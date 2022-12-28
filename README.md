@@ -107,13 +107,13 @@ Full use of this system requires you to bind Tech Action 2 and 3 in the options 
 
 When turning into a predator you will be given a controller item, this is required for the predator transformation to detect some keys being pressed, such as Shift, as well as pass some more data to the vehicle that it cannot detect without it.
 
-Holding Shift+Up with a controller allows you to bring up the action wheel, at the bottom you will be able to let out the most recently eaten prey, or despawn the predator transformation/occupant holder, choosing another action will attempt to perform that action, some of these will need to be aimed, so you might want to assign that action to a controller by clicking on it, if you have a controller in the hand of the click, it will assign it that action, if the hand was empty, it will spawn a new controller for you. Keep in mind a pred might have some actions that are available in some states but not others, clicking with a controller with an assigned action that the pred does not have will not result in anything.
+Tapping Shift+Up with a controller allows you to bring up the action wheel, at the bottom you will be able to let out the most recently eaten prey, or despawn the predator transformation, you can also choose to assign a vore action to that controller to be performed on that controller's click, or choose to perform a prey action on prey you've already consumed, different locations in your body may have unique actions. A pred might also have some vore actions that are available in some states but not others, clicking with a controller with an assigned action that the pred does not have will not result in anything.
 
 Most predators will have the same movement controls a player would, but tapping movment keys can be used to transition between different poses, like standing or sitting or sleeping, etc.
 
-To let people out that you previously ate, simply press Tech Action 2 (G).
+To let people out that you previously ate, either use the letout action on your controller, or if you are in a large transformation simply press Tech Action 2 (G) to let out the most recent that can be let out.
 
-In the bottom right you will have a HUD to show what occupants you've eaten, as well as your current belly effect, this can be used to quickly change the effect, as well as access the settings quickly, and peform actions on the prey by clicking on them, such as letting them out, turbo digesting them, or predator specific actions, like transforming them
+In the bottom right you will have a HUD to show what occupants you've eaten, as well as your current belly effect, this can be used to quickly change the effect, as well as access the settings quickly, and peform actions on the prey by clicking on them, such as letting them out, turbo digesting them, or predator specific actions, like transforming them.
 
 # Prey Info
 
