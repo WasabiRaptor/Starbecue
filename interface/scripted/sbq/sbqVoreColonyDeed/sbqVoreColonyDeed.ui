@@ -42,22 +42,26 @@
 				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,165], "mode": "vertical", "children" : [
 					{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
 						{ "mode" : "h" },
-						[
-							{ "type" : "label", "text" : "Head", "align" : "center" },
+						[[
+							{ "expandMode" : [0,0] },
+							{ "type" : "label", "text" : "Head:", "align" : "center", "expand" : false },
 							{ "type" : "itemSlot", "id" : "headCosmetic" }
-						],
-						[
-							{ "type" : "label", "text" : "Chest", "align" : "center" },
+						]],
+						[[
+							{ "mode" : "h", "expandMode" : [0,0] },
+							{ "type" : "label", "text" : "Chest:", "align" : "center", "expand" : false },
 							{ "type" : "itemSlot", "id" : "chestCosmetic" }
-						],
-						[
-							{ "type" : "label", "text" : "Legs", "align" : "center" },
+						]],
+						[[
+							{ "mode" : "h", "expandMode" : [0,0] },
+							{ "type" : "label", "text" : "Legs:", "align" : "center", "expand" : false },
 							{ "type" : "itemSlot", "id" : "legsCosmetic" }
-						],
-						[
-							{ "type" : "label", "text" : "Back", "align" : "center" },
+						]],
+						[[
+							{ "mode" : "h", "expandMode" : [0,0] },
+							{ "type" : "label", "text" : "Back:", "align" : "center", "expand" : false },
 							{ "type" : "itemSlot", "id" : "backCosmetic" }
-						]
+						]]
 					]},
 					{ "type" : "panel", "id" : "tenantBehaviorPanel", "style" : "convex", "children" : [
 						{ "mode" : "v", "spacing" : -1 },
