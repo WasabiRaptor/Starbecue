@@ -98,6 +98,9 @@
 							{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
 						]}
 					],
+					{ "type" : "panel", "id" : "bioPanel", "expandMode" : [2, 3], "style" : "convex", "children" : [
+					]},
+
 					{"type" : "button", "id" : "revertNPC", "caption" : "Revert", "toolTip" : "Reverts this NPC into the equivalent vanilla version.", "expandMode" : [0, 0]},
 					{"type" : "layout", "mode" : "vertical", "expandMode" : [2,2], "children" : []}
 				]},

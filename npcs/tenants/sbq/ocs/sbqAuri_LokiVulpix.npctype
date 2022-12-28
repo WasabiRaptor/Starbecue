@@ -37,6 +37,21 @@
 		"defaultPortrait" : "Neutral.png",
 		"portraitPath" : "/humanoid/sbqAuri_LokiVulpix/portraits/A", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
 
+		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+			{ "mode" : "vertical" },
+			[
+				{ "type" : "image", "file" : "/humanoid/sbqAuri_LokiVulpix/portraits/ANeutral.png" },
+				[
+					[ { "type" : "label", "text" : "Age: 23"}, { "type" : "label", "text" : "Sex: ^#5BCEFA;F^#F5A9B8;e^#FFFFFF;m^#F5A9B8;a^#5BCEFA;l^#F5A9B8;e"} ],
+					[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Drimyr"} ],
+					{ "type" : "spacer", "size" : 3 },
+					{ "type" : "label", "text" : "Auri is a foxlike dragon who likes eating shiny rocks! ...and friends of course!"},
+					{ "type" : "spacer", "size" : 3 },
+					{ "type" : "label", "text" : "Favorites: CV, OV"}
+				]
+			]
+
+		]},
 		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqTemplateDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
 		// as the scipts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 

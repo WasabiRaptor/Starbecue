@@ -135,6 +135,16 @@ function init()
 
 		sbq.onTenantChanged()
 
+		local bio = sbq.tenant.overrides.scriptConfig.tenantBio or sbq.npcConfig.scriptConfig.tenantBio
+		if bio then
+			bioPanel:clearChildren()
+			if type(bio) == "string" then
+				bio = root.assetJson(bio)
+			end
+			bioPanel:addChild(bio)
+		end
+		bioPanel:setVisible(bio ~= nil)
+
 		local sbqNPC = sbq.npcConfig.scriptConfig.sbqNPC or false
 		globalTenantSettingsLayout:setVisible(sbqNPC)
 		notStarbecueNPC:setVisible(not sbqNPC)
