@@ -65,7 +65,7 @@ function update(dt, fireMode, shiftHeld, controls)
 						if data.selection == "cancel" then return end
 						if data.selection == "despawn" and data.pressed and not sbq.click then
 							sbq.click = true
-							letout(selectedPrey)
+							sbq.letout(selectedPrey)
 							return
 						end
 
@@ -87,6 +87,16 @@ function update(dt, fireMode, shiftHeld, controls)
 								elseif data.selection == "preyAction" then
 									assignPreyActionMenu()
 								end
+							end
+						elseif data.type == "controllerLocationSelect" then
+							if data.pressed and not sbq.click then
+								sbq.click = true
+								assignLocationActionSelect(data)
+							end
+						elseif data.type == "controllerLocationPreyAction" then
+							if data.pressed and not sbq.click then
+								sbq.click = true
+								locationPreyAction(data)
 							end
 						elseif data.type == "controllerPreySelect" then
 							if data.pressed and not sbq.click then
@@ -110,7 +120,7 @@ function update(dt, fireMode, shiftHeld, controls)
 		elseif assignedMenu then
 			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqClose" )
 			if sbq.lastRadialSelection == "despawn" then
-				letout(selectedPrey)
+				sbq.letout(selectedPrey)
 			end
 			assignedMenu = nil
 			activeItem.callOtherHandScript("dontDoRadialMenu")
@@ -131,7 +141,7 @@ function update(dt, fireMode, shiftHeld, controls)
 	end
 end
 
-function letout(i)
+function sbq.letout(i)
 	if type(sbq.sbqCurrentData.id) == "number" and world.entityExists(sbq.sbqCurrentData.id) then
 		if (sbq.sbqCurrentData.totalOccupants or 0) > 0 then
 			world.sendEntityMessage(sbq.sbqCurrentData.id, "letout",i)
@@ -253,11 +263,83 @@ function assignPreyActionMenu()
 	end
 end
 
-function assignLocationActionSelect()
+local locationAction
+
+function assignLocationActionSelect(data)
+	local options = {
+		{
+			name = "letout",
+			title = "Let Out"
+		}
+	}
 	local sbqSettings = player.getProperty("sbqSettings") or {}
 	local settings = sb.jsonMerge(sbqSettings.sbqOccupantHolder or {}, sbqSettings.global or {})
+	sbq.getSpeciesConfig(player.species(), settings)
+	local sbqData = sbq.speciesConfig.sbqData
 
+	locationAction = data.selection
 
+	local locationData = sbqData.locations[data.selection]
+	for j, action in ipairs(locationData.preyActions or {}) do
+		if (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
+			table.insert(options, {
+				name = action.script,
+				title = action.name
+			})
+		end
+	end
+
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationPreyAction" }, true )
+end
+
+function locationPreyAction(selectionData)
+	if sbq.sbqCurrentData.id and world.entityExists(sbq.sbqCurrentData.id) then
+		sbq.addRPC(world.sendEntityMessage(sbq.sbqCurrentData.id, "getOccupancyData"), function(data)
+
+			for i = 0, 7 do
+				local number = i
+				local i = tostring(i)
+				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and
+					data.occupant[i].location == locationAction then
+					if type(sbq[selectionData.selection]) == "function" then
+						sbq[selectionData.selection](data.occupant[i].id, number)
+					end
+				end
+			end
+		end)
+	end
+end
+
+function assignLocationSelect(data, sbqSettings, settings, sbqData)
+	local options = {
+	}
+	local locations = {
+
+	}
+	for i = 0, 7 do
+		local number = i
+		local i = tostring(i)
+		selectedPreyIndex = i
+		if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and
+			(data.occupant[i].location ~= nil) and (data.occupant[i].location ~= "escaping") then
+			locations[data.occupant[i].location] = (locations[data.occupant[i].location] or 0) + 1
+		end
+	end
+	for name, count in pairs(locations) do
+		table.insert(options, {
+			name = name,
+			title = sbqData.locations[name].name..": "..count
+		})
+	end
+	if options[1] ~= nil then
+		if #options == 1 then
+			locationAction = options[1].name
+			assignLocationActionSelect({selection = options[1].name})
+		else
+			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationSelect" }, true )
+
+		end
+	end
 end
 
 function assignPreyActionsLocation(id)
@@ -280,6 +362,13 @@ function assignPreyActionsLocation(id)
 	if sbq.sbqCurrentData.id and world.entityExists(sbq.sbqCurrentData.id) then
 		sbq.addRPC(world.sendEntityMessage(sbq.sbqCurrentData.id, "getOccupancyData"), function(data)
 			sbq.occupant = data.occupant
+
+			if id == "all" then
+				assignLocationSelect(data, sbqSettings, settings, sbqData)
+				return
+			end
+
+
 			for i = 0, 7 do
 				local number = i
 				local i = tostring(i)
