@@ -1,12 +1,12 @@
 {
-  "kind" : "sbqAuri_LokiVulpix",
+  "kind" : "sbqLoki_LokiVulpix",
 
   "speciesAnimOverride" : "speciesAnimOverride.config",
   "permanentAnimOverride" : true,
 
   "charCreationTooltip" : {
-      "title" : "Auri",
-      "subTitle" : "(Zn,Cu)5(CO3)2(OH)6",
+      "title" : "Loki",
+      "subTitle" : "(C9H8O)C6H5CH=CHCHO",
       "description" : "Are you sure you're supposed to be able to read this?"
   },
 
@@ -19,7 +19,7 @@
 
   "charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "HUMAN", "Personality" ],
   "skull" : "/humanoid/human/dead.png",
-  "effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
+  "effectDirectives" : "?replace=FEFFFFFF=cfffa7FF?replace=9bd4ffFF=b4ff74FF?replace=31a6ffFF=92e64aFF",
   "defaultBlueprints" : {
     "tier1" : [
 
@@ -97,7 +97,7 @@
       { "item" : "workoutlegs" }
     ]
   },
-  "altOptionAsUndyColor" : true,
+  "altOptionAsFacialMask" : true,
   "headOptionAsHairColor" : true,
   "altOptionAsHairColor" : true,
   "genders" : [
@@ -111,8 +111,8 @@
       "pants" : [ "emptylegs" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
-      "facialMaskGroup" : "",
-      "facialMask" : [ ]
+      "facialMaskGroup" : "antlers",
+      "facialMask" : [ "0" ]
     },
     {
       "name" : "female",
@@ -124,23 +124,23 @@
       "pants" : [ "emptylegs" ],
       "facialHairGroup" : "",
       "facialHair" : [ ],
-      "facialMaskGroup" : "",
-      "facialMask" : [ ]
+      "facialMaskGroup" : "antlers",
+      "facialMask" : [ "0" ]
     }
   ],
   "baseColorMap" : {
-    "primary" : ["5a4878","6b568e","806aa6","9581b8"],
-    "secondary" : ["332665","3f3173","493a81"],
-	"tertiary" : ["a295b0","bdb2c9","fdfbff"],
-    "hair" : ["332665","3f3173","493a81"],
-    "flesh" : ["451ea9", "5227c2", "5f2fdc"]
+    "primary" : ["bd7025","d3802f","ea9440"],
+    "secondary" : ["301e0a","3d270f","462d13"],
+	"tertiary" : ["dbab7a","e9bc8d","fed2a5","ffd9b2"],
+    "hair" : ["a35003","bc610a","d4700e"],
+    "flesh" : ["7656ab", "9577c5", "a689d5"]
   },
 
   // These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
   "bodyColor" : [
     {
-      "451ea9" : "451ea9FE", "5227c2" : "5227c2FE", "5f2fdc" : "5f2fdcFE", // make flesh fullbright
-      "1f1735" : "1f1735FE", "48cfb4" : "48cfb4FE" // make eyes fullbright
+      "533487" : "533487fe", "9577c5" : "9577c5fe", "a689d5" : "a689d5fe", // make flesh fullbright
+      "589e1c" : "589e1cfe", "73c42f" : "73c42ffe", "92e64a" : "92e64afe" // make eyes fullbright
     }
   ],
   "undyColor" : [

@@ -485,10 +485,10 @@ if speciesLayout ~= nil then
 			table.insert(sbq.unlockedSpeciesList, species)
 		end
 	end
-	if player.isAdmin() then
-		sbq.unlockedSpeciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
-	end
 	table.sort(sbq.unlockedSpeciesList)
+	if player.isAdmin() then
+		util.appendLists(sbq.unlockedSpeciesList, table.sort(root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering))
+	end
 	for i, species in ipairs(sbq.unlockedSpeciesList) do
 		if species == player.species() then
 			sbq.speciesOverrideIndex = i
