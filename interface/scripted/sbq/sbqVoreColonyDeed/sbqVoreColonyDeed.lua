@@ -472,6 +472,13 @@ if orderFurniture ~= nil then
 	function orderFurniture:onClick()
 		local occupier = sbq.storage.occupier
 		local contextMenu = {}
+
+		if occupier.name then
+			local config = root.tenantConfig(occupier.name)
+			occupier.orderFurniture = config.orderFurniture or occupier.orderFurniture
+		end
+
+
 		for i, item in pairs(occupier.orderFurniture or {}) do
 			local itemConfig = root.itemConfig(item)
 			if not itemConfig then

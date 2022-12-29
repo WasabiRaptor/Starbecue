@@ -11,12 +11,13 @@
     "pretty" : 4
   },
 
-  "colonyObjectCriteria" : {
-    "spookypumpkinhead" : 1
-  },
   "tenantNote" : "^green;\"unscorched\"^reset; objects are the variants of ^green;\"scorched\"^reset; objects that aren't ruined.",
   "orderFurniture" : [
-    {"name":"spookypumpkinhead", "count":1},
+    {"name":"sbqSpookyPumpkinHead", "count":1, "parameters":{
+		"directives":"?replace;da5302=0008dc;fd8f4d=3d44f2;fdd14d=898df5",
+		"inventoryIcon" : "spookypumpkinheadicon.png?replace;da5302=0008dc;fd8f4d=3d44f2;fdd14d=898df5",
+		"lightColor" : [61, 68, 242]
+	}},
     {"name":"scorchedcitytv", "count":1},
     {"name":"scorchedcitycounter", "count":1},
     {"name":"scorchedcityfridge", "count":1},

@@ -1,5 +1,5 @@
 {
-	"type" : "sbqAuri_LokiVulpix",
+	"type" : "sbqLoki_LokiVulpix",
 	"baseType" : "villager",
 
 	"scripts" : [
@@ -10,7 +10,7 @@
 	],
 
 	// you really should make sure to define the npcname so the OC actually has the OC's name
-	"npcname" : "Auri",
+	"npcname" : "Loki",
 	// identity is quite important if you don't want things to be randomly generated
 	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
 	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
@@ -32,22 +32,22 @@
 			}
 		},
 
-		"uniqueId" : "sbqAuri_LokiVulpix", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+		"uniqueId" : "sbqLoki_LokiVulpix", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
 		"defaultPortrait" : "Neutral.png",
-		"portraitPath" : "/humanoid/sbqAuri_LokiVulpix/portraits/A", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
+		"portraitPath" : "/humanoid/sbqLoki_LokiVulpix/portraits/L", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
 
 		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
 			{ "mode" : "vertical" },
 			[
-				{ "type" : "image", "file" : "/humanoid/sbqAuri_LokiVulpix/portraits/ANeutral.png" },
+				{ "type" : "image", "file" : "/humanoid/sbqLoki_LokiVulpix/portraits/LNeutral.png" },
 				[
 					[ { "type" : "label", "text" : "Age: 23"}, { "type" : "label", "text" : "Gender: ^#5BCEFA;F^#F5A9B8;e^#FFFFFF;m^#F5A9B8;a^#5BCEFA;l^#F5A9B8;e"} ],
-					[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Drimyr"} ],
+					[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Deerfox"} ],
 					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Auri is a foxlike dragon who likes eating shiny rocks! ...and friends of course!"},
+					{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with absorbing people into her body~"},
 					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: CV, OV"}
+					{ "type" : "label", "text" : "Favorites: CTF, CV, BV, Boobsorb, OV"}
 				]
 			]
 

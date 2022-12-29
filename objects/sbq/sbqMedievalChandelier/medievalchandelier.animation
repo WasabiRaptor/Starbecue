@@ -1,0 +1,68 @@
+{
+	"globalTagDefaults" : {
+		"directives" : "?replace;da5302=34c205;fd8f4d=39e61a;fdd14d=4dfd6f"
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+			"light" : {
+				"default" : "off",
+				"states" : {
+					"off" : {
+					},
+					"on" : {
+						"frames" : 4,
+						"cycle" : 0.5,
+						"mode" : "loop"
+					}
+				}
+			}
+		},
+
+		"parts" : {
+			"bg" : {
+				"properties" : {
+					"centered" : false
+				},
+
+				"partStates" : {
+					"light" : {
+						"off" : {
+							"properties" : {
+								"image" : "<partImage>:<color>.off<directives>"
+							}
+						},
+
+						"on" : {
+							"properties" : {
+								"image" : "<partImage>:<color>.<frame><directives>",
+								"fullbright" : true
+							}
+						}
+					}
+				}
+			},
+			"fg" : {
+				"properties" : {
+					"centered" : false,
+					"zLevel" : 1
+				},
+
+				"partStates" : {
+					"light" : {
+						"off" : {
+							"properties" : {
+								"image" : "<partImage>:<color>.off<directives>"
+							}
+						},
+
+						"on" : {
+							"properties" : {
+								"image" : "<partImage>:<color>.<frame><directives>"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
