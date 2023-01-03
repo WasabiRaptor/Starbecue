@@ -1,8 +1,8 @@
-function getIdentity(eid)
+function getIdentity(eid, identity)
 	local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
 	overrideData.gender = overrideData.gender or world.entityGender(eid)
 	overrideData.species = overrideData.species or world.entitySpecies(eid)
-	overrideData.identity = overrideData.identity or {}
+	overrideData.identity = overrideData.identity or identity or {}
 	overrideData.name = world.entityName(eid)
 
 	local success, speciesFile = pcall(root.assetJson, ("/species/"..overrideData.species..".species"))

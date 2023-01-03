@@ -4,7 +4,8 @@ function build( directory, config, parameters, level, seed )
 	parameters.colonyTags = parameters.originalColonyTags
 	config = sb.jsonMerge(config, parameters)
 
-	if not parameters.description or not parameters.shortdescription then
+	if not parameters.generated then
+		parameters.generated = true
 		local preyPossessive = "'s"
 		if config.prey then
 			if config.prey:sub(-1,-1) == "s" then

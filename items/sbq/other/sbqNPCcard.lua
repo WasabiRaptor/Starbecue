@@ -14,7 +14,9 @@ function build(directory, config, parameters, level, seed)
 
 			parameters.tooltipFields.collarNameLabel = ""
 
-			parameters.description = ""
+			local npcConfig = root.npcConfig(config.npcArgs.npcType)
+
+			parameters.description = npcConfig.scriptConfig.cardDesc or parameters.description or ""
 
 			parameters.tooltipFields.objectImage = config.fullPortrait or
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
@@ -22,8 +24,8 @@ function build(directory, config, parameters, level, seed)
 		elseif config.speciesFile then
 			local colorRemap = "?replace"
 			config.baseColorMap = config.baseColorMap or {
-				primary = { "A19579", "CBBD9D", "ECEACC" },
-				secondary = { "726B5A" }
+				primary = {"6f2919", "a85636", "e0975c", "ffca8a"},
+				secondary = {"951500", "be1b00", "dc1f00", "f32200"}
 			}
 			for colorName, from in pairs(config.baseColorMap) do
 				local to = config.speciesFile.baseColorMap[colorName] or from
@@ -35,11 +37,12 @@ function build(directory, config, parameters, level, seed)
 				((((config.npcArgs.npcParam or {}).identity or {}).bodyDirectives or "") ..
 					(((config.npcArgs.npcParam or {}).identity or {}).hairDirectives or ""))
 
-			parameters.inventoryIcon = (config.useIcon or "/items/generic/other/secretnote.png")..config.directives
+			parameters.inventoryIcon = config.useIcon or {
+				{ image = "/items/sbq/other/sbqNPCEssenceJar.png" },
+				{ image = "/items/sbq/other/sbqNPCEssence.png"..config.directives, fullbright = true }
+			}
 
-			parameters.tooltipFields.collarNameLabel = "Placeholder Card"
-
-			parameters.description = "This card is a placeholder until the character is fully implemented"
+			parameters.tooltipFields.collarNameLabel = "^red;Placeholder"
 		end
 	end
 

@@ -44,8 +44,12 @@ function generateItemDrop(itemDrop)
 	if preyType == "npc" or preyType == "player" then
 		itemDrop.parameters.prey = world.entityName(entity.id())
 		itemDrop.parameters.preyUUID = world.entityUniqueId(entity.id())
-		local overrideData = getIdentity(entity.id())
-		local identity = overrideData.identity or {}
+		local identity
+		if preyType == "npc" then
+			identity = world.callScriptedEntity(entity.id(), "npc.humanoidIdentity")
+		end
+		local overrideData = getIdentity(entity.id(), identity)
+		identity = overrideData.identity or {}
 		local species = overrideData.species or world.entitySpecies(entity.id())
 		local speciesFile = root.assetJson("/species/" .. species .. ".species")
 		itemDrop.parameters.fullPortrait = world.entityPortrait(entity.id(), "full")
@@ -74,6 +78,7 @@ function generateItemDrop(itemDrop)
 			itemDrop.parameters.npcArgs.npcType = world.callScriptedEntity(entity.id(), "npc.npcType")
 			itemDrop.parameters.npcArgs.npcLevel = world.callScriptedEntity(entity.id(), "npc.level")
 			itemDrop.parameters.npcArgs.npcSeed = world.callScriptedEntity(entity.id(), "npc.seed")
+			itemDrop.parameters.description = ((root.npcConfig(itemDrop.parameters.npcArgs.npcType) or {}).scriptConfig or {}).cardDesc or ""
 		end
 		itemDrop.parameters.tooltipKind = "filledcapturepod"
 		itemDrop.parameters.tooltipFields = {
@@ -87,9 +92,10 @@ function generateItemDrop(itemDrop)
 				itemDrop.parameters.npcArgs.npcType or "generictenant",
 				itemDrop.parameters.npcArgs.npcLevel or 1, itemDrop.parameters.npcArgs.npcSeed, itemDrop.parameters.npcArgs.npcParam)
 		if itemDrop.parameters.pred then
-			itemDrop.parameters.tooltipFields.collarNameLabel = "Gurgled by: " .. itemDrop.parameters.pred
+			itemDrop.parameters.gurgledBy = config.getParameter("gurgledByText")
+			itemDrop.parameters.tooltipFields.collarNameLabel = ( itemDrop.parameters.gurgledBy or "Gurgled by: ") .. itemDrop.parameters.pred
 		end
-		itemDrop.parameters.shortdescription = itemDrop.parameters.prey
+		itemDrop.parameters.shortdescription = itemDrop.parameters.prey.."'s Essence"
 		itemDrop.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
 	end
 

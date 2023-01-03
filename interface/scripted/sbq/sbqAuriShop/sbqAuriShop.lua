@@ -44,13 +44,28 @@ for j, tabData in pairs(shopRecipes) do
 	for i, recipe in ipairs(recipes) do
 		local resultItemConfig = root.itemConfig({ name = recipe.result, count = recipe.count, parameters = recipe.parameters })
 		if resultItemConfig ~= nil then
-			local bottom = { type = "label", text = " "}
+			local bottom = { { mode = "horizontal" }, { type = "layout", expandMode = { 1, 1 } }, { type = "label", text = "", inline = true, align = 1 } }
+			local toolTip = nil
+			if not recipe.materials then
+				recipe.materials = {
+					{ item = "money", count = resultItemConfig.price or 1 }
+				}
+			end
 			for _, material in ipairs(recipe.materials) do
 				if material.item == "money" then
-					bottom = { { mode = "horizontal" }, { type = "layout", expandMode = {1,1} }, { type = "image", file = "/interface/merchant/pixels.png", align = 1 }, { type = "label", text = (tostring( material.count )), inline = true, align = 1}}
+					table.insert(bottom, { type = "image", file = "/interface/merchant/pixels.png", align = 1 })
+					table.insert(bottom, { type = "label", text = (tostring(material.count)), inline = true, align = 1 })
+				end
+				if material.item == "essence" then
+					table.insert(bottom, { type = "image", file = "/interface/scripted/sbq/sbqAuriShop/essence.png", align = 1 })
+					table.insert(bottom, { type = "label", text = (tostring(material.count)), inline = true, align = 1 })
+				end
+				local materialConfig = root.itemConfig(material.item)
+				if materialConfig then
+					toolTip = (toolTip or "")..materialConfig.config.shortdescription.." ^#555;×"..material.count.."^reset;\n"
 				end
 			end
-			local listItem = tabScrollArea:addChild({ type = "menuItem", selectionGroup = "buyItem", children = {{ type = "panel", style = "convex", children = {{ mode = "horizontal"},
+			local listItem = tabScrollArea:addChild({ type = "menuItem", selectionGroup = "buyItem", toolTip = toolTip, children = {{ type = "panel", style = "convex", children = {{ mode = "horizontal"},
 				{ type = "itemSlot", autoInteract = false, item = { name = recipe.result, count = recipe.count, parameters = recipe.parameters }},
 				{
 					{ type = "label", text = resultItemConfig.config.shortdescription},

@@ -181,23 +181,31 @@ function sbq.effectsPanel()
 			} }
 			local count = 5
 			if type(sbq.storedDigestedPrey[location]) == "table" then
-				local players = {}
-				local ocs = {}
-				local other = {}
-				for uniqueId, item in pairs(sbq.storedDigestedPrey[location]) do
-					count = count + 1
-					if item.parameters.npcArgs.wasPlayer then
-						table.insert(players, item)
-					elseif (root.npcConfig(item.parameters.npcArgs.npcType).scriptConfig or {}).isOC then
-						table.insert(ocs, item)
+				table.sort(sbq.storedDigestedPrey[location], function(a, b)
+					local npcConfig = {
+						a = root.npcConfig(a.parameters.npcArgs.npcType) or {},
+						b = root.npcConfig(b.parameters.npcArgs.npcType) or {}
+					}
+					if a.parameters.npcArgs.wasPlayer then
+						if b.parameters.npcArgs.wasPlayer then
+							return a.parameters.npcArgs.npcParam.identity.name > b.parameters.npcArgs.npcParam.identity.name
+						else
+							return true
+						end
+					elseif b.parameters.npcArgs.wasPlayer then
+						return false
+					elseif (npcConfig.a.scriptConfig or {}).isOC or a.parameters.npcArgs.scriptConfig.isOC then
+
+						if (npcConfig.b.scriptConfig or {}).isOC or b.parameters.npcArgs.scriptConfig.isOC then
+							return (a.parameters.npcArgs.npcParam.identity.name or npcConfig.a.npcname) > (b.parameters.npcArgs.npcParam.identity.name or npcConfig.b.npcname)
+						else
+							return true
+						end
 					else
-						table.insert(other, item)
+						return (a.parameters.npcArgs.npcParam.identity.name or npcConfig.a.npcname) > (b.parameters.npcArgs.npcParam.identity.name or npcConfig.b.npcname)
 					end
-				end
-				count = (count+5)-((count+5)%5)
-				absorbedPreyList = players
-				util.appendLists(absorbedPreyList, ocs)
-				util.appendLists(absorbedPreyList, other)
+				end)
+				absorbedPreyList = sbq.storedDigestedPrey[location]
 				absorbedPreyPanel.children[1].children[2].slots = count
 			end
 
