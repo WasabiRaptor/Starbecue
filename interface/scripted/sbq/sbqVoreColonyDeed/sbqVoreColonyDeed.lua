@@ -669,11 +669,12 @@ function sbq.refreshDeedPage()
 end
 
 function sbq.generateNPCItemCard(tenant)
+	local npcConfig = root.npcConfig(tenant.type)
 
 	local item = copy(sbq.config.npcCardTemplate)
 	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
 	item.parameters.inventoryIcon = root.npcPortrait("bust", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
-	item.parameters.description = sbq.npcConfig.scriptConfig.cardDesc or ""
+	item.parameters.description = (npcConfig.scriptConfig or {}).cardDesc or ""
 	item.parameters.tooltipFields.collarNameLabel = ""
 	item.parameters.tooltipFields.objectImage = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 	item.parameters.tooltipFields.subtitle = tenant.type
