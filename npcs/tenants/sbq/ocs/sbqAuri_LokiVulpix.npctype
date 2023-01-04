@@ -47,7 +47,7 @@
 					{ "type" : "spacer", "size" : 3 },
 					{ "type" : "label", "text" : "Auri is a foxlike dragon who likes eating shiny rocks! ...and friends of course!"},
 					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: CV, OV"}
+					{ "type" : "label", "text" : "Favorites: CV, OV, Sentient Pudge"}
 				]
 			]
 
@@ -707,6 +707,12 @@
 						}
 					}
 				},
+				"ctfLines" : {
+					"randomDialogue" : [
+						"Ahhh~ <infusedName> feels so great down there~",
+						""
+					]
+				},
 				"cock" : "struggle.shaft", // these are just in case someone names something different
 				"shaft" : { // location
 					"next" : "race",
@@ -719,11 +725,13 @@
 								"default" : { "randomDialogue" : [
 									["Ffffff yeeesss~", "MMMMmmm~ go deeeper~", "Ahhhhh~ deeeeper~", "<keysmash>~"],
 									{"infusedSlot":true,
-										"default":[
-											"ctf lines go here"
+										"default": [
+											"Ffff~ Turning <infusedName> into my cock was such a good decision~",
+											{"add" : "ctfLines"}
 										],
 										"sbqZevi_Zygahedron":[
-											"specific ctf lines go here"
+											"specific ctf lines go here",
+											{"add" : "ctfLines"}
 										]
 									}
 								]},
@@ -1327,8 +1335,8 @@
 		},
 		"sbqRandomizeSettings" : {
 			"ballsInfusedItem" : [
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Auroria",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Auroria's Essence",
 					"npcArgs" : {
 						"npcSpecies" : "sbqAuroria_Auroria",
 						"npcType" : "sbqAuroria_Auroria",
@@ -1342,8 +1350,8 @@
 				}}
 			],
 			"shaftInfusedItem" : [
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Zevi",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Zevi's Essence",
 					"npcArgs" : {
 						"npcSpecies" : "sbqZevi_Zygahedron",
 						"npcType" : "sbqZevi_Zygahedron",
@@ -1354,184 +1362,10 @@
 							}
 						}
 					}
-				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Orpheus",
-					"npcArgs" : {
-						"npcSpecies" : "sbqOrpheus_Auroria",
-						"npcType" : "sbqOrpheus_Auroria",
-						"npcParam" : {
-							"identity" : {},
-							"scriptConfig" : {
-								"uniqueId" : "sbqOrpheus_Auroria"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": true,
-
-										"analVore": true,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
-							}
-						}
-					},
-					"speciesFile": {
-						"speciesAnimOverride" : "speciesAnimOverride.config",
-						"baseColorMap" : {
-							"primary" : ["306298","4681C1","5B97D8"],
-							"secondary" : ["6D337A","8E499E","A35CB4"]
-						}
-					}
-				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Claire",
-					"npcArgs" : {
-						"npcSpecies" : "sbqClaire_FFWizard",
-						"npcType" : "sbqClaire_FFWizard",
-						"npcParam" : {
-							"identity" : {},
-							"scriptConfig" : {
-								"uniqueId" : "sbqClaire_FFWizard"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": true,
-
-										"analVore": true,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
-							}
-						}
-					},
-					"speciesFile": {
-						"speciesAnimOverride" : "speciesAnimOverride.config",
-						"baseColorMap" : {
-							"primary" : ["D9D6E7","EBE8F5","FAF9FE"],
-							"secondary" : ["323A55","343E5D","3A4565"]
-						}
-					}
-				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Kaori",
-					"npcArgs" : {
-						"npcSpecies" : "sbqKaori_Fevix",
-						"npcType" : "sbqKaori_Fevix",
-						"npcParam" : {
-							"identity" : {},
-							"scriptConfig" : {
-								"uniqueId" : "sbqKaori_Fevix"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": true,
-
-										"analVore": true,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
-							}
-						}
-					},
-					"speciesFile": {
-						"speciesAnimOverride" : "speciesAnimOverride.config",
-						"baseColorMap" : {
-							"primary" : ["0b0b0b","101010","1b1b1b"],
-							"secondary" : ["3890cf","1ac2e7","01e9fa"]
-						}
-					}
-				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Sandy",
-					"npcArgs" : {
-						"npcSpecies" : "sbqSandy_Fevix",
-						"npcType" : "sbqSandy_Fevix",
-						"npcParam" : {
-							"identity" : {},
-							"scriptConfig" : {
-								"uniqueId" : "sbqSandy_Fevix"
-							}
-						}
-					}
 				}}
 			]
 		},
+
 
 
 		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences

@@ -25,7 +25,7 @@ function doItemDrop()
 		else
 			local preyType = world.entityType(entity.id())
 			if preyType ~= "monster" and entity.uniqueId() ~= nil then
-				world.sendEntityMessage(effect.sourceEntity(), "sbqDigestStore", (status.statusProperty("sbqDigestData") or {}).location, entity.uniqueId(), generateItemDrop(root.assetJson("/sbqGeneral.config:npcCardTemplate")))
+				world.sendEntityMessage(effect.sourceEntity(), "sbqDigestStore", (status.statusProperty("sbqDigestData") or {}).location, entity.uniqueId(), generateItemDrop(root.assetJson("/sbqGeneral.config:npcEssenceTemplate")))
 			end
 		end
 	end

@@ -8,6 +8,24 @@ function build(directory, config, parameters, level, seed)
 
 		local success, speciesFile = pcall(root.assetJson, ("/species/"..(config.npcArgs.npcSpecies or "")..".species"))
 
+		local colorRemap = "?replace"
+		config.baseColorMap = config.baseColorMap or {
+			primary = { "6f2919", "a85636", "e0975c", "ffca8a" },
+			secondary = { "951500", "be1b00", "dc1f00", "f32200" }
+		}
+
+		for colorName, from in pairs(config.baseColorMap) do
+			local to = ((success and speciesFile) or config.speciesFile).baseColorMap[colorName] or from
+			for i, color in ipairs(from or {}) do
+				colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+			end
+		end
+
+		parameters.directives = colorRemap ..
+				((((config.npcArgs.npcParam or {}).identity or {}).bodyDirectives or "") ..
+					(((config.npcArgs.npcParam or {}).identity or {}).hairDirectives or ""))
+
+
 		if success then
 			parameters.inventoryIcon = root.npcPortrait("bust", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
 				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, config.npcArgs.npcParam)
@@ -22,25 +40,8 @@ function build(directory, config, parameters, level, seed)
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
 					config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, config.npcArgs.npcParam)
 		elseif config.speciesFile then
-			local colorRemap = "?replace"
-			config.baseColorMap = config.baseColorMap or {
-				primary = {"6f2919", "a85636", "e0975c", "ffca8a"},
-				secondary = {"951500", "be1b00", "dc1f00", "f32200"}
-			}
-			for colorName, from in pairs(config.baseColorMap) do
-				local to = config.speciesFile.baseColorMap[colorName] or from
-				for i, color in ipairs(from or {}) do
-					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
-				end
-			end
-			config.directives = colorRemap ..
-				((((config.npcArgs.npcParam or {}).identity or {}).bodyDirectives or "") ..
-					(((config.npcArgs.npcParam or {}).identity or {}).hairDirectives or ""))
 
-			parameters.inventoryIcon = config.useIcon or {
-				{ image = "/items/sbq/other/sbqNPCEssenceJar.png" },
-				{ image = "/items/sbq/other/sbqNPCEssence.png"..config.directives, fullbright = true }
-			}
+			parameters.inventoryIcon = (config.useIcon or "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJarCombo.png")..parameters.directives
 
 			parameters.tooltipFields.collarNameLabel = "^red;Placeholder"
 		end

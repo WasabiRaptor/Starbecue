@@ -1,0 +1,42 @@
+{
+	"objectName" : "sbqNPCEssenceJar",
+	"colonyTags" : [],
+	"rarity" : "Common",
+	"category" : "decorative",
+	"price" : 100,
+	"maxStack" : 64,
+
+	"description" : "A jar containing a colored flame.",
+	"shortdescription" : "Essence Jar",
+	"race" : "generic",
+
+	"builder" : "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssence.lua",
+	"retainObjectParametersInItem" : true,
+
+	"scripts" : ["/objects/sbq/setDirectivesTag.lua"],
+	"animation" : "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJar.animation",
+
+	"animationPosition" : [0, 8],
+	"inventoryIcon" : "sbqNPCEssenceJarCombo.png",
+	"orientations" : [
+		{
+			"image" : "sbqNPCEssenceJar.png",
+			"imagePosition" : [-8, 0],
+
+			"direction" : "right",
+			"collision" : "platform",
+			"spaceScan" : 0.1,
+			"anchors" : [ "bottom" ]
+		},
+		{
+			"image" : "sbqNPCEssenceJar.png",
+			"imagePosition" : [-8, 0],
+
+			"direction" : "left",
+			"flipImages" : true,
+			"collision" : "platform",
+			"spaceScan" : 0.1,
+			"anchors" : [ "bottom" ]
+		}
+	]
+}

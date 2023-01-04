@@ -45,9 +45,9 @@
 					[ { "type" : "label", "text" : "Age: 23"}, { "type" : "label", "text" : "Gender: ^#5BCEFA;F^#F5A9B8;e^#FFFFFF;m^#F5A9B8;a^#5BCEFA;l^#F5A9B8;e"} ],
 					[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Deerfox"} ],
 					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with absorbing people into her body~"},
+					{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with transforming and absorbing people."},
 					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: CTF, CV, BV, Boobsorb, OV"}
+					{ "type" : "label", "text" : "Favorites: CTF, CV, BV, Boobsorb, OV, Sentient Pudge"}
 				]
 			]
 
@@ -79,7 +79,7 @@
 							],
 							"randomButtonText" : [
 								["Hi.", "Hello."],
-								{"check":{"introduced":true},"add":[["Hi Auri!"]]}
+								{"check":{"introduced":true},"add":[["Hi Loki!"]]}
 							],
 							"randomPortrait" : [
 								"Neutral.png",
@@ -97,10 +97,10 @@
 				]],
 				"randomButtonText" : ["[Options]"],
 				"options" : [
-					["Can I see your shop?", {
+					["Can help me make something?", {
 						"next" : "openNewDialogueBox",
 						"ui" : "starbecue:auriShop",
-						"inputData" : { "shopRecipes" : "/recipes/auriShop/auriShopRecipes.config", "dialogueTreeStart" : ["converse"] }
+						"inputData" : { "shopRecipes" : "/recipes/auriShop/lokiShopRecipes.config", "dialogueTreeStart" : ["converse"] }
 					}],
 					[ "My name is...", {
 						"check":{"introduced":false},
@@ -1327,8 +1327,8 @@
 		},
 		"sbqRandomizeSettings" : {
 			"ballsInfusedItem" : [
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Auroria",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Auroria's Essence",
 					"npcArgs" : {
 						"npcSpecies" : "sbqAuroria_Auroria",
 						"npcType" : "sbqAuroria_Auroria",
@@ -1342,8 +1342,8 @@
 				}}
 			],
 			"shaftInfusedItem" : [
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Zevi",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Zevi's Essence",
 					"npcArgs" : {
 						"npcSpecies" : "sbqZevi_Zygahedron",
 						"npcType" : "sbqZevi_Zygahedron",
@@ -1355,13 +1355,16 @@
 						}
 					}
 				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Orpheus",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Orpheus's Essence",
+					"description" : "A sylveon who just couldn't get any action... unless he was Loki's Cock~",
 					"npcArgs" : {
 						"npcSpecies" : "sbqOrpheus_Auroria",
 						"npcType" : "sbqOrpheus_Auroria",
 						"npcParam" : {
-							"identity" : {},
+							"identity" : {
+								"name" : "Orpheus"
+							},
 							"scriptConfig" : {
 								"uniqueId" : "sbqOrpheus_Auroria"
 							},
@@ -1409,13 +1412,16 @@
 						}
 					}
 				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Claire",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Claire's Essence",
+					"description" : "An anthro sprigatito who is having a rather pleasueable experience as Loki's Cock~",
 					"npcArgs" : {
 						"npcSpecies" : "sbqClaire_FFWizard",
 						"npcType" : "sbqClaire_FFWizard",
 						"npcParam" : {
-							"identity" : {},
+							"identity" : {
+								"name" : "Claire"
+							},
 							"scriptConfig" : {
 								"uniqueId" : "sbqClaire_FFWizard"
 							},
@@ -1463,13 +1469,73 @@
 						}
 					}
 				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Kaori",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Astira's Essence",
+					"description" : "Asti would never admit it, but she loves getting stolen, especially if the Liepard gets turned into a throbbing cock~",
+					"npcArgs" : {
+						"npcSpecies" : "sbqAstira_LokiVulpix",
+						"npcType" : "sbqAstira_LokiVulpix",
+						"npcParam" : {
+							"identity" : {
+								"name" : "Astira"
+							},
+							"scriptConfig" : {
+								"uniqueId" : "sbqAstira_LokiVulpix"
+							},
+							"statusControllerSettings" : {
+								"statusProperties" : {
+									"sbqDidVornyConvertCheck" : true,
+									"sbqPreyEnabled" : {
+										"preyEnabled": true,
+
+										"digestAllow": true,
+										"cumDigestAllow": true,
+										"milkDigestAllow": true,
+
+										"transformAllow": true,
+										"genderswapAllow": true,
+
+										"eggAllow": true,
+
+										"held": true,
+
+										"oralVore": true,
+										"tailVore": true,
+										"absorbVore": true,
+										"navelVore": false,
+
+										"analVore": true,
+										"unbirth": true,
+										"cockVore": true,
+										"breastVore": true,
+
+										"bellyInfusion" : true,
+										"cockInfusion" : true,
+										"pussyInfusion" : true,
+										"breastsInfusion" : true
+									}
+								}
+							}
+						}
+					},
+					"speciesFile": {
+						"speciesAnimOverride" : "speciesAnimOverride.config",
+						"baseColorMap" : {
+							"primary" : ["401a4f","471f55","552764"],
+							"secondary" : ["af72b4","bd80c1","ce97d1"]
+						}
+					}
+				}},
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Kaori's Essence",
+					"description" : "This Liepard just keeps finding herself inside cocks... or as them~",
 					"npcArgs" : {
 						"npcSpecies" : "sbqKaori_Fevix",
 						"npcType" : "sbqKaori_Fevix",
 						"npcParam" : {
-							"identity" : {},
+							"identity" : {
+								"name" : "Kaori"
+							},
 							"scriptConfig" : {
 								"uniqueId" : "sbqKaori_Fevix"
 							},
@@ -1495,7 +1561,7 @@
 										"absorbVore": true,
 										"navelVore": true,
 
-										"analVore": true,
+										"analVore": false,
 										"unbirth": true,
 										"cockVore": true,
 										"breastVore": true,
@@ -1517,8 +1583,9 @@
 						}
 					}
 				}},
-				{ "name": "sbqNPCcard", "count": 1, "parameters": {
-					"shortdescription" : "Sandy",
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Sandy's Essence",
+					"description" : "Sandy just couldn't help herself from diving right in~",
 					"npcArgs" : {
 						"npcSpecies" : "sbqSandy_Fevix",
 						"npcType" : "sbqSandy_Fevix",

@@ -1,0 +1,40 @@
+{
+	"globalTagDefaults" : {
+		"directives" : ""
+	},
+	"animatedParts": {
+		"stateTypes": {
+			"essence" : {
+				"default" : "idle",
+				"states" : {
+					"idle": { "frames": 8, "cycle": 1, "mode": "loop", "priority": 0 }
+				}
+			}
+		},
+		"parts": {
+			"jar" : {
+				"properties": {
+					"zLevel": 0,
+					"fullbright" : true
+				},
+				"partStates": {
+					"essence" : {
+						"idle" : { "properties" : {"image": "sbqNPCEssence.png:<frame><directives>"}}
+					}
+				}
+			},
+			"essence" : {
+				"properties": {
+					"zLevel": 1,
+					"image": "sbqNPCEssenceJar.png"
+				}
+			}
+		}
+	},
+	"transformationGroups": {
+	},
+	"sounds": {
+	},
+	"particleEmitters": {
+	}
+}

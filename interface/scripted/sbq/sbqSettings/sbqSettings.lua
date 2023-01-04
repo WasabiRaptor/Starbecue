@@ -487,11 +487,14 @@ if speciesLayout ~= nil then
 	end
 	table.sort(sbq.unlockedSpeciesList)
 	if player.isAdmin() then
-		util.appendLists(sbq.unlockedSpeciesList, table.sort(root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering))
+		local list = root.assetJson("/interface/windowconfig/charcreation.config:speciesOrdering")
+		table.sort(list)
+		util.appendLists(sbq.unlockedSpeciesList, list or {})
 	end
 	for i, species in ipairs(sbq.unlockedSpeciesList) do
 		if species == player.species() then
 			sbq.speciesOverrideIndex = i
+			break
 		end
 	end
 	function speciesGenderToggle:onClick()

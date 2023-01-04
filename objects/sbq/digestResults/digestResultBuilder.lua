@@ -96,7 +96,7 @@ function build( directory, config, parameters, level, seed )
 			parameters.tooltipFields.collarNameLabel = (config.gurgledBy or "Gurgled by: ")..config.pred
 		end
 	end
-	config.animationParts.object = config.objectImage..(config.directives or "")
+	config.animationParts.object = config.objectImage
 	config.inventoryIcon = config.iconImage..(config.directives or "")
 
 	parameters.orientations = config.orientations
