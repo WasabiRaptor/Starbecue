@@ -2,11 +2,14 @@
 function init()
 	status.clearPersistentEffects("cumDigestImmunity")
 	status.clearPersistentEffects("milkDigestImmunity")
-	refresh()
-	script.setUpdateDelta(0)
 end
 
 function update(dt)
+	local position = entity.position()
+	if world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
+		refresh()
+		script.setUpdateDelta(0)
+	end
 end
 
 function uninit()
