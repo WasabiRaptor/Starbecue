@@ -194,11 +194,14 @@ function sbq.effectsPanel()
 						table.insert(other, item)
 					end
 				end
-				count = (count+5)-((count+5)%5)
+				count = (count + 5) - ((count + 5) % 5)
+				local function sortItems(a, b)
+					return a.parameters.shortdescription < b.parameters.shortdescription
+				end
 				absorbedPreyList = players
-				table.sort(players)
-				table.sort(ocs)
-				table.sort(other)
+				table.sort(players, sortItems)
+				table.sort(ocs, sortItems)
+				table.sort(other, sortItems)
 				util.appendLists(absorbedPreyList, ocs)
 				util.appendLists(absorbedPreyList, other)
 				absorbedPreyPanel.children[1].children[2].slots = count
