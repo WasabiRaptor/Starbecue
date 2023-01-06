@@ -650,7 +650,8 @@
 			"allMineLines" : {
 				"randomDialogue" : [
 					["Hehe, all mine~", "Now you're all mine~", "My preything~"],
-					["Trapped inside me~", "Hehe, got you all stuck in there~", "Do you even *want* to get out~?"]
+					["Trapped inside me~", "Hehe, got you all stuck in there~", "Do you even *want* to get out~?"],
+					["Hehe, part of my hoard~", "Looks like I'll be keeping you in my hoard~"]
 				]
 			},
 			"struggle" : {
@@ -707,12 +708,6 @@
 						}
 					}
 				},
-				"ctfLines" : {
-					"randomDialogue" : [
-						"Ahhh~ <infusedName> feels so great down there~",
-						""
-					]
-				},
 				"cock" : "struggle.shaft", // these are just in case someone names something different
 				"shaft" : { // location
 					"next" : "race",
@@ -723,17 +718,7 @@
 							"default" : { // mood
 								"next" : "getLocationEffect",
 								"default" : { "randomDialogue" : [
-									["Ffffff yeeesss~", "MMMMmmm~ go deeeper~", "Ahhhhh~ deeeeper~", "<keysmash>~"],
-									{"infusedSlot":true,
-										"default": [
-											"Ffff~ Turning <infusedName> into my cock was such a good decision~",
-											{"add" : "ctfLines"}
-										],
-										"sbqZevi_Zygahedron":[
-											"specific ctf lines go here",
-											{"add" : "ctfLines"}
-										]
-									}
+									["Ffffff yeeesss~", "MMMMmmm~ go deeeper~", "Ahhhhh~ deeeeper~", "<keysmash>~"]
 								]},
 								"transformed" : { "randomDialogue" : [ ["Ahhhh~", "Ffffff you're gonna make me cum~", "Ahhhhh~", "<keysmash>~"] ] },
 								"sbqHeal" : "errorOrBad",

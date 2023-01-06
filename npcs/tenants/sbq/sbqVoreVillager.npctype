@@ -525,6 +525,12 @@
 						}
 					}
 				},
+				"ctfLines" : {
+					"randomDialogue" : [
+						"Ahhh~ <infusedName> feels so great down there~",
+						"<keysmash> you're gonna make <infusedName> cum~"
+					]
+				},
 				"cock" : "struggle.shaft", // these are just in case someone names something different
 				"shaft" : { // location
 					"next" : "race",
@@ -536,9 +542,7 @@
 								"next" : "getLocationEffect",
 								"default" : { "randomDialogue" : [
 									"Having a good time in there?", "Hope its comfortable.",
-									{"infusedSlot":true,"default":[
-										"I bet <infusedName> is enjoying that."
-									]}
+									{"infusedSlot":true,"default":"ctfLines"}
 								]},
 								"transformed" : { "randomDialogue" : [ ["Heh, I can feel you sloshing around.", "Seems like you're not quite solid anymore."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
 								"transform" : {

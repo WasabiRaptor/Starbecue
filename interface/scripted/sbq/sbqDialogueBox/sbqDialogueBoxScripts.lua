@@ -74,7 +74,7 @@ function sbq.getRedirectedDialogue(dialogueTree, settings, entity)
 	return dialogueTree or {}
 end
 
-function sbq.getRandomDialogueTreeValue(settings, randomRolls, randomTable, name)
+function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomTable, name)
 	local randomRolls = randomRolls
 	local randomTable = randomTable
 	local badRolls = {}
@@ -109,7 +109,7 @@ function sbq.getRandomDialogueTreeValue(settings, randomRolls, randomTable, name
 				end
 			end
 		elseif randomTable.infusedSlot then
-			local itemSlot = settings[(settings.location or "").."InfusedItem"]
+			local itemSlot = settings[((dialogueTree.location or settings.location) or "").."InfusedItem"]
 			if type(randomTable.infusedSlot) == "string" then
 				itemSlot = settings[randomTable.infusedSlot]
 			end
@@ -181,18 +181,18 @@ end
 function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, entity, ...)
 	local dialogueTree = dialogueTree
 	local options = {}
-	local effect = settings[settings.location.."Effect"]
+	local effect = settings[(dialogueTree.location or settings.location).."Effect"]
 	if settings.digested then
 		return dialogueTree.digested or dialogueTree.default
 	end
 
 	if settings.cumDigesting or settings.digesting then
-		effect = ((settings.locationsData[settings.location] or {}).digest).effect or "sbqDigest"
+		effect = ((settings.locationsData[(dialogueTree.location or settings.location)] or {}).digest).effect or "sbqDigest"
 	end
 	table.insert(options, effect or "default")
 
-	if settings[settings.location.."Compression"] then
-		table.insert(options, settings.location.."Compression")
+	if settings[(dialogueTree.location or settings.location).."Compression"] then
+		table.insert(options, (dialogueTree.location or settings.location).."Compression")
 	end
 	if settings.transformed and dialogueTree.transformed then
 		table.insert(options, "transformed")
@@ -210,19 +210,19 @@ end
 
 function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, entity, ...)
 	local dialogueTree = dialogueTree
-	local effect = settings[settings.location.."Effect"]
+	local effect = settings[(dialogueTree.location or settings.location).."Effect"]
 	if settings.digested then
 		return dialogueTree.digested or dialogueTree.default
 	end
 	if settings.cumDigesting or settings.digesting then
-		effect = ((settings.locationsData[settings.location] or {}).digest).effect or "sbqDigest"
+		effect = ((settings.locationsData[(dialogueTree.location or settings.location)] or {}).digest).effect or "sbqDigest"
 	end
 
 	return dialogueTree[effect] or dialogueTree.default
 end
 
 function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, entity, ...)
-	if (not settings.digestAllow) and (settings.softDigestAllow and settings[settings.location.."EffectSlot"] == "softDigest") then
+	if (not settings.digestAllow) and (settings.softDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.digestAllow) then
 		return dialogueTree["true"] or dialogueTree.default
@@ -232,7 +232,7 @@ function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, entit
 end
 
 function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, entity, ...)
-	if (not settings.cumDigestAllow) and (settings.cumSoftDigestAllow and settings[settings.location.."EffectSlot"] == "softDigest") then
+	if (not settings.cumDigestAllow) and (settings.cumSoftDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.cumDigestAllow) then
 		return dialogueTree["true"] or dialogueTree.default
@@ -242,7 +242,7 @@ function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, en
 end
 
 function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch, entity, ...)
-	if (not settings.femcumDigestAllow) and (settings.femcumSoftDigestAllow and settings[settings.location.."EffectSlot"] == "softDigest") then
+	if (not settings.femcumDigestAllow) and (settings.femcumSoftDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.femcumDigestAllow) then
 		return dialogueTree["true"] or dialogueTree.default
@@ -252,7 +252,7 @@ function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch,
 end
 
 function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, entity, ...)
-	if (not settings.milkDigestAllow) and (settings.milkSoftDigestAllow and settings[settings.location.."EffectSlot"] == "softDigest") then
+	if (not settings.milkDigestAllow) and (settings.milkSoftDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.milkDigestAllow) then
 		return dialogueTree["true"] or dialogueTree.default
@@ -303,8 +303,8 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, entity
 end
 
 function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, entity, ...)
-	if (((settings[settings.location.."InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil then
-		local uniqueID = settings[settings.location .. "InfusedItem"].parameters.npcArgs.npcParam.scriptConfig.uniqueId
+	if (((settings[(dialogueTree.location or settings.location).."InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil then
+		local uniqueID = settings[(dialogueTree.location or settings.location) .. "InfusedItem"].parameters.npcArgs.npcParam.scriptConfig.uniqueId
 		if dialogueTree[uniqueID] then
 			return dialogueTree[uniqueID]
 		else

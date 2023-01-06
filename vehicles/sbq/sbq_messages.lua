@@ -42,7 +42,11 @@ function sbq.transformMessageHandler(eid, TF, TFType)
 	TF.data = TF.data or { species = sbq.species, gender = sbq.settings.TFTG or "noChange" }
 
 	if TF.data.randomSpecies then
-		TF.data.species = TF.data.randomSpecies[math.random(#TF.data.randomSpecies)]
+		local species = TF.data.randomSpecies
+		while type(species) == "table" do
+			species = species[math.random(#species)]
+		end
+		TF.data.species = species
 	end
 	for setting, values in pairs(TF.data.randomSettings or {}) do
 		TF.data.settings[setting] = values[math.random(#values)]

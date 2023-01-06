@@ -106,12 +106,13 @@ local finished = false
 local dialoguePos = 1
 
 function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTree)
-	sbq.checkVoreButtonsEnabled()
 	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, sbq.data.settings, player.id(), dialogueTree)
 	if not dialogueTree then return false end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
 	sbq.prevDialogueBranch = dialogueTree
+
+	sbq.checkVoreButtonsEnabled()
 
 	local randomDialogue = dialogueTree.randomDialogue
 	local randomPortrait = dialogueTree.randomPortrait
@@ -125,11 +126,11 @@ function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTree)
 		randomRolls = prevRandomRolls
 	end
 	-- we want to make sure the rolls for the portraits and the dialogue line up
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(sbq.data.settings, randomRolls, randomDialogue, "randomDialogue")
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(sbq.data.settings, randomRolls, randomPortrait, "randomPortrait")
-	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(sbq.data.settings, randomRolls, randomName, "randomName")
-	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(sbq.data.settings, randomRolls, randomButtonText, "randomButtonText")
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(sbq.data.settings, randomRolls, randomEmote, "randomEmote")
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.data.settings, randomRolls, randomDialogue, "randomDialogue")
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.data.settings, randomRolls, randomPortrait, "randomPortrait")
+	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.data.settings, randomRolls, randomName, "randomName")
+	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.data.settings, randomRolls, randomButtonText, "randomButtonText")
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.data.settings, randomRolls, randomEmote, "randomEmote")
 
 	prevRandomRolls = randomRolls
 
@@ -142,16 +143,16 @@ function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTree)
 		end
 		speaker = dialogueTree.speaker
 	end
-	local tags = { entityname = playerName, dontSpeak = "", infusedName = (((((sbq.data.settings[(sbq.data.settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local tags = { entityname = playerName, dontSpeak = "", infusedName = (((((sbq.data.settings[(dialogueTree.location or sbq.data.settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
 	local imagePortrait
 
 	if type(randomName) == "string" then
 		nameLabel:setText(randomName)
 	elseif dialogueTree.name ~= nil then
 		if type(dialogueTree.name) == "table" then
-			nameLable:setText(dialogueTree.name[dialoguePos] or dialogueTree.name[#dialogueTree.name] or sbq.data.defaultName or world.entityName(pane.sourceEntity()))
+			nameLabel:setText(dialogueTree.name[dialoguePos] or dialogueTree.name[#dialogueTree.name] or sbq.data.defaultName or world.entityName(pane.sourceEntity()))
 		else
-			nameLable:setText(dialogueTree.name)
+			nameLabel:setText(dialogueTree.name)
 		end
 	else
 		nameLabel:setText(sbq.data.defaultName or world.entityName(pane.sourceEntity()))
@@ -302,13 +303,17 @@ end
 function sbq.checkVoreButtonsEnabled()
 	for i, voreType in pairs(sbq.config.voreTypes or {}) do
 		local button = _ENV[voreType]
-		local active = sbq.checkVoreTypeActive(voreType)
-		button:setVisible(active ~= "hidden")
-		local image = sbq.data.icons[voreType]
-		if active ~= "request" then
-			image = image.."?brightness=-25?saturation=-100"
+		if (sbq.prevDialogueBranch or {}).hideVoreButtons then
+			button:setVisible(false)
+		else
+			local active = sbq.checkVoreTypeActive(voreType)
+			button:setVisible(active ~= "hidden")
+			local image = sbq.data.icons[voreType]
+			if active ~= "request" then
+				image = image.."?brightness=-25?saturation=-100"
+			end
+			button:setImage(image)
 		end
-		button:setImage(image)
 	end
 end
 

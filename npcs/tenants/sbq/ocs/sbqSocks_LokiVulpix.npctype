@@ -174,15 +174,49 @@
 						"dialogue" : [
 							"So, back when Loki first made me, she didn't actually tell me what the zipper was for",
 							"But I knew perfectly well, I could just feel my purpose imbued into my very being hehe~",
-							"So I had to wait for my moment, all through the day as she showed me around the house, getting me familiar with the place...",
-							"But I didn't have the right moment yet, I just listened to her being cute while resisting the urge to stuff her up inside me right then and there~",
-							"And then, when we finally went to bed, and she snuggled right up against me, the fox's guard down entirely, I made my move~",
-							"I reached down and quietly unzipped myself, and then made sure I had her firmly in my grasp... before shoving her down inside headfirst!",
-							"She squirmed and squirmed and it felt so good, fighting back just a little, we both knew she could have easily stopped me, but she wouldn't~",
-							"Stuffed that fox all the way inside and zipped myself up tight, trapping her, not a single consequence for touching her tails~",
-							"And I had her nice and snug and tucked away in my womb, trapped inside me, she would never admit it, but she loved it~"
+							"So I had to wait for my moment, all through the day as she showed me around the house, getting me familiar with the place..."
 						],
-						"jump":["tellMeAStory"]
+						"continue" : {
+							"buttonText" : ["->"],
+							"nearUniqueId" : ["sbqLoki_LokiVulpix"],
+							"speaker" : "sbqLoki_LokiVulpix",
+							"name" : ["Loki"],
+							"dialogue" : ["What are y'all talking about?"],
+							"portrait" : ["/humanoid/sbqLoki_LokiVulpix/portraits/LConfused.png"],
+							"hideVoreButtons" : true,
+							"continue" : {
+								"buttonText" : ["->"],
+								"dialogue" : ["Oh nothing, just the day you made me~"],
+								"continue" : {
+									"buttonText" : ["->"],
+									"speaker" : "sbqLoki_LokiVulpix",
+									"name" : ["Loki"],
+									"hideVoreButtons" : true,
+									"dialogue" : [
+										"...!",
+										"M-maybe I can tell you that story myself later...",
+										"Fluff for brains here might get the story wrong or something."
+									],
+									"portrait" : [
+										"/humanoid/sbqLoki_LokiVulpix/portraits/LShocked.png",
+										"/humanoid/sbqLoki_LokiVulpix/portraits/LConfused.png"
+									],
+									"jump":["tellMeAStory"]
+								}
+							}
+						},
+						"fail" : {
+							"dialogue" : [
+								"But I didn't have the right moment yet, I just listened to her being cute while resisting the urge to stuff her up inside me right then and there~",
+								"And then, when we finally went to bed, and she snuggled right up against me, the fox's guard down entirely, I made my move~",
+								"I reached down and quietly unzipped myself, and then made sure I had her firmly in my grasp... before shoving her down inside headfirst!",
+								"She squirmed and squirmed and it felt so good, fighting back just a little, we both knew she could have easily stopped me, but she wouldn't~",
+								"Stuffed that fox all the way inside and zipped myself up tight, trapping her, not a single consequence for touching her tails~",
+								"And I had her nice and snug and tucked away in my womb, trapped inside me, she would never admit it, but she loved it~"
+							],
+							"playerSaveSettings" : { "heardLokiCreationStory" : true },
+							"jump":["tellMeAStory"]
+						}
 					}
 				},
 				"sbqJaych_Jaych" : {
@@ -202,6 +236,7 @@
 							"And he was just so flustered being inside there, just a wiggly toy for me as the soft plush fabric squeezed tightly around him~",
 							"He loved it even more when I told him I wasn't letting him out~ He kept rubbing his against my closed zipper so he knew he was trapped~\nI think I kept him in there for a week~"
 						],
+						"playerSaveSettings" : { "heardJaychMeetingStory" : true },
 						"jump":["tellMeAStory"]
 					}
 				}

@@ -45,7 +45,7 @@
 					[ { "type" : "label", "text" : "Age: 23"}, { "type" : "label", "text" : "Gender: ^#5BCEFA;F^#F5A9B8;e^#FFFFFF;m^#F5A9B8;a^#5BCEFA;l^#F5A9B8;e"} ],
 					[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Deerfox"} ],
 					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with transforming and absorbing people."},
+					{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with transforming and absorbing people~"},
 					{ "type" : "spacer", "size" : 3 },
 					{ "type" : "label", "text" : "Favorites: CTF, CV, BV, Boobsorb, OV, Sentient Pudge"}
 				]
@@ -106,7 +106,7 @@
 						"check":{"introduced":false},
 						"dialogue" : [
 							"Well hi there <entityname>!",
-							"You can call me Auri, I'm a what your kind might call a 'Dreamer'.\n \nI go by She/They."
+							"You're lucky I'm not in the mood to take your name, you can address me by the name Loki.\n \nI go by She/They."
 						],
 						"playerSaveSettings" : { "introduced" : true },
 						"jump" : ["converse"]
@@ -114,13 +114,10 @@
 					["Tell me about yourself", {"jump":["talkAboutSelf"]}],
 					[ "Whats your belly like?", {
 						"voreType" : "oralVore",
-						"dialogue" : ["Well uhm, you might find some coins and gems and such in there...\nSince my diet includes rocks and minerals."],
-						"continue" : {
-							"next" : "bellyEffectSlot",
-							"default" : { "dialogue" : ["Other than that it should be pretty comfortable for you!" ], "portrait" : ["Happy.png"], "jump" : ["converse"]},
-							"heal" : { "dialogue" : ["My juices in there should patch you up and be really soothing!"], "portrait" : ["Joyful.png"], "jump" : ["converse"]},
-							"softDigest" : { "dialogue" : ["Well, you'd probably drift off to a nice relaxing goopy nap as I melt you down to keep as some pudge."], "portrait" : ["Smug.png"], "jump" : ["converse"]}
-						}
+						"next" : "bellyEffectSlot",
+						"default" : { "dialogue" : ["Might be a bit warm in there, but you'll be fine, just a bit squished~" ], "portrait" : ["Happy.png"], "jump" : ["converse"]},
+						"heal" : { "dialogue" : ["Should be a nice warm relaxing sauna in there~"], "portrait" : ["Joyful.png"], "jump" : ["converse"]},
+						"softDigest" : { "dialogue" : ["Hehe, you'll be melted down in my furnace until you're nothing but padding and a spot on my thighs~"], "portrait" : ["Smug.png"], "jump" : ["converse"]}
 					}],
 					/*
 					[ "What are your tails like?", {
@@ -139,20 +136,29 @@
 					[ "What are your breasts like?", {
 						"next" : "breastsEffectSlot",
 						"voreType" : "breastVore",
-						"default" : { "dialogue" : ["Should be soft and milky, it's purple flavored."], "jump" : ["converse"]},
+						"default" : { "dialogue" : ["Nice and soft, I typically produce cinnamon milk~"], "jump" : ["converse"]},
 						"heal" : { "dialogue" : ["I always hear a milk bath is really relaxing~"], "jump" : ["converse"]},
 						"softDigest" : { "dialogue" : ["Might mix you up into my next batch of milk~"], "jump" : ["converse"]}
 					}],
 					[ "Whats your shaft like?", {
 						"next" : "shaftEffectSlot",
 						"voreType" : "cockVore",
-						"default" : { "dialogue" : ["Hehe, I'll probably get pretty hard if you squirm your way in there~"], "portrait" : ["Smug.png"], "jump" : ["converse"]}
+						"default" : { "dialogue" : ["huff, I'll probably get pretty hard if you squirm your way in there~"], "portrait" : ["Smug.png"],
+							"continue" : {
+								"next" : "infusedCharacter",
+								"location" : "shaft",
+								"default" : "converse",
+								"defaultInfused" : {
+									"location" : "shaft",
+									"dialogue" : [ "Or it might be more apt to say <infusedName> would get pretty hard hehe~" ], "portrait" : ["Smug.png"]
+								}
+							}
+						}
 					}],
 					[ "What are your balls like?", {
 						"next" : "ballsEffectSlot",
 						"voreType" : "cockVore",
 						"default" : { "dialogue" : ["Might be a bit messy to stew and slosh around in all that cum~"], "jump" : ["converse"]},
-						"heal" : { "dialogue" : ["Most of my bodily fluids have healing properties, my cum is no exception~"], "jump" : ["converse"]},
 						"softDigest" : { "dialogue" : ["Hehe, you might end up being the next load I pump out into someone if you stay in there too long~"], "jump" : ["converse"]}
 
 					}]
@@ -160,254 +166,66 @@
 			},
 
 			"itemSelection" : { // dialogue lines for selecting items in the shop
-				"sbqPotionVaporeon" : {
-					"randomPortrait" : [
-						"UwU.png",
-						"Neutral.png",
-						"Blep.png"
-					],
-					"randomDialogue" : [
-						"Vappy TF UwU",
-						"The first one we made, basically all the original sprites were done by Zevi, then I had the great idea \"what if you could play as it\" and kinda took over.",
-						"Hey guys, did you know that in terms of male human and female Pokémon breeding, Vaporeon is the most compatible Pokémon for humans? Not only are they in the field egg group, which is mostly comprised of mammals, Vaporeon are an average of 3”03’ tall and 63.9 pounds, this means they’re large enough to be able handle human dicks, and with their impressive Base Stats for HP and access to Acid Armor, you can be rough with one. Due to their mostly water based biology, there’s no doubt in my mind that an aroused Vaporeon would be incredibly wet, so wet that you could easily have sex with one for hours without getting sore. They can also learn the moves Attract, Baby-Doll Eyes, Captivate, Charm, and Tail Whip, along with not having fur to hide nipples, so it’d be incredibly easy for one to get you in the mood. With their abilities Water Absorb and Hydration, they can easily recover from fatigue with enough water. No other Pokémon comes close to this level of compatibility. Also, fun fact, if you pull out enough, you can make your Vaporeon turn white. Vaporeon is literally built for human dick. Ungodly defense stat+high HP pool+Acid Armor means it can take cock all day, all shapes and sizes and still come for more"
-					],
-					"randomButtonText" : [
-						"UwU",
-						"Interesting.",
-						"Fucking Hell."
-					],
-					"continue" : {
-						"useLastRandom" : true,
-						"nearUniqueId" : ["sbqZevi_Zygahedron"],
-						"speaker" : "sbqZevi_Zygahedron",
-						"range" : 8,
-						"randomName" : "Zevi",
-						"portraitPath" : "/humanoid/sbqZevi_Zygahedron/portraits/Z",
-						"randomPortrait" : [
-							"UwU.png",
-							"Neutral.png",
-							"Blep.png"
-						],
-						"randomDialogue" : [
-							"Vappy TF UwU",
-							"Yeah it was originally just going to be a normal object thing.",
-							"Well, well, well. It appears that <entityname> is a fellow Vappy fuck connoisseur. However, screw the female version. You get those same ol' two holes in literally everything else. The male Vappy is the real star of the show. Those long slippery dicks. They have full mobility control with like a tentacle are the perfect ass filler for the ultimate in deep reaching experience nothing else could possibly provide. Naturally lubed at all times due to their aquatic hydrodynamic nature, you can pull off anywhere to the side of the road, or go into a public restroom at the beach. Get each other aroused, and have the fuck of a lifetime. The extraordinary squishyness of the Vappy alone rubbing against you would be enough to lose yourself in pleasure as it simply mounts you. Let alone with that perfect tool of pleasure slips into you, it's ability to snake around your bends and its perfect length make it seem that a Vappy dick was made specifically for your booty. Enjoy the feeling of being completely filled while also being able to see it if you have a tight tummy. And hat's only the dick. Due to having internal balls, they're much bigger and pack a lot more cream to load you up with, along with having muscles around them to make sure every drop comes out while also being a lot more powerful than any external balls could ever hope to achieve, giving you a deep, complete filling to rock your world to your literal core, and beyond. There's still more though. Due to having a thick, powerful tail connected from their back and front, that means all their fun stuff is on the front and easy to access. Meaning, if you were even comfortable with having your dick point backwards (takes some training), you can be fucked, while also fucking your Vappy at the same time! Me-owth, that's fucking right! But, but, but! There's still fucking more! Like, holy shit, male Vaps are the gods of fuck. While you're fucking your male Vappy, possibly while also being fucked by him, their booty is on their tail, at the base, which is the thickest part, because that's where the biggest muscles are. This means that while your dick is in there, it's being fucking massaged, better than even a vag could achieve! Agh! It should be fucking illegal because how amazing male Vaps are for fuck!Well, guess what? That only covered you being a softy, wholesome fucker like me. That's right. There's. Even. F*cking. More! Say you like to be a little restrained. You don't need a Sylveon's feelers for that, or an Umbreon/Espeon's psychic powers, or Leafeon's vines. Vappies got that shit covered too! Did you even see that tail?! It's basically a boa constrictor. In a non sexual sense, it's my favorite part of a Vappy. It's basically their main part about them. But, if you want them to, it can be a super useful tool to enhance your knotty experience with them. Despite the slippyness, you won't be going anywhere if the Vappy wraps you up in that thing.Are you a super kinkster? Do you like pure fantasy fetishes that aren't possible IRL? Such as, soft vore? Well guess fucking what. It just became possible! They can be solid as they pass your lips (passed where your eyes can see them) and turn into water as they enter you, allowing them to fit perfectly, cuz nothing fits into any spot more perfectly than water, except air, like a ghost type. But, who wants to do knotty shit with air? You can't feel it unless it's moving. You can always feel liquids. Speaking of liquids, even if you're a weirdo who likes digestion, don't worry about killing them with absorption. Eventually, they'll come back out and be able to reform like nothing happened. Speaking of hurting them, if you get too rough, or you're a horrible abusive asshole to them on purpose for your own pleasure (QnQ), they can just turn to water and reform back to their completely unscathed body, making scars or missing pieces a thing of the past!I would love to say there's even more you can do with them, but the possibilities are damn near endless. Use your imagination. But if you get one, you better show this god of fuck the respect it deserves. Umbreons may be my favorite. But, damn, Vappies really want to get that top spot from me. It's a really close call."
-						],
-						"randomButtonText" : [
-							"UwU",
-							"Interesting.",
-							"God Damn It."
-						],
-						"jump" : [ "converse"]
-					},
-					"fail" : "converse"
+				"sbqMysteriousPotion" : {
+					"randomDialogue" : ["Heh, you won't even know what you're gonna turn into."],
+					"jump" : ["converse"]
 				},
-				"sbqCoreVaporeon" : {
-					"randomPortrait" : [
-						"UwU.png",
-						"Neutral.png",
-						"Blep.png"
-					],
-					"randomDialogue" : [
-						"Vappy UwU",
-						"The first one we made, basically all the original sprites were done by Zevi, then I had the great idea \"what if you could play as it\" and kinda took over.",
-						"Hey guys, did you know that in terms of male human and female Pokémon breeding, Vaporeon is the most compatible Pokémon for humans? Not only are they in the field egg group, which is mostly comprised of mammals, Vaporeon are an average of 3”03’ tall and 63.9 pounds, this means they’re large enough to be able handle human dicks, and with their impressive Base Stats for HP and access to Acid Armor, you can be rough with one. Due to their mostly water based biology, there’s no doubt in my mind that an aroused Vaporeon would be incredibly wet, so wet that you could easily have sex with one for hours without getting sore. They can also learn the moves Attract, Baby-Doll Eyes, Captivate, Charm, and Tail Whip, along with not having fur to hide nipples, so it’d be incredibly easy for one to get you in the mood. With their abilities Water Absorb and Hydration, they can easily recover from fatigue with enough water. No other Pokémon comes close to this level of compatibility. Also, fun fact, if you pull out enough, you can make your Vaporeon turn white. Vaporeon is literally built for human dick. Ungodly defense stat+high HP pool+Acid Armor means it can take cock all day, all shapes and sizes and still come for more"
-					],
-					"randomButtonText" : [
-						"UwU",
-						"Interesting.",
-						"Fucking Hell."
-					],
-					"continue" : {
-						"useLastRandom" : true,
-						"nearUniqueId" : ["sbqZevi_Zygahedron"],
-						"randomName" : "Zevi",
-						"range" : 8,
-						"speaker" : "sbqZevi_Zygahedron",
-						"portraitPath" : "/humanoid/sbqZevi_Zygahedron/portraits/Z",
-						"randomPortrait" : [
-							"UwU.png",
-							"Neutral.png",
-							"Blep.png"
-						],
-						"randomDialogue" : [
-							"Vappy UwU",
-							"Yeah it was originally just going to be a normal object thing.",
-							"Well, well, well. It appears that <entityname> is a fellow Vappy fuck connoisseur. However, screw the female version. You get those same ol' two holes in literally everything else. The male Vappy is the real star of the show. Those long slippery dicks. They have full mobility control with like a tentacle are the perfect ass filler for the ultimate in deep reaching experience nothing else could possibly provide. Naturally lubed at all times due to their aquatic hydrodynamic nature, you can pull off anywhere to the side of the road, or go into a public restroom at the beach. Get each other aroused, and have the fuck of a lifetime. The extraordinary squishyness of the Vappy alone rubbing against you would be enough to lose yourself in pleasure as it simply mounts you. Let alone with that perfect tool of pleasure slips into you, it's ability to snake around your bends and its perfect length make it seem that a Vappy dick was made specifically for your booty. Enjoy the feeling of being completely filled while also being able to see it if you have a tight tummy. And hat's only the dick. Due to having internal balls, they're much bigger and pack a lot more cream to load you up with, along with having muscles around them to make sure every drop comes out while also being a lot more powerful than any external balls could ever hope to achieve, giving you a deep, complete filling to rock your world to your literal core, and beyond. There's still more though. Due to having a thick, powerful tail connected from their back and front, that means all their fun stuff is on the front and easy to access. Meaning, if you were even comfortable with having your dick point backwards (takes some training), you can be fucked, while also fucking your Vappy at the same time! Me-owth, that's fucking right! But, but, but! There's still fucking more! Like, holy shit, male Vaps are the gods of fuck. While you're fucking your male Vappy, possibly while also being fucked by him, their booty is on their tail, at the base, which is the thickest part, because that's where the biggest muscles are. This means that while your dick is in there, it's being fucking massaged, better than even a vag could achieve! Agh! It should be fucking illegal because how amazing male Vaps are for fuck!Well, guess what? That only covered you being a softy, wholesome fucker like me. That's right. There's. Even. F*cking. More! Say you like to be a little restrained. You don't need a Sylveon's feelers for that, or an Umbreon/Espeon's psychic powers, or Leafeon's vines. Vappies got that shit covered too! Did you even see that tail?! It's basically a boa constrictor. In a non sexual sense, it's my favorite part of a Vappy. It's basically their main part about them. But, if you want them to, it can be a super useful tool to enhance your knotty experience with them. Despite the slippyness, you won't be going anywhere if the Vappy wraps you up in that thing.Are you a super kinkster? Do you like pure fantasy fetishes that aren't possible IRL? Such as, soft vore? Well guess fucking what. It just became possible! They can be solid as they pass your lips (passed where your eyes can see them) and turn into water as they enter you, allowing them to fit perfectly, cuz nothing fits into any spot more perfectly than water, except air, like a ghost type. But, who wants to do knotty shit with air? You can't feel it unless it's moving. You can always feel liquids. Speaking of liquids, even if you're a weirdo who likes digestion, don't worry about killing them with absorption. Eventually, they'll come back out and be able to reform like nothing happened. Speaking of hurting them, if you get too rough, or you're a horrible abusive asshole to them on purpose for your own pleasure (QnQ), they can just turn to water and reform back to their completely unscathed body, making scars or missing pieces a thing of the past!I would love to say there's even more you can do with them, but the possibilities are damn near endless. Use your imagination. But if you get one, you better show this god of fuck the respect it deserves. Umbreons may be my favorite. But, damn, Vappies really want to get that top spot from me. It's a really close call."
-						],
-						"randomButtonText" : [
-							"UwU",
-							"Interesting.",
-							"God Damn It."
-						],
-						"jump" : [ "converse"]
-					},
-					"fail" : "converse"
+				"sbqDuplicatePotion" : {
+					"randomDialogue" : ["Who're you gonna copy? hope you don't have anything nefarious planned~"],
+					"jump" : ["converse"]
+				},
+				"sbqSpeciesPotion" : {
+					"randomDialogue" : ["Just add a bit of DNA and it'll bind to that species."],
+					"jump" : ["converse"]
+				},
+				"sbqGenderSwapPotion" : {
+					"randomDialogue" : ["Hehe, gonna switch things around? hope you enjoy the results~"],
+					"jump" : ["converse"]
+				},
+
+				"sbqMysteriousPotionVaporeon" : {
+					"randomDialogue" : ["Always a popular option, things can get pretty wet."],
+					"jump" : ["converse"]
+				},
+				"sbqMysteriousPotionHellhound" : {
+					"randomDialogue" : ["Always good to have another demon to summon."],
+					"jump" : ["converse"]
 				},
 
 				"sbqPotionAvian" : {
-					"randomPortrait" : [
-						"Dizzy.png",
-						"Blep.png",
-						"Joyful.png",
-						"Happy.png"
-
-					],
-					"randomDialogue" : [
-						"Oh my god the bird feet were hard to draw.",
-						"Big horny vorny birb.",
-						"I doubt the Stargazers would approve of this haha!",
-						"Make sure to check out the settings on this, theres some fun things that aren't enabled by default for obvious reasons!"
-					],
-					"jump" : [ "converse"]
+					"randomDialogue" : ["So you want to be a big Avian? I think we can make that happen."],
+					"jump" : ["converse"]
 				},
-				"sbqCoreAvian" : {
-					"randomPortrait" : [
-						"Dizzy.png",
-						"Blep.png",
-						"Joyful.png",
-						"Happy.png"
-
-					],
-					"randomDialogue" : [
-						"Oh my god the bird feet were hard to draw.",
-						"Big horny vorny birb.",
-						"I doubt the Stargazers would approve of this haha!",
-						"Make sure to check out the settings on this, theres some fun things that aren't enabled by default for obvious reasons!"
-					],
-					"jump" : [ "converse"]
-				},
-				"sbqPotionXeronious" : {
-					"randomPortrait" : [
-						"Neutral.png"
-					],
-					"randomDialogue" : [
-						"The first comm for one of these, currently the one with the most varied actions.",
-						"Big fluffy kaiju belly, currently the one that holds the most prey.",
-						"Aside from the support for making all this stuff, Xeronious has been an excellent bug tester to help this project not come apart at the seams every update release.",
-						"If I have to say the most difficult part making this, I think it'd probably be the grab system, which started here, had to redo how I handled the transformation groups to make it work.",
-						"The inhale that he can do is really fun to use"
-					],
-					"jump" : [ "converse"]
-				},
-				"sbqCoreXeronious" : {
-					"randomPortrait" : [
-						"Neutral.png"
-					],
-					"randomDialogue" : [
-						"The first comm for one of these, currently the one with the most varied actions.",
-						"Big fluffy kaiju belly, currently the one that holds the most prey.",
-						"Aside from the support for making all this stuff, Xeronious has been an excellent bug tester to help this project not come apart at the seams every update release."
-					],
-					"jump" : [ "converse"]
-				},
-
 				"sbqPotionSlime" : {
-					"randomPortrait" : [
-						"Neutral.png",
-						"Blep.png"
-					],
-					"randomDialogue" : [
-						"I actually made this whole thing in like, a few hours, it was done in one night. So yeah its really simple but rather fun!",
-						"Slime"
-					],
-					"jump" : [ "converse"]
+					"randomDialogue" : ["Usually I make this with gel, but you'll have to find a substitute."],
+					"jump" : ["converse"]
 				},
-				"sbqCoreSlime" : {
-					"randomPortrait" : [
-						"Neutral.png",
-						"Blep.png"
-					],
-					"randomDialogue" : [
-						"I actually made this whole thing in like, a few hours, it was done in one night. So yeah its really simple but rather fun!",
-						"Slime"
-					],
-					"jump" : [ "converse"]
+				"sbqPotionVaporeon" : {
+					"randomDialogue" : ["Bigger isn't *always* better, but in this case it might me heh~"],
+					"jump" : ["converse"]
 				},
 
-				"sbqCoreCharem" : {
-					"portrait" : ["Mad.png"],
-					"dialogue" : [
-						"So, someone edited the shop recipes and also added this back into the game, fucking disgusting. This person expliclty allowed minors into vore spaces, I don't want to associate with them."
-					],
-					"jump" : [ "converse"]
-				},
-
-				"sbqCoreZiellekDragon" : {
-					"randomDialogue" : [
-						"The third comm, fully playable dragon, has some more customizability, commed by Lakota.",
-						"Noodle."
-					],
-					"jump" : [ "converse"]
+				"sbqPotionXeronious" : {
+					"randomDialogue" : ["I met one of these, he had quite the appetite."],
+					"jump" : ["converse"]
 				},
 				"sbqConsumableZiellekPearl" : {
-					"randomDialogue" : [
-						"The third comm, fully playable dragon, has some more customizability, commed by Lakota.",
-						"Noodle."
-					],
-					"jump" : [ "converse"]
+					"randomDialogue" : ["I got a scale off of one once so I could try and replicate these."],
+					"jump" : ["converse"]
 				},
-				"sbqPotionDartGun" : {
-					"randomPortrait" : [
-						"Joyful.png",
-						"Neutral.png",
-						"Happy.png",
-						"Neutral.png"
-					],
-					"randomDialogue" : [
-						"TF GUN!\nTF GUN!\nTF GUN!",
-						"Make sure to buy some potions too or this thing is useless.",
-						"This thing I like, made in a single day, in a frenzy of energy.",
-						"Do be aware that some people can be immune to TF."
-					],
-					"jump" : [ "converse"]
-				},
-				"sbqSizeRay" : {
-					"randomPortrait" : [
-						"Joyful.png",
-						"Neutral.png",
-						"Happy.png",
-						"Neutral.png"
-					],
-					"randomDialogue" : [
-						["SHRINK RAY!\nSHRINK RAY!\nSHRINK RAY!", "GROWTH RAY!\nGROWTH RAY!\nGROWTH RAY!", "SIZE RAY!\nSIZE RAY!\nSIZE RAY!"],
-						"Use responsibly, and remember, micros are meant to be stepped on.",
-						"This thing is so much fun!",
-						"If you have this in your inv you can set a scale manually in the settings."
-					],
-					"jump" : [ "converse"]
+				"sbqPotionFray" : {
+					"randomDialogue" : ["A fox kinda like me, kept a sample of their fur so I could do this."],
+					"jump" : ["converse"]
 				},
 
-
-				"sbqMysteriousPotion" : { "randomDialogue" : ["Do be aware that some species won't work correctly with this, but it should work for most."], "jump" : [ "converse"] },
-				"sbqDuplicatePotion" : { "randomDialogue" : ["Do be aware that some species won't work correctly with this, but it should work for most."], "jump" : [ "converse"] },
-				"sbqSpeciesPotion" : { "randomDialogue" : ["Do be aware that some species won't work correctly with this, but it should work for most."], "jump" : [ "converse"] },
-				"sbqGenderSwapPotion" : { "randomDialogue" : ["Do be aware that some species won't work correctly with this, but it should work for most.", "The gender fluid."], "jump" : [ "converse"] },
-				"sbqReversionPotion" : { "randomDialogue" : ["You will very much want to have lots of these on hand if you're messing around with the potions above."], "jump" : [ "converse"] },
-
-				"sbqMysteriousPotionVaporeon" : { "randomDialogue" : ["Want to be a vappy hehe? This one is for being a vappy in the normal player mode, rather than being a giant one."], "jump" : [ "converse"] },
-				"sbqMysteriousPotionHellhound" : { "randomDialogue" : ["This turns you into a anthro Hellhound!"], "jump" : [ "converse"] },
-
-				"sbqMysteriousPotionSandy_Fevix" : { "randomDialogue" : ["This turns you into Sandy the Floatporeon! just know that when playing as her, you have to go by her prefrences!"], "jump" : [ "converse"] },
-				"sbqMysteriousPotionHelena_FFWizard" : { "randomDialogue" : ["This turns you into Helena the Hellhound! just know that when playing as her, you have to go by her prefrences!"], "jump" : [ "converse"] },
-
-				"sbqNominomicon" : { "randomDialogue" : ["This is a pretty important tool if you don't want to deal with every object Pred being randomized, though I still think modifiers to feed them are quite fun"], "jump" : [ "converse"] },
-
-				"sbqModifierFatteningDonut" : { "randomPortrait" : ["Blep.png"], "randomDialogue" : ["Hah, a donut that makes things fat!"], "jump" : [ "converse"] },
-
-				"sbqModifierDietPill" : { "randomPortrait" : ["Confused.png"], "randomDialogue" : ["I think this is the only holdover sprite from our days as an addon to SSVM, we couldn't think of anything better than a pill for this."], "jump" : [ "converse"] },
-
-				"sbqModifierHealingPotion" : { "randomPortrait" : ["Happy.png"], "randomDialogue" : ["The best belly effect!"], "jump" : [ "converse"] },
-
-				"sbqPlasticEgg" : { "randomPortrait" : ["Happy.png", "Neutral.png", "Blep.png"], "randomDialogue" : ["These! These are so fun, its so dumb but they're so fun I love them.", "These are entirely reusable, and random ones can come in mismatched colors", "Did you know if you get unbirthed by a robotic species you'll get put in one of these?"], "jump" : [ "converse"] },
-
-				"sbqEggWand" : { "randomPortrait" : "Confused.png", "randomDialogue" : ["Oh this? its pretty crazy, not really sure I should even be selling this?", "I know I had one of these laying around somewhere...", "Yeah I know 9999 is ridiculous but I can't just hand out something like this."], "jump" : [ "converse"] },
-
-				"sbqBallsPoster" : { "randomPortrait" : ["Joyful.png"], "randomDialogue" : ["Hehehehe, friends are stored in the balls~"], "jump" : [ "converse"] },
-				"spookypumpkinhead" : { "randomPortrait" : ["Joyful.png"], "randomDialogue" : ["Halloween is my favorite!", "My pet plushie Socks probably would like one of these in her house."], "jump" : [ "converse"] },
-				"sbqLargeWoodenArmchair" : { "randomPortrait" : ["Neutral.png"], "randomDialogue" : ["Beeg chair for beeg friends."], "jump" : [ "converse"] },
-
-				"smallBellyBoundStore" : { "randomPortrait" : ["Neutral.png"], "randomDialogue" : ["They were the reason this mod came to be, even if I have surpassed it a bit in some aspects.", "Might as well offer this here incase anyone wants it.", "Do note that I'm not maintaining any of that mod's content.", "While this was originally an add on to SSVM, SBQ is entirely standalone from it now."], "jump" : [ "converse"] }
+				"sbqMysteriousPotionSandy_Fevix" : {
+					"randomDialogue" : ["Heh, this Vaporeon is so silly, thought it'd be funny if she started seeing double."],
+					"jump" : ["converse"]
+				},
+				"sbqMysteriousPotionHelena_FFWizard" : {
+					"randomDialogue" : ["She'd probably find it flattering someone would want to look exactly like her."],
+					"jump" : ["converse"]
+				}
 
 			},
 
@@ -421,18 +239,13 @@
 				"options" : [
 					["So what are you?", {
 						"dialogue" : [
-							"Well, the easiest answer is 'Dragon' but theres a bit more to it than that, what I really am is a 'Drimyr' or 'Dreamer'\nGotta love those fantasy names which you just spell a word differntly for fun.",
-							"I'm a creature which is empowered by dreams and imagination, both feeding off of them and using them to create worlds of my own, as well as entering the worlds of others.",
-							"Which I guess is sorta what I'm doing here? Invading this game world to help make the kinky fantasies of vore and such take form in some way.",
-							"While my physical form is a fluffy dragon usally I do shapeshift, it's probably easier to think of me as a fae, or some form of demon.",
-							"I'm not all powerful, but realms of dreams and imagination such as this where the laws of reality are flexible are where I am."
+							"Well I'm a witch of course~ practicing a bit of alchemy and transfiguration. Species wise I'm a fae deerfox, little bit more fox than deer in my case."
 						],
 						"jump" : ["talkAboutSelf"]
 					}],
 					["What kinks do you like?", {
 						"dialogue" : [
-							"First of all, while this form is a representation of me, don't think talking about kinky stuff here lets the other me just psychically know you learned my prefs and stuff.",
-							"But hey, if you have similar prefs, don't be scared about talking to the other me outside the game."
+							"That sure is a question to ask~ Almost like an invitation for me to do a demonstration as I explain~"
 						],
 						"jump" : ["talkAboutKinks"]
 					}],
@@ -449,10 +262,10 @@
 					["Oral Vore (Pred)", {
 						"checkPlayer" : { "oralVore" : true },
 						"dialogue" : [
-							"I tend to like things a bit more close, in most cases the people I ate are more than just food to me. I'm eating them because I want them to feel comfy inside me.",
-							"Or I'm eating them because I want to have them inside, nice and protected, entirely surrounded by me in what could be a really close hug, all mine.",
-							"And then... if I do choose to digest someone, its because I want them even closer, I want them to truly be mine for the time I have them.",
-							"After I would melt someone down they get to experience being pudge somewhere on my body until I they want to be reformed, but during that time they are truly all mine."
+							"Heh, you should try counting the number of spots on my thighs, Maybe you'll recognize someone you know~",
+							"Rest assured they're there because they want to be there, I wouldn't keep someone for too long if they didn't want to be a part of me.",
+							"Those who I claim I think rather enjoy themselves, being melted down in my furnace and becoming a bit of fat or pudge somewhere~",
+							"Though I may also allow someone to just sit in my belly and enjoy feeling the walls squeeze and compress around them~"
 						],
 						"playerSaveSettings" : { "oralVorePredTalk" : true },
 						"continue" : {
@@ -467,29 +280,6 @@
 								["No", {
 									"dialogue" : ["Alright then."],
 									"playerSaveSettings" : { "oralVorePredLike" : false },
-									"jump" : ["talkAboutKinks"]
-								}]
-							]
-						}
-					}],
-					["Oral Vore (Prey)", {
-						"checkPlayer" : { "oralVorePred" : true },
-						"dialogue" : [
-							"If I do let myself be prey... it usually is only for a few specific people. Make me feel safe and comfortable, even if I do get gurgled I'd know it would be fine."
-						],
-						"playerSaveSettings" : { "oralVorePreyTalk" : true },
-						"continue" : {
-							"dialogue" : [ "Would you be a pred like that?" ],
-							"buttonText" : ["Y/N"],
-							"options" : [
-								["Yes", {
-									"dialogue" : ["Nice! We can have some fun sometime then."],
-									"playerSaveSettings" : { "oralVorePreyLike" : true },
-									"jump" : ["talkAboutKinks"]
-								}],
-								["No", {
-									"dialogue" : ["Alright then."],
-									"playerSaveSettings" : { "oralVorePreyLike" : false },
 									"jump" : ["talkAboutKinks"]
 								}]
 							]
@@ -527,7 +317,6 @@
 								"full" : {
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ "I'm a bit too full...", "My belly can't stretch any further...", "I've eaten too much already...", "I would... but I'm too full..." ]},
-									"sbqDigest" : { "randomDialogue" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ]},
 									"sbqSoftDigest" : { "randomDialogue" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ]}
 								},
 								"otherLocationFull" : { "randomDialogue" : [ "I'm a bit too full...", "My body can't stretch any further...", "I've been filled too much already...", "I would... but I'm too full..." ]},
@@ -671,7 +460,10 @@
 								] },
 								"sbqSoftDigest" : {
 									"next" : "digestImmunity",
-									"false" : { "randomDialogue" : [ "Just relax as I melt you down.", "Let all your worries just melt away~", "Pretty soon you'll just be pudge on my belly~", {"add" : "allMineLines" } ] },
+									"false" : { "randomDialogue" : [
+										["Just relax as I melt you down.", "Let all your worries just melt away~"],
+										["Pretty soon you'll just be pudge~", "Pretty soon you'll add another spot to my thighs~"],
+										{"add" : "allMineLines" } ] },
 									"true" : "struggle.location.race.personality.mood.default"
 								},
 								"sbqDigest" : "errorOrBad"
@@ -692,7 +484,7 @@
 								"transformed" : { "randomDialogue" : [ ["Seems like you're finished.", "I think you're finished changing.", "Are you excited to see what you look like once you're out?"], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
 								"transform" : {
 									"next" : "transformAllow",
-									"true" : { "randomDialogue" : [ ["Now to make you as fluffy as ME!", "These changes should be an improvement~", "New fluffderg coming soon~"], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
+									"true" : { "randomDialogue" : [ ["Will you be a deer, or a fox? or something else~ guess we'll find out soon~", "Hehe, maybe you'll become another familiar~"], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
 									"false" : "struggle.location.race.personality.mood.locationEffect"
 								},
 								"egged" : { "randomDialogue" : [ "Now you're trapped in an egg" ] }, // I don't think this will ever trigger because eggs can't struggle haha
@@ -707,6 +499,15 @@
 						}
 					}
 				},
+				"ctfLines" : {
+					"randomDialogue" : [
+						"Ahhh~ <infusedName> feels so great down there~",
+						"<keysmash> you're gonna make <infusedName> cum~",
+						"Ahhh~ <infusedName> feels so great down there~",
+						"<keysmash> you're gonna make <infusedName> cum~",
+						{"add":["I just might turn you into another layer on my cock hehe~"]}
+					]
+				},
 				"cock" : "struggle.shaft", // these are just in case someone names something different
 				"shaft" : { // location
 					"next" : "race",
@@ -719,11 +520,14 @@
 								"default" : { "randomDialogue" : [
 									["Ffffff yeeesss~", "MMMMmmm~ go deeeper~", "Ahhhhh~ deeeeper~", "<keysmash>~"],
 									{"infusedSlot":true,
-										"default":[
-											"ctf lines go here"
+										"default":"struggle.ctfLines",
+										"sbqZevi_Zygahedron": [
+											{"add":"struggle.ctfLines"},
+											["Heheh, giving my familiar and me such a good time~"]
 										],
-										"sbqZevi_Zygahedron":[
-											"specific ctf lines go here"
+										"sbqClaire_FFWizard": [
+											{"add":"struggle.ctfLines"},
+											["I'm sure Claire is having a pleasueable experience hehe~"]
 										]
 									}
 								]},
@@ -747,9 +551,10 @@
 								"next" : "getLocationEffect",
 								"default" : {
 									"randomDialogue" : [
-										"Yeeess~", "Keep squirming~", "Got you stewing down there in all that cum~", "Ffff I gotta hold back from cumming you out~",
-										"<keysmash>~", "Friends are stored in the balls~", "Ohhhh I sure do want to just keep you down there~",
-										"Just get yourself absolutely covered in cum~", "Ahhhhhh~", "Sloshing around down there~", "Mmmmm you're gonna get stained white~",
+										["Yeeess~", "Keep squirming~", "Got you stewing down there in all that cum~", "Ffff I gotta hold back from cumming you out~"],
+										["<keysmash>~", "Friends are stored in the balls~", "Ohhhh I sure do want to just keep you down there~"],
+										["Just get yourself absolutely covered in cum~", "Ahhhhhh~", "Sloshing around down there~", "Mmmmm you're gonna get stained white~"],
+
 										{"add" : "allMineLines" }
 									]
 								},
@@ -1614,6 +1419,7 @@
 
 			"bellyDigestEnable" : false,
 			"ballsDigestEnable" : false,
+			"ballsHealEnable" : false,
 			"tailDigestEnable" : false,
 			"breastsDigestEnable" : false,
 			"shaftEffectSlot" : "none",
