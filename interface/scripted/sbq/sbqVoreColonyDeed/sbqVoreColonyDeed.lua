@@ -74,7 +74,6 @@ function init()
 		type(occupier.tenants[indexes.tenantIndex].species) == "string"
 	then
 		sbq.tenant = occupier.tenants[indexes.tenantIndex]
-		sb.logInfo(sb.printJson(sbq.tenant,1))
 		sbq.npcConfig = root.npcConfig(sbq.tenant.type)
 
 		sbq.sbqCurrentData = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).sbqCurrentData or {}
