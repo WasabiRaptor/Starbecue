@@ -52,7 +52,6 @@ function generateItemDrop(itemDrop)
 		identity = overrideData.identity or {}
 		local species = overrideData.species or world.entitySpecies(entity.id())
 		local speciesFile = root.assetJson("/species/" .. species .. ".species")
-		itemDrop.parameters.fullPortrait = world.entityPortrait(entity.id(), "full")
 		itemDrop.parameters.preySpecies = species
 		itemDrop.parameters.preyDirectives = (overrideData.directives or "")..(identity.bodyDirectives or "")..(identity.hairDirectives or "")
 		itemDrop.parameters.preyColorMap = speciesFile.baseColorMap
@@ -87,16 +86,32 @@ function generateItemDrop(itemDrop)
 			collarNameLabel = "",
 			noCollarLabel = "",
 		}
-		itemDrop.parameters.tooltipFields.objectImage = itemDrop.parameters.fullPortrait or
+		itemDrop.parameters.portraitNpcParam = {
+			items = {
+				override = {
+					{0,
+						{
+							{
+							}
+						}
+					}
+				}
+			}
+		}
+		itemDrop.parameters.tooltipFields.objectImage =
 			root.npcPortrait("full", itemDrop.parameters.npcArgs.npcSpecies,
 				itemDrop.parameters.npcArgs.npcType or "generictenant",
-				itemDrop.parameters.npcArgs.npcLevel or 1, itemDrop.parameters.npcArgs.npcSeed, itemDrop.parameters.npcArgs.npcParam)
+			itemDrop.parameters.npcArgs.npcLevel or 1, itemDrop.parameters.npcArgs.npcSeed, sb.jsonMerge(itemDrop.parameters.npcArgs.npcParam, itemDrop.parameters.portraitNpcParam or {}))
+
 		if itemDrop.parameters.pred then
 			itemDrop.parameters.gurgledBy = config.getParameter("gurgledByText")
 			itemDrop.parameters.tooltipFields.collarNameLabel = ( itemDrop.parameters.gurgledBy or "Gurgled by: ") .. itemDrop.parameters.pred
 		end
 		itemDrop.parameters.shortdescription = itemDrop.parameters.prey.."'s Essence"
-		itemDrop.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
+		itemDrop.parameters.inventoryIcon = root.npcPortrait("bust", itemDrop.parameters.npcArgs.npcSpecies,
+			itemDrop.parameters.npcArgs.npcType or "generictenant",
+			itemDrop.parameters.npcArgs.npcLevel or 1, itemDrop.parameters.npcArgs.npcSeed,
+			sb.jsonMerge(itemDrop.parameters.npcArgs.npcParam, itemDrop.parameters.portraitNpcParam or {}))
 	end
 
 	return itemDrop

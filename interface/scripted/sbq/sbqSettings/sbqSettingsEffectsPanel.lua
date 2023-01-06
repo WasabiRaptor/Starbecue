@@ -186,7 +186,7 @@ function sbq.effectsPanel()
 				local other = {}
 				for uniqueId, item in pairs(sbq.storedDigestedPrey[location]) do
 					count = count + 1
-					if item.parameters.npcArgs.wasPlayer then
+					if item.parameters.npcArgs.npcParam.wasPlayer then
 						table.insert(players, item)
 					elseif (root.npcConfig(item.parameters.npcArgs.npcType).scriptConfig or {}).isOC then
 						table.insert(ocs, item)

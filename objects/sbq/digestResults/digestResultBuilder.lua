@@ -87,11 +87,11 @@ function build( directory, config, parameters, level, seed )
 	if (config or {}).npcArgs ~= nil then
 		parameters.tooltipKind = "filledcapturepod"
 		parameters.tooltipFields = parameters.tooltipFields or {}
-		parameters.tooltipFields.subtitle = (config.npcArgs.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"
+		parameters.tooltipFields.subtitle = (config.npcArgs.npcParam.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"
 
 		parameters.tooltipFields.objectImage = parameters.fullPortrait or
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
-				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, config.npcArgs.npcParam)
+				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
 		if config.pred then
 			parameters.tooltipFields.collarNameLabel = (config.gurgledBy or "Gurgled by: ")..config.pred
 		end

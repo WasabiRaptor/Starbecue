@@ -3,7 +3,7 @@ function build(directory, config, parameters, level, seed)
 	if (config or {}).npcArgs ~= nil then
 		parameters.tooltipKind = "filledcapturepod"
 		parameters.tooltipFields = parameters.tooltipFields or {}
-		parameters.tooltipFields.subtitle = (config.npcArgs.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"
+		parameters.tooltipFields.subtitle = (config.npcArgs.npcParam.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"
 		parameters.tooltipFields.noCollarLabel = ""
 
 		local success, speciesFile = pcall(root.assetJson, ("/species/"..(config.npcArgs.npcSpecies or "")..".species"))
@@ -28,7 +28,7 @@ function build(directory, config, parameters, level, seed)
 
 		if success then
 			parameters.inventoryIcon = root.npcPortrait("bust", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
-				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, config.npcArgs.npcParam)
+				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
 
 			parameters.tooltipFields.collarNameLabel = ""
 
@@ -38,7 +38,7 @@ function build(directory, config, parameters, level, seed)
 
 			parameters.tooltipFields.objectImage = config.fullPortrait or
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
-					config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, config.npcArgs.npcParam)
+					config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
 		elseif config.speciesFile then
 
 			parameters.inventoryIcon = (config.useIcon or "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJarCombo.png")..parameters.directives

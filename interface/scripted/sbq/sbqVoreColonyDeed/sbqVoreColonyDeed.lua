@@ -74,6 +74,7 @@ function init()
 		type(occupier.tenants[indexes.tenantIndex].species) == "string"
 	then
 		sbq.tenant = occupier.tenants[indexes.tenantIndex]
+		sb.logInfo(sb.printJson(sbq.tenant,1))
 		sbq.npcConfig = root.npcConfig(sbq.tenant.type)
 
 		sbq.sbqCurrentData = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).sbqCurrentData or {}
@@ -534,7 +535,7 @@ else
 		if (item.parameters or {}).npcArgs ~= nil then
 			local success, speciesFile = pcall(root.assetJson, ("/species/"..(item.parameters.npcArgs.npcSpecies or "")..".species"))
 			if not success then return false end
-			if item.parameters.npcArgs.wasPlayer then return false end
+			if item.parameters.npcArgs.npcParam.wasPlayer then return false end
 			if item.parameters.npcArgs.uniqueId then
 				for i, tenant in ipairs((sbq.storage.occupier or {}).tenants or {}) do
 					if tenant.uniqueId == item.parameters.npcArgs.uniqueId then return false end

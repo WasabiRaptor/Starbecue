@@ -4,6 +4,7 @@ function getIdentity(eid, identity)
 	overrideData.species = overrideData.species or world.entitySpecies(eid)
 	overrideData.identity = overrideData.identity or identity or {}
 	overrideData.name = world.entityName(eid)
+	overrideData.identity.gender = overrideData.gender
 
 	local success, speciesFile = pcall(root.assetJson, ("/species/"..overrideData.species..".species"))
 	if success then
@@ -34,11 +35,11 @@ function getIdentity(eid, identity)
 			end
 
 			--get personality values
-			if (not overrideData.identity.body) or (not overrideData.identity.bodyDirectives) then
+			if (not overrideData.identity.body) or (not overrideData.identity.bodyDirectives) or (not overrideData.identity.personalityIdle) then
 				local found1, found2 = imageString:find("body.png:idle.")
 				if found1 ~= nil then
 					overrideData.identity.body = overrideData.identity.body or imageString:sub(found2+1, found2+1)
-
+					overrideData.identity.personalityIdle = "idle."..overrideData.identity.body
 					local found3 = imageString:find("?")
 					local directives = imageString:sub(found3)
 					overrideData.identity.bodyDirectives = overrideData.identity.bodyDirectives or directives
@@ -52,10 +53,11 @@ function getIdentity(eid, identity)
 					overrideData.identity.emoteDirectives = overrideData.identity.emoteDirectives or directives
 				end
 			end
-			if not overrideData.identity.arm then
+			if (not overrideData.identity.arm) or (not overrideData.identity.personalityArmIdle) then
 				local found1, found2 = imageString:find("backarm.png:idle.")
 				if found1 ~= nil then
-					overrideData.identity.arm = imageString:sub(found2+1, found2+1)
+					overrideData.identity.arm = imageString:sub(found2 + 1, found2 + 1)
+					overrideData.identity.personalityArmIdle = "idle."..overrideData.identity.arm
 				end
 			end
 
