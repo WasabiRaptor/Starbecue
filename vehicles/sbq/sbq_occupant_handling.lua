@@ -568,8 +568,6 @@ function sbq.doBellyEffects(dt)
 					if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
 						sbq[sbq.occupant[i].progressBarFinishFuncName](i)
 						sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
-						sb.logInfo(tostring(sbq.occupant[i].progressBarFinishFlag))
-						sb.logInfo(tostring(sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")]))
 						sbq.occupant[i].progressBarActive = false
 					end
 				else
@@ -577,18 +575,12 @@ function sbq.doBellyEffects(dt)
 					if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
 						sbq[sbq.occupant[i].progressBarFinishFuncName](i)
 						sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
-						sb.logInfo(tostring(sbq.occupant[i].progressBarFinishFlag))
-						sb.logInfo(tostring(sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")]))
 						sbq.occupant[i].progressBarActive = false
 					end
 				end
 			else
-				for i, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
+				for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 					local data = sbq.sbqData.locations[location][passiveEffect]
-					sb.logInfo("attepmting")
-					sb.logInfo(tostring(data.occupantFlag))
-					sb.logInfo(tostring(sbq.occupant[i].flags[(data.occupantFlag or "transformed")]))
-					sb.logInfo("immune:"..tostring(sbq.occupant[i][location..passiveEffect.."Immune"]))
 					if sbq.settings[location..passiveEffect] and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
 						sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 							if enabled then
