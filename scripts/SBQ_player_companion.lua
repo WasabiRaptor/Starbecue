@@ -174,6 +174,15 @@ function init()
 			effectDirectives = status.statusProperty("effectDirectives")
 		}
 	end)
+	message.setHandler("sbqSetCurrentData", function (_,_, current)
+		local type = current.type or "prey"
+		player.setProperty( "sbqCurrentData", current)
+		status.setStatusProperty( "sbqCurrentData", current)
+		if not (current.type == "driver" and current.species == "sbqOccupantHolder") then
+			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
+			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
+		end
+	end)
 
 	message.setHandler("sbqGiveController", function(_,_)
 		if (not player.hasItem("sbqController")) then

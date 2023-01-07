@@ -58,6 +58,12 @@ function sbq.loopedMessage(name, eid, message, args, callback, failCallback)
 	end
 end
 
+function sbq.timedLoopedMessage(name, time, eid, message, args, callback, failCallback)
+	return sbq.timer(name, time, function ()
+		sbq.addRPC(world.sendEntityMessage(eid, message, table.unpack(args or {})), callback, failCallback)
+	end)
+end
+
 sbq.timerList = {}
 
 function sbq.randomTimer(name, min, max, callback)

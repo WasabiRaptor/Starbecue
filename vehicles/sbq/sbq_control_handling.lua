@@ -123,9 +123,13 @@ function sbq.getSeatData(occupant, seatname, eid)
 			occupant.controls = sb.jsonMerge(occupant.controls, seatdata)
 		end)
 	end
-	sbq.loopedMessage(seatname .. "Equips", eid, "sbqGetSeatEquips", { data }, function(seatdata)
-		occupant.controls = sb.jsonMerge(occupant.controls, seatdata)
-	end)
+
+	if sbq.timedLoopedMessage(seatname .. "Equips", 1, eid, "sbqGetSeatEquips", { data }, function(seatdata)
+			occupant.controls = sb.jsonMerge(occupant.controls, seatdata)
+		end)
+	then
+		world.sendEntityMessage(eid, "sbqSetCurrentData", data)
+	end
 end
 
 sbq.monsterstrugglecooldown = {}

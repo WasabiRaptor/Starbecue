@@ -44,6 +44,17 @@ function init()
 			effectDirectives = status.statusProperty("effectDirectives")
 		}
 	end)
+	message.setHandler("sbqSetCurrentData", function(_,_, current)
+		status.setStatusProperty( "sbqCurrentData", current)
+		if current.type == "prey" then
+			status.setStatusProperty("sbqDontTouchDoors", true)
+		else
+			status.setStatusProperty("sbqDontTouchDoors", false)
+		end
+		if current.species ~= "sbqOccupantHolder" then
+			_npc_setInteractive(false)
+		end
+	end)
 
 	message.setHandler("sbqInteract", function(_,_, pred, predData)
 		return interact({sourceId = pred, sourcePosition = world.entityPosition(pred), predData = predData})
