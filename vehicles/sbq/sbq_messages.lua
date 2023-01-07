@@ -103,14 +103,38 @@ function sbq.transformMessageHandler(eid, TF, TFType)
 	end
 end
 
+local function getSmallerOccupantData()
+	local sendOccupantValues = config.getParameter("sendOccupantValues") or {
+		"species",
+		"id",
+		"location",
+		"smolPreyData",
+		"progressBar",
+		"progressBarColor",
+		"flags"
+	}
+	local occupant = {}
+	for i, occupantData in pairs(sbq.occupant) do
+		occupant[i] = {}
+		for _, value in ipairs(sendOccupantValues) do
+			occupant[i][value] = occupantData[value]
+		end
+	end
+	return occupant
+end
+
 message.setHandler( "settingsMenuRefresh", function(_,_)
+
+
 	sbq.predHudOpen = 2
 	local refreshList = sbq.refreshList
 	sbq.refreshList = nil
+
+
 	return {
 		isNested = sbq.isNested,
 		occupants = sbq.occupants,
-		occupant = sbq.occupant,
+		occupant = getSmallerOccupantData(),
 		powerMultiplier = sbq.seats[sbq.driverSeat].controls.powerMultiplier,
 		settings = sbq.settings,
 		refreshList = refreshList,
@@ -241,8 +265,8 @@ message.setHandler( "requestUneat", function (_,_, prey, voreType)
 	end)
 end)
 
-message.setHandler( "getOccupancyData", function ()
-	return {occupant = sbq.occupant, occupants = sbq.occupants, actualOccupants = sbq.actualOccupants}
+message.setHandler("getOccupancyData", function()
+	return {occupant = getSmallerOccupantData(), occupants = sbq.occupants, actualOccupants = sbq.actualOccupants}
 end)
 
 message.setHandler( "requestTransition", function (_,_, transition, args)
