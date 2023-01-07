@@ -142,19 +142,20 @@ function sbq.handleBodyParts()
 		sbq.sbqData.locations.ballsL.max = 0
 		sbq.sbqData.locations.ballsR.max = 0
 	end
-	if sbq.settings.breasts and ((not defaultSbqData.locations.breasts.requiresInfusion) or (defaultSbqData.locations.breasts.requiresInfusion and sbq.settings.breastsInfusedItem ~= nil)) then
-		sbq.setStatusValue("breastsVisible", "")
-		sbq.sbqData.locations.breasts.max = defaultSbqData.locations.breasts.max
-		sbq.sbqData.locations.breastsL.max = defaultSbqData.locations.breasts.max
-		sbq.sbqData.locations.breastsR.max = defaultSbqData.locations.breasts.max
-	else
-		sbq.setStatusValue("breastsVisible", "?crop;0;0;0;0")
-		sbq.sbqData.locations.breasts.max = 0
-		sbq.sbqData.locations.breastsL.max = 0
-		sbq.sbqData.locations.breastsR.max = 0
+	if sbq.sbqData.locations.breasts then
+		if sbq.settings.breasts and ((not defaultSbqData.locations.breasts.requiresInfusion) or (defaultSbqData.locations.breasts.requiresInfusion and sbq.settings.breastsInfusedItem ~= nil)) then
+			sbq.setStatusValue("breastsVisible", "")
+			sbq.sbqData.locations.breasts.max = defaultSbqData.locations.breasts.max
+			sbq.sbqData.locations.breastsL.max = defaultSbqData.locations.breasts.max
+			sbq.sbqData.locations.breastsR.max = defaultSbqData.locations.breasts.max
+		else
+			sbq.setStatusValue("breastsVisible", "?crop;0;0;0;0")
+			sbq.sbqData.locations.breasts.max = 0
+			sbq.sbqData.locations.breastsL.max = 0
+			sbq.sbqData.locations.breastsR.max = 0
+		end
+		world.sendEntityMessage(sbq.driver, "setBoobMask", sbq.settings.breasts)
 	end
-	world.sendEntityMessage(sbq.driver, "setBoobMask", sbq.settings.breasts)
-
 	if sbq.settings.pussy and ((not defaultSbqData.locations.womb.requiresInfusion) or (defaultSbqData.locations.womb.requiresInfusion and sbq.settings.wombInfusedItem ~= nil)) then
 		sbq.setStatusValue("pussyVisible", "")
 		sbq.sbqData.locations.womb.max = defaultSbqData.locations.womb.max

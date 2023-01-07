@@ -51,6 +51,7 @@ function sbq.clearOccupant(i)
 		species = nil,
 		smolPreyData = {},
 		nestedPreyData = {},
+		flags = {},
 		visited = {},
 		struggleTime = 0,
 		bellySettleDownTimer = 0,

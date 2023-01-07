@@ -255,11 +255,6 @@ function sbq.transformPrey(i)
 			sbq.doTransformPrey(i, smolPreyData.settings or {}, smolPreyData)
 		end
 	end
-	if sbq.occupant[i].progressBarType == "eggifying" then
-		sbq.occupant[i].egged = true
-	else
-		sbq.occupant[i].transformed = true
-	end
 	sbq.refreshList = true
 end
 
@@ -279,7 +274,6 @@ end
 function sbq.transformPlayer(i)
 	local id = sbq.occupant[i].id
 	local data = sbq.occupant[i].progressBarData or {species = sbq.species, gender = sbq.settings.TFTG or "noChange"}
-	sbq.occupant[i].transformed = true
 	if sbq.settings.TGOnly then
 		data.species = "originalSpecies"
 		data.identity = nil

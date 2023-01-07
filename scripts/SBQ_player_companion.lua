@@ -326,7 +326,7 @@ function update(dt)
 	end
 
 	local preyWarpData = player.getProperty("sbqPreyWarpData")
-	if preyWarpData and (not preyWarpData.uuid or #preyWarpData.uuid ~= 32) then
+	if preyWarpData and (not preyWarpData.uuid) then
 		preyWarpData = nil
 		player.setProperty("sbqPreyWarpData", nil)
 	end
@@ -335,9 +335,9 @@ function update(dt)
 		status.addEphemeralEffect("sbqInvisible")
 		if not predNotFound then
 			preyWarpData.prey.id = player.id()
-			local players = world.playerQuery(world.entityPosition(player.id()), 1000)
+			local entities = world.entityQuery(world.entityPosition(player.id()), 1000)
 			local gotPlayer
-			for i, eid in ipairs(players or {}) do
+			for i, eid in ipairs(entities or {}) do
 				if world.entityUniqueId(eid) == preyWarpData.uuid then
 					gotPlayer = eid
 					break

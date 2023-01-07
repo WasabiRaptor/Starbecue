@@ -247,17 +247,14 @@ function sbq.doEscape(args, statuses, afterstatuses, voreType )
 	if not victim then return false end -- could be part of above but no need to log an error here
 	local location = sbq.lounging[victim].location
 
-	local settings = sb.jsonMerge(sbq.lounging[victim].visited,{
+	local settings = sb.jsonMerge(sb.jsonMerge(sbq.lounging[victim].visited,{
 		voreType = voreType or "default",
 		struggleTrigger = args.struggleTrigger,
 		location = location,
-		digesting = sbq.lounging[victim].digesting,
-		digested = sbq.lounging[victim].digested,
-		cumDigesting = sbq.lounging[victim].cumDigesting,
-		egged = sbq.lounging[victim].egged,
-		transformed = sbq.lounging[victim].transformed,
-		progressBarType = sbq.lounging[victim].progressBarType
-	})
+		progressBarType = sbq.lounging[victim].progressBarType,
+		progressBar = sbq.lounging[victim].progressBar
+	}), sbq.lounging[victim].flags)
+
 	local entityType = world.entityType(args.id)
 	local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
 
@@ -546,18 +543,18 @@ function sbq.doBellyEffects(dt)
 				world.sendEntityMessage( eid, "sbqLight", sb.jsonMerge(light, {position = lightPosition}) )
 			end
 
-			if sbq.occupant[i].digesting then
+			if sbq.occupant[i].flags.digesting then
 				locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
 			end
 
 			local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
 
-			if (sbq.settings[location.."Sounds"] == true) and (not sbq.occupant[i].digested) then
+			if (sbq.settings[location.."Sounds"] == true) and (not sbq.occupant[i].flags.digested) then
 				sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
 			end
 			world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.settings.predDigestItemDrops}, sbq.driver or entity.id())
 
-			if sbq.settings[location.."Compression"] and not sbq.occupant[i].digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
+			if sbq.settings[location.."Compression"] and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
 				sbq.occupant[i].sizeMultiplier = math.min(1, math.max(0.1, sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt)/100 ))
 			end
 
@@ -570,19 +567,29 @@ function sbq.doBellyEffects(dt)
 					sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
 					if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
 						sbq[sbq.occupant[i].progressBarFinishFuncName](i)
+						sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
+						sb.logInfo(tostring(sbq.occupant[i].progressBarFinishFlag))
+						sb.logInfo(tostring(sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")]))
 						sbq.occupant[i].progressBarActive = false
 					end
 				else
 					sbq.occupant[i].progressBar = math.max(0, sbq.occupant[i].progressBar)
 					if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
 						sbq[sbq.occupant[i].progressBarFinishFuncName](i)
+						sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
+						sb.logInfo(tostring(sbq.occupant[i].progressBarFinishFlag))
+						sb.logInfo(tostring(sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")]))
 						sbq.occupant[i].progressBarActive = false
 					end
 				end
 			else
 				for i, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 					local data = sbq.sbqData.locations[location][passiveEffect]
-					if sbq.settings[location..passiveEffect] and data and not (sbq.occupant[i][data.occupantFlag or "transformed"] or sbq.occupant[i][location..passiveEffect.."Immune"]) then
+					sb.logInfo("attepmting")
+					sb.logInfo(tostring(data.occupantFlag))
+					sb.logInfo(tostring(sbq.occupant[i].flags[(data.occupantFlag or "transformed")]))
+					sb.logInfo("immune:"..tostring(sbq.occupant[i][location..passiveEffect.."Immune"]))
+					if sbq.settings[location..passiveEffect] and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
 						sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 							if enabled then
 								sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
@@ -687,7 +694,7 @@ function sbq.validStruggle(struggler, dt)
 	if sbq.config.speciesStrugglesDisabled[config.getParameter("name")] then
 		if sbq.isNested then return end
 	else
-		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or sbq.occupant[struggler].digested then
+		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or sbq.occupant[struggler].flags.digested then
 			if not sbq.driving or world.entityType(sbq.driver) == "npc" then
 				sbq.occupant[struggler].struggleTime = math.max(0, sbq.occupant[struggler].struggleTime + dt)
 				if sbq.occupant[struggler].struggleTime > 1 then
@@ -780,7 +787,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.occupant[struggler].bellySettleDownTimer = time / 2
 		sbq.occupant[struggler].struggleTime = sbq.occupant[struggler].struggleTime + time
 
-		if sbq.settings[location.."Compression"] and not sbq.occupant[struggler].digested then
+		if sbq.settings[location.."Compression"] and not sbq.occupant[struggler].flags.digested then
 			sbq.occupant[struggler].sizeMultiplier = sbq.occupant[struggler].sizeMultiplier + (time * 2)/100
 		end
 

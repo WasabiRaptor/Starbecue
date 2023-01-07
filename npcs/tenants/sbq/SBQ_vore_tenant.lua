@@ -388,7 +388,7 @@ function sbq.setRelevantPredSettings()
 			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "ballsBack", storage.settings.ballsInfusedVisual and storage.settings.ballsInfusedItem)
 			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "pussy", storage.settings.wombInfusedVisual and storage.settings.wombInfusedItem)
 
-			if storage.settings.penis and ((not sbq.predatorConfig.locations.shaft.requiresInfusion) or (sbq.predatorConfig.locations.shaft.requiresInfusion and storage.settings.shaftInfusedItem ~= nil)) then
+			if storage.settings.penis and sbq.predatorConfig.locations.penis and ((not sbq.predatorConfig.locations.shaft.requiresInfusion) or (sbq.predatorConfig.locations.shaft.requiresInfusion and storage.settings.shaftInfusedItem ~= nil)) then
 				if storage.settings.underwear then
 					sbq.setStatusValue( "cockVisible", "?crop;0;0;0;0")
 				else
@@ -397,7 +397,7 @@ function sbq.setRelevantPredSettings()
 			else
 				sbq.setStatusValue( "cockVisible", "?crop;0;0;0;0")
 			end
-			if storage.settings.balls and ((not sbq.predatorConfig.locations.balls.requiresInfusion) or (sbq.predatorConfig.locations.balls.requiresInfusion and storage.settings.ballsInfusedItem ~= nil)) then
+			if storage.settings.balls and sbq.predatorConfig.locations.balls and ((not sbq.predatorConfig.locations.balls.requiresInfusion) or (sbq.predatorConfig.locations.balls.requiresInfusion and storage.settings.ballsInfusedItem ~= nil)) then
 				if storage.settings.underwear then
 					sbq.setStatusValue( "ballsVisible", "?crop;0;0;0;0")
 				else
@@ -406,12 +406,12 @@ function sbq.setRelevantPredSettings()
 			else
 				sbq.setStatusValue( "ballsVisible", "?crop;0;0;0;0")
 			end
-			if storage.settings.breasts and ((not sbq.predatorConfig.locations.breasts.requiresInfusion) or (sbq.predatorConfig.locations.breasts.requiresInfusion and storage.settings.breastsInfusedItem ~= nil)) then
+			if storage.settings.breasts and sbq.predatorConfig.locations.breasts and ((not sbq.predatorConfig.locations.breasts.requiresInfusion) or (sbq.predatorConfig.locations.breasts.requiresInfusion and storage.settings.breastsInfusedItem ~= nil)) then
 				sbq.setStatusValue( "breastsVisible", "")
 			else
 				sbq.setStatusValue( "breastsVisible", "?crop;0;0;0;0")
 			end
-			if storage.settings.pussy and ((not sbq.predatorConfig.locations.womb.requiresInfusion) or (sbq.predatorConfig.locations.womb.requiresInfusion and storage.settings.wombInfusedItem ~= nil)) then
+			if storage.settings.pussy and sbq.predatorConfig.locations.pussy and ((not sbq.predatorConfig.locations.womb.requiresInfusion) or (sbq.predatorConfig.locations.womb.requiresInfusion and storage.settings.wombInfusedItem ~= nil)) then
 				sbq.setStatusValue( "pussyVisible", "")
 			else
 				sbq.setStatusValue( "pussyVisible", "?crop;0;0;0;0")

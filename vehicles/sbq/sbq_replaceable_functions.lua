@@ -33,17 +33,13 @@ function sbq.struggleMessages(id)
 	local entityType = world.entityType(id)
 	if entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver) then
 		local location = sbq.lounging[id].location
-		local settings = sb.jsonMerge(sbq.lounging[id].visited,{
+		local settings = sb.jsonMerge(sb.jsonMerge(sbq.lounging[id].visited,{
 			predator = sbq.species,
 			location = location,
-			digested = sbq.lounging[id].digested,
-			digesting = sbq.lounging[id].digesting,
-			cumDigesting = sbq.lounging[id].cumDigesting,
-			egged = sbq.lounging[id].egged,
-			transformed = sbq.lounging[id].transformed,
 			progressBarType = sbq.lounging[id].progressBarType,
+			progressBar = sbq.lounging[id].progressBar,
 			entryType = sbq.lounging[id].entryType
-		})
+		}), sbq.lounging[id].flags)
 
 		if math.random() >= 0.9 then
 			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, {"struggle"}, true )

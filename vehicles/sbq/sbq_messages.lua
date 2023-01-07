@@ -97,6 +97,7 @@ function sbq.transformMessageHandler(eid, TF, TFType)
 	end
 
 	sbq.lounging[eid].progressBarType = "transforming"
+	sbq.lounging[eid].progressBarFinishFlag = TF.occupantFlag or "transformed"
 	if TFType then
 		sbq.lounging[eid].progressBarType = TFType.."ing"
 	end
@@ -140,8 +141,8 @@ message.setHandler( "sbqDigest", function(_,_, eid)
 	if type(eid) == "number" and sbq.lounging[eid] ~= nil then
 		sbq.lounging[eid].sizeMultiplier = 0
 		sbq.lounging[eid].visible = false
-		sbq.lounging[eid].digesting = true
-		if not sbq.lounging[eid].digested then
+		sbq.lounging[eid].flags.digesting = true
+		if not sbq.lounging[eid].flags.digested then
 			local location = sbq.lounging[eid].location
 			local success, timing = sbq.doTransition("digest"..location)
 			sbq.entityDigestedAt[eid] = location
@@ -156,13 +157,13 @@ message.setHandler( "sbqDigest", function(_,_, eid)
 				world.sendEntityMessage(eid, "sbqDigestResponse", 2)
 			end
 		end
-		sbq.lounging[eid].digested = true
+		sbq.lounging[eid].flags.digested = true
 	end
 end )
 
 message.setHandler("sbqCumDigest", function(_, _, eid)
 	if eid ~= nil and type(sbq.lounging[eid]) == "table" then
-		sbq.lounging[eid].cumDigesting = true
+		sbq.lounging[eid].flags.cumDigesting = true
 	end
 end)
 
@@ -170,7 +171,7 @@ message.setHandler( "sbqSoftDigest", function(_,_, eid)
 	if type(eid) == "number" and sbq.lounging[eid] ~= nil then
 		sbq.lounging[eid].sizeMultiplier = 0
 		sbq.lounging[eid].visible = false
-		if not sbq.lounging[eid].digested then
+		if not sbq.lounging[eid].flags.digested then
 			local location = sbq.lounging[eid].location
 			local success, timing = sbq.doTransition("digest"..location)
 			sbq.entityDigestedAt[eid] = location
@@ -185,7 +186,7 @@ message.setHandler( "sbqSoftDigest", function(_,_, eid)
 				world.sendEntityMessage(eid, "sbqDigestResponse", 2)
 			end
 		end
-		sbq.lounging[eid].digested = true
+		sbq.lounging[eid].flags.digested = true
 	end
 end )
 
