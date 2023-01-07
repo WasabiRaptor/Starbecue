@@ -2,7 +2,7 @@
 
 function update()
 	local position = stagehand.position()
-	if world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
+	if (world ~= nil) and (world.regionActive ~= nil) and world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
 
 		local data = config.getParameter("randomSelection") or {}
 		if type(data) == "string" then

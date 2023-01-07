@@ -6,7 +6,7 @@ end
 
 function update(dt)
 	local position = entity.position()
-	if world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
+	if (world ~= nil) and (world.regionActive ~= nil) and world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
 		refresh()
 		script.setUpdateDelta(0)
 	end
