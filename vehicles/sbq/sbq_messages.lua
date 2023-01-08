@@ -1,5 +1,5 @@
 message.setHandler( "settingsMenuSet", function(_,_, val )
-	sbq.settings = sb.jsonMerge(sbq.settings, sb.jsonMerge(val, sbq.sbqData.overrideSettings or {}))
+	sbq.settings = sb.jsonMerge(val, sbq.sbqData.overrideSettings or {})
 
 	sbq.setColorReplaceDirectives()
 	sbq.setSkinPartTags()

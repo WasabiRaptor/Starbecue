@@ -40,7 +40,7 @@ function update(args)
 						if data.pressed and not sbq.click then
 							world.sendEntityMessage(entity.id(), "sbqOpenInterface", "sbqClose")
 							spawnPredator(data.selection)
-							radialMenuOpen = nil
+							radialMenuOpen = false
 							return
 						end
 						if data.button == 0 and not sbq.click then
@@ -60,7 +60,7 @@ function update(args)
 				spawnPredator(sbq.lastRadialSelection)
 			end
 		end
-		radialMenuOpen = nil
+		radialMenuOpen = false
 	else
 		pressedTime = 0
 	end
