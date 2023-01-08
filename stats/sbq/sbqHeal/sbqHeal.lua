@@ -12,7 +12,7 @@ end
 
 function update(dt)
 	self.powerMultiplier = (status.statusProperty("sbqDigestData") or {}).power or 1
-	status.modifyResourcePercentage("health", 0.01 * dt * self.powerMultiplier)
+	status.modifyResource("health", dt * self.powerMultiplier)
 end
 
 function uninit()

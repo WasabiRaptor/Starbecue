@@ -29,16 +29,16 @@ function update(dt)
 		self.powerMultiplier = (status.statusProperty("sbqDigestData") or {}).power or 1
 
 		local health = world.entityHealth(entity.id())
-		local digestRate = 0.01
+		local digestRate = 1
 		if self.turboDigest then
-			digestRate = 0.1
+			digestRate = 10
 		end
 
 		local digestAmount = (digestRate * dt * self.powerMultiplier)
 
 		if health[1] > (digestAmount + 1) and not self.digested and health[1] > 1 then
 			if config.getParameter("displayDamage") then
-				digestAmount = digestAmount * health[2] + self.cdamage
+				digestAmount = digestAmount + self.cdamage
 				if digestAmount >= 1 then
 					self.cdamage = digestAmount % 1
 					digestAmount = math.floor(digestAmount)
@@ -53,9 +53,9 @@ function update(dt)
 					digestAmount = 0
 				end
 			else
-				status.modifyResourcePercentage("health", -digestAmount)
+				status.modifyResource("health", -digestAmount)
 			end
-			if config.getParameter("sendHunger") and digestAmount > 0 then
+			if config.getParameter("sendHunger") and (digestAmount > 0) then
 				world.sendEntityMessage(effect.sourceEntity(), "sbqAddHungerHealth", digestAmount )
 			end
 		elseif not self.digested then

@@ -123,15 +123,12 @@ function init()
 		return status.overConsumeResource("energy", energyUsed)
 	end )
 
-	message.setHandler("sbqAddHungerHealth", function( _, _, amount)
-		if status.resourcePercentage("food") < 1 then
-			status.modifyResourcePercentage( "food", amount)
-			return 1
-		elseif status.resourcePercentage("health") < 1 then
-			status.modifyResourcePercentage( "health", amount)
-			return 2
-		else
-			return 3
+	message.setHandler("sbqAddHungerHealth", function(_, _, amount)
+		local food = status.resource("food")
+		status.giveResource("food", amount)
+		local health = (food + amount) - 100
+		if health > 0 then
+			status.giveResource("health", health)
 		end
 	end )
 
