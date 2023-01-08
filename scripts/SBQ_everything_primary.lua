@@ -129,7 +129,7 @@ function sbq.doMysteriousTF(data)
 	local originalSpecies = world.entitySpecies(entity.id())
 	local originalGender = world.entityGender(entity.id())
 
-	if not overrideData.species then
+	if (not overrideData.species) or overrideData.species == "any" then
 		local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
 		local validSpecies = false
 		local blacklist = root.assetJson("/animOverrideBlacklist.config")
