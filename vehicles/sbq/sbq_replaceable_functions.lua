@@ -101,7 +101,7 @@ function sbq.letout(id)
 end
 
 function sbq.getRecentPrey()
-	for i = sbq.occupantSlots, 0, -1 do
+	for i = sbq.occupantSlots, sbq.startSlot, -1 do
 		if type(sbq.occupant[i].id) == "number" and world.entityExists(sbq.occupant[i].id)
 		and sbq.occupant[i].location ~= "escaping"
 		then
