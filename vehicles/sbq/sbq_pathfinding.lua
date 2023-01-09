@@ -52,6 +52,12 @@ end
 sbq.pathMover = nil
 sbq.pathingTarget = nil
 
+function sbq.controlPathMove(target, run, options)
+	sbq.pathMover.options.run = run
+	sbq.pathMover.finder.options = sb.jsonMerge(sbq.pathMover.finder.options, options or {})
+	return sbq.pathTo(target)
+end
+
 function sbq.pathTo(target, options)
 	options = sb.jsonMerge({
 		maximumCorrection = math.abs(mcontroller.localBoundBox()[3] - mcontroller.localBoundBox()[1]),
@@ -59,6 +65,9 @@ function sbq.pathTo(target, options)
 	}, options)
 	if not target then return false end
 	sbq.isPathfinding = true
+	sb.logInfo(sb.printJson(sbq.movementParams.collisionPoly))
+	sb.logInfo(sb.printJson(target))
+	sb.logInfo(sb.printJson(options.maximumCorrection))
 	target = world.resolvePolyCollision(
 		sbq.movementParams.collisionPoly, target,
 		options.maximumCorrection

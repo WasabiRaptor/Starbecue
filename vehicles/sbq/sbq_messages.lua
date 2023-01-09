@@ -312,3 +312,11 @@ end)
 message.setHandler("animOverridesLoungeAnim", function ()
 	return "lay"
 end)
+
+message.setHandler("sbqControlPathMove", function(_,_, ...)
+	sbq.controlPathMove(...)
+end)
+
+message.setHandler("sbqSetPosition", function(_,_,position)
+	mcontroller.setPosition(position)
+end)

@@ -20,6 +20,40 @@ sbq = {}
 
 local old = {}
 
+local controlPathMoveRPC
+function sbq.controlPathMove(target, run, options)
+	local current = status.statusProperty("sbqCurrentData")
+	if current and current.type == "driver" then
+		local newRPC = world.sendEntityMessage(current.id, "sbqControlPathMove", target, run, options)
+		local syncResult = newRPC:finished() and newRPC:succeeded() and newRPC:result()
+		if syncResult ~= nil then
+			controlPathMoveRPC = nil
+			return syncResult
+		end
+		-- this logic is a mess... that's what happens when you send another message without waiting for the previous
+		local oldFinished = controlPathMoveRPC and controlPathMoveRPC:finished() and controlPathMoveRPC:succeeded()
+		local oldResult = oldFinished and controlPathMoveRPC:result()
+		if oldFinished and oldResult ~= nil then
+			controlPathMoveRPC = nil
+			return oldResult
+		end
+		if (oldFinished and oldResult == nil) or (options ~= nil) then
+			controlPathMoveRPC = newRPC
+			return nil
+		end
+	else
+		return old.controlPathMove(target, run, options)
+	end
+end
+function sbq.setPosition(position)
+	local current = status.statusProperty("sbqCurrentData")
+	if current and current.type == "driver" then
+		world.sendEntityMessage(current.id, "sbqSetPosition", position)
+	else
+		old.setPosition(position)
+	end
+end
+
 require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
@@ -133,6 +167,12 @@ function init()
 
 		old.getgenerateRecruitInfo = recruitable.generateRecruitInfo
 		recruitable.generateRecruitInfo = sbq.generateRecruitInfo
+
+		old.controlPathMove = mcontroller.controlPathMove
+		mcontroller.controlPathMove = sbq.controlPathMove
+
+		old.setPosition = mcontroller.setPosition
+		mcontroller.setPosition = sbq.setPosition
 	end
 
 
