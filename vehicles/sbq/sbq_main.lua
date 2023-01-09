@@ -476,7 +476,7 @@ function sbq.faceDirection(x)
 	if x > 0 then
 		sbq.direction = 1
 		animator.setFlipped(false)
-	elseif x < 0 then
+	else
 		sbq.direction = -1
 		animator.setFlipped(true)
 	end
