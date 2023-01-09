@@ -65,9 +65,6 @@ function sbq.pathTo(target, options)
 	}, options)
 	if not target then return false end
 	sbq.isPathfinding = true
-	sb.logInfo(sb.printJson(sbq.movementParams.collisionPoly))
-	sb.logInfo(sb.printJson(target))
-	sb.logInfo(sb.printJson(options.maximumCorrection))
 	target = world.resolvePolyCollision(
 		sbq.movementParams.collisionPoly, target,
 		options.maximumCorrection
