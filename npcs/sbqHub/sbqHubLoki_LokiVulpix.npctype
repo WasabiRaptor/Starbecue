@@ -1,0 +1,33 @@
+{
+	"type" : "sbqHubLoki_LokiVulpix",
+	"baseType" : "sbqLoki_LokiVulpix",
+
+	"scriptConfig" : {
+		"sbqOverrideSettings" : {
+			"analVorePred" : false,
+			"cockVorePred" : false,
+			"breastVorePred" : false,
+			"unbirthPred" : false,
+
+			"analVorePredEnable" : false,
+			"cockVorePredEnable" : false,
+			"breastVorePredEnable" : false,
+			"unbirthPredEnable" : false
+		},
+		"sbqOverridePreyEnabled" : {
+			"digestAllow": false,
+			"transformAllow": false,
+			"milkDigestAllow": false,
+			"cumDigestAllow": false,
+			"cumTFImmunity":true,
+			"genderswapAllow": false
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}
