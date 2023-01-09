@@ -262,6 +262,8 @@ function sbq.checkVoreTypeActive(voreType)
 	local locationData = sbq.data.sbqData.locations[locationName]
 	if not locationData then return "hidden" end
 
+	if sbq.occupants[locationName] == nil then return "hidden" end
+
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if (--[[sbq.data.settings[voreType.."PredEnable"] or]] sbq.data.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
 		if sbq.data.settings[voreType.."Pred"] then
