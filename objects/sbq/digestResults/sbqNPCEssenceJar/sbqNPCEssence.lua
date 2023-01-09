@@ -25,7 +25,7 @@ function build(directory, config, parameters, level, seed)
 				((((config.npcArgs.npcParam or {}).identity or {}).bodyDirectives or "") ..
 					(((config.npcArgs.npcParam or {}).identity or {}).hairDirectives or ""))
 
-		local success2, npcConfig = root.npcConfig(config.npcArgs.npcType)
+		local success2, npcConfig = pcall(root.npcConfig, (config.npcArgs.npcType))
 		if success and success2 then
 			parameters.inventoryIcon = root.npcPortrait("bust", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
 				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
