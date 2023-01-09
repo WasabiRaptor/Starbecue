@@ -12,7 +12,6 @@ sbq.queuedTransitions = {}
 
 dialogueBoxScripts = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
 require("/lib/stardust/json.lua")
 require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")
 require("/scripts/SBQ_species_config.lua")
@@ -199,8 +198,6 @@ end
 
 function update(dt)
 	sbq.currentData = status.statusProperty("sbqCurrentData") or {}
-	sbq.checkRPCsFinished(dt)
-	sbq.checkTimers(dt)
 
 	sbq.occupantHolder = sbq.currentData.id
 	sbq.loopedMessage("checkRefresh", sbq.occupantHolder, "settingsMenuRefresh", {}, function (result)

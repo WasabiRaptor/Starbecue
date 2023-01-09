@@ -1,4 +1,5 @@
 local oldinit = init
+local _update = update
 sbq = {}
 
 local _monster_setDamageTeam
@@ -9,15 +10,23 @@ function capture_monster_setDamageTeam(data)
 	end
 end
 
+require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
 
 	status.setStatusProperty( "sbqCurrentData", nil)
 
-	message.setHandler("sbqPredatorDespawned", function (_,_, eaten, species, occupants)
-		status.setStatusProperty("sbqPreyList", nil)
+	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
+		sbq.timer("sbqPredatorDespawned", 0.5, function ()
+			status.setStatusProperty("sbqPreyList", nil)
 
-		status.setStatusProperty( "sbqCurrentData", nil)
+			status.setStatusProperty("sbqCurrentData", nil)
+
+			local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
+			if sbqOriginalDamageTeam then
+				_monster_setDamageTeam(sbqOriginalDamageTeam)
+			end
+		end)
 	end)
 
 	if type(_monster_setDamageTeam) ~= "function" then
@@ -33,14 +42,14 @@ function init()
 		_monster_setDamageTeam({ type = "ghostly", team = damageTeam.team })
 	end)
 
-	message.setHandler("sbqRestoreDamageTeam", function(_,_)
-		local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
-		if sbqOriginalDamageTeam then
-			_monster_setDamageTeam(sbqOriginalDamageTeam)
-		end
-	end)
-
 	status.clearPersistentEffects("digestImmunity")
 	status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
 	oldinit()
+end
+
+function update(dt)
+	sbq.checkRPCsFinished(dt)
+	sbq.checkTimers(dt)
+
+	_update(dt)
 end

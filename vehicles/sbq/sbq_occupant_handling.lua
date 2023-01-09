@@ -91,7 +91,6 @@ function sbq.uneat( occupantId )
 	sbq.refreshList = true
 	sbq.lounging[occupantId] = nil
 	sbq.occupant[seatindex] = sbq.clearOccupant(seatindex)
-	world.sendEntityMessage(entity.id(), "sbqRestoreDamageTeam")
 	return true
 end
 

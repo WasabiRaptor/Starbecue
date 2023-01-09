@@ -2,7 +2,7 @@
 local _init = init
 local _update = update
 
-local interactive
+local interactive = true
 local _npc_setInteractive
 function capture_npc_setInteractive(bool)
 	interactive = bool
@@ -20,16 +20,18 @@ sbq = {}
 
 local old = {}
 
+require("/scripts/SBQ_RPC_handling.lua")
+
 function init()
 	message.setHandler("sbqGetSeatEquips", function(_,_, current)
 		status.setStatusProperty( "sbqCurrentData", current)
 		if current.type == "prey" then
 			status.setStatusProperty("sbqDontTouchDoors", true)
+			if current.species ~= "sbqOccupantHolder" then
+				_npc_setInteractive(false)
+			end
 		else
 			status.setStatusProperty("sbqDontTouchDoors", false)
-		end
-		if current.species ~= "sbqOccupantHolder" then
-			_npc_setInteractive(false)
 		end
 		return {
 			head = npc.getItemSlot("head") or false,
@@ -48,11 +50,11 @@ function init()
 		status.setStatusProperty( "sbqCurrentData", current)
 		if current.type == "prey" then
 			status.setStatusProperty("sbqDontTouchDoors", true)
+			if current.species ~= "sbqOccupantHolder" then
+				_npc_setInteractive(false)
+			end
 		else
 			status.setStatusProperty("sbqDontTouchDoors", false)
-		end
-		if current.species ~= "sbqOccupantHolder" then
-			_npc_setInteractive(false)
 		end
 	end)
 
@@ -63,10 +65,18 @@ function init()
 		world.sendEntityMessage(args.sourceId, "sbqPlayerInteract", interact(args), entity.id() )
 	end)
 
-	message.setHandler("sbqPredatorDespawned", function (_,_, eaten, species, occupants)
-		_npc_setInteractive(interactive)
-		status.setStatusProperty("sbqPreyList", nil)
-		status.setStatusProperty( "sbqCurrentData", nil)
+	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
+		sbq.timer("sbqPredatorDespawned", 0.5, function()
+			sb.logInfo("interactive"..tostring(interactive))
+			_npc_setInteractive(interactive)
+			status.setStatusProperty("sbqPreyList", nil)
+			status.setStatusProperty("sbqCurrentData", nil)
+
+			local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
+			if sbqOriginalDamageTeam then
+				_npc_setDamageTeam(sbqOriginalDamageTeam)
+			end
+		end)
 	end)
 
 	message.setHandler("sbqMakeNonHostile", function(_,_)
@@ -75,13 +85,6 @@ function init()
 			status.setStatusProperty("sbqOriginalDamageTeam", damageTeam)
 		end
 		_npc_setDamageTeam({ type = "ghostly", team = damageTeam.team })
-	end)
-
-	message.setHandler("sbqRestoreDamageTeam", function(_,_)
-		local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
-		if sbqOriginalDamageTeam then
-			_npc_setDamageTeam(sbqOriginalDamageTeam)
-		end
 	end)
 
 	message.setHandler("sbqDigestDrop", function(_,_, itemDrop)
@@ -145,6 +148,13 @@ function init()
 			end
 		end
 	end
+end
+
+function update(dt)
+	sbq.checkRPCsFinished(dt)
+	sbq.checkTimers(dt)
+
+	_update(dt)
 end
 
 
