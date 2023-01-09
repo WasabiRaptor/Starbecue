@@ -48,7 +48,7 @@ for j, tabData in pairs(shopRecipes) do
 			local toolTip = nil
 			if not recipe.materials then
 				recipe.materials = {
-					{ item = "money", count = resultItemConfig.price or 1 }
+					{ item = "money", count = resultItemConfig.config.price or 1 }
 				}
 			end
 			for _, material in ipairs(recipe.materials) do
