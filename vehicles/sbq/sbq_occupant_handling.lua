@@ -316,6 +316,7 @@ sbq.addPreyQueue = {}
 function sbq.recievePrey()
 	for i, prey in ipairs(sbq.addPreyQueue) do
 		local seatindex = sbq.occupants.total + sbq.startSlot + i - 1
+		prey.visible = false
 		if seatindex > sbq.occupantSlots then break end
 		sbq.occupant[seatindex] = prey
 	end
