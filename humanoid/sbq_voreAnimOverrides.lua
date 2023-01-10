@@ -131,8 +131,7 @@ message.setHandler("sbqSetInfusedPartColors", function(_, _, partname, item)
 			end
 		end
 	end
-	animator.setPartTag(partname, "partImage", part)
-	animator.setPartTag(partname, "colorRemap", colorRemap or "")
+	setPartImage(partname, part, colorRemap)
 	animator.setPartTag(partname, "customDirectives", (identity.bodyDirectives or "")..(identity.hairDirectives or ""))
 	self.parts[partname] = part
 end)
