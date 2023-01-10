@@ -101,7 +101,6 @@ function init()
 
 	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
 		sbq.timer("sbqPredatorDespawned", 0.5, function()
-			sb.logInfo("interactive"..tostring(interactive))
 			_npc_setInteractive(interactive)
 			status.setStatusProperty("sbqPreyList", nil)
 			status.setStatusProperty("sbqCurrentData", nil)
