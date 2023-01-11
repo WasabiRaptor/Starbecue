@@ -61,11 +61,11 @@ function init()
 		status.setStatusProperty( "sbqCurrentData", current)
 		if current.type == "prey" then
 			status.setStatusProperty("sbqDontTouchDoors", true)
-			if current.species ~= "sbqOccupantHolder" then
-				_npc_setInteractive(false)
-			end
 		else
 			status.setStatusProperty("sbqDontTouchDoors", false)
+		end
+		if current.species ~= "sbqOccupantHolder" then
+			_npc_setInteractive(false)
 		end
 		return {
 			head = npc.getItemSlot("head") or false,

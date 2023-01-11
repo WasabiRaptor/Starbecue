@@ -200,7 +200,7 @@ function update(dt)
 	sbq.currentData = status.statusProperty("sbqCurrentData") or {}
 
 	sbq.occupantHolder = sbq.currentData.id
-	sbq.loopedMessage("checkRefresh", sbq.occupantHolder, "settingsMenuRefresh", {}, function (result)
+	sbq.loopedMessage("checkRefresh", sbq.occupantHolder, "getOccupancyData", {}, function (result)
 		if result ~= nil then
 			sbq.occupants = result.occupants
 			sbq.occupant = result.occupant

@@ -31,13 +31,11 @@
 	ArgobargSoup
 
 # Patrons
-## Special Thanks
-	David stat man
 ## Thank you all for your support!
 	BRZYN-Z18
-	Darling Devil
 	Dragonuna
 	Joseph
+	Darling Devil
 	xeronious
 	Robotic Boyo
 	Lunadefends
@@ -45,31 +43,42 @@
 	Ivan Ivanovich
 	OtterlySam
 	Sandyagos
-	Koole
 	Drexel Amatin
-	dirty kitty
+	Koole
 	Signum
 	assassin604
 	Knochen
-	Tim D.
-	Selicia
-	Ignitus
 	Mojma
+	Selicia
+	Tim D.
+	Ignitus
 	lil cam
 	DarkerNebel
-	LP
 	Arden Umbraheart
-	Fevix
+	LP
 	Pascal Gailloud
+	Fevix
 	Kuni
 	Crimson
-	Dexasol
-	Ferrilata_118
 	Fenris Nox
-	CodatheFox
 	Warship Destoyer
-	Tyler Howard
+	CodatheFox
+	Dexasol
+	Maxel Noone
+	Mako Thesharkess
+	Jaych
+	Ears
+	TAX
+	GMan
+	ABREZZEL
+	Akari Kaen
+	Silver Snowy
+	Joseph Barron
+	belost_
+	Leanedwuff
+	Sypher
 ### Past Patrons
+	David stat man
 	Senjor Habash
 	amber310
 	Nick
@@ -77,8 +86,9 @@
 	pelle
 	Avar
 	The_Gamer_Eagle
-	Lakota Amitola
+	dirty kitty
 	King
+	Lakota Amitola
 	Canary
 	LefTonbo
 	fabiqueen
@@ -88,36 +98,38 @@
 	Sanoka
 	Gooey Goomy
 	Estrane Proctor
-	Maxel Noone
 	Arden Umbraheart
+	Ferrilata_118
 	Comely
 	Sony Antoing
 	Quetzaquotl
 	Brandon Proctor
 	Likeable spoon
-	TAX
 	清 李
 	box boyo
 	MoonlightShadow
-	DrFrank
+	Tyler Howard
 	Tremellia Steele
+	DrFrank
 	Giacomo
 	Dragon _hero76
-	KP
-	Ias Delino Iney
-	Hunterofsorrows
-	Recreaf
-	潘禹全
-	DeVout Numelran
-	Kingkenofthunder
-	zavo
-	Сократ Ржевский
-	zzzfd
-	銀狐
 	dasutamu
+	Ias Delino Iney
+	KP
+	AnonSpace
+	zavo
+	Recreaf
+	Hunterofsorrows
 	StarSpectre
+	DeVout Numelran
+	chyzalt chyzman
+	銀狐
+	潘禹全
 	BillboDrawings
+	Сократ Ржевский
+	Kingkenofthunder
 	Cody McCoy
+	Dostluk V Harmony
 	ely nathus
 	Niflar12
 	Scpdragon
@@ -126,4 +138,4 @@
 	TheKipiDragon
 	TNT00007
 	Zovoroth
-	chyzalt chyzman
+	zzzfd
