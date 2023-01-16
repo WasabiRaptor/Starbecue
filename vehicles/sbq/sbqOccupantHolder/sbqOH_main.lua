@@ -298,7 +298,7 @@ function sbq.openPredHud(dt)
 	sbq.predHudOpen = math.max( 0, sbq.predHudOpen - dt )
 	if sbq.predHudOpen <= 0 then
 		sbq.predHudOpen = 2
-		world.sendEntityMessage( sbq.driver, "sbqOpenMetagui", "starbecue:predHud", entity.id())
+		world.sendEntityMessage( sbq.driver, "sbqOpenMetagui", "starbecue:predHud" )
 	end
 end
 

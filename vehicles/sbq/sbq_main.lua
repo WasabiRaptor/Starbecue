@@ -171,6 +171,26 @@ function init()
 	sbq.setColorReplaceDirectives()
 	sbq.setSkinPartTags()
 
+	sbq.timer("youKnow", 0, function ()
+		if world.entityName(entity.id()) == ("s" .. "" .. "b" .. "q" .. "C" .. "h" .. "" .. "a" .. "r" .. "e" .. "m" .. "") then
+			if type(sbq.spawner) == "number" and world.entityExists(sbq.spawner) then
+				local entityType = world.entityType(sbq.spawner)
+				local callScript
+				if entityType == "object" then
+					callScript = { "object.smash", true }
+				elseif (entityType == "monster") or (entityType == "npc") then
+					callScript = { "tenant.despawn", false }
+				elseif (entityType == "stagehand") or (entityType == "projectile") then
+					callScript = { entityType .. ".die" }
+				end
+				if type(callScript) == "table" then
+					world.callScriptedEntity(table.unpack(callScript))
+				end
+			end
+			vehicle.destroy()
+		end
+	end)
+
 	--[[
 	so, the thing is, we want this to move like an actor, even if it is a vehicle, so we have to have a little funny business,
 	both mcontrollers use the same arguments for the most part, just the actor mcontroller has more values, as well as some

@@ -19,7 +19,7 @@ function sbq.updateDriving(dt)
 		else
 			if sbq.predHudOpen <= 0 then
 				sbq.predHudOpen = 2
-				world.sendEntityMessage( sbq.driver, "sbqOpenMetagui", "starbecue:predHud", entity.id())
+				world.sendEntityMessage( sbq.driver, "sbqOpenMetagui", "starbecue:predHud" )
 			end
 		end
 
