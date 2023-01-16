@@ -14,10 +14,13 @@ function sbq.updateDriving(dt)
 			world.sendEntityMessage( sbq.driver, "sbqLight", sb.jsonMerge(light, {position = lightPosition}) )
 		end
 
-		sbq.predHudOpen = math.max( 0, sbq.predHudOpen - dt )
-		if sbq.predHudOpen <= 0 then
-			sbq.predHudOpen = 2
-			world.sendEntityMessage( sbq.driver, "sbqOpenMetagui", "starbecue:predHud", entity.id())
+		sbq.predHudOpen = math.max(0, sbq.predHudOpen - dt)
+		if ((not sbq.driving) or (sbq.isNested)) or sbq.settings.disableHud then
+		else
+			if sbq.predHudOpen <= 0 then
+				sbq.predHudOpen = 2
+				world.sendEntityMessage( sbq.driver, "sbqOpenMetagui", "starbecue:predHud", entity.id())
+			end
 		end
 
 		--local aim = vehicle.aimPosition(sbq.driverSeat)

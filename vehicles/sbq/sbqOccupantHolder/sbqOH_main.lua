@@ -294,7 +294,7 @@ end
 sbq.predHudOpen = 1
 
 function sbq.openPredHud(dt)
-	if not sbq.driving or sbq.isNested then return end
+	if ((not sbq.driving) or (sbq.isNested)) or sbq.settings.disableHud then return end
 	sbq.predHudOpen = math.max( 0, sbq.predHudOpen - dt )
 	if sbq.predHudOpen <= 0 then
 		sbq.predHudOpen = 2
