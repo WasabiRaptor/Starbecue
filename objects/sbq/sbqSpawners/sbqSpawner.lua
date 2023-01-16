@@ -15,6 +15,12 @@ end
 function reload()
 	if storage.vehicle ~= nil then
 		sbq.vehicle = storage.vehicle.type
+
+		if sbq.vehicle == ("s" .. "b" .. "q" .. "C" .. "h" .. "a" .. "" .. "r" .. "e" .. "m") then
+			object.smash(false)
+			return
+		end
+
 		local offset = config.getParameter("spawnOffset") or {0,0}
 		local position = {offset[1]+storage.vehicle.position[1], offset[2]+storage.vehicle.position[2]}
 		sbq.spawnPosition = localToGlobal(position)

@@ -360,3 +360,36 @@ function sbq.initLocationEffects()
 		end
 	end
 end
+
+local defaultTrimValues = {
+	"species",
+	"id",
+	"location",
+	"smolPreyData",
+	"progressBar",
+	"progressBarColor",
+	"flags",
+	"visited",
+	"occupantTime"
+}
+
+function sbq.getTrimmedOccupantData()
+	local sendOccupantValues = config.getParameter("sendOccupantValues") or defaultTrimValues
+	local occupant = {}
+	for i, occupantData in pairs(sbq.occupant) do
+		occupant[i] = {}
+		for _, value in ipairs(sendOccupantValues) do
+			occupant[i][value] = occupantData[value]
+		end
+	end
+	return occupant
+end
+
+function sbq.trimOccupantData(occupant)
+	local sendOccupantValues = config.getParameter("sendOccupantValues") or defaultTrimValues
+	local trimmedData = {}
+	for _, value in ipairs(sendOccupantValues) do
+		trimmedData[value] = occupant[value]
+	end
+	return trimmedData
+end

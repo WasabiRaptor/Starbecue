@@ -291,8 +291,8 @@
 			"breasts"
 		],
 		"locations" :{
-			"belly" : { "max": 2, "combine":["womb"], "transformGroups" : ["bodybob"] },
-			"womb" : { "max": 2, "combined" : true, "transformGroups" : ["bodybob"] },
+			"belly" : { "max": 1, "combine":["womb"], "transformGroups" : ["bodybob"] },
+			"womb" : { "max": 1, "combined" : true, "transformGroups" : ["bodybob"] },
 
 			"tail" : { "name" : "Tail", "max": 1, "selectEffect" : true, "transformGroups" : ["tailbob"] },
 
@@ -328,10 +328,10 @@
 					"lock" : true,
 					"script": "oralVore",
 					"victimAnimation": "oralVore",
-					"timing": "belly",
+					"timing": "head",
 					"animation": {
 						"head" : "eat",
-						"belly": "eat"
+						"neck": "eat"
 					}
 				},
 				"oralEscape": { // 1 occupant
@@ -340,10 +340,10 @@
 					"lock" : true,
 					"script": "oralEscape",
 					"victimAnimation": "oralEscape",
-					"timing": "belly",
+					"timing": "head",
 					"animation": {
 						"head" : "escape",
-						"belly": "escape"
+						"neck": "escape"
 					}
 				},
 
@@ -403,7 +403,12 @@
 			//	{ "head": "blink" },
 			//	{ "head": "idle" }
 			],
-
+			"shrinkAnims" : {
+				"belly" : { "belly" : "shrink" }
+			},
+			"expandAnims" : {
+				"belly" : { "belly" : "expand" }
+			},
 			"struggle": {
 				"belly" : {
 					"parts" : ["belly"],

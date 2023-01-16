@@ -56,8 +56,8 @@
 			"neckState": {
 				"default": "none",
 				"states": {
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3, "baseAnim" : "eat" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 3, "baseAnim" : "eat" },
 
 					"none": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 }
 				}

@@ -57,7 +57,6 @@ function sbq.clearOccupant(i)
 		location = nil,
 		species = nil,
 		smolPreyData = {},
-		nestedPreyData = {},
 		visited = {},
 		flags = {},
 		struggleTime = 0,
@@ -311,7 +310,7 @@ function sbq.checkSpawnerExists()
 		for i = sbq.startSlot, sbq.occupantSlots do
 			local id = sbq.occupant[i].id
 			if type(id) == "number" and world.entityExists(id) then
-				world.sendEntityMessage(id, "sbqPreyWarp", sbq.spawnerUUID, sbq.occupant[i])
+				world.sendEntityMessage(id, "sbqPreyWarp", sbq.spawnerUUID, sbq.trimOccupantData(sbq.occupant[i]))
 			end
 		end
 		sbq.spawnerUUID = nil

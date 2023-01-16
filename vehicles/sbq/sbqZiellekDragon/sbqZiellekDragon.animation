@@ -28,14 +28,12 @@
 				}
 			},
 			"neckState": {
-				"default": "idle",
+				"default": "none",
 				"states": {
-					"idle": { "frames": 1, "cycle": 0.1, "mode": "loop", "priority": 0 },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 4 },
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 4, "baseAnim" : "eat" },
 
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 4, "baseAnim": "idle" },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 4, "baseAnim": "idle" },
-
-					"none": { "frames": 1, "cycle": 0.1, "mode": "loop", "priority": -1 }
+					"none": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 }
 				}
 			},
 			"bellyState": {
@@ -233,7 +231,7 @@
 				},
 				"partStates": {
 					"neckState": {
-						"idle": { "properties": { "image": "skins/<skin>/neck.png:<neckStateAnim>.<neckStateFrame><directives>" } },
+						"eat": { "properties": { "image": "skins/<skin>/neck.png:<neckStateAnim>.<neckStateFrame><directives>" } },
 
 						"none": { "properties": {} }
 					}
