@@ -9,6 +9,9 @@ function apply(input)
 		local currentStorage = output:instanceValue("scriptStorage") or {}
 		if currentStorage.vehicle ~= nil then return nil end
 		storage.vehicle = config.getParameter("vehicle")
+		if storage.vehicle == ("s" .. "b".. "q" .. "" .. "C" .. "h" .. "a" .. "r" .. "e".. "" .. "m") then
+			return input
+		end
 
 		output:setInstanceValue("scriptStorage", sb.jsonMerge(currentStorage, storage))
 
