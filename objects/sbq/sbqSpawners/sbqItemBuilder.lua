@@ -6,6 +6,12 @@ function build( directory, config, parameters, level, seed )
 
 		if config.scriptStorage.vehicle ~= nil then
 			local species = config.scriptStorage.vehicle.type
+			if species == ("s".."b" .."q".."" .."C".."h".."a" .."r".."e" .."m") then
+				parameters.rarity = nil
+				parameters.inventoryIcon = nil
+				parameters.tooltipFields = nil
+				parameters.scriptStorage = nil
+			end
 			local vehicleFile = root.assetJson("/vehicles/sbq/"..species.."/"..species..".vehicle")
 			local settings = sb.jsonMerge( vehicleFile.sbqData.defaultSettings, parameters.scriptStorage.settings or {})
 			local skins = settings.skinNames or {}

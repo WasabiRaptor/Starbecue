@@ -3,7 +3,7 @@
 		"size" : [96, 96],
 		"dimensions" : [8, 4],
 		"names" : [
-			[ "0.idle.1", "1.idle.1"],
+			[ "0.walk.1", "0.walk.2", "0.walk.3", "0.walk.4", "0.walk.5"],
 			[ "1.eat.1", "1.eat.2", "1.eat.3", "1.eat.4", "1.eat.5", "1.eat.6", "1.eat.7", "1.eat.8"],
 			[ "1.s_up.1", "1.s_up.2", "1.s_up.3", "1.s_up.4", "1.s_down.1", "1.s_down.2", "1.s_down.3", "1.s_down.4"],
 			[ "1.s_back.1", "1.s_back.2", "1.s_back.3", "1.s_back.4", "1.s_front.1", "1.s_front.2", "1.s_front.3", "1.s_front.4"]
@@ -11,6 +11,12 @@
 	},
 	"aliases" : {
 		"idle.default" : "0.idle.1",
+		"0.idle.1" : "0.walk.1",
+		"1.idle.1" : "0.walk.1",
+
+		"0.walk.6" : "0.walk.4",
+		"0.walk.7" : "0.walk.3",
+		"0.walk.8" : "0.walk.2",
 
 		"1.s_up.5" : "1.idle.1",
 		"1.s_down.5" : "1.idle.1",

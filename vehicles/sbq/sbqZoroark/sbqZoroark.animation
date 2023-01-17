@@ -159,8 +159,8 @@
 				"states": {
 					"idle": { "frames": 1, "cycle": 3, "mode": "end", "priority": 0 },
 
-					"walk": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
-					"run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0, "baseAnim" : "walk" },
+					"walk": { "frames": 8, "cycle": 0.75, "mode": "end", "priority": 0, "baseAnim" : "idle" },
+					"run": { "frames": 8, "cycle": 0.75, "mode": "end", "priority": 0, "baseAnim" : "idle" },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3, "baseAnim" : "idle" },
 					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3, "baseAnim" : "idle" },
@@ -350,7 +350,6 @@
 				"partStates": {
 					"bellyState": {
 						"idle": { "properties": { "image": "skins/<tailSkin>/giant/giant_tail.png:<tailOccupants>.<tailStateAnim>.<tailStateFrame><partVisible><directives><statusDirectives><bellymask>" } },
-						"walk": { "properties": { "image": "skins/<tailSkin>/giant/giant_tail.png:<direction>.<tailOccupants>.<tailStateAnim>.<tailStateFrame><partVisible><directives><statusDirectives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
