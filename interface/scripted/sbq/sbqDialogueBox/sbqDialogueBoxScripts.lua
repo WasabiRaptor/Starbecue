@@ -313,3 +313,28 @@ function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, ent
 	end
 	return dialogueTree.default
 end
+
+function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, entity, ...)
+	if player ~= nil then
+		local uuid = world.entityUniqueId(pane.sourceEntity())
+		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
+		local rewards = tenantRewardsTable[uuid]
+		if rewards then
+			local rewardDialogue
+			for rewardName, reward in pairs(rewards) do
+				for i = 1, reward.count do
+					world.spawnTreasure( world.entityPosition(pane.sourceEntity()), reward.pool, reward.level or 0)
+				end
+				if reward.dialogue then
+					rewardDialogue = reward.dialogue
+				end
+			end
+			tenantRewardsTable[uuid] = nil
+
+			player.setProperty("sbqTenantRewards", tenantRewardsTable)
+
+			return dialogueTree[rewardDialogue or "rewards"] or dialogueTree.default
+		end
+	end
+	return dialogueTree.default
+end

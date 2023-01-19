@@ -289,6 +289,14 @@ function init()
 		}, 1)
 	end)
 
+	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
+		if not uniqueId then return end
+		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
+		tenantRewardsTable[uniqueId] = sb.jsonMerge(tenantRewardsTable[uniqueId] or {}, newRewards or {})
+		player.setProperty("sbqTenantRewards", tenantRewardsTable)
+
+	end)
+
 	if initStage < 1 then
 		function Recruit:_spawn(position, parameters)
 

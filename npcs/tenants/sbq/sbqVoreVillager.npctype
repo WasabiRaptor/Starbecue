@@ -36,7 +36,17 @@
 					"default" : { // personality
 						"next" : "mood",
 						"default" : { // mood
-							"randomDialogue" : [ "Hi, how's it going." ]
+							"next" : "giveTenantRewards",
+							"rewards" : {
+								"randomDialogue" : [
+									"It was fun messing around!\nHave some stuff.",
+									{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+								],
+								"jump" : ["greeting"]
+							},
+							"default" : {
+								"randomDialogue" : [ "Hi, how's it going." ]
+							}
 						}
 					}
 				}
@@ -1266,6 +1276,29 @@
 			"default" : {
 				"preySettings" : {},
 				"settings" : {}
+			}
+		},
+
+		"sbqRewards" : {
+			"session" : {
+				// Time is in minutes here!
+				"timedReward1" : { "repeatable" : true, "time" : 5, "pool" : "money" },
+
+				"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+				"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+				"struggleReward1" : { "repeatable" : true, "struggles" : 50, "pool" : "money" }
+			},
+			"collective" : {
+				"hour1" : { "time" : 60, "pool" : "highValueQuestRewards" }, // one hour
+				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+				"day1" : { "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+				"week1" : { "time" : 10080, "pool" : "highValueQuestRewards" } // a full week
 			}
 		},
 

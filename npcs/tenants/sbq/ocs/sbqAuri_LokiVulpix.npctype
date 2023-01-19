@@ -67,8 +67,16 @@
 			// settings come from itself
 			//"greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
 			"greeting" : {
-				"next" : "race",
-				"default" : { // race
+				"next" : "giveTenantRewards",
+				"rewards" : {
+					"randomPortrait" : "Joyful.png",
+					"randomDialogue" : [
+						"It was fun messing around!\nHave some stuff.",
+						{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+					],
+					"jump" : ["greeting"]
+				},
+				"default" : { // no rewards
 					"next" : "personality",
 					"default" : { // personality
 						"next" : "mood",
@@ -1278,6 +1286,37 @@
 				"settings" : {
 					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
 				}
+			}
+		},
+
+		"sbqRewards" : {
+			"session" : {
+				// Time is in minutes here!
+				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "ore" },
+				"timedReward2" : { "repeatable" : true, "time" : 10, "minTime" : 20, "pool" : "richOre" },
+
+				"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+				"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+				"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "ore" },
+				"struggleReward2" : { "repeatable" : true, "struggles" : 100, "minStruggles" : 200, "pool" : "richOre" },
+
+				"CVStruggleReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "struggles" : 75, "pool" : "richOre" },
+				"CVStruggleReward2" : { "location" : ["shaft", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
+
+				"CVTimedReward1" : { "repeatable" : true, "time" : 3, "minTime" : 0, "pool" : "richOre" }
+
+			},
+			"collective" : {
+				"hour1" : { "time" : 60, "pool" : "highValueQuestRewards" }, // one hour
+				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+				"day1" : { "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+				"week1" : { "time" : 10080, "pool" : "highValueQuestRewards" } // a full week
 			}
 		},
 

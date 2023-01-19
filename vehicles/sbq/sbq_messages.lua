@@ -300,3 +300,10 @@ end)
 message.setHandler("sbqSetPosition", function(_,_,position)
 	mcontroller.setPosition(position)
 end)
+
+message.setHandler("sbqSetOccupantFlags", function(_,_, eid, flags)
+	if not eid or not sbq.lounging[eid] then return end
+	for flag, value in pairs(flags) do
+		sbq.lounging[eid].flags[flag] = value
+	end
+end)

@@ -61,7 +61,6 @@ function sbq.clearOccupant(i)
 		flags = {},
 		struggleTime = 0,
 		bellySettleDownTimer = 0,
-		occupantTime = 0,
 		progressBar = 0,
 		progressBarActive = false,
 		progressBarData = nil,

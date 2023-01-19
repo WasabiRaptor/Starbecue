@@ -54,7 +54,6 @@ function sbq.clearOccupant(i)
 		visited = {},
 		struggleTime = 0,
 		bellySettleDownTimer = 0,
-		occupantTime = 0,
 		progressBar = 0,
 		progressBarActive = false,
 		progressBarData = nil,

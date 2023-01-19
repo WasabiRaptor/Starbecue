@@ -16,6 +16,7 @@ require("/lib/stardust/json.lua")
 require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+require("/npcs/tenants/sbq/SBQ_tenant_rewards.lua")
 
 local _npc_setItemSlot
 
@@ -204,6 +205,19 @@ function update(dt)
 		if result ~= nil then
 			sbq.occupants = result.occupants
 			sbq.occupant = result.occupant
+		end
+	end)
+	sbq.timer("rewardCheck", 30, function()
+		local rewards = config.getParameter("sbqRewards") or {}
+		for i, occupant in pairs(sbq.occupant or {}) do
+			if type(occupant.id) == "number" and world.entityExists(occupant.id) and world.entityType(occupant.id) == "player" then
+				local setFlags, newRewards = sbq.getTenantRewards(rewards.session, occupant, npc.level())
+				world.sendEntityMessage(sbq.occupantHolder, "sbqSetOccupantFlags", occupant.id, setFlags)
+				for _,_ in pairs(newRewards) do
+					world.sendEntityMessage(occupant.id, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
+					break
+				end
+			end
 		end
 	end)
 

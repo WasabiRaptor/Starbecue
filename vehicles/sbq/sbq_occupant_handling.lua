@@ -344,7 +344,7 @@ function sbq.updateOccupants(dt)
 			sbq.occupant[i].seatname = seatname
 			sbq.lounging[sbq.occupant[i].id] = sbq.occupant[i]
 			sbq.seats[sbq.occupant[i].seatname] = sbq.occupant[i]
-			sbq.occupant[i].occupantTime = sbq.occupant[i].occupantTime + dt
+			sbq.occupant[i].visited.totalTime = (sbq.occupant[i].visited.totalTime or 0) + dt
 
 			local massMultiplier = 0
 			local mass = sbq.occupant[i].controls.mass
@@ -643,7 +643,7 @@ function sbq.openPreyHud(i, directions, progressbarDx, icon, location)
 				dx = progressbarDx
 			},
 			icon = icon,
-			time = sbq.occupant[i].occupantTime,
+			time = sbq.occupant[i].visited.totalTime,
 			location = (sbq.sbqData.locations[location] or {}).name
 		}
 	})
@@ -766,7 +766,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.occupant[struggler].bellySettleDownTimer = 0.1
 		sbq.doTransition( struggledata.directions[movedir].transition, {direction = movedir, id = strugglerId, struggleTrigger = true} )
 	else
-		local location = sbq.occupant[struggler].location..(sbq.occupant[struggler].locationSide or "")
+		local location = sbq.occupant[struggler].location
 
 		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and ( struggledata.directions[movedir].settings == nil or sbq.checkSettings(struggledata.directions[movedir].settings) ) then
 			sbq.occupant[struggler].controls.favorDirection = movedir
@@ -778,6 +778,8 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 
 		sbq.occupant[struggler].bellySettleDownTimer = time / 2
 		sbq.occupant[struggler].struggleTime = sbq.occupant[struggler].struggleTime + time
+		sbq.occupant[struggler].visited[location.."StruggleTime"] = (sbq.occupant[struggler].visited[location.."StruggleTime"] or 0) + time
+		sbq.occupant[struggler].visited.totalStruggleTime = (sbq.occupant[struggler].visited.totalStruggleTime or 0) + time
 
 		if sbq.settings[location.."Compression"] and not sbq.occupant[struggler].flags.digested then
 			sbq.occupant[struggler].sizeMultiplier = sbq.occupant[struggler].sizeMultiplier + (time * 2)/100
