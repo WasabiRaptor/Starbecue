@@ -316,8 +316,6 @@ function init()
 		else
 			cumData[uniqueId].pred = data
 		end
-		sb.logInfo("saving")
-		sb.logInfo(sb.printJson(cumData))
 		player.setProperty("sbqCumulativeData", cumData)
 	end)
 

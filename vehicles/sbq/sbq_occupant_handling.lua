@@ -53,8 +53,6 @@ function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationS
 	if entityType == "player" then
 		sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
 			function(data)
-			sb.logInfo("got")
-			sb.logInfo(sb.printJson(data))
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
 			sbq.occupant[seatindex].cumulativeStart = sb.jsonMerge(data.times or {}, {})
