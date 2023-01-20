@@ -96,7 +96,7 @@ function sbq.uneat( occupantId )
 		world.sendEntityMessage(occupantId, "sbqOpenInterface", "sbqClose")
 	end
 
-	if occupantData.species ~= nil and occupantData.species ~= "sbqOccupantHolder" and occupantData.smolPreyData ~= nil then
+	if occupantData.species ~= nil and occupantData.smolPreyData ~= nil then
 		if type(occupantData.smolPreyData.id) == "number" and world.entityExists(occupantData.smolPreyData.id) then
 			world.sendEntityMessage(occupantData.smolPreyData.id, "uneaten")
 		else
