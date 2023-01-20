@@ -26,11 +26,6 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 
 				timeCumulative = occupant.cumulative[data.location .. "Time"] or 0
 				struggleTimeCumulative = occupant.cumulative[data.location .. "StruggleTime"] or 0
-				if data.repeatable then
-					timeCumulative = timeCumulative - (occupant.cumulativeStart[data.location .. "Time"] or 0)
-					struggleTimeCumulative = struggleTimeCumulative - (occupant.cumulativeStart[data.location .. "StruggleTime"] or 0)
-				end
-
 			elseif type(data.location) == "table" then
 				time = 0
 				struggleTime = 0
@@ -44,11 +39,6 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 
 					timeCumulative = timeCumulative + (occupant.cumulative[location .. "Time"] or 0)
 					struggleTimeCumulative = struggleTimeCumulative + (occupant.cumulative[location .. "StruggleTime"] or 0)
-
-					if data.repeatable then
-						timeCumulative = timeCumulative - (occupant.cumulativeStart[location .. "Time"] or 0)
-						struggleTimeCumulative = struggleTimeCumulative - (occupant.cumulativeStart[location .. "StruggleTime"] or 0)
-					end
 				end
 			end
 
@@ -118,7 +108,10 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				if count == math.huge then
 					count = 1
 				end
-				rewards[rewardName] = { pool = data.pool, count = count, level = data.level or level, cumulative = cumulativeFlag }
+				count = count - (occupant.flags[rewardName.."CountRecieved"] or 0)
+				if count > (occupant.flags[rewardName.."Count"] or 0) then
+					rewards[rewardName] = { pool = data.pool, count = count, level = data.level or level, cumulative = cumulativeFlag }
+				end
 			end
 		end
 	end

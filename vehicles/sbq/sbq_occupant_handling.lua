@@ -108,6 +108,8 @@ function sbq.uneat( occupantId )
 	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[occupantId].cumulative )
 	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), true, sbq.lounging[occupantId].cumulative)
 
+	world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[occupantId]) )
+
 	sbq.refreshList = true
 	sbq.lounging[occupantId] = nil
 	sbq.occupant[seatindex] = sbq.clearOccupant(seatindex)

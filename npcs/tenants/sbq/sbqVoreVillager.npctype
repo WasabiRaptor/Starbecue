@@ -1258,6 +1258,79 @@
 						}
 					}
 				}
+			},
+
+			"rewardNotify": {
+				"next": "predator",
+				"default": { // predator
+					"next": "race",
+					"default": { // race
+						"next": "personality",
+						"default": { // personality
+							"next": "mood",
+							"default": { // mood
+								"next": "rewardName",
+								"default": {
+									"next": "poolName",
+									"money": {
+										"randomDialogue" : [ "This is nice, I think I'll give you some of my spare change.", "I'll give you a few pixels for giving me a good time."]
+									},
+									"lowValueQuestRewards": {
+										"randomDialogue" : [ "Hmm, I think you deserve something after this.", "I think I'll give you some sort of small gift."]
+									},
+									"mediumValueQuestRewards": {
+										"randomDialogue" : [ "Maybe I've got something a bit better for you this time.", "I've got another gift for you after this."]
+									},
+									"highValueQuestRewards": {
+										"randomDialogue" : [ "I think you'll really like what I've gotten you.", "My next gift will be really good heh."]
+									}
+								}
+							}
+						},
+						"flirty": { // personality
+							"next": "mood",
+							"default": { // mood
+								"next": "rewardName",
+								"default": {
+									"next": "poolName",
+									"money": {
+										"randomDialogue" : [ "Heh, being all subby just to get some pocket change~?", "Mmmm should I even give you this cash? seems like letting you do this is payment enough~"]
+									},
+									"lowValueQuestRewards": {
+										"randomDialogue" : [ "Heh~ I'll give you a little something after~", "Hehe, doing this all just for a little gift~"]
+									},
+									"mediumValueQuestRewards": {
+										"randomDialogue" : [ "If you keep this up I've got something better down the line~", "I hope this gift is nice~"]
+									},
+									"highValueQuestRewards": {
+										"randomDialogue" : [ "You really deserve something for all this worshipping~", "Your worshipping is gonna pay off after this~"]
+									}
+								}
+							}
+						},
+						"shy": { // personality
+							"next": "mood",
+							"default": { // mood
+								"next": "rewardName",
+								"default": {
+									"next": "poolName",
+									"money": {
+										"randomDialogue" : [ "Oh uhm... maybe I should pay you after...", "Do I... should I pay you for this?"]
+									},
+									"lowValueQuestRewards": {
+										"randomDialogue" : [ "I feel like I should give you something for this...", "Uhm... I like this... so I'm gonna give you a gift... if thats ok..."]
+									},
+									"mediumValueQuestRewards": {
+										"randomDialogue" : [ "Maybe... maybe I'll give you something nice.", "Gosh... this is great... I'll give you something good..."]
+									},
+									"highValueQuestRewards": {
+										"randomDialogue" : [ "I think... yeah you're so good, I'm gonna give you a good gift.", "Ahhh... I'm gonna give you something real good."]
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		},
 		// when hunting for prey, a checklist to have them only seek out prey that match the settings
@@ -1280,26 +1353,24 @@
 		},
 
 		"sbqRewards" : {
-			"session" : {
-				// Time is in minutes here!
-				"timedReward1" : { "repeatable" : true, "time" : 5, "pool" : "money" },
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
 
-				"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
-				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
-				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
-				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
-				"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 
-				"struggleReward1" : { "repeatable" : true, "struggles" : 50, "pool" : "money" }
-			},
-			"collective" : {
-				"hour1" : { "time" : 60, "pool" : "highValueQuestRewards" }, // one hour
-				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
-				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
-				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
-				"day1" : { "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
-				"week1" : { "time" : 10080, "pool" : "highValueQuestRewards" } // a full week
-			}
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "money" },
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		},
 
 		"sbqRandomizePreySettings" : {

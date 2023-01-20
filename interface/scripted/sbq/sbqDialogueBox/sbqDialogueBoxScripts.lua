@@ -328,6 +328,7 @@ function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, en
 			for rewardName, reward in pairs(rewards) do
 				if reward.cumulative then
 					cumulativeDataTable[uuid].flags[rewardName] = true
+					cumulativeDataTable[uuid].flags[rewardName.."CountRecieved"] = reward.count
 				end
 				for i = 1, reward.count do
 					world.spawnTreasure(world.entityPosition(pane.sourceEntity()), reward.pool, reward.level or 0)

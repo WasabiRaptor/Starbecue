@@ -183,6 +183,11 @@ function init()
 	message.setHandler("sbqSaveDigestedPrey", function(_, _, digestedStoredTable )
 		status.setStatusProperty("sbqStoredDigestedPrey", digestedStoredTable)
 	end)
+	message.setHandler("sbqCheckRewards", function(_, _, occupant)
+		local rewards = config.getParameter("sbqRewards") or {}
+		sbq.checkOccupantRewards(occupant, rewards, false)
+	end)
+
 end
 
 function sbq.setSpeciesConfig()
@@ -210,7 +215,7 @@ function update(dt)
 	sbq.timer("rewardCheck", 30, function()
 		local rewards = config.getParameter("sbqRewards") or {}
 		for i, occupant in pairs(sbq.occupant or {}) do
-			sbq.checkOccupantRewards(occupant, i, rewards)
+			sbq.checkOccupantRewards(occupant, rewards, true)
 		end
 	end)
 
@@ -494,7 +499,7 @@ function sbq.searchForValidPred(setting)
 
 end
 
-function sbq.checkOccupantRewards(occupant, i, rewards)
+function sbq.checkOccupantRewards(occupant, rewards, notify)
 	if type(occupant.id) == "number" and world.entityExists(occupant.id) and world.entityType(occupant.id) == "player" then
 		local setFlags, newRewards = sbq.getTenantRewards(rewards, occupant, npc.level())
 		world.sendEntityMessage(sbq.occupantHolder, "sbqSetOccupantFlags", occupant.id, setFlags)
@@ -502,7 +507,7 @@ function sbq.checkOccupantRewards(occupant, i, rewards)
 		local rewardNotifyDelay = 0
 		for rewardName, data in pairs(newRewards) do
 			sendRewards = true
-			if sbq.getRandomDialogue( {"rewardNotify"}, occupant.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool }))) then
+			if notify and sbq.getRandomDialogue( {"rewardNotify"}, occupant.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool }))) then
 				rewardNotifyDelay = rewardNotifyDelay + 5
 			end
 		end
