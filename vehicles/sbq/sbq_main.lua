@@ -52,6 +52,8 @@ function sbq.clearOccupant(i)
 		smolPreyData = {},
 		flags = {},
 		visited = {},
+		cumulative = {},
+		cumulativeStart = {},
 		struggleTime = 0,
 		bellySettleDownTimer = 0,
 		progressBar = 0,

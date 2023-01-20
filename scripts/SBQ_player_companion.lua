@@ -297,6 +297,30 @@ function init()
 
 	end)
 
+	message.setHandler("sbqGetCumulativeOccupancyTimeAndFlags", function(_, _, uniqueId, isPrey)
+		if not uniqueId then return end
+		local cumData = player.getProperty("sbqCumulativeData") or {}
+		if isPrey then
+			return {times =(cumData[uniqueId] or {}).prey, flags=(cumData[uniqueId] or {}).flags}
+		else
+			return {times =(cumData[uniqueId] or {}).pred, flags=(cumData[uniqueId] or {}).flags}
+		end
+	end)
+
+	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, isPrey, data)
+		if not uniqueId then return end
+		local cumData = player.getProperty("sbqCumulativeData") or {}
+		cumData[uniqueId] = cumData[uniqueId] or {}
+		if isPrey then
+			cumData[uniqueId].prey = data
+		else
+			cumData[uniqueId].pred = data
+		end
+		sb.logInfo("saving")
+		sb.logInfo(sb.printJson(cumData))
+		player.setProperty("sbqCumulativeData", cumData)
+	end)
+
 	if initStage < 1 then
 		function Recruit:_spawn(position, parameters)
 

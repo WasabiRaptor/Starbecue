@@ -31,35 +31,53 @@ function sbq.eat( occupantId, location, size, voreType, locationSide, force )
 	} )
 	if edibles[1] == nil then
 		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungable now
-			sbq.occupant[seatindex].id = occupantId
-			sbq.occupant[seatindex].location = location
-			sbq.occupant[seatindex].locationSide = locationSide
-			sbq.occupant[seatindex].size = size or 1
-			sbq.occupant[seatindex].entryType = voreType
-			world.sendEntityMessage( occupantId, "sbqMakeNonHostile")
+			sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
 			sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetSpeciesVoreConfig"), function (data)
 				sbq.occupant[seatindex].scale = data[2]
 				sbq.occupant[seatindex].scaleYOffset = data[3]
 			end)
-			sbq.forceSeat( occupantId, seatindex)
-			sbq.refreshList = true
 			return true -- not lounging
 		else
 			return false -- lounging in something inedible
 		end
 	end
 	-- lounging in edible smol thing
-	local species = world.entityName( edibles[1] )
-	sbq.occupant[seatindex].id = occupantId
+	local species = world.entityName(edibles[1])
+	sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
 	sbq.occupant[seatindex].species = species
+	return true
+end
+
+function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
+	local entityType = world.entityType(occupantId)
+	if entityType == "player" then
+		sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
+			function(data)
+			sb.logInfo("got")
+			sb.logInfo(sb.printJson(data))
+			if not data then return end
+			sbq.occupant[seatindex].cumulative = data.times or {}
+			sbq.occupant[seatindex].cumulativeStart = sb.jsonMerge(data.times or {}, {})
+			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
+		end)
+	else
+		sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetCumulativeOccupancyTimeAndFlags",
+			world.entityUniqueId(occupantId), true), function(data)
+			if not data then return end
+			sbq.occupant[seatindex].cumulative = data.times or {}
+			sbq.occupant[seatindex].cumulativeStart = sb.jsonMerge(data.times or {}, {})
+			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
+		end)
+	end
+
+	sbq.occupant[seatindex].id = occupantId
 	sbq.occupant[seatindex].location = location
 	sbq.occupant[seatindex].locationSide = locationSide
 	sbq.occupant[seatindex].size = size or 1
 	sbq.occupant[seatindex].entryType = voreType
 	world.sendEntityMessage( occupantId, "sbqMakeNonHostile")
-	sbq.forceSeat( occupantId, seatindex )
+	sbq.forceSeat( occupantId, seatindex)
 	sbq.refreshList = true
-	return true
 end
 
 function sbq.uneat( occupantId )
@@ -78,16 +96,20 @@ function sbq.uneat( occupantId )
 		world.sendEntityMessage(occupantId, "sbqOpenInterface", "sbqClose")
 	end
 
-	if occupantData.species ~= nil and occupantData.smolPreyData ~= nil then
+	if occupantData.species ~= nil and occupantData.species ~= "sbqOccupantHolder" and occupantData.smolPreyData ~= nil then
 		if type(occupantData.smolPreyData.id) == "number" and world.entityExists(occupantData.smolPreyData.id) then
 			world.sendEntityMessage(occupantData.smolPreyData.id, "uneaten")
 		else
 			world.spawnVehicle( occupantData.species, sbq.localToGlobal({ occupantData.victimAnim.last.x or 0, occupantData.victimAnim.last.y or 0}), { driver = occupantId, settings = occupantData.smolPreyData.settings, uneaten = true, startState = occupantData.smolPreyData.state, layer = occupantData.smolPreyData.layer })
 		end
 	else
-		world.sendEntityMessage( occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects)
+		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects)
 		world.sendEntityMessage( occupantId, "sbqPredatorDespawned", true ) -- to clear the current data for players
 	end
+
+	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[occupantId].cumulative )
+	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), true, sbq.lounging[occupantId].cumulative)
+
 	sbq.refreshList = true
 	sbq.lounging[occupantId] = nil
 	sbq.occupant[seatindex] = sbq.clearOccupant(seatindex)
@@ -345,6 +367,7 @@ function sbq.updateOccupants(dt)
 			sbq.lounging[sbq.occupant[i].id] = sbq.occupant[i]
 			sbq.seats[sbq.occupant[i].seatname] = sbq.occupant[i]
 			sbq.occupant[i].visited.totalTime = (sbq.occupant[i].visited.totalTime or 0) + dt
+			sbq.occupant[i].cumulative.totalTime = (sbq.occupant[i].cumulative.totalTime or 0) + dt
 
 			local massMultiplier = 0
 			local mass = sbq.occupant[i].controls.mass
@@ -358,6 +381,7 @@ function sbq.updateOccupants(dt)
 			else
 				sbq.occupant[i].visited[location .. "Visited"] = true
 				sbq.occupant[i].visited[location .. "Time"] = (sbq.occupant[i].visited[location .. "Time"] or 0) + dt
+				sbq.occupant[i].cumulative[location .. "Time"] = (sbq.occupant[i].cumulative[location .. "Time"] or 0) + dt
 
 				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.settings[location.."Multiplier"] or 1))
 				sbq.occupants[location..(sbq.occupant[i].locationSide or "")] = sbq.occupants[location..(sbq.occupant[i].locationSide or "")] + size
@@ -780,6 +804,9 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.occupant[struggler].struggleTime = sbq.occupant[struggler].struggleTime + time
 		sbq.occupant[struggler].visited[location.."StruggleTime"] = (sbq.occupant[struggler].visited[location.."StruggleTime"] or 0) + time
 		sbq.occupant[struggler].visited.totalStruggleTime = (sbq.occupant[struggler].visited.totalStruggleTime or 0) + time
+
+		sbq.occupant[struggler].cumulative[location.."StruggleTime"] = (sbq.occupant[struggler].cumulative[location.."StruggleTime"] or 0) + time
+		sbq.occupant[struggler].cumulative.totalStruggleTime = (sbq.occupant[struggler].cumulative.totalStruggleTime or 0) + time
 
 		if sbq.settings[location.."Compression"] and not sbq.occupant[struggler].flags.digested then
 			sbq.occupant[struggler].sizeMultiplier = sbq.occupant[struggler].sizeMultiplier + (time * 2)/100

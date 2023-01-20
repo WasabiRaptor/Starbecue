@@ -210,14 +210,7 @@ function update(dt)
 	sbq.timer("rewardCheck", 30, function()
 		local rewards = config.getParameter("sbqRewards") or {}
 		for i, occupant in pairs(sbq.occupant or {}) do
-			if type(occupant.id) == "number" and world.entityExists(occupant.id) and world.entityType(occupant.id) == "player" then
-				local setFlags, newRewards = sbq.getTenantRewards(rewards.session, occupant, npc.level())
-				world.sendEntityMessage(sbq.occupantHolder, "sbqSetOccupantFlags", occupant.id, setFlags)
-				for _,_ in pairs(newRewards) do
-					world.sendEntityMessage(occupant.id, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
-					break
-				end
-			end
+			sbq.checkOccupantRewards(occupant, i, rewards)
 		end
 	end)
 
@@ -297,9 +290,9 @@ function sbq.getOccupantArg(id, arg)
 	end
 end
 
-function sbq.getRandomDialogue(dialogueTreeLocation, entity, settings)
+function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings)
 	settings.race = npc.species()
-	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, entity)
+	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid)
 	if not dialogueTree then return false end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
@@ -319,14 +312,15 @@ function sbq.getRandomDialogue(dialogueTreeLocation, entity, settings)
 
 	local playerName
 
-	if type(entity) == "number" then
-		playerName = world.entityName(entity)
+	if type(eid) == "number" then
+		playerName = world.entityName(eid)
 	end
 
 	local tags = { entityname = playerName, dontSpeak = "", infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
 
 	if type(randomDialogue) == "string" then
-		sbq.say( sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote )
+		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote)
+		return true
 	end
 end
 
@@ -498,4 +492,22 @@ end
 
 function sbq.searchForValidPred(setting)
 
+end
+
+function sbq.checkOccupantRewards(occupant, i, rewards)
+	if type(occupant.id) == "number" and world.entityExists(occupant.id) and world.entityType(occupant.id) == "player" then
+		local setFlags, newRewards = sbq.getTenantRewards(rewards, occupant, npc.level())
+		world.sendEntityMessage(sbq.occupantHolder, "sbqSetOccupantFlags", occupant.id, setFlags)
+		local sendRewards = false
+		local rewardNotifyDelay = 0
+		for rewardName, data in pairs(newRewards) do
+			sendRewards = true
+			if sbq.getRandomDialogue( {"rewardNotify"}, occupant.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool }))) then
+				rewardNotifyDelay = rewardNotifyDelay + 5
+			end
+		end
+		if sendRewards then
+			world.sendEntityMessage(occupant.id, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
+		end
+	end
 end

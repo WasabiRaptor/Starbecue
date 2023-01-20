@@ -1260,6 +1260,25 @@
 						}
 					}
 				}
+			},
+
+			"rewardNotify" : {
+				"next" : "rewardName",
+				"default" : {
+					"next" : "poolName",
+					"richOre" : {
+						"randomDialogue" : [ "This is great, I think I'll share some of my shiny rocks with you after.", "Hehe, I've have to pay you back for doing this for me~"]
+					},
+					"lowValueQuestRewards" : {
+						"randomDialogue" : [ "I think I'll give you something after, this is nice.", "You keep doing that and you might get even nicer rewards."]
+					},
+					"mediumValueQuestRewards" : {
+						"randomDialogue" : [ "Mmmm~ hehe, you're doing real good, keep it up~", "I think you'll like what I've got ready for you after~"]
+					},
+					"highValueQuestRewards" : {
+						"randomDialogue" : [ "You're doing amazing, I'll have some extra nice stuff for you~", "Mmm~ are you trying to get gifts, or is keeping me happy a reward itself~?"]
+					}
+				}
 			}
 		},
 		// when hunting for prey, a checklist to have them only seek out prey that match the settings
@@ -1290,34 +1309,31 @@
 		},
 
 		"sbqRewards" : {
-			"session" : {
-				// Time is in minutes here!
-				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "ore" },
-				"timedReward2" : { "repeatable" : true, "time" : 10, "minTime" : 20, "pool" : "richOre" },
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "ore" },
+			"timedReward2" : { "repeatable" : true, "time" : 10, "minTime" : 20, "pool" : "richOre" },
 
-				"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
-				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
-				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
-				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
-				"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 
-				"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "ore" },
-				"struggleReward2" : { "repeatable" : true, "struggles" : 100, "minStruggles" : 200, "pool" : "richOre" },
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "ore" },
+			"struggleReward2" : { "repeatable" : true, "struggles" : 100, "minStruggles" : 200, "pool" : "richOre" },
 
-				"CVStruggleReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "struggles" : 75, "pool" : "richOre" },
-				"CVStruggleReward2" : { "location" : ["shaft", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
+			"CVStruggleReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "struggles" : 75, "pool" : "richOre" },
+			"CVStruggleReward2" : { "location" : ["shaft", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
 
-				"CVTimedReward1" : { "repeatable" : true, "time" : 3, "minTime" : 0, "pool" : "richOre" }
+			"CVTimedReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "time" : 3, "minTime" : 0, "pool" : "richOre" },
 
-			},
-			"collective" : {
-				"hour1" : { "time" : 60, "pool" : "highValueQuestRewards" }, // one hour
-				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
-				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
-				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
-				"day1" : { "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
-				"week1" : { "time" : 10080, "pool" : "highValueQuestRewards" } // a full week
-			}
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		},
 
 		// the pred prefrences and general settings for this NPC are set here!
