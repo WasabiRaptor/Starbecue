@@ -12,8 +12,6 @@
 	{ "op": "add", "path": "/animations/swim/belly", "value": "idle" },
 	{ "op": "add", "path": "/animations/swimIdle/belly", "value": "idle" },
 
-	{ "op": "add", "path": "/partImages/belly", "value": "/humanoid/<species><reskin>/belly.png" },
-
 	{ "op": "add", "path": "/animations/idle/cock", "value": "idle" },
 	{ "op": "add", "path": "/animations/sit/cock", "value": "idle" },
 	{ "op": "add", "path": "/animations/lay/cock", "value": "idle" },
@@ -24,8 +22,6 @@
 	{ "op": "add", "path": "/animations/fall/cock", "value": "fall" },
 	{ "op": "add", "path": "/animations/swim/cock", "value": "walk" },
 	{ "op": "add", "path": "/animations/swimIdle/cock", "value": "idle" },
-
-	{ "op": "add", "path": "/partImages/cock", "value": "/humanoid/<species><reskin>/cock.png" },
 
 	{ "op": "add", "path": "/animations/idle/ballsFront", "value": "idle" },
 	{ "op": "add", "path": "/animations/sit/ballsFront", "value": "idle" },
@@ -38,8 +34,6 @@
 	{ "op": "add", "path": "/animations/swim/ballsFront", "value": "idle" },
 	{ "op": "add", "path": "/animations/swimIdle/ballsFront", "value": "idle" },
 
-	{ "op": "add", "path": "/partImages/ballsFront", "value": "/humanoid/<species><reskin>/ballsFront.png" },
-
 	{ "op": "add", "path": "/animations/idle/ballsBack", "value": "idle" },
 	{ "op": "add", "path": "/animations/sit/ballsBack", "value": "idle" },
 	{ "op": "add", "path": "/animations/lay/ballsBack", "value": "idle" },
@@ -50,8 +44,6 @@
 	{ "op": "add", "path": "/animations/fall/ballsBack", "value": "idle" },
 	{ "op": "add", "path": "/animations/swim/ballsBack", "value": "idle" },
 	{ "op": "add", "path": "/animations/swimIdle/ballsBack", "value": "idle" },
-
-	{ "op": "add", "path": "/partImages/ballsBack", "value": "/humanoid/<species><reskin>/ballsBack.png" },
 
 	{ "op": "add", "path": "/animations/idle/pussy", "value": "idle" },
 	{ "op": "add", "path": "/animations/sit/pussy", "value": "idle" },
@@ -64,8 +56,6 @@
 	{ "op": "add", "path": "/animations/swim/pussy", "value": "idle" },
 	{ "op": "add", "path": "/animations/swimIdle/pussy", "value": "idle" },
 
-	{ "op": "add", "path": "/partImages/pussy", "value": "/humanoid/<species><reskin>/pussy.png" },
-
 	{ "op": "add", "path": "/animations/idle/breastsFront", "value": "idle" },
 	{ "op": "add", "path": "/animations/sit/breastsFront", "value": "idle" },
 	{ "op": "add", "path": "/animations/lay/breastsFront", "value": "idle" },
@@ -77,9 +67,7 @@
 	{ "op": "add", "path": "/animations/swim/breastsFront", "value": "idle" },
 	{ "op": "add", "path": "/animations/swimIdle/breastsFront", "value": "idle" },
 
-	{ "op": "add", "path": "/partImages/breastsFront", "value": "/humanoid/<species><reskin>/breastsFront.png" },
-
-	{ "op": "add", "path": "/partImages/breastsCover2", "value": "/humanoid/<species><reskin>/breastsCover.png" },
+	{ "op": "add", "path": "/partImages/breastsCover", "value": "/humanoid/<species><reskin>/genderBreastsCover.png" },
 
 	{ "op": "add", "path": "/animations/idle/breastsBack", "value": "idle" },
 	{ "op": "add", "path": "/animations/sit/breastsBack", "value": "idle" },
@@ -92,23 +80,16 @@
 	{ "op": "add", "path": "/animations/swim/breastsBack", "value": "idle" },
 	{ "op": "add", "path": "/animations/swimIdle/breastsBack", "value": "idle" },
 
-	{ "op": "add", "path": "/partImages/breastsBack", "value": "/humanoid/<species><reskin>/breastsBack.png" },
-
 	{ "op": "add", "path": "/nudePartImages", "value": {} },
 	{ "op": "add", "path": "/nudeChestPartImages", "value": {} },
 	{ "op": "add", "path": "/underwearPartImages", "value": {} },
 	{ "op": "add", "path": "/braPartImages", "value": {} },
 
-	{ "op": "add", "path": "/nudePartImages/body", "value": "/humanoid/<species><reskin>/nude/<gender>body.png" },
-	{ "op": "add", "path": "/nudePartImages/frontlegs", "value": "/humanoid/<species><reskin>/nude/<gender>body.png" },
-
-	{ "op": "add", "path": "/nudeChestPartImages/breastsCover", "value": "/humanoid/<species><reskin>/nude/<gender>BreastsCover.png" },
-
 	{ "op": "add", "path": "/underwearPartImages/crotch_underwear", "value": "/humanoid/any/underwear/malebody.png" },
 	{ "op": "add", "path": "/underwearPartImages/crotch_underwear_frontlegs", "value": "/humanoid/any/underwear/malebody.png" },
 	{ "op": "add", "path": "/underwearPartImages/bulge", "value": "/humanoid/any/underwear/bulge.png" },
 
-	{ "op": "add", "path": "/braPartImages/breastsCover_underwear", "value": "/humanoid/any/underwear/<gender>BreastsCover.png" },
+	{ "op": "add", "path": "/braPartImages/genderBreastsCover_underwear", "value": "/humanoid/any/underwear/<gender>BreastsCover.png" },
 	{ "op": "add", "path": "/braPartImages/breastsFront_underwear", "value": "/humanoid/any/underwear/breastsFront.png" },
 	{ "op": "add", "path": "/braPartImages/breastsBack_underwear", "value": "/humanoid/any/underwear/breastsBack.png" },
 
@@ -137,7 +118,7 @@
 				["primary","primary"]
 			]
 		},
-		"breastsCover2" :  {
+		"breastsCover" :  {
 			"imagePath" : "any/sbqVoreParts",
 			"remapColors" : [
 				["primary","primary"]

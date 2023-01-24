@@ -110,7 +110,7 @@ end
 function sbq.handleBodyParts()
 	local defaultSbqData = sbq.defaultSbqData
 	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "cock", sbq.settings.shaftInfusedVisual and sbq.settings.shaftInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsCover2", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsCover", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
 	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsFront", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
 	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsBack", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
 	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "ballsFront", sbq.settings.ballsInfusedVisual and sbq.settings.ballsInfusedItem)

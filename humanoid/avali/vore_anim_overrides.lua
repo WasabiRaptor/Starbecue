@@ -5,10 +5,10 @@ message.setHandler("setBoobMask", function (_,_,booba)
 		local part = replaceSpeciesGenderTags(self.speciesData.sbqBreastCover or "/humanoid/<species><reskin>/breasts/femaleBreastsCover.png")
 		local success, notEmpty = pcall(root.nonEmptyRegion, (part))
 		if success and notEmpty ~= nil then
-			animator.setPartTag("breastsCover", "partImage", part)
-			self.parts["breastsCover"] = part
+			animator.setPartTag("genderBreastsCover", "partImage", part)
+			self.parts["genderBreastsCover"] = part
 		elseif self.speciesData.sbqBreastCoverRemap then
-			local partname = "breastsCover"
+			local partname = "genderBreastsCover"
 			local remapPart = self.speciesData.sbqBreastCoverRemap
 			local part = replaceSpeciesGenderTags(remapPart.string or "/humanoid/<species><reskin>/breasts/femaleBreastsCover.png", remapPart.imagePath or remapPart.species, remapPart.reskin)
 			local success2, baseColorMap = pcall(root.assetJson, "/species/" .. (remapPart.species or "human") .. ".species:baseColorMap")
@@ -33,8 +33,8 @@ message.setHandler("setBoobMask", function (_,_,booba)
 			animator.setGlobalTag("bodyMask1", part)
 		end
 	else
-		animator.setPartTag("breastsCover", "partImage", "")
-		self.parts["breastsCover"] = ""
+		animator.setPartTag("genderBreastsCover", "partImage", "")
+		self.parts["genderBreastsCover"] = ""
 		animator.setGlobalTag("bodyMask1", "/humanoid/animOverrideMasks/malebody.png")
 	end
 end)
