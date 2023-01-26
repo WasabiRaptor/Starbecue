@@ -520,11 +520,11 @@ end
 
 function sbq.doAnim( state, anim, force)
 	if not sbq.animStateData[state] then
-		sb.logError("Attempt to call invalid Anim State: "..tostring(state))
+		sbq.logError("Attempt to call invalid Anim State: "..tostring(state))
 		return
 	end
 	if not sbq.animStateData[state].states[anim] then
-		sb.logError("Attempt to call invalid Anim State: "..tostring(state).."."..tostring(anim))
+		sbq.logError("Attempt to call invalid Anim State: "..tostring(state).."."..tostring(anim))
 		return
 	end
 
@@ -815,4 +815,28 @@ function sbq.showEmote( emotename ) --helper function to express a emotion parti
 		animator.burstParticleEmitter( emotename )
 		sbq.emoteCooldown = 0.2; -- seconds
 	end
+end
+
+function sbq.getLongestAnimationTime(animations, minTime)
+	local times = {}
+	for part, anim in pairs(animations) do
+		local state = part.."State"
+		local animData = (sbq.animStateData[state] or {}).states[anim]
+		if animData then
+			table.insert(times, sbq.animStateData[state].states[anim].cycle)
+		end
+	end
+	return math.max((minTime or 0), table.unpack(times))
+end
+
+function sbq.getShortestAnimationTime(animations, maxTime)
+	local times = {}
+	for part, anim in pairs(animations) do
+		local state = part.."State"
+		local animData = (sbq.animStateData[state] or {}).states[anim]
+		if animData then
+			table.insert(times, animData.cycle)
+		end
+	end
+	return math.min((maxTime or math.huge), table.unpack(times))
 end

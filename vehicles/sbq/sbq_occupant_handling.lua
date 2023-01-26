@@ -187,14 +187,21 @@ function sbq.locationVisualSize(location, side)
 	local locationSize = sbq.occupants[location]
 	local data = sbq.sbqData.locations[location] or {}
 	if data.sided then
-		if sbq.settings[location.."Symmetrical"] or data.symmetrical then
+		if (sbq.settings[location.."Symmetrical"] or data.symmetrical) or not side then
 			locationSize = math.max(sbq.occupants[location.."L"], sbq.occupants[location.."R"])
 		else
 			locationSize = sbq.occupants[location..(side or "L")]
 		end
 	end
-	local unscaled = math.min(locationSize, data.max or math.huge)
-	return math.floor(math.max((sbq.settings[location.."VisualMin"] or data.minVisual or 0), math.min(math.floor((unscaled / sbq.predScale) + 0.4), (sbq.settings[location.."VisualMax"] or data.max or math.huge))))
+	local minMaxed = math.max((sbq.settings[location .. "VisualMin"] or data.minVisual or 0),
+		math.min((locationSize / sbq.predScale), sbq.settings[location .. "VisualMax"] or data.maxVisual or data.max or
+			math.huge))
+
+	if data.sizes then
+		return sbq.getClosestValue(minMaxed, data.sizes.struggle)
+	else
+		return math.floor(minMaxed)
+	end
 end
 
 function sbq.locationSpaceAvailable(location, side)
@@ -328,7 +335,7 @@ function sbq.resetOccupantCount()
 	sbq.occupants.total = 0
 	sbq.occupants.totalSize = 0
 	for location, data in pairs(sbq.sbqData.locations) do
-		sbq.occupants[location] = sbq.settings[location.."VisualMin"] or 0
+		sbq.occupants[location] = 0
 	end
 	sbq.occupants.mass = 0
 end
@@ -351,6 +358,8 @@ function sbq.updateOccupants(dt)
 	local lastFilled = true
 
 	local list = {}
+	local powerMultiplier = math.atan(math.max(sbq.seats[sbq.driverSeat].controls.powerMultiplier, 1)/3) * 5
+
 	for i = sbq.startSlot, sbq.occupantSlots do
 		if type(sbq.occupant[i].id) == "number" and world.entityExists(sbq.occupant[i].id) then
 			table.insert(list, sbq.occupant[i].id)
@@ -372,6 +381,7 @@ function sbq.updateOccupants(dt)
 			local massMultiplier = 0
 			local mass = sbq.occupant[i].controls.mass
 			local location = sbq.occupant[i].location
+			local sidedLocation = location .. (sbq.occupant[i].locationSide or "")
 
 			if location == "escaping" then
 			elseif (location == nil) or (sbq.sbqData.locations[location] == nil) or
@@ -379,13 +389,16 @@ function sbq.updateOccupants(dt)
 				sbq.uneat(sbq.occupant[i].id)
 				return
 			else
+				sbq.doBellyEffect(i, sbq.occupant[i].id, dt, location, powerMultiplier)
+
 				sbq.occupant[i].visited[location .. "Visited"] = true
 				sbq.occupant[i].visited[location .. "Time"] = (sbq.occupant[i].visited[location .. "Time"] or 0) + dt
 				sbq.occupant[i].cumulative[location .. "Time"] = (sbq.occupant[i].cumulative[location .. "Time"] or 0) + dt
 
 				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.settings[location.."Multiplier"] or 1))
-				sbq.occupants[location..(sbq.occupant[i].locationSide or "")] = sbq.occupants[location..(sbq.occupant[i].locationSide or "")] + size
+				sbq.occupants[sidedLocation] = sbq.occupants[sidedLocation] + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
+
 				massMultiplier = sbq.sbqData.locations[location].mass or 0
 
 				sbq.occupants.mass = sbq.occupants.mass + mass * massMultiplier
@@ -410,10 +423,6 @@ function sbq.updateOccupants(dt)
 
 	mcontroller.applyParameters({mass = sbq.movementParams.mass + sbq.occupants.mass})
 
-	for location, occupancy in pairs(sbq.occupants) do
-		sbq.actualOccupants[location] = math.floor(occupancy+0.4)
-	end
-
 	sbq.setOccupantTags()
 end
 
@@ -421,11 +430,10 @@ sbq.expandQueue = {}
 sbq.shrinkQueue = {}
 
 function sbq.setOccupantTags()
-	if sbq.occupants.total ~= sbq.occupantsPrev.total then sbq.setPartTag( "global", "totalOccupants", tostring(sbq.occupants.total) ) end
-	-- because of the fact that pairs feeds things in a random ass order we need to make sure these have tripped on every location *before* setting the occupancy tags or checking the expand/shrink queue
-	for location, data in pairs(sbq.sbqData.locations) do
-		sbq.occupants[location] = math.max((sbq.settings[location.."VisualMin"] or data.minVisual or 0), math.min(sbq.occupants[location] or 0, sbq.settings[location.."VisualMax"] or data.max or math.huge))
+	for location, occupancy in pairs(sbq.occupants) do
+		sbq.actualOccupants[location] = occupancy
 	end
+	-- because of the fact that pairs feeds things in a random ass order we need to make sure these have tripped on every location *before* setting the occupancy tags or checking the expand/shrink queue
 	for location, data in pairs(sbq.sbqData.locations) do
 		if data.combine then
 			for _, combine in ipairs(data.combine) do
@@ -433,7 +441,8 @@ function sbq.setOccupantTags()
 				sbq.occupants[combine] = sbq.occupants[location]
 			end
 		end
-
+	end
+	for location, data in pairs(sbq.sbqData.locations) do
 		if data.copy then
 			local copyTable = {0}
 			for _, copy in ipairs(data.copy) do
@@ -442,83 +451,79 @@ function sbq.setOccupantTags()
 			sbq.occupants[location] = math.max(table.unpack(copyTable))
 		end
 	end
-	for location, data in pairs(sbq.sbqData.locations) do
-		sbq.occupants[location] = math.floor(math.max((sbq.settings[location.."VisualMin"] or data.minVisual or 0),math.min(math.floor((sbq.occupants[location] or 0)+0.4), sbq.settings[location.."VisualMax"] or data.max or math.huge)))
-	end
 
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
-		if sbq.occupantsPrevVisualSize[location] == nil then sbq.occupantsPrevVisualSize[location] = 0 end
 		if data.sided then
 			if sbq.settings[location.."Symmetrical"] or data.symmetrical then -- for when people want their balls and boobs to be the same size
 				if sbq.occupantsVisualSize[location] ~= sbq.occupantsPrevVisualSize[location] or sbq.refreshSizes then
 					sbq.setPartTag( "global", location.."FrontOccupants", tostring(sbq.occupantsVisualSize[location]) )
 					sbq.setPartTag( "global", location.."BackOccupants", tostring(sbq.occupantsVisualSize[location]) )
 				end
+				sbq.interpolateLocation(location, location .. "FrontOccupantsInterpolate")
+				sbq.interpolateLocation(location, location .. "BackOccupantsInterpolate")
 
 				if sbq.occupantsVisualSize[location] > sbq.occupantsPrevVisualSize[location] then
-					sbq.doAnims(sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
+					sbq.setLocationInterpolation(sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
 				elseif sbq.occupantsVisualSize[location] < sbq.occupantsPrevVisualSize[location] then
-					sbq.doAnims(sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
+					sbq.setLocationInterpolation(sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
 				end
 
 			else
 				sbq.occupantsVisualSize[location.."L"] = sbq.locationVisualSize(location, "L")
-				sbq.occupantsVisualSize[location.."R"] = sbq.locationVisualSize(location, "R")
-				if sbq.occupantsPrevVisualSize[location.."L"] == nil then sbq.occupantsPrevVisualSize[location.."L"] = 0 end
-				if sbq.occupantsPrevVisualSize[location.."R"] == nil then sbq.occupantsPrevVisualSize[location.."R"] = 0 end
+				sbq.occupantsVisualSize[location .. "R"] = sbq.locationVisualSize(location, "R")
+
 				if sbq.direction > 0 then -- to make sure those in the balls in CV and breasts in BV cases stay on the side they were on instead of flipping
 					if sbq.occupantsVisualSize[location.."R"] ~= sbq.occupantsPrevVisualSize[location.."R"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
-						sbq.setPartTag( "global", location.."FrontOccupants", tostring(sbq.occupantsVisualSize[location.."R"]) )
+						sbq.setPartTag("global", location .. "FrontOccupants", tostring(sbq.occupantsVisualSize[location .. "R"]))
 					end
+					sbq.interpolateLocation(location.."R", location .. "FrontOccupantsInterpolate")
+
 					if sbq.occupantsVisualSize[location.."L"] ~= sbq.occupantsPrevVisualSize[location.."L"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
 						sbq.setPartTag( "global", location.."BackOccupants", tostring(sbq.occupantsVisualSize[location.."L"]) )
 					end
+					sbq.interpolateLocation(location.."L", location .. "BackOccupantsInterpolate")
 
-					if sbq.occupantsVisualSize[location.."R"] > sbq.occupantsPrevVisualSize[location.."R"] then
-						sbq.doAnims(sbq.expandQueue[location.."Front"] or (sbq.stateconfig[sbq.state].expandAnims or {})[location.."Front"])
-					elseif sbq.occupantsVisualSize[location.."R"] < sbq.occupantsPrevVisualSize[location.."R"] then
-						sbq.doAnims(sbq.shrinkQueue[location.."Front"] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location.."Front"])
-					end
-
-					if sbq.occupantsVisualSize[location.."L"] > sbq.occupantsPrevVisualSize[location.."L"] then
-						sbq.doAnims(sbq.expandQueue[location.."Back"] or (sbq.stateconfig[sbq.state].expandAnims or {})[location.."Back"])
-					elseif sbq.occupantsVisualSize[location.."L"] < sbq.occupantsPrevVisualSize[location.."L"] then
-						sbq.doAnims(sbq.shrinkQueue[location.."Back"] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location.."Back"])
-					end
 				else
 					if sbq.occupantsVisualSize[location.."R"] ~= sbq.occupantsPrevVisualSize[location.."R"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
 						sbq.setPartTag( "global", location.."BackOccupants", tostring(sbq.occupantsVisualSize[location.."R"]) )
 					end
+					sbq.interpolateLocation(location.."R", location .. "BackOccupantsInterpolate")
+
 					if sbq.occupantsVisualSize[location.."L"] ~= sbq.occupantsPrevVisualSize[location.."L"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
 						sbq.setPartTag( "global", location.."FrontOccupants", tostring(sbq.occupantsVisualSize[location.."L"]) )
 					end
+					sbq.interpolateLocation(location.."L", location .. "FrontOccupantsInterpolate")
 
-					if sbq.occupantsVisualSize[location.."L"] > sbq.occupantsPrevVisualSize[location.."L"] then
-						sbq.doAnims(sbq.expandQueue[location.."Front"] or (sbq.stateconfig[sbq.state].expandAnims or {})[location.."Front"])
-					elseif sbq.occupantsVisualSize[location.."L"] < sbq.occupantsPrevVisualSize[location.."L"] then
-						sbq.doAnims(sbq.shrinkQueue[location.."Front"] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location.."Front"])
-					end
+				end
 
-					if sbq.occupantsVisualSize[location.."R"] > sbq.occupantsPrevVisualSize[location.."R"] then
-						sbq.doAnims(sbq.expandQueue[location.."Back"] or (sbq.stateconfig[sbq.state].expandAnims or {})[location.."Back"])
-					elseif sbq.occupantsVisualSize[location.."R"] < sbq.occupantsPrevVisualSize[location.."R"] then
-						sbq.doAnims(sbq.shrinkQueue[location.."Back"] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location.."Back"])
-					end
+				if (sbq.occupantsVisualSize[location.."R"] > sbq.occupantsPrevVisualSize[location.."R"]) then
+					sbq.setLocationInterpolation(location.."R", data, sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
+				elseif sbq.occupantsVisualSize[location.."R"] < sbq.occupantsPrevVisualSize[location.."R"] then
+					sbq.setLocationInterpolation(location.."R", data, sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
+				end
+
+				if sbq.occupantsVisualSize[location.."L"] > sbq.occupantsPrevVisualSize[location.."L"] then
+					sbq.setLocationInterpolation(location.."L", data, sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
+				elseif sbq.occupantsVisualSize[location.."L"] < sbq.occupantsPrevVisualSize[location.."L"] then
+					sbq.setLocationInterpolation(location.."L", data, sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
 				end
 			end
+
 		else
 			if sbq.occupantsVisualSize[location] ~= sbq.occupantsPrevVisualSize[location] or sbq.refreshSizes then
 				sbq.setPartTag( "global", location.."Occupants", tostring(sbq.occupantsVisualSize[location]) )
 			end
+			sbq.interpolateLocation(location, location .. "OccupantsInterpolate")
 
 			if sbq.totalTimeAlive > 0.5 or config.getParameter("doExpandAnim") then
 				if sbq.occupantsVisualSize[location] > sbq.occupantsPrevVisualSize[location] then
-					sbq.doAnims(sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
+					sbq.setLocationInterpolation(location, data, sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
 				elseif sbq.occupantsVisualSize[location] < sbq.occupantsPrevVisualSize[location] then
-					sbq.doAnims(sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
+					sbq.setLocationInterpolation(location, data, sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
 				end
 			end
+
 		end
 
 		sbq.expandQueue[location] = nil
@@ -526,6 +531,67 @@ function sbq.setOccupantTags()
 	end
 	sbq.refreshSizes = false
 	sbq.prevDirection = sbq.direction
+end
+
+sbq.locationInterpolation = {}
+function sbq.setLocationInterpolation(location, data, animations)
+	local result = sbq.occupantsVisualSize[location]
+	sbq.doAnims(animations)
+	if type(sbq.locationInterpolation[location]) ~= "table" then
+		local interpolationTable = sbq.getLocationSizeInterpolationTable(location, data, sbq.occupantsPrevVisualSize[location], result)
+		if not interpolationTable then return end
+		sbq.locationInterpolation[location] = {
+			result = result,
+			current = sbq.occupantsPrevVisualSize[location],
+			time = 0,
+			speed = #interpolationTable / sbq.getLongestAnimationTime(animations),
+			interpolationTable = interpolationTable
+		}
+	elseif result ~= sbq.locationInterpolation[location].result then
+		local current = sbq.locationInterpolation[location].current
+		local interpolationTable = sbq.getLocationSizeInterpolationTable(location, data, current, result)
+		if not interpolationTable then return end
+		sbq.locationInterpolation[location] = {
+			result = result,
+			current = current,
+			time = 0,
+			speed = #interpolationTable / sbq.getLongestAnimationTime(animations),
+			interpolationTable = interpolationTable
+		}
+	end
+end
+
+function sbq.getLocationSizeInterpolationTable(location, data, current, result)
+	local interpolationTable = {}
+	if not data.sizes then return end
+
+	local closestStart, start = sbq.getClosestValue(current, data.sizes.interpolate)
+	local closestEnd, ending = sbq.getClosestValue(result, data.sizes.interpolate)
+
+	local direction = 1
+	if current > result then
+		direction = -1
+	end
+	for i = start, ending, direction do
+		local size = data.sizes.interpolate[i]
+		table.insert(interpolationTable, size)
+	end
+	return interpolationTable
+end
+
+function sbq.interpolateLocation(location, tag)
+	if type(sbq.locationInterpolation[location]) == "table" then
+		sbq.locationInterpolation[location].time = sbq.locationInterpolation[location].time + sbq.dt
+		local interpolationTable = sbq.locationInterpolation[location].interpolationTable
+		local index = math.floor(sbq.locationInterpolation[location].time * sbq.locationInterpolation[location].speed) + 1
+		if index ~= sbq.locationInterpolation[location].prevIndex then
+			sbq.setPartTag("global", tag, tostring(interpolationTable[index]))
+			sbq.locationInterpolation[location].prevIndex = index
+		end
+		if index >= #interpolationTable then
+			sbq.locationInterpolation[location] = nil
+		end
+	end
 end
 
 function sbq.swapOccupants(a, b)
@@ -544,116 +610,104 @@ function sbq.entityLounging( entity )
 	return false
 end
 
-function sbq.doBellyEffects(dt)
-	if sbq.occupants.total <= 0 then return end
+function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
+	local locationEffect = sbq.settings[(location or "").."Effect"] or "sbqRemoveBellyEffects"
+	local health = world.entityHealth(eid)
+	local light = sbq.sbqData.lights.prey
+	if light ~= nil then
+		local lightPosition
+		if light.position ~= nil then
+			lightPosition = sbq.localToGlobal(light.position)
+		else
+			lightPosition = world.entityPosition( eid )
+		end
+		world.sendEntityMessage( eid, "sbqLight", sb.jsonMerge(light, {position = lightPosition}) )
+	end
 
-	local powerMultiplier = math.atan(math.max(sbq.seats[sbq.driverSeat].controls.powerMultiplier, 1)/3) * 5
+	if sbq.occupant[i].flags.digesting then
+		locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
+	end
 
-	for i = sbq.startSlot, sbq.occupantSlots do
+	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
 
-		local eid = sbq.occupant[i].id
-		local location = sbq.occupant[i].location
-		if type(eid) == "number" and world.entityExists(eid) and location ~= "escaping" then
-			local locationEffect = sbq.settings[(location or "").."Effect"] or "sbqRemoveBellyEffects"
-			local health = world.entityHealth(eid)
-			local light = sbq.sbqData.lights.prey
-			if light ~= nil then
-				local lightPosition
-				if light.position ~= nil then
-					lightPosition = sbq.localToGlobal(light.position)
-				else
-					lightPosition = world.entityPosition( eid )
-				end
-				world.sendEntityMessage( eid, "sbqLight", sb.jsonMerge(light, {position = lightPosition}) )
+	if (sbq.settings[location.."Sounds"] == true) and (not sbq.occupant[i].flags.digested) then
+		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
+	end
+	world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.settings.predDigestItemDrops}, sbq.driver or entity.id())
+
+	if sbq.settings[location.."Compression"] and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
+		sbq.occupant[i].sizeMultiplier = math.min(1, math.max(0.1, sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt)/100 ))
+	end
+
+	local progressbarDx = 0
+	if sbq.occupant[i].progressBarActive == true then
+		progressbarDx = (sbq.occupant[i].progressBarLocations[location] and (powerMultiplier * sbq.occupant[i].progressBarMultiplier)) or (-(powerMultiplier * sbq.occupant[i].progressBarMultiplier))
+		sbq.occupant[i].progressBar = sbq.occupant[i].progressBar + dt * progressbarDx
+
+		if sbq.occupant[i].progressBarMultiplier > 0 then
+			sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
+			if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
+				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
+				sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
+				sbq.occupant[i].progressBarActive = false
 			end
-
-			if sbq.occupant[i].flags.digesting then
-				locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
+		else
+			sbq.occupant[i].progressBar = math.max(0, sbq.occupant[i].progressBar)
+			if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
+				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
+				sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
+				sbq.occupant[i].progressBarActive = false
 			end
-
-			local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
-
-			if (sbq.settings[location.."Sounds"] == true) and (not sbq.occupant[i].flags.digested) then
-				sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
-			end
-			world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.settings.predDigestItemDrops}, sbq.driver or entity.id())
-
-			if sbq.settings[location.."Compression"] and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
-				sbq.occupant[i].sizeMultiplier = math.min(1, math.max(0.1, sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt)/100 ))
-			end
-
-			local progressbarDx = 0
-			if sbq.occupant[i].progressBarActive == true then
-				progressbarDx = (sbq.occupant[i].progressBarLocations[location] and (powerMultiplier * sbq.occupant[i].progressBarMultiplier)) or (-(powerMultiplier * sbq.occupant[i].progressBarMultiplier))
-				sbq.occupant[i].progressBar = sbq.occupant[i].progressBar + dt * progressbarDx
-
-				if sbq.occupant[i].progressBarMultiplier > 0 then
-					sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
-					if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
-						sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-						sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
-						sbq.occupant[i].progressBarActive = false
+		end
+	else
+		for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
+			local data = sbq.sbqData.locations[location][passiveEffect]
+			if sbq.settings[location..passiveEffect] and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
+				sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
+					if enabled then
+						sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
+					else
+						sbq.occupant[i][location..passiveEffect.."Immune"] = true
 					end
-				else
-					sbq.occupant[i].progressBar = math.max(0, sbq.occupant[i].progressBar)
-					if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
-						sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-						sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
-						sbq.occupant[i].progressBarActive = false
-					end
-				end
-			else
-				for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
-					local data = sbq.sbqData.locations[location][passiveEffect]
-					if sbq.settings[location..passiveEffect] and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
-						sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
-							if enabled then
-								sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
-							else
-								sbq.occupant[i][location..passiveEffect.."Immune"] = true
-							end
-						end, function ()
-							sbq.occupant[i][location..passiveEffect.."Immune"] = true
-						end)
-					end
-				end
+				end, function ()
+					sbq.occupant[i][location..passiveEffect.."Immune"] = true
+				end)
 			end
-
-			sbq.occupant[i].indicatorCooldown = sbq.occupant[i].indicatorCooldown - dt
-
-			if world.entityType(sbq.occupant[i].id) == "player" and sbq.occupant[i].indicatorCooldown <= 0 then
-				-- p.occupant[i].indicatorCooldown = 0.5
-				local struggledata = (sbq.stateconfig[sbq.state].struggle or {})[location..(sbq.occupant[i].locationSide or "")] or {}
-				local directions = {}
-				local icon
-				if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" then
-					for dir, data in pairs(struggledata.directions or {}) do
-						if data and (not sbq.driving or data.drivingEnabled) and ((data.settings == nil) or sbq.checkSettings(data.settings)) then
-							if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
-							if dir == "back" then dir = ({"right","","left"})[sbq.direction+2] end
-							if sbq.isNested and data.indicate == "red" then
-								directions[dir] = "default"
-							else
-								directions[dir] = data.indicate or "default"
-							end
-						elseif data then
-							if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
-							if dir == "back" then dir = ({"right","","left"})[sbq.direction+2] end
-							directions[dir] = "default"
-						end
-					end
-				end
-				if sbq.occupant[i].species and sbq.occupant[i].species ~= "sbqOccupantHolder" then
-					icon = "/vehicles/sbq/"..sbq.occupant[i].species.."/skins/"..((sbq.occupant[i].smolPreyData.settings.skinNames or {}).head or "default").."/icon.png"..((sbq.occupant[i].smolPreyData.settings or {}).directives or "")
-				end
-				sbq.openPreyHud(i, directions, progressbarDx, icon, location..(sbq.occupant[i].locationSide or ""))
-			end
-
-			sbq.otherLocationEffects(i, eid, health, locationEffect, status, location, powerMultiplier )
-
 		end
 	end
+
+	sbq.occupant[i].indicatorCooldown = sbq.occupant[i].indicatorCooldown - dt
+
+	if world.entityType(sbq.occupant[i].id) == "player" and sbq.occupant[i].indicatorCooldown <= 0 then
+		-- p.occupant[i].indicatorCooldown = 0.5
+		local struggledata = (sbq.stateconfig[sbq.state].struggle or {})[location..(sbq.occupant[i].locationSide or "")] or {}
+		local directions = {}
+		local icon
+		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" then
+			for dir, data in pairs(struggledata.directions or {}) do
+				if data and (not sbq.driving or data.drivingEnabled) and ((data.settings == nil) or sbq.checkSettings(data.settings)) then
+					if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
+					if dir == "back" then dir = ({"right","","left"})[sbq.direction+2] end
+					if sbq.isNested and data.indicate == "red" then
+						directions[dir] = "default"
+					else
+						directions[dir] = data.indicate or "default"
+					end
+				elseif data then
+					if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
+					if dir == "back" then dir = ({"right","","left"})[sbq.direction+2] end
+					directions[dir] = "default"
+				end
+			end
+		end
+		if sbq.occupant[i].species and sbq.occupant[i].species ~= "sbqOccupantHolder" then
+			icon = "/vehicles/sbq/"..sbq.occupant[i].species.."/skins/"..((sbq.occupant[i].smolPreyData.settings.skinNames or {}).head or "default").."/icon.png"..((sbq.occupant[i].smolPreyData.settings or {}).directives or "")
+		end
+		sbq.openPreyHud(i, directions, progressbarDx, icon, location..(sbq.occupant[i].locationSide or ""))
+	end
+	sbq.otherLocationEffects(i, eid, health, locationEffect, status, location, powerMultiplier )
 end
+
 function sbq.openPreyHud(i, directions, progressbarDx, icon, location)
 	sbq.loopedMessage(sbq.occupant[i].id .. "-indicator", sbq.occupant[i].id, -- update quickly but minimize spam
 		"sbqOpenInterface", { "sbqIndicatorHud",
@@ -766,12 +820,9 @@ function sbq.handleStruggles(dt)
 		for _, part in ipairs(struggledata.additionalParts or {}) do -- these are parts that it doesn't matter if it struggles or not, meant for multiple parts triggering the animation but never conflicting since it doesn't check if its struggling already or not
 			animation[part] = prefix .. "s_" .. movedir
 		end
-		local times = {}
-		for _, part in ipairs(parts) do
-			table.insert(times, sbq.animStateData[part .. "State"].animationState.cycle)
-		end
-		time = math.max(0.25, table.unpack(times))
+		time = sbq.getLongestAnimationTime(animation, 0.25)
 	end
+
 	local entityType = world.entityType(strugglerId)
 	if entityType == "player" then
 		sbq.addNamedRPC(strugglerId.."ConsumeEnergy", world.sendEntityMessage(strugglerId, "sbqConsumeResource", "energy", time * 5), function (consumed)

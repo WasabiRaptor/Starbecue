@@ -93,7 +93,7 @@ function sbq.doTransition(direction, scriptargs)
 	local scriptargs = scriptargs or {}
 	if (not sbq.stateconfig or not sbq.stateconfig[sbq.state].transitions[direction]) then return "no data" end
 	if sbq.transitionLock then return "locked" end
-	local tconfig = sbq.occupantArray( sbq.stateconfig[sbq.state].transitions[direction] )
+	local tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction])
 	if tconfig == nil then return "no data" end
 	if tconfig.settings then
 		if not sbq.checkSettings(tconfig.settings) then return "script fail" end
@@ -216,7 +216,7 @@ function sbq.doingTransition(tconfig, direction, scriptargs)
 			end)
 		end
 		if tconfig.victimAnimation ~= nil then
-			sb.logError("[SBQ]["..world.entityName(entity.id()).."] Victim Animations MUST use a timing value from an animation part")
+			sbq.logError("Victim Animations MUST use a timing value from an animation part")
 		end
 	end
 	return "success", timing
@@ -236,12 +236,12 @@ end
 function sbq.idleStateChange(dt)
 	if not sbq.notMoving() or sbq.movement.animating or sbq.transitionLock then return end
 
-	if sbq.randomTimer( "idleStateChange", 5.0, 5.0 ) then -- every 5 seconds? this is arbitrary, oh well
+	if not sbq.driving and sbq.randomTimer( "idleStateChange", 5.0, 5.0 ) then -- every 5 seconds? this is arbitrary, oh well
 		local transitions = sbq.stateconfig[sbq.state].transitions
 		if not sbq.driver then
 			local percent = math.random(100)
 			for name, t in pairs(transitions) do
-				local transition = sbq.occupantArray( t )
+				local transition = sbq.getOccupancyTransition( t )
 				if transition and transition.chance and transition.chance > 0 then
 					percent = percent - transition.chance
 					if percent <= 0 then

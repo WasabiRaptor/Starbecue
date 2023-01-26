@@ -239,7 +239,7 @@ function initAfterInit(data, scale, scaleYOffset)
 			require(script)
 		end
 	end
-	sbq.initLocationEffects()
+	sbq.initLocations()
 
 	local retrievePrey = config.getParameter("retrievePrey")
 	if type(retrievePrey) == "number" and world.entityExists(retrievePrey) then
@@ -281,7 +281,6 @@ function update(dt)
 	sbq.recievePrey()
 	sbq.updateOccupants(dt)
 	sbq.handleStruggles(dt)
-	sbq.doBellyEffects(dt)
 	sbq.applyStatusLists()
 
 	sbq.update(dt)

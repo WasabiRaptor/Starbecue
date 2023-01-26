@@ -2,9 +2,18 @@ require("/scripts/poly.lua")
 require("/scripts/rect.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 
-function sbq.logJson(arg)
-	sb.logInfo(sb.printJson(arg, 1))
+function sbq.logJson(...)
+	sbq.logInfo(sb.printJson(...))
 end
+
+function sbq.logError(arg)
+	sb.logError("["..world.entityName(entity.id()).."]"..arg)
+end
+
+function sbq.logInfo(arg)
+	sb.logInfo("["..world.entityName(entity.id()).."]"..arg)
+end
+
 
 function sbq.sameSign(num1, num2)
 	if num1 < 0 and num2 < 0 then
@@ -93,20 +102,27 @@ function sbq.globalToLocal( position )
 	return pos
 end
 
-function sbq.occupantArray( maybearray )
-	if maybearray[1] == nil then -- not an array, check for eating
-		if maybearray.location and maybearray.failOnFull ~= nil then
-			if maybearray.failOnFull then
-				if (maybearray.failOnFull ~= true) and (sbq.occupants[maybearray.location] >= maybearray.failOnFull) then return maybearray.failTransition
-				elseif not sbq.getSidedLocationWithSpace(maybearray.location, 1) then return maybearray.failTransition end
-			else
-				if sbq.occupants[maybearray.location] <= 0 then return maybearray.failTransition end
+function sbq.getOccupancyTransition(transition)
+	if transition.location then
+		local size = 1
+		if type(transition.location) == "table" then
+			for i, location in ipairs(transition.location) do
+				local failOnFull = transition[location.."FailOnFull"] or transition.failOnFull
+				if (type(failOnFull) == "number") and (sbq.occupantsVisualSize[location] >= failOnFull) then return transition.failTransition
+				elseif transition.failOnFull and not sbq.getSidedLocationWithSpace(location, size) then return transition.failTransition end
 			end
+			local filled = transition[location.."filled"] or transition.filled
+			if (type(filled) == "number") and (sbq.occupantsVisualSize[location] < filled) then return transition.failTransition end
+		else
+			if transition.failOnFull then
+				if (type(transition.failOnFull) == "number") and (sbq.occupantsVisualSize[transition.location] >= transition.failOnFull) then return transition.failTransition
+				elseif transition.failOnFull and not sbq.getSidedLocationWithSpace(transition.location, size) then return transition.failTransition end
+			end
+			local filled = transition[transition.location.."filled"] or transition.filled
+			if (type(filled) == "number") and (sbq.occupantsVisualSize[transition.location] < filled) then return transition.failTransition end
 		end
-		return maybearray
-	else -- pick one depending on number of occupants
-		return maybearray[math.floor(sbq.occupants[maybearray[1].location or "total"] or 0) + 1]
 	end
+	return transition
 end
 
 function sbq.getSmolPreyData(settings, species, state, tags, layer)
@@ -300,6 +316,16 @@ local copyList = {
 
 require("/scripts/SBQ_species_config.lua")
 
+function sbq.initLocations()
+	for location, data in pairs(sbq.sbqData.locations) do
+		sbq.occupantsPrevVisualSize[location] = 0
+		sbq.occupantsVisualSize[location] = 0
+		sbq.actualOccupants[location] = 0
+		sbq.occupants[location] = 0
+	end
+	sbq.initLocationEffects()
+end
+
 function sbq.initLocationEffects()
 	for location, data in pairs(sbq.sbqData.locations or {}) do
 		local data = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
@@ -358,6 +384,8 @@ function sbq.initLocationEffects()
 			end
 			sbq.settings[location.."Effect"] = effect
 		end
+
+
 	end
 end
 
@@ -393,4 +421,19 @@ function sbq.trimOccupantData(occupant)
 		trimmedData[value] = occupant[value]
 	end
 	return trimmedData
+end
+
+function sbq.getClosestValue(x, list)
+	local closest
+	local closestKey
+	local closestDiff = math.huge
+	for k, v in pairs(list) do
+		diff = math.abs(v - x)
+		if diff < closestDiff then
+			closestDiff = diff
+			closest = v
+			closestKey = k
+		end
+	end
+	return closest, closestKey
 end

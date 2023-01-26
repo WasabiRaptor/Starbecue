@@ -285,8 +285,8 @@ function init()
 	for _, script in ipairs(sbq.config.scripts) do
 		require(script)
 	end
+	sbq.initLocations()
 	sbq.init()
-	sbq.initLocationEffects()
 end
 
 function sbq.initAfterInit()
@@ -320,7 +320,6 @@ function update(dt)
 	sbq.recievePrey()
 	sbq.updateOccupants(dt)
 	sbq.handleStruggles(dt)
-	sbq.doBellyEffects(dt)
 	sbq.applyStatusLists()
 
 	sbq.update(dt)
@@ -479,12 +478,12 @@ function sbq.interactChance(data, args)
 	if not (data.drivingEnabled or (not sbq.driver)) then return end
 	if data.chance then
 		if math.random() <= (data.chance/100) then
-			sbq.doTransition( (sbq.occupantArray(data) or {}).transition, {id=args.sourceId} )
+			sbq.doTransition( (sbq.getOccupancyTransition(data) or {}).transition, {id=args.sourceId} )
 		elseif data.animation then
 			sbq.doAnims(data.animation)
 		end
 	else
-		sbq.doTransition( (sbq.occupantArray(data) or {}).transition, {id=args.sourceId} )
+		sbq.doTransition( (sbq.getOccupancyTransition(data) or {}).transition, {id=args.sourceId} )
 	end
 end
 
