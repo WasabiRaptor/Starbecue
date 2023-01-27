@@ -23,11 +23,11 @@ end
 
 function sbq.setState(state)
 	if state == nil then
-		sb.logError( "nil state from ".. sbq.state )
+		sbq.logError( "nil state from ".. sbq.state )
 		return
 	end
 	if not sbq.stateconfig[state] then
-		sb.logError( "invalid state "..state.." from ".. sbq.state)
+		sbq.logError( "invalid state "..state.." from ".. sbq.state)
 		return
 	end
 	sbq.prevState = sbq.state
@@ -132,7 +132,7 @@ function sbq.doingTransition(tconfig, direction, scriptargs)
 			if _continue ~= nil then continue = _continue end
 			if _tconfig ~= nil then tconfig = _tconfig end
 		else
-			sb.logError("no script named: ["..tconfig.script.."] in state: ["..sbq.state.."]")
+			sbq.logError("no script named: ["..tconfig.script.."] in state: ["..sbq.state.."]")
 		end
 	end
 

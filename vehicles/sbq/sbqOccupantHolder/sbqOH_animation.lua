@@ -68,11 +68,11 @@ end
 
 function sbq.doAnimData(state, anim, force)
 	if not sbq.animStateData[state] then
-		sb.logError("Attempt to call invalid Anim State: "..tostring(state))
+		sbq.logError("Attempt to call invalid Anim State: "..tostring(state))
 		return
 	end
 	if not sbq.animStateData[state].states[anim] then
-		sb.logError("Attempt to call invalid Anim State: "..tostring(state).."."..tostring(anim))
+		sbq.logError("Attempt to call invalid Anim State: "..tostring(state).."."..tostring(anim))
 		return
 	end
 

@@ -798,7 +798,7 @@ function sbq.handleStruggles(dt)
 		if statescript ~= nil then
 			statescript({id = strugglerId, direction = movedir})
 		else
-			sb.logError("no script named: ["..struggledata.script.."] in state: ["..sbq.state.."]")
+			sbq.logError("no script named: ["..struggledata.script.."] in state: ["..sbq.state.."]")
 		end
 	end
 

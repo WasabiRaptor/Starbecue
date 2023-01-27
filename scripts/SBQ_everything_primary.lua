@@ -43,7 +43,7 @@ function sbq.everything_primary()
 		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
 		if preySettings.preyEnabled == false then return false end
 		local boundRectSize = rect.size(mcontroller.boundBox())
-		local size = math.sqrt(boundRectSize[1] * boundRectSize[2])/math.sqrt(8) -- size is being based on the player 1 prey would be 4x2
+		local size = math.sqrt(boundRectSize[1] * boundRectSize[2])/2.37 -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
 		return { enabled = preySettings[voreType], size = size, preyList = status.statusProperty("sbqPreyList")}
 	end)
 

@@ -449,7 +449,7 @@ function sbq.action(stateData, name, control)
 			if state[sbq.state][actionData.script] ~= nil then
 				if not state[sbq.state][actionData.script](actionData, control, pressed) then return end
 			else
-				sb.logError("no script named: ["..actionData.script.."] in state: ["..sbq.state.."]")
+				sbq.logError("no script named: ["..actionData.script.."] in state: ["..sbq.state.."]")
 			end
 		end
 		local sounds = actionData.sounds

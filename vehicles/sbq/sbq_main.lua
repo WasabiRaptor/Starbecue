@@ -362,20 +362,20 @@ function sbq.eatHandItem(entity, hand)
 				local changed = false
 				for k,v in pairs(modifier) do
 					if not allowed[k] then
-						sb.logInfo("can't apply: not allowed")
+						sbq.logInfo("can't apply: not allowed")
 						return nil
 					end
 					if allowed[k].min and allowed[k].min > v then
-						sb.logInfo("can't apply: "..k.." too low ("..v.." smaller than minimum "..allowed[k]..")")
+						sbq.logInfo("can't apply: "..k.." too low ("..v.." smaller than minimum "..allowed[k]..")")
 						return nil
 					end
 					if allowed[k].max and allowed[k].max < v then
-						sb.logInfo("can't apply: "..k.." too high ("..v.." larger than maximum "..allowed[k]..")")
+						sbq.logInfo("can't apply: "..k.." too high ("..v.." larger than maximum "..allowed[k]..")")
 						return nil
 					end
 					if not allowed[k].min and not allowed[k].max and allowed[k] ~= "bool" then
 						if not allowed[k][v] then
-							sb.logInfo("can't apply: "..k.." not valid (got \""..v.."\", allowed "..sb.printJson(allowed[k])..")")
+							sbq.logInfo("can't apply: "..k.." not valid (got \""..v.."\", allowed "..sb.printJson(allowed[k])..")")
 							return nil
 						end
 					end

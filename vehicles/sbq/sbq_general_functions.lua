@@ -427,9 +427,9 @@ function sbq.getClosestValue(x, list)
 	local closest
 	local closestKey
 	local closestDiff = math.huge
-	for k, v in pairs(list) do
+	for k, v in ipairs(list) do
 		diff = math.abs(v - x)
-		if diff < closestDiff then
+		if diff <= closestDiff then
 			closestDiff = diff
 			closest = v
 			closestKey = k
