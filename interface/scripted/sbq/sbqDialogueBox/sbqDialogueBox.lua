@@ -355,10 +355,10 @@ function sbq.checkIfVored(dt)
 end
 
 function sbq.dismissAfterTimer(time)
-	if time == -1 then
+	if not time then
 		sbq.timerList.dismissAfterTime = nil
 	else
-		sbq.forceTimer("dismissAfterTime", time or 10, function ()
+		sbq.forceTimer("dismissAfterTime", time, function ()
 			pane.dismiss()
 		end)
 	end
@@ -465,6 +465,8 @@ function dialogueCont:onClick()
 				table.insert(contextMenu, action)
 			end
 		end
+	elseif type(sbq.dialogueTreeReturn) == "table" then -- if nothing else above was triggered, theres nothing to continue to, so might as well jump to a return point if we have one
+		sbq.updateDialogueBox(sbq.dialogueTreeReturn)
 	end
 	if #contextMenu > 0 then
 		metagui.contextMenu(contextMenu)

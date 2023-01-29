@@ -78,6 +78,11 @@ function init()
 
 	oldinit()
 
+	if not self.uniqueId then
+		self.uniqueId = sb.makeUuid()
+		updateUniqueId()
+	end
+
 	storage.settings.ownerUuid = recruitable.ownerUuid()
 	storage.settings.isFollowing = recruitable.isFollowing()
 

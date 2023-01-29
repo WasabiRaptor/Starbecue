@@ -43,6 +43,9 @@
 			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
 			// if no setting is found it only attempts to go down the branch with the matching name of the next step
 
+			// if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+			"dialogueTreeReturn" : ["converse"],
+
 			// greeting is the default start of the tree
 			// settings come from itself
 			//"greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
@@ -294,7 +297,7 @@
 									"after" : { "randomDialogue" : [
 										"Hehehe, eaten by a plushie~", "I hope you like the feel of my fabric all snug around you~", "Right where you belong~", "Hope you consider staying for a while~",
 										"I was made just for this~", "Get yourself nice and comfortable~", "I hope you like how soft it is in there~", "Hope you enjoy the snuggles~"
-									]}
+									], "dismissTime" : 10}
 								},
 								"unprompted" : {
 									"next" : "doingVore",
@@ -345,7 +348,7 @@
 									"after" : { "randomDialogue" : [
 										"Heheh, I've got some elastic down there for some extra squeeze on the way in~", "Ahhh~ just squirm on in those elastic tubes~",
 										"Some people think that tube is just so I'm fuckable...\nnow you know otherwise~", "You better squirm for me now that you're my toy~"
-									]}
+									], "dismissTime" : 10}
 								},
 								"unprompted" : {
 									"next" : "doingVore",
@@ -357,7 +360,7 @@
 									"after" : { "randomDialogue" : [
 										"Heheh, I've got some elastic down there for some extra squeeze on the way in~", "Ahhh~ just squirm on in those elastic tubes~",
 										"Some people think that tube is just so I'm fuckable...\nnow you know otherwise~", "You better squirm for me now that you're my toy~"
-									]}
+									], "dismissTime" : 10}
 								},
 								"notFeelingIt" : "vore.oralVore.race.personality.mood.notFeelingIt",
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.otherLocationFull",
@@ -386,7 +389,7 @@
 										"Ahhh~ Get nice and comfortable in there, I'm gonna enjoy carrying you~", "Mmmm~ I'd be perfectly happy for you to take a looooong nap in there~", "Hehehe~ When I zip myself up I could just keep you trapped inside~",
 										"A-ahh~ Got you all tucked away inside my soft plushie womb now~", "Hehe, I think I might carry you for in there for a while~", "Hehe, snuggle up and get comfortable, thats the favorite spot for many~",
 										"Hehe, Now you're safed and sound and tucked away in my most intimate place~", "I really love putting people inside there,\nget them to drift of to sleep from my belly gently swaying as I walk~"
-									]}
+									], "dismissTime" : 10}
 								},
 								"unprompted" : {
 									"next" : "doingVore",
@@ -400,7 +403,7 @@
 										"Ahhh~ Get nice and comfortable in there, I'm gonna enjoy carrying you~", "Mmmm~ I'd be perfectly happy for you to take a looooong nap in there~", "Hehehe~ When I zip myself up I could just keep you trapped inside~",
 										"A-ahh~ Got you all tucked away inside my soft plushie womb now~", "Hehe, I think I might carry you for in there for a while~", "Hehe, snuggle up and get comfortable, thats the favorite spot for many~",
 										"Hehe, Now you're safed and sound and tucked away in my most intimate place~", "I really love putting people inside there,\nget them to drift of to sleep from my belly gently swaying as I walk~"
-									]}
+									], "dismissTime" : 10}
 								},
 								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",

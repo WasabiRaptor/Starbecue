@@ -41,6 +41,9 @@
 			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
 			// if no setting is found it only attempts to go down the branch with the matching name of the next step
 
+			// if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+			"dialogueTreeReturn" : ["converse"],
+
 			// greeting is the default start of the tree
 			// settings come from itself
 			"greeting" : {
@@ -790,12 +793,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["Ah, yes. Time for you to slip down the hatch.", "Your body told me all that I need to know. Get in.", "Can't resist, can you? Neither can I.", "My demonic allure too much for you? Come right on inside~"] },
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Goodness, you're quite the meal. Not bad tasting, either!", "*glk* There, tucked away where prey like you belong~", "Mmm, just what I needed...", "Hmhm, you filled me up nicely. I might have to keep you in there."] }
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Goodness, you're quite the meal. Not bad tasting, either!", "*glk* There, tucked away where prey like you belong~", "Mmm, just what I needed...", "Hmhm, you filled me up nicely. I might have to keep you in there."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["Heh, you look too good to pass up. Sorry about this. \nJust kidding, I'm not sorry.", "Oh no, a poor, defenseless <entityname>! Let me give you some shelter.", "You're the 999th person I've seen here. Your prize: a world class trip to a private sauna.", "Looking for a nice, warm place. No, I wasn't asking."] },
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Such a delightful taste.", "You're all mine now~", "Try not to get too heated in there, dear.", "An unsuspecting treat is always a delight to meet~"] }
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Such a delightful taste.", "You're all mine now~", "Try not to get too heated in there, dear.", "An unsuspecting treat is always a delight to meet~"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "portrait" : ["Confused.png"], "randomDialogue" : ["Sorry, you'll have to wait. It shouldn't be too long.", "I'll have to pass. It's a bit too hostile in my gut right now.", "I might look like I'm starving. I am. But it's not safe for me to eat you.", "Mmmf... Gotta put some normal food in me, sorry."] },
 								"full" : {
@@ -813,12 +816,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Offering yourself to me? I appreciate it. My gut will, too.", "I certainly don't mind a willing snack.", "Hm, does the sound of an eager stomach get you worked up? Let me give you a private tour.", "Oh? You're approaching me instead of running away?"] },
-									"after" : { "portrait" : ["Relieved.png"],"randomDialogue" : ["Absolutely divine. My taste buds and gut both send their compliments.", "You are just what I needed, <entityname>.", "Mmm, hope you enjoy being surrounded by my noisy gut.", "Nothing beats a tasty prey when it comes to filling an empty gut."] }
+									"after" : { "portrait" : ["Relieved.png"],"randomDialogue" : ["Absolutely divine. My taste buds and gut both send their compliments.", "You are just what I needed, <entityname>.", "Mmm, hope you enjoy being surrounded by my noisy gut.", "Nothing beats a tasty prey when it comes to filling an empty gut."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["My stomach won't stop grumbling. You should do nicely.", "Your adventure is going to have to wait.", "Ooh, I've heard tasty things about you, <entityname>.", "Normally, I'd tease you, but I'm a hungry b!***."] },
-									"after" : { "portrait" : ["Relieved.png"], "randomDialogue" : ["Mm, that might quell my inner fire a bit.", "There there, stomach, help is on the way.", "Ooh, that might've made my gut more excited!", "Now to find somewhere to relax..."] }
+									"after" : { "portrait" : ["Relieved.png"], "randomDialogue" : ["Mm, that might quell my inner fire a bit.", "There there, stomach, help is on the way.", "Ooh, that might've made my gut more excited!", "Now to find somewhere to relax..."], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "portrait" : ["Hurt.png"], "randomDialogue" : ["While I am positively ^red;ravenous^reset;, I can't guarantee your safety. Ask me again once I have things under control.", "Sorry, no can do. ^red;It wouldn't be pleasant.^reset;", "Nope. Not safe. You're going to have to wait.", "Not now. Sorry, but it just isn't a good idea."] },
 								"full" : {
@@ -836,12 +839,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["I bet you can't wait to be trapped in my hot, gurgly gut. Who knows if I'll ever let you out~", "My my, what a hot looking <entityname>~", "Hehe, such a sexy offering. Let me put you in your proper place~", "If you're lucky, your friends might hear you over my gurgling tummy. Maybe not~"] },
-									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~", "In terms of taste, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~", "Mmm, enjoy your private room, dear. Better hope I don't lose the key~", "Absolutely delightful. Relax, curl up, and let my ^pink;steam^reset; loosen you up~"] }
+									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~", "In terms of taste, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~", "Mmm, enjoy your private room, dear. Better hope I don't lose the key~", "Absolutely delightful. Relax, curl up, and let my ^pink;steam^reset; loosen you up~"], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["I was going to ask, but nope. You're far too hot to pass up~", "Am I being too forward? Maybe. But the only direction you're going is down~", "I'd like to fit you in somewhere else, but my tummy has other plans~", "<entityname>. Known to be incredibly yummy. Time to find out~"] },
-									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["I gotta say, you taste as good as you look~", "You're all mine now~", "Let your friends know you're going to be late. Very, very late~", "Enjoy the ride, dear. It's going to be a long one~"] }
+									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["I gotta say, you taste as good as you look~", "You're all mine now~", "Let your friends know you're going to be late. Very, very late~", "Enjoy the ride, dear. It's going to be a long one~"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "portrait" : ["Relieved.png"], "randomDialogue" : ["Sorry, you'll have to wait. I'm getting the temperature just right~", "My tummy is off limits for now. I'm not quite ready.", "I'm very eager to cram you in me. I just need some more time.", "Good things come to those who wait. Or bad things, in the case of me~"] },
 								"full" : {
@@ -860,12 +863,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Not afraid? Good.", "^red;Seriously? Fine.", "^red;Need protection? Get in.", "^red;Desperate, huh?"] },
-									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;You're safe.", "^red;It'll be okay.", "^red;Now relax.", "^red;I'll protect you."] }
+									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;You're safe.", "^red;It'll be okay.", "^red;Now relax.", "^red;I'll protect you."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;I'm not asking.", "^red;I smell danger.", "^red;It's not safe.", "^red;I found you."] },
-									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;You're mine now.", "^red;Don't fight this.", "^red;Take it easy.", "^red;Let me help."] }
+									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;You're mine now.", "^red;Don't fight this.", "^red;Take it easy.", "^red;Let me help."], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Bad idea. You won't just melt.", "^red;No.", "^red;Not. Now.", "^red;Soon. I promise."] },
 								"full" : {
@@ -894,12 +897,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["Ah, yes. Time for you to slip right on up.", "Your body told me all that I need to know. Get in.", "Can't resist, can you? Neither can I.", "My demonic allure too much for you? Come right on inside~"] },
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Goodness, you're quite the meal. Felt great going in, too!", "There, tucked away where you belong~", "Mmm, just what I needed...", "Hmhm, you filled me up nicely. I might have to keep you in there."] }
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Goodness, you're quite the meal. Felt great going in, too!", "There, tucked away where you belong~", "Mmm, just what I needed...", "Hmhm, you filled me up nicely. I might have to keep you in there."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : "vore.oralVore.race.personality.mood.unprompted",
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Such a good squeeze.", "You're all mine now~", "Try not to get too heated in there, dear.", "An unsuspecting toy is perfect to play coy with~"] }
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Such a good squeeze.", "You're all mine now~", "Try not to get too heated in there, dear.", "An unsuspecting toy is perfect to play coy with~"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "portrait" : ["Confused.png"], "randomDialogue" : ["Sorry, you'll have to wait. It shouldn't be too long.", "I'll have to pass. It's a bit too hostile in my gut right now.", "I might look like I'm starving. I am. But it's not safe for me to eat you. With either end.", "Mmmf... Gotta put some normal food in me, sorry."] },
 								"full" : {
@@ -917,7 +920,7 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : "vore.oralVore.race.personality.mood.request",
-									"after" : { "portrait" : ["Relieved.png"], "randomDialogue" : ["Absolutely splendid. My rear and gut both send their compliments.", "You are just what I needed, <entityname>.", "Mmm, hope you enjoy being surrounded by my noisy gut.", "Nothing beats a squirmy prey when it comes to filling an empty gut."] }
+									"after" : { "portrait" : ["Relieved.png"], "randomDialogue" : ["Absolutely splendid. My rear and gut both send their compliments.", "You are just what I needed, <entityname>.", "Mmm, hope you enjoy being surrounded by my noisy gut.", "Nothing beats a squirmy prey when it comes to filling an empty gut."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
@@ -940,12 +943,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : "vore.oralVore.race.personality.mood.request",
-									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~", "In terms of feel, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~", "Mmm, enjoy your private room, dear. Better hope I don't lose the key~", "Absolutely delightful. Relax, curl up, and let my ^pink;steam^reset; loosen you up~"] }
+									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~", "In terms of feel, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~", "Mmm, enjoy your private room, dear. Better hope I don't lose the key~", "Absolutely delightful. Relax, curl up, and let my ^pink;steam^reset; loosen you up~"], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["I was going to ask, but nope. You're far too hot to pass up~", "Am I being too forward? Maybe. But the only direction you're going is up~", "I'd like to fit you in somewhere else, but my tummy has other plans~", "<entityname>. Known to be incredibly good at squirming. Time to find out~"] },
-									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["I gotta say, you squirm like a champ~", "You're all mine now~", "Let your friends know you're going to be late. Very, very late~", "Enjoy the ride, dear. It's going to be a long one~"] }
+									"after" : { "portrait" : ["Blep.png"], "randomDialogue" : ["I gotta say, you squirm like a champ~", "You're all mine now~", "Let your friends know you're going to be late. Very, very late~", "Enjoy the ride, dear. It's going to be a long one~"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : "vore.oralVore.race.personality.mood.notFeelingIt",
 								"full" : {
@@ -998,12 +1001,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["I see where your gaze is. How about you get a closer look?", "Interested? Go on, give them a touch~", "Want to experience one of my infamous hugs? Get over here.", "Judging by how ^pink;flustered^reset; you look, I think I know what you want."] },
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Mmm, mind if I keep you for a while? Say, forever?", "Just lovely~ Now you know how my shirts get torn up.", "All nice and plumped up~ Now, where did that Avali go...", "Enjoy the ride, dear. Complimentary drinks have been provided~"] }
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Mmm, mind if I keep you for a while? Say, forever?", "Just lovely~ Now you know how my shirts get torn up.", "All nice and plumped up~ Now, where did that Avali go...", "Enjoy the ride, dear. Complimentary drinks have been provided~"], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : {"randomDialogue" : ["I've got a ^pink;sizzling^reset; e-date coming up, so sorry in advance.", "Ooh, you'll do nicely. I need to go up a few sizes.", "You look thirsty. Let me fix that.", "Your next quest involves being trapped in my breasts. *glomp*"]},
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Oh shush. We both know you want this~", "A little bumpy, but those will smooth as you settle in.", "And not a single drop wasted. Hope you don't mind getting soaked~", "I knew you'd fit in perfectly~"]}
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Oh shush. We both know you want this~", "A little bumpy, but those will smooth as you settle in.", "And not a single drop wasted. Hope you don't mind getting soaked~", "I knew you'd fit in perfectly~"], "dismissTime" : 10}
 								},
 								"notFeelingIt" : { "randomDialogue" : ["Tempting! But no.", "No room for you, dear.", "Ah, maybe later.", "I'm not ready. You're welcome to touch, however~"] },
 								"full" : {
@@ -1020,12 +1023,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Not exactly what I had in mind, but sure!", "Sure. I could use the milk you'd help make.", "Okay, I guess? Might help me catch some prey.", "Don't complain if I leave you in there until my hunger wears off."]},
-									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["At least you're nestled right on top of my hungry belly.", "Time to grab some cookies, then.", "Now to get a proper meal.", "Doesn't feel half bad, honestly."]}
+									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["At least you're nestled right on top of my hungry belly.", "Time to grab some cookies, then.", "Now to get a proper meal.", "Doesn't feel half bad, honestly."], "dismissTime" : 10}
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Shocked.png"], "randomDialogue" : ["Alright, time for you to go down the hatc--whoops!", "'Hold ^green;[Shift]^reset;, then press ^green;[Up]^reset;'--ack!", "All I have to do is grab them and-<keysmash>", "Alright. This spell should do the trick."]},
-									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["I hate it when I misclick.", "That's not my stomach. Damn.", "Whatever, this still feels good.", "I meant to do that."]}
+									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["I hate it when I misclick.", "That's not my stomach. Damn.", "Whatever, this still feels good.", "I meant to do that."], "dismissTime" : 10}
 								},
 								"notFeelingIt" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["It's something else that needs attention, dear.", "More 'om nom', not 'gl-omp'.", "Settle my inner fire a bit, then you can spend as much time as you like with them~", "My maw is up here, <entityname>."] },
 								"full" : {
@@ -1042,12 +1045,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["I knew you couldn't resist, hot stuff. Let me give you a hug~", "Hmhm, that I can do. Your paradise of milk awaits~", "Honestly? Yeah. I can't think of a better place.", "Ooh, yes~ Let's do so before someone finds out."] },
-									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : ["You fit in perfectly~ Might have to get myself a few meme sweaters.", "Absolutely wonderful~ You really know how to pad a demon out~", "You wouldn't mind if I slipped on a bra or a piercing, would you? So you can't escape~", "Heh, hope you don't mind me squeezing you. I just love how you made me look~"] }
+									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : ["You fit in perfectly~ Might have to get myself a few meme sweaters.", "Absolutely wonderful~ You really know how to pad a demon out~", "You wouldn't mind if I slipped on a bra or a piercing, would you? So you can't escape~", "Heh, hope you don't mind me squeezing you. I just love how you made me look~"], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["You look like the type to enjoy this~", "You wouldn't mind a quick hug, would you?", "Quick! I need help with my latest cosplay!", "I think I have a smudge on my collar. Mind taking a quick peek?"]},
-									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : ["Oops~ You fell right into my booby trap~", "Hmhm, gets them every time~", "Mm, now I just need an apron to complete the look~", "Perfect. You're just the right size~"]}
+									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : ["Oops~ You fell right into my booby trap~", "Hmhm, gets them every time~", "Mm, now I just need an apron to complete the look~", "Perfect. You're just the right size~"], "dismissTime" : 10}
 								},
 								"notFeelingIt" : { "portrait" : ["Determined.png"], "randomDialogue" : ["Yes, but no. I have other needs I want filled~", "Off limits for now. You can look and touch as much as you'd like, though~", "I appreciate the offer, but you'd burn up in an instant. It's too hot in there~", "Maybe later. I'm a bit too sensitive~"] },
 								"full" : {
@@ -1064,12 +1067,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Really. Fine.", "^red;Whatever floats your boat.", "^red;As you wish.", "^red;You're that horny, huh?"] },
-									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;You happy? Good.", "^red;Don't drown.", "^red;Now drink up.", "^red;At least you're safe."] }
+									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;You happy? Good.", "^red;Don't drown.", "^red;Now drink up.", "^red;At least you're safe."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;I'm low on time. This'll do.", "^red;They're coming. I'll hide you.", "^red;It's dangerous. Let me hug you.", "^red;Caught you looking."]},
-									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;I'll carry you.", "^red;It'll be fine.", "^red;Just trust me.", "^red;Try not to move so much."]}
+									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;I'll carry you.", "^red;It'll be fine.", "^red;Just trust me.", "^red;Try not to move so much."], "dismissTime" : 10}
 								},
 								"notFeelingIt" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Seriously? Not in the mood.", "^red;I'm sore. Ask later.", "^red;You'd disappear into the abyss. Not right now.", "^red;Sorry. Pick somewhere else."] },
 								"full" : {
@@ -1095,12 +1098,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["It's going to get ^pink;hot^reset;. Oh! You're into that.", "I figured you were never going to ask. I'm ready~", "Mhm, let's do this~", "I could practically smell how willing you are. Slip on in~"] },
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Mmmf, that tickles~", "This feeling never gets old. Enjoy~", "Feel free to express yourself in there. I won't mind~", "Hmhm, I suppose I do have some charm~"]}
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Mmmf, that tickles~", "This feeling never gets old. Enjoy~", "Feel free to express yourself in there. I won't mind~", "Hmhm, I suppose I do have some charm~"], "dismissTime" : 10}
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : {"randomDialogue" : ["Oh, perfect. I've got a swimsuit shoot coming up. 'Big Gals, Bigger Bellies'~", "Oooh~ I could just snatch you up~", "Your little adventure is going on a hot detour~", "You look like you could use some loving."]},
-									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Goodness, you're bigger than I expected~", "Lovely. I'll get even more attention now.", "Mmm~ I'm positively glowing now~", "Toy goes in, fluids come out~ \nToy does too... ^pink;eventually~^reset;"] }
+									"after" : { "portrait" : ["Happy.png"], "randomDialogue" : ["Goodness, you're bigger than I expected~", "Lovely. I'll get even more attention now.", "Mmm~ I'm positively glowing now~", "Toy goes in, fluids come out~ \nToy does too... ^pink;eventually~^reset;"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : "vore.breastVore.race.personality.mood.notFeelingIt",
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.otherLocationFull",
@@ -1118,12 +1121,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Not quite the hole I had in mind, but I don't mind.", "Sure! Might help me get a few discounts.", "Well, it was either this or my mouth. I still get a gravid belly regardless.", "Careful, I might not let you back out for a long time~"] },
-									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["All nice and tucked away.", "Just relax. I'll find something for both of us.", "Great, now I have to eat for more than just me.", "I was going to complain, but this feels too good."] }
+									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["All nice and tucked away.", "Just relax. I'll find something for both of us.", "Great, now I have to eat for more than just me.", "I was going to complain, but this feels too good."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["I've got two ^pink;burning^reset; ^red;hungers^reset;, and I know which one you're gonna fill.", "Gonna use you as a toy to put my mind off my hunger.", "My friend loves a big gut. Might trick him into feeding me.", "Sorry, stomach. This B!tch's needs come first~"] },
-									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["Umpf~ That takes care of one thing.", "Now I'm hungry AND wet. Ah well~", "If I was more flexible, I'd squeeze you right into my mouth later~", "Mhm, now to grab a proper meal~"] }
+									"after" : { "portrait" : ["Tired.png"], "randomDialogue" : ["Umpf~ That takes care of one thing.", "Now I'm hungry AND wet. Ah well~", "If I was more flexible, I'd squeeze you right into my mouth later~", "Mhm, now to grab a proper meal~"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : "vore.breastVore.race.personality.mood.notFeelingIt",
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.otherLocationFull",
@@ -1141,12 +1144,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["Time for you to find out just how strong those muscles are~", "I do love a willing toy~", "Excellent. Your ^pink;VIP suite^reset; is ready~", "I've got a nice ^pink;steamy^reset; cavern for you to explore~"] },
-									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : ["Exactly what this hound has been desiring~", "Carrying you around is going to give me quite the workout~", "Oh geez, and I thought I was wet before~", "Mmmmmn... bork..."] }
+									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : ["Exactly what this hound has been desiring~", "Carrying you around is going to give me quite the workout~", "Oh geez, and I thought I was wet before~", "Mmmmmn... bork..."], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["OwO.png"], "randomDialogue" : ["Oh look, the perfect shape~", "My fire needs some stoking. You'll do~", "You're going inside me. ALL of you~", "Heh, I've seen your search history, <entityname>."] },
-									"after" : { "portrait" : ["UwU.png"], "randomDialogue" : ["Mm-ng~! You're squirmy~", "Now now, your new room isn't permanent... Probably~", "Now to slip somewhere secluded and enjoy this moment~", "Vanished without a trace~"] }
+									"after" : { "portrait" : ["UwU.png"], "randomDialogue" : ["Mm-ng~! You're squirmy~", "Now now, your new room isn't permanent... Probably~", "Now to slip somewhere secluded and enjoy this moment~", "Vanished without a trace~"], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : "vore.breastVore.race.personality.mood.notFeelingIt",
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.otherLocationFull",
@@ -1164,12 +1167,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Just get in.", "^red;Since you asked.", "^red;It'll be hot and wet.", "^red;Slip into my abyss." ] },
-									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;This helps. Thanks.", "^red;Claimed by me.", "^red;Safety in numbers.", "^red;The calm within the storm." ] }
+									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;This helps. Thanks.", "^red;Claimed by me.", "^red;Safety in numbers.", "^red;The calm within the storm." ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;My body needs this.", "^red;This'll be rough.", "^red;You'll be fine.", "^red;Surprise."] },
-									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;O-ooh...", "^red;F-fwah...", "^red;A-ahh...", "^red;M-mmn..."] }
+									"after" : { "portrait" : ["Mad.png"], "randomDialogue" : ["^red;O-ooh...", "^red;F-fwah...", "^red;A-ahh...", "^red;M-mmn..."], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : "vore.breastVore.race.personality.mood.notFeelingIt",
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",

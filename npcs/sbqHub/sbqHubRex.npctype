@@ -120,7 +120,6 @@
 						"options" : [
 							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "randomButtonText" : "Okay.", "jump" : [ "converse", "options", 1, 2 ] }],
 							[ "Tell me more about these minigames.", {
-								"dismissTime" : -1,
 								"buttonText" : [
 									"Okay.",
 									"Got it.",
@@ -144,7 +143,6 @@
 								"jump" : [ "converse", "options", 1, 2 ]
 							}],
 							[ "What else do you do other than minigames?", {
-								"dismissTime" : -1,
 								"buttonText" : [
 									"Interesting.",
 									"I will!"
@@ -175,12 +173,12 @@
 							"request" : {
 								"next" : "doingVore",
 								"before" : { "randomDialogue" : [ "With pleasure~" ] },
-								"after" : { "randomDialogue" : [ "Mmm~ get comfortable in there~" ] }
+								"after" : { "randomDialogue" : [ "Mmm~ get comfortable in there~" ], "dismissTime" : 10 }
 							},
 							"unprompted" : {
 								"next" : "doingVore",
 								"before" : { "randomDialogue" : [ "Mmmm~ you look like a tasty meal~" ] },
-								"after" : { "randomDialogue" : [ "Mmm~ get comfortable in there~" ] }
+								"after" : { "randomDialogue" : [ "Mmm~ get comfortable in there~" ], "dismissTime" : 10 }
 							},
 							"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now." ] },
 							"full" : { "randomDialogue" : [ "I'm a bit too full..." ] },

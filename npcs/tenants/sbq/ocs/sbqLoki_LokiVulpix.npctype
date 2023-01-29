@@ -63,6 +63,9 @@
 			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
 			// if no setting is found it only attempts to go down the branch with the matching name of the next step
 
+			// if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+			"dialogueTreeReturn" : ["converse"],
+
 			// greeting is the default start of the tree
 			// settings come from itself
 			//"greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
@@ -306,12 +309,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ] },
-									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ] }
+									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "I think you'll fill me up.", "I just need a bite to eat.", "You seem like you'd make a good meal.", "My belly's been grumbling..." ] },
-									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ] }
+									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
 								"full" : {
@@ -337,12 +340,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "You want to go up my butt?", "You know thats the wrong way right?", "That's going to be a tight fit.", "Thats an interesting request." ] },
-									"after" : { "randomDialogue" : [ "Ahhh~ Hope I'm not squeezing too much.", "Mmm~ This actually feels pretty good.", "Heh~ it's almost like you're a living dildo.", "Oooh~ That squirming is rather nice." ] }
+									"after" : { "randomDialogue" : [ "Ahhh~ Hope I'm not squeezing too much.", "Mmm~ This actually feels pretty good.", "Heh~ it's almost like you're a living dildo.", "Oooh~ That squirming is rather nice." ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hey, I want to try something.", "Hey... what if I shoved you up my ass?", "For some reason... I keep imagining you as a dildo.", "You know, theres a reason I'm not wearing pants." ] },
-									"after" : { "randomDialogue" : [ "Ahhh~ hope I'm not squeezing too much.", "Mmm~ That actually feels pretty good.", "Heh~ it's almost like you're a living dildo.", "Oooh~ That squirming is rather nice." ] }
+									"after" : { "randomDialogue" : [ "Ahhh~ hope I'm not squeezing too much.", "Mmm~ That actually feels pretty good.", "Heh~ it's almost like you're a living dildo.", "Oooh~ That squirming is rather nice." ], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : "vore.oralVore.race.personality.mood.notFeelingIt",
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.otherLocationFull",
@@ -364,12 +367,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "You know things aren't supposed to go in there right?", "Thats going to be a real tight fit." ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
 								"full" : { "randomDialogue" : [ "Already got someone plugging my shaft~", "Mmm maybe if someone squirmed a little further in, I might have space for you.", "Hehe, I would if someone wasn't already squeezed in there~", "Maybe after I cum heh~" ] },
@@ -389,12 +392,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my pussy?", "You know thats where dicks are supposed to go right?", "Thats going to be a real tight fit." ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me excited~", "Ffff~ Now I'm all wet~", "A-ahh~ Don't stop squirming~" ] }
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me excited~", "Ffff~ Now I'm all wet~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all wet~", "A-ahh~ Don't stop squirming~" ] }
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all wet~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",
@@ -415,12 +418,12 @@
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to squirm into one of my boobs?", "Hehe, you want a bit more than just a drink of milk don't you~", "Thats going to be a real tight fit.", "Now to decide which side to put you on..." ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ] }
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
 									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ] }
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
 								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",

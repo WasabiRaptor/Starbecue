@@ -38,6 +38,9 @@ end
 function sbq.checkDialogueBranch(dialogueTree, settings, branch, entity)
 	local dialogueTree = dialogueTree
 	if type(dialogueTree) == "table" then
+		-- if we are moving down the tree its nice to have it automatically set a point to return to as we move past it
+		sbq.dialogueTreeReturn = dialogueTree.dialogueTreeReturn or sbq.dialogueTreeReturn
+
 		if type(dialogueBoxScripts[branch]) == "function" then
 			dialogueTree = dialogueBoxScripts[branch](dialogueTree, settings, branch, entity)
 		elseif settings[branch] ~= nil then

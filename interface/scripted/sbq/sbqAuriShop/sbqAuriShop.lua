@@ -131,9 +131,6 @@ for j, tabData in pairs(shopRecipes) do
 	end
 end
 
-function sbq.dismissAfterTimer(time)
-end
-
 function decAmount:onClick()
 	buyAmount = math.max(1, buyAmount - 1)
 	buyAmountLabel:setText(tostring(buyAmount))
