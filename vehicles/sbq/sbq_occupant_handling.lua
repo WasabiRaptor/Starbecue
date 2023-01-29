@@ -200,7 +200,7 @@ function sbq.locationVisualSize(location, side)
 	if data.sizes then
 		return sbq.getClosestValue(minMaxed, data.sizes.struggle)
 	else
-		return math.floor(minMaxed)
+		return math.floor(minMaxed+0.4)
 	end
 end
 
@@ -454,46 +454,53 @@ function sbq.setOccupantTags()
 
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
+
 		if data.sided then
 			if sbq.settings[location.."Symmetrical"] or data.symmetrical then -- for when people want their balls and boobs to be the same size
-				if sbq.occupantsVisualSize[location] ~= sbq.occupantsPrevVisualSize[location] or sbq.refreshSizes then
-					sbq.setPartTag( "global", location.."FrontOccupants", tostring(sbq.occupantsVisualSize[location]) )
-					sbq.setPartTag( "global", location.."BackOccupants", tostring(sbq.occupantsVisualSize[location]) )
+				local setTag = sbq.interpolateLocation(location, location .. "FrontOccupantsInterpolate", sbq.refreshSizes)
+				if setTag then
+					sbq.setPartTag("global", location .. "BackOccupantsInterpolate", setTag)
 				end
-				sbq.interpolateLocation(location, location .. "FrontOccupantsInterpolate")
-				sbq.interpolateLocation(location, location .. "BackOccupantsInterpolate")
+
+				if sbq.occupantsVisualSize[location] ~= sbq.occupantsPrevVisualSize[location] or sbq.refreshSizes then
+					local size = tostring(sbq.occupantsVisualSize[location])
+					sbq.setPartTag( "global", location.."FrontOccupants", size )
+					sbq.setPartTag( "global", location.."BackOccupants", size )
+				end
 
 				if sbq.occupantsVisualSize[location] > sbq.occupantsPrevVisualSize[location] then
-					sbq.setLocationInterpolation(sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
+					sbq.setLocationInterpolation(location, data, sbq.expandQueue[location] or (sbq.stateconfig[sbq.state].expandAnims or {})[location])
 				elseif sbq.occupantsVisualSize[location] < sbq.occupantsPrevVisualSize[location] then
-					sbq.setLocationInterpolation(sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
+					sbq.setLocationInterpolation(location, data, sbq.shrinkQueue[location] or (sbq.stateconfig[sbq.state].shrinkAnims or {})[location])
 				end
 
 			else
+
 				sbq.occupantsVisualSize[location.."L"] = sbq.locationVisualSize(location, "L")
 				sbq.occupantsVisualSize[location .. "R"] = sbq.locationVisualSize(location, "R")
+				local flipped = sbq.direction ~= sbq.prevDirection
 
 				if sbq.direction > 0 then -- to make sure those in the balls in CV and breasts in BV cases stay on the side they were on instead of flipping
-					if sbq.occupantsVisualSize[location.."R"] ~= sbq.occupantsPrevVisualSize[location.."R"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
+					if sbq.occupantsVisualSize[location.."R"] ~= sbq.occupantsPrevVisualSize[location.."R"] or flipped or sbq.refreshSizes then
 						sbq.setPartTag("global", location .. "FrontOccupants", tostring(sbq.occupantsVisualSize[location .. "R"]))
 					end
-					sbq.interpolateLocation(location.."R", location .. "FrontOccupantsInterpolate")
+					sbq.interpolateLocation(location.."R", location .. "FrontOccupantsInterpolate", flipped or sbq.refreshSizes)
 
-					if sbq.occupantsVisualSize[location.."L"] ~= sbq.occupantsPrevVisualSize[location.."L"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
+					if sbq.occupantsVisualSize[location.."L"] ~= sbq.occupantsPrevVisualSize[location.."L"] or flipped or sbq.refreshSizes then
 						sbq.setPartTag( "global", location.."BackOccupants", tostring(sbq.occupantsVisualSize[location.."L"]) )
 					end
-					sbq.interpolateLocation(location.."L", location .. "BackOccupantsInterpolate")
+					sbq.interpolateLocation(location.."L", location .. "BackOccupantsInterpolate", flipped or sbq.refreshSizes)
 
 				else
-					if sbq.occupantsVisualSize[location.."R"] ~= sbq.occupantsPrevVisualSize[location.."R"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
+					if sbq.occupantsVisualSize[location.."R"] ~= sbq.occupantsPrevVisualSize[location.."R"] or flipped or sbq.refreshSizes then
 						sbq.setPartTag( "global", location.."BackOccupants", tostring(sbq.occupantsVisualSize[location.."R"]) )
 					end
-					sbq.interpolateLocation(location.."R", location .. "BackOccupantsInterpolate")
+					sbq.interpolateLocation(location.."R", location .. "BackOccupantsInterpolate", flipped or sbq.refreshSizes)
 
-					if sbq.occupantsVisualSize[location.."L"] ~= sbq.occupantsPrevVisualSize[location.."L"] or sbq.direction ~= sbq.prevDirection or sbq.refreshSizes then
+					if sbq.occupantsVisualSize[location.."L"] ~= sbq.occupantsPrevVisualSize[location.."L"] or flipped or sbq.refreshSizes then
 						sbq.setPartTag( "global", location.."FrontOccupants", tostring(sbq.occupantsVisualSize[location.."L"]) )
 					end
-					sbq.interpolateLocation(location.."L", location .. "FrontOccupantsInterpolate")
+					sbq.interpolateLocation(location.."L", location .. "FrontOccupantsInterpolate", flipped or sbq.refreshSizes)
 
 				end
 
@@ -510,11 +517,12 @@ function sbq.setOccupantTags()
 				end
 			end
 
-		else
+		elseif not data.side then
+
 			if sbq.occupantsVisualSize[location] ~= sbq.occupantsPrevVisualSize[location] or sbq.refreshSizes then
 				sbq.setPartTag( "global", location.."Occupants", tostring(sbq.occupantsVisualSize[location]) )
 			end
-			sbq.interpolateLocation(location, location .. "OccupantsInterpolate")
+			sbq.interpolateLocation(location, location .. "OccupantsInterpolate", sbq.refreshSizes)
 
 			if sbq.totalTimeAlive > 0.5 or config.getParameter("doExpandAnim") then
 				if sbq.occupantsVisualSize[location] > sbq.occupantsPrevVisualSize[location] then
@@ -535,6 +543,7 @@ end
 
 sbq.locationInterpolation = {}
 function sbq.setLocationInterpolation(location, data, animations)
+	if not animations then return end
 	local result = sbq.occupantsVisualSize[location]
 	sbq.doAnims(animations)
 	if type(sbq.locationInterpolation[location]) ~= "table" then
@@ -579,19 +588,24 @@ function sbq.getLocationSizeInterpolationTable(location, data, current, result)
 	return interpolationTable
 end
 
-function sbq.interpolateLocation(location, tag)
+function sbq.interpolateLocation(location, tag, update)
+	local setTag
 	if type(sbq.locationInterpolation[location]) == "table" then
 		sbq.locationInterpolation[location].time = sbq.locationInterpolation[location].time + sbq.dt
 		local interpolationTable = sbq.locationInterpolation[location].interpolationTable
 		local index = math.floor(sbq.locationInterpolation[location].time * sbq.locationInterpolation[location].speed) + 1
 		if index ~= sbq.locationInterpolation[location].prevIndex then
-			sbq.setPartTag("global", tag, tostring(interpolationTable[index]))
+			setTag = tostring(interpolationTable[index])
+			sbq.setPartTag("global", tag, setTag)
 			sbq.locationInterpolation[location].prevIndex = index
 		end
 		if index >= #interpolationTable then
 			sbq.locationInterpolation[location] = nil
 		end
+	elseif update then
+		sbq.setPartTag("global", tag, tostring(sbq.occupantsVisualSize[location]))
 	end
+	return setTag
 end
 
 function sbq.swapOccupants(a, b)
@@ -817,10 +831,11 @@ function sbq.handleStruggles(dt)
 		for _, part in ipairs(parts) do
 			animation[part] = prefix .. "s_" .. movedir
 		end
+		time = sbq.getLongestAnimationTime(animation, 0.25)
+
 		for _, part in ipairs(struggledata.additionalParts or {}) do -- these are parts that it doesn't matter if it struggles or not, meant for multiple parts triggering the animation but never conflicting since it doesn't check if its struggling already or not
 			animation[part] = prefix .. "s_" .. movedir
 		end
-		time = sbq.getLongestAnimationTime(animation, 0.25)
 	end
 
 	local entityType = world.entityType(strugglerId)

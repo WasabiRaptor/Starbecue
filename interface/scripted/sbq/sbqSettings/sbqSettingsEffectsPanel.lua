@@ -314,11 +314,11 @@ function sbq.effectsPanel()
 			visualMin:setText(tostring(sbq.overrideSettings[location .. "VisualMin"] or sbq.predatorSettings[location .."VisualMin"] or 0))
 			function visualMin:onEnter()
 				sbq.numberBox(visualMin, "changePredatorSetting", location .. "VisualMin", "predatorSettings", "overrideSettings", (sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0), math.min(sbq.predatorSettings[location .. "VisualMax"], (sbq.overrideSettings[location .. "VisualMax"] or locationData.max)))
-				sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"], (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
+				sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
 			end
 			function visualMin:onTextChanged()
 				sbq.numberBoxColor(visualMin, (sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0), math.min(sbq.predatorSettings[location .. "VisualMax"], (sbq.overrideSettings[location .. "VisualMax"] or locationData.max)))
-				sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"], (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
+				sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
 			end
 			function visualMin:onEscape() self:onEnter() end
 			function visualMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end

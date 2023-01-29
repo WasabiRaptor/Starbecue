@@ -299,9 +299,9 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "<partImage>:<bellyOccupants>-<bellyStateAnim>.<bellyStateFrame><cosmeticDirectives><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<bellyOccupants>-<state>.<bellyStateAnim>.<bellyStateFrame><cosmeticDirectives><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>-<bellyOccupants>-<bellyStateAnim>.<bellyStateFrame><cosmeticDirectives><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<bellyOccupants>-<state>.<bellyStateAnim>.<bellyStateFrame><cosmeticDirectives><directives>" } },
 
 						"eat": { "properties": { "image": "<partImage>:<bellyOccupants>-<state>.<bellyStateAnim>.<bellyStateFrame><cosmeticDirectives><directives>" } },
 						"dummyEat": { "properties": { "image": "<partImage>:<bellyOccupants>-<state>.idle.1<cosmeticDirectives><directives>" } },
@@ -453,10 +453,10 @@
 					"swim": { "frames": 7, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 					"swimIdle": { "frames": 2, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 
-					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
 
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 }
 				}
@@ -473,12 +473,12 @@
 				},
 				"partStates": {
 					"ballsFrontState": {
-						"idle": { "properties": { "image": "<partImage>:<ballsFrontOccupants>.<ballsFrontStateAnim>.<ballsFrontStateFrame>?addmask=<ballsFrontMask>:<ballsFrontOccupants>.<ballsFrontStateAnim>.<ballsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<ballsFrontOccupants>-<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame>?addmask=<ballsFrontMask>:<ballsFrontOccupants>-<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<ballsFrontOccupants>.<ballsFrontStateAnim>.<ballsFrontStateFrame>?addmask=<ballsFrontMask>:<direction>.<ballsFrontOccupants>.<ballsFrontStateAnim>.<ballsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<ballsFrontOccupants>-<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame>?addmask=<ballsFrontMask>:<direction>-<ballsFrontOccupants>-<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<ballsFrontOccupants>.<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame>?addmask=<ballsFrontMask>:<ballsFrontOccupants>.<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<ballsFrontOccupants>.<state>.idle.1?addmask=<ballsFrontMask>:<ballsFrontOccupants>.<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<ballsFrontOccupantsInterpolate>-<state>.<ballsFrontStateAnim>?addmask=<ballsFrontMask>:<ballsFrontOccupantsInterpolate>-<state>.<ballsFrontStateAnim>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<ballsFrontOccupants>-<state>.idle.1?addmask=<ballsFrontMask>:<ballsFrontOccupants>-<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -496,12 +496,12 @@
 				},
 				"partStates": {
 					"ballsFrontState": {
-						"idle": { "properties": { "image": "<partImage>:<ballsFrontOccupants>.<ballsFrontStateAnim>.<bodyPersonality><cosmeticDirectives><ballsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<ballsFrontOccupants>-<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<ballsFrontOccupants>.<ballsFrontStateAnim>.<ballsFrontStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<ballsFrontOccupants>-<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<ballsFrontOccupants>.<state>.<ballsFrontStateAnim>.<ballsFrontStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<ballsFrontOccupants>.<state>.idle.1<cosmeticDirectives><ballsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<ballsFrontOccupantsInterpolate>-<state>.<ballsFrontStateAnim><cosmeticDirectives><ballsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<ballsFrontOccupants>-<state>.idle.1<cosmeticDirectives><ballsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -537,10 +537,10 @@
 					"swim": { "frames": 7, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 					"swimIdle": { "frames": 2, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 
-					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
 
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 }
 				}
@@ -557,12 +557,12 @@
 				},
 				"partStates": {
 					"ballsBackState": {
-						"idle": { "properties": { "image": "<partImage>:<ballsBackOccupants>.<ballsBackStateAnim>.<ballsBackStateFrame>?addmask=<ballsBackMask>:<ballsBackOccupants>.<ballsBackStateAnim>.<ballsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<ballsBackOccupants>-<state>.<ballsBackStateAnim>.<ballsBackStateFrame>?addmask=<ballsBackMask>:<ballsBackOccupants>-<state>.<ballsBackStateAnim>.<ballsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<ballsBackOccupants>.<ballsBackStateAnim>.<ballsBackStateFrame>?addmask=<ballsBackMask>:<direction>.<ballsBackOccupants>.<ballsBackStateAnim>.<ballsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<ballsBackOccupants>-<state>.<ballsBackStateAnim>.<ballsBackStateFrame>?addmask=<ballsBackMask>:<direction>-<ballsBackOccupants>-<state>.<ballsBackStateAnim>.<ballsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<ballsBackOccupants>.<state>.<ballsBackStateAnim>.<ballsBackStateFrame>?addmask=<ballsBackMask>:<ballsBackOccupants>.<state>.<ballsBackStateAnim>.<ballsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<ballsBackOccupants>.<state>.idle.1?addmask=<ballsBackMask>:<ballsBackOccupants>.<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<ballsBackOccupantsInterpolate>-<state>.<ballsBackStateAnim>?addmask=<ballsBackMask>:<ballsBackOccupantsInterpolate>-<state>.<ballsBackStateAnim>;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<ballsBackOccupants>-<state>.idle.1?addmask=<ballsBackMask>:<ballsBackOccupants>-<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><ballsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -580,12 +580,12 @@
 				},
 				"partStates": {
 					"ballsBackState": {
-						"idle": { "properties": { "image": "<partImage>:<ballsBackOccupants>.<ballsBackStateAnim>.<bodyPersonality><cosmeticDirectives><ballsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<ballsBackOccupants>-<state>.<ballsBackStateAnim>.<ballsBackStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<ballsBackOccupants>.<ballsBackStateAnim>.<ballsBackStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<ballsBackOccupants>-<state>.<ballsBackStateAnim>.<ballsBackStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<ballsBackOccupants>.<state>.<ballsBackStateAnim>.<ballsBackStateFrame><cosmeticDirectives><ballsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<ballsBackOccupants>.<state>.idle.1<cosmeticDirectives><ballsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<ballsBackOccupantsInterpolate>-<state>.<ballsBackStateAnim><cosmeticDirectives><ballsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<ballsBackOccupants>-<state>.idle.1<cosmeticDirectives><ballsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
