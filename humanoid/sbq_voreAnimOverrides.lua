@@ -86,11 +86,11 @@ message.setHandler("sbqSetInfusedPartColors", function(_, _, partname, item)
 	local part = replaceSpeciesGenderTags(string or ("/humanoid/<species>/"..partname..".png"), remapPart.imagePath or remapPart.species, remapPart.reskin)
 	local success2, baseColorMap = pcall(root.assetJson, "/species/" .. (remapPart.species or "human") .. ".species:baseColorMap")
 	local colorRemap
-	if success2 and baseColorMap ~= nil and remapPart.remapColors and self.speciesFile.baseColorMap then
+	if success2 and baseColorMap ~= nil and remapPart.remapColors and speciesFile.baseColorMap then
 		colorRemap = "?replace"
 		for _, data in ipairs(remapPart.remapColors) do
 			local from = baseColorMap[data[1]]
-			local to = self.speciesFile.baseColorMap[data[2]]
+			local to = speciesFile.baseColorMap[data[2]]
 			for i, color in ipairs(from or {}) do
 				colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
 			end

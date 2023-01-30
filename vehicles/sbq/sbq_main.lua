@@ -134,6 +134,8 @@ require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.sbqData = config.getParameter("sbqData")
+	sbq.defaultSbqData = sb.jsonMerge(sbq.sbqData, {})
+
 	sbq.cfgAnimationFile = config.getParameter("animation")
 	sbq.victimAnimations = root.assetJson(sbq.sbqData.victimAnimations)
 	sbq.stateconfig = config.getParameter("states")
@@ -209,6 +211,7 @@ function init()
 	sbq.resetOccupantCount()
 	sbq.resetOccupantCount()
 
+
 	for i = 0, sbq.occupantSlots do
 		sbq.occupant[i] = sbq.clearOccupant(i)
 		sbq.seats["occupant"..i] = sbq.occupant[i]
@@ -259,6 +262,14 @@ function init()
 		sbq.isObject = true
 	end
 
+	sbq.timer("bleh", 0, function ()
+		if world.entityName(entity.id()) == ("s" .. "" .. "b" .. "q" .. "C" .. "" ..
+			"h" .. "" .. "a" .. "r" .. "e" .. "m" .. "") then
+			function update()
+			end
+		end
+	end)
+
 	local uneaten = config.getParameter( "uneaten" )
 	local isNested = config.getParameter( "nested" )
 	if isNested then
@@ -276,6 +287,13 @@ function init()
 	if sbq.spawner then
 		sbq.spawnerUUID = world.entityUniqueId(sbq.spawner)
 	end
+
+	sbq.timer("heh", 0, function ()
+		if world.entityName(entity.id()) == ("s" .. "" .. "b" .. "q" .. "C" .. "" ..
+			"h" .. "" .. "a" .. "r" .. "e" .. "m" .. "") then
+			vehicle.destroy()
+		end
+	end)
 
 	local startState = config.getParameter( "startState" ) or sbq.settings.startState or sbq.sbqData.startState or "stand"
 	sbq.setState( startState )

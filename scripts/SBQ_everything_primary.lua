@@ -43,7 +43,7 @@ function sbq.everything_primary()
 		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
 		if preySettings.preyEnabled == false then return false end
 		local boundRectSize = rect.size(mcontroller.boundBox())
-		local size = math.sqrt(boundRectSize[1] * boundRectSize[2])/2.37 -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
+		local size = math.sqrt(boundRectSize[1] * boundRectSize[2])/root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
 		return { enabled = preySettings[voreType], size = size, preyList = status.statusProperty("sbqPreyList")}
 	end)
 
@@ -100,10 +100,23 @@ function sbq.everything_primary()
 	end)
 
 	message.setHandler("sbqDigestStore", function(_, _, location, uniqueId, item)
+		if (not uniqueId) or (not item) or (not location) then return end
 		local digestedStoredTable = status.statusProperty("sbqStoredDigestedPrey") or {}
 		digestedStoredTable[location] = digestedStoredTable[location] or {}
 		digestedStoredTable[location][uniqueId] = item
 		status.setStatusProperty("sbqStoredDigestedPrey", digestedStoredTable)
+	end)
+
+	message.setHandler("sbqCheckInfusion", function(_, _, location, locationData, pred, primaryLocation)
+		local enabled = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))[locationData.infusionSetting]
+		if not enabled then return end
+		local template = locationData.infusionItem
+		if type(template) == "string" then
+			template = root.assetJson(template)
+		end
+		local itemDrop = sbq.generateItemDrop(pred, locationData.infuseText or "Infused By: ",
+			template or root.assetJson("/sbqGeneral.config:npcEssenceTemplate"))
+		world.sendEntityMessage(pred, "sbqReplaceInfusion", location, itemDrop, entity.id(), primaryLocation)
 	end)
 
 	mysteriousTFDuration = status.statusProperty("sbqMysteriousPotionTFDuration" )
@@ -331,3 +344,5 @@ function sbq.endMysteriousTF()
 
 	refreshOccupantHolder()
 end
+
+require("/scripts/SBQ_generate_drop.lua")

@@ -38,17 +38,21 @@
 							{ "type" : "scrollArea", "id" : "preferencesScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
 								{ "type" : "panel", "style" : "flat", "children" : [
 									{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
-									[{ "type" : "checkBox", "id" : "oralVorePred", "toolTip" : "Prey NPCs will seek you out for Oral Vore" }, { "type" : "label", "text" : " Oral Vore" } ],
-									[{ "type" : "checkBox", "id" : "tailVorePred", "toolTip" : "Prey NPCs will seek you out for Tail Vore" }, { "type" : "label", "text" : " Tail Vore" } ],
-									[{ "type" : "checkBox", "id" : "absorbVorePred", "toolTip" : "Prey NPCs will seek you out for Absorbtion" }, { "type" : "label", "text" : " Absorbtion" } ],
-									[{ "type" : "checkBox", "id" : "navelVorePred", "toolTip" : "Prey NPCs will seek you out for Navel Vore" }, { "type" : "label", "text" : " Navel Vore" } ],
-									[{ "type" : "checkBox", "id" : "analVorePred", "toolTip" : "Prey NPCs will seek you out for Anal Vore" }, { "type" : "label", "text" : " Anal Vore" } ],
-									[{ "type" : "checkBox", "id" : "cockVorePred", "toolTip" : "Prey NPCs will seek you out for Cock Vore" }, { "type" : "label", "text" : " Cock Vore" } ],
-									[{ "type" : "checkBox", "id" : "unbirthPred", "toolTip" : "Prey NPCs will seek you out for Unbirth" }, { "type" : "label", "text" : " Unbirth" } ],
-									[{ "type" : "checkBox", "id" : "breastVorePred", "toolTip" : "Prey NPCs will seek you out for Breast Vore" }, { "type" : "label", "text" : " Breast Vore" } ]
-									//{"type" : "label", "text" : "-Other-", "align" : "center"},
-									//[{ "type" : "checkBox", "id" : "cockTFPred", "toolTip" : "Prey NPCs will seek you out for Cock TF" }, { "type" : "label", "text" : " Cock TF" } ],
-									//[{ "type" : "checkBox", "id" : "boobsorbPred", "toolTip" : "Prey NPCs will seek you out for Breast Absorbtion" }, { "type" : "label", "text" : " Boobsorb" } ]
+									[{ "type" : "checkBox", "id" : "oralVorePred", "toolTip" : "Prey NPCs may seek you out for Oral Vore" }, { "type" : "label", "text" : " Oral Vore" } ],
+									[{ "type" : "checkBox", "id" : "tailVorePred", "toolTip" : "Prey NPCs may seek you out for Tail Vore" }, { "type" : "label", "text" : " Tail Vore" } ],
+									[{ "type" : "checkBox", "id" : "absorbVorePred", "toolTip" : "Prey NPCs may seek you out for Absorbtion" }, { "type" : "label", "text" : " Absorbtion" } ],
+									[{ "type" : "checkBox", "id" : "navelVorePred", "toolTip" : "Prey NPCs may seek you out for Navel Vore" }, { "type" : "label", "text" : " Navel Vore" } ],
+									[{ "type" : "checkBox", "id" : "analVorePred", "toolTip" : "Prey NPCs may seek you out for Anal Vore" }, { "type" : "label", "text" : " Anal Vore" } ],
+									[{ "type" : "checkBox", "id" : "cockVorePred", "toolTip" : "Prey NPCs may seek you out for Cock Vore" }, { "type" : "label", "text" : " Cock Vore" } ],
+									[{ "type" : "checkBox", "id" : "unbirthPred", "toolTip" : "Prey NPCs may seek you out for Unbirth" }, { "type" : "label", "text" : " Unbirth" } ],
+									[{ "type" : "checkBox", "id" : "breastVorePred", "toolTip" : "Prey NPCs may seek you out for Breast Vore" }, { "type" : "label", "text" : " Breast Vore" } ],
+									{"type" : "spacer", "size" : 3},
+									{"type" : "label", "text" : "-Body Part TF-", "align" : "center"},
+									{"type" : "spacer", "size" : 3},
+									[{ "type" : "checkBox", "id" : "bellyInfusionPred", "toolTip" : "Prey NPCs may seek you out for Cock TF" }, { "type" : "label", "text" : " Belly TF" } ],
+									[{ "type" : "checkBox", "id" : "cockInfusionPred", "toolTip" : "Prey NPCs may seek you out for Cock TF" }, { "type" : "label", "text" : " Cock TF" } ],
+									[{ "type" : "checkBox", "id" : "pussyInfusionPred", "toolTip" : "Prey NPCs may seek you out for Pussy TF" }, { "type" : "label", "text" : " Pussy TF" } ],
+									[{ "type" : "checkBox", "id" : "breastsInfusionPred", "toolTip" : "Prey NPCs may seek you out for Breast TF" }, { "type" : "label", "text" : " Breast TF" } ]
 								]}
 							]}]}
 						]}
@@ -72,7 +76,7 @@
 							[{ "type" : "checkBox", "id" : "bellyInfusion", "toolTip" : "" }, { "type" : "label", "text" : " Belly TF" } ],
 							[{ "type" : "checkBox", "id" : "cockInfusion", "toolTip" : "" }, { "type" : "label", "text" : " Cock TF" } ],
 							[{ "type" : "checkBox", "id" : "pussyInfusion", "toolTip" : "" }, { "type" : "label", "text" : " Pussy TF" } ],
-							[{ "type" : "checkBox", "id" : "breastsInfusion", "toolTip" : "" }, { "type" : "label", "text" : " Boobsorb" } ]
+							[{ "type" : "checkBox", "id" : "breastsInfusion", "toolTip" : "" }, { "type" : "label", "text" : " Breast TF" } ]
 
 						]}]}]}
 					]},

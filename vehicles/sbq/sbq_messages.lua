@@ -307,3 +307,34 @@ message.setHandler("sbqSetOccupantFlags", function(_,_, eid, flags)
 		sbq.lounging[eid].flags[flag] = value
 	end
 end)
+
+message.setHandler("infuseLocation", function (_,_,eid, locations)
+	sbq.infuseMessageHandler(eid, locations)
+end)
+
+function sbq.infuseMessageHandler(eid, locations)
+	if not eid or not sbq.lounging[eid] then return end
+	local locations = locations or { sbq.lounging[eid].location }
+
+	for i, location in ipairs(locations) do
+		local locationData = sbq.sbqData.locations[location]
+		if locationData and locationData.infusion then
+			world.sendEntityMessage(eid, "sbqCheckInfusion", location, locationData, sbq.spawner or entity.id(), i==1 )
+		end
+	end
+end
+
+message.setHandler( "setInfusedCharacter", function(_,_, location, item, eid, primaryLocation )
+	sbq.settings[location .. "InfusedItem"] = item
+	sbq.setColorReplaceDirectives()
+	sbq.setSkinPartTags()
+	sbq.initLocationEffects()
+	sbq.settingsMenuUpdated()
+
+	if not primaryLocation or not eid or not sbq.lounging[eid] then return end
+	sbq.lounging[eid].location = location
+	sbq.lounging[eid].sizeMultiplier = 0
+	sbq.lounging[eid].flags.infused = true
+
+
+end)

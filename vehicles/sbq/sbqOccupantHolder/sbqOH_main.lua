@@ -167,6 +167,19 @@ function init()
 		sbq.predScale = scale
 		sbq.predScaleYOffset = scaleYOffset
 	end)
+
+	sbq.timer("init", 0, function ()
+		sbq.getInit()
+	end)
+end
+
+function sbq.getInit()
+	sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetSpeciesVoreConfig"), function (data)
+		initAfterInit(table.unpack(data))
+		inited = true
+	end, function ()
+		sbq.getInit()
+	end)
 end
 
 function initAfterInit(data, scale, scaleYOffset)
@@ -250,18 +263,7 @@ function initAfterInit(data, scale, scaleYOffset)
 end
 
 sbq.totalTimeAlive = 0
-local sentDataMessage
 function update(dt)
-	if not sentDataMessage then
-		sentDataMessage = true
-		sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetSpeciesVoreConfig"), function (data)
-			initAfterInit(table.unpack(data))
-			inited = true
-		end, function ()
-			sentDataMessage = false
-		end)
-	end
-
 	sbq.checkSpawnerExists()
 	sbq.totalTimeAlive = sbq.totalTimeAlive + dt
 	sbq.dt = dt

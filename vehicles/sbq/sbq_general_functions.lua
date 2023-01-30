@@ -327,7 +327,7 @@ function sbq.initLocations()
 end
 
 function sbq.initLocationEffects()
-	for location, data in pairs(sbq.sbqData.locations or {}) do
+	for location, data in pairs(sbq.defaultSbqData.locations or {}) do
 		local data = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
 		local infusedLocation
 		local item = (sbq.settings or {})[location .. "InfusedItem"]
@@ -349,12 +349,9 @@ function sbq.initLocationEffects()
 						end
 					end
 					-- this is to make sure that if you have used an infusion slot to get this modified locationData you can still get these options for *your* species
-					infusedLocation.combine = data.combine
-					infusedLocation.combined = data.combined
-					infusedLocation.infusedVisual = data.infusedVisual
-					infusedLocation.infusion = data.infusion
-					infusedLocation.infusionAccepts = data.infusionAccepts
-					infusedLocation.checkSettings = data.checkSettings
+					for _, key in ipairs(sbq.config.nonInfusedData) do
+						infusedLocation[key] = data[key]
+					end
 				end
 			end
 		end

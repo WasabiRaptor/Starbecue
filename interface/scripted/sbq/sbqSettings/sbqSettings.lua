@@ -60,12 +60,7 @@ function sbq.drawLocked(w, icon)
 	c:drawImageDrawable(icon, pos, 1)
 end
 
-function init()
-
-	sbq.getInitialData()
-
-	sbq.globalSettings = sb.jsonMerge(sbq.config.globalSettings, sbq.sbqSettings.global)
-
+function sbq.getPlayerSpeciesAndSettings()
 	if sbq.sbqCurrentData.species ~= nil then
 		if sbq.sbqCurrentData.species == "sbqOccupantHolder" then
 			sbq.getPlayerOccupantHolderData()
@@ -81,6 +76,15 @@ function init()
 		sbq.predatorSettings = sb.jsonMerge(sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.sbqSettings.sbqOccupantHolder or {}), sbq.globalSettings)
 	end
 	sbq.overrideSettings = sbq.predatorConfig.overrideSettings or {}
+end
+
+function init()
+
+	sbq.getInitialData()
+
+	sbq.globalSettings = sb.jsonMerge(sbq.config.globalSettings, sbq.sbqSettings.global)
+
+	sbq.getPlayerSpeciesAndSettings()
 
 	sbq.effectsPanel()
 

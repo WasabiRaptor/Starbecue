@@ -39,3 +39,12 @@ end
 function sbq.eggify(id, i)
 	world.sendEntityMessage( sbq.sbqCurrentData.id, "eggify", id )
 end
+
+
+function sbq.infuseLocation(id, i)
+	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id )
+end
+
+function sbq.cockTF(id, i)
+	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id, {"shaft", "balls"} )
+end

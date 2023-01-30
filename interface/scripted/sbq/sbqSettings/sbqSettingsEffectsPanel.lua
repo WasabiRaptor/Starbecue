@@ -31,6 +31,7 @@ function sbq.checkTable(check, checked)
 	return true
 end
 
+local selectedLocationTab = 1
 sbq.drawSpecialButtons = {}
 function sbq.effectsPanel()
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations then return end
@@ -226,7 +227,7 @@ function sbq.effectsPanel()
 					}}
 				}
 			})
-			if i == 1 then
+			if i == selectedLocationTab then
 				sbq.selectedLocationTab = tab
 			end
 
@@ -277,6 +278,13 @@ function sbq.effectsPanel()
 			end
 			function infusedItemSlot:onItemModified()
 				sbq.changeGlobalSetting(location .. "InfusedItem", infusedItemSlot:item())
+				sbq.getPlayerSpeciesAndSettings()
+
+				--below would refresh the tab with the new settings from the infusion, but this CHUGS and feels bad so I won't
+				--selectedLocationTab = i
+				--sbq.effectsPanel()
+				--sbq.refreshButtons()
+				--locationTabField:pushEvent("tabChanged", sbq.selectedLocationTab, sbq.selectedLocationTab)
 			end
 
 			for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
@@ -466,8 +474,9 @@ function sbq.dropdownButton(button, settingname, list, func, overrides)
 end
 
 function sbq.infusionSlotAccepts(locationData, item)
-	local uniqueId = (((((item or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId
-	if uniqueId and ((not locationData.infusionAccepts) or locationData.infusionAccepts.characters) then
+	local npcParam = (((item or {}).parameters or {}).npcArgs or {}).npcParam
+	local uniqueId = (( npcParam or {}).scriptConfig or {}).uniqueId
+	if npcParam and ((not locationData.infusionAccepts) or locationData.infusionAccepts.characters) then
 		local preySettings = sbq.getItemPreySettings(item)
 		if not preySettings[locationData.infusionSetting or "undefined"] then return false end
 		if type((locationData.infusionAccepts or {}).characters) == "table" then

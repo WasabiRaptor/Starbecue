@@ -369,10 +369,10 @@
 					"swim": { "frames": 7, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 					"swimIdle": { "frames": 2, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 
-					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
 
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 }
 				}
@@ -389,12 +389,12 @@
 				},
 				"partStates": {
 					"cockState": {
-						"idle": { "properties": { "image": "<partImage>:<shaftOccupants>.<cockStateAnim>.<cockStateFrame>?addmask=<cockMask>:<shaftOccupants>.<cockStateAnim>.<cockStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<shaftOccupants>-<state>.<cockStateAnim>.<cockStateFrame>?addmask=<cockMask>:<shaftOccupants>-<state>.<cockStateAnim>.<cockStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<shaftOccupants>.<cockStateAnim>.<cockStateFrame>?addmask=<cockMask>:<direction>.<shaftOccupants>.<cockStateAnim>.<cockStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<shaftOccupants>-<state>.<cockStateAnim>.<cockStateFrame>?addmask=<cockMask>:<direction>-<shaftOccupants>-<state>.<cockStateAnim>.<cockStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<shaftOccupants>.<state>.<cockStateAnim>.<cockStateFrame>?addmask=<cockMask>:<shaftOccupants>.<state>.<cockStateAnim>.<cockStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<shaftOccupants>.<state>.idle.1?addmask=<cockMask>:<shaftOccupants>.<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<shaftOccupantsInterpolate>-<state>.<cockStateAnim>?addmask=<cockMask>:<shaftOccupantsInterpolate>-<state>.<cockStateAnim>;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<shaftOccupants>-<state>.idle.1?addmask=<cockMask>:<shaftOccupants>-<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><cockVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -412,12 +412,12 @@
 				},
 				"partStates": {
 					"cockState": {
-						"idle": { "properties": { "image": "<partImage>:<shaftOccupants>.<cockStateAnim>.<bodyPersonality><cosmeticDirectives><cockVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<shaftOccupants>-<state>.<cockStateAnim>.<cockStateFrame><cosmeticDirectives><cockVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<shaftOccupants>.<cockStateAnim>.<cockStateFrame><cosmeticDirectives><cockVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<shaftOccupants>-<state>.<cockStateAnim>.<cockStateFrame><cosmeticDirectives><cockVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<shaftOccupants>.<state>.<cockStateAnim>.<cockStateFrame><cosmeticDirectives><cockVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<shaftOccupants>.<state>.idle.1<cosmeticDirectives><cockVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<shaftOccupantsInterpolate>-<state>.<cockStateAnim><cosmeticDirectives><cockVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<shaftOccupants>-<state>.idle.1<cosmeticDirectives><cockVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}

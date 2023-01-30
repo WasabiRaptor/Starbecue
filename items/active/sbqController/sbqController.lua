@@ -281,7 +281,7 @@ function assignLocationActionSelect(data)
 
 	local locationData = sbqData.locations[data.selection]
 	for j, action in ipairs(locationData.preyActions or {}) do
-		if (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
+		if (not action.single) and (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
 			table.insert(options, {
 				name = action.script,
 				title = action.name

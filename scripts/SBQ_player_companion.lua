@@ -319,6 +319,23 @@ function init()
 		player.setProperty("sbqCumulativeData", cumData)
 	end)
 
+	message.setHandler("sbqReplaceInfusion", function(_, _, location, itemDrop, preyId, primaryLocation)
+		local sbqSettings = player.getProperty("sbqSettings") or {}
+		sbqSettings.global = sbqSettings.global or {}
+
+		local alreadyInfused = sbqSettings.global[location .. "InfusedItem"]
+		world.sendEntityMessage(player.id(), "sbqDigestStore", location, (((((alreadyInfused or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId, alreadyInfused)
+
+		sbqSettings.global[location .. "InfusedItem"] = itemDrop
+
+		player.setProperty( "sbqSettings", sbqSettings )
+		world.sendEntityMessage(player.id(), "sbqRefreshSettings", sbqSettings)
+		local current = player.getProperty("sbqCurrentData") or {}
+		if current and type(current.id) == "number" and world.entityExists(current.id) then
+			world.sendEntityMessage(current.id, "setInfusedCharacter", location, sbqSettings.global[location.."InfusedItem"], preyId, primaryLocation )
+		end
+	end)
+
 	if initStage < 1 then
 		function Recruit:_spawn(position, parameters)
 
