@@ -650,7 +650,8 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.settings.predDigestItemDrops}, sbq.driver or entity.id())
 
 	if sbq.settings[location.."Compression"] and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
-		sbq.occupant[i].sizeMultiplier = math.min(1, math.max(0.1, sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt)/100 ))
+		sbq.occupant[i].sizeMultiplier = math.min(1,
+			math.max(0.1, sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt * 0.01)))
 	end
 
 	local progressbarDx = 0

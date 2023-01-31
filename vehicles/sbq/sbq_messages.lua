@@ -249,7 +249,7 @@ message.setHandler("getOccupancyData", function()
 	return {occupant = sbq.getTrimmedOccupantData(), occupants = sbq.occupants, actualOccupants = sbq.actualOccupants}
 end)
 
-message.setHandler( "requestTransition", function (_,_, transition, args)
+message.setHandler("requestTransition", function(_, _, transition, args)
 	sbq.doTransition( transition, args )
 end)
 
@@ -335,6 +335,4 @@ message.setHandler( "setInfusedCharacter", function(_,_, location, item, eid, pr
 	sbq.lounging[eid].location = location
 	sbq.lounging[eid].sizeMultiplier = 0
 	sbq.lounging[eid].flags.infused = true
-
-
 end)

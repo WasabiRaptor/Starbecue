@@ -683,10 +683,10 @@
 					"swim": { "frames": 7, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 					"swimIdle": { "frames": 2, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 
-					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
 
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 }
 				}
@@ -703,12 +703,12 @@
 				},
 				"partStates": {
 					"breastsFrontState": {
-						"idle": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<breastsFrontStateAnim>.<breastsFrontStateFrame>?addmask=<breastsFrontMask>:<breastsFrontOccupants>.<breastsFrontStateAnim>.<breastsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame>?addmask=<breastsFrontMask>:<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<breastsFrontOccupants>.<breastsFrontStateAnim>.<breastsFrontStateFrame>?addmask=<breastsFrontMask>:<direction>.<breastsFrontOccupants>.<breastsFrontStateAnim>.<breastsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame>?addmask=<breastsFrontMask>:<direction>-<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame>?addmask=<breastsFrontMask>:<breastsFrontOccupants>.<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<state>.idle.1?addmask=<breastsFrontMask>:<breastsFrontOccupants>.<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<breastsFrontOccupantsInterpolate>-<state>.<breastsFrontStateAnim>?addmask=<breastsFrontMask>:<breastsFrontOccupantsInterpolate>-<state>.<breastsFrontStateAnim>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>-<state>.idle.1?addmask=<breastsFrontMask>:<breastsFrontOccupants>-<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -726,12 +726,12 @@
 				},
 				"partStates": {
 					"breastsFrontState": {
-						"idle": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<breastsFrontStateAnim>.<bodyPersonality><cosmeticDirectives><breastsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<breastsFrontOccupants>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<breastsFrontOccupantsInterpolate>-<state>.<breastsFrontStateAnim><cosmeticDirectives><breastsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>-<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -749,12 +749,12 @@
 				},
 				"partStates": {
 					"breastsFrontState": {
-						"idle": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<breastsFrontStateAnim>.<bodyPersonality><cosmeticDirectives><breastsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<breastsFrontOccupants>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<breastsFrontOccupants>-<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<state>.<breastsFrontStateAnim>.<breastsFrontStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>.<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<breastsFrontOccupantsInterpolate>-<state>.<breastsFrontStateAnim><cosmeticDirectives><breastsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<breastsFrontOccupants>-<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -791,10 +791,10 @@
 					"swim": { "frames": 7, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 					"swimIdle": { "frames": 2, "cycle": 0.50, "mode": "loop", "priority": 0, "baseAnim" : "idle" },
 
-					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "eat" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1, "baseAnim" : "idle" },
 
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 }
 				}
@@ -811,12 +811,12 @@
 				},
 				"partStates": {
 					"breastsBackState": {
-						"idle": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<breastsBackStateAnim>.<breastsBackStateFrame>?addmask=<breastsBackMask>:<breastsBackOccupants>.<breastsBackStateAnim>.<breastsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame>?addmask=<breastsBackMask>:<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<breastsBackOccupants>.<breastsBackStateAnim>.<breastsBackStateFrame>?addmask=<breastsBackMask>:<direction>.<breastsBackOccupants>.<breastsBackStateAnim>.<breastsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame>?addmask=<breastsBackMask>:<direction>-<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<state>.<breastsBackStateAnim>.<breastsBackStateFrame>?addmask=<breastsBackMask>:<breastsBackOccupants>.<state>.<breastsBackStateAnim>.<breastsBackStateFrame>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<state>.idle.1?addmask=<breastsBackMask>:<breastsBackOccupants>.<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<breastsBackOccupantsInterpolate>-<state>.<breastsBackStateAnim>?addmask=<breastsBackMask>:<breastsBackOccupantsInterpolate>-<state>.<breastsBackStateAnim>;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<breastsBackOccupants>-<state>.idle.1?addmask=<breastsBackMask>:<breastsBackOccupants>-<state>.idle.1;0;0<colorRemap><customDirectives><bodyDirectives><breastsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -834,12 +834,12 @@
 				},
 				"partStates": {
 					"breastsBackState": {
-						"idle": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<breastsBackStateAnim>.<bodyPersonality><cosmeticDirectives><breastsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<breastsBackOccupants>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<state>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<breastsBackOccupantsInterpolate>-<state>.<breastsBackStateAnim><cosmeticDirectives><breastsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<breastsBackOccupants>-<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -857,12 +857,12 @@
 				},
 				"partStates": {
 					"breastsBackState": {
-						"idle": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<breastsBackStateAnim>.<bodyPersonality><cosmeticDirectives><breastsVisible><directives>" } },
+						"idle": { "properties": { "image": "<partImage>:<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"walk": { "properties": { "image": "<partImage>:<direction>.<breastsBackOccupants>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
+						"walk": { "properties": { "image": "<partImage>:<direction>-<breastsBackOccupants>-<state>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
 
-						"eat": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<state>.<breastsBackStateAnim>.<breastsBackStateFrame><cosmeticDirectives><breastsVisible><directives>" } },
-						"dummyEat": { "properties": { "image": "<partImage>:<breastsBackOccupants>.<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
+						"eat": { "properties": { "image": "<partImage>:<breastsBackOccupantsInterpolate>-<state>.<breastsBackStateAnim><cosmeticDirectives><breastsVisible><directives>" } },
+						"dummyEat": { "properties": { "image": "<partImage>:<breastsBackOccupants>-<state>.idle.1<cosmeticDirectives><breastsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -942,7 +942,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.01,
-					"transformationGroups": ["breasts_offset", "breastscover", "chestbob", "globalOffset", "globalOffset2", "globalScale", "globalScale2", "globalRotation", "globalRotation2", "sitrotation", "sitrotation2"]
+					"transformationGroups": [ "breastscover", "chestbob", "globalOffset", "globalOffset2", "globalScale", "globalScale2", "globalRotation", "globalRotation2", "sitrotation", "sitrotation2"]
 				},
 				"partStates": {
 					"bodyState": {
@@ -976,7 +976,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.02,
-					"transformationGroups": ["breasts_offset", "breastscover", "chestbob", "globalOffset", "globalOffset2", "globalScale", "globalScale2", "globalRotation", "globalRotation2", "sitrotation", "sitrotation2"]
+					"transformationGroups": [ "breastscover", "chestbob", "globalOffset", "globalOffset2", "globalScale", "globalScale2", "globalRotation", "globalRotation2", "sitrotation", "sitrotation2"]
 				},
 				"partStates": {
 					"bodyState": {

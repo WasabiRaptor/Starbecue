@@ -1,4 +1,5 @@
 require("/items/active/sbqTransformation/sbqDuplicatePotion/sbqGetIdentity.lua")
+require("/scripts/rect.lua")
 
 function sbq.generateItemDrop(pred, flavorText, itemDrop)
 	local itemDrop = itemDrop

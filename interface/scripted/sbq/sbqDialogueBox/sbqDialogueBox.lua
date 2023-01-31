@@ -80,7 +80,6 @@ function update()
 	sbq.checkTimers(dt)
 	sbq.refreshData()
 	sbq.getOccupancy()
-	sbq.checkIfVored(dt)
 end
 
 function sbq.getOccupancy()
@@ -262,19 +261,25 @@ function sbq.checkVoreTypeActive(voreType)
 	local locationData = sbq.data.sbqData.locations[locationName]
 	if not locationData then return "hidden" end
 
+	local size = status.statusProperty("sbqSize") or 1
+
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if (--[[sbq.data.settings[voreType.."PredEnable"] or]] sbq.data.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
-		if sbq.data.settings[voreType.."Pred"] then
+		if sbq.data.settings[voreType.."Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
 			if type(sbq.data.occupantHolder) ~= "nil" and type(sbq.occupants) == "table" then
 				if sbq.occupants[locationName] == nil then return "hidden" end
-				if currentData.type == "driver" and ((not currentData.edible)
-					or not locationData.sided and(((sbq.occupants[locationName] + 1 + currentData.totalOccupants) > (sbq.data.settings[locationName.."VisualMax"] or locationData.max))) and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName.."HammerspaceDisabled"])
-					or locationData.sided and (
-						(((sbq.occupants[locationName.."L"] + 1 + currentData.totalOccupants) > (sbq.data.settings[locationName.."LVisualMax"] or locationData.max))) and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName.."LHammerspaceDisabled"])
-						or (((sbq.occupants[locationName.."R"] + 1 + currentData.totalOccupants) > (sbq.data.settings[locationName.."RVisualMax"] or locationData.max))) and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName.."RHammerspaceDisabled"])
-					)
+				local full = (
+					not locationData.sided
+					and ((sbq.occupants[locationName] + size) > (sbq.data.settings[locationName .. "VisualMax"] or locationData.max))
+					and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName .. "HammerspaceDisabled"])
 				)
-				then
+				local sidedFull = (
+					locationData.sided
+					and ((sbq.occupants[locationName.."L"] + size) > (sbq.data.settings[locationName .. "VisualMax"] or locationData.max))
+					and ((sbq.occupants[locationName.."R"] + size) > (sbq.data.settings[locationName .. "VisualMax"] or locationData.max))
+					and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName .. "HammerspaceDisabled"])
+				)
+				if full or sidedFull then
 					return "tooBig", locationName, locationData
 				elseif not locationData.sided and (sbq.occupants[locationName] >= (sbq.data.settings[locationName.."VisualMax"] or locationData.max))
 				or locationData.sided and (
@@ -328,29 +333,22 @@ function sbq.voreButton(voreType)
 		sbq.data.settings.doingVore = "before"
 		local dialogueTree = sbq.updateDialogueBox({ "vore" }) or {}
 		sbq.timer("eatMessage", dialogueTree.delay or 1.5, function ()
-			sbq.voring = true
-			sbq.voringDelay = dialogueTree.delay or 1.5
-			world.sendEntityMessage( sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType, { id =  player.id() } )
+			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType,
+				{ id = player.id() })
+			sbq.timer("gotVored", dialogueTree.delay or 1.5, function ()
+				for i, occpant in pairs(sbq.occupant or {}) do
+					if occpant.id == player.id() then
+						sbq.data.settings.doingVore = "after"
+						sbq.updateDialogueBox({ "vore" })
+						return
+					end
+				end
+				sbq.data.settings.getVoreButtonAction = "notFeelingIt"
+				sbq.updateDialogueBox({ "vore" })
+			end)
 		end)
 	else
 		sbq.updateDialogueBox({ "vore" })
-	end
-end
-
-
-function sbq.checkIfVored(dt)
-	if sbq.voring then
-		sbq.voringDelay = math.max(0, sbq.voringDelay - dt)
-		if sbq.voringDelay <= 0 then
-			sbq.voring = false
-			for i, occpant in pairs(sbq.occupant or {}) do
-				if occpant.id == player.id() then
-					sbq.data.settings.doingVore = "after"
-					sbq.updateDialogueBox({ "vore" })
-					break
-				end
-			end
-		end
 	end
 end
 

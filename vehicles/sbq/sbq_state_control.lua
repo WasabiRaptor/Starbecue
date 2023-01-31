@@ -57,14 +57,20 @@ sbq.movementLock = false
 
 function sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, preyList)
 	if not world.entityExists(preyList[preyIndex]) then
-		animator.playSound("error")
-		return
+		if preyIndex >= #preyList then
+			sbq.doingTransition(tconfig, direction, scriptargs)
+		else
+			preyIndex = preyIndex + 1
+			sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, preyList)
+		end
 	end
 	sbq.addRPC(world.sendEntityMessage(preyList[preyIndex], "sbqIsPreyEnabled", tconfig.voreType), function(enabled)
 		if enabled and enabled.enabled then
 			if enabled.preyList then
 				for _, prey in ipairs(enabled.preyList) do
 					if prey == sbq.driver then
+						sb.logInfo("or maybe here?")
+
 						animator.playSound("error")
 						return
 					end
@@ -84,19 +90,21 @@ function sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, pre
 				sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, preyList)
 			end
 		else
+			sb.logInfo("or here?")
+
 			animator.playSound("error")
 		end
 	end)
 end
 
-function sbq.doTransition(direction, scriptargs)
+function sbq.doTransition(direction, scriptargs, log)
 	local scriptargs = scriptargs or {}
-	if (not sbq.stateconfig or not sbq.stateconfig[sbq.state].transitions[direction]) then return "no data" end
-	if sbq.transitionLock then return "locked" end
+	if (not sbq.stateconfig or not sbq.stateconfig[sbq.state].transitions[direction]) then return end
+	if sbq.transitionLock then return end
 	local tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction])
-	if tconfig == nil then return "no data" end
+	if tconfig == nil then return end
 	if tconfig.settings then
-		if not sbq.checkSettings(tconfig.settings) then return "script fail" end
+		if not sbq.checkSettings(tconfig.settings) then return end
 	end
 	local id = sbq.getTransitionVictimId(scriptargs, tconfig)
 
@@ -120,7 +128,7 @@ function sbq.doTransition(direction, scriptargs)
 end
 
 function sbq.doingTransition(tconfig, direction, scriptargs)
-	if sbq.transitionLock then return "locked" end
+	if sbq.transitionLock then return end
 	local continue = true
 	local after
 
@@ -143,7 +151,7 @@ function sbq.doingTransition(tconfig, direction, scriptargs)
 		sbq.expandQueue = sb.jsonMerge(sbq.shrinkQueue, tconfig.expandAnims)
 	end
 
-	if not continue then return "script fail" end
+	if not continue then return end
 
 	if tconfig.timing == nil then
 		tconfig.timing = "body"
@@ -219,7 +227,7 @@ function sbq.doingTransition(tconfig, direction, scriptargs)
 			sbq.logError("Victim Animations MUST use a timing value from an animation part")
 		end
 	end
-	return "success", timing
+	return true, timing
 end
 
 function sbq.getTransitionVictimId(scriptargs, tconfig)
