@@ -456,6 +456,13 @@ function sbq.setOccupantTags()
 
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
+		sbq.randomTimer(location.."InfusedStruggle", 15, 60, function ()
+			sbq.doLocationStruggle(location, data)
+		end)
+		sbq.randomTimer(location.."InfusedStruggleDialogue", 15, 60, function ()
+			sbq.doInfusedStruggleDialogue(location, data)
+			sbq.doLocationStruggle(location, data)
+		end)
 
 		if data.sided then
 			if sbq.settings[location.."Symmetrical"] or data.symmetrical then -- for when people want their balls and boobs to be the same size
@@ -760,10 +767,24 @@ function sbq.validStruggle(struggler, dt)
 	if not (sbq.occupant[struggler].bellySettleDownTimer <= 0) then return end
 	if not movedir then sbq.occupant[struggler].struggleTime = math.max( 0, sbq.occupant[struggler].struggleTime - dt) return end
 
+	if sbq.config.speciesStrugglesDisabled[config.getParameter("name")] then
+		if sbq.isNested then return end
+	else
+		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or (sbq.occupant[struggler].flags.digested or sbq.occupant[struggler].flags.infused) then
+			if not sbq.driving or world.entityType(sbq.driver) == "npc" then
+				sbq.occupant[struggler].struggleTime = math.max(0, sbq.occupant[struggler].struggleTime + dt)
+				if sbq.occupant[struggler].struggleTime > 1 then
+					sbq.letout(sbq.occupant[struggler].id)
+				end
+			end
+			return
+		end
+	end
+
 	local struggling
 	struggledata = sbq.stateconfig[sbq.state].struggle[(sbq.occupant[struggler].location or "")..(sbq.occupant[struggler].locationSide or "")]
 
-	if (struggledata == nil or struggledata.directions == nil or struggledata.directions[movedir] == nil) then return end
+	if (sbq.occupant[struggler].flags.digested or sbq.occupant[struggler].flags.infused) or (struggledata == nil or struggledata.directions == nil or struggledata.directions[movedir] == nil) then return end
 
 	if struggledata.parts ~= nil then
 		struggling = sbq.partsAreStruggling(struggledata.parts)
@@ -777,20 +798,6 @@ function sbq.validStruggle(struggler, dt)
 	end
 
 	if struggling then return end
-
-	if sbq.config.speciesStrugglesDisabled[config.getParameter("name")] then
-		if sbq.isNested then return end
-	else
-		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or sbq.occupant[struggler].flags.digested then
-			if not sbq.driving or world.entityType(sbq.driver) == "npc" then
-				sbq.occupant[struggler].struggleTime = math.max(0, sbq.occupant[struggler].struggleTime + dt)
-				if sbq.occupant[struggler].struggleTime > 1 then
-					sbq.letout(sbq.occupant[struggler].id)
-				end
-			end
-			return
-		end
-	end
 
 	return movedir, struggledata
 end

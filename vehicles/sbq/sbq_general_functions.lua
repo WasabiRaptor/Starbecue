@@ -1,6 +1,9 @@
+dialogueBoxScripts = {}
+
 require("/scripts/poly.lua")
 require("/scripts/rect.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")
 
 function sbq.logJson(...)
 	sbq.logInfo(sb.printJson(...))
@@ -433,4 +436,10 @@ function sbq.getClosestValue(x, list)
 		end
 	end
 	return closest, closestKey
+end
+
+function sbq.doInfusedStruggleDialogue(location, data)
+end
+
+function sbq.doLocationStruggle(location, data, movedir, side)
 end
