@@ -100,7 +100,22 @@ message.setHandler("sbqSetInfusedPartColors", function(_, _, partname, item)
 			end
 		end
 	end
-	setPartImage(partname, part, colorRemap)
+	--[[
+	baseColorMap = (self.speciesFile or {}).baseColorMap
+	remapColors = ((self.speciesData.remapParts or {})[partname] or {}).infusedRemap
+
+	if colorRemap and baseColorMap and remapColors then
+		for _, data in ipairs(remapColors) do
+			local from = baseColorMap[data[1] ]
+			local to = speciesFile.baseColorMap[data[2] ]
+			for i, color in ipairs(from or {}) do
+				colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+			end
+		end
+	end
+	]]
+
+	setPartImage(partname, part, colorRemap, (identity.bodyDirectives or "")..(identity.hairDirectives or ""))
 end)
 
 

@@ -12,7 +12,7 @@ function sbq.unForceSeat(occupantId)
 end
 
 function sbq.eat( occupantId, location, size, voreType, locationSide, force )
-	local seatindex = sbq.occupants.total + sbq.startSlot
+	local seatindex = math.floor(sbq.occupants.total + sbq.startSlot)
 	if seatindex > sbq.occupantSlots then return false end
 	local locationSpace = sbq.locationSpaceAvailable(location, locationSide)
 	if locationSpace < ((size or 1) * (sbq.settings[location.."Multiplier"] or 1)) then return false end
@@ -74,7 +74,7 @@ function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationS
 	sbq.occupant[seatindex].size = size or 1
 	sbq.occupant[seatindex].entryType = voreType
 	world.sendEntityMessage( occupantId, "sbqMakeNonHostile")
-	sbq.forceSeat( occupantId, seatindex)
+	sbq.forceSeat( occupantId, seatindex )
 	sbq.refreshList = true
 end
 
@@ -193,7 +193,7 @@ function sbq.locationVisualSize(location, side)
 			locationSize = sbq.occupants[location..(side or "L")]
 		end
 	end
-	local minMaxed = math.max((sbq.settings[location .. "VisualMin"] or data.minVisual or 0),
+	local minMaxed = math.max(math.max(((sbq.settings[location .. "VisualMin"] or 0) + ( (sbq.settings[location.."InfusedSize"] and ((((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).preySize or 0) * (sbq.settings[location.."InfusedMultiplier"] or 0.5))) or 0 ) ), data.minVisual or 0),
 		math.min((locationSize / sbq.predScale), sbq.settings[location .. "VisualMax"] or data.maxVisual or data.max or
 			math.huge))
 
@@ -431,7 +431,9 @@ sbq.shrinkQueue = {}
 
 function sbq.setOccupantTags()
 	for location, occupancy in pairs(sbq.occupants) do
-		sbq.actualOccupants[location] = occupancy
+		sbq.occupants[location] = sbq.occupants[location] + (sbq.settings[location.."VisualMinAdditive"] and sbq.settings[location.."VisualMin"] or 0)
+		sbq.occupants[location] = sbq.occupants[location] + ((sbq.settings[location.."InfusedSizeAdditive"] and ((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).preySize or 0) * (sbq.settings[location.."InfusedMultiplier"] or 0.5))
+		sbq.actualOccupants[location] = sbq.occupants[location]
 	end
 	-- because of the fact that pairs feeds things in a random ass order we need to make sure these have tripped on every location *before* setting the occupancy tags or checking the expand/shrink queue
 	for location, data in pairs(sbq.sbqData.locations) do

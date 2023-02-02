@@ -137,9 +137,10 @@ function sbq.effectsPanel()
 				{ type = "layout", mode = "vertical", spacing = 0, children = {
 					{type = "label", text = "Size Modifiers", align = "center"},
 					{
-						{ type = "textBox", align = "center", id = location .. "VisualMin", toolTip = "Minimum Visual Occupancy"},
-						{ type = "textBox", align = "center", id = location .. "VisualMax", toolTip = "Maximum Visual Occupancy"},
-						{ type = "textBox", align = "center", id = location .. "Multiplier", toolTip = "Occupant Size Multiplier"},
+						{ type = "textBox", align = "center", id = location .. "VisualMin", toolTip = "Minimum Fill level" },
+						{ type = "checkBox", id = location .. "VisualMinAdditive", checked = sbq.predatorSettings[location .. "VisualMinAdditive"], toolTip = "Whether the Minimum actually counts towards the fill level." },
+						{ type = "textBox", align = "center", id = location .. "VisualMax", toolTip = "Maximum Fill level"},
+						{ type = "textBox", align = "center", id = location .. "Multiplier", toolTip = "Fill Level Multiplier"},
 					},
 					{
 						{ type = "checkBox", id = location .. "HammerspaceDisabled",
@@ -155,21 +156,28 @@ function sbq.effectsPanel()
 					}
 				}}
 			} }
-			local difficultyMod = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,1}, children = {
+			local difficultyMod = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {0,1}, size = {50, 30}, children = {
 				{ type = "layout", mode = "vertical", spacing = 0, children = {
 					{type = "label", text = "Difficulty", align = "center"},
 					{ type = "textBox", align = "center", id = location .. "DifficultyMod", toolTip = "Make this location easier or harder relative to the main difficulty."},
 				}}
 			} }
 			local InfusionPanel = { type = "panel", style = "flat", expandMode = {1,1}, visible = locationData.infusion or false, children = {
-				{ type = "layout", mode = "vertical", spacing = 0, children = {
+				{ type = "layout", mode = "vertical", spacing = -2, children = {
 					{type = "label", text = "Infusion", align = "center"},
 					{
-						{ expandMode = {0,0} },
-						{ type = "itemSlot", autoInteract = true, id = location .. "InfusedItem",
-							item = sbq.predatorSettings[location .. "InfusedItem"] },
-						{ type = "checkBox", id = location .. "InfusedVisual", checked = sbq.predatorSettings[location .. "InfusedVisual"],
-							toolTip = "Change colors to match infused character if applicable.", visible = locationData.infusedVisual or false },
+						{ expandMode = {0,0}, spacing = -2, },
+						{ type = "itemSlot", autoInteract = true, id = location .. "InfusedItem", item = sbq.predatorSettings[location .. "InfusedItem"] },
+						{
+							{ mode = "h", spacing = -2 },
+							{ type = "checkBox", id = location .. "InfusedVisual", checked = sbq.predatorSettings[location .. "InfusedVisual"], toolTip = "Change colors to match infused character if applicable.", visible = locationData.infusedVisual or false },
+							{
+								{ spacing = -2, expandMode = {0,0}, },
+								{ type = "checkBox", id = location .. "InfusedSize", checked = sbq.predatorSettings[location .. "InfusedSize"], toolTip = "Add infused character's size if applicable." },
+								{ type = "checkBox", id = location .. "InfusedSizeAdditive", checked = sbq.predatorSettings[location .. "InfusedSizeAdditive"], toolTip = "If adding a character's size, make it count towards the fill level." },
+							},
+							{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", toolTip = "Size Multiplier on Infused Characters if size is being added."},
+						}
 					}
 				}}
 			} }
@@ -357,7 +365,17 @@ function sbq.effectsPanel()
 			function difficultyTextbox:onTextChanged() sbq.numberBoxColor(self, sbq.overrideSettings[location.."DifficultyModMin"], sbq.overrideSettings[location.."DifficultyModMax"]) end
 			function difficultyTextbox:onEscape() self:onEnter() end
 			function difficultyTextbox:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			sbq.numberBoxColor(difficultyTextbox, sbq.overrideSettings[location.."DifficultyModMin"], sbq.overrideSettings[location.."DifficultyModMax"])
+			sbq.numberBoxColor(difficultyTextbox, sbq.overrideSettings[location .. "DifficultyModMin"],
+				sbq.overrideSettings[location .. "DifficultyModMax"])
+
+			local InfusionMultiplier = _ENV[location .. "InfusedMultiplier"]
+
+			InfusionMultiplier:setText(tostring(sbq.overrideSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings[location .. "InfusedMultiplier"] or 0.5))
+			function InfusionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
+			function InfusionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+			function InfusionMultiplier:onEscape() self:onEnter() end
+			function InfusionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+			sbq.numberBoxColor(InfusionMultiplier, 0)
 		end
 	end
 end
@@ -396,6 +414,9 @@ function sbq.locationDefaultSettings(locationData,location)
 	sbq.globalSettings[location.."Compression"] = sbq.globalSettings[location.."Compression"] or false
 	sbq.globalSettings[location.."Sounds"] = sbq.globalSettings[location.."Sounds"] or false
 	sbq.globalSettings[location .. "InfusedVisual"] = sbq.globalSettings[location .. "InfusedVisual"] or false
+	sbq.globalSettings[location .. "InfusedSize"] = sbq.globalSettings[location .. "InfusedSize"] or false
+	sbq.globalSettings[location .. "InfusedSizeAdditive"] = sbq.globalSettings[location .. "InfusedSizeAdditive"] or false
+	sbq.globalSettings[location .. "VisualMinAdditive"] = sbq.globalSettings[location .. "VisualMinAdditive"] or false
 end
 
 local map = {
