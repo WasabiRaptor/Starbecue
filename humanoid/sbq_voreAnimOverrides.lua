@@ -93,10 +93,17 @@ message.setHandler("sbqSetInfusedPartColors", function(_, _, partname, item)
 	if success2 and baseColorMap ~= nil and remapPart.remapColors and speciesFile.baseColorMap then
 		colorRemap = "?replace"
 		for _, data in ipairs(remapPart.remapColors) do
-			local from = baseColorMap[data[1]]
-			local to = speciesFile.baseColorMap[data[2]]
-			for i, color in ipairs(from or {}) do
-				colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+			if not data[1] then
+				for color, replace in pairs(data or {}) do
+					colorRemap = colorRemap .. ";" .. color .. "=" .. replace
+				end
+				colorRemap = colorRemap .. "?replace"
+			else
+				local from = baseColorMap[data[1]]
+				local to = speciesFile.baseColorMap[data[2]]
+				for i, color in ipairs(from or {}) do
+					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+				end
 			end
 		end
 	end
