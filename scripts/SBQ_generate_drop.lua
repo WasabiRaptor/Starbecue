@@ -34,7 +34,8 @@ function sbq.generateItemDrop(pred, flavorText, itemDrop)
 				wasPlayer = preyType == "player",
 				identity = identity,
 				scriptConfig = {
-					uniqueId = itemDrop.parameters.preyUUID
+					uniqueId = itemDrop.parameters.preyUUID,
+					sbqSettings = status.statusProperty("sbqSettings")
 				},
 				statusControllerSettings = {
 					statusProperties = {

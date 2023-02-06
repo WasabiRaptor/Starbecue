@@ -456,13 +456,20 @@ function sbq.setOccupantTags()
 
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
-		sbq.randomTimer(location.."InfusedStruggle", 15, 60, function ()
-			sbq.doLocationStruggle(location, data)
-		end)
-		sbq.randomTimer(location.."InfusedStruggleDialogue", 15, 60, function ()
-			sbq.doInfusedStruggleDialogue(location, data)
-			sbq.doLocationStruggle(location, data)
-		end)
+		local npcArgs = ((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).npcArgs
+		if npcArgs then
+			sbq.randomTimer(location.."InfusedStruggle", 15, 60, function ()
+				sbq.doLocationStruggle(location, data)
+			end)
+			sbq.randomTimer(location.."InfusedStruggleDialogue", 15, 60, function ()
+				local dialogue = sbq.getNPCDialogue({ "struggling" }, location, data, npcArgs) -- this will change to its own part of the tree
+				if dialogue then
+					dialogue = npcArgs.npcParam.identity.name..":\n"..dialogue
+				end
+				sbq.logInfo(dialogue)
+				sbq.doLocationStruggle(location, data)
+			end)
+		end
 
 		if data.sided then
 			if sbq.settings[location.."Symmetrical"] or data.symmetrical then -- for when people want their balls and boobs to be the same size

@@ -101,8 +101,8 @@ function init()
 		sbq.dialogueBoxOpen = 0.5
 		return { occupantHolder = sbq.occupantHolder }
 	end)
-	message.setHandler("sbqSay", function (_,_, string, tags, imagePortrait, emote)
-		sbq.say(string, tags, imagePortrait, emote)
+	message.setHandler("sbqSay", function (_,_, string, tags, imagePortrait, emote, appendName)
+		sbq.say(string, tags, imagePortrait, emote, appendName)
 	end)
 	message.setHandler("sbqSetInteracted", function (_,_, id)
 		self.interacted = true
@@ -134,10 +134,10 @@ function init()
 		settings.locationsData = sbq.speciesConfig.sbqData.locations
 		if getVictimPreySettings then
 			sbq.addRPC(world.sendEntityMessage(entity, "sbqGetPreyEnabled" ), function (sbqPreyEnabled)
-				sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings or {})))
+				sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings or {})) )
 			end)
 		else
-			sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(settings, sb.jsonMerge({personality = storage.settings.personality, mood = storage.settings.mood}, status.statusProperty("sbqPreyEnabled") or {})))
+			sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(settings, sb.jsonMerge({personality = storage.settings.personality, mood = storage.settings.mood}, status.statusProperty("sbqPreyEnabled") or {})), nil, true)
 		end
 	end)
 	message.setHandler( "sbqLoadSettings", function(_,_, menuName )
@@ -300,9 +300,9 @@ function sbq.getOccupantArg(id, arg)
 	end
 end
 
-function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings)
+function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree, appendName)
 	settings.race = npc.species()
-	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid)
+	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
 	if not dialogueTree then return false end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
@@ -329,13 +329,16 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings)
 	local tags = { entityname = playerName, dontSpeak = "", infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
 
 	if type(randomDialogue) == "string" then
-		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote)
+		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote, appendName)
 		return true
 	end
 end
 
-function sbq.say(string, tags, imagePortrait, emote)
+function sbq.say(string, tags, imagePortrait, emote, appendName)
 	if type(string) == "string" and string ~= "" and not string:find("<dontSpeak>") then
+		if appendName then
+			string = world.entityName(entity.id())..":\n"..string
+		end
 		local options = {sound = randomChatSound()}
 		if type(imagePortrait) == "string" and config.getParameter("sayPortrait") then
 			npc.sayPortrait(string, imagePortrait, tags, options)
@@ -436,6 +439,9 @@ function sbq.setRelevantPredSettings()
 	elseif not sbq.occupantHolder and not speciesAnimOverrideData.permanent then
 		status.clearPersistentEffects("speciesAnimOverride")
 	end
+
+	status.setStatusProperty("sbqSettings", storage.settings)
+
 	sbq.updateCosmeticSlots()
 end
 

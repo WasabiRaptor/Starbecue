@@ -10,11 +10,11 @@ function sbq.logJson(...)
 end
 
 function sbq.logError(arg)
-	sb.logError("["..world.entityName(entity.id()).."]"..arg)
+	sb.logError("["..world.entityName(entity.id()).."]"..tostring(arg))
 end
 
 function sbq.logInfo(arg)
-	sb.logInfo("["..world.entityName(entity.id()).."]"..arg)
+	sb.logInfo("["..world.entityName(entity.id()).."]"..tostring(arg))
 end
 
 
@@ -384,8 +384,6 @@ function sbq.initLocationEffects()
 			end
 			sbq.settings[location.."Effect"] = effect
 		end
-
-
 	end
 end
 
@@ -423,6 +421,20 @@ function sbq.trimOccupantData(occupant)
 	return trimmedData
 end
 
+function sbq.loadNPCConfig(npcArgs)
+	local uniqueId = ((((npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId)
+	if uniqueId then
+		local success, npcConfig = pcall(root.npcConfig, npcArgs.npcType)
+		if not success then
+			npcConfig = npcArgs.npcParam
+		else
+			npcConfig = sb.jsonMerge(npcConfig, npcArgs.npcParam)
+		end
+		sbq.npcConfigs[uniqueId] = npcConfig
+		return npcConfig
+	end
+end
+
 function sbq.getClosestValue(x, list)
 	local closest
 	local closestKey
@@ -438,7 +450,60 @@ function sbq.getClosestValue(x, list)
 	return closest, closestKey
 end
 
-function sbq.doInfusedStruggleDialogue(location, data)
+function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTree)
+	local dialogueTreeTop = dialogueTree
+	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
+	if not dialogueTree then return false end
+	recursionCount = 0 -- since we successfully made it here, reset the recursion count
+
+	local randomRolls = {}
+	local randomDialogue = dialogueTree.randomDialogue
+	local randomPortrait = dialogueTree.randomPortrait
+	local randomEmote = dialogueTree.randomEmote
+
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
+
+	local imagePortrait
+	if not npcConfig.scriptConfig.entityPortrait then
+		imagePortrait = ((npcConfig.scriptConfig.portraitPath or "")..(randomPortrait or npcConfig.scriptConfig.defaultPortrait))
+	end
+
+	local playerName
+
+	if type(eid) == "number" then
+		playerName = world.entityName(eid)
+	end
+
+	local tags = { entityname = playerName, dontSpeak = "", infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+
+	if type(randomDialogue) == "string" then
+		return sb.replaceTags(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags), imagePortrait
+	end
+end
+
+sbq.npcConfigs = {}
+sbq.npcOccupantData = {}
+
+function sbq.getNPCDialogue(dialogueStart, location, data, npcArgs)
+	local npcConfig = sbq.npcConfigs[npcArgs.npcParam.scriptConfig.uniqueId]
+	if not npcConfig then
+		npcConfig = sbq.loadNPCConfig(npcArgs)
+	end
+	if not npcConfig then return end
+	local occupantData = sbq.npcOccupantData[npcArgs.npcParam.scriptConfig.uniqueId] or {}
+
+	local dialogueTree = npcConfig.scriptConfig.dialogueTree
+	local preyEnabled = ((((npcConfig or {}).statusControllerSettings or {}).statusProperties or {}).sbqPreyEnabled or {})
+	local occupancyData = sb.jsonMerge(sb.jsonMerge( sbq.config.defaultSettings, occupantData.visited or {}), sb.jsonMerge(occupantData.flags, {
+		predator = sbq.species,
+		location = location,
+		race = npcArgs.npcSpecies
+	}))
+	local settings = sb.jsonMerge(sbq.settings, sb.jsonMerge({ personality = (npcConfig.scriptConfig.sbqSettings or {}).personality, mood = (npcConfig.scriptConfig.sbqSettings or {}).mood }, sb.jsonMerge(preyEnabled, occupancyData)))
+
+	return sbq.getRandomDialogue(npcConfig, dialogueStart, sbq.spawner, settings, dialogueTree)
 end
 
 function sbq.doLocationStruggle(location, data, movedir, side)

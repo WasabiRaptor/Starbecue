@@ -12,22 +12,26 @@ function sbq.generateKeysmashes(input, lengthMin, lengthMax)
 	end)
 end
 
-function sbq.getDialogueBranch(dialogueTreeLocation, settings, entity, dialogueTree)
-	local dialogueTree = sbq.getRedirectedDialogue(dialogueTree or sbq.dialogueTree, settings) or {}
+function sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree, dialogueTreeTop)
+	local dialogueTree = sbq.getRedirectedDialogue(dialogueTree or sbq.dialogueTree, settings, eid, dialogueTreeTop) or {}
+	local dialogueTreeTop = dialogueTreeTop or dialogueTree
 
 	for _, branch in ipairs(dialogueTreeLocation) do
-		dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, branch, entity)
+		dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, branch, eid, dialogueTreeTop)
 	end
 
 	local continue = true
 	while continue and type(dialogueTree) == "table" do
 		continue = false
-		local nextType = type(dialogueTree.next)
-		if nextType == "string" then
-			dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, dialogueTree.next, entity)
-			continue = true
-		elseif nextType == "table" then
-			dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, dialogueTree.next[math.random(#dialogueTree.next)], entity)
+		local next
+		if type(dialogueTree.next) == "string" then
+			next = dialogueTree.next
+		elseif type(next) == "table" then
+			next = dialogueTree.next[math.random(#dialogueTree.next)]
+		end
+		if next then
+			--sb.logInfo(next)
+			dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, next, eid, dialogueTreeTop)
 			continue = true
 		end
 	end
@@ -35,26 +39,26 @@ function sbq.getDialogueBranch(dialogueTreeLocation, settings, entity, dialogueT
 	return dialogueTree
 end
 
-function sbq.checkDialogueBranch(dialogueTree, settings, branch, entity)
+function sbq.checkDialogueBranch(dialogueTree, settings, branch, eid, dialogueTreeTop)
 	local dialogueTree = dialogueTree
 	if type(dialogueTree) == "table" then
 		-- if we are moving down the tree its nice to have it automatically set a point to return to as we move past it
 		sbq.dialogueTreeReturn = dialogueTree.dialogueTreeReturn or sbq.dialogueTreeReturn
 
 		if type(dialogueBoxScripts[branch]) == "function" then
-			dialogueTree = dialogueBoxScripts[branch](dialogueTree, settings, branch, entity)
+			dialogueTree = dialogueBoxScripts[branch](dialogueTree, settings, branch, eid)
 		elseif settings[branch] ~= nil then
 			dialogueTree = dialogueTree[tostring(settings[branch])] or dialogueTree[branch] or dialogueTree.default
 		else
 			dialogueTree = dialogueTree[branch]
 		end
 	end
-	return sbq.getRedirectedDialogue(dialogueTree, settings, entity)
+	return sbq.getRedirectedDialogue(dialogueTree, settings, eid, dialogueTreeTop)
 end
 
 local recursionCount = 0
 -- for dialog in other files thats been pointed to
-function sbq.getRedirectedDialogue(dialogueTree, settings, entity)
+function sbq.getRedirectedDialogue(dialogueTree, settings, eid, dialogueTreeTop)
 	local dialogueTree = dialogueTree
 	if type(dialogueTree) == "string" then
 		local firstChar = dialogueTree:sub(1,1)
@@ -71,13 +75,13 @@ function sbq.getRedirectedDialogue(dialogueTree, settings, entity)
 			table.insert(jump, dialogueTree)
 			if recursionCount > 10 then return {} end -- protection against possible infinite loops of recusion
 			recursionCount = recursionCount + 1
-			dialogueTree = sbq.getDialogueBranch(jump, settings, entity)
+			dialogueTree = sbq.getDialogueBranch(jump, settings, eid, dialogueTreeTop, dialogueTreeTop)
 		end
 	end
 	return dialogueTree or {}
 end
 
-function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomTable, name)
+function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomTable, name, dialogueTreeTop)
 	local randomRolls = randomRolls
 	local randomTable = randomTable
 	local badRolls = {}
@@ -88,13 +92,13 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 			if randomTable.check then
 				if sbq.checkSettings(randomTable.check, settings) then
 					if type(randomTable.add) == "string" then
-						randomTable = sbq.getRedirectedDialogue(randomTable.add, settings)[name]
+						randomTable = sbq.getRedirectedDialogue(randomTable.add, settings, nil, dialogueTreeTop)[name]
 					else
 						randomTable = randomTable.add
 					end
 				elseif randomTable.fail ~= nil then
 					if type(randomTable.fail) == "string" then
-						randomTable = sbq.getRedirectedDialogue(randomTable.fail, settings)[name]
+						randomTable = sbq.getRedirectedDialogue(randomTable.fail, settings, nil, dialogueTreeTop)[name]
 					else
 						randomTable = randomTable.fail
 					end
@@ -106,7 +110,7 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 				end
 			else
 				if type((randomTable or {}).add) == "string" then
-					randomTable = sbq.getRedirectedDialogue((randomTable or {}).add, settings)[name]
+					randomTable = sbq.getRedirectedDialogue((randomTable or {}).add, settings, nil, dialogueTreeTop)[name]
 				else
 					randomTable = (randomTable or {}).add
 				end
@@ -124,7 +128,7 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 					randomTable = randomTable.default
 				end
 				if type(randomTable) == "string" then
-					randomTable = sbq.getRedirectedDialogue(randomTable, settings)[name]
+					randomTable = sbq.getRedirectedDialogue(randomTable, settings, nil, dialogueTreeTop)[name]
 				end
 			else
 				i = i - 1
@@ -181,7 +185,7 @@ function sbq.checkTable(check, checked)
 end
 
 
-function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, eid, ...)
 	local dialogueTree = dialogueTree
 	local options = {}
 	local effect = settings[(dialogueTree.location or settings.location).."Effect"]
@@ -211,7 +215,7 @@ function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, en
 	return dialogueTree[options[math.random(#options)]] or dialogueTree.default
 end
 
-function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, ...)
 	local dialogueTree = dialogueTree
 	local effect = settings[(dialogueTree.location or settings.location).."Effect"]
 	if settings.digested then
@@ -224,7 +228,7 @@ function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, entit
 	return dialogueTree[effect] or dialogueTree.default
 end
 
-function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, eid, ...)
 	if (not settings.digestAllow) and (settings.softDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.digestAllow) then
@@ -234,7 +238,7 @@ function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, entit
 	end
 end
 
-function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, eid, ...)
 	if (not settings.cumDigestAllow) and (settings.cumSoftDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.cumDigestAllow) then
@@ -244,7 +248,7 @@ function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, en
 	end
 end
 
-function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch, eid, ...)
 	if (not settings.femcumDigestAllow) and (settings.femcumSoftDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.femcumDigestAllow) then
@@ -254,7 +258,7 @@ function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch,
 	end
 end
 
-function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, eid, ...)
 	if (not settings.milkDigestAllow) and (settings.milkSoftDigestAllow and settings[(dialogueTree.location or settings.location).."EffectSlot"] == "softDigest") then
 		return dialogueTree["false"] or dialogueTree.default
 	elseif (not settings.milkDigestAllow) then
@@ -264,25 +268,25 @@ function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, e
 	end
 end
 
-function dialogueBoxScripts.openNewDialogueBox(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.openNewDialogueBox(dialogueTree, settings, branch, eid, ...)
 	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogueTree.inputData), gui = { }, scripts = {"/metagui.lua"}, ui = dialogueTree.ui }, pane.sourceEntity())
 	pane.dismiss()
 end
 
-function dialogueBoxScripts.isOwner(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.isOwner(dialogueTree, settings, branch, eid, ...)
 	local result = false
-	if entity then
-		local uuid = world.entityUniqueId(entity)
+	if eid then
+		local uuid = world.entityUniqueId(eid)
 		result = uuid ~= nil and uuid == settings.ownerUuid
 	end
 	return dialogueTree[tostring(result) or "false"]
 end
 
-function dialogueBoxScripts.dismiss(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.dismiss(dialogueTree, settings, branch, eid, ...)
 	pane.dismiss()
 end
 
-function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, eid, ...)
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqSwapFollowing"), function(data)
 		if data and data[1] then
 			if data[1] == "None" then
@@ -305,7 +309,7 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, entity
 	return {}
 end
 
-function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, eid, ...)
 	if (((settings[(dialogueTree.location or settings.location).."InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil then
 		local uniqueID = settings[(dialogueTree.location or settings.location) .. "InfusedItem"].parameters.npcArgs.npcParam.scriptConfig.uniqueId
 		if dialogueTree[uniqueID] then
@@ -317,7 +321,7 @@ function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, ent
 	return dialogueTree.default
 end
 
-function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, entity, ...)
+function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, eid, ...)
 	if player ~= nil then
 		local uuid = world.entityUniqueId(pane.sourceEntity())
 		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
