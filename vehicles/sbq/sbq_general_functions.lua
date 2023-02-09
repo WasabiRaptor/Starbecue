@@ -487,12 +487,13 @@ sbq.npcConfigs = {}
 sbq.npcOccupantData = {}
 
 function sbq.getNPCDialogue(dialogueStart, location, data, npcArgs)
-	local npcConfig = sbq.npcConfigs[npcArgs.npcParam.scriptConfig.uniqueId]
+	local uniqueId = npcArgs.npcParam.scriptConfig.uniqueId
+	local npcConfig = sbq.npcConfigs[uniqueId]
 	if not npcConfig then
 		npcConfig = sbq.loadNPCConfig(npcArgs)
 	end
 	if not npcConfig then return end
-	local occupantData = sbq.npcOccupantData[npcArgs.npcParam.scriptConfig.uniqueId] or {}
+	local occupantData = sbq.npcOccupantData[uniqueId] or {}
 
 	local dialogueTree = npcConfig.scriptConfig.dialogueTree
 	local preyEnabled = ((((npcConfig or {}).statusControllerSettings or {}).statusProperties or {}).sbqPreyEnabled or {})
@@ -506,5 +507,44 @@ function sbq.getNPCDialogue(dialogueStart, location, data, npcArgs)
 	return sbq.getRandomDialogue(npcConfig, dialogueStart, sbq.spawner, settings, dialogueTree)
 end
 
+local moveDirs = {"up", "down", "front", "back"}
 function sbq.doLocationStruggle(location, data, movedir, side)
+	struggledata = sbq.stateconfig[sbq.state].struggle[(location or "") .. (side or "")]
+	if not struggledata then return end
+	local movedir = movedir
+	if not movedir then
+		movedir = moveDirs[math.random(#moveDirs)]
+	end
+	if not struggledata.directions[movedir] then return end
+
+	if struggledata.parts ~= nil and sbq.partsAreStruggling(struggledata.parts) then return end
+	if struggledata.sided ~= nil then
+		local parts = struggledata.sided.rightParts
+		if sbq.direction == -1 then
+			parts = struggledata.sided.leftParts
+		end
+		if sbq.partsAreStruggling(parts) then return end
+	end
+
+	if struggledata.script ~= nil then
+		local statescript = state[sbq.state][struggledata.script]
+		if statescript ~= nil then
+			statescript({direction = movedir})
+		else
+			sbq.logError("no script named: ["..struggledata.script.."] in state: ["..sbq.state.."]")
+		end
+	end
+	local animation = { offset = struggledata.directions[movedir].offset }
+	local prefix = struggledata.prefix or ""
+	local parts = struggledata.parts
+	if struggledata.sided ~= nil then
+		parts = struggledata.sided.rightParts
+		if sbq.direction == -1 then
+			parts = struggledata.sided.leftParts
+		end
+	end
+	for _, part in ipairs(parts or {}) do
+		animation[part] = prefix .. "s_" .. movedir
+	end
+	sbq.doAnims(animation)
 end

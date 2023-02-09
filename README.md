@@ -92,7 +92,7 @@ This mod includes no assets from the respective modded races, modified or not, m
 - Auri Drimyr (Pred/Prey) LokiVulpix
 - Zevi Goocat (Pred/Prey) Zygahedron
 - Socks Flareon (Pred/Prey) LokiVulpix
-- Helena hellhound (Pred/Prey) FFWizard
+- Helena Hellhound (Pred/Prey) FFWizard
 - Sandy Floatporeon (Pred/Prey) Fevix
 - Batty (Pred/Prey) Xeronious
 - Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706) mod )
