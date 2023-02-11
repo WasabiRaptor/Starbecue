@@ -1,6 +1,6 @@
 {
-	"type" : "sbqVoreFriendlyGuard",
-	"baseType" : "friendlyguard",
+	"type" : "sbqVoreCrewmemberMedic",
+	"baseType" : "crewmembermedic",
 
 	"scripts" : [
 		"/npcs/bmain.lua",
@@ -10,20 +10,23 @@
 	],
 	"scriptConfig" : {
 		"sbqNPC" : true,
-		"behavior" : "sbqvoreguard",
+		"behavior" : "sbqvorecrewmember",
 		"questGenerator" : {
 			"graduation" : {
-				"nextNpcType" : [
-					[1, "sbqVoreCrewmember"],
-					[0.5, "sbqVoreCrewmemberEngineer"],
-					[0.5, "sbqVoreCrewmemberMechanic"]
-				]
-			}
+				"nextNpcType" : []
+			},
+			"enableParticipation" : false
 		},
 
 		"entityPortrait" : true,
 		"defaultPortrait" : "bust",
-		"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree",
+		"dialogueTree" : "/npcs/tenants/sbq/crew/sbqVoreCrewmember.npctype:scriptConfig.dialogueTree",
+
+		"sbqOverrideSettings" : {
+			"questParticipation" : false,
+			"crewmateGraduation" : false
+		},
+
 		"sbqRandomizePreySettings" : {
 			"oralVore" : [true,false],
 			"tailVore" : [true,false],
@@ -79,47 +82,7 @@
 	"statusControllerSettings" : {
 		"statusProperties" : {
 			"sbqDidVornyConvertCheck" : true,
-			"sbqPreyEnabled" : {
-				"preyEnabled" : true,
-
-				"digestAllow": true,
-				"softDigestAllow" : true,
-				"digestItemDropsAllow" : true,
-
-				"cumDigestAllow": true,
-				"cumSoftDigestAllow": true,
-				"cumDigestItemDropsAllow" : true,
-
-				"femcumDigestAllow": true,
-				"femcumSoftDigestAllow": true,
-				"femcumDigestItemDropsAllow" : true,
-
-				"milkDigestAllow": true,
-				"milkSoftDigestAllow" : true,
-				"milkDigestItemDropsAllow" : true,
-
-				"transformAllow": true,
-				"cumTransformAllow": true,
-				"genderswapAllow": true,
-				"eggAllow": true,
-
-				"held" : true,
-
-				"oralVore" : true,
-				"tailVore" : true,
-				"absorbVore" : true,
-				"navelVore" : true,
-
-				"analVore" : true,
-				"unbirth" : true,
-				"cockVore" : true,
-				"breastVore" : true,
-
-				"bellyInfusion" : true,
-				"cockInfusion" : true,
-				"pussyInfusion" : true,
-				"breastsInfusion" : true
-			}
+			"sbqPreyEnabled" : {}
 		}
 	}
 }

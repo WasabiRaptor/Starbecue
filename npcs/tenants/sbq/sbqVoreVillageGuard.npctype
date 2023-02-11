@@ -14,6 +14,17 @@
 		"entityPortrait" : true,
 		"defaultPortrait" : "bust",
 		"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree",
+
+		"questGenerator" : {
+			"graduation" : {
+				"nextNpcType" : [
+					[1, "sbqVoreCrewmember"],
+					[0.5, "sbqVoreCrewmemberEngineer"],
+					[0.5, "sbqVoreCrewmemberMechanic"]
+				]
+			}
+		},
+
 		"sbqRandomizePreySettings" : {
 			"oralVore" : [true,false],
 			"tailVore" : [true,false],
