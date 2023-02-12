@@ -499,7 +499,7 @@ function sbq.infusionSlotAccepts(locationData, item)
 	local uniqueId = (( npcParam or {}).scriptConfig or {}).uniqueId
 	if npcParam and ((not locationData.infusionAccepts) or locationData.infusionAccepts.characters) then
 		local preySettings = sbq.getItemPreySettings(item)
-		if not preySettings[locationData.infusionSetting or "undefined"] then return false end
+		if (not sbq.predatorSettings[(locationData.infusionSetting or "infusion").."Pred"]) or not preySettings[locationData.infusionSetting or "infusion"] then return false end
 		if type((locationData.infusionAccepts or {}).characters) == "table" then
 			for i, uuid in ipairs((locationData.infusionAccepts or {}).characters or {}) do
 				if uuid == uniqueId then

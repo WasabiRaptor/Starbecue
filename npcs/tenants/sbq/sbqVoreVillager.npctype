@@ -1243,26 +1243,17 @@
 				"default" : { // voreType
 					"next" : "predator",
 					"default" : { // predator
-						"next" : "struggleTrigger",
-						"true" : { // struggle trigger
-							"next" : "race",
-							"default" :{ // race
-								"next" : "personality",
-								"default" : { // personality
-									"next" : "mood",
-									"default" : { // mood
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" :{ // personality
+								"next" : "mood",
+								"default" : { // mood
+									"next" : "struggleTrigger",
+									"true" : { // struggleTrigger
 										"randomDialogue" : [ "I got out." ]
-									}
-								}
-							}
-						},
-						"false" : { // struggle trigger
-							"next" : "race",
-							"default" :{ // race
-								"next" : "personality",
-								"default" : { // personality
-									"next" : "mood",
-									"default" : { // mood
+									},
+									"false" : { // struggleTrigger
 										"randomDialogue" : [ "Ah, back outside" ]
 									}
 								}

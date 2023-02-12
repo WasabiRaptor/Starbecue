@@ -29,27 +29,37 @@
 						"next" : "personality",
 						"default" : { // personality
 							"next" : "mood",
-							"default" : { // mood
-								"next" : "isFollowing",
-								"true" : {
-									"randomDialogue" : [ "Greetings Captain.", "Hello Captain.", "Captain." ],
-									"buttonText"  : [ "Stay" ],
-									"callScript" : "swapFollowing",
-									"continue" : {
-										"randomDialogue" : [ "I'll be right here.", "Staying here.", "Yeah I'll stay."],
-										"callScript" : "dismiss"
-									},
-									"fail" : "fullCrew"
+							"default" : {
+								"next" : "giveTenantRewards",
+								"rewards" : {
+									"randomDialogue" : [
+										"It was fun messing around!\nHave some stuff.",
+										{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+									],
+									"jump" : ["greeting"]
 								},
-								"false" : {
-									"randomDialogue" : [ "Greetings Captain.", "Hello Captain.", "Captain." ],
-									"buttonText"  : [ "Follow" ],
-									"callScript" : "swapFollowing",
-									"continue" : {
-										"randomDialogue" : [ "Right behind you!", "Here we go!", "Lets go!"],
-										"callScript" : "dismiss"
+								"default" : { // mood
+									"next" : "isFollowing",
+									"true" : {
+										"randomDialogue" : [ "Greetings Captain.", "Hello Captain.", "Captain." ],
+										"buttonText"  : [ "Stay" ],
+										"callScript" : "swapFollowing",
+										"continue" : {
+											"randomDialogue" : [ "I'll be right here.", "Staying here.", "Yeah I'll stay."],
+											"callScript" : "dismiss"
+										},
+										"fail" : "fullCrew"
 									},
-									"fail" : "fullCrew"
+									"false" : {
+										"randomDialogue" : [ "Greetings Captain.", "Hello Captain.", "Captain." ],
+										"buttonText"  : [ "Follow" ],
+										"callScript" : "swapFollowing",
+										"continue" : {
+											"randomDialogue" : [ "Right behind you!", "Here we go!", "Lets go!"],
+											"callScript" : "dismiss"
+										},
+										"fail" : "fullCrew"
+									}
 								}
 							}
 						}
@@ -62,7 +72,17 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"randomDialogue" : [ "Hi, how's it going." ]
+								"next" : "giveTenantRewards",
+								"rewards" : {
+									"randomDialogue" : [
+										"It was fun messing around!\nHave some stuff.",
+										{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+									],
+									"jump" : ["greeting"]
+								},
+								"default" : {
+									"randomDialogue" : [ "Hi, how's it going." ]
+								}
 							}
 						}
 					}
@@ -71,6 +91,8 @@
 			"fullCrew": {
 				"randomDialogue" : ["I can't, you've got a full crew."]
 			},
+
+			"converse" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.converse",
 
 			"vore" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.vore",
 			"struggle" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.struggle",
