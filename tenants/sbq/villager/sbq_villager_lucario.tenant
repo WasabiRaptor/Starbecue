@@ -1,33 +1,33 @@
 {
-  "name": "sbq_villager_lucario",
-  "priority": 51,
+	"name": "sbq_villager_lucario",
+	"priority": 51,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "lucario" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"lucario" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["lucariotier1chest"] },
-  "orderFurniture" : [
-    {"name":"aurabed", "count":1},
-    {"name":"megalbigstatue", "count":1},
-    {"name":"crystalizestation", "count":1},
-    {"name":"auraciteAnvil", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["lucario"],
-      "type": "sbqVoreTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["lucariotier1chest"] },
+	"orderFurniture" : [
+		{"name":"aurabed", "count":1},
+		{"name":"megalbigstatue", "count":1},
+		{"name":"crystalizestation", "count":1},
+		{"name":"auraciteAnvil", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["lucario"],
+			"type": "sbqVoreTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

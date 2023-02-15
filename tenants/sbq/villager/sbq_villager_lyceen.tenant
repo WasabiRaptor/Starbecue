@@ -1,40 +1,40 @@
 {
-  "name": "sbq_villager_lyceen",
-  "priority": 51,
+	"name": "sbq_villager_lyceen",
+	"priority": 51,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "lyceen" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"lyceen" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["lyceenoutfit1chest"] },
-  "orderFurniture" : [
-    {"name":"lyceenbannerlarge", "count":1},
-    {"name":"lyceenbannersmall", "count":1},
-    {"name":"lyceenbookcase", "count":1},
-    {"name":"lyceendresser", "count":1},
-    {"name":"lyceenornatebed", "count":1},
-    {"name":"lyceensmallbed", "count":1},
-    {"name":"lyceensmalllamp", "count":1},
-    {"name":"lyceenwoodchair", "count":1},
-    {"name":"lyceenexteriordoor", "count":1},
-    {"name":"lyceeninteriordoor", "count":1},
-    {"name":"lyceenlamppost1", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["lyceen"],
-      "type": "sbqVoreTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["lyceenoutfit1chest"] },
+	"orderFurniture" : [
+		{"name":"lyceenbannerlarge", "count":1},
+		{"name":"lyceenbannersmall", "count":1},
+		{"name":"lyceenbookcase", "count":1},
+		{"name":"lyceendresser", "count":1},
+		{"name":"lyceenornatebed", "count":1},
+		{"name":"lyceensmallbed", "count":1},
+		{"name":"lyceensmalllamp", "count":1},
+		{"name":"lyceenwoodchair", "count":1},
+		{"name":"lyceenexteriordoor", "count":1},
+		{"name":"lyceeninteriordoor", "count":1},
+		{"name":"lyceenlamppost1", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["lyceen"],
+			"type": "sbqVoreTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

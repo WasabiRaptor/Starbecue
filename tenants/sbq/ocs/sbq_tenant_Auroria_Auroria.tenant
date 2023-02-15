@@ -1,27 +1,27 @@
 {
-  "name": "sbq_tenant_Auroria_Auroria", // the tenant ID
-  "priority": 60,
+	"name": "sbq_tenant_Auroria_Auroria", // the tenant ID
+	"priority": 60,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1, // this tag is important, do not change this at all, this makes it so that it will require the sbq vore deed to be summoned
-    // You should make the colony tags below reflect what your OC likes
-    "office" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1, // this tag is important, do not change this at all, this makes it so that it will require the sbq vore deed to be summoned
+		// You should make the colony tags below reflect what your OC likes
+		"office" : 8
+	},
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["sbqAuroria_Auroria"], // the species you NPC is, whether that be a custom or an existing one
-      "type": "sbqAuroria_Auroria", // the NPC type ID, this should be the ID you're setting in the .npctype file
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["sbqAuroria_Auroria"], // the species you NPC is, whether that be a custom or an existing one
+			"type": "sbqAuroria_Auroria", // the NPC type ID, this should be the ID you're setting in the .npctype file
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

@@ -1,47 +1,47 @@
 {
-  "name": "sbq_tenant_Socks_LokiVulpix",
-  "priority": 60,
+	"name": "sbq_tenant_Socks_LokiVulpix",
+	"priority": 60,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "spooky" : 4,
-    "unscorched" : 8,
-    "pretty" : 4
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"spooky" : 4,
+		"unscorched" : 8,
+		"pretty" : 4
+	},
 
-  "tenantNote" : "^green;\"unscorched\"^reset; objects are the variants of ^green;\"scorched\"^reset; objects that aren't ruined.",
-  "orderFurniture" : [
-    {"name":"sbqSpookyPumpkinHead", "count":1, "parameters":{
+	"tenantNote" : "^green;\"unscorched\"^reset; objects are the variants of ^green;\"scorched\"^reset; objects that aren't ruined.",
+	"orderFurniture" : [
+		{"name":"sbqSpookyPumpkinHead", "count":1, "parameters":{
 		"directives":"?replace;da5302=0008dc;fd8f4d=3d44f2;fdd14d=898df5",
 		"inventoryIcon" : "spookypumpkinheadicon.png?replace;da5302=0008dc;fd8f4d=3d44f2;fdd14d=898df5",
 		"lightColor" : [61, 68, 242]
 	}},
-    {"name":"scorchedcitytv", "count":1},
-    {"name":"scorchedcitycounter", "count":1},
-    {"name":"scorchedcityfridge", "count":1},
-    {"name":"fennixaf", "count":1},
-    {"name":"spookitaf", "count":1},
-    {"name":"unicornplush", "count":1},
-    {"name":"woodencouch2", "count":1, "parameters":{"color":"green"}},
-    {"name":"redtoyblock", "count":50, "price":10}
-  ],
+		{"name":"scorchedcitytv", "count":1},
+		{"name":"scorchedcitycounter", "count":1},
+		{"name":"scorchedcityfridge", "count":1},
+		{"name":"fennixaf", "count":1},
+		{"name":"spookitaf", "count":1},
+		{"name":"unicornplush", "count":1},
+		{"name":"woodencouch2", "count":1, "parameters":{"color":"green"}},
+		{"name":"redtoyblock", "count":50, "price":10}
+	],
 
-  "checkRequirements" : {},
+	"checkRequirements" : {},
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["sbqSocks_LokiVulpix"],
-      "type": "sbqSocks_LokiVulpix",
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["sbqSocks_LokiVulpix"],
+			"type": "sbqSocks_LokiVulpix",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

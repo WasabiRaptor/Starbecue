@@ -1,38 +1,38 @@
 {
-  "name": "sbq_villager_dragon",
-  "priority": 51,
+	"name": "sbq_villager_dragon",
+	"priority": 51,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "dragon" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"dragon" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["dragonoutfit1chest"] },
-  "orderFurniture" : [
-    {"name":"dragonbed", "count":1},
-    {"name":"dragonbeanbag", "count":1},
-    {"name":"dragontapestry", "count":1},
-    {"name":"nomadtable", "count":1},
-    {"name":"dragonceilinglight", "count":1},
-    {"name":"dragonfountain", "count":1},
-    {"name":"dragonvillagedoor", "count":1},
-    {"name":"dragonplushie", "count":1},
-    {"name":"dragondesk", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["dragon"],
-      "type": "sbqVoreTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["dragonoutfit1chest"] },
+	"orderFurniture" : [
+		{"name":"dragonbed", "count":1},
+		{"name":"dragonbeanbag", "count":1},
+		{"name":"dragontapestry", "count":1},
+		{"name":"nomadtable", "count":1},
+		{"name":"dragonceilinglight", "count":1},
+		{"name":"dragonfountain", "count":1},
+		{"name":"dragonvillagedoor", "count":1},
+		{"name":"dragonplushie", "count":1},
+		{"name":"dragondesk", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["dragon"],
+			"type": "sbqVoreTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

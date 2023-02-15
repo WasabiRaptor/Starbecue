@@ -1,41 +1,41 @@
 {
-  "name": "sbq_guard_latex",
-  "priority": 52,
+	"name": "sbq_guard_latex",
+	"priority": 52,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "science" : 8,
-    "slime" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"science" : 8,
+		"slime" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["myfirsttestoutfit1chest"] },
-  "orderFurniture" : [
-    {"name":"biohazardsign", "count":1},
-    {"name":"symbiotesample", "count":1},
-    {"name":"hazardmicroscope", "count":1},
-    {"name":"apexcoolshelf2", "count":1},
-    {"name":"slimebed", "count":1},
-    {"name":"slimechair", "count":1},
-    {"name":"slimehide", "count":1},
-    {"name":"slimetorch", "count":1}
-  ],
+	"checkRequirements" : { "checkItems" : ["myfirsttestoutfit1chest"] },
+	"orderFurniture" : [
+		{"name":"biohazardsign", "count":1},
+		{"name":"symbiotesample", "count":1},
+		{"name":"hazardmicroscope", "count":1},
+		{"name":"apexcoolshelf2", "count":1},
+		{"name":"slimebed", "count":1},
+		{"name":"slimechair", "count":1},
+		{"name":"slimehide", "count":1},
+		{"name":"slimetorch", "count":1}
+	],
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 1,
-      "species": ["myfirsttest"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["myfirsttest"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

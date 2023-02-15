@@ -1,40 +1,40 @@
 {
-  "name": "sbq_guard_floran",
-  "priority": 52,
+	"name": "sbq_guard_floran",
+	"priority": 52,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "floran" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"floran" : 8
+	},
 
-  "checkRequirements" : {},
-  "orderFurniture" : [
-    {"name":"floranarmchair", "count":1},
-    {"name":"floranbed", "count":1},
-    {"name":"floranbonerack", "count":1},
-    {"name":"floranbookcase", "count":1},
-    {"name":"florancabinet1", "count":1},
-    {"name":"floranpainting1", "count":1},
-    {"name":"florandrum1", "count":1},
-    {"name":"floranstove", "count":1},
-    {"name":"plantcage1", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 1,
-      "species": ["floran"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"floranarmchair", "count":1},
+		{"name":"floranbed", "count":1},
+		{"name":"floranbonerack", "count":1},
+		{"name":"floranbookcase", "count":1},
+		{"name":"florancabinet1", "count":1},
+		{"name":"floranpainting1", "count":1},
+		{"name":"florandrum1", "count":1},
+		{"name":"floranstove", "count":1},
+		{"name":"plantcage1", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["floran"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

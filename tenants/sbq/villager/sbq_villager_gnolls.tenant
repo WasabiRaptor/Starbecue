@@ -1,32 +1,32 @@
 {
-  "name": "sbq_villager_gnolls",
-  "priority": 51,
+	"name": "sbq_villager_gnolls",
+	"priority": 51,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "fenerox" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"fenerox" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["gnollsoutfit1chest"] },
-  "orderFurniture" : [
-    {"name":"dustybed", "count":1},
-    {"name":"dusychair", "count":1},
-    {"name":"dustytable", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["gnolls"],
-      "type": "sbqVoreTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["gnollsoutfit1chest"] },
+	"orderFurniture" : [
+		{"name":"dustybed", "count":1},
+		{"name":"dusychair", "count":1},
+		{"name":"dustytable", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["gnolls"],
+			"type": "sbqVoreTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

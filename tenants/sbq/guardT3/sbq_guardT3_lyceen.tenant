@@ -1,43 +1,43 @@
 {
-  "name": "sbq_guardT3_lyceen",
-  "priority": 54,
+	"name": "sbq_guardT3_lyceen",
+	"priority": 54,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier3": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "lyceen" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"lyceen" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["lyceenoutfit1chest"] },
-  "orderFurniture" : [
-    {"name":"lyceenbannerlarge", "count":1},
-    {"name":"lyceenbannersmall", "count":1},
-    {"name":"lyceenbookcase", "count":1},
-    {"name":"lyceendresser", "count":1},
-    {"name":"lyceenornatebed", "count":1},
-    {"name":"lyceensmallbed", "count":1},
-    {"name":"lyceensmalllamp", "count":1},
-    {"name":"lyceenwoodchair", "count":1},
-    {"name":"lyceenexteriordoor", "count":1},
-    {"name":"lyceeninteriordoor", "count":1},
-    {"name":"lyceenlamppost1", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 3,
-      "species": ["lyceen"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["lyceenoutfit1chest"] },
+	"orderFurniture" : [
+		{"name":"lyceenbannerlarge", "count":1},
+		{"name":"lyceenbannersmall", "count":1},
+		{"name":"lyceenbookcase", "count":1},
+		{"name":"lyceendresser", "count":1},
+		{"name":"lyceenornatebed", "count":1},
+		{"name":"lyceensmallbed", "count":1},
+		{"name":"lyceensmalllamp", "count":1},
+		{"name":"lyceenwoodchair", "count":1},
+		{"name":"lyceenexteriordoor", "count":1},
+		{"name":"lyceeninteriordoor", "count":1},
+		{"name":"lyceenlamppost1", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["lyceen"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

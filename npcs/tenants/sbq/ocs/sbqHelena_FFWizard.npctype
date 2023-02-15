@@ -804,7 +804,7 @@
 								"notFeelingIt" : { "portrait" : ["Confused.png"], "randomDialogue" : ["Sorry, you'll have to wait. It shouldn't be too long.", "I'll have to pass. It's a bit too hostile in my gut right now.", "I might look like I'm starving. I am. But it's not safe for me to eat you.", "Mmmf... Gotta put some normal food in me, sorry."] },
 								"full" : {
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : ["As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.", "I haven't been this full in a long time. Sorry, maybe next time.",  "You look tasty, but I can't right now...", "Mmm, no can do... I might have other options available, however..."]},
+									"default" : { "randomDialogue" : ["As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.", "I haven't been this full in a long time. Sorry, maybe next time.",	"You look tasty, but I can't right now...", "Mmm, no can do... I might have other options available, however..."]},
 									"sbqHeal" : { "randomDialogue" : ["Sorry, dear, but you're going to have to wait.", "I'd love to, but they had a scratch. Can't let them out until they're all patched up.", "Eager for healing as well, are you? Perhaps I have an opening elsewhere~", "The sauna's occupied. You'll have to book a later session."]},
 									"sbqDigest" : { "portrait" : ["Bork.png"], "randomDialogue" : ["^red;Hmph.^reset;"]},
 									"sbqSoftDigest" : { "randomDialogue" : ["It might look like I've got space, but they want me all to themselves. Sorry~", "Ah, there's no need to worry. They'll be perfectly fine. \nYou will be too once I get to you~", "Eager to get turned into pudge, are you? It'll be a bit of a wait. Maybe even a long one...", "Hmhm, do I look nice and empty? Oh, it's nothing."]}
@@ -908,7 +908,7 @@
 								"notFeelingIt" : { "portrait" : ["Confused.png"], "randomDialogue" : ["Sorry, you'll have to wait. It shouldn't be too long.", "I'll have to pass. It's a bit too hostile in my gut right now.", "I might look like I'm starving. I am. But it's not safe for me to eat you. With either end.", "Mmmf... Gotta put some normal food in me, sorry."] },
 								"full" : {
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : ["As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.", "I haven't been this full in a long time. Sorry, maybe next time.",  "You look like a fun time, but I can't right now...", "Mmm, no can do... I might have other options available, however..."]},
+									"default" : { "randomDialogue" : ["As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.", "I haven't been this full in a long time. Sorry, maybe next time.",	"You look like a fun time, but I can't right now...", "Mmm, no can do... I might have other options available, however..."]},
 									"sbqHeal" : "vore.oralVore.race.personality.mood.full",
 									"sbqDigest" : { "portrait" : ["Bork.png"], "randomDialogue" : ["^red;Hmph.^reset;"]},
 									"sbqSoftDigest" : "vore.oralVore.race.personality.mood.full"
@@ -2006,19 +2006,19 @@
 							"next" : "personality",
 							"default" : { // personality
 								"next" : "mood",
-								"default" : {  // mood
+								"default" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "portrait" : ["Happy.png"], "randomDialogue" : [ ["This feels quite nice.", "Are you enjoying yourself? I am.", "Ooh, this is a new one for me.", "I'll keep going for as long as you like."] ] }
 								},
-								"hungry" : {  // mood
+								"hungry" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "portrait" : ["Tired.png"], "randomDialogue" : [ ["Not bad. Getting a little hungry, though.", "Are you enjoying yourself? I am, but I might need a snack in a bit.", "Ugh, I might have to ask you to send me some food.", "I'll keep going for as long as you like. Or until my hunger gets too hard to bear."] ] }
 								},
-								"horny" : {  // mood
+								"horny" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "portrait" : ["OwO.png"], "randomDialogue" : [ ["This feels amazing~", "Are you having fun? I am, too~", "Ooh, this is a sexy new experience for me.", "Don't mind me if I get quiet all of a sudden~"] ] }
 								},
-								"friendly" : {  // mood
+								"friendly" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "portrait" : ["Mad.png"], "randomDialogue" : [ ["^red;New to me. This feels good.", "^red;I haven't felt this before. It's good.", "^red;Where... am I exactly? It's nice.", "^red;No complaints here."] ] }
 								}

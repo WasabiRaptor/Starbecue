@@ -1,37 +1,37 @@
 {
-  "name": "sbq_guardT4_rodent",
-  "priority": 55,
+	"name": "sbq_guardT4_rodent",
+	"priority": 55,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier4": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "explorer" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier4": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"explorer" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["vorechip-chip"] },
-  "orderFurniture" : [
-    {"name":"sleepingbag", "count":1},
-    {"name":"treasuremap", "count":1},
-    {"name":"medievalmap", "count":1},
-    {"name":"recreationalvehicle", "count":1},
-    {"name":"apextent", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 4,
-      "species": ["rodent"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["vorechip-chip"] },
+	"orderFurniture" : [
+		{"name":"sleepingbag", "count":1},
+		{"name":"treasuremap", "count":1},
+		{"name":"medievalmap", "count":1},
+		{"name":"recreationalvehicle", "count":1},
+		{"name":"apextent", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 4,
+			"species": ["rodent"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

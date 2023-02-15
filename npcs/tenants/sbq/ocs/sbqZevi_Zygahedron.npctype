@@ -604,14 +604,14 @@
 							"next" : "personality",
 							"default" : { // personality
 								"next" : "mood",
-								"default" : {  // mood
+								"default" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ ["I'm stuck here aren't I?", "Is there even a way out?", "Trapped..."] ] }
 								}
 							},
 							"shy" : { // personality
 								"next" : "mood",
-								"default" : {  // mood
+								"default" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ ["I-I'm stuck here aren't I?", "I-is there even a way out?", "T-trapped..."] ] }
 								}

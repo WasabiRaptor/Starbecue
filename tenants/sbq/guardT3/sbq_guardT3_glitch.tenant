@@ -1,41 +1,41 @@
 {
-  "name": "sbq_guardT3_glitch",
-  "priority": 54,
+	"name": "sbq_guardT3_glitch",
+	"priority": 54,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier3": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "glitch" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"glitch" : 8
+	},
 
-  "checkRequirements" : {},
-  "orderFurniture" : [
-    {"name":"medievalarmor", "count":1},
-    {"name":"medievalbed", "count":1},
-    {"name":"medievalbookcase", "count":1},
-    {"name":"medievalchandelier", "count":1},
-    {"name":"medievalfireplace", "count":1},
-    {"name":"medievalsworddisplay", "count":1},
-    {"name":"royalcabinet", "count":1},
-    {"name":"royalbed", "count":1},
-    {"name":"wallshackles", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 3,
-      "species": ["glitch"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"medievalarmor", "count":1},
+		{"name":"medievalbed", "count":1},
+		{"name":"medievalbookcase", "count":1},
+		{"name":"medievalchandelier", "count":1},
+		{"name":"medievalfireplace", "count":1},
+		{"name":"medievalsworddisplay", "count":1},
+		{"name":"royalcabinet", "count":1},
+		{"name":"royalbed", "count":1},
+		{"name":"wallshackles", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["glitch"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

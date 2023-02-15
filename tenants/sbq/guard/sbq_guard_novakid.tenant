@@ -1,39 +1,39 @@
 {
-  "name": "sbq_guard_novakid",
-  "priority": 52,
+	"name": "sbq_guard_novakid",
+	"priority": 52,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "novakid" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"novakid" : 8
+	},
 
-  "checkRequirements" : { },
-  "orderFurniture" : [
-    {"name":"frontierbed", "count":1},
-    {"name":"frontierchair", "count":1},
-    {"name":"frontierclock", "count":1},
-    {"name":"frontierdoor", "count":1},
-    {"name":"frontierfurnace", "count":1},
-    {"name":"frontierironsymbol", "count":1},
-    {"name":"frontierlamp", "count":1},
-    {"name":"frontierlamppost", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 1,
-      "species": ["novakid"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { },
+	"orderFurniture" : [
+		{"name":"frontierbed", "count":1},
+		{"name":"frontierchair", "count":1},
+		{"name":"frontierclock", "count":1},
+		{"name":"frontierdoor", "count":1},
+		{"name":"frontierfurnace", "count":1},
+		{"name":"frontierironsymbol", "count":1},
+		{"name":"frontierlamp", "count":1},
+		{"name":"frontierlamppost", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["novakid"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

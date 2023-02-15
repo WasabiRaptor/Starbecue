@@ -42,7 +42,7 @@
 									"next" : "isFollowing",
 									"true" : {
 										"randomDialogue" : [ "Greetings Captain.", "Hello Captain.", "Captain." ],
-										"buttonText"  : [ "Stay" ],
+										"buttonText" : [ "Stay" ],
 										"callScript" : "swapFollowing",
 										"continue" : {
 											"randomDialogue" : [ "I'll be right here.", "Staying here.", "Yeah I'll stay."],
@@ -52,7 +52,7 @@
 									},
 									"false" : {
 										"randomDialogue" : [ "Greetings Captain.", "Hello Captain.", "Captain." ],
-										"buttonText"  : [ "Follow" ],
+										"buttonText" : [ "Follow" ],
 										"callScript" : "swapFollowing",
 										"continue" : {
 											"randomDialogue" : [ "Right behind you!", "Here we go!", "Lets go!"],

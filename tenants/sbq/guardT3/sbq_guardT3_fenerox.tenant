@@ -1,36 +1,36 @@
 {
-  "name": "sbq_guardT3_fenerox",
-  "priority": 54,
+	"name": "sbq_guardT3_fenerox",
+	"priority": 54,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier3": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "fenerox" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"fenerox" : 8
+	},
 
-  "checkRequirements" : {},
-  "orderFurniture" : [
-    {"name":"dustybed", "count":1},
-    {"name":"dusychair", "count":1},
-    {"name":"dustytable", "count":1}
-  ],
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"dustybed", "count":1},
+		{"name":"dusychair", "count":1},
+		{"name":"dustytable", "count":1}
+	],
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 3,
-      "species": ["fenerox"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["fenerox"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

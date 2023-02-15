@@ -1,40 +1,40 @@
 {
-  "name": "sbq_villager_sergal",
-  "priority": 51,
+	"name": "sbq_villager_sergal",
+	"priority": 51,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "sergal" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"sergal" : 8
+	},
 
-  "checkRequirements" : { "checkImage" : "/humanoid/sergal/malebody.png" },
-  "orderFurniture" : [
-    {"name":"sergalbed", "count":1},
-    {"name":"sergalbookcase", "count":1},
-    {"name":"sergalcabinet1", "count":1},
-    {"name":"sergaltable", "count":1},
-    {"name":"sergaltradbed", "count":1},
-    {"name":"sergalwardrobe1", "count":1},
-    {"name":"sergalchair", "count":1},
-    {"name":"sergalchair2", "count":1},
-    {"name":"sergalchest", "count":1},
-    {"name":"sergalglobe", "count":1},
-    {"name":"sergallantern", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["sergal"],
-      "type": "sbqVoreTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkImage" : "/humanoid/sergal/malebody.png" },
+	"orderFurniture" : [
+		{"name":"sergalbed", "count":1},
+		{"name":"sergalbookcase", "count":1},
+		{"name":"sergalcabinet1", "count":1},
+		{"name":"sergaltable", "count":1},
+		{"name":"sergaltradbed", "count":1},
+		{"name":"sergalwardrobe1", "count":1},
+		{"name":"sergalchair", "count":1},
+		{"name":"sergalchair2", "count":1},
+		{"name":"sergalchest", "count":1},
+		{"name":"sergalglobe", "count":1},
+		{"name":"sergallantern", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["sergal"],
+			"type": "sbqVoreTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

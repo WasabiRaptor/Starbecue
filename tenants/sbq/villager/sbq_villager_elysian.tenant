@@ -1,35 +1,35 @@
 {
-  "name": "sbq_villager_elysian",
-  "priority": 51,
+	"name": "sbq_villager_elysian",
+	"priority": 51,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "human" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"human" : 8
+	},
 
-  "checkRequirements" : { "checkItems" : ["elysianoutfit1chest"] },
-  "orderFurniture" : [
-    {"name":"carbed", "count":1},
-    {"name":"jukebox", "count":1},
-    {"name":"basictv", "count":1},
-    {"name":"fridge", "count":1},
-    {"name":"oven1", "count":1},
-    {"name":"basicbath", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["elysian"],
-      "type": "sbqVoreTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkItems" : ["elysianoutfit1chest"] },
+	"orderFurniture" : [
+		{"name":"carbed", "count":1},
+		{"name":"jukebox", "count":1},
+		{"name":"basictv", "count":1},
+		{"name":"fridge", "count":1},
+		{"name":"oven1", "count":1},
+		{"name":"basicbath", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["elysian"],
+			"type": "sbqVoreTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

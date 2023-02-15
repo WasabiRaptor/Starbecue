@@ -672,67 +672,49 @@ if speciesLayout ~= nil then
 	function incSpeciesFacialMaskType:onClick() sbq.changeFacialMaskType(1) end
 
 	function sbq.applySpeciesColors()
-		local bodyColor = ""
-		local undyColor = ""
-		local hairColor = ""
 		local overrideData = sbq.currentCustomSpecies
 		local speciesFile = sbq.speciesFile
 
-		local index = overrideData.identity.undyColorIndex
-		local colorTable = (speciesFile.undyColor or {})[index]
-		if type(colorTable) == "table" then
-			undyColor = "?replace"
-			for color, replace in pairs(colorTable) do
-				undyColor = undyColor..";"..color.."="..replace
-			end
-		end
+		local bodyColor = sbq.colorTable((speciesFile.bodyColor or {})[overrideData.identity.bodyColorIndex])
+		local undyColor = sbq.colorTable((speciesFile.undyColor or {})[overrideData.identity.undyColorIndex])
+		local hairColor = sbq.colorTable((speciesFile.hairColor or {})[overrideData.identity.hairColorIndex])
+
 		overrideData.identity.undyColor = undyColor
+		overrideData.identity.bodyColor = bodyColor
+		overrideData.identity.hairColor = hairColor
 
-		local index = overrideData.identity.bodyColorIndex
-		local colorTable = (speciesFile.bodyColor or {})[index]
-		if type(colorTable) == "table" then
-			bodyColor = "?replace"
-			for color, replace in pairs(colorTable) do
-				bodyColor = bodyColor..";"..color.."="..replace
-			end
-		end
 		overrideData.identity.bodyDirectives = bodyColor
-
 		if speciesFile.altOptionAsUndyColor then
 			overrideData.identity.bodyDirectives = overrideData.identity.bodyDirectives..undyColor
-		end
-
-		local index = overrideData.identity.hairColorIndex
-		local colorTable = (speciesFile.hairColor or {})[index]
-		if type(colorTable) == "table" then
-			hairColor = "?replace"
-			for color, replace in pairs(colorTable) do
-				hairColor = hairColor..";"..color.."="..replace
-			end
-		end
-		if speciesFile.headOptionAsHairColor then
-			overrideData.identity.hairDirectives = hairColor
-		else
-			overrideData.identity.hairDirectives = overrideData.identity.bodyDirectives
-		end
-		if speciesFile.altOptionAsHairColor then
-			overrideData.identity.hairDirectives = overrideData.identity.hairDirectives..undyColor
 		end
 		if speciesFile.hairColorAsBodySubColor then
 			overrideData.identity.bodyDirectives = overrideData.identity.bodyDirectives..hairColor
 		end
-		if speciesFile.bodyColorAsHairSubColor then
-			overrideData.identity.hairDirectives = overrideData.identity.hairDirectives..overrideData.identity.bodyDirectives
+
+
+		if speciesFile.headOptionAsHairColor then
+			overrideData.identity.hairDirectives = hairColor
+		else
+			overrideData.identity.hairDirectives = bodyColor
+			hairColor = bodyColor
 		end
+		if speciesFile.altOptionAsHairColor then
+			overrideData.identity.hairDirectives = overrideData.identity.hairDirectives..undyColor
+		end
+		if speciesFile.bodyColorAsHairSubColor then -- this isn't real
+			overrideData.identity.hairDirectives = overrideData.identity.hairDirectives..bodyColor
+		end
+
 
 		overrideData.identity.facialHairDirectives = overrideData.identity.hairDirectives
-		if speciesFile.bodyColorAsFacialHairSubColor then
-			overrideData.identity.facialMaskDirectives = overrideData.identity.facialMaskDirectives..overrideData.identity.bodyDirectives
-		end
 
-		overrideData.identity.facialMaskDirectives = overrideData.identity.hairDirectives
+
+		overrideData.identity.facialMaskDirectives = hairColor
 		if speciesFile.bodyColorAsFacialMaskSubColor then
-			overrideData.identity.facialMaskDirectives = overrideData.identity.facialMaskDirectives..overrideData.identity.bodyDirectives
+			overrideData.identity.facialMaskDirectives = overrideData.identity.facialMaskDirectives..bodyColor
+		end
+		if speciesFile.altColorAsFacialMaskSubColor then
+			overrideData.identity.facialMaskDirectives = overrideData.identity.facialMaskDirectives..undyColor
 		end
 
 		overrideData.identity.emoteDirectives = overrideData.identity.bodyDirectives
@@ -807,6 +789,17 @@ if speciesLayout ~= nil then
 	end
 
 	sbq.changeSpecies(0)
+end
+
+function sbq.colorTable(input)
+	local result = ""
+	if type(input) == "table" then
+		result = "?replace"
+		for color, replace in pairs(input) do
+			result = result..";"..color.."="..replace
+		end
+	end
+	return result
 end
 
 --------------------------------------------------------------------------------------------------

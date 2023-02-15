@@ -503,7 +503,7 @@
 								]},
 
 								"transformed" : "struggle.belly.race.personality.mood.transformed",
-								"transform" :  "struggle.belly.race.personality.mood.transform",
+								"transform" : "struggle.belly.race.personality.mood.transform",
 								"egged" : { "jump" : ["converse"], "buttonText" : "[converse]", "randomDialogue" : [ "Now you're trapped in an egg" ] }, // I don't think this will ever trigger because eggs can't struggle haha
 								"eggify" : {
 									"next" : "eggAllow",
@@ -660,7 +660,7 @@
 							"next" : "personality",
 							"default" : { // personality
 								"next" : "mood",
-								"default" : {  // mood
+								"default" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ ["I'm stuck here aren't I?", "Is there even a way out?", "Trapped..."] ] }
 								}

@@ -1,40 +1,40 @@
 {
-  "name": "sbq_guard_argonian",
-  "priority": 52,
+	"name": "sbq_guard_argonian",
+	"priority": 52,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "argonian" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"argonian" : 8
+	},
 
-  "checkRequirements" : { "checkImage" : "/humanoid/argonian/malebody.png" },
-  "orderFurniture" : [
-    {"name":"argoniandrum", "count":1},
-    {"name":"ashbed", "count":1},
-    {"name":"chestargonian1", "count":1},
-    {"name":"chestargonian2", "count":1},
-    {"name":"argonianpot", "count":1},
-    {"name":"argoniantotem", "count":1},
-    {"name":"argonianbannergreen", "count":1},
-    {"name":"argonianbannertan", "count":1}
-  ],
+	"checkRequirements" : { "checkImage" : "/humanoid/argonian/malebody.png" },
+	"orderFurniture" : [
+		{"name":"argoniandrum", "count":1},
+		{"name":"ashbed", "count":1},
+		{"name":"chestargonian1", "count":1},
+		{"name":"chestargonian2", "count":1},
+		{"name":"argonianpot", "count":1},
+		{"name":"argoniantotem", "count":1},
+		{"name":"argonianbannergreen", "count":1},
+		{"name":"argonianbannertan", "count":1}
+	],
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 1,
-      "species": ["argonian"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["argonian"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

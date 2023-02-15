@@ -1,40 +1,40 @@
 {
-  "name": "sbq_tenant_Sandy_Fevix",
-  "priority": 60,
+	"name": "sbq_tenant_Sandy_Fevix",
+	"priority": 60,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "hoard" : 8,
-    "sea" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"hoard" : 8,
+		"sea" : 8
+	},
 
-  "checkRequirements" : {},
-  "orderFurniture" : [
-    {"name":"treasurechest", "count":1},
-    {"name":"trapchest", "count":1},
-    {"name":"barrelgoldfilled", "count":1},
-    {"name":"woodencrategoldfilled", "count":1},
-    {"name":"brokenanchor", "count":1},
-    {"name":"coralmirror", "count":1},
-    {"name":"seabed", "count":1},
-    {"name":"seachair", "count":1},
-    {"name":"sealamp", "count":1},
-    {"name":"seaweedpot", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["sbqSandy_Fevix"],
-      "type": "sbqSandy_Fevix",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"treasurechest", "count":1},
+		{"name":"trapchest", "count":1},
+		{"name":"barrelgoldfilled", "count":1},
+		{"name":"woodencrategoldfilled", "count":1},
+		{"name":"brokenanchor", "count":1},
+		{"name":"coralmirror", "count":1},
+		{"name":"seabed", "count":1},
+		{"name":"seachair", "count":1},
+		{"name":"sealamp", "count":1},
+		{"name":"seaweedpot", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["sbqSandy_Fevix"],
+			"type": "sbqSandy_Fevix",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

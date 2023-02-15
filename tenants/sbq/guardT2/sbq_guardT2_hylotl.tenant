@@ -1,39 +1,39 @@
 {
-  "name": "sbq_guardT2_hylotl",
-  "priority": 53,
+	"name": "sbq_guardT2_hylotl",
+	"priority": 53,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier2": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "hylotl" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier2": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"hylotl" : 8
+	},
 
-  "checkRequirements" : {},
-  "orderFurniture" : [
-    {"name":"hylotlchair", "count":1},
-    {"name":"hylotlcityposter", "count":1},
-    {"name":"hylotldrinks", "count":1},
-    {"name":"hylotlfashionhologram", "count":1},
-    {"name":"neonhylotlhead", "count":1},
-    {"name":"hylotlwallshelf", "count":1},
-    {"name":"hylotlcounter", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 2,
-      "species": ["hylotl"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"hylotlchair", "count":1},
+		{"name":"hylotlcityposter", "count":1},
+		{"name":"hylotldrinks", "count":1},
+		{"name":"hylotlfashionhologram", "count":1},
+		{"name":"neonhylotlhead", "count":1},
+		{"name":"hylotlwallshelf", "count":1},
+		{"name":"hylotlcounter", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 2,
+			"species": ["hylotl"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

@@ -1,30 +1,30 @@
 {
-  "name": "sbq_guardT3_random",
-  "priority": 53,
+	"name": "sbq_guardT3_random",
+	"priority": 53,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier3": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1
+	},
 
-  "checkRequirements" : {},
+	"checkRequirements" : {},
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 3,
-      "species": ["human", "apex", "avian", "floran", "glitch", "hylotl"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["human", "apex", "avian", "floran", "glitch", "hylotl"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

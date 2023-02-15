@@ -18,24 +18,24 @@
 	"identity" : {
 
 	 "facialHairType" : "1",
-      "facialHairGroup" : "hair",
-      "personalityArmOffset" : [0, 0],
-      "hairType" : "male3",
-      "bodyDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;767162=4ca4d6;1e1400=133c53;9e9b94=acd3ec;f32200=59c3ff;3f3c2e=216891?replace;dc1f00=00d6fe;be1b00=00befe;951500=0095fe",
-      "personalityArmIdle" : "idle.2",
-      "gender" : "male",
-      "color" : [51, 117, 237],
-      "personalityHeadOffset" : [-1, 0],
-      "hairGroup" : "hair",
-      "facialMaskDirectives" : "",
-      "species" : "synth",
-      "personalityIdle" : "idle.2",
-      "facialMaskGroup" : "",
-      "name" : "Blue",
-      "facialHairDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665",
-      "emoteDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;767162=4ca4d6;1e1400=133c53;9e9b94=acd3ec;f32200=59c3ff;3f3c2e=216891?replace;dc1f00=00d6fe;be1b00=00befe;951500=0095fe",
-      "hairDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665",
-      "facialMaskType" : ""
+			"facialHairGroup" : "hair",
+			"personalityArmOffset" : [0, 0],
+			"hairType" : "male3",
+			"bodyDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;767162=4ca4d6;1e1400=133c53;9e9b94=acd3ec;f32200=59c3ff;3f3c2e=216891?replace;dc1f00=00d6fe;be1b00=00befe;951500=0095fe",
+			"personalityArmIdle" : "idle.2",
+			"gender" : "male",
+			"color" : [51, 117, 237],
+			"personalityHeadOffset" : [-1, 0],
+			"hairGroup" : "hair",
+			"facialMaskDirectives" : "",
+			"species" : "synth",
+			"personalityIdle" : "idle.2",
+			"facialMaskGroup" : "",
+			"name" : "Blue",
+			"facialHairDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665",
+			"emoteDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;767162=4ca4d6;1e1400=133c53;9e9b94=acd3ec;f32200=59c3ff;3f3c2e=216891?replace;dc1f00=00d6fe;be1b00=00befe;951500=0095fe",
+			"hairDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665",
+			"facialMaskType" : ""
 
 	},
 	"scriptConfig" : {
@@ -494,14 +494,14 @@
 							"next" : "personality",
 							"default" : { // personality
 								"next" : "mood",
-								"default" : {  // mood
+								"default" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ ["Running Wiggly_wggles.exe!", "I can at least see thanks to my LED lights", "Just because you ate me, don't mean i won't try to get out!, even if i don't want too....", "Just because i taste like blueberries, don't mean i'm a snack, darn it!"] ] }
 								}
 							},
 							"shy" : { // personality
 								"next" : "mood",
-								"default" : {  // mood
+								"default" : {	// mood
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ ["I-I'm stuck here aren't I?", "I-is there even a way out?", "T-trapped..."] ] }
 								}

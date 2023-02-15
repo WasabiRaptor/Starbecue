@@ -1,43 +1,43 @@
 {
-  "name": "sbq_guardT3_sergal",
-  "priority": 54,
+	"name": "sbq_guardT3_sergal",
+	"priority": 54,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier3": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "sergal" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"sergal" : 8
+	},
 
-  "checkRequirements" : { "checkImage" : "/humanoid/sergal/malebody.png" },
-  "orderFurniture" : [
-    {"name":"sergalbed", "count":1},
-    {"name":"sergalbookcase", "count":1},
-    {"name":"sergalcabinet1", "count":1},
-    {"name":"sergaltable", "count":1},
-    {"name":"sergaltradbed", "count":1},
-    {"name":"sergalwardrobe1", "count":1},
-    {"name":"sergalchair", "count":1},
-    {"name":"sergalchair2", "count":1},
-    {"name":"sergalchest", "count":1},
-    {"name":"sergalglobe", "count":1},
-    {"name":"sergallantern", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 3,
-      "species": ["sergal"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkImage" : "/humanoid/sergal/malebody.png" },
+	"orderFurniture" : [
+		{"name":"sergalbed", "count":1},
+		{"name":"sergalbookcase", "count":1},
+		{"name":"sergalcabinet1", "count":1},
+		{"name":"sergaltable", "count":1},
+		{"name":"sergaltradbed", "count":1},
+		{"name":"sergalwardrobe1", "count":1},
+		{"name":"sergalchair", "count":1},
+		{"name":"sergalchair2", "count":1},
+		{"name":"sergalchest", "count":1},
+		{"name":"sergalglobe", "count":1},
+		{"name":"sergallantern", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["sergal"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

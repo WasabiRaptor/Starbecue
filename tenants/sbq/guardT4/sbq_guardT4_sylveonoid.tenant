@@ -1,40 +1,40 @@
 {
-  "name": "sbq_guardT4_sylveonoid",
-  "priority": 55,
+	"name": "sbq_guardT4_sylveonoid",
+	"priority": 55,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "tier4": 12,
-    "combat" : 8,
-    "door": 1,
-    "sbqVore" : 1,
-    "sylveonoid" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier4": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"sylveonoid" : 8
+	},
 
-  "checkRequirements" : { "checkImage" : "/humanoid/sylveonoid/malebody.png" },
-  "orderFurniture" : [
-    {"name":"sylveonoidbannerlarge", "count":1},
-    {"name":"sylveonoidbannersmall", "count":1},
-    {"name":"sylveonoidbannerlargealt", "count":1},
-    {"name":"sylveonoidbannersmallalt", "count":1},
-    {"name":"sylveonoidwoodchair", "count":1},
-    {"name":"sylveonoidwooddoor", "count":1},
-    {"name":"sylveonoidwoodenbed", "count":1},
-    {"name":"sylveonoidwoodendesk", "count":1}
-  ],
-  "tenants": [
-    {
-      "spawn": "npc",
-      "level" : 4,
-      "species": ["sylveonoid"],
-      "type": "sbqVoreFriendlyGuardTenant",
-      "overrides": {
-       }
-     }
-   ],
+	"checkRequirements" : { "checkImage" : "/humanoid/sylveonoid/malebody.png" },
+	"orderFurniture" : [
+		{"name":"sylveonoidbannerlarge", "count":1},
+		{"name":"sylveonoidbannersmall", "count":1},
+		{"name":"sylveonoidbannerlargealt", "count":1},
+		{"name":"sylveonoidbannersmallalt", "count":1},
+		{"name":"sylveonoidwoodchair", "count":1},
+		{"name":"sylveonoidwooddoor", "count":1},
+		{"name":"sylveonoidwoodenbed", "count":1},
+		{"name":"sylveonoidwoodendesk", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 4,
+			"species": ["sylveonoid"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }

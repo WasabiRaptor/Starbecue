@@ -1,28 +1,28 @@
 {
-  "name": "sbq_tenant_Batty_Xeronious",
-  "priority": 60,
+	"name": "sbq_tenant_Batty_Xeronious",
+	"priority": 60,
 
-  "colonyTagCriteria": {
-    "light": 1,
-    "door": 1,
-    "sbqVore" : 1,
-    "crystalline" : 8
-  },
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"crystalline" : 8
+	},
 
-  "checkRequirements" : {},
+	"checkRequirements" : {},
 
-  "tenants": [
-    {
-      "spawn": "npc",
-      "species": ["sbqBatty_Xeronious"],
-      "type": "sbqBatty_Xeronious",
-      "overrides": {
-       }
-     }
-   ],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["sbqBatty_Xeronious"],
+			"type": "sbqBatty_Xeronious",
+			"overrides": {
+			}
+		}
+	],
 
-  "rent": {
-    "periodRange": [1200.0, 1800.0],
-    "pool": "villagerGift"
-  }
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
 }
