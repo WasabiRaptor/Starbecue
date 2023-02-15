@@ -1,11 +1,12 @@
 {
-	"kind" : "sbqAuroria_Auroria",
+	"kind" : "meowscarada",
 
 	"speciesAnimOverride" : "speciesAnimOverride.config",
+	//"permanentAnimOverride" : true,
 
 	"charCreationTooltip" : {
-			"title" : "Auroria",
-			"subTitle" : "",
+			"title" : "Meowscarada",
+			"subTitle" : "Kitty",
 			"description" : "Are you sure you're supposed to be able to read this?"
 	},
 
@@ -13,12 +14,12 @@
 
 
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_male1.ogg" ],
+	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
 
 
 	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "HUMAN", "Personality" ],
 	"skull" : "/humanoid/human/dead.png",
-	"effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
+	"effectDirectives" : "?replace=FEFFFFFF=cfffa7FF?replace=9bd4ffFF=b4ff74FF?replace=31a6ffFF=92e64aFF",
 	"defaultBlueprints" : {
 		"tier1" : [
 
@@ -96,8 +97,9 @@
 			{ "item" : "workoutlegs" }
 		]
 	},
-	"altOptionAsUndyColor" : true,
+	"altOptionAsFacialMask" : true,
 	"headOptionAsHairColor" : true,
+	"headOptionAsFacialhair" : true,
 	"altOptionAsHairColor" : true,
 	"genders" : [
 		{
@@ -108,10 +110,10 @@
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
 			"pants" : [ "emptylegs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
-			"facialMaskGroup" : "",
-			"facialMask" : [ ]
+			"facialHairGroup" : "ears",
+			"facialHair" : [ "0" ],
+			"facialMaskGroup" : "mask",
+			"facialMask" : [ "blank", "0" ]
 		},
 		{
 			"name" : "female",
@@ -121,25 +123,22 @@
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
 			"pants" : [ "emptylegs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
-			"facialMaskGroup" : "",
-			"facialMask" : [ ]
+			"facialHairGroup" : "ears",
+			"facialHair" : [ "0" ],
+			"facialMaskGroup" : "mask",
+			"facialMask" : [ "blank", "0" ]
 		}
 	],
 	"baseColorMap" : {
-		"primary" : ["6d4489","7a4b9a","895aaa"],
-		"secondary" : ["512173","612d86","6d3992"],
-		"hair" : ["307ca9","4195c7","4aa1d3"],
-		"flesh" : ["290f3f", "33144c", "3d1a57"],
-		"Loki" : ["cc7b2d","da8637","ea9440"]
+		"primary" : ["a0b686","c3daa5","ddf2bf","e9fcce"],
+		"secondary" : ["1c421e","265529","2d6231"],
+		"tertiary" : ["131c10","1a2617","23311f"],
+		"flesh" : ["882c4a", "b9446b", "df658e"]
 	},
 
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
-		{
-			"0019cf" : "0019cfFE", "001298" : "001298FE" // make eyes fullbright
-		}
+		{ "a0b686" : "a0b686" }
 	],
 	"undyColor" : [
 		{ "dc1f00" : "4d76ad" }

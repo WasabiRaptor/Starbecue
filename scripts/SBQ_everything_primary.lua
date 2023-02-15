@@ -282,7 +282,6 @@ function sbq.doMysteriousTF(data)
 	overrideData.customAnimStatus = speciesFile.customAnimStatus
 
 	if (not isOriginalSpecies and not customData) and not speciesFile.noUnlock then
-		overrideData.unlockSpecies = nil
 		customizedSpecies[overrideData.species] = overrideData
 		status.setStatusProperty("sbqCustomizedSpecies", customizedSpecies)
 		world.sendEntityMessage(entity.id(), "sbqUnlockedSpecies")

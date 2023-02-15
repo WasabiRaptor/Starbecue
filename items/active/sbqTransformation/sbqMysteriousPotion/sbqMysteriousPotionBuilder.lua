@@ -11,9 +11,6 @@ function build(directory, config, parameters, level, seed)
 		if parameters.name then
 			config.shortdescription = parameters.name.." Potion"
 		end
-		if parameters.unlockSpecies then
-			config.description = "A bottle of mysterious liquid... The label says it lasts forever."
-		end
 		local directives = ((parameters.directives or "")..((parameters.identity or {}).bodyDirectives or ""))..(parameters.potionDirectives or "")
 		local largeDirectives = ((parameters.directives or "")..((parameters.identity or {}).bodyDirectives or ""))..(parameters.potionDirectives or "")
 

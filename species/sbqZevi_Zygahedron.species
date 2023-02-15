@@ -1,143 +1,143 @@
 {
-  "kind" : "sbqZevi_Zygahedron",
+	"kind" : "sbqZevi_Zygahedron",
 
-  "speciesAnimOverride" : "speciesAnimOverride.config",
-  "permanentAnimOverride" : true,
+	"speciesAnimOverride" : "speciesAnimOverride.config",
+	"permanentAnimOverride" : true,
 
-  "charCreationTooltip" : {
-      "title" : "Zevi",
-      "subTitle" : "Goocat",
-      "description" : "How tf are you reading this, you ain't supposed to play as one of these"
-  },
+	"charCreationTooltip" : {
+			"title" : "Zevi",
+			"subTitle" : "Goocat",
+			"description" : "How tf are you reading this, you ain't supposed to play as one of these"
+	},
 
-  "statusEffects" : [ "novakidglow" ],
+	"statusEffects" : [ "novakidglow" ],
 
-  "humanoidConfig" : "/species/sbqQuadruped.config",
+	"humanoidConfig" : "/species/sbqQuadruped.config",
 
-  "nameGen" : [ "/species/novakidnamegen.config:names", "/species/novakidnamegen.config:names" ],
-  "ouchNoises" : [ "/sfx/sbqZevi_Zygahedron/zeviHurt.ogg", "/sfx/sbqZevi_Zygahedron/zeviHurt.ogg" ],
-  "charGenTextLabels" : [ "Gas colour", "Hair style", "Shirt", "Legwear", "", "Brand", "Shirt colour", "Legwear colour", "NOVAKID", "Personality" ],
-  "skull" : "/humanoid/sbqZevi_Zygahedron/dead.png",
-  "effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ff99e6FF?replace=31a6ffFF=e359b9FF",
-  "defaultBlueprints" : {
-    "tier1" : [
+	"nameGen" : [ "/species/novakidnamegen.config:names", "/species/novakidnamegen.config:names" ],
+	"ouchNoises" : [ "/sfx/sbqZevi_Zygahedron/zeviHurt.ogg", "/sfx/sbqZevi_Zygahedron/zeviHurt.ogg" ],
+	"charGenTextLabels" : [ "Gas colour", "Hair style", "Shirt", "Legwear", "", "Brand", "Shirt colour", "Legwear colour", "NOVAKID", "Personality" ],
+	"skull" : "/humanoid/sbqZevi_Zygahedron/dead.png",
+	"effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ff99e6FF?replace=31a6ffFF=e359b9FF",
+	"defaultBlueprints" : {
+		"tier1" : [
 
 // Empty Hands
-      { "item" : "flagnovakid" },
+			{ "item" : "flagnovakid" },
 
 // Anvil
-      { "item" : "novatier1head" },
-      { "item" : "novatier1chest" },
-      { "item" : "novatier1pants" },
-      { "item" : "novatier2head" },
-      { "item" : "novatier2chest" },
-      { "item" : "novatier2pants" },
-      { "item" : "ironrevolver" },
-      { "item" : "ironassaultrifle" },
-      { "item" : "tungstenmagnum" },
-      { "item" : "tungstenshotgun" },
+			{ "item" : "novatier1head" },
+			{ "item" : "novatier1chest" },
+			{ "item" : "novatier1pants" },
+			{ "item" : "novatier2head" },
+			{ "item" : "novatier2chest" },
+			{ "item" : "novatier2pants" },
+			{ "item" : "ironrevolver" },
+			{ "item" : "ironassaultrifle" },
+			{ "item" : "tungstenmagnum" },
+			{ "item" : "tungstenshotgun" },
 
 
 // Anvil2
-      { "item" : "novatier3head" },
-      { "item" : "novatier3chest" },
-      { "item" : "novatier3pants" },
-      { "item" : "novatier4head" },
-      { "item" : "novatier4chest" },
-      { "item" : "novatier4pants" },
-      { "item" : "titaniummachinepistol" },
-      { "item" : "titaniumsniperrifle" },
-      { "item" : "durasteelrevolver" },
-      { "item" : "durasteelassaultrifle" },
+			{ "item" : "novatier3head" },
+			{ "item" : "novatier3chest" },
+			{ "item" : "novatier3pants" },
+			{ "item" : "novatier4head" },
+			{ "item" : "novatier4chest" },
+			{ "item" : "novatier4pants" },
+			{ "item" : "titaniummachinepistol" },
+			{ "item" : "titaniumsniperrifle" },
+			{ "item" : "durasteelrevolver" },
+			{ "item" : "durasteelassaultrifle" },
 
 // Anvil3
-      { "item" : "novatier5ahead" },
-      { "item" : "novatier5achest" },
-      { "item" : "novatier5apants" },
-      { "item" : "novatier6ahead" },
-      { "item" : "novatier6achest" },
-      { "item" : "novatier6apants" },
+			{ "item" : "novatier5ahead" },
+			{ "item" : "novatier5achest" },
+			{ "item" : "novatier5apants" },
+			{ "item" : "novatier6ahead" },
+			{ "item" : "novatier6achest" },
+			{ "item" : "novatier6apants" },
 
-      { "item" : "novatier5mhead" },
-      { "item" : "novatier5mchest" },
-      { "item" : "novatier5mpants" },
-      { "item" : "novatier6mhead" },
-      { "item" : "novatier6mchest" },
-      { "item" : "novatier6mpants" },
+			{ "item" : "novatier5mhead" },
+			{ "item" : "novatier5mchest" },
+			{ "item" : "novatier5mpants" },
+			{ "item" : "novatier6mhead" },
+			{ "item" : "novatier6mchest" },
+			{ "item" : "novatier6mpants" },
 
-      { "item" : "novatier5shead" },
-      { "item" : "novatier5schest" },
-      { "item" : "novatier5spants" },
-      { "item" : "novatier6shead" },
-      { "item" : "novatier6schest" },
-      { "item" : "novatier6spants" },
+			{ "item" : "novatier5shead" },
+			{ "item" : "novatier5schest" },
+			{ "item" : "novatier5spants" },
+			{ "item" : "novatier6shead" },
+			{ "item" : "novatier6schest" },
+			{ "item" : "novatier6spants" },
 
-      { "item" : "aegisaltpistol" },
-      { "item" : "aegisaltbow" },
-      { "item" : "feroziumwand" },
-      { "item" : "feroziumstaff" },
-      { "item" : "violiumshortsword" },
-      { "item" : "violiumbroadsword" },
+			{ "item" : "aegisaltpistol" },
+			{ "item" : "aegisaltbow" },
+			{ "item" : "feroziumwand" },
+			{ "item" : "feroziumstaff" },
+			{ "item" : "violiumshortsword" },
+			{ "item" : "violiumbroadsword" },
 
 // Furniture Table 2
-      { "item" : "novakidstoragelocker" },
-      { "item" : "novakidshipdoor" },
-      { "item" : "novakidshiphatch" },
+			{ "item" : "novakidstoragelocker" },
+			{ "item" : "novakidshipdoor" },
+			{ "item" : "novakidshiphatch" },
 
 // Spinning Wheel
-      { "item" : "novakidfancychest" },
-      { "item" : "novakidfancypants" },
-      { "item" : "novakidjacket" },
-      { "item" : "novakidjacketpants" },
-      { "item" : "novakidsuspenders" },
-      { "item" : "novakidsuspenderspants" },
-      { "item" : "novakidwaistcoat" },
-      { "item" : "novakidblackpants" }
-    ]
-  },
-  "altOptionAsUndyColor" : false,
-  "headOptionAsHairColor" : false,
-  "genders" : [
-    {
-      "name" : "male",
-      "image" : "/interface/title/male.png",
-      "characterImage" : "/interface/title/novakidmale.png",
-      "hair" : [ "0" ],
-      "shirt" : [ "emptychest" ],
-      "pants" : [ "emptylegs" ],
-      "facialHairGroup" : "",
-      "facialHair" : [ ],
-      "facialMaskGroup" : "",
-      "facialMask" : [ ]
-    },
-    {
-      "name" : "female",
-      "image" : "/interface/title/female.png",
-      "characterImage" : "/interface/title/novakidfemale.png",
-      "hair" : [ "0" ],
-      "shirt" : [ "emptychest" ],
-      "pants" : [ "emptylegs" ],
-      "facialHairGroup" : "",
-      "facialHair" : [ ],
-      "facialMaskGroup" : "",
-      "facialMask" : [ ]
-    }
-  ],
-  "baseColorMap" : {
-    "primary" : ["8b72a9","a38cbe","c3aae2"],
-    "tertiary" : ["8c8c8c","bfbfbf","e3e3e3"],
-    "secondary" : ["418093", "57a3b9", "70b9cf"],
-    "flesh" : ["418093", "57a3b9", "70b9cf"]
-  },
-  // These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-  "bodyColor" : [
-    { "ffe2c5" : "ab8c77" }
-  ],
-  "undyColor" : [
-    { "dc1f00" : "4d76ad" }
-  ],
-  "hairColor" : [
-    { "d9c189" : "E86D46" }
-  ]
+			{ "item" : "novakidfancychest" },
+			{ "item" : "novakidfancypants" },
+			{ "item" : "novakidjacket" },
+			{ "item" : "novakidjacketpants" },
+			{ "item" : "novakidsuspenders" },
+			{ "item" : "novakidsuspenderspants" },
+			{ "item" : "novakidwaistcoat" },
+			{ "item" : "novakidblackpants" }
+		]
+	},
+	"altOptionAsUndyColor" : false,
+	"headOptionAsHairColor" : false,
+	"genders" : [
+		{
+			"name" : "male",
+			"image" : "/interface/title/male.png",
+			"characterImage" : "/interface/title/novakidmale.png",
+			"hair" : [ "0" ],
+			"shirt" : [ "emptychest" ],
+			"pants" : [ "emptylegs" ],
+			"facialHairGroup" : "",
+			"facialHair" : [ ],
+			"facialMaskGroup" : "",
+			"facialMask" : [ ]
+		},
+		{
+			"name" : "female",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/novakidfemale.png",
+			"hair" : [ "0" ],
+			"shirt" : [ "emptychest" ],
+			"pants" : [ "emptylegs" ],
+			"facialHairGroup" : "",
+			"facialHair" : [ ],
+			"facialMaskGroup" : "",
+			"facialMask" : [ ]
+		}
+	],
+	"baseColorMap" : {
+		"primary" : ["8b72a9","a38cbe","c3aae2"],
+		"tertiary" : ["8c8c8c","bfbfbf","e3e3e3"],
+		"secondary" : ["418093", "57a3b9", "70b9cf"],
+		"flesh" : ["418093", "57a3b9", "70b9cf"]
+	},
+	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"bodyColor" : [
+		{ "ffe2c5" : "ab8c77" }
+	],
+	"undyColor" : [
+		{ "dc1f00" : "4d76ad" }
+	],
+	"hairColor" : [
+		{ "d9c189" : "E86D46" }
+	]
 
 }
