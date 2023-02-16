@@ -5,9 +5,9 @@
 	"permanentAnimOverride" : true,
 
 	"charCreationTooltip" : {
-			"title" : "Loki",
-			"subTitle" : "(C9H8O)C6H5CH=CHCHO",
-			"description" : "Are you sure you're supposed to be able to read this?"
+		"title" : "Loki",
+		"subTitle" : "(C9H8O)C6H5CH=CHCHO",
+		"description" : "Are you sure you're supposed to be able to read this?"
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
@@ -17,7 +17,7 @@
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_female1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
 
 
-	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "HUMAN", "Personality" ],
+	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "Deerfox", "Personality" ],
 	"skull" : "/humanoid/human/dead.png",
 	"effectDirectives" : "?replace=FEFFFFFF=cfffa7FF?replace=9bd4ffFF=b4ff74FF?replace=31a6ffFF=92e64aFF",
 	"defaultBlueprints" : {
@@ -105,7 +105,7 @@
 		{
 			"name" : "male",
 			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/humanmale.png",
+			"characterImage" : "/interface/title/male.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
@@ -118,7 +118,7 @@
 		{
 			"name" : "female",
 			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/humanfemale.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],

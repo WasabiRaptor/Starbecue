@@ -174,7 +174,8 @@ function sbq.readOccupantData()
 						{ type = "canvas", id = id.."PortraitCanvas", position = {8,4}, size = {16,16} },
 						{ type = "label", id = id.."Name", position = {32,8.5}, size = {48,10}, text = world.entityName( id ) },
 						{ type = "canvas", id = id.."ProgressBar", position = {23,0}, size = {61,5} },
-						{ type = "canvas", id = id.."HealthBar", position = {23,19}, size = {61,5}},
+						{ type = "canvas", id = id .. "HealthBar", position = { 23, 19 }, size = { 61, 5 } },
+						{ type = "image", noAutoCrop = true, position = {0,0}, file = "portraitCover.png"  },
 						{ type = "iconButton", id = id.."ActionButton", noAutoCrop = true, position = {0,0}, image = "portrait.png?setcolor=FFFFFF?multiply=00000001"  }
 					}})}
 					sbq.occupantList[id].portrait = _ENV[id.."PortraitCanvas"]

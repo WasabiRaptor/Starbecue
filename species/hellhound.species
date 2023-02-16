@@ -1,147 +1,147 @@
 {
-  "kind" : "hellhound",
+	"kind" : "hellhound",
 
-  "speciesAnimOverride" : "speciesAnimOverride.config",
+	"speciesAnimOverride" : "speciesAnimOverride.config",
 
-  "charCreationTooltip" : {
-      "title" : "Hellhound",
-      "subTitle" : "S8",
-      "description" : "Are you sure you're supposed to be able to read this?"
-  },
+	"charCreationTooltip" : {
+		"title" : "Hellhound",
+		"subTitle" : "S8",
+		"description" : "I hear they're pretty hot."
+	},
 
-  "nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
-
-
-  // these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-  "ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
+	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
 
 
-  "charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "HUMAN", "Personality" ],
-  "skull" : "/humanoid/human/dead.png",
-  "effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
-  "defaultBlueprints" : {
-    "tier1" : [
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
+
+
+	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "Hellhound", "Personality" ],
+	"skull" : "/humanoid/human/dead.png",
+	"effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
+	"defaultBlueprints" : {
+		"tier1" : [
 
 // Empty Hands
-      { "item" : "flaghuman" },
+			{ "item" : "flaghuman" },
 
 // Anvil
-      { "item" : "humantier1head" },
-      { "item" : "humantier1chest" },
-      { "item" : "humantier1pants" },
-      { "item" : "humantier2head" },
-      { "item" : "humantier2chest" },
-      { "item" : "humantier2pants" },
+			{ "item" : "humantier1head" },
+			{ "item" : "humantier1chest" },
+			{ "item" : "humantier1pants" },
+			{ "item" : "humantier2head" },
+			{ "item" : "humantier2chest" },
+			{ "item" : "humantier2pants" },
 
-      { "item" : "ironshortsword" },
-      { "item" : "ironbroadsword" },
-      { "item" : "tungstenaxe" },
-      { "item" : "tungstenhammer" },
+			{ "item" : "ironshortsword" },
+			{ "item" : "ironbroadsword" },
+			{ "item" : "tungstenaxe" },
+			{ "item" : "tungstenhammer" },
 
 // Anvil2
-      { "item" : "humantier3head" },
-      { "item" : "humantier3chest" },
-      { "item" : "humantier3pants" },
-      { "item" : "humantier4head" },
-      { "item" : "humantier4chest" },
-      { "item" : "humantier4pants" },
+			{ "item" : "humantier3head" },
+			{ "item" : "humantier3chest" },
+			{ "item" : "humantier3pants" },
+			{ "item" : "humantier4head" },
+			{ "item" : "humantier4chest" },
+			{ "item" : "humantier4pants" },
 
-      { "item" : "titaniumdagger" },
-      { "item" : "titaniumspear" },
-      { "item" : "durasteelbroadsword" },
-      { "item" : "durasteelshortsword" },
+			{ "item" : "titaniumdagger" },
+			{ "item" : "titaniumspear" },
+			{ "item" : "durasteelbroadsword" },
+			{ "item" : "durasteelshortsword" },
 
 // Anvil3
-      { "item" : "humantier5ahead" },
-      { "item" : "humantier5achest" },
-      { "item" : "humantier5apants" },
-      { "item" : "humantier6ahead" },
-      { "item" : "humantier6achest" },
-      { "item" : "humantier6apants" },
+			{ "item" : "humantier5ahead" },
+			{ "item" : "humantier5achest" },
+			{ "item" : "humantier5apants" },
+			{ "item" : "humantier6ahead" },
+			{ "item" : "humantier6achest" },
+			{ "item" : "humantier6apants" },
 
-      { "item" : "humantier5mhead" },
-      { "item" : "humantier5mchest" },
-      { "item" : "humantier5mpants" },
-      { "item" : "humantier6mhead" },
-      { "item" : "humantier6mchest" },
-      { "item" : "humantier6mpants" },
+			{ "item" : "humantier5mhead" },
+			{ "item" : "humantier5mchest" },
+			{ "item" : "humantier5mpants" },
+			{ "item" : "humantier6mhead" },
+			{ "item" : "humantier6mchest" },
+			{ "item" : "humantier6mpants" },
 
-      { "item" : "humantier5shead" },
-      { "item" : "humantier5schest" },
-      { "item" : "humantier5spants" },
-      { "item" : "humantier6shead" },
-      { "item" : "humantier6schest" },
-      { "item" : "humantier6spants" },
+			{ "item" : "humantier5shead" },
+			{ "item" : "humantier5schest" },
+			{ "item" : "humantier5spants" },
+			{ "item" : "humantier6shead" },
+			{ "item" : "humantier6schest" },
+			{ "item" : "humantier6spants" },
 
-      { "item" : "aegisaltpistol" },
-      { "item" : "aegisaltbow" },
-      { "item" : "feroziumwand" },
-      { "item" : "feroziumstaff" },
-      { "item" : "violiumshortsword" },
-      { "item" : "violiumbroadsword" },
+			{ "item" : "aegisaltpistol" },
+			{ "item" : "aegisaltbow" },
+			{ "item" : "feroziumwand" },
+			{ "item" : "feroziumstaff" },
+			{ "item" : "violiumshortsword" },
+			{ "item" : "violiumbroadsword" },
 
 // Furniture Table 2
-      { "item" : "humanstoragelocker" },
-      { "item" : "humanshipdoor" },
-      { "item" : "humanshiphatch" },
+			{ "item" : "humanstoragelocker" },
+			{ "item" : "humanshipdoor" },
+			{ "item" : "humanshiphatch" },
 
 // Spinning Wheel
-      { "item" : "conceptchest" },
-      { "item" : "conceptlegs" },
-      { "item" : "coolchest" },
-      { "item" : "coollegs" },
-      { "item" : "sweatervestchest" },
-      { "item" : "sweatervestlegs" },
-      { "item" : "workoutchest" },
-      { "item" : "workoutlegs" }
-    ]
-  },
-  "altOptionAsUndyColor" : true,
-  "headOptionAsHairColor" : true,
-  "altOptionAsHairColor" : true,
-  "genders" : [
-    {
-      "name" : "male",
-      "image" : "/interface/title/male.png",
-      "characterImage" : "/interface/title/humanmale.png",
-      // if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-      "hair" : [ "0" ],
-      "shirt" : [ "emptychest" ],
-      "pants" : [ "emptylegs" ],
-      "facialHairGroup" : "",
-      "facialHair" : [ ],
-      "facialMaskGroup" : "",
-      "facialMask" : [ ]
-    },
-    {
-      "name" : "female",
-      "image" : "/interface/title/female.png",
-      "characterImage" : "/interface/title/humanfemale.png",
-      // if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-      "hair" : [ "0" ],
-      "shirt" : [ "emptychest" ],
-      "pants" : [ "emptylegs" ],
-      "facialHairGroup" : "",
-      "facialHair" : [ ],
-      "facialMaskGroup" : "",
-      "facialMask" : [ ]
-    }
-  ],
-  "baseColorMap" : {
-    "primary" :   ["1c1614","261f1d","2e2725","372f2d"],
-    "secondary" : ["753e23","884c2c","9b5b38","ab6743"],
-    "hair" :      ["1c1614","261f1d","2e2725","372f2d"],
-    "flesh" :     ["a0533f","c05e41","fc8d72","fcab9c"]
-  },
+			{ "item" : "conceptchest" },
+			{ "item" : "conceptlegs" },
+			{ "item" : "coolchest" },
+			{ "item" : "coollegs" },
+			{ "item" : "sweatervestchest" },
+			{ "item" : "sweatervestlegs" },
+			{ "item" : "workoutchest" },
+			{ "item" : "workoutlegs" }
+		]
+	},
+	"altOptionAsUndyColor" : true,
+	"headOptionAsHairColor" : true,
+	"altOptionAsHairColor" : true,
+	"genders" : [
+		{
+			"name" : "male",
+			"image" : "/interface/title/male.png",
+			"characterImage" : "/interface/title/male.png",
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+			"hair" : [ "0" ],
+			"shirt" : [ "emptychest" ],
+			"pants" : [ "emptylegs" ],
+			"facialHairGroup" : "",
+			"facialHair" : [ ],
+			"facialMaskGroup" : "",
+			"facialMask" : [ ]
+		},
+		{
+			"name" : "female",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/female.png",
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+			"hair" : [ "0" ],
+			"shirt" : [ "emptychest" ],
+			"pants" : [ "emptylegs" ],
+			"facialHairGroup" : "",
+			"facialHair" : [ ],
+			"facialMaskGroup" : "",
+			"facialMask" : [ ]
+		}
+	],
+	"baseColorMap" : {
+		"primary" :	 ["1c1614","261f1d","2e2725","372f2d"],
+		"secondary" : ["753e23","884c2c","9b5b38","ab6743"],
+		"hair" :			["1c1614","261f1d","2e2725","372f2d"],
+		"flesh" :		 ["a0533f","c05e41","fc8d72","fcab9c"]
+	},
 
-  // These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-  "bodyColor" : [
-    { "ffe2c5" : "ab8c77" }
-  ],
-  "undyColor" : [
-    { "dc1f00" : "4d76ad" }
-  ],
-  "hairColor" : [
-    { "d9c189" : "E86D46" }
-  ]
+	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"bodyColor" : [
+		{ "ffe2c5" : "ab8c77" }
+	],
+	"undyColor" : [
+		{ "dc1f00" : "4d76ad" }
+	],
+	"hairColor" : [
+		{ "d9c189" : "E86D46" }
+	]
 }

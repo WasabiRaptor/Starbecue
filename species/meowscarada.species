@@ -7,11 +7,12 @@
 	"charCreationTooltip" : {
 			"title" : "Meowscarada",
 			"subTitle" : "Kitty",
-			"description" : "Are you sure you're supposed to be able to read this?"
+			"description" : "The trickiest grass cat."
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
 
+	"humanoidConfig" : "/species/pokemonDeathBodyconfig.config",
 
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
@@ -113,7 +114,7 @@
 		{
 			"name" : "male",
 			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/humanmale.png",
+			"characterImage" : "/interface/title/male.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
@@ -121,12 +122,12 @@
 			"facialHairGroup" : "ears",
 			"facialHair" : [ "0" ],
 			"facialMaskGroup" : "mask",
-			"facialMask" : [ "blank", "0" ]
+			"facialMask" : [ "blank", "0", "0", "1", "2" ]
 		},
 		{
 			"name" : "female",
 			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/humanfemale.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
@@ -134,7 +135,7 @@
 			"facialHairGroup" : "ears",
 			"facialHair" : [ "0" ],
 			"facialMaskGroup" : "mask",
-			"facialMask" : [ "blank", "0" ]
+			"facialMask" : [ "blank", "0", "1", "2" ]
 		}
 	],
 	"baseColorMap" : {

@@ -12,7 +12,7 @@
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
 
-	"humanoidConfig" : "/species/sbqQuadruped.config",
+	"humanoidConfig" : "/species/sbqQuadrupedPokemon.config",
 
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
@@ -105,7 +105,7 @@
 		{
 			"name" : "male",
 			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/humanmale.png",
+			"characterImage" : "/interface/title/male.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
@@ -118,7 +118,7 @@
 		{
 			"name" : "female",
 			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/humanfemale.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "emptychest" ],
