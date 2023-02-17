@@ -27,6 +27,7 @@ require("/interface/scripted/sbq/sbqSettings/sbqSettingsEffectsPanel.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
 sbq.selectedMainTabFieldTab = mainTabField.tabs.globalPredSettings
 
@@ -449,6 +450,8 @@ function sbq.generateItemCard(overrideData)
 			}
 		}
 	}
+
+	validateIdentity(overrideData.identity)
 
 	item.parameters.shortdescription = sbq.speciesFile.charCreationTooltip.title
 	item.parameters.inventoryIcon = root.npcPortrait("bust", overrideData.species, "generictenant", 1, 0, npcOverrides)

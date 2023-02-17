@@ -11,6 +11,7 @@ indexes = {
 }
 
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
+require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
 function sbq.changeSelectedFromList(list, label, indexName, inc )
 	indexes[indexName] = (indexes[indexName] or 1) + inc
@@ -673,6 +674,8 @@ end
 
 function sbq.generateNPCItemCard(tenant)
 	local npcConfig = root.npcConfig(tenant.type)
+
+	validateIdentity(tenant.overrides.identity or {})
 
 	local item = copy(sbq.config.npcCardTemplate)
 	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
