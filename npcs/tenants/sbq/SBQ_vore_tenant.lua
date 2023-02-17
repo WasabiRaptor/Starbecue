@@ -50,6 +50,8 @@ function init()
 		npc.setItemSlot = new_npc_setItemSlot
 	end
 
+	oldinit()
+
 	sbq.setSpeciesConfig()
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
 
@@ -75,8 +77,6 @@ function init()
 	sbq.saveCosmeticSlots()
 
 	sbq.setRelevantPredSettings()
-
-	oldinit()
 
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()

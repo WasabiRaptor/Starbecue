@@ -122,7 +122,7 @@
 			"facialHairGroup" : "ears",
 			"facialHair" : [ "0" ],
 			"facialMaskGroup" : "mask",
-			"facialMask" : [ "blank", "0", "0", "1", "2" ]
+			"facialMask" : [ "blank","blank","blank","blank","blank","blank","blank", "0","0","0","0","0","0","0", "1","1","1","1","1","1","1", "2","2","2","2","2","2","2" ]
 		},
 		{
 			"name" : "female",
@@ -135,7 +135,7 @@
 			"facialHairGroup" : "ears",
 			"facialHair" : [ "0" ],
 			"facialMaskGroup" : "mask",
-			"facialMask" : [ "blank", "0", "1", "2" ]
+			"facialMask" : [ "blank","blank","blank","blank","blank","blank","blank", "0","0","0","0","0","0","0", "1","1","1","1","1","1","1", "2","2","2","2","2","2","2" ]
 		}
 	],
 	"baseColorMap" : {
@@ -183,6 +183,10 @@
 		{ // blue
 			"44b992":"2551e7FE","65deb5":"4e78ffFE","aaccc0":"daf2eaFE","c2cfcb":"e6fff8FE", // eyes
 			"882c4a":"0a2da3","b9446b":"2551e7","df658e":"4e78ff" // flesh
+		},
+		{ // claire
+			"44b992":"b9446bFE","65deb5":"df658eFE","aaccc0":"ccaab5FE","c2cfcb":"cfc2c6FE", // eyes pink
+			"882c4a":"323A55","b9446b":"343E5D","df658e":"3A4565" // flesh bluish black
 		}
 	],
 	"undyColor" : [ // main body
@@ -203,6 +207,9 @@
 		},
 		{ // Cherry
 			"a0b686":"eda7cb","c3daa5":"f5bad8","ddf2bf":"ffd7eb","e9fcce":"ffe2f0" // primary
+		},
+		{ // Claire
+			"a0b686":"D9D6E7","c3daa5":"EBE8F5","ddf2bf":"FAF9FE","e9fcce":"FAF9FE" // primary
 		}
 	],
 	"hairColor" : [ // mask / leaves / legs
@@ -225,6 +232,10 @@
 		{ // cherry legs and cherry leaves
 			"1c421e":"a93c89","265529":"b9549b","2d6231":"cc69af", // secondary / pink leaves
 			"131c10":"5a062f","1a2617":"65133a","23311f":"721e46" // tertiary / darkpink legs
+		},
+		{ // bluish black legs and bluish black leaves
+			"1c421e":"323A55","265529":"343E5D","2d6231":"3A4565", // secondary /  bluish black leaves
+			"131c10":"323A55","1a2617":"343E5D","23311f":"3A4565" // tertiary / bluish black legs
 		}
 	]
 

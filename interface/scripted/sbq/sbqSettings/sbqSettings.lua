@@ -419,6 +419,55 @@ function presetText:onEnter()
 end
 
 --------------------------------------------------------------------------------------------------
+
+function sbq.nextDifferentListEntry(list, index, inc)
+	local current = list[index]
+	local index = index
+	while list[index] == current do
+		index = index + inc
+		if index > #list then
+			index = 1
+		elseif index < 1 then
+			index = #list
+		end
+	end
+	return index, list[index]
+end
+
+function sbq.generateItemCard(overrideData)
+	local item = copy(sbq.config.npcCardTemplate)
+	local npcOverrides = {
+		identity = sb.jsonMerge(overrideData.identity, {gender = overrideData.gender}),
+		items = {
+			override = {
+				{0,
+					{
+						{
+						}
+					}
+				}
+			}
+		}
+	}
+
+	item.parameters.shortdescription = sbq.speciesFile.charCreationTooltip.title
+	item.parameters.inventoryIcon = root.npcPortrait("bust", overrideData.species, "generictenant", 1, 0, npcOverrides)
+	item.parameters.description = "Player Customization Card"
+	item.parameters.tooltipFields.collarNameLabel = ""
+	item.parameters.tooltipFields.objectImage = root.npcPortrait("full", overrideData.species, "generictenant", 1, 0, npcOverrides)
+	item.parameters.tooltipFields.subtitle = "Player"
+	item.parameters.tooltipFields.collarIconImage = nil
+	item.parameters.npcArgs = {
+		npcSpecies = overrideData.species,
+		npcSeed = 0,
+		npcType = "generictenant",
+		npcLevel = 1,
+		npcParam = npcOverrides
+	}
+	speciesCardSlot:setItem(item, true)
+end
+
+
 if speciesLayout ~= nil then
 	function refreshOccupantHolder()
 		local currentData = status.statusProperty("sbqCurrentData") or {}
@@ -562,7 +611,9 @@ if speciesLayout ~= nil then
 				end
 			end
 
-			if not hidePanels then return end
+			if not hidePanels then speciesCardSlot:setItem(nil, true) return end
+
+			sbq.generateItemCard(sbq.currentCustomSpecies)
 
 			speciesCustomColorText:setText(sbq.currentCustomSpecies.directives)
 			speciesBodyColorText:setText(sbq.currentCustomSpecies.identity.bodyDirectives)
@@ -624,48 +675,30 @@ if speciesLayout ~= nil then
 	end
 
 	function sbq.changeHairType(inc)
-		local index = (sbq.hairTypeIndex or 1) + inc
-		local list = sbq.genderTable.hair
-		if index > #list then
-			index = 1
-		elseif index < 1 then
-			index = #list
-		end
+		local index, result = sbq.nextDifferentListEntry(sbq.genderTable.hair, (sbq.hairTypeIndex or 1), inc)
 		sbq.hairTypeIndex = index
-		sbq.currentCustomSpecies.identity.hairType = list[index]
-		speciesHairTypeLabel:setText(list[index])
+		sbq.currentCustomSpecies.identity.hairType = result
+		speciesHairTypeLabel:setText(result)
 		sbq.saveSpeciesCustomize()
 	end
 	function decSpeciesHairType:onClick() sbq.changeHairType(-1) end
 	function incSpeciesHairType:onClick() sbq.changeHairType(1) end
 
 	function sbq.changeFacialHairType(inc)
-		local index = (sbq.facialHairTypeIndex or 1) + inc
-		local list = sbq.genderTable.facialHair
-		if index > #list then
-			index = 1
-		elseif index < 1 then
-			index = #list
-		end
+		local index, result = sbq.nextDifferentListEntry(sbq.genderTable.facialHair, (sbq.facialHairTypeIndex or 1), inc)
 		sbq.facialHairTypeIndex = index
-		sbq.currentCustomSpecies.identity.facialHairType = list[index]
-		speciesFacialHairTypeLabel:setText(list[index])
+		sbq.currentCustomSpecies.identity.facialHairType = result
+		speciesFacialHairTypeLabel:setText(result)
 		sbq.saveSpeciesCustomize()
 	end
 	function decSpeciesFacialHairType:onClick() sbq.changeFacialHairType(-1) end
 	function incSpeciesFacialHairType:onClick() sbq.changeFacialHairType(1) end
 
 	function sbq.changeFacialMaskType(inc)
-		local index = (sbq.facialMaskTypeIndex or 1) + inc
-		local list = sbq.genderTable.facialMask
-		if index > #list then
-			index = 1
-		elseif index < 1 then
-			index = #list
-		end
+		local index, result = sbq.nextDifferentListEntry(sbq.genderTable.facialMask, (sbq.facialMaskTypeIndex or 1), inc)
 		sbq.facialMaskTypeIndex = index
-		sbq.currentCustomSpecies.identity.facialMaskType = list[index]
-		speciesFacialMaskTypeLabel:setText(list[index])
+		sbq.currentCustomSpecies.identity.facialMaskType = result
+		speciesFacialMaskTypeLabel:setText(result)
 		sbq.saveSpeciesCustomize()
 	end
 	function decSpeciesFacialMaskType:onClick() sbq.changeFacialMaskType(-1) end
