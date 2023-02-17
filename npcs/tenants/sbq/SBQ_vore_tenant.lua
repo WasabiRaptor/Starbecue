@@ -193,6 +193,25 @@ function init()
 		sbq.checkOccupantRewards(occupant, rewards, false)
 	end)
 
+	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+		local size = sbq.calcSize()
+		if size <= (steppySize*0.4) then
+			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
+			if steppyType == "falling" then
+				if sbq.timer("sbqSteppyFall", 0.5) then
+					sbq.getRandomDialogue( {"gotSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+				end
+			elseif sbq.timer("sbqSteppy", 5) then
+				sbq.getRandomDialogue( {"gotSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+			end
+		end
+	end)
+	message.setHandler("sbqDidSteppy", function(_, _, eid, steppyType)
+		if sbq.timer("sbqDidSteppy", 5) then
+			sbq.getRandomDialogue( {"didSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+		end
+	end)
+
 end
 
 function sbq.setSpeciesConfig()
@@ -326,7 +345,7 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 		playerName = world.entityName(eid)
 	end
 
-	local tags = { entityname = playerName, dontSpeak = "", infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local tags = { entityname = playerName, dontSpeak = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
 
 	if type(randomDialogue) == "string" then
 		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote, appendName)
@@ -391,7 +410,9 @@ function sbq.setRelevantPredSettings()
 	local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
 
 	if storage.settings.breasts or storage.settings.penis or storage.settings.balls or storage.settings.pussy
-	or storage.settings.bra or storage.settings.underwear
+		or storage.settings.bra or storage.settings.underwear
+		or speciesAnimOverrideData.species ~= speciesOverride.species()
+		or speciesAnimOverrideData.gender ~= speciesOverride.gender()
 	then
 		local effects = status.getPersistentEffects("speciesAnimOverride")
 		if not effects[1] then
@@ -436,7 +457,7 @@ function sbq.setRelevantPredSettings()
 			end
 			sbq.handleUnderwear()
 		end)
-	elseif not sbq.occupantHolder and not speciesAnimOverrideData.permanent then
+	elseif (not sbq.occupantHolder and not speciesAnimOverrideData.permanent) and (status.statusProperty("animOverrideScale") or 1) == 1 then
 		status.clearPersistentEffects("speciesAnimOverride")
 	end
 

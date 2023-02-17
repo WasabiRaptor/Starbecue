@@ -3,20 +3,69 @@
 --local oldInitAfterInit = initAfterInit
 
 require("/scripts/rect.lua")
+sbq = {}
 
 local _scaleUpdated = scaleUpdated
+
 function scaleUpdated(dt)
 	_scaleUpdated(dt)
 	local occupantHolder = (status.statusProperty("sbqCurrentData") or {}).id
 	local boundRectSize = rect.size(mcontroller.boundBox())
-	local size = math.sqrt(boundRectSize[1] * boundRectSize[2])/root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
+	sbq.size = math.sqrt(boundRectSize[1] * boundRectSize[2])/root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
 	status.setStatusProperty("sbqSize", size)
 	if occupantHolder then
 		world.sendEntityMessage(occupantHolder, "sbqOccupantHolderScale", self.currentScale or 1, (self.controlParameters or {}).yOffset or 0)
 	end
 end
 
-sbq = {}
+local _createScaledHitbox = createScaledHitbox
+function createScaledHitbox(anims, animsTable, currentScale)
+	_createScaledHitbox(anims, animsTable, currentScale)
+
+	-- we want a hitbox to detect where our feet are for stepping on micros
+	local scaledControlParameters = animsTable.scaledControlParameters[currentScale]
+	local steppyHitbox = poly.boundBox(poly.scale(scaledControlParameters.collisionPoly, { 1, 0.25 }))
+	local unscaledBox = poly.boundBox(scaledControlParameters.collisionPoly)
+	local feetOffset = unscaledBox[2] - steppyHitbox[2] -- first pair of coords in a rect is the lower left, so we want the difference in y between the bottom so we can translate that
+	scaledControlParameters.steppyHitbox = rect.translate(steppyHitbox, {0, feetOffset})
+end
+
+local oldMovement = {
+	walking = movement.walking,
+	running = movement.running,
+	falling = movement.falling
+}
+
+function movement.walking()
+	oldMovement.walking()
+	sbq.steppy("walking")
+end
+function movement.running()
+	oldMovement.running()
+	sbq.steppy("running")
+end
+function movement.falling()
+	oldMovement.falling()
+	sbq.steppy("falling")
+end
+
+function sbq.steppy(steppyType)
+	local steppyHitbox = self.controlParameters.steppyHitbox
+	--[[world.debugPoly({
+		localToGlobal({ steppyHitbox[1], steppyHitbox[2] }),
+		localToGlobal({ steppyHitbox[1], steppyHitbox[4] }),
+		localToGlobal({ steppyHitbox[3], steppyHitbox[4] }),
+		localToGlobal({ steppyHitbox[3], steppyHitbox[2] }),
+	}, "blue")]]
+	local entities = world.entityQuery(localToGlobal({steppyHitbox[1],steppyHitbox[2]}),localToGlobal({steppyHitbox[3],steppyHitbox[4]}), {
+		withoutEntityId = entity.id(),
+		includedTypes = {"creature"}
+	})
+	for i, eid in ipairs(entities or {}) do
+		world.sendEntityMessage(eid, "sbqSteppy", entity.id(), steppyType, sbq.size)
+	end
+end
+
 
 message.setHandler("sbqUpdateAnimTags", function (_,_, animTags)
 	for tag, value in pairs(animTags) do

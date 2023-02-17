@@ -1263,6 +1263,50 @@
 				}
 			},
 
+			// when stepping on a character small enough
+			"didSteppy" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" :{ // personality
+						"next" : "mood",
+						"default" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"randomDialogue" : [ "hehe, whoops!", "Oh did I step on something?", "You tinies need to pay attention more!"]
+							}
+						}
+					}
+				}
+			},
+			// when stepped on by a larger character
+			"gotSteppy" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" :{ // personality
+						"next" : "mood",
+						"default" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"randomDialogue" : [
+									["Ahhh!", "AH!", "oof!", "eep!"],
+									["You stepped on me!", "Watch your step!"],
+									["Be careful where you're <steppyType>!", "Watch where you're <steppyType>!"],
+									["Look out!", "Careful!"]
+								]
+							},
+							"falling" : {
+								"randomDialogue" : [
+									["Ahhh!", "AH!", "oof!", "eep!"],
+									["You're stomping on me!", "I'm getting smushed!", "*wheeze*"]
+								]
+							}
+						}
+					}
+				}
+			},
+
 			"rewardNotify": {
 				"next": "race",
 				"default": { // race

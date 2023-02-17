@@ -18,6 +18,13 @@ end
 
 sbq = {}
 
+function sbq.calcSize()
+	local boundRectSize = rect.size(mcontroller.boundBox())
+	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
+	status.setStatusProperty("sbqSize", size)
+	return size
+end
+
 local old = {}
 
 local controlPathMoveRPC

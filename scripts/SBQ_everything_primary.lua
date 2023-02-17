@@ -42,10 +42,7 @@ function sbq.everything_primary()
 	message.setHandler("sbqIsPreyEnabled", function(_,_, voreType)
 		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
 		if preySettings.preyEnabled == false then return false end
-		local boundRectSize = rect.size(mcontroller.boundBox())
-		local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
-		status.setStatusProperty("sbqSize", size)
-		return { enabled = preySettings[voreType], size = size, preyList = status.statusProperty("sbqPreyList")}
+		return { enabled = preySettings[voreType], size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList")}
 	end)
 
 	message.setHandler("sbqGetPreyEnabled", function(_,_)
@@ -120,6 +117,13 @@ function sbq.everything_primary()
 		world.sendEntityMessage(pred, "sbqReplaceInfusion", location, itemDrop, entity.id(), primaryLocation)
 	end)
 
+	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+		local size = sbq.calcSize()
+		if size <= (steppySize*0.4) then
+			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
+		end
+	end)
+
 	mysteriousTFDuration = status.statusProperty("sbqMysteriousPotionTFDuration" )
 end
 
@@ -133,6 +137,13 @@ function update(dt)
 			sbq.endMysteriousTF()
 		end
 	end
+end
+
+function sbq.calcSize()
+	local boundRectSize = rect.size(mcontroller.boundBox())
+	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
+	status.setStatusProperty("sbqSize", size)
+	return size
 end
 
 function sbq.doMysteriousTF(data)
