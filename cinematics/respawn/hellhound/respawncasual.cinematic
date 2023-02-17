@@ -64,18 +64,18 @@
       "drawables" : [
       ],
       "fontSize" : 16,
-      "text" : "You panicked and dropped 30% of your pixels...",
+      "text" : "10% of Pixels Lost",
       "textPosition" : {
-        "position" : [0, 40],
+        "position" : [40, 40],
         "vAnchor" : "top",
-        "wrapWidth" : 400
+        "wrapWidth" : 218
       },
       "keyframes" : [
         {
           "timecode" : 0.0,
           "alpha" : 1.0,
           "zoom" : 1.0,
-          "position" : [300.5, 100],
+          "position" : [366.5, 100],
           "frame" : 0,
           "textPercentage" : 0
         },
@@ -93,7 +93,7 @@
    {
       "drawables" : [
         {
-          "image" : "/cinematics/respawn/Wasabi_Raptor_PokemonRespawn/layer1.png:<frame>?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=80b3ffFF;31a6ffFF=5476f0FF"
+          "image" : "/cinematics/respawn/human/layer1.png:<frame>"
         }
       ],
       "keyframes" : [
@@ -129,28 +129,28 @@
       "avatar" : "fullneutralnude",
       "keyframes" : [
         {
-          "timecode" :9,
+          "timecode" : 3.5,
           "zoom" : 1.5,
           "alpha" : 0,
           "frame" : 0,
           "position" : [478, 269]
         },
         {
-          "timecode" : 9.75,
+          "timecode" : 4,
           "zoom" : 1.5,
           "alpha" : 1,
           "frame" : 0,
           "position" : [478, 269]
         },
         {
-        "timecode" : 10.75,
+          "timecode" : 11.25,
           "zoom" : 1.5,
           "alpha" : 1,
           "frame" : 0,
           "position" : [478, 269]
         },
         {
-          "timecode" : 11.5,
+          "timecode" : 12,
           "alpha" : 0,
           "zoom" : 1.5,
           "frame" : 93.999
@@ -160,7 +160,7 @@
     {
       "drawables" : [
         {
-          "image" : "/cinematics/respawn/Wasabi_Raptor_PokemonRespawn/layer1.png:<frame>?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=80b3ffFF;31a6ffFF=5476f0FF"
+          "image" : "/cinematics/respawn/human/layer2.png:<frame>"
         }
       ],
       "keyframes" : [
@@ -195,8 +195,8 @@
   ],
   "audio" : [
     {
-      "timecode" : 4.2,
-      "resource" : "/sfx/cinematics/pokeheal.ogg"
+      "timecode" : 3,
+      "resource" : "/sfx/cinematics/pixels_lost_piano.ogg"
     },
     {
       "timecode" : 5,
