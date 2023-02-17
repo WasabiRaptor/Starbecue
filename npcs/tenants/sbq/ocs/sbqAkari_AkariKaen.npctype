@@ -1,0 +1,811 @@
+{
+	"type" : "sbqAkari_AkariKaen",
+	"baseType" : "villager",
+
+	"scripts" : [
+		"/npcs/bmain.lua",
+		"/scripts/SBQ_npc_bmain.lua",
+		"/scripts/speciesAnimOverride_npc_bmain.lua",
+		"/npcs/tenants/sbq/SBQ_vore_tenant.lua"
+	],
+
+	// you really should make sure to define the npcname so the OC actually has the OC's name
+	"npcname" : "Akari",
+	// identity is quite important if you don't want things to be randomly generated
+	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
+	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
+	// if one knows how to make a directives string too, they can just define it here for the specific parts
+	"identity" : {
+		"gender" : "male",
+		"personalityArmIdle" : "idle.2",
+		"personalityIdle" : "idle.2"
+	},
+	"scriptConfig" : {
+		"sbqNPC" : true,
+
+		// these remove access to the settings panels for pred and prey respectively
+		// "isPredator" : false,
+		// "isPrey" : false,
+
+		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
+		"behavior" : "sbqvorevillager",
+		"questGenerator" : {
+			"graduation" : {
+				"nextNpcType" : [] // this prevents the NPC from graduating into crew
+			}
+		},
+
+
+		"uniqueId" : "sbqAkari_AkariKaen", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+
+		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
+		"defaultPortrait" : "bust",
+		// if you want to use specially drawn sprites for dialogue box portraits, remove the two portrait args above, and uncomment the args below
+		/*
+		"defaultPortrait" : "neutral.png",
+		"portraitPath" : "/humanoid/sbqAkari_AkariKaen/portraits/", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
+		"portraitPath" : "/npcs/tenants/sbq/ocs/sbqAkari_AkariKaen/portraits/",
+		*/
+
+		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqAkari_AkariKaenDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
+		// as the scipts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
+
+		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		"dialogueTree" : {
+			// after following a path, next steps will automatically advance you down the tree until there is a step that does not have a next
+			// a next can be a string or a table, if the next step is a string, it will just use that value, if it is a table, it will randomly select from it
+			// when defining a next step, it attemts to find and run dialogueBoxScript[step]() matching the name of the next step value to determine which step to take next
+			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
+			// if no setting is found it only attempts to go down the branch with the matching name of the next step
+
+			"dialogueTreeReturn" : ["converse"], // this sets it so that when you reach the end of a tree with nowhere to continue, and the button has no actions, it will return to the most recent time it saw one of these while moving down the tree
+
+			// greeting is the default start of the tree
+			// settings come from itself
+			// "greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
+			"greeting" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "giveTenantRewards",
+							"rewards" : {
+								"randomDialogue" : [
+									"It was fun messing around!\nHave some stuff.",
+									{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+								],
+								"jump" : ["greeting"]
+							},
+							"default" : { // no rewards
+								"randomDialogue" : [ "This is my first random greeting line.", "This is my second random greeting line" ],
+								"randomButtonText" : [ "Ok", "Yeah I can tell"],
+								"jump" : ["converse"] // all jumps are relative to the top of the dialogue tree
+							}
+						}
+					}
+				}
+			},
+			// and jumps can go to any other part of the tree
+			"converse" : {
+				"dialogue" : [
+					"here comes some lines in sequence",
+					"One",
+					"You can't tell me what to do.",
+					"Haha yes.",
+					"Now the other stuff for the button can trigger since the sequence is done."
+				],
+				"buttonText" : [
+					"Oh really?",
+					"Now you're gonna say 'two'",
+					"Guess you're too smart.",
+					"So what now?",
+					"Like what?"
+				],
+				"continue" : {
+					"dialogueTreeReturn" : ["converse","continue"], // this sets it so that when you reach the end of a tree with nowhere to continue, and the button has no actions, it will return here
+
+					"dialogue" : ["I can give you more dialogue options to choose from."],
+					"options" : [
+						[ "Woah, dropdown options.", {
+							"dialogue" : ["Yep, pretty cool."],
+							"continue" : {
+								"next" : ["random1", "random2"], // using a table for next keys makes it randonly select between them
+								"random1" : { "dialogue" : ["So lets jump back there so you can choose again alright?"] },
+								"random2" : {
+									"dialogue" : ["What if we talked a little more?"],
+									"continue" : { "dialogue" : ["Oh alright we'll jump back"], "jump" : ["converse","continue"] } // a jump can also be manually defined
+								}
+							}
+						}],
+						[ "Jump Example", { "jump" : ["converse", "continue", "options", 1, 2, "continue"] } ], // this is one that goes to another option but the jump can go anywhere really
+						[ "So whats your belly like?", {
+							"next" : "bellyEffect", // the dialogue for the next step down the tree will be based on their bellyEffect setting
+							"voreType" : "oralVore", // this option won't show up if oralVore isn't something either party wants to partake in
+							"default" : { "dialogue" : ["Doesn't really do much"]},
+							"sbqHeal" : { "dialogue" : ["You'd be healed."]},
+							"sbqDigest" : { "dialogue" : ["I'd melt you down."]},
+							"sbqSoftDigest" : { "dialogue" : ["I'd melt you down, but you'd be fine."]}
+						}]
+					]
+				}
+			},
+
+			// lines for when a pred is eating prey, be it from hunting, or from it being requested
+			// settings come from itself
+			"vore" : {
+				"next" : "voreType",
+				"oralVore" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ] },
+									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ] }
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "I think you'll fill me up.", "I just need a bite to eat.", "You seem like you'd make a good meal.", "My belly's been grumbling..." ] },
+									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ] }
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
+								"full" : {
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "I'm a bit too full...", "My belly can't stretch any further...", "I've eaten too much already...", "I would... but I'm too full..." ]},
+									"sbqDigest" : { "randomDialogue" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ]},
+									"sbqSoftDigest" : { "randomDialogue" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ]}
+								},
+								"otherLocationFull" : { "randomDialogue" : [ "I'm a bit too full...", "My body can't stretch any further...", "I've been filled too much already...", "I would... but I'm too full..." ]},
+
+								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+							}
+						}
+					}
+				},
+				"cockVore" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "You know things aren't supposed to go in there right?", "Thats going to be a real tight fit." ] },
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
+								"full" : { "randomDialogue" : [ "Already got someone plugging my shaft~", "Mmm maybe if someone squirmed a little further in, I might have space for you.", "Hehe, I would if someone wasn't already squeezed in there~", "Maybe after I cum heh~" ] },
+								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+							}
+						}
+					}
+				}
+			},
+			// when being pred, responses to the prey struggling inside
+			// settings come from itself, prey settings come from prey
+			"struggle" : {
+				"next" : "location",
+				"taurBelly" : "struggle.belly",
+				"belly" : { // location
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "Having a good time in there?", "Hope its comfortable." ] },
+								"sbqHeal" : { "randomDialogue" : [ "Now you're nice and safe.", "Hope you like how it feels in there." ] },
+								"sbqDigest" : {
+									"next" : "digestImmunity",
+									"false" : { "randomDialogue" : [ "Time to melt you down into pudge.", "Just be a good meal and melt." ] },
+									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
+								},
+								"sbqSoftDigest" : "struggle.location.race.personality.mood.sbqDigest"
+							}
+						}
+					}
+				},
+				"cock" : "struggle.shaft", // these are just in case someone names something different
+				"shaft" : { // location
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "Having a good time in there?", "Hope its comfortable." ] },
+								"sbqCumDigest" : {
+									"next" : "cumDigestImmunity",
+									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
+									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
+								}
+							}
+						}
+					}
+				},
+				"ballsL" : "struggle.balls",
+				"ballsR" : "struggle.balls",
+				"balls" : { // location
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "Having a good time in there?", "Keep squirming.", "It feels so good having you in there~", "Friends are stored in the balls~" ] },
+								"sbqCumDigest" : {
+									"next" : "cumDigestImmunity",
+									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
+									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
+								}
+							}
+						}
+					}
+				}
+			},
+			// when being pred, responses to the prey escaping
+			// settings come from itself, prey settings come from the prey
+			"letout" : {
+				"next" : "voreType",
+				"oralVore" : { // voreType
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "struggleTrigger",
+								"true" : { // prey struggling out
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "Ahh... ok you want out.", "Why leave?", "Mmm... fine you can come out.", "I actually liked having you in there..." ] },
+									"sbqHeal" : { "randomDialogue" : [ "You do know its safer inside me right?", "Are you sure you're ready to come out?", "Maybe you should get back in... heal a little longer.", "You can come back to heal any time." ]},
+									"sbqDigest" : {
+										"next" : "digestImmunity",
+										"false" : { "randomDialogue" : [ "Dang it... I was hungry.", "No hard feelings?", "Come on, you were almost done...", "If only you weren't such a fighter..." ] },
+										"true" : { "randomDialogue" : [ "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
+									},
+									"sbqSoftDigest" : {
+										"next" : "digestImmunity",
+										"false" : { "randomDialogue" : [ "Darn it... I was hungry, you were gonna be fine anyway.", "No hard feelings? Its not like I was going to go all the way...", "Come on, you were almost done...", "If only you weren't such a fighter..." ] },
+										"true" : { "randomDialogue" : [ "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
+									},
+									"digested" : { "randomDialogue" : ["Ah... you want out... just a moment to reform.", "Ah ok, I'll reform you now.", "Fine, I'll reform you now.", "Alright, I'll reform you."]}
+								},
+								"false" : { // pred letting prey out
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "You can come out now.", "Time to come out.", "You can't stay in there forever.", "Time to get out." ] },
+									"sbqHeal" : { "randomDialogue" : [ "You're probably patched up enough.", "I think you've spent enough time healing.", "I think you should be feeling much better now.", "My stomach does wonders for healing doesn't it?"] },
+									"sbqDigest" : {
+										"next" : "digestImmunity",
+										"false" : { "randomDialogue" : [ "Actually... you've probably spent enough time in there.", "My hunger is satiated enough for now.", "Probably best to get you out of there...", "Didn't feel like melting you entirely."] },
+										"true" : { "randomDialogue" : [ "I can't even melt you down at all...", "My hunger isn't going to be satiated with you in there.", "Probably best to get you out of there so I can eat something else.", "Can't even melt you down the tiniest bit."] }
+									},
+									"sbqSoftDigest" : {
+										"next" : "digestImmunity",
+										"false" : { "randomDialogue" : [ "Actually... you've probably spent enough time in there.", "My hunger is satiated enough for now.", "Probably best to get you out of there...", "Didn't feel like melting you entirely."] },
+										"true" : { "randomDialogue" : [ "I can't even melt you down at all...", "My hunger isn't going to be satiated with you in there.", "Probably best to get you out of there so I can eat something else.", "Can't even melt you down the tiniest bit."] }
+									},
+									"digested" : { "randomDialogue" : ["Here, let me reform you real quick.", "You got digested so I gotta reform you.", "Ah, guess its time to reform you.", "Time to reform you I guess."]}
+								}
+							}
+						}
+					}
+				},
+				"cockVore" : { // voreType
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "struggleTrigger",
+								"true" : { // struggleTrigger
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "Ahh~ ahh that felt so good~", "Could you get back in and squirm some more?", "Mmm~ I thought you were pretty comfortable.", "I thought you liked it in there.", "Oh... alright." ] }
+								},
+								"false" : { // struggleTrigger
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "Hhhhhh I'm gonna cum...", "C-can't hold back much longer~", "Gonna blast you out with a load~", "Ahhhh feeels soooo goood~" ] }
+								}
+							}
+						}
+					}
+				}
+			},
+
+			// when being prey, responses to the pred that ate them as they struggle
+			// settings come from the pred, prey settings comes from itself
+			"struggling" : {
+				"next" : "location",
+				"default" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ ["I'm stuck here aren't I?", "Is there even a way out?", "Trapped..."] ] }
+								}
+							}
+						}
+					}
+				},
+				"belly" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : { // mood
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [
+										["Mmmm pretty comfortable.", "Ahh... your belly is so soft...", {"check":{"bellySounds":true},"add":["Your belly is so noisy.", "Mmm... I like the sounds your belly is making."]}],
+										{"check":{"predator":"sbqVaporeon"},"add":["Gooey Vappy belly.", "Its all gooey in here."]}
+									]},
+									"sbqHeal" : { "randomDialogue" : [
+										["Ahh... its so soothing.", "I can feel all my troubles melting away...", "Its so comfortable in here.", {"check":{"bellySounds":true},"add":["I really like the sounds your belly makes... very calming.", "I could just drift off to sleep listening to the sounds of your body..."]} ],
+										{"check":{"predator":"sbqVaporeon"},"add":["I always liked vappy goo."]}
+									]},
+									"sbqDigest" : {
+										"next" : "digestImmunity",
+										"true" : { "randomDialogue" : [
+											[["Trying to melt me down?","Trying to melt me down?\nThats not gonna work."], "Heh, I can actually stay in here as long as I want.", "I'm invincible!", "You can't melt me!"]
+										]},
+										"false" : { "randomDialogue" : [
+											["Ahh... I'm starting to melt.", "Oh my... I'm just gonna be food.", {"check":{"bellySounds":true},"add":["Your belly is so noisy... I'm going to be gurgled up aren't I?", "All this grumbling... you must be pretty hungry."]} ],
+											{"check":{"predator":"sbqVaporeon"},"add":["Ahh... I'm starting to melt into goo..."]}
+										]}
+									},
+									"sbqSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
+									"transform" : {
+										"next" : "transformImmunity",
+										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
+									}
+								}
+							}
+						}
+					}
+				},
+				"ballsR" : "struggling.balls",
+				"ballsL" : "struggling.balls",
+				"balls" : {
+					"next" : "predator",
+					"default" : {
+						"next" : "race",
+						"default" : {
+							"next" : "personality",
+							"default" : {
+								"next" : "mood",
+								"default" : {
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "All this cum sloshing around me~", "Ahhh... I'm stored in the balls~", "Stuck down here in your balls~", "This is so hot~" ] },
+									"transformed" : { "randomDialogue" : [ "O-oh my... I'm just cum now~", "Oooh~ I'm sloshing around in here~", "Now I'm just a load of cum~" ] },
+									"transform" : {
+										"next" : "transformImmunity",
+										"false" : { "randomDialogue" : [
+											["It feels kinda weird in here?", "I think... I think I'm turning white?", "I think... I'm starting to feel goopy?"]
+										]},
+										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
+									}
+								}
+							}
+						}
+					}
+				},
+				"penis" : "struggling.shaft",
+				"cock" : "struggling.shaft",
+				"shaft" : {
+					"next" : "predator",
+					"default" : {
+						"next" : "race",
+						"default" : {
+							"next" : "personality",
+							"default" : {
+								"next" : "mood",
+								"default" : {
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "Ahh~ your cock is squeezing tight around me~", "Ohhh~ Your shaft is squeezing so hard~", "This is so hot~" ] },
+									"transform" : {
+										"next" : "transformImmunity",
+										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			// when being prey, responses to the pred thats eating them
+			// settings come from the pred, prey settings comes from itself
+			"vored" : {
+				"next" : "voreType",
+				"default" : { // voreType
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : { // mood
+									"randomDialogue" : [ "Ah!" ]
+								}
+							}
+						}
+					}
+				},
+				"oralVore" : { // voreType
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : { // mood
+									"randomDialogue" : [ "Ah!" ]
+								}
+							}
+						}
+					}
+				},
+				"cockVore" : { // voreType
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : { // mood
+									"randomDialogue" : [ "UwU" ]
+								}
+							}
+						}
+					}
+				}
+			},
+			// when being prey, responses to the pred letting them out
+			// settings come from the pred, prey settings comes from itself
+			"escape" : {
+				"next" : "voreType",
+				"default" : { // voreType
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" :{ // personality
+								"next" : "mood",
+								"default" : { // mood
+									"next" : "struggleTrigger",
+									"true" : { // struggleTrigger
+										"randomDialogue" : [ "I got out." ]
+									},
+									"false" : { // struggleTrigger
+										"randomDialogue" : [ "Ah, back outside" ]
+									}
+								}
+							}
+						}
+					}
+				},
+				"oralVore" : { // voreType
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" :{ // personality
+								"next" : "mood",
+								"default" : { // mood
+									"next" : "struggleTrigger",
+									"true" : { // struggleTrigger
+										"randomDialogue" : [ "I got out." ]
+									},
+									"false" : { // struggleTrigger
+										"randomDialogue" : [ "Ah, back outside" ]
+									}
+								}
+							}
+						}
+					}
+				},
+				"cockVore" : { // voreType
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" :{ // personality
+								"next" : "mood",
+								"default" : { // mood
+									"next" : "struggleTrigger",
+									"true" : { // struggleTrigger
+										"randomDialogue" : [ "I got out." ]
+									},
+									"false" : { // struggleTrigger
+										"randomDialogue" : [ "Ah, back outside" ]
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+
+			// a line of dialogue triggered when size is changed by the size ray or something else
+			"sizeChanged" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "shrinkOrGrow",
+							"shrink" : {
+								"randomDialogue" : ["Why's everything getting bigger?", "Ah! I'm shrinking!"]
+							},
+							"grow" : {
+								"randomDialogue" : ["Why's everything getting smaller?", "Ah! I'm growing!"]
+							}
+						}
+					}
+				}
+			}
+		},
+		// when hunting for prey, a checklist to have them only seek out prey that match the settings
+		// any settings not defined in the checlkist for that vore type can be anything
+		// such as a digestion pred not wanting to eat prey with digestion immunity, or not want to eat other preds, etc.
+		"huntingChecklist" : {
+			"default" : { // mood
+				"preySettings" : {
+					// "digestImmunity" : "false" // example for a pred that would only seek out prey they can digest
+				},
+				"settings" : {
+					// "oralVorePred : "false" // example for a pred that wouldn't eat other oralVore preds
+				}
+			}
+		},
+		// when baiting a pred, a checklist to have them only seek out preds with certain settings
+		// any settings not defined in the checlkist for that vore type can be anything
+		// such as a prey not wanting to seek out preds that will digest them, or not wanting to seek out preds that do vore types they don't like, or not wanting to seek out preds who can also be prey
+		"baitingChecklist" : {
+			"default" : { // mood
+				"preySettings" : {
+					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
+				},
+				"settings" : {
+					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
+				}
+			}
+		},
+
+		// the pred prefrences and general settings for this NPC are set here!
+		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+
+		"sbqDefaultSettings" : {
+			"mood" : "default",
+			"personality" : "default",
+
+			"bellyEffectSlot" : "none", // the settings in this group exist for each location, just use the correct name (belly, balls, shaft, womb, tail, breasts)
+			//"bellyHammerspaceDisabled" : false,
+			//"bellyVisualMin" : 0,
+			//"bellyVisualMax" : 2,
+			//"bellyNoneEnable" : true,
+			//"bellyHealEnable" : true,
+			//"bellyDigestEnable" : true,
+			//"bellySoftDigestEnable" : true,
+			//"bellyDifficultyMod" : 0,
+			"bellySounds" : true,
+
+			"displayDigest" : false,
+
+			"escapeDifficulty": 0,
+			"escapeDifficultyMin": 0,
+			"escapeDifficultyMax": 0,
+
+			"impossibleEscape": false,
+			"hammerspace" : false,
+
+
+			// predator prefrences
+			"oralVorePred" : true,
+			"cockVorePred" : true
+		},
+
+		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
+		"sbqOverrideSettings" : {
+			"shaftTFEnable" : false,
+			"ballsTFEnable" : false,
+
+			"crewmateGraduation" : false,
+
+			"tailVorePred" : false,
+			"absorbVorePred" : false,
+			"navelVorePred" : false,
+
+			"analVorePred" : false,
+			"unbirthPred" : false,
+			"breastVorePred" : false,
+
+			"breasts" : false,
+			"pussy" : false,
+
+			"bellyInfusionPred" : false,
+			"cockInfusionPred" : false,
+			"pussyInfusionPred" : false,
+			"breastsInfusionPred" : false
+		},
+		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
+		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
+		"sbqOverridePreyEnabled" : {
+			"femcumDigestAllow": false,
+			"femcumSoftDigestAllow": false,
+			"femcumDigestItemDropsAllow" : false,
+
+			"milkDigestAllow": false,
+			"milkSoftDigestAllow" : false,
+			"milkDigestItemDropsAllow" : false,
+
+			"transformAllow": false,
+			"cumTransformAllow": false,
+			"genderswapAllow": false,
+			"eggAllow": false,
+
+			"tailVore" : false,
+			"absorbVore" : false,
+			"navelVore" : false,
+
+			"analVore" : false,
+			"unbirth" : false,
+			"breastVore" : false,
+
+			"bellyInfusion" : false,
+			"cockInfusion" : false,
+			"pussyInfusion" : false,
+			"breastsInfusion" : false
+		},
+
+		// rewards given to the player for doing things for the pred are here! cumulative ones accumulate time between different sessions, otherwise it only counts up per the current session
+		// you can make a reward take both per session time as well as cumulative time!
+		"sbqRewards" : {
+			// Time is in minutes here!
+
+			/*
+			"exampleReward" : { // example reward that uses all possible args
+				"repeatable" : true, // whether this reward repeats each time its requirements are met, a 5min reward would repeat at 10min and etc
+				"location" : ["belly", "womb", "shaft", "balls", "breasts", "tail"], // whether the counters for this are for a specific location, it adds the timers and counters for all the locations listed in this arg, otherwise its just the overall count/time
+				"pool" : "richOre", // the treasure pool this reward gives the player, look up how these are defined, make sure they don't conflict in name
+
+				// per session, resets each time you escape the pred
+				"minTime" : 1, // the minimum amount of time (minutes) in this session before this reward can be obtained (minutes)
+				"time" : 5, // the amount of time (minutes) needed for this reward to trigger and between each repeat
+				"minStruggles" : 1, // the amount of struggles (seconds) before this reward can be obtained
+				"struggles" : 10, // the amount of struggles (seconds) for this reward to trigger between each repeat
+
+				// cumulative, they never reset, and will continue to count up every time you are in this specific pred
+				"minTimeCumulative" : 1, // the minimum amount of time (minutes) in this session before this reward can be obtained (minutes)
+				"timeCumulative" : 5, // the amount of time (minutes) needed for this reward to trigger and between each repeat
+				"minStrugglesCumulative" : 1, // the amount of struggles (seconds) before this reward can be obtained
+				"strugglesCumulative" : 10 // the amount of struggles (seconds) for this reward to trigger between each repeat
+			},
+			*/
+
+
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
+
+			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "money" },
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		}
+
+		// the args below are for randomizing specific settings between possible values in the table when the pred is first summoned, a few examples have been defined
+		// specific OCs will probably have specific prefrences in mind, so you may not want things to randomize at all
+		/*
+		"sbqRandomizeSettings" : {
+			"oralVorePred" : [true,false],
+
+			"bellyEffectSlot" : [ "none", "heal", "softDigest", "digest"],
+
+			// we shouldn't have the randomly generated preds generate with nsfw stuff
+			// not everyone wants to stumble across an NPC with their dick out
+
+			//"cockVorePred" : [true,false],
+		}
+		*/
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0 // this will make your OC immune to most forms of damage outside of vore
+			}
+		},
+		"statusProperties" : {
+			"sbqDidVornyConvertCheck" : true,
+
+			// this arg for speciesAnimOverrideData should only be used if your NPC has a unique body, only mess with it if you know what you're doing
+			"speciesAnimOverrideData" : {},
+
+			// the prey prefrences for this NPC are set here!
+			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+
+			"sbqPreyEnabled" : {
+				"preyEnabled" : true,
+
+				"digestAllow": true,
+				"softDigestAllow" : true,
+				"digestItemDropsAllow" : true,
+
+				"cumDigestAllow": true,
+				"cumSoftDigestAllow": true,
+				"cumDigestItemDropsAllow" : true,
+
+				"held" : true,
+				"cockVore" : true,
+				"oralVore" : true,
+
+
+
+				"femcumDigestAllow": false,
+				"femcumSoftDigestAllow": false,
+				"femcumDigestItemDropsAllow" : false,
+
+				"milkDigestAllow": false,
+				"milkSoftDigestAllow" : false,
+				"milkDigestItemDropsAllow" : false,
+
+				"transformAllow": false,
+				"cumTransformAllow": false,
+				"genderswapAllow": false,
+				"eggAllow": false,
+
+				"tailVore" : false,
+				"absorbVore" : false,
+				"navelVore" : false,
+
+				"analVore" : false,
+				"unbirth" : false,
+				"breastVore" : false,
+
+				"bellyInfusion" : false,
+				"cockInfusion" : false,
+				"pussyInfusion" : false,
+				"breastsInfusion" : false
+			}
+		}
+	}
+}
