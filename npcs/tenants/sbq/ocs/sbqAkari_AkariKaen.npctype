@@ -35,17 +35,25 @@
 			}
 		},
 
+		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+			{ "mode" : "vertical" },
+			[
+				{ "type" : "image", "file" : "/humanoid/sbqAkair_AkariKaen/portraits/ANeutral.png" },
+				[
+					[ { "type" : "label", "text" : "Age: 22"}, { "type" : "label", "text" : "Gender: male"} ],
+					[ { "type" : "label", "text" : "Pronouns: He/Him"}, { "type" : "label", "text" : "Species: Southern sergal"} ],
+					{ "type" : "spacer", "size" : 3 },
+					{ "type" : "label", "text" : "Akari is from the planet Tal and grew up in the walls of the major city Gold Ring, he mostly work as an guard or an city police and later becoming an Agent so he got to experience and witness to many things...like when he had to rescue the king's daughter from a cult, though he was always interested in the wonders of the micro world...oh and has a weakness for paws, mostly those that are bigger than him"},
+					{ "type" : "spacer", "size" : 3 },
+					{ "type" : "label", "text" : "Favorites: Being a Micro, Paws, inanimate tf, OV, CV, being a micro prey"}
+				]
+			]
+		]},
 
 		"uniqueId" : "sbqAkari_AkariKaen", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
-		"defaultPortrait" : "bust",
-		// if you want to use specially drawn sprites for dialogue box portraits, remove the two portrait args above, and uncomment the args below
-		/*
 		"defaultPortrait" : "neutral.png",
-		"portraitPath" : "/humanoid/sbqAkari_AkariKaen/portraits/", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
-		"portraitPath" : "/npcs/tenants/sbq/ocs/sbqAkari_AkariKaen/portraits/",
-		*/
+		"portraitPath" : "/humanoid/sbqAkari_AkariKaen/portraits/A", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
 
 		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqAkari_AkariKaenDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
 		// as the scipts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
@@ -462,6 +470,24 @@
 							}
 						}
 					}
+				},
+
+				"underfoot" : {
+					"next" : "predator",
+					"default" : {
+						"next" : "race",
+						"default" : {
+							"next" : "personality",
+							"default" : {
+								"next" : "mood",
+								"default" : {
+									"default" : { "randomDialogue" : [
+										"..hello?...down here...", ">~<", "* muffled sergal noises ", "ack!...heavy...", "I mean...I do belong here~", " slupring noises *", "m...merp..."
+									] }
+								}
+							}
+						}
+					}
 				}
 			},
 			// when being prey, responses to the pred thats eating them
@@ -597,6 +623,44 @@
 							},
 							"grow" : {
 								"randomDialogue" : ["Not my cup of tea but ill roll with it.", "reminds me of my ex", "*bumps head* ow....","heh...my kind were always looked at as big"]
+							}
+						}
+					}
+				}
+			},
+			"didSteppy" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" :{ // personality
+						"next" : "mood",
+						"default" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"randomDialogue" : [ "hehe, whoops!", "Oh did I step on something?", "You tinies need to pay attention more!"]
+							}
+						}
+					}
+				}
+			},
+			// when stepped on by a larger character
+			"gotSteppy" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" :{ // personality
+						"next" : "mood",
+						"default" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"randomDialogue" : [
+									"oomph...", "* squish ", "ow......", "....ueegh...", "ack! watch where you step!", "..uugh...thank you.","merp....", "merp!", "ugh...the micro life is never easy.."
+								]
+							},
+							"walking" : {
+								"randomDialogue" : [
+									" eyy, I'm walking here!", "woah..paw ahoy", "Woah...watch where you step", "woah..falls on butt*...ow"
+								]
 							}
 						}
 					}
