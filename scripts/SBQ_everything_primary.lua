@@ -196,10 +196,10 @@ function sbq.doMysteriousTF(data)
 
 		for i, data in ipairs(speciesFile.genders or {}) do
 			if data.name == overrideData.gender then
-				overrideData.identity.hairGroup = overrideData.identity.hairGroup or data.hairGroup or "hair"
-				overrideData.identity.facialHairGroup = overrideData.identity.facialHairGroup or data.facialHairGroup or "facialHair"
-				overrideData.identity.facialMaskGroup = overrideData.identity.facialMaskGroup or data.facialMaskGroup or "facialMask"
-				if data.hair and data.hair[1] then
+				overrideData.identity.hairGroup = (overrideData.identity.hairGroup and overrideData.identity.hairGroup ~= "") or (data.hairGroup and data.hairGroup ~= "") or "hair"
+				overrideData.identity.facialHairGroup = (overrideData.identity.facialHairGroup and overrideData.identity.facialHairGroup ~= "") or (data.facialHairGroup and data.facialHairGroup ~= "") or "facialHair"
+				overrideData.identity.facialMaskGroup = (overrideData.identity.facialMaskGroup and overrideData.identity.facialHairGroup ~= "") or (data.facialMaskGroup and data.facialMaskGroup ~= "") or "facialMask"
+			if data.hair and data.hair[1] then
 					overrideData.identity.hairType = overrideData.identity.hairType or data.hair[math.random(#data.hair)]
 				end
 				if data.facialHair and data.facialHair[1] then

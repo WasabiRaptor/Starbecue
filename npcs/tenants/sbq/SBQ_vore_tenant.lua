@@ -50,6 +50,8 @@ function init()
 		npc.setItemSlot = new_npc_setItemSlot
 	end
 
+	sbq.saveCosmeticSlots()
+
 	oldinit()
 
 	sbq.setSpeciesConfig()
@@ -74,7 +76,6 @@ function init()
 		storage.settings.firstLoadDone = true
 		sbq.randomizeTenantSettings()
 	end
-	sbq.saveCosmeticSlots()
 
 	sbq.setRelevantPredSettings()
 
