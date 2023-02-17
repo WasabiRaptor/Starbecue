@@ -1,0 +1,42 @@
+{
+	"name": "sbq_guardT3_flareon",
+	"priority": 54,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"unscorched" : 8,
+		"human" : 4
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"medievalfireplace", "count":1},
+		{"name":"frontierfurnace", "count":1},
+		{"name":"scorchedcitybed", "count":1},
+		{"name":"scorchedcitychestdrawersmall", "count":1},
+		{"name":"scorchedcitytv", "count":1},
+		{"name":"scorchedcitytable", "count":1},
+		{"name":"lavalamp1", "count":1, "parameters":{"color":"red"}},
+		{"name":"lavalamp1", "count":1, "parameters":{"color":"orange"}},
+		{"name":"lavalamp1", "count":1, "parameters":{"color":"yellow"}}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["flareon"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

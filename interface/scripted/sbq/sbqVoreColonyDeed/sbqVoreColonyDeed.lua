@@ -490,9 +490,12 @@ if orderFurniture ~= nil then
 				if item.count ~= nil and item.count > 1 then
 					actionLabel = actionLabel.." x"..item.count
 				end
+				if type((item.parameters or {}).color) == "string" then
+					actionLabel = "^"..item.parameters.color..";"..actionLabel
+				end
 
 				local price = ((item.count or 1)*(item.price or itemConfig.config.price))
-				actionLabel = actionLabel..", Price: ^yellow;"..price.."^reset;"
+				actionLabel = actionLabel.." ^#555;Price: ^yellow;"..price.."^reset;"
 
 				local comma = ""
 				local gotReqTag = false
@@ -500,7 +503,7 @@ if orderFurniture ~= nil then
 					for j, tag in ipairs(itemConfig.config.colonyTags or {}) do
 						if tag == reqTag then
 							if not gotReqTag then
-								actionLabel = actionLabel..", Tags:"
+								actionLabel = actionLabel.." ^#555;Tags:"
 								gotReqTag = true
 							end
 							actionLabel = actionLabel..comma.." ^green;"..tag.."^reset;"
