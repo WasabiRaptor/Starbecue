@@ -62,7 +62,7 @@
 
 			// greeting is the default start of the tree
 			// settings come from itself
-			// "greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
+			//"greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
 			"greeting" : {
 				"next" : "race",
 				"default" : { // race
@@ -79,8 +79,8 @@
 								"jump" : ["greeting"]
 							},
 							"default" : { // no rewards
-								"randomDialogue" : [ "This is my first random greeting line.", "This is my second random greeting line" ],
-								"randomButtonText" : [ "Ok", "Yeah I can tell"],
+								"randomDialogue" : [ "Ah, hello there", "merp?", "yes?", "yea?" ],
+								"randomButtonText" : [ "Hi", "Hey", "Hello"],
 								"jump" : ["converse"] // all jumps are relative to the top of the dialogue tree
 							}
 						}
@@ -89,47 +89,75 @@
 			},
 			// and jumps can go to any other part of the tree
 			"converse" : {
-				"dialogue" : [
-					"here comes some lines in sequence",
-					"One",
-					"You can't tell me what to do.",
-					"Haha yes.",
-					"Now the other stuff for the button can trigger since the sequence is done."
+				"randomDialogue" : [
+					"Did ya want to talk about something?", "merp?"
 				],
-				"buttonText" : [
-					"Oh really?",
-					"Now you're gonna say 'two'",
-					"Guess you're too smart.",
-					"So what now?",
-					"Like what?"
-				],
-				"continue" : {
-					"dialogueTreeReturn" : ["converse","continue"], // this sets it so that when you reach the end of a tree with nowhere to continue, and the button has no actions, it will return here
+				"buttonText" : ["[options]"],
+				"options" : [
 
-					"dialogue" : ["I can give you more dialogue options to choose from."],
-					"options" : [
-						[ "Woah, dropdown options.", {
-							"dialogue" : ["Yep, pretty cool."],
-							"continue" : {
-								"next" : ["random1", "random2"], // using a table for next keys makes it randonly select between them
-								"random1" : { "dialogue" : ["So lets jump back there so you can choose again alright?"] },
-								"random2" : {
-									"dialogue" : ["What if we talked a little more?"],
-									"continue" : { "dialogue" : ["Oh alright we'll jump back"], "jump" : ["converse","continue"] } // a jump can also be manually defined
-								}
-							}
-						}],
-						[ "Jump Example", { "jump" : ["converse", "continue", "options", 1, 2, "continue"] } ], // this is one that goes to another option but the jump can go anywhere really
-						[ "So whats your belly like?", {
-							"next" : "bellyEffect", // the dialogue for the next step down the tree will be based on their bellyEffect setting
-							"voreType" : "oralVore", // this option won't show up if oralVore isn't something either party wants to partake in
-							"default" : { "dialogue" : ["Doesn't really do much"]},
-							"sbqHeal" : { "dialogue" : ["You'd be healed."]},
-							"sbqDigest" : { "dialogue" : ["I'd melt you down."]},
-							"sbqSoftDigest" : { "dialogue" : ["I'd melt you down, but you'd be fine."]}
-						}]
-					]
-				}
+					[ "My name is...", {
+						"check":{"introduced":false},
+						"dialogue" : [
+							"well...\n nice to make you acquittance <entityname>"
+						],
+						"playerSaveSettings" : { "introduced" : true }
+					}],
+					[ "Tell me more about you", {"jump":["talkAboutSelf"]}]
+				]
+			},
+
+			"talkAboutSelf" : {
+				"dialogueTreeReturn" : ["talkAboutSelf"],
+				"dialogue" : [
+					"well there isnt much to me, merp"
+				],
+				"buttonText" : ["[options]"],
+				"options" : [
+					[ "What are you?", {
+						"dialogue" : [
+							"never seen an sergal before? well my home planet is Tal with several races and clans in them and I lived in a Major city called Gold Ring mostly populated with southern sergals I was called \"city boy\" A lot. "
+						]
+					}],
+					[ "Why do you guys say \"merp\" A lot?", {
+						"dialogue" : [
+							"me...* clears throat * it's a funny sound we can make and it was popular...and now its a cliche thing we do..though once you get us going it'll be all you hear"
+						]
+					}],
+					[ "* say a cheese joke", {
+						"dialogue" : [
+							"* groans * well aren't you clever...it's not like I heard those jokes thousands of times over my entire life...but I can't stop you having have your fun with it."
+						]
+					}],
+					[ "what are you into?", {
+						"dialogue" : [
+							"hmm...I can talk about the some of them that are worth while for this Mod."
+						],
+						"jump" : ["talkAboutKinks"]
+					}],
+					[ "<-", {"jump" : ["converse"]}]
+				]
+			},
+			"talkAboutKinks" : {
+				"randomDialogue" : [ "so you wanted to talk kinks?"],
+				"dialogueTreeReturn" : ["talkAboutKinks"],
+				"options" : [
+					["Macro and Micro", {
+						"dialogue" : [
+							"Probably what you'll see me  interact with the most as I like being an micro and how I primary interact with my other kinks and I always love the tiny in house of macros avoiding their steps~"
+						]
+					}],
+					["Paws", {
+						"dialogue" : [
+							"Ah...yes paws...as I prefer humanoid soles...the same ideal follows as I enjoy the pleasure of serving them and being under them as normal or tiny~."
+						]
+					}],
+					["Vore", {
+						"dialogue" : [
+							"not my biggest thing but for the case of this I'd say my go to is OV and CV though only while micro since it works better in my head."
+						]
+					}],
+					[ "<-", {"jump" : ["talkAboutSelf"]}]
+				]
 			},
 
 			// lines for when a pred is eating prey, be it from hunting, or from it being requested
@@ -178,17 +206,17 @@
 								"next" : "getVoreButtonAction",
 								"request" : {
 									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "You know things aren't supposed to go in there right?", "Thats going to be a real tight fit." ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
+									"before" : { "randomDialogue" : [ "lol horny for sergal pp", "merp? you want in my shaft?", "hope you fit", "well? come on in" ] },
+									"after" : { "randomDialogue" : [ "ooh my merp that get me hard~", "FFF~ you making this ergal very happy", "great...im hard..hope no one notices...", "m..merp merp~" ] }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
-									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
+									"before" : {"randomDialogue" : [ "Surpised!", "Gotcha", "sorry but I have to do this~", "I'm horny so come here~" ] },
 									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
 								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
-								"full" : { "randomDialogue" : [ "Already got someone plugging my shaft~", "Mmm maybe if someone squirmed a little further in, I might have space for you.", "Hehe, I would if someone wasn't already squeezed in there~", "Maybe after I cum heh~" ] },
-								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+								"notFeelingIt" : { "randomDialogue" : [ "Not in the mood pal", "I'm busy", "Mayber later im just rubbed it off awhile ago", "I'm got other sergals things to do...like merping", "my shaft is tired" ] },
+								"full" : { "randomDialogue" : [ "my sheese dispenser is full right now...", "Hmmm if someone moves down to my balls you might fit~", "This sergal shaft is full", "Maybe when I bust a sergal nut" ] },
+								"tooBig" : { "randomDialogue" : [ "Sorry micros only", "Woah maybe shrink youself down and I may", "get youself a shrink ray form Auri and come back to me", "smalelr folks only", "your to merping big" ]}
 							}
 						}
 					}
@@ -207,12 +235,12 @@
 							"next" : "mood",
 							"default" : { // mood
 								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [ "Having a good time in there?", "Hope its comfortable." ] },
-								"sbqHeal" : { "randomDialogue" : [ "Now you're nice and safe.", "Hope you like how it feels in there." ] },
+								"default" : { "randomDialogue" : [ "enjoying yourself", "Comfy?","merp?" ] },
+								"sbqHeal" : { "randomDialogue" : [ "relax...you are injured", "stop moving to much..just heal up" ] },
 								"sbqDigest" : {
 									"next" : "digestImmunity",
-									"false" : { "randomDialogue" : [ "Time to melt you down into pudge.", "Just be a good meal and melt." ] },
-									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
+									"false" : { "randomDialogue" : [ "melting so good~", "Be a good moursel and just melt~", "Im merping you down will good..hehe" ] },
+									"true" : { "randomDialogue" : [ "merp?", "doesn't feel liek your melting" ] }
 								},
 								"sbqSoftDigest" : "struggle.location.race.personality.mood.sbqDigest"
 							}
@@ -228,11 +256,11 @@
 							"next" : "mood",
 							"default" : { // mood
 								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [ "Having a good time in there?", "Hope its comfortable." ] },
+								"default" : { "randomDialogue" : [ "ooohh hehe that tingles~", "wooo boy..." ] },
 								"sbqCumDigest" : {
 									"next" : "cumDigestImmunity",
-									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
-									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
+									"false" : { "randomDialogue" : [ "mmm melting down you go~", "merp for me~" ] },
+									"true" : { "randomDialogue" : [ "less talking more melting", "just mely down and enjoy youself" ] }
 								}
 							}
 						}
@@ -248,11 +276,11 @@
 							"next" : "mood",
 							"default" : { // mood
 								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [ "Having a good time in there?", "Keep squirming.", "It feels so good having you in there~", "Friends are stored in the balls~" ] },
+								"default" : { "randomDialogue" : [ "merp...that feels nice feeling down there", "Keep going.", "It feels so good having you in there~", "Friends are stored in the balls~" ] },
 								"sbqCumDigest" : {
 									"next" : "cumDigestImmunity",
-									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
-									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
+									"false" : { "randomDialogue" : [ "yes become nice sergal cum for me~", "time to be sergal cummies~" ] },
+									"true" : { "randomDialogue" : [ "not melting", "This sergal wants you to melt" ] }
 								}
 							}
 						}
@@ -273,35 +301,35 @@
 								"next" : "struggleTrigger",
 								"true" : { // prey struggling out
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh... ok you want out.", "Why leave?", "Mmm... fine you can come out.", "I actually liked having you in there..." ] },
-									"sbqHeal" : { "randomDialogue" : [ "You do know its safer inside me right?", "Are you sure you're ready to come out?", "Maybe you should get back in... heal a little longer.", "You can come back to heal any time." ]},
+									"default" : { "randomDialogue" : [ "*hack...cough*", "alright alright come on out", "aw man...come on..." ] },
+									"sbqHeal" : { "randomDialogue" : [ "come on..its like a suana in there", "Are you sure you're ready to come out?", "well...return to me if you need more healing", "don't go whinning if you die cause you didnt fully heal up", "next time stop spamming for medic" ]},
 									"sbqDigest" : {
 										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Dang it... I was hungry.", "No hard feelings?", "Come on, you were almost done...", "If only you weren't such a fighter..." ] },
-										"true" : { "randomDialogue" : [ "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
+										"false" : { "randomDialogue" : [ "oh..huh enjoy the stay then", "No hard feelings?", "you're no fun \n", "ooh? we got outselfs a fighter" ] },
+										"true" : { "randomDialogue" : [ "that's fine..I wasnt even that hungry", "you're making me look bad infront of the others", "Come on...It's my job" ] }
 									},
 									"sbqSoftDigest" : {
 										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Darn it... I was hungry, you were gonna be fine anyway.", "No hard feelings? Its not like I was going to go all the way...", "Come on, you were almost done...", "If only you weren't such a fighter..." ] },
-										"true" : { "randomDialogue" : [ "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
+										"false" : { "randomDialogue" : [ "wha...you were gona be fine..geez", "what? you had that option selected", "well...just stay there I guess" ] },
+										"true" : { "randomDialogue" : [ {"add":"letout.voreType.race.personality.mood.struggleTrigger.sbqSoftDigest.false"}, "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
 									},
-									"digested" : { "randomDialogue" : ["Ah... you want out... just a moment to reform.", "Ah ok, I'll reform you now.", "Fine, I'll reform you now.", "Alright, I'll reform you."]}
+									"digested" : { "randomDialogue" : ["reformation central", "beep boop reforming..haha jk I aint a synth...oh hope BLue didnt hear that", "alright time to reform"]}
 								},
 								"false" : { // pred letting prey out
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "You can come out now.", "Time to come out.", "You can't stay in there forever.", "Time to get out." ] },
-									"sbqHeal" : { "randomDialogue" : [ "You're probably patched up enough.", "I think you've spent enough time healing.", "I think you should be feeling much better now.", "My stomach does wonders for healing doesn't it?"] },
+									"default" : { "randomDialogue" : [ "alright out you go", "*hack and coughs* out you go", "bleh...you didnt really taste that good", "come on out we got work to do *burps* er excuse me" ] },
+									"sbqHeal" : { "randomDialogue" : [ "alright now get back out there!", "Alrighty I think you're all good to go", "feeling better?", "I never though id have a stomach that heals", "I never got my medical degree you know?"] },
 									"sbqDigest" : {
 										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Actually... you've probably spent enough time in there.", "My hunger is satiated enough for now.", "Probably best to get you out of there...", "Didn't feel like melting you entirely."] },
-										"true" : { "randomDialogue" : [ "I can't even melt you down at all...", "My hunger isn't going to be satiated with you in there.", "Probably best to get you out of there so I can eat something else.", "Can't even melt you down the tiniest bit."] }
+										"false" : { "randomDialogue" : [ "ok I'm good for now", "I'm satified you can go now", "best you leave", "I didnt really want to digest you"] },
+										"true" : { "randomDialogue" : [ "what's the point?", "that's no fun", "best you go..this sergal is intrested in something else...oh beef jerky", "I'ma go get some actual food"] }
 									},
 									"sbqSoftDigest" : {
 										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Actually... you've probably spent enough time in there.", "My hunger is satiated enough for now.", "Probably best to get you out of there...", "Didn't feel like melting you entirely."] },
-										"true" : { "randomDialogue" : [ "I can't even melt you down at all...", "My hunger isn't going to be satiated with you in there.", "Probably best to get you out of there so I can eat something else.", "Can't even melt you down the tiniest bit."] }
+										"false" : { "randomDialogue" : [ "I think your soft enough", "I'm good for now thanks", "now got out of here you silly", "Didn't feel like it"] },
+										"true" : { "randomDialogue" : [ "really?", "well this is pointless", "oh you selected that option...no fun", "what am I sergal express?"] }
 									},
-									"digested" : { "randomDialogue" : ["Here, let me reform you real quick.", "You got digested so I gotta reform you.", "Ah, guess its time to reform you.", "Time to reform you I guess."]}
+									"digested" : { "randomDialogue" : ["time for you to go", "get digested lol", "hope it was worth the pixels", "next yea when you get back"]}
 								}
 							}
 						}
@@ -317,11 +345,11 @@
 								"next" : "struggleTrigger",
 								"true" : { // struggleTrigger
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh~ ahh that felt so good~", "Could you get back in and squirm some more?", "Mmm~ I thought you were pretty comfortable.", "I thought you liked it in there.", "Oh... alright." ] }
+									"default" : { "randomDialogue" : [ "Ahh~ man what a sensation~", "come back anytime^^", "you felt good in there~", "what? didnt enjoy yourself in there?", "merp...." ] }
 								},
 								"false" : { // struggleTrigger
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Hhhhhh I'm gonna cum...", "C-can't hold back much longer~", "Gonna blast you out with a load~", "Ahhhh feeels soooo goood~" ] }
+									"default" : { "randomDialogue" : [ "Hhhhhh I'm gonna cum...", "M..mmph god~", "Gonna blast~", "M..Meerpp....~" ] }
 								}
 							}
 						}
@@ -341,9 +369,9 @@
 							"next" : "personality",
 							"default" : { // personality
 								"next" : "mood",
-								"default" : {	// mood
+								"default" : {  // mood
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ ["I'm stuck here aren't I?", "Is there even a way out?", "Trapped..."] ] }
+									"default" : { "randomDialogue" : [ ["how long you gonna keep me here?", "welp...this is my life for now...", "*sploosh*"] ] }
 								}
 							}
 						}
@@ -360,21 +388,21 @@
 								"default" : { // mood
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [
-										["Mmmm pretty comfortable.", "Ahh... your belly is so soft...", {"check":{"bellySounds":true},"add":["Your belly is so noisy.", "Mmm... I like the sounds your belly is making."]}],
+										["comfy", "so this is what it's like in a belly", {"check":{"bellySounds":true},"add":["*gurgle*", "Mmmph those noises", "struggled grunts...oh I give up..."]}],
 										{"check":{"predator":"sbqVaporeon"},"add":["Gooey Vappy belly.", "Its all gooey in here."]}
 									]},
 									"sbqHeal" : { "randomDialogue" : [
-										["Ahh... its so soothing.", "I can feel all my troubles melting away...", "Its so comfortable in here.", {"check":{"bellySounds":true},"add":["I really like the sounds your belly makes... very calming.", "I could just drift off to sleep listening to the sounds of your body..."]} ],
-										{"check":{"predator":"sbqVaporeon"},"add":["I always liked vappy goo."]}
+										["hmm...it aint melting me..that's good right?", "its like a healing bath", "thi feels wonderful", {"check":{"bellySounds":true},"add":["I really like the sounds your belly makes... very calming.", "I could just drift off to sleep listening to the sounds of your body..."]} ],
+										{"check":{"predator":"sbqVaporeon"},"add":["did you kno-*get's slooshed around*..nvm"]}
 									]},
 									"sbqDigest" : {
 										"next" : "digestImmunity",
 										"true" : { "randomDialogue" : [
-											[["Trying to melt me down?","Trying to melt me down?\nThats not gonna work."], "Heh, I can actually stay in here as long as I want.", "I'm invincible!", "You can't melt me!"]
+											[["Trying to melt me down?","Trying to melt me down?\nThats not gonna work."], "Heh, I can actually stay in here as long as I want.", "I'm @#%@@#$ invincible! *enter metal gear rising refereence here*", "I'm immune so good luck \n"]
 										]},
 										"false" : { "randomDialogue" : [
-											["Ahh... I'm starting to melt.", "Oh my... I'm just gonna be food.", {"check":{"bellySounds":true},"add":["Your belly is so noisy... I'm going to be gurgled up aren't I?", "All this grumbling... you must be pretty hungry."]} ],
-											{"check":{"predator":"sbqVaporeon"},"add":["Ahh... I'm starting to melt into goo..."]}
+											["man this hurts...", "hmmph..nothing but pudge", {"check":{"bellySounds":true},"add":["so much...noise", "All this grumbling... you must be pretty hungry."]} ],
+											{"check":{"predator":"sbqVaporeon"},"add":["....vappy goo...."]}
 										]}
 									},
 									"sbqSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
@@ -425,7 +453,7 @@
 								"next" : "mood",
 								"default" : {
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh~ your cock is squeezing tight around me~", "Ohhh~ Your shaft is squeezing so hard~", "This is so hot~" ] },
+									"default" : { "randomDialogue" : [ "yes..squish me harder`", "nice and smelly", "This is so hot~" ] },
 									"transform" : {
 										"next" : "transformImmunity",
 										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
@@ -449,7 +477,7 @@
 							"default" : { // personality
 								"next" : "mood",
 								"default" : { // mood
-									"randomDialogue" : [ "Ah!" ]
+									"randomDialogue" : [ "wha..?!?", "down I go", "oh..ok I guess" ]
 								}
 							}
 						}
@@ -464,7 +492,7 @@
 							"default" : { // personality
 								"next" : "mood",
 								"default" : { // mood
-									"randomDialogue" : [ "Ah!" ]
+									"randomDialogue" : [ "euugh so slimey", "happy to fill you up^^","ill never will get use to this >~<" ]
 								}
 							}
 						}
@@ -479,7 +507,7 @@
 							"default" : { // personality
 								"next" : "mood",
 								"default" : { // mood
-									"randomDialogue" : [ "UwU" ]
+									"randomDialogue" : [ "hehe now the fun begins", "euugh..some got into my mouth", "man it's tight", "Friends are stored in the balls...heh Auri would be proud","needing to refuel? happy to help^^", "ill never will get use to this >~<" ]
 								}
 							}
 						}
@@ -501,10 +529,10 @@
 								"default" : { // mood
 									"next" : "struggleTrigger",
 									"true" : { // struggleTrigger
-										"randomDialogue" : [ "I got out." ]
+										"randomDialogue" : [ "oh..arlighty then", "euugh..that felt funny", "AH...fresh air" ]
 									},
 									"false" : { // struggleTrigger
-										"randomDialogue" : [ "Ah, back outside" ]
+										"randomDialogue" : [ "till next time then" ]
 									}
 								}
 							}
@@ -522,10 +550,10 @@
 								"default" : { // mood
 									"next" : "struggleTrigger",
 									"true" : { // struggleTrigger
-										"randomDialogue" : [ "I got out." ]
+										"randomDialogue" : [ "won't deny it was cozy in there", "well that was an expereince" ]
 									},
 									"false" : { // struggleTrigger
-										"randomDialogue" : [ "Ah, back outside" ]
+										"randomDialogue" : [ "so that's whats it like to be swallowed", "I'll never get used to this" ]
 									}
 								}
 							}
@@ -543,10 +571,10 @@
 								"default" : { // mood
 									"next" : "struggleTrigger",
 									"true" : { // struggleTrigger
-										"randomDialogue" : [ "I got out." ]
+										"randomDialogue" : [ "ah man...its all over my clothes", "man..it'll take me forever to wash the cum out" ]
 									},
 									"false" : { // struggleTrigger
-										"randomDialogue" : [ "Ah, back outside" ]
+										"randomDialogue" : [ "so salty..plhew", "its in my mouth..." ]
 									}
 								}
 							}
@@ -565,10 +593,10 @@
 						"default" : { // mood
 							"next" : "shrinkOrGrow",
 							"shrink" : {
-								"randomDialogue" : ["Why's everything getting bigger?", "Ah! I'm shrinking!"]
+								"randomDialogue" : ["Oh boy here we go again...", "this feels normal","heh I did prefer being tiny","heh..remember micros are meant ot be stepped on^^", "yippie"]
 							},
 							"grow" : {
-								"randomDialogue" : ["Why's everything getting smaller?", "Ah! I'm growing!"]
+								"randomDialogue" : ["Not my cup of tea but ill roll with it.", "reminds me of my ex", "*bumps head* ow....","heh...my kind were always looked at as big"]
 							}
 						}
 					}
