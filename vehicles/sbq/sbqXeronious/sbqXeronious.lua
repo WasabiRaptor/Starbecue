@@ -29,7 +29,7 @@ function sbq.init()
 	getColors()
 end
 
-sbq.fullSuccTime = 4
+sbq.fullSuccTime = 3
 
 function getColors()
 	if not sbq.settings.firstLoadDone then
@@ -124,7 +124,7 @@ function succ(args, control, pressed)
 	sbq.succArgs = args
 
 	local aim = sbq.seats[sbq.driverSeat].controls.aim
-	sbq.facePoint(aim)
+	sbq.facePoint(aim[1])
 
 	if sbq.succTime > sbq.fullSuccTime then
 		sbq.doAnims(args.fullPuffAnim)
