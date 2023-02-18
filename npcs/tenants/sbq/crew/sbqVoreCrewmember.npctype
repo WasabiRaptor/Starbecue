@@ -31,13 +31,7 @@
 							"next" : "mood",
 							"default" : {
 								"next" : "giveTenantRewards",
-								"rewards" : {
-									"randomDialogue" : [
-										"It was fun messing around!\nHave some stuff.",
-										{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
-									],
-									"jump" : ["greeting"]
-								},
+								"rewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting.default.default.default.rewards",
 								"default" : { // mood
 									"next" : "isFollowing",
 									"true" : {
@@ -56,6 +50,66 @@
 										"callScript" : "swapFollowing",
 										"continue" : {
 											"randomDialogue" : [ "Right behind you!", "Here we go!", "Lets go!"],
+											"callScript" : "dismiss"
+										},
+										"fail" : "fullCrew"
+									}
+								}
+							}
+						},
+						"shy" : { // personality
+							"next" : "mood",
+							"default" : {
+								"next" : "giveTenantRewards",
+								"rewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting.default.shy.default.rewards",
+								"default" : { // mood
+									"next" : "isFollowing",
+									"true" : {
+										"randomDialogue" : [ "H-hey there Captain.", "Hi Captain...", "Captain..." ],
+										"buttonText" : [ "Stay" ],
+										"callScript" : "swapFollowing",
+										"continue" : {
+											"randomDialogue" : [ "I-I'll stay here... I guess...", "Staying here... please come back though...", "Ok... I-If you say so..."],
+											"callScript" : "dismiss"
+										},
+										"fail" : "fullCrew"
+									},
+									"false" : {
+										"randomDialogue" : [ "H-hey there Captain.", "Hi Captain...", "Captain..." ],
+										"buttonText" : [ "Follow" ],
+										"callScript" : "swapFollowing",
+										"continue" : {
+											"randomDialogue" : [ "Y-You really want me?", "O-Ok I'm right behind you!", "I-I'm ready!\n...probably..."],
+											"callScript" : "dismiss"
+										},
+										"fail" : "fullCrew"
+									}
+								}
+							}
+						},
+						"flirty" : { // personality
+							"next" : "mood",
+							"default" : {
+								"next" : "giveTenantRewards",
+								"rewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting.default.flirty.default.rewards",
+								"default" : { // mood
+									"next" : "isFollowing",
+									"true" : {
+										"randomDialogue" : [ "Hey there Captain~", "Hi Captain~", "Captain~" ],
+										"buttonText" : [ "Stay" ],
+										"callScript" : "swapFollowing",
+										"continue" : {
+											"randomDialogue" : [ "Had too much of me?~", "You better be coming back~", "Alright, whatever you say~"],
+											"callScript" : "dismiss"
+										},
+										"fail" : "fullCrew"
+									},
+									"false" : {
+										"randomDialogue" : [ "Hey there Captain~", "Hi Captain~", "Captain~" ],
+										"buttonText" : [ "Follow" ],
+										"callScript" : "swapFollowing",
+										"continue" : {
+											"randomDialogue" : [ "I knew you liked me~", "Better be a fun date~", "Of course you needed me~"],
 											"callScript" : "dismiss"
 										},
 										"fail" : "fullCrew"

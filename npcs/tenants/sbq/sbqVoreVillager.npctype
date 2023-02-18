@@ -57,7 +57,39 @@
 								"jump" : ["greeting"]
 							},
 							"default" : {
-								"randomDialogue" : [ "Hi, how's it going." ]
+								"randomDialogue" : [ "Hi, how's it going.", "Hey there!", "Hi", "Hello" ]
+							}
+						}
+					},
+					"shy" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "giveTenantRewards",
+							"rewards" : {
+								"randomDialogue" : [
+									"I-I really liked what we did so uhm... have this.",
+									{"check":{"introduced":true},"add":[["A-ah <keysmash> <entityname>!\nI-I got you some stuff... I hope you like it."]]}
+								],
+								"jump" : ["greeting"]
+							},
+							"default" : {
+								"randomDialogue" : [ "H-Hi...", "O-oh hi... I didn't see you there.", "Hello...", "Hi..." ]
+							}
+						}
+					},
+					"flirty" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "giveTenantRewards",
+							"rewards" : {
+								"randomDialogue" : [
+									"You did really well, and of course, you deserve a reward for that~",
+									{"check":{"introduced":true},"add":[["Hehe, <entityname>~\nThis is for you~"]]}
+								],
+								"jump" : ["greeting"]
+							},
+							"default" : {
+								"randomDialogue" : [ "H-Hi...", "O-oh hi... I didn't see you there.", "Hello...", "Hi..." ]
 							}
 						}
 					}
@@ -472,6 +504,46 @@
 								"full" : { "randomDialogue" : [ "My boobs are already occupied~", "Maybe after I'm done carrying my current occupants around~", "Hehe, I would if I wasn't already full in there~" ] },
 								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
 							}
+						},
+						"flirty" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "I knew you wanted in from all the staring~", "You just want to make them bigger, don't you~", "Hehe, you want a bit more than just a drink of milk don't you~", "I'll make you dissapear behind all that softness~", "Now to decide which side to put you on..." ] },
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {"randomDialogue" : [ "I think you'll look better on my chest~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I gotta have you massaging my tits... from the inside~" ] },
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
+								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",
+								"full" : { "randomDialogue" : [ "My boobs are already occupied~", "Maybe after I'm done carrying my current occupants around~", "Hehe, I would if I wasn't already full in there~" ] },
+								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+							}
+						},
+						"shy" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "A-ah... a-are you sure?", "I-I guess that would make them b-bigger...", ["T-thats... <keysmash> y-yes please","T-thats... *flustered noises* y-yes please"], ["O-oh! a-and you want... mine? *flustered noise*","O-oh! a-and you want... mine? <keysmash>"], "B-but which side do I put you on..." ] },
+									"after" : { "randomDialogue" : [ "A-aahh~ ooooh t-thats really good~", "Mmmm~ You're g-getting me e-excited~", ["Ffff~ n-now they look even b-bigger~ *flustered noises*", "Ffff~ n-now they look even b-bigger~ <keysmash>"], "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {"randomDialogue" : [ "Uhm... what if I uhm...", "H-hey I want to use you...", "I can't help myself... you're going in my tits", "Ahh... I want to feel you inside my boobs" ] },
+									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ hehe now they look even bigger~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
+								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",
+								"full" : { "randomDialogue" : [ "My boobs are already occupied... s-sorry", "M-maybe after I'm done carrying these ones around...", "O-oh... I would definetly do it if they weren't full.." ] },
+								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+							}
 						}
 					}
 				}
@@ -576,7 +648,8 @@
 									"next" : "cumDigestImmunity",
 									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
 									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
-								}
+								},
+								"sbqCumSoftDigest" : "struggle.location.race.personality.mood.sbqCumDigest"
 							}
 						}
 					}
@@ -602,7 +675,33 @@
 									"next" : "cumDigestImmunity",
 									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
 									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
-								}
+								},
+								"sbqCumSoftDigest" : "struggle.location.race.personality.mood.sbqCumDigest"
+							}
+						}
+					}
+				},
+				"breastsL" : "struggle.breasts",
+				"breastsR" : "struggle.breasts",
+				"breasts" : { // location
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [
+									"Having a good time in there?", "Hope its comfortable.", "Get yourself a nice milk bath~",
+									"Feel free to take a drink, don't want to start leaking after all~", "hehe, look at how much bigger they are with you in there~"
+								]},
+								"sbqHeal" : { "randomDialogue" : [ ["Now you're nice and safe.", "Hope you like how it feels in there.", "Just snuggle into the walls~", "Get yourself nice and soaked in my milk~"], {"add":"struggle.location.race.personality.mood.default"} ] },
+								"sbqMilkDigest" : {
+									"next" : "milkDigestImmunity",
+									"false" : { "randomDialogue" : [ "Hehe, seems like I'm going to have a nice batch of milk.", "Let all your worries just melt away~", "Mmmmm can't wait to taste whatever flavor you'll make~" ] },
+									"true" : "struggle.location.race.personality.mood.default"
+								},
+								"sbqMilkSoftDigest" : "struggle.location.race.personality.mood.sbqMilkDigest"
 							}
 						}
 					}
