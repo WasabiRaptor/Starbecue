@@ -346,7 +346,7 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 		playerName = world.entityName(eid)
 	end
 
-	local tags = { entityname = playerName, dontSpeak = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
 
 	if type(randomDialogue) == "string" then
 		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote, appendName)
@@ -355,15 +355,33 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 end
 
 function sbq.say(string, tags, imagePortrait, emote, appendName)
-	if type(string) == "string" and string ~= "" and not string:find("<dontSpeak>") then
+	if type(string) == "string" and string ~= "" then
+		if string:find("<love>") then
+			status.addEphemeralEffect("love")
+		end
+		if string:find("<slowlove>") then
+			status.addEphemeralEffect("slowlove")
+		end
+		if string:find("<confused>") then
+			status.addEphemeralEffect("sbqConfused")
+		end
+		if string:find("<sleepy>") then
+			status.addEphemeralEffect("sbqSleepy")
+		end
+		if string:find("<sad>") then
+			status.addEphemeralEffect("sbqSad")
+		end
+		string = sb.replaceTags(string, tags)
+		if string == "" then return end
+
 		if appendName then
 			string = world.entityName(entity.id())..":\n"..string
 		end
 		local options = {sound = randomChatSound()}
 		if type(imagePortrait) == "string" and config.getParameter("sayPortrait") then
-			npc.sayPortrait(string, imagePortrait, tags, options)
+			npc.sayPortrait(string, imagePortrait, nil, options)
 		else
-			npc.say(string, tags, options )
+			npc.say(string, nil, options )
 		end
 		if type(emote) == "string" then
 			npc.emote(emote)

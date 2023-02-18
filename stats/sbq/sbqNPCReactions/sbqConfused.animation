@@ -1,0 +1,33 @@
+{
+	"particleEmitters": {
+		"love": {
+			"enabled": true,
+			"emissionRate": 1.0,
+			"particles": [
+				{
+					"particle": {
+						"type": "animated",
+						"animation": "/animations/emotes/confused.animation",
+						"position": [
+							0.5,
+							2
+						],
+						"finalVelocity": [
+							0,
+							0
+						],
+						"initialVelocity": [
+							0,
+							0
+						],
+						"destructionTime": 0.2,
+						"destructionAction": "shrink",
+						"layer": "front",
+						"timeToLive": 0.8,
+						"flippable": false
+					}
+				}
+			]
+		}
+	}
+}
