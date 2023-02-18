@@ -1263,6 +1263,26 @@
 				}
 			},
 
+			// a line of dialogue triggered when size is changed by the size ray or something else
+			"sizeChanged" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "shrinkOrGrow",
+							"shrink" : {
+								"randomDialogue" : ["Why's everything getting bigger?", "Ah! I'm shrinking!"]
+							},
+							"grow" : {
+								"randomDialogue" : ["Why's everything getting smaller?", "Ah! I'm growing!"]
+							}
+						}
+					}
+				}
+			},
+
 			// when stepping on a character small enough
 			"didSteppy" : {
 				"next" : "race",

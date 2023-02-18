@@ -30,6 +30,13 @@ function createScaledHitbox(anims, animsTable, currentScale)
 	scaledControlParameters.steppyHitbox = rect.translate(steppyHitbox, {0, feetOffset})
 end
 
+local _animOverrideScale = animOverrideScale
+function animOverrideScale(scale, duration, sourceEntity, sourceWeapon)
+	local shrinkOrGrow = ((scale < (self.scale or 1)) and "shrink") or ((scale > (self.scale or 1)) and "grow")
+	_animOverrideScale(scale, duration, sourceWeapon)
+	world.sendEntityMessage(entity.id(), "sbqSayRandomLine", sourceEntity, {shrinkOrGrow = shrinkOrGrow, sourceWeapon = sourceWeapon}, {"sizeChanged"})
+end
+
 local oldMovement = {
 	walking = movement.walking,
 	running = movement.running,
