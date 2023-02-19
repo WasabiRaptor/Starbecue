@@ -15,7 +15,7 @@ function sbq.eat( occupantId, location, size, voreType, locationSide, force )
 	local seatindex = math.floor(sbq.occupants.total + sbq.startSlot)
 	if seatindex > sbq.occupantSlots then return false end
 	local locationSpace = sbq.locationSpaceAvailable(location, locationSide)
-	if locationSpace < ((size or 1) * (sbq.settings[location.."Multiplier"] or 1)) then return false end
+	if locationSpace < ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1))) then return false end
 	if (not occupantId) or (not world.entityExists(occupantId))
 	or ((sbq.entityLounging(occupantId) or sbq.inedible(occupantId)) and not force)
 	then return false end
@@ -168,7 +168,7 @@ end
 
 function sbq.moveOccupantLocation(args, location, side)
 	local space = sbq.locationSpaceAvailable(location, side)
-	if not args.id or (space < ((sbq.lounging[args.id].size or 1) * (sbq.settings[location.."Multiplier"] or 1))) then return false end
+	if not args.id or (space < ((sbq.lounging[args.id].size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1)))) then return false end
 
 	sbq.lounging[args.id].location = location
 	sbq.lounging[args.id].locationSide = side
@@ -187,14 +187,14 @@ function sbq.locationVisualSize(location, side)
 	local locationSize = sbq.occupants[location]
 	local data = sbq.sbqData.locations[location] or {}
 	if data.sided then
-		if (sbq.settings[location.."Symmetrical"] or data.symmetrical) or not side then
+		if sbq.getLocationSetting(location, "Symmetrical", data.symmetrical) or not side then
 			locationSize = math.max(sbq.occupants[location.."L"], sbq.occupants[location.."R"])
 		else
 			locationSize = sbq.occupants[location..(side or "L")]
 		end
 	end
-	local minMaxed = math.max(math.max(((sbq.settings[location .. "VisualMin"] or 0) + ( (sbq.settings[location.."InfusedSize"] and ((((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).preySize or 0) * (sbq.settings[location.."InfusedMultiplier"] or 0.5))) or 0 ) ), data.minVisual or 0),
-		math.min((locationSize / sbq.predScale), sbq.settings[location .. "VisualMax"] or data.maxVisual or data.max or
+	local minMaxed = math.max(math.max(((sbq.getLocationSetting(location,  "VisualMin", 0)) + ( (sbq.getLocationSetting(location, "InfusedSize") and ((((sbq.getLocationSetting(location, "InfusedItem", {})).parameters or {}).preySize or 0) * (sbq.getLocationSetting(location, "InfusedMultiplier", 0.5)))) or 0 ) ), data.minVisual or 0),
+		math.min((locationSize / sbq.predScale), sbq.getLocationSetting(location, "VisualMax") or data.maxVisual or data.max or
 			math.huge))
 
 	if data.sizes then
@@ -205,8 +205,7 @@ function sbq.locationVisualSize(location, side)
 end
 
 function sbq.locationSpaceAvailable(location, side)
-	if sbq.settings.hammerspace and sbq.sbqData.locations[location].hammerspace
-	and not sbq.settings[location.."HammerspaceDisabled"] then
+	if sbq.getLocationSetting(location, "Hammerspace") and sbq.sbqData.locations[location].hammerspace then
 		return math.huge
 	end
 	return (sbq.sbqData.locations[location..(side or "")].max * (sbq.predScale or 1)) - sbq.occupants[location..(side or "")]
@@ -215,8 +214,8 @@ end
 function sbq.getSidedLocationWithSpace(location, size)
 	local data = sbq.sbqData.locations[location]
 	if data.sided then
-		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > ((size or 1) * (sbq.settings[location.."Multiplier"] or 1))
-		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > ((size or 1) * (sbq.settings[location.."Multiplier"] or 1))
+		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
+		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
 		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
 			if sbq.direction > 0 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
 				if leftHasSpace then return location, "L", data
@@ -395,7 +394,7 @@ function sbq.updateOccupants(dt)
 				sbq.occupant[i].visited[location .. "Time"] = (sbq.occupant[i].visited[location .. "Time"] or 0) + dt
 				sbq.occupant[i].cumulative[location .. "Time"] = (sbq.occupant[i].cumulative[location .. "Time"] or 0) + dt
 
-				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.settings[location.."Multiplier"] or 1))
+				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
 				sbq.occupants[sidedLocation] = sbq.occupants[sidedLocation] + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
 
@@ -431,8 +430,8 @@ sbq.shrinkQueue = {}
 
 function sbq.setOccupantTags()
 	for location, occupancy in pairs(sbq.occupants) do
-		sbq.occupants[location] = sbq.occupants[location] + (sbq.settings[location.."VisualMinAdditive"] and sbq.settings[location.."VisualMin"] or 0)
-		sbq.occupants[location] = sbq.occupants[location] + ((sbq.settings[location.."InfusedSizeAdditive"] and ((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).preySize or 0) * (sbq.settings[location.."InfusedMultiplier"] or 0.5))
+		sbq.occupants[location] = sbq.occupants[location] + (sbq.getLocationSetting(location, "VisualMinAdditive") and sbq.getLocationSetting(location, "VisualMin") or 0)
+		sbq.occupants[location] = sbq.occupants[location] + ((sbq.getLocationSetting(location, "InfusedSizeAdditive") and (sbq.getLocationSetting(location, "InfusedItem", {}).parameters or {}).preySize or 0) * (sbq.getLocationSetting(location, "InfusedMultiplier", 0.5)))
 		sbq.actualOccupants[location] = sbq.occupants[location]
 	end
 	-- because of the fact that pairs feeds things in a random ass order we need to make sure these have tripped on every location *before* setting the occupancy tags or checking the expand/shrink queue
@@ -456,7 +455,7 @@ function sbq.setOccupantTags()
 
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
-		local npcArgs = ((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).npcArgs
+		local npcArgs = ((sbq.getLocationSetting(location, "InfusedItem", {})).parameters or {}).npcArgs
 		if data.infusion and sbq.settings[data.infusionSetting.."Pred"] and npcArgs and (((npcArgs or {}).npcParam or {}).identity or {}).name then
 			if sbq.randomTimer(location .. "InfusedStruggleDialogue", 15, 60) then
 				if (sbq.totalTimeAlive > 0.5) and (math.random() > 0.5) then
@@ -471,7 +470,7 @@ function sbq.setOccupantTags()
 		end
 
 		if data.sided then
-			if sbq.settings[location.."Symmetrical"] or data.symmetrical then -- for when people want their balls and boobs to be the same size
+			if sbq.getLocationSetting(location, "Symmetrical", data.symmetrical) then -- for when people want their balls and boobs to be the same size
 				local setTag = sbq.interpolateLocation(location, location .. "FrontOccupantsInterpolate", sbq.refreshSizes)
 				if setTag then
 					sbq.setPartTag("global", location .. "BackOccupantsInterpolate", setTag)
@@ -659,14 +658,14 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 
 	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
 
-	if (sbq.settings[location.."Sounds"] == true) and (not sbq.occupant[i].flags.digested) then
+	if (sbq.getLocationSetting(location, "Sounds")) and (not sbq.occupant[i].flags.digested) then
 		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
 	end
 	world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.settings.predDigestItemDrops}, sbq.driver or entity.id())
 
-	if sbq.settings[location.."Compression"] and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
+	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
 		sbq.occupant[i].sizeMultiplier = math.min(1,
-			math.max(0.1, sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt * 0.01)))
+			math.max(sbq.getLocationSetting(location, "CompressionMultiplier", 0.25), sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt * 0.01)))
 	end
 
 	local progressbarDx = 0
@@ -692,7 +691,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	else
 		for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 			local data = sbq.sbqData.locations[location][passiveEffect]
-			if sbq.settings[location..passiveEffect] and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
+			if sbq.getLocationSetting(location, passiveEffect) and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
 				sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 					if enabled then
 						sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
@@ -890,8 +889,8 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.occupant[struggler].cumulative[location.."StruggleTime"] = (sbq.occupant[struggler].cumulative[location.."StruggleTime"] or 0) + time
 		sbq.occupant[struggler].cumulative.totalStruggleTime = (sbq.occupant[struggler].cumulative.totalStruggleTime or 0) + time
 
-		if sbq.settings[location.."Compression"] and not sbq.occupant[struggler].flags.digested then
-			sbq.occupant[struggler].sizeMultiplier = sbq.occupant[struggler].sizeMultiplier + (time * 2)/100
+		if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[struggler].flags.digested then
+			sbq.occupant[struggler].sizeMultiplier = math.min(1,(sbq.occupant[struggler].sizeMultiplier + (time * 2)/100))
 		end
 
 		if not sbq.movement.animating then
@@ -914,7 +913,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		if struggledata.directions[movedir].sound ~= nil then
 			sound = struggledata.directions[movedir].sound
 		end
-		if sound ~= false then
+		if sound ~= false and sbq.getLocationSetting(location, "StruggleSounds") then
 			animator.playSound( sound or "struggle" )
 		end
 	end
@@ -931,7 +930,7 @@ function sbq.struggleChance(struggledata, struggler, movedir, location)
 	if sbq.settings.impossibleEscape then return false end
 	if sbq.driving and not struggledata.directions[movedir].drivingEnabled then return false end
 
-	local escapeDifficulty = ((sbq.settings.escapeDifficulty or 0) + (sbq.settings[location.."DifficultyMod"] or 0))
+	local escapeDifficulty = ((sbq.settings.escapeDifficulty or 0) + (sbq.getLocationSetting(location, "DifficultyMod", 0)))
 	return chances ~= nil and (chances.min ~= nil) and (chances.max ~= nil)
 	and (math.random(math.floor(chances.min + escapeDifficulty), math.ceil(chances.max + escapeDifficulty)) <= (sbq.occupant[struggler].struggleTime or 0))
 end

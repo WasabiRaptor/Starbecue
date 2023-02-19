@@ -39,6 +39,28 @@
 					[{"mode":"h"},{ "type" : "checkBox", "id" : "cockInfusionPred", "toolTip" : "Prey NPCs may seek you out for Cock TF" }, { "type" : "label", "text" : " Cock TF" } ],
 					[{"mode":"h"},{ "type" : "checkBox", "id" : "pussyInfusionPred", "toolTip" : "Prey NPCs may seek you out for Pussy TF" }, { "type" : "label", "text" : " Pussy TF" } ],
 					[{"mode":"h"},{ "type" : "checkBox", "id" : "breastsInfusionPred", "toolTip" : "Prey NPCs may seek you out for Breast TF" }, { "type" : "label", "text" : " Breast TF" } ]]
+				]},
+				{"type":"label", "align":"center", "text":"Default Location Preferences"},
+				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
+					{"mode":"v", "spacing":-1},
+					[[{"mode":"h"},{ "type" : "checkBox", "id" : "defaultHammerspace", "toolTip" : "Locations will ignore the size limit by default." }, { "type" : "label", "text" : " Hammerspace" } ],
+						[
+							{"mode":"h"},
+							{ "type" : "checkBox", "id" : "defaultCompression", "toolTip" : "Prey will be compressed to a smaller size over time by default." },
+							{ "type" : "textBox", "id" : "defaultCompressionMultiplier", "size" : [30,14], "expandMode" : [0,0], "expand" : false,  "toolTip" : "Default minimum multiplier compression can apply." },
+							{ "type" : "label", "text" : " Compression" }
+						]
+					],
+					[[{"mode":"h"},{ "type" : "checkBox", "id" : "defaultSounds", "toolTip" : "Will emit gurgling sounds when prey is within by default." }, { "type" : "label", "text" : " Gurgling Sounds" } ],
+					[{"mode":"h"},{ "type" : "checkBox", "id" : "defaultStruggleSounds", "toolTip" : "Will emit sounds when a prey struggles by default." }, { "type" : "label", "text" : " Struggle Sounds" } ]],
+					[
+						{"mode":"h"},
+						{ "type" : "checkBox", "id" : "defaultInfusedVisual", "toolTip" : "Parts may change colors to match infused character if applicable by default." },
+						{ "type" : "checkBox", "id" : "defaultInfusedSize", "toolTip" : "Add infused character's size if applicable by default." },
+						{ "type" : "checkBox", "id" : "defaultInfusedSizeAdditive", "toolTip" : "If adding a character's size, make it count towards the fill level by default." },
+						{ "type" : "textBox", "id" : "defaultInfusedMultiplier", "size" : [30,14], "expandMode" : [0,0], "toolTip" : "Default Size Multiplier on Infused Characters if size is being added." },
+						{ "type" : "label", "text" : " Infusion Settings" }
+					]
 				]}
 			]},
 			{"type":"panel","style":"convex","expandMode":[1,0],"children":[

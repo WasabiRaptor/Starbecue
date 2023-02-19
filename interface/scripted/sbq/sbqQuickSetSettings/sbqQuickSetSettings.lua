@@ -25,14 +25,17 @@ player.gender = speciesOverride._gender
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+require("/interface/scripted/sbq/makeTextBoxesUseSize.lua")
 
-player.setProperty("sbqSettingsVersion", sbq.config.settingsVersion)
 
-sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), status.statusProperty("speciesAnimOverrideSettings") or {})
-sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
-sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
 
 function init()
+	player.setProperty("sbqSettingsVersion", sbq.config.settingsVersion)
+
+	sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), status.statusProperty("speciesAnimOverrideSettings") or {})
+	sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
+	sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
+
 	sbq.sbqSettings = player.getProperty("sbqSettings") or {}
 
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
@@ -71,6 +74,36 @@ function init()
 	sbq.sbqPreyEnabled = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
 	sbq.overridePreyEnabled = status.statusProperty("sbqOverridePreyEnabled") or {}
 	sbq.checkLockedSettingsButtons("sbqPreyEnabled", "overridePreyEnabled", "changePreySetting")
+
+	scaleValueMin:setText(tostring(sbq.animOverrideOverrideSettings.scaleMin or sbq.animOverrideSettings.scaleMin or 0.1))
+	local minmaxTable = {(sbq.animOverrideOverrideSettings.scaleMin or 0.1), (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1)}
+	function scaleValueMin:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMin", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
+	function scaleValueMin:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
+	function scaleValueMin:onEscape() self:onEnter() end
+	function scaleValueMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+	sbq.numberBoxColor(scaleValueMin, table.unpack(minmaxTable) )
+
+	scaleValueMax:setText(tostring(sbq.animOverrideOverrideSettings.scaleMax or sbq.animOverrideSettings.scaleMax or 3))
+	local minmaxTable = { (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1), (sbq.animOverrideOverrideSettings.scaleMax or 3)}
+	function scaleValueMax:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMax", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
+	function scaleValueMax:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
+	function scaleValueMax:onEscape() self:onEnter() end
+	function scaleValueMax:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+	sbq.numberBoxColor(scaleValueMax, table.unpack(minmaxTable))
+
+	defaultInfusedMultiplier:setText(tostring(sbq.overrideSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
+	function defaultInfusedMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
+	function defaultInfusedMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+	function defaultInfusedMultiplier:onEscape() self:onEnter() end
+	function defaultInfusedMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+	sbq.numberBoxColor(defaultInfusedMultiplier, 0)
+
+	defaultCompressionMultiplier:setText(tostring(sbq.overrideSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
+	function defaultCompressionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "CompressionMultiplier", "globalSettings", "overrideSettings", 0) end
+	function defaultCompressionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+	function defaultCompressionMultiplier:onEscape() self:onEnter() end
+	function defaultCompressionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+	sbq.numberBoxColor(defaultCompressionMultiplier, 0)
 end
 
 function sbq.checkLockedSettingsButtons(settings, override, func)
@@ -289,6 +322,8 @@ function noneKinks:onClick()
 	sbq.setSettingsList(preySettingList, false)
 	sbq.setSettingsList(digestPreyList, false)
 	sbq.setSettingsList(transformList, false)
+	sbq.changeAnimOverrideSetting("scaleMin", 1)
+	sbq.changeAnimOverrideSetting("scaleMax", 1)
 	pane.dismiss()
 end
 
@@ -299,20 +334,3 @@ end
 function close:onClick()
 	pane.dismiss()
 end
-
-scaleValueMin:setText(tostring(sbq.animOverrideOverrideSettings.scaleMin or sbq.animOverrideSettings.scaleMin or 0.1))
-local minmaxTable = {(sbq.animOverrideOverrideSettings.scaleMin or 0.1), (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1)}
-function scaleValueMin:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMin", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
-function scaleValueMin:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
-function scaleValueMin:onEscape() self:onEnter() end
-function scaleValueMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-sbq.numberBoxColor(scaleValueMin, table.unpack(minmaxTable) )
-
-
-scaleValueMax:setText(tostring(sbq.animOverrideOverrideSettings.scaleMax or sbq.animOverrideSettings.scaleMax or 3))
-local minmaxTable = { (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1), (sbq.animOverrideOverrideSettings.scaleMax or 3)}
-function scaleValueMax:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMax", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
-function scaleValueMax:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
-function scaleValueMax:onEscape() self:onEnter() end
-function scaleValueMax:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-sbq.numberBoxColor(scaleValueMax, table.unpack(minmaxTable))

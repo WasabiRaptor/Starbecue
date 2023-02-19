@@ -271,13 +271,13 @@ function sbq.checkVoreTypeActive(voreType)
 				local full = (
 					not locationData.sided
 					and ((sbq.occupants[locationName] + size) > (sbq.data.settings[locationName .. "VisualMax"] or locationData.max))
-					and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName .. "HammerspaceDisabled"])
+					and not (sbq.data.settings[locationName .. "Hammerspace"])
 				)
 				local sidedFull = (
 					locationData.sided
 					and ((sbq.occupants[locationName.."L"] + size) > (sbq.data.settings[locationName .. "VisualMax"] or locationData.max))
 					and ((sbq.occupants[locationName.."R"] + size) > (sbq.data.settings[locationName .. "VisualMax"] or locationData.max))
-					and not (sbq.data.settings.hammerspace and not sbq.data.settings[locationName .. "HammerspaceDisabled"])
+					and not (sbq.data.settings[locationName .. "Hammerspace"])
 				)
 				if full or sidedFull then
 					return "tooBig", locationName, locationData

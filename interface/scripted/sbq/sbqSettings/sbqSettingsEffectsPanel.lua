@@ -1,5 +1,7 @@
 ---@diagnostic disable:undefined-global
 
+require("/interface/scripted/sbq/makeTextBoxesUseSize.lua")
+
 function sbq.checkSettings(checkSettings, settings)
 	for setting, value in pairs(checkSettings or {}) do
 		if (type(settings[setting]) == "table") and settings[setting].name ~= nil then
@@ -129,6 +131,13 @@ function sbq.effectsPanel()
 							toolTip = "Will emit gurgling sounds when prey is within."
 						},
 						{ type = "label", text = "Gurgling Sounds" }
+					},
+					{
+						{
+							type = "checkBox", id = location.."StruggleSounds", checked = sbq.globalSettings[location.."StruggleSounds"],
+							toolTip = "Will emit sounds when a prey struggles."
+						},
+						{ type = "label", text = "Struggle Sounds" }
 					}
 				}}
 			}}
@@ -143,15 +152,16 @@ function sbq.effectsPanel()
 						{ type = "textBox", align = "center", id = location .. "Multiplier", toolTip = "Fill Level Multiplier"},
 					},
 					{
-						{ type = "checkBox", id = location .. "HammerspaceDisabled",
-							checked = sbq.predatorSettings[location .. "HammerspaceDisabled"],
-							toolTip = "Disallow hammerspace for this location when it is enabled.",
+						{ type = "checkBox", id = location .. "Hammerspace",
+							checked = sbq.predatorSettings[location .. "Hammerspace"],
+							toolTip = "This location will ignore the size limit.",
 							visible = locationData.hammerspace or false
 						},
-						{ type = "label", text = "Disallow Hammerspace", visible = locationData.hammerspace or false}
+						{ type = "label", text = "Hammerspace", visible = locationData.hammerspace or false}
 					},
 					{
-						{ type = "checkBox", id = location .. "Compression", checked = sbq.predatorSettings[location.."Compression"], toolTip = "Prey will be compressed to a smaller size over time." },
+						{ type = "checkBox", id = location .. "Compression", checked = sbq.predatorSettings[location .. "Compression"], toolTip = "Prey will be compressed to a smaller size over time." },
+						{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {30,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
 						{ type = "label", text = "Compression"}
 					}
 				}}
@@ -159,7 +169,7 @@ function sbq.effectsPanel()
 			local difficultyMod = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {0,1}, size = {50, 30}, children = {
 				{ type = "layout", mode = "vertical", spacing = 0, children = {
 					{type = "label", text = "Difficulty", align = "center"},
-					{ type = "textBox", align = "center", id = location .. "DifficultyMod", toolTip = "Make this location easier or harder relative to the main difficulty."},
+					{ type = "textBox", align = "center", id = location .. "DifficultyMod", size = {30,14}, expandMode = {0,0}, toolTip = "Make this location easier or harder relative to the main difficulty."},
 				}}
 			} }
 			local InfusionPanel = { type = "panel", style = "flat", expandMode = {1,1}, visible = locationData.infusion or false, children = {
@@ -176,7 +186,7 @@ function sbq.effectsPanel()
 								{ type = "checkBox", id = location .. "InfusedSize", checked = sbq.predatorSettings[location .. "InfusedSize"], toolTip = "Add infused character's size if applicable." },
 								{ type = "checkBox", id = location .. "InfusedSizeAdditive", checked = sbq.predatorSettings[location .. "InfusedSizeAdditive"], toolTip = "If adding a character's size, make it count towards the fill level." },
 							},
-							{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", toolTip = "Size Multiplier on Infused Characters if size is being added."},
+							{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", size = {30,14}, expandMode = {0,0}, toolTip = "Size Multiplier on Infused Characters if size is being added."},
 						}
 					}
 				}}
@@ -370,12 +380,22 @@ function sbq.effectsPanel()
 
 			local InfusionMultiplier = _ENV[location .. "InfusedMultiplier"]
 
-			InfusionMultiplier:setText(tostring(sbq.overrideSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings[location .. "InfusedMultiplier"] or 0.5))
+			InfusionMultiplier:setText(tostring(sbq.overrideSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
 			function InfusionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
 			function InfusionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
 			function InfusionMultiplier:onEscape() self:onEnter() end
 			function InfusionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
 			sbq.numberBoxColor(InfusionMultiplier, 0)
+
+			local compressionMultiplier = _ENV[location .. "CompressionMultiplier"]
+
+			compressionMultiplier:setText(tostring(sbq.overrideSettings[location .. "CompressionMultiplier"] or sbq.predatorSettings[location .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
+			function compressionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "CompressionMultiplier", "globalSettings", "overrideSettings", 0) end
+			function compressionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+			function compressionMultiplier:onEscape() self:onEnter() end
+			function compressionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+			sbq.numberBoxColor(compressionMultiplier, 0)
+
 		end
 	end
 end
@@ -410,13 +430,18 @@ function sbq.locationDefaultSettings(locationData,location)
 	if sbq.predatorSettings[location.."VisualMax"] == nil then
 		sbq.predatorSettings[location.."VisualMax"] = locationData.max or 0
 	end
-	sbq.globalSettings[location.."HammerspaceDisabled"] = sbq.globalSettings[location.."HammerspaceDisabled"] or false
-	sbq.globalSettings[location.."Compression"] = sbq.globalSettings[location.."Compression"] or false
-	sbq.globalSettings[location.."Sounds"] = sbq.globalSettings[location.."Sounds"] or false
-	sbq.globalSettings[location .. "InfusedVisual"] = sbq.globalSettings[location .. "InfusedVisual"] or false
-	sbq.globalSettings[location .. "InfusedSize"] = sbq.globalSettings[location .. "InfusedSize"] or false
-	sbq.globalSettings[location .. "InfusedSizeAdditive"] = sbq.globalSettings[location .. "InfusedSizeAdditive"] or false
-	sbq.globalSettings[location .. "VisualMinAdditive"] = sbq.globalSettings[location .. "VisualMinAdditive"] or false
+	sbq.defaultGlobalSetting(location, "Hammerspace")
+	sbq.defaultGlobalSetting(location, "Compression")
+	sbq.defaultGlobalSetting(location, "Sounds")
+	sbq.defaultGlobalSetting(location, "StruggleSounds")
+	sbq.defaultGlobalSetting(location, "InfusedVisual")
+	sbq.defaultGlobalSetting(location, "InfusedSize")
+	sbq.defaultGlobalSetting(location, "InfusedSizeAdditive")
+	sbq.defaultGlobalSetting(location, "VisualMinAdditive")
+end
+
+function sbq.defaultGlobalSetting(location, setting)
+	sbq.globalSettings[location .. setting] = sbq.globalSettings[location .. setting] or ((sbq.globalSettings[location .. setting] == nil) and sbq.globalSettings["default" .. setting]) or false
 end
 
 local map = {

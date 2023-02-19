@@ -51,6 +51,10 @@ end
 
 -------------------------------------------------------------------------------
 
+function sbq.getLocationSetting(location, setting, default)
+	return sbq.settings[location..setting] or sbq.settings["default"..setting] or default
+end
+
 function sbq.objectPowerLevel()
 	local power = world.threatLevel()
 	if type(power) ~= "number" or power < 1 then return 1 end
@@ -376,7 +380,7 @@ function sbq.initLocationEffects()
 		end
 	end
 	for location, data in pairs(sbq.sbqData.locations) do
-		local value = sbq.settings[location.."EffectSlot"]
+		local value = sbq.getLocationSetting(location, "EffectSlot")
 		if value then
 			local effect = (data[value] or {}).effect or (sbq.sbqData.effectDefaults or {})[value] or (sbq.config.effectDefaults or {})[value] or "sbqRemoveBellyEffects"
 			if( sbq.sbqData.overrideSettings or {})[location..map[value].."Enable"] == false then
