@@ -457,14 +457,14 @@ function sbq.setOccupantTags()
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
 		local npcArgs = ((sbq.settings[location.."InfusedItem"] or {}).parameters or {}).npcArgs
-		if data.infusion and npcArgs and (((npcArgs or {}).npcParam or {}).identity or {}).name then
+		if data.infusion and sbq.settings[data.infusionSetting.."Pred"] and npcArgs and (((npcArgs or {}).npcParam or {}).identity or {}).name then
 			if sbq.randomTimer(location .. "InfusedStruggleDialogue", 15, 60) then
 				if (sbq.totalTimeAlive > 0.5) and (math.random() > 0.5) then
-					local dialogue = sbq.getNPCDialogue({ "struggling" }, location, data, npcArgs) -- this will change to its own part of the tree
-					if dialogue then
-						dialogue = npcArgs.npcParam.identity.name .. ":\n" .. dialogue
-						sbq.logInfo(dialogue)
-					end
+					local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
+					world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
+						parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
+						sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
+					})
 				end
 				sbq.doLocationStruggle(location, data)
 			end
