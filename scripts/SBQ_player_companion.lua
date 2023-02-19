@@ -47,6 +47,10 @@ function init()
 		})
 	end
 
+	if player.getProperty("sbqSettingsVersion") ~= sbq.config.settingsVersion then
+		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui.lua"}, ui = "starbecue:quickSettings" })
+	end
+
 	message.setHandler( "sbqPlayerCompanions", function (_,_, func, ...)
 		return playerCompanions[func](...)
 	end)
