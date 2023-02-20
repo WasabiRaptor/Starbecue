@@ -24,9 +24,9 @@ function getIdentity(eid, identity)
 			--get personality values
 			if not overrideData.identity.imagePath and not overrideData.species then
 				local found1, found2 = imageString:find("humanoid/")
-				if found1 then
+				if type(found1) == "number" and type(found2) == "number" then
 					local found3, found4 = imageString:find("/"..status.statusProperty("animOverridesStoredGender") or world.entityGender(eid).."body")
-					if found3 then
+					if type(found3) == "number" and type(found4) == "number" then
 						overrideData.identity.imagePath = imageString:sub(found2+1, found3-1)
 					end
 				end
@@ -37,7 +37,7 @@ function getIdentity(eid, identity)
 			--get personality values
 			if (not overrideData.identity.body) or (not overrideData.identity.bodyDirectives) or (not overrideData.identity.personalityIdle) then
 				local found1, found2 = imageString:find("body.png:idle.")
-				if found1 ~= nil then
+				if type(found1) == "number" and type(found2) == "number" then
 					overrideData.identity.body = overrideData.identity.body or imageString:sub(found2+1, found2+1)
 					overrideData.identity.personalityIdle = "idle."..overrideData.identity.body
 					local found3 = imageString:find("?")
@@ -47,7 +47,7 @@ function getIdentity(eid, identity)
 			end
 			if not overrideData.identity.emoteDirectives then
 				local found1, found2 = imageString:find("emote.png")
-				if found1 ~= nil then
+				if type(found1) == "number" and type(found2) == "number" then
 					local found3 = imageString:find("?")
 					local directives = imageString:sub(found3)
 					overrideData.identity.emoteDirectives = overrideData.identity.emoteDirectives or directives
@@ -55,7 +55,7 @@ function getIdentity(eid, identity)
 			end
 			if (not overrideData.identity.arm) or (not overrideData.identity.personalityArmIdle) then
 				local found1, found2 = imageString:find("backarm.png:idle.")
-				if found1 ~= nil then
+				if type(found1) == "number" and type(found2) == "number" then
 					overrideData.identity.arm = imageString:sub(found2 + 1, found2 + 1)
 					overrideData.identity.personalityArmIdle = "idle."..overrideData.identity.arm
 				end
@@ -63,7 +63,7 @@ function getIdentity(eid, identity)
 
 			if (not overrideData.identity.hairType) or (not overrideData.identity.hairDirectives) then
 				local found1, found2 = imageString:find("/"..(overrideData.identity.hairGroup or "hair").."/")
-				if found1 ~= nil then
+				if type(found1) == "number" and type(found2) == "number" then
 					local found3, found4 = imageString:find(".png:normal")
 					overrideData.identity.hairType = overrideData.identity.hairType or imageString:sub(found2+1, found3-1)
 
@@ -76,7 +76,7 @@ function getIdentity(eid, identity)
 
 			if (not overrideData.identity.facialHairType) or not (overrideData.identity.facialHairDirectives) then
 				local found1, found2 = imageString:find("/"..(overrideData.identity.facialHairGroup or "facialHair").."/")
-				if found1 ~= nil then
+				if type(found1) == "number" and type(found2) == "number" then
 					found3, found4 = imageString:find(".png:normal")
 					overrideData.identity.facialHairType = overrideData.identity.facialHairType or imageString:sub(found2+1, found3-1)
 
@@ -88,7 +88,7 @@ function getIdentity(eid, identity)
 
 			if (not overrideData.identity.facialMaskType) or (not overrideData.identity.facialMaskDirectives) then
 				local found1, found2 = imageString:find("/"..(overrideData.identity.facialMaskGroup or "facialMask").."/")
-				if found1 ~= nil then
+				if type(found1) == "number" and type(found2) == "number" then
 					found3, found4 = imageString:find(".png:normal")
 					overrideData.identity.facialMaskType = overrideData.identity.facialMaskType imageString:sub(found2+1, found3-1)
 
