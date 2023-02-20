@@ -19,8 +19,10 @@ function build(directory, config, parameters, level, seed)
 
 		for colorName, from in pairs(config.baseColorMap) do
 			local to = ((success and speciesFile) or config.speciesFile).baseColorMap[colorName] or from
-			for i, color in ipairs(from or {}) do
-				colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+			if from and to then
+				for i, color in ipairs(from or {}) do
+					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+				end
 			end
 		end
 

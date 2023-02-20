@@ -157,8 +157,10 @@ message.setHandler("sbqSetInfusedPartColors", function(_, _, partname, item)
 			else
 				local from = baseColorMap[data[1]]
 				local to = speciesFile.baseColorMap[data[2]]
-				for i, color in ipairs(from or {}) do
-					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+				if from and to then
+					for i, color in ipairs(from or {}) do
+						colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+					end
 				end
 			end
 		end

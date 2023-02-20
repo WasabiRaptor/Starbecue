@@ -62,8 +62,10 @@ function build( directory, config, parameters, level, seed )
 			local colorRemap = "?replace"
 			for colorName, from in pairs(config.baseColorMap) do
 				local to = config.preyColorMap[colorName] or from
-				for i, color in ipairs(from or {}) do
-					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+				if from and to then
+					for i, color in ipairs(from or {}) do
+						colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+					end
 				end
 			end
 			config.directives = colorRemap..config.preyDirectives
@@ -71,8 +73,10 @@ function build( directory, config, parameters, level, seed )
 			local colorRemap = "?replace"
 			for colorName, from in pairs(config.baseColorMap) do
 				local to = config.predColorMap[colorName] or from
-				for i, color in ipairs(from or {}) do
-					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+				if from and to then
+					for i, color in ipairs(from or {}) do
+						colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
+					end
 				end
 			end
 			config.directives = colorRemap..config.predDirectives
