@@ -1,0 +1,39 @@
+{
+	"type" : "sbqHubFerri_Ferrilata_",
+
+	// this should be your base NPC's type
+	"baseType" : "sbqFerri_Ferrilata_",
+
+	"scriptConfig" : {
+		"sbqDefaultSettings" : {
+			// the hub map will be seen by everyone who plays the mod, you don't want to subject them to seeing NSFW stuff
+			// any NPCs on the hub map *must* have their NSFW vore types disabled
+			"analVorePred" : false,
+			"cockVorePred" : false,
+			"breastVorePred" : false,
+			"unbirthPred" : false,
+
+			"analVorePredEnable" : false,
+			"cockVorePredEnable" : false,
+			"breastVorePredEnable" : false,
+			"unbirthPredEnable" : false
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		},
+		"statusProperties" : {
+			"sbqPreyEnabled" : {
+				// up to you if you want to make them immune to these or not, though on the hub map it would probably be wise to do so
+				"digestImmunity": false,
+				"cumDigestImmunity": false,
+				"femcumDigestImmunity": false,
+				"transformImmunity": false,
+				"genderswapImmunity": false
+			}
+		}
+	}
+}

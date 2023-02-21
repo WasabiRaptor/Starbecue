@@ -1,0 +1,48 @@
+{
+	"objectName" : "sbqCardboardBox",
+	"colonyTags" : ["cardboard"],
+	"rarity" : "Common",
+	"objectType" : "loungeable",
+
+	"category" : "furniture",
+	"price" : 45,
+	"description" : "An opened cardboard box.",
+	"shortdescription" : "Open Cardboard Box",
+	"race" : "generic",
+	"health" : 1.5,
+
+	"apexDescription" : "A cardboard box that's been left open.",
+	"avianDescription" : "A medium sized cardboard box.",
+	"floranDescription" : "Cardboard for sstoring thingss insside.",
+	"glitchDescription" : "Impressed. This cardboard box is light, but large enough to hold many things inside.",
+	"humanDescription" : "A cardboard box. Looks like it's been opened.",
+	"hylotlDescription" : "A basic cardboard box. It's not pretty, but good for keeping things organised.",
+	"novakidDescription" : "A flimsy box for storin' just about anythin'.",
+
+	"inventoryIcon" : "sbqCardboardBoxicon.png",
+	"orientations" : [
+		{
+			"image" : "/objects/sbq/sbqCardboardBox/sbqCardboardBox.png:back",
+			"imagePosition" : [-12, 0],
+			"sitCoverImage" : "/objects/sbq/sbqCardboardBox/sbqCardboardBox.png:cover",
+			"direction" : "left",
+			"flipImages" : true,
+
+			"sitPosition" : [0, 18],
+
+			"spaceScan" : 0.1,
+			"anchors" : [ "bottom" ]
+		},
+		{
+			"image" : "/objects/sbq/sbqCardboardBox/sbqCardboardBox.png:back",
+			"imagePosition" : [-12, 0],
+			"sitCoverImage" : "/objects/sbq/sbqCardboardBox/sbqCardboardBox.png:cover",
+			"direction" : "right",
+
+			"sitPosition" : [0, 18],
+
+			"spaceScan" : 0.1,
+			"anchors" : [ "bottom" ]
+		}
+	]
+}

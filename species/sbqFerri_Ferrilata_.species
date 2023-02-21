@@ -1,12 +1,12 @@
 {
-	"kind" : "hellhound",
+	"kind" : "sbqFerri_Ferrilata_",
 
 	"speciesAnimOverride" : "speciesAnimOverride.config",
 
 	"charCreationTooltip" : {
-		"title" : "Hellhound",
-		"subTitle" : "S8",
-		"description" : "I hear they're pretty hot."
+			"title" : "Ferri",
+			"subTitle" : "The potential for vore.",
+			"description" : "Catfox named Ferri. Friendly. Eager to please. Nutritious."
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
@@ -16,9 +16,9 @@
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
 
 
-	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "Hellhound", "Personality" ],
+	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "HUMAN", "Personality" ],
 	"skull" : "/humanoid/human/dead.png",
-	"effectDirectives" : "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=ff99e6FF;31a6ffFF=e359b9FF",
+	"effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
 	"defaultBlueprints" : {
 		"tier1" : [
 
@@ -103,10 +103,10 @@
 		{
 			"name" : "male",
 			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png",
+			"characterImage" : "/interface/title/humanmale.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
-			"shirt" : [ "emptychest" ],
+			"shirt" : [ "sbqFerri_Ferrilata_chest" ],
 			"pants" : [ "emptylegs" ],
 			"facialHairGroup" : "",
 			"facialHair" : [ ],
@@ -116,10 +116,10 @@
 		{
 			"name" : "female",
 			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/humanfemale.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
-			"shirt" : [ "emptychest" ],
+			"shirt" : [ "sbqFerri_Ferrilata_chest" ],
 			"pants" : [ "emptylegs" ],
 			"facialHairGroup" : "",
 			"facialHair" : [ ],
@@ -128,20 +128,20 @@
 		}
 	],
 	"baseColorMap" : {
-		"primary" :	 ["1c1614","261f1d","2e2725","372f2d"],
-		"secondary" : ["753e23","884c2c","9b5b38","ab6743"],
-		"hair" : ["1c1614","261f1d","2e2725","372f2d"],
-		"flesh" : ["a0533f","c05e41","fc8d72","fcab9c"]
+		"primary" : ["6f2919","bc4b12","f42617"],
+		"secondary" : ["7c7c7c","afafaf","dddddd"],
+		"hair" : ["6f2919","bc4b12","f42617"],
+		"flesh" : ["d38488","dd9691","fdaba1"]
 	},
 
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
-		{ "ffe2c5" : "ab8c77" }
+		{ "6f2919" : "6f2919", "bc4b12" : "bc4b12", "f42617" : "f42617" }
 	],
 	"undyColor" : [
-		{ "dc1f00" : "4d76ad" }
+		{ "7c7c7c" : "7c7c7c", "afafaf" : "afafaf", "dddddd" : "dddddd" }
 	],
 	"hairColor" : [
-		{ "d9c189" : "E86D46" }
+		{ "d38488" : "d38488", "dd9691" : "dd9691", "fdaba1" : "fdaba1" }
 	]
 }

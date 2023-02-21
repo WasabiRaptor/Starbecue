@@ -7,6 +7,7 @@
 	Wasabi_Raptor / LokiVulpix / Loki_the_Vulpix
 	ArgobargSoup
 	HornySe7en
+	Ferrilata_
 
 # Commissioners
 	xeronious
@@ -22,6 +23,7 @@
 	radiantAurora
 	Blueninja
 	FFWizard
+	Ferrilata_
 
 # Playtesters / Bug Hunters
 	xeronious

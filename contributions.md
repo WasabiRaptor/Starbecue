@@ -18,6 +18,9 @@
 	Floran house on hub map
 	Novakid house on hub map
 
+# Ferrilata_
+	Ferri NPC
+
 # FFWizard
 	Helena NPC dialogue
 
