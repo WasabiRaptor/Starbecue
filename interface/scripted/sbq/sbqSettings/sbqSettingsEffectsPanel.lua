@@ -338,10 +338,16 @@ function sbq.effectsPanel()
 			local difficultyTextbox = _ENV[location.."DifficultyMod"]
 
 			local n1 = sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0
-			local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or 1
+			local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or locationData.max or 1
 			visualSize.notches = locationData.sizes.struggle
-			visualSize.handles[1].value = sbq.overrideSettings[location .. "VisualMin"] or sbq.predatorSettings[location .. "VisualMin"] or 0
-			visualSize.handles[2].value = sbq.overrideSettings[location .. "VisualMax"] or sbq.predatorSettings[location .. "VisualMax"] or 0
+			if not visualSize.notches then
+				visualSize.notches = {}
+				for i = n1, n2 do
+					table.insert(visualSize.notches, i)
+				end
+			end
+			visualSize.handles[1].value = sbq.overrideSettings[location .. "VisualMin"] or sbq.predatorSettings[location .. "VisualMin"] or locationData.minVisual or 0
+			visualSize.handles[2].value = sbq.overrideSettings[location .. "VisualMax"] or sbq.predatorSettings[location .. "VisualMax"] or locationData.maxVisual or locationData.max or 1
 			function visualSize:onChange(index, value)
 				if index == 1 then
 					sbq.changePredatorSetting(location .. "VisualMin", value)
