@@ -216,7 +216,7 @@ end
 function onInteraction(args)
 	if not storage.house then return animator.playSound("error") end
 
-	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui.lua"}, ui = "starbecue:voreColonyDeed" }}
+	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:voreColonyDeed" }}
 end
 
 function die() -- replace the old function so the tenant isn't evicted upon breaking it

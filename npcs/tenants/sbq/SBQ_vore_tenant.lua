@@ -296,7 +296,7 @@ function interact(args)
 
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, settings)
 			dialogueBoxData.dialogueTreeStart = { "struggling" }
-			return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui.lua"}, ui = "starbecue:dialogueBox" }}
+			return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
 		else
 			return
 		end
@@ -307,7 +307,7 @@ function interact(args)
 			dialogueBoxData.settings.location = location
 			dialogueBoxData.settings.playerPrey = true
 		end
-		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui.lua"}, ui = "starbecue:dialogueBox" }}
+		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
 	end
 end
 

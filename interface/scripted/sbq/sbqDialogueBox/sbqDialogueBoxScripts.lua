@@ -269,7 +269,7 @@ function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, e
 end
 
 function dialogueBoxScripts.openNewDialogueBox(dialogueTree, settings, branch, eid, ...)
-	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogueTree.inputData), gui = { }, scripts = {"/metagui.lua"}, ui = dialogueTree.ui }, pane.sourceEntity())
+	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogueTree.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogueTree.ui }, pane.sourceEntity())
 	pane.dismiss()
 end
 

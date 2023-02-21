@@ -122,8 +122,7 @@
 					{"mode": "vertical", "spacing" : 0},
 					{ "type" : "label", "text" : "Size Control", "align" : "center" },
 					[
-						{ "type" : "textBox", "id" : "scaleValueMin", "toolTip" : "Minimum Scale", "text" : "0.1" },
-						{ "type" : "textBox", "id" : "scaleValueMax", "toolTip" : "Maximum Scale", "text" : "3" }
+							{ "type" : "slider", "id" : "scaleValue", "notches": [0.1, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3], "handles": [{"value": 0.1, "toolTip": "Minimum Scale"}, {"value": 1, "toolTip": "Current Scale"}, {"value": 3, "toolTip": "Maximum Scale"}]}
 					]
 				]},
 				{ "type" : "panel", "id" : "performanceSettingsPanel", "expandMode" : [1,1], "style" : "convex", "children" : [
