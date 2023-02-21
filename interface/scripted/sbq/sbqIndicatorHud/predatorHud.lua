@@ -307,7 +307,7 @@ end
 ----------------------------------------------------------------------------------------------------------------
 
 function settings:onClick()
-	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui.lua"}, ui = "starbecue:settings" })
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:settings" })
 end
 
 function escapeValue:onEnter()

@@ -16,11 +16,11 @@ function update(dt, fireMode, shiftHeld, controls)
 			if not world.isTileProtected(world.entityPosition(object)) then
 				if world.entityName(object) == "sbqMouseHole" then
 					player.interact("ScriptPane",
-						{ data = world.getObjectParameter(object, "savedData"), gui = {}, scripts = { "/metagui.lua" },
+						{ data = world.getObjectParameter(object, "savedData"), gui = {}, scripts = { "/metagui/sbq/build.lua" },
 							ui = "starbecue:mouseHoleTool" }, object)
 				elseif world.entityName(object) == "sbqMouseRoom" then
 					player.interact("ScriptPane",
-						{ data = world.getObjectParameter(object, "savedData"), gui = {}, scripts = { "/metagui.lua" },
+						{ data = world.getObjectParameter(object, "savedData"), gui = {}, scripts = { "/metagui/sbq/build.lua" },
 							ui = "starbecue:mouseRoomTool" }, object)
 				end
 			end
