@@ -325,31 +325,30 @@ function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, ei
 	if player ~= nil then
 		local uuid = world.entityUniqueId(pane.sourceEntity())
 		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
-		local cumulativeDataTable = player.getProperty("sbqCumulativeData") or {}
-		cumulativeDataTable[uuid] = cumulativeDataTable[uuid] or {}
-		cumulativeDataTable[uuid].flags = cumulativeDataTable[uuid].flags or {}
 
-		local rewards = tenantRewardsTable[uuid]
-		if rewards then
+		local rewards = tenantRewardsTable[uuid] or {}
+		if rewards[1] then
+			player.cleanupItems()
+
 			local rewardDialogue
-			for rewardName, reward in pairs(rewards) do
-				if reward.cumulative then
-					cumulativeDataTable[uuid].flags[rewardName] = true
-					cumulativeDataTable[uuid].flags[rewardName.."CountRecieved"] = reward.count
+			local remainingRewards = {}
+			local itemsGiven = 0
+			for i, item in ipairs(rewards) do
+				local count = player.hasCountOfItem(item, false)
+				player.giveItem(item)
+				local newCount = player.hasCountOfItem(item, false)
+				local diff = newCount - count
+				if diff < (item.count or 0) then
+					item.count = item.count - diff
+					table.insert(remainingRewards, item)
 				end
-				for i = 1, reward.count do
-					world.spawnTreasure(world.entityPosition(pane.sourceEntity()), reward.pool, reward.level or 0)
-				end
-				if reward.dialogue then
-					rewardDialogue = reward.dialogue
-				end
+				itemsGiven = itemsGiven + diff
+				if (diff > 0) and item.rewardDialogue then rewardDialogue = item.rewardDialogue end
 			end
-			tenantRewardsTable[uuid] = nil
-
+			tenantRewardsTable[uuid] = remainingRewards
 			player.setProperty("sbqTenantRewards", tenantRewardsTable)
-			player.setProperty("sbqCumulativeData", cumulativeDataTable)
 
-			return dialogueTree[rewardDialogue or "rewards"] or dialogueTree.default
+			if itemsGiven > 0 then return dialogueTree[rewardDialogue or "rewards"] or dialogueTree.default end
 		end
 	end
 	return dialogueTree.default

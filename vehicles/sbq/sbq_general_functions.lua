@@ -400,8 +400,7 @@ local defaultTrimValues = {
 	"progressBarColor",
 	"flags",
 	"visited",
-	"cumulative",
-	"cumulativeStart"
+	"cumulative"
 }
 
 function sbq.getTrimmedOccupantData()

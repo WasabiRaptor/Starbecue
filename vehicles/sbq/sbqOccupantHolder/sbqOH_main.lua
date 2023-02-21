@@ -60,7 +60,6 @@ function sbq.clearOccupant(i)
 		flags = {},
 		visited = {},
 		cumulative = {},
-		cumulativeStart = {},
 		struggleTime = 0,
 		bellySettleDownTimer = 0,
 		progressBar = 0,

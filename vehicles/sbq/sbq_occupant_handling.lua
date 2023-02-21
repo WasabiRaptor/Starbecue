@@ -55,7 +55,6 @@ function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationS
 			function(data)
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
-			sbq.occupant[seatindex].cumulativeStart = sb.jsonMerge(data.times or {}, {})
 			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
 		end)
 	else
@@ -63,7 +62,6 @@ function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationS
 			world.entityUniqueId(occupantId), true), function(data)
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
-			sbq.occupant[seatindex].cumulativeStart = sb.jsonMerge(data.times or {}, {})
 			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
 		end)
 	end

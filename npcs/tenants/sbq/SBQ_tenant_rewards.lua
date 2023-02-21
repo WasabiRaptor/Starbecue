@@ -108,8 +108,9 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				if count == math.huge then
 					count = 1
 				end
-				count = count - (occupant.flags[rewardName.."CountRecieved"] or 0)
-				if count > (occupant.flags[rewardName.."Count"] or 0) then
+				count = count - (occupant.flags[rewardName.."CountRecieved"] or 0) - (occupant.flags[rewardName.."Count"] or 0)
+				if count > 0 then
+					setFlags[rewardName .. "Count"] = (occupant.flags[rewardName.."Count"] or 0) + count
 					rewards[rewardName] = { pool = data.pool, count = count, level = data.level or level, cumulative = cumulativeFlag }
 				end
 			end

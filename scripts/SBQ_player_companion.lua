@@ -296,9 +296,30 @@ function init()
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
 		if not uniqueId then return end
 		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
-		tenantRewardsTable[uniqueId] = sb.jsonMerge(tenantRewardsTable[uniqueId] or {}, newRewards or {})
-		player.setProperty("sbqTenantRewards", tenantRewardsTable)
+		tenantRewardsTable[uniqueId] = tenantRewardsTable[uniqueId] or {}
 
+		local cumulativeDataTable = player.getProperty("sbqCumulativeData") or {}
+		cumulativeDataTable[uuid] = cumulativeDataTable[uuid] or {}
+		cumulativeDataTable[uuid].flags = cumulativeDataTable[uuid].flags or {}
+
+		for rewardName, reward in pairs(newRewards) do
+			if reward.cumulative then
+				cumulativeDataTable[uuid].flags[rewardName] = true
+				cumulativeDataTable[uuid].flags[rewardName.."CountRecieved"] = (cumulativeDataTable[uuid].flags[rewardName.."CountRecieved"] or 0) + reward.count
+			end
+			for i = 1, reward.count do
+				local loot = root.createTreasure(reward.pool, reward.level or 0)
+				for i, item in ipairs(loot or {}) do
+					table.insert(tenantRewardsTable[uniqueId], item)
+				end
+			end
+			if reward.dialogue and tenantRewardsTable[uniqueId][1] then
+				tenantRewardsTable[uniqueId][#tenantRewardsTable[uniqueId]].rewardDialogue = reward.dialogue
+			end
+		end
+
+		player.setProperty("sbqTenantRewards", tenantRewardsTable)
+		player.setProperty("sbqCumulativeData", cumulativeDataTable)
 	end)
 
 	message.setHandler("sbqGetCumulativeOccupancyTimeAndFlags", function(_, _, uniqueId, isPrey)
