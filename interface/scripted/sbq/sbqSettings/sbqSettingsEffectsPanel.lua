@@ -174,8 +174,8 @@ function sbq.effectsPanel()
 					},
 					{
 						{ type = "checkBox", id = location .. "Compression", checked = sbq.predatorSettings[location .. "Compression"], toolTip = "Prey will be compressed to a smaller size over time." },
-						{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {30,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
-						{ type = "label", text = "Compression"}
+						{ type = "label", text = "Compression " },
+						{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
 					}
 				}}
 			} }
