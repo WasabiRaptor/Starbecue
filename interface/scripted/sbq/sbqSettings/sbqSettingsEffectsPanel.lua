@@ -140,17 +140,29 @@ function sbq.effectsPanel()
 				}}
 			}}
 
+			local n1 = sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0
+			local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or locationData.max or 1
+			local notches = locationData.sizes.struggle
+			if not notches then
+				notches = {}
+				for i = n1, n2 do
+					table.insert(notches, i)
+				end
+			end
+			local min = sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0
+			local max = sbq.overrideSettings[location .. "VisualMax"] or locationData.maxVisual or locationData.max or 1
+
 			local modifiersLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,0}, children = {
 				{ type = "layout", mode = "vertical", spacing = 0, children = {
 					{type = "label", text = "Size Modifiers", align = "center"},
 					{
+						{ spacing = -1 },
 						{ type = "checkBox", id = location .. "VisualMinAdditive", checked = sbq.predatorSettings[location .. "VisualMinAdditive"], toolTip = "Whether the Minimum actually counts towards the fill level." },
-						{ type = "slider", id = location .. "VisualSize", notches = {0, 1}, handles = {{value = 0, toolTip = "Minimum Visual Size"}, {value = 1, toolTip = "Maximum Visual Size"}}},
-						-- { type = "textBox", align = "center", id = location .. "VisualMin", toolTip = "Minimum Fill level" },
-						-- { type = "textBox", align = "center", id = location .. "VisualMax", toolTip = "Maximum Fill level"},
-					},
-					{
-						{ type = "textBox", align = "center", id = location .. "Multiplier", toolTip = "Fill Level Multiplier"},
+							{ type = "slider", id = location .. "VisualSize", notches = notches,
+								handles = { { value = math.max(min, sbq.predatorSettings[location .. "VisualMin"] or min),
+									toolTip = "Minimum Visual Size" },
+									{ value = math.min(max, sbq.predatorSettings[location .. "VisualMax"] or max), toolTip = "Maximum Visual Size" } } },
+						{ type = "textBox", align = "center", id = location .. "Multiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Fill Level Multiplier"},
 					},
 					{
 						{ type = "checkBox", id = location .. "Hammerspace",
@@ -187,7 +199,7 @@ function sbq.effectsPanel()
 								{ type = "checkBox", id = location .. "InfusedSize", checked = sbq.predatorSettings[location .. "InfusedSize"], toolTip = "Add infused character's size if applicable." },
 								{ type = "checkBox", id = location .. "InfusedSizeAdditive", checked = sbq.predatorSettings[location .. "InfusedSizeAdditive"], toolTip = "If adding a character's size, make it count towards the fill level." },
 							},
-							{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", size = {30,14}, expandMode = {0,0}, toolTip = "Size Multiplier on Infused Characters if size is being added."},
+							{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Size Multiplier on Infused Characters if size is being added."},
 						}
 					}
 				}}
@@ -337,17 +349,6 @@ function sbq.effectsPanel()
 			local multiplier = _ENV[location .. "Multiplier"]
 			local difficultyTextbox = _ENV[location.."DifficultyMod"]
 
-			local n1 = sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0
-			local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or locationData.max or 1
-			visualSize.notches = locationData.sizes.struggle
-			if not visualSize.notches then
-				visualSize.notches = {}
-				for i = n1, n2 do
-					table.insert(visualSize.notches, i)
-				end
-			end
-			visualSize.handles[1].value = sbq.overrideSettings[location .. "VisualMin"] or sbq.predatorSettings[location .. "VisualMin"] or locationData.minVisual or 0
-			visualSize.handles[2].value = sbq.overrideSettings[location .. "VisualMax"] or sbq.predatorSettings[location .. "VisualMax"] or locationData.maxVisual or locationData.max or 1
 			function visualSize:onChange(index, value)
 				if index == 1 then
 					sbq.changePredatorSetting(location .. "VisualMin", value)
