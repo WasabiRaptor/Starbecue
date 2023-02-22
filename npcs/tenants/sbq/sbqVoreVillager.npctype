@@ -1363,6 +1363,108 @@
 				}
 			},
 
+			// lines for when a character is infused (CTF Boobsorb etc.)
+			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
+			"infused": {
+				"next" : "location",
+				"default" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : ["Just a part of your body~"] // very very placeholder
+								}
+							}
+						}
+					}
+				},
+				"belly" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : ["I'm your belly"] // very very placeholder
+								}
+							}
+						}
+					}
+				},
+				"womb" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : ["I'm your pussy!"] // very very placeholder
+								}
+							}
+						}
+					}
+				},
+				"breastsL" : "infused.breasts",
+				"breastsR" : "infused.breasts",
+				"breasts" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : ["I'm your tits!"] // very very placeholder
+								}
+							}
+						}
+					}
+				},
+				"penis" : "infused.shaft",
+				"cock" : "infused.shaft",
+				"shaft" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : ["I'm your cock!"] // very very placeholder
+								}
+							}
+						}
+					}
+				},
+				"ballsL" : "infused.balls",
+				"ballsR" : "infused.balls",
+				"balls" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : ["I'm your balls!"] // very very placeholder
+								}
+							}
+						}
+					}
+				}
+			},
+
 			// a line of dialogue triggered when size is changed by the size ray or something else
 			"sizeChanged" : {
 				"next" : "race",
