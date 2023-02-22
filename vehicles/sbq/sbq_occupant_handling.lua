@@ -458,12 +458,16 @@ function sbq.setOccupantTags()
 		local npcArgs = ((sbq.getLocationSetting(location, "InfusedItem", {})).parameters or {}).npcArgs
 		if data.infusion and sbq.settings[data.infusionSetting.."Pred"] and npcArgs and (((npcArgs or {}).npcParam or {}).identity or {}).name then
 			if sbq.randomTimer(location .. "InfusedStruggleDialogue", 15, 60) then
-				if (sbq.totalTimeAlive > 0.5) and (math.random() > 0.5) then
-					local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
-					world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
-						parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
-						sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
-					})
+				if (sbq.totalTimeAlive > 0.5) then
+					if (math.random() > 0.5) then
+						local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
+						world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
+							parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
+							sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
+						})
+					else
+						world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {}, {"infusedTease"} )
+					end
 				end
 				sbq.doLocationStruggle(location, data)
 			end
