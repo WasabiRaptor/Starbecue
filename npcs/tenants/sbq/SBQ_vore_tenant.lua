@@ -191,7 +191,11 @@ function init()
 	end)
 	message.setHandler("sbqCheckRewards", function(_, _, occupant)
 		local rewards = config.getParameter("sbqRewards") or {}
-		sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false)
+		sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false, occupant.id, sbq.occupantHolder)
+	end)
+	message.setHandler("sbqCheckPreyRewards", function(_, _, occupant, recipient, holder)
+		local rewards = config.getParameter("sbqPreyRewards") or {}
+		sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false, recipient, holder)
 	end)
 
 	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
@@ -550,20 +554,20 @@ function sbq.searchForValidPred(setting)
 
 end
 
-function sbq.checkOccupantRewards(occupant, rewards, notify)
-	if type(occupant.id) == "number" and world.entityExists(occupant.id) and world.entityType(occupant.id) == "player" then
+function sbq.checkOccupantRewards(occupant, rewards, notify, recipient, holder, treestart)
+	if type(recipient) == "number" and world.entityExists(recipient) and world.entityType(recipient) == "player" then
 		local setFlags, newRewards = sbq.getTenantRewards(rewards, occupant, npc.level())
-		world.sendEntityMessage(sbq.occupantHolder, "sbqSetOccupantFlags", occupant.id, setFlags)
+		world.sendEntityMessage(holder, "sbqSetOccupantFlags", recipient, setFlags)
 		local sendRewards = false
 		local rewardNotifyDelay = 0
 		for rewardName, data in pairs(newRewards) do
 			sendRewards = true
-			if notify and sbq.getRandomDialogue( {"rewardNotify"}, occupant.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool }))) then
+			if notify and sbq.getRandomDialogue( treestart or {"rewardNotify"}, recipient, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool, isPrey = (occupant.id == entity.id()) }))) then
 				rewardNotifyDelay = rewardNotifyDelay + 5
 			end
 		end
 		if sendRewards then
-			world.sendEntityMessage(occupant.id, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
+			world.sendEntityMessage(recipient, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
 		end
 	end
 end

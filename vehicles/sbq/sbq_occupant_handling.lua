@@ -106,6 +106,7 @@ function sbq.uneat( occupantId )
 	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[occupantId].cumulative )
 	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), true, sbq.lounging[occupantId].cumulative)
 
+	world.sendEntityMessage(occupantId, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.lounging[occupantId]), sbq.spawner, entity.id() )
 	world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[occupantId]) )
 
 	sbq.refreshList = true
@@ -403,6 +404,10 @@ function sbq.updateOccupants(dt)
 				if sbq.sbqData.locations[location].transformGroups ~= nil then
 					sbq.copyTransformationFromGroupsToGroup(sbq.sbqData.locations[location].transformGroups, seatname .. "Position")
 				end
+			end
+
+			if sbq.timer(seatname.."PreyRewards", 30) and sbq.driving and world.entityType(sbq.driver) == "player" then
+				world.sendEntityMessage(sbq.occupant[i].id, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.occupant[i]), sbq.spawner, entity.id() )
 			end
 
 			lastFilled = true
