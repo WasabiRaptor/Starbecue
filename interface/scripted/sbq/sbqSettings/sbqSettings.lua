@@ -42,7 +42,8 @@ function sbq.getInitialData()
 
 	sbq.predatorEntity = sbq.sbqCurrentData.id
 
-	sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), status.statusProperty("speciesAnimOverrideSettings") or {})
+
+	sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), status.statusProperty("speciesAnimOverrideSettings") or {})
 	sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
 	sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
 
@@ -52,6 +53,7 @@ end
 function sbq.getPlayerOccupantHolderData()
 	sbq.getSpeciesConfig(player.species(), sbq.sbqSettings.global)
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
+	sbq.speciesFile = root.assetJson( "/species/"..(sbq.speciesConfig.species)..".species" )
 end
 
 function sbq.drawLocked(w, icon)

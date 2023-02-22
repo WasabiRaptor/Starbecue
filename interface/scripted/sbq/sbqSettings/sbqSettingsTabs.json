@@ -73,8 +73,11 @@
 							{ "type" : "checkBox", "id" : "tailMaw", "toolTip" : "Give your tail a tail maw"},
 							{ "id" : "tailLabel", "type" : "label", "text" : " Tail" }
 						],
-						[{ "type" : "checkBox", "id" : "navel", "toolTip" : "Enable the navel for navel vore and escapes"}, { "id" : "navelLabel", "type" : "label", "text" : " Navel" }],
-
+						[
+							{ "type" : "checkBox", "id" : "navel", "toolTip" : "Enable the navel for navel vore and escapes"},
+							{ "type" : "checkBox", "id" : "visibleNavel", "toolTip" : "Makes a navel appear on belly sprites"},
+							{ "id" : "navelLabel", "type" : "label", "text" : " Navel" }
+						],
 						[
 							{ "type" : "checkBox", "id" : "breasts", "toolTip" : "Boobs! for breast vore, regardless of gender."},
 							{ "type" : "checkBox", "id" : "breastsSymmetrical", "toolTip" : "When one of the breasts is stretched out, the other will be stretched the same amount, even if theres nobody inside"},

@@ -79,21 +79,10 @@ function init()
 
 		sbq.sbqCurrentData = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).sbqCurrentData or {}
 
-		-- I do need to seperate the settings for the NPCs based on their pred species but thats for another time
-		--[[if sbq.sbqCurrentData.species ~= nil then
-			if sbq.sbqCurrentData.species == "sbqOccupantHolder" then
-				sbq.getSpeciesConfig(sbq.tenant.species, sbq.tenant.overrides.scriptConfig.sbqSettings)
-				sbq.predatorConfig = sbq.speciesConfig.sbqData
-					else
-				sbq.predatorConfig = root.assetJson("/vehicles/sbq/"..sbq.sbqCurrentData.species.."/"..sbq.sbqCurrentData.species..".vehicle").sbqData or {}
-			end
-		else
-			sbq.getSpeciesConfig(sbq.tenant.species, sbq.tenant.overrides.scriptConfig.sbqSettings)
-			sbq.predatorConfig = sbq.speciesConfig.sbqData
-		end]]
 		sbq.getSpeciesConfig(sbq.tenant.species, sbq.tenant.overrides.scriptConfig.sbqSettings)
 		sbq.predatorConfig = sbq.speciesConfig.sbqData
 
+		sbq.speciesFile = root.assetJson( "/species/"..(sbq.speciesConfig.species)..".species" )
 
 		sbq.overrideSettings = sb.jsonMerge(sbq.predatorConfig.overrideSettings or {}, sbq.npcConfig.scriptConfig.sbqOverrideSettings or {})
 		sbq.overridePreyEnabled = sb.jsonMerge(sbq.predatorConfig.overridePreyEnabled or {}, sbq.npcConfig.scriptConfig.sbqOverridePreyEnabled or {})
@@ -118,9 +107,10 @@ function init()
 		sbq.storedDigestedPrey = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey or {}
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = sbq.storedDigestedPrey
 
-		sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings or {})
+		sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings or {})
 		sbq.animOverrideSettings.scale = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).animOverrideScale or 1
-		sbq.animOverrideOverrideSettings = sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideOverrideSettings or {}
+		sbq.animOverrideOverrideSettings = sb.jsonMerge(sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideOverrideSettings or {}, npc.npcConfig.scriptConfig.speciesAnimOverrideOverrideSettings)
+
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = sbq.animOverrideSettings
 
 		sbq.globalSettings = sbq.predatorSettings
