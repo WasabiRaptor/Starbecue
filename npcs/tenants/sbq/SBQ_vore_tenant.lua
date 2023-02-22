@@ -191,7 +191,7 @@ function init()
 	end)
 	message.setHandler("sbqCheckRewards", function(_, _, occupant)
 		local rewards = config.getParameter("sbqRewards") or {}
-		sbq.checkOccupantRewards(occupant, rewards, false)
+		sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false)
 	end)
 
 	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
@@ -240,7 +240,7 @@ function update(dt)
 	sbq.timer("rewardCheck", 30, function()
 		local rewards = config.getParameter("sbqRewards") or {}
 		for i, occupant in pairs(sbq.occupant or {}) do
-			sbq.checkOccupantRewards(occupant, rewards, true)
+			sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false)
 		end
 	end)
 
