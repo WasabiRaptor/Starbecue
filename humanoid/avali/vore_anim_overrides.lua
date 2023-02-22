@@ -14,16 +14,7 @@ message.setHandler("setBoobMask", function (_,_,booba)
 			local success2, baseColorMap = pcall(root.assetJson, "/species/" .. (remapPart.species or "human") .. ".species:baseColorMap")
 			local colorRemap
 			if success2 and baseColorMap ~= nil and remapPart.remapColors and self.speciesFile.baseColorMap then
-				colorRemap = "?replace"
-				for _, data in ipairs(remapPart.remapColors) do
-					local from = baseColorMap[data[1]]
-					local to = self.speciesFile.baseColorMap[data[2]]
-					if from and to then
-						for i, color in ipairs(from or {}) do
-							colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
-						end
-					end
-				end
+				colorRemap = remapBaseColors(remapPart.remapColors, baseColorMap, self.speciesFile.baseColorMap)
 			end
 			animator.setPartTag(partname, "partImage", part)
 			animator.setPartTag(partname, "colorRemap", colorRemap or "")
