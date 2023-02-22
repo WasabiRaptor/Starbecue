@@ -1099,27 +1099,6 @@
 		"sbqRewards" : {
 			// Time is in minutes here!
 
-			/*
-			"exampleReward" : { // example reward that uses all possible args
-				"repeatable" : true, // whether this reward repeats each time its requirements are met, a 5min reward would repeat at 10min and etc
-				"location" : ["belly", "womb", "shaft", "balls", "breasts", "tail"], // whether the counters for this are for a specific location, it adds the timers and counters for all the locations listed in this arg, otherwise its just the overall count/time
-				"pool" : "richOre", // the treasure pool this reward gives the player, look up how these are defined, make sure they don't conflict in name
-
-				// per session, resets each time you escape the pred
-				"minTime" : 1, // the minimum amount of time (minutes) in this session before this reward can be obtained (minutes)
-				"time" : 5, // the amount of time (minutes) needed for this reward to trigger and between each repeat
-				"minStruggles" : 1, // the amount of struggles (seconds) before this reward can be obtained
-				"struggles" : 10, // the amount of struggles (seconds) for this reward to trigger between each repeat
-
-				// cumulative, they never reset, and will continue to count up every time you are in this specific pred
-				"minTimeCumulative" : 1, // the minimum amount of time (minutes) in this session before this reward can be obtained (minutes)
-				"timeCumulative" : 5, // the amount of time (minutes) needed for this reward to trigger and between each repeat
-				"minStrugglesCumulative" : 1, // the amount of struggles (seconds) before this reward can be obtained
-				"strugglesCumulative" : 10 // the amount of struggles (seconds) for this reward to trigger between each repeat
-			},
-			*/
-
-
 			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
 
 			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
