@@ -67,6 +67,28 @@
 			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		},
+		"sbqPreyRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "money" },
+
+			"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "money"},
+			"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "lowValueQuestRewards"},
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+
 
 		// when hunting for prey, a checklist to have them only seek out prey that match the settings
 		// any settings not defined in the checlkist for that vore type can be anything
