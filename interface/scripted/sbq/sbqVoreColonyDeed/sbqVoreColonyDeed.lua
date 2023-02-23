@@ -109,7 +109,7 @@ function init()
 
 		sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings or {})
 		sbq.animOverrideSettings.scale = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).animOverrideScale or 1
-		sbq.animOverrideOverrideSettings = sb.jsonMerge(sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideOverrideSettings or {}, npc.npcConfig.scriptConfig.speciesAnimOverrideOverrideSettings)
+		sbq.animOverrideOverrideSettings = sb.jsonMerge(sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideOverrideSettings or {}, sbq.npcConfig.scriptConfig.speciesAnimOverrideOverrideSettings)
 
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = sbq.animOverrideSettings
 

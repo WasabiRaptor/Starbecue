@@ -25,100 +25,10 @@
 			}
 		},
 
-		"sbqRewards" : {
-			"default" : {
-				// Time is in minutes here!
-				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
-
-				"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
-				"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
-				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
-				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
-				"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
-
-				"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "money" },
-
-				"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
-				"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
-				"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
-				"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
-
-				"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
-				"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
-			},
-			"vaporeon" : {
-				// Time is in minutes here!
-				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "fishingcommon" },
-
-				"hour1" : { "time" : 60, "pool" : "fishinguncommon" }, // one hour
-				"hour3" : { "time" : 180, "pool" : "fishingrare" }, // three hours
-				"hour6" : { "time" : 360, "pool" : "fishingrare" }, // six hours
-				"hour12" : { "time" : 720, "pool" : "fishinglegendary" }, // twelve hours
-				"day" : { "repeatable" : true, "time" : 1440, "pool" : "fishingGrandPrize" }, // a full day
-
-				"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "fishingcommon" },
-
-				"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "fishinguncommon" }, // one hour
-				"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "fishingrare" }, // three hours
-				"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "fishinglegendary" }, // six hours
-				"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "fishingGrandPrize" }, // twelve hours
-
-				"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "fishingGrandPrize" }, // a full day
-				"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "fishingGrandPrize" } // a full week
-			}
-		},
-
-		"sbqRandomizePreySettings" : {
-			"oralVore" : [true,false],
-			"tailVore" : [true,false],
-			"navelVore" : [true,false],
-			"absorbVore" : [true,false],
-
-			"cockVore" : [true,false],
-			"analVore" : [true,false],
-			"breastVore" : [true,false],
-			"unbirth" : [true,false],
-
-
-			"digestAllow" : [true,false],
-
-			"cumDigestAllow" : [true,false],
-
-			"femcumDigestAllow" : [true,false],
-
-			"eggAllow" : [true,false],
-
-			"transformAllow" : [true,false],
-
-			"genderswapAllow" : [true,false]
-
-		},
-		"sbqRandomizeSettings" : {
-			"oralVorePred" : [true,false],
-			"tailVorePred" : [true,false],
-			"navelVorePred" : [true,false],
-			"absorbVorePred" : [true,false],
-
-			// we shouldn't have the randomly generated preds generate with nsfw stuff
-			// not everyone wants to stumble across an NPC with their dick out
-
-			//"cockVorePred" : [true,false],
-			//"analVorePred" : [true,false],
-			//"breastVorePred" : [true,false],
-			//"unbirthPred" : [true,false],
-
-			"bellyEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"wombEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"ballsEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"shaftEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"breastsEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-
-
-
-			"displayDigest" : [true,false],
-
-			"personality" : ["default", "flirty", "shy"]
-		}
+		"sbqPredRewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
+		"sbqPreyRewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",
+		"sbqRandomizePreySettings" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqRandomizePreySettings",
+		"sbqRandomizeSettings" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqRandomizeSettings"
 	},
 	"statusControllerSettings" : {
 		"statusProperties" : {

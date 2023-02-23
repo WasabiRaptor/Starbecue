@@ -299,13 +299,13 @@ function init()
 		tenantRewardsTable[uniqueId] = tenantRewardsTable[uniqueId] or {}
 
 		local cumulativeDataTable = player.getProperty("sbqCumulativeData") or {}
-		cumulativeDataTable[uuid] = cumulativeDataTable[uuid] or {}
-		cumulativeDataTable[uuid].flags = cumulativeDataTable[uuid].flags or {}
+		cumulativeDataTable[uniqueId] = cumulativeDataTable[uniqueId] or {}
+		cumulativeDataTable[uniqueId].flags = cumulativeDataTable[uniqueId].flags or {}
 
 		for rewardName, reward in pairs(newRewards) do
 			if reward.cumulative then
-				cumulativeDataTable[uuid].flags[rewardName] = true
-				cumulativeDataTable[uuid].flags[rewardName.."CountRecieved"] = (cumulativeDataTable[uuid].flags[rewardName.."CountRecieved"] or 0) + reward.count
+				cumulativeDataTable[uniqueId].flags[rewardName] = true
+				cumulativeDataTable[uniqueId].flags[rewardName.."CountRecieved"] = (cumulativeDataTable[uniqueId].flags[rewardName.."CountRecieved"] or 0) + reward.count
 			end
 			for i = 1, reward.count do
 				local loot = root.createTreasure(reward.pool, reward.level or 0)
@@ -341,6 +341,7 @@ function init()
 		else
 			cumData[uniqueId].pred = data
 		end
+		sb.logInfo(sb.printJson(cumData,1))
 		player.setProperty("sbqCumulativeData", cumData)
 	end)
 

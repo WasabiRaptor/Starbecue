@@ -12,11 +12,15 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 			local timeCumulative = occupant.cumulative.totalTime or 0
 			local struggleTimeCumulative = occupant.cumulative.totalStruggleTime or 0
 
+			local timesDigested = occupant.cumulative.totalTimesDigested or 0
+
 			local timeCount
 			local struggleCount
 
 			local timeCountCumulative
 			local struggleCountCumulative
+
+			local digestedCount
 
 			local cumulativeFlag
 
@@ -26,6 +30,8 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 
 				timeCumulative = occupant.cumulative[data.location .. "Time"] or 0
 				struggleTimeCumulative = occupant.cumulative[data.location .. "StruggleTime"] or 0
+
+				timesDigested = occupant.cumulative[data.location .. "TimesDigested"] or 0
 			elseif type(data.location) == "table" then
 				time = 0
 				struggleTime = 0
@@ -33,12 +39,16 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				timeCumulative = 0
 				struggleTimeCumulative = 0
 
+				timesDigested = 0
+
 				for i, location in ipairs(data.location) do
 					time = time + (occupant.visited[location .. "Time"] or 0)
 					struggleTime = struggleTime + (occupant.visited[location .. "StruggleTime"] or 0)
 
 					timeCumulative = timeCumulative + (occupant.cumulative[location .. "Time"] or 0)
 					struggleTimeCumulative = struggleTimeCumulative + (occupant.cumulative[location .. "StruggleTime"] or 0)
+
+					timesDigested = timesDigested + (occupant.cumulative[location .. "TimesDigested"] or 0)
 				end
 			end
 
@@ -49,6 +59,17 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 			end
 			if giveReward and type(data.minStruggles) == "number" then
 				if struggleTime < data.minStruggles then
+					giveReward = false
+				end
+			end
+
+			if giveReward and type(data.maxTime) == "number" then
+				if time > (data.maxTime * 60) then
+					giveReward = false
+				end
+			end
+			if giveReward and type(data.maxStruggles) == "number" then
+				if struggleTime > data.maxStruggles then
 					giveReward = false
 				end
 			end
@@ -82,6 +103,17 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				end
 			end
 
+			if giveReward and type(data.maxTimeCumulative) == "number" then
+				if time < (data.maxTimeCumulative * 60) then
+					giveReward = false
+				end
+			end
+			if giveReward and type(data.maxStrugglesCumulative) == "number" then
+				if struggleTime < data.maxStrugglesCumulative then
+					giveReward = false
+				end
+			end
+
 			if giveReward and type(data.timeCumulative) == "number" then
 				cumulativeFlag = true
 				local val = (time - ((data.minTimeCumulative or 0) * 60))
@@ -102,9 +134,29 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				end
 			end
 
+			if giveReward and type(data.minTimesDigested) == "number" then
+				if timesDigested < data.minTimesDigested then
+					giveReward = false
+				end
+			end
+			if giveReward and type(data.timesDigested) == "number" then
+				cumulativeFlag = true
+				local val = (timesDigested - (data.minTimesDigested or 0))
+				if val < data.timesDigested then
+					giveReward = false
+				elseif data.repeatable then
+					digestedCount = math.floor(val / data.timesDigested)
+				end
+			end
+			if giveReward and type(data.maxTimesDigested) == "number" then
+				if timesDigested > data.maxTimesDigested then
+					giveReward = false
+				end
+			end
+
 			if giveReward then
 				setFlags[rewardName] = true
-				local count = math.min(struggleCount or math.huge, timeCount or math.huge, struggleCountCumulative or math.huge, timeCountCumulative or math.huge)
+				local count = math.min(struggleCount or math.huge, timeCount or math.huge, struggleCountCumulative or math.huge, timeCountCumulative or math.huge, digestedCount or math.huge)
 				if count == math.huge then
 					count = 1
 				end
@@ -116,6 +168,9 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 			end
 		end
 	end
+
+	sb.logInfo(sb.printJson(setFlags))
+	sb.logInfo(sb.printJson(rewards,1))
 
 	return setFlags, rewards
 end

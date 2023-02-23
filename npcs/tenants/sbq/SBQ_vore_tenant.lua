@@ -190,12 +190,12 @@ function init()
 		status.setStatusProperty("sbqStoredDigestedPrey", digestedStoredTable)
 	end)
 	message.setHandler("sbqCheckRewards", function(_, _, occupant)
-		local rewards = config.getParameter("sbqRewards") or {}
-		sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false, occupant.id, sbq.occupantHolder)
+		local rewards = config.getParameter("sbqPredRewards") or {}
+		sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false, occupant.id, sbq.occupantHolder)
 	end)
 	message.setHandler("sbqCheckPreyRewards", function(_, _, occupant, recipient, holder)
 		local rewards = config.getParameter("sbqPreyRewards") or {}
-		sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false, recipient, holder)
+		sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false, recipient, holder)
 	end)
 
 	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
@@ -242,9 +242,9 @@ function update(dt)
 		end
 	end)
 	sbq.timer("rewardCheck", 30, function()
-		local rewards = config.getParameter("sbqRewards") or {}
+		local rewards = config.getParameter("sbqPredRewards") or {}
 		for i, occupant in pairs(sbq.occupant or {}) do
-			sbq.checkOccupantRewards(occupant, rewards[npc.species()] or rewards.default or rewards, false)
+			sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false)
 		end
 	end)
 
@@ -407,14 +407,14 @@ function sbq.saveCosmeticSlots()
 end
 
 function sbq.randomizeTenantSettings()
-	local randomizeSettings = config.getParameter("sbqRandomizeSettings") or {}
+	local randomizeSettings = sbq.checkSpeciesRootTable(config.getParameter("sbqRandomizeSettings") or {})
 	for setting, values in pairs(randomizeSettings) do
 		local value = values[math.random(#values)]
 		storage.settings[setting] = value
 		sbq.autoSetSettings(setting, value)
 	end
 
-	local randomizePreySettings = config.getParameter("sbqRandomizePreySettings") or {}
+	local randomizePreySettings = sbq.checkSpeciesRootTable(config.getParameter("sbqRandomizePreySettings") or {})
 	local preySettings = status.statusProperty("sbqPreyEnabled") or {}
 	for setting, values in pairs(randomizePreySettings) do
 		preySettings[setting] = values[math.random(#values)]
@@ -570,4 +570,16 @@ function sbq.checkOccupantRewards(occupant, rewards, notify, recipient, holder, 
 			world.sendEntityMessage(recipient, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
 		end
 	end
+end
+
+function sbq.checkSpeciesRootTable(input)
+	local input = input
+	if type(input) == "string" then
+		input = root.assetJson(input)
+	end
+	input = input[npc.species()] or input.default or input
+	if type(input) == "string" then
+		input = sbq.checkSpeciesRootTable(input)
+	end
+	return input
 end

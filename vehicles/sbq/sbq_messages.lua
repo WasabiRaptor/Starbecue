@@ -146,22 +146,7 @@ message.setHandler( "sbqDigest", function(_,_, eid)
 		sbq.lounging[eid].sizeMultiplier = 0
 		sbq.lounging[eid].visible = false
 		sbq.lounging[eid].flags.digesting = true
-		if not sbq.lounging[eid].flags.digested then
-			local location = sbq.lounging[eid].location
-			local success, timing = sbq.doTransition("digest"..location)
-			sbq.entityDigestedAt[eid] = location
-
-			if type(sbq.lounging[eid].smolPreyData.id) == "number" and world.entityExists(sbq.lounging[eid].smolPreyData.id) then
-				world.sendEntityMessage(sbq.lounging[eid].smolPreyData.id, "giveDigestPrey", eid)
-			end
-
-			if success and type(timing) == "number" then
-				world.sendEntityMessage(eid, "sbqDigestResponse", timing)
-			else
-				world.sendEntityMessage(eid, "sbqDigestResponse", 2)
-			end
-		end
-		sbq.lounging[eid].flags.digested = true
+		sbq.entityDigested(eid)
 	end
 end )
 
@@ -175,24 +160,38 @@ message.setHandler( "sbqSoftDigest", function(_,_, eid)
 	if type(eid) == "number" and sbq.lounging[eid] ~= nil then
 		sbq.lounging[eid].sizeMultiplier = 0
 		sbq.lounging[eid].visible = false
-		if not sbq.lounging[eid].flags.digested then
-			local location = sbq.lounging[eid].location
-			local success, timing = sbq.doTransition("digest"..location)
-			sbq.entityDigestedAt[eid] = location
-
-			if type(sbq.lounging[eid].smolPreyData.id) == "number" and world.entityExists(sbq.lounging[eid].smolPreyData.id) then
-				world.sendEntityMessage(sbq.lounging[eid].smolPreyData.id, "giveDigestPrey", entity.id())
-			end
-
-			if success and type(timing) == "number" then
-				world.sendEntityMessage(eid, "sbqDigestResponse", timing)
-			else
-				world.sendEntityMessage(eid, "sbqDigestResponse", 2)
-			end
-		end
-		sbq.lounging[eid].flags.digested = true
+		sbq.entityDigested(eid)
 	end
-end )
+end)
+
+function sbq.entityDigested(eid)
+	if not sbq.lounging[eid].flags.digested then
+		sbq.lounging[eid].flags.digested = true
+
+		local location = sbq.lounging[eid].location
+		sbq.entityDigestedAt[eid] = location
+
+		sbq.lounging[eid].cumulative.totalTimesDigested = (sbq.lounging[eid].cumulative.totalTimesDigested or 0) + 1
+		sbq.lounging[eid].cumulative[location.."TimesDigested"] = (sbq.lounging[eid].cumulative[location.."TimesDigested"] or 0) + 1
+
+		world.sendEntityMessage(eid, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.lounging[eid]), sbq.spawner, entity.id() )
+		world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[eid]) )
+
+		world.sendEntityMessage(eid, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[eid].cumulative )
+		world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(eid), true, sbq.lounging[eid].cumulative)
+
+		if type(sbq.lounging[eid].smolPreyData.id) == "number" and world.entityExists(sbq.lounging[eid].smolPreyData.id) then
+			world.sendEntityMessage(sbq.lounging[eid].smolPreyData.id, "giveDigestPrey", eid)
+		end
+
+		local success, timing = sbq.doTransition(location.."Digest")
+		if success and type(timing) == "number" then
+			world.sendEntityMessage(eid, "sbqDigestResponse", timing)
+		else
+			world.sendEntityMessage(eid, "sbqDigestResponse", 2)
+		end
+	end
+end
 
 message.setHandler( "uneat", function(_,_, eid)
 	sbq.uneat( eid )

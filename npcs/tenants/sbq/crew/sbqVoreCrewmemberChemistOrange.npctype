@@ -27,57 +27,10 @@
 			"crewmateGraduation" : false
 		},
 
-		"sbqRandomizePreySettings" : {
-			"oralVore" : [true,false],
-			"tailVore" : [true,false],
-			"navelVore" : [true,false],
-			"absorbVore" : [true,false],
-
-			"cockVore" : [true,false],
-			"analVore" : [true,false],
-			"breastVore" : [true,false],
-			"unbirth" : [true,false],
-
-
-			"digestAllow" : [true,false],
-
-			"cumDigestAllow" : [true,false],
-
-			"femcumDigestAllow" : [true,false],
-
-			"eggAllow" : [true,false],
-
-			"transformAllow" : [true,false],
-
-			"genderswapAllow" : [true,false]
-
-		},
-		"sbqRandomizeSettings" : {
-			"oralVorePred" : [true,false],
-			"tailVorePred" : [true,false],
-			"navelVorePred" : [true,false],
-			"absorbVorePred" : [true,false],
-
-			// we shouldn't have the randomly generated preds generate with nsfw stuff
-			// not everyone wants to stumble across an NPC with their dick out
-
-			//"cockVorePred" : [true,false],
-			//"analVorePred" : [true,false],
-			//"breastVorePred" : [true,false],
-			//"unbirthPred" : [true,false],
-
-			"bellyEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"wombEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"ballsEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"shaftEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-			"breastsEffectSlot" : [ "none", "heal", "digest", "softDigest"],
-
-
-
-			"displayDigest" : [true,false],
-
-			"personality" : ["default", "flirty", "shy"]
-		}
+		"sbqPredRewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
+		"sbqPreyRewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",
+		"sbqRandomizePreySettings" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqRandomizePreySettings",
+		"sbqRandomizeSettings" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqRandomizeSettings"
 	},
 	"statusControllerSettings" : {
 		"statusProperties" : {

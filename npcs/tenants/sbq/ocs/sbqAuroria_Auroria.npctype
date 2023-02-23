@@ -58,7 +58,7 @@
 
 		"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 
-		"sbqRewards" : {
+		"sbqPredRewards" : {
 			// Time is in minutes here!
 			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "ore" },
 			"timedReward2" : { "repeatable" : true, "time" : 10, "minTime" : 20, "pool" : "richOre" },

@@ -1516,7 +1516,7 @@
 			}
 		},
 
-		"sbqRewards" : {
+		"sbqPredRewards" : {
 			"default" : {
 				// Time is in minutes here!
 				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
@@ -1558,6 +1558,51 @@
 				"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "fishingGrandPrize" } // a full week
 			}
 		},
+		"sbqPreyRewards" : {
+			"default" : {
+				// Time is in minutes here!
+				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "money" },
+
+				"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
+				"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+				"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+				"day1" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+				"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "money"},
+				"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "lowValueQuestRewards"},
+
+				"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+				"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+				"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+				"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+				"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+				"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+			},
+			"vaporeon" : {
+				// Time is in minutes here!
+				"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "fishingcommon" },
+
+				"hour3" : { "time" : 180, "pool" : "fishinguncommon" }, // three hours
+				"hour6" : { "time" : 360, "pool" : "fishingrare" }, // six hours
+				"hour12" : { "time" : 720, "pool" : "fishinglegendary" }, // twelve hours
+
+				"day1" : { "repeatable" : true, "time" : 1440, "pool" : "fishingGrandPrize" }, // a full day
+
+				"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "fishingcommon"},
+				"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "fishinguncommon"},
+
+				"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "fishinguncommon" }, // one hour
+				"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "fishingrare" }, // three hours
+				"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "fishinglegendary" }, // six hours
+				"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "fishingGrandPrize" }, // twelve hours
+
+				"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "fishingGrandPrize" }, // a full day
+				"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "fishingGrandPrize" } // a full week
+			}
+		},
+
 
 		"sbqRandomizePreySettings" : {
 		},
