@@ -326,26 +326,37 @@ function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, ei
 		local uuid = world.entityUniqueId(pane.sourceEntity())
 		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
 
-		local rewards = tenantRewardsTable[uuid] or {}
-		if rewards[1] then
+		local rewards = tenantRewardsTable[uuid]
+		if rewards then
 			player.cleanupItems()
 
 			local rewardDialogue
 			local remainingRewards = {}
+			local remainingRewardsCount = 0
 			local itemsGiven = 0
+
 			for i, item in ipairs(rewards) do
 				local count = player.hasCountOfItem(item, false)
 				player.giveItem(item)
 				local newCount = player.hasCountOfItem(item, false)
+				local itemType = root.itemType(item.name)
 				local diff = newCount - count
-				if diff < (item.count or 0) then
+				if (itemType ~= "currency") and (diff < (item.count or 0)) then
 					item.count = item.count - diff
+					remainingRewardsCount = remainingRewardsCount + item.count
 					table.insert(remainingRewards, item)
+				elseif (itemType == "currency") then
+					itemsGiven = itemsGiven + item.count
 				end
 				itemsGiven = itemsGiven + diff
-				if (diff > 0) and item.rewardDialogue then rewardDialogue = item.rewardDialogue end
+				if ((diff > 0) or (itemType == "currency")) and item.rewardDialogue then rewardDialogue = item.rewardDialogue end
 			end
-			tenantRewardsTable[uuid] = remainingRewards
+
+			if remainingRewardsCount > 0 then
+				tenantRewardsTable[uuid] = remainingRewards
+			else
+				tenantRewardsTable[uuid] = nil
+			end
 			player.setProperty("sbqTenantRewards", tenantRewardsTable)
 
 			if itemsGiven > 0 then return dialogueTree[rewardDialogue or "rewards"] or dialogueTree.default end

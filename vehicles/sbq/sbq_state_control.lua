@@ -69,8 +69,6 @@ function sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, pre
 			if enabled.preyList then
 				for _, prey in ipairs(enabled.preyList) do
 					if prey == sbq.driver then
-						sb.logInfo("or maybe here?")
-
 						animator.playSound("error")
 						return
 					end
@@ -90,8 +88,6 @@ function sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, pre
 				sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, preyList)
 			end
 		else
-			sb.logInfo("or here?")
-
 			animator.playSound("error")
 		end
 	end)

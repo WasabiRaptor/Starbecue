@@ -154,13 +154,14 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				end
 			end
 
+
 			if giveReward then
 				setFlags[rewardName] = true
 				local count = math.min(struggleCount or math.huge, timeCount or math.huge, struggleCountCumulative or math.huge, timeCountCumulative or math.huge, digestedCount or math.huge)
 				if count == math.huge then
 					count = 1
 				end
-				count = count - (occupant.flags[rewardName.."CountRecieved"] or 0) - (occupant.flags[rewardName.."Count"] or 0)
+				count = count - (occupant.flags[rewardName .. "CountRecieved"] or 0) - (occupant.flags[rewardName .. "Count"] or 0)
 				if count > 0 then
 					setFlags[rewardName .. "Count"] = (occupant.flags[rewardName.."Count"] or 0) + count
 					rewards[rewardName] = { pool = data.pool, count = count, level = data.level or level, cumulative = cumulativeFlag }
@@ -168,9 +169,5 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 			end
 		end
 	end
-
-	sb.logInfo(sb.printJson(setFlags))
-	sb.logInfo(sb.printJson(rewards,1))
-
 	return setFlags, rewards
 end
