@@ -1,3 +1,6 @@
+# Akari Kaen
+	Akari NPC dialogue
+
 # ArgobargSoup
 	Humanoid Breast Vore Animations
 	Avali Breast Vore Animations

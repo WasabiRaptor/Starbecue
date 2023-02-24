@@ -38,7 +38,7 @@
 		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
 			{ "mode" : "vertical" },
 			[
-				{ "type" : "image", "file" : "/humanoid/sbqAkair_AkariKaen/portraits/ANeutral.png" },
+				{ "type" : "image", "file" : "/humanoid/sbqAkari_AkariKaen/portraits/ANeutral.png" },
 				[
 					[ { "type" : "label", "text" : "Age: 22"}, { "type" : "label", "text" : "Gender: male"} ],
 					[ { "type" : "label", "text" : "Pronouns: He/Him"}, { "type" : "label", "text" : "Species: Southern sergal"} ],
@@ -52,7 +52,7 @@
 
 		"uniqueId" : "sbqAkari_AkariKaen", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"defaultPortrait" : "neutral.png",
+		"defaultPortrait" : "Neutral.png",
 		"portraitPath" : "/humanoid/sbqAkari_AkariKaen/portraits/A", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
 
 		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqAkari_AkariKaenDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
@@ -724,7 +724,7 @@
 
 			// predator prefrences
 			"oralVorePred" : true,
-			"cockVorePred" : true
+			"cockVorePred" : false
 		},
 
 		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
@@ -806,7 +806,7 @@
 			*/
 
 
-			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "sbqAkari_AkariKaen_Basic" },
 
 			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
 			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
@@ -814,7 +814,7 @@
 			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
 			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 
-			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "money" },
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "sbqAkari_AkariKaen_Basic" },
 
 			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
 			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
@@ -823,7 +823,29 @@
 
 			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+		"sbqPreyRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "sbqAkari_AkariKaen_Basic" },
+
+			"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "sbqAkari_AkariKaen_Basic"},
+			"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "lowValueQuestRewards"},
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		}
+
 
 		// the args below are for randomizing specific settings between possible values in the table when the pred is first summoned, a few examples have been defined
 		// specific OCs will probably have specific prefrences in mind, so you may not want things to randomize at all
@@ -899,5 +921,39 @@
 				"breastsInfusion" : false
 			}
 		}
+	},
+	"items" : {
+		"override" : [
+			[0,
+				[
+					{
+						"head" : [{
+							"parameters" : {
+								"colorIndex" : 8
+							},
+							"name" : "sbqBasicCollar",
+							"count" : 1
+						}],
+						"chest" : [{
+							"parameters" : {
+								"directives" : "",
+								"colorIndex" : 1
+							},
+							"name" : "tshirtchest",
+							"count" : 1
+						}],
+						"legs" : [{
+							"parameters" : {
+								"directives" : "?replace;383838=00000000;b5b5b5=00000000;838383=00000000;b6b6b6=00000000;e6e6e6=00000000?replace;ffca8a=96cbe7;e0975c=5588d4;a85636=344495;6f2919=1a1c51",
+								"colorIndex" : 0
+							},
+							"name" : "jeans1legs",
+							"count" : 1
+						}]
+					}
+				]
+			]
+		]
 	}
+
 }

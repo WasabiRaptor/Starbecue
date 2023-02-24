@@ -15,15 +15,21 @@
 	BRZYN-Z18
 	Fevix
 	FFWizard
+	Akari Kaen
 
 # Builders
 	Cosmic
+	LokiVulpix
 
 # Writers
+	LokiVulpix
 	radiantAurora
 	Blueninja
 	FFWizard
 	Ferrilata_
+	ArgobargSoup
+	Akari Kaen
+
 
 # Playtesters / Bug Hunters
 	xeronious

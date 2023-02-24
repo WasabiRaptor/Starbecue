@@ -1,0 +1,40 @@
+{
+	"type" : "sbqHubAkari_AkariKaen",
+	"baseType" : "sbqAkari_AkariKaen",
+
+	"scriptConfig" : {
+		"sbqOverrideSettings" : {
+			"analVorePred" : false,
+			"cockVorePred" : false,
+			"breastVorePred" : false,
+			"unbirthPred" : false,
+
+			"bellyInfusion" : false,
+			"cockInfusion" : false,
+			"pussyInfusion" : false,
+			"breastsInfusion" : false
+		},
+		"sbqOverridePreyEnabled" : {
+			// up to you if you want to make them immune to these or not, though on the hub map it would probably be wise to do so
+			"digestAllow": false,
+			"cumDigestAllow": false,
+			"femcumDigestAllow": false,
+			"milkDigestAllow": false,
+			"transformAllow": false,
+			"cumTransformAllow": false,
+			"genderswapAllow": false,
+
+			"bellyInfusion" : false,
+			"cockInfusion" : false,
+			"pussyInfusion" : false,
+			"breastsInfusion" : false
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}
