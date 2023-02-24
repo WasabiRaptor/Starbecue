@@ -773,15 +773,21 @@ function sbq.validStruggle(struggler, dt)
 
 	local movedir = sbq.getSeatDirections( sbq.occupant[struggler].seatname )
 	if not (sbq.occupant[struggler].bellySettleDownTimer <= 0) then return end
-	if not movedir then sbq.occupant[struggler].struggleTime = math.max( 0, sbq.occupant[struggler].struggleTime - dt) return end
+	if not movedir then
+		sbq.occupant[struggler].visited.struggleTime = math.max(0, sbq.occupant[struggler].visited.struggleTime - dt)
+		sbq.occupant[struggler].visited.sinceLastStruggle = sbq.occupant[struggler].visited.struggleTime + dt
+		return
+	else
+		sbq.occupant[struggler].visited.sinceLastStruggle = 0
+	end
 
 	if sbq.config.speciesStrugglesDisabled[config.getParameter("name")] then
 		if sbq.isNested then return end
 	else
 		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or (sbq.occupant[struggler].flags.digested or sbq.occupant[struggler].flags.infused) then
 			if not sbq.driving or world.entityType(sbq.driver) == "npc" then
-				sbq.occupant[struggler].struggleTime = math.max(0, sbq.occupant[struggler].struggleTime + dt)
-				if sbq.occupant[struggler].struggleTime > 1 then
+				sbq.occupant[struggler].visited.struggleTime = math.max(0, sbq.occupant[struggler].visited.struggleTime + dt)
+				if sbq.occupant[struggler].visited.struggleTime > 1 then
 					sbq.letout(sbq.occupant[struggler].id)
 				end
 			end
@@ -870,7 +876,7 @@ end
 
 function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId, time)
 	if sbq.struggleChance(struggledata, struggler, movedir, sbq.occupant[struggler].location ) then
-		sbq.occupant[struggler].struggleTime = 0
+		sbq.occupant[struggler].visited.struggleTime = 0
 		sbq.occupant[struggler].bellySettleDownTimer = 0.1
 		sbq.doTransition( struggledata.directions[movedir].transition, {direction = movedir, id = strugglerId, struggleTrigger = true} )
 	else
@@ -885,7 +891,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.doAnims(animation)
 
 		sbq.occupant[struggler].bellySettleDownTimer = time / 2
-		sbq.occupant[struggler].struggleTime = sbq.occupant[struggler].struggleTime + time
+		sbq.occupant[struggler].visited.struggleTime = sbq.occupant[struggler].visited.struggleTime + time
 		sbq.occupant[struggler].visited[location.."StruggleTime"] = (sbq.occupant[struggler].visited[location.."StruggleTime"] or 0) + time
 		sbq.occupant[struggler].visited.totalStruggleTime = (sbq.occupant[struggler].visited.totalStruggleTime or 0) + time
 
@@ -935,7 +941,7 @@ function sbq.struggleChance(struggledata, struggler, movedir, location)
 
 	local escapeDifficulty = ((sbq.settings.escapeDifficulty or 0) + (sbq.getLocationSetting(location, "DifficultyMod", 0)))
 	return chances ~= nil and (chances.min ~= nil) and (chances.max ~= nil)
-	and (math.random(math.floor(chances.min + escapeDifficulty), math.ceil(chances.max + escapeDifficulty)) <= (sbq.occupant[struggler].struggleTime or 0))
+	and (math.random(math.floor(chances.min + escapeDifficulty), math.ceil(chances.max + escapeDifficulty)) <= (sbq.occupant[struggler].visited.struggleTime or 0))
 end
 
 function sbq.inedible(occupantId)

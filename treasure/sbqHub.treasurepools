@@ -156,5 +156,59 @@
 				[0.25, 48]
 			]
 		}]
+	],
+	"sbqPotion" : [
+		[0, {
+			"pool" : [
+				{"weight":0.3, "item" : "sbqPotionAvian"},
+				{"weight":0.3, "item" : "sbqPotionSlime"},
+				{"weight":0.3, "item" : "sbqPotionVaporeon"},
+				{"weight":0.3, "item" : "sbqPotionXeronious"},
+				{"weight":0.3, "item" : "sbqConsumableZiellekPearl"},
+				{"weight":0.3, "item" : "sbqPotionFray"}
+			]
+		}]
+	],
+	"sbqMysteriousPotion" : [
+		[0, {
+			"pool" : [
+				{"weight":0.3, "item" : "sbqMysteriousPotion"},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion","count":1,"parameters":{
+					"species":"vaporeon"
+				}}},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion","count":1,"parameters":{
+					"species":"flareon"
+				}}},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion","count":1,"parameters":{
+					"species":"meowscarada"
+				}}},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion","count":1,"parameters":{
+					"species":"hellhound"
+				}}}
+			]
+		}]
+	],
+	"sbqCore" : [
+		[0, {
+			"pool" : [
+				{"weight":0.3, "item" : "sbqCoreAvian"},
+				{"weight":0.3, "item" : "sbqCoreSlime"},
+				{"weight":0.3, "item" : "sbqCoreVaporeon"},
+				{"weight":0.3, "item" : "sbqCoreXeronious"},
+				{"weight":0.3, "item" : "sbqCoreZiellekDragon"},
+				{"weight":0.3, "item" : "sbqCoreFray_IcyVixen"}
+			]
+		}]
+	],
+	"sbqFreeSample" : [
+		[0, {
+			"fill" : [
+				{"pool" : "sbqCore"},
+				{"item" : "sbqSpawnerInvisible"},
+				{"pool" : "sbqPotion"},
+				{"pool" : "sbqMysteriousPotion"},
+				{"item" : ["sbqReversionPotion", 10]}
+			]
+		}]
 	]
 }

@@ -81,6 +81,11 @@
 					],
 					"jump" : ["greeting"]
 				},
+				"freeSample" : {
+					"randomPortrait" : "Joyful.png",
+					"randomDialogue" : ["I thought I'd give you a free sample of my wares!"],
+					"jump" : ["greeting"]
+				},
 				"default" : { // no rewards
 					"next" : "personality",
 					"default" : { // personality
@@ -1320,6 +1325,8 @@
 			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "ore" },
 			"timedReward2" : { "repeatable" : true, "time" : 10, "minTime" : 20, "pool" : "richOre" },
 
+			"freeSample" : { "timeCumulative" : 0, "minTimeCumulative" : 10, "pool" : "sbqFreeSample", "dialogue" : "freeSample" },
+
 			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
 			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
 			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
@@ -1345,6 +1352,8 @@
 		"sbqPreyRewards" : {
 			// Time is in minutes here!
 			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "ore" },
+
+			"freeSample" : { "timeCumulative" : 0, "minTimeCumulative" : 10, "pool" : "sbqFreeSample", "dialogue" : "freeSample" },
 
 			"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
 			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours

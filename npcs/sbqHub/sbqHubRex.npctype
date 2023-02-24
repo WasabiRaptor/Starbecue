@@ -41,9 +41,7 @@
 		"isOC" : true,
 		"behavior" : "sbqvorevillager",
 		"uniqueId" : "sbqHubRex",
-		"sbqDefaultSettings" : {
-			"mood" : "default",
-			"personality" : "default",
+		"sbqOverrideSettings" : {
 			"oralVorePred" : true,
 
 			"analVorePred" : false,
@@ -51,17 +49,19 @@
 			"breastVorePred" : false,
 			"unbirthPred" : false,
 
-			"analVorePredEnable" : false,
-			"cockVorePredEnable" : false,
-			"breastVorePredEnable" : false,
-			"unbirthPredEnable" : false
+			"bellyInfusion" : false,
+			"cockInfusion" : false,
+			"pussyInfusion" : false,
+			"breastsInfusion" : false
 
 		},
 		"sbqOverridePreyEnabled" : {
 			"digestAllow": false,
-			"transformAllow": false,
 			"cumDigestAllow": false,
-			"cumTFImmunity":true,
+			"femcumDigestAllow": false,
+			"milkDigestAllow": false,
+			"transformAllow": false,
+			"cumTransformAllow": false,
 			"genderswapAllow": false,
 
 			"preyEnabled": false,
@@ -76,7 +76,12 @@
 			"analVore": true,
 			"unbirth": true,
 			"cockVore": true,
-			"breastVore": false
+			"breastVore": false,
+
+			"bellyInfusion" : false,
+			"cockInfusion" : false,
+			"pussyInfusion" : false,
+			"breastsInfusion" : false
 		},
 
 		"entityPortrait" : true,
@@ -212,31 +217,6 @@
 			"protection" : {
 				"baseValue" : 100.0
 			}
-		},
-		"statusProperties" : {
-			"sbqPreyEnabled" : {
-				"preyEnabled": false,
-
-				"digestAllow": false,
-				"cumDigestAllow": false,
-				"milkDigestAllow": false,
-				"transformAllow": false,
-				"cumTransformAllow": false,
-				"genderswapAllow": false,
-
-				"eggAllow": true,
-				"held": false,
-				"oralVore": true,
-				"tailVore": true,
-				"absorbVore": false,
-
-				"navelVore": false,
-				"analVore": true,
-				"unbirth": true,
-				"cockVore": true,
-				"breastVore": false
-			},
-			"speciesAnimOverrideData" : {}
 		}
 	},
 	"items" : {

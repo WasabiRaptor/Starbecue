@@ -14,13 +14,7 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 
 			local timesDigested = occupant.cumulative.totalTimesDigested or 0
 
-			local timeCount
-			local struggleCount
-
-			local timeCountCumulative
-			local struggleCountCumulative
-
-			local digestedCount
+			local rewardCounts = {math.huge}
 
 			local cumulativeFlag
 
@@ -52,35 +46,99 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				end
 			end
 
+			for name, argData in pairs(data.specialArgs or {}) do
+				if type(argData) == "table" then
+					local tableName = "visited"
+					if argData.cumulative then
+						cumulativeFlag = true
+						tableName = "cumulative"
+					end
+					if giveReward and type(argData.min) == "number" then
+						if occupant[tableName][name] < (argData.min * (argData.mul or 1)) then
+							giveReward = false
+						end
+					end
+					if giveReward and type(argData.value) == "number" then
+						local val = (occupant[tableName][name] - ((argData.min or 0) * (argData.mul or 1)))
+						local comp = (data.struggleFor)
+						if val < comp then
+							giveReward = false
+						elseif data.repeatable then
+							table.insert(rewardCounts, math.floor(val / comp))
+						end
+					end
+					if giveReward and type(argData.max) == "number" then
+						if occupant[tableName][name] > (argData.max * (argData.mul or 1)) then
+							giveReward = false
+						end
+					end
+				end
+			end
+
+
+			if giveReward and type(data.minStruggleFor) == "number" then
+				if occupant.visited.struggleTime < (data.minStruggleFor) then
+					giveReward = false
+				end
+			end
+			if giveReward and type(data.struggleFor) == "number" then
+				local val = (occupant.visited.struggleTime - (data.minStruggleFor or 0))
+				local comp = (data.struggleFor)
+				if val < comp then
+					giveReward = false
+				elseif data.repeatable then
+					table.insert(rewardCounts, math.floor(val / comp))
+				end
+			end
+			if giveReward and type(data.maxStruggleFor) == "number" then
+				if occupant.visited.struggleTime > (data.maxStruggleFor) then
+					giveReward = false
+				end
+			end
+
+			if giveReward and type(data.minSinceStruggle) == "number" then
+				if occupant.visited.sinceLastStruggle < (data.minSinceStruggle) then
+					giveReward = false
+				end
+			end
+			if giveReward and type(data.sinceStruggle) == "number" then
+				local val = (occupant.visited.sinceLastStruggle - (data.minSinceStruggle or 0))
+				local comp = (data.sinceStruggle)
+				if val < comp then
+					giveReward = false
+				elseif data.repeatable then
+					table.insert(rewardCounts, math.floor(val / comp))
+				end
+			end
+			if giveReward and type(data.maxSinceStruggle) == "number" then
+				if occupant.visited.sinceLastStruggle > (data.maxSinceStruggle) then
+					giveReward = false
+				end
+			end
+
 			if giveReward and type(data.minTime) == "number" then
 				if time < (data.minTime * 60) then
 					giveReward = false
 				end
 			end
-			if giveReward and type(data.minStruggles) == "number" then
-				if struggleTime < data.minStruggles then
-					giveReward = false
-				end
-			end
-
-			if giveReward and type(data.maxTime) == "number" then
-				if time > (data.maxTime * 60) then
-					giveReward = false
-				end
-			end
-			if giveReward and type(data.maxStruggles) == "number" then
-				if struggleTime > data.maxStruggles then
-					giveReward = false
-				end
-			end
-
 			if giveReward and type(data.time) == "number" then
 				local val = (time - ((data.minTime or 0) * 60))
 				local comp = (data.time * 60)
 				if val < comp then
 					giveReward = false
 				elseif data.repeatable then
-					timeCount = math.floor(val / comp)
+					table.insert(rewardCounts, math.floor(val / comp))
+				end
+			end
+			if giveReward and type(data.maxTime) == "number" then
+				if time > (data.maxTime * 60) then
+					giveReward = false
+				end
+			end
+
+			if giveReward and type(data.minStruggles) == "number" then
+				if struggleTime < data.minStruggles then
+					giveReward = false
 				end
 			end
 			if giveReward and type(data.struggles) == "number" then
@@ -88,7 +146,12 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				if val < data.struggles then
 					giveReward = false
 				elseif data.repeatable then
-					struggleCount = math.floor(val / data.struggles)
+					table.insert(rewardCounts, math.floor(val / data.struggles))
+				end
+			end
+			if giveReward and type(data.maxStruggles) == "number" then
+				if struggleTime > data.maxStruggles then
+					giveReward = false
 				end
 			end
 
@@ -121,7 +184,7 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				if val < comp then
 					giveReward = false
 				elseif data.repeatable then
-					timeCountCumulative = math.floor(val / comp)
+					table.insert(rewardCounts, math.floor(val / comp))
 				end
 			end
 			if giveReward and type(data.strugglesCumulative) == "number" then
@@ -130,7 +193,7 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				if val < data.strugglesCumulative then
 					giveReward = false
 				elseif data.repeatable then
-					struggleCountCumulative = math.floor(val / data.strugglesCumulative)
+					table.insert(rewardCounts, math.floor(val / data.strugglesCumulative))
 				end
 			end
 
@@ -145,7 +208,7 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 				if val < data.timesDigested then
 					giveReward = false
 				elseif data.repeatable then
-					digestedCount = math.floor(val / data.timesDigested)
+					table.insert(rewardCounts, math.floor(val / data.timesDigested))
 				end
 			end
 			if giveReward and type(data.maxTimesDigested) == "number" then
@@ -157,7 +220,7 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 
 			if giveReward then
 				setFlags[rewardName] = true
-				local count = math.min(struggleCount or math.huge, timeCount or math.huge, struggleCountCumulative or math.huge, timeCountCumulative or math.huge, digestedCount or math.huge)
+				local count = math.min(table.unpack(rewardCounts))
 				if count == math.huge then
 					count = 1
 				end
