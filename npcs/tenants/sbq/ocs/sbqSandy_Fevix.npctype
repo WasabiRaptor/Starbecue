@@ -32,7 +32,7 @@
 
 
 		"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/pet_dialogue_script.lua"],
-		// as the scipts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
+		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 
 		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : {

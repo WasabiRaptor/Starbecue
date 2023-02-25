@@ -52,7 +52,7 @@
 		]},
 
 		"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/pet_dialogue_script.lua"],
-		// as the scipts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
+		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 		"dialogueTree" : {
 			// after following a path, next steps will automatically advance you down the tree until there is a step that does not have a next
 			// a next can be a string or a table, if the next step is a string, it will just use that value, if it is a table, it will randomly select from it
