@@ -38,7 +38,7 @@
 		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
 			{ "mode" : "vertical" },
 			[
-				{ "type" : "image", "file" : "/humanoid/sbqAkari_AkariKaen/portraits/ANeutral.png" },
+				//{ "type" : "image", "file" : "/humanoid/sbqAkari_AkariKaen/portraits/ANeutral.png" },
 				[
 					[ { "type" : "label", "text" : "Age: 22"}, { "type" : "label", "text" : "Gender: male"} ],
 					[ { "type" : "label", "text" : "Pronouns: He/Him"}, { "type" : "label", "text" : "Species: Southern sergal"} ],
@@ -52,8 +52,13 @@
 
 		"uniqueId" : "sbqAkari_AkariKaen", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
+		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
+		"defaultPortrait" : "bust",
+		// if you want to use specially drawn sprites for dialogue box portraits, remove the two portrait args above, and uncomment the args below
+		/*
 		"defaultPortrait" : "Neutral.png",
 		"portraitPath" : "/humanoid/sbqAkari_AkariKaen/portraits/A", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
+		*/
 
 		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqAkari_AkariKaenDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
 		// as the scipts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
