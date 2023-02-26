@@ -120,9 +120,20 @@ function sbq.effectsPanel()
 				{ type = "layout", mode = "vertical", spacing = 0, children = {
 					extraEffectToggles
 				}}
-			}}
+			} }
+			local digestDropsVisible = (
+				((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "softDigest") or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false) or (locationData.softDigest == false))) or false)
+				or ((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= "digest") or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false) or (locationData.digest == false))) or false)
+			)
 			local otherLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,0}, children = {
 				{ type = "layout", mode = "vertical", spacing = 0, children = {
+					{
+						{
+							type = "checkBox", id = location.."PredDigestDrops", checked = sbq.globalSettings[location.."PredDigestDrops"],
+							toolTip = "Prey may drop an item upon digestion.", visible = digestDropsVisible
+						},
+						{ type = "label", text = "Digest Drops", visible = digestDropsVisible }
+					},
 					{
 						{
 							type = "checkBox", id = location.."Sounds", checked = sbq.globalSettings[location.."Sounds"],
@@ -447,9 +458,7 @@ end
 
 function sbq.locationDefaultSettings(locationData,location)
 
-	if sbq.predatorSettings[location.."VisualMax"] == nil then
-		sbq.predatorSettings[location.."VisualMax"] = locationData.max or 0
-	end
+	sbq.defaultGlobalSetting(location, "PredDigestDrops")
 	sbq.defaultGlobalSetting(location, "Hammerspace")
 	sbq.defaultGlobalSetting(location, "Compression")
 	sbq.defaultGlobalSetting(location, "Sounds")

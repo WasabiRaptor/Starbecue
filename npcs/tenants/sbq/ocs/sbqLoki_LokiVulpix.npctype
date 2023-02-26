@@ -1185,6 +1185,7 @@
 		"sbqRandomizeSettings" : {
 			"ballsInfusedItem" : [
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"preySize" : 1,
 					"shortdescription" : "Auroria's Essence",
 					"npcArgs" : {
 						"npcSpecies" : "sbqAuroria_Auroria",
@@ -1200,6 +1201,7 @@
 			],
 			"shaftInfusedItem" : [
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"preySize" : 1,
 					"shortdescription" : "Zevi's Essence",
 					"npcArgs" : {
 						"npcSpecies" : "sbqZevi_Zygahedron",
@@ -1215,6 +1217,7 @@
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Orpheus's Essence",
 					"description" : "A sylveon who just couldn't get any action... unless he was Loki's Cock~",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqOrpheus_Auroria",
 						"npcType" : "sbqOrpheus_Auroria",
@@ -1273,6 +1276,7 @@
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Claire's Essence",
 					"description" : "An anthro sprigatito who is having a rather pleasueable experience as Loki's Cock~",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqClaire_FFWizard",
 						"npcType" : "sbqClaire_FFWizard",
@@ -1331,6 +1335,7 @@
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Astira's Essence",
 					"description" : "Asti would never admit it, but she loves getting stolen, especially if the Liepard gets turned into a throbbing cock~",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqAstira_LokiVulpix",
 						"npcType" : "sbqAstira_LokiVulpix",
@@ -1389,6 +1394,7 @@
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Kaori's Essence",
 					"description" : "This Liepard just keeps finding herself inside cocks... or as them~",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqKaori_Fevix",
 						"npcType" : "sbqKaori_Fevix",
@@ -1447,6 +1453,7 @@
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Sandy's Essence",
 					"description" : "Sandy just couldn't help herself from diving right in~",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqSandy_Fevix",
 						"npcType" : "sbqSandy_Fevix",
@@ -1470,12 +1477,16 @@
 			"navelVorePred" : false,
 			"digestEnable" : false,
 
+			"defaultInfusedSize" : true,
+
+			"bellyPredDigestDrops" : false,
+			"tailPredDigestDrops" : false,
+			"wombPredDigestDrops" : false,
+
 			"wombDigestEnable" : false,
 			"wombSoftDigestEnable" : false,
-
 			"bellyDigestEnable" : false,
 			"ballsDigestEnable" : false,
-			"ballsHealEnable" : false,
 			"tailDigestEnable" : false,
 			"breastsDigestEnable" : false,
 			"shaftEffectSlot" : "none",

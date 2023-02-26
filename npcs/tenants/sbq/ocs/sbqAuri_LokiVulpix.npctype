@@ -1415,6 +1415,7 @@
 			"ballsInfusedItem" : [
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Auroria's Essence",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqAuroria_Auroria",
 						"npcType" : "sbqAuroria_Auroria",
@@ -1430,6 +1431,7 @@
 			"shaftInfusedItem" : [
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"shortdescription" : "Zevi's Essence",
+					"preySize" : 1,
 					"npcArgs" : {
 						"npcSpecies" : "sbqZevi_Zygahedron",
 						"npcType" : "sbqZevi_Zygahedron",
@@ -1456,6 +1458,12 @@
 
 			"wombDigestEnable" : false,
 			"wombSoftDigestEnable" : false,
+
+			"bellyPredDigestDrops" : false,
+			"tailPredDigestDrops" : false,
+			"wombPredDigestDrops" : false,
+
+			"defaultInfusedSize" : true,
 
 			"bellyDigestEnable" : false,
 			"ballsDigestEnable" : false,

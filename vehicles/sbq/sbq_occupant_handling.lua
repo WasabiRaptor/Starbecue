@@ -664,7 +664,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	if (sbq.getLocationSetting(location, "Sounds")) and (not sbq.occupant[i].flags.digested) then
 		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
 	end
-	world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.settings.predDigestItemDrops}, sbq.driver or entity.id())
+	world.sendEntityMessage( eid, "sbqApplyDigestEffect", status, { power = powerMultiplier, location = location, dropItem = sbq.getLocationSetting(location, "PredDigestDrops")}, sbq.driver or entity.id())
 
 	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
 		sbq.occupant[i].sizeMultiplier = math.min(1,

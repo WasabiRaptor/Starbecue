@@ -20,12 +20,10 @@
 								{ "type" : "textBox", "id" : "escapeValue", "toolTip" : "Current Escape Difficulty", "text" : "0" }
 							]
 						]},
-						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,50], "expandMode" : [1,0], "style" : "convex", "children" : [
-							{ "type" : "label", "text" : "Global Settings", "align" : "center" },
+						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,30], "expandMode" : [1,0], "style" : "convex", "children" : [
 							{ "type" : "scrollArea", "id" : "globalSettingsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [ { "type" : "panel", "style" : "flat", "children" : [
 								{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
-									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
-									[{ "type" : "checkBox", "id" : "predDigestItemDrops", "toolTip" : "Some digest effect may cause prey to drop a special item." }, { "type" : "label", "text" : " Digest Drops" } ]
+									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ]
 								]}
 							]}]}
 						]}

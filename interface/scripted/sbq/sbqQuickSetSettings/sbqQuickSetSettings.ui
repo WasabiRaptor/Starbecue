@@ -54,12 +54,17 @@
 					[[{"mode":"h"},{ "type" : "checkBox", "id" : "defaultSounds", "toolTip" : "Will emit gurgling sounds when prey is within by default." }, { "type" : "label", "text" : " Gurgling Sounds" } ],
 					[{"mode":"h"},{ "type" : "checkBox", "id" : "defaultStruggleSounds", "toolTip" : "Will emit sounds when a prey struggles by default." }, { "type" : "label", "text" : " Struggle Sounds" } ]],
 					[
-						{"mode":"h"},
-						{ "type" : "checkBox", "id" : "defaultInfusedVisual", "toolTip" : "Parts may change colors to match infused character if applicable by default." },
-						{ "type" : "checkBox", "id" : "defaultInfusedSize", "toolTip" : "Add infused character's size if applicable by default." },
-						{ "type" : "checkBox", "id" : "defaultInfusedSizeAdditive", "toolTip" : "If adding a character's size, make it count towards the fill level by default." },
-						{ "type" : "textBox", "id" : "defaultInfusedMultiplier", "size" : [30,14], "expandMode" : [0,0], "toolTip" : "Default Size Multiplier on Infused Characters if size is being added." },
-						{ "type" : "label", "text" : " Infusion Settings" }
+						[
+							{"mode":"h"},{ "type" : "checkBox", "id" : "defaultPredDigestDrops", "toolTip" : "Prey may drop an item upon digestion by default." }, { "type" : "label", "text" : " Digest Drops" }
+						],
+						[
+							{"mode":"h"},
+							{ "type" : "checkBox", "id" : "defaultInfusedVisual", "toolTip" : "Parts may change colors to match infused character if applicable by default." },
+							{ "type" : "checkBox", "id" : "defaultInfusedSize", "toolTip" : "Add infused character's size if applicable by default." },
+							{ "type" : "checkBox", "id" : "defaultInfusedSizeAdditive", "toolTip" : "If adding a character's size, make it count towards the fill level by default." },
+							{ "type" : "textBox", "id" : "defaultInfusedMultiplier", "size" : [30,14], "expandMode" : [0,0], "toolTip" : "Default Size Multiplier on Infused Characters if size is being added." },
+							{ "type" : "label", "text" : " Infusion Settings" }
+						]
 					]
 				]}
 			]},
