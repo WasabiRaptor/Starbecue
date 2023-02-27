@@ -1363,6 +1363,78 @@
 				}
 			},
 
+			// lines for when an NPC infuses someone (CTF, Boobsorb, etc.)
+			"infusePrey" : {
+				"next" : "location",
+				"belly" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "You want to be my belly?" ] },
+									"after" : { "randomDialogue" : [ "Now you're my belly" ], "dismissTime" : 10 }
+								},
+								"requestLayer" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "You want to take <infusedName>'s place?" ] },
+									"after" : { "randomDialogue" : [ "Now you're my belly" ], "dismissTime" : 10 }
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "I'm gonna make you my belly" ] },
+									"after" : { "randomDialogue" : [ "Now you're my belly" ], "dismissTime" : 10 }
+								},
+								"unpromptedLayer" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "Heh, you're gonna take <infusedName>'s place as my belly" ] },
+									"after" : { "randomDialogue" : [ "Now you're my belly" ], "dismissTime" : 10 }
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
+							}
+						}
+					}
+				},
+				"shaft" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "You want to be my cock?" ] },
+									"after" : { "randomDialogue" : [ "Now you're my cock" ], "dismissTime" : 10 }
+								},
+								"requestLayer" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "You want to take <infusedName>'s place?" ] },
+									"after" : { "randomDialogue" : [ "Now you're my cock" ], "dismissTime" : 10 }
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "I'm gonna make you my cock" ] },
+									"after" : { "randomDialogue" : [ "Now you're my cock" ], "dismissTime" : 10 }
+								},
+								"unpromptedLayer" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [ "Heh, you're gonna take <infusedName>'s place as my cock" ] },
+									"after" : { "randomDialogue" : [ "Now you're my cock" ], "dismissTime" : 10 }
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
+							}
+						}
+					}
+				}
+
+			},
+
 			// lines for when a character is infused (CTF Boobsorb etc.)
 			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
 			"infused": {
