@@ -785,10 +785,12 @@ function sbq.validStruggle(struggler, dt)
 		sbq.occupant[struggler].visited.sinceLastStruggle = 0
 	end
 
+	local infusedNonPlayer = (sbq.occupant[struggler].flags.infused and world.entityType(sbq.occupant[struggler].id) ~= "player")
+
 	if sbq.config.speciesStrugglesDisabled[config.getParameter("name")] then
 		if sbq.isNested then return end
 	else
-		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or (sbq.occupant[struggler].flags.digested or (sbq.occupant[struggler].flags.infused and world.entityType(sbq.occupant[struggler].id) ~= "player")) then
+		if (sbq.occupant[struggler].species ~= nil and sbq.config.speciesStrugglesDisabled[sbq.occupant[struggler].species]) or (sbq.occupant[struggler].flags.digested or infusedNonPlayer) then
 			if not sbq.driving or world.entityType(sbq.driver) == "npc" then
 				sbq.occupant[struggler].visited.struggleTime = math.max(0, sbq.occupant[struggler].visited.struggleTime + dt)
 				if sbq.occupant[struggler].visited.struggleTime > 1 then
@@ -802,7 +804,7 @@ function sbq.validStruggle(struggler, dt)
 	local struggling
 	struggledata = sbq.stateconfig[sbq.state].struggle[(sbq.occupant[struggler].location or "")..(sbq.occupant[struggler].locationSide or "")]
 
-	if (sbq.occupant[struggler].flags.digested or sbq.occupant[struggler].flags.infused) or (struggledata == nil or struggledata.directions == nil or struggledata.directions[movedir] == nil) then return end
+	if (sbq.occupant[struggler].flags.digested or infusedNonPlayer) or (struggledata == nil or struggledata.directions == nil or struggledata.directions[movedir] == nil) then return end
 
 	if struggledata.parts ~= nil then
 		struggling = sbq.partsAreStruggling(struggledata.parts)
@@ -933,7 +935,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 end
 
 function sbq.struggleChance(struggledata, struggler, movedir, location)
-	if not ((struggledata.directions[movedir].settings == nil) or sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
+	if not (sbq.occupant[struggler].flags.infused or (struggledata.directions[movedir].settings == nil) or sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
 
 	local chances = struggledata.chances
 	if struggledata.directions[movedir].chances ~= nil then

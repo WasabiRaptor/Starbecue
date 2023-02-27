@@ -33,7 +33,8 @@ function sbq.struggleMessages(id)
 	local entityType = world.entityType(id)
 	if entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver) then
 		local location = sbq.lounging[id].location
-		local settings = sb.jsonMerge(sb.jsonMerge(sbq.lounging[id].visited,{
+		local settings = sb.jsonMerge(sb.jsonMerge(sbq.lounging[id].visited, {
+			predDigestEffect = (((sbq.sbqData.locations[location] or {}).digest or {}).effect or "sbqDigest"),
 			predator = sbq.species,
 			location = location,
 			progressBarType = sbq.lounging[id].progressBarType,
@@ -41,17 +42,17 @@ function sbq.struggleMessages(id)
 			entryType = sbq.lounging[id].entryType
 		}), sbq.lounging[id].flags)
 
-		if sbq.lounging[id].flags.infused and sbq.timer(sbq.driver.."struggleLine", 5, 15) then
+		if sbq.lounging[id].flags.infused and sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
 			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, { location = location }, { "infusedTease" })
 			return
 		end
 
 		if math.random() >= 0.5 then
-			if sbq.timer(sbq.driver.."struggleLine", 5, 15) then
+			if sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
 				world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, {"struggle"}, true )
 			end
 		else
-			if sbq.timer(id.."struggleLine", 5, 15) then
+			if sbq.randomTimer(id.."struggleLine", 5, 15) then
 				world.sendEntityMessage(id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"struggling"}, false )
 			end
 		end

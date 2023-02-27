@@ -404,7 +404,7 @@ function update(dt)
 		end
 		prey = {}
 	end
-
+--[[
 	local preyWarpData = player.getProperty("sbqPreyWarpData")
 	if preyWarpData and (not preyWarpData.uuid) then
 		preyWarpData = nil
@@ -466,7 +466,7 @@ function update(dt)
 			end
 		end
 	end
-
+]]
 
 	-- make sure init has happened
 	if initStage ~= 1 then return end

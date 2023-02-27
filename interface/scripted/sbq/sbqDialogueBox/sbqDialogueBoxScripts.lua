@@ -116,8 +116,8 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 				end
 			end
 		elseif randomTable.infusedSlot
-		and (settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusion
-		and settings[(((settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
+		and (sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).infusion
+		and settings[(((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
 		then
 			local itemSlot = settings[((dialogueTree.location or settings.location) or "").."InfusedItem"]
 			if type(randomTable.infusedSlot) == "string" then
@@ -141,14 +141,16 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 			end
 		else
 			if randomRolls[i] == nil then
-				local roll = math.random(#randomTable)
-				while badRolls[roll] do
-					roll = math.random(#randomTable)
+				if randomTable[1] then
+					local roll = math.random(#randomTable)
+					while badRolls[roll] do
+						roll = math.random(#randomTable)
+					end
+					table.insert(randomRolls, roll)
 				end
-				table.insert(randomRolls, roll)
 			end
 			prevTable = randomTable
-			randomTable = randomTable[randomRolls[i]] or randomTable[1]
+			randomTable = randomTable[randomRolls[i] or 1]
 			i = i + 1
 		end
 	end
@@ -196,8 +198,8 @@ function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, ei
 		return dialogueTree.digested or dialogueTree.default
 	end
 
-	if settings.cumDigesting or settings.digesting then
-		effect = ((settings.locationsData[(dialogueTree.location or settings.location)] or {}).digest).effect or "sbqDigest"
+	if settings.digesting then
+		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
 	end
 	table.insert(options, effect or "default")
 
@@ -224,8 +226,8 @@ function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, 
 	if settings.digested then
 		return dialogueTree.digested or dialogueTree.default
 	end
-	if settings.cumDigesting or settings.digesting then
-		effect = ((settings.locationsData[(dialogueTree.location or settings.location)] or {}).digest).effect or "sbqDigest"
+	if settings.digesting then
+		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
 	end
 
 	return dialogueTree[effect] or dialogueTree.default
@@ -313,8 +315,8 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, eid, .
 end
 
 function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, eid, ...)
-	if (settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusion
-	and settings[(((settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
+	if (sbq.sbqData[(dialogueTree.location or settings.location)] or {}).infusion
+	and settings[(((sbq.sbqData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
 	and (((settings[(dialogueTree.location or settings.location) .. "InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil
 	then
 		local uniqueID = settings[(dialogueTree.location or settings.location) .. "InfusedItem"].parameters.npcArgs.npcParam.scriptConfig.uniqueId
