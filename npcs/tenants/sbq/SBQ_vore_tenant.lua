@@ -237,8 +237,8 @@ function init()
 		storage.settings[location .. "InfusedItem"] = itemDrop
 
 		local index = config.getParameter("tenantIndex")
-		if id and world.entityExists(id) and index ~= nil then
-			world.sendEntityMessage(id, "sbqSaveSettings", storage.settings or {}, index )
+		if storage.respawner and index ~= nil then
+			world.sendEntityMessage(torage.respawner, "sbqSaveSettings", storage.settings or {}, index )
 		end
 
 		local current = status.statusProperty("sbqCurrentData") or {}
