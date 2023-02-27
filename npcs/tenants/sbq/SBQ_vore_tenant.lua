@@ -238,7 +238,7 @@ function init()
 
 		local index = config.getParameter("tenantIndex")
 		if storage.respawner and index ~= nil then
-			world.sendEntityMessage(torage.respawner, "sbqSaveSettings", storage.settings or {}, index )
+			world.sendEntityMessage(storage.respawner, "sbqSaveSettings", storage.settings or {}, index )
 		end
 
 		local current = status.statusProperty("sbqCurrentData") or {}
