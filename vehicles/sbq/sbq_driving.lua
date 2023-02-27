@@ -310,7 +310,7 @@ end
 
 function sbq.assignClickAction(state)
 	if sbq.heldControl(sbq.driverSeat, "shift", 0.2) and sbq.heldControl(sbq.driverSeat, "up", 0.2) then
-		if sbq.movement.occpantsWhenAssigned ~= sbq.occupants.total then
+		if sbq.movement.occupantsWhenAssigned ~= sbq.occupants.total then
 			sbq.movement.assignClickActionRadial = false
 		end
 		if not sbq.movement.assignClickActionRadial then
@@ -496,7 +496,7 @@ function sbq.assignClickActionMenu(state)
 			icon = "/items/active/sbqController/unassigned.png"..(sbq.itemActionDirectives or "")
 		}
 	}
-	sbq.movement.occpantsWhenAssigned = sbq.occupants.total
+	sbq.movement.occupantsWhenAssigned = sbq.occupants.total
 	if sbq.occupants.total > 0 then
 		options[1].icon = nil
 	end

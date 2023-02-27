@@ -22,6 +22,7 @@ function init()
 	sbq.sbqSettings[sbq.sbqCurrentData.species] = data.settings
 	sbq.predatorSpawner = data.spawner
 	sbq.storedDigestedPrey = data.storedDigestedPrey or {}
+	sbq.playerSettings = false
 
 	oldInit()
 

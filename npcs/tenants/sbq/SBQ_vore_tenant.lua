@@ -26,6 +26,19 @@ function new_npc_setItemSlot(slot, data)
 	sbq.updateCosmeticSlots()
 end
 
+function preservedStorage()
+	return {
+		itemSlots = storage.itemSlots,
+		relationships = storage.relationships,
+		criminal = storage.criminal,
+		stolen = storage.stolen,
+		extraMerchantItems = storage.extraMerchantItems,
+		saveCosmeticSlots = storage.ssaveCosmeticSlots,
+		settings = storage.settings
+	  }
+  end
+
+
 local _tenant_setHome = tenant.setHome
 function tenant.setHome(position, boundary, deedUniqueId, skipNotification)
 	if deedUniqueId and not storage.settings.dontSaveToDeed then
@@ -35,6 +48,7 @@ function tenant.setHome(position, boundary, deedUniqueId, skipNotification)
 			if id and world.entityExists(id) and index ~= nil then
 				world.sendEntityMessage(id, "sbqSaveSettings", storage.settings or {}, index )
 				world.sendEntityMessage(id, "sbqSavePreySettings", status.statusProperty("sbqPreyEnabled") or {}, index)
+				world.sendEntityMessage(id, "sbqSaveDigestedPrey", status.statusProperty("sbqStoredDigestedPrey"), index)
 			end
 		end)
 	end
@@ -216,7 +230,22 @@ function init()
 			sbq.getRandomDialogue( {"didSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
 		end
 	end)
+	message.setHandler("sbqReplaceInfusion", function(_, _, location, itemDrop, preyId, primaryLocation)
 
+		local alreadyInfused = storage.settings[location .. "InfusedItem"]
+		world.sendEntityMessage(entity.id(), "sbqDigestStore", location, (((((alreadyInfused or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId, alreadyInfused)
+		storage.settings[location .. "InfusedItem"] = itemDrop
+
+		local index = config.getParameter("tenantIndex")
+		if id and world.entityExists(id) and index ~= nil then
+			world.sendEntityMessage(id, "sbqSaveSettings", storage.settings or {}, index )
+		end
+
+		local current = status.statusProperty("sbqCurrentData") or {}
+		if current and type(current.id) == "number" and world.entityExists(current.id) then
+			world.sendEntityMessage(current.id, "setInfusedCharacter", location, storage.settings[location.."InfusedItem"], preyId, primaryLocation )
+		end
+	end)
 end
 
 function sbq.setSpeciesConfig()
@@ -339,11 +368,12 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomPortrait, "randomPortrait")
 	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomEmote, "randomEmote")
 
+--[[
 	local imagePortrait
 	if not config.getParameter("entityPortrait") then
 		imagePortrait = ((config.getParameter("portraitPath") or "")..(randomPortrait or config.getParameter("defaultPortrait")))
 	end
-
+]]
 	local playerName
 
 	if type(eid) == "number" then

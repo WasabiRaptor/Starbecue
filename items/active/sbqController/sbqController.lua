@@ -32,7 +32,7 @@ end
 require("/scripts/speciesAnimOverride_player_species.lua")
 
 local assignedMenu
-local occpantsWhenAssigned
+local occupantsWhenAssigned
 local selectedPrey
 local selectedPreyIndex
 
@@ -44,7 +44,7 @@ function update(dt, fireMode, shiftHeld, controls)
 	sbq.checkRPCsFinished(dt)
 	if not player.isLounging() then
 		sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
-		if occpantsWhenAssigned ~= (sbq.sbqCurrentData.totalOccupants or 0) then
+		if occupantsWhenAssigned ~= (sbq.sbqCurrentData.totalOccupants or 0) then
 			assignedMenu = nil
 		end
 
@@ -170,7 +170,7 @@ function assignAssignActionMenu()
 			icon = returnVoreIcon("analVore") or "/items/active/sbqController/analVore.png"
 		}
 	}
-	occpantsWhenAssigned = sbq.sbqCurrentData.totalOccupants or 0
+	occupantsWhenAssigned = sbq.sbqCurrentData.totalOccupants or 0
 	if (sbq.sbqCurrentData.totalOccupants or 0) > 0 then
 		options[1].icon = nil
 	end
@@ -224,7 +224,7 @@ function assignSelectMenu()
 			title = "Assign\nClick"
 		}
 	}
-	occpantsWhenAssigned = sbq.sbqCurrentData.totalOccupants or 0
+	occupantsWhenAssigned = sbq.sbqCurrentData.totalOccupants or 0
 	if (sbq.sbqCurrentData.totalOccupants or 0) > 0 then
 		options[1].icon = nil
 		table.insert(options, {

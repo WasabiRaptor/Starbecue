@@ -5,7 +5,8 @@ require( "/lib/stardust/json.lua" )
 
 sbq = {
 	config = root.assetJson( "/sbqGeneral.config" ),
-	overrideSettings = {}
+	overrideSettings = {},
+	playerSettings = true
 }
 speciesOverride = {}
 

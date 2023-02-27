@@ -4,6 +4,10 @@ function resetGlobalSettings:onClick()
 	sbq.globalSettings = sb.jsonMerge(sbq.config.globalSettings, {})
 	sbq.saveSettings()
 	sbq.despawnPred()
+	if sbq.playerSettings then
+		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
+	end
+	pane.dismiss()
 end
 
 function resetAllPredSettings:onClick()
@@ -19,12 +23,15 @@ function resetAllPredSettings:onClick()
 	end
 	sbq.saveSettings()
 	sbq.despawnPred()
+	pane.dismiss()
+
 end
 
 function resetCurPredSettings:onClick()
 	sbq.predatorSettings = {}
 	sbq.saveSettings()
 	sbq.despawnPred()
+	pane.dismiss()
 end
 
 function sbq.despawnPred()

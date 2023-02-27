@@ -240,6 +240,12 @@ function sbq.tenant_setNpcType(npcType)
 				initialStorage = preservedStorage(),
 				uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
 				preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId()
+			},
+			statusControllerSettings = {
+				statusProperties = {
+					sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
+					sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey")
+				}
 			}
 		},
 		storage = storage

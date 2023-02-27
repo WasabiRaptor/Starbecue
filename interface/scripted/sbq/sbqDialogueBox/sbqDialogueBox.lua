@@ -8,7 +8,14 @@ sbq = {
 	data = {
 		settings = { personality = "default", mood = "default" },
 		defaultPortrait = "/empty_image.png",
-		icons = {}
+		icons = {
+			bellyInfusion = "/items/active/sbqController/bellyInfusion.png",
+			breastsInfusion = "/items/active/sbqController/breastsInfusion.png",
+			pussyInfusion = "/items/active/sbqController/pussyInfusion.png",
+			cockInfusion = "/items/active/sbqController/cockInfusion.png",
+			ballsInfusion = "/items/active/sbqController/ballsInfusion.png",
+			shaftBallsInfusion = "/items/active/sbqController/shaftBallsInfusion.png"
+		}
 	}
 }
 dialogueBoxScripts = {}
@@ -264,7 +271,7 @@ function sbq.checkVoreTypeActive(voreType)
 	local size = status.statusProperty("sbqSize") or 1
 
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
-	if (--[[sbq.data.settings[voreType.."PredEnable"] or]] sbq.data.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
+	if ( sbq.data.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
 		if sbq.data.settings[voreType.."Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
 			if type(sbq.data.occupantHolder) ~= "nil" and type(sbq.occupants) == "table" then
 				if sbq.occupants[locationName] == nil then return "hidden" end
@@ -321,6 +328,102 @@ function sbq.checkVoreButtonsEnabled()
 			button:setImage(image)
 		end
 	end
+	sbq.checkInfusionActionButtonsEnabled()
+end
+
+function sbq.checkInfusionActionButtonsEnabled()
+	local locationTFs = sbq.data.sbqData.locationTFs or {}
+
+	local bellyInfusionActive = sbq.checkInfusionActionActive("belly", locationTFs.belly )
+	local ballsInfusionActive = sbq.checkInfusionActionActive("balls", locationTFs.balls or {"balls","shaft"})
+	local cockInfusionActive = sbq.checkInfusionActionActive("shaft", locationTFs.shaft or {"balls","shaft"})
+	local breastsInfusionActive = sbq.checkInfusionActionActive("breasts", locationTFs.breasts)
+	local pussyInfusionActive = sbq.checkInfusionActionActive("womb", locationTFs.womb)
+
+	sbq.infusionButtonSetup(bellyInfusionActive, bellyInfusion, "bellyInfusion")
+	sbq.infusionButtonSetup(ballsInfusionActive, ballsInfusion, "ballsInfusion")
+	sbq.infusionButtonSetup(cockInfusionActive, cockInfusion, "cockInfusion")
+	sbq.infusionButtonSetup(breastsInfusionActive, breastsInfusion, "breastsInfusion")
+	sbq.infusionButtonSetup(pussyInfusionActive, pussyInfusion, "pussyInfusion")
+
+	sbq.infusionButtonSetup((ballsInfusionActive ~= "hidden") and (cockInfusionActive ~= "hidden") and cockInfusionActive or "hidden", shaftBallsInfusion, "shaftBallsInfusion")
+end
+
+function sbq.infusionButtonSetup(active, button, voreType)
+	if (sbq.prevDialogueBranch or {}).hideVoreButtons then
+		button:setVisible(false)
+	else
+		button.active = active
+		button:setVisible((active ~= "hidden") and (active ~= "otherLocation"))
+		local image = sbq.data.icons[voreType]
+		if active == "request" or active == "layerRequest" then
+		else
+			image = image.."?brightness=-25?saturation=-100"
+		end
+		button:setImage(image)
+	end
+end
+
+function sbq.infusionButton(active, kind, locationName, locations)
+	sbq.data.settings.voreType = kind
+	sbq.data.settings.getVoreButtonAction = active
+	sbq.data.settings.location = locationName
+
+	if active == "request" or active == "layerRequest" then
+		sbq.data.settings.doingVore = "before"
+		local dialogueTree = sbq.updateDialogueBox({ "infusePrey" }) or {}
+		sbq.timer("infuseMessage", dialogueTree.delay or 1.5, function ()
+			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "infuseLocation", player.id(), locations)
+			sbq.timer("gotInfused", dialogueTree.delay or 1.5, function ()
+				for i, occupant in pairs(sbq.occupant or {}) do
+					if occupant.id == player.id() then
+						sbq.data.settings.doingVore = "after"
+						sbq.updateDialogueBox({ "infusePrey" })
+						return
+					end
+				end
+				sbq.data.settings.getVoreButtonAction = "notFeelingIt"
+				sbq.updateDialogueBox({ "infusePrey" })
+			end)
+		end)
+	else
+		sbq.updateDialogueBox({ "infusePrey" })
+	end
+end
+
+function sbq.checkInfusionActionActive(location, locations)
+	if (not sbq.data.settings) then return "hidden" end
+	local locationData = sbq.data.sbqData.locations[location]
+	if not locationData
+	or not locationData.infusion
+	then return "hidden" end
+	local currentData = player.getProperty( "sbqCurrentData") or {}
+	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
+	if (sbq.data.settings[(locationData.infusionSetting or "infusion") .. "Pred"]) and preyEnabled.preyEnabled and
+		preyEnabled[(locationData.infusionSetting or "infusion")] and (currentData.type == "prey")
+	then
+		local playerLocation
+		for i, occupant in pairs(sbq.occupant or {}) do
+			if occupant.id == player.id() then
+				playerLocation = occupant.location
+			end
+		end
+		if not playerLocation then return "hidden" end
+		if not locations then
+			if playerLocation ~= location then return "otherLocation" end
+			local npcArgs = ((sbq.data.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs
+			if npcArgs then return "layerRequest" end
+			return "request"
+		end
+		for i, location in ipairs(locations or {}) do
+			if playerLocation == location then
+				local npcArgs = ((sbq.data.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs
+				if npcArgs then return "layerRequest" end
+				return "request"
+			end
+		end
+		return "otherLocation"
+	else return "hidden" end
 end
 
 function sbq.voreButton(voreType)
@@ -336,8 +439,8 @@ function sbq.voreButton(voreType)
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType,
 				{ id = player.id() })
 			sbq.timer("gotVored", dialogueTree.delay or 1.5, function ()
-				for i, occpant in pairs(sbq.occupant or {}) do
-					if occpant.id == player.id() then
+				for i, occupant in pairs(sbq.occupant or {}) do
+					if occupant.id == player.id() then
 						sbq.data.settings.doingVore = "after"
 						sbq.updateDialogueBox({ "vore" })
 						return
@@ -505,6 +608,8 @@ function close:onClick()
 	pane.dismiss()
 end
 
+-----------------------------------------------------------
+
 function oralVore:onClick()
 	sbq.voreButton("oralVore")
 end
@@ -535,4 +640,30 @@ end
 
 function unbirth:onClick()
 	sbq.voreButton("unbirth")
+end
+
+-----------------------------------------------------------
+
+function bellyInfusion:onClick()
+	sbq.infusionButton(self.active, "bellyInfusion", "belly" )
+end
+
+function pussyInfusion:onClick()
+	sbq.infusionButton(self.active, "pussyInfusion", "womb" )
+end
+
+function breastsInfusion:onClick()
+	sbq.infusionButton(self.active, "breastsInfusion", "breasts" )
+end
+
+function cockInfusion:onClick()
+	sbq.infusionButton(self.active, "cockInfusion", "shaft" )
+end
+
+function ballsInfusion:onClick()
+	sbq.infusionButton(self.active, "ballsInfusion", "balls" )
+end
+
+function shaftBallsInfusion:onClick()
+	sbq.infusionButton(self.active, "cockInfusion", "shaft", {"shaft","balls"} )
 end

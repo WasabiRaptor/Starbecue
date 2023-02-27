@@ -115,7 +115,10 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 					randomTable = (randomTable or {}).add
 				end
 			end
-		elseif randomTable.infusedSlot then
+		elseif randomTable.infusedSlot
+		and (settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusion
+		and settings[(((settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
+		then
 			local itemSlot = settings[((dialogueTree.location or settings.location) or "").."InfusedItem"]
 			if type(randomTable.infusedSlot) == "string" then
 				itemSlot = settings[randomTable.infusedSlot]
@@ -310,7 +313,10 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, eid, .
 end
 
 function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, eid, ...)
-	if (((settings[(dialogueTree.location or settings.location).."InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil then
+	if (settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusion
+	and settings[(((settings.locationsData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
+	and (((settings[(dialogueTree.location or settings.location) .. "InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil
+	then
 		local uniqueID = settings[(dialogueTree.location or settings.location) .. "InfusedItem"].parameters.npcArgs.npcParam.scriptConfig.uniqueId
 		if dialogueTree[uniqueID] then
 			return dialogueTree[uniqueID]
