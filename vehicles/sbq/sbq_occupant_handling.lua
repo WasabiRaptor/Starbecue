@@ -719,7 +719,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		local struggledata = (sbq.stateconfig[sbq.state].struggle or {})[location..(sbq.occupant[i].locationSide or "")] or {}
 		local directions = {}
 		local icon
-		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" then
+		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" and sbq.occupant[i].flags.infused then
 			for dir, data in pairs(struggledata.directions or {}) do
 				if data and (not sbq.driving or data.drivingEnabled) and ((data.settings == nil) or sbq.checkSettings(data.settings)) then
 					if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
@@ -935,7 +935,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 end
 
 function sbq.struggleChance(struggledata, struggler, movedir, location)
-	if not (sbq.occupant[struggler].flags.infused or (struggledata.directions[movedir].settings == nil) or sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
+	if sbq.occupant[struggler].flags.infused or not ((struggledata.directions[movedir].settings == nil) or sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
 
 	local chances = struggledata.chances
 	if struggledata.directions[movedir].chances ~= nil then
