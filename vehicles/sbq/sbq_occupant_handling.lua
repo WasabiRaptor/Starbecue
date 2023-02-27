@@ -719,7 +719,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		local struggledata = (sbq.stateconfig[sbq.state].struggle or {})[location..(sbq.occupant[i].locationSide or "")] or {}
 		local directions = {}
 		local icon
-		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" and sbq.occupant[i].flags.infused then
+		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" and (not sbq.occupant[i].flags.infused) then
 			for dir, data in pairs(struggledata.directions or {}) do
 				if data and (not sbq.driving or data.drivingEnabled) and ((data.settings == nil) or sbq.checkSettings(data.settings)) then
 					if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
