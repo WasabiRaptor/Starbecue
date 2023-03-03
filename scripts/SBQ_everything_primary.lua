@@ -108,6 +108,28 @@ function sbq.everything_primary()
 	message.setHandler("sbqCheckInfusion", function(_, _, location, locationData, pred, primaryLocation)
 		local enabled = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))[locationData.infusionSetting]
 		if not enabled then return end
+
+		local uniqueId = world.entityUniqueId(entity.id())
+		if locationData.infusionAccepts and locationData.infusionAccepts.characters then
+			local continue
+			if type((locationData.infusionAccepts or {}).characters) == "table" then
+				for i, uuid in ipairs((locationData.infusionAccepts or {}).characters or {}) do
+					if uuid == uniqueId then
+						continue = true
+						break
+					end
+				end
+			end
+			if not continue then return end
+			if (locationData.infusionAccepts or {}).rejectCharacters ~= nil then
+				for i, uuid in ipairs((locationData.infusionAccepts or {}).rejectCharacters or {}) do
+					if uuid == uniqueId then
+						return
+					end
+				end
+			end
+		end
+
 		local template = locationData.infusionItem
 		if type(template) == "string" then
 			template = root.assetJson(template)

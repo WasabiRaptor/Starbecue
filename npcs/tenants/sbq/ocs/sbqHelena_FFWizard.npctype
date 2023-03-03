@@ -2914,6 +2914,700 @@
 						}
 					}
 				}
+			},
+			// lines for when an NPC infuses someone (CTF, Boobsorb, etc.)
+			"infusePrey" : {
+				"next" : "location",
+				"belly" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"Mm, you love my belly so much... you want to be a part of it?", "You want to become my belly?", "You want to become a part of me...?"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Ahh... there you are... just my belly now", "Just a part of me now", "Try not to make me too hungry..."
+										],
+										"dismissTime" : 10
+									}
+								},
+								"requestLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["You want to take <infusedName>'s place?", "You want to join <infusedName>?"]
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"}
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"I think... I need you in my belly... or... as my belly"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"}
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unpromptedLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										],
+										"dismissTime" : 10
+									}
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
+							}
+						}
+					}
+				},
+				"cock":"infusePrey.shaft",
+				"shaft" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"You want to be my cock?", "Mm, can't wait to be throbbing down there can you?", "You really want to give yourself entirely to me?"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Hehe, I can feel you twitching with excitment already~", "Hehe, excited to be part of me~?", "Ah, you're already throbbing with excitment~"
+										],
+										"dismissTime" : 10
+									}
+								},
+								"requestLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["You want to take <infusedName>'s place?", "Hehe, want to send <infusedName> a layer deeper~?"]
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["And now <infusedName> is even more trapped~"]
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"Hehe, I think you belong as something else~", "Mm~ I think it'd be fitting to have you throbbing between my legs~", "You're always so twitchy... which would make you a good cock~",
+											"I think I have a far better use for you~"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Ahh~ finally got you where you belong~", "You belong right where you are, throbbing between my legs~", "Mmm~ feels right to have you there~"
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unpromptedLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										],
+										"dismissTime" : 10
+									}
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
+							}
+						}
+					}
+				},
+				"breasts" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"You want to be my boobs?", "Mm, can't wait to be jiggling on my chest can you?", "You really want to give yourself entirely to me?"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Hehe, I can feel you leaking with excitment already~", "Hehe, excited to be part of me~?", "Ah, you're already leaking milk~"
+										],
+										"dismissTime" : 10
+									}
+								},
+								"requestLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["You want to take <infusedName>'s place?", "Hehe, want to send <infusedName> a layer deeper~?"]
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["And now <infusedName> is even more trapped~"]
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"Hehe, I think you belong as something else~", "Mm~ I think it'd be fitting to have you jiggling on my chest~",
+											"I think I have a far better use for you~"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Ahh~ finally got you where you belong~", "You belong right where you are, jiggling on my chest~", "Mmm~ feels right to have you there~"
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unpromptedLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										],
+										"dismissTime" : 10
+									}
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
+							}
+						}
+					}
+				},
+				"pussy":"infusePrey.womb",
+				"womb" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"You want to be my pussy?", "Mm, can't wait to be soaking wet down there can you?", "You really want to give yourself entirely to me?"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Hehe, I can feel you leaking with excitment already~", "Hehe, excited to be part of me~?", "Ah, you're already sopping wet with excitment~"
+										],
+										"dismissTime" : 10
+									}
+								},
+								"requestLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["You want to take <infusedName>'s place?", "Hehe, want to send <infusedName> a layer deeper~?"]
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
+											["And now <infusedName> is even more trapped~"]
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											"Hehe, I think you belong as something else~", "Mm~ I think it'd be fitting to have you dripping between my legs~",
+											"I think I have a far better use for you~"
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											"Ahh~ finally got you where you belong~", "You belong right where you are, soaking between my legs~", "Mmm~ feels right to have you there~"
+										],
+										"dismissTime" : 10
+									}
+								},
+								"unpromptedLayer" : {
+									"next" : "doingVore",
+									"before" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										]
+									},
+									"after" : {
+										"randomDialogue" : [
+											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
+										],
+										"dismissTime" : 10
+									}
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
+							}
+						}
+					}
+				}
+			},
+			// lines for when a character is infused (CTF Boobsorb etc.)
+			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
+			"infused": {
+				"next" : "location",
+				"default" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"<slowlove>",
+										"<love>",
+										[
+											["^#ffffff7f;(Just a part of your body~)", "^#ffffff7f;(Just a part of <entityname>'s body~)"],
+											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+											"<love>^#ffffff7f;(<keysmash>)"
+										]
+									]
+								}
+							}
+						}
+					}
+				},
+				"belly" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"<slowlove>",
+										"<love>",
+										[
+											{"check":{"bellySounds":true},"add":[
+												"^#ffffff7f;(Just a grumbling belly~)","^#ffffff7f;(Just your grumbling belly~)","^#ffffff7f;(Just <entityname>'s grumbling belly~)",
+												"^#ffffff7f;(Just a noisy belly~)","^#ffffff7f;(Just your noisy belly~)","^#ffffff7f;(Just <entityname>'s noisy belly~)"
+											]},
+											{"check":{"mood":"hungry"},"add":["<slowlove>^#ffffff7f;(Feeed meee~)", "^#ffffff7f;(Hungry...)"]},
+											["^#ffffff7f;(Just a belly~)","^#ffffff7f;(Just your belly~)","^#ffffff7f;(Just <entityname>'s belly~)"],
+											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+											"<love>^#ffffff7f;(<keysmash>)"
+										]
+									]
+								}
+							}
+						}
+					}
+				},
+				"womb" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"<slowlove>",
+										"<love>",
+										[
+											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+											"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
+											"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
+											"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
+											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+											"<love>^#ffffff7f;(<keysmash>)"
+										]
+									]
+								}
+							}
+						}
+					}
+				},
+				"breastsL" : "infused.breasts",
+				"breastsR" : "infused.breasts",
+				"breasts" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"<slowlove>",
+										"<love>",
+										[
+											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+											"<slowlove>^#ffffff7f;(Producing milk...~)",
+											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+											"<love>^#ffffff7f;(<keysmash>)"
+										]
+									]
+								}
+							}
+						}
+					}
+				},
+				"penis" : "infused.shaft",
+				"cock" : "infused.shaft",
+				"shaft" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"<slowlove>",
+										"<love>",
+										[
+											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+											"<slowlove>^#ffffff7f;(I'm just a cock~)",
+											"<slowlove>^#ffffff7f;(I can't wait to be used~)",
+											"<slowlove>^#ffffff7f;(Ahh~ I'm throbbing with excitment~)",
+											"<slowlove>^#ffffff7f;(I'm just <entityname>'s cock~)",
+											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+											"<love>^#ffffff7f;(<keysmash>)"
+										]
+									]
+								}
+							}
+						}
+					}
+				},
+				"ballsL" : "infused.balls",
+				"ballsR" : "infused.balls",
+				"balls" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"<slowlove>",
+										"<love>",
+										[
+											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+											"<slowlove>^#ffffff7f;(I'm just your balls~)",
+											"<slowlove>^#ffffff7f;(Ahh~ so full of cum sloshing around~)",
+											"<slowlove>^#ffffff7f;(I'm just <entityname>'s balls~)",
+											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+											"<love>^#ffffff7f;(<keysmash>)"
+										]
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+			// lines for when a character is infused (CTF Boobsorb etc.) the pred teasing their occupant
+			// the <infusedName> tag can also be used in any of the above vore context to use the name of the infused character, just make sure to have the lines within a special check for it
+			"infusedTease": {
+				"next" : "location",
+				"default" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										"Just a part of my body~", "Just a part of my body <infusedName>~" // very very placeholder
+									]
+								}
+							}
+						}
+					}
+				},
+				"belly" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										{"check":{"bellySounds":true},"add":["Hehe, grumbling <infusedName>?", "Does my noisy belly want something~?"]},
+										"Hehe, does my belly want something?", "Hehe, do you want something <infusedName?"
+									]
+								}
+							}
+						}
+					}
+				},
+				"womb" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										["<slowlove>Ahh, I'm so much more sensitive with you down there~", "<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"],
+										["<slowlove>Fff, ahh... I keep getting wet thinking about you down there~","<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"],
+										["<slowlove>Hehe... dripping wet, right where you belong~","Hehe... dripping wet, right where you belong <infusedName>~"],
+										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
+									]
+								}
+							}
+						}
+					}
+				},
+				"breastsL" : "infused.breasts",
+				"breastsR" : "infused.breasts",
+				"breasts" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										["<slowlove>Mmm, you make them so much more sensitive~","<slowlove>Mmm, <infusedName> you make them so much more sensitive~"],
+										["<slowlove>Ahh I can just feel you making even more milk~","<slowlove>Ahh I can just feel you making even more milk <infusedName>~"],
+										["<slowlove>Jiggling on my chest, right where you belong~","<slowlove>Jiggling on my chest, right where you belong <infusedName>~"],
+										{"check":{"breastsInfusedSize":true},"add":[
+											["<love>I love how much bigger you make my boobs~","<love>I love how much bigger you make my boobs <infusedName>~"],
+											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
+										]},
+										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
+									] // very very placeholder
+								}
+							}
+						}
+					}
+				},
+				"penis" : "infused.shaft",
+				"cock" : "infused.shaft",
+				"shaft" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										["<love>Heh, I can feel you twitching down there~", "<love>Heh, I can feel you twitching down there <infusedName>~"],
+										["<love>Are you enjoying your new purpose?~", "<love>Are you enjoying your new purpose <infusedName>?~"],
+										["<slowlove>Just twitch and throb away, you're right where you belong~", "<slowlove>Just twitch and throb away <infusedName> you're right where you belong~"],
+										["<love>Heh, you belong right there, twitching and throbbing between my legs~", "<love>Heh, you belong right there <infusedName>, twitching and throbbing between my legs~"],
+										{"check":{"shaftInfusedSize":true},"add":[
+											["<love>I love how much bigger you make my cock~","<love>I love how much bigger you make my cock <infusedName>~"],
+											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
+										]},
+										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
+									]
+								}
+							}
+						}
+					}
+				},
+				"ballsL" : "infused.balls",
+				"ballsR" : "infused.balls",
+				"balls" : { // location
+					"next" : "predator",
+					"default" : { // predator
+						"next" : "race",
+						"default" : { // race
+							"next" : "personality",
+							"default" : { // personality
+								"next" : "mood",
+								"default" : {	// mood
+									"randomDialogue" : [
+										["<love>Heh, I can feel you twitching down there~", "<love>Heh, I can feel you twitching down there <infusedName>~"],
+										["<love>Are you enjoying your new purpose?~", "<love>Are you enjoying your new purpose <infusedName>?~"],
+										["<love>Mmm, all that cum sloshing around down there~", "<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"],
+										{"check":{"ballsInfusedSize":true},"add":[
+											["<love>I love how much bigger you make my balls~","<love>I love how much bigger you make my balls <infusedName>~"],
+											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
+										]},
+										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
+
+									]
+								}
+							}
+						}
+					}
+				}
+			},
+
+			// lines triggered when a player may recieve a certain reward
+			"rewardNotify": {
+				"next": "race",
+				"default": { // race
+					"next": "personality",
+					"default": { // personality
+						"next": "mood",
+						"default": { // mood
+							"next": "rewardName",
+							"default": {
+								"next": "poolName",
+								"money": {
+									"randomDialogue" : [ "This is nice, I think I'll give you some of my spare change.", "I'll give you a few pixels for giving me a good time."]
+								},
+								"lowValueQuestRewards": {
+									"randomDialogue" : [ "Hmm, I think you deserve something after this.", "I think I'll give you some sort of small gift."]
+								},
+								"mediumValueQuestRewards": {
+									"randomDialogue" : [ "Maybe I've got something a bit better for you this time.", "I've got another gift for you after this."]
+								},
+								"highValueQuestRewards": {
+									"randomDialogue" : [ "I think you'll really like what I've gotten you.", "My next gift will be really good heh."]
+								}
+							}
+						}
+					}
+				}
+			},
+
+			// a line of dialogue triggered when size is changed by the size ray or something else
+			"sizeChanged" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "shrinkOrGrow",
+							"shrink" : {
+								"randomDialogue" : ["Why's everything getting bigger?", "Ah! I'm shrinking!"]
+							},
+							"grow" : {
+								"randomDialogue" : ["Why's everything getting smaller?", "Ah! I'm growing!"]
+							}
+						}
+					}
+				}
+			},
+			// when stepping on a character small enough
+			"didSteppy" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" :{ // personality
+						"next" : "mood",
+						"default" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"randomDialogue" : [ "hehe, whoops!", "Oh did I step on something?", "You tinies need to pay attention more!"]
+							}
+						}
+					}
+				}
+			},
+			// when stepped on by a larger character
+			"gotSteppy" : {
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" :{ // personality
+						"next" : "mood",
+						"default" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"randomDialogue" : [
+									["Ahhh!", "AH!", "oof!", "eep!"],
+									["You stepped on me!", "Watch your step!"],
+									["Be careful where you're <steppyType>!", "Watch where you're <steppyType>!"],
+									["Look out!", "Careful!"]
+								]
+							},
+							"falling" : {
+								"randomDialogue" : [
+									["Ahhh!", "AH!", "oof!", "eep!"],
+									["You're stomping on me!", "I'm getting smushed!", "*wheeze*"]
+								]
+							}
+						}
+					}
+				}
 			}
 		},
 

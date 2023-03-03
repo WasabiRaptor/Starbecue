@@ -342,10 +342,10 @@ function sbq.checkInfusionActionButtonsEnabled()
 	alreadyInfused = false
 
 	local bellyInfusionActive = sbq.checkInfusionActionActive("belly", locationTFs.belly )
-	local ballsInfusionActive = sbq.checkInfusionActionActive("balls", locationTFs.balls or {"balls","shaft"})
-	local cockInfusionActive = sbq.checkInfusionActionActive("shaft", locationTFs.shaft or {"balls","shaft"})
+	local ballsInfusionActive = sbq.checkInfusionActionActive("balls", locationTFs.balls or {"balls","shaft","womb"})
+	local cockInfusionActive = sbq.checkInfusionActionActive("shaft", locationTFs.shaft or {"balls","shaft","womb"})
 	local breastsInfusionActive = sbq.checkInfusionActionActive("breasts", locationTFs.breasts)
-	local pussyInfusionActive = sbq.checkInfusionActionActive("womb", locationTFs.womb)
+	local pussyInfusionActive = sbq.checkInfusionActionActive("womb", locationTFs.womb or {"balls","shaft","womb"} )
 
 	sbq.infusionButtonSetup(bellyInfusionActive, bellyInfusion, "bellyInfusion")
 	sbq.infusionButtonSetup(ballsInfusionActive, ballsInfusion, "ballsInfusion")
