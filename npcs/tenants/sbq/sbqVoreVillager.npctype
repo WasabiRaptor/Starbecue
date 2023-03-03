@@ -694,12 +694,42 @@
 								"default" : { "randomDialogue" : [
 									"Having a good time in there?", "Hope its comfortable.", "Get yourself a nice milk bath~",
 									"Feel free to take a drink, don't want to start leaking after all~", "hehe, look at how much bigger they are with you in there~",
-									{"check":{"shirt":true},"add":["Careful, you're gonna cause me a wardrobe malfunction~", "Whoops, almost bounced my shirt off."]}
+									{"check":{"shirt":true},"add":["Careful, you're gonna cause me a wardrobe malfunction~", "Whoops, almost bounced my shirt off.", "Things a bit tight behind my top?"]}
 								]},
 								"sbqHeal" : { "randomDialogue" : [ ["Now you're nice and safe.", "Hope you like how it feels in there.", "Just snuggle into the walls~", "Get yourself nice and soaked in my milk~"], {"add":"struggle.location.race.personality.mood.default"} ] },
 								"sbqMilkDigest" : {
 									"next" : "milkDigestImmunity",
 									"false" : { "randomDialogue" : [ "Hehe, seems like I'm going to have a nice batch of milk.", "Let all your worries just melt away~", "Mmmmm can't wait to taste whatever flavor you'll make~" ] },
+									"true" : "struggle.location.race.personality.mood.default"
+								},
+								"sbqMilkSoftDigest" : "struggle.location.race.personality.mood.sbqMilkDigest"
+							}
+						},
+						"flirty" : {
+							"next" : "mood",
+							"default" : {
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "I hope you're having a good time in there~", "Nice and soft, isn't it~?", "Hffff, feels so good with you in there~", "I love being busty, and it's all thanks to you, dear~", {"check":{"shirt":true},"add":["Ooh, ya wanna be shown off~?", "Tight, isn't it~?"]}
+								]},
+								"sbqHeal" : { "randomDialogue" : [ [ "All nice and safe~", "Feels nice and soothing, right~?", "Settle on in, it's nice and safe~", "Enjoy your therapeutic milk bath~" ], {"add":"struggle.location.race.personality.mood.default"} ] },
+								"sbqMilkDigest" : {
+									"next" : "milkDigestImmunity",
+									"false" : { "randomDialogue" : [ "You're gonna make a lovely batch of milk, dear~", "Starting to slosh, eh~?", "You're gonna be delicious~" ] },
+									"true" : "struggle.location.race.personality.mood.default"
+								},
+								"sbqMilkSoftDigest" : "struggle.location.race.personality.mood.sbqMilkDigest"
+							}
+						},
+						"shy" : {
+							"next" : "mood",
+							"default" : {
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "<keysmash>", "Oh g-goodness... uhm!", "Hhhh... they're so b-big with you...!", "If you k-keep wiggling, people are g-gonna see...!", {"check":{"shirt":true},"add":["<keysmash> Ohno my shirt...!", "Stop, you're g-gonna make my top slip off...!", "Ack you nearly popped out of my b-bra...!"]}
+								]},
+								"sbqHeal" : { "randomDialogue" : [ [ "Uhm... I hope it feels g-good in there...!", "J-just... relax, alright?  You're s-safe..." ], {"add":"struggle.location.race.personality.mood.default"} ] },
+								"sbqMilkDigest" : {
+									"next" : "milkDigestImmunity",
+									"false" : { "randomDialogue" : [ "Oh g-goodness, I feel so f-full...", "Was th-that... sloshing?  ...<keysmash>", "I'm g-gonna be so leaky...!"] },
 									"true" : "struggle.location.race.personality.mood.default"
 								},
 								"sbqMilkSoftDigest" : "struggle.location.race.personality.mood.sbqMilkDigest"
