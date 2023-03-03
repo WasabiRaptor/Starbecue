@@ -393,7 +393,6 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 end
 
 function sbq.say(string, tags, imagePortrait, emote, appendName)
-	sb.logInfo(tostring(string))
 	if type(string) == "string" and string ~= "" then
 		if string:find("<love>") then
 			status.addEphemeralEffect("love")

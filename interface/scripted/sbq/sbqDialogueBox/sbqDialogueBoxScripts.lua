@@ -13,7 +13,7 @@ function sbq.generateKeysmashes(input, lengthMin, lengthMax)
 end
 
 function sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree, dialogueTreeTop)
-	sb.logInfo(sb.printJson(dialogueTreeLocation))
+	--(sb.printJson(dialogueTreeLocation))
 	local dialogueTree = sbq.getRedirectedDialogue(dialogueTree or sbq.dialogueTree, settings, eid, dialogueTreeTop) or {}
 	local dialogueTreeTop = dialogueTreeTop or dialogueTree
 
