@@ -683,5 +683,6 @@ function sbq.generateNPCItemCard(tenant)
 		npcParam = tenant.overrides,
 		npcSpawn = tenant.spawn
 	}
+	item.parameters.preySize = 1
 	return item
 end

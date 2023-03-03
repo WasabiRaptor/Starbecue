@@ -201,7 +201,7 @@ function sbq.effectsPanel()
 					{type = "label", text = "Infusion", align = "center"},
 					{
 						{ expandMode = {0,0}, spacing = -2, },
-						{ type = "itemSlot", autoInteract = true, id = location .. "InfusedItem", item = sbq.predatorSettings[location .. "InfusedItem"] },
+						{ type = "itemSlot", autoInteract = true, id = location .. "InfusedItem", item = sbq.predatorSettings[location .. "InfusedItem"], toolTip = "When swapping you may need to close and re-open the menu to refresh available settings." },
 						{
 							{ mode = "h", spacing = -2 },
 							{ type = "checkBox", id = location .. "InfusedVisual", checked = sbq.predatorSettings[location .. "InfusedVisual"], toolTip = "Change colors to match infused character if applicable.", visible = locationData.infusedVisual or false },
@@ -562,7 +562,8 @@ function sbq.infusionSlotAccepts(locationData, item)
 			end
 			return false
 		end
-		if (locationData.infusionAccepts or {}).rejectCharacters ~= nil then
+		if (locationData.infusionAccepts or {}).rejectCharacters then
+			if ((locationData.infusionAccepts or {}).rejectCharacters) == true then return false end
 			for i, uuid in ipairs((locationData.infusionAccepts or {}).rejectCharacters or {}) do
 				if uuid == uniqueId then
 					return false

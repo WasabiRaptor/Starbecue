@@ -394,7 +394,7 @@ function sbq.infusionButton(active, kind, locationName, locations)
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "infuseLocation", player.id(), locations)
 			sbq.timer("gotInfused", dialogueTree.delay or 1.5, function ()
 				for i, occupant in pairs(sbq.occupant or {}) do
-					if occupant.id == player.id() then
+					if occupant.id == player.id() and occupant.flags.infused then
 						sbq.settings.doingVore = "after"
 						sbq.updateDialogueBox({ "infusePrey" })
 						return

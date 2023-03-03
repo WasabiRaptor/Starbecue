@@ -111,24 +111,26 @@ function sbq.everything_primary()
 
 		local uniqueId = world.entityUniqueId(entity.id())
 		if locationData.infusionAccepts and locationData.infusionAccepts.characters then
-			local continue
 			if type((locationData.infusionAccepts or {}).characters) == "table" then
+				local continue
 				for i, uuid in ipairs((locationData.infusionAccepts or {}).characters or {}) do
 					if uuid == uniqueId then
 						continue = true
 						break
 					end
 				end
+				if not continue then return end
 			end
-			if not continue then return end
-			if (locationData.infusionAccepts or {}).rejectCharacters ~= nil then
-				for i, uuid in ipairs((locationData.infusionAccepts or {}).rejectCharacters or {}) do
-					if uuid == uniqueId then
-						return
-					end
+		end
+		if (locationData.infusionAccepts or {}).rejectCharacters then
+			if ((locationData.infusionAccepts or {}).rejectCharacters) == true then return end
+			for i, uuid in ipairs((locationData.infusionAccepts or {}).rejectCharacters or {}) do
+				if uuid == uniqueId then
+					return
 				end
 			end
 		end
+
 
 		local template = locationData.infusionItem
 		if type(template) == "string" then
