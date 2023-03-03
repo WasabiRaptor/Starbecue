@@ -108,7 +108,7 @@ function sbq.doTransition(direction, scriptargs, log)
 		sbq.addRPC(world.sendEntityMessage(id, "sbqIsPreyEnabled", tconfig.voreType), function(enabled)
 			if enabled and enabled.enabled then
 				scriptargs.size = enabled.size
-				tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction], scriptargs)
+				tconfig = sbq.getOccupancyTransition(tconfig, scriptargs)
 				if tconfig == nil then return end
 
 				if enabled.preyList and type(enabled.preyList[1]) == "number" then

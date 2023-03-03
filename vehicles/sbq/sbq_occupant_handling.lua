@@ -15,7 +15,9 @@ function sbq.eat( occupantId, location, size, voreType, locationSide, force )
 	local seatindex = math.floor(sbq.occupants.total + sbq.startSlot)
 	if seatindex > sbq.occupantSlots then return false end
 	local locationSpace = sbq.locationSpaceAvailable(location, locationSide)
-	if locationSpace < ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1))) then return false end
+
+	if (locationSpace < ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1)))) and not force then return false end
+
 	if (not occupantId) or (not world.entityExists(occupantId))
 	or ((sbq.entityLounging(occupantId) or sbq.inedible(occupantId)) and not force)
 	then return false end
@@ -235,9 +237,13 @@ end
 
 function sbq.doVore(args, location, statuses, sound, voreType )
 	if sbq.isNested then return false end
-	local location, locationSide = sbq.getSidedLocationWithSpace(location, args.size)
+	local location = location
+	local locationSide
+	if not args.force then
+		location, locationSide = sbq.getSidedLocationWithSpace(location, args.size)
+	end
 	if not location then return false end
-	if sbq.eat( args.id, location, args.size, voreType, locationSide, args.force ) then
+	if sbq.eat(args.id, location, args.size, voreType, locationSide, args.force) then
 		sbq.justAte = args.id
 		vehicle.setInteractive( false )
 		sbq.showEmote("emotehappy")

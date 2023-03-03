@@ -376,7 +376,7 @@ end
 
 function dialogueBoxScripts.cockTFmePls(dialogueTree, settings, branch, eid, ...)
 	world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", "cockVore",{ id = player.id(), force = true })
-	sbq.timer("ctfDelay", 0.25, function ()
+	sbq.timer("ctfDelay", 0.25, function()
 		shaftBallsInfusion:onClick()
 	end)
 	return dialogueTree.continue or {dialogue = {""}}
