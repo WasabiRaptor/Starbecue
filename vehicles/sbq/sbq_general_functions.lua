@@ -109,9 +109,10 @@ function sbq.globalToLocal( position )
 	return pos
 end
 
-function sbq.getOccupancyTransition(transition)
+function sbq.getOccupancyTransition(transition, args)
+	if args.force then return transition end
 	if transition.location then
-		local size = 1
+		local size = args.size or 0
 		if type(transition.location) == "table" then
 			for i, location in ipairs(transition.location) do
 				local failOnFull = transition[location.."FailOnFull"] or transition.failOnFull

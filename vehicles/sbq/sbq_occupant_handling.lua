@@ -237,7 +237,7 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 	if sbq.isNested then return false end
 	local location, locationSide = sbq.getSidedLocationWithSpace(location, args.size)
 	if not location then return false end
-	if sbq.eat( args.id, location, args.size, voreType, locationSide ) then
+	if sbq.eat( args.id, location, args.size, voreType, locationSide, args.force ) then
 		sbq.justAte = args.id
 		vehicle.setInteractive( false )
 		sbq.showEmote("emotehappy")

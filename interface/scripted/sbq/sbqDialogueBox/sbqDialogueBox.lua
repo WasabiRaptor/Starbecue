@@ -273,6 +273,8 @@ function sbq.checkVoreTypeActive(voreType)
 
 	local size = status.statusProperty("sbqSize") or 1
 
+	if locationData.requiresInfusion and not sbq.settings[locationName.."InfusedItem"] then return "needsInfusion" end
+
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if ( sbq.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
 		if sbq.settings[voreType.."Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
@@ -597,7 +599,9 @@ function dialogueCont:onClick()
 						sbq.updateDialogueBox( {}, option[2] )
 					end
 				elseif option[2].jump ~= nil then
-					action[2] = function () sbq.updateDialogueBox( option[2].jump ) end
+					action[2] = function() sbq.updateDialogueBox(option[2].jump) end
+				elseif type(option[2].callScript) == "string" and type(dialogueBoxScripts[option[2].callScript]) == "function" then
+					action[2] = function() sbq.updateDialogueBox({}, dialogueBoxScripts[option[2].callScript](option[2], sbq.settings, "callScript", player.id(), table.unpack(option[2].scriptArgs or {}))) end
 				end
 				table.insert(contextMenu, action)
 			end

@@ -9,7 +9,7 @@ function state.stand.oralVore(args, tconfig)
 end
 
 function state.stand.oralEscape(args, tconfig)
-	return sbq.doEscape(args, {wet = { power = 5, source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args, toconfig.releaseEffects or {wet = { power = 5, source = entity.id()}}, {}, tconfig.voreType )
 end
 
 function state.stand.analVore(args, tconfig)
@@ -17,7 +17,7 @@ function state.stand.analVore(args, tconfig)
 end
 
 function state.stand.analEscape(args, tconfig)
-	return sbq.doEscape(args, {}, {}, tconfig.voreType )
+	return sbq.doEscape(args, toconfig.releaseEffects or {}, {}, tconfig.voreType )
 end
 
 function state.stand.unbirth(args, tconfig)
@@ -25,7 +25,7 @@ function state.stand.unbirth(args, tconfig)
 end
 
 function state.stand.unbirthEscape(args, tconfig)
-	return sbq.doEscape(args, {wet = { power = 5, source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args, toconfig.releaseEffects or {wet = { power = 5, source = entity.id()}}, {}, tconfig.voreType )
 end
 
 function state.stand.cockVore(args, tconfig)
@@ -40,7 +40,7 @@ state.stand.moveToLocation = sbq.moveToLocation
 state.stand.switchBalls = sbq.switchBalls
 
 function state.stand.cockEscape(args, tconfig)
-	return sbq.doEscape(args, {glueslow = { power = 5 + (sbq.lounging[args.id].progressBar), source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args, toconfig.releaseEffects or {glueslow = { power = 5 + (sbq.lounging[args.id].progressBar), source = entity.id()}}, {}, tconfig.voreType )
 end
 
 function state.stand.breastVore(args, tconfig)
@@ -48,15 +48,15 @@ function state.stand.breastVore(args, tconfig)
 end
 
 function state.stand.breastEscape(args, tconfig)
-	return sbq.doEscape(args, {}, {}, tconfig.voreType )
+	return sbq.doEscape(args, toconfig.releaseEffects or {}, {}, tconfig.voreType )
 end
 
 function state.stand.navelVore(args, tconfig)
-	return sbq.doVore(args, "belly", {}, "swallow", tconfig.voreType)
+	return sbq.doVore(args, "belly", toconfig.releaseEffects or {}, "swallow", tconfig.voreType)
 end
 
 function state.stand.navelEscape(args, tconfig)
-	return sbq.doEscape(args, {}, {}, tconfig.voreType )
+	return sbq.doEscape(args, toconfig.releaseEffects or {}, {}, tconfig.voreType )
 end
 
 function sbq.detectShirt()

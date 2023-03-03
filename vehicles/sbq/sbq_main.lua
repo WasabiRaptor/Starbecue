@@ -497,12 +497,12 @@ function sbq.interactChance(data, args)
 	if not (data.drivingEnabled or (not sbq.driver)) then return end
 	if data.chance then
 		if math.random() <= (data.chance/100) then
-			sbq.doTransition( (sbq.getOccupancyTransition(data) or {}).transition, {id=args.sourceId} )
+			sbq.doTransition( (sbq.getOccupancyTransition(data, {}) or {}).transition, {id=args.sourceId} )
 		elseif data.animation then
 			sbq.doAnims(data.animation)
 		end
 	else
-		sbq.doTransition( (sbq.getOccupancyTransition(data) or {}).transition, {id=args.sourceId} )
+		sbq.doTransition( (sbq.getOccupancyTransition(data, {}) or {}).transition, {id=args.sourceId} )
 	end
 end
 

@@ -97,7 +97,7 @@ function sbq.doTransition(direction, scriptargs, log)
 	local scriptargs = scriptargs or {}
 	if (not sbq.stateconfig or not sbq.stateconfig[sbq.state].transitions[direction]) then return end
 	if sbq.transitionLock then return end
-	local tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction])
+	local tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction], scriptargs)
 	if tconfig == nil then return end
 	if tconfig.settings then
 		if not sbq.checkSettings(tconfig.settings) then return end
@@ -108,6 +108,9 @@ function sbq.doTransition(direction, scriptargs, log)
 		sbq.addRPC(world.sendEntityMessage(id, "sbqIsPreyEnabled", tconfig.voreType), function(enabled)
 			if enabled and enabled.enabled then
 				scriptargs.size = enabled.size
+				tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction], scriptargs)
+				if tconfig == nil then return end
+
 				if enabled.preyList and type(enabled.preyList[1]) == "number" then
 					local preyIndex = 1
 					sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, enabled.preyList)

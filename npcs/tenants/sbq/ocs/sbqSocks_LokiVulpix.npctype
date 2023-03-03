@@ -292,6 +292,27 @@
 
 			},
 
+
+			"cockTFme" :{
+				"dialogue" : [
+					"Well... I could transform you into a dildo, and then I could attach that to myself. Or you could get someone's essence I could use.",
+					"So what do you say, do you want to become this plushie's dick~?"
+				],
+				"buttonText" : [
+					"Go on...",
+					"[Y/N]"
+				],
+				"options" : [
+					["Yes please!",{
+						"callScript" : "cockTFmePls"
+					}],
+					["No thanks.",{
+						"dialogue" : ["Thats alright, the option is always open."]
+					}]
+				]
+
+			},
+
 			// lines for when a pred is eating prey, be it from hunting, or from it being requested
 			// settings come from itself
 			"vore" : {
@@ -435,6 +456,51 @@
 							}
 						}
 					}
+				},
+				"cockVore" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [
+										"Spied my attachment down there didn't cha~?", "<infusedName> was rather eager to be my new attachment~\nLets put it to use then~", "I usually don't do this, but if <infusedName> enjoys it, then I do to~"
+									]},
+									"after" : { "randomDialogue" : [
+										"Get stuffed right down in there~", "Get squeeeeeezed into my dildo dick hehe~", "Ahh~ <infusedName> is sure to enjoy that~", "Oooh~ I can really feel <infusedName> twitching down there hehe~"
+									], "dismissTime" : 10}
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : { "randomDialogue" : [
+										"Spied my attachment down there didn't cha~?", "<infusedName> was rather eager to be my new attachment~\nLets put it to use then~", "I usually don't do this, but if <infusedName> enjoys it, then I do to~"
+									]},
+									"after" : { "randomDialogue" : [
+										"Get stuffed right down in there~", "Get squeeeeeezed into my dildo dick hehe~", "Ahh~ <infusedName> is sure to enjoy that~", "Oooh~ I can really feel <infusedName> twitching down there hehe~"
+									], "dismissTime" : 10}
+								},
+								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
+								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",
+								"full" : { "randomDialogue" : [
+									"Ahh~ my dildo does have a limit to how much it can stretch!", "I don't think you'll be able to fit, even if <infusedName> wants to try..."
+								]},
+								"tooBig" : { "randomDialogue" : [
+									"I don't want to break <infusedName> trying to force you in.", "You're a bit too large, I might break it.", "You should try and make yourself smaller~", "You're a bit too big to stuff into my dildo."
+								]},
+								"needsInfusion" : {
+									"randomDialogue" : [
+										"I don't have one of those normally, I'd need a *special* kind of dildo~","Mmm~ I can't quite do that to you at the moment, but I could do something else~"
+									],
+									"buttonText" : ["Tell me more?"],
+									"jump" : ["cockTFme"]
+								}
+							}
+						}
+					}
 				}
 			},
 			// when being pred, responses to the prey struggling inside
@@ -538,6 +604,38 @@
 										{"add":"struggle.location.race.personality.mood.locationEffect"}
 									] }
 								}
+							}
+						}
+					}
+				},
+				"cock" : "struggle.shaft", // these are just in case someone names something different
+				"shaft" : { // location
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [
+									["Having a good time in there~?", "Hope its comfortable~", "Ahh, keep squirming~", "Ahhh~ so this is what having a dick feels like~"],
+									["Ahh~ <infusedName> is twitching so much~", "Ahh I'm so glad I turned <infusedName> into a didlo~"]
+								] }
+							}
+						}
+					}
+				},
+				"ballsL" : "struggle.balls",
+				"ballsR" : "struggle.balls",
+				"balls" : { // location
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "Having a good time in there?", "Keep squirming.", "It feels so good having you in there~", "Friends are stored in the balls~" ] }
 							}
 						}
 					}
@@ -662,7 +760,28 @@
 							}
 						}
 					}
+				},
+				"cockVore" : { // voreType
+				"next" : "race",
+				"default" : { // race
+					"next" : "personality",
+					"default" : { // personality
+						"next" : "mood",
+						"default" : { // mood
+							"next" : "struggleTrigger",
+							"true" : { // struggleTrigger
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "Ahh~ ahh that felt so good~", "Could you get back in and squirm some more?", "Mmm~ I thought you were pretty comfortable.", "I thought you liked it in there.", "Oh... alright." ] }
+							},
+							"false" : { // struggleTrigger
+								"next" : "getLocationEffect",
+								"default" : { "randomDialogue" : [ "Ahhhh~ ffff... I would have just cum if I could~", "FFF... ahhh... I guess I came and forced you out?", "Hnnnn i-is this what cumming feels like?" ] }
+							}
+						}
+					}
 				}
+			}
+
 			},
 
 			// when being prey, responses to the pred that ate them as they struggle
@@ -1833,7 +1952,6 @@
 
 			"analVorePred" : true,
 			"unbirthPred" : true,
-			"cockVorePred" : false,
 			"breastVorePred" : false
 		},
 
@@ -1860,8 +1978,6 @@
 			"tailVorePred" : false,
 			"absorbVorePred" : false,
 			"navelVorePred" : false,
-			"breastVorePred" : false,
-			"cockVorePred" : false,
 
 			"bellySounds" : false
 		},
