@@ -469,7 +469,7 @@ function sbq.setOccupantTags()
 							sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
 						})
 					else
-						world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location}, {"infusedTease"} )
+						world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, {"infusedTease"}, true )
 					end
 				end
 				sbq.doLocationStruggle(location, data)

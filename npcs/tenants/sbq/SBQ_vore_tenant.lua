@@ -148,9 +148,13 @@ function init()
 	end)
 	message.setHandler("sbqSayRandomLine", function ( _,_, entity, settings, treestart, getVictimPreySettings )
 		if getVictimPreySettings then
-			sbq.addRPC(world.sendEntityMessage(entity, "sbqGetPreyEnabled" ), function (sbqPreyEnabled)
-				sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings or {})) )
-			end)
+			if type(entity) == "number" and world.entityExists(entity) then
+				sbq.addRPC(world.sendEntityMessage(entity, "sbqGetPreyEnabled" ), function (sbqPreyEnabled)
+					sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings or {})) )
+				end)
+			else
+				sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(storage.settings, settings or {}) )
+			end
 		else
 			sbq.getRandomDialogue( treestart, entity, sb.jsonMerge(settings, sb.jsonMerge({personality = storage.settings.personality, mood = storage.settings.mood}, status.statusProperty("sbqPreyEnabled") or {})), nil, true)
 		end
@@ -191,6 +195,7 @@ function init()
 		storage.settings.isFollowing = recruitable.isFollowing()
 	end)
 	message.setHandler("sbqDigestStore", function(_, _, location, uniqueId, item)
+		if not uniqueId then return end
 		local digestedStoredTable = status.statusProperty("sbqStoredDigestedPrey") or {}
 		digestedStoredTable[location] = digestedStoredTable[location] or {}
 		digestedStoredTable[location][uniqueId] = item
@@ -388,6 +393,7 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 end
 
 function sbq.say(string, tags, imagePortrait, emote, appendName)
+	sb.logInfo(tostring(string))
 	if type(string) == "string" and string ~= "" then
 		if string:find("<love>") then
 			status.addEphemeralEffect("love")

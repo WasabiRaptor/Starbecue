@@ -43,7 +43,7 @@ function sbq.struggleMessages(id)
 		}), sbq.lounging[id].flags)
 
 		if sbq.lounging[id].flags.infused and sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
-			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, { location = location }, { "infusedTease" })
+			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, { "infusedTease" }, true)
 			return
 		end
 

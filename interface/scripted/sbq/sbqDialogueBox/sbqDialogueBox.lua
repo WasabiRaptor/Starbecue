@@ -370,12 +370,12 @@ function sbq.infusionButtonSetup(active, button, voreType)
 		if active == "alreadyInfused" or active == "youreAlreadyInfused" then
 			alreadyInfused = true
 		end
-		button:setVisible(active == "request" or active == "layerRequest")
+		button:setVisible(active == "request" or active == "requestLayer")
 		local image = sbq.data.icons[voreType]
 		if active == "youreAlreadyInfused" then
 			changeBackImage = image.."?brightness=-25?saturation=-100"
 		end
-		if active == "request" or active == "layerRequest" then
+		if active == "request" or active == "requestLayer" then
 		else
 			image = image.."?brightness=-25?saturation=-100"
 		end
@@ -387,8 +387,7 @@ function sbq.infusionButton(active, kind, locationName, locations)
 	sbq.settings.voreType = kind
 	sbq.settings.getVoreButtonAction = active
 	sbq.settings.location = locationName
-
-	if active == "request" or active == "layerRequest" then
+	if active == "request" or active == "requestLayer" then
 		sbq.settings.doingVore = "before"
 		local dialogueTree = sbq.updateDialogueBox({ "infusePrey" }) or {}
 		sbq.timer("infuseMessage", dialogueTree.delay or 1.5, function ()
@@ -439,7 +438,7 @@ function sbq.checkInfusionActionActive(location, locations)
 					return "youreAlreadyInfused"
 				end
 				if isInfused then return "alreadyInfused" end
-				return "layerRequest"
+				return "requestLayer"
 			end
 			if isInfused then return "alreadyInfused" end
 			return "request"
@@ -453,7 +452,7 @@ function sbq.checkInfusionActionActive(location, locations)
 						return "youreAlreadyInfused"
 					end
 					if isInfused then return "alreadyInfused" end
-					return "layerRequest"
+					return "requestLayer"
 				end
 				if isInfused then return "alreadyInfused" end
 				return "request"
