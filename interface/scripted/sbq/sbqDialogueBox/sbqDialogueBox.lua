@@ -273,13 +273,13 @@ function sbq.checkVoreTypeActive(voreType)
 
 	local size = status.statusProperty("sbqSize") or 1
 
-	if locationData.requiresInfusion and not sbq.settings[locationName.."InfusedItem"] then return "needsInfusion" end
 
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if ( sbq.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
-		if sbq.settings[voreType.."Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
+		if sbq.settings[voreType .. "Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
 			if type(sbq.data.occupantHolder) ~= "nil" and type(sbq.occupants) == "table" then
 				if sbq.occupants[locationName] == nil then return "hidden" end
+				if locationData.requiresInfusion and not sbq.settings[locationName.."InfusedItem"] then return "needsInfusion" end
 				local full = (
 					not locationData.sided
 					and ((sbq.occupants[locationName] + size) > (sbq.settings[locationName .. "VisualMax"] or locationData.max))
@@ -527,7 +527,8 @@ function dialogueCont:onClick()
 	end
 	if type(sbq.prevDialogueBranch.callScript) == "string" then
 		if type(dialogueBoxScripts[sbq.prevDialogueBranch.callScript]) == "function" then
-			sbq.updateDialogueBox({}, dialogueBoxScripts[sbq.prevDialogueBranch.callScript](sbq.prevDialogueBranch, sbq.settings, "callScript", player.id(), table.unpack(sbq.prevDialogueBranch.scriptArgs or {})))
+			local dialogueTree = dialogueBoxScripts[sbq.prevDialogueBranch.callScript](sbq.prevDialogueBranch, sbq.settings,"callScript", player.id(), table.unpack(sbq.prevDialogueBranch.scriptArgs or {}))
+			if dialogueTree then sbq.updateDialogueBox({}, dialogueTree) end
 		end
 	elseif sbq.prevDialogueBranch.continue ~= nil then
 		local continue = true
@@ -601,7 +602,10 @@ function dialogueCont:onClick()
 				elseif option[2].jump ~= nil then
 					action[2] = function() sbq.updateDialogueBox(option[2].jump) end
 				elseif type(option[2].callScript) == "string" and type(dialogueBoxScripts[option[2].callScript]) == "function" then
-					action[2] = function() sbq.updateDialogueBox({}, dialogueBoxScripts[option[2].callScript](option[2], sbq.settings, "callScript", player.id(), table.unpack(option[2].scriptArgs or {}))) end
+					action[2] = function()
+						local dialogueTree = dialogueBoxScripts[option[2].callScript](option[2], sbq.settings, "callScript", player.id(), table.unpack(option[2].scriptArgs or {}))
+						if dialogueTree then sbq.updateDialogueBox({}, dialogueTree) end
+					end
 				end
 				table.insert(contextMenu, action)
 			end

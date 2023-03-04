@@ -30,7 +30,8 @@ function sbq.eat( occupantId, location, size, voreType, locationSide, force )
 	local edibles = world.entityQuery( world.entityPosition(occupantId), 2, {
 		withoutEntityId = entity.id(), includedTypes = { "vehicle" },
 		callScript = "sbq.edible", callScriptArgs = { occupantId, seatindex, entity.id(), force}
-	} )
+	})
+	sbq.occupant[seatindex].force = force
 	if edibles[1] == nil then
 		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungable now
 			sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
@@ -388,10 +389,8 @@ function sbq.updateOccupants(dt)
 			local sidedLocation = location .. (sbq.occupant[i].locationSide or "")
 
 			if location == "escaping" then
-			elseif (location == nil) or (sbq.sbqData.locations[location] == nil) or
-				((sbq.sbqData.locations[location].max or 0) == 0) then
+			elseif not sbq.occupant[i].force and ((location == nil) or (sbq.sbqData.locations[location] == nil) or ((sbq.sbqData.locations[location].max or 0) == 0)) then
 				sbq.uneat(sbq.occupant[i].id)
-				return
 			else
 				sbq.doBellyEffect(i, sbq.occupant[i].id, dt, location, powerMultiplier)
 

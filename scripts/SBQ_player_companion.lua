@@ -252,6 +252,11 @@ function init()
 			world.sendEntityMessage(player.id(), "sbqLight")
 
 			if not eaten then
+				local resolvePosition = world.resolvePolyCollision(mcontroller.collisionPoly(), mcontroller.position(), 5)
+				if resolvePosition ~= nil then
+					mcontroller.setPosition(resolvePosition)
+				end
+
 				for i, effect in ipairs(root.assetJson("/sbqGeneral.config").predStatusEffects) do
 					status.removeEphemeralEffect(effect)
 				end

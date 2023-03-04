@@ -111,6 +111,12 @@ function init()
 			_npc_setInteractive(interactive)
 			status.setStatusProperty("sbqPreyList", nil)
 			status.setStatusProperty("sbqCurrentData", nil)
+			if not eaten then
+				local resolvePosition = world.resolvePolyCollision(mcontroller.collisionPoly(), mcontroller.position(), 5)
+				if resolvePosition ~= nil then
+					mcontroller.setPosition(resolvePosition)
+				end
+			end
 
 			local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
 			if sbqOriginalDamageTeam then

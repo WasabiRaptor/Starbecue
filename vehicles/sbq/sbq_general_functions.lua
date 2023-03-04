@@ -483,7 +483,7 @@ function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, d
 	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
 
 	if type(randomDialogue) == "string" then
-		return sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait
+		return sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags--, imagePortrait
 	end
 end
 
