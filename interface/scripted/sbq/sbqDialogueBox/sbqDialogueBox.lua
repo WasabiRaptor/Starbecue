@@ -319,6 +319,7 @@ function sbq.checkVoreTypeActive(voreType)
 end
 
 function sbq.checkVoreButtonsEnabled()
+	if not sbq.sbqData then return end
 	for i, voreType in pairs(sbq.config.voreTypes or {}) do
 		local button = _ENV[voreType]
 		if (sbq.prevDialogueBranch or {}).hideVoreButtons then
@@ -414,9 +415,7 @@ end
 function sbq.checkInfusionActionActive(location, locations)
 	if (not sbq.settings) then return "hidden" end
 	local locationData = sbq.sbqData.locations[location]
-	if not locationData
-	or not locationData.infusion
-	then return "hidden" end
+	if not locationData or not locationData.infusion then return "hidden" end
 	local currentData = player.getProperty( "sbqCurrentData") or {}
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if (sbq.settings[(locationData.infusionSetting or "infusion") .. "Pred"]) and preyEnabled.preyEnabled and

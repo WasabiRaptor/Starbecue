@@ -153,7 +153,7 @@ function sbq.effectsPanel()
 
 			local n1 = sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0
 			local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or locationData.max or 1
-			local notches = locationData.sizes.struggle
+			local notches = (locationData.sizes or {}).struggle
 			if not notches then
 				notches = {}
 				for i = n1, n2 do
