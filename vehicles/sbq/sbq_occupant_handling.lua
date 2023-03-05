@@ -399,7 +399,7 @@ function sbq.updateOccupants(dt)
 				sbq.occupant[i].cumulative[location .. "Time"] = (sbq.occupant[i].cumulative[location .. "Time"] or 0) + dt
 
 				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
-				sbq.occupants[sidedLocation] = sbq.occupants[sidedLocation] + size
+				sbq.occupants[sidedLocation] = (sbq.occupants[sidedLocation] or 0) + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
 
 				massMultiplier = sbq.sbqData.locations[location].mass or 0

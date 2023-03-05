@@ -8,6 +8,7 @@ function init()
 	sbq.timer("despawn", 10, function()
 		status.dead = true
 		monster.setDropPool(nil)
+		status.modifyResource("health", -100)
 	end)
 	sbq.timer("say", 0, function()
 		sbq.say(config.getParameter("sayLine"), config.getParameter("sayTags"), config.getParameter("sayImagePortait"), config.getParameter("sayEmote"), config.getParameter("sayAppendName"))
