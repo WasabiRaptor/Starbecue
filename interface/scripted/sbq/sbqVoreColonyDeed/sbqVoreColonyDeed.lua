@@ -529,9 +529,9 @@ else
 			local success, speciesFile = pcall(root.assetJson, ("/species/"..(item.parameters.npcArgs.npcSpecies or "")..".species"))
 			if not success then return false end
 			if item.parameters.npcArgs.npcParam.wasPlayer then return false end
-			if item.parameters.npcArgs.uniqueId then
+			if ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId then
 				for i, tenant in ipairs((sbq.storage.occupier or {}).tenants or {}) do
-					if tenant.uniqueId == item.parameters.npcArgs.uniqueId then return false end
+					if tenant.uniqueId == ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId then return false end
 				end
 			end
 			return true

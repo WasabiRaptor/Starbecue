@@ -40,7 +40,7 @@ state.stand.moveToLocation = sbq.moveToLocation
 state.stand.switchBalls = sbq.switchBalls
 
 function state.stand.cockEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {glueslow = { power = 5 + (sbq.lounging[args.id].progressBar), source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args, tconfig.releaseEffects or {glueslow = { power = 5 + ((sbq.lounging[args.id] or {}).progressBar or 0), source = entity.id()}}, {}, tconfig.voreType )
 end
 
 function state.stand.breastVore(args, tconfig)

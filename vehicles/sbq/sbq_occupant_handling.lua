@@ -480,8 +480,8 @@ function sbq.setOccupantTags()
 		sbq.occupantsVisualSize[location] = sbq.locationVisualSize(location)
 		local npcArgs = ((sbq.getLocationSetting(location, "InfusedItem", {})).parameters or {}).npcArgs
 		if data.infusion and sbq.settings[data.infusionSetting.."Pred"] and npcArgs and (((npcArgs or {}).npcParam or {}).identity or {}).name then
-			if sbq.randomTimer(location .. "InfusedStruggleDialogue", 15, 60) then
-				local uniqueId = (npcArgs.scriptConfig or {}).uniqueId
+			if sbq.randomTimer(location .. "InfusedStruggleDialogue", 15, 60) and sbq.checkSettings(data.checkSettings) then
+				local uniqueId = ((npcArgs.npcParam or {}).scriptConfig or {}).uniqueId
 				if not uniqueId then return end
 				local eid = world.loadUniqueEntity(uniqueId)
 				if (not eid) or (sbq.lounging[eid]) or (not entity.entityInSight(eid)) then

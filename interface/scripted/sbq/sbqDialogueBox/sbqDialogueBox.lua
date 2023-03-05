@@ -347,7 +347,7 @@ function sbq.checkInfusionActionButtonsEnabled()
 	local bellyInfusionActive = sbq.checkInfusionActionActive("belly", locationTFs.belly )
 	local ballsInfusionActive = sbq.checkInfusionActionActive("balls", locationTFs.balls or {"balls","shaft","womb"})
 	local cockInfusionActive = sbq.checkInfusionActionActive("shaft", locationTFs.shaft or {"balls","shaft","womb"})
-	local breastsInfusionActive = sbq.checkInfusionActionActive("breasts", locationTFs.breasts)
+	local breastsInfusionActive = sbq.checkInfusionActionActive("breasts", locationTFs.breasts or {"belly", "breasts"})
 	local pussyInfusionActive = sbq.checkInfusionActionActive("womb", locationTFs.womb or {"balls","shaft","womb"} )
 
 	sbq.infusionButtonSetup(bellyInfusionActive, bellyInfusion, "bellyInfusion")
@@ -358,8 +358,10 @@ function sbq.checkInfusionActionButtonsEnabled()
 
 	letOut:setVisible(alreadyInfused)
 	if alreadyInfused and changeBackImage then
-		--changeBack:setImage(changeBackImage)
-		--changeBack:setVisible(true)
+		changeBack:setImage(changeBackImage)
+		changeBack:setVisible(true)
+	else
+		changeBack:setVisible(false)
 	end
 
 	sbq.infusionButtonSetup((ballsInfusionActive ~= "hidden") and (cockInfusionActive ~= "hidden") and cockInfusionActive or "hidden", shaftBallsInfusion, "shaftBallsInfusion")
@@ -430,11 +432,11 @@ function sbq.checkInfusionActionActive(location, locations)
 			end
 		end
 		if not playerLocation then return "hidden" end
-		if not locations then
+		if (playerLocation == location) or not locations then
 			if playerLocation ~= location then return "otherLocation" end
 			local npcArgs = ((sbq.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs
 			if npcArgs then
-				local uniqueId = (npcArgs.scriptConfig or {}).uniqueId
+				local uniqueId = ((npcArgs.npcParam or {}).scriptConfig or {}).uniqueId
 				if uniqueId and world.entityUniqueId(player.id()) == uniqueId then
 					return "youreAlreadyInfused"
 				end
@@ -448,10 +450,6 @@ function sbq.checkInfusionActionActive(location, locations)
 			if playerLocation == location then
 				local npcArgs = ((sbq.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs
 				if npcArgs then
-					local uniqueId = (npcArgs.scriptConfig or {}).uniqueId
-					if uniqueId and world.entityUniqueId(player.id()) == uniqueId then
-						return "youreAlreadyInfused"
-					end
 					if isInfused then return "alreadyInfused" end
 					return "requestLayer"
 				end
@@ -718,4 +716,7 @@ function letOut:onClick()
 end
 
 function changeBack:onClick()
+	sbq.addRPC(world.sendEntityMessage(sbq.data.occupantHolder, "changeBack", player.id()),function ()
+		world.sendEntityMessage(pane.sourceEntity(), "changeBack", world.entityUniqueId(player.id()))
+	end)
 end

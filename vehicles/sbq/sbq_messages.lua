@@ -336,3 +336,20 @@ message.setHandler( "setInfusedCharacter", function(_,_, location, item, eid, pr
 	sbq.lounging[eid].flags.infused = true
 	sbq.lounging[eid].side = ""
 end)
+
+message.setHandler("changeBack", function(_, _, eid)
+	if not sbq.lounging[eid] then return end
+	local location = sbq.lounging[eid].location
+	sbq.lounging[eid].flags.infused = false
+	sbq.lounging[eid].force = true
+	if sbq.sbqData.locations[location].sided then
+		local sides = { "L", "R" }
+		local location, side = sbq.getSidedLocationWithSpace(location, sbq.lounging[eid].size)
+		if location then
+			sbq.lounging[eid].side = side
+		else
+			sbq.lounging[eid].side = sides[math.random(#sides)]
+		end
+	end
+	sbq.letout(eid)
+end)

@@ -582,11 +582,51 @@ function sbq.getItemPreySettings(item)
 	local success, npcConfig = pcall(root.npcConfig, (((item.parameters or {}).npcArgs or {}).npcType))
 	if not success then npcConfig = {} end
 
+	local registry = root.assetJson("/humanoid/sbqDataRegistry.config")
+	local path = registry[species] or "/humanoid/sbqData.config"
+	if path:sub(1,1) ~= "/" then
+		path = "/humanoid/"..species.."/"..path
+	end
+	local speciesConfig = root.assetJson(path)
+	local sbqData
+	if type(speciesConfig.sbqData) == "table" then
+		sbqData = speciesConfig.sbqData
+	end
+
+	local mergeConfigs = sbqData.merge or {}
+	local configs = { sbqData }
+	while type(mergeConfigs[#mergeConfigs]) == "string" do
+		local insertPos = #mergeConfigs
+		local newConfig = root.assetJson(mergeConfigs[#mergeConfigs]).sbqData
+		for i = #(newConfig.merge or {}), 1, -1 do
+			table.insert(mergeConfigs, insertPos, newConfig.merge[i])
+		end
+
+		table.insert(configs, 1, newConfig)
+
+		table.remove(mergeConfigs, #mergeConfigs)
+	end
+	local scripts = {}
+	local finalConfig = {}
+	for i, config in ipairs(configs) do
+		finalConfig = sb.jsonMerge(finalConfig, config)
+		for j, script in ipairs(config.scripts or {}) do
+			table.insert(scripts, script)
+		end
+	end
+
+
 	return sb.jsonMerge(
 		sb.jsonMerge(
-			((((npcConfig or {}).statusControllerSettings or {}).statusProperties or {}).sbqPreyEnabled or {}),
-			(((((item.parameters.npcArgs or {}).npcParam or {}).statusControllerSettings or {}).statusProperties or {}).sbqPreyEnabled or {})
+			sb.jsonMerge(
+				sb.jsonMerge(
+					sbq.config.defaultPreyEnabled.npc,
+					((((npcConfig or {}).statusControllerSettings or {}).statusProperties or {}).sbqPreyEnabled or {})
+				),
+				(((((item.parameters.npcArgs or {}).npcParam or {}).statusControllerSettings or {}).statusProperties or {}).sbqPreyEnabled or {})
+			),
+			(((npcConfig or {}).scriptConfig or {}).sbqOverridePreyEnabled or {})
 		),
-		(((npcConfig or {}).scriptConfig or {}).sbqOverridePreyEnabled or {})
+		(finalConfig.overridePreyEnabled or {})
 	)
 end

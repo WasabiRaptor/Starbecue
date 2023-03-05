@@ -241,15 +241,33 @@ function init()
 		world.sendEntityMessage(entity.id(), "sbqDigestStore", location, (((((alreadyInfused or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId, alreadyInfused)
 		storage.settings[location .. "InfusedItem"] = itemDrop
 
-		local index = config.getParameter("tenantIndex")
-		if storage.respawner and index ~= nil then
-			world.sendEntityMessage(storage.respawner, "sbqSaveSettings", storage.settings or {}, index )
-		end
+		sbq.saveSettingsToDeed()
 
 		local current = status.statusProperty("sbqCurrentData") or {}
 		if current and type(current.id) == "number" and world.entityExists(current.id) then
 			world.sendEntityMessage(current.id, "setInfusedCharacter", location, storage.settings[location.."InfusedItem"], preyId, primaryLocation )
 		end
+	end)
+
+	message.setHandler("changeBack", function(_, _, uniqueId, locations)
+		if not uniqueId then return end
+		if not locations then
+			for location, data in pairs(sbq.sbqData.locations) do
+				local uuid = (((((storage.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId
+				if uuid == uniqueId then
+					storage.settings[location .. "InfusedItem"] = nil
+				end
+			end
+		else
+			for i, location in ipairs(locations) do
+				local uuid = (((((storage.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId
+				if uuid == uniqueId then
+					storage.settings[location .. "InfusedItem"] = nil
+				end
+			end
+		end
+		sbq.saveSettingsToDeed()
+		sbq.saveSettingsToOccupantHolder()
 	end)
 end
 
@@ -340,9 +358,14 @@ function interact(args)
 	else
 		local location = sbq.getOccupantArg(args.sourceId, "location")
 		if location ~= nil then
+			local flags = sbq.getOccupantArg(args.sourceId, "flags") or {}
 			dialogueBoxData.dialogueTreeStart = { "struggle" }
 			dialogueBoxData.settings.location = location
 			dialogueBoxData.settings.playerPrey = true
+			if flags.infused then
+				dialogueBoxData.settings.predator = npc.species()
+				dialogueBoxData.dialogueTreeStart = { "infusedTease" }
+			end
 		end
 		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
 	end
@@ -356,6 +379,19 @@ function sbq.getOccupantArg(id, arg)
 		end
 	end
 end
+
+function sbq.saveSettingsToDeed()
+	local index = config.getParameter("tenantIndex")
+	if storage.respawner and index ~= nil then
+		world.sendEntityMessage(storage.respawner, "sbqSaveSettings", storage.settings or {}, index )
+	end
+end
+function sbq.saveSettingsToOccupantHolder()
+	if type(sbq.occupantHolder) == "number" and world.entityExists(sbq.occupantHolder) then
+		world.sendEntityMessage(sbq.occupantHolder, "settingsMenuSet", storage.settings)
+	end
+end
+
 
 function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree, appendName)
 	settings.race = npc.species()
@@ -443,15 +479,25 @@ end
 function sbq.randomizeTenantSettings()
 	local randomizeSettings = sbq.checkSpeciesRootTable(config.getParameter("sbqRandomizeSettings") or {})
 	for setting, values in pairs(randomizeSettings) do
-		local value = values[math.random(#values)]
-		storage.settings[setting] = value
-		sbq.autoSetSettings(setting, value)
+		if type(values) == "table" then
+			local value = values[math.random(#values)]
+			storage.settings[setting] = value
+			sbq.autoSetSettings(setting, value)
+		end
+	end
+	for setting, value in pairs(randomizeSettings) do
+		if type(value) == "string" then
+			storage.settings[setting] = storage.settings[value]
+			sbq.autoSetSettings(setting, storage.settings[setting])
+		end
 	end
 
 	local randomizePreySettings = sbq.checkSpeciesRootTable(config.getParameter("sbqRandomizePreySettings") or {})
 	local preySettings = status.statusProperty("sbqPreyEnabled") or {}
 	for setting, values in pairs(randomizePreySettings) do
-		preySettings[setting] = values[math.random(#values)]
+		if type(values) == "table" then
+			preySettings[setting] = values[math.random(#values)]
+		end
 	end
 	status.setStatusProperty("sbqPreyEnabled", preySettings)
 	status.clearPersistentEffects("digestImmunity")

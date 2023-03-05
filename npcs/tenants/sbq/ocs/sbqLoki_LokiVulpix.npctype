@@ -1773,7 +1773,8 @@
 			"impossibleEscape": false,
 			"hammerspace" : true,
 
-			"shaftInfusedVisual" : true,
+			"wombInfusedSize" : false,
+			"bellyInfusedSize" : false,
 
 			// predator prefrences
 			"oralVorePred" : true,
@@ -1784,25 +1785,15 @@
 			"analVorePred" : false,
 			"unbirthPred" : false,
 			"cockVorePred" : false,
-			"breastVorePred" : false
+			"breastVorePred" : false,
+
+			"cockInfusionPred" : true,
+			"pussyInfusionPred" : true,
+			"bellyInfusionPred" : true,
+			"breastsInfusionPred" : true
 		},
 		"sbqRandomizeSettings" : {
-			"ballsInfusedItem" : [
-				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
-					"preySize" : 1,
-					"shortdescription" : "Auroria's Essence",
-					"npcArgs" : {
-						"npcSpecies" : "sbqAuroria_Auroria",
-						"npcType" : "sbqAuroria_Auroria",
-						"npcParam" : {
-							"identity" : {},
-							"scriptConfig" : {
-								"uniqueId" : "sbqAuroria_Auroria"
-							}
-						}
-					}
-				}}
-			],
+			"ballsInfusedItem" : "shaftInfusedItem",
 			"shaftInfusedItem" : [
 				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
 					"preySize" : 1,
@@ -1832,40 +1823,6 @@
 							"scriptConfig" : {
 								"isOC" : true,
 								"uniqueId" : "sbqOrpheus_Auroria"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": true,
-
-										"analVore": true,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
 							}
 						}
 					},
@@ -1874,6 +1831,20 @@
 						"baseColorMap" : {
 							"primary" : ["306298","4681C1","5B97D8"],
 							"secondary" : ["6D337A","8E499E","A35CB4"]
+						}
+					}
+				}},
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"preySize" : 1,
+					"shortdescription" : "Auroria's Essence",
+					"npcArgs" : {
+						"npcSpecies" : "sbqAuroria_Auroria",
+						"npcType" : "sbqAuroria_Auroria",
+						"npcParam" : {
+							"identity" : {},
+							"scriptConfig" : {
+								"uniqueId" : "sbqAuroria_Auroria"
+							}
 						}
 					}
 				}},
@@ -1891,40 +1862,6 @@
 							"scriptConfig" : {
 								"isOC" : true,
 								"uniqueId" : "sbqClaire_FFWizard"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": true,
-
-										"analVore": true,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
 							}
 						}
 					},
@@ -1950,40 +1887,6 @@
 							"scriptConfig" : {
 								"isOC" : true,
 								"uniqueId" : "sbqAstira_LokiVulpix"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": false,
-
-										"analVore": true,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
 							}
 						}
 					},
@@ -2009,40 +1912,6 @@
 							"scriptConfig" : {
 								"isOC" : true,
 								"uniqueId" : "sbqKaori_Fevix"
-							},
-							"statusControllerSettings" : {
-								"statusProperties" : {
-									"sbqDidVornyConvertCheck" : true,
-									"sbqPreyEnabled" : {
-										"preyEnabled": true,
-
-										"digestAllow": true,
-										"cumDigestAllow": true,
-										"milkDigestAllow": true,
-
-										"transformAllow": true,
-										"genderswapAllow": true,
-
-										"eggAllow": true,
-
-										"held": true,
-
-										"oralVore": true,
-										"tailVore": true,
-										"absorbVore": true,
-										"navelVore": true,
-
-										"analVore": false,
-										"unbirth": true,
-										"cockVore": true,
-										"breastVore": true,
-
-										"bellyInfusion" : true,
-										"cockInfusion" : true,
-										"pussyInfusion" : true,
-										"breastsInfusion" : true
-									}
-								}
 							}
 						}
 					},
@@ -2066,6 +1935,59 @@
 							"scriptConfig" : {
 								"uniqueId" : "sbqSandy_Fevix"
 							}
+						}
+					}
+				}},
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Jemmy's Essence",
+					"description" : "Loki found this umbreon wandering around her territory... she found a new home for him~",
+					"preySize" : 1,
+					"npcArgs" : {
+						"npcSpecies" : "sbqJemmy_Jemmysponz",
+						"npcType" : "sbqJemmy_Jemmysponz",
+						"npcParam" : {
+							"identity" : {
+								"name" : "Jemmy"
+							},
+							"scriptConfig" : {
+								"isOC" : true,
+								"uniqueId" : "sbqJemmy_Jemmysponz"
+							}
+						}
+					},
+					"speciesFile": {
+						"speciesAnimOverride" : "speciesAnimOverride.config",
+						"baseColorMap" : {
+							"primary" : ["501178","6d229b","8431b5"],
+							"secondary" : ["88a0f6","bbd2fe","cce4ff"],
+							"flesh" : ["88a0f6","bbd2fe","cce4ff"]
+						}
+					}
+				}}
+			],
+			"wombInfusedItem" : [
+				{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+					"shortdescription" : "Astira's Essence",
+					"description" : "Asti would never admit it, but she loves getting stolen, especially if the Liepard gets turned into a dripping pussy~",
+					"preySize" : 1,
+					"npcArgs" : {
+						"npcSpecies" : "sbqAstira_LokiVulpix",
+						"npcType" : "sbqAstira_LokiVulpix",
+						"npcParam" : {
+							"identity" : {
+								"name" : "Astira"
+							},
+							"scriptConfig" : {
+								"isOC" : true,
+								"uniqueId" : "sbqAstira_LokiVulpix"
+							}
+						}
+					},
+					"speciesFile": {
+						"speciesAnimOverride" : "speciesAnimOverride.config",
+						"baseColorMap" : {
+							"primary" : ["401a4f","471f55","552764"],
+							"secondary" : ["af72b4","bd80c1","ce97d1"]
 						}
 					}
 				}}
