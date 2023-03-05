@@ -436,6 +436,21 @@ end
 sbq.expandQueue = {}
 sbq.shrinkQueue = {}
 
+function sbq.infusedStruggleDialogue(location, data, npcArgs)
+	if (sbq.totalTimeAlive > 0.5) then
+		if (math.random() > 0.5) then
+			local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
+			world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
+				parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
+				sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
+			})
+		else
+			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, {"infusedTease"}, true )
+		end
+	end
+	sbq.doLocationStruggle(location, data)
+end
+
 function sbq.setOccupantTags()
 	for location, occupancy in pairs(sbq.occupants) do
 		sbq.occupants[location] = sbq.occupants[location] + (sbq.getLocationSetting(location, "VisualMinAdditive") and sbq.getLocationSetting(location, "VisualMin") or 0)
@@ -466,18 +481,12 @@ function sbq.setOccupantTags()
 		local npcArgs = ((sbq.getLocationSetting(location, "InfusedItem", {})).parameters or {}).npcArgs
 		if data.infusion and sbq.settings[data.infusionSetting.."Pred"] and npcArgs and (((npcArgs or {}).npcParam or {}).identity or {}).name then
 			if sbq.randomTimer(location .. "InfusedStruggleDialogue", 15, 60) then
-				if (sbq.totalTimeAlive > 0.5) then
-					if (math.random() > 0.5) then
-						local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
-						world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
-							parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
-							sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
-						})
-					else
-						world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, {"infusedTease"}, true )
-					end
+				local uniqueId = (npcArgs.scriptConfig or {}).uniqueId
+				if not uniqueId then return end
+				local eid = world.loadUniqueEntity(uniqueId)
+				if (not eid) or (sbq.lounging[eid]) or (not entity.entityInSight(eid)) then
+					sbq.infusedStruggleDialogue(location, data, npcArgs)
 				end
-				sbq.doLocationStruggle(location, data)
 			end
 		end
 
