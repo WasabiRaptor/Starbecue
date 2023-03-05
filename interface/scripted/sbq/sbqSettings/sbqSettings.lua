@@ -51,8 +51,8 @@ function sbq.getInitialData()
 	sbq.sbqCurrentData.species = sbq.sbqCurrentData.species or "sbqOccupantHolder"
 end
 
-function sbq.getPlayerOccupantHolderData()
-	sbq.getSpeciesConfig(player.species(), sbq.sbqSettings.global)
+function sbq.getOccupantHolderData(settings)
+	sbq.getSpeciesConfig(player.species(), settings or sbq.sbqSettings.global)
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
 	sbq.speciesFile = root.assetJson( "/species/"..(sbq.speciesConfig.species)..".species" )
 end
@@ -64,10 +64,10 @@ function sbq.drawLocked(w, icon)
 	c:drawImageDrawable(icon, pos, 1)
 end
 
-function sbq.getPlayerSpeciesAndSettings()
+function sbq.getSpeciesAndSettings()
 	if sbq.sbqCurrentData.species ~= nil then
 		if sbq.sbqCurrentData.species == "sbqOccupantHolder" then
-			sbq.getPlayerOccupantHolderData()
+			sbq.getOccupantHolderData()
 		else
 			sbq.predatorConfig = root.assetJson("/vehicles/sbq/" .. sbq.sbqCurrentData.species .. "/" .. sbq.sbqCurrentData.species .. ".vehicle").sbqData or {}
 			for location, data in pairs(sbq.predatorConfig.locations or {}) do
@@ -76,7 +76,7 @@ function sbq.getPlayerSpeciesAndSettings()
 		end
 		sbq.predatorSettings = sb.jsonMerge(sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.sbqSettings[sbq.sbqCurrentData.species] or {}), sbq.globalSettings)
 	else
-		sbq.getPlayerOccupantHolderData()
+		sbq.getOccupantHolderData()
 		sbq.predatorSettings = sb.jsonMerge(sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.sbqSettings.sbqOccupantHolder or {}), sbq.globalSettings)
 	end
 	sbq.overrideSettings = sbq.predatorConfig.overrideSettings or {}
@@ -88,7 +88,7 @@ function init()
 
 	sbq.globalSettings = sb.jsonMerge(sbq.config.globalSettings, sbq.sbqSettings.global)
 
-	sbq.getPlayerSpeciesAndSettings()
+	sbq.getSpeciesAndSettings()
 
 	sbq.effectsPanel()
 

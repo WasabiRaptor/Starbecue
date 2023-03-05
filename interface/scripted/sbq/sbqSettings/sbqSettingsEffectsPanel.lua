@@ -42,392 +42,362 @@ function sbq.effectsPanel()
 	end
 
 	for i, location in ipairs(sbq.predatorConfig.listLocations or {}) do
-		local locationData = sbq.predatorConfig.locations[location]
-		if type(locationData) == "table" then
-			sbq.locationDefaultSettings(locationData, location)
+		local tab = sbq.updateLocationTab(location)
+		if i == 1 then
+			sbq.selectedLocationTab = tab
+		end
+	end
+end
+sbq.locationTabs = {}
+function sbq.updateLocationTab(location)
+	local locationData = sbq.predatorConfig.locations[location]
+	if type(locationData) == "table" then
+		sbq.locationDefaultSettings(locationData, location)
 
-			local requiresInfusionVisible = true
-			if locationData.requiresInfusion then
-				requiresInfusionVisible = sbq.infusionSlotAccepts(locationData, sbq.predatorSettings[location .. "InfusedItem"])
-			end
 
-			local mainEffectLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible and locationData.selectEffect or false, expandMode = {1,0}, children = {
-				{ type = "layout", mode = "horizontal", spacing = 0, expandMode = {1,0}, size = {100, 20}, children = {
+		local requiresInfusionVisible = true
+		if locationData.requiresInfusion then
+			requiresInfusionVisible = sbq.infusionSlotAccepts(locationData, sbq.predatorSettings[location .. "InfusedItem"])
+		end
+
+		local mainEffectLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible and locationData.selectEffect or false, expandMode = {1,0}, children = {
+			{ type = "layout", mode = "horizontal", spacing = 0, expandMode = {1,0}, size = {100, 20}, children = {
+				{
 					{
 						{
-							{
-								type = "checkBox", id = location.."None", checked = sbq.predatorSettings[location.."EffectSlot"] == "none" or sbq.predatorSettings[location.."EffectSlot"] == nil,
-								radioGroup = location.."EffectGroup", value = "none",
-								visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "none" ) or (sbq.overrideSettings[location.."NoneEnable"] == false) or (sbq.overrideSettings.noneEnable == false) or (locationData.none == false))) or false,
-								toolTip = ((locationData.none or {}).toolTip or "No effects will be applied to prey.")
-							},{
-								type = "checkBox", id = location.."Heal", checked = sbq.predatorSettings[location.."EffectSlot"] == "heal",
-								radioGroup = location.."EffectGroup", value = "heal",
-								visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "heal" ) or (sbq.overrideSettings[location.."HealEnable"] == false) or (sbq.overrideSettings.healEnable == false) or (locationData.heal == false))) or false,
-								toolTip = ((locationData.heal or {}).toolTip or "Prey within will be healed, boosted by your attack power.")
-							},{
-								type = "checkBox", id = location.."SoftDigest", checked = sbq.predatorSettings[location.."EffectSlot"] == "softDigest",
-								radioGroup = location.."EffectGroup", value = "softDigest",
-								visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "softDigest") or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false) or (locationData.softDigest == false))) or false,
-								toolTip = ((locationData.softDigest or {}).toolTip or "Prey within will be digested, boosted by your attack power.\nBut they will always retain 1HP.")
-							},{
-								type = "checkBox", id = location.."Digest", checked = sbq.predatorSettings[location.."EffectSlot"] == "digest",
-								radioGroup = location.."EffectGroup", value = "digest",
-								visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= "digest") or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false) or (locationData.digest == false))) or false,
-								toolTip = ((locationData.digest or {}).toolTip or "Prey within will be digested, boosted by your attack power.")
-							},
-						}, {}--[[,
-						{
-							{
-								type = "checkBox", id = location.."NoneEnable", toolTip = "Allows the NPC to choose to have no effect.",
-								visible = sbq.deedUI and (locationData.selectEffect and not ((sbq.overrideSettings[location.."EffectSlot"] ~= nil) or (sbq.overrideSettings[location.."NoneEnable"] == false) or (sbq.overrideSettings.noneEnable == false))) or false,
-							},
-							{
-								type = "checkBox", id = location.."HealEnable",  toolTip = "Allows the NPC to choose to heal.",
-								visible = sbq.deedUI and (locationData.selectEffect and not ((sbq.overrideSettings[location.."EffectSlot"] ~= nil) or (sbq.overrideSettings[location.."HealEnable"] == false) or (sbq.overrideSettings.healEnable == false))) or false,
-							},
-							{
-								type = "checkBox", id = location.."SoftDigestEnable",  toolTip = "Allows the NPC to choose to soft digest.",
-								visible = sbq.deedUI and (locationData.selectEffect and not ((sbq.overrideSettings[location.."EffectSlot"] ~= nil) or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false))) or false,
-							},
-							{
-								type = "checkBox", id = location.."DigestEnable",  toolTip = "Allows the NPC to choose to digest.",
-								visible = sbq.deedUI and (locationData.selectEffect and not ((sbq.overrideSettings[location.."EffectSlot"] ~= nil) or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false))) or false,
-							},
-						}]]
-					},
-					{type = "spacer", size = 1},
-					{type = "label", align = "center", id = location.."EffectLabel", text = (sbq.config.bellyStatusEffectNames[sbq.getStatusEffectSlot(location, locationData)] or "No Effect")},
-				}}
-			} }
-
-			local extraEffectToggles = {}
-			local extraEffectsVisible = false
-			for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
-				local toggleData = locationData[extraEffect]
-				if toggleData then
-					extraEffectsVisible = extraEffectsVisible or ((locationData[extraEffect] and not (sbq.overrideSettings[location..extraEffect] ~= nil)) or false)
-
-					sbq.predatorSettings[location..extraEffect] = sbq.predatorSettings[location..extraEffect] or false
-					table.insert(extraEffectToggles,{
-						type = "checkBox", id = location..extraEffect, checked = sbq.predatorSettings[location..extraEffect],
-						visible = (locationData[extraEffect] and not (sbq.overrideSettings[location..extraEffect] ~= nil)) or false,
-						toolTip = ((locationData[extraEffect] or {}).toolTip or "Prey within will be transformed.")
-					})
-				end
-			end
-			local extraEffectLayout = { type = "panel", style = "flat", expandMode = {1,0}, visible = requiresInfusionVisible and extraEffectsVisible, children = {
-				{ type = "layout", mode = "vertical", spacing = 0, children = {
-					extraEffectToggles
-				}}
-			} }
-			local digestDropsVisible = (
-				((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "softDigest") or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false) or (locationData.softDigest == false))) or false)
-				or ((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= "digest") or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false) or (locationData.digest == false))) or false)
-			)
-			local otherLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,0}, children = {
-				{ type = "layout", mode = "vertical", spacing = 0, children = {
-					{
-						{
-							type = "checkBox", id = location.."PredDigestDrops", checked = sbq.globalSettings[location.."PredDigestDrops"],
-							toolTip = "Prey may drop an item upon digestion.", visible = digestDropsVisible
+							type = "checkBox", id = location.."None", checked = sbq.predatorSettings[location.."EffectSlot"] == "none" or sbq.predatorSettings[location.."EffectSlot"] == nil,
+							radioGroup = location.."EffectGroup", value = "none",
+							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "none" ) or (sbq.overrideSettings[location.."NoneEnable"] == false) or (sbq.overrideSettings.noneEnable == false) or (locationData.none == false))) or false,
+							toolTip = ((locationData.none or {}).toolTip or "No effects will be applied to prey.")
+						},{
+							type = "checkBox", id = location.."Heal", checked = sbq.predatorSettings[location.."EffectSlot"] == "heal",
+							radioGroup = location.."EffectGroup", value = "heal",
+							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "heal" ) or (sbq.overrideSettings[location.."HealEnable"] == false) or (sbq.overrideSettings.healEnable == false) or (locationData.heal == false))) or false,
+							toolTip = ((locationData.heal or {}).toolTip or "Prey within will be healed, boosted by your attack power.")
+						},{
+							type = "checkBox", id = location.."SoftDigest", checked = sbq.predatorSettings[location.."EffectSlot"] == "softDigest",
+							radioGroup = location.."EffectGroup", value = "softDigest",
+							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "softDigest") or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false) or (locationData.softDigest == false))) or false,
+							toolTip = ((locationData.softDigest or {}).toolTip or "Prey within will be digested, boosted by your attack power.\nBut they will always retain 1HP.")
+						},{
+							type = "checkBox", id = location.."Digest", checked = sbq.predatorSettings[location.."EffectSlot"] == "digest",
+							radioGroup = location.."EffectGroup", value = "digest",
+							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= "digest") or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false) or (locationData.digest == false))) or false,
+							toolTip = ((locationData.digest or {}).toolTip or "Prey within will be digested, boosted by your attack power.")
 						},
-						{ type = "label", text = "Digest Drops", visible = digestDropsVisible }
-					},
-					{
-						{
-							type = "checkBox", id = location.."Sounds", checked = sbq.globalSettings[location.."Sounds"],
-							toolTip = "Will emit gurgling sounds when prey is within."
-						},
-						{ type = "label", text = "Gurgling Sounds" }
-					},
-					{
-						{
-							type = "checkBox", id = location.."StruggleSounds", checked = sbq.globalSettings[location.."StruggleSounds"],
-							toolTip = "Will emit sounds when a prey struggles."
-						},
-						{ type = "label", text = "Struggle Sounds" }
-					}
-				}}
+					}, {}
+				},
+				{type = "spacer", size = 1},
+				{type = "label", align = "center", id = location.."EffectLabel", text = (sbq.config.bellyStatusEffectNames[sbq.getStatusEffectSlot(location, locationData)] or "No Effect")},
 			}}
+		} }
 
-			local n1 = sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0
-			local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or locationData.max or 1
-			local notches = (locationData.sizes or {}).struggle
-			if not notches then
-				notches = {}
-				for i = n1, n2 do
-					table.insert(notches, i)
-				end
+		local extraEffectToggles = {}
+		local extraEffectsVisible = false
+		for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
+			local toggleData = locationData[extraEffect]
+			if toggleData then
+				extraEffectsVisible = extraEffectsVisible or ((locationData[extraEffect] and not (sbq.overrideSettings[location..extraEffect] ~= nil)) or false)
+
+				sbq.predatorSettings[location..extraEffect] = sbq.predatorSettings[location..extraEffect] or false
+				table.insert(extraEffectToggles,{
+					type = "checkBox", id = location..extraEffect, checked = sbq.predatorSettings[location..extraEffect],
+					visible = (locationData[extraEffect] and not (sbq.overrideSettings[location..extraEffect] ~= nil)) or false,
+					toolTip = ((locationData[extraEffect] or {}).toolTip or "Prey within will be transformed.")
+				})
 			end
-			local min = sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0
-			local max = sbq.overrideSettings[location .. "VisualMax"] or locationData.maxVisual or locationData.max or 1
+		end
+		local extraEffectLayout = { type = "panel", style = "flat", expandMode = {1,0}, visible = requiresInfusionVisible and extraEffectsVisible, children = {
+			{ type = "layout", mode = "vertical", spacing = 0, children = {
+				extraEffectToggles
+			}}
+		} }
+		local digestDropsVisible = (
+			((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "softDigest") or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false) or (locationData.softDigest == false))) or false)
+			or ((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= "digest") or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false) or (locationData.digest == false))) or false)
+		)
+		local otherLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,0}, children = {
+			{ type = "layout", mode = "vertical", spacing = 0, children = {
+				{
+					{
+						type = "checkBox", id = location.."PredDigestDrops", checked = sbq.globalSettings[location.."PredDigestDrops"],
+						toolTip = "Prey may drop an item upon digestion.", visible = digestDropsVisible
+					},
+					{ type = "label", text = "Digest Drops", visible = digestDropsVisible }
+				},
+				{
+					{
+						type = "checkBox", id = location.."Sounds", checked = sbq.globalSettings[location.."Sounds"],
+						toolTip = "Will emit gurgling sounds when prey is within."
+					},
+					{ type = "label", text = "Gurgling Sounds" }
+				},
+				{
+					{
+						type = "checkBox", id = location.."StruggleSounds", checked = sbq.globalSettings[location.."StruggleSounds"],
+						toolTip = "Will emit sounds when a prey struggles."
+					},
+					{ type = "label", text = "Struggle Sounds" }
+				}
+			}}
+		}}
 
-			local modifiersLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,0}, children = {
-				{ type = "layout", mode = "vertical", spacing = 0, children = {
-					{type = "label", text = "Size Modifiers", align = "center"},
-					{
-						{ spacing = -1 },
-						{ type = "checkBox", id = location .. "VisualMinAdditive", checked = sbq.predatorSettings[location .. "VisualMinAdditive"], toolTip = "Whether the Minimum actually counts towards the fill level." },
-							{ type = "slider", id = location .. "VisualSize", notches = notches,
-								handles = { { value = math.max(min, sbq.predatorSettings[location .. "VisualMin"] or min),
-									toolTip = "Minimum Visual Size" },
-									{ value = math.min(max, sbq.predatorSettings[location .. "VisualMax"] or max), toolTip = "Maximum Visual Size" } } },
-						{ type = "textBox", align = "center", id = location .. "Multiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Fill Level Multiplier"},
+		local n1 = sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0
+		local n2 = sbq.overrideSettings[location.."VisualMax"] or locationData.maxVisual or locationData.max or 1
+		local notches = (locationData.sizes or {}).struggle
+		if not notches then
+			notches = {}
+			for i = n1, n2 do
+				table.insert(notches, i)
+			end
+		end
+		local min = sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0
+		local max = sbq.overrideSettings[location .. "VisualMax"] or locationData.maxVisual or locationData.max or 1
+
+		local modifiersLayout = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {1,0}, children = {
+			{ type = "layout", mode = "vertical", spacing = 0, children = {
+				{type = "label", text = "Size Modifiers", align = "center"},
+				{
+					{ spacing = -1 },
+					{ type = "checkBox", id = location .. "VisualMinAdditive", checked = sbq.predatorSettings[location .. "VisualMinAdditive"], toolTip = "Whether the Minimum actually counts towards the fill level." },
+						{ type = "slider", id = location .. "VisualSize", notches = notches,
+							handles = { { value = math.max(min, sbq.predatorSettings[location .. "VisualMin"] or min),
+								toolTip = "Minimum Visual Size" },
+								{ value = math.min(max, sbq.predatorSettings[location .. "VisualMax"] or max), toolTip = "Maximum Visual Size" } } },
+					{ type = "textBox", align = "center", id = location .. "Multiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Fill Level Multiplier"},
+				},
+				{
+					{ type = "checkBox", id = location .. "Hammerspace",
+						checked = sbq.predatorSettings[location .. "Hammerspace"],
+						toolTip = "This location will ignore the size limit.",
+						visible = locationData.hammerspace or false
 					},
+					{ type = "label", text = "Hammerspace", visible = locationData.hammerspace or false}
+				},
+				{
+					{ type = "checkBox", id = location .. "Compression", checked = sbq.predatorSettings[location .. "Compression"], toolTip = "Prey will be compressed to a smaller size over time." },
+					{ type = "label", text = "Compression " },
+					{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
+				}
+			}}
+		} }
+		local difficultyMod = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {0,1}, size = {50, 30}, children = {
+			{ type = "layout", mode = "vertical", spacing = 0, children = {
+				{type = "label", text = "Difficulty", align = "center"},
+				{ type = "textBox", align = "center", id = location .. "DifficultyMod", size = {30,14}, expandMode = {0,0}, toolTip = "Make this location easier or harder relative to the main difficulty."},
+			}}
+		} }
+		local InfusionPanel = { type = "panel", style = "flat", expandMode = {1,1}, visible = locationData.infusion or false, children = {
+			{ type = "layout", mode = "vertical", spacing = -2, children = {
+				{type = "label", text = "Infusion", align = "center"},
+				{
+					{ expandMode = {0,0}, spacing = -2, },
+					{ type = "itemSlot", autoInteract = true, id = location .. "InfusedItem", item = sbq.predatorSettings[location .. "InfusedItem"] },
 					{
-						{ type = "checkBox", id = location .. "Hammerspace",
-							checked = sbq.predatorSettings[location .. "Hammerspace"],
-							toolTip = "This location will ignore the size limit.",
-							visible = locationData.hammerspace or false
-						},
-						{ type = "label", text = "Hammerspace", visible = locationData.hammerspace or false}
-					},
-					{
-						{ type = "checkBox", id = location .. "Compression", checked = sbq.predatorSettings[location .. "Compression"], toolTip = "Prey will be compressed to a smaller size over time." },
-						{ type = "label", text = "Compression " },
-						{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
-					}
-				}}
-			} }
-			local difficultyMod = { type = "panel", style = "flat", visible = requiresInfusionVisible or false, expandMode = {0,1}, size = {50, 30}, children = {
-				{ type = "layout", mode = "vertical", spacing = 0, children = {
-					{type = "label", text = "Difficulty", align = "center"},
-					{ type = "textBox", align = "center", id = location .. "DifficultyMod", size = {30,14}, expandMode = {0,0}, toolTip = "Make this location easier or harder relative to the main difficulty."},
-				}}
-			} }
-			local InfusionPanel = { type = "panel", style = "flat", expandMode = {1,1}, visible = locationData.infusion or false, children = {
-				{ type = "layout", mode = "vertical", spacing = -2, children = {
-					{type = "label", text = "Infusion", align = "center"},
-					{
-						{ expandMode = {0,0}, spacing = -2, },
-						{ type = "itemSlot", autoInteract = true, id = location .. "InfusedItem", item = sbq.predatorSettings[location .. "InfusedItem"], toolTip = "When swapping you may need to close and re-open the menu to refresh available settings." },
+						{ mode = "h", spacing = -2 },
+						{ type = "checkBox", id = location .. "InfusedVisual", checked = sbq.predatorSettings[location .. "InfusedVisual"], toolTip = "Change colors to match infused character if applicable.", visible = locationData.infusedVisual or false },
 						{
-							{ mode = "h", spacing = -2 },
-							{ type = "checkBox", id = location .. "InfusedVisual", checked = sbq.predatorSettings[location .. "InfusedVisual"], toolTip = "Change colors to match infused character if applicable.", visible = locationData.infusedVisual or false },
-							{
-								{ spacing = -2, expandMode = {0,0}, },
-								{ type = "checkBox", id = location .. "InfusedSize", checked = sbq.predatorSettings[location .. "InfusedSize"], toolTip = "Add infused character's size if applicable." },
-								{ type = "checkBox", id = location .. "InfusedSizeAdditive", checked = sbq.predatorSettings[location .. "InfusedSizeAdditive"], toolTip = "If adding a character's size, make it count towards the fill level." },
-							},
-							{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Size Multiplier on Infused Characters if size is being added."},
-						}
+							{ spacing = -2, expandMode = {0,0}, },
+							{ type = "checkBox", id = location .. "InfusedSize", checked = sbq.predatorSettings[location .. "InfusedSize"], toolTip = "Add infused character's size if applicable." },
+							{ type = "checkBox", id = location .. "InfusedSizeAdditive", checked = sbq.predatorSettings[location .. "InfusedSizeAdditive"], toolTip = "If adding a character's size, make it count towards the fill level." },
+						},
+						{ type = "textBox", align = "center", id = location .. "InfusedMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Size Multiplier on Infused Characters if size is being added."},
 					}
-				}}
-			} }
-			local absorbedPreyList
-			local absorbedPreyPanel = { type = "panel", style = "flat", expandMode = {1,0}, children = {
-				{ type = "layout", mode = "vertical", spacing = 0, children = {
-					{ type = "label", text = "Absorbed Prey", align = "center" },
-					{ type = "itemGrid", slots = 5, id = location.."ItemGrid", autoInteract = true },
-				}}
-			} }
-			local count = 5
-			if type(sbq.storedDigestedPrey[location]) == "table" then
-				local players = {}
-				local ocs = {}
-				local other = {}
-				for uniqueId, item in pairs(sbq.storedDigestedPrey[location]) do
-					count = count + 1
-					local success, npcConfig = pcall(root.npcConfig, item.parameters.npcArgs.npcType)
-					if not success then
-						npcConfig = item.parameters.npcArgs.npcParam
-					end
-					if item.parameters.npcArgs.npcParam.wasPlayer then
-						table.insert(players, item)
-					elseif ((npcConfig or {}).scriptConfig or {}).isOC then
-						table.insert(ocs, item)
-					else
-						table.insert(other, item)
-					end
+				}
+			}}
+		} }
+		local absorbedPreyList
+		local absorbedPreyPanel = { type = "panel", style = "flat", expandMode = {1,0}, children = {
+			{ type = "layout", mode = "vertical", spacing = 0, children = {
+				{ type = "label", text = "Absorbed Prey", align = "center" },
+				{ type = "itemGrid", slots = 5, id = location.."ItemGrid", autoInteract = true },
+			}}
+		} }
+		local count = 5
+		if type(sbq.storedDigestedPrey[location]) == "table" then
+			local players = {}
+			local ocs = {}
+			local other = {}
+			for uniqueId, item in pairs(sbq.storedDigestedPrey[location]) do
+				count = count + 1
+				local success, npcConfig = pcall(root.npcConfig, item.parameters.npcArgs.npcType)
+				if not success then
+					npcConfig = item.parameters.npcArgs.npcParam
 				end
-				count = (count + 5) - ((count + 5) % 5)
-				local function sortItems(a, b)
-					return a.parameters.shortdescription < b.parameters.shortdescription
+				if item.parameters.npcArgs.npcParam.wasPlayer then
+					table.insert(players, item)
+				elseif ((npcConfig or {}).scriptConfig or {}).isOC then
+					table.insert(ocs, item)
+				else
+					table.insert(other, item)
 				end
-				absorbedPreyList = players
-				table.sort(players, sortItems)
-				table.sort(ocs, sortItems)
-				table.sort(other, sortItems)
-				util.appendLists(absorbedPreyList, ocs)
-				util.appendLists(absorbedPreyList, other)
-				absorbedPreyPanel.children[1].children[2].slots = count
 			end
+			count = (count + 5) - ((count + 5) % 5)
+			local function sortItems(a, b)
+				return a.parameters.shortdescription < b.parameters.shortdescription
+			end
+			absorbedPreyList = players
+			table.sort(players, sortItems)
+			table.sort(ocs, sortItems)
+			table.sort(other, sortItems)
+			util.appendLists(absorbedPreyList, ocs)
+			util.appendLists(absorbedPreyList, other)
+			absorbedPreyPanel.children[1].children[2].slots = count
+		end
 
-			local tab = locationTabField:newTab({
+		local tab
+		if sbq.locationTabs[location] then
+			tab = sbq.locationTabs[location]
+			tab:setVisible(sbq.checkSettings(locationData.checkSettings, sbq.predatorSettings))
+			local scrollArea = _ENV[location.."TabScrollArea"]
+			scrollArea:clearChildren()
+		else
+			tab = locationTabField:newTab({
 				type = "tab", id = location .. "Tab", title = ((locationData.name or location) .. " "), visible = sbq.checkSettings(locationData.checkSettings, sbq.predatorSettings),
 				contents = {
-					{ type = "scrollArea", scrollBars = true, thumbScrolling = true, scrollDirections = {0,1}, children = {
-						{ type = "panel", style = "convex", children = {
-							mainEffectLayout,
-							extraEffectLayout,
-							otherLayout,
-							modifiersLayout,
-							{ type = "layout", mode = "horizontal", expandMode = {1,0}, size = {100, 30}, children = {difficultyMod, InfusionPanel} },
-							absorbedPreyPanel
-						} }
+					{ id = location.."TabScrollArea", type = "scrollArea", scrollBars = true, thumbScrolling = true, scrollDirections = {0,1}, children = {
 					}}
 				}
 			})
-			if i == selectedLocationTab then
-				sbq.selectedLocationTab = tab
-			end
-
-			local itemGrid = _ENV[location .. "ItemGrid"]
-			for i, item in ipairs(absorbedPreyList or {}) do
-				itemGrid:setItem(i, item)
-			end
-			for i = 1, count do
-				local itemSlot = itemGrid:slot(i)
-				function itemSlot:acceptsItem(item)
-					if not ((((item.parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId then pane.playSound("/sfx/interface/clickon_error.ogg") return false end
-
-					local preySettings = sbq.getItemPreySettings(item)
-
-					local validPrey = true
-					for i, voreType in ipairs(locationData.voreTypes or {}) do
-						validPrey = preySettings[voreType]
-						if validPrey then return true end
-					end
-					if not validPrey then
-						pane.playSound("/sfx/interface/clickon_error.ogg")
-						return false
-					end
-					return true
-				end
-				function itemSlot:onItemModified()
-					local itemList = {}
-					for i = 1, count do
-						local item = itemGrid:item(i)
-						if item then
-							table.insert(itemList, item)
-						end
-					end
-					sbq.storedDigestedPrey[location] = {}
-					for i, item in ipairs(itemList) do
-						local uniqueId = item.parameters.npcArgs.npcParam.scriptConfig.uniqueId
-						sbq.storedDigestedPrey[location][uniqueId] = item
-					end
-					sbq.saveDigestedPrey()
-				end
-			end
-
-			local infusedItemSlot = _ENV[location .. "InfusedItem"]
-
-			function infusedItemSlot:acceptsItem(item)
-				if sbq.infusionSlotAccepts(locationData, item) then return true
-				else pane.playSound("/sfx/interface/clickon_error.ogg") return false end
-			end
-			function infusedItemSlot:onItemModified()
-				sbq.changeGlobalSetting(location .. "InfusedItem", infusedItemSlot:item())
-				sbq.getPlayerSpeciesAndSettings()
-
-				--below would refresh the tab with the new settings from the infusion, but this CHUGS and feels bad so I won't
-				--selectedLocationTab = i
-				--sbq.effectsPanel()
-				--sbq.refreshButtons()
-				--locationTabField:pushEvent("tabChanged", sbq.selectedLocationTab, sbq.selectedLocationTab)
-			end
-
-			for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
-				local toggleData = locationData[extraEffect]
-				if toggleData then
-					local toggleButton = _ENV[location .. extraEffect]
-					if toggleButton ~= nil then
-						function toggleButton:drawSpecial() sbq.drawEffectButton(toggleButton, ((locationData[extraEffect] or {}).icon or "/interface/scripted/sbq/sbqSettings/transform.png")) end
-						sbq.drawSpecialButtons[location .. extraEffect] = true
-					end
-				end
-			end
-
-			local noneButton = _ENV[location.."None"]
-			local healButton = _ENV[location.."Heal"]
-			local softDigestButton = _ENV[location.."SoftDigest"]
-			local digestButton = _ENV[location.."Digest"]
-			local effectLabel = _ENV[location.."EffectLabel"]
-
-			function noneButton:draw() sbq.drawEffectButton(noneButton, ((locationData.none or {}).icon or "/interface/scripted/sbq/sbqSettings/noEffect.png") ) end
-			function healButton:draw() sbq.drawEffectButton(healButton, ((locationData.heal or {}).icon or "/interface/scripted/sbq/sbqSettings/heal.png")) end
-			function softDigestButton:draw() sbq.drawEffectButton(softDigestButton, ((locationData.softDigest or {}).icon or "/interface/scripted/sbq/sbqSettings/softDigest.png")) end
-			function digestButton:draw() sbq.drawEffectButton(digestButton, ((locationData.digest or {}).icon or "/interface/scripted/sbq/sbqSettings/digest.png")) end
-
-			function noneButton:onClick() sbq.locationEffectButton(noneButton, location, locationData, effectLabel) end
-			function healButton:onClick() sbq.locationEffectButton(healButton, location, locationData, effectLabel) end
-			function softDigestButton:onClick() sbq.locationEffectButton(softDigestButton, location, locationData, effectLabel) end
-			function digestButton:onClick() sbq.locationEffectButton(digestButton, location, locationData, effectLabel) end
-
-			local visualSize = _ENV[location .. "VisualSize"]
-			local multiplier = _ENV[location .. "Multiplier"]
-			local difficultyTextbox = _ENV[location.."DifficultyMod"]
-
-			function visualSize:onChange(index, value)
-				if index == 1 then
-					sbq.changePredatorSetting(location .. "VisualMin", value)
-				elseif index == 2 then
-					sbq.changePredatorSetting(location .. "VisualMax", value)
-				end
-			end
-
-			-- visualMin:setText(tostring(sbq.overrideSettings[location .. "VisualMin"] or sbq.predatorSettings[location .."VisualMin"] or 0))
-			-- function visualMin:onEnter()
-			-- 	sbq.numberBox(visualMin, "changePredatorSetting", location .. "VisualMin", "predatorSettings", "overrideSettings", (sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0), math.min(sbq.predatorSettings[location .. "VisualMax"], (sbq.overrideSettings[location .. "VisualMax"] or locationData.max)))
-			-- 	sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
-			-- end
-			-- function visualMin:onTextChanged()
-			-- 	sbq.numberBoxColor(visualMin, (sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0), math.min(sbq.predatorSettings[location .. "VisualMax"], (sbq.overrideSettings[location .. "VisualMax"] or locationData.max)))
-			-- 	sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
-			-- end
-			-- function visualMin:onEscape() self:onEnter() end
-			-- function visualMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			-- sbq.numberBoxColor(visualMin, (sbq.overrideSettings[location .. "VisualMin"] or locationData.minVisual or 0), math.min(sbq.predatorSettings[location .. "VisualMax"], (sbq.overrideSettings[location .. "VisualMax"] or locationData.max)))
-
-			-- visualMax:setText(tostring(sbq.overrideSettings[location .. "VisualMax"] or sbq.predatorSettings[location .."VisualMax"] or locationData.max or 0))
-			-- function visualMax:onEnter()
-			-- 	sbq.numberBox(visualMax, "changePredatorSetting", location .. "VisualMax", "predatorSettings", "overrideSettings", math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
-			-- 	sbq.numberBoxColor(visualMin, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0), math.min( sbq.predatorSettings[location.."VisualMax"], (sbq.overrideSettings[location.."VisualMax"] or locationData.max)) )
-			-- end
-			-- function visualMax:onTextChanged()
-			-- 	sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
-			-- 	sbq.numberBoxColor(visualMin, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0), math.min( sbq.predatorSettings[location.."VisualMax"], (sbq.overrideSettings[location.."VisualMax"] or locationData.max)) )
-			-- end
-			-- function visualMax:onEscape() self:onEnter() end
-			-- function visualMax:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			-- sbq.numberBoxColor(visualMax, math.max(sbq.predatorSettings[location.."VisualMin"] or 0, (sbq.overrideSettings[location.."VisualMin"] or locationData.minVisual or 0)), (sbq.overrideSettings[location.."VisualMax"] or locationData.max) )
-
-			multiplier:setText(tostring(sbq.overrideSettings[location .. "Multiplier"] or sbq.predatorSettings[location .. "Multiplier"] or 1))
-			function multiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "Multiplier", "globalSettings", "overrideSettings", 0) end
-			function multiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
-			function multiplier:onEscape() self:onEnter() end
-			function multiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			sbq.numberBoxColor(multiplier, 0)
-
-			difficultyTextbox:setText(tostring(sbq.overrideSettings[location .. "DifficultyMod"] or sbq.predatorSettings[location .. "DifficultyMod"] or 0))
-			function difficultyTextbox:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "DifficultyMod", "globalSettings", "overrideSettings", sbq.overrideSettings[location.."DifficultyModMin"], sbq.overrideSettings[location.."DifficultyModMax"]) end
-			function difficultyTextbox:onTextChanged() sbq.numberBoxColor(self, sbq.overrideSettings[location.."DifficultyModMin"], sbq.overrideSettings[location.."DifficultyModMax"]) end
-			function difficultyTextbox:onEscape() self:onEnter() end
-			function difficultyTextbox:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			sbq.numberBoxColor(difficultyTextbox, sbq.overrideSettings[location .. "DifficultyModMin"],
-				sbq.overrideSettings[location .. "DifficultyModMax"])
-
-			local InfusionMultiplier = _ENV[location .. "InfusedMultiplier"]
-
-			InfusionMultiplier:setText(tostring(sbq.overrideSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
-			function InfusionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
-			function InfusionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
-			function InfusionMultiplier:onEscape() self:onEnter() end
-			function InfusionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			sbq.numberBoxColor(InfusionMultiplier, 0)
-
-			local compressionMultiplier = _ENV[location .. "CompressionMultiplier"]
-
-			compressionMultiplier:setText(tostring(sbq.overrideSettings[location .. "CompressionMultiplier"] or sbq.predatorSettings[location .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
-			function compressionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "CompressionMultiplier", "globalSettings", "overrideSettings", 0) end
-			function compressionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
-			function compressionMultiplier:onEscape() self:onEnter() end
-			function compressionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-			sbq.numberBoxColor(compressionMultiplier, 0)
-
 		end
+		local scrollArea = _ENV[location.."TabScrollArea"]
+		scrollArea:addChild(
+			{ type = "panel", style = "convex", children = {
+				mainEffectLayout,
+				extraEffectLayout,
+				otherLayout,
+				modifiersLayout,
+				{ type = "layout", mode = "horizontal", expandMode = {1,0}, size = {100, 30}, children = {difficultyMod, InfusionPanel} },
+				absorbedPreyPanel
+			} }
+		)
+		sbq.locationTabs[location] = tab
+
+		local itemGrid = _ENV[location .. "ItemGrid"]
+		for i, item in ipairs(absorbedPreyList or {}) do
+			itemGrid:setItem(i, item)
+		end
+		for i = 1, count do
+			local itemSlot = itemGrid:slot(i)
+			function itemSlot:acceptsItem(item)
+				if not ((((item.parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId then pane.playSound("/sfx/interface/clickon_error.ogg") return false end
+
+				local preySettings = sbq.getItemPreySettings(item)
+
+				local validPrey = true
+				for i, voreType in ipairs(locationData.voreTypes or {}) do
+					validPrey = preySettings[voreType]
+					if validPrey then return true end
+				end
+				if not validPrey then
+					pane.playSound("/sfx/interface/clickon_error.ogg")
+					return false
+				end
+				return true
+			end
+			function itemSlot:onItemModified()
+				local itemList = {}
+				for i = 1, count do
+					local item = itemGrid:item(i)
+					if item then
+						table.insert(itemList, item)
+					end
+				end
+				sbq.storedDigestedPrey[location] = {}
+				for i, item in ipairs(itemList) do
+					local uniqueId = item.parameters.npcArgs.npcParam.scriptConfig.uniqueId
+					sbq.storedDigestedPrey[location][uniqueId] = item
+				end
+				sbq.saveDigestedPrey()
+			end
+		end
+
+		local infusedItemSlot = _ENV[location .. "InfusedItem"]
+
+		function infusedItemSlot:acceptsItem(item)
+			if sbq.infusionSlotAccepts(locationData, item) then return true
+			else pane.playSound("/sfx/interface/clickon_error.ogg") return false end
+		end
+		function infusedItemSlot:onItemModified()
+			sbq.changeGlobalSetting(location .. "InfusedItem", infusedItemSlot:item())
+			sbq.getOccupantHolderData(sbq.predatorSettings)
+			sbq.updateLocationTab(location)
+			sbq.refreshButtons()
+		end
+
+		for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
+			local toggleData = locationData[extraEffect]
+			if toggleData then
+				local toggleButton = _ENV[location .. extraEffect]
+				if toggleButton ~= nil then
+					function toggleButton:drawSpecial() sbq.drawEffectButton(toggleButton, ((locationData[extraEffect] or {}).icon or "/interface/scripted/sbq/sbqSettings/transform.png")) end
+					sbq.drawSpecialButtons[location .. extraEffect] = true
+				end
+			end
+		end
+
+		local noneButton = _ENV[location.."None"]
+		local healButton = _ENV[location.."Heal"]
+		local softDigestButton = _ENV[location.."SoftDigest"]
+		local digestButton = _ENV[location.."Digest"]
+		local effectLabel = _ENV[location.."EffectLabel"]
+
+		function noneButton:draw() sbq.drawEffectButton(noneButton, ((locationData.none or {}).icon or "/interface/scripted/sbq/sbqSettings/noEffect.png") ) end
+		function healButton:draw() sbq.drawEffectButton(healButton, ((locationData.heal or {}).icon or "/interface/scripted/sbq/sbqSettings/heal.png")) end
+		function softDigestButton:draw() sbq.drawEffectButton(softDigestButton, ((locationData.softDigest or {}).icon or "/interface/scripted/sbq/sbqSettings/softDigest.png")) end
+		function digestButton:draw() sbq.drawEffectButton(digestButton, ((locationData.digest or {}).icon or "/interface/scripted/sbq/sbqSettings/digest.png")) end
+
+		function noneButton:onClick() sbq.locationEffectButton(noneButton, location, locationData, effectLabel) end
+		function healButton:onClick() sbq.locationEffectButton(healButton, location, locationData, effectLabel) end
+		function softDigestButton:onClick() sbq.locationEffectButton(softDigestButton, location, locationData, effectLabel) end
+		function digestButton:onClick() sbq.locationEffectButton(digestButton, location, locationData, effectLabel) end
+
+		local visualSize = _ENV[location .. "VisualSize"]
+		local multiplier = _ENV[location .. "Multiplier"]
+		local difficultyTextbox = _ENV[location.."DifficultyMod"]
+
+		function visualSize:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(location .. "VisualMin", value)
+			elseif index == 2 then
+				sbq.changePredatorSetting(location .. "VisualMax", value)
+			end
+		end
+
+		multiplier:setText(tostring(sbq.overrideSettings[location .. "Multiplier"] or sbq.predatorSettings[location .. "Multiplier"] or 1))
+		function multiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "Multiplier", "globalSettings", "overrideSettings", 0) end
+		function multiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+		function multiplier:onEscape() self:onEnter() end
+		function multiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+		sbq.numberBoxColor(multiplier, 0)
+
+		difficultyTextbox:setText(tostring(sbq.overrideSettings[location .. "DifficultyMod"] or sbq.predatorSettings[location .. "DifficultyMod"] or 0))
+		function difficultyTextbox:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "DifficultyMod", "globalSettings", "overrideSettings", sbq.overrideSettings[location.."DifficultyModMin"], sbq.overrideSettings[location.."DifficultyModMax"]) end
+		function difficultyTextbox:onTextChanged() sbq.numberBoxColor(self, sbq.overrideSettings[location.."DifficultyModMin"], sbq.overrideSettings[location.."DifficultyModMax"]) end
+		function difficultyTextbox:onEscape() self:onEnter() end
+		function difficultyTextbox:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+		sbq.numberBoxColor(difficultyTextbox, sbq.overrideSettings[location .. "DifficultyModMin"],
+			sbq.overrideSettings[location .. "DifficultyModMax"])
+
+		local InfusionMultiplier = _ENV[location .. "InfusedMultiplier"]
+
+		InfusionMultiplier:setText(tostring(sbq.overrideSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings[location .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
+		function InfusionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
+		function InfusionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+		function InfusionMultiplier:onEscape() self:onEnter() end
+		function InfusionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+		sbq.numberBoxColor(InfusionMultiplier, 0)
+
+		local compressionMultiplier = _ENV[location .. "CompressionMultiplier"]
+
+		compressionMultiplier:setText(tostring(sbq.overrideSettings[location .. "CompressionMultiplier"] or sbq.predatorSettings[location .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
+		function compressionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", location .. "CompressionMultiplier", "globalSettings", "overrideSettings", 0) end
+		function compressionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
+		function compressionMultiplier:onEscape() self:onEnter() end
+		function compressionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
+		sbq.numberBoxColor(compressionMultiplier, 0)
+
+		return tab
 	end
 end
 

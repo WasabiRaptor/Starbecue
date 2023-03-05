@@ -40,13 +40,13 @@ function init()
 
 	if sbq.sbqCurrentData.species ~= nil then
 		if sbq.sbqCurrentData.species == "sbqOccupantHolder" then
-			sbq.getPlayerOccupantHolderData()
+			sbq.getOccupantHolderData()
 		else
 			sbq.predatorConfig = root.assetJson("/vehicles/sbq/"..sbq.sbqCurrentData.species.."/"..sbq.sbqCurrentData.species..".vehicle").sbqData or {}
 		end
 		sbq.predatorSettings = sb.jsonMerge(sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.sbqSettings[sbq.sbqCurrentData.species] or {}), sbq.globalSettings)
 	else
-		sbq.getPlayerOccupantHolderData()
+		sbq.getOccupantHolderData()
 		sbq.predatorSettings = sb.jsonMerge(sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.sbqSettings.sbqOccupantHolder or {}), sbq.globalSettings)
 	end
 	sbq.overrideSettings = sbq.predatorConfig.overrideSettings or {}
@@ -78,7 +78,7 @@ function init()
 	sbq.predUIeffectsPanel(sbq.predatorSettings.lastLocationSelect)
 end
 
-function sbq.getPlayerOccupantHolderData()
+function sbq.getOccupantHolderData()
 	sbq.getSpeciesConfig(player.species(), sbq.sbqSettings.global)
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
 end

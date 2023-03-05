@@ -79,8 +79,7 @@ function init()
 
 		sbq.sbqCurrentData = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).sbqCurrentData or {}
 
-		sbq.getSpeciesConfig(sbq.tenant.species, sbq.tenant.overrides.scriptConfig.sbqSettings)
-		sbq.predatorConfig = sbq.speciesConfig.sbqData
+		sbq.getOccupantHolderData()
 
 		sbq.speciesFile = root.assetJson( "/species/"..(sbq.speciesConfig.species)..".species" )
 
@@ -299,6 +298,11 @@ function update()
 	local dt = script.updateDt()
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
+end
+
+function sbq.getOccupantHolderData(settings)
+	sbq.getSpeciesConfig(sbq.tenant.species, settings or sbq.tenant.overrides.scriptConfig.sbqSettings)
+	sbq.predatorConfig = sbq.speciesConfig.sbqData
 end
 
 function sbq.savePredSettings()
