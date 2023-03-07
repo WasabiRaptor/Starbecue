@@ -1,0 +1,161 @@
+{
+	"kind" : "sbqClover_LokiVulpix",
+
+	"speciesAnimOverride" : "speciesAnimOverride.config",
+	"animOverrideDefaultSettings" : {
+		"visibleNavel" : true
+	},
+
+	"charCreationTooltip" : {
+			"title" : "Meowscarada",
+			"subTitle" : "Kitty",
+			"description" : "God I want him to do unspeakable things to me... wait how are you reading this, get out of here."
+	},
+
+	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
+
+	"humanoidConfig" : "/species/pokemonDeathBodyconfig.config",
+
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
+
+
+	"charGenTextLabels" : [ "Eye colour", "Hair style", "Shirt", "Legwear", "Mask/Fur", "Ears/Marks", "Shirt colour", "Legwear colour", "Meowscarada", "Personality" ],
+	"skull" : "/humanoid/human/dead.png",
+	"effectDirectives" : "?replace;FEFFFFFF=cfffa7FF;9bd4ffFF=b4ff74FF;31a6ffFF=92e64aFF",
+	"defaultBlueprints" : {
+		"tier1" : [
+
+// Empty Hands
+			{ "item" : "flaghuman" },
+
+// Anvil
+			{ "item" : "humantier1head" },
+			{ "item" : "humantier1chest" },
+			{ "item" : "humantier1pants" },
+			{ "item" : "humantier2head" },
+			{ "item" : "humantier2chest" },
+			{ "item" : "humantier2pants" },
+
+			{ "item" : "ironshortsword" },
+			{ "item" : "ironbroadsword" },
+			{ "item" : "tungstenaxe" },
+			{ "item" : "tungstenhammer" },
+
+// Anvil2
+			{ "item" : "humantier3head" },
+			{ "item" : "humantier3chest" },
+			{ "item" : "humantier3pants" },
+			{ "item" : "humantier4head" },
+			{ "item" : "humantier4chest" },
+			{ "item" : "humantier4pants" },
+
+			{ "item" : "titaniumdagger" },
+			{ "item" : "titaniumspear" },
+			{ "item" : "durasteelbroadsword" },
+			{ "item" : "durasteelshortsword" },
+
+// Anvil3
+			{ "item" : "humantier5ahead" },
+			{ "item" : "humantier5achest" },
+			{ "item" : "humantier5apants" },
+			{ "item" : "humantier6ahead" },
+			{ "item" : "humantier6achest" },
+			{ "item" : "humantier6apants" },
+
+			{ "item" : "humantier5mhead" },
+			{ "item" : "humantier5mchest" },
+			{ "item" : "humantier5mpants" },
+			{ "item" : "humantier6mhead" },
+			{ "item" : "humantier6mchest" },
+			{ "item" : "humantier6mpants" },
+
+			{ "item" : "humantier5shead" },
+			{ "item" : "humantier5schest" },
+			{ "item" : "humantier5spants" },
+			{ "item" : "humantier6shead" },
+			{ "item" : "humantier6schest" },
+			{ "item" : "humantier6spants" },
+
+			{ "item" : "aegisaltpistol" },
+			{ "item" : "aegisaltbow" },
+			{ "item" : "feroziumwand" },
+			{ "item" : "feroziumstaff" },
+			{ "item" : "violiumshortsword" },
+			{ "item" : "violiumbroadsword" },
+
+// Furniture Table 2
+			{ "item" : "humanstoragelocker" },
+			{ "item" : "humanshipdoor" },
+			{ "item" : "humanshiphatch" },
+
+// Spinning Wheel
+			{ "item" : "conceptchest" },
+			{ "item" : "conceptlegs" },
+			{ "item" : "coolchest" },
+			{ "item" : "coollegs" },
+			{ "item" : "sweatervestchest" },
+			{ "item" : "sweatervestlegs" },
+			{ "item" : "workoutchest" },
+			{ "item" : "workoutlegs" }
+		]
+	},
+	"altOptionAsFacialMask" : true,
+	"altOptionAsUndyColor" : true,
+	"altOptionAsHairColor" : true,
+
+	"headOptionAsHairColor" : true,
+	"headOptionAsFacialhair" : true,
+
+	"bodyColorAsFacialMaskSubColor" : true,
+	"altColorAsFacialMaskSubColor" : true,
+
+	"hairColorAsBodySubColor" : true,
+
+	"genders" : [
+		{
+			"name" : "male",
+			"image" : "/interface/title/male.png",
+			"characterImage" : "/interface/title/male.png",
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+			"hair" : [ "0" ],
+			"shirt" : [ "emptychest" ],
+			"pants" : [ "emptylegs" ],
+			"facialHairGroup" : "ears",
+			"facialHair" : [ "0" ],
+			"facialMaskGroup" : "mask",
+			"facialMask" : [ "blank", "2" ]
+		},
+		{
+			"name" : "female",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/female.png",
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+			"hair" : [ "0" ],
+			"shirt" : [ "emptychest" ],
+			"pants" : [ "emptylegs" ],
+			"facialHairGroup" : "ears",
+			"facialHair" : [ "0" ],
+			"facialMaskGroup" : "mask",
+			"facialMask" : [ "blank", "2" ]
+		}
+	],
+	"baseColorMap" : {
+		"primary" : ["c05b25","cf7332","dc8a3d","e0934a"], // main orange
+		"secondary" : ["cb2e22","d54729","e65233"], // red leaves
+		"tertiary" : ["1f100d","2c1813","321c17"], // dark brown lwgs
+		"flesh" : ["723c88","884e9f","9d5eb5"] // flower
+	},
+
+	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"bodyColor" : [ // eyes / flower
+		{"EDCDCD":"EDCDCDfe", "FFE5E5":"FFE5E5fe", "D74946":"D74946fe", "FF6966":"FF6966fe", "22ADCF":"22ADCFfe", "25BFE4":"25BFE4fe"}
+	],
+	"undyColor" : [ // main body
+		""
+	],
+	"hairColor" : [ // mask / leaves / legs
+		""
+	]
+
+}

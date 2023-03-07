@@ -285,7 +285,34 @@
 							]
 						}
 					}],
-
+					["Cock TF (Pred)", {
+						"checkPlayer" : { "cockInfusion" : true },
+						"dialogue" : [
+							"O-oh you want to ask me about that~? I'm flattered really.",
+							"This has come to be, well... one of my favorite kinks, might be my favorite actually.",
+							"Just... taking claim of someone entirely, moulding them into shape down there... making them a part of me...",
+							"<slowlove>*shivers* The thought is just so exciting, sharing all those feelings, knowing how much bliss they must be feeling...",
+							"<slowlove>Just feeling so good they might not be able to think... just twitching and throbbing, and I coulc feel them, how much they must enjoy it.",
+							"<slowlove>Just... being nothing but my throbbing cock, because thats what they want to be, a pleasurable experience for the both of us."
+						],
+						"playerSaveSettings" : { "cockInfusionPredTalk" : true },
+						"continue" : {
+							"dialogue" : [ "<slowlove>Would you like being my cock at some point~?" ],
+							"buttonText" : ["Y/N"],
+							"options" : [
+								["Yes", {
+									"dialogue" : ["<slowlove>Nice! We can have some fun sometime then~"],
+									"playerSaveSettings" : { "cockInfusionPredLike" : true },
+									"jump" : ["talkAboutKinks"]
+								}],
+								["No", {
+									"dialogue" : ["Alright then."],
+									"playerSaveSettings" : { "cockInfusionPredLike" : false },
+									"jump" : ["talkAboutKinks"]
+								}]
+							]
+						}
+					}],
 					["Thats it for now.", {"jump":["talkAboutSelf"]}]
 				]
 			},
@@ -363,7 +390,7 @@
 								"next" : "getVoreButtonAction",
 								"request" : {
 									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "You know things aren't supposed to go in there right?", "Thats going to be a real tight fit." ] },
+									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "Thats going to be a real tight fit." ] },
 									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"unprompted" : {
@@ -1661,7 +1688,6 @@
 											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
 										]},
 										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
-
 									]
 								}
 							}
@@ -1775,6 +1801,9 @@
 
 			"wombInfusedSize" : false,
 			"bellyInfusedSize" : false,
+
+			"shaftInfusedVisual" : true,
+			"wombInfusedVisual" : true,
 
 			// predator prefrences
 			"oralVorePred" : true,
@@ -2023,10 +2052,12 @@
 		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
 		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
 		"sbqOverridePreyEnabled" : {
-			"preyEnabledEnable" : false,
 			"navelVore": false,
 
 			"genderswapAllow": false,
+
+			"digestItemDropsAllow" : false,
+			"femcumDigestItemDropsAllow" : false,
 
 			"femcumSoftDigestAllow": false,
 

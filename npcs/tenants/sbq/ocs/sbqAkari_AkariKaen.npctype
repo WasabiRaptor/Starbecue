@@ -418,11 +418,7 @@
 											{"check":{"predator":"sbqVaporeon"},"add":["....vappy goo...."]}
 										]}
 									},
-									"sbqSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
-									"transform" : {
-										"next" : "transformImmunity",
-										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
+									"sbqSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest"
 								}
 							}
 						}
@@ -440,15 +436,7 @@
 								"next" : "mood",
 								"default" : {
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "All this cum sloshing around me~", "Ahhh... I'm stored in the balls~", "Stuck down here in your balls~", "This is so hot~" ] },
-									"transformed" : { "randomDialogue" : [ "O-oh my... I'm just cum now~", "Oooh~ I'm sloshing around in here~", "Now I'm just a load of cum~" ] },
-									"transform" : {
-										"next" : "transformImmunity",
-										"false" : { "randomDialogue" : [
-											["It feels kinda weird in here?", "I think... I think I'm turning white?", "I think... I'm starting to feel goopy?"]
-										]},
-										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
+									"default" : { "randomDialogue" : [ "All this cum sloshing around me~", "Ahhh... I'm stored in the balls~", "Stuck down here in your balls~", "This is so hot~" ] }
 								}
 							}
 						}
@@ -466,11 +454,7 @@
 								"next" : "mood",
 								"default" : {
 									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "yes..squish me harder`", "nice and smelly", "This is so hot~" ] },
-									"transform" : {
-										"next" : "transformImmunity",
-										"true" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
+									"default" : { "randomDialogue" : [ "yes..squish me harder`", "nice and smelly", "This is so hot~" ] }
 								}
 							}
 						}

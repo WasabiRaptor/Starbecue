@@ -66,6 +66,9 @@
 			"wombTFEnable" : false
 		},
 		"sbqOverridePreyEnabled" : {
+			"digestItemDropsAllow" : false,
+			"femcumDigestItemDropsAllow" : false,
+
 			"digestAllow": false,
 			"cumDigestAllow": false,
 			"milkDigestAllow": false,
@@ -287,7 +290,7 @@
 								"next" : "getVoreButtonAction",
 								"request" : {
 									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "You know things aren't supposed to go in there right?", "Thats going to be a real tight fit." ] },
+									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "Thats going to be a real tight fit." ] },
 									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ], "dismissTime" : 10 }
 								},
 								"unprompted" : {

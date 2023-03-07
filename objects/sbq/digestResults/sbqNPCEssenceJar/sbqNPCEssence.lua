@@ -44,7 +44,7 @@ function build(directory, config, parameters, level, seed)
 			parameters.tooltipFields.objectImage = config.fullPortrait or
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
 					config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
-		elseif config.speciesFile then
+		elseif config.speciesFile or (success and speciesFile) then
 
 			parameters.inventoryIcon = (config.useIcon or "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJarCombo.png")..parameters.directives
 

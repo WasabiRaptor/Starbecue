@@ -649,7 +649,7 @@
 								"next" : "getLocationEffect",
 								"default" : { "randomDialogue" : [
 									"Having a good time in there?", "Hope its comfortable.",
-									{"infusedSlot":true,"default":"ctfLines"}
+									{"infusedSlot":true,"default":"struggle.ctfLines"}
 								]},
 								"transformed" : { "randomDialogue" : [ ["Heh, I can feel you sloshing around.", "Seems like you're not quite solid anymore."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
 								"transform" : {
