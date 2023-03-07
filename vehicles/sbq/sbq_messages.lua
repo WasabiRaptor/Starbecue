@@ -334,6 +334,7 @@ message.setHandler( "setInfusedCharacter", function(_,_, location, item, eid, pr
 	sbq.lounging[eid].location = location
 	sbq.lounging[eid].sizeMultiplier = 0
 	sbq.lounging[eid].flags.infused = true
+	sbq.lounging[eid].flags.digested = false
 	sbq.lounging[eid].side = ""
 end)
 

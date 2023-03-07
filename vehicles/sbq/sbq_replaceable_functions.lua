@@ -167,6 +167,8 @@ the entity id, health, and the status checked in the options]]
 -- to have other effects applied in the effect application loop
 function sbq.otherLocationEffects(i, eid, health, locationEffect, status, location, powerMultiplier)
 end
+function sbq.infusedLocationEffects(i, eid, health, locationEffect, location, powerMultiplier)
+end
 
 ---------------------------------------------------------------------------------------------------------------------------------
 

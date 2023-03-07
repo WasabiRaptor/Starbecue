@@ -436,7 +436,7 @@ end
 sbq.expandQueue = {}
 sbq.shrinkQueue = {}
 
-function sbq.infusedStruggleDialogue(location, data, npcArgs)
+function sbq.infusedStruggleDialogue(location, data, npcArgs, eid)
 	if (sbq.totalTimeAlive > 0.5) then
 		if (math.random() > 0.5) then
 			local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
@@ -448,7 +448,9 @@ function sbq.infusedStruggleDialogue(location, data, npcArgs)
 			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, {"infusedTease"}, true )
 		end
 	end
-	sbq.doLocationStruggle(location, data)
+	if (not eid) or (type(eid)=="number" and (world.entityType(eid)~="player")) then
+		sbq.doLocationStruggle(location, data)
+	end
 end
 
 function sbq.setOccupantTags()
@@ -484,8 +486,8 @@ function sbq.setOccupantTags()
 				local uniqueId = ((npcArgs.npcParam or {}).scriptConfig or {}).uniqueId
 				if not uniqueId then return end
 				local eid = world.loadUniqueEntity(uniqueId)
-				if (not eid) or (sbq.lounging[eid]) or (not entity.entityInSight(eid)) then
-					sbq.infusedStruggleDialogue(location, data, npcArgs)
+				if (not eid) or (type(eid)=="number" and (sbq.lounging[eid]) or (not entity.entityInSight(eid))) then
+					sbq.infusedStruggleDialogue(location, data, npcArgs, eid)
 				end
 			end
 		end
@@ -672,6 +674,10 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		end
 		world.sendEntityMessage( eid, "sbqLight", sb.jsonMerge(light, {position = lightPosition}) )
 	end
+	if sbq.occupant[i].flags.infused then
+		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
+		return sbq.infusedLocationEffects(i, eid, health, locationEffect, location, powerMultiplier)
+	end
 
 	if sbq.occupant[i].flags.digesting then
 		locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
@@ -682,7 +688,11 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	if (sbq.getLocationSetting(location, "Sounds")) and (not sbq.occupant[i].flags.digested) then
 		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
 	end
-	sbq.loopedMessage(eid.."LocationEffectLoop", eid, "sbqApplyDigestEffect", {status, { power = powerMultiplier, location = location, dropItem = sbq.getLocationSetting(location, "PredDigestDrops")}, sbq.driver or entity.id()})
+	if status == "sbqRemoveBellyEffects" then
+		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
+	else
+		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "sbqApplyDigestEffect", {status, { power = powerMultiplier, location = location, dropItem = sbq.getLocationSetting(location, "PredDigestDrops")}, sbq.driver or entity.id()})
+	end
 
 	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
 		sbq.occupant[i].sizeMultiplier = math.min(1,
