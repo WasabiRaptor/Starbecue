@@ -1,21 +1,16 @@
 
-function sbq.ballsBoobsRefresh()
-	sbq.effectsPanel()
-	sbq.refreshButtons()
-end
-
 function settingsButtonScripts.balls()
-	sbq.ballsBoobsRefresh()
+	sbq.updateLocationTab("balls")
 end
 
 function settingsButtonScripts.breasts()
-	sbq.ballsBoobsRefresh()
+	sbq.updateLocationTab("breasts")
 end
 
 function settingsButtonScripts.penis()
-	sbq.ballsBoobsRefresh()
+	sbq.updateLocationTab("shaft")
 end
 
 function settingsButtonScripts.pussy()
-	sbq.ballsBoobsRefresh()
+	sbq.updateLocationTab("womb")
 end

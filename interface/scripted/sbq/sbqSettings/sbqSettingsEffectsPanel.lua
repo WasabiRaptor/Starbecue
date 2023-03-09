@@ -34,6 +34,7 @@ end
 local selectedLocationTab = 1
 sbq.drawSpecialButtons = {}
 function sbq.effectsPanel()
+	sbq.locationTabs = {}
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations then return end
 	locationTabLayout:clearChildren()
 	locationTabLayout:addChild({ id = "locationTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {} })
