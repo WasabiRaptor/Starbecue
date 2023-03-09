@@ -1,4 +1,3 @@
-
 function sbq.update(dt)
 	sbq.detectShirt()
 	sbq.detectPants()
@@ -9,7 +8,8 @@ function state.stand.oralVore(args, tconfig)
 end
 
 function state.stand.oralEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {wet = { power = 5, source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args, tconfig.releaseEffects or { wet = { power = 5, source = entity.id() } }, {},
+	tconfig.voreType)
 end
 
 function state.stand.analVore(args, tconfig)
@@ -17,7 +17,7 @@ function state.stand.analVore(args, tconfig)
 end
 
 function state.stand.analEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType )
+	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType)
 end
 
 function state.stand.unbirth(args, tconfig)
@@ -25,12 +25,13 @@ function state.stand.unbirth(args, tconfig)
 end
 
 function state.stand.unbirthEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {wet = { power = 5, source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args, tconfig.releaseEffects or { wet = { power = 5, source = entity.id() } }, {},
+	tconfig.voreType)
 end
 
 function state.stand.cockVore(args, tconfig)
 	if not args.id then
-		sbq.moveToLocation({id = sbq.findFirstOccupantIdForLocation("shaft")}, {location = "balls"})
+		sbq.moveToLocation({ id = sbq.findFirstOccupantIdForLocation("shaft") }, { location = "balls" })
 		return false
 	end
 	return sbq.doVore(args, "shaft", {}, "swallow", tconfig.voreType)
@@ -40,7 +41,10 @@ state.stand.moveToLocation = sbq.moveToLocation
 state.stand.switchBalls = sbq.switchBalls
 
 function state.stand.cockEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {glueslow = { power = 5 + ((sbq.lounging[args.id] or {}).progressBar or 0), source = entity.id()}}, {}, tconfig.voreType )
+	return sbq.doEscape(args,
+	tconfig.releaseEffects or
+	{ glueslow = { power = 5 + ((sbq.lounging[args.id] or {}).progressBar or 0), source = entity.id() } }, {},
+	tconfig.voreType)
 end
 
 function state.stand.breastVore(args, tconfig)
@@ -48,7 +52,7 @@ function state.stand.breastVore(args, tconfig)
 end
 
 function state.stand.breastEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType )
+	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType)
 end
 
 function state.stand.navelVore(args, tconfig)
@@ -56,7 +60,7 @@ function state.stand.navelVore(args, tconfig)
 end
 
 function state.stand.navelEscape(args, tconfig)
-	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType )
+	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType)
 end
 
 function sbq.detectShirt()
@@ -82,23 +86,23 @@ function sbq.letout(id)
 	local location = sbq.lounging[id].location
 
 	if location == "belly" then
-		if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage.clickAction == "analVore" then
-			return sbq.doTransition("analEscape", {id = id})
-		elseif (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage.clickAction == "navelVore" then
-			return sbq.doTransition("navelEscape", {id = id})
+		if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction == "analVore" then
+			return sbq.doTransition("analEscape", { id = id })
+		elseif (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction == "navelVore" then
+			return sbq.doTransition("navelEscape", { id = id })
 		else
-			return sbq.doTransition("oralEscape", {id = id})
+			return sbq.doTransition("oralEscape", { id = id })
 		end
 	elseif location == "tail" then
-		return sbq.doTransition("tailEscape", {id = id})
+		return sbq.doTransition("tailEscape", { id = id })
 	elseif location == "shaft" then
-		return sbq.doTransition("cockEscape", {id = id})
+		return sbq.doTransition("cockEscape", { id = id })
 	elseif location == "ballsL" or location == "ballsR" or location == "balls" then
-		return sbq.moveToLocation({id = id}, {location = "shaft"})
+		return sbq.moveToLocation({ id = id }, { location = "shaft" })
 	elseif location == "breastsL" or location == "breastsR" or location == "breasts" then
-		return sbq.doTransition("breastEscape", {id = id})
+		return sbq.doTransition("breastEscape", { id = id })
 	elseif location == "womb" then
-		return sbq.doTransition("unbirthEscape", {id = id})
+		return sbq.doTransition("unbirthEscape", { id = id })
 	end
 end
 
@@ -109,29 +113,36 @@ end
 
 function sbq.handleBodyParts()
 	local defaultSbqData = sbq.defaultSbqData
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "cock", sbq.settings.shaftInfusedVisual and sbq.settings.shaftInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsCover", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsFront", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsBack", sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "ballsFront", sbq.settings.ballsInfusedVisual and sbq.settings.ballsInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "ballsBack", sbq.settings.ballsInfusedVisual and sbq.settings.ballsInfusedItem)
-	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "pussy", sbq.settings.wombInfusedVisual and sbq.settings.wombInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "cock",
+	sbq.settings.shaftInfusedVisual and sbq.settings.shaftInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsCover",
+	sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsFront",
+	sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "breastsBack",
+	sbq.settings.breastsInfusedVisual and sbq.settings.breastsInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "ballsFront",
+	sbq.settings.ballsInfusedVisual and sbq.settings.ballsInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "ballsBack",
+	sbq.settings.ballsInfusedVisual and sbq.settings.ballsInfusedItem)
+	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "pussy",
+	sbq.settings.wombInfusedVisual and sbq.settings.wombInfusedItem)
 	if sbq.settings.penis and ((not defaultSbqData.locations.shaft.requiresInfusion) or (defaultSbqData.locations.shaft.requiresInfusion and sbq.settings.shaftInfusedItem ~= nil)) then
 		if sbq.settings.underwear then
-			sbq.setStatusValue( "cockVisible", "?crop;0;0;0;0")
+			sbq.setStatusValue("cockVisible", "?crop;0;0;0;0")
 		else
-			sbq.setStatusValue( "cockVisible", "")
+			sbq.setStatusValue("cockVisible", "")
 		end
 		sbq.sbqData.locations.shaft.max = defaultSbqData.locations.shaft.max
 	else
-		sbq.setStatusValue( "cockVisible", "?crop;0;0;0;0")
+		sbq.setStatusValue("cockVisible", "?crop;0;0;0;0")
 		sbq.sbqData.locations.shaft.max = 0
 	end
 	if sbq.settings.balls and ((not defaultSbqData.locations.balls.requiresInfusion) or (defaultSbqData.locations.balls.requiresInfusion and sbq.settings.ballsInfusedItem ~= nil)) then
 		if sbq.settings.underwear then
-			sbq.setStatusValue( "ballsVisible", "?crop;0;0;0;0")
+			sbq.setStatusValue("ballsVisible", "?crop;0;0;0;0")
 		else
-			sbq.setStatusValue( "ballsVisible", "")
+			sbq.setStatusValue("ballsVisible", "")
 		end
 		sbq.sbqData.locations.balls.max = defaultSbqData.locations.balls.max
 		sbq.sbqData.locations.ballsL.max = defaultSbqData.locations.balls.max
