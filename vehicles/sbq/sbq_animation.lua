@@ -8,8 +8,6 @@ function sbq.updateAnims(dt)
 			state.animationState.frame = frame + 1
 			state.animationState.reverseFrame = math.abs(frame - state.animationState.frames)
 			sbq.setPartTag("global", statename.."Frame", state.animationState.frame or 1 )
-		elseif ended and state.animationState.mode == "transition" then
-			sbq.doAnim(statename, state.animationState.transition)
 		end
 	end
 
@@ -23,8 +21,12 @@ function sbq.updateAnims(dt)
 	sbq.emoteCooldown =  math.max( 0, sbq.emoteCooldown - dt )
 
 	for statename, state in pairs(sbq.animStateData) do
-		if state.animationState.time >= state.animationState.cycle then
+		local ended, times, time = sbq.hasAnimEnded(statename)
+		if ended then
 			sbq.endAnim(state, statename)
+		end
+		if ended and state.animationState.mode == "transition" then
+			sbq.doAnim(statename, state.animationState.transition)
 		end
 	end
 end
@@ -351,6 +353,8 @@ function sbq.victimAnimUpdate(eid)
 	local rotation = sbq.getVictimAnimInterpolatedValue(victimAnim, "r", progress)
 	local translation = { sbq.getVictimAnimInterpolatedValue(victimAnim, "x", progress), sbq.getVictimAnimInterpolatedValue(victimAnim, "y", progress)}
 
+	sbq.logJson({transformGroup,progress})
+	sbq.logJson(translation)
 	--sb.setLogMap("-currTime", currTime)
 	--sb.setLogMap("-progress", progress)
 	--sb.setLogMap("-frame", victimAnim.frame)
