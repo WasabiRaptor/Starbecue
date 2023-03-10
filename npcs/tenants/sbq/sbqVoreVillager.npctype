@@ -1312,7 +1312,57 @@
 				},
 				"breastsR" : "struggling.breasts",
 				"breastsL" : "struggling.breasts",
-				"breasts" : {}
+				"breasts" : {
+					"next" : "predator",
+					"default" : {
+						"next" : "race",
+						"default" : {
+							"next" : "personality",
+							"default" : {
+								"next" : "mood",
+								"default" : {
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "It's really soft in here...", "Nice and warm, heh.", "So bouncy...", "I can hear your heartbeat...", {"check":{"shirt":"true"}, "add" : [ "Goodness, it's tight...", "It's very snug..." ] } ] },
+									"sbqHeal" : { "randomDialogue" : [ "Heh, a very good milk bath...", "Ahh, feeling better now...", "Comfy and soothing...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
+									"sbqMilkSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
+									"sbqMilkDigest" : {
+										"next" : "digestImmunity",
+										"true" : { "randomDialogue" : [ "Huh, kinda squeezy...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
+										"false" : { "randomDialogue" : [ "Huh, there's more milk in here... wait.  Oh.", "Guess you want to know what I taste like?", "Heh, me-flavored milk.", "Making me into a fresh batch of milk?", {"check":{"shirt":"true"}, "add" : [ "Careful, I'll stain your top..." ] } ] }
+									}
+								}
+							},
+							"flirty" : {
+								"next" : "mood",
+								"default" : {
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "It's so soft in here~", "Mmm, it's so warm~", "Hee, bouncy bouncy~", "You could say I'm close to your heart~", {"check":{"shirt":"true"}, "add" : [ "Hnnn~ So tight~", "So snug~" ] } ] },
+									"sbqHeal" : { "randomDialogue" : [ "A wonderful milk bath~", "Mmm, I feel wonderful~", "So soothing and comfy in here~", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
+									"sbqMilkSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
+									"sbqMilkDigest" : {
+										"next" : "digestImmunity",
+										"true" : { "randomDialogue" : [ "Squeezy~", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
+										"false" : { "randomDialogue" : [ "Gosh, I can feel myself sloshing~", "Hee, wondering what I taste like~?", "Heh, I taste good~", "I hope I make a good batch of milk for you~", {"check":{"shirt":"true"}, "add" : [ "Gonna get your shirt soaked with me at this rate~" ] } ] }
+									}
+								}
+							},
+							"shy" : {
+								"next" : "mood",
+								"default" : {
+									"next" : "getLocationEffect",
+									"default" : { "randomDialogue" : [ "It's so... s-soft...", "S-so warm...", "Gosh... b-bouncy...", "Oh... I c-can hear your heartbeat...", "<keysmash>", {"check":{"shirt":"true"}, "add" : [ "<keysmash>... so t-tight...", "Hfff... s-so snug..." ] } ] },
+									"sbqHeal" : { "randomDialogue" : [ "A m-milk bath, here... heck...!", "It feels so... good... <keysmash>", "So c-comfy...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
+									"sbqMilkSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
+									"sbqMilkDigest" : {
+										"next" : "digestImmunity",
+										"true" : { "randomDialogue" : [ "Feels s-squeezy...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
+										"false" : { "randomDialogue" : [ "Oh heck... I'm turning into m-milk...!", "You... want to know what I t-taste like?  ...<keysmash>", "...I taste... g-good...", "Ohgosh you're m-making me into milk...!", {"check":{"shirt":"true"}, "add" : [ "You're g-gonna leak me into your shirt...!" ] } ] }
+									}
+								}
+							}
+						}
+					}
+				}
 			},
 			// when being prey, responses to the pred thats eating them
 			// settings come from the pred, prey settings comes from itself
