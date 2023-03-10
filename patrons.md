@@ -1,155 +1,155 @@
 # Patrons
 ## Thank you all for your support!
-	BRZYN-Z18
 	Joseph
-	Darling Devil
 	Dragonuna
+	Darling Devil
+	BRZYN-Z18
 	xeronious
 	Robotic Boyo
 	Lunadefends
 	xyoshi
 	Ivan Ivanovich
+	Drexel Amatin
 	OtterlySam
 	Sandyagos
-	Drexel Amatin
 	Koole
 	Signum
 	Knochen
 	Mojma
-	Selicia
 	Ignitus
-	assassin604
+	Selicia
 	Tim D.
+	assassin604
 	lil cam
-	DarkerNebel
 	fabiqueen
 	Arden Umbraheart
 	LP
-	Pascal Gailloud
 	Fevix
 	Crimson
 	Kuni
 	CodatheFox
-	Warship Destoyer
+	Estrane Proctor
 	Fenris Nox
-	Dexasol
 	Mako Thesharkess
-	Maxel Noone
+	Warship Destoyer
+	Dexasol
 	Ears
 	Jaych
-	Brandon Proctor
+	Maxel Noone
 	horkrgo
-	TAX
 	Zyamiu
-	Kaos Savira
 	Shameful bird
 	Overshield
-	ABREZZEL
 	firespikez
+	Kaos Savira
+	ABREZZEL
 	pootisman
-	GMan
+	Brandon Proctor
 	'-fake- Oinarisama
-	Tremellia Steele
-	J5500
-	Blue HQ
-	StormSuicune
-	GigglingRaven
-	Dusty
-	FireFrenzy
-	Adam
-	Kaz
-	Drago Buckner
 	Jemmysponz
-	UmoluMLG
-	Slyfox24
-	Jefferson Racicot
-	Koda
-	Midnight Sapphire
-	ResRaptor
-	Ferrilata
-	Wolf ZX
+	GigglingRaven
 	Akari Kaen
+	Adam
 	LizordBoi
+	Blue HQ
+	FireFrenzy
 	hornet
-	konta husky
+	Drago Buckner
+	Jefferson Racicot
 	SkinWalker Dave
-	Silent Buizel
 	Astrocat
-	Hidden Hidden 2 well
-	sleep
+	ResRaptor
 	Dmitry Volkov
-	Emerald
-	Chendron
-	Dracos
+	Ferrilata
 	Delta Ludwig
 	Sage Berry
 	Snqwii
+	Dracos
+	J5500
+	sleep
+	StormSuicune
+	Silent Buizel
+	Dusty
+	Koda
+	Wolf ZX
+	TAX
+	Kaz
+	Hidden Hidden 2 well
+	Emerald
+	UmoluMLG
+	GMan
+	Tremellia Steele
+	Chendron
 	KP
-	Michael Williams
+	Hunterofsorrows
+	Dr.Bomber
+	Cattygaming
 	Izzy Luci
 	Loughlin Martin (Crimson Avalka)
 	FlowerMan
-	codys kettles
-	The_Norse_Gaster
-	JairaBloodclaw
-	Alt Bigbox71
 	Vaelstrom
 	Screak Bloodtail
-	Malfaren
-	Silver Snowy
-	belost_
-	Joe Stylin'
-	FizzySodaFish
-	Greenest of Dragons
-	Hearths
-	Eastern Star Entertainment
-	Victor emmond
-	Weaver-Rat
-	Dravus Airwing
-	Red
-	Mango
-	Skye
-	Sypher
-	Joseph Barron
-	Dude
-	E3x125631
-	Kiero Ashkore
-	Zovoroth
-	FwipFwip
-	Blankest
-	NovaSnake
-	V3rse4ty
-	Leanedwuff
-	Zeal
-	Hunterofsorrows
-	Kug
+	The_Norse_Gaster
+	codys kettles
+	Konaryn
 	MW
-	Wolf For Snooze
 	CainTheMadManKing
+	GenericIsabelle
+	Veridient Vision
+	Vinderex the Gilded (Andrew Lambert)
+	William
+	warbrand2
 	Eon439
 	Verandt
-	Konaryn
-	GenericIsabelle
 	LevinFloofeon
-	Vinderex the Gilded (Andrew Lambert)
 	MMDGLaDOS
-	Louie Rascal
-	warbrand2
-	HighGround212
-	William
-	Veridient Vision
-	Crowbar Sniper
+	E3x125631
+	Greenest of Dragons
+	Victor emmond
+	Weaver-Rat
+	Zovoroth
+	Sypher
+	Kiero Ashkore
+	Hearths
+	Dravus Airwing
+	Dude
+	FwipFwip
+	belost_
+	Skye
+	Red
+	Blankest
+	Zeal
+	V3rse4ty
+	Eastern Star Entertainment
+	FizzySodaFish
+	NovaSnake
+	Silver Snowy
+	Kug
+	Wolf For Snooze
+	Ecafymtoohs
+	Dominic Smolej
+	David McKenzie
 	Pillowsalt
-	Zoey D Rapp
+	TheBestJoeYoullEverKnow
+	Lekrashar
+	Cy Tyreth
+	TheGreatKitsune
+	Brandon
 	Ferd Meyers
 	James Bannister
-	Sebastian Cipponeri
-	Lekrashar
-	Kaen The Draconic Fox
-	Brandon
-	ZeUbPat
-	TheBestJoeYoullEverKnow
-	TheGreatKitsune
+	SwifttheLeapzard
+	Lurky
+	Alukawolf1
+	В гостях у Капитана Parkan-a
+	Vore
+	InigoNotMontoya
+	GhostAndrew
+	Sarusan
+	Trevor Neal
+	keenan stollov
+	Dr.NPC
+	Tyrannus Rexus
+	StaR
 ### Past Patrons
 	David stat man
 	Senjor Habash
@@ -158,80 +158,97 @@
 	Ethan Hennen
 	pelle
 	Avar
+	DarkerNebel
 	The_Gamer_Eagle
-	Lakota Amitola
-	King
 	dirty kitty
+	King
+	Lakota Amitola
 	Canary
 	LefTonbo
-	Vargo_Bargo
+	Pascal Gailloud
 	stevie
+	Vargo_Bargo
 	Zae
-	Estrane Proctor
 	Sanoka
 	Gooey Goomy
-	Comely
 	Arden Umbraheart
+	Comely
+	konta husky
+	Midnight Sapphire
+	Slyfox24
 	Sony Antoing
 	Likeable spoon
 	Quetzaquotl
+	Michael Williams
+	JairaBloodclaw
+	Alt Bigbox71
 	Frisk .
 	Mike Duggan
 	清 李
+	Joe Stylin'
+	Malfaren
+	Leanedwuff
+	Mango
+	Joseph Barron
 	Arzuru
 	Chazo
 	Sunthraa Chan'sei
 	GD Niemsis
 	box boyo
 	MoonlightShadow
-	Blaze
 	Nurgle Prince
-	FluffAurntem
-	Ryan Fielding
-	Tyler Howard
-	Giacomo
 	jank
 	Jsnrg3000
+	Blaze
+	Louie Rascal
 	Zachine
+	HighGround212
 	humoi
 	DrFrank
-	the Prussian Furry
 	TheWatcher
+	the Prussian Furry
+	Ryan Fielding
+	FluffAurntem
+	Giacomo
+	Tyler Howard
+	Crowbar Sniper
 	Giacomone
 	AkiraTomi
 	Roku
-	Ecafymtoohs
-	Dominic Smolej
-	David McKenzie
 	Dragon _hero76
-	Mae
-	Thomas Garou
-	something
-	dasutamu
-	JohnFastolf101
-	Daiki Diaz
-	燃烧的狐狸
-	kyouko zhang
+	Sebastian Cipponeri
 	Ias Delino Iney
+	燃烧的狐狸
+	something
+	Thomas Garou
+	JohnFastolf101
+	Mae
+	kyouko zhang
+	Daiki Diaz
 	Lucas Yoshino
-	Azurite AC
-	zavo
-	Recreaf
-	Hunterofsorrows
-	StarSpectre
-	DeVout Numelran
+	ZeUbPat
+	Zoey D Rapp
+	dasutamu
+	Kaen The Draconic Fox
+	Man
 	chyzalt chyzman
-	潘禹全
-	BillboDrawings
-	Сократ Ржевский
-	Hayato Nakamura
-	銀狐
-	liyang
 	之灵 遗忘
+	Hayato Nakamura
+	liyang
 	Wyatt Heltemes
-	AnonSpace
-	ARedBugge
+	Hunterofsorrows
+	Recreaf
+	DeVout Numelran
+	StarSpectre
+	BillboDrawings
 	Kingkenofthunder
+	銀狐
+	zavo
+	Сократ Ржевский
+	潘禹全
+	ARedBugge
+	Ashton Newell
+	Azurite AC
 	Cody McCoy
 	Dostluk V Harmony
 	DracoMan671
@@ -243,7 +260,9 @@
 	Nanakra
 	Niflar12
 	No
+	NovaPolaris
 	Scpdragon
+	Shootnsuch
 	Tacom8
 	TheKipiDragon
 	TNT00007
