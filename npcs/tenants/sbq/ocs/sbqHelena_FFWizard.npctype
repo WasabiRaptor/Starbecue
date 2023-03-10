@@ -988,9 +988,63 @@
 						}
 					}
 				},
-
-				"cockVore" : {},
-
+				"cockVore" : {
+					"next" : "race",
+					"default" : { // race
+						"next" : "personality",
+						"default" : { // personality
+							"next" : "mood",
+							"default" : { // mood
+								"next" : "getVoreButtonAction",
+								"request" : {
+									"next" : "doingVore",
+									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : [
+										["Heh, did you think I forgot about this kind of vore? I didn't.", "Took me long enough, didn't it?", "Mmm, we love this part, don't we <infusedName>?", "Oh my, I thought you'd *never* ask~"],
+										{"infusedSlot":true,
+											"sbqLoki_LokiVulpix": [
+												["Heads up, my dear secret. You've got a fun surprise incoming~", "Honestly, I'm not sure who enjoys this more: me or her~", "Looks like you've got someone's full attention, heh~", "Oooh, safe to say we've both been waiting for this~"]
+											]
+										}
+									]},
+									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : [
+										["That's the spot. Make sure to squirm lots for both of us, dear.", "I'll never get tired of this feeling~", "O-oh! That's perfect.", "Make sure to play nice, you two~" ],
+										{"infusedSlot":true,
+											"sbqLoki_LokiVulpix": [
+												["Ah, that burst of horny energy is perfect~", "Oh my, I think you've got a fan~", "Careful, <entityname>. She's got you now~", "Finally~"]
+											]
+										}
+									],
+									"dismissTime" : 10
+									}
+								},
+								"unprompted" : {
+									"next" : "doingVore",
+									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : [
+										["What's that <infusedName>? You want them? Sure thing~", "Heh, this horn dog has you in her sights~", "I was going to pass you up, but my dick has other thoughts~", "Time to introduce you to a hot dog's hot dog~"],
+										{"infusedSlot":true,
+											"sbqLoki_LokiVulpix": [
+												["Getting a good feel for this one, hm~?", "Mm, I agree. <entityname> will make a perfect fit for us~", "I think it's time to turn up the heat, don't you?", "Oooh, think they'll make good filler for our next hotel visit~?"]
+											]
+										}
+									]},
+									"after" : { "portrait" : ["OwO.png"], "randomDialogue" : [
+										["Hmhm, don't blame me, blame how eager <infusedName> got~", "Mmmng~ You sure fit in nicely~", "How delightfully hard~", "Aaaah, so good~"],
+										{"infusedSlot":true,
+											"sbqLoki_LokiVulpix": [
+												["Heh, it was really her idea, not mine~", "Woof, THAT was a good horny vibe~", "Whew, making both of us warm up nicely~", "Heh, this is almost like when I caught you, dear~"]
+											]
+										}
+									],
+									"dismissTime" : 10
+									}
+								},
+								"notFeelingIt" : { "portrait" : ["Determined.png"], "randomDialogue" : ["Sorry, I'm giving my goods a much deserved break. Next time, dear.", "Gotta take care of my package. You'll have to wait your turn~", "Heh, <infusedName>'s feeling a little shy. They'll come out later~", "Come back in the morning, dear. We'll be nice and firm then~"]},
+								"full" : { "portrait" : ["Determined.png"], "randomDialogue" : ["Someone else is having their fun with <infusedName> right now~", "Only one at a time. Maybe you can get them to go a little deeper~?", "Sorry, only one guest at time~", "If you want in, you'll have to coax them into moving~"]},
+								"tooBig" : { "portrait" : ["Blep.png"], "randomDialogue" : ["If it was anywhere else, I'd probably agree, but I have to take good care of <infusedName>~", "I'm flattered, but we're not *that* stretchy.", "No can do. I'm not going to stress out my goods~", "You're just a little too big for us, dear."]}
+							}
+						}
+					}
+				},
 				"breastVore" : {
 					"next" : "race",
 					"default" : { // race
@@ -3539,7 +3593,7 @@
 									"randomDialogue" : [ "Maybe I've got something a bit better for you this time.", "I've got another gift for you after this."]
 								},
 								"highValueQuestRewards": {
-									"randomDialogue" : [ "I think you'll really like what I've gotten you.", "My next gift will be really good heh."]
+									"randomDialogue" : ["You always manage to surprise me. I'll give you something from my personal wardrobe, then.", "I cherish these moments dearly. I'll get you a token of my appreciation.", "Now this deserves a reward. Don't let me forget.", "I'd be lying if I said I didn't enjoy our time together."]
 								}
 							}
 						}
@@ -3557,16 +3611,50 @@
 						"default" : { // mood
 							"next" : "shrinkOrGrow",
 							"shrink" : {
-								"randomDialogue" : ["Why's everything getting bigger?", "Ah! I'm shrinking!"]
+								"portrait" : ["Happy.png"],
+								"randomDialogue" : ["Mm, looking to make me more manageable?", "Oh? I wonder what you have in mind, dear.", "Hmm, I don't remember using Minimize.", "Big or small, I'm happy either way."]
 							},
 							"grow" : {
-								"randomDialogue" : ["Why's everything getting smaller?", "Ah! I'm growing!"]
+								"portrait" : ["Happy.png"],
+								"randomDialogue" : ["Making me bigger, are you?", "Careful, dear, I might not watch my step.", "Hmhm, you must like big dogs. Don't worry, I can keep a secret~", "Big or small, I'm happy either way."]
+							}
+						},
+						"hungry" : { // mood
+							"next" : "shrinkOrGrow",
+							"shrink" : {
+								"portrait" : ["Tired.png"],
+								"randomDialogue" : ["Can you shrink down my hunger as well?", "I suppose I can make due with less food now.", "Hmm, I think I can still manage to get a good-sized meal in me.", "Are you looking to fit into a warm, snug space~?"]
+							},
+							"grow" : {
+								"portrait" : ["Tired.png"],
+								"randomDialogue" : ["Watch out. My appetite scales with my size, dear.", "You are looking pretty tasty from this point of view.", "Ah, this works. Now I can cram in more tasty morsels.", "Being hungry sucks. Being bigger and hungry, not so much."]
+							}
+						},
+						"horny" : { // mood
+							"next" : "shrinkOrGrow",
+							"shrink" : {
+								"portrait" : ["UwU.png"],
+								"randomDialogue" : ["Goodness, I can only wonder what you have in mind~", "Mmm, looking to make me into a fun toy~?", "No matter my size, I would love to squeeze you somewhere warm and cramped~", "Oh my, this could be fun~"]
+							},
+							"grow" : {
+								"portrait" : ["UwU.png"],
+								"randomDialogue" : ["Hmhm, want me to hide you without a trace~?", "Just a warning, dear: the bigger I get, the more places you'll fit~", "Mm, let me be your shelter~", "The possibilities keep growing, as do I~"]
+							}
+						},
+						"friendly" : { // mood
+							"next" : "shrinkOrGrow",
+							"shrink" : {
+								"portrait" : ["Mad.png"],
+								"randomDialogue" : ["^red;Going to throw me at someone?", "^red;Small or not, I'm still capable.", "^red;Be careful where you put me.", "^red;I'm trusting you."]
+							},
+							"grow" : {
+								"portrait" : ["Mad.png"],
+								"randomDialogue" : ["^red;Good. No one will mess with us.", "^red;Sorry if I step on you.", "^red;Need protection? Come here.", "^red;Now I can keep you safe."]
 							}
 						}
 					}
 				}
 			},
-			// when stepping on a character small enough
 			"didSteppy" : {
 				"next" : "race",
 				"default" : { // race
@@ -3576,7 +3664,29 @@
 						"default" : {
 							"next" : "steppyType", // walking, running, falling
 							"default" : {
-								"randomDialogue" : [ "hehe, whoops!", "Oh did I step on something?", "You tinies need to pay attention more!"]
+								"portrait" : ["Happy.png"],
+								"randomDialogue" : ["Ah, sorry about that.", "Oops! Better watch where I'm <steppytype>.", "Oh! Hello down there.", "Oh? Did I hear a squish?"]
+							}
+						},
+						"hungry" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"portrait" : ["Tired.png"],
+								"randomDialogue" : ["Oh? A potential snack?", "A little too small to quell my hunger.", "You might help put a small dent in my hunger.", "Heh, you'd fit perfectly in a hot dog bun."]
+							}
+						},
+						"horny" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"portrait" : ["UwU.png"],
+								"randomDialogue" : ["My my, something feels nice under my paws~", "Oh? An admirer? Please, feel free to indulge yourself~", "Mmm, care to give me a rub or two~?", "Fun sized, hmm? I can think of a few places for you~"]
+							}
+						},
+						"friendly" : {
+							"next" : "steppyType", // walking, running, falling
+							"default" : {
+								"portrait" : ["Mad.png"],
+								"randomDialogue" : ["^red;Hey, be careful.", "^red;Sorry, I'm on the move.", "^red;Grrrr, at least you're not a Lego.", "^red;Odd, they were here a moment ago."]
 							}
 						}
 					}
@@ -3592,17 +3702,15 @@
 						"default" : {
 							"next" : "steppyType", // walking, running, falling
 							"default" : {
+								"portrait" : ["Happy.png"],
 								"randomDialogue" : [
-									["Ahhh!", "AH!", "oof!", "eep!"],
-									["You stepped on me!", "Watch your step!"],
-									["Be careful where you're <steppyType>!", "Watch where you're <steppyType>!"],
-									["Look out!", "Careful!"]
+									"Oh! Hello to you, too.", "Need a little pep in your step? Bring me along!", "Heh, I'm down here, dear.", "My, what nice feet you have~"
 								]
 							},
 							"falling" : {
+								"portrait" : ["Happy.png"],
 								"randomDialogue" : [
-									["Ahhh!", "AH!", "oof!", "eep!"],
-									["You're stomping on me!", "I'm getting smushed!", "*wheeze*"]
+									"Bork?!", "Bork.", "Bork!", "...bork."
 								]
 							}
 						}
@@ -3610,7 +3718,6 @@
 				}
 			}
 		},
-
 		"sbqPredRewards" : {
 			// Time is in minutes here!
 			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
@@ -3714,9 +3821,9 @@
 			"navelVorePred" : false,
 
 			"analVorePred" : false,
-			"unbirthPred" : true,
+			"unbirthPred" : false,
 			"cockVorePred" : false,
-			"breastVorePred" : true
+			"breastVorePred" : false
 		},
 
 		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
@@ -3729,7 +3836,10 @@
 
 			"digestEnable" : false,
 			"bellyDigestEnable" : false,
-			"wombDigestEnable" : false
+			"wombDigestEnable" : false,
+			"breastsDigestEnable" : false,
+			"shaftDigestEnable" : false
+
 		},
 		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
 		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all

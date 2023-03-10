@@ -575,14 +575,14 @@ function dialogueCont:onClick()
 			end
 			if continue and option[2].nearEntitiesNamed ~= nil then
 				continue = false
-				local found = checkEntityName( world.entityQuery( world.entityPosition(player.id()), option[2].range or 10, sbq.prevDialogueBranch.continue.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), option[2].nearEntitiesNamed)
+				local found = checkEntityName( world.entityQuery( world.entityPosition(player.id()), option[2].range or 10, option[2].queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), option[2].nearEntitiesNamed)
 				for _, id in ipairs(found) do
 					continue = true
 					table.insert(entities, id)
 				end
 			end
 			if continue and option[2].nearUniqueId ~= nil then
-				local found = checkEntityUniqueId( world.entityQuery( world.entityPosition(player.id()), option[2].range or 10, sbq.prevDialogueBranch.continue.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), option[2].nearUniqueId)
+				local found = checkEntityUniqueId( world.entityQuery( world.entityPosition(player.id()), option[2].range or 10, option[2].queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), option[2].nearUniqueId)
 				for _, id in ipairs(found) do
 					continue = true
 					table.insert(entities, id)

@@ -253,6 +253,7 @@
 				]
 			},
 			"talkAboutKinks" : {
+				"dialogueTreeReturn" : ["talkAboutKinks"],
 				"randomDialogue" : [
 					"So what kinky stuff did you want to know?",
 					"What're today's horny questions?"
@@ -312,6 +313,32 @@
 								}]
 							]
 						}
+					}],
+					["Cock TFed by Helena", {
+						"checkPlayerLikesKinks" : ["cockInfusion"],
+						"nearUniqueId" : ["sbqHelena_FFWizard"],
+						"range" : 500,
+						"portrait":[
+							"Shocked.png",
+							"Dizzy.png",
+							"Relieved.png",
+							"UwU.png",
+							"UwU.png",
+							"Shocked.png",
+							"Relieved.png",
+							"Dizzy.png"
+						],
+						"dialogue" : [
+							"<confused>A-ah! H-how did you know about that!?",
+							"And you've brought her to this colony too... gosh ahh~",
+							"S-since you're asking... I once spent a uh... quite some time as her cock..",
+							"<slowlove>It was... amazing to be honest, submitting... getting claimed by her, getting used... praising me when she was alone...",
+							"<slowlove>My mind drifting and getting lost in all that pleasure as I twitch and throb away... her prized possession...",
+							"A-Ah t-there I go rambling a bit!",
+							"<love>Just ahh, it was uh extremely hot, just don't let that give you any ideas!",
+							"<dontSpeak><slowlove>^#FFFFFF7F;(If they just grabbed my summon card... and put it in Helena's slot... who knows how long I'd be stuck there...)"
+						],
+						"playerSaveSettings" : { "cockInfusionHelenaTalk" : true }
 					}],
 					["Thats it for now.", {"jump":["talkAboutSelf"]}]
 				]

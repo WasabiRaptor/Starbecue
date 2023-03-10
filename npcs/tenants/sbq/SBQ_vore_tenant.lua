@@ -446,6 +446,8 @@ function sbq.say(string, tags, imagePortrait, emote, appendName)
 		if string:find("<sad>") then
 			status.addEphemeralEffect("sbqSad")
 		end
+		if string:find("<dontSpeak>") then return end
+
 		string = sb.replaceTags(string, tags)
 		if string == "" then return end
 
