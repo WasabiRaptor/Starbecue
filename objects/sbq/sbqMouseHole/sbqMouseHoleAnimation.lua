@@ -12,10 +12,12 @@ local blockViewMasks = {}
 local spaces
 local detection = {}
 local position = {}
+local viewOffset = {4,4}
 
 function init()
 	script.setUpdateDelta(2)
 	position = objectAnimator.position()
+	viewOffset = objectAnimator.getParameter("viewOffset") or viewOffset
 end
 
 function update()
@@ -145,7 +147,7 @@ function playerViewCircle()
 				timers[player] = 5
 			end
 			if type(timers[player]) == "number" and timers[player] > 0 then
-				local distance = vec2.mul(vec2.floor(vec2.mul(vec2.add(entity.distanceToEntity(player), { -4, -6 }), 8)), -1)
+				local distance = vec2.mul(vec2.floor(vec2.mul(vec2.add(entity.distanceToEntity(player), viewOffset), 8)), -1)
 				for _, coords in ipairs(spaces or {}) do
 					local x = coords[1]
 					local y = coords[2]
