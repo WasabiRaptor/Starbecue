@@ -1326,7 +1326,7 @@
 									"sbqHeal" : { "randomDialogue" : [ "Heh, a very good milk bath...", "Ahh, feeling better now...", "Comfy and soothing...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
 									"sbqMilkSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
 									"sbqMilkDigest" : {
-										"next" : "digestImmunity",
+										"next" : "milkDigestImmunity",
 										"true" : { "randomDialogue" : [ "Huh, kinda squeezy...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
 										"false" : { "randomDialogue" : [ "Huh, there's more milk in here... wait.  Oh.", "Guess you want to know what I taste like?", "Heh, me-flavored milk.", "Making me into a fresh batch of milk?", {"check":{"shirt":"true"}, "add" : [ "Careful, I'll stain your top..." ] } ] }
 									}
@@ -1340,7 +1340,7 @@
 									"sbqHeal" : { "randomDialogue" : [ "A wonderful milk bath~", "Mmm, I feel wonderful~", "So soothing and comfy in here~", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
 									"sbqMilkSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
 									"sbqMilkDigest" : {
-										"next" : "digestImmunity",
+										"next" : "milkDigestImmunity",
 										"true" : { "randomDialogue" : [ "Squeezy~", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
 										"false" : { "randomDialogue" : [ "Gosh, I can feel myself sloshing~", "Hee, wondering what I taste like~?", "Heh, I taste good~", "I hope I make a good batch of milk for you~", {"check":{"shirt":"true"}, "add" : [ "Gonna get your shirt soaked with me at this rate~" ] } ] }
 									}
@@ -1354,7 +1354,7 @@
 									"sbqHeal" : { "randomDialogue" : [ "A m-milk bath, here... heck...!", "It feels so... good... <keysmash>", "So c-comfy...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
 									"sbqMilkSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
 									"sbqMilkDigest" : {
-										"next" : "digestImmunity",
+										"next" : "milkDigestImmunity",
 										"true" : { "randomDialogue" : [ "Feels s-squeezy...", {"add":"struggling.location.predator.race.personality.mood.default"} ] },
 										"false" : { "randomDialogue" : [ "Oh heck... I'm turning into m-milk...!", "You... want to know what I t-taste like?  ...<keysmash>", "...I taste... g-good...", "Ohgosh you're m-making me into milk...!", {"check":{"shirt":"true"}, "add" : [ "You're g-gonna leak me into your shirt...!" ] } ] }
 									}
