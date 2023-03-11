@@ -12,7 +12,7 @@ local blockViewMasks = {}
 local spaces
 local detection = {}
 local position = {}
-local viewOffset = {4,4}
+local viewOffset = {-4,-4}
 
 function init()
 	script.setUpdateDelta(2)
