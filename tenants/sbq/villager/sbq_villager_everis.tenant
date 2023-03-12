@@ -1,0 +1,34 @@
+{
+	"name": "sbq_villager_everis",
+	"priority": 51,
+	
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"everis" : 6
+	},
+	
+	"orderFurniture" : [
+	{"name":"chelseaplush", "count":1},
+	{"name":"evlight", "count":1},
+	{"name":"evtable", "count":1},
+	{"name":"everisholovision", "count":1},
+	{"name":"fluffybedding", "count":1}
+	],
+	
+	"checkRequirements" : {},
+	
+	"tenants": [
+	{
+		"spawn": "npc",
+		"species": ["everis"],
+		"type": "sbqVoreTenant",
+		"overrides": {}
+	}
+	],
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}
