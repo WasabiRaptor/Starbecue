@@ -87,6 +87,7 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Bunnykin](https://steamcommunity.com/sharedfiles/filedetails/?id=732452461)
 - [Yharian](https://www.furaffinity.net/view/47517002/)
 - [Spacekidds](https://steamcommunity.com/sharedfiles/filedetails/?id=2790390697)
+- [Viera](https://steamcommunity.com/sharedfiles/filedetails/?id=732276079)
 
 This mod includes no assets from the respective modded races, modified or not, meaning said modded race *must* be installed to access its content
 
