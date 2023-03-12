@@ -588,7 +588,7 @@ end
 
 function sbq.refreshDeedPage()
 	sbq.tenantList = {}
-	local occupier = sbq.storage.occupier
+	local occupier = sbq.storage.occupier or {}
 	if not sbq.storage.crewUI then
 		tenantListScrollArea:clearChildren()
 	end
