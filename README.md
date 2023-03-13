@@ -89,6 +89,7 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Spacekidds](https://steamcommunity.com/sharedfiles/filedetails/?id=2790390697)
 - [Viera](https://steamcommunity.com/sharedfiles/filedetails/?id=732276079)
 - [Everis](https://steamcommunity.com/sharedfiles/filedetails/?id=1117006719)
+- [Bossmonster](https://steamcommunity.com/sharedfiles/filedetails/?id=1563090801)
 
 This mod includes no assets from the respective modded races, modified or not, meaning said modded race *must* be installed to access its content
 
@@ -96,12 +97,15 @@ This mod includes no assets from the respective modded races, modified or not, m
 ### NPC Vore Tenants
 - Loki Deerfox (Pred/Prey) LokiVulpix
 - Auri Drimyr (Pred/Prey) LokiVulpix
-- Zevi Goocat (Pred/Prey) Zygahedron
 - Socks Flareon (Pred/Prey) LokiVulpix
+- Clover Meowscarada (Pred/Prey) LokiVulpix
+- Zevi Goocat (Pred/Prey) Zygahedron
 - Helena Hellhound (Pred/Prey) FFWizard
 - Sandy Floatporeon (Pred/Prey) Fevix
 - Batty (Pred/Prey) Xeronious
 - Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706) mod )
+- Akari Kaen
+- Ferri Catfox (Pred/Prey) Ferrilata_
 
 ### Other Things
 - TF Dart Gun
