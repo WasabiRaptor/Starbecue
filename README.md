@@ -54,8 +54,11 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes)
 - [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1266991719) (Remade)
 - Vaporeon (SBQ)
+- [Jolteon](https://steamcommunity.com/sharedfiles/filedetails/?id=2075613227)
 - Flareon (SBQ)
+- [Espeon](https://steamcommunity.com/sharedfiles/filedetails/?id=1144430324)
 - [Umbreon](https://steamcommunity.com/sharedfiles/filedetails/?id=730345787)
+- [Glaceon](https://steamcommunity.com/sharedfiles/filedetails/?id=2012704863)
 - [Sylveonoid](https://steamcommunity.com/sharedfiles/filedetails/?id=2843385916)
 - [Braixen](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148)
 - [Delphox](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148)
@@ -90,6 +93,7 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Viera](https://steamcommunity.com/sharedfiles/filedetails/?id=732276079)
 - [Everis](https://steamcommunity.com/sharedfiles/filedetails/?id=1117006719)
 - [Bossmonster](https://steamcommunity.com/sharedfiles/filedetails/?id=1563090801)
+- [Twilit Wolves](https://steamcommunity.com/sharedfiles/filedetails/?id=1818480557)
 
 This mod includes no assets from the respective modded races, modified or not, meaning said modded race *must* be installed to access its content
 
@@ -175,6 +179,8 @@ Players can use the quickbar to access Starbecue's settings, the prey tab brings
 Currently this does not affect whether any other vore mods can or can't perform vore on the player.
 
 # Support Us!
+
+https://ko-fi.com/lokivulpix (I end up getting a better cut of precentage via Ko-Fi)
 
 https://www.patreon.com/LokiVulpix
 

@@ -10,12 +10,21 @@ function sbq.getPatronsString()
 	return patronsString
 end
 sbq.patronsString = sbq.getPatronsString()
+function sbq.getKofiString()
+	local patronsString = ""
+	for _, patron in ipairs(root.assetJson("/kofiSupporters.json")) do
+		patronsString = patronsString..patron.."^reset;\n"
+	end
+	return patronsString
+end
+sbq.KoFiString = sbq.getKofiString()
 
 function sbq.setHelpTab()
 	if sbq.doneHelpTab then return end
 	sbq.doneHelpTab = true
 	helpTabContents:clearChildren()
-	helpTabContents:addChild({type = "layout", mode = "horizontal", children = sbq.extraTabs.helpTab.contents})
+	helpTabContents:addChild({ type = "layout", mode = "horizontal", children = sbq.extraTabs.helpTab.contents })
+	kofiLabel:setText(sbq.KoFiString)
 	patronsLabel:setText(sbq.patronsString)
 
 	sbq.selectedHelpTab = helpTabs.tabs.predHelpTab

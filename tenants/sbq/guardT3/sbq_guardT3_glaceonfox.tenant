@@ -1,0 +1,43 @@
+{
+	"name": "sbq_guardT3_glaceonfox",
+	"priority": 54,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"prism" : 8
+	},
+
+	"checkRequirements" : { "checkImage" : "/humanoid/glaceonfox/malebody.png" },
+	"orderFurniture" : [
+		{"name":"prismbed", "count":1},
+		{"name":"prismchair", "count":1},
+		{"name":"prismdoor", "count":1},
+		{"name":"prismtable", "count":1},
+		{"name":"prismlamp3", "count":1},
+		{"name":"prismrock4", "count":1},
+		{"name":"prismrock5", "count":1},
+		{"name":"prismrock6", "count":1},
+		{"name":"prismrock7", "count":1},
+		{"name":"prismrock8", "count":1},
+		{"name":"prismrockrunes", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["glaceonfox"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

@@ -195,9 +195,11 @@ function init()
 		storage.settings.isFollowing = recruitable.isFollowing()
 	end)
 	message.setHandler("sbqDigestStore", function(_, _, location, uniqueId, item)
-		if not uniqueId then return end
+		if (not uniqueId) or (not item) or (not location) then return end
+		local item = item
 		local digestedStoredTable = status.statusProperty("sbqStoredDigestedPrey") or {}
 		digestedStoredTable[location] = digestedStoredTable[location] or {}
+		item.count = (item.count or 1) + ((digestedStoredTable[location][uniqueId] or {}).count or 0)
 		digestedStoredTable[location][uniqueId] = item
 		status.setStatusProperty("sbqStoredDigestedPrey", digestedStoredTable)
 		local index = config.getParameter("tenantIndex")

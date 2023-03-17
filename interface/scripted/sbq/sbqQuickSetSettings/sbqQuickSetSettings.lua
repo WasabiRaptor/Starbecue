@@ -120,6 +120,13 @@ function init()
 	sbq.numberBoxColor(defaultCompressionMultiplier, 0)
 end
 
+function sbq.drawLocked(w, icon)
+	local c = widget.bindCanvas(w.backingWidget)
+	c:clear()
+	local pos = vec2.mul(c:size(), 0.5)
+	c:drawImageDrawable(icon, pos, 1)
+end
+
 function sbq.checkLockedSettingsButtons(settings, override, func)
 	for setting, value in pairs(sbq[settings] or {}) do
 		local button = _ENV[setting]
