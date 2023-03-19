@@ -1,19 +1,36 @@
 # Ko-Fi Supporters
 ## Thank you all for your support!
+	Maxel Noone
+	HiddenPiecrust
+	The Cat
 	Freeliller
 	Joseph
 	Cammy
 	Mojma
-	Nathan Wood
 	John Doe
-	Goose
+	Dezzacord
+	Tacogun
+	LoremasterSilas
+	Xalic Aviare
+	Upforanything
+	Airinnann
+	Bane Fox
+	destiny42
+	Nova
 	Kalito
+	Frisk
+	xian zhou
+	LilacStarvix
+	Greennyy
+	Raru
+	Goose
+	Ko-fi Supporter
 	GINKO
 	shadowviolet
 	Anthony 
 	Krazeni
-	xian zhou
-	Frisk
+	Rymanzzzzz
+	Nathan Wood
 	Reokami
 	Ko-fi Supporter
 	Chris Colmenero
@@ -21,9 +38,9 @@
 	Amuse
 	Ilindar
 	Pony Fan
-	LilacStarvix
+	Zachine
 	Verse Forty
 	BigR
 	Anonymous
-	Greennyy
+	jdthehero213
 	Bonbon
