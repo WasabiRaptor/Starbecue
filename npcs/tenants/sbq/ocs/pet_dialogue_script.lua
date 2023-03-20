@@ -1,6 +1,6 @@
 local petCount = 0
 
-function dialogueBoxScripts.petting(dialogueTree, settings, branch)
+function dialogueBoxScripts.petting(dialogueTree, settings, branch, eid, ...)
 	petCount = petCount + 1
 	local petType = "normal"
 	local addPetActions = false

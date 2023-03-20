@@ -50,6 +50,7 @@
 	"portraitPath" : "/humanoid/sbqAuri_LokiVulpix/portraits/A",
 	"defaultPortrait" : "Neutral.png",
 	"defaultName" : "Auri",
+	"dialogueBoxScripts" : ["/objects/sbq/sbqShop/sbqShopAuri/fix_data.lua"],
 	"dialogueTree" : {
 		"greeting" : {
 			"next" : "mood",
@@ -101,7 +102,9 @@
 								],
 								"jump" : [ "greeting", "mood", "continue"]
 							}
-						}]
+						}],
+						[ "I think I'm bugged!", { "randomDialogue" : [ "This might help then, try to report what happened if you actually were."], "callScript":"fixData"} ]
+
 					]
 				}
 			}
