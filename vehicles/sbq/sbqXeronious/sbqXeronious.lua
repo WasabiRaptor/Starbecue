@@ -92,7 +92,10 @@ function sbq.letout(id)
 	local location = sbq.lounging[id].location
 
 	if location == "belly" then
-		if sbq.heldControl(sbq.driverSeat, "down") or sbq.lounging[id].species == "sbqEgg" then
+		if sbq.lounging[id].species == "sbqEgg"then
+			return sbq.doTransition("eggEscape", {id = id})
+		end
+		if sbq.heldControl(sbq.driverSeat, "down") then
 			return sbq.doTransition("analEscape", {id = id})
 		else
 			return sbq.doTransition("oralEscape", {id = id})

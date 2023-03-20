@@ -87,6 +87,8 @@ function sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, pre
 				preyIndex = preyIndex + 1
 				sbq.checkPreyListEnabled(direction, tconfig, scriptargs, preyIndex, preyList)
 			end
+		elseif tconfig.failPreyCheck then
+			sbq.doTransition(tconfig.failPreyCheck, scriptargs)
 		else
 			animator.playSound("error")
 		end
@@ -95,9 +97,9 @@ end
 
 function sbq.doTransition(direction, scriptargs, log)
 	local scriptargs = scriptargs or {}
-	if (not sbq.stateconfig or not sbq.stateconfig[sbq.state].transitions[direction]) then return end
+	if (direction and type(direction) == "string" and (not sbq.stateconfig or not sbq.stateconfig[sbq.state].transitions[direction])) then return end
 	if sbq.transitionLock then return end
-	local tconfig = sbq.getOccupancyTransition(sbq.stateconfig[sbq.state].transitions[direction], scriptargs or {})
+	local tconfig = sbq.getOccupancyTransition(((type(direction) == "string" and sbq.stateconfig[sbq.state].transitions[direction]) or direction), scriptargs or {})
 	if tconfig == nil then return end
 	if tconfig.settings then
 		if not sbq.checkSettings(tconfig.settings) then return end
@@ -117,6 +119,8 @@ function sbq.doTransition(direction, scriptargs, log)
 				else
 					sbq.doingTransition(tconfig, direction, scriptargs)
 				end
+			elseif tconfig.failPreyCheck then
+				sbq.doTransition(tconfig.failPreyCheck, scriptargs, log)
 			else
 				animator.playSound("error")
 			end
