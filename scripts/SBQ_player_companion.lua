@@ -54,8 +54,61 @@ function init()
 	message.setHandler( "sbqPlayerCompanions", function (_,_, func, ...)
 		return playerCompanions[func](...)
 	end)
-	message.setHandler( "sbqSetRecruits", function (_,_, name, data)
-		recruitSpawner[name] = recruitSpawner:_loadRecruits(data or {})
+	message.setHandler("sbqSetRecruit", function(_, _, data)
+		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
+		for _, companionType in ipairs(companionTypes) do
+			local companions = playerCompanions.getCompanions(companionType)
+			local reload
+			for i, follower in ipairs(companions) do
+				if follower.uniqueId == data.uniqueId then
+					companions[i] = data
+					reload = true
+					break
+				end
+			end
+			if reload then
+				playerCompanions.setCompanions(companionType, companions)
+				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
+			end
+		end
+		recruitSpawner:markDirty()
+	end)
+	message.setHandler("sbqCrewSaveSettings", function(_, _, settings, uniqueId)
+		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
+		for _, companionType in ipairs(companionTypes) do
+			local companions = playerCompanions.getCompanions(companionType)
+			local reload
+			for i, follower in ipairs(companions) do
+				if follower.uniqueId == uniqueId then
+					companions[i].config.parameters.scriptConfig.sbqSettings = settings
+					reload = true
+					break
+				end
+			end
+			if reload then
+				playerCompanions.setCompanions(companionType, companions)
+				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
+			end
+		end
+		recruitSpawner:markDirty()
+	end)
+	message.setHandler("sbqCrewSaveDigestedPrey", function(_, _, digestedStoredTable, uniqueId)
+		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
+		for _, companionType in ipairs(companionTypes) do
+			local companions = playerCompanions.getCompanions(companionType)
+			local reload
+			for i, follower in ipairs(companions) do
+				if follower.uniqueId == uniqueId then
+					companions[i].config.parameters.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = digestedStoredTable
+					reload = true
+					break
+				end
+			end
+			if reload then
+				playerCompanions.setCompanions(companionType, companions)
+				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
+			end
+		end
 		recruitSpawner:markDirty()
 	end)
 

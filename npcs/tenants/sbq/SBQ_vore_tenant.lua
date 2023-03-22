@@ -206,6 +206,9 @@ function init()
 		if storage.respawner and index ~= nil then
 			world.sendEntityMessage(storage.respawner, "sbqSaveDigestedPrey", digestedStoredTable, index)
 		end
+		if recruitable.ownerUuid() then
+			world.sendEntityMessage(recruitable.ownerUuid(), "sbqCrewSaveDigestedPrey", digestedStoredTable, entity.uniqueId())
+		end
 	end)
 	message.setHandler("sbqSaveDigestedPrey", function(_, _, digestedStoredTable )
 		status.setStatusProperty("sbqStoredDigestedPrey", digestedStoredTable)
@@ -386,7 +389,10 @@ end
 function sbq.saveSettingsToDeed()
 	local index = config.getParameter("tenantIndex")
 	if storage.respawner and index ~= nil then
-		world.sendEntityMessage(storage.respawner, "sbqSaveSettings", storage.settings or {}, index )
+		world.sendEntityMessage(storage.respawner, "sbqSaveSettings", storage.settings or {}, index)
+	end
+	if recruitable.ownerUuid() then
+		world.sendEntityMessage(recruitable.ownerUuid(), "sbqCrewSaveSettings", storage.settings or {}, entity.uniqueId())
 	end
 end
 function sbq.saveSettingsToOccupantHolder()

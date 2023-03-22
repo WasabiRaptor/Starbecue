@@ -410,7 +410,7 @@ function sbq.doClickActions(state, dt)
 		sbq.action(state, (state.defaultActions or {})[2], "altFire")
 	else
 		if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") then
-			local action = sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage.clickAction
+			local action = ((sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters or {}).scriptStorage or {}).clickAction
 			if not action or action == "unassigned" then
 				action = (state.defaultActions or {})[1]
 			end
@@ -420,7 +420,7 @@ function sbq.doClickActions(state, dt)
 		end
 
 		if (sbq.seats[sbq.driverSeat].controls.altHandItem == "sbqController") then
-			local action = sbq.seats[sbq.driverSeat].controls.altHandItemDescriptor.parameters.scriptStorage.clickAction
+			local action = ((sbq.seats[sbq.driverSeat].controls.altHandItemDescriptor.parameters or {}).scriptStorage or {}).clickAction
 			if not action or action == "unassigned" then
 				action = (state.defaultActions or {})[2]
 			end

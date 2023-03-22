@@ -13,6 +13,9 @@ indexes = {
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
+local cosmeticSlots = { "headCosmetic", "chestCosmetic", "legsCosmetic", "backCosmetic", "underchestCosmetic", "underlegsCosmetic" }
+local cosmeticItemType =  { "headarmor", "chestarmor", "legsarmor", "backarmor", "chestarmor", "legsarmor" }
+
 function sbq.changeSelectedFromList(list, label, indexName, inc )
 	indexes[indexName] = (indexes[indexName] or 1) + inc
 	if indexes[indexName] < 1 then
@@ -63,7 +66,7 @@ function sbq.drawLocked(w, icon)
 	c:drawImageDrawable(icon, pos, 1)
 end
 
-sbq.selectedMainTabFieldTab = mainTabField.tabs.tenantTab
+sbq.selectedMainTabFieldTab = mainTabField.tabs.deedTab
 
 function init()
 	local occupier = sbq.storage.occupier
@@ -214,16 +217,14 @@ function init()
 		sbq.checkLockedSettingsButtons("preySettings", "overridePreyEnabled", "changePreySetting")
 		sbq.checkLockedSettingsButtons("animOverrideSettings", "animOverrideOverrideSettings", "changeAnimOverrideSetting")
 
-		local slots = { "headCosmetic", "chestCosmetic", "legsCosmetic", "backCosmetic" }
-		local itemType =  { "headarmor", "chestarmor", "legsarmor", "backarmor"}
-		for i, slot in ipairs(slots) do
+		for i, slot in ipairs(cosmeticSlots) do
 			local itemSlot = _ENV[slot]
 			if itemSlot then
 				itemSlot:setItem(sbq.predatorSettings[slot])
 				itemSlot.autoInteract = (sbq.overrideSettings[slot] == nil)
 				function itemSlot:acceptsItem(item)
 					if sbq.overrideSettings[slot] == nil then
-						return (root.itemType((item or {}).name)) == itemType[i]
+						return (root.itemType((item or {}).name)) == cosmeticItemType[i]
 					end
 				end
 				function itemSlot:onItemModified()
@@ -589,9 +590,7 @@ end
 function sbq.refreshDeedPage()
 	sbq.tenantList = {}
 	local occupier = sbq.storage.occupier or {}
-	if not sbq.storage.crewUI then
-		tenantListScrollArea:clearChildren()
-	end
+	tenantListScrollArea:clearChildren()
 
 	if sbq.storage.occupier then
 		if type(occupier) == "table" and type(occupier.tenants) == "table" then
@@ -605,30 +604,30 @@ function sbq.refreshDeedPage()
 				local name = ((tenant.overrides or {}).identity or {}).name or ""
 				table.insert(sbq.tenantList, name)
 
-				if not sbq.storage.crewUI then
-					local panel = { type = "panel", expandMode = { 0, 1 }, style = "flat", children = {
-						{ mode = "vertical"},
-						{ type = "itemSlot", autoInteract = false, item = sbq.generateNPCItemCard(tenant), id = "tenant"..i.."ItemSlot" },
-						{
-							{ type = "label", text = ((tenant.overrides or {}).identity or {}).name or "" },
-							{ type = "button", caption = "X", color = "FF0000", id = "tenant" .. i .. "Remove", size = {12,12}, expandMode = { 0, 0 } }
-						}
-					}}
-					tenantListScrollArea:addChild(panel)
-					local button = _ENV["tenant" .. i .. "Remove"]
-					local itemSlot = _ENV["tenant" .. i .. "ItemSlot"]
-					function button:onClick()
-						player.giveItem(sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i]))
-						table.remove(sbq.storage.occupier.tenants, i)
-						world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
-						init()
-					end
-					function itemSlot:onMouseButtonEvent(btn, down)
-						indexes.tenantIndex = i
-						curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
-						curTenantIndex:setText(indexes.tenantIndex)
-						init()
-					end
+				local panel = { type = "panel", expandMode = { 0, 1 }, style = "flat", children = {
+					{ mode = "vertical" },
+					{ type = "itemSlot", autoInteract = false, item = sbq.generateNPCItemCard(tenant), id = "tenant" .. i .. "ItemSlot" },
+					{
+						{ type = "label", text = ((tenant.overrides or {}).identity or {}).name or "" },
+						{ type = "button", visible = not sbq.storage.crewUI, caption = "X", color = "FF0000",
+							id = "tenant" .. i .. "Remove", size = { 12, 12 }, expandMode = { 0, 0 } }
+					}
+				} }
+				tenantListScrollArea:addChild(panel)
+				local button = _ENV["tenant" .. i .. "Remove"]
+				local itemSlot = _ENV["tenant" .. i .. "ItemSlot"]
+				function button:onClick()
+					player.giveItem(sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i]))
+					table.remove(sbq.storage.occupier.tenants, i)
+					world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
+					init()
+				end
+
+				function itemSlot:onMouseButtonEvent(btn, down)
+					indexes.tenantIndex = i
+					curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
+					curTenantIndex:setText(indexes.tenantIndex)
+					init()
 				end
 			end
 		end

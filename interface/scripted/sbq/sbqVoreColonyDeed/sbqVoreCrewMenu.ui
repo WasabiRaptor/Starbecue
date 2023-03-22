@@ -7,9 +7,44 @@
 	"scripts" : [ "sbqVoreColonyDeed.lua" ],
 	"children" : [
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
+			{ "type" : "tab", "id" : "deedTab", "title" : "", "icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png", "color" : "ff00ff", "contents" : [
+				{"type" : "layout", "id": "deedSettingsLayout", "expandMode" : [1,0], "size" : [100,140], "mode": "horizontal", "children" : [
+					{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "size" : [100,140], "children" : [
+						{ "type" : "panel", "style" : "convex", "id" : "tenantScrollAreaPanel", "expandMode" : [1,0], "size" : [100, 40], "children" : [
+							{ "type" : "scrollArea", "id" : "tenantListScrollArea", "size" : [100, 30], "expandMode" : [1, 1], "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [1, 0], "children" : [ {"mode" : "horizontal"}]}
+						]},
+						{ "type" : "layout", "mode" : "vertical", "expandMode" : [2,2], "children" : []}
+					]}
+				]},
+				"spacer",
+				{"type" : "label", "id" : "tryWarpingLabel", "text" : "^#555;If this menu doesn't look right, try warping to refresh crew.", "align" : "center" }
+			]},
 			{ "type" : "tab", "id" : "tenantTab", "title" : "Crewmate", "icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png", "color" : "ff00ff", "contents" : [
 				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,165], "mode": "horizontal", "children" : [
 					{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "size" : [100,165], "children" : [
+						{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
+							{ "mode" : "h" },
+							[[
+								{ "expandMode" : [0,0] },
+								{ "type" : "label", "text" : "Head:", "align" : "center", "expand" : false },
+								{ "type" : "itemSlot", "id" : "headCosmetic" }
+							]],
+							[[
+								{ "expandMode" : [0,0] },
+								{ "type" : "label", "text" : "Chest:", "align" : "center", "expand" : false },
+								{ "type" : "itemSlot", "id" : "chestCosmetic" }
+							]],
+							[[
+								{ "expandMode" : [0,0] },
+								{ "type" : "label", "text" : "Legs:", "align" : "center", "expand" : false },
+								{ "type" : "itemSlot", "id" : "legsCosmetic" }
+							]],
+							[[
+								{ "expandMode" : [0,0] },
+								{ "type" : "label", "text" : "Back:", "align" : "center", "expand" : false },
+								{ "type" : "itemSlot", "id" : "backCosmetic" }
+							]]
+						]},
 						[{ "type" : "panel", "id" : "tenantBehaviorPanel", "style" : "convex", "children" : [
 							{ "mode" : "v", "spacing" : -1 },
 							{ "type" : "label", "text" : "NPC Behavior", "align" : "center" }
@@ -57,10 +92,7 @@
 				{"type" : "layout", "mode" : "vertical", "id" : "notStarbecueNPC", "children" : [
 					{"type" : "label", "text" : "This NPC is not a Starbecue NPC.", "align" : "center" },
 					{"type" : "button", "id" : "convertNPC", "caption" : "Convert", "toolTip" : "Converts this NPC into the equivalent SBQ Version.", "expandMode" : [0, 0]}
-				]},
-				"spacer",
-				{"type" : "label", "id" : "tryWarpingLabel", "text" : "^#555;If this menu doesn't look right, try warping to refresh crew.", "align" : "center" }
-
+				]}
 
 			]},
 			{ "type" : "tab", "id" : "globalPredSettings", "title" : "Pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
