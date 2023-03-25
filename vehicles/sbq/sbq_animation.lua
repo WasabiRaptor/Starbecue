@@ -353,8 +353,6 @@ function sbq.victimAnimUpdate(eid)
 	local rotation = sbq.getVictimAnimInterpolatedValue(victimAnim, "r", progress)
 	local translation = { sbq.getVictimAnimInterpolatedValue(victimAnim, "x", progress), sbq.getVictimAnimInterpolatedValue(victimAnim, "y", progress)}
 
-	sbq.logJson({transformGroup,progress})
-	sbq.logJson(translation)
 	--sb.setLogMap("-currTime", currTime)
 	--sb.setLogMap("-progress", progress)
 	--sb.setLogMap("-frame", victimAnim.frame)

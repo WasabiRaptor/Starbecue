@@ -691,7 +691,16 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	if status == "sbqRemoveBellyEffects" then
 		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
 	else
-		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "sbqApplyDigestEffect", {status, { power = powerMultiplier, location = location, dropItem = sbq.getLocationSetting(location, "PredDigestDrops")}, sbq.driver or entity.id()})
+		local args = {
+			power = powerMultiplier,
+			location = location,
+			dropItem = sbq.getLocationSetting(location, "PredDigestDrops"),
+			absorbPlayers = sbq.getLocationSetting(location, "AbsorbPlayers"),
+			absorbOCs =  sbq.getLocationSetting(location, "AbsorbOCs"),
+			absorbSBQNPCs = sbq.getLocationSetting(location, "AbsorbSBQNPCs"),
+			absorbOthers =  sbq.getLocationSetting(location, "AbsorbOthers")
+		}
+		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "sbqApplyDigestEffect", {status, args, sbq.driver or entity.id()})
 	end
 
 	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then

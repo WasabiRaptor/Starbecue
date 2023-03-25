@@ -308,7 +308,9 @@ end
 
 function sbq.savePredSettings()
 	sbq.tenant.overrides.scriptConfig.sbqSettings = sbq.predatorSettings
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveSettings", sbq.predatorSettings, indexes.tenantIndex)
+	if not sbq.storage.detached then
+		world.sendEntityMessage(pane.sourceEntity(), "sbqSaveSettings", sbq.predatorSettings, indexes.tenantIndex)
+	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSaveSettings", sbq.predatorSettings)
 	end
@@ -317,14 +319,18 @@ sbq.saveSettings = sbq.savePredSettings
 
 function sbq.savePreySettings()
 	sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = sbq.preySettings
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSavePreySettings", sbq.preySettings, indexes.tenantIndex)
+	if not sbq.storage.detached then
+		world.sendEntityMessage(pane.sourceEntity(), "sbqSavePreySettings", sbq.preySettings, indexes.tenantIndex)
+	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSavePreySettings", sbq.preySettings)
 	end
 end
 
 function sbq.saveDigestedPrey()
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveDigestedPrey", sbq.storedDigestedPrey, indexes.tenantIndex )
+	if not sbq.storage.detached then
+		world.sendEntityMessage(pane.sourceEntity(), "sbqSaveDigestedPrey", sbq.storedDigestedPrey, indexes.tenantIndex )
+	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage( sbq.tenant.uniqueId, "sbqSaveDigestedPrey", sbq.storedDigestedPrey )
 	end
@@ -346,7 +352,9 @@ end
 function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 	sbq.animOverrideSettings[settingname] = settingvalue
 	sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = sbq.animOverrideSettings
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings, indexes.tenantIndex)
+	if not sbq.storage.detached then
+		world.sendEntityMessage(pane.sourceEntity(), "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings, indexes.tenantIndex)
+	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings)
 		world.sendEntityMessage(sbq.tenant.uniqueId, "speciesAnimOverrideRefreshSettings", sbq.animOverrideSettings)
@@ -359,6 +367,10 @@ end
 if callTenant ~= nil then
 	function callTenant:onClick()
 		world.sendEntityMessage(pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = world.entityPosition(player.id())})
+	end
+
+	if sbq.storage.detached then
+		callTenant:setVisible(false)
 	end
 
 	local applyCount = 0
@@ -671,6 +683,13 @@ function sbq.generateNPCItemCard(tenant)
 	validateIdentity(tenant.overrides.identity or {})
 
 	local item = copy(sbq.config.npcCardTemplate)
+
+	if npcConfig.scriptConfig.isOC then
+		item.parameters.rarity = "rare"
+	elseif npcConfig.scriptConfig.sbqNPC then
+		item.parameters.rarity = "uncommon"
+	end
+
 	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
 	item.parameters.inventoryIcon = root.npcPortrait("bust", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 	item.parameters.description = (npcConfig.scriptConfig or {}).cardDesc or ""

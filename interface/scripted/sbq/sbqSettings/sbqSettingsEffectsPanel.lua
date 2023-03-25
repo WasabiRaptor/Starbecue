@@ -210,14 +210,30 @@ function sbq.updateLocationTab(location)
 		local absorbedPreyList
 		local absorbedPreyPanel = { type = "panel", style = "flat", expandMode = {1,0}, children = {
 			{ type = "layout", mode = "vertical", spacing = 0, children = {
-				{ type = "label", text = "Absorbed Prey", align = "center" },
-				{ type = "itemGrid", slots = 5, id = location.."ItemGrid", autoInteract = true },
+				{
+					{ type = "label", text = "Absorbed Prey", align = "center" },
+					{ type = "checkBox", id = location .. "AbsorbPlayers", checked = sbq.predatorSettings[location .. "AbsorbPlayers"], toolTip = "Absorb Players upon Digestion." },
+					{ type = "checkBox", id = location .. "AbsorbOCs", checked = sbq.predatorSettings[location .. "AbsorbOCs"], toolTip = "Absorb OCs upon Digestion." },
+					{ type = "checkBox", id = location .. "AbsorbSBQNPCs", checked = sbq.predatorSettings[location .. "AbsorbSBQNPCs"], toolTip = "Absorb SBQ NPCs upon Digestion." },
+					{ type = "checkBox", id = location .. "AbsorbOthers", checked = sbq.predatorSettings[location .. "AbsorbOthers"], toolTip = "Absorb any other NPCs upon Digestion." },
+				},
+				{ type = "itemGrid", slots = 5, id = location .. "ItemGrid", autoInteract = true },
+				{ type = "label", text = "Clear Prey", align = "center" },
+				{
+					{ type = "button", id = location .. "ClearPlayers", caption = "Players", toolTip = "Clear Absorbed Players" },
+					{ type = "button", id = location .. "ClearOCs", caption = "OCs", toolTip = "Clear Absorbed OCs" },
+				},
+				{
+					{ type = "button", id = location .. "ClearSBQNPCs", caption = "SBQ NPCs", toolTip = "Clear SBQ NPCs" },
+					{ type = "button", id = location .. "ClearOthers", caption = "Others", toolTip = "Clear any Other NPCs" },
+				}
 			}}
 		} }
 		local count = 5
 		if type(sbq.storedDigestedPrey[location]) == "table" then
 			local players = {}
 			local ocs = {}
+			local sbqNPCs = {}
 			local other = {}
 			for uniqueId, item in pairs(sbq.storedDigestedPrey[location]) do
 				count = count + 1
@@ -226,10 +242,16 @@ function sbq.updateLocationTab(location)
 					npcConfig = item.parameters.npcArgs.npcParam
 				end
 				if item.parameters.npcArgs.npcParam.wasPlayer then
+					item.parameters.rarity = "legendary"
 					table.insert(players, item)
 				elseif ((npcConfig or {}).scriptConfig or {}).isOC then
+					item.parameters.rarity = "rare"
 					table.insert(ocs, item)
+				elseif ((npcConfig or {}).scriptConfig or {}).sbqNPC then
+					item.parameters.rarity = "uncommon"
+					table.insert(sbqNPCs, item)
 				else
+					item.parameters.rarity = "common"
 					table.insert(other, item)
 				end
 			end
@@ -237,11 +259,13 @@ function sbq.updateLocationTab(location)
 			local function sortItems(a, b)
 				return a.parameters.shortdescription < b.parameters.shortdescription
 			end
-			absorbedPreyList = players
 			table.sort(players, sortItems)
 			table.sort(ocs, sortItems)
+			table.sort(sbqNPCs, sortItems)
 			table.sort(other, sortItems)
+			absorbedPreyList = players
 			util.appendLists(absorbedPreyList, ocs)
+			util.appendLists(absorbedPreyList, sbqNPCs)
 			util.appendLists(absorbedPreyList, other)
 			absorbedPreyPanel.children[1].children[2].slots = count
 		end
@@ -398,6 +422,16 @@ function sbq.updateLocationTab(location)
 		function compressionMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
 		sbq.numberBoxColor(compressionMultiplier, 0)
 
+		local clearPlayers = _ENV[location.."ClearPlayers"]
+		local clearOCs = _ENV[location.."ClearOCs"]
+		local clearSBQNPCs = _ENV[location.."ClearSBQNPCs"]
+		local clearOthers = _ENV[location.."ClearOthers"]
+
+		function clearPlayers:onClick() sbq.clearLocationEssences(location, "Players", count) end
+		function clearOCs:onClick() sbq.clearLocationEssences(location, "OCs", count) end
+		function clearSBQNPCs:onClick() sbq.clearLocationEssences(location, "SBQNPCs", count) end
+		function clearOthers:onClick() sbq.clearLocationEssences(location, "Others", count) end
+
 		return tab
 	end
 end
@@ -438,6 +472,10 @@ function sbq.locationDefaultSettings(locationData,location)
 	sbq.defaultGlobalSetting(location, "InfusedSize")
 	sbq.defaultGlobalSetting(location, "InfusedSizeAdditive")
 	sbq.defaultGlobalSetting(location, "VisualMinAdditive")
+	sbq.defaultGlobalSetting(location, "AbsorbPlayers")
+	sbq.defaultGlobalSetting(location, "AbsorbOCs")
+	sbq.defaultGlobalSetting(location, "AbsorbSBQNPCs")
+	sbq.defaultGlobalSetting(location, "AbsorbOthers")
 end
 
 function sbq.defaultGlobalSetting(location, setting)
@@ -600,4 +638,29 @@ function sbq.getItemPreySettings(item)
 		),
 		(finalConfig.overridePreyEnabled or {})
 	)
+end
+
+function sbq.clearLocationEssences(location, essenceType, slots)
+	local newList = {}
+	local itemGrid = _ENV[location .. "ItemGrid"]
+	for i = 1, slots do
+		local item = itemGrid:item(i)
+		if item then
+			local success, npcConfig = pcall(root.npcConfig, item.parameters.npcArgs.npcType)
+			if not success then
+				npcConfig = item.parameters.npcArgs.npcParam
+			end
+			if (essenceType == "Players" and not (item.parameters.npcArgs.npcParam.wasPlayer))
+				or (essenceType == "OCs" and not (((npcConfig or {}).scriptConfig or {}).isOC))
+				or (essenceType == "SBQNPCs" and not (((npcConfig or {}).scriptConfig or {}).sbqNPC))
+				or (essenceType == "Others" and not (((npcConfig or {}).scriptConfig or {}).sbqNPC or ((npcConfig or {}).scriptConfig or {}).isOC or item.parameters.npcArgs.npcParam.wasPlayer))
+			then
+				table.insert(newList, item)
+			end
+		end
+	end
+	for i = 1, slots do
+		itemGrid:setItem(i, newList[i])
+	end
+	sbq.saveDigestedPrey()
 end

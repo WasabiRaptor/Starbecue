@@ -65,6 +65,19 @@
 							{ "type" : "textBox", "id" : "defaultInfusedMultiplier", "size" : [30,14], "expandMode" : [0,0], "toolTip" : "Default Size Multiplier on Infused Characters if size is being added." },
 							{ "type" : "label", "text" : " Infusion" }
 						]
+					],
+					[
+						[
+							{"mode":"h"},
+							{ "type" : "checkBox", "id" : "defaultAbsorbPlayers", "toolTip" : "Absorb Players upon Digestion." },
+							{ "type" : "checkBox", "id" : "defaultAbsorbOCs", "toolTip" : "Absorb OCs upon Digestion." },
+							{ "type" : "checkBox", "id" : "defaultAbsorbSBQNPCs", "toolTip" : "Absorb SBQ NPCs upon Digestion." },
+							{ "type" : "checkBox", "id" : "defaultAbsorbOthers", "toolTip" : "Absorb any other NPCs upon Digestion." },
+							{"type" : "label", "text" : " Prey Absorbtion"}
+						],
+						[
+							{"mode":"h"}
+						]
 					]
 				]}
 			]},

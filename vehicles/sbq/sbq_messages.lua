@@ -252,7 +252,7 @@ message.setHandler("requestTransition", function(_, _, transition, args)
 	sbq.doTransition( transition, args )
 end)
 
-message.setHandler( "getObjectSettingsMenuData", function (_,_)
+message.setHandler( "getEntitySettingsMenuData", function (_,_)
 	if not sbq.driver then
 		return {
 			settings = sbq.settings,

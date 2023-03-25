@@ -52,6 +52,15 @@ function sbq.generateItemDrop(pred, flavorText, itemDrop)
 			itemDrop.parameters.npcArgs.npcLevel = world.callScriptedEntity(entity.id(), "npc.level")
 			itemDrop.parameters.npcArgs.npcSeed = world.callScriptedEntity(entity.id(), "npc.seed")
 			itemDrop.parameters.description = ((root.npcConfig(itemDrop.parameters.npcArgs.npcType) or {}).scriptConfig or {}).cardDesc or ""
+
+			local npcConfig = root.npcConfig(itemDrop.parameters.npcArgs.npcType)
+			if npcConfig.scriptConfig.isOC then
+				itemDrop.parameters.rarity = "rare"
+			elseif npcConfig.scriptConfig.sbqNPC then
+				itemDrop.parameters.rarity = "uncommon"
+			end
+		elseif preyType == "player" then
+			itemDrop.parameters.rarity = "legendary"
 		end
 		itemDrop.parameters.tooltipKind = "filledcapturepod"
 		itemDrop.parameters.tooltipFields = {

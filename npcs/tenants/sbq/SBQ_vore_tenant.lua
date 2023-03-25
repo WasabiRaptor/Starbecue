@@ -275,6 +275,25 @@ function init()
 		sbq.saveSettingsToDeed()
 		sbq.saveSettingsToOccupantHolder()
 	end)
+
+	message.setHandler("getEntitySettingsMenuData", function(_, _, uniqueId)
+		local owner = recruitable.ownerUuid()
+		if owner then
+			if owner == uniqueId then
+
+			end
+		elseif storage.respawner then
+
+		else
+			--[[
+			return {
+				detached = true
+
+
+			}]]
+		end
+	end
+	)
 end
 
 function sbq.setSpeciesConfig()
