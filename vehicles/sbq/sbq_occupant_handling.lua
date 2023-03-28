@@ -984,7 +984,7 @@ function sbq.struggleChance(struggledata, struggler, movedir, location)
 end
 
 function sbq.inedible(occupantId)
-	return sbq.config.inedibleCreatures[world.entityType(occupantId)]
+	return sbq.config.inedibleCreatures[world.entityTypeName(occupantId)]
 end
 
 function sbq.removeOccupantsFromLocation(location)
