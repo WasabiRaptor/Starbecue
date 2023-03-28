@@ -29,7 +29,7 @@ function getEntitySettingsMenu(entities, i)
 	sbq.addRPC(world.sendEntityMessage( entities[i], "getEntitySettingsMenuData", entity.uniqueId() ), function (data)
 		if data then
 			player.interact("ScriptPane",
-				{ data = data, gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:" .. (data.ui or "nominomicon") }, data.parent or entities[i])
+				{ data = data, gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui =  (data.ui or "starbecue:nominomicon") }, data.parent or player.id())
 		else
 			if entities[i+1] then
 				getEntitySettingsMenu(entities, i+1)

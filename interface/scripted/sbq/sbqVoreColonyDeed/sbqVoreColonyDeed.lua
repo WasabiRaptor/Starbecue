@@ -67,7 +67,12 @@ function sbq.drawLocked(w, icon)
 end
 
 sbq.selectedMainTabFieldTab = mainTabField.tabs.deedTab
-
+if sbq.storage.detached or sbq.storage.respawner then
+	metagui.setTitle("Preditor")
+	metagui.setIcon("/items/active/sbqNominomicon/sbqNominomicon.png")
+	mainTabField.tabs.deedTab:setVisible(false)
+	sbq.selectedMainTabFieldTab = mainTabField.tabs.tenantTab
+end
 function init()
 	local occupier = sbq.storage.occupier
 
@@ -238,23 +243,26 @@ function init()
 			if sbq.overrideSettings.questParticipation == nil then
 				function questParticipation:onClick()
 					sbq.changePredatorSetting("questParticipation", questParticipation.checked)
-
-					world.sendEntityMessage(pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, indexes.tenantIndex)
+					if not sbq.storage.detached then
+						world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
+					end
 				end
 			end
 			if sbq.overrideSettings.crewmateGraduation == nil then
 				function crewmateGraduation:onClick()
 					sbq.changePredatorSetting("crewmateGraduation", crewmateGraduation.checked)
 
-					local graduation = {
-						["true"] = {
-							nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
-						},
-						["false"] = {
-							nextNpcType = {nil}
+					if not sbq.storage.detached then
+						local graduation = {
+							["true"] = {
+								nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
+							},
+							["false"] = {
+								nextNpcType = {nil}
+							}
 						}
-					}
-					world.sendEntityMessage(pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], indexes.tenantIndex)
+						world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
+					end
 				end
 			end
 		end
@@ -309,7 +317,7 @@ end
 function sbq.savePredSettings()
 	sbq.tenant.overrides.scriptConfig.sbqSettings = sbq.predatorSettings
 	if not sbq.storage.detached then
-		world.sendEntityMessage(pane.sourceEntity(), "sbqSaveSettings", sbq.predatorSettings, indexes.tenantIndex)
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveSettings", sbq.predatorSettings, sbq.storage.forcedIndex or indexes.tenantIndex)
 	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSaveSettings", sbq.predatorSettings)
@@ -320,7 +328,7 @@ sbq.saveSettings = sbq.savePredSettings
 function sbq.savePreySettings()
 	sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = sbq.preySettings
 	if not sbq.storage.detached then
-		world.sendEntityMessage(pane.sourceEntity(), "sbqSavePreySettings", sbq.preySettings, indexes.tenantIndex)
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSavePreySettings", sbq.preySettings, sbq.storage.forcedIndex or indexes.tenantIndex)
 	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSavePreySettings", sbq.preySettings)
@@ -329,7 +337,7 @@ end
 
 function sbq.saveDigestedPrey()
 	if not sbq.storage.detached then
-		world.sendEntityMessage(pane.sourceEntity(), "sbqSaveDigestedPrey", sbq.storedDigestedPrey, indexes.tenantIndex )
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveDigestedPrey", sbq.storedDigestedPrey, sbq.storage.forcedIndex or indexes.tenantIndex )
 	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage( sbq.tenant.uniqueId, "sbqSaveDigestedPrey", sbq.storedDigestedPrey )
@@ -353,7 +361,7 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 	sbq.animOverrideSettings[settingname] = settingvalue
 	sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = sbq.animOverrideSettings
 	if not sbq.storage.detached then
-		world.sendEntityMessage(pane.sourceEntity(), "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings, indexes.tenantIndex)
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings, sbq.storage.forcedIndex or indexes.tenantIndex)
 	end
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings)
@@ -366,7 +374,7 @@ end
 
 if callTenant ~= nil then
 	function callTenant:onClick()
-		world.sendEntityMessage(pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = world.entityPosition(player.id())})
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = world.entityPosition(player.id())})
 	end
 
 	if sbq.storage.detached then
@@ -378,7 +386,7 @@ if callTenant ~= nil then
 		applyCount = applyCount + 1
 
 		if applyCount > 3 or sbq.storage.occupier == nil then
-			world.sendEntityMessage(pane.sourceEntity(), "sbqSummonNewTenant", sbq.getGuardTier() or tenantText.text)
+			world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSummonNewTenant", sbq.getGuardTier() or tenantText.text)
 			pane.dismiss()
 		end
 		summonTenant:setText(tostring(4 - applyCount))
@@ -595,7 +603,7 @@ function sbq.insertTenant(item)
 	tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
 	tenant.overrides.scriptConfig.uniqueId = tenant.uniqueId
 	table.insert(sbq.storage.occupier.tenants, tenant)
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
+	world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
 	init()
 end
 
@@ -631,7 +639,7 @@ function sbq.refreshDeedPage()
 				function button:onClick()
 					player.giveItem(sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i]))
 					table.remove(sbq.storage.occupier.tenants, i)
-					world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
+					world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
 					init()
 				end
 
@@ -646,7 +654,7 @@ function sbq.refreshDeedPage()
 	end
 	curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
 
-	if not sbq.storage.crewUI then
+	if (not sbq.storage.crewUI) and not (sbq.storage.detached or sbq.storage.respawner) then
 		tenantNote:setVisible(occupier.tenantNote ~= nil)
 		tenantNote.toolTip = occupier.tenantNote
 
@@ -708,3 +716,5 @@ function sbq.generateNPCItemCard(tenant)
 	item.parameters.preySize = 1
 	return item
 end
+
+sbq.selectedMainTabFieldTab:select()

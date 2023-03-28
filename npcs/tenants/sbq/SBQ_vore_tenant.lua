@@ -132,6 +132,7 @@ function init()
 		if menuName and menuName ~= "sbqOccupantHolder" then
 		else
 			storage.settings = settings
+			sbq.predatorSettings = storage.settings
 			sbq.setRelevantPredSettings()
 			if type(sbq.occupantHolder) == "number" and world.entityExists(sbq.occupantHolder) then
 				world.sendEntityMessage(sbq.occupantHolder, "settingsMenuSet", storage.settings)
@@ -278,19 +279,49 @@ function init()
 
 	message.setHandler("getEntitySettingsMenuData", function(_, _, uniqueId)
 		local owner = recruitable.ownerUuid()
+		local occupier = {
+			tenants = {
+				{
+					type = npc.npcType(),
+					species = npc.species(),
+					uniqueId = entity.uniqueId(),
+					overrides = {
+						identity = npc.humanoidIdentity(),
+						scriptConfig = {
+							sbqSettings = sbq.predatorSettings,
+							tenantBio = config.getParameter("tenantBio")
+						},
+						statusControllerSettings = {
+							statusProperties = {
+								sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
+								sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
+								speciesAnimOverrideSettings = status.statusProperty("speciesAnimOverrideSettings"),
+								animOverrideScale = status.statusProperty("animOverrideScale")
+							}
+						}
+					}
+				}
+			}
+		}
 		if owner then
 			if owner == uniqueId then
-
+				return {
+					ui = "starbecue:voreCrewMenu"
+				}
 			end
 		elseif storage.respawner then
-
-		else
-			--[[
 			return {
-				detached = true
-
-
-			}]]
+				ui = "starbecue:voreColonyDeed",
+				respawner = storage.respawner,
+				forcedIndex = config.getParameter("tenantIndex"),
+				occupier = occupier
+			}
+		else
+			return {
+				ui = "starbecue:voreColonyDeed",
+				detached = true,
+				occupier = occupier
+			}
 		end
 	end
 	)
