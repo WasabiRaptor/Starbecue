@@ -552,7 +552,7 @@ function sbq.dropdownButton(button, settingname, list, func, overrides)
 	end
 	if sbq[overrides][settingname] == nil then
 		function button:onClick()
-			metagui.contextMenu(contextMenu)
+			metagui.dropDownMenu(contextMenu,2)
 		end
 	end
 end

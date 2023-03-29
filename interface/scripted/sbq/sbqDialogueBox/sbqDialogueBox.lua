@@ -504,6 +504,7 @@ function dialogueCont:onClick()
 	local contextMenu = {}
 	if not finished then
 		return sbq.updateDialogueBox({}, sbq.prevDialogueBranch)
+	elseif finished and sbq.prevDialogueBranch.options ~= nil then
 	else
 		finished = false
 	end
@@ -589,19 +590,26 @@ function dialogueCont:onClick()
 				end
 			end
 			if continue and ((option[2].voreType == nil) or ( sbq.checkVoreTypeActive(option[2].voreType) ~= "hidden" )) then
-				if option[2].dialogue ~= nil or option[2].randomDialogue ~= nil or option[2].next then
+				if option[2].dialogue ~= nil or option[2].randomDialogue ~= nil or option[2].next ~= nil then
 					action[2] = function ()
 						for _, entity in ipairs(entities) do
 							world.sendEntityMessage( entity, "sbqSetInteracted", player.id())
 						end
+						finished = false
 						sbq.updateDialogueBox( {}, option[2] )
 					end
 				elseif option[2].jump ~= nil then
-					action[2] = function() sbq.updateDialogueBox(option[2].jump) end
+					action[2] = function()
+						finished = false
+						sbq.updateDialogueBox(option[2].jump)
+					end
 				elseif type(option[2].callScript) == "string" and type(dialogueBoxScripts[option[2].callScript]) == "function" then
 					action[2] = function()
+						finished = false
 						local dialogueTree = dialogueBoxScripts[option[2].callScript](option[2], sbq.settings, "callScript", player.id(), table.unpack(option[2].scriptArgs or {}))
-						if dialogueTree then sbq.updateDialogueBox({}, dialogueTree) end
+						if dialogueTree then
+							sbq.updateDialogueBox({}, dialogueTree)
+						end
 					end
 				end
 				table.insert(contextMenu, action)
@@ -611,7 +619,7 @@ function dialogueCont:onClick()
 		sbq.updateDialogueBox(sbq.dialogueTreeReturn)
 	end
 	if #contextMenu > 0 then
-		metagui.contextMenu(contextMenu)
+		metagui.dropDownMenu(contextMenu, sbq.prevDialogueBranch.optionColumns or 2)
 	end
 end
 

@@ -190,7 +190,7 @@ function sbq.readOccupantData()
 								table.insert(actionList, {action.name, function() sbq[action.script](id, i) end})
 							end
 						end
-						metagui.contextMenu(actionList)
+						metagui.dropDownMenu(actionList,2)
 					end
 				end
 

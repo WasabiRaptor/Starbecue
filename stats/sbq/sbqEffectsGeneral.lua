@@ -27,7 +27,6 @@ function doItemDrop()
 		elseif entity.uniqueId() ~= nil then
 			local doAbsorb = false
 			local preyType = world.entityType(entity.id())
-			sb.logInfo(sb.printJson(digestData,1))
 			if preyType == "npc" then
 				local npcConfig = root.npcConfig(world.callScriptedEntity(entity.id(), "npc.npcType"))
 				if npcConfig.scriptConfig.isOC then
@@ -51,8 +50,6 @@ function doItemDrop()
 			if doAbsorb then
 				world.sendEntityMessage(effect.sourceEntity(), "sbqDigestStore", (status.statusProperty("sbqDigestData") or {}).location, entity.uniqueId(), sbq.generateItemDrop(effect.sourceEntity(), config.getParameter("gurgledByText"), root.assetJson("/sbqGeneral.config:npcEssenceTemplate")))
 			end
-		else
-			sb.logInfo("no uuid")
 		end
 	end
 end

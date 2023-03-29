@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
 local mkwidget = mg.mkwidget
@@ -201,3 +202,69 @@ function widgets.slider:getToolTip()
 end
 
 function widgets.slider:onChange(index, value) end
+
+local lastMenu
+function mg.dropDownMenu(m, columns, w, h, s)
+	if type(m) ~= "table" or not m[1] then return nil end -- invalid argument passed
+	if lastMenu and lastMenu.dismiss then lastMenu.dismiss() end
+	local menuId = "dropDownMenu:" .. sb.makeRandomSource():randu64()
+	local cfg = {
+		style = "contextMenu", scripts = {"/metagui/sbq/dropDownMenu.lua"}, menuId = menuId,
+		forceTheme = mg.cfg.theme, accentColor = mg.cfg.accentColor, -- carry over theme and accent color
+		children = { { mode = "vertical", spacing = s or 0 } }
+	}
+	local height, width = 0, 0
+	local hooks = {}
+	local rowHeights = {}
+	local colWidths = {}
+
+	-- and build
+	for i, mi in ipairs(m) do
+		if mi == "separator" or mi == "-" then
+		elseif type(mi) == "table" then
+			local itemId = "item:" .. sb.makeRandomSource():randu64()
+			local size = { w or 100, h or 12 }
+			if type(mi[1]) == "string" then
+				size = vec2.add(mg.measureString(mi[1], w or 100), 4)
+				mi[1] = { type = "label", text = mi[1], align = "center" }
+			end
+
+			local insertRow = math.floor((i-0.1) / columns) + 1
+			local insertOffset = 1
+			if not cfg.children[insertRow + insertOffset] then
+				cfg.children[insertRow + insertOffset] = {}
+			end
+
+			rowHeights[insertRow] = math.max((rowHeights[insertRow] or 0), size[2])
+			local col = ((i +(columns-1)) % columns) + 1
+			colWidths[col] = math.max(colWidths[col] or 0, size[1])
+
+			table.insert(cfg.children[insertRow + insertOffset], {
+				type = "menuItem", id = itemId, size = size, children = {
+					mi[1]
+				}
+			})
+			local f = mi[2] or function() end
+			hooks[itemId] = function() mg.startEvent(f) end
+		end
+	end
+	height = (math.max(table.unpack(rowHeights)) + (s or 0)) * #rowHeights
+	width = (math.max(table.unpack(colWidths)) + (s or 0)) * #colWidths
+
+	local bm = theme.metrics.borderMargins.contextMenu
+	cfg.size = {width, height}
+	local calcSize = {width + bm[1] + bm[3], height + bm[2] + bm[4]}
+	local pushIn = -((bm[1] + bm[2]) / 2 + 2)
+	local position = vec2.add(vec2.mul(vec2.add(mg.windowPosition, mg.mousePosition), {1, -1}), {-bm[1] - pushIn, calcSize[2] - bm[2] - pushIn} )
+
+	cfg.anchor = { "bottomLeft",
+		{position[1]-(calcSize[1]/2), math.min(0,position[2]-4)}
+	}
+	theme.modifyContextMenu(cfg) -- give theme a chance to edit whatever it likes
+	mg.ipc[menuId] = hooks
+	lastMenu = hooks
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
+end
+mg.registerUninit(function() -- close any paired menus when this pane closes
+	if lastMenu and lastMenu.dismiss then lastMenu.dismiss() end
+end)

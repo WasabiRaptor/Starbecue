@@ -13,7 +13,6 @@ function sbq.generateKeysmashes(input, lengthMin, lengthMax)
 end
 
 function sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree, dialogueTreeTop)
-	--(sb.printJson(dialogueTreeLocation))
 	local dialogueTree = sbq.getRedirectedDialogue(dialogueTree or sbq.dialogueTree, settings, eid, dialogueTreeTop) or {}
 	local dialogueTreeTop = dialogueTreeTop or dialogueTree
 
@@ -27,11 +26,10 @@ function sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree
 		local next
 		if type(dialogueTree.next) == "string" then
 			next = dialogueTree.next
-		elseif type(next) == "table" then
+		elseif type(dialogueTree.next) == "table" then
 			next = dialogueTree.next[math.random(#dialogueTree.next)]
 		end
 		if next then
-			--sb.logInfo(next)
 			dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, next, eid, dialogueTreeTop)
 			continue = true
 		end

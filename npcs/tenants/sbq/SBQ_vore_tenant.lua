@@ -247,7 +247,6 @@ function init()
 		world.sendEntityMessage(entity.id(), "sbqDigestStore", location, (((((alreadyInfused or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId, alreadyInfused)
 		storage.settings[location .. "InfusedItem"] = itemDrop
 
-		sb.logInfo(sb.printJson(itemDrop,1))
 		sbq.saveSettingsToDeed()
 
 		local current = status.statusProperty("sbqCurrentData") or {}
