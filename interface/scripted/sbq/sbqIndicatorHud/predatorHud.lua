@@ -5,7 +5,6 @@
 sbq = {
 	sbqCurrentData = player.getProperty("sbqCurrentData") or {},
 	refreshtime = 0,
-	hudActions = root.assetJson("/interface/scripted/sbq/sbqIndicatorHud/hudActionScripts.config"),
 	config = root.assetJson("/sbqGeneral.config"),
 	overrideSettings = {},
 	occupants = {
@@ -156,14 +155,6 @@ sbq.occupantList = {}
 function sbq.readOccupantData()
 	if sbq.occupants.total > 0 then
 		local y = 224
-		local playerSpecies = (sbq.sbqCurrentData or {}).species
-
-		if playerSpecies == "sbqOccupantHolder" then
-			local maybeSpecies = player.species()
-			if type(sbq.hudActions[maybeSpecies]) == "table" then
-				playerSpecies = maybeSpecies
-			end
-		end
 
 		for i, occupant in pairs(sbq.occupant) do
 			local id = occupant.id
@@ -187,20 +178,16 @@ function sbq.readOccupantData()
 
 					local occupantButton = sbq.occupantList[id].actionButton
 					function occupantButton:onClick()
-						local actionList = {}
+						local actionList = {
+							{ "Let Out", function() sbq.letout(id, i) end }
+						}
 						if world.entityType(id) == "npc" then
 							table.insert(actionList, {"Interact", function() sbq.npcInteract(id, i) end})
 						end
-						for _, action in ipairs(sbq.hudActions.global) do
-							if action.locations == nil or sbq.checkOccupantLocation(occupant.location, action.locations) then
+						local locationData = sbq.predatorConfig.locations[occupant.location] or {}
+						for j, action in ipairs(locationData.preyActions or {}) do
+							if (not action.checkSettings) or sbq.checkSettings(action.checkSettings, sbq.predatorSettings) then
 								table.insert(actionList, {action.name, function() sbq[action.script](id, i) end})
-							end
-						end
-						if type(sbq.hudActions[playerSpecies]) == "table" then
-							for _, action in ipairs(sbq.hudActions[playerSpecies]) do
-								if action.locations == nil or sbq.checkOccupantLocation(occupant.location, action.locations) then
-									table.insert(actionList, {action.name, function() sbq[action.script](id, i) end})
-								end
 							end
 						end
 						metagui.contextMenu(actionList)
@@ -217,6 +204,37 @@ function sbq.readOccupantData()
 			end
 		end
 	end
+end
+
+function sbq.checkSettings(checkSettings, settings)
+	for setting, value in pairs(checkSettings or {}) do
+		if (type(settings[setting]) == "table") and settings[setting].name ~= nil then
+			if not value then return false
+			elseif type(value) == "table" then
+				if not sbq.checkTable(value, settings[setting]) then return false end
+			end
+		elseif type(value) == "table" then
+			local match = false
+			for i, value in ipairs(value) do if (settings[setting] or false) == value then
+				match = true
+				break
+			end end
+			if not match then return false end
+		elseif (settings[setting] or false) ~= value then return false
+		end
+	end
+	return true
+end
+
+function sbq.checkTable(check, checked)
+	for k, v in pairs(check) do
+		if type(v) == "table" then
+			if not sbq.checkTable(v, (checked or {})[k]) then return false end
+		elseif v == true and type((checked or {})[k]) ~= "boolean" and ((checked or {})[k]) ~= nil then
+		elseif not (v == (checked or {})[k] or false) then return false
+		end
+	end
+	return true
 end
 
 function sbq.checkOccupantLocation(occupantLocation, locations)
