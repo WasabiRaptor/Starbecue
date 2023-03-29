@@ -1,46 +1,71 @@
 # Ko-Fi Supporters
+## Special Thanks
+	Lurky
 ## Thank you all for your support!
-	Maxel Noone
-	HiddenPiecrust
-	The Cat
-	Freeliller
-	Joseph
-	Cammy
 	Mojma
-	John Doe
-	Dezzacord
-	Tacogun
-	LoremasterSilas
-	Xalic Aviare
-	Upforanything
-	Airinnann
-	Bane Fox
-	destiny42
-	Nova
-	Kalito
-	Frisk
-	xian zhou
-	LilacStarvix
-	Greennyy
-	Raru
-	Goose
-	Ko-fi Supporter
-	GINKO
-	shadowviolet
-	Anthony 
-	Krazeni
-	Rymanzzzzz
-	Nathan Wood
-	Reokami
-	Ko-fi Supporter
-	Chris Colmenero
-	DocUmbreon
-	Amuse
-	Ilindar
-	Pony Fan
-	Zachine
-	Verse Forty
-	BigR
-	Anonymous
-	jdthehero213
+	Cammy
+	Joseph
+	Freeliller
+	The Cat
+	HiddenPiecrust
+	Maxel Noone
+	Jemmy
+	skye
+	halcyonesselion
+	Jaych
+	OccultProponent
 	Bonbon
+	Anonymous
+	BigR
+	Verse Forty
+	Pony Fan
+	Ilindar
+	Amuse
+	DocUmbreon
+	DocUmbreon
+	Chris Colmenero
+	Ko-fi Supporter
+	Reokami
+	Nathan Wood
+	Krazeni
+	Anthony 
+	shadowviolet
+	GINKO
+	Goose
+	John Doe
+	Greennyy
+	LilacStarvix
+	xian zhou
+	Frisk
+	Kalito
+	Nova
+	destiny42
+	Airinnann
+	Ko-fi Supporter
+	Xalic Aviare
+	Tacogun
+	Dezzacord
+	jdthehero213
+	Zachine
+	Ko-fi Supporter
+	LoremasterSilas
+	Bane Fox
+	Raru
+	Rymanzzzzz
+	stealth goldfish
+	mm87
+	Thewildhi12
+	Blaze
+	Xodious
+	SilphScope
+	Stefan
+	toolazytothinkofanything
+	Przyjaciel
+	BowlOfSoup
+	Carsten Gesslein
+	Voxren
+	bikboktik
+	Astrikur
+	DrFrank
+	GohmiM
+	FurryFunBoy
