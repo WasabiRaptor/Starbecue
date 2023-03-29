@@ -204,7 +204,7 @@ end
 function widgets.slider:onChange(index, value) end
 
 local lastMenu
-function mg.dropDownMenu(m, columns, w, h, s)
+function mg.dropDownMenu(m, columns, w, h, s, align)
 	if type(m) ~= "table" or not m[1] then return nil end -- invalid argument passed
 	if lastMenu and lastMenu.dismiss then lastMenu.dismiss() end
 	local menuId = "dropDownMenu:" .. sb.makeRandomSource():randu64()
@@ -226,7 +226,7 @@ function mg.dropDownMenu(m, columns, w, h, s)
 			local size = { w or 100, h or 12 }
 			if type(mi[1]) == "string" then
 				size = vec2.add(mg.measureString(mi[1], w or 100), 4)
-				mi[1] = { type = "label", text = mi[1], align = "center" }
+				mi[1] = { type = "label", text = mi[1], align = align or "center" }
 			end
 
 			local insertRow = math.floor((i-0.1) / columns) + 1
@@ -248,8 +248,8 @@ function mg.dropDownMenu(m, columns, w, h, s)
 			hooks[itemId] = function() mg.startEvent(f) end
 		end
 	end
-	height = (math.max(table.unpack(rowHeights)) + (s or 0)) * #rowHeights
-	width = (math.max(table.unpack(colWidths)) + (s or 0)) * #colWidths
+	height = (math.max((h or 0), table.unpack(rowHeights)) + (s or 0)) * #rowHeights
+	width = (math.max((w or 0), table.unpack(colWidths)) + (s or 0)) * #colWidths
 
 	local bm = theme.metrics.borderMargins.contextMenu
 	cfg.size = {width, height}

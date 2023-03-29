@@ -103,7 +103,7 @@
 								"jump" : [ "greeting", "mood", "continue"]
 							}
 						}],
-						[ "I think I'm bugged!", { "randomDialogue" : [ "This might help then, try to report what happened if you actually were."], "callScript":"fixData"} ]
+						[ "I think I'm bugged!", { "randomDialogue" : [ "This might help then, try to report what happened if you actually were."], "callScript":"fixData", "checkScript":"fixData"} ]
 
 					]
 				}

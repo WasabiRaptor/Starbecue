@@ -91,6 +91,8 @@
 				"many" : {
 					"randomDialogue" : [{"add":"pet.normal"}],
 					"buttonText" : ["[ACT]"],
+					"optionsAlign" : "left",
+					"optionsW" : 100,
 					"options" : [
 						[ "* Pet", {"jump":["pet"]}]
 					]
@@ -98,6 +100,8 @@
 				"excessive" : {
 					"randomDialogue" : [{"add":"pet.normal"}],
 					"buttonText" : ["[ACT]"],
+					"optionsAlign" : "left",
+					"optionsW" : 100,
 					"options" : [
 						[ "* Pet", {"jump":["pet"]}]
 					]
@@ -105,6 +109,8 @@
 				"problem" : {
 					"randomDialogue" : ["<dontSpeak>* It's possible that you may have a problem."],
 					"buttonText" : ["[ACT]"],
+					"optionsAlign" : "left",
+					"optionsW" : 100,
 					"options" : [
 						[ "* Pet", {"jump":["pet"]}]
 					]

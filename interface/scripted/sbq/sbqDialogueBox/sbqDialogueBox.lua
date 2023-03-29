@@ -19,6 +19,7 @@ sbq = {
 	}
 }
 dialogueBoxScripts = {}
+optionCheckScripts = {}
 
 speciesOverride = {}
 
@@ -558,10 +559,13 @@ function dialogueCont:onClick()
 			local action = {option[1]}
 			local continue = true
 			local entities = {}
-			if continue and option[2].check ~= nil then
+			if continue and (type(option[2].checkScript) == "string") and (type(optionCheckScripts[option[2].checkScript])=="function") then
+				continue = optionCheckScripts[option[2].checkScript](sbq.settings, table.unpack(option[2].checkScriptArgs or {}))
+			end
+			if continue and (type(option[2].check) == "table") then
 				continue = sbq.checkSettings(option[2].check, sbq.settings)
 			end
-			if continue and option[2].checkPlayer ~= nil then
+			if continue and (type(option[2].checkPlayer) == "table") then
 				continue = sbq.checkSettings(option[2].checkPlayer, sb.jsonMerge(sb.jsonMerge(root.assetJson("/sbqGeneral.config:globalSettings"),root.assetJson("/sbqGeneral.config:defaultPreyEnabled.player")),sb.jsonMerge((player.getProperty("sbqSettings") or {}).global or {}, status.statusProperty("sbqPreyEnabled") or {})))
 			end
 			if continue and option[2].checkPlayerLikesKinks ~= nil then
@@ -619,7 +623,7 @@ function dialogueCont:onClick()
 		sbq.updateDialogueBox(sbq.dialogueTreeReturn)
 	end
 	if #contextMenu > 0 then
-		metagui.dropDownMenu(contextMenu, sbq.prevDialogueBranch.optionColumns or 2)
+		metagui.dropDownMenu(contextMenu, sbq.prevDialogueBranch.optionsColumns or 2, sbq.prevDialogueBranch.optionsW, sbq.prevDialogueBranch.optionsH, sbq.prevDialogueBranch.optionsS, sbq.prevDialogueBranch.optionsAlign)
 	end
 end
 
