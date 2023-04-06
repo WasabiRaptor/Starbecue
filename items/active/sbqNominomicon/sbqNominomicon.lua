@@ -26,6 +26,7 @@ function update(dt, fireMode, shiftHeld, controls)
 end
 
 function getEntitySettingsMenu(entities, i)
+	if (not entities) or (not i) or (not entities[i]) or ((type(i) == "number" and type(entities[i]) == "number") and not world.entityExists(entities[i])) then return end
 	sbq.addRPC(world.sendEntityMessage( entities[i], "getEntitySettingsMenuData", entity.uniqueId() ), function (data)
 		if data then
 			player.interact("ScriptPane",
