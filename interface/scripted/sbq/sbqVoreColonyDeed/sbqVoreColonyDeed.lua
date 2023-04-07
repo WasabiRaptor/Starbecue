@@ -67,11 +67,12 @@ function sbq.drawLocked(w, icon)
 end
 
 sbq.selectedMainTabFieldTab = mainTabField.tabs.deedTab
-if sbq.storage.detached or sbq.storage.respawner then
-	metagui.setTitle("Preditor")
-	metagui.setIcon("/items/active/sbqNominomicon/sbqNominomicon.png")
+if (sbq.storage.detached) or (sbq.storage.respawner ~= nil) then
 	mainTabField.tabs.deedTab:setVisible(false)
 	sbq.selectedMainTabFieldTab = mainTabField.tabs.tenantTab
+	metagui.setTitle("Preditor")
+	metagui.setIcon("/items/active/sbqNominomicon/sbqNominomicon.png")
+	theme.drawFrame()
 end
 function init()
 	local occupier = sbq.storage.occupier

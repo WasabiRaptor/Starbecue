@@ -8,21 +8,25 @@ function init()
 	activeItem.setArmAngle(-45)
 end
 
+clicked = false
+
 function update(dt, fireMode, shiftHeld, controls)
 	if fireMode == "primary" or fireMode == "alt" and not clicked then
 		clicked = true
+		if sbq.timer("menu", 1) then
+			local predators = world.entityQuery( activeItem.ownerAimPosition(), 2, {
+				withoutEntityId = entity.id(), includedTypes = { "vehicle", "npc", "object" }
+			})
 
-		local predators = world.entityQuery( activeItem.ownerAimPosition(), 2, {
-			withoutEntityId = entity.id(), includedTypes = { "vehicle", "npc", "object" }
-		})
-
-		if predators[1] ~= nil then
-			getEntitySettingsMenu(predators, 1)
+			if predators[1] ~= nil then
+				getEntitySettingsMenu(predators, 1)
+			end
 		end
 	elseif fireMode == "none" then
 		clicked = false
 	end
 	sbq.checkRPCsFinished(dt)
+	sbq.checkTimers(dt)
 end
 
 function getEntitySettingsMenu(entities, i)
