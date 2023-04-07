@@ -110,6 +110,7 @@ function sbq.globalToLocal( position )
 end
 
 function sbq.getOccupancyTransition(transition, args)
+	if (not transition) or (not args) then return end
 	if args.force then return transition end
 	if transition.location then
 		local size = args.size or 0
