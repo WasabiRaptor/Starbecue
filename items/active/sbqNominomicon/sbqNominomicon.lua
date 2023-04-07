@@ -11,7 +11,7 @@ end
 clicked = false
 
 function update(dt, fireMode, shiftHeld, controls)
-	if fireMode == "primary" or fireMode == "alt" and not clicked then
+	if (fireMode == "primary" or fireMode == "alt") and not clicked then
 		clicked = true
 		if sbq.timer("menu", 1) then
 			local predators = world.entityQuery( activeItem.ownerAimPosition(), 2, {
