@@ -1,4 +1,11 @@
 
+function init()
+	message.setHandler("sbqRefreshDigestImmunities", function ()
+		refresh()
+		script.setUpdateDelta(0)
+	end)
+end
+
 function update(dt)
 	local position = entity.position()
 	if (world ~= nil) and (world.regionActive ~= nil) and world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
@@ -7,8 +14,9 @@ function update(dt)
 	end
 end
 
-function refresh()
-	local preyEnabled = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
+local groupId
+function refresh(forceType)
+	local preyEnabled = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[forceType or world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
 	local statModifierGroup = {}
 	if not preyEnabled.digestAllow then
 		table.insert(statModifierGroup, {stat = "digestionImmunity", amount = 1})
@@ -38,5 +46,9 @@ function refresh()
 		table.insert(statModifierGroup, {stat = "milkSoftDigestImmunity", amount = 1})
 	end
 
-	effect.addStatModifierGroup(statModifierGroup)
+	if not groupId then
+		groupId = effect.addStatModifierGroup(statModifierGroup)
+	else
+		effect.setStatModifierGroup(groupId, statModifierGroup)
+	end
 end

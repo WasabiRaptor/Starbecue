@@ -203,8 +203,7 @@ function sbq.changePreySetting(settingname, settingvalue)
 	sbq.sbqPreyEnabled = status.statusProperty("sbqPreyEnabled") or {}
 	sbq.sbqPreyEnabled[settingname] = settingvalue
 	status.setStatusProperty("sbqPreyEnabled", sbq.sbqPreyEnabled)
-	status.clearPersistentEffects("digestImmunity")
-	status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
+	world.sendEntityMessage(player.id(), "sbqRefreshDigestImmunities")
 end
 
 function sbq.getOccupantHolderData()

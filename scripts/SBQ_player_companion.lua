@@ -314,8 +314,7 @@ function init()
 		if not effects[1] then
 			status.setPersistentEffects("speciesAnimOverride", {  speciesAnimOverrideData.customAnimStatus or "speciesAnimOverride" })
 		end
-		status.clearPersistentEffects("digestImmunity")
-		status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
+		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
 		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1, status.statusProperty("animOverridesGlobalScaleYOffset") or 0}
 	end)
 
@@ -504,7 +503,9 @@ function update(dt)
 	-- make sure init has happened
 	if initStage ~= 1 then return end
 	-- make sure the world is loaded
-	if world.pointTileCollision(entity.position(), {"Null"}) then return end
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
+
 	-- now we can actually do things
 	if not preyWarpData then
 		if current.species then
