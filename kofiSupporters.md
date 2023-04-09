@@ -14,6 +14,9 @@
 	halcyonesselion
 	Jaych
 	OccultProponent
+	Sevari
+	jdthehero213
+	Kintobor
 	Bonbon
 	Anonymous
 	BigR
@@ -21,7 +24,6 @@
 	Pony Fan
 	Ilindar
 	Amuse
-	DocUmbreon
 	DocUmbreon
 	Chris Colmenero
 	Ko-fi Supporter
@@ -45,11 +47,10 @@
 	Xalic Aviare
 	Tacogun
 	Dezzacord
-	jdthehero213
 	Zachine
 	Ko-fi Supporter
-	LoremasterSilas
 	Bane Fox
+	LoremasterSilas
 	Raru
 	Rymanzzzzz
 	stealth goldfish
@@ -69,3 +70,18 @@
 	DrFrank
 	GohmiM
 	FurryFunBoy
+	Teddybearson
+	DaytonPoole
+	Nobledreameater
+	Glados
+	Whimsii
+	Brandin Bellinger
+	Peterfan1st
+	Light Wolf
+	Nevixio
+	jezey
+	Dew562
+	Lyko
+	Hin Huan
+	Anonymous
+	Twilight
