@@ -36,19 +36,17 @@
 		"defaultPortrait" : "Neutral.png",
 		"portraitPath" : "/humanoid/sbqSocks_LokiVulpix/portraits/S",
 
-		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
-			{ "mode" : "vertical" },
-			[
-				{ "type" : "image", "file" : "/humanoid/sbqSocks_LokiVulpix/portraits/SNeutral.png" },
-				[
-					[ { "type" : "label", "text" : "Age: 22?"}, { "type" : "label", "text" : "Gender: female?"} ],
-					[ { "type" : "label", "text" : "Pronouns: She/They/It"}, { "type" : "label", "text" : "Species: Plushie Flareon"} ],
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Socks is, well a living plushie, she was made by Loki to be something to cuddle... but of course, she knows she was meant for quite a bit more than that."},
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: UB, OV, TF, Living Suit"}
-				]
-			]
+		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
+			{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqSocks_LokiVulpix/portraits/SNeutral.png" },
+			{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+				{ "mode" : "vertical" },
+				[ { "type" : "label", "text" : "Age: 22?"}, { "type" : "label", "text" : "Gender: female?"} ],
+				[ { "type" : "label", "text" : "Pronouns: She/They/It"}, { "type" : "label", "text" : "Species: Plushie Flareon"} ],
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Socks is, well a living plushie, she was made by Loki to be something to cuddle... but of course, she knows she was meant for quite a bit more than that."},
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Favorites: UB, OV, TF, Living Suit"}
+			]}
 		]},
 
 		"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/pet_dialogue_script.lua"],

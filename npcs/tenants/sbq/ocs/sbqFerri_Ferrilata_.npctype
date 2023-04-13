@@ -42,19 +42,17 @@
 
 		"uniqueId" : "sbqFerri_Ferrilata_", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
-			{ "mode" : "vertical" },
-			[
-				{ "type" : "image", "file" : "/humanoid/sbqFerri_Ferrilata_/portraits/neutral.png" },
-				[
-					[ { "type" : "label", "text" : "Age: looks like he's in his 20's"}, { "type" : "label", "text" : "Gender: male"} ],
-					[ { "type" : "label", "text" : "Pronouns: he/him"}, { "type" : "label", "text" : "Species: catfox"} ],
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Orange and white -furred catfox with a cool jacket and a big blaster. "},
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: melting in bellies, churning into cum, or being molded into other species."}
-				]
-			]
+		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
+			{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqFerri_Ferrilata_/portraits/neutral.png" },
+			{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+				{ "mode" : "vertical" },
+				[ { "type" : "label", "text" : "Age: looks like he's in his 20's"}, { "type" : "label", "text" : "Gender: male"} ],
+				[ { "type" : "label", "text" : "Pronouns: he/him"}, { "type" : "label", "text" : "Species: catfox"} ],
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Orange and white -furred catfox with a cool jacket and a big blaster. "},
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Favorites: melting in bellies, churning into cum, or being molded into other species."}
+			]}
 		]},
 
 

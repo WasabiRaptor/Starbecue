@@ -40,42 +40,21 @@
 			]},
 			{ "type" : "tab", "id" : "tenantTab", "title" : "NPC", "icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png", "color" : "ff00ff", "contents" : [
 				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "vertical", "children" : [
-					{ "type" : "panel", "id" : "bioPanel", "size" : [100,50], "expandMode" : [1, 1], "style" : "convex", "children" : [
-					]},
-					{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
-						{ "mode" : "h" },
-						[[
-							{ "expandMode" : [0,0] },
-							{ "type" : "label", "text" : "Head:", "align" : "center", "expand" : false },
-							{ "type" : "itemSlot", "id" : "headCosmetic" }
-						]],
-						[[
-							{ "expandMode" : [0,0] },
-							{ "type" : "label", "text" : "Chest:", "align" : "center", "expand" : false },
-							{ "type" : "itemSlot", "id" : "chestCosmetic" }
-						]],
-						[[
-							{ "expandMode" : [0,0] },
-							{ "type" : "label", "text" : "Legs:", "align" : "center", "expand" : false },
-							{ "type" : "itemSlot", "id" : "legsCosmetic" }
-						]],
-						[[
-							{ "expandMode" : [0,0] },
-							{ "type" : "label", "text" : "Back:", "align" : "center", "expand" : false },
-							{ "type" : "itemSlot", "id" : "backCosmetic" }
-						]]
+					{ "type" : "panel", "id" : "bioPanel", "size" : [100,50], "expandMode" : [1, 0], "style" : "convex", "children" : [
 					]},
 					[
-						{"mode":"h", "size" : [100,150], "expandMode":[1,0]},
+						{"mode":"h", "expandMode":[1,1]},
 						{ "type" : "panel", "id" : "tenantBehaviorPanel", "style" : "convex", "children" : [
 							{ "mode" : "v"}
 						]},
 						[
-							{ "mode" : "v", "size" : 100},
-							{ "type" : "panel", "id" : "questSettingsPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
-								{ "mode" : "v"},
-								[{"mode":"h"},{ "type" : "checkBox", "id" : "questParticipation", "toolTip" : "Allow NPC to give out and participate in quests.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Quests", "inline" : true }],
-								[{"mode":"h"},{ "type" : "checkBox", "id" : "crewmateGraduation", "toolTip" : "Allow NPC to give out and graduate into a cewmate.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Graduation", "inline" : true }]
+							{ "mode" : "v", "size" : 82},
+							{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
+								{ "mode" : "h" },
+								{ "type" : "itemSlot", "id" : "headCosmetic", "glyph" : "/interface/scripted/sbq/headSlot.png" },
+								{ "type" : "itemSlot", "id" : "chestCosmetic", "glyph" : "/interface/scripted/sbq/chestSlot.png" },
+								{ "type" : "itemSlot", "id" : "legsCosmetic", "glyph" : "/interface/scripted/sbq/legsSlot.png" },
+								{ "type" : "itemSlot", "id" : "backCosmetic", "glyph" : "/interface/scripted/sbq/backSlot.png" }
 							]},
 							{ "type" : "panel", "id" : "personalityPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 								{ "mode" : "h" },
@@ -90,6 +69,11 @@
 								{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
 								{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood" },
 								{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
+							]},
+							{ "type" : "panel", "id" : "questSettingsPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
+								{ "mode" : "v"},
+								[{"mode":"h"},{ "type" : "checkBox", "id" : "questParticipation", "toolTip" : "Allow NPC to give out and participate in quests.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Quests", "inline" : true }],
+								[{"mode":"h"},{ "type" : "checkBox", "id" : "crewmateGraduation", "toolTip" : "Allow NPC to graduate into a cewmate or other type of NPC.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Graduation", "inline" : true }]
 							]},
 							[
 								{"expandMode" : [2, 2]}

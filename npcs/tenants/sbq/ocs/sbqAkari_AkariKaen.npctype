@@ -35,19 +35,17 @@
 			}
 		},
 
-		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
-			{ "mode" : "vertical" },
-			[
-				//{ "type" : "image", "file" : "/humanoid/sbqAkari_AkariKaen/portraits/ANeutral.png" },
-				[
-					[ { "type" : "label", "text" : "Age: 22"}, { "type" : "label", "text" : "Gender: male"} ],
-					[ { "type" : "label", "text" : "Pronouns: He/Him"}, { "type" : "label", "text" : "Species: Southern sergal"} ],
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Akari is from the planet Tal and grew up in the walls of the major city Gold Ring, he mostly work as an guard or an city police and later becoming an Agent so he got to experience and witness to many things...like when he had to rescue the king's daughter from a cult, though he was always interested in the wonders of the micro world...oh and has a weakness for paws, mostly those that are bigger than him"},
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: Being a Micro, Paws, inanimate tf, OV, CV, being a micro prey"}
-				]
-			]
+		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
+			//{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqAkari_AkariKaen/portraits/ANeutral.png" },
+			{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+				{ "mode" : "vertical" },
+				[ { "type" : "label", "text" : "Age: 22"}, { "type" : "label", "text" : "Gender: male"} ],
+				[ { "type" : "label", "text" : "Pronouns: He/Him"}, { "type" : "label", "text" : "Species: Southern sergal"} ],
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Akari is from the planet Tal and grew up in the walls of the major city Gold Ring, he mostly work as an guard or an city police and later becoming an Agent so he got to experience and witness to many things...like when he had to rescue the king's daughter from a cult, though he was always interested in the wonders of the micro world...oh and has a weakness for paws, mostly those that are bigger than him"},
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Favorites: Being a Micro, Paws, inanimate tf, OV, CV, being a micro prey"}
+			]}
 		]},
 
 		"uniqueId" : "sbqAkari_AkariKaen", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet

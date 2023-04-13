@@ -41,20 +41,17 @@
 		"defaultPortrait" : "Neutral.png",
 		"portraitPath" : "/humanoid/sbqLoki_LokiVulpix/portraits/L", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
 
-		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
-			{ "mode" : "vertical" },
-			[
-				{ "type" : "image", "file" : "/humanoid/sbqLoki_LokiVulpix/portraits/LNeutral.png" },
-				[
-					[ { "type" : "label", "text" : "Age: 23"}, { "type" : "label", "text" : "Gender: ^#5BCEFA;F^#F5A9B8;e^#FFFFFF;m^#F5A9B8;a^#5BCEFA;l^#F5A9B8;e"} ],
-					[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Deerfox"} ],
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with transforming and absorbing people~"},
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: Cock TF, CV, BV, Breast TF, OV, Sentient Pudge"}
-				]
-			]
-
+		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
+			{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqLoki_LokiVulpix/portraits/LNeutral.png" },
+			{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+				{ "mode" : "vertical" },
+				[ { "type" : "label", "text" : "Age: 23"}, { "type" : "label", "text" : "Gender: ^#5BCEFA;F^#F5A9B8;e^#FFFFFF;m^#F5A9B8;a^#5BCEFA;l^#F5A9B8;e"} ],
+				[ { "type" : "label", "text" : "Pronouns: She/They"}, { "type" : "label", "text" : "Species: Deerfox"} ],
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Loki, if that is even her real name, is a witch with a particular interest with transforming and absorbing people~"},
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Favorites: Cock TF, CV, BV, Breast TF, OV, Sentient Pudge"}
+			]}
 		]},
 		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqTemplateDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
 		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table

@@ -51,19 +51,17 @@
 
 		//"uniqueId" : "sbqClover_LokiVulpix", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
-			{ "mode" : "vertical" },
-			[
-				{ "type" : "image", "file" : "/humanoid/sbqClover_LokiVulpix/portraits/CNeutral.png" },
-				[
-					[ { "type" : "label", "text" : "Age: 21"}, { "type" : "label", "text" : "Gender: Nonbinary"} ],
-					[ { "type" : "label", "text" : "Pronouns: They/Them/He"}, { "type" : "label", "text" : "Species: Meowscarada"} ],
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "A mystery..."},
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: Hammerspace, Compression, Cock TF, Cock Vore"}
-				]
-			]
+		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
+			{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqClover_LokiVulpix/portraits/CNeutral.png" },
+			{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+				{ "mode" : "vertical" },
+				[ { "type" : "label", "text" : "Age: 21"}, { "type" : "label", "text" : "Gender: Nonbinary"} ],
+				[ { "type" : "label", "text" : "Pronouns: They/Them/He"}, { "type" : "label", "text" : "Species: Meowscarada"} ],
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "A mystery..."},
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Favorites: Hammerspace, Compression, Cock TF, Cock Vore"}
+			] }
 		]},
 
 		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
