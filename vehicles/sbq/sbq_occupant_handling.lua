@@ -681,7 +681,10 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 
 	if sbq.occupant[i].flags.digesting then
 		locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
+	elseif sbq.occupant[i].flags.healing then
+		locationEffect = (sbq.sbqData.locations[location].heal or {}).effect or "sbqHeal"
 	end
+
 
 	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
 

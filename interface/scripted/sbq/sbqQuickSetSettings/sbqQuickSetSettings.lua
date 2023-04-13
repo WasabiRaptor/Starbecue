@@ -78,6 +78,9 @@ function init()
 	scaleValue.handles[2].value = sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1
 	scaleValue.handles[1].value = sbq.animOverrideOverrideSettings.scaleMin or sbq.animOverrideSettings.scaleMin or 0.1
 	scaleValue.handles[3].value = sbq.animOverrideOverrideSettings.scaleMax or sbq.animOverrideSettings.scaleMax or 3
+
+	scaleValue.handles[1].locked = sbq.animOverrideOverrideSettings.scaleMin ~= nil
+	scaleValue.handles[3].locked = sbq.animOverrideOverrideSettings.scaleMax ~= nil
 	function scaleValue:onChange(index, value)
 		if index == 1 then
 			sbq.changeAnimOverrideSetting("scaleMin", value)

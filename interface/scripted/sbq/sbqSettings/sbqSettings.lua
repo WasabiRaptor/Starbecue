@@ -30,7 +30,7 @@ require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
-sbq.selectedMainTabFieldTab = mainTabField.tabs.globalPredSettings
+mainTabField.tabs.globalPredSettings:select()
 
 function sbq.getInitialData()
 	sbq.sbqSettings = player.getProperty("sbqSettings") or {}

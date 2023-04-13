@@ -31,21 +31,18 @@ function sbq.checkTable(check, checked)
 	return true
 end
 
-local selectedLocationTab = 1
 sbq.drawSpecialButtons = {}
 function sbq.effectsPanel()
 	sbq.locationTabs = {}
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations then return end
 	locationTabLayout:clearChildren()
 	locationTabLayout:addChild({ id = "locationTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {} })
-	function locationTabField:onTabChanged(tab, previous)
-		sbq.selectedLocationTab = tab
-	end
+	sbq.fixMainTabSubTab.globalPredSettings = {locationTabField}
 
 	for i, location in ipairs(sbq.predatorConfig.listLocations or {}) do
 		local tab = sbq.updateLocationTab(location)
 		if i == 1 then
-			sbq.selectedLocationTab = tab
+			tab:select()
 		end
 	end
 end
@@ -162,9 +159,11 @@ function sbq.updateLocationTab(location)
 					{ spacing = -1 },
 					{ type = "checkBox", id = location .. "VisualMinAdditive", checked = sbq.predatorSettings[location .. "VisualMinAdditive"], toolTip = "Whether the Minimum actually counts towards the fill level." },
 						{ type = "slider", id = location .. "VisualSize", notches = notches,
-							handles = { { value = math.max(min, sbq.predatorSettings[location .. "VisualMin"] or min),
-								toolTip = "Minimum Visual Size" },
-								{ value = math.min(max, sbq.predatorSettings[location .. "VisualMax"] or max), toolTip = "Maximum Visual Size" } } },
+							handles = {
+								{ value = math.max(min, sbq.predatorSettings[location .. "VisualMin"] or min), locked = sbq.overrideSettings[location .. "VisualMin"] ~= nil, toolTip = "Minimum Visual Size" },
+								{ value = math.min(max, sbq.predatorSettings[location .. "VisualMax"] or max), locked = sbq.overrideSettings[location .. "VisualMax"] ~= nil, toolTip = "Maximum Visual Size" }
+							}
+						},
 					{ type = "textBox", align = "center", id = location .. "Multiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Fill Level Multiplier"},
 				},
 				{

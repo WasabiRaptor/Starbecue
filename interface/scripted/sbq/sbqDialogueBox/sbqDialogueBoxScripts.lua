@@ -197,8 +197,13 @@ function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, ei
 		return dialogueTree.digested or dialogueTree.default
 	end
 
+	if settings.healing then
+		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
+	end
 	if settings.digesting then
 		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
+	elseif settings.healing then
+		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
 	end
 	table.insert(options, effect or "default")
 
@@ -227,6 +232,8 @@ function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, 
 	end
 	if settings.digesting then
 		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
+	elseif settings.healing then
+		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
 	end
 
 	return dialogueTree[effect] or dialogueTree.default

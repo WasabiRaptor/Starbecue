@@ -63,26 +63,13 @@
 							{ "type" : "itemSlot", "id" : "backCosmetic" }
 						]]
 					]},
-					{ "type" : "panel", "id" : "tenantBehaviorPanel", "style" : "convex", "children" : [
+					{ "type" : "panel", "id" : "tenantBehaviorPanel", "expandMode" : [1,0], "size":[100,100], "style" : "convex", "children" : [
 						{ "mode" : "v", "spacing" : -1 },
-						{ "type" : "label", "text" : "NPC Behavior", "align" : "center" },
-						/*[
-							{ "type" : "checkBox", "id" : "allowHunting", "toolTip" : "NPC will actively seek out prey to vore" },  { "type" : "label", "text" : " Allow Hunting ", "inline" : true },
-							{ "type" : "checkBox", "id" : "huntFriendlyPlayers", "toolTip" : "Friendly Players" },
-							{ "type" : "checkBox", "id" : "huntHostilePlayers", "toolTip" : "Hostile Players" },
-							{ "type" : "checkBox", "id" : "huntFriendlyNPCs", "toolTip" : "Friendly NPCs" },
-							{ "type" : "checkBox", "id" : "huntHostileNPCs", "toolTip" : "Hostile NPCs" },
-							{ "type" : "checkBox", "id" : "huntFriendlyMonsters", "toolTip" : "Friendly Monsters" },
-							{ "type" : "checkBox", "id" : "huntHostileMonsters", "toolTip" : "Hostile Monsters" }
+						{ "type" : "tabField", "id" : "behaviorTabField", "layout" : "vertical", "tabs" : [
+						]}
+					]},
+					{ "type" : "panel", "id" : "questSettingsPanel", "style" : "convex", "children" : [
 
-						],
-						[
-							{ "type" : "checkBox", "id" : "allowBaiting", "toolTip" : "NPC will actively seek out preds to vore them" }, { "type" : "label", "text" : " Allow Baiting  ", "inline" : true },
-							{ "type" : "checkBox", "id" : "baitFriendlyPlayers", "toolTip" : "Friendly Players" },
-							{ "type" : "checkBox", "id" : "baitHostilePlayers", "toolTip" : "Hostile Players" },
-							{ "type" : "checkBox", "id" : "baitFriendlyNPCs", "toolTip" : "Friendly NPCs" },
-							{ "type" : "checkBox", "id" : "baitHostileNPCs", "toolTip" : "Hostile NPCs" }
-						],*/
 						[{ "type" : "checkBox", "id" : "questParticipation", "toolTip" : "Allow NPC to give out and participate in quests.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Quest Participation", "inline" : true }],
 						[{ "type" : "checkBox", "id" : "crewmateGraduation", "toolTip" : "Allow NPC to give out and graduate into a cewmate.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Crewmate Graduation", "inline" : true }]
 					]},
@@ -132,7 +119,8 @@
 						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,30], "expandMode" : [1,0], "style" : "convex", "children" : [
 							{ "type" : "scrollArea", "id" : "globalSettingsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [ { "type" : "panel", "style" : "flat", "children" : [
 								{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
-									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ]
+									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
+									[{ "type" : "checkBox", "id" : "forcefulPrey", "toolTip" : "Allow Prey to force their way inside without asking\n(If that vore type is enabled and available)" }, { "type" : "label", "text" : " Forceful Prey" } ]
 								]}
 							]}]}
 						]},

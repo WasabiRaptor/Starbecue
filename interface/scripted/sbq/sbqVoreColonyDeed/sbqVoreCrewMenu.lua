@@ -77,6 +77,5 @@ function sbq.saveDigestedPrey()
 end
 
 function sbq.onTenantChanged()
-
-	mainTabField:pushEvent("tabChanged", sbq.selectedMainTabFieldTab, sbq.selectedMainTabFieldTab)
+	mainTabField:pushEvent("tabChanged", mainTabField.currentTab, mainTabField.currentTab)
 end

@@ -23,7 +23,8 @@
 						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,30], "expandMode" : [1,0], "style" : "convex", "children" : [
 							{ "type" : "scrollArea", "id" : "globalSettingsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [ { "type" : "panel", "style" : "flat", "children" : [
 								{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
-									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ]
+									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
+									[{ "type" : "checkBox", "id" : "forcefulPrey", "toolTip" : "Allow Prey to force their way inside without asking\n(If that vore type is enabled and available)" }, { "type" : "label", "text" : " Forceful Prey" } ]
 								]}
 							]}]}
 						]}

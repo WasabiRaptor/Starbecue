@@ -58,6 +58,7 @@ require("/scripts/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqSettings/sbqSettingsEffectsPanel.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+require("/interface/scripted/sbq/sbqVoreColonyDeed/sbqHuntingSettings.lua")
 
 function sbq.drawLocked(w, icon)
 	local c = widget.bindCanvas(w.backingWidget)
@@ -66,19 +67,21 @@ function sbq.drawLocked(w, icon)
 	c:drawImageDrawable(icon, pos, 1)
 end
 
-sbq.selectedMainTabFieldTab = mainTabField.tabs.deedTab
+mainTabField.tabs.deedTab:select()
 if (sbq.storage.detached) or (sbq.storage.respawner ~= nil) then
 	mainTabField.tabs.deedTab:setVisible(false)
-	sbq.selectedMainTabFieldTab = mainTabField.tabs.tenantTab
+	mainTabField.tabs.tenantTab:select()
 	metagui.setTitle("Preditor")
 	metagui.setIcon("/items/active/sbqNominomicon/sbqNominomicon.png")
 	theme.drawFrame()
 end
 function init()
-	local occupier = sbq.storage.occupier
-
 	sbq.refreshDeedPage()
+	sbq.refreshTenantPages()
+end
 
+function sbq.refreshTenantPages()
+	local occupier = sbq.storage.occupier
 	if type(occupier) == "table" and type(occupier.tenants) == "table" and
 		type(occupier.tenants[indexes.tenantIndex]) == "table" and
 		type(occupier.tenants[indexes.tenantIndex].species) == "string"
@@ -213,6 +216,7 @@ function init()
 		globalPreySettingsLayout:setVisible(preyTabVisible)
 
 		sbq.effectsPanel()
+		sbq.huntingSettingsPanel()
 
 		sbq.setSpeciesHelpTab(species)
 		sbq.setSpeciesSettingsTab(species)
@@ -236,34 +240,6 @@ function init()
 				function itemSlot:onItemModified()
 					local item = itemSlot:item()
 					sbq.changePredatorSetting(slot, item)
-				end
-			end
-		end
-
-		if questParticipation ~= nil then
-			if sbq.overrideSettings.questParticipation == nil then
-				function questParticipation:onClick()
-					sbq.changePredatorSetting("questParticipation", questParticipation.checked)
-					if not sbq.storage.detached then
-						world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
-					end
-				end
-			end
-			if sbq.overrideSettings.crewmateGraduation == nil then
-				function crewmateGraduation:onClick()
-					sbq.changePredatorSetting("crewmateGraduation", crewmateGraduation.checked)
-
-					if not sbq.storage.detached then
-						local graduation = {
-							["true"] = {
-								nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
-							},
-							["false"] = {
-								nextNpcType = {nil}
-							}
-						}
-						world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
-					end
 				end
 			end
 		end
@@ -303,6 +279,26 @@ function sbq.checkLockedSettingsButtons(settings, override, func)
 		end
 	end
 end
+
+function settingsButtonScripts.questParticipation()
+	if not sbq.storage.detached then
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
+	end
+end
+function settingsButtonScripts.crewmateGraduation()
+	if not sbq.storage.detached then
+		local graduation = {
+			["true"] = {
+				nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
+			},
+			["false"] = {
+				nextNpcType = {nil}
+			}
+		}
+		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
+	end
+end
+
 
 function update()
 	local dt = script.updateDt()
@@ -433,13 +429,13 @@ end
 function decCurTenant:onClick()
 	sbq.changeSelectedFromList(sbq.tenantList, curTenantName, "tenantIndex", -1)
 	curTenantIndex:setText(indexes.tenantIndex)
-	init()
+	sbq.refreshTenantPages()
 end
 
 function incCurTenant:onClick()
 	sbq.changeSelectedFromList(sbq.tenantList, curTenantName, "tenantIndex", 1)
 	curTenantIndex:setText(indexes.tenantIndex)
-	init()
+	sbq.refreshTenantPages()
 end
 
 --------------------------------------------------------------------------------------------------
@@ -717,5 +713,3 @@ function sbq.generateNPCItemCard(tenant)
 	item.parameters.preySize = 1
 	return item
 end
-
-sbq.selectedMainTabFieldTab:select()

@@ -24,6 +24,7 @@
 							{ "type" : "scrollArea", "id" : "globalSettingsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [ { "type" : "panel", "style" : "flat", "children" : [
 								{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
 									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
+									[{ "type" : "checkBox", "id" : "forcefulPrey", "toolTip" : "Allow Prey to force their way inside without asking\n(If that vore type is enabled and available)" }, { "type" : "label", "text" : " Forceful Prey" } ],
 									[{ "type" : "checkBox", "id" : "disableHud", "toolTip" : "Disable the predator HUD if its bothering you." }, { "type" : "label", "text" : " Disable HUD" } ]
 								]}
 							]}]}

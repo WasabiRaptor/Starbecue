@@ -27,10 +27,8 @@ function sbq.setHelpTab()
 	kofiLabel:setText(sbq.KoFiString)
 	patronsLabel:setText(sbq.patronsString)
 
-	sbq.selectedHelpTab = helpTabs.tabs.predHelpTab
-	function helpTabs:onTabChanged(tab, previous)
-		sbq.selectedHelpTab = tab
-	end
+	sbq.fixMainTabSubTab.helpTab = { helpTabs }
+	helpTabs.tabs.predHelpTab:select()
 
 	require("/interface/scripted/sbq/sbqSettings/sbqResetSettings.lua")
 	if root.itemConfig("vorechipkit") ~= nil and sbq.config.SSVMParityEnabled then
@@ -65,10 +63,8 @@ function sbq.setSpeciesHelpTab(entitySpecies)
 		mainTabField.tabs.speciesHelpTab:setTitle(tabData.title, tabData.icon)
 		speciesHelpTabContents:addChild({type = "layout", mode = "horizontal", children = tabData.contents})
 
-		sbq.selectedSpeciesHelpTab = speciesHelpTabs.tabs.generalTab
-		function speciesHelpTabs:onTabChanged(tab, previous)
-			sbq.selectedSpeciesHelpTab = tab
-		end
+		sbq.fixMainTabSubTab.speciesHelpTab = { speciesHelpTabs }
+		speciesHelpTabs.tabs.generalTab:select()
 	else
 		mainTabField.tabs.speciesHelpTab:setVisible(false)
 	end
@@ -109,17 +105,14 @@ function sbq.setIconDirectives()
 	end
 end
 
-function mainTabField:onTabChanged(tab, previous)
-	sbq.selectedMainTabFieldTab = tab
-	local newSelected = tab.id
 
-	if newSelected == "globalPredSettings" and sbq.selectedLocationTab ~= nil then
-		locationTabField:pushEvent("tabChanged", sbq.selectedLocationTab, sbq.selectedLocationTab)
-	end
-	if newSelected == "speciesHelpTab" and sbq.selectedSpeciesHelpTab ~= nil then
-		speciesHelpTabs:pushEvent("tabChanged", sbq.selectedSpeciesHelpTab, sbq.selectedSpeciesHelpTab)
-	end
-	if newSelected == "helpTab" and sbq.selectedHelpTab ~= nil then
-		helpTabs:pushEvent("tabChanged", sbq.selectedHelpTab, sbq.selectedHelpTab)
+sbq.fixMainTabSubTab = {}
+function mainTabField:onTabChanged(tab, previous)
+	local fixSubTabs = sbq.fixMainTabSubTab[tab.id]
+	if fixSubTabs then
+		for i, fixTab in ipairs(fixSubTabs) do
+			fixTab:pushEvent("tabChanged", fixTab.currentTab, fixTab.currentTab)
+			fixTab:onTabChanged(fixTab.currentTab, fixTab.currentTab)
+		end
 	end
 end

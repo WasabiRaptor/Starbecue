@@ -353,6 +353,9 @@ function update(dt)
 			sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false)
 		end
 	end)
+	sbq.timer("hunting", 15, function ()
+		sbq.GoHunting()
+	end)
 
 	if type(sbq.occupantHolder) == "number" and world.entityExists(sbq.occupantHolder) then
 		for _, transition in ipairs(sbq.queuedTransitions) do
@@ -422,6 +425,13 @@ function interact(args)
 			end
 		end
 		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
+	end
+end
+
+function sbq.GoHunting()
+	storage.huntingTarget = (world.playerQuery( entity.position(), 50) or {})[1]
+	if type(storage.huntingTarget) == "number" and world.entityExists(storage.huntingTarget) then
+		--self.board:setEntity("sbqHuntingTarget", storage.huntingTarget)
 	end
 end
 
@@ -685,7 +695,6 @@ function sbq.searchForValidPrey(voreType)
 			end)
 		end
 	end
-
 
 end
 
