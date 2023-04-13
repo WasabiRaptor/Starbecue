@@ -39,7 +39,9 @@
 				]}
 			]},
 			{ "type" : "tab", "id" : "tenantTab", "title" : "NPC", "icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png", "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,165], "mode": "vertical", "children" : [
+				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "vertical", "children" : [
+					{ "type" : "panel", "id" : "bioPanel", "size" : [100,50], "expandMode" : [1, 1], "style" : "convex", "children" : [
+					]},
 					{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
 						{ "mode" : "h" },
 						[[
@@ -63,37 +65,38 @@
 							{ "type" : "itemSlot", "id" : "backCosmetic" }
 						]]
 					]},
-					{ "type" : "panel", "id" : "tenantBehaviorPanel", "expandMode" : [1,0], "size":[100,100], "style" : "convex", "children" : [
-						{ "mode" : "v", "spacing" : -1 },
-						{ "type" : "tabField", "id" : "behaviorTabField", "layout" : "vertical", "tabs" : [
-						]}
-					]},
-					{ "type" : "panel", "id" : "questSettingsPanel", "style" : "convex", "children" : [
-
-						[{ "type" : "checkBox", "id" : "questParticipation", "toolTip" : "Allow NPC to give out and participate in quests.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Quest Participation", "inline" : true }],
-						[{ "type" : "checkBox", "id" : "crewmateGraduation", "toolTip" : "Allow NPC to give out and graduate into a cewmate.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Crewmate Graduation", "inline" : true }]
-					]},
 					[
-						{ "type" : "panel", "id" : "personalityPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
-							{ "mode" : "h" },
-							{ "type" : "label", "text" : "Personality", "inline" : true },
-							{ "type" : "iconButton", "id" : "decPersonality", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-							{ "type" : "textBox", "id" : "personalityText", "expandMode" : [1, 0], "toolTip": "Personality" },
-							{ "type" : "iconButton", "id" : "incPersonality", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
+						{"mode":"h", "size" : [100,150], "expandMode":[1,0]},
+						{ "type" : "panel", "id" : "tenantBehaviorPanel", "style" : "convex", "children" : [
+							{ "mode" : "v"}
 						]},
-						{ "type" : "panel", "id" : "moodPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
-							{ "mode" : "h" },
-							{ "type" : "label", "text" : "Mood", "inline" : true },
-							{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-							{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood" },
-							{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
-						]}
-					],
-					{ "type" : "panel", "id" : "bioPanel", "expandMode" : [2, 3], "style" : "convex", "children" : [
-					]},
-
-					{"type" : "button", "id" : "revertNPC", "caption" : "Revert", "toolTip" : "Reverts this NPC into the equivalent vanilla version.", "expandMode" : [0, 0]},
-					{"type" : "layout", "mode" : "vertical", "expandMode" : [2,2], "children" : []}
+						[
+							{ "mode" : "v", "size" : 100},
+							{ "type" : "panel", "id" : "questSettingsPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
+								{ "mode" : "v"},
+								[{"mode":"h"},{ "type" : "checkBox", "id" : "questParticipation", "toolTip" : "Allow NPC to give out and participate in quests.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Quests", "inline" : true }],
+								[{"mode":"h"},{ "type" : "checkBox", "id" : "crewmateGraduation", "toolTip" : "Allow NPC to give out and graduate into a cewmate.\n(Forces NPC to Respawn when toggled)" },{ "type" : "label", "text" : " Graduation", "inline" : true }]
+							]},
+							{ "type" : "panel", "id" : "personalityPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
+								{ "mode" : "h" },
+								{ "type" : "label", "text" : "P", "inline" : true },
+								{ "type" : "iconButton", "id" : "decPersonality", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
+								{ "type" : "textBox", "id" : "personalityText", "expandMode" : [1, 0], "toolTip": "Personality" },
+								{ "type" : "iconButton", "id" : "incPersonality", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
+							]},
+							{ "type" : "panel", "id" : "moodPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
+								{ "mode" : "h" },
+								{ "type" : "label", "text" : "M", "inline" : true },
+								{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
+								{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood" },
+								{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
+							]},
+							[
+								{"expandMode" : [2, 2]}
+							],
+							{"type" : "button", "id" : "revertNPC", "caption" : "Revert", "toolTip" : "Reverts this NPC into the equivalent vanilla version.", "expandMode" : [0, 0]}
+						]
+					]
 				]},
 				{"type" : "layout", "mode" : "vertical", "id" : "notStarbecueNPC", "children" : [
 					{"type" : "label", "text" : "This NPC is not a Starbecue NPC.", "align" : "center" },
@@ -101,8 +104,8 @@
 				]}
 			]},
 			{ "type" : "tab", "id" : "globalPredSettings", "title" : "Pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id": "globalPredSettingsLayout", "expandMode" : [1,0], "size" : [100,165], "mode": "horizontal", "children" : [
-					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,165], "children" : [
+				{"type" : "layout", "id": "globalPredSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "horizontal", "children" : [
+					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,175], "children" : [
 					]},
 					[
 						{ "size" : 85 },
@@ -167,8 +170,8 @@
 				{"type" : "label", "id" : "notPredText", "text" : "This NPC is not a Pred.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "globalPreySettings", "title" : "Prey", "icon" : "/interface/scripted/sbq/sbqSettings/preySettings.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "mode": "horizontal", "id": "globalPreySettingsLayout", "expandMode" : [1,0], "size" : [100,165],  "children" : [
-					{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [80, 165], "expandMode" : [0, 0], "children" : [
+				{"type" : "layout", "mode": "horizontal", "id": "globalPreySettingsLayout", "expandMode" : [1,0], "size" : [100,175],  "children" : [
+					{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [80, 175], "expandMode" : [0, 0], "children" : [
 						{ "type" : "label", "text" : "Prey Preferences", "align" : "center" },
 						[{ "type" : "checkBox", "id" : "preyEnabled", "toolTip" : "Enable or Disable being prey in general" }, { "type" : "label", "text" : " Prey Enabled" }],
 						{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [{ "type" : "panel", "style" : "flat", "children" : [{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
@@ -215,25 +218,14 @@
 				{"type" : "label", "id" : "notPreyText", "text" : "This NPC is not Prey.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "speciesConfigTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesConfigTabContents", "expandMode" : [1,0], "size" : [100,165],  "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesConfigTabContents", "expandMode" : [1,0], "size" : [100,175],  "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "speciesHelpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesHelpTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesHelpTabContents", "expandMode" : [1,0], "size" : [100,175], "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "helpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "helpTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "helpTabContents", "expandMode" : [1,0], "size" : [100,175], "mode" : "horizontal", "children" : [] }
 			]}
-		],
-			"bottomBar" : [
-					{ "type" : "panel", "id" : "tenantSelectPanel", "style" : "convex", "children" : [
-						{ "mode" : "h" },
-						{ "type" : "label", "id" : "npcSelectorLabel", "text" : "Tenant Selector", "align" : "center", "inline" : true },
-						{ "type" : "iconButton", "id" : "decCurTenant", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-						{ "type" : "label", "id" : "curTenantIndex", "text": "1", "align" : "center", "inline" : true },
-						{ "type" : "iconButton", "id" : "incCurTenant", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" },
-						{ "type" : "label", "id" : "curTenantName", "text": "", "align" : "center", "inline" : true }
-					]}
-			]
-		}
+		]}
 	]
 }

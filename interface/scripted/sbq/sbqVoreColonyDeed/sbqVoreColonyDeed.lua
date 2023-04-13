@@ -138,11 +138,12 @@ function sbq.refreshTenantPages()
 		sbq.onTenantChanged()
 
 		local bio = sbq.tenant.overrides.scriptConfig.tenantBio or sbq.npcConfig.scriptConfig.tenantBio
-		if bio then
+		if bio ~= nil then
 			bioPanel:clearChildren()
 			if type(bio) == "string" then
 				bio = root.assetJson(bio)
 			end
+			sb.logInfo(sb.printJson(bio))
 			bioPanel:addChild(bio)
 		end
 		bioPanel:setVisible(bio ~= nil)
@@ -216,11 +217,31 @@ function sbq.refreshTenantPages()
 		globalPreySettingsLayout:setVisible(preyTabVisible)
 
 		sbq.effectsPanel()
-		sbq.huntingSettingsPanel()
 
 		sbq.setSpeciesHelpTab(species)
 		sbq.setSpeciesSettingsTab(species)
 		sbq.setHelpTab()
+
+		function settingsButtonScripts.questParticipation()
+			if not sbq.storage.detached then
+				world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
+			end
+		end
+		function settingsButtonScripts.crewmateGraduation()
+			if not sbq.storage.detached then
+				local graduation = {
+					["true"] = {
+						nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
+					},
+					["false"] = {
+						nextNpcType = {nil}
+					}
+				}
+				world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
+			end
+		end
+
+		sbq.huntingSettingsPanel()
 
 		sbq.refreshButtons()
 
@@ -243,6 +264,7 @@ function sbq.refreshTenantPages()
 				end
 			end
 		end
+		mainTabField.tabs.tenantTab:setTitle(((sbq.tenant.overrides or {}).identity or {}).name or "")
 	end
 end
 
@@ -279,26 +301,6 @@ function sbq.checkLockedSettingsButtons(settings, override, func)
 		end
 	end
 end
-
-function settingsButtonScripts.questParticipation()
-	if not sbq.storage.detached then
-		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
-	end
-end
-function settingsButtonScripts.crewmateGraduation()
-	if not sbq.storage.detached then
-		local graduation = {
-			["true"] = {
-				nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
-			},
-			["false"] = {
-				nextNpcType = {nil}
-			}
-		}
-		world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
-	end
-end
-
 
 function update()
 	local dt = script.updateDt()
@@ -422,20 +424,7 @@ if decTenant ~= nil then
 	end
 end
 
-
 function sbq.onTenantChanged()
-end
-
-function decCurTenant:onClick()
-	sbq.changeSelectedFromList(sbq.tenantList, curTenantName, "tenantIndex", -1)
-	curTenantIndex:setText(indexes.tenantIndex)
-	sbq.refreshTenantPages()
-end
-
-function incCurTenant:onClick()
-	sbq.changeSelectedFromList(sbq.tenantList, curTenantName, "tenantIndex", 1)
-	curTenantIndex:setText(indexes.tenantIndex)
-	sbq.refreshTenantPages()
 end
 
 --------------------------------------------------------------------------------------------------
@@ -642,14 +631,11 @@ function sbq.refreshDeedPage()
 
 				function itemSlot:onMouseButtonEvent(btn, down)
 					indexes.tenantIndex = i
-					curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
-					curTenantIndex:setText(indexes.tenantIndex)
-					init()
+					sbq.refreshTenantPages()
 				end
 			end
 		end
 	end
-	curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
 
 	if (not sbq.storage.crewUI) and not (sbq.storage.detached or sbq.storage.respawner) then
 		tenantNote:setVisible(occupier.tenantNote ~= nil)

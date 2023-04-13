@@ -3,10 +3,8 @@
 sbq.fixBehaviorSubTabs = {}
 function sbq.huntingSettingsPanel()
 	tenantBehaviorPanel:clearChildren()
-	tenantBehaviorPanel:addChild({ id = "behaviorTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {} })
+	tenantBehaviorPanel:addChild({ id = "behaviorTabField", type = "tabField", layout = "horizontal", tabWidth = 40, tabs = {} })
 	sbq.fixMainTabSubTab.tenantTab = { behaviorTabField }
-
-
 
 	sbq.huntingTab()
 	sbq.baitingTab()
@@ -26,7 +24,7 @@ function sbq.huntingTab()
 	behaviorTabField:newTab({
 		type = "tab", id = "huntingTab", title = "Hunting", visible = true,
 		contents = {
-			{ id = "huntingTabField", type = "tabField", layout = "horizontal", tabWidth = 40, tabs = {
+			{ id = "huntingTabField", type = "tabField", layout = "vertical", tabWidth = 18, tabs = {
 			}}
 		}
 	})
@@ -47,7 +45,7 @@ function sbq.huntingTab()
 			}
 		}
 		tab = huntingTabField:newTab({
-			type = "tab", id = voreType .. "HuntingTab", title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
+			type = "tab", id = voreType .. "HuntingTab", visible = sbq.predatorSettings[voreType.."Pred"] or false, title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
 				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
 					{ type = "panel", id = voreType .. "HuntingTabScrollArea", style = "flat", children = {
 						{ mode = "v" },
@@ -97,6 +95,10 @@ function sbq.huntingTab()
 			}
 		})
 
+		settingsButtonScripts[voreType .. "Pred"] = function()
+			tab:setVisible(sbq.predatorSettings[voreType .. "Pred"])
+		end
+
 		if i == 1 then
 			tab:select()
 		end
@@ -107,7 +109,7 @@ function sbq.baitingTab()
 	behaviorTabField:newTab({
 		type = "tab", id = "baitingTab", title = "Baiting", visible = true,
 		contents = {
-			{ id = "baitingTabField", type = "tabField", layout = "horizontal", tabWidth = 40, tabs = {
+			{ id = "baitingTabField", type = "tabField", layout = "vertical", tabWidth = 18, tabs = {
 			}}
 		}
 	})
@@ -116,13 +118,17 @@ function sbq.baitingTab()
 	for i, voreType in pairs(sbq.config.voreTypes) do
 
 		tab = baitingTabField:newTab({
-			type = "tab", id = voreType .. "BaitingTab", title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
+			type = "tab", id = voreType .. "BaitingTab", visible = sbq.preySettings[voreType] or false, title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
 				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
 					{ type = "panel", id = voreType .. "BaitingTabScrollArea", style = "flat", children = {
 					}}
 				}}
 			}
 		})
+		settingsButtonScripts[voreType] = function()
+			tab:setVisible(sbq.preySettings[voreType])
+		end
+
 
 		if i == 1 then
 			tab:select()

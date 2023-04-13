@@ -20,8 +20,8 @@
 				{"type" : "label", "id" : "tryWarpingLabel", "text" : "^#555;If this menu doesn't look right, try warping to refresh crew.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "tenantTab", "title" : "Crewmate", "icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png", "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,165], "mode": "horizontal", "children" : [
-					{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "size" : [100,165], "children" : [
+				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "horizontal", "children" : [
+					{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "size" : [100,175], "children" : [
 						{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
 							{ "mode" : "h" },
 							[[
@@ -68,14 +68,14 @@
 						]}],
 						[{ "type" : "panel", "id" : "personalityPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 							{ "mode" : "h" },
-							{ "type" : "label", "text" : " P", "inline" : true },
+							{ "type" : "label", "text" : "P", "inline" : true },
 							{ "type" : "iconButton", "id" : "decPersonality", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
 							{ "type" : "textBox", "id" : "personalityText", "expandMode" : [1, 0], "toolTip": "Personality" },
 							{ "type" : "iconButton", "id" : "incPersonality", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
 						]},
 						{ "type" : "panel", "id" : "moodPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 							{ "mode" : "h" },
-							{ "type" : "label", "text" : " M", "inline" : true },
+							{ "type" : "label", "text" : "M", "inline" : true },
 							{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
 							{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood" },
 							{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
@@ -96,8 +96,8 @@
 
 			]},
 			{ "type" : "tab", "id" : "globalPredSettings", "title" : "Pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id": "globalPredSettingsLayout", "expandMode" : [1,0], "size" : [100,165], "mode": "horizontal", "children" : [
-					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,165], "children" : [
+				{"type" : "layout", "id": "globalPredSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "horizontal", "children" : [
+					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,175], "children" : [
 					]},
 					[
 						{ "size" : 85 },
@@ -162,8 +162,8 @@
 				{"type" : "label", "id" : "notPredText", "text" : "This NPC is not a Pred.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "globalPreySettings", "title" : "Prey", "icon" : "/interface/scripted/sbq/sbqSettings/preySettings.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "mode": "horizontal", "id": "globalPreySettingsLayout", "expandMode" : [1,0], "size" : [100,165],  "children" : [
-					{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [80, 165], "expandMode" : [0, 0], "children" : [
+				{"type" : "layout", "mode": "horizontal", "id": "globalPreySettingsLayout", "expandMode" : [1,0], "size" : [100,175],  "children" : [
+					{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [80, 175], "expandMode" : [0, 0], "children" : [
 						{ "type" : "label", "text" : "Prey Preferences", "align" : "center" },
 						[{ "type" : "checkBox", "id" : "preyEnabled", "toolTip" : "Enable or Disable being prey in general" }, { "type" : "label", "text" : " Prey Enabled" }],
 						{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [{ "type" : "panel", "style" : "flat", "children" : [{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
@@ -210,13 +210,13 @@
 				{"type" : "label", "id" : "notPreyText", "text" : "This NPC is not Prey.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "speciesConfigTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesConfigTabContents", "expandMode" : [1,0], "size" : [100,165],  "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesConfigTabContents", "expandMode" : [1,0], "size" : [100,175],  "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "speciesHelpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesHelpTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesHelpTabContents", "expandMode" : [1,0], "size" : [100,175], "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "helpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "helpTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "helpTabContents", "expandMode" : [1,0], "size" : [100,175], "mode" : "horizontal", "children" : [] }
 			]}
 		],
 			"bottomBar" : [
