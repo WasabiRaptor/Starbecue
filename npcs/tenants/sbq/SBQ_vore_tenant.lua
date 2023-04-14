@@ -49,6 +49,7 @@ function tenant.setHome(position, boundary, deedUniqueId, skipNotification)
 				world.sendEntityMessage(id, "sbqSaveSettings", storage.settings or {}, index )
 				world.sendEntityMessage(id, "sbqSavePreySettings", status.statusProperty("sbqPreyEnabled") or {}, index)
 				world.sendEntityMessage(id, "sbqSaveDigestedPrey", status.statusProperty("sbqStoredDigestedPrey"), index)
+				world.sendEntityMessage(id, "sbqSaveStatusProperty", "sbqCumulativeData", status.statusProperty("sbqStoredDigestedPrey"), index)
 			end
 		end)
 	end
@@ -203,11 +204,10 @@ function init()
 		digestedStoredTable[location][uniqueId] = item
 		status.setStatusProperty("sbqStoredDigestedPrey", digestedStoredTable)
 		local index = config.getParameter("tenantIndex")
-		if storage.respawner and index ~= nil then
-			world.sendEntityMessage(storage.respawner, "sbqSaveDigestedPrey", digestedStoredTable, index)
-		end
 		if recruitable.ownerUuid() then
 			world.sendEntityMessage(recruitable.ownerUuid(), "sbqCrewSaveDigestedPrey", digestedStoredTable, entity.uniqueId())
+		elseif storage.respawner and index ~= nil then
+			world.sendEntityMessage(storage.respawner, "sbqSaveDigestedPrey", digestedStoredTable, index)
 		end
 	end)
 	message.setHandler("sbqSaveDigestedPrey", function(_, _, digestedStoredTable )
@@ -321,8 +321,26 @@ function init()
 				occupier = occupier
 			}
 		end
-	end
-	)
+	end)
+
+	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, isPrey, data)
+		if not uniqueId then return end
+		local cumData = status.statusProperty("sbqCumulativeData") or {}
+		cumData[uniqueId] = cumData[uniqueId] or {}
+		if isPrey then
+			cumData[uniqueId].prey = data
+		else
+			cumData[uniqueId].pred = data
+		end
+		cumData[uniqueId].name = world.entityName(world.loadUniqueEntity(uniqueId))
+		status.setStatusProperty("sbqCumulativeData", cumData)
+
+		if recruitable.ownerUuid() then
+			world.sendEntityMessage(recruitable.ownerUuid(), "sbqCrewSaveStatusProperty", "sbqCumulativeData", cumData, entity.uniqueId())
+		elseif storage.respawner and index ~= nil then
+			world.sendEntityMessage(storage.respawner, "sbqSaveStatusProperty", "sbqCumulativeData", cumData, index)
+		end
+	end)
 end
 
 function sbq.setSpeciesConfig()

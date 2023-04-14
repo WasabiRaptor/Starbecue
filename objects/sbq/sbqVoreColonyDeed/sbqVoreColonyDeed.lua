@@ -65,6 +65,10 @@ function init()
 	message.setHandler("sbqSaveAnimOverrideSettings", function (_,_, settings, index)
 		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = settings
 	end)
+	message.setHandler("sbqSaveStatusProperty", function (_,_, property, value, index)
+		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties[property] = value
+	end)
+
 
 	message.setHandler("sbqDeedInteract", function (_,_, args)
 		_onInteraction(args)

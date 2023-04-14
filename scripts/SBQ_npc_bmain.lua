@@ -162,6 +162,28 @@ function init()
 		sbq.tenant_setNpcType(npcType)
 	end)
 
+	message.setHandler("sbqGetCumulativeOccupancyTimeAndFlags", function(_, _, uniqueId, isPrey)
+		if not uniqueId then return end
+		local cumData = status.statusProperty("sbqCumulativeData") or {}
+		if isPrey then
+			return {times =(cumData[uniqueId] or {}).prey, flags=(cumData[uniqueId] or {}).flags}
+		else
+			return {times =(cumData[uniqueId] or {}).pred, flags=(cumData[uniqueId] or {}).flags}
+		end
+	end)
+
+	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, isPrey, data)
+		if not uniqueId then return end
+		local cumData = status.statusProperty("sbqCumulativeData") or {}
+		cumData[uniqueId] = cumData[uniqueId] or {}
+		if isPrey then
+			cumData[uniqueId].prey = data
+		else
+			cumData[uniqueId].pred = data
+		end
+		status.setStatusProperty("sbqCumulativeData", cumData)
+	end)
+
 	status.setStatusProperty( "sbqCurrentData", nil)
 
 	_init()
@@ -249,7 +271,8 @@ function sbq.tenant_setNpcType(npcType)
 			statusControllerSettings = {
 				statusProperties = {
 					sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
-					sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey")
+					sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
+					sbqCumulativeData = status.statusProperty("sbqCumulativeData")
 				}
 			}
 		},

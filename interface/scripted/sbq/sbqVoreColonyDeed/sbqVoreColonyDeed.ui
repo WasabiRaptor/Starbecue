@@ -56,19 +56,19 @@
 								{ "type" : "itemSlot", "id" : "legsCosmetic", "glyph" : "/interface/scripted/sbq/legsSlot.png" },
 								{ "type" : "itemSlot", "id" : "backCosmetic", "glyph" : "/interface/scripted/sbq/backSlot.png" }
 							]},
+							{ "type" : "panel", "id" : "moodPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
+								{ "mode" : "h" },
+								{ "type" : "label", "text" : "M", "inline" : true },
+								{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
+								{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood\n(NPC May change this themselves sometimes)" },
+								{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
+							]},
 							{ "type" : "panel", "id" : "personalityPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 								{ "mode" : "h" },
 								{ "type" : "label", "text" : "P", "inline" : true },
 								{ "type" : "iconButton", "id" : "decPersonality", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
 								{ "type" : "textBox", "id" : "personalityText", "expandMode" : [1, 0], "toolTip": "Personality" },
 								{ "type" : "iconButton", "id" : "incPersonality", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
-							]},
-							{ "type" : "panel", "id" : "moodPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
-								{ "mode" : "h" },
-								{ "type" : "label", "text" : "M", "inline" : true },
-								{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-								{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood" },
-								{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
 							]},
 							{ "type" : "panel", "id" : "questSettingsPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 								{ "mode" : "v"},
@@ -78,7 +78,8 @@
 							[
 								{"expandMode" : [2, 2]}
 							],
-							{"type" : "button", "id" : "revertNPC", "caption" : "Revert", "toolTip" : "Reverts this NPC into the equivalent vanilla version.", "expandMode" : [0, 0]}
+							{"type" : "button", "id" : "hideBio", "caption" : "Hide Bio", "expandMode" : [1, 0]},
+							{"type" : "button", "id" : "revertNPC", "caption" : "Revert", "toolTip" : "Reverts this NPC into the equivalent vanilla version.", "expandMode" : [1, 0]}
 						]
 					]
 				]},

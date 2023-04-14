@@ -111,6 +111,26 @@ function init()
 		end
 		recruitSpawner:markDirty()
 	end)
+	message.setHandler("sbqCrewSaveStatusProperty", function(_, _, property, data, uniqueId)
+		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
+		for _, companionType in ipairs(companionTypes) do
+			local companions = playerCompanions.getCompanions(companionType)
+			local reload
+			for i, follower in ipairs(companions) do
+				if follower.uniqueId == uniqueId then
+					companions[i].config.parameters.statusControllerSettings.statusProperties[property] = data
+					reload = true
+					break
+				end
+			end
+			if reload then
+				playerCompanions.setCompanions(companionType, companions)
+				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
+			end
+		end
+		recruitSpawner:markDirty()
+	end)
+
 
 	message.setHandler( "sbqRequestFollow", function (_,_, uniqueId, recruitUuid, recruitInfo)
 		if not checkCrewLimits(recruitUuid) then

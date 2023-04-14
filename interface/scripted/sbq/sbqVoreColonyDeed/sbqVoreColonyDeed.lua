@@ -3,7 +3,8 @@ sbq = {
 	config = root.assetJson("/sbqGeneral.config"),
 	tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json"),
 	storage = metagui.inputData,
-	deedUI = true
+	deedUI = true,
+	playeruuid = world.entityUniqueId(player.id())
 }
 
 indexes = {
@@ -75,6 +76,10 @@ if (sbq.storage.detached) or (sbq.storage.respawner ~= nil) then
 	metagui.setIcon("/items/active/sbqNominomicon/sbqNominomicon.png")
 	theme.drawFrame()
 end
+
+sbq.playerPreySettings = status.statusProperty("sbqPreyEnabled") or {}
+sbq.playerPredatorSettings = (player.getProperty("sbqSettings") or {}).global or {}
+
 function init()
 	sbq.refreshDeedPage()
 	sbq.refreshTenantPages()
@@ -115,6 +120,11 @@ function sbq.refreshTenantPages()
 		)
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = sbq.preySettings
 
+		sbq.cumulativeData = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqCumulativeData or {}
+		sbq.cumulativeData[sbq.playeruuid] = (player.getProperty("sbqCumulativeData") or {})[sbq.tenant.uniqueId] or {}
+		sbq.cumulativeData[sbq.playeruuid].name = world.entityName(player.id())
+		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqCumulativeData = sbq.cumulativeData
+
 		sbq.storedDigestedPrey = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey or {}
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = sbq.storedDigestedPrey
 
@@ -147,6 +157,7 @@ function sbq.refreshTenantPages()
 			bioPanel:addChild(bio)
 		end
 		bioPanel:setVisible(bio ~= nil)
+		hideBio:setVisible(bio ~= nil)
 
 		local sbqNPC = sbq.npcConfig.scriptConfig.sbqNPC or false
 		globalTenantSettingsLayout:setVisible(sbqNPC)
@@ -698,4 +709,9 @@ function sbq.generateNPCItemCard(tenant)
 	}
 	item.parameters.preySize = 1
 	return item
+end
+
+function hideBio:onClick()
+	bioPanel:setVisible(false)
+	hideBio:setVisible(false)
 end

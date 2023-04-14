@@ -13,6 +13,8 @@ widgets.slider = mg.proto(mg.widgetBase, {
 
 function widgets.slider:init(base, param)
 	self.expandMode = param.expandMode
+	self.textToolTips = param.textToolTips
+
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
 
@@ -192,9 +194,14 @@ function widgets.slider:onCaptureMouseMove(delta)
 	end
 
 	self.handles[self.current].value = v
+	mg.toolTip()
 end
 function widgets.slider:getToolTip()
 	if self.current then
+		if self.textToolTips then
+			local closest, index = getClosestValue(self.handles[self.current].value, self.notches)
+			return self.handles[self.current].toolTip.."\n"..self.textToolTips[index]
+		end
 		return self.handles[self.current].toolTip .. "\nValue: " .. (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
 	else
 		return nil
@@ -268,3 +275,18 @@ end
 mg.registerUninit(function() -- close any paired menus when this pane closes
 	if lastMenu and lastMenu.dismiss then lastMenu.dismiss() end
 end)
+
+function getClosestValue(x, list)
+	local closest
+	local closestKey
+	local closestDiff = math.huge
+	for k, v in ipairs(list) do
+		diff = math.abs(v - x)
+		if diff <= closestDiff then
+			closestDiff = diff
+			closest = v
+			closestKey = k
+		end
+	end
+	return closest, closestKey
+end
