@@ -384,7 +384,7 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, isPrey, data)
+	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, name, entityType, typeName, isPrey, data)
 		if not uniqueId then return end
 		local cumData = player.getProperty("sbqCumulativeData") or {}
 		cumData[uniqueId] = cumData[uniqueId] or {}
@@ -393,6 +393,9 @@ function init()
 		else
 			cumData[uniqueId].pred = data
 		end
+		cumData[uniqueId].name = name
+		cumData[uniqueId].type = entityType
+		cumData[uniqueId].typeName = typeName
 		player.setProperty("sbqCumulativeData", cumData)
 	end)
 

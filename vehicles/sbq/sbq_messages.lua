@@ -177,8 +177,8 @@ function sbq.entityDigested(eid)
 		world.sendEntityMessage(eid, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.lounging[eid]), sbq.spawner, entity.id() )
 		world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[eid]) )
 
-		world.sendEntityMessage(eid, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[eid].cumulative )
-		world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(eid), true, sbq.lounging[eid].cumulative)
+		world.sendEntityMessage(eid, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, world.entityName(sbq.spawner), world.entityType(sbq.spawner), world.entityTypeName(sbq.spawner), false, sbq.lounging[eid].cumulative )
+		world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(eid), world.entityName(eid), world.entityType(eid), world.entityTypeName(eid), true, sbq.lounging[eid].cumulative)
 
 		if type(sbq.lounging[eid].smolPreyData.id) == "number" and world.entityExists(sbq.lounging[eid].smolPreyData.id) then
 			world.sendEntityMessage(sbq.lounging[eid].smolPreyData.id, "giveDigestPrey", eid)

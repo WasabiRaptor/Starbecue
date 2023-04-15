@@ -123,6 +123,10 @@ function sbq.refreshTenantPages()
 		sbq.cumulativeData = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqCumulativeData or {}
 		sbq.cumulativeData[sbq.playeruuid] = (player.getProperty("sbqCumulativeData") or {})[sbq.tenant.uniqueId] or {}
 		sbq.cumulativeData[sbq.playeruuid].name = world.entityName(player.id())
+		local swapData = sbq.cumulativeData[sbq.playeruuid].pred
+		sbq.cumulativeData[sbq.playeruuid].pred = sbq.cumulativeData[sbq.playeruuid].prey
+		sbq.cumulativeData[sbq.playeruuid].prey = swapData
+		sbq.cumulativeData[sbq.playeruuid].type = "player"
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqCumulativeData = sbq.cumulativeData
 
 		sbq.storedDigestedPrey = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey or {}

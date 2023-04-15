@@ -70,7 +70,7 @@ function init()
 	sbq.checkLockedSettingsButtons("globalSettings", "overrideSettings", "changeGlobalSetting")
 	sbq.checkLockedSettingsButtons("animOverrideSettings", "animOverrideOverrideSettings", "changeAnimOverrideSetting")
 
-	sbq.sbqPreyEnabled = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
+	sbq.preySettings = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
 	sbq.overridePreyEnabled = status.statusProperty("sbqOverridePreyEnabled") or {}
 	sbq.checkLockedSettingsButtons("sbqPreyEnabled", "overridePreyEnabled", "changePreySetting")
 
@@ -203,9 +203,9 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 end
 
 function sbq.changePreySetting(settingname, settingvalue)
-	sbq.sbqPreyEnabled = status.statusProperty("sbqPreyEnabled") or {}
-	sbq.sbqPreyEnabled[settingname] = settingvalue
-	status.setStatusProperty("sbqPreyEnabled", sbq.sbqPreyEnabled)
+	sbq.preySettings = status.statusProperty("sbqPreyEnabled") or {}
+	sbq.preySettings[settingname] = settingvalue
+	status.setStatusProperty("sbqPreyEnabled", sbq.preySettings)
 	world.sendEntityMessage(player.id(), "sbqRefreshDigestImmunities")
 end
 

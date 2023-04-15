@@ -106,8 +106,8 @@ function sbq.uneat( occupantId )
 		world.sendEntityMessage( occupantId, "sbqPredatorDespawned", true ) -- to clear the current data for players
 	end
 
-	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[occupantId].cumulative )
-	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), true, sbq.lounging[occupantId].cumulative)
+	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, world.entityName(sbq.spawner), world.entityType(sbq.spawner), world.entityTypeName(sbq.spawner), false, sbq.lounging[occupantId].cumulative )
+	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), world.entityName(occupantId), world.entityType(occupantId), world.entityTypeName(occupantId), true, sbq.lounging[occupantId].cumulative)
 
 	world.sendEntityMessage(occupantId, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.lounging[occupantId]), sbq.spawner, entity.id() )
 	world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[occupantId]) )

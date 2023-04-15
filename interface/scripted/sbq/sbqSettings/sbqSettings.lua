@@ -6,9 +6,12 @@ require( "/lib/stardust/json.lua" )
 sbq = {
 	config = root.assetJson( "/sbqGeneral.config" ),
 	overrideSettings = {},
-	playerSettings = true
+	playerSettings = true,
+	playerPreySettings = status.statusProperty("sbqPreyEnabled") or {},
+	playerPredatorSettings = (player.getProperty("sbqSettings") or {}).global or {}
 }
 speciesOverride = {}
+
 
 function speciesOverride._species()
 	return (status.statusProperty("speciesAnimOverrideData") or {}).species or speciesOverride.species()
@@ -29,10 +32,14 @@ require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 require("/scripts/speciesAnimOverride_validateIdentity.lua")
+require("/interface/scripted/sbq/sbqSettings/sbqExtraTab.lua")
 
 mainTabField.tabs.globalPredSettings:select()
 
 function sbq.getInitialData()
+	sbq.preySettings = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
+	sbq.overridePreyEnabled = status.statusProperty("sbqOverridePreyEnabled") or {}
+
 	sbq.sbqSettings = player.getProperty("sbqSettings") or {}
 
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
@@ -43,6 +50,7 @@ function sbq.getInitialData()
 
 	sbq.predatorEntity = sbq.sbqCurrentData.id
 
+	sbq.cumulativeData = player.getProperty("sbqCumulativeData") or {}
 
 	sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), status.statusProperty("speciesAnimOverrideSettings") or {})
 	sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
@@ -91,6 +99,7 @@ function init()
 	sbq.getSpeciesAndSettings()
 
 	sbq.effectsPanel()
+	sbq.extraTab()
 
 	if ((sbq.sbqCurrentData.type ~= "prey") or (sbq.sbqCurrentData.type == "object")) then
 		mainTabField.tabs.customizeTab:setVisible(true)
@@ -209,8 +218,6 @@ function init()
 	sbq.checkLockedSettingsButtons("animOverrideSettings", "animOverrideOverrideSettings", "changeAnimOverrideSetting")
 
 	if mainTabField.tabs.globalPreySettings ~= nil then
-		sbq.sbqPreyEnabled = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
-		sbq.overridePreyEnabled = status.statusProperty("sbqOverridePreyEnabled") or {}
 		sbq.checkLockedSettingsButtons("sbqPreyEnabled", "overridePreyEnabled", "changePreySetting")
 	end
 end
@@ -296,9 +303,9 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 end
 
 function sbq.changePreySetting(settingname, settingvalue)
-	sbq.sbqPreyEnabled = status.statusProperty("sbqPreyEnabled") or {}
-	sbq.sbqPreyEnabled[settingname] = settingvalue
-	status.setStatusProperty("sbqPreyEnabled", sbq.sbqPreyEnabled)
+	sbq.preySettings = status.statusProperty("sbqPreyEnabled") or {}
+	sbq.preySettings[settingname] = settingvalue
+	status.setStatusProperty("sbqPreyEnabled", sbq.preySettings)
 	world.sendEntityMessage(player.id(), "sbqRefreshDigestImmunities")
 end
 
