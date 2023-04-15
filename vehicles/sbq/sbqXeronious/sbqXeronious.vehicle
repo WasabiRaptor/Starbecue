@@ -185,6 +185,7 @@
 			"displayDigest": "bool"
 		},
 		"defaultSettings" : {
+			"oralVorePred" : true,
 			"replaceColors" : [1,1,1,1,1],
 			"fullbright" : [false,false,false,true,false]
 		},
@@ -287,6 +288,7 @@
 				},
 				"oralVore": {
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"location" : "belly",
 					"lock" : true,
 					"failOnFull" : true,
@@ -299,6 +301,7 @@
 				},
 				"succEat": {
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"location" : "belly",
 					"lock" : true,
 					"failOnFull" : true,
@@ -311,6 +314,7 @@
 				},
 				"oralEscape": {
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"victimAnimation": "escape",
 					"lock":true,
 					"script": "oralEscape",
@@ -321,6 +325,7 @@
 				},
 				"tailVore": {
 					"voreType" : "tailVore",
+					"settings" : { "tailVorePred" : true },
 					"location" : "tail",
 					"lock" : true,
 					"failOnFull" : true,
@@ -334,6 +339,7 @@
 				},
 				"tailEscape": {
 					"voreType" : "tailVore",
+					"settings" : { "tailVorePred" : true },
 					"lock" : true,
 					"victimAnimation": "tailEscape",
 					"timing": "tail",
@@ -345,6 +351,7 @@
 				},
 				"analVore": {
 					"voreType" : "analVore",
+					"settings" : { "analVorePred" : true },
 					"location" : "belly",
 					"failOnFull" : true,
 					"lock":true,
@@ -357,6 +364,7 @@
 				},
 				"analEscape": {
 					"voreType" : "analVore",
+					"settings" : { "analVorePred" : true },
 					"lock":true,
 					"victimAnimation": "analEscape",
 					"script": "analEscape",

@@ -141,6 +141,7 @@
 		},
 
 		"defaultSettings" : {
+			"absorbVorePred" : true,
 			"replaceColors" : [5],
 			"directives" : "?replace;A1A1A1=2D5396Bc;DCDCDC=4188FABc;EFEFEF=4C9FFFBc;FFFFFF=7DBCFFBc"
 		},
@@ -200,6 +201,7 @@
 			"transitions": {
 				// directional = occupant0 can press that direction to transition
 				"absorbVore" : {
+					"settings" : { "absorbVorePred" : true },
 					"script" : "absorbVore",
 					"location" : "belly",
 					"voreType" : "absorbVore",
@@ -210,6 +212,7 @@
 					}
 				},
 				"escape" : {
+					"settings" : { "absorbVorePred" : true },
 					"script" : "absorbEscape",
 					"location" : "belly",
 					"voreType" : "absorbVore",

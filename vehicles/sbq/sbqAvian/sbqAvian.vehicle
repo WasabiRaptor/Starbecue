@@ -123,6 +123,7 @@
 			}
 		},
 		"defaultSettings" : {
+			"oralVorePred" : true,
 			"directives" : "?replace;ffca8a=f0608b;e0975c=cd5061;a85636=95484c;6f2919=6a3836;f32200=f6fbfb;dc1f00=d7e8e8;be1b00=8fa7a3;951500=5d6d69;d9c189=eacf60;a38d59=c1a24e;735e3a=977841",
 			"ballsSymmetrical" : true,
 			"breastsSymmetrical" : true,
@@ -252,6 +253,7 @@
 				// non directional = not accessible via controls, except from script
 				"oralVore": { // 1 occupant
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"location" : "belly",
 					"failOnFull" : true,
 					"lock" : true,
@@ -265,6 +267,7 @@
 				},
 				"oralEscape": { // 1 occupant
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"location" : "belly",
 					"lock" : true,
 					"script": "oralEscape",
@@ -278,6 +281,7 @@
 
 				"cockVore": { // 1 occupant
 					"voreType" : "cockVore",
+					"settings" : { "cockVorePred" : true },
 					"location" : "shaft",
 					"failOnFull" : true,
 					"lock" : true,
@@ -290,6 +294,7 @@
 				},
 				"cockEscape": { // 1 occupant
 					"voreType" : "cockVore",
+					"settings" : { "cockVorePred" : true },
 					"location" : "shaft",
 					"lock" : true,
 					"script": "cockEscape",

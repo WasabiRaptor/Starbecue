@@ -134,6 +134,7 @@
 		},
 
 		"defaultSettings" : {
+			"oralVorePred" : true,
 			"replaceColors" : [1,1,1,1,1,1,1],
 			"fullbright" : [false,false,false,false,false,true,false],
 
@@ -324,6 +325,7 @@
 				// non directional = not accessible via controls, except from script
 				"oralVore": { // 2 occupants
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"lock": true,
 					"location": "belly",
 					"failOnFull" : true,
@@ -338,6 +340,7 @@
 				},
 				"oralEscape": { // 2 occupants
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"lock": true,
 					"location": "belly",
 					"timing": "head",
@@ -353,6 +356,7 @@
 
 				"cockVore": {
 					"voreType" : "cockVore",
+					"settings" : { "cockVorePred" : true },
 					"lock": true,
 					"location": "shaft",
 					"failOnFull" : true,
@@ -366,6 +370,7 @@
 				},
 				"cockEscape": {
 					"voreType" : "cockVore",
+					"settings" : { "cockVorePred" : true },
 					"lock": true,
 					"location": "shaft",
 					"timing": "cock",
@@ -392,6 +397,7 @@
 
 				"analVore": { // 2 occupants
 					"voreType" : "analVore",
+					"settings" : { "analVorePred" : true },
 					"lock": true,
 					"location": "belly",
 					"failOnFull" : true,
@@ -405,6 +411,7 @@
 				},
 				"analEscape": { // 2 occupants
 					"voreType" : "analVore",
+					"settings" : { "analVorePred" : true },
 					"lock": true,
 					"location": "belly",
 					"timing": "tail",
@@ -418,6 +425,7 @@
 
 				"unbirth": { // 2 occupants
 					"voreType" : "unbirth",
+					"settings" : { "unbirthPred" : true },
 					"lock": true,
 					"movementLock": true,
 					"location": "womb",
@@ -433,6 +441,7 @@
 				},
 				"unbirthEscape": { // 2 occupants
 					"voreType" : "unbirth",
+					"settings" : { "unbirthPred" : true },
 					"lock": true,
 					"movementLock": true,
 					"location": "womb",

@@ -124,6 +124,7 @@
 			}
 		},
 		"defaultSettings" : {
+			"oralVorePred" : true,
 			"replaceColors" : [1,1,1,1,1,1],
 			"fullbright" : [false,false,false,false,true,false],
 
@@ -322,6 +323,7 @@
 				// directional = driver can press that direction to transition
 				// non directional = not accessible via controls, except from script
 				"oralVore": { // 1 occupant
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"location" : "belly",
 					"failOnFull" : true,
@@ -335,6 +337,7 @@
 					}
 				},
 				"oralEscape": { // 1 occupant
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"location" : "belly",
 					"lock" : true,
@@ -348,6 +351,7 @@
 				},
 
 				"cockVore": { // 1 occupant
+					"settings" : { "cockVorePred" : true },
 					"voreType" : "cockVore",
 					"location" : "shaft",
 					"failOnFull" : true,
@@ -360,6 +364,7 @@
 					}
 				},
 				"cockEscape": { // 1 occupant
+					"settings" : { "cockVorePred" : true },
 					"voreType" : "cockVore",
 					"location" : "shaft",
 					"lock" : true,
