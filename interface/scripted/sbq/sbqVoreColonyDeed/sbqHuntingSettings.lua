@@ -3,8 +3,8 @@ require("/interface/scripted/sbq/sbqSettings/sbqStatsTab.lua")
 
 sbq.fixBehaviorSubTabs = {}
 function sbq.huntingSettingsPanel()
-	tenantBehaviorPanel:clearChildren()
-	tenantBehaviorPanel:addChild({ id = "behaviorTabField", type = "tabField", layout = "horizontal", tabWidth = 40, tabs = {} })
+	extraTabsPanel:clearChildren()
+	extraTabsPanel:addChild({ id = "behaviorTabField", type = "tabField", layout = "horizontal", tabWidth = 40, tabs = {} })
 	sbq.fixMainTabSubTab.tenantTab = { behaviorTabField }
 
 	sbq.npcStatsTab()

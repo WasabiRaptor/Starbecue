@@ -1,6 +1,6 @@
 { //  -*- grammar-ext: json -*-
 	"style" : "window", // window (has titlebar), panel (just a frame) etc.
-	"size" : [256, 200], // *internal* size (not including chrome)
+	"size" : [256, 256], // *internal* size (not including chrome)
 	"title" : "SBQ Crew Menu",
 	"icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png",
 	"uniqueBy" : "path",
@@ -20,9 +20,9 @@
 				{"type" : "label", "id" : "tryWarpingLabel", "text" : "^#555;If this menu doesn't look right, try warping to refresh crew.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "tenantTab", "title" : "Crewmate", "icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png", "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "horizontal", "children" : [
-					{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "size" : [100,175], "children" : [
-						{ "type" : "panel", "id" : "tenantEquipsPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
+				{"type" : "layout", "id": "globalTenantSettingsLayout", "expandMode" : [1,0], "size" : [100,231], "mode": "horizontal", "children" : [
+					{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "size" : [100,231], "children" : [
+						{ "type" : "panel", "id" : "accessoriesPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
 							{ "mode" : "h" },
 							[[
 								{ "expandMode" : [0,0] },
@@ -45,7 +45,7 @@
 								{ "type" : "itemSlot", "id" : "backCosmetic" }
 							]]
 						]},
-						[{ "type" : "panel", "id" : "tenantBehaviorPanel", "style" : "convex", "children" : [
+						[{ "type" : "panel", "id" : "extraTabsPanel", "style" : "convex", "children" : [
 							{ "mode" : "v", "spacing" : -1 },
 							{ "type" : "label", "text" : "NPC Behavior", "align" : "center" }
 							/*[
@@ -96,8 +96,8 @@
 
 			]},
 			{ "type" : "tab", "id" : "globalPredSettings", "title" : "Pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id": "globalPredSettingsLayout", "expandMode" : [1,0], "size" : [100,175], "mode": "horizontal", "children" : [
-					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,175], "children" : [
+				{"type" : "layout", "id": "globalPredSettingsLayout", "expandMode" : [1,0], "size" : [100,231], "mode": "horizontal", "children" : [
+					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,231], "children" : [
 					]},
 					[
 						{ "size" : 85 },
@@ -111,7 +111,7 @@
 								{ "type" : "textBox", "visible" : false, "id" : "escapeValueMax", "toolTip" : "Maximum Escape Difficulty", "text" : "10" }
 							]}
 						]},
-						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,30], "expandMode" : [1,0], "style" : "convex", "children" : [
+						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,40], "expandMode" : [1,0], "style" : "convex", "children" : [
 							{ "type" : "scrollArea", "id" : "globalSettingsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [ { "type" : "panel", "style" : "flat", "children" : [
 								{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
 									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
@@ -162,8 +162,8 @@
 				{"type" : "label", "id" : "notPredText", "text" : "This NPC is not a Pred.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "globalPreySettings", "title" : "Prey", "icon" : "/interface/scripted/sbq/sbqSettings/preySettings.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "mode": "horizontal", "id": "globalPreySettingsLayout", "expandMode" : [1,0], "size" : [100,175],  "children" : [
-					{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [80, 175], "expandMode" : [0, 0], "children" : [
+				{"type" : "layout", "mode": "horizontal", "id": "globalPreySettingsLayout", "expandMode" : [1,0], "size" : [100,231],  "children" : [
+					{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [80, 231], "expandMode" : [0, 0], "children" : [
 						{ "type" : "label", "text" : "Prey Preferences", "align" : "center" },
 						[{ "type" : "checkBox", "id" : "preyEnabled", "toolTip" : "Enable or Disable being prey in general" }, { "type" : "label", "text" : " Prey Enabled" }],
 						{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [{ "type" : "panel", "style" : "flat", "children" : [{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
@@ -185,7 +185,7 @@
 						]}]}]}
 					]},
 					[
-						{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [100, 100], "expandMode" : [1, 0], "children" : [
+						{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [100, 160], "expandMode" : [1, 0], "children" : [
 							{ "type" : "label", "text" : "Immunities", "align" : "center" },
 							{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [{ "type" : "panel", "style" : "flat", "children" : [{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
 								//[{ "type" : "checkBox", "id" : "digestOverallAllow", "toolTip" : "Allow digestion overall." },{ "type" : "checkBox", "id" : "softDigestOverallAllow", "toolTip" : "Allow soft digestion overall." }, { "type" : "checkBox", "id" : "digestOverallItemDropsAllow", "toolTip" : "Allow special drops upon being digested overall." }, { "type" : "label", "text" : " Overall Digestion" }],
@@ -199,7 +199,7 @@
 								[{ "type" : "checkBox", "id" : "eggAllow", "toolTip" : "Allow being trapped in an egg." }, { "type" : "label", "text" : " Egg Entrapment" }]
 							]}]}]}
 						]},
-						{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [100, 65], "expandMode" : [1, 0], "children" : [
+						{ "type" : "panel", "style" : "convex", "mode" : "vertical", "size" : [100, 71], "expandMode" : [1, 0], "children" : [
 							{ "type" : "label", "text" : "Other", "align" : "center" },
 							{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [{ "type" : "panel", "style" : "flat", "children" : [{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
 								[{ "type" : "checkBox", "id" : "held", "toolTip" : "Whether you can be grabbed, pinned, hugged, etc." }, { "type" : "label", "text" : " Grabbed" } ]
@@ -210,13 +210,13 @@
 				{"type" : "label", "id" : "notPreyText", "text" : "This NPC is not Prey.", "align" : "center" }
 			]},
 			{ "type" : "tab", "id" : "speciesConfigTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesConfigTabContents", "expandMode" : [1,0], "size" : [100,175],  "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesConfigTabContents", "align" : 0, "expandMode" : [1,0], "size" : [100,231],  "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "speciesHelpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesHelpTabContents", "expandMode" : [1,0], "size" : [100,175], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesHelpTabContents", "align" : 0, "expandMode" : [1,0], "size" : [100,231], "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "helpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "helpTabContents", "expandMode" : [1,0], "size" : [100,175], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "helpTabContents", "align" : 0, "expandMode" : [1,0], "size" : [100,231], "mode" : "horizontal", "children" : [] }
 			]}
 		],
 			"bottomBar" : [

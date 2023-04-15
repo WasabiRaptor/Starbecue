@@ -20,6 +20,7 @@ function init()
 
 	sbq.sbqSettings = { global = data.settings }
 	sbq.sbqSettings[sbq.sbqCurrentData.species] = data.settings
+	sbq.preySettings = {}
 	sbq.predatorSpawner = data.spawner
 	sbq.storedDigestedPrey = data.storedDigestedPrey or {}
 	sbq.cumulativeData = data.cumulativeData or {}
