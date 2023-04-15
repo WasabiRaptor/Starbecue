@@ -6,6 +6,8 @@ local mkwidget = mg.mkwidget
 -- first off, modify textBox to actually use given size
 function widgets.textBox:preferredSize() return self.explicitSize or {96, 14} end
 
+----- slider -----
+
 widgets.slider = mg.proto(mg.widgetBase, {
 	expandMode = {1, 0}, -- will expand horizontally, but not vertically
 	widgetType = "slider"
@@ -209,6 +211,48 @@ function widgets.slider:getToolTip()
 end
 
 function widgets.slider:onChange(index, value) end
+
+----- fill bar -----
+
+widgets.fillbar = mg.proto(mg.widgetBase, {
+	expandMode = {1, 0},
+	widgetType = "fillbar"
+})
+
+function widgets.fillbar:init(base, param)
+	self.expandMode = param.expandMode
+	if param.inline then self.expandMode = {0, 0} end
+	if param.expand then self.expandMode = {2, 0} end
+
+	self.backingWidget = mkwidget(base, {type = "canvas"})
+	self.color = param.color or {200, 100, 100}
+	self.background = param.background or {0, 0, 0}
+	self.value = param.value or 0.5
+	self.max = param.max or 1
+end
+
+function widgets.fillbar:minSize() return {16, 16} end
+function widgets.fillbar:preferredSize() return {64, 16} end
+
+function widgets.fillbar:draw()
+	local c = widget.bindCanvas(self.backingWidget)
+	c:clear()
+
+	local outlineColor = {128, 128, 128}
+
+	c:drawRect({2, 0, self.size[1] - 4, self.size[2]}, outlineColor)
+	c:drawRect({0, 2, self.size[1], self.size[2] - 4}, outlineColor)
+	c:drawRect({2, 2, self.size[1] - 4, self.size[2] - 4}, self.background)
+	c:drawRect({2, 2, (self.size[1] - 4) * self.value/self.max, self.size[2] - 4}, self.color)
+	-- c:drawRect({(self.size[1] - 4) * self.value/self.max, 2, 2, self.size[2] - 4}, outlineColor)
+end
+
+function widgets.slider:isMouseInteractable() return false end
+function widgets.fillbar:getToolTip()
+	return self.toolTip .. ": " .. self.value .. " / " .. self.max
+end
+
+----- other functions -----
 
 local lastMenu
 function mg.dropDownMenu(m, columns, w, h, s, align)
