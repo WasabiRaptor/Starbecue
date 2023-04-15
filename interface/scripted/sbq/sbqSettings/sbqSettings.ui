@@ -115,11 +115,21 @@
 					[
 						{ "mode" : "v", "size" : 82},
 						{ "type" : "panel", "id" : "accessoriesPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
-							{ "mode" : "h" },
-							{ "type" : "itemSlot", "id" : "headCosmetic", "glyph" : "/interface/scripted/sbq/headSlot.png" },
-							{ "type" : "itemSlot", "id" : "chestCosmetic", "glyph" : "/interface/scripted/sbq/chestSlot.png" },
-							{ "type" : "itemSlot", "id" : "legsCosmetic", "glyph" : "/interface/scripted/sbq/legsSlot.png" },
-							{ "type" : "itemSlot", "id" : "backCosmetic", "glyph" : "/interface/scripted/sbq/backSlot.png" }
+							{ "mode" : "v" },
+							{ "type" : "label", "text" : "Cosmetics", "align" : "center"},
+							[
+								{ "type" : "itemSlot", "id" : "headCosmetic", "glyph" : "/interface/scripted/sbq/headSlot.png" },
+								{ "type" : "itemSlot", "id" : "chestCosmetic", "glyph" : "/interface/scripted/sbq/chestSlot.png" },
+								{ "type" : "itemSlot", "id" : "legsCosmetic", "glyph" : "/interface/scripted/sbq/legsSlot.png" },
+								{ "type" : "itemSlot", "id" : "backCosmetic", "glyph" : "/interface/scripted/sbq/backSlot.png" }
+							],
+							{ "type" : "label", "text" : "Accessories", "align" : "center"},
+							[
+								{ "type" : "itemSlot", "id" : "collarAccessory", "glyph" : "/interface/scripted/sbq/collarSlot.png" },
+								{ "type" : "itemSlot", "id" : "braAccessory", "glyph" : "/interface/scripted/sbq/braSlot.png" },
+								{ "type" : "itemSlot", "id" : "pantiesAccessory", "glyph" : "/interface/scripted/sbq/pantiesSlot.png" },
+								{ "type" : "itemSlot", "id" : "socksAccessory", "glyph" : "/interface/scripted/sbq/socksSlot.png" }
+							]
 						]}
 					]
 				] }
