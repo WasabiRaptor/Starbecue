@@ -231,8 +231,15 @@ function widgets.fillbar:init(base, param)
 	self.max = param.max or 1
 end
 
-function widgets.fillbar:minSize() return {16, 16} end
-function widgets.fillbar:preferredSize() return {64, 16} end
+function widgets.fillbar:minSize() return {16, 8} end
+function widgets.fillbar:preferredSize() return { 64, 8 } end
+
+local function subColor(color1, color2)
+	return { math.max(color1[1] - color2[1],0), math.max(color1[2] - color2[2],0), math.max(color1[3] - color2[3],0) }
+end
+local function addColor(color1, color2)
+	return { math.min(color1[1] + color2[1], 255), math.min(color1[2] + color2[2],255), math.min(color1[3] + color2[3],255) }
+end
 
 function widgets.fillbar:draw()
 	local c = widget.bindCanvas(self.backingWidget)
@@ -240,12 +247,21 @@ function widgets.fillbar:draw()
 
 	local outlineColor = {128, 128, 128}
 
-	c:drawRect({2, 0, self.size[1] - 4, self.size[2]}, outlineColor)
-	c:drawRect({0, 2, self.size[1], self.size[2] - 4}, outlineColor)
-	c:drawRect({2, 2, self.size[1] - 4, self.size[2] - 4}, self.background)
-	c:drawRect({2, 2, (self.size[1] - 4) * self.value/self.max, self.size[2] - 4}, self.color)
-	-- c:drawRect({(self.size[1] - 4) * self.value/self.max, 2, 2, self.size[2] - 4}, outlineColor)
+	c:drawRect({ 1, 0, self.size[1]-1, 1 }, outlineColor)
+	c:drawRect({ 1, self.size[2] - 1, self.size[1]-1, self.size[2] }, outlineColor)
+
+	c:drawRect({ 0, 1, 1, self.size[2]-1}, outlineColor)
+	c:drawRect({ self.size[1], 1, self.size[1] - 1, self.size[2] - 1 }, outlineColor)
+
+	local fillRect = { 1, 1, (self.size[1] - 1) * self.value / self.max, self.size[2] - 1 }
+
+	c:drawRect({ 1, 1, self.size[1] - 1, self.size[2] - 1 }, self.background)
+	c:drawRect(fillRect, subColor(self.color, { 40, 30, 20 }))
+	c:drawRect({ fillRect[1] + 1, fillRect[2] + 1, fillRect[3] - 1, fillRect[4] - 1 }, self.color)
+	c:drawRect({fillRect[1]+1,fillRect[4]-1,fillRect[3]-1,fillRect[4]-2 }, addColor(self.color, {40,30,20}))
 end
+
+
 
 function widgets.slider:isMouseInteractable() return false end
 function widgets.fillbar:getToolTip()

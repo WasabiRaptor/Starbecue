@@ -36,7 +36,10 @@ function sbq.npcStatsTab()
 	behaviorTabField:newTab({
 		type = "tab", id = "statsTab", title = "Stats", visible = true,
 		contents = {
-			{{type = "label", text = "Prey", inline = true}, predPreySlider, {type = "label", text = "Pred", inline = true}},
+			{ { type = "label", text = " Prey", inline = true }, predPreySlider, { type = "label", text = "Pred", inline = true } },
+			{ { type = "label", text = " Hunger", size = {35,10}, inline = true }, { type = "fillbar", value = 0.75, color = {153,123,39} } },
+			{ { type = "label", text = " Horny", size = {35,10}, inline = true}, { type = "fillbar", value = 0.25, color = {226,109,215} } },
+
 			{ id = "statsTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {
 			}}
 		}
