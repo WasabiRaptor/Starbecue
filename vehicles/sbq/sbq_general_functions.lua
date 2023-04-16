@@ -46,7 +46,7 @@ function sbq.underWater()
 end
 
 function sbq.useEnergy(eid, cost, callback)
-	sbq.addRPC( world.sendEntityMessage(eid, "sbqUseEnergy", cost), callback)
+	sbq.addRPC( world.sendEntityMessage(eid, "sbqConsumeResource", "energy", cost), callback)
 end
 
 -------------------------------------------------------------------------------

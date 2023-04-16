@@ -37,7 +37,7 @@ function sbq.effectsPanel()
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations then return end
 	locationTabLayout:clearChildren()
 	locationTabLayout:addChild({ id = "locationTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {} })
-	sbq.fixMainTabSubTab.globalPredSettings = {locationTabField}
+	mainTabField.subTabs.globalPredSettings = {locationTabField}
 
 	for i, location in ipairs(sbq.predatorConfig.listLocations or {}) do
 		local tab = sbq.updateLocationTab(location)

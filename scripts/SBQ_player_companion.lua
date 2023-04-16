@@ -196,23 +196,6 @@ function init()
 		world.spawnVehicle( species, { position[1], position[2] + 1.5 }, { driver = entity.id(), settings = settings, uneaten = true, data = species } )
 	end )
 
-	message.setHandler("sbqUseEnergy", function( _, _, energyUsed)
-		return status.overConsumeResource("energy", energyUsed)
-	end )
-
-	message.setHandler("sbqAddHungerHealth", function(_, _, amount)
-		local food = status.resource("food")
-		status.giveResource("food", amount)
-		local health = (food + amount) - 100
-		if health > 0 then
-			status.giveResource("health", health)
-		end
-	end )
-
-	message.setHandler("sbqGetDriverStat", function( _, _, stat)
-		return status.stat(stat)
-	end )
-
 	message.setHandler("sbqUnlockType", function(_,_, name )
 		local settings = player.getProperty( "sbqSettings" ) or {}
 		if settings.types == nil then settings.types = {} end

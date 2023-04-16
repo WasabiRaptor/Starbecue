@@ -11,6 +11,8 @@ indexes = {
 	tenantIndex = 1
 }
 
+mainTabField.subTabs = {}
+
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
@@ -321,6 +323,7 @@ function update()
 	local dt = script.updateDt()
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
+	mainTabField:doUpdate(dt)
 end
 
 function sbq.getOccupantHolderData(settings)

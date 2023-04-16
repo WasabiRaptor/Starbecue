@@ -1,25 +1,15 @@
 ---@diagnostic disable: undefined-global
 require("/interface/scripted/sbq/sbqSettings/sbqStatsTab.lua")
 
-sbq.fixBehaviorSubTabs = {}
 function sbq.huntingSettingsPanel()
 	extraTabsPanel:clearChildren()
 	extraTabsPanel:addChild({ id = "behaviorTabField", type = "tabField", layout = "horizontal", tabWidth = 40, tabs = {} })
-	sbq.fixMainTabSubTab.tenantTab = { behaviorTabField }
+	mainTabField.subTabs.tenantTab = { behaviorTabField }
+	behaviorTabField.subTabs = {}
 
 	sbq.npcStatsTab()
 	sbq.huntingTab()
 	sbq.baitingTab()
-
-	function behaviorTabField:onTabChanged(tab, previous)
-		local fixSubTabs = sbq.fixBehaviorSubTabs[tab.id]
-		if fixSubTabs then
-			for i, fixTab in ipairs(fixSubTabs) do
-				fixTab:pushEvent("tabChanged", fixTab.currentTab, fixTab.currentTab)
-				fixTab:onTabChanged(fixTab.currentTab, fixTab.currentTab)
-			end
-		end
-	end
 end
 
 function sbq.npcStatsTab()
@@ -33,19 +23,30 @@ function sbq.npcStatsTab()
 		}
 	}
 
+	local hungryVisible = sbq.npcConfig.scriptConfig.isHungry
+	local hornyVisible = sbq.npcConfig.scriptConfig.isHorny
+
 	behaviorTabField:newTab({
 		type = "tab", id = "statsTab", title = "Stats", visible = true,
 		contents = {
 			{ { type = "label", text = " Prey", inline = true }, predPreySlider, { type = "label", text = "Pred", inline = true } },
-			{ { type = "label", text = " Hunger", size = {35,10}, inline = true }, { type = "fillbar", value = 0.75, color = {153,123,39} } },
-			{ { type = "label", text = " Horny", size = {35,10}, inline = true}, { type = "fillbar", value = 0.25, color = {226,109,215} } },
-
+			{ { type = "label", text = " "..(sbq.npcConfig.scriptConfig.hungerLabel or "Hunger"), size = {40,10}, inline = true, visible = hungryVisible}, { visible = hungryVisible, id = "hungerBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hungerColor or {153,123,39} } },
+			{ { type = "label", text = " "..(sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = {40,10}, inline = true, visible = hornyVisible}, { visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or {226,109,215} } },
 			{ id = "statsTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {
 			}}
 		}
 	})
+	function statsTabField:update(dt)
+		sbq.loopedMessage("getHunger", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"food"}, function (value)
+			hungerBar:setValue(value)
+		end )
+		sbq.loopedMessage("getHorny", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"horny"}, function (value)
+			hornyBar:setValue(value)
+		end )
+	end
+
 	behaviorTabField.tabs.statsTab:select()
-	sbq.fixBehaviorSubTabs.statsTab = { statsTabField }
+	behaviorTabField.subTabs.statsTab = { statsTabField }
 
 	sbq.statsTab()
 end
@@ -61,7 +62,7 @@ function sbq.huntingTab()
 		}
 	})
 	--behaviorTabField.tabs.huntingTab:select()
-	sbq.fixBehaviorSubTabs.huntingTab = { huntingTabField }
+	behaviorTabField.subTabs.huntingTab = { huntingTabField }
 
 	for i, voreType in pairs(sbq.config.voreTypes) do
 		local preferredSize = { type = "slider", id = voreType .. "PreferredSizeSlider", extendMax = true, notches = {0, 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 3},
@@ -145,7 +146,7 @@ function sbq.baitingTab()
 			}}
 		}
 	})
-	sbq.fixBehaviorSubTabs.baitingTab = {baitingTabField}
+	behaviorTabField.subTabs.baitingTab = {baitingTabField}
 
 	for i, voreType in pairs(sbq.config.voreTypes) do
 

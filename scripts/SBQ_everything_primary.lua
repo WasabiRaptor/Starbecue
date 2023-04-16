@@ -94,8 +94,26 @@ function sbq.everything_primary()
 	end)
 
 	message.setHandler("sbqConsumeResource", function(_, _, resourceName, amount)
-		return status.consumeResource(resourceName, amount)
+		if status.resourceLocked(resourceName) then return false end
+		return status.overConsumeResource(resourceName, amount)
 	end)
+
+	message.setHandler("sbqGetResourcePercentage", function(_, _, resourceName)
+		return status.resourcePercentage(resourceName)
+	end)
+
+	message.setHandler("sbqAddHungerHealth", function(_, _, amount)
+		local food = status.resource("food")
+		status.giveResource("food", amount)
+		local health = (food + amount) - status.resourceMax("food")
+		if health > 0 then
+			status.giveResource("health", health)
+		end
+	end )
+
+	message.setHandler("sbqGetDriverStat", function( _, _, stat)
+		return status.stat(stat)
+	end )
 
 	message.setHandler("sbqDigestStore", function(_, _, location, uniqueId, item)
 		if (not uniqueId) or (not item) or (not location) then return end

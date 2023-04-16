@@ -386,6 +386,8 @@ function update(dt)
 
 	sbq.dialogueBoxOpen = math.max(0, sbq.dialogueBoxOpen - dt)
 
+	sbq.passiveStatChanges(dt)
+
 	oldupdate(dt)
 end
 
@@ -445,6 +447,14 @@ function interact(args)
 			end
 		end
 		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
+	end
+end
+
+function sbq.passiveStatChanges(dt)
+	if (storage.isHorny ~= false) then
+		if status.resourcePercentage("horny") < status.stat("hornyPassiveLimit") then
+			status.modifyResource("horny", status.stat("hornyDelta") * dt * status.resourcePercentage("food"))
+		end
 	end
 end
 

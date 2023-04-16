@@ -6,6 +6,24 @@ local mkwidget = mg.mkwidget
 -- first off, modify textBox to actually use given size
 function widgets.textBox:preferredSize() return self.explicitSize or {96, 14} end
 
+-- nice handling for tab field updates and sub tabs
+function widgets.tabField:onTabChanged(tab, previous)
+	local subTabs = (self.subTabs or {})[tab.id] or {}
+	for i, subTab in ipairs(subTabs) do
+		subTab:pushEvent("tabChanged", subTab.currentTab, subTab.currentTab)
+		subTab:onTabChanged(subTab.currentTab, subTab.currentTab)
+	end
+end
+function widgets.tabField:update(dt)
+end
+function widgets.tabField:doUpdate(dt)
+	self:update(dt)
+	local subTabs = (self.subTabs or {})[self.currentTab.id] or {}
+	for i, subTab in ipairs(subTabs) do
+		subTab:doUpdate(dt)
+	end
+end
+
 ----- slider -----
 
 widgets.slider = mg.proto(mg.widgetBase, {
@@ -253,14 +271,19 @@ function widgets.fillbar:draw()
 	c:drawRect({ 0, 1, 1, self.size[2]-1}, outlineColor)
 	c:drawRect({ self.size[1], 1, self.size[1] - 1, self.size[2] - 1 }, outlineColor)
 
-	local fillRect = { 1, 1, (self.size[1] - 1) * self.value / self.max, self.size[2] - 1 }
+	local fillRect = { 1, 1, math.max(1,(self.size[1] - 1) * self.value / self.max), self.size[2] - 1 }
 
 	c:drawRect({ 1, 1, self.size[1] - 1, self.size[2] - 1 }, self.background)
 	c:drawRect(fillRect, subColor(self.color, { 40, 30, 20 }))
-	c:drawRect({ fillRect[1] + 1, fillRect[2] + 1, fillRect[3] - 1, fillRect[4] - 1 }, self.color)
-	c:drawRect({fillRect[1]+1,fillRect[4]-1,fillRect[3]-1,fillRect[4]-2 }, addColor(self.color, {40,30,20}))
+	local x1, x2 = math.min(fillRect[1] + 1, fillRect[3]), math.max(fillRect[3] - 1, fillRect[1])
+	c:drawRect({ x1, fillRect[2] + 1, x2, fillRect[4] - 1 }, self.color)
+	c:drawRect({ x1, fillRect[4]-1, x2, fillRect[4]-2 }, addColor(self.color, {40,30,20}))
 end
 
+function widgets.fillbar:setValue(value)
+	self.value = value
+	self:draw()
+end
 
 
 function widgets.slider:isMouseInteractable() return false end

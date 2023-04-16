@@ -905,7 +905,7 @@ function sbq.handleStruggles(dt)
 	end
 
 	local entityType = world.entityType(strugglerId)
-	if entityType == "player" then
+	if entityType == "player" or entityType == "npc" then
 		sbq.addNamedRPC(strugglerId.."ConsumeEnergy", world.sendEntityMessage(strugglerId, "sbqConsumeResource", "energy", time * 5), function (consumed)
 			if consumed then
 				sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId, time)

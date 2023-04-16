@@ -12,6 +12,7 @@ sbq = {
 }
 speciesOverride = {}
 
+mainTabField.subTabs = {}
 
 function speciesOverride._species()
 	return (status.statusProperty("speciesAnimOverrideData") or {}).species or speciesOverride.species()
@@ -261,6 +262,8 @@ function update()
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
 	sbq.sbqSettings = player.getProperty("sbqSettings") or {}
 	sbq.globalSettings = sb.jsonMerge(sbq.config.globalSettings, sbq.sbqSettings.global or {})
+
+	mainTabField:doUpdate(script.updateDt())
 
 	if sbq.sbqCurrentData.id ~= sbq.predatorEntity then
 		init()
