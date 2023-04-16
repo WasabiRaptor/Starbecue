@@ -491,9 +491,9 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 	local randomPortrait = dialogueTree.randomPortrait
 	local randomEmote = dialogueTree.randomEmote
 
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomDialogue, "randomDialogue")
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomPortrait, "randomPortrait")
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomEmote, "randomEmote")
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomDialogue, "randomDialogue")
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomPortrait, "randomPortrait")
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomEmote, "randomEmote")
 
 --[[
 	local imagePortrait

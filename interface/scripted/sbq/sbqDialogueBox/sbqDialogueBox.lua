@@ -136,11 +136,11 @@ function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTree)
 		randomRolls = prevRandomRolls
 	end
 	-- we want to make sure the rolls for the portraits and the dialogue line up
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, randomRolls, randomDialogue, "randomDialogue")
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, randomRolls, randomPortrait, "randomPortrait")
-	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, randomRolls, randomName, "randomName")
-	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, randomRolls, randomButtonText, "randomButtonText")
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, randomRolls, randomEmote, "randomEmote")
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomDialogue, "randomDialogue")
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomPortrait, "randomPortrait")
+	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomName, "randomName")
+	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomButtonText, "randomButtonText")
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomEmote, "randomEmote")
 
 	prevRandomRolls = randomRolls
 

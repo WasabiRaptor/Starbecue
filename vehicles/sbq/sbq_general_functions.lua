@@ -466,9 +466,9 @@ function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, d
 	local randomPortrait = dialogueTree.randomPortrait
 	local randomEmote = dialogueTree.randomEmote
 
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
 --[[
 	local imagePortrait
 	if not npcConfig.scriptConfig.entityPortrait then

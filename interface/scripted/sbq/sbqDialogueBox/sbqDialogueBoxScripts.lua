@@ -80,7 +80,7 @@ function sbq.getRedirectedDialogue(dialogueTree, settings, eid, dialogueTreeTop)
 	return dialogueTree or {}
 end
 
-function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomTable, name, dialogueTreeTop)
+function sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomTable, name, dialogueTreeTop)
 	local randomRolls = randomRolls
 	local randomTable = randomTable
 	local badRolls = {}
@@ -88,19 +88,35 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 	local prevTable
 	while type(randomTable) == "table" do
 		if randomTable.add then
+			local passed = true
 			if randomTable.check then
-				if sbq.checkSettings(randomTable.check, settings) then
-					if type(randomTable.add) == "string" then
-						randomTable = sbq.getRedirectedDialogue(randomTable.add, settings, nil, dialogueTreeTop)[name]
-					else
-						randomTable = randomTable.add
-					end
+				passed = sbq.checkSettings(randomTable.check, settings)
+			end
+			if passed and randomTable.percentage then
+				local percentage = 0.5
+				if randomTable.percentage == "selfHealth" then
+					local health = world.entityHealth(entity.id())
+					percentage = health[1] / health[2]
+				elseif randomTable.percentage == "targetHealth" then
+					local health = world.entityHealth(eid)
+					percentage = health[1] / health[2]
+				else
+					percentage = settings[randomTable.percentage] or 0.5
+				end
+				local pool = sbq.handleRandomTableString(randomTable.add, settings, eid, dialogueTreeTop, name)
+				local index = math.min((math.floor((#pool * percentage) + 0.5) + 1), #pool)
+				randomTable = randomTable[index]
+				if not randomTable then
+					i = i - 1
+					badRolls[randomRolls[i]] = true
+					randomRolls[i] = nil -- clear the saved random value so it chooses a different one next round
+					randomTable = prevTable
+				end
+			elseif randomTable.check then
+				if passed then
+					randomTable = sbq.handleRandomTableString(randomTable.add, settings, eid, dialogueTreeTop, name)
 				elseif randomTable.fail ~= nil then
-					if type(randomTable.fail) == "string" then
-						randomTable = sbq.getRedirectedDialogue(randomTable.fail, settings, nil, dialogueTreeTop)[name]
-					else
-						randomTable = randomTable.fail
-					end
+					randomTable = sbq.handleRandomTableString(randomTable.fail, settings, eid, dialogueTreeTop, name)
 				else
 					i = i - 1
 					badRolls[randomRolls[i]] = true
@@ -108,11 +124,7 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 					randomTable = prevTable
 				end
 			else
-				if type((randomTable or {}).add) == "string" then
-					randomTable = sbq.getRedirectedDialogue((randomTable or {}).add, settings, nil, dialogueTreeTop)[name]
-				else
-					randomTable = (randomTable or {}).add
-				end
+				randomTable = sbq.handleRandomTableString(randomTable.add, settings, eid, dialogueTreeTop, name)
 			end
 		elseif randomTable.infusedSlot
 		and (sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).infusion
@@ -129,9 +141,7 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 				else
 					randomTable = randomTable.default
 				end
-				if type(randomTable) == "string" then
-					randomTable = sbq.getRedirectedDialogue(randomTable, settings, nil, dialogueTreeTop)[name]
-				end
+				randomTable = sbq.handleRandomTableString(randomTable, settings, eid, dialogueTreeTop, name)
 			else
 				i = i - 1
 				badRolls[randomRolls[i]] = true
@@ -155,6 +165,13 @@ function sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, ran
 	end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 	return randomRolls, randomTable
+end
+
+function sbq.handleRandomTableString(randomTable, settings, eid, dialogueTreeTop, name)
+	if type(randomTable) == "string" then
+		return sbq.getRedirectedDialogue(randomTable, settings, eid, dialogueTreeTop)[name]
+	end
+	return randomTable
 end
 
 function sbq.checkSettings(checkSettings, settings)
