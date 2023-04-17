@@ -25,13 +25,23 @@ function sbq.npcStatsTab()
 
 	local hungryVisible = sbq.npcConfig.scriptConfig.isHungry
 	local hornyVisible = sbq.npcConfig.scriptConfig.isHorny
+	local sleepyVisible = sbq.npcConfig.scriptConfig.isSleepy
 
 	behaviorTabField:newTab({
 		type = "tab", id = "statsTab", title = "Stats", visible = true,
 		contents = {
 			{ { type = "label", text = " Prey", inline = true }, predPreySlider, { type = "label", text = "Pred", inline = true } },
-			{ { type = "label", text = " "..(sbq.npcConfig.scriptConfig.hungerLabel or "Hunger"), size = {40,10}, inline = true, visible = hungryVisible}, { visible = hungryVisible, id = "hungerBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hungerColor or {153,123,39} } },
-			{ { type = "label", text = " "..(sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = {40,10}, inline = true, visible = hornyVisible}, { visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or {226,109,215} } },
+			{
+				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hungerLabel or "Hunger"), size = { 40, 10 }, inline = true, visible = hungryVisible },
+				{ visible = hungryVisible, id = "hungerBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hungerColor or { 153, 123, 39 } } },
+			{
+				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.restLabel or "Rest"), size = { 40, 10 }, inline = true, visible = sleepyVisible },
+				{ visible = sleepyVisible, id = "restBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.restColor or { 179, 135, 215 } }
+			},
+			{
+				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = { 40, 10 }, inline = true, visible = hornyVisible },
+				{ visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or { 226, 109, 215 } }
+			},
 			{ id = "statsTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {
 			}}
 		}
@@ -42,7 +52,11 @@ function sbq.npcStatsTab()
 		end )
 		sbq.loopedMessage("getHorny", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"horny"}, function (value)
 			hornyBar:setValue(value)
+		end)
+		sbq.loopedMessage("getRest", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"rest"}, function (value)
+			restBar:setValue(value)
 		end )
+
 	end
 
 	behaviorTabField.tabs.statsTab:select()
@@ -72,9 +86,9 @@ function sbq.huntingTab()
 				{ value = (sbq.predatorSettings[voreType .. "PreferredSizeMax"] or 1), locked = sbq.predatorSettings[voreType .. "PreferredSizeMax"] ~= nil, toolTip = "Maximum Relative Prey Size" }
 			}
 		}
-		local preferredVore = { type = "slider", id = voreType .. "Preferred", notches = {0, 1, 5, 10},
+		local preferredVore = { type = "slider", id = voreType .. "PreferredPred", min = 0, max = 10, snapOnly = true,
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "Preferred"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredSize"] ~= nil, toolTip = "How much this vore type is preferred by this character" },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPred"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredPred"] ~= nil, toolTip = "How much this vore type is preferred by this character as a pred." },
 			}
 		}
 		tab = huntingTabField:newTab({
@@ -150,10 +164,17 @@ function sbq.baitingTab()
 
 	for i, voreType in pairs(sbq.config.voreTypes) do
 
+		local preferredVore = { type = "slider", id = voreType .. "PreferredPrey", min = 0, max = 10, snapOnly = true,
+			handles = {
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredPrey"] ~= nil, toolTip = "How much this vore type is preferred by this character as prey." },
+			}
+		}
+
 		tab = baitingTabField:newTab({
 			type = "tab", id = voreType .. "BaitingTab", visible = sbq.preySettings[voreType] or false, title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
 				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
 					{ type = "panel", id = voreType .. "BaitingTabScrollArea", style = "flat", children = {
+						preferredVore
 					}}
 				}}
 			}

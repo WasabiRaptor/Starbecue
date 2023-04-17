@@ -159,7 +159,6 @@ function sbq.refreshTenantPages()
 			if type(bio) == "string" then
 				bio = root.assetJson(bio)
 			end
-			sb.logInfo(sb.printJson(bio))
 			bioPanel:addChild(bio)
 		end
 		bioPanel:setVisible(bio ~= nil)

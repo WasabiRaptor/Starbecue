@@ -38,7 +38,12 @@ function widgets.slider:init(base, param)
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
 
-	self.notches = param.notches or {param.min, param.max}
+	self.notches = param.notches or {}
+	if not param.notches and param.min and param.max then
+		for i = param.min, param.max do
+			table.insert(self.notches, i)
+		end
+	end
 	if #self.notches < 2 or self.notches[1] >= self.notches[#self.notches] then
 		sb.logError("Slider with invalid min/max! id: " .. self.id)
 	end

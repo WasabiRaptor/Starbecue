@@ -60,6 +60,8 @@ function init()
 	sbq.config = root.assetJson("/sbqGeneral.config")
 	sbq.NPCconfig = root.npcConfig(npc.npcType())
 
+	--status.resetAllResources()
+
 	if type(_npc_setItemSlot) ~= "function" then
 		_npc_setItemSlot = npc.setItemSlot
 		npc.setItemSlot = new_npc_setItemSlot
@@ -105,6 +107,12 @@ function init()
 
 	sbq.dialogueTree = config.getParameter("dialogueTree")
 	sbq.dialogueBoxScripts = config.getParameter("dialogueBoxScripts")
+
+	storage.isHorny = config.getParameter("isHorny")
+	storage.isHungry = config.getParameter("isHungry")
+	storage.isHungry = config.getParameter("isSleepy")
+	storage.persistentTarget = config.getParameter("persistentTarget")
+
 	for _, script in ipairs(sbq.dialogueBoxScripts or {}) do
 		require(script)
 	end
@@ -373,9 +381,13 @@ function update(dt)
 			sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false)
 		end
 	end)
-	sbq.timer("hunting", 15, function ()
-		sbq.GoHunting()
+	sbq.randomTimer("hunting", 15, 60, function () -- get a new hunting target every 15 to 60 seconds
+		sbq.getTarget()
 	end)
+	sbq.randomTimer("adjustMood", 60, 300, function () -- adust mood every 1 to 5 minutes
+		sbq.adjustMood()
+	end)
+
 
 	if type(sbq.occupantHolder) == "number" and world.entityExists(sbq.occupantHolder) then
 		for _, transition in ipairs(sbq.queuedTransitions) do
@@ -456,14 +468,88 @@ function sbq.passiveStatChanges(dt)
 			status.modifyResource("horny", status.stat("hornyDelta") * dt * status.resourcePercentage("food"))
 		end
 	end
+	if (storage.isSleepy ~= false) then
+		if npc.loungingIn() ~= nil then
+			status.modifyResource("rest", status.stat("restDelta") * dt * (4 * status.resourcePercentage("health")))
+		else
+			status.modifyResource("rest", status.stat("restDelta") * dt * (2 - status.resourcePercentage("health")))
+		end
+	end
 end
 
-function sbq.GoHunting()
-	storage.huntingTarget = (world.playerQuery( entity.position(), 50) or {})[1]
+function sbq.getTarget()
+	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
+		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
+			return
+		end
+		if math.random() > 0.5 then
+
+		end
+	end
+
+	--storage.huntingTarget = (world.playerQuery( entity.position(), 50) or {})[1]
 	if type(storage.huntingTarget) == "number" and world.entityExists(storage.huntingTarget) then
 		--self.board:setEntity("sbqHuntingTarget", storage.huntingTarget)
 	end
 end
+
+function sbq.getGurrentVorePref()
+	local predOrPrey = sbq.getPredOrPrey()
+	local favoredVoreTypes = {}
+	for voreType, data in pairs(sbq.config.generalVoreTypeData) do
+		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"] then
+			for i = 1, (sbq.predatorSettings[voreType .. "PreferredPred"] or 5) do
+				table.insert(favoredVoreTypes, voreType)
+			end
+		elseif predOrPrey == "prey" and sbq.preySettings[voreType] then
+			for i = 1, (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5) do
+				table.insert(favoredVoreTypes, voreType)
+			end
+		end
+	end
+	local voreTypeChosen = favoredVoreTypes[math.random(#favoredVoreTypes)]
+
+end
+
+local negative = { 1, -1 }
+local function getPositiveNegativeFloat()
+	return math.random() * negative[math.random(#negative)]
+end
+function sbq.getClosestValue(x, list)
+	local closest
+	local closestKey
+	local closestDiff = math.huge
+	for k, v in ipairs(list) do
+		diff = math.abs(v - x)
+		if diff <= closestDiff then
+			closestDiff = diff
+			closest = v
+			closestKey = k
+		end
+	end
+	return closest, closestKey
+end
+
+function sbq.getPredOrPrey()
+	local bias = 0
+	if storage.isHungry ~= false then
+		bias = bias + ((1 - status.resourcePercentage("food")) * 0.5)
+	end
+	if storage.isSleepy ~= false then
+		bias = bias + ((1 - status.resourcePercentage("rest")) * 0.5)
+	end
+	local result = math.max(sbq.predatorSettings.predPreyLeanMin or -1, math.min(sbq.predatorSettings.predPreyLeanMax or 1, (bias or 0) + sbq.getClosestValue(sbq.predatorSettings.predPreyLean or 0, {
+		getPositiveNegativeFloat(),
+		getPositiveNegativeFloat(),
+		getPositiveNegativeFloat(),
+		getPositiveNegativeFloat(),
+		getPositiveNegativeFloat()
+	})))
+	if result < 0 then return "prey" end
+	if result >= 0 then return "pred" end
+end
+
+
 
 function sbq.getOccupantArg(id, arg)
 	if sbq.occupant == nil then return end
