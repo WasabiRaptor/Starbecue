@@ -88,9 +88,11 @@ function sbq.everything_primary()
 		sbq.endMysteriousTF()
 	end)
 
-	message.setHandler("sbqApplyDigestEffect", function(_, _, effectConfig, data, sourceEntityId)
+	message.setHandler("sbqApplyDigestEffects", function(_, _, effects, data, sourceEntityId)
 		status.setStatusProperty("sbqDigestData", data)
-		status.addEphemeralEffect(effectConfig, 1, sourceEntityId)
+		for i, effect in ipairs(effects) do
+			status.addEphemeralEffect(effect, 1, sourceEntityId)
+		end
 	end)
 
 	message.setHandler("sbqConsumeResource", function(_, _, resourceName, amount)
@@ -109,7 +111,20 @@ function sbq.everything_primary()
 		if health > 0 then
 			status.giveResource("health", health)
 		end
-	end )
+	end)
+
+	message.setHandler("sbqAddToResources", function(_, _, amount, resources)
+		local amountRemaining = amount
+		for i, resource in ipairs(resources or {}) do
+			if amountRemaining <= 0 then break end
+			if status.isResource(resource) then
+				local before = status.resource(resource)
+				status.giveResource("food", amountRemaining)
+				amountRemaining = (before + amountRemaining) - status.resourceMax(resource)
+			end
+		end
+	end)
+
 
 	message.setHandler("sbqGetDriverStat", function( _, _, stat)
 		return status.stat(stat)

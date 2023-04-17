@@ -1,0 +1,20 @@
+{
+	"name" : "sbqDrainEnergy",
+	"blockingStat" : "energyDrainImmunity",
+
+	"effectConfig" : {
+		"drain" : "energy",
+		"send" : ["hunger", "energy"],
+		"regenStat": "energyRegenPercentageRate",
+		"drainRate" : 5,
+		"sendMultiplier" : 0.1
+	},
+	"defaultDuration" : 5,
+
+	"scripts" : [
+		"sbqDrain.lua"
+	],
+
+	"label" : "Energy Being Drained",
+	"icon" : "/stats/sbq/sbqDrain/sbqDrainEnergy.png"
+}

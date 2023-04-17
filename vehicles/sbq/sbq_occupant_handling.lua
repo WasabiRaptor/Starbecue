@@ -686,24 +686,19 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	end
 
 
-	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
-
+	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect]) or locationEffect
+	local effects = {status}
+	local args = {
+		power = powerMultiplier,
+		location = location,
+		dropItem = sbq.getLocationSetting(location, "PredDigestDrops"),
+		absorbPlayers = sbq.getLocationSetting(location, "AbsorbPlayers"),
+		absorbOCs =  sbq.getLocationSetting(location, "AbsorbOCs"),
+		absorbSBQNPCs = sbq.getLocationSetting(location, "AbsorbSBQNPCs"),
+		absorbOthers =  sbq.getLocationSetting(location, "AbsorbOthers")
+	}
 	if (sbq.getLocationSetting(location, "Sounds")) and (not sbq.occupant[i].flags.digested) then
 		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
-	end
-	if status == "sbqRemoveBellyEffects" then
-		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
-	else
-		local args = {
-			power = powerMultiplier,
-			location = location,
-			dropItem = sbq.getLocationSetting(location, "PredDigestDrops"),
-			absorbPlayers = sbq.getLocationSetting(location, "AbsorbPlayers"),
-			absorbOCs =  sbq.getLocationSetting(location, "AbsorbOCs"),
-			absorbSBQNPCs = sbq.getLocationSetting(location, "AbsorbSBQNPCs"),
-			absorbOthers =  sbq.getLocationSetting(location, "AbsorbOthers")
-		}
-		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "sbqApplyDigestEffect", {status, args, sbq.driver or entity.id()})
 	end
 
 	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
@@ -734,7 +729,9 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	else
 		for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 			local data = sbq.sbqData.locations[location][passiveEffect]
-			if sbq.getLocationSetting(location, passiveEffect) and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
+			if data.effect then
+				table.insert(effects, data.effect)
+			elseif sbq.getLocationSetting(location, passiveEffect) and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
 				sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 					if enabled then
 						sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
@@ -747,6 +744,9 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 			end
 		end
 	end
+
+	sbq.loopedMessage(eid.."LocationExtraEffectLoop", eid, "sbqApplyDigestEffects", {effects, args, sbq.driver or entity.id()})
+
 
 	sbq.occupant[i].indicatorCooldown = sbq.occupant[i].indicatorCooldown - dt
 
