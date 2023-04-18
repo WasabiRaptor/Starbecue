@@ -1,0 +1,15 @@
+{
+	"doSBQTargetAction": {
+		"title":"doSBQTargetAction",
+		"type":"action",
+		"name":"doSBQTargetAction",
+		"properties": {
+			"entity": {"type": "entity", "value": "target"},
+			"voreType": {"type": "string", "value": null},
+			"predOrPrey": {"type": "string", "value": null}
+		},
+		"category": "sbqHunting",
+		"script": "/behaviors/npc/sbqHunting.lua",
+		"output": {}
+	}
+}

@@ -640,7 +640,9 @@ function sbq.refreshDeedPage()
 				local button = _ENV["tenant" .. i .. "Remove"]
 				local itemSlot = _ENV["tenant" .. i .. "ItemSlot"]
 				function button:onClick()
-					player.giveItem(sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i]))
+					local itemCard = sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i])
+					sb.logInfo("Removed Tenant:"..sb.printJson(itemCard,1))
+					player.giveItem(itemCard)
 					table.remove(sbq.storage.occupier.tenants, i)
 					world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
 					init()

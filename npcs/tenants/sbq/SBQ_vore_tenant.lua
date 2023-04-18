@@ -172,10 +172,7 @@ function init()
 		return storage.settings
 	end)
 	message.setHandler("requestTransition", function ( _,_, transition, args)
-		if not sbq.occupantHolder then
-			sbq.occupantHolder = world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { driver = entity.id(), settings = storage.settings, doExpandAnim = true } )
-		end
-		table.insert(sbq.queuedTransitions, {transition, args})
+		sbq.requestTransition(transition, args)
 	end)
 	message.setHandler("sbqSwapFollowing", function(_, _)
 		if storage.behaviorFollowing then
@@ -352,6 +349,13 @@ function init()
 	end)
 end
 
+function sbq.requestTransition(transition, args)
+	if not sbq.occupantHolder then
+		sbq.occupantHolder = world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { driver = entity.id(), settings = storage.settings, doExpandAnim = true } )
+	end
+	table.insert(sbq.queuedTransitions, {transition, args})
+end
+
 function sbq.setSpeciesConfig()
 	sbq.getSpeciesConfig(npc.species(), storage.settings)
 	status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
@@ -480,6 +484,25 @@ function sbq.adjustMood()
 
 end
 
+function sbq.doTargetAction()
+	sb.logInfo("trying action")
+	sb.logInfo(sb.printJson(storage.huntingTarget))
+	if storage.huntingTarget then
+		if storage.huntingTarget.predOrPrey == "pred" then
+			sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
+			self.board:setEntity("sbqHuntingTarget", nil)
+
+			sbq.timer("checkIfInside", 5, function ()
+				if sbq.checkOccupant(storage.huntingTarget.id) then
+					storage.huntingTarget = nil
+				else
+					self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
+				end
+			end)
+		end
+	end
+end
+
 function sbq.getTarget()
 	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
 		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
@@ -528,6 +551,7 @@ function sbq.getNextTarget()
 			storage.huntingTarget = sb.jsonMerge(storage.huntingTarget, newTarget)
 		else
 			storage.huntingTarget = nil
+			self.board:setEntity("sbqHuntingTarget", nil)
 		end
 	end
 end
@@ -620,6 +644,14 @@ function sbq.getPredOrPrey()
 	if result >= 0 then return "pred" end
 end
 
+function sbq.checkOccupant(id)
+	if sbq.occupant == nil then return end
+	for i, occupant in pairs(sbq.occupant) do
+		if occupant.id == id then
+			return true
+		end
+	end
+end
 
 
 function sbq.getOccupantArg(id, arg)
