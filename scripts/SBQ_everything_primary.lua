@@ -42,6 +42,15 @@ function sbq.everything_primary()
 	message.setHandler("sbqIsPreyEnabled", function(_,_, voreType)
 		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
 		if preySettings.preyEnabled == false then return false end
+		local enabled = true
+		if type(voreType) == "table" then
+			for i, voreType in ipairs(voreType) do
+				enabled = enabled and preySettings[voreType]
+			end
+		else
+			enabled = preySettings[voreType]
+		end
+
 		local currentData = status.statusProperty("sbqCurrentData") or {}
 		return { enabled = preySettings[voreType], size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}
 	end)

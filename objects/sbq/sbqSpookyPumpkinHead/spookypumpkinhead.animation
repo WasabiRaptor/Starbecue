@@ -28,13 +28,13 @@
 					"light" : {
 						"off" : {
 							"properties" : {
-								"image" : "<partImage>:<color>.off<directives>"
+								"image" : "<partImage>:default.off<directives>"
 							}
 						},
 
 						"on" : {
 							"properties" : {
-								"image" : "<partImage>:<color>.<frame><directives>",
+								"image" : "<partImage>:default.<frame><directives>",
 								"fullbright" : true
 							}
 						}
@@ -51,13 +51,13 @@
 					"light" : {
 						"off" : {
 							"properties" : {
-								"image" : "<partImage>:<color>.off<directives>"
+								"image" : "<partImage>:default.off<directives>"
 							}
 						},
 
 						"on" : {
 							"properties" : {
-								"image" : "<partImage>:<color>.<frame><directives>"
+								"image" : "<partImage>:default.<frame><directives>"
 							}
 						}
 					}

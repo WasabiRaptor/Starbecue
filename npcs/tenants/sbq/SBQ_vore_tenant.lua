@@ -76,18 +76,16 @@ function init()
 	sbq.sbqData = sbq.predatorConfig
 
 	if not storage.settings then
-		storage.settings = sb.jsonMerge( sbq.config.defaultSettings,
+		storage.settings = sb.jsonMerge( sb.jsonMerge(sbq.config.defaultSettings, sbq.config.tenantDefaultSettings),
 			sb.jsonMerge(sbq.speciesConfig.sbqData.defaultSettings or {},
 				sb.jsonMerge( config.getParameter("sbqDefaultSettings") or {}, config.getParameter("sbqSettings") or {})
 			)
 		)
 	end
-	local preySettings = status.statusProperty("sbqPreyEnabled")
-	status.setStatusProperty("sbqPreyEnabled",
-		sb.jsonMerge(sbq.config.defaultPreyEnabled.player,
-			sb.jsonMerge(preySettings, config.getParameter("sbqOverridePreyEnabled") or {})
-		)
+	sbq.preySettings = sb.jsonMerge(sbq.config.defaultPreyEnabled.player,
+		sb.jsonMerge(status.statusProperty("sbqPreyEnabled") or {}, config.getParameter("sbqOverridePreyEnabled") or {})
 	)
+	status.setStatusProperty("sbqPreyEnabled", sbq.preySettings)
 	storage.settings = sb.jsonMerge(storage.settings or {}, config.getParameter("sbqOverrideSettings") or {})
 	sbq.predatorSettings = storage.settings
 	if not storage.settings.firstLoadDone then
@@ -150,6 +148,7 @@ function init()
 	end)
 	message.setHandler("sbqSavePreySettings", function (_,_, settings)
 		status.setStatusProperty("sbqPreyEnabled", settings)
+		sbq.preySettings = settings
 		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
 	end)
 	message.setHandler("sbqSaveAnimOverrideSettings", function (_,_, settings)
@@ -477,40 +476,59 @@ function sbq.passiveStatChanges(dt)
 	end
 end
 
-local targetList = {"players", "OCs", "SBQNPCs", "other"}
+function sbq.adjustMood()
+
+end
+
 function sbq.getTarget()
 	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
 		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
 			return
 		end
 		if math.random() > 0.5 then
-			storage.huntingTarget = nil
+			sbq.getNextTarget()
 		end
+	elseif storage.huntingTarget then
+		sbq.getNextTarget()
 	elseif math.random() > 0.5 then
+		sb.logInfo("attempting to target something")
 		local voreType, predOrPrey = sbq.getCurrentVorePref()
+		predOrPrey = "pred" -- for debug
 		if predOrPrey == "pred" then
-			bq.searchForValidPrey(voreType)
+			sbq.searchForValidPrey(voreType)
 		elseif predOrPrey == "prey" then
-
+			sbq.searchForValidPred(voreType)
 		end
 		sbq.timer("targeting", 1, function()
-			local targets = {}
-			for i, thing in ipairs(targetList) do
-				local list = sbq.targetedEntities[thing] or {}
-				for j, data in ipairs(list) do -- I do want to have seperate tables for the type to score differently but for now I'm just going to do this
-					table.insert(targets, data)
-				end
-			end
-			table.sort(targets, function(a, b)
+			table.sort(sbq.targetedEntities, function(a, b)
 				return a[2] < b[2]
 			end)
-			storage.huntingTarget = {
-				id = targets[1][1],
-				voreType = voreType,
-				predOrPrey = predOrPrey
-			}
-			self.board:setEntity("sbqHuntingTarget", targets[1][1])
+			sb.logInfo(sb.printJson(sbq.targetedEntities))
+			if sbq.targetedEntities[1] then
+				storage.huntingTarget = {
+					index = 1,
+					id = sbq.targetedEntities[1][1],
+					voreType = voreType,
+					predOrPrey = predOrPrey
+				}
+				sb.logInfo(world.entityName(entity.id()).." Got Target:"..sb.printJson(storage.huntingTarget,1))
+				self.board:setEntity("sbqHuntingTarget", sbq.targetedEntities[1][1])
+			end
 		end)
+	end
+end
+
+function sbq.getNextTarget()
+	if storage.huntingTarget then
+		local newTarget = {
+			index = storage.huntingTarget.index + 1,
+			id = (sbq.targetedEntities[storage.huntingTarget.index+1] or {})[1],
+		}
+		if newTarget.id ~= nil then
+			storage.huntingTarget = sb.jsonMerge(storage.huntingTarget, newTarget)
+		else
+			storage.huntingTarget = nil
+		end
 	end
 end
 
@@ -539,11 +557,11 @@ function sbq.getCurrentVorePref()
 		local data = sbq.config.generalVoreTypeData[voreType] or {}
 		local satisfyTable = {}
 		if predOrPrey == "prey" then
-			satisfyTable = data.satisfyPrey
+			satisfyTable = data.satisfiesPrey
 		elseif predOrPrey == "pred" then
-			satisfyTable = data.satisfyPred
+			satisfyTable = data.satisfiesPred
 		end
-		for j, satisfy in ipairs(satisfyTable) do
+		for j, satisfy in ipairs(satisfyTable or {}) do
 			if sbq.satisfyInverse[satisfy] then
 				favoredSelection[i][2] = (favoredSelection[i][2] or 0) + (1 - status.resourcePercentage(satisfy))
 			else
@@ -552,10 +570,10 @@ function sbq.getCurrentVorePref()
 		end
 	end
 	table.sort(favoredSelection, function (a, b)
-		return a > b
+		return a[2] > b[2]
 	end)
 
-	return favoredSelection[1], predOrPrey
+	return favoredSelection[1][1], predOrPrey
 end
 sbq.satisfyInverse = {
 	health = true,
@@ -834,45 +852,41 @@ end
 
 function sbq.searchForValidPrey(voreType)
 	sbq.targetedEntities = {
-		players = {},
-		OCs = {},
-		SBQNPCs = {},
-		other = {}
 	}
 
 	if storage.settings[voreType.."HuntFriendlyPlayers"] or storage.settings[voreType.."HuntHostilePlayers"] then
 		local entities = world.playerQuery(mcontroller.position(), 50)
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddToTargetList(eid, voreType, "players", "Players")
+			sbq.maybeAddToTargetList(eid, voreType, "Players", 0)
 		end
 	end
 	if storage.settings[voreType.."HuntFriendlyOCs"] or storage.settings[voreType.."HuntHostileOCs"] then
-		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = npc.id(), callScript = "config.getParameter", callScriptArgs = { "isOC" } })
+		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "isOC" } })
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddToTargetList(eid, voreType, "OCs", "OCs")
+			sbq.maybeAddToTargetList(eid, voreType, "OCs", 0.25)
 		end
 	end
 	if storage.settings[voreType.."HuntFriendlySBQNPCs"] or storage.settings[voreType.."HuntHostileSBQNPCs"] then
-		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = npc.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" } })
+		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" } })
 		for i, eid in ipairs(entities) do
 			if not world.callScriptedEntity(eid, "config.getParameter", "isOC") then
-				sbq.maybeAddToTargetList(eid, voreType, "sbqNPCs", "SBQNPCs")
+				sbq.maybeAddToTargetList(eid, voreType, "SBQNPCs", 0.5)
 			end
 		end
 	end
 	if storage.settings[voreType.."HuntFriendlyOther"] or storage.settings[voreType.."HuntHostileOther"] then
-		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = npc.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" }, callScriptResult = false })
+		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" }, callScriptResult = false })
 		util.appendLists(entities, world.monsterQuery(mcontroller.position(), 50))
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddToTargetList(eid, voreType, "other", "Other")
+			sbq.maybeAddToTargetList(eid, voreType, "Other", 2)
 		end
 	end
 end
 
-function sbq.maybeAddToTargetList(eid, voreType, list, ext)
+function sbq.maybeAddToTargetList(eid, voreType, ext, score)
 	local aggressive = world.entityAggressive(eid)
 	local validTarget = false
-	if aggressive and storage.settings[voreType .. "HuntHostile"..ext] then
+	if aggressive and storage.settings[voreType .. "HuntHostile" .. ext] then
 		validTarget = true
 	elseif not aggressive and storage.settings[voreType .. "HuntFriendly"..ext] then
 		validTarget = true
@@ -882,15 +896,15 @@ function sbq.maybeAddToTargetList(eid, voreType, list, ext)
 			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
 				local scale = (status.statusProperty("animOverrideScale") or 1)
 				local relativeSize = enabled.size / scale
-				if (relativeSize > storage.settings[voreType .. "PreferredSizeMin"] or 0.1) and (relativeSize < storage.settings[voreType .. "PreferredSizeMax"] or 1) then
-					table.insert(sbq.targetedEntities[list], {eid, math.abs((storage.settings[voreType .. "PreferredSize"] or 0.5)-relativeSize)})
+				if (relativeSize > (storage.settings[voreType .. "PreferredSizeMin"] or 0.1)) and (relativeSize < (storage.settings[voreType .. "PreferredSizeMax"] or 1)) then
+					table.insert(sbq.targetedEntities, {eid, score - math.abs((storage.settings[voreType .. "PreferredSize"] or 0.5)-relativeSize)})
 				end
 			end
 		end)
 	end
 end
 
-function sbq.searchForValidPred(setting)
+function sbq.searchForValidPred(voreType)
 
 end
 
