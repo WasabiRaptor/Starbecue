@@ -18,8 +18,8 @@ function sbq.npcStatsTab()
 		textToolTips = {"Hard Prey Lean", "Prey Leaning", "Neutral Lean", "Pred Leaning", "Hard Pred Lean"},
 		handles = {
 			{ value = (sbq.predatorSettings.predPreyLeanMin or -1), locked = sbq.overrideSettings.predPreyLeanMin ~= nil, toolTip = "Prey Lean Limit" },
-			{ value = math.max((sbq.predatorSettings.predPreyLean or 0), math.min((sbq.predatorSettings.predPreyLeanMax or 1), (sbq.predatorSettings.predPreyLean or 0))), locked = sbq.predatorSettings.predPreyLean ~= nil, toolTip = "Current Pred/Prey Lean" },
-			{ value = (sbq.predatorSettings.predPreyLeanMax or 1), locked = sbq.predatorSettings.predPreyLeanMax ~= nil, toolTip = "Pred Lean Limit" }
+			{ value = math.max((sbq.predatorSettings.predPreyLean or 0), math.min((sbq.predatorSettings.predPreyLeanMax or 1), (sbq.predatorSettings.predPreyLean or 0))), locked = sbq.overrideSettings.predPreyLean ~= nil, toolTip = "Current Pred/Prey Lean" },
+			{ value = (sbq.predatorSettings.predPreyLeanMax or 1), locked = sbq.overrideSettings.predPreyLeanMax ~= nil, toolTip = "Pred Lean Limit" }
 		}
 	}
 
@@ -46,6 +46,16 @@ function sbq.npcStatsTab()
 			}}
 		}
 	})
+	function predPreyLeanSlider:onChange(index, value)
+		if index == 1 then
+			sbq.changePredatorSetting("predPreyLeanMin", value)
+		elseif index == 2 then
+			sbq.changePredatorSetting("predPreyLean", value)
+		elseif index == 3 then
+			sbq.changePredatorSetting("predPreyLeanMax", value)
+		end
+	end
+
 	function statsTabField:update(dt)
 		sbq.loopedMessage("getHunger", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"food"}, function (value)
 			hungerBar:setValue(value)
@@ -79,17 +89,17 @@ function sbq.huntingTab()
 	behaviorTabField.subTabs.huntingTab = { huntingTabField }
 
 	for i, voreType in pairs(sbq.config.voreTypes) do
-		local preferredSize = { type = "slider", id = voreType .. "PreferredSizeSlider", extendMax = true, notches = {0.1, 0.25, 0.5, 0.75, 1, 1.5, 2},
+		local preferredSize = { type = "slider", id = voreType .. "PreferredPreySizeSlider", extendMax = true, notches = {0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3},
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "PreferredSizeMin"] or 0.1), locked = sbq.overrideSettings[voreType .. "PreferredSizeMin"] ~= nil, toolTip = "Minimum Relative Prey Size" },
-				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredSizeMin"] or 0.1), math.min((sbq.predatorSettings[voreType .. "PreferredSizeMax"] or 1), (sbq.predatorSettings[voreType .. "PreferredSize"] or 0.5))), locked = sbq.predatorSettings[voreType .. "PreferredSize"] ~= nil, toolTip = "Preferred Relative Prey Size" },
-				{ value = (sbq.predatorSettings[voreType .. "PreferredSizeMax"] or 1), locked = sbq.predatorSettings[voreType .. "PreferredSizeMax"] ~= nil, toolTip = "Maximum Relative Prey Size" }
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPreySizeMin"] or 0.1), locked = sbq.overrideSettings[voreType .. "PreferredPreySizeMin"] ~= nil, toolTip = "Minimum Relative Prey Size" },
+				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredPreySizeMin"] or 0.1), math.min((sbq.predatorSettings[voreType .. "PreferredPreySizeMax"] or 1), (sbq.predatorSettings[voreType .. "PreferredPreySize"] or 0.5))), locked = sbq.overrideSettings[voreType .. "PreferredPreySize"] ~= nil, toolTip = "Preferred Relative Prey Size" },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPreySizeMax"] or 1), locked = sbq.overrideSettings[voreType .. "PreferredPreySizeMax"] ~= nil, toolTip = "Maximum Relative Prey Size" }
 			}
 		}
 		local preferredVore = { type = "slider", id = voreType .. "PreferredPred", min = 0, max = 10, snapOnly = true,
 			textToolTips = {"Never"},
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "PreferredPred"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredPred"] ~= nil, toolTip = "How much this vore type is preferred by this character as a pred." },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPred"] or 5), locked = sbq.overrideSettings[voreType .. "PreferredPred"] ~= nil, toolTip = "How much this vore type is preferred by this character as a pred." },
 			}
 		}
 		tab = huntingTabField:newTab({
@@ -143,6 +153,24 @@ function sbq.huntingTab()
 			}
 		})
 
+		local preferredVoreSlider = _ENV[voreType .. "PreferredPred"]
+		function preferredVoreSlider:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(voreType .. "PreferredPred", value)
+			end
+		end
+
+		local PreferredSizeSlider = _ENV[voreType .. "PreferredPreySizeSlider"]
+		function PreferredSizeSlider:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(voreType .. "PreferredPreySizeMin", value)
+			elseif index == 2 then
+				sbq.changePredatorSetting(voreType .. "PreferredPreySize", value)
+			elseif index == 3 then
+				sbq.changePredatorSetting(voreType .. "PreferredPreySizeMax", value)
+			end
+		end
+
 		settingsButtonScripts[voreType .. "Pred"] = function()
 			tab:setVisible(sbq.predatorSettings[voreType .. "Pred"])
 		end
@@ -165,10 +193,17 @@ function sbq.baitingTab()
 
 	for i, voreType in pairs(sbq.config.voreTypes) do
 
+		local preferredSize = { type = "slider", id = voreType .. "PreferredPredSizeSlider", extendMax = true, notches = {0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3},
+			handles = {
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPredSizeMin"] or 1), locked = sbq.overrideSettings[voreType .. "PreferredPredSizeMin"] ~= nil, toolTip = "Minimum Relative Pred Size" },
+				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredPredSizeMin"] or 1), math.min((sbq.predatorSettings[voreType .. "PreferredPredSizeMax"] or 3), (sbq.predatorSettings[voreType .. "PreferredPredSize"] or 2))), locked = sbq.overrideSettings[voreType .. "PreferredPredSize"] ~= nil, toolTip = "Preferred Relative Pred Size" },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPredSizeMax"] or 3), locked = sbq.overrideSettings[voreType .. "PreferredPredSizeMax"] ~= nil, toolTip = "Maximum Relative Pred Size" }
+			}
+		}
 		local preferredVore = { type = "slider", id = voreType .. "PreferredPrey", min = 0, max = 10, snapOnly = true,
 			textToolTips = {"Never"},
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredPrey"] ~= nil, toolTip = "How much this vore type is preferred by this character as prey." },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5), locked = sbq.overrideSettings[voreType .. "PreferredPrey"] ~= nil, toolTip = "How much this vore type is preferred by this character as prey." },
 			}
 		}
 
@@ -176,13 +211,35 @@ function sbq.baitingTab()
 			type = "tab", id = voreType .. "BaitingTab", visible = sbq.preySettings[voreType] or false, title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
 				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
 					{ type = "panel", id = voreType .. "BaitingTabScrollArea", style = "flat", children = {
-						preferredVore
+						{ mode = "v" },
+						{type = "label", align = "center", text = "Preference To "..sbq.config.voreTypeNames[voreType]},
+						preferredVore,
+						{type = "label", align = "center", text = "Preferred Relative Pred Size"},
+						preferredSize,
 					}}
 				}}
 			}
 		})
 		settingsButtonScripts[voreType] = function()
 			tab:setVisible(sbq.preySettings[voreType])
+		end
+
+		local preferredVoreSlider = _ENV[voreType .. "PreferredPrey"]
+		function preferredVoreSlider:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(voreType .. "PreferredPrey", value)
+			end
+		end
+
+		local PreferredSizeSlider = _ENV[voreType .. "PreferredPredSizeSlider"]
+		function PreferredSizeSlider:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(voreType .. "PreferredPredSizeMin", value)
+			elseif index == 2 then
+				sbq.changePredatorSetting(voreType .. "PreferredPredSize", value)
+			elseif index == 3 then
+				sbq.changePredatorSetting(voreType .. "PreferredPredSizeMax", value)
+			end
 		end
 
 

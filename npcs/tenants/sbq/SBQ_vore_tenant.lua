@@ -506,6 +506,7 @@ end
 function sbq.getTarget()
 	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
 		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
+			self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 			return
 		end
 		if math.random() > 0.5 then
@@ -928,8 +929,8 @@ function sbq.maybeAddToTargetList(eid, voreType, ext, score)
 			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
 				local scale = (status.statusProperty("animOverrideScale") or 1)
 				local relativeSize = enabled.size / scale
-				if (relativeSize > (storage.settings[voreType .. "PreferredSizeMin"] or 0.1)) and (relativeSize < (storage.settings[voreType .. "PreferredSizeMax"] or 1)) then
-					table.insert(sbq.targetedEntities, {eid, score - math.abs((storage.settings[voreType .. "PreferredSize"] or 0.5)-relativeSize)})
+				if (relativeSize > (storage.settings[voreType .. "PreferredPreySizeMin"] or 0.1)) and (relativeSize < (storage.settings[voreType .. "PreferredPreySizeMax"] or 1)) then
+					table.insert(sbq.targetedEntities, {eid, score - math.abs((storage.settings[voreType .. "PreferredPreySize"] or 0.5)-relativeSize)})
 				end
 			end
 		end)
