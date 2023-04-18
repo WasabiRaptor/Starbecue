@@ -31,7 +31,6 @@ function sbq.checkTable(check, checked)
 	return true
 end
 
-sbq.drawSpecialButtons = {}
 function sbq.effectsPanel()
 	sbq.locationTabs = {}
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations then return end
@@ -63,25 +62,29 @@ function sbq.updateLocationTab(location)
 				{
 					{
 						{
-							type = "checkBox", id = location.."None", checked = sbq.predatorSettings[location.."EffectSlot"] == "none" or sbq.predatorSettings[location.."EffectSlot"] == nil,
+							type = "iconCheckBox", id = location.."None", checked = sbq.predatorSettings[location.."EffectSlot"] == "none" or sbq.predatorSettings[location.."EffectSlot"] == nil,
 							radioGroup = location.."EffectGroup", value = "none",
 							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "none" ) or (sbq.overrideSettings[location.."NoneEnable"] == false) or (sbq.overrideSettings.noneEnable == false) or (locationData.none == false))) or false,
-							toolTip = ((locationData.none or {}).toolTip or "No effects will be applied to prey.")
+							toolTip = ((locationData.none or {}).toolTip or "No effects will be applied to prey."),
+							icon = ((locationData.none or {}).icon or "/interface/scripted/sbq/sbqSettings/noEffect.png")
 						},{
-							type = "checkBox", id = location.."Heal", checked = sbq.predatorSettings[location.."EffectSlot"] == "heal",
+							type = "iconCheckBox", id = location.."Heal", checked = sbq.predatorSettings[location.."EffectSlot"] == "heal",
 							radioGroup = location.."EffectGroup", value = "heal",
 							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "heal" ) or (sbq.overrideSettings[location.."HealEnable"] == false) or (sbq.overrideSettings.healEnable == false) or (locationData.heal == false))) or false,
-							toolTip = ((locationData.heal or {}).toolTip or "Prey within will be healed, boosted by your attack power.")
+							toolTip = ((locationData.heal or {}).toolTip or "Prey within will be healed, boosted by your attack power."),
+							icon = ((locationData.heal or {}).icon or "/interface/scripted/sbq/sbqSettings/heal.png")
 						},{
-							type = "checkBox", id = location.."SoftDigest", checked = sbq.predatorSettings[location.."EffectSlot"] == "softDigest",
+							type = "iconCheckBox", id = location.."SoftDigest", checked = sbq.predatorSettings[location.."EffectSlot"] == "softDigest",
 							radioGroup = location.."EffectGroup", value = "softDigest",
 							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."EffectSlot"] ~= "softDigest") or (sbq.overrideSettings[location.."SoftDigestEnable"] == false) or (sbq.overrideSettings.softDigestEnable == false) or (locationData.softDigest == false))) or false,
-							toolTip = ((locationData.softDigest or {}).toolTip or "Prey within will be digested, boosted by your attack power.\nBut they will always retain 1HP.")
+							toolTip = ((locationData.softDigest or {}).toolTip or "Prey within will be digested, boosted by your attack power.\nBut they will always retain 1HP."),
+							icon = ((locationData.softDigest or {}).icon or "/interface/scripted/sbq/sbqSettings/softDigest.png")
 						},{
-							type = "checkBox", id = location.."Digest", checked = sbq.predatorSettings[location.."EffectSlot"] == "digest",
+							type = "iconCheckBox", id = location.."Digest", checked = sbq.predatorSettings[location.."EffectSlot"] == "digest",
 							radioGroup = location.."EffectGroup", value = "digest",
 							visible = (locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= "digest") or (sbq.overrideSettings[location.."DigestEnable"] == false) or (sbq.overrideSettings.digestEnable == false) or (locationData.digest == false))) or false,
-							toolTip = ((locationData.digest or {}).toolTip or "Prey within will be digested, boosted by your attack power.")
+							toolTip = ((locationData.digest or {}).toolTip or "Prey within will be digested, boosted by your attack power."),
+							icon = ((locationData.digest or {}).icon or "/interface/scripted/sbq/sbqSettings/digest.png")
 						},
 					}, {}
 				},
@@ -99,9 +102,10 @@ function sbq.updateLocationTab(location)
 
 				sbq.predatorSettings[location..extraEffect] = sbq.predatorSettings[location..extraEffect] or false
 				table.insert(extraEffectToggles,{
-					type = "checkBox", id = location..extraEffect, checked = sbq.predatorSettings[location..extraEffect],
+					type = "iconCheckBox", id = location..extraEffect, checked = sbq.predatorSettings[location..extraEffect],
 					visible = (locationData[extraEffect] and not (sbq.overrideSettings[location..extraEffect] ~= nil)) or false,
-					toolTip = ((locationData[extraEffect] or {}).toolTip or "Prey within will be transformed.")
+					toolTip = ((locationData[extraEffect] or {}).toolTip or "Prey within will be transformed."),
+					icon = ((locationData[extraEffect] or {}).icon or "/interface/scripted/sbq/sbqSettings/transform.png")
 				})
 			end
 		end
@@ -349,27 +353,11 @@ function sbq.updateLocationTab(location)
 			sbq.refreshButtons()
 		end
 
-		for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
-			local toggleData = locationData[extraEffect]
-			if toggleData then
-				local toggleButton = _ENV[location .. extraEffect]
-				if toggleButton ~= nil then
-					function toggleButton:drawSpecial() sbq.drawEffectButton(toggleButton, ((locationData[extraEffect] or {}).icon or "/interface/scripted/sbq/sbqSettings/transform.png")) end
-					sbq.drawSpecialButtons[location .. extraEffect] = true
-				end
-			end
-		end
-
 		local noneButton = _ENV[location.."None"]
 		local healButton = _ENV[location.."Heal"]
 		local softDigestButton = _ENV[location.."SoftDigest"]
 		local digestButton = _ENV[location.."Digest"]
 		local effectLabel = _ENV[location.."EffectLabel"]
-
-		function noneButton:draw() sbq.drawEffectButton(noneButton, ((locationData.none or {}).icon or "/interface/scripted/sbq/sbqSettings/noEffect.png") ) end
-		function healButton:draw() sbq.drawEffectButton(healButton, ((locationData.heal or {}).icon or "/interface/scripted/sbq/sbqSettings/heal.png")) end
-		function softDigestButton:draw() sbq.drawEffectButton(softDigestButton, ((locationData.softDigest or {}).icon or "/interface/scripted/sbq/sbqSettings/softDigest.png")) end
-		function digestButton:draw() sbq.drawEffectButton(digestButton, ((locationData.digest or {}).icon or "/interface/scripted/sbq/sbqSettings/digest.png")) end
 
 		function noneButton:onClick() sbq.locationEffectButton(noneButton, location, locationData, effectLabel) end
 		function healButton:onClick() sbq.locationEffectButton(healButton, location, locationData, effectLabel) end
@@ -436,18 +424,6 @@ function sbq.updateLocationTab(location)
 end
 
 
-
-function sbq.drawEffectButton(w, icon)
-	local c = widget.bindCanvas(w.backingWidget) c:clear()
-	local directives = ""
-	if w.state == "press" then directives = "?brightness=-50" end
-	local pos = vec2.mul(c:size(), 0.5)
-
-	c:drawImageDrawable(icon..directives, pos, 1)
-	if w.checked then
-		c:drawImageDrawable(icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
-	end
-end
 
 function sbq.locationEffectButton(button, location, locationData, effectLabel)
 	local value = button:getGroupChecked().value

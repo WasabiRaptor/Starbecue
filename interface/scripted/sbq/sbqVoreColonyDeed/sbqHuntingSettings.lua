@@ -206,6 +206,67 @@ function sbq.baitingTab()
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5), locked = sbq.overrideSettings[voreType .. "PreferredPrey"] ~= nil, toolTip = "How much this vore type is preferred by this character as prey." },
 			}
 		}
+		local preferredEffects = { id = "preferredEffectsPanel", type = "panel", style = "flat", children = {
+			{ mode = "v" },
+			{type = "label", align = "center", text = "Liked Effects"},
+			{
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyPrefersNone",
+					checked = sbq.predatorSettings[voreType .. "PreyPrefersNone"],
+					icon = "/interface/scripted/sbq/sbqSettings/noEffect.png",
+					toolTip = "Preds with no effect will be prefered.",
+				}},
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyPrefersHeal",
+					checked = sbq.predatorSettings[voreType .. "PreyPrefersHeal"],
+					icon = "/interface/scripted/sbq/sbqSettings/heal.png",
+					toolTip = "Preds with a healing effect will be prefered.",
+				}},
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyPrefersSoftDigest",
+					checked = sbq.predatorSettings[voreType .. "PreyPrefersSoftDigest"],
+					icon = "/interface/scripted/sbq/sbqSettings/softDigest.png",
+					toolTip = "Preds with a soft digest effect will be prefered.",
+
+				}},
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyPrefersDigest",
+					checked = sbq.predatorSettings[voreType .. "PreyPrefersDigest"],
+					icon = "/interface/scripted/sbq/sbqSettings/digest.png",
+					toolTip = "Preds with a digest effect will be prefered.",
+				}},
+			}
+		}}
+		local dislikedEffects = { id = "dislikedEffectsPanel", type = "panel", style = "flat", children = {
+			{ mode = "v" },
+			{type = "label", align = "center", text = "Disliked Effects"},
+			{
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyDislikesNone",
+					checked = sbq.predatorSettings[voreType .. "PreyDislikesNone"],
+					icon = "/interface/scripted/sbq/sbqSettings/noEffect.png",
+					toolTip = "Preds with no effect will not be considered.",
+				}},
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyDislikesHeal",
+					checked = sbq.predatorSettings[voreType .. "PreyDislikesHeal"],
+					icon = "/interface/scripted/sbq/sbqSettings/heal.png",
+					toolTip = "Preds with a heal effect will not be considered.",
+				}},
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyDislikesSoftDigest",
+					checked = sbq.predatorSettings[voreType .. "PreyDislikesSoftDigest"],
+					icon = "/interface/scripted/sbq/sbqSettings/softDigest.png",
+					toolTip = "Preds with a soft digest effect will not be considered.",
+				}},
+				{{
+					type = "iconCheckBox", id = voreType .. "PreyDislikesDigest",
+					checked = sbq.predatorSettings[voreType .. "PreyDislikesDigest"],
+					icon = "/interface/scripted/sbq/sbqSettings/digest.png",
+					toolTip = "Preds with a digest effect will not be considered.",
+				}},
+			}
+		}}
 
 		tab = baitingTabField:newTab({
 			type = "tab", id = voreType .. "BaitingTab", visible = sbq.preySettings[voreType] or false, title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
@@ -216,6 +277,9 @@ function sbq.baitingTab()
 						preferredVore,
 						{type = "label", align = "center", text = "Preferred Relative Pred Size"},
 						preferredSize,
+						{
+							preferredEffects, dislikedEffects
+						}
 					}}
 				}}
 			}

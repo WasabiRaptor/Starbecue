@@ -23,14 +23,12 @@
 				{ "type" : "panel", "id" : "effectsPanel", "style" : "concave", "size" : [50,28], "position" : [9,3], "children" : [
 					{ "type" : "layout", "mode" : "vertical", "spacing" : 0, "children" : [
 						{ "type" : "layout", "mode" : "horizontal", "spacing" : -1, "children" :[
-							{ "type" : "checkBox", "id" : "noneButton", "value" : "none", "radioGroup" : "effectsGroup"},
-							{ "type" : "checkBox", "id" : "healButton", "value" : "heal",  "radioGroup" : "effectsGroup"},
-							{ "type" : "checkBox", "id" : "softDigestButton", "value" : "softDigest", "radioGroup" : "effectsGroup"},
-							{ "type" : "checkBox", "id" : "digestButton", "value" : "digest",  "radioGroup" : "effectsGroup"}
+							{ "type" : "iconCheckBox", "id" : "noneButton", "value" : "none", "radioGroup" : "effectsGroup"},
+							{ "type" : "iconCheckBox", "id" : "healButton", "value" : "heal",  "radioGroup" : "effectsGroup"},
+							{ "type" : "iconCheckBox", "id" : "softDigestButton", "value" : "softDigest", "radioGroup" : "effectsGroup"},
+							{ "type" : "iconCheckBox", "id" : "digestButton", "value" : "digest",  "radioGroup" : "effectsGroup"}
 						]},
-						{ "type" : "layout", "mode" : "horizontal", "spacing" : -1, "children" :[
-							{ "type" : "checkBox", "id" : "transformButton" },
-							{ "type" : "checkBox", "id" : "eggifyButton" }
+						{ "type" : "layout", "id" : "extraEffectTogglesLayout", "mode" : "horizontal", "spacing" : -1, "children" :[
 						]}
 					]}
 				]},

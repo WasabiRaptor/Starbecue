@@ -353,19 +353,15 @@ function impossibleEscape:onClick()
 	sbq.saveSettings()
 end
 
-----------------------------------------------------------------------------------------------------------------
+function sbq.changeGlobalSetting(settingname, settingvalue)
+	sbq.globalSettings[settingname] = settingvalue
+	sbq.predatorSettings[settingname] = settingvalue
+	sbq.autoSetSettings(settingname, settingvalue)
 
-function sbq.drawEffectButton(w, icon)
-	local c = widget.bindCanvas(w.backingWidget) c:clear()
-	local directives = ""
-	if w.state == "press" then directives = "?brightness=-50" end
-	local pos = vec2.mul(c:size(), 0.5)
-
-	c:drawImageDrawable(icon..directives, pos, 1)
-	if w.checked then
-		c:drawImageDrawable(icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
-	end
+	sbq.saveSettings()
 end
+
+----------------------------------------------------------------------------------------------------------------
 
 function sbq.locationEffectButton(button, location, locationData)
 	local value = button:getGroupChecked().value
@@ -379,39 +375,46 @@ function sbq.predUIeffectsPanel(location)
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations or not location then return sbq.clearEffectButtons() end
 	local locationData = sbq.predatorConfig.locations[location] or {}
 	if (locationData.selectEffect or locationData.TF or locationData.Eggify) then
-		function noneButton:draw() sbq.drawEffectButton(noneButton, ((locationData.none or {}).icon or "/interface/scripted/sbq/sbqSettings/noEffect.png") ) end
-		function healButton:draw() sbq.drawEffectButton(healButton, ((locationData.heal or {}).icon or "/interface/scripted/sbq/sbqSettings/heal.png")) end
-		function softDigestButton:draw() sbq.drawEffectButton(softDigestButton, ((locationData.softDigest or {}).icon or "/interface/scripted/sbq/sbqSettings/softDigest.png")) end
-		function digestButton:draw() sbq.drawEffectButton(digestButton, ((locationData.digest or {}).icon or "/interface/scripted/sbq/sbqSettings/digest.png")) end
-		function eggifyButton:draw() sbq.drawEffectButton(eggifyButton, ((locationData.Eggify or {}).icon or "/interface/scripted/sbq/sbqSettings/eggify.png")) end
-		function transformButton:draw() sbq.drawEffectButton(transformButton, ((locationData.TF or {}).icon or "/interface/scripted/sbq/sbqSettings/transform.png")) end
-
 		function noneButton:onClick() sbq.locationEffectButton(noneButton, location, locationData) end
 		function healButton:onClick() sbq.locationEffectButton(healButton, location, locationData) end
 		function softDigestButton:onClick() sbq.locationEffectButton(softDigestButton, location, locationData) end
 		function digestButton:onClick() sbq.locationEffectButton(digestButton, location, locationData) end
 
-		function eggifyButton:onClick() sbq.globalSettings[location.."Eggify"] = eggifyButton.checked sbq.saveSettings() end
-		function transformButton:onClick() sbq.globalSettings[location.."TF"] = transformButton.checked sbq.saveSettings() end
+		noneButton.icon = ((locationData.none or {}).icon or "/interface/scripted/sbq/sbqSettings/noEffect.png")
+		healButton.icon = ((locationData.heal or {}).icon or "/interface/scripted/sbq/sbqSettings/heal.png")
+		softDigestButton.icon = ((locationData.softDigest or {}).icon or "/interface/scripted/sbq/sbqSettings/softDigest.png")
+		digestButton.icon = ((locationData.digest or {}).icon or "/interface/scripted/sbq/sbqSettings/digest.png")
 
 		noneButton.toolTip = (locationData.name or location).."\n"..((locationData.none or {}).toolTip or "No effects will be applied to prey.")
 		healButton.toolTip = (locationData.name or location).."\n"..((locationData.heal or {}).toolTip or "Prey within will be healed, boosted by your attack power.")
 		softDigestButton.toolTip = (locationData.name or location).."\n"..((locationData.softDigest or {}).toolTip or "Prey within will be digested, boosted by your attack power.\nBut they will always retain 1HP.")
 		digestButton.toolTip = (locationData.name or location).."\n"..((locationData.digest or {}).toolTip or "Prey within will be digested, boosted by your attack power.")
-		eggifyButton.toolTip = (locationData.name or location).."\n"..((locationData.Eggify or {}).toolTip or "Prey within will be trapped in an egg." )
-		transformButton.toolTip = (locationData.name or location).."\n"..((locationData.TF or {}).toolTip or "Prey within will be transformed." )
 
 		noneButton:selectValue(sbq.predatorSettings[location.."EffectSlot"] or "none")
-
-		eggifyButton:setChecked(sbq.predatorSettings[location.."Eggify"] or false)
-		transformButton:setChecked(sbq.predatorSettings[location.."TF"] or false)
 
 		noneButton:setVisible((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= ((locationData.none or {}).effect or (sbq.predatorConfig.effectDefaults or {}).none or "sbqRemoveBellyEffects")) or (sbq.overrideSettings[location.."NoneEnable"] == false)) or (sbq.overrideSettings.noneEnable == false)) or false)
 		healButton:setVisible((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= ((locationData.heal or {}).effect or (sbq.predatorConfig.effectDefaults or {}).heal or "sbqHeal")) or (sbq.overrideSettings[location.."HealEnable"] == false)) or (sbq.overrideSettings.healEnable == false)) or false)
 		softDigestButton:setVisible((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= ((locationData.softDigest or {}).effect or (sbq.predatorConfig.effectDefaults or {}).softDigest or "sbqSoftDigest")) or (sbq.overrideSettings[location.."SoftDigestEnable"] == false)) or (sbq.overrideSettings.softDigestEnable == false)) or false)
 		digestButton:setVisible((locationData.selectEffect and not ((sbq.overrideSettings[location.."Effect"] ~= nil and sbq.overrideSettings[location.."Effect"] ~= ((locationData.digest or {}).effect or (sbq.predatorConfig.effectDefaults or {}).digest or "sbqDigest")) or (sbq.overrideSettings[location.."DigestEnable"] == false)) or (sbq.overrideSettings.digestEnable == false)) or false)
-		eggifyButton:setVisible((locationData.Eggify and not sbq.overrideSettings[location.."Eggify"] ~= nil) or false)
-		transformButton:setVisible((locationData.TF and not sbq.overrideSettings[location.."TF"] ~= nil) or false)
+
+		extraEffectTogglesLayout:clearChildren()
+		for i, extraEffect in ipairs(locationData.passiveToggles or {}) do
+			local toggleData = locationData[extraEffect]
+			if toggleData then
+				sbq.predatorSettings[location .. extraEffect] = sbq.predatorSettings[location .. extraEffect] or false
+
+				local button = extraEffectTogglesLayout:addChild({
+					type = "iconCheckBox", id = location..extraEffect, checked = sbq.predatorSettings[location..extraEffect],
+					visible = (locationData[extraEffect] and not (sbq.overrideSettings[location..extraEffect] ~= nil)) or false,
+					toolTip = ((locationData[extraEffect] or {}).toolTip or "Prey within will be transformed."),
+					icon = ((locationData[extraEffect] or {}).icon or "/interface/scripted/sbq/sbqSettings/transform.png")
+				})
+				function button:onClick()
+					sbq.changeGlobalSetting(location..extraEffect, button.checked)
+				end
+			end
+		end
+
 	else
 		sbq.clearEffectButtons()
 	end

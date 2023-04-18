@@ -297,6 +297,122 @@ function widgets.fillbar:getToolTip()
 	return self.toolTip .. ": " .. self.value .. " / " .. self.max
 end
 
+----- icon check box -----
+
+widgets.iconCheckBox = mg.proto(widgets.button, {
+	expandMode = { 0, 0 }, -- fixed size
+
+	checked = false,
+})
+
+local broadcastLevel = 2
+local hRadioFind = {} -- empty table as private event handle
+local hRadioValueFind = {}
+
+function widgets.iconCheckBox:init(base, param)
+	self.icon = param.icon
+	self.state = "idle"
+	self.backingWidget = mkwidget(base, { type = "canvas" })
+	self.checked = param.checked
+	self.radioGroup = param.radioGroup
+	self.value = param.value
+
+	self:subscribeEvent("radioButtonChecked", function(self, btn)
+		if btn ~= self and btn.radioGroup == self.radioGroup then
+			self.checked = false
+			self:queueRedraw()
+		end
+	end)
+	self:subscribeEvent(hRadioFind, function(self, group)
+		if self.radioGroup == group and self.checked then return self end
+	end)
+	self:subscribeEvent(hRadioValueFind, function(self, group, val)
+		if self.radioGroup == group and self.value == val then return self end
+	end)
+end
+
+function widgets.iconCheckBox:preferredSize() return { 12, 12 } end
+
+function widgets.iconCheckBox:draw()
+	if self.icon then
+		local c = widget.bindCanvas(self.backingWidget) c:clear()
+		local directives = ""
+		if self.state == "press" then directives = "?brightness=-50" end
+		local pos = vec2.mul(c:size(), 0.5)
+
+		c:drawImageDrawable(self.icon..directives, pos, 1)
+		if self.checked then
+			c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
+		end
+	else
+		theme.drawCheckBox(self)
+	end
+end
+
+function widgets.iconCheckBox:onMouseEnter()
+	self.state = "hover"
+	self:queueRedraw()
+	--theme.onButtonHover(self)
+end
+
+function widgets.iconCheckBox:onMouseButtonEvent(btn, down)
+	if btn == 0 then -- left button
+		if down then
+			self.state = "press"
+			self:captureMouse(btn)
+			self:queueRedraw()
+			theme.onCheckBoxClick(self)
+		elseif self.state == "press" then
+			self.state = "hover"
+			if self.radioGroup then
+				if not self.checked then
+					self.checked = true
+					self:wideBroadcast(broadcastLevel, "radioButtonChecked", self)
+				end
+			else
+				self.checked = not self.checked
+			end
+			self:releaseMouse()
+			self:queueRedraw()
+			mg.startEvent(self.onClick, self)
+		end
+		return true
+	end
+end
+
+function widgets.iconCheckBox:setChecked(b)
+	if b and self.radioGroup and not self.checked then
+		self.checked = true -- set before event
+		self:wideBroadcast(broadcastLevel, "radioButtonChecked", self)
+	end
+	self.checked = b
+	self:queueRedraw()
+end
+
+function widgets.iconCheckBox:getGroupChecked()
+	if not self.radioGroup then return nil end
+	if self.checked then return self end
+	return self:wideBroadcast(broadcastLevel, hRadioFind, self.radioGroup)
+end
+
+function widgets.iconCheckBox:getGroupValue()
+	local c = self:getGroupChecked()
+	if c then return c.value end
+	return nil -- explicit nil
+end
+
+function widgets.iconCheckBox:findValue(val)
+	if not self.radioGroup then return nil end
+	if self.value == val then return self end
+	return self:wideBroadcast(broadcastLevel, hRadioValueFind, self.radioGroup, val)
+end
+
+function widgets.iconCheckBox:selectValue(val)
+	local c = self:findValue(val)
+	if c then c:setChecked(true) end
+	return c -- might as well
+end
+
 ----- other functions -----
 
 local lastMenu

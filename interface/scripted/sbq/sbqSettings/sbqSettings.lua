@@ -241,11 +241,6 @@ function sbq.checkLockedSettingsButtons(settings, override, func)
 				end
 				function button:onClick() end
 			else
-				if sbq.drawSpecialButtons[setting] then
-					function button:draw() button:drawSpecial() end
-				else
-					function button:draw() theme.drawCheckBox(self) end
-				end
 				button:setChecked(value)
 				function button:onClick()
 					sbq[func](setting, button.checked)
