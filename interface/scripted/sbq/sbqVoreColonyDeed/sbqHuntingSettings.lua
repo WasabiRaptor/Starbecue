@@ -79,14 +79,15 @@ function sbq.huntingTab()
 	behaviorTabField.subTabs.huntingTab = { huntingTabField }
 
 	for i, voreType in pairs(sbq.config.voreTypes) do
-		local preferredSize = { type = "slider", id = voreType .. "PreferredSizeSlider", extendMax = true, notches = {0, 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 3},
+		local preferredSize = { type = "slider", id = voreType .. "PreferredSizeSlider", extendMax = true, notches = {0.1, 0.25, 0.5, 0.75, 1, 1.5, 2},
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "PreferredSizeMin"] or 0), locked = sbq.overrideSettings[voreType .. "PreferredSizeMin"] ~= nil, toolTip = "Minimum Relative Prey Size" },
-				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredSizeMin"] or 0), math.min((sbq.predatorSettings[voreType .. "PreferredSizeMax"] or 1), (sbq.predatorSettings[voreType .. "PreferredSize"] or 1))), locked = sbq.predatorSettings[voreType .. "PreferredSize"] ~= nil, toolTip = "Preferred Relative Prey Size" },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredSizeMin"] or 0.1), locked = sbq.overrideSettings[voreType .. "PreferredSizeMin"] ~= nil, toolTip = "Minimum Relative Prey Size" },
+				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredSizeMin"] or 0.1), math.min((sbq.predatorSettings[voreType .. "PreferredSizeMax"] or 1), (sbq.predatorSettings[voreType .. "PreferredSize"] or 0.5))), locked = sbq.predatorSettings[voreType .. "PreferredSize"] ~= nil, toolTip = "Preferred Relative Prey Size" },
 				{ value = (sbq.predatorSettings[voreType .. "PreferredSizeMax"] or 1), locked = sbq.predatorSettings[voreType .. "PreferredSizeMax"] ~= nil, toolTip = "Maximum Relative Prey Size" }
 			}
 		}
 		local preferredVore = { type = "slider", id = voreType .. "PreferredPred", min = 0, max = 10, snapOnly = true,
+			textToolTips = {"Never"},
 			handles = {
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPred"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredPred"] ~= nil, toolTip = "How much this vore type is preferred by this character as a pred." },
 			}
@@ -165,6 +166,7 @@ function sbq.baitingTab()
 	for i, voreType in pairs(sbq.config.voreTypes) do
 
 		local preferredVore = { type = "slider", id = voreType .. "PreferredPrey", min = 0, max = 10, snapOnly = true,
+			textToolTips = {"Never"},
 			handles = {
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5), locked = sbq.predatorSettings[voreType .. "PreferredPrey"] ~= nil, toolTip = "How much this vore type is preferred by this character as prey." },
 			}

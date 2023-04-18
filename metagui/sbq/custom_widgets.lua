@@ -34,6 +34,7 @@ widgets.slider = mg.proto(mg.widgetBase, {
 function widgets.slider:init(base, param)
 	self.expandMode = param.expandMode
 	self.textToolTips = param.textToolTips
+	self.snapOnly = param.snapOnly
 
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
@@ -225,7 +226,7 @@ function widgets.slider:getToolTip()
 	if self.current then
 		if self.textToolTips then
 			local closest, index = getClosestValue(self.handles[self.current].value, self.notches)
-			return self.handles[self.current].toolTip.."\n"..self.textToolTips[index]
+			if self.textToolTips[index] then return self.handles[self.current].toolTip .. "\n" .. self.textToolTips[index] end
 		end
 		return self.handles[self.current].toolTip .. "\nValue: " .. (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
 	else
@@ -291,7 +292,7 @@ function widgets.fillbar:setValue(value)
 end
 
 
-function widgets.slider:isMouseInteractable() return false end
+function widgets.fillbar:isMouseInteractable() return false end
 function widgets.fillbar:getToolTip()
 	return self.toolTip .. ": " .. self.value .. " / " .. self.max
 end
