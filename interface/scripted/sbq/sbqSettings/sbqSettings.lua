@@ -219,7 +219,7 @@ function init()
 	sbq.checkLockedSettingsButtons("animOverrideSettings", "animOverrideOverrideSettings", "changeAnimOverrideSetting")
 
 	if mainTabField.tabs.globalPreySettings ~= nil then
-		sbq.checkLockedSettingsButtons("sbqPreyEnabled", "overridePreyEnabled", "changePreySetting")
+		sbq.checkLockedSettingsButtons("preySettings", "overridePreyEnabled", "changePreySetting")
 	end
 end
 local init = init

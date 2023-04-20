@@ -72,8 +72,13 @@ function init()
 	oldinit()
 
 	sbq.setSpeciesConfig()
-	sbq.predatorConfig = sbq.speciesConfig.sbqData
-	sbq.sbqData = sbq.predatorConfig
+	sbq.occupants = {}
+	sbq.occupants.total = 0
+	sbq.occupants.totalSize = 0
+	for location, data in pairs(sbq.sbqData.locations) do
+		sbq.occupants[location] = 0
+	end
+	sbq.occupants.mass = 0
 
 	if not storage.settings then
 		storage.settings = sb.jsonMerge( sb.jsonMerge(sbq.config.defaultSettings, sbq.config.tenantDefaultSettings),
@@ -358,6 +363,8 @@ end
 
 function sbq.setSpeciesConfig()
 	sbq.getSpeciesConfig(npc.species(), storage.settings)
+	sbq.predatorConfig = sbq.speciesConfig.sbqData
+	sbq.sbqData = sbq.predatorConfig
 	status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
 	local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
 	local effects = status.getPersistentEffects("speciesAnimOverride")
@@ -418,7 +425,7 @@ function interact(args)
 	local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
 
 	local dialogueBoxData = {
-		sbqData = sbq.speciesConfig.sbqData,
+		speciesConfig = sbq.speciesConfig,
 		dialogueBoxScripts = sbq.dialogueBoxScripts,
 		settings = sb.jsonMerge(storage.settings, status.statusProperty("sbqPreyEnabled") or {} ),
 		dialogueTree = sbq.dialogueTree,
@@ -483,30 +490,98 @@ end
 function sbq.adjustMood()
 
 end
-
+function sbq.logInfo(arg)
+	sb.logInfo("["..world.entityName(entity.id()).."]"..arg)
+end
 function sbq.doTargetAction()
-	sb.logInfo("trying action")
-	sb.logInfo(sb.printJson(storage.huntingTarget))
+	sbq.logInfo("Trying action: "..sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then
 		if storage.huntingTarget.predOrPrey == "pred" then
-			sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
-			self.board:setEntity("sbqHuntingTarget", nil)
+			sbq.addNamedRPC("attemptingToEat", world.sendEntityMessage(storage.huntingTarget.id, "sbqGetPreyEnabled"), function(sbqPreyEnabled)
+				if sbqPreyEnabled[storage.huntingTarget.voreType] and (sbqPreyEnabled.type ~= "prey")then
+					local settings = {
+						voreType = storage.huntingTarget.voreType,
+						getVoreButtonAction = "unprompted",
+						location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
+						doingVore = "before"
+					}
+					local dialogueTree = sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings))) or {}
 
-			sbq.timer("checkIfInside", 5, function ()
-				if sbq.checkOccupant(storage.huntingTarget.id) then
-					storage.huntingTarget = nil
+					sbq.timer("eatMessage", dialogueTree.delay or 1.5, function()
+						if not storage.huntingTarget then sbq.getNextTarget() return end
+						self.board:setEntity("sbqHuntingTarget", nil)
+						sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
+						sbq.timer("gotVored", dialogueTree.delay or 1.5, function()
+							if not storage.huntingTarget then sbq.getNextTarget() return end
+							settings.doingVore = "after"
+							if sbq.checkOccupant(storage.huntingTarget.id) then
+								sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+								storage.huntingTarget = nil
+							else
+								settings.getVoreButtonAction = "couldntEat"
+								sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+								self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
+							end
+						end)
+					end)
 				else
-					self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
+					sbq.getNextTarget()
 				end
 			end)
 		end
 	end
 end
 
+function sbq.getLocationSetting(location, setting, default)
+	return storage.settings[location..setting] or storage.settings["default"..setting] or default
+end
+
+function sbq.locationSpaceAvailable(location, side)
+	if sbq.getLocationSetting(location, "Hammerspace") and sbq.sbqData.locations[location].hammerspace then
+		return math.huge
+	end
+	return (((sbq.sbqData.locations[location..(side or "")] or {}).max or 0) * ((status.statusProperty("animOverrideScale") or 1))) - (sbq.occupants[location..(side or "")] or 0)
+end
+
+function sbq.getSidedLocationWithSpace(location, size)
+	local data = sbq.sbqData.locations[location] or {}
+	local sizeMultiplied = ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
+	if data.sided then
+		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
+		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
+		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
+			if sbq.direction > 0 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
+				if leftHasSpace then return location, "L", data
+				elseif rightHasSpace then return location, "R", data
+				else return false end
+			else
+				if rightHasSpace then return location, "R", data
+				elseif leftHasSpace then return location, "L", data
+				else return false end
+			end
+		elseif sbq.occupants[location .. "L"] < sbq.occupants[location .. "R"] and leftHasSpace then return location, "L", data
+		elseif sbq.occupants[location .. "L"] > sbq.occupants[location .. "R"] and rightHasSpace then return location, "R", data
+		else return false end
+	else
+		if sbq.locationSpaceAvailable(location, "") > sizeMultiplied then
+			return location, "", data
+		end
+	end
+	return false
+end
+
 function sbq.getTarget()
 	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
 		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
-			self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
+			sbq.addRPC(world.sendEntityMessage(storage.huntingTarget.id, "sbqIsPreyEnabled", storage.huntingTarget.voreType), function (enabled)
+				if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size
+				and sbq.getSidedLocationWithSpace(sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType], enabled.size)
+				then
+					self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
+				else
+					sbq.getNextTarget()
+				end
+			end)
 			return
 		end
 		if math.random() > 0.5 then
@@ -515,9 +590,8 @@ function sbq.getTarget()
 	elseif storage.huntingTarget then
 		sbq.getNextTarget()
 	elseif math.random() > 0.5 then
-		sb.logInfo("attempting to target something")
 		local voreType, predOrPrey = sbq.getCurrentVorePref()
-		predOrPrey = "pred" -- for debug
+		if not voreType then return end
 		if predOrPrey == "pred" then
 			sbq.searchForValidPrey(voreType)
 		elseif predOrPrey == "prey" then
@@ -527,7 +601,6 @@ function sbq.getTarget()
 			table.sort(sbq.targetedEntities, function(a, b)
 				return a[2] < b[2]
 			end)
-			sb.logInfo(sb.printJson(sbq.targetedEntities))
 			if sbq.targetedEntities[1] then
 				storage.huntingTarget = {
 					index = 1,
@@ -535,7 +608,7 @@ function sbq.getTarget()
 					voreType = voreType,
 					predOrPrey = predOrPrey
 				}
-				sb.logInfo(world.entityName(entity.id()).." Got Target:"..sb.printJson(storage.huntingTarget,1))
+				sbq.logInfo("Got Target:"..sb.printJson(storage.huntingTarget))
 				self.board:setEntity("sbqHuntingTarget", sbq.targetedEntities[1][1])
 			end
 		end)
@@ -558,10 +631,13 @@ function sbq.getNextTarget()
 end
 
 function sbq.getCurrentVorePref()
-	local predOrPrey = sbq.getPredOrPrey()
+	local predOrPrey = "pred" --sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
 	local favoredVoreTypes = {}
 	for voreType, data in pairs(sbq.config.generalVoreTypeData) do
-		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"] then
+		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"]
+			and (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
+			and sbq.checkSettings((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType].settings, storage.settings)
+		then
 			for i = 1, (sbq.predatorSettings[voreType .. "PreferredPred"] or 5) do
 				table.insert(favoredVoreTypes, voreType)
 			end
@@ -571,6 +647,7 @@ function sbq.getCurrentVorePref()
 			end
 		end
 	end
+	if not favoredVoreTypes[1] then return end
 	local favoredSelection = {
 		{ favoredVoreTypes[math.random(#favoredVoreTypes)] },
 		{ favoredVoreTypes[math.random(#favoredVoreTypes)] },
@@ -641,8 +718,9 @@ function sbq.getPredOrPrey()
 		getPositiveNegativeFloat(),
 		getPositiveNegativeFloat()
 	})))
+
+	if (result >= 0) and (sbq.occupants.total or 0) < 8 then return "pred" end
 	if result < 0 then return "prey" end
-	if result >= 0 then return "pred" end
 end
 
 function sbq.checkOccupant(id)
@@ -711,7 +789,7 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 
 	if type(randomDialogue) == "string" then
 		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote, appendName)
-		return true
+		return dialogueTree
 	end
 end
 
@@ -929,7 +1007,11 @@ function sbq.maybeAddToTargetList(eid, voreType, ext, score)
 			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
 				local scale = (status.statusProperty("animOverrideScale") or 1)
 				local relativeSize = enabled.size / scale
-				if (relativeSize > (storage.settings[voreType .. "PreferredPreySizeMin"] or 0.1)) and (relativeSize < (storage.settings[voreType .. "PreferredPreySizeMax"] or 1)) then
+				local location = ((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType] or {}).location
+				if (relativeSize > (storage.settings[voreType .. "PreferredPreySizeMin"] or 0.1))
+				and (relativeSize < (storage.settings[voreType .. "PreferredPreySizeMax"] or 1))
+				and location and sbq.getSidedLocationWithSpace(location, enabled.size)
+				then
 					table.insert(sbq.targetedEntities, {eid, score - math.abs((storage.settings[voreType .. "PreferredPreySize"] or 0.5)-relativeSize)})
 				end
 			end

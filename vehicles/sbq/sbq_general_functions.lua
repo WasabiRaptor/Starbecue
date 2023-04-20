@@ -119,9 +119,9 @@ function sbq.getOccupancyTransition(transition, args)
 				local failOnFull = transition[location.."FailOnFull"] or transition.failOnFull
 				if (type(failOnFull) == "number") and (sbq.occupantsVisualSize[location] >= failOnFull) then return transition.failTransition
 				elseif transition.failOnFull and not sbq.getSidedLocationWithSpace(location, size) then return transition.failTransition end
+				local filled = transition[location.."filled"] or transition.filled
+				if (type(filled) == "number") and (sbq.occupantsVisualSize[location] < filled) then return transition.failTransition end
 			end
-			local filled = transition[location.."filled"] or transition.filled
-			if (type(filled) == "number") and (sbq.occupantsVisualSize[location] < filled) then return transition.failTransition end
 		else
 			if transition.failOnFull then
 				if (type(transition.failOnFull) == "number") and (sbq.occupantsVisualSize[transition.location] >= transition.failOnFull) then return transition.failTransition

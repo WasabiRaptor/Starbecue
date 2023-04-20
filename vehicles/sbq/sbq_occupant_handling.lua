@@ -210,14 +210,15 @@ function sbq.locationSpaceAvailable(location, side)
 	if sbq.getLocationSetting(location, "Hammerspace") and sbq.sbqData.locations[location].hammerspace then
 		return math.huge
 	end
-	return (sbq.sbqData.locations[location..(side or "")].max * (sbq.predScale or 1)) - sbq.occupants[location..(side or "")]
+	return (((sbq.sbqData.locations[location..(side or "")] or {}).max or 0) * (sbq.predScale or 1)) - (sbq.occupants[location..(side or "")] or 0)
 end
 
 function sbq.getSidedLocationWithSpace(location, size)
-	local data = sbq.sbqData.locations[location]
+	local data = sbq.sbqData.locations[location] or {}
+	local sizeMultiplied = ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
 	if data.sided then
-		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
-		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
+		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
+		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
 		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
 			if sbq.direction > 0 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
 				if leftHasSpace then return location, "L", data
@@ -231,10 +232,13 @@ function sbq.getSidedLocationWithSpace(location, size)
 		elseif sbq.occupants[location .. "L"] < sbq.occupants[location .. "R"] and leftHasSpace then return location, "L", data
 		elseif sbq.occupants[location .. "L"] > sbq.occupants[location .. "R"] and rightHasSpace then return location, "R", data
 		else return false end
+	else
+		if sbq.locationSpaceAvailable(location, "") > sizeMultiplied then
+			return location, "", data
+		end
 	end
-	return location, "", data
+	return false
 end
-
 
 function sbq.doVore(args, location, statuses, sound, voreType )
 	if sbq.isNested then return false end
@@ -729,7 +733,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	else
 		for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 			local data = sbq.sbqData.locations[location][passiveEffect]
-			if data.effect then
+			if data and data.effect and sbq.getLocationSetting(location, passiveEffect) then
 				table.insert(effects, data.effect)
 			elseif sbq.getLocationSetting(location, passiveEffect) and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
 				sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
@@ -757,7 +761,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		local icon
 		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" and (not sbq.occupant[i].flags.infused) then
 			for dir, data in pairs(struggledata.directions or {}) do
-				if data and (not sbq.driving or data.drivingEnabled) and ((data.settings == nil) or sbq.checkSettings(data.settings)) then
+				if data and (not sbq.driving or data.drivingEnabled) and (sbq.checkSettings(data.settings)) then
 					if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
 					if dir == "back" then dir = ({"right","","left"})[sbq.direction+2] end
 					if sbq.isNested and data.indicate == "red" then
@@ -924,7 +928,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 	else
 		local location = sbq.occupant[struggler].location
 
-		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and ( struggledata.directions[movedir].settings == nil or sbq.checkSettings(struggledata.directions[movedir].settings) ) then
+		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and ( sbq.checkSettings(struggledata.directions[movedir].settings) ) then
 			sbq.occupant[struggler].controls.favorDirection = movedir
 		elseif not struggledata.directions[movedir].indicate then
 			sbq.occupant[struggler].controls.disfavorDirection = movedir
@@ -971,7 +975,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 end
 
 function sbq.struggleChance(struggledata, struggler, movedir, location)
-	if sbq.occupant[struggler].flags.infused or not ((struggledata.directions[movedir].settings == nil) or sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
+	if sbq.occupant[struggler].flags.infused or not ( sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
 
 	local chances = struggledata.chances
 	if struggledata.directions[movedir].chances ~= nil then

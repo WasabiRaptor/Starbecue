@@ -55,8 +55,9 @@ function sbq.everything_primary()
 		return { enabled = preySettings[voreType], size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}
 	end)
 
-	message.setHandler("sbqGetPreyEnabled", function(_,_)
-		return sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
+	message.setHandler("sbqGetPreyEnabled", function(_, _)
+		local currentData = status.statusProperty("sbqCurrentData") or {}
+		return sb.jsonMerge({size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}, sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {}))))
 	end)
 
 	message.setHandler("sbqGetPreyEnabledSetting", function(_,_, setting)

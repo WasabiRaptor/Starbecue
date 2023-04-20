@@ -32,8 +32,7 @@ function update(dt)
 		local drainedAll = (status.resource(self.drain) < drainAmount)
 		if self.send and (drainAmount > 0) then
 			status.modifyResource(self.drain, -drainAmount)
----@diagnostic disable-next-line: deprecated
-			world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", drainAmount * (self.sendMultiplier or 1) * math.pow(2, self.drainCount), self.send )
+			world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", drainAmount * (self.sendMultiplier or 1) * 2^self.drainCount, self.send )
 		end
 		if drainedAll then
 			status.setResourceLocked(self.drain, true)

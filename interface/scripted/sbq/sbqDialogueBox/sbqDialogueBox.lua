@@ -69,7 +69,8 @@ function init()
 	sbq.data.settings.playerRace = player.species()
 
 	sbq.settings = sb.jsonMerge(sbq.data.settings, (player.getProperty("sbqDialogueSettings") or {})[world.entityUniqueId(pane.sourceEntity()) or "noUUID"] or {})
-	sbq.sbqData = sbq.data.sbqData
+	sbq.sbqData = sbq.data.speciesConfig.sbqData
+	sbq.speciesConfig = sbq.data.speciesConfig
 
 	for _, script in ipairs(sbq.data.dialogueBoxScripts or {}) do
 		require(script)
@@ -266,7 +267,7 @@ function sbq.checkVoreTypeActive(voreType)
 	if not (sbq.settings[voreType.."Pred"] --[[or sbq.settings[voreType.."PredEnable"] ]]) then return "hidden" end
 	local currentData = player.getProperty( "sbqCurrentData") or {}
 
-	local locationName = sbq.sbqData.voreTypes[voreType]
+	local locationName = ((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType] or {}).location
 	if not locationName then return "hidden" end
 
 	local locationData = sbq.sbqData.locations[locationName]
@@ -320,7 +321,7 @@ function sbq.checkVoreTypeActive(voreType)
 end
 
 function sbq.checkVoreButtonsEnabled()
-	if not sbq.sbqData then return end
+	if not sbq.speciesConfig then return end
 	for i, voreType in pairs(sbq.config.voreTypes or {}) do
 		local button = _ENV[voreType]
 		if (sbq.prevDialogueBranch or {}).hideVoreButtons then
@@ -406,7 +407,7 @@ function sbq.infusionButton(active, kind, locationName, locations)
 						return
 					end
 				end
-				sbq.settings.getVoreButtonAction = "notFeelingIt"
+				sbq.settings.getVoreButtonAction = "couldntInfuse"
 				sbq.updateDialogueBox({ "infusePrey" })
 			end)
 		end)
@@ -482,7 +483,7 @@ function sbq.voreButton(voreType)
 						return
 					end
 				end
-				sbq.settings.getVoreButtonAction = "notFeelingIt"
+				sbq.settings.getVoreButtonAction = "couldntEat"
 				sbq.updateDialogueBox({ "vore" })
 			end)
 		end)

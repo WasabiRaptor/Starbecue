@@ -281,7 +281,7 @@ function assignLocationActionSelect(data)
 
 	local locationData = sbqData.locations[data.selection]
 	for j, action in ipairs(locationData.preyActions or {}) do
-		if (not action.single) and (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
+		if (not action.single) and sbq.checkSettings(action.checkSettings, settings) then
 			table.insert(options, {
 				name = action.script,
 				title = action.name
@@ -376,7 +376,7 @@ function assignPreyActionsLocation(id)
 				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and data.occupant[i].id == id then
 					local locationData = sbqData.locations[data.occupant[i].location]
 					for j, action in ipairs(locationData.preyActions or {}) do
-						if (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
+						if sbq.checkSettings(action.checkSettings, settings) then
 							table.insert(options, {
 								name = action.script,
 								title = action.name

@@ -502,7 +502,7 @@ function sbq.assignClickActionMenu(state)
 	end
 
 	for action, data in pairs((state.actions or {})) do
-		if ((data.settings == nil) or sbq.checkSettings(data.settings) ) then
+		if (sbq.checkSettings(data.settings) ) then
 			table.insert(options, {
 				name = action,
 				icon = ((data.icon) or ("/items/active/sbqController/"..action..".png"))..(sbq.itemActionDirectives or "")

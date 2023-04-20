@@ -186,7 +186,7 @@ function sbq.readOccupantData()
 						end
 						local locationData = sbq.predatorConfig.locations[occupant.location] or {}
 						for j, action in ipairs(locationData.preyActions or {}) do
-							if (not action.checkSettings) or sbq.checkSettings(action.checkSettings, sbq.predatorSettings) then
+							if sbq.checkSettings(action.checkSettings, sbq.predatorSettings) then
 								table.insert(actionList, {action.name, function() sbq[action.script](id, i) end})
 							end
 						end
