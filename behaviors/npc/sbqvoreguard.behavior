@@ -1,51 +1,57 @@
 {
-  "name": "sbqvoreguard",
-  "description": null,
-  "scripts": [],
-  "parameters": {
-    "play": true,
-    "hostileDamageTeam": {"type": "enemy", "team": 1}
-  },
-  "root": {
-    "title": "Villager",
-    "type": "composite",
-    "name": "dynamic",
-    "parameters": {},
-    "children": [
-      {
-        "title": "Tenant Baseline Behavior",
-        "type": "module",
-        "name": "Tenant Baseline Behavior",
-        "parameters": {}
-      },
-      {
-        "title": "attackthief",
-        "type": "module",
-        "name": "attackthief",
-        "parameters": {}
-      },
-      {
-        "title": "friendlynpccombat",
-        "type": "module",
-        "name": "friendlynpccombat",
-        "parameters": {
-          "hostileDamageTeam": {"key": "<hostileDamageTeam>"}
-        }
-      },
-      {
-        "title": null,
-        "type": "module",
-        "name": "sbqdialogueboxconverse",
-        "parameters": {}
-      },
-      {
-        "title": "NPC Idle",
-        "type": "module",
-        "name": "NPC Idle",
-        "parameters": {
-          "play": {"key": "<play>"}
-        }
-      }
-    ]
-  }
+	"name": "sbqvoreguard",
+	"description": null,
+	"scripts": [],
+	"parameters": {
+		"play": true,
+		"hostileDamageTeam": {"type": "enemy", "team": 1}
+	},
+	"root": {
+		"title": "Villager",
+		"type": "composite",
+		"name": "dynamic",
+		"parameters": {},
+		"children": [
+			{
+				"title": "sbqhunting",
+				"type": "module",
+				"name": "sbqhunting",
+				"parameters": {}
+			},
+			{
+				"title": "Tenant Baseline Behavior",
+				"type": "module",
+				"name": "Tenant Baseline Behavior",
+				"parameters": {}
+			},
+			{
+				"title": "attackthief",
+				"type": "module",
+				"name": "attackthief",
+				"parameters": {}
+			},
+			{
+				"title": "friendlynpccombat",
+				"type": "module",
+				"name": "friendlynpccombat",
+				"parameters": {
+					"hostileDamageTeam": {"key": "<hostileDamageTeam>"}
+				}
+			},
+			{
+				"title": null,
+				"type": "module",
+				"name": "sbqdialogueboxconverse",
+				"parameters": {}
+			},
+			{
+				"title": "NPC Idle",
+				"type": "module",
+				"name": "NPC Idle",
+				"parameters": {
+					"play": {"key": "<play>"}
+				}
+			}
+		]
+	}
 }

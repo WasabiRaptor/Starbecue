@@ -494,7 +494,13 @@ function sbq.logInfo(arg)
 	sb.logInfo("["..world.entityName(entity.id()).."]"..arg)
 end
 function sbq.doTargetAction()
-	sbq.logInfo("Trying action: "..sb.printJson(storage.huntingTarget))
+	if not sbq.timer("targetReachedCooldown", 5) then return end
+	if npc.loungingIn() ~= nil then
+		storage.huntingTarget = nil
+		self.board:setEntity("sbqHuntingTarget", nil)
+		return
+	end
+	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then
 		if storage.huntingTarget.predOrPrey == "pred" then
 			sbq.addNamedRPC("attemptingToEat", world.sendEntityMessage(storage.huntingTarget.id, "sbqGetPreyEnabled"), function(sbqPreyEnabled)
@@ -571,6 +577,11 @@ function sbq.getSidedLocationWithSpace(location, size)
 end
 
 function sbq.getTarget()
+	if npc.loungingIn() ~= nil then
+		storage.huntingTarget = nil
+		self.board:setEntity("sbqHuntingTarget", nil)
+		return
+	end
 	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
 		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
 			sbq.addRPC(world.sendEntityMessage(storage.huntingTarget.id, "sbqIsPreyEnabled", storage.huntingTarget.voreType), function (enabled)
@@ -601,6 +612,7 @@ function sbq.getTarget()
 			table.sort(sbq.targetedEntities, function(a, b)
 				return a[2] < b[2]
 			end)
+			sbq.logInfo(sb.printJson(sbq.targetedEntities,1))
 			if sbq.targetedEntities[1] then
 				storage.huntingTarget = {
 					index = 1,
@@ -968,20 +980,20 @@ function sbq.searchForValidPrey(voreType)
 	if storage.settings[voreType.."HuntFriendlyPlayers"] or storage.settings[voreType.."HuntHostilePlayers"] then
 		local entities = world.playerQuery(mcontroller.position(), 50)
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddToTargetList(eid, voreType, "Players", 0)
+			sbq.maybeAddToTargetList(eid, voreType, "Players", 1.5)
 		end
 	end
 	if storage.settings[voreType.."HuntFriendlyOCs"] or storage.settings[voreType.."HuntHostileOCs"] then
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "isOC" } })
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddToTargetList(eid, voreType, "OCs", 0.25)
+			sbq.maybeAddToTargetList(eid, voreType, "OCs", 2)
 		end
 	end
 	if storage.settings[voreType.."HuntFriendlySBQNPCs"] or storage.settings[voreType.."HuntHostileSBQNPCs"] then
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" } })
 		for i, eid in ipairs(entities) do
 			if not world.callScriptedEntity(eid, "config.getParameter", "isOC") then
-				sbq.maybeAddToTargetList(eid, voreType, "SBQNPCs", 0.5)
+				sbq.maybeAddToTargetList(eid, voreType, "SBQNPCs", 3)
 			end
 		end
 	end
@@ -989,7 +1001,7 @@ function sbq.searchForValidPrey(voreType)
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" }, callScriptResult = false })
 		util.appendLists(entities, world.monsterQuery(mcontroller.position(), 50))
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddToTargetList(eid, voreType, "Other", 2)
+			sbq.maybeAddToTargetList(eid, voreType, "Other", 4)
 		end
 	end
 end
@@ -1012,7 +1024,7 @@ function sbq.maybeAddToTargetList(eid, voreType, ext, score)
 				and (relativeSize < (storage.settings[voreType .. "PreferredPreySizeMax"] or 1))
 				and location and sbq.getSidedLocationWithSpace(location, enabled.size)
 				then
-					table.insert(sbq.targetedEntities, {eid, score - math.abs((storage.settings[voreType .. "PreferredPreySize"] or 0.5)-relativeSize)})
+					table.insert(sbq.targetedEntities, {eid, score * ((math.abs((storage.settings[voreType .. "PreferredPreySize"] or 0.5)-relativeSize) * 5) + world.magnitude(mcontroller.position(), world.entityPosition(eid)))})
 				end
 			end
 		end)
