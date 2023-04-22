@@ -10,13 +10,6 @@
 	HiddenPiecrust
 	Maxel Noone
 	Jemmy
-	skye
-	halcyonesselion
-	Jaych
-	OccultProponent
-	Sevari
-	jdthehero213
-	Kintobor
 	Bonbon
 	Anonymous
 	BigR
@@ -24,40 +17,44 @@
 	Pony Fan
 	Ilindar
 	Amuse
-	DocUmbreon
 	Chris Colmenero
 	Ko-fi Supporter
 	Reokami
-	Nathan Wood
 	Krazeni
 	Anthony 
 	shadowviolet
-	GINKO
-	Goose
 	John Doe
 	Greennyy
 	LilacStarvix
 	xian zhou
 	Frisk
-	Kalito
-	Nova
 	destiny42
 	Airinnann
-	Ko-fi Supporter
 	Xalic Aviare
 	Tacogun
 	Dezzacord
-	Zachine
 	Ko-fi Supporter
 	Bane Fox
-	LoremasterSilas
 	Raru
 	Rymanzzzzz
 	stealth goldfish
-	mm87
 	Thewildhi12
-	Blaze
 	Xodious
+	skye
+	halcyonesselion
+	Jaych
+	OccultProponent
+	Sevari
+	jdthehero213
+	Kintobor
+	Hin Huan
+	Izzy
+	bikboktik
+	Dostluk Harmony
+	Hunterofsorrows 
+	GINKO
+	Nova
+	Zachine
 	SilphScope
 	Stefan
 	toolazytothinkofanything
@@ -82,6 +79,16 @@
 	jezey
 	Dew562
 	Lyko
-	Hin Huan
 	Anonymous
 	Twilight
+	Del
+	Zane9779
+	Luigistar67
+	Ryker
+	Tristan Bradley
+	randomperson97o
+	Lati65
+	Dream “DREAM”
+	fiddlesx
+	Rena Dyne
+	Zura
