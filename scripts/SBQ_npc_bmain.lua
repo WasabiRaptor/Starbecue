@@ -109,6 +109,17 @@ function init()
 	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
 		sbq.timer("sbqPredatorDespawned", 0.5, function()
 			_npc_setInteractive(interactive)
+			local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
+			if sbqOriginalDamageTeam then
+				_npc_setDamageTeam(sbqOriginalDamageTeam)
+			end
+			sbq.timer("sbqPredatorDespawned2", 5, function()
+				_npc_setInteractive(interactive)
+				if sbqOriginalDamageTeam then
+					_npc_setDamageTeam(sbqOriginalDamageTeam)
+				end
+			end)
+
 			status.setStatusProperty("sbqPreyList", nil)
 			status.setStatusProperty("sbqCurrentData", nil)
 			if not eaten then
@@ -116,11 +127,6 @@ function init()
 				if resolvePosition ~= nil then
 					mcontroller.setPosition(resolvePosition)
 				end
-			end
-
-			local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
-			if sbqOriginalDamageTeam then
-				_npc_setDamageTeam(sbqOriginalDamageTeam)
 			end
 		end)
 	end)
