@@ -115,25 +115,36 @@ function sbq.everything_primary()
 		return status.resourcePercentage(resourceName)
 	end)
 
-	message.setHandler("sbqAddHungerHealth", function(_, _, amount)
-		local food = status.resource("food")
-		status.giveResource("food", amount)
-		local health = (food + amount) - status.resourceMax("food")
-		if health > 0 then
-			status.giveResource("health", health)
-		end
-	end)
-
-	message.setHandler("sbqAddToResources", function(_, _, amount, resources)
+	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)
 		local amountRemaining = amount
 		for i, resource in ipairs(resources or {}) do
 			if amountRemaining <= 0 then break end
 			if status.isResource(resource) then
-				local before = status.resource(resource)
-				status.giveResource("food", amountRemaining)
-				amountRemaining = (before + amountRemaining) - status.resourceMax(resource)
+				local mul = ((multipliers or {})[i] or 1)
+				local before = status.resource(resource) / mul
+				status.giveResource(resource, (amountRemaining * mul))
+				amountRemaining = (before + amountRemaining) - (status.resourceMax(resource) / mul)
 			end
 		end
+	end)
+	message.setHandler("sbqTakeFromResources", function(_, _, amount, resources, multipliers, thresholds)
+		local amountRemaining = amount
+		for i, resource in ipairs(resources or {}) do
+			if amountRemaining <= 0 then break end
+			if status.isResource(resource) then
+				local threshold = ((thresholds or {})[i] or 0)
+				if status.resourcePercentage(resource) > threshold then
+					local mul = ((multipliers or {})[i] or 1)
+					local before = status.resource(resource) / mul
+					status.modifyResource(resource, -(amountRemaining * mul))
+					amountRemaining = math.max((amountRemaining - before), 0)
+					if resource == "energy" then
+						status.setResourcePercentage("energyRegenBlock", math.max(status.resourcePercentage("energyRegenBlock"),0.1))
+					end
+				end
+			end
+		end
+		return amount - amountRemaining
 	end)
 
 

@@ -10,8 +10,8 @@ function init()
 	self.digested = false
 	self.dropItem = false
 	self.turboDigest = false
-	self.displayDamage = config.getParameter("displayDamage")
 	self.send = config.getParameter("send")
+	self.sendMultiplier = config.getParameter("sendMultiplier")
 	self.digestMessage = config.getParameter("digestMessage")
 	self.fatal = config.getParameter("fatal")
 
@@ -29,8 +29,8 @@ end
 
 function update(dt)
 	if world.entityExists(effect.sourceEntity()) and (effect.sourceEntity() ~= entity.id()) then
-
-		self.powerMultiplier = (status.statusProperty("sbqDigestData") or {}).power or 1
+		local data = status.statusProperty("sbqDigestData") or {}
+		self.powerMultiplier = data.power or 1
 
 		local health = world.entityHealth(entity.id())
 		local digestRate = 1
@@ -41,7 +41,7 @@ function update(dt)
 		local digestAmount = (digestRate * dt * self.powerMultiplier)
 
 		if health[1] > (digestAmount + 1) and not self.digested and health[1] > 1 then
-			if self.displayDamage then
+			if data.displayEffect then
 				digestAmount = digestAmount + self.cdamage
 				if digestAmount >= 1 then
 					self.cdamage = digestAmount % 1
@@ -60,7 +60,7 @@ function update(dt)
 				status.modifyResource("health", -digestAmount)
 			end
 			if self.send and (digestAmount > 0) then
-				world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", digestAmount, self.send )
+				world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", digestAmount, self.send, self.sendMultiplier )
 			end
 		elseif not self.digested then
 			self.cdt = 0

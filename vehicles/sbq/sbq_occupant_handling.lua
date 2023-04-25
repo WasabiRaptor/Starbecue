@@ -689,9 +689,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		locationEffect = (sbq.sbqData.locations[location].heal or {}).effect or "sbqHeal"
 	end
 
-
-	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect]) or locationEffect
-	local effects = {status}
+	local effects = {locationEffect}
 	local args = {
 		power = powerMultiplier,
 		location = location,
@@ -781,7 +779,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		end
 		sbq.openPreyHud(i, directions, progressbarDx, icon, location..(sbq.occupant[i].locationSide or ""))
 	end
-	sbq.otherLocationEffects(i, eid, health, locationEffect, status, location, powerMultiplier )
+	sbq.otherLocationEffects(i, eid, health, locationEffect, location, powerMultiplier )
 end
 
 function sbq.openPreyHud(i, directions, progressbarDx, icon, location)

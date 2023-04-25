@@ -3,13 +3,20 @@
 	"blockingStat" : "healingStatusImmunity",
 
 	"effectConfig" : {
-		"effect" : "sbqHeal"
+		"effect" : "sbqHeal",
+		"healStat" : "health",
+		"healRate" : 0.5,
+		"take" : ["energy"],
+		"takeMultiplier" : [30],
+		"takeThreshold" : [0.5]
 	},
 	"defaultDuration" : 5,
 
 	"scripts" : [
-	"sbqHeal.lua"
+		"sbqHeal.lua"
 	],
+
+	"animationConfig" : "/stats/effects/heal/heal.animation",
 
 	"label" : "Healing Vore",
 	"icon" : "/stats/sbq/sbqHeal/sbqHeal.png"

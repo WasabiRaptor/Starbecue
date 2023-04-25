@@ -20,25 +20,29 @@ function init()
 end
 
 function update(dt)
-	self.powerMultiplier = (status.statusProperty("sbqDigestData") or {}).power or 1
+	if not status.isResource(self.drain) then return end
+	if (status.resourcePercentage(self.drain) > 0) and (not status.resourceLocked(self.drain)) then
+		local data = status.statusProperty("sbqDigestData") or {}
+		self.powerMultiplier = data.power or 1
 
-	local drainRate = self.drainRate
-	if self.turboDrain then
-		drainRate = self.turboDrainRate or (self.drainRate * 10)
-	end
+		local drainRate = self.drainRate
+		if self.turboDrain then
+			drainRate = self.turboDrainRate or (self.drainRate * 10)
+		end
 
-	local drainAmount = (drainRate * dt * self.powerMultiplier)
-	if status.isResource(self.drain) and (not status.resourceLocked(self.drain)) then
+		local drainAmount = (drainRate * dt * self.powerMultiplier)
+
 		local drainedAll = (status.resource(self.drain) < drainAmount)
 		if self.send and (drainAmount > 0) then
 			status.modifyResource(self.drain, -drainAmount)
-			world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", drainAmount * (self.sendMultiplier or 1) * 2^self.drainCount, self.send )
+			world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", drainAmount * 2 ^ self.drainCount, self.send,
+				self.sendMultiplier)
 		end
 		if drainedAll then
 			status.setResourceLocked(self.drain, true)
 			if self.regenStat then
 				self.drainCount = self.drainCount + 1
-				effect.addStatModifierGroup({{stat = self.regenStat, effectiveMultiplier = self.regenStatMultiply or 0.5}})
+				effect.addStatModifierGroup({ { stat = self.regenStat, effectiveMultiplier = self.regenStatMultiply or 0.5 } })
 			end
 		end
 	end
