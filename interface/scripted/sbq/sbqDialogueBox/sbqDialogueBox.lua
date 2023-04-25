@@ -69,7 +69,7 @@ function init()
 	sbq.data.settings.playerRace = player.species()
 
 	sbq.settings = sb.jsonMerge(sbq.data.settings, (player.getProperty("sbqDialogueSettings") or {})[world.entityUniqueId(pane.sourceEntity()) or "noUUID"] or {})
-	sbq.sbqData = sbq.data.speciesConfig.sbqData
+	sbq.sbqData = (sbq.data.speciesConfig or {}).sbqData
 	sbq.speciesConfig = sbq.data.speciesConfig
 
 	for _, script in ipairs(sbq.data.dialogueBoxScripts or {}) do
