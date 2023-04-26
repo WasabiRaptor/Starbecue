@@ -1,0 +1,75 @@
+{
+
+	"defaultGreeting" : [
+		"Hi, how's it going.", "Hey there!", "Hi", "Hello"
+	],
+	"shyGreeting" : [
+		"H-Hi...", "O-oh hi... I didn't see you there.", "Hello...", "Hi..."
+	],
+	"flirtyGreeting" : [
+		"Hey there~", "Hello~", "Hey cutie~", "Hey there hot stuff~"
+	],
+	"defaultRewardsGreeting" : [
+		"It was fun messing around!\nHave some stuff.",
+		{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+	],
+	"shyRewardsGreeting" : [
+		"I-I really liked what we did so uhm... have this.",
+		{"check":{"introduced":true},"add":[["A-ah <keysmash> <entityname>!\nI-I got you some stuff... I hope you like it."]]}
+	],
+	"flirtyRewardsGreeting" : [
+		"You did really well, and of course, you deserve a reward for that~",
+		{"check":{"introduced":true},"add":[["Hehe, <entityname>~\nThis is for you~"]]}
+	],
+
+	"defaultRequestOralVoreBefore" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ],
+	"defaultRequestOralVoreAfter" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ],
+	"defaultUnpromptedOralVoreBefore" : [ "I think you'll fill me up.", "I just need a bite to eat.", "You seem like you'd make a good meal.", "My belly's been grumbling..." ],
+
+	"defaultNPCRequestOralVore" : [{"percentage" : "food", "add" : [
+		[ // 0% - 25%
+			"I'm so hungry, I need you in my belly!"
+		],
+		[ // 25% - 50%
+			"Mmmmm hungry, can I eat you?"
+		],
+		[ // 50% - 75%
+			"I could use a meal, would you want to be it?"
+		],
+		[ // 75% - 100%
+			"I'm a bit peckish, can I use you to top off?"
+		]
+	]}],
+	"defaultNPCDeniedOralVore" : [{"percentage" : "food", "add" : [
+		[ // 0% - 25%
+			"Oh... I'll find someone else..."
+		],
+		[ // 25% - 50%
+			"I'll just find someone else then."
+		],
+		[ // 50% - 75%
+			"Thats alright."
+		],
+		[ // 75% - 100%
+			"That's alright."
+		]
+	]}],
+	"defaultNPCGotConsentOralVoreBefore" : [{"percentage" : "food", "add" : [
+		[ // 0% - 25%
+			"Oh thank you! I thought I'd starve!"
+		],
+		[ // 25% - 50%
+			"Mmmmm hungry, can I eat you?"
+		],
+		[ // 50% - 75%
+			"I could use a meal, would you want to be it?"
+		],
+		[ // 75% - 100%
+			"I'm a bit peckish, can I use you to top off?"
+		]
+	]}],
+	"defaultNPCIgnoreConsentOralVoreBefore" : [
+		"Well I'm not going to take \"No\" for an answer."
+	],
+	"defaultNotFeelingIt" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ]
+}

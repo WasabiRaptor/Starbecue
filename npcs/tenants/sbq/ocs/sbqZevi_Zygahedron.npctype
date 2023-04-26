@@ -100,11 +100,11 @@
 							"Hey there.",
 							"Mrow."
 						],
-						"randomButtonText" : "Hi.",
+						"randomButtonText" : ["Hi."],
 						"jump" : ["converse"]
 					},
 					"fearful" : { // mood
-						"randomPortrait" : "Shocked.png",
+						"randomPortrait" : ["Shocked.png"],
 						"randomDialogue" : [
 							"AH!",
 							"I-I didn't see you there!",
@@ -116,7 +116,7 @@
 						]
 					},
 					"horny" : { // mood
-						"randomPortrait" : "UwU.png",
+						"randomPortrait" : ["UwU.png"],
 						"randomDialogue" : [
 							"UwU",
 							"Hehe, hey there~",
@@ -125,7 +125,7 @@
 						"jump" : ["converse"]
 					},
 					"friendly" : { // mood
-						"randomPortrait" : "Happy.png",
+						"randomPortrait" : ["Happy.png"],
 						"randomDialogue" : [
 							"Hi!",
 							"Hey <entityname>!",
@@ -146,14 +146,14 @@
 
 			"converse" : {
 				"randomDialogue" : ["So what did you want to talk about?"],
-				"randomButtonText" : "[options]",
+				"randomButtonText" : ["[Options]"],
 				"options" : [
 					[ "* Pet", {"jump":["pet"]}],
 					["Can we talk about you?", {
 						"randomButtonText" : ["[options]"],
 						"randomDialogue" : [ "What about me?" ],
 						"options" : [
-							[ "Who are you?", { "randomDialogue" : [ "Zevi, A Magic Goocat, like Levi but with a Z." ], "randomButtonText" : "Okay.", "jump" : [ "converse", "options", 1, 2 ] }],
+							[ "Who are you?", { "randomDialogue" : [ "Zevi, A Magic Goocat, like Levi but with a Z." ], "randomButtonText" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
 							[ "Thats all I wanted to know about you.", { "jump" : [ "converse" ] }]
 						]
 					}]
@@ -513,7 +513,7 @@
 										"true" : { "randomDialogue" : [ "Maybe I shouldn't change you.", "Maybe I should stop this." ] },
 										"false" : { "randomDialogue" : [ "Seems like I can't change you.", "For some reason this isn't working..." ] }
 									},
-									"egged" : { "randomDialogue" : "Mmm time to get this egg out." },
+									"egged" : { "randomDialogue" : ["Mmm time to get this egg out."] },
 									"digested" : { "randomDialogue" : ["Here, let me reform you real quick.", "You got digested so I gotta reform you.", "Ah, guess its time to reform you.", "Time to reform you I guess."]}
 								}
 							}

@@ -7,12 +7,13 @@ function sbq.huntingSettingsPanel()
 	mainTabField.subTabs.tenantTab = { behaviorTabField }
 	behaviorTabField.subTabs = {}
 
-	sbq.npcStatsTab()
+	sbq.npcGeneralBehaviorTab()
 	sbq.huntingTab()
 	sbq.baitingTab()
+	sbq.npcStatsTab()
 end
 
-function sbq.npcStatsTab()
+function sbq.npcGeneralBehaviorTab()
 	local predPreySlider = { type = "slider", id = "predPreyLeanSlider", extendMax = true,
 		notches = { -1, -0.5, 0, 0.5, 1 },
 		textToolTips = {"Hard Prey Lean", "Prey Leaning", "Neutral Lean", "Pred Leaning", "Hard Pred Lean"},
@@ -27,8 +28,8 @@ function sbq.npcStatsTab()
 	local hornyVisible = sbq.npcConfig.scriptConfig.isHorny
 	local sleepyVisible = sbq.npcConfig.scriptConfig.isSleepy
 
-	behaviorTabField:newTab({
-		type = "tab", id = "statsTab", title = "Stats", visible = true,
+	local tab = behaviorTabField:newTab({
+		type = "tab", id = "behaviorTab", title = "Behavior", visible = true,
 		contents = {
 			{ { type = "label", text = " Prey", inline = true }, predPreySlider, { type = "label", text = "Pred", inline = true } },
 			{
@@ -41,9 +42,7 @@ function sbq.npcStatsTab()
 			{
 				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = { 40, 10 }, inline = true, visible = hornyVisible },
 				{ visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or { 226, 109, 215 } }
-			},
-			{ id = "statsTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {
-			}}
+			}
 		}
 	})
 	function predPreyLeanSlider:onChange(index, value)
@@ -56,7 +55,7 @@ function sbq.npcStatsTab()
 		end
 	end
 
-	function statsTabField:update(dt)
+	function tab:update(dt)
 		sbq.loopedMessage("getHunger", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"food"}, function (value)
 			hungerBar:setValue(value)
 		end )
@@ -66,10 +65,19 @@ function sbq.npcStatsTab()
 		sbq.loopedMessage("getRest", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"rest"}, function (value)
 			restBar:setValue(value)
 		end )
-
 	end
+end
 
-	behaviorTabField.tabs.statsTab:select()
+
+function sbq.npcStatsTab()
+	behaviorTabField:newTab({
+		type = "tab", id = "statsTab", title = "Stats", visible = true,
+		contents = {
+			{ id = "statsTabField", type = "tabField", layout = "vertical", tabWidth = 40, tabs = {
+			}}
+		}
+	})
+
 	behaviorTabField.subTabs.statsTab = { statsTabField }
 
 	sbq.statsTab()
@@ -102,6 +110,12 @@ function sbq.huntingTab()
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPred"] or 5), locked = sbq.overrideSettings[voreType .. "PreferredPred"] ~= nil, toolTip = "How much this vore type is preferred by this character as a pred." },
 			}
 		}
+		local consentSlider = { type = "slider", id = voreType .. "ConsentPred", notches = {0,0.25,0.5,0.75,1},
+			textToolTips = {"Never", "Unlikely", "Sometimes", "Likely", "Always"},
+			handles = {
+				{ value = (sbq.predatorSettings[voreType .. "ConsentPred"] or 3), locked = sbq.overrideSettings[voreType .. "ConsentPred"] ~= nil, toolTip = "How often the NPC will ask for consent." },
+			}
+		}
 		tab = huntingTabField:newTab({
 			type = "tab", id = voreType .. "HuntingTab", visible = sbq.predatorSettings[voreType.."Pred"] or false, title = "", icon = "/items/active/sbqController/"..voreType..".png", color = "ff00ff", contents = {
 				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
@@ -111,6 +125,8 @@ function sbq.huntingTab()
 						preferredVore,
 						{type = "label", align = "center", text = "Preferred Relative Prey Size"},
 						preferredSize,
+						{type = "label", align = "center", text = "Requesting Consent"},
+						consentSlider,
 						{ { type = "checkBox", id = voreType .. "PreferNonImmune",
 							toolTip = "Prefer Prey that aren't immune to this location's effects." },
 							{ type = "label", text = "Prefer Non Immune" } },
@@ -159,6 +175,12 @@ function sbq.huntingTab()
 				sbq.changePredatorSetting(voreType .. "PreferredPred", value)
 			end
 		end
+		local consentSliderWidget = _ENV[voreType .. "ConsentPred"]
+		function consentSliderWidget:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(voreType .. "ConsentPred", value)
+			end
+		end
 
 		local PreferredSizeSlider = _ENV[voreType .. "PreferredPreySizeSlider"]
 		function PreferredSizeSlider:onChange(index, value)
@@ -204,6 +226,12 @@ function sbq.baitingTab()
 			textToolTips = {"Never"},
 			handles = {
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5), locked = sbq.overrideSettings[voreType .. "PreferredPrey"] ~= nil, toolTip = "How much this vore type is preferred by this character as prey." },
+			}
+		}
+		local consentSlider = { type = "slider", id = voreType .. "ConsentPrey", notches = {0,0.25,0.5,0.75,1},
+			textToolTips = {"Never", "Unlikely", "Sometimes", "Likely", "Always"},
+			handles = {
+				{ value = (sbq.predatorSettings[voreType .. "ConsentPrey"] or 0.5), locked = sbq.overrideSettings[voreType .. "ConsentPrey"] ~= nil, toolTip = "How often the NPC will ask for consent." },
 			}
 		}
 		local preferredEffects = { id = "preferredEffectsPanel", type = "panel", style = "flat", children = {
@@ -277,6 +305,8 @@ function sbq.baitingTab()
 						preferredVore,
 						{type = "label", align = "center", text = "Preferred Relative Pred Size"},
 						preferredSize,
+						{type = "label", align = "center", text = "Requesting Consent"},
+						consentSlider,
 						{
 							preferredEffects, dislikedEffects
 						}
@@ -294,6 +324,13 @@ function sbq.baitingTab()
 				sbq.changePredatorSetting(voreType .. "PreferredPrey", value)
 			end
 		end
+		local consentSliderWidget = _ENV[voreType .. "ConsentPrey"]
+		function consentSliderWidget:onChange(index, value)
+			if index == 1 then
+				sbq.changePredatorSetting(voreType .. "ConsentPrey", value)
+			end
+		end
+
 
 		local PreferredSizeSlider = _ENV[voreType .. "PreferredPredSizeSlider"]
 		function PreferredSizeSlider:onChange(index, value)

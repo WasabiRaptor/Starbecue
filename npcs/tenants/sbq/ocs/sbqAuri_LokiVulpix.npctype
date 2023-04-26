@@ -71,7 +71,7 @@
 			"greeting" : {
 				"next" : "giveTenantRewards",
 				"rewards" : {
-					"randomPortrait" : "Joyful.png",
+					"randomPortrait" : ["Joyful.png"],
 					"randomDialogue" : [
 						"It was fun messing around!\nHave some stuff.",
 						{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
@@ -79,7 +79,7 @@
 					"jump" : ["greeting"]
 				},
 				"freeSample" : {
-					"randomPortrait" : "Joyful.png",
+					"randomPortrait" : ["Joyful.png"],
 					"randomDialogue" : ["I thought I'd give you a free sample of my wares!"],
 					"jump" : ["greeting"]
 				},
@@ -418,7 +418,7 @@
 
 				"sbqPlasticEgg" : { "randomPortrait" : ["Happy.png", "Neutral.png", "Blep.png"], "randomDialogue" : ["These! These are so fun, its so dumb but they're so fun I love them.", "These are entirely reusable, and random ones can come in mismatched colors", "Did you know if you get unbirthed by a robotic species you'll get put in one of these?"], "jump" : [ "converse"] },
 
-				"sbqEggWand" : { "randomPortrait" : "Confused.png", "randomDialogue" : ["Oh this? its pretty crazy, not really sure I should even be selling this?", "I know I had one of these laying around somewhere...", "Yeah I know 9999 is ridiculous but I can't just hand out something like this."], "jump" : [ "converse"] },
+				"sbqEggWand" : { "randomPortrait" : ["Confused.png"], "randomDialogue" : ["Oh this? its pretty crazy, not really sure I should even be selling this?", "I know I had one of these laying around somewhere...", "Yeah I know 9999 is ridiculous but I can't just hand out something like this."], "jump" : [ "converse"] },
 
 				"sbqBallsPoster" : { "randomPortrait" : ["Joyful.png"], "randomDialogue" : ["Hehehehe, friends are stored in the balls~"], "jump" : [ "converse"] },
 				"spookypumpkinhead" : { "randomPortrait" : ["Joyful.png"], "randomDialogue" : ["Halloween is my favorite!", "My pet plushie Socks probably would like one of these in her house."], "jump" : [ "converse"] },
@@ -438,7 +438,7 @@
 					"What did you want to ask?",
 					"Ask away."
 				],
-				"randomButtonText" : "[Options]",
+				"randomButtonText" : ["[Options]"],
 				"options" : [
 					["So what are you?", {
 						"dialogue" : [
@@ -465,7 +465,7 @@
 					"So what kinky stuff did you want to know?",
 					"What're today's horny questions?"
 				],
-				"randomButtonText" : "[Options]",
+				"randomButtonText" : ["[Options]"],
 				"options" : [
 					["Oral Vore (Pred)", {
 						"checkPlayer" : { "oralVore" : true },
@@ -896,7 +896,7 @@
 										"true" : { "randomDialogue" : [ "Maybe I shouldn't change you.", "Maybe I should stop this." ] },
 										"false" : { "randomDialogue" : [ "Seems like I can't change you.", "For some reason this isn't working..." ] }
 									},
-									"egged" : { "randomDialogue" : "Mmm time to get this egg out." },
+									"egged" : { "randomDialogue" : ["Mmm time to get this egg out."] },
 									"digested" : { "randomDialogue" : ["Here, let me reform you real quick.", "You got digested so I gotta reform you.", "Ah, guess its time to reform you.", "Time to reform you I guess."]}
 								}
 							}

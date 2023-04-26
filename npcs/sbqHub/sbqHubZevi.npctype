@@ -33,14 +33,14 @@
 		"dialogueTree" : {
 			"converse" : {
 				"randomDialogue" : ["So what did you want to talk about?"],
-				"randomButtonText" : "[options]",
+				"randomButtonText" : ["[Options]"],
 				"options" : [
 					[ "* Pet", {"jump":["pet"]}],
 					["Can we talk about you?", {
 						"randomButtonText" : ["[options]"],
 						"randomDialogue" : [ "What about me?" ],
 						"options" : [
-							[ "Who are you?", { "randomDialogue" : [ "Zevi, A Magic Goocat, like Levi but with a Z." ], "randomButtonText" : "Okay.", "jump" : [ "converse", "options", 1, 2 ] }],
+							[ "Who are you?", { "randomDialogue" : [ "Zevi, A Magic Goocat, like Levi but with a Z." ], "randomButtonText" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
 							[ "Tell me more about the vore NPC stuff", {
 								"buttonText" : [
 									"Okay.",

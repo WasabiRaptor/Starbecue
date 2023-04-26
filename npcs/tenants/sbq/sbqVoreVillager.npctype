@@ -30,6 +30,7 @@
 		"entityPortrait" : true,
 		"defaultPortrait" : "bust",
 		"dialogueTree" : {
+			"dialogueFile" : "/npcs/tenants/sbq/sbqVoreVillager.dialogue",
 			// after following a path, next steps will automatically advance you down the tree until there is a step that does not have a next
 			// a next can be a string or a table, if the next step is a string, it will just use that value, if it is a table, it will randomly select from it
 			// when defining a next step, it attemts to find and run dialogueBoxScript matching the name of the next step value to determine which step to take next
@@ -50,14 +51,11 @@
 						"default" : { // mood
 							"next" : "giveTenantRewards",
 							"rewards" : {
-								"randomDialogue" : [
-									"It was fun messing around!\nHave some stuff.",
-									{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
-								],
+								"randomDialogue" : ":defaultRewardsGreeting",
 								"jump" : ["greeting"]
 							},
 							"default" : {
-								"randomDialogue" : [ "Hi, how's it going.", "Hey there!", "Hi", "Hello" ]
+								"randomDialogue" : ":defaultGreeting"
 							}
 						}
 					},
@@ -66,14 +64,11 @@
 						"default" : { // mood
 							"next" : "giveTenantRewards",
 							"rewards" : {
-								"randomDialogue" : [
-									"I-I really liked what we did so uhm... have this.",
-									{"check":{"introduced":true},"add":[["A-ah <keysmash> <entityname>!\nI-I got you some stuff... I hope you like it."]]}
-								],
+								"randomDialogue" : ":shyRewardsGreeting",
 								"jump" : ["greeting"]
 							},
 							"default" : {
-								"randomDialogue" : [ "H-Hi...", "O-oh hi... I didn't see you there.", "Hello...", "Hi..." ]
+								"randomDialogue" : ":shyGreeting"
 							}
 						}
 					},
@@ -82,14 +77,11 @@
 						"default" : { // mood
 							"next" : "giveTenantRewards",
 							"rewards" : {
-								"randomDialogue" : [
-									"You did really well, and of course, you deserve a reward for that~",
-									{"check":{"introduced":true},"add":[["Hehe, <entityname>~\nThis is for you~"]]}
-								],
+								"randomDialogue" : ":flirtyRewardsGreeting",
 								"jump" : ["greeting"]
 							},
 							"default" : {
-								"randomDialogue" : [ "Hey there~", "Hello~", "Hey cutie~", "Hey there hot stuff~" ]
+								"randomDialogue" : ":flirtyGreeting"
 							}
 						}
 					}
@@ -110,15 +102,56 @@
 								"next" : "getVoreButtonAction",
 								"request" : {
 									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ] },
-									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ], "dismissTime" : 10 }
+									"before" : { "randomDialogue" : ":defaultRequestOralVoreBefore" },
+									"after" : { "randomDialogue" : ":defaultRequestOralVoreAfter", "dismissTime" : 10 }
 								},
 								"unprompted" : {
 									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "I think you'll fill me up.", "I just need a bite to eat.", "You seem like you'd make a good meal.", "My belly's been grumbling..." ] },
-									"after" : { "randomDialogue" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ], "dismissTime" : 10 }
+									"before" : { "randomDialogue" : ":defaultUnpromptedOralVoreBefore" },
+									"after" : { "randomDialogue" : ":defaultRequestOralVoreAfter", "dismissTime" : 10 }
 								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
+								"selfRequest" : {
+									"next" : "answered",
+									"false" : {
+										"hideVoreButtons" : true,
+										"randomDialogue" : ":defaultNPCRequestOralVore" ,
+										"options" : [
+											["Yes", {
+												"callScript" : "gotVoreConsent"
+											}],
+											["No", {
+												"callScript" : "maybeIgnoreConsent",
+												"false" : {
+													"randomDialogue" : ":defaultNPCDeniedOralVore"
+												}
+											}]
+										]
+									},
+									"true" : {
+										"next" : "gotConsent",
+										"true" : {
+											"next" : "doingVore",
+											"before" : {
+												"hideVoreButtons" : true,
+												"randomDialogue" : ":defaultNPCGotConsentOralVoreBefore"
+											},
+											"after" : {
+												"randomDialogue" : ":defaultRequestOralVoreAfter", "dismissTime" : 10
+											}
+										},
+										"false" : {
+											"next" : "doingVore",
+											"before" : {
+												"randomDialogue" : ":defaultNPCIgnoreConsentOralVoreBefore"
+											},
+											"after" : {
+												"randomDialogue" : ":defaultRequestOralVoreAfter", "dismissTime" : 10
+											}
+										}
+									}
+								},
+
+								"notFeelingIt" : { "randomDialogue" : ":defaultNotFeelingIt" },
 								"full" : {
 									"next" : "getLocationEffect",
 									"default" : { "randomDialogue" : [ "I'm a bit too full...", "My belly can't stretch any further...", "I've eaten too much already...", "I would... but I'm too full..." ]},
@@ -882,7 +915,7 @@
 										"true" : { "randomDialogue" : [ "Maybe I shouldn't change you.", "Maybe I should stop this." ] },
 										"false" : { "randomDialogue" : [ "Seems like I can't change you.", "For some reason this isn't working..." ] }
 									},
-									"egged" : { "randomDialogue" : "Mmm time to get this egg out." },
+									"egged" : { "randomDialogue" : ["Mmm time to get this egg out."] },
 									"digested" : { "randomDialogue" : ["Here, let me reform you real quick.", "You got digested so I gotta reform you.", "Ah, guess its time to reform you.", "Time to reform you I guess."]}
 								}
 							},
@@ -908,7 +941,7 @@
 										"true" : { "randomDialogue" : [ "Maybe I shouldn't change you.", "Maybe I should stop this." ] },
 										"false" : { "randomDialogue" : [ "Seems like I can't change you.", "For some reason this isn't working..." ] }
 									},
-									"egged" : { "randomDialogue" : "Mmm time to get this egg out~" },
+									"egged" : { "randomDialogue" : ["Mmm time to get this egg out~"] },
 									"digested" : { "randomDialogue" : ["Here, let me reform you real quick~", "I can't let you spend tooooo long on my hips~", "Hey silly, its time for you to be more than pudge again~", "Welcome back to not being simply a part of me~"]}
 								}
 							},
@@ -934,7 +967,7 @@
 										"true" : { "randomDialogue" : [ "M-maybe I shouldn't change you.", "M-maybe I should stop this." ] },
 										"false" : { "randomDialogue" : [ "Seems like I can't change you.", "For some reason this isn't working..." ] }
 									},
-									"egged" : { "randomDialogue" : "P-probably time to get this egg out." },
+									"egged" : { "randomDialogue" : ["P-probably time to get this egg out."] },
 									"digested" : { "randomDialogue" : ["H-here, let me reform you real quick.", "I...uhm... melted you... so I gotta reform you.", "I-I hope you had fun being a part of me...", "I-I don't think I can keep you forever..."]}
 								}
 							}

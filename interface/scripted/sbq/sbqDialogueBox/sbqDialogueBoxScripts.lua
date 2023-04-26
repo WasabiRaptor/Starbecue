@@ -63,6 +63,8 @@ function sbq.getRedirectedDialogue(dialogueTree, settings, eid, dialogueTreeTop)
 		local firstChar = dialogueTree:sub(1,1)
 		if firstChar == "/" then
 			dialogueTree = root.assetJson(dialogueTree)
+		elseif firstChar == ":" then
+			dialogueTree = root.assetJson(dialogueTreeTop.dialogueFile..dialogueTree)
 		else
 			local found1 = dialogueTree:find("%.")
 			local jump = {}
@@ -83,6 +85,9 @@ end
 function sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomTable, name, dialogueTreeTop)
 	local randomRolls = randomRolls
 	local randomTable = randomTable
+	if type(randomTable) == "string" then
+		randomTable = sbq.getRedirectedDialogue(randomTable, settings, eid, dialogueTreeTop)
+	end
 	local badRolls = {}
 	local i = 1
 	local prevTable

@@ -6,22 +6,96 @@ local mkwidget = mg.mkwidget
 -- first off, modify textBox to actually use given size
 function widgets.textBox:preferredSize() return self.explicitSize or {96, 14} end
 
--- nice handling for tab field updates and sub tabs
-function widgets.tabField:onTabChanged(tab, previous)
-	local subTabs = (self.subTabs or {})[tab.id] or {}
+----- modified tabField -----
+
+local tabHeight = 16
+
+local function evContentsTabChanged(self, tab)
+	self:setVisible(self.tab == tab)
+end
+
+local function evTabSelect(self)
+	local tf = self.tab.parent
+	local old = tf.currentTab
+	tf.currentTab = self.tab
+	tf:pushEvent("tabChanged", self.tab, old)
+	mg.startEvent(tf.onTabChanged, tf, self.tab, old)
+
+	local subTabs = (tf.subTabs or {})[self.tab.id] or {}
 	for i, subTab in ipairs(subTabs) do
-		subTab:pushEvent("tabChanged", subTab.currentTab, subTab.currentTab)
-		subTab:onTabChanged(subTab.currentTab, subTab.currentTab)
+		subTab.currentTab.tabWidget:onSelected()
 	end
 end
+
 function widgets.tabField:update(dt)
 end
+
 function widgets.tabField:doUpdate(dt)
 	self:update(dt)
 	local subTabs = (self.subTabs or {})[self.currentTab.id] or {}
 	for i, subTab in ipairs(subTabs) do
 		subTab:doUpdate(dt)
 	end
+	self.currentTab:update(dt)
+end
+
+local tabProto = {}
+local tabMt = { __index = tabProto }
+
+function tabProto:setTitle(txt, icon)
+	self.titleWidget:setText(txt or tab.id)
+	if icon ~= nil then
+		self.iconWidget:setFile(icon or nil)
+		self.iconWidget:setVisible(not not icon)
+	end
+end
+
+function tabProto:setColor(c)
+	self.tabWidget.color = c
+	self.tabWidget:queueRedraw()
+end
+
+function tabProto:setVisible(b)
+	self.tabWidget:setVisible(b)
+end
+
+function tabProto:select()
+	self.tabWidget:select()
+end
+
+function tabProto:update(dt)
+end
+
+function widgets.tabField:newTab(param)
+	local first = not self.tabScroll.children[1].children[1] -- check if first tab added
+
+	local tab = setmetatable({ parent = self, id = param.id or sb.makeUuid() }, tabMt)
+	self.tabs[tab.id] = tab
+
+	-- set up tab widget itself
+	tab.tabWidget = self.tabScroll.children[1]:addChild { type = "listItem",
+		size = (self.layout == "vertical" and { self.tabWidth, tabHeight } or nil),
+		expandMode = self.layout == "vertical" and { 1, 0 } or { 0, 0 }, padding = 0, buttonLike = true,
+		visible = param.visible }
+	tab.tabWidget.children[1]:addChild { type = "spacer", size = { 0, tabHeight } } -- manual padding
+	tab.iconWidget = tab.tabWidget.children[1]:addChild { type = "image", size = { tabHeight, tabHeight }, visible = false }
+	tab.titleWidget = tab.tabWidget.children[1]:addChild { type = "label", inline = true }
+	tab.tabWidget.children[1]:addChild { type = "spacer", size = { 0, tabHeight } } -- manual padding
+	tab.tabWidget.tabStyle = self.layout -- set style var
+	tab.tabWidget.color = param.color
+
+	-- populate title and contents
+	tab:setTitle(param.title, param.icon)
+	tab.contents = mg.createImplicitLayout(param.contents, self.stack, { mode = "vertical", visible = false })
+
+	-- hook up events
+	tab.tabWidget.tab = tab
+	tab.tabWidget.onSelected = evTabSelect
+	tab.contents.tab = tab
+	tab.contents:subscribeEvent("tabChanged", evContentsTabChanged)
+
+	if first and not self.noFocusFirstTab then tab:select() end
+	return tab
 end
 
 ----- slider -----

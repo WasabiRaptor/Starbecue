@@ -439,6 +439,10 @@ function interact(args)
 	}
 	dialogueBoxData.settings.race = npc.species()
 
+	dialogueBoxData.settings.horny = status.resourcePercentage("horny")
+	dialogueBoxData.settings.food = status.resourcePercentage("food")
+	dialogueBoxData.settings.energy = status.resourcePercentage("energy")
+
 	if sbq.currentData.type == "prey" then
 		if args.predData then
 			sbq.predData = args.predData
@@ -503,6 +507,7 @@ function sbq.doTargetAction()
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then
 		if storage.huntingTarget.predOrPrey == "pred" then
+
 			sbq.addNamedRPC("attemptingToEat", world.sendEntityMessage(storage.huntingTarget.id, "sbqGetPreyEnabled"), function(sbqPreyEnabled)
 				if sbqPreyEnabled[storage.huntingTarget.voreType] and (sbqPreyEnabled.type ~= "prey")then
 					local settings = {
