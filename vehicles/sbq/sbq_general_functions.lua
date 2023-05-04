@@ -455,9 +455,8 @@ function sbq.getClosestValue(x, list)
 	return closest, closestKey
 end
 
-function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTree)
-	local dialogueTreeTop = dialogueTree
-	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
+function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTreeTop)
+	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTreeTop)
 	if not dialogueTree then return false end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 

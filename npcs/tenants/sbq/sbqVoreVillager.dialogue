@@ -1,5 +1,4 @@
 {
-
 	"defaultGreeting" : [
 		"Hi, how's it going.", "Hey there!", "Hi", "Hello"
 	],
@@ -25,6 +24,10 @@
 	"defaultRequestOralVoreBefore" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ],
 	"defaultRequestOralVoreAfter" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ],
 	"defaultUnpromptedOralVoreBefore" : [ "I think you'll fill me up.", "I just need a bite to eat.", "You seem like you'd make a good meal.", "My belly's been grumbling..." ],
+
+	"hungryRequestOralVoreBefore" : [ "Didn't know the food here came to you!", "Oh yes, I'm famished.", "Free food? Why of course!" ],
+	"hungryRequestOralVoreAfter" : [ "Oh yeah, that hit the spot.", "Mmmmmh, nothing like a good meal.", "Urrrhp!" ],
+	"hungryUnpromptedOralVoreBefore" : [ "I'm famished, come here.", "Sorry but... Not sorry.", "Mind helping me out? I'm starved.", "Food shouldn't be walking around, let me fix that." ],
 
 	"defaultNPCRequestOralVore" : [{"percentage" : "food", "add" : [
 		[ // 0% - 25%
@@ -71,5 +74,58 @@
 	"defaultNPCIgnoreConsentOralVoreBefore" : [
 		"Well I'm not going to take \"No\" for an answer."
 	],
-	"defaultNotFeelingIt" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ]
+	"defaultNotFeelingIt" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ],
+	"hungryNotFeelingIt" : [ "I'm not that kind of hungry right now.", "I'm not sure you'd fill me." ],
+
+	"defaultFull" : [ "I'm a bit too full...", "My body can't stretch any further...", "I've been filled too much already...", "I would... but I'm too full..." ],
+	"hungryFull" : [ "I wish I could but...\nI'm already too full.", "Can't fit any more..." ],
+
+	"defaultBellyFull" : [ "I'm a bit too full...", "My belly can't stretch any further...", "I've eaten too much already...", "I would... but I'm too full..." ],
+	"digestBellyFull" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ],
+	"hungryDefaultBellyFull" : [ "I wish I could but- Bwuuurph!\n...too full...", "I've already had my fill." ],
+	"hungryDigestBellyFull" : [ "Give it a few minutes.\nThen we'll see if I'm still hungry.", "Bwuuuurp!\nSoon...", "Check in when this meal's finished." ],
+
+	"defaultTooBig" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ],
+	"hungryTooBig" : [ "That's too big even for me!", "I may be hungry but...\nWow, you're way too big." ],
+
+	"friendlyRequestOralVoreBefore" : [ "Oh, of course!", "I'm sure you'll fill me just right." ],
+	"friendlyRequestOralVoreAfter" : [ "That was good...", "You taste SO good!" ],
+	"friendlyUnpromptedOralVoreBefore" : [ "Sorry about this!", "Don't worry, I won't hurt you." ],
+	"friendlyNotFeelingIt" : [ "Sorry, I'm not feeling it right now.", "I'm not hungry, maybe later though?" ],
+	"friendlyDefaultFull" : [ "Oh sorry, I've already got a pal with me.", "Sorry, I'm already full.\nI'm sure I'll be free soon though!" ],
+	"friendlyDigestFull" : [ "Can you give me a few minutes?\nI need to tuck a friend away first.", "Gotta tuck this cutie onto my hips.\nThen you can be next." ],
+	"frientlyFull" : [ "Oh sorry, I've already got a pal with me.", "Sorry, I'm already full.\nI'm sure I'll be free soon though!" ],
+	"friendlyTooBig" : [ "Oh wow, you're big!", "I couldn't even hope to fit you!" ],
+
+	"flirtyRequestOralVoreBefore" : [ "Hehe, sure I'll eat you~", "You want to get in my belly~?", "I've seen you eyeing my belly up... Get in~", "A cute morsel like you, of course~?", "I can't wait to eat a scrumptious snack like you~" ],
+	"flirtyRequestOralVoreAfter" : [ "Mmm~ get comfortable in there~", "You better enjoy yourself~", "Such a preything~", "Maybe I'll keep you as a belly pet~" ],
+	"flirtyUnpromptedOralVoreBefore" : [ "Mmmm~ you look like a tasty meal~", "You're going to get in my belly, and you're gonna like it~", "I wonder how you'd look stretching out my gut~", "Hehe, looks like I'm about to have lunch... and you're on the menu~" ],
+	"flirtyUnpromptedOralVoreAfter" : [ "Mmm~ get comfortable in there~", "You better enjoy yourself~", "Hehe, its like you wanted me to eat you~", "Maybe I'll keep you as a belly pet~" ],
+	"flirtyNotFeelingIt" : [ "Perhaps later sweetie~", "Not now, I've got to watch these hips~", "How about just a taste for now~ *lick*", "You think you're good enough to be my prey? how cute~" ],
+
+	"flirtyDefaultFull" : [ "Too late, but I'm sure you're loving how my belly looks~", "Envious of my prey~?", "Are you imagining yourself squirming in there with the others~?", "You're just gonna keep staring until you can get inside?~" ],
+	"flirtyDigestFull" : [ "Just let me add the last prey to my hips first~", "Hehe, eagerly waiting to be pudge, aren't you~?", "Gotta gurgle up some space first~", "Heh, you can't wait to be melting down inside me~" ],
+	"flirtyTooBig" : [ "You're a bit too big sweetie~", "How cute~ you know you're too big to eat right?", "You just want to see me stretched out too much don't you~?", "If you were a bit smaller, I'd snap you up in an instant~" ],
+
+	"shyRequestOralVoreBefore" : [ "O-oh... really? I guess I'll try", "Are you sure...?", "Uhm... you're asking... me?", "R-right... g-get in my belly then... did I say that right?" ],
+	"shyRequestOralVoreAfter" : [ "Ah... w-wow you're really in there...", "I-I didn't think you were serious...", "Mmmm... is it actually good in there...?", "N-now you're where you belong... did I say it right?" ],
+	"shyUmpromptedOralVoreBefore" : [ "Uhm... e-excuse me... I-", "Hey... uhm... funny thing... I-", "Do you... uhm... do you mind if I-", "Hi... hey... hi... hi... hi-" ],
+	"shyUmpromptedOralVoreAfter" : [ "S-sorry I couldn't control myself!", "Th-this is fine right?", "A-ahhh sorry I just panicked!" ],
+	"shyNotFeelingIt" : [ "Uhm... I uhm... uhm...", "Y-you really t-think I can be a pred?", "M-me? I can't...", ["*Incomprehensible Noises*", "<keysmash>"] ],
+	"shyDefaultFull" : [ "O-oh uhm... uh... I don't think I can eat more...", ["*Flustered Noise* t-too many others wanted in already!", "<keysmash> t-too many others wanted in already!"], ["*Incomprehensible Noises*", "aaaaaaa<keysmash><keysmash>"], "I-I'm too full!" ],
+	"shyDigestFull" : [ "A-are y-you sure? m-my prey is melting in there...", "Uhm... a-after my last meal is more manageable...", "Y-you want to be p-pudge too?", "I-Uhm... uhm... uhm... s-soon yeah... soon..." ],
+	"shyOtherFull" : [ "O-oh uhm... uh... I don't think I can fit more...", ["*Flustered Noise* t-too many others wanted in already!", "<keysmash> t-too many others wanted in already!"], ["*Incomprehensible Noises*", "aaaaaaa<keysmash><keysmash>"], "I-I'm too full!" ],
+	"shyTooBig" : [ "A-ah y-you w-wouldn't fit if I tried", "I-Oh w-wow y-you really think I could do t-that?", ["Thats... you're too... *Incomprehensible Noises*", "Thats... you're too... <keysmash>"], "T-thats crazy..." ],
+
+	"shyHungryRequestOralVoreBefore" : [ "O-oh gosh, you would do that?", "Y-you...\nReally?", "You... don't have to but...\nOkay...", "F-for me..?", "You really think...\nI g-gues I could try..." ],
+	"shyHungryRequestOralVoreAfter" : [ "Oh g-gosh...\nThat really... H-hit the spot...", "Y-you really... \n<keysmash>", "You didn't have to..." ],
+	"shyHungryUnpromptedOralVoreBefore" : [ "Would you, uhm-\nMind if I..?\n...Yeah...", "Hey, uhm... I'm-\nYeah I'm... H-hungry.\nC-could you... yeah...", "Uuuhm....\nS-Sorry about this!" ],
+	"shyHungryUmpromptedOralVoreAfter" : [ "I was just... too hungry!", "You're okay with this. Right?\nRight..?", "P-please don't squirm too much..." ],
+	"shyHungryNotFeelingIt" : [ "I couldn't...", "W-wow, okay, uhm...\nI'm not... that hungry?", "<keysmash>" ],
+	"shyHungryFull" : [ "<keysmash>\nI already ate enough...", "ohgoshohgoshohgosh-", "Too...\nUuuurhp!\nFull...", "Bwuuuuurph!\nI- uh... <keysmash>" ],
+	"shyHungryDigestFull" : [ "T-too... Soon...", "A-already..?", "<keysmash>", "The last ones are still...\nM-Melting...", "I-I don't think you'd wa-AUUUUURP-\n...To join them...", "I-I'm already going to be fat..." ],
+	"shyHungryOtherFull" : [ "<keysmash>\nI'm already full enough...", "ohgoshohgoshohgosh-", "Too... Full...", "I- uh... <keysmash>" ],
+	"shyHungryTooBig" : [ "A-ah y-you w-wouldn't fit if I tried", "I-Oh w-wow y-you really think I could do t-that?", ["Thats... you're too... *Incomprehensible Noises*", "Thats... you're too... <keysmash>"], "T-thats crazy..." ],
+
+	"defaultNeedsInfusion" : [ "I'd want someone merged in there"]
 }

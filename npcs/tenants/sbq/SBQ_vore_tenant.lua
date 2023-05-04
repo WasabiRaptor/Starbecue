@@ -777,7 +777,7 @@ end
 
 function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree, appendName)
 	settings.race = npc.species()
-	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
+	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
 	if not dialogueTree then return false end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
@@ -786,9 +786,9 @@ function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree
 	local randomPortrait = dialogueTree.randomPortrait
 	local randomEmote = dialogueTree.randomEmote
 
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomDialogue, "randomDialogue")
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomPortrait, "randomPortrait")
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomEmote, "randomEmote")
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
 
 --[[
 	local imagePortrait

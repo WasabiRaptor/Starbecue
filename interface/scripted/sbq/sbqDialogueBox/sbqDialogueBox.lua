@@ -116,8 +116,8 @@ local prevRandomRolls = {}
 local finished = false
 local dialoguePos = 1
 
-function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTree)
-	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, sbq.settings, player.id(), dialogueTree)
+function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTreeTop)
+	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, sbq.settings, player.id(), dialogueTreeTop)
 	if not dialogueTree then return false end
 	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
@@ -137,11 +137,11 @@ function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTree)
 		randomRolls = prevRandomRolls
 	end
 	-- we want to make sure the rolls for the portraits and the dialogue line up
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomDialogue, "randomDialogue")
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomPortrait, "randomPortrait")
-	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomName, "randomName")
-	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomButtonText, "randomButtonText")
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomEmote, "randomEmote")
+	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
+	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
+	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomName, "randomName", dialogueTreeTop)
+	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomButtonText, "randomButtonText", dialogueTreeTop)
+	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
 
 	prevRandomRolls = randomRolls
 

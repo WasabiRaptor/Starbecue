@@ -35,7 +35,7 @@ function sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree
 		end
 	end
 
-	return dialogueTree
+	return dialogueTree, dialogueTreeTop
 end
 
 function sbq.checkDialogueBranch(dialogueTree, settings, branch, eid, dialogueTreeTop)
