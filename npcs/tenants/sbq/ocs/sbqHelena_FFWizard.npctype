@@ -272,7 +272,7 @@
 					"horny" : {
 						"portrait" : ["Determined.png"],
 						"randomDialogue" : ["You're looking fine today.", "My my, such a delightful body.", "Ooh, you're looking irresistible!"],
-						"randomButtonText" : ["Thanks. You too.", "...", "Thanks!"],
+						"randomButtonText" : ["Thanks. You too.", " ... ", "Thanks!"],
 							"continue" : {
 								"portrait" : ["Determined.png"],
 								"randomDialogue" : ["Better not forget my bedside manners. What's up?", "Sorry, I'm getting carried away. You need something?", "Don't mind me. Do you have a question?"],
@@ -357,7 +357,7 @@
 					"friendly" : {
 						"portrait" : ["Angry.png"],
 						"randomDialogue" : ["^red;Not the best time.", "^red;Make it quick.", "^red;Keep it short and sweet."],
-						"randomButtonText" : ["...", "...", "..."],
+						"randomButtonText" : [" ... ", " ... ", " ... "],
 							"continue" : {
 								"portrait" : ["Angry.png"],
 								"randomDialogue" : ["^red;So, spit it out.", "^red;Speak.", "^red;What is it?"],
@@ -612,7 +612,7 @@
 					"horny" : {
 						"portrait" : ["OwO.png"],
 						"randomDialogue" : ["You're looking like fire today.", "My my, such a delightful demonic body.", "Ooh, you're looking even more irresistible!"],
-						"randomButtonText" : ["Thanks. You too.", "...", "Thanks!"],
+						"randomButtonText" : ["Thanks. You too.", " ... ", "Thanks!"],
 							"continue" : {
 								"portrait" : ["OwO.png"],
 								"randomDialogue" : ["Better not forget my bedside manners. What's up?", "Sorry, I'm getting carried away. You need something?", "Don't mind me. Do you have a question?"],
@@ -697,7 +697,7 @@
 					"friendly" : {
 						"portrait" : ["Mad.png"],
 						"randomDialogue" : ["^red;Not the best time.", "^red;Make it quick.", "^red;Keep it short and sweet."],
-						"randomButtonText" : ["..."],
+						"randomButtonText" : [" ... "],
 							"continue" : {
 								"portrait" : ["Mad.png"],
 								"randomDialogue" : ["^red;So, spit it out.", "^red;Speak.", "^red;What is it?"],
@@ -809,7 +809,7 @@
 									"sbqDigest" : { "portrait" : ["Bork.png"], "randomDialogue" : ["^red;Hmph.^reset;"]},
 									"sbqSoftDigest" : { "randomDialogue" : ["It might look like I've got space, but they want me all to themselves. Sorry~", "Ah, there's no need to worry. They'll be perfectly fine. \nYou will be too once I get to you~", "Eager to get turned into pudge, are you? It'll be a bit of a wait. Maybe even a long one...", "Hmhm, do I look nice and empty? Oh, it's nothing."]}
 								},
-								"otherLocationFull" : { "portrait" : ["Confused.png"], "randomDialogue" : ["While I have space where you want to go, it'd get way too cramped...", "..'mmph!'.. I don't know who said that, but that means I'm out of room...", "I do indulging myself, but even this is too much...", "...Not right now, my thiccness has its limits..."]},
+								"otherLocationFull" : { "portrait" : ["Confused.png"], "randomDialogue" : ["While I have space where you want to go, it'd get way too cramped...", " ..'mmph!'.. I don't know who said that, but that means I'm out of room...", "I do indulging myself, but even this is too much...", " ...Not right now, my thiccness has its limits..."]},
 								"tooBig" : { "randomDialogue" : ["Wow! You're far too big for even me to handle.", "I really want to, but even I know my limits.", "I can't. I'm pretty sure my gut would pop instantly.", "No way. Not after the last time I tried with someone as big as you."]}
 							},
 							"hungry" : { // mood
@@ -832,7 +832,7 @@
 									"sbqDigest" : { "portrait" : ["Bork.png"], "randomDialogue" : ["^red;Hmph.^reset;"]},
 									"sbqSoftDigest" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Hm? Nothing to see here. Any cries for help are just your imagination.", "Yummy... Just reminiscing about a tasty meal. Come back later.", "My belly is a bit busy. Somewhere else may prove more fruitful~", "Who's the unlucky prey? Probably someone you know~" ]}
 								},
-								"otherLocationFull" : { "portrait" : ["Hurt.png"], "randomDialogue" : ["While my body really wants you inside it, it'd get way too cramped...", "Trust me, I want to. My body wants to. You want to. But I can't.", "I could probably give you a lick, but that's it...", "...Not right now, my body has its limits..."]},
+								"otherLocationFull" : { "portrait" : ["Hurt.png"], "randomDialogue" : ["While my body really wants you inside it, it'd get way too cramped...", "Trust me, I want to. My body wants to. You want to. But I can't.", "I could probably give you a lick, but that's it...", " ...Not right now, my body has its limits..."]},
 								"tooBig" : { "portrait" : ["Shocked.png"], "randomDialogue" : ["Wow! You're far too big for even me to handle with how hungry I am.", "I really, REALLY, want to, but even I know my limits.", "I can't. I'm pretty sure my rumbly gut would pop instantly.", "No way. Not after the last time I tried with someone as big as you. Thanks, belly."]}
 							},
 							"horny" : { // mood
@@ -1332,7 +1332,7 @@
 								},
 								"impossibleEscapeToggleOn" : {
 									"next" : "impossibleEscapeToggleCounter",
-									"someCounter" : { "portrait" : ["OwO.png"], "dialogue" : ["Uu~ That's starting to really feel good.", "Don't mind me if I... mm... throw away the key for a bit.." ,"Just checking my phone and...", "...and now our fun has just started~"] }
+									"someCounter" : { "portrait" : ["OwO.png"], "dialogue" : ["Uu~ That's starting to really feel good.", "Don't mind me if I... mm... throw away the key for a bit.." ,"Just checking my phone and...", " ...and now our fun has just started~"] }
 								},
 								"impossibleEscapeToggleOff" : {
 									"next" : "impossibleEscapeToggleCounter",
@@ -3710,7 +3710,7 @@
 							"falling" : {
 								"portrait" : ["Happy.png"],
 								"randomDialogue" : [
-									"Bork?!", "Bork.", "Bork!", "...bork."
+									"Bork?!", "Bork.", "Bork!", " ...bork."
 								]
 							}
 						}

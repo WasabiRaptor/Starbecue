@@ -456,9 +456,10 @@ function sbq.getClosestValue(x, list)
 end
 
 function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTreeTop)
+	return false
+
 	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTreeTop)
 	if not dialogueTree then return false end
-	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
 	local randomRolls = {}
 	local randomDialogue = dialogueTree.randomDialogue

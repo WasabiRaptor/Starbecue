@@ -12,169 +12,165 @@ function sbq.generateKeysmashes(input, lengthMin, lengthMax)
 	end)
 end
 
-function sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree, dialogueTreeTop)
-	local dialogueTree = sbq.getRedirectedDialogue(dialogueTree or sbq.dialogueTree, settings, eid, dialogueTreeTop) or {}
+dialogue = {
+	queue = {},
+	result = {},
+	randomRolls = {},
+	position = 1,
+}
+
+function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
 	local dialogueTreeTop = dialogueTreeTop or dialogueTree
-
-	for _, branch in ipairs(dialogueTreeLocation) do
-		dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, branch, eid, dialogueTreeTop)
-	end
-
-	local continue = true
-	while continue and type(dialogueTree) == "table" do
-		continue = false
-		local next
-		if type(dialogueTree.next) == "string" then
-			next = dialogueTree.next
-		elseif type(dialogueTree.next) == "table" then
-			next = dialogueTree.next[math.random(#dialogueTree.next)]
-		end
-		if next then
-			dialogueTree = sbq.checkDialogueBranch(dialogueTree, settings, next, eid, dialogueTreeTop)
-			continue = true
-		end
-	end
-
-	return dialogueTree, dialogueTreeTop
-end
-
-function sbq.checkDialogueBranch(dialogueTree, settings, branch, eid, dialogueTreeTop)
-	local dialogueTree = dialogueTree
-	if type(dialogueTree) == "table" then
-		-- if we are moving down the tree its nice to have it automatically set a point to return to as we move past it
-		sbq.dialogueTreeReturn = dialogueTree.dialogueTreeReturn or sbq.dialogueTreeReturn
-
-		if type(dialogueBoxScripts[branch]) == "function" then
-			dialogueTree = dialogueBoxScripts[branch](dialogueTree, settings, branch, eid)
-		elseif settings[branch] ~= nil then
-			dialogueTree = dialogueTree[tostring(settings[branch])] or dialogueTree[branch] or dialogueTree.default
+	local dialogueTree = sbq.getRedirectedDialogue(path, false, dialogueTree, dialogueTree or dialogueTreeTop)
+	if not dialogueTree then return false end
+	local finished = sbq.processDialogueStep(dialogueTree)
+	if dialogueTree.next and not finished then
+		if dialogueTree.randomNext then
+			local step = dialogueTree.next[math.random(#dialogueTree.next)]
+			finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
 		else
-			dialogueTree = dialogueTree[branch]
+			for _, step in ipairs(dialogueTree.next) do
+				finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
+			end
 		end
 	end
-	return sbq.getRedirectedDialogue(dialogueTree, settings, eid, dialogueTreeTop)
+	return finished or false, dialogueTree, dialogueTreeTop
 end
 
-local recursionCount = 0
--- for dialog in other files thats been pointed to
-function sbq.getRedirectedDialogue(dialogueTree, settings, eid, dialogueTreeTop)
-	local dialogueTree = dialogueTree
-	if type(dialogueTree) == "string" then
-		local firstChar = dialogueTree:sub(1,1)
-		if firstChar == "/" then
-			dialogueTree = root.assetJson(dialogueTree)
-		elseif firstChar == ":" then
-			dialogueTree = root.assetJson(dialogueTreeTop.dialogueFile..dialogueTree)
+function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
+	if dialogueTree[step] then
+		if dialogueBoxScripts[step] then
+			return sbq.getDialogueBranch("."..step.."."..(dialogueBoxScripts[step](dialogueTree, settings, branch, eid) or "default"), settings, dialogueTree, dialogueTreeTop)
+		elseif settings[step] then
+			return sbq.getDialogueBranch("."..step.."."..(settings[step] or "default"), settings, dialogueTree, dialogueTreeTop)
 		else
-			local found1 = dialogueTree:find("%.")
-			local jump = {}
-			while found1 do
-				table.insert(jump, dialogueTree:sub(1,found1-1))
-				dialogueTree = dialogueTree:sub(found1+1,-1)
-				found1 = dialogueTree:find("%.")
-			end
-			table.insert(jump, dialogueTree)
-			if recursionCount > 10 then return {} end -- protection against possible infinite loops of recusion
-			recursionCount = recursionCount + 1
-			dialogueTree = sbq.getDialogueBranch(jump, settings, eid, dialogueTreeTop, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..step, settings, dialogueTree, dialogueTreeTop)
 		end
+	else
+		return false
 	end
-	return dialogueTree or {}
 end
 
-function sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomTable, name, dialogueTreeTop)
-	local randomRolls = randomRolls
-	local randomTable = randomTable
-	if type(randomTable) == "string" then
-		randomTable = sbq.getRedirectedDialogue(randomTable, settings, eid, dialogueTreeTop)
+function sbq.processDialogueStep(dialogueTree)
+	if dialogueTree.new then
+		dialogue.result = sb.jsonMerge({}, dialogueTree.new)
+		dialogue.queue = sb.jsonMerge({}, {})
 	end
-	local badRolls = {}
-	local i = 1
-	local prevTable
-	while type(randomTable) == "table" do
-		if randomTable.add then
-			local passed = true
-			if randomTable.check then
-				passed = sbq.checkSettings(randomTable.check, settings)
+	if dialogueTree.clear then
+		for _, k in ipairs(dialogueTree.clear) do
+			dialogue.result[k] = nil
+		end
+	end
+	if dialogueTree.replace then
+		dialogue.result = sb.jsonMerge(dialogue.result, dialogueTree.replace)
+	end
+	if dialogueTree.add then
+		for k, v in pairs(dialogueTree.add) do
+			if type(v) == "table" then
+				dialogue.result[k] = dialogue.result[k] or {}
+				util.appendLists(dialogue.result[k], v)
+			elseif type(v) == "string" then
+				dialogue.result[k] = (dialogue.result[k] or "") .. v
+			elseif type(v) == "number" then
+				dialogue.result[k] = (dialogue.result[k] or 0) + v
 			end
-			if passed and randomTable.percentage then
-				local percentage = 0.5
-				if randomTable.percentage == "selfHealth" then
-					local health = world.entityHealth(entity.id())
-					percentage = health[1] / health[2]
-				elseif randomTable.percentage == "targetHealth" then
-					local health = world.entityHealth(eid)
-					percentage = health[1] / health[2]
-				else
-					percentage = settings[randomTable.percentage] or 0.5
-				end
-				local pool = sbq.handleRandomTableString(randomTable.add, settings, eid, dialogueTreeTop, name)
-				local index = math.min((math.floor((#pool * percentage) + 0.5) + 1), #pool)
-				randomTable = randomTable[index]
-				if not randomTable then
-					i = i - 1
-					badRolls[randomRolls[i]] = true
-					randomRolls[i] = nil -- clear the saved random value so it chooses a different one next round
-					randomTable = prevTable
-				end
-			elseif randomTable.check then
-				if passed then
-					randomTable = sbq.handleRandomTableString(randomTable.add, settings, eid, dialogueTreeTop, name)
-				elseif randomTable.fail ~= nil then
-					randomTable = sbq.handleRandomTableString(randomTable.fail, settings, eid, dialogueTreeTop, name)
-				else
-					i = i - 1
-					badRolls[randomRolls[i]] = true
-					randomRolls[i] = nil -- clear the saved random value so it chooses a different one next round
-					randomTable = prevTable
-				end
+		end
+	end
+	if not dialogueTree.next or dialogueTree.addQueued then
+		for k, v in pairs(dialogue.queue) do
+			if type(v) == "table" then
+				dialogue.result[k] = dialogue.result[k] or {}
+				util.appendLists(dialogue.result[k], v)
+			elseif type(v) == "string" then
+				dialogue.result[k] = (dialogue.result[k] or "") .. v
+			elseif type(v) == "number" then
+				dialogue.result[k] = (dialogue.result[k] or 0) + v
+			end
+		end
+		dialogue.queue = sb.jsonMerge({}, {})
+	end
+	if dialogueTree.newQueue then
+		dialogue.queue = sb.jsonMerge({}, dialogueTree.newQueue)
+	end
+	if dialogueTree.clearQueue then
+		for _, k in ipairs(dialogueTree.clearQueue) do
+			dialogue.queue[k] = nil
+		end
+	end
+	if dialogueTree.replaceQueue then
+		dialogue.queue = sb.jsonMerge(dialogue.queue, dialogueTree.replaceQueue)
+	end
+	if dialogueTree.addQueue then
+		for k, v in pairs(dialogueTree.addQueue) do
+			if type(v) == "table" then
+				dialogue.queue[k] = dialogue.queue[k] or {}
+				util.appendLists(dialogue.queue[k], v)
+			elseif type(v) == "string" then
+				dialogue.queue[k] = (dialogue.queue[k] or "") .. v
+			elseif type(v) == "number" then
+				dialogue.queue[k] = (dialogue.queue[k] or 0) + v
+			end
+		end
+	end
+	if dialogueTree.finished then return true end
+end
+
+function sbq.getRedirectedDialogue(path, returnStrings, dialogueTree, dialogueTreeTop )
+	if type(path) == "string" then
+		if path[1] == "/" then
+			return root.assetJson(path) or {}
+		elseif path[1] == ":" then
+			return root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile..path) or {}
+		elseif path[1] == "." then
+			return sb.jsonQuery(dialogueTree, path:sub(2, -1)) or sb.jsonQuery(dialogueTreeTop, path:sub(2, -1))
+		elseif returnStrings then
+			return path
+		end
+	elseif type(path) == "table" then
+		return path
+	end
+end
+
+function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dialogueTree, dialogueTreeTop)
+	local rollNo = rollNo or 1
+	local randomTable = sbq.getRedirectedDialogue(randomTable, true, dialogueTree, dialogueTreeTop)
+	local badrolls = {}
+	if type(randomTable) == "table" then
+		if not sbq.checkSettings(randomTable.check, settings) then return end
+		if randomTable.percentage then
+			local percentage = 0.5
+			if randomTable.percentage == "selfHealth" then
+				local health = world.entityHealth(entity.id())
+				percentage = health[1] / health[2]
+			elseif randomTable.percentage == "targetHealth" then
+				local health = world.entityHealth(eid)
+				percentage = health[1] / health[2]
 			else
-				randomTable = sbq.handleRandomTableString(randomTable.add, settings, eid, dialogueTreeTop, name)
+				percentage = settings[randomTable.percentage] or 0.5
 			end
-		elseif randomTable.infusedSlot
-		and (sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).infusion
-		and settings[(((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
-		then
-			local itemSlot = settings[((dialogueTree.location or settings.location) or "").."InfusedItem"]
-			if type(randomTable.infusedSlot) == "string" then
-				itemSlot = settings[randomTable.infusedSlot]
-			end
-			if ((itemSlot or {}).parameters or {}).npcArgs then
-				local uniqueId = (((((itemSlot or {}).parameters or {}).npcArgs or {}).npcParam or {}).scriptConfig or {}).uniqueId
-				if uniqueId and randomTable[uniqueId] ~= nil then
-					randomTable = randomTable[uniqueId]
-				else
-					randomTable = randomTable.default
-				end
-				randomTable = sbq.handleRandomTableString(randomTable, settings, eid, dialogueTreeTop, name)
-			else
-				i = i - 1
-				badRolls[randomRolls[i]] = true
-				randomRolls[i] = nil -- clear the saved random value so it chooses a different one next round
-				randomTable = prevTable
-			end
-		else
-			if randomRolls[i] == nil then
-				if randomTable[1] then
-					local roll = math.random(#randomTable)
-					while badRolls[roll] do
-						roll = math.random(#randomTable)
-					end
-					table.insert(randomRolls, roll)
-				end
-			end
-			prevTable = randomTable
-			randomTable = randomTable[randomRolls[i] or 1]
-			i = i + 1
+			return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)
 		end
-	end
-	recursionCount = 0 -- since we successfully made it here, reset the recursion count
-	return randomRolls, randomTable
-end
-
-function sbq.handleRandomTableString(randomTable, settings, eid, dialogueTreeTop, name)
-	if type(randomTable) == "string" then
-		return sbq.getRedirectedDialogue(randomTable, settings, eid, dialogueTreeTop)[name]
+		if randomTable.dialogue or randomTable.portrait or randomTable.emote or randomTable.name or randomTable.buttonText or randomTable.speaker then
+			return randomTable
+		end
+		local selection = randomTable.add or randomTable
+		if selection[1] ~= nil then
+			local badroll = true
+			randomRolls[rollNo] = randomRolls[rollNo] or math.random(#selection)
+			while badroll do
+				while badrolls[tostring(randomRolls[rollNo])] do
+					randomRolls[rollNo] = math.random(#selection)
+				end
+				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, selection[randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
+				if randomTable then
+					badroll = false
+				else
+					badrolls[tostring(randomRolls[rollNo])] = true
+					badrolls.count = (badrolls.count or 0) + 1
+					if badrolls.count >= #selection then return end
+				end
+			end
+		end
 	end
 	return randomTable
 end

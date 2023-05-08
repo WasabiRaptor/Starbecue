@@ -83,7 +83,7 @@ function init()
 	sbq.dialogueTree = sbq.data.dialogueTree
 
 
-	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or { "greeting" })
+	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or "greeting", sbq.dialogueTree )
 end
 
 function update()
@@ -112,132 +112,75 @@ function sbq.refreshData()
 end
 
 
-local prevRandomRolls = {}
-local finished = false
-local dialoguePos = 1
+local randomDialogueHandling = {
+	{ "randomDialogue", "dialogue" },
+	{ "randomPortrait", "portrait" },
+	{ "randomButtonText", "buttonText" },
+	{ "randomEmote", "emote" },
+	{ "randomName", "name" },
+}
 
-function sbq.updateDialogueBox(dialogueTreeLocation, dialogueTreeTop)
-	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, sbq.settings, player.id(), dialogueTreeTop)
-	if not dialogueTree then return false end
-	recursionCount = 0 -- since we successfully made it here, reset the recursion count
+function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
+	local dialogueTree, dialogueTreeTop = dialogueTree, dialogueTreeTop
+	if path ~= dialogue.path and path ~= nil then
+		_, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, sbq.settings, player.id(), dialogueTree, dialogueTreeTop)
+		if not dialogueTree then return false end
+		dialogue.path = path
 
-	sbq.prevDialogueBranch = dialogueTree
+		sbq.prevDialogueBranch = dialogueTree
+
+		if not dialogue.result.useLastRandom then
+			dialogue.randomRolls = {}
+		end
+		for _, v in ipairs(randomDialogueHandling) do
+			local randomVal = v[1]
+			local resultVal = v[2]
+			if not dialogue.result[resultVal] then
+				local randomResult = sbq.getRandomDialogueTreeValue(sbq.settings, player.id(), 1, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
+				if type(randomResult) == "table" then
+					sb.jsonMerge(dialogue.result, randomResult)
+				elseif type(randomResult) == "string" then
+					dialogue.result[resultVal] = {randomResult}
+				end
+			end
+		end
+	end
 
 	sbq.checkVoreButtonsEnabled()
 
-	local randomDialogue = dialogueTree.randomDialogue
-	local randomPortrait = dialogueTree.randomPortrait
-	local randomName = dialogueTree.randomName
-	local randomButtonText = dialogueTree.randomButtonText
-	local randomEmote = dialogueTree.randomEmote
-
-	local randomRolls = {}
-
-	if dialogueTree.useLastRandom then
-		randomRolls = prevRandomRolls
-	end
-	-- we want to make sure the rolls for the portraits and the dialogue line up
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
-	randomRolls, randomName			= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomName, "randomName", dialogueTreeTop)
-	randomRolls, randomButtonText	= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomButtonText, "randomButtonText", dialogueTreeTop)
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, sbq.settings, player.id(), randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
-
-	prevRandomRolls = randomRolls
-
 	local playerName = world.entityName(player.id())
-	local speaker = pane.sourceEntity()
 
-	if dialogueTree.speaker ~= nil then
-		if type(dialogueTree.speaker) == "table" then
-			speaker = dialogueTree.speaker[dialoguePos] or dialogueTree.speaker[#dialogueTree.speaker]
-		end
-		speaker = dialogueTree.speaker
-	end
-	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = (((((sbq.settings[(dialogueTree.location or sbq.settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local speaker = dialogue.result.speaker[dialogue.position] or dialogue.result.speaker[#dialogue.result.speaker] or pane.sourceEntity()
+
+	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(sbq.settings, (dialogue.result.location or sbq.settings.location).."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
 	local imagePortrait
 
-	if type(randomName) == "string" then
-		nameLabel:setText(randomName)
-	elseif dialogueTree.name ~= nil then
-		if type(dialogueTree.name) == "table" then
-			nameLabel:setText(dialogueTree.name[dialoguePos] or dialogueTree.name[#dialogueTree.name] or sbq.data.defaultName or world.entityName(pane.sourceEntity()))
-		else
-			nameLabel:setText(dialogueTree.name)
-		end
+	nameLabel:setText(dialogue.result.name[dialogue.position] or dialogue.result.name[#dialogue.result.name] or sbq.data.defaultName or world.entityName(pane.sourceEntity()))
+	dialogueCont:setText(dialogue.result.buttonText[dialogue.position] or dialogue.result.buttonText[#dialogue.result.buttonText] or "...")
+
+	if sbq.data.entityPortrait then
+		sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait( speaker, dialogue.result.buttonText[dialogue.position] or dialogue.result.buttonText[#dialogue.result.buttonText] or sbq.data.defaultPortrait ), {32,8} )
 	else
-		nameLabel:setText(sbq.data.defaultName or world.entityName(pane.sourceEntity()))
+		dialoguePortrait:setFile(sbq.getPortraitPath((dialogue.result.portrait[dialogue.position] or dialogue.result.portrait[#dialogue.result.portrait] or sbq.data.defaultPortrait)))
 	end
 
-	if type(randomButtonText) == "string" then
-		dialogueCont:setText(randomButtonText)
-	elseif dialogueTree.buttonText ~= nil then
-		if type(dialogueTree.buttonText) == "table" then
-			dialogueCont:setText(dialogueTree.buttonText[dialoguePos] or dialogueTree.buttonText[#dialogueTree.buttonText] or "...")
-		else
-			dialogueCont:setText(dialogueTree.buttonText)
-		end
-	else
-		dialogueCont:setText("...")
+	local dialogue = sbq.generateKeysmashes(dialogue.result.dialogue[dialogue.position] or dialogue.result.dialogue[#dialogue.result.dialogue], dialogue.result.keysmashMin, dialogue.result.keysmashMax)
+	dialogueLabel:setText(sb.replaceTags(dialogue, tags))
+	world.sendEntityMessage(speaker, "sbqSay", dialogue, tags, imagePortrait, emote)
+
+	if dialogue.position >= #dialogue.result.dialogue then
+		dialogue.finished = true
+		sbq.dismissAfterTimer(dialogue.result.dismissTime)
 	end
 
-	if type(randomPortrait) == "string" then
-		if sbq.data.entityPortrait then
-			sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait( speaker, randomPortrait or sbq.data.defaultPortrait ), {32,8} )
-		else
-			dialoguePortrait:setFile(sbq.getPortraitPath(dialogueTree, (randomPortrait or sbq.data.defaultPortrait)))
-		end
-	elseif dialogueTree.portrait ~= nil then
-		if type(dialogueTree.portrait) == "table" then
-			if sbq.data.entityPortrait then
-				sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait( speaker, dialogueTree.portrait[dialoguePos] or dialogueTree.portrait[#dialogueTree.portrait] or sbq.data.defaultPortrait ), {32,8} )
-			else
-				dialoguePortrait:setFile(sbq.getPortraitPath(dialogueTree, (dialogueTree.portrait[dialoguePos] or dialogueTree.portrait[#dialogueTree.portrait] or sbq.data.defaultPortrait)))
-			end
-		else
-			if sbq.data.entityPortrait then
-				sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait( speaker, dialogueTree.portrait or sbq.data.defaultPortrait ), {32,8} )
-			else
-				dialoguePortrait:setFile(sbq.getPortraitPath(dialogueTree, (dialogueTree.portrait or sbq.data.defaultPortrait) ))
-			end
-		end
-	else
-		if sbq.data.entityPortrait then
-			sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait( speaker, sbq.data.defaultPortrait ), {32,8} )
-		else
-			dialoguePortrait:setFile(sbq.getPortraitPath(dialogueTree, (sbq.data.defaultPortrait)))
-		end
-	end
-
-	if type(randomDialogue) == "string" then
-		local randomDialogue = sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax)
-		dialogueLabel:setText(sb.replaceTags(randomDialogue, tags))
-		world.sendEntityMessage(speaker, "sbqSay", randomDialogue, tags, imagePortrait, randomEmote)
-		finished = true
-	elseif dialogueTree.dialogue ~= nil then
-		local dialogue = sbq.generateKeysmashes(dialogueTree.dialogue[dialoguePos] or dialogueTree.dialogue[#dialogueTree.dialogue], dialogueTree.keysmashMin, dialogueTree.keysmashMax)
-		dialogueLabel:setText(sb.replaceTags(dialogue, tags ))
-		world.sendEntityMessage(speaker, "sbqSay", dialogue, tags, imagePortrait, (dialogueTree.emote or {})[dialoguePos])
-		if dialoguePos >= #dialogueTree.dialogue then
-			finished = true
-			dialoguePos = 1
-		else
-			dialoguePos = dialoguePos + 1
-		end
-	else
-		dialogueLabel:setText("")
-	end
-
-	sbq.dismissAfterTimer(dialogueTree.dismissTime)
-
-	return dialogueTree, randomRolls
+	return path, dialogueTree, dialogueTreeTop
 end
 
-function sbq.getPortraitPath(dialogueTree, portrait)
-	if portrait:find("^/") then
+function sbq.getPortraitPath(portrait)
+	if portrait[1] == "/" then
 		return portrait
 	else
-		return (dialogueTree.portraitPath or sbq.data.portraitPath or "")..portrait
+		return (dialogue.result.portraitPath or sbq.data.portraitPath or "")..portrait
 	end
 end
 
@@ -394,25 +337,20 @@ function sbq.infusionButton(active, kind, locationName, locations)
 	sbq.settings.voreType = kind
 	sbq.settings.getVoreButtonAction = active
 	sbq.settings.location = locationName
+	sbq.updateDialogueBox( "infusePrey", sbq.dialogueTree)
 	if active == "request" or active == "requestLayer" then
-		sbq.settings.doingVore = "before"
-		local dialogueTree = sbq.updateDialogueBox({ "infusePrey" }) or {}
-		sbq.timer("infuseMessage", dialogueTree.delay or 1.5, function ()
+		sbq.timer("infuseMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "infuseLocation", player.id(), locations or {locationName})
-			sbq.timer("gotInfused", dialogueTree.delay or 1.5, function ()
+			sbq.timer("gotInfused", dialogue.result.delay or 1.5, function ()
 				for i, occupant in pairs(sbq.occupant or {}) do
 					if occupant.id == player.id() and occupant.flags.infused then
-						sbq.settings.doingVore = "after"
-						sbq.updateDialogueBox({ "infusePrey" })
+						sbq.updateDialogueBox( "infusePrey.after", sbq.dialogueTree)
 						return
 					end
 				end
-				sbq.settings.getVoreButtonAction = "couldntInfuse"
-				sbq.updateDialogueBox({ "infusePrey" })
+				sbq.updateDialogueBox("infusePrey.couldnt", sbq.dialogueTree)
 			end)
 		end)
-	else
-		sbq.updateDialogueBox({ "infusePrey" })
 	end
 end
 
@@ -468,27 +406,21 @@ function sbq.voreButton(voreType)
 	sbq.settings.voreType = voreType
 	sbq.settings.getVoreButtonAction = active
 	sbq.settings.location = locationName
-
+	sbq.updateDialogueBox( "vore", sbq.dialogueTree )
 	if active == "request" then
-		sbq.settings.doingVore = "before"
-		local dialogueTree = sbq.updateDialogueBox({ "vore" }) or {}
-		sbq.timer("eatMessage", dialogueTree.delay or 1.5, function ()
+		sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType,
 				{ id = player.id() })
-			sbq.timer("gotVored", dialogueTree.delay or 1.5, function ()
+			sbq.timer("gotVored", dialogue.result.delay or 1.5, function ()
 				for i, occupant in pairs(sbq.occupant or {}) do
 					if occupant.id == player.id() then
-						sbq.settings.doingVore = "after"
-						sbq.updateDialogueBox({ "vore" })
+						sbq.updateDialogueBox( "vore.after", sbq.dialogueTree)
 						return
 					end
 				end
-				sbq.settings.getVoreButtonAction = "couldntEat"
-				sbq.updateDialogueBox({ "vore" })
+				sbq.updateDialogueBox("vore.couldnt" )
 			end)
 		end)
-	else
-		sbq.updateDialogueBox({ "vore" })
 	end
 end
 
@@ -496,135 +428,130 @@ function sbq.dismissAfterTimer(time)
 	if not time then
 		sbq.timerList.dismissAfterTime = nil
 	else
-		sbq.forceTimer("dismissAfterTime", time, function ()
-			pane.dismiss()
+		sbq.forceTimer("dismissAfterTime", time, function()
+			if dialogue.result.continue then
+				sbq.updateDialogueBox("continue", sbq.prevDialogueBranch, sbq.dialogueTree)
+			elseif dialogue.result.jump then
+				sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
+			elseif not dialogue.finished then
+				sbq.updateDialogueBox()
+			else
+				pane.dismiss()
+			end
 		end)
 	end
 end
 
 function dialogueCont:onClick()
 	local contextMenu = {}
-	if not finished then
-		return sbq.updateDialogueBox({}, sbq.prevDialogueBranch)
-	elseif finished and sbq.prevDialogueBranch.options ~= nil then
+	if not dialogue.finished then
+		dialogue.position = dialogue.position + 1
+		return sbq.updateDialogueBox()
+	elseif dialogue.finished and dialogue.result.options ~= nil then
 	else
-		finished = false
+		dialogue.finished = false
+		dialogue.position = 1
 	end
-	if type(sbq.prevDialogueBranch.saveSettings) == "table" then
-		for setting, value in pairs(sbq.prevDialogueBranch.saveSettings) do
+
+	if type(dialogue.result.saveSettings) == "table" then
+		for setting, value in pairs(dialogue.result.saveSettings) do
 
 		end
 	end
-	if type(sbq.prevDialogueBranch.playerSaveSettings) == "table" then
+	if type(dialogue.result.playerSaveSettings) == "table" then
 		local settings = player.getProperty("sbqDialogueSettings") or {}
-		local uuid = sbq.prevDialogueBranch.saveForUUID or world.entityUniqueId(pane.sourceEntity()) or "noUUID"
+		local uuid = dialogue.result.saveForUUID or world.entityUniqueId(pane.sourceEntity()) or "noUUID"
 		settings[uuid] = settings[uuid] or {}
-		for setting, value in pairs(sbq.prevDialogueBranch.playerSaveSettings) do
+		for setting, value in pairs(dialogue.result.playerSaveSettings) do
 			settings[uuid][setting] = value
 			sbq.settings[setting] = value
 		end
 		player.setProperty("sbqDialogueSettings", settings)
 	end
-	if type(sbq.prevDialogueBranch.callScript) == "string" then
-		if type(dialogueBoxScripts[sbq.prevDialogueBranch.callScript]) == "function" then
-			local dialogueTree = dialogueBoxScripts[sbq.prevDialogueBranch.callScript](sbq.prevDialogueBranch, sbq.settings,"callScript", player.id(), table.unpack(sbq.prevDialogueBranch.scriptArgs or {}))
-			if dialogueTree then sbq.updateDialogueBox({}, dialogueTree) end
+	if type(dialogue.result.callScript) == "string" then
+		if type(dialogueBoxScripts[dialogue.result.callScript]) == "function" then
+			local path = dialogueBoxScripts[dialogue.result.callScript](sbq.prevDialogueBranch, sbq.settings, "callScript", player.id(), table.unpack(dialogue.result.scriptArgs or {}))
+			sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
 		end
-	elseif sbq.prevDialogueBranch.continue ~= nil then
+	elseif dialogue.result.options ~= nil then
+		for i, option in ipairs(dialogue.result.options) do
+			local action = { option[1] }
+			local checks = { option[3] }
+			local path = { option [2] }
+			local continue = true
+			local entities = {}
+			if continue and (type(checks.checkScript) == "string") and (type(optionCheckScripts[checks.checkScript])=="function") then
+				continue = optionCheckScripts[checks.checkScript](sbq.settings, table.unpack(checks.checkScriptArgs or {}))
+			end
+			if continue and (type(checks.check) == "table") then
+				continue = sbq.checkSettings(checks.check, sbq.settings)
+			end
+			if continue and (type(checks.checkPlayer) == "table") then
+				continue = sbq.checkSettings(checks.checkPlayer, sb.jsonMerge(sb.jsonMerge(root.assetJson("/sbqGeneral.config:globalSettings"),root.assetJson("/sbqGeneral.config:defaultPreyEnabled.player")),sb.jsonMerge((player.getProperty("sbqSettings") or {}).global or {}, status.statusProperty("sbqPreyEnabled") or {})))
+			end
+			if continue and checks.checkPlayerLikesKinks ~= nil then
+				local settings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/sbqGeneral.config:globalSettings"),
+					root.assetJson("/sbqGeneral.config:defaultPreyEnabled.player")),
+					sb.jsonMerge((player.getProperty("sbqSettings") or {}).global or {}, status.statusProperty("sbqPreyEnabled") or {}))
+				for i, kink in ipairs(checks.checkPlayerLikesKinks) do
+					if not (settings[kink] or settings[kink.."Pred"]) then
+						continue = false break
+					end
+				end
+			end
+			if continue and checks.nearEntitiesNamed ~= nil then
+				continue = false
+				local found = checkEntityName( world.entityQuery( world.entityPosition(player.id()), checks.range or 10, checks.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), checks.nearEntitiesNamed)
+				for _, id in ipairs(found) do
+					continue = true
+					table.insert(entities, id)
+				end
+			end
+			if continue and checks.nearUniqueId ~= nil then
+				local found = checkEntityUniqueId( world.entityQuery( world.entityPosition(player.id()), checks.range or 10, checks.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), checks.nearUniqueId)
+				for _, id in ipairs(found) do
+					continue = true
+					table.insert(entities, id)
+				end
+			end
+			if continue and ((checks.voreType == nil) or (sbq.checkVoreTypeActive(checks.voreType) ~= "hidden")) then
+				action[2] = function()
+					dialogue.finished = false
+					sbq.updateDialogueBox( path, sbq.prevDialogueBranch, sbq.dialogueTree )
+				end
+				table.insert(contextMenu, action)
+			end
+		end
+	elseif dialogue.result.continue ~= nil then
 		local continue = true
 		local entities = {}
-		if continue and sbq.prevDialogueBranch.continue.nearEntitiesNamed ~= nil then
+		if continue and dialogue.result.continue.nearEntitiesNamed ~= nil then
 			continue = false
-			local found = checkEntityName( world.entityQuery( world.entityPosition(player.id()), sbq.prevDialogueBranch.continue.range or 10, sbq.prevDialogueBranch.continue.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), sbq.prevDialogueBranch.continue.nearEntitiesNamed)
+			local found = checkEntityName( world.entityQuery( world.entityPosition(player.id()), dialogue.result.continue.range or 10, dialogue.result.continue.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), dialogue.result.continue.nearEntitiesNamed)
 			for _, id in ipairs(found) do
 				continue = true
 				table.insert(entities, id)
 			end
 		end
-		if continue and sbq.prevDialogueBranch.continue.nearUniqueId ~= nil then
-			local found = checkEntityUniqueId( world.entityQuery( world.entityPosition(player.id()), sbq.prevDialogueBranch.continue.range or 10, sbq.prevDialogueBranch.continue.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), sbq.prevDialogueBranch.continue.nearUniqueId)
+		if continue and dialogue.result.continue.nearUniqueId ~= nil then
+			local found = checkEntityUniqueId( world.entityQuery( world.entityPosition(player.id()), dialogue.result.continue.range or 10, dialogue.result.continue.queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), dialogue.result.continue.nearUniqueId)
 			for _, id in ipairs(found) do
 				continue = true
 				table.insert(entities, id)
 			end
 		end
 		if continue then
-			sbq.updateDialogueBox({}, sbq.prevDialogueBranch.continue)
+			sbq.updateDialogueBox("continue", sbq.prevDialogueBranch, sbq.dialogueTree)
 		else
-			sbq.updateDialogueBox({}, sbq.prevDialogueBranch.fail)
+			sbq.updateDialogueBox("fail", sbq.prevDialogueBranch, sbq.dialogueTree)
 		end
-	elseif sbq.prevDialogueBranch.jump ~= nil then
-		sbq.updateDialogueBox(sbq.prevDialogueBranch.jump)
-	elseif sbq.prevDialogueBranch.options ~= nil then
-		for i, option in ipairs(sbq.prevDialogueBranch.options) do
-			local action = {option[1]}
-			local continue = true
-			local entities = {}
-			if continue and (type(option[2].checkScript) == "string") and (type(optionCheckScripts[option[2].checkScript])=="function") then
-				continue = optionCheckScripts[option[2].checkScript](sbq.settings, table.unpack(option[2].checkScriptArgs or {}))
-			end
-			if continue and (type(option[2].check) == "table") then
-				continue = sbq.checkSettings(option[2].check, sbq.settings)
-			end
-			if continue and (type(option[2].checkPlayer) == "table") then
-				continue = sbq.checkSettings(option[2].checkPlayer, sb.jsonMerge(sb.jsonMerge(root.assetJson("/sbqGeneral.config:globalSettings"),root.assetJson("/sbqGeneral.config:defaultPreyEnabled.player")),sb.jsonMerge((player.getProperty("sbqSettings") or {}).global or {}, status.statusProperty("sbqPreyEnabled") or {})))
-			end
-			if continue and option[2].checkPlayerLikesKinks ~= nil then
-				local settings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/sbqGeneral.config:globalSettings"),
-					root.assetJson("/sbqGeneral.config:defaultPreyEnabled.player")),
-					sb.jsonMerge((player.getProperty("sbqSettings") or {}).global or {}, status.statusProperty("sbqPreyEnabled") or {}))
-				for i, kink in ipairs(option[2].checkPlayerLikesKinks) do
-					if not (settings[kink] or settings[kink.."Pred"]) then
-						continue = false break
-					end
-				end
-			end
-			if continue and option[2].nearEntitiesNamed ~= nil then
-				continue = false
-				local found = checkEntityName( world.entityQuery( world.entityPosition(player.id()), option[2].range or 10, option[2].queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), option[2].nearEntitiesNamed)
-				for _, id in ipairs(found) do
-					continue = true
-					table.insert(entities, id)
-				end
-			end
-			if continue and option[2].nearUniqueId ~= nil then
-				local found = checkEntityUniqueId( world.entityQuery( world.entityPosition(player.id()), option[2].range or 10, option[2].queryArgs or {includedTypes = {"object", "npc", "vehicle", "monster"}}), option[2].nearUniqueId)
-				for _, id in ipairs(found) do
-					continue = true
-					table.insert(entities, id)
-				end
-			end
-			if continue and ((option[2].voreType == nil) or ( sbq.checkVoreTypeActive(option[2].voreType) ~= "hidden" )) then
-				if option[2].dialogue ~= nil or option[2].randomDialogue ~= nil or option[2].next ~= nil then
-					action[2] = function ()
-						for _, entity in ipairs(entities) do
-							world.sendEntityMessage( entity, "sbqSetInteracted", player.id())
-						end
-						finished = false
-						sbq.updateDialogueBox( {}, option[2] )
-					end
-				elseif option[2].jump ~= nil then
-					action[2] = function()
-						finished = false
-						sbq.updateDialogueBox(option[2].jump)
-					end
-				elseif type(option[2].callScript) == "string" and type(dialogueBoxScripts[option[2].callScript]) == "function" then
-					action[2] = function()
-						finished = false
-						local dialogueTree = dialogueBoxScripts[option[2].callScript](option[2], sbq.settings, "callScript", player.id(), table.unpack(option[2].scriptArgs or {}))
-						if dialogueTree then
-							sbq.updateDialogueBox({}, dialogueTree)
-						end
-					end
-				end
-				table.insert(contextMenu, action)
-			end
-		end
-	elseif type(sbq.dialogueTreeReturn) == "table" then -- if nothing else above was triggered, theres nothing to continue to, so might as well jump to a return point if we have one
-		sbq.updateDialogueBox(sbq.dialogueTreeReturn)
+	elseif dialogue.result.jump ~= nil then
+		sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
+	elseif type(sbq.dialogueTreeReturn) == "string" then -- if nothing else above was triggered, theres nothing to continue to, so might as well jump to a return point if we have one
+		sbq.updateDialogueBox(sbq.dialogueTreeReturn, sbq.prevDialogueBranch, sbq.dialogueTree)
 	end
 	if #contextMenu > 0 then
-		metagui.dropDownMenu(contextMenu, sbq.prevDialogueBranch.optionsColumns or 2, sbq.prevDialogueBranch.optionsW, sbq.prevDialogueBranch.optionsH, sbq.prevDialogueBranch.optionsS, sbq.prevDialogueBranch.optionsAlign)
+		metagui.dropDownMenu(contextMenu, dialogue.result.optionsColumns or 2, dialogue.result.optionsW, dialogue.result.optionsH, dialogue.result.optionsS, dialogue.result.optionsAlign)
 	end
 end
 

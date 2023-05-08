@@ -776,10 +776,11 @@ end
 
 
 function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree, appendName)
+	return false
+
 	settings.race = npc.species()
 	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
 	if not dialogueTree then return false end
-	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
 	local randomRolls = {}
 	local randomDialogue = dialogueTree.randomDialogue

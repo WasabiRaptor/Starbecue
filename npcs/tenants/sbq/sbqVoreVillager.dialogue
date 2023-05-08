@@ -1,131 +1,1996 @@
 {
-	"defaultGreeting" : [
-		"Hi, how's it going.", "Hey there!", "Hi", "Hello"
+	"defaultGreeting": [
+		"Hi, how's it going.",
+		"Hey there!",
+		"Hi",
+		"Hello"
 	],
-	"shyGreeting" : [
-		"H-Hi...", "O-oh hi... I didn't see you there.", "Hello...", "Hi..."
+	"shyGreeting": [
+		"H-Hi...",
+		"O-oh hi... I didn't see you there.",
+		"Hello...",
+		"Hi..."
 	],
-	"flirtyGreeting" : [
-		"Hey there~", "Hello~", "Hey cutie~", "Hey there hot stuff~"
+	"flirtyGreeting": [
+		"Hey there~",
+		"Hello~",
+		"Hey cutie~",
+		"Hey there hot stuff~"
 	],
-	"defaultRewardsGreeting" : [
-		"It was fun messing around!\nHave some stuff.",
-		{"check":{"introduced":true},"add":[["That was great <entityname>!\nI hope you like all this!"]]}
+	"defaultRewardsGreeting": [
+		"It was fun messing around!\nHave some stuff."
 	],
-	"shyRewardsGreeting" : [
-		"I-I really liked what we did so uhm... have this.",
-		{"check":{"introduced":true},"add":[["A-ah <keysmash> <entityname>!\nI-I got you some stuff... I hope you like it."]]}
+	"defaultRewardsGreetingIntroduced": [
+		"That was great <entityname>!\nI hope you like all this!"
 	],
-	"flirtyRewardsGreeting" : [
-		"You did really well, and of course, you deserve a reward for that~",
-		{"check":{"introduced":true},"add":[["Hehe, <entityname>~\nThis is for you~"]]}
+	"shyRewardsGreeting": [
+		"I-I really liked what we did so uhm... have this."
 	],
-
-	"defaultRequestOralVoreBefore" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ],
-	"defaultRequestOralVoreAfter" : [ "Mmmmmmm... good.", "Tasty.", "Nice and filling.", "Not too bad." ],
-	"defaultUnpromptedOralVoreBefore" : [ "I think you'll fill me up.", "I just need a bite to eat.", "You seem like you'd make a good meal.", "My belly's been grumbling..." ],
-
-	"hungryRequestOralVoreBefore" : [ "Didn't know the food here came to you!", "Oh yes, I'm famished.", "Free food? Why of course!" ],
-	"hungryRequestOralVoreAfter" : [ "Oh yeah, that hit the spot.", "Mmmmmh, nothing like a good meal.", "Urrrhp!" ],
-	"hungryUnpromptedOralVoreBefore" : [ "I'm famished, come here.", "Sorry but... Not sorry.", "Mind helping me out? I'm starved.", "Food shouldn't be walking around, let me fix that." ],
-
-	"defaultNPCRequestOralVore" : [{"percentage" : "food", "add" : [
-		[ // 0% - 25%
-			"I'm so hungry, I need you in my belly!"
-		],
-		[ // 25% - 50%
-			"Mmmmm hungry, can I eat you?"
-		],
-		[ // 50% - 75%
-			"I could use a meal, would you want to be it?"
-		],
-		[ // 75% - 100%
-			"I'm a bit peckish, can I use you to top off?"
+	"shyRewardsGreetingIntroduced": [
+		"A-ah <keysmash> <entityname>!\nI-I got you some stuff... I hope you like it."
+	],
+	"flirtyRewardsGreeting": [
+		"You did really well, and of course, you deserve a reward for that~"
+	],
+	"flirtyRewardsGreetingIntroduced": [
+		"Hehe, <entityname>~\nThis is for you~"
+	],
+	"defaultRequestOralVoreBefore": [
+		"You want me to eat you?",
+		"Alright, sure.",
+		"Yeah ok.",
+		"Sounds good."
+	],
+	"defaultRequestOralVoreAfter": [
+		"Mmmmmmm... good.",
+		"Tasty.",
+		"Nice and filling.",
+		"Not too bad."
+	],
+	"defaultUnpromptedOralVoreBefore": [
+		"I think you'll fill me up.",
+		"I just need a bite to eat.",
+		"You seem like you'd make a good meal.",
+		"My belly's been grumbling..."
+	],
+	"hungryRequestOralVoreBefore": [
+		"Didn't know the food here came to you!",
+		"Oh yes, I'm famished.",
+		"Free food? Why of course!"
+	],
+	"hungryRequestOralVoreAfter": [
+		"Oh yeah, that hit the spot.",
+		"Mmmmmh, nothing like a good meal.",
+		"Urrrhp!"
+	],
+	"hungryUnpromptedOralVoreBefore": [
+		"I'm famished, come here.",
+		"Sorry but... Not sorry.",
+		"Mind helping me out? I'm starved.",
+		"Food shouldn't be walking around, let me fix that."
+	],
+	"defaultNPCRequestOralVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm so hungry, I need you in my belly!"
+			],
+			[ // 25% - 50%
+				"Mmmmm hungry, can I eat you?"
+			],
+			[ // 50% - 75%
+				"I could use a meal, would you want to be it?"
+			],
+			[ // 75% - 100%
+				"I'm a bit peckish, can I use you to top off?"
+			]
 		]
-	]}],
-	"defaultNPCDeniedOralVore" : [{"percentage" : "food", "add" : [
-		[ // 0% - 25%
-			"Oh... I'll find someone else..."
-		],
-		[ // 25% - 50%
-			"I'll just find someone else then."
-		],
-		[ // 50% - 75%
-			"Thats alright."
-		],
-		[ // 75% - 100%
-			"That's alright."
+	},
+	"defaultNPCDeniedOralVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Oh... I'll find someone else..."
+			],
+			[ // 25% - 50%
+				"I'll just find someone else then."
+			],
+			[ // 50% - 75%
+				"Thats alright."
+			],
+			[ // 75% - 100%
+				"That's alright."
+			]
 		]
-	]}],
-	"defaultNPCGotConsentOralVoreBefore" : [{"percentage" : "food", "add" : [
-		[ // 0% - 25%
-			"Oh thank you! I thought I'd starve!"
-		],
-		[ // 25% - 50%
-			"Mmmmm hungry, can I eat you?"
-		],
-		[ // 50% - 75%
-			"I could use a meal, would you want to be it?"
-		],
-		[ // 75% - 100%
-			"I'm a bit peckish, can I use you to top off?"
+	},
+	"defaultNPCGotConsentOralVoreBefore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Oh thank you! I thought I'd starve!"
+			],
+			[ // 25% - 50%
+				"Mmmmm hungry, can I eat you?"
+			],
+			[ // 50% - 75%
+				"I could use a meal, would you want to be it?"
+			],
+			[ // 75% - 100%
+				"I'm a bit peckish, can I use you to top off?"
+			]
 		]
-	]}],
-	"defaultNPCIgnoreConsentOralVoreBefore" : [
+	},
+	"defaultNPCIgnoreConsentOralVoreBefore": [
 		"Well I'm not going to take \"No\" for an answer."
 	],
-	"defaultNotFeelingIt" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ],
-	"hungryNotFeelingIt" : [ "I'm not that kind of hungry right now.", "I'm not sure you'd fill me." ],
-
-	"defaultFull" : [ "I'm a bit too full...", "My body can't stretch any further...", "I've been filled too much already...", "I would... but I'm too full..." ],
-	"hungryFull" : [ "I wish I could but...\nI'm already too full.", "Can't fit any more..." ],
-
-	"defaultBellyFull" : [ "I'm a bit too full...", "My belly can't stretch any further...", "I've eaten too much already...", "I would... but I'm too full..." ],
-	"digestBellyFull" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ],
-	"hungryDefaultBellyFull" : [ "I wish I could but- Bwuuurph!\n...too full...", "I've already had my fill." ],
-	"hungryDigestBellyFull" : [ "Give it a few minutes.\nThen we'll see if I'm still hungry.", "Bwuuuurp!\nSoon...", "Check in when this meal's finished." ],
-
-	"defaultTooBig" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ],
-	"hungryTooBig" : [ "That's too big even for me!", "I may be hungry but...\nWow, you're way too big." ],
-
-	"friendlyRequestOralVoreBefore" : [ "Oh, of course!", "I'm sure you'll fill me just right." ],
-	"friendlyRequestOralVoreAfter" : [ "That was good...", "You taste SO good!" ],
-	"friendlyUnpromptedOralVoreBefore" : [ "Sorry about this!", "Don't worry, I won't hurt you." ],
-	"friendlyNotFeelingIt" : [ "Sorry, I'm not feeling it right now.", "I'm not hungry, maybe later though?" ],
-	"friendlyDefaultFull" : [ "Oh sorry, I've already got a pal with me.", "Sorry, I'm already full.\nI'm sure I'll be free soon though!" ],
-	"friendlyDigestFull" : [ "Can you give me a few minutes?\nI need to tuck a friend away first.", "Gotta tuck this cutie onto my hips.\nThen you can be next." ],
-	"frientlyFull" : [ "Oh sorry, I've already got a pal with me.", "Sorry, I'm already full.\nI'm sure I'll be free soon though!" ],
-	"friendlyTooBig" : [ "Oh wow, you're big!", "I couldn't even hope to fit you!" ],
-
-	"flirtyRequestOralVoreBefore" : [ "Hehe, sure I'll eat you~", "You want to get in my belly~?", "I've seen you eyeing my belly up... Get in~", "A cute morsel like you, of course~?", "I can't wait to eat a scrumptious snack like you~" ],
-	"flirtyRequestOralVoreAfter" : [ "Mmm~ get comfortable in there~", "You better enjoy yourself~", "Such a preything~", "Maybe I'll keep you as a belly pet~" ],
-	"flirtyUnpromptedOralVoreBefore" : [ "Mmmm~ you look like a tasty meal~", "You're going to get in my belly, and you're gonna like it~", "I wonder how you'd look stretching out my gut~", "Hehe, looks like I'm about to have lunch... and you're on the menu~" ],
-	"flirtyUnpromptedOralVoreAfter" : [ "Mmm~ get comfortable in there~", "You better enjoy yourself~", "Hehe, its like you wanted me to eat you~", "Maybe I'll keep you as a belly pet~" ],
-	"flirtyNotFeelingIt" : [ "Perhaps later sweetie~", "Not now, I've got to watch these hips~", "How about just a taste for now~ *lick*", "You think you're good enough to be my prey? how cute~" ],
-
-	"flirtyDefaultFull" : [ "Too late, but I'm sure you're loving how my belly looks~", "Envious of my prey~?", "Are you imagining yourself squirming in there with the others~?", "You're just gonna keep staring until you can get inside?~" ],
-	"flirtyDigestFull" : [ "Just let me add the last prey to my hips first~", "Hehe, eagerly waiting to be pudge, aren't you~?", "Gotta gurgle up some space first~", "Heh, you can't wait to be melting down inside me~" ],
-	"flirtyTooBig" : [ "You're a bit too big sweetie~", "How cute~ you know you're too big to eat right?", "You just want to see me stretched out too much don't you~?", "If you were a bit smaller, I'd snap you up in an instant~" ],
-
-	"shyRequestOralVoreBefore" : [ "O-oh... really? I guess I'll try", "Are you sure...?", "Uhm... you're asking... me?", "R-right... g-get in my belly then... did I say that right?" ],
-	"shyRequestOralVoreAfter" : [ "Ah... w-wow you're really in there...", "I-I didn't think you were serious...", "Mmmm... is it actually good in there...?", "N-now you're where you belong... did I say it right?" ],
-	"shyUmpromptedOralVoreBefore" : [ "Uhm... e-excuse me... I-", "Hey... uhm... funny thing... I-", "Do you... uhm... do you mind if I-", "Hi... hey... hi... hi... hi-" ],
-	"shyUmpromptedOralVoreAfter" : [ "S-sorry I couldn't control myself!", "Th-this is fine right?", "A-ahhh sorry I just panicked!" ],
-	"shyNotFeelingIt" : [ "Uhm... I uhm... uhm...", "Y-you really t-think I can be a pred?", "M-me? I can't...", ["*Incomprehensible Noises*", "<keysmash>"] ],
-	"shyDefaultFull" : [ "O-oh uhm... uh... I don't think I can eat more...", ["*Flustered Noise* t-too many others wanted in already!", "<keysmash> t-too many others wanted in already!"], ["*Incomprehensible Noises*", "aaaaaaa<keysmash><keysmash>"], "I-I'm too full!" ],
-	"shyDigestFull" : [ "A-are y-you sure? m-my prey is melting in there...", "Uhm... a-after my last meal is more manageable...", "Y-you want to be p-pudge too?", "I-Uhm... uhm... uhm... s-soon yeah... soon..." ],
-	"shyOtherFull" : [ "O-oh uhm... uh... I don't think I can fit more...", ["*Flustered Noise* t-too many others wanted in already!", "<keysmash> t-too many others wanted in already!"], ["*Incomprehensible Noises*", "aaaaaaa<keysmash><keysmash>"], "I-I'm too full!" ],
-	"shyTooBig" : [ "A-ah y-you w-wouldn't fit if I tried", "I-Oh w-wow y-you really think I could do t-that?", ["Thats... you're too... *Incomprehensible Noises*", "Thats... you're too... <keysmash>"], "T-thats crazy..." ],
-
-	"shyHungryRequestOralVoreBefore" : [ "O-oh gosh, you would do that?", "Y-you...\nReally?", "You... don't have to but...\nOkay...", "F-for me..?", "You really think...\nI g-gues I could try..." ],
-	"shyHungryRequestOralVoreAfter" : [ "Oh g-gosh...\nThat really... H-hit the spot...", "Y-you really... \n<keysmash>", "You didn't have to..." ],
-	"shyHungryUnpromptedOralVoreBefore" : [ "Would you, uhm-\nMind if I..?\n...Yeah...", "Hey, uhm... I'm-\nYeah I'm... H-hungry.\nC-could you... yeah...", "Uuuhm....\nS-Sorry about this!" ],
-	"shyHungryUmpromptedOralVoreAfter" : [ "I was just... too hungry!", "You're okay with this. Right?\nRight..?", "P-please don't squirm too much..." ],
-	"shyHungryNotFeelingIt" : [ "I couldn't...", "W-wow, okay, uhm...\nI'm not... that hungry?", "<keysmash>" ],
-	"shyHungryFull" : [ "<keysmash>\nI already ate enough...", "ohgoshohgoshohgosh-", "Too...\nUuuurhp!\nFull...", "Bwuuuuurph!\nI- uh... <keysmash>" ],
-	"shyHungryDigestFull" : [ "T-too... Soon...", "A-already..?", "<keysmash>", "The last ones are still...\nM-Melting...", "I-I don't think you'd wa-AUUUUURP-\n...To join them...", "I-I'm already going to be fat..." ],
-	"shyHungryOtherFull" : [ "<keysmash>\nI'm already full enough...", "ohgoshohgoshohgosh-", "Too... Full...", "I- uh... <keysmash>" ],
-	"shyHungryTooBig" : [ "A-ah y-you w-wouldn't fit if I tried", "I-Oh w-wow y-you really think I could do t-that?", ["Thats... you're too... *Incomprehensible Noises*", "Thats... you're too... <keysmash>"], "T-thats crazy..." ],
-
-	"defaultNeedsInfusion" : [ "I'd want someone merged in there"]
+	"defaultNotFeelingIt": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
+	],
+	"hungryNotFeelingIt": [
+		"I'm not that kind of hungry right now.",
+		"I'm not sure you'd fill me."
+	],
+	"defaultFull": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
+	"hungryFull": [
+		"I wish I could but...\nI'm already too full.",
+		"Can't fit any more..."
+	],
+	"defaultBellyFull": [
+		"I'm a bit too full...",
+		"My belly can't stretch any further...",
+		"I've eaten too much already...",
+		"I would... but I'm too full..."
+	],
+	"digestBellyFull": [
+		"Maybe after I melt down the last meal",
+		"Urrrrp!\n Won't be too long until I can fit you.",
+		"I've eaten too much already... but I'll probably have room soon.",
+		"I'll have to finish processing this meal first."
+	],
+	"hungryDefaultBellyFull": [
+		"I wish I could but- Bwuuurph!\n...too full...",
+		"I've already had my fill."
+	],
+	"hungryDigestBellyFull": [
+		"Give it a few minutes.\nThen we'll see if I'm still hungry.",
+		"Bwuuuurp!\nSoon...",
+		"Check in when this meal's finished."
+	],
+	"defaultTooBig": [
+		"I think you're a bit too big to fit in there...",
+		"I don't think I'd be able to get you in...",
+		"If only you were a bit smaller...",
+		"Thats a bit too much to ask of me..."
+	],
+	"hungryTooBig": [
+		"That's too big even for me!",
+		"I may be hungry but...\nWow, you're way too big."
+	],
+	"friendlyRequestOralVoreBefore": [
+		"Oh, of course!",
+		"I'm sure you'll fill me just right."
+	],
+	"friendlyRequestOralVoreAfter": [
+		"That was good...",
+		"You taste SO good!"
+	],
+	"friendlyUnpromptedOralVoreBefore": [
+		"Sorry about this!",
+		"Don't worry, I won't hurt you."
+	],
+	"friendlyNotFeelingIt": [
+		"Sorry, I'm not feeling it right now.",
+		"I'm not hungry, maybe later though?"
+	],
+	"friendlyDefaultFull": [
+		"Oh sorry, I've already got a pal with me.",
+		"Sorry, I'm already full.\nI'm sure I'll be free soon though!"
+	],
+	"friendlyDigestFull": [
+		"Can you give me a few minutes?\nI need to tuck a friend away first.",
+		"Gotta tuck this cutie onto my hips.\nThen you can be next."
+	],
+	"frientlyFull": [
+		"Oh sorry, I've already got a pal with me.",
+		"Sorry, I'm already full.\nI'm sure I'll be free soon though!"
+	],
+	"friendlyTooBig": [
+		"Oh wow, you're big!",
+		"I couldn't even hope to fit you!"
+	],
+	"flirtyRequestOralVoreBefore": [
+		"Hehe, sure I'll eat you~",
+		"You want to get in my belly~?",
+		"I've seen you eyeing my belly up... Get in~",
+		"A cute morsel like you, of course~?",
+		"I can't wait to eat a scrumptious snack like you~"
+	],
+	"flirtyRequestOralVoreAfter": [
+		"Mmm~ get comfortable in there~",
+		"You better enjoy yourself~",
+		"Such a preything~",
+		"Maybe I'll keep you as a belly pet~"
+	],
+	"flirtyUnpromptedOralVoreBefore": [
+		"Mmmm~ you look like a tasty meal~",
+		"You're going to get in my belly, and you're gonna like it~",
+		"I wonder how you'd look stretching out my gut~",
+		"Hehe, looks like I'm about to have lunch... and you're on the menu~"
+	],
+	"flirtyUnpromptedOralVoreAfter": [
+		"Mmm~ get comfortable in there~",
+		"You better enjoy yourself~",
+		"Hehe, its like you wanted me to eat you~",
+		"Maybe I'll keep you as a belly pet~"
+	],
+	"flirtyNotFeelingIt": [
+		"Perhaps later sweetie~",
+		"Not now, I've got to watch these hips~",
+		"How about just a taste for now~ *lick*",
+		"You think you're good enough to be my prey? how cute~"
+	],
+	"flirtyDefaultFull": [
+		"Too late, but I'm sure you're loving how my belly looks~",
+		"Envious of my prey~?",
+		"Are you imagining yourself squirming in there with the others~?",
+		"You're just gonna keep staring until you can get inside?~"
+	],
+	"flirtyDigestFull": [
+		"Just let me add the last prey to my hips first~",
+		"Hehe, eagerly waiting to be pudge, aren't you~?",
+		"Gotta gurgle up some space first~",
+		"Heh, you can't wait to be melting down inside me~"
+	],
+	"flirtyTooBig": [
+		"You're a bit too big sweetie~",
+		"How cute~ you know you're too big to eat right?",
+		"You just want to see me stretched out too much don't you~?",
+		"If you were a bit smaller, I'd snap you up in an instant~"
+	],
+	"shyRequestOralVoreBefore": [
+		"O-oh... really? I guess I'll try",
+		"Are you sure...?",
+		"Uhm... you're asking... me?",
+		"R-right... g-get in my belly then... did I say that right?"
+	],
+	"shyRequestOralVoreAfter": [
+		"Ah... w-wow you're really in there...",
+		"I-I didn't think you were serious...",
+		"Mmmm... is it actually good in there...?",
+		"N-now you're where you belong... did I say it right?"
+	],
+	"shyUmpromptedOralVoreBefore": [
+		"Uhm... e-excuse me... I-",
+		"Hey... uhm... funny thing... I-",
+		"Do you... uhm... do you mind if I-",
+		"Hi... hey... hi... hi... hi-"
+	],
+	"shyUmpromptedOralVoreAfter": [
+		"S-sorry I couldn't control myself!",
+		"Th-this is fine right?",
+		"A-ahhh sorry I just panicked!"
+	],
+	"shyNotFeelingIt": [
+		"Uhm... I uhm... uhm...",
+		"Y-you really t-think I can be a pred?",
+		"M-me? I can't...",
+		[
+			"*Incomprehensible Noises*",
+			"<keysmash>"
+		]
+	],
+	"shyDefaultFull": [
+		"O-oh uhm... uh... I don't think I can eat more...",
+		[
+			"*Flustered Noise* t-too many others wanted in already!",
+			"<keysmash> t-too many others wanted in already!"
+		],
+		[
+			"*Incomprehensible Noises*",
+			"aaaaaaa<keysmash><keysmash>"
+		],
+		"I-I'm too full!"
+	],
+	"shyDigestFull": [
+		"A-are y-you sure? m-my prey is melting in there...",
+		"Uhm... a-after my last meal is more manageable...",
+		"Y-you want to be p-pudge too?",
+		"I-Uhm... uhm... uhm... s-soon yeah... soon..."
+	],
+	"shyOtherFull": [
+		"O-oh uhm... uh... I don't think I can fit more...",
+		[
+			"*Flustered Noise* t-too many others wanted in already!",
+			"<keysmash> t-too many others wanted in already!"
+		],
+		[
+			"*Incomprehensible Noises*",
+			"aaaaaaa<keysmash><keysmash>"
+		],
+		"I-I'm too full!"
+	],
+	"shyTooBig": [
+		"A-ah y-you w-wouldn't fit if I tried",
+		"I-Oh w-wow y-you really think I could do t-that?",
+		[
+			"Thats... you're too... *Incomprehensible Noises*",
+			"Thats... you're too... <keysmash>"
+		],
+		"T-thats crazy..."
+	],
+	"shyHungryRequestOralVoreBefore": [
+		"O-oh gosh, you would do that?",
+		"Y-you...\nReally?",
+		"You... don't have to but...\nOkay...",
+		"F-for me..?",
+		"You really think...\nI g-gues I could try..."
+	],
+	"shyHungryRequestOralVoreAfter": [
+		"Oh g-gosh...\nThat really... H-hit the spot...",
+		"Y-you really... \n<keysmash>",
+		"You didn't have to..."
+	],
+	"shyHungryUnpromptedOralVoreBefore": [
+		"Would you, uhm-\nMind if I..?\n...Yeah...",
+		"Hey, uhm... I'm-\nYeah I'm... H-hungry.\nC-could you... yeah...",
+		"Uuuhm....\nS-Sorry about this!"
+	],
+	"shyHungryUmpromptedOralVoreAfter": [
+		"I was just... too hungry!",
+		"You're okay with this. Right?\nRight..?",
+		"P-please don't squirm too much..."
+	],
+	"shyHungryNotFeelingIt": [
+		"I couldn't...",
+		"W-wow, okay, uhm...\nI'm not... that hungry?",
+		"<keysmash>"
+	],
+	"shyHungryFull": [
+		"<keysmash>\nI already ate enough...",
+		"ohgoshohgoshohgosh-",
+		"Too...\nUuuurhp!\nFull...",
+		"Bwuuuuurph!\nI- uh... <keysmash>"
+	],
+	"shyHungryDigestFull": [
+		"T-too... Soon...",
+		"A-already..?",
+		"<keysmash>",
+		"The last ones are still...\nM-Melting...",
+		"I-I don't think you'd wa-AUUUUURP-\n...To join them...",
+		"I-I'm already going to be fat..."
+	],
+	"shyHungryOtherFull": [
+		"<keysmash>\nI'm already full enough...",
+		"ohgoshohgoshohgosh-",
+		"Too... Full...",
+		"I- uh... <keysmash>"
+	],
+	"shyHungryTooBig": [
+		"A-ah y-you w-wouldn't fit if I tried",
+		"I-Oh w-wow y-you really think I could do t-that?",
+		[
+			"Thats... you're too... *Incomprehensible Noises*",
+			"Thats... you're too... <keysmash>"
+		],
+		"T-thats crazy..."
+	],
+	"defaultRequestAnalVore": [
+		"You want to go up my butt?",
+		"You know thats the wrong way right?",
+		"That's going to be a tight fit.",
+		"Thats an interesting request."
+	],
+	"defaultNeedsInfusion": [
+		"I'd want someone merged in there"
+	],
+	// anal vore
+	"defaultRequestAnalVoreBefore": [
+		"You want to go up my butt?",
+		"You know thats the wrong way right?",
+		"That's going to be a tight fit.",
+		"Thats an interesting request."
+	],
+	"defaultRequestAnalVoreAfter": [
+		"Ahhh~ Hope I'm not squeezing too much.",
+		"Mmm~ This actually feels pretty good.",
+		"Heh~ it's almost like you're a living dildo.",
+		"Oooh~ That squirming is rather nice."
+	],
+	"defaultUnpromptedAnalVoreBefore": [
+		"Hey, I want to try something.",
+		"Hey... what if I shoved you up my ass?",
+		"For some reason... I keep imagining you as a dildo.",
+		"You know, theres a reason I'm not wearing pants."
+	],
+	"defaultUnpromptedAnalVoreAfter": [
+		"Ahhh~ hope I'm not squeezing too much.",
+		"Mmm~ That actually feels pretty good.",
+		"Heh~ it's almost like you're a living dildo.",
+		"Oooh~ That squirming is rather nice."
+	],
+	"flirtyRequestAnalVoreBefore": [
+		"Hehe, you like my ass?~",
+		"You've been staring at my rear all day haven't you~",
+		"Of course you'd want to be my little toy~",
+		"Can't help but want to smush your face into me hmm~?"
+	],
+	"flirtyRequestAnalVoreAfter": [
+		"Ahh~ So why don't you take a closer look~",
+		"Mmm~ I'll make sure to clench extra tight, just for you~",
+		"Heh~ You better squirm for me, toy~",
+		"Oooh~ I think you make the perfect toy~"
+	],
+	"flirtyUnpromtedAnalVoreBefore": [
+		"Hehe, there's my toy~",
+		"You look like you can fit into tight places~",
+		"You're exactly what I want right now~",
+		"I'm gonna shove you up my ass, and you're gonna like it~"
+	],
+	"flirtyUnprompedAnalVoreAfter": [
+		"Ahh~ Right where you belong~",
+		"Mmm~ My perfect squirmy toy~",
+		"Hehe~ You really do make an excellent dildo~",
+		"Oohh~ You're squirming so much~"
+	],
+	"shyRequestAnalVoreBefore": [
+		"U-uhm y-you want... t-to go up my...?",
+		"U-uhm y-you know thats... the wrong way... r-right?",
+		[
+			"*Flustered Noises*",
+			"<keysmash>"
+		],
+		"A-are y-you sure...?"
+	],
+	"shyRequestAnalVoreAfter": [
+		"Ahhh~ H-hope I'm not squeezing too much...",
+		[
+			"Mmm~ This actually... feels... <keysmash>",
+			"Mmm~ This actually... feels... *Pleasured Noises*"
+		],
+		[
+			"*Pleasured Noises*",
+			"<keysmash>"
+		],
+		"Oooh~ I-I can f-feel you squirming~"
+	],
+	"shyUnprompedAnalVoreBefore": [
+		"Uhm... e-excuse me... I-",
+		"Hey... uhm... funny thing... I-",
+		"Do you... uhm... do you mind if I-",
+		"Hi... hey... hi... hi... hi-"
+	],
+	"shyUnpromptedAnalVoreAfter": [
+		"S-sorry I couldn't control myself!",
+		"I was just... too excited!",
+		"T-this is fine right?",
+		"A-ahhh sorry I just panicked!"
+	],
+	// navel vore
+	"defaultRequestNavelVoreBefore": [
+		"You want to go in through my navel?",
+		"That isn't the usual way to do things.",
+		"I can try that.",
+		"Thats my belly button right?"
+	],
+	"defaultRequestNavelVoreAfter": [
+		"Mmmm~ that was a tight squeeze.",
+		"You really like bellies don't you.",
+		"Not bothering with anything else, straight to the belly.",
+		"Oooh~ Thats a stretch."
+	],
+	"defaultUnpromptedNavelVoreBefore": [
+		"This isn't the usual way to do things.",
+		"I think we'll just skip right to your destination.",
+		"Gonna do a bit more than just squish you against my belly here...",
+		"Did you know theres more than just two ways into a belly?"
+	],
+	"defaultUnpromptedNavelVoreAfter": [
+		"Mmmm~ that was a tight squeeze.",
+		"Right into my belly.",
+		"Not bothering with anything else, straight to the belly.",
+		"Oooh~ Thats a stretch."
+	],
+	// cock vore
+	"defaultRequestCockVoreBefore": [
+		"Hah, you're horny.",
+		"You want to get squeezed into my dick?",
+		"You know things aren't supposed to go in there right?",
+		"Thats going to be a real tight fit."
+	],
+	"defaultRequestCockVoreAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me all excited~",
+		"Ffff~ Now I'm all hard~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"defaultUnpromptedCockVoreBefore": [
+		"Gonna stick you somewhere things aren't supposed to go~",
+		"Mmm~ hey, want to try something?",
+		"I got a bit excited thinking about this, so now I have to do it~",
+		"I'm gonna need you to pleasure me, but not the normal way~"
+	],
+	"defaultUnpromptedCockVoreAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me even more excited~",
+		"Ffff~ Now I'm all hard~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"defaultCockVoreNotFeelingIt": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
+	],
+	"defaultCockVoreFull": [
+		"Already got someone plugging my shaft~",
+		"Mmm maybe if someone squirmed a little further in, I might have space for you.",
+		"Hehe, I would if someone wasn't already squeezed in there~",
+		"Maybe after I cum heh~"
+	],
+	"defaultCockVoreTooBig": [
+		"I think you're a bit too big to fit in there...",
+		"I don't think I'd be able to get you in...",
+		"If only you were a bit smaller...",
+		"Thats a bit too much to ask of me..."
+	],
+	"defaultCockVoreNeedsInfusion": [
+		"I'd need someone to turn into my dick first...",
+		"Someone would need to be my cock...",
+		"I'd have to turn someone into my dick first..."
+	],
+	"flirtyRequestCockVoreBefore": [
+		"Hehe, horny little plaything~",
+		"Hehe, look at how excited you are to get shoved into my dick~",
+		"Hey look, you got me hard by just asking~",
+		"So you want to get squeezed all around by my nice hard shaft~?"
+	],
+	"flirtyRequestCockVoreAfter": [
+		"Aahh~ right where you belong you horny little thing~",
+		"Mmmm~ Who knows, you might even get me to cum~",
+		"Heheh~ I can feel how excited you are~",
+		"Heh~ makes me want to spend some time by myself and squeeze you even tighter~"
+	],
+	"flirtyUnpromptedCockVoreBefore": [
+		"Gonna stick you somewhere things aren't supposed to go~",
+		"Dicks are meant for shoving into other people... but I like to do the opposite~",
+		"You're going to feel real good wriggling inside me~",
+		"Don't think I haven't caught you staring you perv~ So heres your \"punishment\"~"
+	],
+	"flirtyCockVoreNotFeelingIt": [
+		"Perhaps later sweetie~",
+		"Not now, I can't just be slutting out for everyone~",
+		"I'll let you give me a lick, but nothing more~",
+		"You think you're good enough to be my toy? how cute~"
+	],
+	"flirtyCockVoreFull": [
+		"I'm plugged up down there already~",
+		"Envious of the one I've got in there~?",
+		"You really want to horny little plaything don't you~?",
+		"Heh, get in line, everyone wants to have fun with me~"
+	],
+	"flirtyCockVoreTooBig": [
+		"You're a bit too big sweetie~",
+		"How cute~ you know you're too big to fit right?",
+		"You just want to see my huge stretched out dong don't you~?",
+		"If you were a bit smaller, I'd make you my personal toy~"
+	],
+	"shyRequestCockVoreBefore": [
+		[
+			"O-oh... y-you want to g-get into my... *Flustered Noises*",
+			"O-oh... y-you want to g-get into my... <keysmash>"
+		],
+		"Are you sure...?",
+		"Uhm... you're asking... me?",
+		"R-right... g-get in my dick then~ ...did I say that right?"
+	],
+	"shyRequestCockVoreAfter": [
+		"Ahhh~ w-wow you're really in there~",
+		"Ooohhh~ I-I didn't think you were serious~",
+		"Mmmm~ Is it as good for you as it is for me~",
+		"Ffffff~ N-now you're where you belong~ ...did I say it right?"
+	],
+	"shyUnpromptedCockVoreBefore": [
+		"Uhm... e-excuse me... I-",
+		"Hey... uhm... funny thing... I-",
+		"Do you... uhm... do you mind if I-",
+		"Hi... hey... hi... hi... hi-"
+	],
+	"shyUnpromptedCockVoreAfter": [
+		"Ahhh~ S-sorry I couldn't control myself!",
+		"Ohhh~ I was just... too excited!",
+		"Mmmm~ T-this is fine right?",
+		"A-ahhh sorry I just panicked!"
+	],
+	"shyCockVoreNotFeelingIt": [
+		"Uhm... I uhm... uhm...",
+		"Y-you really t-think I can do that?",
+		"M-me? I can't...",
+		[
+			"*Incomprehensible Noises*",
+			"<keysmash>"
+		]
+	],
+	"shyCockVoreFull": [
+		"S-someone's a-already in~",
+		"A-ahhh~ I-I don't think theres space~",
+		"Ffff~ I would... but I can't fit another~",
+		"I-if they keep squirming I-I might cum~"
+	],
+	"shyCockVoreTooBig": [
+		"A-ah y-you w-wouldn't fit if I tried",
+		"I-Oh w-wow y-you really think I could do t-that?",
+		[
+			"Thats... you're too... *Incomprehensible Noises*",
+			"Thats... you're too... <keysmash>"
+		],
+		"T-thats crazy..."
+	],
+	"shyCockVoreNeedsInfusion": [
+		"I'd need to get a dick somehow...",
+		"Is t-there any way for me to get one of those...?",
+		"I-I don't actually have o-one of those..."
+	],
+	//unbirth
+	"defaultRequestUnbirthBefore": [
+		"Hah, you're horny.",
+		"You want to get squeezed into my pussy?",
+		"You know thats where dicks are supposed to go right?",
+		"Thats going to be a real tight fit."
+	],
+	"defaultRequestUnbirthAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me excited~",
+		"Ffff~ Now I'm all wet~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"defaultUnpromptedUnbirthBefore": [
+		"Gonna stick you somewhere things aren't supposed to go~",
+		"Mmm~ hey, want to try something?",
+		"I got a bit excited thinking about this, so now I have to do it~",
+		"I'm gonna need you to pleasure me, but not the normal way~"
+	],
+	"defaultUnpromptedUnbirthAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me even more excited~",
+		"Ffff~ Now I'm all wet~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"defaultUnbirthFull": [
+		"My womb is already occupied~",
+		"Maybe after I'm done carrying my current occupants around~",
+		"Hehe, I would if I wasn't already full down there~",
+		"Maybe after I climax heh~"
+	],
+	"defaultUnbirthNeedsInfusion": [
+		"I'd need someone to turn into my pussy first...",
+		"Someone would need to be my pussy...",
+		"I'd have to turn someone into my pussy first..."
+	],
+	"flirtyRequestUnbirthBefore": [
+		"Hehe, horny little plaything~",
+		"Hehe, look at how excited you are to get shoved into my pussy~",
+		"Hey look, you got me wet by just asking~",
+		"So you want to get squeezed all around by my nice soft pussy~?"
+	],
+	"flirtyRequestUnbirthAfter": [
+		"Aahh~ right where you belong you horny little thing~",
+		"Mmmm~ Who knows, you might even get me to climax~",
+		"Heheh~ I can feel how excited you are~",
+		"Heh~ makes me want to spend some time by myself and squeeze you even tighter~"
+	],
+	"flirtyUnpromptedUnbirthBefore": [
+		"Gonna stick you somewhere things aren't supposed to go~",
+		"Pussies are meant for dicks to get shoved inside... but I like to shove in quite a bit more~",
+		"You're going to feel real good wriggling inside me~",
+		"Don't think I haven't caught you staring you perv~ So heres your \"punishment\"~"
+	],
+	"shyRequestUnbirthBefore": [
+		[
+			"O-oh... y-you want to g-get into my... *Flustered Noises*",
+			"O-oh... y-you want to g-get into my... <keysmash>"
+		],
+		"Are you sure...?",
+		"Uhm... you're asking... me?",
+		"R-right... g-get in my womb then~ ...did I say that right?"
+	],
+	"shyRequestUnbirthAfter": [
+		"Ahhh~ w-wow you're really in there~",
+		"Ooohhh~ I-I didn't think you were serious~",
+		"Mmmm~ Is it as good for you as it is for me~",
+		"Ffffff~ N-now you're where you belong~ ...did I say it right?"
+	],
+	"shyUnpromptedUnbirthBefore": [
+		"Uhm... e-excuse me... I-",
+		"Hey... uhm... funny thing... I-",
+		"Do you... uhm... do you mind if I-",
+		"Hi... hey... hi... hi... hi-"
+	],
+	"shyUnpromptedUnbirthAfter": [
+		"Ahhh~ S-sorry I couldn't control myself!",
+		"Ohhh~ I was just... too excited!",
+		"Mmmm~ T-this is fine right?",
+		"A-ahhh sorry I just panicked!"
+	],
+	"shyUnbirthNotFeelingIt": [
+		"Uhm... I uhm... uhm...",
+		"Y-you really t-think I can do that?",
+		"M-me? I can't...",
+		[
+			"*Incomprehensible Noises*",
+			"<keysmash>"
+		]
+	],
+	"shyUnbirthFull": [
+		"S-someone's a-already in~",
+		"A-ahhh~ I-I don't think theres space~",
+		"Ffff~ I would... but I can't fit another~",
+		"I-if they keep squirming I-I might climax~"
+	],
+	"shyUnbirthNeedsInfusion": [
+		"I'd need to get a pussy somehow...",
+		"Is t-there any way for me to get one of those...?",
+		"I-I don't actually have o-one of those..."
+	],
+	// breast vore
+	"defaultRequestBreastVoreBefore": [
+		"Hah, you're horny.",
+		"You want to squirm into one of my boobs?",
+		"Hehe, you want a bit more than just a drink of milk don't you~",
+		"Thats going to be a real tight fit.",
+		"Now to decide which side to put you on..."
+	],
+	"defaultRequestBreastVoreAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me excited~",
+		"Ffff~ hehe now they look even bigger~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"defaultUnpromptedBreastVoreBefore": [
+		"Gonna stick you somewhere things aren't supposed to go~",
+		"Mmm~ hey, want to try something?",
+		"I got a bit excited thinking about this, so now I have to do it~",
+		"I'm gonna need you to pleasure me, but not the normal way~"
+	],
+	"defaultUnpromptedBreastVoreAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me even more excited~",
+		"Ffff~ hehe now they look even bigger~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"defaultBreastVoreFull": [
+		"My boobs are already occupied~",
+		"Maybe after I'm done carrying my current occupants around~",
+		"Hehe, I would if I wasn't already full in there~"
+	],
+	"defaultBreastVoreNeedsInfusion": [
+		"I'd need someone to turn into my boobs first...",
+		"Someone would need to be my boobs...",
+		"I'd have to turn someone into my boobs first..."
+	],
+	"flirtyRequestBreastVoreBefore": [
+		"I knew you wanted in from all the staring~",
+		"You just want to make them bigger, don't you~",
+		"Hehe, you want a bit more than just a drink of milk don't you~",
+		"I'll make you dissapear behind all that softness~",
+		"Now to decide which side to put you on..."
+	],
+	"flirtyRequestBreastVoreAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me excited~",
+		"Ffff~ hehe now they look even bigger~",
+		"A-ahh~ Don't stop squirming~",
+		"Mmm... the best kind of \"implants\"~"
+	],
+	"flirtyUnpromptedBreastVoreBefore": [
+		"I think you'll look better on my chest~",
+		"Mmm~ hey, want to try something?",
+		"I got a bit excited thinking about this, so now I have to do it~",
+		"I gotta have you massaging my tits... from the inside~",
+		"Hey, I need to \"borrow\" you for a bit, got a date tonight~"
+	],
+	"flirtyUnpromptedBreastVoreAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me even more excited~",
+		"Ffff~ hehe now they look even bigger~",
+		"A-ahh~ Don't stop squirming~",
+		"Mmm... the best kind of \"implants\"~"
+	],
+	"shyRequestBreastVoreBefore": [
+		"A-ah... a-are you sure?",
+		"I-I guess that would make them b-bigger...",
+		[
+			"T-thats... <keysmash> y-yes please",
+			"T-thats... *flustered noises* y-yes please"
+		],
+		[
+			"O-oh! a-and you want... mine? *flustered noise*",
+			"O-oh! a-and you want... mine? <keysmash>"
+		],
+		"B-but which side do I put you on..."
+	],
+	"shyRequestBreastVoreAfter": [
+		"A-aahh~ ooooh t-thats really good~",
+		"Mmmm~ You're g-getting me e-excited~",
+		[
+			"Ffff~ n-now they look even b-bigger~ *flustered noises*",
+			"Ffff~ n-now they look even b-bigger~ <keysmash>"
+		],
+		"A-ahh~ Don't stop squirming~"
+	],
+	"shyUnpromptedBreastVoreBefore": [
+		"Uhm... what if I uhm...",
+		"H-hey I want to use you...",
+		"I can't help myself... you're going in my tits",
+		"Ahh... I want to feel you inside my boobs"
+	],
+	"shyBreastVoreNotFeelingIt": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later.",
+		"I, uh, um... <keysmash> notnow!"
+	],
+	"shyBreastVoreFull": [
+		"My boobs are already occupied... s-sorry",
+		"M-maybe after I'm done carrying these ones around...",
+		"O-oh... I would definetly do it if they weren't full.."
+	],
+	"shyBreastVoreNeedsInfusion": [
+		"I'd need to get some boobs somehow...",
+		"Is t-there any way for me to get those...?",
+		"I-I don't actually have those..."
+	],
+	// struggles
+	"defaultStruggle": [
+		"Having a good time in there?",
+		"Hope its comfortable."
+	],
+	"healStruggle": [
+		"Now you're nice and safe.",
+		"Hope you like how it feels in there."
+	],
+	"digestStruggle": [
+		"Time to melt you down into pudge.",
+		"Just be a good meal and melt."
+	],
+	"digestStruggleImmune": [
+		"Why aren't you melting down?",
+		"Doesn't feel like you're melting."
+	],
+	"transformedStruggle": [
+		[
+			"Seems like you're finished.",
+			"I think you're finished changing."
+		]
+	],
+	"transformingStruggle": [
+		[
+			"You'll be a bit different after this is all done.",
+			"These changes should be an improvement."
+		]
+	],
+	"eggedStruggle": [
+		"Now you're trapped in an egg"
+	],
+	"eggifyStruggle": [
+		[
+			"Can you feel that egg forming around you?",
+			"Soon your squirming won't do a thing."
+		]
+	],
+	"transformingStruggleImmune": [
+		[
+			"You don't want to change?",
+			"Come on, don't you want to be different?"
+		]
+	],
+	"wombDigestStruggle": [
+		"You're getting so soft.",
+		"Melt for me!"
+	],
+	"shaftInfusedStruggle": [
+		"Ahhh~ <infusedName> feels so great down there~",
+		"<keysmash> you're gonna make <infusedName> cum~"
+	],
+	"shaftDigestStruggle": [
+		[
+			"Heh, I can feel you sloshing around.",
+			"Seems like you're not quite solid anymore."
+		]
+	],
+	"shaftTransformingStruggle": [
+		[
+			"I can feel you getting goopy in there.",
+			"I can feel you tarting to turn~"
+		]
+	],
+	"ballsDefaultStruggle": [
+		"Having a good time in there?",
+		"Keep squirming.",
+		"It feels so good having you in there~",
+		"Friends are stored in the balls~"
+	],
+	"breastsDefaultStruggle": [
+		"Having a good time in there?",
+		"Hope its comfortable.",
+		"Get yourself a nice milk bath~",
+		"Feel free to take a drink, don't want to start leaking after all~",
+		"hehe, look at how much bigger they are with you in there~"
+	],
+	"breastsDefaultStruggleTop": [
+		"Careful, you're gonna cause me a wardrobe malfunction~",
+		"Whoops, almost bounced my shirt off.",
+		"Things a bit tight behind my top?"
+	],
+	"breastsHealStruggle": [
+		[
+			"Now you're nice and safe.",
+			"Hope you like how it feels in there.",
+			"Just snuggle into the walls~",
+			"Get yourself nice and soaked in my milk~"
+		]
+	],
+	"breastsDigestStruggle": [
+		"Hehe, seems like I'm going to have a nice batch of milk.",
+		"Let all your worries just melt away~",
+		"Mmmmm can't wait to taste whatever flavor you'll make~"
+	],
+	"breastsFlirtyStruggle": [
+		"I hope you're having a good time in there~",
+		"Nice and soft, isn't it~?",
+		"Hffff, feels so good with you in there~",
+		"I love being busty, and it's all thanks to you, dear~"
+	],
+	"breastsFlirtyStruggleTop": [
+		"Ooh, ya wanna be shown off~?",
+		"Tight, isn't it~?"
+	],
+	"breastsFlirtyHealStruggle": [
+		[
+			"All nice and safe~",
+			"Feels nice and soothing, right~?",
+			"Settle on in, it's nice and safe~",
+			"Enjoy your therapeutic milk bath~"
+		]
+	],
+	"breastsFlirtyDigestStruggle": [
+		"You're gonna make a lovely batch of milk, dear~",
+		"Starting to slosh, eh~?",
+		"You're gonna be delicious~"
+	],
+	"breastsShyDefaultStruggle": [
+		"<keysmash>",
+		"Oh g-goodness... uhm!",
+		"Hhhh... they're so b-big with you...!",
+		"If you k-keep wiggling, people are g-gonna see...!"
+	],
+	"breastsShyDefaultStruggleTop": [
+		"<keysmash> Ohno my shirt...!",
+		"Stop, you're g-gonna make my top slip off...!",
+		"Ack you nearly popped out of my b-bra...!"
+	],
+	"breastsShyHealStruggle": [
+		[
+			"Uhm... I hope it feels g-good in there...!",
+			"J-just... relax, alright?  You're s-safe..."
+		]
+	],
+	"breastsShyDigestStruggle": [
+		"Oh g-goodness, I feel so f-full...",
+		"Was th-that... sloshing?  ...<keysmash>",
+		"I'm g-gonna be so leaky...!"
+	],
+	"letoutOralVoreStruggle": [
+		"Ahh... ok you want out.",
+		"Why leave?",
+		"Mmm... fine you can come out.",
+		"I actually liked having you in there..."
+	],
+	"letoutOralVoreStruggleHeal": [
+		"You do know its safer inside me right?",
+		"Are you sure you're ready to come out?",
+		"Maybe you should get back in... heal a little longer.",
+		"You can come back to heal any time."
+	],
+	"letoutOralVoreStruggleDigest": [
+		"Dang it... I was hungry.",
+		"No hard feelings?",
+		"Come on, you were almost done...",
+		"If only you weren't such a fighter..."
+	],
+	"letoutOralVoreStruggleDigestImmune": [
+		"Dang it... I was hungry... and you didn't even melt at all.",
+		"No hard feelings? Its not like my acid even managed to do anything.",
+		"Come on, my acid didn't even do anything to you...",
+		"If only you actually started to melt..."
+	],
+	"letoutOralVoreStruggleSoftDigest": [
+		"Darn it... I was hungry, you were gonna be fine anyway.",
+		"No hard feelings? Its not like I was going to go all the way...",
+		"Come on, you were almost done...",
+		"If only you weren't such a fighter..."
+	],
+	"letoutStruggleTransformed": [
+		"Now you can see the new you.",
+		"You might look a bit different now."
+	],
+	"letoutStruggleTransforming": [
+		"Didn't want to become something like me?",
+		"Didn't like the changes I was making?"
+	],
+	"letoutStruggleEgged": [
+		"Hah, egg"
+	],
+	"letoutStruggleEggify": [
+		"Don't want to be trapped in an egg?",
+		"You don't like eggs?"
+	],
+	"letoutOralVoreStruggleDigested": [
+		"Ah... you want out... just a moment to reform.",
+		"Ah ok, I'll reform you now.",
+		"Fine, I'll reform you now.",
+		"Alright, I'll reform you."
+	],
+	"letoutFlirtyOralVoreStruggle": [
+		"I'd much rather you stay~",
+		"Come back whenever you like~",
+		"Afraid you'll want to stay forever~?",
+		"You know you don't have to leave~"
+	],
+	"letoutFlirtyOralVoreStruggleHeal": [
+		"You do know its safer inside me right?~",
+		"Are you sure? I think you need some more time~",
+		"I think you should get back in, you tooootally need more healing~",
+		"You really should get back in to let me finish~"
+	],
+	"letoutFlirtyOralVoreStruggleDigest": [
+		"You've escaped... for now~",
+		"What, don't want to be pudge~?",
+		"I think you'd really enjoy it if you just let yourself melt away~",
+		"Awww~ You were so close to becoming a part of me~"
+	],
+	"letoutFlirtyOralVoreStruggleDigestImmune": [
+		"You've escaped... for now~",
+		"What, don't want to be pudge~?",
+		"I think you'd really enjoy it if you just let yourself melt away~",
+		"Awww~ You just need to let yourself melt down for me~"
+	],
+	"letoutFlirtyStruggleTransformed": [
+		"Now you can see the new you~",
+		"You might look a bit different now~"
+	],
+	"letoutFlirtyStruggleTransforming": [
+		"Didn't want to become something like me?~",
+		"Didn't like the changes I was making?~"
+	],
+	"letoutFlirtyStruggleTransformingImmune": [
+		"Didn't want to become something like me?~",
+		"Didn't like the changes I was trying to make?~"
+	],
+	"letoutFlirtyStruggleEggify": [
+		"Don't want to be trapped in an egg?~",
+		"You don't like eggs?~"
+	],
+	"letoutFlirtyStruggleDigested": [
+		"Ah... you want out... just a moment to reform~",
+		"Oh alright, you can stop being fat for a little bit~",
+		"I'll reform you if thats what you want, but you know I can just eat you again later~",
+		"Alright, I'll reform you~"
+	],
+	"letoutShyOralVoreStruggle": [
+		"O-oh ok...",
+		"M-maybe you'll come back later?",
+		"Ah... I-I was rather enjoying that...",
+		"M-maybe you can stay longer next time...",
+		[
+			"<keysmash>",
+			"*Surprised Noises*"
+		]
+	],
+	"letoutShyOralVoreStruggleHeal": [
+		"U-uhm... i-it might be safer inside me...",
+		"M-maybe getting out isn't the best idea...?",
+		"I-I really think it'd be better if you stayed inside...",
+		"W-wait what if you're not healed yet!"
+	],
+	"letoutShyOralVoreStruggleDigest": [
+		"O-oh... s-sorry about that.",
+		"I... I just really needed to eat...",
+		"W-why couldn't you just finish melting...",
+		"Y-you know I need food right?"
+	],
+	"letoutShyOralVoreStruggleDigestImmune": [
+		"O-oh... s-sorry about that... you seem to be fine though.",
+		"I... I just really needed to eat... but you just weren't melting...",
+		"W-why couldn't you just let yourself melt...",
+		"Y-you know I need food right?"
+	],
+	"letoutShyStruggleTransformed": [
+		"Hehe... now you're like me.",
+		"I-I t-think I like the new look."
+	],
+	"letoutShyStruggleTransforming": [
+		"O-oh y-you didn't want to change?",
+		"Do... do you not want to be like me?"
+	],
+	"letoutShyStruggleEggify": [
+		"S-so you don't want to be in an egg?",
+		"S-so you don't like eggs?"
+	],
+	"letoutShyStruggleDigested": [
+		"H-here, let me reform you real quick.",
+		"I...uhm... melted you... so I gotta reform you.",
+		"I-I hope you had fun being a part of me...",
+		"I-I don't think I can keep you forever..."
+	],
+	"letoutOralVore": [
+		"You can come out now.",
+		"Time to come out.",
+		"You can't stay in there forever.",
+		"Time to get out."
+	],
+	"letoutOralVoreHeal": [
+		"You're probably patched up enough.",
+		"I think you've spent enough time healing.",
+		"I think you should be feeling much better now.",
+		"My stomach does wonders for healing doesn't it?"
+	],
+	"letoutOralVoreDigest": [
+		"Actually... you've probably spent enough time in there.",
+		"My hunger is satiated enough for now.",
+		"Probably best to get you out of there...",
+		"Didn't feel like melting you entirely."
+	],
+	"letoutOralVoreDigestImmune": [
+		"I can't even melt you down at all...",
+		"My hunger isn't going to be satiated with you in there.",
+		"Probably best to get you out of there so I can eat something else.",
+		"Can't even melt you down the tiniest bit."
+	],
+	"letoutOralVoreTransforming": [
+		"Maybe I shouldn't change you.",
+		"Maybe I should stop this."
+	],
+	"letoutOralVoreTransformingImmune": [
+		"Seems like I can't change you.",
+		"For some reason this isn't working..."
+	],
+	"letoutOralVoreEgged": [
+		"Mmm time to get this egg out."
+	],
+	"letoutOralVoreDigested": [
+		"Here, let me reform you real quick.",
+		"You got digested so I gotta reform you.",
+		"Ah, guess its time to reform you.",
+		"Time to reform you I guess."
+	],
+	"letoutFlirtyOralVore": [
+		"Mmm~ I think you've had enough time inside~",
+		"You gotta come out, or else I won't be able to put you back in later~",
+		"You can't stay in there forever... yet~",
+		"I know you want to stay~ so I'll let you back in later~"
+	],
+	"letoutFlirtyOralVoreHeal": [
+		"You're probably patched up enough~",
+		"I think you've spent enough time healing~",
+		"I think you should be feeling much better now~",
+		"My stomach does wonders for healing doesn't it?~"
+	],
+	"letoutFlirtyOralVoreDigest": [
+		"Mmm, I don't want to turn you into pudge... yet~",
+		"My hunger is satiated... for now~",
+		"Probably best to get you out of there...",
+		"Hmm, I don't feel like melting you entirely... yet~"
+	],
+	"letoutFlirtyOralVoreDigestImmune": [
+		"Mmm, seems like I can't turn you into pudge~",
+		"Maybe next time you'll let yourself become a part of me~",
+		"Probably best to get you out of there...",
+		"Hmm, seems like I can't melt you down."
+	],
+	"letoutFlirtyOralVoreEgged": [
+		"Mmm time to get this egg out~"
+	],
+	"letoutFlirtyOralVoreDigested": [
+		"Here, let me reform you real quick~",
+		"I can't let you spend tooooo long on my hips~",
+		"Hey silly, its time for you to be more than pudge again~",
+		"Welcome back to not being simply a part of me~"
+	],
+	"letoutShyOralVore": [
+		"S-sorry I-I just want you out...",
+		"I-it feels pretty weird having you in there...",
+		"Uhm... lets continue another time...",
+		"I uhm... uhm... yeah..."
+	],
+	"letoutShyOralVoreHeal": [
+		"S-sorry I-I just want to check if it was working...",
+		"I-I'm not sure I can keep you in there...",
+		"W-what if my belly isn't healing you? I gotta get you out!",
+		"I uhm... uhm... yeah..."
+	],
+	"letoutShyOralVoreDigest": [
+		"A-actually... you've p-probably spent enough time in there.",
+		"I-I'm not r-really hungry anymore.",
+		"P-probably best to get you out of there...",
+		"A-are you ok?"
+	],
+	"letoutShyOralVoreDigestImmune": [
+		"I-its like you're not melting at all...",
+		"I-I'm still hungry... but you're not really helping with that.",
+		"P-probably best to get you out of there...",
+		"Y-you seem entirely untouched... how?"
+	],
+	"letoutShyOralVoreTransforming": [
+		"M-maybe I shouldn't change you.",
+		"M-maybe I should stop this."
+	],
+	"letoutShyOralVoreEgged": [
+		"P-probably time to get this egg out."
+	],
+	"letoutUnbirthStruggle": [
+		"Happy birthday.",
+		"Ah~ Why'd you come out?",
+		"Mmm~ I thought you were pretty comfortable.",
+		"I thought you liked it in there.",
+		"Oh... alright."
+	],
+	"letoutFlirtyUnbirthStruggle": [
+		"Happy birthday hehe~",
+		" Ahh~ Why'd you come out silly, its much softer back inside~",
+		"Mmm~ I thought you said you were comfortable~?",
+		"Are you coming out just to squirm back in~?"
+	],
+	"letoutShyUnbirthStruggle": [
+		"H-happy b-birthday!\n...\nS-sorry it just seemed funny...",
+		"Ah... o-oh... I g-guess you wanted out...",
+		"I-I hope you uh... consider going back in... I liked it...",
+		"I-I thought you were comfortable in there...",
+		"O-oh... alright..."
+	],
+	"letoutUnbirth": [
+		"Happy birthday.",
+		"I think you've had enough fun in there.",
+		"Maybe its time for you to come out."
+	],
+	"letoutUnbirthEgged": [
+		"Well, time to lay an egg."
+	],
+	"letoutFlirtyUnbirth": [
+		"Happy birthday hehe~",
+		"I think you've had enough fun in there~",
+		"Maybe its time for you to come out~"
+	],
+	"letoutFlrityUnbirthEgged": [
+		"Well, time to lay an egg~",
+		"Hehe I love popping eggs out~"
+	],
+	"letoutShyUnbirth": [
+		"H-happy b-birthday!\n...\nS-sorry it just seemed funny...",
+		"I-I think you've had e-enough fun in there.",
+		"M-maybe its time for you to come out... maybe/"
+	],
+	"letoutShyUnbirthEgged": [
+		"W-well, time to lay an egg."
+	],
+	"letoutCockVoreStruggle": [
+		"Ahh~ ahh that felt so good~",
+		"Could you get back in and squirm some more?",
+		"Mmm~ I thought you were pretty comfortable.",
+		"I thought you liked it in there.",
+		"Oh... alright."
+	],
+	"letoutCockVoreStruggleTransformed": [
+		"Heh, now you're a blob of cum~",
+		"Ahhh~ I came~"
+	],
+	"letoutCockVoreStruggleTransforming": [
+		"If only you stayed a bit longer...",
+		"Ahh~ you didn't stay in long enough.",
+		"Maybe you should stay in a little longer."
+	],
+	"letoutCockVoreStruggleTransformingImmune": [
+		"Hmmm why aren't you turning?",
+		"Come on, don't you want to see what happens?"
+	],
+	"letoutFlirtyCockVoreStruggle": [
+		"Don't you know friends are supposed to be stored in the balls~",
+		" Ahh~ Why'd you come out silly, it feels muuuch better to have you squirming in there~",
+		"Mmm~ I thought you said you were comfortable~?",
+		"Are you coming out just to squirm back in~?"
+	],
+	"letoutFlirtyCockVoreStruggleTransforming": [
+		"If only you stayed a bit longer~",
+		"Ahh~ you didn't stay in long enough~",
+		"Maybe you should stay in a little longer~"
+	],
+	"letoutFlirtyCockVoreStruggleTransformingImmune": [
+		"Hmmm why aren't you turning?",
+		"Come on, don't you want to see what happens?",
+		"Don't you want to see what its like to be my cum?~"
+	],
+	"letoutShyCockVoreStruggle": [
+		[
+			"<keysmash>",
+			"*Horny Noise*"
+		],
+		"A-ahhhh~ Y-you're squirming so much!",
+		"Fffff~ That feels so g-good... m-maybe get back in?",
+		"Ahhh~"
+	],
+	"letoutShyCockVoreStruggleTransformed": [
+		"O-oohhh that felt good... w-where'd you go?",
+		[
+			"Ahhhhh~ ...O-oh I turned you... into... <keysmash>",
+			"Ahhhhh~ ...O-oh I turned you... into... *Flustered Noises*"
+		]
+	],
+	"letoutShyCockVoreStruggleTransformingImmune": [
+		"W-was something happening in there?",
+		"Y-you look a bit more uh... drippy than normal.",
+		"Y-you seem a bit more... white... than normal."
+	],
+	"letoutCockVore": [
+		"Hhhhhh I'm gonna cum...",
+		"C-can't hold back much longer~",
+		"Gonna blast you out with a load~",
+		"Ahhhh feeels soooo goood~"
+	],
+	"letoutCockVoreTransforming": [
+		"Ffff... came too early...",
+		"C-couldn't hold back long enough..."
+	],
+	"letoutCockVoreTransfomringImmune": [
+		"Ffffff... shouldn't you have turned...?",
+		"Ahhh~ oh... you didn't turn..."
+	],
+	"letoutShyCockVore": [
+		[
+			"<keysmash>",
+			"*Horny Noise*"
+		],
+		"A-ahhhh~ Y-you're squirming so much! I-I can't hold back!",
+		"Fffff~ That feels so g-good... m-maybe get back in?",
+		"Ahhh~"
+	],
+	"struggling": [
+		[
+			"I'm stuck here aren't I?",
+			"Is there even a way out?",
+			"Trapped..."
+		]
+	],
+	"strugglingShy": [
+		[
+			"I-I'm stuck here aren't I?",
+			"I-is there even a way out?",
+			"T-trapped..."
+		]
+	],
+	"strugglingBelly": [
+		[
+			"Mmmm pretty comfortable.",
+			"Ahh... your belly is so soft..."
+		]
+	],
+	"strugglingBellyNoisy": [
+		"Your belly is so noisy.",
+		"Mmm... I like the sounds your belly is making."
+	],
+	"strugglingBellyVaporeon": [
+		"Gooey Vappy belly.",
+		"Its all gooey in here."
+	],
+	"strugglingBellyNoisyHeal": [
+		"I really like the sounds your belly makes... very calming.",
+		"I could just drift off to sleep listening to the sounds of your body..."
+	],
+	"strugglingBellyHeal": [
+		"Ahh... its so soothing.",
+		"I can feel all my troubles melting away...",
+		"Its so comfortable in here."
+	],
+	"strugglingBellyDigestImmune": [
+		[
+			"Trying to melt me down?",
+			"Trying to melt me down?\nThats not gonna work."
+		],
+		"Heh, I can actually stay in here as long as I want.",
+		"I'm invincible!",
+		"You can't melt me!"
+	],
+	"strugglingBellyNoisyDigest": [
+		"Your belly is so noisy... I'm going to be gurgled up aren't I?",
+		"All this grumbling... you must be pretty hungry."
+	],
+	"strugglingBellyDigest": [
+		"Ahh... I'm starting to melt.",
+		"Oh my... I'm just gonna be food."
+	],
+	"strugglingBellyTransformingVaporeon": [
+		"Its... its like I'm turning into goo?",
+		"I'm being turned into a Vapreon..."
+	],
+	"strugglingBellyTransforming": [
+		"It feels kinda weird in here?",
+		"It feels like... I'm changing?"
+	],
+	"strugglingSlime": [
+		"This slime is so sticky.",
+		"Stuck suspended in slime...",
+		"Suspended in sticky goo..."
+	],
+	"strugglingSlimeHeal": [
+		"This slime feels pretty nice.",
+		"Ahh... this is... oddly satisfying...",
+		"I wouldn't mind staying suspended in here..."
+	],
+	"strugglingSlimeDigestImmune": [
+		[
+			"Heh trying to melt me into more slime?",
+			"Heh trying to melt me into more slime?\nThats not gonna work."
+		],
+		"Sorry, I'm not soluble.",
+		"You're gonna have to try harder to absorb me."
+	],
+	"sstrugglingSlimeDigest": [
+		"Ahh... I'm starting to melt into slime.",
+		"Oh my... I'm dissolving.",
+		"I'm gonna be absorbed..."
+	],
+	"strugglingSlimeTransformed": [
+		"I've been turned into a slime!",
+		"Oh my... I'm a slime now",
+		"I'm just a blob of slime now..."
+	],
+	"strugglingSlimeTransforming": [
+		"Ahh... I'm being turned into slime...",
+		"Its like my limbs are turning into jelly..."
+	],
+	"strugglingBalls": [
+		"All this cum sloshing around me~",
+		"Ahhh... I'm stored in the balls~",
+		"Stuck down here in your balls~",
+		"This is so hot~"
+	],
+	"strugglingBallsTransformed": [
+		"O-oh my... I'm just cum now~",
+		"Oooh~ I'm sloshing around in here~",
+		"Now I'm just a load of cum~"
+	],
+	"strugglingBallsTransforming": [
+		"It feels kinda weird in here?",
+		"I think... I think I'm turning white?",
+		"I think... I'm starting to feel goopy?"
+	],
+	"strugglingShaft": [
+		"Ahh~ your cock is squeezing tight around me~",
+		"Ohhh~ Your shaft is squeezing so hard~",
+		"This is so hot~"
+	],
+	"strugglingShaftTransformed": [
+		"O-oh my... I'm just cum now~",
+		"Oooh~ Are you about to cum me out~?",
+		"Now I'm just a load of cum~"
+	],
+	"strugglingWomb": [
+		"Ahh~ Its so soft in here~",
+		"Ohhh~ Your womb is so snug and soft~",
+		"This is so hot~"
+	],
+	"strugglingWombTransformed": [
+		"Ahhh~ My body is all different~",
+		"Oooh~ I've been transformed~",
+		"I got transformed by your womb~"
+	],
+	"strugglingWombTransformedEgged": [
+		"You used an egg to transform me~",
+		"Can't wait to hatch and see my new body~"
+	],
+	"strugglingWombTransforming": [
+		"It feels kinda weird in here?",
+		"I think... I think changing?",
+		"I think... I'm starting to feel goopy?"
+	],
+	"strugglingWombTransformingEgged": [
+		"I think this egg is doing something?",
+		"Is this egg changing me?"
+	],
+	"strugglingWombEggify": [
+		"Is this... an egg?",
+		"Are you making an egg around me?",
+		"I'm gonna be trapped in an egg!"
+	],
+	"strugglingBreasts": [
+		"It's really soft in here...",
+		"Nice and warm, heh.",
+		"So bouncy...",
+		"I can hear your heartbeat..."
+	],
+	"strugglingBreastsTop": [
+		"Goodness, it's tight...",
+		"It's very snug..."
+	],
+	"strugglingBreastsHeal": [
+		"Heh, a very good milk bath...",
+		"Ahh, feeling better now...",
+		"Comfy and soothing..."
+	],
+	"strugglingBreastsDigestImmune": [
+		"Huh, kinda squeezy..."
+	],
+	"strugglingBreastsDigest": [
+		"Huh, there's more milk in here... wait.  Oh.",
+		"Guess you want to know what I taste like?",
+		"Heh, me-flavored milk.",
+		"Making me into a fresh batch of milk?"
+	],
+	"strugglingBreastsDigestTop": [
+		"Careful, I'll stain your top..."
+	],
+	"strugglingBreastsFlirty": [
+		"It's so soft in here~",
+		"Mmm, it's so warm~",
+		"Hee, bouncy bouncy~",
+		"You could say I'm close to your heart~"
+	],
+	"strugglingBreastsFlirtyTop": [
+		"Hnnn~ So tight~",
+		"So snug~"
+	],
+	"strugglingBreastsFlirtyHeal": [
+		"A wonderful milk bath~",
+		"Mmm, I feel wonderful~",
+		"So soothing and comfy in here~"
+	],
+	"strugglingBreastsFlirtyDigestImmune": [
+		"Squeezy~"
+	],
+	"strugglingBreastsFlirtyDigest": [
+		"Gosh, I can feel myself sloshing~",
+		"Hee, wondering what I taste like~?",
+		"Heh, I taste good~",
+		"I hope I make a good batch of milk for you~"
+	],
+	"strugglingBreastsFlirtyDigestTop": [
+		"Gonna get your top soaked with me at this rate~"
+	],
+	"strugglingBreastsShy": [
+		"It's so... s-soft...",
+		"S-so warm...",
+		"Gosh... b-bouncy...",
+		"Oh... I c-can hear your heartbeat...",
+		"<keysmash>"
+	],
+	"strugglingBreastsShyTop": [
+		"<keysmash>... so t-tight...",
+		"Hfff... s-so snug..."
+	],
+	"strugglingBreastsShyHeal": [
+		"A m-milk bath, here... heck...!",
+		"It feels so... good... <keysmash>",
+		"So c-comfy..."
+	],
+	"strugglingBreastsShyDigestImmune": [
+		"Feels s-squeezy..."
+	],
+	"strugglingBreastsShyDigest": [
+		"Oh heck... I'm turning into m-milk...!",
+		"You... want to know what I t-taste like?  ...<keysmash>",
+		" ...I taste... g-good...",
+		"Ohgosh you're m-making me into milk...!"
+	],
+	"strugglingBreastsShyDigestTop": [
+		"You're g-gonna leak me into your shirt...!"
+	],
+	"vored": [
+		"Ah!"
+	],
+	"voredCockVore": [
+		"UwU"
+	],
+	"escapeStruggle": [
+		"I got out."
+	],
+	"escape": [
+		"Ah, back outside"
+	],
+	"infuseRequestBellyBefore": [
+		"Mm, you love my belly so much... you want to be a part of it?",
+		"You want to become my belly?",
+		"You want to become a part of me...?"
+	],
+	"infuseRequestBellyAfter": [
+		"Ahh... there you are... just my belly now",
+		"Just a part of me now",
+		"Try not to make me too hungry..."
+	],
+	"infuseRequestBellyBeforeLayer": [
+		"You want to take <infusedName>'s place?",
+		"You want to join <infusedName>?"
+	],
+	"infuseUnpromptedBellyBefore": [
+		"I think... I need you in my belly... or... as my belly"
+	],
+	"infuseRequestShaftBefore": [
+		"You want to be my cock?",
+		"Mm, can't wait to be throbbing down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"infuseRequestShaftAfter": [
+		"Hehe, I can feel you twitching with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already throbbing with excitment~"
+	],
+	"infuseRequestShaftBeforeLayer": [
+		"You want to take <infusedName>'s place?",
+		"Hehe, want to send <infusedName> a layer deeper~?"
+	],
+	"infuseRequestShaftAfterLayer": [
+		"And now <infusedName> is even more trapped~"
+	],
+	"infuseUnpromptedShaftBefore": [
+		"Hehe, I think you belong as something else~",
+		"Mm~ I think it'd be fitting to have you throbbing between my legs~",
+		"You're always so twitchy... which would make you a good cock~",
+		"I think I have a far better use for you~"
+	],
+	"infuseUnpromptedShaftAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, throbbing between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"infuseRequestBreastsBefore": [
+		"You want to be my boobs?",
+		"Mm, can't wait to be jiggling on my chest can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"infuseRequestBreastsAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already leaking milk~"
+	],
+	"infuseUnpromptedBreastsBefore": [
+		"Hehe, I think you belong as something else~",
+		"Mm~ I think it'd be fitting to have you jiggling on my chest~",
+		"I think I have a far better use for you~"
+	],
+	"infuseUnpromptedBreastsAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, jiggling on my chest~",
+		"Mmm~ feels right to have you there~"
+	],
+	"infuseRequestPussyBefore": [
+		"You want to be my pussy?",
+		"Mm, can't wait to be soaking wet down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"infuseRequestPussyAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already sopping wet with excitment~"
+	],
+	"infuseUnpromptedPussyBefore": [
+		"Hehe, I think you belong as something else~",
+		"Mm~ I think it'd be fitting to have you dripping between my legs~",
+		"I think I have a far better use for you~"
+	],
+	"infuseUnpromptedPussyAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, soaking between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"infused": [
+		"<slowlove>",
+		"<love>",
+		[
+			[
+				"^#ffffff7f;(Just a part of your body~)",
+				"^#ffffff7f;(Just a part of <entityname>'s body~)"
+			],
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedBellyNoisy": [
+		[
+			"^#ffffff7f;(Just a grumbling belly~)",
+			"^#ffffff7f;(Just your grumbling belly~)",
+			"^#ffffff7f;(Just <entityname>'s grumbling belly~)",
+			"^#ffffff7f;(Just a noisy belly~)",
+			"^#ffffff7f;(Just your noisy belly~)",
+			"^#ffffff7f;(Just <entityname>'s noisy belly~)"
+		]
+	],
+	"infusedBellyHungry": [
+		[
+			"<slowlove>^#ffffff7f;(Feeed meee~)",
+			"^#ffffff7f;(Hungry...)"
+		]
+	],
+	"infusedBelly": [
+		"<slowlove>",
+		"<love>",
+		[
+			[
+				"^#ffffff7f;(Just a belly~)",
+				"^#ffffff7f;(Just your belly~)",
+				"^#ffffff7f;(Just <entityname>'s belly~)"
+			],
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedPussy": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
+			"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
+			"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedBreasts": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(Producing milk...~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedShaft": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I'm just a cock~)",
+			"<slowlove>^#ffffff7f;(I can't wait to be used~)",
+			"<slowlove>^#ffffff7f;(Ahh~ I'm throbbing with excitment~)",
+			"<slowlove>^#ffffff7f;(I'm just <entityname>'s cock~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedBalls": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I'm just your balls~)",
+			"<slowlove>^#ffffff7f;(Ahh~ so full of cum sloshing around~)",
+			"<slowlove>^#ffffff7f;(I'm just <entityname>'s balls~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"teaseInfused": [
+		"Just a part of my body~",
+		"Just a part of my body <infusedName>~" // very very placeholder
+	],
+	"teaseInfusedBellyNoisy": [
+		"Hehe, grumbling <infusedName>?",
+		"Does my noisy belly want something~?"
+	],
+	"teaseInfusedBelly": [
+		"Hehe, does my belly want something?",
+		"Hehe, do you want something <infusedName>?"
+	],
+	"teaseInfusedPussy": [
+		[
+			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
+			"<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"
+		],
+		[
+			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
+			"<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"
+		],
+		[
+			"<slowlove>Hehe... dripping wet, right where you belong~",
+			"Hehe... dripping wet, right where you belong <infusedName>~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
+		]
+	],
+	"teaseInfusedBreasts": [
+		[
+			"<slowlove>Mmm, you make them so much more sensitive~",
+			"<slowlove>Mmm, <infusedName> you make them so much more sensitive~"
+		],
+		[
+			"<slowlove>Ahh I can just feel you making even more milk~",
+			"<slowlove>Ahh I can just feel you making even more milk <infusedName>~"
+		],
+		[
+			"<slowlove>Jiggling on my chest, right where you belong~",
+			"<slowlove>Jiggling on my chest, right where you belong <infusedName>~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
+		]
+	],
+	"teaseInfusedBreastsSize": [
+		[
+			"<love>I love how much bigger you make my boobs~",
+			"<love>I love how much bigger you make my boobs <infusedName>~"
+		],
+		[
+			"<love>You're better as extra size for me~",
+			"<love>You're better as extra size for me <infusedName>~"
+		]
+	],
+	"teaseInfusedShaft": [
+		[
+			"<love>Heh, I can feel you twitching down there~",
+			"<love>Heh, I can feel you twitching down there <infusedName>~"
+		],
+		[
+			"<love>Are you enjoying your new purpose?~",
+			"<love>Are you enjoying your new purpose <infusedName>?~"
+		],
+		[
+			"<slowlove>Just twitch and throb away, you're right where you belong~",
+			"<slowlove>Just twitch and throb away <infusedName> you're right where you belong~"
+		],
+		[
+			"<love>Heh, you belong right there, twitching and throbbing between my legs~",
+			"<love>Heh, you belong right there <infusedName>, twitching and throbbing between my legs~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
+		]
+	],
+	"teaseInfusedShaftSize": [
+		[
+			"<love>I love how much bigger you make my cock~",
+			"<love>I love how much bigger you make my cock <infusedName>~"
+		],
+		[
+			"<love>You're better as extra size for me~",
+			"<love>You're better as extra size for me <infusedName>~"
+		]
+	],
+	"teaseInfusedBalls": [
+		[
+			"<love>Heh, I can feel you twitching down there~",
+			"<love>Heh, I can feel you twitching down there <infusedName>~"
+		],
+		[
+			"<love>Are you enjoying your new purpose?~",
+			"<love>Are you enjoying your new purpose <infusedName>?~"
+		],
+		[
+			"<love>Mmm, all that cum sloshing around down there~",
+			"<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
+		]
+	],
+	"teaseBallsInfusedSize": [
+		[
+			"<love>I love how much bigger you make my balls~",
+			"<love>I love how much bigger you make my balls <infusedName>~"
+		],
+		[
+			"<love>You're better as extra size for me~",
+			"<love>You're better as extra size for me <infusedName>~"
+		]
+	],
+	"shrinking": [
+		"Why's everything getting bigger?",
+		"Ah! I'm shrinking!"
+	],
+	"growing": [
+		"Why's everything getting smaller?",
+		"Ah! I'm growing!"
+	],
+	"didSteppy": [
+		"hehe, whoops!",
+		"<confused>Oh did I step on something?",
+		"You tinies need to pay attention more!"
+	],
+	"gotStepped": [
+		[
+			"Ahhh!",
+			"AH!",
+			"oof!",
+			"eep!"
+		],
+		[
+			"You stepped on me!",
+			"Watch your step!"
+		],
+		[
+			"Be careful where you're <steppyType>!",
+			"Watch where you're <steppyType>!"
+		],
+		[
+			"Look out!",
+			"Careful!"
+		]
+	],
+	"gotStomped": [
+		[
+			"Ahhh!",
+			"AH!",
+			"oof!",
+			"eep!"
+		],
+		[
+			"You're stomping on me!",
+			"I'm getting smushed!",
+			"*wheeze*"
+		]
+	],
+	"rewardNotifyMoney": [
+		"This is nice, I think I'll give you some of my spare change.",
+		"I'll give you a few pixels for giving me a good time."
+	],
+	"rewardNotifyLowValueQuestRewards": [
+		"Hmm, I think you deserve something after this.",
+		"I think I'll give you some sort of small gift."
+	],
+	"rewardNotifyMediumValueQuestRewards": [
+		"Maybe I've got something a bit better for you this time.",
+		"I've got another gift for you after this."
+	],
+	"rewardNotifyHighValueQuestRewards": [
+		"I think you'll really like what I've gotten you.",
+		"My next gift will be really good heh."
+	],
+	"rewardNotifyFlirtyMoney": [
+		"Heh, being all subby just to get some pocket change~?",
+		"Mmmm should I even give you this cash? seems like letting you do this is payment enough~"
+	],
+	"rewardNotifyFlirtyLowValueQuestRewards": [
+		"Heh~ I'll give you a little something after~",
+		"Hehe, doing this all just for a little gift~"
+	],
+	"rewardNotifyFlirtyMediumValueQuestRewards": [
+		"If you keep this up I've got something better down the line~",
+		"I hope this gift is nice~"
+	],
+	"rewardNotifyFlirtyHighValueQuestRewards": [
+		"You really deserve something for all this worshipping~",
+		"Your worshipping is gonna pay off after this~"
+	],
+	"rewardNotifyShyMoney": [
+		"Oh uhm... maybe I should pay you after...",
+		"Do I... should I pay you for this?"
+	],
+	"rewardNotifyShyLowValueQuestRewards": [
+		"I feel like I should give you something for this...",
+		"Uhm... I like this... so I'm gonna give you a gift... if thats ok..."
+	],
+	"rewardNotifyShyMediumValueQuestRewards": [
+		"Maybe... maybe I'll give you something nice.",
+		"Gosh... this is great... I'll give you something good..."
+	],
+	"rewardNotifyShyHighValueQuestRewards": [
+		"I think... yeah you're so good, I'm gonna give you a good gift.",
+		"Ahhh... I'm gonna give you something real good."
+	]
 }
