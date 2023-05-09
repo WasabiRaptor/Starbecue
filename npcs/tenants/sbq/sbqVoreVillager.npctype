@@ -31,112 +31,163 @@
 		"defaultPortrait" : "bust",
 		"dialogueTree" : {
 			"dialogueFile" : "/npcs/tenants/sbq/sbqVoreVillager.dialogue",
-			// after following a path, next steps will automatically advance you down the tree until there is a step that does not have a next
-			// a next can be a string or a table, if the next step is a string, it will just use that value, if it is a table, it will randomly select from it
-			// when defining a next step, it attemts to find and run dialogueBoxScript matching the name of the next step value to determine which step to take next
-			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
-			// if no setting is found it only attempts to go down the branch with the matching name of the next step
+			// after following a path, next steps will automatically advance down the tree building the result dialogue
 
-			// if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
-			"dialogueTreeReturn" : ["greeting"],
+			// overall default values for a "new" dialogue
+			"default" : {
+				"dialogueTreeReturn" : "greeting"	// if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 
-
+			},
 			// greeting is the default start of the tree
 			// settings come from itself
 			"greeting" : {
-				"new" : {
-					"jump" : ["converse"]
-				},
+				"new" : {"jump" : "converse"},
 				"next" : "giveTenantRewards",
 				"rewards" : {
-					"replace" : {
-						"randomDialogue" : ":defaultRewardsGreeting"
-					},
+					"replace" : {"randomDialogue" : [":defaultRewardsGreeting"]},
 					"next" : "personality",
-					"shy" : {
-						"replace" : {
-							"randomDialogue" : [":shyRewardsGreeting"]
-						}
-					},
-					"flirty" : {
-						"replace" : {
-							"randomDialogue" : [":flirtyRewardsGreeting"]
-						}
-					}
+					"shy" : {"replace" : {"randomDialogue" : [":shyRewardsGreeting"]}},
+					"flirty" : {"replace" : {"randomDialogue" : [":flirtyRewardsGreeting"]}}
 				},
 				"default" : {
 					"next" : "personality",
-					"replace" : {
-						"randomDialogue" : [":defaultGreeting"]
-					},
-					"shy" : {
-						"replace" : {
-							"randomDialogue" : [":shyGreeting"]
-						}
-					},
-					"flirty" : {
-						"replace" : {
-							"randomDialogue" : [":flirtyGreeting"]
-						}
-					}
-
+					"replace" : {"randomDialogue" : [":defaultGreeting"]},
+					"shy" : {"replace" : {"randomDialogue" : [":shyGreeting"]}},
+					"flirty" : {"replace" : {"randomDialogue" : [":flirtyGreeting"]}}
 				}
 			},
-
 
 
 			// lines for when a pred is eating prey, be it from hunting, or from it being requested
 			// settings come from itself
 			"vore" : {
+				"new" : {
+					"delay" : 1.5,
+					"dismissTime" : 3
+				},
+				"next" : "voreType",
+				"oralVore" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : {"randomDialogue" : [":defaultRequestOralVoreBefore"]},
+							"next" : "personality",
+							"shy" : {"replace" : {"randomDialogue" : [":shyRequestOralVoreBefore"]}},
+							"flirty" : {"replace" : {"randomDialogue" : [":flirtyRequestOralVoreBefore"]}}
+						},
+						"after" : {
+							"replace" : {"randomDialogue" : [":defaultRequestOralVoreAfter"]},
+							"next" : "personality",
+							"shy" : {"replace" : {"randomDialogue" : [":shyRequestOralVoreAfter"]}},
+							"flirty" : {"replace" : {"randomDialogue" : [":flirtyRequestOralVoreAfter"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : {"randomDialogue" : [":defaultUnpromptedOralVoreBefore"]},
+							"next" : "personality",
+							"shy" : {"replace" : {"randomDialogue" : [":shyUnpromptedOralVoreBefore"]}},
+							"flirty" : {"replace" : {"randomDialogue" : [":flirtyUnpromptedOralVoreBefore"]}}
+						},
+						"after" : {
+							"replace" : {"randomDialogue" : [":defaultUnpromptedOralVoreAfter"]},
+							"next" : "personality",
+							"shy" : {"replace" : {"randomDialogue" : [":shyUnpromptedOralVoreAfter"]}},
+							"flirty" : {"replace" : {"randomDialogue" : [":flirtyUnpromptedOralVoreAfter"]}}
+						}
+					},
+					"notFeelingIt" : {
+						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]},
+						"next" : "personality",
+						"shy" : {"replace" : {"randomDialogue" : [":shytNotFeelingIt"]}},
+						"flirty" : {"replace" : {"randomDialogue" : [":flirtyNotFeelingIt"]}}
+					},
+					"tooBig" : {
+						"replace" : {"randomDialogue" : [":defaultTooBig"]},
+						"next" : "personality",
+						"shy" : {"replace" : {"randomDialogue" : [":shyTooBig"]}},
+						"flirty" : {"replace" : {"randomDialogue" : [":flirtyTooBig"]}}
+					},
+					"full" : {
+						"replace" : {"randomDialogue" : [":defaultBellyFull"]},
+						"next" : [
+							"personality",
+							"locationDigestSlot",
+							"locationCompression"
+						],
+						"shy" : {"replace" : {"randomDialogue" : [":shyDefaultFull"]}},
+						"flirty" : {"replace" : {"randomDialogue" : [":flirtyDefaultFull"]}},
+						"softDigest" : ".digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":digestBellyFull"]},
+							"next" : "personality",
+							"shy" : {"replace" : {"randomDialogue" : [":shyDigestFull"]}},
+							"flirty" : {"replace" : {"randomDialogue" : [":flirtyDigestFull"]}}
+						},
+						"true" : { // compression
+							"replaceQueue" : {"randomDialogue" : [":compressionBellyFull"]},
+							"next" : "personality",
+							"shy" : {"replaceQueue" : {"randomDialogue" : [":shyCompressionBellyFull"]}},
+							"flirty" : {"replaceQueue" : {"randomDialogue" : [":flirtyCompressionBellyFull"]}}
+						}
+					},
+					"otherLocationFull" : {
+						"replace" : {"randomDialogue" : [":defaultFull"]},
+						"next" : "personality",
+						"shy" : {"replace" : {"randomDialogue" : [":shyFull"]}},
+						"flirty" : {"replace" : {"randomDialogue" : [":flirtyFull"]}}
+					},
+					"needsInfusion" : {
+						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]},
+						"next" : "personality",
+						"shy" : {"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}},
+						"flirty" : {"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}}
+					}
+				}
 			},
+
 			// when being pred, responses to the prey struggling inside
 			// settings come from itself, prey settings come from prey
 			"struggle" : {
 				"new" : {
 					"randomDialogue" : [":defaultStruggle"]
 				},
-				"next" : [
-					"location"
-				],
+				"next" : "location",
 				"belly" : {
-					"next" : [
-						"locationDigestEffect",
-						"locationCompression",
-						"locationAdditionalEffects"
-					],
 					"replace" : {
-						"randomDialogue" : [":defaultBellyStruggle"]
+						"randomDialogue" : [":defaultStruggle"]
 					},
-					"softDigest" : ".digest",
-					"digest" : {
-						"replace" : {
-							"randomDialogue" : [":digestBellyStruggle"]
+					"seperateNext" : true,
+					"next" : [
+						"locationDigestSlot",
+						"locationCompression",
+						"locationEnergyDrain",
+						"eggify",
+						"transforming"
+					],
+					"locationDigestSlot" : {
+						"softDigest" : ".locationDigestSlot.digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":digestStruggle"]},
+							"next" : "digestImmunity",
+							"true" : {"replace" : {"randomDialogue" : [":digestStruggleImmune"]}}
 						},
-						"next" : "digestImmunity",
-						"true" : {
-							"replace" : [":digestImmuneBellyStruggle"]
-						}
+						"heal" : { "replace" : {"randomDialogue" : [":healStruggle"]}}
 					},
-					"heal" : {
-						"replace" : {
-							"randomDialogue" : [":healBellyStruggle"]
-						}
-					},
-					"transform" : {
-						"add" : {
-							"randomDialogue" : [":transformBellyStruggle"]
-						}
-					},
-					"compression" : {
-						"add" : {
-							"randomDialogue" : [":compressionBellyStruggle"]
-						}
-					},
-					"energyDrain" : {
-						"add" : {
-							"randomDialogue" : [":energyDrainBellyStruggle"]
-						}
-					}
+					"locationCompression" : { "true" : { "add" : { "randomDialogue" : [":compressionStruggle"]}}},
+					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":energyDrainStruggle"]}}},
+					"transforming" : {"true" : {
+						"replaceQueue" : {"randomDialogue" : [":transformingStruggle"]},
+						"next" : "transformAllow",
+						"false" : {"replaceQueue":{"randomDialogue" : [":transformingStruggleImmune"]}}
+					}},
+					"eggify" : {"true" : {
+						"replaceQueue" : {"randomDialogue" : [":eggifyStruggle"]},
+						"next" : "eggAllow",
+						"false" : {"replaceQueue":{"randomDialogue" : [":eggifyStruggleImmune"]}}
+					}}
 				}
 			},
 

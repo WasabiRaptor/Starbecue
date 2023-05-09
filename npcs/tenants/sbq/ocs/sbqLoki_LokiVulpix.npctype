@@ -104,7 +104,7 @@
 					["Can help me make something?", {
 						"next" : "openNewDialogueBox",
 						"ui" : "starbecue:auriShop",
-						"inputData" : { "shopRecipes" : "/recipes/auriShop/lokiShopRecipes.config", "dialogueTreeStart" : ["converse"] }
+						"inputData" : { "shopRecipes" : "/recipes/auriShop/lokiShopRecipes.config", "dialogueTreeStart" : "converse" }
 					}],
 					[ "My name is...", {
 						"check":{"introduced":false},
@@ -353,7 +353,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ] },
@@ -384,7 +384,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "You want to go up my butt?", "You know thats the wrong way right?", "That's going to be a tight fit.", "Thats an interesting request." ] },
@@ -411,7 +411,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my dick?", "Thats going to be a real tight fit." ] },
@@ -436,7 +436,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my pussy?", "You know thats where dicks are supposed to go right?", "Thats going to be a real tight fit." ] },
@@ -462,7 +462,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to squirm into one of my boobs?", "Hehe, you want a bit more than just a drink of milk don't you~", "Thats going to be a real tight fit.", "Now to decide which side to put you on..." ] },
@@ -1127,7 +1127,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {
@@ -1198,7 +1198,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {
@@ -1270,7 +1270,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {
@@ -1343,7 +1343,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {

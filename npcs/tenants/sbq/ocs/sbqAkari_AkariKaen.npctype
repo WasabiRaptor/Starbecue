@@ -182,7 +182,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "You want me to eat you?", "Alright, sure.", "Yeah ok.", "Sounds good." ] },
@@ -214,7 +214,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : [ "lol horny for sergal pp", "merp? you want in my shaft?", "hope you fit", "well? come on in" ] },

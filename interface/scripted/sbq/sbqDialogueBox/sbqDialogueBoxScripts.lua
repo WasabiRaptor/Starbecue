@@ -20,31 +20,37 @@ dialogue = {
 }
 
 function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
+	sb.logInfo("start")
+	sb.logInfo(sb.printJson(path))
+	sb.logInfo(sb.printJson(dialogue, 1))
 	local dialogueTreeTop = dialogueTreeTop or dialogueTree
-	local dialogueTree = sbq.getRedirectedDialogue(path, false, dialogueTree, dialogueTree or dialogueTreeTop)
+	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	if not dialogueTree then return false end
 	local finished = sbq.processDialogueStep(dialogueTree)
 	if dialogueTree.next and not finished then
-		if dialogueTree.randomNext then
+		if dialogueTree.randomNext and type(dialogueTree.next) == "table" then
 			local step = dialogueTree.next[math.random(#dialogueTree.next)]
-			finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
-		else
+			finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
+		elseif type(dialogueTree.next) == "table" then
 			for _, step in ipairs(dialogueTree.next) do
-				finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
+				finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
 			end
+		elseif type(dialogueTree.next) == "string" then
+			finished = sbq.doNextStep(dialogueTree.next, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
 		end
 	end
 	return finished or false, dialogueTree, dialogueTreeTop
 end
 
-function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
-	if dialogueTree[step] then
+function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
+	sb.logInfo(sb.printJson(step))
+	if dialogueTree[step] or (not useStepPath) then
 		if dialogueBoxScripts[step] then
-			return sbq.getDialogueBranch("."..step.."."..(dialogueBoxScripts[step](dialogueTree, settings, branch, eid) or "default"), settings, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(dialogueBoxScripts[step](dialogueTree, settings, branch, eid) or "default"), settings, eid, dialogueTree, dialogueTreeTop)
 		elseif settings[step] then
-			return sbq.getDialogueBranch("."..step.."."..(settings[step] or "default"), settings, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(settings[step] or "default"), settings, eid, dialogueTree, dialogueTreeTop)
 		else
-			return sbq.getDialogueBranch("."..step, settings, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
 		end
 	else
 		return false
@@ -115,25 +121,34 @@ function sbq.processDialogueStep(dialogueTree)
 	if dialogueTree.finished then return true end
 end
 
-function sbq.getRedirectedDialogue(path, returnStrings, dialogueTree, dialogueTreeTop )
-	if type(path) == "string" then
-		if path[1] == "/" then
-			return root.assetJson(path) or {}
-		elseif path[1] == ":" then
-			return root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile..path) or {}
-		elseif path[1] == "." then
-			return sb.jsonQuery(dialogueTree, path:sub(2, -1)) or sb.jsonQuery(dialogueTreeTop, path:sub(2, -1))
-		elseif returnStrings then
-			return path
+function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, dialogueTreeTop)
+	local returnVal = path
+	local tags = {}
+	for k, v in pairs(settings) do
+		if (type(v) ~= "table") then
+			tags[tostring(k)] = tostring(v)
 		end
-	elseif type(path) == "table" then
-		return path
+	end
+	while type(returnVal) == "string" do
+		returnVal = sb.replaceTags(returnVal, tags)
+		firstChar = returnVal:sub(1,1)
+		if firstChar == "/" then
+			returnVal = root.assetJson(returnVal) or {}
+		elseif firstChar == ":" then
+			returnVal = root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile..returnVal) or {}
+		elseif firstChar == "." then
+			local trim = returnVal:sub(2, -1)
+			returnVal = sb.jsonQuery(dialogueTree, trim) or sb.jsonQuery(dialogueTreeTop, trim)
+		else break end
+	end
+	if (type(returnVal) == "string" and returnStrings) or type(returnVal) == "table" then
+		return returnVal
 	end
 end
 
 function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dialogueTree, dialogueTreeTop)
 	local rollNo = rollNo or 1
-	local randomTable = sbq.getRedirectedDialogue(randomTable, true, dialogueTree, dialogueTreeTop)
+	local randomTable = sbq.getRedirectedDialogue(randomTable, true, settings, dialogueTree, dialogueTreeTop)
 	local badrolls = {}
 	if type(randomTable) == "table" then
 		if not sbq.checkSettings(randomTable.check, settings) then return end
@@ -150,22 +165,30 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 			end
 			return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)
 		end
+		local location = dialogue.result.location or settings.location
+		if randomTable.infusedSlot and location then
+			local uuid = sb.jsonQuery(settings, location.."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
+			if uuid then
+				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable[uuid] or randomTable.default, dialogueTree, dialogueTreeTop)
+			end
+		end
 		if randomTable.dialogue or randomTable.portrait or randomTable.emote or randomTable.name or randomTable.buttonText or randomTable.speaker then
 			return randomTable
 		end
 		local selection = randomTable.add or randomTable
 		if selection[1] ~= nil then
 			local badroll = true
-			randomRolls[rollNo] = randomRolls[rollNo] or math.random(#selection)
+			dialogue.randomRolls[rollNo] = dialogue.randomRolls[rollNo] or math.random(#selection)
 			while badroll do
-				while badrolls[tostring(randomRolls[rollNo])] do
-					randomRolls[rollNo] = math.random(#selection)
+				while badrolls[tostring(dialogue.randomRolls[rollNo])] do
+					dialogue.randomRolls[rollNo] = math.random(#selection)
 				end
-				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, selection[randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
+---@diagnostic disable-next-line: cast-local-type
+				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, selection[dialogue.randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
 				if randomTable then
 					badroll = false
 				else
-					badrolls[tostring(randomRolls[rollNo])] = true
+					badrolls[tostring(dialogue.randomRolls[rollNo])] = true
 					badrolls.count = (badrolls.count or 0) + 1
 					if badrolls.count >= #selection then return end
 				end
@@ -312,7 +335,7 @@ function dialogueBoxScripts.isOwner(dialogueTree, settings, branch, eid, ...)
 		local uuid = world.entityUniqueId(eid)
 		result = uuid ~= nil and uuid == settings.ownerUuid
 	end
-	return dialogueTree[tostring(result) or "false"]
+	return tostring(result)
 end
 
 function dialogueBoxScripts.dismiss(dialogueTree, settings, branch, eid, ...)
@@ -339,22 +362,22 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, eid, .
 			end
 		end
 	end)
-	return {}
 end
 
 function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, eid, ...)
+	local infusedChar = sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs")
 	if (sbq.sbqData[(dialogueTree.location or settings.location)] or {}).infusion
 	and settings[(((sbq.sbqData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
-	and (((settings[(dialogueTree.location or settings.location) .. "InfusedItem"] or {}).parameters or {}).npcArgs) ~= nil
+	and infusedChar
 	then
-		local uniqueID = settings[(dialogueTree.location or settings.location) .. "InfusedItem"].parameters.npcArgs.npcParam.scriptConfig.uniqueId
+		local uniqueID = sb.jsonQuery(infusedChar, "npcParam.scriptConfig.uniqueId")
 		if dialogueTree[uniqueID] then
-			return dialogueTree[uniqueID]
+			return uniqueID
 		else
-			return dialogueTree.defaultInfused
+			return "defaultInfused"
 		end
 	end
-	return dialogueTree.default
+	return "default"
 end
 
 function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, eid, ...)
@@ -395,10 +418,10 @@ function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, ei
 			end
 			player.setProperty("sbqTenantRewards", tenantRewardsTable)
 
-			if itemsGiven > 0 then return dialogueTree[rewardDialogue or "rewards"] or dialogueTree.default end
+			if itemsGiven > 0 then return "rewards" end
 		end
 	end
-	return dialogueTree.default
+	return "default"
 end
 
 -- this doesn't work

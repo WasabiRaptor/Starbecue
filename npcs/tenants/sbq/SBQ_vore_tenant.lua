@@ -455,7 +455,7 @@ function interact(args)
 			settings.mood = storage.settings.mood
 
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, settings)
-			dialogueBoxData.dialogueTreeStart = { "struggling" }
+			dialogueBoxData.dialogueTreeStart = ".struggling"
 			return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
 		else
 			return
@@ -464,12 +464,12 @@ function interact(args)
 		local location = sbq.getOccupantArg(args.sourceId, "location")
 		if location ~= nil then
 			local flags = sbq.getOccupantArg(args.sourceId, "flags") or {}
-			dialogueBoxData.dialogueTreeStart = { "struggle" }
+			dialogueBoxData.dialogueTreeStart = ".struggle"
 			dialogueBoxData.settings.location = location
 			dialogueBoxData.settings.playerPrey = true
 			if flags.infused then
 				dialogueBoxData.settings.predator = npc.species()
-				dialogueBoxData.dialogueTreeStart = { "infusedTease" }
+				dialogueBoxData.dialogueTreeStart = ".infusedTease"
 			end
 		end
 		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
@@ -512,7 +512,7 @@ function sbq.doTargetAction()
 				if sbqPreyEnabled[storage.huntingTarget.voreType] and (sbqPreyEnabled.type ~= "prey")then
 					local settings = {
 						voreType = storage.huntingTarget.voreType,
-						getVoreButtonAction = "unprompted",
+						voreResponse = "unprompted",
 						location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
 						doingVore = "before"
 					}
@@ -529,7 +529,7 @@ function sbq.doTargetAction()
 								sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 								storage.huntingTarget = nil
 							else
-								settings.getVoreButtonAction = "couldntEat"
+								settings.voreResponse = "couldntEat"
 								sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 								self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 							end
@@ -776,8 +776,7 @@ end
 
 
 function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree, appendName)
-	return false
-
+	if true then return false end
 	settings.race = npc.species()
 	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
 	if not dialogueTree then return false end

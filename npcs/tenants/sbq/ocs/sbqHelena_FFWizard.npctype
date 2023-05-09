@@ -790,7 +790,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["Ah, yes. Time for you to slip down the hatch.", "Your body told me all that I need to know. Get in.", "Can't resist, can you? Neither can I.", "My demonic allure too much for you? Come right on inside~"] },
@@ -813,7 +813,7 @@
 								"tooBig" : { "randomDialogue" : ["Wow! You're far too big for even me to handle.", "I really want to, but even I know my limits.", "I can't. I'm pretty sure my gut would pop instantly.", "No way. Not after the last time I tried with someone as big as you."]}
 							},
 							"hungry" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Offering yourself to me? I appreciate it. My gut will, too.", "I certainly don't mind a willing snack.", "Hm, does the sound of an eager stomach get you worked up? Let me give you a private tour.", "Oh? You're approaching me instead of running away?"] },
@@ -836,7 +836,7 @@
 								"tooBig" : { "portrait" : ["Shocked.png"], "randomDialogue" : ["Wow! You're far too big for even me to handle with how hungry I am.", "I really, REALLY, want to, but even I know my limits.", "I can't. I'm pretty sure my rumbly gut would pop instantly.", "No way. Not after the last time I tried with someone as big as you. Thanks, belly."]}
 							},
 							"horny" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["I bet you can't wait to be trapped in my hot, gurgly gut. Who knows if I'll ever let you out~", "My my, what a hot looking <entityname>~", "Hehe, such a sexy offering. Let me put you in your proper place~", "If you're lucky, your friends might hear you over my gurgling tummy. Maybe not~"] },
@@ -860,7 +860,7 @@
 							},
 							"friendly" : { // mood
 								"portrait" : ["Angry.png"],
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Not afraid? Good.", "^red;Seriously? Fine.", "^red;Need protection? Get in.", "^red;Desperate, huh?"] },
@@ -894,7 +894,7 @@
 							"next" : "mood",
 							"default" : { // mood
 								"portrait" : ["Neutral.png"],
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["Ah, yes. Time for you to slip right on up.", "Your body told me all that I need to know. Get in.", "Can't resist, can you? Neither can I.", "My demonic allure too much for you? Come right on inside~"] },
@@ -917,7 +917,7 @@
 								"tooBig" : "vore.oralVore.race.personality.mood.tooBig"
 							},
 							"hungry" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : "vore.oralVore.race.personality.mood.request",
@@ -940,7 +940,7 @@
 								"tooBig" : { "portrait" : ["Shocked.png"], "randomDialogue" : ["Wow! You're far too big for even me to handle with how hungry I am.", "I really, REALLY, want to, but even I know my limits.", "I can't. I'm pretty sure my rumbly gut would pop instantly.", "No way. Not after the last time I tried with someone as big as you. Thanks, butt."]}
 							},
 							"horny" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : "vore.oralVore.race.personality.mood.request",
@@ -963,7 +963,7 @@
 								"tooBig" : "vore.oralVore.race.personality.mood.tooBig"
 							},
 							"friendly" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : "vore.oralVore.race.personality.mood.request",
@@ -995,7 +995,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : [
@@ -1052,7 +1052,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["I see where your gaze is. How about you get a closer look?", "Interested? Go on, give them a touch~", "Want to experience one of my infamous hugs? Get over here.", "Judging by how ^pink;flustered^reset; you look, I think I know what you want."] },
@@ -1074,7 +1074,7 @@
 								"tooBig" : { "randomDialogue" : ["Sorry. I like being able to fit through most doorways, thank you.", "I'm pretty sure my back can't handle that, dear.", "If I was a cow, then maybe. But I'm not.", "That's impossible, even for me."]}
 							},
 							"hungry" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Not exactly what I had in mind, but sure!", "Sure. I could use the milk you'd help make.", "Okay, I guess? Might help me catch some prey.", "Don't complain if I leave you in there until my hunger wears off."]},
@@ -1096,7 +1096,7 @@
 								"tooBig" : { "portrait" : ["Shocked.png"], "randomDialogue" : ["Sorry. I like being able to fit into most kitchens~", "I'm pretty sure my boobs can't handle that, dear.", "If I was a slime, then maybe. But I'm not.", "That's impossible, even though I think it'd be fun." ]}
 							},
 							"horny" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["I knew you couldn't resist, hot stuff. Let me give you a hug~", "Hmhm, that I can do. Your paradise of milk awaits~", "Honestly? Yeah. I can't think of a better place.", "Ooh, yes~ Let's do so before someone finds out."] },
@@ -1118,7 +1118,7 @@
 								"tooBig" : { "portrait" : ["OwO.png"], "randomDialogue" : [ "Sorry. I like being able to fit into most bedrooms~", "I'm pretty sure my bed can't handle that, dear.", "If I was a succubus, then maybe. But I'm not.", "That's impossible, even though I really want to." ]}
 							},
 							"friendly" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Really. Fine.", "^red;Whatever floats your boat.", "^red;As you wish.", "^red;You're that horny, huh?"] },
@@ -1149,7 +1149,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "randomDialogue" : ["It's going to get ^pink;hot^reset;. Oh! You're into that.", "I figured you were never going to ask. I'm ready~", "Mhm, let's do this~", "I could practically smell how willing you are. Slip on in~"] },
@@ -1172,7 +1172,7 @@
 								"tooBig" : { "portrait" : ["Confused.png"], "randomDialogue" : ["T-tempting, but even I'm not that stretchy~", "Woof. You're big!", "No. I did consider it, though!", "I wouldn't be able to walk straight for weeks, so no." ]}
 							},
 							"hungry" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Sleepy.png"], "randomDialogue" : ["Not quite the hole I had in mind, but I don't mind.", "Sure! Might help me get a few discounts.", "Well, it was either this or my mouth. I still get a gravid belly regardless.", "Careful, I might not let you back out for a long time~"] },
@@ -1195,7 +1195,7 @@
 								"tooBig" : "vore.unbirth.race.personality.mood.tooBig"
 							},
 							"horny" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Determined.png"], "randomDialogue" : ["Time for you to find out just how strong those muscles are~", "I do love a willing toy~", "Excellent. Your ^pink;VIP suite^reset; is ready~", "I've got a nice ^pink;steamy^reset; cavern for you to explore~"] },
@@ -1218,7 +1218,7 @@
 								"tooBig" : "vore.unbirth.race.personality.mood.tooBig"
 							},
 							"friendly" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : { "portrait" : ["Angry.png"], "randomDialogue" : ["^red;Just get in.", "^red;Since you asked.", "^red;It'll be hot and wet.", "^red;Slip into my abyss." ] },
@@ -2979,7 +2979,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {
@@ -3050,7 +3050,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {
@@ -3122,7 +3122,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {
@@ -3195,7 +3195,7 @@
 						"default" : { // personality
 							"next" : "mood",
 							"default" : { // mood
-								"next" : "getVoreButtonAction",
+								"next" : "voreResponse",
 								"request" : {
 									"next" : "doingVore",
 									"before" : {

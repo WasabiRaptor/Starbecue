@@ -456,7 +456,7 @@ function sbq.getClosestValue(x, list)
 end
 
 function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTreeTop)
-	return false
+	if true then return false end
 
 	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTreeTop)
 	if not dialogueTree then return false end

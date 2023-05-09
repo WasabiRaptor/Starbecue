@@ -83,7 +83,7 @@ function init()
 	sbq.dialogueTree = sbq.data.dialogueTree
 
 
-	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or "greeting", sbq.dialogueTree )
+	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree )
 end
 
 function update()
@@ -149,24 +149,39 @@ function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
 	sbq.checkVoreButtonsEnabled()
 
 	local playerName = world.entityName(player.id())
+	local speaker = pane.sourceEntity()
+	local name = sbq.data.defaultName or world.entityName(pane.sourceEntity())
+	local buttonText = "..."
+	local portrait = sbq.data.defaultPortrait
+	local printDialogue = sbq.generateKeysmashes(dialogue.result.dialogue[dialogue.position] or dialogue.result.dialogue[#dialogue.result.dialogue], dialogue.result.keysmashMin, dialogue.result.keysmashMax)
 
-	local speaker = dialogue.result.speaker[dialogue.position] or dialogue.result.speaker[#dialogue.result.speaker] or pane.sourceEntity()
-
-	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(sbq.settings, (dialogue.result.location or sbq.settings.location).."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
-	local imagePortrait
-
-	nameLabel:setText(dialogue.result.name[dialogue.position] or dialogue.result.name[#dialogue.result.name] or sbq.data.defaultName or world.entityName(pane.sourceEntity()))
-	dialogueCont:setText(dialogue.result.buttonText[dialogue.position] or dialogue.result.buttonText[#dialogue.result.buttonText] or "...")
-
-	if sbq.data.entityPortrait then
-		sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait( speaker, dialogue.result.buttonText[dialogue.position] or dialogue.result.buttonText[#dialogue.result.buttonText] or sbq.data.defaultPortrait ), {32,8} )
-	else
-		dialoguePortrait:setFile(sbq.getPortraitPath((dialogue.result.portrait[dialogue.position] or dialogue.result.portrait[#dialogue.result.portrait] or sbq.data.defaultPortrait)))
+	if dialogue.result.speaker then
+		speaker = dialogue.result.speaker[dialogue.position] or dialogue.result.speaker[#dialogue.result.speaker]
+	end
+	if dialogue.result.name then
+		name = dialogue.result.name[dialogue.position] or dialogue.result.name[#dialogue.result.name]
+	end
+	if dialogue.result.buttonText then
+		buttonText = dialogue.result.buttonText[dialogue.position] or dialogue.result.buttonText[#dialogue.result.buttonText]
+	end
+	if dialogue.result.portrait then
+		portrait = dialogue.result.portrait[dialogue.position] or dialogue.result.portrait[#dialogue.result.portrait]
 	end
 
-	local dialogue = sbq.generateKeysmashes(dialogue.result.dialogue[dialogue.position] or dialogue.result.dialogue[#dialogue.result.dialogue], dialogue.result.keysmashMin, dialogue.result.keysmashMax)
-	dialogueLabel:setText(sb.replaceTags(dialogue, tags))
-	world.sendEntityMessage(speaker, "sbqSay", dialogue, tags, imagePortrait, emote)
+	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(sbq.settings, (dialogue.result.location or sbq.settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
+	local imagePortrait
+
+	nameLabel:setText(name)
+	dialogueCont:setText(buttonText)
+
+	if sbq.data.entityPortrait then
+		sbq.setPortrait( dialoguePortraitCanvas, world.entityPortrait(speaker, portrait), {32,8} )
+	else
+		dialoguePortrait:setFile(sbq.getPortraitPath(portrait))
+	end
+
+	dialogueLabel:setText(sb.replaceTags(printDialogue, tags))
+	world.sendEntityMessage(speaker, "sbqSay", printDialogue, tags, imagePortrait, emote)
 
 	if dialogue.position >= #dialogue.result.dialogue then
 		dialogue.finished = true
@@ -335,19 +350,22 @@ end
 
 function sbq.infusionButton(active, kind, locationName, locations)
 	sbq.settings.voreType = kind
-	sbq.settings.getVoreButtonAction = active
+	sbq.settings.voreResponse = active
 	sbq.settings.location = locationName
+	sbq.settings.doingVore = "before"
 	sbq.updateDialogueBox( "infusePrey", sbq.dialogueTree)
 	if active == "request" or active == "requestLayer" then
 		sbq.timer("infuseMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "infuseLocation", player.id(), locations or {locationName})
-			sbq.timer("gotInfused", dialogue.result.delay or 1.5, function ()
+			sbq.timer("gotInfused", dialogue.result.delay or 1.5, function()
+				sbq.settings.doingVore = "after"
 				for i, occupant in pairs(sbq.occupant or {}) do
 					if occupant.id == player.id() and occupant.flags.infused then
-						sbq.updateDialogueBox( "infusePrey.after", sbq.dialogueTree)
+						sbq.updateDialogueBox( "infusePrey", sbq.dialogueTree)
 						return
 					end
 				end
+				sbq.settings.voreResponse = "couldnt"
 				sbq.updateDialogueBox("infusePrey.couldnt", sbq.dialogueTree)
 			end)
 		end)
@@ -404,21 +422,24 @@ end
 function sbq.voreButton(voreType)
 	local active, locationName, locationData = sbq.checkVoreTypeActive(voreType)
 	sbq.settings.voreType = voreType
-	sbq.settings.getVoreButtonAction = active
+	sbq.settings.voreResponse = active
 	sbq.settings.location = locationName
+	sbq.settings.doingVore = "before"
 	sbq.updateDialogueBox( "vore", sbq.dialogueTree )
 	if active == "request" then
 		sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType,
 				{ id = player.id() })
-			sbq.timer("gotVored", dialogue.result.delay or 1.5, function ()
+			sbq.timer("gotVored", dialogue.result.delay or 1.5, function()
+				sbq.settings.doingVore = "after"
 				for i, occupant in pairs(sbq.occupant or {}) do
 					if occupant.id == player.id() then
-						sbq.updateDialogueBox( "vore.after", sbq.dialogueTree)
+						sbq.updateDialogueBox( "vore", sbq.dialogueTree)
 						return
 					end
 				end
-				sbq.updateDialogueBox("vore.couldnt" )
+				sbq.settings.voreResponse = "couldnt"
+				sbq.updateDialogueBox("vore", sbq.dialogueTree )
 			end)
 		end)
 	end
