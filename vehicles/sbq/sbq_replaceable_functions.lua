@@ -43,17 +43,17 @@ function sbq.struggleMessages(id)
 		}), sbq.lounging[id].flags)
 
 		if sbq.lounging[id].flags.infused and sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
-			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, { "infusedTease" }, true)
+			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, ".infusedTease", true)
 			return
 		end
 
 		if math.random() >= 0.5 then
 			if sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
-				world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, {"struggle"}, true )
+				world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, ".struggle", true )
 			end
 		else
 			if sbq.randomTimer(id.."struggleLine", 5, 15) then
-				world.sendEntityMessage(id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"struggling"}, false )
+				world.sendEntityMessage(id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), ".struggling", false )
 			end
 		end
 	end

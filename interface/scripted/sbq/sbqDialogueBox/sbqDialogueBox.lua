@@ -122,7 +122,7 @@ local randomDialogueHandling = {
 
 function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
 	local dialogueTree, dialogueTreeTop = dialogueTree, dialogueTreeTop
-	if path ~= dialogue.path and path ~= nil then
+	if path ~= nil then
 		_, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, sbq.settings, player.id(), dialogueTree, dialogueTreeTop)
 		if not dialogueTree then return false end
 		dialogue.path = path
@@ -353,7 +353,7 @@ function sbq.infusionButton(active, kind, locationName, locations)
 	sbq.settings.voreResponse = active
 	sbq.settings.location = locationName
 	sbq.settings.doingVore = "before"
-	sbq.updateDialogueBox( "infusePrey", sbq.dialogueTree)
+	sbq.updateDialogueBox( ".infusePrey", sbq.dialogueTree)
 	if active == "request" or active == "requestLayer" then
 		sbq.timer("infuseMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "infuseLocation", player.id(), locations or {locationName})
@@ -361,12 +361,12 @@ function sbq.infusionButton(active, kind, locationName, locations)
 				sbq.settings.doingVore = "after"
 				for i, occupant in pairs(sbq.occupant or {}) do
 					if occupant.id == player.id() and occupant.flags.infused then
-						sbq.updateDialogueBox( "infusePrey", sbq.dialogueTree)
+						sbq.updateDialogueBox( ".infusePrey", sbq.dialogueTree)
 						return
 					end
 				end
 				sbq.settings.voreResponse = "couldnt"
-				sbq.updateDialogueBox("infusePrey.couldnt", sbq.dialogueTree)
+				sbq.updateDialogueBox(".infusePrey", sbq.dialogueTree)
 			end)
 		end)
 	end
@@ -425,7 +425,7 @@ function sbq.voreButton(voreType)
 	sbq.settings.voreResponse = active
 	sbq.settings.location = locationName
 	sbq.settings.doingVore = "before"
-	sbq.updateDialogueBox( "vore", sbq.dialogueTree )
+	sbq.updateDialogueBox( ".vore", sbq.dialogueTree )
 	if active == "request" then
 		sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType,
@@ -434,12 +434,12 @@ function sbq.voreButton(voreType)
 				sbq.settings.doingVore = "after"
 				for i, occupant in pairs(sbq.occupant or {}) do
 					if occupant.id == player.id() then
-						sbq.updateDialogueBox( "vore", sbq.dialogueTree)
+						sbq.updateDialogueBox( ".vore", sbq.dialogueTree)
 						return
 					end
 				end
 				sbq.settings.voreResponse = "couldnt"
-				sbq.updateDialogueBox("vore", sbq.dialogueTree )
+				sbq.updateDialogueBox(".vore", sbq.dialogueTree )
 			end)
 		end)
 	end
@@ -451,7 +451,7 @@ function sbq.dismissAfterTimer(time)
 	else
 		sbq.forceTimer("dismissAfterTime", time, function()
 			if dialogue.result.continue then
-				sbq.updateDialogueBox("continue", sbq.prevDialogueBranch, sbq.dialogueTree)
+				sbq.updateDialogueBox(".continue", sbq.prevDialogueBranch, sbq.dialogueTree)
 			elseif dialogue.result.jump then
 				sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
 			elseif not dialogue.finished then
@@ -562,14 +562,12 @@ function dialogueCont:onClick()
 			end
 		end
 		if continue then
-			sbq.updateDialogueBox("continue", sbq.prevDialogueBranch, sbq.dialogueTree)
+			sbq.updateDialogueBox(".continue", sbq.prevDialogueBranch, sbq.dialogueTree)
 		else
-			sbq.updateDialogueBox("fail", sbq.prevDialogueBranch, sbq.dialogueTree)
+			sbq.updateDialogueBox(".fail", sbq.prevDialogueBranch, sbq.dialogueTree)
 		end
 	elseif dialogue.result.jump ~= nil then
 		sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
-	elseif type(sbq.dialogueTreeReturn) == "string" then -- if nothing else above was triggered, theres nothing to continue to, so might as well jump to a return point if we have one
-		sbq.updateDialogueBox(sbq.dialogueTreeReturn, sbq.prevDialogueBranch, sbq.dialogueTree)
 	end
 	if #contextMenu > 0 then
 		metagui.dropDownMenu(contextMenu, dialogue.result.optionsColumns or 2, dialogue.result.optionsW, dialogue.result.optionsH, dialogue.result.optionsS, dialogue.result.optionsAlign)

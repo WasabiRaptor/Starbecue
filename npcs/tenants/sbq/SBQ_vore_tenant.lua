@@ -237,16 +237,16 @@ function init()
 			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
 			if steppyType == "falling" then
 				if sbq.timer("sbqSteppyFall", 0.5) then
-					sbq.getRandomDialogue( {"gotSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+					sbq.getRandomDialogue( ".gotSteppy", eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
 				end
 			elseif sbq.timer("sbqSteppy", 5) then
-				sbq.getRandomDialogue( {"gotSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+				sbq.getRandomDialogue( ".gotSteppy", eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
 			end
 		end
 	end)
 	message.setHandler("sbqDidSteppy", function(_, _, eid, steppyType)
 		if sbq.timer("sbqDidSteppy", 5) then
-			sbq.getRandomDialogue( {"didSteppy"}, eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+			sbq.getRandomDialogue( ".didSteppy", eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
 		end
 	end)
 	message.setHandler("sbqReplaceInfusion", function(_, _, location, itemDrop, preyId, primaryLocation)
@@ -516,21 +516,21 @@ function sbq.doTargetAction()
 						location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
 						doingVore = "before"
 					}
-					local dialogueTree = sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings))) or {}
-
-					sbq.timer("eatMessage", dialogueTree.delay or 1.5, function()
+					sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+					local delay = dialogue.result.delay
+					sbq.timer("eatMessage", delay or 1.5, function()
 						if not storage.huntingTarget then sbq.getNextTarget() return end
 						self.board:setEntity("sbqHuntingTarget", nil)
 						sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
-						sbq.timer("gotVored", dialogueTree.delay or 1.5, function()
+						sbq.timer("gotVored", delay or 1.5, function()
 							if not storage.huntingTarget then sbq.getNextTarget() return end
 							settings.doingVore = "after"
 							if sbq.checkOccupant(storage.huntingTarget.id) then
-								sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+								sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 								storage.huntingTarget = nil
 							else
-								settings.voreResponse = "couldntEat"
-								sbq.getRandomDialogue({ "vore" }, storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+								settings.voreResponse = "couldnt"
+								sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 								self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 							end
 						end)
@@ -774,39 +774,43 @@ function sbq.saveSettingsToOccupantHolder()
 	end
 end
 
+local randomDialogueHandling = {
+	{ "randomDialogue", "dialogue" },
+	--{ "randomPortrait", "portrait" },
+	{ "randomEmote", "emote" },
+}
 
-function sbq.getRandomDialogue(dialogueTreeLocation, eid, settings, dialogueTree, appendName)
-	if true then return false end
+function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName)
 	settings.race = npc.species()
-	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
+	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree or sbq.dialogueTree)
 	if not dialogueTree then return false end
 
-	local randomRolls = {}
-	local randomDialogue = dialogueTree.randomDialogue
-	local randomPortrait = dialogueTree.randomPortrait
-	local randomEmote = dialogueTree.randomEmote
+	dialogue.randomRolls = {}
 
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
-
---[[
-	local imagePortrait
-	if not config.getParameter("entityPortrait") then
-		imagePortrait = ((config.getParameter("portraitPath") or "")..(randomPortrait or config.getParameter("defaultPortrait")))
-	end
-]]
-	local playerName
-
-	if type(eid) == "number" then
-		playerName = world.entityName(eid)
+	for _, v in ipairs(randomDialogueHandling) do
+		local randomVal = v[1]
+		local resultVal = v[2]
+		if not dialogue.result[resultVal] then
+			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, 1, dialogue.result[randomVal],
+				dialogueTree, dialogueTreeTop)
+			if type(randomResult) == "table" then
+				sb.jsonMerge(dialogue.result, randomResult)
+			elseif type(randomResult) == "string" then
+				dialogue.result[resultVal] = { randomResult }
+			end
+		end
 	end
 
-	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local entityname
 
-	if type(randomDialogue) == "string" then
-		sbq.say(sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags, imagePortrait, randomEmote, appendName)
-		return dialogueTree
+	if type(eid) == "number" then entityname = world.entityName(eid) end
+
+	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
+
+	for i, line in ipairs(dialogue.result.dialogue or {}) do
+		sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
+			sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags, (dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
+		end)
 	end
 end
 
@@ -1048,7 +1052,7 @@ function sbq.checkOccupantRewards(occupant, rewards, notify, recipient, holder, 
 		local rewardNotifyDelay = 0
 		for rewardName, data in pairs(newRewards) do
 			sendRewards = true
-			if notify and sbq.getRandomDialogue( treestart or {"rewardNotify"}, recipient, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool, isPrey = (occupant.id == entity.id()) }))) then
+			if notify and sbq.getRandomDialogue( treestart or ".rewardNotify", recipient, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool, isPrey = (occupant.id == entity.id()) }))) then
 				rewardNotifyDelay = rewardNotifyDelay + 5
 			end
 		end

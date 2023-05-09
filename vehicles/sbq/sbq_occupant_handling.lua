@@ -264,7 +264,7 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 		local entityType = world.entityType(args.id)
 		local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
 
-		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"vored"}, true ) end
+		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), ".vored", true ) end
 
 		return true, function()
 			sbq.justAte = nil
@@ -295,14 +295,14 @@ function sbq.doEscape(args, statuses, afterstatuses, voreType )
 	local entityType = world.entityType(args.id)
 	local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
 
-	if sayLine then world.sendEntityMessage( sbq.driver, "sbqSayRandomLine", args.id, settings, {"letout"}, true ) end
+	if sayLine then world.sendEntityMessage( sbq.driver, "sbqSayRandomLine", args.id, settings, ".letout", true ) end
 	sbq.lounging[victim].location = "escaping"
 
 	vehicle.setInteractive( false )
 	world.sendEntityMessage( victim, "sbqApplyStatusEffects", statuses )
 	sbq.transitionLock = true
 	return true, function()
-		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"escape"}, false) end
+		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), ".escape", false) end
 		sbq.transitionLock = false
 		sbq.checkDrivingInteract()
 		sbq.uneat( victim )
@@ -443,13 +443,13 @@ sbq.shrinkQueue = {}
 function sbq.infusedStruggleDialogue(location, data, npcArgs, eid)
 	if (sbq.totalTimeAlive > 0.5) then
 		if (math.random() > 0.5) then
-			local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
+			local dialogue, tags, imagePortrait = sbq.getNPCDialogue(".infused", location, data, npcArgs) -- this will change to its own part of the tree
 			world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
 				parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
 				sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
 			})
 		else
-			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, {"infusedTease"}, true )
+			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, ".teaseInfused", true )
 		end
 	end
 	if (not eid) or (type(eid)=="number" and (world.entityType(eid)~="player")) then

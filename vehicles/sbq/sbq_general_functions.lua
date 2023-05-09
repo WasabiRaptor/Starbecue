@@ -455,36 +455,39 @@ function sbq.getClosestValue(x, list)
 	return closest, closestKey
 end
 
-function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTreeTop)
-	if true then return false end
+local randomDialogueHandling = {
+	{ "randomDialogue", "dialogue" },
+	{ "randomName", "name" },
+}
 
-	local dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTreeTop)
+function sbq.getRandomDialogue(npcConfig, path, eid, settings, dialogueTree)
+	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree)
 	if not dialogueTree then return false end
 
-	local randomRolls = {}
-	local randomDialogue = dialogueTree.randomDialogue
-	local randomPortrait = dialogueTree.randomPortrait
-	local randomEmote = dialogueTree.randomEmote
+	dialogue.randomRolls = {}
 
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, eid, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
---[[
-	local imagePortrait
-	if not npcConfig.scriptConfig.entityPortrait then
-		imagePortrait = ((npcConfig.scriptConfig.portraitPath or "")..(randomPortrait or npcConfig.scriptConfig.defaultPortrait))
-	end
-]]
-	local playerName
-
-	if type(eid) == "number" then
-		playerName = world.entityName(eid)
+	for _, v in ipairs(randomDialogueHandling) do
+		local randomVal = v[1]
+		local resultVal = v[2]
+		if not dialogue.result[resultVal] then
+			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, 1, dialogue.result[randomVal],
+				dialogueTree, dialogueTreeTop)
+			if type(randomResult) == "table" then
+				sb.jsonMerge(dialogue.result, randomResult)
+			elseif type(randomResult) == "string" then
+				dialogue.result[resultVal] = { randomResult }
+			end
+		end
 	end
 
-	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local entityname
 
-	if type(randomDialogue) == "string" then
-		return sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags--, imagePortrait
+	if type(eid) == "number" then entityname = world.entityName(eid) end
+
+	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
+
+	if type(dialogue.result.dialogue[1]) == "string" then
+		return sbq.generateKeysmashes(dialogue.result.dialogue[1], dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags--, imagePortrait
 	end
 end
 

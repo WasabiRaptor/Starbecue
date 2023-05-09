@@ -69,8 +69,6 @@
 			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
 			// if no setting is found it only attempts to go down the branch with the matching name of the next step
 
-			"dialogueTreeReturn" : ["converse"], // this sets it so that when you reach the end of a tree with nowhere to continue, and the button has no actions, it will return to the most recent time it saw one of these while moving down the tree
-
 			// greeting is the default start of the tree
 			// settings come from itself
 			//"greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file

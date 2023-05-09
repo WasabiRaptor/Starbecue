@@ -35,8 +35,8 @@
 
 			// overall default values for a "new" dialogue
 			"default" : {
-				"dialogueTreeReturn" : "greeting"	// if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
-
+				"randomDialogue" : ["Whoops! looks like some kind of error!"],
+				"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 			},
 			// greeting is the default start of the tree
 			// settings come from itself
@@ -114,7 +114,7 @@
 						"replace" : {"randomDialogue" : [":defaultBellyFull"]},
 						"next" : [
 							"personality",
-							"locationDigestSlot",
+							"locationEffectSlot",
 							"locationCompression"
 						],
 						"shy" : {"replace" : {"randomDialogue" : [":shyDefaultFull"]}},
@@ -161,14 +161,14 @@
 					},
 					"seperateNext" : true,
 					"next" : [
-						"locationDigestSlot",
+						"locationEffectSlot",
 						"locationCompression",
 						"locationEnergyDrain",
 						"eggify",
 						"transforming"
 					],
-					"locationDigestSlot" : {
-						"softDigest" : ".locationDigestSlot.digest",
+					"locationEffectSlot" : {
+						"softDigest" : ".locationEffectSlot.digest",
 						"digest" : {
 							"replace" : {"randomDialogue" : [":digestStruggle"]},
 							"next" : "digestImmunity",

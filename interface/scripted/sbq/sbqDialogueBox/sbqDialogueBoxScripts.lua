@@ -124,7 +124,7 @@ end
 function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, dialogueTreeTop)
 	local returnVal = path
 	local tags = {}
-	for k, v in pairs(settings) do
+	for k, v in pairs(settings or {}) do
 		if (type(v) ~= "table") then
 			tags[tostring(k)] = tostring(v)
 		end
@@ -162,6 +162,11 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 				percentage = health[1] / health[2]
 			else
 				percentage = settings[randomTable.percentage] or 0.5
+			end
+			if percentage >= 1 then
+				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.full, dialogueTree, dialogueTreeTop)
+			elseif percentage <= 0 then
+				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.empty, dialogueTree, dialogueTreeTop)
 			end
 			return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)
 		end
@@ -230,54 +235,28 @@ function sbq.checkTable(check, checked)
 end
 
 
-function dialogueBoxScripts.getLocationEffect(dialogueTree, settings, branch, eid, ...)
-	local dialogueTree = dialogueTree
-	local options = {}
-	local effect = settings[(dialogueTree.location or settings.location).."Effect"]
-	if settings.digested then
-		return dialogueTree.digested or dialogueTree.default
-	end
-
-	if settings.healing then
-		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
-	end
+function dialogueBoxScripts.locationEffectSlot(dialogueTree, settings, branch, eid, ...)
 	if settings.digesting then
-		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
+		return "digest"
 	elseif settings.healing then
-		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
+		return "heal"
 	end
-	table.insert(options, effect or "default")
-
-	if settings[(dialogueTree.location or settings.location).."Compression"] then
-		table.insert(options, (dialogueTree.location or settings.location).."Compression")
+	return settings[(dialogue.result.location or settings.location).."EffectSlot"]
+end
+function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, ...)
+	if settings.digesting then
+		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
+	elseif settings.healing then
+		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
 	end
-	if settings.transformed and dialogueTree.transformed then
-		table.insert(options, "transformed")
-	elseif not settings.transformed and settings.progressBarType == "transforming" and dialogueTree.transform then
-		table.insert(options, "transform")
-	end
-	if settings.egged and dialogueTree.egged then
-		table.insert(options, "egged")
-	elseif not settings.egged and settings.progressBarType == "eggifying" and dialogueTree.eggify then
-		table.insert(options, "eggify")
-	end
-
-	return dialogueTree[options[math.random(#options)]] or dialogueTree.default
+	return settings[(dialogue.result.location or settings.location).."Effect"]
 end
 
-function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, ...)
-	local dialogueTree = dialogueTree
-	local effect = settings[(dialogueTree.location or settings.location).."Effect"]
-	if settings.digested then
-		return dialogueTree.digested or dialogueTree.default
-	end
-	if settings.digesting then
-		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
-	elseif settings.healing then
-		effect = settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
-	end
-
-	return dialogueTree[effect] or dialogueTree.default
+function dialogueBoxScripts.locationCompression(dialogueTree, settings, branch, eid, ...)
+	return settings[(dialogue.result.location or settings.location).."Compression"]
+end
+function dialogueBoxScripts.locationEnergyDrain(dialogueTree, settings, branch, eid, ...)
+	return settings[(dialogue.result.location or settings.location).."EnergyDrain"]
 end
 
 function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, eid, ...)
