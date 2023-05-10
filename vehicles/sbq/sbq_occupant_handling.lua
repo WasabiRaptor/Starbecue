@@ -259,7 +259,8 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 			voreType = voreType or "default",
 			predator = sbq.species,
 			location = location,
-			entryType = voreType
+			entryType = voreType,
+			willing = args.willing or false,
 		}
 		local entityType = world.entityType(args.id)
 		local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)

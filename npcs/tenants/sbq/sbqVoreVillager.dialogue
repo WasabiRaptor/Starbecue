@@ -1465,7 +1465,9 @@
 		[
 			"Mmmm pretty comfortable.",
 			"Ahh... your belly is so soft..."
-		]
+		],
+		{"check": {"bellySounds": true},"add": ":strugglingBellyNoisy"}
+
 	],
 	"strugglingBellyNoisy": [
 		"Your belly is so noisy.",
@@ -1480,9 +1482,12 @@
 		"I could just drift off to sleep listening to the sounds of your body..."
 	],
 	"strugglingBellyHeal": [
-		"Ahh... its so soothing.",
-		"I can feel all my troubles melting away...",
-		"Its so comfortable in here."
+		[
+			"Ahh... its so soothing.",
+			"I can feel all my troubles melting away...",
+			"Its so comfortable in here."
+		],
+		{"check": {"bellySounds": true},"add": ":strugglingBellyNoisyHeal"}
 	],
 	"strugglingBellyDigestImmune": [
 		[
@@ -1498,14 +1503,17 @@
 		"All this grumbling... you must be pretty hungry."
 	],
 	"strugglingBellyDigest": [
-		"Ahh... I'm starting to melt.",
-		"Oh my... I'm just gonna be food."
+		[
+			"Ahh... I'm starting to melt.",
+			"Oh my... I'm just gonna be food."
+		],
+		{"check": {"bellySounds": true},"add": ":strugglingBellyNoisyDigest"}
 	],
-	"strugglingBellyTransformingVaporeon": [
+	"strugglingTransformingVaporeon": [
 		"Its... its like I'm turning into goo?",
 		"I'm being turned into a Vapreon..."
 	],
-	"strugglingBellyTransforming": [
+	"strugglingTransforming": [
 		"It feels kinda weird in here?",
 		"It feels like... I'm changing?"
 	],
@@ -1537,10 +1545,14 @@
 		"Oh my... I'm a slime now",
 		"I'm just a blob of slime now..."
 	],
-	"strugglingSlimeTransforming": [
-		"Ahh... I'm being turned into slime...",
-		"Its like my limbs are turning into jelly..."
-	],
+	"strugglingSlimeTransforming": {
+		"percentage" : "progressBar",
+		"full" : ":strugglingSlimeTransformed",
+		"pools": [
+			["Ahh... I'm being turned into slime...",
+			"Its like my limbs are turning into jelly..."]
+		]
+	},
 	"strugglingBalls": [
 		"All this cum sloshing around me~",
 		"Ahhh... I'm stored in the balls~",

@@ -23,7 +23,8 @@ function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTo
 	local dialogueTreeTop = sbq.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	if not dialogueTree then return false end
-	local finished = sbq.processDialogueStep(dialogueTree)
+	sbq.processDialogueStep(dialogueTree)
+	local finished = false
 	if dialogueTree.next and not finished then
 		if dialogueTree.randomNext and type(dialogueTree.next) == "table" then
 			local step = dialogueTree.next[math.random(#dialogueTree.next)]
@@ -31,12 +32,26 @@ function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTo
 		elseif type(dialogueTree.next) == "table" then
 			for _, step in ipairs(dialogueTree.next) do
 				finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
+				if finished then break end
 			end
 		elseif type(dialogueTree.next) == "string" then
 			finished = sbq.doNextStep(dialogueTree.next, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
 		end
 	end
-	return finished or false, dialogueTree, dialogueTreeTop
+	if dialogueTree.addQueued then
+		for k, v in pairs(dialogue.queue) do
+			if type(v) == "table" then
+				dialogue.result[k] = dialogue.result[k] or {}
+				util.appendLists(dialogue.result[k], v)
+			elseif type(v) == "string" then
+				dialogue.result[k] = (dialogue.result[k] or "") .. v
+			elseif type(v) == "number" then
+				dialogue.result[k] = (dialogue.result[k] or 0) + v
+			end
+		end
+		dialogue.queue = sb.jsonMerge({}, {})
+	end
+	return finished or dialogueTree.finished or false, dialogueTree, dialogueTreeTop
 end
 
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
@@ -79,19 +94,6 @@ function sbq.processDialogueStep(dialogueTree)
 			end
 		end
 	end
-	if not dialogueTree.next or dialogueTree.addQueued then
-		for k, v in pairs(dialogue.queue) do
-			if type(v) == "table" then
-				dialogue.result[k] = dialogue.result[k] or {}
-				util.appendLists(dialogue.result[k], v)
-			elseif type(v) == "string" then
-				dialogue.result[k] = (dialogue.result[k] or "") .. v
-			elseif type(v) == "number" then
-				dialogue.result[k] = (dialogue.result[k] or 0) + v
-			end
-		end
-		dialogue.queue = sb.jsonMerge({}, {})
-	end
 	if dialogueTree.newQueue then
 		dialogue.queue = sb.jsonMerge({}, dialogueTree.newQueue)
 	end
@@ -115,7 +117,6 @@ function sbq.processDialogueStep(dialogueTree)
 			end
 		end
 	end
-	if dialogueTree.finished then return true end
 end
 
 function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, dialogueTreeTop)
