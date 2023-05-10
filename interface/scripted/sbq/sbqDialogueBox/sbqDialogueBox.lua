@@ -239,34 +239,11 @@ function sbq.checkVoreTypeActive(voreType)
 		if sbq.settings[voreType .. "Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
 			if type(sbq.data.occupantHolder) ~= "nil" and type(sbq.occupants) == "table" then
 				if sbq.occupants[locationName] == nil then return "hidden" end
-				if locationData.requiresInfusion and not sbq.settings[locationName.."InfusedItem"] then return "needsInfusion" end
-				local full = (
-					not locationData.sided
-					and ((sbq.occupants[locationName] + size) > (sbq.settings[locationName .. "VisualMax"] or locationData.max))
-					and not (sbq.settings[locationName .. "Hammerspace"])
-				)
-				local sidedFull = (
-					locationData.sided
-					and ((sbq.occupants[locationName.."L"] + size) > (sbq.settings[locationName .. "VisualMax"] or locationData.max))
-					and ((sbq.occupants[locationName.."R"] + size) > (sbq.settings[locationName .. "VisualMax"] or locationData.max))
-					and not (sbq.settings[locationName .. "Hammerspace"])
-				)
-				if full or sidedFull then
-					return "tooBig", locationName, locationData
-				elseif not locationData.sided and (sbq.occupants[locationName] >= (sbq.settings[locationName.."VisualMax"] or locationData.max))
-				or locationData.sided and (
-					(sbq.occupants[locationName.."L"] >= (sbq.settings[locationName.."LVisualMax"] or locationData.max))
-					and (sbq.occupants[locationName.."R"] >= (sbq.settings[locationName.."RVisualMax"] or locationData.max))
-				)
-				then
-					if sbq.actualOccupants == 0 then
-						return "otherLocationFull", locationName, locationData
-					else
-						return "full", locationName, locationData
-					end
-				else
-					return "request", locationName, locationData
-				end
+				if locationData.requiresInfusion and not sbq.settings[locationName .. "InfusedItem"] then return "needsInfusion" end
+				if size < ((sbq.settings[voreType .. "PreferredPreySizeMin"] or 0.1) * (sbq.data.scale or 1)) then return "tooSmall", locationName, locationData end
+				if size > ((sbq.settings[voreType .. "PreferredPreySizeMax"] or 1.25) * (sbq.data.scale or 1)) then return "tooBig", locationName, locationData end
+				if sbq.getSidedLocationWithSpace(locationName, size) then return "request", locationName, locationData end
+				return "full", locationName, locationData
 			else
 				return "request", locationName, locationData
 			end
@@ -278,11 +255,49 @@ function sbq.checkVoreTypeActive(voreType)
 	end
 end
 
+function sbq.getLocationSetting(location, setting, default)
+	return sbq.settings[location..setting] or sbq.settings["default"..setting] or default
+end
+
+function sbq.locationSpaceAvailable(location, side)
+	if sbq.getLocationSetting(location, "Hammerspace") and sbq.sbqData.locations[location].hammerspace then
+		return math.huge
+	end
+	return (((sbq.sbqData.locations[location..(side or "")] or {}).max or 0) * ((sbq.data.scale or 1))) - (sbq.occupants[location..(side or "")] or 0)
+end
+
+function sbq.getSidedLocationWithSpace(location, size)
+	local data = sbq.sbqData.locations[location] or {}
+	local sizeMultiplied = ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
+	if data.sided then
+		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
+		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
+		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
+			if sbq.direction > 0 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
+				if leftHasSpace then return location, "L", data
+				elseif rightHasSpace then return location, "R", data
+				else return false end
+			else
+				if rightHasSpace then return location, "R", data
+				elseif leftHasSpace then return location, "L", data
+				else return false end
+			end
+		elseif sbq.occupants[location .. "L"] < sbq.occupants[location .. "R"] and leftHasSpace then return location, "L", data
+		elseif sbq.occupants[location .. "L"] > sbq.occupants[location .. "R"] and rightHasSpace then return location, "R", data
+		else return false end
+	else
+		if sbq.locationSpaceAvailable(location, "") > sizeMultiplied then
+			return location, "", data
+		end
+	end
+	return false
+end
+
 function sbq.checkVoreButtonsEnabled()
 	if not sbq.speciesConfig then return end
 	for i, voreType in pairs(sbq.config.voreTypes or {}) do
 		local button = _ENV[voreType]
-		if (sbq.prevDialogueBranch or {}).hideVoreButtons then
+		if dialogue.result.hideVoreButtons then
 			button:setVisible(false)
 		else
 			local active = sbq.checkVoreTypeActive(voreType)
@@ -328,7 +343,7 @@ function sbq.checkInfusionActionButtonsEnabled()
 end
 
 function sbq.infusionButtonSetup(active, button, voreType)
-	if (sbq.prevDialogueBranch or {}).hideVoreButtons then
+	if dialogue.result.hideVoreButtons then
 		button:setVisible(false)
 	else
 		button.active = active

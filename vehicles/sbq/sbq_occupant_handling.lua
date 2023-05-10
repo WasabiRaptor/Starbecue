@@ -703,10 +703,17 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
 	end
 
-	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
+	local compression = sbq.getLocationSetting(location, "Compression")
+
+	if ( compression == "time") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
 		sbq.occupant[i].sizeMultiplier = math.min(1,
 			math.max(sbq.getLocationSetting(location, "CompressionMultiplier", 0.25), sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt * 0.01)))
 	end
+	if ( compression == "health") and not sbq.occupant[i].flags.digested then
+		sbq.occupant[i].sizeMultiplier = math.min(1,
+			math.max(sbq.getLocationSetting(location, "CompressionMultiplier", 0.25), (health[1] / health[2])))
+	end
+
 
 	local progressbarDx = 0
 	if sbq.occupant[i].progressBarActive == true then

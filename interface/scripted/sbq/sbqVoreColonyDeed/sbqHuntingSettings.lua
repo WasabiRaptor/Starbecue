@@ -100,8 +100,8 @@ function sbq.huntingTab()
 		local preferredSize = { type = "slider", id = voreType .. "PreferredPreySizeSlider", extendMax = true, notches = {0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3},
 			handles = {
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPreySizeMin"] or 0.1), locked = sbq.overrideSettings[voreType .. "PreferredPreySizeMin"] ~= nil, toolTip = "Minimum Relative Prey Size" },
-				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredPreySizeMin"] or 0.1), math.min((sbq.predatorSettings[voreType .. "PreferredPreySizeMax"] or 1), (sbq.predatorSettings[voreType .. "PreferredPreySize"] or 0.5))), locked = sbq.overrideSettings[voreType .. "PreferredPreySize"] ~= nil, toolTip = "Preferred Relative Prey Size" },
-				{ value = (sbq.predatorSettings[voreType .. "PreferredPreySizeMax"] or 1), locked = sbq.overrideSettings[voreType .. "PreferredPreySizeMax"] ~= nil, toolTip = "Maximum Relative Prey Size" }
+				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredPreySizeMin"] or 0.1), math.min((sbq.predatorSettings[voreType .. "PreferredPreySizeMax"] or 1.25), (sbq.predatorSettings[voreType .. "PreferredPreySize"] or 0.5))), locked = sbq.overrideSettings[voreType .. "PreferredPreySize"] ~= nil, toolTip = "Preferred Relative Prey Size" },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPreySizeMax"] or 1.25), locked = sbq.overrideSettings[voreType .. "PreferredPreySizeMax"] ~= nil, toolTip = "Maximum Relative Prey Size" }
 			}
 		}
 		local preferredVore = { type = "slider", id = voreType .. "PreferredPred", min = 0, max = 10, snapOnly = true,
@@ -217,8 +217,8 @@ function sbq.baitingTab()
 
 		local preferredSize = { type = "slider", id = voreType .. "PreferredPredSizeSlider", extendMax = true, notches = {0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 2.5, 3},
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "PreferredPredSizeMin"] or 1), locked = sbq.overrideSettings[voreType .. "PreferredPredSizeMin"] ~= nil, toolTip = "Minimum Relative Pred Size" },
-				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredPredSizeMin"] or 1), math.min((sbq.predatorSettings[voreType .. "PreferredPredSizeMax"] or 3), (sbq.predatorSettings[voreType .. "PreferredPredSize"] or 2))), locked = sbq.overrideSettings[voreType .. "PreferredPredSize"] ~= nil, toolTip = "Preferred Relative Pred Size" },
+				{ value = (sbq.predatorSettings[voreType .. "PreferredPredSizeMin"] or 0.75), locked = sbq.overrideSettings[voreType .. "PreferredPredSizeMin"] ~= nil, toolTip = "Minimum Relative Pred Size" },
+				{ value = math.max((sbq.predatorSettings[voreType .. "PreferredPredSizeMin"] or 0.75), math.min((sbq.predatorSettings[voreType .. "PreferredPredSizeMax"] or 3), (sbq.predatorSettings[voreType .. "PreferredPredSize"] or 2))), locked = sbq.overrideSettings[voreType .. "PreferredPredSize"] ~= nil, toolTip = "Preferred Relative Pred Size" },
 				{ value = (sbq.predatorSettings[voreType .. "PreferredPredSizeMax"] or 3), locked = sbq.overrideSettings[voreType .. "PreferredPredSizeMax"] ~= nil, toolTip = "Maximum Relative Pred Size" }
 			}
 		}

@@ -20,10 +20,7 @@ dialogue = {
 }
 
 function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
-	sb.logInfo("start")
-	sb.logInfo(sb.printJson(path))
-	sb.logInfo(sb.printJson(dialogue, 1))
-	local dialogueTreeTop = dialogueTreeTop or dialogueTree
+	local dialogueTreeTop = sbq.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	if not dialogueTree then return false end
 	local finished = sbq.processDialogueStep(dialogueTree)
@@ -138,7 +135,7 @@ function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, 
 			returnVal = root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile..returnVal) or {}
 		elseif firstChar == "." then
 			local trim = returnVal:sub(2, -1)
-			returnVal = sb.jsonQuery(dialogueTree, trim) or sb.jsonQuery(dialogueTreeTop, trim)
+			returnVal = sb.jsonQuery(dialogueTree or {}, trim) or sb.jsonQuery(dialogueTreeTop or {}, trim)
 		else break end
 	end
 	if (type(returnVal) == "string" and returnStrings) or type(returnVal) == "table" then
@@ -163,9 +160,9 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 			else
 				percentage = settings[randomTable.percentage] or 0.5
 			end
-			if percentage >= 1 then
+			if percentage >= 1 and randomTable.full then
 				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.full, dialogueTree, dialogueTreeTop)
-			elseif percentage <= 0 then
+			elseif percentage <= 0 and randomTable.empty then
 				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.empty, dialogueTree, dialogueTreeTop)
 			end
 			return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)

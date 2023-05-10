@@ -69,23 +69,109 @@
 		"Mind helping me out? I'm starved.",
 		"Food shouldn't be walking around, let me fix that."
 	],
-	"defaultNPCRequestOralVore": {
+	"defaultSelfRequestOralVore": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
-				"I'm so hungry, I need you in my belly!"
+				"I'm soooo hungry... I need to eat something... can I have you?"
 			],
 			[ // 25% - 50%
-				"Mmmmm hungry, can I eat you?"
+				"Mmmmm hungry... can I... eat you?"
 			],
 			[ // 50% - 75%
-				"I could use a meal, would you want to be it?"
+				"I could use a meal... would you want to be it?"
 			],
 			[ // 75% - 100%
-				"I'm a bit peckish, can I use you to top off?"
+				"I'm a bit peckish... can I eat you to top off?"
 			]
 		]
 	},
+	"shySelfRequestOralVore" : ":defaultSelfRequestOralVore",
+	"flirtySelfRequestOralVore" : ":defaultSelfRequestOralVore",
+
+	"defaultSelfRequestOralVoreYes" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Thank you so much! I thought I'd starve!"
+			],
+			[ // 25% - 50%
+				"Thanks... I was really hungry."
+			],
+			[ // 50% - 75%
+				"Thank you! I just needed to satiate those grumbles."
+			],
+			[ // 75% - 100%
+				"Thanks, you should be just the snack I need."
+			]
+		]
+	},
+	"shySelfRequestOralVoreYes" : ":defaultSelfRequestOralVoreYes",
+	"flirtySelfRequestOralVoreYes" : ":defaultSelfRequestOralVoreYes",
+
+	"defaultSelfRequestOralVoreNoYes" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Sorry... I can't take no for an answer right now!"
+			],
+			[ // 25% - 50%
+				"Mmm... I think my grumbling belly disagrees with that."
+			],
+			[ // 50% - 75%
+				"Why don't you try it out first, then we'll see."
+			],
+			[ // 75% - 100%
+				"Are you quite sure? why don't we see what you think once you're inside."
+			]
+		]
+	},
+	"shySelfRequestOralVoreNoYes" : ":defaultSelfRequestOralVoreNoYes",
+	"flirtySelfRequestOralVoreNoYes" : ":defaultSelfRequestOralVoreNoYes",
+
+	"defaultSelfRequestOralVoreYesAfter" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Ahhh~ you *Really* hit the spot there."
+			],
+			[ // 25% - 50%
+				"MMmmmm... feeling better already."
+			],
+			[ // 50% - 75%
+				"You're filling me right up."
+			],
+			[ // 75% - 100%
+				"Mmm, the perfect snack."
+			]
+		]
+	},
+	"shySelfRequestOralVoreYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
+	"flirtySelfRequestOralVoreYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
+	"defaultSelfRequestOralVoreNoYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
+	"shySelfRequestOralVoreNoYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
+	"flirtySelfRequestOralVoreNoYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
+
+	"defaultSelfRequestOralVoreNo" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Ahh... I'll have to find something else..."
+			],
+			[ // 25% - 50%
+				"Thats alright... I'll find another meal..."
+			],
+			[ // 50% - 75%
+				"Thats ok, not everyone wants to be a meal."
+			],
+			[ // 75% - 100%
+				"Eh I just wanted a snack, don't fret on it."
+			]
+		]
+	},
+	"shySelfRequestOralVoreNo" : ":defaultSelfRequestOralVoreNo",
+	"flirtySelfRequestOralVoreNo" : ":defaultSelfRequestOralVoreNo",
+
 	"defaultNPCDeniedOralVore": {
 		"percentage": "food",
 		"pools": [
@@ -143,23 +229,23 @@
 		"I wish I could but...\nI'm already too full.",
 		"Can't fit any more..."
 	],
-	"defaultBellyFull": [
+	"defaultOralVoreFull": [
 		"I'm a bit too full...",
 		"My belly can't stretch any further...",
 		"I've eaten too much already...",
 		"I would... but I'm too full..."
 	],
-	"digestBellyFull": [
+	"digestOralVoreFull": [
 		"Maybe after I melt down the last meal",
 		"Urrrrp!\n Won't be too long until I can fit you.",
 		"I've eaten too much already... but I'll probably have room soon.",
 		"I'll have to finish processing this meal first."
 	],
-	"hungryDefaultBellyFull": [
+	"hungryDefaultOralVoreFull": [
 		"I wish I could but- Bwuuurph!\n...too full...",
 		"I've already had my fill."
 	],
-	"hungryDigestBellyFull": [
+	"hungryDigestOralVoreFull": [
 		"Give it a few minutes.\nThen we'll see if I'm still hungry.",
 		"Bwuuuurp!\nSoon...",
 		"Check in when this meal's finished."

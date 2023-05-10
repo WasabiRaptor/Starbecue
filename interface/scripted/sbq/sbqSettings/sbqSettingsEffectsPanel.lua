@@ -179,7 +179,9 @@ function sbq.updateLocationTab(location)
 					{ type = "label", text = "Hammerspace", visible = locationData.hammerspace or false}
 				},
 				{
-					{ type = "checkBox", id = location .. "Compression", checked = sbq.predatorSettings[location .. "Compression"], toolTip = "Prey will be compressed to a smaller size over time." },
+					{ type = "checkBox", radioGroup = "Compression", id = location .. "TimeCompression", checked = sbq.predatorSettings[location .. "Compression"] == "time", toolTip = "Prey will be compressed to a smaller size over time." },
+					{ type = "checkBox", radioGroup = "Compression", id = location .. "HealthCompression", checked = sbq.predatorSettings[location .. "Compression"] == "health", toolTip = "Prey will be compressed to a smaller based on their health." },
+					{ type = "checkBox", radioGroup = "Compression", id = location .. "NoneCompression", checked = sbq.predatorSettings[location .. "Compression"] == false, toolTip = "Prey will not be compressed.", visible = false },
 					{ type = "label", text = "Compression " },
 					{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
 				}
@@ -359,10 +361,16 @@ function sbq.updateLocationTab(location)
 		local digestButton = _ENV[location.."Digest"]
 		local effectLabel = _ENV[location.."EffectLabel"]
 
-		function noneButton:onClick() sbq.locationEffectButton(noneButton, location, locationData, effectLabel) end
-		function healButton:onClick() sbq.locationEffectButton(healButton, location, locationData, effectLabel) end
-		function softDigestButton:onClick() sbq.locationEffectButton(softDigestButton, location, locationData, effectLabel) end
-		function digestButton:onClick() sbq.locationEffectButton(digestButton, location, locationData, effectLabel) end
+		function noneButton:onClick() sbq.locationEffectButton(self, location, locationData, effectLabel) end
+		function healButton:onClick() sbq.locationEffectButton(self, location, locationData, effectLabel) end
+		function softDigestButton:onClick() sbq.locationEffectButton(self, location, locationData, effectLabel) end
+		function digestButton:onClick() sbq.locationEffectButton(self, location, locationData, effectLabel) end
+
+		local timeCompression = _ENV[location.."TimeCompression"]
+		local healthCompression = _ENV[location .. "HealthCompression"]
+		function timeCompression:onClick() sbq.radioButton(self, location.."Compression", "changeGlobalSetting")end
+		function healthCompression:onClick() sbq.radioButton(self, location.."Compression", "changeGlobalSetting")end
+
 
 		local visualSize = _ENV[location .. "VisualSize"]
 		local multiplier = _ENV[location .. "Multiplier"]
@@ -434,6 +442,15 @@ function sbq.locationEffectButton(button, location, locationData, effectLabel)
 
 	effectLabel:setText((sbq.config.bellyStatusEffectNames[effect] or "No Effect"))
 	sbq.saveSettings()
+end
+
+function sbq.radioButton(button, setting, settingfunc)
+	if sbq[settingGroup][setting] == button.value then
+		button:selectValue(false)
+		sbq[settingfunc](setting, false)
+	else
+		sbq[settingfunc](setting, button.value)
+	end
 end
 
 function sbq.locationDefaultSettings(locationData,location)

@@ -435,7 +435,8 @@ function interact(args)
 		defaultPortrait = config.getParameter("defaultPortrait"),
 		portraitPath = config.getParameter("portraitPath"),
 		defaultName = config.getParameter("defaultName"),
-		occupantHolder = sbq.occupantHolder
+		occupantHolder = sbq.occupantHolder,
+		scale = status.statusProperty("animOverrideScale")
 	}
 	dialogueBoxData.settings.race = npc.species()
 
@@ -1030,7 +1031,7 @@ function sbq.maybeAddToTargetList(eid, voreType, ext, score)
 				local relativeSize = enabled.size / scale
 				local location = ((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType] or {}).location
 				if (relativeSize > (storage.settings[voreType .. "PreferredPreySizeMin"] or 0.1))
-				and (relativeSize < (storage.settings[voreType .. "PreferredPreySizeMax"] or 1))
+				and (relativeSize < (storage.settings[voreType .. "PreferredPreySizeMax"] or 1.25))
 				and location and sbq.getSidedLocationWithSpace(location, enabled.size)
 				then
 					table.insert(sbq.targetedEntities, {eid, score * ((math.abs((storage.settings[voreType .. "PreferredPreySize"] or 0.5)-relativeSize) * 5) + world.magnitude(mcontroller.position(), world.entityPosition(eid)))})
