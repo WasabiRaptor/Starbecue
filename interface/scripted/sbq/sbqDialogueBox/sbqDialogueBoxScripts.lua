@@ -55,7 +55,6 @@ function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTo
 end
 
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
-	sb.logInfo(sb.printJson(step))
 	if dialogueTree[step] or (not useStepPath) then
 		if dialogueBoxScripts[step] then
 			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(dialogueBoxScripts[step](dialogueTree, settings, branch, eid) or "default"), settings, eid, dialogueTree, dialogueTreeTop)
@@ -258,47 +257,27 @@ function dialogueBoxScripts.locationEnergyDrain(dialogueTree, settings, branch, 
 end
 
 function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogueTree.location or settings.location) .. "EffectSlot"])
-	if (settings.digestAllow and (effectSlot == "digest"))
-	or (settings.softDigestAllow and (effectSlot == "softDigest"))
-	then
-		return dialogueTree["false"] or dialogueTree.default
-	else
-		return dialogueTree["true"] or dialogueTree.default
-	end
+	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	return (settings.digestAllow and (effectSlot == "digest")) or (settings.softDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogueTree.location or settings.location) .. "EffectSlot"])
-	if (settings.cumDigestAllow and (effectSlot == "digest"))
-	or (settings.cumSoftDigestAllow and (effectSlot == "softDigest"))
-	then
-		return dialogueTree["false"] or dialogueTree.default
-	else
-		return dialogueTree["true"] or dialogueTree.default
-	end
+	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	return (settings.cumDigestAllow and (effectSlot == "digest")) or (settings.cumSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogueTree.location or settings.location) .. "EffectSlot"])
-	if (settings.femcumDigestAllow and (effectSlot == "digest"))
-	or (settings.femcumSoftDigestAllow and (effectSlot == "softDigest"))
-	then
-		return dialogueTree["false"] or dialogueTree.default
-	else
-		return dialogueTree["true"] or dialogueTree.default
-	end
+	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	return (settings.femcumDigestAllow and (effectSlot == "digest")) or (settings.femcumSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogueTree.location or settings.location) .. "EffectSlot"])
-	if (settings.milkDigestAllow and (effectSlot == "digest"))
-	or (settings.milkSoftDigestAllow and (effectSlot == "softDigest"))
-	then
-		return dialogueTree["false"] or dialogueTree.default
-	else
-		return dialogueTree["true"] or dialogueTree.default
-	end
+	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	return (settings.milkDigestAllow and (effectSlot == "digest")) or (settings.milkSoftDigestAllow and (effectSlot == "softDigest"))
+end
+
+function dialogueBoxScripts.infuseLayered(dialogueTree, settings, branch, eid, ...)
+	return sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
 end
 
 function dialogueBoxScripts.openNewDialogueBox(dialogueTree, settings, branch, eid, ...)

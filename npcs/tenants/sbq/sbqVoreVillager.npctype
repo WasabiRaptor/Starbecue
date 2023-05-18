@@ -2945,9 +2945,282 @@
 						}}
 					}
 				}
-			}
+			},
 
 			// lines for when an NPC infuses someone (CTF, Boobsorb, etc.)
+			"infusePrey" : {
+				"new" : {"dismissTime" : 2},
+				"next" : "location",
+				"belly" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBellyBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBellyBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBellyAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBellyAfterLayer"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBellyBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBellyBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBellyAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBellyAfterLayer"]}}
+						}
+					},
+					"selfrequest" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestBellyBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestBellyBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestBellyAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestBellyAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+
+				},
+				"tail" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestTailBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestTailBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestTailAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestTailAfterLayer"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedTailBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedTailBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedTailAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedTailAfterLayer"]}}
+						}
+					},
+					"selfrequest" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestTailBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestTailBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestTailAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestTailAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+
+				},
+				"breastsL" : ".breasts",
+				"breastsR" : ".breasts",
+				"breasts" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBreastsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBreastsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBreastsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBreastsAfterLayer"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsAfterLayer"]}}
+						}
+					},
+					"selfrequest" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestBreastsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestBreastsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestBreastsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestBreastsAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+
+				},
+				"womb" : ".pussy",
+				"pussy" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestPussyBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestPussyBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestPussyAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestPussyAfterLayer"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedPussyBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedPussyBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedPussyAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedPussyAfterLayer"]}}
+						}
+					},
+					"selfrequest" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestPussyBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestPussyBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestPussyAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestPussyAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+
+				},
+				"cock" : ".shaft",
+				"shaft" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestShaftBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestShaftBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestShaftAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestShaftAfterLayer"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedShaftBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedShaftBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedShaftAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedShaftAfterLayer"]}}
+						}
+					},
+					"selfrequest" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestShaftBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestShaftBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestShaftAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestShaftAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+
+				},
+				"ballsL" : ".balls",
+				"ballsR" : ".balls",
+				"balls" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBallsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBallsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBallsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBallsAfterLayer"]}}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBallsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBallsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBallsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBallsAfterLayer"]}}
+						}
+					},
+					"selfrequest" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestBallsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestBallsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseSelfRequestBallsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseSelfRequestBallsAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+				}
+			}
 
 			// lines for when a character is infused (CTF Boobsorb etc.)
 			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred

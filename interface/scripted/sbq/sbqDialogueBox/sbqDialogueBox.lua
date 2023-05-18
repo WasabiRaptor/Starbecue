@@ -147,6 +147,10 @@ function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
 	end
 
 	sbq.checkVoreButtonsEnabled()
+	if not dialogue.result.dialogue then
+		dialogue.finished = true
+		return path, dialogueTree, dialogueTreeTop
+	end
 
 	local playerName = world.entityName(player.id())
 	local speaker = pane.sourceEntity()
@@ -405,7 +409,7 @@ function sbq.checkInfusionActionActive(location, locations)
 			end
 		end
 		if not playerLocation then return "hidden" end
-		if (playerLocation == location) or not locations then
+		if (playerLocation == location) then
 			if playerLocation ~= location then return "otherLocation" end
 			local npcArgs = ((sbq.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs
 			if npcArgs then
@@ -413,8 +417,6 @@ function sbq.checkInfusionActionActive(location, locations)
 				if uniqueId and world.entityUniqueId(player.id()) == uniqueId then
 					return "youreAlreadyInfused"
 				end
-				if isInfused then return "alreadyInfused" end
-				return "requestLayer"
 			end
 			if isInfused then return "alreadyInfused" end
 			return "request"
@@ -423,8 +425,6 @@ function sbq.checkInfusionActionActive(location, locations)
 			if playerLocation == location then
 				local npcArgs = ((sbq.settings[location .. "InfusedItem"] or {}).parameters or {}).npcArgs
 				if npcArgs then
-					if isInfused then return "alreadyInfused" end
-					return "requestLayer"
 				end
 				if isInfused then return "alreadyInfused" end
 				return "request"

@@ -618,7 +618,7 @@ function sbq.getTarget()
 			table.sort(sbq.targetedEntities, function(a, b)
 				return a[2] < b[2]
 			end)
-			sbq.logInfo(sb.printJson(sbq.targetedEntities,1))
+			--sbq.logInfo(sb.printJson(sbq.targetedEntities,1))
 			if sbq.targetedEntities[1] then
 				storage.huntingTarget = {
 					index = 1,
@@ -626,7 +626,7 @@ function sbq.getTarget()
 					voreType = voreType,
 					predOrPrey = predOrPrey
 				}
-				sbq.logInfo("Got Target:"..sb.printJson(storage.huntingTarget))
+				--sbq.logInfo("Got Target:"..sb.printJson(storage.huntingTarget))
 				self.board:setEntity("sbqHuntingTarget", sbq.targetedEntities[1][1])
 			end
 		end)

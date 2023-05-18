@@ -486,7 +486,7 @@ function sbq.getRandomDialogue(npcConfig, path, eid, settings, dialogueTree)
 
 	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
 
-	if type(dialogue.result.dialogue[1]) == "string" then
+	if type((dialogue.result.dialogue or {})[1]) == "string" then
 		return sbq.generateKeysmashes(dialogue.result.dialogue[1], dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags--, imagePortrait
 	end
 end
