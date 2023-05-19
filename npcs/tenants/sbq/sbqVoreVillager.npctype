@@ -2100,9 +2100,377 @@
 				}
 			},
 
-			// for when an NPC is requesting a player or other NPC does something to them
-			"request" : {
-
+			// for when an NPC is requesting a player or other NPC eats them
+			"preyRequest" : {
+				"next" : "voreType",
+				"oralVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestOralVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".oralVore.response.yes" ],
+							["No...", ".oralVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".oralVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestOralVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestOralVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestOralVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestOralVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestOralVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestOralVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestOralVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestOralVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestOralVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestOralVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestOralVoreNoYes"]}}
+						}
+					}
+				},
+				"tailVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestTailVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".tailVore.response.yes" ],
+							["No...", ".tailVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".tailVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestTailVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestTailVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestTailVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestTailVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestTailVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestTailVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestTailVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestTailVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestTailVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestTailVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestTailVoreNoYes"]}}
+						}
+					}
+				},
+				"analVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestAnalVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".analVore.response.yes" ],
+							["No...", ".analVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".analVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAnalVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAnalVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestAnalVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAnalVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAnalVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestAnalVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAnalVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAnalVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestAnalVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAnalVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAnalVoreNoYes"]}}
+						}
+					}
+				},
+				"navelVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestNavelVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".navelVore.response.yes" ],
+							["No...", ".navelVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".navelVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestNavelVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestNavelVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestNavelVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestNavelVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestNavelVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestNavelVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestNavelVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestNavelVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestNavelVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestNavelVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestNavelVoreNoYes"]}}
+						}
+					}
+				},
+				"absorbVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestAbsorbVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".absorbVore.response.yes" ],
+							["No...", ".absorbVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".absorbVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAbsorbVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAbsorbVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestAbsorbVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAbsorbVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAbsorbVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestAbsorbVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAbsorbVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAbsorbVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestAbsorbVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestAbsorbVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestAbsorbVoreNoYes"]}}
+						}
+					}
+				},
+				"unbirth" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestUnbirth"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".unbirth.response.yes" ],
+							["No...", ".unbirth.response.no" ],
+							["No... ^#555;(But actually Yes)", ".unbirth.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestUnbirth"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestUnbirth"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestUnbirthYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestUnbirthYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestUnbirthYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestUnbirthNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestUnbirthNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestUnbirthNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestUnbirthNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestUnbirthNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestUnbirthNoYes"]}}
+						}
+					}
+				},
+				"cockVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestCockVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".cockVore.response.yes" ],
+							["No...", ".cockVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".cockVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestCockVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestCockVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestCockVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestCockVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestCockVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestCockVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestCockVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestCockVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestCockVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestCockVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestCockVoreNoYes"]}}
+						}
+					}
+				},
+				"breastVore" : {
+					"replace" : {
+						"randomDialogue" : [":defaultPreyRequestBreastVore"],
+						"buttonText" : ["[Y/N]"],
+						"options" : [
+							["Yes!", ".breastVore.response.yes" ],
+							["No...", ".breastVore.response.no" ],
+							["No... ^#555;(But actually Yes)", ".breastVore.response.noYes" ]
+						]
+					},
+					"seperateNext" : true,
+					"next" : ["personality"],
+					"personality" : {
+						"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestBreastVore"]}},
+						"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestBreastVore"]}}
+					},
+					"response" : {
+						"yes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestBreastVoreYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestBreastVoreYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestBreastVoreYes"]}}
+						},
+						"no" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestBreastVoreNo"],
+								"dismissTime" :2
+							},
+							"next" : ["personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestBreastVoreNo"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestBreastVoreNo"]}}
+						},
+						"noYes" : {
+							"new" : {
+								"randomDialogue" : [":defaultPreyRequestBreastVoreNoYes"],
+								"dismissTime" :2
+							},
+							"next" : ["queuePrey","personality"],
+							"shy" : { "replace" : { "randomDialogue" : [":shyPreyRequestBreastVoreNoYes"]}},
+							"flirty" : { "replace" : { "randomDialogue" : [":flirtyPreyRequestBreastVoreNoYes"]}}
+						}
+					}
+				}
 			},
 
 			// when being prey, responses to the pred that ate them as they struggle
