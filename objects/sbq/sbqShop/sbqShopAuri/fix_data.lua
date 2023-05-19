@@ -1,5 +1,5 @@
 
-function dialogueBoxScripts.fixData(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.fixData(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	player.setProperty("sbqCurrentData", nil)
 	status.setStatusProperty("sbqCurrentData", nil)
 	player.setProperty("sbqPreyWarpData", nil)

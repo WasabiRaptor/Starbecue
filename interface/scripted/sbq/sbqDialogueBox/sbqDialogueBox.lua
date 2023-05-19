@@ -39,6 +39,7 @@ player.gender = speciesOverride._gender
 require("/scripts/SBQ_RPC_handling.lua")
 require("/lib/stardust/json.lua")
 require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")
+require("/interface/scripted/sbq/sbqDialogueBox/scripts/player.lua")
 
 
 function init()
@@ -506,7 +507,7 @@ function dialogueCont:onClick()
 	end
 	if type(dialogue.result.callScript) == "string" then
 		if type(dialogueBoxScripts[dialogue.result.callScript]) == "function" then
-			local path = dialogueBoxScripts[dialogue.result.callScript](sbq.prevDialogueBranch, sbq.settings, "callScript", player.id(), table.unpack(dialogue.result.scriptArgs or {}))
+			local path = dialogueBoxScripts[dialogue.result.callScript](sbq.prevDialogueBranch, sbq.dialogueTree, sbq.settings, "callScript", player.id(), table.unpack(dialogue.result.scriptArgs or {}))
 			sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
 		end
 	elseif dialogue.result.options ~= nil then

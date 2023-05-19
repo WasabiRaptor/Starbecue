@@ -57,7 +57,7 @@ end
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
 	if dialogueTree[step] or (not useStepPath) then
 		if dialogueBoxScripts[step] then
-			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(dialogueBoxScripts[step](dialogueTree, settings, branch, eid) or "default"), settings, eid, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid) or "default"), settings, eid, dialogueTree, dialogueTreeTop)
 		elseif settings[step] then
 			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(settings[step] or "default"), settings, eid, dialogueTree, dialogueTreeTop)
 		else
@@ -232,7 +232,7 @@ function sbq.checkTable(check, checked)
 end
 
 
-function dialogueBoxScripts.locationEffectSlot(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.locationEffectSlot(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	if settings.digesting then
 		return "digest"
 	elseif settings.healing then
@@ -240,7 +240,7 @@ function dialogueBoxScripts.locationEffectSlot(dialogueTree, settings, branch, e
 	end
 	return settings[(dialogue.result.location or settings.location).."EffectSlot"]
 end
-function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.locationEffect(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	if settings.digesting then
 		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
 	elseif settings.healing then
@@ -249,43 +249,38 @@ function dialogueBoxScripts.locationEffect(dialogueTree, settings, branch, eid, 
 	return settings[(dialogue.result.location or settings.location).."Effect"]
 end
 
-function dialogueBoxScripts.locationCompression(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.locationCompression(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	return settings[(dialogue.result.location or settings.location).."Compression"]
 end
-function dialogueBoxScripts.locationEnergyDrain(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.locationEnergyDrain(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	return settings[(dialogue.result.location or settings.location).."EnergyDrain"]
 end
 
-function dialogueBoxScripts.digestImmunity(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.digestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
 	return (settings.digestAllow and (effectSlot == "digest")) or (settings.softDigestAllow and (effectSlot == "softDigest"))
 end
 
-function dialogueBoxScripts.cumDigestImmunity(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.cumDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
 	return (settings.cumDigestAllow and (effectSlot == "digest")) or (settings.cumSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
-function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
 	return (settings.femcumDigestAllow and (effectSlot == "digest")) or (settings.femcumSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
-function dialogueBoxScripts.milkDigestImmunity(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.milkDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
 	return (settings.milkDigestAllow and (effectSlot == "digest")) or (settings.milkSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
-function dialogueBoxScripts.infuseLayered(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.infuseLayered(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	return sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
 end
 
-function dialogueBoxScripts.openNewDialogueBox(dialogueTree, settings, branch, eid, ...)
-	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogueTree.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogueTree.ui }, pane.sourceEntity())
-	pane.dismiss()
-end
-
-function dialogueBoxScripts.isOwner(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.isOwner(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local result = false
 	if eid then
 		local uuid = world.entityUniqueId(eid)
@@ -294,96 +289,18 @@ function dialogueBoxScripts.isOwner(dialogueTree, settings, branch, eid, ...)
 	return tostring(result)
 end
 
-function dialogueBoxScripts.dismiss(dialogueTree, settings, branch, eid, ...)
-	pane.dismiss()
-end
-
-function dialogueBoxScripts.swapFollowing(dialogueTree, settings, branch, eid, ...)
-	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqSwapFollowing"), function(data)
-		if data and data[1] then
-			if data[1] == "None" then
-				sbq.updateDialogueBox({}, dialogueTree.continue)
-			elseif data[1] == "Message" then
-				if data[2].messageType == "recruits.requestUnfollow" then
-					world.sendEntityMessage(player.id(), "recruits.requestUnfollow", table.unpack(data[2].messageArgs))
-					sbq.updateDialogueBox({}, dialogueTree.continue)
-				elseif data[2].messageType == "recruits.requestFollow" then
-					local result = world.sendEntityMessage(player.id(), "sbqRequestFollow", table.unpack(data[2].messageArgs)):result()
-					if result == nil then
-						sbq.updateDialogueBox({}, dialogueTree.continue)
-					else
-						sbq.updateDialogueBox({}, dialogueTree.fail)
-					end
-				end
-			end
-		end
-	end)
-end
-
-function dialogueBoxScripts.infusedCharacter(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.infusedCharacter(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local infusedChar = sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs")
-	if (sbq.sbqData[(dialogueTree.location or settings.location)] or {}).infusion
-	and settings[(((sbq.sbqData[(dialogueTree.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
+	if (sbq.sbqData[(dialogue.result.location or settings.location)] or {}).infusion
+	and settings[(((sbq.sbqData[(dialogue.result.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
 	and infusedChar
 	then
 		local uniqueID = sb.jsonQuery(infusedChar, "npcParam.scriptConfig.uniqueId")
-		if dialogueTree[uniqueID] then
+		if dialogueTree[uniqueID] or (dialogueTree.infusedCharacter or {})[uniqueID] then
 			return uniqueID
 		else
 			return "defaultInfused"
 		end
 	end
 	return "default"
-end
-
-function dialogueBoxScripts.giveTenantRewards(dialogueTree, settings, branch, eid, ...)
-	if player ~= nil then
-		local uuid = world.entityUniqueId(pane.sourceEntity())
-		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
-
-		local rewards = tenantRewardsTable[uuid]
-		if rewards then
-			player.cleanupItems()
-
-			local rewardDialogue
-			local remainingRewards = {}
-			local remainingRewardsCount = 0
-			local itemsGiven = 0
-
-			for i, item in ipairs(rewards) do
-				local count = player.hasCountOfItem(item, false)
-				player.giveItem(item)
-				local newCount = player.hasCountOfItem(item, false)
-				local itemType = root.itemType(item.name)
-				local diff = newCount - count
-				if (itemType ~= "currency") and (diff < (item.count or 0)) then
-					item.count = item.count - diff
-					remainingRewardsCount = remainingRewardsCount + item.count
-					table.insert(remainingRewards, item)
-				elseif (itemType == "currency") then
-					itemsGiven = itemsGiven + item.count
-				end
-				itemsGiven = itemsGiven + diff
-				if ((diff > 0) or (itemType == "currency")) and item.rewardDialogue then rewardDialogue = item.rewardDialogue end
-			end
-
-			if remainingRewardsCount > 0 then
-				tenantRewardsTable[uuid] = remainingRewards
-			else
-				tenantRewardsTable[uuid] = nil
-			end
-			player.setProperty("sbqTenantRewards", tenantRewardsTable)
-
-			if itemsGiven > 0 then return "rewards" end
-		end
-	end
-	return "default"
-end
-
--- this doesn't work
-function dialogueBoxScripts.cockTFmePls(dialogueTree, settings, branch, eid, ...)
-	world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", "cockVore",{ id = player.id(), force = true })
-	sbq.timer("ctfDelay", 0.25, function()
-		shaftBallsInfusion:onClick()
-	end)
 end
