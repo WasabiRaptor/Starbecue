@@ -35,7 +35,7 @@
 
 			// overall default values for a "new" dialogue
 			"default" : {
-				"randomDialogue" : ["Whoops! looks like some kind of error!"],
+				"randomDialogue" : [":missingDialogue"],
 				"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 			},
 			// greeting is the default start of the tree
@@ -56,7 +56,35 @@
 					"flirty" : {"replace" : {"randomDialogue" : [":flirtyGreeting"]}}
 				}
 			},
-
+			// lines triggered when a player may recieve a certain reward
+			"rewardNotify" :{
+				"new" : {},
+				"next" : ["poolName", "rewardName"],
+				"money" : {
+					"replace" : {"randomDialogue":[":rewardNotifyMoney"]},
+					"next" : "personality",
+					"shy" : { "replace":{"randomDialogue":["rewardNotifyShyMoney"]}},
+					"flirty" : { "replace":{"randomDialogue":["rewardNotifyFlirtyMoney"]}}
+				},
+				"lowValueQuestRewards" : {
+					"replace" : {"randomDialogue":[":rewardNotifyLowValueQuestRewards"]},
+					"next" : "personality",
+					"shy" : { "replace":{"randomDialogue":["rewardNotifyShyLowValueQuestRewards"]}},
+					"flirty" : { "replace":{"randomDialogue":["rewardNotifyFlirtyLowValueQuestRewards"]}}
+				},
+				"mediumValueQuestRewards" : {
+					"replace" : {"randomDialogue":[":rewardNotifyMediumValueQuestRewards"]},
+					"next" : "personality",
+					"shy" : { "replace":{"randomDialogue":["rewardNotifyShyMediumValueQuestRewards"]}},
+					"flirty" : { "replace":{"randomDialogue":["rewardNotifyFlirtyMediumValueQuestRewards"]}}
+				},
+				"highValueQuestRewards" : {
+					"replace" : {"randomDialogue":[":rewardNotifyHighValueQuestRewards"]},
+					"next" : "personality",
+					"shy" : { "replace":{"randomDialogue":["rewardNotifyShyHighValueQuestRewards"]}},
+					"flirty" : { "replace":{"randomDialogue":["rewardNotifyFlirtyHighValueQuestRewards"]}}
+				}
+			},
 
 			// lines for when a pred is eating prey, be it from hunting, or from it being requested
 			// settings come from itself
@@ -3220,20 +3248,64 @@
 					},
 					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
 				}
-			}
+			},
 
 			// lines for when a character is infused (CTF Boobsorb etc.)
 			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
+			"infused" : {
+				"new" : {"randomDialogue":[":infused"]},
+				"next" : "location",
+				"belly" : {"replace" :{"randomDialogue" : [":infusedBelly"]}},
+				"tail" : {"replace" :{"randomDialogue" : [":infusedTail"]}},
+				"womb":".pussy",
+				"pussy" : {"replace" :{"randomDialogue" : [":infusedPussy"]}},
+				"breastsL":".breasts",
+				"breastsR":".breasts",
+				"breasts" : {"replace" :{"randomDialogue" : [":infusedBreasts"]}},
+				"cock":".shaft",
+				"shaft" : {"replace" :{"randomDialogue" : [":infusedShaft"]}},
+				"ballsL":".balls",
+				"ballsR":".balls",
+				"balls" : {"replace" :{"randomDialogue" : [":infusedBalls"]}}
+			},
 
 			// lines for when a character is infused (CTF Boobsorb etc.) the pred teasing their occupant
 			// the <infusedName> tag can also be used in any of the above vore context to use the name of the infused character, just make sure to have the lines within a special check for it
+			"teaseInfused" : {
+				"new" : {"randomDialogue":[":teaseInfused"]},
+				"next" : "location",
+				"belly" : {"replace" :{"randomDialogue" : [":teaseInfusedBelly"]}},
+				"tail" : {"replace" :{"randomDialogue" : [":teaseInfusedTail"]}},
+				"womb":".pussy",
+				"pussy" : {"replace" :{"randomDialogue" : [":teaseInfusedPussy"]}},
+				"breastsL":".breasts",
+				"breastsR":".breasts",
+				"breasts" : {"replace" :{"randomDialogue" : [":teaseInfusedBreasts"]}},
+				"cock":".shaft",
+				"shaft" : {"replace" :{"randomDialogue" : [":teaseInfusedShaft"]}},
+				"ballsL":".balls",
+				"ballsR":".balls",
+				"balls" : {"replace" :{"randomDialogue" : [":teaseInfusedBalls"]}}
+			},
 
 			// a line of dialogue triggered when size is changed by the size ray or something else
-
+			"sizeChanged" : {
+				"new" : {},
+				"next":"shrinkOrGrow",
+				"shrink" :{"replace" : {"randomDialogue":[":shrinking"]}},
+				"grow" :{"replace" : {"randomDialogue":[":growing"]}}
+			},
 			// when stepping on a character small enough
+			"didSteppy" : {
+				"new" : {"randomDialogue":[":didSteppy"]}
+			},
 
 			// when stepped on by a larger character
-
+			"gotSteppy" : {
+				"new" : {"randomDialogue":[":gotStepped"]},
+				"next" : "steppyType",
+				"falling" :{"replace" : {"randomDialogue":[":gotStomped"]}}
+			}
 		},
 		// when hunting for prey, a checklist to have them only seek out prey that match the settings
 		// any settings not defined in the checlkist for that vore type can be anything
