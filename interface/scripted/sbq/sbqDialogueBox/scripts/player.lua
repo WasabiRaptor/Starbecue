@@ -2,7 +2,7 @@
 
 function dialogueBoxScripts.queueVore(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
-		world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", settings.voreType, { id = player.id() })
+		world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", settings.voreType, { id = player.id(), willing = true })
 		sbq.timer("gotVored", dialogue.result.delay or 1.5, function()
 			for i, occupant in pairs(sbq.occupant or {}) do
 				if occupant.id == player.id() then
@@ -16,7 +16,7 @@ end
 
 function dialogueBoxScripts.queuePrey(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
-		world.sendEntityMessage(player.id(), "requestTransition", settings.voreType, { id = pane.sourceEntity() })
+		world.sendEntityMessage(player.id(), "requestTransition", settings.voreType, { id = pane.sourceEntity(), willing = true })
 	end)
 end
 

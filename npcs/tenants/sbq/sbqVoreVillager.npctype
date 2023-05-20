@@ -91,7 +91,8 @@
 			"vore" : {
 				"new" : {
 					"delay" : 1.5,
-					"dismissTime" : 3
+					"dismissTime" : 3,
+					"hideVoreButtons" : true
 				},
 				"next" : "voreType",
 				"oralVore" : {
@@ -1286,6 +1287,7 @@
 			// settings come from itself, prey settings come from prey
 			"struggle" : {
 				"new" : {
+					"hideVoreButtons" : true,
 					"randomDialogue" : [":defaultStruggle"]
 				},
 				"next" : "location",
@@ -2104,6 +2106,9 @@
 			// for when an NPC is requesting a player or other NPC eats them
 			"preyRequest" : {
 				"next" : "voreType",
+				"new" : {
+					"hideVoreButtons" : true
+				},
 				"oralVore" : {
 					"replace" : {
 						"randomDialogue" : [":defaultPreyRequestOralVore"],
@@ -2478,6 +2483,7 @@
 			// settings come from the pred, prey settings comes from itself
 			"struggling" : {
 				"new" : {
+					"hideVoreButtons" : true,
 					"randomDialogue" : [":struggling"]
 				},
 				"next" : ["predator","location"],
@@ -3622,7 +3628,10 @@
 			// lines for when a character is infused (CTF Boobsorb etc.)
 			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
 			"infused" : {
-				"new" : {"randomDialogue":[":infused"]},
+				"new" : {
+					"randomDialogue":[":infused"],
+					"hideVoreButtons" : true
+				},
 				"next" : "location",
 				"belly" : {"replace" :{"randomDialogue" : [":infusedBelly"]}},
 				"tail" : {"replace" :{"randomDialogue" : [":infusedTail"]}},
@@ -3641,7 +3650,10 @@
 			// lines for when a character is infused (CTF Boobsorb etc.) the pred teasing their occupant
 			// the <infusedName> tag can also be used in any of the above vore context to use the name of the infused character, just make sure to have the lines within a special check for it
 			"teaseInfused" : {
-				"new" : {"randomDialogue":[":teaseInfused"]},
+				"new" : {
+					"randomDialogue":[":teaseInfused"],
+					"hideVoreButtons" : true
+				},
 				"next" : "location",
 				"belly" : {"replace" :{"randomDialogue" : [":teaseInfusedBelly"]}},
 				"tail" : {"replace" :{"randomDialogue" : [":teaseInfusedTail"]}},
