@@ -42,7 +42,16 @@ function sbq.npcGeneralBehaviorTab()
 			{
 				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = { 40, 10 }, inline = true, visible = hornyVisible },
 				{ visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or { 226, 109, 215 } }
-			}
+			},
+			{ { type = "checkBox", id = "preferNonImmune",
+				toolTip = "Prefer Prey that aren't immune to this location's effects." },
+				{ type = "label", text = "Prefer Non Immune" } },
+			{ { type = "checkBox", id = "preferDigestHostiles",
+				toolTip = "Attempt to digest hostiles with this vore type." },
+				{ type = "label", text = "Digest Hostiles" } },
+			{ { type = "checkBox", id = "preferHealFriendlies",
+				toolTip = "Attempt to heal friendlies with this vore type when they are low health." },
+				{ type = "label", text = "Heal Friendlies" } },
 		}
 	})
 	function predPreyLeanSlider:onChange(index, value)
@@ -127,15 +136,6 @@ function sbq.huntingTab()
 						preferredSize,
 						{type = "label", align = "center", text = "Requesting Consent"},
 						consentSlider,
-						{ { type = "checkBox", id = voreType .. "PreferNonImmune",
-							toolTip = "Prefer Prey that aren't immune to this location's effects." },
-							{ type = "label", text = "Prefer Non Immune" } },
-						{ { type = "checkBox", id = voreType .. "DigestHostiles",
-							toolTip = "Attempt to digest hostiles with this vore type." },
-							{ type = "label", text = "Digest Hostiles" } },
-						{ { type = "checkBox", id = voreType .. "HealFriendlies",
-							toolTip = "Attempt to heal friendlies with this vore type when they are low health." },
-							{ type = "label", text = "Heal Friendlies" } },
 						{
 							{ type = "panel", style = "flat", children = {
 								{ mode = "h" },

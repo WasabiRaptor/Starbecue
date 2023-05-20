@@ -4,6 +4,7 @@ local oldinit = init
 sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/SBQ_species_config.lua")
+sbq.queuedTransitions = {}
 
 local prey = {}
 
@@ -148,7 +149,10 @@ function init()
 	message.setHandler("addPrey", function( _, _, data)
 		table.insert(prey, data)
 		return true
-	end )
+	end)
+	message.setHandler("requestTransition", function ( _,_, transition, args)
+		sbq.requestTransition(transition, args)
+	end)
 
 	message.setHandler( "sbqLoadSettings", function(_,_, menuName )
 		local settings = player.getProperty( "sbqSettings" ) or {}
@@ -441,6 +445,10 @@ function update(dt)
 			world.sendEntityMessage(current.id, "addPrey", preyData)
 		end
 		prey = {}
+		for _, transition in ipairs(sbq.queuedTransitions) do
+			world.sendEntityMessage(current.id, "requestTransition", transition[1], transition[2])
+		end
+		sbq.queuedTransitions = {}
 	end
 --[[
 	local preyWarpData = player.getProperty("sbqPreyWarpData")
@@ -586,4 +594,14 @@ function sbq.lockEssentialItem(itemDescriptor, slot, type)
 	lockItemDescriptor.parameters.scriptStorage.lockedEssentialItems[slot] = itemDescriptor
 	lockItemDescriptor.parameters.scriptStorage.lockType = type
 	player.giveEssentialItem(slot, lockItemDescriptor)
+end
+
+function sbq.requestTransition(transition, args)
+	local current = player.getProperty("sbqCurrentData") or {}
+
+	if current.id then
+		local settings = player.getProperty( "sbqSettings" ) or {}
+		world.spawnVehicle( "sbqOccupantHolder", entity.position(), { driver = entity.id(), settings = sb.jsonMerge(settings.sbqOccupantHolder or {}, settings.global or {}), doExpandAnim = true } )
+	end
+	table.insert(sbq.queuedTransitions, {transition, args})
 end

@@ -29,7 +29,6 @@ function update(dt)
 		if self.take then
 			sbq.addRPC(world.sendEntityMessage(effect.sourceEntity(), "sbqTakeFromResources", restoreHealth, self.take,
 				self.takeMultiplier, self.takeThreshold), function(amount)
-					sb.logInfo(amount)
 					status.modifyResource(self.healStat, amount)
 				end)
 		else
