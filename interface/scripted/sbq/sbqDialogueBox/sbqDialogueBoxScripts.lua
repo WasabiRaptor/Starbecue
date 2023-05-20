@@ -57,9 +57,9 @@ end
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
 	if dialogueTree[step] or (not useStepPath) then
 		if dialogueBoxScripts[step] then
-			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid) or "default"), settings, eid, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..tostring((dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid))), settings, eid, dialogueTree, dialogueTreeTop)
 		elseif settings[step] then
-			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..(settings[step] or "default"), settings, eid, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..tostring(settings[step] or ((settings[step] == nil) and "default")), settings, eid, dialogueTree, dialogueTreeTop)
 		else
 			return sbq.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
 		end
@@ -250,10 +250,10 @@ function dialogueBoxScripts.locationEffect(dialogueTree, dialogueTreeTop, settin
 end
 
 function dialogueBoxScripts.locationCompression(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	return settings[(dialogue.result.location or settings.location).."Compression"]
+	return settings[(dialogue.result.location or settings.location).."Compression"] or false
 end
 function dialogueBoxScripts.locationEnergyDrain(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	return settings[(dialogue.result.location or settings.location).."EnergyDrain"]
+	return settings[(dialogue.result.location or settings.location).."EnergyDrain"] or false
 end
 
 function dialogueBoxScripts.digestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)

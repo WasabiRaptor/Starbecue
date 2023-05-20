@@ -128,12 +128,13 @@
 					},
 					"selfRequest" : {
 						"replace" : {
+							"dismissTime" : 30,
 							"randomDialogue" : [":defaultSelfRequestOralVore"],
 							"buttonText" : ["[Y/N]"],
 							"options" : [
 								["Yes!", ".oralVore.selfRequest.response.yes" ],
 								["No...", ".oralVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".oralVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".oralVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -281,7 +282,7 @@
 							"options" : [
 								["Yes!", ".analVore.selfRequest.response.yes" ],
 								["No...", ".analVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".analVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".analVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -429,7 +430,7 @@
 							"options" : [
 								["Yes!", ".tailVore.selfRequest.response.yes" ],
 								["No...", ".tailVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".tailVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".tailVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -577,7 +578,7 @@
 							"options" : [
 								["Yes!", ".navelVore.selfRequest.response.yes" ],
 								["No...", ".navelVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".navelVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".navelVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -725,7 +726,7 @@
 							"options" : [
 								["Yes!", ".absorbVore.selfRequest.response.yes" ],
 								["No...", ".absorbVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".absorbVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".absorbVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -873,7 +874,7 @@
 							"options" : [
 								["Yes!", ".cockVore.selfRequest.response.yes" ],
 								["No...", ".cockVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -1021,7 +1022,7 @@
 							"options" : [
 								["Yes!", ".unbirth.selfRequest.response.yes" ],
 								["No...", ".unbirth.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".unbirth.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".unbirth.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -1169,7 +1170,7 @@
 							"options" : [
 								["Yes!", ".breastVore.selfRequest.response.yes" ],
 								["No...", ".breastVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".breastVore.selfRequest.response.noYes" ]
+								["                  No... ^#555;(But actually Yes)", ".breastVore.selfRequest.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
@@ -2110,7 +2111,7 @@
 						"options" : [
 							["Yes!", ".oralVore.response.yes" ],
 							["No...", ".oralVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".oralVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".oralVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2156,7 +2157,7 @@
 						"options" : [
 							["Yes!", ".tailVore.response.yes" ],
 							["No...", ".tailVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".tailVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".tailVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2202,7 +2203,7 @@
 						"options" : [
 							["Yes!", ".analVore.response.yes" ],
 							["No...", ".analVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".analVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".analVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2248,7 +2249,7 @@
 						"options" : [
 							["Yes!", ".navelVore.response.yes" ],
 							["No...", ".navelVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".navelVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".navelVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2294,7 +2295,7 @@
 						"options" : [
 							["Yes!", ".absorbVore.response.yes" ],
 							["No...", ".absorbVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".absorbVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".absorbVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2340,7 +2341,7 @@
 						"options" : [
 							["Yes!", ".unbirth.response.yes" ],
 							["No...", ".unbirth.response.no" ],
-							["No... ^#555;(But actually Yes)", ".unbirth.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".unbirth.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2386,7 +2387,7 @@
 						"options" : [
 							["Yes!", ".cockVore.response.yes" ],
 							["No...", ".cockVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".cockVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".cockVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,
@@ -2432,7 +2433,7 @@
 						"options" : [
 							["Yes!", ".breastVore.response.yes" ],
 							["No...", ".breastVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".breastVore.response.noYes" ]
+							["                  No... ^#555;(But actually Yes)", ".breastVore.response.noYes" ]
 						]
 					},
 					"seperateNext" : true,

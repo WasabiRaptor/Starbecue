@@ -513,8 +513,8 @@ function dialogueCont:onClick()
 	elseif dialogue.result.options ~= nil then
 		for i, option in ipairs(dialogue.result.options) do
 			local action = { option[1] }
-			local checks = { option[3] }
-			local path = { option [2] }
+			local checks = option[3] or {}
+			local path = option[2]
 			local continue = true
 			local entities = {}
 			if continue and (type(checks.checkScript) == "string") and (type(optionCheckScripts[checks.checkScript])=="function") then

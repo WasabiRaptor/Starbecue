@@ -164,7 +164,7 @@ function init()
 	end)
 
 	message.setHandler( "sbqOpenMetagui", function(_,_, name, sourceEntity, data)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name }, sourceEntity )
+		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
 	end)
 
 	message.setHandler( "sbqOpenInterface", function(_,_, name, args, appendSettings, sourceEntity)

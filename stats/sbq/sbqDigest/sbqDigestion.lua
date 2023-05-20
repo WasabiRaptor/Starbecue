@@ -77,6 +77,10 @@ function update(dt)
 			if self.cdt >= self.targetTime then
 				doItemDrop()
 				if self.fatal then
+					local entityType = world.entityType(entity.id())
+					if entityType == "npc" or entityType == "monster" then
+						world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
+					end
 					status.setResource("health", -1)
 					return
 				end

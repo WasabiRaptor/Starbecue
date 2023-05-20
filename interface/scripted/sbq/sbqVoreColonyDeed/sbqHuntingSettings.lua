@@ -113,7 +113,7 @@ function sbq.huntingTab()
 		local consentSlider = { type = "slider", id = voreType .. "ConsentPred", notches = {0,0.25,0.5,0.75,1},
 			textToolTips = {"Never", "Unlikely", "Sometimes", "Likely", "Always"},
 			handles = {
-				{ value = (sbq.predatorSettings[voreType .. "ConsentPred"] or 3), locked = sbq.overrideSettings[voreType .. "ConsentPred"] ~= nil, toolTip = "How often the NPC will ask for consent." },
+				{ value = (sbq.predatorSettings[voreType .. "ConsentPred"] or 0.5), locked = sbq.overrideSettings[voreType .. "ConsentPred"] ~= nil, toolTip = "How often the NPC will ask for consent." },
 			}
 		}
 		tab = huntingTabField:newTab({

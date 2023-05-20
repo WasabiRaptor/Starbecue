@@ -417,13 +417,8 @@ function uninit()
 	olduninit()
 end
 
-function interact(args)
-	if recruitable.isRecruitable() then
-		return recruitable.generateRecruitInteractAction()
-	end
-
+function sbq.getDialogueBoxData()
 	local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
-
 	local dialogueBoxData = {
 		speciesConfig = sbq.speciesConfig,
 		dialogueBoxScripts = sbq.dialogueBoxScripts,
@@ -443,6 +438,16 @@ function interact(args)
 	dialogueBoxData.settings.horny = status.resourcePercentage("horny")
 	dialogueBoxData.settings.food = status.resourcePercentage("food")
 	dialogueBoxData.settings.energy = status.resourcePercentage("energy")
+
+	return dialogueBoxData
+end
+
+function interact(args)
+	if recruitable.isRecruitable() then
+		return recruitable.generateRecruitInteractAction()
+	end
+
+	local dialogueBoxData = sbq.getDialogueBoxData()
 
 	if sbq.currentData.type == "prey" then
 		if args.predData then
@@ -503,45 +508,112 @@ function sbq.doTargetAction()
 	if npc.loungingIn() ~= nil then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
+		sbq.targetedEntities = {}
 		return
 	end
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then
 		if storage.huntingTarget.predOrPrey == "pred" then
-
-			sbq.addNamedRPC("attemptingToEat", world.sendEntityMessage(storage.huntingTarget.id, "sbqGetPreyEnabled"), function(sbqPreyEnabled)
-				if sbqPreyEnabled[storage.huntingTarget.voreType] and (sbqPreyEnabled.type ~= "prey")then
-					local settings = {
-						voreType = storage.huntingTarget.voreType,
-						voreResponse = "unprompted",
-						location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
-						doingVore = "before"
-					}
-					sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
-					local delay = dialogue.result.delay
-					sbq.timer("eatMessage", delay or 1.5, function()
-						if not storage.huntingTarget then sbq.getNextTarget() return end
-						self.board:setEntity("sbqHuntingTarget", nil)
-						sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
-						sbq.timer("gotVored", delay or 1.5, function()
-							if not storage.huntingTarget then sbq.getNextTarget() return end
-							settings.doingVore = "after"
-							if sbq.checkOccupant(storage.huntingTarget.id) then
-								sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
-								storage.huntingTarget = nil
-							else
-								settings.voreResponse = "couldnt"
-								sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
-								self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
-							end
-						end)
-					end)
-				else
-					sbq.getNextTarget()
-				end
-			end)
+			if storage.huntingTarget.getConsent then
+				sbq.askToVore()
+			else
+				sbq.eatUnprompted()
+			end
+		elseif storage.huntingTarget.predOrPrey == "prey" then
 		end
 	end
+end
+
+function sbq.askToVore()
+	entityType = world.entityType(storage.huntingTarget.id)
+	if entityType == "player" then
+		if sbq.timer("leaveUnresponsivePlayer", 30, function ()
+			sbq.getNextTarget()
+		end) then
+			local dialogueBoxData = sbq.getDialogueBoxData()
+			dialogueBoxData.dialogueTreeStart = ".vore"
+			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, {
+				voreType = storage.huntingTarget.voreType,
+				voreResponse = "selfRequest"
+			})
+			world.sendEntityMessage(storage.huntingTarget.id, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), dialogueBoxData )
+		end
+	elseif entityType == "npc" then
+		sbq.eatUnprompted() -- going to replace this with one where the NPCs talk to eachother and can say yes or no later
+	elseif entityType == "monster" then
+		sbq.eatUnprompted()
+	end
+end
+
+function sbq.askToBeVored()
+	entityType = world.entityType(storage.huntingTarget.id)
+	if entityType == "player" then
+		if sbq.timer("leaveUnresponsivePlayer", 30, function ()
+			sbq.getNextTarget()
+		end) then
+			local dialogueBoxData = sbq.getDialogueBoxData()
+			dialogueBoxData.dialogueTreeStart = ".preyRequest"
+			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, {
+				voreType = storage.huntingTarget.voreType,
+			})
+			world.sendEntityMessage(storage.huntingTarget.id, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), dialogueBoxData )
+		end
+	elseif entityType == "npc" then
+	elseif entityType == "monster" then
+	end
+end
+
+function sbq.combatEat()
+	local settings = {
+		voreType = storage.huntingTarget.voreType,
+		voreResponse = "unprompted",
+		location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
+		doingVore = "before"
+	}
+	sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
+	sbq.forceTimer("gotVored", delay or 1.5, function()
+		if not storage.huntingTarget then sbq.getNextTarget() return end
+		settings.doingVore = "after"
+		if sbq.checkOccupant(storage.huntingTarget.id) then
+			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+			storage.huntingTarget = nil
+		end
+	end)
+end
+
+function sbq.eatUnprompted()
+	sbq.addNamedRPC("attemptingToEat", world.sendEntityMessage(storage.huntingTarget.id, "sbqGetPreyEnabled"), function(sbqPreyEnabled)
+		if sbqPreyEnabled[storage.huntingTarget.voreType] and (sbqPreyEnabled.type ~= "prey")then
+			local settings = {
+				voreType = storage.huntingTarget.voreType,
+				voreResponse = "unprompted",
+				location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
+				doingVore = "before"
+			}
+			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+			local delay = dialogue.result.delay
+			sbq.timer("eatMessage", delay or 1.5, function()
+				if not storage.huntingTarget then sbq.getNextTarget() return end
+				self.board:setEntity("sbqHuntingTarget", nil)
+				sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
+				sbq.timer("gotVored", delay or 1.5, function()
+					if not storage.huntingTarget then sbq.getNextTarget() return end
+					settings.doingVore = "after"
+					if sbq.checkOccupant(storage.huntingTarget.id) then
+						sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+						storage.huntingTarget = nil
+						sbq.targetedEntities = {}
+					else
+						settings.voreResponse = "couldnt"
+						sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+						self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
+					end
+				end)
+			end)
+		else
+			sbq.getNextTarget()
+		end
+	end)
 end
 
 function sbq.getLocationSetting(location, setting, default)
@@ -606,7 +678,7 @@ function sbq.getTarget()
 		end
 	elseif storage.huntingTarget then
 		sbq.getNextTarget()
-	elseif math.random() > 0.5 then
+	elseif (math.random() > 0.5) then
 		local voreType, predOrPrey = sbq.getCurrentVorePref()
 		if not voreType then return end
 		if predOrPrey == "pred" then
@@ -618,7 +690,6 @@ function sbq.getTarget()
 			table.sort(sbq.targetedEntities, function(a, b)
 				return a[2] < b[2]
 			end)
-			--sbq.logInfo(sb.printJson(sbq.targetedEntities,1))
 			if sbq.targetedEntities[1] then
 				storage.huntingTarget = {
 					index = 1,
@@ -626,7 +697,7 @@ function sbq.getTarget()
 					voreType = voreType,
 					predOrPrey = predOrPrey
 				}
-				--sbq.logInfo("Got Target:"..sb.printJson(storage.huntingTarget))
+				sbq.huntingAskConsent()
 				self.board:setEntity("sbqHuntingTarget", sbq.targetedEntities[1][1])
 			end
 		end)
@@ -634,7 +705,9 @@ function sbq.getTarget()
 end
 
 function sbq.getNextTarget()
+	if not sbq.targetedEntities then storage.huntingTarget = nil return end
 	if storage.huntingTarget then
+		sbq.huntingAskConsent()
 		local newTarget = {
 			index = storage.huntingTarget.index + 1,
 			id = (sbq.targetedEntities[storage.huntingTarget.index+1] or {})[1],
@@ -645,6 +718,20 @@ function sbq.getNextTarget()
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
 		end
+	end
+end
+
+function sbq.huntingAskConsent()
+	if storage.huntingTarget then
+		local consentVal
+		if storage.huntingTarget.predOrPrey == "pred" then
+			consentVal = storage.settings[storage.huntingTarget.voreType .. "ConsentPred"] or 0.5
+		elseif storage.huntingTarget.predOrPrey == "prey" then
+			consentVal = storage.settings[storage.huntingTarget.voreType .. "ConsentPrey"] or 0.5
+		end
+		if consentVal == 1 then storage.huntingTarget.getConsent = true return end
+		if consentVal == 0 then storage.huntingTarget.getConsent = false return end
+		storage.huntingTarget.getConsent = consentVal < math.random()
 	end
 end
 
