@@ -43,6 +43,9 @@ function sbq.getSpeciesConfig(species, settings)
 	sbq.speciesConfig.sbqData = finalConfig
 	sbq.speciesConfig.sbqData.scripts = scripts
 
+	sbq.speciesConfig.sbqData.voreTypeData = sb.jsonMerge(sbq.config.generalVoreTypeData, sbq.speciesConfig.sbqData.voreTypeData or {})
+
+
 	local mergeConfigs = sbq.speciesConfig.states.merge or {}
 	local configs = { sbq.speciesConfig.states }
 	while type(mergeConfigs[#mergeConfigs]) == "string" do

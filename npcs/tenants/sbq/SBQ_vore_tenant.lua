@@ -358,6 +358,14 @@ function init()
 		local settings = storage.settings or {}
 		return {enabled = settings[voreType.."Pred"], size = sbq.calcSize(), type = currentData.type}
 	end)
+	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
+		local effects = {}
+		local data = sbq.speciesConfig.sbqData.voreTypeData[voreType]
+		for i, location in ipairs( data.locations ) do
+			table.insert(effects, storage.settings[location.."EffectSlot"])
+		end
+		return effects
+	end)
 
 end
 
@@ -630,8 +638,11 @@ function sbq.eatUnprompted()
 end
 
 function sbq.forcePrey()
-
-
+	sbq.addRPC(world.sendEntityMessage(storage.huntingTarget.id, "sbqForcePrey", entity.id(), storage.huntingTarget.voreType), function(valid)
+		if not valid then
+			sbq.getNextTarget()
+		end
+	end)
 end
 
 function sbq.getLocationSetting(location, setting, default)
@@ -756,7 +767,7 @@ end
 function sbq.getCurrentVorePref()
 	local predOrPrey = "prey" --sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
 	local favoredVoreTypes = {}
-	for voreType, data in pairs(sbq.config.generalVoreTypeData) do
+	for voreType, data in pairs(sbq.speciesConfig.sbqData.voreTypeData or {}) do
 		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"]
 			and (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
 			and sbq.checkSettings((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType].settings, storage.settings)
@@ -1190,15 +1201,41 @@ function sbq.maybeAddPredToTargetList(eid, voreType, ext, score)
 	end
 	if validTarget then
 		sbq.addRPC(world.sendEntityMessage(eid, "sbqIsPredEnabled", voreType), function(enabled)
-			sbq.logInfo(enabled,1)
 			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
-				local scale = (status.statusProperty("animOverrideScale") or 1)
-				local relativeSize = enabled.size / scale
-				if (relativeSize > (storage.settings[voreType .. "PreferredPredSizeMin"] or 0.75))
-				and (relativeSize < (storage.settings[voreType .. "PreferredPredSizeMax"] or 3))
-				then
-					table.insert(sbq.targetedEntities, {eid, score * ((math.abs((storage.settings[voreType .. "PreferredPredSize"] or 2)-relativeSize) * 5) + world.magnitude(mcontroller.position(), world.entityPosition(eid)))})
-				end
+				sbq.addRPC(world.sendEntityMessage(eid, "sbqCheckAssociatedEffects", voreType), function(effects)
+					if effects then
+						local badEffect = false
+						local effectScore = 0
+						for i, effect in ipairs(effects) do
+							if (effect == "none" and storage.settings[voreType .. "PreyDislikesNone"])
+								or (effect == "heal" and storage.settings[voreType .. "PreyDislikesHeal"])
+								or (effect == "digest" and storage.settings[voreType .. "PreyDislikesDigest"])
+								or (effect == "softDigest" and storage.settings[voreType .. "PreyDislikesSoftDigest"])
+							then
+								badEffect = true
+								break
+							elseif (effect == "none" and storage.settings[voreType .. "PreyPrefersNone"])
+								or (effect == "heal" and storage.settings[voreType .. "PreyPrefersHeal"])
+								or (effect == "digest" and storage.settings[voreType .. "PreyPrefersDigest"])
+								or (effect == "softDigest" and storage.settings[voreType .. "PreyPrefersSoftDigest"])
+							then
+								effectScore = effectScore + (10/#effects)
+							end
+						end
+						local scale = (status.statusProperty("animOverrideScale") or 1)
+						local relativeSize = enabled.size / scale
+						if not badEffect
+						and (relativeSize > (storage.settings[voreType .. "PreferredPredSizeMin"] or 0.75))
+						and (relativeSize < (storage.settings[voreType .. "PreferredPredSizeMax"] or 3))
+						then
+							table.insert(sbq.targetedEntities, { eid, score * (
+								(math.abs((storage.settings[voreType .. "PreferredPredSize"] or 2) - relativeSize) * 5)
+									+ world.magnitude(mcontroller.position(), world.entityPosition(eid))
+									- effectScore
+							)})
+						end
+					end
+				end)
 			end
 		end)
 	end

@@ -140,28 +140,28 @@ function sbq.huntingTab()
 							{ type = "panel", style = "flat", children = {
 								{ mode = "h" },
 								{ type = "label", align = "center", text = "Players" },
-								{ type = "checkBox", id = voreType .. "HuntFriendlyPlayers" },
-								{ type = "checkBox", id = voreType .. "HuntHostilePlayers" }
+								{ type = "iconCheckBox", id = voreType .. "HuntFriendlyPlayers", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "HuntHostilePlayers", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
 							} },
 							{ type = "panel", style = "flat", children = {
 								{ mode = "h" },
 								{ type = "label", align = "center", text = "OCs" },
-								{ type = "checkBox", id = voreType .. "HuntFriendlyOCs" },
-								{ type = "checkBox", id = voreType .. "HuntHostileOCs" }
+								{ type = "iconCheckBox", id = voreType .. "HuntFriendlyOCs", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "HuntHostileOCs", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
 							}}
 						},
 						{
 							{ type = "panel", style = "flat", children = {
 								{ mode = "h" },
 								{ type = "label", align = "center", text = "SBQ NPCs" },
-								{ type = "checkBox", id = voreType .. "HuntFriendlySBQNPCs" },
-								{ type = "checkBox", id = voreType .. "HuntHostileSBQNPCs" }
+								{ type = "iconCheckBox", id = voreType .. "HuntFriendlySBQNPCs", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "HuntHostileSBQNPCs", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
 							} },
 							{ type = "panel", style = "flat", children = {
 								{ mode = "h" },
 								{ type = "label", align = "center", text = "Other" },
-								{ type = "checkBox", id = voreType .. "HuntFriendlyOther" },
-								{ type = "checkBox", id = voreType .. "HuntHostileOther" }
+								{ type = "iconCheckBox", id = voreType .. "HuntFriendlyOther", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "HuntHostileOther", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
 							}}
 						}
 					}}
@@ -309,7 +309,36 @@ function sbq.baitingTab()
 						consentSlider,
 						{
 							preferredEffects, dislikedEffects
+						},
+						{
+							{ type = "panel", style = "flat", children = {
+								{ mode = "h" },
+								{ type = "label", align = "center", text = "Players" },
+								{ type = "iconCheckBox", id = voreType .. "BaitFriendlyPlayers", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "BaitHostilePlayers", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
+							} },
+							{ type = "panel", style = "flat", children = {
+								{ mode = "h" },
+								{ type = "label", align = "center", text = "OCs" },
+								{ type = "iconCheckBox", id = voreType .. "BaitFriendlyOCs", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "BaitHostileOCs", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
+							}}
+						},
+						{
+							{ type = "panel", style = "flat", children = {
+								{ mode = "h" },
+								{ type = "label", align = "center", text = "SBQ NPCs" },
+								{ type = "iconCheckBox", id = voreType .. "BaitFriendlySBQNPCs", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "BaitHostileSBQNPCs", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
+							} },
+							{ type = "panel", style = "flat", children = {
+								{ mode = "h" },
+								{ type = "label", align = "center", text = "Other" },
+								{ type = "iconCheckBox", id = voreType .. "BaitFriendlyOther", toolTip = "Friendly", icon = "/interface/scripted/sbq/sbqSettings/friendly.png" },
+								{ type = "iconCheckBox", id = voreType .. "BaitHostileOther", toolTip = "Hostile", icon = "/interface/scripted/sbq/sbqSettings/hostile.png" }
+							}}
 						}
+
 					}}
 				}}
 			}

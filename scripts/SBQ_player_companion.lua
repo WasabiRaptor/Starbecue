@@ -403,6 +403,19 @@ function init()
 		end
 	end)
 
+	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
+		local settings = (player.getProperty("sbqSettings") or {}).global
+		if not sbq.speciesConfig then
+			sbq.getSpeciesConfig(player.species(), settings)
+		end
+		local effects = {}
+		local data = sbq.speciesConfig.sbqData.voreTypeData[voreType]
+		for i, location in ipairs( data.locations ) do
+			table.insert(effects, settings[location.."EffectSlot"])
+		end
+		return effects
+	end)
+
 	if initStage < 1 then
 		function Recruit:_spawn(position, parameters)
 
