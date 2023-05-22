@@ -43,7 +43,7 @@ function init()
 	message.setHandler("sbqIsPredEnabled", function(_,_, voreType)
 		local currentData = status.statusProperty("sbqCurrentData") or {}
 		local settings = (player.getProperty( "sbqSettings" ) or {}).global or {}
-		return {enabled = settings[voreType.."Pred"], size = sbq.calcSize(), type = currentData.type}
+		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = currentData.type}
 	end)
 
 end

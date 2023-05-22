@@ -356,7 +356,7 @@ function init()
 	message.setHandler("sbqIsPredEnabled", function(_,_, voreType)
 		local currentData = status.statusProperty("sbqCurrentData") or {}
 		local settings = storage.settings or {}
-		return {enabled = settings[voreType.."Pred"], size = sbq.calcSize(), type = currentData.type}
+		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = currentData.type}
 	end)
 	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
 		local effects = {}
@@ -639,9 +639,7 @@ end
 
 function sbq.forcePrey()
 	sbq.addRPC(world.sendEntityMessage(storage.huntingTarget.id, "sbqForcePrey", entity.id(), storage.huntingTarget.voreType), function(valid)
-		if not valid then
-			sbq.getNextTarget()
-		end
+
 	end)
 end
 
@@ -710,10 +708,11 @@ function sbq.getTarget()
 	elseif (math.random() > 0.5) then
 		local voreType, predOrPrey = sbq.getCurrentVorePref()
 		if not voreType then return end
+		local consent = sbq.huntingAskConsent()
 		if predOrPrey == "pred" then
-			sbq.searchForValidPrey(voreType)
+			sbq.searchForValidPrey(voreType, consent)
 		elseif predOrPrey == "prey" then
-			sbq.searchForValidPred(voreType)
+			sbq.searchForValidPred(voreTyp, consent)
 		end
 		sbq.timer("targeting", 1, function()
 			table.sort(sbq.targetedEntities, function(a, b)
@@ -724,9 +723,9 @@ function sbq.getTarget()
 					index = 1,
 					id = sbq.targetedEntities[1][1],
 					voreType = voreType,
-					predOrPrey = predOrPrey
+					predOrPrey = predOrPrey,
+					getConsent = consent
 				}
-				sbq.huntingAskConsent()
 				self.board:setEntity("sbqHuntingTarget", sbq.targetedEntities[1][1])
 			end
 		end)
@@ -736,7 +735,6 @@ end
 function sbq.getNextTarget()
 	if not sbq.targetedEntities then storage.huntingTarget = nil return end
 	if storage.huntingTarget then
-		sbq.huntingAskConsent()
 		local newTarget = {
 			index = storage.huntingTarget.index + 1,
 			id = (sbq.targetedEntities[storage.huntingTarget.index+1] or {})[1],
@@ -758,9 +756,9 @@ function sbq.huntingAskConsent()
 		elseif storage.huntingTarget.predOrPrey == "prey" then
 			consentVal = storage.settings[storage.huntingTarget.voreType .. "ConsentPrey"] or 0.5
 		end
-		if consentVal == 1 then storage.huntingTarget.getConsent = true return end
-		if consentVal == 0 then storage.huntingTarget.getConsent = false return end
-		storage.huntingTarget.getConsent = consentVal < math.random()
+		if consentVal == 1 then return true end
+		if consentVal == 0 then return false end
+		return consentVal < math.random()
 	end
 end
 
@@ -1099,7 +1097,7 @@ function sbq.updateCosmeticSlots()
 	end
 end
 
-function sbq.searchForValidPrey(voreType)
+function sbq.searchForValidPrey(voreType, consent)
 	sbq.targetedEntities = {
 	}
 
@@ -1157,14 +1155,14 @@ function sbq.maybeAddPreyToTargetList(eid, voreType, ext, score)
 	end
 end
 
-function sbq.searchForValidPred(voreType)
+function sbq.searchForValidPred(voreType, consent)
 	sbq.targetedEntities = {
 	}
 
 	if storage.settings[voreType.."BaitFriendlyPlayers"] or storage.settings[voreType.."BaitHostilePlayers"] then
 		local entities = world.playerQuery(mcontroller.position(), 50)
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddPredToTargetList(eid, voreType, "Players", 1.5)
+			sbq.maybeAddPredToTargetList(eid, voreType, "Players", 1.5, consent)
 		end
 	end
 	--[[
@@ -1191,7 +1189,7 @@ function sbq.searchForValidPred(voreType)
 	end]]
 end
 
-function sbq.maybeAddPredToTargetList(eid, voreType, ext, score)
+function sbq.maybeAddPredToTargetList(eid, voreType, ext, score, consent)
 	local aggressive = world.entityAggressive(eid)
 	local validTarget = false
 	if aggressive and storage.settings[voreType .. "BaitHostile" .. ext] then
@@ -1201,7 +1199,7 @@ function sbq.maybeAddPredToTargetList(eid, voreType, ext, score)
 	end
 	if validTarget then
 		sbq.addRPC(world.sendEntityMessage(eid, "sbqIsPredEnabled", voreType), function(enabled)
-			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
+			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size and (consent or enabled.unwilling) then
 				sbq.addRPC(world.sendEntityMessage(eid, "sbqCheckAssociatedEffects", voreType), function(effects)
 					if effects then
 						local badEffect = false
