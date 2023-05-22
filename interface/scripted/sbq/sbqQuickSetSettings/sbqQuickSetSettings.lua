@@ -270,7 +270,22 @@ local predSettingList = {
 	"cockInfusionPred",
 	"pussyInfusionPred",
 	"bellyInfusionPred",
-	"breastsInfusionPred"
+	"breastsInfusionPred",
+
+	"oralVorePredUnwilling",
+	"tailVorePredUnwilling",
+	"absorbVorePredUnwilling",
+	"navelVorePredUnwilling",
+
+	"analVorePredUnwilling",
+	"unbirthPredUnwilling",
+	"cockVorePredUnwilling",
+	"breastVorePredUnwilling",
+
+	"cockInfusionPredUnwilling",
+	"pussyInfusionPredUnwilling",
+	"bellyInfusionPredUnwilling",
+	"breastsInfusionPredUnwilling"
 }
 local preySettingList = {
 	"oralVore",

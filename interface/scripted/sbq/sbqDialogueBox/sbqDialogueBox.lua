@@ -230,7 +230,12 @@ function sbq.checkVoreTypeActive(voreType)
 	if not (sbq.settings[voreType.."Pred"] --[[or sbq.settings[voreType.."PredEnable"] ]]) then return "hidden" end
 	local currentData = player.getProperty( "sbqCurrentData") or {}
 
-	local locationName = ((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType] or {}).location
+	local transition = (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
+	if not transition then return "hidden" end
+
+	if not sbq.checkSettings(transition.settings, sbq.settings) then return "hidden" end
+
+	local locationName = (transition or {}).location
 	if not locationName then return "hidden" end
 
 	local locationData = sbq.sbqData.locations[locationName]

@@ -410,6 +410,9 @@ function init()
 		end
 		local effects = {}
 		local data = sbq.speciesConfig.sbqData.voreTypeData[voreType]
+		local transition = (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
+		if not transition then return end
+		if not sbq.checkSettings(transition.settings, settings) then return end
 		for i, location in ipairs( data.locations ) do
 			table.insert(effects, settings[location.."EffectSlot"])
 		end

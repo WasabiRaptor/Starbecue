@@ -359,10 +359,14 @@ function init()
 		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = currentData.type}
 	end)
 	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
+		local settings = storage.settings
 		local effects = {}
 		local data = sbq.speciesConfig.sbqData.voreTypeData[voreType]
+		local transition = (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
+		if not transition then return end
+		if not sbq.checkSettings(transition.settings, settings) then return end
 		for i, location in ipairs( data.locations ) do
-			table.insert(effects, storage.settings[location.."EffectSlot"])
+			table.insert(effects, settings[location.."EffectSlot"])
 		end
 		return effects
 	end)

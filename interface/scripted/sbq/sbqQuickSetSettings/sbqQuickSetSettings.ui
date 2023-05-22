@@ -40,6 +40,13 @@
 					[{"mode":"h"},{ "type" : "checkBox", "id" : "pussyInfusionPred", "toolTip" : "Enables this body part TF" },{ "type" : "checkBox", "id" : "pussyInfusionPredUnwilling", "toolTip" : "Enables prey to TF themselves without asking." }, { "type" : "label", "text" : " Pussy TF" } ],
 					[{"mode":"h"},{ "type" : "checkBox", "id" : "breastsInfusionPred", "toolTip" : "Enables this body part TF" },{ "type" : "checkBox", "id" : "breastsInfusionPredUnwilling", "toolTip" : "Enables prey to TF themselves without asking." }, { "type" : "label", "text" : " Breast TF" } ]]
 				]},
+				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
+					{"mode":"v", "spacing":-1},
+					[
+						[{"mode":"h"},{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
+						[{"mode":"h"},{ "type" : "checkBox", "id" : "forcefulPrey", "toolTip" : "Allow Prey to force their way inside without asking\n(If that vore type is enabled and available)" }, { "type" : "label", "text" : " Forceful Prey" } ]
+					]
+				]},
 				{"type":"label", "align":"center", "text":"Default Location Preferences"},
 				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
 					{"mode":"v", "spacing":-1},
