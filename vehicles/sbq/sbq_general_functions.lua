@@ -65,36 +65,8 @@ function sbq.randomChance(percent)
 	return math.random() <= (percent/100)
 end
 
-function sbq.checkSettings(checkSettings)
-	for setting, value in pairs(checkSettings or {}) do
-		if (type(sbq.settings[setting]) == "table") and sbq.settings[setting].name ~= nil then
-			if not value then return false
-			elseif type(value) == "table" then
-				if not sbq.checkTable(value, sbq.settings[setting]) then return false end
-			end
-		elseif type(value) == "table" then
-			local match = false
-			for i, value in ipairs(value) do if (sbq.settings[setting] or false) == value then
-				match = true
-				break
-			end end
-			if not match then return false end
-		elseif (sbq.settings[setting] or false) ~= value then return false
-		end
-	end
-	return true
-end
+require("/scripts/SBQ_check_settings.lua")
 
-function sbq.checkTable(check, checked)
-	for k, v in pairs(check) do
-		if type(v) == "table" then
-			if not sbq.checkTable(v, (checked or {})[k]) then return false end
-		elseif v == true and type((checked or {})[k]) ~= "boolean" and ((checked or {})[k]) ~= nil then
-		elseif not (v == (checked or {})[k] or false) then return false
-		end
-	end
-	return true
-end
 
 function sbq.localToGlobal( position )
 	local lpos = { position[1], position[2] }

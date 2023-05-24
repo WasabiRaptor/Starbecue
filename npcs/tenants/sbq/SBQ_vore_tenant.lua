@@ -584,7 +584,9 @@ function sbq.askToBeVored()
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), dialogueBoxData )
 		end
 	elseif entityType == "npc" then
+		sbq.forcePrey()
 	elseif entityType == "monster" then
+		sbq.forcePrey()
 	end
 end
 
@@ -642,8 +644,10 @@ function sbq.eatUnprompted()
 end
 
 function sbq.forcePrey()
-	sbq.addRPC(world.sendEntityMessage(storage.huntingTarget.id, "sbqForcePrey", entity.id(), storage.huntingTarget.voreType), function(valid)
-
+	sbq.getRandomDialogue(".forcingPrey", storage.huntingTarget.id, storage.settings)
+	sbq.timer("forcedPreyDialogue", dialogue.result.delay or 1.5, function ()
+		world.sendEntityMessage(storage.huntingTarget.id, "requestTransition", storage.huntingTarget.voreType, { id = entity.id(), willing = true })
+		world.sendEntityMessage(storage.huntingTarget.id, "sbqSayRandomLine", entity.id(), {voreType = storage.huntingTarget.voreType}, ".unwillingPred")
 	end)
 end
 
@@ -716,7 +720,7 @@ function sbq.getTarget()
 		if predOrPrey == "pred" then
 			sbq.searchForValidPrey(voreType, consent)
 		elseif predOrPrey == "prey" then
-			sbq.searchForValidPred(voreTyp, consent)
+			sbq.searchForValidPred(voreType, consent)
 		end
 		sbq.timer("targeting", 1, function()
 			table.sort(sbq.targetedEntities, function(a, b)
@@ -767,8 +771,9 @@ function sbq.huntingAskConsent()
 end
 
 function sbq.getCurrentVorePref()
-	local predOrPrey = "prey" --sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
+	local predOrPrey = sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
 	local favoredVoreTypes = {}
+	if not predOrPrey then return end
 	for voreType, data in pairs(sbq.speciesConfig.sbqData.voreTypeData or {}) do
 		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"]
 			and (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
@@ -1169,7 +1174,6 @@ function sbq.searchForValidPred(voreType, consent)
 			sbq.maybeAddPredToTargetList(eid, voreType, "Players", 1.5, consent)
 		end
 	end
-	--[[
 	if storage.settings[voreType.."BaitFriendlyOCs"] or storage.settings[voreType.."BaitHostileOCs"] then
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "isOC" } })
 		for i, eid in ipairs(entities) do
@@ -1190,7 +1194,7 @@ function sbq.searchForValidPred(voreType, consent)
 		for i, eid in ipairs(entities) do
 			sbq.maybeAddPredToTargetList(eid, voreType, "Other", 4)
 		end
-	end]]
+	end
 end
 
 function sbq.maybeAddPredToTargetList(eid, voreType, ext, score, consent)

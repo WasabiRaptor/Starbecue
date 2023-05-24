@@ -2478,6 +2478,112 @@
 					}
 				}
 			},
+			// for when being prey and forcing their way into a pred without asking
+			"forcingPrey" : {
+				"new" : {},
+				"next" : "voreType",
+				"oralVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyOralVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyOralVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyOralVore"]}}
+				},
+				"tailVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyTailVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyTailVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyTailVore"]}}
+				},
+				"absorbVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyAbsorbVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyAbsorbVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyAbsorbVore"]}}
+				},
+				"navelVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyNavelVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyNavelVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyNavelVore"]}}
+				},
+				"analVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyAnalVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyAnalVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyAnalVore"]}}
+				},
+				"cockVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyCockVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyCockVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyCockVore"]}}
+				},
+				"unbirth" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyUnbirth"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyUnbirth"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyUnbirth"]}}
+				},
+				"breastVore" : {
+					"replace" : { "randomDialogue" : [":defaultForcingPreyBreastVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyForcingPreyBreastVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyForcingPreyBreastVore"]}}
+				}
+			},
+			// when being pred, response to prey forcing their way in unwillingly
+			"unwillingPred" : {
+				"new" : {},
+				"next" : "voreType",
+				"oralVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredOralVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredOralVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredOralVore"]}}
+				},
+				"tailVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredTailVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredTailVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredTailVore"]}}
+				},
+				"absorbVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredAbsorbVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredAbsorbVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredAbsorbVore"]}}
+				},
+				"navelVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredNavelVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredNavelVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredNavelVore"]}}
+				},
+				"analVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredAnalVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredAnalVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredAnalVore"]}}
+				},
+				"cockVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredCockVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredCockVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredCockVore"]}}
+				},
+				"unbirth" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredUnbirth"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredUnbirth"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredUnbirth"]}}
+				},
+				"breastVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredBreastVore"]},
+					"next" : "personality",
+					"shy" : {"replace" : { "randomDialogue" : [":shyUnwillingPredBreastVore"]}},
+					"flirty" : {"replace" : { "randomDialogue" : [":flirtyUnwillingPredBreastVore"]}}
+				}
+			},
 
 			// when being prey, responses to the pred that ate them as they struggle
 			// settings come from the pred, prey settings comes from itself
@@ -2732,7 +2838,6 @@
 					}}
 				}
 			},
-
 
 			// when being prey, responses to the pred thats eating them
 			// settings come from the pred, prey settings comes from itself

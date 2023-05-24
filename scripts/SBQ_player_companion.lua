@@ -4,6 +4,7 @@ local oldinit = init
 sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/SBQ_species_config.lua")
+require("/scripts/SBQ_check_settings.lua")
 sbq.queuedTransitions = {}
 
 local prey = {}
