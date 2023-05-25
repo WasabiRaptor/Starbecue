@@ -17,6 +17,7 @@ require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 require("/npcs/tenants/sbq/SBQ_tenant_rewards.lua")
+require("/interface/scripted/sbq/sbqDialogueBox/scripts/npc.lua")
 
 local _npc_setItemSlot
 
@@ -370,6 +371,26 @@ function init()
 		end
 		return effects
 	end)
+	message.setHandler("sbqNPCGetConsent", function(_, _, eid, data)
+		local predOrPrey = sbq.getPredOrPrey()
+		if predOrPrey == data.predOrPrey then
+			if not ((data.predOrPrey == "pred" and storage.settings[data.voreType .. "PreyAlwaysAccept"])
+			or ((data.predOrPrey == "prey" and storage.settings[data.voreType .. "PredAlwaysAccept"]))) then
+				return 2 -- the "No." option
+			end
+		end
+		if ((data.predOrPrey == "pred" and storage.settings[data.voreType .. "PreyAlwaysSeemUnwilling"])
+		or ((data.predOrPrey == "prey" and storage.settings[data.voreType .. "PredAlwaysSeemUnwilling"]))) then
+			return 3 -- the "No... (But actually yes)" option
+		end
+		local favoredVoreTypes = sbq.getFavoredVoreTypes(predOrPrey)
+		for i = 1, 5 do
+			if favoredVoreTypes[math.random(#favoredVoreTypes)] == data.voreType then
+				return 1 -- the "Yes!" option
+			end
+		end
+		return 3 -- the "No... (But actually yes)" option
+	end)
 
 end
 
@@ -564,7 +585,22 @@ function sbq.askToVore()
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), dialogueBoxData )
 		end
 	elseif entityType == "npc" then
-		sbq.eatUnprompted() -- going to replace this with one where the NPCs talk to eachother and can say yes or no later
+		local settings = sb.jsonMerge(storage.settings, {
+			voreType = storage.huntingTarget.voreType,
+			voreResponse = "selfRequest"
+		})
+		sbq.getRandomDialogue(".vore", storage.huntingTarget.id, settings)
+		sbq.addNamedRPC("sbqNPCGetConsent",
+			world.sendEntityMessage(storage.huntingTarget.id, "sbqNPCGetConsent", entity.id(), storage.huntingTarget),
+			function(result)
+				if result == 1 then
+					settings.willing = true
+				end
+				sbq.getRandomDialogue(dialogue.result.options[result][2], storage.huntingTarget.id, settings)
+				if result == 2 then -- "No."
+					sbq.getNextTarget()
+				end
+			end)
 	elseif entityType == "monster" then
 		sbq.eatUnprompted()
 	end
@@ -584,7 +620,22 @@ function sbq.askToBeVored()
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), dialogueBoxData )
 		end
 	elseif entityType == "npc" then
-		sbq.forcePrey()
+		local settings = sb.jsonMerge(storage.settings, {
+			voreType = storage.huntingTarget.voreType,
+		})
+		sbq.getRandomDialogue(".preyRequest", storage.huntingTarget.id, settings)
+
+		sbq.addNamedRPC("sbqNPCGetConsent",
+			world.sendEntityMessage(storage.huntingTarget.id, "sbqNPCGetConsent", entity.id(), storage.huntingTarget),
+			function(result)
+				if result == 1 then
+					settings.willing = true
+				end
+				sbq.getRandomDialogue(dialogue.result.options[result][2], storage.huntingTarget.id, settings)
+				if result == 2 then -- "No."
+					sbq.getNextTarget()
+				end
+			end)
 	elseif entityType == "monster" then
 		sbq.forcePrey()
 	end
@@ -647,7 +698,13 @@ function sbq.forcePrey()
 	sbq.getRandomDialogue(".forcingPrey", storage.huntingTarget.id, storage.settings)
 	sbq.timer("forcedPreyDialogue", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(storage.huntingTarget.id, "requestTransition", storage.huntingTarget.voreType, { id = entity.id(), willing = true })
-		world.sendEntityMessage(storage.huntingTarget.id, "sbqSayRandomLine", entity.id(), {voreType = storage.huntingTarget.voreType}, ".unwillingPred")
+		sbq.timer("forcedPreyCheckInside", 1, function ()
+			if sbq.currentData.type == "prey" then
+				world.sendEntityMessage(storage.huntingTarget.id, "sbqSayRandomLine", entity.id(), {voreType = storage.huntingTarget.voreType}, ".unwillingPred")
+			else
+				sbq.getNextTarget()
+			end
+		end)
 	end)
 end
 
@@ -770,10 +827,8 @@ function sbq.huntingAskConsent()
 	end
 end
 
-function sbq.getCurrentVorePref()
-	local predOrPrey = sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
+function sbq.getFavoredVoreTypes(predOrPrey)
 	local favoredVoreTypes = {}
-	if not predOrPrey then return end
 	for voreType, data in pairs(sbq.speciesConfig.sbqData.voreTypeData or {}) do
 		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"]
 			and (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
@@ -788,6 +843,13 @@ function sbq.getCurrentVorePref()
 			end
 		end
 	end
+	return favoredVoreTypes
+end
+
+function sbq.getCurrentVorePref()
+	local predOrPrey = sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
+	if not predOrPrey then return end
+	local favoredVoreTypes = sbq.getFavoredVoreTypes(predOrPrey)
 	if not favoredVoreTypes[1] then return end
 	local favoredSelection = {
 		{ favoredVoreTypes[math.random(#favoredVoreTypes)] },
@@ -904,9 +966,9 @@ local randomDialogueHandling = {
 	{ "randomEmote", "emote" },
 }
 
-function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName)
+function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, dialogueTreeTop)
 	settings.race = npc.species()
-	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree or sbq.dialogueTree)
+	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTreeTop or dialogueTree or sbq.dialogueTree)
 	if not dialogueTree then return false end
 
 	dialogue.randomRolls = {}
