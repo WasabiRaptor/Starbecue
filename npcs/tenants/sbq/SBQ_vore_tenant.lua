@@ -540,8 +540,8 @@ end
 function sbq.adjustMood()
 
 end
-function sbq.logInfo(...)
-	sb.logInfo("["..world.entityName(entity.id()).."]"..sb.printJson(...))
+function sbq.logInfo(input)
+	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
 end
 
 function sbq.doTargetAction()

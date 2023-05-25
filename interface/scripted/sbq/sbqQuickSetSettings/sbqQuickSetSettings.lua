@@ -154,7 +154,7 @@ end
 
 function titleCanvas:draw()
 	local c = widget.bindCanvas(self.backingWidget) c:clear()
-	c:drawText("Starbecue 2.7", {
+	c:drawText("Starbecue "..root.assetJson("/sbqGeneral.config:settingsVersion"), {
 		position = {titleCanvas.size[1]/2, titleCanvas.size[2]},
 		horizontalAnchor = "mid",
 		verticalAnchor = "top",
