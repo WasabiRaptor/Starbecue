@@ -90,22 +90,6 @@ function init()
 		sbq.saveSettings()
 	end
 
-	-- scaleValueMin:setText(tostring(sbq.animOverrideOverrideSettings.scaleMin or sbq.animOverrideSettings.scaleMin or 0.1))
-	-- local minmaxTable = {(sbq.animOverrideOverrideSettings.scaleMin or 0.1), (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1)}
-	-- function scaleValueMin:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMin", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
-	-- function scaleValueMin:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
-	-- function scaleValueMin:onEscape() self:onEnter() end
-	-- function scaleValueMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-	-- sbq.numberBoxColor(scaleValueMin, table.unpack(minmaxTable) )
-
-	-- scaleValueMax:setText(tostring(sbq.animOverrideOverrideSettings.scaleMax or sbq.animOverrideSettings.scaleMax or 3))
-	-- local minmaxTable = { (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1), (sbq.animOverrideOverrideSettings.scaleMax or 3)}
-	-- function scaleValueMax:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMax", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
-	-- function scaleValueMax:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
-	-- function scaleValueMax:onEscape() self:onEnter() end
-	-- function scaleValueMax:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-	-- sbq.numberBoxColor(scaleValueMax, table.unpack(minmaxTable))
-
 	defaultInfusedMultiplier:setText(tostring(sbq.overrideSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
 	function defaultInfusedMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
 	function defaultInfusedMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end

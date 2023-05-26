@@ -99,6 +99,6 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, dialogueTreeTop, setting
 end
 
 function dialogueBoxScripts.openNewDialogueBox(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogueTree.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogueTree.ui }, pane.sourceEntity())
+	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogue.result.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogue.result.ui }, pane.sourceEntity())
 	pane.dismiss()
 end

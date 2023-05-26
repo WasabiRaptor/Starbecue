@@ -1,0 +1,215 @@
+{
+	//gotSteppy.default.default.default.falling duplicates gotSteppy.default.default.default.falling
+	"greeting.default.default": [
+		"Hi.",
+		"Hey there.",
+		"Mrow."
+	],
+	"greeting.default.fearful": [
+		"AH!",
+		"I-I didn't see you there!",
+		"O-oh its you!"
+	],
+	"greeting.default.horny": [
+		"UwU",
+		"Hehe, hey there~",
+		"Mrow~"
+	],
+	"greeting.default.friendly": [
+		"Hi!",
+		"Hey <entityname>!",
+		"Nya!"
+	],
+	"greeting.default.hungry": [
+		"Mmmm... feeling a bit hungry.",
+		"Hey <entityname>, I'm looking for some food, have any?",
+		"Oh huh, I probably need to find something to eat."
+	],
+	"converse": [
+		"So what did you want to talk about?"
+	],
+	"pet.normal": [
+		"Purrr",
+		"UwU"
+	],
+	"pet.many": [
+		{
+			"add": "pet.normal"
+		}
+	],
+	"pet.problem": [
+		"<dontSpeak>* It's possible that you may have a problem."
+	],
+	"vore.oralVore.default.default.default.request.before": [
+		"You want me to eat you?",
+		"Alright, sure.",
+		"Yeah ok.",
+		"Sounds good."
+	],
+	"vore.oralVore.default.default.default.request.after": [
+		"Mmmmmmm... good.",
+		"Tasty.",
+		"Nice and filling.",
+		"Not too bad."
+	],
+	"vore.oralVore.default.default.default.unprompted.before": [
+		"I think you'll fill me up.",
+		"I just need a bite to eat.",
+		"You seem like you'd make a good meal.",
+		"My belly's been grumbling..."
+	],
+	"vore.analVore.default.default.default.request.before": [
+		"You want to go up my butt?",
+		"You know thats the wrong way right?",
+		"That's going to be a tight fit.",
+		"Thats an interesting request."
+	],
+	"vore.analVore.default.default.default.request.after": [
+		"Ahhh~ Hope I'm not squeezing too much.",
+		"Mmm~ This actually feels pretty good.",
+		"Heh~ it's almost like you're a living dildo.",
+		"Oooh~ That squirming is rather nice."
+	],
+	"vore.analVore.default.default.default.unprompted.before": [
+		"Hey, I want to try something.",
+		"Hey... what if I shoved you up my ass?",
+		"For some reason... I keep imagining you as a dildo.",
+		"You know, theres a reason I'm not wearing pants."
+	],
+	"vore.analVore.default.default.default.unprompted.after": [
+		"Ahhh~ hope I'm not squeezing too much.",
+		"Mmm~ That actually feels pretty good.",
+		"Heh~ it's almost like you're a living dildo.",
+		"Oooh~ That squirming is rather nice."
+	],
+	"vore.cockVore.default.default.default.request.before": [
+		"Hah, you're horny.",
+		"You want to get squeezed into my dick?",
+		"Thats going to be a real tight fit."
+	],
+	"vore.cockVore.default.default.default.request.after": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me all excited~",
+		"Ffff~ Now I'm all hard~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"struggle.womb.default.default.default.transformed": [
+		[
+			"Seems like you're finished.",
+			"I think you're finished changing."
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.womb.default.default.default.transform.true": [
+		[
+			"You'll be a bit different after this is all done.",
+			"These changes should be an improvement."
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.womb.default.default.default.transform.false": [
+		[
+			"You don't want to change?",
+			"Come on, don't you want to be different?"
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.womb.default.default.default.eggify.true": [
+		[
+			"Can you feel that egg forming around you?",
+			"Soon your squirming won't do a thing."
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.womb.default.default.default.eggify.false": [
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.shaft.default.default.default.transformed": [
+		[
+			"Heh, I can feel you sloshing around.",
+			"Seems like you're not quite solid anymore."
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.shaft.default.default.default.transform.true": [
+		[
+			"I can feel you getting goopy in there.",
+			"I can feel you tarting to turn~"
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"struggle.balls.default.default.default.default": [
+		"Having a good time in there?",
+		"Keep squirming.",
+		"It feels so good having you in there~",
+		"Friends are stored in the balls~"
+	],
+	"struggling.belly.default.default.default.default.default": [
+		[
+			"Mmmm pretty comfortable.",
+			"Ahh... your belly is so soft...",
+			{
+				"check": {
+					"bellySounds": true
+				},
+				"add": [
+					"Your belly is so noisy.",
+					"Mmm... I like the sounds your belly is making."
+				]
+			}
+		],
+		{
+			"check": {
+				"predator": [
+					"sbqVaporeon",
+					"vaporeon"
+				]
+			},
+			"add": [
+				"Gooey Vappy belly.",
+				"Its all gooey in here."
+			]
+		}
+	],
+	"struggling.belly.default.default.default.default.sbqHeal": [
+		[
+			"Ahh... its so soothing.",
+			"I can feel all my troubles melting away...",
+			"Its so comfortable in here.",
+			{
+				"check": {
+					"bellySounds": true
+				},
+				"add": [
+					"I really like the sounds your belly makes... very calming.",
+					"I could just drift off to sleep listening to the sounds of your body..."
+				]
+			}
+		],
+		{
+			"check": {
+				"predator": [
+					"sbqVaporeon",
+					"vaporeon"
+				]
+			},
+			"add": [
+				"I always liked vappy goo."
+			]
+		}
+	]
+}
