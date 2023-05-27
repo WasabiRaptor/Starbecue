@@ -75,41 +75,154 @@
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
-				"I'm soooo hungry... I need to eat something... can I have you?"
+				"I'm soooo hungry... I need to eat something... can I have you?",
+				"Starving... you... please... feed me...",
+				"Hey... I need something in my gut... right now... Interested?"
 			],
 			[ // 25% - 50%
-				"Mmmmm hungry... can I... eat you?"
+				"Mmmmm hungry... can I... eat you?",
+				"Getting really close to needing some solid food. You wanna help?",
+				"O-ooh, I can feel my tank running dry. Fill me up, please?"
 			],
 			[ // 50% - 75%
-				"I could use a meal... would you want to be it?"
+				"I could use a meal... would you want to be it?",
+				"I'm not THAT hungry, but a belly filler would be nice. You in?",
+				"Gotta admit, I think you'd fit in me nicely. Care to try?"
 			],
 			[ // 75% - 100%
-				"I'm a bit peckish... can I eat you to top off?"
+				"I'm a bit peckish... can I eat you to top off?",
+				"Something light would be nice. You might fit the bill.",
+				"Even if I'm not hungry, you look tasty. May I?"
 			]
 		]
 	},
-	"shySelfRequestOralVore": ":defaultSelfRequestOralVore",
-	"flirtySelfRequestOralVore" : ":defaultSelfRequestOralVore",
+	"shySelfRequestOralVore" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"O-oohhh... I don't want to impose... b-but I really need food...",
+				"S-sorry... I'm starving... I hate t-to bother... but may I eat you?",
+				"A-ah! You startled me... Can I a-ask you for a favor? I gotta eat..."
+			],
+			[ // 25% - 50%
+				"H-hey... I'm really starting to get hungry... W-would you like to be my meal?",
+				"Mmf... S-sorry, my belly is really... wanting food...",
+				"Ooof... I-I hate to ask... but I n-need your help..."
+			],
+			[ // 50% - 75%
+				"N-nice to bump into you here... I need a snack... If you'd like to v-volunteer, of course...",
+				"I shouldn't have skipped lunch--h-hi! P-perfect timing, could I b-borrow you for a while?",
+				"Erm.. Oh.. I feel so e-embarrassed, but... I'd like to eat you... Please?"
+			],
+			[ // 75% - 100%
+				"Hey... Um... I w-wanted to see if you were interested in... spending some time in me?",
+				"<entityname>. I... I would like to eat you... if you're okay with it... It's fine if you're busy...",
+				"Something quick would be nice...  O-oh, could I trouble you as a s-snack?"
+			]
+		]
+	},
+	"flirtySelfRequestOralVore" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Mmmf... I'm too hungry to tease properly... Get in my tummy, please~?",
+				"Hey there, hot stuff... Care to help me in my time of need? I'll make it worth your time~",
+				"I bet you waited until I was famished... hm? Ready to spend some time in my extra grumbly guts~?"
+			],
+			[ // 25% - 50%
+				"Mmm, you look like you'd fill me up in *all* the right places. Want to find out~?",
+				"Hey, whatever you're doing can wait. I'm hungry now, and I'd love to have you for dinner~",
+				"My my, I'm so close to starving. I need a brave volunteer to rescue me~"
+			],
+			[ // 50% - 75%
+				"You're looking positively delectable. I wonder, though, if you taste just as good as you look~?",
+				"Normally, I'd snatch up a sexy snack like you up, but I figured I'd be polite and ask *this* time~",
+				"Fancy running into you here. I was craving a good <entityname> snack, if you're willing~"
+			],
+			[ // 75% - 100%
+				"You look exhausted. I know just the place you can relax in~",
+				"I'm pretty full, but I can make room for someone as nice looking as you, if you'd like~",
+				"Wandering around, are we? A cute thing like yourself needs to be kept snug and secure. Interested~?"
+			]
+		]
+	},
 
 	"defaultSelfRequestOralVoreYes" : {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
-				"Thank you so much! I thought I'd starve!"
+				"Thank you so much! I thought I'd starve!",
+				"I appreciate it. I might reward you for this later.",
+				"I was hoping you'd say that. You're a life-saver."
 			],
 			[ // 25% - 50%
-				"Thanks... I was really hungry."
+				"Thanks... I was really hungry.",
+				"Whew... I really didn't want to starve.",
+				"You're the best. Honest!"
 			],
 			[ // 50% - 75%
-				"Thank you! I just needed to satiate those grumbles."
+				"Thank you! I just needed to satiate those grumbles.",
+				"Perfect, I'll make it worth your while.",
+				"Mmm, I was hoping you'd agree."
 			],
 			[ // 75% - 100%
-				"Thanks, you should be just the snack I need."
+				"Thanks, you should be just the snack I need.",
+				"Nice, now just relax and enjoy the ride.",
+				"Lovely, let's not waste any time."
 			]
 		]
 	},
-	"shySelfRequestOralVoreYes" : ":defaultSelfRequestOralVoreYes",
-	"flirtySelfRequestOralVoreYes" : ":defaultSelfRequestOralVoreYes",
+	"shySelfRequestOralVoreYes" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Goodness! I-I wasn't expecting you to say yes...",
+				"T-thank you so much! I'll be gentle, I promise...",
+				"W-wow! T-this means so much to me, really!"
+			],
+			[ // 25% - 50%
+				"You're a life-saver... T-truly!",
+				"Thank y-you! My belly thanks you, t-too!",
+				"Whew... Thanks."
+			],
+			[ // 50% - 75%
+				"Okay! J-just relax...",
+				"You agree? A-alright!",
+				"I'm glad you like the idea."
+			],
+			[ // 75% - 100%
+				"O-okay... Here goes...!",
+				"W-wow... You really mean it?",
+				"It's alright, I figured you were bus--w-wait, you said 'yes'?"
+			]
+		]
+	},
+
+	"flirtySelfRequestOralVoreYes" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Just what my starving belly wanted to hear... Time for you two to get acquainted~",
+				"Thanks a million... I won't forget this, and neither will you~",
+				"Mmm... let's not keep my belly waiting, then~"
+			],
+			[ // 25% - 50%
+				"Delightful~ It's rare to find a willing treat like yourself~",
+				"Thanks~ Now, let's get you crammed in where you belong~",
+				"I always adore a tasty volunteer~"
+			],
+			[ // 50% - 75%
+				"Perfect~ I was hoping you would say that~",
+				"Just what I needed to hear~",
+				"A good snack always knows its place~"
+			],
+			[ // 75% - 100%
+				"Good. Take a break while I do the hard work~",
+				"Mhm, I figured you were interested~",
+				"Relax... We're both going to enjoy this~"
+			]
+		]
+	},
 
 	"defaultSelfRequestOralVoreNoYes" : {
 		"percentage": "food",
@@ -2685,4 +2798,5 @@
 	"defaultUnwillingPredBreastVore": ":missingDialogue",
 	"shyUnwillingPredBreastVore": ":missingDialogue",
 	"flirtyUnwillingPredBreastVore": ":missingDialogue"
+
 }
