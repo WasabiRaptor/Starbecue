@@ -286,6 +286,82 @@
 	},
 	"shySelfRequestOralVoreNo" : ":defaultSelfRequestOralVoreNo",
 	"flirtySelfRequestOralVoreNo" : ":defaultSelfRequestOralVoreNo",
+	"defaultUnwillingPredOralVore" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Oof, wasn't expecting that...! I just wanted to know if you had any food...",
+				"*glk*, note to self... don't let prey hear my hungry stomach grumble...",
+				"Mmph... I shouldn't have skipped lunch... People just... jump right in..."
+			],
+			[ // 25% - 50%
+				"*urp*, not exactly what I had in mind to fix my hunger, but you ARE filling.",
+				"Haa-ah... Nice joke... Now, when are you getting out?",
+				"Erf... A little warning before you force my jaws open would've been nice."
+			],
+			[ // 50% - 75%
+				"Ugh, I was supposed to be on a diet. You do taste good, though.",
+				"Oof! That's a little too forward, isn't it?",
+				"Hey, you're supposed to treat me to dinner first before you--oh."
+			],
+			[ // 75% - 100%
+				"Whew, I thought you were joking when you were offering me a snack!",
+				"Gah, is this your way of saying hello?",
+				"*gulp*, Was it something I said?"
+			]
+		]
+	},
+	"shyUnwillingPredOralVore" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"A-ah, what are you d-doing?! I-I... just w-wanted some food!",
+				"*g-glk*, I'm s-so s-sorry...! Are you o-okay?",
+				"Wha... W-was it something my belly s-said?"
+			],
+			[ // 25% - 50%
+				"M-mmf, you seemed to have, uh... slipped right down my throat...",
+				"*u-urp*, I, uh... appreciate the gesture... but I asked for a snack...",
+				"Fff, a-are you okay...? It's getting active in t-there..."
+			],
+			[ // 50% - 75%
+				"O-oh my, I heard p-people were into me... but not like this...",
+				"<keysmash>!! U-um... please ask n-nicely next time...",
+				"Uhm... Y-you just... well... oh..."
+			],
+			[ // 75% - 100%
+				"*g-gulp*, not a-again!?",
+				"Um, w-well, I guess I'm carrying you around, n-now...",
+				"W-whew... You surprised m-me... Is... this what you wanted?"
+			]
+		]
+	},
+	"flirtyUnwillingPredOralVore" : {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Mmph... I wanted to invite you over for dinner, not *as* dinner...",
+				"Oof... This works, but I had somewhere else in mind for you to fill...",
+				"*glk~*, well, I did say to send their sexiest delivery person..."
+			],
+			[ // 25% - 50%
+				"*urp~*, someone always seems to meet my tummy's siren song for some reason...",
+				"Mm, your methods are a little forceful, but your flavor is unmatched~",
+				"Fwah, now I have to think about getting some bigger clothes~"
+			],
+			[ // 50% - 75%
+				"Oohh~, as you just found out, I don't have a gag reflex~",
+				"Mmf, you could've just told me that I look good with a nice, round tum~",
+				"Fff, there goes my figure again~"
+			],
+			[ // 75% - 100%
+				"*gulp~* When I said you were looking like a snack, I wasn't being literal~!",
+				"Not what I-*urp~*-meant what I told you to get inside me~",
+				"Mmpf, is this your idea of a lunch date~?"
+			]
+		]
+	},
+
 
 	"defaultNotFeelingIt": [
 		"Don't really feel like that right now.",
@@ -2774,9 +2850,6 @@
 	"defaultForcingPreyBreastVore": ":missingDialogue",
 	"shyForcingPreyBreastVore": ":missingDialogue",
 	"flirtyForcingPreyBreastVore": ":missingDialogue",
-	"defaultUnwillingPredOralVore": ":missingDialogue",
-	"shyUnwillingPredOralVore": ":missingDialogue",
-	"flirtyUnwillingPredOralVore": ":missingDialogue",
 	"defaultUnwillingPredTailVore": ":missingDialogue",
 	"shyUnwillingPredTailVore": ":missingDialogue",
 	"flirtyUnwillingPredTailVore": ":missingDialogue",
