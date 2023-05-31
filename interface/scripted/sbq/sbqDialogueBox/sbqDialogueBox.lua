@@ -83,7 +83,6 @@ function init()
 	end
 	sbq.dialogueTree = sbq.data.dialogueTree
 
-
 	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree )
 end
 
@@ -133,6 +132,13 @@ function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
+		if type(dialogue.result.dialogue) == "string" then
+			dialogue.result.dialogue = sbq.getRedirectedDialogue(dialogue.result.dialogue, true, sbq.settings, dialogueTree, dialogueTreeTop)
+			if type(dialogue.result.dialogue) == "table" and dialogue.result.dialogue.dialogue ~= nil then
+				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
+			end
+		end
+
 		for _, v in ipairs(randomDialogueHandling) do
 			local randomVal = v[1]
 			local resultVal = v[2]
@@ -522,8 +528,11 @@ function dialogueCont:onClick()
 			local path = option[2]
 			local continue = true
 			local entities = {}
-			if continue and (type(checks.checkScript) == "string") and (type(optionCheckScripts[checks.checkScript])=="function") then
-				continue = optionCheckScripts[checks.checkScript](sbq.settings, table.unpack(checks.checkScriptArgs or {}))
+			if continue and (type(checks.checkScript) == "string") then
+				if (type(optionCheckScripts[checks.checkScript]) == "function") then
+					continue = optionCheckScripts[checks.checkScript](sbq.settings, table.unpack(checks.checkScriptArgs or {}))
+				else continue = false
+				end
 			end
 			if continue and (type(checks.check) == "table") then
 				continue = sbq.checkSettings(checks.check, sbq.settings)

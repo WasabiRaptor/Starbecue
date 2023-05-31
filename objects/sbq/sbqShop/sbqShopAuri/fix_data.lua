@@ -11,7 +11,7 @@ function optionCheckScripts.fixData(settings, ...)
 	if preyWarp then return true end
 
 	local sbqCurrentData = player.getProperty("sbqCurrentData") or {}
-	local sbqCurrentData2 = player.getProperty("sbqCurrentData") or {}
+	local sbqCurrentData2 = status.statusProperty("sbqCurrentData") or {}
 	if ((sbqCurrentData.type == "driver") and (sbqCurrentData2.type == "driver"))
 	or ((sbqCurrentData.type == nil) and (sbqCurrentData2.type == nil))
 	then
