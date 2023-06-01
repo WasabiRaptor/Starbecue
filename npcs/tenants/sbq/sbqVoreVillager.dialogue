@@ -1,6 +1,5 @@
 {
-	"missingDialogue" : "Whoops! this dialogue is missing.",
-
+	"missingDialogue": "Whoops! this dialogue is missing.",
 	"defaultGreeting": [
 		"Hi, how's it going.",
 		"Hey there!",
@@ -96,7 +95,7 @@
 			]
 		]
 	},
-	"shySelfRequestOralVore" : {
+	"shySelfRequestOralVore": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -121,7 +120,7 @@
 			]
 		]
 	},
-	"flirtySelfRequestOralVore" : {
+	"flirtySelfRequestOralVore": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -146,8 +145,7 @@
 			]
 		]
 	},
-
-	"defaultSelfRequestOralVoreYes" : {
+	"defaultSelfRequestOralVoreYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -172,7 +170,7 @@
 			]
 		]
 	},
-	"shySelfRequestOralVoreYes" : {
+	"shySelfRequestOralVoreYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -197,8 +195,7 @@
 			]
 		]
 	},
-
-	"flirtySelfRequestOralVoreYes" : {
+	"flirtySelfRequestOralVoreYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -223,8 +220,7 @@
 			]
 		]
 	},
-
-	"defaultSelfRequestOralVoreNoYes" : {
+	"defaultSelfRequestOralVoreNoYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -241,10 +237,9 @@
 			]
 		]
 	},
-	"shySelfRequestOralVoreNoYes" : ":defaultSelfRequestOralVoreNoYes",
-	"flirtySelfRequestOralVoreNoYes" : ":defaultSelfRequestOralVoreNoYes",
-
-	"defaultSelfRequestOralVoreYesAfter" : {
+	"shySelfRequestOralVoreNoYes": ":defaultSelfRequestOralVoreNoYes",
+	"flirtySelfRequestOralVoreNoYes": ":defaultSelfRequestOralVoreNoYes",
+	"defaultSelfRequestOralVoreYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -261,13 +256,12 @@
 			]
 		]
 	},
-	"shySelfRequestOralVoreYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
-	"flirtySelfRequestOralVoreYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
-	"defaultSelfRequestOralVoreNoYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
-	"shySelfRequestOralVoreNoYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
-	"flirtySelfRequestOralVoreNoYesAfter" : ":defaultSelfRequestOralVoreYesAfter",
-
-	"defaultSelfRequestOralVoreNo" : {
+	"shySelfRequestOralVoreYesAfter": ":defaultSelfRequestOralVoreYesAfter",
+	"flirtySelfRequestOralVoreYesAfter": ":defaultSelfRequestOralVoreYesAfter",
+	"defaultSelfRequestOralVoreNoYesAfter": ":defaultSelfRequestOralVoreYesAfter",
+	"shySelfRequestOralVoreNoYesAfter": ":defaultSelfRequestOralVoreYesAfter",
+	"flirtySelfRequestOralVoreNoYesAfter": ":defaultSelfRequestOralVoreYesAfter",
+	"defaultSelfRequestOralVoreNo": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -284,9 +278,9 @@
 			]
 		]
 	},
-	"shySelfRequestOralVoreNo" : ":defaultSelfRequestOralVoreNo",
-	"flirtySelfRequestOralVoreNo" : ":defaultSelfRequestOralVoreNo",
-	"defaultUnwillingPredOralVore" : {
+	"shySelfRequestOralVoreNo": ":defaultSelfRequestOralVoreNo",
+	"flirtySelfRequestOralVoreNo": ":defaultSelfRequestOralVoreNo",
+	"defaultUnwillingPredOralVore": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -311,7 +305,7 @@
 			]
 		]
 	},
-	"shyUnwillingPredOralVore" : {
+	"shyUnwillingPredOralVore": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -336,7 +330,7 @@
 			]
 		]
 	},
-	"flirtyUnwillingPredOralVore" : {
+	"flirtyUnwillingPredOralVore": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -361,8 +355,6 @@
 			]
 		]
 	},
-
-
 	"defaultNotFeelingIt": [
 		"Don't really feel like that right now.",
 		"Not right now.",
@@ -1620,8 +1612,12 @@
 			"Mmmm pretty comfortable.",
 			"Ahh... your belly is so soft..."
 		],
-		{"check": {"bellySounds": true},"add": ":strugglingBellyNoisy"}
-
+		{
+			"check": {
+				"bellySounds": true
+			},
+			"add": ":strugglingBellyNoisy"
+		}
 	],
 	"strugglingBellyNoisy": [
 		"Your belly is so noisy.",
@@ -1641,7 +1637,12 @@
 			"I can feel all my troubles melting away...",
 			"Its so comfortable in here."
 		],
-		{"check": {"bellySounds": true},"add": ":strugglingBellyNoisyHeal"}
+		{
+			"check": {
+				"bellySounds": true
+			},
+			"add": ":strugglingBellyNoisyHeal"
+		}
 	],
 	"strugglingBellyDigestImmune": [
 		[
@@ -1661,7 +1662,12 @@
 			"Ahh... I'm starting to melt.",
 			"Oh my... I'm just gonna be food."
 		],
-		{"check": {"bellySounds": true},"add": ":strugglingBellyNoisyDigest"}
+		{
+			"check": {
+				"bellySounds": true
+			},
+			"add": ":strugglingBellyNoisyDigest"
+		}
 	],
 	"strugglingTransformingVaporeon": [
 		"Its... its like I'm turning into goo?",
@@ -1700,11 +1706,13 @@
 		"I'm just a blob of slime now..."
 	],
 	"strugglingSlimeTransforming": {
-		"percentage" : "progressBar",
-		"full" : ":strugglingSlimeTransformed",
+		"percentage": "progressBar",
+		"full": ":strugglingSlimeTransformed",
 		"pools": [
-			["Ahh... I'm being turned into slime...",
-			"Its like my limbs are turning into jelly..."]
+			[
+				"Ahh... I'm being turned into slime...",
+				"Its like my limbs are turning into jelly..."
+			]
 		]
 	},
 	"strugglingBalls": [
@@ -2245,7 +2253,6 @@
 		"I think... yeah you're so good, I'm gonna give you a good gift.",
 		"Ahhh... I'm gonna give you something real good."
 	],
-
 	"shyUnpromptedOralVoreBefore": ":missingDialogue",
 	"defaultUnpromptedOralVoreAfter": ":missingDialogue",
 	"shyUnpromptedOralVoreAfter": ":missingDialogue",
@@ -2871,5 +2878,4 @@
 	"defaultUnwillingPredBreastVore": ":missingDialogue",
 	"shyUnwillingPredBreastVore": ":missingDialogue",
 	"flirtyUnwillingPredBreastVore": ":missingDialogue"
-
 }

@@ -41,7 +41,7 @@
 			// greeting is the default start of the tree
 			// settings come from itself
 			"greeting" : {
-				"new" : {"jump" : ".converse"},
+				"new" : {"jump" : "converse"},
 				"next" : "giveTenantRewards",
 				"rewards" : {
 					"replace" : {"randomDialogue" : [":defaultRewardsGreeting"]},
