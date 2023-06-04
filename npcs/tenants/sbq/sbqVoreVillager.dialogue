@@ -2542,7 +2542,12 @@
 	"letoutBreastVoreDigestImmune": ":missingDialogue",
 	"letoutBreastVoreSoftDigest": ":missingDialogue",
 	"letoutBreastVoreHeal": ":missingDialogue",
-	"strugglingEnergyDrain": ":missingDialogue",
+	"strugglingEnergyDrain": [
+		"I... I'm feeling so tired...",
+		"It's getting harder to move...",
+		"I'm loosing the energy to struggle...",
+		"I can barely even squirm..."
+	],
 	"strugglingBellyCompression": ":missingDialogue",
 	"strugglingBellyEnergyDrain": ":missingDialogue",
 	"strugglingBellyTransforming": ":missingDialogue",
@@ -2737,16 +2742,104 @@
 	"infuseSelfRequestBallsAfterLayer": ":missingDialogue",
 	"infusedTail": ":missingDialogue",
 	"teaseInfusedTail": ":missingDialogue",
-	"defaultPreyRequestOralVore": ":missingDialogue",
+	"defaultPreyRequestOralVore": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Your belly, its calling to me... please! I need you to swallow me whole!",
+				"I just... I can't stop thinking about it! I need to be eaten, please!",
+				"I can't help it, I just need to feel the embrace of your belly, I need to be your meal!"
+			],
+			[ // 25% - 50%
+				"I really need a rest, would you, please please please send me down to your gut?",
+				"Would you eat me? please? I really need to feel your belly squeezing around me...",
+				"Your belly... it looks so nice, I just need to be inside it, please eat me!"
+			],
+			[ // 50% - 75%
+				"I keep imagining myself inside your belly, like you could totally eat me right now and I would not fight back at all.\nHaha.",
+				"You know, theres nothing really stopping you from just eating me, you could just do it and I wouldn't complain.",
+				"Hey, if you're, hungry, like, at all, you've got a totally willing snack right here, you could just eat me if you want."
+			],
+			[ // 75% - 100%
+				"I think it would be nice to have a rest in your gut, if you want to eat me that is.",
+				"How full are you? I wouldn't mind chilling in your belly if you're hungry or anything.",
+				"I kinda want to be carried around... in your belly, if you don't mind eating me."
+			]
+		]
+	},
 	"shyPreyRequestOralVore": ":missingDialogue",
 	"flirtyPreyRequestOralVore": ":missingDialogue",
-	"defaultPreyRequestOralVoreYes": ":missingDialogue",
+	"defaultPreyRequestOralVoreYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Thank you! Thank you! Thank you! Now open wide so I can just dive right in there!",
+				"Yes! thank you! gosh I almost dived in when you opened your mouth to speak!",
+				"Thanks you! ahhh I can't wait to just slip down your throat and be all yours!"
+			],
+			[ // 25% - 50%
+				"Ahh I'm so happy I get to be your meal!",
+				"I'm really gonna get to be in your belly? thank you!",
+				"Yes! I can't wait to be making bulge in your gut!"
+			],
+			[ // 50% - 75%
+				"You'd really do that? just eat me whole?",
+				"You're really going to eat me? right here? right now?",
+				"Oh my gosh you're actually going to eat me?"
+			],
+			[ // 75% - 100%
+				"Yes? oh this's is going to be fun!",
+				"I get to be your snack!",
+				"Yes! I just love bellies so much!"
+			]
+		]
+	},
 	"shyPreyRequestOralVoreYes": ":missingDialogue",
 	"flirtyPreyRequestOralVoreYes": ":missingDialogue",
-	"defaultPreyRequestOralVoreNo": ":missingDialogue",
+	"defaultPreyRequestOralVoreNo": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Ah... I guess I was too excited... I'll find someone else..."
+			],
+			[ // 25% - 50%
+				"Thats alright... I'll find someone else."
+			],
+			[ // 50% - 75%
+				"Hah yeah, I wonder if anyone else would."
+			],
+			[ // 75% - 100%
+				"Thats alright, I can ask someone else."
+			]
+		]
+	},
 	"shyPreyRequestOralVoreNo": ":missingDialogue",
 	"flirtyPreyRequestOralVoreNo": ":missingDialogue",
-	"defaultPreyRequestOralVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestOralVoreNoYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I... sorry! I need this too much! I'm diving in your maw and you can't stop me!",
+				"You're probably not listening to your belly! I know you want me inside just as much as I need to be!",
+				"That doesn't sound right, I can sense you're hungry! It's fine I promise! I'm going to be your meal! I'll show you!"
+			],
+			[ // 25% - 50%
+				"Huh...? No? But your eyes tell me otherwise... you're hungry, how about I help you with that...",
+				"I may need a rest, but I've got enough energy left in me to force my way down your throat!",
+				"You're really going to say no? I can see the hunger in your eyes! Let me in!"
+			],
+			[ // 50% - 75%
+				"Hey, no need to be shy about it... I can tell you want to, so here, how about I stick my head in your maw and we'll see where that leads...",
+				"No? you don't seem confident there... I could just force myself into your mouth, are you going to stop me?",
+				"Hmm? Really? I thought you were sizing me up just now, you know you can do it... here, open your maw, let me show you..."
+			],
+			[ // 75% - 100%
+				"You don't sound too confident there... why don't I just push my way into your maw and find out what you *really* think?",
+				"Hmmm, I think you're lying to me, I think you secretly want me to be bulging out your gut just as much as I do.",
+				"Hm? did you say no? that can't be right, let me do an internal inspection juuuust to make sure."
+			]
+		]
+	},
 	"shyPreyRequestOralVoreNoYes": ":missingDialogue",
 	"flirtyPreyRequestOralVoreNoYes": ":missingDialogue",
 	"defaultPreyRequestTailVore": ":missingDialogue",
@@ -2833,7 +2926,24 @@
 	"defaultPreyRequestBreastVoreNoYes": ":missingDialogue",
 	"shyPreyRequestBreastVoreNoYes": ":missingDialogue",
 	"flirtyPreyRequestBreastVoreNoYes": ":missingDialogue",
-	"defaultForcingPreyOralVore": ":missingDialogue",
+	"defaultForcingPreyOralVore": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I... I just can't help myself! I'm going to get in your belly!",
+				"Its calling to me... your belly... Open up, I'm diving in!"
+			],
+			[ // 25% - 50%
+				"You look... amazing... I bet you'd look even better with me in your belly!"
+			],
+			[ // 50% - 75%
+				"You know, I could force my way down your throat... and theres not much you could do to stop me!"
+			],
+			[ // 75% - 100%
+				"I'm gonna fill you up... I want to be carried around in your belly!"
+			]
+		]
+	},
 	"shyForcingPreyOralVore": ":missingDialogue",
 	"flirtyForcingPreyOralVore": ":missingDialogue",
 	"defaultForcingPreyTailVore": ":missingDialogue",
