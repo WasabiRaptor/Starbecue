@@ -641,6 +641,14 @@ function sbq.askToBeVored()
 	end
 end
 
+function sbq.combatSwitchHuntingTarget(newTarget)
+	if sbq.timer("combatSwitchHuntingTarget", 10) then
+		storage.huntingTarget = nil
+
+
+	end
+end
+
 function sbq.combatEat()
 	local settings = {
 		voreType = storage.huntingTarget.voreType,

@@ -4,9 +4,18 @@
 		"type":"action",
 		"name":"doSBQTargetAction",
 		"properties": {
-			"entity": {"type": "entity", "value": "target"},
-			"voreType": {"type": "string", "value": null},
-			"predOrPrey": {"type": "string", "value": null}
+			"entity": {"type": "entity", "value": "target"}
+		},
+		"category": "sbqHunting",
+		"script": "/behaviors/npc/sbqHunting.lua",
+		"output": {}
+	},
+	"sbqSetHostileTarget": {
+		"title":"sbqSetHostileTarget",
+		"type":"action",
+		"name":"sbqSetHostileTarget",
+		"properties": {
+			"entity": {"type": "entity", "value": "target"}
 		},
 		"category": "sbqHunting",
 		"script": "/behaviors/npc/sbqHunting.lua",

@@ -18,6 +18,16 @@
 		"parameters": {},
 		"children" : [
 			{
+				"title": "sbqSetHostileTarget",
+				"type": "action",
+				"name": "sbqSetHostileTarget",
+				"parameters": {
+					"entity": {
+						"key": "combatTarget"
+					}
+				}
+			},
+			{
 				"title": "entityInRange",
 				"type": "action",
 				"name": "entityInRange",
