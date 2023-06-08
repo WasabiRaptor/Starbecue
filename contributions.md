@@ -10,6 +10,7 @@
 
 # Blueninja
 	Blue the Synth NPC dialogue
+	General NPC dialogue for many unwilling pred and forcing prey lines
 
 # Cosmic
 	Crystal Shrine on hub map
