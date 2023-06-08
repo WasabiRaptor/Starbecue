@@ -499,17 +499,6 @@
 		"Mmmm... is it actually good in there...?",
 		"N-now you're where you belong... did I say it right?"
 	],
-	"shyUnpromptedOralVoreBefore": [
-		"Uhm... e-excuse me... I-",
-		"Hey... uhm... funny thing... I-",
-		"Do you... uhm... do you mind if I-",
-		"Hi... hey... hi... hi... hi-"
-	],
-	"shyUnpromptedOralVoreAfter": [
-		"S-sorry I couldn't control myself!",
-		"Th-this is fine right?",
-		"A-ahhh sorry I just panicked!"
-	],
 	"shyNotFeelingIt": [
 		"Uhm... I uhm... uhm...",
 		"Y-you really t-think I can be a pred?",
@@ -1931,7 +1920,9 @@
 	"infuseRequestPussyBefore": [
 		"You want to be my pussy?",
 		"Mm, can't wait to be soaking wet down there can you?",
-		"You really want to give yourself entirely to me?"
+		"You really want to give yourself entirely to me?",
+		"Want to stay awhile, huh? Why dont you just get comfy then~",
+		"Get comfy, dear. Youre going to be here awhile~"
 	],
 	"infuseRequestPussyAfter": [
 		"Hehe, I can feel you leaking with excitment already~",
@@ -2253,8 +2244,33 @@
 		"I think... yeah you're so good, I'm gonna give you a good gift.",
 		"Ahhh... I'm gonna give you something real good."
 	],
-	"defaultUnpromptedOralVoreAfter": ":missingDialogue",
-	"shytNotFeelingIt": ":missingDialogue",
+	"shyUnpromptedOralVoreBefore": [
+		"Uhm... e-excuse me... I-",
+		"Hey... uhm... funny thing... I-",
+		"Do you... uhm... do you mind if I-",
+		"Hi... hey... hi... hi... hi-",
+		"Do you mind if I just... help myself to you? Please?",
+		"Im sorry, Im just really hungry!",
+		"Umm, may I just have a taste?"
+	],
+	"defaultUnpromptedOralVoreAfter": [
+		"Dont mind me! Just grabbing lunch.",
+		"Get comfy in there!"
+	],
+	"shyUnpromptedOralVoreAfter": [
+		"S-sorry I couldn't control myself!",
+		"Th-this is fine right?",
+		"A-ahhh sorry I just panicked!",
+		"Im sorry! Im sorry! Im sorry! Im sorry!",
+		"I hope you dont mind...",
+		"Was that too forward? Im sorry!",
+		"So full... So good..."
+	],
+	"shytNotFeelingIt": [
+		"*shy whimpering*",
+		"M-m-maybe another time...",
+		"Im umm... not hungry right now."
+	],
 	"defaultTooSmall": ":missingDialogue",
 	"shyTooSmall": ":missingDialogue",
 	"flirtyTooSmall": ":missingDialogue",
@@ -2262,13 +2278,22 @@
 	"shyCompressionOralVoreFull": ":missingDialogue",
 	"flirtyCompressionOralVoreFull": ":missingDialogue",
 	"shyFull": ":missingDialogue",
-	"flirtyFull": ":missingDialogue",
+	"flirtyFull": [
+		"Sorry handsome! Need to make some room, first~!",
+		"Youll have to wait your turn~"
+	],
 	"shytNeedsInfusion": ":missingDialogue",
-	"flirtytNeedsInfusion": ":missingDialogue",
+	"flirtytNeedsInfusion":
+	[
+		"Really just need to add a cutie to me right now..."
+	],
 	"shyUnpromptedAnalVoreBefore": ":missingDialogue",
 	"flirtyUnpromptedAnalVoreBefore": ":missingDialogue",
 	"flirtyUnpromptedAnalVoreAfter": ":missingDialogue",
-	"defaultSelfRequestAnalVore": ":missingDialogue",
+	"defaultSelfRequestAnalVore": [
+		"You wouldnt mind if I just let myself in, would you?",
+		"Could you do me a favor and bend over?"
+	],
 	"shySelfRequestAnalVore": ":missingDialogue",
 	"flirtySelfRequestAnalVore": ":missingDialogue",
 	"defaultSelfRequestAnalVoreYes": ":missingDialogue",
@@ -2284,8 +2309,14 @@
 	"flirtySelfRequestAnalVoreNoYes": ":missingDialogue",
 	"defaultSelfRequestAnalVoreNoYesAfter": ":missingDialogue",
 	"shySelfRequestAnalVoreNoYesAfter": ":missingDialogue",
-	"defaultAnalVoreFull": ":missingDialogue",
-	"digestAnalVoreFull": ":missingDialogue",
+	"defaultAnalVoreFull": [
+		"Sorry, hun. All full back here!",
+		"Afraid I couldnt fit another in me!"
+	],
+	"digestAnalVoreFull": [
+		"Wait your turn! Ill get to you soon.",
+		"Just need to make some room for ya. Do you mind waiting a bit?"
+	],
 	"compressionAnalVoreFull": ":missingDialogue",
 	"shyCompressionAnalVoreFull": ":missingDialogue",
 	"flirtyCompressionAnalVoreFull": ":missingDialogue",
@@ -2686,24 +2717,55 @@
 	"escapeBreastVoreHeal": ":missingDialogue",
 	"infuseRequestBellyAfterLayer": ":missingDialogue",
 	"infuseUnpromptedBellyBeforeLayer": ":missingDialogue",
-	"infuseUnpromptedBellyAfter": ":missingDialogue",
+	"infuseUnpromptedBellyAfter": [
+		"Im sure you wont mind being a part of me for awhile, huh?",
+		"Lets be honest, you look a lot cuter this way.",
+		"What was their name again? Oh well."
+	],
 	"infuseUnpromptedBellyAfterLayer": ":missingDialogue",
-	"infuseSelfRequestBellyBefore": ":missingDialogue",
+	"infuseSelfRequestBellyBefore": [
+		"Youre gonna love it down there, I guarantee it!",
+		"Let's be honest, you look a lot cuter this way.",
+		"You wont regret being a part of me!"
+	],
 	"infuseSelfRequestBellyBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestBellyAfter": ":missingDialogue",
+	"infuseSelfRequestBellyAfter": [
+		"Got you all to myself, now!",
+		"Enjoy your stay down there!",
+		"What was their name again? Oh well.",
+		"Uuuurhp!"
+	],
 	"infuseSelfRequestBellyAfterLayer": ":missingDialogue",
-	"infuseRequestTailBefore": ":missingDialogue",
+	"infuseRequestTailBefore": [
+		"Looking to be a part of my tail, huh? Cant say I blame you!",
+		"Youre gonna make a nice bit of extra length!",
+		"Knew you were staring at my tail for a reason!"
+	],
 	"infuseRequestTailBeforeLayer": ":missingDialogue",
-	"infuseRequestTailAfter": ":missingDialogue",
+	"infuseRequestTailAfter": [
+		"Looking good back there, <entityname>!",
+		"All a part of me, now!"
+	],
 	"infuseRequestTailAfterLayer": ":missingDialogue",
-	"infuseUnpromptedTailBefore": ":missingDialogue",
+	"infuseUnpromptedTailBefore": [
+		"Might as well keep you back there, since you squirmed so nicely!",
+		"Think youll look good as part of my tail. Wouldnt you agree?"
+	],
 	"infuseUnpromptedTailBeforeLayer": ":missingDialogue",
-	"infuseUnpromptedTailAfter": ":missingDialogue",
+	"infuseUnpromptedTailAfter": [
+		"Looking good back there!",
+		"What was their name again? <entityname>?"
+	],
 	"infuseUnpromptedTailAfterLayer": ":missingDialogue",
 	"infuseSelfRequestTailBefore": ":missingDialogue",
 	"infuseSelfRequestTailBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestTailAfter": ":missingDialogue",
+	"infuseSelfRequestTailAfter": [
+		"Looking good back there, <entityname>!",
+		"All a part of me, now! Hope you enjoy the stay!",
+		"Got you all to myself, now!"
+	],
 	"infuseSelfRequestTailAfterLayer": ":missingDialogue",
+
 	"infuseRequestBreastsBeforeLayer": ":missingDialogue",
 	"infuseRequestBreastsAfterLayer": ":missingDialogue",
 	"infuseUnpromptedBreastsBeforeLayer": ":missingDialogue",
@@ -2712,13 +2774,23 @@
 	"infuseSelfRequestBreastsBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestBreastsAfter": ":missingDialogue",
 	"infuseSelfRequestBreastsAfterLayer": ":missingDialogue",
+
 	"infuseRequestPussyBeforeLayer": ":missingDialogue",
 	"infuseRequestPussyAfterLayer": ":missingDialogue",
 	"infuseUnpromptedPussyBeforeLayer": ":missingDialogue",
 	"infuseUnpromptedPussyAfterLayer": ":missingDialogue",
-	"infuseSelfRequestPussyBefore": ":missingDialogue",
+	"infuseSelfRequestPussyBefore": [
+		"You're going to look good as my pussy.",
+		"Mm, can't wait to feel you soaking me down there.",
+		"You really want to give yourself entirely to me?",
+		"Get comfy, dear. Youre going to be here awhile~"
+	],
 	"infuseSelfRequestPussyBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestPussyAfter": ":missingDialogue",
+	"infuseSelfRequestPussyAfter": [
+		"I can already feel you dripping down there~",
+		"Mmhm, maybe I need to put you to good use.",
+		"You feel so wet and sensitive! Glad to have you where you belong, <entityname>~"
+	],
 	"infuseSelfRequestPussyAfterLayer": ":missingDialogue",
 	"infuseUnpromptedShaftBeforeLayer": ":missingDialogue",
 	"infuseUnpromptedShaftAfterLayer": ":missingDialogue",
@@ -2738,8 +2810,16 @@
 	"infuseSelfRequestBallsBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestBallsAfter": ":missingDialogue",
 	"infuseSelfRequestBallsAfterLayer": ":missingDialogue",
-	"infusedTail": ":missingDialogue",
-	"teaseInfusedTail": ":missingDialogue",
+	"infusedTail": [
+		"<slowlove>^#ffffff7f;(I belong back here~)",
+		"<slowlove>^#ffffff7f;(Back and forth. Back and forth. Just a tail now~)",
+		"<slowlove>^#ffffff7f;(I belong back here... just a part of <entityname>~)"
+	],
+	"teaseInfusedTail": [
+		"I can still feel you back there~",
+		"I can still feel you back there, <entityname>~",
+		"Looking good back there, <entityname>!"
+	],
 	"defaultPreyRequestOralVore": {
 		"percentage": "rest",
 		"pools": [
@@ -2793,7 +2873,31 @@
 		]
 	},
 	"shyPreyRequestOralVoreYes": ":missingDialogue",
-	"flirtyPreyRequestOralVoreYes": ":missingDialogue",
+	"flirtyPreyRequestOralVoreYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"And to think I was starting to get desperate~! Open wide, sweetie!",
+				"Im going to make you feel so good from the inside~",
+				"You have no idea how much Ive needed this~!"
+			],
+			[ // 25% - 50%
+				"You and I are going to get along swimingly~ Enjoy the meal~!",
+				"Enjoy your meal, sweetheart~",
+				"Time for me and your belly to get acquainted~"
+			],
+			[ // 50% - 75%
+				"Just what I was hoping to hear~ Open wide!",
+				"Just what I needed to hear~",
+				"A good snack always knows its place~"
+			],
+			[ // 75% - 100%
+				"Good. Take a break while I do the hard work~",
+				"Mhm, I figured you were interested~",
+				"Relax... We're both going to enjoy this~"
+			]
+		]
+	},
 	"defaultPreyRequestOralVoreNo": {
 		"percentage": "rest",
 		"pools": [

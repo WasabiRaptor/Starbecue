@@ -36,3 +36,6 @@
 
 # radiantAurora
 	General NPC Dialogue for Hungry mood
+
+# Xodious
+	General NPC dialogue contributions for infusion lines

@@ -29,7 +29,7 @@
 	Ferrilata_
 	ArgobargSoup
 	Akari Kaen
-
+	Xodious
 
 # Playtesters / Bug Hunters
 	xeronious
