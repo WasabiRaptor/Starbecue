@@ -47,11 +47,13 @@ function sbq.npcGeneralBehaviorTab()
 				toolTip = "Prefer Prey that aren't immune to this location's effects." },
 				{ type = "label", text = "Prefer Non Immune" } },
 			{ { type = "checkBox", id = "preferDigestHostiles",
-				toolTip = "Attempt to digest hostiles with this vore type." },
-				{ type = "label", text = "Digest Hostiles" } },
+				toolTip = "Only uses vore types with digest effects on hostiles." },
+				{ type = "checkBox", id = "overrideSoftDigestForHostiles",
+				toolTip = "Override Soft digest to fatal digest for hostiles.\n(This prevents prey buildup from combat)" },
+				{ type = "label", text = "Prefer Digest Hostiles" } },
 			{ { type = "checkBox", id = "preferHealFriendlies",
 				toolTip = "Attempt to heal friendlies with this vore type when they are low health." },
-				{ type = "label", text = "Heal Friendlies" } },
+				{ type = "label", text = "Prefer Heal Friendlies" } },
 		}
 	})
 	function predPreyLeanSlider:onChange(index, value)

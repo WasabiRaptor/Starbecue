@@ -228,10 +228,10 @@ message.setHandler( "addDigestPrey", function (_,_, data, owner)
 	table.insert(sbq.addPreyQueue, data)
 end)
 
-message.setHandler( "requestEat", function (_,_, prey, voreType, location)
+message.setHandler( "requestEat", function (_,_, prey, voreType, location, side)
 	sbq.addRPC(world.sendEntityMessage(prey, "sbqIsPreyEnabled", voreType), function(enabled)
 		if enabled and enabled.enabled then
-			sbq.eat(prey, location, enabled.size or 1)
+			sbq.eat({id = prey, size = enabled.size or 1}, voreType, location, side)
 		end
 	end)
 end)

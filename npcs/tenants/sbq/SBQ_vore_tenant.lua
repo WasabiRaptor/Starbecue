@@ -554,17 +554,23 @@ function sbq.doTargetAction()
 	end
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then
-		if storage.huntingTarget.predOrPrey == "pred" then
-			if storage.huntingTarget.getConsent then
-				sbq.askToVore()
-			else
-				sbq.eatUnprompted()
+		if storage.huntingTarget.combat then
+			if storage.huntingTarget.predOrPrey == "pred" then
+				sbq.combatEat()
 			end
-		elseif storage.huntingTarget.predOrPrey == "prey" then
-			if storage.huntingTarget.getConsent then
-				sbq.askToBeVored()
-			else
-				sbq.forcePrey()
+		else
+			if storage.huntingTarget.predOrPrey == "pred" then
+				if storage.huntingTarget.getConsent then
+					sbq.askToVore()
+				else
+					sbq.eatUnprompted()
+				end
+			elseif storage.huntingTarget.predOrPrey == "prey" then
+				if storage.huntingTarget.getConsent then
+					sbq.askToBeVored()
+				else
+					sbq.forcePrey()
+				end
 			end
 		end
 	end
@@ -644,9 +650,42 @@ end
 function sbq.combatSwitchHuntingTarget(newTarget)
 	if sbq.timer("combatSwitchHuntingTarget", 10) then
 		storage.huntingTarget = nil
-
-
+		sbq.targetedEntities = {}
+		sbq.addRPC(world.sendEntityMessage(newTarget, "sbqGetPreyEnabled"), function(preySettings)
+			local voreType = sbq.getCurrentVorePref("pred", preySettings)
+			if not voreType then return end
+			local ext = sbq.getTargetExt(newTarget)
+			local aggressive = world.entityAggressive(eid)
+			local validTarget = false
+			if aggressive and storage.settings[voreType .. "HuntHostile" .. ext] then
+				validTarget = true
+			elseif not aggressive and storage.settings[voreType .. "HuntFriendly"..ext] then
+				validTarget = true
+			end
+			if not validTarget then return end
+			storage.huntingTarget = {
+				index = 1,
+				id = newTarget,
+				voreType = voreType,
+				predOrPrey = "pred",
+				combat = true,
+			}
+		end)
 	end
+end
+function sbq.getTargetExt(target)
+	local entityType = world.entityType(target)
+	if entityType == "npc" then
+		if world.callScriptedEntity(newTarget, "config.getParameter", "isOC" ) then
+			return "OCs"
+		end
+		if world.callScriptedEntity(newTarget, "config.getParameter", "sbqNPC" ) then
+			return "SBQNPCs"
+		end
+	elseif entityType == "player" then
+		return "Players"
+	end
+	return "Other"
 end
 
 function sbq.combatEat()
@@ -656,9 +695,9 @@ function sbq.combatEat()
 		location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
 		doingVore = "before"
 	}
-	sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id })
+	sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id, hostile = world.entityAggressive(storage.huntingTarget.id)  })
 	sbq.forceTimer("gotVored", delay or 1.5, function()
-		if not storage.huntingTarget then sbq.getNextTarget() return end
+		if not storage.huntingTarget then return end
 		settings.doingVore = "after"
 		if sbq.checkOccupant(storage.huntingTarget.id) then
 			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
@@ -835,15 +874,32 @@ function sbq.huntingAskConsent()
 	end
 end
 
-function sbq.getFavoredVoreTypes(predOrPrey)
+function sbq.getFavoredVoreTypes(predOrPrey, preySettings, effectSlot)
 	local favoredVoreTypes = {}
 	for voreType, data in pairs(sbq.speciesConfig.sbqData.voreTypeData or {}) do
 		if predOrPrey == "pred" and sbq.predatorSettings[voreType .. "Pred"]
 			and (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
 			and sbq.checkSettings((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType].settings, storage.settings)
 		then
-			for i = 1, (sbq.predatorSettings[voreType .. "PreferredPred"] or 5) do
-				table.insert(favoredVoreTypes, voreType)
+			local addType = true
+			if preySettings then
+				addType = preySettings[voreType]
+			end
+			if effectSlot then
+				addType = false
+				for i, location in ipairs(data.locations) do
+					if storage.settings[location.."EffectSlot"] == effectSlot then
+						addType = true break
+					end
+					if (effectSlot == "digest") and (storage.settings[location.."EffectSlot"] == "softDigest") and storage.settings.overrideSoftDigestForHostiles then
+						addType = true break
+					end
+				end
+			end
+			if addType then
+				for i = 1, (sbq.predatorSettings[voreType .. "PreferredPred"] or 5) do
+					table.insert(favoredVoreTypes, voreType)
+				end
 			end
 		elseif predOrPrey == "prey" and sbq.preySettings[voreType] then
 			for i = 1, (sbq.predatorSettings[voreType .. "PreferredPrey"] or 5) do
@@ -854,10 +910,10 @@ function sbq.getFavoredVoreTypes(predOrPrey)
 	return favoredVoreTypes
 end
 
-function sbq.getCurrentVorePref()
-	local predOrPrey = sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
+function sbq.getCurrentVorePref(predOrPrey, preySettings, healOrDigest)
+	local predOrPrey = predOrPrey or sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
 	if not predOrPrey then return end
-	local favoredVoreTypes = sbq.getFavoredVoreTypes(predOrPrey)
+	local favoredVoreTypes = sbq.getFavoredVoreTypes(predOrPrey, preySettings, healOrDigest)
 	if not favoredVoreTypes[1] then return end
 	local favoredSelection = {
 		{ favoredVoreTypes[math.random(#favoredVoreTypes)] },

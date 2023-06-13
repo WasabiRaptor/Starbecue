@@ -658,7 +658,7 @@ function sbq.grab(location, aimrange, grabrange)
 				})
 				for _, entity in ipairs(prey) do
 					if entity == target then
-						if sbq.eat(target, location, enabled.size or 1) then
+						if sbq.eat({id = target, size = enabled.size or 1}, "held", location) then
 							sbq.grabbing = target
 							sbq.movement.clickActionsDisabled = true
 						end

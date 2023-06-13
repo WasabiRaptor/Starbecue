@@ -11,31 +11,31 @@ function sbq.unForceSeat(occupantId)
 	end
 end
 
-function sbq.eat( occupantId, location, size, voreType, locationSide, force )
+function sbq.eat( args, voreType, location, locationSide )
 	local seatindex = math.floor(sbq.occupants.total + sbq.startSlot)
 	if seatindex > sbq.occupantSlots then return false end
 	local locationSpace = sbq.locationSpaceAvailable(location, locationSide)
 
-	if (locationSpace < ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1)))) and not force then return false end
+	if (locationSpace < ((args.size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1)))) and not args.force then return false end
 
-	if (not occupantId) or (not world.entityExists(occupantId))
-	or ((sbq.entityLounging(occupantId) or sbq.inedible(occupantId)) and not force)
+	if (not args.id) or (not world.entityExists(args.id))
+	or ((sbq.entityLounging(args.id) or sbq.inedible(args.id)) and not args.force)
 	then return false end
 
-	local loungeables = world.entityQuery( world.entityPosition(occupantId), 5, {
+	local loungeables = world.entityQuery( world.entityPosition(args.id), 5, {
 		withoutEntityId = entity.id(), includedTypes = { "vehicle" },
-		callScript = "sbq.entityLounging", callScriptArgs = { occupantId }
+		callScript = "sbq.entityLounging", callScriptArgs = { args.id }
 	} )
 
-	local edibles = world.entityQuery( world.entityPosition(occupantId), 2, {
+	local edibles = world.entityQuery( world.entityPosition(args.id), 2, {
 		withoutEntityId = entity.id(), includedTypes = { "vehicle" },
-		callScript = "sbq.edible", callScriptArgs = { occupantId, seatindex, entity.id(), force}
+		callScript = "sbq.edible", callScriptArgs = { args.id, seatindex, entity.id(), args.force}
 	})
-	sbq.occupant[seatindex].force = force
+	sbq.occupant[seatindex].force = args.force
 	if edibles[1] == nil then
 		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungable now
-			sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
-			sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetSpeciesVoreConfig"), function (data)
+			sbq.gotEaten(args, seatindex, voreType)
+			sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetSpeciesVoreConfig"), function (data)
 				sbq.occupant[seatindex].scale = data[2]
 				sbq.occupant[seatindex].scaleYOffset = data[3]
 			end)
@@ -46,22 +46,22 @@ function sbq.eat( occupantId, location, size, voreType, locationSide, force )
 	end
 	-- lounging in edible smol thing
 	local species = world.entityName(edibles[1])
-	sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
+	sbq.gotEaten(args, seatindex)
 	sbq.occupant[seatindex].species = species
 	return true
 end
 
-function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
-	local entityType = world.entityType(occupantId)
+function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
+	local entityType = world.entityType(args.id)
 	if entityType == "player" then
-		sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
+		sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
 		function(data)
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
 			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
 		end)
 	else
-		sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetCumulativeOccupancyTimeAndFlags", world.entityUniqueId(occupantId), true),
+		sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetCumulativeOccupancyTimeAndFlags", world.entityUniqueId(args.id), true),
 		function(data)
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
@@ -69,13 +69,14 @@ function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationS
 		end)
 	end
 
-	sbq.occupant[seatindex].id = occupantId
+	sbq.occupant[seatindex].id = args.id
 	sbq.occupant[seatindex].location = location
 	sbq.occupant[seatindex].locationSide = locationSide
-	sbq.occupant[seatindex].size = size or 1
+	sbq.occupant[seatindex].size = args.size or 1
 	sbq.occupant[seatindex].entryType = voreType
-	world.sendEntityMessage( occupantId, "sbqMakeNonHostile")
-	sbq.forceSeat( occupantId, seatindex )
+	sbq.occupant[seatindex].flags.hostile = args.hostile
+	world.sendEntityMessage( args.id, "sbqMakeNonHostile")
+	sbq.forceSeat( args.id, seatindex )
 	sbq.refreshList = true
 end
 
@@ -248,7 +249,7 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 		location, locationSide = sbq.getSidedLocationWithSpace(location, args.size)
 	end
 	if not location then return false end
-	if sbq.eat(args.id, location, args.size, voreType, locationSide, args.force) then
+	if sbq.eat(args, voreType, location, locationSide) then
 		sbq.justAte = args.id
 		vehicle.setInteractive( false )
 		sbq.showEmote("emotehappy")
@@ -261,6 +262,7 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 			location = location,
 			entryType = voreType,
 			willing = args.willing or false,
+			hostile = args.hostile or false,
 		}
 		local entityType = world.entityType(args.id)
 		local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
@@ -683,8 +685,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
 		return sbq.infusedLocationEffects(i, eid, health, locationEffect, location, powerMultiplier)
 	end
-
-	if sbq.occupant[i].flags.digesting then
+	if sbq.occupant[i].flags.digesting or (sbq.occupant[i].flags.hostile and sbq.settings.overrideSoftDigestForHostiles and (sbq.settings[location.."EffectSlot"] == "softDigest")) then
 		locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
 	elseif sbq.occupant[i].flags.healing then
 		locationEffect = (sbq.sbqData.locations[location].heal or {}).effect or "sbqHeal"

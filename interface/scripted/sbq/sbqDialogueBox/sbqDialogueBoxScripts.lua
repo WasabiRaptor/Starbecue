@@ -204,7 +204,7 @@ require("/scripts/SBQ_check_settings.lua")
 
 
 function dialogueBoxScripts.locationEffectSlot(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	if settings.digesting then
+	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[location.."EffectSlot"] == "softDigest")) then
 		return "digest"
 	elseif settings.healing then
 		return "heal"
@@ -212,7 +212,7 @@ function dialogueBoxScripts.locationEffectSlot(dialogueTree, dialogueTreeTop, se
 	return settings[(dialogue.result.location or settings.location).."EffectSlot"]
 end
 function dialogueBoxScripts.locationEffect(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	if settings.digesting then
+	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[location.."EffectSlot"] == "softDigest")) then
 		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
 	elseif settings.healing then
 		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
