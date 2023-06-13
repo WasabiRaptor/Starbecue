@@ -36,7 +36,7 @@
 			// overall default values for a "new" dialogue
 			"default" : {
 				"randomDialogue" : [":missingDialogue"],
-				"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+				"jump" : ".converse" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 			},
 			// greeting is the default start of the tree
 			// settings come from itself
@@ -50,10 +50,43 @@
 					"flirty" : {"replace" : {"randomDialogue" : [":flirtyRewardsGreeting"]}}
 				},
 				"default" : {
-					"next" : "personality",
+					"next" : ["personality","isOwner"],
 					"replace" : {"randomDialogue" : [":defaultGreeting"]},
 					"shy" : {"replace" : {"randomDialogue" : [":shyGreeting"]}},
-					"flirty" : {"replace" : {"randomDialogue" : [":flirtyGreeting"]}}
+					"flirty" : {"replace" : {"randomDialogue" : [":flirtyGreeting"]}},
+					"true" : {
+						"next" : ["personality","isFollowing"],
+						"replace" : {
+							"randomDialogue" : [":defaultGreetingCrew"],
+							"buttonText" : ["Stay"],
+							"callScript" : "swapFollowing"
+						},
+						"shy" : {"replace" : {"randomDialogue" : [":shyGreetingCrew"]}},
+						"flirty" : {"replace" : {"randomDialogue" : [":flirtyGreetingCrew"]}},
+						"false" : { "replace" : {"buttonText": ["Follow"]}},
+
+						"continue" : {
+							"next" : "isFollowing",
+							"true" : {
+								"new" : {
+									"randomDialogue" : ["defaultCrewStay"]
+								},
+								"next" : "personality",
+								"shy" : {"replace" : {"randomDialogue" : [":shyCrewStay"]}},
+								"flirty" : {"replace" : {"randomDialogue" : [":flirtyCrewStay"]}}
+							},
+							"false" : {
+								"new" : {
+									"randomDialogue" : ["defaultCrewFollow"]
+								},
+								"shy" : {"replace" : {"randomDialogue" : [":shyCrewFollow"]}},
+								"flirty" : {"replace" : {"randomDialogue" : [":flirtyCrewFollow"]}}
+							}
+						},
+						"fail" : {
+							"new" : {"randomDialogue" : [":fullCrew"]}
+						}
+					}
 				}
 			},
 			// lines triggered when a player may recieve a certain reward
