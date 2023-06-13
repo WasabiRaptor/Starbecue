@@ -652,6 +652,7 @@ function sbq.combatSwitchHuntingTarget(newTarget)
 		storage.huntingTarget = nil
 		sbq.targetedEntities = {}
 		sbq.addRPC(world.sendEntityMessage(newTarget, "sbqGetPreyEnabled"), function(preySettings)
+			if (not preySettings) or (preySettings.preyEnabled == false) then return end
 			local voreType = sbq.getCurrentVorePref("pred", preySettings)
 			if not voreType then return end
 			local ext = sbq.getTargetExt(newTarget)
