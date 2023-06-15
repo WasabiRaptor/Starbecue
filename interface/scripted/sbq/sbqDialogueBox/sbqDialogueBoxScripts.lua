@@ -18,8 +18,14 @@ dialogue = {
 	randomRolls = {},
 	position = 1,
 }
+function sbq.finishDialogue()
+	dialogue.finished = false
+	dialogue.result = {}
+	dialogue.position = 1
+end
 
 function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
+	sb.logInfo(path)
 	local dialogueTreeTop = sbq.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
 	if not dialogueTree then return false end
@@ -56,6 +62,7 @@ end
 
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
 	if not useStepPath then
+		sb.logInfo(step)
 		if dialogueBoxScripts[step] then
 			return sbq.getDialogueBranch("."..tostring((dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid))), settings, eid, dialogueTree, dialogueTreeTop)
 		elseif settings[step] then
@@ -65,7 +72,7 @@ function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useS
 		end
 	elseif useStepPath and dialogueTree[step] then
 		local dialogueTree = sbq.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)
-		return sbq.doNextStep(setp, settings, eid, dialogueTree, dialogueTreeTop)
+		return sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
 	else
 		return false
 	end

@@ -34,7 +34,7 @@ function sbq.eat( args, voreType, location, locationSide )
 	sbq.occupant[seatindex].force = args.force
 	if edibles[1] == nil then
 		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungable now
-			sbq.gotEaten(args, seatindex, voreType)
+			sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 			sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetSpeciesVoreConfig"), function (data)
 				sbq.occupant[seatindex].scale = data[2]
 				sbq.occupant[seatindex].scaleYOffset = data[3]
@@ -46,7 +46,7 @@ function sbq.eat( args, voreType, location, locationSide )
 	end
 	-- lounging in edible smol thing
 	local species = world.entityName(edibles[1])
-	sbq.gotEaten(args, seatindex)
+	sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	sbq.occupant[seatindex].species = species
 	return true
 end
@@ -296,7 +296,7 @@ function sbq.doEscape(args, statuses, afterstatuses, voreType )
 	}), sbq.lounging[victim].flags)
 
 	local entityType = world.entityType(args.id)
-	local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
+	local sayLine = (entityType == "npc" or entityType == "player") and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
 
 	if sayLine then world.sendEntityMessage( sbq.driver, "sbqSayRandomLine", args.id, settings, ".letout", true ) end
 	sbq.lounging[victim].location = "escaping"

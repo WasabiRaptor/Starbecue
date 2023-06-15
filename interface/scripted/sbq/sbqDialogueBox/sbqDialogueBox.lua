@@ -497,8 +497,7 @@ function dialogueCont:onClick()
 		return sbq.updateDialogueBox()
 	elseif dialogue.finished and dialogue.result.options ~= nil then
 	else
-		dialogue.finished = false
-		dialogue.position = 1
+		sbq.finishDialogue()
 	end
 
 	if type(dialogue.result.saveSettings) == "table" then
@@ -567,7 +566,7 @@ function dialogueCont:onClick()
 			end
 			if continue and ((checks.voreType == nil) or (sbq.checkVoreTypeActive(checks.voreType) ~= "hidden")) then
 				action[2] = function()
-					dialogue.finished = false
+					sbq.finishDialogue()
 					sbq.updateDialogueBox( path, sbq.prevDialogueBranch, sbq.dialogueTree )
 				end
 				table.insert(contextMenu, action)
