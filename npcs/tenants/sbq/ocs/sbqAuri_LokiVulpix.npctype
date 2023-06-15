@@ -658,18 +658,8 @@
 					},
 					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":compressionStruggle"]}}},
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":energyDrainStruggle"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":transformingStruggle"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":transformingStruggleImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}}
+					"transforming" : ".struggle.any.transforming",
+					"eggify" : ".struggle.any.eggify"
 				},
 				"tail" : {
 					"replace" : {
@@ -694,18 +684,8 @@
 					},
 					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":compressionStruggle"]}}},
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":energyDrainStruggle"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":transformingStruggle"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":transformingStruggleImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}}
+					"transforming" : ".struggle.any.transforming",
+					"eggify" : ".struggle.any.eggify"
 				},
 				"womb" : {
 					"replace" : {
@@ -724,18 +704,8 @@
 					},
 					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":wombCompressionStruggle"]}}},
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":wombEnergyDrainStruggle"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":transformingStruggle"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":transformingStruggleImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}}
+					"transforming" : ".struggle.any.transforming",
+					"eggify" : ".struggle.any.eggify"
 				},
 				"cock" : ".shaft",
 				"shaft" : {
@@ -757,12 +727,7 @@
 						"next" : "cumTransformAllow",
 						"false" : {"queueReplace":{"randomDialogue" : [":cumTransformingStruggleImmune"]}}
 					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}}
+					"eggify" : ".struggle.any.eggify"
 				},
 				"ballsL" : ".balls",
 				"ballsR" : ".balls",
@@ -795,12 +760,7 @@
 						"next" : "cumTransformAllow",
 						"false" : {"queueReplace":{"randomDialogue" : [":cumTransformingStruggleImmune"]}}
 					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}}
+					"eggify" : ".struggle.any.eggify"
 				},
 				"breastsL" : ".breasts",
 				"breastsR" : ".breasts",
@@ -827,18 +787,8 @@
 					},
 					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":breastsCompressionStruggle"]}}},
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":breastsEnergyDrainStruggle"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":transformingStruggle"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":transformingStruggleImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}}
+					"transforming" : ".struggle.any.transforming",
+					"eggify" : ".struggle.any.eggify"
 				}
 			},
 

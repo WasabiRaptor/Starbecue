@@ -55,14 +55,17 @@ function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTo
 end
 
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
-	if dialogueTree[step] or (not useStepPath) then
+	if not useStepPath then
 		if dialogueBoxScripts[step] then
-			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..tostring((dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid))), settings, eid, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..tostring((dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid))), settings, eid, dialogueTree, dialogueTreeTop)
 		elseif settings[step] then
-			return sbq.getDialogueBranch("."..(useStepPath and (step..".") or "")..tostring(settings[step] or ((settings[step] == nil) and "default")), settings, eid, dialogueTree, dialogueTreeTop)
+			return sbq.getDialogueBranch("."..tostring(settings[step] or ((settings[step] == nil) and "default")), settings, eid, dialogueTree, dialogueTreeTop)
 		else
 			return sbq.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
 		end
+	elseif useStepPath and dialogueTree[step] then
+		local dialogueTree = sbq.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)
+		return sbq.doNextStep(setp, settings, eid, dialogueTree, dialogueTreeTop)
 	else
 		return false
 	end
@@ -185,7 +188,7 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 				while badrolls[tostring(dialogue.randomRolls[rollNo])] do
 					dialogue.randomRolls[rollNo] = math.random(#selection)
 				end
----@diagnostic disable-next-line: cast-local-type
+				---@diagnostic disable-next-line: cast-local-type
 				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, selection[dialogue.randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
 				if randomTable then
 					badroll = false
@@ -250,6 +253,14 @@ end
 function dialogueBoxScripts.infuseLayered(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	return sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
 end
+
+function dialogueBoxScripts.transforming(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+	return tostring(type(settings.transforming) == "number")
+end
+function dialogueBoxScripts.eggify(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+	return tostring(type(settings.Eggifying) == "number")
+end
+
 
 function dialogueBoxScripts.isOwner(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local result = false

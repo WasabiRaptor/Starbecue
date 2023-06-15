@@ -97,7 +97,6 @@ function sbq.transformMessageHandler(eid, TF, TFType)
 	end
 
 	sbq.lounging[eid].progressBarType = "transforming"
-	sbq.lounging[eid].progressBarFinishFlag = TF.occupantFlag or "transformed"
 	if TFType then
 		sbq.lounging[eid].progressBarType = TFType.."ing"
 	end

@@ -721,19 +721,17 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 	if sbq.occupant[i].progressBarActive == true then
 		progressbarDx = (sbq.occupant[i].progressBarLocations[location] and (powerMultiplier * sbq.occupant[i].progressBarMultiplier)) or (-(powerMultiplier * sbq.occupant[i].progressBarMultiplier))
 		sbq.occupant[i].progressBar = sbq.occupant[i].progressBar + dt * progressbarDx
-
+		sbq.occupant[i].flags[sbq.occupant[i].progressBarType] = sbq.occupant[i].progressBar / 100
 		if sbq.occupant[i].progressBarMultiplier > 0 then
 			sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
 			if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
 				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-				sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
 				sbq.occupant[i].progressBarActive = false
 			end
 		else
 			sbq.occupant[i].progressBar = math.max(0, sbq.occupant[i].progressBar)
 			if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
 				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-				sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
 				sbq.occupant[i].progressBarActive = false
 			end
 		end
