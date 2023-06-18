@@ -180,8 +180,6 @@ Currently this does not affect whether any other vore mods can or can't perform 
 
 # Support Us!
 
-https://ko-fi.com/lokivulpix (I end up getting a better cut of precentage via Ko-Fi)
-
 https://www.patreon.com/LokiVulpix
 
 Vote on what should be the next feature worked on!
