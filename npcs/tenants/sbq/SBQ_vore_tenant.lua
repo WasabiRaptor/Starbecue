@@ -649,18 +649,17 @@ end
 
 function sbq.combatSwitchHuntingTarget(newTarget)
 	if sbq.timer("combatSwitchHuntingTarget", 10) then
+		sbq.searchForHealTarget(true)
 		storage.huntingTarget = nil
 		sbq.targetedEntities = {}
 		sbq.addRPC(world.sendEntityMessage(newTarget, "sbqGetPreyEnabled"), function(preySettings)
 			if (not preySettings) or (preySettings.preyEnabled == false) then return end
-			local voreType = sbq.getCurrentVorePref("pred", preySettings)
+			local voreType = sbq.getCurrentVorePref("pred", preySettings, storage.settings.preferDigestHostiles and "digest" )
 			if not voreType then return end
 			local ext = sbq.getTargetExt(newTarget)
 			local aggressive = world.entityAggressive(eid)
 			local validTarget = false
 			if aggressive and storage.settings[voreType .. "HuntHostile" .. ext] then
-				validTarget = true
-			elseif not aggressive and storage.settings[voreType .. "HuntFriendly"..ext] then
 				validTarget = true
 			end
 			if not validTarget then return end
@@ -674,6 +673,43 @@ function sbq.combatSwitchHuntingTarget(newTarget)
 		end)
 	end
 end
+
+function sbq.searchForHealTarget(combat)
+	if not storage.settings.preferHealFriendlies then return false end
+	local entityQuery = world.entityQuery(mcontroller.position(), 25, {
+		withoutEntityId = entity.id(), includedTypes = "creature"
+	})
+	for i, newTarget in ipairs(entityQuery) do
+		if not world.entityAggressive(newTarget) then
+			local health = world.entityHealth(newTarget)
+			if health then
+				local percent = health[1] / health[2]
+				if percent < 0.25 then
+					sbq.addRPC(world.sendEntityMessage(newTarget, "sbqGetPreyEnabled"), function(preySettings)
+						if (not preySettings) or (preySettings.preyEnabled == false) then return end
+						local voreType = sbq.getCurrentVorePref("pred", preySettings, storage.settings.preferHealFriendlies and "heal")
+						if not voreType then return end
+						local ext = sbq.getTargetExt(newTarget)
+						local validTarget = false
+						if storage.settings[voreType .. "HuntFriendly"..ext] then
+							validTarget = true
+						end
+						if not validTarget then return end
+						storage.huntingTarget = {
+							index = 1,
+							id = newTarget,
+							voreType = voreType,
+							predOrPrey = "pred",
+							combat = combat,
+						}
+					end)
+				end
+			end
+		end
+	end
+end
+
+
 function sbq.getTargetExt(target)
 	local entityType = world.entityType(target)
 	if entityType == "npc" then
@@ -800,6 +836,7 @@ function sbq.getTarget()
 		self.board:setEntity("sbqHuntingTarget", nil)
 		return
 	end
+	sbq.searchForHealTarget(false)
 	if storage.huntingTarget and type(storage.huntingTarget.id) == "number" and world.entityExists(storage.huntingTarget.id) then
 		if storage.persistentTarget and entity.entityInSight(storage.huntingTarget.id) then
 			sbq.addRPC(world.sendEntityMessage(storage.huntingTarget.id, "sbqIsPreyEnabled", storage.huntingTarget.voreType), function (enabled)
