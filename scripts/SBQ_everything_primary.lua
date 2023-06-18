@@ -8,9 +8,12 @@ function sbq.everything_primary()
 			status.addEphemeralEffect(statusEffect, data.power, data.source)
 		end
 	end)
-	message.setHandler("sbqRemoveStatusEffects", function(_,_, statlist)
+	message.setHandler("sbqRemoveStatusEffects", function(_,_, statlist, resetHealth)
 		for _, statusEffect in ipairs(statlist) do
 			status.removeEphemeralEffect(statusEffect)
+		end
+		if resetHealth then
+			status.resetResource("health")
 		end
 	end)
 	message.setHandler("sbqRemoveStatusEffect", function(_,_, statusEffect)
