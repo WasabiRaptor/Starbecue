@@ -69,30 +69,27 @@
 						},
 						"shy" : {"replace" : {"randomDialogue" : [":shyGreetingCrew"]}},
 						"flirty" : {"replace" : {"randomDialogue" : [":flirtyGreetingCrew"]}},
-						"false" : { "replace" : {"buttonText": ["Follow"]}},
-
-						"continue" : {
-							"next" : "isFollowing",
-							"true" : {
-								"new" : {
-									"randomDialogue" : [":defaultCrewStay"]
-								},
-								"next" : "personality",
-								"shy" : {"replace" : {"randomDialogue" : [":shyCrewStay"]}},
-								"flirty" : {"replace" : {"randomDialogue" : [":flirtyCrewStay"]}}
-							},
-							"false" : {
-								"new" : {
-									"randomDialogue" : [":defaultCrewFollow"]
-								},
-								"shy" : {"replace" : {"randomDialogue" : [":shyCrewFollow"]}},
-								"flirty" : {"replace" : {"randomDialogue" : [":flirtyCrewFollow"]}}
-							}
-						},
-						"fail" : {
-							"new" : {"randomDialogue" : [":fullCrew"]}
-						}
+						"false" : { "replace" : {"buttonText": ["Follow"]}}
 					}
+				},
+				"stay" : {
+					"new" : {
+						"randomDialogue" : [":defaultCrewStay"]
+					},
+					"next" : "personality",
+					"shy" : {"replace" : {"randomDialogue" : [":shyCrewStay"]}},
+					"flirty" : {"replace" : {"randomDialogue" : [":flirtyCrewStay"]}}
+				},
+				"follow" : {
+					"new" : {
+						"randomDialogue" : [":defaultCrewFollow"]
+					},
+					"next" : "personality",
+					"shy" : {"replace" : {"randomDialogue" : [":shyCrewFollow"]}},
+					"flirty" : {"replace" : {"randomDialogue" : [":flirtyCrewFollow"]}}
+				},
+				"fullCrew" : {
+					"new" : {"randomDialogue" : [":fullCrew"]}
 				}
 			},
 			// lines triggered when a player may recieve a certain reward

@@ -20,14 +20,12 @@ dialogue = {
 }
 function sbq.finishDialogue()
 	dialogue.finished = false
-	dialogue.result = {}
 	dialogue.position = 1
 end
 
 function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
-	sb.logInfo(path)
-	local dialogueTreeTop = sbq.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
-	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree, dialogueTree or dialogueTreeTop)
+	local dialogueTreeTop = sbq.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
+	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
 	if not dialogueTree then return false end
 	sbq.processDialogueStep(dialogueTree)
 	local finished = false
@@ -62,11 +60,10 @@ end
 
 function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
 	if not useStepPath then
-		sb.logInfo(step)
 		if dialogueBoxScripts[step] then
 			return sbq.getDialogueBranch("."..tostring((dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid))), settings, eid, dialogueTree, dialogueTreeTop)
-		elseif settings[step] then
-			return sbq.getDialogueBranch("."..tostring(settings[step] or ((settings[step] == nil) and "default")), settings, eid, dialogueTree, dialogueTreeTop)
+		elseif settings[step] ~= nil then
+			return sbq.getDialogueBranch("."..tostring(settings[step]), settings, eid, dialogueTree, dialogueTreeTop)
 		else
 			return sbq.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
 		end
@@ -214,51 +211,63 @@ require("/scripts/SBQ_check_settings.lua")
 
 
 function dialogueBoxScripts.locationEffectSlot(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[location.."EffectSlot"] == "softDigest")) then
+	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[(dialogueTree.location or dialogue.result.location or settings.location).."EffectSlot"] == "softDigest")) then
 		return "digest"
 	elseif settings.healing then
 		return "heal"
 	end
-	return settings[(dialogue.result.location or settings.location).."EffectSlot"]
+	return settings[(dialogueTree.location or dialogue.result.location or settings.location).."EffectSlot"]
 end
 function dialogueBoxScripts.locationEffect(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[location.."EffectSlot"] == "softDigest")) then
-		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
+	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[(dialogueTree.location or dialogue.result.location or settings.location).."EffectSlot"] == "softDigest")) then
+		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or dialogue.result.location or settings.location)] or {}).digest or {}).effect or "sbqDigest"
 	elseif settings.healing then
-		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogue.result.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
+		return settings.predDigestEffect or ((sbq.sbqData.locations[(dialogueTree.location or dialogue.result.location or settings.location)] or {}).heal or {}).effect or "sbqHeal"
 	end
-	return settings[(dialogue.result.location or settings.location).."Effect"]
+	return settings[(dialogueTree.location or dialogue.result.location or settings.location).."Effect"]
 end
 
 function dialogueBoxScripts.locationCompression(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	return settings[(dialogue.result.location or settings.location).."Compression"] or false
+	return settings[(dialogueTree.location or dialogue.result.location or settings.location).."Compression"] or false
 end
 function dialogueBoxScripts.locationEnergyDrain(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	return settings[(dialogue.result.location or settings.location).."EnergyDrain"] or false
+	return settings[(dialogueTree.location or dialogue.result.location or settings.location).."EnergyDrain"] or false
 end
 
 function dialogueBoxScripts.digestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	local effectSlot = (settings[(dialogueTree.location or dialogue.result.location or settings.location) .. "EffectSlot"])
+	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
+		effectSlot = "digest"
+	end
 	return (settings.digestAllow and (effectSlot == "digest")) or (settings.softDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.cumDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	local effectSlot = (settings[(dialogueTree.location or dialogue.result.location or settings.location) .. "EffectSlot"])
+	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
+		effectSlot = "digest"
+	end
 	return (settings.cumDigestAllow and (effectSlot == "digest")) or (settings.cumSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	local effectSlot = (settings[(dialogueTree.location or dialogue.result.location or settings.location) .. "EffectSlot"])
+	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
+		effectSlot = "digest"
+	end
 	return (settings.femcumDigestAllow and (effectSlot == "digest")) or (settings.femcumSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.milkDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	local effectSlot = (settings[(dialogue.result.location or settings.location) .. "EffectSlot"])
+	local effectSlot = (settings[(dialogueTree.location or dialogue.result.location or settings.location) .. "EffectSlot"])
+	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
+		effectSlot = "digest"
+	end
 	return (settings.milkDigestAllow and (effectSlot == "digest")) or (settings.milkSoftDigestAllow and (effectSlot == "softDigest"))
 end
 
 function dialogueBoxScripts.infuseLayered(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	return sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
+	return sb.jsonQuery(settings, (dialogueTree.location or dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
 end
 
 function dialogueBoxScripts.transforming(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
@@ -279,9 +288,9 @@ function dialogueBoxScripts.isOwner(dialogueTree, dialogueTreeTop, settings, bra
 end
 
 function dialogueBoxScripts.infusedCharacter(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	local infusedChar = sb.jsonQuery(settings, (dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs")
-	if (sbq.sbqData[(dialogue.result.location or settings.location)] or {}).infusion
-	and settings[(((sbq.sbqData[(dialogue.result.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
+	local infusedChar = sb.jsonQuery(settings, (dialogueTree.location or dialogue.result.location or settings.location).."InfusedItem.parameters.npcArgs")
+	if (sbq.sbqData[(dialogueTree.location or dialogue.result.location or settings.location)] or {}).infusion
+	and settings[(((sbq.sbqData[(dialogueTree.location or dialogue.result.location or settings.location)] or {}).infusionSetting or "infusion").."Pred")]
 	and infusedChar
 	then
 		local uniqueID = sb.jsonQuery(infusedChar, "npcParam.scriptConfig.uniqueId")

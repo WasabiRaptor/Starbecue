@@ -517,8 +517,11 @@ function dialogueCont:onClick()
 	end
 	if type(dialogue.result.callScript) == "string" then
 		if type(dialogueBoxScripts[dialogue.result.callScript]) == "function" then
-			local path = dialogueBoxScripts[dialogue.result.callScript](sbq.prevDialogueBranch, sbq.dialogueTree, sbq.settings, "callScript", player.id(), table.unpack(dialogue.result.scriptArgs or {}))
-			sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
+			local path = dialogueBoxScripts[dialogue.result.callScript](sbq.prevDialogueBranch, sbq.dialogueTree, sbq.settings,
+				"callScript", player.id(), table.unpack(dialogue.result.scriptArgs or {}))
+			if path then
+				sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
+			end
 		end
 	elseif dialogue.result.options ~= nil then
 		for i, option in ipairs(dialogue.result.options) do
@@ -567,6 +570,7 @@ function dialogueCont:onClick()
 			if continue and ((checks.voreType == nil) or (sbq.checkVoreTypeActive(checks.voreType) ~= "hidden")) then
 				action[2] = function()
 					sbq.finishDialogue()
+					dialogue.result = {}
 					sbq.updateDialogueBox( path, sbq.prevDialogueBranch, sbq.dialogueTree )
 				end
 				table.insert(contextMenu, action)
@@ -600,6 +604,9 @@ function dialogueCont:onClick()
 	end
 	if #contextMenu > 0 then
 		metagui.dropDownMenu(contextMenu, dialogue.result.optionsColumns or 2, dialogue.result.optionsW, dialogue.result.optionsH, dialogue.result.optionsS, dialogue.result.optionsAlign)
+	end
+	if dialogue.finished and dialogue.result.options == nil then
+		dialogue.result = {}
 	end
 end
 

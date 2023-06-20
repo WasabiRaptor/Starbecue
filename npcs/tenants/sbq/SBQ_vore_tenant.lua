@@ -106,9 +106,6 @@ function init()
 		updateUniqueId()
 	end
 
-	storage.settings.ownerUuid = recruitable.ownerUuid()
-	storage.settings.isFollowing = recruitable.isFollowing()
-
 	sbq.dialogueTree = config.getParameter("dialogueTree")
 	sbq.dialogueBoxScripts = config.getParameter("dialogueBoxScripts")
 
@@ -184,7 +181,6 @@ function init()
 		if storage.behaviorFollowing then
 			if world.getProperty("ephemeral") then
 				recruitable.confirmUnfollowBehavior()
-				storage.settings.isFollowing = recruitable.isFollowing()
 				return { "None", {} }
 			else
 				return recruitable.generateUnfollowInteractAction()
@@ -195,15 +191,12 @@ function init()
 	end)
 	message.setHandler("recruit.confirmFollow", function(_,_)
 		recruitable.confirmFollow(true)
-		storage.settings.isFollowing = recruitable.isFollowing()
 	end)
 	message.setHandler("recruit.confirmUnfollow", function(_,_)
 		recruitable.confirmUnfollow(true)
-		storage.settings.isFollowing = recruitable.isFollowing()
 	end)
 	message.setHandler("recruit.confirmUnfollowBehavior", function(_,_)
 		recruitable.confirmUnfollowBehavior(true)
-		storage.settings.isFollowing = recruitable.isFollowing()
 	end)
 	message.setHandler("sbqDigestStore", function(_, _, location, uniqueId, item)
 		if (not uniqueId) or (not item) or (not location) then return end
@@ -474,7 +467,8 @@ function sbq.getDialogueBoxData()
 		scale = status.statusProperty("animOverrideScale")
 	}
 	dialogueBoxData.settings.race = npc.species()
-
+	dialogueBoxData.settings.ownerUuid = recruitable.ownerUuid()
+	dialogueBoxData.settings.isFollowing = recruitable.isFollowing()
 	dialogueBoxData.settings.horny = status.resourcePercentage("horny")
 	dialogueBoxData.settings.food = status.resourcePercentage("food")
 	dialogueBoxData.settings.energy = status.resourcePercentage("energy")
@@ -545,7 +539,6 @@ function sbq.logInfo(input)
 end
 
 function sbq.doTargetAction()
-	if not sbq.timer("targetReachedCooldown", 5) then return end
 	if npc.loungingIn() ~= nil then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
@@ -559,6 +552,7 @@ function sbq.doTargetAction()
 				sbq.combatEat()
 			end
 		else
+			if not sbq.timer("targetReachedCooldown", 5) then return end
 			if storage.huntingTarget.predOrPrey == "pred" then
 				if storage.huntingTarget.getConsent then
 					sbq.askToVore()
@@ -657,7 +651,7 @@ function sbq.combatSwitchHuntingTarget(newTarget)
 			local voreType = sbq.getCurrentVorePref("pred", preySettings, storage.settings.preferDigestHostiles and "digest" )
 			if not voreType then return end
 			local ext = sbq.getTargetExt(newTarget)
-			local aggressive = world.entityAggressive(eid)
+			local aggressive = world.entityAggressive(newTarget)
 			local validTarget = false
 			if aggressive and storage.settings[voreType .. "HuntHostile" .. ext] then
 				validTarget = true
@@ -670,16 +664,17 @@ function sbq.combatSwitchHuntingTarget(newTarget)
 				predOrPrey = "pred",
 				combat = true,
 			}
+			self.board:setEntity("sbqHuntingTarget", newTarget)
 		end)
 	end
 end
 
 function sbq.searchForHealTarget(combat)
 	if not storage.settings.preferHealFriendlies then return false end
-	local entityQuery = world.entityQuery(mcontroller.position(), 25, {
-		withoutEntityId = entity.id(), includedTypes = "creature"
+	local entities = world.entityQuery(mcontroller.position(), 25, {
+		withoutEntityId = entity.id(), includedTypes = {"creature"}
 	})
-	for i, newTarget in ipairs(entityQuery) do
+	for i, newTarget in ipairs(entities) do
 		if not world.entityAggressive(newTarget) then
 			local health = world.entityHealth(newTarget)
 			if health then
@@ -702,6 +697,7 @@ function sbq.searchForHealTarget(combat)
 							predOrPrey = "pred",
 							combat = combat,
 						}
+						self.board:setEntity("sbqHuntingTarget", newTarget)
 					end)
 				end
 			end
@@ -713,10 +709,10 @@ end
 function sbq.getTargetExt(target)
 	local entityType = world.entityType(target)
 	if entityType == "npc" then
-		if world.callScriptedEntity(newTarget, "config.getParameter", "isOC" ) then
+		if world.callScriptedEntity(target, "config.getParameter", "isOC" ) then
 			return "OCs"
 		end
-		if world.callScriptedEntity(newTarget, "config.getParameter", "sbqNPC" ) then
+		if world.callScriptedEntity(target, "config.getParameter", "sbqNPC" ) then
 			return "SBQNPCs"
 		end
 	elseif entityType == "player" then
@@ -732,13 +728,19 @@ function sbq.combatEat()
 		location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
 		doingVore = "before"
 	}
-	sbq.requestTransition(storage.huntingTarget.voreType, { id = storage.huntingTarget.id, hostile = world.entityAggressive(storage.huntingTarget.id)  })
+	sbq.requestTransition(storage.huntingTarget.voreType,
+		{ id = storage.huntingTarget.id, hostile = world.entityAggressive(storage.huntingTarget.id) })
+
 	sbq.forceTimer("gotVored", delay or 1.5, function()
 		if not storage.huntingTarget then return end
 		settings.doingVore = "after"
 		if sbq.checkOccupant(storage.huntingTarget.id) then
 			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 			storage.huntingTarget = nil
+			self.board:setEntity("sbqHuntingTarget", nil)
+			self.board:setEntity("combatTarget", nil)
+		else
+			sb.logInfo("failed to eat")
 		end
 	end)
 end
@@ -1101,6 +1103,7 @@ function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, di
 				(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
 			if i == #dialogue.result.dialogue then
 				sbq.finishDialogue()
+				dialogue.result = {}
 			end
 		end)
 	end
