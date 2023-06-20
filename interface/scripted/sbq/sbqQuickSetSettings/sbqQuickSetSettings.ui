@@ -53,7 +53,10 @@
 					[[{"mode":"h"},{ "type" : "checkBox", "id" : "defaultHammerspace", "toolTip" : "Locations will ignore the size limit by default." }, { "type" : "label", "text" : " Hammerspace" } ],
 						[
 							{"mode":"h"},
-							{ "type" : "checkBox", "id" : "defaultCompression", "toolTip" : "Prey will be compressed to a smaller size over time by default." },
+							{ "type" : "checkBox", "radioGroup" : "Compression", "value" : "time", "id" : "defaultTimeCompression",  "toolTip" : "Prey will be compressed to a smaller size over time." },
+							{ "type" : "checkBox", "radioGroup" : "Compression", "value" : "health", "id" : "defaultHealthCompression",  "toolTip" : "Prey will be compressed to a smaller based on their health." },
+							{ "type" : "checkBox", "radioGroup" : "Compression", "value" : false, "id" : "defaultNoneCompression",  "toolTip" : "Prey will not be compressed.", "visible" : false },
+
 							{ "type" : "textBox", "id" : "defaultCompressionMultiplier", "size" : [30,14], "expandMode" : [0,0], "expand" : false,  "toolTip" : "Default minimum multiplier compression can apply." },
 							{ "type" : "label", "text" : " Compression" }
 						]

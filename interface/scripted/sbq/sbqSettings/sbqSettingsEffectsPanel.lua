@@ -150,11 +150,11 @@ function sbq.updateLocationTab(location)
 					{ type = "label", text = "Hammerspace", visible = locationData.hammerspace or false}
 				},
 				{
-					{ type = "checkBox", radioGroup = "Compression", id = location .. "TimeCompression", checked = sbq.predatorSettings[location .. "Compression"] == "time", toolTip = "Prey will be compressed to a smaller size over time." },
-					{ type = "checkBox", radioGroup = "Compression", id = location .. "HealthCompression", checked = sbq.predatorSettings[location .. "Compression"] == "health", toolTip = "Prey will be compressed to a smaller based on their health." },
-					{ type = "checkBox", radioGroup = "Compression", id = location .. "NoneCompression", checked = sbq.predatorSettings[location .. "Compression"] == false, toolTip = "Prey will not be compressed.", visible = false },
-					{ type = "label", text = "Compression " },
-					{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply."},
+					{ type = "checkBox", radioGroup = "Compression", id = location .. "TimeCompression", value = "time", toolTip = "Prey will be compressed to a smaller size over time.", visible = ((sbq.overrideSettings[location.."Compression"] == nil) or (sbq.overrideSettings[location.."Compression"] == "time")) },
+					{ type = "checkBox", radioGroup = "Compression", id = location .. "HealthCompression", value = "health", toolTip = "Prey will be compressed to a smaller based on their health.", visible = ((sbq.overrideSettings[location.."Compression"] == nil) or (sbq.overrideSettings[location.."Compression"] == "health")) },
+					{ type = "checkBox", radioGroup = "Compression", id = location .. "NoneCompression", value = false, toolTip = "Prey will not be compressed.", visible = false },
+					{ type = "label", text = "Compression ", visible = (sbq.overrideSettings[location.."Compression"] ~= false) },
+					{ type = "textBox", align = "center", id = location .. "CompressionMultiplier", size = {25,14}, expandMode = {0,0}, toolTip = "Minimum multiplier compression can apply.", visible = (sbq.overrideSettings[location.."Compression"] ~= false)},
 				}
 			}}
 		} }
@@ -339,9 +339,15 @@ function sbq.updateLocationTab(location)
 
 		local timeCompression = _ENV[location.."TimeCompression"]
 		local healthCompression = _ENV[location .. "HealthCompression"]
-		function timeCompression:onClick() sbq.radioButton(self, location.."Compression", "changeGlobalSetting")end
-		function healthCompression:onClick() sbq.radioButton(self, location.."Compression", "changeGlobalSetting")end
-
+		timeCompression:selectValue(sbq.overrideSettings[location .. "Compression"] or
+			sbq.predatorSettings[location .. "Compression"] or "none")
+		if sbq.overrideSettings[location .. "Compression"] ~= nil then
+			function timeCompression:draw() sbq.drawLocked(self, "/interface/scripted/sbq/sbqVoreColonyDeed/lockedEnabled.png") end
+			function healthCompression:draw() sbq.drawLocked(self, "/interface/scripted/sbq/sbqVoreColonyDeed/lockedEnabled.png") end
+		else
+			function timeCompression:onClick() sbq.radioButton(self, location.."Compression", "globalSettings", "changeGlobalSetting")end
+			function healthCompression:onClick() sbq.radioButton(self, location.."Compression", "globalSettings", "changeGlobalSetting")end
+		end
 
 		local visualSize = _ENV[location .. "VisualSize"]
 		local multiplier = _ENV[location .. "Multiplier"]
@@ -415,7 +421,7 @@ function sbq.locationEffectButton(button, location, locationData, effectLabel)
 	sbq.saveSettings()
 end
 
-function sbq.radioButton(button, setting, settingfunc)
+function sbq.radioButton(button, setting, settingGroup, settingfunc)
 	if sbq[settingGroup][setting] == button.value then
 		button:selectValue(false)
 		sbq[settingfunc](setting, false)

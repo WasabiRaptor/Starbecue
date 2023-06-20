@@ -120,6 +120,8 @@ function init()
 			local reload
 			for i, follower in ipairs(companions) do
 				if follower.uniqueId == uniqueId then
+					companions[i].config.parameters.statusControllerSettings = companions[i].config.parameters.statusControllerSettings or {}
+					companions[i].config.parameters.statusControllerSettings.statusProperties = companions[i].config.parameters.statusControllerSettings.statusProperties or {}
 					companions[i].config.parameters.statusControllerSettings.statusProperties[property] = data
 					reload = true
 					break

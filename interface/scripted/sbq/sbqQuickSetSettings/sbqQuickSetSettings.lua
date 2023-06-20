@@ -90,14 +90,18 @@ function init()
 		sbq.saveSettings()
 	end
 
-	defaultInfusedMultiplier:setText(tostring(sbq.overrideSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
+	defaultInfusedMultiplier:setText(tostring(sbq.overrideSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
 	function defaultInfusedMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
 	function defaultInfusedMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
 	function defaultInfusedMultiplier:onEscape() self:onEnter() end
 	function defaultInfusedMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
 	sbq.numberBoxColor(defaultInfusedMultiplier, 0)
 
-	defaultCompressionMultiplier:setText(tostring(sbq.overrideSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
+	defaultTimeCompression:selectValue(sbq.overrideSettings["default" .. "Compression"] or sbq.predatorSettings["default".."Compression"] or "none")
+	function defaultTimeCompression:onClick() sbq.radioButton(self, "defaultCompression", "globalSettings", "changeGlobalSetting")end
+	function defaultHealthCompression:onClick() sbq.radioButton(self, "defaultCompression", "globalSettings", "changeGlobalSetting")end
+
+	defaultCompressionMultiplier:setText(tostring(sbq.overrideSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
 	function defaultCompressionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "CompressionMultiplier", "globalSettings", "overrideSettings", 0) end
 	function defaultCompressionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
 	function defaultCompressionMultiplier:onEscape() self:onEnter() end
