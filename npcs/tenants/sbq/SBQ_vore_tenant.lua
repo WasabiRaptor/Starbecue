@@ -738,7 +738,6 @@ function sbq.combatEat()
 			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
-			self.board:setEntity("combatTarget", nil)
 		end
 	end)
 end
