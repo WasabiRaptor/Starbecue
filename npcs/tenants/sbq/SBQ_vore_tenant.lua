@@ -739,8 +739,6 @@ function sbq.combatEat()
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
 			self.board:setEntity("combatTarget", nil)
-		else
-			sb.logInfo("failed to eat")
 		end
 	end)
 end
