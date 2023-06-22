@@ -3,13 +3,11 @@ local _npcCombat = npcCombat
 function npcCombat(dt)
 	if world.entityExists(self.goal) and world.entityType(self.goal) ~= "player" and ((world.callScriptedEntity(self.goal, "status.statusProperty", ("sbqCurrentData")) or {}).type == "prey") then
 		self.success = true
-		sb.logInfo("returned that it's prey")
 		return
 	end
 	for i, id in ipairs(self.group.members or {}) do
 		if world.entityExists(id) and world.entityType(id) ~= "player" and world.callScriptedEntity(id, "sbq.checkOccupant", self.goal) then
 			self.success = true
-			sb.logInfo("other entity has it as prey")
 			return
 		end
 	end
