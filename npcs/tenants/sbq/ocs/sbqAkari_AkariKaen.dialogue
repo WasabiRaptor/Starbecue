@@ -1,6 +1,5 @@
 {
-	//defaultUnpromptedOralVoreAfter duplicates defaultRequestOralVoreAfter
-	//softDigestOralVoreFull duplicates digestOralVoreFull
+	"missingDialogue": ["Whoops this dialogue is missing"],
 	"defaultRewardsGreeting": [
 		"It was fun messing around!\nHave some stuff.",
 		{
@@ -14,22 +13,16 @@
 			]
 		}
 	],
-	"greeting.default.default.default.default": [
-		"Ah, hello there",
-		"merp?",
-		"yes?",
-		"yea?"
-	],
-	"converse": [
-		"Did ya want to talk about something?",
-		"merp?"
-	],
-	"talkAboutSelf": [
-		"well there isnt much to me, merp"
-	],
-	"talkAboutKinks": [
-		"so you wanted to talk kinks?"
-	],
+	"defaultRewardsGreetingIntroduced": ":missingDialogue",
+	"defaultGreeting": ":missingDialogue",
+	"defaultGreetingCrew": ":missingDialogue",
+	"defaultCrewStay": ":missingDialogue",
+	"defaultCrewFollow": ":missingDialogue",
+	"fullCrew": ":missingDialogue",
+	"rewardNotifyMoney": ":missingDialogue",
+	"rewardNotifyLowValueQuestRewards": ":missingDialogue",
+	"rewardNotifyMediumValueQuestRewards": ":missingDialogue",
+	"rewardNotifyHighValueQuestRewards": ":missingDialogue",
 	"defaultRequestOralVoreBefore": [
 		"You want me to eat you?",
 		"Alright, sure.",
@@ -48,13 +41,16 @@
 		"You seem like you'd make a good meal.",
 		"My belly's been grumbling..."
 	],
-	"defaultUnpromptedOralVoreAfter": ":defaultRequestOralVoreAfter", // duplicated lines
-	"defaultOralVoreNotFeelingIt": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
+	"defaultUnpromptedOralVoreAfter": ":defaultRequestOralVoreAfter",
+	"defaultSelfRequestOralVore": ":missingDialogue",
+	"defaultSelfRequestOralVoreYes": ":missingDialogue",
+	"defaultSelfRequestOralVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestOralVoreNo": ":missingDialogue",
+	"defaultSelfRequestOralVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestOralVoreNoYesAfter": ":missingDialogue",
+	"defaultNotFeelingIt": ":missingDialogue",
+	"defaultTooBig": ":missingDialogue",
+	"defaultTooSmall": ":missingDialogue",
 	"defaultOralVoreFull": [
 		"I'm a bit too full...",
 		"My belly can't stretch any further...",
@@ -67,19 +63,61 @@
 		"I've eaten too much already... but I'll probably have room soon.",
 		"I'll have to finish processing this meal first."
 	],
-	"softDigestOralVoreFull": ":digestOralVoreFull", // duplicated lines
-	"defaultOralVoreOtherFull": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
-	],
-	"defaultOralVoreTooBig": [
-		"I think you're a bit too big to fit in there...",
-		"I don't think I'd be able to get you in...",
-		"If only you were a bit smaller...",
-		"Thats a bit too much to ask of me..."
-	],
+	"compressionOralVoreFull": ":missingDialogue",
+	"defaultFull": ":missingDialogue",
+	"defaultNeedsInfusion": ":missingDialogue",
+	"defaultRequestAnalVoreBefore": ":missingDialogue",
+	"defaultRequestAnalVoreAfter": ":missingDialogue",
+	"defaultUnpromptedAnalVoreBefore": ":missingDialogue",
+	"defaultUnpromptedAnalVoreAfter": ":missingDialogue",
+	"defaultSelfRequestAnalVore": ":missingDialogue",
+	"defaultSelfRequestAnalVoreYes": ":missingDialogue",
+	"defaultSelfRequestAnalVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNo": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNoYesAfter": ":missingDialogue",
+	"defaultAnalVoreFull": ":missingDialogue",
+	"digestAnalVoreFull": ":missingDialogue",
+	"compressionAnalVoreFull": ":missingDialogue",
+	"defaultRequestTailVoreBefore": ":missingDialogue",
+	"defaultRequestTailVoreAfter": ":missingDialogue",
+	"defaultUnpromptedTailVoreBefore": ":missingDialogue",
+	"defaultUnpromptedTailVoreAfter": ":missingDialogue",
+	"defaultSelfRequestTailVore": ":missingDialogue",
+	"defaultSelfRequestTailVoreYes": ":missingDialogue",
+	"defaultSelfRequestTailVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestTailVoreNo": ":missingDialogue",
+	"defaultSelfRequestTailVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestTailVoreNoYesAfter": ":missingDialogue",
+	"defaultTailVoreFull": ":missingDialogue",
+	"digestTailVoreFull": ":missingDialogue",
+	"compressionTailVoreFull": ":missingDialogue",
+	"defaultRequestNavelVoreBefore": ":missingDialogue",
+	"defaultRequestNavelVoreAfter": ":missingDialogue",
+	"defaultUnpromptedNavelVoreBefore": ":missingDialogue",
+	"defaultUnpromptedNavelVoreAfter": ":missingDialogue",
+	"defaultSelfRequestNavelVore": ":missingDialogue",
+	"defaultSelfRequestNavelVoreYes": ":missingDialogue",
+	"defaultSelfRequestNavelVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestNavelVoreNo": ":missingDialogue",
+	"defaultSelfRequestNavelVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestNavelVoreNoYesAfter": ":missingDialogue",
+	"defaultNavelVoreFull": ":missingDialogue",
+	"digestNavelVoreFull": ":missingDialogue",
+	"compressionNavelVoreFull": ":missingDialogue",
+	"defaultRequestAbsorbVoreBefore": ":missingDialogue",
+	"defaultRequestAbsorbVoreAfter": ":missingDialogue",
+	"defaultUnpromptedAbsorbVoreBefore": ":missingDialogue",
+	"defaultUnpromptedAbsorbVoreAfter": ":missingDialogue",
+	"defaultSelfRequestAbsorbVore": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreYes": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreNo": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreNoYesAfter": ":missingDialogue",
+	"defaultAbsorbVoreFull": ":missingDialogue",
+	"digestAbsorbVoreFull": ":missingDialogue",
+	"compressionAbsorbVoreFull": ":missingDialogue",
 	"defaultRequestCockVoreBefore": [
 		"lol horny for sergal pp",
 		"merp? you want in my shaft?",
@@ -104,18 +142,702 @@
 		"Ffff~ Now I'm all hard~",
 		"A-ahh~ Don't stop squirming~"
 	],
+	"defaultSelfRequestCockVore": ":missingDialogue",
+	"defaultSelfRequestCockVoreYes": ":missingDialogue",
+	"defaultSelfRequestCockVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestCockVoreNo": ":missingDialogue",
+	"defaultSelfRequestCockVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestCockVoreNoYesAfter": ":missingDialogue",
+	"defaultCockVoreFull": [
+		"my sheese dispenser is full right now...",
+		"Hmmm if someone moves down to my balls you might fit~",
+		"This sergal shaft is full",
+		"Maybe when I bust a sergal nut"
+	],
+	"digestCockVoreFull": ":missingDialogue",
+	"compressionCockVoreFull": ":missingDialogue",
+	"defaultRequestUnbirthBefore": ":missingDialogue",
+	"defaultRequestUnbirthAfter": ":missingDialogue",
+	"defaultUnpromptedUnbirthBefore": ":missingDialogue",
+	"defaultUnpromptedUnbirthAfter": ":missingDialogue",
+	"defaultSelfRequestUnbirth": ":missingDialogue",
+	"defaultSelfRequestUnbirthYes": ":missingDialogue",
+	"defaultSelfRequestUnbirthYesAfter": ":missingDialogue",
+	"defaultSelfRequestUnbirthNo": ":missingDialogue",
+	"defaultSelfRequestUnbirthNoYes": ":missingDialogue",
+	"defaultSelfRequestUnbirthNoYesAfter": ":missingDialogue",
+	"defaultUnbirthFull": ":missingDialogue",
+	"digestUnbirthFull": ":missingDialogue",
+	"compressionUnbirthFull": ":missingDialogue",
+	"defaultRequestBreastVoreBefore": ":missingDialogue",
+	"defaultRequestBreastVoreAfter": ":missingDialogue",
+	"defaultUnpromptedBreastVoreBefore": ":missingDialogue",
+	"defaultUnpromptedBreastVoreAfter": ":missingDialogue",
+	"defaultSelfRequestBreastVore": ":missingDialogue",
+	"defaultSelfRequestBreastVoreYes": ":missingDialogue",
+	"defaultSelfRequestBreastVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNo": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNoYesAfter": ":missingDialogue",
+	"defaultBreastVoreFull": ":missingDialogue",
+	"digestBreastVoreFull": ":missingDialogue",
+	"compressionBreastVoreFull": ":missingDialogue",
+	"defaultStruggle": ":missingDialogue",
+	"transformingStruggle": ":missingDialogue",
+	"transformingStruggleImmune": ":missingDialogue",
+	"eggifyStruggle": ":missingDialogue",
+	"eggifyStruggleImmune": ":missingDialogue",
+	"digestStruggle": ":missingDialogue",
+	"digestStruggleImmune": ":missingDialogue",
+	"healStruggle": ":missingDialogue",
+	"compressionStruggle": ":missingDialogue",
+	"energyDrainStruggle": ":missingDialogue",
+	"wombDefaultStruggle": ":missingDialogue",
+	"wombDigestStruggle": ":missingDialogue",
+	"wombDigestStruggleImmune": ":missingDialogue",
+	"wombHealStruggle": ":missingDialogue",
+	"wombCompressionStruggle": ":missingDialogue",
+	"wombEnergyDrainStruggle": ":missingDialogue",
+	"shaftDefaultStruggle": [
+		"ooohh hehe that tingles~",
+		"wooo boy..."
+	],
+	"shaftDigestStruggle": [
+		"mmm melting down you go~",
+		"merp for me~"
+	],
+	"shaftDigestStruggleImmune": ":missingDialogue",
+	"shaftHealStruggle": ":missingDialogue",
+	"shaftCompressionStruggle": ":missingDialogue",
+	"shaftEnergyDrainStruggle": ":missingDialogue",
+	"cumTransformingStruggle": ":missingDialogue",
+	"cumTransformingStruggleImmune": ":missingDialogue",
+	"shaftInfusedStruggle": ":missingDialogue",
+	"ballsDefaultStruggle": [
+		"merp...that feels nice feeling down there",
+		"Keep going.",
+		"It feels so good having you in there~",
+		"Friends are stored in the balls~"
+	],
+	"ballsDigestStruggle": [
+		"yes become nice sergal cum for me~",
+		"time to be sergal cummies~"
+	],
+	"ballsDigestStruggleImmune": ":missingDialogue",
+	"ballsHealStruggle": ":missingDialogue",
+	"ballsCompressionStruggle": ":missingDialogue",
+	"ballsEnergyDrainStruggle": ":missingDialogue",
+	"breastsDefaultStruggle": ":missingDialogue",
+	"breastsDigestStruggle": ":missingDialogue",
+	"breastsDigestStruggleImmune": ":missingDialogue",
+	"breastsHealStruggle": ":missingDialogue",
+	"breastsCompressionStruggle": ":missingDialogue",
+	"breastsEnergyDrainStruggle": ":missingDialogue",
+	"breastsDefaultStruggleShirt": ":missingDialogue",
+	"letoutStruggleTransforming": ":missingDialogue",
+	"letoutTransformingImmune": ":missingDialogue",
+	"letoutStruggleEggify": ":missingDialogue",
+	"letoutStruggleEggifyImmune": ":missingDialogue",
+	"letoutOralVoreStruggle": [
+		"*hack...cough*",
+		"alright alright come on out",
+		"aw man...come on..."
+	],
+	"letoutOralVoreStruggleDigested": [
+		"reformation central",
+		"beep boop reforming..haha jk I aint a synth...oh hope BLue didnt hear that",
+		"alright time to reform"
+	],
+	"letoutOralVoreStruggleDigest": [
+		"oh..huh enjoy the stay then",
+		"No hard feelings?",
+		"you're no fun \n",
+		"ooh? we got outselfs a fighter"
+	],
+	"letoutOralVoreStruggleDigestImmune": [
+		"that's fine..I wasnt even that hungry",
+		"you're making me look bad infront of the others",
+		"Come on...It's my job"
+	],
+	"letoutShyOralVoreStruggleDigest": ":missingDialogue",
+	"letoutFlirtyOralVoreStruggleDigest": ":missingDialogue",
+	"letoutOralVoreStruggleSoftDigest": [
+		"wha...you were gona be fine..geez",
+		"what? you had that option selected",
+		"well...just stay there I guess"
+	],
+	"letoutOralVoreStruggleHeal": [
+		"come on..its like a suana in there",
+		"Are you sure you're ready to come out?",
+		"well...return to me if you need more healing",
+		"don't go whinning if you die cause you didnt fully heal up",
+		"next time stop spamming for medic"
+	],
+	"letoutAnalVoreStruggle": ":missingDialogue",
+	"letoutAnalVoreStruggleDigested": ":missingDialogue",
+	"letoutAnalVoreStruggleDigest": ":missingDialogue",
+	"letoutAnalVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutAnalVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutAnalVoreStruggleHeal": ":missingDialogue",
+	"letoutTailVoreStruggle": ":missingDialogue",
+	"letoutTailVoreStruggleDigested": ":missingDialogue",
+	"letoutTailVoreStruggleDigest": ":missingDialogue",
+	"letoutTailVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutTailVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutTailVoreStruggleHeal": ":missingDialogue",
+	"letoutNavelVoreStruggle": ":missingDialogue",
+	"letoutNavelVoreStruggleDigested": ":missingDialogue",
+	"letoutNavelVoreStruggleDigest": ":missingDialogue",
+	"letoutNavelVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutNavelVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutNavelVoreStruggleHeal": ":missingDialogue",
+	"letoutAbsorbVoreStruggle": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigested": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigest": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutAbsorbVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutAbsorbVoreStruggleHeal": ":missingDialogue",
+	"letoutCockVoreStruggle": [
+		"Ahh~ man what a sensation~",
+		"come back anytime^^",
+		"you felt good in there~",
+		"what? didnt enjoy yourself in there?",
+		"merp...."
+	],
+	"letoutCockVoreStruggleDigested": ":missingDialogue",
+	"letoutCockVoreStruggleDigest": ":missingDialogue",
+	"letoutCockVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutCockVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutCockVoreStruggleHeal": ":missingDialogue",
+	"letoutUnbirthStruggle": ":missingDialogue",
+	"letoutUnbirthStruggleDigested": ":missingDialogue",
+	"letoutUnbirthStruggleDigest": ":missingDialogue",
+	"letoutUnbirthStruggleDigestImmune": ":missingDialogue",
+	"letoutUnbirthStruggleSoftDigest": ":missingDialogue",
+	"letoutUnbirthStruggleHeal": ":missingDialogue",
+	"letoutBreastVoreStruggle": ":missingDialogue",
+	"letoutBreastVoreStruggleDigested": ":missingDialogue",
+	"letoutBreastVoreStruggleDigest": ":missingDialogue",
+	"letoutBreastVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutBreastVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutBreastVoreStruggleHeal": ":missingDialogue",
+	"letoutTransforming": ":missingDialogue",
+	"letoutEggify": ":missingDialogue",
+	"letoutEggifyImmune": ":missingDialogue",
+	"letoutOralVore": [
+		"alright out you go",
+		"*hack and coughs* out you go",
+		"bleh...you didnt really taste that good",
+		"come on out we got work to do *burps* er excuse me"
+	],
+	"letoutOralVoreDigested": [
+		"time for you to go",
+		"get digested lol",
+		"hope it was worth the pixels",
+		"next yea when you get back"
+	],
+	"letoutOralVoreDigest": [
+		"ok I'm good for now",
+		"I'm satified you can go now",
+		"best you leave",
+		"I didnt really want to digest you"
+	],
+	"letoutOralVoreDigestImmune": [
+		"what's the point?",
+		"that's no fun",
+		"best you go..this sergal is intrested in something else...oh beef jerky",
+		"I'ma go get some actual food"
+	],
+	"letoutOralVoreSoftDigest": [
+		"I think your soft enough",
+		"I'm good for now thanks",
+		"now got out of here you silly",
+		"Didn't feel like it"
+	],
+	"letoutOralVoreHeal": [
+		"alright now get back out there!",
+		"Alrighty I think you're all good to go",
+		"feeling better?",
+		"I never though id have a stomach that heals",
+		"I never got my medical degree you know?"
+	],
+	"letoutAnalVore": ":missingDialogue",
+	"letoutAnalVoreDigested": ":missingDialogue",
+	"letoutAnalVoreDigest": ":missingDialogue",
+	"letoutAnalVoreDigestImmune": ":missingDialogue",
+	"letoutAnalVoreSoftDigest": ":missingDialogue",
+	"letoutAnalVoreHeal": ":missingDialogue",
+	"letoutTailVore": ":missingDialogue",
+	"letoutTailVoreDigested": ":missingDialogue",
+	"letoutTailVoreDigest": ":missingDialogue",
+	"letoutTailVoreDigestImmune": ":missingDialogue",
+	"letoutTailVoreSoftDigest": ":missingDialogue",
+	"letoutTailVoreHeal": ":missingDialogue",
+	"letoutNavelVore": ":missingDialogue",
+	"letoutNavelVoreDigested": ":missingDialogue",
+	"letoutNavelVoreDigest": ":missingDialogue",
+	"letoutNavelVoreDigestImmune": ":missingDialogue",
+	"letoutNavelVoreSoftDigest": ":missingDialogue",
+	"letoutNavelVoreHeal": ":missingDialogue",
+	"letoutAbsorbVore": ":missingDialogue",
+	"letoutAbsorbVoreDigested": ":missingDialogue",
+	"letoutAbsorbVoreDigest": ":missingDialogue",
+	"letoutAbsorbVoreDigestImmune": ":missingDialogue",
+	"letoutAbsorbVoreSoftDigest": ":missingDialogue",
+	"letoutAbsorbVoreHeal": ":missingDialogue",
+	"letoutCockVore": [
+		"Hhhhhh I'm gonna cum...",
+		"M..mmph god~",
+		"Gonna blast~",
+		"M..Meerpp....~"
+	],
+	"letoutCockVoreDigested": ":missingDialogue",
+	"letoutCockVoreDigest": ":missingDialogue",
+	"letoutCockVoreDigestImmune": ":missingDialogue",
+	"letoutCockVoreSoftDigest": ":missingDialogue",
+	"letoutCockVoreHeal": ":missingDialogue",
+	"letoutUnbirth": ":missingDialogue",
+	"letoutUnbirthDigested": ":missingDialogue",
+	"letoutUnbirthDigest": ":missingDialogue",
+	"letoutUnbirthDigestImmune": ":missingDialogue",
+	"letoutUnbirthSoftDigest": ":missingDialogue",
+	"letoutUnbirthHeal": ":missingDialogue",
+	"letoutBreastVore": ":missingDialogue",
+	"letoutBreastVoreDigested": ":missingDialogue",
+	"letoutBreastVoreDigest": ":missingDialogue",
+	"letoutBreastVoreDigestImmune": ":missingDialogue",
+	"letoutBreastVoreSoftDigest": ":missingDialogue",
+	"letoutBreastVoreHeal": ":missingDialogue",
+	"defaultPreyRequestOralVore": ":missingDialogue",
+	"defaultPreyRequestOralVoreYes": ":missingDialogue",
+	"defaultPreyRequestOralVoreNo": ":missingDialogue",
+	"defaultPreyRequestOralVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestTailVore": ":missingDialogue",
+	"defaultPreyRequestTailVoreYes": ":missingDialogue",
+	"defaultPreyRequestTailVoreNo": ":missingDialogue",
+	"defaultPreyRequestTailVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestAnalVore": ":missingDialogue",
+	"defaultPreyRequestAnalVoreYes": ":missingDialogue",
+	"defaultPreyRequestAnalVoreNo": ":missingDialogue",
+	"defaultPreyRequestAnalVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestNavelVore": ":missingDialogue",
+	"defaultPreyRequestNavelVoreYes": ":missingDialogue",
+	"defaultPreyRequestNavelVoreNo": ":missingDialogue",
+	"defaultPreyRequestNavelVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestAbsorbVore": ":missingDialogue",
+	"defaultPreyRequestAbsorbVoreYes": ":missingDialogue",
+	"defaultPreyRequestAbsorbVoreNo": ":missingDialogue",
+	"defaultPreyRequestAbsorbVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestUnbirth": ":missingDialogue",
+	"defaultPreyRequestUnbirthYes": ":missingDialogue",
+	"defaultPreyRequestUnbirthNo": ":missingDialogue",
+	"defaultPreyRequestUnbirthNoYes": ":missingDialogue",
+	"defaultPreyRequestCockVore": ":missingDialogue",
+	"defaultPreyRequestCockVoreYes": ":missingDialogue",
+	"defaultPreyRequestCockVoreNo": ":missingDialogue",
+	"defaultPreyRequestCockVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestBreastVore": ":missingDialogue",
+	"defaultPreyRequestBreastVoreYes": ":missingDialogue",
+	"defaultPreyRequestBreastVoreNo": ":missingDialogue",
+	"defaultPreyRequestBreastVoreNoYes": ":missingDialogue",
+	"defaultForcingPreyOralVore": ":missingDialogue",
+	"defaultForcingPreyTailVore": ":missingDialogue",
+	"defaultForcingPreyAbsorbVore": ":missingDialogue",
+	"defaultForcingPreyNavelVore": ":missingDialogue",
+	"defaultForcingPreyAnalVore": ":missingDialogue",
+	"defaultForcingPreyCockVore": ":missingDialogue",
+	"defaultForcingPreyUnbirth": ":missingDialogue",
+	"defaultForcingPreyBreastVore": ":missingDialogue",
+	"defaultUnwillingPredOralVore": ":missingDialogue",
+	"defaultUnwillingPredTailVore": ":missingDialogue",
+	"defaultUnwillingPredAbsorbVore": ":missingDialogue",
+	"defaultUnwillingPredNavelVore": ":missingDialogue",
+	"defaultUnwillingPredAnalVore": ":missingDialogue",
+	"defaultUnwillingPredCockVore": ":missingDialogue",
+	"defaultUnwillingPredUnbirth": ":missingDialogue",
+	"defaultUnwillingPredBreastVore": ":missingDialogue",
+	"struggling": ":missingDialogue",
+	"strugglingSlime": ":missingDialogue",
+	"sstrugglingSlimeDigest": ":missingDialogue",
+	"strugglingSlimeDigestImmune": ":missingDialogue",
+	"strugglingSlimeHeal": ":missingDialogue",
+	"strugglingEnergyDrain": ":missingDialogue",
+	"strugglingSlimeTransforming": ":missingDialogue",
+	"strugglingBelly": [
+		[
+			"comfy",
+			"so this is what it's like in a belly",
+			{
+				"check": {
+					"bellySounds": true
+				},
+				"add": [
+					"*gurgle*",
+					"Mmmph those noises",
+					"struggled grunts...oh I give up..."
+				]
+			}
+		],
+		{
+			"check": {
+				"predator": "sbqVaporeon"
+			},
+			"add": [
+				"Gooey Vappy belly.",
+				"Its all gooey in here."
+			]
+		}
+	],
+	"strugglingBellyDigest": [
+		[
+			"man this hurts...",
+			"hmmph..nothing but pudge",
+			{
+				"check": {
+					"bellySounds": true
+				},
+				"add": [
+					"so much...noise",
+					"All this grumbling... you must be pretty hungry."
+				]
+			}
+		],
+		{
+			"check": {
+				"predator": "sbqVaporeon"
+			},
+			"add": [
+				" ....vappy goo...."
+			]
+		}
+	],
+	"strugglingBellyDigestImmune": [
+		[
+			[
+				"Trying to melt me down?",
+				"Trying to melt me down?\nThats not gonna work."
+			],
+			"Heh, I can actually stay in here as long as I want.",
+			"I'm @#%@@#$ invincible! *enter metal gear rising refereence here*",
+			"I'm immune so good luck \n"
+		]
+	],
+	"strugglingBellyHeal": [
+		[
+			"hmm...it aint melting me..that's good right?",
+			"its like a healing bath",
+			"thi feels wonderful",
+			{
+				"check": {
+					"bellySounds": true
+				},
+				"add": [
+					"I really like the sounds your belly makes... very calming.",
+					"I could just drift off to sleep listening to the sounds of your body..."
+				]
+			}
+		],
+		{
+			"check": {
+				"predator": "sbqVaporeon"
+			},
+			"add": [
+				"did you kno-*get's slooshed around*..nvm"
+			]
+		}
+	],
+	"strugglingBellyCompression": ":missingDialogue",
+	"strugglingBellyEnergyDrain": ":missingDialogue",
+	"strugglingBellyTransforming": ":missingDialogue",
+	"strugglingTransformingImmune": ":missingDialogue",
+	"strugglingBellyEggify": ":missingDialogue",
+	"strugglingEggifyImmune": ":missingDialogue",
+	"strugglingTail": ":missingDialogue",
+	"strugglingTailDigest": ":missingDialogue",
+	"strugglingTailDigestImmune": ":missingDialogue",
+	"strugglingTailHeal": ":missingDialogue",
+	"strugglingTailCompression": ":missingDialogue",
+	"strugglingTailEnergyDrain": ":missingDialogue",
+	"strugglingTailTransforming": ":missingDialogue",
+	"strugglingTailEggify": ":missingDialogue",
+	"strugglingWomb": ":missingDialogue",
+	"strugglingWombDigest": ":missingDialogue",
+	"strugglingWombDigestImmune": ":missingDialogue",
+	"strugglingWombHeal": ":missingDialogue",
+	"strugglingWombCompression": ":missingDialogue",
+	"strugglingWombEnergyDrain": ":missingDialogue",
+	"strugglingWombTransforming": ":missingDialogue",
+	"strugglingWombEggify": ":missingDialogue",
+	"strugglingShaft": [
+		"yes..squish me harder`",
+		"nice and smelly",
+		"This is so hot~"
+	],
+	"strugglingShaftDigest": ":missingDialogue",
+	"strugglingShaftDigestImmune": ":missingDialogue",
+	"strugglingShaftHeal": ":missingDialogue",
+	"strugglingShaftCompression": ":missingDialogue",
+	"strugglingShaftEnergyDrain": ":missingDialogue",
+	"strugglingShaftCumTransforming": ":missingDialogue",
+	"strugglingCumTransformingImmune": ":missingDialogue",
+	"strugglingShaftEggify": ":missingDialogue",
+	"strugglingBalls": [
+		"All this cum sloshing around me~",
+		"Ahhh... I'm stored in the balls~",
+		"Stuck down here in your balls~",
+		"This is so hot~"
+	],
+	"strugglingBallsDigest": ":missingDialogue",
+	"strugglingBallsDigestImmune": ":missingDialogue",
+	"strugglingBallsHeal": ":missingDialogue",
+	"strugglingBallsCompression": ":missingDialogue",
+	"strugglingBallsEnergyDrain": ":missingDialogue",
+	"strugglingBallsEggify": ":missingDialogue",
+	"strugglingBreasts": ":missingDialogue",
+	"strugglingBreastsDigest": ":missingDialogue",
+	"strugglingBreastsDigestImmune": ":missingDialogue",
+	"strugglingBreastsHeal": ":missingDialogue",
+	"strugglingBreastsCompression": ":missingDialogue",
+	"strugglingBreastsEnergyDrain": ":missingDialogue",
+	"strugglingBreastsTransforming": ":missingDialogue",
+	"voredOralVoreWilling": ":missingDialogue",
+	"voredAnalVoreWilling": ":missingDialogue",
+	"voredTailVoreWilling": ":missingDialogue",
+	"voredNavelVoreWilling": ":missingDialogue",
+	"voredAbsorbVoreWilling": ":missingDialogue",
+	"voredCockVoreWilling": ":missingDialogue",
+	"voredUnbirthWilling": ":missingDialogue",
+	"voredBreastVoreWilling": ":missingDialogue",
+	"voredOralVore": ":missingDialogue",
+	"voredAnalVore": ":missingDialogue",
+	"voredTailVore": ":missingDialogue",
+	"voredNavelVore": ":missingDialogue",
+	"voredAbsorbVore": ":missingDialogue",
+	"voredCockVore": ":missingDialogue",
+	"voredUnbirth": ":missingDialogue",
+	"voredBreastVore": ":missingDialogue",
+	"escapeOralVoreStruggle": ":missingDialogue",
+	"escapeOralVoreStruggleDigest": ":missingDialogue",
+	"escapeOralVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeOralVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeOralVoreStruggleHeal": ":missingDialogue",
+	"escapeStruggleTransforming": ":missingDialogue",
+	"escapeStruggleTransformingImmune": ":missingDialogue",
+	"escapeStruggleEggify": ":missingDialogue",
+	"escapeStruggleEggifyImmune": ":missingDialogue",
+	"escapeAnalVoreStruggle": ":missingDialogue",
+	"escapeAnalVoreStruggleDigest": ":missingDialogue",
+	"escapeAnalVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeAnalVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeAnalVoreStruggleHeal": ":missingDialogue",
+	"escapeTailVoreStruggle": ":missingDialogue",
+	"escapeTailVoreStruggleDigest": ":missingDialogue",
+	"escapeTailVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeTailVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeTailVoreStruggleHeal": ":missingDialogue",
+	"escapeNavelVoreStruggle": ":missingDialogue",
+	"escapeNavelVoreStruggleDigest": ":missingDialogue",
+	"escapeNavelVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeNavelVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeNavelVoreStruggleHeal": ":missingDialogue",
+	"escapeAbsorbVoreStruggle": ":missingDialogue",
+	"escapeAbsorbVoreStruggleDigest": ":missingDialogue",
+	"escapeAbsorbVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeAbsorbVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeAbsorbVoreStruggleHeal": ":missingDialogue",
+	"escapeCockVoreStruggle": ":missingDialogue",
+	"escapeCockVoreStruggleDigest": ":missingDialogue",
+	"escapeCockVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeCockVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeCockVoreStruggleHeal": ":missingDialogue",
+	"escapeUnbirthStruggle": ":missingDialogue",
+	"escapeUnbirthStruggleDigest": ":missingDialogue",
+	"escapeUnbirthStruggleDigestImmune": ":missingDialogue",
+	"escapeUnbirthStruggleSoftDigest": ":missingDialogue",
+	"escapeUnbirthStruggleHeal": ":missingDialogue",
+	"escapeBreastVoreStruggle": ":missingDialogue",
+	"escapeBreastVoreStruggleDigest": ":missingDialogue",
+	"escapeBreastVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeBreastVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeBreastVoreStruggleHeal": ":missingDialogue",
+	"escapeOralVore": ":missingDialogue",
+	"escapeOralVoreDigest": ":missingDialogue",
+	"escapeOralVoreDigestImmune": ":missingDialogue",
+	"escapeOralVoreSoftDigest": ":missingDialogue",
+	"escapeOralVoreHeal": ":missingDialogue",
+	"escapeTransforming": ":missingDialogue",
+	"escapeTransformingImmune": ":missingDialogue",
+	"escapeEggify": ":missingDialogue",
+	"escapeEggifyImmune": ":missingDialogue",
+	"escapeAnalVore": ":missingDialogue",
+	"escapeAnalVoreDigest": ":missingDialogue",
+	"escapeAnalVoreDigestImmune": ":missingDialogue",
+	"escapeAnalVoreSoftDigest": ":missingDialogue",
+	"escapeAnalVoreHeal": ":missingDialogue",
+	"escapeTailVore": ":missingDialogue",
+	"escapeTailVoreDigest": ":missingDialogue",
+	"escapeTailVoreDigestImmune": ":missingDialogue",
+	"escapeTailVoreSoftDigest": ":missingDialogue",
+	"escapeTailVoreHeal": ":missingDialogue",
+	"escapeNavelVore": ":missingDialogue",
+	"escapeNavelVoreDigest": ":missingDialogue",
+	"escapeNavelVoreDigestImmune": ":missingDialogue",
+	"escapeNavelVoreSoftDigest": ":missingDialogue",
+	"escapeNavelVoreHeal": ":missingDialogue",
+	"escapeAbsorbVore": ":missingDialogue",
+	"escapeAbsorbVoreDigest": ":missingDialogue",
+	"escapeAbsorbVoreDigestImmune": ":missingDialogue",
+	"escapeAbsorbVoreSoftDigest": ":missingDialogue",
+	"escapeAbsorbVoreHeal": ":missingDialogue",
+	"escapeCockVore": ":missingDialogue",
+	"escapeCockVoreDigest": ":missingDialogue",
+	"escapeCockVoreDigestImmune": ":missingDialogue",
+	"escapeCockVoreSoftDigest": ":missingDialogue",
+	"escapeCockVoreHeal": ":missingDialogue",
+	"escapeUnbirth": ":missingDialogue",
+	"escapeUnbirthDigest": ":missingDialogue",
+	"escapeUnbirthDigestImmune": ":missingDialogue",
+	"escapeUnbirthSoftDigest": ":missingDialogue",
+	"escapeUnbirthHeal": ":missingDialogue",
+	"escapeBreastVore": ":missingDialogue",
+	"escapeBreastVoreDigest": ":missingDialogue",
+	"escapeBreastVoreDigestImmune": ":missingDialogue",
+	"escapeBreastVoreSoftDigest": ":missingDialogue",
+	"escapeBreastVoreHeal": ":missingDialogue",
+	"infuseRequestBellyBefore": ":missingDialogue",
+	"infuseRequestBellyBeforeLayer": ":missingDialogue",
+	"infuseRequestBellyAfter": ":missingDialogue",
+	"infuseRequestBellyAfterLayer": ":missingDialogue",
+	"infuseUnpromptedBellyBefore": ":missingDialogue",
+	"infuseUnpromptedBellyBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedBellyAfter": ":missingDialogue",
+	"infuseUnpromptedBellyAfterLayer": ":missingDialogue",
+	"infuseRequestTailBefore": ":missingDialogue",
+	"infuseRequestTailBeforeLayer": ":missingDialogue",
+	"infuseRequestTailAfter": ":missingDialogue",
+	"infuseRequestTailAfterLayer": ":missingDialogue",
+	"infuseUnpromptedTailBefore": ":missingDialogue",
+	"infuseUnpromptedTailBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedTailAfter": ":missingDialogue",
+	"infuseUnpromptedTailAfterLayer": ":missingDialogue",
+	"infuseRequestBreastsBefore": ":missingDialogue",
+	"infuseRequestBreastsBeforeLayer": ":missingDialogue",
+	"infuseRequestBreastsAfter": ":missingDialogue",
+	"infuseRequestBreastsAfterLayer": ":missingDialogue",
+	"infuseUnpromptedBreastsBefore": ":missingDialogue",
+	"infuseUnpromptedBreastsBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedBreastsAfter": ":missingDialogue",
+	"infuseUnpromptedBreastsAfterLayer": ":missingDialogue",
+	"infuseRequestPussyBefore": ":missingDialogue",
+	"infuseRequestPussyBeforeLayer": ":missingDialogue",
+	"infuseRequestPussyAfter": ":missingDialogue",
+	"infuseRequestPussyAfterLayer": ":missingDialogue",
+	"infuseUnpromptedPussyBefore": ":missingDialogue",
+	"infuseUnpromptedPussyBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedPussyAfter": ":missingDialogue",
+	"infuseUnpromptedPussyAfterLayer": ":missingDialogue",
+	"infuseRequestShaftBefore": ":missingDialogue",
+	"infuseRequestShaftBeforeLayer": ":missingDialogue",
+	"infuseRequestShaftAfter": ":missingDialogue",
+	"infuseRequestShaftAfterLayer": ":missingDialogue",
+	"infuseUnpromptedShaftBefore": ":missingDialogue",
+	"infuseUnpromptedShaftBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedShaftAfter": ":missingDialogue",
+	"infuseUnpromptedShaftAfterLayer": ":missingDialogue",
+	"infuseRequestBallsBefore": ":missingDialogue",
+	"infuseRequestBallsBeforeLayer": ":missingDialogue",
+	"infuseRequestBallsAfter": ":missingDialogue",
+	"infuseRequestBallsAfterLayer": ":missingDialogue",
+	"infuseUnpromptedBallsBefore": ":missingDialogue",
+	"infuseUnpromptedBallsBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedBallsAfter": ":missingDialogue",
+	"infuseUnpromptedBallsAfterLayer": ":missingDialogue",
+	"infused": ":missingDialogue",
+	"infusedBelly": ":missingDialogue",
+	"infusedTail": ":missingDialogue",
+	"infusedPussy": ":missingDialogue",
+	"infusedBreasts": ":missingDialogue",
+	"infusedShaft": ":missingDialogue",
+	"infusedBalls": ":missingDialogue",
+	"teaseInfused": ":missingDialogue",
+	"teaseInfusedBelly": ":missingDialogue",
+	"teaseInfusedTail": ":missingDialogue",
+	"teaseInfusedPussy": ":missingDialogue",
+	"teaseInfusedBreasts": ":missingDialogue",
+	"teaseInfusedShaft": ":missingDialogue",
+	"teaseInfusedBalls": ":missingDialogue",
+	"shrinking": [
+		"Oh boy here we go again...",
+		"this feels normal",
+		"heh I did prefer being tiny",
+		"heh..remember micros are meant ot be stepped on^^",
+		"yippie"
+	],
+	"growing": [
+		"Not my cup of tea but ill roll with it.",
+		"reminds me of my ex",
+		"*bumps head* ow....",
+		"heh...my kind were always looked at as big"
+	],
+	"didSteppy": [
+		"hehe, whoops!",
+		"Oh did I step on something?",
+		"You tinies need to pay attention more!"
+	],
+	"gotStepped": [
+		"oomph...",
+		"* squish ",
+		"ow......",
+		" ....ueegh...",
+		"ack! watch where you step!",
+		" ..uugh...thank you.",
+		"merp....",
+		"merp!",
+		"ugh...the micro life is never easy.."
+	],
+	"gotStomped": ":missingDialogue",
+	// Unused Dialogue
+	"greeting.default.default.default.default": [
+		"Ah, hello there",
+		"merp?",
+		"yes?",
+		"yea?"
+	],
+	"converse": [
+		"Did ya want to talk about something?",
+		"merp?"
+	],
+	"talkAboutSelf": [
+		"well there isnt much to me, merp"
+	],
+	"talkAboutKinks": [
+		"so you wanted to talk kinks?"
+	],
+	"defaultOralVoreNotFeelingIt": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
+	],
+	"softDigestOralVoreFull": ":digestOralVoreFull", // duplicated lines
+	"defaultOralVoreOtherFull": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
+	"defaultOralVoreTooBig": [
+		"I think you're a bit too big to fit in there...",
+		"I don't think I'd be able to get you in...",
+		"If only you were a bit smaller...",
+		"Thats a bit too much to ask of me..."
+	],
 	"defaultCockVoreNotFeelingIt": [
 		"Not in the mood pal",
 		"I'm busy",
 		"Mayber later im just rubbed it off awhile ago",
 		"I'm got other sergals things to do...like merping",
 		"my shaft is tired"
-	],
-	"defaultCockVoreFull": [
-		"my sheese dispenser is full right now...",
-		"Hmmm if someone moves down to my balls you might fit~",
-		"This sergal shaft is full",
-		"Maybe when I bust a sergal nut"
 	],
 	"defaultCockVoreTooBig": [
 		"Sorry micros only",
@@ -142,59 +864,13 @@
 		"merp?",
 		"doesn't feel liek your melting"
 	],
-	"shaftDefaultStruggle": [
-		"ooohh hehe that tingles~",
-		"wooo boy..."
-	],
-	"shaftDigestStruggle": [
-		"mmm melting down you go~",
-		"merp for me~"
-	],
 	"shaftDigestStruggleImmmune": [
 		"less talking more melting",
 		"just mely down and enjoy youself"
 	],
-	"ballsDefaultStruggle": [
-		"merp...that feels nice feeling down there",
-		"Keep going.",
-		"It feels so good having you in there~",
-		"Friends are stored in the balls~"
-	],
-	"ballsDigestStruggle": [
-		"yes become nice sergal cum for me~",
-		"time to be sergal cummies~"
-	],
 	"ballsDigestStruggleImmmune": [
 		"not melting",
 		"This sergal wants you to melt"
-	],
-	"letoutOralVoreStruggle": [
-		"*hack...cough*",
-		"alright alright come on out",
-		"aw man...come on..."
-	],
-	"letoutOralVoreStruggleHeal": [
-		"come on..its like a suana in there",
-		"Are you sure you're ready to come out?",
-		"well...return to me if you need more healing",
-		"don't go whinning if you die cause you didnt fully heal up",
-		"next time stop spamming for medic"
-	],
-	"letoutOralVoreStruggleDigest": [
-		"oh..huh enjoy the stay then",
-		"No hard feelings?",
-		"you're no fun \n",
-		"ooh? we got outselfs a fighter"
-	],
-	"letoutOralVoreStruggleDigestImmune": [
-		"that's fine..I wasnt even that hungry",
-		"you're making me look bad infront of the others",
-		"Come on...It's my job"
-	],
-	"letoutOralVoreStruggleSoftDigest": [
-		"wha...you were gona be fine..geez",
-		"what? you had that option selected",
-		"well...just stay there I guess"
 	],
 	"letoutOralVoreStruggleSoftDigestImmune": [
 		{
@@ -205,66 +881,11 @@
 		"Come on, my acid didn't even do anything to you...",
 		"If only you actually started to melt..."
 	],
-	"letoutOralVoreStruggleDigested": [
-		"reformation central",
-		"beep boop reforming..haha jk I aint a synth...oh hope BLue didnt hear that",
-		"alright time to reform"
-	],
-	"letoutOralVore": [
-		"alright out you go",
-		"*hack and coughs* out you go",
-		"bleh...you didnt really taste that good",
-		"come on out we got work to do *burps* er excuse me"
-	],
-	"letoutOralVoreHeal": [
-		"alright now get back out there!",
-		"Alrighty I think you're all good to go",
-		"feeling better?",
-		"I never though id have a stomach that heals",
-		"I never got my medical degree you know?"
-	],
-	"letoutOralVoreDigest": [
-		"ok I'm good for now",
-		"I'm satified you can go now",
-		"best you leave",
-		"I didnt really want to digest you"
-	],
-	"letoutOralVoreDigestImmune": [
-		"what's the point?",
-		"that's no fun",
-		"best you go..this sergal is intrested in something else...oh beef jerky",
-		"I'ma go get some actual food"
-	],
-	"letoutOralVoreSoftDigest": [
-		"I think your soft enough",
-		"I'm good for now thanks",
-		"now got out of here you silly",
-		"Didn't feel like it"
-	],
 	"letoutOralVoreSoftDigestImmune": [
 		"really?",
 		"well this is pointless",
 		"oh you selected that option...no fun",
 		"what am I sergal express?"
-	],
-	"letoutOralVoreDigested": [
-		"time for you to go",
-		"get digested lol",
-		"hope it was worth the pixels",
-		"next yea when you get back"
-	],
-	"letoutCockVoreStruggle": [
-		"Ahh~ man what a sensation~",
-		"come back anytime^^",
-		"you felt good in there~",
-		"what? didnt enjoy yourself in there?",
-		"merp...."
-	],
-	"letoutCockVore": [
-		"Hhhhhh I'm gonna cum...",
-		"M..mmph god~",
-		"Gonna blast~",
-		"M..Meerpp....~"
 	],
 	"struggling.default.default.default.default.default.default": [
 		[
@@ -272,100 +893,6 @@
 			"welp...this is my life for now...",
 			"*sploosh*"
 		]
-	],
-	"strugglingBelly": [
-		[
-			"comfy",
-			"so this is what it's like in a belly",
-			{
-				"check": {
-					"bellySounds": true
-				},
-				"add": [
-					"*gurgle*",
-					"Mmmph those noises",
-					"struggled grunts...oh I give up..."
-				]
-			}
-		],
-		{
-			"check": {
-				"predator": "sbqVaporeon"
-			},
-			"add": [
-				"Gooey Vappy belly.",
-				"Its all gooey in here."
-			]
-		}
-	],
-	"strugglingBellyHeal": [
-		[
-			"hmm...it aint melting me..that's good right?",
-			"its like a healing bath",
-			"thi feels wonderful",
-			{
-				"check": {
-					"bellySounds": true
-				},
-				"add": [
-					"I really like the sounds your belly makes... very calming.",
-					"I could just drift off to sleep listening to the sounds of your body..."
-				]
-			}
-		],
-		{
-			"check": {
-				"predator": "sbqVaporeon"
-			},
-			"add": [
-				"did you kno-*get's slooshed around*..nvm"
-			]
-		}
-	],
-	"strugglingBellyDigestImmune": [
-		[
-			[
-				"Trying to melt me down?",
-				"Trying to melt me down?\nThats not gonna work."
-			],
-			"Heh, I can actually stay in here as long as I want.",
-			"I'm @#%@@#$ invincible! *enter metal gear rising refereence here*",
-			"I'm immune so good luck \n"
-		]
-	],
-	"strugglingBellyDigest": [
-		[
-			"man this hurts...",
-			"hmmph..nothing but pudge",
-			{
-				"check": {
-					"bellySounds": true
-				},
-				"add": [
-					"so much...noise",
-					"All this grumbling... you must be pretty hungry."
-				]
-			}
-		],
-		{
-			"check": {
-				"predator": "sbqVaporeon"
-			},
-			"add": [
-				" ....vappy goo...."
-			]
-		}
-	],
-	"strugglingBalls": [
-		"All this cum sloshing around me~",
-		"Ahhh... I'm stored in the balls~",
-		"Stuck down here in your balls~",
-		"This is so hot~"
-	],
-	"strugglingShaft": [
-		"yes..squish me harder`",
-		"nice and smelly",
-		"This is so hot~"
 	],
 	"struggling.underfoot.default.default.default.default.default": [
 		" ..hello?...down here...",
@@ -417,35 +944,6 @@
 	"escape.cockVore.default.default.default.default.false": [
 		"so salty..plhew",
 		"its in my mouth..."
-	],
-	"shrinking": [
-		"Oh boy here we go again...",
-		"this feels normal",
-		"heh I did prefer being tiny",
-		"heh..remember micros are meant ot be stepped on^^",
-		"yippie"
-	],
-	"growing": [
-		"Not my cup of tea but ill roll with it.",
-		"reminds me of my ex",
-		"*bumps head* ow....",
-		"heh...my kind were always looked at as big"
-	],
-	"didSteppy": [
-		"hehe, whoops!",
-		"Oh did I step on something?",
-		"You tinies need to pay attention more!"
-	],
-	"gotStepped": [
-		"oomph...",
-		"* squish ",
-		"ow......",
-		" ....ueegh...",
-		"ack! watch where you step!",
-		" ..uugh...thank you.",
-		"merp....",
-		"merp!",
-		"ugh...the micro life is never easy.."
 	],
 	"gotSteppy.default.default.default.walking": [
 		" eyy, I'm walking here!",

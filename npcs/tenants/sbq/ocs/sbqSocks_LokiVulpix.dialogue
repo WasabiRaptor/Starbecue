@@ -1,31 +1,7 @@
 {
-	//pet.excessive duplicates pet.many
-	//defaultUnpromptedAnalVoreAfter duplicates defaultRequestAnalVoreAfter
-	//defaultUnpromptedUnbirthAfter duplicates defaultRequestUnbirthAfter
-	//defaultUnbirthNotFeelingIt duplicates defaultOralVoreNotFeelingIt
-	//defaultUnbirthTooBig duplicates defaultOralVoreTooBig
-	//defaultUnpromptedCockVoreBefore duplicates defaultRequestCockVoreBefore
-	//defaultUnpromptedCockVoreAfter duplicates defaultRequestCockVoreAfter
-	//defaultCockVoreNotFeelingIt duplicates defaultOralVoreNotFeelingIt
-	//letoutUnbirthStruggleHeal duplicates letoutOralVoreStruggleHeal
-	//strugglingShaftDigestImmune duplicates strugglingBallsDigestImmune
-	//strugglingBreastsDigestImmune duplicates strugglingBallsDigestImmune
-	//infuseUnpromptedBellyAfter duplicates infuseRequestBellyAfterLayer
-	//infuseUnpromptedBellyAfterLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infusePreyBellyNotFeelingIt duplicates defaultOralVoreNotFeelingIt
-	//infuseUnpromptedShaftBeforeLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infuseUnpromptedShaftAfterLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infusePreyShaftNotFeelingIt duplicates defaultOralVoreNotFeelingIt
-	//infuseRequestBreastsBeforeLayer duplicates infuseRequestShaftBeforeLayer
-	//infuseRequestBreastsAfterLayer duplicates infuseRequestShaftAfterLayer
-	//infuseUnpromptedBreastsBeforeLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infuseUnpromptedBreastsAfterLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infusePreyBreastsNotFeelingIt duplicates defaultOralVoreNotFeelingIt
-	//infuseRequestWombBeforeLayer duplicates infuseRequestShaftBeforeLayer
-	//infuseRequestWombAfterLayer duplicates infuseRequestShaftAfterLayer
-	//infuseUnpromptedWombBeforeLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infuseUnpromptedWombAfterLayer duplicates infuseUnpromptedBellyBeforeLayer
-	//infusePreyWombNotFeelingIt duplicates defaultOralVoreNotFeelingIt
+	"missingDialogue": ["Whoops this dialogue is missing"],
+	"defaultRewardsGreeting": ":missingDialogue",
+	"defaultRewardsGreetingIntroduced": ":missingDialogue",
 	"defaultGreeting": [
 		"Oh, hi there!",
 		"Hello!",
@@ -39,83 +15,25 @@
 			]
 		}
 	],
-	"converse": [
-		"So what did you want to talk about?",
-		"Did you want to ask me something?",
-		"Wanna talk?"
+	"defaultGreetingCrew": ":missingDialogue",
+	"defaultCrewStay": ":missingDialogue",
+	"defaultCrewFollow": ":missingDialogue",
+	"fullCrew": ":missingDialogue",
+	"rewardNotifyMoney": [
+		"This is nice, I think I'll give you some of my spare change.",
+		"I'll give you a few pixels for giving me a good time."
 	],
-	"talkAboutSelf": [
-		[
-			"So what did you want to know about me?",
-			"Curious about me aren't you~",
-			"You know you could learn by just having me do things to you~"
-		],
-		{
-			"check": {
-				"introduced": true
-			},
-			"add": [
-				"So what did you want to know about me <entityname>?",
-				"Curious about me aren't you <entityname>~",
-				"You know you could learn by just having me do things to you <entityname>~"
-			]
-		}
+	"rewardNotifyLowValueQuestRewards": [
+		"Hmm, I think you deserve something after this.",
+		"I think I'll give you some sort of small gift."
 	],
-	"tellMeAStory": [
-		"I've got some fun stories for ya~",
-		"Hehe, sure I can tell ya a story~"
+	"rewardNotifyMediumValueQuestRewards": [
+		"Maybe I've got something a bit better for you this time.",
+		"I've got another gift for you after this."
 	],
-	"unbirthStories.sbqLoki_LokiVulpix.creation": [
-		"So, back when Loki first made me, she didn't actually tell me what the zipper was for",
-		"But I knew perfectly well, I could just feel my purpose imbued into my very being hehe~",
-		"So I had to wait for my moment, all through the day as she showed me around the house, getting me familiar with the place..."
-	],
-	"unbirthStories.sbqLoki_LokiVulpix.creation.continue": [
-		"What are y'all talking about?"
-	],
-	"unbirthStories.sbqLoki_LokiVulpix.creation.continue.continue": [
-		"Oh nothing, just the day you made me~"
-	],
-	"unbirthStories.sbqLoki_LokiVulpix.creation.continue.continue.continue": [
-		" ...!",
-		"M-maybe I can tell you that story myself later...",
-		"Fluff for brains here might get the story wrong or something."
-	],
-	"unbirthStories.sbqLoki_LokiVulpix.creation.fail": [
-		"But I didn't have the right moment yet, I just listened to her being cute while resisting the urge to stuff her up inside me right then and there~",
-		"And then, when we finally went to bed, and she snuggled right up against me, the fox's guard down entirely, I made my move~",
-		"I reached down and quietly unzipped myself, and then made sure I had her firmly in my grasp... before shoving her down inside headfirst!",
-		"She squirmed and squirmed and it felt so good, fighting back just a little, we both knew she could have easily stopped me, but she wouldn't~",
-		"Stuffed that fox all the way inside and zipped myself up tight, trapping her, not a single consequence for touching her tails~",
-		"And I had her nice and snug and tucked away in my womb, trapped inside me, she would never admit it, but she loved it~"
-	],
-	"unbirthStories.sbqJaych_Jaych.meeting": [
-		"So, theres this ferret named Jaych, little friend of mine, a grassy noodly creature.",
-		"And he just absolutely loves being my little womb pet~",
-		"Back when I first met him, I was part of this little haunted house type thing, where people would wander inside and we would pick them off one by one~",
-		"I would turn them into plushies for my collection hehe, would turn them back afterwards if they wanted, but anyway...",
-		"He came in with a group, and when they split up to search the house, he was left alone in a bedroom with a totally inanimate plushie~",
-		"And while he was distracted by a yell from someone else, I snuck right up over him, and then shoved my rear down right on top!",
-		"And oooooh did it feel good to have such a wiggly noodly creature getting squeezed in my pussy~ I even fingered myself a bit before I zipped myself up to trap him inside~",
-		"And he was just so flustered being inside there, just a wiggly toy for me as the soft plush fabric squeezed tightly around him~",
-		"He loved it even more when I told him I wasn't letting him out~ He kept rubbing his against my closed zipper so he knew he was trapped~\nI think I kept him in there for a week~"
-	],
-	"pet.normal": [
-		"Purrr",
-		"UwU"
-	],
-	"pet.many": [
-		{
-			"add": "pet.normal"
-		}
-	],
-	"pet.excessive": ":pet.many", // duplicated lines
-	"pet.problem": [
-		"<dontSpeak>* It's possible that you may have a problem."
-	],
-	"cockTFme": [
-		"Well... I could transform you into a dildo, and then I could attach that to myself. Or you could get someone's essence I could use.",
-		"So what do you say, do you want to become this plushie's dick~?"
+	"rewardNotifyHighValueQuestRewards": [
+		"I think you'll really like what I've gotten you.",
+		"My next gift will be really good heh."
 	],
 	"defaultRequestOralVoreBefore": [
 		"Want to take a nap inside~?",
@@ -147,12 +65,16 @@
 		"You know, if you don't snuggle your plushies...\nthey might come to snuggle you~",
 		"I demand snuggles~\nyou don't get a say where though~"
 	],
-	"defaultOralVoreNotFeelingIt": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
+	"defaultUnpromptedOralVoreAfter": ":missingDialogue",
+	"defaultSelfRequestOralVore": ":missingDialogue",
+	"defaultSelfRequestOralVoreYes": ":missingDialogue",
+	"defaultSelfRequestOralVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestOralVoreNo": ":missingDialogue",
+	"defaultSelfRequestOralVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestOralVoreNoYesAfter": ":missingDialogue",
+	"defaultNotFeelingIt": ":missingDialogue",
+	"defaultTooBig": ":missingDialogue",
+	"defaultTooSmall": ":missingDialogue",
 	"defaultOralVoreFull": [
 		"I might pop a stitch if I try to eat any more!",
 		"My fabric is getting stretched pretty thin!",
@@ -163,22 +85,10 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"defaultOralVoreOtherFull": [
-		"I might pop a stitch if I try to fill myself any more!",
-		"My fabric is getting stretched pretty thin!",
-		"My body has some great napping spots, but already at full occupancy~",
-		"You can hug me from the outside if you want~",
-		"You just can't resist the call of my soft plushie body, can you~",
-		"Maybe if you squish your paws on my belly enough I might give you a turn somewhere~",
-		"How about we just snuggle with you out here for now~",
-		"Perhaps we can think of something else to do hmmm~?"
-	],
-	"defaultOralVoreTooBig": [
-		"I don't want to tear myself trying to force you in.",
-		"You're a bit too large, I might pop a seam.",
-		"You should try and make yourself smaller~",
-		"You're a bit too big to stuff into this plushie."
-	],
+	"digestOralVoreFull": ":missingDialogue",
+	"compressionOralVoreFull": ":missingDialogue",
+	"defaultFull": ":missingDialogue",
+	"defaultNeedsInfusion": ":missingDialogue",
 	"defaultRequestAnalVoreBefore": [
 		"You want to go up my butt?",
 		"Aren't satisfied with just staring at my plush butt?",
@@ -202,7 +112,54 @@
 		"Most plushies just have a smooth null butt...\nI'm not one of them~",
 		"I demand snuggles~\nyou don't get a say where though~"
 	],
-	"defaultUnpromptedAnalVoreAfter": ":defaultRequestAnalVoreAfter", // duplicated lines
+	"defaultUnpromptedAnalVoreAfter": ":defaultRequestAnalVoreAfter",
+	"defaultSelfRequestAnalVore": ":missingDialogue",
+	"defaultSelfRequestAnalVoreYes": ":missingDialogue",
+	"defaultSelfRequestAnalVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNo": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNoYesAfter": ":missingDialogue",
+	"defaultAnalVoreFull": ":missingDialogue",
+	"digestAnalVoreFull": ":missingDialogue",
+	"compressionAnalVoreFull": ":missingDialogue",
+	"defaultRequestTailVoreBefore": ":missingDialogue",
+	"defaultRequestTailVoreAfter": ":missingDialogue",
+	"defaultUnpromptedTailVoreBefore": ":missingDialogue",
+	"defaultUnpromptedTailVoreAfter": ":missingDialogue",
+	"defaultSelfRequestTailVore": ":missingDialogue",
+	"defaultSelfRequestTailVoreYes": ":missingDialogue",
+	"defaultSelfRequestTailVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestTailVoreNo": ":missingDialogue",
+	"defaultSelfRequestTailVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestTailVoreNoYesAfter": ":missingDialogue",
+	"defaultTailVoreFull": ":missingDialogue",
+	"digestTailVoreFull": ":missingDialogue",
+	"compressionTailVoreFull": ":missingDialogue",
+	"defaultRequestCockVoreBefore": [
+		"Spied my attachment down there didn't cha~?",
+		"<infusedName> was rather eager to be my new attachment~\nLets put it to use then~",
+		"I usually don't do this, but if <infusedName> enjoys it, then I do to~"
+	],
+	"defaultRequestCockVoreAfter": [
+		"Get stuffed right down in there~",
+		"Get squeeeeeezed into my dildo dick hehe~",
+		"Ahh~ <infusedName> is sure to enjoy that~",
+		"Oooh~ I can really feel <infusedName> twitching down there hehe~"
+	],
+	"defaultUnpromptedCockVoreBefore": ":defaultRequestCockVoreBefore",
+	"defaultUnpromptedCockVoreAfter": ":defaultRequestCockVoreAfter",
+	"defaultSelfRequestCockVore": ":missingDialogue",
+	"defaultSelfRequestCockVoreYes": ":missingDialogue",
+	"defaultSelfRequestCockVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestCockVoreNo": ":missingDialogue",
+	"defaultSelfRequestCockVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestCockVoreNoYesAfter": ":missingDialogue",
+	"defaultCockVoreFull": [
+		"Ahh~ my dildo does have a limit to how much it can stretch!",
+		"I don't think you'll be able to fit, even if <infusedName> wants to try..."
+	],
+	"digestCockVoreFull": ":missingDialogue",
+	"compressionCockVoreFull": ":missingDialogue",
 	"defaultRequestUnbirthBefore": [
 		"Spied my zipper down there didn't cha~?",
 		"Hehe, you're gonna be zipped up in the softest sleeping bag possible~",
@@ -234,8 +191,13 @@
 		"You know, if you don't snuggle your plushies...\nthey might come to snuggle you~",
 		"I demand snuggles~\nyou don't get say where~"
 	],
-	"defaultUnpromptedUnbirthAfter": ":defaultRequestUnbirthAfter", // duplicated lines
-	"defaultUnbirthNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"defaultUnpromptedUnbirthAfter": ":defaultRequestUnbirthAfter",
+	"defaultSelfRequestUnbirth": ":missingDialogue",
+	"defaultSelfRequestUnbirthYes": ":missingDialogue",
+	"defaultSelfRequestUnbirthYesAfter": ":missingDialogue",
+	"defaultSelfRequestUnbirthNo": ":missingDialogue",
+	"defaultSelfRequestUnbirthNoYes": ":missingDialogue",
+	"defaultSelfRequestUnbirthNoYesAfter": ":missingDialogue",
 	"defaultUnbirthFull": [
 		"I might pop a stitch if I try to stuff any more in there!",
 		"My fabric is getting stretched pretty thin!",
@@ -246,99 +208,31 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"defaultUnbirthTooBig": ":defaultOralVoreTooBig", // duplicated lines
-	"defaultRequestCockVoreBefore": [
-		"Spied my attachment down there didn't cha~?",
-		"<infusedName> was rather eager to be my new attachment~\nLets put it to use then~",
-		"I usually don't do this, but if <infusedName> enjoys it, then I do to~"
-	],
-	"defaultRequestCockVoreAfter": [
-		"Get stuffed right down in there~",
-		"Get squeeeeeezed into my dildo dick hehe~",
-		"Ahh~ <infusedName> is sure to enjoy that~",
-		"Oooh~ I can really feel <infusedName> twitching down there hehe~"
-	],
-	"defaultUnpromptedCockVoreBefore": ":defaultRequestCockVoreBefore", // duplicated lines
-	"defaultUnpromptedCockVoreAfter": ":defaultRequestCockVoreAfter", // duplicated lines
-	"defaultCockVoreNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"defaultCockVoreFull": [
-		"Ahh~ my dildo does have a limit to how much it can stretch!",
-		"I don't think you'll be able to fit, even if <infusedName> wants to try..."
-	],
-	"defaultCockVoreTooBig": [
-		"I don't want to break <infusedName> trying to force you in.",
-		"You're a bit too large, I might break it.",
-		"You should try and make yourself smaller~",
-		"You're a bit too big to stuff into my dildo."
-	],
-	"vore.cockVore.default.default.default.needsInfusion": [
-		"I don't have one of those normally, I'd need a *special* kind of dildo~",
-		"Mmm~ I can't quite do that to you at the moment, but I could do something else~"
-	],
-	"bellyDefaultStruggle": [
-		"Snuggle my belly as much as you want~",
-		"Enjoying my soft plushie belly~?",
-		"I bet you'll drift off and take a nap soon enough~",
-		"Mmm~ I love your little squirms~",
-		"I bet you just love the sway of my belly as I walk~",
-		"Its nice and comfortable in there right~?",
-		"My belly was designed to be nice and soft to take naps in~",
-		"You should consider staying in there for a while~",
-		"I bet you just love squishing your hands into the soft plush walls of my belly~",
-		"Mmmm~ knead your hands alllll over in there for me~",
-		"I love snuggles, inside and out~",
-		"Mmmm, just giving you a full body hug~",
-		"You're trapped inside a plushie's belly~",
-		"You're just loving the warmth of my belly aren't you~",
-		"These are some of my favorite snuggles~",
-		"Hehe, stuck inside a plushie~"
-	],
-	"bellyHealStruggle": [
-		[
-			"You should start feeling a lot better after this rest~",
-			"You should stay nice and snug in my belly until you feel better~",
-			"Let me patch you up~",
-			"A rest in my belly should soothe all your troubles away~",
-			"You're nice and safe tucked away in my belly~",
-			"My plush belly should keep you nice and safe~",
-			"You'll be well protected in my belly~",
-			"All of my plush padding should keep you safe~",
-			"You should stay for a while,\nI'll keep you safe tucked away inside me~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
-	],
-	"bellyTransformedStruggle": [
-		[
-			"Hehe, you're just a little eevee plush now~",
-			"Hehe, I can feel your new little plushie paws pressing out against me~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
-	],
-	"bellyTransformingStruggle": [
-		[
-			"Can you feel yourself getting softer~?",
-			"I think you'll make a cute vee plushie~",
-			"I think I can feel you getting more snuggly~",
-			"Hehe, you're getting fluffier in there aren't you~",
-			"I bet you've got a little tag on your butt by now~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
-	],
-	"bellyTransformingStruggleImmune": [
-		[
-			"A real shame you're resisting,\nI think you'd make a cute plushie~",
-			"Guess I won't be having a new vee plush to snuggle..."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
-	],
+	"digestUnbirthFull": ":missingDialogue",
+	"compressionUnbirthFull": ":missingDialogue",
+	"defaultRequestBreastVoreBefore": ":missingDialogue",
+	"defaultRequestBreastVoreAfter": ":missingDialogue",
+	"defaultUnpromptedBreastVoreBefore": ":missingDialogue",
+	"defaultUnpromptedBreastVoreAfter": ":missingDialogue",
+	"defaultSelfRequestBreastVore": ":missingDialogue",
+	"defaultSelfRequestBreastVoreYes": ":missingDialogue",
+	"defaultSelfRequestBreastVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNo": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNoYesAfter": ":missingDialogue",
+	"defaultBreastVoreFull": ":missingDialogue",
+	"digestBreastVoreFull": ":missingDialogue",
+	"compressionBreastVoreFull": ":missingDialogue",
+	"defaultStruggle": ":missingDialogue",
+	"transformingStruggle": ":missingDialogue",
+	"transformingStruggleImmune": ":missingDialogue",
+	"eggifyStruggle": ":missingDialogue",
+	"eggifyStruggleImmune": ":missingDialogue",
+	"digestStruggle": ":missingDialogue",
+	"digestStruggleImmune": ":missingDialogue",
+	"healStruggle": ":missingDialogue",
+	"compressionStruggle": ":missingDialogue",
+	"energyDrainStruggle": ":missingDialogue",
 	"wombDefaultStruggle": [
 		"Hehe, zipped up and trapped inside me~",
 		"Hope you like how it feels in there~",
@@ -356,6 +250,8 @@
 		"These are some of my favorite snuggles~",
 		"Hehe, stuck inside a plushie~"
 	],
+	"wombDigestStruggle": ":missingDialogue",
+	"wombDigestStruggleImmune": ":missingDialogue",
 	"wombHealStruggle": [
 		[
 			"You should start feeling a lot better after this rest~",
@@ -372,35 +268,8 @@
 			"add": "struggle.location.race.personality.mood.default"
 		}
 	],
-	"wombEggedStruggle": [
-		"Now you're trapped in an egg"
-	],
-	"wombEggifyStruggle": [
-		[
-			"Hehe, you're gonna be like a toy in a prize egg soon",
-			"Once this egg is done, you'll be like a hidden prize~",
-			{
-				"check": {
-					"wombTF": true
-				},
-				"add": [
-					"Hehe, you'll just be a plushie toy in a prize egg when I'm done~"
-				]
-			}
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
-	],
-	"wombEggifyStruggleImmune": [
-		[
-			"Aww, I really wanted to put you in a prize egg...",
-			"It would have been such fun to pop out a prize egg."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
-	],
+	"wombCompressionStruggle": ":missingDialogue",
+	"wombEnergyDrainStruggle": ":missingDialogue",
 	"shaftDefaultStruggle": [
 		[
 			"Having a good time in there~?",
@@ -413,12 +282,36 @@
 			"Ahh I'm so glad I turned <infusedName> into a didlo~"
 		]
 	],
+	"shaftDigestStruggle": ":missingDialogue",
+	"shaftDigestStruggleImmune": ":missingDialogue",
+	"shaftHealStruggle": ":missingDialogue",
+	"shaftCompressionStruggle": ":missingDialogue",
+	"shaftEnergyDrainStruggle": ":missingDialogue",
+	"cumTransformingStruggle": ":missingDialogue",
+	"cumTransformingStruggleImmune": ":missingDialogue",
+	"shaftInfusedStruggle": ":missingDialogue",
 	"ballsDefaultStruggle": [
 		"Having a good time in there?",
 		"Keep squirming.",
 		"It feels so good having you in there~",
 		"Friends are stored in the balls~"
 	],
+	"ballsDigestStruggle": ":missingDialogue",
+	"ballsDigestStruggleImmune": ":missingDialogue",
+	"ballsHealStruggle": ":missingDialogue",
+	"ballsCompressionStruggle": ":missingDialogue",
+	"ballsEnergyDrainStruggle": ":missingDialogue",
+	"breastsDefaultStruggle": ":missingDialogue",
+	"breastsDigestStruggle": ":missingDialogue",
+	"breastsDigestStruggleImmune": ":missingDialogue",
+	"breastsHealStruggle": ":missingDialogue",
+	"breastsCompressionStruggle": ":missingDialogue",
+	"breastsEnergyDrainStruggle": ":missingDialogue",
+	"breastsDefaultStruggleShirt": ":missingDialogue",
+	"letoutStruggleTransforming": ":missingDialogue",
+	"letoutTransformingImmune": ":missingDialogue",
+	"letoutStruggleEggify": ":missingDialogue",
+	"letoutStruggleEggifyImmune": ":missingDialogue",
 	"letoutOralVoreStruggle": [
 		[
 			"Are you sure you want out?",
@@ -445,26 +338,42 @@
 			]
 		}
 	],
+	"letoutOralVoreStruggleDigested": ":missingDialogue",
+	"letoutOralVoreStruggleDigest": ":missingDialogue",
+	"letoutOralVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutShyOralVoreStruggleDigest": ":missingDialogue",
+	"letoutFlirtyOralVoreStruggleDigest": ":missingDialogue",
+	"letoutOralVoreStruggleSoftDigest": ":missingDialogue",
 	"letoutOralVoreStruggleHeal": [
 		"You do know its safer inside me right?",
 		"Are you sure you're ready to come out?",
 		"Maybe you should get back in... rest a little longer~",
 		"You can come back to rest any time~"
 	],
-	"letoutOralVoreStruggleTransformed": [
-		"Hehe, look at you now,\na cute vee plush~",
-		"Hehe, now you're a plushie like me~"
+	"letoutAnalVoreStruggle": ":missingDialogue",
+	"letoutAnalVoreStruggleDigested": ":missingDialogue",
+	"letoutAnalVoreStruggleDigest": ":missingDialogue",
+	"letoutAnalVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutAnalVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutAnalVoreStruggleHeal": ":missingDialogue",
+	"letoutTailVoreStruggle": ":missingDialogue",
+	"letoutTailVoreStruggleDigested": ":missingDialogue",
+	"letoutTailVoreStruggleDigest": ":missingDialogue",
+	"letoutTailVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutTailVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutTailVoreStruggleHeal": ":missingDialogue",
+	"letoutCockVoreStruggle": [
+		"Ahh~ ahh that felt so good~",
+		"Could you get back in and squirm some more?",
+		"Mmm~ I thought you were pretty comfortable.",
+		"I thought you liked it in there.",
+		"Oh... alright."
 	],
-	"letoutOralVoreStruggleTransformingImmune": [
-		"Didn't want to become a plushie?",
-		"Oh darn, I'll have to start all over again."
-	],
-	"letoutOralVoreStruggleTransforming": [
-		"I still think you'd have made a cute plushie",
-		{
-			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
-		}
-	],
+	"letoutCockVoreStruggleDigested": ":missingDialogue",
+	"letoutCockVoreStruggleDigest": ":missingDialogue",
+	"letoutCockVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutCockVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutCockVoreStruggleHeal": ":missingDialogue",
 	"letoutUnbirthStruggle": [
 		"Happy birthday~",
 		"Ah~ Why'd you come out?",
@@ -476,38 +385,110 @@
 		"Are you done with your rest?",
 		"Hope you consider coming back for more~"
 	],
-	"letoutUnbirthStruggleHeal": ":letoutOralVoreStruggleHeal", // duplicated lines
-	"letoutUnbirthStruggleEgged": [
-		"Hah, egg"
-	],
-	"letoutUnbirthStruggleEggifyImmune": [
-		"Don't want to be in a prize egg?",
-		"I thought you'd look cute in a prize egg~"
-	],
-	"letoutUnbirthStruggleEggify": [
-		{
-			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
-		}
-	],
-	"letoutCockVoreStruggle": [
-		"Ahh~ ahh that felt so good~",
-		"Could you get back in and squirm some more?",
-		"Mmm~ I thought you were pretty comfortable.",
-		"I thought you liked it in there.",
-		"Oh... alright."
-	],
+	"letoutUnbirthStruggleDigested": ":missingDialogue",
+	"letoutUnbirthStruggleDigest": ":missingDialogue",
+	"letoutUnbirthStruggleDigestImmune": ":missingDialogue",
+	"letoutUnbirthStruggleSoftDigest": ":missingDialogue",
+	"letoutUnbirthStruggleHeal": ":letoutOralVoreStruggleHeal",
+	"letoutBreastVoreStruggle": ":missingDialogue",
+	"letoutBreastVoreStruggleDigested": ":missingDialogue",
+	"letoutBreastVoreStruggleDigest": ":missingDialogue",
+	"letoutBreastVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutBreastVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutBreastVoreStruggleHeal": ":missingDialogue",
+	"letoutTransforming": ":missingDialogue",
+	"letoutEggify": ":missingDialogue",
+	"letoutEggifyImmune": ":missingDialogue",
+	"letoutOralVore": ":missingDialogue",
+	"letoutOralVoreDigested": ":missingDialogue",
+	"letoutOralVoreDigest": ":missingDialogue",
+	"letoutOralVoreDigestImmune": ":missingDialogue",
+	"letoutOralVoreSoftDigest": ":missingDialogue",
+	"letoutOralVoreHeal": ":missingDialogue",
+	"letoutAnalVore": ":missingDialogue",
+	"letoutAnalVoreDigested": ":missingDialogue",
+	"letoutAnalVoreDigest": ":missingDialogue",
+	"letoutAnalVoreDigestImmune": ":missingDialogue",
+	"letoutAnalVoreSoftDigest": ":missingDialogue",
+	"letoutAnalVoreHeal": ":missingDialogue",
+	"letoutTailVore": ":missingDialogue",
+	"letoutTailVoreDigested": ":missingDialogue",
+	"letoutTailVoreDigest": ":missingDialogue",
+	"letoutTailVoreDigestImmune": ":missingDialogue",
+	"letoutTailVoreSoftDigest": ":missingDialogue",
+	"letoutTailVoreHeal": ":missingDialogue",
 	"letoutCockVore": [
 		"Ahhhh~ ffff... I would have just cum if I could~",
 		"FFF... ahhh... I guess I came and forced you out?",
 		"Hnnnn i-is this what cumming feels like?"
 	],
-	"struggling.default.default.default.default.default.default": [
-		[
-			"I'm stuck here aren't I?",
-			"Is there even a way out?",
-			"Trapped..."
-		]
+	"letoutCockVoreDigested": ":missingDialogue",
+	"letoutCockVoreDigest": ":missingDialogue",
+	"letoutCockVoreDigestImmune": ":missingDialogue",
+	"letoutCockVoreSoftDigest": ":missingDialogue",
+	"letoutCockVoreHeal": ":missingDialogue",
+	"letoutUnbirth": ":missingDialogue",
+	"letoutUnbirthDigested": ":missingDialogue",
+	"letoutUnbirthDigest": ":missingDialogue",
+	"letoutUnbirthDigestImmune": ":missingDialogue",
+	"letoutUnbirthSoftDigest": ":missingDialogue",
+	"letoutUnbirthHeal": ":missingDialogue",
+	"letoutBreastVore": ":missingDialogue",
+	"letoutBreastVoreDigested": ":missingDialogue",
+	"letoutBreastVoreDigest": ":missingDialogue",
+	"letoutBreastVoreDigestImmune": ":missingDialogue",
+	"letoutBreastVoreSoftDigest": ":missingDialogue",
+	"letoutBreastVoreHeal": ":missingDialogue",
+	"defaultPreyRequestOralVore": ":missingDialogue",
+	"defaultPreyRequestOralVoreYes": ":missingDialogue",
+	"defaultPreyRequestOralVoreNo": ":missingDialogue",
+	"defaultPreyRequestOralVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestTailVore": ":missingDialogue",
+	"defaultPreyRequestTailVoreYes": ":missingDialogue",
+	"defaultPreyRequestTailVoreNo": ":missingDialogue",
+	"defaultPreyRequestTailVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestUnbirth": ":missingDialogue",
+	"defaultPreyRequestUnbirthYes": ":missingDialogue",
+	"defaultPreyRequestUnbirthNo": ":missingDialogue",
+	"defaultPreyRequestUnbirthNoYes": ":missingDialogue",
+	"defaultPreyRequestCockVore": ":missingDialogue",
+	"defaultPreyRequestCockVoreYes": ":missingDialogue",
+	"defaultPreyRequestCockVoreNo": ":missingDialogue",
+	"defaultPreyRequestCockVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestBreastVore": ":missingDialogue",
+	"defaultPreyRequestBreastVoreYes": ":missingDialogue",
+	"defaultPreyRequestBreastVoreNo": ":missingDialogue",
+	"defaultPreyRequestBreastVoreNoYes": ":missingDialogue",
+	"defaultForcingPreyOralVore": ":missingDialogue",
+	"defaultForcingPreyTailVore": ":missingDialogue",
+	"defaultForcingPreyAbsorbVore": ":missingDialogue",
+	"defaultForcingPreyAnalVore": ":missingDialogue",
+	"defaultForcingPreyCockVore": ":missingDialogue",
+	"defaultForcingPreyUnbirth": ":missingDialogue",
+	"defaultForcingPreyBreastVore": ":missingDialogue",
+	"defaultUnwillingPredOralVore": ":missingDialogue",
+	"defaultUnwillingPredTailVore": ":missingDialogue",
+	"defaultUnwillingPredAnalVore": ":missingDialogue",
+	"defaultUnwillingPredCockVore": ":missingDialogue",
+	"defaultUnwillingPredUnbirth": ":missingDialogue",
+	"defaultUnwillingPredBreastVore": ":missingDialogue",
+	"struggling": ":missingDialogue",
+	"strugglingSlime": [
+		"This slime is so sticky.",
+		"Stuck suspended in slime...",
+		"Suspended in sticky goo...",
+		"I'm really going to need a wash after this..."
 	],
+	"sstrugglingSlimeDigest": ":missingDialogue",
+	"strugglingSlimeDigestImmune": ":missingDialogue",
+	"strugglingSlimeHeal": [
+		"This slime feels pretty nice.",
+		"Ahh... this is... oddly satisfying...",
+		"I wouldn't mind staying suspended in here...",
+		"I'm really going to need a wash after this..."
+	],
+	"strugglingEnergyDrain": ":missingDialogue",
+	"strugglingSlimeTransforming": ":missingDialogue",
 	"strugglingBelly": [
 		[
 			"Mmmm comfy...",
@@ -536,6 +517,25 @@
 				"Its all gooey in here."
 			]
 		}
+	],
+	"strugglingBellyDigest": [
+		"Ahh... these acids are soaking into me!",
+		"Ahhh... starting to get mushy...",
+		"I-I'm starting to melt in here!",
+		"F-figured out I'm scented and flavored didn't you?",
+		"I don't think I'm that nutritious... b-but you're not going to stop,\nare you?",
+		"I'm flattered you think I'm so tasty,\nb-but I'm not really food.",
+		"I'm really going to need a lot more than a wash after this..."
+	],
+	"strugglingBellyDigestImmune": [
+		[
+			"Trying to melt me down?",
+			"Trying to melt me down?\nThats not gonna work."
+		],
+		"You might get indigestion, I'm not really edible.",
+		"Don't make yourself sick over trying to eat me.",
+		"I'm flattered you think I'm so tasty,\nbut I'm not really food.",
+		"I'm really going to need a wash after this..."
 	],
 	"strugglingBellyHeal": [
 		[
@@ -566,44 +566,75 @@
 			]
 		}
 	],
-	"strugglingBellyDigestImmune": [
-		[
-			"Trying to melt me down?",
-			"Trying to melt me down?\nThats not gonna work."
-		],
-		"You might get indigestion, I'm not really edible.",
-		"Don't make yourself sick over trying to eat me.",
-		"I'm flattered you think I'm so tasty,\nbut I'm not really food.",
-		"I'm really going to need a wash after this..."
+	"strugglingBellyCompression": ":missingDialogue",
+	"strugglingBellyEnergyDrain": ":missingDialogue",
+	"strugglingBellyTransforming": ":missingDialogue",
+	"strugglingTransformingImmune": ":missingDialogue",
+	"strugglingBellyEggify": ":missingDialogue",
+	"strugglingEggifyImmune": ":missingDialogue",
+	"strugglingTail": ":missingDialogue",
+	"strugglingTailDigest": ":missingDialogue",
+	"strugglingTailDigestImmune": ":missingDialogue",
+	"strugglingTailHeal": ":missingDialogue",
+	"strugglingTailCompression": ":missingDialogue",
+	"strugglingTailEnergyDrain": ":missingDialogue",
+	"strugglingTailTransforming": ":missingDialogue",
+	"strugglingTailEggify": ":missingDialogue",
+	"strugglingWomb": [
+		"Ahh~ Its so soft in here~",
+		"Ohhh~ Your womb is so snug and soft~",
+		"This is so hot~",
+		"Usually I put people in here,\nbut I'm not complaining~",
+		"Aaaa I'm going to need a wash after this!~"
 	],
-	"strugglingBellyDigest": [
-		"Ahh... these acids are soaking into me!",
-		"Ahhh... starting to get mushy...",
-		"I-I'm starting to melt in here!",
-		"F-figured out I'm scented and flavored didn't you?",
-		"I don't think I'm that nutritious... b-but you're not going to stop,\nare you?",
-		"I'm flattered you think I'm so tasty,\nb-but I'm not really food.",
-		"I'm really going to need a lot more than a wash after this..."
-	],
-	"strugglingBellyTransformingImmune": [
-		"I can tell what you're trying to do, it won't work on me.",
-		"This sort of stuff doesn't work on me.",
+	"strugglingWombDigest": ":missingDialogue",
+	"strugglingWombDigestImmune": [
+		"A-all this is doing is staining me white!",
+		"I-I'm never going to turn,\nall you're doing is making me more messy!",
+		"Wombs are supposed to be a safe place...",
 		{
-			"add": "struggling.location.predator.race.personality.mood.locationEffect"
+			"add": "struggling.location.predator.race.personality.mood.default"
 		}
 	],
-	"strugglingSlime": [
-		"This slime is so sticky.",
-		"Stuck suspended in slime...",
-		"Suspended in sticky goo...",
-		"I'm really going to need a wash after this..."
+	"strugglingWombHeal": ":missingDialogue",
+	"strugglingWombCompression": ":missingDialogue",
+	"strugglingWombEnergyDrain": ":missingDialogue",
+	"strugglingWombTransforming": ":missingDialogue",
+	"strugglingWombEggify": [
+		"Is this... an egg?",
+		"Are you making an egg around me?",
+		"I'm gonna be trapped in an egg!"
 	],
-	"strugglingSlimeHeal": [
-		"This slime feels pretty nice.",
-		"Ahh... this is... oddly satisfying...",
-		"I wouldn't mind staying suspended in here...",
-		"I'm really going to need a wash after this..."
+	"strugglingShaft": [
+		"Ahh~ your cock is squeezing tight around me~",
+		"Ohhh~ Your shaft is squeezing so hard~",
+		"This is so hot~",
+		"Aaaa I'm going to need a wash after this!~"
 	],
+	"strugglingShaftDigest": [
+		"Ahh~ your cock is squeezing tight around me~",
+		"Ohhh~ Your shaft is squeezing so hard~",
+		"This is so hot~",
+		"I-I can feel the cum getting forced through me",
+		"FFff~ I'm getting soaked with cum!",
+		"All this cum is starting to stain me!",
+		"Ahhh~ I'm getting all mushy from all this throbbing and squeezing!",
+		"Aaaa I'm going to need much more than a wash after this!~"
+	],
+	"strugglingShaftDigestImmune": ":strugglingBallsDigestImmune",
+	"strugglingBallsDigestImmune": [
+		"A-all this is doing is staining me white!",
+		"I-I'm not going to turn,\nall you're doing is making me more messy!",
+		{
+			"add": "struggling.location.predator.race.personality.mood.default"
+		}
+	],
+	"strugglingShaftHeal": ":missingDialogue",
+	"strugglingShaftCompression": ":missingDialogue",
+	"strugglingShaftEnergyDrain": ":missingDialogue",
+	"strugglingShaftCumTransforming": ":missingDialogue",
+	"strugglingCumTransformingImmune": ":missingDialogue",
+	"strugglingShaftEggify": ":missingDialogue",
 	"strugglingBalls": [
 		"All this cum sloshing around me~",
 		"Ahhh... I'm stored in the balls~",
@@ -611,13 +642,6 @@
 		"This is so hot~",
 		"I'm getting soaked in cum~",
 		"Aaaa I'm going to need a wash after this!~"
-	],
-	"strugglingBallsDigestImmune": [
-		"A-all this is doing is staining me white!",
-		"I-I'm not going to turn,\nall you're doing is making me more messy!",
-		{
-			"add": "struggling.location.predator.race.personality.mood.default"
-		}
 	],
 	"strugglingBallsDigest": [
 		"All this cum sloshing around me~",
@@ -629,55 +653,10 @@
 		"Mmmm... I'm just... so soaked with cum~",
 		"Aaaa~ I'm going to need much more than a wash after this!~"
 	],
-	"strugglingBallsTransformingImmune": [
-		"A-all this is doing is staining me white!",
-		"I-I'm not going to turn,\nall you're doing is making me more messy!",
-		{
-			"add": "struggling.location.predator.race.personality.mood.locationEffect"
-		}
-	],
-	"strugglingShaft": [
-		"Ahh~ your cock is squeezing tight around me~",
-		"Ohhh~ Your shaft is squeezing so hard~",
-		"This is so hot~",
-		"Aaaa I'm going to need a wash after this!~"
-	],
-	"strugglingShaftDigestImmune": ":strugglingBallsDigestImmune", // duplicated lines
-	"strugglingShaftDigest": [
-		"Ahh~ your cock is squeezing tight around me~",
-		"Ohhh~ Your shaft is squeezing so hard~",
-		"This is so hot~",
-		"I-I can feel the cum getting forced through me",
-		"FFff~ I'm getting soaked with cum!",
-		"All this cum is starting to stain me!",
-		"Ahhh~ I'm getting all mushy from all this throbbing and squeezing!",
-		"Aaaa I'm going to need much more than a wash after this!~"
-	],
-	"strugglingWomb": [
-		"Ahh~ Its so soft in here~",
-		"Ohhh~ Your womb is so snug and soft~",
-		"This is so hot~",
-		"Usually I put people in here,\nbut I'm not complaining~",
-		"Aaaa I'm going to need a wash after this!~"
-	],
-	"strugglingWombDigestImmune": [
-		"A-all this is doing is staining me white!",
-		"I-I'm never going to turn,\nall you're doing is making me more messy!",
-		"Wombs are supposed to be a safe place...",
-		{
-			"add": "struggling.location.predator.race.personality.mood.default"
-		}
-	],
-	"strugglingWombEggify": [
-		"Is this... an egg?",
-		"Are you making an egg around me?",
-		"I'm gonna be trapped in an egg!"
-	],
-	"strugglingWombEggifyImmune": [
-		{
-			"add": "struggling.location.predator.race.personality.mood.locationEffect"
-		}
-	],
+	"strugglingBallsHeal": ":missingDialogue",
+	"strugglingBallsCompression": ":missingDialogue",
+	"strugglingBallsEnergyDrain": ":missingDialogue",
+	"strugglingBallsEggify": ":missingDialogue",
 	"strugglingBreasts": [
 		"Ahh~ Its so soft in here~",
 		"Ohhh~ Your boobs are so soft~",
@@ -685,116 +664,112 @@
 		"Hehe, the milk in here tastes great~",
 		"Aaaa I'm going to need a wash after this!~"
 	],
-	"strugglingBreastsDigestImmune": ":strugglingBallsDigestImmune", // duplicated lines
 	"strugglingBreastsDigest": [
 		"All this milk is starting to stain me!",
 		"Ahhh~ I'm getting all mushy from all this squeezing!",
 		"Aaaa I'm going to need much more than a wash after this!~"
 	],
-	"vored.default.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!"
-	],
-	"vored.oralVore.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"Ah! plushies are supposed to be for snuggling!",
-		"Meep! I thought you were just going for a smooch!",
-		"Are you sure you want to eat me?\nI'm just a plushie!",
-		"I-I guess I can snuggle in your belly!",
-		"You're drooling on me~!\nI-I might need a wash after this!"
-	],
-	"vored.cockVore.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"<keysmash>",
-		"UwU",
-		"O-oh my usually people put their dicks in me!\nnot the other way around!",
-		"You're gonna get me cum soaked~!\nI-I might need a wash after this!"
-	],
-	"vored.unbirth.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"<keysmash>",
-		"UwU",
-		"W-wait I'm the one who's supposed to unbirth YOU!",
-		"O-oh my you're gonna snuggle ME like this~?",
-		"Your pussy is so wet~!\nI-I might need a wash after this!"
-	],
-	"vored.breastVore.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"<keysmash>",
-		"UwU",
-		"A-ah I thought you were just snuggling me against your boobs!",
-		"You're gonna soak me in milk~! I-I might need a wash after this!"
-	],
-	"escape.default.default.true.default.default.default": [
-		[
-			"Freedom!",
-			"I'm free!"
-		],
-		{
-			"check": {
-				"entryType": "oralVore",
-				"voreType": "analVore"
-			},
-			"add": [
-				"Hehe, looks like I took the full tour~"
-			]
-		},
-		{
-			"check": {
-				"entryType": "analVore",
-				"voreType": "oralVore"
-			},
-			"add": [
-				"Hehe, looks like I took the backwards full tour~"
-			]
-		}
-	],
-	"escape.default.default.false.default.default.default": [
-		[
-			"Ah, I'm out."
-		],
-		{
-			"check": {
-				"entryType": "oralVore",
-				"voreType": "analVore"
-			},
-			"add": [
-				"Hehe, you put me through the full tour~"
-			]
-		},
-		{
-			"check": {
-				"entryType": "analVore",
-				"voreType": "oralVore"
-			},
-			"add": [
-				"Hehe, you put me through the backwards full tour~"
-			]
-		}
-	],
+	"strugglingBreastsDigestImmune": ":strugglingBallsDigestImmune",
+	"strugglingBreastsHeal": ":missingDialogue",
+	"strugglingBreastsCompression": ":missingDialogue",
+	"strugglingBreastsEnergyDrain": ":missingDialogue",
+	"strugglingBreastsTransforming": ":missingDialogue",
+	"voredOralVoreWilling": ":missingDialogue",
+	"voredAnalVoreWilling": ":missingDialogue",
+	"voredTailVoreWilling": ":missingDialogue",
+	"voredAbsorbVoreWilling": ":missingDialogue",
+	"voredCockVoreWilling": ":missingDialogue",
+	"voredUnbirthWilling": ":missingDialogue",
+	"voredBreastVoreWilling": ":missingDialogue",
+	"voredOralVore": ":missingDialogue",
+	"voredAnalVore": ":missingDialogue",
+	"voredTailVore": ":missingDialogue",
+	"voredAbsorbVore": ":missingDialogue",
+	"voredCockVore": ":missingDialogue",
+	"voredUnbirth": ":missingDialogue",
+	"voredBreastVore": ":missingDialogue",
+	"escapeOralVoreStruggle": ":missingDialogue",
+	"escapeOralVoreStruggleDigest": ":missingDialogue",
+	"escapeOralVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeOralVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeOralVoreStruggleHeal": ":missingDialogue",
+	"escapeStruggleTransforming": ":missingDialogue",
+	"escapeStruggleTransformingImmune": ":missingDialogue",
+	"escapeStruggleEggify": ":missingDialogue",
+	"escapeStruggleEggifyImmune": ":missingDialogue",
+	"escapeAnalVoreStruggle": ":missingDialogue",
+	"escapeAnalVoreStruggleDigest": ":missingDialogue",
+	"escapeAnalVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeAnalVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeAnalVoreStruggleHeal": ":missingDialogue",
+	"escapeTailVoreStruggle": ":missingDialogue",
+	"escapeTailVoreStruggleDigest": ":missingDialogue",
+	"escapeTailVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeTailVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeTailVoreStruggleHeal": ":missingDialogue",
+	"escapeAbsorbVoreStruggle": ":missingDialogue",
+	"escapeAbsorbVoreStruggleDigest": ":missingDialogue",
+	"escapeAbsorbVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeAbsorbVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeAbsorbVoreStruggleHeal": ":missingDialogue",
+	"escapeCockVoreStruggle": ":missingDialogue",
+	"escapeCockVoreStruggleDigest": ":missingDialogue",
+	"escapeCockVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeCockVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeCockVoreStruggleHeal": ":missingDialogue",
+	"escapeUnbirthStruggle": ":missingDialogue",
+	"escapeUnbirthStruggleDigest": ":missingDialogue",
+	"escapeUnbirthStruggleDigestImmune": ":missingDialogue",
+	"escapeUnbirthStruggleSoftDigest": ":missingDialogue",
+	"escapeUnbirthStruggleHeal": ":missingDialogue",
+	"escapeBreastVoreStruggle": ":missingDialogue",
+	"escapeBreastVoreStruggleDigest": ":missingDialogue",
+	"escapeBreastVoreStruggleDigestImmune": ":missingDialogue",
+	"escapeBreastVoreStruggleSoftDigest": ":missingDialogue",
+	"escapeBreastVoreStruggleHeal": ":missingDialogue",
+	"escapeOralVore": ":missingDialogue",
+	"escapeOralVoreDigest": ":missingDialogue",
+	"escapeOralVoreDigestImmune": ":missingDialogue",
+	"escapeOralVoreSoftDigest": ":missingDialogue",
+	"escapeOralVoreHeal": ":missingDialogue",
+	"escapeTransforming": ":missingDialogue",
+	"escapeTransformingImmune": ":missingDialogue",
+	"escapeEggify": ":missingDialogue",
+	"escapeEggifyImmune": ":missingDialogue",
+	"escapeAnalVore": ":missingDialogue",
+	"escapeAnalVoreDigest": ":missingDialogue",
+	"escapeAnalVoreDigestImmune": ":missingDialogue",
+	"escapeAnalVoreSoftDigest": ":missingDialogue",
+	"escapeAnalVoreHeal": ":missingDialogue",
+	"escapeTailVore": ":missingDialogue",
+	"escapeTailVoreDigest": ":missingDialogue",
+	"escapeTailVoreDigestImmune": ":missingDialogue",
+	"escapeTailVoreSoftDigest": ":missingDialogue",
+	"escapeTailVoreHeal": ":missingDialogue",
+	"escapeAbsorbVore": ":missingDialogue",
+	"escapeAbsorbVoreDigest": ":missingDialogue",
+	"escapeAbsorbVoreDigestImmune": ":missingDialogue",
+	"escapeAbsorbVoreSoftDigest": ":missingDialogue",
+	"escapeAbsorbVoreHeal": ":missingDialogue",
+	"escapeCockVore": ":missingDialogue",
+	"escapeCockVoreDigest": ":missingDialogue",
+	"escapeCockVoreDigestImmune": ":missingDialogue",
+	"escapeCockVoreSoftDigest": ":missingDialogue",
+	"escapeCockVoreHeal": ":missingDialogue",
+	"escapeUnbirth": ":missingDialogue",
+	"escapeUnbirthDigest": ":missingDialogue",
+	"escapeUnbirthDigestImmune": ":missingDialogue",
+	"escapeUnbirthSoftDigest": ":missingDialogue",
+	"escapeUnbirthHeal": ":missingDialogue",
+	"escapeBreastVore": ":missingDialogue",
+	"escapeBreastVoreDigest": ":missingDialogue",
+	"escapeBreastVoreDigestImmune": ":missingDialogue",
+	"escapeBreastVoreSoftDigest": ":missingDialogue",
+	"escapeBreastVoreHeal": ":missingDialogue",
 	"infuseRequestBellyBefore": [
 		"Mm, you love my belly so much... you want to be a part of it?",
 		"You want to become my belly?",
 		"You want to become a part of me...?"
-	],
-	"infuseRequestBellyAfter": [
-		"Ahh... there you are... just my belly now",
-		"Just a part of me now",
-		"Try not to make me too hungry..."
 	],
 	"infuseRequestBellyBeforeLayer": [
 		{
@@ -805,6 +780,11 @@
 			"You want to join <infusedName>?"
 		]
 	],
+	"infuseRequestBellyAfter": [
+		"Ahh... there you are... just my belly now",
+		"Just a part of me now",
+		"Try not to make me too hungry..."
+	],
 	"infuseRequestBellyAfterLayer": [
 		{
 			"add": "infusePrey.location.race.personality.mood.request.doingVore"
@@ -813,14 +793,70 @@
 	"infuseUnpromptedBellyBefore": [
 		"I think... I need you in my belly... or... as my belly"
 	],
-	"infuseUnpromptedBellyAfter": ":infuseRequestBellyAfterLayer", // duplicated lines
 	"infuseUnpromptedBellyBeforeLayer": [
 		{
 			"add": "infusePrey.location.race.personality.mood.unprompted.doingVore"
 		}
 	],
-	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infusePreyBellyNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"infuseUnpromptedBellyAfter": ":infuseRequestBellyAfterLayer",
+	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
+	"infuseRequestTailBefore": ":missingDialogue",
+	"infuseRequestTailBeforeLayer": ":missingDialogue",
+	"infuseRequestTailAfter": ":missingDialogue",
+	"infuseRequestTailAfterLayer": ":missingDialogue",
+	"infuseUnpromptedTailBefore": ":missingDialogue",
+	"infuseUnpromptedTailBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedTailAfter": ":missingDialogue",
+	"infuseUnpromptedTailAfterLayer": ":missingDialogue",
+	"infuseRequestBreastsBefore": [
+		"You want to be my boobs?",
+		"Mm, can't wait to be jiggling on my chest can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"infuseRequestBreastsBeforeLayer": ":infuseRequestShaftBeforeLayer",
+	"infuseRequestShaftBeforeLayer": [
+		{
+			"add": "infusePrey.location.race.personality.mood.request.doingVore"
+		},
+		[
+			"You want to take <infusedName>'s place?",
+			"Hehe, want to send <infusedName> a layer deeper~?"
+		]
+	],
+	"infuseRequestBreastsAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already leaking milk~"
+	],
+	"infuseRequestBreastsAfterLayer": ":infuseRequestShaftAfterLayer",
+	"infuseRequestShaftAfterLayer": [
+		{
+			"add": "infusePrey.location.race.personality.mood.request.doingVore"
+		},
+		[
+			"And now <infusedName> is even more trapped~"
+		]
+	],
+	"infuseUnpromptedBreastsBefore": [
+		"Hehe, I think you belong as something else~",
+		"Mm~ I think it'd be fitting to have you jiggling on my chest~",
+		"I think I have a far better use for you~"
+	],
+	"infuseUnpromptedBreastsBeforeLayer": ":infuseUnpromptedBellyBeforeLayer",
+	"infuseUnpromptedBreastsAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, jiggling on my chest~",
+		"Mmm~ feels right to have you there~"
+	],
+	"infuseUnpromptedBreastsAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
+	"infuseRequestPussyBefore": ":missingDialogue",
+	"infuseRequestPussyBeforeLayer": ":missingDialogue",
+	"infuseRequestPussyAfter": ":missingDialogue",
+	"infuseRequestPussyAfterLayer": ":missingDialogue",
+	"infuseUnpromptedPussyBefore": ":missingDialogue",
+	"infuseUnpromptedPussyBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedPussyAfter": ":missingDialogue",
+	"infuseUnpromptedPussyAfterLayer": ":missingDialogue",
 	"infuseRequestShaftBefore": [
 		"You want to be my cock?",
 		"Mm, can't wait to be throbbing down there can you?",
@@ -831,100 +867,28 @@
 		"Hehe, excited to be part of me~?",
 		"Ah, you're already throbbing with excitment~"
 	],
-	"infuseRequestShaftBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
-		[
-			"You want to take <infusedName>'s place?",
-			"Hehe, want to send <infusedName> a layer deeper~?"
-		]
-	],
-	"infuseRequestShaftAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
-		[
-			"And now <infusedName> is even more trapped~"
-		]
-	],
 	"infuseUnpromptedShaftBefore": [
 		"Hehe, I think you belong as something else~",
 		"Mm~ I think it'd be fitting to have you throbbing between my legs~",
 		"You're always so twitchy... which would make you a good cock~",
 		"I think I have a far better use for you~"
 	],
+	"infuseUnpromptedShaftBeforeLayer": ":infuseUnpromptedBellyBeforeLayer",
 	"infuseUnpromptedShaftAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, throbbing between my legs~",
 		"Mmm~ feels right to have you there~"
 	],
-	"infuseUnpromptedShaftBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infuseUnpromptedShaftAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infusePreyShaftNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infuseRequestBreastsBefore": [
-		"You want to be my boobs?",
-		"Mm, can't wait to be jiggling on my chest can you?",
-		"You really want to give yourself entirely to me?"
-	],
-	"infuseRequestBreastsAfter": [
-		"Hehe, I can feel you leaking with excitment already~",
-		"Hehe, excited to be part of me~?",
-		"Ah, you're already leaking milk~"
-	],
-	"infuseRequestBreastsBeforeLayer": ":infuseRequestShaftBeforeLayer", // duplicated lines
-	"infuseRequestBreastsAfterLayer": ":infuseRequestShaftAfterLayer", // duplicated lines
-	"infuseUnpromptedBreastsBefore": [
-		"Hehe, I think you belong as something else~",
-		"Mm~ I think it'd be fitting to have you jiggling on my chest~",
-		"I think I have a far better use for you~"
-	],
-	"infuseUnpromptedBreastsAfter": [
-		"Ahh~ finally got you where you belong~",
-		"You belong right where you are, jiggling on my chest~",
-		"Mmm~ feels right to have you there~"
-	],
-	"infuseUnpromptedBreastsBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infuseUnpromptedBreastsAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infusePreyBreastsNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infuseRequestWombBefore": [
-		"You want to be my pussy?",
-		"Mm, can't wait to be soaking wet down there can you?",
-		"You really want to give yourself entirely to me?"
-	],
-	"infuseRequestWombAfter": [
-		"Hehe, I can feel you leaking with excitment already~",
-		"Hehe, excited to be part of me~?",
-		"Ah, you're already sopping wet with excitment~"
-	],
-	"infuseRequestWombBeforeLayer": ":infuseRequestShaftBeforeLayer", // duplicated lines
-	"infuseRequestWombAfterLayer": ":infuseRequestShaftAfterLayer", // duplicated lines
-	"infuseUnpromptedWombBefore": [
-		"Hehe, I think you belong as something else~",
-		"Mm~ I think it'd be fitting to have you dripping between my legs~",
-		"I think I have a far better use for you~"
-	],
-	"infuseUnpromptedWombAfter": [
-		"Ahh~ finally got you where you belong~",
-		"You belong right where you are, soaking between my legs~",
-		"Mmm~ feels right to have you there~"
-	],
-	"infuseUnpromptedWombBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infuseUnpromptedWombAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infusePreyWombNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infused.default.default.default.default.default": [
-		"<slowlove>",
-		"<love>",
-		[
-			[
-				"^#ffffff7f;(Just a part of your body~)",
-				"^#ffffff7f;(Just a part of <entityname>'s body~)"
-			],
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
-		]
-	],
+	"infuseUnpromptedShaftAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
+	"infuseRequestBallsBefore": ":missingDialogue",
+	"infuseRequestBallsBeforeLayer": ":missingDialogue",
+	"infuseRequestBallsAfter": ":missingDialogue",
+	"infuseRequestBallsAfterLayer": ":missingDialogue",
+	"infuseUnpromptedBallsBefore": ":missingDialogue",
+	"infuseUnpromptedBallsBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedBallsAfter": ":missingDialogue",
+	"infuseUnpromptedBallsAfterLayer": ":missingDialogue",
+	"infused": ":missingDialogue",
 	"infusedBelly": [
 		"<slowlove>",
 		"<love>",
@@ -960,19 +924,8 @@
 			"<love>^#ffffff7f;(<keysmash>)"
 		]
 	],
-	"infusedWomb": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
-			"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
-			"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
-		]
-	],
+	"infusedTail": ":missingDialogue",
+	"infusedPussy": ":missingDialogue",
 	"infusedBreasts": [
 		"<slowlove>",
 		"<love>",
@@ -1011,10 +964,7 @@
 			"<love>^#ffffff7f;(<keysmash>)"
 		]
 	],
-	"infusedTease.default.default.default.default.default": [
-		"Just a part of my body~",
-		"Just a part of my body <infusedName>~" // very very placeholder
-	],
+	"teaseInfused": ":missingDialogue",
 	"teaseInfusedBelly": [
 		{
 			"check": {
@@ -1028,24 +978,8 @@
 		"Hehe, does my belly want something?",
 		"Hehe, do you want something <infusedName>?"
 	],
-	"teaseInfusedWomb": [
-		[
-			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
-			"<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"
-		],
-		[
-			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
-			"<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"
-		],
-		[
-			"<slowlove>Hehe... dripping wet, right where you belong~",
-			"Hehe... dripping wet, right where you belong <infusedName>~"
-		],
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <infusedName>"
-		]
-	],
+	"teaseInfusedTail": ":missingDialogue",
+	"teaseInfusedPussy": ":missingDialogue",
 	"teaseInfusedBreasts": [
 		[
 			"<slowlove>Mmm, you make them so much more sensitive~",
@@ -1149,22 +1083,6 @@
 			"<love>You're far more useful like this <infusedName>"
 		]
 	],
-	"rewardNotifyMoney": [
-		"This is nice, I think I'll give you some of my spare change.",
-		"I'll give you a few pixels for giving me a good time."
-	],
-	"rewardNotifyLowValueQuestRewards": [
-		"Hmm, I think you deserve something after this.",
-		"I think I'll give you some sort of small gift."
-	],
-	"rewardNotifyMediumValueQuestRewards": [
-		"Maybe I've got something a bit better for you this time.",
-		"I've got another gift for you after this."
-	],
-	"rewardNotifyHighValueQuestRewards": [
-		"I think you'll really like what I've gotten you.",
-		"My next gift will be really good heh."
-	],
 	"shrinking": [
 		"Why's everything getting bigger?",
 		"Ah! I'm shrinking!"
@@ -1209,6 +1127,436 @@
 			"You're stomping on me!",
 			"I'm getting smushed!",
 			"*wheeze*"
+		]
+	],
+	// Unused Dialogue
+	"converse": [
+		"So what did you want to talk about?",
+		"Did you want to ask me something?",
+		"Wanna talk?"
+	],
+	"talkAboutSelf": [
+		[
+			"So what did you want to know about me?",
+			"Curious about me aren't you~",
+			"You know you could learn by just having me do things to you~"
+		],
+		{
+			"check": {
+				"introduced": true
+			},
+			"add": [
+				"So what did you want to know about me <entityname>?",
+				"Curious about me aren't you <entityname>~",
+				"You know you could learn by just having me do things to you <entityname>~"
+			]
+		}
+	],
+	"tellMeAStory": [
+		"I've got some fun stories for ya~",
+		"Hehe, sure I can tell ya a story~"
+	],
+	"unbirthStories.sbqLoki_LokiVulpix.creation": [
+		"So, back when Loki first made me, she didn't actually tell me what the zipper was for",
+		"But I knew perfectly well, I could just feel my purpose imbued into my very being hehe~",
+		"So I had to wait for my moment, all through the day as she showed me around the house, getting me familiar with the place..."
+	],
+	"unbirthStories.sbqLoki_LokiVulpix.creation.continue": [
+		"What are y'all talking about?"
+	],
+	"unbirthStories.sbqLoki_LokiVulpix.creation.continue.continue": [
+		"Oh nothing, just the day you made me~"
+	],
+	"unbirthStories.sbqLoki_LokiVulpix.creation.continue.continue.continue": [
+		" ...!",
+		"M-maybe I can tell you that story myself later...",
+		"Fluff for brains here might get the story wrong or something."
+	],
+	"unbirthStories.sbqLoki_LokiVulpix.creation.fail": [
+		"But I didn't have the right moment yet, I just listened to her being cute while resisting the urge to stuff her up inside me right then and there~",
+		"And then, when we finally went to bed, and she snuggled right up against me, the fox's guard down entirely, I made my move~",
+		"I reached down and quietly unzipped myself, and then made sure I had her firmly in my grasp... before shoving her down inside headfirst!",
+		"She squirmed and squirmed and it felt so good, fighting back just a little, we both knew she could have easily stopped me, but she wouldn't~",
+		"Stuffed that fox all the way inside and zipped myself up tight, trapping her, not a single consequence for touching her tails~",
+		"And I had her nice and snug and tucked away in my womb, trapped inside me, she would never admit it, but she loved it~"
+	],
+	"unbirthStories.sbqJaych_Jaych.meeting": [
+		"So, theres this ferret named Jaych, little friend of mine, a grassy noodly creature.",
+		"And he just absolutely loves being my little womb pet~",
+		"Back when I first met him, I was part of this little haunted house type thing, where people would wander inside and we would pick them off one by one~",
+		"I would turn them into plushies for my collection hehe, would turn them back afterwards if they wanted, but anyway...",
+		"He came in with a group, and when they split up to search the house, he was left alone in a bedroom with a totally inanimate plushie~",
+		"And while he was distracted by a yell from someone else, I snuck right up over him, and then shoved my rear down right on top!",
+		"And oooooh did it feel good to have such a wiggly noodly creature getting squeezed in my pussy~ I even fingered myself a bit before I zipped myself up to trap him inside~",
+		"And he was just so flustered being inside there, just a wiggly toy for me as the soft plush fabric squeezed tightly around him~",
+		"He loved it even more when I told him I wasn't letting him out~ He kept rubbing his against my closed zipper so he knew he was trapped~\nI think I kept him in there for a week~"
+	],
+	"pet.normal": [
+		"Purrr",
+		"UwU"
+	],
+	"pet.many": [
+		{
+			"add": "pet.normal"
+		}
+	],
+	"pet.excessive": ":pet.many", // duplicated lines
+	"pet.problem": [
+		"<dontSpeak>* It's possible that you may have a problem."
+	],
+	"cockTFme": [
+		"Well... I could transform you into a dildo, and then I could attach that to myself. Or you could get someone's essence I could use.",
+		"So what do you say, do you want to become this plushie's dick~?"
+	],
+	"defaultOralVoreNotFeelingIt": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
+	],
+	"defaultOralVoreOtherFull": [
+		"I might pop a stitch if I try to fill myself any more!",
+		"My fabric is getting stretched pretty thin!",
+		"My body has some great napping spots, but already at full occupancy~",
+		"You can hug me from the outside if you want~",
+		"You just can't resist the call of my soft plushie body, can you~",
+		"Maybe if you squish your paws on my belly enough I might give you a turn somewhere~",
+		"How about we just snuggle with you out here for now~",
+		"Perhaps we can think of something else to do hmmm~?"
+	],
+	"defaultOralVoreTooBig": [
+		"I don't want to tear myself trying to force you in.",
+		"You're a bit too large, I might pop a seam.",
+		"You should try and make yourself smaller~",
+		"You're a bit too big to stuff into this plushie."
+	],
+	"defaultUnbirthNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"defaultUnbirthTooBig": ":defaultOralVoreTooBig", // duplicated lines
+	"defaultCockVoreNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"defaultCockVoreTooBig": [
+		"I don't want to break <infusedName> trying to force you in.",
+		"You're a bit too large, I might break it.",
+		"You should try and make yourself smaller~",
+		"You're a bit too big to stuff into my dildo."
+	],
+	"vore.cockVore.default.default.default.needsInfusion": [
+		"I don't have one of those normally, I'd need a *special* kind of dildo~",
+		"Mmm~ I can't quite do that to you at the moment, but I could do something else~"
+	],
+	"bellyDefaultStruggle": [
+		"Snuggle my belly as much as you want~",
+		"Enjoying my soft plushie belly~?",
+		"I bet you'll drift off and take a nap soon enough~",
+		"Mmm~ I love your little squirms~",
+		"I bet you just love the sway of my belly as I walk~",
+		"Its nice and comfortable in there right~?",
+		"My belly was designed to be nice and soft to take naps in~",
+		"You should consider staying in there for a while~",
+		"I bet you just love squishing your hands into the soft plush walls of my belly~",
+		"Mmmm~ knead your hands alllll over in there for me~",
+		"I love snuggles, inside and out~",
+		"Mmmm, just giving you a full body hug~",
+		"You're trapped inside a plushie's belly~",
+		"You're just loving the warmth of my belly aren't you~",
+		"These are some of my favorite snuggles~",
+		"Hehe, stuck inside a plushie~"
+	],
+	"bellyHealStruggle": [
+		[
+			"You should start feeling a lot better after this rest~",
+			"You should stay nice and snug in my belly until you feel better~",
+			"Let me patch you up~",
+			"A rest in my belly should soothe all your troubles away~",
+			"You're nice and safe tucked away in my belly~",
+			"My plush belly should keep you nice and safe~",
+			"You'll be well protected in my belly~",
+			"All of my plush padding should keep you safe~",
+			"You should stay for a while,\nI'll keep you safe tucked away inside me~"
+		],
+		{
+			"add": "struggle.location.race.personality.mood.default"
+		}
+	],
+	"bellyTransformedStruggle": [
+		[
+			"Hehe, you're just a little eevee plush now~",
+			"Hehe, I can feel your new little plushie paws pressing out against me~"
+		],
+		{
+			"add": "struggle.location.race.personality.mood.locationEffect"
+		}
+	],
+	"bellyTransformingStruggle": [
+		[
+			"Can you feel yourself getting softer~?",
+			"I think you'll make a cute vee plushie~",
+			"I think I can feel you getting more snuggly~",
+			"Hehe, you're getting fluffier in there aren't you~",
+			"I bet you've got a little tag on your butt by now~"
+		],
+		{
+			"add": "struggle.location.race.personality.mood.locationEffect"
+		}
+	],
+	"bellyTransformingStruggleImmune": [
+		[
+			"A real shame you're resisting,\nI think you'd make a cute plushie~",
+			"Guess I won't be having a new vee plush to snuggle..."
+		],
+		{
+			"add": "struggle.location.race.personality.mood.locationEffect"
+		}
+	],
+	"wombEggedStruggle": [
+		"Now you're trapped in an egg"
+	],
+	"wombEggifyStruggle": [
+		[
+			"Hehe, you're gonna be like a toy in a prize egg soon",
+			"Once this egg is done, you'll be like a hidden prize~",
+			{
+				"check": {
+					"wombTF": true
+				},
+				"add": [
+					"Hehe, you'll just be a plushie toy in a prize egg when I'm done~"
+				]
+			}
+		],
+		{
+			"add": "struggle.location.race.personality.mood.locationEffect"
+		}
+	],
+	"wombEggifyStruggleImmune": [
+		[
+			"Aww, I really wanted to put you in a prize egg...",
+			"It would have been such fun to pop out a prize egg."
+		],
+		{
+			"add": "struggle.location.race.personality.mood.locationEffect"
+		}
+	],
+	"letoutOralVoreStruggleTransformed": [
+		"Hehe, look at you now,\na cute vee plush~",
+		"Hehe, now you're a plushie like me~"
+	],
+	"letoutOralVoreStruggleTransformingImmune": [
+		"Didn't want to become a plushie?",
+		"Oh darn, I'll have to start all over again."
+	],
+	"letoutOralVoreStruggleTransforming": [
+		"I still think you'd have made a cute plushie",
+		{
+			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
+		}
+	],
+	"letoutUnbirthStruggleEgged": [
+		"Hah, egg"
+	],
+	"letoutUnbirthStruggleEggifyImmune": [
+		"Don't want to be in a prize egg?",
+		"I thought you'd look cute in a prize egg~"
+	],
+	"letoutUnbirthStruggleEggify": [
+		{
+			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
+		}
+	],
+	"struggling.default.default.default.default.default.default": [
+		[
+			"I'm stuck here aren't I?",
+			"Is there even a way out?",
+			"Trapped..."
+		]
+	],
+	"strugglingBellyTransformingImmune": [
+		"I can tell what you're trying to do, it won't work on me.",
+		"This sort of stuff doesn't work on me.",
+		{
+			"add": "struggling.location.predator.race.personality.mood.locationEffect"
+		}
+	],
+	"strugglingBallsTransformingImmune": [
+		"A-all this is doing is staining me white!",
+		"I-I'm not going to turn,\nall you're doing is making me more messy!",
+		{
+			"add": "struggling.location.predator.race.personality.mood.locationEffect"
+		}
+	],
+	"strugglingWombEggifyImmune": [
+		{
+			"add": "struggling.location.predator.race.personality.mood.locationEffect"
+		}
+	],
+	"vored.default.default.default.default.default": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!"
+	],
+	"vored.oralVore.default.default.default.default": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"Ah! plushies are supposed to be for snuggling!",
+		"Meep! I thought you were just going for a smooch!",
+		"Are you sure you want to eat me?\nI'm just a plushie!",
+		"I-I guess I can snuggle in your belly!",
+		"You're drooling on me~!\nI-I might need a wash after this!"
+	],
+	"vored.cockVore.default.default.default.default": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"<keysmash>",
+		"UwU",
+		"O-oh my usually people put their dicks in me!\nnot the other way around!",
+		"You're gonna get me cum soaked~!\nI-I might need a wash after this!"
+	],
+	"vored.unbirth.default.default.default.default": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"<keysmash>",
+		"UwU",
+		"W-wait I'm the one who's supposed to unbirth YOU!",
+		"O-oh my you're gonna snuggle ME like this~?",
+		"Your pussy is so wet~!\nI-I might need a wash after this!"
+	],
+	"vored.breastVore.default.default.default.default": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"<keysmash>",
+		"UwU",
+		"A-ah I thought you were just snuggling me against your boobs!",
+		"You're gonna soak me in milk~! I-I might need a wash after this!"
+	],
+	"escape.default.default.true.default.default.default": [
+		[
+			"Freedom!",
+			"I'm free!"
+		],
+		{
+			"check": {
+				"entryType": "oralVore",
+				"voreType": "analVore"
+			},
+			"add": [
+				"Hehe, looks like I took the full tour~"
+			]
+		},
+		{
+			"check": {
+				"entryType": "analVore",
+				"voreType": "oralVore"
+			},
+			"add": [
+				"Hehe, looks like I took the backwards full tour~"
+			]
+		}
+	],
+	"escape.default.default.false.default.default.default": [
+		[
+			"Ah, I'm out."
+		],
+		{
+			"check": {
+				"entryType": "oralVore",
+				"voreType": "analVore"
+			},
+			"add": [
+				"Hehe, you put me through the full tour~"
+			]
+		},
+		{
+			"check": {
+				"entryType": "analVore",
+				"voreType": "oralVore"
+			},
+			"add": [
+				"Hehe, you put me through the backwards full tour~"
+			]
+		}
+	],
+	"infusePreyBellyNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"infusePreyShaftNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"infusePreyBreastsNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"infuseRequestWombBefore": [
+		"You want to be my pussy?",
+		"Mm, can't wait to be soaking wet down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"infuseRequestWombAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already sopping wet with excitment~"
+	],
+	"infuseRequestWombBeforeLayer": ":infuseRequestShaftBeforeLayer", // duplicated lines
+	"infuseRequestWombAfterLayer": ":infuseRequestShaftAfterLayer", // duplicated lines
+	"infuseUnpromptedWombBefore": [
+		"Hehe, I think you belong as something else~",
+		"Mm~ I think it'd be fitting to have you dripping between my legs~",
+		"I think I have a far better use for you~"
+	],
+	"infuseUnpromptedWombAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, soaking between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"infuseUnpromptedWombBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
+	"infuseUnpromptedWombAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
+	"infusePreyWombNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"infused.default.default.default.default.default": [
+		"<slowlove>",
+		"<love>",
+		[
+			[
+				"^#ffffff7f;(Just a part of your body~)",
+				"^#ffffff7f;(Just a part of <entityname>'s body~)"
+			],
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedWomb": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
+			"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
+			"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
+	"infusedTease.default.default.default.default.default": [
+		"Just a part of my body~",
+		"Just a part of my body <infusedName>~" // very very placeholder
+	],
+	"teaseInfusedWomb": [
+		[
+			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
+			"<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"
+		],
+		[
+			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
+			"<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"
+		],
+		[
+			"<slowlove>Hehe... dripping wet, right where you belong~",
+			"Hehe... dripping wet, right where you belong <infusedName>~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
 		]
 	]
 }
