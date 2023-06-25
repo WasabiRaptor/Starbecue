@@ -531,9 +531,24 @@
 		"You just want to see me stretched out too much don't you~?",
 		"If you were a bit smaller, I'd snap you up in an instant~"
 	],
-	"defaultTooSmall": ":missingDialogue",
-	"shyTooSmall": ":missingDialogue",
-	"flirtyTooSmall": ":missingDialogue",
+	"defaultTooSmall": [
+		"Sorry but I need something a bit bigger then you",
+		"I don't think I'd really feel you at that size",
+		"You're too short for this ride buddy", //blue here, TFW your friend shrinks you before going to a carnavel and forgets to undo it, and you can't get on a ride because you're toddler sized
+		"Maybe if you where just a little bigger..."
+	],
+	"shyTooSmall": [
+		"I um... sorry but I would prefer if you where b-bigger...",
+		"I might not mind... if you had a b-bigger size...",
+		"You might get lost in m-me if I let you in...",
+		"Too small... just a bit... too small..."
+	],
+	"flirtyTooSmall": [
+		"Oh you sweet little thing, you're just too little of a sweet thing~",
+		"I like to feel my playthings in me, sorry but you're too small for me~",
+		"If you had some more size to you, I'd snatch you right up~ but...",
+		"I can't play with a toy this small honey, sorry!"
+	],
 	"defaultOralVoreFull": [
 		"I'm a bit too full...",
 		"My belly can't stretch any further...",
@@ -576,9 +591,24 @@
 		"Gotta gurgle up some space first~",
 		"Heh, you can't wait to be melting down inside me~"
 	],
-	"compressionOralVoreFull": ":missingDialogue",
-	"shyCompressionOralVoreFull": ":missingDialogue",
-	"flirtyCompressionOralVoreFull": ":missingDialogue",
+	"compressionOralVoreFull": [
+		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
+		"I'll swallow you down after my current snack gets a bit more compact",
+		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
+		"Just give me a sec to squish my friend here down, and then you'll be next!"
+	],
+	"shyCompressionOralVoreFull": [
+		"I um... need a moment to make room, it won't be long i t-think...",
+		"Let my belly c-compress some more... then I could f-fit you in...",
+		"Don't worry uh... my p-prey is getting more snug... you will fit soon...",
+		"C-can you come back later?... after my belly c-contents are s-squeezed down?"
+	],
+	"flirtyCompressionOralVoreFull": [
+		"You want me to eat ya? maybe after my plaything here is a more cuter size~",
+		"I'm working my toy here into my toy chest, don't have room for more toys yet~",
+		"My snack is still getting squished down, give me some time and I'll squish you too cutie~",
+		"I'm making my prey travel sized right now, once I'm done I'll see to you cutie~"
+	],
 	"defaultFull": [
 		"I'm a bit too full...",
 		"My body can't stretch any further...",
@@ -710,23 +740,295 @@
 		"You wouldnt mind if I just let myself in, would you?",
 		"Could you do me a favor and bend over?"
 	],
-	"shySelfRequestAnalVore": ":missingDialogue",
-	"flirtySelfRequestAnalVore": ":missingDialogue",
-	"defaultSelfRequestAnalVoreYes": ":missingDialogue",
-	"shySelfRequestAnalVoreYes": ":missingDialogue",
-	"flirtySelfRequestAnalVoreYes": ":missingDialogue",
-	"defaultSelfRequestAnalVoreYesAfter": ":missingDialogue",
-	"shySelfRequestAnalVoreYesAfter": ":missingDialogue",
-	"flirtySelfRequestAnalVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestAnalVoreNo": ":missingDialogue",
-	"shySelfRequestAnalVoreNo": ":missingDialogue",
-	"flirtySelfRequestAnalVoreNo": ":missingDialogue",
-	"defaultSelfRequestAnalVoreNoYes": ":missingDialogue",
-	"shySelfRequestAnalVoreNoYes": ":missingDialogue",
-	"flirtySelfRequestAnalVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestAnalVoreNoYesAfter": ":missingDialogue",
-	"shySelfRequestAnalVoreNoYesAfter": ":missingDialogue",
-	"flirtySelfRequestAnalVoreNoYesAfter": ":missingDialogue",
+	"shySelfRequestAnalVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I want uh... for you to go up my b=butt..."
+			],
+			[ // 25% - 50%
+				"Is it alright... if you would go up my b-bottom..."
+			],
+			[ // 50% - 75%
+				"I really would like it... if you'd let me s-slip you... into my r-rear..."
+			],
+			[ // 75% - 100%
+				"I just... very much want you in my r-rear... will you go... p-please?..."
+			]
+		]
+	},
+	"flirtySelfRequestAnalVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hey cutie, want a trip up my lovely butt?~"
+			],
+			[ // 25% - 50%
+				"I think I should shove your cute butt into mine, want me to?~"
+			],
+			[ // 50% - 75%
+				"You look like just the toy I need to up up my rear, may I have you?~"
+			],
+			[ // 75% - 100%
+				"I just need something squirmy in my ass, would you volunteer?~"
+			]
+		]
+	},
+	"defaultSelfRequestAnalVoreYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"You'll come in? great! let me just bend over for you."
+			],
+			[ // 25% - 50%
+				"Glad you saw things my way, now come into my back door."
+			],
+			[ // 50% - 75%
+				"Yes! this is going to feel good with you wiggling in my booty"
+			],
+			[ // 75% - 100%
+				"Thank you! I appreciate it really, now let's squeeze you in."
+			]
+		]
+	},
+	"shySelfRequestAnalVoreYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Y-you'll go in!?... thank you..."
+			],
+			[ // 25% - 50%
+				"Y-you will?... wonderful, just um... let me b-bend over..."
+			],
+			[ // 50% - 75%
+				"Oh thank you... I was worried you'd think I'm w-weird... now in my butt p-please..."
+			],
+			[ // 75% - 100%
+				"Whew... I don't know what I'd do without you... I hope my r-rear is comfy..."
+			]
+		]
+	},
+	"flirtySelfRequestAnalVoreYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Why am I not surprised you'd agree, in you go butt plug!~"
+			],
+			[ // 25% - 50%
+				"Eager to be my toy huh? fine by me, now get in my butt baby~"
+			],
+			[ // 50% - 75%
+				"Of course you'd agree, you're such a nice butt toy, come in cutie~"
+			],
+			[ // 75% - 100%
+				"Glad you see things my way honey, go ahead and slip in my lovely ass~"
+			]
+		]
+	},
+	"defaultSelfRequestAnalVoreYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Oh! you fit like a glove... up my butt!"
+			],
+			[ // 25% - 50%
+				"Feels good having you up my rear."
+			],
+			[ // 50% - 75%
+				"There we go, squirm as you like butt buddy."
+			],
+			[ // 75% - 100%
+				"heh, you wiggled in there nicely, enjoy the stay friend."
+			]
+		]
+	},
+	"shySelfRequestAnalVoreYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ah!... you're really... inside my r-rear... and so willingly..."
+			],
+			[ // 25% - 50%
+				"You feel nice... inside my b-bottom... thanks for agreeing..."
+			],
+			[ // 50% - 75%
+				"I'm glad... you let me p-push you... into my b-butt..."
+			],
+			[ // 75% - 100%
+				"I really... needed this... thanks for helping me out back t-there..."
+			]
+		]
+	},
+	"flirtySelfRequestAnalVoreYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ah yes, you fit nicely in my rear my toy~"
+			],
+			[ // 25% - 50%
+				"Oh yes, Getting comfortable in my butt cutie?~"
+			],
+			[ // 50% - 75%
+				"You must be liking my bottom to be so willing to go in it, I like it too~"
+			],
+			[ // 75% - 100%
+				"Ahh... This is just the thing I needed, a cutie letting me shove them in my ass~"
+			]
+		]
+	},
+	"defaultSelfRequestAnalVoreNo": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Oh well, maybe another time then."
+			],
+			[ // 25% - 50%
+				"I suppose my butt must do without you for now."
+			],
+			[ // 50% - 75%
+				"Gosh darn it, I was hoping you'd scratch my itch down there."
+			],
+			[ // 75% - 100%
+				"Really? well now I'm going to have to find someone else..."
+			]
+		]
+	},
+	"shySelfRequestAnalVoreNo": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Oh... I guess I should have expected that..."
+			],
+			[ // 25% - 50%
+				"A-are you sure?... alright then... maybe you'll go in another time..."
+			],
+			[ // 50% - 75%
+				"D-darn it... I was hoping you wouldn't say no... my b-bottom is lonely..."
+			],
+			[ // 75% - 100%
+				"B-but... oh fine then... I guess I'll have to let my rear be alone then..."
+			]
+		]
+	},
+	"flirtySelfRequestAnalVoreNo": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Not in the mood for butt stuff? that's alright cutie~"
+			],
+			[ // 25% - 50%
+				"Oh well, another time then toy, my rear will have to do without~"
+			],
+			[ // 50% - 75%
+				"Aww! what am I gonna do without my favorite butt toy?~ shoot..."
+			],
+			[ // 75% - 100%
+				"Really? no? even though I'm so needy right now? well you can't say no next time then~"
+			]
+		]
+	},
+	"defaultSelfRequestAnalVoreNoYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I think you meant yes, so I'm just going to put you in back there anyway."
+			],
+			[ // 25% - 50%
+				"I didn't expect you to say no, and I bet you don't expect me to shove you in my butt anyway."
+			],
+			[ // 50% - 75%
+				"Listen here, I need a nice butt plug and you're the closest to me, so you're going in!"
+			],
+			[ // 75% - 100%
+				"Really? that's a shame, since you're going up my rear regardless."
+			]
+		]
+	},
+	"shySelfRequestAnalVoreNoYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I heard your no... but I just can't accept that... I'm sorry!..."
+			],
+			[ // 25% - 50%
+				"I get why you'd be h-hesitant... but maybe you just need c-convincing..."
+			],
+			[ // 50% - 75%
+				"I understand... but I need you in my b-butt... so sorry for t-this!..."
+			],
+			[ // 75% - 100%
+				"B-but... my b-butt needs you... maybe if I s-shove you in You'd see..."
+			]
+		]
+	},
+	"flirtySelfRequestAnalVoreNoYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Here's the funny thing about that cutie, you're going in anyway~"
+			],
+			[ // 25% - 50%
+				"You don't wanna go up my rear? too bad! toys don't get a choice~"
+			],
+			[ // 50% - 75%
+				"Sorry cutie, but I'm looking for something to go up in my butt and it's you~"
+			],
+			[ // 75% - 100%
+				"You said no? let me put you in your place then, in my ass~"
+			]
+		]
+	},
+	"defaultSelfRequestAnalVoreNoYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I think my choice was better then yours here, butt buddy."
+			],
+			[ // 25% - 50%
+				"Seems you fit just right in my rear despite your disapproval."
+			],
+			[ // 50% - 75%
+				"Yeah, you where just what I needed back there, maybe you'll say yes to this next time."
+			],
+			[ // 75% - 100%
+				"I can't believe you'd say no to this! you feel so good back there."
+			]
+		]
+	},
+	"shySelfRequestAnalVoreNoYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"S-sorry again!... but you feel great back t-there... at least..."
+			],
+			[ // 25% - 50%
+				"N-now I got you snug inside there... it's not so bad right?..."
+			],
+			[ // 50% - 75%
+				"I'll only keep you in my r-rear for a short time... m-maybe longer..."
+			],
+			[ // 75% - 100%
+				"Y-you feel so nice in my butt... please don't be too upset!...."
+			]
+		]
+	},
+	"flirtySelfRequestAnalVoreNoYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"What a nice butt plug you make, wouldn't you agree now?~"
+			],
+			[ // 25% - 50%
+				"I don't feel bad for shoving you up my rear, not when you feel so good in it~"
+			],
+			[ // 50% - 75%
+				"Ah, I think shoving you in my butt is fair punishment for trying to deny me~"
+			],
+			[ // 75% - 100%
+				"Yup, you where what I needed there after all, enjoy your new home in my ass cutie~"
+			]
+		]
+	},
 	"defaultAnalVoreFull": [
 		"Sorry, hun. All full back here!",
 		"Afraid I couldnt fit another in me!"
@@ -735,15 +1037,42 @@
 		"Wait your turn! Ill get to you soon.",
 		"Just need to make some room for ya. Do you mind waiting a bit?"
 	],
-	"compressionAnalVoreFull": ":missingDialogue",
-	"shyCompressionAnalVoreFull": ":missingDialogue",
-	"flirtyCompressionAnalVoreFull": ":missingDialogue",
-	"defaultRequestTailVoreBefore": ":missingDialogue",
-	"shyRequestTailVoreBefore": ":missingDialogue",
-	"flirtyRequestTailVoreBefore": ":missingDialogue",
-	"defaultRequestTailVoreAfter": ":missingDialogue",
-	"shyRequestTailVoreAfter": ":missingDialogue",
-	"flirtyRequestTailVoreAfter": ":missingDialogue",
+	"compressionAnalVoreFull": [
+		"I got my back door busy with squeezing a guest down, come back later maybe.",
+		"Right now I'm kinda compacting my current butt buddy, not much room for you right now."
+	],
+	"shyCompressionAnalVoreFull": [
+		"S-sorry... my b-bottom is squeezing down it's guest right now... come back later?...",
+		"Give my b-butt some time... It's c-compacting someone at the moment..."
+	],
+	"flirtyCompressionAnalVoreFull": [
+		"Give me a bit honey, my tush is squeezing down it's toy at the moment~",
+		"I'm full down there cutie, but my rear is making it's toy a bit smaller so come back soon~"
+	],
+	"defaultRequestTailVoreBefore": [
+		"You want in my tail? well okay then.",
+		"Eager to slide down my tail now huh?"
+	],
+	"shyRequestTailVoreBefore": [
+		"Y-you want to... get in my t-tail?... my tail...",
+		"R-really?... you just want to slide right in... my t-tail?..."
+	],
+	"flirtyRequestTailVoreBefore": [
+		"I thought you where eying my lovely tail cutie~",
+		"So bold for a plaything like you to ask to go in my tail like this~"
+	],
+	"defaultRequestTailVoreAfter": [
+		"You feel great in my tail, get comfy.",
+		"You got what you wanted, is my tail all that you wished for?"
+	],
+	"shyRequestTailVoreAfter": [
+		"W-well this is nice... get cozy in there... I guess...",
+		"J-just let me know... when you want out... p-please..."
+	],
+	"flirtyRequestTailVoreAfter": [
+		"Well in you go scrumptious, you'll make a fine treat for it~",
+		"Make sure to wiggle like crazy in there, and I'll wag you around~"
+	],
 	"defaultUnpromptedTailVoreBefore": [
 		"My tail would like to say hi! let me introduce you head first!",
 		"I've spotted the perfect prey for my tail, now come here.",
@@ -774,29 +1103,332 @@
 		"Heh, even a tail finds you as irresistible prey, meant to be engulfed by it~",
 		"Oh how pleasant it is to have something in my tail, I'm glad it went after you~"
 	],
-	"defaultSelfRequestTailVore": ":missingDialogue",
-	"shySelfRequestTailVore": ":missingDialogue",
-	"flirtySelfRequestTailVore": ":missingDialogue",
-	"defaultSelfRequestTailVoreYes": ":missingDialogue",
-	"shySelfRequestTailVoreYes": ":missingDialogue",
-	"flirtySelfRequestTailVoreYes": ":missingDialogue",
-	"defaultSelfRequestTailVoreYesAfter": ":missingDialogue",
-	"shySelfRequestTailVoreYesAfter": ":missingDialogue",
-	"flirtySelfRequestTailVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestTailVoreNo": ":missingDialogue",
-	"shySelfRequestTailVoreNo": ":missingDialogue",
-	"flirtySelfRequestTailVoreNo": ":missingDialogue",
-	"defaultSelfRequestTailVoreNoYes": ":missingDialogue",
-	"shySelfRequestTailVoreNoYes": ":missingDialogue",
-	"flirtySelfRequestTailVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestTailVoreNoYesAfter": ":missingDialogue",
-	"shySelfRequestTailVoreNoYesAfter": ":missingDialogue",
-	"flirtySelfRequestTailVoreNoYesAfter": ":missingDialogue",
-	"defaultTailVoreFull": ":missingDialogue",
-	"digestTailVoreFull": ":missingDialogue",
-	"compressionTailVoreFull": ":missingDialogue",
-	"shyCompressionTailVoreFull": ":missingDialogue",
-	"flirtyCompressionTailVoreFull": ":missingDialogue",
+	"defaultSelfRequestTailVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I could really use something in my tail, and you'd be perfect, may I have you??"
+			],
+			[ // 25% - 50%
+				"My tail is feeling a bit empty, wanna help with that?"
+			],
+			[ // 50% - 75%
+				"Want to fill out my tail bud?"
+			],
+			[ // 75% - 100%
+				"Hey there, want to take a trip into my tail?"
+			]
+		]
+	},
+	"shySelfRequestTailVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm so hungry... would you please... get in my t-tail?..."
+			],
+			[ // 25% - 50%
+				"I'm needing a s-snack... for my t-tail... could you help me?..."
+			],
+			[ // 50% - 75%
+				"Would you mind... if I slid you... into my t-tail?..."
+			],
+			[ // 75% - 100%
+				"H-hey uh... can I eat you... with my t-tail?..."
+			]
+		]
+	},
+	"flirtySelfRequestTailVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I just gotta get you in my tail, won't you just let me have all you cutie?~"
+			],
+			[ // 25% - 50%
+				"I need a cute snack for my cute tail, you'd be perfect, wanna be mine?~"
+			],
+			[ // 50% - 75%
+				"I was just looking for you, want to go into my lovely tail cutie?~"
+			],
+			[ // 75% - 100%
+				"Hi cutie, can I get you going down my lovely tail today?~"
+			]
+		]
+	},
+	"defaultSelfRequestTailVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Sweet, let's not waist time and get you inside it, now!"
+			],
+			[ // 25% - 50%
+				"Great, I can't wait to feel you sliding down my tail!"
+			],
+			[ // 50% - 75%
+				"Good, let's get you and my tail to know each other closer."
+			],
+			[ // 75% - 100%
+				"I'm glad you're eager to be tail food!"
+			]
+		]
+	},
+	"shySelfRequestTailVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Thank you, thank you!... now let's get you in... my t-tail..."
+			],
+			[ // 25% - 50%
+				"This is good... I appreciate you letting me... make you a t-tail snack..."
+			],
+			[ // 50% - 75%
+				"Y-you're willing?... thank goodness... let's get you i-inside it then..."
+			],
+			[ // 75% - 100%
+				"Y-you don't mind!?... thank you... let me just move my t-tail over..."
+			]
+		]
+	},
+	"flirtySelfRequestTailVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I knew this was an offer you couldn't refuse, get in my tail cutie and be mine~"
+			],
+			[ // 25% - 50%
+				"Glad you'd want to make my tail full, hop in sweet stuff~"
+			],
+			[ // 50% - 75%
+				"How'd I know you'd be so eager? well cutie, go ahead and enter my tail~"
+			],
+			[ // 75% - 100%
+				"Good tail snack, I'm eager to feel you squirming in there~"
+			]
+		]
+	},
+	"defaultSelfRequestTailVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Finally, I really needed something like you in my tail, enjoy!"
+			],
+			[ // 25% - 50%
+				"I feel just a bit better now that you're all snug in my tail."
+			],
+			[ // 50% - 75%
+				"I hope you're finding my tail to be comfy on the inside."
+			],
+			[ // 75% - 100%
+				"Welcome tail snack to your new room for a while."
+			]
+		]
+	},
+	"shySelfRequestTailVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I feel so much better... such a kind t-tail snack you are...."
+			],
+			[ // 25% - 50%
+				"Just what my t-tail needed... thanks again for going along..."
+			],
+			[ // 50% - 75%
+				"Letting me have you in my t-tail... makes me feel happy..."
+			],
+			[ // 75% - 100%
+				"Y-you fit so snugly in there... Is it nice in my t-tail?..."
+			]
+		]
+	},
+	"flirtySelfRequestTailVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"How I enjoy eager prey filling out my tail like this, so good~"
+			],
+			[ // 25% - 50%
+				"You fit just right in my tail, like you're supposed to be it's snack~ "
+			],
+			[ // 50% - 75%
+				"Does it feel as good to be swallowed by my tail as it does for me?~"
+			],
+			[ // 75% - 100%
+				"Always so nice feeling prey slipping into my tail~"
+			]
+		]
+	},
+	"defaultSelfRequestTailVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Really? this is a sad tale to tell my tail today."
+			],
+			[ // 25% - 50%
+				"Well shoot! now I'm gonna have to get normal food for my tail."
+			],
+			[ // 50% - 75%
+				"Darn, no tail spelunking for you huh?"
+			],
+			[ // 75% - 100%
+				"My tail not appealing to you? shame..."
+			]
+		]
+	},
+	"shySelfRequestTailVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I wish you'd say yes... I'm so hungry... my t-tail so empty..."
+			],
+			[ // 25% - 50%
+				"But my t-tail... needs a s-snack... guess I'll look elsewhere..."
+			],
+			[ // 50% - 75%
+				"Darn... I guess it's to be e-expected..."
+			],
+			[ // 75% - 100%
+				"I... okay..."
+			]
+		]
+	},
+	"flirtySelfRequestTailVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I can't believe you'd let me and my tail starve! but oh well..."
+			],
+			[ // 25% - 50%
+				"My tail's gonna have to find some other cute snack then..."
+			],
+			[ // 50% - 75%
+				"You resisted the allure of my gorgeous tail? impressive~"
+			],
+			[ // 75% - 100%
+				"Huh, not a fan of my tail, I'll let it slid this time~"
+			]
+		]
+	},
+	"defaultSelfRequestTailVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I am starving! so you're going to fill my tail whether you like it or not!"
+			],
+			[ // 25% - 50%
+				"You see my tail needs a snack, and you're here, so you don't got a choice."
+			],
+			[ // 50% - 75%
+				"I think you might be a bit hesitant, so I'll give you a push, into my tail!"
+			],
+			[ // 75% - 100%
+				"Oh, I guess I'll just turn my back now, don't mind what my tail may do."
+			]
+		]
+	},
+	"shySelfRequestTailVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm so hungry... I can't take a no... you must go in my t-tail..."
+			],
+			[ // 25% - 50%
+				"S-sorry... but I need the snack... for my t-tail... so..."
+			],
+			[ // 50% - 75%
+				"M-maybe you'll change you're mind... if you go into my t-tail..."
+			],
+			[ // 75% - 100%
+				"I hear you... but I d-disagree... so you're getting in my t-tail..."
+			]
+		]
+	},
+	"flirtySelfRequestTailVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm too hungry to hear a no from you, so you're going to be claimed by my tail~"
+			],
+			[ // 25% - 50%
+				"You see I'm a bit peckish, so I'm just going to stuff you in my tail regardless"
+			],
+			[ // 50% - 75%
+				"I hear you're words, but they mean little to my desire, you're going in my tail~"
+			],
+			[ // 75% - 100%
+				"No? I think you meant to say yes, so I'm just going to stuff you in anyway~"
+			]
+		]
+	},
+	"defaultSelfRequestTailVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Can't believe you'd try and deny being my tail snack, now squirm buddy!"
+			],
+			[ // 25% - 50%
+				"My tail needed the snack, and you are a snack, willing or not."
+			],
+			[ // 50% - 75%
+				"I just couldn't help making you tail food, I hope you understand."
+			],
+			[ // 75% - 100%
+				"Welp, seems you belong in my tail more then you thought huh?"
+			]
+		]
+	},
+	"shySelfRequestTailVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You've filled... the empty feeling in my t-tail... even if you didn't want to..."
+			],
+			[ // 25% - 50%
+				"I feel like... my cravings are gone... now that you're in my t-tail..."
+			],
+			[ // 50% - 75%
+				"I h-hope... that after some time... you'll be more receptive to being t-tail food..."
+			],
+			[ // 75% - 100%
+				"This feels better... sorry for forcing you but... enjoy my tail?"
+			]
+		]
+	},
+	"flirtySelfRequestTailVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"My tail feels much better with you in it, don't you feel silly for saying no now?~"
+			],
+			[ // 25% - 50%
+				"When I want a snack, I'll get one, isn't that right, tail snack?~"
+			],
+			[ // 50% - 75%
+				"I could have claimed you as tail filler the easy way, but you want to play hard to get~"
+			],
+			[ // 75% - 100%
+				"There we are, you're where you're meant to be tail snack, even if you disagree~"
+			]
+		]
+	},
+	"defaultTailVoreFull": [
+		"Sorry but my tail is already filled up.",
+		"My tail's capacity is at max, sorry!"
+	],
+	"digestTailVoreFull": [
+		"My tail is working it's prey down at the moment, come back later!",
+		"My tail's full, but once some it's prey melts a bit, there'll be room!"
+	],
+	"compressionTailVoreFull": [
+		"My tail is full, but it's prey is getting compacted, so there'll be room soon!",
+		"Once my tail has squeeze down it's current guest, I might squeeze you in."
+	],
+	"shyCompressionTailVoreFull": [
+		"I um... still have p-prey compressing in my t-tail... maybe later?...",
+		"My t-tail is busy... making it's s-snacks fit better... takes time..."
+	],
+	"flirtyCompressionTailVoreFull": [
+		"Sorry honey, my tail is making it's playthings fit in better right now, come back soon~",
+		"Let my tail work it's snacks into something more manageable, then I'll see to you cutie~"
+	],
 	"defaultRequestNavelVoreBefore": [
 		"You want to go in through my navel?",
 		"That isn't the usual way to do things.",
@@ -2197,18 +2829,54 @@
 	"defaultPreyRequestTailVoreNoYes": ":missingDialogue",
 	"shyPreyRequestTailVoreNoYes": ":missingDialogue",
 	"flirtyPreyRequestTailVoreNoYes": ":missingDialogue",
-	"defaultPreyRequestAnalVore": ":missingDialogue",
-	"shyPreyRequestAnalVore": ":missingDialogue",
-	"flirtyPreyRequestAnalVore": ":missingDialogue",
-	"defaultPreyRequestAnalVoreYes": ":missingDialogue",
-	"shyPreyRequestAnalVoreYes": ":missingDialogue",
-	"flirtyPreyRequestAnalVoreYes": ":missingDialogue",
-	"defaultPreyRequestAnalVoreNo": ":missingDialogue",
-	"shyPreyRequestAnalVoreNo": ":missingDialogue",
-	"flirtyPreyRequestAnalVoreNo": ":missingDialogue",
-	"defaultPreyRequestAnalVoreNoYes": ":missingDialogue",
-	"shyPreyRequestAnalVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestAnalVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestAnalVore": [
+		"You wouldn't mind if I just let myself in, would you?",
+		"Could you do me a favor and bend over?"
+	],
+	"shyPreyRequestAnalVore": [
+		"C-can i get in that um... booty of yours?",
+		"You have a nice b-butt... can I get i-inside it?"
+	],
+	"flirtyPreyRequestAnalVore": [
+		"What a lovely ass you have cutie! may I come in?",
+		"I can't help but stare at that lovely rear you got, would you let me in?"
+	],
+	"defaultPreyRequestAnalVoreYes": [
+		"You'll let me in? I can't wait to be in your booty!",
+		"Sweet! I'm going to love being in that butt!"
+	],
+	"shyPreyRequestAnalVoreYes": [
+		"Y-you'll take me in!?... t-thanks for letting me in your b-backside...",
+		"You don't mind... if I go inside your b-butt?... That's great to hear..."
+	],
+	"flirtyPreyRequestAnalVoreYes": [
+		"I thought you'd agree with me, now just let me slide on in that rear~",
+		"Couldn't resist my request? good since I can't resist that butt~"
+	],
+	"defaultPreyRequestAnalVoreNo": [
+		"Oh... well was worth asking.",
+		"No booty for me today huh?"
+	],
+	"shyPreyRequestAnalVoreNo": [
+		"I figured... I thought I'd ask at least though...",
+		"But... but... alright, sorry for troubling you..."
+	],
+	"flirtyPreyRequestAnalVoreNo": [
+		"Huh, I wouldn't think you'd say no, guess I'll get in that cute booty another day~",
+		"Well then, I'll accept a no for now, but you better let me at that butt next time~"
+	],
+	"defaultPreyRequestAnalVoreNoYes": [
+		"Well that's too bad, because I'm going in that butt anyway!",
+		"I think you'll change your tune once you feel me in your rear wiggling!"
+	],
+	"shyPreyRequestAnalVoreNoYes": [
+		"I'm sorry I f-forced my way in your r-rear... but it's so warm...",
+		"I promise I'll be good... let me just stay in your b-butt a bit..."
+	],
+	"flirtyPreyRequestAnalVoreNoYes": [
+		"I gave you a chance to let me in that butt the easy way, but it seems you like the hard way~",
+		"You think you can say no to me sugar? sorry but I'm getting in that booty~"
+	],
 	"defaultPreyRequestNavelVore": ":missingDialogue",
 	"shyPreyRequestNavelVore": ":missingDialogue",
 	"flirtyPreyRequestNavelVore": ":missingDialogue",
@@ -4452,7 +5120,6 @@
 			"*wheeze*"
 		]
 	],
-
 	// unused lines from how the old dialogue tree was structured, still very much usable, just need to be used slightly differently
 	"hungryRequestOralVoreBefore": [
 		"Didn't know the food here came to you!",
