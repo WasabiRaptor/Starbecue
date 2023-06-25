@@ -571,6 +571,13 @@ function dialogueCont:onClick()
 				action[2] = function()
 					sbq.finishDialogue()
 					dialogue.result = {}
+					if type(path) == "table" then
+						local newpath = "."
+						for i, step in ipairs(path) do
+							newpath = newpath.."."..tostring(sbq.doNextStep(step, settings, eid, sbq.prevDialogueBranch, sbq.dialogueTree, sbq.prevDialogueBranch.useStepPath))
+						end
+						path = newpath
+					end
 					sbq.updateDialogueBox( path, sbq.prevDialogueBranch, sbq.dialogueTree )
 				end
 				table.insert(contextMenu, action)

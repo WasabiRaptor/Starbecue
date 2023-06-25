@@ -28,39 +28,6 @@
 			"cockInfusion" : false,
 			"pussyInfusion" : false,
 			"breastsInfusion" : false
-		},
-
-		"dialogueTree" : {
-			"converse" : {
-				"randomDialogue" : ["So what did you want to talk about?"],
-				"randomButtonText" : ["[Options]"],
-				"options" : [
-					[ "* Pet", {"jump":["pet"]}],
-					["Can we talk about you?", {
-						"randomButtonText" : ["[options]"],
-						"randomDialogue" : [ "What about me?" ],
-						"options" : [
-							[ "Who are you?", { "randomDialogue" : [ "Zevi, A Magic Goocat, like Levi but with a Z." ], "randomButtonText" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
-							[ "Tell me more about the vore NPC stuff", {
-								"buttonText" : [
-									"Okay.",
-									"Mhm.",
-									"Got it."
-								],
-								"dialogue" : [
-									"So, first of all, you can summon SBQ NPCs with the special colony deed you can buy from Auri. It has its own UI to help you choose the NPC you want.",
-									"For example, you could summon me by just placing some crystalline tagged objects in my room with the vore deed, or by typing my name into the textbox and summoning.",
-									"You'd still have to make me happy by getting some crystalline objects, but you'd see the requirements in the deed UI to make it easier."
-								],
-								"jump" : [ "converse", "options", 1, 2 ]
-							}],
-							[ "Thats all I wanted to know about you.", { "jump" : [ "converse" ] }]
-						]
-					}],
-					[ "Whats this whole dialogue box thingy?", { "randomButtonText" : ["Mhm."], "randomDialogue" : [ "This is for the NPC system, I'm a bit of a demo." ], "jump" : [ "converse" ] }],
-					[ "What is this place?", { "randomButtonText" : ["Mhm."], "randomDialogue" : [ "A shop for vore stuff, you downloaded a vore mod after all."], "jump" : [ "converse" ]}]
-				]
-			}
 		}
 	},
 	"statusControllerSettings" : {

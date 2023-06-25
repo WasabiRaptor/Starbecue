@@ -14,14 +14,11 @@ function dialogueBoxScripts.petting(dialogueTree, dialogueTreeTop, settings, bra
 		addPetActions = true
 		petType = "many"
 	end
-	local dialogueTree = sb.jsonMerge({}, dialogueTree[petType])
 	if addPetActions then
-		local options = {}
 		for i = 1, petCount do
-			table.insert(options, dialogueTree.options[#dialogueTree.options] )
+			table.insert(dialogue.result.options, dialogue.result.options[#dialogue.result.options] )
 		end
-		dialogueTree.options = options
 	end
 
-	return dialogueTree
+	return petType
 end

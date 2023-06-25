@@ -1,5 +1,7 @@
 {
-	"missingDialogue": ["Whoops this dialogue is missing"],
+	"missingDialogue": [
+		"Whoops this dialogue is missing"
+	],
 	"defaultRewardsGreeting": ":missingDialogue",
 	"defaultRewardsGreetingIntroduced": ":missingDialogue",
 	"defaultGreeting": [
@@ -8,9 +10,19 @@
 		"Mrow."
 	],
 	"defaultGreetingCrew": ":missingDialogue",
+	"converse": [
+		"So what did you want to talk about?"
+	],
 	"defaultCrewStay": ":missingDialogue",
 	"defaultCrewFollow": ":missingDialogue",
 	"fullCrew": ":missingDialogue",
+	"normalPet": [
+		"Purrr",
+		"UwU"
+	],
+	"problemPet": [
+		"<dontSpeak>* It's possible that you may have a problem."
+	],
 	"rewardNotifyMoney": [
 		"This is nice, I think I'll give you some of my spare change.",
 		"I'll give you a few pixels for giving me a good time."
@@ -27,82 +39,6 @@
 		"I think you'll really like what I've gotten you.",
 		"My next gift will be really good heh."
 	],
-	"defaultRequestOralVoreBefore": [
-		"You want me to eat you?",
-		"Alright, sure.",
-		"Yeah ok.",
-		"Sounds good."
-	],
-	"defaultRequestOralVoreAfter": [
-		"Mmmmmmm... good.",
-		"Tasty.",
-		"Nice and filling.",
-		"Not too bad."
-	],
-	"defaultUnpromptedOralVoreBefore": [
-		"I think you'll fill me up.",
-		"I just need a bite to eat.",
-		"You seem like you'd make a good meal.",
-		"My belly's been grumbling..."
-	],
-	"defaultUnpromptedOralVoreAfter": ":defaultRequestOralVoreAfter",
-	"defaultSelfRequestOralVore": ":missingDialogue",
-	"defaultSelfRequestOralVoreYes": ":missingDialogue",
-	"defaultSelfRequestOralVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestOralVoreNo": ":missingDialogue",
-	"defaultSelfRequestOralVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestOralVoreNoYesAfter": ":missingDialogue",
-	"defaultNotFeelingIt": ":missingDialogue",
-	"defaultTooBig": ":missingDialogue",
-	"defaultTooSmall": ":missingDialogue",
-	"defaultOralVoreFull": [
-		"I'm a bit too full...",
-		"My belly can't stretch any further...",
-		"I've eaten too much already...",
-		"I would... but I'm too full..."
-	],
-	"digestOralVoreFull": [
-		"Maybe after I melt down the last meal",
-		"Urrrrp!\n Won't be too long until I can fit you.",
-		"I've eaten too much already... but I'll probably have room soon.",
-		"I'll have to finish processing this meal first."
-	],
-	"compressionOralVoreFull": ":missingDialogue",
-	"defaultFull": ":missingDialogue",
-	"defaultNeedsInfusion": ":missingDialogue",
-	"defaultRequestAnalVoreBefore": [
-		"You want to go up my butt?",
-		"You know thats the wrong way right?",
-		"That's going to be a tight fit.",
-		"Thats an interesting request."
-	],
-	"defaultRequestAnalVoreAfter": [
-		"Ahhh~ Hope I'm not squeezing too much.",
-		"Mmm~ This actually feels pretty good.",
-		"Heh~ it's almost like you're a living dildo.",
-		"Oooh~ That squirming is rather nice."
-	],
-	"defaultUnpromptedAnalVoreBefore": [
-		"Hey, I want to try something.",
-		"Hey... what if I shoved you up my ass?",
-		"For some reason... I keep imagining you as a dildo.",
-		"You know, theres a reason I'm not wearing pants."
-	],
-	"defaultUnpromptedAnalVoreAfter": [
-		"Ahhh~ hope I'm not squeezing too much.",
-		"Mmm~ That actually feels pretty good.",
-		"Heh~ it's almost like you're a living dildo.",
-		"Oooh~ That squirming is rather nice."
-	],
-	"defaultSelfRequestAnalVore": ":missingDialogue",
-	"defaultSelfRequestAnalVoreYes": ":missingDialogue",
-	"defaultSelfRequestAnalVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestAnalVoreNo": ":missingDialogue",
-	"defaultSelfRequestAnalVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestAnalVoreNoYesAfter": ":missingDialogue",
-	"defaultAnalVoreFull": ":missingDialogue",
-	"digestAnalVoreFull": ":missingDialogue",
-	"compressionAnalVoreFull": ":missingDialogue",
 	"defaultRequestTailVoreBefore": ":missingDialogue",
 	"defaultRequestTailVoreAfter": ":missingDialogue",
 	"defaultUnpromptedTailVoreBefore": ":missingDialogue",
@@ -113,22 +49,29 @@
 	"defaultSelfRequestTailVoreNo": ":missingDialogue",
 	"defaultSelfRequestTailVoreNoYes": ":missingDialogue",
 	"defaultSelfRequestTailVoreNoYesAfter": ":missingDialogue",
+	"defaultNotFeelingIt": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
+	],
+	"defaultTooBig": [
+		"I think you're a bit too big to fit in there...",
+		"I don't think I'd be able to get you in...",
+		"If only you were a bit smaller...",
+		"Thats a bit too much to ask of me..."
+	],
+	"defaultTooSmall": ":missingDialogue",
 	"defaultTailVoreFull": ":missingDialogue",
 	"digestTailVoreFull": ":missingDialogue",
 	"compressionTailVoreFull": ":missingDialogue",
-	"defaultRequestAbsorbVoreBefore": ":missingDialogue",
-	"defaultRequestAbsorbVoreAfter": ":missingDialogue",
-	"defaultUnpromptedAbsorbVoreBefore": ":missingDialogue",
-	"defaultUnpromptedAbsorbVoreAfter": ":missingDialogue",
-	"defaultSelfRequestAbsorbVore": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreYes": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreNo": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreNoYesAfter": ":missingDialogue",
-	"defaultAbsorbVoreFull": ":missingDialogue",
-	"digestAbsorbVoreFull": ":missingDialogue",
-	"compressionAbsorbVoreFull": ":missingDialogue",
+	"defaultFull": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
+	"defaultNeedsInfusion": ":missingDialogue",
 	"defaultRequestCockVoreBefore": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my dick?",
@@ -204,7 +147,10 @@
 	"transformingStruggleImmune": ":missingDialogue",
 	"eggifyStruggle": ":missingDialogue",
 	"eggifyStruggleImmune": ":missingDialogue",
-	"digestStruggle": ":missingDialogue",
+	"digestStruggle": [
+		"Time to melt you down into pudge.",
+		"Just be a good meal and melt."
+	],
 	"digestStruggleImmune": ":missingDialogue",
 	"healStruggle": ":missingDialogue",
 	"compressionStruggle": ":missingDialogue",
@@ -244,65 +190,15 @@
 	"ballsCompressionStruggle": ":missingDialogue",
 	"ballsEnergyDrainStruggle": ":missingDialogue",
 	"letoutStruggleTransforming": ":missingDialogue",
-	"letoutTransformingImmune": ":missingDialogue",
+	"letoutStruggleTransformingImmune": ":missingDialogue",
 	"letoutStruggleEggify": ":missingDialogue",
 	"letoutStruggleEggifyImmune": ":missingDialogue",
-	"letoutOralVoreStruggle": [
-		"Ahh... ok you want out.",
-		"Why leave?",
-		"Mmm... fine you can come out.",
-		"I actually liked having you in there..."
-	],
-	"letoutOralVoreStruggleDigested": [
-		"Ah... you want out... just a moment to reform.",
-		"Ah ok, I'll reform you now.",
-		"Fine, I'll reform you now.",
-		"Alright, I'll reform you."
-	],
-	"letoutOralVoreStruggleDigest": [
-		"Dang it... I was hungry.",
-		"No hard feelings?",
-		"Come on, you were almost done...",
-		"If only you weren't such a fighter..."
-	],
-	"letoutOralVoreStruggleDigestImmune": [
-		"Dang it... I was hungry... and you didn't even melt at all.",
-		"No hard feelings? Its not like my acid even managed to do anything.",
-		"Come on, my acid didn't even do anything to you...",
-		"If only you actually started to melt..."
-	],
-	"letoutShyOralVoreStruggleDigest": ":missingDialogue",
-	"letoutFlirtyOralVoreStruggleDigest": ":missingDialogue",
-	"letoutOralVoreStruggleSoftDigest": [
-		"Darn it... I was hungry, you were gonna be fine anyway.",
-		"No hard feelings? Its not like I was going to go all the way...",
-		"Come on, you were almost done...",
-		"If only you weren't such a fighter..."
-	],
-	"letoutOralVoreStruggleHeal": [
-		"You do know its safer inside me right?",
-		"Are you sure you're ready to come out?",
-		"Maybe you should get back in... heal a little longer.",
-		"You can come back to heal any time."
-	],
-	"letoutAnalVoreStruggle": ":missingDialogue",
-	"letoutAnalVoreStruggleDigested": ":missingDialogue",
-	"letoutAnalVoreStruggleDigest": ":missingDialogue",
-	"letoutAnalVoreStruggleDigestImmune": ":missingDialogue",
-	"letoutAnalVoreStruggleSoftDigest": ":missingDialogue",
-	"letoutAnalVoreStruggleHeal": ":missingDialogue",
 	"letoutTailVoreStruggle": ":missingDialogue",
 	"letoutTailVoreStruggleDigested": ":missingDialogue",
 	"letoutTailVoreStruggleDigest": ":missingDialogue",
 	"letoutTailVoreStruggleDigestImmune": ":missingDialogue",
 	"letoutTailVoreStruggleSoftDigest": ":missingDialogue",
 	"letoutTailVoreStruggleHeal": ":missingDialogue",
-	"letoutAbsorbVoreStruggle": ":missingDialogue",
-	"letoutAbsorbVoreStruggleDigested": ":missingDialogue",
-	"letoutAbsorbVoreStruggleDigest": ":missingDialogue",
-	"letoutAbsorbVoreStruggleDigestImmune": ":missingDialogue",
-	"letoutAbsorbVoreStruggleSoftDigest": ":missingDialogue",
-	"letoutAbsorbVoreStruggleHeal": ":missingDialogue",
 	"letoutCockVoreStruggle": [
 		"Ahh~ ahh that felt so good~",
 		"Could you get back in and squirm some more?",
@@ -315,6 +211,8 @@
 	"letoutCockVoreStruggleDigestImmune": ":missingDialogue",
 	"letoutCockVoreStruggleSoftDigest": ":missingDialogue",
 	"letoutCockVoreStruggleHeal": ":missingDialogue",
+	"letoutStruggleCumTransforming": ":missingDialogue",
+	"letoutStruggleCumTransformingImmune": ":missingDialogue",
 	"letoutUnbirthStruggle": [
 		"Happy birthday.",
 		"Ah~ Why'd you come out?",
@@ -328,6 +226,7 @@
 	"letoutUnbirthStruggleSoftDigest": ":missingDialogue",
 	"letoutUnbirthStruggleHeal": ":missingDialogue",
 	"letoutTransforming": ":missingDialogue",
+	"letoutTransformingImmune": ":missingDialogue",
 	"letoutEggify": ":missingDialogue",
 	"letoutEggifyImmune": ":missingDialogue",
 	"letoutOralVore": ":missingDialogue",
@@ -360,6 +259,8 @@
 	"letoutCockVoreDigestImmune": ":missingDialogue",
 	"letoutCockVoreSoftDigest": ":missingDialogue",
 	"letoutCockVoreHeal": ":missingDialogue",
+	"letoutCumTransforming": ":missingDialogue",
+	"letoutCumTransformingImmune": ":missingDialogue",
 	"letoutUnbirth": ":missingDialogue",
 	"letoutUnbirthDigested": ":missingDialogue",
 	"letoutUnbirthDigest": ":missingDialogue",
@@ -401,10 +302,7 @@
 	"defaultForcingPreyCockVore": ":missingDialogue",
 	"defaultForcingPreyUnbirth": ":missingDialogue",
 	"defaultForcingPreyBreastVore": ":missingDialogue",
-	"defaultUnwillingPredOralVore": ":missingDialogue",
 	"defaultUnwillingPredTailVore": ":missingDialogue",
-	"defaultUnwillingPredAbsorbVore": ":missingDialogue",
-	"defaultUnwillingPredAnalVore": ":missingDialogue",
 	"defaultUnwillingPredCockVore": ":missingDialogue",
 	"defaultUnwillingPredUnbirth": ":missingDialogue",
 	"struggling": ":missingDialogue",
@@ -609,6 +507,7 @@
 	"strugglingBallsHeal": ":missingDialogue",
 	"strugglingBallsCompression": ":missingDialogue",
 	"strugglingBallsEnergyDrain": ":missingDialogue",
+	"strugglingBallsCumTransforming": ":missingDialogue",
 	"strugglingBallsEggify": ":missingDialogue",
 	"strugglingBreasts": ":missingDialogue",
 	"strugglingBreastsDigest": ":missingDialogue",
@@ -631,15 +530,15 @@
 	"voredCockVore": ":missingDialogue",
 	"voredUnbirth": ":missingDialogue",
 	"voredBreastVore": ":missingDialogue",
+	"escapeStruggleTransforming": ":missingDialogue",
+	"escapeStruggleTransformingImmune": ":missingDialogue",
+	"escapeStruggleEggify": ":missingDialogue",
+	"escapeStruggleEggifyImmune": ":missingDialogue",
 	"escapeOralVoreStruggle": ":missingDialogue",
 	"escapeOralVoreStruggleDigest": ":missingDialogue",
 	"escapeOralVoreStruggleDigestImmune": ":missingDialogue",
 	"escapeOralVoreStruggleSoftDigest": ":missingDialogue",
 	"escapeOralVoreStruggleHeal": ":missingDialogue",
-	"escapeStruggleTransforming": ":missingDialogue",
-	"escapeStruggleTransformingImmune": ":missingDialogue",
-	"escapeStruggleEggify": ":missingDialogue",
-	"escapeStruggleEggifyImmune": ":missingDialogue",
 	"escapeAnalVoreStruggle": ":missingDialogue",
 	"escapeAnalVoreStruggleDigest": ":missingDialogue",
 	"escapeAnalVoreStruggleDigestImmune": ":missingDialogue",
@@ -660,6 +559,8 @@
 	"escapeCockVoreStruggleDigestImmune": ":missingDialogue",
 	"escapeCockVoreStruggleSoftDigest": ":missingDialogue",
 	"escapeCockVoreStruggleHeal": ":missingDialogue",
+	"escapeStruggleCumTransforming": ":missingDialogue",
+	"escapeStruggleCumTransformingImmune": ":missingDialogue",
 	"escapeUnbirthStruggle": ":missingDialogue",
 	"escapeUnbirthStruggleDigest": ":missingDialogue",
 	"escapeUnbirthStruggleDigestImmune": ":missingDialogue",
@@ -670,15 +571,15 @@
 	"escapeBreastVoreStruggleDigestImmune": ":missingDialogue",
 	"escapeBreastVoreStruggleSoftDigest": ":missingDialogue",
 	"escapeBreastVoreStruggleHeal": ":missingDialogue",
+	"escapeTransforming": ":missingDialogue",
+	"escapeTransformingImmune": ":missingDialogue",
+	"escapeEggify": ":missingDialogue",
+	"escapeEggifyImmune": ":missingDialogue",
 	"escapeOralVore": ":missingDialogue",
 	"escapeOralVoreDigest": ":missingDialogue",
 	"escapeOralVoreDigestImmune": ":missingDialogue",
 	"escapeOralVoreSoftDigest": ":missingDialogue",
 	"escapeOralVoreHeal": ":missingDialogue",
-	"escapeTransforming": ":missingDialogue",
-	"escapeTransformingImmune": ":missingDialogue",
-	"escapeEggify": ":missingDialogue",
-	"escapeEggifyImmune": ":missingDialogue",
 	"escapeAnalVore": ":missingDialogue",
 	"escapeAnalVoreDigest": ":missingDialogue",
 	"escapeAnalVoreDigestImmune": ":missingDialogue",
@@ -699,6 +600,8 @@
 	"escapeCockVoreDigestImmune": ":missingDialogue",
 	"escapeCockVoreSoftDigest": ":missingDialogue",
 	"escapeCockVoreHeal": ":missingDialogue",
+	"escapeCumTransforming": ":missingDialogue",
+	"escapeCumTransformingImmune": ":missingDialogue",
 	"escapeUnbirth": ":missingDialogue",
 	"escapeUnbirthDigest": ":missingDialogue",
 	"escapeUnbirthDigestImmune": ":missingDialogue",
@@ -1060,6 +963,145 @@
 			"*wheeze*"
 		]
 	],
+	// Unused Dialogue 
+	"defaultRequestOralVoreBefore": [
+		"You want me to eat you?",
+		"Alright, sure.",
+		"Yeah ok.",
+		"Sounds good."
+	],
+	"defaultRequestOralVoreAfter": [
+		"Mmmmmmm... good.",
+		"Tasty.",
+		"Nice and filling.",
+		"Not too bad."
+	],
+	"defaultUnpromptedOralVoreBefore": [
+		"I think you'll fill me up.",
+		"I just need a bite to eat.",
+		"You seem like you'd make a good meal.",
+		"My belly's been grumbling..."
+	],
+	"defaultUnpromptedOralVoreAfter": ":defaultRequestOralVoreAfter",
+	"defaultSelfRequestOralVore": ":missingDialogue",
+	"defaultSelfRequestOralVoreYes": ":missingDialogue",
+	"defaultSelfRequestOralVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestOralVoreNo": ":missingDialogue",
+	"defaultSelfRequestOralVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestOralVoreNoYesAfter": ":missingDialogue",
+	"defaultOralVoreFull": [
+		"I'm a bit too full...",
+		"My belly can't stretch any further...",
+		"I've eaten too much already...",
+		"I would... but I'm too full..."
+	],
+	"digestOralVoreFull": [
+		"Maybe after I melt down the last meal",
+		"Urrrrp!\n Won't be too long until I can fit you.",
+		"I've eaten too much already... but I'll probably have room soon.",
+		"I'll have to finish processing this meal first."
+	],
+	"compressionOralVoreFull": ":missingDialogue",
+	"defaultRequestAnalVoreBefore": [
+		"You want to go up my butt?",
+		"You know thats the wrong way right?",
+		"That's going to be a tight fit.",
+		"Thats an interesting request."
+	],
+	"defaultRequestAnalVoreAfter": [
+		"Ahhh~ Hope I'm not squeezing too much.",
+		"Mmm~ This actually feels pretty good.",
+		"Heh~ it's almost like you're a living dildo.",
+		"Oooh~ That squirming is rather nice."
+	],
+	"defaultUnpromptedAnalVoreBefore": [
+		"Hey, I want to try something.",
+		"Hey... what if I shoved you up my ass?",
+		"For some reason... I keep imagining you as a dildo.",
+		"You know, theres a reason I'm not wearing pants."
+	],
+	"defaultUnpromptedAnalVoreAfter": [
+		"Ahhh~ hope I'm not squeezing too much.",
+		"Mmm~ That actually feels pretty good.",
+		"Heh~ it's almost like you're a living dildo.",
+		"Oooh~ That squirming is rather nice."
+	],
+	"defaultSelfRequestAnalVore": ":missingDialogue",
+	"defaultSelfRequestAnalVoreYes": ":missingDialogue",
+	"defaultSelfRequestAnalVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNo": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestAnalVoreNoYesAfter": ":missingDialogue",
+	"defaultAnalVoreFull": ":missingDialogue",
+	"digestAnalVoreFull": ":missingDialogue",
+	"compressionAnalVoreFull": ":missingDialogue",
+	"defaultRequestAbsorbVoreBefore": ":missingDialogue",
+	"defaultRequestAbsorbVoreAfter": ":missingDialogue",
+	"defaultUnpromptedAbsorbVoreBefore": ":missingDialogue",
+	"defaultUnpromptedAbsorbVoreAfter": ":missingDialogue",
+	"defaultSelfRequestAbsorbVore": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreYes": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreNo": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestAbsorbVoreNoYesAfter": ":missingDialogue",
+	"defaultAbsorbVoreFull": ":missingDialogue",
+	"digestAbsorbVoreFull": ":missingDialogue",
+	"compressionAbsorbVoreFull": ":missingDialogue",
+	"letoutOralVoreStruggle": [
+		"Ahh... ok you want out.",
+		"Why leave?",
+		"Mmm... fine you can come out.",
+		"I actually liked having you in there..."
+	],
+	"letoutOralVoreStruggleDigested": [
+		"Ah... you want out... just a moment to reform.",
+		"Ah ok, I'll reform you now.",
+		"Fine, I'll reform you now.",
+		"Alright, I'll reform you."
+	],
+	"letoutOralVoreStruggleDigest": [
+		"Dang it... I was hungry.",
+		"No hard feelings?",
+		"Come on, you were almost done...",
+		"If only you weren't such a fighter..."
+	],
+	"letoutOralVoreStruggleDigestImmune": [
+		"Dang it... I was hungry... and you didn't even melt at all.",
+		"No hard feelings? Its not like my acid even managed to do anything.",
+		"Come on, my acid didn't even do anything to you...",
+		"If only you actually started to melt..."
+	],
+	"letoutShyOralVoreStruggleDigest": ":missingDialogue",
+	"letoutFlirtyOralVoreStruggleDigest": ":missingDialogue",
+	"letoutOralVoreStruggleSoftDigest": [
+		"Darn it... I was hungry, you were gonna be fine anyway.",
+		"No hard feelings? Its not like I was going to go all the way...",
+		"Come on, you were almost done...",
+		"If only you weren't such a fighter..."
+	],
+	"letoutOralVoreStruggleHeal": [
+		"You do know its safer inside me right?",
+		"Are you sure you're ready to come out?",
+		"Maybe you should get back in... heal a little longer.",
+		"You can come back to heal any time."
+	],
+	"letoutAnalVoreStruggle": ":missingDialogue",
+	"letoutAnalVoreStruggleDigested": ":missingDialogue",
+	"letoutAnalVoreStruggleDigest": ":missingDialogue",
+	"letoutAnalVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutAnalVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutAnalVoreStruggleHeal": ":missingDialogue",
+	"letoutAbsorbVoreStruggle": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigested": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigest": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigestImmune": ":missingDialogue",
+	"letoutAbsorbVoreStruggleSoftDigest": ":missingDialogue",
+	"letoutAbsorbVoreStruggleHeal": ":missingDialogue",
+	"defaultUnwillingPredOralVore": ":missingDialogue",
+	"defaultUnwillingPredAbsorbVore": ":missingDialogue",
+	"defaultUnwillingPredAnalVore": ":missingDialogue",
+	// Unused Dialogue 
 	// Unused Dialogue
 	"greeting.default.fearful": [
 		"AH!",
@@ -1081,50 +1123,7 @@
 		"Hey <entityname>, I'm looking for some food, have any?",
 		"Oh huh, I probably need to find something to eat."
 	],
-	"converse": [
-		"So what did you want to talk about?"
-	],
-	"pet.normal": [
-		"Purrr",
-		"UwU"
-	],
-	"pet.many": [
-		{
-			"add": "pet.normal"
-		}
-	],
-	"pet.excessive": ":pet.many", // duplicated lines
-	"pet.problem": [
-		"<dontSpeak>* It's possible that you may have a problem."
-	],
-	"defaultOralVoreNotFeelingIt": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
-	"softDigestOralVoreFull": ":digestOralVoreFull", // duplicated lines
-	"defaultOralVoreOtherFull": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
-	],
-	"defaultOralVoreTooBig": [
-		"I think you're a bit too big to fit in there...",
-		"I don't think I'd be able to get you in...",
-		"If only you were a bit smaller...",
-		"Thats a bit too much to ask of me..."
-	],
-	"defaultCockVoreNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"defaultCockVoreTooBig": ":defaultOralVoreTooBig", // duplicated lines
-	"defaultUnbirthNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"defaultUnbirthTooBig": ":defaultOralVoreTooBig", // duplicated lines
-	"bellyDigestStruggle": [
-		"Time to melt you down into pudge.",
-		"Just be a good meal and melt."
-	],
-	"bellyDigestStruggleImmmune": [
+	"digestStruggleImmmune": [
 		"Why aren't you melting down?",
 		"Doesn't feel like you're melting."
 	],
