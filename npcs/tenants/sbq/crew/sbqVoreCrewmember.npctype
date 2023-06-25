@@ -12,6 +12,9 @@
 	"scriptConfig" : {
 		"sbqNPC" : true,
 		"behavior" : "sbqvorecrewmember",
+		"behaviorConfig": {
+			"emptyHands": true
+		},
 		"questGenerator" : {
 			"graduation" : {
 				"nextNpcType" : []
@@ -27,7 +30,56 @@
 			"questParticipation" : false,
 			"crewmateGraduation" : false
 		},
-
+		"crew" : {
+			"ranks": [
+				"Second-to-Last <role>",
+				"3rd Technical Assistant <field> Officer",
+				"Assistant Deputy <role> Guy/Gal",
+				"Trainee Apprentice <role>",
+				"Temporary Relief <role>",
+				"3rd Rear Lieutenant <role>",
+				"64th Commodore <role>",
+				"Standing <field> Officer",
+				"Sitting <field> Officer",
+				"Executive Coffee-Making <role>",
+				"Command Master Chief Petty <field> Officer",
+				"Independent <field> Auditor",
+				"Dependant <field> Auditor",
+				"Dreadnought <field> Officer",
+				"Trainee <field> Mastermind",
+				"Head of Petty <field> Arguments",
+				"Backup <role>",
+				"Reliable <field> Lacky",
+				"Theoretical <field> Advisor",
+				"Reliable <field> Lackey",
+				"Head of <field> operations",
+				"Wild Card <role>",
+				"Head of <field> Relations",
+				"Last-Minute <role>",
+				"Expert in <field> Diplomacy",
+				"<field> Innovation Manager",
+				"Loose Cannon <role>",
+				"Regional <field> Director",
+				"Private <field> Investigator",
+				"Temporal <field> Surveyor",
+				"Radical <field> Innovator",
+				"Independent Head of <field> Operations",
+				"Just your average <role>",
+				"Hobbyist <role>",
+				"Master of <field> Matters",
+				"Alternative <field> Advisory Representative",
+				"Runner-Up <field> Officer",
+				"Emergency <field> Officer",
+				"First Mate's Second-Cousin's Third <role>",
+				"Unpaid <field> Intern",
+				"<field> Student",
+				"<field> Forum Moderator",
+				"Rogue <field> Profiteer",
+				"Neutral Third Party <role>",
+				"Low Quality <field> Negotiations",
+				"Armchair <field> Expert"
+			]
+		},
 		"sbqPredRewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
 		"sbqPreyRewards" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",
 		"sbqRandomizePreySettings" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.sbqRandomizePreySettings",

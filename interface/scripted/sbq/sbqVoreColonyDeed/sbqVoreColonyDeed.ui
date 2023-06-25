@@ -111,9 +111,7 @@
 							{"type" : "layout", "mode" : "horizontal", "spacing" : -1, "children" :[
 								//{ "type" : "checkBox", "id" : "impossibleEscape", "toolTip" : "Make escaping impossible" },
 								//{ "type" : "checkBox", "id" : "impossibleEscapeEnable", "toolTip" : "Allow Pred to decide to make escaping impossible" },
-								{ "type" : "textBox", "visible" : false, "id" : "escapeValueMin", "toolTip" : "Minimum Escape Difficulty", "text" : "0" },
-								{ "type" : "textBox", "id" : "escapeValue", "toolTip" : "Current Escape Difficulty", "text" : "0" },
-								{ "type" : "textBox", "visible" : false, "id" : "escapeValueMax", "toolTip" : "Maximum Escape Difficulty", "text" : "10" }
+								{ "type" : "textBox", "id" : "escapeValue", "toolTip" : "Current Escape Difficulty", "text" : "0" }
 							]}
 						]},
 						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,40], "expandMode" : [1,0], "style" : "convex", "children" : [

@@ -12,6 +12,9 @@
 	"scriptConfig" : {
 		"sbqNPC" : true,
 		"behavior" : "sbqvorecrewmember",
+		"behaviorConfig": {
+			"emptyHands": true
+		},
 		"questGenerator" : {
 			"graduation" : {
 				"nextNpcType" : []

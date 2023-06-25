@@ -6,6 +6,9 @@
 	"dropPools": [],
 
 	"scriptConfig": {
+		"behaviorConfig": {
+			"emptyHands": true
+		},
 		"questGenerator": {
 			"pools": [ "common", "tenant", "guard"],
 			"enableParticipation": true,
