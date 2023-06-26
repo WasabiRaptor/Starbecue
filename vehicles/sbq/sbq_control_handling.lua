@@ -144,8 +144,7 @@ function sbq.getSeatDirections(seatname)
 	if world.entityType( occupantId ) ~= "player" then
 		sbq.monsterstrugglecooldown[occupantId] = math.max(0, (sbq.monsterstrugglecooldown[occupantId] or 0) - sbq.dt)
 		if (sbq.monsterstrugglecooldown[occupantId] or 0) > 0 then return end
-		if (math.random() < 0.25) and not sbq.settings.bellyEffect == "digest" then sbq.monsterstrugglecooldown[occupantId] = math.random() end -- there still should be a chance for them to "rest" but not when being digested because it'd be urgent to escape
-
+		if (math.random() < 0.5) then sbq.monsterstrugglecooldown[occupantId] = math.random(3) + math.random() end -- there still should be a chance for them to "rest" but not when being digested because it'd be urgent to escape
 		if occupantData.controls.favorDirection and (math.random() > 0.5) then
 			return occupantData.controls.favorDirection
 		else

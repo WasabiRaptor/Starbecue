@@ -75,6 +75,7 @@ function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	sbq.occupant[seatindex].size = args.size or 1
 	sbq.occupant[seatindex].entryType = voreType
 	sbq.occupant[seatindex].flags.hostile = args.hostile
+	sbq.occupant[seatindex].flags.willing = args.willing
 	world.sendEntityMessage( args.id, "sbqMakeNonHostile")
 	sbq.forceSeat( args.id, seatindex )
 	sbq.refreshList = true
@@ -933,9 +934,16 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 	else
 		local location = sbq.occupant[struggler].location
 
-		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and ( sbq.checkSettings(struggledata.directions[movedir].settings) ) then
-			sbq.occupant[struggler].controls.favorDirection = movedir
+		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and
+			(sbq.checkSettings(struggledata.directions[movedir].settings)) then
+			if sbq.occupant[struggler].flags.willing then
+				sbq.occupant[struggler].controls.favorDirection = movedir
+			else
+				sbq.occupant[struggler].controls.favorDirection = movedir
+			end
 		elseif not struggledata.directions[movedir].indicate then
+			sbq.occupant[struggler].controls.disfavorDirection = movedir
+		elseif sbq.occupant[struggler].flags.hostile then
 			sbq.occupant[struggler].controls.disfavorDirection = movedir
 		end
 
