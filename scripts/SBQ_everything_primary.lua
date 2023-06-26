@@ -49,13 +49,14 @@ function sbq.everything_primary()
 		if type(voreType) == "table" then
 			for i, voreType in ipairs(voreType) do
 				enabled = enabled and preySettings[voreType]
+				if not enabled then break end
 			end
 		else
 			enabled = preySettings[voreType]
 		end
 
 		local currentData = status.statusProperty("sbqCurrentData") or {}
-		return { enabled = preySettings[voreType], size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}
+		return { enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}
 	end)
 
 	message.setHandler("sbqGetPreyEnabled", function(_, _)

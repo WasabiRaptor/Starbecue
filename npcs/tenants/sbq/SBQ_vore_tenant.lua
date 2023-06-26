@@ -384,7 +384,46 @@ function init()
 		end
 		return 3 -- the "No... (But actually yes)" option
 	end)
+	message.setHandler("sbqIsPreyEnabled", function(_,_, voreType)
+		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
+		if preySettings.preyEnabled == false then return false end
+		local enabled = true
+		if type(voreType) == "table" then
+			for i, voreType in ipairs(voreType) do
+				enabled = enabled and preySettings[voreType]
+				if not enabled then break end
+			end
+		else
+			enabled = preySettings[voreType]
+		end
+		local willing = false
+		if enabled then
+			if type(voreType) == "table" then
+				willing = sbq.getPreyWilling(voreType)
+			else
+				willing = sbq.getPreyWilling({voreType})
+			end
+		end
+		local currentData = status.statusProperty("sbqCurrentData") or {}
+		return { willing = willing,  enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}
+	end)
+end
 
+function sbq.getPreyWilling(voreTypes)
+	local favoredVoreTypes = sbq.getFavoredVoreTypes("prey", preySettings, healOrDigest)
+	if not favoredVoreTypes[1] then return false end
+	local favoredSelection = {
+		favoredVoreTypes[math.random(#favoredVoreTypes)],
+		favoredVoreTypes[math.random(#favoredVoreTypes)],
+		favoredVoreTypes[math.random(#favoredVoreTypes)],
+		favoredVoreTypes[math.random(#favoredVoreTypes)]
+	}
+	for i, voreType in ipairs(voreTypes) do
+		for j, voreType2 in ipairs(favoredSelection) do
+			if voreType == voreType2 then return true end
+		end
+	end
+	return false
 end
 
 function sbq.requestTransition(transition, args)

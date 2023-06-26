@@ -110,6 +110,7 @@ function sbq.doTransition(direction, scriptargs, log)
 		sbq.addRPC(world.sendEntityMessage(id, "sbqIsPreyEnabled", tconfig.voreType), function(enabled)
 			if enabled and enabled.enabled then
 				scriptargs.size = enabled.size
+				scriptargs.willing = scriptargs.willing or enabled.willing
 				tconfig = sbq.getOccupancyTransition(tconfig, scriptargs or {})
 				if tconfig == nil then return end
 
