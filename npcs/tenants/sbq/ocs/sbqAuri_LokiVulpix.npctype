@@ -56,7 +56,7 @@
 
 		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : {
-			"dialogueFile" : "/npcs/tenants/sbq/ocs/sbqLoki_LokiVulpix.dialogue",
+			"dialogueFile" : "/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.dialogue",
 			// after following a path, next steps will automatically advance down the tree building the result dialogue
 
 			// overall default values for a "new" dialogue
@@ -1817,7 +1817,7 @@
 				"new" : {},
 				"next" : "willing",
 				"true" : {
-					"oralVore" : {"replace":{"randomDialogue":[":voredOralVoreWilling"]}},
+					"next" : "voreType",					"oralVore" : {"replace":{"randomDialogue":[":voredOralVoreWilling"]}},
 					"analVore" : {"replace":{"randomDialogue":[":voredAnalVoreWilling"]}},
 					"tailVore" : {"replace":{"randomDialogue":[":voredTailVoreWilling"]}},
 					"absorbVore" : {"replace":{"randomDialogue":[":voredAbsorbVoreWilling"]}},

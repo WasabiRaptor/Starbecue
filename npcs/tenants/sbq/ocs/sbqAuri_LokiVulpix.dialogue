@@ -1,5 +1,7 @@
 {
-	"missingDialogue": ["Whoops this dialogue is missing"],
+	"missingDialogue": [
+		"Whoops this dialogue is missing"
+	],
 	"defaultRewardsGreeting": [
 		"It was fun messing around!\nHave some stuff.",
 		{
@@ -299,6 +301,10 @@
 	],
 	"breastsCompressionStruggle": ":missingDialogue",
 	"breastsEnergyDrainStruggle": ":missingDialogue",
+	"escapeStruggleTransforming": ":missingDialogue",
+	"escapeStruggleTransformingImmune": ":missingDialogue",
+	"escapeStruggleEggify": ":missingDialogue",
+	"escapeStruggleEggifyImmune": ":missingDialogue",
 	"letoutOralVoreStruggle": [
 		"Ahh... ok you want out.",
 		"Why leave?",
@@ -370,6 +376,10 @@
 	"letoutBreastVoreStruggleDigestImmune": ":missingDialogue",
 	"letoutBreastVoreStruggleSoftDigest": ":missingDialogue",
 	"letoutBreastVoreStruggleHeal": ":missingDialogue",
+	"escapeTransforming": ":missingDialogue",
+	"escapeTransformingImmune": ":missingDialogue",
+	"escapeEggify": ":missingDialogue",
+	"escapeEggifyImmune": ":missingDialogue",
 	"letoutOralVore": ":missingDialogue",
 	"letoutOralVoreDigest": ":missingDialogue",
 	"letoutOralVoreDigestImmune": ":missingDialogue",
@@ -634,6 +644,7 @@
 	"strugglingBallsHeal": ":missingDialogue",
 	"strugglingBallsCompression": ":missingDialogue",
 	"strugglingBallsEnergyDrain": ":missingDialogue",
+	"strugglingBallsCumTransforming": ":missingDialogue",
 	"strugglingBallsEggify": ":missingDialogue",
 	"strugglingBreasts": ":missingDialogue",
 	"strugglingBreastsDigest": ":missingDialogue",
@@ -661,10 +672,6 @@
 	"escapeOralVoreStruggleDigestImmune": ":missingDialogue",
 	"escapeOralVoreStruggleSoftDigest": ":missingDialogue",
 	"escapeOralVoreStruggleHeal": ":missingDialogue",
-	"escapeStruggleTransforming": ":missingDialogue",
-	"escapeStruggleTransformingImmune": ":missingDialogue",
-	"escapeStruggleEggify": ":missingDialogue",
-	"escapeStruggleEggifyImmune": ":missingDialogue",
 	"escapeAnalVoreStruggle": ":missingDialogue",
 	"escapeAnalVoreStruggleDigest": ":missingDialogue",
 	"escapeAnalVoreStruggleDigestImmune": ":missingDialogue",
@@ -685,6 +692,8 @@
 	"escapeCockVoreStruggleDigestImmune": ":missingDialogue",
 	"escapeCockVoreStruggleSoftDigest": ":missingDialogue",
 	"escapeCockVoreStruggleHeal": ":missingDialogue",
+	"escapeStruggleCumTransforming": ":missingDialogue",
+	"escapeStruggleCumTransformingImmune": ":missingDialogue",
 	"escapeUnbirthStruggle": ":missingDialogue",
 	"escapeUnbirthStruggleDigest": ":missingDialogue",
 	"escapeUnbirthStruggleDigestImmune": ":missingDialogue",
@@ -700,10 +709,6 @@
 	"escapeOralVoreDigestImmune": ":missingDialogue",
 	"escapeOralVoreSoftDigest": ":missingDialogue",
 	"escapeOralVoreHeal": ":missingDialogue",
-	"escapeTransforming": ":missingDialogue",
-	"escapeTransformingImmune": ":missingDialogue",
-	"escapeEggify": ":missingDialogue",
-	"escapeEggifyImmune": ":missingDialogue",
 	"escapeAnalVore": ":missingDialogue",
 	"escapeAnalVoreDigest": ":missingDialogue",
 	"escapeAnalVoreDigestImmune": ":missingDialogue",
@@ -724,6 +729,8 @@
 	"escapeCockVoreDigestImmune": ":missingDialogue",
 	"escapeCockVoreSoftDigest": ":missingDialogue",
 	"escapeCockVoreHeal": ":missingDialogue",
+	"escapeCumTransforming": ":missingDialogue",
+	"escapeCumTransformingImmune": ":missingDialogue",
 	"escapeUnbirth": ":missingDialogue",
 	"escapeUnbirthDigest": ":missingDialogue",
 	"escapeUnbirthDigestImmune": ":missingDialogue",
@@ -829,14 +836,6 @@
 	"infuseSelfRequestBreastsBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestBreastsAfter": ":missingDialogue",
 	"infuseSelfRequestBreastsAfterLayer": ":missingDialogue",
-	"infuseRequestPussyBefore": ":missingDialogue",
-	"infuseRequestPussyBeforeLayer": ":missingDialogue",
-	"infuseRequestPussyAfter": ":missingDialogue",
-	"infuseRequestPussyAfterLayer": ":missingDialogue",
-	"infuseUnpromptedPussyBefore": ":missingDialogue",
-	"infuseUnpromptedPussyBeforeLayer": ":missingDialogue",
-	"infuseUnpromptedPussyAfter": ":missingDialogue",
-	"infuseUnpromptedPussyAfterLayer": ":missingDialogue",
 	"infuseSelfRequestPussyBefore": ":missingDialogue",
 	"infuseSelfRequestPussyBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestPussyAfter": ":missingDialogue",
@@ -917,7 +916,6 @@
 		]
 	],
 	"infusedTail": ":missingDialogue",
-	"infusedPussy": ":missingDialogue",
 	"infusedBreasts": [
 		"<slowlove>",
 		"<love>",
@@ -971,7 +969,6 @@
 		"Hehe, do you want something <infusedName>?"
 	],
 	"teaseInfusedTail": ":missingDialogue",
-	"teaseInfusedPussy": ":missingDialogue",
 	"teaseInfusedBreasts": [
 		[
 			"<slowlove>Mmm, you make them so much more sensitive~",
@@ -1588,30 +1585,30 @@
 	"infusePreyBellyNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
 	"infusePreyShaftNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
 	"infusePreyBreastsNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infuseRequestWombBefore": [
+	"infuseRequestPussyBefore": [
 		"You want to be my pussy?",
 		"Mm, can't wait to be soaking wet down there can you?",
 		"You really want to give yourself entirely to me?"
 	],
-	"infuseRequestWombAfter": [
+	"infuseRequestPussyAfter": [
 		"Hehe, I can feel you leaking with excitment already~",
 		"Hehe, excited to be part of me~?",
 		"Ah, you're already sopping wet with excitment~"
 	],
-	"infuseRequestWombBeforeLayer": ":infuseRequestShaftBeforeLayer", // duplicated lines
-	"infuseRequestWombAfterLayer": ":infuseRequestShaftAfterLayer", // duplicated lines
-	"infuseUnpromptedWombBefore": [
+	"infuseRequestPussyBeforeLayer": ":infuseRequestShaftBeforeLayer", // duplicated lines
+	"infuseRequestPussyAfterLayer": ":infuseRequestShaftAfterLayer", // duplicated lines
+	"infuseUnpromptedPussyBefore": [
 		"Hehe, I think you belong as something else~",
 		"Mm~ I think it'd be fitting to have you dripping between my legs~",
 		"I think I have a far better use for you~"
 	],
-	"infuseUnpromptedWombAfter": [
+	"infuseUnpromptedPussyAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, soaking between my legs~",
 		"Mmm~ feels right to have you there~"
 	],
-	"infuseUnpromptedWombBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infuseUnpromptedWombAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
+	"infuseUnpromptedPussyBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
+	"infuseUnpromptedPussyAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
 	"infusePreyWombNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
 	"infused.default.default.default.default.default": [
 		"<slowlove>",
@@ -1626,7 +1623,7 @@
 			"<love>^#ffffff7f;(<keysmash>)"
 		]
 	],
-	"infusedWomb": [
+	"infusedPussy": [
 		"<slowlove>",
 		"<love>",
 		[
@@ -1643,7 +1640,85 @@
 		"Just a part of my body~",
 		"Just a part of my body <infusedName>~" // very very placeholder
 	],
-	"teaseInfusedWomb": [
+	"talkAboutSelf.options.0.1": [
+		"Well, the easiest answer is 'Dragon' but theres a bit more to it than that, what I really am is a 'Drimyr' or 'Dreamer'\nGotta love those fantasy names which you just spell a word differntly for fun.",
+		"I'm a creature which is empowered by dreams and imagination, both feeding off of them and using them to create worlds of my own, as well as entering the worlds of others.",
+		"Which I guess is sorta what I'm doing here? Invading this game world to help make the kinky fantasies of vore and such take form in some way.",
+		"While my physical form is a fluffy dragon usally I do shapeshift, it's probably easier to think of me as a fae, or some form of demon.",
+		"I'm not all powerful, but realms of dreams and imagination such as this where the laws of reality are flexible are where I am."
+	],
+	"talkAboutSelf.options.1.1": [
+		"First of all, while this form is a representation of me, don't think talking about kinky stuff here lets the other me just psychically know you learned my prefs and stuff.",
+		"But hey, if you have similar prefs, don't be scared about talking to the other me outside the game."
+	],
+	"talkAboutKinks.options.0.1": [
+		"I tend to like things a bit more close, in most cases the people I ate are more than just food to me. I'm eating them because I want them to feel comfy inside me.",
+		"Or I'm eating them because I want to have them inside, nice and protected, entirely surrounded by me in what could be a really close hug, all mine.",
+		"And then... if I do choose to digest someone, its because I want them even closer, I want them to truly be mine for the time I have them.",
+		"After I would melt someone down they get to experience being pudge somewhere on my body until I they want to be reformed, but during that time they are truly all mine."
+	],
+	"talkAboutKinks.options.0.1.continue": [
+		"Would you like being prey like that?"
+	],
+	"talkAboutKinks.options.0.1.continue.options.0.1": [
+		"Nice! We can have some fun sometime then."
+	],
+	"talkAboutKinks.options.0.1.continue.options.1.1": [
+		"Alright then."
+	],
+	"talkAboutKinks.options.1.1": [
+		"If I do let myself be prey... it usually is only for a few specific people. Make me feel safe and comfortable, even if I do get gurgled I'd know it would be fine."
+	],
+	"talkAboutKinks.options.1.1.continue": [
+		"Would you be a pred like that?"
+	],
+	"talkAboutKinks.options.1.1.continue.options.0.1": ":talkAboutKinks.options.0.1.continue.options.0.1", // duplicated lines
+	"talkAboutKinks.options.1.1.continue.options.1.1": ":talkAboutKinks.options.0.1.continue.options.1.1", // duplicated lines
+
+	"converse.options.1.1": [
+		"Well hi there <entityname>!",
+		"You can call me Auri, I'm a what your kind might call a 'Dreamer'.\n \nI go by She/They."
+	],
+	"converse.options.3.1": [
+		"Well uhm, you might find some coins and gems and such in there...\nSince my diet includes rocks and minerals."
+	],
+	"converse.options.3.1.continue.default": [
+		"Other than that it should be pretty comfortable for you!"
+	],
+	"converse.options.3.1.continue.heal": [
+		"My juices in there should patch you up and be really soothing!"
+	],
+	"converse.options.3.1.continue.softDigest": [
+		"Well, you'd probably drift off to a nice relaxing goopy nap as I melt you down to keep as some pudge."
+	],
+	"converse.options.4.1.default": [
+		"Should be nice and comfy in there."
+	],
+	"converse.options.4.1.heal": [
+		"You'll feel so comfy and rested in there, I've heard its very nice~"
+	],
+	"converse.options.5.1.default": [
+		"Should be soft and milky, it's purple flavored."
+	],
+	"converse.options.5.1.heal": [
+		"I always hear a milk bath is really relaxing~"
+	],
+	"converse.options.5.1.softDigest": [
+		"Might mix you up into my next batch of milk~"
+	],
+	"converse.options.6.1.default": [
+		"Hehe, I'll probably get pretty hard if you squirm your way in there~"
+	],
+	"converse.options.7.1.default": [
+		"Might be a bit messy to stew and slosh around in all that cum~"
+	],
+	"converse.options.7.1.heal": [
+		"Most of my bodily fluids have healing properties, my cum is no exception~"
+	],
+	"converse.options.7.1.softDigest": [
+		"Hehe, you might end up being the next load I pump out into someone if you stay in there too long~"
+	],
+	"teaseInfusedPussy": [
 		[
 			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
 			"<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"

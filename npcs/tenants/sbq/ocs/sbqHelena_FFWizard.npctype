@@ -35,18 +35,18 @@
 
 		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : {
-			"dialogueFile" : "/npcs/tenants/sbq/sbqVoreVillager.dialogue",
+			"dialogueFile" : "/npcs/tenants/sbq/ocs/sbqHelena_FFWizard.dialogue",
 			// after following a path, next steps will automatically advance down the tree building the result dialogue
 
 			// overall default values for a "new" dialogue
 			"default" : {
 				"randomDialogue" : [":missingDialogue"],
-				"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+				"jump" : ".converse" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 			},
 			// greeting is the default start of the tree
 			// settings come from itself
 			"greeting" : {
-				"new" : {"jump" : "converse"},
+				"new" : {"jump" : ".converse"},
 				"next" : "giveTenantRewards",
 				"rewards" : {
 					"replace" : {"randomDialogue" : [":defaultRewardsGreeting"]},
@@ -59,13 +59,34 @@
 					"next" : ["isOwner"],
 					"replace" : {"randomDialogue" : [":defaultGreeting"]},
 					"true" : {
-						"next" : ["isFollowing"],
 						"replace" : {
-							"randomDialogue" : [":defaultGreetingCrew"],
-							"buttonText" : ["Stay"],
-							"callScript" : "swapFollowing"
+							"randomDialogue" : [":defaultGreetingCrew"]
+						}
+					}
+				}
+			},
+			"converse" : {
+				"new" : {
+					"randomDialogue" : [":converse"],
+					"buttonText" : ["[Options]"],
+					"options" : [
+					],
+					"next" : ["isOwner", "otherOptions"],
+					"true" : {
+						"addQueued" : true,
+						"queueReplace" : {
+							"options" : [
+								["Stay", ["swapFollowing"]]
+							]
 						},
-						"false" : { "replace" : {"buttonText": ["Follow"]}}
+						"next" : ["isFollowing"],
+						"false" : {
+							"queueReplace" : {
+								"options" : [
+									["Follow", ["swapFollowing"]]
+								]
+							}
+						}
 					}
 				},
 				"stay" : {
@@ -2318,7 +2339,7 @@
 				"new" : {},
 				"next" : "willing",
 				"true" : {
-					"oralVore" : {"replace":{"randomDialogue":[":voredOralVoreWilling"]}},
+					"next" : "voreType",					"oralVore" : {"replace":{"randomDialogue":[":voredOralVoreWilling"]}},
 					"analVore" : {"replace":{"randomDialogue":[":voredAnalVoreWilling"]}},
 					"tailVore" : {"replace":{"randomDialogue":[":voredTailVoreWilling"]}},
 					"navelVore" : {"replace":{"randomDialogue":[":voredNavelVoreWilling"]}},

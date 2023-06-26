@@ -23,6 +23,8 @@
 	"scriptConfig" : {
 		"sbqNPC" : true,
 		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
+		"isPrey" : false,
+
 		"behavior" : "sbqvorevillager",
 		"questGenerator" : {
 			"graduation" : {
@@ -55,18 +57,18 @@
 		"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/pet_dialogue_script.lua"],
 		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 		"dialogueTree" : {
-			"dialogueFile" : "/npcs/tenants/sbq/sbqVoreVillager.dialogue",
+			"dialogueFile" : "/npcs/tenants/sbq/ocs/sbqSocks_LokiVulpix.dialogue",
 			// after following a path, next steps will automatically advance down the tree building the result dialogue
 
 			// overall default values for a "new" dialogue
 			"default" : {
 				"randomDialogue" : [":missingDialogue"],
-				"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+				"jump" : ".converse" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 			},
 			// greeting is the default start of the tree
 			// settings come from itself
 			"greeting" : {
-				"new" : {"jump" : "converse"},
+				"new" : {"jump" : ".converse"},
 				"next" : "giveTenantRewards",
 				"rewards" : {
 					"replace" : {"randomDialogue" : [":defaultRewardsGreeting"]},
@@ -79,13 +81,35 @@
 					"next" : ["isOwner"],
 					"replace" : {"randomDialogue" : [":defaultGreeting"]},
 					"true" : {
-						"next" : ["isFollowing"],
 						"replace" : {
-							"randomDialogue" : [":defaultGreetingCrew"],
-							"buttonText" : ["Stay"],
-							"callScript" : "swapFollowing"
+							"randomDialogue" : [":defaultGreetingCrew"]
+						}
+					}
+				}
+			},
+			"converse" : {
+				"new" : {
+					"randomDialogue" : [":converse"],
+					"buttonText" : ["[Options]"],
+					"options" : [
+						[ "* Pet", ".pet"]
+					],
+					"next" : ["isOwner", "otherOptions"],
+					"true" : {
+						"addQueued" : true,
+						"queueReplace" : {
+							"options" : [
+								["Stay", ["swapFollowing"]]
+							]
 						},
-						"false" : { "replace" : {"buttonText": ["Follow"]}}
+						"next" : ["isFollowing"],
+						"false" : {
+							"queueReplace" : {
+								"options" : [
+									["Follow", ["swapFollowing"]]
+								]
+							}
+						}
 					}
 				},
 				"stay" : {
@@ -100,6 +124,32 @@
 				},
 				"fullCrew" : {
 					"new" : {"randomDialogue" : [":fullCrew"]}
+				}
+			},
+			"pet" : {
+				"new" : {
+					"randomDialogue" : [":normalPet"],
+					"buttonText" : ["[Back]"],
+					"options" : [
+						[ "* Pet", ".pet"]
+					]
+				},
+				"next" : "petting",
+				"many" : {
+					"replace" : {
+						"buttonText" : ["[ACT]"]
+					}
+				},
+				"excessive" : {
+					"replace" : {
+						"buttonText" : ["[ACT]"]
+					}
+				},
+				"problem" : {
+					"replace" : {
+						"randomDialogue" : [":problemPet"],
+						"buttonText" : ["[ACT]"]
+					}
 				}
 			},
 			// lines triggered when a player may recieve a certain reward
@@ -322,198 +372,6 @@
 						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
 					}
 				},
-				"tailVore" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : {"randomDialogue" : [":defaultRequestTailVoreBefore"]}
-						},
-						"after" : {
-							"replace" : {"randomDialogue" : [":defaultRequestTailVoreAfter"]}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : {"randomDialogue" : [":defaultUnpromptedTailVoreBefore"]}
-						},
-						"after" : {
-							"replace" : {"randomDialogue" : [":defaultUnpromptedTailVoreAfter"]}
-						}
-					},
-					"selfRequest" : {
-						"replace" : {
-							"randomDialogue" : [":defaultSelfRequestTailVore"],
-							"buttonText" : ["[Y/N]"],
-							"options" : [
-								["Yes!", ".tailVore.selfRequest.response.yes" ],
-								["No.", ".tailVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".tailVore.selfRequest.response.noYes" ]
-							]
-						},
-						"response" : {
-							"yes" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestTailVoreYes"],
-									"dismissTime" : 2
-								},
-								"next" : ["queueVore"],
-								"after" : {
-									"new" : {
-										"randomDialogue" : [":defaultSelfRequestTailVoreYesAfter"],
-										"dismissTime" : 2
-									}
-								}
-							},
-							"no" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestTailVoreNo"],
-									"dismissTime" : 2
-								}
-							},
-							"noYes" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestTailVoreNoYes"],
-									"dismissTime" : 2
-								},
-								"next" : ["queueVore"],
-								"after" : {
-									"new" : {
-										"randomDialogue" : [":defaultSelfRequestTailVoreNoYesAfter"],
-										"dismissTime" : 2
-									}
-								}
-							}
-						}
-					},
-					"notFeelingIt" : {
-						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}
-					},
-					"tooBig" : {
-						"replace" : {"randomDialogue" : [":defaultTooBig"]}
-					},
-					"tooSmall" : {
-						"replace" : {"randomDialogue" : [":defaultTooSmall"]}
-					},
-					"full" : {
-						"replace" : {"randomDialogue" : [":defaultTailVoreFull"]},
-						"next" : [
-							"locationEffectSlot",
-							"locationCompression"
-						],
-						"softDigest" : ".digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":digestTailVoreFull"]}
-						},
-						"time" : { // compression
-							"queueReplace" : {"randomDialogue" : [":compressionTailVoreFull"]},
-							"addQueued" : true
-						}
-					},
-					"otherLocationFull" : {
-						"replace" : {"randomDialogue" : [":defaultFull"]}
-					},
-					"needsInfusion" : {
-						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
-					}
-				},
-				"cockVore" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : {"randomDialogue" : [":defaultRequestCockVoreBefore"]}
-						},
-						"after" : {
-							"replace" : {"randomDialogue" : [":defaultRequestCockVoreAfter"]}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : {"randomDialogue" : [":defaultUnpromptedCockVoreBefore"]}
-						},
-						"after" : {
-							"replace" : {"randomDialogue" : [":defaultUnpromptedCockVoreAfter"]}
-						}
-					},
-					"selfRequest" : {
-						"replace" : {
-							"randomDialogue" : [":defaultSelfRequestCockVore"],
-							"buttonText" : ["[Y/N]"],
-							"options" : [
-								["Yes!", ".cockVore.selfRequest.response.yes" ],
-								["No.", ".cockVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
-							]
-						},
-						"response" : {
-							"yes" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestCockVoreYes"],
-									"dismissTime" : 2
-								},
-								"next" : ["queueVore"],
-								"after" : {
-									"new" : {
-										"randomDialogue" : [":defaultSelfRequestCockVoreYesAfter"],
-										"dismissTime" : 2
-									}
-								}
-							},
-							"no" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestCockVoreNo"],
-									"dismissTime" : 2
-								}
-							},
-							"noYes" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestCockVoreNoYes"],
-									"dismissTime" : 2
-								},
-								"next" : ["queueVore"],
-								"after" : {
-									"new" : {
-										"randomDialogue" : [":defaultSelfRequestCockVoreNoYesAfter"],
-										"dismissTime" : 2
-									}
-								}
-							}
-						}
-					},
-					"notFeelingIt" : {
-						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}
-					},
-					"tooBig" : {
-						"replace" : {"randomDialogue" : [":defaultTooBig"]}
-					},
-					"tooSmall" : {
-						"replace" : {"randomDialogue" : [":defaultTooSmall"]}
-					},
-					"full" : {
-						"replace" : {"randomDialogue" : [":defaultCockVoreFull"]},
-						"next" : [
-							"locationEffectSlot",
-							"locationCompression"
-						],
-						"softDigest" : ".digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":digestCockVoreFull"]}
-						},
-						"time" : { // compression
-							"queueReplace" : {"randomDialogue" : [":compressionCockVoreFull"]},
-							"addQueued" : true
-						}
-					},
-					"otherLocationFull" : {
-						"replace" : {"randomDialogue" : [":defaultFull"]}
-					},
-					"needsInfusion" : {
-						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
-					}
-				},
 				"unbirth" : {
 					"next" : "voreResponse",
 					"request" : {
@@ -609,102 +467,6 @@
 					"needsInfusion" : {
 						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
 					}
-				},
-				"breastVore" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : {"randomDialogue" : [":defaultRequestBreastVoreBefore"]}
-						},
-						"after" : {
-							"replace" : {"randomDialogue" : [":defaultRequestBreastVoreAfter"]}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : {"randomDialogue" : [":defaultUnpromptedBreastVoreBefore"]}
-						},
-						"after" : {
-							"replace" : {"randomDialogue" : [":defaultUnpromptedBreastVoreAfter"]}
-						}
-					},
-					"selfRequest" : {
-						"replace" : {
-							"randomDialogue" : [":defaultSelfRequestBreastVore"],
-							"buttonText" : ["[Y/N]"],
-							"options" : [
-								["Yes!", ".breastVore.selfRequest.response.yes" ],
-								["No.", ".breastVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".breastVore.selfRequest.response.noYes" ]
-							]
-						},
-						"response" : {
-							"yes" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestBreastVoreYes"],
-									"dismissTime" : 2
-								},
-								"next" : ["queueVore"],
-								"after" : {
-									"new" : {
-										"randomDialogue" : [":defaultSelfRequestBreastVoreYesAfter"],
-										"dismissTime" : 2
-									}
-								}
-							},
-							"no" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestBreastVoreNo"],
-									"dismissTime" : 2
-								}
-							},
-							"noYes" : {
-								"new" : {
-									"randomDialogue" : [":defaultSelfRequestBreastVoreNoYes"],
-									"dismissTime" : 2
-								},
-								"next" : ["queueVore"],
-								"after" : {
-									"new" : {
-										"randomDialogue" : [":defaultSelfRequestBreastVoreNoYesAfter"],
-										"dismissTime" : 2
-									}
-								}
-							}
-						}
-					},
-					"notFeelingIt" : {
-						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}
-					},
-					"tooBig" : {
-						"replace" : {"randomDialogue" : [":defaultTooBig"]}
-					},
-					"tooSmall" : {
-						"replace" : {"randomDialogue" : [":defaultTooSmall"]}
-					},
-					"full" : {
-						"replace" : {"randomDialogue" : [":defaultBreastVoreFull"]},
-						"next" : [
-							"locationEffectSlot",
-							"locationCompression"
-						],
-						"softDigest" : ".digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":digestBreastVoreFull"]}
-						},
-						"time" : { // compression
-							"queueReplace" : {"randomDialogue" : [":compressionBreastVoreFull"]},
-							"addQueued" : true
-						}
-					},
-					"otherLocationFull" : {
-						"replace" : {"randomDialogue" : [":defaultFull"]}
-					},
-					"needsInfusion" : {
-						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
-					}
 				}
 
 			},
@@ -758,32 +520,6 @@
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				},
-				"tail" : {
-					"replace" : {
-						"randomDialogue" : [":defaultStruggle"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":digestStruggle"]},
-							"next" : "digestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":digestStruggleImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":healStruggle"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":compressionStruggle"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":energyDrainStruggle"]}}},
-					"transforming" : ".struggle.any.transforming",
-					"eggify" : ".struggle.any.eggify"
-				},
 				"womb" : {
 					"replace" : {
 						"randomDialogue" : [":wombDefaultStruggle"]
@@ -809,119 +545,6 @@
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":wombEnergyDrainStruggle"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
-				},
-				"cock" : ".shaft",
-				"shaft" : {
-					"replace" : {
-						"randomDialogue" : [":shaftDefaultStruggle"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming",
-						"locationInfused"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":shaftDigestStruggle"]},
-							"next" : "cumDigestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":shaftDigestStruggleImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":shaftHealStruggle"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":shaftCompressionStruggle"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":shaftEnergyDrainStruggle"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":cumTransformingStruggle"]},
-						"addQueued" : true,
-						"next" : "cumTransformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":cumTransformingStruggleImmune"]}}
-					}},
-					"eggify" : ".struggle.any.eggify",
-					"locationInfused" : {
-						"true" : {
-							"add" : { "randomDialogue" : [":shaftInfusedStruggle"]}
-						}
-					}
-				},
-				"ballsL" : ".balls",
-				"ballsR" : ".balls",
-				"balls" : {
-					"replace" : {
-						"randomDialogue" : [":ballsDefaultStruggle"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":ballsDigestStruggle"]},
-							"next" : "cumDigestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":ballsDigestStruggleImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":ballsHealStruggle"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":ballsCompressionStruggle"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":ballsEnergyDrainStruggle"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":cumTransformingStruggle"]},
-						"addQueued" : true,
-						"next" : "cumTransformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":cumTransformingStruggleImmune"]}}
-					}},
-					"eggify" : ".struggle.any.eggify"
-				},
-				"breastsL" : ".breasts",
-				"breastsR" : ".breasts",
-				"breasts" : {
-					"replace" : {
-						"randomDialogue" : [":breastsDefaultStruggle"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming",
-						"shirt"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":breastsDigestStruggle"]},
-							"next" : ["milkDigestImmunity"],
-							"true" : {"replace" : {"randomDialogue" : [":breastsDigestStruggleImmune"]}}
-						},
-						"heal" : {
-							"replace" : {"randomDialogue" : [":breastsHealStruggle"]}
-						}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":breastsCompressionStruggle"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":breastsEnergyDrainStruggle"]}}},
-					"transforming" : ".struggle.any.transforming",
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
-					}},
-					"shirt" : {
-						"true" : {
-							"queueReplace" : {"randomDialogue": [":breastsDefaultStruggleShirt"]},
-							"addQueued" : true
-						}
-					}
 				}
 			},
 
@@ -1026,81 +649,6 @@
 						"transforming" : ".letout.true.any.transforming",
 						"eggify" : ".letout.true.any.eggify"
 					},
-					"tailVore" : {
-						"replace" : {
-							"randomDialogue" : [":letoutTailVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"digested",
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"digested" : {
-							"true" : {
-								"replace" : {
-									"randomDialogue" : [":letoutTailVoreStruggleDigested"]
-								},
-								"finished" : true
-							}
-						},
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":letoutTailVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutTailVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":letoutTailVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutTailVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":letoutTailVoreStruggleHeal"]}}
-						},
-						"transforming" : ".letout.true.any.transforming",
-						"eggify" : ".letout.true.any.eggify"
-					},
-					"cockVore" : {
-						"replace" : {
-							"randomDialogue" : [":letoutCockVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"digested",
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"digested" : {
-							"true" : {
-								"replace" : {
-									"randomDialogue" : [":letoutCockVoreStruggleDigested"]
-								},
-								"finished" : true
-							}
-						},
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":letoutCockVoreStruggleDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":letoutCockVoreStruggleSoftDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":letoutCockVoreStruggleHeal"]}}
-						},
-						"transforming" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":letoutStruggleCumTransforming"]},
-							"addQueued" : true,
-							"next" : ["cumTransformAllow"],
-							"false" : {"queueReplace":{"randomDialogue" : [":letoutStruggleCumTransformingImmune"]}}
-						}},
-						"eggify" : ".letout.true.any.eggify"
-					},
 					"unbirth" : {
 						"replace" : {
 							"randomDialogue" : [":letoutUnbirthStruggle"]
@@ -1132,41 +680,6 @@
 								"true" : {"replace" : {"randomDialogue" : [":letoutUnbirthStruggleDigestImmune"]}}
 							},
 							"heal" : { "replace" : {"randomDialogue" : [":letoutUnbirthStruggleHeal"]}}
-						},
-						"transforming" : ".letout.true.any.transforming",
-						"eggify" : ".letout.true.any.eggify"
-					},
-					"breastVore" : {
-						"replace" : {
-							"randomDialogue" : [":letoutBreastVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"digested",
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"digested" : {
-							"true" : {
-								"replace" : {
-									"randomDialogue" : [":letoutBreastVoreStruggleDigested"]
-								},
-								"finished" : true
-							}
-						},
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":letoutBreastVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutBreastVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":letoutBreastVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutBreastVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":letoutBreastVoreStruggleHeal"]}}
 						},
 						"transforming" : ".letout.true.any.transforming",
 						"eggify" : ".letout.true.any.eggify"
@@ -1260,81 +773,6 @@
 						"eggify" : ".letout.false.any.eggify"
 
 					},
-					"tailVore" : {
-						"replace" : {
-							"randomDialogue" : [":letoutTailVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"digested",
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"digested" : {
-							"true" : {
-								"replace" : {
-									"randomDialogue" : [":letoutTailVoreDigested"]
-								},
-								"finished" : true
-							}
-						},
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":letoutTailVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutTailVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":letoutTailVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutTailVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":letoutTailVoreHeal"]}}
-						},
-						"transforming" : ".letout.false.any.transforming",
-						"eggify" : ".letout.false.any.eggify"
-					},
-					"cockVore" : {
-						"replace" : {
-							"randomDialogue" : [":letoutCockVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"digested",
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"digested" : {
-							"true" : {
-								"replace" : {
-									"randomDialogue" : [":letoutCockVoreDigested"]
-								},
-								"finished" : true
-							}
-						},
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":letoutCockVoreDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":letoutCockVoreSoftDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":letoutCockVoreHeal"]}}
-						},
-						"transforming" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":letoutCumTransforming"]},
-							"addQueued" : true,
-							"next" : "cumTransformAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":letoutCumTransformingImmune"]}}
-						}},
-						"eggify" : ".letout.false.any.eggify"
-					},
 					"unbirth" : {
 						"replace" : {
 							"randomDialogue" : [":letoutUnbirth"]
@@ -1368,247 +806,17 @@
 						},
 						"transforming" : ".letout.false.any.transforming",
 						"eggify" : ".letout.false.any.eggify"
-					},
-					"breastVore" : {
-						"replace" : {
-							"randomDialogue" : [":letoutBreastVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"digested",
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"digested" : {
-							"true" : {
-								"replace" : {
-									"randomDialogue" : [":letoutBreastVoreDigested"]
-								},
-								"finished" : true
-							}
-						},
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":letoutBreastVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutBreastVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":letoutBreastVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutBreastVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":letoutBreastVoreHeal"]}}
-						},
-						"transforming" : ".letout.false.any.transforming",
-						"eggify" : ".letout.false.any.eggify"
 					}
 				}
 			},
 
 			// for when an NPC is requesting a player or other NPC eats them
 			"preyRequest" : {
-				"next" : "voreType",
-				"new" : {
-					"hideVoreButtons" : true
-				},
-				"oralVore" : {
-					"replace" : {
-						"randomDialogue" : [":defaultPreyRequestOralVore"],
-						"buttonText" : ["[Y/N]"],
-						"options" : [
-							["Yes!", ".oralVore.response.yes" ],
-							["No.", ".oralVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".oralVore.response.noYes" ]
-						]
-					},
-					"seperateNext" : true,
-					"response" : {
-						"yes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestOralVoreYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						},
-						"no" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestOralVoreNo"],
-								"dismissTime" :2
-							}
-						},
-						"noYes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestOralVoreNoYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						}
-					}
-				},
-				"tailVore" : {
-					"replace" : {
-						"randomDialogue" : [":defaultPreyRequestTailVore"],
-						"buttonText" : ["[Y/N]"],
-						"options" : [
-							["Yes!", ".tailVore.response.yes" ],
-							["No.", ".tailVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".tailVore.response.noYes" ]
-						]
-					},
-					"seperateNext" : true,
-					"response" : {
-						"yes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestTailVoreYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						},
-						"no" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestTailVoreNo"],
-								"dismissTime" :2
-							}
-						},
-						"noYes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestTailVoreNoYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						}
-					}
-				},
-				"unbirth" : {
-					"replace" : {
-						"randomDialogue" : [":defaultPreyRequestUnbirth"],
-						"buttonText" : ["[Y/N]"],
-						"options" : [
-							["Yes!", ".unbirth.response.yes" ],
-							["No.", ".unbirth.response.no" ],
-							["No... ^#555;(But actually Yes)", ".unbirth.response.noYes" ]
-						]
-					},
-					"seperateNext" : true,
-					"response" : {
-						"yes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestUnbirthYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						},
-						"no" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestUnbirthNo"],
-								"dismissTime" :2
-							}
-						},
-						"noYes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestUnbirthNoYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						}
-					}
-				},
-				"cockVore" : {
-					"replace" : {
-						"randomDialogue" : [":defaultPreyRequestCockVore"],
-						"buttonText" : ["[Y/N]"],
-						"options" : [
-							["Yes!", ".cockVore.response.yes" ],
-							["No.", ".cockVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".cockVore.response.noYes" ]
-						]
-					},
-					"seperateNext" : true,
-					"response" : {
-						"yes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestCockVoreYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						},
-						"no" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestCockVoreNo"],
-								"dismissTime" :2
-							}
-						},
-						"noYes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestCockVoreNoYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						}
-					}
-				},
-				"breastVore" : {
-					"replace" : {
-						"randomDialogue" : [":defaultPreyRequestBreastVore"],
-						"buttonText" : ["[Y/N]"],
-						"options" : [
-							["Yes!", ".breastVore.response.yes" ],
-							["No.", ".breastVore.response.no" ],
-							["No... ^#555;(But actually Yes)", ".breastVore.response.noYes" ]
-						]
-					},
-					"seperateNext" : true,
-					"response" : {
-						"yes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestBreastVoreYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						},
-						"no" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestBreastVoreNo"],
-								"dismissTime" :2
-							}
-						},
-						"noYes" : {
-							"new" : {
-								"randomDialogue" : [":defaultPreyRequestBreastVoreNoYes"],
-								"dismissTime" :2
-							},
-							"next" : ["queuePrey"]
-						}
-					}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 			// for when being prey and forcing their way into a pred without asking
 			"forcingPrey" : {
-				"new" : {},
-				"next" : "voreType",
-				"oralVore" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyOralVore"]}
-				},
-				"tailVore" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyTailVore"]}
-				},
-				"absorbVore" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyAbsorbVore"]}
-				},
-				"analVore" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyAnalVore"]}
-				},
-				"cockVore" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyCockVore"]}
-				},
-				"unbirth" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyUnbirth"]}
-				},
-				"breastVore" : {
-					"replace" : { "randomDialogue" : [":defaultForcingPreyBreastVore"]}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 			// when being pred, response to prey forcing their way in unwillingly
 			"unwillingPred" : {
@@ -1617,826 +825,36 @@
 				"oralVore" : {
 					"replace" : { "randomDialogue" : [":defaultUnwillingPredOralVore"]}
 				},
-				"tailVore" : {
-					"replace" : { "randomDialogue" : [":defaultUnwillingPredTailVore"]}
-				},
 				"analVore" : {
 					"replace" : { "randomDialogue" : [":defaultUnwillingPredAnalVore"]}
 				},
-				"cockVore" : {
-					"replace" : { "randomDialogue" : [":defaultUnwillingPredCockVore"]}
-				},
 				"unbirth" : {
 					"replace" : { "randomDialogue" : [":defaultUnwillingPredUnbirth"]}
-				},
-				"breastVore" : {
-					"replace" : { "randomDialogue" : [":defaultUnwillingPredBreastVore"]}
 				}
 			},
 
 			// when being prey, responses to the pred that ate them as they struggle
 			// settings come from the pred, prey settings comes from itself
 			"struggling" : {
-				"new" : {
-					"hideVoreButtons" : true,
-					"randomDialogue" : [":struggling"]
-				},
-				"next" : ["predator","location"],
-				"sbqSlime" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingSlime"]
-					},
-					"finished" : true,
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationEnergyDrain",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":sstrugglingSlimeDigest"]},
-							"next" : "digestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingSlimeDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingSlimeHeal"]}}
-					},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingSlimeTransforming"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":transformingStruggleImmune"]}}
-					}}
-				},
-				"taurBelly" : ".belly",
-				"belly" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingBelly"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":strugglingBellyDigest"]},
-							"next" : "digestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingBellyDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingBellyHeal"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingBellyCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingBellyEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingBellyTransforming"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingTransformingImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingBellyEggify"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingEggifyImmune"]}}
-					}}
-				},
-				"tail" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingTail"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":strugglingTailDigest"]},
-							"next" : "digestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingTailDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingTailHeal"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingTailCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingTailEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingTailTransforming"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingTransformingImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingTailEggify"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingEggifyImmune"]}}
-					}}
-				},
-				"womb" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingWomb"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":strugglingWombDigest"]},
-							"next" : "femcumDigestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingWombDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingWombHeal"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingWombCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingWombEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingWombTransforming"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingTransformingImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingWombEggify"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingEggifyImmune"]}}
-					}}
-				},
-				"cock" : ".shaft",
-				"shaft" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingShaft"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":strugglingShaftDigest"]},
-							"next" : "cumDigestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingShaftDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingShaftHeal"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingShaftCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingShaftEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingShaftCumTransforming"]},
-						"addQueued" : true,
-						"next" : "cumTransformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingCumTransformingImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingShaftEggify"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingEggifyImmune"]}}
-					}}
-				},
-				"ballsL" : ".balls",
-				"ballsR" : ".balls",
-				"balls" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingBalls"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":strugglingBallsDigest"]},
-							"next" : "cumDigestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingBallsDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingBallsHeal"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingBallsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingBallsEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingBallsCumTransforming"]},
-						"addQueued" : true,
-						"next" : "cumTransformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingCumTransformingImmune"]}}
-					}},
-					"eggify" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingBallsEggify"]},
-						"addQueued" : true,
-						"next" : "eggAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingEggifyImmune"]}}
-					}}
-				},
-				"breastsL" : ".breasts",
-				"breastsR" : ".breasts",
-				"breasts" : {
-					"replace" : {
-						"randomDialogue" : [":strugglingBreasts"]
-					},
-					"seperateNext" : true,
-					"next" : [
-						"locationEffectSlot",
-						"locationCompression",
-						"locationEnergyDrain",
-						"eggify",
-						"transforming"
-					],
-					"locationEffectSlot" : {
-						"softDigest" : ".locationEffectSlot.digest",
-						"digest" : {
-							"replace" : {"randomDialogue" : [":strugglingBreastsDigest"]},
-							"next" : "milkDigestImmunity",
-							"true" : {"replace" : {"randomDialogue" : [":strugglingBreastsDigestImmune"]}}
-						},
-						"heal" : { "replace" : {"randomDialogue" : [":strugglingBreastsHeal"]}}
-					},
-					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingBreastsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingBreastsEnergyDrain"]}}},
-					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingBreastsTransforming"]},
-						"addQueued" : true,
-						"next" : "transformAllow",
-						"false" : {"queueReplace":{"randomDialogue" : [":strugglingTransformingImmune"]}}
-					}}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 
 			// when being prey, responses to the pred thats eating them
 			// settings come from the pred, prey settings comes from itself
 			"vored" : {
-				"new" : {},
-				"next" : "willing",
-				"true" : {
-					"oralVore" : {"replace":{"randomDialogue":[":voredOralVoreWilling"]}},
-					"analVore" : {"replace":{"randomDialogue":[":voredAnalVoreWilling"]}},
-					"tailVore" : {"replace":{"randomDialogue":[":voredTailVoreWilling"]}},
-					"absorbVore" : {"replace":{"randomDialogue":[":voredAbsorbVoreWilling"]}},
-					"cockVore" : {"replace":{"randomDialogue":[":voredCockVoreWilling"]}},
-					"unbirth" : {"replace":{"randomDialogue":[":voredUnbirthWilling"]}},
-					"breastVore" : {"replace":{"randomDialogue":[":voredBreastVoreWilling"]}}
-				},
-				"false" : {
-					"next" : "voreType",
-					"oralVore" : {"replace":{"randomDialogue":[":voredOralVore"]}},
-					"analVore" : {"replace":{"randomDialogue":[":voredAnalVore"]}},
-					"tailVore" : {"replace":{"randomDialogue":[":voredTailVore"]}},
-					"absorbVore" : {"replace":{"randomDialogue":[":voredAbsorbVore"]}},
-					"cockVore" : {"replace":{"randomDialogue":[":voredCockVore"]}},
-					"unbirth" : {"replace":{"randomDialogue":[":voredUnbirth"]}},
-					"breastVore" : {"replace":{"randomDialogue":[":voredBreastVore"]}}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 
 			// when being prey, responses to the pred letting them out
 			// settings come from the pred, prey settings comes from itself
 			"escape" : {
-				"next" : "struggleTrigger",
-				"true" : { // prey struggled out
-					"next" : "voreType",
-					"any" : {
-						"transforming" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeStruggleTransforming"]},
-							"addQueued" : true,
-							"next" : "transformAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeStruggleTransformingImmune"]}}
-						}},
-						"eggify" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeStruggleEggify"]},
-							"addQueued" : true,
-							"next" : "eggAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeStruggleEggifyImmune"]}}
-						}}
-					},
-					"oralVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeOralVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeOralVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeOralVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeOralVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeOralVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeOralVoreStruggleHeal"]}}
-						},
-						"transforming" : ".escape.true.any.transforming",
-						"eggify" : ".escape.true.any.eggify"
-					},
-					"analVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeAnalVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeAnalVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAnalVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeAnalVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAnalVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeAnalVoreStruggleHeal"]}}
-						},
-						"transforming" : ".escape.true.any.transforming",
-						"eggify" : ".escape.true.any.eggify"
-					},
-					"tailVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeTailVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeTailVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeTailVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeTailVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeTailVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeTailVoreStruggleHeal"]}}
-						},
-						"transforming" : ".escape.true.any.transforming",
-						"eggify" : ".escape.true.any.eggify"
-					},
-					"absorbVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeAbsorbVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeAbsorbVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAbsorbVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeAbsorbVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAbsorbVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeAbsorbVoreStruggleHeal"]}}
-						},
-						"transforming" : ".escape.true.any.transforming",
-						"eggify" : ".escape.true.any.eggify"
-					},
-					"cockVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeCockVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeCockVoreStruggleDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeCockVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeCockVoreStruggleSoftDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeCockVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeCockVoreStruggleHeal"]}}
-						},
-						"transforming" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeStruggleCumTransforming"]},
-							"addQueued" : true,
-							"next" : "cumTransformAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeStruggleCumTransformingImmune"]}}
-						}},
-						"eggify" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeStruggleEggify"]},
-							"addQueued" : true,
-							"next" : "eggAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeStruggleEggifyImmune"]}}
-						}}
-					},
-					"unbirth" : {
-						"replace" : {
-							"randomDialogue" : [":escapeUnbirthStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeUnbirthStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeUnbirthStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeUnbirthStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeUnbirthStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeUnbirthStruggleHeal"]}}
-						},
-						"transforming" : ".escape.true.any.transforming",
-						"eggify" : ".escape.true.any.eggify"
-					},
-					"breastVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeBreastVoreStruggle"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeBreastVoreStruggleDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeBreastVoreStruggleDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeBreastVoreStruggleSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeBreastVoreStruggleDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeBreastVoreStruggleHeal"]}}
-						},
-						"transforming" : ".escape.true.any.transforming",
-						"eggify" : ".escape.true.any.eggify"
-					}
-				},
-				"false" : { // pred let prey out
-					"next" : "voreType",
-					"any" : {
-						"transforming" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeTransforming"]},
-							"addQueued" : true,
-							"next" : "transformAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeTransformingImmune"]}}
-						}},
-						"eggify" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeEggify"]},
-							"addQueued" : true,
-							"next" : "eggAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeEggifyImmune"]}}
-						}}
-					},
-					"oralVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeOralVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeOralVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeOralVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeOralVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeOralVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeOralVoreHeal"]}}
-						},
-						"transforming" : ".escape.false.any.transforming",
-						"eggify" : ".escape.false.any.eggify"
-					},
-					"analVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeAnalVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeAnalVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAnalVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeAnalVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAnalVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeAnalVoreHeal"]}}
-						},
-						"transforming" : ".escape.false.any.transforming",
-						"eggify" : ".escape.false.any.eggify"
-					},
-					"tailVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeTailVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeTailVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeTailVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeTailVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeTailVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeTailVoreHeal"]}}
-						},
-						"transforming" : ".escape.false.any.transforming",
-						"eggify" : ".escape.false.any.eggify"
-					},
-					"absorbVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeAbsorbVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeAbsorbVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAbsorbVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeAbsorbVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeAbsorbVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeAbsorbVoreHeal"]}}
-						},
-						"transforming" : ".escape.false.any.transforming",
-						"eggify" : ".escape.false.any.eggify"
-					},
-					"cockVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeCockVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeCockVoreDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeCockVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeCockVoreSoftDigest"]},
-								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeCockVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeCockVoreHeal"]}}
-						},
-						"transforming" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeCumTransforming"]},
-							"addQueued" : true,
-							"next" : "cumTransformAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeCumTransformingImmune"]}}
-						}},
-						"eggify" : {"true" : {
-							"queueReplace" : {"randomDialogue" : [":escapeEggify"]},
-							"addQueued" : true,
-							"next" : "eggAllow",
-							"false" : {"queueReplace":{"randomDialogue" : [":escapeEggifyImmune"]}}
-						}}
-					},
-					"unbirth" : {
-						"replace" : {
-							"randomDialogue" : [":escapeUnbirth"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeUnbirthDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeUnbirthDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeUnbirthSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeUnbirthDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeUnbirthHeal"]}}
-						},
-						"transforming" : ".escape.false.any.transforming",
-						"eggify" : ".escape.false.any.eggify"
-					},
-					"breastVore" : {
-						"replace" : {
-							"randomDialogue" : [":escapeBreastVore"]
-						},
-						"seperateNext" : true,
-						"next" : [
-							"locationEffectSlot",
-							"eggify",
-							"transforming"
-						],
-						"locationEffectSlot" : {
-							"digest" : {
-								"replace" : {"randomDialogue" : [":escapeBreastVoreDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeBreastVoreDigestImmune"]}}
-							},
-							"softDigest" : {
-								"replace" : {"randomDialogue" : [":escapeBreastVoreSoftDigest"]},
-								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":escapeBreastVoreDigestImmune"]}}
-							},
-							"heal" : { "replace" : {"randomDialogue" : [":escapeBreastVoreHeal"]}}
-						},
-						"transforming" : ".escape.false.any.transforming",
-						"eggify" : ".escape.false.any.eggify"
-					}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 
 			// lines for when an NPC infuses someone (CTF, Boobsorb, etc.)
 			"infusePrey" : {
 				"new" : {"dismissTime" : 2},
 				"next" : "location",
-				"belly" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseRequestBellyBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBellyBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseRequestBellyAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBellyAfterLayer"]}}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedBellyBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBellyBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedBellyAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBellyAfterLayer"]}}
-						}
-					},
-					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
-
-				},
-				"tail" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseRequestTailBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestTailBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseRequestTailAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestTailAfterLayer"]}}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedTailBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedTailBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedTailAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedTailAfterLayer"]}}
-						}
-					},
-					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
-
-				},
-				"breastsL" : ".breasts",
-				"breastsR" : ".breasts",
-				"breasts" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseRequestBreastsBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBreastsBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseRequestBreastsAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBreastsAfterLayer"]}}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBreastsAfterLayer"]}}
-						}
-					},
-					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
-
-				},
 				"womb" : ".pussy",
 				"pussy" : {
 					"next" : "voreResponse",
@@ -2468,93 +886,13 @@
 					},
 					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
 
-				},
-				"cock" : ".shaft",
-				"shaft" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseRequestShaftBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestShaftBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseRequestShaftAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestShaftAfterLayer"]}}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedShaftBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedShaftBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedShaftAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedShaftAfterLayer"]}}
-						}
-					},
-					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
-
-				},
-				"ballsL" : ".balls",
-				"ballsR" : ".balls",
-				"balls" : {
-					"next" : "voreResponse",
-					"request" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseRequestBallsBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBallsBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseRequestBallsAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBallsAfterLayer"]}}
-						}
-					},
-					"unprompted" : {
-						"next" : "doingVore",
-						"before" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedBallsBefore"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBallsBeforeLayer"]}}
-						},
-						"after" : {
-							"replace" : { "randomDialogue" : [":infuseUnpromptedBallsAfter"]},
-							"next" : "infuselayered",
-							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBallsAfterLayer"]}}
-						}
-					},
-					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
 				}
 			},
 
 			// lines for when a character is infused (CTF Boobsorb etc.)
 			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
 			"infused" : {
-				"new" : {
-					"randomDialogue":[":infused"],
-					"hideVoreButtons" : true
-				},
-				"next" : "location",
-				"belly" : {"replace" :{"randomDialogue" : [":infusedBelly"]}},
-				"tail" : {"replace" :{"randomDialogue" : [":infusedTail"]}},
-				"womb":".pussy",
-				"pussy" : {"replace" :{"randomDialogue" : [":infusedPussy"]}},
-				"breastsL":".breasts",
-				"breastsR":".breasts",
-				"breasts" : {"replace" :{"randomDialogue" : [":infusedBreasts"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"randomDialogue" : [":infusedShaft"]}},
-				"ballsL":".balls",
-				"ballsR":".balls",
-				"balls" : {"replace" :{"randomDialogue" : [":infusedBalls"]}}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 
 			// lines for when a character is infused (CTF Boobsorb etc.) the pred teasing their occupant
@@ -2565,18 +903,8 @@
 					"hideVoreButtons" : true
 				},
 				"next" : "location",
-				"belly" : {"replace" :{"randomDialogue" : [":teaseInfusedBelly"]}},
-				"tail" : {"replace" :{"randomDialogue" : [":teaseInfusedTail"]}},
 				"womb":".pussy",
-				"pussy" : {"replace" :{"randomDialogue" : [":teaseInfusedPussy"]}},
-				"breastsL":".breasts",
-				"breastsR":".breasts",
-				"breasts" : {"replace" :{"randomDialogue" : [":teaseInfusedBreasts"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"randomDialogue" : [":teaseInfusedShaft"]}},
-				"ballsL":".balls",
-				"ballsR":".balls",
-				"balls" : {"replace" :{"randomDialogue" : [":teaseInfusedBalls"]}}
+				"pussy" : {"replace" :{"randomDialogue" : [":teaseInfusedPussy"]}}
 			},
 
 			// a line of dialogue triggered when size is changed by the size ray or something else
@@ -2730,6 +1058,8 @@
 		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
 		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
 		"sbqOverridePreyEnabled" : {
+			"preyEnabled": false,
+
 			"navelVore" : false,
 
 			"digestItemDropsAllow" : false,
@@ -2797,7 +1127,6 @@
 			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
 
 			"sbqPreyEnabled" : {
-				"preyEnabled": true,
 
 				"eggAllow": true,
 
