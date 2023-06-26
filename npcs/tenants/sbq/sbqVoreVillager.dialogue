@@ -1721,39 +1721,132 @@
 	"compressionAbsorbVoreFull": ":missingDialogue",
 	"shyCompressionAbsorbVoreFull": ":missingDialogue",
 	"flirtyCompressionAbsorbVoreFull": ":missingDialogue",
-	"defaultRequestCockVoreBefore": [
-		"Hah, you're horny.",
-		"You want to get squeezed into my dick?",
-		"You know things aren't supposed to go in there right?",
-		"Thats going to be a real tight fit."
-	],
-	"shyRequestCockVoreBefore": [
-		[
-			"O-oh... y-you want to g-get into my... *Flustered Noises*",
-			"O-oh... y-you want to g-get into my... <keysmash>"
-		],
-		"Are you sure...?",
-		"Uhm... you're asking... me?",
-		"R-right... g-get in my dick then~ ...did I say that right?"
-	],
-	"flirtyRequestCockVoreBefore": [
-		"Hehe, horny little plaything~",
-		"Hehe, look at how excited you are to get shoved into my dick~",
-		"Hey look, you got me hard by just asking~",
-		"So you want to get squeezed all around by my nice hard shaft~?"
-	],
-	"defaultRequestCockVoreAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me all excited~",
-		"Ffff~ Now I'm all hard~",
-		"A-ahh~ Don't stop squirming~"
-	],
-	"shyRequestCockVoreAfter": [
-		"Ahhh~ w-wow you're really in there~",
-		"Ooohhh~ I-I didn't think you were serious~",
-		"Mmmm~ Is it as good for you as it is for me~",
-		"Ffffff~ N-now you're where you belong~ ...did I say it right?"
-	],
+	"defaultRequestCockVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hah, you're horny.",
+				"You want to get squeezed into my dick?",
+				"You know things aren't supposed to go in there right?",
+				"Thats going to be a real tight fit."
+			],
+			[ // 25% - 50%
+				"Mmm... I think I could work myself up to that heh.",
+				"Ahh... just the suggestion got my dick firming up, lets do it.",
+				"You're real naughty you know that?\nWanting to get shoved into my dick...\nYeah..."
+			],
+			[ // 50% - 75%
+				"Thats good, because I've had a bit of a hard on hehe~",
+				"Of course I can! Gosh its going to feel so good with you in my cock!",
+				"Hehe, you sure you can handle getting squeezed in my boner?"
+			],
+			[ // 75% - 100%
+				"Yes! of course I will!\nI'm so worked up I just *need* someone squirming down my shaft!",
+				"Oh yessss! Huff... Get yourself squirming down my shaft right away!",
+				"Ahhh yes please! I needed someone squirming in my cock and now you're right here asking for it!"
+			]
+		]
+	},
+	"shyRequestCockVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Are you sure...?",
+				"Uhm... you're asking... me?",
+				"R-right... g-get in my dick then~ ...did I say that right?"
+			],
+			[ // 25% - 50%
+				"O-oh... y-you want to g-get into my... *Flustered Noises*",
+				"O-oh... y-you want to g-get into my... <keysmash>",
+				"A-Ahhh! You're getting me all e-excited...!"
+			],
+			[ // 50% - 75%
+				"Huff... A-ah m-maybe it will help with this b-boner~",
+				"I-I'm already so hard thinking about it... p-please get in my cock!",
+				"hhhhuff... You really... r-eally want to s-squirm into my throbbing shaft?"
+			],
+			[ // 75% - 100%
+				"Ahh! Y-yes please! I-I've been trying to hide this boner but I just can't!",
+				"H-how did you know!? I-I didn't think anybody knew what I was s-so horny over!",
+				"P-please just get into my cock! I-I just couldn't get myself to ask anyone!"
+			]
+		]
+	},
+	"flirtyRequestCockVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hehe, horny little plaything~",
+				"Hehe, look at how excited you are to get shoved into my dick~",
+				"Hey look, you got me firm by just asking~",
+				"So you want to get squeezed all around by my nice firm shaft~?"
+			],
+			[ // 25% - 50%
+				"Ah, just what I wanted, a cutie like you to admire my cock from inside~",
+				"Of course you'd wanted into my dick, don't think I didn't notice you staring~",
+				"You know exactly where cuties like you belong, don't you~"
+			],
+			[ // 50% - 75%
+				"I knew somebody would get lured in by the sight of my dick hehe~",
+				"A cutie like you? Of course you can squeeze yourself into my nice hard shaft~",
+				"I was thinking about putting it in you, however, your idea sounds more fun cutie~"
+			],
+			[ // 75% - 100%
+				"Huff~ Exactly what I needed cutie, get yourself shoved down my cock~",
+				"My little toy right here exactly when I needed it, you saw how hard I was and came running~",
+				"Time to play with you, and get my cock all hard around you and squeeze you~"
+			]
+		]
+	},
+	"defaultRequestCockVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ahh... You're making my shaft all firm~",
+				"I hope you like it in there~"
+			],
+			[ // 25% - 50%
+				"Aahh~ ooooh thats really good~",
+				"Mmmm~ You're getting me all excited~",
+				"Ffff~ Now I'm all hard~",
+				"A-ahh~ Don't stop squirming~"
+			],
+			[ // 50% - 75%
+				"Yes! Oooh thats great! Squirm even more!",
+				"Keep Squirming, get me harder!",
+				"Yessss~ that feels so goooood~"
+			],
+			[ // 75% - 100%
+				"Huffff~ I'm already so close just from putting you in!",
+				"Squirm! Squirm! Get me to cum ahhH~",
+				"Hhhuff I'm so harrrd this is great~!"
+			]
+		]
+	},
+	"shyRequestCockVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ahh... You're m-making my shaft all firm~",
+				"I h-hope you like it in there~ "
+			],
+			[ // 25% - 50%
+				"Ahhh~ w-wow you're really in there~",
+				"Ooohhh~ I-I didn't think you were serious~!",
+				"I-is this as good for you as it is for m-me~?"
+			],
+			[ // 50% - 75%
+				"Huff ahh I-I... w-wow you're really in my cock... hhhuuufff~",
+				"I-I just t-this is so exciting! I-I really fit you in t-there!",
+				"Ffffff~ N-now you're where you belong~ ...did I say it right?"
+			],
+			[ // 75% - 100%
+				"Hhhhh... I'm so c-close! y-you might just make me cum!",
+				"Ahhhhaaahhh~ why... w-why does this feel so goooood~",
+				"Hhhuff t-this feels so amaaaaaazing~"
+			]
+		]
+	},
 	"flirtyRequestCockVoreAfter": [
 		"Aahh~ right where you belong you horny little thing~",
 		"Mmmm~ Who knows, you might even get me to cum~",
@@ -1795,9 +1888,77 @@
 		"Heheheh, you look so cute all stuffed down my rod like that, like It's meant to be~",
 		"Wow, every move you make is just... ah! yeah, I choose a good toy, a very good toy~"
 	],
-	"defaultSelfRequestCockVore": ":missingDialogue",
-	"shySelfRequestCockVore": ":missingDialogue",
-	"flirtySelfRequestCockVore": ":missingDialogue",
+	"defaultSelfRequestCockVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hey so... my balls are feeling a bit empty, would you want to get inside?",
+				"I was just, thinking about squeezing you into my cock...",
+				"Have you ever thought about... being squeezed into a penis?"
+			],
+			[ // 25% - 50%
+				"Hey so uh... I've been feeling a little horny... can I put you in my balls?",
+				"Been having some urges... can I try... squeezing you into my cock?",
+				"I heard that uh, friends are stored in the balls, I think we're on friendly enough terms for that?"
+			],
+			[ // 50% - 75%
+				"Ahhh I've just been, feeling so horny! I need to have someone squirming around in my sack!",
+				"Huffff... so hard, all these urges to shove someone down into my dick! Help me deal with em!",
+				"Gosh I just keep looking at you... and wanting to feel you getting squeezed down my shaft!"
+			],
+			[ // 75% - 100%
+				"Ahhh~ I'm feeling so close! I just need... I need you in my cock!",
+				"I'm so worked up! right on the edge hufff~ and you're exactly what I need shoved down into my balls~",
+				"I've just been overwhelmed with these urges... the urge to have someone squirming around in my dick!"
+			]
+		]
+	},
+	"shySelfRequestCockVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Uhm... hey I'm... I want to try something... like uhm... put you down my pants... a-and into my cock...",
+				"Could you uh... Can I uh... uhm... put... cock...",
+				"My uh... my balls feel empty... was... wondering..."
+			],
+			[ // 25% - 50%
+				"H-hey I... have a bit of a problem... c-can you help... it's a horny problem...",
+				"I uh... I just... looking at you... feeling some urges... c-can you help?",
+				"I've had this... rather silly horny idea... its probably impossible actually..."
+			],
+			[ // 50% - 75%
+				"P-please help me! I've j-just been... gah! I just want to s-shove you in my cock!",
+				"Hhufff I... g-gosh I'm so excited just t-talking to you... b-but I want more... I want to feel you s-squirming around in my balls!",
+				"Y-you would not believe h-how hard... it was t-to work up the energy to ask you... t-to help me with how hard my cock is..."
+			],
+			[ // 75% - 100%
+				"Huffff... I... I neeeed your help p-pleassse! m-my cock is so h-haaard and nothing I'm doing is helping!",
+				"Ahhh I'm so c-clooose but I just need something! I have all these h-horny urges towards you!",
+				"I've just been overwhelmed with these urges... the urge to have someone squirming around in my dick!"
+			]
+		]
+	},
+	"flirtySelfRequestCockVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hmm, I'd like to take a cutie like you along with me, how about a ride in my sack~?",
+				"Hehe, hey cutie, want to go on a little adventure down my cock~?",
+				"You're so cute... how about I stick you down my pants, maybe into my cock~"
+			],
+			[ // 25% - 50%
+				"Hey there~ I think I'm gonna shove you down my cock, just because I feel like it~",
+				"Hey you~ Do you want to get a real close look at my dick~?",
+				"Mmm I think my dick is firming up a bit, probably from looking at you~ want to see~?"
+			],
+			[ // 50% - 75%
+				"MMMmm can't help having this boner when I'm imagning a cutie like you squirming around in my sack~"
+			],
+			[ // 75% - 100%
+				"You. I want you~ I want to grab you and shove you right down into my throbbing cock~\nWhere you belong~"
+			]
+		]
+	},
 	"defaultSelfRequestCockVoreYes": ":missingDialogue",
 	"shySelfRequestCockVoreYes": ":missingDialogue",
 	"flirtySelfRequestCockVoreYes": ":missingDialogue",
@@ -1873,12 +2034,24 @@
 		"You really want to horny little plaything don't you~?",
 		"Heh, get in line, everyone wants to have fun with me~"
 	],
-	"digestCockVoreFull": ":missingDialogue",
-	"shyDigestCockVoreFull": ":missingDialogue",
-	"flirtyDigestCockVoreFull": ":missingDialogue",
-	"compressionCockVoreFull": ":missingDialogue",
-	"shyCompressionCockVoreFull": ":missingDialogue",
-	"flirtyCompressionCockVoreFull": ":missingDialogue",
+	"digestCockVoreFull": [
+		"Ah... give me a moment to melt my toys into cum, then I might be able to fit you."
+	],
+	"shyDigestCockVoreFull": [
+		"Oh uhm... y-you won't fit in there... t-though it does seem like they're... melting..."
+	],
+	"flirtyDigestCockVoreFull": [
+		"Give me moment or two to melt one of these cuties down~ Then you can take their place~"
+	],
+	"compressionCockVoreFull": [
+		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
+	],
+	"shyCompressionCockVoreFull": [
+		"Ahhh... the h-harder I get... the more they get squished... m-maybe then you'll fit in...?"
+	],
+	"flirtyCompressionCockVoreFull": [
+		"Maybe give me a handjob while you wait for you turn~? It'll certainly help my other toys get squished harder~"
+	],
 	"defaultCockVoreNeedsInfusion": [
 		"I'd need someone to turn into my dick first...",
 		"Someone would need to be my cock...",
@@ -1889,7 +2062,10 @@
 		"Is t-there any way for me to get one of those...?",
 		"I-I don't actually have o-one of those..."
 	],
-	"flirtytCockVoreNeedsInfusion": ":missingDialogue",
+	"flirtytCockVoreNeedsInfusion": [
+		"hmm~ I'll need to get my hands on a cock then~",
+		"Know anyone I can turn into a cock~?"
+	],
 	"defaultRequestUnbirthBefore": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my pussy?",
@@ -2679,7 +2855,9 @@
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
-	"letoutCockVoreStruggleDigested": ":missingDialogue",
+	"letoutCockVoreStruggleDigested": [
+		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
+	],
 	"letoutCockVoreStruggleDigest": [
 		"Got out of my shaft before it made you mush ey?",
 		"Did you have to leave? it felt so good having you melt in my cock!",
@@ -2834,11 +3012,27 @@
 		"Gonna blast you out with a load~",
 		"Ahhhh feeels soooo goood~"
 	],
-	"letoutCockVoreDigested": ":missingDialogue",
-	"letoutCockVoreDigest": ":missingDialogue",
-	"letoutCockVoreDigestImmune": ":missingDialogue",
+	"letoutCockVoreDigested": [
+		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
+	],
+	"letoutCockVoreDigest": [
+		"Hm... maybe I won't melt you down entirely..."
+	],
+	"letoutCockVoreDigestImmune": [
+		"I can't seem to melt you down... so I'll let you go."
+	],
 	"letoutCockVoreSoftDigest": ":missingDialogue",
-	"letoutCockVoreHeal": ":missingDialogue",
+	"letoutCockVoreHeal": {
+		"percentage" : "targetHealth",
+		"pools": [
+			[
+				"I don't have the time to patch you up fully, hope you soaked in my cum long enough!"
+			]
+		],
+		"full": [
+			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
+		]
+	},
 	"letoutUnbirth": [
 		"Happy birthday.",
 		"I think you've had enough fun in there.",
@@ -3084,6 +3278,7 @@
 	"defaultPreyRequestUnbirthNoYes": ":missingDialogue",
 	"shyPreyRequestUnbirthNoYes": ":missingDialogue",
 	"flirtyPreyRequestUnbirthNoYes": ":missingDialogue",
+
 	"defaultPreyRequestCockVore": ":missingDialogue",
 	"shyPreyRequestCockVore": ":missingDialogue",
 	"flirtyPreyRequestCockVore": ":missingDialogue",
@@ -3096,6 +3291,7 @@
 	"defaultPreyRequestCockVoreNoYes": ":missingDialogue",
 	"shyPreyRequestCockVoreNoYes": ":missingDialogue",
 	"flirtyPreyRequestCockVoreNoYes": ":missingDialogue",
+
 	"defaultPreyRequestBreastVore": ":missingDialogue",
 	"shyPreyRequestBreastVore": ":missingDialogue",
 	"flirtyPreyRequestBreastVore": ":missingDialogue",
