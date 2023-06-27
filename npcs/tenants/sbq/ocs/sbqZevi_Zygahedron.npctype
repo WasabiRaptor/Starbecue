@@ -118,22 +118,22 @@
 					"buttonText" : ["[Options]"],
 					"options" : [
 						[ "* Pet", ".pet"]
-					],
-					"next" : ["isOwner", "otherOptions"],
-					"true" : {
-						"addQueued" : true,
+					]
+				},
+				"next" : ["isOwner", "otherOptions"],
+				"true" : {
+					"addQueued" : true,
+					"queueReplace" : {
+						"options" : [
+							["Stay", ["swapFollowing"]]
+						]
+					},
+					"next" : ["isFollowing"],
+					"false" : {
 						"queueReplace" : {
 							"options" : [
-								["Stay", ["swapFollowing"]]
+								["Follow", ["swapFollowing"]]
 							]
-						},
-						"next" : ["isFollowing"],
-						"false" : {
-							"queueReplace" : {
-								"options" : [
-									["Follow", ["swapFollowing"]]
-								]
-							}
 						}
 					}
 				},

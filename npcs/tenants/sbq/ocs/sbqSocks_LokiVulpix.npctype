@@ -78,13 +78,15 @@
 					}
 				},
 				"default" : {
-					"next" : ["isOwner"],
+					"next" : ["introduced","isOwner"],
 					"replace" : {"randomDialogue" : [":defaultGreeting"]},
-					"true" : {
-						"replace" : {
-							"randomDialogue" : [":defaultGreetingCrew"]
-						}
-					}
+					"seperateNext" : true,
+					"introduced" : { "true" : { "replace" : {
+						"randomDialogue" : [":introducedGreeting"]
+					}}},
+					"isOwner" : {"true" : { "replace" : {
+						"randomDialogue" : [":defaultGreetingCrew"]
+					}}}
 				}
 			},
 			"converse" : {
@@ -92,44 +94,190 @@
 					"randomDialogue" : [":converse"],
 					"buttonText" : ["[Options]"],
 					"options" : [
-						[ "* Pet", ".pet"]
-					],
-					"next" : ["isOwner", "otherOptions"],
-					"true" : {
-						"addQueued" : true,
+						[ "* Pet", ".pet"],
+						[ "My name is...", ".introduce", {"check" : {"introduced" : false}}]
+					]
+				},
+				"next" : ["isOwner", "otherOptions"],
+				"true" : {
+					"addQueued" : true,
+					"queueReplace" : {
+						"options" : [
+							["Stay", ["swapFollowing"]]
+						]
+					},
+					"next" : ["isFollowing"],
+					"false" : {
 						"queueReplace" : {
 							"options" : [
-								["Stay", ["swapFollowing"]]
+								["Follow", ["swapFollowing"]]
 							]
-						},
-						"next" : ["isFollowing"],
-						"false" : {
-							"queueReplace" : {
-								"options" : [
-									["Follow", ["swapFollowing"]]
-								]
-							}
 						}
+					}
+				},
+				"otherOptions" : {
+					"add" : {
+						"options" : [
+							["Tell me about yourself", ".talkAboutSelf", {"check" : {"introduced" : true}}],
+							["Tell me about your body", ".talkAboutBody", {"check" : {"introduced" : true}}],
+							//["Lets talk about kinks", ".talkAboutKinks", {"check" : {"introduced" : true}}],
+							["Have any fun stories?", ".tellAStory", {"check" : {"introduced" : true}}]
+						]
 					}
 				},
 				"stay" : {
 					"new" : {
-						"randomDialogue" : [":defaultCrewStay"]
+						"randomDialogue" : [":defaultCrewStay"],
+						"jump" : ".converse"
 					}
 				},
 				"follow" : {
 					"new" : {
-						"randomDialogue" : [":defaultCrewFollow"]
+						"randomDialogue" : [":defaultCrewFollow"],
+						"jump" : ".converse"
 					}
 				},
 				"fullCrew" : {
-					"new" : {"randomDialogue" : [":fullCrew"]}
+					"new" : {
+						"randomDialogue" : [":fullCrew"],
+						"jump" : ".converse"
+					}
+				},
+				"introduce" :{
+					"new" : {
+						"playerSaveSettings" : { "introduced" : true },
+						"dialogue" : ":introduce",
+						"jump" : ".converse"
+					}
+				}
+			},
+			"talkAboutSelf" : {
+				"new" : {
+					"randomDialogue" : [":talkAboutSelf"],
+					"buttonText" : ["[Options]"],
+					"options" : [
+						["What Are You?", ".whatAreYou"],
+						["Have Any Friends?", ".friends"],
+						["Tell me about your body", ".talkAboutBody"],
+						//["Lets talk about kinks", ".talkAboutKinks"],
+						["Have any fun stories?", ".tellAStory"],
+						["Thats it for now", ".converse" ]
+					]
+				},
+				"whatAreYou" : {
+					"new" : {
+						"dialogue" : ":talkAboutSelfWhatAreYou",
+						"jump" : ".talkAboutSelf"
+					}
+				},
+				"friends" : {
+					"new" : {
+						"dialogue" : ":talkAboutSelfFriends",
+						"jump" : ".talkAboutSelf"
+					}
+				}
+			},
+			"talkAboutKinks" : {
+				"new" : {
+					"buttonText" : ["[Options]"],
+					"randomDialogue" : [":talkAboutKinks"],
+					"options" : [
+					]
+				}
+			},
+			"talkAboutBody" : {
+				"new" : {
+					"buttonText" : ["[Options]"],
+					"randomDialogue" : [":talkAboutBody"],
+					"options" : [
+						["Belly", ".belly"],
+						["Womb", ".womb"],
+						["Thats it for now", ".converse" ]
+					]
+				},
+				"belly" : {
+					"new" : {
+						"location" : "belly",
+						"dialogue" : ":talkAboutBodyBelly",
+						"jump" : ".talkAboutBody"
+					},
+					"next" : ["locationEffectSlot"],
+					"seperateNext" : true,
+					"locationEffectSlot" : {
+						"heal" : { "replace" :{
+							"dialogue" : ":talkAboutBodyBellyHeal"
+						}}
+					}
+				},
+				"womb" : {
+					"new" : {
+						"location" : "womb",
+						"dialogue" : ":talkAboutBodyWomb",
+						"jump" : ".talkAboutBody"
+					},
+					"next" : ["locationEffectSlot"],
+					"seperateNext" : true,
+					"locationEffectSlot" : {
+						"heal" : { "replace" :{
+							"dialogue" : ":talkAboutBodyWombHeal"
+						}}
+					}
+				}
+
+			},
+			"tellMeAStory" : {
+				"new" : {
+					"buttonText" : ["[Options]"],
+					"randomDialogue" : [":tellMeAStory"],
+					"options" : [
+						["(UB) Creation", ".creation" ],
+						["(UB) Jaych", ".jaychMeeting" ],
+						["Thats it for now", ".converse" ]
+					]
+				},
+				"creation" : {
+					"new" : {
+						"buttonText" : ["->"],
+						"dialogue" : ":creationStoryPt1",
+						"continue" : {
+							"nearUniqueId" : ["sbqLoki_LokiVulpix"],
+							"path" : ".interrupted",
+							"fail" : ".uninterrupted"
+						}
+					},
+					"uninterrupted" :{
+						"new" : {
+							"buttonText" : ["->"],
+							"dialogue" : ":creationStoryPt2",
+							"playerSaveSettings" : { "heardLokiCreationStory" : true },
+							"jump" : ".tellMeAStory"
+						}
+					},
+					"interrupted" : {
+						"new" : {
+							"buttonText" : ["->"],
+							"dialogue" : ":creationStoryLokiInterrupts",
+							"playerSaveSettings" : { "lokiInterruptedCreationStory" : true },
+							"jump" : ".tellMeAStory"
+						}
+					}
+				},
+				"jaychMeeting" : {
+					"new" : {
+						"buttonText" : ["->"],
+						"dialogue" : ":jaychMeetingStory",
+						"playerSaveSettings" : { "heardJaychMeetingStory" : true },
+						"jump" : ".tellMeAStory"
+					}
 				}
 			},
 			"pet" : {
 				"new" : {
 					"randomDialogue" : [":normalPet"],
 					"buttonText" : ["[Back]"],
+					"jump" : ".converse",
+					"optionsAlign" : "left",
+					"optionsW" : 100,
 					"options" : [
 						[ "* Pet", ".pet"]
 					]
@@ -137,18 +285,21 @@
 				"next" : "petting",
 				"many" : {
 					"replace" : {
-						"buttonText" : ["[ACT]"]
+						"buttonText" : ["[ACT]"],
+						"jump" : ".pet"
 					}
 				},
 				"excessive" : {
 					"replace" : {
-						"buttonText" : ["[ACT]"]
+						"buttonText" : ["[ACT]"],
+						"jump" : ".pet"
 					}
 				},
 				"problem" : {
 					"replace" : {
 						"randomDialogue" : [":problemPet"],
-						"buttonText" : ["[ACT]"]
+						"buttonText" : ["[ACT]"],
+						"jump" : ".pet"
 					}
 				}
 			},
@@ -594,18 +745,14 @@
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"softDigest" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"heal" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleHeal"]}

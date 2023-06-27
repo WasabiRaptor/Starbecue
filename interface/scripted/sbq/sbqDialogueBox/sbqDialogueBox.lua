@@ -478,7 +478,7 @@ function sbq.dismissAfterTimer(time)
 	else
 		sbq.forceTimer("dismissAfterTime", time, function()
 			if dialogue.result.continue then
-				sbq.updateDialogueBox(".continue", sbq.prevDialogueBranch, sbq.dialogueTree)
+				sbq.updateDialogueBox(dialogue.result.continue.path, sbq.prevDialogueBranch, sbq.dialogueTree)
 			elseif dialogue.result.jump then
 				sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
 			elseif not dialogue.finished then
@@ -602,9 +602,9 @@ function dialogueCont:onClick()
 			end
 		end
 		if continue then
-			sbq.updateDialogueBox(".continue", sbq.prevDialogueBranch, sbq.dialogueTree)
+			sbq.updateDialogueBox(dialogue.result.continue.path, sbq.prevDialogueBranch, sbq.dialogueTree)
 		else
-			sbq.updateDialogueBox(".fail", sbq.prevDialogueBranch, sbq.dialogueTree)
+			sbq.updateDialogueBox(dialogue.result.continue.fail, sbq.prevDialogueBranch, sbq.dialogueTree)
 		end
 	elseif dialogue.result.jump ~= nil then
 		sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)

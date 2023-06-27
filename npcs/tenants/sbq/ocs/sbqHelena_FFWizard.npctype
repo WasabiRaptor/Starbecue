@@ -70,22 +70,22 @@
 					"randomDialogue" : [":converse"],
 					"buttonText" : ["[Options]"],
 					"options" : [
-					],
-					"next" : ["isOwner", "otherOptions"],
-					"true" : {
-						"addQueued" : true,
+					]
+				},
+				"next" : ["isOwner", "otherOptions"],
+				"true" : {
+					"addQueued" : true,
+					"queueReplace" : {
+						"options" : [
+							["Stay", ["swapFollowing"]]
+						]
+					},
+					"next" : ["isFollowing"],
+					"false" : {
 						"queueReplace" : {
 							"options" : [
-								["Stay", ["swapFollowing"]]
+								["Follow", ["swapFollowing"]]
 							]
-						},
-						"next" : ["isFollowing"],
-						"false" : {
-							"queueReplace" : {
-								"options" : [
-									["Follow", ["swapFollowing"]]
-								]
-							}
 						}
 					}
 				},
@@ -1164,18 +1164,14 @@
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"softDigest" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"heal" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleHeal"]}

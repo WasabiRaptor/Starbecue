@@ -87,13 +87,34 @@
 					"next" : ["isOwner"],
 					"replace" : {"randomDialogue" : [":defaultGreeting"]},
 					"true" : {
-						"next" : ["isFollowing"],
 						"replace" : {
-							"randomDialogue" : [":defaultGreetingCrew"],
-							"buttonText" : ["Stay"],
-							"callScript" : "swapFollowing"
-						},
-						"false" : { "replace" : {"buttonText": ["Follow"]}}
+							"randomDialogue" : [":defaultGreetingCrew"]
+						}
+					}
+				}
+			},
+			"converse" : {
+				"new" : {
+					"randomDialogue" : [":converse"],
+					"buttonText" : ["[Options]"],
+					"options" : [
+					]
+				},
+				"next" : ["isOwner", "otherOptions"],
+				"true" : {
+					"addQueued" : true,
+					"queueReplace" : {
+						"options" : [
+							["Stay", ["swapFollowing"]]
+						]
+					},
+					"next" : ["isFollowing"],
+					"false" : {
+						"queueReplace" : {
+							"options" : [
+								["Follow", ["swapFollowing"]]
+							]
+						}
 					}
 				},
 				"stay" : {
@@ -109,8 +130,7 @@
 				"fullCrew" : {
 					"new" : {"randomDialogue" : [":fullCrew"]}
 				}
-			},
-			// lines triggered when a player may recieve a certain reward
+			},			// lines triggered when a player may recieve a certain reward
 			"rewardNotify" :{
 				"new" : {},
 				"next" : ["poolName", "rewardName"],
@@ -492,18 +512,14 @@
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"softDigest" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"heal" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleHeal"]}

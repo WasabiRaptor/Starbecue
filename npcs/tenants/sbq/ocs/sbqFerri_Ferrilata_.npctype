@@ -1172,18 +1172,14 @@
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"softDigest" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"heal" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleHeal"]}

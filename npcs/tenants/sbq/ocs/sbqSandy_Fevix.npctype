@@ -72,22 +72,22 @@
 					"buttonText" : ["[Options]"],
 					"options" : [
 						[ "* Pet", ".pet"]
-					],
-					"next" : ["isOwner", "otherOptions"],
-					"true" : {
-						"addQueued" : true,
+					]
+				},
+				"next" : ["isOwner", "otherOptions"],
+				"true" : {
+					"addQueued" : true,
+					"queueReplace" : {
+						"options" : [
+							["Stay", ["swapFollowing"]]
+						]
+					},
+					"next" : ["isFollowing"],
+					"false" : {
 						"queueReplace" : {
 							"options" : [
-								["Stay", ["swapFollowing"]]
+								["Follow", ["swapFollowing"]]
 							]
-						},
-						"next" : ["isFollowing"],
-						"false" : {
-							"queueReplace" : {
-								"options" : [
-									["Follow", ["swapFollowing"]]
-								]
-							}
 						}
 					}
 				},
@@ -109,6 +109,9 @@
 				"new" : {
 					"randomDialogue" : [":normalPet"],
 					"buttonText" : ["[Back]"],
+					"jump" : ".converse",
+					"optionsAlign" : "left",
+					"optionsW" : 100,
 					"options" : [
 						[ "* Pet", ".pet"]
 					]
@@ -116,18 +119,21 @@
 				"next" : "petting",
 				"many" : {
 					"replace" : {
-						"buttonText" : ["[ACT]"]
+						"buttonText" : ["[ACT]"],
+						"jump" : ".pet"
 					}
 				},
 				"excessive" : {
 					"replace" : {
-						"buttonText" : ["[ACT]"]
+						"buttonText" : ["[ACT]"],
+						"jump" : ".pet"
 					}
 				},
 				"problem" : {
 					"replace" : {
 						"randomDialogue" : [":problemPet"],
-						"buttonText" : ["[ACT]"]
+						"buttonText" : ["[ACT]"],
+						"jump" : ".pet"
 					}
 				}
 			},
@@ -1004,18 +1010,14 @@
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"softDigest" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
 								"next" : ["digestImmunity"],
 								"true" : {
 									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
-								},
-								"shy" : { "replace" : {"randomDialogue" : [":letoutShyOralVoreStruggleDigest"]}},
-								"flirty" : { "replace" : {"randomDialogue" : [":letoutFlirtyOralVoreStruggleDigest"]}}
+								}
 							},
 							"heal" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleHeal"]}
