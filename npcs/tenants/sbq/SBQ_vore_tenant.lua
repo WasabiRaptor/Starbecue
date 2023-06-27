@@ -231,10 +231,16 @@ function init()
 			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
 			if steppyType == "falling" then
 				if sbq.timer("sbqSteppyFall", 0.5) then
-					sbq.getRandomDialogue( ".gotSteppy", eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+					sbq.getRandomDialogue(".gotSteppy", eid, sb.jsonMerge(storage.settings, { steppyType = steppyType }))
+					if config.getParameter("likesSteppy") then
+						status.giveResource("horny",5)
+					end
 				end
 			elseif sbq.timer("sbqSteppy", 5) then
-				sbq.getRandomDialogue( ".gotSteppy", eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
+				sbq.getRandomDialogue(".gotSteppy", eid, sb.jsonMerge(storage.settings, { steppyType = steppyType }))
+				if config.getParameter("likesSteppy") then
+					status.giveResource("horny",5)
+				end
 			end
 		end
 	end)

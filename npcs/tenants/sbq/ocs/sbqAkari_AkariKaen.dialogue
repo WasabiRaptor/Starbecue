@@ -3,19 +3,11 @@
 		"Whoops this dialogue is missing"
 	],
 	"defaultRewardsGreeting": [
-		"It was fun messing around!\nHave some stuff.",
-		{
-			"check": {
-				"introduced": true
-			},
-			"add": [
-				[
-					"That was great <entityname>!\nI hope you like all this!"
-				]
-			]
-		}
+		"It was fun messing around!\nHave some stuff."
 	],
-	"defaultRewardsGreetingIntroduced": ":missingDialogue",
+	"defaultRewardsGreetingIntroduced": [
+		"That was great <entityname>!\nI hope you like all this!"
+	],
 	"defaultGreeting": [
 		"Ah, hello there",
 		"merp?",
@@ -30,6 +22,36 @@
 	"defaultCrewStay": ":missingDialogue",
 	"defaultCrewFollow": ":missingDialogue",
 	"fullCrew": ":missingDialogue",
+	"introduce": [
+		"well...\n nice to make you acquittance <entityname>"
+	],
+	"talkAboutSelf": [
+		"well there isnt much to me, merp"
+	],
+	"talkAboutSelfWhatAreYou": [
+		"never seen an sergal before? well my home planet is Tal with several races and clans in them and I lived in a Major city called Gold Ring mostly populated with southern sergals I was called \"city boy\" A lot. "
+	],
+	"talkAboutSelfWhyMerp": [
+		"me...* clears throat * it's a funny sound we can make and it was popular...and now its a cliche thing we do..though once you get us going it'll be all you hear"
+	],
+	"talkAboutSelfCheeseJoke": [
+		"* groans * well aren't you clever...it's not like I heard those jokes thousands of times over my entire life...but I can't stop you having have your fun with it."
+	],
+	"talkAboutSelfKinks": [
+		"hmm...I can talk about the some of them that are worth while for this Mod."
+	],
+	"talkAboutKinks": [
+		"so you wanted to talk kinks?"
+	],
+	"talkAboutKinksMacroMicro": [
+		"Probably what you'll see me  interact with the most as I like being an micro and how I primary interact with my other kinks and I always love the tiny in house of macros avoiding their steps~"
+	],
+	"talkAboutKinksPaws": [
+		"Ah...yes paws...as I prefer humanoid soles...the same ideal follows as I enjoy the pleasure of serving them and being under them as normal or tiny~."
+	],
+	"talkAboutKinksVore": [
+		"not my biggest thing but for the case of this I'd say my go to is OV and CV though only while micro since it works better in my head."
+	],
 	"rewardNotifyMoney": ":missingDialogue",
 	"rewardNotifyLowValueQuestRewards": ":missingDialogue",
 	"rewardNotifyMediumValueQuestRewards": ":missingDialogue",
@@ -144,11 +166,25 @@
 	],
 	"digestCockVoreFull": ":missingDialogue",
 	"compressionCockVoreFull": ":missingDialogue",
-	"defaultStruggle": ":missingDialogue",
+	"defaultStruggle": [
+		"enjoying yourself",
+		"Comfy?",
+		"merp?"
+	],
 	"error": ":missingDialogue",
-	"digestStruggle": ":missingDialogue",
-	"digestStruggleImmune": ":missingDialogue",
-	"healStruggle": ":missingDialogue",
+	"digestStruggle": [
+		"melting so good~",
+		"Be a good moursel and just melt~",
+		"Im merping you down will good..hehe"
+	],
+	"digestStruggleImmune": [
+		"merp?",
+		"doesn't feel like your melting"
+	],
+	"healStruggle": [
+		"relax...you are injured",
+		"stop moving to much..just heal up"
+	],
 	"compressionStruggle": ":missingDialogue",
 	"energyDrainStruggle": ":missingDialogue",
 	"shaftDefaultStruggle": [
@@ -159,7 +195,10 @@
 		"mmm melting down you go~",
 		"merp for me~"
 	],
-	"shaftDigestStruggleImmune": ":missingDialogue",
+	"shaftDigestStruggleImmune": [
+		"less talking more melting",
+		"just mely down and enjoy youself"
+	],
 	"shaftHealStruggle": ":missingDialogue",
 	"shaftCompressionStruggle": ":missingDialogue",
 	"shaftEnergyDrainStruggle": ":missingDialogue",
@@ -174,7 +213,10 @@
 		"yes become nice sergal cum for me~",
 		"time to be sergal cummies~"
 	],
-	"ballsDigestStruggleImmune": ":missingDialogue",
+	"ballsDigestStruggleImmune": [
+		"not melting",
+		"This sergal wants you to melt"
+	],
 	"ballsHealStruggle": ":missingDialogue",
 	"ballsCompressionStruggle": ":missingDialogue",
 	"ballsEnergyDrainStruggle": ":missingDialogue",
@@ -207,6 +249,12 @@
 		"wha...you were gona be fine..geez",
 		"what? you had that option selected",
 		"well...just stay there I guess"
+	],
+	"letoutOralVoreStruggleSoftDigestImmune": [
+		"Dang it... I was hungry... and you didn't even melt at all.",
+		"No hard feelings? Its not like my acid even managed to do anything.",
+		"Come on, my acid didn't even do anything to you...",
+		"If only you actually started to melt..."
 	],
 	"letoutOralVoreStruggleHeal": [
 		"come on..its like a suana in there",
@@ -262,6 +310,12 @@
 		"I'm good for now thanks",
 		"now got out of here you silly",
 		"Didn't feel like it"
+	],
+	"letoutOralVoreSoftDigestImmune": [
+		"really?",
+		"well this is pointless",
+		"oh you selected that option...no fun",
+		"what am I sergal express?"
 	],
 	"letoutOralVoreHeal": [
 		"alright now get back out there!",
@@ -502,75 +556,13 @@
 		"ugh...the micro life is never easy.."
 	],
 	"gotStomped": ":missingDialogue",
+	"gotSteppedWalking": [
+		"eyy, I'm walking here!",
+		"woah..paw ahoy",
+		"Woah...watch where you step",
+		"woah..falls on butt*...ow"
+	],
 	// Unused Dialogue
-	"converse.options.0.1": [
-		"well...\n nice to make you acquittance <entityname>"
-	],
-	"talkAboutSelf": [
-		"well there isnt much to me, merp"
-	],
-	"talkAboutSelf.options.0.1": [
-		"never seen an sergal before? well my home planet is Tal with several races and clans in them and I lived in a Major city called Gold Ring mostly populated with southern sergals I was called \"city boy\" A lot. "
-	],
-	"talkAboutSelf.options.1.1": [
-		"me...* clears throat * it's a funny sound we can make and it was popular...and now its a cliche thing we do..though once you get us going it'll be all you hear"
-	],
-	"talkAboutSelf.options.2.1": [
-		"* groans * well aren't you clever...it's not like I heard those jokes thousands of times over my entire life...but I can't stop you having have your fun with it."
-	],
-	"talkAboutSelf.options.3.1": [
-		"hmm...I can talk about the some of them that are worth while for this Mod."
-	],
-	"talkAboutKinks": [
-		"so you wanted to talk kinks?"
-	],
-	"talkAboutKinks.options.0.1": [
-		"Probably what you'll see me  interact with the most as I like being an micro and how I primary interact with my other kinks and I always love the tiny in house of macros avoiding their steps~"
-	],
-	"talkAboutKinks.options.1.1": [
-		"Ah...yes paws...as I prefer humanoid soles...the same ideal follows as I enjoy the pleasure of serving them and being under them as normal or tiny~."
-	],
-	"talkAboutKinks.options.2.1": [
-		"not my biggest thing but for the case of this I'd say my go to is OV and CV though only while micro since it works better in my head."
-	],
-	"bellyDefaultStruggle": [
-		"enjoying yourself",
-		"Comfy?",
-		"merp?"
-	],
-	"bellyHealStruggle": [
-		"relax...you are injured",
-		"stop moving to much..just heal up"
-	],
-	"bellyDigestStruggle": [
-		"melting so good~",
-		"Be a good moursel and just melt~",
-		"Im merping you down will good..hehe"
-	],
-	"bellyDigestStruggleImmmune": [
-		"merp?",
-		"doesn't feel like your melting"
-	],
-	"shaftDigestStruggleImmmune": [
-		"less talking more melting",
-		"just mely down and enjoy youself"
-	],
-	"ballsDigestStruggleImmmune": [
-		"not melting",
-		"This sergal wants you to melt"
-	],
-	"letoutOralVoreStruggleSoftDigestImmune": [
-		"Dang it... I was hungry... and you didn't even melt at all.",
-		"No hard feelings? Its not like my acid even managed to do anything.",
-		"Come on, my acid didn't even do anything to you...",
-		"If only you actually started to melt..."
-	],
-	"letoutOralVoreSoftDigestImmune": [
-		"really?",
-		"well this is pointless",
-		"oh you selected that option...no fun",
-		"what am I sergal express?"
-	],
 	"struggling.default.default.default.default.default.default": [
 		[
 			"how long you gonna keep me here?",
@@ -587,23 +579,17 @@
 		" slupring noises *",
 		"m...merp..."
 	],
-	"vored.default.default.default.default.default": [
+	"vored": [
 		"wha..?!?",
 		"down I go",
 		"oh..ok I guess"
 	],
-	"escape.default.default.default.default.default.true": [
+	"escapeStruggle": [
 		"oh..arlighty then",
 		"euugh..that felt funny",
 		"AH...fresh air"
 	],
-	"escape.default.default.default.default.default.false": [
+	"escape": [
 		"till next time then"
-	],
-	"gotSteppy.default.default.default.walking": [
-		"eyy, I'm walking here!",
-		"woah..paw ahoy",
-		"Woah...watch where you step",
-		"woah..falls on butt*...ow"
 	]
 }

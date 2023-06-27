@@ -34,6 +34,7 @@
 				"nextNpcType" : [] // this prevents the NPC from graduating into crew
 			}
 		},
+		"likesSteppy" : true,
 
 		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
 			//{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqAkari_AkariKaen/portraits/ANeutral.png" },
@@ -98,6 +99,7 @@
 					"randomDialogue" : [":converse"],
 					"buttonText" : ["[Options]"],
 					"options" : [
+						[ "My name is...", ".introduce", {"check" : {"introduced" : false}}]
 					]
 				},
 				"next" : ["isOwner", "otherOptions"],
@@ -117,20 +119,109 @@
 						}
 					}
 				},
+				"otherOptions" : {
+					"add" : {
+						"options" : [
+							[ "Tell me more about you", ".talkAboutSelf"]
+						]
+					}
+				},
 				"stay" : {
 					"new" : {
-						"randomDialogue" : [":defaultCrewStay"]
+						"randomDialogue" : [":defaultCrewStay"],
+						"jump" : ".converse"
 					}
 				},
 				"follow" : {
 					"new" : {
-						"randomDialogue" : [":defaultCrewFollow"]
+						"randomDialogue" : [":defaultCrewFollow"],
+						"jump" : ".converse"
 					}
 				},
 				"fullCrew" : {
-					"new" : {"randomDialogue" : [":fullCrew"]}
+					"new" : {
+						"randomDialogue" : [":fullCrew"],
+						"jump" : ".converse"
+					}
+				},
+				"introduce" :{
+					"new" : {
+						"playerSaveSettings" : { "introduced" : true },
+						"dialogue" : ":introduce",
+						"jump" : ".converse"
+					}
 				}
-			},			// lines triggered when a player may recieve a certain reward
+			},
+			"talkAboutSelf" : {
+				"new" : {
+					"randomDialogue" : [":talkAboutSelf"],
+					"buttonText" : ["[Options]"],
+					"options" : [
+						["What Are You?", ".whatAreYou"],
+						["Why do you guys say \"merp\" A lot?", ".merp"],
+						["* say a cheese joke", ".cheeseJoke"],
+						["what are you into?", ".talkAboutKinks"],
+						["<-", ".converse" ]
+					]
+				},
+				"whatAreYou" : {
+					"new" : {
+						"dialogue" : ":talkAboutSelfWhatAreYou",
+						"jump" : ".talkAboutSelf"
+					}
+				},
+				"merp" : {
+					"new" : {
+						"dialogue" : ":talkAboutSelfWhyMerp",
+						"jump" : ".talkAboutSelf"
+					}
+				},
+				"cheeseJoke" : {
+					"new" : {
+						"dialogue" : ":talkAboutSelfCheeseJoke",
+						"jump" : ".talkAboutSelf"
+					}
+				},
+				"talkAboutKinks" : {
+					"new" : {
+						"dialogue" : ":talkAboutSelfKinks",
+						"jump" : ".talkAboutKinks"
+					}
+				}
+			},
+			"talkAboutKinks" : {
+				"new" : {
+					"buttonText" : ["[Options]"],
+					"randomDialogue" : [":talkAboutKinks"],
+					"options" : [
+						["Macro and Micro", ".macroMicro"],
+						["Paws", ".paws"],
+						["vore", ".vore"],
+						["<-", ".converse" ]
+					]
+				},
+				"macroMicro" : {
+					"new" : {
+						"dialogue" : ":talkAboutKinksMacroMicro",
+						"jump" : ".talkAboutKinks"
+					}
+				},
+				"paws" : {
+					"new" : {
+						"dialogue" : ":talkAboutKinksPaws",
+						"jump" : ".talkAboutKinks"
+					}
+				},
+				"vore" : {
+					"new" : {
+						"dialogue" : ":talkAboutKinksVore",
+						"jump" : ".talkAboutKinks"
+					}
+				}
+			},
+
+
+			// lines triggered when a player may recieve a certain reward
 			"rewardNotify" :{
 				"new" : {},
 				"next" : ["poolName", "rewardName"],
@@ -518,7 +609,7 @@
 								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
 								"next" : ["digestImmunity"],
 								"true" : {
-									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
+									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigestImmune"]}
 								}
 							},
 							"heal" : {
@@ -613,7 +704,7 @@
 							"softDigest" : {
 								"replace" : {"randomDialogue" : [":letoutOralVoreSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"randomDialogue" : [":letoutOralVoreDigestImmune"]}}
+								"true" : {"replace" : {"randomDialogue" : [":letoutOralVoreSoftDigestImmune"]}}
 							},
 							"heal" : { "replace" : {"randomDialogue" : [":letoutOralVoreHeal"]}}
 						},
@@ -1108,7 +1199,8 @@
 			"gotSteppy" : {
 				"new" : {"randomDialogue":[":gotStepped"]},
 				"next" : "steppyType",
-				"falling" :{"replace" : {"randomDialogue":[":gotStomped"]}}
+				"falling" :{"replace" : {"randomDialogue":[":gotStomped"]}},
+				"walking" :{"replace" : {"randomDialogue":[":gotSteppedWalking"]}}
 			}
 		},
 		// when hunting for prey, a checklist to have them only seek out prey that match the settings
