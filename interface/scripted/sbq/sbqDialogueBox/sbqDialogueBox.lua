@@ -120,6 +120,26 @@ local randomDialogueHandling = {
 	{ "randomName", "name" },
 }
 
+function sbq.handleRandomDialogue(dialogueTree, dialogueTreeTop, rollno)
+	local startAgain = false
+	for _, v in ipairs(randomDialogueHandling) do
+		local randomVal = v[1]
+		local resultVal = v[2]
+		if not dialogue.result[resultVal] then
+			local randomResult = sbq.getRandomDialogueTreeValue(sbq.settings, player.id(), rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
+			if type(randomResult) == "table" then
+				sb.jsonMerge(dialogue.result, randomResult)
+				if randomResult.randomDialogue or randomResult.randomPortrait or randomResult.randomButtonText or randomResult.randomEmote or randomResult.randomName then
+					startAgain = true
+				end
+			elseif type(randomResult) == "string" then
+				dialogue.result[resultVal] = {randomResult}
+			end
+		end
+	end
+	return startAgain
+end
+
 function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
 	local dialogueTree, dialogueTreeTop = dialogueTree, dialogueTreeTop
 	if path ~= nil then
@@ -138,18 +158,11 @@ function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
 				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
 			end
 		end
-
-		for _, v in ipairs(randomDialogueHandling) do
-			local randomVal = v[1]
-			local resultVal = v[2]
-			if not dialogue.result[resultVal] then
-				local randomResult = sbq.getRandomDialogueTreeValue(sbq.settings, player.id(), 1, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
-				if type(randomResult) == "table" then
-					sb.jsonMerge(dialogue.result, randomResult)
-				elseif type(randomResult) == "string" then
-					dialogue.result[resultVal] = {randomResult}
-				end
-			end
+		local handleRandom = true
+		local startIndex = 1
+		while handleRandom == true do
+			handleRandom = sbq.handleRandomDialogue(dialogueTree, dialogueTreeTop, startIndex)
+			startIndex = #dialogue.randomRolls + 1
 		end
 	end
 

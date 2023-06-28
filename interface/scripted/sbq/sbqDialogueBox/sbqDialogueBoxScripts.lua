@@ -181,7 +181,10 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable[uuid] or randomTable.default, dialogueTree, dialogueTreeTop)
 			end
 		end
-		if randomTable.dialogue or randomTable.portrait or randomTable.emote or randomTable.name or randomTable.buttonText or randomTable.speaker then
+		if 	randomTable.dialogue or randomTable.portrait or randomTable.emote or randomTable.name or randomTable.buttonText or
+			randomTable.speaker or randomTable.randomDialogue or randomTable.randomPortrait or randomTable.randomButtonText or
+			randomTable.randomEmote or randomTable.randomName
+			then
 			return randomTable
 		end
 		local selection = randomTable.add or randomTable
@@ -301,4 +304,30 @@ function dialogueBoxScripts.infusedCharacter(dialogueTree, dialogueTreeTop, sett
 		end
 	end
 	return "default"
+end
+
+function dialogueBoxScripts.percentage(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+	local best = "default"
+	local bestScore = 0
+	for key, value in pairs(dialogueTree.percentage) do
+		if type(settings[key]) == "number" then
+			local score
+			if value < 0 then
+				if settings[key] < math.abs(value) then
+					score = settings[key] - value
+				end
+			else
+				if settings[key] > math.abs(value) then
+					score = value + settings[key]
+				end
+			end
+			if type(score) == "number" then
+				if score > bestScore then
+					bestScore = score
+					best = key
+				end
+			end
+		end
+	end
+	return best
 end
