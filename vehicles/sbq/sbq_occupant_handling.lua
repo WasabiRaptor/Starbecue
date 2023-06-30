@@ -54,6 +54,7 @@ end
 function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	local entityType = world.entityType(args.id)
 	if entityType == "player" then
+		world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqClose", nil, nil, sbq.driver )
 		sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
 		function(data)
 			if not data then return end

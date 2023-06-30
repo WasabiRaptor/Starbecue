@@ -473,6 +473,11 @@
 		"Stuck suspended in slime...",
 		"Suspended in sticky goo..."
 	],
+	"strugglingSlimeDigest": [
+		"Ahh... I'm starting to melt into slime.",
+		"Oh my... I'm dissolving.",
+		"I'm gonna be absorbed..."
+	],
 	"strugglingSlimeDigestImmune": [
 		[
 			"Heh trying to melt me into more slime?",
@@ -777,20 +782,13 @@
 		"Just a part of me now",
 		"Try not to make me too hungry..."
 	],
-	"infuseRequestBellyAfterLayer": [
-	],
+	"infuseRequestBellyAfterLayer": [],
 	"infuseUnpromptedBellyBefore": [
 		"I think... I need you in my belly... or... as my belly"
 	],
-	"infuseUnpromptedBellyBeforeLayer": [
-
-	],
+	"infuseUnpromptedBellyBeforeLayer": [],
 	"infuseUnpromptedBellyAfter": ":infuseRequestBellyAfterLayer",
 	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
-	"infuseSelfRequestBellyBefore": ":missingDialogue",
-	"infuseSelfRequestBellyBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestBellyAfter": ":missingDialogue",
-	"infuseSelfRequestBellyAfterLayer": ":missingDialogue",
 	"infuseRequestTailBefore": ":missingDialogue",
 	"infuseRequestTailBeforeLayer": ":missingDialogue",
 	"infuseRequestTailAfter": ":missingDialogue",
@@ -834,6 +832,30 @@
 		"Mmm~ feels right to have you there~"
 	],
 	"infuseUnpromptedBreastsAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
+	"infuseRequestPussyBefore": [
+		"You want to be my pussy?",
+		"Mm, can't wait to be soaking wet down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"infuseRequestPussyBeforeLayer": ":infuseRequestShaftBeforeLayer",
+	"infuseRequestPussyAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already sopping wet with excitment~"
+	],
+	"infuseRequestPussyAfterLayer": ":infuseRequestShaftAfterLayer",
+	"infuseUnpromptedPussyBefore": [
+		"Hehe, I think you belong as something else~",
+		"Mm~ I think it'd be fitting to have you dripping between my legs~",
+		"I think I have a far better use for you~"
+	],
+	"infuseUnpromptedPussyBeforeLayer": ":infuseUnpromptedBellyBeforeLayer",
+	"infuseUnpromptedPussyAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, soaking between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"infuseUnpromptedPussyAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
 	"infuseRequestShaftBefore": [
 		"You want to be my cock?",
 		"Mm, can't wait to be throbbing down there can you?",
@@ -867,6 +889,19 @@
 	"infuseUnpromptedBallsAfterLayer": ":missingDialogue",
 	"infused": ":missingDialogue",
 	"infusedTail": ":missingDialogue",
+	"infusedPussy": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
+			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
+			"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
+			"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
+			"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
 	"infusedBreasts": [
 		"<slowlove>",
 		"<love>",
@@ -920,6 +955,24 @@
 		"Hehe, do you want something <infusedName>?"
 	],
 	"teaseInfusedTail": ":missingDialogue",
+	"teaseInfusedPussy": [
+		[
+			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
+			"<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"
+		],
+		[
+			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
+			"<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"
+		],
+		[
+			"<slowlove>Hehe... dripping wet, right where you belong~",
+			"Hehe... dripping wet, right where you belong <infusedName>~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
+		]
+	],
 	"teaseInfusedBreasts": [
 		[
 			"<slowlove>Mmm, you make them so much more sensitive~",
@@ -1023,11 +1076,21 @@
 			"<love>You're far more useful like this <infusedName>"
 		]
 	],
+	"climax": ":missingDialogue",
+	"climaxWomb": ":missingDialogue",
+	"climaxBreasts": ":missingDialogue",
+	"climaxShaft": ":missingDialogue",
+	"climaxBalls": ":missingDialogue",
 	"shrinking": ":missingDialogue",
 	"growing": ":missingDialogue",
 	"didSteppy": ":missingDialogue",
 	"gotStepped": ":missingDialogue",
 	"gotStomped": ":missingDialogue",
+	// Unused Dialogue 
+	"infuseSelfRequestBellyBefore": ":missingDialogue",
+	"infuseSelfRequestBellyBeforeLayer": ":missingDialogue",
+	"infuseSelfRequestBellyAfter": ":missingDialogue",
+	"infuseSelfRequestBellyAfterLayer": ":missingDialogue",
 	// Unused Dialogue
 	"letoutAnalVoreStruggle": ":missingDialogue",
 	"letoutAnalVoreStruggleDigest": ":missingDialogue",
@@ -1350,8 +1413,7 @@
 		"Didn't want to become something like me?",
 		"Didn't like the changes I was making?"
 	],
-	"letoutOralVoreStruggleTransforming": [
-	],
+	"letoutOralVoreStruggleTransforming": [],
 	"letoutOralVoreStruggleEgged": [
 		"Hah, egg"
 	],
@@ -1390,13 +1452,7 @@
 			"T-trapped..."
 		]
 	],
-	"strugglingBellyTransformingImmune": [
-	],
-	"strugglingSlimeDigest": [
-		"Ahh... I'm starting to melt into slime.",
-		"Oh my... I'm dissolving.",
-		"I'm gonna be absorbed..."
-	],
+	"strugglingBellyTransformingImmune": [],
 	"strugglingSlimeTransformed": [
 		"I've been turned into a slime!",
 		"Oh my... I'm a slime now",
@@ -1450,30 +1506,6 @@
 	"infusePreyBellyNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
 	"infusePreyShaftNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
 	"infusePreyBreastsNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infuseRequestPussyBefore": [
-		"You want to be my pussy?",
-		"Mm, can't wait to be soaking wet down there can you?",
-		"You really want to give yourself entirely to me?"
-	],
-	"infuseRequestPussyAfter": [
-		"Hehe, I can feel you leaking with excitment already~",
-		"Hehe, excited to be part of me~?",
-		"Ah, you're already sopping wet with excitment~"
-	],
-	"infuseRequestPussyBeforeLayer": ":infuseRequestShaftBeforeLayer", // duplicated lines
-	"infuseRequestPussyAfterLayer": ":infuseRequestShaftAfterLayer", // duplicated lines
-	"infuseUnpromptedPussyBefore": [
-		"Hehe, I think you belong as something else~",
-		"Mm~ I think it'd be fitting to have you dripping between my legs~",
-		"I think I have a far better use for you~"
-	],
-	"infuseUnpromptedPussyAfter": [
-		"Ahh~ finally got you where you belong~",
-		"You belong right where you are, soaking between my legs~",
-		"Mmm~ feels right to have you there~"
-	],
-	"infuseUnpromptedPussyBeforeLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
-	"infuseUnpromptedPussyAfterLayer": ":infuseUnpromptedBellyBeforeLayer", // duplicated lines
 	"infusePreyWombNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
 	"infused.default.default.default.default.default": [
 		"<slowlove>",
@@ -1488,40 +1520,9 @@
 			"<love>^#ffffff7f;(<keysmash>)"
 		]
 	],
-	"infusedPussy": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
-			"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
-			"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
-		]
-	],
 	"infusedTease.default.default.default.default.default": [
 		"Just a part of my body~",
 		"Just a part of my body <infusedName>~" // very very placeholder
-	],
-	"teaseInfusedPussy": [
-		[
-			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
-			"<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"
-		],
-		[
-			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
-			"<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"
-		],
-		[
-			"<slowlove>Hehe... dripping wet, right where you belong~",
-			"Hehe... dripping wet, right where you belong <infusedName>~"
-		],
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <infusedName>"
-		]
 	],
 	"converse.options.1.1": [
 		"Well hi there <entityname>!",

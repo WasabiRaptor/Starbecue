@@ -1054,6 +1054,18 @@
 				"pussy" : {"replace" :{"randomDialogue" : [":teaseInfusedPussy"]}}
 			},
 
+			//lines of dialogue triggered when the horny meter hits 100% (the NPC climaxes)
+			"climax" : {
+				"new" : {
+					"randomDialogue":[":climax"],
+					"hideVoreButtons" : true
+				},
+				"next" : "location",
+				"pussy":".womb",
+				"womb" : {"replace" :{"randomDialogue" : [":climaxWomb"]}}
+			},
+
+
 			// a line of dialogue triggered when size is changed by the size ray or something else
 			"sizeChanged" : {
 				"new" : {},

@@ -2232,6 +2232,23 @@
 				"balls" : {"replace" :{"randomDialogue" : [":teaseInfusedBalls"]}}
 			},
 
+			//lines of dialogue triggered when the horny meter hits 100% (the NPC climaxes)
+			"climax" : {
+				"new" : {
+					"randomDialogue":[":climax"],
+					"hideVoreButtons" : true
+				},
+				"next" : "location",
+				"pussy":".womb",
+				"womb" : {"replace" :{"randomDialogue" : [":climaxWomb"]}},
+				"cock":".shaft",
+				"shaft" : {"replace" :{"randomDialogue" : [":climaxShaft"]}},
+				"ballsL":".balls",
+				"ballsR":".balls",
+				"balls" : {"replace" :{"randomDialogue" : [":climaxBalls"]}}
+			},
+
+
 			// a line of dialogue triggered when size is changed by the size ray or something else
 			"sizeChanged" : {
 				"new" : {},
