@@ -11,3 +11,19 @@ function sbqSetHostileTarget(args, board)
 	end
 	return true
 end
+
+function swapItemSlots(args, board)
+	sb.logInfo("mine")
+	npc.setItemSlot("primary", self.sheathedPrimary)
+	local primary = self.primary
+	self.primary = self.sheathedPrimary
+	self.sheathedPrimary = self.sheathedPrimary2
+	self.sheathedPrimary2 = primary
+
+	npc.setItemSlot("alt", self.sheathedAlt)
+	local alt = self.alt
+	self.alt = self.sheathedAlt
+	self.sheathedAlt = self.sheathedAlt2
+	self.sheathedAlt2 = alt
+	return true
+end

@@ -27,6 +27,19 @@ function new_npc_setItemSlot(slot, data)
 	sbq.updateCosmeticSlots()
 end
 
+function getHeldItems()
+	local result = {}
+	-- table.insert has no effect on the table when given a nil
+	table.insert(result, self.primary)
+	table.insert(result, self.sheathedPrimary)
+	table.insert(result, self.sheathedPrimary2)
+	table.insert(result, self.alt)
+	table.insert(result, self.sheathedAlt)
+	table.insert(result, self.sheathedAlt2)
+	return result
+end
+
+
 function preservedStorage()
 	return {
 		itemSlots = storage.itemSlots,

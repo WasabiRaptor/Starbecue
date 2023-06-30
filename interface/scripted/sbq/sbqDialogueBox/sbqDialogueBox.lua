@@ -504,8 +504,6 @@ end
 
 function dialogueCont:onClick()
 	local contextMenu = {}
-	sb.logInfo(dialogue.position)
-	sb.logInfo(sb.printJson(dialogue.result,1))
 	if not dialogue.finished then
 		dialogue.position = dialogue.position + 1
 		return sbq.updateDialogueBox()
