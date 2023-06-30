@@ -472,10 +472,6 @@ function update(dt)
 	sbq.randomTimer("hunting", 15, 60, function () -- get a new hunting target every 15 to 60 seconds
 		sbq.getTarget()
 	end)
-	sbq.randomTimer("adjustMood", 60, 300, function () -- adust mood every 1 to 5 minutes
-		sbq.adjustMood()
-	end)
-
 
 	if type(sbq.occupantHolder) == "number" and world.entityExists(sbq.occupantHolder) then
 		for _, transition in ipairs(sbq.queuedTransitions) do
@@ -576,9 +572,6 @@ function sbq.passiveStatChanges(dt)
 	end
 end
 
-function sbq.adjustMood()
-
-end
 function sbq.logInfo(input)
 	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
 end
@@ -1145,7 +1138,6 @@ function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, di
 				(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
 			if i == #dialogue.result.dialogue then
 				sbq.finishDialogue()
-				dialogue.result = {}
 			end
 		end)
 	end

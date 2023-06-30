@@ -121,16 +121,15 @@ local randomDialogueHandling = {
 }
 
 function sbq.handleRandomDialogue(dialogueTree, dialogueTreeTop, rollno)
-	local startAgain = false
 	for _, v in ipairs(randomDialogueHandling) do
 		local randomVal = v[1]
 		local resultVal = v[2]
 		if not dialogue.result[resultVal] then
 			local randomResult = sbq.getRandomDialogueTreeValue(sbq.settings, player.id(), rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
 			if type(randomResult) == "table" then
-				sb.jsonMerge(dialogue.result, randomResult)
+				dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
 				if randomResult.randomDialogue or randomResult.randomPortrait or randomResult.randomButtonText or randomResult.randomEmote or randomResult.randomName then
-					startAgain = true
+					return true
 				end
 			elseif type(randomResult) == "string" then
 				dialogue.result[resultVal] = {randomResult}
@@ -490,12 +489,12 @@ function sbq.dismissAfterTimer(time)
 		sbq.timerList.dismissAfterTime = nil
 	else
 		sbq.forceTimer("dismissAfterTime", time, function()
-			if dialogue.result.continue then
-				sbq.updateDialogueBox(dialogue.result.continue.path, sbq.prevDialogueBranch, sbq.dialogueTree)
-			elseif dialogue.result.jump then
-				sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
-			elseif not dialogue.finished then
+			if not dialogue.finished then
 				sbq.updateDialogueBox()
+			elseif dialogue.result.jump then
+				local path = dialogue.result.jump
+				sbq.finishDialogue()
+				sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
 			else
 				pane.dismiss()
 			end
@@ -505,12 +504,11 @@ end
 
 function dialogueCont:onClick()
 	local contextMenu = {}
+	sb.logInfo(dialogue.position)
+	sb.logInfo(sb.printJson(dialogue.result,1))
 	if not dialogue.finished then
 		dialogue.position = dialogue.position + 1
 		return sbq.updateDialogueBox()
-	elseif dialogue.finished and dialogue.result.options ~= nil then
-	else
-		sbq.finishDialogue()
 	end
 
 	if type(dialogue.result.saveSettings) == "table" then
@@ -583,7 +581,6 @@ function dialogueCont:onClick()
 			if continue and ((checks.voreType == nil) or (sbq.checkVoreTypeActive(checks.voreType) ~= "hidden")) then
 				action[2] = function()
 					sbq.finishDialogue()
-					dialogue.result = {}
 					if type(path) == "table" then
 						local newpath = "."
 						for i, step in ipairs(path) do
@@ -614,19 +611,24 @@ function dialogueCont:onClick()
 				table.insert(entities, id)
 			end
 		end
+		local path = dialogue.result.continue.fail
 		if continue then
-			sbq.updateDialogueBox(dialogue.result.continue.path, sbq.prevDialogueBranch, sbq.dialogueTree)
-		else
-			sbq.updateDialogueBox(dialogue.result.continue.fail, sbq.prevDialogueBranch, sbq.dialogueTree)
+			path = dialogue.result.continue.path
 		end
+		sbq.finishDialogue()
+		sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
+		return
 	elseif dialogue.result.jump ~= nil then
-		sbq.updateDialogueBox(dialogue.result.jump, sbq.prevDialogueBranch, sbq.dialogueTree)
+		local path = dialogue.result.jump
+		sbq.finishDialogue()
+		sbq.updateDialogueBox(path, sbq.prevDialogueBranch, sbq.dialogueTree)
+		return
 	end
 	if #contextMenu > 0 then
 		metagui.dropDownMenu(contextMenu, dialogue.result.optionsColumns or 2, dialogue.result.optionsW, dialogue.result.optionsH, dialogue.result.optionsS, dialogue.result.optionsAlign)
 	end
 	if dialogue.finished and dialogue.result.options == nil then
-		dialogue.result = {}
+		sbq.finishDialogue()
 	end
 end
 

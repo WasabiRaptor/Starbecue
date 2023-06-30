@@ -21,6 +21,7 @@ dialogue = {
 function sbq.finishDialogue()
 	dialogue.finished = false
 	dialogue.position = 1
+	dialogue.result = {}
 end
 
 function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
