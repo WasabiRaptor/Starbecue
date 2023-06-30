@@ -85,16 +85,59 @@
 					}
 				},
 				"default" : {
-					"next" : ["isOwner"],
+					"next" : ["percentage", "isOwner" ],
 					"replace" : {"randomDialogue" : [":defaultGreeting"]},
 					"true" : {
-						"next" : ["isFollowing"],
 						"replace" : {
-							"randomDialogue" : [":defaultGreetingCrew"],
-							"buttonText" : ["Stay"],
-							"callScript" : "swapFollowing"
-						},
-						"false" : { "replace" : {"buttonText": ["Follow"]}}
+							"randomDialogue" : [":defaultGreetingCrew"]
+						}
+					},
+					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"horny" : {"replace" : {"randomDialogue" : [":hornyGreeting"]}},
+					"food" : {"replace" : {"randomDialogue" : [":hungryGreeting"]}
+					}
+				}
+			},
+			"converse" : {
+				"new" : {
+					"randomDialogue" : [":converse"],
+					"buttonText" : ["[Options]"],
+					"options" : [
+					]
+				},
+				"next" : ["percentage","playerRace","isOwner", "otherOptions"],
+				"percentage" : { "horny" : 0.7, "food" : -0.7 },
+				"horny" : {"replace" : {"randomDialogue" : [":hornyConverse"]}},
+				"food" : {"replace" : {"randomDialogue" : [":hungryConverse"]}},
+				"sbqHelena_FFWizard" : ".hellhound",
+				"hellhound" : {
+					"replace" : {"randomDialogue":[":hellhoundConverse"]},
+					"next" : "percentage",
+					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"horny" : {"replace" : {"randomDialogue" : [":hellhoundHornyConverse"]}},
+					"food" : {"replace" : {"randomDialogue" : [":hellhoundHungryConverse"]}}
+				},
+				"true" : {
+					"addQueued" : true,
+					"queueReplace" : {
+						"options" : [
+							["Stay", ["swapFollowing"]]
+						]
+					},
+					"next" : ["isFollowing"],
+					"false" : {
+						"queueReplace" : {
+							"options" : [
+								["Follow", ["swapFollowing"]]
+							]
+						}
+					}
+				},
+				"otherOptions" : {
+					"add" : {
+						"options" : [
+							["I was curious.", ".curious"]
+						]
 					}
 				},
 				"stay" : {
@@ -111,6 +154,98 @@
 					"new" : {"randomDialogue" : [":fullCrew"]}
 				}
 			},
+			"curious" : {
+				"new" : {
+					"randomDialogue" : [":curious"],
+					"buttonText" : ["[Choose]"],
+					"options" : [
+						["Who are you?", ".who"],
+						["So you mentioned you're a catfox?\nIs that, like, a cat and a fox?", ".catfox"],
+						["So you mentioned you could help me out some ways?", ".curiousHelp"],
+						["So what's your stomach like?", ".belly"]
+					]
+				},
+				"seperateNext" : true,
+				"next" : ["percentage"],
+				"percentage" : {
+					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"horny" : {
+						"replace" : {
+							"randomDialogue" : [":hornyCurious"]
+						},
+						"add" : {
+							"options" : [
+								["Getting heated, huh?", ".heat"]
+							]
+						}
+					},
+					"food" : {
+						"replace" : {
+							"randomDialogue" : [":hungryCurious"]
+						},
+						"add" : {
+							"options" : [
+								["How bad does your hunger get?", ".hunger"]
+							]
+						}
+					},
+					"default" : {
+						"add" : {
+							"options" : [
+								["How did you get those scars?", ".scars"]
+							]
+						}
+					}
+				},
+				"who" : {
+					"new" : {
+						"randomDialogue":[":curiousWhoAreYou"],
+						"playerSaveSettings" : { "introduced" : true },
+						"jump" : ".curious.questionAnswered"
+					}
+				},
+				"catfox" : {
+					"new" : {
+						"randomDialogue":[":curiousCatfox"],
+						"jump" : ".curious.questionAnswered"
+					}
+				},
+				"help" : {
+					"new" : {
+						"randomDialogue":[":curiousHelp"],
+						"jump" : ".curious.questionAnswered"
+					}
+				},
+
+				"belly" : {
+					"new" : {
+						"location" : "belly",
+						"dialogue" : ":curiousBelly",
+						"jump" : ".curious.questionAnswered"
+					},
+					"next" : ["percentage","locationEffectSlot"],
+					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"horny" : {"replace" : {"randomDialogue" : [":hornyCuriousBelly"]}},
+					"food" : {"replace" : {"randomDialogue" : [":hungryCuriousBelly"]}},
+					"heal" : {"replace" : { "randomDialogue" : [":curiousBellyHeal"]}},
+					"dDigest" : {"replace" : { "randomDialogue" : [":curiousBellyDigest"]}},
+					"softDigest" : {"replace" : { "randomDialogue" : [":curiousBellySoftDigest"]}}
+				},
+				"questionAnswered" : {
+					"new" : {
+						"randomDialogue" : [":questionAnswered1"],
+						"buttonText" : ["Yes."],
+						"jump" : ".continue"
+					},
+					"continue" : {
+						"new" : {
+							"randomDialogue" : [":questionAnswered2"],
+							"jump" : ".curious"
+						}
+					}
+				}
+			},
+
 			// lines triggered when a player may recieve a certain reward
 			"rewardNotify" :{
 				"new" : {},
@@ -2253,7 +2388,7 @@
 					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingShaftCompression"]}}},
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingShaftEnergyDrain"]}}},
 					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingShaftCumTransforming"]},
+						"queueReplace" : {"randomDialogue" : [":strugglingCumTransforming"]},
 						"addQueued" : true,
 						"next" : "cumTransformAllow",
 						"false" : {"queueReplace":{"randomDialogue" : [":strugglingCumTransformingImmune"]}}
@@ -2291,7 +2426,7 @@
 					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":strugglingBallsCompression"]}}},
 					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":strugglingBallsEnergyDrain"]}}},
 					"transforming" : {"true" : {
-						"queueReplace" : {"randomDialogue" : [":strugglingBallsCumTransforming"]},
+						"queueReplace" : {"randomDialogue" : [":strugglingCumTransforming"]},
 						"addQueued" : true,
 						"next" : "cumTransformAllow",
 						"false" : {"queueReplace":{"randomDialogue" : [":strugglingCumTransformingImmune"]}}
