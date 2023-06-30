@@ -616,9 +616,6 @@
 		"You want to become a part of me...?"
 	],
 	"infuseRequestBellyBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"You want to take <infusedName>'s place?",
 			"You want to join <infusedName>?"
@@ -630,17 +627,12 @@
 		"Try not to make me too hungry..."
 	],
 	"infuseRequestBellyAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		}
 	],
 	"infuseUnpromptedBellyBefore": [
 		"I think... I need you in my belly... or... as my belly"
 	],
 	"infuseUnpromptedBellyBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.unprompted.doingVore"
-		}
+
 	],
 	"infuseUnpromptedBellyAfter": ":infuseRequestBellyAfterLayer",
 	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
@@ -659,9 +651,6 @@
 	],
 	"infuseRequestPussyBeforeLayer": ":infuseRequestShaftBeforeLayer",
 	"infuseRequestShaftBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"You want to take <infusedName>'s place?",
 			"Hehe, want to send <infusedName> a layer deeper~?"
@@ -674,9 +663,6 @@
 	],
 	"infuseRequestPussyAfterLayer": ":infuseRequestShaftAfterLayer",
 	"infuseRequestShaftAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"And now <infusedName> is even more trapped~"
 		]
@@ -1128,24 +1114,15 @@
 		[
 			"Seems like you're finished.",
 			"I think you're finished changing."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"bellyTransformingStruggle": [
 		[
 			"You'll be a bit different after this is all done.",
 			"These changes should be an improvement."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"bellyTransformingStruggleImmune": [
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
 	],
 	"bellyEggedStruggle": [
 		"Now you're trapped in an egg"
@@ -1154,71 +1131,47 @@
 		[
 			"Can you feel that egg forming around you?",
 			"Soon your squirming won't do a thing."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"bellyEggifyStruggleImmune": ":bellyTransformingStruggleImmune", // duplicated lines
 	"wombTransformedStruggle": [
 		[
 			"Seems like you're finished.",
 			"I think you're finished changing."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"wombTransformingStruggle": [
 		[
 			"You'll be a bit different after this is all done.",
 			"These changes should be an improvement."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"wombTransformingStruggleImmune": [
 		[
 			"You don't want to change?",
 			"Come on, don't you want to be different?"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"wombEggedStruggle": ":bellyEggedStruggle", // duplicated lines
 	"wombEggifyStruggle": [
 		[
 			"Can you feel that egg forming around you?",
 			"Soon your squirming won't do a thing."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"wombEggifyStruggleImmune": [
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
 	],
 	"shaftTransformedStruggle": [
 		[
 			"Heh, I can feel you sloshing around.",
 			"Seems like you're not quite solid anymore."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"shaftTransformingStruggle": [
 		[
 			"I can feel you getting goopy in there.",
 			"I can feel you tarting to turn~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"shaftTransformingStruggleImmune": ":wombEggifyStruggleImmune", // duplicated lines
 	"ballsTransformedStruggle": ":shaftTransformedStruggle", // duplicated lines
@@ -1234,9 +1187,6 @@
 		"Didn't like the changes I was making?"
 	],
 	"letoutOralVoreStruggleTransforming": [
-		{
-			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
-		}
 	],
 	"letoutOralVoreStruggleEgged": [
 		"Hah, egg"
@@ -1277,9 +1227,6 @@
 		]
 	],
 	"strugglingBellyTransformingImmune": [
-		{
-			"add": "struggling.location.predator.race.personality.mood.locationEffect"
-		}
 	],
 	"strugglingSlimeDigest": [
 		"Ahh... I'm starting to melt into slime.",

@@ -145,7 +145,6 @@ function sbq.refreshTenantPages()
 		sbq.numberBoxColor(escapeValue, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax)
 
 		personalityText:setText(sbq.predatorSettings.personality or "default")
-		moodText:setText(sbq.predatorSettings.mood or "default")
 
 		sbq.onTenantChanged()
 
@@ -445,18 +444,6 @@ end
 function incPersonality:onClick()
 	if sbq.overrideSettings.personality ~= nil then return end
 	sbq.changePredatorSetting("personality", sbq.changeSelectedFromList(sbq.config.npcPersonalities, personalityText, "personalityIndex", 1))
-end
-
---------------------------------------------------------------------------------------------------
-
-function decMood:onClick()
-	if sbq.overrideSettings.mood ~= nil then return end
-	sbq.changePredatorSetting("mood", sbq.changeSelectedFromList(sbq.config.npcMoods, moodText, "moodIndex", -1))
-end
-
-function incMood:onClick()
-	if sbq.overrideSettings.mood ~= nil then return end
-	sbq.changePredatorSetting("mood", sbq.changeSelectedFromList(sbq.config.npcMoods, moodText, "moodIndex", 1))
 end
 
 --------------------------------------------------------------------------------------------------

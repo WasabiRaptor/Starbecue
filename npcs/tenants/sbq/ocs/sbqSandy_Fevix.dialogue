@@ -752,9 +752,6 @@
 		"You want to become a part of me...?"
 	],
 	"infuseRequestBellyBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"You want to take <infusedName>'s place?",
 			"You want to join <infusedName>?"
@@ -766,17 +763,12 @@
 		"Try not to make me too hungry..."
 	],
 	"infuseRequestBellyAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		}
 	],
 	"infuseUnpromptedBellyBefore": [
 		"I think... I need you in my belly... or... as my belly"
 	],
 	"infuseUnpromptedBellyBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.unprompted.doingVore"
-		}
+
 	],
 	"infuseUnpromptedBellyAfter": ":infuseRequestBellyAfterLayer",
 	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
@@ -795,9 +787,6 @@
 	],
 	"infuseRequestBreastsBeforeLayer": ":infuseRequestShaftBeforeLayer",
 	"infuseRequestShaftBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"You want to take <infusedName>'s place?",
 			"Hehe, want to send <infusedName> a layer deeper~?"
@@ -810,9 +799,6 @@
 	],
 	"infuseRequestBreastsAfterLayer": ":infuseRequestShaftAfterLayer",
 	"infuseRequestShaftAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"And now <infusedName> is even more trapped~"
 		]
@@ -1165,10 +1151,7 @@
 		[
 			"Seems like you're finished.",
 			"I think you're finished changing."
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"eggedStruggle": [
 		"Now you're trapped in an egg"
@@ -1205,9 +1188,6 @@
 		"Didn't like the changes I was making?"
 	],
 	"letoutOralVoreStruggleTransforming": [
-		{
-			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
-		}
 	],
 	"letoutOralVoreStruggleEgged": [
 		"Hah, egg"

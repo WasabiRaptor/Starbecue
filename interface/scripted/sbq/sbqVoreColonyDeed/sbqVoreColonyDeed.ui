@@ -68,13 +68,6 @@
 								]
 								*/
 							]},
-							{ "type" : "panel", "id" : "moodPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
-								{ "mode" : "h" },
-								{ "type" : "label", "text" : "M", "inline" : true },
-								{ "type" : "iconButton", "id" : "decMood", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-								{ "type" : "textBox", "id" : "moodText", "expandMode" : [1, 0], "toolTip": "Mood\n(NPC May change this themselves sometimes)" },
-								{ "type" : "iconButton", "id" : "incMood", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" }
-							]},
 							{ "type" : "panel", "id" : "personalityPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 								{ "mode" : "h" },
 								{ "type" : "label", "text" : "P", "inline" : true },

@@ -294,10 +294,7 @@
 			"Hope you like how it feels in there.",
 			"Just snuggle into the walls~",
 			"Get yourself nice and soaked in my milk~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"breastsCompressionStruggle": ":missingDialogue",
 	"breastsEnergyDrainStruggle": ":missingDialogue",
@@ -746,9 +743,6 @@
 		"You want to become a part of me...?"
 	],
 	"infuseRequestBellyBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"You want to take <infusedName>'s place?",
 			"You want to join <infusedName>?"
@@ -760,17 +754,12 @@
 		"Try not to make me too hungry..."
 	],
 	"infuseRequestBellyAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		}
 	],
 	"infuseUnpromptedBellyBefore": [
 		"I think... I need you in my belly... or... as my belly"
 	],
 	"infuseUnpromptedBellyBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.unprompted.doingVore"
-		}
+
 	],
 	"infuseUnpromptedBellyAfter": ":infuseRequestBellyAfterLayer",
 	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyBeforeLayer",
@@ -797,9 +786,6 @@
 	],
 	"infuseRequestBreastsBeforeLayer": ":infuseRequestShaftBeforeLayer",
 	"infuseRequestShaftBeforeLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"You want to take <infusedName>'s place?",
 			"Hehe, want to send <infusedName> a layer deeper~?"
@@ -812,9 +798,6 @@
 	],
 	"infuseRequestBreastsAfterLayer": ":infuseRequestShaftAfterLayer",
 	"infuseRequestShaftAfterLayer": [
-		{
-			"add": "infusePrey.location.race.personality.mood.request.doingVore"
-		},
 		[
 			"And now <infusedName> is even more trapped~"
 		]
@@ -1347,10 +1330,7 @@
 			"Hope you like how it feels in there.",
 			"Just snuggle into the walls~",
 			"Get yourself nice and coated in those juices~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.default"
-		}
+		]
 	],
 	"bellySoftDigestStruggle": [
 		"Just relax as I melt you down.",
@@ -1365,20 +1345,14 @@
 			"Seems like you're finished.",
 			"I think you're finished changing.",
 			"Are you excited to see what you look like once you're out?"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"wombTransformingStruggle": [
 		[
 			"Now to make you as fluffy as ME!",
 			"These changes should be an improvement~",
 			"New fluffderg coming soon~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"wombEggedStruggle": [
 		"Now you're trapped in an egg"
@@ -1388,10 +1362,7 @@
 			"Can you feel that egg forming around you?",
 			"Soon your squirming won't do a thing~",
 			"Trapped even more~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"shaftTransformedStruggle": [
 		[
@@ -1408,10 +1379,7 @@
 			"Feels like I've got more cum than usual sloshing around down there~",
 			"Ahh~ I'm just itching to get this load out into someone~",
 			"My balls feel so full...~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"ballsSoftDigestStruggle": [
 		[
@@ -1445,10 +1413,7 @@
 			"Clooooser~",
 			"Just relaaaax as I melt you down~",
 			"Feels like I've got more cum than usual sloshing around down there~"
-		],
-		{
-			"add": "struggle.location.race.personality.mood.locationEffect"
-		}
+		]
 	],
 	"struggle.breasts.default.default.default.sbqSoftMilkDigest.false": [
 		"Hehe, seems like I'm going to have a nice batch of milk.",
@@ -1465,9 +1430,6 @@
 		"Didn't like the changes I was making?"
 	],
 	"letoutOralVoreStruggleTransforming": [
-		{
-			"add": "letout.voreType.struggleTrigger.race.personality.mood.locationEffect"
-		}
 	],
 	"letoutOralVoreStruggleEgged": [
 		"Hah, egg"
@@ -1514,9 +1476,6 @@
 		]
 	],
 	"strugglingBellyTransformingImmune": [
-		{
-			"add": "struggling.location.predator.race.personality.mood.locationEffect"
-		}
 	],
 	"strugglingSlimeDigest": [
 		"Ahh... I'm starting to melt into slime.",
