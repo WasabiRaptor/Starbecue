@@ -106,7 +106,7 @@ function sbq.getOccupancy()
 end
 
 function sbq.refreshData()
-	sbq.loopedMessage("refreshData", pane.sourceEntity(), "sbqRefreshDialogueBoxData", { player.id(), (player.getProperty("sbqCurrentData") or {}).type }, function (dialogueBoxData)
+	sbq.loopedMessage("refreshData", pane.sourceEntity(), "sbqRefreshDialogueBoxData", { player.id(), (player.getProperty("sbqType") or {}) }, function (dialogueBoxData)
 		sbq.data = sb.jsonMerge(sbq.data, dialogueBoxData)
 	end)
 end
@@ -261,10 +261,11 @@ function sbq.checkVoreTypeActive(voreType)
 
 	local size = status.statusProperty("sbqSize") or 1
 
+	local sbqType = player.getProperty("sbqType")
 
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
-	if ( sbq.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( currentData.type ~= "prey" ) then
-		if sbq.settings[voreType .. "Pred"] and not (currentData.type == "driver" and (not currentData.edible)) then
+	if ( sbq.settings[voreType.."Pred"]) and preyEnabled.preyEnabled and preyEnabled[voreType] and ( sbqType ~= "prey" ) then
+		if sbq.settings[voreType .. "Pred"] and not (sbqType == "driver" and (not currentData.edible)) then
 			if type(sbq.data.occupantHolder) ~= "nil" and type(sbq.occupants) == "table" then
 				if sbq.occupants[locationName] == nil then return "hidden" end
 				if locationData.requiresInfusion and not sbq.settings[locationName .. "InfusedItem"] then return "needsInfusion" end
@@ -419,10 +420,11 @@ function sbq.checkInfusionActionActive(location, locations)
 	if (not sbq.settings) then return "hidden" end
 	local locationData = sbq.sbqData.locations[location]
 	if not locationData or not locationData.infusion then return "hidden" end
-	local currentData = player.getProperty( "sbqCurrentData") or {}
+	local sbqType = player.getProperty("sbqType")
+
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if (sbq.settings[(locationData.infusionSetting or "infusion") .. "Pred"]) and preyEnabled.preyEnabled and
-		preyEnabled[(locationData.infusionSetting or "infusion")] and (currentData.type == "prey")
+		preyEnabled[(locationData.infusionSetting or "infusion")] and (sbqType == "prey")
 	then
 		local playerLocation
 		local isInfused

@@ -217,10 +217,10 @@ function init()
 	end)
 
 	message.setHandler("sbqGetSeatEquips", function(_,_, current)
-		local type = current.type or "prey"
 		player.setProperty( "sbqCurrentData", current)
-		status.setStatusProperty( "sbqCurrentData", current)
-		if not (current.type == "driver" and current.species == "sbqOccupantHolder") then
+		status.setStatusProperty("sbqCurrentData", current)
+		local type = player.getProperty("sbqType")
+		if not (type == "driver" and current.species == "sbqOccupantHolder") then
 			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
 			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
 		end
@@ -238,11 +238,15 @@ function init()
 			effectDirectives = status.statusProperty("effectDirectives")
 		}
 	end)
+	message.setHandler("sbqSetType", function(_, _, current)
+		player.setProperty( "sbqType", current)
+		status.setStatusProperty("sbqType", current)
+	end)
 	message.setHandler("sbqSetCurrentData", function (_,_, current)
-		local type = current.type or "prey"
 		player.setProperty( "sbqCurrentData", current)
-		status.setStatusProperty( "sbqCurrentData", current)
-		if not (current.type == "driver" and current.species == "sbqOccupantHolder") then
+		status.setStatusProperty("sbqCurrentData", current)
+		local type = player.getProperty("sbqType")
+		if not (type == "driver" and current.species == "sbqOccupantHolder") then
 			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
 			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
 		end
@@ -546,7 +550,7 @@ function update(dt)
 				driver = player.id(), layer = current.layer, startState = current.state,
 				settings = current.settings,
 			})
-		elseif current.type == "prey" then
+		elseif player.getProperty("sbqType") == "prey" then
 			for i, effect in ipairs(root.assetJson("/sbqGeneral.config").predStatusEffects) do
 				status.removeEphemeralEffect(effect)
 			end

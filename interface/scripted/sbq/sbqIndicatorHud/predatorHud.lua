@@ -115,7 +115,7 @@ function sbq.checkRefresh(dt)
 	sbq.globalSettings = sb.jsonMerge(sbq.config.globalSettings, sbq.sbqSettings.global or {})
 
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
-	if (sbq.sbqCurrentData.type == "driver") and type(sbq.sbqCurrentData.id)== "number" and world.entityExists(sbq.sbqCurrentData.id) then
+	if (player.getProperty("sbqType") == "driver") and type(sbq.sbqCurrentData.id)== "number" and world.entityExists(sbq.sbqCurrentData.id) then
 		sbq.loopedMessage("checkRefresh", sbq.sbqCurrentData.id, "settingsMenuRefresh", {}, function (result)
 			if result ~= nil then
 				if result.isNested then

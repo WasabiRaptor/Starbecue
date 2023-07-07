@@ -5,7 +5,8 @@ sbq = {}
 local _monster_setDamageTeam
 function capture_monster_setDamageTeam(data)
 	status.setStatusProperty("sbqOriginalDamageTeam", data)
-	if (status.statusProperty( "sbqCurrentData" ) or {}).type ~= "prey" then
+	local type = status.statusProperty("sbqType")
+	if type ~= "prey" then
 		_monster_setDamageTeam(data)
 	end
 end

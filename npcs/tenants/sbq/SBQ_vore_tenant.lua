@@ -367,9 +367,9 @@ function init()
 	end)
 
 	message.setHandler("sbqIsPredEnabled", function(_,_, voreType)
-		local currentData = status.statusProperty("sbqCurrentData") or {}
 		local settings = storage.settings or {}
-		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = currentData.type}
+		local type = status.statusProperty("sbqType")
+		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = type}
 	end)
 	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
 		local settings = storage.settings
@@ -423,8 +423,8 @@ function init()
 				willing = sbq.getPreyWilling({voreType})
 			end
 		end
-		local currentData = status.statusProperty("sbqCurrentData") or {}
-		return { willing = willing,  enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = currentData.type}
+		local type = status.statusProperty("sbqType")
+		return { willing = willing,  enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = type}
 	end)
 end
 
@@ -537,7 +537,7 @@ function interact(args)
 
 	local dialogueBoxData = sbq.getDialogueBoxData()
 
-	if sbq.currentData.type == "prey" then
+	if status.statusProperty("sbqType") == "prey" then
 		if args.predData then
 			sbq.predData = args.predData
 			local settings = args.predData.settings
@@ -863,7 +863,7 @@ function sbq.forcePrey()
 	sbq.timer("forcedPreyDialogue", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(storage.huntingTarget.id, "requestTransition", storage.huntingTarget.voreType, { id = entity.id(), willing = true })
 		sbq.timer("forcedPreyCheckInside", 1, function ()
-			if sbq.currentData.type == "prey" then
+			if status.statusProperty("sbqType") == "prey" then
 				world.sendEntityMessage(storage.huntingTarget.id, "sbqSayRandomLine", entity.id(), {voreType = storage.huntingTarget.voreType}, ".unwillingPred")
 			else
 				sbq.getNextTarget()

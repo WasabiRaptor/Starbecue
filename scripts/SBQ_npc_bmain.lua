@@ -11,7 +11,8 @@ end
 local _npc_setDamageTeam
 function capture_npc_setDamageTeam(data)
 	status.setStatusProperty("sbqOriginalDamageTeam", data)
-	if (status.statusProperty( "sbqCurrentData" ) or {}).type ~= "prey" then
+	local type = status.statusProperty("sbqType")
+	if type ~= "prey" then
 		_npc_setDamageTeam(data)
 	end
 end
@@ -30,7 +31,7 @@ local old = {}
 local controlPathMoveRPC
 function sbq.controlPathMove(target, run, options)
 	local current = status.statusProperty("sbqCurrentData")
-	if current and current.species ~= "sbqOccupantHolder" and current.type == "driver" then
+	if current and current.species ~= "sbqOccupantHolder" and status.statusProperty("sbqType") == "driver" then
 		local newRPC = world.sendEntityMessage(current.id, "sbqControlPathMove", target, run, options)
 		local syncResult = newRPC:finished() and newRPC:succeeded() and newRPC:result()
 		if syncResult ~= nil then
@@ -54,7 +55,8 @@ function sbq.controlPathMove(target, run, options)
 end
 function sbq.setPosition(position)
 	local current = status.statusProperty("sbqCurrentData")
-	if current and current.species ~= "sbqOccupantHolder" and current.type == "driver" then
+	local type = status.statusProperty("sbqType")
+	if current and current.species ~= "sbqOccupantHolder" and type == "driver" then
 		world.sendEntityMessage(current.id, "sbqSetPosition", position)
 	else
 		old.setPosition(position)
@@ -65,8 +67,9 @@ require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
 	message.setHandler("sbqGetSeatEquips", function(_,_, current)
-		status.setStatusProperty( "sbqCurrentData", current)
-		if current.type == "prey" then
+		status.setStatusProperty("sbqCurrentData", current)
+		local type = status.statusProperty("sbqType")
+		if type == "prey" then
 			status.setStatusProperty("sbqDontTouchDoors", true)
 		else
 			status.setStatusProperty("sbqDontTouchDoors", false)
@@ -88,8 +91,9 @@ function init()
 		}
 	end)
 	message.setHandler("sbqSetCurrentData", function(_,_, current)
-		status.setStatusProperty( "sbqCurrentData", current)
-		if current.type == "prey" then
+		status.setStatusProperty("sbqCurrentData", current)
+		local type = status.statusProperty("sbqType")
+		if type == "prey" then
 			status.setStatusProperty("sbqDontTouchDoors", true)
 			if current.species ~= "sbqOccupantHolder" then
 				_npc_setInteractive(false)
@@ -97,6 +101,9 @@ function init()
 		else
 			status.setStatusProperty("sbqDontTouchDoors", false)
 		end
+	end)
+	message.setHandler("sbqSetType", function(_, _, current)
+		status.setStatusProperty("sbqType", current)
 	end)
 
 	message.setHandler("sbqInteract", function(_,_, pred, predData)

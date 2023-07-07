@@ -37,7 +37,7 @@ function init()
 
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
 	sbq.lastSpecies = sbq.sbqCurrentData.species
-	sbq.lastType = sbq.sbqCurrentData.type
+	sbq.lastType = player.getProperty("sbqType")
 
 	sbq.storedDigestedPrey = status.statusProperty("sbqStoredDigestedPrey") or {}
 
@@ -151,7 +151,7 @@ function titleCanvas:draw()
 end
 
 function sbq.saveSettings()
-	if type(sbq.sbqCurrentData.id) == "number" and sbq.sbqCurrentData.type == "driver" and world.entityExists(sbq.sbqCurrentData.id) then
+	if type(sbq.sbqCurrentData.id) == "number" and player.getProperty("sbqType") == "driver" and world.entityExists(sbq.sbqCurrentData.id) then
 		world.sendEntityMessage( sbq.sbqCurrentData.id, "settingsMenuSet", sb.jsonMerge(sbq.predatorSettings, sbq.globalSettings))
 	end
 

@@ -45,7 +45,7 @@ function sbq.getInitialData()
 
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
 	sbq.lastSpecies = sbq.sbqCurrentData.species
-	sbq.lastType = sbq.sbqCurrentData.type
+	sbq.lastType = player.getProperty("sbqType")
 
 	sbq.storedDigestedPrey = status.statusProperty("sbqStoredDigestedPrey") or {}
 
@@ -102,7 +102,7 @@ function init()
 	sbq.effectsPanel()
 	sbq.extraTab()
 
-	if ((sbq.sbqCurrentData.type ~= "prey") or (sbq.sbqCurrentData.type == "object")) then
+	if ((sbq.lastType ~= "prey") or (sbq.lastType == "object")) then
 		mainTabField.tabs.customizeTab:setVisible(true)
 
 		if sbq.predatorConfig.customizePresets ~= nil then
@@ -112,9 +112,9 @@ function init()
 		else
 			presetsPanel:setVisible(false)
 		end
-		if not player.loungingIn() and sbq.sbqCurrentData.type ~= "object" and (sbq.sbqCurrentData.species == nil or sbq.sbqCurrentData.species == "sbqOccupantHolder") then
+		if not player.loungingIn() and sbq.lastType ~= "object" and (sbq.sbqCurrentData.species == nil or sbq.sbqCurrentData.species == "sbqOccupantHolder") then
 			speciesLayout:setVisible( not sbq.hideSpeciesPanel )
-		elseif sbq.sbqCurrentData.type ~= "object" then
+		elseif sbq.lastType ~= "object" then
 			speciesLayout:setVisible(false)
 		end
 
@@ -268,7 +268,7 @@ end
 --------------------------------------------------------------------------------------------------
 
 function sbq.saveSettings()
-	if type(sbq.sbqCurrentData.id) == "number" and sbq.sbqCurrentData.type == "driver" and world.entityExists(sbq.sbqCurrentData.id) then
+	if type(sbq.sbqCurrentData.id) == "number" and sbq.lastType == "driver" and world.entityExists(sbq.sbqCurrentData.id) then
 		world.sendEntityMessage( sbq.sbqCurrentData.id, "settingsMenuSet", sb.jsonMerge(sbq.predatorSettings, sbq.globalSettings))
 	end
 

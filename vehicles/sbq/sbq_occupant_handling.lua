@@ -54,7 +54,9 @@ end
 function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	local entityType = world.entityType(args.id)
 	if entityType == "player" then
-		world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqClose", nil, nil, sbq.driver )
+		if args.keepWindow then
+			world.sendEntityMessage( args.id, "sbqOpenInterface", "sbqClose", nil, nil, sbq.driver )
+		end
 		sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
 		function(data)
 			if not data then return end
@@ -69,6 +71,7 @@ function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
 		end)
 	end
+	world.sendEntityMessage(args.id, "sbqSetType", "prey")
 
 	sbq.occupant[seatindex].id = args.id
 	sbq.occupant[seatindex].location = location
@@ -97,6 +100,7 @@ function sbq.uneat( occupantId )
 	if world.entityType(occupantId) == "player" then
 		world.sendEntityMessage(occupantId, "sbqOpenInterface", "sbqClose")
 	end
+	world.sendEntityMessage(occupantId, "sbqSetType", nil)
 
 	if occupantData.species ~= nil and occupantData.smolPreyData ~= nil then
 		if type(occupantData.smolPreyData.id) == "number" and world.entityExists(occupantData.smolPreyData.id) then

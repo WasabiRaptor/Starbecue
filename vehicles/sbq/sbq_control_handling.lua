@@ -104,24 +104,28 @@ function sbq.getSeatData(occupant, seatname, eid)
 			id = entity.id()
 		}
 	else
-		seatType = "prey"
 		data = occupant.smolPreyData
 		data.predId = entity.id()
 	end
 	data.type = seatType
 	data.location = occupant.location
 
-	if occupant.controls.primaryHandItem ~= nil and occupant.controls.primaryHandItemDescriptor.parameters.scriptStorage ~= nil and occupant.controls.primaryHandItemDescriptor.parameters.scriptStorage.seatdata ~= nil then
-		occupant.controls = sb.jsonMerge(occupant.controls, occupant.controls.primaryHandItemDescriptor.parameters.scriptStorage.seatdata)
-	elseif occupant.controls.altHandItem ~= nil and occupant.controls.altHandItemDescriptor.parameters.scriptStorage ~= nil and occupant.controls.altHandItemDescriptor.parameters.scriptStorage.seatdata ~= nil then
-		occupant.controls = sb.jsonMerge(occupant.controls, occupant.controls.altHandItemDescriptor.parameters.scriptStorage.seatdata)
-	else
-		occupant.controls.shiftReleased = occupant.controls.shift
-		occupant.controls.shift = 0
+	if sbq.timer(seatname .. "Info", 1) then
+		if seatType == "driver" and not sbq.isNested then
+			world.sendEntityMessage(eid, "sbqSetType", "driver")
+		end
+		if occupant.controls.primaryHandItem ~= nil and occupant.controls.primaryHandItemDescriptor.parameters.scriptStorage ~= nil and occupant.controls.primaryHandItemDescriptor.parameters.scriptStorage.seatdata ~= nil then
+			occupant.controls = sb.jsonMerge(occupant.controls, occupant.controls.primaryHandItemDescriptor.parameters.scriptStorage.seatdata)
+		elseif occupant.controls.altHandItem ~= nil and occupant.controls.altHandItemDescriptor.parameters.scriptStorage ~= nil and occupant.controls.altHandItemDescriptor.parameters.scriptStorage.seatdata ~= nil then
+			occupant.controls = sb.jsonMerge(occupant.controls, occupant.controls.altHandItemDescriptor.parameters.scriptStorage.seatdata)
+		else
+			occupant.controls.shiftReleased = occupant.controls.shift
+			occupant.controls.shift = 0
 
-		sbq.loopedMessage(seatname .. "Info", eid, "sbqGetSeatInformation", { seatType }, function(seatdata)
-			occupant.controls = sb.jsonMerge(occupant.controls, seatdata)
-		end)
+			sbq.loopedMessage(seatname .. "Info", eid, "sbqGetSeatInformation", { seatType }, function(seatdata)
+				occupant.controls = sb.jsonMerge(occupant.controls, seatdata)
+			end)
+		end
 	end
 
 	if sbq.timedLoopedMessage(seatname .. "Equips", 1, eid, "sbqGetSeatEquips", { data }, function(seatdata)
