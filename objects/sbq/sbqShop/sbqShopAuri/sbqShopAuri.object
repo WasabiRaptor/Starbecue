@@ -63,22 +63,37 @@
 					["Tell me about yourself", ".talkAboutSelf"],
 					["I think I'm bugged!", ".fixData", { "checkScript":"fixData"} ]
 				]
+			}
+		},
+		"converse" : {
+			"new" : {
+				"randomButtonText" : ["[Options]"],
+				"randomDialogue" : [":shopConverse"],
+				"options" : [
+					["What is this place?", ".place"],
+					["Can you eat me?", ".npc"],
+					["Tell me about yourself", ".talkAboutSelf"],
+					["I think I'm bugged!", ".fixData", { "checkScript":"fixData"} ]
+				]
+			}
+		},
+		"place" : {
+			"new" : {
+				"dialogue" : ":shopPlace",
+				"jump" : ".converse"
+			}
+		},
+		"fixData" :{
+			"new" : {
+				"dialogue" : ":fixBug",
+				"jump" : ".converse"
 			},
-			"place" : {
-				"new" : {
-					"dialogue" : ":shopPlace"
-				}
-			},
-			"fixData" :{
-				"new" : {
-					"dialogue" : ":fixBug"
-				},
-				"next" : "fixData"
-			},
-			"npc" : {
-				"new" : {
-					"dialogue" : ":checkNPC"
-				}
+			"next" : "fixData"
+		},
+		"npc" : {
+			"new" : {
+				"randomDialogue" : ":checkNPC",
+				"jump" : ".converse"
 			}
 		},
 		"talkAboutKinks" : "/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.npctype:scriptConfig.dialogueTree.talkAboutKinks",

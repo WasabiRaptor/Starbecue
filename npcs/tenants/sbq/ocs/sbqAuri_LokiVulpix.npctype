@@ -92,17 +92,23 @@
 					"next" : "openNewDialogueBox",
 					"new" : {
 						"ui" : "starbecue:auriShop",
-						"inputData" : { "shopRecipes" : "/recipes/auriShop/lokiShopRecipes.config", "dialogueTreeStart" : "converse" }
+						"inputData" : { "shopRecipes" : "/recipes/auriShop/lokiShopRecipes.config", "dialogueTreeStart" : ".shopConverse" }
 					}
 				},
-				"introduce" : {"new" : { "dialogue" : ":introduce"}},
-				"locations" : {
-					"belly" : {
-
-					}
-				}
-
+				"introduce" : {"new" : { "dialogue" : ":introduce"}}
 			},
+			"shopConverse" : {
+				"new" : {
+					"randomDialogue" :[":shopConverse"],
+					"options" : [
+						["My name is...", ".converse.introduce", {"check" : {"introduced":"false"}}],
+						["Tell me about yourself", ".talkAboutSelf"],
+						["Tell me about your kinks", ".talkAboutKinks"],
+						["Tell me about your body", ".talkAboutBody"]
+					]
+				}
+			},
+
 			"talkAboutSelf" : {
 				"new" : {
 					"randomDialogue" :[":talkAboutSelf"],
@@ -132,13 +138,70 @@
 			},
 
 			"itemSelection" : {
+				"sbqPotionVaporeon" : {
+					"new" : {
+						"randomDialogue" : ":itemSelectionPotionVaporeon",
+						"continue" : {
+							"path" : ".Zevi",
+							"nearUniqueId" : ["sbqZevi_Zygahedron"]
+						}
+					},
+					"Zevi" : { "new" : {"useLastRandom":true,"randomDialogue" : ":itemSelectionPotionVaporeonZevi"}}
+				},
+				"sbqCoreVaporeon" : {
+					"new" : {
+						"randomDialogue" : ":itemSelectionCoreVaporeon",
+						"continue" : {
+							"path" : ".Zevi",
+							"nearUniqueId" : ["sbqZevi_Zygahedron"]
+						}
+					},
+					"Zevi" : { "new" : {"useLastRandom":true,"randomDialogue" : ":itemSelectionCoreVaporeonZevi"}}
+				},
+				"sbqPotionAvian" : { "new" : {"randomDialogue" : ":itemSelectionPotionAvian"}},
+				"sbqCoreAvian" : { "new" : {"randomDialogue" : ":itemSelectionCoreAvian"}},
+				"sbqPotionXeronious" : { "new" : {"randomDialogue" : ":itemSelectionPotionXeronious"}},
+				"sbqCoreXeronious" : { "new" : {"randomDialogue" : ":itemSelectionCoreXeronious"}},
+				"sbqPotionSlime" : { "new" : {"randomDialogue" : ":itemSelectionPotionSlime"}},
+				"sbqCoreSlime" : { "new" : {"randomDialogue" : ":itemSelectionCoreSlime"}},
+				"sbqCoreCharem" : { "new" : {"randomDialogue" : ":itemSelectionCoreCharem"}},
+				"sbqConsumableZiellekPearl" : { "new" : {"randomDialogue" : ":itemSelectionConsumableZiellekPearl"}},
+				"sbqCoreZiellekDragon" : { "new" : {"randomDialogue" : ":itemSelectionCoreZiellekDragon"}},
+				"sbqPotionDartGun" : { "new" : {"randomDialogue" : ":itemSelectionPotionDartGun"}},
+				"sbqSizeRay" : { "new" : {"randomDialogue" : ":itemSelectionSizeRay"}},
+				"sbqMysteriousPotion" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotion"}},
+				"sbqDuplicatePotion" : { "new" : {"randomDialogue" : ":itemSelectionDuplicatePotion"}},
+				"sbqSpeciesPotion" : { "new" : {"randomDialogue" : ":itemSelectionSpeciesPotion"}},
+				"sbqGenderSwapPotion" : { "new" : {"randomDialogue" : ":itemSelectionGenderSwapPotion"}},
+				"sbqReversionPotion" : { "new" : {"randomDialogue" : ":itemSelectionReversionPotion"}},
+				"sbqMysteriousPotionHellhound" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotionHellhound"}},
+				"sbqMysteriousPotionVaporeon" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotionVaporeon"}},
+				"sbqMysteriousPotionFlareon" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotionFlareon"}},
+				"sbqMysteriousPotionMeowscarada" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotionMeowscarada"}},
+				"sbqMysteriousPotionSandy_Fevix" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotionSandy_Fevix"}},
+				"sbqMysteriousPotionHelena_FFWizard" : { "new" : {"randomDialogue" : ":itemSelectionMysteriousPotionHelena_FFWizard"}},
+				"sbqNominomicon" : { "new" : {"randomDialogue" : ":itemSelectionNominomicon"}},
+				"sbqModifierFatteningDonut" : { "new" : {"randomDialogue" : ":itemSelectionModifierFatteningDonut"}},
+				"sbqModifierDietPill" : { "new" : {"randomDialogue" : ":itemSelectionModifierDietPill"}},
+				"sbqModifierHealingPotion" : { "new" : {"randomDialogue" : ":itemSelectionModifierHealingPotion"}},
+				"sbqPlasticEgg" : { "new" : {"randomDialogue" : ":itemSelectionPlasticEgg"}},
+				"sbqEggWand" : { "new" : {"randomDialogue" : ":itemSelectionEggWand"}},
+				"sbqBallsPoster" : { "new" : {"randomDialogue" : ":itemSelectionBallsPoster"}},
+				"sbqLargeWoodenArmchair" : { "new" : {"randomDialogue" : ":itemSelectionLargeWoodenArmchair"}},
+				"sbqLoki_LokiVulpix_clothes" : { "new" : {"randomDialogue" : ":itemSelectionLoki_LokiVulpix_clothes"}},
+				"sbqAkari_AkariKaen_clothes" : { "new" : {"randomDialogue" : ":itemSelectionAkari_AkariKaen_clothes"}},
 
+				"spookypumpkinhead" : { "new" : {"randomDialogue" : ":itemSelectionSpookypumpkinhead"}},
+				"smallBellyBoundStore" : { "new" : {"randomDialogue" : ":itemSelectionSmallBellyBoundStore"}}
 			},
 
 			// lines triggered when a player may recieve a certain reward
 			"rewardNotify" :{
 				"new" : {},
 				"next" : ["poolName", "rewardName"],
+				"richOre" : {
+					"replace" : {"randomDialogue":[":rewardNotifyRichOre"]}
+				},
 				"money" : {
 					"replace" : {"randomDialogue":[":rewardNotifyMoney"]}
 				},
