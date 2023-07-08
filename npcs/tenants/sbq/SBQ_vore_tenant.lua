@@ -585,7 +585,7 @@ function sbq.passiveStatChanges(dt)
 				for i, occupant in pairs(sbq.occupant) do
 					local location = occupant.location
 					local locationData = sbq.predatorConfig.locations[location]
-					for _, satisfy in ipairs(locationData.satisfiesPred or {}) do
+					for _, satisfy in ipairs((locationData or {}).satisfiesPred or {}) do
 						if satisfy == "horny" then
 							if world.entityType(occupant.id) == "player" then
 								table.insert(players, { occupant.id, location })
