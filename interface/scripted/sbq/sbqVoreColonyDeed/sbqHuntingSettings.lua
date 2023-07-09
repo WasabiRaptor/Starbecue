@@ -51,19 +51,19 @@ function sbq.npcGeneralBehaviorTab()
 				{
 					{ type = "label", text = " " .. ("Head"), size = { 25, 10 }, inline = true, visible = hornyVisible },
 					{ visible = hornyVisible, id = "stripHead", type = "slider", size = { 64, 10 }, expand = true, notches = { 0, 0.25, 0.5, 0.75, 0.99, 1 }, textToolTips = { nil, nil, nil, nil, nil, (sbq.npcConfig.scriptConfig.hatStaysOn or "The hat stays on during sex.")}, handles = {
-						{ value = (sbq.predatorSettings.stripHead or 0.75), locked = sbq.overrideSettings.stripHead ~= nil, toolTip = "Horny level at which the NPC strips." },
+						{ value = (sbq.predatorSettings.stripHead or 0.6), locked = sbq.overrideSettings.stripHead ~= nil, toolTip = "Horny level at which the NPC strips." },
 					}}
 				},
 				{
 					{ type = "label", text = " " .. ("Chest"), size = { 25, 10 }, inline = true, visible = hornyVisible },
 					{ visible = hornyVisible, id = "stripChest", type = "slider", size = { 64, 10 }, expand = true, notches = { 0, 0.25, 0.5, 0.75, 1 }, handles = {
-						{ value = (sbq.predatorSettings.stripChest or 0.75), locked = sbq.overrideSettings.stripChest ~= nil, toolTip = "Horny level at which the NPC strips." },
+						{ value = (sbq.predatorSettings.stripChest or 0.6), locked = sbq.overrideSettings.stripChest ~= nil, toolTip = "Horny level at which the NPC strips." },
 					}}
 				},
 				{
 					{ type = "label", text = " " .. ("Legs"), size = { 25, 10 }, inline = true, visible = hornyVisible },
 					{ visible = hornyVisible, id = "stripLegs", type = "slider", size = { 64, 10 }, expand = true, notches = { 0, 0.25, 0.5, 0.75, 1 }, handles = {
-						{ value = (sbq.predatorSettings.stripLegs or 0.75), locked = sbq.overrideSettings.stripLegs ~= nil, toolTip = "Horny level at which the NPC strips." },
+						{ value = (sbq.predatorSettings.stripLegs or 0.6), locked = sbq.overrideSettings.stripLegs ~= nil, toolTip = "Horny level at which the NPC strips." },
 					}}
 				}
 			} },

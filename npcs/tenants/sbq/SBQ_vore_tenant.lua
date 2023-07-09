@@ -1342,17 +1342,17 @@ end
 function sbq.updateCosmeticSlots()
 	if type(storage.settings) == "table" then
 		local hornyPercent = status.resourcePercentage("horny")
-		if (storage.settings.stripHead or 0.75) < hornyPercent then
+		if (storage.settings.stripHead or 0.6) < hornyPercent then
 			_npc_setItemSlot("headCosmetic", "sbq_nude_chest")
 		else
 			_npc_setItemSlot("headCosmetic", storage.saveCosmeticSlots.headCosmetic)
 		end
-		if (storage.settings.stripChest or 0.75) < hornyPercent then
+		if (storage.settings.stripChest or 0.6) < hornyPercent then
 			_npc_setItemSlot("chestCosmetic", "sbq_nude_chest")
 		else
 			_npc_setItemSlot("chestCosmetic", storage.saveCosmeticSlots.chestCosmetic)
 		end
-		if (storage.settings.stripLegs or 0.75) < hornyPercent then
+		if (storage.settings.stripLegs or 0.6) < hornyPercent then
 			_npc_setItemSlot("legsCosmetic", "sbq_nude_legs")
 		else
 			_npc_setItemSlot("legsCosmetic", storage.saveCosmeticSlots.legsCosmetic)
