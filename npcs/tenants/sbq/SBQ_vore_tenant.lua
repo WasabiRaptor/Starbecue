@@ -485,6 +485,7 @@ function update(dt)
 	sbq.randomTimer("hunting", 15, 60, function () -- get a new hunting target every 15 to 60 seconds
 		sbq.getTarget()
 	end)
+	sbq.timer("clothes", 5, sbq.updateCosmeticSlots)
 
 	if type(sbq.occupantHolder) == "number" and world.entityExists(sbq.occupantHolder) then
 		for _, transition in ipairs(sbq.queuedTransitions) do
@@ -1340,13 +1341,18 @@ end
 
 function sbq.updateCosmeticSlots()
 	if type(storage.settings) == "table" then
-		if storage.settings.breastVorePred then
+		local hornyPercent = status.resourcePercentage("horny")
+		if (storage.settings.stripHead or 0.75) < hornyPercent then
+			_npc_setItemSlot("headCosmetic", "sbq_nude_chest")
+		else
+			_npc_setItemSlot("headCosmetic", storage.saveCosmeticSlots.headCosmetic)
+		end
+		if (storage.settings.stripChest or 0.75) < hornyPercent then
 			_npc_setItemSlot("chestCosmetic", "sbq_nude_chest")
 		else
 			_npc_setItemSlot("chestCosmetic", storage.saveCosmeticSlots.chestCosmetic)
 		end
-
-		if storage.settings.unbirthPred or storage.settings.cockVorePred or storage.settings.analVorePred then
+		if (storage.settings.stripLegs or 0.75) < hornyPercent then
 			_npc_setItemSlot("legsCosmetic", "sbq_nude_legs")
 		else
 			_npc_setItemSlot("legsCosmetic", storage.saveCosmeticSlots.legsCosmetic)

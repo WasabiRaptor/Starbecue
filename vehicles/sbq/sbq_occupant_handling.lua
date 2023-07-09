@@ -938,6 +938,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.doTransition( struggledata.directions[movedir].transition, {direction = movedir, id = strugglerId, struggleTrigger = true} )
 	else
 		local location = sbq.occupant[struggler].location
+		local locationData = sbq.sbqData.locations[location]
 
 		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and
 			(sbq.checkSettings(struggledata.directions[movedir].settings)) then
@@ -953,6 +954,14 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		end
 
 		sbq.doAnims(animation)
+
+		if locationData.satisfiesPred and sbq.driver then
+			world.sendEntityMessage(sbq.driver, "sbqAddToResources", time, locationData.satisfiesPred)
+		end
+		if locationData.satisfiesPrey then
+			world.sendEntityMessage(strugglerId, "sbqAddToResources", time, locationData.satisfiesPrey)
+		end
+
 
 		sbq.occupant[struggler].bellySettleDownTimer = time / 2
 		sbq.occupant[struggler].visited.struggleTime = sbq.occupant[struggler].visited.struggleTime + time

@@ -32,28 +32,55 @@ function sbq.npcGeneralBehaviorTab()
 		type = "tab", id = "behaviorTab", title = "Behavior", visible = true,
 		contents = {
 			{ { type = "label", text = " Prey", inline = true }, predPreySlider, { type = "label", text = "Pred", inline = true } },
-			{
-				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hungerLabel or "Hunger"), size = { 40, 10 }, inline = true, visible = hungryVisible },
-				{ visible = hungryVisible, id = "hungerBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hungerColor or { 153, 123, 39 } } },
-			{
-				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.restLabel or "Rest"), size = { 40, 10 }, inline = true, visible = sleepyVisible },
-				{ visible = sleepyVisible, id = "restBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.restColor or { 179, 135, 215 } }
-			},
-			{
-				{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = { 40, 10 }, inline = true, visible = hornyVisible },
-				{ visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or { 226, 109, 215 } }
-			},
-			{ { type = "checkBox", id = "preferNonImmune",
-				toolTip = "Prefer Prey that aren't immune to this location's effects." },
-				{ type = "label", text = "Prefer Non Immune" } },
-			{ { type = "checkBox", id = "preferDigestHostiles",
-				toolTip = "Only uses vore types with digest effects on hostiles." },
-				{ type = "checkBox", id = "overrideSoftDigestForHostiles",
-				toolTip = "Override Soft digest to fatal digest for hostiles.\n(This prevents prey buildup from combat)" },
-				{ type = "label", text = "Prefer Digest Hostiles" } },
-			{ { type = "checkBox", id = "preferHealFriendlies",
-				toolTip = "Attempt to heal friendlies with this vore type when they are low health." },
-				{ type = "label", text = "Prefer Heal Friendlies" } },
+
+			{ type = "panel", style = "flat", expandMode = { 1, 0 }, children = { { mode = "v" },
+				{
+					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hungerLabel or "Hunger"), size = { 40, 10 }, inline = true, visible = hungryVisible },
+					{ visible = hungryVisible, id = "hungerBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hungerColor or { 153, 123, 39 } } },
+				{
+					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.restLabel or "Rest"), size = { 40, 10 }, inline = true, visible = sleepyVisible },
+					{ visible = sleepyVisible, id = "restBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.restColor or { 179, 135, 215 } }
+				},
+				{
+					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = { 40, 10 }, inline = true, visible = hornyVisible },
+					{ visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or { 226, 109, 215 } }
+				},
+			}},
+			{ type = "panel", style = "flat", expandMode = { 1, 0 }, children = { { mode = "v" },
+				{ type = "label", text = ("Stripping"), align = "center", visible = hornyVisible },
+				{
+					{ type = "label", text = " " .. ("Head"), size = { 25, 10 }, inline = true, visible = hornyVisible },
+					{ visible = hornyVisible, id = "stripHead", type = "slider", size = { 64, 10 }, expand = true, notches = { 0, 0.25, 0.5, 0.75, 0.99, 1 }, textToolTips = { nil, nil, nil, nil, nil, (sbq.npcConfig.scriptConfig.hatStaysOn or "The hat stays on during sex.")}, handles = {
+						{ value = (sbq.predatorSettings.stripHead or 0.75), locked = sbq.overrideSettings.stripHead ~= nil, toolTip = "Horny level at which the NPC strips." },
+					}}
+				},
+				{
+					{ type = "label", text = " " .. ("Chest"), size = { 25, 10 }, inline = true, visible = hornyVisible },
+					{ visible = hornyVisible, id = "stripChest", type = "slider", size = { 64, 10 }, expand = true, notches = { 0, 0.25, 0.5, 0.75, 1 }, handles = {
+						{ value = (sbq.predatorSettings.stripChest or 0.75), locked = sbq.overrideSettings.stripChest ~= nil, toolTip = "Horny level at which the NPC strips." },
+					}}
+				},
+				{
+					{ type = "label", text = " " .. ("Legs"), size = { 25, 10 }, inline = true, visible = hornyVisible },
+					{ visible = hornyVisible, id = "stripLegs", type = "slider", size = { 64, 10 }, expand = true, notches = { 0, 0.25, 0.5, 0.75, 1 }, handles = {
+						{ value = (sbq.predatorSettings.stripLegs or 0.75), locked = sbq.overrideSettings.stripLegs ~= nil, toolTip = "Horny level at which the NPC strips." },
+					}}
+				}
+			} },
+			{ type = "panel", style = "flat", expandMode = { 1, 0 }, children = { { mode = "v" },
+
+				{ { type = "checkBox", id = "preferNonImmune",
+					toolTip = "Prefer Prey that aren't immune to this location's effects." },
+					{ type = "label", text = "Prefer Non Immune" } },
+				{ { type = "checkBox", id = "preferDigestHostiles",
+					toolTip = "Only uses vore types with digest effects on hostiles." },
+					{ type = "checkBox", id = "overrideSoftDigestForHostiles",
+					toolTip = "Override Soft digest to fatal digest for hostiles.\n(This prevents prey buildup from combat)" },
+					{ type = "label", text = "Prefer Digest Hostiles" } },
+				{ { type = "checkBox", id = "preferHealFriendlies",
+					toolTip = "Attempt to heal friendlies with this vore type when they are low health." },
+					{ type = "label", text = "Prefer Heal Friendlies" } },
+			}},
 		}
 	})
 	function predPreyLeanSlider:onChange(index, value)
@@ -65,6 +92,23 @@ function sbq.npcGeneralBehaviorTab()
 			sbq.changePredatorSetting("predPreyLeanMax", value)
 		end
 	end
+	function stripHead:onChange(index, value)
+		if index == 1 then
+			sbq.changePredatorSetting("stripHead", value)
+		end
+	end
+	function stripChest:onChange(index, value)
+		if index == 1 then
+			sbq.changePredatorSetting("stripChest", value)
+		end
+	end
+	function stripLegs:onChange(index, value)
+		if index == 1 then
+			sbq.changePredatorSetting("stripLegs", value)
+		end
+	end
+
+
 
 	function tab:update(dt)
 		sbq.loopedMessage("getHunger", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"food"}, function (value)

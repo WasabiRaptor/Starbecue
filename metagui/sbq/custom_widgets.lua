@@ -109,6 +109,7 @@ function widgets.slider:init(base, param)
 	self.expandMode = param.expandMode
 	self.textToolTips = param.textToolTips
 	self.snapOnly = param.snapOnly
+	self.explicitSize = param.size
 
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
@@ -146,7 +147,7 @@ function widgets.slider:init(base, param)
 end
 
 function widgets.slider:minSize() return {16, 16} end
-function widgets.slider:preferredSize() return {64, 16} end
+function widgets.slider:preferredSize() return self.explicitSize or {64, 16} end
 
 function widgets.slider:draw()
 	-- update every frame while mouse is nearby
@@ -163,7 +164,7 @@ function widgets.slider:draw()
 			local dist = math.huge
 			for i, h in ipairs(self.handles) do
 				local d = rmp[1] - math.min(self.size[1], math.max(0, f * (h.value - s)))
-				if math.abs(d) < dist and not h.locked or (math.abs(d) == dist and d > 0) then
+				if math.abs(d) < dist and true or (math.abs(d) == dist and d > 0) then
 					best = i
 					dist = math.abs(d)
 				end
@@ -257,6 +258,7 @@ function widgets.slider:onMouseButtonEvent(btn, down)
 end
 function widgets.slider:onCaptureMouseMove(delta)
 	if delta[1] == 0 or not self.current or not self.handles[self.current].value then return end
+	if self.handles[self.current].locked then mg.toolTip() return end
 
 	if not self.changed then
 		-- local d = (delta[1] > 0) and 1 or -1
