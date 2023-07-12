@@ -470,7 +470,7 @@ function sbq.voreButton(voreType)
 	if active == "request" then
 		sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
 			world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", voreType,
-				{ id = player.id(), willing = true })
+				{ id = player.id(), willing = true, keepWindow = true })
 			sbq.timer("gotVored", dialogue.result.delay or 1.5, function()
 				sbq.settings.doingVore = "after"
 				for i, occupant in pairs(sbq.occupant or {}) do

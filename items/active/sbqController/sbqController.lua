@@ -107,7 +107,7 @@ function update(dt, fireMode, shiftHeld, controls)
 							if data.pressed and not sbq.click then
 								sbq.click = true
 								if type(sbq[data.selection]) == "function" then
-									sbq[data.selection](selectedPrey, selectedPreyIndex)
+									sbq[data.selection](selectedPrey, selectedPreyIndex, data.data)
 								end
 							end
 						end
@@ -284,7 +284,8 @@ function assignLocationActionSelect(data)
 		if (not action.single) and sbq.checkSettings(action.checkSettings, settings) then
 			table.insert(options, {
 				name = action.script,
-				title = action.name
+				title = action.name,
+				data = action.args
 			})
 		end
 	end
@@ -302,7 +303,7 @@ function locationPreyAction(selectionData)
 				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and
 					data.occupant[i].location == locationAction then
 					if type(sbq[selectionData.selection]) == "function" then
-						sbq[selectionData.selection](data.occupant[i].id, number)
+						sbq[selectionData.selection](data.occupant[i].id, number, selectionData.data)
 					end
 				end
 			end
@@ -379,7 +380,8 @@ function assignPreyActionsLocation(id)
 						if sbq.checkSettings(action.checkSettings, settings) then
 							table.insert(options, {
 								name = action.script,
-								title = action.name
+								title = action.name,
+								data = action.args
 							})
 						end
 					end

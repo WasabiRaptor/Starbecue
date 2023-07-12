@@ -187,7 +187,7 @@ function sbq.readOccupantData()
 						local locationData = sbq.predatorConfig.locations[occupant.location] or {}
 						for j, action in ipairs(locationData.preyActions or {}) do
 							if sbq.checkSettings(action.checkSettings, sbq.predatorSettings) then
-								table.insert(actionList, {action.name, function() sbq[action.script](id, i) end})
+								table.insert(actionList, {action.name, function() sbq[action.script](id, i, action.args) end})
 							end
 						end
 						metagui.dropDownMenu(actionList,2)

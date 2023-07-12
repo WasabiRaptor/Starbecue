@@ -41,10 +41,6 @@ function sbq.eggify(id, i)
 end
 
 
-function sbq.infuseLocation(id, i)
-	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id )
-end
-
-function sbq.cockTF(id, i)
-	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id, {"shaft", "balls"} )
+function sbq.infuseLocation(id, i, args)
+	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id, (args or {}).locations )
 end
