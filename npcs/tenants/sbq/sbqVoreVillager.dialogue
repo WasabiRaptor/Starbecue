@@ -1592,16 +1592,36 @@
 		"I can try that.",
 		"Thats my belly button right?"
 	],
-	"shyRequestNavelVoreBefore": ":missingDialogue",
-	"flirtyRequestNavelVoreBefore": ":missingDialogue",
+	"shyRequestNavelVoreBefore": [
+		"Y-you... want in... m-my navel!?...",
+		"R-really?... though my own... b-button!?...",
+		"I-i... you... into my... n-navel?...",
+		"Isn't that... quite a odd... r-request?..."
+	],
+	"flirtyRequestNavelVoreBefore": [
+		"You're eying my navel huh? I can't blame ya cutie~",
+		"My my, a cutie like you in my belly button? why not?~",
+		"Got an interest in my button huh? I got an interest in you too~",
+		"Alright then, stop gawking and shove you're face in already~"
+	],
 	"defaultRequestNavelVoreAfter": [
 		"Mmmm~ that was a tight squeeze.",
 		"You really like bellies don't you.",
 		"Not bothering with anything else, straight to the belly.",
 		"Oooh~ Thats a stretch."
 	],
-	"shyRequestNavelVoreAfter": ":missingDialogue",
-	"flirtyRequestNavelVoreAfter": ":missingDialogue",
+	"shyRequestNavelVoreAfter": [
+		"O-oh wow... you feel nice going though t-there... h-huh?...",
+		"Y-you went though so s-smooth... maybe this is a better way to 'eat'... ",
+		"W-was the trip though my b-button alright... it felt good at least...",
+		"W-what a strange way to enter... my s-stomach... but still nice..."
+	],
+	"flirtyRequestNavelVoreAfter": [
+		"Seems like you and my navel got along well, ya cute snack~",
+		"Just had to rush into my belly as quick as you could huh?~",
+		"You looked cute squirming into my button, felt good too~",
+		"You're all settled in now, having taking the short route to my gut~"
+	],
 	"defaultUnpromptedNavelVoreBefore": [
 		"This isn't the usual way to do things.",
 		"I think we'll just skip right to your destination.",
@@ -1634,35 +1654,356 @@
 		"Such a direct route to my stomach, and it felt sooo pleasant the whole way though~",
 		"You must be so flustered to get utterly stuffed into my belly button, good, I like my prey all blushy~"
 	],
-	"defaultSelfRequestNavelVore": ":missingDialogue",
-	"shySelfRequestNavelVore": ":missingDialogue",
-	"flirtySelfRequestNavelVore": ":missingDialogue",
-	"defaultSelfRequestNavelVoreYes": ":missingDialogue",
-	"shySelfRequestNavelVoreYes": ":missingDialogue",
-	"flirtySelfRequestNavelVoreYes": ":missingDialogue",
-	"defaultSelfRequestNavelVoreYesAfter": ":missingDialogue",
-	"shySelfRequestNavelVoreYesAfter": ":missingDialogue",
-	"flirtySelfRequestNavelVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestNavelVoreNo": ":missingDialogue",
-	"shySelfRequestNavelVoreNo": ":missingDialogue",
-	"flirtySelfRequestNavelVoreNo": ":missingDialogue",
-	"defaultSelfRequestNavelVoreNoYes": ":missingDialogue",
-	"shySelfRequestNavelVoreNoYes": ":missingDialogue",
-	"flirtySelfRequestNavelVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestNavelVoreNoYesAfter": ":missingDialogue",
-	"shySelfRequestNavelVoreNoYesAfter": ":missingDialogue",
-	"flirtySelfRequestNavelVoreNoYesAfter": ":missingDialogue",
-	"defaultNavelVoreFull": ":missingDialogue",
-	"digestNavelVoreFull": ":missingDialogue",
-	"compressionNavelVoreFull": ":missingDialogue",
-	"shyCompressionNavelVoreFull": ":missingDialogue",
-	"flirtyCompressionNavelVoreFull": ":missingDialogue",
-	"defaultRequestAbsorbVoreBefore": ":missingDialogue",
-	"shyRequestAbsorbVoreBefore": ":missingDialogue",
-	"flirtyRequestAbsorbVoreBefore": ":missingDialogue",
-	"defaultRequestAbsorbVoreAfter": ":missingDialogue",
-	"shyRequestAbsorbVoreAfter": ":missingDialogue",
-	"flirtyRequestAbsorbVoreAfter": ":missingDialogue",
+	"defaultSelfRequestNavelVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm starved, may I just smush you into my navel?"
+			],
+			[ // 25% - 50%
+				"Feeling peckish, can I shove you in my belly button?"
+			],
+			[ // 50% - 75%
+				"I just want to push you into my belly, can I?"
+			],
+			[ // 75% - 100%
+				"Hey, can I get you in my navel today?"
+			]
+		]
+	},
+	"shySelfRequestNavelVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Will you please... get inside my n-navel?... I'm very hungry..."
+			],
+			[ // 25% - 50%
+				"I'm peckish... can I get you... in my n-navel?..."
+			],
+			[ // 50% - 75%
+				"Would you like... to go though... my n-navel?..."
+			],
+			[ // 75% - 100%
+				"Hey um... can you go into... my n-navel?..."
+			]
+		]
+	},
+	"flirtySelfRequestNavelVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm just starving out here, wouldn't you like to help me cutie and go in my button?~"
+			],
+			[ // 25% - 50%
+				"Be a sweaty and hop into my navel would ya? I need a snack~"
+			],
+			[ // 50% - 75%
+				"You seem like the perfect thing to be shoved into my navel~"
+			],
+			[ // 75% - 100%
+				"Hey you, want to take a trip into my navel cutie?~"
+			]
+		]
+	},
+	"defaultSelfRequestNavelVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Great! now come smush your face into my button, mt gut awaits!"
+			],
+			[ // 25% - 50%
+				"Good to hear, a quick slip though the navel and into belly then!"
+			],
+			[ // 50% - 75%
+				"thanks, I think you'll find my button very comfortable."
+			],
+			[ // 75% - 100%
+				"You'll let me? sweet! now get in my navel."
+			]
+		]
+	},
+	"shySelfRequestNavelVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You are so kind... h-hurry on then... into my n-navel..."
+			],
+			[ // 25% - 50%
+				"I appreciate you... my b-button is open to enter..."
+			],
+			[ // 50% - 75%
+				"Whew... glad you want to... so go ahead into my b-button..."
+			],
+			[ // 75% - 100%
+				"You don't mind!?... my n-navel is all yours..."
+			]
+		]
+	},
+	"flirtySelfRequestNavelVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Ain't you such a sweaty, well head in my navel then, make me fill~"
+			],
+			[ // 25% - 50%
+				"Oh how nice of you! let's get you into my navel already cutie!~"
+			],
+			[ // 50% - 75%
+				"Good, just relax and let me take it from here, in my button you go~"
+			],
+			[ // 75% - 100%
+				"I thought you would say yes, what cutie wouldn't want in my belly?~"
+			]
+		]
+	},
+	"defaultSelfRequestNavelVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Thanks for wiggling into my navel like that, needed the snack."
+			],
+			[ // 25% - 50%
+				"from navel, to belly, the quickest way to get a snack!"
+			],
+			[ // 50% - 75%
+				"Glad you took the shortcut to my belly there, felt nice."
+			],
+			[ // 75% - 100%
+				"ah, it's pleasant feeling someone going though your navel."
+			]
+		]
+	},
+	"shySelfRequestNavelVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Such a quick way... to be f-filled up... t-thanks again..."
+			],
+			[ // 25% - 50%
+				"Was it a smooth ride... though to my b-belly?... hope so..."
+			],
+			[ // 50% - 75%
+				"I hope no l-lint... was in the way... getting to my b-belly..."
+			],
+			[ // 75% - 100%
+				"Feels nice... you going though to my b-belly... like that..."
+			]
+		]
+	},
+	"flirtySelfRequestNavelVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I wish I could always be stuffing your cute butt into my hungry navel~"
+			],
+			[ // 25% - 50%
+				"You really hit the spot for me cutie, get used to your new home~"
+			],
+			[ // 50% - 75%
+				"What a lovely little trip right into my belly you took~"
+			],
+			[ // 75% - 100%
+				"Ah, right where you belong, hope you found my navel pleasant~"
+			]
+		]
+	},
+	"defaultSelfRequestNavelVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"It's rude to keep a hungry belly waiting, but oh well."
+			],
+			[ // 25% - 50%
+				"Well great... and here my belly was rumbling for ya to get in."
+			],
+			[ // 50% - 75%
+				"Not interested? well fine, but you owe my belly one!"
+			],
+			[ // 75% - 100%
+				"Awww... guess you won't be wiggling though a navel today."
+			]
+		]
+	},
+	"shySelfRequestNavelVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Huh... my belly won't be happy... hearing this... me either..."
+			],
+			[ // 25% - 50%
+				"Darn... did I come off... as creepy?... wanting you in there?..."
+			],
+			[ // 50% - 75%
+				"Y-yeah... I suppose entering my b-button... might be w-weird..."
+			],
+			[ // 75% - 100%
+				"Aww... I should have s-suspected... you'd turn it down..."
+			]
+		]
+	},
+	"flirtySelfRequestNavelVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You'll leave me starving like this? you owe me one cutie~"
+			],
+			[ // 25% - 50%
+				"I could've used you in my button, but alas it's not to be, yet~"
+			],
+			[ // 50% - 75%
+				"I'm in shock that you denied me! though I'm sure you'll come around later~"
+			],
+			[ // 75% - 100%
+				"Really? well your loss then cutie~"
+			]
+		]
+	},
+	"defaultSelfRequestNavelVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You hear my stomach grumbling? you can't deny that, get in here!"
+			],
+			[ // 25% - 50%
+				"I need a snack, so you're going in my navel anyway belly buddy!"
+			],
+			[ // 50% - 75%
+				"The thing is you're going in anyway, I was just being polite."
+			],
+			[ // 75% - 100%
+				"I think you need to get a demo before you say no to my navel."
+			]
+		]
+	},
+	"shySelfRequestNavelVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"If I wasn't so hungry... I wouldn't f-force you in my b-button... but..."
+			],
+			[ // 25% - 50%
+				"I need a s-snack though... really do... so... s-sorry about this!..."
+			],
+			[ // 50% - 75%
+				"You must conquer your f-fear... of my n-navel... let me help you..."
+			],
+			[ // 75% - 100%
+				"U-uh... here's the thing... you're going in anyway... s-sorry!..."
+			]
+		]
+	},
+	"flirtySelfRequestNavelVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm far too hungry for you not be mine, get in my button plaything~"
+			],
+			[ // 25% - 50%
+				"Snacks don't get to say no, they just get in belly buttons~"
+			],
+			[ // 50% - 75%
+				"Too bad, my navel is calling for you, and you're gonna answer it~"
+			],
+			[ // 75% - 100%
+				"So you think you got a choice here? cute, I'm just gonna shove you in~"
+			]
+		]
+	},
+	"defaultSelfRequestNavelVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"The best way to settle my gut is to take the shortlist route, right snack?"
+			],
+			[ // 25% - 50%
+				"If only you'd let me push you into my navel, you snack."
+			],
+			[ // 50% - 75%
+				"Sorry to force you into my navel, but there was no other choice!"
+			],
+			[ // 75% - 100%
+				"Is my navel really so bad now that you've went though it?"
+			]
+		]
+	},
+	"shySelfRequestNavelVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I know f-forcing you though my b-button... was not nice... but I was h-hungry..."
+			],
+			[ // 25% - 50%
+				"S-sorry... but you are here... and I'm p-peckish... so you went in my n-navel..."
+			],
+			[ // 50% - 75%
+				"It's not so bad now... i-is it?... I'm sure my n-navel was lovely..."
+			],
+			[ // 75% - 100%
+				"Enjoy my b-belly... even if you didn't want to..."
+			]
+		]
+	},
+	"flirtySelfRequestNavelVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Nice little express route to my belly for you, be good and keep me filled cutie~"
+			],
+			[ // 25% - 50%
+				"You where the only snack I wanted in my button today, you should be honored~"
+			],
+			[ // 50% - 75%
+				"You where meant to be stuffed though my navel, no denying that cutie~"
+			],
+			[ // 75% - 100%
+				"Glad you've settled in toy, hope my navel wasn't too rough on you~"
+			]
+		]
+	},
+	"defaultNavelVoreFull": [
+		"Sorry, but my belly doesn't have room, maybe get in my navel later?",
+		"I would squeeze you though my button, but I'm too full to take you."
+	],
+	"digestNavelVoreFull": [
+		"I might be able to get you in my navel after I've softened this one up.",
+		"My navel is closed until my current belly filler is digested a bit."
+	],
+	"compressionNavelVoreFull": [
+		"I'm working down my prey as is, I can get you in my navel in a bit maybe.",
+		"Once my current guest is a bit more compact, I might have room for you."
+	],
+	"shyCompressionNavelVoreFull": [
+		"Um... give me awhile... to squeeze down my belly filler...",
+		"Could you uh... come back later... when my prey is more... compact?..."
+	],
+	"flirtyCompressionNavelVoreFull": [
+		"I'd love to shove you in my navel, but until I make more room, you'll have to wait~",
+		"You really want in my button? I'd say yes but my prey isn't compact enough cutie~"
+	],
+	"defaultRequestAbsorbVoreBefore": [
+		"You want my to engulf you with my body? why not! come here.",
+		"Make you disappear into my body? well okay then, let me hug you."
+	],
+	"shyRequestAbsorbVoreBefore": [
+		"You want to... just s-shove you into me?... uh... s-sure!...",
+		"A-absorb you!?... I suppose I could... let me just give you a hug..."
+	],
+	"flirtyRequestAbsorbVoreBefore": [
+		"Heh, sure I'll take you into my body, sattle up and get close cutie~",
+		"I thought you might ask me that, just jump into my body already!~"
+	],
+	"defaultRequestAbsorbVoreAfter": [
+		"Ah.. easy instant snack, settle in my buddy.",
+		"You fit like a glove in me, might as well got comfortable."
+	],
+	"shyRequestAbsorbVoreAfter": [
+		"This feels nice... having you i-inside my form like this...",
+		"I hope you liked me uh... e-engulfing your body with m-mine..."
+	],
+	"flirtyRequestAbsorbVoreAfter": [
+		"Hawh, how was feeling my body rolling over yours cutie?~",
+		"Hmm, you fit too well inside, like you're meant to be absorbed into me~"
+	],
 	"defaultUnpromptedAbsorbVoreBefore": [ // blue here, absorbing time! not very confadent about these lines, tried to keep it vague as to not make it any kind of body absorb (slime, latex, ect..) while making it unque to this vore type
 		"Wanna see a neat trick? I'm about to make you disappear... into me!",
 		"I'm about to surround you completely with my body, just like a blanket!",
@@ -1693,29 +2034,332 @@
 		"Mmmhmhm... I've got you all wrapped up in my body... engulfed by it... immersed in it~",
 		"It's only natural a plaything like you sooo easily passed into my body like that, you belong here anyway~"
 	],
-	"defaultSelfRequestAbsorbVore": ":missingDialogue",
-	"shySelfRequestAbsorbVore": ":missingDialogue",
-	"flirtySelfRequestAbsorbVore": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreYes": ":missingDialogue",
-	"shySelfRequestAbsorbVoreYes": ":missingDialogue",
-	"flirtySelfRequestAbsorbVoreYes": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreYesAfter": ":missingDialogue",
-	"shySelfRequestAbsorbVoreYesAfter": ":missingDialogue",
-	"flirtySelfRequestAbsorbVoreYesAfter": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreNo": ":missingDialogue",
-	"shySelfRequestAbsorbVoreNo": ":missingDialogue",
-	"flirtySelfRequestAbsorbVoreNo": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreNoYes": ":missingDialogue",
-	"shySelfRequestAbsorbVoreNoYes": ":missingDialogue",
-	"flirtySelfRequestAbsorbVoreNoYes": ":missingDialogue",
-	"defaultSelfRequestAbsorbVoreNoYesAfter": ":missingDialogue",
-	"shySelfRequestAbsorbVoreNoYesAfter": ":missingDialogue",
-	"flirtySelfRequestAbsorbVoreNoYesAfter": ":missingDialogue",
-	"defaultAbsorbVoreFull": ":missingDialogue",
-	"digestAbsorbVoreFull": ":missingDialogue",
-	"compressionAbsorbVoreFull": ":missingDialogue",
-	"shyCompressionAbsorbVoreFull": ":missingDialogue",
-	"flirtyCompressionAbsorbVoreFull": ":missingDialogue",
+	"defaultSelfRequestAbsorbVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Feeling empty, can I just throw you into me and fill that void?"
+			],
+			[ // 25% - 50%
+				"It's almost lunch, cool if I just shove you into my body?"
+			],
+			[ // 50% - 75%
+				"Would you care to be absorbed today friend?"
+			],
+			[ // 75% - 100%
+				"Hey you, mind if I take you into my body real quick?"
+			]
+		]
+	},
+	"shySelfRequestAbsorbVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I really want you... inside my b-body... will you let me... a-absorb you?..."
+			],
+			[ // 25% - 50%
+				"I'm peckish... can I just... s-shove you into my f-form?"
+			],
+			[ // 50% - 75%
+				"Is it alright if I uh... p-push you into my b-body?... only if you want..."
+			],
+			[ // 75% - 100%
+				"C-can I give you a hug?... one that might uh... bring you i-into me?..."
+			]
+		]
+	},
+	"flirtySelfRequestAbsorbVore": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I'm sooo empty! won't you fill me up you cute thing?"
+			],
+			[ // 25% - 50%
+				"I could use a snack, want to get engulfed by my form and help me out?~"
+			],
+			[ // 50% - 75%
+				"Hey cutie, want me to wrap you up in my wonderful form?~"
+			],
+			[ // 75% - 100%
+				"Hello you, want to embrace my body covering you up completely?~"
+			]
+		]
+	},
+	"defaultSelfRequestAbsorbVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Yes! I can't wait for you to fill me up, give me a tight hug!"
+			],
+			[ // 25% - 50%
+				"Glad you see it my way, now come here and get in!"
+			],
+			[ // 50% - 75%
+				"Wonderful, let's get you in buddy, my body is ready!"
+			],
+			[ // 75% - 100%
+				"Great! just let me get my arms around you and..."
+			]
+		]
+	},
+	"shySelfRequestAbsorbVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Finally... thanks for letting me do this... now to s-shove you in..."
+			],
+			[ // 25% - 50%
+				"I appreciate... you're willingness to be i-inside... my form..."
+			],
+			[ // 50% - 75%
+				"Great to hear... now just let me... get you in m-me..."
+			],
+			[ // 75% - 100%
+				"Y-you'll let me have you?... I'ma give you a big hug then..."
+			]
+		]
+	},
+	"flirtySelfRequestAbsorbVoreYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"What I want to hear, now let me just take control and push you into me~"
+			],
+			[ // 25% - 50%
+				"I thought you might agree, come here and let me roll over you~"
+			],
+			[ // 50% - 75%
+				"Well then it's time for you to get real close to me cutie~"
+			],
+			[ // 75% - 100%
+				"Great, then just let me hug you really tightly and get you in~"
+			]
+		]
+	},
+	"defaultSelfRequestAbsorbVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You fill my form up in just the right way!"
+			],
+			[ // 25% - 50%
+				"Ah yes, I won't be needing lunch anymore, now that you're all in me."
+			],
+			[ // 50% - 75%
+				"Seems you went into me nicely, like a rock into Jello."
+			],
+			[ // 75% - 100%
+				"There we are, every bit of you is surrounded by every bit of me."
+			]
+		]
+	},
+	"shySelfRequestAbsorbVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I was very empty... now you f-fill that h-hole... it's nice..."
+			],
+			[ // 25% - 50%
+				"I feel b-better with you uh... going into my f-form..."
+			],
+			[ // 50% - 75%
+				"Is being w-wrapped around with my b-body... nice?"
+			],
+			[ // 75% - 100%
+				"Y-you went into me so smooth... it's almost concerning..."
+			]
+		]
+	},
+	"flirtySelfRequestAbsorbVoreYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"There you are, my emptiness is gone, and you're all mine~"
+			],
+			[ // 25% - 50%
+				"Such a kind little cute snack, all cozy inside my form now~"
+			],
+			[ // 50% - 75%
+				"You slid in so nicely, you must have been so eager to get in me~"
+			],
+			[ // 75% - 100%
+				"Oh so good! I feel you're entire being in mine, and it's lovely~"
+			]
+		]
+	},
+	"defaultSelfRequestAbsorbVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You'd leave me feeling empty? how cold."
+			],
+			[ // 25% - 50%
+				"Huh, I might have to eat something normally now."
+			],
+			[ // 50% - 75%
+				"Dang, would have like to feel you in me."
+			],
+			[ // 75% - 100%
+				"Aww, well fine then, guess I'll absorb someone else."
+			]
+		]
+	},
+	"shySelfRequestAbsorbVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I really needed f-filling... but okay... no s-shoving you in..."
+			],
+			[ // 25% - 50%
+				"I guess... I'll have to get some other s-snack... i-inside me..."
+			],
+			[ // 50% - 75%
+				"Well... m-maybe another day then?... maybe?..."
+			],
+			[ // 75% - 100%
+				"Uh I... understand... no a-absorbing..."
+			]
+		]
+	},
+	"flirtySelfRequestAbsorbVoreNo": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Leaving me feeling empty huh? better buy me dinner later then~"
+			],
+			[ // 25% - 50%
+				"Darn, I would've preferred a cuter snack to eat~"
+			],
+			[ // 50% - 75%
+				"That's disappointing, but oh well, I'll make you mine later~"
+			],
+			[ // 75% - 100%
+				"Impressive you can resist the urge to throw yourself into me~"
+			]
+		]
+	},
+	"defaultSelfRequestAbsorbVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"what's that? couldn't hear you over my belly grumbling! must have been a yes."
+			],
+			[ // 25% - 50%
+				"Not feeling like going and getting lunch elsewhere, so no to a no."
+			],
+			[ // 50% - 75%
+				"c'mon! why don't I just shove you into me so you better get me."
+			],
+			[ // 75% - 100%
+				"I think that's a soft no, let me get you in and see if that's still the case."
+			]
+		]
+	},
+	"shySelfRequestAbsorbVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"J-just wait a moment... I need you... so I'm going to h-have you... g-get in..."
+			],
+			[ // 25% - 50%
+				"You're here... and I w-want you... in m-me... so..."
+			],
+			[ // 50% - 75%
+				"I don't think... I'm going to a-accept that... so I'm just g-going to..."
+			],
+			[ // 75% - 100%
+				"I hear you... but my arms... are already around you... so..."
+			]
+		]
+	},
+	"flirtySelfRequestAbsorbVoreNoYes": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"There is a you shaped void in me, you have to be the one to fill it~"
+			],
+			[ // 25% - 50%
+				"My body desires you to be inside it, I'm not going to deny it cutie~"
+			],
+			[ // 50% - 75%
+				"I think you're just timid, let me help you get over that cutie~"
+			],
+			[ // 75% - 100%
+				"It seems you didn't understand me, you're going inside my body~"
+			]
+		]
+	},
+	"defaultSelfRequestAbsorbVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"Ah.. I feel so much better now, and I feel every bit of you too."
+			],
+			[ // 25% - 50%
+				"That wasn't so bad now was it? I get a snack and you get absorbed!"
+			],
+			[ // 50% - 75%
+				"You might not be happy with how this went, but I am for sure."
+			],
+			[ // 75% - 100%
+				"There we are, can't believe you'd try and get out of this."
+			]
+		]
+	},
+	"shySelfRequestAbsorbVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"I can't c-control myself... when I'm so e-empty... s-sorry... about this..."
+			],
+			[ // 25% - 50%
+				"Listen... don't be upset... I just needed a snack... despite your no..."
+			],
+			[ // 50% - 75%
+				"I'm s-sorry!... I just didn't want you to g-go... just stay in my f-form..."
+			],
+			[ // 75% - 100%
+				"S-see?... that was q-quick and easy... one little h-hug and... i-inside..."
+			]
+		]
+	},
+	"flirtySelfRequestAbsorbVoreNoYesAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"You're filling my form up just right, Don't you agree with that at least?~"
+			],
+			[ // 25% - 50%
+				"Looks like you couldn't stop me from getting you for lunch cutie~"
+			],
+			[ // 50% - 75%
+				"I will always get what I want, now squirm for me in my lovely form~"
+			],
+			[ // 75% - 100%
+				"You're right where you should be, regardless of weather you think so~"
+			]
+		]
+	},
+	"defaultAbsorbVoreFull": [
+		"I'd push you in, but my form is stretched out enough as is!",
+		"No room in my body for you bud."
+	],
+	"digestAbsorbVoreFull": [
+		"My form is at max, but once I've melted some guest down, I might take ya.",
+		"Let my form deal with it's current meals, then we'll talk."
+	],
+	"compressionAbsorbVoreFull": [
+		"My form is at cap, but soon there might be room after I get some guests compacted.",
+		"Give my body time to down size it's prey, then see if there's room for you."
+	],
+	"shyCompressionAbsorbVoreFull": [
+		"I-I uh... am f-full... but I'm c-compressing my guests... so maybe not f-full soon...",
+		"Compacting p-prey right now... very f-full... give me time... m-maybe?"
+	],
+	"flirtyCompressionAbsorbVoreFull": [
+		"Sorry honey, but I'm stuffed! however I'm making my snacks travel sized so ask later~",
+		"Currently putting on some real pressure to down size my full body, ask me later~"
+	],
 	"defaultRequestCockVoreBefore": {
 		"percentage": "horny",
 		"pools": [
@@ -2101,7 +2745,7 @@
 			]
 		]
 	},
-	"shySelfRequestCockVoreNo":{
+	"shySelfRequestCockVoreNo": {
 		"percentage": "horny",
 		"pools": [
 			[ // 0% - 25%
