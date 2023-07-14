@@ -778,7 +778,9 @@
 	"defaultNeedsInfusion": [
 		"I'd want someone merged in there"
 	],
-	"shyNeedsInfusion": ":missingDialogue",
+	"shyNeedsInfusion": [
+		"I... I d-don't think I have that part..."
+	],
 	"flirtyNeedsInfusion": [
 		"Really just need to add a cutie to me right now..."
 	],
@@ -3048,23 +3050,23 @@
 		"Mmmm, how lewd of me to just shove ya in there... but I don't care, you are my toy now after all~"
 	],
 	"defaultSelfRequestUnbirth": ":missingDialogue",
-	"shySelfRequestUnbirth": ":missingDialogue",
-	"flirtySelfRequestUnbirth": ":missingDialogue",
+	"shySelfRequestUnbirth": ":defaultSelfRequestUnbirth", // duplicated lines
+	"flirtySelfRequestUnbirth": ":defaultSelfRequestUnbirth", // duplicated lines
 	"defaultSelfRequestUnbirthYes": ":missingDialogue",
-	"shySelfRequestUnbirthYes": ":missingDialogue",
-	"flirtySelfRequestUnbirthYes": ":missingDialogue",
+	"shySelfRequestUnbirthYes": ":defaultSelfRequestUnbirthYes", // duplicated lines
+	"flirtySelfRequestUnbirthYes": ":defaultSelfRequestUnbirthYes", // duplicated lines
 	"defaultSelfRequestUnbirthYesAfter": ":missingDialogue",
-	"shySelfRequestUnbirthYesAfter": ":missingDialogue",
-	"flirtySelfRequestUnbirthYesAfter": ":missingDialogue",
+	"shySelfRequestUnbirthYesAfter": ":defaultSelfRequestUnbirthYesAfter", // duplicated lines
+	"flirtySelfRequestUnbirthYesAfter": ":defaultSelfRequestUnbirthYesAfter", // duplicated lines
 	"defaultSelfRequestUnbirthNo": ":missingDialogue",
-	"shySelfRequestUnbirthNo": ":missingDialogue",
-	"flirtySelfRequestUnbirthNo": ":missingDialogue",
+	"shySelfRequestUnbirthNo": ":defaultSelfRequestUnbirthNo", // duplicated lines
+	"flirtySelfRequestUnbirthNo": ":defaultSelfRequestUnbirthNo", // duplicated lines
 	"defaultSelfRequestUnbirthNoYes": ":missingDialogue",
-	"shySelfRequestUnbirthNoYes": ":missingDialogue",
-	"flirtySelfRequestUnbirthNoYes": ":missingDialogue",
+	"shySelfRequestUnbirthNoYes": ":defaultSelfRequestUnbirthNoYes", // duplicated lines
+	"flirtySelfRequestUnbirthNoYes": ":defaultSelfRequestUnbirthNoYes", // duplicated lines
 	"defaultSelfRequestUnbirthNoYesAfter": ":missingDialogue",
-	"shySelfRequestUnbirthNoYesAfter": ":missingDialogue",
-	"flirtySelfRequestUnbirthNoYesAfter": ":missingDialogue",
+	"shySelfRequestUnbirthNoYesAfter": ":defaultSelfRequestUnbirthNoYesAfter", // duplicated lines
+	"flirtySelfRequestUnbirthNoYesAfter": ":defaultSelfRequestUnbirthNoYesAfter", // duplicated lines
 	"shyUnbirthNotFeelingIt": [
 		"Uhm... I uhm... uhm...",
 		"Y-you really t-think I can do that?",
@@ -3074,13 +3076,27 @@
 			"<keysmash>"
 		]
 	],
-	"flirtyUnbirthNotFeelingIt": ":missingDialogue",
-	"defaultUnbirthTooBig": ":missingDialogue",
-	"shyUnbirthTooBig": ":missingDialogue",
-	"flirtyUnbirthTooBig": ":missingDialogue",
-	"defaultUnbirthTooSmall": ":missingDialogue",
-	"shyUnbirthTooSmall": ":missingDialogue",
-	"flirtyUnbirthTooSmall": ":missingDialogue",
+	"flirtyUnbirthNotFeelingIt": [
+		"Sorry~ I'm just not in the mood right now cutie~"
+	],
+	"defaultUnbirthTooBig": [
+		"I think you're a bit too big for me to carry around."
+	],
+	"shyUnbirthTooBig": [
+		"U-uhm... I-I don't think I could carry you... t-too big..."
+	],
+	"flirtyUnbirthTooBig": [
+		"Sorry Cutie, you're a bit too large for me to carry~"
+	],
+	"defaultUnbirthTooSmall": [
+		"You're a bit too small... I'd probably not even feel you in there..."
+	],
+	"shyUnbirthTooSmall": [
+		"I-I might loose you! Y-you're just too small..."
+	],
+	"flirtyUnbirthTooSmall": [
+		"You? You may be cute but you're so small I wouldn't even feel you in there!"
+	],
 	"defaultUnbirthFull": [
 		"My womb is already occupied~",
 		"Maybe after I'm done carrying my current occupants around~",
@@ -3093,13 +3109,27 @@
 		"Ffff~ I would... but I can't fit another~",
 		"I-if they keep squirming I-I might climax~"
 	],
-	"flirtyDefaultUnbirthFull": ":missingDialogue",
-	"digestUnbirthFull": ":missingDialogue",
-	"shyDigestUnbirthFull": ":missingDialogue",
-	"flirtyDigestUnbirthFull": ":missingDialogue",
-	"compressionUnbirthFull": ":missingDialogue",
-	"shyCompressionUnbirthFull": ":missingDialogue",
-	"flirtyCompressionUnbirthFull": ":missingDialogue",
+	"flirtyDefaultUnbirthFull": [
+		"Already fully occupied, but you're free to admire my bump~"
+	],
+	"digestUnbirthFull": [
+		"I may be full at the moment, but they're melting down into juices, check back soon"
+	],
+	"shyDigestUnbirthFull": [
+		"N-no more space... u-until they're melted into juices..."
+	],
+	"flirtyDigestUnbirthFull": [
+		"Can't fit you yet, but you're free to lick up my juices once they're finished melting~"
+	],
+	"compressionUnbirthFull": [
+		"A bit full, but give me a moment or two to pack them down a bit"
+	],
+	"shyCompressionUnbirthFull": [
+		"I-I'm trying to squeeze em down... t-then maybe you can fit too..."
+	],
+	"flirtyCompressionUnbirthFull": [
+		"Maybe you can help me squeeze em all down, give my belly a rub, maybe you'll feel a kick~"
+	],
 	"defaultUnbirthNeedsInfusion": [
 		"I'd need someone to turn into my pussy first...",
 		"Someone would need to be my pussy...",
@@ -3110,7 +3140,10 @@
 		"Is t-there any way for me to get one of those...?",
 		"I-I don't actually have o-one of those..."
 	],
-	"flirtyUnbirthNeedsInfusion": ":missingDialogue",
+	"flirtyUnbirthNeedsInfusion": [
+		"I'd need some cutie to turn into my pussy~",
+		"I'd like to turn someone into my pussy, makes it even more sensitive~"
+	],
 	"defaultRequestBreastVoreBefore": [
 		"Hah, you're horny.",
 		"You want to squirm into one of my boobs?",
@@ -3198,24 +3231,26 @@
 		"Mmm... the best kind of \"implants\"~"
 	],
 	"defaultSelfRequestBreastVore": ":missingDialogue",
-	"shySelfRequestBreastVore": ":missingDialogue",
-	"flirtySelfRequestBreastVore": ":missingDialogue",
+	"shySelfRequestBreastVore": ":defaultSelfRequestBreastVore", // duplicated lines
+	"flirtySelfRequestBreastVore": ":defaultSelfRequestBreastVore", // duplicated lines
 	"defaultSelfRequestBreastVoreYes": ":missingDialogue",
-	"shySelfRequestBreastVoreYes": ":missingDialogue",
-	"flirtySelfRequestBreastVoreYes": ":missingDialogue",
+	"shySelfRequestBreastVoreYes": ":defaultSelfRequestBreastVoreYes", // duplicated lines
+	"flirtySelfRequestBreastVoreYes": ":defaultSelfRequestBreastVoreYes", // duplicated lines
 	"defaultSelfRequestBreastVoreYesAfter": ":missingDialogue",
-	"shySelfRequestBreastVoreYesAfter": ":missingDialogue",
-	"flirtySelfRequestBreastVoreYesAfter": ":missingDialogue",
+	"shySelfRequestBreastVoreYesAfter": ":defaultSelfRequestBreastVoreYesAfter", // duplicated lines
+	"flirtySelfRequestBreastVoreYesAfter": ":defaultSelfRequestBreastVoreYesAfter", // duplicated lines
 	"defaultSelfRequestBreastVoreNo": ":missingDialogue",
-	"shySelfRequestBreastVoreNo": ":missingDialogue",
-	"flirtySelfRequestBreastVoreNo": ":missingDialogue",
+	"shySelfRequestBreastVoreNo": ":defaultSelfRequestBreastVoreNo", // duplicated lines
+	"flirtySelfRequestBreastVoreNo": ":defaultSelfRequestBreastVoreNo", // duplicated lines
 	"defaultSelfRequestBreastVoreNoYes": ":missingDialogue",
-	"shySelfRequestBreastVoreNoYes": ":missingDialogue",
-	"flirtySelfRequestBreastVoreNoYes": ":missingDialogue",
+	"shySelfRequestBreastVoreNoYes": ":defaultSelfRequestBreastVoreNoYes", // duplicated lines
+	"flirtySelfRequestBreastVoreNoYes": ":defaultSelfRequestBreastVoreNoYes", // duplicated lines
 	"defaultSelfRequestBreastVoreNoYesAfter": ":missingDialogue",
-	"shySelfRequestBreastVoreNoYesAfter": ":missingDialogue",
-	"flirtySelfRequestBreastVoreNoYesAfter": ":missingDialogue",
-	"defaultBreastVoreNotFeelingIt": ":missingDialogue",
+	"shySelfRequestBreastVoreNoYesAfter": ":defaultSelfRequestBreastVoreNoYesAfter", // duplicated lines
+	"flirtySelfRequestBreastVoreNoYesAfter": ":defaultSelfRequestBreastVoreNoYesAfter", // duplicated lines
+	"defaultBreastVoreNotFeelingIt": [
+		"Not really feeling that right now..."
+	],
 	"shyBreastVoreNotFeelingIt": [
 		"Don't really feel like that right now.",
 		"Not right now.",
@@ -3223,26 +3258,46 @@
 		"Eh, maybe later.",
 		"I, uh, um... <keysmash> notnow!"
 	],
-	"flirtyBreastVoreNotFeelingIt": ":missingDialogue",
+	"flirtyBreastVoreNotFeelingIt": [
+		"Mm, sorry cutie, I'd like to keep my tits to myself for the moment~"
+	],
 	"defaultBreastVoreFull": [
 		"My boobs are already occupied~",
 		"Maybe after I'm done carrying my current occupants around~",
 		"Hehe, I would if I wasn't already full in there~"
 	],
-	"shyDefaultBreastVoreFull": ":missingDialogue",
-	"flirtyDefaultBreastVoreFull": ":missingDialogue",
-	"digestBreastVoreFull": ":missingDialogue",
-	"shyDigestBreastVoreFull": ":missingDialogue",
-	"flirtyDigestBreastVoreFull": ":missingDialogue",
-	"compressionBreastVoreFull": ":missingDialogue",
-	"shyCompressionBreastVoreFull": ":missingDialogue",
-	"flirtyCompressionBreastVoreFull": ":missingDialogue",
+	"shyDefaultBreastVoreFull": [
+		"a-ah... t-they're already too full!"
+	],
+	"flirtyDefaultBreastVoreFull": [
+		"I already got too many cuties packed away in my tits~"
+	],
+	"digestBreastVoreFull": [
+		"They're already occupied, but once I finish melting them into milk..."
+	],
+	"shyDigestBreastVoreFull": [
+		"Uhm... m-maybe... I-I just... need to go get milked..."
+	],
+	"flirtyDigestBreastVoreFull": [
+		"Hmm~ Maybe if you help milk me~ As my cuties are going to be a nice batch of milk soon~"
+	],
+	"compressionBreastVoreFull": [
+		"I just gotta... squeeze em in my tits some more, then maybe you'll fit too"
+	],
+	"shyCompressionBreastVoreFull": [
+		"a-ah... uhm... s-soon I just gotta... squeeze my boobs a little"
+	],
+	"flirtyCompressionBreastVoreFull": [
+		"Heh, maybe if you help me squish em in my tits, there'll be space for you~"
+	],
 	"shyBreastVoreFull": [
 		"My boobs are already occupied... s-sorry",
 		"M-maybe after I'm done carrying these ones around...",
 		"O-oh... I would definetly do it if they weren't full.."
 	],
-	"flirtyBreastVoreFull": ":missingDialogue",
+	"flirtyBreastVoreFull": [
+		"Sorry sweetie! my boobs are already fule of cuties~"
+	],
 	"defaultBreastVoreNeedsInfusion": [
 		"I'd need someone to turn into my boobs first...",
 		"Someone would need to be my boobs...",
@@ -3253,7 +3308,9 @@
 		"Is t-there any way for me to get those...?",
 		"I-I don't actually have those..."
 	],
-	"flirtyBreastVoreNeedsInfusion": ":missingDialogue",
+	"flirtyBreastVoreNeedsInfusion": [
+		"hmmm, we're going to have to find someone I can make into a nice pair of tits first~\nKnow anyone cutie~?"
+	],
 	"defaultStruggle": [
 		"Having a good time in there?",
 		"Hope its comfortable."
@@ -3380,7 +3437,9 @@
 			"I can feel you tarting to turn~"
 		]
 	],
-	"cumTransformingStruggleImmune": ":missingDialogue",
+	"cumTransformingStruggleImmune": [
+		"Hm... you don't seem to be getting any softer in there..."
+	],
 	"shaftInfusedStruggle": [
 		"Ahhh~ <infusedName> feels so great down there~",
 		"<keysmash> you're gonna make <infusedName> cum~"
@@ -3656,7 +3715,7 @@
 		"I'm impressed you where able to get out of my booty.",
 		"I guess between my butt and your squirming, you win."
 	],
-	"letoutAnalVoreStruggleDigested": ":missingDialogue",
+	"letoutAnalVoreStruggleDigested": ":letoutOralVoreStruggleDigested", // duplicated lines
 	"letoutAnalVoreStruggleDigest": [
 		"Darn, guess you got out though my rear before you where all mush.",
 		"You sure you wanna escape being added to my cheeks?",
@@ -3682,7 +3741,7 @@
 		"Slipped out of tail did you? not an easy feat!",
 		"Aww, my tail feels so empty now that you squirmed out it."
 	],
-	"letoutTailVoreStruggleDigested": ":missingDialogue",
+	"letoutTailVoreStruggleDigested": ":letoutOralVoreStruggleDigested", // duplicated lines
 	"letoutTailVoreStruggleDigest": [
 		"You where just starting to soften up in my tail, oh well.",
 		"Don't you want to add to my tail? you'd be a great addition.",
@@ -3708,7 +3767,7 @@
 		"Taking the shortest route out of my belly are you?",
 		"I suppose you can keep any lint you find while you squirm on out."
 	],
-	"letoutNavelVoreStruggleDigested": ":missingDialogue",
+	"letoutNavelVoreStruggleDigested": ":letoutOralVoreStruggleDigested", // duplicated lines
 	"letoutNavelVoreStruggleDigest": [
 		"Instead of wiggling out my navel, why not stay and become pudge, no?",
 		"Getting though my button to quickly escape digestion, smart.",
@@ -3734,7 +3793,7 @@
 		"My body lost it's grip on you it seems...",
 		"Impressive, you managed to struggle out of my body!"
 	],
-	"letoutAbsorbVoreStruggleDigested": ":missingDialogue",
+	"letoutAbsorbVoreStruggleDigested": ":letoutOralVoreStruggleDigested", // duplicated lines
 	"letoutAbsorbVoreStruggleDigest": [
 		"You should've stayed, become one with my body.",
 		"Getting broken down into my body isn't that bad, why run away?",
@@ -3785,8 +3844,9 @@
 		"You seem eager to be free, just don't get 'cocky' and get hurt, or back you go!",
 		"Feeling better now? I hope 'Dr. D' so accommodating!"
 	],
-	"letoutStruggleCumTransforming": ":missingDialogue",
-	"letoutStruggleCumTransformingImmune": ":missingDialogue",
+	"letoutStruggleCumTransforming": ":missingButNotNecessary", // duplicated lines
+	"missingButNotNecessary": "",
+	"letoutStruggleCumTransformingImmune": ":missingButNotNecessary", // duplicated lines
 	"letoutUnbirthStruggle": [
 		"Happy birthday.",
 		"Ah~ Why'd you come out?",
@@ -3794,7 +3854,9 @@
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
-	"letoutUnbirthStruggleDigested": ":missingDialogue",
+	"letoutUnbirthStruggleDigested": [
+		"Ah... you're gonna need a new body after becoming nothing but juices..."
+	],
 	"letoutUnbirthStruggleDigest": [
 		"You where melting nicely in my womb, if you'd only stayed a bit longer...",
 		"Thing's where just heating up in my womb...",
@@ -3820,7 +3882,9 @@
 		"Seems you squirmed free of my breast, was it too bouncy?",
 		"Most would kill to be this close to my boobs, and you wiggle out and away from them!"
 	],
-	"letoutBreastVoreStruggleDigested": ":missingDialogue",
+	"letoutBreastVoreStruggleDigested": [
+		"heh, here you go, nice and reformed, since you were just churned into milk~"
+	],
 	"letoutBreastVoreStruggleDigest": [
 		"You where just about to add some spice to my milk, what a shame...",
 		"Don't you wanna add to my rack?",
@@ -3841,7 +3905,7 @@
 		"Was your healing room too bouncy? sorry about that...",
 		"Felt like coming out then? hope you liked the soothing boob inn!"
 	],
-	"letoutTransforming": ":missingDialogue",
+	"letoutTransforming": ":missingButNotNecessary", // duplicated lines
 	"letoutEggify": {
 		"percentage": "Eggifying",
 		"pools": [
@@ -3854,7 +3918,7 @@
 			":LetoutEgged"
 		]
 	},
-	"LetoutEgged": ":missingDialogue",
+	"LetoutEgged": ":missingButNotNecessary", // duplicated lines
 	"letoutEggifyImmune": [
 		"Guess I just can't put you in an egg.",
 		"Seems like eggs don't work on you.",
@@ -3884,7 +3948,7 @@
 		"Probably best to get you out of there so I can eat something else.",
 		"Can't even melt you down the tiniest bit."
 	],
-	"letoutOralVoreSoftDigest": ":missingDialogue",
+	"letoutOralVoreSoftDigest": ":letoutOralVoreDigest", // duplicated lines
 	"letoutOralVoreHeal": [
 		"You're probably patched up enough.",
 		"I think you've spent enough time healing.",
@@ -3892,25 +3956,25 @@
 		"My stomach does wonders for healing doesn't it?"
 	],
 	"letoutAnalVore": ":missingDialogue",
-	"letoutAnalVoreDigested": ":missingDialogue",
+	"letoutAnalVoreDigested": ":letoutOralVoreDigested", // duplicated lines
 	"letoutAnalVoreDigest": ":missingDialogue",
 	"letoutAnalVoreDigestImmune": ":missingDialogue",
 	"letoutAnalVoreSoftDigest": ":missingDialogue",
 	"letoutAnalVoreHeal": ":missingDialogue",
 	"letoutTailVore": ":missingDialogue",
-	"letoutTailVoreDigested": ":missingDialogue",
+	"letoutTailVoreDigested": ":letoutOralVoreDigested", // duplicated lines
 	"letoutTailVoreDigest": ":missingDialogue",
 	"letoutTailVoreDigestImmune": ":missingDialogue",
 	"letoutTailVoreSoftDigest": ":missingDialogue",
 	"letoutTailVoreHeal": ":missingDialogue",
 	"letoutNavelVore": ":missingDialogue",
-	"letoutNavelVoreDigested": ":missingDialogue",
+	"letoutNavelVoreDigested": ":letoutOralVoreDigested", // duplicated lines
 	"letoutNavelVoreDigest": ":missingDialogue",
 	"letoutNavelVoreDigestImmune": ":missingDialogue",
 	"letoutNavelVoreSoftDigest": ":missingDialogue",
 	"letoutNavelVoreHeal": ":missingDialogue",
 	"letoutAbsorbVore": ":missingDialogue",
-	"letoutAbsorbVoreDigested": ":missingDialogue",
+	"letoutAbsorbVoreDigested": ":letoutOralVoreDigested", // duplicated lines
 	"letoutAbsorbVoreDigest": ":missingDialogue",
 	"letoutAbsorbVoreDigestImmune": ":missingDialogue",
 	"letoutAbsorbVoreSoftDigest": ":missingDialogue",
@@ -3930,7 +3994,7 @@
 	"letoutCockVoreDigestImmune": [
 		"I can't seem to melt you down... so I'll let you go."
 	],
-	"letoutCockVoreSoftDigest": ":letoutCockVoreDigest",
+	"letoutCockVoreSoftDigest": ":letoutCockVoreDigest", // duplicated lines
 	"letoutCockVoreHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -3942,24 +4006,50 @@
 			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
 		]
 	},
-	"letoutCumTransforming": ":missingDialogue",
-	"letoutCumTransformingImmune": ":missingDialogue",
+	"letoutCumTransforming": ":missingButNotNecessary", // duplicated lines
+	"letoutCumTransformingImmune": ":missingButNotNecessary", // duplicated lines
 	"letoutUnbirth": [
 		"Happy birthday.",
 		"I think you've had enough fun in there.",
 		"Maybe its time for you to come out."
 	],
-	"letoutUnbirthDigested": ":missingDialogue",
-	"letoutUnbirthDigest": ":missingDialogue",
-	"letoutUnbirthDigestImmune": ":missingDialogue",
-	"letoutUnbirthSoftDigest": ":missingDialogue",
-	"letoutUnbirthHeal": ":missingDialogue",
+	"letoutUnbirthDigested": [
+		"I'm going to reform you now... since you got all melted into juices heh~"
+	],
+	"letoutUnbirthDigest": [
+		"Hm... lets stop before you're all melted into juices heh~"
+	],
+	"letoutUnbirthDigestImmune": [
+		"Seems like you're not melting, so I'm gonna let you out."
+	],
+	"letoutUnbirthSoftDigest": ":letoutUnbirthDigest", // duplicated lines
+	"letoutUnbirthHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I hope my womb was cozy, but I can't keep holding you in even if you aren't fully healed yet..."
+			]
+		],
+		"full": [
+			"Feels like my womb's juices have gotten you all patched up, so its time to let you out."
+		]
+	},
 	"letoutBreastVore": ":missingDialogue",
 	"letoutBreastVoreDigested": ":missingDialogue",
 	"letoutBreastVoreDigest": ":missingDialogue",
 	"letoutBreastVoreDigestImmune": ":missingDialogue",
 	"letoutBreastVoreSoftDigest": ":missingDialogue",
-	"letoutBreastVoreHeal": ":missingDialogue",
+	"letoutBreastVoreHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I know my boobs are cozy... but I gotta let you out, even if the milk bath hasn't finished soothing your wounds..."
+			]
+		],
+		"full": [
+			"I think your milk bath is done! how do you feel?"
+		]
+	},
 	"defaultPreyRequestOralVore": {
 		"percentage": "rest",
 		"pools": [
@@ -3985,8 +4075,8 @@
 			]
 		]
 	},
-	"shyPreyRequestOralVore": ":missingDialogue",
-	"flirtyPreyRequestOralVore": ":missingDialogue",
+	"shyPreyRequestOralVore": ":defaultPreyRequestOralVore", // duplicated lines
+	"flirtyPreyRequestOralVore": ":defaultPreyRequestOralVore", // duplicated lines
 	"defaultPreyRequestOralVoreYes": {
 		"percentage": "rest",
 		"pools": [
@@ -4012,7 +4102,7 @@
 			]
 		]
 	},
-	"shyPreyRequestOralVoreYes": ":missingDialogue",
+	"shyPreyRequestOralVoreYes": ":defaultPreyRequestOralVoreYes", // duplicated lines
 	"flirtyPreyRequestOralVoreYes": {
 		"percentage": "rest",
 		"pools": [
@@ -4055,8 +4145,8 @@
 			]
 		]
 	},
-	"shyPreyRequestOralVoreNo": ":missingDialogue",
-	"flirtyPreyRequestOralVoreNo": ":missingDialogue",
+	"shyPreyRequestOralVoreNo": ":defaultPreyRequestOralVoreNo", // duplicated lines
+	"flirtyPreyRequestOralVoreNo": ":defaultPreyRequestOralVoreNo", // duplicated lines
 	"defaultPreyRequestOralVoreNoYes": {
 		"percentage": "rest",
 		"pools": [
@@ -4082,20 +4172,20 @@
 			]
 		]
 	},
-	"shyPreyRequestOralVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestOralVoreNoYes": ":missingDialogue",
+	"shyPreyRequestOralVoreNoYes": ":defaultPreyRequestOralVoreNoYes", // duplicated lines
+	"flirtyPreyRequestOralVoreNoYes": ":defaultPreyRequestOralVoreNoYes", // duplicated lines
 	"defaultPreyRequestTailVore": ":missingDialogue",
-	"shyPreyRequestTailVore": ":missingDialogue",
-	"flirtyPreyRequestTailVore": ":missingDialogue",
+	"shyPreyRequestTailVore": ":defaultPreyRequestTailVore", // duplicated lines
+	"flirtyPreyRequestTailVore": ":defaultPreyRequestTailVore", // duplicated lines
 	"defaultPreyRequestTailVoreYes": ":missingDialogue",
-	"shyPreyRequestTailVoreYes": ":missingDialogue",
-	"flirtyPreyRequestTailVoreYes": ":missingDialogue",
+	"shyPreyRequestTailVoreYes": ":defaultPreyRequestTailVoreYes", // duplicated lines
+	"flirtyPreyRequestTailVoreYes": ":defaultPreyRequestTailVoreYes", // duplicated lines
 	"defaultPreyRequestTailVoreNo": ":missingDialogue",
-	"shyPreyRequestTailVoreNo": ":missingDialogue",
-	"flirtyPreyRequestTailVoreNo": ":missingDialogue",
+	"shyPreyRequestTailVoreNo": ":defaultPreyRequestTailVoreNo", // duplicated lines
+	"flirtyPreyRequestTailVoreNo": ":defaultPreyRequestTailVoreNo", // duplicated lines
 	"defaultPreyRequestTailVoreNoYes": ":missingDialogue",
-	"shyPreyRequestTailVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestTailVoreNoYes": ":missingDialogue",
+	"shyPreyRequestTailVoreNoYes": ":defaultPreyRequestTailVoreNoYes", // duplicated lines
+	"flirtyPreyRequestTailVoreNoYes": ":defaultPreyRequestTailVoreNoYes", // duplicated lines
 	"defaultPreyRequestAnalVore": [
 		"You wouldn't mind if I just let myself in, would you?",
 		"Could you do me a favor and bend over?"
@@ -4145,65 +4235,65 @@
 		"You think you can say no to me sugar? sorry but I'm getting in that booty~"
 	],
 	"defaultPreyRequestNavelVore": ":missingDialogue",
-	"shyPreyRequestNavelVore": ":missingDialogue",
-	"flirtyPreyRequestNavelVore": ":missingDialogue",
+	"shyPreyRequestNavelVore": ":defaultPreyRequestNavelVore", // duplicated lines
+	"flirtyPreyRequestNavelVore": ":defaultPreyRequestNavelVore", // duplicated lines
 	"defaultPreyRequestNavelVoreYes": ":missingDialogue",
-	"shyPreyRequestNavelVoreYes": ":missingDialogue",
-	"flirtyPreyRequestNavelVoreYes": ":missingDialogue",
+	"shyPreyRequestNavelVoreYes": ":defaultPreyRequestNavelVoreYes", // duplicated lines
+	"flirtyPreyRequestNavelVoreYes": ":defaultPreyRequestNavelVoreYes", // duplicated lines
 	"defaultPreyRequestNavelVoreNo": ":missingDialogue",
-	"shyPreyRequestNavelVoreNo": ":missingDialogue",
-	"flirtyPreyRequestNavelVoreNo": ":missingDialogue",
+	"shyPreyRequestNavelVoreNo": ":defaultPreyRequestNavelVoreNo", // duplicated lines
+	"flirtyPreyRequestNavelVoreNo": ":defaultPreyRequestNavelVoreNo", // duplicated lines
 	"defaultPreyRequestNavelVoreNoYes": ":missingDialogue",
-	"shyPreyRequestNavelVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestNavelVoreNoYes": ":missingDialogue",
+	"shyPreyRequestNavelVoreNoYes": ":defaultPreyRequestNavelVoreNoYes", // duplicated lines
+	"flirtyPreyRequestNavelVoreNoYes": ":defaultPreyRequestNavelVoreNoYes", // duplicated lines
 	"defaultPreyRequestAbsorbVore": ":missingDialogue",
-	"shyPreyRequestAbsorbVore": ":missingDialogue",
-	"flirtyPreyRequestAbsorbVore": ":missingDialogue",
+	"shyPreyRequestAbsorbVore": ":defaultPreyRequestAbsorbVore", // duplicated lines
+	"flirtyPreyRequestAbsorbVore": ":defaultPreyRequestAbsorbVore", // duplicated lines
 	"defaultPreyRequestAbsorbVoreYes": ":missingDialogue",
-	"shyPreyRequestAbsorbVoreYes": ":missingDialogue",
-	"flirtyPreyRequestAbsorbVoreYes": ":missingDialogue",
+	"shyPreyRequestAbsorbVoreYes": ":defaultPreyRequestAbsorbVoreYes", // duplicated lines
+	"flirtyPreyRequestAbsorbVoreYes": ":defaultPreyRequestAbsorbVoreYes", // duplicated lines
 	"defaultPreyRequestAbsorbVoreNo": ":missingDialogue",
-	"shyPreyRequestAbsorbVoreNo": ":missingDialogue",
-	"flirtyPreyRequestAbsorbVoreNo": ":missingDialogue",
+	"shyPreyRequestAbsorbVoreNo": ":defaultPreyRequestAbsorbVoreNo", // duplicated lines
+	"flirtyPreyRequestAbsorbVoreNo": ":defaultPreyRequestAbsorbVoreNo", // duplicated lines
 	"defaultPreyRequestAbsorbVoreNoYes": ":missingDialogue",
-	"shyPreyRequestAbsorbVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestAbsorbVoreNoYes": ":missingDialogue",
+	"shyPreyRequestAbsorbVoreNoYes": ":defaultPreyRequestAbsorbVoreNoYes", // duplicated lines
+	"flirtyPreyRequestAbsorbVoreNoYes": ":defaultPreyRequestAbsorbVoreNoYes", // duplicated lines
 	"defaultPreyRequestUnbirth": ":missingDialogue",
-	"shyPreyRequestUnbirth": ":missingDialogue",
-	"flirtyPreyRequestUnbirth": ":missingDialogue",
+	"shyPreyRequestUnbirth": ":defaultPreyRequestUnbirth", // duplicated lines
+	"flirtyPreyRequestUnbirth": ":defaultPreyRequestUnbirth", // duplicated lines
 	"defaultPreyRequestUnbirthYes": ":missingDialogue",
-	"shyPreyRequestUnbirthYes": ":missingDialogue",
-	"flirtyPreyRequestUnbirthYes": ":missingDialogue",
+	"shyPreyRequestUnbirthYes": ":defaultPreyRequestUnbirthYes", // duplicated lines
+	"flirtyPreyRequestUnbirthYes": ":defaultPreyRequestUnbirthYes", // duplicated lines
 	"defaultPreyRequestUnbirthNo": ":missingDialogue",
-	"shyPreyRequestUnbirthNo": ":missingDialogue",
-	"flirtyPreyRequestUnbirthNo": ":missingDialogue",
+	"shyPreyRequestUnbirthNo": ":defaultPreyRequestUnbirthNo", // duplicated lines
+	"flirtyPreyRequestUnbirthNo": ":defaultPreyRequestUnbirthNo", // duplicated lines
 	"defaultPreyRequestUnbirthNoYes": ":missingDialogue",
-	"shyPreyRequestUnbirthNoYes": ":missingDialogue",
-	"flirtyPreyRequestUnbirthNoYes": ":missingDialogue",
+	"shyPreyRequestUnbirthNoYes": ":defaultPreyRequestUnbirthNoYes", // duplicated lines
+	"flirtyPreyRequestUnbirthNoYes": ":defaultPreyRequestUnbirthNoYes", // duplicated lines
 	"defaultPreyRequestCockVore": ":missingDialogue",
-	"shyPreyRequestCockVore": ":missingDialogue",
-	"flirtyPreyRequestCockVore": ":missingDialogue",
+	"shyPreyRequestCockVore": ":defaultPreyRequestCockVore", // duplicated lines
+	"flirtyPreyRequestCockVore": ":defaultPreyRequestCockVore", // duplicated lines
 	"defaultPreyRequestCockVoreYes": ":missingDialogue",
-	"shyPreyRequestCockVoreYes": ":missingDialogue",
-	"flirtyPreyRequestCockVoreYes": ":missingDialogue",
+	"shyPreyRequestCockVoreYes": ":defaultPreyRequestCockVoreYes", // duplicated lines
+	"flirtyPreyRequestCockVoreYes": ":defaultPreyRequestCockVoreYes", // duplicated lines
 	"defaultPreyRequestCockVoreNo": ":missingDialogue",
-	"shyPreyRequestCockVoreNo": ":missingDialogue",
-	"flirtyPreyRequestCockVoreNo": ":missingDialogue",
+	"shyPreyRequestCockVoreNo": ":defaultPreyRequestCockVoreNo", // duplicated lines
+	"flirtyPreyRequestCockVoreNo": ":defaultPreyRequestCockVoreNo", // duplicated lines
 	"defaultPreyRequestCockVoreNoYes": ":missingDialogue",
-	"shyPreyRequestCockVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestCockVoreNoYes": ":missingDialogue",
+	"shyPreyRequestCockVoreNoYes": ":defaultPreyRequestCockVoreNoYes", // duplicated lines
+	"flirtyPreyRequestCockVoreNoYes": ":defaultPreyRequestCockVoreNoYes", // duplicated lines
 	"defaultPreyRequestBreastVore": ":missingDialogue",
-	"shyPreyRequestBreastVore": ":missingDialogue",
-	"flirtyPreyRequestBreastVore": ":missingDialogue",
+	"shyPreyRequestBreastVore": ":defaultPreyRequestBreastVore", // duplicated lines
+	"flirtyPreyRequestBreastVore": ":defaultPreyRequestBreastVore", // duplicated lines
 	"defaultPreyRequestBreastVoreYes": ":missingDialogue",
-	"shyPreyRequestBreastVoreYes": ":missingDialogue",
-	"flirtyPreyRequestBreastVoreYes": ":missingDialogue",
+	"shyPreyRequestBreastVoreYes": ":defaultPreyRequestBreastVoreYes", // duplicated lines
+	"flirtyPreyRequestBreastVoreYes": ":defaultPreyRequestBreastVoreYes", // duplicated lines
 	"defaultPreyRequestBreastVoreNo": ":missingDialogue",
-	"shyPreyRequestBreastVoreNo": ":missingDialogue",
-	"flirtyPreyRequestBreastVoreNo": ":missingDialogue",
+	"shyPreyRequestBreastVoreNo": ":defaultPreyRequestBreastVoreNo", // duplicated lines
+	"flirtyPreyRequestBreastVoreNo": ":defaultPreyRequestBreastVoreNo", // duplicated lines
 	"defaultPreyRequestBreastVoreNoYes": ":missingDialogue",
-	"shyPreyRequestBreastVoreNoYes": ":missingDialogue",
-	"flirtyPreyRequestBreastVoreNoYes": ":missingDialogue",
+	"shyPreyRequestBreastVoreNoYes": ":defaultPreyRequestBreastVoreNoYes", // duplicated lines
+	"flirtyPreyRequestBreastVoreNoYes": ":defaultPreyRequestBreastVoreNoYes", // duplicated lines
 	"defaultForcingPreyOralVore": {
 		"percentage": "rest",
 		"pools": [
@@ -5502,8 +5592,8 @@
 		"Is your seed sapping my energy away? I feel fatigued.",
 		"The more i move in your orbs, the more exhausted i feel..."
 	],
-	"strugglingBallsCumTransforming": ":missingDialogue",
-	"strugglingCumTransformingImmune": ":missingDialogue",
+	"strugglingBallsCumTransforming": ":missingButNotNecessary", // duplicated lines
+	"strugglingCumTransformingImmune": ":missingButNotNecessary", // duplicated lines
 	"strugglingBallsEggify": [
 		"I think a shell is forming around me in your sack!",
 		"Is it me, or is there something surrounding me that's not your spunk?",
@@ -5783,8 +5873,8 @@
 	"escapeCockVoreStruggleHeal": [
 		"I squirmed out your cock, and I feel really good after all that!"
 	],
-	"escapeStruggleCumTransforming": ":missingDialogue",
-	"escapeStruggleCumTransformingImmune": ":missingDialogue",
+	"escapeStruggleCumTransforming": ":missingButNotNecessary", // duplicated lines
+	"escapeStruggleCumTransformingImmune": ":missingButNotNecessary", // duplicated lines
 	"escapeUnbirthStruggle": [
 		"Yes! I squirmed out of your womb."
 	],
@@ -5917,8 +6007,8 @@
 	"escapeCockVoreHeal": [
 		"Ah, thanks for letting me out your junk, I never felt better after my time inside it!"
 	],
-	"escapeCumTransforming": ":missingDialogue",
-	"escapeCumTransformingImmune": ":missingDialogue",
+	"escapeCumTransforming": ":missingButNotNecessary", // duplicated lines
+	"escapeCumTransformingImmune": ":missingButNotNecessary", // duplicated lines
 	"escapeUnbirth": [
 		"Thanks for squeezing me out of your womb!"
 	],
@@ -5963,86 +6053,86 @@
 		"Just a part of me now",
 		"Try not to make me too hungry..."
 	],
-	"infuseRequestBellyAfterLayer": ":missingDialogue",
+	"infuseRequestBellyAfterLayer": ":infuseRequestBellyAfter", // duplicated lines
 	"infuseUnpromptedBellyBefore": [
 		"I think... I need you in my belly... or... as my belly"
 	],
-	"infuseUnpromptedBellyBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedBellyBeforeLayer": ":infuseUnpromptedBellyBefore", // duplicated lines
 	"infuseUnpromptedBellyAfter": [
 		"Im sure you wont mind being a part of me for awhile, huh?",
 		"Lets be honest, you look a lot cuter this way.",
 		"What was their name again? Oh well."
 	],
-	"infuseUnpromptedBellyAfterLayer": ":missingDialogue",
+	"infuseUnpromptedBellyAfterLayer": ":infuseUnpromptedBellyAfter", // duplicated lines
 	"infuseRequestTailBefore": [
 		"Looking to be a part of my tail, huh? Cant say I blame you!",
 		"Youre gonna make a nice bit of extra length!",
 		"Knew you were staring at my tail for a reason!"
 	],
-	"infuseRequestTailBeforeLayer": ":missingDialogue",
+	"infuseRequestTailBeforeLayer": ":infuseRequestTailBefore", // duplicated lines
 	"infuseRequestTailAfter": [
 		"Looking good back there, <entityname>!",
 		"All a part of me, now!"
 	],
-	"infuseRequestTailAfterLayer": ":missingDialogue",
+	"infuseRequestTailAfterLayer": ":infuseRequestTailAfter", // duplicated lines
 	"infuseUnpromptedTailBefore": [
 		"Might as well keep you back there, since you squirmed so nicely!",
 		"Think youll look good as part of my tail. Wouldnt you agree?"
 	],
-	"infuseUnpromptedTailBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedTailBeforeLayer": ":infuseUnpromptedTailBefore", // duplicated lines
 	"infuseUnpromptedTailAfter": [
 		"Looking good back there!",
 		"What was their name again? <entityname>?"
 	],
-	"infuseUnpromptedTailAfterLayer": ":missingDialogue",
+	"infuseUnpromptedTailAfterLayer": ":infuseUnpromptedTailAfter", // duplicated lines
 	"infuseRequestBreastsBefore": [
 		"You want to be my boobs?",
 		"Mm, can't wait to be jiggling on my chest can you?",
 		"You really want to give yourself entirely to me?"
 	],
-	"infuseRequestBreastsBeforeLayer": ":missingDialogue",
+	"infuseRequestBreastsBeforeLayer": ":infuseRequestBreastsBefore", // duplicated lines
 	"infuseRequestBreastsAfter": [
 		"Hehe, I can feel you leaking with excitment already~",
 		"Hehe, excited to be part of me~?",
 		"Ah, you're already leaking milk~"
 	],
-	"infuseRequestBreastsAfterLayer": ":missingDialogue",
+	"infuseRequestBreastsAfterLayer": ":infuseRequestBreastsAfter", // duplicated lines
 	"infuseUnpromptedBreastsBefore": [
 		"Hehe, I think you belong as something else~",
 		"Mm~ I think it'd be fitting to have you jiggling on my chest~",
 		"I think I have a far better use for you~"
 	],
-	"infuseUnpromptedBreastsBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedBreastsBeforeLayer": ":infuseUnpromptedBreastsBefore", // duplicated lines
 	"infuseUnpromptedBreastsAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, jiggling on my chest~",
 		"Mmm~ feels right to have you there~"
 	],
-	"infuseUnpromptedBreastsAfterLayer": ":missingDialogue",
+	"infuseUnpromptedBreastsAfterLayer": ":infuseUnpromptedBreastsAfter", // duplicated lines
 	"infuseRequestPussyBefore": [
 		"You want to be my pussy?",
 		"Mm, can't wait to be soaking wet down there can you?",
 		"You really want to give yourself entirely to me?"
 	],
-	"infuseRequestPussyBeforeLayer": ":missingDialogue",
+	"infuseRequestPussyBeforeLayer": ":infuseRequestPussyBefore", // duplicated lines
 	"infuseRequestPussyAfter": [
 		"Hehe, I can feel you leaking with excitment already~",
 		"Hehe, excited to be part of me~?",
 		"Ah, you're already sopping wet with excitment~"
 	],
-	"infuseRequestPussyAfterLayer": ":missingDialogue",
+	"infuseRequestPussyAfterLayer": ":infuseRequestPussyAfter", // duplicated lines
 	"infuseUnpromptedPussyBefore": [
 		"Hehe, I think you belong as something else~",
 		"Mm~ I think it'd be fitting to have you dripping between my legs~",
 		"I think I have a far better use for you~"
 	],
-	"infuseUnpromptedPussyBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedPussyBeforeLayer": ":infuseUnpromptedPussyBefore", // duplicated lines
 	"infuseUnpromptedPussyAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, soaking between my legs~",
 		"Mmm~ feels right to have you there~"
 	],
-	"infuseUnpromptedPussyAfterLayer": ":missingDialogue",
+	"infuseUnpromptedPussyAfterLayer": ":infuseUnpromptedPussyAfter", // duplicated lines
 	"infuseRequestShaftBefore": [
 		"You want to be my cock?",
 		"Mm, can't wait to be throbbing down there can you?",
@@ -6066,21 +6156,31 @@
 		"You're always so twitchy... which would make you a good cock~",
 		"I think I have a far better use for you~"
 	],
-	"infuseUnpromptedShaftBeforeLayer": ":missingDialogue",
+	"infuseUnpromptedShaftBeforeLayer": ":infuseUnpromptedShaftBefore", // duplicated lines
 	"infuseUnpromptedShaftAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, throbbing between my legs~",
 		"Mmm~ feels right to have you there~"
 	],
-	"infuseUnpromptedShaftAfterLayer": ":missingDialogue",
-	"infuseRequestBallsBefore": ":missingDialogue",
-	"infuseRequestBallsBeforeLayer": ":missingDialogue",
-	"infuseRequestBallsAfter": ":missingDialogue",
-	"infuseRequestBallsAfterLayer": ":missingDialogue",
-	"infuseUnpromptedBallsBefore": ":missingDialogue",
-	"infuseUnpromptedBallsBeforeLayer": ":missingDialogue",
-	"infuseUnpromptedBallsAfter": ":missingDialogue",
-	"infuseUnpromptedBallsAfterLayer": ":missingDialogue",
+	"infuseUnpromptedShaftAfterLayer": ":infuseUnpromptedShaftAfter", // duplicated lines
+	"infuseRequestBallsBefore": [
+		"Oh so you want to be my balls~?",
+		"You want to be swinging around between my legs~?"
+	],
+	"infuseRequestBallsBeforeLayer": ":infuseRequestBallsBefore", // duplicated lines
+	"infuseRequestBallsAfter": [
+		"Hehe, there you go, hanging down from my crotch~ Right where you belong~",
+		"Usually friends are stored IN the balls... but I like this arrangement too~"
+	],
+	"infuseRequestBallsAfterLayer": ":infuseRequestBallsAfter", // duplicated lines
+	"infuseUnpromptedBallsBefore": [
+		"Hmmm~ I think you'd make a nice pair of balls~"
+	],
+	"infuseUnpromptedBallsBeforeLayer": ":infuseUnpromptedBallsBefore", // duplicated lines
+	"infuseUnpromptedBallsAfter": [
+		"Perfect, you feel perfect hanging around down there~"
+	],
+	"infuseUnpromptedBallsAfterLayer": ":infuseUnpromptedBallsAfter", // duplicated lines
 	"infused": [
 		"<slowlove>",
 		"<love>",
@@ -6296,11 +6396,45 @@
 			"<love>You're better as extra size for me <infusedName>~"
 		]
 	],
-	"climax": ":missingDialogue",
-	"climaxWomb": ":missingDialogue",
-	"climaxBreasts": ":missingDialogue",
-	"climaxShaft": ":missingDialogue",
-	"climaxBalls": ":missingDialogue",
+	"climax": [
+		"Ahhh~! FUCK that felt good~!"
+	],
+	"climaxWomb": [
+		{
+			"dialogue": [
+				"Yes! YES! Don't stop kicking!",
+				"*Moans*~",
+				"Ahhh... that felt great..."
+			]
+		}
+	],
+	"climaxBreasts": [
+		{
+			"dialogue": [
+				"Ffff... I think I'm! AH!",
+				"*Moans*~",
+				"Ahhh... oh... hehe... I might have sprayed some milk eveywhere..."
+			]
+		}
+	],
+	"climaxShaft": [
+		{
+			"dialogue": [
+				"Agh I'm... I'm so hard! so close I'm! ...I'm-",
+				"Gahhhh~",
+				"Ahhh... finally came... that felt great~"
+			]
+		}
+	],
+	"climaxBalls": [
+		{
+			"dialogue": [
+				"So much cum sloshing around! so close I'm! ...I'm-",
+				"Gahhhh~",
+				"Ahhh... finally came... that felt great~"
+			]
+		}
+	],
 	"shrinking": [
 		"Why's everything getting bigger?",
 		"Ah! I'm shrinking!"
@@ -6347,6 +6481,7 @@
 			"*wheeze*"
 		]
 	],
+	"vanilla": {},
 	// Unused Dialogue
 	"voredAnalVoreShyWilling": [
 		"I-it's so warm... just like I thought it would be in your b-butt...",
@@ -6366,47 +6501,28 @@
 		"Let's be honest, you look a lot cuter this way.",
 		"You wont regret being a part of me!"
 	],
-	"infuseSelfRequestBellyBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestBellyAfter": [
 		"Got you all to myself, now!",
 		"Enjoy your stay down there!",
 		"What was their name again? Oh well.",
 		"Uuuurhp!"
 	],
-	"infuseSelfRequestBellyAfterLayer": ":missingDialogue",
-	"infuseSelfRequestTailBefore": ":missingDialogue",
-	"infuseSelfRequestTailBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestTailAfter": [
 		"Looking good back there, <entityname>!",
 		"All a part of me, now! Hope you enjoy the stay!",
 		"Got you all to myself, now!"
 	],
-	"infuseSelfRequestTailAfterLayer": ":missingDialogue",
-	"infuseSelfRequestBreastsBefore": ":missingDialogue",
-	"infuseSelfRequestBreastsBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestBreastsAfter": ":missingDialogue",
-	"infuseSelfRequestBreastsAfterLayer": ":missingDialogue",
 	"infuseSelfRequestPussyBefore": [
 		"You're going to look good as my pussy.",
 		"Mm, can't wait to feel you soaking me down there.",
 		"You really want to give yourself entirely to me?",
 		"Get comfy, dear. Youre going to be here awhile~"
 	],
-	"infuseSelfRequestPussyBeforeLayer": ":missingDialogue",
 	"infuseSelfRequestPussyAfter": [
 		"I can already feel you dripping down there~",
 		"Mmhm, maybe I need to put you to good use.",
 		"You feel so wet and sensitive! Glad to have you where you belong, <entityname>~"
 	],
-	"infuseSelfRequestPussyAfterLayer": ":missingDialogue",
-	"infuseSelfRequestShaftBefore": ":missingDialogue",
-	"infuseSelfRequestShaftBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestShaftAfter": ":missingDialogue",
-	"infuseSelfRequestShaftAfterLayer": ":missingDialogue",
-	"infuseSelfRequestBallsBefore": ":missingDialogue",
-	"infuseSelfRequestBallsBeforeLayer": ":missingDialogue",
-	"infuseSelfRequestBallsAfter": ":missingDialogue",
-	"infuseSelfRequestBallsAfterLayer": ":missingDialogue",
 	// unused lines from how the old dialogue tree was structured, still very much usable, just need to be used slightly differently
 	"hungryRequestOralVoreBefore": [
 		"Didn't know the food here came to you!",
