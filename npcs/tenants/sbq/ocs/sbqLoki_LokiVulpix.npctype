@@ -2650,6 +2650,8 @@
 			"displayDigest" : false,
 
 			"stripHead" : 1,
+			"stripChest" : 0.4,
+			"stripLegs" : 0.4,
 
 			"ballsDifficultyMod" : 10,
 
@@ -2668,13 +2670,16 @@
 
 			// predator prefrences
 			"oralVorePred" : true,
+			"oralVorePredUnwilling" : true,
 			"tailVorePred" : true,
+			"tailVorePredUnwilling" : true,
 			"absorbVorePred" : false,
 			"navelVorePred" : false,
 
 			"analVorePred" : false,
 			"unbirthPred" : false,
-			"cockVorePred" : false,
+			"cockVorePred" : true,
+			"cockVorePredUnwilling" : true,
 			"breastVorePred" : false,
 
 			"cockInfusionPred" : true,
