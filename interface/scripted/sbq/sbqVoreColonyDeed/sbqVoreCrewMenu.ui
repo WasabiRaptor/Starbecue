@@ -184,14 +184,6 @@
 			]}
 		],
 			"bottomBar" : [
-					{ "type" : "panel", "id" : "tenantSelectPanel", "style" : "convex", "children" : [
-						{ "mode" : "h" },
-						{ "type" : "label", "id" : "npcSelectorLabel", "text" : "Crew Selector", "align" : "center", "inline" : true },
-						{ "type" : "iconButton", "id" : "decCurTenant", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-						{ "type" : "label", "id" : "curTenantIndex", "text": "1", "align" : "center", "inline" : true },
-						{ "type" : "iconButton", "id" : "incCurTenant", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" },
-						{ "type" : "label", "id" : "curTenantName", "text": "", "align" : "center", "inline" : true }
-					]}
 			]
 		}
 	]
