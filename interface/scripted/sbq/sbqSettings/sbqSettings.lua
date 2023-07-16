@@ -89,6 +89,7 @@ function sbq.getSpeciesAndSettings()
 		sbq.predatorSettings = sb.jsonMerge(sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.sbqSettings.sbqOccupantHolder or {}), sbq.globalSettings)
 	end
 	sbq.overrideSettings = sbq.predatorConfig.overrideSettings or {}
+	sbq.overridePreyEnabled = sb.jsonMerge(sbq.predatorConfig.overridePreyEnabled or {}, sbq.overridePreyEnabled or {})
 end
 
 function init()
