@@ -132,7 +132,8 @@ function sbq.getOccupancyStatLayout(uuid, data, location, locationData)
 				{ type = "label", text = "Struggles:"  },
 				{ type = "label", text = sbq.getTimeString((data.pred or {})[location .. "StruggleTime"] or 0) },
 				{ type = "spacer" },
-				{{ type = "label", text = "Digested:", inline = true }, { type = "label", text = ((data.pred or {})[location .. "TimesDigested"] or 0), inline = true }}
+				{ { type = "label", text = "Digested:", inline = true }, { type = "label", text = ((data.pred or {})[location .. "TimesDigested"] or 0), inline = true } },
+				{ { type = "label", text = "Climaxed:", inline = true }, { type = "label", text = ((data.pred or {})[location .. "TimesClimaxed"] or 0), inline = true }}
 			}},
 			{ type = "panel", style = "flat", visible = predVisble, color = "FF8201", children = {
 				{ type = "label", text = "As Pred:" },
@@ -141,7 +142,8 @@ function sbq.getOccupancyStatLayout(uuid, data, location, locationData)
 				{ type = "label", text = "Struggles:" },
 				{ type = "label", text = sbq.getTimeString((data.prey or {})[location .. "StruggleTime"] or 0) },
 				{ type = "spacer" },
-				{{ type = "label", text = "Digested:", inline = true }, { type = "label", text = ((data.prey or {})[location .. "TimesDigested"] or 0), inline = true }}
+				{ { type = "label", text = "Digested:", inline = true }, { type = "label", text = ((data.prey or {})[location .. "TimesDigested"] or 0), inline = true } },
+				{ { type = "label", text = "Climaxed:", inline = true }, { type = "label", text = ((data.prey or {})[location .. "TimesClimaxed"] or 0), inline = true }}
 			}}
 		}
 	}}

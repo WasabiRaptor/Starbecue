@@ -14,6 +14,8 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 
 			local timesDigested = occupant.cumulative.totalTimesDigested or 0
 
+			local timesClimaxed = occupant.cumulative.totalTimesClimaxed or 0
+
 			local rewardCounts = {math.huge}
 
 			local cumulativeFlag
@@ -216,6 +218,28 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 					giveReward = false
 				end
 			end
+
+			if giveReward and type(data.minTimesClimaxed) == "number" then
+				if timesClimaxed < data.minTimesClimaxed then
+					giveReward = false
+				end
+			end
+			if giveReward and type(data.timesClimaxed) == "number" then
+				cumulativeFlag = true
+				local val = (timesClimaxed - (data.minTimesClimaxed or 0))
+				if val < data.timesClimaxed then
+					giveReward = false
+				elseif data.repeatable then
+					table.insert(rewardCounts, math.floor(val / data.timesClimaxed))
+				end
+			end
+			if giveReward and type(data.maxTimesClimaxed) == "number" then
+				if timesClimaxed > data.maxTimesClimaxed then
+					giveReward = false
+				end
+			end
+
+
 
 
 			if giveReward then

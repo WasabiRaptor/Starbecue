@@ -603,29 +603,33 @@ function sbq.passiveStatChanges(dt)
 			if sbq.timer("hornyReset", 5, function ()
 				status.resetResource("horny")
 			end) then
-				local entitys = {}
-				local players = {}
-				for i, occupant in pairs(sbq.occupant) do
-					local location = occupant.location
-					local locationData = sbq.predatorConfig.locations[location]
-					for _, satisfy in ipairs((locationData or {}).satisfiesPred or {}) do
-						if satisfy == "horny" then
-							if world.entityType(occupant.id) == "player" then
-								table.insert(players, { occupant.id, location })
-							else
-								table.insert(entitys, { occupant.id, location })
+				if sbq.occupant then
+					local entitys = {}
+					local players = {}
+					for i, occupant in pairs(sbq.occupant) do
+						local location = occupant.location
+						local locationData = sbq.predatorConfig.locations[location]
+						for _, satisfy in ipairs((locationData or {}).satisfiesPred or {}) do
+							if satisfy == "horny" then
+								world.sendEntityMessage(sbq.occupantHolder, "causedClimax", occupant.id)
+								if world.entityType(occupant.id) == "player" then
+									table.insert(players, { occupant.id, location })
+								else
+									table.insert(entitys, { occupant.id, location })
+								end
 							end
 						end
 					end
+					local chosen
+					if players[1] then
+						chosen = players[math.random(#players)]
+					elseif entitys[1] then
+						chosen = entitys[math.random(#entitys)]
+					end
+
+					local settings = { predOrPrey = "pred", location = chosen[2] }
+					sbq.getRandomDialogue(".climax", chosen[1], sb.jsonMerge(storage.settings, settings))
 				end
-				local chosen
-				if players[1] then
-					chosen = players[math.random(#players)]
-				else
-					chosen = entitys[math.random(#entitys)]
-				end
-				local settings = { predOrPrey = "pred", location = chosen[2] }
-				sbq.getRandomDialogue(".climax", chosen[1], sb.jsonMerge(storage.settings, settings))
 			end
 		end
 	end

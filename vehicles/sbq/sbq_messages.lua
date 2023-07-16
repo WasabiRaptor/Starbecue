@@ -192,6 +192,17 @@ function sbq.entityDigested(eid)
 	end
 end
 
+message.setHandler( "causedClimax", function (_,_,eid)
+	if type(eid) == "number" and sbq.lounging[eid] ~= nil then
+		sbq.lounging[eid].cumulative.totalTimesClimaxed = (sbq.lounging[eid].cumulative.totalTimesClimaxed or 0) + 1
+		sbq.lounging[eid].cumulative[location.."TimesClimaxed"] = (sbq.lounging[eid].cumulative[location.."TimesClimaxed"] or 0) + 1
+	end
+end)
+
+function sbq.causedClimax(eid)
+
+end
+
 message.setHandler( "uneat", function(_,_, eid)
 	sbq.uneat( eid )
 end )
