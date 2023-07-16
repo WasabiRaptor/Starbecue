@@ -70,7 +70,7 @@ function init()
 
 	sbq.preySettings = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
 	sbq.overridePreyEnabled = status.statusProperty("sbqOverridePreyEnabled") or {}
-	sbq.checkLockedSettingsButtons("sbqPreyEnabled", "overridePreyEnabled", "changePreySetting")
+	sbq.checkLockedSettingsButtons("preySettings", "overridePreyEnabled", "changePreySetting")
 
 	scaleValue.handles[2].locked = not player.hasItem("sbqSizeRay")
 	scaleValue.handles[2].value = sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1
