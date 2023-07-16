@@ -302,7 +302,7 @@ function sbq.getSidedLocationWithSpace(location, size)
 		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
 		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
 		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
-			if sbq.direction > 0 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
+			if math.random() > 0.5 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
 				if leftHasSpace then return location, "L", data
 				elseif rightHasSpace then return location, "R", data
 				else return false end
