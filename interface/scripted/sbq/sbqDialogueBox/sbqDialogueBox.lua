@@ -101,6 +101,12 @@ function sbq.getOccupancy()
 			sbq.occupants = occupancyData.occupants
 			sbq.actualOccupants = occupancyData.actualOccupants
 			sbq.checkVoreButtonsEnabled()
+		end, function ()
+			sbq.data.occupantHolder = nil
+			sbq.occupant = nil
+			sbq.occupants = nil
+			sbq.actualOccupants = nil
+			sbq.checkVoreButtonsEnabled()
 		end)
 	end
 end
@@ -301,6 +307,9 @@ function sbq.getSidedLocationWithSpace(location, size)
 	if data.sided then
 		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
 		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
+		if location == "breasts" then
+			sb.logInfo(sizeMultiplied)
+		end
 		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
 			if math.random() > 0.5 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
 				if leftHasSpace then return location, "L", data
@@ -360,7 +369,7 @@ function sbq.checkInfusionActionButtonsEnabled()
 	sbq.infusionButtonSetup(breastsInfusionActive, breastsInfusion, "breastsInfusion")
 	sbq.infusionButtonSetup(pussyInfusionActive, pussyInfusion, "pussyInfusion")
 
-	letOut:setVisible(alreadyInfused)
+	letOut:setVisible(sbq.settings.playerPrey or false)
 	if alreadyInfused and changeBackImage then
 		changeBack:setImage(changeBackImage)
 		changeBack:setVisible(true)
@@ -730,10 +739,12 @@ end
 
 function letOut:onClick()
 	world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "letout", player.id())
+	pane.dismiss()
 end
 
 function changeBack:onClick()
 	sbq.addRPC(world.sendEntityMessage(sbq.data.occupantHolder, "changeBack", player.id()),function ()
 		world.sendEntityMessage(pane.sourceEntity(), "changeBack", world.entityUniqueId(player.id()))
+		pane.dismiss()
 	end)
 end

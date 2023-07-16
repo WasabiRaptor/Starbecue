@@ -2,6 +2,7 @@ local mysteriousTFDuration
 require("/scripts/rect.lua")
 
 function sbq.everything_primary()
+	status.setStatusProperty("sbqType", nil)
 	message.setHandler("sbqApplyStatusEffects", function(_,_, statlist)
 		for statusEffect, data in pairs(statlist) do
 			status.setStatusProperty(statusEffect, data.property)

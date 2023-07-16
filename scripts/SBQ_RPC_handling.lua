@@ -55,6 +55,8 @@ function sbq.loopedMessage(name, eid, message, args, callback, failCallback)
 			end
 			sbq.loopedMessages[name] = nil
 		end
+	elseif failCallback ~= nil then
+		failCallback()
 	end
 end
 

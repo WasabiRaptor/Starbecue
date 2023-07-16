@@ -456,6 +456,7 @@ function sbq.setSpeciesConfig()
 	sbq.getSpeciesConfig(npc.species(), storage.settings)
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
 	sbq.sbqData = sbq.predatorConfig
+	sbq.initLocationSizes()
 	status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
 	local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
 	local effects = status.getPersistentEffects("speciesAnimOverride")
@@ -466,6 +467,24 @@ function sbq.setSpeciesConfig()
 	status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
 end
 
+function sbq.initLocationSizes()
+	for location, data in pairs(sbq.sbqData.locations) do
+		if data.sided then
+			sbq.sbqData.locations[location.."L"] = sbq.sbqData.locations[location.."L"] or {}
+			sbq.sbqData.locations[location.."R"] = sbq.sbqData.locations[location.."R"] or {}
+			for name, copy in pairs(data) do
+				if name ~= "combine" and name ~= "sided" then
+					sbq.sbqData.locations[location.."L"][name] = sbq.sbqData.locations[location.."L"][name] or copy
+					sbq.sbqData.locations[location.."R"][name] = sbq.sbqData.locations[location.."R"][name] or copy
+				end
+			end
+			sbq.sbqData.locations[location .. "L"].side = sbq.sbqData.locations[location .. "L"].side or "L"
+			sbq.sbqData.locations[location .. "R"].side = sbq.sbqData.locations[location .. "R"].side or "R"
+		end
+	end
+end
+
+
 function update(dt)
 	sbq.currentData = status.statusProperty("sbqCurrentData") or {}
 
@@ -475,6 +494,9 @@ function update(dt)
 			sbq.occupants = result.occupants
 			sbq.occupant = result.occupant
 		end
+	end, function ()
+		sbq.occupants = nil
+		sbq.occupant = nil
 	end)
 	sbq.timer("rewardCheck", 30, function()
 		local rewards = config.getParameter("sbqPredRewards") or {}
