@@ -109,7 +109,7 @@ function sbq.refreshTenantPages()
 		sbq.tenant.overrides.statusControllerSettings.statusProperties = sbq.tenant.overrides.statusControllerSettings.statusProperties or {}
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled or {}
 
-		sbq.predatorSettings = sb.jsonMerge( sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.config.tenantDefaultSettings),
+		sbq.predatorSettings = sb.jsonMerge( sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.config.npcDefaultSettings),
 			sb.jsonMerge( sbq.npcConfig.scriptConfig.sbqDefaultSettings or {},
 				sb.jsonMerge( sbq.tenant.overrides.scriptConfig.sbqSettings or {}, sbq.overrideSettings)
 			)

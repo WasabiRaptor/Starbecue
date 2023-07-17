@@ -103,9 +103,6 @@ function sbq.getOccupancy()
 			sbq.checkVoreButtonsEnabled()
 		end, function ()
 			sbq.data.occupantHolder = nil
-			sbq.occupant = nil
-			sbq.occupants = nil
-			sbq.actualOccupants = nil
 			sbq.checkVoreButtonsEnabled()
 		end)
 	end

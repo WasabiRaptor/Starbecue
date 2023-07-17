@@ -95,7 +95,7 @@ function init()
 	sbq.occupants.mass = 0
 
 	if not storage.settings then
-		storage.settings = sb.jsonMerge( sb.jsonMerge(sbq.config.defaultSettings, sbq.config.tenantDefaultSettings),
+		storage.settings = sb.jsonMerge( sb.jsonMerge(sbq.config.defaultSettings, sbq.config.npcDefaultSettings),
 			sb.jsonMerge(sbq.speciesConfig.sbqData.defaultSettings or {},
 				sb.jsonMerge( config.getParameter("sbqDefaultSettings") or {}, config.getParameter("sbqSettings") or {})
 			)
@@ -494,9 +494,6 @@ function update(dt)
 			sbq.occupants = result.occupants
 			sbq.occupant = result.occupant
 		end
-	end, function ()
-		sbq.occupants = nil
-		sbq.occupant = nil
 	end)
 	sbq.timer("rewardCheck", 30, function()
 		local rewards = config.getParameter("sbqPredRewards") or {}
