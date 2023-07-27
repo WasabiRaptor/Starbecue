@@ -366,12 +366,17 @@ function sbq.checkInfusionActionButtonsEnabled()
 	sbq.infusionButtonSetup(breastsInfusionActive, breastsInfusion, "breastsInfusion")
 	sbq.infusionButtonSetup(pussyInfusionActive, pussyInfusion, "pussyInfusion")
 
-	letOut:setVisible(sbq.settings.playerPrey or false)
+	letOut:setVisible(sbq.settings.playerPrey or (sbq.occupants.total > 1) or false)
 	if alreadyInfused and changeBackImage then
 		changeBack:setImage(changeBackImage)
 		changeBack:setVisible(true)
 	else
 		changeBack:setVisible(false)
+	end
+	if sbq.settings.playerPrey then
+		letOut.toolTip = "Ask to be let out."
+	else
+		letOut.toolTip = "Ask them to let one of their prey out."
 	end
 
 	sbq.infusionButtonSetup((ballsInfusionActive ~= "hidden") and (cockInfusionActive ~= "hidden") and cockInfusionActive or "hidden", shaftBallsInfusion, "shaftBallsInfusion")
@@ -735,7 +740,11 @@ end
 -----------------------------------------------------------
 
 function letOut:onClick()
-	world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "letout", player.id())
+	if sbq.settings.playerPrey then
+		world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "letout", player.id())
+	else
+		world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "letout" )
+	end
 	pane.dismiss()
 end
 
