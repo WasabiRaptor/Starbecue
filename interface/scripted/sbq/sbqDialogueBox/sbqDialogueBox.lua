@@ -366,7 +366,7 @@ function sbq.checkInfusionActionButtonsEnabled()
 	sbq.infusionButtonSetup(breastsInfusionActive, breastsInfusion, "breastsInfusion")
 	sbq.infusionButtonSetup(pussyInfusionActive, pussyInfusion, "pussyInfusion")
 
-	letOut:setVisible(sbq.settings.playerPrey or (sbq.occupants.total > 1) or false)
+	letOut:setVisible(sbq.settings.playerPrey or (((sbq.occupants or {}).total or 0) >= 1) or false)
 	if alreadyInfused and changeBackImage then
 		changeBack:setImage(changeBackImage)
 		changeBack:setVisible(true)
