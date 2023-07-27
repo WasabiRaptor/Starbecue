@@ -25,6 +25,8 @@ local function evTabSelect(self)
 	for i, subTab in ipairs(subTabs) do
 		subTab.currentTab.tabWidget:onSelected()
 	end
+
+	self.tab:onSelect()
 end
 
 function widgets.tabField:update(dt)
@@ -61,6 +63,9 @@ end
 
 function tabProto:select()
 	self.tabWidget:select()
+end
+
+function tabProto:onSelect()
 end
 
 function tabProto:update(dt)

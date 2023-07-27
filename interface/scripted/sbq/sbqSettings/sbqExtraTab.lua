@@ -4,6 +4,6 @@
 require("/interface/scripted/sbq/sbqSettings/sbqStatsTab.lua")
 
 function sbq.extraTab()
-	sbq.statsTab()
+	--sbq.statsTab()
 	mainTabField.subTabs.otherGlobalTab = {statsTabField}
 end

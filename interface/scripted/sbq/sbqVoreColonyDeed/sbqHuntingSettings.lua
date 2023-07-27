@@ -10,7 +10,7 @@ function sbq.huntingSettingsPanel()
 	sbq.npcGeneralBehaviorTab()
 	sbq.huntingTab()
 	sbq.baitingTab()
-	sbq.npcStatsTab()
+	--sbq.npcStatsTab()
 end
 
 function sbq.npcGeneralBehaviorTab()

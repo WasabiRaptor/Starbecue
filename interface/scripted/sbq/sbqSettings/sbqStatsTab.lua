@@ -1,24 +1,4 @@
----@diagnostic disable: undefined-global
 function sbq.statsTab()
-
-	local totalLocationTimes = {
-		pred = {},
-		prey = {},
-		name = "Overall"
-	}
-	for uuid, data in pairs(sbq.cumulativeData or {}) do
-		for thing, value in pairs(data.pred or {}) do
-			if type(value) == "number" then
-				totalLocationTimes.pred[thing] = (totalLocationTimes.pred[thing] or 0) + value
-			end
-		end
-		for thing, value in pairs(data.prey or {}) do
-			if type(value) == "number" then
-				totalLocationTimes.prey[thing] = (totalLocationTimes.prey[thing] or 0) + value
-			end
-		end
-	end
-
 	for i, location in pairs(sbq.config.listLocations) do
 		local defaultLocationData = sbq.config.defaultLocationData[location]
 		local tabVisible = true
@@ -32,68 +12,79 @@ function sbq.statsTab()
 			end
 		end
 
-		local dataPanels = {
-			sbq.getOccupancyStatLayout(nil, totalLocationTimes, location, defaultLocationData),
-		}
-		if sbq.playeruuid and sbq.cumulativeData[sbq.playeruuid] then
-			table.insert(dataPanels, sbq.getOccupancyStatLayout(nil, sbq.cumulativeData[sbq.playeruuid], location, defaultLocationData)
-		)
+---@diagnostic disable-next-line: undefined-global
+		tab = statsTabField:newTab({
+			type = "tab", id = location .. "StatsTab", visible = tabVisible, title = defaultLocationData.name or location, color = "ff00ff", contents = {
+				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
+					{ type = "layout", id = location .. "StatsTabScrollArea", children = {}}
+				}}
+			}
+		})
+		function tab:onSelect()
+			sb.logInfo(location .. "StatsTab")
+			local panel = _ENV[location .. "StatsTabScrollArea"]
+			panel:clearChildren()
+			panel:addChild({ type = "panel", style = "flat", children = sbq.getLocationOccupancyStats(location, defaultLocationData)})
 		end
-		local players = {}
-		local ocs = {}
-		local sbqNPCs = {}
-		local other = {}
+		if i == 1 then
+			tab:select()
+		end
+	end
+end
 
-		for uuid, data in pairs(sbq.cumulativeData) do
-			if uuid ~= sbq.playeruuid then
-				local entry = sbq.getOccupancyStatLayout(uuid, data, location, defaultLocationData)
-				if data.type == "player" then
-					table.insert(players, entry)
-				elseif data.type == "npc" then
-					if data.typeName then
-						local success, npcConfig = pcall(root.npcConfig, (data.typeName))
-						if success and ((npcConfig or {}).scriptConfig or {}).isOC then
-							table.insert(ocs, entry)
-						elseif success and ((npcConfig or {}).scriptConfig or {}).sbqNPC then
-							table.insert(sbqNPCs, entry)
-						else
-							table.insert(other, entry)
-						end
+function sbq.getLocationOccupancyStats(location, defaultLocationData)
+
+	local dataPanels = {
+	}
+	if sbq.playeruuid and sbq.cumulativeData[sbq.playeruuid] then
+		table.insert(dataPanels, sbq.getOccupancyStatLayout(nil, sbq.cumulativeData[sbq.playeruuid], location, defaultLocationData)
+	)
+	end
+	local players = {}
+	local ocs = {}
+	local sbqNPCs = {}
+	local other = {}
+
+	for uuid, data in pairs(sbq.cumulativeData) do
+		if uuid ~= sbq.playeruuid then
+			local entry = sbq.getOccupancyStatLayout(uuid, data, location, defaultLocationData)
+			if data.type == "player" then
+				table.insert(players, entry)
+			elseif data.type == "npc" then
+				if data.typeName then
+					local success, npcConfig = pcall(root.npcConfig, (data.typeName))
+					if success and ((npcConfig or {}).scriptConfig or {}).isOC then
+						table.insert(ocs, entry)
+					elseif success and ((npcConfig or {}).scriptConfig or {}).sbqNPC then
+						table.insert(sbqNPCs, entry)
 					else
 						table.insert(other, entry)
 					end
 				else
 					table.insert(other, entry)
 				end
+			else
+				table.insert(other, entry)
 			end
 		end
-		table.sort(players, sbq.sortStatEntries)
-		table.sort(ocs, sbq.sortStatEntries)
-		table.sort(sbqNPCs, sbq.sortStatEntries)
-		table.sort(other, sbq.sortStatEntries)
-
-		util.appendLists(dataPanels, players)
-		util.appendLists(dataPanels, ocs)
-		util.appendLists(dataPanels, sbqNPCs)
-		util.appendLists(dataPanels, other)
-
-		table.insert(dataPanels, {
-			{expandMode = {2,2}}
-		})
-
-		tab = statsTabField:newTab({
-			type = "tab", id = location .. "StatsTab", visible = tabVisible, title = defaultLocationData.name or location, color = "ff00ff", contents = {
-				{ type = "scrollArea", scrollDirections = { 0, 1 }, scrollBars = true, thumbScrolling = true, children = {
-					{ type = "panel", id = location .. "StatsTabScrollArea", style = "flat", children = dataPanels}
-				}}
-			}
-		})
-		if i == 1 then
-			tab:select()
-		end
 	end
+	table.sort(players, sbq.sortStatEntries)
+	table.sort(ocs, sbq.sortStatEntries)
+	table.sort(sbqNPCs, sbq.sortStatEntries)
+	table.sort(other, sbq.sortStatEntries)
 
+	util.appendLists(dataPanels, players)
+	util.appendLists(dataPanels, ocs)
+	util.appendLists(dataPanels, sbqNPCs)
+	util.appendLists(dataPanels, other)
+
+	table.insert(dataPanels, {
+		{expandMode = {2,2}}
+	})
+
+	return dataPanels
 end
+
 function sbq.sortStatEntries(a, b)
 	return a.children[2].text < b.children[2].text
 end

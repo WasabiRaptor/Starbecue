@@ -3871,13 +3871,15 @@
 			"navelVorePred" : [true,false],
 			"absorbVorePred" : [true,false],
 
-			// we shouldn't have the randomly generated preds generate with nsfw stuff
-			// not everyone wants to stumble across an NPC with their dick out
+			"cockVorePred" : [true,false],
+			"analVorePred" : [true,false],
+			"breastVorePred" : [true,false],
+			"unbirthPred" : [true,false],
 
-			//"cockVorePred" : [true,false],
-			//"analVorePred" : [true,false],
-			//"breastVorePred" : [true,false],
-			//"unbirthPred" : [true,false],
+			"cockInfusionPred" : [true,false],
+			"breastsInfusionPred" : [true,false],
+			"bellyInfusionPred" : [true,false],
+			"pussyInfusionPred" : [true,false],
 
 			"bellyEffectSlot" : [ "none", "heal", "digest", "softDigest"],
 			"wombEffectSlot" : [ "none", "heal", "digest", "softDigest"],
@@ -3893,6 +3895,11 @@
 			"analVorePredUnwilling" : "analVorePred",
 			"breastVorePredUnwilling" : "breastVorePred",
 			"unbirthPredUnwilling" : "unbirthPred",
+
+			"cockInfusionPredUnwilling" : "cockInfusionPred",
+			"breastsInfusionPredUnwilling" : "breastsInfusionPred",
+			"bellyInfusionPredUnwilling" : "bellyInfusionPred",
+			"pussyInfusionPredUnwilling" : "pussyInfusionPred",
 
 			"displayDigest" : [true,false],
 
