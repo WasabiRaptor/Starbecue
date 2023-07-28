@@ -942,8 +942,9 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 
 		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and
 			(sbq.checkSettings(struggledata.directions[movedir].settings)) then
-			if sbq.occupant[struggler].flags.willing then
-				sbq.occupant[struggler].controls.favorDirection = movedir
+			local isPlayerDriver = sbq.driver and world.entityType(sbq.driver) == "player"
+			if sbq.occupant[struggler].flags.willing and (isPlayerDriver or sbq.occupant[struggler].visited.totalTime < 600) then
+				sbq.occupant[struggler].controls.disfavorDirection = movedir
 			else
 				sbq.occupant[struggler].controls.favorDirection = movedir
 			end
