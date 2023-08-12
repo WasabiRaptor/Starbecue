@@ -3230,22 +3230,118 @@
 		"A-ahh~ Don't stop squirming~",
 		"Mmm... the best kind of \"implants\"~"
 	],
-	"defaultSelfRequestBreastVore": ":missingDialogue",
+	"defaultSelfRequestBreastVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I just need you in my breast! come on and help me out?"
+			],
+			[ // 25% - 50%
+				"I got some jugs that need filling, want to help me out here?"
+			],
+			[ // 50% - 75%
+				"Wanna take a trip into my rack?"
+			],
+			[ // 75% - 100%
+				"My boobs could use some company, mind going in them a while?"
+			]
+		]
+	},
 	"shySelfRequestBreastVore": ":defaultSelfRequestBreastVore", // duplicated lines
 	"flirtySelfRequestBreastVore": ":defaultSelfRequestBreastVore", // duplicated lines
-	"defaultSelfRequestBreastVoreYes": ":missingDialogue",
+	"defaultSelfRequestBreastVoreYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Awesome, I can't tell you how much I need this, now comes the boobs."
+			],
+			[ // 25% - 50%
+				"Thanks for agreeing, let's make you comfortable inside them now."
+			],
+			[ // 50% - 75%
+				"You'll love this, now just shove you're face in my boob here."
+			],
+			[ // 75% - 100%
+				"wonderful, now get in my nipple!"
+			]
+		]
+	},
 	"shySelfRequestBreastVoreYes": ":defaultSelfRequestBreastVoreYes", // duplicated lines
 	"flirtySelfRequestBreastVoreYes": ":defaultSelfRequestBreastVoreYes", // duplicated lines
-	"defaultSelfRequestBreastVoreYesAfter": ":missingDialogue",
+	"defaultSelfRequestBreastVoreYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ah, just take a nice milk bath"
+			],
+			[ // 25% - 50%
+				"Felt nice when you slipped though my nipple like that."
+			],
+			[ // 50% - 75%
+				"Seems you had no trouble getting in my rack."
+			],
+			[ // 75% - 100%
+				"Look at you now, all snug in my boob!"
+			]
+		]
+	},
 	"shySelfRequestBreastVoreYesAfter": ":defaultSelfRequestBreastVoreYesAfter", // duplicated lines
 	"flirtySelfRequestBreastVoreYesAfter": ":defaultSelfRequestBreastVoreYesAfter", // duplicated lines
-	"defaultSelfRequestBreastVoreNo": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNo": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I really could've used you in my mommy milkers."
+			],
+			[ // 25% - 50%
+				"And here i was ready to feel you in my rack, a shame."
+			],
+			[ // 50% - 75%
+				"Not a fan of my boinga owingas?"
+			],
+			[ // 75% - 100%
+				"I see, well no boobs for you then."
+			]
+		]
+	},
 	"shySelfRequestBreastVoreNo": ":defaultSelfRequestBreastVoreNo", // duplicated lines
 	"flirtySelfRequestBreastVoreNo": ":defaultSelfRequestBreastVoreNo", // duplicated lines
-	"defaultSelfRequestBreastVoreNoYes": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNoYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Too bad, I'm far too aroused, I'ma shove you in my boobs so quick!"
+			],
+			[ // 25% - 50%
+				"I'm not taking no, so you'll just have to get comfy in my rack now."
+			],
+			[ // 50% - 75%
+				"Sorry but you're going in anyway, get in my boob!"
+			],
+			[ // 75% - 100%
+				"You don't mean that, just get a closer look at my breast here."
+			]
+		]
+	},
 	"shySelfRequestBreastVoreNoYes": ":defaultSelfRequestBreastVoreNoYes", // duplicated lines
 	"flirtySelfRequestBreastVoreNoYes": ":defaultSelfRequestBreastVoreNoYes", // duplicated lines
-	"defaultSelfRequestBreastVoreNoYesAfter": ":missingDialogue",
+	"defaultSelfRequestBreastVoreNoYesAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"You feel way too good for me to just let get away, my boob filler!"
+			],
+			[ // 25% - 50%
+				"Squirm in my jugs and I might forgive you for trying to turn me down."
+			],
+			[ // 50% - 75%
+				"Could've made this easy for me, but you had to make me shove you in."
+			],
+			[ // 75% - 100%
+				"There we are, not so bad now that you're in my boob is it?"
+			]
+		]
+	},
 	"shySelfRequestBreastVoreNoYesAfter": ":defaultSelfRequestBreastVoreNoYesAfter", // duplicated lines
 	"flirtySelfRequestBreastVoreNoYesAfter": ":defaultSelfRequestBreastVoreNoYesAfter", // duplicated lines
 	"defaultBreastVoreNotFeelingIt": [
@@ -3955,30 +4051,118 @@
 		"I think you should be feeling much better now.",
 		"My stomach does wonders for healing doesn't it?"
 	],
-	"letoutAnalVore": ":missingDialogue",
+	"letoutAnalVore": [
+		"Was the 'subway' a pleasant trip though?",
+		"Out though my lower exit, come again soon!"
+	],
 	"letoutAnalVoreDigested": ":letoutOralVoreDigested", // duplicated lines
-	"letoutAnalVoreDigest": ":missingDialogue",
-	"letoutAnalVoreDigestImmune": ":missingDialogue",
-	"letoutAnalVoreSoftDigest": ":missingDialogue",
-	"letoutAnalVoreHeal": ":missingDialogue",
-	"letoutTailVore": ":missingDialogue",
+	"letoutAnalVoreDigest": [
+		"I think you won't be adding to me today, butt buddy!",
+		"I'll let you go this time, but next time my rear will have you mushed!"
+	],
+	"letoutAnalVoreDigestImmune": [
+		"Just leave my behind, it can't even soften you up.",
+		"You're free to go, since my bottom can't melt you at all."
+	],
+	"letoutAnalVoreSoftDigest": [
+		"I think you won't be adding to me today, butt buddy!",
+		"I'll let you go this time, but next time my rear will have you mushed!"
+	],
+	"letoutAnalVoreHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I think my healing booty has done enough, hope it soothed you!"
+			]
+		],
+		"full": [
+			"All better! time to come out from my rear end healing center."
+		]
+	},
+	"letoutTailVore": [
+		"I think you've spent enough time in tail-jail.",
+		"Times up tail snack, time to leave this ones tail for now."
+	],
 	"letoutTailVoreDigested": ":letoutOralVoreDigested", // duplicated lines
-	"letoutTailVoreDigest": ":missingDialogue",
-	"letoutTailVoreDigestImmune": ":missingDialogue",
-	"letoutTailVoreSoftDigest": ":missingDialogue",
-	"letoutTailVoreHeal": ":missingDialogue",
-	"letoutNavelVore": ":missingDialogue",
+	"letoutTailVoreDigest": [
+		"I'll let my tail digest you some other day, snack.",
+		"I'll give you some mercy from my tail, and let you go."
+	],
+	"letoutTailVoreDigestImmune": [
+		"Enjoy freedom, since my tail just can't melt you.",
+		"I can't soften you in my tail no matter how much I try, so leave already."
+	],
+	"letoutTailVoreSoftDigest": [
+		"I'll let my tail digest you some other day, snack.",
+		"I'll give you some mercy from my tail, and let you go."
+	],
+	"letoutTailVoreHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"Hope you've enjoyed healing in my tail, but it's time to leave it."
+			]
+		],
+		"full": [
+			"Time to come out my tail spa and feel fully invigorated!"
+		]
+	},
+	"letoutNavelVore": [
+		"I'm going to just let you out my navel real quick here.",
+		"Time to get out, though my navel you go!"
+	],
 	"letoutNavelVoreDigested": ":letoutOralVoreDigested", // duplicated lines
-	"letoutNavelVoreDigest": ":missingDialogue",
-	"letoutNavelVoreDigestImmune": ":missingDialogue",
-	"letoutNavelVoreSoftDigest": ":missingDialogue",
-	"letoutNavelVoreHeal": ":missingDialogue",
-	"letoutAbsorbVore": ":missingDialogue",
+	"letoutNavelVoreDigest": [
+		"I won't be melting you today, navel snack",
+		"Be glad, instead of adding you to my gut, I'm letting you out it's button."
+	],
+	"letoutNavelVoreDigestImmune": [
+		"My belly can't break you down, so you're coming out my navel.",
+		"Enjoy the trip out my navel, as I'm unable to soften you up."
+	],
+	"letoutNavelVoreSoftDigest": [
+		"I won't be melting you today, navel snack",
+		"Be glad, instead of adding you to my gut, I'm letting you out it's button."
+	],
+	"letoutNavelVoreHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"Hopefully you're soothed, as it's time to exit my belly."
+			]
+		],
+		"full": [
+			"Belly spa time is up, hope you feel great coming out my navel!"
+		]
+	},
+	"letoutAbsorbVore": [
+		"I think you've spent enough time in my form.",
+		"Time to get out my form buddy."
+	],
 	"letoutAbsorbVoreDigested": ":letoutOralVoreDigested", // duplicated lines
-	"letoutAbsorbVoreDigest": ":missingDialogue",
-	"letoutAbsorbVoreDigestImmune": ":missingDialogue",
-	"letoutAbsorbVoreSoftDigest": ":missingDialogue",
-	"letoutAbsorbVoreHeal": ":missingDialogue",
+	"letoutAbsorbVoreDigest": [
+		"I'll not completely melt you into my form today",
+		"Be thankful I'm letting you out my form, and not adding you to it."
+	],
+	"letoutAbsorbVoreDigestImmune": [
+		"You can leave now, since you're not getting soft at all.",
+		"Seems my form can't break you down, so just get out I suppose."
+	],
+	"letoutAbsorbVoreSoftDigest": [
+		"I'll not completely melt you into my form today",
+		"Be thankful I'm letting you out my form, and not adding you to it."
+	],
+	"letoutAbsorbVoreHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"Did my body heal you up well? if not you can come back again."
+			]
+		],
+		"full": [
+			"Hope you enjoyed getting massaged all over and healed by my form!"
+		]
+	},
 	"letoutCockVore": [
 		"Hhhhhh I'm gonna cum...",
 		"C-can't hold back much longer~",
@@ -4034,11 +4218,26 @@
 			"Feels like my womb's juices have gotten you all patched up, so its time to let you out."
 		]
 	},
-	"letoutBreastVore": ":missingDialogue",
-	"letoutBreastVoreDigested": ":missingDialogue",
-	"letoutBreastVoreDigest": ":missingDialogue",
-	"letoutBreastVoreDigestImmune": ":missingDialogue",
-	"letoutBreastVoreSoftDigest": ":missingDialogue",
+	"letoutBreastVore": [
+		"Time to leave my breast buddy.",
+		"I think you've stewed in my milk long enough."
+	],
+	"letoutBreastVoreDigested": [
+		"You're all milk now, filling my breast out nicely!",
+		"Seems you've been melted inside my boobs, good for you!"
+	],
+	"letoutBreastVoreDigest": [
+		"Be glad I'm not making you into milk today.",
+		"I'll let you go for now, but you're adding to my jugs next time!"
+	],
+	"letoutBreastVoreDigestImmune": [
+		"Come on out, I can't seem to melt you into my milk anyway.",
+		"Take you're freedom, since it seems you're immune to my rack's melting power."
+	],
+	"letoutBreastVoreSoftDigest": [
+		"Be glad I'm not making you into milk today.",
+		"I'll let you go for now, but you're adding to my jugs next time!"
+	],
 	"letoutBreastVoreHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -4174,16 +4373,80 @@
 	},
 	"shyPreyRequestOralVoreNoYes": ":defaultPreyRequestOralVoreNoYes", // duplicated lines
 	"flirtyPreyRequestOralVoreNoYes": ":defaultPreyRequestOralVoreNoYes", // duplicated lines
-	"defaultPreyRequestTailVore": ":missingDialogue",
+	"defaultPreyRequestTailVore": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Your tail looks like the perfect sleeping bag, may I get in?"
+			],
+			[ // 25% - 50%
+				"I could use some rest, can I get in your tail for some?"
+			],
+			[ // 50% - 75%
+				"Would care to eat me up with your tail?"
+			],
+			[ // 75% - 100%
+				"Hey, can i get your tail?"
+			]
+		]
+	},
 	"shyPreyRequestTailVore": ":defaultPreyRequestTailVore", // duplicated lines
 	"flirtyPreyRequestTailVore": ":defaultPreyRequestTailVore", // duplicated lines
-	"defaultPreyRequestTailVoreYes": ":missingDialogue",
+	"defaultPreyRequestTailVoreYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Thank you, I can already imagine how soft it is inside!"
+			],
+			[ // 25% - 50%
+				"Oh yes, I can't wait to be in that nice tail you got!"
+			],
+			[ // 50% - 75%
+				"I'm all yours, eat me up with that tail."
+			],
+			[ // 75% - 100%
+				"Great! let me just let myself in."
+			]
+		]
+	},
 	"shyPreyRequestTailVoreYes": ":defaultPreyRequestTailVoreYes", // duplicated lines
 	"flirtyPreyRequestTailVoreYes": ":defaultPreyRequestTailVoreYes", // duplicated lines
-	"defaultPreyRequestTailVoreNo": ":missingDialogue",
+	"defaultPreyRequestTailVoreNo": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I was so wanting in that tail, darn."
+			],
+			[ // 25% - 50%
+				"I'm going to have find a normal bed now."
+			],
+			[ // 50% - 75%
+				"Flipped a coin and it came up heads?"
+			],
+			[ // 75% - 100%
+				"Well darn, no tails to tell me huh?"
+			]
+		]
+	},
 	"shyPreyRequestTailVoreNo": ":defaultPreyRequestTailVoreNo", // duplicated lines
 	"flirtyPreyRequestTailVoreNo": ":defaultPreyRequestTailVoreNo", // duplicated lines
-	"defaultPreyRequestTailVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestTailVoreNoYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"You see, I'm getting into that tail regardless, I need in!"
+			],
+			[ // 25% - 50%
+				"I need a sleep spot, and you're tail is just too perfect, I'm diving in!"
+			],
+			[ // 50% - 75%
+				"I see, so I'm going to have to force my way in that tail then? so be it"
+			],
+			[ // 75% - 100%
+				"Sorry, but you're tail is calling my name, so I'm gonna get in."
+			]
+		]
+	},
 	"shyPreyRequestTailVoreNoYes": ":defaultPreyRequestTailVoreNoYes", // duplicated lines
 	"flirtyPreyRequestTailVoreNoYes": ":defaultPreyRequestTailVoreNoYes", // duplicated lines
 	"defaultPreyRequestAnalVore": [
@@ -4234,28 +4497,156 @@
 		"I gave you a chance to let me in that butt the easy way, but it seems you like the hard way~",
 		"You think you can say no to me sugar? sorry but I'm getting in that booty~"
 	],
-	"defaultPreyRequestNavelVore": ":missingDialogue",
+	"defaultPreyRequestNavelVore": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I want in your belly bad! would you let me in your navel?"
+			],
+			[ // 25% - 50%
+				"I'd really like to get into that navel of yours."
+			],
+			[ // 50% - 75%
+				"May I squeeze into your navel?"
+			],
+			[ // 75% - 100%
+				"Can I get in your navel?"
+			]
+		]
+	},
 	"shyPreyRequestNavelVore": ":defaultPreyRequestNavelVore", // duplicated lines
 	"flirtyPreyRequestNavelVore": ":defaultPreyRequestNavelVore", // duplicated lines
-	"defaultPreyRequestNavelVoreYes": ":missingDialogue",
+	"defaultPreyRequestNavelVoreYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Sweet, now to take that shortcut into your belly."
+			],
+			[ // 25% - 50%
+				"Thanks, time to shove my face right in that belly button!"
+			],
+			[ // 50% - 75%
+				"I'm on the navel express, choo choo!"
+			],
+			[ // 75% - 100%
+				"Yes, your navel here I come!"
+			]
+		]
+	},
 	"shyPreyRequestNavelVoreYes": ":defaultPreyRequestNavelVoreYes", // duplicated lines
 	"flirtyPreyRequestNavelVoreYes": ":defaultPreyRequestNavelVoreYes", // duplicated lines
-	"defaultPreyRequestNavelVoreNo": ":missingDialogue",
+	"defaultPreyRequestNavelVoreNo": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Well now where am I going to rest?"
+			],
+			[ // 25% - 50%
+				"Really? well alright, but I'm not happy about it!"
+			],
+			[ // 50% - 75%
+				"There goes my plans for today."
+			],
+			[ // 75% - 100%
+				"Shoot, no navels for me huh?"
+			]
+		]
+	},
 	"shyPreyRequestNavelVoreNo": ":defaultPreyRequestNavelVoreNo", // duplicated lines
 	"flirtyPreyRequestNavelVoreNo": ":defaultPreyRequestNavelVoreNo", // duplicated lines
-	"defaultPreyRequestNavelVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestNavelVoreNoYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I tried asking to get in that navel, now we move on to force!"
+			],
+			[ // 25% - 50%
+				"Sorry to say, but your navel is looking too good for me to back off!"
+			],
+			[ // 50% - 75%
+				"I think you don't get me, so I'ma just slip in anyway!"
+			],
+			[ // 75% - 100%
+				"Ah, you see you've made a mistake, Your navel is exposed!"
+			]
+		]
+	},
 	"shyPreyRequestNavelVoreNoYes": ":defaultPreyRequestNavelVoreNoYes", // duplicated lines
 	"flirtyPreyRequestNavelVoreNoYes": ":defaultPreyRequestNavelVoreNoYes", // duplicated lines
-	"defaultPreyRequestAbsorbVore": ":missingDialogue",
+	"defaultPreyRequestAbsorbVore": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I'm really in need of rest, mind absorbing me?"
+			],
+			[ // 25% - 50%
+				"I'm tired, can you absorb me?"
+			],
+			[ // 50% - 75%
+				"Can I just, get inside your form?"
+			],
+			[ // 75% - 100%
+				"May I get absorbed by you?"
+			]
+		]
+	},
 	"shyPreyRequestAbsorbVore": ":defaultPreyRequestAbsorbVore", // duplicated lines
 	"flirtyPreyRequestAbsorbVore": ":defaultPreyRequestAbsorbVore", // duplicated lines
-	"defaultPreyRequestAbsorbVoreYes": ":missingDialogue",
+	"defaultPreyRequestAbsorbVoreYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"Yes, time to disappear into your body!"
+			],
+			[ // 25% - 50%
+				"Awesome, I'm going to just dive in."
+			],
+			[ // 50% - 75%
+				"I'm going to enjoy getting encased in you!"
+			],
+			[ // 75% - 100%
+				"Thanks, come give me a tight hug!"
+			]
+		]
+	},
 	"shyPreyRequestAbsorbVoreYes": ":defaultPreyRequestAbsorbVoreYes", // duplicated lines
 	"flirtyPreyRequestAbsorbVoreYes": ":defaultPreyRequestAbsorbVoreYes", // duplicated lines
-	"defaultPreyRequestAbsorbVoreNo": ":missingDialogue",
+	"defaultPreyRequestAbsorbVoreNo": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I was looking forward to being in you, darn it!"
+			],
+			[ // 25% - 50%
+				"Fine, I'll sleep in a normal bed then"
+			],
+			[ // 50% - 75%
+				"Really? well shoot then"
+			],
+			[ // 75% - 100%
+				"Aw, I'm not absorbed and sad now."
+			]
+		]
+	},
 	"shyPreyRequestAbsorbVoreNo": ":defaultPreyRequestAbsorbVoreNo", // duplicated lines
 	"flirtyPreyRequestAbsorbVoreNo": ":defaultPreyRequestAbsorbVoreNo", // duplicated lines
-	"defaultPreyRequestAbsorbVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestAbsorbVoreNoYes": {
+		"percentage": "rest",
+		"pools": [
+			[ // 0% - 25%
+				"I'm too tired for this, just be still as I get in you!"
+			],
+			[ // 25% - 50%
+				"Whelp, seems I must cannonball into you to get what I want."
+			],
+			[ // 50% - 75%
+				"Well, then come give me a hug at least, a very, very close one!"
+			],
+			[ // 75% - 100%
+				"No? but can you even stop me if I walk into you? like this!"
+			]
+		]
+	},
 	"shyPreyRequestAbsorbVoreNoYes": ":defaultPreyRequestAbsorbVoreNoYes", // duplicated lines
 	"flirtyPreyRequestAbsorbVoreNoYes": ":defaultPreyRequestAbsorbVoreNoYes", // duplicated lines
 	"defaultPreyRequestUnbirth": ":missingDialogue",
@@ -4282,16 +4673,80 @@
 	"defaultPreyRequestCockVoreNoYes": ":missingDialogue",
 	"shyPreyRequestCockVoreNoYes": ":defaultPreyRequestCockVoreNoYes", // duplicated lines
 	"flirtyPreyRequestCockVoreNoYes": ":defaultPreyRequestCockVoreNoYes", // duplicated lines
-	"defaultPreyRequestBreastVore": ":missingDialogue",
+	"defaultPreyRequestBreastVore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I'm real needy, and would love to relax in your milkers!"
+			],
+			[ // 25% - 50%
+				"I would really like to be in your rack."
+			],
+			[ // 50% - 75%
+				"I wanna be bouncing in those jugs of yours!"
+			],
+			[ // 75% - 100%
+				"May I get into your breast please?"
+			]
+		]
+	},
 	"shyPreyRequestBreastVore": ":defaultPreyRequestBreastVore", // duplicated lines
 	"flirtyPreyRequestBreastVore": ":defaultPreyRequestBreastVore", // duplicated lines
-	"defaultPreyRequestBreastVoreYes": ":missingDialogue",
+	"defaultPreyRequestBreastVoreYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Yes! let me though and let me in those jugs!"
+			],
+			[ // 25% - 50%
+				"This is going to be great, boobs here I come!"
+			],
+			[ // 50% - 75%
+				"Awesome, now to get in that milk tub."
+			],
+			[ // 75% - 100%
+				"Alright! time to get in that boob."
+			]
+		]
+	},
 	"shyPreyRequestBreastVoreYes": ":defaultPreyRequestBreastVoreYes", // duplicated lines
 	"flirtyPreyRequestBreastVoreYes": ":defaultPreyRequestBreastVoreYes", // duplicated lines
-	"defaultPreyRequestBreastVoreNo": ":missingDialogue",
+	"defaultPreyRequestBreastVoreNo": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Just my luck, I get no breast just when I'm wanting them most!"
+			],
+			[ // 25% - 50%
+				"I was looking forward to getting in that milk bath."
+			],
+			[ // 50% - 75%
+				"welp, no boobs for me huh?"
+			],
+			[ // 75% - 100%
+				"Damn, was worth asking."
+			]
+		]
+	},
 	"shyPreyRequestBreastVoreNo": ":defaultPreyRequestBreastVoreNo", // duplicated lines
 	"flirtyPreyRequestBreastVoreNo": ":defaultPreyRequestBreastVoreNo", // duplicated lines
-	"defaultPreyRequestBreastVoreNoYes": ":missingDialogue",
+	"defaultPreyRequestBreastVoreNoYes": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I'm sorry but you're not standing between me and those nice breast!"
+			],
+			[ // 25% - 50%
+				"Don't you see I'm in need of your soft jugs? let me show you."
+			],
+			[ // 50% - 75%
+				"While you where saying no, I got close enough to just shove in soooo..."
+			],
+			[ // 75% - 100%
+				"You might think differently once I'm inside them!"
+			]
+		]
+	},
 	"shyPreyRequestBreastVoreNoYes": ":defaultPreyRequestBreastVoreNoYes", // duplicated lines
 	"flirtyPreyRequestBreastVoreNoYes": ":defaultPreyRequestBreastVoreNoYes", // duplicated lines
 	"defaultForcingPreyOralVore": {
