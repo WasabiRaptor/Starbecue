@@ -172,7 +172,7 @@
 					}
 				}
 			},
-			"tail" : { "name" : "Tail", "max": 1, "selectEffect" : true, "mass" : 1, "transformGroups" : ["bodybob", "tailbob"] },
+			"tail" : { "name" : "Tail", "max": 1, "selectEffect" : true, "mass" : 1, "transformGroups" : ["bodybob", "tailbob"], "hammerspace" : true, "checkSettings" : {"tail":[false, true]} },
 
 			"hug" : { "name" : "Held", "max": 1, "maxNested": -1, "transformGroups" : ["bodybob"] },
 			"pinned" : { "max": 1, "maxNested": 2, "transformGroups" : ["bodybob"] }
