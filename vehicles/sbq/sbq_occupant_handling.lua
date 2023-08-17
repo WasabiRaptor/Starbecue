@@ -788,7 +788,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 			end
 		end
 		if sbq.occupant[i].species and sbq.occupant[i].species ~= "sbqOccupantHolder" then
-			icon = "/vehicles/sbq/"..sbq.occupant[i].species.."/skins/"..((sbq.occupant[i].smolPreyData.settings.skinNames or {}).head or "default").."/icon.png"..((sbq.occupant[i].smolPreyData.settings or {}).directives or "")
+			icon = "/vehicles/sbq/"..sbq.occupant[i].species.."/skins/"..(((sbq.occupant[i].smolPreyData.settings or {}).skinNames or {}).head or "default").."/icon.png"..((sbq.occupant[i].smolPreyData.settings or {}).directives or "")
 		end
 		sbq.openPreyHud(i, directions, progressbarDx, icon, location..(sbq.occupant[i].locationSide or ""))
 	end
