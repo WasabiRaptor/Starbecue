@@ -366,3 +366,7 @@ message.setHandler("changeBack", function(_, _, eid)
 	end
 	sbq.letout(eid)
 end)
+
+message.setHandler("sbqTakeFromResources", function(_, _, amount, resources, multipliers, thresholds)
+	return amount
+end)
