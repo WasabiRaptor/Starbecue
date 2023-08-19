@@ -566,6 +566,7 @@ local essentialItems = {"beamaxe", "wiretool", "painttool", "inspectiontool"}
 
 function sbq.checkLockItem(itemDescriptor, type)
 	if not itemDescriptor then return end
+	local type = type or "driver"
 	allowedItems = root.assetJson("/sbqGeneral.config:sbqAllowedItems")
 	bannedTags = root.assetJson("/sbqGeneral.config:sbqBannedTags")
 	bannedTypes = root.assetJson("/sbqGeneral.config:sbqBannedItemTypes")
