@@ -154,9 +154,9 @@ end
 function sbq.switchBalls(args)
 	local dx = sbq.lounging[args.id].controls.dx
 	if dx == -1 then
-		return sbq.moveOccupantLocation(args, "ballsR")
+		return sbq.moveOccupantLocation(args, "balls", "R")
 	elseif dx == 1 then
-		return sbq.moveOccupantLocation(args, "ballsL")
+		return sbq.moveOccupantLocation(args, "balls", "L")
 	end
 end
 
