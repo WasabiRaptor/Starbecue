@@ -539,18 +539,21 @@ else
 	end
 	function insertTenant:onClick()
 		local item = insertTenantItemSlot:item()
-
-		sbq.addRPC(world.findUniqueEntity(((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId),
-			function(result)
-				if not result then
+		local uuid = ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId
+		if uuid then
+			sbq.addRPC(world.findUniqueEntity(uuid),
+				function(result)
+					if not result then
+						sbq.insertTenant(item)
+					end
+					pane.playSound("/sfx/interface/clickon_error.ogg")
+				end,
+				function()
 					sbq.insertTenant(item)
-				end
-				pane.playSound("/sfx/interface/clickon_error.ogg")
-			end,
-			function ()
-				sbq.insertTenant(item)
-			end
-		)
+				end)
+		else
+			sbq.insertTenant(item)
+		end
 	end
 	function uninit()
 		local item = insertTenantItemSlot:item()
