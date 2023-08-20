@@ -31,7 +31,7 @@ local old = {}
 local controlPathMoveRPC
 function sbq.controlPathMove(target, run, options)
 	local current = status.statusProperty("sbqCurrentData")
-	if current and current.species ~= "sbqOccupantHolder" and status.statusProperty("sbqType") == "driver" then
+	if current and type(current.id) == "number" and current.species ~= "sbqOccupantHolder" and status.statusProperty("sbqType") == "driver" then
 		local newRPC = world.sendEntityMessage(current.id, "sbqControlPathMove", target, run, options)
 		local syncResult = newRPC:finished() and newRPC:succeeded() and newRPC:result()
 		if syncResult ~= nil then
