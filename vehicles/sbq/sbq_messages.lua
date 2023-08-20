@@ -96,10 +96,7 @@ function sbq.transformMessageHandler(eid, TF, TFType)
 		sbq.lounging[eid].progressBarFinishFuncName = "transformPrey"
 	end
 
-	sbq.lounging[eid].progressBarType = "transforming"
-	if TFType then
-		sbq.lounging[eid].progressBarType = TFType.."ing"
-	end
+	sbq.lounging[eid].progressBarType = TF.data.occupantFlag or "transforming"
 end
 
 message.setHandler( "settingsMenuRefresh", function(_,_)

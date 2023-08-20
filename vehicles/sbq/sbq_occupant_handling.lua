@@ -746,15 +746,15 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 			local data = sbq.sbqData.locations[location][passiveEffect]
 			if data and data.effect and sbq.getLocationSetting(location, passiveEffect) then
 				table.insert(effects, data.effect)
-			elseif sbq.getLocationSetting(location, passiveEffect) and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
-				sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
+			elseif sbq.getLocationSetting(location, passiveEffect) and data and (not ((sbq.occupant[i].flags[data.occupantFlag or "transforming"] ~= nil) or sbq.occupant[i][passiveEffect.."Immune"])) then
+				sbq.loopedMessage(passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 					if enabled then
 						sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
 					else
-						sbq.occupant[i][location..passiveEffect.."Immune"] = true
+						sbq.occupant[i][passiveEffect.."Immune"] = true
 					end
 				end, function ()
-					sbq.occupant[i][location..passiveEffect.."Immune"] = true
+					sbq.occupant[i][passiveEffect.."Immune"] = true
 				end)
 			end
 		end

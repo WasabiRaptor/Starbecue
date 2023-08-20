@@ -278,7 +278,7 @@ function dialogueBoxScripts.transforming(dialogueTree, dialogueTreeTop, settings
 	return tostring(type(settings.transforming) == "number")
 end
 function dialogueBoxScripts.eggify(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	return tostring(type(settings.Eggifying) == "number")
+	return tostring(type(settings.eggifying) == "number")
 end
 
 
