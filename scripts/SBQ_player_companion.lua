@@ -222,8 +222,8 @@ function init()
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = player.getProperty("sbqType")
 		if not (type == "driver" and current.species == "sbqOccupantHolder") then
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
 		end
 
 		return {
@@ -248,9 +248,10 @@ function init()
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = player.getProperty("sbqType")
 		if not (type == "driver" and current.species == "sbqOccupantHolder") then
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
 		end
+
 	end)
 
 	message.setHandler("sbqGiveController", function(_,_)
@@ -565,13 +566,13 @@ end
 local essentialItems = {"beamaxe", "wiretool", "painttool", "inspectiontool"}
 
 function sbq.checkLockItem(itemDescriptor, type)
-	if not itemDescriptor then return end
+	if not itemDescriptor then return false end
 	local type = type or "driver"
 	allowedItems = root.assetJson("/sbqGeneral.config:sbqAllowedItems")
 	bannedTags = root.assetJson("/sbqGeneral.config:sbqBannedTags")
 	bannedTypes = root.assetJson("/sbqGeneral.config:sbqBannedItemTypes")
 
-	if allowedItems[type][itemDescriptor.name] then return end
+	if allowedItems[type][itemDescriptor.name] then return false end
 
 	for i, item in ipairs(essentialItems) do
 		local essentialItem = player.essentialItem(item)
@@ -589,14 +590,18 @@ function sbq.checkLockItem(itemDescriptor, type)
 	end
 
 	if bannedTypes[type][root.itemType(itemDescriptor.name)] then return sbq.lockItem(itemDescriptor, type) end
+	return false
 end
 
 function sbq.lockItem(itemDescriptor, type)
 	if itemDescriptor.parameters ~= nil and itemDescriptor.parameters.itemHasOverrideLockScript then
-		return world.sendEntityMessage(entity.id(), itemDescriptor.name.."Lock", true)
+		world.sendEntityMessage(entity.id(), itemDescriptor.name.."Lock", true)
+		return false
 	end
-	if root.itemType(itemDescriptor.name) == "activeitem" and (not itemDescriptor.parameters or not itemDescriptor.parameters.itemHasOverrideLockScript) then
-		return giveHeldItemOverrideLockScript(itemDescriptor) ---@diagnostic disable-line:undefined-global
+	if root.itemType(itemDescriptor.name) == "activeitem" and
+		(not itemDescriptor.parameters or not itemDescriptor.parameters.itemHasOverrideLockScript) then
+		giveHeldItemOverrideLockScript(itemDescriptor) ---@diagnostic disable-line:undefined-global
+		return false
 	end
 
 	local lockItemDescriptor = player.essentialItem("painttool") or {}
@@ -610,8 +615,10 @@ function sbq.lockItem(itemDescriptor, type)
 	if consumed then
 		local lockedItemList = player.getProperty( "sbqLockedItems" ) or {}
 		table.insert(lockedItemList, consumed)
-		player.setProperty( "sbqLockedItems", lockedItemList )
+		player.setProperty("sbqLockedItems", lockedItemList)
+		return true
 	end
+	return false
 end
 
 function sbq.lockEssentialItem(itemDescriptor, slot, type)
@@ -619,6 +626,7 @@ function sbq.lockEssentialItem(itemDescriptor, slot, type)
 	lockItemDescriptor.parameters.scriptStorage.lockedEssentialItems[slot] = itemDescriptor
 	lockItemDescriptor.parameters.scriptStorage.lockType = type
 	player.giveEssentialItem(slot, lockItemDescriptor)
+	return true
 end
 
 function sbq.requestTransition(transition, args)
@@ -629,4 +637,22 @@ function sbq.requestTransition(transition, args)
 		world.spawnVehicle( "sbqOccupantHolder", entity.position(), { driver = entity.id(), settings = sb.jsonMerge(settings.sbqOccupantHolder or {}, settings.global or {}), doExpandAnim = true } )
 	end
 	table.insert(sbq.queuedTransitions, {transition, args})
+end
+local lockedNotified = false
+function sbq.notifyLockedItem(yes)
+	if (not lockedNotified) then
+		lockedNotified = player.getProperty("sbqLockNotified")
+	end
+	if yes and not lockedNotified then
+		player.setProperty("sbqLockNotified", true)
+		lockedNotified = true
+		player.radioMessage({
+			messageId = "playerNotifyLock1", unique = false,
+			text = "Your current state makes certain equipment unusable, therefore I have Locked the items within an ^yellow;Essential Tool^reset; slot."
+		}, 1)
+		player.radioMessage({
+			messageId = "playerNotifyLock2", unique = false,
+			text = "After you have returned to normal simply equip the tool to have your items returned to you. ^#555;(Typically the ^yellow;Paint Tool^#555; slot ^green;(Y hotkey)^#555; if no other essential tools had attempted to be used)"
+		}, 5)
+	end
 end
