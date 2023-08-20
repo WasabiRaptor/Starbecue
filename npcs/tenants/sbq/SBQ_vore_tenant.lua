@@ -326,7 +326,8 @@ function init()
 		if owner then
 			if owner == uniqueId then
 				return {
-					ui = "starbecue:voreCrewMenu"
+					ui = "starbecue:voreCrewMenu",
+					data = { crewUI = true}
 				}
 			end
 		elseif storage.respawner then
@@ -965,7 +966,7 @@ function sbq.getTarget()
 	elseif (math.random() > 0.5) then
 		local voreType, predOrPrey = sbq.getCurrentVorePref()
 		if not voreType then return end
-		local consent = sbq.huntingAskConsent()
+		local consent = sbq.huntingAskConsent(voreType, predOrPrey)
 		if predOrPrey == "pred" then
 			sbq.searchForValidPrey(voreType, consent)
 		elseif predOrPrey == "prey" then
@@ -1005,17 +1006,17 @@ function sbq.getNextTarget()
 	end
 end
 
-function sbq.huntingAskConsent()
-	if storage.huntingTarget then
+function sbq.huntingAskConsent(voreType, predOrPrey)
+	if storage.huntingTarget or (voreType and predOrPrey) then
 		local consentVal
-		if storage.huntingTarget.predOrPrey == "pred" then
-			consentVal = storage.settings[storage.huntingTarget.voreType .. "ConsentPred"] or 0.5
-		elseif storage.huntingTarget.predOrPrey == "prey" then
-			consentVal = storage.settings[storage.huntingTarget.voreType .. "ConsentPrey"] or 0.5
+		if (predOrPrey or storage.huntingTarget.predOrPrey) == "pred" then
+			consentVal = storage.settings[( voreType or storage.huntingTarget.voreType) .. "ConsentPred"] or 0.5
+		elseif (predOrPrey or storage.huntingTarget.predOrPrey) == "prey" then
+			consentVal = storage.settings[( voreType or storage.huntingTarget.voreType) .. "ConsentPrey"] or 0.5
 		end
 		if consentVal == 1 then return true end
 		if consentVal == 0 then return false end
-		return consentVal < math.random()
+		return consentVal > math.random()
 	end
 end
 
