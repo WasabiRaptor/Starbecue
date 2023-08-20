@@ -327,21 +327,25 @@ function init()
 			if owner == uniqueId then
 				return {
 					ui = "starbecue:voreCrewMenu",
-					data = { crewUI = true}
+					data = { crewUI = true }
 				}
 			end
 		elseif storage.respawner then
 			return {
 				ui = "starbecue:voreColonyDeed",
-				respawner = storage.respawner,
-				forcedIndex = config.getParameter("tenantIndex"),
-				occupier = occupier
+				data = {
+					respawner = storage.respawner,
+					forcedIndex = config.getParameter("tenantIndex"),
+					occupier = occupier
+				}
 			}
 		else
 			return {
 				ui = "starbecue:voreColonyDeed",
-				detached = true,
-				occupier = occupier
+				data = {
+					detached = true,
+					occupier = occupier
+				}
 			}
 		end
 	end)

@@ -244,7 +244,7 @@ function sbq.assignTransformMenu()
 					end
 				end
 			end
-			world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "transformSelect" }, true )
+			world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "transformSelect" } )
 		else
 			noTFMenu = true
 			sbq.lastRadialSelection = "despawn"
@@ -510,7 +510,7 @@ function sbq.assignClickActionMenu(state)
 		end
 	end
 
-	world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "actionSelect" }, true )
+	world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "actionSelect" } )
 end
 
 function sbq.checkValidAim(seat, range)

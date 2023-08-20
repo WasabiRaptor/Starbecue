@@ -1,4 +1,3 @@
-local settings
 local options
 local menuType
 local canvas
@@ -6,7 +5,6 @@ local button
 local pressed
 
 function init()
-	settings = config.getParameter( "settings", {} )
 	options = config.getParameter( "options" )
 	menuType = config.getParameter("type")
 	if not options then

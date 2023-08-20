@@ -175,7 +175,7 @@ function init()
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
 	end)
 
-	message.setHandler( "sbqOpenInterface", function(_,_, name, args, appendSettings, sourceEntity)
+	message.setHandler( "sbqOpenInterface", function(_,_, name, args, sourceEntity)
 		local pane = root.assetJson("/interface/scripted/sbq/"..name.."/"..name..".config")
 		if args then
 			pane = sb.jsonMerge(pane, args)

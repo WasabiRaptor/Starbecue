@@ -205,7 +205,7 @@ function assignAssignActionMenu()
 		} )
 	end
 
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerActionSelect" }, true )
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerActionSelect" })
 end
 
 function assignSelectMenu()
@@ -232,7 +232,7 @@ function assignSelectMenu()
 			title = "Prey\nActions"
 		})
 	end
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerSelectMenu" }, true )
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerSelectMenu" } )
 end
 
 function assignRPActionMenu()
@@ -258,7 +258,7 @@ function assignPreyActionMenu()
 					})
 				end
 			end
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreySelect" }, true )
+			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreySelect" } )
 		end)
 	end
 end
@@ -290,7 +290,7 @@ function assignLocationActionSelect(data)
 		end
 	end
 
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationPreyAction" }, true )
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationPreyAction" } )
 end
 
 function locationPreyAction(selectionData)
@@ -337,7 +337,7 @@ function assignLocationSelect(data, sbqSettings, settings, sbqData)
 			locationAction = options[1].name
 			assignLocationActionSelect({selection = options[1].name})
 		else
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationSelect" }, true )
+			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationSelect" } )
 
 		end
 	end
@@ -385,7 +385,7 @@ function assignPreyActionsLocation(id)
 							})
 						end
 					end
-					world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreyAction" }, true )
+					world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreyAction" } )
 					break
 				end
 			end

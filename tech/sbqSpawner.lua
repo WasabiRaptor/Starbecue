@@ -103,7 +103,7 @@ function openRadialMenu()
 		end
 	end
 
-	world.sendEntityMessage( entity.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "sbqSelect"}, true )
+	world.sendEntityMessage( entity.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "sbqSelect"} )
 end
 function openSettingsMenu()
 	world.sendEntityMessage( entity.id(), "sbqOpenMetagui", "starbecue:predatorSelectorSettings" )

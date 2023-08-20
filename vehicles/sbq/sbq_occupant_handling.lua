@@ -55,7 +55,7 @@ function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	local entityType = world.entityType(args.id)
 	if entityType == "player" then
 		if args.keepWindow then
-			world.sendEntityMessage( args.id, "sbqOpenInterface", "sbqClose", nil, nil, sbq.driver )
+			world.sendEntityMessage( args.id, "sbqOpenInterface", "sbqClose", nil, sbq.driver )
 		end
 		sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
 		function(data)
@@ -139,7 +139,7 @@ function sbq.edible( occupantId, seatindex, source, force )
 			),
 			entity.id()
 		)
-		world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqClose", false, false, entity.id() )
+		world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqClose", nil, entity.id() )
 		sbq.isNested = true
 		sbq.scaleTransformationGroup("globalScale", {0,0})
 		return true

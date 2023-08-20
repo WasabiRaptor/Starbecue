@@ -263,9 +263,11 @@ end)
 message.setHandler( "getEntitySettingsMenuData", function (_,_)
 	if not sbq.driver and world.entityName(entity.id()) ~= "sbqOccupantHolder" then
 		return {
-			settings = sbq.settings,
-			spawner = sbq.spawner,
-			parent = entity.id()
+			parent = entity.id(),
+			data = {
+				settings = sbq.settings,
+				spawner = sbq.spawner,
+			}
 		}
 	end
 end)
