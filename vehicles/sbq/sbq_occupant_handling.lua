@@ -396,6 +396,15 @@ function sbq.updateOccupants(dt)
 			sbq.occupant[i].visited.totalTime = (sbq.occupant[i].visited.totalTime or 0) + dt
 			sbq.occupant[i].cumulative.totalTime = (sbq.occupant[i].cumulative.totalTime or 0) + dt
 
+			if sbq.occupant[i].visited.totalTime >= 900 and not sbq.occupant[i].player then
+				sbq.occupant[i].player = world.entityType(sbq.occupant[i].id) == "player"
+				if not sbq.occupant[i].player then
+					sbq.timer("letOut"..sbq.occupant[i].id, 1, function()
+						sbq.letout(sbq.occupant[i].id)
+					end)
+				end
+			end
+
 			local massMultiplier = 0
 			local mass = sbq.occupant[i].controls.mass
 			local location = sbq.occupant[i].location
