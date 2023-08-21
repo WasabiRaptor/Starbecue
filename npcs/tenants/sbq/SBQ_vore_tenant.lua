@@ -628,7 +628,7 @@ function sbq.passiveStatChanges(dt)
 					elseif entitys[1] then
 						chosen = entitys[math.random(#entitys)]
 					end
-
+					if not chosen then return end
 					local settings = { predOrPrey = "pred", location = chosen[2] }
 					sbq.getRandomDialogue(".climax", chosen[1], sb.jsonMerge(storage.settings, settings))
 				end

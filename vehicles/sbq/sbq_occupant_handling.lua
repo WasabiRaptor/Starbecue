@@ -125,7 +125,8 @@ function sbq.uneat( occupantId )
 	return true
 end
 
-function sbq.edible( occupantId, seatindex, source, force )
+function sbq.edible(occupantId, seatindex, source, force)
+	if not sbq.stateconfig then return false end
 	if sbq.driver ~= occupantId or (sbq.isNested and not force) then return false end
 
 	if sbq.stateconfig[sbq.state].edible then
