@@ -38,3 +38,4 @@
 	FFWizard
 	ArgobargSoup
 	Jemmysponz
+	Zovoroth
