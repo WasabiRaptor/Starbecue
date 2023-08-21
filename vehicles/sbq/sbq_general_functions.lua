@@ -10,11 +10,11 @@ function sbq.logJson(...)
 end
 
 function sbq.logError(arg)
-	sb.logError("["..world.entityName(entity.id()).."]"..tostring(arg))
+	sb.logError("["..tostring(world.entityName(entity.id())).."]"..tostring(arg))
 end
 
 function sbq.logInfo(arg)
-	sb.logInfo("["..world.entityName(entity.id()).."]"..tostring(arg))
+	sb.logInfo("["..tostring(world.entityName(entity.id())).."]"..tostring(arg))
 end
 
 
