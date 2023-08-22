@@ -518,6 +518,7 @@ state.fly.succEat = oralEat
 state.fly.tailVore = tailVore
 state.fly.analVore = analVore
 
+state.fly.checkOralVore = checkOral
 state.fly.checkTailVore = checkTail
 state.fly.checkAnalVore = checkAnal
 
