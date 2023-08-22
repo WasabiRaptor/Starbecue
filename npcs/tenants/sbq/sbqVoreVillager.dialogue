@@ -1233,7 +1233,7 @@
 		"Sorry honey, my tail is making it's playthings fit in better right now, come back soon~",
 		"Let my tail work it's snacks into something more manageable, then I'll see to you cutie~"
 	],
-	"defaultRequestNavelVoreBefore": [
+	"defaultRequestNavelVoreBefore": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"You want to go in through my navel?",
 		"That isn't the usual way to do things.",
 		"I can try that.",
@@ -1627,10 +1627,10 @@
 		"I'd love to shove you in my navel, but until I make more room, you'll have to wait~",
 		"You really want in my button? I'd say yes but my prey isn't compact enough cutie~"
 	],
-	// proofread ends here
-	"defaultRequestAbsorbVoreBefore": [
-		"You want my to engulf you with my body? why not! come here.",
-		"Make you disappear into my body? well okay then, let me hug you."
+
+	"defaultRequestAbsorbVoreBefore": [ // these lines should be proofread and or redone when Absorb is actually implemented for NPCs/players
+		"You want to be entirely engulfed within me? why not! come here.",
+		"Heh, now to give you a hug, and pull you into a full body hug."
 	],
 	"shyRequestAbsorbVoreBefore": [
 		"You want to... just s-shove you into me?... uh... s-sure!...",
@@ -2134,47 +2134,126 @@
 			]
 		]
 	},
-	"flirtyRequestCockVoreAfter": [
-		"Aahh~ right where you belong you horny little thing~",
-		"Mmmm~ Who knows, you might even get me to cum~",
-		"Heheh~ I can feel how excited you are~",
-		"Heh~ makes me want to spend some time by myself and squeeze you even tighter~"
-	],
-	"defaultUnpromptedCockVoreBefore": [
-		"Gonna stick you somewhere things aren't supposed to go~",
-		"Mmm~ hey, want to try something?",
-		"I got a bit excited thinking about this, so now I have to do it~",
-		"I'm gonna need you to pleasure me, but not the normal way~"
-	],
-	"shyUnpromptedCockVoreBefore": [
-		"Uhm... e-excuse me... m-may I show you my cock?", //blue here, this line kills me, my standerd of humer is cock bottom... get it? cocks!?!?... i'll stop...
-		"Hey... uhm... mind helping me... w-with a stiff stick?",
-		"Do you... uhm... do you mind if I shove you... into my s-shaft?",
-		"Hi... you look like... y-you'd fit in... my rod..."
-	],
-	"flirtyUnpromptedCockVoreBefore": [
-		"Gonna stick you somewhere things aren't supposed to go~",
-		"Dicks are meant for shoving into other people... but I like to do the opposite~",
-		"You're going to feel real good wriggling inside me~",
-		"Don't think I haven't caught you staring you perv~ So heres your \"punishment\"~"
-	],
-	"defaultUnpromptedCockVoreAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me even more excited~",
-		"Ffff~ Now I'm all hard~",
-		"A-ahh~ Don't stop squirming~"
-	],
-	"shyUnpromptedCockVoreAfter": [
-		"Ahhh~ S-sorry I couldn't control myself! it felt so nice putting you in my cock!",
-		"Ohhh~ I was just... too excited to have you in my shaft!",
-		"Mmmm~ T-this is fine right? maybe a bit lewd, but your fine in that rod right??",
-		"A-ahhh sorry I just panicked! and putting you in my cock was my only choice... right?"
-	],
-	"flirtyUnpromptedCockVoreAfter": [ //blue here, getting cocky~ odd this was the only one without lines for cock unprompted
-		"Oooooh yes, you feel so good in there~ wiggle for me toy, serve your new role for me~",
-		"Heheheh, you look so cute all stuffed down my rod like that, like It's meant to be~",
-		"Wow, every move you make is just... ah! yeah, I choose a good toy, a very good toy~"
-	],
+	"flirtyRequestCockVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Heh~ makes me want to spend some time by myself and squeeze you even tighter~"
+			],
+			[ // 25% - 50%
+				"Aahh~ right where you belong you horny little thing~"
+			],
+			[ // 50% - 75%
+				"Mmmm~ Who knows, you might even get me to cum~",
+				"Heheh~ I can feel how excited you are~"
+			],
+			[ // 75% - 100%
+				"Ahhh...~ fff... I'm so close already! Good toy! Squirm and wriggle and get me off!"
+			]
+		]
+	},
+	"defaultUnpromptedCockVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Mmm~ hey, I think I'm gonna stick you in my pants, maybe a little more~"
+			],
+			[ // 25% - 50%
+				"I got a bit excited thinking about this, so now I have to do it~ You're going in my cock~"
+			],
+			[ // 50% - 75%
+				"Huff... I'm all excited, you! I'm gonna get off to you squirming in my cock~!"
+			],
+			[ // 75% - 100%
+				"I need to cum! Huff! I need you squirming around in my dick to finish!"
+			]
+		]
+	},
+	"shyUnpromptedCockVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"H-hey there... balls are empty... need to fill them..."
+			],
+			[ // 25% - 50%
+				"Hey... I gotta deal with some u-urges... so you're going in my cock... s-sorry!"
+			],
+			[ // 50% - 75%
+				"I'm getting all h-horny... S-sorry but I need to use you to help me get off!"
+			],
+			[ // 75% - 100%
+				"Hufff... I'm so horny! Aaaa... N-needy... need to cum! N-need to use you!"
+			]
+		]
+	},
+	"flirtyUnpromptedCockVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Mmm, you look cute, cute enough for me to want to see you all cum stained~"
+			],
+			[ // 25% - 50%
+				"Dicks are meant for shoving into other people... but I like to do the opposite~"
+			],
+			[ // 50% - 75%
+				"Getting a bit of a hard on looking at you cutie~ Ready for you to get shoved right into it!"
+			],
+			[ // 75% - 100%
+				"Huff~ Look at how hard I am~! And you cutie, you're gonna get in there and help me cum~"
+			]
+		]
+	},
+	"defaultUnpromptedCockVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ah hehe, squeezed right in my shaft, squirm around for me will ya?"
+			],
+			[ // 25% - 50%
+				"Mmmm, getting nice and hard from that squirming, now squirm some more!"
+			],
+			[ // 50% - 75%
+				"Huff... I'm all excited, you! I'm gonna get off to you squirming in my cock~!"
+			],
+			[ // 75% - 100%
+				"I need to cum! Huff! I need you squirming around in my dick to finish!"
+			]
+		]
+	},
+	"shyUnpromptedCockVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"S-sorry I just... I needed to feel something in there!"
+			],
+			[ // 25% - 50%
+				"A-ahh... you s-squirming around is actually pretty good...~"
+			],
+			[ // 50% - 75%
+				"S-sorry again I just... can't control these urges~!"
+			],
+			[ // 75% - 100%
+				"Aaaa S-sorry! I just, can't c-control myself when I get this horny~!"
+			]
+		]
+	},
+	"flirtyUnpromptedCockVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Keep squirming around in there~ get yourself nice and soaked in cum~"
+			],
+			[ // 25% - 50%
+				"Hehe, and now that you're in my dick, I'd say a cutie like you belongs in there~"
+			],
+			[ // 50% - 75%
+				"Ahhh~ yessss thats so good~! Squirm around for me toy! Try and make me cum!"
+			],
+			[ // 75% - 100%
+				"Hufff~ I'm getting close! Come on toy! I wanna feel how goood it is to cum with a cutie like you in there~!"
+			]
+		]
+	},
 	"defaultSelfRequestCockVore": {
 		"percentage": "horny",
 		"pools": [
@@ -2610,7 +2689,7 @@
 	"defaultCockVoreNeedsInfusion": [
 		"I'd need someone to turn into my dick first...",
 		"Someone would need to be my cock...",
-		"I'd have to turn someone into my dick first..."
+		"I'd have to turn someone into my penis first..."
 	],
 	"shyCockVoreNeedsInfusion": [
 		"I'd need to get a dick somehow...",
@@ -2621,6 +2700,7 @@
 		"hmm~ I'll need to get my hands on a cock then~",
 		"Know anyone I can turn into a cock~?"
 	],
+	// proofread stops here
 	"defaultRequestUnbirthBefore": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my pussy?",
@@ -3600,7 +3680,7 @@
 		"I hope you're feeling better after staying in my tail, since you wiggled out",
 		"You'd think my soothing tail would relax you too much to squirm out of it."
 	],
-	"letoutNavelVoreStruggle": [
+	"letoutNavelVoreStruggle": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"Managed to wiggle out my navel huh?",
 		"Taking the shortest route out of my belly are you?",
 		"I suppose you can keep any lint you find while you squirm on out."
@@ -4239,7 +4319,7 @@
 		"I gave you a chance to let me in that butt the easy way, but it seems you like the hard way~",
 		"You think you can say no to me sugar? sorry but I'm getting in that booty~"
 	],
-	"defaultPreyRequestNavelVore": {
+	"defaultPreyRequestNavelVore": { // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"percentage": "rest",
 		"pools": [
 			[ // 0% - 25%
@@ -6031,7 +6111,7 @@
 		"I hope your tail can handle me inside it!",
 		"Such a great looking tail, I gotta get in!"
 	],
-	"voredNavelVoreWilling": [
+	"voredNavelVoreWilling": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"Let me in that navel you got!",
 		"This is going to be a quick, yet awesome trip from navel to belly!",
 		"I'm going to slip into that belly button of yours!"
@@ -6071,7 +6151,7 @@
 		"I see you moving your tail closer, don't you- ah!",
 		"You don't need to show off your tail like that, unless- wah!"
 	],
-	"voredNavelVore": [
+	"voredNavelVore": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"Why are you pushing me to your belly button- mmph!",
 		"You have a nice belly, but why get me closer to look- ah!",
 		"You don't need to show off your belly like that, wait why are you- wah!"
@@ -6153,7 +6233,7 @@
 	"escapeTailVoreStruggleHeal": [
 		"I squirmed out your tail, and boy do I feel great after that stay!"
 	],
-	"escapeNavelVoreStruggle": [
+	"escapeNavelVoreStruggle": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"Yes! I got though your navel."
 	],
 	"escapeNavelVoreStruggleDigest": [
@@ -6287,7 +6367,7 @@
 	"escapeTailVoreHeal": [
 		"Thanks for letting me out out your tail, it was quite a soothing stay!"
 	],
-	"escapeNavelVore": [
+	"escapeNavelVore": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"Thanks for pushing me out your navel!"
 	],
 	"escapeNavelVoreDigest": [
