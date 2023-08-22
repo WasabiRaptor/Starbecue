@@ -102,14 +102,29 @@ function sbq.letout(id)
 			return sbq.doTransition("oralEscape", { id = id })
 		end
 	elseif location == "tail" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("tailInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("tailEscape", { id = id })
 	elseif location == "shaft" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("cockInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("cockEscape", { id = id })
 	elseif location == "ballsL" or location == "ballsR" or location == "balls" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("cockInfuseEscape", { id = id })
+		end
 		return sbq.moveToLocation({ id = id }, { location = "shaft" })
 	elseif location == "breastsL" or location == "breastsR" or location == "breasts" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("breastInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("breastEscape", { id = id })
 	elseif location == "womb" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("pussyInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("unbirthEscape", { id = id })
 	end
 end
