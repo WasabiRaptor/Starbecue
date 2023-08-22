@@ -434,8 +434,10 @@ function sbq.updateOccupants(dt)
 				end
 			end
 
-			if sbq.timer(seatname.."PreyRewards", 30) and sbq.driving and world.entityType(sbq.driver) == "player" then
-				world.sendEntityMessage(sbq.occupant[i].id, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.occupant[i]), sbq.spawner, entity.id() )
+			if sbq.timer(seatname .. "PreyRewards", 30) and sbq.driving and world.entityType(sbq.driver) == "player" then
+				if sbq.occupant[i].id then
+					world.sendEntityMessage(sbq.occupant[i].id, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.occupant[i]), sbq.spawner, entity.id() )
+				end
 			end
 
 			lastFilled = true
