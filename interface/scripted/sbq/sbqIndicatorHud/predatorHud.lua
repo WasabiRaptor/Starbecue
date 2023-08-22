@@ -54,6 +54,7 @@ function init()
 	sbq.overrideSettings = sbq.predatorConfig.overrideSettings or {}
 
 	escapeValue:setText(tostring(sbq.globalSettings.escapeDifficulty or 0))
+	sbq.numberBoxColor(escapeValue, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax)
 
 	if sbq.predatorConfig.listLocations then
 		for i, location in ipairs(sbq.predatorConfig.listLocations or {}) do
@@ -197,8 +198,8 @@ function sbq.readOccupantData()
 				if species == nil or species == "sbqOccupantHolder" then
 					sbq.setPortrait(sbq.occupantList[id].portrait, world.entityPortrait( id, "bust" ), {8,2})
 				else
-					local skin = (occupant.smolPreyData.settings.skinNames or {}).head or "default"
-					local directives = occupant.smolPreyData.settings.directives or ""
+					local skin = ((occupant.smolPreyData.settings or {}).skinNames or {}).head or "default"
+					local directives = (occupant.smolPreyData.settings or {}).directives or ""
 					sbq.setPortrait(sbq.occupantList[id].portrait, {{image = "/vehicles/sbq/"..species.."/skins/"..skin.."/icon.png"..directives, position = {0,0} }}, {8,8})
 				end
 			end
@@ -303,22 +304,13 @@ function settings:onClick()
 end
 
 function escapeValue:onEnter()
-	local value = tonumber(escapeValue.text)
-	local isNumber = type(value) == "number"
-	if isNumber and sbq.overrideSettings.escapeDifficulty == nil and value > 0
-	and (
-		(sbq.overrideSettings.escapeDifficultyMin == nil and sbq.overrideSettings.escapeDifficultyMax == nil)
-		or (sbq.overrideSettings.escapeDifficultyMin <= value and sbq.overrideSettings.escapeDifficultyMax == nil)
-		or (sbq.overrideSettings.escapeDifficultyMin == nil and sbq.overrideSettings.escapeDifficultyMax >= value)
-		or (sbq.overrideSettings.escapeDifficultyMin <= value and sbq.overrideSettings.escapeDifficultyMax >= value)
-	)
-	then
-		sbq.globalSettings.escapeDifficulty = value
-		sbq.saveSettings()
-	else
-		escapeValue:setText(tostring(sbq.globalSettings.escapeDifficulty or 0))
-	end
+	sbq.numberBox(self, "changeGlobalSetting", "escapeDifficulty", "predatorSettings", "overrideSettings", sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax)
 end
+function escapeValue:onTextChanged()
+	sbq.numberBoxColor(self, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax)
+end
+function escapeValue:onEscape() self:onEnter() end
+function escapeValue:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
 
 function impossibleEscape:onClick()
 	sbq.globalSettings.impossibleEscape = impossibleEscape.checked
