@@ -484,6 +484,8 @@ state.crouch.vore = checkTail
 
 state.crouch.tailEscape = tailEscape
 
+state.crouch.succ = succ
+
 -------------------------------------------------------------------------------
 
 function state.fly.update()
