@@ -636,7 +636,7 @@ function sbq.passiveStatChanges(dt)
 		end
 	end
 	if (storage.isSleepy ~= false) then
-		if npc.loungingIn() ~= nil then
+		if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 			status.modifyResource("rest", status.stat("restDelta") * dt * (4 * status.resourcePercentage("health")))
 		else
 			status.modifyResource("rest", status.stat("restDelta") * dt * (2 - status.resourcePercentage("health")))

@@ -2700,81 +2700,154 @@
 		"hmm~ I'll need to get my hands on a cock then~",
 		"Know anyone I can turn into a cock~?"
 	],
-	// proofread stops here
-	"defaultRequestUnbirthBefore": [
-		"Hah, you're horny.",
-		"You want to get squeezed into my pussy?",
-		"You know thats where dicks are supposed to go right?",
-		"Thats going to be a real tight fit."
-	],
-	"shyRequestUnbirthBefore": [
-		[
-			"O-oh... y-you want to g-get into my... *Flustered Noises*",
-			"O-oh... y-you want to g-get into my... <keysmash>"
-		],
-		"Are you sure...?",
-		"Uhm... you're asking... me?",
-		"R-right... g-get in my womb then~ ...did I say that right?"
-	],
-	"flirtyRequestUnbirthBefore": [
-		"Hehe, horny little plaything~",
-		"Hehe, look at how excited you are to get shoved into my pussy~",
-		"Hey look, you got me wet by just asking~",
-		"So you want to get squeezed all around by my nice soft pussy~?"
-	],
-	"defaultRequestUnbirthAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me excited~",
-		"Ffff~ Now I'm all wet~",
-		"A-ahh~ Don't stop squirming~"
-	],
-	"shyRequestUnbirthAfter": [
-		"Ahhh~ w-wow you're really in there~",
-		"Ooohhh~ I-I didn't think you were serious~",
-		"Mmmm~ Is it as good for you as it is for me~",
-		"Ffffff~ N-now you're where you belong~ ...did I say it right?"
-	],
-	"flirtyRequestUnbirthAfter": [
-		"Aahh~ right where you belong you horny little thing~",
-		"Mmmm~ Who knows, you might even get me to climax~",
-		"Heheh~ I can feel how excited you are~",
-		"Heh~ makes me want to spend some time by myself and squeeze you even tighter~"
-	],
-	"defaultUnpromptedUnbirthBefore": [
-		"Gonna stick you somewhere things aren't supposed to go~",
-		"Mmm~ hey, want to try something?",
-		"I got a bit excited thinking about this, so now I have to do it~",
-		"I'm gonna need you to pleasure me, but not the normal way~"
-	],
-	"shyUnpromptedUnbirthBefore": [
-		"Uhm... e-excuse me... I need you... in my womb",
-		"Hey... uhm... funny thing... I want you... in my folds.",
-		"Do you... uhm... do you mind if I shove you into my lips below?",
-		"Hi... have you been... downstairs in my vag lately?"
-	],
-	"flirtyUnpromptedUnbirthBefore": [
-		"Gonna stick you somewhere things aren't supposed to go~",
-		"Pussies are meant for dicks to get shoved inside... but I like to shove in quite a bit more~",
-		"You're going to feel real good wriggling inside me~",
-		"Don't think I haven't caught you staring you perv~ So heres your \"punishment\"~"
-	],
-	"defaultUnpromptedUnbirthAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me even more excited~",
-		"Ffff~ Now I'm all wet~",
-		"A-ahh~ Don't stop squirming~"
-	],
-	"shyUnpromptedUnbirthAfter": [
-		"Ahhh~ S-sorry I couldn't control myself! you where slipping in so easily!",
-		"Ohhh~ I was just... too excited! and then you just... went in!",
-		"Mmmm~ T-this is fine right? you'll be safe in my womb... right?",
-		"A-ahhh sorry I just panicked! and it j-just felt nice sticking you in there..."
-	],
-	"flirtyUnpromptedUnbirthAfter": [ //blue here, doing this line, not a big fan of ub, but I tried my best to make good line anyway
-		"Ahhh! I can't even believe how nice you feel in there... I can tell you'll be of good use to me, toy~",
-		"Ooooh, move around to your hearts content! it's so pleasurable feeling my plaything wiggle about~",
-		"Mmmm, how lewd of me to just shove ya in there... but I don't care, you are my toy now after all~"
-	],
+	"defaultRequestUnbirthBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Oh! so you want to get nice and cozy in my womb?"
+			],
+			[ // 25% - 50%
+				"You want to get squeezed into my pussy?"
+			],
+			[ // 50% - 75%
+				"You know thats where dicks are supposed to go right?",
+				"Mmm~ I'm already a bit wet, so I think you'll just slip right up into my womb."
+			],
+			[ // 75% - 100%
+				"Hehh... just what I needed! You'll probably get nice and soaked as you squirm your way in~"
+			]
+		]
+	},
+	"shyRequestUnbirthBefore":{
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Uhm... you're asking... me...? To put you in my pussy...?"
+			],
+			[ // 25% - 50%
+				"O-oh... y-you want to g-get into my... *Flustered Noises*",
+				"O-oh... y-you want to g-get into my... <keysmash>"
+			],
+			[ // 50% - 75%
+				"R-right... g-get in my womb then~ ...did I say that right?"
+			],
+			[ // 75% - 100%
+				"Ahh... I-I'm so wet already... you might just s-slip out if you even try to squirm in..."
+			]
+		]
+	},
+	"flirtyRequestUnbirthBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hehe, look at how excited you are to get shoved into my pussy~"
+			],
+			[ // 25% - 50%
+				"Hehe, horny little plaything~ Wanting nothing more than to be my toy~"
+			],
+			[ // 50% - 75%
+				"You know thats where dicks and toys are supposed to go right? So you want to be my toy~?",
+				"Thats good cutie, because, you got me wetter by just asking~"
+			],
+			[ // 75% - 100%
+				"Just the cute toy I needed~ You'll get nice and soaked as I shove you in like the toy you are~"
+			]
+		]
+	},
+	"defaultRequestUnbirthAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"There you go! nice and cozy inside me."
+			],
+			[ // 25% - 50%
+				"Aahh~ ooooh thats really good~",
+				"Mmmm~ You're getting me excited~"
+			],
+			[ // 50% - 75%
+				"Ffff~ Now I'm all wet~",
+				"A-ahh~ Don't stop squirming~"
+			],
+			[ // 75% - 100%
+				"Ahh~ yes! don't stop! keep squirming until I climax!"
+			]
+		]
+	},
+	"shyRequestUnbirthAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ooohhh~ I-I didn't think you were serious~"
+
+			],
+			[ // 25% - 50%
+				"Ahhh~ w-wow you're really in there~"
+			],
+			[ // 50% - 75%
+				"Ffffff~ N-now you're where you belong~ ...did I say it right?"
+			],
+			[ // 75% - 100%
+				"Mmmm~ Is it as good for you as it is for me~"
+			]
+		]
+	},
+	"flirtyRequestUnbirthAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Heh~ makes me want to spend some time by myself and squeeze you even tighter~"
+			],
+			[ // 25% - 50%
+				"Heheh~ I can feel how excited you are~"
+			],
+			[ // 50% - 75%
+				"Aahh~ right where you belong you horny little thing~"
+			],
+			[ // 75% - 100%
+				"Mmmm~ Who knows, you might even get me to climax~"
+			]
+		]
+	},
+	"defaultUnpromptedUnbirthBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"My womb feels so empty... hey, you look like you'd fit in there!"
+			],
+			[ // 25% - 50%
+				"I think I need something kicking around in my womb... and you seem perfect!"
+			],
+			[ // 50% - 75%
+				"Hhh... I'm starting to feel some heat... and you're going to be my toy to help me deal with it!"
+			],
+			[ // 75% - 100%
+				"Ahh... so wet... so close, I just need a toy to help me finish! Something squirming in my pussy... something like you!"
+			]
+		]
+	},
+	"shyUnpromptedUnbirthBefore": ":defaultUnpromptedUnbirthBefore",
+	"flirtyUnpromptedUnbirthBefore": ":defaultUnpromptedUnbirthBefore",
+	"defaultUnpromptedUnbirthAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Ah you fit perfectly~ No complaints right? So get nice and cozy inside me."
+			],
+			[ // 25% - 50%
+				"Aahh~ ooooh thats really good~",
+				"Mmmm~ You're getting me excited~"
+			],
+			[ // 50% - 75%
+				"Ffff~ Now I'm all wet~",
+				"A-ahh~ Don't stop squirming~"
+			],
+			[ // 75% - 100%
+				"Ahh~ yes! don't stop! keep squirming until I climax!"
+			]
+		]
+	},
+	"shyUnpromptedUnbirthAfter": ":defaultUnpromptedUnbirthAfter",
+	"flirtyUnpromptedUnbirthAfter": ":defaultUnpromptedUnbirthAfter",
 	"defaultSelfRequestUnbirth": {
 		"percentage": "horny",
 		"pools": [
@@ -2966,106 +3039,231 @@
 		"I'd need some cutie to turn into my pussy~",
 		"I'd like to turn someone into my pussy, makes it even more sensitive~"
 	],
-	"defaultRequestBreastVoreBefore": [
-		"Hah, you're horny.",
-		"You want to squirm into one of my boobs?",
-		"Hehe, you want a bit more than just a drink of milk don't you~",
-		"Thats going to be a real tight fit.",
-		"Now to decide which side to put you on..."
-	],
-	"shyRequestBreastVoreBefore": [
-		"A-ah... a-are you sure?",
-		"I-I guess that would make them b-bigger...",
-		[
-			"T-thats... <keysmash> y-yes please",
-			"T-thats... *flustered noises* y-yes please"
-		],
-		[
-			"O-oh! a-and you want... mine? *flustered noise*",
-			"O-oh! a-and you want... mine? <keysmash>"
-		],
-		"B-but which side do I put you on..."
-	],
-	"flirtyRequestBreastVoreBefore": [
-		"I knew you wanted in from all the staring~",
-		"You just want to make them bigger, don't you~",
-		"Hehe, you want a bit more than just a drink of milk don't you~",
-		"I'll make you dissapear behind all that softness~",
-		"Now to decide which side to put you on..."
-	],
-	"defaultRequestBreastVoreAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me excited~",
-		"Ffff~ hehe now they look even bigger~",
-		"A-ahh~ Don't stop squirming~"
-	],
-	"shyRequestBreastVoreAfter": [
-		"A-aahh~ ooooh t-thats really good~",
-		"Mmmm~ You're g-getting me e-excited~",
-		[
-			"Ffff~ n-now they look even b-bigger~ *flustered noises*",
-			"Ffff~ n-now they look even b-bigger~ <keysmash>"
-		],
-		"A-ahh~ Don't stop squirming~"
-	],
-	"flirtyRequestBreastVoreAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me excited~",
-		"Ffff~ hehe now they look even bigger~",
-		"A-ahh~ Don't stop squirming~",
-		"Mmm... the best kind of \"implants\"~"
-	],
-	"defaultUnpromptedBreastVoreBefore": [
-		"Gonna stick you somewhere things aren't supposed to go~",
-		"Mmm~ hey, want to try something?",
-		"I got a bit excited thinking about this, so now I have to do it~",
-		"I'm gonna need you to pleasure me, but not the normal way~"
-	],
-	"shyUnpromptedBreastVoreBefore": [
-		"Uhm... what if I uhm...",
-		"H-hey I want to use you...",
-		"I can't help myself... you're going in my tits",
-		"Ahh... I want to feel you inside my boobs"
-	],
-	"flirtyUnpromptedBreastVoreBefore": [
-		"I think you'll look better on my chest~",
-		"Mmm~ hey, want to try something?",
-		"I got a bit excited thinking about this, so now I have to do it~",
-		"I gotta have you massaging my tits... from the inside~",
-		"Hey, I need to \"borrow\" you for a bit, got a date tonight~"
-	],
-	"defaultUnpromptedBreastVoreAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me even more excited~",
-		"Ffff~ hehe now they look even bigger~",
-		"A-ahh~ Don't stop squirming~"
-	],
-	"shyUnpromptedBreastVoreAfter": [ //blue here, doing this line, also not a fan of um... BV?, but I must carry on for those who do!
-		"ah!... y-you feel, n-nice in there... s-sorry I just... s-shoved you into... my boob",
-		"I-I... s-sorry, but I just... r-really wanted you... in my c-cleavage, b-but you don't mind... r-right?",
-		"Oh m-my... it's nice f-feeling you, in my uh... r-rack... I know it w-was sudden... but at least you uh... got m-milk?"
-	],
-	"flirtyUnpromptedBreastVoreAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me even more excited~",
-		"Ffff~ hehe now they look even bigger~",
-		"A-ahh~ Don't stop squirming~",
-		"Mmm... the best kind of \"implants\"~"
-	],
+
+	"defaultRequestBreastVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"You want to squirm into one of my boobs? Now to decide which side to put you on..."
+			],
+			[ // 25% - 50%
+				"Hehe, you want a bit more than just a drink of milk don't you~"
+			],
+			[ // 50% - 75%
+				"You just want to make my boobs bigger don't you... I do too heh."
+			],
+			[ // 75% - 100%
+				"Hehe, you know, theres quite a bit of milk sloshing around in there... might end up leaking..."
+			]
+		]
+	},
+	"shyRequestBreastVoreBefore":{
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"A-ah... a-are you sure you want... me? B-but which side do I put you on..."
+			],
+			[ // 25% - 50%
+				"I-I guess that would make them b-bigger..."
+			],
+			[ // 50% - 75%
+				"T-thats... <keysmash> y-yes please",
+				"T-thats... *flustered noises* y-yes please",
+				"O-oh! a-and you want... mine? *flustered noise*",
+				"O-oh! a-and you want... mine? <keysmash>"
+			],
+			[ // 75% - 100%
+				"U-uhm... t-that might make all the milk start... l-leaking..."
+			]
+		]
+	},
+	"flirtyRequestBreastVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I knew you wanted in from all the staring~ Now to decide which side to put you on..."
+			],
+			[ // 25% - 50%
+				"Hehe, you want a bit more than just a drink of milk don't you~"
+			],
+			[ // 50% - 75%
+				"You just want to make them bigger, don't you~ I do too~",
+				"I'll make you dissapear behind all that softness~"
+			],
+			[ // 75% - 100%
+				"Hehe, you know, theres quite a bit of milk sloshing around in there~ Might end up leaking with a cutie like you in there~"
+			]
+		]
+	},
+	"defaultRequestBreastVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Aahh~ ooooh thats really good~"
+			],
+			[ // 25% - 50%
+				"Mmmm~ You're getting me excited~"
+			],
+			[ // 50% - 75%
+				"Ffff~ hehe now they look even bigger~"
+			],
+			[ // 75% - 100%
+				"A-ahh~ Don't stop squirming~"
+			]
+		]
+	},
+	"shyRequestBreastVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"A-aahh~ ooooh t-thats really good~"
+			],
+			[ // 25% - 50%
+				"Mmmm~ You're g-getting me e-excited~"
+			],
+			[ // 50% - 75%
+				"Ffff~ n-now they look even b-bigger~ *flustered noises*",
+				"Ffff~ n-now they look even b-bigger~ <keysmash>"
+			],
+			[ // 75% - 100%
+			"A-ahh~ Don't stop squirming~"
+			]
+		]
+	},
+	"flirtyRequestBreastVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Aahh~ ooooh thats really good~"
+			],
+			[ // 25% - 50%
+				"Mmmm~ You're getting me excited~"
+			],
+			[ // 50% - 75%
+				"Ffff~ hehe now they look even bigger~",
+				"Mmm... the best kind of \"implants\"~"
+			],
+			[ // 75% - 100%
+				"A-ahh~ Don't stop squirming~"
+			]
+		]
+	},
+	"defaultUnpromptedBreastVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Wish I had a bigger cup size... hey you!"
+			],
+			[ // 25% - 50%
+				"Hm, my boobs feel like they need a little something extra, like you!"
+			],
+			[ // 50% - 75%
+				"Hmmm... you seem like you're perfect for stuffing in my boobs!"
+			],
+			[ // 75% - 100%
+				"Ahh... I've got all this milk sloshing around in my tits but I want something more more!"
+			]
+		]
+	},
+	"shyUnpromptedBreastVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Wish they were bigger... hey what if I uhm..."
+			],
+			[ // 25% - 50%
+				"H-hey I need some help... I think you could make my boobs just a little bigger..."
+			],
+			[ // 50% - 75%
+				"Want... bigger... I c-can't help myself! you're going in my tits!"
+			],
+			[ // 75% - 100%
+				"Huhfff... S-so much milk in my tits... b-but I still want something more in there!"
+			]
+		]
+	},
+	"flirtyUnpromptedBreastVoreBefore": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I think you'll look better padding out my chest~"
+			],
+			[ // 25% - 50%
+				"You're such a cutie, I gotta have you massaging my tits... from the inside~"
+			],
+			[ // 50% - 75%
+				"Hey, I need to \"borrow\" you for a bit, got a date tonight, and they love looking at my tits~"
+			],
+			[ // 75% - 100%
+				"A cutie like you should be worshipping my tits from inside and out, get to work~"
+			]
+		]
+	},
+	"defaultUnpromptedBreastVoreAfter":{
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Just the addition I needed I think~"
+			],
+			[ // 25% - 50%
+				"Ffff~ hehe now they look even bigger~"
+			],
+			[ // 50% - 75%
+				"Hehe, it feels so great having you in there, more weight on my rack~"
+			],
+			[ // 75% - 100%
+				"Ahh~ If you keep squirming like that they're gonna start leaking!"
+			]
+		]
+	},
+	"shyUnpromptedBreastVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"Hehe... bigger."
+			],
+			[ // 25% - 50%
+				"N-now I have more to squish hehe..."
+			],
+			[ // 50% - 75%
+				"Ahh~ I can't stop l-looking at my cleavage now hehe..."
+			],
+			[ // 75% - 100%
+				"Ahhh... O-oh my they're gonna start l-leaking aren't they!"
+			]
+		]
+	},
+	"flirtyUnpromptedBreastVoreAfter": {
+		"percentage": "horny",
+		"pools": [
+			[ // 0% - 25%
+				"I have to say you make my boobs look even more amazing~"
+			],
+			[ // 25% - 50%
+				"More boob for me to squish with a cutie like you stuffed in there~"
+			],
+			[ // 50% - 75%
+				"Mmm~ I quite like the extra heft with you in there cutie~"
+			],
+			[ // 75% - 100%
+				"Mmm... the best kind of \"implants\"~"
+			]
+		]
+	},
 	"defaultSelfRequestBreastVore": {
 		"percentage": "horny",
 		"pools": [
 			[ // 0% - 25%
-				"I just need you in my breast! come on and help me out?"
+				"I've been looking for someone to increase my cup size, wanna help me out~?"
 			],
 			[ // 25% - 50%
-				"I got some jugs that need filling, want to help me out here?"
+				"I wish my boobs were a little bigger, want to help out with that~?"
 			],
 			[ // 50% - 75%
-				"Wanna take a trip into my rack?"
+				"I need a little something stuffed in my tits, want that something to be you~?"
 			],
 			[ // 75% - 100%
-				"My boobs could use some company, mind going in them a while?"
+				"Look at you! Oh I just need to have you squirming in my tits and soaking in my milk!"
 			]
 		]
 	},
@@ -3075,16 +3273,16 @@
 		"percentage": "horny",
 		"pools": [
 			[ // 0% - 25%
-				"Awesome, I can't tell you how much I need this, now comes the boobs."
+				"Thank you! You're gonna be excellent padding, now to stuff you inside..."
 			],
 			[ // 25% - 50%
-				"Thanks for agreeing, let's make you comfortable inside them now."
+				"Excellent! You should bump me up a size or two~"
 			],
 			[ // 50% - 75%
-				"You'll love this, now just shove you're face in my boob here."
+				"Hehe~ Oh oh you're going to be perfect, you better give em a nice massage~"
 			],
 			[ // 75% - 100%
-				"wonderful, now get in my nipple!"
+				"Yee! I just wanna squish and feel you so much in there! I'm so excited I might leak!"
 			]
 		]
 	},
@@ -3191,7 +3389,7 @@
 		"I already got too many cuties packed away in my tits~"
 	],
 	"digestBreastVoreFull": [
-		"They're already occupied, but once I finish melting them into milk..."
+		"They're already occupied, but once I finish churning them into milk..."
 	],
 	"shyDigestBreastVoreFull": [
 		"Uhm... m-maybe... I-I just... need to go get milked..."
@@ -3211,10 +3409,12 @@
 	"shyBreastVoreFull": [
 		"My boobs are already occupied... s-sorry",
 		"M-maybe after I'm done carrying these ones around...",
-		"O-oh... I would definetly do it if they weren't full.."
+		"O-oh... I would definetly do it if they weren't full..",
+		"T-too much weight on my chest..."
 	],
 	"flirtyBreastVoreFull": [
-		"Sorry sweetie! my boobs are already fule of cuties~"
+		"Sorry sweetie! my boobs are already full of cuties~",
+		"I'd need to get a little weight off my chest first~"
 	],
 	"defaultBreastVoreNeedsInfusion": [
 		"I'd need someone to turn into my boobs first...",
