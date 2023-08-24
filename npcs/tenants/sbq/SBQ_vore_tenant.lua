@@ -575,6 +575,9 @@ function interact(args)
 
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, settings)
 			dialogueBoxData.dialogueTreeStart = ".struggling"
+			if args.infused then
+				dialogueBoxData.dialogueTreeStart = ".infused"
+			end
 			return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
 		else
 			return

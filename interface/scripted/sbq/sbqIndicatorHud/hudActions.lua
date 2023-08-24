@@ -11,6 +11,7 @@ function sbq.npcInteract(id, i)
 	local predData = {
 		settings = sbq.sbqCurrentData.settings,
 		location = sbq.occupant[i].location,
+		infused = sbq.occupant[i].flags.infused,
 		predator = predator
 	}
 	sbq.addRPC(world.sendEntityMessage(id, "sbqInteract", player.id(), predData), function (data)
