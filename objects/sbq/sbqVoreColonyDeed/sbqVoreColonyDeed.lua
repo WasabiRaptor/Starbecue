@@ -13,7 +13,7 @@ function init()
 	sbq.config = root.assetJson("/sbqGeneral.config")
 
 	if not storage.occupier then
-		storage = config.getParameter("saveTenants") or {}
+		storage = config.getParameter("scriptStorage") or {}
 		sbq.timer("doRespawn", 0.5, function ()
 			respawnTenants()
 		end)
@@ -221,12 +221,6 @@ function onInteraction(args)
 	if not storage.house then return animator.playSound("error") end
 
 	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:voreColonyDeed" }}
-end
-
-function die() -- replace the old function so the tenant isn't evicted upon breaking it
-	object.setConfigParameter("saveTenants", storage)
-	self.questParticipant:die()
-	evictTenants()
 end
 
 function checkHouseIntegrity()
