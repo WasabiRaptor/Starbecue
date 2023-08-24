@@ -32,6 +32,7 @@ player.gender = speciesOverride._gender
 
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/SBQ_species_config.lua")
+require("/interface/scripted/sbq/sbqNumberBox.lua")
 
 function init()
 	sbq.sbqSettings = player.getProperty("sbqSettings") or {}

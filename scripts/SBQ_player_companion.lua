@@ -76,6 +76,9 @@ function init()
 		end
 		recruitSpawner:markDirty()
 	end)
+
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
+
 	message.setHandler("sbqCrewSaveSettings", function(_, _, settings, uniqueId)
 		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
 		for _, companionType in ipairs(companionTypes) do
