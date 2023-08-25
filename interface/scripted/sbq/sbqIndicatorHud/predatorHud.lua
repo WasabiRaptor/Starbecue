@@ -183,7 +183,7 @@ function sbq.readOccupantData()
 						local actionList = {
 							{ "Let Out", function() sbq.letout(id, i) end }
 						}
-						if world.entityType(id) == "npc" and not occupant.flags.infused then
+						if world.entityType(id) == "npc" then
 							table.insert(actionList, {"Interact", function() sbq.npcInteract(id, i) end})
 						end
 						local locationData = sbq.predatorConfig.locations[occupant.location] or {}
