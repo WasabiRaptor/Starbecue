@@ -21,7 +21,7 @@
 	Cosmic
 	LokiVulpix
 
-# Writers
+# Writers / Editors
 	LokiVulpix
 	radiantAurora
 	Blueninja
@@ -30,6 +30,7 @@
 	ArgobargSoup
 	Akari Kaen
 	Xodious
+	Zovoroth
 
 # Playtesters / Bug Hunters
 	xeronious

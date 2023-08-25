@@ -27,6 +27,7 @@
 
 # FFWizard
 	Helena NPC dialogue
+	General NPC dialogue proofreading and editing
 
 # HornySe7en
 	Latex race tail vore animations
@@ -40,3 +41,6 @@
 
 # Xodious
 	General NPC dialogue contributions for infusion lines
+
+# Zovoroth
+	General NPC dialogue proofreading and editing
