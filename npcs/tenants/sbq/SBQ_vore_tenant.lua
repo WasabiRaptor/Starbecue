@@ -651,14 +651,11 @@ function sbq.logInfo(input)
 end
 
 function sbq.doTargetAction()
-	if npc.loungingIn() ~= nil then
-		if status.statusProperty("sbqType") == "driver" then
-		else
+	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
 			sbq.targetedEntities = {}
 			return
-		end
 	end
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then
@@ -949,7 +946,7 @@ function sbq.getSidedLocationWithSpace(location, size)
 end
 
 function sbq.getTarget()
-	if npc.loungingIn() ~= nil then
+	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
 		return
