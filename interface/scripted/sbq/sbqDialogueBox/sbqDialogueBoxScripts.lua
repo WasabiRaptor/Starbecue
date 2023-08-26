@@ -243,7 +243,7 @@ function dialogueBoxScripts.digestImmunity(dialogueTree, dialogueTreeTop, settin
 	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
 		effectSlot = "digest"
 	end
-	return not (settings.digestAllow and (effectSlot == "digest")) or (settings.softDigestAllow and (effectSlot == "softDigest"))
+	return not ((settings.digestAllow and (effectSlot == "digest")) or (settings.softDigestAllow and (effectSlot == "softDigest")))
 end
 
 function dialogueBoxScripts.cumDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
@@ -251,7 +251,7 @@ function dialogueBoxScripts.cumDigestImmunity(dialogueTree, dialogueTreeTop, set
 	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
 		effectSlot = "digest"
 	end
-	return not (settings.cumDigestAllow and (effectSlot == "digest")) or (settings.cumSoftDigestAllow and (effectSlot == "softDigest"))
+	return not ((settings.cumDigestAllow and (effectSlot == "digest")) or (settings.cumSoftDigestAllow and (effectSlot == "softDigest")))
 end
 
 function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
@@ -259,7 +259,7 @@ function dialogueBoxScripts.femcumDigestImmunity(dialogueTree, dialogueTreeTop, 
 	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
 		effectSlot = "digest"
 	end
-	return not (settings.femcumDigestAllow and (effectSlot == "digest")) or (settings.femcumSoftDigestAllow and (effectSlot == "softDigest"))
+	return not ((settings.femcumDigestAllow and (effectSlot == "digest")) or (settings.femcumSoftDigestAllow and (effectSlot == "softDigest")))
 end
 
 function dialogueBoxScripts.milkDigestImmunity(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
@@ -267,7 +267,7 @@ function dialogueBoxScripts.milkDigestImmunity(dialogueTree, dialogueTreeTop, se
 	if effectSlot == "softDigest" and settings.hostile and settings.overrideSoftDigestForHostiles then
 		effectSlot = "digest"
 	end
-	return not (settings.milkDigestAllow and (effectSlot == "digest")) or (settings.milkSoftDigestAllow and (effectSlot == "softDigest"))
+	return not ((settings.milkDigestAllow and (effectSlot == "digest")) or (settings.milkSoftDigestAllow and (effectSlot == "softDigest")))
 end
 
 function dialogueBoxScripts.infuseLayered(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)

@@ -47,7 +47,7 @@ function sbq.struggleMessages(id)
 			return
 		end
 
-		if math.random() >= 0.5 then
+		if math.random() >= 0.5 and sbq.species ~= "sbqEgg" then
 			if sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
 				world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, ".struggle", true )
 			end

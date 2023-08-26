@@ -3706,10 +3706,18 @@
 		"Did you have some kind of device to keep you from morphing?",
 		"Seems your body is rather hard to modify, tsk..."
 	],
-	"letoutShyStruggleTransforming": [
-		"O-oh y-you didn't want to change?",
-		"Do... do you not want to be like me?"
-	],
+	"letoutShyStruggleTransforming": {
+		"percentage": "transforming",
+		"pools": [
+			[
+				"O-oh y-you didn't want to change?",
+				"Do... do you not want to be like me?"
+					]
+		],
+		"full": [
+			":letoutShyStruggleTransformed"
+		]
+	},
 	"letoutFlirtyStruggleTransforming": {
 		"percentage": "transforming",
 		"pools": [
