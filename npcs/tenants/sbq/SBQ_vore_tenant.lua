@@ -373,8 +373,7 @@ function init()
 
 	message.setHandler("sbqIsPredEnabled", function(_,_, voreType)
 		local settings = storage.settings or {}
-		local type = status.statusProperty("sbqType")
-		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = type}
+		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = status.statusProperty("sbqType")}
 	end)
 	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
 		local settings = storage.settings
@@ -1439,6 +1438,9 @@ function sbq.maybeAddPreyToTargetList(eid, voreType, ext, score)
 	elseif not aggressive and storage.settings[voreType .. "HuntFriendly"..ext] then
 		validTarget = true
 	end
+	if sbq.checkOccupant(eid) then
+		validTarget = false
+	end
 	if validTarget then
 		sbq.addRPC(world.sendEntityMessage(eid, "sbqIsPreyEnabled", voreType), function (enabled)
 			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
@@ -1496,6 +1498,9 @@ function sbq.maybeAddPredToTargetList(eid, voreType, ext, score, consent)
 		validTarget = true
 	elseif not aggressive and storage.settings[voreType .. "BaitFriendly"..ext] then
 		validTarget = true
+	end
+	if sbq.checkOccupant(eid) then
+		validTarget = false
 	end
 	if validTarget then
 		sbq.addRPC(world.sendEntityMessage(eid, "sbqIsPredEnabled", voreType), function(enabled)
