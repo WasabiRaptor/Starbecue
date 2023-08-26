@@ -105,7 +105,7 @@ end
 -- for letting out prey, some predators might wand more specific logic regarding this
 function sbq.letout(id)
 	local id = id or sbq.getRecentPrey()
-	if not id then return false end
+	if (not id) or (not sbq.lounging[id]) then return false end
 
 	return sbq.doTransition( "escape", {id = id} )
 end

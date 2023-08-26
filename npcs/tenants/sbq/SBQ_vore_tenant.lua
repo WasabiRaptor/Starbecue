@@ -652,10 +652,10 @@ end
 
 function sbq.doTargetAction()
 	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
-			storage.huntingTarget = nil
-			self.board:setEntity("sbqHuntingTarget", nil)
-			sbq.targetedEntities = {}
-			return
+		storage.huntingTarget = nil
+		self.board:setEntity("sbqHuntingTarget", nil)
+		sbq.targetedEntities = {}
+		return
 	end
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
 	if storage.huntingTarget then

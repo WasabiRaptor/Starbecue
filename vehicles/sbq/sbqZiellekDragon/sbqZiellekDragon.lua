@@ -27,7 +27,7 @@ end
 
 function sbq.letout(id)
 	local id = id or sbq.getRecentPrey()
-	if not id then return false end
+	if (not id) or (not sbq.lounging[id]) then return false end
 
 	local location = sbq.lounging[id].location
 

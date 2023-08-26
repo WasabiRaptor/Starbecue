@@ -603,6 +603,7 @@
 				},
 				"tailVore": {
 					"voreType" : "tailVore",
+					"settings" : { "tailVorePred" : true },
 					"location" : "tail",
 					"lock" : true,
 					"failOnFull" : true,
@@ -618,6 +619,7 @@
 					"voreType" : "tailVore",
 					"lock" : true,
 					"victimAnimation": "tailEscape",
+					"settings" : { "tailVorePred" : true },
 					"timing": "tail",
 					"script": "tailEscape",
 					"animation": {
@@ -770,6 +772,7 @@
 				},
 				"tailVore": {
 					"voreType" : "tailVore",
+					"settings" : { "tailVorePred" : true },
 					"location" : "tail",
 					"lock" : true,
 					"failOnFull" : true,
@@ -784,6 +787,7 @@
 				},
 				"tailEscape": {
 					"voreType" : "tailVore",
+					"settings" : { "tailVorePred" : true },
 					"lock" : true,
 					"victimAnimation": "tailEscape",
 					"script" : "tailEscape",
