@@ -395,10 +395,12 @@
 					}
 				},
 				"bellyToTail" : {
+					"settings" : { "tailVorePred" : true },
 					"script": "bellyToTail"
 
 				},
 				"tailToBelly" : {
+					"settings" : { "oralVorePred" : true },
 					"script": "tailToBelly"
 				}
 			},
@@ -640,9 +642,11 @@
 					}
 				},
 				"bellyToTail" : {
+					"settings" : { "tailVorePred" : true },
 					"script": "bellyToTail"
 				},
 				"tailToBelly" : {
+					"settings" : { "oralVorePred" : true },
 					"script": "tailToBelly"
 				}
 			},
@@ -748,6 +752,7 @@
 		"fly": {
 			"transitions": {
 				"succEat": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"location" : "belly",
 					"lock" : true,
@@ -761,6 +766,7 @@
 					"script": "eat"
 				},
 				"oralEscape": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"victimAnimation": "escape",
 					"script" : "oralEscape",
@@ -811,6 +817,7 @@
 					}
 				},
 				"analVore": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"location" : "belly",
 					"failOnFull" : true,
@@ -825,6 +832,7 @@
 					"script": "analVore"
 				},
 				"analEscape": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock":true,
 					"victimAnimation": "analEscape",
@@ -836,12 +844,14 @@
 					}
 				},
 				"bellyToTail" : {
+					"settings" : { "tailVorePred" : true },
 					"script": "bellyToTail",
 					"animation": {
 						"arms": "fly"
 					}
 				},
 				"tailToBelly" : {
+					"settings" : { "oralVorePred" : true },
 					"script": "tailToBelly",
 					"animation": {
 						"arms": "fly"
@@ -986,6 +996,7 @@
 					"chance": 5
 				},
 				"oralVore": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"location" : "belly",
 					"lock" : true,
@@ -998,6 +1009,7 @@
 					"script": "eat"
 				},
 				"oralEscape": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"victimAnimation": "escape",
 					"lock":true,
@@ -1008,6 +1020,7 @@
 					}
 				},
 				"tailVore": {
+					"settings" : { "tailVorePred" : true },
 					"voreType" : "tailVore",
 					"location" : "tail",
 					"lock" : true,
@@ -1021,6 +1034,7 @@
 					"timing": "tail"
 				},
 				"tailEscape": {
+					"settings" : { "tailVorePred" : true },
 					"voreType" : "tailVore",
 					"lock" : true,
 					"victimAnimation": "tailEscape",
@@ -1032,6 +1046,7 @@
 					}
 				},
 				"analVore": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"location" : "belly",
 					"failOnFull" : true,
@@ -1056,9 +1071,11 @@
 					}
 				},
 				"bellyToTail" : {
+					"settings" : { "tailVorePred" : true },
 					"script": "bellyToTail"
 				},
 				"tailToBelly" : {
+					"settings" : { "oralVorePred" : true },
 					"script": "tailToBelly"
 				},
 				"hug": {
@@ -1254,6 +1271,7 @@
 					"state": "stand"
 				},
 				"oralVore": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"location" : "belly",
 					"lock" : true,
@@ -1266,6 +1284,7 @@
 					"script": "eat"
 				},
 				"oralEscape": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"victimAnimation": "escape",
 					"lock":true,
@@ -1276,6 +1295,7 @@
 					}
 				},
 				"tailVore": {
+					"settings" : { "tailVorePred" : true },
 					"voreType" : "tailVore",
 					"location" : "tail",
 					"lock" : true,
@@ -1289,6 +1309,7 @@
 					"timing": "tail"
 				},
 				"tailEscape": {
+					"settings" : { "tailVorePred" : true },
 					"voreType" : "tailVore",
 					"lock" : true,
 					"victimAnimation": "tailEscape",
@@ -1300,6 +1321,7 @@
 					}
 				},
 				"analVore": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"location" : "belly",
 					"failOnFull" : true,
@@ -1324,9 +1346,11 @@
 					}
 				},
 				"bellyToTail" : {
+					"settings" : { "tailVorePred" : true },
 					"script": "bellyToTail"
 				},
 				"tailToBelly" : {
+					"settings" : { "oralVorePred" : true },
 					"script": "tailToBelly"
 				}
 			},
