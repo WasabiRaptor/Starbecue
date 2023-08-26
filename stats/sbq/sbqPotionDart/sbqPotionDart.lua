@@ -9,7 +9,7 @@ function update(dt)
 	sbq.checkRPCsFinished(dt)
 	if not inited then
 		source = status.statusProperty("sbqProjectileSource")
-		if type(source) == "number" and world.entityExists(source) then
+		if (type(source) == "number") and world.entityExists(source) and (status.statusProperty("sbqType") ~= "prey") then
 			status.setStatusProperty("sbqProjectileSource", nil)
 			inited = true
 			sbq.addRPC(world.sendEntityMessage(source, "sbqPotionDartGunData"), function (gotData)
@@ -22,6 +22,8 @@ function update(dt)
 			end, function ()
 				effect.expire()
 			end)
+		elseif status.statusProperty("sbqType") == "prey" then
+			effect.expire()
 		end
 	end
 end
