@@ -706,13 +706,14 @@ function sbq.askToVore()
 			voreResponse = "selfRequest"
 		})
 		sbq.getRandomDialogue(".vore", storage.huntingTarget.id, settings)
+		local options = sb.jsonMerge(dialogue.result.options or {}, {})
 		sbq.addNamedRPC("sbqNPCGetConsent",
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqNPCGetConsent", entity.id(), storage.huntingTarget),
 			function(result)
 				if result == 1 then
 					settings.willing = true
 				end
-				sbq.getRandomDialogue(dialogue.result.options[result][2], storage.huntingTarget.id, settings)
+				sbq.getRandomDialogue((((options or {})[result] or {})[2] or {}), storage.huntingTarget.id, settings)
 				if result == 2 then -- "No."
 					sbq.getNextTarget()
 				end
