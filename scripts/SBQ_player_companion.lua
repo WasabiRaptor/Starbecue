@@ -244,7 +244,7 @@ function init()
 		}
 	end)
 	message.setHandler("sbqSetType", function(_, _, current)
-		player.setProperty( "sbqType", current)
+		player.setProperty("sbqType", current)
 		status.setStatusProperty("sbqType", current)
 	end)
 	message.setHandler("sbqSetCurrentData", function (_,_, current)
