@@ -326,6 +326,8 @@ function sbq.changeGlobalSetting(settingname, settingvalue)
 	sbq.saveSettings()
 end
 
+require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+
 ----------------------------------------------------------------------------------------------------------------
 
 function sbq.locationEffectButton(button, location, locationData)

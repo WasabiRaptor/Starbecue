@@ -13,7 +13,6 @@ function sbqSetHostileTarget(args, board)
 end
 
 function swapItemSlots(args, board)
-	sb.logInfo("mine")
 	npc.setItemSlot("primary", self.sheathedPrimary)
 	local primary = self.primary
 	self.primary = self.sheathedPrimary
