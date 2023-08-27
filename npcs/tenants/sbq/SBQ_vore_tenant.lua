@@ -558,6 +558,7 @@ function interact(args)
 	if recruitable.isRecruitable() then
 		return recruitable.generateRecruitInteractAction()
 	end
+	setInteracted(args)
 
 	local dialogueBoxData = sbq.getDialogueBoxData()
 
