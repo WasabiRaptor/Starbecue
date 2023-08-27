@@ -149,7 +149,7 @@ function sbq.getSeatDirections(seatname)
 		sbq.monsterstrugglecooldown[occupantId] = math.max(0, (sbq.monsterstrugglecooldown[occupantId] or 0) - sbq.dt)
 		if (sbq.monsterstrugglecooldown[occupantId] or 0) > 0 then return end
 		local EffectSlot = sbq.getLocationSetting(occupantData.location, "EffectSlot")
-		if (math.random() < 0.5) and not (EffectSlot == "softDigest" or EffectSlot == "digest" or occupantData.visited.totalTime > 600)  then sbq.monsterstrugglecooldown[occupantId] = math.random(0,2) + math.random() end -- there still should be a chance for them to "rest" but not when being digested because it'd be urgent to escape
+		if (math.random() < 0.5) and not (EffectSlot == "softDigest" or EffectSlot == "digest" or occupantData.visited.totalTime > 600 or sbq.species == "sbqEgg")  then sbq.monsterstrugglecooldown[occupantId] = math.random(0,2) + math.random() end -- there still should be a chance for them to "rest" but not when being digested because it'd be urgent to escape
 		if occupantData.controls.favorDirection and (math.random() > 0.5) then
 			return occupantData.controls.favorDirection
 		else

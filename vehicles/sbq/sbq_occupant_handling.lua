@@ -740,25 +740,17 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		progressbarDx = (sbq.occupant[i].progressBarLocations[location] and (powerMultiplier * sbq.occupant[i].progressBarMultiplier)) or (-(powerMultiplier * sbq.occupant[i].progressBarMultiplier))
 		sbq.occupant[i].progressBar = sbq.occupant[i].progressBar + dt * progressbarDx
 		sbq.occupant[i].flags[sbq.occupant[i].progressBarType] = sbq.occupant[i].progressBar / 100
-		if sbq.occupant[i].progressBarMultiplier > 0 then
-			sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
-			if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
-				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-				sbq.occupant[i].progressBarActive = false
-			end
-		else
-			sbq.occupant[i].progressBar = math.max(0, sbq.occupant[i].progressBar)
-			if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
-				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-				sbq.occupant[i].progressBarActive = false
-			end
+		sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
+		if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
+			sbq[sbq.occupant[i].progressBarFinishFuncName](i)
+			sbq.occupant[i].progressBarActive = false
 		end
 	else
 		for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 			local data = sbq.sbqData.locations[location][passiveEffect]
 			if data and data.effect and sbq.getLocationSetting(location, passiveEffect) then
 				table.insert(effects, data.effect)
-			elseif sbq.getLocationSetting(location, passiveEffect) and data and (not ((sbq.occupant[i].flags[data.occupantFlag or "transforming"] ~= nil) or sbq.occupant[i][passiveEffect.."Immune"])) then
+			elseif sbq.getLocationSetting(location, passiveEffect) and data and (sbq.occupant[i].flags[data.occupantFlag] == nil) and (not sbq.occupant[i].progressBarActive) and (not sbq.occupant[i][passiveEffect.."Immune"]) then
 				sbq.loopedMessage(passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 					if enabled then
 						sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
