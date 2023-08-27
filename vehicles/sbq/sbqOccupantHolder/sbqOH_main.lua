@@ -4,7 +4,11 @@ state = {
 
 sbq = {
 	occupants = {
-		maximum = 8
+		maximum = 8,
+		total = 0,
+	},
+	occupantCount = {
+		total = 0
 	},
 	occupantsVisualSize = {},
 	occupantsPrevVisualSize = {},

@@ -266,8 +266,7 @@ end
 function sbq.transformPrey(i)
 	local smolPreyData = sbq.occupant[i].progressBarData or {}
 	if smolPreyData.layer == true then
-		smolPreyData.layer = sbq.occupant[i].smolPreyData
-		sbq.occupant[i].smolPreyData = {}
+		smolPreyData.layer = sb.jsonMerge(sbq.occupant[i].smolPreyData, {})
 	end
 	if type(smolPreyData.species) == "string" then
 		local entityType = world.entityType(sbq.occupant[i].id)

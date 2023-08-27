@@ -185,7 +185,7 @@
 			"belly"
 		],
 		"locations" :{
-			"belly" : { "name" : "Slime", "max": 1, "selectEffect" : true, "transformGroups" : ["preybob"],
+			"belly" : { "name" : "Slime", "max": 1, "useOccupantCount": true, "selectEffect" : true, "transformGroups" : ["preybob"],
 				"TF" : { "data" : { "species": "sbqSlime", "randomColors" : true, "settings" : { "firstLoadDone" : true } }}
 			}
 		},

@@ -6,6 +6,9 @@ sbq = {
 		maximum = 0,
 		total = 0
 	},
+	occupantCount = {
+		total = 0
+	},
 	occupantsVisualSize = {},
 	occupantsPrevVisualSize = {},
 	occupant = {},

@@ -355,6 +355,7 @@ function sbq.resetOccupantCount()
 	sbq.occupants.totalSize = 0
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupants[location] = 0
+		sbq.occupantCount[location] = 0
 	end
 	sbq.occupants.mass = 0
 end
@@ -424,6 +425,8 @@ function sbq.updateOccupants(dt)
 				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
 				sbq.occupants[sidedLocation] = (sbq.occupants[sidedLocation] or 0) + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
+				sbq.occupantCount.total = sbq.occupantCount.total + 1
+				sbq.occupantCount[sidedLocation] = sbq.occupantCount[sidedLocation] + 1
 
 				massMultiplier = sbq.sbqData.locations[location].mass or 0
 
@@ -486,6 +489,9 @@ function sbq.setOccupantTags()
 	end
 	-- because of the fact that pairs feeds things in a random ass order we need to make sure these have tripped on every location *before* setting the occupancy tags or checking the expand/shrink queue
 	for location, data in pairs(sbq.sbqData.locations) do
+		if data.useOccupantCount then
+			sbq.occupants[location] = sbq.occupantCount[location]
+		end
 		if data.combine then
 			for _, combine in ipairs(data.combine) do
 				sbq.occupants[location] = sbq.occupants[location] + sbq.occupants[combine]
