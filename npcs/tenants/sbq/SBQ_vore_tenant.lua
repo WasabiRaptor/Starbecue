@@ -892,6 +892,7 @@ function sbq.eatUnprompted()
 end
 
 function sbq.forcePrey()
+	if not storage.huntingTarget then return end
 	sbq.getRandomDialogue(".forcingPrey", storage.huntingTarget.id, storage.settings)
 	sbq.timer("forcedPreyDialogue", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(storage.huntingTarget.id, "requestTransition", storage.huntingTarget.voreType,
@@ -900,6 +901,8 @@ function sbq.forcePrey()
 		local voreType = storage.huntingTarget.voreType
 		sbq.timer("forcedPreyCheckInside", 1, function ()
 			if status.statusProperty("sbqType") == "prey" then
+				storage.huntingTarget = nil
+				sbq.targetedEntities = {}
 				world.sendEntityMessage(id, "sbqSayRandomLine", entity.id(), {voreType = voreType}, ".unwillingPred")
 			else
 				sbq.getNextTarget()
