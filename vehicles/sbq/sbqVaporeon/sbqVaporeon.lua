@@ -63,7 +63,7 @@ function sbq.changeSize()
 		sbq.uneat(sbq.findFirstOccupantIdForLocation("hug"))
 
 		local changeSize = "smol"
-		if sbq.occupants.belly >= 2 then
+		if sbq.occupantsVisualSize.belly >= 2 then
 			changeSize = "chonk_ball"
 		end
 		if sbq.state == changeSize then
@@ -247,7 +247,7 @@ end
 function state.chonk_ball.update(dt)
 	roll_chonk_ball(dt)
 	sbq.movement.aimingLock = 0.1
-	if sbq.occupants.belly < 2 and not sbq.transitionLock then
+	if sbq.occupantsVisualSize.belly < 2 and not sbq.transitionLock then
 		sbq.warpInEffect();
 
 		sbq.setState( "smol" )
