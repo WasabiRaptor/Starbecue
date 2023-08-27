@@ -367,6 +367,7 @@
 					},
 					"selfRequest" : {
 						"replace" : {
+							"dismissTime" : 30,
 							"randomDialogue" : [":defaultSelfRequestCockVore"],
 							"buttonText" : ["[Y/N]"],
 							"options" : [
@@ -759,6 +760,7 @@
 			"preyRequest" : {
 				"next" : "voreType",
 				"new" : {
+					"dismissTime" : 30,
 					"hideVoreButtons" : true
 				},
 				"oralVore" : {
