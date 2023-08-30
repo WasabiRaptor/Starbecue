@@ -238,7 +238,8 @@ function init()
 		sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false, recipient, holder)
 	end)
 
-	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+    message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+		if status.statusProperty("sbqType") == "prey" then return end
 		local size = sbq.calcSize()
 		if size <= (steppySize*0.4) then
 			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)

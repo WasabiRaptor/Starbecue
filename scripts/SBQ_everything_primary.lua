@@ -201,7 +201,8 @@ function sbq.everything_primary()
 		world.sendEntityMessage(pred, "sbqReplaceInfusion", location, itemDrop, entity.id(), primaryLocation)
 	end)
 
-	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+    message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+		if status.statusProperty("sbqType") == "prey" then return end
 		local size = sbq.calcSize()
 		if size <= (steppySize*0.4) then
 			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
