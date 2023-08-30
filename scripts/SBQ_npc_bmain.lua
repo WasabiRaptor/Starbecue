@@ -8,6 +8,7 @@ function capture_npc_setInteractive(bool)
 	interactive = bool
 	_npc_setInteractive(bool)
 end
+
 local _npc_setDamageTeam
 function capture_npc_setDamageTeam(data)
 	status.setStatusProperty("sbqOriginalDamageTeam", data)
@@ -21,7 +22,8 @@ sbq = {}
 
 function sbq.calcSize()
 	local boundRectSize = rect.size(mcontroller.boundBox())
-	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
+	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) /
+	root.assetJson("/sbqGeneral.config:size")                                                            -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
 	status.setStatusProperty("sbqSize", size)
 	return size
 end
@@ -53,6 +55,7 @@ function sbq.controlPathMove(target, run, options)
 		return old.controlPathMove(target, run, options)
 	end
 end
+
 function sbq.setPosition(position)
 	local current = status.statusProperty("sbqCurrentData")
 	local type = status.statusProperty("sbqType")
@@ -66,7 +69,7 @@ end
 require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
-	message.setHandler("sbqGetSeatEquips", function(_,_, current)
+	message.setHandler("sbqGetSeatEquips", function(_, _, current)
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = status.statusProperty("sbqType")
 		if type == "prey" then
@@ -90,7 +93,7 @@ function init()
 			effectDirectives = status.statusProperty("effectDirectives")
 		}
 	end)
-	message.setHandler("sbqSetCurrentData", function(_,_, current)
+	message.setHandler("sbqSetCurrentData", function(_, _, current)
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = status.statusProperty("sbqType")
 		if type == "prey" then
@@ -106,11 +109,11 @@ function init()
 		status.setStatusProperty("sbqType", current)
 	end)
 
-	message.setHandler("sbqInteract", function(_,_, pred, predData)
-		return interact({sourceId = pred, sourcePosition = world.entityPosition(pred), predData = predData})
+	message.setHandler("sbqInteract", function(_, _, pred, predData)
+		return interact({ sourceId = pred, sourcePosition = world.entityPosition(pred), predData = predData })
 	end)
-	message.setHandler("sbqVehicleInteracted", function (_,_, args)
-		world.sendEntityMessage(args.sourceId, "sbqPlayerInteract", interact(args), entity.id() )
+	message.setHandler("sbqVehicleInteracted", function(_, _, args)
+		world.sendEntityMessage(args.sourceId, "sbqPlayerInteract", interact(args), entity.id())
 	end)
 
 	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
@@ -138,7 +141,7 @@ function init()
 		end)
 	end)
 
-	message.setHandler("sbqMakeNonHostile", function(_,_)
+	message.setHandler("sbqMakeNonHostile", function(_, _)
 		local damageTeam = entity.damageTeam()
 		if (status.statusProperty("sbqOriginalDamageTeam") == nil) then
 			status.setStatusProperty("sbqOriginalDamageTeam", damageTeam)
@@ -146,20 +149,21 @@ function init()
 		_npc_setDamageTeam({ type = "ghostly", team = damageTeam.team })
 	end)
 
-	message.setHandler("sbqDigestDrop", function(_,_, itemDrop)
+	message.setHandler("sbqDigestDrop", function(_, _, itemDrop)
 		local itemDrop = itemDrop
 		local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
 		local identity = overrideData.identity or npc.identity()
 		local species = npc.species()
-		local speciesFile = root.assetJson("/species/"..species..".species")
+		local speciesFile = root.assetJson("/species/" .. species .. ".species")
 		itemDrop.parameters.predSpecies = species
-		itemDrop.parameters.predDirectives = (overrideData.directives or "")..(identity.bodyDirectives or "")..(identity.hairDirectives or "")
+		itemDrop.parameters.predDirectives = (overrideData.directives or "") ..
+			(identity.bodyDirectives or "") .. (identity.hairDirectives or "")
 		itemDrop.parameters.predColorMap = speciesFile.baseColorMap
 
 		world.spawnItem(itemDrop, mcontroller.position())
 	end)
 
-	message.setHandler("sbqSaveSettings", function (_,_, settings, menuName)
+	message.setHandler("sbqSaveSettings", function(_, _, settings, menuName)
 		if menuName and menuName ~= "sbqOccupantHolder" then
 		else
 		end
@@ -168,7 +172,7 @@ function init()
 		status.setStatusProperty("sbqPreyEnabled", settings)
 		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
 	end)
-	message.setHandler("sbqSaveAnimOverrideSettings", function (_,_, settings)
+	message.setHandler("sbqSaveAnimOverrideSettings", function(_, _, settings)
 		status.setStatusProperty("speciesAnimOverrideSettings", settings)
 	end)
 	message.setHandler("sbqSetNPCType", function(_, _, npcType)
@@ -179,28 +183,29 @@ function init()
 		if not uniqueId then return end
 		local cumData = status.statusProperty("sbqCumulativeData") or {}
 		if isPrey then
-			return {times =(cumData[uniqueId] or {}).prey, flags=(cumData[uniqueId] or {}).flags}
+			return { times = (cumData[uniqueId] or {}).prey, flags = (cumData[uniqueId] or {}).flags }
 		else
-			return {times =(cumData[uniqueId] or {}).pred, flags=(cumData[uniqueId] or {}).flags}
+			return { times = (cumData[uniqueId] or {}).pred, flags = (cumData[uniqueId] or {}).flags }
 		end
 	end)
 
-	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, name, entityType, typeName, isPrey, data)
-		if not uniqueId then return end
-		local cumData = status.statusProperty("sbqCumulativeData") or {}
-		cumData[uniqueId] = cumData[uniqueId] or {}
-		if isPrey then
-			cumData[uniqueId].prey = data
-		else
-			cumData[uniqueId].pred = data
-		end
-		cumData[uniqueId].name = name
-		cumData[uniqueId].type = entityType
-		cumData[uniqueId].typeName = typeName
-		status.setStatusProperty("sbqCumulativeData", cumData)
-	end)
+	message.setHandler("sbqSetCumulativeOccupancyTime",
+		function(_, _, uniqueId, name, entityType, typeName, isPrey, data)
+			if not uniqueId then return end
+			local cumData = status.statusProperty("sbqCumulativeData") or {}
+			cumData[uniqueId] = cumData[uniqueId] or {}
+			if isPrey then
+				cumData[uniqueId].prey = data
+			else
+				cumData[uniqueId].pred = data
+			end
+			cumData[uniqueId].name = name
+			cumData[uniqueId].type = entityType
+			cumData[uniqueId].typeName = typeName
+			status.setStatusProperty("sbqCumulativeData", cumData)
+		end)
 
-	status.setStatusProperty( "sbqCurrentData", nil)
+	status.setStatusProperty("sbqCurrentData", nil)
 
 	_init()
 
@@ -227,14 +232,22 @@ function init()
 
 	sbq.config = root.assetJson("/sbqGeneral.config")
 	status.clearPersistentEffects("digestImmunity")
-	status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
+	status.setPersistentEffects("digestImmunity", { "sbqDigestImmunity" })
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
-		status.setStatusProperty("sbqDidVornyConvertCheck", true)
-		if tenant ~= nil then
-			local npcType = sbq.config.vornyConvertTable[npc.npcType()]
-			if (math.random(8) == 8) and npcType ~= nil then
-				sbq.tenant_setNpcType(npcType)
-			end
+		sbq.maybeConvert()
+	end
+end
+
+function sbq.maybeConvert()
+	status.setStatusProperty("sbqDidVornyConvertCheck", true)
+	if config.getParameter("uniqueId") or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true) then
+		return
+	end
+	status.setStatusProperty("sbqDidVornyConvertCheck", true)
+	if tenant ~= nil then
+		local npcType = sbq.config.vornyConvertTable[npc.npcType()]
+		if (math.random(8) == 8) and npcType ~= nil then
+			sbq.tenant_setNpcType(npcType)
 		end
 	end
 end
@@ -245,7 +258,6 @@ function update(dt)
 
 	_update(dt)
 end
-
 
 function sbq.tenant_setNpcType(npcType)
 	if npc.npcType() == npcType then return end
@@ -262,10 +274,10 @@ function sbq.tenant_setNpcType(npcType)
 	-- Preserve head item slots, even if they haven't changed from the default:
 	storage.itemSlots = storage.itemSlots or {}
 	if not storage.itemSlots.headCosmetic and not storage.itemSlots.headCosmetic then
-	  storage.itemSlots.headCosmetic = npc.getItemSlot("headCosmetic")
+		storage.itemSlots.headCosmetic = npc.getItemSlot("headCosmetic")
 	end
 	if not storage.itemSlots.head then
-	  storage.itemSlots.head = npc.getItemSlot("head")
+		storage.itemSlots.head = npc.getItemSlot("head")
 	end
 	storage.itemSlots.primary = nil
 	storage.itemSlots.alt = nil
@@ -282,7 +294,8 @@ function sbq.tenant_setNpcType(npcType)
 				personality = personality(),
 				initialStorage = preservedStorage(),
 				uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
-				preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId()
+				preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or
+				entity.uniqueId()
 			},
 			statusControllerSettings = {
 				statusProperties = {
@@ -295,9 +308,6 @@ function sbq.tenant_setNpcType(npcType)
 		storage = storage
 	}
 	world.spawnStagehand(entity.position(), "sbqReplaceNPC", parameters)
-
-	function die()
-	end
 
 	tenant.despawn(false)
 end
