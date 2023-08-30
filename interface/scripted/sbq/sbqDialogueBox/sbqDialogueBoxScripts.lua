@@ -128,14 +128,7 @@ end
 
 function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, dialogueTreeTop)
 	local returnVal = path
-	local tags = {}
-	for k, v in pairs(settings or {}) do
-		if (type(v) ~= "table") then
-			tags[tostring(k)] = tostring(v)
-		end
-	end
 	while type(returnVal) == "string" do
-		returnVal = sb.replaceTags(returnVal, tags)
 		firstChar = returnVal:sub(1,1)
 		if firstChar == "/" then
 			returnVal = root.assetJson(returnVal) or {}
@@ -154,7 +147,6 @@ end
 function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dialogueTree, dialogueTreeTop)
 	local rollNo = rollNo or 1
 	local randomTable = sbq.getRedirectedDialogue(randomTable, true, settings, dialogueTree, dialogueTreeTop)
-	local badrolls = {}
 	if type(randomTable) == "table" then
 		if not sbq.checkSettings(randomTable.check, settings) then return end
 		if randomTable.percentage then
@@ -190,20 +182,21 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 		end
 		local selection = randomTable.add or randomTable
 		if selection[1] ~= nil then
-			local badroll = true
-			dialogue.randomRolls[rollNo] = dialogue.randomRolls[rollNo] or math.random(#selection)
-			while badroll do
-				while badrolls[tostring(dialogue.randomRolls[rollNo])] do
-					dialogue.randomRolls[rollNo] = math.random(#selection)
-				end
+			local selectionRolls = {}
+			for i = 1, #selection do
+				selectionRolls[i] = i
+			end
+			while selectionRolls[1] ~= nil do
+				dialogue.randomRolls[rollNo] = dialogue.randomRolls[rollNo] or
+				selectionRolls[math.random(#selectionRolls)]
 				---@diagnostic disable-next-line: cast-local-type
-				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, selection[dialogue.randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
+				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1,
+					selection[dialogue.randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
 				if randomTable then
-					badroll = false
+					break
 				else
-					badrolls[tostring(dialogue.randomRolls[rollNo])] = true
-					badrolls.count = (badrolls.count or 0) + 1
-					if badrolls.count >= #selection then return end
+					table.remove(selectionRolls, dialogue.randomRolls[rollNo])
+					dialogue.randomRolls[rollNo] = nil
 				end
 			end
 		end
