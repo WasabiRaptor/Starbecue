@@ -24,6 +24,7 @@
 
 # Ferrilata_
 	Ferri NPC
+	Catfox race
 
 # FFWizard
 	Helena NPC dialogue
