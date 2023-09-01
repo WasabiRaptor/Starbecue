@@ -636,7 +636,7 @@ end
 function sbq.requestTransition(transition, args)
 	local current = player.getProperty("sbqCurrentData") or {}
 
-	if current.id then
+	if not current.id then
 		local settings = player.getProperty( "sbqSettings" ) or {}
 		world.spawnVehicle( "sbqOccupantHolder", entity.position(), { driver = entity.id(), settings = sb.jsonMerge(settings.sbqOccupantHolder or {}, settings.global or {}), doExpandAnim = true } )
 	end
