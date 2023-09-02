@@ -34,7 +34,7 @@ end
 
 function widgets.tabField:doUpdate(dt)
 	self:update(dt)
-	local subTabs = (self.subTabs or {})[self.currentTab.id] or {}
+	local subTabs = (self.subTabs or {})[(self.currentTab or {}).id] or {}
 	for i, subTab in ipairs(subTabs) do
 		subTab:doUpdate(dt)
 	end

@@ -1069,7 +1069,7 @@ function sbq.getFavoredVoreTypes(predOrPrey, preySettings, effectSlot)
 end
 
 function sbq.getCurrentVorePref(predOrPrey, preySettings, healOrDigest)
-	local predOrPrey = predOrPrey or sbq.getPredOrPrey() -- commented out so it only rolls pred for now for testing
+	local predOrPrey = predOrPrey or sbq.getPredOrPrey()
 	if not predOrPrey then return end
 	local favoredVoreTypes = sbq.getFavoredVoreTypes(predOrPrey, preySettings, healOrDigest)
 	if not favoredVoreTypes[1] then return end
