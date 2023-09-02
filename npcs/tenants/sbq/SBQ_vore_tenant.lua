@@ -1215,14 +1215,16 @@ function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, di
 
 	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
 
-	for i, line in ipairs(dialogue.result.dialogue or {}) do
-		sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
-			sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags,
-				(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
-			if i == #dialogue.result.dialogue then
-				sbq.finishDialogue()
-			end
-		end)
+	if dialogue.result.dialogue and dialogue.result.dialogue[1] then
+		for i, line in ipairs(dialogue.result.dialogue) do
+			sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
+				sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags,
+					(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
+				if i == #dialogue.result.dialogue then
+					sbq.finishDialogue()
+				end
+			end)
+		end
 	end
 end
 
