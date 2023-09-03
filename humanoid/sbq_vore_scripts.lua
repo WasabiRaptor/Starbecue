@@ -92,11 +92,15 @@ function sbq.letout(id)
 	if (not id) or (not sbq.lounging[id]) then return false end
 
 	local location = sbq.lounging[id].location
+	local controllerAction
+	if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") then
+		controllerAction = (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction
+	end
 
 	if location == "belly" then
-		if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction == "analVore" then
+		if (sbq.settings.analVorePred and (not sbq.settings.oralVorePred) and controllerAction ~= "oralVore" and controllerAction ~= "navelVore") or (controllerAction == "analVore") or (controllerAction ~= "oralVore" and sbq.lounging[id].entryType == "analVore") then
 			return sbq.doTransition("analEscape", { id = id })
-		elseif (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction == "navelVore" then
+		elseif (sbq.settings.navelVorePred and (not sbq.settings.oralVorePred) and controllerAction ~= "oralVore") or (controllerAction == "navelVore") or (controllerAction ~= "oralVore" and sbq.lounging[id].entryType == "navelVore") then
 			return sbq.doTransition("navelEscape", { id = id })
 		else
 			return sbq.doTransition("oralEscape", { id = id })
