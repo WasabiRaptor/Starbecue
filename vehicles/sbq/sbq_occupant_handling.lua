@@ -948,7 +948,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.doTransition( struggledata.directions[movedir].transition, {direction = movedir, id = strugglerId, struggleTrigger = true} )
 	else
 		local location = sbq.occupant[struggler].location
-		local locationData = sbq.sbqData.locations[location]
+		local locationData = sbq.sbqData.locations[location] or {}
 
 		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and
 			(sbq.checkSettings(struggledata.directions[movedir].settings)) then
