@@ -238,7 +238,7 @@ function init()
 		sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false, recipient, holder)
 	end)
 
-    message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
 		if status.statusProperty("sbqType") == "prey" then return end
 		local size = sbq.calcSize()
 		if size <= (steppySize*0.4) then
@@ -458,7 +458,20 @@ function sbq.requestTransition(transition, args)
 end
 
 function sbq.setSpeciesConfig()
-	sbq.getSpeciesConfig(npc.species(), storage.settings)
+	sbq.speciesConfig = {}
+	if sbq.currentData.species ~= nil then
+		if sbq.currentData.species == "sbqOccupantHolder" then
+			sbq.getSpeciesConfig(npc.species(), storage.settings)
+		else
+			sbq.speciesConfig = root.assetJson("/vehicles/sbq/" ..
+				sbq.currentData.species .. "/" .. sbq.currentData.species .. ".vehicle") or {}
+			for location, data in pairs(sbq.speciesConfig.sbqData.locations or {}) do
+				sbq.speciesConfig.sbqData.locations[location] = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
+			end
+		end
+	else
+		sbq.getSpeciesConfig(npc.species(), storage.settings)
+	end
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
 	sbq.sbqData = sbq.predatorConfig
 	sbq.initLocationSizes()
@@ -494,6 +507,7 @@ function update(dt)
 	sbq.currentData = status.statusProperty("sbqCurrentData") or {}
 
 	sbq.occupantHolder = sbq.currentData.id
+	sbq.state = sbq.currentData.state
 	sbq.loopedMessage("checkRefresh", sbq.occupantHolder, "getOccupancyData", {}, function (result)
 		if result ~= nil then
 			sbq.occupants = result.occupants
@@ -653,6 +667,7 @@ function sbq.logInfo(input)
 end
 
 function sbq.doTargetAction()
+	if not sbq.timer("targetReachedCooldown", storage.huntingTarget.combat and 1 or 5) then return end
 	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
@@ -666,7 +681,6 @@ function sbq.doTargetAction()
 				sbq.combatEat()
 			end
 		else
-			if not sbq.timer("targetReachedCooldown", 5) then return end
 			if storage.huntingTarget.predOrPrey == "pred" then
 				if storage.huntingTarget.getConsent then
 					sbq.askToVore()
@@ -845,14 +859,14 @@ function sbq.combatEat()
 	}
 	sbq.requestTransition(storage.huntingTarget.voreType,
 		{ id = storage.huntingTarget.id, hostile = world.entityAggressive(storage.huntingTarget.id) })
-
+	self.board:setEntity("sbqHuntingTarget", nil)
 	sbq.forceTimer("gotVored", delay or 1.5, function()
 		if not storage.huntingTarget then return end
 		settings.doingVore = "after"
 		if sbq.checkOccupant(storage.huntingTarget.id) then
 			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 			storage.huntingTarget = nil
-			self.board:setEntity("sbqHuntingTarget", nil)
+			sbq.targetedEntities = {}
 		end
 	end)
 end
@@ -954,6 +968,7 @@ function sbq.getTarget()
 	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
+		sbq.targetedEntities = {}
 		return
 	end
 	sbq.searchForHealTarget(false)

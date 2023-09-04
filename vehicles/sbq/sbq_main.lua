@@ -138,7 +138,10 @@ require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.sbqData = config.getParameter("sbqData")
-	sbq.defaultSbqData = sb.jsonMerge(sbq.sbqData, {})
+    sbq.defaultSbqData = sb.jsonMerge(sbq.sbqData, {})
+	sbq.timer("setSpecies", 1, function ()
+		world.sendEntityMessage(sbq.spawner, "sbqGetSpeciesVoreConfig")
+	end)
 
 	sbq.cfgAnimationFile = config.getParameter("animation")
 	sbq.victimAnimations = root.assetJson(sbq.sbqData.victimAnimations)
