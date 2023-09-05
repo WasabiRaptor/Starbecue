@@ -147,8 +147,9 @@ function init()
 		self.interacted = true
 		self.board:setEntity("interactionSource", id)
 	end)
-	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_)
-		sbq.setSpeciesConfig()
+	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_, species)
+        sbq.setSpeciesConfig(species)
+		if species then return end
 		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1, status.statusProperty("animOverridesGlobalScaleYOffset") or 0}
 	end)
 	message.setHandler("sbqSaveSettings", function (_,_, settings, menuName)
@@ -457,17 +458,13 @@ function sbq.requestTransition(transition, args)
 	table.insert(sbq.queuedTransitions, {transition, args})
 end
 
-function sbq.setSpeciesConfig()
-	sbq.speciesConfig = {}
-	if sbq.currentData.species ~= nil then
-		if sbq.currentData.species == "sbqOccupantHolder" then
-			sbq.getSpeciesConfig(npc.species(), storage.settings)
-		else
-			sbq.speciesConfig = root.assetJson("/vehicles/sbq/" ..
-				sbq.currentData.species .. "/" .. sbq.currentData.species .. ".vehicle") or {}
-			for location, data in pairs(sbq.speciesConfig.sbqData.locations or {}) do
-				sbq.speciesConfig.sbqData.locations[location] = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
-			end
+function sbq.setSpeciesConfig(species)
+    sbq.speciesConfig = {}
+	local species = species or sbq.currentData.species
+	if (species ~= nil) and (species ~= "sbqOccupantHolder") then
+		sbq.speciesConfig = root.assetJson("/vehicles/sbq/" .. species .. "/" .. species .. ".vehicle") or {}
+		for location, data in pairs(sbq.speciesConfig.sbqData.locations or {}) do
+			sbq.speciesConfig.sbqData.locations[location] = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
 		end
 	else
 		sbq.getSpeciesConfig(npc.species(), storage.settings)
