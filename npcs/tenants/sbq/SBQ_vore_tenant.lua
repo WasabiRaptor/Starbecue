@@ -664,6 +664,7 @@ function sbq.logInfo(input)
 end
 
 function sbq.doTargetAction()
+	if not storage.huntingTarget then return end
 	if not sbq.timer("targetReachedCooldown", storage.huntingTarget.combat and 1 or 5) then return end
 	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 		storage.huntingTarget = nil
@@ -672,24 +673,22 @@ function sbq.doTargetAction()
 		return
 	end
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
-	if storage.huntingTarget then
-		if storage.huntingTarget.combat then
-			if storage.huntingTarget.predOrPrey == "pred" then
-				sbq.combatEat()
+	if storage.huntingTarget.combat then
+		if storage.huntingTarget.predOrPrey == "pred" then
+			sbq.combatEat()
+		end
+	else
+		if storage.huntingTarget.predOrPrey == "pred" then
+			if storage.huntingTarget.getConsent then
+				sbq.askToVore()
+			else
+				sbq.eatUnprompted()
 			end
-		else
-			if storage.huntingTarget.predOrPrey == "pred" then
-				if storage.huntingTarget.getConsent then
-					sbq.askToVore()
-				else
-					sbq.eatUnprompted()
-				end
-			elseif storage.huntingTarget.predOrPrey == "prey" then
-				if storage.huntingTarget.getConsent then
-					sbq.askToBeVored()
-				else
-					sbq.forcePrey()
-				end
+		elseif storage.huntingTarget.predOrPrey == "prey" then
+			if storage.huntingTarget.getConsent then
+				sbq.askToBeVored()
+			else
+				sbq.forcePrey()
 			end
 		end
 	end
