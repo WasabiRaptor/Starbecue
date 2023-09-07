@@ -1588,3 +1588,59 @@ function sbq.checkSpeciesRootTable(input)
 	end
 	return input
 end
+
+-- I fucking hate starbound
+function recruitable.generateRecruitInfo()
+	local rank = config.getParameter("crew.rank") or storage.recruitRank or recruitable.generateRank()
+	local parameters = {
+		level = npc.level(),
+		identity = npc.humanoidIdentity(),
+		scriptConfig = {
+			personality = personality(),
+			crew = {
+				rank = rank
+			},
+            initialStorage = preservedStorage(),
+			sbqSettings = storage.settings,
+			uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
+			preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or
+			entity.uniqueId()
+		},
+		statusControllerSettings = {
+			statusProperties = {
+				sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
+				sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
+                sbqCumulativeData = status.statusProperty("sbqCumulativeData"),
+				speciesAnimOverrideSettings = status.statusProperty("speciesAnimOverrideSettings")
+			}
+		}
+	}
+	local poly = mcontroller.collisionPoly()
+	if #poly <= 0 then poly = nil end
+
+	local name = world.entityName(entity.id())
+
+	if not entity.uniqueId() then
+	  world.setUniqueId(entity.id(), sb.makeUuid())
+	end
+
+	storage.statusText = storage.statusText or randomStatusText(personalityType())
+
+	return {
+		name = name,
+		uniqueId = entity.uniqueId(),
+		portrait = world.entityPortrait(entity.id(), "full"),
+		collisionPoly = poly,
+		statusText = storage.statusText,
+		rank = rank,
+		uniform = storage.crewUniform,
+		status = getCurrentStatus(),
+		storage = preservedStorage(),
+		config = {
+			species = npc.species(),
+			type = npc.npcType(),
+			seed = npc.seed(),
+			parameters = parameters
+		}
+	}
+end

@@ -313,6 +313,9 @@ end
 
 function sbq.initAfterInit()
 	sbq.species = world.entityName(entity.id())
+	sbq.timer("setSpecies", 1, function ()
+		world.sendEntityMessage(sbq.spawner, "sbqGetSpeciesVoreConfig", sbq.species)
+	end)
 
 	local retrievePrey = config.getParameter("retrievePrey")
 	if type(retrievePrey) == "number" and world.entityExists(retrievePrey) then
