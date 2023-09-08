@@ -147,12 +147,10 @@ function init()
 	end)
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
 	end)
 
     message.setHandler("sbqOpenInterface", function(_, _, name, args, sourceEntity)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
 		local pane = root.assetJson("/interface/scripted/sbq/"..name.."/"..name..".config")
 		if args then
 			pane = sb.jsonMerge(pane, args)

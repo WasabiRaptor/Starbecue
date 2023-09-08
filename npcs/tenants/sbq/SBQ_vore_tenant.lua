@@ -463,6 +463,7 @@ function sbq.setSpeciesConfig(species)
 	local species = species or sbq.currentData.species
 	if (species ~= nil) and (species ~= "sbqOccupantHolder") then
 		sbq.speciesConfig = root.assetJson("/vehicles/sbq/" .. species .. "/" .. species .. ".vehicle") or {}
+		sbq.speciesConfig.sbqData.voreTypeData = sb.jsonMerge(sbq.config.generalVoreTypeData, sbq.speciesConfig.sbqData.voreTypeData or {})
 		for location, data in pairs(sbq.speciesConfig.sbqData.locations or {}) do
 			sbq.speciesConfig.sbqData.locations[location] = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
 		end
