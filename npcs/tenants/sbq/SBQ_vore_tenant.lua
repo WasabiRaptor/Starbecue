@@ -1017,12 +1017,10 @@ end
 function sbq.getNextTarget()
 	if not sbq.targetedEntities then storage.huntingTarget = nil return end
 	if storage.huntingTarget then
-		local newTarget = {
-			index = storage.huntingTarget.index + 1,
-			id = (sbq.targetedEntities[storage.huntingTarget.index+1] or {})[1],
-		}
-		if newTarget.id ~= nil then
-			storage.huntingTarget = sb.jsonMerge(storage.huntingTarget, newTarget)
+		storage.huntingTarget.index = storage.huntingTarget.index + 1
+		storage.huntingTarget.id = (sbq.targetedEntities[storage.huntingTarget.index] or {})[1]
+		if storage.huntingTarget.id then
+			self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 		else
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
