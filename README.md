@@ -1,12 +1,10 @@
 # Starbecue
 
-if you have a question check [the FAQ](https://github.com/Zygahedron/Starbecue/wiki/F.A.Q.)
+if you have a question check [the FAQ](https://github.com/Zygahedron/Starbecue/wiki/F.A.Q.) If availble or navigate to the in game help tabs, most SBQ interfaces will have a tab with a purple book which has information that may help you.
 
-To install simply visit the [releases page](https://github.com/Zygahedron/Starbecue/releases), download the latest one (the .pak files), and put them in your Starbound mods folder.
+To install simply visit the [patreon](https://www.patreon.com/LokiVulpix), download the latest one from the pinned post (the .pak files), and put them in your Starbound mods folder.
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
-
-Alternatively, if you want the latest and greatest changes, download this repo as a zip and extract in your starbound mods folder, or better yet, use git to clone it there so that you can update it more easily. Just be warned that things won't always be perfectly stable. And likely will also require the library [Species Anim Overrides](https://github.com/WasabiRaptor/starboundSpeciesAnimOverrides) to be installed as well, be aware that when installing the mods like this, things are much more likely to be unstable! keep to the [releases page](https://github.com/Zygahedron/Starbecue/releases) if you want stable versions.
 
 While not required it is recommended you install the Monster Config Core Loader mods found [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442860690) and [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442873217), if you're using Stardust Core then you should get [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2690363974) and if you're using FU you'll also need [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2442880727) because it should fix potential compatibility issues.
 
@@ -15,6 +13,8 @@ While not required it is recommended you install the Monster Config Core Loader 
 To get started with the mod, all you need to do is open your crafting interface, and craft a **Vore Controller**. When holding it in hand, hold shift and up to see your avalable actions, click to select one and assign it to the controller perform the action.
 
 After you have an assigned vore controller, you can click it to activate **Vore mode** and then click on things to vore them, you may notice your player character jitter slightly on activation, this is normal. While in vore mode you will have a hud in the bottom right to show you your prey and belly effects, if you click the gear you can get more settings to enable or diable other vore types as well as being prey, you can access the same menu via the quickbar as well even when not in vore mode.
+
+When in vore mode, or tranformed into a different player species, some items may appear buggy in your hands, this is normal, this is not something we can fix, do not report it as a bug.
 
 The settings panel also has ingame help information, click on any of the book tabs to get information about the mod.
 
@@ -111,6 +111,8 @@ This mod includes no assets from the respective modded races, modified or not, m
 - Akari Kaen
 - Ferri Catfox (Pred/Prey) Ferrilata_
 
+Purchase a **Vore Colony Deed** from Auri's shop to summon a vore Tenant, those listed above are OC NPCs which may have unique dialogue, you can summon an NPC of any compatible species, they may share the same dialogue line pool, however they are able to do more vore types.
+
 ### Other Things
 - TF Dart Gun
 - Shrink Ray
@@ -180,8 +182,6 @@ Currently this does not affect whether any other vore mods can or can't perform 
 
 # Support Us!
 
-https://ko-fi.com/lokivulpix (I end up getting a better cut of precentage via Ko-Fi)
-
 https://www.patreon.com/LokiVulpix
 
 Vote on what should be the next feature worked on!
@@ -198,7 +198,7 @@ Artist, Lua scripting and debugging.
 
 > I take commissions! contact me if I am open!
 >
-> https://www.furaffinity.net/user/lokithevulpix/
+> https://itaku.ee/profile/lokivulpix
 > https://twitter.com/LokiVulpix
 
 
