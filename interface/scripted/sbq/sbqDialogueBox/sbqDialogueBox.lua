@@ -135,11 +135,13 @@ function sbq.handleRandomDialogue(dialogueTree, dialogueTreeTop, rollno)
 					return true
 				end
 			elseif type(randomResult) == "string" then
+				if (resultVal == "dialogue") and (sb.replaceTags(randomResult, {dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = ""}) == "") then
+					return true
+				end
 				dialogue.result[resultVal] = {randomResult}
 			end
 		end
 	end
-	return startAgain
 end
 
 function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)

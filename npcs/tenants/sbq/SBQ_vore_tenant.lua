@@ -463,6 +463,7 @@ function sbq.setSpeciesConfig(species)
 	local species = species or sbq.currentData.species
 	if (species ~= nil) and (species ~= "sbqOccupantHolder") then
 		sbq.speciesConfig = root.assetJson("/vehicles/sbq/" .. species .. "/" .. species .. ".vehicle") or {}
+		sbq.speciesConfig.sbqData.voreTypeData = sb.jsonMerge(sbq.config.generalVoreTypeData, sbq.speciesConfig.sbqData.voreTypeData or {})
 		for location, data in pairs(sbq.speciesConfig.sbqData.locations or {}) do
 			sbq.speciesConfig.sbqData.locations[location] = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
 		end
@@ -1016,12 +1017,10 @@ end
 function sbq.getNextTarget()
 	if not sbq.targetedEntities then storage.huntingTarget = nil return end
 	if storage.huntingTarget then
-		local newTarget = {
-			index = storage.huntingTarget.index + 1,
-			id = (sbq.targetedEntities[storage.huntingTarget.index+1] or {})[1],
-		}
-		if newTarget.id ~= nil then
-			storage.huntingTarget = sb.jsonMerge(storage.huntingTarget, newTarget)
+		storage.huntingTarget.index = storage.huntingTarget.index + 1
+		storage.huntingTarget.id = (sbq.targetedEntities[storage.huntingTarget.index] or {})[1]
+		if storage.huntingTarget.id then
+			self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 		else
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
@@ -1227,6 +1226,7 @@ function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, di
 	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
 
 	if dialogue.result.dialogue and dialogue.result.dialogue[1] then
+		local dialogue = sb.jsonMerge(dialogue, {})
 		for i, line in ipairs(dialogue.result.dialogue) do
 			sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
 				sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags,
