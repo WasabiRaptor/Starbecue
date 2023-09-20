@@ -426,7 +426,7 @@ function sbq.updateOccupants(dt)
 				sbq.occupants[sidedLocation] = (sbq.occupants[sidedLocation] or 0) + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
 				sbq.occupantCount.total = sbq.occupantCount.total + 1
-				sbq.occupantCount[sidedLocation] = sbq.occupantCount[sidedLocation] + 1
+				sbq.occupantCount[sidedLocation] = (sbq.occupantCount[sidedLocation] or 0) + 1
 
 				massMultiplier = sbq.sbqData.locations[location].mass or 0
 
