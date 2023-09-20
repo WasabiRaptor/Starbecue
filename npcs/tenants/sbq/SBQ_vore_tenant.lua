@@ -555,7 +555,8 @@ function sbq.getDialogueBoxData()
 		portraitPath = config.getParameter("portraitPath"),
 		defaultName = config.getParameter("defaultName"),
 		occupantHolder = sbq.occupantHolder,
-		scale = status.statusProperty("animOverrideScale")
+		scale = status.statusProperty("animOverrideScale"),
+		occupant = sbq.occupant
 	}
 	dialogueBoxData.settings.race = npc.species()
 	dialogueBoxData.settings.ownerUuid = recruitable.ownerUuid()

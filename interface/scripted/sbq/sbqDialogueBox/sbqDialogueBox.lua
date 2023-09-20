@@ -67,6 +67,7 @@ function init()
 	if sbq.data.settings.playerPrey then
 		sbq.data.settings = sb.jsonMerge(sbq.data.settings, sb.jsonMerge( sbq.config.defaultPreyEnabled.player, player.getProperty("sbqPreyEnabled") or {}))
 	end
+	sbq.occupant = metagui.inputData.occupant
 	sbq.data.settings.playerRace = player.species()
 
 	sbq.settings = sb.jsonMerge(sbq.data.settings, (player.getProperty("sbqDialogueSettings") or {})[world.entityUniqueId(pane.sourceEntity()) or "noUUID"] or {})
@@ -83,7 +84,7 @@ function init()
 	end
 	sbq.dialogueTree = sbq.data.dialogueTree
 
-	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree )
+	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree)
 end
 
 function update()
@@ -382,7 +383,7 @@ function sbq.checkInfusionActionButtonsEnabled()
 end
 
 function sbq.infusionButtonSetup(active, button, voreType)
-	if dialogue.result.hideVoreButtons then
+	if dialogue.result.hideInfusionButtons then
 		button:setVisible(false)
 	else
 		button.active = active
@@ -430,11 +431,10 @@ function sbq.checkInfusionActionActive(location, locations)
 	if (not sbq.settings) then return "hidden" end
 	local locationData = sbq.sbqData.locations[location]
 	if not locationData or not locationData.infusion then return "hidden" end
-	local sbqType = player.getProperty("sbqType")
 
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if (sbq.settings[(locationData.infusionSetting or "infusion") .. "Pred"]) and preyEnabled.preyEnabled and
-		preyEnabled[(locationData.infusionSetting or "infusion")] and (sbqType == "prey")
+		preyEnabled[(locationData.infusionSetting or "infusion")] and sbq.settings.playerPrey
 	then
 		local playerLocation
 		local isInfused
