@@ -476,7 +476,7 @@ function sbq.infusedStruggleDialogue(location, data, npcArgs, eid)
 			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, ".teaseInfused", true )
 		end
 	end
-	if (not eid) or (type(eid)=="number" and (world.entityType(eid)~="player")) then
+	if (not eid) or ((type(eid)=="number") and (world.entityType(eid)~="player")) then
 		sbq.doLocationStruggle(location, data)
 	end
 end
