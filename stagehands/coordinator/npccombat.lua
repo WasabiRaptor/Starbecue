@@ -171,6 +171,7 @@ function attackPositionAlongLine(startLine, endLine)
   local dir = util.toDirection(toEnd[1])
 
   while toEnd[1] * dir > 0 do
+---@diagnostic disable-next-line: redundant-parameter
     local groundPosition = findGroundAttackPosition(startLine, -4, 4, endLine, self.npcBounds, self.npcPoly)
     if groundPosition then
       return groundPosition

@@ -92,7 +92,7 @@
 							"randomDialogue" : [":defaultGreetingCrew"]
 						}
 					},
-					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"percentage" : { "horny" : 0.55, "food" : -0.55 },
 					"horny" : {"replace" : {"randomDialogue" : [":hornyGreeting"]}},
 					"food" : {"replace" : {"randomDialogue" : [":hungryGreeting"]}
 					}
@@ -106,14 +106,14 @@
 					]
 				},
 				"next" : ["percentage","playerRace","isOwner", "otherOptions"],
-				"percentage" : { "horny" : 0.7, "food" : -0.7 },
+				"percentage" : { "horny" : 0.55, "food" : -0.55 },
 				"horny" : {"replace" : {"randomDialogue" : [":hornyConverse"]}},
 				"food" : {"replace" : {"randomDialogue" : [":hungryConverse"]}},
 				"sbqHelena_FFWizard" : ".hellhound",
 				"hellhound" : {
 					"replace" : {"randomDialogue":[":hellhoundConverse"]},
 					"next" : "percentage",
-					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"percentage" : { "horny" : 0.55, "food" : -0.55 },
 					"horny" : {"replace" : {"randomDialogue" : [":hellhoundHornyConverse"]}},
 					"food" : {"replace" : {"randomDialogue" : [":hellhoundHungryConverse"]}}
 				},
@@ -168,7 +168,7 @@
 				"seperateNext" : true,
 				"next" : ["percentage"],
 				"percentage" : {
-					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"percentage" : { "horny" : 0.55, "food" : -0.55 },
 					"horny" : {
 						"replace" : {
 							"randomDialogue" : [":hornyCurious"]
@@ -224,7 +224,7 @@
 						"jump" : ".curious.questionAnswered"
 					},
 					"next" : ["percentage","locationEffectSlot"],
-					"percentage" : { "horny" : 0.7, "food" : -0.7 },
+					"percentage" : { "horny" : 0.55, "food" : -0.55 },
 					"horny" : {"replace" : {"randomDialogue" : [":hornyCuriousBelly"]}},
 					"food" : {"replace" : {"randomDialogue" : [":hungryCuriousBelly"]}},
 					"heal" : {"replace" : { "randomDialogue" : [":curiousBellyHeal"]}},

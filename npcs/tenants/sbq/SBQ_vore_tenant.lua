@@ -1194,28 +1194,32 @@ end
 
 local randomDialogueHandling = {
 	{ "randomDialogue", "dialogue" },
-	--{ "randomPortrait", "portrait" },
+	{ "randomPortrait", "portrait" },
 	{ "randomEmote", "emote" },
 }
 
 function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, dialogueTreeTop)
 	settings.race = npc.species()
-	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTreeTop or dialogueTree or sbq.dialogueTree)
-	if not dialogueTree then return false end
+	local dialogueTree, dialogueTreeTop = dialogueTree, dialogueTreeTop
+	if path ~= nil then
+		_, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop or sbq.dialogueTree)
+		if not dialogueTree then return false end
+		dialogue.path = path
 
-	dialogue.randomRolls = {}
-
-	for _, v in ipairs(randomDialogueHandling) do
-		local randomVal = v[1]
-		local resultVal = v[2]
-		if not dialogue.result[resultVal] then
-			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, 1, dialogue.result[randomVal],
-				dialogueTree, dialogueTreeTop)
-			if type(randomResult) == "table" then
-				sb.jsonMerge(dialogue.result, randomResult)
-			elseif type(randomResult) == "string" then
-				dialogue.result[resultVal] = { randomResult }
+		if not dialogue.result.useLastRandom then
+			dialogue.randomRolls = {}
+		end
+		if type(dialogue.result.dialogue) == "string" then
+			dialogue.result.dialogue = sbq.getRedirectedDialogue(dialogue.result.dialogue, true, settings, dialogueTree, dialogueTreeTop)
+			if type(dialogue.result.dialogue) == "table" and dialogue.result.dialogue.dialogue ~= nil then
+				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
 			end
+		end
+		local handleRandom = true
+		local startIndex = 1
+		while handleRandom == true do
+			handleRandom = sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
+			startIndex = #dialogue.randomRolls + 1
 		end
 	end
 
@@ -1231,10 +1235,28 @@ function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, di
 			sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
 				sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags,
 					(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
-				if i == #dialogue.result.dialogue then
+				if i >= #dialogue.result.dialogue then
 					sbq.finishDialogue()
 				end
 			end)
+		end
+	end
+end
+
+function sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
+	for _, v in ipairs(randomDialogueHandling) do
+		local randomVal = v[1]
+		local resultVal = v[2]
+		if not dialogue.result[resultVal] then
+			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
+			if type(randomResult) == "table" then
+				dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
+				if randomResult.randomDialogue or randomResult.randomPortrait or randomResult.randomButtonText or randomResult.randomEmote or randomResult.randomName then
+					return true
+				end
+			elseif type(randomResult) == "string" then
+				dialogue.result[resultVal] = {randomResult}
+			end
 		end
 	end
 end
