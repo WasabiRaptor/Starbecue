@@ -138,7 +138,7 @@ require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.sbqData = config.getParameter("sbqData")
-	sbq.defaultSbqData = sb.jsonMerge(sbq.sbqData, {})
+    sbq.defaultSbqData = sb.jsonMerge(sbq.sbqData, {})
 
 	sbq.cfgAnimationFile = config.getParameter("animation")
 	sbq.victimAnimations = root.assetJson(sbq.sbqData.victimAnimations)
@@ -313,6 +313,9 @@ end
 
 function sbq.initAfterInit()
 	sbq.species = world.entityName(entity.id())
+	sbq.timer("setSpecies", 1, function ()
+		world.sendEntityMessage(sbq.spawner, "sbqGetSpeciesVoreConfig", sbq.species)
+	end)
 
 	local retrievePrey = config.getParameter("retrievePrey")
 	if type(retrievePrey) == "number" and world.entityExists(retrievePrey) then

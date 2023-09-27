@@ -303,7 +303,7 @@ end
 function dialogueBoxScripts.percentage(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local best = "default"
 	local bestScore = 0
-	for key, value in pairs(dialogueTree.percentage) do
+	for key, value in pairs(dialogueTree.percentage or {}) do
 		if type(settings[key]) == "number" then
 			local score
 			if value < 0 then

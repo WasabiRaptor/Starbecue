@@ -109,7 +109,7 @@ function sbq.uneat( occupantId )
 			world.spawnVehicle( occupantData.species, sbq.localToGlobal({ occupantData.victimAnim.last.x or 0, occupantData.victimAnim.last.y or 0}), { driver = occupantId, settings = occupantData.smolPreyData.settings, uneaten = true, startState = occupantData.smolPreyData.state, layer = occupantData.smolPreyData.layer })
 		end
 	else
-		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects, (occupantData.flags.digested or occupantData.flags.infused) and sbq.settings.reformResetHealth)
+		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects, (occupantData.flags.digested or occupantData.flags.infused) and sbq.settings.reformResetHealth and not (occupantData.flags.hostile and sbq.settings.overrideSoftDigestForHostiles))
 		world.sendEntityMessage( occupantId, "sbqPredatorDespawned", true ) -- to clear the current data for players
 	end
 
@@ -426,7 +426,7 @@ function sbq.updateOccupants(dt)
 				sbq.occupants[sidedLocation] = (sbq.occupants[sidedLocation] or 0) + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
 				sbq.occupantCount.total = sbq.occupantCount.total + 1
-				sbq.occupantCount[sidedLocation] = sbq.occupantCount[sidedLocation] + 1
+				sbq.occupantCount[sidedLocation] = (sbq.occupantCount[sidedLocation] or 0) + 1
 
 				massMultiplier = sbq.sbqData.locations[location].mass or 0
 
@@ -476,7 +476,7 @@ function sbq.infusedStruggleDialogue(location, data, npcArgs, eid)
 			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, ".teaseInfused", true )
 		end
 	end
-	if (not eid) or (type(eid)=="number" and (world.entityType(eid)~="player")) then
+	if (not eid) or ((type(eid)=="number") and (world.entityType(eid)~="player")) then
 		sbq.doLocationStruggle(location, data)
 	end
 end
@@ -948,7 +948,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.doTransition( struggledata.directions[movedir].transition, {direction = movedir, id = strugglerId, struggleTrigger = true} )
 	else
 		local location = sbq.occupant[struggler].location
-		local locationData = sbq.sbqData.locations[location]
+		local locationData = sbq.sbqData.locations[location] or {}
 
 		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and
 			(sbq.checkSettings(struggledata.directions[movedir].settings)) then

@@ -5,12 +5,6 @@ function npcCombat(dt)
 		self.success = true
 		return
 	end
-	for i, id in ipairs(self.group.members or {}) do
-		if world.entityExists(id) and world.entityType(id) ~= "player" and world.callScriptedEntity(id, "sbq.checkOccupant", self.goal) then
-			self.success = true
-			return
-		end
-	end
 
 	return _npcCombat(dt)
 end

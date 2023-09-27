@@ -147,8 +147,9 @@ function init()
 		self.interacted = true
 		self.board:setEntity("interactionSource", id)
 	end)
-	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_)
-		sbq.setSpeciesConfig()
+	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_, species)
+        sbq.setSpeciesConfig(species)
+		if species then return end
 		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1, status.statusProperty("animOverridesGlobalScaleYOffset") or 0}
 	end)
 	message.setHandler("sbqSaveSettings", function (_,_, settings, menuName)
@@ -238,7 +239,7 @@ function init()
 		sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false, recipient, holder)
 	end)
 
-    message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
 		if status.statusProperty("sbqType") == "prey" then return end
 		local size = sbq.calcSize()
 		if size <= (steppySize*0.4) then
@@ -457,8 +458,18 @@ function sbq.requestTransition(transition, args)
 	table.insert(sbq.queuedTransitions, {transition, args})
 end
 
-function sbq.setSpeciesConfig()
-	sbq.getSpeciesConfig(npc.species(), storage.settings)
+function sbq.setSpeciesConfig(species)
+    sbq.speciesConfig = {}
+	local species = species or sbq.currentData.species
+	if (species ~= nil) and (species ~= "sbqOccupantHolder") then
+		sbq.speciesConfig = root.assetJson("/vehicles/sbq/" .. species .. "/" .. species .. ".vehicle") or {}
+		sbq.speciesConfig.sbqData.voreTypeData = sb.jsonMerge(sbq.config.generalVoreTypeData, sbq.speciesConfig.sbqData.voreTypeData or {})
+		for location, data in pairs(sbq.speciesConfig.sbqData.locations or {}) do
+			sbq.speciesConfig.sbqData.locations[location] = sb.jsonMerge(sbq.config.defaultLocationData[location] or {}, data)
+		end
+	else
+		sbq.getSpeciesConfig(npc.species(), storage.settings)
+	end
 	sbq.predatorConfig = sbq.speciesConfig.sbqData
 	sbq.sbqData = sbq.predatorConfig
 	sbq.initLocationSizes()
@@ -494,6 +505,7 @@ function update(dt)
 	sbq.currentData = status.statusProperty("sbqCurrentData") or {}
 
 	sbq.occupantHolder = sbq.currentData.id
+	sbq.state = sbq.currentData.state
 	sbq.loopedMessage("checkRefresh", sbq.occupantHolder, "getOccupancyData", {}, function (result)
 		if result ~= nil then
 			sbq.occupants = result.occupants
@@ -543,7 +555,8 @@ function sbq.getDialogueBoxData()
 		portraitPath = config.getParameter("portraitPath"),
 		defaultName = config.getParameter("defaultName"),
 		occupantHolder = sbq.occupantHolder,
-		scale = status.statusProperty("animOverrideScale")
+		scale = status.statusProperty("animOverrideScale"),
+		occupant = sbq.occupant
 	}
 	dialogueBoxData.settings.race = npc.species()
 	dialogueBoxData.settings.ownerUuid = recruitable.ownerUuid()
@@ -653,6 +666,8 @@ function sbq.logInfo(input)
 end
 
 function sbq.doTargetAction()
+	if not storage.huntingTarget then return end
+	if not sbq.timer("targetReachedCooldown", storage.huntingTarget.combat and 1 or 5) then return end
 	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
@@ -660,25 +675,22 @@ function sbq.doTargetAction()
 		return
 	end
 	sbq.logInfo("Trying action: " .. sb.printJson(storage.huntingTarget))
-	if storage.huntingTarget then
-		if storage.huntingTarget.combat then
-			if storage.huntingTarget.predOrPrey == "pred" then
-				sbq.combatEat()
+	if storage.huntingTarget.combat then
+		if storage.huntingTarget.predOrPrey == "pred" then
+			sbq.combatEat()
+		end
+	else
+		if storage.huntingTarget.predOrPrey == "pred" then
+			if storage.huntingTarget.getConsent then
+				sbq.askToVore()
+			else
+				sbq.eatUnprompted()
 			end
-		else
-			if not sbq.timer("targetReachedCooldown", 5) then return end
-			if storage.huntingTarget.predOrPrey == "pred" then
-				if storage.huntingTarget.getConsent then
-					sbq.askToVore()
-				else
-					sbq.eatUnprompted()
-				end
-			elseif storage.huntingTarget.predOrPrey == "prey" then
-				if storage.huntingTarget.getConsent then
-					sbq.askToBeVored()
-				else
-					sbq.forcePrey()
-				end
+		elseif storage.huntingTarget.predOrPrey == "prey" then
+			if storage.huntingTarget.getConsent then
+				sbq.askToBeVored()
+			else
+				sbq.forcePrey()
 			end
 		end
 	end
@@ -845,14 +857,14 @@ function sbq.combatEat()
 	}
 	sbq.requestTransition(storage.huntingTarget.voreType,
 		{ id = storage.huntingTarget.id, hostile = world.entityAggressive(storage.huntingTarget.id) })
-
+	self.board:setEntity("sbqHuntingTarget", nil)
 	sbq.forceTimer("gotVored", delay or 1.5, function()
 		if not storage.huntingTarget then return end
 		settings.doingVore = "after"
 		if sbq.checkOccupant(storage.huntingTarget.id) then
 			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 			storage.huntingTarget = nil
-			self.board:setEntity("sbqHuntingTarget", nil)
+			sbq.targetedEntities = {}
 		end
 	end)
 end
@@ -954,6 +966,7 @@ function sbq.getTarget()
 	if npc.loungingIn() ~= nil and (status.statusProperty("sbqType") ~= "driver") then
 		storage.huntingTarget = nil
 		self.board:setEntity("sbqHuntingTarget", nil)
+		sbq.targetedEntities = {}
 		return
 	end
 	sbq.searchForHealTarget(false)
@@ -1005,12 +1018,10 @@ end
 function sbq.getNextTarget()
 	if not sbq.targetedEntities then storage.huntingTarget = nil return end
 	if storage.huntingTarget then
-		local newTarget = {
-			index = storage.huntingTarget.index + 1,
-			id = (sbq.targetedEntities[storage.huntingTarget.index+1] or {})[1],
-		}
-		if newTarget.id ~= nil then
-			storage.huntingTarget = sb.jsonMerge(storage.huntingTarget, newTarget)
+		storage.huntingTarget.index = storage.huntingTarget.index + 1
+		storage.huntingTarget.id = (sbq.targetedEntities[storage.huntingTarget.index] or {})[1]
+		if storage.huntingTarget.id then
+			self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 		else
 			storage.huntingTarget = nil
 			self.board:setEntity("sbqHuntingTarget", nil)
@@ -1184,28 +1195,32 @@ end
 
 local randomDialogueHandling = {
 	{ "randomDialogue", "dialogue" },
-	--{ "randomPortrait", "portrait" },
+	{ "randomPortrait", "portrait" },
 	{ "randomEmote", "emote" },
 }
 
 function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, dialogueTreeTop)
 	settings.race = npc.species()
-	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTreeTop or dialogueTree or sbq.dialogueTree)
-	if not dialogueTree then return false end
+	local dialogueTree, dialogueTreeTop = dialogueTree, dialogueTreeTop
+	if path ~= nil then
+		_, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop or sbq.dialogueTree)
+		if not dialogueTree then return false end
+		dialogue.path = path
 
-	dialogue.randomRolls = {}
-
-	for _, v in ipairs(randomDialogueHandling) do
-		local randomVal = v[1]
-		local resultVal = v[2]
-		if not dialogue.result[resultVal] then
-			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, 1, dialogue.result[randomVal],
-				dialogueTree, dialogueTreeTop)
-			if type(randomResult) == "table" then
-				sb.jsonMerge(dialogue.result, randomResult)
-			elseif type(randomResult) == "string" then
-				dialogue.result[resultVal] = { randomResult }
+		if not dialogue.result.useLastRandom then
+			dialogue.randomRolls = {}
+		end
+		if type(dialogue.result.dialogue) == "string" then
+			dialogue.result.dialogue = sbq.getRedirectedDialogue(dialogue.result.dialogue, true, settings, dialogueTree, dialogueTreeTop)
+			if type(dialogue.result.dialogue) == "table" and dialogue.result.dialogue.dialogue ~= nil then
+				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
 			end
+		end
+		local handleRandom = true
+		local startIndex = 1
+		while handleRandom == true do
+			handleRandom = sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
+			startIndex = #dialogue.randomRolls + 1
 		end
 	end
 
@@ -1216,14 +1231,33 @@ function sbq.getRandomDialogue(path, eid, settings, dialogueTree, appendName, di
 	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
 
 	if dialogue.result.dialogue and dialogue.result.dialogue[1] then
+		local dialogue = sb.jsonMerge(dialogue, {})
 		for i, line in ipairs(dialogue.result.dialogue) do
 			sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
 				sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags,
 					(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
-				if i == #dialogue.result.dialogue then
+				if i >= #dialogue.result.dialogue then
 					sbq.finishDialogue()
 				end
 			end)
+		end
+	end
+end
+
+function sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
+	for _, v in ipairs(randomDialogueHandling) do
+		local randomVal = v[1]
+		local resultVal = v[2]
+		if not dialogue.result[resultVal] then
+			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
+			if type(randomResult) == "table" then
+				dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
+				if randomResult.randomDialogue or randomResult.randomPortrait or randomResult.randomButtonText or randomResult.randomEmote or randomResult.randomName then
+					return true
+				end
+			elseif type(randomResult) == "string" then
+				dialogue.result[resultVal] = {randomResult}
+			end
 		end
 	end
 end
@@ -1576,4 +1610,60 @@ function sbq.checkSpeciesRootTable(input)
 		input = sbq.checkSpeciesRootTable(input)
 	end
 	return input
+end
+
+-- I fucking hate starbound
+function recruitable.generateRecruitInfo()
+	local rank = config.getParameter("crew.rank") or storage.recruitRank or recruitable.generateRank()
+	local parameters = {
+		level = npc.level(),
+		identity = npc.humanoidIdentity(),
+		scriptConfig = {
+			personality = personality(),
+			crew = {
+				rank = rank
+			},
+            initialStorage = preservedStorage(),
+			sbqSettings = storage.settings,
+			uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
+			preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or
+			entity.uniqueId()
+		},
+		statusControllerSettings = {
+			statusProperties = {
+				sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
+				sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
+                sbqCumulativeData = status.statusProperty("sbqCumulativeData"),
+				speciesAnimOverrideSettings = status.statusProperty("speciesAnimOverrideSettings")
+			}
+		}
+	}
+	local poly = mcontroller.collisionPoly()
+	if #poly <= 0 then poly = nil end
+
+	local name = world.entityName(entity.id())
+
+	if not entity.uniqueId() then
+	  world.setUniqueId(entity.id(), sb.makeUuid())
+	end
+
+	storage.statusText = storage.statusText or randomStatusText(personalityType())
+
+	return {
+		name = name,
+		uniqueId = entity.uniqueId(),
+		portrait = world.entityPortrait(entity.id(), "full"),
+		collisionPoly = poly,
+		statusText = storage.statusText,
+		rank = rank,
+		uniform = storage.crewUniform,
+		status = getCurrentStatus(),
+		storage = preservedStorage(),
+		config = {
+			species = npc.species(),
+			type = npc.npcType(),
+			seed = npc.seed(),
+			parameters = parameters
+		}
+	}
 end

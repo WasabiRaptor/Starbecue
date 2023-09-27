@@ -67,6 +67,7 @@ function init()
 	if sbq.data.settings.playerPrey then
 		sbq.data.settings = sb.jsonMerge(sbq.data.settings, sb.jsonMerge( sbq.config.defaultPreyEnabled.player, player.getProperty("sbqPreyEnabled") or {}))
 	end
+	sbq.occupant = metagui.inputData.occupant
 	sbq.data.settings.playerRace = player.species()
 
 	sbq.settings = sb.jsonMerge(sbq.data.settings, (player.getProperty("sbqDialogueSettings") or {})[world.entityUniqueId(pane.sourceEntity()) or "noUUID"] or {})
@@ -83,7 +84,7 @@ function init()
 	end
 	sbq.dialogueTree = sbq.data.dialogueTree
 
-	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree )
+	sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree)
 end
 
 function update()
@@ -135,11 +136,13 @@ function sbq.handleRandomDialogue(dialogueTree, dialogueTreeTop, rollno)
 					return true
 				end
 			elseif type(randomResult) == "string" then
+				if (resultVal == "dialogue") and (sb.replaceTags(randomResult, {dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = ""}) == "") then
+					return true
+				end
 				dialogue.result[resultVal] = {randomResult}
 			end
 		end
 	end
-	return startAgain
 end
 
 function sbq.updateDialogueBox(path, dialogueTree, dialogueTreeTop)
@@ -304,9 +307,6 @@ function sbq.getSidedLocationWithSpace(location, size)
 	if data.sided then
 		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
 		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
-		if location == "breasts" then
-			sb.logInfo(sizeMultiplied)
-		end
 		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
 			if math.random() > 0.5 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
 				if leftHasSpace then return location, "L", data
@@ -383,7 +383,7 @@ function sbq.checkInfusionActionButtonsEnabled()
 end
 
 function sbq.infusionButtonSetup(active, button, voreType)
-	if dialogue.result.hideVoreButtons then
+	if dialogue.result.hideInfusionButtons then
 		button:setVisible(false)
 	else
 		button.active = active
@@ -431,11 +431,10 @@ function sbq.checkInfusionActionActive(location, locations)
 	if (not sbq.settings) then return "hidden" end
 	local locationData = sbq.sbqData.locations[location]
 	if not locationData or not locationData.infusion then return "hidden" end
-	local sbqType = player.getProperty("sbqType")
 
 	local preyEnabled = sb.jsonMerge( sbq.config.defaultPreyEnabled.player, (status.statusProperty("sbqPreyEnabled") or {}))
 	if (sbq.settings[(locationData.infusionSetting or "infusion") .. "Pred"]) and preyEnabled.preyEnabled and
-		preyEnabled[(locationData.infusionSetting or "infusion")] and (sbqType == "prey")
+		preyEnabled[(locationData.infusionSetting or "infusion")] and sbq.settings.playerPrey
 	then
 		local playerLocation
 		local isInfused

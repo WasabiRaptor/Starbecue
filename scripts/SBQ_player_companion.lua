@@ -55,86 +55,57 @@ function init()
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
 	end
 
-	message.setHandler( "sbqPlayerCompanions", function (_,_, func, ...)
-		return playerCompanions[func](...)
-	end)
-	message.setHandler("sbqSetRecruit", function(_, _, data)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
-		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == data.uniqueId then
-					companions[i] = data
-					reload = true
-					break
-				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
+	message.setHandler("sbqPlayerCompanions", function(_, _)
+		local crew = {}
+		for category, companions in pairs(recruitSpawner:storeCrew()) do
+			if category == "followers" then
+				util.appendLists(crew, companions)
+			elseif onOwnShip() and category == "shipCrew" then
+				util.appendLists(crew, companions)
 			end
 		end
-		recruitSpawner:markDirty()
+		return crew
 	end)
 
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
 
+	local companionTypes = { "followers", "shipCrew" }
 	message.setHandler("sbqCrewSaveSettings", function(_, _, settings, uniqueId)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
 		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == uniqueId then
-					companions[i].config.parameters.scriptConfig.sbqSettings = settings
-					reload = true
+			local companions = recruitSpawner[companionType]
+			for i, follower in pairs(companions) do
+				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
+					follower.spawnConfig.parameters.scriptConfig.sbqSettings = settings
 					break
 				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
 			end
 		end
 		recruitSpawner:markDirty()
 	end)
 	message.setHandler("sbqCrewSaveDigestedPrey", function(_, _, digestedStoredTable, uniqueId)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
 		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == uniqueId then
-					companions[i].config.parameters.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = digestedStoredTable
-					reload = true
+			local companions = recruitSpawner[companionType]
+			for i, follower in pairs(companions) do
+				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
+					follower.spawnConfig.parameters.statusControllerSettings = follower.spawnConfig.parameters.statusControllerSettings or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties = follower.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = digestedStoredTable
 					break
 				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
 			end
 		end
 		recruitSpawner:markDirty()
 	end)
 	message.setHandler("sbqCrewSaveStatusProperty", function(_, _, property, data, uniqueId)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
 		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == uniqueId then
-					companions[i].config.parameters.statusControllerSettings = companions[i].config.parameters.statusControllerSettings or {}
-					companions[i].config.parameters.statusControllerSettings.statusProperties = companions[i].config.parameters.statusControllerSettings.statusProperties or {}
-					companions[i].config.parameters.statusControllerSettings.statusProperties[property] = data
-					reload = true
+			local companions = recruitSpawner[companionType]
+			for i, follower in pairs(companions) do
+				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
+					follower.spawnConfig.parameters.statusControllerSettings = follower.spawnConfig.parameters.statusControllerSettings or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties = follower.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties[property] = data
 					break
 				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
 			end
 		end
 		recruitSpawner:markDirty()
@@ -175,11 +146,11 @@ function init()
 		world.sendEntityMessage(player.id(), "sbqRefreshSettings", sbqSettings )
 	end)
 
-	message.setHandler( "sbqOpenMetagui", function(_,_, name, sourceEntity, data)
+	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
 	end)
 
-	message.setHandler( "sbqOpenInterface", function(_,_, name, args, sourceEntity)
+    message.setHandler("sbqOpenInterface", function(_, _, name, args, sourceEntity)
 		local pane = root.assetJson("/interface/scripted/sbq/"..name.."/"..name..".config")
 		if args then
 			pane = sb.jsonMerge(pane, args)

@@ -292,7 +292,8 @@ function sbq.tenant_setNpcType(npcType)
 			scriptConfig = {
 				ownerUuid = config.getParameter("ownerUuid"),
 				personality = personality(),
-				initialStorage = preservedStorage(),
+                initialStorage = preservedStorage(),
+				sbqSettings = storage.settings,
 				uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
 				preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or
 				entity.uniqueId()
@@ -301,7 +302,8 @@ function sbq.tenant_setNpcType(npcType)
 				statusProperties = {
 					sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
 					sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
-					sbqCumulativeData = status.statusProperty("sbqCumulativeData")
+					sbqCumulativeData = status.statusProperty("sbqCumulativeData"),
+					speciesAnimOverrideSettings = status.statusProperty("speciesAnimOverrideSettings")
 				}
 			}
 		},
