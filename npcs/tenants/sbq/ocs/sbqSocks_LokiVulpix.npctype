@@ -27,6 +27,7 @@
 
 		"behavior" : "sbqvorevillager",
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
 			"graduation" : {
 				"nextNpcType" : [] // this prevents the NPC from graduating into crew
 			}

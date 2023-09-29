@@ -30,6 +30,7 @@
 		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
 		"behavior" : "sbqvorevillager",
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
 			"graduation" : {
 				"nextNpcType" : [] // this prevents the NPC from graduating into crew
 			}
