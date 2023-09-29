@@ -45,3 +45,4 @@
 
 # Zovoroth
 	General NPC dialogue proofreading and editing
+	SBQ specific quest generation

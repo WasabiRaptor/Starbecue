@@ -12,6 +12,7 @@
 		"behavior" : "sbqvorevillager",
 		"sbqNPC" : true,
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"],
 			"graduation" : {
 				"nextNpcType" : [
 					[1, "sbqVoreCrewmember"],

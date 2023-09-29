@@ -16,6 +16,7 @@
 		"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree",
 
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "guard"],
 			"graduation" : {
 				"nextNpcType" : [
 					[1, "sbqVoreCrewmember"],

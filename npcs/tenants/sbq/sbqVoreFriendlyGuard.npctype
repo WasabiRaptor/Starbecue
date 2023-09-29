@@ -12,6 +12,7 @@
 		"sbqNPC" : true,
 		"behavior" : "sbqvoreguard",
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "guard"],
 			"graduation" : {
 				"nextNpcType" : [
 					[1, "sbqVoreCrewmember"],

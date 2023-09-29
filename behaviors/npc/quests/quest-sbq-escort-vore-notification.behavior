@@ -1,0 +1,84 @@
+{
+  "name": "quest-sbq-escort-vore-notification",
+  "description": "",
+  "scripts": [
+    "/scripts/actions/notification.lua",
+    "/scripts/actions/movement.lua",
+    "/scripts/actions/npc.lua",
+    "/scripts/actions/quests.lua",
+    "/scripts/actions/entity.lua"
+  ],
+  "parameters": {},
+  "root": {
+    "title": "selector",
+    "type": "composite",
+    "name": "selector",
+    "parameters": {},
+    "children": [
+      {
+        "title": "sequence",
+        "type": "composite",
+        "name": "sequence",
+        "parameters": {},
+        "children": [
+          {
+            "title": "receivedNotification",
+            "type": "action",
+            "name": "receivedNotification",
+            "parameters": {
+              "type": {"value": "foundEscort"}
+            },
+            "output": {
+              "source": "player"
+            }
+          },
+          {
+            "title": "faceEntity",
+            "type": "action",
+            "name": "faceEntity",
+            "parameters": {
+              "entity": {"key": "player"}
+            }
+          },
+          {
+            "title": "emote",
+            "type": "action",
+            "name": "emote",
+            "parameters": {
+              "emote": {"value": "happy"}
+            }
+          },
+          {
+            "title": "sayQuestDialog",
+            "type": "action",
+            "name": "sayQuestDialog",
+            "parameters": {
+              "dialogType": {"value": "sbq_escort_vore.found"},
+              "entity": {"key": "player"},
+              "extraTags": {"value": {}},
+              "quest": {"key": "override"}
+            }
+          },
+          {
+            "title": "setDamageTeam",
+            "type": "action",
+            "name": "setDamageTeam",
+            "parameters": {
+              "damageTeam": {"value": {"type": "friendly", "team": 0}}
+            }
+          },
+          {
+            "title": "setQuestValue",
+            "type": "action",
+            "name": "setQuestValue",
+            "parameters": {
+              "bool": {"value": true},
+              "name": {"value": "interacted"},
+              "quest": {"key": "override"}
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

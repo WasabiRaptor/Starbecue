@@ -1,0 +1,91 @@
+{
+  "id" : "sbq_change_species.generated",
+  "parameters" : {
+    "questGiver" : {
+      "type" : "entity"
+    },
+    "target" : {
+      "type" : "entity",
+      "example" : {
+        "name" : "Role Model"
+      }
+    },
+    "newSpecies" : {
+      "type" : "noDetail",
+      "example" : "axhylotl"
+    },
+    "article" : {
+      "type" : "noDetail",
+      "example" : "an"
+    }
+  },
+  "moneyRange" : [10, 50],
+  "rewards" : [ ],
+  "rewardParameters" : [ "rewards" ],
+  "canBeAbandoned" : true,
+  "ephemeral" : true,
+
+  "updateDelta" : 60,
+  "script" : "/quests/scripts/generated/sbq_change_species.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "default" : "questGiver"
+    },
+    "generatedText" : {
+      "text" : {
+        "first" : {
+          "default" : [
+            "I think I could really get to know ^orange;<target>^white; better if I could be just like them... Do you think you could find some way to ^green;transform me into <article> <newSpecies>^white;?"
+          ]
+        },
+        "default" : {
+          "default" : [
+            "You know, <newSpecies> are pretty amazing... See if you can ^green;turn me into <article> <newSpecies>^white; like ^orange;<target>^white;!"
+          ]
+        }
+      },
+      "title" : {
+        "default" : [
+          "<questGiver>'s <newSpecies> dream"
+        ]
+      },
+      "goalText" : {
+        "default" : [
+          "^cyan;I wish I could become <article> <newSpecies>!"
+        ]
+      },
+      "completionText" : {
+        "first" : {
+          "default" : [
+            "Wow! I've got to let <target> know!"
+          ]
+        },
+        "default" : {
+          "default" : [
+            "Thanks! It really is amazing!"
+          ]
+        }
+      }
+    },
+    "goalSpecies" : "newSpecies",
+    "portraitParameter" : "questGiver",
+    "requireTurnIn" : true,
+    "indicators" : ["questGiver"],
+
+    "objectives" : [
+      {
+        "id" : "transform",
+        "text" : "Turn <questGiver> into <article> <newSpecies>"
+      },
+      {
+        "id" : "return",
+        "text" : "Return to <questGiver>"
+      }
+    ],
+
+    "initialCompassTarget" : {
+      "targetType" : "parameter",
+      "target" : "questGiver"
+    }
+  }
+}

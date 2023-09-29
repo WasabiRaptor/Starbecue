@@ -2,6 +2,9 @@
 	Zygan / Zygahedron
 	Wasabi_Raptor / LokiVulpix / Loki_the_Vulpix
 
+# Code Contributors
+	Zovoroth
+
 # Artists
 	Zygan / Zygahedron
 	Wasabi_Raptor / LokiVulpix / Loki_the_Vulpix
