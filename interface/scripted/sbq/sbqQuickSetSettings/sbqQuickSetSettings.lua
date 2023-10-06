@@ -3,8 +3,6 @@
 sbq = {
 	config = root.assetJson( "/sbqGeneral.config" ),
 	overrideSettings = {},
-	drawSpecialButtons = {},
-
 }
 settingsButtonScripts = {}
 speciesOverride = {}
@@ -39,7 +37,7 @@ function init()
 
 	sbq.sbqCurrentData = player.getProperty("sbqCurrentData") or {}
 	sbq.lastSpecies = sbq.sbqCurrentData.species
-	sbq.lastType = sbq.sbqCurrentData.type
+	sbq.lastType = player.getProperty("sbqType")
 
 	sbq.storedDigestedPrey = status.statusProperty("sbqStoredDigestedPrey") or {}
 
@@ -70,14 +68,17 @@ function init()
 	sbq.checkLockedSettingsButtons("globalSettings", "overrideSettings", "changeGlobalSetting")
 	sbq.checkLockedSettingsButtons("animOverrideSettings", "animOverrideOverrideSettings", "changeAnimOverrideSetting")
 
-	sbq.sbqPreyEnabled = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
-	sbq.overridePreyEnabled = status.statusProperty("sbqOverridePreyEnabled") or {}
-	sbq.checkLockedSettingsButtons("sbqPreyEnabled", "overridePreyEnabled", "changePreySetting")
+	sbq.preySettings = sb.jsonMerge(sbq.config.defaultPreyEnabled.player, status.statusProperty("sbqPreyEnabled") or {})
+	sbq.overridePreyEnabled = sb.jsonMerge(sbq.predatorConfig.overridePreyEnabled or {}, status.statusProperty("sbqOverridePreyEnabled") or {})
+	sbq.checkLockedSettingsButtons("preySettings", "overridePreyEnabled", "changePreySetting")
 
 	scaleValue.handles[2].locked = not player.hasItem("sbqSizeRay")
 	scaleValue.handles[2].value = sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1
 	scaleValue.handles[1].value = sbq.animOverrideOverrideSettings.scaleMin or sbq.animOverrideSettings.scaleMin or 0.1
 	scaleValue.handles[3].value = sbq.animOverrideOverrideSettings.scaleMax or sbq.animOverrideSettings.scaleMax or 3
+
+	scaleValue.handles[1].locked = sbq.animOverrideOverrideSettings.scaleMin ~= nil
+	scaleValue.handles[3].locked = sbq.animOverrideOverrideSettings.scaleMax ~= nil
 	function scaleValue:onChange(index, value)
 		if index == 1 then
 			sbq.changeAnimOverrideSetting("scaleMin", value)
@@ -89,30 +90,18 @@ function init()
 		sbq.saveSettings()
 	end
 
-	-- scaleValueMin:setText(tostring(sbq.animOverrideOverrideSettings.scaleMin or sbq.animOverrideSettings.scaleMin or 0.1))
-	-- local minmaxTable = {(sbq.animOverrideOverrideSettings.scaleMin or 0.1), (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1)}
-	-- function scaleValueMin:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMin", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
-	-- function scaleValueMin:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
-	-- function scaleValueMin:onEscape() self:onEnter() end
-	-- function scaleValueMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-	-- sbq.numberBoxColor(scaleValueMin, table.unpack(minmaxTable) )
-
-	-- scaleValueMax:setText(tostring(sbq.animOverrideOverrideSettings.scaleMax or sbq.animOverrideSettings.scaleMax or 3))
-	-- local minmaxTable = { (sbq.animOverrideOverrideSettings.scale or sbq.animOverrideSettings.scale or 1), (sbq.animOverrideOverrideSettings.scaleMax or 3)}
-	-- function scaleValueMax:onEnter() sbq.numberBox(self, "changeAnimOverrideSetting", "scaleMax", "animOverrideSettings", "animOverrideOverrideSettings", table.unpack(minmaxTable) ) end
-	-- function scaleValueMax:onTextChanged() sbq.numberBoxColor(self, table.unpack(minmaxTable) ) end
-	-- function scaleValueMax:onEscape() self:onEnter() end
-	-- function scaleValueMax:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-	-- sbq.numberBoxColor(scaleValueMax, table.unpack(minmaxTable))
-
-	defaultInfusedMultiplier:setText(tostring(sbq.overrideSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
+	defaultInfusedMultiplier:setText(tostring(sbq.overrideSettings["default" .. "InfusedMultiplier"] or sbq.predatorSettings["default".."InfusedMultiplier"] or 0.5))
 	function defaultInfusedMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "InfusedMultiplier", "globalSettings", "overrideSettings", 0) end
 	function defaultInfusedMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
 	function defaultInfusedMultiplier:onEscape() self:onEnter() end
 	function defaultInfusedMultiplier:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
 	sbq.numberBoxColor(defaultInfusedMultiplier, 0)
 
-	defaultCompressionMultiplier:setText(tostring(sbq.overrideSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
+	defaultTimeCompression:selectValue(sbq.overrideSettings["default" .. "Compression"] or sbq.predatorSettings["default".."Compression"] or "none")
+	function defaultTimeCompression:onClick() sbq.radioButton(self, "defaultCompression", "globalSettings", "changeGlobalSetting")end
+	function defaultHealthCompression:onClick() sbq.radioButton(self, "defaultCompression", "globalSettings", "changeGlobalSetting")end
+
+	defaultCompressionMultiplier:setText(tostring(sbq.overrideSettings["default" .. "CompressionMultiplier"] or sbq.predatorSettings["default".."CompressionMultiplier"] or 0.25))
 	function defaultCompressionMultiplier:onEnter() sbq.numberBox(self, "changeGlobalSetting", "default" .. "CompressionMultiplier", "globalSettings", "overrideSettings", 0) end
 	function defaultCompressionMultiplier:onTextChanged() sbq.numberBoxColor(self, 0) end
 	function defaultCompressionMultiplier:onEscape() self:onEnter() end
@@ -139,11 +128,6 @@ function sbq.checkLockedSettingsButtons(settings, override, func)
 				end
 				function button:onClick() end
 			else
-				if sbq.drawSpecialButtons[setting] then
-					function button:draw() button:drawSpecial() end
-				else
-					function button:draw() theme.drawCheckBox(self) end
-				end
 				button:setChecked(value)
 				function button:onClick()
 					sbq[func](setting, button.checked)
@@ -158,7 +142,7 @@ end
 
 function titleCanvas:draw()
 	local c = widget.bindCanvas(self.backingWidget) c:clear()
-	c:drawText("Starbecue 2.7", {
+	c:drawText("Starbecue "..root.assetJson("/sbqGeneral.config:settingsVersion"), {
 		position = {titleCanvas.size[1]/2, titleCanvas.size[2]},
 		horizontalAnchor = "mid",
 		verticalAnchor = "top",
@@ -167,7 +151,7 @@ function titleCanvas:draw()
 end
 
 function sbq.saveSettings()
-	if type(sbq.sbqCurrentData.id) == "number" and sbq.sbqCurrentData.type == "driver" and world.entityExists(sbq.sbqCurrentData.id) then
+	if type(sbq.sbqCurrentData.id) == "number" and player.getProperty("sbqType") == "driver" and world.entityExists(sbq.sbqCurrentData.id) then
 		world.sendEntityMessage( sbq.sbqCurrentData.id, "settingsMenuSet", sb.jsonMerge(sbq.predatorSettings, sbq.globalSettings))
 	end
 
@@ -200,9 +184,9 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 end
 
 function sbq.changePreySetting(settingname, settingvalue)
-	sbq.sbqPreyEnabled = status.statusProperty("sbqPreyEnabled") or {}
-	sbq.sbqPreyEnabled[settingname] = settingvalue
-	status.setStatusProperty("sbqPreyEnabled", sbq.sbqPreyEnabled)
+	sbq.preySettings = status.statusProperty("sbqPreyEnabled") or {}
+	sbq.preySettings[settingname] = settingvalue
+	status.setStatusProperty("sbqPreyEnabled", sbq.preySettings)
 	world.sendEntityMessage(player.id(), "sbqRefreshDigestImmunities")
 end
 
@@ -221,44 +205,7 @@ function sbq.setSettingsList(list, value)
 	end
 end
 
-function sbq.numberBox(textbox, settingsFunc, settingName, settings, overrideSettings, min, max )
-	local value = tonumber(textbox.text)
-	local isNumber = type(value) == "number"
-	if isNumber and (sbq[overrideSettings] or {})[settingName] == nil then
-		local newValue = math.min(math.max(value, (min or -math.huge)), (max or math.huge))
-		textbox:setText(tostring(newValue))
-		sbq[settingsFunc](settingName, newValue)
-		sbq.numberBoxColor(textbox, min, max)
-		sbq.saveSettings()
-	else
-		textbox:setText(tostring((sbq[overrideSettings] or {})[settingName] or (sbq[settings] or {})[settingName] or 0))
-	end
-end
-function sbq.numberBoxColor(textbox, min, max)
-	local value = tonumber(textbox.text)
-	local isNumber = type(value) == "number"
-	local color = "FFFFFF"
-	if isNumber then
-		if type(max) == "number" and value == max
-		or type(min) == "number" and value == min
-		then
-			color = "FFFF00"
-		elseif type(max) == "number" and type(min) == "number" then
-			if value > min and value < max then
-				color = "00FF00"
-			end
-		end
-		if type(max) == "number" and value > max
-		or type(min) == "number" and value < min
-		then
-			color = "FF0000"
-		end
-	else
-		color = "FF0000"
-	end
-	textbox:setColor(color)
-end
-
+require("/interface/scripted/sbq/sbqNumberBox.lua")
 
 local predSettingList = {
 	"oralVorePred",
@@ -274,7 +221,22 @@ local predSettingList = {
 	"cockInfusionPred",
 	"pussyInfusionPred",
 	"bellyInfusionPred",
-	"breastsInfusionPred"
+	"breastsInfusionPred",
+
+	"oralVorePredUnwilling",
+	"tailVorePredUnwilling",
+	"absorbVorePredUnwilling",
+	"navelVorePredUnwilling",
+
+	"analVorePredUnwilling",
+	"unbirthPredUnwilling",
+	"cockVorePredUnwilling",
+	"breastVorePredUnwilling",
+
+	"cockInfusionPredUnwilling",
+	"pussyInfusionPredUnwilling",
+	"bellyInfusionPredUnwilling",
+	"breastsInfusionPredUnwilling"
 }
 local preySettingList = {
 	"oralVore",

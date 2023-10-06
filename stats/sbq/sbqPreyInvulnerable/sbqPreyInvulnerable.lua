@@ -14,6 +14,7 @@ function init()
 		{stat = "biomeradiationImmunity", amount = 1},
 		{stat = "lavaImmunity", amount = 1},
 		{stat = "fallDamageMultiplier", effectiveMultiplier = 0},
+		{stat = "foodDelta", effectiveMultiplier = 0 },
 		--FU
 		{stat = "pusImmunity", amount = 1},
 		{stat = "beestingImmunity", amount = 1},

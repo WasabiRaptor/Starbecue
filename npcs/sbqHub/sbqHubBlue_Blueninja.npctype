@@ -5,6 +5,9 @@
 	"baseType" : "sbqBlue_Blueninja",
 
 	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		},
 		"sbqOverrideSettings" : {
 			// the hub map will be seen by everyone who plays the mod, you don't want to subject them to seeing NSFW stuff
 			// any NPCs on the hub map *must* have their NSFW vore types disabled

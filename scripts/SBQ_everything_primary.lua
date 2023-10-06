@@ -2,15 +2,19 @@ local mysteriousTFDuration
 require("/scripts/rect.lua")
 
 function sbq.everything_primary()
+	status.setStatusProperty("sbqType", nil)
 	message.setHandler("sbqApplyStatusEffects", function(_,_, statlist)
 		for statusEffect, data in pairs(statlist) do
 			status.setStatusProperty(statusEffect, data.property)
 			status.addEphemeralEffect(statusEffect, data.power, data.source)
 		end
 	end)
-	message.setHandler("sbqRemoveStatusEffects", function(_,_, statlist)
+	message.setHandler("sbqRemoveStatusEffects", function(_,_, statlist, resetHealth)
 		for _, statusEffect in ipairs(statlist) do
 			status.removeEphemeralEffect(statusEffect)
+		end
+		if resetHealth then
+			status.resetResource("health")
 		end
 	end)
 	message.setHandler("sbqRemoveStatusEffect", function(_,_, statusEffect)
@@ -42,11 +46,21 @@ function sbq.everything_primary()
 	message.setHandler("sbqIsPreyEnabled", function(_,_, voreType)
 		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
 		if preySettings.preyEnabled == false then return false end
-		return { enabled = preySettings[voreType], size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList")}
+		local enabled = true
+		if type(voreType) == "table" then
+			for i, voreType in ipairs(voreType) do
+				enabled = enabled and preySettings[voreType]
+				if not enabled then break end
+			end
+		else
+			enabled = preySettings[voreType]
+		end
+
+		return { enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = status.statusProperty("sbqType")}
 	end)
 
-	message.setHandler("sbqGetPreyEnabled", function(_,_)
-		return sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
+	message.setHandler("sbqGetPreyEnabled", function(_, _)
+		return sb.jsonMerge({size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = status.statusProperty("sbqType")}, sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {}))))
 	end)
 
 	message.setHandler("sbqGetPreyEnabledSetting", function(_,_, setting)
@@ -88,14 +102,58 @@ function sbq.everything_primary()
 		sbq.endMysteriousTF()
 	end)
 
-	message.setHandler("sbqApplyDigestEffect", function(_, _, effectConfig, data, sourceEntityId)
+	message.setHandler("sbqApplyDigestEffects", function(_, _, effects, data, sourceEntityId)
 		status.setStatusProperty("sbqDigestData", data)
-		status.addEphemeralEffect(effectConfig, 1, sourceEntityId)
+		for i, effect in ipairs(effects) do
+			status.addEphemeralEffect(effect, 1, sourceEntityId)
+		end
 	end)
 
 	message.setHandler("sbqConsumeResource", function(_, _, resourceName, amount)
-		return status.consumeResource(resourceName, amount)
+		if status.resourceLocked(resourceName) then return false end
+		return status.overConsumeResource(resourceName, amount)
 	end)
+
+	message.setHandler("sbqGetResourcePercentage", function(_, _, resourceName)
+		return status.resourcePercentage(resourceName)
+	end)
+
+	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)
+		local amountRemaining = amount
+		for i, resource in ipairs(resources or {}) do
+			if amountRemaining <= 0 then break end
+			if status.isResource(resource) then
+				local mul = ((multipliers or {})[i] or 1)
+				local before = status.resource(resource) / mul
+				status.giveResource(resource, (amountRemaining * mul))
+				amountRemaining = (before + amountRemaining) - (status.resourceMax(resource) / mul)
+			end
+		end
+	end)
+	message.setHandler("sbqTakeFromResources", function(_, _, amount, resources, multipliers, thresholds)
+		local amountRemaining = amount
+		for i, resource in ipairs(resources or {}) do
+			if amountRemaining <= 0 then break end
+			if status.isResource(resource) then
+				local threshold = ((thresholds or {})[i] or 0)
+				if status.resourcePercentage(resource) > threshold then
+					local mul = ((multipliers or {})[i] or 1)
+					local before = status.resource(resource) / mul
+					status.modifyResource(resource, -(amountRemaining * mul))
+					amountRemaining = math.max((amountRemaining - before), 0)
+					if resource == "energy" then
+						status.setResourcePercentage("energyRegenBlock", math.max(status.resourcePercentage("energyRegenBlock"),0.1))
+					end
+				end
+			end
+		end
+		return amount - amountRemaining
+	end)
+
+
+	message.setHandler("sbqGetDriverStat", function( _, _, stat)
+		return status.stat(stat)
+	end )
 
 	message.setHandler("sbqDigestStore", function(_, _, location, uniqueId, item)
 		if (not uniqueId) or (not item) or (not location) then return end
@@ -143,7 +201,8 @@ function sbq.everything_primary()
 		world.sendEntityMessage(pred, "sbqReplaceInfusion", location, itemDrop, entity.id(), primaryLocation)
 	end)
 
-	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+    message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
+		if status.statusProperty("sbqType") == "prey" then return end
 		local size = sbq.calcSize()
 		if size <= (steppySize*0.4) then
 			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)

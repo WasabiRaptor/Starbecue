@@ -1,48 +1,57 @@
 {
-  "name": "sbqvorevillager",
-  "description": "",
-  "scripts": [],
-  "parameters": {
-    "play": true
-  },
-  "root": {
-    "title": "Villager",
-    "type": "composite",
-    "name": "dynamic",
-    "parameters": {},
-    "children": [
-      {
-        "title": "Tenant Baseline Behavior",
-        "type": "module",
-        "name": "Tenant Baseline Behavior",
-        "parameters": {}
-      },
-      {
-        "title": null,
-        "type": "module",
-        "name": "flee",
-        "parameters": {}
-      },
-      {
-        "title": "accuse",
-        "type": "module",
-        "name": "accuse",
-        "parameters": {}
-      },
-      {
-        "title": null,
-        "type": "module",
-        "name": "sbqdialogueboxconverse",
-        "parameters": {}
-      },
-      {
-        "title": "NPC Idle",
-        "type": "module",
-        "name": "NPC Idle",
-        "parameters": {
-          "play": {"value": "<play>"}
-        }
-      }
-    ]
-  }
+	"name": "sbqvorevillager",
+	"description": "",
+	"scripts": [
+		"/scripts/actions/npc.lua",
+		"/behaviors/npc/sbqHunting.lua"
+	],
+	"parameters": {
+		"play": true
+	},
+	"root": {
+		"title": "Villager",
+		"type": "composite",
+		"name": "dynamic",
+		"parameters": {},
+		"children": [
+			{
+				"title": "sbqhunting",
+				"type": "module",
+				"name": "sbqhunting",
+				"parameters": {}
+			},
+			{
+				"title": "Tenant Baseline Behavior",
+				"type": "module",
+				"name": "Tenant Baseline Behavior",
+				"parameters": {}
+			},
+			{
+				"title": null,
+				"type": "module",
+				"name": "flee",
+				"parameters": {}
+			},
+			{
+				"title": "accuse",
+				"type": "module",
+				"name": "accuse",
+				"parameters": {}
+			},
+			{
+				"title": null,
+				"type": "module",
+				"name": "sbqdialogueboxconverse",
+				"parameters": {}
+			},
+			{
+				"title": "NPC Idle",
+				"type": "module",
+				"name": "NPC Idle",
+				"parameters": {
+					"play": {"value": "<play>"}
+				}
+			}
+		]
+	}
 }

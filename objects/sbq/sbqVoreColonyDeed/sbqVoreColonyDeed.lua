@@ -13,7 +13,7 @@ function init()
 	sbq.config = root.assetJson("/sbqGeneral.config")
 
 	if not storage.occupier then
-		storage = config.getParameter("saveTenants") or {}
+		storage = config.getParameter("scriptStorage") or {}
 		sbq.timer("doRespawn", 0.5, function ()
 			respawnTenants()
 		end)
@@ -65,6 +65,10 @@ function init()
 	message.setHandler("sbqSaveAnimOverrideSettings", function (_,_, settings, index)
 		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = settings
 	end)
+	message.setHandler("sbqSaveStatusProperty", function (_,_, property, value, index)
+		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties[property] = value
+	end)
+
 
 	message.setHandler("sbqDeedInteract", function (_,_, args)
 		_onInteraction(args)
@@ -217,12 +221,6 @@ function onInteraction(args)
 	if not storage.house then return animator.playSound("error") end
 
 	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:voreColonyDeed" }}
-end
-
-function die() -- replace the old function so the tenant isn't evicted upon breaking it
-	object.setConfigParameter("saveTenants", storage)
-	self.questParticipant:die()
-	evictTenants()
 end
 
 function checkHouseIntegrity()
@@ -435,4 +433,55 @@ function spawn(tenant, i)
 		tenant.seed = world.callScriptedEntity(entityId, "object.seed")
 	end
 	return entityId
+end
+
+local _die = die
+function die()
+	if not storage.occupier.tenants then return end
+
+	-- Spawn NPC essence for all tenants
+	for _, tenant in pairs(storage.occupier.tenants) do
+		local item = sbq.generateNPCItemCard(tenant)
+		if item then
+			world.spawnItem(item, object.position())
+		end
+	end
+	-- Original function will fail quests and evict tenants
+	_die()
+	-- Dropped deed is empty
+	storage = {}
+end
+
+require("/scripts/speciesAnimOverride_validateIdentity.lua")
+
+function sbq.generateNPCItemCard(tenant)
+	local npcConfig = root.npcConfig(tenant.type)
+
+	validateIdentity(tenant.overrides.identity or {})
+
+	local item = copy(sbq.config.npcCardTemplate)
+
+	if npcConfig.scriptConfig.isOC then
+		item.parameters.rarity = "rare"
+	elseif npcConfig.scriptConfig.sbqNPC then
+		item.parameters.rarity = "uncommon"
+	end
+
+	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
+	item.parameters.inventoryIcon = root.npcPortrait("bust", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
+	item.parameters.description = (npcConfig.scriptConfig or {}).cardDesc or ""
+	item.parameters.tooltipFields.collarNameLabel = ""
+	item.parameters.tooltipFields.objectImage = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
+	item.parameters.tooltipFields.subtitle = tenant.type
+	item.parameters.tooltipFields.collarIconImage = nil
+	item.parameters.npcArgs = {
+		npcSpecies = tenant.species,
+		npcSeed = tenant.seed,
+		npcType = tenant.type,
+		npcLevel = tenant.level,
+		npcParam = tenant.overrides,
+		npcSpawn = tenant.spawn
+	}
+	item.parameters.preySize = 1
+	return item
 end

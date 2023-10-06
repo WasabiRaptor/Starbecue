@@ -6,16 +6,17 @@
 
 	"scriptConfig" : {
 		"behaviorConfig" : {
+			//"emptyHands": true,
 			"greetingChance" : 0
 		},
 		"questGenerator" : {
-			"pools" : ["common", "tenant", "hats"],
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant", "hats"],
 			"enableParticipation" : true,
 
 			"timeLimit" : 30,
 			"nearbyQuestLimit" : 2,
 			"nearbyQuestRange" : 50,
-			"chance" : 0.02
+			"chance" : 0.9
 		}
 	}
 }

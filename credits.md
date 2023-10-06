@@ -2,6 +2,9 @@
 	Zygan / Zygahedron
 	Wasabi_Raptor / LokiVulpix / Loki_the_Vulpix
 
+# Code Contributors
+	Zovoroth
+
 # Artists
 	Zygan / Zygahedron
 	Wasabi_Raptor / LokiVulpix / Loki_the_Vulpix
@@ -21,7 +24,7 @@
 	Cosmic
 	LokiVulpix
 
-# Writers
+# Writers / Editors
 	LokiVulpix
 	radiantAurora
 	Blueninja
@@ -29,7 +32,8 @@
 	Ferrilata_
 	ArgobargSoup
 	Akari Kaen
-
+	Xodious
+	Zovoroth
 
 # Playtesters / Bug Hunters
 	xeronious
@@ -38,3 +42,17 @@
 	FFWizard
 	ArgobargSoup
 	Jemmysponz
+	Zovoroth
+
+## Do Not Ask/Contact
+
+People who were previously asked about compatibilty and requested not to be contacted further
+
+# Bun (Protogen Race Mod)
+- There is to be no compatibility
+- Nobody is to extract assets to modify
+- Do not contact or ask further
+
+# Crescent (Crylan Race Mod)
+- Permission granted to use assets
+- Do not contact or ask further

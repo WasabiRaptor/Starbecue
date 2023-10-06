@@ -3,6 +3,10 @@
 	"baseType" : "sbqHelena_FFWizard",
 
 	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		},
+
 		"sbqOverrideSettings" : {
 			"analVorePred" : false,
 			"cockVorePred" : false,

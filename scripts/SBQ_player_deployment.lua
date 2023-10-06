@@ -5,6 +5,7 @@ local old = {
 }
 sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/rect.lua")
 
 function init()
 	old.init()
@@ -39,6 +40,12 @@ function init()
 			status.setStatusProperty("sbqCurrentData", nil)
 		end)
 	end)
+	message.setHandler("sbqIsPredEnabled", function(_,_, voreType)
+		local settings = (player.getProperty("sbqSettings") or {}).global or {}
+		local type = player.getProperty("sbqType")
+		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = type}
+	end)
+
 end
 
 function update(dt)
@@ -49,4 +56,11 @@ function update(dt)
 		localAnimator.clearLightSources()
 		localAnimator.addLightSource(light)
 	end
+end
+
+function sbq.calcSize()
+	local boundRectSize = rect.size(mcontroller.boundBox())
+	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
+	status.setStatusProperty("sbqSize", size)
+	return size
 end

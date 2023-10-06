@@ -1,0 +1,94 @@
+{
+  "id" : "sbq_fetch_belly.generated",
+  "parameters" : {
+    "questGiver" : {
+      "type" : "entity"
+    },
+    "fetchedItems" : {
+      "type" : "itemList",
+      "example" : {
+        "items" : [
+          {"name" : "banana", "count" : 3},
+          {"name" : "teleportercore", "count" : 1}
+        ]
+      }
+    }
+  },
+  "moneyRange" : [10, 50],
+  "rewards" : [ ],
+  "rewardParameters" : [ "rewards" ],
+  "canBeAbandoned" : true,
+  "ephemeral" : true,
+
+  "updateDelta" : 60,
+  "script" : "/quests/scripts/generated/sbq_fetch_belly.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "default" : "questGiver"
+    },
+    "generatedText" : {
+      "text" : {
+        "first" : {
+          "default" : [
+            "But first, my stomach has been killing me! Do you think you could... ^green;take a look inside^white;? Find out what's wrong?"
+          ]
+        },
+        "default" : {
+          "default" : [
+            "I think I have something stuck in my throat. ^green;Minding taking a close look^white;? You might have to reach in there pretty deep..."
+          ]
+        }
+      },
+      "title" : {
+        "default" : [
+          "<questGiver>'s stomach trouble"
+        ]
+      },
+      "goalText" : {
+        "default" : [
+          "^cyan;I need some help clearing up my stomach problems."
+        ]
+      },
+      "completionText" : {
+        "last" : {
+          "default" : [
+            "Oh! So that's where that ended up, haha! As thanks, you can have it."
+          ]
+        },
+        "default" : {
+          "default" : [
+            "Great! I was actually just looking for that..."
+          ]
+        }
+      }
+    },
+    "fetchList" : "fetchedItems",
+    "portraitParameter" : "questGiver",
+    "requireTurnIn" : true,
+    "indicators" : ["questGiver"],
+
+    "objectives" : [
+      {
+        "id" : "enter",
+        "text" : "Find your way inside of <questGiver>"
+      },
+      {
+        "id" : "fetch",
+        "text" : "Retrieve <fetchedItems> from <questGiver>"
+      },
+      {
+        "id" : "exit",
+        "text" : "Find your way back out of <questGiver>"
+      },
+      {
+        "id" : "return",
+        "text" : "Return <fetchedItems> to <questGiver>"
+      }
+    ],
+    
+    "initialCompassTarget" : {
+      "targetType" : "parameter",
+      "target" : "questGiver"
+    }
+  }
+}

@@ -120,6 +120,11 @@
 			"shaft",
 			"balls"
 		],
+		"voreTypes" : {
+			"oralVore" : "belly",
+			"cockVore" : "shaft",
+			"analVore" : "butt"
+		},
 		"locations" :{
 			"belly" : { "max": 1, "transformGroups" : ["bellybob", "bodybob"] },
 			"butt" : { "name" : "Butt", "max": 1, "maxNested" : -1, "transformGroups" : ["bellybob", "bodybob"] },
@@ -130,6 +135,7 @@
 		},
 
 		"defaultSettings" : {
+			"oralVorePred" : true,
 			"replaceColors" : [1,1,1,1],
 			"fullbright" : [false,false,true,true],
 
@@ -186,6 +192,7 @@
 
 				// non directional = not accessible via controls, except from script
 				"oralVore": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"lock": true,
 					"location": "belly",
@@ -201,6 +208,7 @@
 					"script": "oralVore"
 				},
 				"oralEscape": {
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"lock": true,
 					"location": "belly",
@@ -217,6 +225,7 @@
 
 
 				"cockVore": {
+					"settings" : { "cockVorePred" : true },
 					"voreType" : "cockVore",
 					"lock": true,
 					"location": "shaft",
@@ -230,6 +239,7 @@
 					"script": "cockVore"
 				},
 				"cockEscape": {
+					"settings" : { "cockVorePred" : true },
 					"voreType" : "cockVore",
 					"lock": true,
 					"location": "shaft",
@@ -256,6 +266,7 @@
 				},
 
 				"analVore": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock": true,
 					"location": "butt",
@@ -269,6 +280,7 @@
 					"script": "analVore"
 				},
 				"analEscape": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock": true,
 					"location": "butt",
@@ -281,6 +293,7 @@
 					"script": "analEscape"
 				},
 				"analPushOut": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock": true,
 					"location": "butt",
@@ -293,6 +306,7 @@
 					"script": "moveToLocation"
 				},
 				"analPushIn": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock": true,
 					"location": "belly",
@@ -305,6 +319,7 @@
 					"script": "moveToLocation"
 				},
 				"analPullInside" : {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock": true,
 					"movementLock" : true,

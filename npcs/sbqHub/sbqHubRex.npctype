@@ -98,7 +98,7 @@
 							"Hey there.",
 							"Greetings!"
 						],
-						"randomButtonText": "Hi.",
+						"randomButtonText": ["Hi."],
 						"jump": ["converse"]
 					},
 					"hungry": {
@@ -117,13 +117,13 @@
 					"What's on your mind?",
 					"What can I do for you?"
 					],
-				"randomButtonText" : "[options]",
+				"randomButtonText" : ["[options]"],
 				"options" : [
 					["Can we talk about you?", {
 						"randomButtonText" : ["[options]"],
 						"randomDialogue" : [ "What about me?" ],
 						"options" : [
-							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "randomButtonText" : "Okay.", "jump" : [ "converse", "options", 1, 2 ] }],
+							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "randomButtonText" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
 							[ "Tell me more about these minigames.", {
 								"buttonText" : [
 									"Okay.",
@@ -174,7 +174,7 @@
 					"default" : {
 						"next" : "mood",
 						"default": {
-							"next" : "getVoreButtonAction",
+							"next" : "voreResponse",
 							"request" : {
 								"next" : "doingVore",
 								"before" : { "randomDialogue" : [ "With pleasure~" ] },
@@ -214,9 +214,43 @@
 
 	"statusControllerSettings" : {
 		"stats" : {
-			"protection" : {
+			"maxEnergy" : {
 				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"hornyPassiveLimit" : {
+				"baseValue" : 0.5
+			},
+			"hornyDelta" : {
+				"baseValue" : 0.0583
+			},
+			"restDelta" : {
+				"baseValue" : -0.0583
 			}
+		},
+		"resources" : {
+			"food" : {
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"horny" : {
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"rest" : {
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
+			}
+
 		}
 	},
 	"items" : {

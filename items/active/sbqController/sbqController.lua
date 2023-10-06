@@ -107,7 +107,7 @@ function update(dt, fireMode, shiftHeld, controls)
 							if data.pressed and not sbq.click then
 								sbq.click = true
 								if type(sbq[data.selection]) == "function" then
-									sbq[data.selection](selectedPrey, selectedPreyIndex)
+									sbq[data.selection](selectedPrey, selectedPreyIndex, data.data)
 								end
 							end
 						end
@@ -205,7 +205,7 @@ function assignAssignActionMenu()
 		} )
 	end
 
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerActionSelect" }, true )
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerActionSelect" })
 end
 
 function assignSelectMenu()
@@ -232,7 +232,7 @@ function assignSelectMenu()
 			title = "Prey\nActions"
 		})
 	end
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerSelectMenu" }, true )
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerSelectMenu" } )
 end
 
 function assignRPActionMenu()
@@ -258,7 +258,7 @@ function assignPreyActionMenu()
 					})
 				end
 			end
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreySelect" }, true )
+			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreySelect" } )
 		end)
 	end
 end
@@ -281,15 +281,16 @@ function assignLocationActionSelect(data)
 
 	local locationData = sbqData.locations[data.selection]
 	for j, action in ipairs(locationData.preyActions or {}) do
-		if (not action.single) and (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
+		if (not action.single) and sbq.checkSettings(action.checkSettings, settings) then
 			table.insert(options, {
 				name = action.script,
-				title = action.name
+				title = action.name,
+				data = action.args
 			})
 		end
 	end
 
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationPreyAction" }, true )
+	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationPreyAction" } )
 end
 
 function locationPreyAction(selectionData)
@@ -302,7 +303,7 @@ function locationPreyAction(selectionData)
 				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and
 					data.occupant[i].location == locationAction then
 					if type(sbq[selectionData.selection]) == "function" then
-						sbq[selectionData.selection](data.occupant[i].id, number)
+						sbq[selectionData.selection](data.occupant[i].id, number, selectionData.data)
 					end
 				end
 			end
@@ -336,7 +337,7 @@ function assignLocationSelect(data, sbqSettings, settings, sbqData)
 			locationAction = options[1].name
 			assignLocationActionSelect({selection = options[1].name})
 		else
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationSelect" }, true )
+			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationSelect" } )
 
 		end
 	end
@@ -376,14 +377,15 @@ function assignPreyActionsLocation(id)
 				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and data.occupant[i].id == id then
 					local locationData = sbqData.locations[data.occupant[i].location]
 					for j, action in ipairs(locationData.preyActions or {}) do
-						if (not action.checkSettings) or sbq.checkSettings(action.checkSettings, settings) then
+						if sbq.checkSettings(action.checkSettings, settings) then
 							table.insert(options, {
 								name = action.script,
-								title = action.name
+								title = action.name,
+								data = action.args
 							})
 						end
 					end
-					world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreyAction" }, true )
+					world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreyAction" } )
 					break
 				end
 			end
@@ -438,33 +440,4 @@ function getDirectives()
 	end
 end
 
-function sbq.checkSettings(checkSettings, settings)
-	for setting, value in pairs(checkSettings or {}) do
-		if (type(settings[setting]) == "table") and settings[setting].name ~= nil then
-			if not value then return false
-			elseif type(value) == "table" then
-				if not sbq.checkTable(value, settings[setting]) then return false end
-			end
-		elseif type(value) == "table" then
-			local match = false
-			for i, value in ipairs(value) do if (settings[setting] or false) == value then
-				match = true
-				break
-			end end
-			if not match then return false end
-		elseif (settings[setting] or false) ~= value then return false
-		end
-	end
-	return true
-end
-
-function sbq.checkTable(check, checked)
-	for k, v in pairs(check) do
-		if type(v) == "table" then
-			if not sbq.checkTable(v, (checked or {})[k]) then return false end
-		elseif v == true and type((checked or {})[k]) ~= "boolean" and ((checked or {})[k]) ~= nil then
-		elseif not (v == (checked or {})[k] or false) then return false
-		end
-	end
-	return true
-end
+require("/scripts/SBQ_check_settings.lua")

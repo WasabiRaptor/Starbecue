@@ -38,11 +38,12 @@
 
 		// these remove access to the settings panels for pred and prey respectively
 		// "isPredator" : false,
-		// "isPrey" : false,
+		"isPrey" : false,
 
 		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
 		"behavior" : "sbqvorevillager",
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
 			"graduation" : {
 				"nextNpcType" : [] // this prevents the NPC from graduating into crew
 			}
@@ -51,19 +52,17 @@
 
 		//"uniqueId" : "sbqClover_LokiVulpix", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
-			{ "mode" : "vertical" },
-			[
-				{ "type" : "image", "file" : "/humanoid/sbqClover_LokiVulpix/portraits/CNeutral.png" },
-				[
-					[ { "type" : "label", "text" : "Age: 21"}, { "type" : "label", "text" : "Gender: Nonbinary"} ],
-					[ { "type" : "label", "text" : "Pronouns: They/Them/He"}, { "type" : "label", "text" : "Species: Meowscarada"} ],
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "A mystery..."},
-					{ "type" : "spacer", "size" : 3 },
-					{ "type" : "label", "text" : "Favorites: Hammerspace, Compression, Cock TF, Cock Vore"}
-				]
-			]
+		"tenantBio" : { "type" : "layout", "mode" : "h", "children" : [
+			{ "type" : "image", "scale" : 0.75, "file" : "/humanoid/sbqClover_LokiVulpix/portraits/CNeutral.png" },
+			{ "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+				{ "mode" : "vertical" },
+				[ { "type" : "label", "text" : "Age: 21"}, { "type" : "label", "text" : "Gender: ^#FCF434;N^#FFFFFF;o^#9C59D1;n^#FFFFFF;b^#FCF434;i^#FFFFFF;n^#9C59D1;a^#FFFFFF;r^#FCF434;y"} ],
+				[ { "type" : "label", "text" : "Pronouns: They/Them/He"}, { "type" : "label", "text" : "Species: Meowscarada"} ],
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "A mystery..."},
+				{ "type" : "spacer", "size" : 3 },
+				{ "type" : "label", "text" : "Favorites: Hammerspace, Compression, Cock TF, Cock Vore"}
+			] }
 		]},
 
 		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
@@ -80,1646 +79,751 @@
 
 		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : {
-			// after following a path, next steps will automatically advance you down the tree until there is a step that does not have a next
-			// a next can be a string or a table, if the next step is a string, it will just use that value, if it is a table, it will randomly select from it
-			// when defining a next step, it attemts to find and run dialogueBoxScript[step]() matching the name of the next step value to determine which step to take next
-			// if no script is found it checks if a setting matching the name step exists, if so it attempts to use its value for the next step, the setting's name, or default
-			// if no setting is found it only attempts to go down the branch with the matching name of the next step
+			"dialogueFile" : "/npcs/tenants/sbq/ocs/sbqClover_LokiVulpix.dialogue",
+			// after following a path, next steps will automatically advance down the tree building the result dialogue
 
-			"dialogueTreeReturn" : ["converse"], // this sets it so that when you reach the end of a tree with nowhere to continue, and the button has no actions, it will return to the most recent time it saw one of these while moving down the tree
-
+			// overall default values for a "new" dialogue
+			"default" : {
+				"randomDialogue" : [":missingDialogue"],
+				"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+			},
 			// greeting is the default start of the tree
 			// settings come from itself
-			//"greeting" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree.greeting" // individual steps in the dialogue tree can also have their path pointed to another file
 			"greeting" : {
-				"next" : "race",
-				"default" : { // race
-					"next" : "personality",
-					"default" : { // personality
-						"next" : "mood",
-						"default" : { // mood
-							"next" : "giveTenantRewards",
-							"rewards" : {
-								"randomDialogue" : [
-									"You were an excellent part of my perfomance, so have this~",
-									{"check":{"introduced":true},"add":[["You were a great assistant <entityname>!\nEnjoy~"]]}
-								],
-								"jump" : ["greeting"]
-							},
-							"default" : { // no rewards
-								"randomDialogue" : [ "Hello~", "Hey~", "Hm~?" ],
-								"randomButtonText" : [ "Hi", "Hello", "Hey"],
-								"jump" : ["converse"] // all jumps are relative to the top of the dialogue tree
-							}
-						}
+				"new" : {"jump" : ".greeting"},
+				"next" : "giveTenantRewards",
+				"rewards" : {
+					"replace" : {"randomDialogue" : [":defaultRewardsGreeting"]},
+					"next" : ["introduced"],
+					"true" : {
+						"replace" : {"randomDialogue" : [":defaultRewardsGreetingIntroduced"]}
 					}
+				},
+				"default" : {
+					"next" : ["isOwner"],
+					"replace" : {"randomDialogue" : [":defaultGreeting"]},
+					"true" : {
+						"next" : ["isFollowing"],
+						"replace" : {
+							"randomDialogue" : [":defaultGreetingCrew"],
+							"buttonText" : ["Stay"],
+							"callScript" : "swapFollowing"
+						},
+						"false" : { "replace" : {"buttonText": ["Follow"]}}
+					}
+				},
+				"stay" : {
+					"new" : {
+						"randomDialogue" : [":defaultCrewStay"]
+					}
+				},
+				"follow" : {
+					"new" : {
+						"randomDialogue" : [":defaultCrewFollow"]
+					}
+				},
+				"fullCrew" : {
+					"new" : {"randomDialogue" : [":fullCrew"]}
 				}
 			},
-			// and jumps can go to any other part of the tree
-			"converse" :{
-				"randomDialogue" : [[
-					["Did you want to talk?"],
-					{"check":{"introduced":true},"add":["Did you want to talk <entityname>?"]}
-				]],
-				"randomButtonText" : ["[Options]"],
-				"options" : [
-					[ "My name is...", {
-						"check":{"introduced":false},
-						"dialogue" : [
-							"Its nice to meet you <entityname>~",
-							"Perhaps I can include you in one of my performances later`"
-						],
-						"playerSaveSettings" : { "introduced" : true },
-						"jump" : ["converse"]
-					}],
-					["Tell me about yourself", {"jump":["talkAboutSelf"]}],
-					[ "Whats your belly like?", {
-						"voreType" : "oralVore",
-						"next" : "bellyEffectSlot",
-						"default" : { "dialogue" : ["I should have plenty of space for you to vanish into~" ], "portrait" : ["Happy.png"], "jump" : ["converse"]},
-						"heal" : { "dialogue" : ["Should be a relaxing stay with you all hidden and tucked away~"], "portrait" : ["Joyful.png"], "jump" : ["converse"]},
-						"softDigest" : { "dialogue" : ["Once you're all tucked in, you might just find yourself lining my belly~"], "portrait" : ["Smug.png"], "jump" : ["converse"]}
-					}],
-					[ "Whats your womb like?", {
-						"next" : "wombEffectSlot",
-						"voreType" : "unbirth",
-						"location" : "womb",
-						"default" : { "dialogue" : ["Should be nice and comfy in there, curtousey of <infusedName>~"], "portrait" : ["Happy.png"], "jump" : ["converse"]},
-						"heal" : { "dialogue" : ["You'll feel so comfy and rested in there, I've heard its very nice~"], "portrait" : ["Happy.png"], "jump" : ["converse"]}
-					}],
-					[ "What are your breasts like?", {
-						"next" : "breastsEffectSlot",
-						"voreType" : "breastVore",
-						"location" : "breasts",
-						"default" : { "dialogue" : ["Nice and soft, borrowed from <infusedName>~"], "jump" : ["converse"]},
-						"heal" : { "dialogue" : ["I always hear a milk bath is really relaxing~"], "jump" : ["converse"]},
-						"softDigest" : { "dialogue" : ["Might mix you up into my next batch of milk~"], "jump" : ["converse"]}
-					}],
-					[ "Whats your shaft like?", {
-						"next" : "shaftEffectSlot",
-						"voreType" : "cockVore",
-						"default" : { "dialogue" : ["huff, I'll probably get pretty hard if you squirm your way in there~"], "portrait" : ["Smug.png"],
-							"continue" : {
-								"next" : "infusedCharacter",
-								"location" : "shaft",
-								"default" : "converse",
-								"defaultInfused" : {
-									"location" : "shaft",
-									"dialogue" : [ "Or it might be more apt to say <infusedName> would get pretty hard hehe~" ], "portrait" : ["Smug.png"]
-								}
-							}
-						}
-					}],
-					[ "What are your balls like?", {
-						"next" : "ballsEffectSlot",
-						"voreType" : "cockVore",
-						"default" : { "dialogue" : ["Might be a bit messy to stew and slosh around in all that cum~"], "jump" : ["converse"]},
-						"softDigest" : { "dialogue" : ["Hehe, you might end up being the next load I pump out into someone if you stay in there too long~"], "jump" : ["converse"]}
-
-					}]
-				]
+			// lines triggered when a player may recieve a certain reward
+			"rewardNotify" :{
+				"new" : {},
+				"next" : ["poolName", "rewardName"],
+				"money" : {
+					"replace" : {"randomDialogue":[":rewardNotifyMoney"]}
+				},
+				"lowValueQuestRewards" : {
+					"replace" : {"randomDialogue":[":rewardNotifyLowValueQuestRewards"]}
+				},
+				"mediumValueQuestRewards" : {
+					"replace" : {"randomDialogue":[":rewardNotifyMediumValueQuestRewards"]}
+				},
+				"highValueQuestRewards" : {
+					"replace" : {"randomDialogue":[":rewardNotifyHighValueQuestRewards"]}
+				}
 			},
-
-			"talkAboutSelf" : {
-				"dialogueTreeReturn" : ["talkAboutSelf"],
-				"randomDialogue" : [
-					"So what is it?",
-					"What did you want to ask?",
-					"Ask away."
-				],
-				"randomButtonText" : "[Options]",
-				"options" : [
-					["So what are you?", {
-						"dialogue" : [
-							"I'm a Meowscarada, my colors take after autumn! I'm somewhat named after the clubs card suit."
-						]
-					}],
-					["What kinks do you like?", {
-						"dialogue" : [
-							"That sure is a question to ask~ Almost like an invitation for me to do a demonstration as I explain~"
-						],
-						"jump" : ["talkAboutKinks"]
-					}],
-					["Thats it for now.",{"jump":["converse"]}]
-				]
-			},
-			"talkAboutKinks" : {
-				"randomDialogue" : [
-					"So what kinky stuff did you want to know?",
-					"What're today's horny questions?"
-				],
-				"randomButtonText" : "[Options]",
-				"options" : [
-					["Oral Vore (Pred)", {
-						"checkPlayer" : { "oralVore" : true },
-						"dialogue" : [
-							"Mmm~ always a popular performance, gathering the audience around... picking someone who seems far too large...",
-							"And then swiftly making them dissapear down my throat without a trace, my belly squishing and compacting them right away~",
-							"I'll try and fit anything inside, and after a few moments they'll barely make a dent on my smooth belly~"
-						],
-						"playerSaveSettings" : { "oralVorePredTalk" : true },
-						"continue" : {
-							"dialogue" : [ "Would you like being prey like that?" ],
-							"buttonText" : ["Y/N"],
-							"options" : [
-								["Yes", {
-									"dialogue" : ["Nice! We can have some fun sometime then."],
-									"playerSaveSettings" : { "oralVorePredLike" : true },
-									"jump" : ["talkAboutKinks"]
-								}],
-								["No", {
-									"dialogue" : ["Alright then."],
-									"playerSaveSettings" : { "oralVorePredLike" : false },
-									"jump" : ["talkAboutKinks"]
-								}]
-							]
-						}
-					}],
-					["Cock TF (Pred)", {
-						"checkPlayer" : { "cockInfusion" : true },
-						"dialogue" : [
-							"Curious about Cherry eh~? Or did I just let her secret slip, whoops~",
-							"When I take claim of someone, I make sure to get plenty of use out of them, especially if they become an assistant~",
-							"And she surely does assist in ways that matter, all that size she adds to me? She's belongs throbbing down between my legs~",
-							"And she knows it, she basically lives there, spends more time as a part of me than not at this point~",
-							"Which is just how I like it~ When people can't help but enjoy themselves, wanting nothing more than to be a part of me~"
-						],
-						"playerSaveSettings" : { "cockInfusionPredTalk" : true },
-						"continue" : {
-							"dialogue" : [ "<slowlove>Would you like being my cock at some point~?" ],
-							"buttonText" : ["Y/N"],
-							"options" : [
-								["Yes", {
-									"dialogue" : ["<slowlove>Nice! We can have some fun sometime then~"],
-									"playerSaveSettings" : { "cockInfusionPredLike" : true },
-									"jump" : ["talkAboutKinks"]
-								}],
-								["No", {
-									"dialogue" : ["Alright then."],
-									"playerSaveSettings" : { "cockInfusionPredLike" : false },
-									"jump" : ["talkAboutKinks"]
-								}]
-							]
-						}
-					}],
-
-
-					["Thats it for now.", {"jump":["talkAboutSelf"]}]
-				]
-			},
-
 
 			// lines for when a pred is eating prey, be it from hunting, or from it being requested
 			// settings come from itself
 			"vore" : {
+				"new" : {
+					"delay" : 1.5,
+					"dismissTime" : 3,
+					"hideVoreButtons" : true,
+					"hideInfusionButtons" : true
+				},
 				"next" : "voreType",
 				"oralVore" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Hehe, time for our little dissapearing act then~", "Here, just lean in and give me a kiss..~", "A volunteer for my show~?" ] },
-									"after" : { "randomDialogue" : [
-										["And now we see if they can manage to escape~", "And as you all can see, they have dissapeared~"],
-										{"check":{"introduced":true},"add":["And now we see if <entityname> can manage to escape~", "And as you all can see, <entityname> has dissapeared~"]}
-									] }
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : {"randomDialogue" : [":defaultRequestOralVoreBefore"]}
+						},
+						"after" : {
+							"replace" : {"randomDialogue" : [":defaultRequestOralVoreAfter"]}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : {"randomDialogue" : [":defaultUnpromptedOralVoreBefore"]}
+						},
+						"after" : {
+							"replace" : {"randomDialogue" : [":defaultUnpromptedOralVoreAfter"]}
+						}
+					},
+					"selfRequest" : {
+						"replace" : {
+							"dismissTime" : 30,
+							"randomDialogue" : [":defaultSelfRequestOralVore"],
+							"buttonText" : ["[Y/N]"],
+							"options" : [
+								["Yes!", ".oralVore.selfRequest.response.yes" ],
+								["No.", ".oralVore.selfRequest.response.no" ],
+								["No... ^#555;(But actually Yes)", ".oralVore.selfRequest.response.noYes" ]
+							]
+						},
+						"response" : {
+							"yes" : {
+								"new" : {
+									"randomDialogue" : [":defaultSelfRequestOralVoreYes"],
+									"dismissTime" : 2
 								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Congratulations! You're going to be part of my magic show! It's The dissapearing act~" ] },
-									"after" : { "randomDialogue" : [
-										["And now we see if they can manage to escape~", "And as you all can see, they have dissapeared~"],
-										{"check":{"introduced":true},"add":["And now we see if <entityname> can manage to escape~", "And as you all can see, <entityname> has dissapeared~"]}
-									] }
+								"next" : ["queueVore"],
+								"after" : {
+									"new" : {
+										"randomDialogue" : [":defaultSelfRequestOralVoreYesAfter"],
+										"dismissTime" : 2
+									}
+								}
+							},
+							"no" : {
+								"new" : {
+									"randomDialogue" : [":defaultSelfRequestOralVoreNo"],
+									"dismissTime" : 2
+								}
+							},
+							"noYes" : {
+								"new" : {
+									"randomDialogue" : [":defaultSelfRequestOralVoreNoYes"],
+									"dismissTime" : 2
 								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
-								"full" : {
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "I'm a bit too full...", "My belly can't stretch any further...", "I've eaten too much already...", "I would... but I'm too full..." ]},
-									"sbqDigest" : { "randomDialogue" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ]},
-									"sbqSoftDigest" : { "randomDialogue" : [ "Maybe after I melt down the last meal", "Urrrrp!\n Won't be too long until I can fit you.", "I've eaten too much already... but I'll probably have room soon.", "I'll have to finish processing this meal first." ]}
-								},
-								"otherLocationFull" : { "randomDialogue" : [ "I'm a bit too full...", "My body can't stretch any further...", "I've been filled too much already...", "I would... but I'm too full..." ]},
-
-								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+								"next" : ["queueVore"],
+								"after" : {
+									"new" : {
+										"randomDialogue" : [":defaultSelfRequestOralVoreNoYesAfter"],
+										"dismissTime" : 2
+									}
+								}
 							}
 						}
-					}
-				},
-				"analVore" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Hehe, time for our little dissapearing act then~", "Here, just lean in and give my butt a kiss..~", "A volunteer for my show~?" ] },
-									"after" : { "randomDialogue" : [
-										["*clench* ahh~\nAnd now we see if they can manage to escape~","*clench* ahh~\nAnd as you all can see, they have dissapeared~"],
-										{"check":{"introduced":true},"add":["*clench* ahh~\nAnd now we see if <entityname> can manage to escape~","*clench* ahh~\nAnd as you all can see, <entityname> has dissapeared~"]}
-									] }
-								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Congratulations! You're going to be part of my magic show! It's The dissapearing act~" ] },
-									"after" : { "randomDialogue" : [
-										["*clench* ahh~\nAnd now we see if they can manage to escape~","*clench* ahh~\nAnd as you all can see, they have dissapeared~"],
-										{"check":{"introduced":true},"add":["*clench* ahh~\nAnd now we see if <entityname> can manage to escape~","*clench* ahh~\nAnd as you all can see, <entityname> has dissapeared~"]}
-									] }
-								},
-								"notFeelingIt" : "vore.oralVore.race.personality.mood.notFeelingIt",
-								"otherLocationFull" : "vore.oralVore.race.personality.mood.otherLocationFull",
-								"full" : "vore.oralVore.race.personality.mood.full",
-								"tooBig" : "vore.oralVore.race.personality.mood.tooBig"
-							}
+					},
+					"notFeelingIt" : {
+						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}
+					},
+					"tooBig" : {
+						"replace" : {"randomDialogue" : [":defaultTooBig"]}
+					},
+					"tooSmall" : {
+						"replace" : {"randomDialogue" : [":defaultTooSmall"]}
+					},
+					"full" : {
+						"replace" : {"randomDialogue" : [":defaultOralVoreFull"]},
+						"next" : [
+							"locationEffectSlot",
+							"locationCompression"
+						],
+						"softDigest" : ".digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":digestOralVoreFull"]}
+						},
+						"time" : { // compression
+							"queueReplace" : {"randomDialogue" : [":compressionOralVoreFull"]},
+							"addQueued" : true
 						}
+					},
+					"otherLocationFull" : {
+						"replace" : {"randomDialogue" : [":defaultFull"]}
+					},
+					"needsInfusion" : {
+						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
 					}
 				},
-
 				"cockVore" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Ah, a special performance for you~", "Now this is a dissapearing act not many come away from~", "Thats going to be a real tight fit, which I happen to specialize in~." ] },
-									"after" : { "randomDialogue" : [
-										["Ahh~\nAnd now we see if they can manage to escape~","Ahh~\nAnd as you all can see, they have dissapeared~"],
-										{"check":{"introduced":true},"add":["Ahh~\nAnd now we see if <entityname> can manage to escape~","Ahh~\nAnd as you all can see, <entityname> has dissapeared~"]},
-										["Aahh~ ooooh thats really good~", "Mmmm~ You're getting me all excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~"]
-									] }
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : {"randomDialogue" : [":defaultRequestCockVoreBefore"]}
+						},
+						"after" : {
+							"replace" : {"randomDialogue" : [":defaultRequestCockVoreAfter"]}
+						}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : {"randomDialogue" : [":defaultUnpromptedCockVoreBefore"]}
+						},
+						"after" : {
+							"replace" : {"randomDialogue" : [":defaultUnpromptedCockVoreAfter"]}
+						}
+					},
+					"selfRequest" : {
+						"replace" : {
+							"dismissTime" : 30,
+							"randomDialogue" : [":defaultSelfRequestCockVore"],
+							"buttonText" : ["[Y/N]"],
+							"options" : [
+								["Yes!", ".cockVore.selfRequest.response.yes" ],
+								["No.", ".cockVore.selfRequest.response.no" ],
+								["No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
+							]
+						},
+						"response" : {
+							"yes" : {
+								"new" : {
+									"randomDialogue" : [":defaultSelfRequestCockVoreYes"],
+									"dismissTime" : 2
 								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all hard~", "A-ahh~ Don't stop squirming~" ] }
+								"next" : ["queueVore"],
+								"after" : {
+									"new" : {
+										"randomDialogue" : [":defaultSelfRequestCockVoreYesAfter"],
+										"dismissTime" : 2
+									}
+								}
+							},
+							"no" : {
+								"new" : {
+									"randomDialogue" : [":defaultSelfRequestCockVoreNo"],
+									"dismissTime" : 2
+								}
+							},
+							"noYes" : {
+								"new" : {
+									"randomDialogue" : [":defaultSelfRequestCockVoreNoYes"],
+									"dismissTime" : 2
 								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
-								"full" : { "randomDialogue" : [ "Already got someone plugging my shaft~", "Mmm maybe if someone squirmed a little further in, I might have space for you.", "Hehe, I would if someone wasn't already squeezed in there~", "Maybe after I cum heh~" ] },
-								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
+								"next" : ["queueVore"],
+								"after" : {
+									"new" : {
+										"randomDialogue" : [":defaultSelfRequestCockVoreNoYesAfter"],
+										"dismissTime" : 2
+									}
+								}
 							}
 						}
-					}
-				},
-				"unbirth" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : { "randomDialogue" : [ "Hah, you're horny.", "You want to get squeezed into my pussy?", "You know thats where dicks are supposed to go right?", "Thats going to be a real tight fit." ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me excited~", "Ffff~ Now I'm all wet~", "A-ahh~ Don't stop squirming~" ] }
-								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : {"randomDialogue" : [ "Gonna stick you somewhere things aren't supposed to go~", "Mmm~ hey, want to try something?", "I got a bit excited thinking about this, so now I have to do it~", "I'm gonna need you to pleasure me, but not the normal way~" ] },
-									"after" : { "randomDialogue" : [ "Aahh~ ooooh thats really good~", "Mmmm~ You're getting me even more excited~", "Ffff~ Now I'm all wet~", "A-ahh~ Don't stop squirming~" ] }
-								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] },
-								"otherLocationFull" : "vore.oralVore.race.personality.mood.full.otherLocationFull",
-								"full" : { "randomDialogue" : [ "My womb is already occupied~", "Maybe after I'm done carrying my current occupants around~", "Hehe, I would if I wasn't already full down there~", "Maybe after I climax heh~" ] },
-								"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there...", "I don't think I'd be able to get you in...", "If only you were a bit smaller...", "Thats a bit too much to ask of me..." ]}
-							}
+					},
+					"notFeelingIt" : {
+						"replace" : {"randomDialogue" : [":defaultNotFeelingIt"]}
+					},
+					"tooBig" : {
+						"replace" : {"randomDialogue" : [":defaultTooBig"]}
+					},
+					"tooSmall" : {
+						"replace" : {"randomDialogue" : [":defaultTooSmall"]}
+					},
+					"full" : {
+						"replace" : {"randomDialogue" : [":defaultCockVoreFull"]},
+						"next" : [
+							"locationEffectSlot",
+							"locationCompression"
+						],
+						"softDigest" : ".digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":digestCockVoreFull"]}
+						},
+						"time" : { // compression
+							"queueReplace" : {"randomDialogue" : [":compressionCockVoreFull"]},
+							"addQueued" : true
 						}
+					},
+					"otherLocationFull" : {
+						"replace" : {"randomDialogue" : [":defaultFull"]}
+					},
+					"needsInfusion" : {
+						"replace" : {"randomDialogue" : [":defaultNeedsInfusion"]}
 					}
 				}
 			},
+
 			// when being pred, responses to the prey struggling inside
 			// settings come from itself, prey settings come from prey
 			"struggle" : {
+				"new" : {
+					"hideVoreButtons" : true,
+					"randomDialogue" : [":defaultStruggle"]
+				},
 				"next" : "location",
-				"taurBelly" : "struggle.belly",
-				"belly" : { // location
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [ "Having a good time in there?", "Hope its comfortable." ] },
-								"sbqHeal" : { "randomDialogue" : [ "Now you're nice and safe.", "Hope you like how it feels in there." ] },
-								"sbqDigest" : {
-									"next" : "digestImmunity",
-									"false" : { "randomDialogue" : [ "Time to melt you down into pudge.", "Just be a good meal and melt." ] },
-									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
-								},
-								"sbqSoftDigest" : "struggle.location.race.personality.mood.sbqDigest",
-
-								"transformed" : { "randomDialogue" : [ ["Seems like you're finished.", "I think you're finished changing."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-								"transform" : {
-									"next" : "transformAllow",
-									"true" : { "randomDialogue" : [ ["You'll be a bit different after this is all done.", "These changes should be an improvement."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-									"false" : { "randomDialogue" : [ {"add":"struggle.location.race.personality.mood.locationEffect"} ] }
-								},
-
-								"egged" : { "randomDialogue" : [ "Now you're trapped in an egg" ] }, // I don't think this will ever trigger because eggs can't struggle haha
-								"eggify" : {
-									"next" : "eggAllow",
-									"true" : { "randomDialogue" : [ ["Can you feel that egg forming around you?", "Soon your squirming won't do a thing."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-									"false" : { "randomDialogue" : [ {"add":"struggle.location.race.personality.mood.locationEffect"} ] }
-								}
-							}
+				"any" : {
+					"transforming" : {"true" : {
+						"queueReplace" : {"randomDialogue" : [":transformingStruggle"]},
+						"addQueued" : true,
+						"next" : "transformAllow",
+						"false" : {"queueReplace":{"randomDialogue" : [":transformingStruggleImmune"]}}
+					}},
+					"eggify" : {"true" : {
+						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
+						"addQueued" : true,
+						"next" : "eggAllow",
+						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
+					}}
+				},
+				"taurBelly" : ".belly",
+				"belly" : {
+					"replace" : {
+						"randomDialogue" : [":defaultStruggle"]
+					},
+					"seperateNext" : true,
+					"next" : [
+						"locationEffectSlot",
+						"locationCompression",
+						"locationEnergyDrain",
+						"eggify",
+						"transforming"
+					],
+					"locationEffectSlot" : {
+						"softDigest" : ".locationEffectSlot.digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":digestStruggle"]},
+							"next" : "digestImmunity",
+							"true" : {"replace" : {"randomDialogue" : [":digestStruggleImmune"]}}
+						},
+						"heal" : { "replace" : {"randomDialogue" : [":healStruggle"]}}
+					},
+					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":compressionStruggle"]}}},
+					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":energyDrainStruggle"]}}},
+					"transforming" : ".struggle.any.transforming",
+					"eggify" : ".struggle.any.eggify"
+				},
+				"cock" : ".shaft",
+				"shaft" : {
+					"replace" : {
+						"randomDialogue" : [":shaftDefaultStruggle"]
+					},
+					"seperateNext" : true,
+					"next" : [
+						"locationEffectSlot",
+						"locationCompression",
+						"locationEnergyDrain",
+						"eggify",
+						"transforming",
+						"locationInfused"
+					],
+					"locationEffectSlot" : {
+						"softDigest" : ".locationEffectSlot.digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":shaftDigestStruggle"]},
+							"next" : "cumDigestImmunity",
+							"true" : {"replace" : {"randomDialogue" : [":shaftDigestStruggleImmune"]}}
+						},
+						"heal" : { "replace" : {"randomDialogue" : [":shaftHealStruggle"]}}
+					},
+					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":shaftCompressionStruggle"]}}},
+					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":shaftEnergyDrainStruggle"]}}},
+					"transforming" : {"true" : {
+						"queueReplace" : {"randomDialogue" : [":cumTransformingStruggle"]},
+						"addQueued" : true,
+						"next" : "cumTransformAllow",
+						"false" : {"queueReplace":{"randomDialogue" : [":cumTransformingStruggleImmune"]}}
+					}},
+					"eggify" : {"true" : {
+						"queueReplace" : {"randomDialogue" : [":eggifyStruggle"]},
+						"addQueued" : true,
+						"next" : "eggAllow",
+						"false" : {"queueReplace":{"randomDialogue" : [":eggifyStruggleImmune"]}}
+					}},
+					"locationInfused" : {
+						"true" : {
+							"add" : { "randomDialogue" : [":shaftInfusedStruggle"]}
 						}
 					}
 				},
-				"womb" : { // location
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [ "Now you're nice and safe.", "Hope you like how it feels in there." ] },
-								"transformed" : { "randomDialogue" : [ ["Seems like you're finished.", "I think you're finished changing."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-								"transform" : {
-									"next" : "transformAllow",
-									"true" : { "randomDialogue" : [ ["You'll be a bit different after this is all done.", "These changes should be an improvement."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-									"false" : { "randomDialogue" : [ ["You don't want to change?", "Come on, don't you want to be different?"], {"add":"struggle.location.race.personality.mood.locationEffect"} ] }
-								},
-								"egged" : { "randomDialogue" : [ "Now you're trapped in an egg" ] }, // I don't think this will ever trigger because eggs can't struggle haha
-								"eggify" : {
-									"next" : "eggAllow",
-									"true" : { "randomDialogue" : [ ["Can you feel that egg forming around you?", "Soon your squirming won't do a thing."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-									"false" : { "randomDialogue" : [ {"add":"struggle.location.race.personality.mood.locationEffect"} ] }
-								},
-								"sbqFemcumSoftDigest" : "struggle.location.race.personality.mood.sbqFemcumDigest",
-								"sbqFemcumDigest" : {
-									"next" : "femcumDigestImmunity",
-									"false" : { "randomDialogue" : [ "You're getting so soft.", "Melt for me!" ] },
-									"true" : { "randomDialogue" : [ "Why aren't you melting down?", "Doesn't feel like you're melting." ] }
-								}
-							}
-						}
-					}
-				},
-				"ctfLines" : {
-					"randomDialogue" : [
-						"Ahhh~ <infusedName> feels so great down there~",
-						"<keysmash> you're gonna make <infusedName> cum~"
-					]
-				},
-				"cherryCtfLines" : {
-					"randomDialogue" : [
-						"Ahhh~ My assistant feels so great down there~",
-						"<keysmash> you're gonna make my assistant cum~"
-					]
-				},
-				"lokiCtfLines" : {
-					"randomDialogue" : [
-						"Mmmm~ you know she just can't get enough of that~",
-						"Ahh... this fox always makes me far more sensitive~"
-					]
-				},
-				"astiraCtfLines" : {
-					"randomDialogue" : [
-						"Hehe... Asti always knows I put on a better show than she does~",
-						"Mmm~ Asti is rather enjoying all this~\n...Oh? was I not supposed to tell?"
-					]
-				},
-				"cock" : "struggle.shaft", // these are just in case someone names something different
-				"shaft" : { // location
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [
-									["Having a good time in there?", "Hope its comfortable."],
-									{
-										"infusedSlot":true,
-										"default":"struggle.ctfLines",
-										"sbqCherry_LokiVulpix":"struggle.cherryCtfLines",
-										"sbqLoki_LokiVulpix":"struggle.lokiCtfLines",
-										"sbqAstira_LokiVulpix":"struggle.astiraCtfLines"
-									}
-								]},
-								"transformed" : { "randomDialogue" : [ ["Heh, I can feel you sloshing around.", "Seems like you're not quite solid anymore."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-								"transform" : {
-									"next" : "cumTransformAllow",
-									"true" : { "randomDialogue" : [ ["I can feel you getting goopy in there.", "I can feel you tarting to turn~"], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-									"false" : { "randomDialogue" : [ {"add":"struggle.location.race.personality.mood.locationEffect"} ] }
-								},
-								"sbqCumDigest" : {
-									"next" : "cumDigestImmunity",
-									"false" : { "randomDialogue" : [
-										["You're getting so soft~", "Melting right on down~", "I'll get you pumped out into a condom soon enough~" ],
-										{
-											"infusedSlot":true,
-											"default":"struggle.ctfLines",
-											"sbqCherry_LokiVulpix":"struggle.cherryCtfLines",
-											"sbqLoki_LokiVulpix":"struggle.lokiCtfLines",
-											"sbqAstira_LokiVulpix":"struggle.astiraCtfLines"
-										}
-									] },
-									"true" : "struggle.location.race.personality.mood.default"
-								},
-								"sbqCumSoftDigest" : "struggle.location.race.personality.mood.sbqCumDigest"
-							}
-						}
-					}
-				},
-				"ballsL" : "struggle.balls",
-				"ballsR" : "struggle.balls",
-				"balls" : { // location
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [
-									["Having a good time in there?", "Keep squirming.", "It feels so good having you in there~", "Friends are stored in the balls~"],
-									{
-										"infusedSlot":true,
-										"default":"struggle.ctfLines",
-										"sbqCherry_LokiVulpix":"struggle.cherryCtfLines",
-										"sbqLoki_LokiVulpix":"struggle.lokiCtfLines",
-										"sbqAstira_LokiVulpix":"struggle.astiraCtfLines"
-									}
-								]},
-								"transformed" : { "randomDialogue" : [ ["Heh, I can feel you sloshing around.", "Seems like you're not quite solid anymore."], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-								"transform" : {
-									"next" : "cumTransformAllow",
-									"true" : { "randomDialogue" : [ ["I can feel you getting goopy in there.", "I can feel you tarting to turn~"], {"add":"struggle.location.race.personality.mood.locationEffect"} ] },
-									"false" : { "randomDialogue" : [ {"add":"struggle.location.race.personality.mood.locationEffect"} ] }
-								},
-								"sbqCumDigest" : {
-									"next" : "cumDigestImmunity",
-									"false" : { "randomDialogue" : [
-										["You're getting so soft~", "Melting right on down~", "I'll get you pumped out into a condom soon enough~", "Hehe, I can feel you starting to slosh around in there~" ],
-										{
-											"infusedSlot":true,
-											"default":"struggle.ctfLines",
-											"sbqCherry_LokiVulpix":"struggle.cherryCtfLines",
-											"sbqLoki_LokiVulpix":"struggle.lokiCtfLines",
-											"sbqAstira_LokiVulpix":"struggle.astiraCtfLines"
-										}
-									] },
-									"true" : "struggle.location.race.personality.mood.default"
-								},
-								"sbqCumSoftDigest" : "struggle.location.race.personality.mood.sbqCumDigest"
-							}
-						}
-					}
-				},
-				"breastsL" : "struggle.breasts",
-				"breastsR" : "struggle.breasts",
-				"breasts" : { // location
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : {
-							"next" : "mood",
-							"default" : {
-								"next" : "getLocationEffect",
-								"default" : { "randomDialogue" : [ "I hope you're having a good time in there~", "Nice and soft, isn't it~?", "Hffff, feels so good with you in there~", "I love being busty, and it's all thanks to you~", {"check":{"shirt":true},"add":["Ooh, ya wanna be shown off~?", "Tight, isn't it~?"]}
-								]},
-								"sbqHeal" : { "randomDialogue" : [ [ "All nice and safe~", "Feels nice and soothing, right~?", "Settle on in, it's nice and safe~", "Enjoy your therapeutic milk bath~" ], {"add":"struggle.location.race.personality.mood.default"} ] },
-								"sbqMilkDigest" : {
-									"next" : "milkDigestImmunity",
-									"false" : { "randomDialogue" : [ "You're gonna make a lovely batch of milk, dear~", "Starting to slosh, eh~?", "You're gonna be delicious~" ] },
-									"true" : "struggle.location.race.personality.mood.default"
-								},
-								"sbqMilkSoftDigest" : "struggle.location.race.personality.mood.sbqMilkDigest"
-							}
-						}
-					}
+				"ballsL" : ".balls",
+				"ballsR" : ".balls",
+				"balls" : {
+					"replace" : {
+						"randomDialogue" : [":ballsDefaultStruggle"]
+					},
+					"seperateNext" : true,
+					"next" : [
+						"locationEffectSlot",
+						"locationCompression",
+						"locationEnergyDrain",
+						"eggify",
+						"transforming"
+					],
+					"locationEffectSlot" : {
+						"softDigest" : ".locationEffectSlot.digest",
+						"digest" : {
+							"replace" : {"randomDialogue" : [":ballsDigestStruggle"]},
+							"next" : "cumDigestImmunity",
+							"true" : {"replace" : {"randomDialogue" : [":ballsDigestStruggleImmune"]}}
+						},
+						"heal" : { "replace" : {"randomDialogue" : [":ballsHealStruggle"]}}
+					},
+					"locationCompression" : { "time" : { "add" : { "randomDialogue" : [":ballsCompressionStruggle"]}}},
+					"locationEnergyDrain" : { "true" : { "add" : { "randomDialogue" : [":ballsEnergyDrainStruggle"]}}},
+					"transforming" : ".struggle.any.transforming",
+					"eggify" : ".struggle.any.eggify"
 				}
 			},
+
 			// when being pred, responses to the prey escaping
 			// settings come from itself, prey settings come from the prey
 			"letout" : {
-				"next" : "voreType",
-				"oralVore" : { // voreType
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "struggleTrigger",
-								"true" : { // prey struggling out
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh... ok you want out.", "Why leave?", "Mmm... fine you can come out.", "I actually liked having you in there..." ] },
-									"sbqHeal" : { "randomDialogue" : [ "You do know its safer inside me right?", "Are you sure you're ready to come out?", "Maybe you should get back in... heal a little longer.", "You can come back to heal any time." ]},
-									"sbqDigest" : {
-										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Dang it... I was hungry.", "No hard feelings?", "Come on, you were almost done...", "If only you weren't such a fighter..." ] },
-										"true" : { "randomDialogue" : [ "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
-									},
-									"sbqSoftDigest" : {
-										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Darn it... I was hungry, you were gonna be fine anyway.", "No hard feelings? Its not like I was going to go all the way...", "Come on, you were almost done...", "If only you weren't such a fighter..." ] },
-										"true" : { "randomDialogue" : [ "Dang it... I was hungry... and you didn't even melt at all.", "No hard feelings? Its not like my acid even managed to do anything.", "Come on, my acid didn't even do anything to you...", "If only you actually started to melt..." ] }
-									},
-									"transformed" : { "randomDialogue" : [ "Now you can see the new you.", "You might look a bit different now." ] },
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : [ "Didn't want to become something like me?", "Didn't like the changes I was making?" ] },
-										"false" : { "randomDialogue" : [ {"add":"letout.voreType.struggleTrigger.race.personality.mood.locationEffect"} ] }
-									},
-									"egged" : { "randomDialogue" : ["Hah, egg"] }, // I don't think this one is possible to get due to the fact that eggs can't struggle haha
-									"eggify" : {
-										"next" : "eggAllow",
-										"true" : { "randomDialogue" : [ "Don't want to be trapped in an egg?", "You don't like eggs?" ] },
-										"false" : { "randomDialogue" : [ {"add":"letout.voreType.struggleTrigger.race.personality.mood.locationEffect"} ] }
-									},
-									"digested" : { "randomDialogue" : ["Ah... you want out... just a moment to reform.", "Ah ok, I'll reform you now.", "Fine, I'll reform you now.", "Alright, I'll reform you."]}
+				"next" : "struggleTrigger",
+				"true" : { // prey struggled out
+					"next" : "voreType",
+					"any" : {
+						"transforming" : {"true" : {
+							"queueReplace" : {"randomDialogue" : [":letoutStruggleTransforming"]},
+							"addQueued" : true,
+							"next" : ["transformAllow"],
+							"false" : {"queueReplace":{"randomDialogue" : [":letoutStruggleTransformingImmune"]}}
+						}},
+						"eggify" : {"true" : {
+							"queueReplace" : {"randomDialogue" : [":letoutStruggleEggify"]},
+							"addQueued" : true,
+							"next" : "eggAllow",
+							"false" : {"queueReplace":{"randomDialogue" : [":letoutStruggleEggifyImmune"]}}
+						}}
+					},
+					"oralVore" : {
+						"replace" : {
+							"randomDialogue" : [":letoutOralVoreStruggle"]
+						},
+						"seperateNext" : true,
+						"next" : [
+							"digested",
+							"locationEffectSlot",
+							"eggify",
+							"transforming"
+						],
+						"digested" : {
+							"true" : {
+								"replace" : {
+									"randomDialogue" : [":letoutOralVoreStruggleDigested"]
 								},
-								"false" : { // pred letting prey out
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "You can come out now.", "Time to come out.", "You can't stay in there forever.", "Time to get out." ] },
-									"sbqHeal" : { "randomDialogue" : [ "You're probably patched up enough.", "I think you've spent enough time healing.", "I think you should be feeling much better now.", "My stomach does wonders for healing doesn't it?"] },
-									"sbqDigest" : {
-										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Actually... you've probably spent enough time in there.", "My hunger is satiated enough for now.", "Probably best to get you out of there...", "Didn't feel like melting you entirely."] },
-										"true" : { "randomDialogue" : [ "I can't even melt you down at all...", "My hunger isn't going to be satiated with you in there.", "Probably best to get you out of there so I can eat something else.", "Can't even melt you down the tiniest bit."] }
-									},
-									"sbqSoftDigest" : {
-										"next" : "digestImmunity",
-										"false" : { "randomDialogue" : [ "Actually... you've probably spent enough time in there.", "My hunger is satiated enough for now.", "Probably best to get you out of there...", "Didn't feel like melting you entirely."] },
-										"true" : { "randomDialogue" : [ "I can't even melt you down at all...", "My hunger isn't going to be satiated with you in there.", "Probably best to get you out of there so I can eat something else.", "Can't even melt you down the tiniest bit."] }
-									},
-									"transformed" : { "randomDialogue" : [ "Now you can see the new you.", "You might look a bit different now." ] },
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : [ "Maybe I shouldn't change you.", "Maybe I should stop this." ] },
-										"false" : { "randomDialogue" : [ "Seems like I can't change you.", "For some reason this isn't working..." ] }
-									},
-									"egged" : { "randomDialogue" : "Mmm time to get this egg out." },
-									"digested" : { "randomDialogue" : ["Here, let me reform you real quick.", "You got digested so I gotta reform you.", "Ah, guess its time to reform you.", "Time to reform you I guess."]}
-								}
-							}
-						}
-					}
-				},
-				"analVore" : "letout.oralVore", // don't need to write unique lines for it yet
-				"navelVore" : "letout.oralVore", // don't need to write unique lines for it yet
+								"finished" : true
 
-				"unbirth" : { // voreType
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "struggleTrigger",
-								"true" : { // struggleTrigger
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Happy birthday.", "Ah~ Why'd you come out?", "Mmm~ I thought you were pretty comfortable.", "I thought you liked it in there.", "Oh... alright." ] },
-									"transformed" : "letout.oralVore.struggleTrigger.race.personality.mood.transformed",
-									"transform" : "letout.oralVore.struggleTrigger.race.personality.mood.transform",
-									"egged" : { "randomDialogue" : ["Hah, egg"] }, // I don't think this one is possible to get due to the fact that eggs can't struggle haha
-									"eggify" : {
-										"next" : "eggAllow",
-										"true" : { "randomDialogue" : [ "Don't want to be trapped in an egg?", "You don't like eggs?" ] },
-										"false" : { "randomDialogue" : [ {"add":"letout.voreType.struggleTrigger.race.personality.mood.locationEffect"} ] }
-									}
-								},
-								"false" : { // struggleTrigger
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Happy birthday.", "I think you've had enough fun in there.", "Maybe its time for you to come out." ] },
-									"transformed" : "letout.oralVore.struggleTrigger.race.personality.mood.transformed",
-									"transform" : "letout.oralVore.struggleTrigger.race.personality.mood.transform",
-									"egged" : { "randomDialogue" : ["Well, time to lay an egg."] }
-								}
 							}
-						}
+						},
+						"locationEffectSlot" : {
+							"digest" : {
+								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigest"]},
+								"next" : ["digestImmunity"],
+								"true" : {
+									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
+								}
+							},
+							"softDigest" : {
+								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleSoftDigest"]},
+								"next" : ["digestImmunity"],
+								"true" : {
+									"replace" : {"randomDialogue" : [":letoutOralVoreStruggleDigestImmune"]}
+								}
+							},
+							"heal" : {
+								"replace" : {"randomDialogue" : [":letoutOralVoreStruggleHeal"]}
+							}
+						},
+						"transforming" : ".letout.true.any.transforming",
+						"eggify" : ".letout.true.any.eggify"
+					},
+					"cockVore" : {
+						"replace" : {
+							"randomDialogue" : [":letoutCockVoreStruggle"]
+						},
+						"seperateNext" : true,
+						"next" : [
+							"digested",
+							"locationEffectSlot",
+							"eggify",
+							"transforming"
+						],
+						"digested" : {
+							"true" : {
+								"replace" : {
+									"randomDialogue" : [":letoutCockVoreStruggleDigested"]
+								},
+								"finished" : true
+							}
+						},
+						"locationEffectSlot" : {
+							"digest" : {
+								"replace" : {"randomDialogue" : [":letoutCockVoreStruggleDigest"]},
+								"next" : "cumDigestImmunity",
+								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreStruggleDigestImmune"]}}
+							},
+							"softDigest" : {
+								"replace" : {"randomDialogue" : [":letoutCockVoreStruggleSoftDigest"]},
+								"next" : "cumDigestImmunity",
+								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreStruggleDigestImmune"]}}
+							},
+							"heal" : { "replace" : {"randomDialogue" : [":letoutCockVoreStruggleHeal"]}}
+						},
+						"transforming" : ".letout.true.any.transforming",
+						"eggify" : ".letout.true.any.eggify"
 					}
 				},
-				"cockVore" : { // voreType
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "struggleTrigger",
-								"true" : { // struggleTrigger
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh~ ahh that felt so good~", "Could you get back in and squirm some more?", "Mmm~ I thought you were pretty comfortable.", "I thought you liked it in there.", "Oh... alright." ] },
-									"transformed" : { "randomDialogue" : [ "Heh, now you're a blob of cum~", "Ahhh~ I came~" ] },
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : [ "If only you stayed a bit longer...", "Ahh~ you didn't stay in long enough.", "Maybe you should stay in a little longer." ] },
-										"false" : { "randomDialogue" : [ "Hmmm why aren't you turning?", "Come on, don't you want to see what happens?" ] }
-									}
+				"false" : { // pred let prey out
+					"next" : "voreType",
+					"any" : {
+						"transforming" : {"true" : {
+							"queueReplace" : {"randomDialogue" : [":letoutTransforming"]},
+							"addQueued" : true,
+							"next" : "transformAllow",
+							"false" : {"queueReplace":{"randomDialogue" : [":letoutTransformingImmune"]}}
+						}},
+						"eggify" : {"true" : {
+							"queueReplace" : {"randomDialogue" : [":letoutEggify"]},
+							"addQueued" : true,
+							"next" : "eggAllow",
+							"false" : {"queueReplace":{"randomDialogue" : [":letoutEggifyImmune"]}}
+						}}
+					},
+					"oralVore" : {
+						"replace" : {
+							"randomDialogue" : [":letoutOralVore"]
+						},
+						"seperateNext" : true,
+						"next" : [
+							"digested",
+							"locationEffectSlot",
+							"eggify",
+							"transforming"
+						],
+						"digested" : {
+							"true" : {
+								"replace" : {
+									"randomDialogue" : [":letoutOralVoreDigested"]
 								},
-								"false" : { // struggleTrigger
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Hhhhhh I'm gonna cum...", "C-can't hold back much longer~", "Gonna blast you out with a load~", "Ahhhh feeels soooo goood~" ] },
-									"transformed" : { "randomDialogue" : [ "Heh, now you're a blob of cum~", "Ahhh~ I came~" ] },
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : [ "Ffff... came too early...", "C-couldn't hold back long enough..." ] },
-										"false" : { "randomDialogue" : [ "Ffffff... shouldn't you have turned...?", "Ahhh~ oh... you didn't turn..." ] }
-									}
-								}
+								"finished" : true
 							}
-						}
+						},
+						"locationEffectSlot" : {
+							"digest" : {
+								"replace" : {"randomDialogue" : [":letoutOralVoreDigest"]},
+								"next" : "digestImmunity",
+								"true" : {"replace" : {"randomDialogue" : [":letoutOralVoreDigestImmune"]}}
+							},
+							"softDigest" : {
+								"replace" : {"randomDialogue" : [":letoutOralVoreSoftDigest"]},
+								"next" : "digestImmunity",
+								"true" : {"replace" : {"randomDialogue" : [":letoutOralVoreDigestImmune"]}}
+							},
+							"heal" : { "replace" : {"randomDialogue" : [":letoutOralVoreHeal"]}}
+						},
+						"transforming" : ".letout.false.any.transforming",
+						"eggify" : ".letout.false.any.eggify"
+
+					},
+					"cockVore" : {
+						"replace" : {
+							"randomDialogue" : [":letoutCockVore"]
+						},
+						"seperateNext" : true,
+						"next" : [
+							"digested",
+							"locationEffectSlot",
+							"eggify",
+							"transforming"
+						],
+						"digested" : {
+							"true" : {
+								"replace" : {
+									"randomDialogue" : [":letoutCockVoreDigested"]
+								},
+								"finished" : true
+							}
+						},
+						"locationEffectSlot" : {
+							"digest" : {
+								"replace" : {"randomDialogue" : [":letoutCockVoreDigest"]},
+								"next" : "cumDigestImmunity",
+								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreDigestImmune"]}}
+							},
+							"softDigest" : {
+								"replace" : {"randomDialogue" : [":letoutCockVoreSoftDigest"]},
+								"next" : "cumDigestImmunity",
+								"true" : {"replace" : {"randomDialogue" : [":letoutCockVoreDigestImmune"]}}
+							},
+							"heal" : { "replace" : {"randomDialogue" : [":letoutCockVoreHeal"]}}
+						},
+						"transforming" : ".letout.false.any.transforming",
+						"eggify" : ".letout.false.any.eggify"
 					}
+				}
+			},
+
+			// for when an NPC is requesting a player or other NPC eats them
+			"preyRequest" : {
+				"new" : { "randomDialogue" : [":error"]}
+			},
+			// for when being prey and forcing their way into a pred without asking
+			"forcingPrey" : {
+				"new" : { "randomDialogue" : [":error"]}
+			},
+			// when being pred, response to prey forcing their way in unwillingly
+			"unwillingPred" : {
+				"new" : {},
+				"next" : "voreType",
+				"oralVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredOralVore"]}
+				},
+				"cockVore" : {
+					"replace" : { "randomDialogue" : [":defaultUnwillingPredCockVore"]}
 				}
 			},
 
 			// when being prey, responses to the pred that ate them as they struggle
 			// settings come from the pred, prey settings comes from itself
 			"struggling" : {
-				"next" : "location",
-				"default" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {  // mood
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ ["I'm stuck here aren't I?", "Is there even a way out?", "Trapped..."] ] }
-								}
-							},
-							"shy" : { // personality
-								"next" : "mood",
-								"default" : {  // mood
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ ["I-I'm stuck here aren't I?", "I-is there even a way out?", "T-trapped..."] ] }
-								}
-							}
-						}
-					}
-				},
-				"belly" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : { // mood
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [
-										["Mmmm pretty comfortable.", "Ahh... your belly is so soft...", {"check":{"bellySounds":true},"add":["Your belly is so noisy.", "Mmm... I like the sounds your belly is making."]}],
-										{"check":{"predator":"sbqVaporeon"},"add":["Gooey Vappy belly.", "Its all gooey in here."]}
-									]},
-									"sbqHeal" : { "randomDialogue" : [
-										["Ahh... its so soothing.", "I can feel all my troubles melting away...", "Its so comfortable in here.", {"check":{"bellySounds":true},"add":["I really like the sounds your belly makes... very calming.", "I could just drift off to sleep listening to the sounds of your body..."]} ],
-										{"check":{"predator":"sbqVaporeon"},"add":["I always liked vappy goo."]}
-									]},
-									"sbqDigest" : {
-										"next" : "digestImmunity",
-										"true" : { "randomDialogue" : [
-											[["Trying to melt me down?","Trying to melt me down?\nThats not gonna work."], "Heh, I can actually stay in here as long as I want.", "I'm invincible!", "You can't melt me!"]
-										]},
-										"false" : { "randomDialogue" : [
-											["Ahh... I'm starting to melt.", "Oh my... I'm just gonna be food.", {"check":{"bellySounds":true},"add":["Your belly is so noisy... I'm going to be gurgled up aren't I?", "All this grumbling... you must be pretty hungry."]} ],
-											{"check":{"predator":"sbqVaporeon"},"add":["Ahh... I'm starting to melt into goo..."]}
-										]}
-									},
-									"sbqSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : [
-											["It feels kinda weird in here?", "It feels like... I'm changing?"],
-											{"check":{"predator":"sbqVaporeon"},"add":["Its... its like I'm turning into goo?", "I'm being turned into a Vapreon..."]}
-										]},
-										"false" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
-								}
-							}
-						}
-					},
-					"sbqSlime" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : { // mood
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "This slime is so sticky.", "Stuck suspended in slime...", "Suspended in sticky goo..." ]},
-									"sbqHeal" : { "randomDialogue" : [ "This slime feels pretty nice.", "Ahh... this is... oddly satisfying...", "I wouldn't mind staying suspended in here..." ] },
-									"sbqSoftDigest" : "struggling.location.predator.race.personality.mood.sbqDigest",
-									"sbqDigest" : {
-										"next" : "digestImmunity",
-										"true" : { "randomDialogue" : [["Heh trying to melt me into more slime?", "Heh trying to melt me into more slime?\nThats not gonna work."], "Sorry, I'm not soluble.", "You're gonna have to try harder to absorb me."]},
-										"false" : { "randomDialogue" : [ "Ahh... I'm starting to melt into slime.", "Oh my... I'm dissolving.", "I'm gonna be absorbed..." ] }
-									},
-									"transformed" : { "randomDialogue" : ["I've been turned into a slime!", "Oh my... I'm a slime now", "I'm just a blob of slime now..."]},
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : ["Ahh... I'm being turned into slime...", "Its like my limbs are turning into jelly..."]},
-										"false" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
-								}
-							}
-						}
-					}
-				},
-				"ballsR" : "struggling.balls",
-				"ballsL" : "struggling.balls",
-				"balls" : {
-					"next" : "predator",
-					"default" : {
-						"next" : "race",
-						"default" : {
-							"next" : "personality",
-							"default" : {
-								"next" : "mood",
-								"default" : {
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "All this cum sloshing around me~", "Ahhh... I'm stored in the balls~", "Stuck down here in your balls~", "This is so hot~" ] },
-									"transformed" : { "randomDialogue" : [ "O-oh my... I'm just cum now~", "Oooh~ I'm sloshing around in here~", "Now I'm just a load of cum~" ] },
-									"transform" : {
-										"next" : "cumTransformAllow",
-										"true" : { "randomDialogue" : [
-											["It feels kinda weird in here?", "I think... I think I'm turning white?", "I think... I'm starting to feel goopy?"]
-										]},
-										"false" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
-								}
-							}
-						}
-					}
-				},
-				"penis" : "struggling.shaft",
-				"cock" : "struggling.shaft",
-				"shaft" : {
-					"next" : "predator",
-					"default" : {
-						"next" : "race",
-						"default" : {
-							"next" : "personality",
-							"default" : {
-								"next" : "mood",
-								"default" : {
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh~ your cock is squeezing tight around me~", "Ohhh~ Your shaft is squeezing so hard~", "This is so hot~" ] },
-									"transformed" : { "randomDialogue" : [ "O-oh my... I'm just cum now~", "Oooh~ Are you about to cum me out~?", "Now I'm just a load of cum~" ] },
-									"transform" : {
-										"next" : "cumTransformAllow",
-										"true" : { "randomDialogue" : [
-											["It feels kinda weird in here?", "I think... I think I'm turning white?", "I think... I'm starting to feel goopy?"]
-										]},
-										"false" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
-								}
-							}
-						}
-					}
-				},
-				"womb" : {
-					"next" : "predator",
-					"default" : {
-						"next" : "race",
-						"default" : {
-							"next" : "personality",
-							"default" : {
-								"next" : "mood",
-								"default" : {
-									"next" : "getLocationEffect",
-									"default" : { "randomDialogue" : [ "Ahh~ Its so soft in here~", "Ohhh~ Your womb is so snug and soft~", "This is so hot~" ] },
-									"transformed" : { "randomDialogue" : [
-										["Ahhh~ My body is all different~", "Oooh~ I've been transformed~", "I got transformed by your womb~"],
-										{"check":{"egged":true},"add":["You used an egg to transform me~", "Can't wait to hatch and see my new body~"]} // oh wait
-									]},
-									"transform" : {
-										"next" : "transformAllow",
-										"true" : { "randomDialogue" : [
-											["It feels kinda weird in here?", "I think... I think changing?", "I think... I'm starting to feel goopy?"],
-											{"check":{"egged":true},"add":["I think this egg is doing something?", "Is this egg changing me?"]} // yeah fuck I just realized
-										]},
-										"false" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									},
-									"egged" : {}, // struggles can't trigger while egged and inside someone
-									"eggify" : {
-										"next" : "eggAllow",
-										"true" : { "randomDialogue" : [ "Is this... an egg?", "Are you making an egg around me?", "I'm gonna be trapped in an egg!" ] },
-										"false" : { "randomDialogue" : [ {"add":"struggling.location.predator.race.personality.mood.locationEffect"} ] }
-									}
-								}
-							}
-						}
-					}
-				},
-				"breastsR" : "struggling.breasts",
-				"breastsL" : "struggling.breasts",
-				"breasts" : {}
+				"new" : { "randomDialogue" : [":error"]}
 			},
+
 			// when being prey, responses to the pred thats eating them
 			// settings come from the pred, prey settings comes from itself
 			"vored" : {
-				"next" : "voreType",
-				"default" : { // voreType
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : { // mood
-									"randomDialogue" : [ "Ah!" ]
-								}
-							}
-						}
-					}
-				},
-				"oralVore" : { // voreType
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : { // mood
-									"randomDialogue" : [ "Ah!" ]
-								}
-							}
-						}
-					}
-				},
-				"cockVore" : { // voreType
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : { // mood
-									"randomDialogue" : [ "UwU" ]
-								}
-							}
-						}
-					}
-				},
-				"unbirth" : { // voreType
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : { // mood
-									"randomDialogue" : [ "UwU" ]
-								}
-							}
-						}
-					}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
+
 			// when being prey, responses to the pred letting them out
 			// settings come from the pred, prey settings comes from itself
 			"escape" : {
-				"next" : "voreType",
-				"default" : { // voreType
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "struggleTrigger",
-						"true" : { // struggle trigger
-							"next" : "race",
-							"default" :{ // race
-								"next" : "personality",
-								"default" : { // personality
-									"next" : "mood",
-									"default" : { // mood
-										"randomDialogue" : [ "I got out." ]
-									}
-								}
-							}
-						},
-						"false" : { // struggle trigger
-							"next" : "race",
-							"default" :{ // race
-								"next" : "personality",
-								"default" : { // personality
-									"next" : "mood",
-									"default" : { // mood
-										"randomDialogue" : [ "Ah, back outside" ]
-									}
-								}
-							}
-						}
-					}
-				}
+				"new" : { "randomDialogue" : [":error"]}
 			},
 
 			// lines for when an NPC infuses someone (CTF, Boobsorb, etc.)
 			"infusePrey" : {
+				"new" : {"dismissTime" : 2},
 				"next" : "location",
-				"belly" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"Mm, you love my belly so much... you want to be a part of it?", "You want to become my belly?", "You want to become a part of me...?"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Ahh... there you are... just my belly now", "Just a part of me now", "Try not to make me too hungry..."
-										],
-										"dismissTime" : 10
-									}
-								},
-								"requestLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["You want to take <infusedName>'s place?", "You want to join <infusedName>?"]
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"}
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"I think... I need you in my belly... or... as my belly"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"}
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unpromptedLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										],
-										"dismissTime" : 10
-									}
-								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
-							}
-						}
-					}
-				},
-				"cock":"infusePrey.shaft",
+				"cock" : ".shaft",
 				"shaft" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"You want to be my cock?", "Mm, can't wait to be throbbing down there can you?", "You really want to give yourself entirely to me?"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Hehe, I can feel you twitching with excitment already~", "Hehe, excited to be part of me~?", "Ah, you're already throbbing with excitment~"
-										],
-										"dismissTime" : 10
-									}
-								},
-								"requestLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["You want to take <infusedName>'s place?", "Hehe, want to send <infusedName> a layer deeper~?"]
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["And now <infusedName> is even more trapped~"]
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"Hehe, I think you belong as something else~", "Mm~ I think it'd be fitting to have you throbbing between my legs~", "You're always so twitchy... which would make you a good cock~",
-											"I think I have a far better use for you~"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Ahh~ finally got you where you belong~", "You belong right where you are, throbbing between my legs~", "Mmm~ feels right to have you there~"
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unpromptedLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										],
-										"dismissTime" : 10
-									}
-								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
-							}
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestShaftBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestShaftBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestShaftAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestShaftAfterLayer"]}}
 						}
-					}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedShaftBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedShaftBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedShaftAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedShaftAfterLayer"]}}
+						}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
+
 				},
-				"breasts" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"You want to be my boobs?", "Mm, can't wait to be jiggling on my chest can you?", "You really want to give yourself entirely to me?"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Hehe, I can feel you leaking with excitment already~", "Hehe, excited to be part of me~?", "Ah, you're already leaking milk~"
-										],
-										"dismissTime" : 10
-									}
-								},
-								"requestLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["You want to take <infusedName>'s place?", "Hehe, want to send <infusedName> a layer deeper~?"]
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["And now <infusedName> is even more trapped~"]
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"Hehe, I think you belong as something else~", "Mm~ I think it'd be fitting to have you jiggling on my chest~",
-											"I think I have a far better use for you~"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Ahh~ finally got you where you belong~", "You belong right where you are, jiggling on my chest~", "Mmm~ feels right to have you there~"
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unpromptedLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										],
-										"dismissTime" : 10
-									}
-								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
-							}
+				"ballsL" : ".balls",
+				"ballsR" : ".balls",
+				"balls" : {
+					"next" : "voreResponse",
+					"request" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBallsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBallsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseRequestBallsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseRequestBallsAfterLayer"]}}
 						}
-					}
-				},
-				"pussy":"infusePrey.womb",
-				"womb" : {
-					"next" : "race",
-					"default" : { // race
-						"next" : "personality",
-						"default" : { // personality
-							"next" : "mood",
-							"default" : { // mood
-								"next" : "getVoreButtonAction",
-								"request" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"You want to be my pussy?", "Mm, can't wait to be soaking wet down there can you?", "You really want to give yourself entirely to me?"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Hehe, I can feel you leaking with excitment already~", "Hehe, excited to be part of me~?", "Ah, you're already sopping wet with excitment~"
-										],
-										"dismissTime" : 10
-									}
-								},
-								"requestLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["You want to take <infusedName>'s place?", "Hehe, want to send <infusedName> a layer deeper~?"]
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.request.doingVore"},
-											["And now <infusedName> is even more trapped~"]
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unprompted" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											"Hehe, I think you belong as something else~", "Mm~ I think it'd be fitting to have you dripping between my legs~",
-											"I think I have a far better use for you~"
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											"Ahh~ finally got you where you belong~", "You belong right where you are, soaking between my legs~", "Mmm~ feels right to have you there~"
-										],
-										"dismissTime" : 10
-									}
-								},
-								"unpromptedLayer" : {
-									"next" : "doingVore",
-									"before" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										]
-									},
-									"after" : {
-										"randomDialogue" : [
-											{"add":"infusePrey.location.race.personality.mood.unprompted.doingVore"}
-										],
-										"dismissTime" : 10
-									}
-								},
-								"notFeelingIt" : { "randomDialogue" : [ "Don't really feel like that right now.", "Not right now.", "I'm not in the mood.", "Eh, maybe later." ] }
-							}
+					},
+					"unprompted" : {
+						"next" : "doingVore",
+						"before" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBallsBefore"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBallsBeforeLayer"]}}
+						},
+						"after" : {
+							"replace" : { "randomDialogue" : [":infuseUnpromptedBallsAfter"]},
+							"next" : "infuselayered",
+							"true" : {"replace" : { "randomDialogue" : [":infuseUnpromptedBallsAfterLayer"]}}
 						}
-					}
+					},
+					"notFeelingIt" : { "replace" : {"randomDialogue" : [":defaultNotFeelingIt"]} }
 				}
 			},
+
 			// lines for when a character is infused (CTF Boobsorb etc.)
 			// settings for personality and race and mood would come from the infused character, things like location effect and etc would come from the pred
-			"infused": {
-				"next" : "location",
-				"default" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"<slowlove>",
-										"<love>",
-										[
-											["^#ffffff7f;(Just a part of your body~)", "^#ffffff7f;(Just a part of <entityname>'s body~)"],
-											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-											"<love>^#ffffff7f;(<keysmash>)"
-										]
-									]
-								}
-							}
-						}
-					}
-				},
-				"belly" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"<slowlove>",
-										"<love>",
-										[
-											{"check":{"bellySounds":true},"add":[
-												"^#ffffff7f;(Just a grumbling belly~)","^#ffffff7f;(Just your grumbling belly~)","^#ffffff7f;(Just <entityname>'s grumbling belly~)",
-												"^#ffffff7f;(Just a noisy belly~)","^#ffffff7f;(Just your noisy belly~)","^#ffffff7f;(Just <entityname>'s noisy belly~)"
-											]},
-											{"check":{"mood":"hungry"},"add":["<slowlove>^#ffffff7f;(Feeed meee~)", "^#ffffff7f;(Hungry...)"]},
-											["^#ffffff7f;(Just a belly~)","^#ffffff7f;(Just your belly~)","^#ffffff7f;(Just <entityname>'s belly~)"],
-											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-											"<love>^#ffffff7f;(<keysmash>)"
-										]
-									]
-								}
-							}
-						}
-					}
-				},
-				"womb" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"<slowlove>",
-										"<love>",
-										[
-											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-											"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
-											"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
-											"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
-											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-											"<love>^#ffffff7f;(<keysmash>)"
-										]
-									]
-								}
-							}
-						}
-					}
-				},
-				"breastsL" : "infused.breasts",
-				"breastsR" : "infused.breasts",
-				"breasts" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"<slowlove>",
-										"<love>",
-										[
-											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-											"<slowlove>^#ffffff7f;(Producing milk...~)",
-											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-											"<love>^#ffffff7f;(<keysmash>)"
-										]
-									]
-								}
-							}
-						}
-					}
-				},
-				"penis" : "infused.shaft",
-				"cock" : "infused.shaft",
-				"shaft" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"<slowlove>",
-										"<love>",
-										[
-											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-											"<slowlove>^#ffffff7f;(I'm just a cock~)",
-											"<slowlove>^#ffffff7f;(I can't wait to be used~)",
-											"<slowlove>^#ffffff7f;(Ahh~ I'm throbbing with excitment~)",
-											"<slowlove>^#ffffff7f;(I'm just <entityname>'s cock~)",
-											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-											"<love>^#ffffff7f;(<keysmash>)"
-										]
-									]
-								}
-							}
-						}
-					}
-				},
-				"ballsL" : "infused.balls",
-				"ballsR" : "infused.balls",
-				"balls" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"<slowlove>",
-										"<love>",
-										[
-											"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-											"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-											"<slowlove>^#ffffff7f;(I'm just your balls~)",
-											"<slowlove>^#ffffff7f;(Ahh~ so full of cum sloshing around~)",
-											"<slowlove>^#ffffff7f;(I'm just <entityname>'s balls~)",
-											"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-											"<love>^#ffffff7f;(<keysmash>)"
-										]
-									]
-								}
-							}
-						}
-					}
-				}
+			"infused" : {
+				"new" : { "randomDialogue" : [":error"]}
 			},
+
 			// lines for when a character is infused (CTF Boobsorb etc.) the pred teasing their occupant
 			// the <infusedName> tag can also be used in any of the above vore context to use the name of the infused character, just make sure to have the lines within a special check for it
-			"infusedTease": {
+			"teaseInfused" : {
+				"new" : {
+					"randomDialogue":[":teaseInfused"],
+					"hideVoreButtons" : true
+				},
 				"next" : "location",
-				"default" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										"Just a part of my body~", "Just a part of my body <infusedName>~" // very very placeholder
-									]
-								}
-							}
-						}
-					}
-				},
-				"belly" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										{"check":{"bellySounds":true},"add":["Hehe, grumbling <infusedName>?", "Does my noisy belly want something~?"]},
-										"Hehe, does my belly want something?", "Hehe, do you want something <infusedName>?"
-									]
-								}
-							}
-						}
-					}
-				},
-				"womb" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										["<slowlove>Ahh, I'm so much more sensitive with you down there~", "<slowlove>Ahh, <infusedName>~ I'm so much more sensitive with you down there~"],
-										["<slowlove>Fff, ahh... I keep getting wet thinking about you down there~","<slowlove>Fff, ahh... <infusedName> I keep getting wet thinking about you down there~"],
-										["<slowlove>Hehe... dripping wet, right where you belong~","Hehe... dripping wet, right where you belong <infusedName>~"],
-										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
-									]
-								}
-							}
-						}
-					}
-				},
-				"breastsL" : "infused.breasts",
-				"breastsR" : "infused.breasts",
-				"breasts" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										["<slowlove>Mmm, you make them so much more sensitive~","<slowlove>Mmm, <infusedName> you make them so much more sensitive~"],
-										["<slowlove>Ahh I can just feel you making even more milk~","<slowlove>Ahh I can just feel you making even more milk <infusedName>~"],
-										["<slowlove>Jiggling on my chest, right where you belong~","<slowlove>Jiggling on my chest, right where you belong <infusedName>~"],
-										{"check":{"breastsInfusedSize":true},"add":[
-											["<love>I love how much bigger you make my boobs~","<love>I love how much bigger you make my boobs <infusedName>~"],
-											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
-										]},
-										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
-									] // very very placeholder
-								}
-							}
-						}
-					}
-				},
-				"penis" : "infused.shaft",
-				"cock" : "infused.shaft",
-				"shaft" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										["<love>Heh, I can feel you twitching down there~", "<love>Heh, I can feel you twitching down there <infusedName>~"],
-										["<love>Are you enjoying your new purpose?~", "<love>Are you enjoying your new purpose <infusedName>?~"],
-										["<slowlove>Just twitch and throb away, you're right where you belong~", "<slowlove>Just twitch and throb away <infusedName> you're right where you belong~"],
-										["<love>Heh, you belong right there, twitching and throbbing between my legs~", "<love>Heh, you belong right there <infusedName>, twitching and throbbing between my legs~"],
-										{"check":{"shaftInfusedSize":true},"add":[
-											["<love>I love how much bigger you make my cock~","<love>I love how much bigger you make my cock <infusedName>~"],
-											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
-										]},
-										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
-									]
-								}
-							}
-						}
-					}
-				},
-				"ballsL" : "infused.balls",
-				"ballsR" : "infused.balls",
-				"balls" : { // location
-					"next" : "predator",
-					"default" : { // predator
-						"next" : "race",
-						"default" : { // race
-							"next" : "personality",
-							"default" : { // personality
-								"next" : "mood",
-								"default" : {	// mood
-									"randomDialogue" : [
-										["<love>Heh, I can feel you twitching down there~", "<love>Heh, I can feel you twitching down there <infusedName>~"],
-										["<love>Are you enjoying your new purpose?~", "<love>Are you enjoying your new purpose <infusedName>?~"],
-										["<love>Mmm, all that cum sloshing around down there~", "<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"],
-										{"check":{"ballsInfusedSize":true},"add":[
-											["<love>I love how much bigger you make my balls~","<love>I love how much bigger you make my balls <infusedName>~"],
-											["<love>You're better as extra size for me~","<love>You're better as extra size for me <infusedName>~"]
-										]},
-										["<love>You're far more useful like this~","<love>You're far more useful like this <infusedName>"]
-
-									]
-								}
-							}
-						}
-					}
-				}
+				"cock":".shaft",
+				"shaft" : {"replace" :{"randomDialogue" : [":teaseInfusedShaft"]}},
+				"ballsL":".balls",
+				"ballsR":".balls",
+				"balls" : {"replace" :{"randomDialogue" : [":teaseInfusedBalls"]}}
 			},
-			// lines triggered when a player may recieve a certain reward
-			"rewardNotify": {
-				"next": "race",
-				"default": { // race
-					"next": "personality",
-					"default": { // personality
-						"next": "mood",
-						"default": { // mood
-							"next": "rewardName",
-							"default": {
-								"next": "poolName",
-								"money": {
-									"randomDialogue" : [ "This is nice, I think I'll give you some of my spare change.", "I'll give you a few pixels for giving me a good time."]
-								},
-								"lowValueQuestRewards": {
-									"randomDialogue" : [ "Hmm, I think you deserve something after this.", "I think I'll give you some sort of small gift."]
-								},
-								"mediumValueQuestRewards": {
-									"randomDialogue" : [ "Maybe I've got something a bit better for you this time.", "I've got another gift for you after this."]
-								},
-								"highValueQuestRewards": {
-									"randomDialogue" : [ "I think you'll really like what I've gotten you.", "My next gift will be really good heh."]
-								}
-							}
-						}
-					}
-				}
+
+			//lines of dialogue triggered when the horny meter hits 100% (the NPC climaxes)
+			"climax" : {
+				"new" : {
+					"randomDialogue":[":climax"],
+					"hideVoreButtons" : true,
+					"hideInfusionButtons" : true
+				},
+				"next" : "location",
+				"pussy":".womb",
+				"womb" : {"replace" :{"randomDialogue" : [":climaxWomb"]}},
+				"breasts" : {"replace" :{"randomDialogue" : [":climaxBreasts"]}},
+				"cock":".shaft",
+				"shaft" : {"replace" :{"randomDialogue" : [":climaxShaft"]}},
+				"ballsL":".balls",
+				"ballsR":".balls",
+				"balls" : {"replace" :{"randomDialogue" : [":climaxBalls"]}}
 			},
 
 			// a line of dialogue triggered when size is changed by the size ray or something else
 			"sizeChanged" : {
-				"next" : "race",
-				"default" : { // race
-					"next" : "personality",
-					"default" : { // personality
-						"next" : "mood",
-						"default" : { // mood
-							"next" : "shrinkOrGrow",
-							"shrink" : {
-								"randomDialogue" : ["Why's everything getting bigger?", "Ah! I'm shrinking!"]
-							},
-							"grow" : {
-								"randomDialogue" : ["Why's everything getting smaller?", "Ah! I'm growing!"]
-							}
-						}
-					}
-				}
+				"new" : {},
+				"next":"shrinkOrGrow",
+				"shrink" :{"replace" : {"randomDialogue":[":shrinking"]}},
+				"grow" :{"replace" : {"randomDialogue":[":growing"]}}
 			},
 			// when stepping on a character small enough
 			"didSteppy" : {
-				"next" : "race",
-				"default" : { // race
-					"next" : "personality",
-					"default" :{ // personality
-						"next" : "mood",
-						"default" : {
-							"next" : "steppyType", // walking, running, falling
-							"default" : {
-								"randomDialogue" : [ "hehe, whoops!", "Oh did I step on something?", "You tinies need to pay attention more!"]
-							}
-						}
-					}
-				}
+				"new" : {"randomDialogue":[":didSteppy"]}
 			},
+
 			// when stepped on by a larger character
 			"gotSteppy" : {
-				"next" : "race",
-				"default" : { // race
-					"next" : "personality",
-					"default" :{ // personality
-						"next" : "mood",
-						"default" : {
-							"next" : "steppyType", // walking, running, falling
-							"default" : {
-								"randomDialogue" : [
-									["Ahhh!", "AH!", "oof!", "eep!"],
-									["You stepped on me!", "Watch your step!"],
-									["Be careful where you're <steppyType>!", "Watch where you're <steppyType>!"],
-									["Look out!", "Careful!"]
-								]
-							},
-							"falling" : {
-								"randomDialogue" : [
-									["Ahhh!", "AH!", "oof!", "eep!"],
-									["You're stomping on me!", "I'm getting smushed!", "*wheeze*"]
-								]
-							}
-						}
-					}
-				}
+				"new" : {"randomDialogue":[":gotStepped"]},
+				"next" : "steppyType",
+				"falling" :{"replace" : {"randomDialogue":[":gotStomped"]}}
 			}
 		},
 		// when hunting for prey, a checklist to have them only seek out prey that match the settings
@@ -1769,110 +873,34 @@
 
 			"displayDigest" : false,
 
-			"escapeDifficulty": 0,
-			"escapeDifficultyMin": 0,
-			"escapeDifficultyMax": 0,
+			"escapeDifficulty": 5,
 
 			"impossibleEscape": false,
-			"hammerspace" : false,
 
 			"shaftInfusedVisual" : true,
 
-			"bellyInfusedSize" : false,
-			"wombInfusedSize" : false,
-
 			// predator prefrences
 			"oralVorePred" : true,
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"navelVorePred" : false,
 
-			"analVorePred" : false,
-			"unbirthPred" : false,
 			"cockVorePred" : false,
-			"breastVorePred" : false,
-
-			"bellyInfusionPred" : true,
+			"oralVorePredUnwilling" : true,
+			"cockVorePredUnwilling" : true,
 			"cockInfusionPred" : true,
-			"pussyInfusionPred" : true,
-			"breastsInfusionPred" : true,
-
-			"shaftInfusedItem" : { "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
-				"shortdescription" : "Cherry's Essence",
-				"description" : "Clover's \"Assistant\" looks like all she's doing right now is twitching between his legs~",
-				"preySize" : 1,
-				"npcArgs" : {
-					"npcSpecies" : "meowscarada",
-					"npcType" : "sbqCherry_LokiVulpix",
-					"npcParam" : {
-						"scriptConfig" : {
-							"isOC" : true,
-							"uniqueId" : "sbqCherry_LokiVulpix"
-						},
-						"identity" : {
-							"body" : "5",
-							"arm" : "3",
-							"facialHairType" : "0",
-							"facialHairGroup" : "ears",
-							"hairType" : "0",
-							"bodyDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"personalityArmIdle" : "idle.3",
-							"gender" : "female",
-							"hairGroup" : "hair",
-							"facialMaskDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"personalityIdle" : "idle.5",
-							"name" : "Cherry",
-							"facialMaskGroup" : "mask",
-							"facialHairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"imagePath" : "meowscarada",
-							"emoteDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"hairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"facialMaskType" : "blank"
-						},
-						"statusControllerSettings" : {
-							"statusProperties": {
-								"sbqPreyEnabled": {
-									"milkDigestAllow": true,
-									"cumSoftDigestAllow": true,
-									"milkDigestItemDropsAllow": true,
-									"digestAllow": true,
-									"tailVore": true,
-									"digestItemDropsAllow": false,
-									"absorbVore": true,
-									"unbirth": true,
-									"pussyInfusion": true,
-									"femcumSoftDigestAllow": false,
-									"cockInfusion": true,
-									"cumDigestAllow": true,
-									"analVore": true,
-									"milkSoftDigestAllow": true,
-									"cumDigestItemDropsAllow": true,
-									"transformAllow": true,
-									"breastsInfusion": true,
-									"navelVore": false,
-									"bellyInfusion": true,
-									"eggAllow": true,
-									"femcumDigestItemDropsAllow": false,
-									"cumTransformAllow": true,
-									"softDigestAllow": true,
-									"genderswapAllow": true,
-									"oralVore": true,
-									"cockVore": true,
-									"femcumDigestAllow": false,
-									"breastVore": true
-								}
-							}
-						}
-					}
-				}
-			}}
-
+			"cockInfusionPredUnwilling" : true
 		},
 
 		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
 		"sbqOverrideSettings" : {
 			"navel" : false,
 			"navelVorePred" : false,
+			"tailVorePred" : false,
+			"absorbVorePred" : false,
+			"analVorePred" : false,
+			"unbirthPred" : false,
+			"breastVorePred" : false,
+			"bellyInfusionPred" : false,
+			"pussyInfusionPred" : false,
+			"breastsInfusionPred" : false,
 
 			"crewmateGraduation" : false,
 
@@ -1886,11 +914,7 @@
 			"defaultCompressionMultiplier" : 0.1,
 
 			"bellyPredDigestDrops" : false,
-			"tailPredDigestDrops" : false,
-			"wombPredDigestDrops" : false,
 
-			"wombDigestEnable" : false,
-			"wombSoftDigestEnable" : false,
 			"shaftEffectSlot" : "none",
 			"shaftDigestEnable" : false,
 			"shaftSoftDigestEnable" : false,
@@ -1900,6 +924,7 @@
 		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
 		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
 		"sbqOverridePreyEnabled" : {
+			"preyEnabled" : false,
 			"navelVore": false,
 
 			"digestItemDropsAllow" : false,
@@ -1969,16 +994,78 @@
 		"sbqRandomizeSettings" : {
 
 			"bellyEffectSlot" : [ "none", "heal", "softDigest"],
-			"wombEffectSlot" : [ "none", "heal"],
-			"breastsEffectSlot" : [ "none", "heal", "softDigest"],
 			"ballsEffectSlot" : [ "none", "heal", "softDigest"],
+			"ballsInfusedItem" : "shaftInfusedItem",
+			"shaftInfusedItem" : [{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
+				"shortdescription" : "Cherry's Essence",
+				"description" : "Clover's \"Assistant\" looks like all she's doing right now is twitching between his legs~",
+				"preySize" : 1,
+				"npcArgs" : {
+					"npcSpecies" : "meowscarada",
+					"npcType" : "sbqCherry_LokiVulpix",
+					"npcParam" : {
+						"scriptConfig" : {
+							"isOC" : true,
+							"uniqueId" : "sbqCherry_LokiVulpix"
+						},
+						"identity" : {
+							"body" : "5",
+							"arm" : "3",
+							"facialHairType" : "0",
+							"facialHairGroup" : "ears",
+							"hairType" : "0",
+							"bodyDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
+							"personalityArmIdle" : "idle.3",
+							"gender" : "female",
+							"hairGroup" : "hair",
+							"facialMaskDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
+							"personalityIdle" : "idle.5",
+							"name" : "Cherry",
+							"facialMaskGroup" : "mask",
+							"facialHairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
+							"imagePath" : "meowscarada",
+							"emoteDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
+							"hairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
+							"facialMaskType" : "blank"
+						},
+						"statusControllerSettings" : {
+							"statusProperties": {
+								"sbqPreyEnabled": {
+									"milkDigestAllow": true,
+									"cumSoftDigestAllow": true,
+									"milkDigestItemDropsAllow": true,
+									"digestAllow": true,
+									"tailVore": true,
+									"digestItemDropsAllow": false,
+									"absorbVore": true,
+									"unbirth": true,
+									"pussyInfusion": true,
+									"femcumSoftDigestAllow": false,
+									"cockInfusion": true,
+									"cumDigestAllow": true,
+									"analVore": true,
+									"milkSoftDigestAllow": true,
+									"cumDigestItemDropsAllow": true,
+									"transformAllow": true,
+									"breastsInfusion": true,
+									"navelVore": false,
+									"bellyInfusion": true,
+									"eggAllow": true,
+									"femcumDigestItemDropsAllow": false,
+									"cumTransformAllow": true,
+									"softDigestAllow": true,
+									"genderswapAllow": true,
+									"oralVore": true,
+									"cockVore": true,
+									"femcumDigestAllow": false,
+									"breastVore": true
+								}
+							}
+						}
+					}
+				}
+			}}]
 
-			"ballsInfusedItem" : "shaftInfusedItem"
-
-			// we shouldn't have the randomly generated preds generate with nsfw stuff
-			// not everyone wants to stumble across an NPC with their dick out
-
-			//"cockVorePred" : [true,false],
 		}
 		/*
 		"sbqRandomizePreySettings" : {
@@ -1988,8 +1075,41 @@
 	},
 	"statusControllerSettings" : {
 		"stats" : {
-			"protection" : {
-				"baseValue" : 100.0 // this will make your OC immune to most forms of damage outside of vore
+			"maxEnergy" : {
+				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"hornyPassiveLimit" : {
+				"baseValue" : 0.5
+			},
+			"hornyDelta" : {
+				"baseValue" : 0.0583
+			},
+			"restDelta" : {
+				"baseValue" : -0.0583
+			}
+		},
+		"resources" : {
+			"food" : {
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"horny" : {
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"rest" : {
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
 			}
 		},
 		"statusProperties" : {

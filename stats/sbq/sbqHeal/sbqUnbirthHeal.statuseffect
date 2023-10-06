@@ -1,0 +1,23 @@
+{
+	"name" : "sbqUnbirthHeal",
+	"blockingStat" : "healingStatusImmunity",
+
+	"effectConfig" : {
+		"effect" : "sbqUnbirthHeal",
+		"healStat" : "health",
+		"healRate" : 1,
+		"take" : ["food", "energy"],
+		"takeMultiplier" : [0.5, 15],
+		"takeThreshold" : [0.25, 0.5]
+	},
+	"defaultDuration" : 5,
+
+	"animationConfig" : "/stats/effects/heal/heal.animation",
+
+	"scripts" : [
+		"sbqHeal.lua"
+	],
+
+	"label" : "Healing Vore",
+	"icon" : "/stats/sbq/sbqHeal/sbqHeal.png"
+}

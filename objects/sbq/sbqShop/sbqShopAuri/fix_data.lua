@@ -1,5 +1,5 @@
 
-function dialogueBoxScripts.fixData(dialogueTree, settings, branch, eid, ...)
+function dialogueBoxScripts.fixData(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	player.setProperty("sbqCurrentData", nil)
 	status.setStatusProperty("sbqCurrentData", nil)
 	player.setProperty("sbqPreyWarpData", nil)
@@ -10,10 +10,10 @@ function optionCheckScripts.fixData(settings, ...)
 	local preyWarp = player.getProperty("sbqPreyWarpData")
 	if preyWarp then return true end
 
-	local sbqCurrentData = player.getProperty("sbqCurrentData") or {}
-	local sbqCurrentData2 = player.getProperty("sbqCurrentData") or {}
-	if ((sbqCurrentData.type == "driver") and (sbqCurrentData2.type == "driver"))
-	or ((sbqCurrentData.type == nil) and (sbqCurrentData2.type == nil))
+	local type = status.statusProperty("sbqType")
+	local type2 = player.getProperty("sbqType")
+	if ((type == "driver") and (type2 == "driver"))
+	or ((type == nil) and (type2 == nil))
 	then
 		return false
 	end

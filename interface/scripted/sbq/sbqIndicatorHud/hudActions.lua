@@ -11,6 +11,7 @@ function sbq.npcInteract(id, i)
 	local predData = {
 		settings = sbq.sbqCurrentData.settings,
 		location = sbq.occupant[i].location,
+		infused = sbq.occupant[i].flags.infused,
 		predator = predator
 	}
 	sbq.addRPC(world.sendEntityMessage(id, "sbqInteract", player.id(), predData), function (data)
@@ -41,10 +42,6 @@ function sbq.eggify(id, i)
 end
 
 
-function sbq.infuseLocation(id, i)
-	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id )
-end
-
-function sbq.cockTF(id, i)
-	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id, {"shaft", "balls"} )
+function sbq.infuseLocation(id, i, args)
+	world.sendEntityMessage( sbq.sbqCurrentData.id, "infuseLocation", id, (args or {}).locations )
 end

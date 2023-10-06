@@ -154,6 +154,9 @@
 		"listLocations" : [
 			"belly"
 		],
+		"voreTypes" : {
+			"oralVore" : "belly"
+		},
 		"locations" :{
 			"belly" : { "name" : "Belly", "max": 2, "selectEffect" : true, "mass" : 1, "hammerspace" : true,
 				"TF" : {}
@@ -161,6 +164,8 @@
 			"hug" : { "name" : "Held", "max": 1, "maxNested": 2 }
 		},
 		"defaultSettings" : {
+			"oralVorePred" : true,
+			"absorbVorePred" : true,
 			"replaceColors" : [6,6,9,3,9,1,1],
 			"fullbright" : [false,false,false,false,false,true,false],
 			"directives" : "?replace;a34c9a=545455;cc72c3=8a8a8b;ef99e7=b3b3b4;ffcfe9=e0e0e1;fae2ef=fefeff" // a default value to make sure the neck fins don't show up as pink
@@ -324,6 +329,7 @@
 				},
 				// non directional = not accessible via controls, except from script
 				"oralVore": { // 2 occupants
+					"settings" : { "oralVorePred" : true },
 					"voreType" : "oralVore",
 					"lock": true,
 					"location": "belly",
@@ -338,6 +344,7 @@
 				},
 				"escape": { // 2 occupants
 					"voreType" : "oralVore",
+					"settings" : { "oralVorePred" : true },
 					"lock": true,
 					"location": "belly",
 					"animation": {
@@ -650,6 +657,7 @@
 				},
 				"absorb": {
 					"voreType" : "absorbVore",
+					"settings" : { "absorbVorePred" : true },
 					"lock" : true,
 					"location" :"belly",
 					"failOnFull" : 1,
@@ -761,6 +769,7 @@
 				},
 				"absorb": {
 					"voreType" : "absorbVore",
+					"settings" : { "absorbVorePred" : true },
 					"lock" : true,
 					"location" :"belly",
 					"failOnFull" : 1,
@@ -863,6 +872,7 @@
 					"script": "unbed"
 				},
 				"escape": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock" : true,
 					"animation":{
@@ -872,6 +882,7 @@
 					"script": "analEscape"
 				},
 				"eatAnal": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock" : true,
 					"location": "belly",
@@ -972,6 +983,7 @@
 				},
 
 				"absorb": {
+					"settings" : { "absorbVorePred" : true },
 					"voreType" : "absorbVore",
 					"lock" : true,
 					"location": "belly",
@@ -987,6 +999,7 @@
 					"script": "absorb"
 				},
 				"escape": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock" : true,
 					"animation":{
@@ -996,6 +1009,7 @@
 					"script": "analEscape"
 				},
 				"eatAnal": {
+					"settings" : { "analVorePred" : true },
 					"voreType" : "analVore",
 					"lock" : true,
 					"location": "belly",

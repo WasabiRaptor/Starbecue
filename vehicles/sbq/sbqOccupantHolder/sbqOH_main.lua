@@ -4,7 +4,11 @@ state = {
 
 sbq = {
 	occupants = {
-		maximum = 8
+		maximum = 8,
+		total = 0,
+	},
+	occupantCount = {
+		total = 0
 	},
 	occupantsVisualSize = {},
 	occupantsPrevVisualSize = {},
@@ -354,3 +358,23 @@ function sbq.setStatusValue(name, value)
 end
 
 -------------------------------------------------------------------------------------------------------
+
+function sbq.openPreyHud(i, directions, progressbarDx, icon, location)
+	sbq.loopedMessage(sbq.occupant[i].id .. "-indicator", sbq.occupant[i].id, -- update quickly but minimize spam
+		"sbqOpenInterface", { "sbqIndicatorHud",
+		{
+			owner = entity.id(),
+			directions = directions,
+			progress = {
+				active = sbq.occupant[i].progressBarActive,
+				color = sbq.occupant[i].progressBarColor,
+				percent = sbq.occupant[i].progressBar,
+				dx = progressbarDx
+			},
+			icon = icon,
+			time = sbq.occupant[i].visited.totalTime,
+			location = (sbq.sbqData.locations[location] or {}).name
+		},
+		entity.id()
+	})
+end

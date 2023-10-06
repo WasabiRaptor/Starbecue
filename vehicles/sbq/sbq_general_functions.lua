@@ -10,11 +10,11 @@ function sbq.logJson(...)
 end
 
 function sbq.logError(arg)
-	sb.logError("["..world.entityName(entity.id()).."]"..tostring(arg))
+	sb.logError("["..tostring(world.entityName(entity.id())).."]"..tostring(arg))
 end
 
 function sbq.logInfo(arg)
-	sb.logInfo("["..world.entityName(entity.id()).."]"..tostring(arg))
+	sb.logInfo("["..tostring(world.entityName(entity.id())).."]"..tostring(arg))
 end
 
 
@@ -46,7 +46,7 @@ function sbq.underWater()
 end
 
 function sbq.useEnergy(eid, cost, callback)
-	sbq.addRPC( world.sendEntityMessage(eid, "sbqUseEnergy", cost), callback)
+	sbq.addRPC( world.sendEntityMessage(eid, "sbqConsumeResource", "energy", cost), callback)
 end
 
 -------------------------------------------------------------------------------
@@ -66,20 +66,21 @@ function sbq.randomChance(percent)
 end
 
 function sbq.checkSettings(checkSettings)
+	local settings = sbq.settings
 	for setting, value in pairs(checkSettings or {}) do
-		if (type(sbq.settings[setting]) == "table") and sbq.settings[setting].name ~= nil then
+		if (type(settings[setting]) == "table") and settings[setting].name ~= nil then
 			if not value then return false
 			elseif type(value) == "table" then
-				if not sbq.checkTable(value, sbq.settings[setting]) then return false end
+				if not sbq.checkTable(value, settings[setting]) then return false end
 			end
 		elseif type(value) == "table" then
 			local match = false
-			for i, value in ipairs(value) do if (sbq.settings[setting] or false) == value then
+			for i, value in ipairs(value) do if (settings[setting] or false) == value then
 				match = true
 				break
 			end end
 			if not match then return false end
-		elseif (sbq.settings[setting] or false) ~= value then return false
+		elseif (settings[setting] or false) ~= value then return false
 		end
 	end
 	return true
@@ -119,9 +120,9 @@ function sbq.getOccupancyTransition(transition, args)
 				local failOnFull = transition[location.."FailOnFull"] or transition.failOnFull
 				if (type(failOnFull) == "number") and (sbq.occupantsVisualSize[location] >= failOnFull) then return transition.failTransition
 				elseif transition.failOnFull and not sbq.getSidedLocationWithSpace(location, size) then return transition.failTransition end
+				local filled = transition[location.."filled"] or transition.filled
+				if (type(filled) == "number") and (sbq.occupantsVisualSize[location] < filled) then return transition.failTransition end
 			end
-			local filled = transition[location.."filled"] or transition.filled
-			if (type(filled) == "number") and (sbq.occupantsVisualSize[location] < filled) then return transition.failTransition end
 		else
 			if transition.failOnFull then
 				if (type(transition.failOnFull) == "number") and (sbq.occupantsVisualSize[transition.location] >= transition.failOnFull) then return transition.failTransition
@@ -265,8 +266,7 @@ end
 function sbq.transformPrey(i)
 	local smolPreyData = sbq.occupant[i].progressBarData or {}
 	if smolPreyData.layer == true then
-		smolPreyData.layer = sbq.occupant[i].smolPreyData
-		sbq.occupant[i].smolPreyData = {}
+		smolPreyData.layer = sb.jsonMerge(sbq.occupant[i].smolPreyData, {})
 	end
 	if type(smolPreyData.species) == "string" then
 		local entityType = world.entityType(sbq.occupant[i].id)
@@ -455,36 +455,39 @@ function sbq.getClosestValue(x, list)
 	return closest, closestKey
 end
 
-function sbq.getRandomDialogue(npcConfig, dialogueTreeLocation, eid, settings, dialogueTree)
-	local dialogueTreeTop = dialogueTree
-	local dialogueTree = sbq.getDialogueBranch(dialogueTreeLocation, settings, eid, dialogueTree)
+local randomDialogueHandling = {
+	{ "randomDialogue", "dialogue" },
+	{ "randomName", "name" },
+}
+
+function sbq.getRandomDialogue(npcConfig, path, eid, settings, dialogueTree)
+	local _, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree)
 	if not dialogueTree then return false end
-	recursionCount = 0 -- since we successfully made it here, reset the recursion count
 
-	local randomRolls = {}
-	local randomDialogue = dialogueTree.randomDialogue
-	local randomPortrait = dialogueTree.randomPortrait
-	local randomEmote = dialogueTree.randomEmote
+	dialogue.randomRolls = {}
 
-	randomRolls, randomDialogue		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomDialogue, "randomDialogue", dialogueTreeTop)
-	randomRolls, randomPortrait		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomPortrait, "randomPortrait", dialogueTreeTop)
-	randomRolls, randomEmote		= sbq.getRandomDialogueTreeValue(dialogueTree, settings, randomRolls, randomEmote, "randomEmote", dialogueTreeTop)
---[[
-	local imagePortrait
-	if not npcConfig.scriptConfig.entityPortrait then
-		imagePortrait = ((npcConfig.scriptConfig.portraitPath or "")..(randomPortrait or npcConfig.scriptConfig.defaultPortrait))
-	end
-]]
-	local playerName
-
-	if type(eid) == "number" then
-		playerName = world.entityName(eid)
+	for _, v in ipairs(randomDialogueHandling) do
+		local randomVal = v[1]
+		local resultVal = v[2]
+		if not dialogue.result[resultVal] then
+			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, 1, dialogue.result[randomVal],
+				dialogueTree, dialogueTreeTop)
+			if type(randomResult) == "table" then
+				sb.jsonMerge(dialogue.result, randomResult)
+			elseif type(randomResult) == "string" then
+				dialogue.result[resultVal] = { randomResult }
+			end
+		end
 	end
 
-	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", steppyType = settings.steppyType, infusedName = (((((settings[(dialogueTree.location or settings.location or "").."InfusedItem"] or {}).parameters or {}).npcArgs or {}).npcParam or {}).identity or {}).name or "" }
+	local entityname
 
-	if type(randomDialogue) == "string" then
-		return sbq.generateKeysmashes(randomDialogue, dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags--, imagePortrait
+	if type(eid) == "number" then entityname = world.entityName(eid) end
+
+	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
+
+	if type((dialogue.result.dialogue or {})[1]) == "string" then
+		return sbq.generateKeysmashes(dialogue.result.dialogue[1], dialogueTree.keysmashMin, dialogueTree.keysmashMax), tags--, imagePortrait
 	end
 end
 

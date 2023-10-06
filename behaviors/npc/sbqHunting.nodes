@@ -1,0 +1,24 @@
+{
+	"doSBQTargetAction": {
+		"title":"doSBQTargetAction",
+		"type":"action",
+		"name":"doSBQTargetAction",
+		"properties": {
+			"entity": {"type": "entity", "value": "target"}
+		},
+		"category": "sbqHunting",
+		"script": "/behaviors/npc/sbqHunting.lua",
+		"output": {}
+	},
+	"sbqSetHostileTarget": {
+		"title":"sbqSetHostileTarget",
+		"type":"action",
+		"name":"sbqSetHostileTarget",
+		"properties": {
+			"entity": {"type": "entity", "value": "target"}
+		},
+		"category": "sbqHunting",
+		"script": "/behaviors/npc/sbqHunting.lua",
+		"output": {}
+	}
+}

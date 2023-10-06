@@ -33,8 +33,7 @@ function getEntitySettingsMenu(entities, i)
 	if (not entities) or (not i) or (not entities[i]) or ((type(i) == "number" and type(entities[i]) == "number") and not world.entityExists(entities[i])) then return end
 	sbq.addRPC(world.sendEntityMessage( entities[i], "getEntitySettingsMenuData", entity.uniqueId() ), function (data)
 		if data then
-			player.interact("ScriptPane",
-				{ data = data, gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui =  (data.ui or "starbecue:nominomicon") }, data.parent or player.id())
+			player.interact("ScriptPane", sb.jsonMerge({ gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui =  ("starbecue:nominomicon") }, data), data.parent or player.id())
 		else
 			if entities[i+1] then
 				getEntitySettingsMenu(entities, i+1)

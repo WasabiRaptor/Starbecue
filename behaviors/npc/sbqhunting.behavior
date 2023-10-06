@@ -1,0 +1,209 @@
+{
+	"name": "sbqhunting",
+	"description": "",
+	"scripts": [
+		"/scripts/actions/world.lua",
+		"/scripts/actions/movement.lua",
+		"/scripts/actions/time.lua",
+		"/scripts/actions/position.lua",
+		"/scripts/actions/npc.lua",
+		"/behaviors/npc/sbqHunting.lua"
+	],
+	"parameters": {
+	},
+	"root": {
+		"title": "sequence",
+		"type": "composite",
+		"name": "sequence",
+		"parameters": {},
+		"children" : [
+			{
+				"title": "sbqSetHostileTarget",
+				"type": "action",
+				"name": "sbqSetHostileTarget",
+				"parameters": {
+					"entity": {
+						"key": "combatTarget"
+					}
+				}
+			},
+			{
+				"title": "entityInRange",
+				"type": "action",
+				"name": "entityInRange",
+				"parameters": {
+					"entity": {
+						"key": "sbqHuntingTarget"
+					},
+					"position": {
+						"key": "self"
+					},
+					"range": {
+						"value": 50
+					}
+				}
+			},
+			{
+				"title": "parallel",
+				"type": "composite",
+				"name": "parallel",
+				"parameters": {
+					"fail": {
+						"value": 1
+					},
+					"success": {
+						"value": -1
+					}
+				},
+				"children": [
+					{
+						"title": "selector",
+						"type": "composite",
+						"name": "selector",
+						"parameters": {},
+						"children": [
+							{
+								"title": "sequence",
+								"type": "composite",
+								"name": "sequence",
+								"parameters": {},
+								"children": [
+									{
+										"title": "entityInRange",
+										"type": "action",
+										"name": "entityInRange",
+										"parameters": {
+											"entity": {
+												"key": "sbqHuntingTarget"
+											},
+											"position": {
+												"key": "self"
+											},
+											"range": {
+												"value": 4
+											}
+										}
+									},
+									{
+										"title": "faceEntity",
+										"type": "action",
+										"name": "faceEntity",
+										"parameters": {
+											"entity": {
+												"key": "sbqHuntingTarget"
+											}
+										}
+									},
+									{
+										"title":"doSBQTargetAction",
+										"type":"action",
+										"name":"doSBQTargetAction",
+										"parameters":{
+											"entity": {
+												"key": "sbqHuntingTarget"
+											}
+										}
+									}
+								]
+							},
+							{
+								"title": "sequence",
+								"type": "composite",
+								"name": "sequence",
+								"parameters": {},
+								"children": [
+									{
+										"title": "inverter",
+										"type": "decorator",
+										"name": "inverter",
+										"parameters": {},
+										"child": {
+											"title": "entityInRange",
+											"type": "action",
+											"name": "entityInRange",
+											"parameters": {
+												"entity": {"key": "combatTarget"},
+												"position": {"key": "self"},
+												"range": {"value": 50}
+											}
+										}
+									},
+									{
+										"title": "parallel",
+										"type": "composite",
+										"name": "parallel",
+										"parameters": {
+											"fail": {
+												"value": -1
+											},
+											"success": {
+												"value": 2
+											}
+										},
+										"children": [
+											{
+												"title": "entityPosition",
+												"type": "action",
+												"name": "entityPosition",
+												"parameters": {
+													"entity": {
+														"key": "sbqHuntingTarget"
+													}
+												},
+												"output": {
+													"position": "sbqHuntingTarget"
+												}
+											},
+											{
+												"title": "moveToPosition",
+												"type": "action",
+												"name": "moveToPosition",
+												"parameters": {
+													"avoidLiquid": {
+														"value": true
+													},
+													"groundPosition": {
+														"value": true
+													},
+													"maxGround": {
+														"value": 2
+													},
+													"minGround": {
+														"value": -5
+													},
+													"position": {
+														"key": "sbqHuntingTarget"
+													},
+													"run": {
+														"value": true
+													}
+												},
+												"output": {}
+											},
+											{
+												"title": "entityInRange",
+												"type": "action",
+												"name": "entityInRange",
+												"parameters": {
+													"entity": {
+														"key": "sbqHuntingTarget"
+													},
+													"position": {
+														"key": "self"
+													},
+													"range": {
+														"value": 2
+													}
+												}
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

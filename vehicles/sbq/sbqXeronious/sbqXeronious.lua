@@ -87,7 +87,7 @@ end
 
 function sbq.letout(id)
 	local id = id or sbq.getRecentPrey()
-	if not id then return false end
+	if (not id) or (not sbq.lounging[id]) then return false end
 
 	local location = sbq.lounging[id].location
 
@@ -332,7 +332,7 @@ function state.stand.sitpin(args)
 	if #pinnable >= 1 then
 		sbq.addRPC(world.sendEntityMessage(pinnable[1], "sbqIsPreyEnabled", "held"), function(enabled)
 			if enabled and enabled.enabled then
-				sbq.eat( pinnable[1], "pinned", enabled.size or 1 )
+				sbq.eat( { id = pinnable[1], size = enabled.size or 1}, "held", "pinned" )
 			end
 			sbq.doTransition("sit")
 		end)
@@ -387,7 +387,7 @@ end
 function state.sit.hug( args )
 	sbq.addRPC(world.sendEntityMessage(args.id, "sbqIsPreyEnabled", "held"), function(enabled)
 		if enabled and enabled.enabled then
-			return sbq.eat(args.id, "hug", enabled.size or 1)
+			return sbq.eat( args, "held", "hug" )
 		end
 	end)
 end
@@ -484,6 +484,8 @@ state.crouch.vore = checkTail
 
 state.crouch.tailEscape = tailEscape
 
+state.crouch.succ = succ
+
 -------------------------------------------------------------------------------
 
 function state.fly.update()
@@ -516,6 +518,7 @@ state.fly.succEat = oralEat
 state.fly.tailVore = tailVore
 state.fly.analVore = analVore
 
+state.fly.checkOralVore = checkOral
 state.fly.checkTailVore = checkTail
 state.fly.checkAnalVore = checkAnal
 

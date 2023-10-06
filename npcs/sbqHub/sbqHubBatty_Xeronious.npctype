@@ -3,6 +3,9 @@
 	"baseType" : "sbqBatty_Xeronious",
 
 	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		},
 		"sbqOverrideSettings" : {
 			"analVorePred" : false,
 			"cockVorePred" : false,

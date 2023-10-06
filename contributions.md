@@ -10,6 +10,7 @@
 
 # Blueninja
 	Blue the Synth NPC dialogue
+	General NPC dialogue for many unwilling pred and forcing prey lines
 
 # Cosmic
 	Crystal Shrine on hub map
@@ -23,9 +24,11 @@
 
 # Ferrilata_
 	Ferri NPC
+	Catfox race
 
 # FFWizard
 	Helena NPC dialogue
+	General NPC dialogue proofreading and editing
 
 # HornySe7en
 	Latex race tail vore animations
@@ -36,3 +39,10 @@
 
 # radiantAurora
 	General NPC Dialogue for Hungry mood
+
+# Xodious
+	General NPC dialogue contributions for infusion lines
+
+# Zovoroth
+	General NPC dialogue proofreading and editing
+	SBQ specific quest generation

@@ -171,6 +171,7 @@ end
 
 
 function sbq.updateVisibilityAndSmolprey(i)
+	if sbq.isNested then return end
 	if sbq.occupant[i].id == nil or not world.entityExists(sbq.occupant[i].id) then
 		animator.setAnimationState( sbq.occupant[i].seatname.."State", "empty", true )
 		return

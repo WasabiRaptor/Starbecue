@@ -122,9 +122,9 @@ for j, tabData in pairs(shopRecipes) do
 
 				if sbq.data.dialogueTree.itemSelection[recipe.dialogue or recipe.result] ~= nil then
 					lastWasGreeting = false
-					sbq.updateDialogueBox({ "itemSelection", recipe.dialogue or recipe.result })
+					sbq.updateDialogueBox(".itemSelection."..(recipe.dialogue or recipe.result), sbq.dialogueTree)
 				elseif not lastWasGreeting then
-					sbq.updateDialogueBox( metagui.inputData.dialogueTreeStart or { "greeting" })
+					sbq.updateDialogueBox( metagui.inputData.dialogueTreeStart or ".converse", sbq.dialogueTree )
 				end
 			end
 		end

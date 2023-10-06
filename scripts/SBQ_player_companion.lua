@@ -4,11 +4,15 @@ local oldinit = init
 sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/SBQ_species_config.lua")
+require("/scripts/SBQ_check_settings.lua")
+sbq.queuedTransitions = {}
 
 local prey = {}
 
 function init()
 	oldinit()
+	player.setProperty("sbqType", nil)
+	status.setStatusProperty("sbqType", nil)
 	sbq.config = root.assetJson("/sbqGeneral.config")
 
 	player.setUniverseFlag("foodhall_auriShop")
@@ -51,66 +55,62 @@ function init()
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
 	end
 
-	message.setHandler( "sbqPlayerCompanions", function (_,_, func, ...)
-		return playerCompanions[func](...)
-	end)
-	message.setHandler("sbqSetRecruit", function(_, _, data)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
-		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == data.uniqueId then
-					companions[i] = data
-					reload = true
-					break
-				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
+	message.setHandler("sbqPlayerCompanions", function(_, _)
+		local crew = {}
+		for category, companions in pairs(recruitSpawner:storeCrew()) do
+			if category == "followers" then
+				util.appendLists(crew, companions)
+			elseif onOwnShip() and category == "shipCrew" then
+				util.appendLists(crew, companions)
 			end
 		end
-		recruitSpawner:markDirty()
+		return crew
 	end)
+
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
+
+	local companionTypes = { "followers", "shipCrew" }
 	message.setHandler("sbqCrewSaveSettings", function(_, _, settings, uniqueId)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
 		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == uniqueId then
-					companions[i].config.parameters.scriptConfig.sbqSettings = settings
-					reload = true
+			local companions = recruitSpawner[companionType]
+			for i, follower in pairs(companions) do
+				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
+					follower.spawnConfig.parameters.scriptConfig.sbqSettings = settings
 					break
 				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
 			end
 		end
 		recruitSpawner:markDirty()
 	end)
 	message.setHandler("sbqCrewSaveDigestedPrey", function(_, _, digestedStoredTable, uniqueId)
-		local companionTypes = { "followers", "crew", "shipCrew", "pets" }
 		for _, companionType in ipairs(companionTypes) do
-			local companions = playerCompanions.getCompanions(companionType)
-			local reload
-			for i, follower in ipairs(companions) do
-				if follower.uniqueId == uniqueId then
-					companions[i].config.parameters.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = digestedStoredTable
-					reload = true
+			local companions = recruitSpawner[companionType]
+			for i, follower in pairs(companions) do
+				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
+					follower.spawnConfig.parameters.statusControllerSettings = follower.spawnConfig.parameters.statusControllerSettings or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties = follower.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = digestedStoredTable
 					break
 				end
-			end
-			if reload then
-				playerCompanions.setCompanions(companionType, companions)
-				recruitSpawner[companionType] = recruitSpawner:_loadRecruits(companions)
 			end
 		end
 		recruitSpawner:markDirty()
 	end)
+	message.setHandler("sbqCrewSaveStatusProperty", function(_, _, property, data, uniqueId)
+		for _, companionType in ipairs(companionTypes) do
+			local companions = recruitSpawner[companionType]
+			for i, follower in pairs(companions) do
+				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
+					follower.spawnConfig.parameters.statusControllerSettings = follower.spawnConfig.parameters.statusControllerSettings or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties = follower.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
+					follower.spawnConfig.parameters.statusControllerSettings.statusProperties[property] = data
+					break
+				end
+			end
+		end
+		recruitSpawner:markDirty()
+	end)
+
 
 	message.setHandler( "sbqRequestFollow", function (_,_, uniqueId, recruitUuid, recruitInfo)
 		if not checkCrewLimits(recruitUuid) then
@@ -128,7 +128,10 @@ function init()
 	message.setHandler("addPrey", function( _, _, data)
 		table.insert(prey, data)
 		return true
-	end )
+	end)
+	message.setHandler("requestTransition", function ( _,_, transition, args)
+		sbq.requestTransition(transition, args)
+	end)
 
 	message.setHandler( "sbqLoadSettings", function(_,_, menuName )
 		local settings = player.getProperty( "sbqSettings" ) or {}
@@ -143,11 +146,11 @@ function init()
 		world.sendEntityMessage(player.id(), "sbqRefreshSettings", sbqSettings )
 	end)
 
-	message.setHandler( "sbqOpenMetagui", function(_,_, name, sourceEntity, data)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name }, sourceEntity )
+	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
+		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
 	end)
 
-	message.setHandler( "sbqOpenInterface", function(_,_, name, args, appendSettings, sourceEntity)
+    message.setHandler("sbqOpenInterface", function(_, _, name, args, sourceEntity)
 		local pane = root.assetJson("/interface/scripted/sbq/"..name.."/"..name..".config")
 		if args then
 			pane = sb.jsonMerge(pane, args)
@@ -176,23 +179,6 @@ function init()
 		world.spawnVehicle( species, { position[1], position[2] + 1.5 }, { driver = entity.id(), settings = settings, uneaten = true, data = species } )
 	end )
 
-	message.setHandler("sbqUseEnergy", function( _, _, energyUsed)
-		return status.overConsumeResource("energy", energyUsed)
-	end )
-
-	message.setHandler("sbqAddHungerHealth", function(_, _, amount)
-		local food = status.resource("food")
-		status.giveResource("food", amount)
-		local health = (food + amount) - 100
-		if health > 0 then
-			status.giveResource("health", health)
-		end
-	end )
-
-	message.setHandler("sbqGetDriverStat", function( _, _, stat)
-		return status.stat(stat)
-	end )
-
 	message.setHandler("sbqUnlockType", function(_,_, name )
 		local settings = player.getProperty( "sbqSettings" ) or {}
 		if settings.types == nil then settings.types = {} end
@@ -207,12 +193,12 @@ function init()
 	end)
 
 	message.setHandler("sbqGetSeatEquips", function(_,_, current)
-		local type = current.type or "prey"
 		player.setProperty( "sbqCurrentData", current)
-		status.setStatusProperty( "sbqCurrentData", current)
-		if not (current.type == "driver" and current.species == "sbqOccupantHolder") then
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
+		status.setStatusProperty("sbqCurrentData", current)
+		local type = player.getProperty("sbqType")
+		if not (type == "driver" and current.species == "sbqOccupantHolder") then
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
 		end
 
 		return {
@@ -228,14 +214,19 @@ function init()
 			effectDirectives = status.statusProperty("effectDirectives")
 		}
 	end)
+	message.setHandler("sbqSetType", function(_, _, current)
+		player.setProperty("sbqType", current)
+		status.setStatusProperty("sbqType", current)
+	end)
 	message.setHandler("sbqSetCurrentData", function (_,_, current)
-		local type = current.type or "prey"
 		player.setProperty( "sbqCurrentData", current)
-		status.setStatusProperty( "sbqCurrentData", current)
-		if not (current.type == "driver" and current.species == "sbqOccupantHolder") then
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type)
-			sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type)
+		status.setStatusProperty("sbqCurrentData", current)
+		local type = player.getProperty("sbqType")
+		if not (type == "driver" and current.species == "sbqOccupantHolder") then
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
+			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
 		end
+
 	end)
 
 	message.setHandler("sbqGiveController", function(_,_)
@@ -364,7 +355,7 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, isPrey, data)
+	message.setHandler("sbqSetCumulativeOccupancyTime", function(_, _, uniqueId, name, entityType, typeName, isPrey, data)
 		if not uniqueId then return end
 		local cumData = player.getProperty("sbqCumulativeData") or {}
 		cumData[uniqueId] = cumData[uniqueId] or {}
@@ -373,6 +364,9 @@ function init()
 		else
 			cumData[uniqueId].pred = data
 		end
+		cumData[uniqueId].name = name
+		cumData[uniqueId].type = entityType
+		cumData[uniqueId].typeName = typeName
 		player.setProperty("sbqCumulativeData", cumData)
 	end)
 
@@ -391,6 +385,22 @@ function init()
 		if current and type(current.id) == "number" and world.entityExists(current.id) then
 			world.sendEntityMessage(current.id, "setInfusedCharacter", location, sbqSettings.global[location.."InfusedItem"], preyId, primaryLocation )
 		end
+	end)
+
+	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
+		local settings = (player.getProperty("sbqSettings") or {}).global
+		if not sbq.speciesConfig then
+			sbq.getSpeciesConfig(player.species(), settings)
+		end
+		local effects = {}
+		local data = sbq.speciesConfig.sbqData.voreTypeData[voreType]
+		local transition = (((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType]
+		if not transition then return end
+		if not sbq.checkSettings(transition.settings, settings) then return end
+		for i, location in ipairs( data.locations ) do
+			table.insert(effects, settings[location.."EffectSlot"])
+		end
+		return effects
 	end)
 
 	if initStage < 1 then
@@ -435,6 +445,10 @@ function update(dt)
 			world.sendEntityMessage(current.id, "addPrey", preyData)
 		end
 		prey = {}
+		for _, transition in ipairs(sbq.queuedTransitions) do
+			world.sendEntityMessage(current.id, "requestTransition", transition[1], transition[2])
+		end
+		sbq.queuedTransitions = {}
 	end
 --[[
 	local preyWarpData = player.getProperty("sbqPreyWarpData")
@@ -513,7 +527,7 @@ function update(dt)
 				driver = player.id(), layer = current.layer, startState = current.state,
 				settings = current.settings,
 			})
-		elseif current.type == "prey" then
+		elseif player.getProperty("sbqType") == "prey" then
 			for i, effect in ipairs(root.assetJson("/sbqGeneral.config").predStatusEffects) do
 				status.removeEphemeralEffect(effect)
 			end
@@ -527,12 +541,13 @@ end
 local essentialItems = {"beamaxe", "wiretool", "painttool", "inspectiontool"}
 
 function sbq.checkLockItem(itemDescriptor, type)
-	if not itemDescriptor then return end
+	if not itemDescriptor then return false end
+	local type = type or "driver"
 	allowedItems = root.assetJson("/sbqGeneral.config:sbqAllowedItems")
 	bannedTags = root.assetJson("/sbqGeneral.config:sbqBannedTags")
 	bannedTypes = root.assetJson("/sbqGeneral.config:sbqBannedItemTypes")
 
-	if allowedItems[type][itemDescriptor.name] then return end
+	if allowedItems[type][itemDescriptor.name] then return false end
 
 	for i, item in ipairs(essentialItems) do
 		local essentialItem = player.essentialItem(item)
@@ -550,14 +565,18 @@ function sbq.checkLockItem(itemDescriptor, type)
 	end
 
 	if bannedTypes[type][root.itemType(itemDescriptor.name)] then return sbq.lockItem(itemDescriptor, type) end
+	return false
 end
 
 function sbq.lockItem(itemDescriptor, type)
 	if itemDescriptor.parameters ~= nil and itemDescriptor.parameters.itemHasOverrideLockScript then
-		return world.sendEntityMessage(entity.id(), itemDescriptor.name.."Lock", true)
+		world.sendEntityMessage(entity.id(), itemDescriptor.name.."Lock", true)
+		return false
 	end
-	if root.itemType(itemDescriptor.name) == "activeitem" and (not itemDescriptor.parameters or not itemDescriptor.parameters.itemHasOverrideLockScript) then
-		return giveHeldItemOverrideLockScript(itemDescriptor) ---@diagnostic disable-line:undefined-global
+	if root.itemType(itemDescriptor.name) == "activeitem" and
+		(not itemDescriptor.parameters or not itemDescriptor.parameters.itemHasOverrideLockScript) then
+		giveHeldItemOverrideLockScript(itemDescriptor) ---@diagnostic disable-line:undefined-global
+		return false
 	end
 
 	local lockItemDescriptor = player.essentialItem("painttool") or {}
@@ -571,8 +590,10 @@ function sbq.lockItem(itemDescriptor, type)
 	if consumed then
 		local lockedItemList = player.getProperty( "sbqLockedItems" ) or {}
 		table.insert(lockedItemList, consumed)
-		player.setProperty( "sbqLockedItems", lockedItemList )
+		player.setProperty("sbqLockedItems", lockedItemList)
+		return true
 	end
+	return false
 end
 
 function sbq.lockEssentialItem(itemDescriptor, slot, type)
@@ -580,4 +601,33 @@ function sbq.lockEssentialItem(itemDescriptor, slot, type)
 	lockItemDescriptor.parameters.scriptStorage.lockedEssentialItems[slot] = itemDescriptor
 	lockItemDescriptor.parameters.scriptStorage.lockType = type
 	player.giveEssentialItem(slot, lockItemDescriptor)
+	return true
+end
+
+function sbq.requestTransition(transition, args)
+	local current = player.getProperty("sbqCurrentData") or {}
+
+	if not current.id then
+		local settings = player.getProperty( "sbqSettings" ) or {}
+		world.spawnVehicle( "sbqOccupantHolder", entity.position(), { driver = entity.id(), settings = sb.jsonMerge(settings.sbqOccupantHolder or {}, settings.global or {}), doExpandAnim = true } )
+	end
+	table.insert(sbq.queuedTransitions, {transition, args})
+end
+local lockedNotified = false
+function sbq.notifyLockedItem(yes)
+	if (not lockedNotified) then
+		lockedNotified = player.getProperty("sbqLockNotified")
+	end
+	if yes and not lockedNotified then
+		player.setProperty("sbqLockNotified", true)
+		lockedNotified = true
+		player.radioMessage({
+			messageId = "playerNotifyLock1", unique = false,
+			text = "Your current state makes certain equipment unusable, therefore I have Locked the items within an ^yellow;Essential Tool^reset; slot."
+		}, 1)
+		player.radioMessage({
+			messageId = "playerNotifyLock2", unique = false,
+			text = "After you have returned to normal simply equip the tool to have your items returned to you. ^#555;(Typically the ^yellow;Paint Tool^#555; slot ^green;(Y hotkey)^#555; if no other essential tools had attempted to be used)"
+		}, 5)
+	end
 end

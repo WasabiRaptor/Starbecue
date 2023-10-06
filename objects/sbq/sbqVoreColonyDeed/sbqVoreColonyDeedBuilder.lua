@@ -1,8 +1,9 @@
 
-function build( directory, config, parameters, level, seed )
+function build(directory, config, parameters, level, seed)
+	parameters.saveTenants = nil -- clear the duplicate data saves in older versions
 
-	if parameters.saveTenants ~= nil then
-		local name = (parameters.saveTenants.occupier or {}).partyName or (((((parameters.saveTenants.occupier or {}).tenants or {})[1] or {}).overrides or {}).identity or {}).name
+	if parameters.scriptStorage ~= nil then
+		local name = ((parameters.scriptStorage or {}).occupier or {}).partyName or (((((parameters.scriptStorage.occupier or {}).tenants or {})[1] or {}).overrides or {}).identity or {}).name
 		if name then
 			local ownership = "'s"
 			if name:sub(-1,-1) == "s" then

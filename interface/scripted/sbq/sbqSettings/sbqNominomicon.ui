@@ -1,6 +1,6 @@
 { //  -*- grammar-ext: json -*-
 	"style" : "window", // window (has titlebar), panel (just a frame) etc.
-	"size" : [256, 200], // *internal* size (not including chrome)
+	"size" : [256, 256], // *internal* size (not including chrome)
 	"title" : "Preditor",
 	"icon" : "/items/active/sbqNominomicon/sbqNominomicon.png",
 	"uniqueBy" : "path",
@@ -9,7 +9,7 @@
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
 			{ "type" : "tab", "id" : "globalPredSettings", "title" : "Pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
 				{"type" : "layout", "mode": "horizontal", "children" : [
-					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,165], "children" : [
+					{"type" : "layout", "mode" : "vertical", "id" : "locationTabLayout", "expandMode" : [1,0], "size" : [100,221], "children" : [
 					]},
 					[
 						{ "size" : 80 },
@@ -20,39 +20,79 @@
 								{ "type" : "textBox", "id" : "escapeValue", "toolTip" : "Current Escape Difficulty", "text" : "0" }
 							]
 						]},
-						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,30], "expandMode" : [1,0], "style" : "convex", "children" : [
+						{ "id" : "globalSettingsPanel", "type" : "panel", "size":[80,40], "expandMode" : [1,0], "style" : "convex", "children" : [
 							{ "type" : "scrollArea", "id" : "globalSettingsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [ { "type" : "panel", "style" : "flat", "children" : [
 								{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
-									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ]
+									[{ "type" : "checkBox", "id" : "displayDigest", "toolTip" : "Effects applied to prey may emit particles based on the effect" }, { "type" : "label", "text" : " Display Effect" } ],
+									[{ "type" : "checkBox", "id" : "forcefulPrey", "toolTip" : "Allow Prey to force their way inside without asking\n(If that vore type is enabled and available)" }, { "type" : "label", "text" : " Forceful Prey" } ],
+									[{ "type" : "checkBox", "id" : "reformResetHealth", "toolTip" : "When a prey is reformed on being let out after soft digest or infusion, reset their health to full." }, { "type" : "label", "text" : " Reform Reset" } ]
 								]}
 							]}]}
-						]}
-						/*
+						]},
 						{ "id" : "voreTypePanel", "type" : "panel", "size":[80,50], "expandMode" : [1,1], "style" : "convex", "children" : [
 							{ "type" : "label", "text" : "Vore Preferences", "align" : "center" },
 							{ "type" : "scrollArea", "id" : "preferencesScrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
 								{ "type" : "panel", "style" : "flat", "children" : [
 									{"type" : "layout", "mode" : "vertical", "spacing" : -1, "children" : [
-									[{ "type" : "checkBox", "id" : "oralVorePred", "toolTip" : "Prey NPCs will seek you out for Oral Vore" }, { "type" : "label", "text" : " Oral Vore" } ],
-									[{ "type" : "checkBox", "id" : "tailVorePred", "toolTip" : "Prey NPCs will seek you out for Tail Vore" }, { "type" : "label", "text" : " Tail Vore" } ],
-									[{ "type" : "checkBox", "id" : "absorbVorePred", "toolTip" : "Prey NPCs will seek you out for Absorbtion" }, { "type" : "label", "text" : " Absorbtion" } ],
-									[{ "type" : "checkBox", "id" : "navelVorePred", "toolTip" : "Prey NPCs will seek you out for Navel Vore" }, { "type" : "label", "text" : " Navel Vore" } ],
-									[{ "type" : "checkBox", "id" : "analVorePred", "toolTip" : "Prey NPCs will seek you out for Anal Vore" }, { "type" : "label", "text" : " Anal Vore" } ],
-									[{ "type" : "checkBox", "id" : "cockVorePred", "toolTip" : "Prey NPCs will seek you out for Cock Vore" }, { "type" : "label", "text" : " Cock Vore" } ],
-									[{ "type" : "checkBox", "id" : "unbirthPred", "toolTip" : "Prey NPCs will seek you out for Unbirth" }, { "type" : "label", "text" : " Unbirth" } ],
-									[{ "type" : "checkBox", "id" : "breastVorePred", "toolTip" : "Prey NPCs will seek you out for Breast Vore" }, { "type" : "label", "text" : " Breast Vore" } ],
-									{"type" : "label", "text" : "-Other-", "align" : "center"},
-									[{ "type" : "checkBox", "id" : "cockTFPred", "toolTip" : "Prey NPCs will seek you out for Cock TF" }, { "type" : "label", "text" : " Cock TF" } ],
-									[{ "type" : "checkBox", "id" : "boobsorbPred", "toolTip" : "Prey NPCs will seek you out for Breast Absorbtion" }, { "type" : "label", "text" : " Boobsorb" } ]
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "oralVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "oralVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Oral Vore" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "tailVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "tailVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Tail Vore" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "absorbVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "absorbVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Absorbtion" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "navelVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "navelVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Navel Vore" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "analVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "analVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Anal Vore" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "cockVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "cockVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Cock Vore" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "unbirthPred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "unbirthPredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Unbirth" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "breastVorePred", "toolTip" : "Enables this vore type." }, { "type" : "checkBox", "id" : "breastVorePredUnwilling", "toolTip" : "Enables prey to force their way in without asking." }, { "type" : "label", "text" : " Breast Vore" } ],
+										{"type" : "spacer", "size" : 3},
+										{"type" : "label", "text" : "-Body Part TF-", "align" : "center"},
+										{"type" : "spacer", "size" : 3},
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "bellyInfusionPred", "toolTip" : "Enables this body part TF" },{ "type" : "checkBox", "id" : "bellyInfusionPredUnwilling", "toolTip" : "Enables prey to TF themselves without asking." }, { "type" : "label", "text" : " Belly TF" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "cockInfusionPred", "toolTip" : "Enables this body part TF" },{ "type" : "checkBox", "id" : "cockInfusionPredUnwilling", "toolTip" : "Enables prey to TF themselves without asking." }, { "type" : "label", "text" : " Cock TF" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "pussyInfusionPred", "toolTip" : "Enables this body part TF" },{ "type" : "checkBox", "id" : "pussyInfusionPredUnwilling", "toolTip" : "Enables prey to TF themselves without asking." }, { "type" : "label", "text" : " Pussy TF" } ],
+										[{"mode":"h"},{ "type" : "checkBox", "id" : "breastsInfusionPred", "toolTip" : "Enables this body part TF" },{ "type" : "checkBox", "id" : "breastsInfusionPredUnwilling", "toolTip" : "Enables prey to TF themselves without asking." }, { "type" : "label", "text" : " Breast TF" } ]
+									]}
 								]}
-							]}]}
-						]}*/
+							]}
+						]}
 					]
 				]}
 			]},
+			{ "type" : "tab", "id" : "otherGlobalTab", "title" : "Other", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "layout", "id" : "otherGlobalTabContents", "expandMode" : [1,0], "size" : [100,221], "mode" : "horizontal", "children" : [
+					/*{ "type" : "panel", "id" : "extraTabsPanel", "style" : "convex", "children" : [
+						{ "mode" : "v"},
+						{ "type" : "tabField", "id" : "statsTabField", "layout" : "vertical", "tabWidth": 40, "tabs" : [
+
+						]}
+					]},*/
+					[
+						{ "mode" : "v", "size" : 82},
+						{ "type" : "panel", "id" : "accessoriesPanel", "style" : "convex", "expandMode" : [1,0], "children" : [
+
+							{ "mode" : "v" },
+							{ "type" : "label", "text" : "Cosmetics", "align" : "center"},
+							[
+								{ "type" : "itemSlot", "id" : "headCosmetic", "glyph" : "/interface/scripted/sbq/headSlot.png" },
+								{ "type" : "itemSlot", "id" : "chestCosmetic", "glyph" : "/interface/scripted/sbq/chestSlot.png" },
+								{ "type" : "itemSlot", "id" : "legsCosmetic", "glyph" : "/interface/scripted/sbq/legsSlot.png" },
+								{ "type" : "itemSlot", "id" : "backCosmetic", "glyph" : "/interface/scripted/sbq/backSlot.png" }
+							]
+							/*
+							{ "type" : "label", "text" : "Accessories", "align" : "center"},
+							[
+								{ "type" : "itemSlot", "id" : "collarAccessory", "glyph" : "/interface/scripted/sbq/collarSlot.png" },
+								{ "type" : "itemSlot", "id" : "braAccessory", "glyph" : "/interface/scripted/sbq/braSlot.png" },
+								{ "type" : "itemSlot", "id" : "pantiesAccessory", "glyph" : "/interface/scripted/sbq/pantiesSlot.png" },
+								{ "type" : "itemSlot", "id" : "socksAccessory", "glyph" : "/interface/scripted/sbq/socksSlot.png" }
+							]
+							*/
+
+						]}
+					]
+				] }
+			]},
 
 			{ "type" : "tab", "id" : "customizeTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/customize.png", "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "customizeTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "vertical", "children" : [
+				{"type" : "layout", "id" : "customizeTabContents", "expandMode" : [1,0], "size" : [100,221], "mode" : "vertical", "children" : [
 					[
 						{ "expandMode" : [2, 2]},
 						{ "type" : "panel", "id" : "colorsPanel", "style" : "convex", "children" : [
@@ -77,13 +117,13 @@
 				]}
 			]},
 			{ "type" : "tab", "id" : "speciesConfigTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesConfigTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesConfigTabContents", "align" : 0, "expandMode" : [1,0], "size" : [100,221], "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "speciesHelpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "speciesHelpTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "speciesHelpTabContents", "align" : 0, "expandMode" : [1,0], "size" : [100,221], "mode" : "horizontal", "children" : [] }
 			]},
 			{ "type" : "tab", "id" : "helpTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/sbqCodex.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "layout", "id" : "helpTabContents", "expandMode" : [1,0], "size" : [100,165], "mode" : "horizontal", "children" : [] }
+				{"type" : "layout", "id" : "helpTabContents", "align" : 0, "expandMode" : [1,0], "size" : [100,221], "mode" : "horizontal", "children" : [] }
 			]}
 		],"bottomBar" : [ {"type" : "panel", "id" : "ownerBar", "style" : "convex", "children" : [
 			{"spacing" : 0, "mode" : "horizontal"},

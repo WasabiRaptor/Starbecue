@@ -1,0 +1,47 @@
+[
+	{
+		"op": "add",
+		"path": "/sbq_dummy",
+		"value": {
+			"relation" : "UnaryPool",
+			"type" : "String",
+			"poolFile" : "/quests/generated/pools/sbq_dummy.config"
+		}
+	},
+	{
+		"op": "add",
+		"path": "/sbq_isInedibleJunk",
+		"value": {
+			"relation" : "UnaryPool",
+			"type" : "ItemList",
+			"poolFile" : "/quests/generated/pools/sbq_isinediblejunk.config"
+		}
+	},
+	{
+		"op": "add",
+		"path": "/sbq_speciesAny",
+		"value": {
+			"relation" : "UnaryPool",
+			"type" : "String",
+			"poolFile" : "/quests/generated/pools/sbq_speciesany.config"
+		}
+	},
+	{
+		"op": "add",
+		"path": "/sbq_voreTypeAny",
+		"value": {
+			"relation" : "UnaryPool",
+			"type" : "String",
+			"poolFile" : "/quests/generated/pools/sbq_voretypeany.config"
+		}
+	},
+	{
+		"op": "add",
+		"path": "/sbq_voreTypeBelly",
+		"value": {
+			"relation" : "UnaryPool",
+			"type" : "String",
+			"poolFile" : "/quests/generated/pools/sbq_voretypebelly.config"
+		}
+	}
+]

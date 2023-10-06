@@ -63,7 +63,7 @@ function sbq.changeSize()
 		sbq.uneat(sbq.findFirstOccupantIdForLocation("hug"))
 
 		local changeSize = "smol"
-		if sbq.occupants.belly >= 2 then
+		if sbq.occupantsVisualSize.belly >= 2 then
 			changeSize = "chonk_ball"
 		end
 		if sbq.state == changeSize then
@@ -125,7 +125,7 @@ function state.sit.pin( args )
 	if #pinnable >= 1 then
 		sbq.addRPC(world.sendEntityMessage(pinnable[1], "sbqIsPreyEnabled", "held"), function(enabled)
 			if enabled and enabled.enabled then
-				sbq.eat( pinnable[1], "hug", enabled.size or 1 )
+				sbq.eat( { id = pinnable[1], size = enabled.size or 1}, "held", "hug" )
 			end
 			sbq.doTransition("lay")
 		end)
@@ -196,7 +196,7 @@ function state.back.update()
 end
 
 function state.back.bed( args )
-	return sbq.eat( args.id, "hug", args.size or 1 )
+	return sbq.eat( args, "held", "hug" )
 end
 
 function state.back.unbed(args)
@@ -247,7 +247,7 @@ end
 function state.chonk_ball.update(dt)
 	roll_chonk_ball(dt)
 	sbq.movement.aimingLock = 0.1
-	if sbq.occupants.belly < 2 and not sbq.transitionLock then
+	if sbq.occupantsVisualSize.belly < 2 and not sbq.transitionLock then
 		sbq.warpInEffect();
 
 		sbq.setState( "smol" )

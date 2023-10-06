@@ -39,6 +39,7 @@
 		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
 		"behavior" : "sbqvorevillager",
 		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
 			"graduation" : {
 				"nextNpcType" : [] // this prevents the NPC from graduating into crew
 			}
@@ -168,8 +169,41 @@
 	},
 	"statusControllerSettings" : {
 		"stats" : {
-			"protection" : {
-				"baseValue" : 100.0 // this will make your OC immune to most forms of damage outside of vore
+			"maxEnergy" : {
+				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"hornyPassiveLimit" : {
+				"baseValue" : 0.5
+			},
+			"hornyDelta" : {
+				"baseValue" : 0.0583
+			},
+			"restDelta" : {
+				"baseValue" : -0.0583
+			}
+		},
+		"resources" : {
+			"food" : {
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"horny" : {
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"rest" : {
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
 			}
 		},
 		"statusProperties" : {

@@ -1,0 +1,83 @@
+{
+  "id" : "sbq_revert_species.generated",
+  "parameters" : {
+    "questGiver" : {
+      "type" : "entity"
+    },
+    "currentSpecies" : {
+      "type" : "noDetail",
+      "example" : "axhylotl"
+    },
+    "originalSpecies" : {
+      "type" : "noDetail",
+      "example" : "normal human"
+    },
+    "currentArticle" : {
+      "type" : "noDetail",
+      "example" : "an"
+    },
+    "originalArticle" : {
+      "type" : "noDetail",
+      "example" : "a"
+    }
+  },
+  "moneyRange" : [10, 50],
+  "rewards" : [ ],
+  "rewardParameters" : [ "rewards" ],
+  "canBeAbandoned" : true,
+  "ephemeral" : true,
+
+  "updateDelta" : 60,
+  "script" : "/quests/scripts/generated/sbq_change_species.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "default" : "questGiver"
+    },
+    "generatedText" : {
+      "text" : {
+        "default" : {
+          "default" : [
+            "I think I'm done being <currentArticle> <currentSpecies>. Can you ^green;turn me back into <originalArticle> ^orange;<originalSpecies>^white;, like I used to be?"
+          ]
+        }
+      },
+      "title" : {
+        "default" : [
+          "<questGiver>'s return to normalcy"
+        ]
+      },
+      "goalText" : {
+        "default" : [
+          "^cyan;I want to be <originalArticle> <originalSpecies>, again!"
+        ]
+      },
+      "completionText" : {
+        "default" : {
+          "default" : [
+            "Thanks! It's good to be back!"
+          ]
+        }
+      }
+    },
+    "goalSpecies" : "originalSpecies",
+    "portraitParameter" : "questGiver",
+    "requireTurnIn" : true,
+    "indicators" : ["questGiver"],
+
+    "objectives" : [
+      {
+        "id" : "transform",
+        "text" : "Turn <questGiver> back into <originalArticle> <originalSpecies>"
+      },
+      {
+        "id" : "return",
+        "text" : "Return to <questGiver>"
+      }
+    ],
+
+    "initialCompassTarget" : {
+      "targetType" : "parameter",
+      "target" : "questGiver"
+    }
+  }
+}

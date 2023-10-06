@@ -1,0 +1,173 @@
+{
+  "id" : "sbq_escort_vore.generated",
+  "parameters" : {
+    "questGiver" : {
+      "type" : "entity"
+    },
+    "targetNpcType" : {
+      "type" : "npcType",
+      "example" : {
+        "name" : "Joe",
+        "species" : "human",
+        "typeName" : "villager"
+      }
+    },
+    "spawnPoint" : {
+      "type" : "location"
+    }
+  },
+  "moneyRange" : [10, 50],
+  "rewards" : [ ],
+  "rewardParameters" : [ "rewards" ],
+  "canBeAbandoned" : true,
+  "ephemeral" : true,
+
+  "updateDelta" : 60,
+  "script" : "/quests/scripts/generated/sbq_escort_vore.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "default" : "questGiver",
+      "objective" : "targetNpcType"
+    },
+    "generatedText" : {
+      "fluff" : [
+        ["friend", [
+          "friend",
+          "colleague",
+          "cousin",
+          "co-worker",
+          "old friend",
+          "date"
+        ]],
+        ["earlier", [
+          "earlier",
+          "not too long ago",
+          "earlier today",
+          "last night",
+          "yesterday"
+        ]],
+        ["activity1", [
+          "discuss a dream I had about <activity2>",
+          "brainstorm plans for a musical about <activity2>",
+          "discuss our love of <activity2>",
+          "plan a dance show about <activity2>",
+          "talk about some pictures of <activity2> I drew",
+          "plan a piece of art inspired by <activity2>",
+          "hang out together",
+          "argue about <activity2>"
+        ]],
+        ["activity2", [
+          "Gleaps",
+          "Glitch princesses",
+          "pirates",
+          "Poptops",
+          "skeletons",
+          "vegetable farming",
+          "inappropriate hats",
+          "cats",
+          "video-games",
+          "comic books",
+          "exotic fruits",
+          "classic literature",
+          "forest fires",
+          "hands",
+          "the golden age of space piracy",
+          "tiny boats"
+        ]],
+        ["activityfloran", [
+          "sssome combat practice",
+          "sssome hunting practice",
+          "cossstume making",
+          "some sspear practice",
+          "private reasonsss"
+        ]],
+        ["glitchworry1", [
+          "Uneasy",
+          "Distressed",
+          "Perplexed"
+        ]],
+        ["glitchworry2", [
+          "Concerned",
+          "Worried",
+          "Panicked"
+        ]],
+        ["appreciation", [
+          "<targetNpcType.pronoun.capitalSubject> and I are very grateful!",
+          "Take this as a token of my appreciation.",
+          "I'm sure <targetNpcType.pronoun.copulative> relieved to have you around!",
+          "I don't know what I would have done without you!"
+        ]]
+      ],
+      "title" : {
+        "default" : [
+          "<targetNpcType>'s escort",
+          "Escort <targetNpcType>"
+        ]
+      },
+      "goalText" : {
+        "default" : [
+          "^cyan;My friend <targetNpcType> hasn't arrived yet."
+        ],
+        "floran" : [
+          "^cyan;Floran's friend <targetNpcType> hasss gone missing."
+        ],
+        "glitch" : [
+          "^cyan;<glitchworry2>. My friend <targetNpcType> has yet to arrive."
+        ]
+      },
+      "text" : {
+        "default" : {
+          "default" : [
+            "My <friend> ^orange;<targetNpcType>^white; was meant to meet me so we could <activity1> <earlier>. <targetNpcType.pronoun.capitalSubject> probably got lost getting here - the last place I saw <targetNpcType.pronoun.object> was the ^orange;<spawnPoint>^white;<spawnPoint.direction>. ^green;Could you go there and bring <targetNpcType.pronoun.object> back here to me^white;?"
+          ],
+          "floran" : [
+            "Floran's friend ^orange;<targetNpcType>^white; wasss meant to meet Floran for <activityfloran> <earlier>. <targetNpcType> probably got lost... last place Floran sssaw them was at the ^orange;<spawnPoint>^white;<spawnPoint.direction>. ^green;Could you help Floran find <targetNpcType.pronoun.object>^white;?"
+          ],
+          "glitch" : [
+            "<glitchworry2>. My <friend> ^orange;<targetNpcType>^white; was meant to meet me so we could <activity1> <earlier>. <targetNpcType.pronoun.capitalSubject> probably got lost getting here - the last place I saw <targetNpcType.pronoun.object> was the ^orange;<spawnPoint>^white;<spawnPoint.direction>. ^green;Could you go there and bring <targetNpcType.pronoun.object> back here to me^white;?"
+          ]
+        }
+      },
+      "completionText" : {
+        "default" : {
+          "default" : [
+            "Thanks for bringing <targetNpcType> back here! <appreciation>"
+          ],
+          "floran" : [
+            "Thanksss for bringing <targetNpcType> back for Floran!"
+          ],
+          "glitch" : [
+            "Relieved. Thanks for bringing <targetNpcType> back here. <appreciation>"
+          ]
+        }
+      },
+      "failureText" : {
+        "default" : [
+          "Not to worry - I'm sure <questGiver>'s friend will respawn somewhere safer."
+        ]
+      }
+    },
+    "goalDistance" : 10.0,
+    "requireTurnIn" : true,
+
+    "objectives" : [
+      {
+        "id" : "find",
+        "text" : "Find <questGiver>'s friend <targetNpcType>"
+      },
+      {
+        "id" : "bring",
+        "text" : "Bring <targetNpcType> back to <questGiver> safely"
+      },
+      {
+        "id" : "return",
+        "text" : "Speak to <questGiver>"
+      }
+    ],
+
+    "initialCompassTarget" : {
+      "targetType" : "parameter",
+      "target" : "spawnPoint"
+    }
+  }
+}

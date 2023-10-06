@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 
 theme.listItemColor = "#00000000" -- transparent unless hovered
 

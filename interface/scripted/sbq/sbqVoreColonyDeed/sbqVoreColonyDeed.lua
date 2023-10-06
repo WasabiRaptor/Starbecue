@@ -3,12 +3,15 @@ sbq = {
 	config = root.assetJson("/sbqGeneral.config"),
 	tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json"),
 	storage = metagui.inputData,
-	deedUI = true
+	deedUI = true,
+	playeruuid = world.entityUniqueId(player.id())
 }
 
 indexes = {
 	tenantIndex = 1
 }
+
+mainTabField.subTabs = {}
 
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/scripts/speciesAnimOverride_validateIdentity.lua")
@@ -58,6 +61,7 @@ require("/scripts/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqSettings/sbqSettingsEffectsPanel.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
+require("/interface/scripted/sbq/sbqVoreColonyDeed/sbqHuntingSettings.lua")
 
 function sbq.drawLocked(w, icon)
 	local c = widget.bindCanvas(w.backingWidget)
@@ -66,19 +70,25 @@ function sbq.drawLocked(w, icon)
 	c:drawImageDrawable(icon, pos, 1)
 end
 
-sbq.selectedMainTabFieldTab = mainTabField.tabs.deedTab
+mainTabField.tabs.deedTab:select()
 if (sbq.storage.detached) or (sbq.storage.respawner ~= nil) then
 	mainTabField.tabs.deedTab:setVisible(false)
-	sbq.selectedMainTabFieldTab = mainTabField.tabs.tenantTab
+	mainTabField.tabs.tenantTab:select()
 	metagui.setTitle("Preditor")
 	metagui.setIcon("/items/active/sbqNominomicon/sbqNominomicon.png")
 	theme.drawFrame()
 end
+
+sbq.playerPreySettings = status.statusProperty("sbqPreyEnabled") or {}
+sbq.playerPredatorSettings = (player.getProperty("sbqSettings") or {}).global or {}
+
 function init()
-	local occupier = sbq.storage.occupier
-
 	sbq.refreshDeedPage()
+	sbq.refreshTenantPages()
+end
 
+function sbq.refreshTenantPages()
+	local occupier = sbq.storage.occupier
 	if type(occupier) == "table" and type(occupier.tenants) == "table" and
 		type(occupier.tenants[indexes.tenantIndex]) == "table" and
 		type(occupier.tenants[indexes.tenantIndex].species) == "string"
@@ -99,7 +109,7 @@ function init()
 		sbq.tenant.overrides.statusControllerSettings.statusProperties = sbq.tenant.overrides.statusControllerSettings.statusProperties or {}
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled or {}
 
-		sbq.predatorSettings = sb.jsonMerge( sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.config.tenantDefaultSettings),
+		sbq.predatorSettings = sb.jsonMerge( sb.jsonMerge(sb.jsonMerge(sbq.config.defaultSettings, sbq.predatorConfig.defaultSettings or {}), sbq.config.npcDefaultSettings),
 			sb.jsonMerge( sbq.npcConfig.scriptConfig.sbqDefaultSettings or {},
 				sb.jsonMerge( sbq.tenant.overrides.scriptConfig.sbqSettings or {}, sbq.overrideSettings)
 			)
@@ -112,6 +122,15 @@ function init()
 		)
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = sbq.preySettings
 
+		sbq.cumulativeData = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqCumulativeData or {}
+		sbq.cumulativeData[sbq.playeruuid] = (player.getProperty("sbqCumulativeData") or {})[sbq.tenant.uniqueId] or {}
+		sbq.cumulativeData[sbq.playeruuid].name = world.entityName(player.id())
+		local swapData = sbq.cumulativeData[sbq.playeruuid].pred
+		sbq.cumulativeData[sbq.playeruuid].pred = sbq.cumulativeData[sbq.playeruuid].prey
+		sbq.cumulativeData[sbq.playeruuid].prey = swapData
+		sbq.cumulativeData[sbq.playeruuid].type = "player"
+		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqCumulativeData = sbq.cumulativeData
+
 		sbq.storedDigestedPrey = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey or {}
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = sbq.storedDigestedPrey
 
@@ -123,19 +142,14 @@ function init()
 
 		sbq.globalSettings = sbq.predatorSettings
 		escapeValue:setText(tostring(sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty or 0))
-		escapeValueMin:setText(tostring(sbq.overrideSettings.escapeDifficultyMin or sbq.predatorSettings.escapeDifficultyMin or 0))
-		escapeValueMax:setText(tostring(sbq.overrideSettings.escapeDifficultyMax or sbq.predatorSettings.escapeDifficultyMax or 0))
-		sbq.numberBoxColor(escapeValue, sbq.overrideSettings.escapeDifficultyMin or sbq.predatorSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax or sbq.predatorSettings.escapeDifficultyMax)
-		sbq.numberBoxColor(escapeValueMin, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty )
-		sbq.numberBoxColor(escapeValueMax, sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty, sbq.overrideSettings.escapeDifficultyMax )
+		sbq.numberBoxColor(escapeValue, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax)
 
 		personalityText:setText(sbq.predatorSettings.personality or "default")
-		moodText:setText(sbq.predatorSettings.mood or "default")
 
 		sbq.onTenantChanged()
 
 		local bio = sbq.tenant.overrides.scriptConfig.tenantBio or sbq.npcConfig.scriptConfig.tenantBio
-		if bio then
+		if bio ~= nil then
 			bioPanel:clearChildren()
 			if type(bio) == "string" then
 				bio = root.assetJson(bio)
@@ -143,6 +157,7 @@ function init()
 			bioPanel:addChild(bio)
 		end
 		bioPanel:setVisible(bio ~= nil)
+		hideBio:setVisible(bio ~= nil)
 
 		local sbqNPC = sbq.npcConfig.scriptConfig.sbqNPC or false
 		globalTenantSettingsLayout:setVisible(sbqNPC)
@@ -218,6 +233,27 @@ function init()
 		sbq.setSpeciesSettingsTab(species)
 		sbq.setHelpTab()
 
+		function settingsButtonScripts.questParticipation()
+			if not sbq.storage.detached then
+				world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
+			end
+		end
+		function settingsButtonScripts.crewmateGraduation()
+			if not sbq.storage.detached then
+				local graduation = {
+					["true"] = {
+						nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
+					},
+					["false"] = {
+						nextNpcType = {nil}
+					}
+				}
+				world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
+			end
+		end
+
+		sbq.huntingSettingsPanel()
+
 		sbq.refreshButtons()
 
 		sbq.checkLockedSettingsButtons("preySettings", "overridePreyEnabled", "changePreySetting")
@@ -239,34 +275,7 @@ function init()
 				end
 			end
 		end
-
-		if questParticipation ~= nil then
-			if sbq.overrideSettings.questParticipation == nil then
-				function questParticipation:onClick()
-					sbq.changePredatorSetting("questParticipation", questParticipation.checked)
-					if not sbq.storage.detached then
-						world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "enableParticipation", questParticipation.checked, sbq.storage.forcedIndex or indexes.tenantIndex)
-					end
-				end
-			end
-			if sbq.overrideSettings.crewmateGraduation == nil then
-				function crewmateGraduation:onClick()
-					sbq.changePredatorSetting("crewmateGraduation", crewmateGraduation.checked)
-
-					if not sbq.storage.detached then
-						local graduation = {
-							["true"] = {
-								nextNpcType =sbq.npcConfig.scriptConfig.questGenerator.graduation.nextNpcType
-							},
-							["false"] = {
-								nextNpcType = {nil}
-							}
-						}
-						world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveQuestGenSetting", "graduation", graduation[tostring(crewmateGraduation.checked or false)], sbq.storage.forcedIndex or indexes.tenantIndex)
-					end
-				end
-			end
-		end
+		mainTabField.tabs.tenantTab:setTitle(((sbq.tenant.overrides or {}).identity or {}).name or "")
 	end
 end
 
@@ -287,11 +296,6 @@ function sbq.checkLockedSettingsButtons(settings, override, func)
 				end
 				function button:onClick() end
 			else
-				if sbq.drawSpecialButtons[setting] then
-					function button:draw() button.drawSpecial() end
-				else
-					function button:draw() theme.drawCheckBox(self) end
-				end
 				button:setChecked(value)
 				function button:onClick()
 					sbq[func](setting, button.checked)
@@ -308,6 +312,7 @@ function update()
 	local dt = script.updateDt()
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
+	mainTabField:doUpdate(dt)
 end
 
 function sbq.getOccupantHolderData(settings)
@@ -426,20 +431,7 @@ if decTenant ~= nil then
 	end
 end
 
-
 function sbq.onTenantChanged()
-end
-
-function decCurTenant:onClick()
-	sbq.changeSelectedFromList(sbq.tenantList, curTenantName, "tenantIndex", -1)
-	curTenantIndex:setText(indexes.tenantIndex)
-	init()
-end
-
-function incCurTenant:onClick()
-	sbq.changeSelectedFromList(sbq.tenantList, curTenantName, "tenantIndex", 1)
-	curTenantIndex:setText(indexes.tenantIndex)
-	init()
 end
 
 --------------------------------------------------------------------------------------------------
@@ -456,32 +448,10 @@ end
 
 --------------------------------------------------------------------------------------------------
 
-function decMood:onClick()
-	if sbq.overrideSettings.mood ~= nil then return end
-	sbq.changePredatorSetting("mood", sbq.changeSelectedFromList(sbq.config.npcMoods, moodText, "moodIndex", -1))
-end
-
-function incMood:onClick()
-	if sbq.overrideSettings.mood ~= nil then return end
-	sbq.changePredatorSetting("mood", sbq.changeSelectedFromList(sbq.config.npcMoods, moodText, "moodIndex", 1))
-end
-
---------------------------------------------------------------------------------------------------
-
-function escapeValue:onEnter() sbq.numberBox(escapeValue, "changePredatorSetting", "escapeDifficulty", "predatorSettings", "overrideSettings", sbq.overrideSettings.escapeDifficultyMin or sbq.predatorSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax or sbq.predatorSettings.escapeDifficultyMax ) end
-function escapeValue:onTextChanged() sbq.numberBoxColor(escapeValue, sbq.overrideSettings.escapeDifficultyMin or sbq.predatorSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax or sbq.predatorSettings.escapeDifficultyMax ) end
+function escapeValue:onEnter() sbq.numberBox(escapeValue, "changePredatorSetting", "escapeDifficulty", "predatorSettings", "overrideSettings", sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax ) end
+function escapeValue:onTextChanged() sbq.numberBoxColor(escapeValue, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficultyMax ) end
 function escapeValue:onEscape() self:onEnter() end
 function escapeValue:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-
-function escapeValueMin:onEnter() sbq.numberBox(escapeValueMin, "changePredatorSetting", "escapeDifficultyMin", "predatorSettings", "overrideSettings", sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty ) end
-function escapeValueMin:onTextChanged() sbq.numberBoxColor(escapeValueMin, sbq.overrideSettings.escapeDifficultyMin, sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty ) end
-function escapeValueMin:onEscape() self:onEnter() end
-function escapeValueMin:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
-
-function escapeValueMax:onEnter() sbq.numberBox(escapeValueMax, "changePredatorSetting", "escapeDifficultyMax", "predatorSettings", "overrideSettings", sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty, sbq.overrideSettings.escapeDifficultyMax ) end
-function escapeValueMax:onTextChanged() sbq.numberBoxColor(escapeValueMax, sbq.overrideSettings.escapeDifficulty or sbq.predatorSettings.escapeDifficulty, sbq.overrideSettings.escapeDifficultyMax ) end
-function escapeValueMax:onEscape() self:onEnter() end
-function escapeValueMax:onUnfocus() self.focused = false self:queueRedraw() self:onEnter() end
 
 --------------------------------------------------------------------------------------------------
 
@@ -569,18 +539,21 @@ else
 	end
 	function insertTenant:onClick()
 		local item = insertTenantItemSlot:item()
-
-		sbq.addRPC(world.findUniqueEntity(((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId),
-			function(result)
-				if not result then
+		local uuid = ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId
+		if uuid then
+			sbq.addRPC(world.findUniqueEntity(uuid),
+				function(result)
+					if not result then
+						sbq.insertTenant(item)
+					end
+					pane.playSound("/sfx/interface/clickon_error.ogg")
+				end,
+				function()
 					sbq.insertTenant(item)
-				end
-				pane.playSound("/sfx/interface/clickon_error.ogg")
-			end,
-			function ()
-				sbq.insertTenant(item)
-			end
-		)
+				end)
+		else
+			sbq.insertTenant(item)
+		end
 	end
 	function uninit()
 		local item = insertTenantItemSlot:item()
@@ -638,7 +611,9 @@ function sbq.refreshDeedPage()
 				local button = _ENV["tenant" .. i .. "Remove"]
 				local itemSlot = _ENV["tenant" .. i .. "ItemSlot"]
 				function button:onClick()
-					player.giveItem(sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i]))
+					local itemCard = sbq.generateNPCItemCard(sbq.storage.occupier.tenants[i])
+					sb.logInfo("Removed Tenant:"..sb.printJson(itemCard,1))
+					player.giveItem(itemCard)
 					table.remove(sbq.storage.occupier.tenants, i)
 					world.sendEntityMessage(sbq.storage.respawner or pane.sourceEntity(), "sbqSaveTenants", sbq.storage.occupier.tenants)
 					init()
@@ -646,14 +621,11 @@ function sbq.refreshDeedPage()
 
 				function itemSlot:onMouseButtonEvent(btn, down)
 					indexes.tenantIndex = i
-					curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
-					curTenantIndex:setText(indexes.tenantIndex)
-					init()
+					sbq.refreshTenantPages()
 				end
 			end
 		end
 	end
-	curTenantName:setText(sbq.tenantList[indexes.tenantIndex])
 
 	if (not sbq.storage.crewUI) and not (sbq.storage.detached or sbq.storage.respawner) then
 		tenantNote:setVisible(occupier.tenantNote ~= nil)
@@ -718,4 +690,7 @@ function sbq.generateNPCItemCard(tenant)
 	return item
 end
 
-sbq.selectedMainTabFieldTab:select()
+function hideBio:onClick()
+	bioPanel:setVisible(false)
+	hideBio:setVisible(false)
+end

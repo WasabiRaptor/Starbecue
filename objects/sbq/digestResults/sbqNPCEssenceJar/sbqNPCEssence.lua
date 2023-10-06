@@ -39,7 +39,7 @@ function build(directory, config, parameters, level, seed)
 
 			parameters.tooltipFields.collarNameLabel = ""
 
-			parameters.description = npcConfig.scriptConfig.cardDesc or parameters.description or "A Container filled with "..((config.npcArgs.npcParam.identity or {}).name).."'s Essence"
+			parameters.description = npcConfig.scriptConfig.cardDesc or parameters.description or "A Container filled with "..((config.npcArgs.npcParam.identity or {}).name or "Someone").."'s Essence"
 
 			parameters.tooltipFields.objectImage = config.fullPortrait or
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",

@@ -11,31 +11,31 @@ function sbq.unForceSeat(occupantId)
 	end
 end
 
-function sbq.eat( occupantId, location, size, voreType, locationSide, force )
+function sbq.eat( args, voreType, location, locationSide )
 	local seatindex = math.floor(sbq.occupants.total + sbq.startSlot)
 	if seatindex > sbq.occupantSlots then return false end
 	local locationSpace = sbq.locationSpaceAvailable(location, locationSide)
 
-	if (locationSpace < ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1)))) and not force then return false end
+	if (locationSpace < ((args.size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1)))) and not args.force then return false end
 
-	if (not occupantId) or (not world.entityExists(occupantId))
-	or ((sbq.entityLounging(occupantId) or sbq.inedible(occupantId)) and not force)
+	if (not args.id) or (not world.entityExists(args.id))
+	or ((sbq.entityLounging(args.id) or sbq.inedible(args.id)) and not args.force)
 	then return false end
 
-	local loungeables = world.entityQuery( world.entityPosition(occupantId), 5, {
+	local loungeables = world.entityQuery( world.entityPosition(args.id), 5, {
 		withoutEntityId = entity.id(), includedTypes = { "vehicle" },
-		callScript = "sbq.entityLounging", callScriptArgs = { occupantId }
+		callScript = "sbq.entityLounging", callScriptArgs = { args.id }
 	} )
 
-	local edibles = world.entityQuery( world.entityPosition(occupantId), 2, {
+	local edibles = world.entityQuery( world.entityPosition(args.id), 2, {
 		withoutEntityId = entity.id(), includedTypes = { "vehicle" },
-		callScript = "sbq.edible", callScriptArgs = { occupantId, seatindex, entity.id(), force}
+		callScript = "sbq.edible", callScriptArgs = { args.id, seatindex, entity.id(), args.force}
 	})
-	sbq.occupant[seatindex].force = force
+	sbq.occupant[seatindex].force = args.force
 	if edibles[1] == nil then
 		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungable now
-			sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
-			sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetSpeciesVoreConfig"), function (data)
+			sbq.gotEaten(args, voreType, location, locationSide, seatindex)
+			sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetSpeciesVoreConfig"), function (data)
 				sbq.occupant[seatindex].scale = data[2]
 				sbq.occupant[seatindex].scaleYOffset = data[3]
 			end)
@@ -46,36 +46,42 @@ function sbq.eat( occupantId, location, size, voreType, locationSide, force )
 	end
 	-- lounging in edible smol thing
 	local species = world.entityName(edibles[1])
-	sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
+	sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	sbq.occupant[seatindex].species = species
 	return true
 end
 
-function sbq.gotEaten(seatindex, occupantId, location, size, voreType, locationSide, force)
-	local entityType = world.entityType(occupantId)
+function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
+	local entityType = world.entityType(args.id)
 	if entityType == "player" then
-		sbq.addRPC(world.sendEntityMessage(occupantId, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
-			function(data)
+		if args.keepWindow then
+			world.sendEntityMessage( args.id, "sbqOpenInterface", "sbqClose", nil, sbq.driver )
+		end
+		sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetCumulativeOccupancyTimeAndFlags", sbq.spawnerUUID),
+		function(data)
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
 			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
 		end)
 	else
-		sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetCumulativeOccupancyTimeAndFlags",
-			world.entityUniqueId(occupantId), true), function(data)
+		sbq.addRPC(world.sendEntityMessage(sbq.spawner, "sbqGetCumulativeOccupancyTimeAndFlags", world.entityUniqueId(args.id), true),
+		function(data)
 			if not data then return end
 			sbq.occupant[seatindex].cumulative = data.times or {}
 			sbq.occupant[seatindex].flags = sb.jsonMerge(sbq.occupant[seatindex].flags or {}, data.flags or {} )
 		end)
 	end
+	world.sendEntityMessage(args.id, "sbqSetType", "prey")
 
-	sbq.occupant[seatindex].id = occupantId
+	sbq.occupant[seatindex].id = args.id
 	sbq.occupant[seatindex].location = location
 	sbq.occupant[seatindex].locationSide = locationSide
-	sbq.occupant[seatindex].size = size or 1
+	sbq.occupant[seatindex].size = args.size or 1
 	sbq.occupant[seatindex].entryType = voreType
-	world.sendEntityMessage( occupantId, "sbqMakeNonHostile")
-	sbq.forceSeat( occupantId, seatindex )
+	sbq.occupant[seatindex].flags.hostile = args.hostile
+	sbq.occupant[seatindex].flags.willing = args.willing
+	world.sendEntityMessage( args.id, "sbqMakeNonHostile")
+	sbq.forceSeat( args.id, seatindex )
 	sbq.refreshList = true
 end
 
@@ -94,6 +100,7 @@ function sbq.uneat( occupantId )
 	if world.entityType(occupantId) == "player" then
 		world.sendEntityMessage(occupantId, "sbqOpenInterface", "sbqClose")
 	end
+	world.sendEntityMessage(occupantId, "sbqSetType", nil)
 
 	if occupantData.species ~= nil and occupantData.smolPreyData ~= nil then
 		if type(occupantData.smolPreyData.id) == "number" and world.entityExists(occupantData.smolPreyData.id) then
@@ -102,12 +109,12 @@ function sbq.uneat( occupantId )
 			world.spawnVehicle( occupantData.species, sbq.localToGlobal({ occupantData.victimAnim.last.x or 0, occupantData.victimAnim.last.y or 0}), { driver = occupantId, settings = occupantData.smolPreyData.settings, uneaten = true, startState = occupantData.smolPreyData.state, layer = occupantData.smolPreyData.layer })
 		end
 	else
-		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects)
+		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects, (occupantData.flags.digested or occupantData.flags.infused) and sbq.settings.reformResetHealth and not (occupantData.flags.hostile and sbq.settings.overrideSoftDigestForHostiles))
 		world.sendEntityMessage( occupantId, "sbqPredatorDespawned", true ) -- to clear the current data for players
 	end
 
-	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[occupantId].cumulative )
-	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), true, sbq.lounging[occupantId].cumulative)
+	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, world.entityName(sbq.spawner), world.entityType(sbq.spawner), world.entityTypeName(sbq.spawner), false, sbq.lounging[occupantId].cumulative )
+	world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(occupantId), world.entityName(occupantId), world.entityType(occupantId), world.entityTypeName(occupantId), true, sbq.lounging[occupantId].cumulative)
 
 	world.sendEntityMessage(occupantId, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.lounging[occupantId]), sbq.spawner, entity.id() )
 	world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[occupantId]) )
@@ -118,7 +125,8 @@ function sbq.uneat( occupantId )
 	return true
 end
 
-function sbq.edible( occupantId, seatindex, source, force )
+function sbq.edible(occupantId, seatindex, source, force)
+	if not sbq.stateconfig then return false end
 	if sbq.driver ~= occupantId or (sbq.isNested and not force) then return false end
 
 	if sbq.stateconfig[sbq.state].edible then
@@ -132,7 +140,7 @@ function sbq.edible( occupantId, seatindex, source, force )
 			),
 			entity.id()
 		)
-		world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqClose", false, false, entity.id() )
+		world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqClose", nil, entity.id() )
 		sbq.isNested = true
 		sbq.scaleTransformationGroup("globalScale", {0,0})
 		return true
@@ -210,14 +218,15 @@ function sbq.locationSpaceAvailable(location, side)
 	if sbq.getLocationSetting(location, "Hammerspace") and sbq.sbqData.locations[location].hammerspace then
 		return math.huge
 	end
-	return (sbq.sbqData.locations[location..(side or "")].max * (sbq.predScale or 1)) - sbq.occupants[location..(side or "")]
+	return (((sbq.sbqData.locations[location..(side or "")] or {}).max or 0) * (sbq.predScale or 1)) - (sbq.occupants[location..(side or "")] or 0)
 end
 
 function sbq.getSidedLocationWithSpace(location, size)
-	local data = sbq.sbqData.locations[location]
+	local data = sbq.sbqData.locations[location] or {}
+	local sizeMultiplied = ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
 	if data.sided then
-		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
-		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > ((size or 1) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
+		local leftHasSpace = sbq.locationSpaceAvailable(location, "L") > sizeMultiplied
+		local rightHasSpace = sbq.locationSpaceAvailable(location, "R") > sizeMultiplied
 		if sbq.occupants[location.."L"] == sbq.occupants[location.."R"] then
 			if sbq.direction > 0 then -- thinking about it, after adding everything underneath to prioritize the one with less prey, this is kinda useless
 				if leftHasSpace then return location, "L", data
@@ -231,10 +240,13 @@ function sbq.getSidedLocationWithSpace(location, size)
 		elseif sbq.occupants[location .. "L"] < sbq.occupants[location .. "R"] and leftHasSpace then return location, "L", data
 		elseif sbq.occupants[location .. "L"] > sbq.occupants[location .. "R"] and rightHasSpace then return location, "R", data
 		else return false end
+	else
+		if sbq.locationSpaceAvailable(location, "") > sizeMultiplied then
+			return location, "", data
+		end
 	end
-	return location, "", data
+	return false
 end
-
 
 function sbq.doVore(args, location, statuses, sound, voreType )
 	if sbq.isNested then return false end
@@ -244,7 +256,7 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 		location, locationSide = sbq.getSidedLocationWithSpace(location, args.size)
 	end
 	if not location then return false end
-	if sbq.eat(args.id, location, args.size, voreType, locationSide, args.force) then
+	if sbq.eat(args, voreType, location, locationSide) then
 		sbq.justAte = args.id
 		vehicle.setInteractive( false )
 		sbq.showEmote("emotehappy")
@@ -255,12 +267,14 @@ function sbq.doVore(args, location, statuses, sound, voreType )
 			voreType = voreType or "default",
 			predator = sbq.species,
 			location = location,
-			entryType = voreType
+			entryType = voreType,
+			willing = args.willing or false,
+			hostile = args.hostile or false,
 		}
 		local entityType = world.entityType(args.id)
 		local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
 
-		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"vored"}, true ) end
+		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), ".vored", true ) end
 
 		return true, function()
 			sbq.justAte = nil
@@ -289,16 +303,16 @@ function sbq.doEscape(args, statuses, afterstatuses, voreType )
 	}), sbq.lounging[victim].flags)
 
 	local entityType = world.entityType(args.id)
-	local sayLine = entityType == "npc" or entityType == "player" and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
+	local sayLine = (entityType == "npc" or entityType == "player") and type(sbq.driver) == "number" and world.entityExists(sbq.driver)
 
-	if sayLine then world.sendEntityMessage( sbq.driver, "sbqSayRandomLine", args.id, settings, {"letout"}, true ) end
+	if sayLine then world.sendEntityMessage( sbq.driver, "sbqSayRandomLine", args.id, settings, ".letout", true ) end
 	sbq.lounging[victim].location = "escaping"
 
 	vehicle.setInteractive( false )
 	world.sendEntityMessage( victim, "sbqApplyStatusEffects", statuses )
 	sbq.transitionLock = true
 	return true, function()
-		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"escape"}, false) end
+		if sayLine then world.sendEntityMessage( args.id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), ".escape", false) end
 		sbq.transitionLock = false
 		sbq.checkDrivingInteract()
 		sbq.uneat( victim )
@@ -341,6 +355,7 @@ function sbq.resetOccupantCount()
 	sbq.occupants.totalSize = 0
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupants[location] = 0
+		sbq.occupantCount[location] = 0
 	end
 	sbq.occupants.mass = 0
 end
@@ -383,6 +398,15 @@ function sbq.updateOccupants(dt)
 			sbq.occupant[i].visited.totalTime = (sbq.occupant[i].visited.totalTime or 0) + dt
 			sbq.occupant[i].cumulative.totalTime = (sbq.occupant[i].cumulative.totalTime or 0) + dt
 
+			if sbq.occupant[i].visited.totalTime >= 900 and not sbq.occupant[i].player then
+				sbq.occupant[i].player = world.entityType(sbq.occupant[i].id) == "player"
+				if not sbq.occupant[i].player then
+					sbq.timer("letOut"..sbq.occupant[i].id, 1, function()
+						sbq.letout(sbq.occupant[i].id)
+					end)
+				end
+			end
+
 			local massMultiplier = 0
 			local mass = sbq.occupant[i].controls.mass
 			local location = sbq.occupant[i].location
@@ -401,6 +425,8 @@ function sbq.updateOccupants(dt)
 				local size = ((sbq.occupant[i].size * sbq.occupant[i].sizeMultiplier) * (sbq.getLocationSetting(location, "Multiplier", 1) ))
 				sbq.occupants[sidedLocation] = (sbq.occupants[sidedLocation] or 0) + size
 				sbq.occupants.totalSize = sbq.occupants.totalSize + size
+				sbq.occupantCount.total = sbq.occupantCount.total + 1
+				sbq.occupantCount[sidedLocation] = (sbq.occupantCount[sidedLocation] or 0) + 1
 
 				massMultiplier = sbq.sbqData.locations[location].mass or 0
 
@@ -411,8 +437,10 @@ function sbq.updateOccupants(dt)
 				end
 			end
 
-			if sbq.timer(seatname.."PreyRewards", 30) and sbq.driving and world.entityType(sbq.driver) == "player" then
-				world.sendEntityMessage(sbq.occupant[i].id, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.occupant[i]), sbq.spawner, entity.id() )
+			if sbq.timer(seatname .. "PreyRewards", 30) and sbq.driving and world.entityType(sbq.driver) == "player" then
+				if sbq.occupant[i].id then
+					world.sendEntityMessage(sbq.occupant[i].id, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.occupant[i]), sbq.spawner, entity.id() )
+				end
 			end
 
 			lastFilled = true
@@ -439,16 +467,16 @@ sbq.shrinkQueue = {}
 function sbq.infusedStruggleDialogue(location, data, npcArgs, eid)
 	if (sbq.totalTimeAlive > 0.5) then
 		if (math.random() > 0.5) then
-			local dialogue, tags, imagePortrait = sbq.getNPCDialogue({ "infused" }, location, data, npcArgs) -- this will change to its own part of the tree
+			local dialogue, tags, imagePortrait = sbq.getNPCDialogue(".infused", location, data, npcArgs) -- this will change to its own part of the tree
 			world.spawnMonster("sbqDummySpeech", mcontroller.position(), {
 				parent = entity.id(), offset = (((sbq.stateconfig[sbq.state] or {}).locationCenters or {})[location]),
 				sayLine = dialogue, sayTags = tags, sayImagePortait = imagePortrait, sayAppendName = npcArgs.npcParam.identity.name
 			})
 		else
-			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, {"infusedTease"}, true )
+			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", nil, {location = location, predator = sbq.species, race = npcArgs.npcSpecies}, ".teaseInfused", true )
 		end
 	end
-	if (not eid) or (type(eid)=="number" and (world.entityType(eid)~="player")) then
+	if (not eid) or ((type(eid)=="number") and (world.entityType(eid)~="player")) then
 		sbq.doLocationStruggle(location, data)
 	end
 end
@@ -461,6 +489,9 @@ function sbq.setOccupantTags()
 	end
 	-- because of the fact that pairs feeds things in a random ass order we need to make sure these have tripped on every location *before* setting the occupancy tags or checking the expand/shrink queue
 	for location, data in pairs(sbq.sbqData.locations) do
+		if data.useOccupantCount then
+			sbq.occupants[location] = sbq.occupantCount[location]
+		end
 		if data.combine then
 			for _, combine in ipairs(data.combine) do
 				sbq.occupants[location] = sbq.occupants[location] + sbq.occupants[combine]
@@ -678,72 +709,69 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
 		return sbq.infusedLocationEffects(i, eid, health, locationEffect, location, powerMultiplier)
 	end
-
-	if sbq.occupant[i].flags.digesting then
+	if sbq.occupant[i].flags.digesting or (sbq.occupant[i].flags.hostile and sbq.settings.overrideSoftDigestForHostiles and (sbq.settings[location.."EffectSlot"] == "softDigest")) then
 		locationEffect = (sbq.sbqData.locations[location].digest or {}).effect or "sbqDigest"
+	elseif sbq.occupant[i].flags.healing then
+		locationEffect = (sbq.sbqData.locations[location].heal or {}).effect or "sbqHeal"
 	end
 
-	local status = (sbq.settings.displayDigest and sbq.config.bellyDisplayStatusEffects[locationEffect] ) or locationEffect
-
+	local effects = {locationEffect}
+	local args = {
+		power = powerMultiplier,
+		location = location,
+		dropItem = sbq.getLocationSetting(location, "PredDigestDrops"),
+		absorbPlayers = sbq.getLocationSetting(location, "AbsorbPlayers"),
+		absorbOCs =  sbq.getLocationSetting(location, "AbsorbOCs"),
+		absorbSBQNPCs = sbq.getLocationSetting(location, "AbsorbSBQNPCs"),
+		absorbOthers =  sbq.getLocationSetting(location, "AbsorbOthers")
+	}
 	if (sbq.getLocationSetting(location, "Sounds")) and (not sbq.occupant[i].flags.digested) then
 		sbq.randomTimer("gurgle", 1.0, 8.0, function() animator.playSound("digest") end)
 	end
-	if status == "sbqRemoveBellyEffects" then
-		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "applyStatusEffect", {"sbqRemoveBellyEffects"})
-	else
-		local args = {
-			power = powerMultiplier,
-			location = location,
-			dropItem = sbq.getLocationSetting(location, "PredDigestDrops"),
-			absorbPlayers = sbq.getLocationSetting(location, "AbsorbPlayers"),
-			absorbOCs =  sbq.getLocationSetting(location, "AbsorbOCs"),
-			absorbSBQNPCs = sbq.getLocationSetting(location, "AbsorbSBQNPCs"),
-			absorbOthers =  sbq.getLocationSetting(location, "AbsorbOthers")
-		}
-		sbq.loopedMessage(eid.."LocationEffectLoop", eid, "sbqApplyDigestEffect", {status, args, sbq.driver or entity.id()})
-	end
 
-	if sbq.getLocationSetting(location, "Compression") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
+	local compression = sbq.getLocationSetting(location, "Compression")
+
+	if ( compression == "time") and not sbq.occupant[i].flags.digested and sbq.occupant[i].bellySettleDownTimer <= 0 then
 		sbq.occupant[i].sizeMultiplier = math.min(1,
 			math.max(sbq.getLocationSetting(location, "CompressionMultiplier", 0.25), sbq.occupant[i].sizeMultiplier - (powerMultiplier * dt * 0.01)))
 	end
+	if ( compression == "health") and not sbq.occupant[i].flags.digested then
+		sbq.occupant[i].sizeMultiplier = math.min(1,
+			math.max(sbq.getLocationSetting(location, "CompressionMultiplier", 0.25), (health[1] / health[2])))
+	end
+
 
 	local progressbarDx = 0
 	if sbq.occupant[i].progressBarActive == true then
 		progressbarDx = (sbq.occupant[i].progressBarLocations[location] and (powerMultiplier * sbq.occupant[i].progressBarMultiplier)) or (-(powerMultiplier * sbq.occupant[i].progressBarMultiplier))
 		sbq.occupant[i].progressBar = sbq.occupant[i].progressBar + dt * progressbarDx
-
-		if sbq.occupant[i].progressBarMultiplier > 0 then
-			sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
-			if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
-				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-				sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
-				sbq.occupant[i].progressBarActive = false
-			end
-		else
-			sbq.occupant[i].progressBar = math.max(0, sbq.occupant[i].progressBar)
-			if sbq.occupant[i].progressBar <= 0 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
-				sbq[sbq.occupant[i].progressBarFinishFuncName](i)
-				sbq.occupant[i].flags[(sbq.occupant[i].progressBarFinishFlag or "transformed")] = true
-				sbq.occupant[i].progressBarActive = false
-			end
+		sbq.occupant[i].flags[sbq.occupant[i].progressBarType] = sbq.occupant[i].progressBar / 100
+		sbq.occupant[i].progressBar = math.min(100, sbq.occupant[i].progressBar)
+		if sbq.occupant[i].progressBar >= 100 and sbq.occupant[i].progressBarFinishFuncName ~= nil then
+			sbq[sbq.occupant[i].progressBarFinishFuncName](i)
+			sbq.occupant[i].progressBarActive = false
 		end
 	else
 		for j, passiveEffect in ipairs(sbq.sbqData.locations[location].passiveToggles or {}) do
 			local data = sbq.sbqData.locations[location][passiveEffect]
-			if sbq.getLocationSetting(location, passiveEffect) and data and (not (sbq.occupant[i].flags[(data.occupantFlag or "transformed")] or sbq.occupant[i][location..passiveEffect.."Immune"])) then
-				sbq.loopedMessage(location..passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
+			if data and data.effect and sbq.getLocationSetting(location, passiveEffect) then
+				table.insert(effects, data.effect)
+			elseif sbq.getLocationSetting(location, passiveEffect) and data and (sbq.occupant[i].flags[data.occupantFlag] == nil) and (not sbq.occupant[i].progressBarActive) and (not sbq.occupant[i][passiveEffect.."Immune"]) then
+				sbq.loopedMessage(passiveEffect..eid, eid, "sbqGetPreyEnabledSetting", {data.immunity or "transformAllow"}, function (enabled)
 					if enabled then
 						sbq[data.func or "transformMessageHandler"](eid, data, passiveEffect)
 					else
-						sbq.occupant[i][location..passiveEffect.."Immune"] = true
+						sbq.occupant[i][passiveEffect.."Immune"] = true
 					end
 				end, function ()
-					sbq.occupant[i][location..passiveEffect.."Immune"] = true
+					sbq.occupant[i][passiveEffect.."Immune"] = true
 				end)
 			end
 		end
 	end
+
+	sbq.loopedMessage(eid.."LocationExtraEffectLoop", eid, "sbqApplyDigestEffects", {effects, args, sbq.driver or entity.id()})
+
 
 	sbq.occupant[i].indicatorCooldown = sbq.occupant[i].indicatorCooldown - dt
 
@@ -754,7 +782,7 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 		local icon
 		if not sbq.transitionLock and sbq.occupant[i].species ~= "sbqEgg" and (not sbq.occupant[i].flags.infused) then
 			for dir, data in pairs(struggledata.directions or {}) do
-				if data and (not sbq.driving or data.drivingEnabled) and ((data.settings == nil) or sbq.checkSettings(data.settings)) then
+				if data and (not sbq.driving or data.drivingEnabled) and (sbq.checkSettings(data.settings)) then
 					if dir == "front" then dir = ({"left","","right"})[sbq.direction+2] end
 					if dir == "back" then dir = ({"right","","left"})[sbq.direction+2] end
 					if sbq.isNested and data.indicate == "red" then
@@ -770,11 +798,11 @@ function sbq.doBellyEffect(i, eid, dt, location, powerMultiplier)
 			end
 		end
 		if sbq.occupant[i].species and sbq.occupant[i].species ~= "sbqOccupantHolder" then
-			icon = "/vehicles/sbq/"..sbq.occupant[i].species.."/skins/"..((sbq.occupant[i].smolPreyData.settings.skinNames or {}).head or "default").."/icon.png"..((sbq.occupant[i].smolPreyData.settings or {}).directives or "")
+			icon = "/vehicles/sbq/"..sbq.occupant[i].species.."/skins/"..(((sbq.occupant[i].smolPreyData.settings or {}).skinNames or {}).head or "default").."/icon.png"..((sbq.occupant[i].smolPreyData.settings or {}).directives or "")
 		end
 		sbq.openPreyHud(i, directions, progressbarDx, icon, location..(sbq.occupant[i].locationSide or ""))
 	end
-	sbq.otherLocationEffects(i, eid, health, locationEffect, status, location, powerMultiplier )
+	sbq.otherLocationEffects(i, eid, health, locationEffect, location, powerMultiplier )
 end
 
 function sbq.openPreyHud(i, directions, progressbarDx, icon, location)
@@ -902,7 +930,7 @@ function sbq.handleStruggles(dt)
 	end
 
 	local entityType = world.entityType(strugglerId)
-	if entityType == "player" then
+	if entityType == "player" or entityType == "npc" then
 		sbq.addNamedRPC(strugglerId.."ConsumeEnergy", world.sendEntityMessage(strugglerId, "sbqConsumeResource", "energy", time * 5), function (consumed)
 			if consumed then
 				sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId, time)
@@ -920,14 +948,31 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 		sbq.doTransition( struggledata.directions[movedir].transition, {direction = movedir, id = strugglerId, struggleTrigger = true} )
 	else
 		local location = sbq.occupant[struggler].location
+		local locationData = sbq.sbqData.locations[location] or {}
 
-		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and ( struggledata.directions[movedir].settings == nil or sbq.checkSettings(struggledata.directions[movedir].settings) ) then
-			sbq.occupant[struggler].controls.favorDirection = movedir
+		if (struggledata.directions[movedir].indicate == "red" or struggledata.directions[movedir].indicate == "green") and
+			(sbq.checkSettings(struggledata.directions[movedir].settings)) then
+			local isPlayerDriver = sbq.driver and world.entityType(sbq.driver) == "player"
+			if sbq.occupant[struggler].flags.willing and (isPlayerDriver or sbq.occupant[struggler].visited.totalTime < 600) then
+				sbq.occupant[struggler].controls.disfavorDirection = movedir
+			else
+				sbq.occupant[struggler].controls.favorDirection = movedir
+			end
 		elseif not struggledata.directions[movedir].indicate then
+			sbq.occupant[struggler].controls.disfavorDirection = movedir
+		elseif sbq.occupant[struggler].flags.hostile then
 			sbq.occupant[struggler].controls.disfavorDirection = movedir
 		end
 
 		sbq.doAnims(animation)
+
+		if locationData.satisfiesPred and sbq.driver then
+			world.sendEntityMessage(sbq.driver, "sbqAddToResources", time, locationData.satisfiesPred)
+		end
+		if locationData.satisfiesPrey then
+			world.sendEntityMessage(strugglerId, "sbqAddToResources", time, locationData.satisfiesPrey)
+		end
+
 
 		sbq.occupant[struggler].bellySettleDownTimer = time / 2
 		sbq.occupant[struggler].visited.struggleTime = sbq.occupant[struggler].visited.struggleTime + time
@@ -968,7 +1013,7 @@ function sbq.doStruggle(struggledata, struggler, movedir, animation, strugglerId
 end
 
 function sbq.struggleChance(struggledata, struggler, movedir, location)
-	if sbq.occupant[struggler].flags.infused or not ((struggledata.directions[movedir].settings == nil) or sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
+	if sbq.occupant[struggler].flags.infused or not ( sbq.checkSettings(struggledata.directions[movedir].settings) ) then return false end
 
 	local chances = struggledata.chances
 	if struggledata.directions[movedir].chances ~= nil then

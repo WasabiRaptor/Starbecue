@@ -96,11 +96,7 @@ function sbq.transformMessageHandler(eid, TF, TFType)
 		sbq.lounging[eid].progressBarFinishFuncName = "transformPrey"
 	end
 
-	sbq.lounging[eid].progressBarType = "transforming"
-	sbq.lounging[eid].progressBarFinishFlag = TF.occupantFlag or "transformed"
-	if TFType then
-		sbq.lounging[eid].progressBarType = TFType.."ing"
-	end
+	sbq.lounging[eid].progressBarType = TF.occupantFlag
 end
 
 message.setHandler( "settingsMenuRefresh", function(_,_)
@@ -177,8 +173,8 @@ function sbq.entityDigested(eid)
 		world.sendEntityMessage(eid, "sbqCheckPreyRewards", sbq.trimOccupantData(sbq.lounging[eid]), sbq.spawner, entity.id() )
 		world.sendEntityMessage(sbq.spawner, "sbqCheckRewards", sbq.trimOccupantData(sbq.lounging[eid]) )
 
-		world.sendEntityMessage(eid, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, false, sbq.lounging[eid].cumulative )
-		world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(eid), true, sbq.lounging[eid].cumulative)
+		world.sendEntityMessage(eid, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, world.entityName(sbq.spawner), world.entityType(sbq.spawner), world.entityTypeName(sbq.spawner), false, sbq.lounging[eid].cumulative )
+		world.sendEntityMessage(sbq.spawner, "sbqSetCumulativeOccupancyTime", world.entityUniqueId(eid), world.entityName(eid), world.entityType(eid), world.entityTypeName(eid), true, sbq.lounging[eid].cumulative)
 
 		if type(sbq.lounging[eid].smolPreyData.id) == "number" and world.entityExists(sbq.lounging[eid].smolPreyData.id) then
 			world.sendEntityMessage(sbq.lounging[eid].smolPreyData.id, "giveDigestPrey", eid)
@@ -191,6 +187,18 @@ function sbq.entityDigested(eid)
 			world.sendEntityMessage(eid, "sbqDigestResponse", 2)
 		end
 	end
+end
+
+message.setHandler( "causedClimax", function (_,_,eid)
+	if type(eid) == "number" and sbq.lounging[eid] ~= nil then
+		local location = sbq.lounging[eid].location
+		sbq.lounging[eid].cumulative.totalTimesClimaxed = (sbq.lounging[eid].cumulative.totalTimesClimaxed or 0) + 1
+		sbq.lounging[eid].cumulative[location.."TimesClimaxed"] = (sbq.lounging[eid].cumulative[location.."TimesClimaxed"] or 0) + 1
+	end
+end)
+
+function sbq.causedClimax(eid)
+
 end
 
 message.setHandler( "uneat", function(_,_, eid)
@@ -228,10 +236,10 @@ message.setHandler( "addDigestPrey", function (_,_, data, owner)
 	table.insert(sbq.addPreyQueue, data)
 end)
 
-message.setHandler( "requestEat", function (_,_, prey, voreType, location)
+message.setHandler( "requestEat", function (_,_, prey, voreType, location, side)
 	sbq.addRPC(world.sendEntityMessage(prey, "sbqIsPreyEnabled", voreType), function(enabled)
 		if enabled and enabled.enabled then
-			sbq.eat(prey, location, enabled.size or 1)
+			sbq.eat({id = prey, size = enabled.size or 1, willing = enabled.willing}, voreType, location, side)
 		end
 	end)
 end)
@@ -255,9 +263,11 @@ end)
 message.setHandler( "getEntitySettingsMenuData", function (_,_)
 	if not sbq.driver and world.entityName(entity.id()) ~= "sbqOccupantHolder" then
 		return {
-			settings = sbq.settings,
-			spawner = sbq.spawner,
-			parent = entity.id()
+			parent = entity.id(),
+			data = {
+				settings = sbq.settings,
+				spawner = sbq.spawner,
+			}
 		}
 	end
 end)
@@ -354,4 +364,8 @@ message.setHandler("changeBack", function(_, _, eid)
 		end
 	end
 	sbq.letout(eid)
+end)
+
+message.setHandler("sbqTakeFromResources", function(_, _, amount, resources, multipliers, thresholds)
+	return amount
 end)

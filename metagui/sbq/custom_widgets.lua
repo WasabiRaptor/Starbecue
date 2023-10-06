@@ -6,6 +6,103 @@ local mkwidget = mg.mkwidget
 -- first off, modify textBox to actually use given size
 function widgets.textBox:preferredSize() return self.explicitSize or {96, 14} end
 
+----- modified tabField -----
+
+local tabHeight = 16
+
+local function evContentsTabChanged(self, tab)
+	self:setVisible(self.tab == tab)
+end
+
+local function evTabSelect(self)
+	local tf = self.tab.parent
+	local old = tf.currentTab
+	tf.currentTab = self.tab
+	tf:pushEvent("tabChanged", self.tab, old)
+	mg.startEvent(tf.onTabChanged, tf, self.tab, old)
+
+	local subTabs = (tf.subTabs or {})[self.tab.id] or {}
+	for i, subTab in ipairs(subTabs) do
+		subTab.currentTab.tabWidget:onSelected()
+	end
+
+	self.tab:onSelect()
+end
+
+function widgets.tabField:update(dt)
+end
+
+function widgets.tabField:doUpdate(dt)
+	self:update(dt)
+	local subTabs = (self.subTabs or {})[(self.currentTab or {}).id] or {}
+	for i, subTab in ipairs(subTabs) do
+		subTab:doUpdate(dt)
+	end
+	self.currentTab:update(dt)
+end
+
+local tabProto = {}
+local tabMt = { __index = tabProto }
+
+function tabProto:setTitle(txt, icon)
+	self.titleWidget:setText(txt or tab.id)
+	if icon ~= nil then
+		self.iconWidget:setFile(icon or nil)
+		self.iconWidget:setVisible(not not icon)
+	end
+end
+
+function tabProto:setColor(c)
+	self.tabWidget.color = c
+	self.tabWidget:queueRedraw()
+end
+
+function tabProto:setVisible(b)
+	self.tabWidget:setVisible(b)
+end
+
+function tabProto:select()
+	self.tabWidget:select()
+end
+
+function tabProto:onSelect()
+end
+
+function tabProto:update(dt)
+end
+
+function widgets.tabField:newTab(param)
+	local first = not self.tabScroll.children[1].children[1] -- check if first tab added
+
+	local tab = setmetatable({ parent = self, id = param.id or sb.makeUuid() }, tabMt)
+	self.tabs[tab.id] = tab
+
+	-- set up tab widget itself
+	tab.tabWidget = self.tabScroll.children[1]:addChild { type = "listItem",
+		size = (self.layout == "vertical" and { self.tabWidth, tabHeight } or nil),
+		expandMode = self.layout == "vertical" and { 1, 0 } or { 0, 0 }, padding = 0, buttonLike = true,
+		visible = param.visible }
+	tab.tabWidget.children[1]:addChild { type = "spacer", size = { 0, tabHeight } } -- manual padding
+	tab.iconWidget = tab.tabWidget.children[1]:addChild { type = "image", size = { tabHeight, tabHeight }, visible = false }
+	tab.titleWidget = tab.tabWidget.children[1]:addChild { type = "label", inline = true }
+	tab.tabWidget.children[1]:addChild { type = "spacer", size = { 0, tabHeight } } -- manual padding
+	tab.tabWidget.tabStyle = self.layout -- set style var
+	tab.tabWidget.color = param.color
+
+	-- populate title and contents
+	tab:setTitle(param.title, param.icon)
+	tab.contents = mg.createImplicitLayout(param.contents, self.stack, { mode = "vertical", visible = false })
+
+	-- hook up events
+	tab.tabWidget.tab = tab
+	tab.tabWidget.onSelected = evTabSelect
+	tab.contents.tab = tab
+	tab.contents:subscribeEvent("tabChanged", evContentsTabChanged)
+
+	if first and not self.noFocusFirstTab then tab:select() end
+	return tab
+end
+
 ----- slider -----
 
 widgets.slider = mg.proto(mg.widgetBase, {
@@ -15,10 +112,19 @@ widgets.slider = mg.proto(mg.widgetBase, {
 
 function widgets.slider:init(base, param)
 	self.expandMode = param.expandMode
+	self.textToolTips = param.textToolTips
+	self.snapOnly = param.snapOnly
+	self.explicitSize = param.size
+
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
 
-	self.notches = param.notches or {param.min, param.max}
+	self.notches = param.notches or {}
+	if not param.notches and param.min and param.max then
+		for i = param.min, param.max do
+			table.insert(self.notches, i)
+		end
+	end
 	if #self.notches < 2 or self.notches[1] >= self.notches[#self.notches] then
 		sb.logError("Slider with invalid min/max! id: " .. self.id)
 	end
@@ -46,7 +152,7 @@ function widgets.slider:init(base, param)
 end
 
 function widgets.slider:minSize() return {16, 16} end
-function widgets.slider:preferredSize() return {64, 16} end
+function widgets.slider:preferredSize() return self.explicitSize or {64, 16} end
 
 function widgets.slider:draw()
 	-- update every frame while mouse is nearby
@@ -63,7 +169,7 @@ function widgets.slider:draw()
 			local dist = math.huge
 			for i, h in ipairs(self.handles) do
 				local d = rmp[1] - math.min(self.size[1], math.max(0, f * (h.value - s)))
-				if math.abs(d) < dist and not h.locked or (math.abs(d) == dist and d > 0) then
+				if math.abs(d) < dist and true or (math.abs(d) == dist and d > 0) then
 					best = i
 					dist = math.abs(d)
 				end
@@ -157,6 +263,7 @@ function widgets.slider:onMouseButtonEvent(btn, down)
 end
 function widgets.slider:onCaptureMouseMove(delta)
 	if delta[1] == 0 or not self.current or not self.handles[self.current].value then return end
+	if self.handles[self.current].locked then mg.toolTip() return end
 
 	if not self.changed then
 		-- local d = (delta[1] > 0) and 1 or -1
@@ -194,9 +301,14 @@ function widgets.slider:onCaptureMouseMove(delta)
 	end
 
 	self.handles[self.current].value = v
+	mg.toolTip()
 end
 function widgets.slider:getToolTip()
 	if self.current then
+		if self.textToolTips then
+			local closest, index = getClosestValue(self.handles[self.current].value, self.notches)
+			if self.textToolTips[index] then return self.handles[self.current].toolTip .. "\n" .. self.textToolTips[index] end
+		end
 		return self.handles[self.current].toolTip .. "\nValue: " .. (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
 	else
 		return nil
@@ -224,8 +336,15 @@ function widgets.fillbar:init(base, param)
 	self.max = param.max or 1
 end
 
-function widgets.fillbar:minSize() return {16, 16} end
-function widgets.fillbar:preferredSize() return {64, 16} end
+function widgets.fillbar:minSize() return {16, 8} end
+function widgets.fillbar:preferredSize() return { 64, 8 } end
+
+local function subColor(color1, color2)
+	return { math.max(color1[1] - color2[1],0), math.max(color1[2] - color2[2],0), math.max(color1[3] - color2[3],0) }
+end
+local function addColor(color1, color2)
+	return { math.min(color1[1] + color2[1], 255), math.min(color1[2] + color2[2],255), math.min(color1[3] + color2[3],255) }
+end
 
 function widgets.fillbar:draw()
 	local c = widget.bindCanvas(self.backingWidget)
@@ -233,16 +352,146 @@ function widgets.fillbar:draw()
 
 	local outlineColor = {128, 128, 128}
 
-	c:drawRect({2, 0, self.size[1] - 4, self.size[2]}, outlineColor)
-	c:drawRect({0, 2, self.size[1], self.size[2] - 4}, outlineColor)
-	c:drawRect({2, 2, self.size[1] - 4, self.size[2] - 4}, self.background)
-	c:drawRect({2, 2, (self.size[1] - 4) * self.value/self.max, self.size[2] - 4}, self.color)
-	-- c:drawRect({(self.size[1] - 4) * self.value/self.max, 2, 2, self.size[2] - 4}, outlineColor)
+	c:drawRect({ 1, 0, self.size[1]-1, 1 }, outlineColor)
+	c:drawRect({ 1, self.size[2] - 1, self.size[1]-1, self.size[2] }, outlineColor)
+
+	c:drawRect({ 0, 1, 1, self.size[2]-1}, outlineColor)
+	c:drawRect({ self.size[1], 1, self.size[1] - 1, self.size[2] - 1 }, outlineColor)
+
+	local fillRect = { 1, 1, math.max(1,(self.size[1] - 1) * self.value / self.max), self.size[2] - 1 }
+
+	c:drawRect({ 1, 1, self.size[1] - 1, self.size[2] - 1 }, self.background)
+	c:drawRect(fillRect, subColor(self.color, { 40, 30, 20 }))
+	local x1, x2 = math.min(fillRect[1] + 1, fillRect[3]), math.max(fillRect[3] - 1, fillRect[1])
+	c:drawRect({ x1, fillRect[2] + 1, x2, fillRect[4] - 1 }, self.color)
+	c:drawRect({ x1, fillRect[4]-1, x2, fillRect[4]-2 }, addColor(self.color, {40,30,20}))
 end
 
-function widgets.slider:isMouseInteractable() return false end
+function widgets.fillbar:setValue(value)
+	self.value = value
+	self:draw()
+end
+
+
+function widgets.fillbar:isMouseInteractable() return false end
 function widgets.fillbar:getToolTip()
 	return self.toolTip .. ": " .. self.value .. " / " .. self.max
+end
+
+----- icon check box -----
+
+widgets.iconCheckBox = mg.proto(widgets.button, {
+	expandMode = { 0, 0 }, -- fixed size
+
+	checked = false,
+})
+
+local broadcastLevel = 2
+local hRadioFind = {} -- empty table as private event handle
+local hRadioValueFind = {}
+
+function widgets.iconCheckBox:init(base, param)
+	self.icon = param.icon
+	self.state = "idle"
+	self.backingWidget = mkwidget(base, { type = "canvas" })
+	self.checked = param.checked
+	self.radioGroup = param.radioGroup
+	self.value = param.value
+
+	self:subscribeEvent("radioButtonChecked", function(self, btn)
+		if btn ~= self and btn.radioGroup == self.radioGroup then
+			self.checked = false
+			self:queueRedraw()
+		end
+	end)
+	self:subscribeEvent(hRadioFind, function(self, group)
+		if self.radioGroup == group and self.checked then return self end
+	end)
+	self:subscribeEvent(hRadioValueFind, function(self, group, val)
+		if self.radioGroup == group and self.value == val then return self end
+	end)
+end
+
+function widgets.iconCheckBox:preferredSize() return { 12, 12 } end
+
+function widgets.iconCheckBox:draw()
+	if self.icon then
+		local c = widget.bindCanvas(self.backingWidget) c:clear()
+		local directives = ""
+		if self.state == "press" then directives = "?brightness=-50" end
+		local pos = vec2.mul(c:size(), 0.5)
+
+		c:drawImageDrawable(self.icon..directives, pos, 1)
+		if self.checked then
+			c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
+		end
+	else
+		theme.drawCheckBox(self)
+	end
+end
+
+function widgets.iconCheckBox:onMouseEnter()
+	self.state = "hover"
+	self:queueRedraw()
+	--theme.onButtonHover(self)
+end
+
+function widgets.iconCheckBox:onMouseButtonEvent(btn, down)
+	if btn == 0 then -- left button
+		if down then
+			self.state = "press"
+			self:captureMouse(btn)
+			self:queueRedraw()
+			theme.onCheckBoxClick(self)
+		elseif self.state == "press" then
+			self.state = "hover"
+			if self.radioGroup then
+				if not self.checked then
+					self.checked = true
+					self:wideBroadcast(broadcastLevel, "radioButtonChecked", self)
+				end
+			else
+				self.checked = not self.checked
+			end
+			self:releaseMouse()
+			self:queueRedraw()
+			mg.startEvent(self.onClick, self)
+		end
+		return true
+	end
+end
+
+function widgets.iconCheckBox:setChecked(b)
+	if b and self.radioGroup and not self.checked then
+		self.checked = true -- set before event
+		self:wideBroadcast(broadcastLevel, "radioButtonChecked", self)
+	end
+	self.checked = b
+	self:queueRedraw()
+end
+
+function widgets.iconCheckBox:getGroupChecked()
+	if not self.radioGroup then return nil end
+	if self.checked then return self end
+	return self:wideBroadcast(broadcastLevel, hRadioFind, self.radioGroup)
+end
+
+function widgets.iconCheckBox:getGroupValue()
+	local c = self:getGroupChecked()
+	if c then return c.value end
+	return nil -- explicit nil
+end
+
+function widgets.iconCheckBox:findValue(val)
+	if not self.radioGroup then return nil end
+	if self.value == val then return self end
+	return self:wideBroadcast(broadcastLevel, hRadioValueFind, self.radioGroup, val)
+end
+
+function widgets.iconCheckBox:selectValue(val)
+	local c = self:findValue(val)
+	if c then c:setChecked(true) end
+	return c -- might as well
 end
 
 ----- other functions -----
@@ -312,3 +561,18 @@ end
 mg.registerUninit(function() -- close any paired menus when this pane closes
 	if lastMenu and lastMenu.dismiss then lastMenu.dismiss() end
 end)
+
+function getClosestValue(x, list)
+	local closest
+	local closestKey
+	local closestDiff = math.huge
+	for k, v in ipairs(list) do
+		diff = math.abs(v - x)
+		if diff <= closestDiff then
+			closestDiff = diff
+			closest = v
+			closestKey = k
+		end
+	end
+	return closest, closestKey
+end

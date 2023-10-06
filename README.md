@@ -1,12 +1,10 @@
 # Starbecue
 
-if you have a question check [the FAQ](https://github.com/Zygahedron/Starbecue/wiki/F.A.Q.)
+if you have a question check [the FAQ](https://github.com/Zygahedron/Starbecue/wiki/F.A.Q.) If availble or navigate to the in game help tabs, most SBQ interfaces will have a tab with a purple book which has information that may help you.
 
-To install simply visit the [releases page](https://github.com/Zygahedron/Starbecue/releases), download the latest one (the .pak files), and put them in your Starbound mods folder.
+To install simply visit the [patreon](https://www.patreon.com/LokiVulpix), download the latest one from the pinned post (the .pak files), and put them in your Starbound mods folder.
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
-
-Alternatively, if you want the latest and greatest changes, download this repo as a zip and extract in your starbound mods folder, or better yet, use git to clone it there so that you can update it more easily. Just be warned that things won't always be perfectly stable. And likely will also require the library [Species Anim Overrides](https://github.com/WasabiRaptor/starboundSpeciesAnimOverrides) to be installed as well, be aware that when installing the mods like this, things are much more likely to be unstable! keep to the [releases page](https://github.com/Zygahedron/Starbecue/releases) if you want stable versions.
 
 While not required it is recommended you install the Monster Config Core Loader mods found [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442860690) and [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442873217), if you're using Stardust Core then you should get [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2690363974) and if you're using FU you'll also need [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2442880727) because it should fix potential compatibility issues.
 
@@ -15,6 +13,8 @@ While not required it is recommended you install the Monster Config Core Loader 
 To get started with the mod, all you need to do is open your crafting interface, and craft a **Vore Controller**. When holding it in hand, hold shift and up to see your avalable actions, click to select one and assign it to the controller perform the action.
 
 After you have an assigned vore controller, you can click it to activate **Vore mode** and then click on things to vore them, you may notice your player character jitter slightly on activation, this is normal. While in vore mode you will have a hud in the bottom right to show you your prey and belly effects, if you click the gear you can get more settings to enable or diable other vore types as well as being prey, you can access the same menu via the quickbar as well even when not in vore mode.
+
+When in vore mode, or tranformed into a different player species, some items may appear buggy in your hands, this is normal, this is not something we can fix, do not report it as a bug.
 
 The settings panel also has ingame help information, click on any of the book tabs to get information about the mod.
 
@@ -94,6 +94,9 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Everis](https://steamcommunity.com/sharedfiles/filedetails/?id=1117006719)
 - [Bossmonster](https://steamcommunity.com/sharedfiles/filedetails/?id=1563090801)
 - [Twilit Wolves](https://steamcommunity.com/sharedfiles/filedetails/?id=1818480557)
+- [Mons](https://steamcommunity.com/sharedfiles/filedetails/?id=2310314462)
+- [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942)
+- [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956)
 
 This mod includes no assets from the respective modded races, modified or not, meaning said modded race *must* be installed to access its content
 
@@ -110,6 +113,8 @@ This mod includes no assets from the respective modded races, modified or not, m
 - Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706) mod )
 - Akari Kaen
 - Ferri Catfox (Pred/Prey) Ferrilata_
+
+Purchase a **Vore Colony Deed** from Auri's shop to summon a vore Tenant, those listed above are OC NPCs which may have unique dialogue, you can summon an NPC of any compatible species, they may share the same dialogue line pool, however they are able to do more vore types.
 
 ### Other Things
 - TF Dart Gun
@@ -140,7 +145,7 @@ Whether you are being eaten by a object predator, or a player transformed into a
 For player controlled predators, most struggles are disabled so that player is in full control of their state, but if they are in a state where an escape is available, you may be able to struggle out still, but it is possible for them to disable being able to escape entirely in their settings.
 
 #### Red
-indicates a direction in which you could escape, such as out the mouth or butt, your prey settings do not impact whether the arrow appears or not, but they do effect whether you can actally escape, a red arrow may indicate an anal vore escape, but if it isn't enabled in your settings, struggling that direction will not do anything.
+indicates a direction in which you could escape, such as out the mouth or butt, your prey settings do not impact whether the arrow appears or not, but they do effect whether you can actually escape, a red arrow may indicate an anal vore escape, but if it isn't enabled in your settings, struggling that direction will not do anything.
 
 #### Blue
 Indicates a state change, such as making the predator stand up or sit down.
@@ -162,13 +167,7 @@ The settings menu can be accessed from the quickbar, or from the predator HUD.
 
 The Settings menu will open to the Global Pred settings tab by default, these settings effect how you will perform as a predator.
 
-The belly effect names are self explanitory, the rate at which they work is effected by your attack power.
-
-Escape modifier controls the difficulty of your prey being able to escape if you're in a state they can escape from
-
-Display DoT effects causes the prey to emit numbers based on damage being taken.
-
-Belly Sounds controls whether your belly will be silent or emit gurgles.
+The belly effect names are self explanitory and have tooltips if you hover over them.
 
 #### Prey Tab
 
@@ -196,19 +195,5 @@ Artist, Lua scripting and debugging.
 
 > I take commissions! contact me if I am open!
 >
-> https://www.furaffinity.net/user/lokithevulpix/
+> https://itaku.ee/profile/lokivulpix
 > https://twitter.com/LokiVulpix
-
-
-## Do Not Ask/Contact
-
-People who were previously asked about compatibilty and requested not to be contacted further
-
-Bun (Protogen Race Mod)
-- There is to be no compatibility
-- Nobody is to extract assets to modify
-- Do not contact or ask further
-
-Crescent (Crylan Race Mod)
-- Permission granted to use assets
-- Do not contact or ask further

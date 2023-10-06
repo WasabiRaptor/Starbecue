@@ -4,7 +4,7 @@ function sbq.update(dt)
 end
 
 function state.stand.oralVore(args, tconfig)
-	return sbq.doVore(args, "belly", {}, "swallow", tconfig.voreType)
+	return sbq.doVore(args, tconfig.location, {}, "swallow", tconfig.voreType)
 end
 
 function state.stand.oralEscape(args, tconfig)
@@ -13,34 +13,40 @@ function state.stand.oralEscape(args, tconfig)
 end
 
 function state.stand.analVore(args, tconfig)
-	return sbq.doVore(args, "belly", {}, "swallow", tconfig.voreType)
+	world.sendEntityMessage(sbq.driver, "AOHideLegs", 10)
+	return sbq.doVore(args, tconfig.location, {}, "swallow", tconfig.voreType)
 end
 
 function state.stand.analEscape(args, tconfig)
+	world.sendEntityMessage(sbq.driver, "AOHideLegs", 10)
 	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType)
 end
 
 function state.stand.unbirth(args, tconfig)
-	return sbq.doVore(args, "womb", {}, "swallow", tconfig.voreType)
+	world.sendEntityMessage(sbq.driver, "AOHideLegs", 10)
+	return sbq.doVore(args, tconfig.location, {}, "swallow", tconfig.voreType)
 end
 
 function state.stand.unbirthEscape(args, tconfig)
+	world.sendEntityMessage(sbq.driver, "AOHideLegs", 10)
 	return sbq.doEscape(args, tconfig.releaseEffects or { wet = { power = 5, source = entity.id() } }, {},
 	tconfig.voreType)
 end
 
 function state.stand.cockVore(args, tconfig)
 	if not args.id then
-		sbq.moveToLocation({ id = sbq.findFirstOccupantIdForLocation("shaft") }, { location = "balls" })
+		sbq.moveToLocation({ id = sbq.findFirstOccupantIdForLocation(tconfig.location) }, { location = tconfig.locationDest or "balls" })
 		return false
 	end
-	return sbq.doVore(args, "shaft", {}, "swallow", tconfig.voreType)
+	world.sendEntityMessage(sbq.driver, "AOHideLegs", 10)
+	return sbq.doVore(args, tconfig.location, {}, "swallow", tconfig.voreType)
 end
 
 state.stand.moveToLocation = sbq.moveToLocation
 state.stand.switchBalls = sbq.switchBalls
 
 function state.stand.cockEscape(args, tconfig)
+	world.sendEntityMessage(sbq.driver, "AOHideLegs", 10)
 	return sbq.doEscape(args,
 	tconfig.releaseEffects or
 	{ glueslow = { power = 5 + ((sbq.lounging[args.id] or {}).progressBar or 0), source = entity.id() } }, {},
@@ -48,15 +54,17 @@ function state.stand.cockEscape(args, tconfig)
 end
 
 function state.stand.breastVore(args, tconfig)
-	return sbq.doVore(args, "breasts", {}, "swallow", tconfig.voreType)
+	world.sendEntityMessage(sbq.driver, "AOHideChest", 10)
+	return sbq.doVore(args, tconfig.location, {}, "swallow", tconfig.voreType)
 end
 
 function state.stand.breastEscape(args, tconfig)
+	world.sendEntityMessage(sbq.driver, "AOHideChest", 10)
 	return sbq.doEscape(args, tconfig.releaseEffects or {}, {}, tconfig.voreType)
 end
 
 function state.stand.navelVore(args, tconfig)
-	return sbq.doVore(args, "belly", tconfig.releaseEffects or {}, "swallow", tconfig.voreType)
+	return sbq.doVore(args, tconfig.location, tconfig.releaseEffects or {}, "swallow", tconfig.voreType)
 end
 
 function state.stand.navelEscape(args, tconfig)
@@ -84,24 +92,43 @@ function sbq.letout(id)
 	if (not id) or (not sbq.lounging[id]) then return false end
 
 	local location = sbq.lounging[id].location
+	local controllerAction
+	if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") then
+		controllerAction = (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction
+	end
 
 	if location == "belly" then
-		if (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction == "analVore" then
+		if (sbq.settings.analVorePred and (not sbq.settings.oralVorePred) and controllerAction ~= "oralVore" and controllerAction ~= "navelVore") or (controllerAction == "analVore") or (controllerAction ~= "oralVore" and sbq.lounging[id].entryType == "analVore") then
 			return sbq.doTransition("analEscape", { id = id })
-		elseif (sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.scriptStorage or {}).clickAction == "navelVore" then
+		elseif (sbq.settings.navelVorePred and (not sbq.settings.oralVorePred) and controllerAction ~= "oralVore") or (controllerAction == "navelVore") or (controllerAction ~= "oralVore" and sbq.lounging[id].entryType == "navelVore") then
 			return sbq.doTransition("navelEscape", { id = id })
 		else
 			return sbq.doTransition("oralEscape", { id = id })
 		end
 	elseif location == "tail" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("tailInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("tailEscape", { id = id })
 	elseif location == "shaft" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("cockInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("cockEscape", { id = id })
 	elseif location == "ballsL" or location == "ballsR" or location == "balls" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("cockInfuseEscape", { id = id })
+		end
 		return sbq.moveToLocation({ id = id }, { location = "shaft" })
 	elseif location == "breastsL" or location == "breastsR" or location == "breasts" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("breastInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("breastEscape", { id = id })
 	elseif location == "womb" then
+		if sbq.lounging[id].flags.infused then
+			return sbq.doTransition("pussyInfuseEscape", { id = id })
+		end
 		return sbq.doTransition("unbirthEscape", { id = id })
 	end
 end

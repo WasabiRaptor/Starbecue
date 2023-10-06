@@ -43,17 +43,17 @@ function sbq.struggleMessages(id)
 		}), sbq.lounging[id].flags)
 
 		if sbq.lounging[id].flags.infused and sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
-			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, { "infusedTease" }, true)
+			world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, ".infusedTease", true)
 			return
 		end
 
-		if math.random() >= 0.5 then
+		if math.random() >= 0.5 and sbq.species ~= "sbqEgg" then
 			if sbq.randomTimer(sbq.driver.."struggleLine", 5, 15) then
-				world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, {"struggle"}, true )
+				world.sendEntityMessage(sbq.driver, "sbqSayRandomLine", id, settings, ".struggle", true )
 			end
 		else
 			if sbq.randomTimer(id.."struggleLine", 5, 15) then
-				world.sendEntityMessage(id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), {"struggling"}, false )
+				world.sendEntityMessage(id, "sbqSayRandomLine", sbq.driver, sb.jsonMerge(sbq.settings, settings), ".struggling", false )
 			end
 		end
 	end
@@ -105,7 +105,7 @@ end
 -- for letting out prey, some predators might wand more specific logic regarding this
 function sbq.letout(id)
 	local id = id or sbq.getRecentPrey()
-	if not id then return false end
+	if (not id) or (not sbq.lounging[id]) then return false end
 
 	return sbq.doTransition( "escape", {id = id} )
 end
@@ -154,9 +154,9 @@ end
 function sbq.switchBalls(args)
 	local dx = sbq.lounging[args.id].controls.dx
 	if dx == -1 then
-		return sbq.moveOccupantLocation(args, "ballsR")
+		return sbq.moveOccupantLocation(args, "balls", "R")
 	elseif dx == 1 then
-		return sbq.moveOccupantLocation(args, "ballsL")
+		return sbq.moveOccupantLocation(args, "balls", "L")
 	end
 end
 
@@ -165,7 +165,7 @@ end
 the entity id, health, and the status checked in the options]]
 
 -- to have other effects applied in the effect application loop
-function sbq.otherLocationEffects(i, eid, health, locationEffect, status, location, powerMultiplier)
+function sbq.otherLocationEffects(i, eid, health, locationEffect, location, powerMultiplier)
 end
 function sbq.infusedLocationEffects(i, eid, health, locationEffect, location, powerMultiplier)
 end

@@ -244,7 +244,7 @@ function sbq.assignTransformMenu()
 					end
 				end
 			end
-			world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "transformSelect" }, true )
+			world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "transformSelect" } )
 		else
 			noTFMenu = true
 			sbq.lastRadialSelection = "despawn"
@@ -502,7 +502,7 @@ function sbq.assignClickActionMenu(state)
 	end
 
 	for action, data in pairs((state.actions or {})) do
-		if ((data.settings == nil) or sbq.checkSettings(data.settings) ) then
+		if (sbq.checkSettings(data.settings) ) then
 			table.insert(options, {
 				name = action,
 				icon = ((data.icon) or ("/items/active/sbqController/"..action..".png"))..(sbq.itemActionDirectives or "")
@@ -510,7 +510,7 @@ function sbq.assignClickActionMenu(state)
 		end
 	end
 
-	world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "actionSelect" }, true )
+	world.sendEntityMessage( sbq.driver, "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "actionSelect" } )
 end
 
 function sbq.checkValidAim(seat, range)
@@ -658,7 +658,7 @@ function sbq.grab(location, aimrange, grabrange)
 				})
 				for _, entity in ipairs(prey) do
 					if entity == target then
-						if sbq.eat(target, location, enabled.size or 1) then
+						if sbq.eat({id = target, size = enabled.size or 1}, "held", location) then
 							sbq.grabbing = target
 							sbq.movement.clickActionsDisabled = true
 						end

@@ -11,7 +11,7 @@ local _initAfterInit = sbq.initAfterInit
 function sbq.initAfterInit()
 	_initAfterInit()
 	sbq.occupants.total = 0
-	if not sbq.eat(sbq.driver, "egg", config.getParameter("eggSize") or 1, "eggify", "", true) then
+	if not sbq.eat({force = true, id = sbq.driver, size = config.getParameter("eggSize") or 1}, "eggify", "egg") then
 		vehicle.destroy()
 	end
 	if sbq.settings.skinNames.head == "plastic" or sbq.settings.occupantVisible then
