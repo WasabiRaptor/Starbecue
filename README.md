@@ -94,6 +94,9 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Everis](https://steamcommunity.com/sharedfiles/filedetails/?id=1117006719)
 - [Bossmonster](https://steamcommunity.com/sharedfiles/filedetails/?id=1563090801)
 - [Twilit Wolves](https://steamcommunity.com/sharedfiles/filedetails/?id=1818480557)
+- [Mons](https://steamcommunity.com/sharedfiles/filedetails/?id=2310314462)
+- [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942)
+- [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956)
 
 This mod includes no assets from the respective modded races, modified or not, meaning said modded race *must* be installed to access its content
 
@@ -142,7 +145,7 @@ Whether you are being eaten by a object predator, or a player transformed into a
 For player controlled predators, most struggles are disabled so that player is in full control of their state, but if they are in a state where an escape is available, you may be able to struggle out still, but it is possible for them to disable being able to escape entirely in their settings.
 
 #### Red
-indicates a direction in which you could escape, such as out the mouth or butt, your prey settings do not impact whether the arrow appears or not, but they do effect whether you can actally escape, a red arrow may indicate an anal vore escape, but if it isn't enabled in your settings, struggling that direction will not do anything.
+indicates a direction in which you could escape, such as out the mouth or butt, your prey settings do not impact whether the arrow appears or not, but they do effect whether you can actually escape, a red arrow may indicate an anal vore escape, but if it isn't enabled in your settings, struggling that direction will not do anything.
 
 #### Blue
 Indicates a state change, such as making the predator stand up or sit down.
@@ -164,13 +167,7 @@ The settings menu can be accessed from the quickbar, or from the predator HUD.
 
 The Settings menu will open to the Global Pred settings tab by default, these settings effect how you will perform as a predator.
 
-The belly effect names are self explanitory, the rate at which they work is effected by your attack power.
-
-Escape modifier controls the difficulty of your prey being able to escape if you're in a state they can escape from
-
-Display DoT effects causes the prey to emit numbers based on damage being taken.
-
-Belly Sounds controls whether your belly will be silent or emit gurgles.
+The belly effect names are self explanitory and have tooltips if you hover over them.
 
 #### Prey Tab
 
@@ -200,17 +197,3 @@ Artist, Lua scripting and debugging.
 >
 > https://itaku.ee/profile/lokivulpix
 > https://twitter.com/LokiVulpix
-
-
-## Do Not Ask/Contact
-
-People who were previously asked about compatibilty and requested not to be contacted further
-
-Bun (Protogen Race Mod)
-- There is to be no compatibility
-- Nobody is to extract assets to modify
-- Do not contact or ask further
-
-Crescent (Crylan Race Mod)
-- Permission granted to use assets
-- Do not contact or ask further

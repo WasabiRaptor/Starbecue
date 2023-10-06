@@ -1,0 +1,36 @@
+{
+	"name": "sbq_guard_mons",
+	"priority": 52,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"mons" : 8
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"monswoodchair", "count":1},
+		{"name":"monswoodenbed", "count":1},
+		{"name":"monswoodendesk", "count":1},
+		{"name":"monsbannersmall", "count":1},
+		{"name":"monsbannerlarge", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["mons"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

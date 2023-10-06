@@ -1,0 +1,37 @@
+{
+	"name": "sbq_guard_squamaeft",
+	"priority": 52,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"squamaeft" : 8
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"squamaeftwoodenbed", "count":1},
+		{"name":"squamaeftwoodchair", "count":1},
+		{"name":"squamaeftwoodendesk", "count":1},
+		{"name":"squamaeftlantern", "count":1},
+		{"name":"squamaeftbannersmall", "count":1},
+		{"name":"squamaeftbannerlarge", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["squamaeft"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}
