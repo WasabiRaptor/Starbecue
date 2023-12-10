@@ -1,14 +1,74 @@
 # Starbecue
 
-if you have a question check [the FAQ](https://github.com/Zygahedron/Starbecue/wiki/F.A.Q.) If availble or navigate to the in game help tabs, most SBQ interfaces will have a tab with a purple book which has information that may help you.
+if you have a question check [the FAQ]() If availble or navigate to the in game help tabs, most SBQ interfaces will have a tab with an icon of a book which has information that may help you.
 
-To install simply visit the [patreon](https://www.patreon.com/LokiVulpix), download the latest one from the pinned post (the .pak files), and put them in your Starbound mods folder.
+# Install
+
+Make sure to delete any previously installed versions of starbecue within the `Starbound/mods/`
+This includes any version of `starbecue.pak` and `starboundSpeciesAnimOverrides.pak`
+
+Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix)
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
 
 While not required it is recommended you install the Monster Config Core Loader mods found [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442860690) and [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442873217), if you're using Stardust Core then you should get [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2690363974) and if you're using FU you'll also need [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2442880727) because it should fix potential compatibility issues.
 
-## Getting Started
+Further steps are OS specific!
+
+## Windows
+
+### Setup Script
+Double dlick the provided `setup.bat` file to execute it
+
+The script has will have copied the files into their correct place, you can now play starbound with the mod!
+
+### Manual Setup
+Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
+
+Place `starbecue.pak` file within `Starbound\mods\`
+
+if you downloaded the win64 version, you're going to open the `Starbound\win64\` folder
+if you downloaded the win32 version, you're going to open the `Starbound\win32\` folder
+
+Replace the `starbound.exe` and `starbound_server.exe` files with the provided versions
+
+## macOS
+
+### Setup Script
+Open the diretory containing these files within terminal, this can be done by left clicking the folder and selecting "New Terminal At Folder" or opening terminal and input the following command, (you can simply drag the folder into terminal rather than typing the path manually)
+
+`cd /Users/(Username)/Downloads/starbecue_osx_v(version)`
+
+Input the following commands
+`chmod +x ./setup.sh`
+`./setup.sh`
+
+The script has will have copied the files into their correct place, you can now play starbound with the mod!
+
+### Manual Setup
+
+Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
+
+Place `starbecue.pak` file within `Starbound/mods/`
+
+Replace the `starbound` file within `Starbound/osx/Starbound.app/Contents/MacOS/` with the provided version (left click and select "Show Package Contents" on Starbound.app)
+
+Replace the `starbound_server` file within `Starbound/osx/` with the provided version
+
+The files are now in the correct place, you can now play starbound with the mod!
+
+## Uninstall
+Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
+
+delete `starbecue.pak` in the `mods` folder
+
+IF you are playing with other players who have the same modified executable, but simply do not wish to have SBQ content, you can stop here
+
+return to the `Installed Files` tab and select `Verify integrity of game files`
+
+Steam will then re-download the unmodified versions of the game executable
+
+# Getting Started
 
 To get started with the mod, all you need to do is open your crafting interface, and craft a **Vore Controller**. When holding it in hand, hold shift and up to see your avalable actions, click to select one and assign it to the controller perform the action.
 
