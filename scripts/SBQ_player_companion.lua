@@ -34,14 +34,6 @@ function init()
 			message = "Monster Core Loader missing.\n \nThis is not required, but without it you may find some mod incompatibilities, especially with FU.\n \nMake sure to read install information."
 		})
 	end
-	if (not pcall(root.assetJson,("/stats/speciesAnimOverride/speciesAnimOverride.animation"))) then
-		player.confirm({
-			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
-			icon = "/interface/errorpopup/erroricon.png",
-			title = "Starbecue Mod Requirement Warning",
-			message = "If you had read the install directions, you would have installed the required starboundSpeciesAnimOverrides.pak file on the releases page."
-		})
-	end
 	if root.itemConfig("spovpilldonut") ~= nil then
 		player.confirm({
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
