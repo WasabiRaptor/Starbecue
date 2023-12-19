@@ -5,6 +5,8 @@ function sbq.doMysteriousTF(data)
 	local currentData =	 humanoid.getIdentity()
     local customizedSpecies = status.statusProperty("sbqCustomizedSpecies") or {}
 
+	overrideData.personalityIndex = overrideData.personalityIndex or currentData.personalityIndex
+
     local originalSpecies = status.statusProperty("sbqOriginalSpecies")
 	local originalGender = status.statusProperty("sbqOriginalGender")
     if not originalSpecies then
@@ -49,7 +51,7 @@ function sbq.doMysteriousTF(data)
 		end
     end
 
-    overrideData = sb.jsonMerge(humanoid.randomIdentity(overrideData.species), overrideData)
+    overrideData = sb.jsonMerge(humanoid.randomIdentity(overrideData.species, overrideData.personalityIndex, overrideData.seed), overrideData)
 
 	local speciesFile = root.speciesConfig(overrideData.species)
 
