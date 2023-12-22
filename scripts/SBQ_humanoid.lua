@@ -30,7 +30,7 @@ function sbq.doMysteriousTF(data)
 		overrideData.species = currentData.species or originalSpecies
     end
 
-    local customData = customizedSpecies[overrideData.species]
+    local customData = customizedSpecies[overrideData.species] or {}
     if customData.identity then
 		-- this is to fix old data from older versions of sbq
         customData = sb.jsonMerge(customData, customData.identity)
