@@ -143,6 +143,7 @@
 			*/
 			{ "type" : "tab", "id" : "customizeTab", "title" : "", "icon" : "/interface/scripted/sbq/sbqSettings/customize.png", "color" : "ff00ff", "contents" : [
 				{ "type" : "layout", "id" : "speciesLayout", "mode" : "vertical", "children" : [
+					{ "type" : "label", "text" : " ^red;This tab might not be functioning correctly so tread with caution!", "inline" : true },
 					{ "type" : "panel", "id" : "speciesPanel", "expandMode" : [1,0], "style" : "convex", "children" : [
 						{ "mode" : "h" },
 						{ "type" : "label", "text" : " Species", "inline" : true },

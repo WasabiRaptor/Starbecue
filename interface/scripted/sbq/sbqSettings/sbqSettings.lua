@@ -502,35 +502,12 @@ if speciesLayout ~= nil then
 		sbq.changeSpecies(1)
 	end
 
-	function applySpecies:onClick()
-		if speciesText.text ~= "" and type(sbq.customizedSpecies[speciesText.text]) == "table" then
-			local species = player.species()
-			if species ~= speciesText.text then
-				status.setStatusProperty("speciesAnimOverrideData", sbq.currentCustomSpecies)
-
-				local currentEffect = (status.getPersistentEffects("speciesAnimOverride") or {})[1]
-				local resultEffect = sbq.speciesFile.customAnimStatus or "speciesAnimOverride"
-				if resultEffect == currentEffect then
-					world.sendEntityMessage(player.id(), "refreshAnimOverrides")
-				else
-					status.clearPersistentEffects("speciesAnimOverride")
-					status.setPersistentEffects("speciesAnimOverride", { resultEffect })
-				end
-				init()
-				refreshOccupantHolder()
-			else
-				status.setStatusProperty("speciesAnimOverrideData", sbq.currentCustomSpecies)
-				world.sendEntityMessage(player.id(), "refreshAnimOverrides")
-			end
-		elseif player.isAdmin() and pcall(root.assetJson, ("/species/"..speciesText.text..".species")) then
+    function applySpecies:onClick()
+		-- small hack for now to maybe have this function
+        if (speciesText.text ~= "" and type(sbq.customizedSpecies[speciesText.text]) == "table")
+		or (player.isAdmin() and root.speciesConfig(speciesText.text))
+		then
 			world.sendEntityMessage(player.id(), "sbqMysteriousPotionTF", { species = speciesText.text, gender = sbq.currentCustomSpecies.gender })
-		else
-			status.clearPersistentEffects("speciesAnimOverride")
-			status.setStatusProperty("speciesAnimOverrideData", nil)
-			status.setStatusProperty("oldSpeciesAnimOverrideData", nil)
-			status.setStatusProperty("sbqMysteriousPotionTFDuration", nil)
-			status.setStatusProperty("frontarmAnimOverrideArmOffset", nil)
-			status.setStatusProperty("backarmAnimOverrideArmOffset", nil)
 		end
 	end
 	function speciesText:onEnter() applySpecies:onClick() end

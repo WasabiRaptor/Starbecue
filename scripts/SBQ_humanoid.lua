@@ -30,8 +30,13 @@ function sbq.doMysteriousTF(data)
 		overrideData.species = currentData.species or originalSpecies
     end
 
-	local customData = customizedSpecies[overrideData.species]
-	local isOriginalSpecies = (overrideData.species == originalSpecies or (customData or {}).species == originalSpecies)
+    local customData = customizedSpecies[overrideData.species]
+    if customData.identity then
+		-- this is to fix old data from older versions of sbq
+        customData = sb.jsonMerge(customData, customData.identity)
+        customData.identity = nil
+		customizedSpecies[overrideData.species] = nil
+	end
 
 	overrideData = sb.jsonMerge(customData or {}, overrideData)
 
@@ -55,7 +60,7 @@ function sbq.doMysteriousTF(data)
 
 	local speciesFile = root.speciesConfig(overrideData.species)
 
-	if (not isOriginalSpecies and not customData) and not speciesFile.noUnlock then
+	if (not customizedSpecies[overrideData.species]) and not speciesFile.noUnlock then
 		customizedSpecies[overrideData.species] = overrideData
 		status.setStatusProperty("sbqCustomizedSpecies", customizedSpecies)
 		world.sendEntityMessage(entity.id(), "sbqUnlockedSpecies")
@@ -85,6 +90,7 @@ function sbq.endMysteriousTF()
 	local originalGender = status.statusProperty("sbqOriginalGender") or humanoid.gender()
     local customizedSpecies = status.statusProperty("sbqCustomizedSpecies") or {}
     local customData = customizedSpecies[originalSpecies]
+	if not customData then return end
 	customData.gender = originalGender
 	humanoid.setIdentity(customData)
 
