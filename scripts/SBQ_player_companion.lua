@@ -15,9 +15,9 @@ function init()
 	status.setStatusProperty("sbqType", nil)
 	sbq.config = root.assetJson("/sbqGeneral.config")
 
-	player.setUniverseFlag("foodhall_auriShop")
+    player.setUniverseFlag("foodhall_auriShop")
 
-	if not pcall(root.assetJson,("/metagui/registry.json")) then
+	if not (root.modMetadata("Stardust Core") or root.modMetadata("StardustLib") or root.modMetadata("Stardust Core Lite")) then
 		player.confirm({
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
 			icon = "/interface/errorpopup/erroricon.png",
@@ -25,7 +25,7 @@ function init()
 			message = "Stardust Core or Stardust Lite missing.\n \nMake sure to read install information."
 		})
 	end
-	if (not pcall(root.assetJson,("/stats/monster_compat_list.config"))) and not player.getProperty("sbqMonsterCoreLoaderWarned") then
+	if (not root.assetExists("/stats/monster_compat_list.config")) and not player.getProperty("sbqMonsterCoreLoaderWarned") then
 		player.setProperty("sbqMonsterCoreLoaderWarned", true)
 		player.confirm({
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
@@ -43,7 +43,7 @@ function init()
 		})
 	end
 
-	if player.getProperty("sbqSettingsVersion") ~= sbq.config.settingsVersion then
+	if player.getProperty("sbqSettingsVersion") ~= root.modMetadata("Starbecue").version then
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
 	end
 

@@ -27,7 +27,7 @@ require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 
 
 function init()
-	player.setProperty("sbqSettingsVersion", sbq.config.settingsVersion)
+	player.setProperty("sbqSettingsVersion", root.modMetadata("Starbecue").version)
 
 	sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), status.statusProperty("speciesAnimOverrideSettings") or {})
 	sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
@@ -142,7 +142,7 @@ end
 
 function titleCanvas:draw()
 	local c = widget.bindCanvas(self.backingWidget) c:clear()
-	c:drawText("Starbecue "..root.assetJson("/sbqGeneral.config:settingsVersion"), {
+	c:drawText("Starbecue "..root.modMetadata("Starbecue").version, {
 		position = {titleCanvas.size[1]/2, titleCanvas.size[2]},
 		horizontalAnchor = "mid",
 		verticalAnchor = "top",
