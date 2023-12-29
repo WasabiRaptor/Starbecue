@@ -22,10 +22,12 @@ Double dlick the provided `setup.bat` file to execute it
 
 The script has will have copied the files into their correct place, you can now play starbound with the mod!
 
+if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
+
 ### Manual Setup
 Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
 
-Place `starbecue.pak` file within `Starbound\mods\`
+Place `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` files within `Starbound\mods\`
 
 if you downloaded the win64 version, you're going to open the `Starbound\win64\` folder
 if you downloaded the win32 version, you're going to open the `Starbound\win32\` folder
@@ -45,11 +47,13 @@ Input the following commands
 
 The script has will have copied the files into their correct place, you can now play starbound with the mod!
 
+if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
+
 ### Manual Setup
 
 Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
 
-Place `starbecue.pak` file within `Starbound/mods/`
+Place `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` files within `Starbound\mods\`
 
 Replace the `starbound` file within `Starbound/osx/Starbound.app/Contents/MacOS/` with the provided version (left click and select "Show Package Contents" on Starbound.app)
 
@@ -67,6 +71,9 @@ IF you are playing with other players who have the same modified executable, but
 return to the `Installed Files` tab and select `Verify integrity of game files`
 
 Steam will then re-download the unmodified versions of the game executable
+
+
+# WARNING! the following text explaining how the mod works may be innacurate while we are working on this major rewrite!
 
 # Getting Started
 
