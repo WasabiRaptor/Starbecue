@@ -1,5 +1,5 @@
 
-function sbq.doMysteriousTF(data)
+function sbq.doMysteriousTF(data, duration)
 	if world.pointTileCollision(entity.position(), {"Null"}) then return end
 	local overrideData = data or {}
 	local currentData =	 humanoid.getIdentity()

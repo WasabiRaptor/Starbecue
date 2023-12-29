@@ -1,4 +1,11 @@
 require("/scripts/rect.lua")
+require("/scripts/SBQ_RPC_handling.lua")
+
+local destScale = 1
+local scaleTime = 0
+local scaleDuration = 0
+local oldScale = 1
+local scaling = false
 
 function sbq.everything_primary()
 	status.setStatusProperty("sbqType", nil)
@@ -197,12 +204,39 @@ function sbq.everything_primary()
 		if size <= (steppySize*0.4) then
 			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
 		end
+    end)
+
+    message.setHandler("animOverrideScale", function(_, _, scale, duration)
+        status.setStatusProperty("animOverrideScale", scale)
+		oldScale = mcontroller.scale()
+        destScale = scale
+		scaleTime = 0
+        scaleDuration = duration or 1
+		scaling = true
+    end)
+	sbq.timer("initEverythingPrimary", 0, function ()
+		mcontroller.setScale(status.statusProperty("animOverrideScale") or 1)
 	end)
 end
 
 local oldupdate = update
 function update(dt)
-	if oldupdate ~= nil then oldupdate(dt) end
+    if oldupdate ~= nil then oldupdate(dt) end
+	sbq.checkTimers(dt)
+
+    if scaling then
+        scaleTime = scaleTime + dt
+        local currentScale = oldScale + (destScale - oldScale) * (scaleTime / scaleDuration)
+		if destScale > oldScale then
+            currentScale = math.min(destScale, currentScale)
+		elseif destScale < oldScale then
+            currentScale = math.max(destScale, currentScale)
+        end
+        mcontroller.setScale(currentScale)
+		if scaleTime >= scaleDuration then
+			scaling = false
+		end
+	end
 
 end
 
