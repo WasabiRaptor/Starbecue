@@ -168,7 +168,6 @@ function init()
 	end
 
 	message.setHandler("sbqOccupantHolderScale", function(_, _, scale, scaleYOffset)
-		sbq.refreshSizes = true
 		sbq.predScale = scale
 		sbq.predScaleYOffset = scaleYOffset
 	end)

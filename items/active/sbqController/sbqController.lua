@@ -29,8 +29,6 @@ function init()
 	end)
 end
 
-require("/scripts/speciesAnimOverride_player_species.lua")
-
 local assignedMenu
 local occupantsWhenAssigned
 local selectedPrey
