@@ -1,0 +1,66 @@
+[
+	{"op":"merge", "path":"", "value": {
+		"globalTagDefaults" : {
+			"bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
+			"bellyColorRemap" : ""
+		},
+		"animatedParts": {
+			"stateTypes": {
+				"bellyState" : {
+					"default": "none",
+					"priority" : 1,
+					"states" : {
+						"s_back": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
+						"s_front": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
+						"s_up": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
+						"s_down": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
+						"none": { "frames": 1, "cycle": 1, "mode": "end" }
+					}
+				},
+				"bellyExpandState" : {
+					"priority" : 2,
+					"default": "none",
+					"states" : {
+						"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+						"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore",
+							"frameProperties" : {
+								//"immediateSound" : [ "", "", "/sfx/objects/gulp.ogg", "", "", "", "", "" ]
+							}
+						},
+						"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+						"none": { "frames": 1, "cycle": 1, "mode": "end" }
+					}
+				}
+			},
+			"parts": {
+				"belly" : {
+					"properties": {
+						"centered": true,
+						"zLevel": 0.3,
+						"transformationGroups": []
+					},
+					"partStates": {
+						"bellyState": {
+							"idle": { "properties": { "image": "<bellyImage>:<bellyOccupants>-<bellyStateAnim>.<bellyStateFrame><colorRemap><bodyDirectives>" } },
+							"expand": { "properties": { "image": "<bellyImage>:<bellyOccupantsInterpolate>-<bellyStateAnim><colorRemap><bodyDirectives>" } },
+							"eat" : "expand",
+
+							"none": { "properties": {} }
+						},
+						"bellyExpandState" : {
+
+						}
+					}
+				}
+			}
+		},
+		"transformationGroups": {
+
+		},
+		"sounds": {
+		},
+		"particleEmitters": {
+		}
+
+	}}
+]

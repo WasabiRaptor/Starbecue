@@ -6,18 +6,9 @@ local old = {
 sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/rect.lua")
-require("/scripts/SBQ_humanoid.lua")
 
 function init()
 	old.init()
-
-	message.setHandler("sbqMysteriousPotionTF", function (_,_, ...)
-		sbq.doMysteriousTF(...)
-	end)
-	message.setHandler("sbqEndMysteriousPotionTF", function (_,_)
-		sbq.endMysteriousTF()
-	end)
-
 	message.setHandler("sbqLight", function (_,_, light)
 		player.setProperty("sbqLight", light)
 		if light == nil then

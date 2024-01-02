@@ -1,4 +1,31 @@
 
+local old = {
+	init = init,
+	update = update
+}
+function init()
+    old.init()
+    message.setHandler("sbqDoAnim", function(_, _, state, anim, force)
+		sb.logInfo("sbqDoAnim".." "..state.." "..anim.." "..tostring(force))
+		parentAnimator.setAnimationState(state, anim, force)
+	end)
+    message.setHandler("sbqSetPartTag", function(_, _, part, tag, value)
+		sb.logInfo("sbqSetPartTag".." "..part.." "..tag.." "..value)
+		parentAnimator.setPartTag(part, tag, value)
+	end)
+    message.setHandler("sbqSetGlobalTag", function(_, _, tag, value)
+		sb.logInfo("sbqSetGlobalTag "..tag.." "..value)
+        parentAnimator.setGlobalTag(tag, value)
+    end)
+	message.setHandler("sbqMysteriousPotionTF", function (_,_, ...)
+		sbq.doMysteriousTF(...)
+	end)
+	message.setHandler("sbqEndMysteriousPotionTF", function (_,_)
+		sbq.endMysteriousTF()
+	end)
+end
+
+
 function sbq.doMysteriousTF(data, duration)
 	if world.pointTileCollision(entity.position(), {"Null"}) then return end
 	local overrideData = data or {}

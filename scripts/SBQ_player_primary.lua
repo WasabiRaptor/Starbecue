@@ -1,11 +1,9 @@
+require("/scripts/SBQ_everything_primary.lua")
+require("/scripts/SBQ_humanoid.lua")
 local old = {
 	init = init,
 	update = update
 }
-sbq = {}
-require("/scripts/SBQ_everything_primary.lua")
-
 function init()
-	old.init()
-	sbq.everything_primary()
+    old.init()
 end

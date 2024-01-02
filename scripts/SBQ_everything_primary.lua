@@ -1,3 +1,10 @@
+local old = {
+	init = init,
+	update = update
+}
+sbq = {}
+
+
 require("/scripts/rect.lua")
 require("/scripts/SBQ_RPC_handling.lua")
 
@@ -7,7 +14,9 @@ local scaleDuration = 0
 local oldScale = 1
 local scaling = false
 
-function sbq.everything_primary()
+function init()
+    old.init()
+
 	status.setStatusProperty("sbqType", nil)
 	message.setHandler("sbqApplyStatusEffects", function(_,_, statlist)
 		for statusEffect, data in pairs(statlist) do
@@ -215,13 +224,12 @@ function sbq.everything_primary()
 		scaling = true
     end)
 	sbq.timer("initEverythingPrimary", 0, function ()
-		mcontroller.setScale(status.statusProperty("animOverrideScale") or 1)
+    	mcontroller.setScale(status.statusProperty("animOverrideScale") or 1)
 	end)
 end
 
-local oldupdate = update
 function update(dt)
-    if oldupdate ~= nil then oldupdate(dt) end
+	old.update(dt)
 	sbq.checkTimers(dt)
 
     if scaling then

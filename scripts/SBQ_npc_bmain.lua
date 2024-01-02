@@ -67,16 +67,8 @@ function sbq.setPosition(position)
 end
 
 require("/scripts/SBQ_RPC_handling.lua")
-require("/scripts/SBQ_humanoid.lua")
 
 function init()
-	message.setHandler("sbqMysteriousPotionTF", function (_,_, ...)
-		sbq.doMysteriousTF(...)
-	end)
-	message.setHandler("sbqEndMysteriousPotionTF", function (_,_)
-		sbq.endMysteriousTF()
-	end)
-
 	message.setHandler("sbqGetSeatEquips", function(_, _, current)
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = status.statusProperty("sbqType")

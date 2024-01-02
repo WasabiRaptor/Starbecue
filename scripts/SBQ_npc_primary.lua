@@ -1,7 +1,9 @@
-local oldinit = init
-sbq = {}
 require("/scripts/SBQ_everything_primary.lua")
+require("/scripts/SBQ_humanoid.lua")
+local old = {
+	init = init,
+	update = update
+}
 function init()
-	oldinit()
-	sbq.everything_primary()
+	old.init()
 end

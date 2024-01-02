@@ -1,10 +1,12 @@
 
 function sbq.setPartTag(part, tag, value)
-	sbq.partTags[part][tag] = value
-	if part == "global" then
-		world.sendEntityMessage(sbq.spawner, "sbqSetGlobalTag", tag, value)
-	else
-		world.sendEntityMessage(sbq.spawner, "sbqSetPartTag", part, tag, value)
+	if sbq.partTags[part][tag] ~= value then
+		sbq.partTags[part][tag] = value
+		if part == "global" then
+			world.sendEntityMessage(sbq.spawner, "sbqSetGlobalTag", tag, value)
+		else
+			world.sendEntityMessage(sbq.spawner, "sbqSetPartTag", part, tag, value)
+		end
 	end
 end
 
@@ -43,8 +45,6 @@ function sbq.updateAnims(dt)
 end
 
 function sbq.doAnims( anims, force )
-	world.sendEntityMessage(sbq.spawner, "sbqDoAnims", anims, force)
-
 	for state,anim in pairs( anims or {} ) do
 		if state == "offset" then
 			sbq.offsetAnim( anim )
@@ -55,18 +55,12 @@ function sbq.doAnims( anims, force )
 		elseif state == "priority" then
 			sbq.changePriorityLength( anim )
 		else
-			--p.doAnim( state.."State", anim, force)
-			sbq.doAnimData(state.."State", anim, force)
+			sbq.doAnim( state.."State", anim, force)
 		end
 	end
 end
 
-function sbq.doAnim( state, anim, force )
-	world.sendEntityMessage(sbq.spawner, "sbqDoAnim", state, anim, force)
-	sbq.doAnimData(state, anim, force)
-end
-
-function sbq.doAnimData(state, anim, force)
+function sbq.doAnim(state, anim, force)
 	if not sbq.animStateData[state] then
 		sbq.logError("Attempt to call invalid Anim State: "..tostring(state))
 		return
@@ -99,6 +93,7 @@ function sbq.doAnimData(state, anim, force)
 			speed = sbq.animStateData[state].states[anim].frames / sbq.animStateData[state].states[anim].cycle,
 			frame = 1,
 			time = 0
-		}
+        }
+		world.sendEntityMessage(sbq.spawner, "sbqDoAnim", state, anim, force)
 	end
 end
