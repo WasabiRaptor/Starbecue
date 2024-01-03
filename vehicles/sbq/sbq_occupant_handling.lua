@@ -662,16 +662,15 @@ function sbq.interpolateLocation(location, tag, update)
 		local interpolationTable = sbq.locationInterpolation[location].interpolationTable
 		local index = math.floor(sbq.locationInterpolation[location].time * sbq.locationInterpolation[location].speed) + 1
 		if index ~= sbq.locationInterpolation[location].prevIndex then
-			setTag = tostring(interpolationTable[index])
 			sbq.locationInterpolation[location].prevIndex = index
 		end
-        if index >= #interpolationTable then
-			setTag = tostring(sbq.occupantsVisualSize[location])
-			sbq.locationInterpolation[location] = nil
+        if index > #interpolationTable then
+            sbq.locationInterpolation[location] = nil
+        else
+			setTag = tostring(interpolationTable[index])
 		end
-    else
-		setTag = tostring(sbq.occupantsVisualSize[location])
     end
+	setTag = setTag or tostring(sbq.occupantsVisualSize[location] or 0)
 	sbq.setPartTag("global", tag, setTag)
 	return setTag
 end
