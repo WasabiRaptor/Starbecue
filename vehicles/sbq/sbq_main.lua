@@ -223,17 +223,13 @@ function init()
 
 	sbq.animFunctionQueue = {}
 	for statename, state in pairs(sbq.animStateData) do
-		state.animationState = {
+        state.animationState = sb.jsonMerge(state.states[state.default], {
 			anim = state.default,
-			priority = state.states[state.default].priority,
-			cycle = state.states[state.default].cycle,
-			frames = state.states[state.default].frames,
-			mode = state.states[state.default].mode,
 			speed = state.states[state.default].frames / state.states[state.default].cycle,
 			frame = 1,
 			time = 0,
 			queue = {},
-		}
+		})
 		state.tag = nil
 		sbq.animFunctionQueue[statename] = {}
 		sbq.setPartTag("global", statename.."Frame", 1)

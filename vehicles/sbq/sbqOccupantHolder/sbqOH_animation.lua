@@ -24,7 +24,7 @@ function sbq.updateAnims(dt)
 		if (not ended) or (state.animationState.mode == "loop") then
 			state.animationState.frame = math.floor( time * state.animationState.speed ) + 1
 		elseif ended and state.animationState.mode == "transition" then
-			sbq.doAnim(statename, state.animationState.transition)
+			sbq.doAnimData(statename, state.animationState.transition)
 		end
 	end
 
@@ -60,7 +60,7 @@ function sbq.doAnims( anims, force )
 	end
 end
 
-function sbq.doAnim(state, anim, force)
+function sbq.doAnimData(state, anim, force)
 	if not sbq.animStateData[state] then
 		sbq.logError("Attempt to call invalid Anim State: "..tostring(state))
 		return
@@ -84,16 +84,19 @@ function sbq.doAnim(state, anim, force)
 				return
 			end
 		end
-		sbq.animStateData[state].animationState = {
+		sbq.animStateData[state].animationState = sb.jsonMerge(sbq.animStateData[state].states[anim], {
 			anim = anim,
 			priority = newPriority,
-			cycle = sbq.animStateData[state].states[anim].cycle,
-			frames = sbq.animStateData[state].states[anim].frames,
-			mode = sbq.animStateData[state].states[anim].mode,
 			speed = sbq.animStateData[state].states[anim].frames / sbq.animStateData[state].states[anim].cycle,
 			frame = 1,
 			time = 0
-        }
-		world.sendEntityMessage(sbq.spawner, "sbqDoAnim", state, anim, force)
+        })
+		return true
+	end
+end
+
+function sbq.doAnim(...)
+	if sbq.doAnimData(...) then
+		world.sendEntityMessage(sbq.spawner, "sbqDoAnim", ...)
 	end
 end

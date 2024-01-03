@@ -545,17 +545,13 @@ function sbq.doAnim( state, anim, force)
 				return
 			end
 		end
-		sbq.animStateData[state].animationState = {
+		sbq.animStateData[state].animationState = sb.jsonMerge(sbq.animStateData[state].states[anim], {
 			anim = anim,
 			priority = newPriority,
-			cycle = sbq.animStateData[state].states[anim].cycle,
-			frames = sbq.animStateData[state].states[anim].frames,
-			mode = sbq.animStateData[state].states[anim].mode,
 			speed = sbq.animStateData[state].states[anim].frames / sbq.animStateData[state].states[anim].cycle,
-			transition = sbq.animStateData[state].states[anim].transition,
 			frame = 1,
 			time = 0
-		}
+        })
 		sbq.setPartTag("global", state.."Frame", 1 )
 		sbq.setPartTag("global", state.."Anim", sbq.animStateData[state].states[anim].animFrames or anim )
 
