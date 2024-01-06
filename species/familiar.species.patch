@@ -29,7 +29,32 @@
 		},
 		"animOverrideDefaultSettings": {
 			"visibleNavel" : false
+		},
+		"animationCustom" : {
+			"globalTagDefaults" : {
+				"legs_fg_mask" : "/humanoid/familiar/frontLegMask/malebody.png"
+			},
+			"animatedParts":{
+				"parts":{
+					"belly":{"properties":{
+						"offset" : [0,-0.125]
+					}},
+					"cock":{"properties":{
+						"offset" : [0,-0.125]
+					}},
+					"ballsFront":{"properties":{
+						"offset" : [0,-0.125]
+					}},
+					"ballsBack":{"properties":{
+						"offset" : [0,-0.125]
+					}},
+					"tail":{"properties":{
+						"offset" : [0,-0.125]
+					}}
+				}
+			}
 		}
+
 
 	}},
 	{
