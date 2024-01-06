@@ -1,6 +1,4 @@
 
-require("/scripts/speciesAnimOverride_validateIdentity.lua")
-
 function build( directory, config, parameters, level, seed )
 	parameters.originalColonyTags = parameters.originalColonyTags or config.colonyTags
 	parameters.colonyTags = parameters.originalColonyTags
@@ -96,8 +94,6 @@ function build( directory, config, parameters, level, seed )
 			parameters.tooltipKind = "filledcapturepod"
 			parameters.tooltipFields = parameters.tooltipFields or {}
 			parameters.tooltipFields.subtitle = (config.npcArgs.npcParam.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"
-
-			validateIdentity(parameters.npcArgs.npcParam.identity or {})
 
 			parameters.tooltipFields.objectImage = parameters.fullPortrait or
 				root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",

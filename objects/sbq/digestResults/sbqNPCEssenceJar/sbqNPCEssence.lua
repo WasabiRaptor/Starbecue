@@ -1,6 +1,4 @@
 
-require("/scripts/speciesAnimOverride_validateIdentity.lua")
-
 function build(directory, config, parameters, level, seed)
 	config = sb.jsonMerge(config, parameters)
 	if (config or {}).npcArgs ~= nil then
@@ -32,8 +30,6 @@ function build(directory, config, parameters, level, seed)
 
 		local success2, npcConfig = pcall(root.npcConfig, (config.npcArgs.npcType))
 		if speciesFile and success2 then
-			validateIdentity(config.npcArgs.npcParam.identity or {})
-
 			parameters.inventoryIcon = root.npcPortrait("bust", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
 				config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
 

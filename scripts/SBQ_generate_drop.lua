@@ -1,5 +1,4 @@
 require("/scripts/rect.lua")
-require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
 function sbq.generateItemDrop(pred, flavorText, itemDrop)
 	local itemDrop = itemDrop
@@ -37,7 +36,6 @@ function sbq.generateItemDrop(pred, flavorText, itemDrop)
 				}
 			}
 		}
-		validateIdentity(itemDrop.parameters.npcArgs.npcParam.identity)
 
 		if preyType == "npc" then
 			itemDrop.parameters.npcArgs.npcType = world.callScriptedEntity(entity.id(), "npc.npcType")

@@ -14,7 +14,6 @@ indexes = {
 mainTabField.subTabs = {}
 
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
-require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
 local cosmeticSlots = { "headCosmetic", "chestCosmetic", "legsCosmetic", "backCosmetic", "underchestCosmetic", "underlegsCosmetic" }
 local cosmeticItemType =  { "headarmor", "chestarmor", "legsarmor", "backarmor", "chestarmor", "legsarmor" }
@@ -672,8 +671,6 @@ end
 
 function sbq.generateNPCItemCard(tenant)
 	local npcConfig = root.npcConfig(tenant.type)
-
-	validateIdentity(tenant.overrides.identity or {})
 
 	local item = copy(sbq.config.npcCardTemplate)
 

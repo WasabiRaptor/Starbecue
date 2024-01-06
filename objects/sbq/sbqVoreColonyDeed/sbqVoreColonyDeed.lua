@@ -471,12 +471,8 @@ function die()
 	storage = {}
 end
 
-require("/scripts/speciesAnimOverride_validateIdentity.lua")
-
 function sbq.generateNPCItemCard(tenant)
 	local npcConfig = root.npcConfig(tenant.type)
-
-	validateIdentity(tenant.overrides.identity or {})
 
 	local item = copy(sbq.config.npcCardTemplate)
 
