@@ -1,66 +1,657 @@
-[
-	{"op":"merge", "path":"", "value": {
-		"globalTagDefaults" : {
-			"bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
-			"bellyColorRemap" : ""
+[{"op":"merge", "path":"", "value": {
+	"globalTagDefaults" : {
+		"colorRemap" : "",
+		"legs_fg_mask" : "/humanoid/animOverrideMasks/plantigrade/malebody.png",
+
+		"bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
+		"bellyColorRemap" : "",
+
+		"cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
+		"cockColorRemap" : "",
+		"ballsFrontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+		"ballsBackImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+		"ballsColorRemap" : "",
+
+		"breastsFrontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+		"breastsBackImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+		"breastsColorRemap" : "",
+
+		"pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
+		"pussyColorRemap" : "",
+
+		"bellyOccupants" : "0",
+		"bellyOccupantsInterpolate" : "0",
+
+		"wombOccupants" : "0",
+		"wombOccupantsInterpolate" : "0",
+		"pussyOccupants" : "0",
+		"pussyOccupantsInterpolate" : "0",
+
+		"shaftOccupants" : "0",
+		"shaftOccupantsInterpolate" : "0",
+		"ballsOccupants" : "0",
+		"ballsOccupantsInterpolate" : "0",
+		"ballsFrontOccupants" : "0",
+		"ballsFrontOccupantsInterpolate" : "0",
+		"ballsBackOccupants" : "0",
+		"ballsBackOccupantsInterpolate" : "0",
+		"bulgeOccupants" : "0",
+		"bulgeOccupantsInterpolate" : "0",
+
+		"breastsOccupants" : "0",
+		"breastsOccupantsInterpolate" : "0",
+		"breastsFrontOccupants" : "0",
+		"breastsFrontOccupantsInterpolate" : "0",
+		"breastsBackOccupants" : "0",
+		"breastsBackOccupantsInterpolate" : "0",
+
+		"tailOccupants" : "0",
+		"tailOccupantsInterpolate" : "0"
+	},
+	"animatedParts": {
+		"stateTypes": {
+			"bodyState" : {
+				"states" : {
+					"idle" : {"properties" : {
+						"bellyOffset" : {},
+						"chestOffset" : {},
+						"tailOffset" : {},
+						"crotchOffset" : {}
+					}},
+					"duck" : {"properties" : {
+						"bellyOffset" : {"translate" : [-0.25, 0.125]},
+						"chestOffset" : {"translate" : [0, 0.125]},
+						"tailOffset" : {"translate" : [-0.25, 0.25]},
+						"crotchOffset" : {"translate" : [-0.25, 0.25]}
+					}},
+					"sit" : {"properties" : {
+						"bellyOffset" : {"translate" : [-0.125, 0]},
+						"chestOffset" : {"translate" : [-0.125, 0]},
+						"tailOffset" : {"translate" : [-0.125, 0]},
+						"crotchOffset" : {"translate" : [-0.125, 0]}
+					}},
+					"lay" : {"properties" : {
+						"bellyOffset" : {},
+						"chestOffset" : {},
+						"tailOffset" : {},
+						"crotchOffset" : {}
+					}},
+					"walk" : {"properties" : {
+						"bellyOffset" : {},
+						"chestOffset" : {},
+						"tailOffset" : {},
+						"crotchOffset" : {}
+					}},
+					"run" : {"properties" : {
+						"bellyOffset" : {},
+						"chestOffset" : {},
+						"tailOffset" : {},
+						"crotchOffset" : {}
+					}},
+					"jump" : {"properties" : {
+						"bellyOffset" : {},
+						"chestOffset" : {},
+						"tailOffset" : {},
+						"crotchOffset" : {}
+					}},
+					"fall" : {"properties" : {
+						"bellyOffset" : {},
+						"chestOffset" : {},
+						"tailOffset" : {},
+						"crotchOffset" : {}
+					}},
+					"swim" : {"properties" : {
+						"bellyOffset" : {"translate" : [-0.125, 0]},
+						"chestOffset" : {},
+						"tailOffset" : {"translate" : [-0.125, 0.125]},
+						"crotchOffset" : {"translate" : [-0.125, 0.125]}
+					}},
+					"swimIdle" : {"properties" : {
+						"bellyOffset" : {"translate" : [-0.125, 0]},
+						"chestOffset" : {},
+						"tailOffset" : {"translate" : [-0.125, 0.125]},
+						"crotchOffset" : {"translate" : [-0.125, 0.125]}
+					}}
+				}
+			},
+			"bellyState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"bellyExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"cockState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"cockExpandState" : {
+				"priority" : 3,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"cockHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"ballsFrontState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"ballsFrontExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"ballsBackState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"ballsBackExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"ballsHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"breastsFrontState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breastsFrontExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breastsBackState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breastsBackExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breastsHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"pussyState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"pussyExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"pussyHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			}
+
 		},
-		"animatedParts": {
-			"stateTypes": {
-				"bellyState" : {
-					"default": "none",
-					"priority" : 1,
-					"states" : {
-						"s_back": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
-						"s_front": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
-						"s_up": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
-						"s_down": { "frames": 5, "cycle": 1, "mode": "end", "baseAnim" : "idle" },
-						"none": { "frames": 1, "cycle": 1, "mode": "end" }
-					}
+		"parts": {
+			"belly" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.5,
+					"transformationGroups": ["movementOffset", "bellyOffset"]
 				},
-				"bellyExpandState" : {
-					"priority" : 2,
-					"default": "none",
-					"states" : {
-						"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-						"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore",
-							"frameProperties" : {
-								//"immediateSound" : [ "", "", "/sfx/objects/gulp.ogg", "", "", "", "", "" ]
-							}
-						},
-						"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-						"none": { "frames": 1, "cycle": 1, "mode": "end" }
+				"partStates": {
+					"bellyState": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellyOccupants>-<bellyStateAnim>.<bellyStateFrame><bellyColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"expand": { "properties": { "image": "<bellyImage>:<bellyOccupantsInterpolate>-expand<bellyColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
 					}
 				}
 			},
-			"parts": {
-				"belly" : {
-					"properties": {
-						"centered": true,
-						"zLevel": 0.3,
-						"transformationGroups": []
+
+
+			"cock" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.2,
+					"transformationGroups": ["movementOffset", "crotchOffset"]
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<cockImage>:<shaftOccupants>-<cockStateAnim>.<cockStateFrame><cockColorRemap><bodyDirectives>" } },
+						"walk": { "properties": { "image": "<cockImage>:<shaftOccupants>-<bodyStateAnim>.<bodyStateFrame><cockColorRemap><bodyDirectives>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk"
 					},
-					"partStates": {
-						"bellyState": {
-							"idle": { "properties": { "image": "<bellyImage>:<bellyOccupants>-<bellyStateAnim>.<bellyStateFrame><colorRemap><bodyDirectives>" } },
-							"expand": { "properties": { "image": "<bellyImage>:<bellyOccupantsInterpolate>-<bellyStateAnim><colorRemap><bodyDirectives>" } },
-							"eat" : "expand",
+					"cockState": {
+						"s_front" : { "properties": { "image": "<cockImage>:<shaftOccupants>-<cockStateAnim>.<cockStateFrame><cockColorRemap><bodyDirectives>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
+						"none": { "properties": {} }
+					},
+					"cockExpandState" : {
+						"expand": { "properties": { "image": "<cockImage>:<shaftOccupantsInterpolate>-expand<cockColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"cockHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"ballsFront" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.11,
+					"transformationGroups": ["movementOffset", "crotchOffset"]
+				},
+				"partStates": {
+					"ballsFrontState": {
+						"idle": { "properties": { "image": "<ballsFrontImage>:<ballsFrontOccupants>-<ballsFrontStateAnim>.<ballsFrontStateFrame><ballsColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"ballsFrontExpandState" : {
+						"expand": { "properties": { "image": "<ballsFrontImage>:<ballsFrontOccupantsInterpolate>-expand<ballsColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"ballsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"ballsBack" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.1,
+					"transformationGroups": ["movementOffset", "crotchOffset"]
+				},
+				"partStates": {
+					"ballsBackState": {
+						"idle": { "properties": { "image": "<ballsBackImage>:<ballsBackOccupants>-<ballsBackStateAnim>.<ballsBackStateFrame><ballsColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"ballsBackExpandState" : {
+						"expand": { "properties": { "image": "<ballsBackImage>:<ballsBackOccupantsInterpolate>-expand<ballsColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"ballsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
 
-							"none": { "properties": {} }
-						},
-						"bellyExpandState" : {
+			"breastsFront" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.6,
+					"transformationGroups": ["movementOffset", "chestOffset"]
+				},
+				"partStates": {
+					"breastsFrontState": {
+						"idle": { "properties": { "image": "<breastsFrontImage>:<breastsFrontOccupants>-<breastsFrontStateAnim>.<breastsFrontStateFrame><breastsColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"breastsFrontExpandState" : {
+						"expand": { "properties": { "image": "<breastsFrontImage>:<breastsFrontOccupantsInterpolate>-expand<breastsColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"breastsBack" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.4,
+					"transformationGroups": ["movementOffset", "chestOffset"]
+				},
+				"partStates": {
+					"breastsBackState": {
+						"idle": { "properties": { "image": "<breastsBackImage>:<breastsBackOccupants>-<breastsBackStateAnim>.<breastsBackStateFrame><breastsColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"breastsBackExpandState" : {
+						"expand": { "properties": { "image": "<breastsBackImage>:<breastsBackOccupantsInterpolate>-expand<breastsColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
 
-						}
+			"pussy" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.01,
+					"transformationGroups": ["movementOffset", "crotchOffset"]
+				},
+				"partStates": {
+					"pussyState": {
+						"idle": { "properties": { "image": "<pussyImage>:<pussyOccupants>-<pussyStateAnim>.<pussyStateFrame><pussyColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"pussyExpandState" : {
+						"expand": { "properties": { "image": "<pussyImage>:<pussyOccupantsInterpolate>-expand<pussyColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"pussyHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+
+			"body_fg": {
+				"properties": {
+					"centered": true,
+					"zLevel": 2,
+					"transformationGroups": []
+
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle><bodyDirectives>" } },
+						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame><bodyDirectives>" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"legs_cosmetic_fg": {
+				"properties": {
+					"centered": true,
+					"zLevel": 2.1,
+					"transformationGroups": []
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<legsArmor>:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle><legsArmorDirectives>" } },
+						"duck": { "properties": { "image": "<legsArmor>:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame><legsArmorDirectives>" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<legsArmor>:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame><legsArmorDirectives>" } },
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"clothesHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
 					}
 				}
 			}
-		},
-		"transformationGroups": {
-
-		},
-		"sounds": {
-		},
-		"particleEmitters": {
 		}
+	},
+	"transformationGroups": {
+		"chestOffset": {"interpolated": false},
+		"bellyOffset": {"interpolated": false},
+		"crotchOffset": {"interpolated": false},
+		"tailOffset": {"interpolated": false}
+	},
+	"sounds": {
+	},
+	"particleEmitters": {
+	}
 
-	}}
-]
+}}]
