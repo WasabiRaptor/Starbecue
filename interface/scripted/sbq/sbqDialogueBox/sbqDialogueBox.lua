@@ -8,7 +8,15 @@ sbq = {
 	data = {
 		settings = { personality = "default", mood = "default" },
 		defaultPortrait = "/empty_image.png",
-		icons = {
+        icons = {
+			oralVore = "/items/active/sbqController/oralVore.png",
+            absorbVore = "/items/active/sbqController/absorbVore.png",
+			navelVore = "/items/active/sbqController/navelVore.png",
+			tailVore = "/items/active/sbqController/tailVore.png",
+			unbirth = "/items/active/sbqController/unbirth.png",
+			cockVore = "/items/active/sbqController/cockVore.png",
+			analVore = "/items/active/sbqController/analVore.png",
+			breastVore = "/items/active/sbqController/breastVore.png",
 			bellyInfusion = "/items/active/sbqController/bellyInfusion.png",
 			breastsInfusion = "/items/active/sbqController/breastsInfusion.png",
 			pussyInfusion = "/items/active/sbqController/pussyInfusion.png",
@@ -47,20 +55,11 @@ function init()
 	nameLabel:setText(sbq.name)
 
 	local species = (metagui.inputData.settings or {}).race or world.entitySpecies(pane.sourceEntity())
-	if species then
-		for i, voreType in ipairs(sbq.config.voreTypes) do
-			local icon =  "/items/active/sbqController/"..voreType..".png".. (metagui.inputData.iconDirectives or "")
-			local success, notEmpty = pcall(root.nonEmptyRegion, ("/humanoid/" .. species .. "/voreControllerIcons/" .. voreType .. ".png"))
-			if success and notEmpty ~= nil then
-				icon = "/humanoid/" .. species .. "/voreControllerIcons/" .. voreType .. ".png" ..  (metagui.inputData.iconDirectives or "")
-			end
-			sbq.data.icons[voreType] = icon
-		end
-	else
-		for i, voreType in ipairs(sbq.config.voreTypes) do
-			local icon =  "/items/active/sbqController/"..voreType..".png".. (metagui.inputData.iconDirectives or "")
-			sbq.data.icons[voreType] = icon
-		end
+    if species then
+		sbq.data.icons = sb.jsonMerge(sbq.data.icons, root.speciesConfig(species).voreIcons or {})
+    end
+	for voreType, icon in pairs(sbq.data.icons) do
+		sbq.data.icons[voreType] = icon..(metagui.inputData.iconDirectives or "")
 	end
 
 	sbq.data = sb.jsonMerge(sbq.data, metagui.inputData)

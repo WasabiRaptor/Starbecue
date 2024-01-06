@@ -418,16 +418,10 @@ function setIconAndDescription()
 end
 
 function returnVoreIcon(action)
-	local icon
 	sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
 	if sbq.sbqCurrentData.species == "sbqOccupantHolder" or not sbq.sbqCurrentData.species then
-		local species = player.species()
-		local success, notEmpty = pcall(root.nonEmptyRegion, ("/humanoid/"..species.."/voreControllerIcons/"..action..".png"))
-		if success and notEmpty ~= nil then
-			icon = "/humanoid/"..species.."/voreControllerIcons/"..action..".png"
-		end
+        return (root.speciesConfig(humanoid.species()).voreIcons or {})[action]
 	end
-	return icon
 end
 
 function getDirectives()
