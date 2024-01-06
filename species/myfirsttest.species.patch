@@ -1,0 +1,44 @@
+[
+	{"op":"merge", "path":"", "value": {
+		"colorRemapGlobalTags" : {
+			"bellyColorRemap" : [
+					{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+					{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+					["primary","primary"]
+				],
+			"cockColorRemap" : [
+					["primary","primary"]
+				],
+			"pussyColorRemap" : [
+					["flesh","primary"]
+				],
+			"ballsColorRemap" : [
+					["primary","primary"]
+				],
+			"breastsColorRemap" : [
+					["primary","primary"],
+					["flesh","flesh", {"nipples":true}],
+					["flesh","primary", {"nipples":false}]
+				]
+		},
+		"baseColorMap" : {
+			"primary" : ["c7815b", "d39c6c", "ffc181", "ffe2c5"],
+			"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
+			"hair" : ["735e3a", "a38d59", "d9c189"],
+			"flesh" : ["702c55", "8b3c6c", "a94783"]
+		},
+		"animOverrideDefaultSettings": {
+			"visibleNavel" : true
+		}
+	}},
+	{
+		"op" : "replace",
+		"path" : "/charCreationTooltip/title",
+		"value" : "Latex"
+	},
+	{
+		"op" : "replace",
+		"path" : "/charCreationTooltip/subTitle",
+		"value" : "C5H8"
+	}
+]

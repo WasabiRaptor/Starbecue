@@ -151,6 +151,44 @@
 	],
 	"hairColor" : [
 		{ "d9c189" : "E86D46" }
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","primary"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","primary"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			]
+	},
+	"infusedParts" :{
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","primary"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			]
+	}
 
 }

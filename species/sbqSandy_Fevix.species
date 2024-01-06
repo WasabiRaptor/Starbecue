@@ -143,6 +143,40 @@
 	],
 	"hairColor" : [
 		{ "d9c189" : "E86D46" }
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"belly" : {
+			"imagePath" : "any/sbqVoreParts/quadruped",
+			"remapColors" : [
+				["primary","secondary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","secondary"]
+			]
+		}
+	},
+	"infusedParts" :{
+		"cockColorRemap" : [
+				["primary","primary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","primary"]
+			],
+		"ballsColorRemap" : [
+				["primary","secondary"]
+			],
+		"breastsColorRemap" : [
+				["primary","secondary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","secondary", {"nipples":false}]
+			]
+	}
 
 }

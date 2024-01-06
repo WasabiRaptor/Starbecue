@@ -1,0 +1,35 @@
+[{"op":"merge", "path":"", "value": {
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","tertiary"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","tertiary"]
+			],
+		"breastsColorRemap" : [
+				["primary","secondary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","secondary", {"nipples":false}]
+			]
+	},
+	"baseColorMap" : {
+		"primary" : ["735e3a", "a38d59", "d9c189"],
+		"tertiary" : ["2e2e2e", "3c3c3c", "4e4e4e"],
+		"secondary" : ["191919", "1c1c1c", "272727", "393939"],
+		"hair" : ["735e3a", "a38d59", "d9c189"],
+		"flesh" : ["702c55", "8b3c6c", "a94783"]
+
+	},
+	"animOverrideDefaultSettings": {
+		"visibleNavel" : false
+	}
+
+}}]

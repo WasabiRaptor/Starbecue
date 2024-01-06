@@ -239,6 +239,42 @@
 			"1c421e":"323A55","265529":"343E5D","2d6231":"3A4565", // secondary /  bluish black leaves
 			"131c10":"323A55","1a2617":"343E5D","23311f":"3A4565" // tertiary / bluish black legs
 		}
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","primary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			]
+	},
+	"infusedParts" :{
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","primary"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			]
+	}
+
 
 }

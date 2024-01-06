@@ -138,6 +138,37 @@
 	],
 	"hairColor" : [
 		""
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				["primary","primary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","primary"]
+			]
+	},
+	"infusedParts" :{
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","primary"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			]
+	}
 
 }

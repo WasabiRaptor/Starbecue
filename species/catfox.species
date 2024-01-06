@@ -256,5 +256,27 @@
 		{ "d9c189" : "b8b8b8", "a38d59" : "828282", "735e3a" : "555555" },
 		// WHITE
 		{ "d9c189" : "eaeaea", "a38d59" : "b8b8b8", "735e3a" : "828282" }
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","secondary"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","secondary"]
+			],
+		"breastsColorRemap" : [
+				["primary","secondary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","secondary", {"nipples":false}]
+			]
+	}
 }

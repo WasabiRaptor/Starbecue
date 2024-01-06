@@ -153,6 +153,51 @@
 	],
 	"hairColor" : [
 		{ "d9c189" : "E86D46" }
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","tertiary"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","tertiary"]
+			],
+		"breastsColorRemap" : [
+				["primary","tertiary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","tertiary", {"nipples":false}]
+			],
+		"tail" :  {
+			"species" : "sbqAuri_LokiVulpix",
+			"remapColors" : [
+				["tertiary","hair"],
+				["secondary","secondary"]
+			]
+		}
+	},
+	"infusedParts" :{
+		"cockColorRemap" : [
+				["primary","primary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","primary"]
+			],
+		"ballsColorRemap" : [
+				["primary","secondary"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			]
+	}
 
 }

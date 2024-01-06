@@ -230,5 +230,37 @@
 		{ // black underbelly
 			"beab5a":"292726","dcc97d":"3c3632","f8e8a1":"443c36"
 		}
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap": [
+				["primary","tertiary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","tertiary"]
+			]
+	},
+	"infusedParts" :{
+		"cockColorRemap" : [
+				["primary","primary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","secondary"]
+			],
+		"breastsColorRemap" : [
+				["primary","secondary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","secondary", {"nipples":false}]
+			]
+	}
+
 }

@@ -210,5 +210,23 @@
 		"786c31":"2a2a2a", "b1a14e":"393939", "dcca6b":"555555", "f2eab4":"777777", "fdf9e3":"8f8f8f",
 		"a34c9a":"2a2a2a", "cc72c3":"393939", "ef99e7":"555555", "ffcfe9":"777777", "fae2ef":"8f8f8f"
 		} // gray
-	]
+	],
+
+	"colorRemapGlobalTags" : {
+		"belly" : {
+			"imagePath" : "any/sbqVoreParts/quadruped",
+			"remapColors" : [
+				["primary","tertiary"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","tertiary"]
+			]
+		}
+	}
 }
