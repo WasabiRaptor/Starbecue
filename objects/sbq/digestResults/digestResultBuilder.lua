@@ -90,9 +90,9 @@ function build( directory, config, parameters, level, seed )
 		end
 	end
 
-	if (config or {}).npcArgs ~= nil then
-		local success, speciesFile = pcall(root.assetJson, ("/species/" .. config.npcArgs.npcSpecies .. ".species"))
-		if success then
+    if (config or {}).npcArgs ~= nil then
+		local speciesFile = root.speciesConfig(config.npcArgs.npcSpecies)
+		if speciesFile then
 			parameters.tooltipKind = "filledcapturepod"
 			parameters.tooltipFields = parameters.tooltipFields or {}
 			parameters.tooltipFields.subtitle = (config.npcArgs.npcParam.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"

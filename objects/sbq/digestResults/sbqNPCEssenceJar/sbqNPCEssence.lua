@@ -9,7 +9,7 @@ function build(directory, config, parameters, level, seed)
 		parameters.tooltipFields.subtitle = (config.npcArgs.npcParam.wasPlayer and "Player") or config.npcArgs.npcType or "generictenant"
 		parameters.tooltipFields.noCollarLabel = ""
 
-		local success, speciesFile = pcall(root.assetJson, ("/species/"..(config.npcArgs.npcSpecies or "")..".species"))
+		local speciesFile = root.speciesConfig(config.npcArgs.npcSpecies)
 
 		local colorRemap = "?replace"
 		config.baseColorMap = config.baseColorMap or {
@@ -18,7 +18,7 @@ function build(directory, config, parameters, level, seed)
 		}
 
 		for colorName, from in pairs(config.baseColorMap) do
-			local to = ((success and speciesFile) or config.speciesFile).baseColorMap[colorName] or from
+			local to = ((speciesFile) or config.speciesFile).baseColorMap[colorName] or from
 			if from and to then
 				for i, color in ipairs(from or {}) do
 					colorRemap = colorRemap .. ";" .. color .. "=" .. (to[i] or to[#to])
@@ -31,7 +31,7 @@ function build(directory, config, parameters, level, seed)
 					(((config.npcArgs.npcParam or {}).identity or {}).hairDirectives or ""))
 
 		local success2, npcConfig = pcall(root.npcConfig, (config.npcArgs.npcType))
-		if success and success2 then
+		if speciesFile and success2 then
 			validateIdentity(config.npcArgs.npcParam.identity or {})
 
 			parameters.inventoryIcon = root.npcPortrait("bust", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
@@ -44,7 +44,7 @@ function build(directory, config, parameters, level, seed)
 			parameters.tooltipFields.objectImage = config.fullPortrait or
 			root.npcPortrait("full", config.npcArgs.npcSpecies, config.npcArgs.npcType or "generictenant",
 					config.npcArgs.npcLevel or 1, config.npcArgs.npcSeed, sb.jsonMerge(config.npcArgs.npcParam, parameters.portraitNpcParam or {}))
-		elseif config.speciesFile or (success and speciesFile) then
+		elseif config.speciesFile or (speciesFile) then
 
 			parameters.inventoryIcon = (config.useIcon or "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJarCombo.png")..parameters.directives
 
