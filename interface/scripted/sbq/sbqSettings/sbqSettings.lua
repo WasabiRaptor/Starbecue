@@ -574,8 +574,8 @@ if speciesLayout ~= nil then
 		speciesStylePanel:setVisible(hidePanels)
 		speciesManualColorPanel:setVisible(hidePanels)
 
-		local success, speciesFile = pcall(root.assetJson, ("/species/"..selectedSpecies..".species"))
-		if success then
+		local speciesFile = root.speciesConfig(selectedSpecies)
+		if speciesFile then
 			sbq.speciesFile = speciesFile
 			speciesText:setText(selectedSpecies)
 
