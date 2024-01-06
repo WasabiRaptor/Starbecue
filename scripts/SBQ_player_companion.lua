@@ -227,51 +227,6 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqDigestDrop", function(_,_, itemDrop)
-		local itemDrop = itemDrop
-		local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
-		local identity = overrideData.identity or {}
-		local species = player.species()
-		local speciesFile = root.assetJson("/species/"..species..".species")
-		itemDrop.parameters.predSpecies = species
-		itemDrop.parameters.predDirectives = (overrideData.directives or "")..(identity.bodyDirectives or "")..(identity.hairDirectives or "")
-		itemDrop.parameters.predColorMap = speciesFile.baseColorMap
-		if itemDrop.parameters.predDirectives == "" then
-			local portrait = world.entityPortrait(entity.id(), "full")
-			local hairGroup
-			local gotBody
-			local gotHair
-			for i, data in ipairs(speciesFile.genders or {}) do
-				if data.name == world.entityGender(entity.id()) then
-					hairGroup = data.hairGroup or "hair"
-				end
-			end
-			for _, part in ipairs(portrait) do
-				local imageString = part.image
-				if not gotBody then
-					local found1, found2 = imageString:find("body.png:idle.")
-					if found1 ~= nil then
-						local found3 = imageString:find("?")
-						gotBody = imageString:sub(found3)
-					end
-				end
-				if not gotHair then
-					local found1, found2 = imageString:find("/"..(hairGroup or "hair").."/")
-					if found1 ~= nil then
-						local found3, found4 = imageString:find(".png:normal")
-
-						local found5, found6 = imageString:find("?addmask=")
-						gotHair = imageString:sub(found4+1, (found5 or 0)-1) -- this is really elegant haha
-					end
-				end
-				if gotHair and gotBody then break end
-			end
-			itemDrop.parameters.predDirectives = gotBody..gotHair
-		end
-
-		player.giveItem(itemDrop)
-	end)
-
 	message.setHandler("sbqGiveItem", function(_,_, item)
 		player.giveItem(item)
 	end)
@@ -289,16 +244,9 @@ function init()
 
 	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_)
 		sbq.getSpeciesConfig(player.species(), (player.getProperty("sbqSettings") or {}).global)
-
-		local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
 		status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
-
-		local effects = status.getPersistentEffects("speciesAnimOverride")
-		if not effects[1] then
-			status.setPersistentEffects("speciesAnimOverride", {  speciesAnimOverrideData.customAnimStatus or "speciesAnimOverride" })
-		end
 		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
-		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1, status.statusProperty("animOverridesGlobalScaleYOffset") or 0}
+		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1}
 	end)
 
 	message.setHandler("sbqUnlockedSpecies", function ()

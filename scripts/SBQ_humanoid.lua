@@ -22,7 +22,18 @@ function init()
     end)
 	message.setHandler("sbqGetIdentity", function (_,_)
 		return humanoid.getIdentity()
+    end)
+	message.setHandler("sbqDigestDrop", function(_, _, itemDrop)
+		local itemDrop = itemDrop
+		local identity = humanoid.getIdentity()
+		local species = humanoid.species()
+		local speciesFile = root.speciesConfig(species)
+		itemDrop.parameters.predSpecies = species
+		itemDrop.parameters.predDirectives = (identity.bodyDirectives or "") .. (identity.hairDirectives or "")
+		itemDrop.parameters.predColorMap = speciesFile.baseColorMap
+		world.spawnItem(itemDrop, mcontroller.position())
 	end)
+
 end
 
 

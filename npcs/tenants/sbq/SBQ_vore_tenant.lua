@@ -474,11 +474,6 @@ function sbq.setSpeciesConfig(species)
 	sbq.sbqData = sbq.predatorConfig
 	sbq.initLocationSizes()
 	status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
-	local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
-	local effects = status.getPersistentEffects("speciesAnimOverride")
-	if not effects[1] then
-		status.setPersistentEffects("speciesAnimOverride", { speciesAnimOverrideData.customAnimStatus or "speciesAnimOverride" })
-	end
 	status.clearPersistentEffects("digestImmunity")
 	status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
 end
@@ -542,7 +537,7 @@ function uninit()
 end
 
 function sbq.getDialogueBoxData()
-	local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
+	local overrideData = humanoid.getIdentity()
 	local dialogueBoxData = {
 		speciesConfig = sbq.speciesConfig,
 		dialogueBoxScripts = sbq.dialogueBoxScripts,

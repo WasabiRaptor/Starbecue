@@ -427,8 +427,7 @@ end
 function getDirectives()
 	sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
 	if sbq.sbqCurrentData.species == "sbqOccupantHolder" or not sbq.sbqCurrentData.species then
-		local overrideData = status.statusProperty("speciesAnimOverrideData") or {}
-		storage.directives = overrideData.directives
+		storage.directives = humanoid.getIdentity().bodyDirectives
 	end
 end
 

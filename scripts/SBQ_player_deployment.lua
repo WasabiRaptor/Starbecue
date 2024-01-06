@@ -31,9 +31,6 @@ function init()
 				for i, effect in ipairs(root.assetJson("/sbqGeneral.config").predStatusEffects) do
 					status.removeEphemeralEffect(effect)
 				end
-				if species == "sbqOccupantHolder" and occupants == 0 and not (status.statusProperty("speciesAnimOverrideData") or {}).permanent then
-					status.clearPersistentEffects("speciesAnimOverride")
-				end
 			end
 
 			player.setProperty( "sbqCurrentData", nil)

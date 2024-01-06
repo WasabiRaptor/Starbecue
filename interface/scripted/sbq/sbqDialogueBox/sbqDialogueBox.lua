@@ -29,21 +29,6 @@ sbq = {
 dialogueBoxScripts = {}
 optionCheckScripts = {}
 
-speciesOverride = {}
-
-function speciesOverride._species()
-	return (status.statusProperty("speciesAnimOverrideData") or {}).species or speciesOverride.species()
-end
-
-function speciesOverride._gender()
-	return (status.statusProperty("speciesAnimOverrideData") or {}).gender or speciesOverride.gender()
-end
-speciesOverride.species = player.species
-player.species = speciesOverride._species
-
-speciesOverride.gender = player.gender
-player.gender = speciesOverride._gender
-
 require("/scripts/SBQ_RPC_handling.lua")
 require("/lib/stardust/json.lua")
 require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")

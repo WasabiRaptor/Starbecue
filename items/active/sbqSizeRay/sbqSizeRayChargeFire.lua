@@ -34,7 +34,6 @@ function ChargeFire:fireProjectile()
 
 	local params = copy(self.chargeLevel.projectileParameters or {})
 	if sizeRayHoldingShift then
-		world.sendEntityMessage(entity.id(), "applySpeciesAnimOverride")
 		world.sendEntityMessage(entity.id(), "animOverrideScale", params.animOverrideScale, params.animOverrideScaleDuration)
 		return
 	end

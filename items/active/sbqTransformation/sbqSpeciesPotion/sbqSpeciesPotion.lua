@@ -5,9 +5,7 @@ end
 
 function update(dt, fireMode, shiftHeld)
 	if fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-		local data = {}
-		local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
-		data.species = speciesAnimOverrideData.species or world.entitySpecies(entity.id())
+		data.species = humanoid.species()
 		data.potionPath = "/items/active/sbqTransformation/sbqSpeciesPotion/"
 		data.rarity = "rare"
 		player.giveItem({name = "sbqMysteriousPotion", parameters = data})
@@ -16,9 +14,5 @@ function update(dt, fireMode, shiftHeld)
 end
 
 function dartGunData()
-	local data = {}
-	local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
-	data.species = speciesAnimOverrideData.species or world.entitySpecies(entity.id())
-
-	return { funcName = "transform", data = data}
+	return { funcName = "transform", data = {species= humanoid.species()}}
 end
