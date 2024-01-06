@@ -103,11 +103,6 @@ function init()
 		status.setStatusProperty("sbqPreyList", preyList)
 	end)
 
-	message.setHandler("sbqGetSpeciesOverrideData", function (_,_)
-		local data = { species = world.entitySpecies(entity.id()), gender = world.entityGender(entity.id())}
-		return sb.jsonMerge(data, status.statusProperty("speciesAnimOverrideData") or {})
-	end)
-
 	message.setHandler("sbqApplyDigestEffects", function(_, _, effects, data, sourceEntityId)
 		status.setStatusProperty("sbqDigestData", data)
 		for i, effect in ipairs(effects) do

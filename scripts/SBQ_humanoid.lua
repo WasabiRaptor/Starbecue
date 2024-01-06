@@ -19,6 +19,9 @@ function init()
 	end)
 	message.setHandler("sbqEndMysteriousPotionTF", function (_,_)
 		sbq.endMysteriousTF()
+    end)
+	message.setHandler("sbqGetIdentity", function (_,_)
+		return humanoid.getIdentity()
 	end)
 end
 

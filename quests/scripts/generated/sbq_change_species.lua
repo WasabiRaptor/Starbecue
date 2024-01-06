@@ -17,7 +17,7 @@ end
 function pollSpecies()
   -- Must use a message to get the info we want
   if self.promise == nil then
-    self.promise = world.sendEntityMessage(quest.parameters().questGiver.uniqueId, "sbqGetSpeciesOverrideData")
+    self.promise = world.sendEntityMessage(quest.parameters().questGiver.uniqueId, "sbqGetIdentity")
   else
     if self.promise:finished() then
       if self.promise:succeeded() then
