@@ -1346,59 +1346,38 @@ function sbq.setRelevantPredSettings()
 		npc.setItemSlot(slot, storage.settings[slot] or storage.originalCosmeticSlots[slot])
 	end
 
-	local speciesAnimOverrideData = status.statusProperty("speciesAnimOverrideData") or {}
 
-	if storage.settings.breasts or storage.settings.penis or storage.settings.balls or storage.settings.pussy
-		or storage.settings.bra or storage.settings.underwear
-		or speciesAnimOverrideData.species ~= speciesOverride.species()
-		or speciesAnimOverrideData.gender ~= speciesOverride.gender()
-	then
-		local effects = status.getPersistentEffects("speciesAnimOverride")
-		if not effects[1] then
-			status.setPersistentEffects("speciesAnimOverride", { speciesAnimOverrideData.customAnimStatus or "speciesAnimOverride" })
+	sbq.timer("setOverrideSettings", 0, function()
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "cock", storage.settings.shaftInfusedVisual and storage.settings.shaftInfusedItem)
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "breastsCover", storage.settings.breastsInfusedVisual and storage.settings.breastsInfusedItem)
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "breastsFront", storage.settings.breastsInfusedVisual and storage.settings.breastsInfusedItem)
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "breastsBack", storage.settings.breastsInfusedVisual and storage.settings.breastsInfusedItem)
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "ballsFront", storage.settings.ballsInfusedVisual and storage.settings.ballsInfusedItem)
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "ballsBack", storage.settings.ballsInfusedVisual and storage.settings.ballsInfusedItem)
+		world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "pussy", storage.settings.wombInfusedVisual and storage.settings.wombInfusedItem)
+
+		if storage.settings.penis and sbq.predatorConfig.locations.shaft and ((not sbq.predatorConfig.locations.shaft.requiresInfusion) or (sbq.predatorConfig.locations.shaft.requiresInfusion and storage.settings.shaftInfusedItem ~= nil)) then
+			animator.setAnimationState("cockHiddenState", (storage.settings.underwear and "none") or "ignore")
+		else
+			animator.setAnimationState("cockHiddenState", "none")
 		end
-		sbq.timer("setOverrideSettings", 0.5, function()
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "cock", storage.settings.shaftInfusedVisual and storage.settings.shaftInfusedItem)
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "breastsCover", storage.settings.breastsInfusedVisual and storage.settings.breastsInfusedItem)
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "breastsFront", storage.settings.breastsInfusedVisual and storage.settings.breastsInfusedItem)
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "breastsBack", storage.settings.breastsInfusedVisual and storage.settings.breastsInfusedItem)
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "ballsFront", storage.settings.ballsInfusedVisual and storage.settings.ballsInfusedItem)
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "ballsBack", storage.settings.ballsInfusedVisual and storage.settings.ballsInfusedItem)
-			world.sendEntityMessage(entity.id(), "sbqSetInfusedPartColors", "pussy", storage.settings.wombInfusedVisual and storage.settings.wombInfusedItem)
-
-			if storage.settings.penis and sbq.predatorConfig.locations.shaft and ((not sbq.predatorConfig.locations.shaft.requiresInfusion) or (sbq.predatorConfig.locations.shaft.requiresInfusion and storage.settings.shaftInfusedItem ~= nil)) then
-				if storage.settings.underwear then
-					sbq.setStatusValue( "cockVisible", "?crop;0;0;0;0")
-				else
-					sbq.setStatusValue( "cockVisible", "")
-				end
-			else
-				sbq.setStatusValue( "cockVisible", "?crop;0;0;0;0")
-			end
-			if storage.settings.balls and sbq.predatorConfig.locations.balls and ((not sbq.predatorConfig.locations.balls.requiresInfusion) or (sbq.predatorConfig.locations.balls.requiresInfusion and storage.settings.ballsInfusedItem ~= nil)) then
-				if storage.settings.underwear then
-					sbq.setStatusValue( "ballsVisible", "?crop;0;0;0;0")
-				else
-					sbq.setStatusValue( "ballsVisible", "")
-				end
-			else
-				sbq.setStatusValue( "ballsVisible", "?crop;0;0;0;0")
-			end
-			if storage.settings.breasts and sbq.predatorConfig.locations.breasts and ((not sbq.predatorConfig.locations.breasts.requiresInfusion) or (sbq.predatorConfig.locations.breasts.requiresInfusion and storage.settings.breastsInfusedItem ~= nil)) then
-				sbq.setStatusValue( "breastsVisible", "")
-			else
-				sbq.setStatusValue( "breastsVisible", "?crop;0;0;0;0")
-			end
-			if storage.settings.pussy and sbq.predatorConfig.locations.pussy and ((not sbq.predatorConfig.locations.womb.requiresInfusion) or (sbq.predatorConfig.locations.womb.requiresInfusion and storage.settings.wombInfusedItem ~= nil)) then
-				sbq.setStatusValue( "pussyVisible", "")
-			else
-				sbq.setStatusValue( "pussyVisible", "?crop;0;0;0;0")
-			end
-			sbq.handleUnderwear()
-		end)
-	elseif (not sbq.occupantHolder and not speciesAnimOverrideData.permanent) and (status.statusProperty("animOverrideScale") or 1) == 1 then
-		status.clearPersistentEffects("speciesAnimOverride")
-	end
+		if storage.settings.balls and sbq.predatorConfig.locations.balls and ((not sbq.predatorConfig.locations.balls.requiresInfusion) or (sbq.predatorConfig.locations.balls.requiresInfusion and storage.settings.ballsInfusedItem ~= nil)) then
+			animator.setAnimationState("ballsHiddenState", (storage.settings.underwear and "none") or "ignore")
+		else
+			animator.setAnimationState("ballsHiddenState", "none")
+		end
+		if storage.settings.breasts and sbq.predatorConfig.locations.breasts and ((not sbq.predatorConfig.locations.breasts.requiresInfusion) or (sbq.predatorConfig.locations.breasts.requiresInfusion and storage.settings.breastsInfusedItem ~= nil)) then
+			animator.setAnimationState("breastsHiddenState", "ignore")
+		else
+			animator.setAnimationState("breastsHiddenState", "none")
+		end
+		if storage.settings.pussy and sbq.predatorConfig.locations.pussy and ((not sbq.predatorConfig.locations.womb.requiresInfusion) or (sbq.predatorConfig.locations.womb.requiresInfusion and storage.settings.wombInfusedItem ~= nil)) then
+			animator.setAnimationState("pussyHiddenState", "ignore")
+		else
+			animator.setAnimationState("pussyHiddenState", "none")
+		end
+		sbq.handleUnderwear()
+	end)
 
 	status.setStatusProperty("sbqSettings", storage.settings)
 

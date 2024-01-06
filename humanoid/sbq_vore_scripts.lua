@@ -155,39 +155,31 @@ function sbq.handleBodyParts()
 	world.sendEntityMessage(sbq.driver, "sbqSetInfusedPartColors", "pussy",
 	sbq.settings.wombInfusedVisual and sbq.settings.wombInfusedItem)
 	if sbq.settings.penis and ((not defaultSbqData.locations.shaft.requiresInfusion) or (defaultSbqData.locations.shaft.requiresInfusion and sbq.settings.shaftInfusedItem ~= nil)) then
-		if sbq.settings.underwear then
-			sbq.setStatusValue("cockVisible", "?crop;0;0;0;0")
-		else
-			sbq.setStatusValue("cockVisible", "")
-		end
+		sbq.doAnim("cockHiddenState", (sbq.settings.underwear and "none") or "ignore")
 		sbq.sbqData.locations.shaft.max = defaultSbqData.locations.shaft.max
 	else
-		sbq.setStatusValue("cockVisible", "?crop;0;0;0;0")
+		sbq.doAnim("cockHiddenState", "none")
 		sbq.sbqData.locations.shaft.max = 0
 	end
 	if sbq.settings.balls and ((not defaultSbqData.locations.balls.requiresInfusion) or (defaultSbqData.locations.balls.requiresInfusion and sbq.settings.ballsInfusedItem ~= nil)) then
-		if sbq.settings.underwear then
-			sbq.setStatusValue("ballsVisible", "?crop;0;0;0;0")
-		else
-			sbq.setStatusValue("ballsVisible", "")
-		end
+		sbq.doAnim("ballsHiddenState", (sbq.settings.underwear and "none") or "ignore")
 		sbq.sbqData.locations.balls.max = defaultSbqData.locations.balls.max
 		sbq.sbqData.locations.ballsL.max = defaultSbqData.locations.balls.max
 		sbq.sbqData.locations.ballsR.max = defaultSbqData.locations.balls.max
 	else
-		sbq.setStatusValue("ballsVisible", "?crop;0;0;0;0")
+		sbq.doAnim("ballsHiddenState", "none")
 		sbq.sbqData.locations.balls.max = 0
 		sbq.sbqData.locations.ballsL.max = 0
 		sbq.sbqData.locations.ballsR.max = 0
 	end
 	if sbq.sbqData.locations.breasts then
 		if sbq.settings.breasts and ((not defaultSbqData.locations.breasts.requiresInfusion) or (defaultSbqData.locations.breasts.requiresInfusion and sbq.settings.breastsInfusedItem ~= nil)) then
-			sbq.setStatusValue("breastsVisible", "")
+			sbq.doAnim("breastsHiddenState", "ignore")
 			sbq.sbqData.locations.breasts.max = defaultSbqData.locations.breasts.max
 			sbq.sbqData.locations.breastsL.max = defaultSbqData.locations.breasts.max
 			sbq.sbqData.locations.breastsR.max = defaultSbqData.locations.breasts.max
 		else
-			sbq.setStatusValue("breastsVisible", "?crop;0;0;0;0")
+			sbq.doAnim("breastsHiddenState", "none")
 			sbq.sbqData.locations.breasts.max = 0
 			sbq.sbqData.locations.breastsL.max = 0
 			sbq.sbqData.locations.breastsR.max = 0
@@ -195,10 +187,10 @@ function sbq.handleBodyParts()
 		world.sendEntityMessage(sbq.driver, "setBoobMask", sbq.settings.breasts)
 	end
 	if sbq.settings.pussy and ((not defaultSbqData.locations.womb.requiresInfusion) or (defaultSbqData.locations.womb.requiresInfusion and sbq.settings.wombInfusedItem ~= nil)) then
-		sbq.setStatusValue("pussyVisible", "")
+		sbq.doAnim("pussyHiddenState", "ignore")
 		sbq.sbqData.locations.womb.max = defaultSbqData.locations.womb.max
 	else
-		sbq.setStatusValue("pussyVisible", "?crop;0;0;0;0")
+		sbq.doAnim("pussyHiddenState", "none")
 		sbq.sbqData.locations.womb.max = 0
 	end
 end
