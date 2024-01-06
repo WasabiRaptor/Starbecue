@@ -31,29 +31,42 @@ function sbq.changeSelectedFromList(list, label, indexName, inc )
 end
 
 sbq.validTenantCatalogueList = {}
-for name, tenant in pairs(sbq.tenantCatalogue) do
-	local tenant = tenant
-	if type(tenant) == "table" then
-		tenant = tenant[1]
+
+function sbq.populateCatalogueList(name, tenantName)
+	local tenantName = tenantName
+	if type(tenantName) == "table" then
+		tenantName = tenantName[1]
 	end
-	local data = root.tenantConfig(tenant).checkRequirements or {}
-	local addToList = true
-	if addToList and data.checkItems then
-		for i, item in ipairs(data.checkItems) do
-			addToList = root.itemConfig(item)
-			if not addToList then break end
+	local tenantConfig = root.tenantConfig(tenantName)
+	local data = tenantConfig.checkRequirements or {}
+	for i, tenant in ipairs(tenantConfig.tenants) do
+		if tenant.spawn == "npc" then
+			for _, species in ipairs(tenant.species) do
+				if not root.speciesConfig(species) then return end
+			end
 		end
 	end
-	if addToList and data.checkJson then
-		addToList, json = pcall(root.assetJson, data.checkJson)
+	if data.checkItems then
+		for i, item in ipairs(data.checkItems) do
+			if not root.itemConfig(item) then return end
+		end
+    end
+	if data.checkMods then
+		for i, mod in ipairs(data.checkMods) do
+			if not root.modMetadata(mod) then return end
+		end
+    end
+	if data.checkAssets then
+		for i, path in ipairs(data.checkAssets) do
+			if not root.assetExists(path) then return end
+		end
 	end
-	if addToList and data.checkImage then
-		success, notEmpty = pcall(root.nonEmptyRegion, data.checkImage)
-		addToList = (success and notEmpty ~= nil)
-	end
-	if addToList then
-		table.insert(sbq.validTenantCatalogueList, name)
-	end
+
+	table.insert(sbq.validTenantCatalogueList, name)
+end
+
+for name, tenantName in pairs(sbq.tenantCatalogue) do
+	sbq.populateCatalogueList(name, tenantName)
 end
 table.sort(sbq.validTenantCatalogueList)
 

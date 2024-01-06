@@ -1184,8 +1184,8 @@ local function getAllValidSpecies()
   for _, npcData in pairs(allRandomNPCs) do
     local species = npcData.npc
     local requirements = npcData.checkRequirements or {}
-    local addToList = true
-    -- Use this NPC type to filter out the OCs
+    local addToList = root.speciesConfig(species)
+    -- Use this NPC type to filter out the OCs and species not installed
     if npcData.npcTypeName ~= "sbqVoreVillager" then
       addToList = false
     end
@@ -1196,13 +1196,20 @@ local function getAllValidSpecies()
         if not addToList then break end
       end
     end
-    if addToList and requirements.checkJson then
-      addToList, json = pcall(root.assetJson, requirements.checkJson)
+    if addToList and requirements.checkMods then
+      for i, mod in ipairs(requirements.checkMods) do
+        addToList = root.modMetadata(mod)
+        if not addToList then break end
+      end
     end
-    if addToList and requirements.checkImage then
-      success, notEmpty = pcall(root.nonEmptyRegion, requirements.checkImage)
-      addToList = (success and notEmpty ~= nil)
+    if addToList and requirements.checkAssets then
+      for i, path in ipairs(requirements.checkAssets) do
+        addToList = root.assetExists(path)
+        if not addToList then break end
+      end
     end
+
+
     if addToList then
       validSpecies[species] = species
     end

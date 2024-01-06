@@ -44,13 +44,16 @@ function checkRequirements(data)
 		for i, item in ipairs(data.checkItems) do
 			if not root.itemConfig(item) then return end
 		end
-	end
-	if data.checkJson then
-		if not pcall(root.assetJson, data.checkJson) then return end
-	end
-	if data.checkImage then
-		success, notEmpty = pcall(root.nonEmptyRegion, data.checkImage)
-		if not (success and notEmpty ~= nil) then return end
+    end
+	if data.checkMods then
+		for i, mod in ipairs(data.checkMods) do
+			if not root.modMetadata(mod) then return end
+		end
+    end
+	if data.checkAssets then
+		for i, path in ipairs(data.checkAssets) do
+			if not root.assetExists(path) then return end
+		end
 	end
 	return true
 end

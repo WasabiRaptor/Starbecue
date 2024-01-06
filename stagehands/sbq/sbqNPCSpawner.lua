@@ -15,7 +15,7 @@ function update()
 		local didBias = false
 		while not gotData do
 			local i = math.random(#data)
-			if (data[i].spawnOnce and world.getProperty(data[i].npc..data[i].npcTypeName.."Spawned")) or (not checkRequirements(data[i].checkRequirements or {})) then
+			if (data[i].spawnOnce and world.getProperty(data[i].npc..data[i].npcTypeName.."Spawned")) or (not checkRequirements(data[i].checkRequirements or {})) or (not root.speciesConfig(data[i].npc)) then
 				table.remove(data,i)
 			else
 				if data[i].bias or didBias then
@@ -31,11 +31,9 @@ function update()
 
 		local npc = data.npc or config.getParameter("npc")
 		if type(npc) == "string" then
-			local success = pcall(root.assetJson, ("/species/" .. npc .. ".species"))
-			if success then
+			if root.speciesConfig(npc) then
 				world.spawnNpc(position, npc, data.npcTypeName or config.getParameter("npcTypeName"), data.npcLevel or config.getParameter("npcLevel") or world.threatLevel(), data.npcSeed or config.getParameter("npcSeed"), data.npcParameters or config.getParameter("npcParameters"))
 				world.setProperty( npc..(data.npcTypeName or config.getParameter("npcTypeName")).."Spawned", true)
-
 			end
 		end
 		stagehand.die()
@@ -47,13 +45,16 @@ function checkRequirements(data)
 		for i, item in ipairs(data.checkItems) do
 			if not root.itemConfig(item) then return end
 		end
-	end
-	if data.checkJson then
-		if not pcall(root.assetJson, data.checkJson) then return end
-	end
-	if data.checkImage then
-		success, notEmpty = pcall(root.nonEmptyRegion, data.checkImage)
-		if not (success and notEmpty ~= nil) then return end
+    end
+	if data.checkMods then
+		for i, mod in ipairs(data.checkMods) do
+			if not root.modMetadata(mod) then return end
+		end
+    end
+	if data.checkAssets then
+		for i, path in ipairs(data.checkAssets) do
+			if not root.assetExists(path) then return end
+		end
 	end
 	return true
 end
