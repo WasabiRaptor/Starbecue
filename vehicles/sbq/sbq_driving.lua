@@ -405,7 +405,7 @@ function sbq.doClickActions(state, dt)
 
 	if sbq.grabbing ~= nil then sbq.handleGrab() return end
 
-	if (sbq.seats[sbq.driverSeat].controls.primaryHandItem ~= nil) and (not sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") and (sbq.seats[sbq.driverSeat].controls.primaryHandItemDescriptor.parameters.itemHasOverrideLockScript) then
+	if (sbq.seats[sbq.driverSeat].controls.primaryHandItem ~= nil) and (not sbq.seats[sbq.driverSeat].controls.primaryHandItem == "sbqController") then
 		sbq.action(state, (state.defaultActions or {})[1], "primaryFire")
 		sbq.action(state, (state.defaultActions or {})[2], "altFire")
 	else
