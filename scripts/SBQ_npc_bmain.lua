@@ -1,6 +1,10 @@
 ---@diagnostic disable: undefined-global
-local _init = init
-local _update = update
+local old = {
+    init = init,
+	update = update
+}
+sbq = {}
+require("/scripts/SBQ_humanoidAnimator.lua")
 
 local interactive = true
 local _npc_setInteractive
@@ -18,8 +22,6 @@ function capture_npc_setDamageTeam(data)
 	end
 end
 
-sbq = {}
-
 function sbq.calcSize()
 	local boundRectSize = rect.size(mcontroller.boundBox())
 	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) /
@@ -27,8 +29,6 @@ function sbq.calcSize()
 	status.setStatusProperty("sbqSize", size)
 	return size
 end
-
-local old = {}
 
 local controlPathMoveRPC
 function sbq.controlPathMove(target, run, options)
@@ -207,7 +207,7 @@ function init()
 
 	status.setStatusProperty("sbqCurrentData", nil)
 
-	_init()
+	old.init()
 
 	if type(_npc_setInteractive) ~= "function" then
 		_npc_setInteractive = npc.setInteractive
@@ -256,7 +256,7 @@ function update(dt)
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
 
-	_update(dt)
+	old.update(dt)
 end
 
 function sbq.tenant_setNpcType(npcType)

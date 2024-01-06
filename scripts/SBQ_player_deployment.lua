@@ -6,6 +6,7 @@ local old = {
 sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/rect.lua")
+require("/scripts/SBQ_humanoidAnimator.lua")
 
 function init()
 	old.init()
