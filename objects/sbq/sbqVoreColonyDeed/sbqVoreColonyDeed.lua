@@ -84,20 +84,29 @@ function init()
 		if checkExistingUniqueIds(occupier) then return animator.playSound("error") end
 		evictTenants()
 
-		local data = occupier.checkRequirements or {}
+        local data = occupier.checkRequirements or {}
+		for i, tenant in ipairs(occupier.tenants) do
+			if tenant.spawn == "npc" then
+				for _, species in ipairs(tenant.species) do
+					if not root.speciesConfig(species) then return end
+				end
+			end
+		end
 		if data.checkItems then
 			for i, item in ipairs(data.checkItems) do
 				if not root.itemConfig(item) then return end
 			end
 		end
-		if data.checkJson then
-			if not pcall(root.assetJson, data.checkJson) then return end
+		if data.checkMods then
+			for i, mod in ipairs(data.checkMods) do
+				if not root.modMetadata(mod) then return end
+			end
 		end
-		if data.checkImage then
-			success, notEmpty = pcall(root.nonEmptyRegion, data.checkImage)
-			if not (success and notEmpty ~= nil) then return end
+		if data.checkAssets then
+			for i, path in ipairs(data.checkAssets) do
+				if not root.assetExists(path) then return end
+			end
 		end
-
 		if not seeds then
 			for _, tenant in ipairs(occupier.tenants) do
 				if type(tenant.species) == "table" then
@@ -149,18 +158,28 @@ function chooseTenants(seed, tags)
 
 	matches = util.filter(matches, function(match)
 
-		local data = match.checkRequirements or {}
+        local data = match.checkRequirements or {}
+		for i, tenant in ipairs(match.tenants) do
+			if tenant.spawn == "npc" then
+				for _, species in ipairs(tenant.species) do
+					if not root.speciesConfig(species) then return end
+				end
+			end
+		end
 		if data.checkItems then
 			for i, item in ipairs(data.checkItems) do
 				if not root.itemConfig(item) then return end
 			end
 		end
-		if data.checkJson then
-			if not pcall(root.assetJson, data.checkJson) then return end
+		if data.checkMods then
+			for i, mod in ipairs(data.checkMods) do
+				if not root.modMetadata(mod) then return end
+			end
 		end
-		if data.checkImage then
-			success, notEmpty = pcall(root.nonEmptyRegion, data.checkImage)
-			if not (success and notEmpty ~= nil) then return end
+		if data.checkAssets then
+			for i, path in ipairs(data.checkAssets) do
+				if not root.assetExists(path) then return end
+			end
 		end
 
 		if checkExistingUniqueIds(match) then return end

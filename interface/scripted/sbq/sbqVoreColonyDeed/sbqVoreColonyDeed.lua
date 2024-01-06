@@ -535,8 +535,7 @@ if sbq.storage.crewUI then
 else
 	function sbq.isValidTenantCard(item)
 		if (item.parameters or {}).npcArgs ~= nil then
-			local success, speciesFile = pcall(root.assetJson, ("/species/"..(item.parameters.npcArgs.npcSpecies or "")..".species"))
-			if not success then return false end
+			if not root.speciesConfig(item.parameters.npcArgs.npcSpecies) then return false end
 			if item.parameters.npcArgs.npcParam.wasPlayer then return false end
 			if ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId then
 				for i, tenant in ipairs((sbq.storage.occupier or {}).tenants or {}) do
