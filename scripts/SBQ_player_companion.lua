@@ -188,10 +188,10 @@ function init()
 		player.setProperty( "sbqCurrentData", current)
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = player.getProperty("sbqType")
-		if not (type == "driver" and current.species == "sbqOccupantHolder") then
-			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
-			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
-		end
+		-- if not (type == "driver" and current.species == "sbqOccupantHolder") then
+		-- 	sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
+		-- 	sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
+		-- end
 
 		return {
 			head = player.equippedItem("head") or false,
@@ -214,10 +214,10 @@ function init()
 		player.setProperty( "sbqCurrentData", current)
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = player.getProperty("sbqType")
-		if not (type == "driver" and current.species == "sbqOccupantHolder") then
-			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
-			sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
-		end
+		-- if not (type == "driver" and current.species == "sbqOccupantHolder") then
+		-- 	sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "primary" ), type))
+		-- 	sbq.notifyLockedItem(sbq.checkLockItem(world.entityHandItemDescriptor( entity.id(), "alt" ), type))
+		-- end
 
 	end)
 
@@ -515,7 +515,6 @@ function sbq.lockItem(itemDescriptor, type)
 	end
 	if root.itemType(itemDescriptor.name) == "activeitem" and
 		(not itemDescriptor.parameters or not itemDescriptor.parameters.itemHasOverrideLockScript) then
-		giveHeldItemOverrideLockScript(itemDescriptor) ---@diagnostic disable-line:undefined-global
 		return false
 	end
 
@@ -555,19 +554,19 @@ function sbq.requestTransition(transition, args)
 end
 local lockedNotified = false
 function sbq.notifyLockedItem(yes)
-	if (not lockedNotified) then
-		lockedNotified = player.getProperty("sbqLockNotified")
-	end
-	if yes and not lockedNotified then
-		player.setProperty("sbqLockNotified", true)
-		lockedNotified = true
-		player.radioMessage({
-			messageId = "playerNotifyLock1", unique = false,
-			text = "Your current state makes certain equipment unusable, therefore I have Locked the items within an ^yellow;Essential Tool^reset; slot."
-		}, 1)
-		player.radioMessage({
-			messageId = "playerNotifyLock2", unique = false,
-			text = "After you have returned to normal simply equip the tool to have your items returned to you. ^#555;(Typically the ^yellow;Paint Tool^#555; slot ^green;(Y hotkey)^#555; if no other essential tools had attempted to be used)"
-		}, 5)
-	end
+	-- if (not lockedNotified) then
+	-- 	lockedNotified = player.getProperty("sbqLockNotified")
+	-- end
+	-- if yes and not lockedNotified then
+	-- 	player.setProperty("sbqLockNotified", true)
+	-- 	lockedNotified = true
+	-- 	player.radioMessage({
+	-- 		messageId = "playerNotifyLock1", unique = false,
+	-- 		text = "Your current state makes certain equipment unusable, therefore I have Locked the items within an ^yellow;Essential Tool^reset; slot."
+	-- 	}, 1)
+	-- 	player.radioMessage({
+	-- 		messageId = "playerNotifyLock2", unique = false,
+	-- 		text = "After you have returned to normal simply equip the tool to have your items returned to you. ^#555;(Typically the ^yellow;Paint Tool^#555; slot ^green;(Y hotkey)^#555; if no other essential tools had attempted to be used)"
+	-- 	}, 5)
+	-- end
 end
