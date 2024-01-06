@@ -1,10 +1,14 @@
 [{"op":"merge", "path":"", "value": {
 	"globalTagDefaults" : {
 		"colorRemap" : "",
-		"legs_fg_mask" : "/humanoid/animOverrideMasks/plantigrade/malebody.png",
+		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png",
 
 		"bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
 		"bellyColorRemap" : "",
+
+		"tailImage" : "",
+		//"tailImage" : "/humanoid/any/sbqVoreParts/tail.png",
+		"tailColorRemap" : "",
 
 		"cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
 		"cockColorRemap" : "",
@@ -364,6 +368,49 @@
 					}
 				}
 			},
+			"tail" : {
+				"properties": {
+					"centered": true,
+					"zLevel": -0.5,
+					"transformationGroups": ["movementOffset", "tailOffset"]
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<tailImage>:<shaftOccupants>-<tailStateAnim>.<tailStateFrame><tailColorRemap><bodyDirectives>" } },
+						"walk": { "properties": { "image": "<tailImage>:<shaftOccupants>-<bodyStateAnim>.<bodyStateFrame><tailColorRemap><bodyDirectives>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"tailState": {
+						"idle": { "properties": { "image": "<tailImage>:<tailOccupants>-<tailStateAnim>.<tailStateFrame><tailColorRemap><bodyDirectives>" } },
+						"s_front" : "idle",
+						"s_back" : "idle",
+						"s_up" : "idle",
+						"s_down" : "idle",
+						"none": { "properties": {} }
+					},
+					"tailExpandState" : {
+						"expand": { "properties": { "image": "<tailImage>:<tailOccupantsInterpolate>-expand<tailColorRemap><bodyDirectives>" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					}
+				}
+			},
+
 
 
 			"cock" : {
@@ -378,7 +425,12 @@
 						"walk": { "properties": { "image": "<cockImage>:<shaftOccupants>-<bodyStateAnim>.<bodyStateFrame><cockColorRemap><bodyDirectives>" } },
 						"run": "walk",
 						"jump": "walk",
-						"fall": "walk"
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
 					},
 					"cockState": {
 						"s_front" : { "properties": { "image": "<cockImage>:<shaftOccupants>-<cockStateAnim>.<cockStateFrame><cockColorRemap><bodyDirectives>" } },
