@@ -42,30 +42,15 @@ end
 
 function sbq.genderswap()
 	local allowed = getPreyEnabled().genderswapAllow
-	if not allowed then return effect.expire() end
+	if (not allowed) or (not type(humanoid) == "table") then return effect.expire() end
 
 	local table = {
 		male = "female",
 		female = "male"
 	}
-	data = status.statusProperty("speciesAnimOverrideData") or {}
-	local originalGender = world.entityGender(entity.id())
-	data.gender = table[(data.gender or originalGender)]
-	if data.gender == originalGender then
-		data.gender = nil
-	end
-	status.setStatusProperty("speciesAnimOverrideData", data)
-
-	local success, speciesFile = pcall(root.assetJson, ("/species/"..(data.species or world.entitySpecies(entity.id()))..".species"))
-
-	local currentEffect = (status.getPersistentEffects("speciesAnimOverride") or {})[1]
-	local resultEffect = speciesFile.customAnimStatus or "speciesAnimOverride"
-	if resultEffect == currentEffect then
-		world.sendEntityMessage(entity.id(), "refreshAnimOverrides" )
-	else
-		status.clearPersistentEffects("speciesAnimOverride")
-		status.setPersistentEffects("speciesAnimOverride", { resultEffect })
-	end
+	data = humanoid.getIdentity()
+	data.gender = table[data.gender]
+    humanoid.setIdentity(data)
 
 	world.spawnProjectile("sbqWarpInEffect", mcontroller.position(), entity.id(), { 0, 0 }, true)
 	animator.playSound("activate")
