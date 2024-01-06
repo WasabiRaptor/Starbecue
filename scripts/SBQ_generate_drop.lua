@@ -1,4 +1,3 @@
-require("/items/active/sbqTransformation/sbqDuplicatePotion/sbqGetIdentity.lua")
 require("/scripts/rect.lua")
 require("/scripts/speciesAnimOverride_validateIdentity.lua")
 
@@ -15,20 +14,13 @@ function sbq.generateItemDrop(pred, flavorText, itemDrop)
 	if preyType == "npc" or preyType == "player" then
 		itemDrop.parameters.prey = world.entityName(entity.id())
 		itemDrop.parameters.preyUUID = world.entityUniqueId(entity.id())
-		local identity
-		if preyType == "npc" then
-			identity = world.callScriptedEntity(entity.id(), "npc.humanoidIdentity")
-		end
-		local overrideData = getIdentity(entity.id(), identity)
-		identity = overrideData.identity or {}
-		local species = overrideData.species or world.entitySpecies(entity.id())
-		local speciesFile = root.assetJson("/species/" .. species .. ".species")
+		local identity = humanoid.getIdentity()
+		local speciesFile = root.speciesConfig(identity.species)
 		itemDrop.parameters.preySpecies = species
-		itemDrop.parameters.preyDirectives = (overrideData.directives or "")..(identity.bodyDirectives or "")..(identity.hairDirectives or "")
+		itemDrop.parameters.preyDirectives = identity.bodyDirectives
 		itemDrop.parameters.preyColorMap = speciesFile.baseColorMap
-		identity.name = itemDrop.parameters.prey or ""
 		itemDrop.parameters.npcArgs = {
-			npcSpecies = overrideData.species,
+			npcSpecies = identity.species,
 			npcType = "generictenant",
 			npcLevel = 1,
 			npcParam = {

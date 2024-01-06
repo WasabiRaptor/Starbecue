@@ -4,11 +4,9 @@ function init()
 	animator.rotateTransformationGroup("potion", math.pi/4)
 end
 
-require("/items/active/sbqTransformation/sbqDuplicatePotion/sbqGetIdentity.lua")
-
 function update(dt, fireMode, shiftHeld)
 	if fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-		local parameters = getIdentity(entity.id())
+		local parameters = humanoid.getIdentity()
 		parameters.potionPath = "/items/active/sbqTransformation/sbqDuplicatePotion/"
 		parameters.rarity = "legendary"
 		player.giveItem({name = "sbqMysteriousPotion", parameters = parameters})
@@ -17,5 +15,5 @@ function update(dt, fireMode, shiftHeld)
 end
 
 function dartGunData()
-	return { funcName = "transform", data = getIdentity(entity.id())}
+	return { funcName = "transform", data = humanoid.getIdentity()}
 end
