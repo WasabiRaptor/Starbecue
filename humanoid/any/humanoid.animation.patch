@@ -16,6 +16,7 @@
 		"ballsBackImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
 		"ballsColorRemap" : "",
 
+		"breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
 		"breastsFrontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
 		"breastsBackImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
 		"breastsColorRemap" : "",
@@ -240,6 +241,14 @@
 				}
 			},
 
+			"breastsState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
 			"breastsFrontState" : {
 				"default": "idle",
 				"priority" : 1,
@@ -461,7 +470,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.11,
-					"transformationGroups": ["movementOffset", "crotchOffset"]
+					"anchorPart": "cock"
 				},
 				"partStates": {
 					"ballsFrontState": {
@@ -494,7 +503,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.1,
-					"transformationGroups": ["movementOffset", "crotchOffset"]
+					"anchorPart": "cock"
 				},
 				"partStates": {
 					"ballsBackState": {
@@ -523,12 +532,37 @@
 					}
 				}
 			},
+			"breasts" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.1,
+					"transformationGroups": ["movementOffset", "chestOffset"]
+				},
+				"partStates": {
+					"breastsState": {
+						"idle": { "properties": { "image": "<breastsImage><breastsColorRemap><bodyDirectives>" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
 
 			"breastsFront" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.6,
-					"transformationGroups": ["movementOffset", "chestOffset"]
+					"anchorPart": "breasts"
 				},
 				"partStates": {
 					"breastsFrontState": {
@@ -561,7 +595,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.4,
-					"transformationGroups": ["movementOffset", "chestOffset"]
+					"anchorPart": "breasts"
 				},
 				"partStates": {
 					"breastsBackState": {
@@ -629,8 +663,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 2,
-					"transformationGroups": []
-
+					"anchorPart": "body"
 				},
 				"partStates": {
 					"bodyState": {
@@ -662,7 +695,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 2.1,
-					"transformationGroups": []
+					"anchorPart": "body"
 				},
 				"partStates": {
 					"bodyState": {
