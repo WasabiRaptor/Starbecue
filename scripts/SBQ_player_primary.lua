@@ -14,21 +14,18 @@ end
 function cleanAnimOverrideScriptItems()
 	player.makeTechUnavailable("storeDirectivesEmpty")
 
-	local clean
-	while clean ~= true do
+	local lockedItemList = player.getProperty("sbqLockedItems")
+	for i, lockedItemData in pairs(lockedItemList or {}) do
+		player.giveItem(lockedItemData)
+		table.remove(lockedItemList, i)
+	end
+	player.setProperty("sbqLockedItems", lockedItemList)
 
-		clean = true
-		local lockedItemList = player.getProperty("sbqLockedItems")
-		for i, lockedItemData in pairs(lockedItemList or {}) do
-			player.giveItem(lockedItemData)
-			table.remove(lockedItemList, i)
-			clean = false
-		end
-
-		player.setProperty("sbqLockedItems", lockedItemList)
-
-		if clean then
-			for slotname, itemDescriptor in pairs(storage.lockedEssentialItems or {}) do
+	local essentialItems = {"beamaxe", "wiretool", "painttool", "inspectiontool"}
+	for _, slot in ipairs(essentialItems) do
+		local item = player.essentialItem(slot)
+		if item and item.parameters.itemHasOverrideLockScript then
+			for slotname, itemDescriptor in pairs(item.scriptStorage.lockedEssentialItems or {}) do
 				player.giveEssentialItem(slotname, itemDescriptor)
 			end
 		end

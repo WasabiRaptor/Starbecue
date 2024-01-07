@@ -14,7 +14,7 @@ end
 
 function cleanAnimOverrideScriptItems()
 	for i, slot in ipairs({"primary", "alt"}) do
-		item = npc.getItemSlot(slot)
+		local item = npc.getItemSlot(slot)
 		if item and item.parameters and item.parameters.itemHasOverrideLockScript then
 			item.parameters.scripts = nil
 			item.parameters.animationScripts = nil
