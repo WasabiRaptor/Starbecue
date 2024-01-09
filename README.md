@@ -30,9 +30,9 @@ Open the `Starbound` directory by viewing its properties on steam, and then clic
 Place `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` files within `Starbound\mods\`
 
 if you downloaded the win64 version, you're going to open the `Starbound\win64\` folder
-if you downloaded the win32 version, you're going to open the `Starbound\win32\` folder
 
-Replace the `starbound.exe` and `starbound_server.exe` files with the provided versions
+Replace the `starbound.exe` file with the provided version
+if you are running a server, also replace `starbound_server.exe` provided seperately
 
 ## macOS
 
@@ -57,7 +57,7 @@ Place `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` files within `Star
 
 Replace the `starbound` file within `Starbound/osx/Starbound.app/Contents/MacOS/` with the provided version (left click and select "Show Package Contents" on Starbound.app)
 
-Replace the `starbound_server` file within `Starbound/osx/` with the provided version
+Replace the `starbound_server` file within `Starbound/osx/` with the provided version if you are running a server
 
 The files are now in the correct place, you can now play starbound with the mod!
 
