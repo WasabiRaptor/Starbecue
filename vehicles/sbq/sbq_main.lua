@@ -308,7 +308,8 @@ function init()
 end
 
 function sbq.initAfterInit()
-	sbq.species = world.entityName(entity.id())
+    sbq.species = world.entityName(entity.id())
+	sbq.logJson(world.getStatusProperty(sbq.spawner, "sbqPreyEnabled"))
 	sbq.timer("setSpecies", 1, function ()
 		world.sendEntityMessage(sbq.spawner, "sbqGetSpeciesVoreConfig", sbq.species)
 	end)

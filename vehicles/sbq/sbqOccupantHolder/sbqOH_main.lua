@@ -144,6 +144,9 @@ require("/scripts/SBQ_RPC_handling.lua")
 
 
 require("/vehicles/sbq/sbqOccupantHolder/sbqOH_animation.lua")
+function sbq.logInfo(arg)
+	sb.logInfo("["..tostring(world.entityName(sbq.spawner)).."]"..tostring(arg))
+end
 
 local inited
 
@@ -205,7 +208,9 @@ function initAfterInit(data, scale, scaleYOffset)
 		occupant5Position = {},
 		occupant6Position = {},
 		occupant7Position = {},
-	}
+    }
+	sbq.logJson(world.getStatusProperty(sbq.spawner, "sbqPreyEnabled"))
+
 	sbq.predScale = scale
 	sbq.predScaleYOffset = scaleYOffset
 
