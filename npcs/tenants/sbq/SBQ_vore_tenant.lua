@@ -513,7 +513,7 @@ function update(dt)
 			sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false)
 		end
 	end)
-	sbq.randomTimer("hunting", 15, 60, function () -- get a new hunting target every 15 to 60 seconds
+	sbq.randomTimer("hunting", 30, 60 * 3, function () -- get a new hunting target every half minute to 3 minutes seconds
 		sbq.getTarget()
 	end)
 	sbq.timer("clothes", 5, sbq.updateCosmeticSlots)
@@ -1416,7 +1416,7 @@ function sbq.searchForValidPrey(voreType, consent)
 	if storage.settings[voreType.."HuntFriendlyPlayers"] or storage.settings[voreType.."HuntHostilePlayers"] then
 		local entities = world.playerQuery(mcontroller.position(), 50)
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddPreyToTargetList(eid, voreType, "Players", 1.5)
+			sbq.maybeAddPreyToTargetList(eid, voreType, "Players", 1.9)
 		end
 	end
 	if storage.settings[voreType.."HuntFriendlyOCs"] or storage.settings[voreType.."HuntHostileOCs"] then
@@ -1429,7 +1429,7 @@ function sbq.searchForValidPrey(voreType, consent)
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" } })
 		for i, eid in ipairs(entities) do
 			if not world.callScriptedEntity(eid, "config.getParameter", "isOC") then
-				sbq.maybeAddPreyToTargetList(eid, voreType, "SBQNPCs", 3)
+				sbq.maybeAddPreyToTargetList(eid, voreType, "SBQNPCs", 2.1)
 			end
 		end
 	end
@@ -1437,7 +1437,7 @@ function sbq.searchForValidPrey(voreType, consent)
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" }, callScriptResult = false })
 		util.appendLists(entities, world.monsterQuery(mcontroller.position(), 50))
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddPreyToTargetList(eid, voreType, "Other", 4)
+			sbq.maybeAddPreyToTargetList(eid, voreType, "Other", 3)
 		end
 	end
 end
@@ -1477,7 +1477,7 @@ function sbq.searchForValidPred(voreType, consent)
 	if storage.settings[voreType.."BaitFriendlyPlayers"] or storage.settings[voreType.."BaitHostilePlayers"] then
 		local entities = world.playerQuery(mcontroller.position(), 50)
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddPredToTargetList(eid, voreType, "Players", 1.5, consent)
+			sbq.maybeAddPredToTargetList(eid, voreType, "Players", 1.9, consent)
 		end
 	end
 	if storage.settings[voreType.."BaitFriendlyOCs"] or storage.settings[voreType.."BaitHostileOCs"] then
@@ -1490,7 +1490,7 @@ function sbq.searchForValidPred(voreType, consent)
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" } })
 		for i, eid in ipairs(entities) do
 			if not world.callScriptedEntity(eid, "config.getParameter", "isOC") then
-				sbq.maybeAddPredToTargetList(eid, voreType, "SBQNPCs", 3)
+				sbq.maybeAddPredToTargetList(eid, voreType, "SBQNPCs", 2.1)
 			end
 		end
 	end
@@ -1498,7 +1498,7 @@ function sbq.searchForValidPred(voreType, consent)
 		local entities = world.npcQuery(mcontroller.position(), 50, { withoutEntityId = entity.id(), callScript = "config.getParameter", callScriptArgs = { "sbqNPC" }, callScriptResult = false })
 		util.appendLists(entities, world.monsterQuery(mcontroller.position(), 50))
 		for i, eid in ipairs(entities) do
-			sbq.maybeAddPredToTargetList(eid, voreType, "Other", 4)
+			sbq.maybeAddPredToTargetList(eid, voreType, "Other", 3)
 		end
 	end
 end
