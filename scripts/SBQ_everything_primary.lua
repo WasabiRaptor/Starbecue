@@ -218,9 +218,6 @@ function init()
         scaleDuration = duration or 1
 		scaling = true
     end)
-	sbq.timer("initEverythingPrimary", 0, function ()
-    	mcontroller.setScale(status.statusProperty("animOverrideScale") or 1)
-	end)
 end
 
 function update(dt)
