@@ -150,7 +150,7 @@ function init()
 	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_, species)
         sbq.setSpeciesConfig(species)
 		if species then return end
-		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1, status.statusProperty("animOverridesGlobalScaleYOffset") or 0}
+		return {sbq.speciesConfig, mcontroller.scale()}
 	end)
 	message.setHandler("sbqSaveSettings", function (_,_, settings, menuName)
 		if menuName and menuName ~= "sbqOccupantHolder" then

@@ -42,6 +42,13 @@ function init()
 		local type = player.getProperty("sbqType")
 		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = type}
 	end)
+	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_)
+		sbq.getSpeciesConfig(player.species(), (player.getProperty("sbqSettings") or {}).global)
+		status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
+		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
+		return {sbq.speciesConfig, mcontroller.scale()}
+	end)
+
 
 end
 

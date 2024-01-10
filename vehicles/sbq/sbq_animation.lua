@@ -231,9 +231,6 @@ end
 function sbq.victimAnimUpdate(eid)
 	if eid == nil or not sbq.lounging[eid] then return end
 
-	-- local preyYOffset = sbq.lounging[eid].scaleYOffset or 0
-	local predScale = sbq.predScale or 1
-
 	local victimAnim = sbq.lounging[eid].victimAnim
 	if not victimAnim.enabled then
 		local location = sbq.lounging[eid].location
@@ -250,7 +247,7 @@ function sbq.victimAnimUpdate(eid)
 		-- sbq.translateTransformationGroup(transformGroup, {0, -preyYOffset * 8}, true)
 
 		local scale = {victimAnim.last.xs, victimAnim.last.ys}
-		sbq.scaleTransformationGroup(transformGroup, {scale[1] * predScale, scale[2] * predScale})
+		sbq.scaleTransformationGroup(transformGroup, scale)
 		sbq.applyScaleStatusEffect(eid, scale)
 		sbq.rotateTransformationGroup(transformGroup, (victimAnim.last.r * math.pi/180))
 
@@ -269,7 +266,7 @@ function sbq.victimAnimUpdate(eid)
 		else
 			translation = {victimAnim.last.x, victimAnim.last.y}
 		end
-		sbq.translateTransformationGroup(transformGroup, {translation[1] * predScale, translation[2] * predScale})
+		sbq.translateTransformationGroup(transformGroup, translation)
 		return
 	end
 	local statename = victimAnim.statename
@@ -363,10 +360,10 @@ function sbq.victimAnimUpdate(eid)
 	--could probably use animator.transformTransformationGroup() and do everything below in one matrix but I don't know how those work exactly so
 	-- sbq.translateTransformationGroup(transformGroup, {0, -preyYOffset * 8}, true)
 
-	sbq.scaleTransformationGroup(transformGroup, {scale[1] * predScale, scale[2] * predScale})
+	sbq.scaleTransformationGroup(transformGroup, scale)
 	sbq.applyScaleStatusEffect(eid, scale)
 	sbq.rotateTransformationGroup(transformGroup, (rotation * math.pi/180))
-	sbq.translateTransformationGroup(transformGroup, {translation[1] * predScale, translation[2] * predScale})
+	sbq.translateTransformationGroup(transformGroup, translation)
 end
 
 function sbq.applyScaleStatusEffect(eid, scale)

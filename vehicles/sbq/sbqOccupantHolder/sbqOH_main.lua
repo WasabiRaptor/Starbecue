@@ -170,9 +170,9 @@ function init()
 		require(script)
 	end
 
-	message.setHandler("sbqOccupantHolderScale", function(_, _, scale, scaleYOffset)
+	message.setHandler("sbqOccupantHolderScale", function(_, _, scale)
+		mcontroller.setScale(scale)
 		sbq.predScale = scale
-		sbq.predScaleYOffset = scaleYOffset
 	end)
 
 	sbq.timer("init", 0, function ()
@@ -189,7 +189,7 @@ function sbq.getInit()
 	end)
 end
 
-function initAfterInit(data, scale, scaleYOffset)
+function initAfterInit(data, scale)
 	sbq.sbqData = sb.jsonMerge(config.getParameter("sbqData"), data.sbqData)
 	sbq.species = data.species
 	sbq.defaultSbqData = sb.jsonMerge(sbq.sbqData, {})
@@ -212,7 +212,7 @@ function initAfterInit(data, scale, scaleYOffset)
 	sbq.logJson(world.getStatusProperty(sbq.spawner, "sbqPreyEnabled"))
 
 	sbq.predScale = scale
-	sbq.predScaleYOffset = scaleYOffset
+	mcontroller.setScale(scale)
 
 	sbq.settings = sb.jsonMerge(sbq.config.defaultSettings, sb.jsonMerge( sbq.sbqData.defaultSettings or {}, sb.jsonMerge(config.getParameter( "settings" ) or {}, sbq.sbqData.overrideSettings or {})))
 	sbq.predatorSettings = sbq.settings
@@ -311,7 +311,7 @@ end
 function sbq.checkSpawnerExists()
 	if sbq.spawner and world.entityExists(sbq.spawner) then
 		local position = world.entityPosition(sbq.spawner)
-		mcontroller.setPosition({position[1], position[2] + (sbq.predScaleYOffset or 0)})
+		mcontroller.setPosition({position[1], position[2]})
 	elseif sbq.sendAllPreyTo ~= nil then
 	elseif (sbq.spawnerUUID ~= nil) then
 		for i = sbq.startSlot, sbq.occupantSlots do

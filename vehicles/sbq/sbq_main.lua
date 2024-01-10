@@ -156,7 +156,6 @@ function init()
 	sbq.settings.directives = sbq.sbqData.defaultDirectives or ""
 
 	sbq.predScale = 1
-	sbq.predScaleYOffset = 0
 
 	if mcontroller_extensions then
 		for k,v in pairs(mcontroller_extensions) do

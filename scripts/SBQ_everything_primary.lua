@@ -232,7 +232,11 @@ function update(dt)
 		elseif destScale < oldScale then
             currentScale = math.max(destScale, currentScale)
         end
-        mcontroller.setScale(currentScale)
+		mcontroller.setScale(currentScale)
+		local currentData = status.statusProperty("sbqCurrentData")
+		if currentData then
+			world.sendEntityMessage(currentData.id, "sbqOccupantHolderScale", currentScale)
+		end
 		if scaleTime >= scaleDuration then
 			scaling = false
 		end

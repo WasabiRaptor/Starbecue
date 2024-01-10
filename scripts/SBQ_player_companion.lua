@@ -242,13 +242,6 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_)
-		sbq.getSpeciesConfig(player.species(), (player.getProperty("sbqSettings") or {}).global)
-		status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
-		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
-		return {sbq.speciesConfig, status.statusProperty("animOverrideScale") or 1}
-	end)
-
 	message.setHandler("sbqUnlockedSpecies", function ()
 		player.radioMessage({
 			messageId = "transformPotionUnlock", unique = false,
