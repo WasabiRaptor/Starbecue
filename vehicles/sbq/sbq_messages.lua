@@ -216,17 +216,6 @@ message.setHandler( "indicatorClosed", function(_,_, eid)
 	end
 end )
 
-message.setHandler( "fixWeirdSeatBehavior", function(_,_, eid)
-	if sbq.lounging[eid] == nil then return end
-	for i = 0, sbq.occupantSlots do
-		local seatname = "occupant"..i
-		if eid == vehicle.entityLoungingIn("occupant"..i) then
-			vehicle.setLoungeEnabled(seatname, false)
-		end
-	end
-	sbq.weirdFixFrame = true
-end )
-
 message.setHandler( "addPrey", function (_,_, data)
 	table.insert(sbq.addPreyQueue, data)
 end)

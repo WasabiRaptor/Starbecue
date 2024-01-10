@@ -42,8 +42,7 @@ function init()
 	end)
 
 	message.setHandler("sbqForceSit", function(_,_, data)
-		status.setStatusProperty("sbqForceSitData", data)
-		status.addEphemeralEffect("sbqForceSit", 1, data.source)
+		mcontroller.setAnchorState(data.source, data.index)
 	end)
 
 	message.setHandler("sbqGetSeatInformation", function()

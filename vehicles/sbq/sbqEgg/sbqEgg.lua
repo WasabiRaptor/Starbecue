@@ -28,9 +28,6 @@ function sbq.applyStatusLists()
 				vehicle.setLoungeEnabled(sbq.occupant[i].seatname, true)
 			end
 			sbq.loopedMessage( sbq.occupant[i].seatname.."StatusEffects", sbq.occupant[i].id, "sbqApplyStatusEffects", {sbq.occupant[i].statList} )
-			if not (i == 0 and sbq.isNested) then
-				sbq.loopedMessage( sbq.occupant[i].seatname.."ForceSeat", sbq.occupant[i].id, "sbqForceSit", {{index=i, source=entity.id()}})
-			end
 		else
 			vehicle.setLoungeEnabled(sbq.occupant[i].seatname, false)
 		end

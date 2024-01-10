@@ -5,12 +5,6 @@ function sbq.forceSeat( occupantId, seatindex )
 	end
 end
 
-function sbq.unForceSeat(occupantId)
-	if occupantId then
-		world.sendEntityMessage( occupantId, "applyStatusEffect", "sbqRemoveForceSit", 1, entity.id())
-	end
-end
-
 function sbq.eat( args, voreType, location, locationSide )
 	local seatindex = math.floor(sbq.occupants.total + sbq.startSlot)
 	if seatindex > sbq.occupantSlots then return false end
@@ -92,11 +86,13 @@ function sbq.uneat( occupantId )
 	world.sendEntityMessage( occupantId, "primaryItemLock", false)
 	world.sendEntityMessage( occupantId, "altItemLock", false)
 	world.sendEntityMessage( occupantId, "sbqLight", nil )
-	sbq.unForceSeat( occupantId )
 	if not sbq.lounging[occupantId] then return end
 
 	local seatindex = sbq.lounging[occupantId].index
 	local occupantData = sbq.lounging[occupantId]
+
+	vehicle.setLoungeEnabled(sbq.lounging[occupantId].seatname, false)
+
 	if world.entityType(occupantId) == "player" then
 		world.sendEntityMessage(occupantId, "sbqOpenInterface", "sbqClose")
 	end
@@ -323,13 +319,7 @@ end
 function sbq.applyStatusLists()
 	for i = 0, sbq.occupantSlots do
 		if type(sbq.occupant[i].id) == "number" and world.entityExists(sbq.occupant[i].id) then
-			if not sbq.weirdFixFrame then
-				vehicle.setLoungeEnabled(sbq.occupant[i].seatname, true)
-			end
 			sbq.loopedMessage( sbq.occupant[i].seatname.."StatusEffects", sbq.occupant[i].id, "sbqApplyStatusEffects", {sbq.occupant[i].statList} )
-			sbq.loopedMessage( sbq.occupant[i].seatname.."ForceSeat", sbq.occupant[i].id, "sbqForceSit", {{index=i, source=entity.id(), rotation=sbq.occupant[i].victimAnim.last.r, driver = (sbq.occupant[i].seatname == sbq.driverSeat) }})
-		else
-			vehicle.setLoungeEnabled(sbq.occupant[i].seatname, false)
 		end
 	end
 	sbq.weirdFixFrame = nil
