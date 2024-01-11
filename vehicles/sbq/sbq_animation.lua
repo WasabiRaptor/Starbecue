@@ -187,9 +187,7 @@ function sbq.updateVisibilityAndSmolprey(i)
 			end
 		else
 			local seatname = sbq.occupant[i].seatname
-			local transformGroup = seatname.."Position"
-			local scale = animator.transformPointFromGroups({1,1}, {transformGroup})
-			vehicle.setLoungeDirectives(sbq.occupant[i].seatname, "scalenearest="..math.abs(scale[1])..";"..math.abs(scale[2]))
+			vehicle.setLoungeDirectives(sbq.occupant[i].seatname, "scalenearest="..math.abs(sbq.occupant[i].victimAnim.last.xs)..";"..math.abs(sbq.occupant[i].victimAnim.last.ys))
 		end
 	else
 		vehicle.setLoungeDirectives(sbq.occupant[i].seatname, "crop;0;0;0;0")

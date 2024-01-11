@@ -106,7 +106,7 @@ function sbq.uneat( occupantId )
 		end
 	else
 		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects, (occupantData.flags.digested or occupantData.flags.infused) and sbq.settings.reformResetHealth and not (occupantData.flags.hostile and sbq.settings.overrideSoftDigestForHostiles))
-		world.sendEntityMessage( occupantId, "sbqPredatorDespawned", true ) -- to clear the current data for players
+		world.sendEntityMessage( occupantId, "sbqPredatorDespawned" ) -- to clear the current data for players
 	end
 
 	world.sendEntityMessage(occupantId, "sbqSetCumulativeOccupancyTime", sbq.spawnerUUID, world.entityName(sbq.spawner), world.entityType(sbq.spawner), world.entityTypeName(sbq.spawner), false, sbq.lounging[occupantId].cumulative )
