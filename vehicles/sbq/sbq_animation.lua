@@ -178,7 +178,7 @@ function sbq.updateVisibilityAndSmolprey(i)
 	end
 	if sbq.occupant[i].visible then
 		if (sbq.occupant[i].species ~= nil) and (sbq.occupant[i].species ~= "sbqOccupantHolder") then
-			world.sendEntityMessage(sbq.occupant[i].id, "applyStatusEffect", "sbqInvisible")
+			vehicle.setLoungeDirectives(sbq.occupant[i].seatname, "crop;0;0;0;0")
 			if sbq.occupant[i].smolPreyData.recieved then
 				if sbq.occupant[i].smolPreyData.update then
 					sbq.smolPreyAnimPath(sbq.occupant[i])
@@ -186,10 +186,13 @@ function sbq.updateVisibilityAndSmolprey(i)
 				animator.setAnimationState( sbq.occupant[i].seatname.."State", "smol", true )
 			end
 		else
-			world.sendEntityMessage(sbq.occupant[i].id, "sbqRemoveStatusEffect", "sbqInvisible")
+			local seatname = sbq.occupant[i].seatname
+			local transformGroup = seatname.."Position"
+			local scale = animator.transformPointFromGroups({1,1}, {transformGroup})
+			vehicle.setLoungeDirectives(sbq.occupant[i].seatname, "scalenearest="..math.abs(scale[1])..";"..math.abs(scale[2]))
 		end
 	else
-		world.sendEntityMessage(sbq.occupant[i].id, "applyStatusEffect", "sbqInvisible")
+		vehicle.setLoungeDirectives(sbq.occupant[i].seatname, "crop;0;0;0;0")
 		animator.setAnimationState( sbq.occupant[i].seatname.."State", "empty", true )
 	end
 end
@@ -248,7 +251,6 @@ function sbq.victimAnimUpdate(eid)
 
 		local scale = {victimAnim.last.xs, victimAnim.last.ys}
 		sbq.scaleTransformationGroup(transformGroup, scale)
-		sbq.applyScaleStatusEffect(eid, scale)
 		sbq.rotateTransformationGroup(transformGroup, (victimAnim.last.r * math.pi/180))
 
 		local translation
@@ -361,14 +363,8 @@ function sbq.victimAnimUpdate(eid)
 	-- sbq.translateTransformationGroup(transformGroup, {0, -preyYOffset * 8}, true)
 
 	sbq.scaleTransformationGroup(transformGroup, scale)
-	sbq.applyScaleStatusEffect(eid, scale)
 	sbq.rotateTransformationGroup(transformGroup, (rotation * math.pi/180))
 	sbq.translateTransformationGroup(transformGroup, translation)
-end
-
-function sbq.applyScaleStatusEffect(eid, scale)
-	local scale = {math.abs(scale[1]), math.abs(scale[2])}
-	world.sendEntityMessage(eid, "sbqApplyScaleStatus", scale)
 end
 
 function sbq.getVictimAnimInterpolatedValue(victimAnim, valName, progress)

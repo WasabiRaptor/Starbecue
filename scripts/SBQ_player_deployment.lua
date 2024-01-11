@@ -7,8 +7,10 @@ sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/rect.lua")
 require("/scripts/SBQ_humanoidAnimator.lua")
+require("/scripts/SBQ_species_config.lua")
 
 function init()
+	sbq.config = root.assetJson("/sbqGeneral.config")
 	old.init()
 	message.setHandler("sbqLight", function (_,_, light)
 		player.setProperty("sbqLight", light)

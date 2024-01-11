@@ -36,10 +36,6 @@ function init()
 		status.removeEphemeralEffect(statusEffect)
 	end)
 
-	message.setHandler("sbqApplyScaleStatus", function(_,_, scale)
-		status.setStatusProperty("sbqScaling", scale)
-		status.addEphemeralEffect("sbqScaling")
-	end)
 
 	message.setHandler("sbqForceSit", function(_,_, data)
 		mcontroller.setAnchorState(data.source, data.index)
