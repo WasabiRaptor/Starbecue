@@ -5,7 +5,6 @@
 		"skin" : "default",
 		"frame" : "1",
 		"directives" : "",
-		"statusDirectives" : "",
 		"smolpath": ""
 	},
 	"animatedParts": {
@@ -100,7 +99,7 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<skin>/Sarcophagus_back.png<partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/Sarcophagus_back.png<partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -114,7 +113,7 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<skin>/Sarcophagus_wall.png<partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/Sarcophagus_wall.png<partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -129,9 +128,9 @@
 				},
 				"partStates": {
 					"doorState": {
-						"idle": { "properties": { "image": "skins/<skin>/Sarcophagus_lid.png:<doorStateAnim>.<doorStateFrame><partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/Sarcophagus_lid.png:<doorStateAnim>.<doorStateFrame><partVisible><directives>" } },
 
-						"opened": { "properties": { "zLevel": -1, "image": "skins/<skin>/Sarcophagus_lid.png:<doorStateAnim>.<doorStateFrame><partVisible><directives><statusDirectives>" } },
+						"opened": { "properties": { "zLevel": -1, "image": "skins/<skin>/Sarcophagus_lid.png:<doorStateAnim>.<doorStateFrame><partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}

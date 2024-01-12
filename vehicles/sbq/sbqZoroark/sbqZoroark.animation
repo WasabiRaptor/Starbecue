@@ -16,7 +16,6 @@
 		"skin" : "default",
 		"frame" : "1",
 		"directives" : "",
-		"statusDirectives" : "",
 		"bellymask" : "",
 		"smolpath": "",
 		"eyesX" : "0",
@@ -306,7 +305,7 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<bodySkin>/giant/giant_body.png:<bodyStateAnim>.<bodyStateFrame><partVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<bodySkin>/giant/giant_body.png:<bodyStateAnim>.<bodyStateFrame><partVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -320,7 +319,7 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "skins/<bodySkin>/giant/giant_belly.png:<bellyOccupants>.<bellyStateAnim>.<bellyStateFrame><partVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<bodySkin>/giant/giant_belly.png:<bellyOccupants>.<bellyStateAnim>.<bellyStateFrame><partVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -334,7 +333,7 @@
 				},
 				"partStates": {
 					"neckState": {
-						"eat": { "properties": { "image": "skins/<bodySkin>/giant/giant_neck.png:<neckStateAnim>.<neckStateFrame><partVisible><directives><statusDirectives><bellymask>" } },
+						"eat": { "properties": { "image": "skins/<bodySkin>/giant/giant_neck.png:<neckStateAnim>.<neckStateFrame><partVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -349,7 +348,7 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "skins/<tailSkin>/giant/giant_tail.png:<tailOccupants>.<tailStateAnim>.<tailStateFrame><partVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<tailSkin>/giant/giant_tail.png:<tailOccupants>.<tailStateAnim>.<tailStateFrame><partVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -364,7 +363,7 @@
 				},
 				"partStates": {
 					"breastsBackState": {
-						"idle": { "properties": { "image": "skins/<fluffSkin>/giant/giant_breasts.png:<breastsBackStateAnim>.<breastsBackStateFrame><breastsVisible><partVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<fluffSkin>/giant/giant_breasts.png:<breastsBackStateAnim>.<breastsBackStateFrame><breastsVisible><partVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -378,7 +377,7 @@
 				},
 				"partStates": {
 					"breastsFrontState": {
-						"idle": { "properties": { "image": "skins/<fluffSkin>/giant/foreground/giant_breasts.png:<breastsFrontStateAnim>.<breastsFrontStateFrame><breastsVisible><partVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<fluffSkin>/giant/foreground/giant_breasts.png:<breastsFrontStateAnim>.<breastsFrontStateFrame><breastsVisible><partVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -393,7 +392,7 @@
 				},
 				"partStates": {
 					"cockState": {
-						"idle": { "properties": { "image": "skins/<skin>/giant/giant_cock.png:<shaftOccupants>.<cockStateAnim>.<cockStateFrame><partVisible><cockVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/giant/giant_cock.png:<shaftOccupants>.<cockStateAnim>.<cockStateFrame><partVisible><cockVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 
@@ -409,7 +408,7 @@
 				},
 				"partStates": {
 					"ballsFrontState": {
-						"idle": { "properties": { "image": "skins/<skin>/giant/foreground/giant_balls.png:<ballsFrontStateAnim>.<ballsFrontStateFrame><partVisible><ballsVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/giant/foreground/giant_balls.png:<ballsFrontStateAnim>.<ballsFrontStateFrame><partVisible><ballsVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 
@@ -424,7 +423,7 @@
 				},
 				"partStates": {
 					"ballsBackState": {
-						"idle": { "properties": { "image": "skins/<skin>/giant/giant_balls.png:<ballsBackStateAnim>.<ballsBackStateFrame><partVisible><ballsVisible><directives><statusDirectives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/giant/giant_balls.png:<ballsBackStateAnim>.<ballsBackStateFrame><partVisible><ballsVisible><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 
@@ -442,8 +441,8 @@
 				},
 				"partStates": {
 					"armsState": {
-						"idle": { "properties": { "image": "skins/<armsSkin>/giant/foreground/giant_arms.png:<armsStateAnim>.<armsStateFrame><partVisible><directives><statusDirectives><armVisible>" } },
-						"walk": { "properties": { "image": "skins/<armsSkin>/giant/foreground/giant_arms.png:<direction>.<armsStateAnim>.<armsStateFrame><partVisible><directives><statusDirectives><armVisible>" } },
+						"idle": { "properties": { "image": "skins/<armsSkin>/giant/foreground/giant_arms.png:<armsStateAnim>.<armsStateFrame><partVisible><directives><armVisible>" } },
+						"walk": { "properties": { "image": "skins/<armsSkin>/giant/foreground/giant_arms.png:<direction>.<armsStateAnim>.<armsStateFrame><partVisible><directives><armVisible>" } },
 
 						"none": { "properties": {} }
 					}
@@ -458,7 +457,7 @@
 				},
 				"partStates":{
 					"backarms_rotationState": {
-						"rotation": { "properties": { "image": "skins/<armsSkin>/giant/foreground/giant_arms.png:rotation.<backarms_rotationStateFrame><partVisible><directives><statusDirectives><armVisible>" } }
+						"rotation": { "properties": { "image": "skins/<armsSkin>/giant/foreground/giant_arms.png:rotation.<backarms_rotationStateFrame><partVisible><directives><armVisible>" } }
 					}
 				}
 			},
@@ -472,8 +471,8 @@
 				},
 				"partStates": {
 					"armsState": {
-						"idle": { "properties": { "image": "skins/<armsSkin>/giant/giant_arms.png:<armsStateAnim>.<armsStateFrame><partVisible><directives><statusDirectives><armVisible>" } },
-						"walk": { "properties": { "image": "skins/<armsSkin>/giant/giant_arms.png:<direction>.<armsStateAnim>.<armsStateFrame><partVisible><directives><statusDirectives><armVisible>" } },
+						"idle": { "properties": { "image": "skins/<armsSkin>/giant/giant_arms.png:<armsStateAnim>.<armsStateFrame><partVisible><directives><armVisible>" } },
+						"walk": { "properties": { "image": "skins/<armsSkin>/giant/giant_arms.png:<direction>.<armsStateAnim>.<armsStateFrame><partVisible><directives><armVisible>" } },
 
 						"none": { "properties": {} }
 					}
@@ -488,7 +487,7 @@
 				},
 				"partStates":{
 					"backarms_rotationState": {
-						"rotation": { "properties": { "image": "skins/<armsSkin>/giant/giant_arms.png:rotation.<backarms_rotationStateFrame><partVisible><directives><statusDirectives><armVisible>" } }
+						"rotation": { "properties": { "image": "skins/<armsSkin>/giant/giant_arms.png:rotation.<backarms_rotationStateFrame><partVisible><directives><armVisible>" } }
 					}
 				}
 			},
@@ -501,8 +500,8 @@
 				},
 				"partStates": {
 					"legsState": {
-						"idle": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/foreground/giant_legs.png:<legsStateAnim>.<legsStateFrame><partVisible><directives><statusDirectives>" } },
-						"walk": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/foreground/giant_legs.png:<direction>.<legsStateAnim>.<legsStateFrame><partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/foreground/giant_legs.png:<legsStateAnim>.<legsStateFrame><partVisible><directives>" } },
+						"walk": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/foreground/giant_legs.png:<direction>.<legsStateAnim>.<legsStateFrame><partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -516,8 +515,8 @@
 				},
 				"partStates": {
 					"legsState": {
-						"idle": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/giant_legs.png:<legsStateAnim>.<legsStateFrame><partVisible><directives><statusDirectives>" } },
-						"walk": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/giant_legs.png:<direction>.<legsStateAnim>.<legsStateFrame><partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/giant_legs.png:<legsStateAnim>.<legsStateFrame><partVisible><directives>" } },
+						"walk": { "properties": {"offset" : [0,-1], "image": "skins/<legsSkin>/giant/giant_legs.png:<direction>.<legsStateAnim>.<legsStateFrame><partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -532,7 +531,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "skins/<headSkin>/giant/giant_head.png:<headStateAnim>.<headStateFrame><partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": { "image": "skins/<headSkin>/giant/giant_head.png:<headStateAnim>.<headStateFrame><partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -546,7 +545,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "skins/<headSkin>/giant/giant_head.png:<headStateAnim>.<headStateFrame><partVisible><directives><statusDirectives>?addmask=/vehicles/sbq/sbqZoroark/skins/<headSkin>/giant/foreground/giant_head.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "skins/<headSkin>/giant/giant_head.png:<headStateAnim>.<headStateFrame><partVisible><directives>?addmask=/vehicles/sbq/sbqZoroark/skins/<headSkin>/giant/foreground/giant_head.png:<headStateAnim>.<headStateFrame>" } },
 
 						"none": { "properties": {} }
 					}
@@ -557,7 +556,7 @@
 					"centered": true,
 					"zLevel": 2.1,
 					"transformationGroups": ["globalScale", "headbob"],
-					"image": "skins/<headSkin>/giant/giant_eyes.png:<eyesX>.<eyesY><partVisible><directives><statusDirectives>"
+					"image": "skins/<headSkin>/giant/giant_eyes.png:<eyesX>.<eyesY><partVisible><directives>"
 				}
 
 			},
@@ -569,7 +568,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "skins/<hairSkin>/giant/giant_hair.png:<headStateAnim>.<headStateFrame><partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": { "image": "skins/<hairSkin>/giant/giant_hair.png:<headStateAnim>.<headStateFrame><partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -583,7 +582,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "skins/<hairSkin>/giant/giant_hair.png:<headStateAnim>.<headStateFrame><partVisible><directives><statusDirectives>?addmask=/vehicles/sbq/sbqZoroark/skins/<headSkin>/giant/foreground/giant_head.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "skins/<hairSkin>/giant/giant_hair.png:<headStateAnim>.<headStateFrame><partVisible><directives>?addmask=/vehicles/sbq/sbqZoroark/skins/<headSkin>/giant/foreground/giant_head.png:<headStateAnim>.<headStateFrame>" } },
 
 						"none": { "properties": {} }
 					}
@@ -597,7 +596,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "skins/<headSkin>/giant/giant_ears.png:<headStateAnim>.<headStateFrame><partVisible><directives><statusDirectives>" } },
+						"idle": { "properties": { "image": "skins/<headSkin>/giant/giant_ears.png:<headStateAnim>.<headStateFrame><partVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
