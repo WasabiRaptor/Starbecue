@@ -51,12 +51,26 @@ function init()
 		return {sbq.speciesConfig, mcontroller.scale()}
 	end)
 
-
+	sbq.timer("spawn", 0, function()
+		local current = player.getProperty("sbqCurrentData") or {}
+		if current.species then
+			world.spawnVehicle(current.species, entity.position(), {
+				driver = player.id(), layer = current.layer, startState = current.state,
+				settings = current.settings, scale = mcontroller.scale()
+			})
+		elseif player.getProperty("sbqType") == "prey" then
+			for i, effect in ipairs(root.assetJson("/sbqGeneral.config").predStatusEffects) do
+				status.removeEphemeralEffect(effect)
+			end
+		end
+		player.setProperty("sbqCurrentData", nil) -- after spawning the vehicle, clear it so it can set its own current data
+	end)
 end
 
 function update(dt)
-	sbq.checkTimers(dt)
 	old.update(dt)
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	sbq.checkTimers(dt)
 	local light = player.getProperty( "sbqLight" )
 	if light ~= nil then
 		localAnimator.clearLightSources()

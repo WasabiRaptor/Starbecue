@@ -70,10 +70,10 @@ function sbq.vehiclePred(vehicle)
 
 	local currentData = status.statusProperty("sbqCurrentData") or {}
 	sbq.addRPC(world.sendEntityMessage(entity.id(), "sbqLoadSettings", vehicle), function (settings)
-		world.spawnVehicle( vehicle, mcontroller.position(), { driver = entity.id(), settings = settings, retrievePrey = currentData.id } )
+		world.spawnVehicle( vehicle, mcontroller.position(), { driver = entity.id(), settings = settings, retrievePrey = currentData.id, scale = mcontroller.scale() } )
 		animator.playSound("activate")
 	end, function ()
-		world.spawnVehicle( vehicle, mcontroller.position(), { driver = entity.id(), retrievePrey = currentData.id } )
+		world.spawnVehicle( vehicle, mcontroller.position(), { driver = entity.id(), retrievePrey = currentData.id, scale = mcontroller.scale() } )
 		animator.playSound("activate")
 	end)
 end

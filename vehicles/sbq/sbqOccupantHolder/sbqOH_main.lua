@@ -151,7 +151,8 @@ end
 local inited
 
 function init()
-	sbq.config = root.assetJson( "/sbqGeneral.config")
+	sbq.config = root.assetJson("/sbqGeneral.config")
+	sbq.config2 = root.assetJson("/sbq.config")
 	sbq.spawner = config.getParameter("spawner") or config.getParameter("driver")
 	sbq.driver = sbq.spawner
 	sbq.driving = world.entityType(sbq.spawner) == "player"
@@ -169,11 +170,6 @@ function init()
 	for _, script in ipairs(sbq.config.scripts) do
 		require(script)
 	end
-
-	message.setHandler("sbqOccupantHolderScale", function(_, _, scale)
-		mcontroller.setScale(scale)
-		sbq.predScale = scale
-	end)
 
 	sbq.timer("init", 0, function ()
 		sbq.getInit()

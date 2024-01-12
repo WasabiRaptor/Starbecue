@@ -289,7 +289,7 @@ function sbq.doTransformPrey(i, settings, smolPreyData)
 		sbq.occupant[i].smolPreyData.layer = smolPreyData
 	else
 		if type(sbq.occupant[i].smolPreyData.id) == "number" and world.entityExists(sbq.occupant[i].smolPreyData.id) then
-			smolPreyData.id = world.spawnVehicle( smolPreyData.species, sbq.localToGlobal({ sbq.occupant[i].victimAnim.last.x or 0, sbq.occupant[i].victimAnim.last.y or 0}), { driver = sbq.occupant[i].id, settings = smolPreyData.settings, uneaten = true, startState = smolPreyData.state, layer = smolPreyData.layer, isNested = true, retrievePrey = sbq.occupant[i].smolPreyData.id })
+			smolPreyData.id = world.spawnVehicle( smolPreyData.species, sbq.localToGlobal({ sbq.occupant[i].victimAnim.last.x or 0, sbq.occupant[i].victimAnim.last.y or 0}), { driver = sbq.occupant[i].id, settings = smolPreyData.settings, uneaten = true, startState = smolPreyData.state, layer = smolPreyData.layer, isNested = true, retrievePrey = sbq.occupant[i].smolPreyData.id, scale = mcontroller.scale() })
 		end
 		sbq.occupant[i].smolPreyData = smolPreyData
 		sbq.occupant[i].species = smolPreyData.species

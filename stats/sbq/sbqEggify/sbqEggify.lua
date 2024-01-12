@@ -15,5 +15,5 @@ function init()
 	}
 
 	world.spawnProjectile("sbqWarpInEffect", mcontroller.position(), entity.id(), { 0, 0 }, true)
-	eggSpawned = world.spawnVehicle("sbqEgg", mcontroller.position(), { driver = entity.id(), direction = mcontroller.facingDirection(), settings = { replaceColors = replaceColors, escapeDifficulty = -2 } })
+	eggSpawned = world.spawnVehicle("sbqEgg", mcontroller.position(), { driver = entity.id(), direction = mcontroller.facingDirection(), settings = { replaceColors = replaceColors, escapeDifficulty = -2, scale = mcontroller.scale() } })
 end

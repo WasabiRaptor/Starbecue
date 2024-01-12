@@ -19,7 +19,7 @@ function update(args)
 		rpcSettings = nil
 	end
 	if args.moves["special1"] and not pressed then
-		world.spawnVehicle( pred, mcontroller.position(), { driver = entity.id(), settings = sb.jsonMerge(settings[pred] or {}, settings.global or {}), direction = mcontroller.facingDirection()  } )
+		world.spawnVehicle( pred, mcontroller.position(), { driver = entity.id(), settings = sb.jsonMerge(settings[pred] or {}, settings.global or {}), direction = mcontroller.facingDirection(), scale = mcontroller.scale()  } )
 	end
 	pressed = args.moves["special1"]
 end

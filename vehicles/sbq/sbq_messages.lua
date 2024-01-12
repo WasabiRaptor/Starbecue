@@ -7,6 +7,10 @@ message.setHandler( "settingsMenuSet", function(_,_, val )
 	sbq.settingsMenuUpdated()
 end)
 
+message.setHandler("sbqOccupantHolderScale", function(_, _, scale)
+	mcontroller.setScale(scale)
+	sbq.predScale = scale
+end)
 
 message.setHandler( "letout", function(_,_, id )
 	sbq.letout(id)
@@ -129,7 +133,7 @@ end)
 function sbq.reversion()
 	if sbq.occupants.total > 0 then
 		sbq.addRPC(world.sendEntityMessage( sbq.driver, "sbqLoadSettings", "sbqOccupantHolder" ), function (settings)
-			world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { driver = sbq.driver, settings = settings, retrievePrey = entity.id(), direction = sbq.direction } )
+			world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { driver = sbq.driver, settings = settings, retrievePrey = entity.id(), direction = sbq.direction, scale = mcontroller.scale() } )
 		end)
 	else
 		sbq.onDeath()

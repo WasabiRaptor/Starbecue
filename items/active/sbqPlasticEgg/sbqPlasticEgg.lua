@@ -7,7 +7,7 @@ function update(dt, fireMode, shiftHeld, controls)
 		if not (preyEnabled.eggAllow) then
 			return
 		end
-		eggSpawned = world.spawnVehicle("sbqEgg", mcontroller.position(), { driver = player.id(), direction = mcontroller.facingDirection(), settings = storage.settings or { skinNames = { head = "plastic" } } })
+		eggSpawned = world.spawnVehicle("sbqEgg", mcontroller.position(), { driver = player.id(), direction = mcontroller.facingDirection(), settings = storage.settings or { skinNames = { head = "plastic" }, scale = mcontroller.scale() } })
 		item.consume(1)
 
 	elseif fireMode == "none" then

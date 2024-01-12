@@ -89,7 +89,6 @@ function init()
 			chestCosmetic = npc.getItemSlot("chestCosmetic") or false,
 			legsCosmetic = npc.getItemSlot("legsCosmetic") or false,
 			backCosmetic = npc.getItemSlot("backCosmetic") or false,
-			statusDirectives = status.statusProperty("speciesAnimOverrideDirectives"),
 			effectDirectives = status.statusProperty("effectDirectives")
 		}
 	end)

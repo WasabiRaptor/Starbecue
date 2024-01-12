@@ -1,7 +1,15 @@
-function sbq.forceSeat( occupantId, seatindex )
+function sbq.forceSeat( occupantId, seatindex, predPrey )
 	if occupantId then
-		vehicle.setLoungeEnabled("occupant"..seatindex, true)
-		world.sendEntityMessage( occupantId, "sbqForceSit", {index=seatindex, source=entity.id()})
+		local seatname = "occupant" .. seatindex
+		vehicle.setLoungeEnabled(seatname, true)
+		vehicle.setItemBlacklist(seatname, sbq.config2[predPrey].itemBlacklist)
+		vehicle.setItemWhitelist(seatname, sbq.config2[predPrey].itemWhitelist)
+		vehicle.setItemTagBlacklist(seatname, sbq.config2[predPrey].itemTagBlacklist)
+		vehicle.setItemTagWhitelist(seatname, sbq.config2[predPrey].itemTagWhitelist)
+		vehicle.setItemTypeBlacklist(seatname, sbq.config2[predPrey].itemTypeBlacklist)
+		vehicle.setItemTypeWhitelist(seatname, sbq.config2[predPrey].itemTypeWhitelist)
+		vehicle.setToolUsageSuppressed(seatname, sbq.config2[predPrey].toolUsageSuppressed)
+		world.sendEntityMessage(occupantId, "sbqForceSit", { index = seatindex, source = entity.id() })
 	end
 end
 
@@ -75,7 +83,7 @@ function sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 	sbq.occupant[seatindex].flags.hostile = args.hostile
 	sbq.occupant[seatindex].flags.willing = args.willing
 	world.sendEntityMessage( args.id, "sbqMakeNonHostile")
-	sbq.forceSeat( args.id, seatindex )
+	sbq.forceSeat( args.id, seatindex, "prey" )
 	sbq.refreshList = true
 end
 
@@ -102,7 +110,7 @@ function sbq.uneat( occupantId )
 		if type(occupantData.smolPreyData.id) == "number" and world.entityExists(occupantData.smolPreyData.id) then
 			world.sendEntityMessage(occupantData.smolPreyData.id, "uneaten")
 		else
-			world.spawnVehicle( occupantData.species, sbq.localToGlobal({ occupantData.victimAnim.last.x or 0, occupantData.victimAnim.last.y or 0}), { driver = occupantId, settings = occupantData.smolPreyData.settings, uneaten = true, startState = occupantData.smolPreyData.state, layer = occupantData.smolPreyData.layer })
+			world.spawnVehicle( occupantData.species, sbq.localToGlobal({ occupantData.victimAnim.last.x or 0, occupantData.victimAnim.last.y or 0}), { driver = occupantId, settings = occupantData.smolPreyData.settings, uneaten = true, startState = occupantData.smolPreyData.state, layer = occupantData.smolPreyData.layer, scale = mcontroller.scale() })
 		end
 	else
 		world.sendEntityMessage(occupantId, "sbqRemoveStatusEffects", sbq.config.predStatusEffects, (occupantData.flags.digested or occupantData.flags.infused) and sbq.settings.reformResetHealth and not (occupantData.flags.hostile and sbq.settings.overrideSoftDigestForHostiles))

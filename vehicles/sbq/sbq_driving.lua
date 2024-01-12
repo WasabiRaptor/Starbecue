@@ -303,7 +303,7 @@ end
 
 function sbq.transformVehicle(settings, selection)
 	if not sbq.findFirstOccupantIdForLocation("escaping") then
-		world.spawnVehicle( selection, mcontroller.position(), { driver = sbq.driver, settings = settings, retrievePrey = entity.id(), direction = sbq.direction } )
+		world.spawnVehicle( selection, mcontroller.position(), { driver = sbq.driver, settings = settings, retrievePrey = entity.id(), direction = sbq.direction, scale = mcontroller.scale() } )
 	end
 end
 

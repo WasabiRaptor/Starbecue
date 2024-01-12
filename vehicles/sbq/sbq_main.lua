@@ -145,7 +145,8 @@ function init()
 	sbq.stateconfig = config.getParameter("states")
 	sbq.loungePositions = config.getParameter("loungePositions")
 	sbq.animStateData = root.assetJson( sbq.cfgAnimationFile ).animatedParts.stateTypes
-	sbq.config = root.assetJson( "/sbqGeneral.config")
+	sbq.config = root.assetJson("/sbqGeneral.config")
+	sbq.config2 = root.assetJson("/sbq.config")
 	sbq.transformGroups = root.assetJson( sbq.cfgAnimationFile ).transformationGroups
 
 	sbq.settings = sb.jsonMerge(sbq.config.defaultSettings, sb.jsonMerge( sbq.sbqData.defaultSettings or {}, sb.jsonMerge(config.getParameter( "settings" ) or {}, sbq.sbqData.overrideSettings or {})))
@@ -155,8 +156,8 @@ function init()
 	sbq.spawner = config.getParameter("spawner")
 	sbq.settings.directives = sbq.sbqData.defaultDirectives or ""
 
-	sbq.predScale = 1
-
+	sbq.predScale = config.getParameter("scale") or 1
+	mcontroller.setScale(sbq.predScale)
 	if mcontroller_extensions then
 		for k,v in pairs(mcontroller_extensions) do
 			mcontroller[k] = v
@@ -249,7 +250,9 @@ function init()
 
 		sbq.driving = true
 		sbq.spawner = sbq.driver
-		sbq.forceSeat( sbq.driver, 0 )
+		sbq.timer("forceSeat", 0.1, function ()
+			sbq.forceSeat( sbq.driver, 0, "pred" )
+		end)
 		world.sendEntityMessage( sbq.driver, "sbqGiveController")
 	else
 		sbq.seats.objectControls = sbq.clearOccupant(0)

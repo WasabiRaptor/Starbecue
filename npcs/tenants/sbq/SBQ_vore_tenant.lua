@@ -453,7 +453,7 @@ end
 
 function sbq.requestTransition(transition, args)
 	if not sbq.occupantHolder then
-		sbq.occupantHolder = world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { driver = entity.id(), settings = storage.settings, doExpandAnim = true } )
+		sbq.occupantHolder = world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { driver = entity.id(), settings = storage.settings, doExpandAnim = true, scale = mcontroller.scale() } )
 	end
 	table.insert(sbq.queuedTransitions, {transition, args})
 end

@@ -51,7 +51,7 @@ function update(dt, fireMode, shiftHeld)
 
 			local currentData = player.getProperty("sbqCurrentData") or {}
 
-			world.spawnVehicle( self.vehicle, { position[1], position[2] + 1.5 }, { driver = entity.id(), settings = sbqSettings, retrievePrey = currentData.id } )
+			world.spawnVehicle( self.vehicle, { position[1], position[2] + 1.5 }, { driver = entity.id(), settings = sbqSettings, retrievePrey = currentData.id, scale = mcontroller.scale() } )
 
 			if newUnlock then
 				player.radioMessage({
