@@ -14,6 +14,7 @@ local scaleDuration = 0
 local oldScale = 1
 local scaling = false
 
+local seatToForce
 function init()
     old.init()
 
@@ -37,8 +38,10 @@ function init()
 	end)
 
 
-	message.setHandler("sbqForceSit", function(_,_, data)
-		pcall(mcontroller.setAnchorState, data.source, data.index)
+	message.setHandler("sbqForceSit", function(_, _, data)
+		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
+			seatToForce = data
+		end
 	end)
 
 	message.setHandler("sbqGetSeatInformation", function()
@@ -237,6 +240,11 @@ function update(dt)
 		end
 	end
 
+	if seatToForce then
+		if world.entityExists(seatToForce.source) then
+			if pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index) then seatToForce = nil end
+		end
+	end
 end
 
 function sbq.calcSize()

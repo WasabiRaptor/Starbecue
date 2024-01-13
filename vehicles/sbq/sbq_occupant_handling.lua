@@ -10,6 +10,7 @@ function sbq.forceSeat( occupantId, seatindex, predPrey, delay )
 		vehicle.setItemTypeWhitelist(seatname, sbq.config2[predPrey].itemTypeWhitelist)
 		vehicle.setToolUsageSuppressed(seatname, sbq.config2[predPrey].toolUsageSuppressed)
 		sbq.timer(seatname.."forceSit", delay or 0, function ()
+			vehicle.setLoungeEnabled(seatname, true)
 			world.sendEntityMessage(occupantId, "sbqForceSit", { index = seatindex, source = entity.id() })
 		end)
 	end
