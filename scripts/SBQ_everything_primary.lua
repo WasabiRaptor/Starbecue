@@ -232,7 +232,7 @@ function update(dt)
         end
 		mcontroller.setScale(currentScale)
 		local currentData = status.statusProperty("sbqCurrentData")
-		if currentData then
+		if currentData and (type(currentData.id) == "number") and world.entityExists(currentData.id) then
 			world.sendEntityMessage(currentData.id, "sbqOccupantHolderScale", currentScale)
 		end
 		if scaleTime >= scaleDuration then
