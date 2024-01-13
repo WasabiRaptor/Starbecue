@@ -38,7 +38,7 @@ function init()
 
 
 	message.setHandler("sbqForceSit", function(_,_, data)
-		mcontroller.setAnchorState(data.source, data.index)
+		pcall(mcontroller.setAnchorState, data.source, data.index)
 	end)
 
 	message.setHandler("sbqGetSeatInformation", function()
