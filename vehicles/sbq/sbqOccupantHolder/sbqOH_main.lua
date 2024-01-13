@@ -265,6 +265,7 @@ end
 
 sbq.totalTimeAlive = 0
 function update(dt)
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	sbq.checkSpawnerExists()
 	sbq.totalTimeAlive = sbq.totalTimeAlive + dt
 	sbq.dt = dt

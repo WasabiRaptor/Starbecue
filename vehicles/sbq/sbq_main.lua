@@ -324,6 +324,7 @@ end
 
 sbq.totalTimeAlive = 0
 function update(dt)
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	if not inited then
 		inited = true
 		sbq.initAfterInit()
