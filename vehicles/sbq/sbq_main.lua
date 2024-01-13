@@ -250,9 +250,7 @@ function init()
 
 		sbq.driving = true
 		sbq.spawner = sbq.driver
-		sbq.timer("forceSeat", 0.1, function ()
-			sbq.forceSeat( sbq.driver, 0, "pred" )
-		end)
+		sbq.forceSeat( sbq.driver, 0, "pred", 0.5)
 		world.sendEntityMessage( sbq.driver, "sbqGiveController")
 	else
 		sbq.seats.objectControls = sbq.clearOccupant(0)

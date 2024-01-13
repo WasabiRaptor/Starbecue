@@ -1,4 +1,4 @@
-function sbq.forceSeat( occupantId, seatindex, predPrey )
+function sbq.forceSeat( occupantId, seatindex, predPrey, delay )
 	if occupantId then
 		local seatname = "occupant" .. seatindex
 		vehicle.setLoungeEnabled(seatname, true)
@@ -9,7 +9,9 @@ function sbq.forceSeat( occupantId, seatindex, predPrey )
 		vehicle.setItemTypeBlacklist(seatname, sbq.config2[predPrey].itemTypeBlacklist)
 		vehicle.setItemTypeWhitelist(seatname, sbq.config2[predPrey].itemTypeWhitelist)
 		vehicle.setToolUsageSuppressed(seatname, sbq.config2[predPrey].toolUsageSuppressed)
-		world.sendEntityMessage(occupantId, "sbqForceSit", { index = seatindex, source = entity.id() })
+		sbq.timer(seatname.."forceSit", delay or 0, function ()
+			world.sendEntityMessage(occupantId, "sbqForceSit", { index = seatindex, source = entity.id() })
+		end)
 	end
 end
 
