@@ -147,6 +147,42 @@
 				}
 			},
 
+			"tailState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
+						"frameProperties" : {
+							"immediateSound" : []
+						}
+					},
+					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"tailExpandState" : {
+				"priority" : 3,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"tailHiddenState" : {
+				"priority" : 4,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
 			"cockState" : {
 				"default": "idle",
 				"priority" : 2,
@@ -392,8 +428,8 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<shaftOccupants>-<tailStateAnim>.<tailStateFrame><tailColorRemap><bodyDirectives>" } },
-						"walk": { "properties": { "image": "<tailImage>:<shaftOccupants>-<bodyStateAnim>.<bodyStateFrame><tailColorRemap><bodyDirectives>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailOccupants>-<tailStateAnim>.<tailStateFrame><tailColorRemap><bodyDirectives>" } },
+						"walk": { "properties": { "image": "<tailImage>:<tailOccupants>-<bodyStateAnim>.<bodyStateFrame><tailColorRemap><bodyDirectives>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -404,11 +440,10 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailOccupants>-<tailStateAnim>.<tailStateFrame><tailColorRemap><bodyDirectives>" } },
-						"s_front" : "idle",
-						"s_back" : "idle",
-						"s_up" : "idle",
-						"s_down" : "idle",
+						"s_front": { "properties": { "image": "<tailImage>:<tailOccupants>-<tailStateAnim>.<tailStateFrame><tailColorRemap><bodyDirectives>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {

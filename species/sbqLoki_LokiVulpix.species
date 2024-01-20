@@ -173,13 +173,13 @@
 				["flesh","flesh", {"nipples":true}],
 				["flesh","tertiary", {"nipples":false}]
 			],
-		"tail" :  {
-			"species" : "sbqAuri_LokiVulpix",
-			"remapColors" : [
-				["tertiary","hair"],
+		"tailColorRemap" : [
+				["tertiary","hair" ],
 				["secondary","secondary"]
 			]
-		}
+	},
+	"colorRemapSources" : {
+		"tailColorRemap" : "sbqAuri_LokiVulpix"
 	},
 	"infusedParts" :{
 		"cockColorRemap" : [
@@ -199,7 +199,8 @@
 	},
 	"animationCustom" : {
 		"globalTagDefaults":{
-			"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png"
+			"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
+			"tailImage" : "/humanoid/sbqAuri_LokiVulpix/tail.png"
 		}
 	}
 

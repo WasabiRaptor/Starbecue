@@ -12,19 +12,27 @@ end
 
 function initAnimator()
 	old.initAnimator()
-
+	--sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
 	local defaultColorMap = root.speciesConfig("human").baseColorMap
-    local speciesConfig = root.speciesConfig(humanoid.species())
+	local speciesConfig = root.speciesConfig(humanoid.species())
 	sbq.animOverrideSettings = sb.jsonMerge(speciesConfig.animOverrideDefaultSettings or {}, status.statusProperty("speciesAnimOverrideSettings") or {}, status.statusProperty("speciesAnimOverrideOverrideSettings") or {})
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
-		animator.setGlobalTag(tag, sbq.remapColor(remaps, defaultColorMap, speciesConfig.baseColorMap or defaultColorMap))
-    end
-    for part, tags in pairs(speciesConfig.colorRemapPartTags or {}) do
+		local sourceColorMap = sb.jsonQuery(speciesConfig, "colorRemapSources." .. tag)
+		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
+		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
+		--sb.logInfo(tag.." "..directives)
+		animator.setGlobalTag(tag, directives)
+	end
+	for part, tags in pairs(speciesConfig.colorRemapPartTags or {}) do
 		for tag, remaps in pairs(tags or {}) do
-			animator.setPartTag(part, tag, sbq.remapColor(remaps, defaultColorMap, speciesConfig.baseColorMap or defaultColorMap))
+			local sourceColorMap = sb.jsonQuery(speciesConfig, "colorRemapSources." .. part ..".".. tag) or sb.jsonQuery(speciesConfig, "colorRemapSources." .. tag)
+			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
+			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
+			--sb.logInfo(tag.." "..directives)
+			animator.setPartTag(part, tag, directives)
 		end
-    end
-    sbq.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
+	end
+	sbq.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
 	sbq.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
 	sbq.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
 	sbq.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
