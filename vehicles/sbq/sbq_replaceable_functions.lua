@@ -65,7 +65,7 @@ function sbq.handleGrab()
 	local alt = (((sbq.seats[sbq.driverSeat].controls.altHandItemDescriptor or {}).parameters or {}).scriptStorage or {}).clickAction
 	local victim = sbq.grabbing
 
-	if sbq.pressControl(sbq.driverSeat, "primaryFire") then
+	if sbq.pressControl(sbq.driverSeat, "PrimaryFire") then
 		sbq.uneat(sbq.grabbing)
 		sbq.grabbing = nil
 		if primary == "grab" then
@@ -73,7 +73,7 @@ function sbq.handleGrab()
 		else
 			sbq.doTransition(primary, { id = victim })
 		end
-	elseif sbq.pressControl(sbq.driverSeat, "altFire") then
+	elseif sbq.pressControl(sbq.driverSeat, "AltFire") then
 		sbq.uneat(sbq.grabbing)
 		sbq.grabbing = nil
 		if alt == "grab" then

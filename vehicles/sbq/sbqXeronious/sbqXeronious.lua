@@ -294,7 +294,7 @@ function state.stand.update()
 			sbq.letGrabGo("hug")
 			sbq.doTransition( "crouch" )
 			return
-		elseif not mcontroller.onGround() and sbq.pressControl(sbq.driverSeat, "jump") then
+		elseif not mcontroller.onGround() and sbq.pressControl(sbq.driverSeat, "Jump") then
 			sbq.letGrabGo("hug")
 			sbq.setState( "fly" )
 			return
@@ -365,7 +365,7 @@ state.stand.grab = grab
 function state.sit.update()
 	checkEggSitup()
 
-	if sbq.pressControl(sbq.driverSeat, "jump") then
+	if sbq.pressControl(sbq.driverSeat, "Jump") then
 		sbq.doTransition("analVore")
 	end
 
@@ -422,7 +422,7 @@ function state.hug.begin()
 end
 
 function state.hug.update()
-	if sbq.pressControl(sbq.driverSeat, "jump") then
+	if sbq.pressControl(sbq.driverSeat, "Jump") then
 		sbq.doTransition("analVore")
 	end
 
@@ -490,7 +490,7 @@ state.crouch.succ = succ
 
 function state.fly.update()
 	if not sbq.transitionLock then
-		if sbq.pressControl( sbq.driverSeat, "jump" )
+		if sbq.pressControl( sbq.driverSeat, "Jump" )
 		or ((sbq.occupants.mass >= sbq.movementParams.fullThreshold) and mcontroller.onGround())
 		or sbq.underWater()
 		then

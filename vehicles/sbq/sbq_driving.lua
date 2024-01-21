@@ -27,9 +27,6 @@ function sbq.updateDriving(dt)
 		--local cursor = "/cursors/cursors.png:pointer"
 		--world.sendEntityMessage( sbq.driver, "sbqDrawCursor", aim, cursor)
 	end
-	if sbq.pressControl(sbq.driverSeat, "special2") then
-		sbq.letout()
-	end
 
 	if not mcontroller.onGround() and not sbq.underWater() then
 		sbq.movement.airtime = sbq.movement.airtime + dt
@@ -150,7 +147,7 @@ function sbq.jumpMovement(dx, dy, state, dt)
 		end
 		if dy == -1 or sbq.activeControls.drop then
 			mcontroller.applyParameters{ ignorePlatformCollision = true }
-		elseif sbq.movement.jumped and sbq.seats[sbq.driverSeat].controls.jump <= (sbq.movementParams[sbq.movement.jumpProfile].jumpHoldTime) and mcontroller.yVelocity() <= sbq.movementParams[sbq.movement.jumpProfile].jumpSpeed then
+		elseif sbq.movement.jumped and sbq.heldControlMax(sbq.driverSeat, "Jump", sbq.movementParams[sbq.movement.jumpProfile].jumpHoldTime) and mcontroller.yVelocity() <= sbq.movementParams[sbq.movement.jumpProfile].jumpSpeed then
 			mcontroller.force({ 0, sbq.movementParams[sbq.movement.jumpProfile].jumpControlForce * sbq.movementParams.mass})
 		end
 	else

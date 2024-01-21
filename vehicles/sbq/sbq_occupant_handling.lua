@@ -830,7 +830,7 @@ function sbq.validStruggle(struggler, dt)
 
 
 	if sbq.heldControl(sbq.occupant[struggler].seatname, "left") and sbq.heldControl(sbq.occupant[struggler].seatname, "right")
-	and sbq.pressControl(sbq.occupant[struggler].seatname, "jump") then
+	and sbq.pressControl(sbq.occupant[struggler].seatname, "Jump") then
 		sbq.escapeScript(struggler)
 		return
 	end

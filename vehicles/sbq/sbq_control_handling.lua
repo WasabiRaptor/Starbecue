@@ -1,19 +1,34 @@
+sbq.controlsPressed = {}
+sbq.controlsReleased = {}
+function controlPressed(seat, control, time)
+	-- sbq.logJson({seat,control,time})
+	if seat == sbq.driverSeat then
+		if control == "Special2" then
+			sbq.letout()
+		end
+    end
+	sbq.controlsPressed = sb.jsonMerge(sbq.controlsPressed, {[seat] = {[control] = time}})
+end
+function controlReleased(seat, control, time)
+	sbq.controlsReleased = sb.jsonMerge(sbq.controlsReleased, {[seat] = {[control] = time}})
+end
+
+
 function sbq.pressControl(seat, control)
-	if sbq.seats[seat].controls[control.."Pressed"] then
-		return true
-	end
+	return sb.jsonQuery(sbq.controlsPressed, seat.."."..control)
 end
 
 function sbq.tapControl(seat, control)
-	return (( sbq.seats[seat].controls[control.."Released"] > 0 ) and ( sbq.seats[seat].controls[control.."Released"] < 0.19 ))
+    local released = sb.jsonQuery(sbq.controlsReleased, seat .. "." .. control)
+	return released and (released < 0.19)
 end
 
 function sbq.heldControl(seat, control, min)
-	return sbq.seats[seat].controls[control] > (min or 0)
+	return vehicle.controlHeld(seat, control) and (vehicle.controlTime(seat, control) > (min or 0))
 end
 
 function sbq.heldControlMax(seat, control, max)
-	return sbq.seats[seat].controls[control] < (max or 1)
+	return vehicle.controlHeld(seat, control) and (vehicle.controlTime(seat, control) < (max or 1))
 end
 
 function sbq.heldControlMinMax(seat, control, min, max)
@@ -22,36 +37,14 @@ end
 
 function sbq.heldControls(seat, controlList, time)
 	for _, control in pairs(controlList) do
-		if sbq.seats[seat].controls[control] <= (time or 0) then
-			return false
-		end
+		if not sbq.heldControl(seat, control, time) then return false end
 	end
 	return true
 end
 
-function sbq.updateControl(seatname, control, dt, forceHold)
-	if vehicle.controlHeld(seatname, control) or forceHold then
-		if sbq.seats[seatname].controls[control] == 0 then
-			sbq.seats[seatname].controls[control.."Pressed"] = true
-		else
-			sbq.seats[seatname].controls[control.."Pressed"] = false
-		end
-		sbq.seats[seatname].controls[control] = sbq.seats[seatname].controls[control] + dt
-		sbq.seats[seatname].controls[control.."Released"] = 0
-	else
-		sbq.seats[seatname].controls[control.."Released"] = sbq.seats[seatname].controls[control]
-		sbq.seats[seatname].controls[control] = 0
-	end
-end
-
 function sbq.updateDirectionControl(seatname, control, direction, val, dt, forceHold)
 	if vehicle.controlHeld(seatname, control) or forceHold then
-		sbq.seats[seatname].controls[control] = sbq.seats[seatname].controls[control] + dt
 		sbq.seats[seatname].controls[direction] = sbq.seats[seatname].controls[direction] + val
-		sbq.seats[seatname].controls[control.."Released"] = 0
-	else
-		sbq.seats[seatname].controls[control.."Released"] = sbq.seats[seatname].controls[control]
-		sbq.seats[seatname].controls[control] = 0
 	end
 end
 
@@ -66,12 +59,6 @@ function sbq.updateControls(dt)
 			sbq.updateDirectionControl(seatname, "right", "dx", 1, dt)
 			sbq.updateDirectionControl(seatname, "down", "dy", -1, dt)
 			sbq.updateDirectionControl(seatname, "up", "dy", 1, dt)
-			sbq.updateControl(seatname, "jump", dt)
-			sbq.updateControl(seatname, "special1", dt)
-			sbq.updateControl(seatname, "special2", dt)
-			sbq.updateControl(seatname, "special3", dt)
-			sbq.updateControl(seatname, "primaryFire", dt)
-			sbq.updateControl(seatname, "altFire", dt)
 
 			sbq.occupant[i].controls.aim = vehicle.aimPosition( seatname ) or {0,0}
 			sbq.getSeatData(sbq.occupant[i], seatname, eid)
@@ -119,9 +106,6 @@ function sbq.getSeatData(occupant, seatname, eid)
 		elseif occupant.controls.altHandItem ~= nil and occupant.controls.altHandItemDescriptor.parameters.scriptStorage ~= nil and occupant.controls.altHandItemDescriptor.parameters.scriptStorage.seatdata ~= nil then
 			occupant.controls = sb.jsonMerge(occupant.controls, occupant.controls.altHandItemDescriptor.parameters.scriptStorage.seatdata)
 		else
-			occupant.controls.shiftReleased = occupant.controls.shift
-			occupant.controls.shift = 0
-
 			sbq.loopedMessage(seatname .. "Info", eid, "sbqGetSeatInformation", { seatType }, function(seatdata)
 				occupant.controls = sb.jsonMerge(occupant.controls, seatdata)
 			end)

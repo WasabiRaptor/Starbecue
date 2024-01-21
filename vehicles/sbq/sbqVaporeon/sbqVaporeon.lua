@@ -153,10 +153,10 @@ end
 
 function state.lay.update()
 	if sbq.driving then
-		if sbq.pressControl( sbq.driverSeat, "jump" ) then
+		if sbq.pressControl( sbq.driverSeat, "Jump" ) then
 			sbq.doTransition( "absorb" )
 		end
-		if sbq.pressControl( sbq.driverSeat, "primaryFire" ) or sbq.pressControl( sbq.driverSeat, "altFire" )then
+		if sbq.pressControl( sbq.driverSeat, "PrimaryFire" ) or sbq.pressControl( sbq.driverSeat, "AltFire" )then
 			sbq.doTransition( "lick" )
 		end
 	end
@@ -174,7 +174,7 @@ end
 -------------------------------------------------------------------------------
 
 function state.sleep.update()
-	if sbq.driving and sbq.pressControl( sbq.driverSeat, "jump" ) then
+	if sbq.driving and sbq.pressControl( sbq.driverSeat, "Jump" ) then
 		sbq.doTransition( "absorb" )
 	end
 end
@@ -218,7 +218,7 @@ end
 -------------------------------------------------------------------------------
 
 function state.hug.update()
-	if sbq.pressControl( sbq.driverSeat, "jump" ) then
+	if sbq.pressControl( sbq.driverSeat, "Jump" ) then
 		sbq.doTransition( "absorb" )
 	end
 end

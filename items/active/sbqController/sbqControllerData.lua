@@ -19,13 +19,4 @@ function update(dt, fireMode, shiftHeld, controls)
 	storage.seatdata.chestCosmetic = player.equippedItem("chestCosmetic") or false
 	storage.seatdata.legsCosmetic = player.equippedItem("legsCosmetic") or false
 	storage.seatdata.backCosmetic = player.equippedItem("backCosmetic") or false
-
-	if shiftHeld then
-		storage.seatdata.shift = (storage.seatdata.shift or 0) + dt
-		storage.seatdata.shiftReleased = 0
-	else
-		storage.seatdata.shiftReleased = storage.seatdata.shift
-		storage.seatdata.shift = 0
-	end
-
 end
