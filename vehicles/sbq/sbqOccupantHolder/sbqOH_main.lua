@@ -81,39 +81,6 @@ function sbq.clearOccupant(i)
 			altFire = 0,
 			dx = 0,
 			dy = 0,
-			left = 0,
-			right = 0,
-			up = 0,
-			down = 0,
-			jump = 0,
-			shift = 0,
-			special1 = 0,
-			special2 = 0,
-			special3 = 0,
-
-			primaryFireReleased = 0,
-			altFireReleased = 0,
-			leftReleased = 0,
-			rightReleased = 0,
-			upReleased = 0,
-			downReleased = 0,
-			jumpReleased = 0,
-			shiftReleased = 0,
-			special1Released = 0,
-			special2Released = 0,
-			special3Released = 0,
-
-			primaryFirePressed = false,
-			altFirePressed = false,
-			leftPressed = false,
-			rightPressed = false,
-			upPressed = false,
-			downPressed = false,
-			jumpPressed = false,
-			shiftPressed = false,
-			special1Pressed = false,
-			special2Pressed = false,
-			special3Pressed = false,
 
 			aim = {0,0},
 			primaryHandItem = nil,
@@ -288,7 +255,9 @@ function update(dt)
 	sbq.applyStatusLists()
 
 	sbq.update(dt)
-	sbq.applyTransformations()
+    sbq.applyTransformations()
+	sbq.controlsPressed = {}
+	sbq.controlsReleased = {}
 end
 
 function uninit()

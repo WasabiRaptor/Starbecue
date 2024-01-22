@@ -48,7 +48,7 @@ function update(dt)
 	end
 	if storage.vehicle ~= nil then
 		if (sbq.vehicleId == nil) or (not world.entityExists(sbq.vehicleId)) then
-			sbq.vehicleId = world.spawnVehicle( sbq.vehicle, sbq.spawnPosition, { spawner = entity.id(), settings = storage.settings, direction = object.direction(), scale = mcontroller.scale() } )
+			sbq.vehicleId = world.spawnVehicle( sbq.vehicle, sbq.spawnPosition, { spawner = entity.id(), settings = storage.settings, direction = object.direction() } )
 		end
 	else
 		object.setInteractive(false)
