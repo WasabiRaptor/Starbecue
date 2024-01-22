@@ -182,8 +182,8 @@ end
 function _Occupant:controlHeld(...)
 	loungeable.controlHeld(tostring(self.seat), ...)
 end
-function _Occupant:controlTime(...)
-	loungeable.controlTime(tostring(self.seat), ...)
+function _Occupant:controlHeldTime(...)
+	loungeable.controlHeldTime(tostring(self.seat), ...)
 end
 
 function _Occupant:controlPressed(control, time)
@@ -236,19 +236,19 @@ function _Occupant:checkStruggles(dt)
 	local staleTime = 5
     if self:controlHeld("Up") then
         dy = dy + 1
-        if self:controlTime("Up") > staleTime then effectiveness = effectiveness * 0.5 end
+        if self:controlHeldTime("Up") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
     if self:controlHeld("Down") then
         dy = dy - 1
-		if self:controlTime("Down") > staleTime then effectiveness = effectiveness * 0.5 end
+		if self:controlHeldTime("Down") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
     if self:controlHeld("Left") then
         dx = dx - (1 * mcontroller.facingDirection())
-		if self:controlTime("Left") > staleTime then effectiveness = effectiveness * 0.5 end
+		if self:controlHeldTime("Left") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
     if self:controlHeld("Right") then
         dx = dx + (1 * mcontroller.facingDirection())
-		if self:controlTime("Right") > staleTime then effectiveness = effectiveness * 0.5 end
+		if self:controlHeldTime("Right") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
     if dx ~= 0 or dy ~= 0 then
         self.struggleTimer = self.struggleTimer + (dt * effectiveness)

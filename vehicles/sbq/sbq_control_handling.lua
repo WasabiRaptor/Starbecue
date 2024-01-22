@@ -24,11 +24,11 @@ function sbq.tapControl(seat, control)
 end
 
 function sbq.heldControl(seat, control, min)
-	return vehicle.controlHeld(seat, control) and (vehicle.controlTime(seat, control) > (min or 0))
+	return vehicle.controlHeld(seat, control) and (vehicle.controlHeldTime(seat, control) > (min or 0))
 end
 
 function sbq.heldControlMax(seat, control, max)
-	return vehicle.controlHeld(seat, control) and (vehicle.controlTime(seat, control) < (max or 1))
+	return vehicle.controlHeld(seat, control) and (vehicle.controlHeldTime(seat, control) < (max or 1))
 end
 
 function sbq.heldControlMinMax(seat, control, min, max)
