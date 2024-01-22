@@ -38,7 +38,7 @@ function sbq.eat( args, voreType, location, locationSide )
 	})
 	sbq.occupant[seatindex].force = args.force
 	if edibles[1] == nil then
-		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungable now
+		if loungeables[1] == nil then -- now just making sure the prey doesn't belong to another loungeable now
 			sbq.gotEaten(args, voreType, location, locationSide, seatindex)
 			sbq.addRPC(world.sendEntityMessage(args.id, "sbqGetSpeciesVoreConfig"), function (data)
 				sbq.occupant[seatindex].scale = data[2]
