@@ -241,8 +241,11 @@ function update(dt)
 	end
 
 	if seatToForce then
-		if world.entityExists(seatToForce.source) then
-			if pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index) then seatToForce = nil end
+        if world.entityExists(seatToForce.source) then
+			local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
+            if success then seatToForce = nil else
+				-- sb.logError(error)
+			end
 		end
 	end
 end

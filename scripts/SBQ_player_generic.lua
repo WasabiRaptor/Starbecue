@@ -3,10 +3,11 @@ sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/rect.lua")
 require("/scripts/SBQ_humanoidAnimator.lua")
-require("/scripts/SBQ_species_config.lua")
+require("/scripts/SBQ_vore_main.lua")
 
 function init()
-	sbq.config = root.assetJson("/sbqGeneral.config")
+    sbq.config = root.assetJson("/sbq.config")
+	sbq.init()
 	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
 		sbq.timer("sbqPredatorDespawned", 0.5, function ()
 			status.setStatusProperty("sbqPreyList", nil)
@@ -32,12 +33,6 @@ function init()
 		local settings = (player.getProperty("sbqSettings") or {}).global or {}
 		local type = player.getProperty("sbqType")
 		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = type}
-	end)
-	message.setHandler("sbqGetSpeciesVoreConfig", function (_,_)
-		sbq.getSpeciesConfig(player.species(), (player.getProperty("sbqSettings") or {}).global)
-		status.setStatusProperty("sbqOverridePreyEnabled", sbq.speciesConfig.sbqData.overridePreyEnabled)
-		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
-		return {sbq.speciesConfig, mcontroller.scale()}
 	end)
 
 	sbq.timer("spawn", 0, function()

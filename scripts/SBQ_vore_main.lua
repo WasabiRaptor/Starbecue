@@ -14,27 +14,36 @@ Occupants = {
 }
 
 function controlPressed(seat, control, time)
-	if Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
+    if Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
+	sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
 function controlReleased(seat, control, time)
-	if Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
+    if Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
+	sb.logInfo("Released:"..sb.printJson({seat,control,time}))
+end
+
+function sbq.init()
+	sbq.settings = sb.jsonMerge(sbq.config.defaultSettings, storage.settings or {})
+	message.setHandler("sbqAddOccupant", function (_,_, ...)
+		Occupants.addOccupant(...)
+	end)
 end
 
 function sbq.update(dt)
 	Occupants.update(dt)
-
 end
 
+local seats = 15 -- 0 indexed
+
 function Occupants.addOccupant(entityId, location, size)
-    local availableSeats = { true, true, true, true, true, true, true, true }
-    local seat = 0
-	for _, occupant in ipairs(Occupants.list) do
-		availableSeats[occupant.seat + 1] = false
-	end
-	for k,v in ipairs(availableSeats) do
-        if v then seat = k - 1 break end
-		if k == #availableSeats then return false end
-	end
+    local seat
+	for i = 0, seats do
+		if not loungeable.entityLoungingIn("occupant"..i) then
+            seat = "occupant"..i
+			break
+		end
+    end
+    if not seat then return false end
 	local occupant = {
 		entityId = entityId,
 		seat = seat,
@@ -49,7 +58,7 @@ function Occupants.addOccupant(entityId, location, size)
 	}
 	setmetatable(occupant, _Occupant)
     table.insert(Occupants.list, occupant)
-    Occupants.seat[tostring(seat)] = occupant
+    Occupants.seat[seat] = occupant
     Occupants.entityId[tostring(entityId)] = occupant
 	local uuid = world.entityUniqueId(entityId)
 	if uuid then
@@ -64,15 +73,15 @@ function Occupants.addOccupant(entityId, location, size)
 	occupant:setItemTagWhitelist(sbq.config.prey.itemTagWhitelist)
 	occupant:setItemTypeBlacklist(sbq.config.prey.itemTypeBlacklist)
 	occupant:setItemTypeWhitelist(sbq.config.prey.itemTypeWhitelist)
-	occupant:setToolUsageSuppressed(sbq.config.prey.toolUsageSuppressed)
-	world.sendEntityMessage(entityId, "sbqForceSit", { index = seat, source = entity.id() })
+    occupant:setToolUsageSuppressed(sbq.config.prey.toolUsageSuppressed)
+	world.sendEntityMessage(entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 	return true
 end
 function _Occupant:remove()
     self:setLoungeEnabled(false)
     Occupants.locations[self.location].sizeDirty = true
 
-    Occupants.seat[tostring(self.seat)] = nil
+    Occupants.seat[self.seat] = nil
 	for k, occupant in pairs(Occupants.entityId) do
         if occupant.entityId == self.entityId then
 			Occupants.entityId[k] = nil
@@ -100,11 +109,11 @@ function Occupants.update(dt)
     for location, data in pairs(Occupants.locations) do
         if data.sizeDirty or (Occupants.lastScale ~= mcontroller.scale()) then
 			local prevVisualSize = data.visualSize
-			data.size = (storage.settings[location].visualSizeAdd and storage.settings[location].visualSize) or 0
+			data.size = (sbq.settings[location].visualSizeAdd and sbq.settings[location].visualSize) or 0
 			for _, occupant in ipairs(data.list) do
 				data.size = data.size + (occupant.size * occupant.sizeMultiplier / mcontroller.scale())
             end
-            data.size = math.max(storage.settings[location].visualSize, data.size)
+            data.size = math.max(sbq.settings[location].visualSize, data.size)
             data.visualSize = sbq.getClosestValue(data.size, Locations[location].struggleSizes)
             if prevVisualSize ~= data.visualSize then
                 data.interpolating = true
@@ -125,7 +134,7 @@ function _Occupant:update(dt)
     if not world.entityExists(self.entityId) then self:remove() end
     if Occupants.locations[self.location].settingsDirty then self:refreshLocation() end
 
-	local locationSettings = storage.settings.locations[self.location] or {}
+	local locationSettings = (sbq.settings.locations or {})[self.location] or {}
     local locationStore = self.locationStore[self.location]
 
 	locationStore.time = locationStore.time + dt
@@ -137,8 +146,8 @@ function _Occupant:update(dt)
 
     if not self.flags.digested then
 		local oldMultiplier = self.sizeMultiplier
-        local compression = locationSettings.compression or storage.settings.compression
-		local compressionMin = locationSettings.compressionMin or storage.settings.compressionMin
+        local compression = locationSettings.compression or sbq.settings.compression
+		local compressionMin = locationSettings.compressionMin or sbq.settings.compressionMin
         if compression == "time" then
 			self.sizeMultiplier = math.max( compressionMin or 0.25, self.sizeMultiplier - (status.stat("sbqDigestPower") * dt * 0.01))
         elseif compression == "health" then
@@ -153,37 +162,43 @@ function _Occupant:update(dt)
 end
 
 function _Occupant:setLoungeEnabled(...)
-	loungeable.setLoungeEnabled(tostring(self.seat), ...)
+	return loungeable.setLoungeEnabled(self.seat, ...)
 end
 function _Occupant:setDismountable(...)
-	loungeable.setDismountable(tostring(self.seat), ...)
+	return loungeable.setDismountable(self.seat, ...)
 end
 function _Occupant:setItemBlacklist(...)
-	loungeable.setItemBlacklist(tostring(self.seat), ...)
+	return loungeable.setItemBlacklist(self.seat, ...)
 end
 function _Occupant:setItemWhitelist(...)
-	loungeable.setItemWhitelist(tostring(self.seat), ...)
+	return loungeable.setItemWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTagBlacklist(...)
-	loungeable.setItemTagBlacklist(tostring(self.seat), ...)
+	return loungeable.setItemTagBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTagWhitelist(...)
-	loungeable.setItemTagWhitelist(tostring(self.seat), ...)
+	return loungeable.setItemTagWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTypeBlacklist(...)
-	loungeable.setItemTypeBlacklist(tostring(self.seat), ...)
+	return loungeable.setItemTypeBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTypeWhitelist(...)
-	loungeable.setItemTypeWhitelist(tostring(self.seat), ...)
+	return loungeable.setItemTypeWhitelist(self.seat, ...)
 end
 function _Occupant:setToolUsageSuppressed(...)
-	loungeable.setToolUsageSuppressed(tostring(self.seat), ...)
+	return loungeable.setToolUsageSuppressed(self.seat, ...)
 end
 function _Occupant:controlHeld(...)
-	loungeable.controlHeld(tostring(self.seat), ...)
+	return loungeable.controlHeld(self.seat, ...)
 end
 function _Occupant:controlHeldTime(...)
-	loungeable.controlHeldTime(tostring(self.seat), ...)
+	return loungeable.controlHeldTime(self.seat, ...)
+end
+function _Occupant:setLoungeStatusEffects(...)
+	return loungeable.setLoungeStatusEffects(self.seat, ...)
+end
+function _Occupant:getLoungeIndex()
+	return loungeable.getIndexFromName(self.seat)
 end
 
 function _Occupant:controlPressed(control, time)
@@ -204,8 +219,8 @@ function _Occupant:refreshLocation(location)
 		Occupants.locations[location].sizeDirty = true
         self.location = location
 	end
-    local locationData = Locations[self.location]
-	local locationSettings = storage.settings.locations[self.location] or {}
+    local locationData = Locations[self.location] or {}
+	local locationSettings = (sbq.settings.locations or {})[self.location] or {}
 	if not self.locationStore[self.location] then
         self.locationStore[self.location] = {
             time = 0,
@@ -214,18 +229,17 @@ function _Occupant:refreshLocation(location)
     end
 
     local persistentStatusEffects = {
-        { stat = "sbqDigestResistance", effectiveMultiplier = (1 / status.stat("sbqDigestPower")) },
-		{ stat = "sbqGetDigestDrops", amount = (locationSettings.getDigestDrops or storage.settings.getDigestDrops or false) and 1}
+        { stat = "sbqDigestResistance", effectiveMultiplier = (1 / math.max(status.stat("sbqDigestPower"),0.01)) },
+		{ stat = "sbqGetDigestDrops", amount = (1 and (locationSettings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
 	}
-	util.appendLists(persistentStatusEffects, locationData.passiveEffects)
-	util.appendLists(persistentStatusEffects, locationData.mainEffect[locationSettings.mainEffect or storage.settings.mainEffect or "none"])
-    for setting, effects in pairs(locationData.toggleEffects) do
-		if (locationSettings[setting] or (storage.settings[setting] and (locationSettings[setting] == nil))) then
-			util.appendLists(persistentStatusEffects, effects)
+	util.appendLists(persistentStatusEffects, locationData.passiveEffects or {})
+	util.appendLists(persistentStatusEffects, (locationData.mainEffect or {})[locationSettings.mainEffect or sbq.settings.mainEffect or "none"] or {})
+    for setting, effects in pairs(locationData.toggleEffects or {}) do
+		if (locationSettings[setting] or (sbq.settings[setting] and (locationSettings[setting] == nil))) then
+			util.appendLists(persistentStatusEffects, effects or {})
 		end
 	end
-	loungeable.setLoungeStatusEffects("seat"..self.seat, persistentStatusEffects)
-
+	self:setLoungeStatusEffects(persistentStatusEffects)
 end
 
 function _Occupant:checkStruggles(dt)
