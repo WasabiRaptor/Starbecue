@@ -163,7 +163,7 @@ end
 function Occupants.addOccupant(entityId, location, size)
     local seat
 	-- check for unoccupied occupant seat
-	for i = 0, sbq.config.seatCount do
+	for i = 0, sbq.config.seatCount - 1 do
 		if not loungeable.entityLoungingIn("occupant"..i) then
             seat = "occupant"..i
 			break
