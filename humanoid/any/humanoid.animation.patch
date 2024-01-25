@@ -388,16 +388,21 @@
 				}
 			},
 
+
 			"occupant0" : {
 				"default" : "idle",
 				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
+					"oralVore": { "frames": 1, "cycle":0, "mode":"end" },
+					"belly": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			},
 			"occupant1" : {
 				"default" : "idle",
 				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
+					"oralVore": { "frames": 1, "cycle":0, "mode":"end" },
+					"belly": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			},
 			"occupant2" : {

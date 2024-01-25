@@ -1,6 +1,9 @@
 require "/scripts/util.lua"
 require "/scripts/SBQ_util.lua"
 
+_Transformation = {}
+_Transformation.__index = _Transformation
+
 _State = {}
 _State.__index = _State
 
@@ -12,6 +15,9 @@ _Location.__index = _Location
 
 _Occupant = {}
 _Occupant.__index = _Occupant
+
+Transformations = {}
+Transformation = {}
 
 States = {}
 
@@ -41,15 +47,17 @@ function sbq.init()
 end
 
 function sbq.update(dt)
-	Occupants.update(dt)
+    Occupants.update(dt)
+	Transformation:update()
 end
 
 function sbq.reloadVoreConfig(config)
-	-- reset setting tables on reload
+    -- reset setting tables on reload
+	setmetatable(storage.settings, {__index = sbq.config.defaultSettings})
 	sbq.publicSettings = { locations = {} }
-    sbq.overrideSettings = { locations = {} }
-	sbq.settings = sb.jsonMerge(sbq.config.defaultSettings, storage.settings or { locations = {} })
-
+	sbq.settings = { locations = {} }
+    setmetatable(sbq.settings, { __index = storage.settings })
+	setmetatable(sbq.settings.locations, {__index = storage.settings.locations})
 	-- store the last input so it's used again on the next initiaization
     storage.lastVoreConfig = config
 
@@ -59,6 +67,9 @@ function sbq.reloadVoreConfig(config)
 	for _, script in (sbq.voreConfig.scripts or {}) do
 		require(script)
     end
+    Transformation = Transformations[sbq.voreConfig.transformation or "default"]
+	Transformation:init()
+
 	if sbq.voreConfig.pred.appendLists then
 		for k, list in pairs(sbq.voreConfig.pred) do
 			if type(list) == "table" and list[1] then
@@ -92,7 +103,6 @@ end
 
 function sbq.setSetting(k,v)
     storage.settings[k] = v
-    sbq.settings[k] = sbq.overrideSettings[k] or v
 	if sbq.config.publicSettings[k] then
         sbq.publicSettings[k] = sbq.settings[k]
 		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
@@ -101,29 +111,52 @@ end
 
 function sbq.setLocationSetting(location,k,v)
     storage.settings.locations[location][k] = v
-    sbq.settings.locations[location][k] = sbq.overrideSettings.locations[location][k] or v
 	if sbq.config.publicSettings[k] then
         sbq.publicSettings.locations[location][k] = sbq.settings.locations[location][k]
 		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
 	end
 end
 
+function sbq.tryVore(target, location, throughput)
+    local targetSize = math.sqrt(world.entityArea(target))
+	if (targetSize <= ((throughput or 1) * mcontroller.scale())) then
+		local space, subLocation
+	end
+end
+
+-- transformation handling
+function _Transformation:getLocation(locationName, subLocation)
+	return self.state:getLocation(locationName, subLocation)
+end
+
 -- State Handling
-function States.addState(name, config)
+function States.addState(stateName, config)
     local state = sb.jsonMerge(config, {})
+    state.locations = state.locations or {}
+    for k, location in pairs(state.locations) do
+		setmetatable(location, {__index = Locations.locations[k]})
+    end
+	setmetatable(state.locations, {__index = Locations.locations})
 	setmetatable(state, _State)
 	for actionName, action in pairs(state.actions or {}) do
 		setmetatable(action, _Action)
 	end
 end
 
--- Location handling
+function _State:getLocation(locationName, subLocation)
+    if subLocation then
+		return self.locations[locationName].subLocations[subLocation]
+    else
+		return self.locations[locationName]
+	end
+end
 
+-- Location handling
 function Locations.addLocation(name, config)
 	storage.settings.locations[name] = storage.settings.locations[name] or {}
-    sbq.overrideSettings.locations[name] = sbq.overrideSettings.locations[name] or {}
     sbq.publicSettings.locations[name] = sbq.publicSettings.locations[name] or {}
     sbq.settings.locations[name] = sbq.settings.locations[name] or {}
+	setmetatable(sbq.settings.locations[name], {__index = storage.settings.locations[name]})
 
 	local location = sb.jsonMerge(sbq.config.defaultLocationData[name], sbq.getConfigArray(config))
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
@@ -139,12 +172,13 @@ function Locations.addLocation(name, config)
 			)
 		)
 		-- certain NPCs may not like performing certain actions, therefore they can disable them when infused
-		sbq.overrideSettings = sb.jsonMerge(sbq.overrideSettings,  sbq.getConfigArray(infused.parameters.overrideSettings or {}), sbq.getConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name) or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings."..name) or {}))
+		sbq.settings = sb.jsonMerge(sbq.settings,  sbq.getConfigArray(infused.parameters.overrideSettings or {}), sbq.getConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name) or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings."..name) or {}))
 	end
-	-- setup the default settings for that location
-	sbq.settings.locations[name] = sb.jsonMerge(sbq.config.defaultLocationSettings, config.defaultSettings or {}, sbq.settings.locations[name] or {})
+    -- setup the default settings for that location
+    setmetatable(storage.settings.locations[name],
+        { __index = sb.jsonMerge(sbq.config.defaultLocationSettings, config.defaultSettings or {}) })
 	-- setup occupancy values
-	Occupants.locations[name] = {
+	location.occupancy = {
 		sizeDirty = true,
 		settingsDirty = true,
 		list = {},
@@ -152,15 +186,109 @@ function Locations.addLocation(name, config)
 		visualSize = 0,
 		interpolating = false,
 		interpolateFrom = 0,
-		interpolateTime = 0,
+        interpolateTime = 0,
+		subLocations = {}
     }
+	-- sub locations are for things that are different spots techincally, but inherit values and use the settings
+	-- of a single location, such as with the sidedness of breasts, or perhaps a multi chambered stomach
+    for k, subLocation in pairs(location.subLocations) do
+        subLocation.occupancy = {
+			sizeDirty = true,
+			settingsDirty = true,
+			list = {},
+			size = 0,
+			visualSize = 0,
+			interpolating = false,
+			interpolateFrom = 0,
+			interpolateTime = 0,
+        }
+		Occupants.locations[name].subLocations[k] = subLocation.occupancy
+		setmetatable(subLocation, {__index = location})
+	end
+
+    Occupants.locations[name] = location.occupancy
+	location.settings = sbq.settings.locations[name]
 	setmetatable(location, _Location)
-	Locations[name] = location
+	Locations.locations[name] = location
 end
 
+function _Location:hasSpace(size, subLocation)
+    if self.settings.hammerspace then return math.huge end
+    if not self.subLocations then
+		return self:getRemainingSpace(self.max, self.occupancy.size, size)
+    elseif subLocation then
+        -- if we got an input for a sublocation, check that specific one and return
+		return self:getRemainingSpace(self.subLocations[subLocation].max, self.occupancy.subLocations[subLocation].size), subLocation
+    elseif self.subLocations[1] then
+        -- if an array, assuming locations are ordered, only check if theres space in the first
+		return self:getRemainingSpace(self.subLocations[1].max, self.occupancy.subLocations[1].size), 1
+    else
+		-- if an object assume any is valid and choose one with the most space available
+		local best = {0}
+		for k, v in pairs(self.subLocations) do
+            local space = self:getRemainingSpace(v.max, v.occupancy.size, size)
+			if space and space > best[1] then
+				best = {space, k}
+			end
+        end
+		if best[2] then
+			return best[1], best[2]
+		end
+    end
+	return false
+end
+function _Location:getRemainingSpace(max, occupancy, size)
+	local remainingSpace = max - (occupancy + (size or 0))
+	if remainingSpace < 0 then return false end
+	return remainingSpace
+end
+
+function _Location:updateOccupancy(locationTag, subLocationBehavior)
+    local prevVisualSize = self.occupancy.visualSize
+	if self.occupancy.sizeDirty or (Occupants.lastScale ~= mcontroller.scale()) then
+        self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
+        if subLocationBehavior then
+			if subLocationBehavior == "average" then
+				local total = 0
+				local amount = 0
+				for _, subLocation in pairs(self.subLocations) do
+                    total = subLocation.occupancy.size + total
+					amount = amount + 1
+                end
+                self.occupancy.size = (total / amount)
+            elseif subLocationBehavior == "largest" then
+                local best = 0
+				for _, subLocation in pairs(self.subLocations) do
+                    best = math.max(best, subLocation.occupancy.size)
+                end
+                self.occupancy.size = self.occupancy.size + best
+			elseif subLocationBehavior == "smallest" then
+                local best = self.max
+				for _, subLocation in pairs(self.subLocations) do
+                    best = math.min(best, subLocation.occupancy.size)
+                end
+				self.occupancy.size = self.occupancy.size + best
+			end
+        else
+			for _, occupant in ipairs(self.occupancy.list) do
+				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / mcontroller.scale())
+			end
+			self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
+			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size, self.struggleSizes)
+		end
+		if prevVisualSize ~= self.occupancy.visualSize then
+			self.occupancy.interpolating = true
+			self.occupancy.interpolateFrom = prevVisualSize
+			animator.setGlobalTag(locationTag, self.occupancy.visualSize)
+		end
+	end
+	if self.occupancy.interpolating then
+
+	end
+end
 
 -- Occupant Handling
-function Occupants.addOccupant(entityId, location, size)
+function Occupants.addOccupant(entityId, location, size, subLocation)
     local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
@@ -177,6 +305,7 @@ function Occupants.addOccupant(entityId, location, size)
 		seat = seat,
 		flags = {},
         location = location or "belly",
+		subLocation = subLocation,
 		size = size or 1,
         sizeMultiplier = 1,
 		struggleGracePeriod = 0,
@@ -231,26 +360,24 @@ function Occupants.update(dt)
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:update(dt)
     end
-    for location, data in pairs(Occupants.locations) do
-        if data.sizeDirty or (Occupants.lastScale ~= mcontroller.scale()) then
-			local prevVisualSize = data.visualSize
-			data.size = (sbq.settings[location].visualSizeAdd and sbq.settings[location].visualSize) or 0
-			for _, occupant in ipairs(data.list) do
-				data.size = data.size + (occupant.size * occupant.sizeMultiplier / mcontroller.scale())
-            end
-            data.size = math.max(sbq.settings[location].visualSize, data.size)
-            data.visualSize = sbq.getClosestValue(data.size, Locations[location].struggleSizes)
-            if prevVisualSize ~= data.visualSize then
-                data.interpolating = true
-                data.interpolateFrom = prevVisualSize
-				animator.setGlobalTag(location.."Occupants", data.visualSize)
-			end
+    for name, _ in pairs(Locations.locations) do
+		local location = Transformation:getLocation(location)
+        for k, v in pairs(location.subLocations) do
+			local subLocation = Transformation:getLocation(location, k)
+            location.occupancy.sizeDirty = subLocation.occupancy.sizeDirty or location.occupancy.sizeDirty
+            location.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
+            subLocation.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
+			subLocation:updateOccupancy(name.."_"..k)
         end
-		if data.interpolating then
+		location:updateOccupancy(name, true)
 
+        for k, _ in pairs(location.subLocations) do
+			local subLocation = Transformation:getLocation(location, k)
+            subLocation.occupancy.sizeDirty = false
+            subLocation.occupancy.settingsDirty = false
 		end
-        data.settingsDirty = false
-        data.sizeDirty = false
+        location.occupancy.settingsDirty = false
+        location.occupancy.sizeDirty = false
 		Occupants.lastScale = mcontroller.scale()
 	end
 end
@@ -331,20 +458,24 @@ end
 function _Occupant:controlReleased(control, time)
 end
 
-function _Occupant:refreshLocation(location)
-    if location and (self.location ~= location) then
-		Occupants.locations[self.location].sizeDirty = true
-		for i, occupant in ipairs(Occupants.locations[self.location].list) do
+function _Occupant:refreshLocation(name, subLocation)
+	local location = Transformation:getLocation(self.location, self.subLocation)
+
+    if (name and (self.location ~= name)) or (subLocation and (self.subLocation ~= subLocation)) then
+		location.occupancy.sizeDirty = true
+		for i, occupant in ipairs(location.occupancy.list) do
 			if occupant.entityId == self.entityId then
-                table.remove(Occupants.locations[self.location].list, i)
+                table.remove(location.occupancy.list, i)
 				break
 			end
         end
-        table.insert(Occupants.locations[location].list, self)
-		Occupants.locations[location].sizeDirty = true
-        self.location = location
+		self.location = name
+        self.subLocation = subLocation
+		location = Transformation:getLocation(self.location, self.subLocation)
+
+        table.insert(location.occupancy.list, self)
+		location.occupancy.sizeDirty = true
 	end
-    local locationData = Locations[self.location] or {}
 	local locationSettings = (sbq.settings.locations or {})[self.location] or {}
 	if not self.locationStore[self.location] then
         self.locationStore[self.location] = {
@@ -357,22 +488,22 @@ function _Occupant:refreshLocation(location)
         { stat = "sbqDigestResistance", effectiveMultiplier = (1 / math.max(status.stat("sbqDigestPower"),0.01)) },
 		{ stat = "sbqGetDigestDrops", amount = (1 and (locationSettings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
 	}
-	util.appendLists(persistentStatusEffects, locationData.passiveEffects or {})
-	util.appendLists(persistentStatusEffects, (locationData.mainEffect or {})[locationSettings.mainEffect or sbq.settings.mainEffect or "none"] or {})
-    for setting, effects in pairs(locationData.toggleEffects or {}) do
+	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
+	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[locationSettings.mainEffect or sbq.settings.mainEffect or "none"] or {})
+    for setting, effects in pairs(location.toggleEffects or {}) do
 		if (locationSettings[setting] or (sbq.settings[setting] and (locationSettings[setting] == nil))) then
 			util.appendLists(persistentStatusEffects, effects or {})
 		end
 	end
     self:setLoungeStatusEffects(persistentStatusEffects)
 
-	self:setItemBlacklist(locationData.itemBlacklist or sbq.voreConfig.prey.itemBlacklist or sbq.config.prey.itemBlacklist)
-	self:setItemWhitelist(locationData.itemWhitelist or sbq.voreConfig.prey.itemWhitelist or sbq.config.prey.itemWhitelist)
-	self:setItemTagBlacklist(locationData.itemTagBlacklist or sbq.voreConfig.prey.itemTagBlacklist or sbq.config.prey.itemTagBlacklist)
-	self:setItemTagWhitelist(locationData.itemTagWhitelist or sbq.voreConfig.prey.itemTagWhitelist or sbq.config.prey.itemTagWhitelist)
-	self:setItemTypeBlacklist(locationData.itemTypeBlacklist or sbq.voreConfig.prey.itemTypeBlacklist or sbq.config.prey.itemTypeBlacklist)
-	self:setItemTypeWhitelist(locationData.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
-    self:setToolUsageSuppressed(locationData.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
+	self:setItemBlacklist(location.itemBlacklist or sbq.voreConfig.prey.itemBlacklist or sbq.config.prey.itemBlacklist)
+	self:setItemWhitelist(location.itemWhitelist or sbq.voreConfig.prey.itemWhitelist or sbq.config.prey.itemWhitelist)
+	self:setItemTagBlacklist(location.itemTagBlacklist or sbq.voreConfig.prey.itemTagBlacklist or sbq.config.prey.itemTagBlacklist)
+	self:setItemTagWhitelist(location.itemTagWhitelist or sbq.voreConfig.prey.itemTagWhitelist or sbq.config.prey.itemTagWhitelist)
+	self:setItemTypeBlacklist(location.itemTypeBlacklist or sbq.voreConfig.prey.itemTypeBlacklist or sbq.config.prey.itemTypeBlacklist)
+	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
+    self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 end
 
 function _Occupant:checkStruggles(dt)
