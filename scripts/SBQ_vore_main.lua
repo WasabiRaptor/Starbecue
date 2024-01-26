@@ -21,7 +21,7 @@ Transformation = {}
 
 States = {}
 
-Locations = {}
+Locations = {locations = {}}
 
 Occupants = {
 	list = {},
@@ -71,7 +71,11 @@ function sbq.reloadVoreConfig(config)
 		Transformation.state:uninit()
 		Transformation:uninit()
 		Transformation.active = false
-	end
+    end
+	-- this is just to make sure we have the settings available to us as tables
+    storage.settings = storage.settings or { locations = {} }
+    storage.settings.locations = storage.settings.locations or {}
+
 	-- reset setting tables on reload
 	setmetatable(storage.settings, {__index = sbq.config.defaultSettings, __eq = sbq.compareToLeftTable})
 	sbq.publicSettings = { locations = {} }
@@ -84,11 +88,10 @@ function sbq.reloadVoreConfig(config)
 	-- load config from species or config input, such as from a tech transformation
 	sbq.voreConfig = sbq.getConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
 	-- load scripts
-	for _, script in (sbq.voreConfig.scripts or {}) do
+	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
 	end
 	Transformation = Transformations[sbq.voreConfig.transformation or "default"]
-	Transformation:init()
 
 	if sbq.voreConfig.pred.appendLists then
 		for k, list in pairs(sbq.voreConfig.pred) do
@@ -109,7 +112,7 @@ function sbq.reloadVoreConfig(config)
 		Locations.addLocation(location, locationData)
 	end
 	-- load states
-	for name, stateConfig in (sbq.voreConfig.states or {}) do
+	for name, stateConfig in pairs(sbq.voreConfig.states or {}) do
 		States.addState(name, stateConfig)
 	end
 	if not States[storage.lastVoreState] then
@@ -291,13 +294,13 @@ function Locations.addLocation(name, config)
 	sbq.settings.locations[name] = sbq.settings.locations[name] or {}
 	setmetatable(sbq.settings.locations[name], {__index = storage.settings.locations[name]})
 
-	local location = sb.jsonMerge(sbq.config.defaultLocationData[name], sbq.getConfigArray(config))
+	local location = sb.jsonMerge(sbq.config.locations[name], sbq.getConfigArray(config))
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
 	if location.infusionSlot and sbq.settings[location.infusionType .. "Pred"] and sbq.settings[location.infusionSlot] then
 		local infused = sbq.settings[location.infusionSlot]
 		local species = infused.parameters.npcArgs.npcSpecies
 		local voreConfig = sbq.getConfigArray(infused.parameters.voreConfig or root.speciesConfig(species).voreConfig or "/humanoid/any/vore.config")
-		location = sb.jsonMerge(sbq.config.defaultLocationData[name],
+		location = sb.jsonMerge(sbq.config.locations[name],
 			{ species = voreConfig.tfSpecies or species },
 			sbq.getConfigArray(
 				sb.jsonQuery(voreConfig, "infusedLocations." .. species .. "." .. name) or
@@ -324,7 +327,7 @@ function Locations.addLocation(name, config)
 	}
 	-- sub locations are for things that are different spots techincally, but inherit values and use the settings
 	-- of a single location, such as with the sidedness of breasts, or perhaps a multi chambered stomach
-	for k, subLocation in pairs(location.subLocations) do
+	for k, subLocation in pairs(location.subLocations or {}) do
 		subLocation.occupancy = {
 			sizeDirty = true,
 			settingsDirty = true,
@@ -494,8 +497,8 @@ function Occupants.update(dt)
 		occupant:update(dt)
 	end
 	for name, _ in pairs(Locations.locations) do
-		local location = Transformation:getLocation(location)
-		for k, v in pairs(location.subLocations) do
+		local location = Transformation:getLocation(name)
+		for k, v in pairs(location.subLocations or {}) do
 			local subLocation = Transformation:getLocation(location, k)
 			location.occupancy.sizeDirty = subLocation.occupancy.sizeDirty or location.occupancy.sizeDirty
 			location.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
@@ -504,7 +507,7 @@ function Occupants.update(dt)
 		end
 		location:updateOccupancy(name, location.subLocationBehavior)
 
-		for k, _ in pairs(location.subLocations) do
+		for k, _ in pairs(location.subLocations or {}) do
 			local subLocation = Transformation:getLocation(location, k)
 			subLocation.occupancy.sizeDirty = false
 			subLocation.occupancy.settingsDirty = false
