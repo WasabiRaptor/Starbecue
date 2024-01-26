@@ -125,13 +125,7 @@ function update(dt, fireMode, shiftHeld, controls)
 		else
 			if fireMode == "primary" and not clicked then
 				clicked = true
-				if type(sbq.sbqCurrentData.id) == "number" and world.entityExists(sbq.sbqCurrentData.id) then
-					doVoreAction(sbq.sbqCurrentData.id)
-				else
-					local sbqSettings = player.getProperty("sbqSettings") or {}
-					local settings = sb.jsonMerge( sbqSettings.sbqOccupantHolder or {}, sbqSettings.global or {})
-					world.spawnVehicle( "sbqOccupantHolder", mcontroller.position(), { spawner = player.id(), settings = settings } )
-				end
+				doVoreAction()
 			elseif fireMode == "none" then
 				clicked = false
 			end
@@ -392,23 +386,29 @@ function assignPreyActionsLocation(id)
 end
 
 function doVoreAction(id)
+	local withoutEntityIds = loungeable.entitiesLounging()
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), 2, {
-		withoutEntityId = player.id(),
+		withoutEntityId = entity.id(),
+		withoutEntityIds = withoutEntityIds,
 		includedTypes = {"creature"}
 	})
 	local entityInRange = world.entityQuery(mcontroller.position(), 5, {
-		withoutEntityId = player.id(),
+		withoutEntityId = entity.id(),
+		withoutEntityIds = withoutEntityIds,
 		includedTypes = {"creature"}
 	})
-	local sent
-	for i, victimId in ipairs(entityaimed) do
+	for i, targetId in ipairs(entityaimed) do
 		for j, eid in ipairs(entityInRange) do
-			if victimId == eid and entity.entityInSight(victimId) then
-				world.sendEntityMessage( id, "requestTransition", storage.clickAction, { id = victimId } )
+			if targetId == eid and entity.entityInSight(targetId) then
+				local loungeAnchor = world.entityLoungingIn(targetId)
+				if (not loungeAnchor) or loungeAnchor.dismountable then
+					world.sendEntityMessage(entity.id(), "sbqTryAction", storage.clickAction, targetId, {})
+					return
+				end
 			end
 		end
 	end
-	world.sendEntityMessage( id, "requestTransition", storage.clickAction, {} )
+	world.sendEntityMessage(entity.id(), "sbqTryAction", storage.clickAction, nil, {})
 end
 
 
@@ -420,7 +420,7 @@ end
 function returnVoreIcon(action)
 	sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
 	if sbq.sbqCurrentData.species == "sbqOccupantHolder" or not sbq.sbqCurrentData.species then
-        return (root.speciesConfig(humanoid.species()).voreIcons or {})[action]
+		return (root.speciesConfig(humanoid.species()).voreIcons or {})[action]
 	end
 end
 

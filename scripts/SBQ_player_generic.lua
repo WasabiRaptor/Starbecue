@@ -6,7 +6,7 @@ require("/scripts/SBQ_humanoidAnimator.lua")
 require("/scripts/SBQ_vore_main.lua")
 
 function init()
-    sbq.config = root.assetJson("/sbq.config")
+	sbq.config = root.assetJson("/sbq.config")
 	sbq.init()
 	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
 		sbq.timer("sbqPredatorDespawned", 0.5, function ()
@@ -54,6 +54,7 @@ end
 function update(dt)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	sbq.checkTimers(dt)
+	sbq.update(dt)
 end
 
 function sbq.calcSize()
