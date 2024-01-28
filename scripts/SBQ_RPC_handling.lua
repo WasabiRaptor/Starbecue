@@ -26,19 +26,19 @@ function sbq.checkRPCFinished(rpc, callback, failCallback, ...)
 end
 
 sbq.rpcList = {}
-function sbq.addRPC(rpc, callback, failCallback)
-	if not sbq.checkRPCFinished(rpc, callback, failCallback, 0) then
+function sbq.addRPC(rpc, callback, failCallback, ...)
+	if not sbq.checkRPCFinished(rpc, callback, failCallback, 0, ...) then
 		if callback ~= nil or failCallback ~= nil  then
-			table.insert(sbq.rpcList, {rpc = rpc, callback = callback, failCallback = failCallback, dt = 0})
+			table.insert(sbq.rpcList, {rpc = rpc, callback = callback, failCallback = failCallback, dt = 0, args = {...}})
 		end
 	end
 end
 
 sbq.namedRPCList = {}
-function sbq.addNamedRPC(name, rpc, callback, failCallback)
-	if not sbq.checkRPCFinished(rpc, callback, failCallback, 0) then
+function sbq.addNamedRPC(name, rpc, callback, failCallback, ...)
+	if not sbq.checkRPCFinished(rpc, callback, failCallback, 0, ...) then
 		if (callback ~= nil or failCallback ~= nil) and name and not sbq.namedRPCList[name] then
-			sbq.namedRPCList[name] = {rpc = rpc, callback = callback, failCallback = failCallback, dt = 0}
+			sbq.namedRPCList[name] = {rpc = rpc, callback = callback, failCallback = failCallback, dt = 0, args = {...}}
 		end
 	end
 end
@@ -76,7 +76,7 @@ function sbq.randomTimer(name, min, max, callback, ...)
 			targetTime = (math.random(min * 100, max * 100))/100,
 			currTime = 0,
             callback = callback,
-			args = ...
+			args = {...}
 		}
 		if name ~= nil then
 			sbq.timerList[name] = timer
@@ -93,7 +93,7 @@ function sbq.timer(name, time, callback, ...)
 			targetTime = time,
 			currTime = 0,
             callback = callback,
-			args = ...
+			args = {...}
 		}
 		if name ~= nil then
 			sbq.timerList[name] = timer
@@ -104,11 +104,12 @@ function sbq.timer(name, time, callback, ...)
 	end
 end
 
-function sbq.forceTimer(name, time, callback)
+function sbq.forceTimer(name, time, callback, ...)
 		local timer = {
 			targetTime = time,
 			currTime = 0,
-			callback = callback
+        	callback = callback,
+			args = {...}
 		}
 		if name ~= nil then
 			sbq.timerList[name] = timer

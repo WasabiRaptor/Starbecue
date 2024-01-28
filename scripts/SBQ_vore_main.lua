@@ -162,15 +162,24 @@ function sbq.setLocationSetting(name, k, v)
 	end
 end
 
+function sbq.getTargetSize(target)
+	return math.sqrt(world.entityArea(target)) / sbq.config.sizeConstant
+end
+
 function sbq.tryVore(target, locationName, throughput)
-	local targetSize = math.sqrt(world.entityArea(target))
-	if (targetSize <= ((throughput or 1) * sbq.scale)) then
+    local targetSize = sbq.getTargetSize(target)
+	local throughput = ((throughput or 1) * sbq.scale)
+	if (targetSize <= throughput) then
 		local location = Transformation:getLocation(locationName)
-		local space, subLocation = location:hasSpace(targetSize)
+        local space, subLocation = location:hasSpace(targetSize)
 		if space then
 			Occupants.addOccupant(target, locationName, subLocation)
-			return true
-		end
+            return true
+        else
+			return false, "noSpace"
+        end
+    else
+		return false, "tooBig"
 	end
 end
 
@@ -233,40 +242,51 @@ end
 
 function _State:tryAction(name, target, ...)
     local action = self.actions[name]
-	sb.logInfo("attempting action")
 	if not action then return false end
 	if action.onCooldown then return false end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then sb.logInfo("fail settings") return self:actionFailed(name, action, target, ...) end
+	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return self:actionFailed(name, action, target, false, ...) end
 	if action.targetSettings then
-		if not target or not world.entityExists(target) then sb.logInfo("no target") return self:actionFailed(name, action, target, ...) end
+		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, false, ...) end
         local targetSettings = world.getStatusProperty(target, "sbqPublicSettings")
-		sb.logInfo(sb.printJson(targetSettings or {},1))
-		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, ...) end
+		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, false, ...) end
 	end
-	local scriptResult, endFunction = true, false
-	if action.script then scriptResult, endFunction = self.scripts[action.script](name, action, target, ...) end
-	if not scriptResult then return self:actionFailed(name, action, target, ...) end
+	local result1, result2 = true, false
+	if action.script then result1, result2 = self.scripts[action.script](name, action, target, ...) end
+	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
 	local longest = self:doAnimations(action.animations, target)
 	local cooldown = action.cooldown or longest
 	action.onCooldown = true
 	sbq.timer(name.."Cooldown", cooldown, function (...)
 		action.onCooldown = false
-		if type(endFunction) == "function" then
-            endFunction(...)
-        elseif type(endFunction) == "string" then
-			self.scripts[endFunction](...)
+		if type(result2) == "function" then
+            result2(...)
+        elseif type(result2) == "string" and type(self.scripts[result2]) == "function" then
+			self.scripts[result2](...)
 		end
-	end, name, action, target, ...)
-	return scriptResult
+    end, name, action, target, result2, ...)
+	if type(result2) ~= "function" then
+		return result1, result2
+    end
+	return result1
 end
 
 function _State:actionFailed(name, action, target, ...)
 	local cooldown = action.failureCooldown or 0
-	action.onCooldown = true
-	sbq.timer(name.."Cooldown", cooldown, function ()
-		action.onCooldown = false
-	end)
-	return false
+    action.onCooldown = true
+	local result1, result2  = false, false
+	if action.failureScript then result1, result2 = self.scripts[action.failureScript](name, action, target, ...) end
+	sbq.timer(name.."Cooldown", cooldown, function (...)
+        action.onCooldown = false
+		if type(result2) == "function" then
+            result2(...)
+        elseif type(result2) == "string" and type(self.scripts[result2]) == "function" then
+			self.scripts[result2](...)
+		end
+    end, name, action, target, result2, ...)
+	if type(result2) ~= "function" then
+		return result1, result2
+    end
+	return result1
 end
 
 function _State:doAnimations(animations, target)
@@ -277,7 +297,7 @@ function _State:doAnimations(animations, target)
 		left = sbq.facingRight and "back" or "front"
 	}
 	if target then
-		local occupant = Occupants[tostring(target)]
+		local occupant = Occupants.entityId[tostring(target)]
 		if occupant then
 			targetTags.occupant = occupant.seat
 		end

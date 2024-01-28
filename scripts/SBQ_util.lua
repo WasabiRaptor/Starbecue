@@ -23,13 +23,7 @@ function sbq.getConfigArray(config, path)
 end
 
 function sbq.tableMatches(a, b)
-	sb.logInfo("tables")
-	sb.logInfo(sb.printJson(a))
-	sb.logInfo(sb.printJson(b))
     for k, v in pairs(a) do
-        sb.logInfo(k)
-        sb.logInfo(sb.printJson(v).." "..sb.printJson(b[k]))
-
 	  if type(v) == "table"
 	  and type(b[k]) == "table"
 	  and not sbq.tableMatches(v, b[k]) then

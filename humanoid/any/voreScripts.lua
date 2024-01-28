@@ -1,7 +1,7 @@
 
 local Default = {
 	states = {
-		default = {},
+		default = {scripts = {}},
 	}
 }
 setmetatable(Default, _Transformation)
@@ -27,9 +27,9 @@ end
 function default:uninit()
 end
 
-function default.tryVore(name, action, target, ...)
+function default.scripts.tryVore(name, action, target, ...)
 	return sbq.tryVore(target, action.location, action.throughput)
 end
-function default.tryLetout(name, action, target, ...)
+function default.scripts.tryLetout(name, action, target, ...)
 	return sbq.tryLetout(target, action.throughput)
 end
