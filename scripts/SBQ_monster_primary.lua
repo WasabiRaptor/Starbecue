@@ -3,6 +3,7 @@ local old = {
 	init = init,
 	update = update
 }
+require("/scripts/SBQ_public_settings.lua")
 function init()
 	old.init()
 	message.setHandler("sbqGetSeatEquips", function(_,_, current)
@@ -26,5 +27,6 @@ function init()
 		else
 			status.setStatusProperty("sbqDontTouchDoors", false)
 		end
-	end)
+    end)
+	sbq.setupPublicSettings()
 end

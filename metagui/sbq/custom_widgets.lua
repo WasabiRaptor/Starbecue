@@ -3,8 +3,24 @@ local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
 local mkwidget = mg.mkwidget
 
+settingWidgets = {}
+local scrollMode = {true,true} -- local thing to the other one, which is dumb
 -- first off, modify textBox to actually use given size
-function widgets.textBox:preferredSize() return self.explicitSize or {96, 14} end
+function widgets.textBox:preferredSize() return self.explicitSize or { 96, 14 } end
+
+local translationStrings
+function mg.formatText(str)
+    if not str then return nil end
+    if str:sub(1, 1) == ":" then
+		if not translationStrings then translationStrings = root.assetJson("/sbqStrings.config") end
+		str = translationStrings[str:sub(2,-1)] or str
+	end
+	local colorSub = {
+	  ["^accent;"] = string.format("^#%s;", mg.getColor("accent")),
+	}
+	str = string.gsub(str, "(%b^;)", colorSub)
+	return str
+end
 
 ----- modified tabField -----
 
@@ -382,7 +398,6 @@ end
 
 widgets.iconCheckBox = mg.proto(widgets.button, {
 	expandMode = { 0, 0 }, -- fixed size
-
 	checked = false,
 })
 
@@ -396,8 +411,19 @@ function widgets.iconCheckBox:init(base, param)
 	self.backingWidget = mkwidget(base, { type = "canvas" })
 	self.checked = param.checked
 	self.radioGroup = param.radioGroup
-	self.value = param.value
+    self.value = param.value
+    self.setting = param.setting
+    self.script = param.script
+    self.location = param.location
 
+	if self.setting then
+        settingWidgets[(self.location or "")..self.setting] = self
+    end
+	if self.script then
+		function self:onClick()
+			widgetScripts[self.script](self.setting,self.value or self.checked,self.location)
+		end
+	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
 		if btn ~= self and btn.radioGroup == self.radioGroup then
 			self.checked = false
@@ -425,7 +451,7 @@ function widgets.iconCheckBox:draw()
 		if self.checked then
 			c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
 		end
-	else
+    else
 		theme.drawCheckBox(self)
 	end
 end
@@ -436,7 +462,7 @@ function widgets.iconCheckBox:onMouseEnter()
 	--theme.onButtonHover(self)
 end
 
-function widgets.iconCheckBox:onMouseButtonEvent(btn, down)
+function widgets.iconCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 	if btn == 0 then -- left button
 		if down then
 			self.state = "press"
@@ -576,3 +602,207 @@ function getClosestValue(x, list)
 	end
 	return closest, closestKey
 end
+
+-- text box ----------------------------------------------------------------------------------------------------------------------------------
+widgets.sbqTextBox = mg.proto(mg.widgetBase, {
+	expandMode = {1, 0},
+
+	text = "", textWidth = 0,
+	caption = "",
+	cursorPos = 0,
+	scrollPos = 0,
+	frameWidth = 4,
+})
+
+local ptLast = '^(.*%W+)%w%w-%W-$'
+local ptNext = '^%W-%w%w-(%W+.*)$'
+
+function widgets.sbqTextBox:init(base, param)
+	self.caption = param.caption
+	self.color = param.color
+
+	self.expandMode = param.expandMode
+	if param.inline then self.expandMode = {0, 0} end
+	if param.expand then self.expandMode = {2, 0} end
+
+	self.backingWidget = mkwidget(base, { type = "canvas" })
+    self.subWidgets = { content = mkwidget(base, { type = "canvas" }) }
+
+    self.setting = param.setting
+    self.settingType = param.settingType or "string"
+    self.script = param.script
+    self.location = param.location
+
+	if self.setting then
+        settingWidgets[(self.location or "")..self.setting] = self
+    end
+	if self.script then
+        function self:onEnter()
+			if self.settingType == "number" then
+                local number = tonumber(self.text)
+				if number then
+					widgetScripts[self.script](self.setting,number,self.location)
+                end
+            else
+				widgetScripts[self.script](self.setting,tostring(self.text),self.location)
+			end
+		end
+    end
+	self:setText(param.text)
+end
+function widgets.sbqTextBox:preferredSize() return self.explicitSize or {96, 14} end
+function widgets.sbqTextBox:draw()
+	theme.drawTextBox(self)
+	widget.setPosition(self.subWidgets.content, vec2.add(widget.getPosition(self.backingWidget), {self.frameWidth, 0}))
+	widget.setSize(self.subWidgets.content, vec2.add(widget.getSize(self.backingWidget), {self.frameWidth*-2, 0}))
+	local c = widget.bindCanvas(self.subWidgets.content) c:clear()
+	local color = self.focused and "#ffffff" or "#bfbfbf"
+	if self.color then
+	if type(self.color == "string") then -- hexcode or color name
+		color = mg.getColor(self.color:gsub("#", ""))
+		color = color and ("#" .. color)
+	else color = self.color end -- assume rgb255 table
+	end
+	local vc = self.size[2]/2
+	if self.focused then -- cursor
+	local p = mg.measureString(self.text:sub(1, self.cursorPos))[1] - self.scrollPos
+	c:drawRect({p, vc-4, p+0.5, vc+4}, '#' .. mg.getColor("accent"))
+	elseif self.text == "" then
+	c:drawText(self.caption, { position = {0, vc}, horizontalAnchor = "left", verticalAnchor = "mid" }, 8, "#7f7f7f")
+	end
+	c:drawText(self.text, { position = {-self.scrollPos, vc}, horizontalAnchor = "left", verticalAnchor = "mid" }, 8, color)
+end
+
+function widgets.sbqTextBox:isMouseInteractable() return true end
+function widgets.sbqTextBox:onMouseButtonEvent(btn, down)
+	if btn == 0 and down then
+	if not self.focused then
+		self:grabFocus()
+		self:moveCursor(self.text:len())
+	else -- find cursor position from mouse
+		local tp = self:relativeMousePosition()[1] + self.scrollPos - self.frameWidth
+		local fcp, len = 0, self.text:len()
+		for i = 1, len do
+		local m = mg.measureString(self.text:sub(1, i))[1]
+		if m > tp then break end
+		fcp = i
+		end
+		self:setCursorPosition(fcp)
+	end
+	return scrollMode[2] and self:captureMouse(btn)
+	elseif not down and btn == self:mouseCaptureButton() then
+	return self:releaseMouse()
+	end
+end
+function widgets.sbqTextBox:onCaptureMouseMove(delta)
+	if delta[1] ~= 0 then
+	self:setScrollPosition(self.scrollPos - delta[1])
+	end
+end
+function widgets.sbqTextBox:isWheelInteractable() return scrollMode[1] and self.textWidth > (self.size[1] - self.frameWidth*2) end
+function widgets.sbqTextBox:onMouseWheelEvent(dir)
+	self:setScrollPosition(self.scrollPos + dir*15)
+end
+
+function widgets.sbqTextBox:focus()
+	if not self.focused then
+	self:grabFocus()
+	self:moveCursor(self.text:len())
+	end
+end
+function widgets.sbqTextBox:blur() self:releaseFocus() end
+
+function widgets.sbqTextBox:setText(t)
+	local c = self.text
+	self.text = type(t) == "string" and t or ""
+	if self.text ~= c then
+	self.textWidth = mg.measureString(self.text)[1]
+	self:queueRedraw()
+	mg.startEvent(self.onTextChanged, self)
+	end
+end
+function widgets.sbqTextBox:setColor(c)
+	self.color = c
+	self:queueRedraw()
+end
+
+function widgets.sbqTextBox:setScrollPosition(p)
+	self.scrollPos = math.max(0, math.min(p, self.textWidth - (self.size[1] - self.frameWidth * 2) + 1))
+	self:queueRedraw()
+end
+function widgets.sbqTextBox:setCursorPosition(p)
+	local c = self.cursorPos
+	self.cursorPos = util.clamp(p, 0, self.text:len())
+	if self.cursorPos ~= c then
+	self:queueRedraw()
+	local cw = self.size[1] - self.frameWidth * 2 -- content width
+	local cl = cw/2 - 3 -- content limit
+	local p = mg.measureString(self.text:sub(1, self.cursorPos))[1] - cw/2
+	self:setScrollPosition(util.clamp(self.scrollPos, p-cl, p+cl))
+	end
+end
+function widgets.sbqTextBox:moveCursor(o) self:setCursorPosition(self.cursorPos + o) end
+
+function widgets.sbqTextBox:onFocus() self.focused = true self:queueRedraw() end
+function widgets.sbqTextBox:onUnfocus() self.focused = false self:queueRedraw() end
+function widgets.sbqTextBox:onKeyEsc() mg.startEvent(self.onEscape, self) end
+function widgets.sbqTextBox:acceptsKeyRepeat() return true end
+function widgets.sbqTextBox:onKeyEvent(key, down, accel, rep)
+	if down then
+	if key == mg.keys.enter or key == mg.keys.kpEnter then
+		self:releaseFocus()
+		mg.startEvent(self.onEnter, self)
+	elseif key == mg.keys.left then
+		if accel.ctrl then
+		local m = self.text:sub(1, self.cursorPos):match(ptLast)
+		self:setCursorPosition(m and m:len() or 0)
+		else
+		self:moveCursor(-1)
+		end
+	elseif key == mg.keys.right then
+		if accel.ctrl then
+		local m = self.text:sub(self.cursorPos+1):match(ptNext)
+		self:setCursorPosition(m and (self.text:len() - m:len()) or self.text:len())
+		else
+		self:moveCursor(1)
+		end
+	elseif key == mg.keys.home then self:setCursorPosition(0)
+	elseif key == mg.keys["end"] then self:setCursorPosition(self.text:len())
+	elseif key == mg.keys.del then
+		if accel.alt then
+		self:setText()
+		elseif accel.ctrl then
+		local m = self.text:sub(self.cursorPos+1):match(ptNext)
+		self:setText(self.text:sub(1, self.cursorPos) .. (m or ""))
+		else
+		self:setText(self.text:sub(1, self.cursorPos) .. self.text:sub(self.cursorPos+2))
+		end
+	elseif key == mg.keys.backspace then
+		if accel.alt then
+		self:setText()
+		elseif accel.ctrl then
+		local m = self.text:sub(1, self.cursorPos):match(ptLast)
+		self:setText(self.text:sub(1, m and m:len() or 0) .. self.text:sub(self.cursorPos+1))
+		self:setCursorPosition(m and m:len() or 0)
+		else
+		self:setText(self.text:sub(1, math.max(0, self.cursorPos-1)) .. self.text:sub(self.cursorPos+1))
+		self:moveCursor(-1)
+		end
+	else -- try as printable key
+		local char = mg.keyToChar(key, accel)
+		if char then
+		self:setText(self.text:sub(1, self.cursorPos) .. char .. self.text:sub(self.cursorPos+1))
+		self:moveCursor(1)
+		end
+	end
+	--mg.setTitle("key: " .. key)
+	end
+end
+
+-- events out
+function widgets.sbqTextBox:onTextChanged() end
+function widgets.sbqTextBox:onEnter() end
+function widgets.sbqTextBox:onEscape() end
+
+
+for id, t in pairs(widgets) do t.widgetType = id end

@@ -22,16 +22,62 @@ function sbq.getConfigArray(config, path)
 	return config
 end
 
-function sbq.compareToLeftTable(a,b)
-	for k, v in pairs(a) do
-		if type(v) == "table" and not getmetatable(v) then
-			setmetatable(v,{__eq = sbq.compareToLeftTable})
-		end
-		if type(b[k]) == "table" and not getmetatable(b[k]) then
-			setmetatable(b[k],{__eq = sbq.compareToLeftTable})
-		end
-		sb.logInfo(k)
-		if v ~= b[k] then return false end
+function sbq.tableMatches(a, b)
+	sb.logInfo("tables")
+	sb.logInfo(sb.printJson(a))
+	sb.logInfo(sb.printJson(b))
+    for k, v in pairs(a) do
+        sb.logInfo(k)
+        sb.logInfo(sb.printJson(v).." "..sb.printJson(b[k]))
+
+	  if type(v) == "table"
+	  and type(b[k]) == "table"
+	  and not sbq.tableMatches(v, b[k]) then
+		return false
+	  end
+	  if v ~= b[k] then
+		return false
+	  end
 	end
 	return true
+end
+
+function sbq.metatableLayers(...)
+    for _, table in ipairs({ ... }) do
+		setmetatable(table, {__index = prevTable})
+		prevTable = table
+	end
+end
+
+function sbq.setupSettingMetatables(entityType)
+    storage = storage or {}
+    storage.sbqSettings = storage.sbqSettings or {}
+    sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {})
+	sbq.publicSettings = sbq.publicSettings or {}
+    sbq.defaultSettings = sb.jsonMerge(
+        sbq.config.defaultSettings,
+        sbq.config.entityTypeDefaultSettings[entityType] or {},
+        sbq.voreConfig.defaultSettings or {},
+        storage.sbqSettings or {},
+		sbq.settings or {}
+    )
+	-- using sb.jsonMerge to de-reference tables
+	sbq.defaultSettings.locations = sb.jsonMerge(sbq.defaultSettings.locations or {}, {})
+	storage.sbqSettings.locations = sb.jsonMerge(storage.sbqSettings.locations or {}, {})
+	sbq.settings.locations = sb.jsonMerge(sbq.settings.locations or {}, {})
+	sbq.publicSettings.locations = sb.jsonMerge(sbq.publicSettings.locations or {}, {})
+	for name, location in pairs(sbq.voreConfig.locations or {}) do
+		sbq.defaultSettings.locations[name] = sb.jsonMerge(sbq.defaultSettings.locations[name] or {}, {})
+		storage.sbqSettings.locations[name] = sb.jsonMerge(storage.sbqSettings.locations[name] or {}, {})
+		sbq.settings.locations[name] = sb.jsonMerge(sbq.settings.locations[name] or {}, {})
+	end
+
+	setmetatable(storage.sbqSettings, {__index = sbq.defaultSettings})
+	setmetatable(sbq.settings, {__index= storage.sbqSettings})
+
+    for name, location in pairs(sbq.voreConfig.locations or {}) do
+		setmetatable(sbq.defaultSettings.locations[name], {__index = sbq.config.defaultLocationSettings})
+		setmetatable(storage.sbqSettings.locations[name], {__index = sbq.defaultSettings.locations[name]})
+		setmetatable(sbq.settings.locations[name], {__index= storage.sbqSettings.locations[name]})
+    end
 end

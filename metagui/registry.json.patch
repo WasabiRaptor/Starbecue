@@ -1,5 +1,6 @@
 [ // in file: /metagui/registry.json.patch
 	{ "op" : "add", "path" : "/panes/starbecue", "value" : {
+		"mainSettings" : "/interface/scripted/sbq/sbqMainSettings/settings.ui",
 		"settings" : "/interface/scripted/sbq/sbqSettings/sbqSettings.ui",
 		"predHud" : "/interface/scripted/sbq/sbqIndicatorHud/sbqPredatorHud.ui",
 		"preyHud" : "/interface/scripted/sbq/sbqIndicatorHud/sbqIndicatorHud2.ui",

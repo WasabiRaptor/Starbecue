@@ -396,19 +396,17 @@ function doVoreAction(id)
 		withoutEntityId = entity.id(),
 		withoutEntityIds = withoutEntityIds,
 		includedTypes = {"creature"}
-	})
-	for i, targetId in ipairs(entityaimed) do
-		for j, eid in ipairs(entityInRange) do
-			if targetId == eid and entity.entityInSight(targetId) then
-				local loungeAnchor = world.entityLoungingIn(targetId)
-				if (not loungeAnchor) or loungeAnchor.dismountable then
-					world.sendEntityMessage(entity.id(), "sbqTryAction", storage.clickAction, targetId, {})
-					return
-				end
+    })
+	player.setScriptContext("starbecue")
+	for i, targetId in ipairs(entityaimed) do for j, eid in ipairs(entityInRange) do
+		if targetId == eid and entity.entityInSight(targetId) then
+			local loungeAnchor = world.entityLoungingIn(targetId)
+			if (not loungeAnchor) or loungeAnchor.dismountable then
+				return player.callScript("sbq.tryAction", storage.clickAction, targetId)
 			end
 		end
-	end
-	world.sendEntityMessage(entity.id(), "sbqTryAction", storage.clickAction, nil, {})
+	end end
+	return player.callScript("sbq.tryAction", storage.clickAction)
 end
 
 

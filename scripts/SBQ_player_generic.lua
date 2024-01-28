@@ -6,7 +6,9 @@ require("/scripts/SBQ_humanoidAnimator.lua")
 require("/scripts/SBQ_vore_main.lua")
 
 function init()
-	sbq.config = root.assetJson("/sbq.config")
+	storage = storage or {}
+    sbq.config = root.assetJson("/sbq.config")
+	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
 	sbq.init()
 	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
 		sbq.timer("sbqPredatorDespawned", 0.5, function ()
@@ -53,7 +55,11 @@ end
 
 function update(dt)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
-	sbq.checkTimers(dt)
+    sbq.checkTimers(dt)
+    sbq.scale = mcontroller.scale()
+	sbq.facingDirection = mcontroller.facingDirection()
+    sbq.facingRight = (sbq.facingDirection == 1)
+
 	sbq.update(dt)
 end
 
@@ -62,4 +68,8 @@ function sbq.calcSize()
 	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
 	status.setStatusProperty("sbqSize", size)
 	return size
+end
+
+function uninit()
+	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 end

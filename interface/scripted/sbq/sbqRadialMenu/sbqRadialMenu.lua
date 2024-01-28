@@ -139,7 +139,7 @@ function update( dt )
 	end
 end
 
-function canvasClickEvent(position, mouseButton, isButtonDown)
+function canvasClickEvent(position, mouseButton, isButtonDown, shift, ctrl, alt)
 	button = mouseButton
 	pressed = isButtonDown
 end

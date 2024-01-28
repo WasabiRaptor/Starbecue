@@ -1,0 +1,246 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [320, 256], // *internal* size (not including chrome)
+	"title" : ":settingsTitle",
+	"icon" : "/items/active/sbqController/oralVore.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "settings.lua" ],
+	"children" : [
+		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
+			{ "type" : "tab", "id" : "mainSettings", "title" : ":pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"mode":"horizontal"},
+				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
+					{"type":"panel","style":"convex", "id":"mainSettingsPanel" ,"children":[
+						{"mode":"vertical"},
+					]}
+				]},
+				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
+					{"type":"panel","style":"flat", "id":"locationSettingsPanel" ,"children":[
+						{"mode":"vertical"},
+					]}
+				]}
+			]},
+			{ "type" : "tab", "id" : "preferencesTab", "title" : ":prefs", "icon" : "empty_image.png", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "style" : "flat", "children" : [{"type" : "scrollArea", "expandMode":[0,2], "scrollDirections" : [0,1], "children" : [
+					{"mode" : "vertical","expandMode":[2,2]},
+					[
+						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+							{"type":"label", "text":":predatorPrefs","inline":true},
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"oralVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"oralVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":oralVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"tailVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"tailVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":tailVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"absorbVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"absorbVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":absorbVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"navelVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"navelVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":navelVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"analVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"analVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":analVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"unbirthVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"unbirthVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":unbirthVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"breastVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"breastVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":breastVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"cockVorePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"cockVorePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":cockVore"},
+							],
+							{"type":"label", "text":":infusion","inline":true},
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"thighsInfusePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"thighsInfusePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":thighsInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"bellyInfusePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"bellyInfusePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":bellyInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"breastInfusePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"breastInfusePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":breastInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"pussyInfusePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pussyInfusePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":pussyInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"cockInfusePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"cockInfusePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":cockInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"pawInfusePred", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pawInfusePredConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":pawInfuse"},
+							]
+						]},
+						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+							{"type":"label", "text":":preyPrefs","inline":true},
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"oralVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"oralVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":oralVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"tailVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"tailVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":tailVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"absorbVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"absorbVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":absorbVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"navelVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"navelVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":navelVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"analVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"analVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":analVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"unbirthVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"unbirthVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":unbirthVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"breastVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"breastVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":breastVore"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"cockVorePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"cockVorePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":cockVore"},
+							],
+							{"type":"label", "text":":infusion","inline":true},
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"thighsInfusePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"thighsInfusePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":thighsInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"bellyInfusePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"bellyInfusePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":bellyInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"breastInfusePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"breastInfusePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":breastInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pussyInfusePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pussyInfusePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":pussyInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"cockInfusePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"cockInfusePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":cockInfuse"},
+							],
+							[
+								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pawInfusePrey", "toolTip":":voreEnabledTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pawInfusePreyConsent", "toolTip":":voreConsentTip"}],
+								{"type":"label", "text":":pawInfuse"},
+							]
+						]},
+						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+							{"type":"label", "text":":transformation","inline":true},
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"speciesTF", "toolTip":":speciesTFTip"},
+								{"type":"label", "text":":speciesTF"},
+							],
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"genderTF", "toolTip":":genderTFTip"},
+								{"type":"label", "text":":genderTF"},
+							],
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"sexTF", "toolTip":":sexTFTip"},
+								{"type":"label", "text":":sexTF"},
+							],
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"indefiniteTF", "toolTip":":indefiniteTFTip"},
+								{"type":"label", "text":":indefiniteTF"},
+							],
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"permanentTF", "toolTip":":permanentTFTip"},
+								{"type":"label", "text":":permanentTF"},
+							],
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"accidentalTF", "toolTip":":accidentalTFTip"},
+								{"type":"label", "text":":accidentalTF"},
+							],
+							[
+								{"spacing":0},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"potionTF", "toolTip":":potionTFTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"magicTF", "toolTip":":magicTFTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"scienceTF", "toolTip":":scienceTFTip"},
+							],
+							[
+								{"spacing":0},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"voreTF", "toolTip":":voreTFTip"},
+								{"type":"iconCheckBox","script":"changeSetting","setting":"unbirthTF", "toolTip":":unbirthTFTip"},
+							]
+						]},
+					],
+					[
+						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+							{"spacing":0},
+							{"type":"label", "text":":otherPrefs","inline":true},
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"grabbed", "toolTip":":grabbedTip"},
+								{"type":"label", "text":":grabbed"},
+							],
+							[
+								{"type":"iconCheckBox","script":"changeSetting","setting":"pinned", "toolTip":":pinned"},
+								{"type":"label", "text":":pinned"},
+							]
+						]},
+					]
+				]}]}
+			]}
+		], "bottomBar" : []}
+	]
+}

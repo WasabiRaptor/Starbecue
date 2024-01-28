@@ -5,6 +5,7 @@ local old = {
 }
 sbq = {}
 require("/scripts/SBQ_humanoidAnimator.lua")
+require("/scripts/SBQ_public_settings.lua")
 
 local interactive = true
 local _npc_setInteractive
@@ -191,6 +192,7 @@ function init()
 		end)
 
 	status.setStatusProperty("sbqCurrentData", nil)
+    sbq.setupPublicSettings()
 
 	old.init()
 
@@ -220,7 +222,8 @@ function init()
 	status.setPersistentEffects("digestImmunity", { "sbqDigestImmunity" })
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
 		sbq.maybeConvert()
-	end
+    end
+
 end
 
 function sbq.maybeConvert()
