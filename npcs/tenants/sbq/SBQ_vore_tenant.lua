@@ -318,7 +318,7 @@ function init()
 								sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
 								sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
 								speciesAnimOverrideSettings = status.statusProperty("speciesAnimOverrideSettings"),
-								animOverrideScale = status.statusProperty("animOverrideScale")
+								animOverrideScale = status.statusProperty("sbqScale")
 							}
 						}
 					}
@@ -550,7 +550,7 @@ function sbq.getDialogueBoxData()
 		portraitPath = config.getParameter("portraitPath"),
 		defaultName = config.getParameter("defaultName"),
 		occupantHolder = sbq.occupantHolder,
-		scale = status.statusProperty("animOverrideScale"),
+		scale = status.statusProperty("sbqScale"),
 		occupant = sbq.occupant
 	}
 	dialogueBoxData.settings.race = npc.species()
@@ -927,7 +927,7 @@ function sbq.locationSpaceAvailable(location, side)
 	if sbq.getLocationSetting(location, "Hammerspace") and sbq.sbqData.locations[location].hammerspace then
 		return math.huge
 	end
-	return (((sbq.sbqData.locations[location..(side or "")] or {}).max or 0) * ((status.statusProperty("animOverrideScale") or 1))) - (sbq.occupants[location..(side or "")] or 0)
+	return (((sbq.sbqData.locations[location..(side or "")] or {}).max or 0) * ((status.statusProperty("sbqScale") or 1))) - (sbq.occupants[location..(side or "")] or 0)
 end
 
 function sbq.getSidedLocationWithSpace(location, size)
@@ -1456,7 +1456,7 @@ function sbq.maybeAddPreyToTargetList(eid, voreType, ext, score)
 	if validTarget then
 		sbq.addRPC(world.sendEntityMessage(eid, "sbqIsPreyEnabled", voreType), function (enabled)
 			if enabled and enabled.enabled and enabled.type ~= "prey" and enabled.size then
-				local scale = (status.statusProperty("animOverrideScale") or 1)
+				local scale = (status.statusProperty("sbqScale") or 1)
 				local relativeSize = enabled.size / scale
 				local location = ((((sbq.speciesConfig.states or {})[sbq.state or "stand"] or {}).transitions or {})[voreType] or {}).location
 				if (relativeSize > (storage.settings[voreType .. "PreferredPreySizeMin"] or 0.1))
@@ -1537,7 +1537,7 @@ function sbq.maybeAddPredToTargetList(eid, voreType, ext, score, consent)
 								effectScore = effectScore + (10/#effects)
 							end
 						end
-						local scale = (status.statusProperty("animOverrideScale") or 1)
+						local scale = (status.statusProperty("sbqScale") or 1)
 						local relativeSize = enabled.size / scale
 						if not badEffect
 						and (relativeSize > (storage.settings[voreType .. "PreferredPredSizeMin"] or 0.75))

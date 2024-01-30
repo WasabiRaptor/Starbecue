@@ -16,7 +16,7 @@ function init()
 	player.setProperty("sbqSettingsVersion", root.modMetadata("Starbecue").version)
 
 	sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), status.statusProperty("speciesAnimOverrideSettings") or {})
-	sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
+	sbq.animOverrideSettings.scale = status.statusProperty("sbqScale") or 1
 	sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
 
 	sbq.sbqSettings = player.getProperty("sbqSettings") or {}
@@ -166,7 +166,7 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 	sbq.animOverrideSettings[settingname] = settingvalue
 	status.setStatusProperty("speciesAnimOverrideSettings", sbq.animOverrideSettings)
 	world.sendEntityMessage(player.id(), "speciesAnimOverrideRefreshSettings", sbq.animOverrideSettings)
-	world.sendEntityMessage(player.id(), "animOverrideScale", sbq.animOverrideSettings.scale)
+	world.sendEntityMessage(player.id(), "sbqScale", sbq.animOverrideSettings.scale)
 end
 
 function sbq.changePreySetting(settingname, settingvalue)

@@ -6,6 +6,7 @@ local old = {
 sbq = {}
 require("/scripts/SBQ_humanoidAnimator.lua")
 require("/scripts/SBQ_public_settings.lua")
+require("/scripts/SBQ_humanoid.lua")
 
 local interactive = true
 local _npc_setInteractive
@@ -70,6 +71,7 @@ end
 require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
+	sbq.setupTransformationMessages()
 	message.setHandler("sbqGetSeatEquips", function(_, _, current)
 		status.setStatusProperty("sbqCurrentData", current)
 		local type = status.statusProperty("sbqType")

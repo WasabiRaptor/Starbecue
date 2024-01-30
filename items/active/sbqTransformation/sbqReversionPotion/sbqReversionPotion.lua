@@ -29,6 +29,6 @@ function update(dt, fireMode, shiftHeld)
 	end
 end
 
-function dartGunData()
-	return { funcName = "reversion" }
+function transformationItemArgs(useType)
+	return { message = "sbqEndMysteriousPotionTF", itemName = item.name(), consume = true }
 end

@@ -304,7 +304,7 @@ function sbq.transformPlayer(i)
 		data.identity = nil
 	end
 	if type(id) == "number" and world.entityExists(id) then
-		world.sendEntityMessage(id, "sbqMysteriousPotionTF", data )
+		world.sendEntityMessage(id, "sbqDoTransformation", data )
 	end
 end
 

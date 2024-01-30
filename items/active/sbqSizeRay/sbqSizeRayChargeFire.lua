@@ -34,7 +34,7 @@ function ChargeFire:fireProjectile()
 
 	local params = copy(self.chargeLevel.projectileParameters or {})
 	if sizeRayHoldingShift then
-		world.sendEntityMessage(entity.id(), "animOverrideScale", params.animOverrideScale, params.animOverrideScaleDuration)
+		world.sendEntityMessage(entity.id(), "sbqScale", table.unpack(params.args))
 		return
 	end
 	local projectileCount = self.chargeLevel.projectileCount or 1

@@ -5,14 +5,14 @@ end
 
 function update(dt, fireMode, shiftHeld)
 	if fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-		data.species = humanoid.species()
-		data.potionPath = "/items/active/sbqTransformation/sbqSpeciesPotion/"
-		data.rarity = "rare"
-		player.giveItem({name = "sbqMysteriousPotion", parameters = data})
+        player.giveItem({ name = "sbqMysteriousPotion", parameters = {
+            rarity = "rare",
+			args = {{species = humanoid.species()},5},
+		}})
 		item.consume(1)
 	end
 end
 
-function dartGunData()
-	return { funcName = "transform", data = {species= humanoid.species()}}
+function transformationItemArgs(useType)
+	return { message = "sbqDoTransformation", itemName = "sbqMysteriousPotion", args = {{species= humanoid.species()},5}, consume = true}
 end

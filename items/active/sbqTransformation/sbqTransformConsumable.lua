@@ -69,6 +69,6 @@ function update(dt, fireMode, shiftHeld)
 	end
 end
 
-function dartGunData()
+function transformationItemArgs(useType)
 	return { funcName = "vehiclePred", data = self.vehicle }
 end

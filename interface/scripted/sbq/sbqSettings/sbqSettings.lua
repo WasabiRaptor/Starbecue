@@ -39,7 +39,7 @@ function sbq.getInitialData()
 	sbq.cumulativeData = player.getProperty("sbqCumulativeData") or {}
 
 	sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), status.statusProperty("speciesAnimOverrideSettings") or {})
-	sbq.animOverrideSettings.scale = status.statusProperty("animOverrideScale") or 1
+	sbq.animOverrideSettings.scale = status.statusProperty("sbqScale") or 1
 	sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
 
 	sbq.sbqCurrentData.species = sbq.sbqCurrentData.species or "sbqOccupantHolder"
@@ -283,7 +283,7 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 	sbq.animOverrideSettings[settingname] = settingvalue
 	status.setStatusProperty("speciesAnimOverrideSettings", sbq.animOverrideSettings)
 	world.sendEntityMessage(player.id(), "speciesAnimOverrideRefreshSettings", sbq.animOverrideSettings)
-	world.sendEntityMessage(player.id(), "animOverrideScale", sbq.animOverrideSettings.scale)
+	world.sendEntityMessage(player.id(), "sbqScale", sbq.animOverrideSettings.scale)
 end
 
 function sbq.changePreySetting(settingname, settingvalue)
@@ -487,12 +487,12 @@ if speciesLayout ~= nil then
 
     function applySpecies:onClick()
 		-- small hack for now to maybe have this function
-        if (speciesText.text ~= "" and type(sbq.customizedSpecies[speciesText.text]) == "table")
+        if (speciesText.text ~= "" and type(sbq.speciesIdentities[speciesText.text]) == "table")
 		or (player.isAdmin() and root.speciesConfig(speciesText.text))
         then
             status.setStatusProperty("sbqOriginalSpecies", speciesText.text)
-			status.statusProperty("sbqOriginalGender", sbq.customizedSpecies.gender)
-			world.sendEntityMessage(player.id(), "sbqMysteriousPotionTF", { species = speciesText.text, gender = sbq.currentCustomSpecies.gender })
+			status.statusProperty("sbqOriginalGender", sbq.speciesIdentities.gender)
+			world.sendEntityMessage(player.id(), "sbqDoTransformation", { species = speciesText.text, gender = sbq.currentCustomSpecies.gender })
 		end
 	end
 	function speciesText:onEnter() applySpecies:onClick() end
@@ -504,9 +504,9 @@ if speciesLayout ~= nil then
 
 	local originalSpecies = world.entitySpecies(player.id())
 	sbq.unlockedSpeciesList = {originalSpecies}
-	sbq.customizedSpecies = status.statusProperty("sbqCustomizedSpecies") or {}
+	sbq.speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
 	sbq.currentCustomSpecies = {}
-	for species, data in pairs(sbq.customizedSpecies) do
+	for species, data in pairs(sbq.speciesIdentities) do
 		if species ~= originalSpecies then
 			table.insert(sbq.unlockedSpeciesList, species)
 		end
@@ -547,12 +547,12 @@ if speciesLayout ~= nil then
 		end
 		sbq.speciesOverrideIndex = index
 		local selectedSpecies = sbq.unlockedSpeciesList[sbq.speciesOverrideIndex]
-		sbq.currentCustomSpecies = sbq.customizedSpecies[selectedSpecies] or {gender = player.gender(), identity = {}}
+		sbq.currentCustomSpecies = sbq.speciesIdentities[selectedSpecies] or {gender = player.gender(), identity = {}}
 		if not selectedSpecies then
 			sbq.hideSpeciesPanel = true
 			return
 		end
-		local hidePanels = (selectedSpecies ~= originalSpecies) and type(sbq.customizedSpecies[selectedSpecies]) == "table"
+		local hidePanels = (selectedSpecies ~= originalSpecies) and type(sbq.speciesIdentities[selectedSpecies]) == "table"
 		speciesColorPanel:setVisible(hidePanels)
 		speciesStylePanel:setVisible(hidePanels)
 		speciesManualColorPanel:setVisible(hidePanels)
@@ -790,7 +790,7 @@ if speciesLayout ~= nil then
 		sbq.currentCustomSpecies.emoteDirectives = speciesEmoteColorText.text
 		sbq.currentCustomSpecies.directives = speciesCustomColorText.text
 
-		status.setStatusProperty("sbqCustomizedSpecies", sbq.customizedSpecies )
+		status.setStatusProperty("sbqSpeciesIdentities", sbq.speciesIdentities )
 		applySpecies:onClick()
 	end
 

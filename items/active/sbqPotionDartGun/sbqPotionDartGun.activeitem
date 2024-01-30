@@ -19,7 +19,8 @@
 	},
 	"animationCustom" : {
 		"sounds" : {
-			"fire" : [ "/sfx/gun/crossbow1.ogg" ]
+			"fire" : [ "/sfx/gun/crossbow1.ogg" ],
+			"misfire" : [ "/sfx/gun/impact_arrow.ogg" ]
 		}
 	},
 
@@ -34,7 +35,7 @@
 	"elementalType" : "physical",
 
 	"primaryAbility" : {
-		"scripts" : ["/items/active/weapons/ranged/gunfire.lua"],
+		"scripts" : ["/items/active/weapons/ranged/gunfire.lua", "/items/active/sbqPotionDartGun/sbqPotionDartGunFire.lua"],
 		"class" : "GunFire",
 
 		"fireTime" : 1.0,
@@ -49,7 +50,7 @@
 		"projectileParameters" : {
 			"power" : 0,
 			"damageTeam" : {
-				"type" : "indiscriminate"
+				"type" : "any"
 			}
 		},
 		"stances" : {

@@ -34,55 +34,50 @@
 				"energyCost" : 5,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"animOverrideScale" : 1},
+				"projectileParameters" : {"message":"sbqScale", "args":[1]},
 				"inaccuracy" : 0.008,
 				"baseDamage" : 0,
-				"fireSound" : "fire",
-				"level": "1"
+				"fireSound" : "fire"
 			},
 			{
 				"time" : 1,
 				"energyCost" : 5,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"animOverrideScale" : 0.75},
+				"projectileParameters" : {"message":"sbqScale", "args":[0.75]},
 				"inaccuracy" : 0.008,
 				"baseDamage" : 0,
-				"fireSound" : "fire",
-				"level": "2"
+				"fireSound" : "fire"
 			},
 			{
 				"time" : 2,
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"animOverrideScale" : 0.5},
+				"projectileParameters" : {"message":"sbqScale", "args":[0.5]},
 				"inaccuracy" : 0,
 				"baseDamage" : 0,
-				"fireSound" : "fire2",
-				"level": "3"
+				"fireSound" : "fire2"
 			},
 			{
 				"time" : 3,
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"animOverrideScale" : 0.25},
+				"projectileParameters" : {"message":"sbqScale", "args":[0.25]},
 				"inaccuracy" : 0,
 				"baseDamage" : 0,
-				"fireSound" : "fire2",
-				"level": "4"
+				"fireSound" : "fire2"
 			},
 			{
 				"time" : 5,
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"animOverrideScale" : 0.1},
+				"projectileParameters" : {"message":"sbqScale", "args":[0.1]},
 				"inaccuracy" : 0,
 				"baseDamage" : 0,
-				"fireSound" : "fire2",
-				"level": "4"
+				"fireSound" : "fire2"
 			}
 		]
 	},
@@ -95,51 +90,47 @@
 				"energyCost" : 5,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"animOverrideScale" : 1},
+				"projectileParameters" : {"message":"sbqScale", "args":[1]},
 				"inaccuracy" : 0.008,
 				"baseDamage" : 0,
-				"fireSound" : "fire",
-				"level": "1"
+				"fireSound" : "fire"
 			},
 			{
 				"time" : 1,
 				"energyCost" : 5,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"animOverrideScale" : 1.25},
+				"projectileParameters" : {"message":"sbqScale", "args":[1.25]},
 				"inaccuracy" : 0.008,
 				"baseDamage" : 0,
-				"fireSound" : "fire",
-				"level": "2"
+				"fireSound" : "fire"
 			},
 			{
 				"time" : 2,
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"animOverrideScale" : 1.5},
+				"projectileParameters" : {"message":"sbqScale", "args":[1.5]},
 				"inaccuracy" : 0,
 				"baseDamage" : 0,
-				"fireSound" : "fire2",
-				"level": "3"
+				"fireSound" : "fire2"
 			},
 			{
 				"time" : 3,
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"animOverrideScale" : 2},
+				"projectileParameters" : {"message":"sbqScale", "args":[2]},
 				"inaccuracy" : 0,
 				"baseDamage" : 0,
-				"fireSound" : "fire2",
-				"level": "4"
+				"fireSound" : "fire2"
 			},
 			{
 				"time" : 5,
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"animOverrideScale" : 3},
+				"projectileParameters" : {"message":"sbqScale", "args":[3]},
 				"inaccuracy" : 0,
 				"baseDamage" : 0,
 				"fireSound" : "fire2"

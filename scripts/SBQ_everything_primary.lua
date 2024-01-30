@@ -81,10 +81,6 @@ function init()
 	end)
 
 
-	message.setHandler("sbqProjectileSource", function (_,_, source)
-		status.setStatusProperty("sbqProjectileSource", source)
-	end)
-
 	message.setHandler("sbqDigest", function (_,_,id)
 		local currentData = status.statusProperty("sbqCurrentData") or {}
 		if type(currentData.id) == "number" and world.entityExists(currentData.id) then
@@ -208,10 +204,10 @@ function init()
 		end
     end)
 
-    message.setHandler("animOverrideScale", function(_, _, scale, duration)
-        status.setStatusProperty("animOverrideScale", scale)
+    message.setHandler("sbqScale", function(_, _, scale, duration)
+        status.setStatusProperty("sbqScale", scale or 1)
 		oldScale = mcontroller.scale()
-        destScale = scale
+        destScale = scale or 1
 		scaleTime = 0
         scaleDuration = duration or 1
 		scaling = true

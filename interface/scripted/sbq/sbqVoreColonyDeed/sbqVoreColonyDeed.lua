@@ -384,7 +384,7 @@ function sbq.changeAnimOverrideSetting(settingname, settingvalue)
 	if sbq.storage.occupier then
 		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqSaveAnimOverrideSettings", sbq.animOverrideSettings)
 		world.sendEntityMessage(sbq.tenant.uniqueId, "speciesAnimOverrideRefreshSettings", sbq.animOverrideSettings)
-		world.sendEntityMessage(sbq.tenant.uniqueId, "animOverrideScale", sbq.animOverrideSettings.scale)
+		world.sendEntityMessage(sbq.tenant.uniqueId, "sbqScale", sbq.animOverrideSettings.scale)
 	end
 end
 

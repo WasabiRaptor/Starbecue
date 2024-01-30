@@ -2,7 +2,7 @@
 	"itemName" : "sbqMysteriousPotion",
 	"level" : 1,
 	"price" : 500,
-	"maxStack" : 1,
+	"maxStack" : 64,
 	"rarity" : "uncommon",
 	"description" : "A bottle of mysterious liquid... A full bottle is potent enough to be semi permanent, but a tipped dart would only last a few minutes.",
 	"shortdescription" : "Mysterious Potion",
@@ -18,11 +18,16 @@
 		"potion" : "sbqPotion.png"
 	},
 
+	"args" : [
+		{"species":"any"},
+		5
+	],
+
 	"animation" : "/items/active/sbqTransformation/sbqPotion.animation",
 
 	"builder" : "/items/active/sbqTransformation/sbqMysteriousPotion/sbqMysteriousPotionBuilder.lua",
 
 	"scripts" : [
-		"/items/active/sbqTransformation/sbqMysteriousPotion/sbqMysteriousPotion.lua"
+		"/items/active/sbqTransformation/sbqMysteriousPotion/sbqTransformPotion.lua"
 	]
 }
