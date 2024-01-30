@@ -1,4 +1,4 @@
-[{"op":"merge", "path":"", "value": {
+{
 	"globalTagDefaults" : {
 		"colorRemap" : "",
 		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png",
@@ -123,7 +123,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -151,7 +151,7 @@
 				"default": "idle",
 				"priority" : 2,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -187,7 +187,7 @@
 				"default": "idle",
 				"priority" : 2,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -222,7 +222,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -249,7 +249,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -285,7 +285,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -293,7 +293,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -320,7 +320,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -356,7 +356,7 @@
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end", "baseAnim" : "idle" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
 						"frameProperties" : {
 							"immediateSound" : []
@@ -389,12 +389,12 @@
 			},
 
 
-			"occupant0" : {
+			"occupant0State" : {
 				"default" : "idle",
 				"states" : {
 					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"oralVore": { "frames": 1, "cycle":0, "mode":"end" },
-					"belly": { "frames": 1, "cycle":0, "mode":"end" }
+					"oralVore": { "frames": 1, "cycle":1, "mode": "transition", "transition" : "belly" },
+					"belly": { "frames": 2, "cycle":2, "mode":"end" }
 				}
 			},
 			"occupant1" : {
@@ -1079,4 +1079,4 @@
 	"particleEmitters": {
 	}
 
-}}]
+}

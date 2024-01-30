@@ -149,11 +149,14 @@
 
 
 	// This here is for when an NPC has unique sprites for their parts, if your NPC does not have a uniquely animated part, you can delete that part in the table here
-	"animationCustom" : {
-		"globalTagDefaults" : {
-			"cockImage" : "cock.png"
+	"animationCustom" : [
+		"/humanoid/any/humanoidPred.animation",
+		{
+			"globalTagDefaults" : {
+				"cockImage" : "cock.png"
+			}
 		}
-	},
+	],
 
 	// This is for the remap parts, if you do have a unique part, you can remove that part's entry in the table here
 	// if you are using a remap part, this is what detemines what color it uses, they are remapping from the human base colors to the base colors of your species

@@ -1,10 +1,13 @@
 [{"op":"merge", "path":"", "value": {
-	"animationCustom" : {
-		"globalTagDefaults" : {
-			"breastsBack" : "breastsBack.png",
-			"breastsFront" : "breastsFront.png"
+	"animationCustom" : [
+		"/humanoid/any/humanoidPred.animation",
+		{
+			"globalTagDefaults" : {
+				"breastsBack" : "breastsBack.png",
+				"breastsFront" : "breastsFront.png"
+			}
 		}
-	},
+	],
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
 			{"a94783":"d39c6c", "check" : {"visibleNavel":true}},

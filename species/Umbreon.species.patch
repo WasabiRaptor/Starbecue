@@ -1,37 +1,38 @@
-[
-	{"op":"merge", "path":"", "value": {
-		"colorRemapGlobalTags" : {
-			"bellyColorRemap" : [
-					{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
-					{"a94783":"ffc181", "check" : {"visibleNavel":false}},
-					["primary","primary"]
-				],
-			"cockColorRemap" : [
-					["primary","flesh"]
-				],
-			"pussyColorRemap" : [
-					["flesh","flesh"]
-				],
-			"ballsColorRemap" : [
-					["primary","primary"]
-				],
-			"breastsColorRemap" : [
-					["primary","primary"],
-					["flesh","flesh", {"nipples":true}],
-					["flesh","primary", {"nipples":false}]
-				]
-		},
-		"baseColorMap" : {
-			"primary" : ["151515", "2a2a2a", "3f3f3f"],
-			"secondary" : ["151515", "2a2a2a", "3f3f3f"],
-			"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
-			"flesh" : ["cc8309", "ffca2b", "ffca2b"]
-		},
-		"animOverrideDefaultSettings": {
-			"visibleNavel" : false
-		}
-
-	}},
+[{"op":"merge", "path":"", "value": {
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","primary"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","primary"]
+			],
+		"breastsColorRemap" : [
+				["primary","primary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","primary", {"nipples":false}]
+			]
+	},
+	"baseColorMap" : {
+		"primary" : ["151515", "2a2a2a", "3f3f3f"],
+		"secondary" : ["151515", "2a2a2a", "3f3f3f"],
+		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
+		"flesh" : ["cc8309", "ffca2b", "ffca2b"]
+	},
+	"animOverrideDefaultSettings": {
+		"visibleNavel" : false
+	},
+	"animationCustom" : [
+		"/humanoid/any/humanoidPred.animation",
+	]
+}},
 	[
 		{
 			"op": "replace",

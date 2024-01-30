@@ -13,15 +13,6 @@ function sbq.getClosestValue(x, list)
 	return closest, closestKey
 end
 
-function sbq.getConfigArray(config, path)
-	if type(config) == "string" then return root.fetchJson(config, path or ("/humanoid/"..humanoid.species().."/")) end
-	if not config[1] then return config end
-	for i, merger in ipairs(config) do
-		config[i] = sbq.getConfigArray(merger)
-	end
-	return config
-end
-
 function sbq.tableMatches(a, b)
     for k, v in pairs(a) do
 	  if type(v) == "table"

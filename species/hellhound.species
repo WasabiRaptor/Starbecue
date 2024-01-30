@@ -168,10 +168,13 @@
 				["flesh","secondary", {"nipples":false}]
 			]
 	},
-	"animationCustom" : {
-		"globalTagDefaults":{
-			"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png"
+	"animationCustom" : [
+		"/humanoid/any/humanoidPred.animation",
+		{
+			"globalTagDefaults":{
+				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png"
+			}
 		}
-	}
+	]
 
 }

@@ -76,7 +76,7 @@ function sbq.reloadVoreConfig(config)
 	storage.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-    sbq.voreConfig = sbq.getConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+    sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 
@@ -303,39 +303,42 @@ function _State:doAnimations(animations, target)
 		end
 	end
 	for k, v in pairs(animations or {}) do
-		local state = sb.replaceTags(k, targetTags)
-		if type(v) == "table" then
-			animator.setAnimationState(state, v[1], v[2])
-			animator.setAnimationReversed(state, v[3])
-		else
-			animator.setAnimationState(state, v)
-			animator.setAnimationReversed(state, false)
+        local state = sb.replaceTags(k, targetTags)
+        local anim = v
+		local force = false
+		local reversed = false
+        if type(v) == "table" then
+			anim, force, reversed = table.unpack(v)
+        end
+		if animator.hasState(state, anim) then
+            animator.setAnimationState(state, anim, force)
+            animator.setStateReversed(state, reversed or false)
+			local timer = animator.animationTimer(state)
+			longest = math.max(longest, timer[2])
 		end
-		local timer = animator.animationTimer(state)
-		longest = math.max(longest, timer[2])
 	end
 	return longest
 end
 
 -- Location handling
 function Locations.addLocation(name, config)
-	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, sbq.getConfigArray(config))
+	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config))
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
 	if location.infusionSlot and sbq.settings[location.infusionType .. "Pred"] and sbq.settings[location.infusionSlot] then
 		local infused = sbq.settings[location.infusionSlot]
 		local species = infused.parameters.npcArgs.npcSpecies
-		local voreConfig = sbq.getConfigArray(infused.parameters.voreConfig or root.speciesConfig(species).voreConfig or "/humanoid/any/vore.config")
+		local voreConfig = root.fetchConfigArray(infused.parameters.voreConfig or root.speciesConfig(species).voreConfig or "/humanoid/any/vore.config")
 		location = sb.jsonMerge(sbq.config.locations[name],
 			{ species = voreConfig.tfSpecies or species },
-			sbq.getConfigArray(
+			root.fetchConfigArray(
 				sb.jsonQuery(voreConfig, "infusedLocations." .. species .. "." .. name) or
 				sb.jsonQuery(voreConfig, "infusedLocations." .. name) or {}
 			)
 		)
         -- certain NPCs may not like performing certain actions, therefore they can disable them when infused
 		local metatable = getmetatable(sbq.settings)
-        sbq.settings = sb.jsonMerge(sbq.settings, sbq.getConfigArray(infused.parameters.overrideSettings or {}),
-            sbq.getConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name)
+        sbq.settings = sb.jsonMerge(sbq.settings, root.fetchConfigArray(infused.parameters.overrideSettings or {}),
+            root.fetchConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name)
                 or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. name) or {}))
 		setmetatable(sbq.settings, metatable)
     end
@@ -655,7 +658,13 @@ function _Occupant:refreshLocation(name, subLocation)
 
 		table.insert(location.occupancy.list, self)
 		location.occupancy.sizeDirty = true
+    end
+	if animator.hasState(self.seat.."Location", Transformation.stateName.."_"..self.location) then
+        animator.setAnimationState(self.seat .. "Location", Transformation.stateName.."_"..self.location)
+	elseif animator.hasState(self.seat.."Location", self.location) then
+        animator.setAnimationState(self.seat .. "Location", self.location)
 	end
+
 	if not self.locationStore[self.location] then
 		self.locationStore[self.location] = {
 			time = 0,

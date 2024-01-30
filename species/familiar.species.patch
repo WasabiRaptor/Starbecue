@@ -1,36 +1,37 @@
-[
-	{"op":"merge", "path":"", "value": {
-		"colorRemapGlobalTags" : {
-			"bellyColorRemap" : [
-					{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
-					{"a94783":"ffc181", "check" : {"visibleNavel":false}},
-					["primary","tertiary"]
-				],
-			"cockColorRemap" : [
-					["primary","flesh"]
-				],
-			"pussyColorRemap" : [
-					["flesh","flesh"]
-				],
-			"ballsColorRemap" : [
-					["primary","tertiary"]
-				],
-			"breastsColorRemap" : [
-					["primary","secondary"],
-					["flesh","flesh", {"nipples":true}],
-					["flesh","secondary", {"nipples":false}]
-				]
-		},
-		"baseColorMap" : {
-			"primary" : ["606670", "606670", "9399a3"],
-			"secondary" : ["191126", "392a52", "564375"],
-			"tertiary" : ["00c77d", "00c77d", "00ffa1"],
-			"flesh" : ["004a8e","0062bc","007ef2"]
-		},
-		"animOverrideDefaultSettings": {
-			"visibleNavel" : false
-		},
-		"animationCustom" : {
+[{"op":"merge", "path":"", "value": {
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
+				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				["primary","tertiary"]
+			],
+		"cockColorRemap" : [
+				["primary","flesh"]
+			],
+		"pussyColorRemap" : [
+				["flesh","flesh"]
+			],
+		"ballsColorRemap" : [
+				["primary","tertiary"]
+			],
+		"breastsColorRemap" : [
+				["primary","secondary"],
+				["flesh","flesh", {"nipples":true}],
+				["flesh","secondary", {"nipples":false}]
+			]
+	},
+	"baseColorMap" : {
+		"primary" : ["606670", "606670", "9399a3"],
+		"secondary" : ["191126", "392a52", "564375"],
+		"tertiary" : ["00c77d", "00c77d", "00ffa1"],
+		"flesh" : ["004a8e","0062bc","007ef2"]
+	},
+	"animOverrideDefaultSettings": {
+		"visibleNavel" : false
+	},
+	"animationCustom" : [
+		"/humanoid/any/humanoidPred.animation",
+		{
 			"globalTagDefaults" : {
 				"legs_fg_mask" : "/humanoid/familiar/frontLegMask/malebody.png"
 			},
@@ -54,9 +55,8 @@
 				}
 			}
 		}
-
-
-	}},
+	]
+}},
 	{
 		"op": "replace",
 		"path": "/humanoidOverrides/bodyFullbright",
