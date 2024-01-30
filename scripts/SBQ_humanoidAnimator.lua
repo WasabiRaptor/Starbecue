@@ -2,7 +2,7 @@ local old = {
     initAnimator = initAnimator or (function ()end),
 	equipmentSlotUpdated = equipmentSlotUpdated or (function ()end)
 }
-require("/scripts/SBQ_check_settings.lua")
+require("/scripts/SBQ_util.lua")
 
 function equipmentSlotUpdated(slot, itemDescriptor)
     old.equipmentSlotUpdated(slot, itemDescriptor)
@@ -15,7 +15,6 @@ function initAnimator()
 	--sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
 	local defaultColorMap = root.speciesConfig("human").baseColorMap
 	local speciesConfig = root.speciesConfig(humanoid.species())
-	sbq.animOverrideSettings = sb.jsonMerge(speciesConfig.animOverrideDefaultSettings or {}, status.statusProperty("speciesAnimOverrideSettings") or {}, status.statusProperty("speciesAnimOverrideOverrideSettings") or {})
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
 		local sourceColorMap = sb.jsonQuery(speciesConfig, "colorRemapSources." .. tag)
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
@@ -97,7 +96,7 @@ function sbq.remapColor(remaps, fromMap, toMap)
 			local from = fromMap[remap[1]]
             local to = toMap[remap[2]]
             local check = remap[3]
-            if sbq.checkSettings(check, sbq.animOverrideSettings) then
+            if sbq.tableMatches(check, sbq.settings) then
                 for i, fromColor in ipairs(from) do
 					local toColor = to[i] or to[#to]
 					if (fromColor ~= toColor) then
@@ -105,7 +104,7 @@ function sbq.remapColor(remaps, fromMap, toMap)
 					end
 				end
             end
-        elseif sbq.checkSettings(remap.check, sbq.animOverrideSettings) then
+        elseif sbq.tableMatches(remap.check, sbq.settings) then
 			for color, replace in pairs(remap or {}) do
 				if type(replace) == "string" then
 					directives = directives .. ";" .. color .. "=" .. replace

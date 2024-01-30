@@ -14,8 +14,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","secondary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","secondary", {"visibleNipples":false}]
 			]
 	},
 	"baseColorMap" : {
@@ -24,9 +24,14 @@
 		"hair" : ["951500", "be1b00", "dc1f00", "f32200"],
 		"flesh" : ["951500", "be1b00", "dc1f00", "f32200"]
 	},
-	"animOverrideDefaultSettings": {
-		"visibleNavel" : false
-	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : false
+			}
+		}
+	],
 	"animationCustom" : [
 		"/humanoid/any/humanoidPred.animation",
 	]

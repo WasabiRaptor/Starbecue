@@ -24,9 +24,14 @@
 		"hair" : ["b3a998", "e5d9c3", "fff2d9"],
 		"flesh" : ["404040", "5d5d5d", "7b7b7b"]
 	},
-	"animOverrideDefaultSettings": {
-		"visibleNavel" : false
-	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : false
+			}
+		}
+	],
 	"animationCustom" : [
 		"/humanoid/any/humanoidPred.animation",
 	]

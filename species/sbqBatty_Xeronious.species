@@ -1,10 +1,14 @@
 {
 	"kind" : "sbqBatty_Xeronious",
 
-	"animOverrideDefaultSettings" : {
-		"visibleNavel" : true
-	},
-
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	"charCreationTooltip" : {
 			"title" : "Batty",
 			"subTitle" : "Noodle",
@@ -163,8 +167,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","primary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","primary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","primary", {"visibleNipples":false}]
 			]
 	},
 	"animationCustom" : [

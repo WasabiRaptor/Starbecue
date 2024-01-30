@@ -1,10 +1,14 @@
 {
 	"kind" : "sbqHelena_FFWizard",
 
-	"animOverrideDefaultSettings" : {
-		"visibleNavel" : true
-	},
-
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	"charCreationTooltip" : {
 			"title" : "Helena",
 			"subTitle" : "S8",
@@ -158,8 +162,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","secondary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","secondary", {"visibleNipples":false}]
 			],
 		"cockColorRemap" : [
 				["primary","flesh"]
@@ -180,8 +184,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","secondary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","secondary", {"visibleNipples":false}]
 			]
 	},
 	"animationCustom" : [

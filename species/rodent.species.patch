@@ -16,8 +16,8 @@
 		],
 		"breastsColorRemap" : [
 			["primary","secondary"],
-			["flesh","flesh", {"nipples":true}],
-			["flesh","secondary", {"nipples":false}]
+			["flesh","flesh", {"visibleNipples":true}],
+			["flesh","secondary", {"visibleNipples":false}]
 		]
 	},
 	"baseColorMap" : {
@@ -26,9 +26,14 @@
 		"hair" : ["ba9d48", "d7b85d", "e4c471"],
 		"flesh" : ["a0533f", "c05e41", "fc8d72", "fcab9c"]
 	},
-	"animOverrideDefaultSettings": {
-		"visibleNavel" : true
-	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	// avali like body
 	"animationCustom" : [
 		"/humanoid/avali/avaliVoreAnimationCustom.config"

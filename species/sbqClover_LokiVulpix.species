@@ -1,10 +1,14 @@
 {
 	"kind" : "sbqClover_LokiVulpix",
 
-	"animOverrideDefaultSettings" : {
-		"visibleNavel" : true
-	},
-
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	"charCreationTooltip" : {
 			"title" : "Meowscarada",
 			"subTitle" : "Kitty",
@@ -168,8 +172,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","primary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","primary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","primary", {"visibleNipples":false}]
 			],
 		"cockColorRemap" : [
 				["primary","flesh"]
@@ -187,8 +191,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","secondary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","secondary", {"visibleNipples":false}]
 			]
 	},
 	"animationCustom" : [

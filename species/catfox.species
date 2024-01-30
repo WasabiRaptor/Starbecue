@@ -1,10 +1,14 @@
 {
 	"kind" : "catfox",
 
-	"animOverrideDefaultSettings" : {
-		"visibleNavel" : true
-	},
-
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	"charCreationTooltip" : {
 		"title" : "Catfox",
 		"subTitle" : "meow yarp meow myarp",
@@ -274,8 +278,8 @@
 		],
 		"breastsColorRemap" : [
 			["primary","secondary"],
-			["flesh","flesh", {"nipples":true}],
-			["flesh","secondary", {"nipples":false}]
+			["flesh","flesh", {"visibleNipples":true}],
+			["flesh","secondary", {"visibleNipples":false}]
 		]
 	},
 	"animationCustom" : [

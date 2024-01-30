@@ -1,10 +1,14 @@
 {
 	"kind" : "sbqAuri_LokiVulpix",
 
-	"animOverrideDefaultSettings" : {
-		"visibleNavel" : true
-	},
-
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	"charCreationTooltip" : {
 			"title" : "Auri",
 			"subTitle" : "(Zn,Cu)5(CO3)2(OH)6",
@@ -168,8 +172,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","primary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","primary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","primary", {"visibleNipples":false}]
 			]
 	},
 	"infusedParts" :{
@@ -184,8 +188,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","primary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","primary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","primary", {"visibleNipples":false}]
 			]
 	},
 	"animationCustom" : [

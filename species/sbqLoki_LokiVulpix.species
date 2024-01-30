@@ -1,11 +1,6 @@
 {
 	"kind" : "sbqLoki_LokiVulpix",
 
-	"animOverrideDefaultSettings" : {
-		"nipples" : true,
-		"visibleNavel" : true
-	},
-
 	"charCreationTooltip" : {
 		"title" : "Loki",
 		"subTitle" : "(C9H8O)C6H5CH=CHCHO",
@@ -170,8 +165,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","tertiary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","tertiary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","tertiary", {"visibleNipples":false}]
 			],
 		"tailColorRemap" : [
 				["tertiary","hair" ],
@@ -193,8 +188,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","primary"],
-				["flesh","flesh", {"nipples":true}],
-				["flesh","primary", {"nipples":false}]
+				["flesh","flesh", {"visibleNipples":true}],
+				["flesh","primary", {"visibleNipples":false}]
 			]
 	},
 	"animationCustom" : [
@@ -203,6 +198,15 @@
 			"globalTagDefaults":{
 				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
 				"tailImage" : "/humanoid/sbqAuri_LokiVulpix/tail.png"
+			}
+		}
+	],
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true,
+				"visibleNipples" : true,
 			}
 		}
 	]

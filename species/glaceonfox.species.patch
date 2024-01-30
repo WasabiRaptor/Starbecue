@@ -28,9 +28,14 @@
 				["flesh","flesh"]
 			]
 	},
-	"animOverrideDefaultSettings": {
-		"visibleNavel" : true
-	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			}
+		}
+	],
 	"animationCustom" : [
 		"/humanoid/any/humanoidPred.animation",
 	]
