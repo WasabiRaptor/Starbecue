@@ -226,6 +226,28 @@ function init()
 		sbq.maybeConvert()
     end
 
+	if self.behavior then
+		local behavior = {}
+		local _behavior = self.behavior
+		setmetatable(behavior, {__index = _behavior})
+		function behavior:run(...)
+			local loungeAnchor = world.entityLoungingIn(entity.id())
+			if (not loungeAnchor) or loungeAnchor.dismountable then
+				_behavior:run(...)
+			else
+				sbq.struggleBehavior(...)
+			end
+        end
+		-- the metatable __index on this table seems to not get this so I have to define it
+        function behavior:blackboard(...)
+			return _behavior:blackboard(...)
+		end
+		self.behavior = behavior
+	end
+end
+
+function sbq.struggleBehavior(dt)
+	-- TODO
 end
 
 function sbq.maybeConvert()

@@ -56,6 +56,29 @@ function init()
 	status.clearPersistentEffects("digestImmunity")
 	status.setPersistentEffects("digestImmunity", {"sbqDigestImmunity"})
 	oldinit()
+
+	if self.behavior then
+		local behavior = {}
+		local _behavior = self.behavior
+		setmetatable(behavior, {__index = _behavior})
+		function behavior:run(...)
+			local loungeAnchor = world.entityLoungingIn(entity.id())
+			if (not loungeAnchor) or loungeAnchor.dismountable then
+				return _behavior:run(...)
+			else
+				sbq.struggleBehavior(...)
+			end
+        end
+		-- the metatable __index on this table seems to not get this so I have to define it
+		function behavior:blackboard(...)
+			return _behavior:blackboard(...)
+		end
+        self.behavior = behavior
+	end
+end
+
+function sbq.struggleBehavior(dt)
+	-- TODO
 end
 
 function update(dt)
