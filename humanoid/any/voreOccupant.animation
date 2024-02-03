@@ -1,0 +1,219 @@
+{
+	// this is not meant to be used as a standalone animation!
+
+	// this is used as the default for an occupant's animation states and parts
+	// all <occupant> tags are replaced with the occupant's seatname when this is loaded
+	// via the Occupants.addOccupant() function in the main vore script
+	"animatedParts" : {
+		"stateTypes" : {
+			// used for the idle when no special anim is happening
+			// a state does not need to be created for every location
+			"<occupant>Location" : {
+				"default": "none",
+				"priority" : 1,
+				"states" : {
+					// one doesn't explicitly need to make a state for each location
+					// but it is good to do so as explained in the part states
+					// when an occupant location the state with the matching name will be set
+					// however, if your transformation has multiple states, one can also define
+					// a state for each unique state, however it will default to the normal one
+					// if it cannot find a state unique one
+
+					// example of a transformation state unique state
+					// "stateName_belly": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"belly": { "frames": 1, "cycle": 0, "mode": "end" },
+					"ass": { "frames": 1, "cycle": 0, "mode": "end" },
+					"tail": { "frames": 1, "cycle": 0, "mode": "end" },
+					"pussy": { "frames": 1, "cycle": 0, "mode": "end" },
+					"womb": { "frames": 1, "cycle": 0, "mode": "end" },
+					"breasts": { "frames": 1, "cycle": 0, "mode": "end" },
+					"cleavage": { "frames": 1, "cycle": 0, "mode": "end" },
+					"cock": { "frames": 1, "cycle": 0, "mode": "end" },
+					"balls": { "frames": 1, "cycle": 0, "mode": "end" },
+				}
+			},
+			// this animation state has a higher priority than the locations and will override it when it
+			// is active, when idle the occupant will do the animation from the above state
+			"<occupant>State" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"navelVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"unbirthVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"cockVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"breastVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+				}
+
+			}
+		},
+		"parts" : {
+			"<occupant>" : {
+				"properties": {
+					"centered": true,
+					"loungeOffset" : [0,0],
+					"interpolated" : true,
+					"transformationGroups" : ["<occupant>"],
+					// the below is so by default an occupant is scaled so small to be invisible
+					// as well as be layered behind the main sprite
+					"zLevel":-1,
+					"transforms":{"scale":[0,0]}
+				},
+				"partStates" : {
+					"<occupant>Location" : {
+						// one doesn't explicitly need to make a state for each location
+						// but it is good to do so to have their camera focused in the right spot
+						// so anchor to the relevant part and set offsets as necessary
+						"belly" : {"properties":{
+							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [0,-1],
+						}},
+						"womb" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [0,-1.25],
+						}},
+						"shaft" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [0,-1.75],
+						}},
+						"balls" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [0,-1.5],
+						}},
+						"breasts" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [0,-0.5],
+						}}
+					},
+					"<occupant>State" : {
+						"oralVore" : {
+							// frame properties can be used for transformations with the modified
+							// engine's new animator features
+							"frameProperties" :{
+								"transforms" : [
+									{"scale":[-1, 1],		"translate":[1.5,0],		"rotate":0	},
+									{"scale":[-0.75, 0.75],	"translate":[1,0.25],		"rotate":15	},
+									{"scale":[-0.5, 0.5],	"translate":[0.75,0.25],	"rotate":45	},
+									{"scale":[-0.25, 0.25],	"translate":[0.5,0.25],		"rotate":90	},
+									{"scale":[-0.1, 0.1],	"translate":[0.25,0.25],	"rotate":100},
+									{"scale":[-0.1, 0.1],	"translate":[0,0.25],		"rotate":180},
+									{"scale":[0, 0],		"translate":[0,-0.5],		"rotate":90	},
+									{"scale":[0, 0],		"translate":[0,-1],			"rotate":0	},
+								]
+							},
+							"properties" : {
+								"zLevel" : 1
+							}
+
+						},
+						"analVore": {
+							"frameProperties": {
+								"transforms": [
+									{"scale": [1,1],"translate": [-1.5,0],"rotate": 0},
+									{"scale": [0.75,0.75],"translate": [-1,-0.75],"rotate": -15},
+									{"scale": [0.5,0.5],"translate": [-0.75,-1.5],"rotate": -45},
+									{"scale": [0.25,0.25],"translate": [-0.5,-1.5],"rotate": -90},
+									{"scale": [0.1,0.1],"translate": [0,-1.5],"rotate": -90},
+									{"scale": [0.1,0.1],"translate": [0,-1.5],"rotate": -90},
+									{"scale": [0,0],"translate": [0,-1.25],"rotate": -45},
+									{"scale": [0,0],"translate": [0,-1],"rotate": 0}
+								]
+							},
+							"properties" : {
+								"zLevel" : 1
+							}
+						},
+						"navelVore" : {
+							"frameProperties" : {
+								"transforms" : [
+									{"scale" : [-1, 1],"translate" : [1.5, 0],"rotate" : 0},
+									{"scale" : [-0.75, 0.75],"translate" : [1, -0.5],"rotate" : 15},
+									{"scale" : [-0.5, 0.5],"translate" : [0.75, -0.75],"rotate" : 45},
+									{"scale" : [-0.25, 0.25],"translate" : [0.5, -1],"rotate" : 90},
+									{"scale" : [-0.1, 0.1],"translate" : [0.25, -1.25],"rotate" : 90},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -1.25],"rotate" : 90},
+									{"scale" : [0, 0],"translate" : [0, -1.25],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, -1],"rotate" : 0}
+								]
+							},
+							"properties" : {
+								"zLevel" : 1
+							}
+						},
+						"unbirthVore" : {
+							"frameProperties" : {
+								"transforms" : [
+									{"scale" : [-1, 1],"translate" : [1.5, 0],"rotate" : 0},
+									{"scale" : [-0.75, 0.75],"translate" : [1, -0.5],"rotate" : 15},
+									{"scale" : [-0.5, 0.5],"translate" : [0.75, -1],"rotate" : 45},
+									{"scale" : [-0.25, 0.25],"translate" : [0.5, -1.5],"rotate" : 45},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, 1.25],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, -1.25],"rotate" : 0}
+								]
+							},
+							"properties" : {
+								"zLevel" : 1
+							}
+						},
+						"cockVore" : {
+							"frameProperties" : {
+								"transforms" : [
+									{"scale" : [-1, 1],"translate" : [1.5, 0],"rotate" : 0},
+									{"scale" : [-0.75, 0.75],"translate" : [1, -0.5],"rotate" : 15},
+									{"scale" : [-0.5, 0.5],"translate" : [0.75, -1],"rotate" : 45},
+									{"scale" : [-0.25, 0.25],"translate" : [0.5, -1.5],"rotate" : 45},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, -1.75],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, -1.75],"rotate" : 0}
+								]
+							},
+							"properties" : {
+								"zLevel" : 1
+							}
+						},
+						"breastVore" : {
+							"frameProperties" : {
+								"transforms" : [
+									{"scale" : [-1, 1],"translate" : [1.5, 0],"rotate" : 0},
+									{"scale" : [-0.75, 0.75],"translate" : [1, -0.25],"rotate" : 15},
+									{"scale" : [-0.5, 0.5],"translate" : [0.75, -0.5],"rotate" : 45},
+									{"scale" : [-0.25, 0.25],"translate" : [0.5, -0.5],"rotate" : 90},
+									{"scale" : [-0.1, 0.1],"translate" : [0.25, -0.5],"rotate" : 90},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -0.5],"rotate" : 90},
+									{"scale" : [0, 0],"translate" : [0, -0.5],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, -0.5],"rotate" : 0}
+								]
+							},
+							"properties" : {
+								"zLevel" : 1
+							}
+						}
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {"transforms":{"scale":[0,0]}} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {"transforms":{"scale":[0,0]}} }
+					},
+					"justHead" : {
+						"head": { "properties": {"transforms":{"scale":[0,0]}} }
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"<occupant>" : {"interpolated" : true}
+	}
+}
