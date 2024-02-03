@@ -129,7 +129,7 @@ function sbq.reloadVoreConfig(config)
 end
 
 function sbq.tryAction(...)
-	Transformation:tryAction(...)
+	return Transformation:tryAction(...)
 end
 
 function sbq.getSettingsPageData()
@@ -221,10 +221,10 @@ end
 function States.addState(stateName, config)
 	local state = sb.jsonMerge(config, {})
 	state.locations = state.locations or {}
-	for k, location in pairs(state.locations) do
-		setmetatable(location, {__index = Locations.locations[k]})
+    for k, location in pairs(Locations.locations) do
+		state.locations[k] = state.locations[k] or {}
+		setmetatable(state.locations[k], {__index = location})
 	end
-	setmetatable(state.locations, {__index = Locations.locations})
 	setmetatable(state, {__index = Transformation.states[stateName]})
 	for actionName, action in pairs(state.actions or {}) do
 		setmetatable(action, _Action)
@@ -251,7 +251,7 @@ function _State:tryAction(name, target, ...)
 		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, false, ...) end
 	end
 	local result1, result2 = true, false
-	if action.script then result1, result2 = self.scripts[action.script](name, action, target, ...) end
+	if action.script then result1, result2 = self[action.script](self, name, action, target, ...) end
 	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
 	local longest = self:doAnimations(action.animations, target)
 	local cooldown = action.cooldown or longest
@@ -260,8 +260,8 @@ function _State:tryAction(name, target, ...)
 		action.onCooldown = false
 		if type(result2) == "function" then
             result2(...)
-        elseif type(result2) == "string" and type(self.scripts[result2]) == "function" then
-			self.scripts[result2](...)
+        elseif type(result2) == "string" and type(self[result2]) == "function" then
+			self[result2](self, ...)
 		end
     end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
@@ -274,13 +274,13 @@ function _State:actionFailed(name, action, target, ...)
 	local cooldown = action.failureCooldown or 0
     action.onCooldown = true
 	local result1, result2  = false, false
-	if action.failureScript then result1, result2 = self.scripts[action.failureScript](name, action, target, ...) end
+	if action.failureScript then result1, result2 = self[action.failureScript](self, name, action, target, ...) end
 	sbq.timer(name.."Cooldown", cooldown, function (...)
         action.onCooldown = false
 		if type(result2) == "function" then
             result2(...)
-        elseif type(result2) == "string" and type(self.scripts[result2]) == "function" then
-			self.scripts[result2](...)
+        elseif type(result2) == "string" and type(self[result2]) == "function" then
+			self[result2](self, ...)
 		end
     end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
@@ -385,16 +385,21 @@ end
 function _Location:hasSpace(size, subLocation)
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
     if self.settings.hammerspace then return math.huge end
+    local shared = 0
+	for _, name in ipairs(self.sharedWith or {}) do
+		local location = Transformation:getLocation(name)
+		shared = shared + location.occupancy.size
+	end
 	if not self.subLocations then
-		return self:getRemainingSpace(self.maxFill, self.occupancy.size, size)
+		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size)
     elseif subLocation then
 		if self.subLocations[subLocation].maxCount and (#self.occupancy.subLocations[subLocation].list >= self.subLocations[subLocation].maxCount) then return false end
 		-- if we got an input for a sublocation, check that specific one and return
-		return self:getRemainingSpace(self.subLocations[subLocation].maxFill, self.occupancy.subLocations[subLocation].size), subLocation
+		return self:getRemainingSpace(self.subLocations[subLocation].maxFill, self.occupancy.subLocations[subLocation].size + shared, size), subLocation
     elseif self.subLocations[1] then
 		if self.subLocations[1].maxCount and (#self.occupancy.subLocations[1].list >= self.subLocations[1].maxCount) then return false end
 		-- if an array, assuming locations are ordered, only check if theres space in the first
-		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size), 1
+		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, size), 1
 	else
 		-- if an object assume any is valid and choose one with the most space available
 		local best = {0}
@@ -424,8 +429,9 @@ function _Location:updateOccupancy(locationTag, subLocationBehavior)
 		left = sbq.facingRight and "back" or "front"
 	}
 	local prevVisualSize = self.occupancy.visualSize
-	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
-		self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
+    if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
+		self.occupancy.sizeDirty = false
+        self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
 		if subLocationBehavior then
 			if subLocationBehavior == "average" then
 				local total = 0
@@ -452,18 +458,24 @@ function _Location:updateOccupancy(locationTag, subLocationBehavior)
 			for _, occupant in ipairs(self.occupancy.list) do
 				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale)
 			end
-			self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
-			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size, self.struggleSizes or {0})
+            self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
+            local addVisual = 0
+            for _, name in ipairs(self.addFill or {}) do
+                local location = Transformation:getLocation(name)
+				location:updateOccupancy(name, location.subLocationBehavior)
+				addVisual = addVisual + location.occupancy.visualSize
+			end
+			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or {0})
 		end
         if prevVisualSize ~= self.occupancy.visualSize then
 
 			self.occupancy.interpolating = true
 			self.occupancy.interpolateFrom = prevVisualSize
-			animator.setGlobalTag(sb.replaceTags(locationTag, directionTags), self.occupancy.visualSize)
+			animator.setGlobalTag(sb.replaceTags(locationTag, directionTags).."_occupants", self.occupancy.visualSize)
 		end
     end
 	if self.occupancy.sided and (self.occupancy.lastDirection ~= sbq.facingRight) then
-		animator.setGlobalTag(sb.replaceTags(locationTag, directionTags), self.occupancy.visualSize)
+		animator.setGlobalTag(sb.replaceTags(locationTag, directionTags).."_occupants", self.occupancy.visualSize)
 	end
 	if self.occupancy.interpolating then
 		-- TODO get the animation and do stuff with it here
@@ -501,7 +513,7 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 		struggleTime = 0,
 		struggleCount = 0,
 		locationStore = {},
-		progressBar = nil,
+        progressBar = nil,
 	}
 	setmetatable(occupant, _Occupant)
 	-- add occupant to tables for easily referencing it
@@ -509,7 +521,7 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 	Occupants.seat[seat] = occupant
 	Occupants.entityId[tostring(entityId)] = occupant
 	local uuid = world.entityUniqueId(entityId)
-	if uuid then
+    if uuid then
 		Occupants.entityId[uuid] = occupant
 	end
 	-- refresh the location data for this occupant
@@ -521,19 +533,24 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 end
 
 function _Occupant:remove()
-	self:setLoungeEnabled(false)
-	Occupants.locations[self.location].sizeDirty = true
+    self:setLoungeEnabled(false)
+    local location = Transformation:getLocation(self.location)
+	sb.logInfo("removing occupant: "..self.entityId)
 
-	Occupants.seat[self.seat] = nil
-	for k, occupant in pairs(Occupants.entityId) do
-		if occupant.entityId == self.entityId then
-			Occupants.entityId[k] = nil
-			break
+    Occupants.seat[self.seat] = nil
+
+	if self.subLocation then
+		local subLocation = Transformation:getLocation(self.location, self.subLocation)
+		for i, occupant in ipairs(subLocation.occupancy.list) do
+			if occupant.entityId == self.entityId then
+				table.remove(subLocation.occupancy.list, i)
+				break
+			end
 		end
 	end
-	for i, occupant in ipairs(Occupants.locations[self.location].list) do
+	for i, occupant in ipairs(location.occupancy.list) do
 		if occupant.entityId == self.entityId then
-			table.remove(Occupants.locations[self.location].list, i)
+			table.remove(location.occupancy.list, i)
 			break
 		end
 	end
@@ -541,6 +558,11 @@ function _Occupant:remove()
 		if occupant.entityId == self.entityId then
 			table.remove(Occupants.list, i)
 			return
+		end
+    end
+	for k, occupant in pairs(Occupants.entityId) do
+		if occupant.entityId == self.entityId then
+			Occupants.entityId[k] = nil
 		end
 	end
 end
@@ -562,11 +584,9 @@ function Occupants.update(dt)
 
 		for k, _ in pairs(location.subLocations or {}) do
 			local subLocation = Transformation:getLocation(name, k)
-			subLocation.occupancy.sizeDirty = false
 			subLocation.occupancy.settingsDirty = false
 		end
 		location.occupancy.settingsDirty = false
-		location.occupancy.sizeDirty = false
 		Occupants.lastScale = sbq.scale
 	end
 end
@@ -662,7 +682,11 @@ function _Occupant:refreshLocation(name, subLocation)
 		location = Transformation:getLocation(self.location, self.subLocation)
 
 		table.insert(location.occupancy.list, self)
-		location.occupancy.sizeDirty = true
+        location.occupancy.sizeDirty = true
+		for _, sharedName in ipairs(location.sharedWith) do
+			local shared = Transformation:getLocation(sharedName)
+			shared.occupancy.sizeDirty = true
+		end
     end
 	if animator.hasState(self.seat.."Location", Transformation.stateName.."_"..self.location) then
         animator.setAnimationState(self.seat .. "Location", Transformation.stateName.."_"..self.location)

@@ -38,7 +38,13 @@ function dontDoRadialMenu(arg)
 	dontDoMenu = arg
 end
 
+local shiftHeldTime
 function update(dt, fireMode, shiftHeld, controls)
+	if shiftHeld then
+        shiftHeldTime = shiftHeldTime + dt
+    else
+		shiftHeldTime = 0
+	end
 	sbq.checkRPCsFinished(dt)
 	if not player.isLounging() then
 		sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
@@ -46,7 +52,7 @@ function update(dt, fireMode, shiftHeld, controls)
 			assignedMenu = nil
 		end
 
-		if (storage.seatdata.shift or 0) > 0.2 then
+		if (shiftHeldTime) > 0.2 then
 			if not assignedMenu and controls.up then
 				if activeItem.hand() == "primary" then activeItem.callOtherHandScript("dontDoRadialMenu", true) end
 				if dontDoMenu then return end
@@ -133,13 +139,11 @@ function update(dt, fireMode, shiftHeld, controls)
 	end
 end
 
-function sbq.letout(i)
-	if type(sbq.sbqCurrentData.id) == "number" and world.entityExists(sbq.sbqCurrentData.id) then
-		if (sbq.sbqCurrentData.totalOccupants or 0) > 0 then
-			world.sendEntityMessage(sbq.sbqCurrentData.id, "letout",i)
-		else
-			world.sendEntityMessage(sbq.sbqCurrentData.id, "despawn",i)
-		end
+function sbq.letout(id)
+	player.setScriptContext("starbecue")
+	local loungeAnchor = world.entityLoungingIn(entity.id())
+	if (not loungeAnchor) or loungeAnchor.dismountable then
+		return player.callScript("sbq.tryAction", "pickLetout", id, storage.clickAction)
 	end
 end
 

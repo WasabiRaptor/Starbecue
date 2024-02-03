@@ -68,12 +68,12 @@ function init()
 			else
 				sbq.struggleBehavior(...)
 			end
-        end
+		end
 		-- the metatable __index on this table seems to not get this so I have to define it
 		function behavior:blackboard(...)
 			return _behavior:blackboard(...)
 		end
-        self.behavior = behavior
+		self.behavior = behavior
 	end
 end
 

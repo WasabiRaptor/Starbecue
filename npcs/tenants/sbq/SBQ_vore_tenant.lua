@@ -39,7 +39,6 @@ function getHeldItems()
 	return result
 end
 
-
 function preservedStorage()
 	return {
 		itemSlots = storage.itemSlots,

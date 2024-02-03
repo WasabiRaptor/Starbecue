@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
 local old = {
-    init = init,
+	init = init,
 	update = update
 }
 sbq = {}
@@ -194,7 +194,7 @@ function init()
 		end)
 
 	status.setStatusProperty("sbqCurrentData", nil)
-    sbq.setupPublicSettings()
+	sbq.setupPublicSettings()
 
 	old.init()
 
@@ -224,7 +224,7 @@ function init()
 	status.setPersistentEffects("digestImmunity", { "sbqDigestImmunity" })
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
 		sbq.maybeConvert()
-    end
+	end
 
 	if self.behavior then
 		local behavior = {}
@@ -237,9 +237,9 @@ function init()
 			else
 				sbq.struggleBehavior(...)
 			end
-        end
+		end
 		-- the metatable __index on this table seems to not get this so I have to define it
-        function behavior:blackboard(...)
+		function behavior:blackboard(...)
 			return _behavior:blackboard(...)
 		end
 		self.behavior = behavior
@@ -304,7 +304,7 @@ function sbq.tenant_setNpcType(npcType)
 			scriptConfig = {
 				ownerUuid = config.getParameter("ownerUuid"),
 				personality = personality(),
-                initialStorage = preservedStorage(),
+				initialStorage = preservedStorage(),
 				sbqSettings = storage.settings,
 				uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
 				preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or

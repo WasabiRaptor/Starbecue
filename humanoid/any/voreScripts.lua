@@ -1,7 +1,7 @@
 
 local Default = {
 	states = {
-		default = {scripts = {}},
+		default = {},
 	}
 }
 setmetatable(Default, _Transformation)
@@ -27,9 +27,39 @@ end
 function default:uninit()
 end
 
-function default.scripts.tryVore(name, action, target, ...)
+function default:tryVore(name, action, target, ...)
 	return sbq.tryVore(target, action.location, action.throughput)
 end
-function default.scripts.tryLetout(name, action, target, ...)
+function default:tryLetout(name, action, target, ...)
 	return sbq.tryLetout(target, action.throughput)
+end
+function default:pickLetout(name, action, target, preferredAction, skip)
+    if target then
+        occupant = Occupants.entityId[tostring(target)]
+        location = Transformation:getLocation(occupant.location, occupant.subLocation)
+        local exitTypes = location.exitTypes or location.entryTypes
+		if preferredAction then
+			for _, exitType in ipairs(exitTypes) do
+				if exitType == "preferredAction" then
+					if Transformation:tryAction(exitType.."Letout", target) then
+						return true
+					end
+				end
+			end
+        end
+		if skip then return false end
+		for _, exitType in ipairs(exitTypes) do
+			if Transformation:tryAction(exitType.."Letout", target) then
+				return true
+			end
+		end
+    else
+        for i = #Occupants.list, 1, -1 do
+            local occupant = Occupants.list[i]
+			if self:pickLetout(name,action,occupant.entityId,preferredAction,true) then
+				return true
+			end
+		end
+    end
+	return false
 end
