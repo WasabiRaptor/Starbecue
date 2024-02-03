@@ -67,7 +67,7 @@ function update(dt, fireMode, shiftHeld, controls)
 						sbq.lastRadialSelection = data.selection
 						sbq.radialSelectionType = data.type
 						if data.selection == "cancel" then return end
-						if data.selection == "despawn" and data.pressed and not sbq.click then
+						if data.selection == "letout" and data.pressed and not sbq.click then
 							sbq.click = true
 							sbq.letout(selectedPrey)
 							return
@@ -123,7 +123,7 @@ function update(dt, fireMode, shiftHeld, controls)
 			end
 		elseif assignedMenu then
 			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqClose" )
-			if sbq.lastRadialSelection == "despawn" then
+			if sbq.lastRadialSelection == "letout" then
 				sbq.letout(selectedPrey)
 			end
 			assignedMenu = nil
@@ -153,8 +153,7 @@ function assignAssignActionMenu()
 
 	local options = {
 		{
-			name = "despawn",
-			icon = "/interface/xhover.png",
+			name = "letout",
 			title = "Let Out"
 		},
 		{
@@ -207,8 +206,7 @@ end
 function assignSelectMenu()
 	local options = {
 		{
-			name = "despawn",
-			icon = "/interface/xhover.png",
+			name = "letout",
 			title = "Let Out"
 		},
 		--[[{
@@ -348,7 +346,7 @@ function assignPreyActionsLocation(id)
 
 	local options = {
 		{
-			name = "despawn",
+			name = "letout",
 			title = "Let Out"
 		},
 		{

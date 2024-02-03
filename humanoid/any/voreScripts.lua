@@ -38,9 +38,10 @@ function default:pickLetout(name, action, target, preferredAction, skip)
         occupant = Occupants.entityId[tostring(target)]
         location = Transformation:getLocation(occupant.location, occupant.subLocation)
         local exitTypes = location.exitTypes or location.entryTypes
+		sb.logInfo(sb.printJson(exitTypes))
 		if preferredAction then
 			for _, exitType in ipairs(exitTypes) do
-				if exitType == "preferredAction" then
+				if exitType == preferredAction then
 					if Transformation:tryAction(exitType.."Letout", target) then
 						return true
 					end
@@ -56,7 +57,7 @@ function default:pickLetout(name, action, target, preferredAction, skip)
     else
         for i = #Occupants.list, 1, -1 do
             local occupant = Occupants.list[i]
-			if self:pickLetout(name,action,occupant.entityId,preferredAction,true) then
+			if Transformation:tryAction("pickLetout",occupant.entityId,preferredAction,true) then
 				return true
 			end
 		end

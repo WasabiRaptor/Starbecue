@@ -43,10 +43,10 @@ function sbq.init()
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
 		Occupants.addOccupant(...)
 	end)
-    message.setHandler("sbqTryAction", function(_, _, ...)
+	message.setHandler("sbqTryAction", function(_, _, ...)
 		sbq.tryAction(...)
 	end)
-    sbq.reloadVoreConfig(storage.lastVoreConfig)
+	sbq.reloadVoreConfig(storage.lastVoreConfig)
 end
 
 function sbq.update(dt)
@@ -71,12 +71,12 @@ function sbq.reloadVoreConfig(config)
 		Transformation.state:uninit()
 		Transformation:uninit()
 		Transformation.active = false
-    end
+	end
 	-- store the last input so it's used again on the next initiaization
 	storage.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-    sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+	sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 
@@ -100,7 +100,7 @@ function sbq.reloadVoreConfig(config)
 			end
 		end
 	end
-    -- initial setup of location data based on species and infusion
+	-- initial setup of location data based on species and infusion
 	Locations.locations = {}
 	for location, locationData in pairs(sbq.voreConfig.locations) do
 		Locations.addLocation(location, locationData)
@@ -133,12 +133,12 @@ function sbq.tryAction(...)
 end
 
 function sbq.getSettingsPageData()
-    local settingsPageData = {
-        storageSettings = storage.sbqSettings,
-        settings = sbq.settings,
-        voreConfig = sbq.voreConfig,
+	local settingsPageData = {
+		storageSettings = storage.sbqSettings,
+		settings = sbq.settings,
+		voreConfig = sbq.voreConfig,
 		locations = Locations.locations
-    }
+	}
 	return settingsPageData
 end
 
@@ -151,8 +151,8 @@ function sbq.setSetting(k, v)
 end
 
 function sbq.setLocationSetting(name, k, v)
-    local location = Transformation:getLocation(name)
-    storage.sbqSettings.locations[name][k] = v
+	local location = Transformation:getLocation(name)
+	storage.sbqSettings.locations[name][k] = v
 	if location and location.settings[k] ~= v then
 		location.occupancy.settingsDirty = true
 	end
@@ -167,18 +167,18 @@ function sbq.getTargetSize(target)
 end
 
 function sbq.tryVore(target, locationName, throughput)
-    local targetSize = sbq.getTargetSize(target)
+	local targetSize = sbq.getTargetSize(target)
 	local throughput = ((throughput or 1) * sbq.scale)
 	if (targetSize <= throughput) then
 		local location = Transformation:getLocation(locationName)
-        local space, subLocation = location:hasSpace(targetSize)
+		local space, subLocation = location:hasSpace(targetSize)
 		if space then
 			Occupants.addOccupant(target, locationName, subLocation)
-            return true
-        else
+			return true
+		else
 			return false, "noSpace"
-        end
-    else
+		end
+	else
 		return false, "tooBig"
 	end
 end
@@ -221,7 +221,7 @@ end
 function States.addState(stateName, config)
 	local state = sb.jsonMerge(config, {})
 	state.locations = state.locations or {}
-    for k, location in pairs(Locations.locations) do
+	for k, location in pairs(Locations.locations) do
 		state.locations[k] = state.locations[k] or {}
 		setmetatable(state.locations[k], {__index = location})
 	end
@@ -233,7 +233,7 @@ function States.addState(stateName, config)
 end
 
 function _State:getLocation(locationName, subLocation)
-    if subLocation then
+	if subLocation then
 		return self.locations[locationName].subLocations[subLocation]
 	else
 		return self.locations[locationName]
@@ -241,13 +241,13 @@ function _State:getLocation(locationName, subLocation)
 end
 
 function _State:tryAction(name, target, ...)
-    local action = self.actions[name]
+	local action = self.actions[name]
 	if not action then return false end
 	if action.onCooldown then return false end
 	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return self:actionFailed(name, action, target, false, ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, false, ...) end
-        local targetSettings = world.getStatusProperty(target, "sbqPublicSettings")
+		local targetSettings = world.getStatusProperty(target, "sbqPublicSettings")
 		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, false, ...) end
 	end
 	local result1, result2 = true, false
@@ -259,41 +259,41 @@ function _State:tryAction(name, target, ...)
 	sbq.timer(name.."Cooldown", cooldown, function (...)
 		action.onCooldown = false
 		if type(result2) == "function" then
-            result2(...)
-        elseif type(result2) == "string" and type(self[result2]) == "function" then
+			result2(...)
+		elseif type(result2) == "string" and type(self[result2]) == "function" then
 			self[result2](self, ...)
 		end
-    end, name, action, target, result2, ...)
+	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
 		return result1, result2
-    end
+	end
 	return result1
 end
 
 function _State:actionFailed(name, action, target, ...)
 	local cooldown = action.failureCooldown or 0
-    action.onCooldown = true
+	action.onCooldown = true
 	local result1, result2  = false, false
 	if action.failureScript then result1, result2 = self[action.failureScript](self, name, action, target, ...) end
 	sbq.timer(name.."Cooldown", cooldown, function (...)
-        action.onCooldown = false
+		action.onCooldown = false
 		if type(result2) == "function" then
-            result2(...)
-        elseif type(result2) == "string" and type(self[result2]) == "function" then
+			result2(...)
+		elseif type(result2) == "string" and type(self[result2]) == "function" then
 			self[result2](self, ...)
 		end
-    end, name, action, target, result2, ...)
+	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
 		return result1, result2
-    end
+	end
 	return result1
 end
 
 function _State:doAnimations(animations, target)
 	local longest = 0
-    local targetTags = {
-        occupant = "occupant",
-        right = sbq.facingRight and "front" or "back",
+	local targetTags = {
+		occupant = "occupant",
+		right = sbq.facingRight and "front" or "back",
 		left = sbq.facingRight and "back" or "front"
 	}
 	if target then
@@ -303,15 +303,15 @@ function _State:doAnimations(animations, target)
 		end
 	end
 	for k, v in pairs(animations or {}) do
-        local state = sb.replaceTags(k, targetTags)
-        local anim = v
+		local state = sb.replaceTags(k, targetTags)
+		local anim = v
 		local force = false
 		local reversed = false
-        if type(v) == "table" then
+		if type(v) == "table" then
 			anim, force, reversed = table.unpack(v)
-        end
+		end
 		if animator.hasState(state, anim) then
-            animator.setAnimationState(state, anim, force, reversed)
+			animator.setAnimationState(state, anim, force, reversed)
 			local timer = animator.animationTimer(state)
 			longest = math.max(longest, timer[2])
 		end
@@ -334,13 +334,13 @@ function Locations.addLocation(name, config)
 				sb.jsonQuery(voreConfig, "infusedLocations." .. name) or {}
 			)
 		)
-        -- certain NPCs may not like performing certain actions, therefore they can disable them when infused
+		-- certain NPCs may not like performing certain actions, therefore they can disable them when infused
 		local metatable = getmetatable(sbq.settings)
-        sbq.settings = sb.jsonMerge(sbq.settings, root.fetchConfigArray(infused.parameters.overrideSettings or {}),
-            root.fetchConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name)
-                or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. name) or {}))
+		sbq.settings = sb.jsonMerge(sbq.settings, root.fetchConfigArray(infused.parameters.overrideSettings or {}),
+			root.fetchConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name)
+				or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. name) or {}))
 		setmetatable(sbq.settings, metatable)
-    end
+	end
 	-- easier to make it default to math.huge than have it check if it's defined or not
 	location.maxFill = location.maxFill or math.huge
 	-- setup occupancy values
@@ -357,7 +357,7 @@ function Locations.addLocation(name, config)
 	}
 	-- sub locations are for things that are different spots techincally, but inherit values and use the settings
 	-- of a single location, such as with the sidedness of breasts, or perhaps a multi chambered stomach
-    for k, subLocation in pairs(location.subLocations or {}) do
+	for k, subLocation in pairs(location.subLocations or {}) do
 		subLocation.occupancy = {
 			sizeDirty = true,
 			settingsDirty = true,
@@ -367,9 +367,9 @@ function Locations.addLocation(name, config)
 			interpolating = false,
 			interpolateFrom = 0,
 			interpolateTime = 0,
-        }
+		}
 		if k == "<left>" or k == "<right>" then
-            subLocation.occupancy.sided = true
+			subLocation.occupancy.sided = true
 			subLocation.occupancy.lastDirection = sbq.facingRight
 		end
 		location.occupancy.subLocations[k] = subLocation.occupancy
@@ -384,26 +384,26 @@ end
 
 function _Location:hasSpace(size, subLocation)
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
-    if self.settings.hammerspace then return math.huge end
-    local shared = 0
+	if self.settings.hammerspace then return math.huge end
+	local shared = 0
 	for _, name in ipairs(self.sharedWith or {}) do
 		local location = Transformation:getLocation(name)
 		shared = shared + location.occupancy.size
 	end
 	if not self.subLocations then
 		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size)
-    elseif subLocation then
+	elseif subLocation then
 		if self.subLocations[subLocation].maxCount and (#self.occupancy.subLocations[subLocation].list >= self.subLocations[subLocation].maxCount) then return false end
 		-- if we got an input for a sublocation, check that specific one and return
 		return self:getRemainingSpace(self.subLocations[subLocation].maxFill, self.occupancy.subLocations[subLocation].size + shared, size), subLocation
-    elseif self.subLocations[1] then
+	elseif self.subLocations[1] then
 		if self.subLocations[1].maxCount and (#self.occupancy.subLocations[1].list >= self.subLocations[1].maxCount) then return false end
 		-- if an array, assuming locations are ordered, only check if theres space in the first
 		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, size), 1
 	else
 		-- if an object assume any is valid and choose one with the most space available
 		local best = {0}
-        for k, v in pairs(self.subLocations) do
+		for k, v in pairs(self.subLocations) do
 			if not (v.maxCount and (#v.occupancy.list >= v.maxCount)) then
 				local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
 				if space and space > best[1] then
@@ -429,9 +429,9 @@ function _Location:updateOccupancy(locationTag, subLocationBehavior)
 		left = sbq.facingRight and "back" or "front"
 	}
 	local prevVisualSize = self.occupancy.visualSize
-    if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
+	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
 		self.occupancy.sizeDirty = false
-        self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
+		self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
 		if subLocationBehavior then
 			if subLocationBehavior == "average" then
 				local total = 0
@@ -458,22 +458,22 @@ function _Location:updateOccupancy(locationTag, subLocationBehavior)
 			for _, occupant in ipairs(self.occupancy.list) do
 				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale)
 			end
-            self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
-            local addVisual = 0
-            for _, name in ipairs(self.addFill or {}) do
-                local location = Transformation:getLocation(name)
+			self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
+			local addVisual = 0
+			for _, name in ipairs(self.addFill or {}) do
+				local location = Transformation:getLocation(name)
 				location:updateOccupancy(name, location.subLocationBehavior)
 				addVisual = addVisual + location.occupancy.visualSize
 			end
 			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or {0})
 		end
-        if prevVisualSize ~= self.occupancy.visualSize then
+		if prevVisualSize ~= self.occupancy.visualSize then
 
 			self.occupancy.interpolating = true
 			self.occupancy.interpolateFrom = prevVisualSize
 			animator.setGlobalTag(sb.replaceTags(locationTag, directionTags).."_occupants", self.occupancy.visualSize)
 		end
-    end
+	end
 	if self.occupancy.sided and (self.occupancy.lastDirection ~= sbq.facingRight) then
 		animator.setGlobalTag(sb.replaceTags(locationTag, directionTags).."_occupants", self.occupancy.visualSize)
 	end
@@ -491,12 +491,12 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 			seat = "occupant"..i
 			break
 		end
-    end
+	end
 	-- -- if in the future we ever can have dynamic animation parts and seats
 	-- local occupantAnim = sbq.replaceConfigTags(
 	-- 	root.fetchConfigArray(sbq.voreConfig.occupantAnimationConfig or "/humanoid/any/voreOccupant.animation"),
 	-- 	{occupant = seat}
-    -- )
+	-- )
 
 	-- if there is no available seat we cannot add the occupant
 	if not seat then return false end
@@ -513,7 +513,7 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 		struggleTime = 0,
 		struggleCount = 0,
 		locationStore = {},
-        progressBar = nil,
+		progressBar = nil,
 	}
 	setmetatable(occupant, _Occupant)
 	-- add occupant to tables for easily referencing it
@@ -521,7 +521,7 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 	Occupants.seat[seat] = occupant
 	Occupants.entityId[tostring(entityId)] = occupant
 	local uuid = world.entityUniqueId(entityId)
-    if uuid then
+	if uuid then
 		Occupants.entityId[uuid] = occupant
 	end
 	-- refresh the location data for this occupant
@@ -533,11 +533,10 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 end
 
 function _Occupant:remove()
-    self:setLoungeEnabled(false)
-    local location = Transformation:getLocation(self.location)
-	sb.logInfo("removing occupant: "..self.entityId)
+	self:setLoungeEnabled(false)
+	local location = Transformation:getLocation(self.location)
 
-    Occupants.seat[self.seat] = nil
+	Occupants.seat[self.seat] = nil
 
 	if self.subLocation then
 		local subLocation = Transformation:getLocation(self.location, self.subLocation)
@@ -559,7 +558,7 @@ function _Occupant:remove()
 			table.remove(Occupants.list, i)
 			return
 		end
-    end
+	end
 	for k, occupant in pairs(Occupants.entityId) do
 		if occupant.entityId == self.entityId then
 			Occupants.entityId[k] = nil
@@ -592,7 +591,7 @@ function Occupants.update(dt)
 end
 
 function _Occupant:update(dt)
-    if not world.entityExists(self.entityId) then self:remove() end
+	if not world.entityExists(self.entityId) then self:remove() end
 	local location = Transformation:getLocation(self.location)
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	local locationStore = self.locationStore[self.location]
@@ -682,16 +681,16 @@ function _Occupant:refreshLocation(name, subLocation)
 		location = Transformation:getLocation(self.location, self.subLocation)
 
 		table.insert(location.occupancy.list, self)
-        location.occupancy.sizeDirty = true
+		location.occupancy.sizeDirty = true
 		for _, sharedName in ipairs(location.sharedWith) do
 			local shared = Transformation:getLocation(sharedName)
 			shared.occupancy.sizeDirty = true
 		end
-    end
+	end
 	if animator.hasState(self.seat.."Location", Transformation.stateName.."_"..self.location) then
-        animator.setAnimationState(self.seat .. "Location", Transformation.stateName.."_"..self.location)
+		animator.setAnimationState(self.seat .. "Location", Transformation.stateName.."_"..self.location)
 	elseif animator.hasState(self.seat.."Location", self.location) then
-        animator.setAnimationState(self.seat .. "Location", self.location)
+		animator.setAnimationState(self.seat .. "Location", self.location)
 	end
 
 	if not self.locationStore[self.location] then
