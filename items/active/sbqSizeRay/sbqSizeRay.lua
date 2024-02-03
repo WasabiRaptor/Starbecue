@@ -11,11 +11,11 @@ sizeRayFireModeMap = {
 }
 
 local _sizeRayAnimator_setAnimationState
-function sizeRayAnimator_setAnimationState(state, anim, force)
+function sizeRayAnimator_setAnimationState(state, anim, force, reversed)
 	if anim ~= "off" then
 		anim = anim..sizeRayFireModeMap[sizeRayWhichFireMode]
 	end
-	_sizeRayAnimator_setAnimationState(state, anim, force)
+	_sizeRayAnimator_setAnimationState(state, anim, force, reversed)
 end
 
 function init()

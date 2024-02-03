@@ -311,8 +311,7 @@ function _State:doAnimations(animations, target)
 			anim, force, reversed = table.unpack(v)
         end
 		if animator.hasState(state, anim) then
-            animator.setAnimationState(state, anim, force)
-            animator.setStateReversed(state, reversed or false)
+            animator.setAnimationState(state, anim, force, reversed)
 			local timer = animator.animationTimer(state)
 			longest = math.max(longest, timer[2])
 		end
@@ -480,7 +479,13 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 			seat = "occupant"..i
 			break
 		end
-	end
+    end
+	-- -- if in the future we ever can have dynamic animation parts and seats
+	-- local occupantAnim = sbq.replaceConfigTags(
+	-- 	root.fetchConfigArray(sbq.voreConfig.occupantAnimationConfig or "/humanoid/any/voreOccupant.animation"),
+	-- 	{occupant = seat}
+    -- )
+
 	-- if there is no available seat we cannot add the occupant
 	if not seat then return false end
 	-- setup occupant values

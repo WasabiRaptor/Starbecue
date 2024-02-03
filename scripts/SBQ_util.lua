@@ -14,7 +14,8 @@ function sbq.getClosestValue(x, list)
 end
 
 function sbq.tableMatches(a, b)
-    for k, v in pairs(a) do
+	local b = b or {}
+    for k, v in pairs(a or {}) do
 	  if type(v) == "table"
 	  and type(b[k]) == "table"
 	  and not sbq.tableMatches(v, b[k]) then
@@ -65,4 +66,22 @@ function sbq.setupSettingMetatables(entityType)
 		setmetatable(storage.sbqSettings.locations[name], {__index = sbq.defaultSettings.locations[name]})
 		setmetatable(sbq.settings.locations[name], {__index= storage.sbqSettings.locations[name]})
     end
+end
+
+function sbq.replaceConfigTags(config, tags)
+    local newConfig = {}
+    for k, v in pairs(config) do
+        local newKey = k
+		if type(k) == "string" then
+			newKey = sb.replaceTags(k, tags)
+		end
+		if type(v) == "table" then
+            newConfig[newKey] = sbq.replaceConfigTags(v, tags)
+		elseif type(v) == "string" then
+			newConfig[newKey] = sb.replaceTags(v, tags)
+        else
+			newConfig[newKey] = v
+		end
+    end
+	return newConfig
 end
