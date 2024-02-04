@@ -146,7 +146,7 @@ function sbq.refreshTenantPages()
 		sbq.storedDigestedPrey = sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey or {}
 		sbq.tenant.overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = sbq.storedDigestedPrey
 
-		sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings or {})
+		sbq.animOverrideSettings = sb.jsonMerge(sbq.speciesFile.animOverrideDefaultSettings or {}, sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings or {})
 		sbq.animOverrideSettings.scale = ((sbq.tenant.overrides.statusControllerSettings or {}).statusProperties or {}).animOverrideScale or 1
 		sbq.animOverrideOverrideSettings = sb.jsonMerge(sbq.tenant.overrides.statusControllerSettings.statusProperties.speciesAnimOverrideOverrideSettings or {}, sbq.npcConfig.scriptConfig.speciesAnimOverrideOverrideSettings)
 

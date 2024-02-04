@@ -15,7 +15,7 @@ require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 function init()
 	player.setProperty("sbqSettingsVersion", root.modMetadata("Starbecue").version)
 
-	sbq.animOverrideSettings = sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), status.statusProperty("speciesAnimOverrideSettings") or {})
+	sbq.animOverrideSettings = status.statusProperty("speciesAnimOverrideSettings") or {}
 	sbq.animOverrideSettings.scale = status.statusProperty("sbqScale") or 1
 	sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
 

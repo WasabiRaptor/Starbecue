@@ -38,7 +38,7 @@ function sbq.getInitialData()
 
 	sbq.cumulativeData = player.getProperty("sbqCumulativeData") or {}
 
-	sbq.animOverrideSettings = sb.jsonMerge(sb.jsonMerge(root.assetJson("/animOverrideDefaultSettings.config"), sbq.speciesFile.animOverrideDefaultSettings or {}), status.statusProperty("speciesAnimOverrideSettings") or {})
+	sbq.animOverrideSettings = sb.jsonMerge(sbq.speciesFile.animOverrideDefaultSettings or {}, status.statusProperty("speciesAnimOverrideSettings") or {})
 	sbq.animOverrideSettings.scale = status.statusProperty("sbqScale") or 1
 	sbq.animOverrideOverrideSettings = status.statusProperty("speciesAnimOverrideOverrideSettings") or {}
 
