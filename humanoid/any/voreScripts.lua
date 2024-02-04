@@ -38,7 +38,6 @@ function default:pickLetout(name, action, target, preferredAction, skip)
         occupant = Occupants.entityId[tostring(target)]
         location = Transformation:getLocation(occupant.location, occupant.subLocation)
         local exitTypes = location.exitTypes or location.entryTypes
-		sb.logInfo(sb.printJson(exitTypes))
 		if preferredAction then
 			for _, exitType in ipairs(exitTypes) do
 				if exitType == preferredAction then

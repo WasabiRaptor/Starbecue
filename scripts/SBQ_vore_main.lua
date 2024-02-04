@@ -420,7 +420,6 @@ function Locations.addLocation(name, config)
 		location.occupancy.subLocations[k] = subLocation.occupancy
 		setmetatable(subLocation, {__index = location})
     end
-	sb.logInfo(name..sb.printJson(location,1))
 
 	Occupants.locations[name] = location.occupancy
 	location.settings = sbq.settings.locations[name]
@@ -512,7 +511,6 @@ function _Location:updateOccupancy(dt, locationTag, subLocationBehavior)
 				addVisual = addVisual + location.occupancy.visualSize
             end
             self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
-			sb.logInfo(locationTag.. " "..prevVisualSize.." "..self.occupancy.visualSize.." "..sb.printJson(self.struggleSizes))
 		end
         if prevVisualSize ~= self.occupancy.visualSize then
             local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
