@@ -124,14 +124,20 @@
 				"priority" : 1,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -152,14 +158,20 @@
 				"priority" : 2,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -188,14 +200,20 @@
 				"priority" : 2,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -223,14 +241,20 @@
 				"priority" : 1,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -250,14 +274,20 @@
 				"priority" : 1,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -294,14 +324,20 @@
 				"priority" : 1,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -321,14 +357,20 @@
 				"priority" : 1,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -357,14 +399,20 @@
 				"priority" : 1,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"s_back": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle",
-						"frameProperties" : {
-							"immediateSound" : []
-						}
-					},
-					"s_front": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_up": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
-					"s_down": { "frames": 5, "cycle": 1, "mode": "transition", "transition" : "idle" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},

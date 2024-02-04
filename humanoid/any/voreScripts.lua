@@ -64,3 +64,6 @@ function default:pickLetout(name, action, target, preferredAction, skip)
     end
 	return false
 end
+function default:moveToLocation(name, action, target, location, subLocation)
+	return sbq.moveToLocation(target, action.location or location, action.subLocation or subLocation)
+end

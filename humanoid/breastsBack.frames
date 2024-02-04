@@ -4,16 +4,16 @@
 		"dimensions" : [8, 9],
 		"names" : [
 			[ "0.1-expand", "0.2-expand", "0.3-expand", "0.4-expand", "0.5-expand"],
-			[ "0.5-s_up.1", "0.5-s_up.2", "0.5-s_up.3", "0.5-s_up.4", "0.5-s_down.1", "0.5-s_down.2", "0.5-s_down.3", "0.5-s_down.4"],
-			[ "0.5-s_back.1", "0.5-s_back.2", "0.5-s_back.3", "0.5-s_back.4", "0.5-s_front.1", "0.5-s_front.2", "0.5-s_front.3", "0.5-s_front.4"],
+			[ "0.5-s_up_press.1", "0.5-s_up_press.2", "0.5-s_up_hold.1", "0.5-s_up_release.1", "0.5-s_down_press.1", "0.5-s_down_press.2", "0.5-s_down_hold.1", "0.5-s_down_release.1"],
+			[ "0.5-s_back_press.1", "0.5-s_back_press.2", "0.5-s_back_hold.1", "0.5-s_back_release.1", "0.5-s_front_press.1", "0.5-s_front_press.2", "0.5-s_front_hold.1", "0.5-s_front_release.1"],
 
 			[ "0.6-expand", "0.7-expand", "0.8-expand", "0.9-expand", "1-expand"],
-			[ "1-s_up.1", "1-s_up.2", "1-s_up.3", "1-s_up.4", "1-s_down.1", "1-s_down.2", "1-s_down.3", "1-s_down.4"],
-			[ "1-s_back.1", "1-s_back.2", "1-s_back.3", "1-s_back.4", "1-s_front.1", "1-s_front.2", "1-s_front.3", "1-s_front.4"],
+			[ "1-s_up_press.1", "1-s_up_press.2", "1-s_up_hold.1", "1-s_up_release.1", "1-s_down_press.1", "1-s_down_press.2", "1-s_down_hold.1", "1-s_down_release.1"],
+			[ "1-s_back_press.1", "1-s_back_press.2", "1-s_back_hold.1", "1-s_back_release.1", "1-s_front_press.1", "1-s_front_press.2", "1-s_front_hold.1", "1-s_front_release.1"],
 
 			[ "1.2-expand", "1.4-expand", "1.6-expand", "1.8-expand", "2-expand"],
-			[ "2-s_up.1", "2-s_up.2", "2-s_up.3", "2-s_up.4", "2-s_down.1", "2-s_down.2", "2-s_down.3", "2-s_down.4"],
-			[ "2-s_back.1", "2-s_back.2", "2-s_back.3", "2-s_back.4", "2-s_front.1", "2-s_front.2", "2-s_front.3", "2-s_front.4"]
+			[ "2-s_up_press.1", "2-s_up_press.2", "2-s_up_hold.1", "2-s_up_release.1", "2-s_down_press.1", "2-s_down_press.2", "2-s_down_hold.1", "2-s_down_release.1"],
+			[ "2-s_back_press.1", "2-s_back_press.2", "2-s_back_hold.1", "2-s_back_release.1", "2-s_front_press.1", "2-s_front_press.2", "2-s_front_hold.1", "2-s_front_release.1"]
 
 		]
 	},
@@ -25,43 +25,43 @@
 		"1-idle.1" : "1-expand",
 		"2-idle.1" : "2-expand",
 
-		"0-s_up.1" : "0-idle.1",
-		"0-s_up.2" : "0-idle.1",
-		"0-s_up.3" : "0-idle.1",
-		"0-s_up.4" : "0-idle.1",
-		"0-s_up.5" : "0-idle.1",
+		"0-s_up_press.1" : "0-idle.1",
+		"0-s_up_press.2" : "0-idle.1",
+		"0-s_up_hold.1" : "0-idle.1",
+		"0-s_up_release.1" : "0-idle.1",
+		"0-s_up_release.2" : "0-idle.1",
 
-		"0-s_down.1" : "0-idle.1",
-		"0-s_down.2" : "0-idle.1",
-		"0-s_down.3" : "0-idle.1",
-		"0-s_down.4" : "0-idle.1",
-		"0-s_down.5" : "0-idle.1",
+		"0-s_down_press.1" : "0-idle.1",
+		"0-s_down_press.2" : "0-idle.1",
+		"0-s_down_hold.1" : "0-idle.1",
+		"0-s_down_release.1" : "0-idle.1",
+		"0-s_down_release.2" : "0-idle.1",
 
-		"0-s_front.1" : "0-idle.1",
-		"0-s_front.2" : "0-idle.1",
-		"0-s_front.3" : "0-idle.1",
-		"0-s_front.4" : "0-idle.1",
-		"0-s_front.5" : "0-idle.1",
+		"0-s_front_press.1" : "0-idle.1",
+		"0-s_front_press.2" : "0-idle.1",
+		"0-s_front_hold.1" : "0-idle.1",
+		"0-s_front_release.1" : "0-idle.1",
+		"0-s_front_release.2" : "0-idle.1",
 
-		"0-s_back.1" : "0-idle.1",
-		"0-s_back.2" : "0-idle.1",
-		"0-s_back.3" : "0-idle.1",
-		"0-s_back.4" : "0-idle.1",
-		"0-s_back.5" : "0-idle.1",
+		"0-s_back_press.1" : "0-idle.1",
+		"0-s_back_press.2" : "0-idle.1",
+		"0-s_back_hold.1" : "0-idle.1",
+		"0-s_back_release.1" : "0-idle.1",
+		"0-s_back_release.2" : "0-idle.1",
 
-		"0.5-s_up.5" : "0.5-idle.1",
-		"0.5-s_down.5" : "0.5-idle.1",
-		"0.5-s_front.5" : "0.5-idle.1",
-		"0.5-s_back.5" : "0.5-idle.1",
+		"0.5-s_up_release.2" : "0.5-idle.1",
+		"0.5-s_down_release.2" : "0.5-idle.1",
+		"0.5-s_front_release.2" : "0.5-idle.1",
+		"0.5-s_back_release.2" : "0.5-idle.1",
 
-		"1-s_up.5" : "1-idle.1",
-		"1-s_down.5" : "1-idle.1",
-		"1-s_front.5" : "1-idle.1",
-		"1-s_back.5" : "1-idle.1",
+		"1-s_up_release.2" : "1-idle.1",
+		"1-s_down_release.2" : "1-idle.1",
+		"1-s_front_release.2" : "1-idle.1",
+		"1-s_back_release.2" : "1-idle.1",
 
-		"2-s_up.5" : "2-idle.1",
-		"2-s_down.5" : "2-idle.1",
-		"2-s_front.5" : "2-idle.1",
-		"2-s_back.5" : "2-idle.1"
+		"2-s_up_release.2" : "2-idle.1",
+		"2-s_down_release.2" : "2-idle.1",
+		"2-s_front_release.2" : "2-idle.1",
+		"2-s_back_release.2" : "2-idle.1"
 	}
 }
