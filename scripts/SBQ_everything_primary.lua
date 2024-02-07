@@ -56,30 +56,6 @@ function init()
 		status.addEphemeralEffect("sbqSucc", 1, data.source)
 	end)
 
-	message.setHandler("sbqIsPreyEnabled", function(_,_, voreType)
-		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
-		if preySettings.preyEnabled == false then return false end
-		local enabled = true
-		if type(voreType) == "table" then
-			for i, voreType in ipairs(voreType) do
-				enabled = enabled and preySettings[voreType]
-				if not enabled then break end
-			end
-		else
-			enabled = preySettings[voreType]
-		end
-
-		return { enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = status.statusProperty("sbqType")}
-	end)
-
-	message.setHandler("sbqGetPreyEnabled", function(_, _)
-		return sb.jsonMerge({size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = status.statusProperty("sbqType")}, sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {}))))
-	end)
-
-	message.setHandler("sbqGetPreyEnabledSetting", function(_,_, setting)
-		return sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))[setting]
-	end)
-
 
 	message.setHandler("sbqDigest", function (_,_,id)
 		local currentData = status.statusProperty("sbqCurrentData") or {}
@@ -196,16 +172,7 @@ function init()
 		world.sendEntityMessage(pred, "sbqReplaceInfusion", location, itemDrop, entity.id(), primaryLocation)
 	end)
 
-    message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
-		if status.statusProperty("sbqType") == "prey" then return end
-		local size = sbq.calcSize()
-		if size <= (steppySize*0.4) then
-			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
-		end
-    end)
-
     message.setHandler("sbqScale", function(_, _, scale, duration)
-        status.setStatusProperty("sbqScale", scale or 1)
 		oldScale = mcontroller.scale()
         destScale = scale or 1
 		scaleTime = 0
@@ -244,13 +211,6 @@ function update(dt)
 			end
 		end
 	end
-end
-
-function sbq.calcSize()
-	local boundRectSize = rect.size(mcontroller.boundBox())
-	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) / root.assetJson("/sbqGeneral.config:size") -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
-	status.setStatusProperty("sbqSize", size)
-	return size
 end
 
 

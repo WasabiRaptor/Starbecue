@@ -35,11 +35,11 @@ Occupants = {
 }
 
 function controlPressed(seat, control, time)
-	if Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
+	if Transformation.active and Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
 	sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
 function controlReleased(seat, control, time)
-	if Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
+	if Transformation.active and Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
 	sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
 
@@ -54,8 +54,8 @@ function sbq.init()
 end
 
 function sbq.update(dt)
-	Occupants.update(dt)
-	if Transformation.active then
+    if Transformation.active then
+		Occupants.update(dt)
 		Transformation:update(dt)
 		Transformation.state:update(dt)
 	end
@@ -65,7 +65,7 @@ function sbq.uninit()
 	if Transformation.active then
 		Transformation:uninit()
 		Transformation.state:uninit()
-		Transformation.active = false
+        Transformation.active = false
 	end
 end
 
@@ -125,7 +125,13 @@ function sbq.reloadVoreConfig(config)
 	for k, v in pairs(sbq.config.publicSettings) do
 		if v then sbq.publicSettings[k] = sbq.settings[k] end
 	end
-	status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
+    status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
+
+	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates) do
+		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
+			Transformation:doAnimations(settingsAnim[2])
+		end
+	end
 
 	Transformation:init()
 	Transformation.state:init()
@@ -192,8 +198,8 @@ function sbq.tryLetout(target, throughput)
 	if lounging and not lounging.dismountable then return false end
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
-    if not ((occupant.size * occupant.sizeMultiplier) <= ((throughput or 1) * sbq.scale)) then return false end
-    occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
+	if not ((occupant.size * occupant.sizeMultiplier) <= ((throughput or 1) * sbq.scale)) then return false end
+	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
 	return true, function ()
 		occupant:remove()
@@ -201,15 +207,15 @@ function sbq.tryLetout(target, throughput)
 end
 
 function sbq.moveToLocation(target, locationName, subLocationName)
-    if not target or not locationName then return false end
-    occupant = Occupants.entityId[tostring(target)]
-    if not occupant then return false end
+	if not target or not locationName then return false end
+	occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
 	local location = Transformation:getLocation(locationName, subLocationName)
-    local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier)
+	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 	if space then
-        occupant:refreshLocation(locationName, subLocationName)
+		occupant:refreshLocation(locationName, subLocationName)
 		return true
-    end
+	end
 	return false, "noSpace"
 end
 
@@ -246,8 +252,8 @@ function States.addState(stateName, config)
 	state.locations = state.locations or {}
 	for k, location in pairs(Locations.locations) do
 		state.locations[k] = state.locations[k] or {}
-        for k2, subLocation in pairs(location.subLocations or {}) do
-            state.locations[k].subLocations[k2] = state.locations[k].subLocations[k2] or {}
+		for k2, subLocation in pairs(location.subLocations or {}) do
+			state.locations[k].subLocations[k2] = state.locations[k].subLocations[k2] or {}
 			state.locations[k].subLocations[k2].struggleActions = state.locations[k].subLocations[k2].struggleActions or {}
 			for _, struggleAction in pairs(state.locations[k].subLocations[k2].struggleActions) do
 				if state.locations[k].subLocations[k2].struggleActions.any then
@@ -255,7 +261,7 @@ function States.addState(stateName, config)
 				end
 			end
 			setmetatable(state.locations[k].subLocations[k2], { __index = subLocation })
-        end
+		end
 		state.locations[k].struggleActions = state.locations[k].struggleActions or {}
 		for _, struggleAction in pairs(state.locations[k].struggleActions) do
 			if state.locations[k].struggleActions.any then
@@ -292,7 +298,7 @@ function _State:tryAction(name, target, ...)
 	local result1, result2 = true, false
 	if action.script then result1, result2 = self[action.script](self, name, action, target, ...) end
 	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
-	local longest = self:doAnimations(action.animations, target)
+	local longest = Transformation:doAnimations(action.animations, target)
 	local cooldown = action.cooldown or longest
 	action.onCooldown = true
 	sbq.timer(name.."Cooldown", cooldown, function (...)
@@ -340,19 +346,19 @@ function _State:doAnimations(animations, target, tags)
 		if occupant then
 			targetTags.occupant = occupant.seat
 		end
-    end
+	end
 	tags = sb.jsonMerge(tags or {}, targetTags)
 	for k, v in pairs(animations or {}) do
 		local state = sb.replaceTags(k, tags)
 		local anim = v
 		local force = false
-        local reversed = false
+		local reversed = false
 		local waitForEnd = false
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
-        end
+		end
 		anim = sb.replaceTags(anim, tags)
-        if animator.hasState(state, anim) then
+		if animator.hasState(state, anim) then
 			if not waitForEnd or animator.animationEnded(state) then
 				animator.setAnimationState(state, anim, force, reversed)
 				local timer = animator.animationTimer(state)
@@ -393,8 +399,8 @@ function Locations.addLocation(name, config)
 		settingsDirty = true,
 		list = {},
 		size = 0,
-		visualSize = 0,
-        interpolating = false,
+		visualSize = -1,
+		interpolating = false,
 		struggleDirection = {0,0},
 		interpolateFrom = 0,
 		interpolateTime = 0,
@@ -408,7 +414,7 @@ function Locations.addLocation(name, config)
 			settingsDirty = true,
 			list = {},
 			size = 0,
-			visualSize = 0,
+			visualSize = -1,
 			interpolating = false,
 			interpolateFrom = 0,
 			interpolateTime = 0,
@@ -419,7 +425,7 @@ function Locations.addLocation(name, config)
 		end
 		location.occupancy.subLocations[k] = subLocation.occupancy
 		setmetatable(subLocation, {__index = location})
-    end
+	end
 
 	Occupants.locations[name] = location.occupancy
 	location.settings = sbq.settings.locations[name]
@@ -473,8 +479,8 @@ function _Location:updateOccupancy(dt, locationTag, subLocationBehavior)
 		right = sbq.facingRight and "front" or "back",
 		left = sbq.facingRight and "back" or "front"
 	}
-    local prevVisualSize = self.occupancy.visualSize
-    if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
+	local prevVisualSize = self.occupancy.visualSize
+	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
 		self.occupancy.sizeDirty = false
 		self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
 		if subLocationBehavior then
@@ -509,34 +515,34 @@ function _Location:updateOccupancy(dt, locationTag, subLocationBehavior)
 				local location = Transformation:getLocation(name)
 				location:updateOccupancy(0, name, location.subLocationBehavior)
 				addVisual = addVisual + location.occupancy.visualSize
-            end
-            self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
+			end
+			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
 		end
-        if prevVisualSize ~= self.occupancy.visualSize then
-            local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
+		if prevVisualSize ~= self.occupancy.visualSize then
+			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
 			if interpolateAnims then
 				self.occupancy.interpolating = true
-                self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
-                self.interpolateTime = Transformation:doAnimations(interpolateAnims)
+				self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
+				self.interpolateTime = Transformation:doAnimations(interpolateAnims)
 				self.interpolateCurTime = 0
-            end
+			end
 			self.occupancy.queuedInterpolateAnims = nil
-            animator.setGlobalTag(sb.replaceTags(locationTag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+			animator.setGlobalTag(sb.replaceTags(locationTag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
 		end
 	end
 	if self.occupancy.sided and (self.occupancy.lastDirection ~= sbq.facingRight) then
 		animator.setGlobalTag(sb.replaceTags(locationTag, directionTags).."_occupants", tostring(self.occupancy.visualSize))
 	end
-    if self.occupancy.interpolating then
+	if self.occupancy.interpolating then
 		self.interpolateCurTime = self.interpolateCurTime + dt
-        self.occupancy.interpolateSize = sbq.getClosestValue(
+		self.occupancy.interpolateSize = sbq.getClosestValue(
 			interp.linear(
 				self.interpolateCurTime / self.interpolateTime,
 				self.occupancy.interpolateFrom,
 				self.occupancy.visualSize
-            ),
+			),
 			self.interpolateSizes or self.struggleSizes or {0}
-        )
+		)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
 		animator.setGlobalTag(sb.replaceTags(locationTag, directionTags).."_occupantsInterpolate", tostring(self.occupancy.interpolateSize))
 	end
@@ -544,54 +550,40 @@ end
 
 function _Location:refreshStruggleDirection()
 	self.occupancy.struggleDirection = {0,0}
-    for _, occupant in ipairs(self.occupancy.list) do
+	for _, occupant in ipairs(self.occupancy.list) do
 		occupant:checkStruggleDirection(0)
 		self.occupancy.struggleDirection = vec2.add(self.occupancy.struggleDirection, occupant.struggleDirection)
 	end
 end
 
 function _Location:doStruggle(occupant, direction)
-    local struggleAction
-    if self.struggleActions[direction] then
-        struggleAction = self.struggleActions[direction]
-    end
+	local struggleAction
+	if self.struggleActions[direction] then
+		struggleAction = self.struggleActions[direction]
+	end
 	if direction == "left" then
-        direction = sbq.facingRight and "back" or "front"
+		direction = sbq.facingRight and "back" or "front"
 	elseif direction == "right" then
 		direction = sbq.facingRight and "front" or "back"
-    end
-    if not struggleAction and self.struggleActions[direction] then
-        struggleAction = self.struggleActions[direction]
-    end
-    if not struggleAction then return false end
-    local longest = Transformation:doAnimations(
-        struggleAction.pressAnimations or struggleAction.holdAnimations or {},
+	end
+	if not struggleAction and self.struggleActions[direction] then
+		struggleAction = self.struggleActions[direction]
+	end
+	if not struggleAction then return false end
+	local longest = Transformation:doAnimations(
+		struggleAction.pressAnimations or struggleAction.holdAnimations or {},
 		{s_direction = direction}
-    )
+	)
 	locationStore = occupant.locationStore[occupant.location]
-    occupant.struggleTime = occupant.struggleTime + longest
+	occupant.struggleTime = occupant.struggleTime + longest
 	occupant.struggleCount = occupant.struggleCount + 1
-    locationStore = locationStore.struggleCount + 1
-    if struggleAction.action then
-		local timeSucceeded = true
-        local countSucceeded = true
-		local canSucceed = true
-        if struggleAction.time then
-            timeSucceeded = occupant.struggleTime >= math.random(struggleAction.time[1], struggleAction.time[2])
-			if not timeSucceeded then
-				canSucceed = not struggleAction.time[3] and canSucceed
-			end
-        end
-		if struggleAction.count then
-            countSucceeded = occupant.struggleCount >= math.random(struggleAction.count[1], struggleAction.count[2])
-			if not countSucceeded then
-				canSucceed = not struggleAction.count[3] and canSucceed
-			end
-        end
-		if struggleAction.time then
-			timeSucceeded = occupant.struggleTime >= math.random(struggleAction.time[1], struggleAction.time[2])
-        end
-		if (timeSucceeded and canSucceed) or (countSucceeded and canSucceed) then
+	locationStore = locationStore.struggleCount + 1
+	if struggleAction.action then
+		local timeSucceeded = occupant.struggleTime >= math.random(table.unpack(struggleAction.time or {0,0}))
+		local countSucceeded = occupant.struggleCount >= math.random(table.unpack(struggleAction.count or { 0, 0 }))
+		if (struggleAction.both and (timeSucceeded and countSucceeded))
+		or (not struggleAction.both and (timeSucceeded or countSucceeded))
+		then
 			Transformation:tryAction(struggleAction.action, occupant.id, table.unpack(struggleAction.actionArgs or {}))
 		end
 	end
@@ -626,10 +618,10 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 		sizeMultiplier = 1,
 		struggleGracePeriod = 0,
 		struggleTime = 0,
-        struggleCount = 0,
+		struggleCount = 0,
 		struggleDirection = {0,0},
 		locationStore = {},
-        progressBar = nil,
+		progressBar = nil,
 	}
 	setmetatable(occupant, _Occupant)
 	-- add occupant to tables for easily referencing it
@@ -657,7 +649,7 @@ function _Occupant:remove()
 	if self.subLocation then
 		local subLocation = Transformation:getLocation(self.location, self.subLocation)
 		for i, occupant in ipairs(subLocation.occupancy.list) do
-            if occupant.entityId == self.entityId then
+			if occupant.entityId == self.entityId then
 				subLocation.occupancy.sizeDirty = true
 				table.remove(subLocation.occupancy.list, i)
 				break
@@ -665,7 +657,7 @@ function _Occupant:remove()
 		end
 	end
 	for i, occupant in ipairs(location.occupancy.list) do
-        if occupant.entityId == self.entityId then
+		if occupant.entityId == self.entityId then
 			location.occupancy.sizeDirty = true
 			table.remove(location.occupancy.list, i)
 			break
@@ -711,7 +703,10 @@ end
 function _Occupant:update(dt)
 	if not world.entityExists(self.entityId) then self:remove() end
 	local location = self:getLocation()
-	if location.occupancy.settingsDirty then self:refreshLocation() end
+    if location.occupancy.settingsDirty then self:refreshLocation() end
+	if not animator.animationEnded(self.seat.."State") then
+		self:setHidden(animator.partProperty(self.seat, "hidden"))
+	end
 	local locationStore = self.locationStore[self.location]
 
 	locationStore.time = locationStore.time + dt
@@ -773,6 +768,9 @@ function _Occupant:controlHeldTime(...)
 end
 function _Occupant:setLoungeStatusEffects(...)
 	return loungeable.setLoungeStatusEffects(self.seat, ...)
+end
+function _Occupant:setHidden(...)
+	return loungeable.setHidden(self.seat, ...)
 end
 function _Occupant:getLoungeIndex()
 	return loungeable.getIndexFromName(self.seat)
@@ -873,17 +871,17 @@ function _Occupant:checkStruggleDirection(dt)
 	if self:controlHeld("Right") then
 		dx = dx + (1 * sbq.facingDirection)
 		if self:controlHeldTime("Right") > staleTime then effectiveness = effectiveness * 0.5 end
-    end
+	end
 	self.struggleDirection = {dx * effectiveness, dy * effectiveness}
 	if dx ~= 0 or dy ~= 0 then
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
-        self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
+		self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
 	else
-        if self.struggleGracePeriod <= 0 then
+		if self.struggleGracePeriod <= 0 then
 			if self.struggleTime <= 0 then
-                self.struggleCount = 0
-            else
+				self.struggleCount = 0
+			else
 				self.struggleTime = self.struggleTime - dt
 			end
 		else

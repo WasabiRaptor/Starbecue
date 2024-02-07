@@ -85,3 +85,7 @@ function sbq.replaceConfigTags(config, tags)
     end
 	return newConfig
 end
+
+function sbq.distanceToLocal(pos, offset)
+	return world.distance(pos, vec2.add(entity.position(), vec2.mul(offset or {0,0},{sbq.facingDirection, 1})))
+end

@@ -24,14 +24,6 @@ function capture_npc_setDamageTeam(data)
 	end
 end
 
-function sbq.calcSize()
-	local boundRectSize = rect.size(mcontroller.boundBox())
-	local size = math.sqrt(boundRectSize[1] * boundRectSize[2]) /
-	root.assetJson("/sbqGeneral.config:size")                                                            -- size is being based on the player, 1 prey would be math.sqrt(1.4x3.72) as that is the bound rect of the humanoid hitbox
-	status.setStatusProperty("sbqSize", size)
-	return size
-end
-
 local controlPathMoveRPC
 function sbq.controlPathMove(target, run, options)
 	local current = status.statusProperty("sbqCurrentData")
@@ -72,45 +64,6 @@ require("/scripts/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.setupTransformationMessages()
-	message.setHandler("sbqGetSeatEquips", function(_, _, current)
-		status.setStatusProperty("sbqCurrentData", current)
-		local type = status.statusProperty("sbqType")
-		if type == "prey" then
-			status.setStatusProperty("sbqDontTouchDoors", true)
-		else
-			status.setStatusProperty("sbqDontTouchDoors", false)
-		end
-		if current.species ~= "sbqOccupantHolder" then
-			_npc_setInteractive(false)
-		end
-		return {
-			head = npc.getItemSlot("head") or false,
-			chest = npc.getItemSlot("chest") or false,
-			legs = npc.getItemSlot("legs") or false,
-			back = npc.getItemSlot("back") or false,
-			headCosmetic = npc.getItemSlot("headCosmetic") or false,
-			chestCosmetic = npc.getItemSlot("chestCosmetic") or false,
-			legsCosmetic = npc.getItemSlot("legsCosmetic") or false,
-			backCosmetic = npc.getItemSlot("backCosmetic") or false,
-			effectDirectives = status.statusProperty("effectDirectives")
-		}
-	end)
-	message.setHandler("sbqSetCurrentData", function(_, _, current)
-		status.setStatusProperty("sbqCurrentData", current)
-		local type = status.statusProperty("sbqType")
-		if type == "prey" then
-			status.setStatusProperty("sbqDontTouchDoors", true)
-			if current.species ~= "sbqOccupantHolder" then
-				_npc_setInteractive(false)
-			end
-		else
-			status.setStatusProperty("sbqDontTouchDoors", false)
-		end
-	end)
-	message.setHandler("sbqSetType", function(_, _, current)
-		status.setStatusProperty("sbqType", current)
-	end)
-
 	message.setHandler("sbqInteract", function(_, _, pred, predData)
 		return interact({ sourceId = pred, sourcePosition = world.entityPosition(pred), predData = predData })
 	end)
@@ -118,50 +71,10 @@ function init()
 		world.sendEntityMessage(args.sourceId, "sbqPlayerInteract", interact(args), entity.id())
 	end)
 
-	message.setHandler("sbqPredatorDespawned", function(_, _, eaten, species, occupants)
-		sbq.timer("sbqPredatorDespawned", 0.5, function()
-			_npc_setInteractive(interactive)
-			local sbqOriginalDamageTeam = status.statusProperty("sbqOriginalDamageTeam")
-			if sbqOriginalDamageTeam then
-				_npc_setDamageTeam(sbqOriginalDamageTeam)
-			end
-			sbq.timer("sbqPredatorDespawned2", 5, function()
-				_npc_setInteractive(interactive)
-				if sbqOriginalDamageTeam then
-					_npc_setDamageTeam(sbqOriginalDamageTeam)
-				end
-			end)
-
-			status.setStatusProperty("sbqPreyList", nil)
-			status.setStatusProperty("sbqCurrentData", nil)
-			if not eaten then
-				local resolvePosition = world.resolvePolyCollision(mcontroller.collisionPoly(), mcontroller.position(), 5)
-				if resolvePosition ~= nil then
-					mcontroller.setPosition(resolvePosition)
-				end
-			end
-		end)
-	end)
-
-	message.setHandler("sbqMakeNonHostile", function(_, _)
-		local damageTeam = entity.damageTeam()
-		if (status.statusProperty("sbqOriginalDamageTeam") == nil) then
-			status.setStatusProperty("sbqOriginalDamageTeam", damageTeam)
-		end
-		_npc_setDamageTeam({ type = "ghostly", team = damageTeam.team })
-	end)
-
 	message.setHandler("sbqSaveSettings", function(_, _, settings, menuName)
 		if menuName and menuName ~= "sbqOccupantHolder" then
 		else
 		end
-	end)
-	message.setHandler("sbqSavePreySettings", function(_, _, settings)
-		status.setStatusProperty("sbqPreyEnabled", settings)
-		world.sendEntityMessage(entity.id(), "sbqRefreshDigestImmunities")
-	end)
-	message.setHandler("sbqSaveAnimOverrideSettings", function(_, _, settings)
-		status.setStatusProperty("speciesAnimOverrideSettings", settings)
 	end)
 	message.setHandler("sbqSetNPCType", function(_, _, npcType)
 		sbq.tenant_setNpcType(npcType)

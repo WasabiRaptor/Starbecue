@@ -238,26 +238,6 @@ function init()
 		sbq.checkOccupantRewards(occupant, sbq.checkSpeciesRootTable(rewards), false, recipient, holder)
 	end)
 
-	message.setHandler("sbqSteppy", function(_, _, eid, steppyType, steppySize)
-		if status.statusProperty("sbqType") == "prey" then return end
-		local size = sbq.calcSize()
-		if size <= (steppySize*0.4) then
-			world.sendEntityMessage(eid, "sbqDidSteppy", entity.id(), steppyType)
-			if steppyType == "falling" then
-				if sbq.timer("sbqSteppyFall", 0.5) then
-					sbq.getRandomDialogue(".gotSteppy", eid, sb.jsonMerge(storage.settings, { steppyType = steppyType }))
-					if config.getParameter("likesSteppy") then
-						status.giveResource("horny",5)
-					end
-				end
-			elseif sbq.timer("sbqSteppy", 5) then
-				sbq.getRandomDialogue(".gotSteppy", eid, sb.jsonMerge(storage.settings, { steppyType = steppyType }))
-				if config.getParameter("likesSteppy") then
-					status.giveResource("horny",5)
-				end
-			end
-		end
-	end)
 	message.setHandler("sbqDidSteppy", function(_, _, eid, steppyType)
 		if sbq.timer("sbqDidSteppy", 5) then
 			sbq.getRandomDialogue( ".didSteppy", eid, sb.jsonMerge(storage.settings, {steppyType = steppyType}) )
@@ -372,10 +352,6 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqIsPredEnabled", function(_,_, voreType)
-		local settings = storage.settings or {}
-		return {enabled = settings[voreType.."Pred"], unwilling = settings[voreType.."PredUnwilling"] and settings.forcefulPrey, size = sbq.calcSize(), type = status.statusProperty("sbqType")}
-	end)
 	message.setHandler("sbqCheckAssociatedEffects", function(_, _, voreType)
 		local settings = storage.settings
 		local effects = {}
@@ -407,29 +383,6 @@ function init()
 			end
 		end
 		return 3 -- the "No... (But actually yes)" option
-	end)
-	message.setHandler("sbqIsPreyEnabled", function(_,_, voreType)
-		local preySettings = sb.jsonMerge(root.assetJson("/sbqGeneral.config:defaultPreyEnabled")[world.entityType(entity.id())], sb.jsonMerge((status.statusProperty("sbqPreyEnabled") or {}), (status.statusProperty("sbqOverridePreyEnabled")or {})))
-		if preySettings.preyEnabled == false then return false end
-		local enabled = true
-		if type(voreType) == "table" then
-			for i, voreType in ipairs(voreType) do
-				enabled = enabled and preySettings[voreType]
-				if not enabled then break end
-			end
-		else
-			enabled = preySettings[voreType]
-		end
-		local willing = false
-		if enabled then
-			if type(voreType) == "table" then
-				willing = sbq.getPreyWilling(voreType)
-			else
-				willing = sbq.getPreyWilling({voreType})
-			end
-		end
-		local type = status.statusProperty("sbqType")
-		return { willing = willing,  enabled = enabled, size = sbq.calcSize(), preyList = status.statusProperty("sbqPreyList"), type = type}
 	end)
 end
 

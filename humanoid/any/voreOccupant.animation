@@ -60,7 +60,8 @@
 					// the below is so by default an occupant is scaled so small to be invisible
 					// as well as be layered behind the main sprite
 					"zLevel":-1,
-					"transforms":{"scale":[0,0]}
+					// doesn't actually do anything in the animator, script reads this to set the seat visibility
+					"hidden" : true
 				},
 				"partStates" : {
 					"<occupant>Location" : {
@@ -107,6 +108,16 @@
 									{"scale":[-0.1, 0.1],	"translate":[0,0.25],		"rotate":180},
 									{"scale":[0, 0],		"translate":[0,-0.5],		"rotate":90	},
 									{"scale":[0, 0],		"translate":[0,-1],			"rotate":0	},
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true,
 								]
 							},
 							"properties" : {
@@ -125,6 +136,16 @@
 									{"scale": [0.1,0.1],"translate": [0,-1.5],"rotate": -90},
 									{"scale": [0,0],"translate": [0,-1.25],"rotate": -45},
 									{"scale": [0,0],"translate": [0,-1],"rotate": 0}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true,
 								]
 							},
 							"properties" : {
@@ -142,6 +163,16 @@
 									{"scale" : [-0.1, 0.1],"translate" : [0, -1.25],"rotate" : 90},
 									{"scale" : [0, 0],"translate" : [0, -1.25],"rotate" : 45},
 									{"scale" : [0, 0],"translate" : [0, -1],"rotate" : 0}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true,
 								]
 							},
 							"properties" : {
@@ -159,6 +190,16 @@
 									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
 									{"scale" : [0, 0],"translate" : [0, 1.25],"rotate" : 45},
 									{"scale" : [0, 0],"translate" : [0, -1.25],"rotate" : 0}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true,
 								]
 							},
 							"properties" : {
@@ -176,6 +217,16 @@
 									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
 									{"scale" : [0, 0],"translate" : [0, -1.75],"rotate" : 45},
 									{"scale" : [0, 0],"translate" : [0, -1.75],"rotate" : 0}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true,
 								]
 							},
 							"properties" : {
@@ -193,6 +244,16 @@
 									{"scale" : [-0.1, 0.1],"translate" : [0, -0.5],"rotate" : 90},
 									{"scale" : [0, 0],"translate" : [0, -0.5],"rotate" : 45},
 									{"scale" : [0, 0],"translate" : [0, -0.5],"rotate" : 0}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true,
 								]
 							},
 							"properties" : {
