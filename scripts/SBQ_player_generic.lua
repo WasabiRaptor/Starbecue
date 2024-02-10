@@ -7,9 +7,12 @@ require("/scripts/SBQ_vore_main.lua")
 require("/scripts/SBQ_humanoid.lua")
 
 function init()
-	sbq.targetPosition = player.aimPosition
+    sbq.targetPosition = player.aimPosition
+	sbq.facingDirection = mcontroller.facingDirection
+	sbq.scale = mcontroller.scale
 	storage = storage or {}
     sbq.config = root.assetJson("/sbq.config")
+	sbq.relativePath = "/humanoid/"..humanoid.species().."/"
 	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
     sbq.init()
 	sbq.setupTransformationMessages()
@@ -54,9 +57,6 @@ end
 function update(dt)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
     sbq.checkTimers(dt)
-    sbq.scale = mcontroller.scale()
-	sbq.facingDirection = mcontroller.facingDirection()
-    sbq.facingRight = (sbq.facingDirection == 1)
 
 	sbq.update(dt)
 end

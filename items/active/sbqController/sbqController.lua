@@ -4,33 +4,34 @@ sbq = {}
 require("/scripts/SBQ_RPC_handling.lua")
 require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqIndicatorHud/hudActions.lua")
+require "/items/active/sbqController/sbqControllerSetup.lua"
+
 
 function init()
-	sbq.config = root.assetJson("/sbqGeneral.config")
-	activeItem.setHoldingItem(false)
-	local hand = activeItem.hand()
-	if storage.clickAction == nil then
-		storage.clickAction = "unassigned"
-		storage.directives = ""
-	end
-	setIconAndDescription()
+	sbq.config = root.assetJson("/sbq.config")
+	sbq.strings = root.assetJson("/sbqStrings.config")
 
-	message.setHandler( hand.."ItemData", function(_,_, data)
-		storage.directives = data.directives or storage.directives or ""
-		if data.assignClickAction ~= nil then
-			storage.icon = data.icon
-			storage.clickAction = data.assignClickAction
-			setIconAndDescription()
-		elseif ((not storage.clickAction) or (storage.clickAction == "unassigned")) and data.defaultClickAction ~= nil then
-			activeItem.setInventoryIcon((data.defaultIcon or ("/items/active/sbqController/"..data.defaultClickAction..".png"))..(storage.directives or ""))
-		else
-			setIconAndDescription()
-		end
+	activeItem.setHoldingItem(false)
+	storage = storage or {}
+    sbq.setAction(storage.action)
+
+    message.setHandler("sbqControllerRotation", function(_, _, enabled)
+		sbq.rotationEnabled = enabled
+		activeItem.setHoldingItem(enabled)
+	end)
+
+    message.setHandler("sbqControllerRadialMenuScript", function(_, _, script, ...)
+		if RadialMenu[script] then
+			RadialMenu[script](RadialMenu, ...)
+        else
+			sb.logInfo(string.format("[%s] Attmpted invalid radial menu script: %s(%s)", entity.id(), script, sb.printJson({...})))
+    	end
+	end)
+	message.setHandler("sbqControllerCancel", function(_, _)
+		RadialMenu:cancel()
 	end)
 end
 
-local assignedMenu
-local occupantsWhenAssigned
 local selectedPrey
 local selectedPreyIndex
 
@@ -41,353 +42,61 @@ end
 local shiftHeldTime
 function update(dt, fireMode, shiftHeld, controls)
 	if shiftHeld then
-        shiftHeldTime = shiftHeldTime + dt
-    else
+		shiftHeldTime = shiftHeldTime + dt
+	else
 		shiftHeldTime = 0
 	end
 	sbq.checkRPCsFinished(dt)
-	if not player.isLounging() then
-		sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
-		if occupantsWhenAssigned ~= (sbq.sbqCurrentData.totalOccupants or 0) then
-			assignedMenu = nil
-		end
 
-		if (shiftHeldTime) > 0.2 then
-			if not assignedMenu and controls.up then
-				if activeItem.hand() == "primary" then activeItem.callOtherHandScript("dontDoRadialMenu", true) end
-				if dontDoMenu then return end
-				assignedMenu = true
-				selectedPrey = nil
-				assignSelectMenu()
-
-			elseif assignedMenu then
-				if dontDoMenu then return end
-				sbq.loopedMessage("radialSelection", player.id(), "sbqGetRadialSelection", {}, function(data)
-					if data.selection ~= nil then
-						sbq.lastRadialSelection = data.selection
-						sbq.radialSelectionType = data.type
-						if data.selection == "cancel" then return end
-						if data.selection == "letout" and data.pressed and not sbq.click then
-							sbq.click = true
-							sbq.letout(selectedPrey)
-							return
-						end
-
-						if data.type == "controllerActionSelect" then
-							if data.button == 0 and data.pressed and not sbq.click then
-								sbq.click = true
-								world.sendEntityMessage(player.id(), "primaryItemData", { assignClickAction = data.selection })
-							elseif data.button == 2 and data.pressed and not sbq.click then
-								sbq.click = true
-								world.sendEntityMessage(player.id(), "altItemData", {assignClickAction = data.selection })
-							end
-						elseif data.type == "controllerSelectMenu" then
-							if data.pressed and not sbq.click then
-								sbq.click = true
-								if data.selection == "assignAction" then
-									assignAssignActionMenu()
-								elseif data.selection == "rpAction" then
-									assignRPActionMenu()
-								elseif data.selection == "preyAction" then
-									assignPreyActionMenu()
-								end
-							end
-						elseif data.type == "controllerLocationSelect" then
-							if data.pressed and not sbq.click then
-								sbq.click = true
-								assignLocationActionSelect(data)
-							end
-						elseif data.type == "controllerLocationPreyAction" then
-							if data.pressed and not sbq.click then
-								sbq.click = true
-								locationPreyAction(data)
-							end
-						elseif data.type == "controllerPreySelect" then
-							if data.pressed and not sbq.click then
-								sbq.click = true
-								assignPreyActionsLocation(data.selection)
-							end
-						elseif data.type == "controllerPreyAction" then
-							if data.pressed and not sbq.click then
-								sbq.click = true
-								if type(sbq[data.selection]) == "function" then
-									sbq[data.selection](selectedPrey, selectedPreyIndex, data.data)
-								end
-							end
-						end
-						if not data.pressed then
-							sbq.click = false
-						end
-					end
-				end)
-			end
-		elseif assignedMenu then
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqClose" )
-			if sbq.lastRadialSelection == "letout" then
-				sbq.letout(selectedPrey)
-			end
-			assignedMenu = nil
-			activeItem.callOtherHandScript("dontDoRadialMenu")
+	if RadialMenu.activeMenu then
+		if shiftHeld then
+			RadialMenu:update(dt, fireMode, shiftHeld, controls)
 		else
-			if fireMode == "primary" and not clicked then
-				clicked = true
-				doVoreAction()
-			elseif fireMode == "none" then
-				clicked = false
-			end
+			RadialMenu:close()
 		end
+	else
+		if (shiftHeldTime) > 0.2 and controls.up then
+			RadialMenu:open("TopMenu")
+        elseif fireMode ~= "none" and not clicked and not RadialMenu.activeMenu then
+			sbq.clickAction()
+			clicked = true
+        elseif fireMode == "none" then
+			if sbq.rotationEnabled then
+				sbq.aimAngle, sbq.aimDirection = activeItem.aimAngleAndDirection(0, activeItem.ownerAimPosition())
+				activeItem.setArmAngle(sbq.aimAngle)
+				activeItem.setFacingDirection(sbq.aimDirection)
+			end
+			clicked = false
+        end
 	end
+end
+
+function uninit()
+	if storage.action == "grab" then -- one unique case
+		player.setScriptContext("starbecue")
+		return player.callScript("sbq.tryAction", "grabRelease")
+	end
+end
+
+function sbq.setAction(action)
+	storage.action = action
+	player.setScriptContext("starbecue")
+	local icon, shortdescription, description = sbq.getActionData(action, player.callScript("sbq.actionAvailable", action), activeItem.directory(), storage.iconDirectory)
+	activeItem.setInventoryIcon(icon)
+	activeItem.setFriendlyName(shortdescription)
+	activeItem.setDescription(description)
 end
 
 function sbq.letout(id)
 	player.setScriptContext("starbecue")
 	local loungeAnchor = world.entityLoungingIn(entity.id())
 	if (not loungeAnchor) or loungeAnchor.dismountable then
-		return player.callScript("sbq.tryAction", "pickLetout", id, storage.clickAction)
+		return player.callScript("sbq.tryAction", "pickLetout", id, storage.action)
 	end
 end
 
-function assignAssignActionMenu()
-	local sbqSettings = player.getProperty("sbqSettings") or {}
-	local settings = sb.jsonMerge(sbqSettings.sbqOccupantHolder or {}, sbqSettings.global or {})
-
-	local options = {
-		{
-			name = "letout",
-			title = "Let Out"
-		},
-		{
-			name = "oralVore",
-			icon = returnVoreIcon("oralVore") or "/items/active/sbqController/oralVore.png"
-		},
-		{
-			name = "analVore",
-			icon = returnVoreIcon("analVore") or "/items/active/sbqController/analVore.png"
-		}
-	}
-	occupantsWhenAssigned = sbq.sbqCurrentData.totalOccupants or 0
-	if (sbq.sbqCurrentData.totalOccupants or 0) > 0 then
-		options[1].icon = nil
-	end
-	if settings.tailMaw then
-		table.insert(options, 3, {
-			name = "tailVore",
-			icon = returnVoreIcon("tailVore") or "/items/active/sbqController/tailVore.png"
-		} )
-	end
-	if settings.navel then
-		table.insert(options, {
-			name = "navelVore",
-			icon = returnVoreIcon("navelVore") or "/items/active/sbqController/navelVore.png"
-		} )
-	end
-	if settings.breasts then
-		table.insert(options, {
-			name = "breastVore",
-			icon = returnVoreIcon("breastVore") or "/items/active/sbqController/breastVore.png"
-		} )
-	end
-	if settings.pussy then
-		table.insert(options, {
-			name = "unbirth",
-			icon = returnVoreIcon("unbirth") or "/items/active/sbqController/unbirth.png"
-		} )
-	end
-	if settings.penis then
-		table.insert(options, {
-			name = "cockVore",
-			icon = returnVoreIcon("cockVore") or "/items/active/sbqController/cockVore.png"
-		} )
-	end
-
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerActionSelect" })
-end
-
-function assignSelectMenu()
-	local options = {
-		{
-			name = "letout",
-			title = "Let Out"
-		},
-		--[[{
-			name = "rpAction",
-			title = "Roleplay\nActions"
-		},]]
-		{
-			name = "assignAction",
-			title = "Assign\nClick"
-		}
-	}
-	occupantsWhenAssigned = sbq.sbqCurrentData.totalOccupants or 0
-	if (sbq.sbqCurrentData.totalOccupants or 0) > 0 then
-		options[1].icon = nil
-		table.insert(options, {
-			name = "preyAction",
-			title = "Prey\nActions"
-		})
-	end
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerSelectMenu" } )
-end
-
-function assignRPActionMenu()
-
-end
-
-function assignPreyActionMenu()
-	local options = {
-		{
-			name = "all",
-			title = "By Location"
-		}
-	}
-	if sbq.sbqCurrentData.id and world.entityExists(sbq.sbqCurrentData.id) then
-		sbq.addRPC(world.sendEntityMessage(sbq.sbqCurrentData.id, "getOccupancyData"), function (data)
-			for i = 0, 7 do
-				local number = i
-				local i = tostring(i)
-				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) then
-					table.insert(options, {
-						name = data.occupant[i].id,
-						title = (number+1)..": "..(world.entityName(data.occupant[i].id) or "")
-					})
-				end
-			end
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreySelect" } )
-		end)
-	end
-end
-
-local locationAction
-
-function assignLocationActionSelect(data)
-	local options = {
-		{
-			name = "letout",
-			title = "Let Out"
-		}
-	}
-	local sbqSettings = player.getProperty("sbqSettings") or {}
-	local settings = sb.jsonMerge(sbqSettings.sbqOccupantHolder or {}, sbqSettings.global or {})
-	sbq.getSpeciesConfig(player.species(), settings)
-	local sbqData = sbq.speciesConfig.sbqData
-
-	locationAction = data.selection
-
-	local locationData = sbqData.locations[data.selection]
-	for j, action in ipairs(locationData.preyActions or {}) do
-		if (not action.single) and sbq.checkSettings(action.checkSettings, settings) then
-			table.insert(options, {
-				name = action.script,
-				title = action.name,
-				data = action.args
-			})
-		end
-	end
-
-	world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationPreyAction" } )
-end
-
-function locationPreyAction(selectionData)
-	if sbq.sbqCurrentData.id and world.entityExists(sbq.sbqCurrentData.id) then
-		sbq.addRPC(world.sendEntityMessage(sbq.sbqCurrentData.id, "getOccupancyData"), function(data)
-
-			for i = 0, 7 do
-				local number = i
-				local i = tostring(i)
-				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and
-					data.occupant[i].location == locationAction then
-					if type(sbq[selectionData.selection]) == "function" then
-						sbq[selectionData.selection](data.occupant[i].id, number, selectionData.data)
-					end
-				end
-			end
-		end)
-	end
-end
-
-function assignLocationSelect(data, sbqSettings, settings, sbqData)
-	local options = {
-	}
-	local locations = {
-
-	}
-	for i = 0, 7 do
-		local number = i
-		local i = tostring(i)
-		selectedPreyIndex = i
-		if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and
-			(data.occupant[i].location ~= nil) and (data.occupant[i].location ~= "escaping") then
-			locations[data.occupant[i].location] = (locations[data.occupant[i].location] or 0) + 1
-		end
-	end
-	for name, count in pairs(locations) do
-		table.insert(options, {
-			name = name,
-			title = sbqData.locations[name].name..": "..count
-		})
-	end
-	if options[1] ~= nil then
-		if #options == 1 then
-			locationAction = options[1].name
-			assignLocationActionSelect({selection = options[1].name})
-		else
-			world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerLocationSelect" } )
-
-		end
-	end
-end
-
-function assignPreyActionsLocation(id)
-	selectedPrey = id
-	local sbqSettings = player.getProperty("sbqSettings") or {}
-	local settings = sb.jsonMerge(sbqSettings.sbqOccupantHolder or {}, sbqSettings.global or {})
-	sbq.getSpeciesConfig(player.species(), settings)
-	local sbqData = sbq.speciesConfig.sbqData
-
-	local options = {
-		{
-			name = "letout",
-			title = "Let Out"
-		},
-		{
-			name = "npcInteract",
-			title = "Interact"
-		}
-	}
-	if sbq.sbqCurrentData.id and world.entityExists(sbq.sbqCurrentData.id) then
-		sbq.addRPC(world.sendEntityMessage(sbq.sbqCurrentData.id, "getOccupancyData"), function(data)
-			sbq.occupant = data.occupant
-
-			if id == "all" then
-				assignLocationSelect(data, sbqSettings, settings, sbqData)
-				return
-			end
-
-
-			for i = 0, 7 do
-				local number = i
-				local i = tostring(i)
-				selectedPreyIndex = i
-				if data.occupant and data.occupant[i].id ~= nil and world.entityExists(data.occupant[i].id) and data.occupant[i].id == id then
-					local locationData = sbqData.locations[data.occupant[i].location]
-					for j, action in ipairs(locationData.preyActions or {}) do
-						if sbq.checkSettings(action.checkSettings, settings) then
-							table.insert(options, {
-								name = action.script,
-								title = action.name,
-								data = action.args
-							})
-						end
-					end
-					world.sendEntityMessage( player.id(), "sbqOpenInterface", "sbqRadialMenu", {options = options, type = "controllerPreyAction" } )
-					break
-				end
-			end
-		end)
-	end
-end
-
-function doVoreAction(id)
+function sbq.clickAction()
+	if not storage.action then return false end
 	local withoutEntityIds = loungeable.entitiesLounging()
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), 2, {
 		withoutEntityId = entity.id(),
@@ -398,37 +107,132 @@ function doVoreAction(id)
 		withoutEntityId = entity.id(),
 		withoutEntityIds = withoutEntityIds,
 		includedTypes = {"creature"}
-    })
+	})
 	player.setScriptContext("starbecue")
-	for i, targetId in ipairs(entityaimed) do for j, eid in ipairs(entityInRange) do
-		if targetId == eid and entity.entityInSight(targetId) then
-			local loungeAnchor = world.entityLoungingIn(targetId)
-			if (not loungeAnchor) or loungeAnchor.dismountable then
-				return player.callScript("sbq.tryAction", storage.clickAction, targetId)
+	local result
+	for i, targetId in ipairs(entityaimed) do
+		for j, eid in ipairs(entityInRange) do
+			if targetId == eid and entity.entityInSight(targetId) then
+				local loungeAnchor = world.entityLoungingIn(targetId)
+				if (not loungeAnchor) or loungeAnchor.dismountable then
+					result = player.callScript("sbq.tryAction", storage.action, targetId)
+					break
+				end
 			end
+		if result and result[1] then break end
 		end
-	end end
-	return player.callScript("sbq.tryAction", storage.clickAction)
+	end
+
+	if result == nil then
+		result = player.callScript("sbq.tryAction", storage.action)
+	end
+	if result and not result[1] then
+		animator.playSound("error")
+    end
+	-- sb.logInfo(string.format("[%s] Action results: %s:%s", entity.id(), storage.action, sb.printJson(result)))
+	return table.unpack(result or {false})
 end
 
-
-function setIconAndDescription()
-	getDirectives()
-	activeItem.setInventoryIcon((storage.icon or returnVoreIcon(storage.clickAction) or ("/items/active/sbqController/"..storage.clickAction..".png"))..(storage.directives or ""))
-end
-
-function returnVoreIcon(action)
-	sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
-	if sbq.sbqCurrentData.species == "sbqOccupantHolder" or not sbq.sbqCurrentData.species then
-		return (root.speciesConfig(humanoid.species()).voreIcons or {})[action]
+RadialMenu = {}
+setmetatable(RadialMenu, _RadialMenu)
+function RadialMenu:open(menuName)
+	if self.activeMenu then
+		self.activeMenu:uninit()
+	end
+	if self[menuName] and self[menuName].isMenu then
+		self.activeMenuName = menuName
+		self.activeMenu = self[menuName]
+        self.activeMenu:init()
+        setmetatable(self, { __index = self.activeMenu })
+    else
+		sb.logInfo(string.format("[%s] no radial menu named: %s", entity.id(), menuName))
 	end
 end
-
-function getDirectives()
-	sbq.sbqCurrentData = player.getProperty( "sbqCurrentData") or {}
-	if sbq.sbqCurrentData.species == "sbqOccupantHolder" or not sbq.sbqCurrentData.species then
-		storage.directives = humanoid.getIdentity().bodyDirectives
+function RadialMenu:close()
+	if self.activeMenu then
+		self.activeMenu:uninit()
 	end
+	self.activeMenuName = nil
+    self.activeMenu = nil
+	world.sendEntityMessage(player.id(), "sbqOpenInterface", "sbqClose")
 end
 
-require("/scripts/SBQ_check_settings.lua")
+_RadialMenu = {isMenu = true}
+_RadialMenu.__index = _RadialMenu
+function _RadialMenu:init()
+end
+function _RadialMenu:update()
+end
+function _RadialMenu:uninit()
+end
+function _RadialMenu:cancel()
+end
+function _RadialMenu:openRadialMenu(overrides)
+	world.sendEntityMessage(player.id(), "sbqOpenInterface", "sbqRadialMenu",
+		sb.jsonMerge(
+            {
+                selectOnClose = true,
+				default = {
+					context = "starbecue",
+					message = "sbqControllerRadialMenuScript"
+				},
+				cancel = {
+                    message = "sbqControllerCancel",
+                    script = false,
+                },
+			},
+			overrides
+		)
+	)
+end
+
+function _RadialMenu:controllerAssign(action)
+	sbq.setAction(action)
+end
+
+function _RadialMenu:letout()
+	sbq.letout()
+end
+function _RadialMenu:letoutTarget(id)
+	sbq.letout(id)
+end
+
+local TopMenu = {}
+RadialMenu.TopMenu = TopMenu
+setmetatable(TopMenu, _RadialMenu)
+function TopMenu:init()
+	local options = {
+		{
+			args = {"letout"},
+			name = sbq.strings.controllerLetOut,
+		},
+		{
+			args = {"open","AssignMenu"},
+			name = sbq.strings.controllerAssign
+		}
+	}
+	self:openRadialMenu({options = options})
+end
+
+local AssignMenu = {}
+RadialMenu.AssignMenu = AssignMenu
+setmetatable(AssignMenu, _RadialMenu)
+function AssignMenu:init()
+	local options = {
+		{
+			args = {"open","TopMenu"},
+			name = "<-",
+		}
+	}
+	for _, action in ipairs(player.callScript("sbq.actionList") or config.getParameter("actions")) do
+		if player.callScript("sbq.actionAvailable", action) then
+			local icon, shortdescription, description = sbq.getActionData(action, true, activeItem.directory(), storage.iconDirectory)
+			table.insert(options, {
+				args = {"controllerAssign", action},
+				name = shortdescription,
+				icon = icon
+			})
+		end
+	end
+	self:openRadialMenu({options = options})
+end

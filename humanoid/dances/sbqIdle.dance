@@ -3,9 +3,9 @@
 	"states" : ["idle", "walk", "sit", "lay", "duck"],
 	"cycle" : 1.0,
 	"cyclic" : false,
-	"duration" : 1.0,
+	"duration" : 0.25,
 	"steps" : [
 		// body, frontArm, backArm, headOffset, frontArmOffset, backArmOffset
-		[ null, null, null, null, null, null ]
+		[ "idle.1", "idle.1", "idle.1", [0,0], [0,0], [0,0] ]
 	]
 }

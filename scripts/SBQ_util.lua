@@ -86,6 +86,23 @@ function sbq.replaceConfigTags(config, tags)
 	return newConfig
 end
 
-function sbq.distanceToLocal(pos, offset)
-	return world.distance(pos, vec2.add(entity.position(), vec2.mul(offset or {0,0},{sbq.facingDirection, 1})))
+function sbq.globalToLocal(pos, offset)
+    local facingDirection = sbq.facingDirection()
+	local scale = sbq.scale()
+    pos = world.distance(pos, vec2.add(entity.position(), offset or {0,0}))
+    pos[1] = pos[1] * facingDirection / scale
+	pos[2] = pos[2] / scale
+	return pos
+end
+
+function sbq.localToGlobal(pos)
+	local facingDirection = sbq.facingDirection()
+	local scale = sbq.scale()
+	return {world.xwrap(pos[1] * facingDirection * scale), pos[2] * scale}
+end
+
+function sbq.scaleLocal(pos)
+	local facingDirection = sbq.facingDirection()
+	local scale = sbq.scale()
+	return { pos[1] * facingDirection * scale, pos[2] * scale }
 end

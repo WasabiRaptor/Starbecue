@@ -1,14 +1,6 @@
 {
 	"kind" : "sbqAuri_LokiVulpix",
 
-	"voreConfig" : [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings" : {
-				"visibleNavel" : true
-			}
-		}
-	],
 	"charCreationTooltip" : {
 			"title" : "Auri",
 			"subTitle" : "(Zn,Cu)5(CO3)2(OH)6",
@@ -193,6 +185,8 @@
 			]
 	},
 	"humanoidOverrides" : {
+		"sitOffset" : 0,
+		"layOffset" : 0,
 		"runFallOffset" : 0,
 		"jumpBob" : 0, // jump bob is handled by my animation file
 		"globalOffset" : [0.0, 0.0],
@@ -240,11 +234,30 @@
 			[ "idle.5", "idle.3", [0, 0], [0, 0] ] //nervous
 		]
 	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"scripts" : ["/humanoid/any/voreScripts.lua", "/humanoid/sbqAuri_LokiVulpix/voreScripts.lua"],
+			"transformation" : "Auri",
+			"eyeTrackingDeadzone" : [
+				[-1,10], // x min and max
+				[-3,3] // y min and max
+			],
+			"defaultSettings" : {
+				"visibleNavel" : true,
+				"visibleNipples" : true
+			}
+		}
+	],
 	"identityAnimationCustom" : [],
 	"animationConfig" : "/humanoid/any/quadruped.animation",
 	"animationCustom" : [
 		{}, // put the vore parts for quadrupeds here later
 		{
+			"globalTagDefaults" : {
+				"eyesX":"0",
+				"eyesY":"0"
+			},
 			"animatedParts" : {
 				"stateTypes" : {
 					"bodyState" : {"states":{
@@ -288,16 +301,59 @@
 								{"translate":[0,0.125]},
 								{"translate":[0,0.25]},
 							]
+						}},
+						"sit" : {"properties":{
+							"tailOffset" : {"translate":[0.75,-1.375]},
+							"headOffset" : {"translate":[-0.25,0.125]}
+						}},
+						"lay" : {"properties":{
+							"tailOffset" : {"translate":[0,0]},
+							"headOffset" : {"translate":[0.25,-0.5]},
+							"scaleDifference" : [2.5, -2] // y and x are swapped with this one because of seat rotate
+						}},
+						"duck" : {"properties":{
+							"tailOffset" : {"translate":[-0.345,0]},
+							"headOffset" : {"translate":[0.25,-0.375]}
 						}}
 					}}
 				},
 				"parts" : {
-					"frontarm" : {"partStates" : {"frontarmRotationState" : {
-						"properties" : {"anchorPart":"body"}
-					}}},
-					"backarm" : {"partStates" : {"backarmRotationState" : {
-						"properties" : {"anchorPart":"body"}
-					}}}
+					"anchor" : {
+						"partStates" : {
+							"bodyState" : {
+								"sit" : {"properties":{
+									"offset" : [-0.75,1.375]
+								}},
+								"lay" : {"properties":{
+									"offset" : [-1,1.375],
+									"transforms" : {"scale":[-1,1]}
+								}}
+							}
+						}
+					},
+					"frontarm" : {"partStates" : {
+						"frontarmRotationState" : {
+							"properties" : {"anchorPart":"body"}
+						},
+						"bodyState" : {
+							"lay": { "properties": { "zLevel":0.99, "image": "<bodyImagePath>frontarm.png:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } }
+						}
+					}},
+					"backarm" : {"partStates" : {
+						"backarmRotationState" : {
+							"properties" : {"anchorPart":"body"}
+						},
+						"bodyState" : {
+							"sit": { "properties": { "zLevel":-0.99, "image": "<bodyImagePath>backarm.png:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } }
+						}
+					}},
+					"eyes" : {
+						"properties" : {
+							"zLevel":2.1,"anchorPart":"head","offset":[2,0.5],
+							"eyePos" : [0,0],
+							"image":"eyes.png:<eyesX>.<eyesY><bodyDirectives>"
+						}
+					}
 				}
 			}
 		}

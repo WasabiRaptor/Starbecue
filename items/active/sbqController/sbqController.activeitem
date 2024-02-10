@@ -6,12 +6,13 @@
 	"maxStack" : 1,
 	"rarity" : "common",
 	"category" : "weapon",
-	"twoHanded" : false,
-	"itemTags" : ["vehiclecontroller", "vore"],
+	"twoHanded" : true,
+	"itemTags" : ["sbqController"],
 	"inventoryIcon" : "unassigned.png",
 
+	"animation" : "sbqController.animation",
+
 	"actions" : [
-		"unassigned",
 		"vore",
 		"oralVore",
 		"analVore",
@@ -21,19 +22,8 @@
 		"physicalAttack",
 		"specialAttack",
 		"grab",
-		"succ"
+		"inhale"
 	],
-	"descriptions" : {
-		"unassigned" : {"shortdescription" : "Unassigned Vore Controller", "description" : "Triggers your default action."},
-		"vore" : {"shortdescription" : "Vore Controller", "description" : "Triggers any of your vore actions."},
-
-		"physicalAttack" : {"shortdescription" : "Physical Attack Controller", "description" : "Triggers your physical attack."},
-		"specialAttack" : {"shortdescription" : "Special Attack Controller", "description" : "Triggers your special attack."},
-		"grab" : {"shortdescription" : "Grab Controller", "description" : "Triggers your grab action."},
-		"succ" : {"shortdescription" : "Inhale Controller", "description" : "Triggers your inhale action."}
-	},
-
-	"appendedDescription" : " Hold shift+up to re-assign action.",
 
 	"retainScriptStorageInItem": true,
 	"builder" : "/items/active/sbqController/sbqControllerBuilder.lua",

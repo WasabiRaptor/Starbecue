@@ -6,6 +6,7 @@ local Default = {
 }
 setmetatable(Default, _Transformation)
 for k, v in pairs(Default.states) do
+	v.__index = v
 	setmetatable(v, _State)
 end
 Transformations.default = Default
@@ -39,7 +40,7 @@ function default:pickLetout(name, action, target, preferredAction, skip)
         location = Transformation:getLocation(occupant.location, occupant.subLocation)
         local exitTypes = location.exitTypes or location.entryTypes
 		if preferredAction then
-			for _, exitType in ipairs(exitTypes) do
+			for _, exitType in ipairs(exitTypes or {}) do
 				if exitType == preferredAction then
 					if Transformation:tryAction(exitType.."Letout", target) then
 						return true
@@ -48,7 +49,7 @@ function default:pickLetout(name, action, target, preferredAction, skip)
 			end
         end
 		if skip then return false end
-		for _, exitType in ipairs(exitTypes) do
+		for _, exitType in ipairs(exitTypes or {}) do
 			if Transformation:tryAction(exitType.."Letout", target) then
 				return true
 			end
@@ -65,4 +66,38 @@ function default:pickLetout(name, action, target, preferredAction, skip)
 end
 function default:moveToLocation(name, action, target, location, subLocation)
 	return sbq.moveToLocation(target, action.location or location, action.subLocation or subLocation)
+end
+
+function default:grab(name, action, target)
+    local location = Transformation:getLocation(action.location or "grabbed")
+	if not location then return false end
+    local occupant = location.occupancy.list[1]
+	if occupant then
+        return Transformation:tryAction("grabRelease", occupant.entityId)
+    else
+		return Transformation:tryAction("grabTarget", target)
+    end
+end
+
+function default:grabTarget(name, action, target)
+	if sbq.tryVore(target, action.location or "grabbed", action.throughput or math.huge) then
+        world.sendEntityMessage(entity.id(), "sbqControllerRotation", true)
+		return true
+	end
+end
+
+function default:grabRelease(name, action, target)
+    occupant = Occupants.entityId[tostring(target)]
+	if not occupant then
+		local location = Transformation:getLocation(action.location or "grabbed")
+		if not location then return false end
+		occupant = location.occupancy.list[1]
+	end
+	if occupant then
+        occupant:remove()
+		world.sendEntityMessage(entity.id(), "sbqControllerRotation", false)
+        return true
+    else
+		return false
+    end
 end

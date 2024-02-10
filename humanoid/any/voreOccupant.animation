@@ -31,6 +31,7 @@
 					"cleavage": { "frames": 1, "cycle": 0, "mode": "end" },
 					"cock": { "frames": 1, "cycle": 0, "mode": "end" },
 					"balls": { "frames": 1, "cycle": 0, "mode": "end" },
+					"grabbed": { "frames": 1, "cycle": 0, "mode": "end" },
 				}
 			},
 			// this animation state has a higher priority than the locations and will override it when it
@@ -60,8 +61,9 @@
 					// the below is so by default an occupant is scaled so small to be invisible
 					// as well as be layered behind the main sprite
 					"zLevel":-1,
-					// doesn't actually do anything in the animator, script reads this to set the seat visibility
-					"hidden" : true
+					// doesn't actually do anything in the animator, script reads these to set values
+					"hidden" : true,
+					"dance" : "sbqIdle"
 				},
 				"partStates" : {
 					"<occupant>Location" : {
@@ -92,6 +94,12 @@
 							"anchorPart":"body",
 							"zLevel":-1,
 							"offset" : [0,-0.5],
+						}},
+						"grabbed" : {"properties":{
+							"anchorPart":"backarm",
+							"transformationGroups":["backHandPosition"],
+							"zLevel":3.9,
+							"offset" : [0.25,0.25]
 						}}
 					},
 					"<occupant>State" : {
@@ -262,13 +270,13 @@
 						}
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {"transforms":{"scale":[0,0]}} }
+						"none": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
 					},
 					"hiddenState" : {
-						"none": { "properties": {"transforms":{"scale":[0,0]}} }
+						"none": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
 					},
 					"justHead" : {
-						"head": { "properties": {"transforms":{"scale":[0,0]}} }
+						"head": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
 					}
 				}
 			}

@@ -145,7 +145,7 @@ function init()
 		setmetatable(behavior, {__index = _behavior})
 		function behavior:run(...)
 			local loungeAnchor = world.entityLoungingIn(entity.id())
-			if (not loungeAnchor) or loungeAnchor.dismountable then
+			if (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable) then
 				_behavior:run(...)
 			else
 				sbq.struggleBehavior(...)

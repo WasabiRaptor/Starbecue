@@ -216,13 +216,13 @@
 				"partStates": {
 					"bodyState": {
 						"idle": { "properties": { "image": "<bodyImagePath>body.png:<personalityIdle><bodyDirectives>" } },
-						"duck": { "properties": { "image": "<bodyImagePath>body.png:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } },
-						"sit" : "idle",
-						"lay" : "idle",
+						"duck" : "idle",
+						"sit": { "properties": { "image": "<bodyImagePath>body.png:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } },
+						"lay" : "sit",
 						"walk" : "idle",
 						"run" : "idle",
-						"jump" : "duck",
-						"fall" : "duck",
+						"jump" : "sit",
+						"fall" : "sit",
 						"swim" : "idle",
 						"swimIdle" : "idle",
 						"none": { "properties": {} }
@@ -418,7 +418,8 @@
 					"centered": true,
 					"zLevel": 4,
 					"transformationGroups": [],
-					"anchorPart": "anchor"
+					"anchorPart": "anchor",
+					"itemHidden": true
 				},
 				"partStates": {
 					"bodyState": {
@@ -436,6 +437,7 @@
 					},
 					"frontarmRotationState" : {
 						"rotation": { "properties": {
+							"itemHidden": false,
 							"anchorPart": "head",
 							"transformationGroups": ["frontarmrotation"],
 							"image": "<bodyImagePath>frontarm.png:<frontarmRotationFrame><bodyDirectives>"
@@ -462,7 +464,8 @@
 					"centered": true,
 					"zLevel": -4,
 					"transformationGroups": [],
-					"anchorPart": "anchor"
+					"anchorPart": "anchor",
+					"itemHidden": true
 				},
 				"partStates": {
 					"bodyState": {
@@ -480,6 +483,7 @@
 					},
 					"backarmRotationState" : {
 						"rotation": { "properties": {
+							"itemHidden": false,
 							"anchorPart": "head",
 							"transformationGroups": ["backarmrotation"],
 							"image": "<bodyImagePath>backarm.png:<backarmRotationFrame><bodyDirectives>"
@@ -662,7 +666,7 @@
 				"partStates": {
 					"headState": {
 						"normal": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim><bodyDirectives>" } },
-						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>.<headStateFrame><bodyDirectives>" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -676,7 +680,7 @@
 			"emote": {
 				"properties": {
 					"centered": true,
-					"zLevel": -1.1,
+					"zLevel": 2.1,
 					"anchorPart": "head"
 				},
 				"partStates": {
@@ -727,6 +731,7 @@
 			},
 			"tail": {
 				"properties" : {
+					"zLevel":-4,
 					"anchorPart" : "body",
 					"image" : "tail.png:idle.1",
 					"transformationGroups" : ["tailOffset"]

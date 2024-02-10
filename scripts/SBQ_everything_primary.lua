@@ -38,7 +38,8 @@ function init()
 	end)
 
 
-	message.setHandler("sbqForceSit", function(_, _, data)
+    message.setHandler("sbqForceSit", function(_, _, data)
+		mcontroller.resetAnchorState()
 		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
 			seatToForce = data
 		end

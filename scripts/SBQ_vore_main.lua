@@ -50,10 +50,14 @@ function sbq.init()
 	message.setHandler("sbqTryAction", function(_, _, ...)
 		sbq.tryAction(...)
 	end)
-	sbq.reloadVoreConfig(storage.lastVoreConfig)
+    sbq.reloadVoreConfig(storage.lastVoreConfig)
+
+	-- require "/scripts/misc/convert_scripts.lua"
+	-- sbq.createOccupantAnims()
 end
 
 function sbq.update(dt)
+	sbq.facingRight = (sbq.facingDirection() == 1)
     if Transformation.active then
 		Occupants.update(dt)
 		Transformation:update(dt)
@@ -80,7 +84,7 @@ function sbq.reloadVoreConfig(config)
 	storage.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-	sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+	sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", sbq.relativePath)
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 
@@ -131,7 +135,7 @@ function sbq.reloadVoreConfig(config)
 		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
 			Transformation:doAnimations(settingsAnim[2])
 		end
-	end
+    end
 
 	Transformation:init()
 	Transformation.state:init()
@@ -139,8 +143,13 @@ function sbq.reloadVoreConfig(config)
 end
 
 function sbq.tryAction(...)
-	return Transformation:tryAction(...)
+	return {Transformation:tryAction(...)}
 end
+
+function sbq.actionAvailable(...)
+	return Transformation:actionAvailable(...)
+end
+
 
 function sbq.getSettingsPageData()
 	local settingsPageData = {
@@ -178,13 +187,12 @@ end
 
 function sbq.tryVore(target, locationName, throughput)
 	local targetSize = sbq.getTargetSize(target)
-	local throughput = ((throughput or 1) * sbq.scale)
+	local throughput = ((throughput or 1) * sbq.scale())
 	if (targetSize <= throughput) then
 		local location = Transformation:getLocation(locationName)
 		local space, subLocation = location:hasSpace(targetSize)
 		if space then
-			Occupants.addOccupant(target, locationName, subLocation)
-			return true
+			return Occupants.addOccupant(target, locationName, subLocation)
 		else
 			return false, "noSpace"
 		end
@@ -198,7 +206,7 @@ function sbq.tryLetout(target, throughput)
 	if lounging and not lounging.dismountable then return false end
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
-	if not ((occupant.size * occupant.sizeMultiplier) <= ((throughput or 1) * sbq.scale)) then return false end
+	if not ((occupant.size * occupant.sizeMultiplier) <= ((throughput or 1) * sbq.scale())) then return false end
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
 	return true, function ()
@@ -226,6 +234,10 @@ end
 
 function _Transformation:tryAction(...)
 	return self.state:tryAction(...)
+end
+
+function _Transformation:actionAvailable(...)
+	return self.state:actionAvailable(...)
 end
 
 function _Transformation:doAnimations(...)
@@ -289,14 +301,20 @@ function _State:tryAction(name, target, ...)
 	local action = self.actions[name]
 	if not action then return false end
 	if action.onCooldown then return false end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return self:actionFailed(name, action, target, false, ...) end
+	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return self:actionFailed(name, action, target, "settingMismatch", ...) end
 	if action.targetSettings then
-		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, false, ...) end
+		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
 		local targetSettings = world.getStatusProperty(target, "sbqPublicSettings")
-		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, false, ...) end
+		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, "targetSettingsMismatch", ...) end
 	end
 	local result1, result2 = true, false
-	if action.script then result1, result2 = self[action.script](self, name, action, target, ...) end
+    if action.script then
+		if self[action.script] then
+			result1, result2 = self[action.script](self, name, action, target, ...)
+        else
+			return self:actionFailed(name, action, target, "missingScript", ...)
+		end
+	end
 	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
 	local longest = Transformation:doAnimations(action.animations, target)
 	local cooldown = action.cooldown or longest
@@ -315,11 +333,11 @@ function _State:tryAction(name, target, ...)
 	return result1
 end
 
-function _State:actionFailed(name, action, target, ...)
+function _State:actionFailed(name, action, target, reason, ...)
 	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
 	local result1, result2  = false, false
-	if action.failureScript then result1, result2 = self[action.failureScript](self, name, action, target, ...) end
+	if action.failureScript and self[action.failureScript] then result1, result2 = self[action.failureScript](self, name, action, target, reason, ...) end
 	sbq.timer(name.."Cooldown", cooldown, function (...)
 		action.onCooldown = false
 		if type(result2) == "function" then
@@ -329,9 +347,17 @@ function _State:actionFailed(name, action, target, ...)
 		end
 	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
-		return result1, result2
+		return result1, reason, result2, ...
 	end
-	return result1
+	return result1, reason, ...
+end
+
+function _State:actionAvailable(name)
+	if not name then return false end
+	local action = self.actions[name]
+	if not action then return false end
+    if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return false end
+	return true
 end
 
 function _State:doAnimations(animations, target, tags)
@@ -371,24 +397,24 @@ end
 
 -- Location handling
 function Locations.addLocation(name, config)
-	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config))
+	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.relativePath))
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
 	if location.infusionSlot and sbq.settings[location.infusionType .. "Pred"] and sbq.settings[location.infusionSlot] then
 		local infused = sbq.settings[location.infusionSlot]
 		local species = infused.parameters.npcArgs.npcSpecies
-		local voreConfig = root.fetchConfigArray(infused.parameters.voreConfig or root.speciesConfig(species).voreConfig or "/humanoid/any/vore.config")
+		local voreConfig = root.fetchConfigArray(infused.parameters.voreConfig or root.speciesConfig(species).voreConfig or "/humanoid/any/vore.config", sbq.relativePath)
 		location = sb.jsonMerge(sbq.config.locations[name],
 			{ species = voreConfig.tfSpecies or species },
 			root.fetchConfigArray(
 				sb.jsonQuery(voreConfig, "infusedLocations." .. species .. "." .. name) or
-				sb.jsonQuery(voreConfig, "infusedLocations." .. name) or {}
-			)
+				sb.jsonQuery(voreConfig, "infusedLocations." .. name) or {},
+			sbq.relativePath)
 		)
 		-- certain NPCs may not like performing certain actions, therefore they can disable them when infused
 		local metatable = getmetatable(sbq.settings)
-		sbq.settings = sb.jsonMerge(sbq.settings, root.fetchConfigArray(infused.parameters.overrideSettings or {}),
+		sbq.settings = sb.jsonMerge(sbq.settings, root.fetchConfigArray(infused.parameters.overrideSettings or {}, infused.parameters.relativePath or sbq.relativePath),
 			root.fetchConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name)
-				or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. name) or {}))
+				or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. name) or {}, infused.parameters.relativePath or sbq.relativePath))
 		setmetatable(sbq.settings, metatable)
 	end
 	-- easier to make it default to math.huge than have it check if it's defined or not
@@ -480,7 +506,7 @@ function _Location:updateOccupancy(dt, locationTag, subLocationBehavior)
 		left = sbq.facingRight and "back" or "front"
 	}
 	local prevVisualSize = self.occupancy.visualSize
-	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale) then
+	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale()) then
 		self.occupancy.sizeDirty = false
 		self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
 		if subLocationBehavior then
@@ -507,7 +533,7 @@ function _Location:updateOccupancy(dt, locationTag, subLocationBehavior)
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
-				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale)
+				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale())
 			end
 			self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
 			local addVisual = 0
@@ -696,7 +722,7 @@ function Occupants.update(dt)
 			subLocation.occupancy.settingsDirty = false
 		end
 		location.occupancy.settingsDirty = false
-		Occupants.lastScale = sbq.scale
+		Occupants.lastScale = sbq.scale()
 	end
 end
 
@@ -706,6 +732,7 @@ function _Occupant:update(dt)
     if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat.."State") then
 		self:setHidden(animator.partProperty(self.seat, "hidden"))
+		self:setLoungeDance(animator.partProperty(self.seat, "dance"))
 	end
 	local locationStore = self.locationStore[self.location]
 
@@ -865,11 +892,11 @@ function _Occupant:checkStruggleDirection(dt)
 		if self:controlHeldTime("Down") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
 	if self:controlHeld("Left") then
-		dx = dx - (1 * sbq.facingDirection)
+		dx = dx - (1 * sbq.facingDirection())
 		if self:controlHeldTime("Left") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
 	if self:controlHeld("Right") then
-		dx = dx + (1 * sbq.facingDirection)
+		dx = dx + (1 * sbq.facingDirection())
 		if self:controlHeldTime("Right") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
 	self.struggleDirection = {dx * effectiveness, dy * effectiveness}
