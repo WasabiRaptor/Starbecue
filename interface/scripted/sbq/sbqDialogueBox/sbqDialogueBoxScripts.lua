@@ -204,8 +204,6 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 	return randomTable
 end
 
-require("/scripts/SBQ_check_settings.lua")
-
 
 function dialogueBoxScripts.locationEffectSlot(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	if settings.digesting or (settings.hostile and settings.overrideSoftDigestForHostiles and (settings[(dialogueTree.location or dialogue.result.location or settings.location).."EffectSlot"] == "softDigest")) then

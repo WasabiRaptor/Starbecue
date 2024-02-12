@@ -1,6 +1,6 @@
 sbq = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.parent = config.getParameter("parent")

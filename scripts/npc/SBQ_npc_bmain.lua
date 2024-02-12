@@ -4,9 +4,9 @@ local old = {
 	update = update
 }
 sbq = {}
-require("/scripts/SBQ_humanoidAnimator.lua")
-require("/scripts/SBQ_public_settings.lua")
-require("/scripts/SBQ_humanoid.lua")
+require("/scripts/humanoid/SBQ_humanoidAnimator.lua")
+require("/scripts/any/SBQ_public_settings.lua")
+require("/scripts/humanoid/SBQ_humanoid.lua")
 
 local interactive = true
 local _npc_setInteractive
@@ -60,7 +60,7 @@ function sbq.setPosition(position)
 	end
 end
 
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.setupTransformationMessages()

@@ -1,7 +1,5 @@
 ---@diagnostic disable:undefined-global
 
-require("/scripts/SBQ_check_settings.lua")
-
 function sbq.effectsPanel()
 	sbq.locationTabs = {}
 	if not sbq.predatorConfig or not sbq.predatorConfig.locations then return end

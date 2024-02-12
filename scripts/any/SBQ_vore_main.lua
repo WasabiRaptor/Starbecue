@@ -3,7 +3,7 @@ require "/scripts/vec2.lua"
 require "/scripts/rect.lua"
 require "/scripts/poly.lua"
 require "/scripts/interp.lua"
-require "/scripts/SBQ_util.lua"
+require "/scripts/any/SBQ_util.lua"
 
 _Transformation = {}
 _Transformation.__index = _Transformation
@@ -52,7 +52,7 @@ function sbq.init()
 	end)
     sbq.reloadVoreConfig(storage.lastVoreConfig)
 
-	-- require "/scripts/misc/convert_scripts.lua"
+	-- require "/scripts/misc/SBQ_convert_scripts.lua"
 	-- sbq.createOccupantAnims()
 end
 

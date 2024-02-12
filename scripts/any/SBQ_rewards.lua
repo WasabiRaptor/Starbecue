@@ -258,3 +258,21 @@ function sbq.getTenantRewards(rewardTable, occupant, level)
 	end
 	return setFlags, rewards
 end
+
+function sbq.checkOccupantRewards(occupant, rewards, notify, recipient, holder, treestart)
+	if type(recipient) == "number" and world.entityExists(recipient) and world.entityType(recipient) == "player" then
+		local setFlags, newRewards = sbq.getTenantRewards(rewards, occupant, npc.level())
+		world.sendEntityMessage(holder, "sbqSetOccupantFlags", recipient, setFlags)
+		local sendRewards = false
+		local rewardNotifyDelay = 0
+		for rewardName, data in pairs(newRewards) do
+			sendRewards = true
+			if notify and sbq.getRandomDialogue( treestart or ".rewardNotify", recipient, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool, isPrey = (occupant.id == entity.id()) }))) then
+				rewardNotifyDelay = rewardNotifyDelay + 5
+			end
+		end
+		if sendRewards then
+			world.sendEntityMessage(recipient, "sbqQueueTenantRewards", entity.uniqueId(), newRewards)
+		end
+	end
+end

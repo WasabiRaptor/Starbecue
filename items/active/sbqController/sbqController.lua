@@ -1,8 +1,7 @@
 
 sbq = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
-require("/scripts/SBQ_species_config.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqIndicatorHud/hudActions.lua")
 require "/items/active/sbqController/sbqControllerSetup.lua"
 
@@ -154,7 +153,7 @@ function RadialMenu:close()
 	end
 	self.activeMenuName = nil
     self.activeMenu = nil
-	world.sendEntityMessage(player.id(), "sbqOpenInterface", "sbqClose")
+	player.interact("ScriptPane", root.assetJson("/interface/scripted/sbq/sbqClose/sbqClose.config"), player.id())
 end
 
 _RadialMenu = {isMenu = true}
@@ -168,22 +167,21 @@ end
 function _RadialMenu:cancel()
 end
 function _RadialMenu:openRadialMenu(overrides)
-	world.sendEntityMessage(player.id(), "sbqOpenInterface", "sbqRadialMenu",
-		sb.jsonMerge(
-            {
-                selectOnClose = true,
-				default = {
-					context = "starbecue",
-					message = "sbqControllerRadialMenuScript"
-				},
-				cancel = {
-                    message = "sbqControllerCancel",
-                    script = false,
-                },
+    player.interact("ScriptPane", sb.jsonMerge(
+        root.assetJson("/interface/scripted/sbq/sbqRadialMenu/sbqRadialMenu.config")
+		{
+			selectOnClose = true,
+			default = {
+				context = "starbecue",
+				message = "sbqControllerRadialMenuScript"
 			},
-			overrides
-		)
-	)
+			cancel = {
+				message = "sbqControllerCancel",
+				script = false,
+			},
+		},
+		overrides
+	), player.id())
 end
 
 function _RadialMenu:controllerAssign(action)

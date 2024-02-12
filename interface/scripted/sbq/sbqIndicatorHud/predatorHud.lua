@@ -16,8 +16,7 @@ end
 local canvas = widget.bindCanvas(frame.backingWidget .. ".canvas")
 canvas:clear()
 
-require("/scripts/SBQ_RPC_handling.lua")
-require("/scripts/SBQ_species_config.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqNumberBox.lua")
 
 function init()
@@ -193,9 +192,6 @@ function sbq.readOccupantData()
 		end
 	end
 end
-
-require("/scripts/SBQ_check_settings.lua")
-
 
 function sbq.checkOccupantLocation(occupantLocation, locations)
 	for i, location in ipairs(locations) do

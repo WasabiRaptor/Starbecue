@@ -29,7 +29,7 @@ sbq = {
 dialogueBoxScripts = {}
 optionCheckScripts = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 require("/lib/stardust/json.lua")
 require("/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua")
 require("/interface/scripted/sbq/sbqDialogueBox/scripts/player.lua")

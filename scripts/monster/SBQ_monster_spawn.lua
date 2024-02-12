@@ -11,7 +11,7 @@ function capture_monster_setDamageTeam(data)
 	end
 end
 
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 function init()
 

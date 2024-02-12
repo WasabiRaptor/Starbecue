@@ -2,7 +2,7 @@ local old = {
     initAnimator = initAnimator or (function ()end),
 	equipmentSlotUpdated = equipmentSlotUpdated or (function ()end)
 }
-require("/scripts/SBQ_util.lua")
+require("/scripts/any/SBQ_util.lua")
 
 function equipmentSlotUpdated(slot, itemDescriptor)
     old.equipmentSlotUpdated(slot, itemDescriptor)

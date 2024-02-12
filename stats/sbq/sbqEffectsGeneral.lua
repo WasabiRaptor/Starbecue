@@ -11,8 +11,8 @@ function removeOtherBellyEffects()
 		end
 	end
 end
-require("/scripts/SBQ_generate_drop.lua")
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_generate_drop.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 function doItemDrop()
 	if self.dropItem and not self.droppedItem then

@@ -101,7 +101,7 @@ require("/vehicles/sbq/sbq_driving.lua")
 require("/vehicles/sbq/sbq_pathfinding.lua")
 require("/vehicles/sbq/sbq_replaceable_functions.lua")
 require("/vehicles/sbq/sbq_occupant_handling.lua")
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 function init()
 	sbq.sbqData = config.getParameter("sbqData")

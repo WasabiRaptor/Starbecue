@@ -69,9 +69,8 @@ for name, tenantName in pairs(sbq.tenantCatalogue) do
 end
 table.sort(sbq.validTenantCatalogueList)
 
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqSettings/sbqSettingsEffectsPanel.lua")
-require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 require("/interface/scripted/sbq/sbqVoreColonyDeed/sbqHuntingSettings.lua")
 

@@ -8,7 +8,7 @@ local spawnCooldown = 1
 local spawnedVehicle = nil
 
 sbq = {}
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 function init()
 	message.setHandler( "sbqRefreshSettings", function(_,_, newSettings) -- this only ever gets called when the prey despawns or other such occasions, we kinda hijack it for other purposes on the player

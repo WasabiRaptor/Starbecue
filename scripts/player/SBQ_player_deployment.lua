@@ -4,7 +4,7 @@ local old = {
 	update = update
 }
 sbq = {}
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 function init()
 	old.init()
 	message.setHandler("sbqLight", function (_,_, light)

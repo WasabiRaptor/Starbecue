@@ -137,5 +137,5 @@ function update(dt)
 	end
 end
 
-require("/scripts/SBQ_monster_primary.lua")
-require("/scripts/SSVM_compatibility_monster.lua")
+require("/scripts/monster/SBQ_monster_primary.lua")
+require("/scripts/monster/SSVM_compatibility_monster.lua")

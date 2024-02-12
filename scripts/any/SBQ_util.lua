@@ -106,3 +106,7 @@ function sbq.scaleLocal(pos)
 	local scale = sbq.scale()
 	return { pos[1] * facingDirection * scale, pos[2] * scale }
 end
+
+function sbq.logInfo(input)
+	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
+end

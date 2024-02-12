@@ -107,7 +107,7 @@ require("/vehicles/sbq/sbq_occupant_handling.lua")
 require("/vehicles/sbq/sbq_state_control.lua")
 require("/vehicles/sbq/sbq_animation.lua")
 require("/vehicles/sbq/sbq_replaceable_functions.lua")
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 
 require("/vehicles/sbq/sbqOccupantHolder/sbqOH_animation.lua")

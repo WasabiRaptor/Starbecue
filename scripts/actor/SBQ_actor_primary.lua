@@ -6,7 +6,7 @@ sbq = {}
 
 
 require("/scripts/rect.lua")
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 
 local destScale = 1
 local scaleTime = 0
@@ -215,4 +215,4 @@ function update(dt)
 end
 
 
-require("/scripts/SBQ_generate_drop.lua")
+require("/scripts/any/SBQ_generate_drop.lua")

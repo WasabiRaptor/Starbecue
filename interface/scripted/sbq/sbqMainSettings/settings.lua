@@ -6,8 +6,8 @@ widgetScripts = {}
 getWidget = {}
 storage = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
-require("/scripts/SBQ_util.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_util.lua")
 
 function init()
     player.setScriptContext("starbecue")

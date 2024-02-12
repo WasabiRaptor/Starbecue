@@ -323,8 +323,6 @@ local copyList = {
 	"eggify"
 }
 
-require("/scripts/SBQ_species_config.lua")
-
 function sbq.initLocations()
 	for location, data in pairs(sbq.sbqData.locations) do
 		sbq.occupantsPrevVisualSize[location] = 0

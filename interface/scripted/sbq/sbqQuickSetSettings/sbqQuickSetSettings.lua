@@ -6,8 +6,7 @@ sbq = {
 }
 settingsButtonScripts = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
-require("/scripts/SBQ_species_config.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 
 

@@ -1,4 +1,4 @@
-require("/scripts/SBQ_everything_primary.lua")
+require("/scripts/actor/SBQ_actor_primary.lua")
 local old = {
 	init = init,
 	update = update

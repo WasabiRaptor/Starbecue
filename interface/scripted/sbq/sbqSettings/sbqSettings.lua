@@ -13,9 +13,8 @@ sbq = {
 
 mainTabField.subTabs = {}
 
-require("/scripts/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_RPC_handling.lua")
 require("/interface/scripted/sbq/sbqSettings/sbqSettingsEffectsPanel.lua")
-require("/scripts/SBQ_species_config.lua")
 require("/interface/scripted/sbq/sbqSettings/extraTabs.lua")
 require("/interface/scripted/sbq/sbqSettings/autoSetSettings.lua")
 require("/interface/scripted/sbq/sbqSettings/sbqExtraTab.lua")
