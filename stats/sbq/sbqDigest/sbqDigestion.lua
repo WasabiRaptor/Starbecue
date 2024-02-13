@@ -36,7 +36,7 @@ function update(dt)
 			digestRate = 10
 		end
 
-		local digestAmount = (digestRate * dt / (status.stat("sbqDigestResistance") or 1))
+		local digestAmount = (digestRate * dt * status.stat(config.getParameter("resistance") or "sbqDigestResistance"))
 
 		if health[1] > (digestAmount + 1) and not self.digested and health[1] > 1 then
 			if status.statPositive("sbqDisplayEffect") then

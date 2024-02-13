@@ -10,9 +10,11 @@ function sbq.setupPublicSettings()
 	for k, v in pairs(sbq.config.publicSettings) do
 		if v then sbq.publicSettings[k] = sbq.settings[k] end
     end
-    if entityType == "object" then
-		object.setConfigParameter("sbqPublicSettings", sbq.publicSettings)
-	elseif status ~= nil then
-		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
-	end
+	local modifiers = {}
+    for k, v in pairs(sbq.config.statSettings) do
+        table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
+    end
+
+    sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+	sbq.setStatModifiers("sbqStats", modifiers)
 end

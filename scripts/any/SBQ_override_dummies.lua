@@ -1,0 +1,153 @@
+-- dummies to override with entity specific ones
+function sbq.area()
+	return 1
+end
+function sbq.facingDirection()
+	return 1
+end
+function sbq.scale()
+	return 1
+end
+
+function sbq.targetPosition()
+	return entity.position()
+end
+
+function sbq.species()
+	return sbq.voreConfig.species or "sbq_dummy"
+end
+
+function sbq.directory()
+	return "/humanoid/any/"
+end
+
+function sbq.say(line, tags, config)
+end
+
+function sbq.sayPortrait(line, portrait, tags, config)
+end
+
+function sbq.isLounging()
+	return world.entityLoungingIn(entity.id())
+end
+
+function sbq.isLoungeDismountable()
+	local loungeAnchor = world.entityLoungingIn(entity.id())
+	return (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable)
+end
+
+function sbq.setProperty(name, value)
+end
+
+function sbq.stat(name)
+	return storage.stats[name] or 0
+end
+function sbq.statPositive(name)
+	return sbq.stat(name) > 0
+end
+
+function sbq.isResource(name)
+	return storage.resources[name] ~= nil
+end
+function sbq.resource(name)
+	return storage.resources[name]
+end
+function sbq.resourcePositive(name)
+	return storage.resources[name] > 0
+end
+function sbq.setResource(name, value)
+	storage.resources[name] = math.max(0, math.min(value, sbq.resourceMax(name)))
+end
+function sbq.modifyResource(name, value)
+	storage.resources[name] = math.max(0, math.min(storage.resources[name] + value, sbq.resourceMax(name)))
+end
+function sbq.giveResource(name, value)
+	if not sbq.isResource(name) then return 0 end
+	local oldVal = sbq.resource(name)
+    sbq.modifyResource(name, value)
+	return sbq.resource(name) - oldVal
+end
+function sbq.consumeResource(name, value)
+	if not sbq.isResource(name) then return false end
+    if value < 0 then return false end
+	if sbq.resourceLocked(name) then return false end
+	if sbq.resource(name) >= value then
+        sbq.modifyResource(name, -value)
+		return true
+	end
+end
+function sbq.overConsumeResource(name, value)
+	if not sbq.isResource(name) then return false end
+    if value < 0 then return false end
+	if sbq.resourceLocked(name) then return false end
+	sbq.modifyResource(name, -value)
+	return true
+end
+function sbq.resourceLocked(name)
+	return sbq.resourcesLocked[name] or false
+end
+function sbq.setResourceLocked(name,locked)
+	sbq.resourcesLocked[name] = locked
+end
+function sbq.resetResource(name)
+	storage.resources[name] = storage.resourceData[name].initialValue or (storage.resourceData[name].initalPercentage and (storage.resourceData[name].initalPercentage * sbq.resourceMax(name))) or 0
+end
+function sbq.resetAllResources()
+	for name, data in pairs(storage.resourceData) do
+		sbq.resetResource(name)
+	end
+end
+function sbq.resourceMax(name)
+	return (storage.resourceData[name].maxValue or sbq.stat(storage.resourceData[name].maxStat))
+end
+function sbq.resourcePercentage(name)
+	return storage.resources[name] / sbq.resourceMax(name)
+end
+function sbq.setResourcePercentage(name, value)
+	storage.resources[name] = sbq.resourceMax(name) * value
+end
+function sbq.modifyResourcePercentage(name, value)
+	sbq.modifyResource(name, value * sbq.resourceMax(name))
+end
+
+function sbq.setStatModifiers(category, effects)
+    storage.effectCategories[category] = effects
+	sbq.calculateStats()
+end
+
+function sbq.calculateStats()
+	local stats = {}
+	for _, effects in pairs(storage.effectCategories) do
+		for _, effect in ipairs(effects) do
+			if effect.stat then
+                stats[effect.stat] = stats[effect.stat] or {}
+				if effect.baseMultiplier then
+                    stats[effect.stat].baseMultiplier = (stats[effect.stat].baseMultiplier or 1) * effect.baseMultiplier
+				elseif effect.amount then
+					stats[effect.stat].amount = (stats[effect.stat].amount or 0) + effect.amount
+				elseif effect.amount then
+					stats[effect.stat].effectiveMultiplier = (stats[effect.stat].effectiveMultiplier or 1) * effect.effectiveMultiplier
+				end
+			end
+		end
+    end
+	for stat, modifiers in pairs(stats) do
+		storage.stats[stat] = (((storage.baseStats[stat] or 0) * (modifiers.baseMultiplier or 1)) + (modifiers.amount or 0)) * (modifiers.effectiveMultiplier or 1)
+	end
+end
+function sbq.getDefaultResources()
+    local resources = {}
+    for name, data in pairs(storage.resourceData) do
+		resources[name] = data.initialValue or (data.initalPercentage and (data.initalPercentage * sbq.resourceMax(name))) or 0
+	end
+	return resources
+end
+function sbq.resourceDeltas(dt)
+	for name, data in pairs(storage.resourceData) do
+		if data.deltaValue then
+            storage.resources[name] = storage.resources[name] + data.deltaValue * dt
+		elseif data.deltaStat then
+			storage.resources[name] = storage.resources[name] + sbq.stat(data.deltaStat) * dt
+		end
+	end
+end

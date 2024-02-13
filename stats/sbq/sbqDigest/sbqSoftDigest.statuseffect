@@ -1,10 +1,11 @@
 {
 	"name" : "sbqSoftDigest",
-	"blockingStat" : "softDigestImmunity",
 
 	"effectConfig" : {
 		"effect" : "sbqSoftDigest",
 		"digestType" : "digest",
+
+		"resistance" : "sbqDigestResistance",
 
 		"send" : ["food", "health"],
 		"sendMultiplier" : [1,0.5]

@@ -1,5 +1,7 @@
 
-function sbq.setupTransformationMessages()
+function sbq.humanoidInit()
+    sbq.species = humanoid.species
+
 	message.setHandler("sbqDoTransformation", function (_,_, ...)
 		sbq.doTransformation(...)
 	end)
@@ -19,7 +21,10 @@ function sbq.setupTransformationMessages()
 		itemDrop.parameters.predColorMap = speciesFile.baseColorMap
 		world.spawnItem(itemDrop, mcontroller.position())
 	end)
+end
 
+function sbq.directory()
+	return "/humanoid/" .. humanoid.species() .. "/"
 end
 
 

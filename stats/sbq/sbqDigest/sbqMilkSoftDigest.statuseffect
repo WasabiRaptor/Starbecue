@@ -1,15 +1,16 @@
 {
 	"name" : "sbqMilkSoftDigest",
-	"blockingStat" : "milkSoftDigestImmunity",
 
 	"effectConfig" : {
 		"effect" : "sbqMilkSoftDigest",
 		"digestType" : "milkDigest",
 		"gurgledByText" : "Churned By: ",
 
+		"resistance" : "sbqMilkDigestResistance",
+
 		"itemDrop" : "sbqMilkCarton",
 
-		"send" : ["horny"],
+		"send" : ["sbqLust"],
 		"sendMultiplier" : [0.33]
 	},
 	"defaultDuration" : 5,

@@ -168,7 +168,7 @@ function _RadialMenu:cancel()
 end
 function _RadialMenu:openRadialMenu(overrides)
     player.interact("ScriptPane", sb.jsonMerge(
-        root.assetJson("/interface/scripted/sbq/sbqRadialMenu/sbqRadialMenu.config")
+        root.assetJson("/interface/scripted/sbq/sbqRadialMenu/sbqRadialMenu.config"),
 		{
 			selectOnClose = true,
 			default = {

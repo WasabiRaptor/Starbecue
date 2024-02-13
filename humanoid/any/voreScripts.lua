@@ -80,9 +80,10 @@ function default:grab(name, action, target)
 end
 
 function default:grabTarget(name, action, target)
-	if sbq.tryVore(target, action.location or "grabbed", action.throughput or math.huge) then
+	local success, result2 = sbq.tryVore(target, action.location or "grabbed", action.throughput or math.huge)
+	if success then
         world.sendEntityMessage(entity.id(), "sbqControllerRotation", true)
-		return true
+		return success, result2
 	end
 end
 

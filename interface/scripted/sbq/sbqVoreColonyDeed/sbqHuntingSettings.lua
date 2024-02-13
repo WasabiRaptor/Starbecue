@@ -38,11 +38,11 @@ function sbq.npcGeneralBehaviorTab()
 					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hungerLabel or "Hunger"), size = { 40, 10 }, inline = true, visible = hungryVisible },
 					{ visible = hungryVisible, id = "hungerBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hungerColor or { 153, 123, 39 } } },
 				{
-					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.restLabel or "Rest"), size = { 40, 10 }, inline = true, visible = sleepyVisible },
+					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.restLabel or "sbqRest"), size = { 40, 10 }, inline = true, visible = sleepyVisible },
 					{ visible = sleepyVisible, id = "restBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.restColor or { 179, 135, 215 } }
 				},
 				{
-					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "Horny"), size = { 40, 10 }, inline = true, visible = hornyVisible },
+					{ type = "label", text = " " .. (sbq.npcConfig.scriptConfig.hornyLabel or "sbqLust"), size = { 40, 10 }, inline = true, visible = hornyVisible },
 					{ visible = hornyVisible, id = "hornyBar", type = "fillbar", value = 0, color = sbq.npcConfig.scriptConfig.hornyColor or { 226, 109, 215 } }
 				},
 			}},
@@ -114,10 +114,10 @@ function sbq.npcGeneralBehaviorTab()
 		sbq.loopedMessage("getHunger", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"food"}, function (value)
 			hungerBar:setValue(value)
 		end )
-		sbq.loopedMessage("getHorny", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"horny"}, function (value)
+		sbq.loopedMessage("getHorny", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"sbqLust"}, function (value)
 			hornyBar:setValue(value)
 		end)
-		sbq.loopedMessage("getRest", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"rest"}, function (value)
+		sbq.loopedMessage("getRest", sbq.tenant.uniqueId, "sbqGetResourcePercentage", {"sbqRest"}, function (value)
 			restBar:setValue(value)
 		end )
 	end

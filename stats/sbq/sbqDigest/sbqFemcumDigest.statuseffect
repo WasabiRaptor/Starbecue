@@ -1,15 +1,16 @@
 {
 	"name" : "sbqFemcumDigest",
-	"blockingStat" : "femcumDigestImmunity",
 
 	"effectConfig" : {
 		"effect" : "sbqFemcumDigest",
 		"digestType" : "femcumDigest",
 		"gurgledByText" : "Climaxed By: ",
 
+		"resistance" : "sbqFemcumDigestResistance",
+
 		"fatal" : true,
 
-		"send" : ["horny"],
+		"send" : ["sbqLust"],
 		"sendMultiplier" : [0.33]
 	},
 	"defaultDuration" : 5,
@@ -18,6 +19,6 @@
 		"sbqDigestion.lua"
 	],
 
-	"label" : "Converting Into Femcum",
+	"label" : "Melting Into Femcum",
 	"icon" : "/stats/sbq/sbqDigest/sbqCumDigest.png"
 }

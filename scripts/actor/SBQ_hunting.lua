@@ -444,7 +444,7 @@ function sbq.getPredOrPrey()
 		bias = bias + ((1 - status.resourcePercentage("food")) * 0.5)
 	end
 	if storage.isSleepy ~= false then
-		bias = bias + ((1 - status.resourcePercentage("rest")) * 0.5)
+		bias = bias + ((1 - status.resourcePercentage("sbqRest")) * 0.5)
 	end
 	local result = math.max(sbq.predatorSettings.predPreyLeanMin or -1, math.min(sbq.predatorSettings.predPreyLeanMax or 1, (bias or 0) + sbq.getClosestValue(sbq.predatorSettings.predPreyLean or 0, {
 		getPositiveNegativeFloat(),

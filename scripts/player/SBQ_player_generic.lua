@@ -1,21 +1,22 @@
 ---@diagnostic disable: undefined-global
 sbq = {}
-require("/scripts/any/SBQ_RPC_handling.lua")
-require("/scripts/rect.lua")
-require("/scripts/humanoid/SBQ_humanoidAnimator.lua")
-require("/scripts/any/SBQ_vore_main.lua")
-require("/scripts/humanoid/SBQ_humanoid.lua")
-
+require"/scripts/any/SBQ_RPC_handling.lua"
+require"/scripts/rect.lua"
+require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
+require"/scripts/any/SBQ_vore_main.lua"
+require"/scripts/humanoid/SBQ_humanoid.lua"
+require"/scripts/actor/SBQ_vore_actor.lua"
 function init()
-    sbq.targetPosition = player.aimPosition
-	sbq.facingDirection = mcontroller.facingDirection
-	sbq.scale = mcontroller.scale
 	storage = storage or {}
+    storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
+
+    sbq.targetPosition = player.aimPosition
+
     sbq.config = root.assetJson("/sbq.config")
-	sbq.relativePath = "/humanoid/"..humanoid.species().."/"
-	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
+
+    sbq.actorInit()
+	sbq.humanoidInit()
     sbq.init()
-    sbq.setupTransformationMessages()
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )

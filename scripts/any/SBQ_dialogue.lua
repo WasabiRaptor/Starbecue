@@ -18,7 +18,7 @@ function sbq.getDialogueBoxData()
 	dialogueBoxData.settings.race = npc.species()
 	dialogueBoxData.settings.ownerUuid = recruitable.ownerUuid()
 	dialogueBoxData.settings.isFollowing = recruitable.isFollowing()
-	dialogueBoxData.settings.horny = status.resourcePercentage("horny")
+	dialogueBoxData.settings.horny = status.resourcePercentage("sbqLust")
 	dialogueBoxData.settings.food = status.resourcePercentage("food")
 	dialogueBoxData.settings.energy = status.resourcePercentage("energy")
 

@@ -1437,14 +1437,20 @@
 			"foodDelta" : {
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
-			"hornyPassiveLimit" : {
+			"sbqLustScriptMax" : {
 				"baseValue" : 0.5
 			},
-			"hornyDelta" : {
+			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583
 			},
-			"restDelta" : {
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
 				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
 			}
 		},
 		"resources" : {
@@ -1453,11 +1459,13 @@
 				"initialPercentage" : 1.0,
 				"maxValue" : 70
 			},
-			"horny" : {
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
 				"initialPercentage" : 0.0,
 				"maxValue" : 100
 			},
-			"rest" : {
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
 				"initialPercentage" : 1.0,
 				"maxValue" : 100
 			}

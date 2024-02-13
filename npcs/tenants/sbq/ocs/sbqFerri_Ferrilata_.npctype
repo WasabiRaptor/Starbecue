@@ -92,8 +92,8 @@
 							"randomDialogue" : [":defaultGreetingCrew"]
 						}
 					},
-					"percentage" : { "horny" : 0.55, "food" : -0.55 },
-					"horny" : {"replace" : {"randomDialogue" : [":hornyGreeting"]}},
+					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
+					"sbqLust" : {"replace" : {"randomDialogue" : [":hornyGreeting"]}},
 					"food" : {"replace" : {"randomDialogue" : [":hungryGreeting"]}
 					}
 				}
@@ -106,15 +106,15 @@
 					]
 				},
 				"next" : ["percentage","playerRace","isOwner", "otherOptions"],
-				"percentage" : { "horny" : 0.55, "food" : -0.55 },
-				"horny" : {"replace" : {"randomDialogue" : [":hornyConverse"]}},
+				"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
+				"sbqLust" : {"replace" : {"randomDialogue" : [":hornyConverse"]}},
 				"food" : {"replace" : {"randomDialogue" : [":hungryConverse"]}},
 				"sbqHelena_FFWizard" : ".hellhound",
 				"hellhound" : {
 					"replace" : {"randomDialogue":[":hellhoundConverse"]},
 					"next" : "percentage",
-					"percentage" : { "horny" : 0.55, "food" : -0.55 },
-					"horny" : {"replace" : {"randomDialogue" : [":hellhoundHornyConverse"]}},
+					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
+					"sbqLust" : {"replace" : {"randomDialogue" : [":hellhoundHornyConverse"]}},
 					"food" : {"replace" : {"randomDialogue" : [":hellhoundHungryConverse"]}}
 				},
 				"true" : {
@@ -168,8 +168,8 @@
 				"seperateNext" : true,
 				"next" : ["percentage"],
 				"percentage" : {
-					"percentage" : { "horny" : 0.55, "food" : -0.55 },
-					"horny" : {
+					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
+					"sbqLust" : {
 						"replace" : {
 							"randomDialogue" : [":hornyCurious"]
 						},
@@ -224,8 +224,8 @@
 						"jump" : ".curious.questionAnswered"
 					},
 					"next" : ["percentage","locationEffectSlot"],
-					"percentage" : { "horny" : 0.55, "food" : -0.55 },
-					"horny" : {"replace" : {"randomDialogue" : [":hornyCuriousBelly"]}},
+					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
+					"sbqLust" : {"replace" : {"randomDialogue" : [":hornyCuriousBelly"]}},
 					"food" : {"replace" : {"randomDialogue" : [":hungryCuriousBelly"]}},
 					"heal" : {"replace" : { "randomDialogue" : [":curiousBellyHeal"]}},
 					"dDigest" : {"replace" : { "randomDialogue" : [":curiousBellyDigest"]}},
@@ -3424,14 +3424,20 @@
 			"foodDelta" : {
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
-			"hornyPassiveLimit" : {
+			"sbqLustScriptMax" : {
 				"baseValue" : 0.5
 			},
-			"hornyDelta" : {
+			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583
 			},
-			"restDelta" : {
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
 				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
 			}
 		},
 		"resources" : {
@@ -3440,11 +3446,13 @@
 				"initialPercentage" : 1.0,
 				"maxValue" : 70
 			},
-			"horny" : {
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
 				"initialPercentage" : 0.0,
 				"maxValue" : 100
 			},
-			"rest" : {
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
 				"initialPercentage" : 1.0,
 				"maxValue" : 100
 			}

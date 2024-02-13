@@ -69,5 +69,37 @@
 		{ "op" : "add", "path" : "/species/-","value" : "sbqFerri_Ferrilata_" },
 		{ "op" : "add", "path" : "/species/-","value" : "catfox" },
 		{ "op" : "add", "path" : "/species/-","value" : "sbqAkari_AkariKaen" }
-	]
+	],
+
+	{ "op" : "merge", "path" : "/statusControllerSettings", "value" : {
+		"stats" : {
+			"sbqLustScriptMax" : {
+				"baseValue" : 0.5
+			},
+			"sbqLustScriptDelta" : {
+				"baseValue" : 0.0583
+			},
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
+				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
+			}
+		},
+		"resources" : {
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
+			}
+		}
+	}}
 ]
