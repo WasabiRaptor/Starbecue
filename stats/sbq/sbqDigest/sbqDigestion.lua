@@ -28,65 +28,61 @@ function init()
 end
 
 function update(dt)
-	if world.entityExists(effect.sourceEntity()) and (effect.sourceEntity() ~= entity.id()) then
 
-		local health = world.entityHealth(entity.id())
-		local digestRate = 1
-		if self.turboDigest then
-			digestRate = 10
-		end
+	local health = world.entityHealth(entity.id())
+	local digestRate = 1
+	if self.turboDigest then
+		digestRate = 10
+	end
 
-		local digestAmount = (digestRate * dt * status.stat(config.getParameter("resistance") or "sbqDigestResistance"))
+	local digestAmount = (digestRate * dt * status.stat(config.getParameter("resistance") or "sbqDigestResistance"))
 
-		if health[1] > (digestAmount + 1) and not self.digested and health[1] > 1 then
-			if status.statPositive("sbqDisplayEffect") then
-				digestAmount = digestAmount + self.cdamage
-				if digestAmount >= 1 then
-					self.cdamage = digestAmount % 1
-					digestAmount = math.floor(digestAmount)
-					status.applySelfDamageRequest({
-						damageType = "IgnoresDef",
-						damage = digestAmount,
-						damageSourceKind = "poison",
-						sourceEntityId = entity.id()
-					})
-				else
-					self.cdamage = digestAmount
-					digestAmount = 0
-				end
+	if health[1] > (digestAmount + 1) and not self.digested and health[1] > 1 then
+		if status.statPositive("sbqDisplayEffect") then
+			digestAmount = digestAmount + self.cdamage
+			if digestAmount >= 1 then
+				self.cdamage = digestAmount % 1
+				digestAmount = math.floor(digestAmount)
+				status.applySelfDamageRequest({
+					damageType = "IgnoresDef",
+					damage = digestAmount,
+					damageSourceKind = "poison",
+					sourceEntityId = entity.id()
+				})
 			else
-				status.modifyResource("health", -digestAmount)
+				self.cdamage = digestAmount
+				digestAmount = 0
 			end
-			if self.send and (digestAmount > 0) then
-				world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", digestAmount, self.send, self.sendMultiplier )
-			end
-		elseif not self.digested then
-			self.cdt = 0
-			self.targetTime = 2
-			effect.modifyDuration(2+1)
-
-			self.turboDigest = false
-			self.digested = true
-			world.sendEntityMessage(effect.sourceEntity(), self.digestMessage or (self.fatal and "sbqDigest" ) or "sbqSoftDigest", entity.id())
-			status.setResource("health", 1)
 		else
-			self.turboDigest = false
-			self.cdt = self.cdt + dt
-			if self.cdt >= self.targetTime then
-				doItemDrop()
-				if self.fatal then
-					local entityType = world.entityType(entity.id())
-					if entityType == "npc" or entityType == "monster" then
-						world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
-					end
-					status.setResource("health", -1)
-					return
-				end
-			end
-			status.setResource("health", 1)
+			status.modifyResource("health", -digestAmount)
 		end
+		if self.send and (digestAmount > 0) then
+			world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", digestAmount, self.send, self.sendMultiplier )
+		end
+	elseif not self.digested then
+		self.cdt = 0
+		self.targetTime = 2
+		effect.modifyDuration(2+1)
+
+		self.turboDigest = false
+		self.digested = true
+		world.sendEntityMessage(effect.sourceEntity(), self.digestMessage or (self.fatal and "sbqDigest" ) or "sbqSoftDigest", entity.id())
+		status.setResource("health", 1)
 	else
-		effect.expire()
+		self.turboDigest = false
+		self.cdt = self.cdt + dt
+		if self.cdt >= self.targetTime then
+			doItemDrop()
+			if self.fatal then
+				local entityType = world.entityType(entity.id())
+				if entityType == "npc" or entityType == "monster" then
+					world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
+				end
+				status.setResource("health", -1)
+				return
+			end
+		end
+		status.setResource("health", 1)
 	end
 end
 

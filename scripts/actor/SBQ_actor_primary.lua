@@ -91,15 +91,10 @@ function init()
 	end)
 
 	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)
-		local amountRemaining = amount
 		for i, resource in ipairs(resources or {}) do
-			if amountRemaining <= 0 then break end
-			if status.isResource(resource) then
-				local mul = ((multipliers or {})[i] or 1)
-				local before = status.resource(resource) / mul
-				status.giveResource(resource, (amountRemaining * mul))
-				amountRemaining = (before + amountRemaining) - (status.resourceMax(resource) / mul)
-			end
+			if amount <= 0 then break end
+			local mul = ((multipliers or {})[i] or 1)
+			amount = amount - (status.giveResource(resource, (amount * mul)) / mul)
 		end
 	end)
 	message.setHandler("sbqTakeFromResources", function(_, _, amount, resources, multipliers, thresholds)

@@ -98,15 +98,18 @@ function sbq.resetAllResources()
 	end
 end
 function sbq.resourceMax(name)
-	return (storage.resourceData[name].maxValue or sbq.stat(storage.resourceData[name].maxStat))
+	return (storage.resourceData[name].maxValue or (storage.resourceData[name].maxStat and sbq.stat(storage.resourceData[name].maxStat))) or math.huge
 end
 function sbq.resourcePercentage(name)
+	if sbq.resourceMax(name) == math.huge then sb.logError(("resourcePercentage called on resource '%s' which has no maximum").format(name)) return 0 end
 	return storage.resources[name] / sbq.resourceMax(name)
 end
 function sbq.setResourcePercentage(name, value)
+	if sbq.resourceMax(name) == math.huge then sb.logError(("setResourcePercentage called on resource '%s' which has no maximum").format(name)) return end
 	storage.resources[name] = sbq.resourceMax(name) * value
 end
 function sbq.modifyResourcePercentage(name, value)
+	if sbq.resourceMax(name) == math.huge then sb.logError(("modifyResourcePercentage called on resource '%s' which has no maximum").format(name)) return end
 	sbq.modifyResource(name, value * sbq.resourceMax(name))
 end
 
