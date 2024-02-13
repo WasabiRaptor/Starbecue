@@ -113,29 +113,29 @@ function sbq.modifyResourcePercentage(name, value)
 	sbq.modifyResource(name, value * sbq.resourceMax(name))
 end
 
-function sbq.setStatModifiers(category, effects)
-    storage.effectCategories[category] = effects
+function sbq.setStatModifiers(category, modifiers)
+    storage.effectCategories[category] = modifiers
 	sbq.calculateStats()
 end
 
 function sbq.calculateStats()
 	local stats = {}
-	for _, effects in pairs(storage.effectCategories) do
-		for _, effect in ipairs(effects) do
-			if effect.stat then
-                stats[effect.stat] = stats[effect.stat] or {}
-				if effect.baseMultiplier then
-                    stats[effect.stat].baseMultiplier = (stats[effect.stat].baseMultiplier or 1) * effect.baseMultiplier
-				elseif effect.amount then
-					stats[effect.stat].amount = (stats[effect.stat].amount or 0) + effect.amount
-				elseif effect.amount then
-					stats[effect.stat].effectiveMultiplier = (stats[effect.stat].effectiveMultiplier or 1) * effect.effectiveMultiplier
+	for _, modifiers in pairs(storage.effectCategories) do
+		for _, modifier in ipairs(modifiers) do
+			if modifier.stat then
+                stats[modifier.stat] = stats[modifier.stat] or {baseModified = storage.baseStats[modifier.stat] or 0, effectiveMultiplier = 1}
+				if modifier.baseMultiplier then
+                    stats[modifier.stat].baseModified = stats[modifier.stat].baseModified + (storage.baseStats[modifier.stat] * (modifier.baseMultiplier - 1))
+				elseif modifier.amount then
+					stats[modifier.stat].baseModified = stats[modifier.stat].baseModified + modifier.amount
+				elseif modifier.effectiveMultiplier then
+					stats[modifier.stat].effectiveMultiplier = stats[modifier.stat].effectiveMultiplier * modifier.effectiveMultiplier
 				end
 			end
 		end
     end
 	for stat, modifiers in pairs(stats) do
-		storage.stats[stat] = (((storage.baseStats[stat] or 0) * (modifiers.baseMultiplier or 1)) + (modifiers.amount or 0)) * (modifiers.effectiveMultiplier or 1)
+		storage.stats[stat] = modifiers.baseModified * modifiers.effectiveMultiplier
 	end
 end
 function sbq.getDefaultResources()
