@@ -6,8 +6,14 @@ sbq = {}
 
 require"/scripts/any/SBQ_RPC_handling.lua"
 
+require "/scripts/any/SBQ_override_dummies.lua"
+require "/scripts/actor/SBQ_actor.lua"
+require "/scripts/any/SBQ_public_settings.lua"
+
 function init()
     old.init()
+	sbq.actorInit()
+	sbq.setupPublicSettings()
 
 	sbq.say = monster.say
     sbq.sayPortrait = monster.sayPortrait

@@ -107,6 +107,18 @@ function sbq.scaleLocal(pos)
 	return { pos[1] * facingDirection * scale, pos[2] * scale }
 end
 
+function sbq.globalPartPoint(part, property)
+	vec2.add(entity.position(), animator.partPoint(part, property))
+end
+
 function sbq.logInfo(input)
 	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
+end
+
+function sbq.reloadStatModifiers()
+	local modifiers = {}
+    for k, v in pairs(sbq.config.statSettings) do
+        table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
+    end
+	sbq.setStatModifiers("sbqStats", modifiers)
 end

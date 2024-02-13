@@ -37,19 +37,19 @@ Occupants = {
 
 function controlPressed(seat, control, time)
 	if Transformation.active and Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
-	sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
+	-- sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
 function controlReleased(seat, control, time)
 	if Transformation.active and Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
-	sb.logInfo("Released:"..sb.printJson({seat,control,time}))
+	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
 
 function sbq.init()
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
 		Occupants.addOccupant(...)
 	end)
-	message.setHandler("sbqTryAction", function(_, _, ...)
-		sbq.tryAction(...)
+	message.setHandler("sbqTryAction", function(_, _, action, target, ...)
+		sbq.tryAction(action, target, ...)
 	end)
 	sbq.reloadVoreConfig(storage.lastVoreConfig)
 
@@ -95,11 +95,11 @@ function sbq.size()
 	return math.sqrt(sbq.area()) / sbq.config.sizeConstant
 end
 
-function sbq.getSize(target)
+function sbq.getSize(entityId)
 	if world.entityType(entityId) == "object" then
 		return math.sqrt(#world.objectSpaces()) / sbq.config.sizeConstant
 	end
-	return math.sqrt(world.entityArea(target)) / sbq.config.sizeConstant
+	return math.sqrt(world.entityArea(entityId)) / sbq.config.sizeConstant
 end
 
 function sbq.getSettings(entityId)
@@ -171,7 +171,7 @@ function sbq.reloadVoreConfig(config)
     for k, v in pairs(sbq.config.statSettings) do
         table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
     end
-	sbq.setStatModifiers("sbqStats", modifiers)
+	sbq.reloadStatModifiers()
 
 	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates) do
 		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
@@ -184,12 +184,12 @@ function sbq.reloadVoreConfig(config)
 	Transformation.active = true
 end
 
-function sbq.tryAction(...)
-	return {Transformation:tryAction(...)}
+function sbq.tryAction(action, target, ...)
+	return {Transformation:tryAction(action, target, ...)}
 end
 
-function sbq.actionAvailable(...)
-	return Transformation:actionAvailable(...)
+function sbq.actionAvailable(action, target, ...)
+	return Transformation:actionAvailable(action, target, ...)
 end
 
 
@@ -208,6 +208,9 @@ function sbq.setSetting(k, v)
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+    end
+	if sbq.config.statSettings[k] then
+		sbq.reloadStatModifiers()
 	end
 end
 
@@ -279,18 +282,25 @@ function _Transformation:getLocation(...)
 	return self.state:getLocation(...)
 end
 
-function _Transformation:tryAction(...)
-	return self.state:tryAction(...)
+function _Transformation:tryAction(action, target, ...)
+	return self.state:tryAction(action, target, ...)
 end
 
-function _Transformation:actionAvailable(...)
-	return self.state:actionAvailable(...)
+function _Transformation:actionAvailable(action, target, ...)
+	return self.state:actionAvailable(action, target, ...)
 end
 
 function _Transformation:doAnimations(...)
 	return self.state:doAnimations(...)
 end
 
+function _Transformation:checkAnimations(...)
+	return self.state:checkAnimations(...)
+end
+
+function _Transformation:interact(...)
+	return self.state:interact(...)
+end
 
 function _Transformation:changeState(stateName)
 	local state = States[stateName]
@@ -314,16 +324,16 @@ function States.addState(stateName, config)
 		for k2, subLocation in pairs(location.subLocations or {}) do
 			state.locations[k].subLocations[k2] = state.locations[k].subLocations[k2] or {}
 			state.locations[k].subLocations[k2].struggleActions = state.locations[k].subLocations[k2].struggleActions or {}
-			for _, struggleAction in pairs(state.locations[k].subLocations[k2].struggleActions) do
-				if state.locations[k].subLocations[k2].struggleActions.any then
+			for actionName, struggleAction in pairs(state.locations[k].subLocations[k2].struggleActions) do
+				if state.locations[k].subLocations[k2].struggleActions.any and actionName ~= "any" then
 					setmetatable(struggleAction, {__index = state.locations[k].subLocations[k2].struggleActions.any})
 				end
 			end
 			setmetatable(state.locations[k].subLocations[k2], { __index = subLocation })
 		end
 		state.locations[k].struggleActions = state.locations[k].struggleActions or {}
-		for _, struggleAction in pairs(state.locations[k].struggleActions) do
-			if state.locations[k].struggleActions.any then
+		for actionName, struggleAction in pairs(state.locations[k].struggleActions) do
+			if state.locations[k].struggleActions.any and actionName ~= "any" then
 				setmetatable(struggleAction, {__index = state.locations[k].struggleActions.any})
 			end
 		end
@@ -400,11 +410,23 @@ function _State:actionFailed(name, action, target, reason, ...)
 	return result1, reason, ...
 end
 
-function _State:actionAvailable(name)
+function _State:actionAvailable(name, target, ...)
 	if not name then return false end
 	local action = self.actions[name]
-	if not action then return false end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return false end
+	if not action then return false, "missingAction" end
+    if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return false, "settingsMismatch" end
+	if target and action.targetSettings then
+		if not world.entityExists(target) then return false, "targetMissing" end
+		local targetSettings = sbq.getSettings(target)
+		if not sbq.tableMatches(action.targetSettings, targetSettings) then return false, "targetSettingsMismatch" end
+    end
+	if action.availableScript then
+		if self[action.availableScript] then
+			return self[action.availableScript](self, name, action, target, ...)
+		else
+			return false, "missingScript"
+		end
+	end
 	return true
 end
 
@@ -463,8 +485,66 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 			local timer = animator.animationTimer(state, anim)
 			longest = math.max(longest, timer[2] - timer[1])
 		end
+    end
+	return longest
+end
+
+function _State:interact(args)
+	-- find closest interaction point, 4d voronoi style
+	local pos = sbq.globalToLocal(args.sourcePosition)
+	local aim = sbq.globalToLocal(args.interactPosition)
+	local closest = nil
+	local distance = math.huge
+	for _,v in pairs(self.interactActions or {}) do
+		local p = v.pos
+        local a = v.aim
+		if v.partAnchor then
+            p = animator.transformPoint(v.partAnchor, v.pos)
+			a = animator.transformPoint(v.partAnchor, v.aim)
+        end
+		-- check if there either point must be within a radius
+		local valid = true
+		if valid and v.posRadius then
+			valid = (v.posRadius > vec2.mag(vec2.sub(p, pos)))
+        end
+		if valid and v.aimRadius then
+			valid = (v.aimRadius > vec2.mag(vec2.sub(a, aim)))
+        end
+		if valid then
+			if not p and not a then
+				-- no pos or aim, just make this one happen
+				p = pos
+				a = aim
+			elseif a and not p then
+				-- pos isn't specified, default to same as aim but less weight
+				p = {
+					(a[1] + pos[1])/2,
+					(a[2] + pos[2])/2
+				}
+			elseif p and not a then
+				-- aim isn't specified, default to same as pos but less weight
+				a = {
+					(p[1] + aim[1])/2,
+					(p[2] + aim[2])/2
+				}
+			end
+			local d = math.sqrt(
+				(pos[1] - p[1])^2 +
+				(pos[2] - p[2])^2 +
+				(aim[1] - a[1])^2 +
+				(aim[2] - a[2])^2
+			)
+			if d < distance then
+				distance = d
+				closest = v
+			end
+		end
+    end
+	if closest then
+		Transformation:tryAction(closest.action, args.sourceId, table.unpack(closest.args or {}))
 	end
 end
+
 
 -- Location handling
 function Locations.addLocation(name, config)
@@ -694,7 +774,8 @@ function _Location:refreshStruggleDirection(id)
 	end
 end
 function _Location:getStruggleAction(direction)
-	if not direction then return end
+    if not direction then return end
+	direction = string.lower(direction)
 	local newDirection = direction
 	if direction == "left" then
 		newDirection = sbq.facingRight and "back" or "front"
@@ -824,7 +905,8 @@ function _Occupant:update(dt)
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat.."State") then
 		self:setHidden(animator.partProperty(self.seat, "hidden"))
-		self:setLoungeDance(animator.partProperty(self.seat, "dance"))
+        self:setLoungeDance(animator.partProperty(self.seat, "dance"))
+		self:setLoungeEmote(animator.partProperty(self.seat, "emote"))
 	end
 	local locationStore = self.locationStore[self.location]
 
@@ -850,56 +932,6 @@ function _Occupant:update(dt)
 		end
 	end
 	self:checkStruggleDirection(dt)
-end
-
-function _Occupant:setLoungeEnabled(...)
-	return loungeable.setLoungeEnabled(self.seat, ...)
-end
-function _Occupant:setDismountable(...)
-	return loungeable.setDismountable(self.seat, ...)
-end
-function _Occupant:setItemBlacklist(...)
-	return loungeable.setItemBlacklist(self.seat, ...)
-end
-function _Occupant:setItemWhitelist(...)
-	return loungeable.setItemWhitelist(self.seat, ...)
-end
-function _Occupant:setItemTagBlacklist(...)
-	return loungeable.setItemTagBlacklist(self.seat, ...)
-end
-function _Occupant:setItemTagWhitelist(...)
-	return loungeable.setItemTagWhitelist(self.seat, ...)
-end
-function _Occupant:setItemTypeBlacklist(...)
-	return loungeable.setItemTypeBlacklist(self.seat, ...)
-end
-function _Occupant:setItemTypeWhitelist(...)
-	return loungeable.setItemTypeWhitelist(self.seat, ...)
-end
-function _Occupant:setToolUsageSuppressed(...)
-	return loungeable.setToolUsageSuppressed(self.seat, ...)
-end
-function _Occupant:controlHeld(...)
-	return loungeable.controlHeld(self.seat, ...)
-end
-function _Occupant:controlHeldTime(...)
-	return loungeable.controlHeldTime(self.seat, ...)
-end
-function _Occupant:setLoungeStatusEffects(...)
-	return loungeable.setLoungeStatusEffects(self.seat, ...)
-end
-function _Occupant:setHidden(...)
-	return loungeable.setHidden(self.seat, ...)
-end
-function _Occupant:getLoungeIndex()
-	return loungeable.getIndexFromName(self.seat)
-end
-
-function _Occupant:controlPressed(control, time)
-	self.attemptStruggle(control)
-end
-function _Occupant:controlReleased(control, time)
-	self.releaseStruggle(control)
 end
 
 function _Occupant:refreshLocation(name, subLocation)
@@ -1035,16 +1067,16 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		Transformation:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
 	end
-	self.struggleTime = self.struggleTime + bonusTime
-	self.struggleCount = self.struggleCount + inc
-	locationStore = locationStore.struggleCount + inc
+	self.struggleTime = (self.struggleTime or 0) + bonusTime
+	self.struggleCount = (self.struggleCount or 0) + inc
+	locationStore = (locationStore.struggleCount or 0) + inc
 	if self.struggleAction.action then
 		local timeSucceeded = self.struggleTime >= math.random(table.unpack(self.struggleAction.time or { 0, 0 }))
 		local countSucceeded = self.struggleCount >= math.random(table.unpack(self.struggleAction.count or { 0, 0 }))
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then
-			Transformation:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.actionArgs or {}))
+			Transformation:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {}))
 		end
 	end
 end
@@ -1054,4 +1086,71 @@ function _Occupant:setProgressBar(name, args, callback, progress)
 	self.progressBar.args = args
 	self.progressBar.name = name
 	self.progressBar.callback = callback
+end
+function _Occupant:controlPressed(control, time)
+	self:attemptStruggle(control)
+end
+function _Occupant:controlReleased(control, time)
+	self:releaseStruggle(control)
+end
+
+function _Occupant:controlHeld(...)
+	return loungeable.controlHeld(self.seat, ...)
+end
+function _Occupant:controlHeldTime(...)
+	return loungeable.controlHeldTime(self.seat, ...)
+end
+function _Occupant:aimPosition(...)
+	return loungeable.aimPosition(self.seat, ...)
+end
+function _Occupant:entityLoungingIn(...)
+	return loungeable.entityLoungingIn(self.seat, ...)
+end
+function _Occupant:setLoungeEnabled(...)
+	return loungeable.setLoungeEnabled(self.seat, ...)
+end
+function _Occupant:setLoungeOrientation(...)
+	return loungeable.setLoungeOrientation(self.seat, ...)
+end
+function _Occupant:setLoungeEmote(...)
+	return loungeable.setLoungeEmote(self.seat, ...)
+end
+function _Occupant:setLoungeDance(...)
+	return loungeable.setLoungeDance(self.seat, ...)
+end
+function _Occupant:setLoungeDirectives(...)
+	return loungeable.setLoungeDirectives(self.seat, ...)
+end
+function _Occupant:setLoungeStatusEffects(...)
+	return loungeable.setLoungeStatusEffects(self.seat, ...)
+end
+function _Occupant:setToolUsageSuppressed(...)
+	return loungeable.setToolUsageSuppressed(self.seat, ...)
+end
+function _Occupant:setDismountable(...)
+	return loungeable.setDismountable(self.seat, ...)
+end
+function _Occupant:setHidden(...)
+	return loungeable.setHidden(self.seat, ...)
+end
+function _Occupant:setItemBlacklist(...)
+	return loungeable.setItemBlacklist(self.seat, ...)
+end
+function _Occupant:setItemWhitelist(...)
+	return loungeable.setItemWhitelist(self.seat, ...)
+end
+function _Occupant:setItemTagBlacklist(...)
+	return loungeable.setItemTagBlacklist(self.seat, ...)
+end
+function _Occupant:setItemTagWhitelist(...)
+	return loungeable.setItemTagWhitelist(self.seat, ...)
+end
+function _Occupant:setItemTypeBlacklist(...)
+	return loungeable.setItemTypeBlacklist(self.seat, ...)
+end
+function _Occupant:setItemTypeWhitelist(...)
+	return loungeable.setItemTypeWhitelist(self.seat, ...)
+end
+function _Occupant:getLoungeIndex()
+	return loungeable.getIndexFromName(self.seat)
 end
