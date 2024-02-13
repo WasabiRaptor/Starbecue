@@ -111,6 +111,10 @@ function sbq.globalPartPoint(part, property)
 	vec2.add(entity.position(), animator.partPoint(part, property))
 end
 
+function sbq.localPartPoint(part, property)
+	animator.transformPoint(part, animator.partProperty(part, property))
+end
+
 function sbq.logInfo(input)
 	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
 end

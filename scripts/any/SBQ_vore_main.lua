@@ -302,6 +302,10 @@ function _Transformation:interact(...)
 	return self.state:interact(...)
 end
 
+function _Transformation:emergencyEscape(...)
+	return self.state:emergencyEscape(...)
+end
+
 function _Transformation:changeState(stateName)
 	local state = States[stateName]
 	if not state then sbq.logError("Attempt to switch to invalid state: " .. stateName) return false end
@@ -495,20 +499,22 @@ function _State:interact(args)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
-	for _,v in pairs(self.interactActions or {}) do
-		local p = v.pos
-        local a = v.aim
-		if v.partAnchor then
-            p = animator.transformPoint(v.partAnchor, v.pos)
-			a = animator.transformPoint(v.partAnchor, v.aim)
-        end
+    for _, v in pairs(self.interactActions or {}) do
+		local p
+        local a
+		if (v.posPart or v.part) and v.pos then
+			p = sbq.localPartPoint(v.posPart or v.part, v.pos)
+		end
+		if (v.aimPart or v.part) and v.aim then
+			a = sbq.localPartPoint(v.aimPart or v.part, v.aim)
+		end
 		-- check if there either point must be within a radius
 		local valid = true
-		if valid and v.posRadius then
-			valid = (v.posRadius > vec2.mag(vec2.sub(p, pos)))
+		if valid and (v.posRadius or v.radius) then
+			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
         end
-		if valid and v.aimRadius then
-			valid = (v.aimRadius > vec2.mag(vec2.sub(a, aim)))
+		if valid and (v.aimRadius or v.radius) then
+			valid = ((v.aimRadius or v.radius) > vec2.mag(vec2.sub(a, aim)))
         end
 		if valid then
 			if not p and not a then
@@ -543,6 +549,11 @@ function _State:interact(args)
 	if closest then
 		Transformation:tryAction(closest.action, args.sourceId, table.unpack(closest.args or {}))
 	end
+end
+
+function _State:emergencyEscape(occupant)
+	world.spawnProjectile("sbqMemeExplosion", occupant:position())
+    occupant:remove()
 end
 
 
@@ -752,10 +763,10 @@ function _Location:refreshStruggleDirection(id)
 		elseif newVec[2] > 0 then -- right struggle
 			newDirection = "up"
 		end
-	end
-	if newDirection ~= oldDirection then
-		self.occupancy.struggleDirection = newDirection
-		local struggleAction, direction = self:getStruggleAction(newDirection)
+    end
+	local struggleAction, direction = self:getStruggleAction(newDirection)
+	if direction ~= oldDirection then
+		self.occupancy.struggleDirection = direction
 		self.occupancy.struggleAction = struggleAction
 		local newAnims = {}
 		if struggleAction then
@@ -903,7 +914,7 @@ function _Occupant:update(dt)
 	if not world.entityExists(self.entityId) then self:remove() end
 	local location = self:getLocation()
 	if location.occupancy.settingsDirty then self:refreshLocation() end
-	if not animator.animationEnded(self.seat.."State") then
+    if not animator.animationEnded(self.seat .. "State") then
 		self:setHidden(animator.partProperty(self.seat, "hidden"))
         self:setLoungeDance(animator.partProperty(self.seat, "dance"))
 		self:setLoungeEmote(animator.partProperty(self.seat, "emote"))
@@ -1088,12 +1099,24 @@ function _Occupant:setProgressBar(name, args, callback, progress)
 	self.progressBar.callback = callback
 end
 function _Occupant:controlPressed(control, time)
+	if control == "Jump" then
+        if self:controlHeld("Left") and self:controlHeld("Right") then
+			Transformation:emergencyEscape(occupant)
+			return
+		end
+	end
 	self:attemptStruggle(control)
 end
 function _Occupant:controlReleased(control, time)
 	self:releaseStruggle(control)
 end
 
+function _Occupant:position()
+	return sbq.globalPartPoint(self.seat, "loungePosition")
+end
+function _Occupant:localPosition()
+	return sbq.localPartPoint(self.seat, "loungePosition")
+end
 function _Occupant:controlHeld(...)
 	return loungeable.controlHeld(self.seat, ...)
 end
@@ -1153,4 +1176,11 @@ function _Occupant:setItemTypeWhitelist(...)
 end
 function _Occupant:getLoungeIndex()
 	return loungeable.getIndexFromName(self.seat)
+end
+
+function _Occupant:logInfo(json)
+	sbq.logInfo("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+end
+function _Occupant:logError(json)
+	sbq.logError("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
 end
