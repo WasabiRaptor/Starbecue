@@ -1,5 +1,5 @@
 local old = {
-    init = init,
+	init = init,
 	update = update
 }
 sbq = {}
@@ -11,18 +11,17 @@ require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/any/SBQ_public_settings.lua"
 
 function init()
-    old.init()
+	old.init()
 	sbq.actorInit()
 	sbq.setupPublicSettings()
 
 	sbq.say = monster.say
-    sbq.sayPortrait = monster.sayPortrait
+	sbq.sayPortrait = monster.sayPortrait
 
 
 	if self.behavior then
 		local behavior = {}
 		local _behavior = self.behavior
-		setmetatable(behavior, {__index = _behavior})
 		function behavior:run(...)
 			if sbq.isLoungeDismountable() then
 				return _behavior:run(...)
@@ -34,6 +33,9 @@ function init()
 		function behavior:blackboard(...)
 			return _behavior:blackboard(...)
 		end
+		function behavior:clear(...)
+			return _behavior:clear(...)
+		end
 		self.behavior = behavior
 	end
 end
@@ -44,6 +46,6 @@ end
 
 function update(dt)
 	sbq.checkRPCsFinished(dt)
-    sbq.checkTimers(dt)
+	sbq.checkTimers(dt)
 	old.update(dt)
 end

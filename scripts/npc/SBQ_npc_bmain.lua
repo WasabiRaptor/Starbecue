@@ -16,10 +16,10 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 
 	sbq.say = npc.say
-    sbq.sayPortrait = npc.sayPortrait
+	sbq.sayPortrait = npc.sayPortrait
 
 	sbq.actorInit()
-    sbq.humanoidInit()
+	sbq.humanoidInit()
 	sbq.setupPublicSettings()
 
 	message.setHandler("sbqInteract", function(_, _, pred, predData)
@@ -31,7 +31,6 @@ function init()
 	if self.behavior then
 		local behavior = {}
 		local _behavior = self.behavior
-		setmetatable(behavior, {__index = _behavior})
 		function behavior:run(...)
 			if sbq.isLoungeDismountable() then
 				_behavior:run(...)
@@ -42,6 +41,9 @@ function init()
 		-- the metatable __index on this table seems to not get this so I have to define it
 		function behavior:blackboard(...)
 			return _behavior:blackboard(...)
+		end
+		function behavior:clear(...)
+			return _behavior:clear(...)
 		end
 		self.behavior = behavior
 	end
