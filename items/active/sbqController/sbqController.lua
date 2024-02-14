@@ -16,7 +16,10 @@ function init()
 
     message.setHandler("sbqControllerRotation", function(_, _, enabled)
 		sbq.rotationEnabled = enabled
-		activeItem.setHoldingItem(enabled)
+        activeItem.setHoldingItem(enabled)
+		if not enabled then
+			activeItem.setFacingDirection(0)
+		end
 	end)
 
     message.setHandler("sbqControllerRadialMenuScript", function(_, _, script, ...)
