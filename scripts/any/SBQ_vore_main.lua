@@ -103,9 +103,9 @@ function sbq.getSize(entityId)
 end
 
 function sbq.getSettings(entityId)
-    if world.entityType(entityId) == "object" then
+	if world.entityType(entityId) == "object" then
 		return world.getObjectParameter(entityId, "sbqPublicSettings")
-    end
+	end
 	return world.getStatusProperty(entityId, "sbqPublicSettings")
 end
 
@@ -168,9 +168,9 @@ function sbq.reloadVoreConfig(config)
 	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 
 	local modifiers = {}
-    for k, v in pairs(sbq.config.statSettings) do
-        table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
-    end
+	for k, v in pairs(sbq.config.statSettings) do
+		table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
+	end
 	sbq.reloadStatModifiers()
 
 	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates) do
@@ -208,7 +208,7 @@ function sbq.setSetting(k, v)
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-    end
+	end
 	if sbq.config.statSettings[k] then
 		sbq.reloadStatModifiers()
 	end
@@ -368,6 +368,13 @@ function _State:tryAction(name, target, ...)
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
 		local targetSettings = sbq.getSettings(target)
 		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, "targetSettingsMismatch", ...) end
+		if not action.ignoreTargetOccupants then
+			local targetOccupants = world.entitiesLounging(target)
+			for _, occupant in ipairs(targetOccupants or {}) do
+				local occupantSettings = sbq.getSettings(occupant)
+				if not sbq.tableMatches(action.targetSettings, occupantSettings) then return self:actionFailed(name, action, target, "targetPreySettingsMismatch", ...) end
+			end
+		end
 	end
 	local result1, result2 = true, false
 	if action.script then
@@ -418,12 +425,12 @@ function _State:actionAvailable(name, target, ...)
 	if not name then return false end
 	local action = self.actions[name]
 	if not action then return false, "missingAction" end
-    if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return false, "settingsMismatch" end
+	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return false, "settingsMismatch" end
 	if target and action.targetSettings then
 		if not world.entityExists(target) then return false, "targetMissing" end
 		local targetSettings = sbq.getSettings(target)
 		if not sbq.tableMatches(action.targetSettings, targetSettings) then return false, "targetSettingsMismatch" end
-    end
+	end
 	if action.availableScript then
 		if self[action.availableScript] then
 			return self[action.availableScript](self, name, action, target, ...)
@@ -489,7 +496,7 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 			local timer = animator.animationTimer(state, anim)
 			longest = math.max(longest, timer[2] - timer[1])
 		end
-    end
+	end
 	return longest
 end
 
@@ -499,9 +506,9 @@ function _State:interact(args)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
-    for _, v in pairs(self.interactActions or {}) do
+	for _, v in pairs(self.interactActions or {}) do
 		local p
-        local a
+		local a
 		if (v.posPart or v.part) and v.pos then
 			p = sbq.localPartPoint(v.posPart or v.part, v.pos)
 		end
@@ -512,10 +519,10 @@ function _State:interact(args)
 		local valid = true
 		if valid and (v.posRadius or v.radius) then
 			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
-        end
+		end
 		if valid and (v.aimRadius or v.radius) then
 			valid = ((v.aimRadius or v.radius) > vec2.mag(vec2.sub(a, aim)))
-        end
+		end
 		if valid then
 			if not p and not a then
 				-- no pos or aim, just make this one happen
@@ -545,7 +552,7 @@ function _State:interact(args)
 				closest = v
 			end
 		end
-    end
+	end
 	if closest then
 		Transformation:tryAction(closest.action, args.sourceId, table.unpack(closest.args or {}))
 	end
@@ -553,7 +560,7 @@ end
 
 function _State:emergencyEscape(occupant)
 	world.spawnProjectile("sbqMemeExplosion", occupant:position())
-    occupant:remove()
+	occupant:remove()
 end
 
 
@@ -763,7 +770,7 @@ function _Location:refreshStruggleDirection(id)
 		elseif newVec[2] > 0 then -- right struggle
 			newDirection = "up"
 		end
-    end
+	end
 	local struggleAction, direction = self:getStruggleAction(newDirection)
 	if direction ~= oldDirection then
 		self.occupancy.struggleDirection = direction
@@ -785,7 +792,7 @@ function _Location:refreshStruggleDirection(id)
 	end
 end
 function _Location:getStruggleAction(direction)
-    if not direction then return end
+	if not direction then return end
 	direction = string.lower(direction)
 	local newDirection = direction
 	if direction == "left" then
@@ -914,9 +921,9 @@ function _Occupant:update(dt)
 	if not world.entityExists(self.entityId) then self:remove() end
 	local location = self:getLocation()
 	if location.occupancy.settingsDirty then self:refreshLocation() end
-    if not animator.animationEnded(self.seat .. "State") then
+	if not animator.animationEnded(self.seat .. "State") then
 		self:setHidden(animator.partProperty(self.seat, "hidden"))
-        self:setLoungeDance(animator.partProperty(self.seat, "dance"))
+		self:setLoungeDance(animator.partProperty(self.seat, "dance"))
 		self:setLoungeEmote(animator.partProperty(self.seat, "emote"))
 	end
 	local locationStore = self.locationStore[self.location]
@@ -984,6 +991,7 @@ function _Occupant:refreshLocation(name, subLocation)
 		{ stat = "sbqDigestResistance", effectiveMultiplier = sbq.stat("sbqDigestPower") },
 		{ stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
 	}
+	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
 	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[location.settings.mainEffect or sbq.settings.mainEffect or "none"] or {})
 	for setting, effects in pairs(location.toggleEffects or {}) do
@@ -1100,7 +1108,7 @@ function _Occupant:setProgressBar(name, args, callback, progress)
 end
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
-        if self:controlHeld("Left") and self:controlHeld("Right") then
+		if self:controlHeld("Left") and self:controlHeld("Right") then
 			Transformation:emergencyEscape(occupant)
 			return
 		end
