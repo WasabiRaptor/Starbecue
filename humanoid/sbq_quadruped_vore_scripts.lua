@@ -1,2 +1,0 @@
-function sbq.handleUnderwear()
-end
