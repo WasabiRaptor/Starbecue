@@ -28,6 +28,21 @@ end
 function default:uninit()
 end
 
+function default:actionSequence(name, action, target, actionList)
+	for _, actionData in ipairs(actionList or action.actionList) do
+        local results = { Transformation:tryAction(actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
+        if action.untilFirstSuccess then
+			if results[1] then return table.unpack(results) end
+        else
+			if not results[1] then return table.unpack(results) end
+		end
+	end
+end
+
+function default:moveToLocation(name, action, target, location, subLocation)
+	return sbq.moveToLocation(target, action.location or location, action.subLocation or subLocation)
+end
+
 function default:tryVore(name, action, target, ...)
 	return sbq.tryVore(target, action.location, action.throughput)
 end
@@ -64,9 +79,6 @@ function default:pickLetout(name, action, target, preferredAction, skip)
     end
 	return false
 end
-function default:moveToLocation(name, action, target, location, subLocation)
-	return sbq.moveToLocation(target, action.location or location, action.subLocation or subLocation)
-end
 
 function default:grab(name, action, target)
     local location = Transformation:getLocation(action.location or "grabbed")
@@ -78,7 +90,6 @@ function default:grab(name, action, target)
 		return Transformation:tryAction("grabTarget", target)
     end
 end
-
 function default:grabTarget(name, action, target)
 	local success, result2 = sbq.tryVore(target, action.location or "grabbed", action.throughput or math.huge)
 	if success then
@@ -86,7 +97,6 @@ function default:grabTarget(name, action, target)
 		return success, result2
 	end
 end
-
 function default:grabRelease(name, action, target)
     occupant = Occupants.entityId[tostring(target)]
 	if not occupant then

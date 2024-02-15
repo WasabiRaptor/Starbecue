@@ -112,7 +112,10 @@ function sbq.globalPartPoint(part, property)
 end
 
 function sbq.localPartPoint(part, property)
-	animator.transformPoint(part, animator.partProperty(part, property))
+	return animator.transformPoint(animator.partProperty(part, property) or {0,0}, part)
+end
+function sbq.localPartPoly(part, property)
+	return animator.transformPoly(animator.partProperty(part, property) or {{0.5,-0.5},{0.5,0.5},{-0.5,0.5},{-0.5,-0.5}}, part)
 end
 
 function sbq.logInfo(input)

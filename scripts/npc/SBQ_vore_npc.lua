@@ -71,8 +71,12 @@ function uninit()
 end
 
 function interact(args)
-	sbq.tryAction("oralVore", args.sourceId)
-
+	if true then -- TODO make this a check between whether dialogue is enabled on the NPC or not
+		local results = { Transformation:interact(args) }
+		if results[2] == "interactAction" then
+			return results[3]
+		end
+	end
 
 	-- if recruitable.isRecruitable() then
 	-- 	return recruitable.generateRecruitInteractAction()

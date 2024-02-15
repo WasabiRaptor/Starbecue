@@ -517,10 +517,10 @@ function _State:interact(args)
 		end
 		-- check if there either point must be within a radius
 		local valid = true
-		if valid and (v.posRadius or v.radius) then
+		if valid and p and (v.posRadius or v.radius) then
 			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
 		end
-		if valid and (v.aimRadius or v.radius) then
+		if valid and a and (v.aimRadius or v.radius) then
 			valid = ((v.aimRadius or v.radius) > vec2.mag(vec2.sub(a, aim)))
 		end
 		if valid then
