@@ -790,7 +790,8 @@ function _Location:refreshStruggleDirection(id)
 			end
 		end
 		return Transformation:doAnimations(newAnims, { s_direction = direction }, id), direction
-	end
+    end
+	return 0, direction
 end
 function _Location:getStruggleAction(direction)
 	if not direction then return end
@@ -1025,7 +1026,7 @@ function _Occupant:attemptStruggle(control)
 		if self.struggleAction.pressAnimations and not self.struggleAction.holdAnimations then
 			bonusTime = bonusTime + Transformation:doAnimations(self.struggleAction.pressAnimations or {}, {s_direction = self.struggleDirection}, self.entityId)
 		end
-		self:tryStruggleAction(1,bonusTime)
+		self:tryStruggleAction((maybeBonus > 0) and 1,bonusTime)
 	end
 end
 function _Occupant:releaseStruggle(control, time)

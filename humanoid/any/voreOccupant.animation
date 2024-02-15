@@ -47,6 +47,35 @@
 					"unbirthVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"cockVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"breastVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+
+					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"<occupant>" : [
+							{"translate":[0,0]},
+							{"translate":[0.125,0]},
+							{"translate":[0,0]}
+						]}
+					},
+					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"<occupant>" : [
+							{"translate":[0,0]},
+							{"translate":[-0.125,0]},
+							{"translate":[0,0]}
+						]}
+					},
+					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"<occupant>" : [
+							{"translate":[0,0]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0]}
+						]}
+					},
+					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"<occupant>" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,0]}
+						]}
+					},
 				}
 
 			}
