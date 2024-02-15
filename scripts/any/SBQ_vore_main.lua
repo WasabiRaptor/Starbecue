@@ -514,9 +514,10 @@ function _State:interact(args)
 		end
 		if (v.aimPart or v.part) and v.aim then
 			a = sbq.localPartPoint(v.aimPart or v.part, v.aim)
-		end
+        end
+		-- check if we should even consider this action
+        local valid = Transformation:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
 		-- check if there either point must be within a radius
-		local valid = true
 		if valid and p and (v.posRadius or v.radius) then
 			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
 		end
