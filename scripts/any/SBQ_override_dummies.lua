@@ -27,6 +27,11 @@ end
 function sbq.sayPortrait(line, portrait, tags, config)
 end
 
+function sbq.setLoungeControlHeld(control)
+end
+function sbq.releaseLoungeControl(control)
+end
+
 function sbq.isLounging()
 	return world.entityLoungingIn(entity.id())
 end

@@ -13,20 +13,22 @@ require"/scripts/humanoid/SBQ_humanoid.lua"
 require"/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
+	old.init()
+
 	sbq.config = root.assetJson("/sbq.config")
-
-	sbq.say = npc.say
-	sbq.sayPortrait = npc.sayPortrait
-
 	sbq.actorInit()
 	sbq.humanoidInit()
 	sbq.setupPublicSettings()
 
+	sbq.say = npc.say
+	sbq.sayPortrait = npc.sayPortrait
+	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
+	sbq.releaseLoungeControl = npc.releaseLoungeControl
+
+
 	message.setHandler("sbqInteract", function(_, _, pred, predData)
 		return interact({ sourceId = pred, sourcePosition = world.entityPosition(pred), predData = predData })
 	end)
-
-	old.init()
 
 	if self.behavior then
 		local behavior = {}
@@ -47,10 +49,6 @@ function init()
 		end
 		self.behavior = behavior
 	end
-end
-
-function sbq.struggleBehavior(dt)
-	-- TODO
 end
 
 function sbq.maybeConvert()

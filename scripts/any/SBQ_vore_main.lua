@@ -1017,13 +1017,13 @@ function _Occupant:refreshLocation(name, subLocation)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestResistance", effectiveMultiplier = sbq.stat("sbqDigestPower") },
-		{ stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
+		-- { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
-	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
-	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[location.settings.mainEffect or sbq.settings.mainEffect or "none"] or {})
+    util.appendLists(persistentStatusEffects, location.passiveEffects or {})
+	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[location.settings.mainEffect or "none"] or {})
 	for setting, effects in pairs(location.toggleEffects or {}) do
-		if (location.settings[setting] or (sbq.settings[setting] and (location.settings[setting] == nil))) then
+		if (location.settings[setting]) then
 			util.appendLists(persistentStatusEffects, effects or {})
 		end
 	end

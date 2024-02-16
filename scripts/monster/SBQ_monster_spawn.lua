@@ -17,7 +17,8 @@ function init()
 
 	sbq.say = monster.say
 	sbq.sayPortrait = monster.sayPortrait
-
+	sbq.setLoungeControlHeld = monster.setLoungeControlHeld
+	sbq.releaseLoungeControl = monster.releaseLoungeControl
 
 	if self.behavior then
 		local behavior = {}
@@ -38,10 +39,6 @@ function init()
 		end
 		self.behavior = behavior
 	end
-end
-
-function sbq.struggleBehavior(dt)
-	-- TODO
 end
 
 function update(dt)
