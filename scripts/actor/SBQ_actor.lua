@@ -1,3 +1,7 @@
+local old = {
+	faceEntity = faceEntity
+}
+
 function sbq.actorInit()
 	sbq.facingDirection = mcontroller.facingDirection
 	sbq.scale = mcontroller.scale
@@ -26,10 +30,10 @@ function sbq.actorInit()
 	sbq.setResourcePercentage = status.setResourcePercentage
 	sbq.modifyResourcePercentage = status.modifyResourcePercentage
 
-    sbq.setStatModifiers = status.setPersistentEffects
+	sbq.setStatModifiers = status.setPersistentEffects
 
 	message.setHandler("sbqRefreshStruggleData", function (_,_, locationData)
-        sbq.currentLocationData = locationData
+		sbq.currentLocationData = locationData
 		sbq.checkComfortLevel()
 	end)
 end
@@ -57,7 +61,7 @@ function sbq.checkComfortLevel()
 		elseif dislike[adjective] then
 			comfortLevel = comfortLevel - 1
 		end
-    end
+	end
 	sbq.comfortLevel = comfortLevel
 end
 
@@ -65,7 +69,7 @@ local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
 	if sbq.timer("changeStruggleDirection", 2) then
 		if true then -- do stuff with location data here to determine struggles later
-            local dir = struggleDirections[math.random(#struggleDirections)]
+			local dir = struggleDirections[math.random(#struggleDirections)]
 			if dir then
 				if sbq.randomTimer(dir .. "Press", 0, 2, function()
 					sbq.releaseLoungeControl(dir)
@@ -75,4 +79,11 @@ function sbq.struggleBehavior(dt)
 			end
 		end
 	end
+end
+
+function faceEntity(args, board)
+	if args.entity == nil or not world.entityExists(args.entity) then return false end
+	local loungeAnchor = world.entityLoungingIn(args.entity)
+	if loungeAnchor and loungeAnchor.entityId == entity.id() then return false end
+	return old.faceEntity(args, board)
 end
