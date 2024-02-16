@@ -2,12 +2,17 @@
 local Default = {
 	states = {
 		default = {},
-	}
+    },
+	locations = {}
 }
 setmetatable(Default, _Transformation)
 for k, v in pairs(Default.states) do
 	v.__index = v
 	setmetatable(v, _State)
+end
+for k, v in pairs(Default.locations) do
+	v.__index = v
+	setmetatable(v, _Location)
 end
 Transformations.default = Default
 Default.__index = Default
@@ -105,7 +110,8 @@ function default:grabRelease(name, action, target)
 		if not location then return false end
 		occupant = location.occupancy.list[1]
 	end
-	if occupant then
+    if occupant then
+		animator.playSound("release")
         occupant:remove()
 		world.sendEntityMessage(entity.id(), "sbqControllerRotation", false)
         return true

@@ -22,11 +22,10 @@ _Occupant = {}
 _Occupant.__index = _Occupant
 
 Transformations = {}
-Transformation = {}
-
-States = {}
-
-Locations = {locations = {}}
+Transformation = {
+    locations = {},
+	states = {}
+}
 
 Occupants = {
 	list = {},
@@ -128,7 +127,9 @@ function sbq.reloadVoreConfig(config)
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
 	end
-	Transformation = Transformations[sbq.voreConfig.transformation or "default"]
+    Transformation = { locations = {}, states = {} }
+	Transformation.transformation = Transformations[sbq.voreConfig.transformation or "default"]
+	setmetatable(Transformation, {__index = Transformation.transformation})
 
 	if sbq.voreConfig.pred.appendLists then
 		for k, list in pairs(sbq.voreConfig.pred) do
@@ -145,20 +146,19 @@ function sbq.reloadVoreConfig(config)
 		end
 	end
 	-- initial setup of location data based on species and infusion
-	Locations.locations = {}
 	for location, locationData in pairs(sbq.voreConfig.locations) do
-		Locations.addLocation(location, locationData)
+		Transformation:addLocation(location, locationData)
 	end
 	-- load states
 	for name, stateConfig in pairs(sbq.voreConfig.states or {}) do
-		States.addState(name, stateConfig)
+		Transformation:addState(name, stateConfig)
 	end
-	if not States[storage.lastVoreState] then
+	if not storage.lastState or (not (Transformation.states[storage.lastState])) then
 		local defaultState = sbq.voreConfig.defaultState or "default"
-		Transformation.state = States[defaultState]
+		Transformation.state = Transformation.states[defaultState]
 		Transformation.stateName = defaultState
 	else
-		Transformation.state = States[storage.lastVoreState]
+		Transformation.state = Transformation.states[storage.lastState]
 		Transformation.stateName = storage.lastState
 	end
 	-- put settings meant to be public and accessible by other entities in a status property
@@ -198,7 +198,7 @@ function sbq.getSettingsPageData()
 		storageSettings = storage.sbqSettings,
 		settings = sbq.settings,
 		voreConfig = sbq.voreConfig,
-		locations = Locations.locations
+		locations = Transformation.locations
 	}
 	return settingsPageData
 end
@@ -307,11 +307,11 @@ function _Transformation:emergencyEscape(...)
 end
 
 function _Transformation:changeState(stateName)
-	local state = States[stateName]
+	local state = self.states[stateName]
 	if not state then sbq.logError("Attempt to switch to invalid state: " .. stateName) return false end
 	if self.lockStateChanges then return false end
 	if stateName == self.stateName then return false end
-	storage.lastVoreState = stateName
+	storage.lastState = stateName
 	self.state:uninit()
 	self.stateName = stateName
 	self.state = state
@@ -320,10 +320,10 @@ function _Transformation:changeState(stateName)
 end
 
 -- State Handling
-function States.addState(stateName, config)
+function _Transformation:addState(stateName, config)
 	local state = sb.jsonMerge(config, {})
 	state.locations = state.locations or {}
-	for k, location in pairs(Locations.locations) do
+	for k, location in pairs(self.locations) do
 		state.locations[k] = state.locations[k] or {}
 		for k2, subLocation in pairs(location.subLocations or {}) do
 			state.locations[k].subLocations[k2] = state.locations[k].subLocations[k2] or {}
@@ -343,11 +343,11 @@ function States.addState(stateName, config)
 		end
 		setmetatable(state.locations[k], { __index = location })
 	end
-	setmetatable(state, {__index = Transformation.states[stateName]})
 	for actionName, action in pairs(state.actions or {}) do
 		setmetatable(action, _Action)
-	end
-	States[stateName] = state
+    end
+	setmetatable(state, {__index = self.transformation.states[stateName] or _State})
+	self.states[stateName] = state
 end
 
 function _State:getLocation(locationName, subLocation)
@@ -566,9 +566,10 @@ end
 
 
 -- Location handling
-function Locations.addLocation(name, config)
+function _Transformation:addLocation(name, config)
 	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()))
-	location.tag = name
+    location.tag = name
+	location.key = name
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
 	if location.infusionSlot and sbq.settings[location.infusionType .. "Pred"] and sbq.settings[location.infusionSlot] then
 		local infused = sbq.settings[location.infusionSlot]
@@ -620,15 +621,17 @@ function Locations.addLocation(name, config)
 			subLocation.occupancy.sided = true
 			subLocation.occupancy.facingRight = sbq.facingRight
 		end
-		subLocation.tag = name..k
+        subLocation.tag = name .. k
+		subLocation.subKey = k
 		location.occupancy.subLocations[k] = subLocation.occupancy
 		setmetatable(subLocation, {__index = location})
 	end
 
-	Occupants.locations[name] = location.occupancy
-	location.settings = sbq.settings.locations[location.settingsTable or name]
-	setmetatable(location, _Location)
-	Locations.locations[name] = location
+    Occupants.locations[name] = location.occupancy
+    location.settings = {}
+	setmetatable(location.settings, {__index = sbq.settings.locations[location.settingsTable or name]})
+	setmetatable(location, {__index = self.transformation.locations[name] or _Location})
+	self.locations[name] = location
 end
 
 function _Location:hasSpace(size, subLocation)
@@ -751,6 +754,13 @@ function _Location:refreshStruggleDirection(id)
 	for _, occupant in ipairs(self.occupancy.list) do
 		occupant:checkStruggleDirection(0)
 		self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
+    end
+	for _, locationName in ipairs(self.sharedWith or {}) do
+        local location = Transformation:getLocation(locationName)
+		for _, occupant in ipairs(location.occupancy.list) do
+			occupant:checkStruggleDirection(0)
+			self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
+		end
 	end
 	local newVec = self.occupancy.struggleVec
 	local oldAction = self.occupancy.struggleAction
@@ -806,6 +816,22 @@ function _Location:getStruggleAction(direction)
 		return self.struggleActions[direction], newDirection
 	end
 	return self.struggleActions[newDirection], newDirection
+end
+
+function _Location:outputData()
+    local merge = {}
+    table.insert(merge, Transformation.locations[self.key] or {})
+	if self.subKey then
+		table.insert(merge, Transformation.locations[self.key].subLocations[self.subKey] or {})
+    end
+	table.insert(merge, Transformation.state.locations[self.key] or {})
+	if self.subKey then
+		table.insert(merge, Transformation.state.locations[self.key].subLocations[self.subKey] or {})
+    end
+	local location = sb.jsonMerge(table.unpack(merge))
+    location.occupancy = nil
+	location.settings = nil
+	return location
 end
 
 -- Occupant Handling
@@ -899,7 +925,7 @@ function Occupants.update(dt)
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:update(dt)
 	end
-	for name, _ in pairs(Locations.locations) do
+	for name, _ in pairs(Transformation.locations) do
 		local location = Transformation:getLocation(name)
 		for k, v in pairs(location.subLocations or {}) do
 			local subLocation = Transformation:getLocation(name, k)
@@ -1009,7 +1035,9 @@ function _Occupant:refreshLocation(name, subLocation)
 	self:setItemTagWhitelist(location.itemTagWhitelist or sbq.voreConfig.prey.itemTagWhitelist or sbq.config.prey.itemTagWhitelist)
 	self:setItemTypeBlacklist(location.itemTypeBlacklist or sbq.voreConfig.prey.itemTypeBlacklist or sbq.config.prey.itemTypeBlacklist)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
-	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
+    self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
+
+	world.sendEntityMessage(self.entityId, "sbqRefreshStruggleData", location:outputData())
 end
 
 function _Occupant:attemptStruggle(control)
@@ -1026,7 +1054,7 @@ function _Occupant:attemptStruggle(control)
 		if self.struggleAction.pressAnimations and not self.struggleAction.holdAnimations then
 			bonusTime = bonusTime + Transformation:doAnimations(self.struggleAction.pressAnimations or {}, {s_direction = self.struggleDirection}, self.entityId)
 		end
-		self:tryStruggleAction((maybeBonus > 0) and 1,bonusTime)
+		self:tryStruggleAction((maybeBonus > 0) and 1 or 0,bonusTime)
 	end
 end
 function _Occupant:releaseStruggle(control, time)

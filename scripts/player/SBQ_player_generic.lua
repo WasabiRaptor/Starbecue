@@ -49,6 +49,10 @@ function init()
 
 		player.setProperty("sbqTenantRewards", tenantRewardsTable)
 		player.setProperty("sbqCumulativeData", cumulativeDataTable)
+    end)
+
+    message.setHandler("sbqRefreshStruggleData", function(_, _, location)
+        sb.logInfo(sb.printJson(location, 2))
 	end)
 
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
