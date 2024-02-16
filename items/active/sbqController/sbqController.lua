@@ -91,7 +91,7 @@ end
 
 function sbq.letout(id)
 	player.setScriptContext("starbecue")
-	local loungeAnchor = world.entityLoungingIn(entity.id())
+	local loungeAnchor = world.entityCurrentLounge(entity.id())
 	if (not loungeAnchor) or loungeAnchor.dismountable then
 		return player.callScript("sbq.tryAction", "pickLetout", id, storage.action)
 	end
@@ -115,7 +115,7 @@ function sbq.clickAction()
 	for i, targetId in ipairs(entityaimed) do
 		for j, eid in ipairs(entityInRange) do
 			if targetId == eid and entity.entityInSight(targetId) then
-				local loungeAnchor = world.entityLoungingIn(targetId)
+				local loungeAnchor = world.entityCurrentLounge(targetId)
 				if (not loungeAnchor) or loungeAnchor.dismountable then
 					result = player.callScript("sbq.tryAction", storage.action, targetId)
 					break

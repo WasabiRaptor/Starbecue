@@ -33,11 +33,11 @@ function sbq.releaseLoungeControl(control)
 end
 
 function sbq.isLounging()
-	return world.entityLoungingIn(entity.id())
+	return world.entityCurrentLounge(entity.id())
 end
 
 function sbq.isLoungeDismountable()
-	local loungeAnchor = world.entityLoungingIn(entity.id())
+	local loungeAnchor = world.entityCurrentLounge(entity.id())
 	return (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable)
 end
 

@@ -250,7 +250,7 @@ function sbq.tryVore(target, locationName, throughput)
 end
 
 function sbq.tryLetout(target, throughput)
-	local lounging = world.entityLoungingIn(entity.id())
+	local lounging = world.entityCurrentLounge(entity.id())
 	if lounging and not lounging.dismountable then return false end
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
@@ -1090,10 +1090,14 @@ function _Occupant:checkStruggleDirection(dt)
 		-- if self:controlHeldTime("Right") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
 	self.struggleVec = {dx * effectiveness, dy * effectiveness}
-	if dx ~= 0 or dy ~= 0 then
+    if (dx ~= 0 or dy ~= 0) then
+		-- if not self:consumeResource("energy", 100 * dt) then return end
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
-		self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
+        self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
+		if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
+			self:tryStruggleAction(0,0)
+		end
 	else
 		if self.struggleGracePeriod <= 0 then
 			if self.struggleTime <= 0 then
@@ -1104,9 +1108,6 @@ function _Occupant:checkStruggleDirection(dt)
 		else
 			self.struggleGracePeriod = self.struggleGracePeriod - dt
 		end
-	end
-	if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
-		self:tryStruggleAction(0,0)
 	end
 end
 
@@ -1148,6 +1149,11 @@ end
 function _Occupant:controlReleased(control, time)
 	self:releaseStruggle(control)
 end
+
+-- function _Occupant:consumeResource(resource, amount)
+-- 	if not world.entityIsResource(self.entityId, resource) then return true end
+-- 	world.entityConsumeResource(self.entityId, resource, amount)
+-- end
 
 function _Occupant:position()
 	return sbq.globalPartPoint(self.seat, "loungePosition")

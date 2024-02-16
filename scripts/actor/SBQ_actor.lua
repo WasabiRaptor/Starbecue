@@ -83,7 +83,7 @@ end
 
 function faceEntity(args, board)
 	if args.entity == nil or not world.entityExists(args.entity) then return false end
-	local loungeAnchor = world.entityLoungingIn(args.entity)
+	local loungeAnchor = world.entityCurrentLounge(args.entity)
 	if loungeAnchor and loungeAnchor.entityId == entity.id() then return false end
 	return old.faceEntity(args, board)
 end
