@@ -1111,7 +1111,7 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if not self.struggleAction then return false end
+	if (not self.struggleAction) or (self:controlHeld("Shift")) then return false end
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		Transformation:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
