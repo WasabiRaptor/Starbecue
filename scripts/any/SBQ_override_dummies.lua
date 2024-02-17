@@ -78,6 +78,7 @@ function sbq.consumeResource(name, value)
 	if sbq.resourceLocked(name) then return false end
 	if sbq.resource(name) >= value then
         sbq.modifyResource(name, -value)
+		sbq.notifyResourceConsumed(name, value)
 		return true
 	end
 end
@@ -85,7 +86,8 @@ function sbq.overConsumeResource(name, value)
 	if not sbq.isResource(name) then return false end
     if value < 0 then return false end
 	if sbq.resourceLocked(name) then return false end
-	sbq.modifyResource(name, -value)
+    sbq.modifyResource(name, -value)
+	sbq.notifyResourceConsumed(name, value)
 	return true
 end
 function sbq.resourceLocked(name)
@@ -158,4 +160,7 @@ function sbq.resourceDeltas(dt)
 			storage.resources[name] = storage.resources[name] + sbq.stat(data.deltaStat) * dt
 		end
 	end
+end
+
+function sbq.notifyResourceConsumed(resource, amount)
 end

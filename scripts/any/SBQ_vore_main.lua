@@ -1051,10 +1051,13 @@ function _Occupant:attemptStruggle(control)
 	if struggleAction then
 		self.struggleAction = struggleAction
 		self.struggleDirection = direction
-		if self.struggleAction.pressAnimations and not self.struggleAction.holdAnimations then
-			bonusTime = bonusTime + Transformation:doAnimations(self.struggleAction.pressAnimations or {}, {s_direction = self.struggleDirection}, self.entityId)
+		if struggleAction.pressAnimations and not struggleAction.holdAnimations then
+			bonusTime = bonusTime + Transformation:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
+        end
+		if (bonusTime > 0) then
+			if not self:overConsumeResource("energy", sbq.config.struggleCost) then return end
 		end
-		self:tryStruggleAction((maybeBonus > 0) and 1 or 0,bonusTime)
+		self:tryStruggleAction((bonusTime > 0) and 1 or 0, bonusTime)
 	end
 end
 function _Occupant:releaseStruggle(control, time)
@@ -1091,10 +1094,10 @@ function _Occupant:checkStruggleDirection(dt)
 	end
 	self.struggleVec = {dx * effectiveness, dy * effectiveness}
     if (dx ~= 0 or dy ~= 0) then
-		-- if not self:consumeResource("energy", 100 * dt) then return end
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
-        self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
+		if not self:consumeResource("energy", sbq.config.struggleCost * dt, true) then return end
+		self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
 		if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
 			self:tryStruggleAction(0,0)
 		end
@@ -1140,7 +1143,7 @@ end
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
 		if self:controlHeld("Left") and self:controlHeld("Right") then
-			Transformation:emergencyEscape(occupant)
+			Transformation:emergencyEscape(self)
 			return
 		end
 	end
@@ -1150,16 +1153,59 @@ function _Occupant:controlReleased(control, time)
 	self:releaseStruggle(control)
 end
 
--- function _Occupant:consumeResource(resource, amount)
--- 	if not world.entityIsResource(self.entityId, resource) then return true end
--- 	world.entityConsumeResource(self.entityId, resource, amount)
--- end
+function _Occupant:consumeResource(resource, amount, ignoreBlock)
+	-- if an entity doesn't have the resource, they get to have it for free
+    if not world.entityIsResource(self.entityId, resource) then return true end
+	if (world.entityResource(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+        world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
+		return true
+    end
+	return false
+end
+function _Occupant:consumeResource(resource, amount, ignoreBlock)
+	-- if an entity doesn't have the resource, they get to have it for free
+    if not world.entityIsResource(self.entityId, resource) then return true end
+	if (world.entityResource(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+        world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
+		return true
+    end
+	return false
+end
+function _Occupant:overConsumeResource(resource, amount, ignoreBlock)
+	-- if an entity doesn't have the resource, they get to have it for free
+    if not world.entityIsResource(self.entityId, resource) then return true end
+	if (world.entityResource(self.entityId, resource) > 0) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+        world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
+		return true
+    end
+	return false
+end
+
+function _Occupant:consumeResourcePercentage(resource, amount, ignoreBlock)
+	-- if an entity doesn't have the resource, they get to have it for free
+    if not world.entityIsResource(self.entityId, resource) then return true end
+	if (world.entityResourcePercentage(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+        world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
+		return true
+    end
+	return false
+end
+function _Occupant:overConsumeResourcePercentage(resource, amount, ignoreBlock)
+	-- if an entity doesn't have the resource, they get to have it for free
+    if not world.entityIsResource(self.entityId, resource) then return true end
+	if (world.entityResourcePercentage(self.entityId, resource) > 0) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+        world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
+		return true
+    end
+	return false
+end
+
 
 function _Occupant:position()
-	return sbq.globalPartPoint(self.seat, "loungePosition")
+	return sbq.globalPartPoint(self.seat, "loungeOffset")
 end
 function _Occupant:localPosition()
-	return sbq.localPartPoint(self.seat, "loungePosition")
+	return sbq.localPartPoint(self.seat, "loungeOffset")
 end
 function _Occupant:controlHeld(...)
 	return loungeable.controlHeld(self.seat, ...)

@@ -108,7 +108,7 @@ function sbq.scaleLocal(pos)
 end
 
 function sbq.globalPartPoint(part, property)
-	vec2.add(entity.position(), animator.partPoint(part, property))
+	return vec2.add(entity.position(), animator.partPoint(part, property))
 end
 
 function sbq.localPartPoint(part, property)

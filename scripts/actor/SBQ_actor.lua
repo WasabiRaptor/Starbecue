@@ -35,6 +35,27 @@ function sbq.actorInit()
 	message.setHandler("sbqRefreshStruggleData", function (_,_, locationData)
 		sbq.currentLocationData = locationData
 		sbq.checkComfortLevel()
+    end)
+
+    message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
+        local res = status.overConsumeResource(resource, amount)
+		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
+		return res
+    end)
+	message.setHandler("sbqConsumeResource", function (_,_, resource, amount, ignoreBlock)
+        local res = status.consumeResource(resource, amount)
+		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
+		return res
+    end)
+	message.setHandler("sbqOverConsumeResourcePercentage", function (_,_, resource, amount, ignoreBlock)
+        local res = status.overConsumeResourcePercentage(resource, amount)
+		if not res and ignoreBlock then status.modifyResourcePercentage(resource, -amount) end
+		return res
+    end)
+	message.setHandler("sbqConsumeResourcePercentage", function (_,_, resource, amount, ignoreBlock)
+        local res = status.consumeResourcePercentage(resource, amount)
+		if not res and ignoreBlock then status.modifyResourcePercentage(resource, -amount) end
+		return res
 	end)
 end
 
