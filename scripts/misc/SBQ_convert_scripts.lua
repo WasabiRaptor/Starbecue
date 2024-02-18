@@ -38,5 +38,5 @@ function sbq.createOccupantAnims()
         )
         anims = sb.jsonMerge(anims, occupantAnim)
     end
-    sb.logInfo(sb.printJson(anims, 2, true))
+    sbq.logInfo(sb.printJson(anims, 2, true))
 end
