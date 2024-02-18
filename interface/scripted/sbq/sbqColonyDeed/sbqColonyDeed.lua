@@ -84,7 +84,7 @@ function sbq.wrapNumber(input, min, max)
 end
 
 function callTenants:onClick()
-	world.sendEntityMessage(pane.sourceEntity(), "sbqCallTenants", player.id())
+	world.sendEntityMessage(pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = player.position()})
 end
 
 local applyCount = 0
@@ -259,7 +259,13 @@ function sbq.refreshDeedPage()
 			canvas:drawImage(v.image, {pos[1] + canvasSize[1]/2, pos[2] + canvasSize[2]/2}, 1, nil, true )
 		end
 		function settings:onClick()
-			-- TODO
+			local id = world.getUniqueEntityId(tenant.uniqueId)
+			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end
+			sbq.addRPC(world.sendEntityMessage(id, "getEntitySettingsMenuData", player.id()), function(data)
+				player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = data, ui =  ("starbecue:entitySettings") }, id)
+			end, function ()
+				pane.playSound("/sfx/interface/clickon_error.ogg")
+			end)
 		end
 	end
 	tenantListScrollArea:addChild({ type="panel", style="flat", id="insertTenantPanel", expandMode={0,0}, children={

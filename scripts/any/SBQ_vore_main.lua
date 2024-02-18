@@ -50,6 +50,16 @@ function sbq.init()
 	message.setHandler("sbqTryAction", function(_, _, action, target, ...)
 		sbq.tryAction(action, target, ...)
 	end)
+	message.setHandler("getEntitySettingsMenuData", function ()
+		return sbq.getSettingsPageData()
+	end)
+	message.setHandler("sbqSetLocationSetting", function (_,_, ...)
+		return sbq.setLocationSetting(...)
+	end)
+	message.setHandler("sbqSetSetting", function (_,_, ...)
+		return sbq.setSetting(...)
+	end)
+
 	sbq.reloadVoreConfig(storage.lastVoreConfig)
 
 	-- require "/scripts/misc/SBQ_convert_scripts.lua"
@@ -818,7 +828,7 @@ function _Location:getStruggleAction(direction)
 	return self.struggleActions[newDirection], newDirection
 end
 
-function _Location:outputData()
+function _Location:outputData(entityId)
     local merge = {}
     table.insert(merge, Transformation.locations[self.key] or {})
 	if self.subKey then
@@ -831,6 +841,11 @@ function _Location:outputData()
 	local location = sb.jsonMerge(table.unpack(merge))
     location.occupancy = nil
 	location.settings = nil
+	for _, struggleAction in pairs(location.struggleActions or {}) do
+		if not Transformation:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
+			struggleAction.indicate = "default"
+		end
+	end
 	return location
 end
 
@@ -862,6 +877,7 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 		size = size or 1,
 		sizeMultiplier = 1,
 		struggleGracePeriod = 0,
+		time = 0,
 		struggleTime = 0,
 		struggleCount = 0,
 		struggleVec = {0,0},
@@ -957,9 +973,9 @@ function _Occupant:update(dt)
 	local locationStore = self.locationStore[self.location]
 
 	locationStore.time = locationStore.time + dt
-
+	self.time = self.time + dt
 	if self.progressBar then
-		self.progressBar.progress = self.progressBar.progress + (dt * self.progressBar.args.speed)
+		self.progressBar.progress = self.progressBar.progress + (dt * (self.progressBar.args.speed or 1))
 		if self.progressBar.progress >= 100 then self.progressBar.callback(self, self.progressBar.args) end
 	end
 
@@ -1037,7 +1053,10 @@ function _Occupant:refreshLocation(name, subLocation)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
     self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
-	world.sendEntityMessage(self.entityId, "sbqRefreshStruggleData", location:outputData())
+	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
+		progressBar = self.progressBar,
+		time = self.time,
+	})
 end
 
 function _Occupant:attemptStruggle(control)
@@ -1139,6 +1158,11 @@ function _Occupant:setProgressBar(name, args, callback, progress)
 	self.progressBar.args = args
 	self.progressBar.name = name
 	self.progressBar.callback = callback
+
+	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), self:getLocation():outputData(self.entityId), {
+		progressBar = self.progressBar,
+		time = self.time,
+	})
 end
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then

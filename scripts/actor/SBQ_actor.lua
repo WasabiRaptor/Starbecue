@@ -32,10 +32,10 @@ function sbq.actorInit()
 
 	sbq.setStatModifiers = status.setPersistentEffects
 
-	message.setHandler("sbqRefreshStruggleData", function (_,_, locationData)
-		sbq.currentLocationData = locationData
-		sbq.checkComfortLevel()
-    end)
+	-- message.setHandler("sbqRefreshLocationData", function (_,_, id, locationData)
+	-- 	sbq.currentLocationData = locationData
+	-- 	sbq.checkComfortLevel()
+    -- end)
 
     message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
         local res = status.overConsumeResource(resource, amount)
