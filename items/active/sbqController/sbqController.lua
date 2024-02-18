@@ -156,7 +156,7 @@ function RadialMenu:close()
 	end
 	self.activeMenuName = nil
     self.activeMenu = nil
-	player.interact("ScriptPane", root.assetJson("/interface/scripted/sbq/sbqClose/sbqClose.config"), player.id())
+	player.interact("ScriptPane", {baseConfig = "/interface/scripted/sbq/sbqClose/sbqClose.config"}, player.id())
 end
 
 _RadialMenu = {isMenu = true}
@@ -171,8 +171,8 @@ function _RadialMenu:cancel()
 end
 function _RadialMenu:openRadialMenu(overrides)
     player.interact("ScriptPane", sb.jsonMerge(
-        root.assetJson("/interface/scripted/sbq/sbqRadialMenu/sbqRadialMenu.config"),
 		{
+			baseConfig = "/interface/scripted/sbq/sbqRadialMenu/sbqRadialMenu.config",
 			selectOnClose = true,
 			default = {
 				context = "starbecue",
