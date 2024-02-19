@@ -225,38 +225,36 @@ function sbq.setLocationSetting(name, k, v)
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings.locations[name][k] = sbq.settings.locations[name][k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-	end
+    end
 end
 
 function sbq.tryVore(target, locationName, throughput)
 	local size = sbq.getSize(target)
-	local throughput = ((throughput or 1) * sbq.size())
-	if (size <= throughput) then
-		local location = Transformation:getLocation(locationName)
-		local space, subLocation = location:hasSpace(size)
-		if space then
-			if Occupants.addOccupant(target, locationName, subLocation) then
-				sbq.lockActions = true
-				return true, function ()
-					sbq.lockActions = false
-				end
-			else
-				return false, "noSlots"
+	if throughput then
+		if (size) >= (throughput * sbq.size()) then return false, "tooBig" end
+    end
+	local location = Transformation:getLocation(locationName)
+	local space, subLocation = location:hasSpace(size)
+	if space then
+		if Occupants.addOccupant(target, size, locationName, subLocation) then
+			sbq.lockActions = true
+			return true, function ()
+				sbq.lockActions = false
 			end
 		else
-			return false, "noSpace"
+			return false, "noSlots"
 		end
 	else
-		return false, "tooBig"
+		return false, "noSpace"
 	end
 end
 
 function sbq.tryLetout(target, throughput)
-	local lounging = world.entityCurrentLounge(entity.id())
-	if lounging and not lounging.dismountable then return false end
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
-	if not ((occupant.size * occupant.sizeMultiplier) <= ((throughput or 1) * sbq.size())) then return false end
+    if not occupant then return false end
+	if throughput then
+		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
+	end
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
 	sbq.lockActions = true
@@ -266,10 +264,13 @@ function sbq.tryLetout(target, throughput)
 	end
 end
 
-function sbq.moveToLocation(target, locationName, subLocationName)
+function sbq.moveToLocation(target, throughput, locationName, subLocationName)
 	if not target or not locationName then return false end
 	occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+    if not occupant then return false end
+	if throughput then
+		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
+	end
 	local location = Transformation:getLocation(locationName, subLocationName)
 	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 	if space then
@@ -327,22 +328,26 @@ function _Transformation:addState(stateName, config)
 	state.locations = state.locations or {}
 	for k, location in pairs(self.locations) do
 		state.locations[k] = state.locations[k] or {}
-		for k2, subLocation in pairs(location.subLocations or {}) do
-			state.locations[k].subLocations[k2] = state.locations[k].subLocations[k2] or {}
-			state.locations[k].subLocations[k2].struggleActions = state.locations[k].subLocations[k2].struggleActions or {}
-			for actionName, struggleAction in pairs(state.locations[k].subLocations[k2].struggleActions) do
-				if state.locations[k].subLocations[k2].struggleActions.any and actionName ~= "any" then
-					setmetatable(struggleAction, {__index = state.locations[k].subLocations[k2].struggleActions.any})
+        for k2, subLocation in pairs(location.subLocations or {}) do
+			local subLocationData = sb.jsonMerge(subLocation, state.locations[k].subLocations[k2] or {})
+            subLocationData.struggleActions = subLocationData.struggleActions or {}
+			for actionName, struggleAction in pairs(subLocationData.struggleActions) do
+				if subLocationData.struggleActions.any and actionName ~= "any" then
+					setmetatable(struggleAction, {__index = subLocationData.struggleActions.any})
 				end
-			end
-			setmetatable(state.locations[k].subLocations[k2], { __index = subLocation })
-		end
-		state.locations[k].struggleActions = state.locations[k].struggleActions or {}
+            end
+            setmetatable(subLocationData, { __index = state.locations[k] })
+			state.locations[k].subLocations[k2] = subLocationData
+        end
+
+        state.locations[k].struggleActions = state.locations[k].struggleActions or {}
+
 		for actionName, struggleAction in pairs(state.locations[k].struggleActions) do
 			if state.locations[k].struggleActions.any and actionName ~= "any" then
 				setmetatable(struggleAction, {__index = state.locations[k].struggleActions.any})
 			end
-		end
+        end
+
 		setmetatable(state.locations[k], { __index = location })
 	end
 	for actionName, action in pairs(state.actions or {}) do
@@ -637,6 +642,7 @@ function _Transformation:addLocation(name, config)
 end
 
 function _Location:hasSpace(size, subLocation)
+	if not sbq.tableMatches(self.activeSettings or {}, sbq.settings) then return false end
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
 	if self.settings.hammerspace then return math.huge end
 	local shared = 0
@@ -659,7 +665,7 @@ function _Location:hasSpace(size, subLocation)
 		local best = {0}
 		for k, v in pairs(self.subLocations) do
 			if not (v.maxCount and (#v.occupancy.list >= v.maxCount)) then
-				local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
+                local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
 				if space and space > best[1] then
 					best = {space, k}
 				end
@@ -721,7 +727,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			end
 			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
 		end
-		if prevVisualSize ~= self.occupancy.visualSize then
+		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings))) then
 			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
 			if interpolateAnims then
 				self.occupancy.interpolating = true
@@ -731,9 +737,14 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			end
 			self.occupancy.queuedInterpolateAnims = nil
 			animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+			if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings)) then
+				for _, subLocation in pairs(self.subLocations) do
+					animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+				end
+			end
 		end
 	end
-	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
+	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) and not (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings)) then
 		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."_occupants", tostring(self.occupancy.visualSize))
 	end
 	if self.occupancy.interpolating then
@@ -748,6 +759,11 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 		)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
 		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."_occupantsInterpolate", tostring(self.occupancy.interpolateSize))
+		if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings)) then
+			for _, subLocation in pairs(self.subLocations) do
+				animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+			end
+		end
 	end
 end
 
@@ -842,7 +858,7 @@ function _Location:outputData(entityId)
 end
 
 -- Occupant Handling
-function Occupants.addOccupant(entityId, location, size, subLocation)
+function Occupants.addOccupant(entityId, size, location, subLocation)
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
@@ -1009,11 +1025,21 @@ function _Occupant:refreshLocation(name, subLocation)
 			local shared = Transformation:getLocation(sharedName)
 			shared.occupancy.sizeDirty = true
 		end
-	end
-	if animator.hasState(self.seat.."Location", Transformation.stateName.."_"..self.location) then
-		animator.setAnimationState(self.seat .. "Location", Transformation.stateName.."_"..self.location)
-	elseif animator.hasState(self.seat.."Location", self.location) then
-		animator.setAnimationState(self.seat .. "Location", self.location)
+    end
+	if not sbq.tableMatches(location.activeSettings or {}, sbq.settings) then return self:remove() end
+
+	local attemptAnims = {
+		Transformation.stateName .. "_" .. location.tag .. "_" .. location.occupancy.visualSize,
+		Transformation.stateName .. "_" .. location.tag,
+		location.tag .. "_" .. location.occupancy.visualSize,
+        location.tag,
+		self.location .. "_" .. location.occupancy.visualSize,
+		self.location
+    }
+	for _, v in ipairs(attemptAnims) do
+		if animator.hasState(self.seat .. "Location", v) then
+			animator.setAnimationState(self.seat.."Location", v)
+		end
 	end
 
 	if not self.locationStore[self.location] then
