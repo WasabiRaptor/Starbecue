@@ -33,7 +33,7 @@ end
 function default:uninit()
 end
 
-function default:actionSequence(name, action, target, actionList)
+function default:actionSequence(name, action, target, actionList, ...)
 	for _, actionData in ipairs(actionList or action.actionList) do
         local results = { Transformation:tryAction(actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
         if action.untilFirstSuccess then
@@ -43,9 +43,19 @@ function default:actionSequence(name, action, target, actionList)
 		end
 	end
 end
+function default:scriptSequence(name, action, target, scriptList, ...)
+	for _, script in ipairs(scriptList or action.scriptList) do
+        local results = { self[script](name, action, target, ...) }
+        if action.untilFirstSuccess then
+			if results[1] then return table.unpack(results) end
+        else
+			if not results[1] then return table.unpack(results) end
+		end
+	end
+end
 
-function default:moveToLocation(name, action, target, location, subLocation)
-	return sbq.moveToLocation(target, action.location or location, action.subLocation or subLocation)
+function default:moveToLocation(name, action, target, throughput, location, subLocation, ...)
+	return sbq.moveToLocation(target, throughput or action.throughput, action.location or location, action.subLocation or subLocation)
 end
 
 function default:tryVore(name, action, target, ...)
@@ -54,7 +64,7 @@ end
 function default:tryLetout(name, action, target, ...)
 	return sbq.tryLetout(target, action.throughput)
 end
-function default:pickLetout(name, action, target, preferredAction, skip)
+function default:pickLetout(name, action, target, preferredAction, skip, ...)
     if target then
         occupant = Occupants.entityId[tostring(target)]
         location = Transformation:getLocation(occupant.location, occupant.subLocation)
@@ -85,7 +95,16 @@ function default:pickLetout(name, action, target, preferredAction, skip)
 	return false
 end
 
-function default:grab(name, action, target)
+function default:trySendDeeper(name, action, target, ...)
+    local location = Transformation:getLocation(action.location)
+    local occupant = location.occupancy.list[1]
+	local sendDeeper = action.sendDeeper or location.sendDeeper
+	if occupant and action.sendDeeper then
+		return sbq.moveToLocation(occupant.entityId, sendDeeper.throughput, sendDeeper.location, sendDeeper.subLocation)
+	end
+end
+
+function default:grab(name, action, target, ...)
     local location = Transformation:getLocation(action.location or "grabbed")
 	if not location then return false end
     local occupant = location.occupancy.list[1]
@@ -95,7 +114,7 @@ function default:grab(name, action, target)
 		return Transformation:tryAction("grabTarget", target)
     end
 end
-function default:grabTarget(name, action, target)
+function default:grabTarget(name, action, target, ...)
 	local success, result2 = sbq.tryVore(target, action.location or "grabbed", action.throughput or math.huge)
     if success then
 		animator.playSound("grab")
@@ -103,7 +122,7 @@ function default:grabTarget(name, action, target)
 		return success, result2
 	end
 end
-function default:grabRelease(name, action, target)
+function default:grabRelease(name, action, target, ...)
     occupant = Occupants.entityId[tostring(target)]
 	if not occupant then
 		local location = Transformation:getLocation(action.location or "grabbed")
