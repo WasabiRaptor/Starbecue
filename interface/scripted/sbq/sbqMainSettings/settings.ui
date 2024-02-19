@@ -4,7 +4,7 @@
 	"title" : ":settingsTitle",
 	"icon" : "/items/active/sbqController/oralVore.png",
 	"uniqueBy" : "path",
-	"scripts" : [ "settings.lua" ],
+	"scripts" : [ "playerSettings.lua", "settings.lua" ],
 	"children" : [
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
 			{ "type" : "tab", "id" : "mainSettings", "title" : ":pred", "icon" : "/items/active/sbqController/oralVore.png", "visible" : true, "color" : "ff00ff", "contents" : [
@@ -24,7 +24,8 @@
 				{"type" : "panel", "style" : "flat", "children" : [{"type" : "scrollArea", "expandMode":[0,2], "scrollDirections" : [0,1], "children" : [
 					{"mode" : "vertical","expandMode":[2,2]},
 					[
-						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+						{"mode" : "horizontal","expandMode":[2,0]},
+						{"type" : "panel", "expandMode" : [0,2], "style" : "convex", "children" : [
 							{"type":"label", "text":":predatorPrefs","inline":true},
 							[
 								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"iconCheckBox","script":"changeSetting","setting":"oralVorePred", "toolTip":":voreEnabledTip"},
@@ -98,7 +99,7 @@
 								{"type":"label", "text":":pawInfuse"},
 							]
 						]},
-						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+						{"type" : "panel", "expandMode" : [0,2], "style" : "convex", "children" : [
 							{"type":"label", "text":":preyPrefs","inline":true},
 							[
 								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
@@ -186,7 +187,7 @@
 								{"type":"label", "text":":pawInfuse"},
 							]
 						]},
-						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+						{"type" : "panel", "expandMode" : [2,2], "style" : "convex", "children" : [
 							{"type":"label", "text":":transformation","inline":true},
 							[
 								{"type":"iconCheckBox","script":"changeSetting","setting":"speciesTF", "toolTip":":speciesTFTip"},
@@ -226,7 +227,8 @@
 						]},
 					],
 					[
-						{"type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+						{"mode" : "horizontal","expandMode":[2,0]},
+						{"type" : "panel", "expandMode" : [0,2], "style" : "convex", "children" : [
 							{"spacing":0},
 							{"type":"label", "text":":otherPrefs","inline":true},
 							[
@@ -238,6 +240,8 @@
 								{"type":"label", "text":":pinned"},
 							]
 						]},
+						{"type" : "panel", "expandMode" : [2,2], "style" : "convex", "children" : [
+						]}
 					]
 				]}]}
 			]}

@@ -1,0 +1,9 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [320, 256], // *internal* size (not including chrome)
+	"title" : ":preditor",
+	"icon" : "/items/active/sbqController/oralVore.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "entitySettings.lua", "settings.lua" ],
+	"sourceRadius" : -1
+}

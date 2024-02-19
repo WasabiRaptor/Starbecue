@@ -15,9 +15,8 @@ function update(dt, fireMode, shiftHeld, controls)
 		clicked = true
 		if sbq.timer("menu", 1) then
 			local predators = world.entityQuery( activeItem.ownerAimPosition(), 2, {
-				withoutEntityId = entity.id(), includedTypes = { "vehicle", "npc", "object" }
+				withoutEntityId = entity.id(), includedTypes = { "vehicle", "npc", "object", "monster" }
 			})
-
 			if predators[1] ~= nil then
 				getEntitySettingsMenu(predators, 1)
 			end
@@ -33,7 +32,7 @@ function getEntitySettingsMenu(entities, i)
 	if (not entities) or (not i) or (not entities[i]) or ((type(i) == "number" and type(entities[i]) == "number") and not world.entityExists(entities[i])) then return end
 	sbq.addRPC(world.sendEntityMessage( entities[i], "getEntitySettingsMenuData", entity.uniqueId() ), function (data)
 		if data then
-			player.interact("ScriptPane", sb.jsonMerge({ gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui =  ("starbecue:nominomicon") }, data), data.parent or player.id())
+			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = data, ui =  (data.ui or "starbecue:entitySettings") }, entities[i])
 		else
 			if entities[i+1] then
 				getEntitySettingsMenu(entities, i+1)

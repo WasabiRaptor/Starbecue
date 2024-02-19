@@ -12,13 +12,13 @@
 
 		"cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
 		"cockColorRemap" : "",
-		"balls_frontImage" : "/humanoid/any/sbqVoreParts/balls_front.png",
-		"balls_backImage" : "/humanoid/any/sbqVoreParts/balls_back.png",
+		"balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+		"balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
 		"ballsColorRemap" : "",
 
 		"breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
-		"breasts_frontImage" : "/humanoid/any/sbqVoreParts/breasts_front.png",
-		"breasts_backImage" : "/humanoid/any/sbqVoreParts/breasts_back.png",
+		"breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+		"breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
 		"breastsColorRemap" : "",
 
 		"pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
@@ -434,108 +434,6 @@
 					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
-			},
-
-
-			"occupant0State" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"oralVore": { "frames": 1, "cycle":1, "mode": "transition", "transition" : "belly" },
-					"belly": { "frames": 2, "cycle":2, "mode":"end" }
-				}
-			},
-			"occupant1" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"oralVore": { "frames": 1, "cycle":0, "mode":"end" },
-					"belly": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant2" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant3" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant4" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant5" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant6" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant7" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant8" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant9" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant10" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant11" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant12" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant13" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant14" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
-			},
-			"occupant15" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle":0, "mode":"end" }
-				}
 			}
 		},
 		"parts": {
@@ -545,7 +443,8 @@
 					"zLevel": 0.5,
 					"transformationGroups": ["movementOffset", "bellyOffset"],
 					"navelInteract" : [0.25,-1.25],
-					"absorbInteract" : [-0.25,-1.25]
+					"absorbInteract" : [-0.25,-1.25],
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"bellyState": {
@@ -587,7 +486,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": -0.5,
-					"transformationGroups": ["movementOffset", "tailOffset"]
+					"transformationGroups": ["movementOffset", "tailOffset"],
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"bodyState": {
@@ -632,7 +532,8 @@
 					"centered": true,
 					"zLevel": 0.2,
 					"transformationGroups": ["movementOffset", "crotchOffset"],
-					"interact" : [0.5, -1.5]
+					"interact" : [0.5, -1.5],
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"bodyState": {
@@ -676,7 +577,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.11,
-					"anchorPart": "cock"
+					"anchorPart": "cock",
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"balls_frontState": {
@@ -721,7 +623,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.1,
-					"anchorPart": "cock"
+					"anchorPart": "cock",
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"balls_backState": {
@@ -767,7 +670,8 @@
 					"centered": true,
 					"zLevel": 0.1,
 					"transformationGroups": ["movementOffset", "chestOffset"],
-					"interact" : [0.375,-0.375]
+					"interact" : [0.375,-0.375],
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"breastsState": {
@@ -793,7 +697,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.6,
-					"anchorPart": "breasts"
+					"anchorPart": "breasts",
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"breasts_frontState": {
@@ -838,7 +743,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.4,
-					"anchorPart": "breasts"
+					"anchorPart": "breasts",
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"breasts_backState": {
@@ -885,7 +791,8 @@
 					"centered": true,
 					"zLevel": 0.01,
 					"transformationGroups": ["movementOffset", "crotchOffset"],
-					"interact" : [0, -2]
+					"interact" : [0, -2],
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"pussyState": {
@@ -931,7 +838,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 2,
-					"anchorPart": "body"
+					"anchorPart": "body",
+					"bodyFullbright" : true
 				},
 				"partStates": {
 					"bodyState": {

@@ -15,7 +15,7 @@ end
 
 function sbq.tableMatches(a, b)
 	local b = b or {}
-    for k, v in pairs(a or {}) do
+	for k, v in pairs(a or {}) do
 	  if type(v) == "table"
 	  and type(b[k]) == "table"
 	  and not sbq.tableMatches(v, b[k]) then
@@ -29,24 +29,24 @@ function sbq.tableMatches(a, b)
 end
 
 function sbq.metatableLayers(...)
-    for _, table in ipairs({ ... }) do
+	for _, table in ipairs({ ... }) do
 		setmetatable(table, {__index = prevTable})
 		prevTable = table
 	end
 end
 
 function sbq.setupSettingMetatables(entityType)
-    storage = storage or {}
-    storage.sbqSettings = storage.sbqSettings or {}
-    sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {})
+	storage = storage or {}
+	storage.sbqSettings = storage.sbqSettings or {}
+	sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {})
 	sbq.publicSettings = sbq.publicSettings or {}
-    sbq.defaultSettings = sb.jsonMerge(
-        sbq.config.defaultSettings,
-        sbq.config.entityTypeDefaultSettings[entityType] or {},
-        sbq.voreConfig.defaultSettings or {},
-        storage.sbqSettings or {},
+	sbq.defaultSettings = sb.jsonMerge(
+		sbq.config.defaultSettings,
+		sbq.config.entityTypeDefaultSettings[entityType] or {},
+		sbq.voreConfig.defaultSettings or {},
+		storage.sbqSettings or {},
 		sbq.settings or {}
-    )
+	)
 	-- using sb.jsonMerge to de-reference tables
 	sbq.defaultSettings.locations = sb.jsonMerge(sbq.defaultSettings.locations or {}, {})
 	storage.sbqSettings.locations = sb.jsonMerge(storage.sbqSettings.locations or {}, {})
@@ -61,36 +61,36 @@ function sbq.setupSettingMetatables(entityType)
 	setmetatable(storage.sbqSettings, {__index = sbq.defaultSettings})
 	setmetatable(sbq.settings, {__index= storage.sbqSettings})
 
-    for name, location in pairs(sbq.voreConfig.locations or {}) do
+	for name, location in pairs(sbq.voreConfig.locations or {}) do
 		setmetatable(sbq.defaultSettings.locations[name], {__index = sbq.config.defaultLocationSettings})
 		setmetatable(storage.sbqSettings.locations[name], {__index = sbq.defaultSettings.locations[name]})
 		setmetatable(sbq.settings.locations[name], {__index= storage.sbqSettings.locations[name]})
-    end
+	end
 end
 
 function sbq.replaceConfigTags(config, tags)
-    local newConfig = {}
-    for k, v in pairs(config) do
-        local newKey = k
+	local newConfig = {}
+	for k, v in pairs(config) do
+		local newKey = k
 		if type(k) == "string" then
 			newKey = sb.replaceTags(k, tags)
 		end
 		if type(v) == "table" then
-            newConfig[newKey] = sbq.replaceConfigTags(v, tags)
+			newConfig[newKey] = sbq.replaceConfigTags(v, tags)
 		elseif type(v) == "string" then
 			newConfig[newKey] = sb.replaceTags(v, tags)
-        else
+		else
 			newConfig[newKey] = v
 		end
-    end
+	end
 	return newConfig
 end
 
 function sbq.globalToLocal(pos, offset)
-    local facingDirection = sbq.facingDirection()
+	local facingDirection = sbq.facingDirection()
 	local scale = sbq.scale()
-    pos = world.distance(pos, vec2.add(entity.position(), offset or {0,0}))
-    pos[1] = pos[1] * facingDirection / scale
+	pos = world.distance(pos, vec2.add(entity.position(), offset or {0,0}))
+	pos[1] = pos[1] * facingDirection / scale
 	pos[2] = pos[2] / scale
 	return pos
 end
@@ -122,10 +122,16 @@ function sbq.logInfo(input)
 	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
 end
 
-function sbq.reloadStatModifiers()
+function sbq.refreshSettings()
 	local modifiers = {}
-    for k, v in pairs(sbq.config.statSettings) do
-        table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
-    end
+	for k, v in pairs(sbq.config.statSettings or {}) do
+		table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
+	end
 	sbq.setStatModifiers("sbqStats", modifiers)
+
+	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates or {}) do
+		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
+			Transformation:doAnimations(settingsAnim[2])
+		end
+	end
 end

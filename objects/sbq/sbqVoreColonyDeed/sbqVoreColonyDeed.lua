@@ -1,9 +1,11 @@
 ---@diagnostic disable: undefined-global
-
-local _init = init
-local _update = update
-local _onInteraction = onInteraction
-local _countTags = countTags
+local old = {
+	init = init,
+	update = update,
+	onInteraction = onInteraction,
+	countTags = countTags,
+	die = die
+}
 
 sbq = {}
 
@@ -19,20 +21,7 @@ function init()
 		end)
 	end
 
-	_init()
-
-	message.setHandler("sbqSaveQuestGenSetting", function (_,_, settingname, value, index)
-		local scriptConfig = storage.occupier.tenants[index or 1].overrides.scriptConfig or {}
-		scriptConfig.questGenerator = {[settingname] = value}
-		storage.occupier.tenants[index or 1].overrides.scriptConfig = scriptConfig
-
-		entityId = world.loadUniqueEntity(storage.occupier.tenants[index or 1].uniqueId)
-
-		world.callScriptedEntity(entityId, "tenant.despawn", true)
-		sbq.timer("doRespawn", 2, function ()
-			respawnTenants()
-		end)
-	end)
+	old.init()
 
 	message.setHandler("sbqSaveSettings", function (_,_, settings, index)
 		local scriptConfig = storage.occupier.tenants[index or 1].overrides.scriptConfig or {}
@@ -40,11 +29,16 @@ function init()
 		storage.occupier.tenants[index or 1].overrides.scriptConfig = scriptConfig
 	end)
 
-	message.setHandler("sbqSaveTenants", function (_,_, tenants)
+	message.setHandler("sbqSaveTenants", function(_, _, tenants)
+		local uniqueTenants = {}
+		for _, tenant in ipairs(tenants) do
+			if tenant.uniqueId then
+				uniqueTenants[tenant.uniqueId] = true
+			end
+		end
 		for _, tenant in ipairs(storage.occupier.tenants) do
-			if tenant.uniqueId and world.findUniqueEntity(tenant.uniqueId):result() then
+			if tenant.uniqueId and not uniqueTenants[tenant.uniqueId] then
 				local entityId = world.loadUniqueEntity(tenant.uniqueId)
-
 				world.callScriptedEntity(entityId, "tenant.evictTenant")
 			end
 		end
@@ -56,25 +50,11 @@ function init()
 		end)
 	end)
 
-	message.setHandler("sbqSavePreySettings", function (_,_, settings, index)
-		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties.sbqPreyEnabled = settings
-	end)
-	message.setHandler("sbqSaveDigestedPrey", function (_,_, prey, index)
-		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = prey
-	end)
-	message.setHandler("sbqSaveAnimOverrideSettings", function (_,_, settings, index)
-		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties.speciesAnimOverrideSettings = settings
-	end)
-	message.setHandler("sbqSaveStatusProperty", function (_,_, property, value, index)
-		storage.occupier.tenants[index or 1].overrides.statusControllerSettings.statusProperties[property] = value
-	end)
-
-
 	message.setHandler("sbqDeedInteract", function (_,_, args)
-		_onInteraction(args)
+		old.onInteraction(args)
 	end)
 
-	message.setHandler("sbqSummonNewTenant", function (_,_, newTenant, seed)
+	message.setHandler("sbqSummonNewTenant", function (_,_, newTenant, seeds)
 		if not storage.house then return animator.playSound("error") end
 
 		if not newTenant then return animator.playSound("error") end
@@ -112,11 +92,11 @@ function init()
 				if type(tenant.species) == "table" then
 					tenant.species = tenant.species[math.random(#tenant.species)]
 				end
-				tenant.seed = sb.makeRandomSource():randu64()
+				tenant.seed = tenant.seed or sb.makeRandomSource():randu64()
 			end
 		else
 			for i, tenant in ipairs(occupier.tenants) do
-				tenant.seed = seed[i]
+				tenant.seed = tenant.seed or seed[i]
 			end
 		end
 
@@ -134,11 +114,11 @@ end
 function update(dt)
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
-	_update(dt)
+	old.update(dt)
 end
 
 function countTags(...)
-	local tags = _countTags(...)
+	local tags = old.countTags(...)
 	tags["sbqVore"] = 1
 	return tags
 end
@@ -231,7 +211,7 @@ function setTenantsData(occupier)
 		tenant.overrides.statusControllerSettings = npcConfig.statusControllerSettings or {}
 		tenant.overrides.statusControllerSettings.statusProperties = tenant.overrides.statusControllerSettings.statusProperties or {}
 
-		tenant.seed = sb.makeRandomSource():randu64()
+		tenant.seed = tenant.seed or sb.makeRandomSource():randu64()
 	end
 	storage.occupier = occupier
 end
@@ -239,7 +219,7 @@ end
 function onInteraction(args)
 	if not storage.house then return animator.playSound("error") end
 
-	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:voreColonyDeed" }}
+	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:colonyDeed" }}
 end
 
 function checkHouseIntegrity()
@@ -454,7 +434,6 @@ function spawn(tenant, i)
 	return entityId
 end
 
-local _die = die
 function die()
 	if not storage.occupier.tenants then return end
 
@@ -466,7 +445,7 @@ function die()
 		end
 	end
 	-- Original function will fail quests and evict tenants
-	_die()
+	old.die()
 	-- Dropped deed is empty
 	storage = {}
 end

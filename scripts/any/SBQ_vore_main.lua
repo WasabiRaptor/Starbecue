@@ -50,6 +50,16 @@ function sbq.init()
 	message.setHandler("sbqTryAction", function(_, _, action, target, ...)
 		sbq.tryAction(action, target, ...)
 	end)
+	message.setHandler("getEntitySettingsMenuData", function ()
+		return sbq.getSettingsPageData()
+	end)
+	message.setHandler("sbqSetLocationSetting", function (_,_, ...)
+		return sbq.setLocationSetting(...)
+	end)
+	message.setHandler("sbqSetSetting", function (_,_, ...)
+		return sbq.setSetting(...)
+	end)
+
 	sbq.reloadVoreConfig(storage.lastVoreConfig)
 
 	-- require "/scripts/misc/SBQ_convert_scripts.lua"
@@ -167,18 +177,7 @@ function sbq.reloadVoreConfig(config)
 	end
 	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 
-	local modifiers = {}
-	for k, v in pairs(sbq.config.statSettings) do
-		table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
-	end
-	sbq.reloadStatModifiers()
-
-	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates) do
-		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
-			Transformation:doAnimations(settingsAnim[2])
-		end
-	end
-
+	sbq.refreshSettings()
 	Transformation:init()
 	Transformation.state:init()
 	Transformation.active = true
@@ -204,20 +203,23 @@ function sbq.getSettingsPageData()
 end
 
 function sbq.setSetting(k, v)
+	local old = sbq.settings[k]
 	storage.sbqSettings[k] = v
+	if old == sbq.settings[k] then return end
+	sbq.refreshSettings()
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 	end
-	if sbq.config.statSettings[k] then
-		sbq.reloadStatModifiers()
-	end
 end
 
 function sbq.setLocationSetting(name, k, v)
+	local old = sbq.settings.locations[name][k]
 	local location = Transformation:getLocation(name)
 	storage.sbqSettings.locations[name][k] = v
-	if location and location.settings[k] ~= v then
+	if old == sbq.settings.locations[name][k] then return end
+	sbq.refreshSettings()
+	if location then
 		location.occupancy.settingsDirty = true
 	end
 	if sbq.config.publicSettings[k] then
@@ -818,7 +820,7 @@ function _Location:getStruggleAction(direction)
 	return self.struggleActions[newDirection], newDirection
 end
 
-function _Location:outputData()
+function _Location:outputData(entityId)
     local merge = {}
     table.insert(merge, Transformation.locations[self.key] or {})
 	if self.subKey then
@@ -831,6 +833,11 @@ function _Location:outputData()
 	local location = sb.jsonMerge(table.unpack(merge))
     location.occupancy = nil
 	location.settings = nil
+	for _, struggleAction in pairs(location.struggleActions or {}) do
+		if not Transformation:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
+			struggleAction.indicate = "default"
+		end
+	end
 	return location
 end
 
@@ -862,6 +869,7 @@ function Occupants.addOccupant(entityId, location, size, subLocation)
 		size = size or 1,
 		sizeMultiplier = 1,
 		struggleGracePeriod = 0,
+		time = 0,
 		struggleTime = 0,
 		struggleCount = 0,
 		struggleVec = {0,0},
@@ -957,9 +965,9 @@ function _Occupant:update(dt)
 	local locationStore = self.locationStore[self.location]
 
 	locationStore.time = locationStore.time + dt
-
+	self.time = self.time + dt
 	if self.progressBar then
-		self.progressBar.progress = self.progressBar.progress + (dt * self.progressBar.args.speed)
+		self.progressBar.progress = self.progressBar.progress + (dt * (self.progressBar.args.speed or 1))
 		if self.progressBar.progress >= 100 then self.progressBar.callback(self, self.progressBar.args) end
 	end
 
@@ -1037,7 +1045,10 @@ function _Occupant:refreshLocation(name, subLocation)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
     self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
-	world.sendEntityMessage(self.entityId, "sbqRefreshStruggleData", location:outputData())
+	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
+		progressBar = self.progressBar,
+		time = self.time,
+	})
 end
 
 function _Occupant:attemptStruggle(control)
@@ -1139,6 +1150,11 @@ function _Occupant:setProgressBar(name, args, callback, progress)
 	self.progressBar.args = args
 	self.progressBar.name = name
 	self.progressBar.callback = callback
+
+	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), self:getLocation():outputData(self.entityId), {
+		progressBar = self.progressBar,
+		time = self.time,
+	})
 end
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then

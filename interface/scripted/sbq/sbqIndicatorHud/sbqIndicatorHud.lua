@@ -1,6 +1,5 @@
-local owner
 local buttons
-local progress
+local progressBar
 local indicator
 local time = 0
 
@@ -55,24 +54,21 @@ function replace(from, to)
 end
 
 function init()
-	owner = config.getParameter( "owner" )
 	buttons = config.getParameter( "directions" )
-	progress = config.getParameter( "progress" )
+	progressBar = config.getParameter( "progressBar" )
 	time = config.getParameter( "time" )
 	location = config.getParameter( "location" )
-	icon = config.getParameter( "icon" )
-	if not owner or not world.entityExists( owner ) or player.loungingIn() ~= owner then
-		pane.dismiss() -- nothing to indicate?
-	end
+	icon = config.getParameter("icon")
 
 	indicator = widget.bindCanvas( "indicator" )
 
 	update(0)
 end
 
+local gracePeriod = 1
 function update( dt )
-
-	if not owner or not world.entityExists( owner ) or player.loungingIn() ~= owner then
+	gracePeriod = math.max(0, gracePeriod - dt)
+	if gracePeriod == 0 and (player.loungingIn() ~= pane.sourceEntity()) then
 		pane.dismiss()
 		return
 	end
@@ -90,11 +86,28 @@ function update( dt )
 			)
 		end
 	end
+	local facingRight = player.callScript("mcontroller.facingDirection") == 1
+	local left = (facingRight and buttons.back) or buttons.front
+	local right = (facingRight and buttons.front) or buttons.back
+	if not buttons.left and left then
+		indicator:drawImageRect(
+			"/interface/scripted/sbq/sbqIndicatorHud/indicator.png"
+				.. replace(colors.default, colors[left]),
+			directions.left, directions.left
+		)
+	end
+	if not buttons.right and right then
+		indicator:drawImageRect(
+			"/interface/scripted/sbq/sbqIndicatorHud/indicator.png"
+				.. replace(colors.default, colors[right]),
+			directions.right, directions.right
+		)
+	end
 
 	-- bar
-	local s = (progress.percent or 0) / 100 * bar.w
-	if progress.active then
-		progress.percent = progress.percent + progress.dx * dt
+	local s = ((progressBar or {}).progress or 0) / 100 * bar.w
+	if progressBar then
+		progressBar.progress = progressBar.progress + (progressBar.args.speed or 1) * dt
 	end
 	if s < bar.w then
 		indicator:drawImageRect(
@@ -105,7 +118,7 @@ function update( dt )
 	end
 	if s > 0 then
 		indicator:drawImageRect(
-			bar.full .. replace(bar.color, progress.color),
+			bar.full .. replace(bar.color, progressBar.args.color),
 			{0, 0, s, bar.h},
 			{bar.x, bar.y, bar.x + s, bar.y + bar.h}
 		)
@@ -155,7 +168,7 @@ function update( dt )
 end
 
 function uninit()
-	if owner and world.entityExists(owner) then
-		world.sendEntityMessage(owner, "indicatorClosed", player.id())
+	if pane.sourceEntity() and world.entityExists(pane.sourceEntity()) then
+		world.sendEntityMessage(pane.sourceEntity(), "indicatorClosed", player.id())
 	end
 end

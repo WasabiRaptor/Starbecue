@@ -51,9 +51,25 @@ function init()
 		player.setProperty("sbqCumulativeData", cumulativeDataTable)
     end)
 
-    message.setHandler("sbqRefreshStruggleData", function(_, _, location)
-        sb.logInfo(sb.printJson(location, 2))
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, additionalData)
+		sbq.currentLocationData = locationData
+		local struggleActions = locationData.struggleActions or {}
+		player.interact("ScriptPane", {
+			baseConfig = "/interface/scripted/sbq/sbqIndicatorHud/sbqIndicatorHud.config",
+			time = additionalData.time,
+			progressBar = additionalData.progressBar,
+			location = locationData.name,
+			directions = {
+				up = (struggleActions.up and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
+				down = (struggleActions.down and (struggleActions.down.indicate or struggleActions.any.indicate or "default")),
+				left = (struggleActions.left and (struggleActions.left.indicate or struggleActions.any.indicate or "default")),
+				right = (struggleActions.right and (struggleActions.right.indicate or struggleActions.any.indicate or "default")),
+				front = (struggleActions.front and (struggleActions.front.indicate or struggleActions.any.indicate or "default")),
+				back = (struggleActions.back and (struggleActions.back.indicate or struggleActions.any.indicate or "default")),
+			}
+		}, id)
 	end)
+
 
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
 end
