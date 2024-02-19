@@ -12,5 +12,5 @@ function sbq.setupPublicSettings()
     end
 
     sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-	sbq.reloadStatModifiers()
+	sbq.refreshSettings()
 end

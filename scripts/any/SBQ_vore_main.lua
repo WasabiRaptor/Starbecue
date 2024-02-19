@@ -177,18 +177,7 @@ function sbq.reloadVoreConfig(config)
 	end
 	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 
-	local modifiers = {}
-	for k, v in pairs(sbq.config.statSettings) do
-		table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
-	end
-	sbq.reloadStatModifiers()
-
-	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates) do
-		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
-			Transformation:doAnimations(settingsAnim[2])
-		end
-	end
-
+	sbq.refreshSettings()
 	Transformation:init()
 	Transformation.state:init()
 	Transformation.active = true
@@ -214,20 +203,23 @@ function sbq.getSettingsPageData()
 end
 
 function sbq.setSetting(k, v)
+	local old = sbq.settings[k]
 	storage.sbqSettings[k] = v
+	if old == sbq.settings[k] then return end
+	sbq.refreshSettings()
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 	end
-	if sbq.config.statSettings[k] then
-		sbq.reloadStatModifiers()
-	end
 end
 
 function sbq.setLocationSetting(name, k, v)
+	local old = sbq.settings.locations[name][k]
 	local location = Transformation:getLocation(name)
 	storage.sbqSettings.locations[name][k] = v
-	if location and location.settings[k] ~= v then
+	if old == sbq.settings.locations[name][k] then return end
+	sbq.refreshSettings()
+	if location then
 		location.occupancy.settingsDirty = true
 	end
 	if sbq.config.publicSettings[k] then

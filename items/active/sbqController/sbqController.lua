@@ -128,7 +128,7 @@ function sbq.clickAction()
 	if result == nil then
 		result = player.callScript("sbq.tryAction", storage.action)
 	end
-	if result and not result[1] then
+	if result and not result[1] and not (result[2] == "missingTarget") then
 		animator.playSound("error")
     end
 	-- sb.logInfo(string.format("[%s] Action results: %s:%s", entity.id(), storage.action, sb.printJson(result)))
