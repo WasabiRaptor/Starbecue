@@ -2,6 +2,7 @@
 sbq = {
 	config = root.assetJson("/sbq.config"),
 	strings = root.assetJson("/sbqStrings.config"),
+	gui = root.assetJson("/sbqGui.config"),
 	itemTemplates = root.assetJson("/sbqItemTemplates.config"),
 
 	tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json"),

@@ -267,12 +267,12 @@ end
 function sbq.moveToLocation(target, throughput, locationName, subLocationName)
 	if not target or not locationName then return false end
 	occupant = Occupants.entityId[tostring(target)]
-    if not occupant then return false end
+	if not occupant then return false end
 	if throughput then
 		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
 	end
 	local location = Transformation:getLocation(locationName, subLocationName)
-	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier)
+	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier, subLocationName)
 	if space then
 		occupant:refreshLocation(locationName, subLocationName)
 		return true
@@ -577,6 +577,7 @@ function _Transformation:addLocation(name, config)
 	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()))
     location.tag = name
 	location.key = name
+	location.name = location.name or (":"..name)
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
 	if location.infusionSlot and sbq.settings[location.infusionType .. "Pred"] and sbq.settings[location.infusionSlot] then
 		local infused = sbq.settings[location.infusionSlot]

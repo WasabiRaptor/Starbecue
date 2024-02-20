@@ -1,13 +1,3 @@
-sbq = {
-	config = root.assetJson("/sbq.config")
-}
-settingSetup = {}
-widgetScripts = {}
-getWidget = {}
-storage = {}
-
-require("/scripts/any/SBQ_RPC_handling.lua")
-require("/scripts/any/SBQ_util.lua")
 
 function init()
     player.setScriptContext("starbecue")
@@ -22,7 +12,7 @@ function init()
 	sbq.setupSettingMetatables("player")
 end
 
-function widgetScripts.changeSetting(setting,value,location)
+function sbq.widgetScripts.changeSetting(setting,value,location)
     player.setScriptContext("starbecue")
 	if location then
         player.callScript("sbq.setLocationSetting", location, setting, value)
@@ -33,7 +23,7 @@ function widgetScripts.changeSetting(setting,value,location)
 	end
 end
 
-function widgetScripts.changeTableSetting(setting,value,location)
+function sbq.widgetScripts.changeTableSetting(setting,value,location)
     player.setScriptContext("starbecue")
     local table = sb.parseJson(value)
 	if not table then pane.playSound("/sfx/interface/clickon_error.ogg") return false end

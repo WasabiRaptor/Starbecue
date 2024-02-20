@@ -1,25 +1,74 @@
+
+sbq = {
+	settingsSetup = {},
+	widgetScripts = {},
+	getWidget = {},
+	settingWidgets = {},
+	settings = {}
+}
+local old = {
+	init = init
+}
+storage = {}
+
+require("/scripts/any/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_util.lua")
+
+function init()
+	sbq.config = root.assetJson("/sbq.config")
+	sbq.strings = root.assetJson("/sbqStrings.config")
+	sbq.gui = root.assetJson("/sbqGui.config")
+	old.init()
+end
+
 ---@diagnostic disable: undefined-global
 local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
 local mkwidget = mg.mkwidget
 
-settingWidgets = {}
 local scrollMode = {true,true} -- local thing to the other one, which is dumb
 -- first off, modify textBox to actually use given size
 function widgets.textBox:preferredSize() return self.explicitSize or { 96, 14 } end
 
-local translationStrings
 function mg.formatText(str)
     if not str then return nil end
     if str:sub(1, 1) == ":" then
-		if not translationStrings then translationStrings = root.assetJson("/sbqStrings.config") end
-		str = translationStrings[str:sub(2,-1)] or str
+		if sbq.strings then str = sbq.strings[str:sub(2,-1)] or str end
 	end
 	local colorSub = {
 	  ["^accent;"] = string.format("^#%s;", mg.getColor("accent")),
 	}
 	str = string.gsub(str, "(%b^;)", colorSub)
 	return str
+end
+
+function mg.setTitle(s)
+	mg.cfg.title = mg.formatText(s)
+	mg.queueFrameRedraw()
+end
+
+widgets.sbqSetting = mg.proto(mg.widgetBase, {
+	widgetType = "sbqSetting"
+})
+
+function widgets.sbqSetting:init(base, param)
+	local defaultSetting = sbq.config.defaultSettings[param.setting]
+	if param.location then
+		defaultSetting = sbq.config.defaultLocationSettings[param.setting]
+	end
+	param.toolTip = mg.formatText(param.toolTip or sbq.strings[param.setting.."Tip"])
+	local settingType = type(defaultSetting)
+	if sbq.gui.settingWidgets[param.setting] then
+		param = sb.jsonMerge(param, sbq.gui.settingWidgets[param.setting])
+	elseif settingType == "boolean" then
+		param = sb.jsonMerge(param, { type = "iconCheckBox", script = "changeSetting" })
+	elseif settingType == "table" then
+		param = sb.jsonMerge(param, { type = "sbqTextBox", settingType = settingType, script = "changeTableSetting" })
+	else
+		param = sb.jsonMerge(param, { type = "sbqTextBox", settingType = settingType, script = "changeSetting" })
+	end
+	self.id = nil
+	self.parent:addChild(param)
 end
 
 ----- modified tabField -----
@@ -121,23 +170,43 @@ end
 
 ----- slider -----
 
-widgets.slider = mg.proto(mg.widgetBase, {
+widgets.sbqSlider = mg.proto(mg.widgetBase, {
 	expandMode = {1, 0}, -- will expand horizontally, but not vertically
 	widgetType = "slider"
 })
 
-function widgets.slider:init(base, param)
+function widgets.sbqSlider:init(base, param)
 	self.expandMode = param.expandMode
 	self.textToolTips = param.textToolTips
 	self.snapOnly = param.snapOnly
 	self.explicitSize = param.size
+	self.inverted = param.inverted
+	self.percent = param.percent
+	self.min = param.min
+	self.max = param.max
+	self.script = param.script
+
+	if self.script then
+		function self:onChange(index, value)
+			sbq.widgetScripts[self.script](self.handles[index].setting, value, self.handles[index].location)
+		end
+	end
 
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
 
 	self.notches = param.notches or {}
-	if not param.notches and param.min and param.max then
-		for i = param.min, param.max do
+	local min = param.min
+	local max = param.max
+	if type(param.max) == "string" then
+		max = sbq.settings[param.max] or sbq.defaultSettings[param.max] or 1
+	end
+	if type(param.min) == "string" then
+		min = sbq.settings[param.min] or sbq.defaultSettings[param.min] or 0
+	end
+
+	if not param.notches and min and max then
+		for i = min, max do
 			table.insert(self.notches, i)
 		end
 	end
@@ -150,8 +219,15 @@ function widgets.slider:init(base, param)
 		sb.logError("Slider with no handles! id: " .. self.id)
 	end
 	for i, h in ipairs(self.handles) do
+		if h.setting then
+			h.value = sbq.settings[h.setting] or (h.location and sbq.config.defaultLocationSettings[h.setting]) or (sbq.config.defaultSettings[h.setting])
+			sbq.settingWidgets[(h.location or "")..h.setting] = self
+		end
 		if not h.value then
 			sb.logError("Slider handle with no value! id: " .. self.id .. ", index: " .. i)
+		end
+		if self.inverted then
+			h.value = (self.notches[#self.notches] - h.value)
 		end
 		if not h.toolTip then
 			h.toolTip = ""
@@ -167,10 +243,10 @@ function widgets.slider:init(base, param)
 	self.redraw = true
 end
 
-function widgets.slider:minSize() return {16, 16} end
-function widgets.slider:preferredSize() return self.explicitSize or {64, 16} end
+function widgets.sbqSlider:minSize() return {16, 16} end
+function widgets.sbqSlider:preferredSize() return self.explicitSize or {64, 16} end
 
-function widgets.slider:draw()
+function widgets.sbqSlider:draw()
 	-- update every frame while mouse is nearby
 
 	local f = (self.size[1] - 16) / (self.notches[#self.notches] - self.notches[1])
@@ -251,17 +327,18 @@ function widgets.slider:draw()
 	end
 end
 
-function widgets.slider:onMouseEnter()
+function widgets.sbqSlider:onMouseEnter()
 	self.mouseIsOver = true
+	mg.toolTip()
 	self:queueRedraw()
 end
-function widgets.slider:onMouseLeave()
+function widgets.sbqSlider:onMouseLeave()
 	self.mouseIsOver = false
 	self:queueRedraw()
 end
 
-function widgets.slider:isMouseInteractable() return true end
-function widgets.slider:onMouseButtonEvent(btn, down)
+function widgets.sbqSlider:isMouseInteractable() return true end
+function widgets.sbqSlider:onMouseButtonEvent(btn, down)
 	if down and not self:hasMouse() and self.current then
 		self:captureMouse(btn)
 		self.changed = false
@@ -270,14 +347,14 @@ function widgets.slider:onMouseButtonEvent(btn, down)
 	elseif btn == self:mouseCaptureButton() then
 		self.redraw = true
 		if self.changed then
-			self:onChange(self.current, self.handles[self.current].value)
+			self:onChange(self.current, (self.inverted and (self.notches[#self.notches] - self.handles[self.current].value)) or self.handles[self.current].value)
 		end
 		self:releaseMouse()
 		self:queueRedraw()
 		return true
 	end
 end
-function widgets.slider:onCaptureMouseMove(delta)
+function widgets.sbqSlider:onCaptureMouseMove(delta)
 	if delta[1] == 0 or not self.current or not self.handles[self.current].value then return end
 	if self.handles[self.current].locked then mg.toolTip() return end
 
@@ -315,23 +392,26 @@ function widgets.slider:onCaptureMouseMove(delta)
 	if v > max then
 		v = max
 	end
-
 	self.handles[self.current].value = v
 	mg.toolTip()
 end
-function widgets.slider:getToolTip()
-	if self.current then
+function widgets.sbqSlider:getToolTip()
+	if self.current and self.handles[self.current].toolTip then
 		if self.textToolTips then
 			local closest, index = getClosestValue(self.handles[self.current].value, self.notches)
-			if self.textToolTips[index] then return self.handles[self.current].toolTip .. "\n" .. self.textToolTips[index] end
+			if self.textToolTips[index] then return mg.formatText(self.handles[self.current].toolTip) .. "\n" .. mg.formatText(self.textToolTips[index]) end
 		end
-		return self.handles[self.current].toolTip .. "\nValue: " .. (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
+		local value = (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
+		if self.percent then
+			value = math.floor(value * 100)
+		end
+		return mg.formatText(self.handles[self.current].toolTip) .. "\n"..sbq.strings.value..": " .. value .. (self.percent and "%" or "")
 	else
 		return nil
 	end
 end
 
-function widgets.slider:onChange(index, value) end
+function widgets.sbqSlider:onChange(index, value) end
 
 ----- fill bar -----
 
@@ -414,14 +494,19 @@ function widgets.iconCheckBox:init(base, param)
     self.value = param.value
     self.setting = param.setting
     self.script = param.script
-    self.location = param.location
+	self.location = param.location
+
 
 	if self.setting then
-        settingWidgets[(self.location or "")..self.setting] = self
+		sbq.settingWidgets[(self.location or "") .. self.setting] = self
+		local value = sbq.settings[self.setting] or (self.location and sbq.config.defaultLocationSettings[self.setting]) or (sbq.config.defaultSettings[self.setting])
+		if type(value) == "boolean" then
+			self.checked = value
+		end
     end
 	if self.script then
 		function self:onClick()
-			widgetScripts[self.script](self.setting,self.value or self.checked,self.location)
+			sbq.widgetScripts[self.script](self.setting,self.value or self.checked,self.location)
 		end
 	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
@@ -634,17 +719,24 @@ function widgets.sbqTextBox:init(base, param)
     self.location = param.location
 
 	if self.setting then
-        settingWidgets[(self.location or "")..self.setting] = self
-    end
+		sbq.settingWidgets[(self.location or "") .. self.setting] = self
+		local value = sbq.settings[self.setting] or (self.location and sbq.config.defaultLocationSettings[self.setting]) or (sbq.config.defaultSettings[self.setting])
+		param.text = tostring(value)
+		self.settingType = type(value)
+		if self.settingType == "table" then
+			param.text = sb.printJson(value)
+		end
+	end
+
 	if self.script then
         function self:onEnter()
 			if self.settingType == "number" then
                 local number = tonumber(self.text)
 				if number then
-					widgetScripts[self.script](self.setting,number,self.location)
+					sbq.widgetScripts[self.script](self.setting,number,self.location)
                 end
             else
-				widgetScripts[self.script](self.setting,tostring(self.text),self.location)
+				sbq.widgetScripts[self.script](self.setting,tostring(self.text),self.location)
 			end
 		end
     end

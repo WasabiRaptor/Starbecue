@@ -9,6 +9,8 @@ require "/items/active/sbqController/sbqControllerSetup.lua"
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
+	sbq.gui = root.assetJson("/sbqGui.config")
+
 
 	activeItem.setHoldingItem(false)
 	storage = storage or {}
@@ -128,7 +130,7 @@ function sbq.clickAction()
 	if result == nil then
 		result = player.callScript("sbq.tryAction", storage.action)
 	end
-	if result and not result[1] and not (result[2] == "missingTarget") then
+	if result and not result[1] and not (result[2] == "targetMissing") then
 		animator.playSound("error")
     end
 	-- sb.logInfo(string.format("[%s] Action results: %s:%s", entity.id(), storage.action, sb.printJson(result)))

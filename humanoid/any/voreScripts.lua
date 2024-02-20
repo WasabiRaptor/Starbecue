@@ -99,7 +99,7 @@ function default:trySendDeeper(name, action, target, ...)
     local location = Transformation:getLocation(action.location)
     local occupant = location.occupancy.list[1]
 	local sendDeeper = action.sendDeeper or location.sendDeeper
-	if occupant and action.sendDeeper then
+	if occupant and sendDeeper then
 		return sbq.moveToLocation(occupant.entityId, sendDeeper.throughput, sendDeeper.location, sendDeeper.subLocation)
 	end
 end

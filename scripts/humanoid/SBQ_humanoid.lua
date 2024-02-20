@@ -87,7 +87,7 @@ function sbq.doTransformation(newIdentity, duration, perma, ...)
 
     humanoid.setIdentity(newIdentity)
 
-	if duration and not (sbq.settings.indefineiteTF) then
+	if duration and not (sbq.settings.indefiniteTF) then
 		sbq.forceTimer("revertTF", (duration or 5) * 60, sbq.revertTF)
     end
 	if sbq.settings.permanentTF and perma then

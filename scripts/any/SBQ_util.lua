@@ -66,6 +66,21 @@ function sbq.setupSettingMetatables(entityType)
 		setmetatable(storage.sbqSettings.locations[name], {__index = sbq.defaultSettings.locations[name]})
 		setmetatable(sbq.settings.locations[name], {__index= storage.sbqSettings.locations[name]})
 	end
+	sbq.refreshOverrides()
+end
+
+function sbq.refreshOverrides()
+	sbq.overrideSettings = {}
+	for k, v in pairs(sbq.settings) do
+		sbq.overrideSettings[k] = true
+	end
+	sbq.overrideSettings.locations = {}
+	for k, v in pairs(sbq.settings.locations) do
+		sbq.overrideSettings.locations[k] = {}
+		for k2, _ in pairs(v) do
+			sbq.overrideSettings.locations[k][k2] = true
+		end
+	end
 end
 
 function sbq.replaceConfigTags(config, tags)
@@ -120,6 +135,9 @@ end
 
 function sbq.logInfo(input)
 	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
+end
+function sbq.logJson(input, pretty)
+	sb.logInfo("["..world.entityName(entity.id()).."]".. sb.printJson(input, pretty or 2))
 end
 
 function sbq.refreshSettings()
