@@ -1,11 +1,15 @@
 # Starbecue
 
-if you have a question check [the FAQ]() If availble or navigate to the in game help tabs, most SBQ interfaces will have a tab with an icon of a book which has information that may help you.
+Starbecue is an 18+ fetish mod created for starbound that focuses mainly on Vore, Macro/Micro, and Transformation fetish content as well as many adjacent kinks.
+
+The mod has a opt-in based consent system for deciding what sort of actions you are subject to, as well as perform on other characters whether they be player or NPCs. While there is no way to prevent one from viewing other characters performing actions one may not have opted in to, those actions cannot be performed on you by anyone and NPCs will ignore you when seeking out those actions. NPCs can also be configured ingame in much the same way players can configure themselves, however, certain OCs may have certain settings locked to a specific value by their owner.
 
 # Install
 
+Starbecue requires a modified executable that both improves and expands features of the game for modders to take advantage of, most feature changes were to be in service of achieving the intended fetish content in an easier manner, however the changes to the engine itself do not include any fetish specific content, and are not exlusively in service of such content, most overall were meant to improve the game experience for players and modders.
+
 Make sure to delete any previously installed versions of starbecue within the `Starbound/mods/`
-This includes any version of `starbecue.pak` and `starboundSpeciesAnimOverrides.pak`
+This includes any version of `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` or `SBQ_engine_assets.pak`
 
 Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix)
 
@@ -13,7 +17,7 @@ This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/fi
 
 While not required it is recommended you install the Monster Config Core Loader mods found [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442860690) and [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442873217), if you're using Stardust Core then you should get [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2690363974) and if you're using FU you'll also need [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2442880727) because it should fix potential compatibility issues.
 
-Further steps are OS specific!
+Further steps are somewhat OS specific!
 
 ## Windows
 
@@ -25,35 +29,59 @@ The script has will have copied the files into their correct place, you can now 
 if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
 
 ### Manual Setup
-Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
+Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
 
-Place `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` files within `Starbound\mods\`
+Place `starbecue.pak` and `SBQ_engine_assets.pak` files within `Starbound\mods\`
 
 if you downloaded the win64 version, you're going to open the `Starbound\win64\` folder
 
 Replace the `starbound.exe` file with the provided version
 if you are running a server, also replace `starbound_server.exe` provided seperately
 
-## macOS
+## linux
 
 ### Setup Script
-Open the diretory containing these files within terminal, this can be done by left clicking the folder and selecting "New Terminal At Folder" or opening terminal and input the following command, (you can simply drag the folder into terminal rather than typing the path manually)
 
-`cd /Users/(Username)/Downloads/starbecue_osx_v(version)`
+Open the diretory containing these files within terminal, this can be done by left clicking the folder and selecting "New Terminal At Folder" or opening terminal and using `cd` to open the directory by typing the path (you can simply drag the folder into terminal rather than typing the path manually)
 
 Input the following commands
-`chmod +x ./setup.sh`
-`./setup.sh`
+`chmod +x ./install.sh`
+`./install.sh`
 
-The script has will have copied the files into their correct place, you can now play starbound with the mod!
+The script should have copied the files into their correct place, you can now play starbound with the mod!
 
 if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
 
 ### Manual Setup
 
-Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
+Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
 
-Place `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` files within `Starbound\mods\`
+Place `starbecue.pak` and `SBQ_engine_assets.pak` files within `Starbound/mods/`
+
+Replace the `starbound` file within `Starbound/linux/` with the provided version
+
+Replace the `starbound_server` file within `Starbound/linux/` with the provided version if you are running a server
+
+View the file properties on each executable and enable them as executables
+
+## macOS
+
+### Setup Script
+Open the diretory containing these files within terminal, this can be done by left clicking the folder and selecting "New Terminal At Folder" or opening terminal and using `cd` to open the directory by typing the path (you can simply drag the folder into terminal rather than typing the path manually)
+
+Input the following commands
+`chmod +x ./setup.sh`
+`./setup.sh`
+
+The script should have copied the files into their correct place, you can now play starbound with the mod!
+
+if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
+
+### Manual Setup
+
+Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
+
+Place `starbecue.pak` and `SBQ_engine_assets.pak` files within `Starbound/mods/`
 
 Replace the `starbound` file within `Starbound/osx/Starbound.app/Contents/MacOS/` with the provided version (left click and select "Show Package Contents" on Starbound.app)
 
@@ -62,7 +90,8 @@ Replace the `starbound_server` file within `Starbound/osx/` with the provided ve
 The files are now in the correct place, you can now play starbound with the mod!
 
 ## Uninstall
-Open the `Starbound` directory by viewing its properties on steam, and then click `Browse` on the `Installed Files` tab
+
+Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
 
 delete `starbecue.pak` in the `mods` folder
 
@@ -77,35 +106,71 @@ Steam will then re-download the unmodified versions of the game executable
 
 # Getting Started
 
-To get started with the mod, all you need to do is open your crafting interface, and craft a **Vore Controller**. When holding it in hand, hold shift and up to see your avalable actions, click to select one and assign it to the controller perform the action.
+On creation of a new character, a popup menu will open up to allow one to quickly assign the settings. To change those settings and access further settings, then open the toobar and select **Starbecue Settings** to open the settings menu.
 
-After you have an assigned vore controller, you can click it to activate **Vore mode** and then click on things to vore them, you may notice your player character jitter slightly on activation, this is normal. While in vore mode you will have a hud in the bottom right to show you your prey and belly effects, if you click the gear you can get more settings to enable or diable other vore types as well as being prey, you can access the same menu via the quickbar as well even when not in vore mode.
+To get started with the mod, all you need to do is open your crafting interface, and craft the **SBQ Controller** this is the main item used to perform actions, and can be re-assigned via it's action wheel.
 
-When in vore mode, or tranformed into a different player species, some items may appear buggy in your hands, this is normal, this is not something we can fix, do not report it as a bug.
-
-The settings panel also has ingame help information, click on any of the book tabs to get information about the mod.
-
-To exit **Vore More** one simply needs to release all their prey, at which point, the **Let Out** action will become an **X** which can de-activate vore mode.
-
-Races which are supported in **Vore Mode** are listed down below, unsupported races will still be able to use the controllers, but will not have any vore sprites, or they might not display at all.
+Available actions are determined by your current species, what sort of state you're in, and most importantly, what settings you have enabled.
 
 More content can be found via discovering **Auri's Shop** which you can get to via some mysterious fireplaces you might find on lush planets, they look like this:
 ![](/fireplace.png)
 
+## Settings Overview
+The settings are accessed via the toolbar and selecting **Starbecue Settings**.
 
-# Features
+The **Main** tab is mostly focused with predator based settings, changing what effects your body has and etc. Some settings are specific to your current species, though most are global. Some settings are also reliant on other preferences to be displayed.
+Eg: Cock Vore related settings will not be shown if one has not selected that they are a Cock Vore Pred.
+
+The **Prefs** tab controls consent based settings on what actions you can perform and what can be performed on you, as well as modifiers on how much they might be able to effect you.
+
+The **Help** tab contains general information about the mod, it probably contains the same information in this readme!
+
+Depending on your species, you may also find an additional tab with a manual to explain that species' capabilities!
+
+You can also use the **Nominomicon** to open the settings page for any SBQ NPC or Pred Object to edit their settings and read their manual in the same manner as you would for yourself, however OC NPCs may have certain settings locked to a specific value by their owner.
+
+# Compatible Species
+Species which are supported are listed down below, unsupported races will still be able to use the controllers for the default available actions, but will not have any special animations when perfomring most of them.
+
+Most species will only need a simple patch to be made compatible, as well as added to the valid tenant list, a template can be found [here](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate)
+
+One can also create their own OC for the mod using this template [here](https://github.com/WasabiRaptor/SBQ-NPC-Template)
 
 ![](/vehicles/sbq/sbqVaporeon/sbqVaporeon.png)![](/vehicles/sbq/sbqEgg/sbqEgg.png)![](/vehicles/sbq/sbqSlime/sbqSlime.png)![](/vehicles/sbq/sbqXeronious/sbqXeronious.png)![](/vehicles/sbq/sbqAvian/sbqAvian.png)![](/vehicles/sbq/sbqZiellekDragon/sbqZiellekDragon.png)![](/vehicles/sbq/sbqFray_IcyVixen/sbqFray_IcyVixen.png)
 
-### Playable Predator transformation
+### SBQ Special Species
+> These species are special species and may possess more abilities or play differently than one's standard state
 - Vaporeon
-- (Kaiju) Xeronious
-- Avian
+- Kaiju (Xeronious)
+- Giant Avian
 - Slime
 - Ziellek Dragon
 - Fray the Vulpix
 
-### Player/NPC Predator species
+### SBQ Species
+> Races included within SBQ by default
+- Vaporeon
+- Flareon
+- Meowscarada
+- Hellhound
+- Catfox
+
+### OC NPCs
+> These characters cannot be played as, however can be spawned in via the **SBQ Colony Deed** which can be purchased in Auri's shop
+- Loki Deerfox (Pred/Prey) LokiVulpix
+- Auri Drimyr (Pred/Prey) LokiVulpix
+- Socks Flareon (Pred/Prey) LokiVulpix
+- Clover Meowscarada (Pred/Prey) LokiVulpix
+- Zevi Goocat (Pred/Prey) Zygahedron
+- Helena Hellhound (Pred/Prey) FFWizard
+- Sandy Floatporeon (Pred/Prey) Fevix
+- Batty (Pred/Prey) Xeronious
+- Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706))
+- Akari Kaen
+- Ferri Catfox (Pred/Prey) Ferrilata_
+
+### External Compatible Species
+> This mod includes patches for the species below to add compatibility, it does not include any of their respective assets.
 - Human
 - Hylotl
 - Floran
@@ -120,9 +185,7 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Lycanroc](https://steamcommunity.com/sharedfiles/filedetails/?id=1800401078)
 - [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes)
 - [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1266991719) (Remade)
-- Vaporeon (SBQ)
 - [Jolteon](https://steamcommunity.com/sharedfiles/filedetails/?id=2075613227)
-- Flareon (SBQ)
 - [Espeon](https://steamcommunity.com/sharedfiles/filedetails/?id=1144430324)
 - [Umbreon](https://steamcommunity.com/sharedfiles/filedetails/?id=730345787)
 - [Glaceon](https://steamcommunity.com/sharedfiles/filedetails/?id=2012704863)
@@ -131,8 +194,6 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Delphox](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148)
 - [Zoroark](https://steamcommunity.com/sharedfiles/filedetails/?id=2811625141)
 - [Hisui Zoroark](https://steamcommunity.com/workshop/filedetails/?id=2813977483)
-- Meowscarada (SBQ)
-- Hellhound (SBQ)
 - [Crylan](https://steamcommunity.com/sharedfiles/filedetails/?id=1197335162)
 - [Rodent](https://github.com/Zygahedron/StarboundSimpleVoreMod) (Sheights' version of SSVM is broken, this is a fixed fork)
 - [Lyceen](https://steamcommunity.com/sharedfiles/filedetails/?id=1360547769)
@@ -165,84 +226,34 @@ More content can be found via discovering **Auri's Shop** which you can get to v
 - [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942)
 - [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956)
 
-This mod includes no assets from the respective modded races, modified or not, meaning said modded race *must* be installed to access its content
+# Predator Info
 
+To be a pred, one must have opted in to being pred for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
+Eg: If you select Oral Vore pred, but don't require consent, you're allowing prey characters to attempt to force their way inside your mouth. If consent is enabled, then you will recieve a textbox prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
 
-### NPC Vore Tenants
-- Loki Deerfox (Pred/Prey) LokiVulpix
-- Auri Drimyr (Pred/Prey) LokiVulpix
-- Socks Flareon (Pred/Prey) LokiVulpix
-- Clover Meowscarada (Pred/Prey) LokiVulpix
-- Zevi Goocat (Pred/Prey) Zygahedron
-- Helena Hellhound (Pred/Prey) FFWizard
-- Sandy Floatporeon (Pred/Prey) Fevix
-- Batty (Pred/Prey) Xeronious
-- Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706) mod )
-- Akari Kaen
-- Ferri Catfox (Pred/Prey) Ferrilata_
+To perform predator actions, one requires a **SBQ Controller** these can be crafted for a single pixel. Open the action wheel and assign an action, available actions are determined by what settings you have enabled, as well as what species you are.
 
-Purchase a **Vore Colony Deed** from Auri's shop to summon a vore Tenant, those listed above are OC NPCs which may have unique dialogue, you can summon an NPC of any compatible species, they may share the same dialogue line pool, however they are able to do more vore types.
+The action wheel will also let you release any prey you have eaten, or select a specific prey to perform prey specific actions only available through this menu.
 
-### Other Things
-- TF Dart Gun
-- Shrink Ray
-- Egg
-- Plastic Egg
-
-# Playable Predator Info
-
-Special potions can be purchased from Auri's shop which can transform you into large predators, and grants you a head tech that allows you to choose which one you wish to transform into if you've unlocked multiple.
-
-Full use of this system requires you to bind Tech Action 2 and 3 in the options if they aren't already bound. We recommend the G and H keyes respectively, because they're right by F, and that's what they were back in really old versions of the game when they were actually used in vanilla.
-
-When turning into a predator you will be given a controller item, this is required for the predator transformation to detect some keys being pressed, such as Shift, as well as pass some more data to the vehicle that it cannot detect without it.
-
-Tapping Shift+Up with a controller allows you to bring up the action wheel, at the bottom you will be able to let out the most recently eaten prey, or despawn the predator transformation, you can also choose to assign a vore action to that controller to be performed on that controller's click, or choose to perform a prey action on prey you've already consumed, different locations in your body may have unique actions. A pred might also have some vore actions that are available in some states but not others, clicking with a controller with an assigned action that the pred does not have will not result in anything.
-
-Most predators will have the same movement controls a player would, but tapping movment keys can be used to transition between different poses, like standing or sitting or sleeping, etc.
-
-To let people out that you previously ate, either use the letout action on your controller, or if you are in a large transformation simply press Tech Action 2 (G) to let out the most recent that can be let out.
-
-In the bottom right you will have a HUD to show what occupants you've eaten, as well as your current belly effect, this can be used to quickly change the effect, as well as access the settings quickly, and peform actions on the prey by clicking on them, such as letting them out, turbo digesting them, or predator specific actions, like transforming them.
+In the bottom right you will have a HUD to show you the health of your current occupants, as well as the progress bar for any extra effects they are currently being subject to. This HUD will also allow you to quickly change the current digest effect for the selected location.
 
 # Prey Info
 
-Whether you are being eaten by a object predator, or a player transformed into a predator, as prey you will have a HUD in the bottom right, this indicates which directions you can struggle to cause the predator to do something.
+To be prey, one must have opted in to being prey for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
+Eg: if you select Oral Vore prey, but don't require consent, you're allowing pred characters to attempt to eat you without asking. If consent is enabled, you will recieve a textbox prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
 
-For player controlled predators, most struggles are disabled so that player is in full control of their state, but if they are in a state where an escape is available, you may be able to struggle out still, but it is possible for them to disable being able to escape entirely in their settings.
+When you've been eaten a HUD will open up in the bottom right, indicating the directions one can press to cause a struggle animation. The color of the indicator arrow hints at what struggling in that direction might do for you. Holding **Shift** will prevent any actions from occuring from your struggles, only playing the animations, such as if one didn't want to escape.
 
-#### Red
-indicates a direction in which you could escape, such as out the mouth or butt, your prey settings do not impact whether the arrow appears or not, but they do effect whether you can actually escape, a red arrow may indicate an anal vore escape, but if it isn't enabled in your settings, struggling that direction will not do anything.
-
-#### Blue
-Indicates a state change, such as making the predator stand up or sit down.
-
-#### Green
-Indicates a state change, but only for state changes that would bring you closer to a state you can escape from.
-
-#### Cyan
-Indicates a direction that would move you to another location within the predator's body.
-
-#### Yellow
-Indicates a direction that would cause you to get eaten, only appears if you're just being held or hugged.
-
-# Settings
-
-The settings menu can be accessed from the quickbar, or from the predator HUD.
-
-#### Pred Tab
-
-The Settings menu will open to the Global Pred settings tab by default, these settings effect how you will perform as a predator.
-
-The belly effect names are self explanitory and have tooltips if you hover over them.
-
-#### Prey Tab
-
-Some people don't like certain kinds of vore, some people don't like vore at all! but they still might want to play games with other people who do, and this is meant to make that much easier.
-
-Players can use the quickbar to access Starbecue's settings, the prey tab brings up a window with a bunch of checkboxes, this allows you to opt in and out of what types of vore can be done to you, check it if you're ok being prey for it, uncheck if you aren't, if you don't want to be prey at all just uncheck the "Prey Enabled" at the bottom of the menu, which overrides all the others.
-
-Currently this does not affect whether any other vore mods can or can't perform vore on the player.
+- Red
+> You might be able to escape the pred.
+- Blue
+> Might make the pred change state.
+- Green
+> Might make the pred change state, or let you move to another location in the predator's body, regardless it'll be easier for you to escape.
+- Cyan
+> Might let you move to another location within the predator's body.
+- Yellow
+> Might get the pred to perform some sort of action on you.
 
 # Support Us!
 
@@ -252,10 +263,6 @@ Vote on what should be the next feature worked on!
 
 ## Main Credits
 
-### Zygan (Zygahedron)
-
-Artist, Lua scripting and debugging.
-
 ### LokiVulpix / Wasabi_Raptor
 
 Artist, Lua scripting and debugging.
@@ -264,3 +271,7 @@ Artist, Lua scripting and debugging.
 >
 > https://itaku.ee/profile/lokivulpix
 > https://twitter.com/LokiVulpix
+
+### Zygan (Zygahedron)
+
+Artist, Lua scripting and debugging.
