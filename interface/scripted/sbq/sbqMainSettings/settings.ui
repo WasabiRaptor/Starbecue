@@ -21,7 +21,7 @@
 				]}
 			]},
 			{ "type" : "tab", "id" : "preferencesTab", "title" : ":prefs", "icon" : "empty_image.png", "visible" : true, "color" : "ff00ff", "contents" : [
-				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
 					{"mode" : "vertical","expandMode":[2,2]},
 					[
 						{"mode" : "horizontal","expandMode":[2,0]},
@@ -93,11 +93,16 @@
 								{"type":"sbqSetting","setting":"cockInfusePredConsent", "toolTip":":voreConsentTip"}],
 								{"type":"label", "text":":cockInfuse"},
 							],
-							[
-								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"sbqSetting","setting":"pawInfusePred", "toolTip":":voreEnabledTip"},
-								{"type":"sbqSetting","setting":"pawInfusePredConsent", "toolTip":":voreConsentTip"}],
-								{"type":"label", "text":":pawInfuse"},
-							]
+							// [
+							// 	[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"sbqSetting","setting":"tailInfusePred", "toolTip":":voreEnabledTip"},
+							// 	{"type":"sbqSetting","setting":"tailInfusePredConsent", "toolTip":":voreConsentTip"}],
+							// 	{"type":"label", "text":":tailInfuse"},
+							// ],
+							// [
+							// 	[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},{"type":"sbqSetting","setting":"pawInfusePred", "toolTip":":voreEnabledTip"},
+							// 	{"type":"sbqSetting","setting":"pawInfusePredConsent", "toolTip":":voreConsentTip"}],
+							// 	{"type":"label", "text":":pawInfuse"},
+							// ]
 						]},
 						{"type" : "panel", "expandMode" : [2,2], "style" : "convex", "children" : [
 							{"type":"label", "text":":preyPrefs","inline":true},
@@ -180,26 +185,32 @@
 								{"type":"sbqSetting","setting":"cockInfusePreyConsent", "toolTip":":voreConsentTip"}],
 								{"type":"label", "text":":cockInfuse"},
 							],
-							[
-								[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
-								{"type":"sbqSetting","setting":"pawInfusePrey", "toolTip":":voreEnabledTip"},
-								{"type":"sbqSetting","setting":"pawInfusePreyConsent", "toolTip":":voreConsentTip"}],
-								{"type":"label", "text":":pawInfuse"},
-							]
+							// [
+							// 	[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+							// 	{"type":"sbqSetting","setting":"tailInfusePrey", "toolTip":":voreEnabledTip"},
+							// 	{"type":"sbqSetting","setting":"tailInfusePreyConsent", "toolTip":":voreConsentTip"}],
+							// 	{"type":"label", "text":":tailInfuse"},
+							// ],
+							// [
+							// 	[{"spacing":0, "mode":"horizontal", "expandMode":[0,0]},
+							// 	{"type":"sbqSetting","setting":"pawInfusePrey", "toolTip":":voreEnabledTip"},
+							// 	{"type":"sbqSetting","setting":"pawInfusePreyConsent", "toolTip":":voreConsentTip"}],
+							// 	{"type":"label", "text":":pawInfuse"},
+							// ]
 						]},
 						{"type" : "panel", "expandMode" : [2,2], "style" : "convex", "children" : [
 							{"type":"label", "text":":resistances","inline":true},
 
-							{"type":"label", "text":":digestResistance"},
+							{"type":"label", "text":":digestResistance", "id":"digestResistanceLabel"},
 							{"type":"sbqSetting","setting":"digestResistance"},
 
-							{"type":"label", "text":":cumDigestResistance"},
+							{"type":"label", "text":":cumDigestResistance", "id":"cumDigestResistanceLabel"},
 							{"type":"sbqSetting","setting":"cumDigestResistance"},
 
-							{"type":"label", "text":":femcumDigestResistance"},
+							{"type":"label", "text":":femcumDigestResistance", "id":"femcumDigestResistanceLabel"},
 							{"type":"sbqSetting","setting":"femcumDigestResistance"},
 
-							{"type":"label", "text":":milkDigestResistance"},
+							{"type":"label", "text":":milkDigestResistance", "id":"milkDigestResistanceLabel"},
 							{"type":"sbqSetting","setting":"milkDigestResistance"},
 						]}
 					],

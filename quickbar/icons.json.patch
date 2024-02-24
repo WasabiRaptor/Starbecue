@@ -1,26 +1,18 @@
 [
-	{ "op" : "add", "path" : "/items/starbecue:settings",
-		"value" : {
-			"label" : "SBQ Settings",
-			"weight" : -10,
-			"icon" : "/items/active/sbqController/oralVore.png",
-			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:settings" } } ]
-		}
-	},
 	{ "op" : "add", "path" : "/items/starbecue:mainSettings",
 		"value" : {
-			"label" : "Neo SBQ Settings",
+			"label" : "SBQ Settings",
 			"weight" : -10,
 			"icon" : "/items/active/sbqController/oralVore.png",
 			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:mainSettings" } } ]
 		}
 	},
-	{ "op" : "add", "path" : "/items/starbecue:colonyDeed",
+	{ "op" : "add", "path" : "/items/starbecue:crewMenu",
 		"value" : {
 			"label" : "SBQ Crew",
 			"weight" : -9,
 			"icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png",
-			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:voreCrewMenu", "data" : { "crewUI" : true } } } ]
+			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:crewMenu", "data" : { "crewUI" : true } } } ]
 		}
 	}
 ]

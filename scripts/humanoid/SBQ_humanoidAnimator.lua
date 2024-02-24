@@ -96,7 +96,7 @@ function sbq.remapColor(remaps, fromMap, toMap)
 			local from = fromMap[remap[1]]
             local to = toMap[remap[2]]
             local check = remap[3]
-            if sbq.tableMatches(check, sbq.settings) then
+            if sbq.tableMatches(check, sbq.settings, true) then
                 for i, fromColor in ipairs(from) do
 					local toColor = to[i] or to[#to]
 					if (fromColor ~= toColor) then
@@ -104,7 +104,7 @@ function sbq.remapColor(remaps, fromMap, toMap)
 					end
 				end
             end
-        elseif sbq.tableMatches(remap.check, sbq.settings) then
+        elseif sbq.tableMatches(remap.check, sbq.settings, true) then
 			for color, replace in pairs(remap or {}) do
 				if type(replace) == "string" then
 					directives = directives .. ";" .. color .. "=" .. replace

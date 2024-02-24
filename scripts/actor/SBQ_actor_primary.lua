@@ -28,13 +28,25 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqConsumeResource", function(_, _, resourceName, amount)
-		if status.resourceLocked(resourceName) then return false end
-		return status.overConsumeResource(resourceName, amount)
-	end)
-
-	message.setHandler("sbqGetResourcePercentage", function(_, _, resourceName)
-		return status.resourcePercentage(resourceName)
+    message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
+        local res = status.overConsumeResource(resource, amount)
+		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
+		return res
+    end)
+	message.setHandler("sbqConsumeResource", function (_,_, resource, amount, ignoreBlock)
+        local res = status.consumeResource(resource, amount)
+		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
+		return res
+    end)
+	message.setHandler("sbqOverConsumeResourcePercentage", function (_,_, resource, amount, ignoreBlock)
+        local res = status.overConsumeResourcePercentage(resource, amount)
+		if not res and ignoreBlock then status.modifyResourcePercentage(resource, -amount) end
+		return res
+    end)
+	message.setHandler("sbqConsumeResourcePercentage", function (_,_, resource, amount, ignoreBlock)
+        local res = status.consumeResourcePercentage(resource, amount)
+		if not res and ignoreBlock then status.modifyResourcePercentage(resource, -amount) end
+		return res
 	end)
 
 	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)

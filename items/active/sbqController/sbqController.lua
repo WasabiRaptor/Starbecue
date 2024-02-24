@@ -228,7 +228,7 @@ function AssignMenu:init()
 		}
 	}
 	for _, action in ipairs(player.callScript("sbq.actionList") or config.getParameter("actions")) do
-		if player.callScript("sbq.actionAvailable", action) then
+		if player.callScript("sbq.actionAvailable", action)[1] then
 			local icon, shortdescription, description = sbq.getActionData(action, true, activeItem.directory(), storage.iconDirectory)
 			table.insert(options, {
 				args = {"controllerAssign", action},

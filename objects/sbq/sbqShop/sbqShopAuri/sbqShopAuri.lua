@@ -32,7 +32,7 @@ end
 
 function onInteraction(args)
 	local dialogueBoxData = { dialogueBoxScripts = config.getParameter("dialogueBoxScripts"), dialogueTreeStart = config.getParameter("dialogueTreeStart"), settings = storage.sbqSettings, dialogueTree = config.getParameter("dialogueTree"), defaultPortrait = config.getParameter("defaultPortrait"), defaultName = config.getParameter("defaultName"), portraitPath = config.getParameter("portraitPath"), occupantHolder = occupantHolder }
-	return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:auriShop" }}
+	return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:shop" }}
 end
 
 function update(dt)

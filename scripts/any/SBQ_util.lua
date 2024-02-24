@@ -13,8 +13,14 @@ function sbq.getClosestValue(x, list)
 	return closest, closestKey
 end
 
-function sbq.tableMatches(a, b)
-	local b = b or {}
+function sbq.tableMatches(a, b, maybeArrays)
+	if not a then return true end
+    local b = b or {}
+	if maybeArrays and a[1] then
+		for _, v in ipairs(a) do
+			if sbq.tableMatches(v,b) then return true end
+		end
+	end
 	for k, v in pairs(a or {}) do
 	  if type(v) == "table"
 	  and type(b[k]) == "table"
@@ -36,17 +42,30 @@ function sbq.metatableLayers(...)
 end
 
 function sbq.setupSettingMetatables(entityType)
-	storage = storage or {}
+    storage = storage or {}
+	sbq.voreConfig = sbq.voreConfig or {}
 	storage.sbqSettings = storage.sbqSettings or {}
-	sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {})
+    sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {}, (sbq.entityConfig or {}).overrideSettings or {})
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(
 		sbq.config.defaultSettings,
 		sbq.config.entityTypeDefaultSettings[entityType] or {},
-		sbq.voreConfig.defaultSettings or {},
-		storage.sbqSettings or {},
-		sbq.settings or {}
-	)
+        sbq.voreConfig.defaultSettings or {},
+		(sbq.entityConfig or {}).defaultSettings or {}
+    )
+	for k, v in pairs(storage.sbqSettings) do
+		if type(v) ~= type(sbq.defaultSettings[k]) then
+            storage.sbqSettings[k] = nil
+		end
+    end
+	for k, values in pairs(sbq.voreConfig.invalidSettings or {}) do
+		for _, v in ipairs(values) do
+			if storage.sbqSettings[k] == v then
+				storage.sbqSettings[k] = v
+			end
+		end
+	end
+
 	-- using sb.jsonMerge to de-reference tables
 	sbq.defaultSettings.locations = sb.jsonMerge(sbq.defaultSettings.locations or {}, {})
 	storage.sbqSettings.locations = sb.jsonMerge(storage.sbqSettings.locations or {}, {})
@@ -148,8 +167,16 @@ function sbq.refreshSettings()
 	sbq.setStatModifiers("sbqStats", modifiers)
 
 	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates or {}) do
-		if sbq.tableMatches(settingsAnim[1], sbq.settings) then
+		if sbq.tableMatches(settingsAnim[1], sbq.settings, true) then
 			Transformation:doAnimations(settingsAnim[2])
 		end
 	end
+end
+
+function sbq.getString(str)
+    if not str then return nil end
+    if str:sub(1, 1) == ":" then
+		if sbq.strings then str = sbq.strings[str:sub(2,-1)] or str end
+	end
+	return str
 end

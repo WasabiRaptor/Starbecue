@@ -1,3 +1,6 @@
+sbq = {}
+
+require("/scripts/any/SBQ_util.lua")
 local buttons
 local progressBar
 local indicator
@@ -54,6 +57,7 @@ function replace(from, to)
 end
 
 function init()
+	sbq.strings = root.assetJson("/sbqStrings.config")
 	buttons = config.getParameter( "directions" )
 	progressBar = config.getParameter( "progressBar" )
 	time = config.getParameter( "time" )
@@ -158,7 +162,7 @@ function update( dt )
 
 	-- location
 	indicator:drawText(
-		location or "",
+		sbq.getString(location or ""),
 		{position = {16, 29}, horizontalAnchor = "mid", wrapWidth = 25},
 		8, {127, 127, 127}
 	)

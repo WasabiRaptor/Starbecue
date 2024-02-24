@@ -4,7 +4,8 @@ sbq = {
 	widgetScripts = {},
 	getWidget = {},
 	settingWidgets = {},
-	settings = {}
+    settings = {},
+	settingIdentifiers = {}
 }
 local old = {
 	init = init
@@ -14,17 +15,22 @@ storage = {}
 require("/scripts/any/SBQ_RPC_handling.lua")
 require("/scripts/any/SBQ_util.lua")
 
-function init()
-	sbq.config = root.assetJson("/sbq.config")
-	sbq.strings = root.assetJson("/sbqStrings.config")
-	sbq.gui = root.assetJson("/sbqGui.config")
-	old.init()
-end
 
 ---@diagnostic disable: undefined-global
 local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
 local mkwidget = mg.mkwidget
+
+function init()
+	function mg.setTitle(s)
+		mg.cfg.title = mg.formatText(s)
+		mg.queueFrameRedraw()
+	end
+	sbq.config = root.assetJson("/sbq.config")
+	sbq.strings = root.assetJson("/sbqStrings.config")
+	sbq.gui = root.assetJson("/sbqGui.config")
+    old.init()
+end
 
 local scrollMode = {true,true} -- local thing to the other one, which is dumb
 -- first off, modify textBox to actually use given size
@@ -42,19 +48,30 @@ function mg.formatText(str)
 	return str
 end
 
-function mg.setTitle(s)
-	mg.cfg.title = mg.formatText(s)
-	mg.queueFrameRedraw()
-end
-
 widgets.sbqSetting = mg.proto(mg.widgetBase, {
 	widgetType = "sbqSetting"
 })
 
 function widgets.sbqSetting:init(base, param)
+	sbq.timer(nil,0.1,function ()
+		self:delete()
+	end)
+    param.setting = param.setting or self.parent.setting
+    param.location = param.location or self.parent.location
+	sbq.settingIdentifiers[(param.location or "") .. param.setting] = {param.setting, param.location}
 	local defaultSetting = sbq.config.defaultSettings[param.setting]
 	if param.location then
 		defaultSetting = sbq.config.defaultLocationSettings[param.setting]
+    end
+	local isInvalid = false
+    if param.value then
+        local invalid = ((sbq.voreConfig or {}).invalidSettings or {})[param.setting]
+		if param.location then
+			invalid = ((((sbq.voreConfig or {}).invalidSettings or {}).locations or {})[param.location] or {})[param.setting] or invalid
+        end
+		for _, v in ipairs(invalid or {}) do
+			if v == param.value then return end
+		end
 	end
 	param.toolTip = mg.formatText(param.toolTip or sbq.strings[param.setting.."Tip"])
 	local settingType = type(defaultSetting)
@@ -69,6 +86,25 @@ function widgets.sbqSetting:init(base, param)
 	end
 	self.id = nil
 	self.parent:addChild(param)
+end
+
+widgets.sbqPanel = mg.proto(widgets.panel, {
+	widgetType = "sbqPanel"
+})
+function widgets.sbqPanel:init(base, param)
+    self.setting = param.setting or self.parent.setting
+    self.location = param.location or self.parent.location
+    param.id = param.id or (self.location or "") .. self.setting .. "Panel"
+	widgets.panel.init(self, base, param)
+end
+widgets.sbqLayout = mg.proto(widgets.layout, {
+	widgetType = "sbqLayout"
+})
+function widgets.sbqLayout:init(base, param)
+    self.setting = param.setting or self.parent.setting
+    self.location = param.location or self.parent.location
+    param.id = param.id or (self.location or "") .. self.setting .. "Layout"
+	widgets.layout.init(self, base, param)
 end
 
 ----- modified tabField -----
@@ -221,7 +257,8 @@ function widgets.sbqSlider:init(base, param)
 	for i, h in ipairs(self.handles) do
 		if h.setting then
 			h.value = sbq.settings[h.setting] or (h.location and sbq.config.defaultLocationSettings[h.setting]) or (sbq.config.defaultSettings[h.setting])
-			sbq.settingWidgets[(h.location or "")..h.setting] = self
+            sbq.settingWidgets[(h.location or "") .. h.setting] = self
+			sbq.settingIdentifiers[(h.location or "") .. h.setting] = {h.setting, h.location}
 		end
 		if not h.value then
 			sb.logError("Slider handle with no value! id: " .. self.id .. ", index: " .. i)
@@ -492,12 +529,13 @@ function widgets.iconCheckBox:init(base, param)
 	self.checked = param.checked
 	self.radioGroup = param.radioGroup
     self.value = param.value
-    self.setting = param.setting
+    self.setting = param.setting or self.parent.setting
     self.script = param.script
-	self.location = param.location
+	self.location = param.location or self.parent.location
 
 
-	if self.setting then
+    if self.setting then
+		sbq.settingIdentifiers[(self.location or "") .. self.setting] = {self.setting, self.location}
 		sbq.settingWidgets[(self.location or "") .. self.setting] = self
 		local value = sbq.settings[self.setting] or (self.location and sbq.config.defaultLocationSettings[self.setting]) or (sbq.config.defaultSettings[self.setting])
 		if type(value) == "boolean" then
@@ -555,7 +593,8 @@ function widgets.iconCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 			self:queueRedraw()
 			theme.onCheckBoxClick(self)
 		elseif self.state == "press" then
-			self.state = "hover"
+            self.state = "hover"
+			if self.locked then return true end
 			if self.radioGroup then
 				if not self.checked then
 					self.checked = true
@@ -718,7 +757,8 @@ function widgets.sbqTextBox:init(base, param)
     self.script = param.script
     self.location = param.location
 
-	if self.setting then
+    if self.setting then
+		sbq.settingIdentifiers[(self.location or "") .. self.setting] = {self.setting, self.location}
 		sbq.settingWidgets[(self.location or "") .. self.setting] = self
 		local value = sbq.settings[self.setting] or (self.location and sbq.config.defaultLocationSettings[self.setting]) or (sbq.config.defaultSettings[self.setting])
 		param.text = tostring(value)
@@ -742,9 +782,13 @@ function widgets.sbqTextBox:init(base, param)
     end
 	self:setText(param.text)
 end
-function widgets.sbqTextBox:preferredSize() return self.explicitSize or {96, 14} end
+function widgets.sbqTextBox:preferredSize() return {(self.explicitSize or {})[1] or 96, 14} end
 function widgets.sbqTextBox:draw()
-	theme.drawTextBox(self)
+    theme.drawTextBox(self)
+	if self.locked then
+        local c = widget.bindCanvas(self.backingWidget)
+		c:drawImage("/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", {6,7}, 1, nil, true )
+	end
 	widget.setPosition(self.subWidgets.content, vec2.add(widget.getPosition(self.backingWidget), {self.frameWidth, 0}))
 	widget.setSize(self.subWidgets.content, vec2.add(widget.getSize(self.backingWidget), {self.frameWidth*-2, 0}))
 	local c = widget.bindCanvas(self.subWidgets.content) c:clear()
@@ -765,7 +809,7 @@ function widgets.sbqTextBox:draw()
 	c:drawText(self.text, { position = {-self.scrollPos, vc}, horizontalAnchor = "left", verticalAnchor = "mid" }, 8, color)
 end
 
-function widgets.sbqTextBox:isMouseInteractable() return true end
+function widgets.sbqTextBox:isMouseInteractable() return not self.locked end
 function widgets.sbqTextBox:onMouseButtonEvent(btn, down)
 	if btn == 0 and down then
 	if not self.focused then
@@ -797,7 +841,7 @@ function widgets.sbqTextBox:onMouseWheelEvent(dir)
 end
 
 function widgets.sbqTextBox:focus()
-	if not self.focused then
+	if not self.focused and not self.locked then
 	self:grabFocus()
 	self:moveCursor(self.text:len())
 	end

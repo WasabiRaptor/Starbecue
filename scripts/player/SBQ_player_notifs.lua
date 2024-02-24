@@ -26,7 +26,7 @@ function sbq.notifyPlayer()
 		})
 	end
 
-	if player.getProperty("sbqSettingsVersion") ~= root.modMetadata("Starbecue").version then
+	if (player.getProperty("sbqSettingsVersion") ~= root.modMetadata("Starbecue").version) or not player.getProperty("sbqAgreedTerms") then
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
 	end
 

@@ -20,7 +20,8 @@ function sbq.widgetScripts.changeSetting(setting,value,location)
     else
 		player.callScript("sbq.setSetting", setting, value)
 		storage.sbqSettings[setting] = value
-	end
+    end
+	sbq.refreshSettingVisibility()
 end
 
 function sbq.widgetScripts.changeTableSetting(setting,value,location)
@@ -33,5 +34,6 @@ function sbq.widgetScripts.changeTableSetting(setting,value,location)
     else
 		player.callScript("sbq.setSetting", setting, table)
 		storage.sbqSettings[setting] = table
-	end
+    end
+	sbq.refreshSettingVisibility()
 end

@@ -5,7 +5,8 @@ require"/scripts/rect.lua"
 require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/humanoid/SBQ_humanoid.lua"
-require"/scripts/actor/SBQ_actor.lua"
+require "/scripts/actor/SBQ_actor.lua"
+require"/scripts/player/SBQ_player_notifs.lua"
 function init()
 	storage = storage or {}
     storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
@@ -15,8 +16,12 @@ function init()
     sbq.config = root.assetJson("/sbq.config")
 
     sbq.actorInit()
-	sbq.humanoidInit()
-    sbq.init()
+    sbq.humanoidInit()
+	if player.getProperty("sbqAgreedTerms") then
+        sbq.init()
+		sbq.actorMessages()
+    end
+	sbq.notifyPlayer()
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )

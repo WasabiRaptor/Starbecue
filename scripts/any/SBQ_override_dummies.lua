@@ -9,6 +9,10 @@ function sbq.scale()
 	return 1
 end
 
+function sbq.entityId()
+	return entity.entityId()
+end
+
 function sbq.targetPosition()
 	return entity.position()
 end

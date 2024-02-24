@@ -23,7 +23,7 @@ _Occupant.__index = _Occupant
 
 Transformations = {}
 Transformation = {
-    locations = {},
+	locations = {},
 	states = {}
 }
 
@@ -137,7 +137,7 @@ function sbq.reloadVoreConfig(config)
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
 	end
-    Transformation = { locations = {}, states = {} }
+	Transformation = { locations = {}, states = {} }
 	Transformation.transformation = Transformations[sbq.voreConfig.transformation or "default"]
 	setmetatable(Transformation, {__index = Transformation.transformation})
 
@@ -184,11 +184,13 @@ function sbq.reloadVoreConfig(config)
 end
 
 function sbq.tryAction(action, target, ...)
+	if not Transformation.active then return {false} end
 	return {Transformation:tryAction(action, target, ...)}
 end
 
 function sbq.actionAvailable(action, target, ...)
-	return Transformation:actionAvailable(action, target, ...)
+	if not Transformation.active then return {false} end
+	return {Transformation:actionAvailable(action, target, ...)}
 end
 
 
@@ -225,14 +227,14 @@ function sbq.setLocationSetting(name, k, v)
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings.locations[name][k] = sbq.settings.locations[name][k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-    end
+	end
 end
 
 function sbq.tryVore(target, locationName, throughput)
 	local size = sbq.getSize(target)
 	if throughput then
 		if (size) >= (throughput * sbq.size()) then return false, "tooBig" end
-    end
+	end
 	local location = Transformation:getLocation(locationName)
 	local space, subLocation = location:hasSpace(size)
 	if space then
@@ -251,7 +253,7 @@ end
 
 function sbq.tryLetout(target, throughput)
 	local occupant = Occupants.entityId[tostring(target)]
-    if not occupant then return false end
+	if not occupant then return false end
 	if throughput then
 		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
 	end
@@ -328,31 +330,31 @@ function _Transformation:addState(stateName, config)
 	state.locations = state.locations or {}
 	for k, location in pairs(self.locations) do
 		state.locations[k] = state.locations[k] or {}
-        for k2, subLocation in pairs(location.subLocations or {}) do
+		for k2, subLocation in pairs(location.subLocations or {}) do
 			local subLocationData = sb.jsonMerge(subLocation, state.locations[k].subLocations[k2] or {})
-            subLocationData.struggleActions = subLocationData.struggleActions or {}
+			subLocationData.struggleActions = subLocationData.struggleActions or {}
 			for actionName, struggleAction in pairs(subLocationData.struggleActions) do
 				if subLocationData.struggleActions.any and actionName ~= "any" then
 					setmetatable(struggleAction, {__index = subLocationData.struggleActions.any})
 				end
-            end
-            setmetatable(subLocationData, { __index = state.locations[k] })
+			end
+			setmetatable(subLocationData, { __index = state.locations[k] })
 			state.locations[k].subLocations[k2] = subLocationData
-        end
+		end
 
-        state.locations[k].struggleActions = state.locations[k].struggleActions or {}
+		state.locations[k].struggleActions = state.locations[k].struggleActions or {}
 
 		for actionName, struggleAction in pairs(state.locations[k].struggleActions) do
 			if state.locations[k].struggleActions.any and actionName ~= "any" then
 				setmetatable(struggleAction, {__index = state.locations[k].struggleActions.any})
 			end
-        end
+		end
 
 		setmetatable(state.locations[k], { __index = location })
 	end
 	for actionName, action in pairs(state.actions or {}) do
 		setmetatable(action, _Action)
-    end
+	end
 	setmetatable(state, {__index = self.transformation.states[stateName] or _State})
 	self.states[stateName] = state
 end
@@ -370,16 +372,16 @@ function _State:tryAction(name, target, ...)
 	if not action then return self:actionFailed(name, action, target, "missingAction", ...) end
 	if sbq.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
 	if action.onCooldown then return self:actionFailed(name, action, target, "onCooldown", ...) end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return self:actionFailed(name, action, target, "settingMismatch", ...) end
+	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return self:actionFailed(name, action, target, "settingMismatch", ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
 		local targetSettings = sbq.getSettings(target)
-		if not sbq.tableMatches(action.targetSettings, targetSettings) then return self:actionFailed(name, action, target, "targetSettingsMismatch", ...) end
+		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return self:actionFailed(name, action, target, "targetSettingsMismatch", ...) end
 		if not action.ignoreTargetOccupants then
 			local targetOccupants = world.entitiesLounging(target)
 			for _, occupant in ipairs(targetOccupants or {}) do
 				local occupantSettings = sbq.getSettings(occupant)
-				if not sbq.tableMatches(action.targetSettings, occupantSettings) then return self:actionFailed(name, action, target, "targetPreySettingsMismatch", ...) end
+				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return self:actionFailed(name, action, target, "targetPreySettingsMismatch", ...) end
 			end
 		end
 	end
@@ -432,11 +434,11 @@ function _State:actionAvailable(name, target, ...)
 	if not name then return false end
 	local action = self.actions[name]
 	if not action then return false, "missingAction" end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings) then return false, "settingsMismatch" end
+	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return false, "settingsMismatch" end
 	if target and action.targetSettings then
 		if not world.entityExists(target) then return false, "targetMissing" end
 		local targetSettings = sbq.getSettings(target)
-		if not sbq.tableMatches(action.targetSettings, targetSettings) then return false, "targetSettingsMismatch" end
+		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch" end
 	end
 	if action.availableScript then
 		if self[action.availableScript] then
@@ -521,9 +523,9 @@ function _State:interact(args)
 		end
 		if (v.aimPart or v.part) and v.aim then
 			a = sbq.localPartPoint(v.aimPart or v.part, v.aim)
-        end
+		end
 		-- check if we should even consider this action
-        local valid = Transformation:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
+		local valid = Transformation:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
 		-- check if there either point must be within a radius
 		if valid and p and (v.posRadius or v.radius) then
 			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
@@ -575,7 +577,7 @@ end
 -- Location handling
 function _Transformation:addLocation(name, config)
 	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()))
-    location.tag = name
+	location.tag = name
 	location.key = name
 	location.name = location.name or (":"..name)
 	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
@@ -629,21 +631,21 @@ function _Transformation:addLocation(name, config)
 			subLocation.occupancy.sided = true
 			subLocation.occupancy.facingRight = sbq.facingRight
 		end
-        subLocation.tag = name .. k
+		subLocation.tag = name .. k
 		subLocation.subKey = k
 		location.occupancy.subLocations[k] = subLocation.occupancy
 		setmetatable(subLocation, {__index = location})
 	end
 
-    Occupants.locations[name] = location.occupancy
-    location.settings = {}
+	Occupants.locations[name] = location.occupancy
+	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.locations[location.settingsTable or name]})
 	setmetatable(location, {__index = self.transformation.locations[name] or _Location})
 	self.locations[name] = location
 end
 
 function _Location:hasSpace(size, subLocation)
-	if not sbq.tableMatches(self.activeSettings or {}, sbq.settings) then return false end
+	if not sbq.tableMatches(self.activeSettings or {}, sbq.settings, true) then return false end
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
 	if self.settings.hammerspace then return math.huge end
 	local shared = 0
@@ -666,7 +668,7 @@ function _Location:hasSpace(size, subLocation)
 		local best = {0}
 		for k, v in pairs(self.subLocations) do
 			if not (v.maxCount and (#v.occupancy.list >= v.maxCount)) then
-                local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
+				local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
 				if space and space > best[1] then
 					best = {space, k}
 				end
@@ -728,7 +730,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			end
 			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
 		end
-		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings))) then
+		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true))) then
 			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
 			if interpolateAnims then
 				self.occupancy.interpolating = true
@@ -738,14 +740,14 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			end
 			self.occupancy.queuedInterpolateAnims = nil
 			animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
-			if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings)) then
+			if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings, true)) then
 				for _, subLocation in pairs(self.subLocations) do
 					animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
 				end
 			end
 		end
 	end
-	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) and not (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings)) then
+	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) and not (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true)) then
 		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."_occupants", tostring(self.occupancy.visualSize))
 	end
 	if self.occupancy.interpolating then
@@ -760,7 +762,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 		)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
 		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."_occupantsInterpolate", tostring(self.occupancy.interpolateSize))
-		if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings)) then
+		if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.setting, true)) then
 			for _, subLocation in pairs(self.subLocations) do
 				animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
 			end
@@ -773,9 +775,9 @@ function _Location:refreshStruggleDirection(id)
 	for _, occupant in ipairs(self.occupancy.list) do
 		occupant:checkStruggleDirection(0)
 		self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
-    end
+	end
 	for _, locationName in ipairs(self.sharedWith or {}) do
-        local location = Transformation:getLocation(locationName)
+		local location = Transformation:getLocation(locationName)
 		for _, occupant in ipairs(location.occupancy.list) do
 			occupant:checkStruggleDirection(0)
 			self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
@@ -819,7 +821,7 @@ function _Location:refreshStruggleDirection(id)
 			end
 		end
 		return Transformation:doAnimations(newAnims, { s_direction = direction }, id), direction
-    end
+	end
 	return 0, direction
 end
 function _Location:getStruggleAction(direction)
@@ -838,17 +840,17 @@ function _Location:getStruggleAction(direction)
 end
 
 function _Location:outputData(entityId)
-    local merge = {}
-    table.insert(merge, Transformation.locations[self.key] or {})
+	local merge = {}
+	table.insert(merge, Transformation.locations[self.key] or {})
 	if self.subKey then
 		table.insert(merge, Transformation.locations[self.key].subLocations[self.subKey] or {})
-    end
+	end
 	table.insert(merge, Transformation.state.locations[self.key] or {})
 	if self.subKey then
 		table.insert(merge, Transformation.state.locations[self.key].subLocations[self.subKey] or {})
-    end
+	end
 	local location = sb.jsonMerge(table.unpack(merge))
-    location.occupancy = nil
+	location.occupancy = nil
 	location.settings = nil
 	for _, struggleAction in pairs(location.struggleActions or {}) do
 		if not Transformation:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
@@ -1026,17 +1028,17 @@ function _Occupant:refreshLocation(name, subLocation)
 			local shared = Transformation:getLocation(sharedName)
 			shared.occupancy.sizeDirty = true
 		end
-    end
-	if not sbq.tableMatches(location.activeSettings or {}, sbq.settings) then return self:remove() end
+	end
+	if not sbq.tableMatches(location.activeSettings or {}, sbq.settings, true) then return self:remove() end
 
 	local attemptAnims = {
 		Transformation.stateName .. "_" .. location.tag .. "_" .. location.occupancy.visualSize,
 		Transformation.stateName .. "_" .. location.tag,
 		location.tag .. "_" .. location.occupancy.visualSize,
-        location.tag,
+		location.tag,
 		self.location .. "_" .. location.occupancy.visualSize,
 		self.location
-    }
+	}
 	for _, v in ipairs(attemptAnims) do
 		if animator.hasState(self.seat .. "Location", v) then
 			animator.setAnimationState(self.seat.."Location", v)
@@ -1055,7 +1057,7 @@ function _Occupant:refreshLocation(name, subLocation)
 		-- { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
-    util.appendLists(persistentStatusEffects, location.passiveEffects or {})
+	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[location.settings.mainEffect or "none"] or {})
 	for setting, effects in pairs(location.toggleEffects or {}) do
 		if (location.settings[setting]) then
@@ -1070,7 +1072,7 @@ function _Occupant:refreshLocation(name, subLocation)
 	self:setItemTagWhitelist(location.itemTagWhitelist or sbq.voreConfig.prey.itemTagWhitelist or sbq.config.prey.itemTagWhitelist)
 	self:setItemTypeBlacklist(location.itemTypeBlacklist or sbq.voreConfig.prey.itemTypeBlacklist or sbq.config.prey.itemTypeBlacklist)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
-    self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
+	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
 	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
 		progressBar = self.progressBar,
@@ -1091,7 +1093,7 @@ function _Occupant:attemptStruggle(control)
 		self.struggleDirection = direction
 		if struggleAction.pressAnimations and not struggleAction.holdAnimations then
 			bonusTime = bonusTime + Transformation:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
-        end
+		end
 		if (bonusTime > 0) then
 			if not self:overConsumeResource("energy", sbq.config.struggleCost) then return end
 		end
@@ -1131,7 +1133,7 @@ function _Occupant:checkStruggleDirection(dt)
 		-- if self:controlHeldTime("Right") > staleTime then effectiveness = effectiveness * 0.5 end
 	end
 	self.struggleVec = {dx * effectiveness, dy * effectiveness}
-    if (dx ~= 0 or dy ~= 0) then
+	if (dx ~= 0 or dy ~= 0) then
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
 		if not self:consumeResource("energy", sbq.config.struggleCost * dt, true) then return end
@@ -1198,48 +1200,48 @@ end
 
 function _Occupant:consumeResource(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-    if not world.entityIsResource(self.entityId, resource) then return true end
+	if not world.entityIsResource(self.entityId, resource) then return true end
 	if (world.entityResource(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-        world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
+		world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
 		return true
-    end
+	end
 	return false
 end
 function _Occupant:consumeResource(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-    if not world.entityIsResource(self.entityId, resource) then return true end
+	if not world.entityIsResource(self.entityId, resource) then return true end
 	if (world.entityResource(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-        world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
+		world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
 		return true
-    end
+	end
 	return false
 end
 function _Occupant:overConsumeResource(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-    if not world.entityIsResource(self.entityId, resource) then return true end
+	if not world.entityIsResource(self.entityId, resource) then return true end
 	if (world.entityResource(self.entityId, resource) > 0) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-        world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
+		world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
 		return true
-    end
+	end
 	return false
 end
 
 function _Occupant:consumeResourcePercentage(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-    if not world.entityIsResource(self.entityId, resource) then return true end
+	if not world.entityIsResource(self.entityId, resource) then return true end
 	if (world.entityResourcePercentage(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-        world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
+		world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
 		return true
-    end
+	end
 	return false
 end
 function _Occupant:overConsumeResourcePercentage(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-    if not world.entityIsResource(self.entityId, resource) then return true end
+	if not world.entityIsResource(self.entityId, resource) then return true end
 	if (world.entityResourcePercentage(self.entityId, resource) > 0) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-        world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
+		world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
 		return true
-    end
+	end
 	return false
 end
 

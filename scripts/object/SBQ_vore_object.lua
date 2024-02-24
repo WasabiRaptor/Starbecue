@@ -1,6 +1,8 @@
 function sbq.initObject()
 	sbq.facingDirection = object.direction
 
+    sbq.entityId = entity.entityId
+
     sbq.say = object.say
     sbq.sayPortrait = object.sayPortrait
 

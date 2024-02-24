@@ -12,7 +12,8 @@ require "/scripts/any/SBQ_public_settings.lua"
 
 function init()
 	old.init()
-	sbq.actorInit()
+    sbq.actorInit()
+	sbq.actorMessages()
 	sbq.setupPublicSettings()
 
 	sbq.say = monster.say

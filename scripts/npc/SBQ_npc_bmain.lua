@@ -15,9 +15,11 @@ require"/scripts/any/SBQ_RPC_handling.lua"
 function init()
 	old.init()
 
-	sbq.config = root.assetJson("/sbq.config")
+    sbq.config = root.assetJson("/sbq.config")
+	sbq.targetPosition = npc.aimPosition
 	sbq.actorInit()
-	sbq.humanoidInit()
+    sbq.humanoidInit()
+	sbq.actorMessages()
 	sbq.setupPublicSettings()
 
 	sbq.say = npc.say

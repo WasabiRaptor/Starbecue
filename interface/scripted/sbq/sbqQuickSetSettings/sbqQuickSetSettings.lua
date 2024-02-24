@@ -132,7 +132,6 @@ function titleCanvas:draw()
 		horizontalAnchor = "mid",
 		verticalAnchor = "top",
 	}, 24)
-
 end
 
 function sbq.saveSettings()

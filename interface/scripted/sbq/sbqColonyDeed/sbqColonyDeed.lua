@@ -1,16 +1,9 @@
 ---@diagnostic disable: undefined-global
-sbq = {
-	config = root.assetJson("/sbq.config"),
-	strings = root.assetJson("/sbqStrings.config"),
-	gui = root.assetJson("/sbqGui.config"),
-	itemTemplates = root.assetJson("/sbqItemTemplates.config"),
-
-	tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json"),
-	occupier = metagui.inputData.occupier or {},
-	validTenantCatalogueList = {},
-	tenantIndex = 0
-}
-require("/scripts/any/SBQ_RPC_handling.lua")
+sbq.tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json")
+sbq.occupier = metagui.inputData.occupier or {}
+sbq.validTenantCatalogueList = {}
+sbq.tenantIndex = 0
+sbq.itemTemplates = root.assetJson("/sbqItemTemplates.config")
 
 function init()
 	sbq.refreshDeedPage()
@@ -85,7 +78,7 @@ function sbq.wrapNumber(input, min, max)
 end
 
 function callTenants:onClick()
-	world.sendEntityMessage(pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = player.position()})
+	world.sendEntityMessage(pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = world.entityPosition(player.id())})
 end
 
 local applyCount = 0
@@ -147,7 +140,7 @@ function orderFurniture:onClick()
 			end
 
 			local price = ((item.count or 1)*(item.price or itemConfig.config.price))
-			actionLabel = actionLabel.." ^#555;"..sbq.string.price..": ^yellow;"..price.."^reset;"
+			actionLabel = actionLabel.." ^#555;"..sbq.strings.price..": ^yellow;"..price.."^reset;"
 
 			local comma = ""
 			local gotReqTag = false
