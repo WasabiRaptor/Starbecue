@@ -10,7 +10,6 @@ function build(directory, config, parameters, level, seed)
     config.inventoryIcon, config.shortdescription, config.description = sbq.getActionData(
         parameters.scriptStorage.action,
         true,
-        directory,
 		parameters.scriptStorage.iconDirectory
 	)
 

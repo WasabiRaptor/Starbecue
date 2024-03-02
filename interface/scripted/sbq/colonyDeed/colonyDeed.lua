@@ -245,11 +245,8 @@ function sbq.refreshDeedPage()
 			table.remove(_ENV.metagui.inputData.occupier.tenants, i)
 			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
 			sbq.refreshDeedPage()
-		end
-		for k,v in ipairs(portrait) do
-			local pos = v.position or {0, 0}
-			canvas:drawImage(v.image, {pos[1] + canvasSize[1]/2, pos[2] + canvasSize[2]/2}, 1, nil, true )
-		end
+        end
+		canvas:drawDrawables(portrait, {canvasSize[1]/2, canvasSize[2]/2})
 		function settings:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
 			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end

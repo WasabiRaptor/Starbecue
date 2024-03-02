@@ -194,6 +194,15 @@ function sbq.actionAvailable(action, target, ...)
 	return {Transformation:actionAvailable(action, target, ...)}
 end
 
+function sbq.getOccupantData(entityId)
+    local occupant = Occupants.entityId[tostring(entityId)]
+    if not occupant then return false end
+	location = occupant:getLocation()
+    return {
+        occupant,
+		location:outputData(entityId)
+	}
+end
 
 function sbq.getSettingsPageData()
 	local settingsPageData = {
@@ -1008,13 +1017,12 @@ function _Occupant:update(dt)
 
 	if not self.flags.digested then
 		local oldMultiplier = self.sizeMultiplier
-		local compression = location.settings.compression or sbq.settings.compression
-		local compressionMin = location.settings.compressionMin or sbq.settings.compressionMin
+		local compression = location.settings.compression
+		local compressionMin = location.settings.compressionMin
 		if compression == "time" then
 			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat("sbqDigestPower") * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
-			local health = world.entityHealth(self.entityId)
-			self.sizeMultiplier = math.max( compressionMin, (health[1] / health[2]))
+			self.sizeMultiplier = math.max( compressionMin, world.entityResourcePercentage("health"))
 		end
 		if oldMultiplier ~= self.sizeMultiplier then
 			location.occupancy.sizeDirty = true
@@ -1070,11 +1078,13 @@ function _Occupant:refreshLocation(name, subLocation)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestResistance", effectiveMultiplier = sbq.stat("sbqDigestPower") },
-		-- { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
+        { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or false)) or 0},
+		{ stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
+
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
 	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
-	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[location.settings.mainEffect or "none"] or {})
+	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
 	for setting, effects in pairs(location.toggleEffects or {}) do
 		if (location.settings[setting]) then
 			util.appendLists(persistentStatusEffects, effects or {})
@@ -1242,25 +1252,16 @@ function _Occupant:overConsumeResource(resource, amount, ignoreBlock)
 	return false
 end
 
-function _Occupant:consumeResourcePercentage(resource, amount, ignoreBlock)
-	-- if an entity doesn't have the resource, they get to have it for free
-	if not world.entityIsResource(self.entityId, resource) then return true end
-	if (world.entityResourcePercentage(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-		world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
-		return true
-	end
-	return false
+function _Occupant:stat(stat)
+	return world.entityStat(self.entityId, stat)
 end
-function _Occupant:overConsumeResourcePercentage(resource, amount, ignoreBlock)
-	-- if an entity doesn't have the resource, they get to have it for free
-	if not world.entityIsResource(self.entityId, resource) then return true end
-	if (world.entityResourcePercentage(self.entityId, resource) > 0) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
-		world.sendEntityMessage(self.entityId, "sbqOverConsumeResourcePercentage", resource, amount, ignoreBlock)
-		return true
-	end
-	return false
+function _Occupant:statPositive(stat)
+	return world.entityStatPositive(self.entityId, stat)
 end
 
+function _Occupant:sendEntityMessage(...)
+	return world.sendEntityMessage(self.entityId, ...)
+end
 
 function _Occupant:position()
 	return sbq.globalPartPoint(self.seat, "loungeOffset")

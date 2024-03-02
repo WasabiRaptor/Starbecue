@@ -9,14 +9,14 @@ function init()
 	self.cdamage = 0
 	self.digested = false
 	self.dropItem = false
-	self.turboDigest = false
+	self.turboDigest = 0
 	self.send = config.getParameter("send")
 	self.sendMultiplier = config.getParameter("sendMultiplier")
 	self.digestMessage = config.getParameter("digestMessage")
 	self.fatal = config.getParameter("fatal")
 
-	message.setHandler("sbqTurboDigest", function()
-		self.turboDigest = true
+	message.setHandler("sbqTurboDigest", function(_,_, amount)
+		self.turboDigest = amount
 	end)
 
 	message.setHandler("sbqDigestResponse", function(_,_, time)
@@ -31,7 +31,7 @@ function update(dt)
 
 	local health = world.entityHealth(entity.id())
 	local digestRate = 1
-	if self.turboDigest then
+	if self.turboDigest < 0 then
 		digestRate = 10
 	end
 
@@ -42,7 +42,8 @@ function update(dt)
 			digestAmount = digestAmount + self.cdamage
 			if digestAmount >= 1 then
 				self.cdamage = digestAmount % 1
-				digestAmount = math.floor(digestAmount)
+                digestAmount = math.floor(digestAmount)
+				self.turboDigest = self.turboDigest - digestAmount
 				status.applySelfDamageRequest({
 					damageType = "IgnoresDef",
 					damage = digestAmount,
@@ -64,12 +65,10 @@ function update(dt)
 		self.targetTime = 2
 		effect.modifyDuration(2+1)
 
-		self.turboDigest = false
 		self.digested = true
 		world.sendEntityMessage(effect.sourceEntity(), self.digestMessage or (self.fatal and "sbqDigest" ) or "sbqSoftDigest", entity.id())
 		status.setResource("health", 1)
 	else
-		self.turboDigest = false
 		self.cdt = self.cdt + dt
 		if self.cdt >= self.targetTime then
 			doItemDrop()

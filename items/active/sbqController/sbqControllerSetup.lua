@@ -1,5 +1,5 @@
 require"/scripts/any/SBQ_util.lua"
-function sbq.getActionData(action, available, directory, preferredDirectory)
+function sbq.getActionData(action, available, preferredDirectory)
     local shortdescription = sbq.strings.unassignedAction
     local description = sbq.strings.unassignedActionDesc
 	local icon = "/humanoid/any/sbqActionIcons/unassigned.png"

@@ -138,3 +138,18 @@ function default:grabRelease(name, action, target, ...)
 		return false
     end
 end
+
+function default:turboDigestAvailable(name, action, target, ...)
+    local occupant = Occupants.list[tostring(target)]
+    if not occupant then return false end
+    local location = occupant:getLocation()
+    local mainEffect = occupant.overrideEffect or location.settings.mainEffect or "none"
+	if (not location.mainEffect) or ((not location.mainEffect.digest) and (not location.mainEffect.softDigest)) then return false, "invalidAction" end
+	return (mainEffect == "digest") or (mainEffect == "softDigest")
+end
+function default:turboDigest(name, action, target, ...)
+    if not self:turboDigestAvailable(name, action, target, ...) then return false end
+    local occupant = Occupants.list[tostring(target)]
+    occupant:sendEntityMessage("sbqTurboDigest", sbq.resource("energy"))
+	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+end

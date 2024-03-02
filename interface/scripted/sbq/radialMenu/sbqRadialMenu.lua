@@ -109,7 +109,12 @@ function update( dt )
 	for i = 1, segments do
 		local segmentAngle = segmentSize * (i - 1.5) + segmentSpacing / 2 + 180
 		local r1, r2, ri, color
-		if i == activeSegment then
+        if options[i].locked then
+			r1 = innerRadius + 5
+			r2 = outerRadius - 5
+			ri = iconRadius
+			color = {170, 180, 190, 100}
+		elseif i == activeSegment then
 			r1 = innerRadius + 5
 			r2 = outerRadius + 10
 			ri = iconRadius + 7.5
@@ -126,12 +131,17 @@ function update( dt )
         )
 		local textOffset = 0
 		local iconPos = radialPoint(segmentSize * (i - 1) + 180, ri);
-		if options[i].icon then
-            canvas:drawImage(options[i].icon, iconPos, nil, nil, true)
-            local size = root.imageSize(options[i].icon)
-			textOffset = (size[2] / 2) +3
+        if options[i].icon then
+            if type(options[i].icon) == "table" then
+				canvas:drawDrawables(options[i].icon, iconPos)
+            else
+				canvas:drawImage(options[i].icon, iconPos, nil, nil, true)
+				local size = root.imageSize(options[i].icon)
+				textOffset = (size[2] / 2) +3
+			end
 		end
         if options[i].name then
+			local textBrightness = (options[i].locked and 0.75 or 1)
 			canvas:drawText(options[i].name, {
 				position = {iconPos[1] + 0.5, iconPos[2] - 0.5 + textOffset},
 				horizontalAnchor = "mid",
@@ -141,12 +151,12 @@ function update( dt )
 				position = {iconPos[1] + 1, iconPos[2] - 1 + textOffset},
 				horizontalAnchor = "mid",
 				verticalAnchor = "mid"
-			}, 8, {0, 0, 0})
+			}, 8, { 0, 0, 0 })
 			canvas:drawText(options[i].name, {
 				position = {iconPos[1], iconPos[2] + textOffset},
 				horizontalAnchor = "mid",
 				verticalAnchor = "mid"
-			}, 8)
+			}, 8, { 255 * textBrightness, 255 * textBrightness, 255 * textBrightness })
 		end
 	end
 end
@@ -168,7 +178,8 @@ function selectAction(...)
 		option = cancel
 	else
 		option = options[activeSegment]
-	end
+    end
+	if option.locked then return end
 	local context = option.context or ((option.context == nil) and default.context)
 	local script = option.script or ((option.script == nil) and default.script)
 	local message = option.message or ((option.message == nil) and default.message)
