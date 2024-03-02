@@ -305,7 +305,11 @@ function widgets.sbqSlider:init(base, param)
 end
 
 function widgets.sbqSlider:minSize() return {16, 16} end
-function widgets.sbqSlider:preferredSize() return self.explicitSize or {64, 16} end
+function widgets.sbqSlider:preferredSize() return self.explicitSize or { 64, 16 } end
+
+function widgets.sbqSlider:updateGeometry(noApply)
+    self.redraw = true
+end
 
 function widgets.sbqSlider:draw()
 	-- update every frame while mouse is nearby
