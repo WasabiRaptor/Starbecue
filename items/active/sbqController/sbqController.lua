@@ -2,7 +2,7 @@
 sbq = {}
 
 require("/scripts/any/SBQ_RPC_handling.lua")
-require("/interface/scripted/sbq/sbqIndicatorHud/hudActions.lua")
+require("/interface/scripted/sbq/indicatorHud/hudActions.lua")
 require "/items/active/sbqController/sbqControllerSetup.lua"
 
 
@@ -158,7 +158,7 @@ function RadialMenu:close()
 	end
 	self.activeMenuName = nil
     self.activeMenu = nil
-	player.interact("ScriptPane", {baseConfig = "/interface/scripted/sbq/sbqClose/sbqClose.config"}, player.id())
+	player.interact("ScriptPane", {baseConfig = "/interface/scripted/sbq/close/sbqClose.config"}, player.id())
 end
 
 _RadialMenu = {isMenu = true}
@@ -174,7 +174,7 @@ end
 function _RadialMenu:openRadialMenu(overrides)
     player.interact("ScriptPane", sb.jsonMerge(
 		{
-			baseConfig = "/interface/scripted/sbq/sbqRadialMenu/sbqRadialMenu.config",
+			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			selectOnClose = true,
 			default = {
 				context = "starbecue",

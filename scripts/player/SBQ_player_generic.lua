@@ -19,7 +19,9 @@ function init()
     sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then
         sbq.init()
-		sbq.actorMessages()
+        sbq.actorMessages()
+    else
+		status.setStatusProperty("sbqPublicSettings", nil)
     end
 	sbq.notifyPlayer()
 
@@ -60,7 +62,7 @@ function init()
 		sbq.currentLocationData = locationData
 		local struggleActions = locationData.struggleActions or {}
 		player.interact("ScriptPane", {
-			baseConfig = "/interface/scripted/sbq/sbqIndicatorHud/sbqIndicatorHud.config",
+			baseConfig = "/interface/scripted/sbq/indicatorHud/sbqIndicatorHud.config",
 			time = additionalData.time,
 			progressBar = additionalData.progressBar,
 			location = locationData.name,

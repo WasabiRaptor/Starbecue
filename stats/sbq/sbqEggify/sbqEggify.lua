@@ -8,7 +8,7 @@ function init()
 		return
 	end
 
-	local eggData = root.assetJson("/vehicles/sbq/sbqEgg/sbqEgg.vehicle")
+	local eggData = root.assetJson("/vehicles/sbq/Egg/sbqEgg.vehicle")
 	replaceColors = {
 		math.random(1, #eggData.sbqData.replaceColors[1] - 1),
 		math.random(1, #eggData.sbqData.replaceColors[2] - 1)

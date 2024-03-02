@@ -1,0 +1,34 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [256, 156], // *internal* size (not including chrome)
+	"title" : "SBQ Colony Deed",
+	"icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "colonyDeed.lua" ],
+	"children" : [
+		{"type" : "layout", "id": "deedSettingsLayout", "expandMode" : [1,0], "mode": "horizontal", "children" : [
+			{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "children" : [
+				{ "type" : "button", "id" : "callTenants", "caption" : ":callTenants", "expandMode" : [2, 0] },
+				{ "type" : "panel", "style" : "convex", "id" : "tenantScrollAreaPanel", "expandMode" : [1,0], "children" : [
+					{ "type" : "scrollArea", "id" : "tenantListScrollArea", "expandMode" : [1, 0], "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [1, 0], "children" : [ {"mode" : "horizontal"}]}
+				]},
+				{ "type" : "layout", "mode" : "vertical", "expandMode" : [2,2], "children" : []}
+			]},
+			[
+				{"size" : 90},
+				{ "id" : "requiredTagsPanel", "type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
+					{ "type" : "label", "text" : "Colony Tags",  "align" : "center"},
+					[{"type":"button", "id":"orderFurniture", "caption":":orderFurniture", "visible":false, "expandMode" : [2,0]}],
+					{ "type" : "scrollArea", "id" : "requiredTagsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [0, 1], "children" : []}
+				]}
+			]
+		]},
+		{ "type" : "panel", "id" : "tenantPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
+			{ "mode" : "h" },
+			{ "type" : "iconButton", "id" : "decTenant", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
+			{ "type" : "textBox", "id" : "tenantText", "expandMode" : [1, 0] },
+			{ "type" : "iconButton", "id" : "incTenant", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" },
+			{ "type" : "button", "id" : "summonTenant", "caption" : ":summonTenant", "expandMode" : [0, 0], "toolTip" : ":summonTenantTip" }
+		]}
+	]
+}

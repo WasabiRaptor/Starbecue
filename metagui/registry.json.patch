@@ -1,14 +1,12 @@
 [ // in file: /metagui/registry.json.patch
 	{ "op" : "add", "path" : "/panes/starbecue", "value" : {
-		"mainSettings" : "/interface/scripted/sbq/sbqMainSettings/settings.ui",
-		"entitySettings" : "/interface/scripted/sbq/sbqMainSettings/entitySettings.ui",
-		"predHud" : "/interface/scripted/sbq/sbqIndicatorHud/sbqPredatorHud.ui",
-		"preyHud" : "/interface/scripted/sbq/sbqIndicatorHud/sbqIndicatorHud2.ui",
-		"dialogueBox" : "/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBox.ui",
-		"shop" : "/interface/scripted/sbq/sbqShop/shop.ui",
-		"colonyDeed" : "/interface/scripted/sbq/sbqColonyDeed/sbqColonyDeed.ui",
-		"mouseHoleTool" : "/interface/scripted/sbq/sbqMouseHoleTool/sbqMouseHoleTool.ui",
-		"mouseRoomTool" : "/interface/scripted/sbq/sbqMouseHoleTool/sbqMouseRoomTool.ui",
-		"quickSettings" : "/interface/scripted/sbq/sbqMainSettings/quickSettings.ui"
+		"mainSettings" : "/interface/scripted/sbq/settings/buildPlayerSettings.lua",
+		"entitySettings" : "/interface/scripted/sbq/settings/buildEntitySettings.lua",
+		"predHud" : "/interface/scripted/sbq/indicatorHud/sbqPredatorHud.ui",
+		"preyHud" : "/interface/scripted/sbq/indicatorHud/sbqIndicatorHud2.ui",
+		"dialogueBox" : "/interface/scripted/sbq/DialogueBox/sbqDialogueBox.ui",
+		"shop" : "/interface/scripted/sbq/shop/shop.ui",
+		"colonyDeed" : "/interface/scripted/sbq/colonyDeed/colonyDeed.ui",
+		"quickSettings" : "/interface/scripted/sbq/settings/buildQuickSettings.lua"
 	}}
 ]

@@ -1,11 +1,11 @@
 
 sbq = {
-	settingsSetup = {},
 	widgetScripts = {},
 	getWidget = {},
 	settingWidgets = {},
     settings = {},
-	settingIdentifiers = {}
+    settingIdentifiers = {},
+	lists = {}
 }
 local old = {
 	init = init
@@ -15,7 +15,19 @@ storage = {}
 require("/scripts/any/SBQ_RPC_handling.lua")
 require("/scripts/any/SBQ_util.lua")
 
-
+function sbq.widgetSettingIdentifier(w)
+	return sbq.concatStrings(w.setting, w.groupName, w.groupKey)
+end
+function sbq.concatStrings(...)
+	local res = ""
+	for _, v in ipairs({...}) do
+		res = res..(v or "")
+    end
+	return res
+end
+function sbq.entityId()
+	return (pane.sourceEntity() == 0 and player.id()) or pane.sourceEntity()
+end
 ---@diagnostic disable: undefined-global
 local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
@@ -25,10 +37,22 @@ function init()
 	function mg.setTitle(s)
 		mg.cfg.title = mg.formatText(s)
 		mg.queueFrameRedraw()
-	end
+    end
+	-- doing this early just because I can
+	mg.cfg = config.getParameter("___") -- window config
+    mg.inputData = mg.cfg.inputData -- alias
+
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	sbq.gui = root.assetJson("/sbqGui.config")
+	for k, v in pairs((mg.inputData or {}).sbq or {}) do
+        sbq[k] = v
+    end
+	if sbq.storageSettings then
+		storage.sbqSettings = sbq.storageSettings
+        sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+    end
+
     old.init()
 end
 
@@ -57,54 +81,43 @@ function widgets.sbqSetting:init(base, param)
 		self:delete()
 	end)
     param.setting = param.setting or self.parent.setting
-    param.location = param.location or self.parent.location
-	sbq.settingIdentifiers[(param.location or "") .. param.setting] = {param.setting, param.location}
-	local defaultSetting = sbq.config.defaultSettings[param.setting]
-	if param.location then
-		defaultSetting = sbq.config.defaultLocationSettings[param.setting]
-    end
-	local isInvalid = false
-    if param.value then
-        local invalid = ((sbq.voreConfig or {}).invalidSettings or {})[param.setting]
-		if param.location then
-			invalid = ((((sbq.voreConfig or {}).invalidSettings or {}).locations or {})[param.location] or {})[param.setting] or invalid
+    param.groupName = param.groupName or self.parent.groupName
+	param.groupKey = param.groupKey or self.parent.groupKey
+
+	local defaultSetting = sbq.defaultSettings[param.setting]
+    if param.groupName and param.groupKey then
+		if not sbq.defaultSettings[param.groupName] then
+			return sbq.logError("undefined setting group: ".. param.groupName)
         end
-		for _, v in ipairs(invalid or {}) do
-			if v == param.value then return end
-		end
-	end
+		if not sbq.defaultSettings[param.groupName][param.groupKey] then
+			return sbq.logError("undefined setting group entry: ".. param.groupName.."."..param.groupKey)
+        end
+        defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+		if defaultSetting == nil then sbq.logError(string.format("Setting '%s.%s.%s' has no defined default", param.groupName, param.groupKey, param.setting)) end
+    else
+		if defaultSetting == nil then sbq.logError(string.format("Setting '%s' has no defined default", param.setting)) end
+    end
 	param.toolTip = mg.formatText(param.toolTip or sbq.strings[param.setting.."Tip"])
-	local settingType = type(defaultSetting)
-	if sbq.gui.settingWidgets[param.setting] then
-		param = sb.jsonMerge(param, sbq.gui.settingWidgets[param.setting])
-	elseif settingType == "boolean" then
-		param = sb.jsonMerge(param, { type = "iconCheckBox", script = "changeSetting" })
-	elseif settingType == "table" then
-		param = sb.jsonMerge(param, { type = "sbqTextBox", settingType = settingType, script = "changeTableSetting" })
-	else
-		param = sb.jsonMerge(param, { type = "sbqTextBox", settingType = settingType, script = "changeSetting" })
+    param.settingType = type(defaultSetting)
+
+    if sbq.gui.settingWidgets[param.setting] then
+        if type(sbq.gui.settingWidgets[param.setting]) == "string" then
+			param = sbq.widgetScripts[sbq.gui.settingWidgets[param.setting]](param)
+		else
+			param = sb.jsonMerge(param, sbq.gui.settingWidgets[param.setting])
+        end
+    else
+		param = sb.jsonMerge(param, sbq.gui.defaultSettingTypeWidgets[param.settingType] or sbq.gui.defaultSettingTypeWidgets.invalidType)
+    end
+	if param.makeLabel then
+        param = { type = "layout", mode = "horizontal", children = {
+            param,
+			{ type = "label", text = ":"..param.setting}
+		}}
 	end
 	self.id = nil
-	self.parent:addChild(param)
-end
-
-widgets.sbqPanel = mg.proto(widgets.panel, {
-	widgetType = "sbqPanel"
-})
-function widgets.sbqPanel:init(base, param)
-    self.setting = param.setting or self.parent.setting
-    self.location = param.location or self.parent.location
-    param.id = param.id or (self.location or "") .. self.setting .. "Panel"
-	widgets.panel.init(self, base, param)
-end
-widgets.sbqLayout = mg.proto(widgets.layout, {
-	widgetType = "sbqLayout"
-})
-function widgets.sbqLayout:init(base, param)
-    self.setting = param.setting or self.parent.setting
-    self.location = param.location or self.parent.location
-    param.id = param.id or (self.location or "") .. self.setting .. "Layout"
-	widgets.layout.init(self, base, param)
+    self.parent:addChild(param)
+	self:delete()
 end
 
 ----- modified tabField -----
@@ -122,8 +135,7 @@ local function evTabSelect(self)
 	tf:pushEvent("tabChanged", self.tab, old)
 	mg.startEvent(tf.onTabChanged, tf, self.tab, old)
 
-	local subTabs = (tf.subTabs or {})[self.tab.id] or {}
-	for i, subTab in ipairs(subTabs) do
+	for i, subTab in ipairs(self.tab.subTabFields or {}) do
 		subTab.currentTab.tabWidget:onSelected()
 	end
 
@@ -135,8 +147,7 @@ end
 
 function widgets.tabField:doUpdate(dt)
 	self:update(dt)
-	local subTabs = (self.subTabs or {})[(self.currentTab or {}).id] or {}
-	for i, subTab in ipairs(subTabs) do
+	for i, subTab in ipairs(self.currentTab.subTabFields or {}) do
 		subTab:doUpdate(dt)
 	end
 	self.currentTab:update(dt)
@@ -220,11 +231,15 @@ function widgets.sbqSlider:init(base, param)
 	self.percent = param.percent
 	self.min = param.min
 	self.max = param.max
-	self.script = param.script
+    self.script = param.script
+
+	self.setting = param.setting or self.parent.setting
+    self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
 
 	if self.script then
 		function self:onChange(index, value)
-			sbq.widgetScripts[self.script](self.handles[index].setting, value, self.handles[index].location)
+			sbq.widgetScripts[self.script](self.handles[index].setting, value, self.handles[index].groupName, self.handles[index].groupKey)
 		end
 	end
 
@@ -254,11 +269,20 @@ function widgets.sbqSlider:init(base, param)
 	if #self.handles < 1 then
 		sb.logError("Slider with no handles! id: " .. self.id)
 	end
-	for i, h in ipairs(self.handles) do
-		if h.setting then
-			h.value = sbq.settings[h.setting] or (h.location and sbq.config.defaultLocationSettings[h.setting]) or (sbq.config.defaultSettings[h.setting])
-            sbq.settingWidgets[(h.location or "") .. h.setting] = self
-			sbq.settingIdentifiers[(h.location or "") .. h.setting] = {h.setting, h.location}
+    for i, h in ipairs(self.handles) do
+		h.setting = h.setting or self.setting
+        if h.setting then
+			local defaultSetting = sbq.defaultSettings[h.setting]
+            if (h.groupName and h.groupKey) then
+				defaultSetting = sbq.defaultSettings[h.groupName][h.groupKey][h.setting]
+            elseif (self.groupKey and self.groupName) and not (h.groupName or h.groupKey) then
+                h.groupName = self.groupName
+				h.groupKey = self.groupKey
+				defaultSetting = sbq.defaultSettings[self.groupName][self.groupKey][h.setting]
+			end
+			h.value = defaultSetting
+            sbq.settingWidgets[sbq.widgetSettingIdentifier(h)] = self
+			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(h)] = {h.setting, h.groupName, h.groupKey}
 		end
 		if not h.value then
 			sb.logError("Slider handle with no value! id: " .. self.id .. ", index: " .. i)
@@ -437,10 +461,13 @@ function widgets.sbqSlider:getToolTip()
 		if self.textToolTips then
 			local closest, index = getClosestValue(self.handles[self.current].value, self.notches)
 			if self.textToolTips[index] then return mg.formatText(self.handles[self.current].toolTip) .. "\n" .. mg.formatText(self.textToolTips[index]) end
-		end
+        end
 		local value = (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
 		if self.percent then
 			value = math.floor(value * 100)
+        end
+		if self.integer then
+			math.floor(value)
 		end
 		return mg.formatText(self.handles[self.current].toolTip) .. "\n"..sbq.strings.value..": " .. value .. (self.percent and "%" or "")
 	else
@@ -513,7 +540,7 @@ end
 
 ----- icon check box -----
 
-widgets.iconCheckBox = mg.proto(widgets.button, {
+widgets.sbqCheckBox = mg.proto(widgets.button, {
 	expandMode = { 0, 0 }, -- fixed size
 	checked = false,
 })
@@ -522,29 +549,33 @@ local broadcastLevel = 2
 local hRadioFind = {} -- empty table as private event handle
 local hRadioValueFind = {}
 
-function widgets.iconCheckBox:init(base, param)
+function widgets.sbqCheckBox:init(base, param)
 	self.icon = param.icon
 	self.state = "idle"
 	self.backingWidget = mkwidget(base, { type = "canvas" })
 	self.checked = param.checked
 	self.radioGroup = param.radioGroup
     self.value = param.value
-    self.setting = param.setting or self.parent.setting
-    self.script = param.script
-	self.location = param.location or self.parent.location
+	self.script = param.script
 
+    self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
 
     if self.setting then
-		sbq.settingIdentifiers[(self.location or "") .. self.setting] = {self.setting, self.location}
-		sbq.settingWidgets[(self.location or "") .. self.setting] = self
-		local value = sbq.settings[self.setting] or (self.location and sbq.config.defaultLocationSettings[self.setting]) or (sbq.config.defaultSettings[self.setting])
-		if type(value) == "boolean" then
-			self.checked = value
+		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		local defaultSetting = sbq.defaultSettings[param.setting]
+		if param.groupName and param.groupKey then
+			defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+		end
+		if type(defaultSetting) == "boolean" then
+			self.checked = defaultSetting
 		end
     end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.setting,self.value or self.checked,self.location)
+			sbq.widgetScripts[self.script](self.setting, self.value or self.checked, self.groupName, self.groupKey)
 		end
 	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
@@ -561,14 +592,18 @@ function widgets.iconCheckBox:init(base, param)
 	end)
 end
 
-function widgets.iconCheckBox:preferredSize() return { 12, 12 } end
+function widgets.sbqCheckBox:preferredSize() return { 12, 12 } end
 
-function widgets.iconCheckBox:draw()
+function widgets.sbqCheckBox:draw()
+	local c = widget.bindCanvas(self.backingWidget)
+	local pos = vec2.mul(c:size(), 0.5)
+
+
 	if self.icon then
-		local c = widget.bindCanvas(self.backingWidget) c:clear()
+		c:clear()
 		local directives = ""
-		if self.state == "press" then directives = "?brightness=-50" end
-		local pos = vec2.mul(c:size(), 0.5)
+        if self.state == "press" then directives = "?brightness=-50" end
+		if self.locked and not self.checked then directives = directives.."?saturation=-100" end
 
 		c:drawImageDrawable(self.icon..directives, pos, 1)
 		if self.checked then
@@ -576,16 +611,19 @@ function widgets.iconCheckBox:draw()
 		end
     else
 		theme.drawCheckBox(self)
+    end
+	if self.locked then
+		c:drawImage("/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", pos, 1, nil, true )
 	end
 end
 
-function widgets.iconCheckBox:onMouseEnter()
+function widgets.sbqCheckBox:onMouseEnter()
 	self.state = "hover"
 	self:queueRedraw()
 	--theme.onButtonHover(self)
 end
 
-function widgets.iconCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
+function widgets.sbqCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 	if btn == 0 then -- left button
 		if down then
 			self.state = "press"
@@ -611,7 +649,7 @@ function widgets.iconCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 	end
 end
 
-function widgets.iconCheckBox:setChecked(b)
+function widgets.sbqCheckBox:setChecked(b)
 	if b and self.radioGroup and not self.checked then
 		self.checked = true -- set before event
 		self:wideBroadcast(broadcastLevel, "radioButtonChecked", self)
@@ -620,25 +658,25 @@ function widgets.iconCheckBox:setChecked(b)
 	self:queueRedraw()
 end
 
-function widgets.iconCheckBox:getGroupChecked()
+function widgets.sbqCheckBox:getGroupChecked()
 	if not self.radioGroup then return nil end
 	if self.checked then return self end
 	return self:wideBroadcast(broadcastLevel, hRadioFind, self.radioGroup)
 end
 
-function widgets.iconCheckBox:getGroupValue()
+function widgets.sbqCheckBox:getGroupValue()
 	local c = self:getGroupChecked()
 	if c then return c.value end
 	return nil -- explicit nil
 end
 
-function widgets.iconCheckBox:findValue(val)
+function widgets.sbqCheckBox:findValue(val)
 	if not self.radioGroup then return nil end
 	if self.value == val then return self end
 	return self:wideBroadcast(broadcastLevel, hRadioValueFind, self.radioGroup, val)
 end
 
-function widgets.iconCheckBox:selectValue(val)
+function widgets.sbqCheckBox:selectValue(val)
 	local c = self:findValue(val)
 	if c then c:setChecked(true) end
 	return c -- might as well
@@ -752,19 +790,24 @@ function widgets.sbqTextBox:init(base, param)
 	self.backingWidget = mkwidget(base, { type = "canvas" })
     self.subWidgets = { content = mkwidget(base, { type = "canvas" }) }
 
-    self.setting = param.setting
+    self.setting = param.setting or self.parent.setting
+    self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
     self.settingType = param.settingType or "string"
     self.script = param.script
-    self.location = param.location
+    self.groupName = param.groupName
 
     if self.setting then
-		sbq.settingIdentifiers[(self.location or "") .. self.setting] = {self.setting, self.location}
-		sbq.settingWidgets[(self.location or "") .. self.setting] = self
-		local value = sbq.settings[self.setting] or (self.location and sbq.config.defaultLocationSettings[self.setting]) or (sbq.config.defaultSettings[self.setting])
-		param.text = tostring(value)
-		self.settingType = type(value)
+		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		local defaultSetting = sbq.defaultSettings[param.setting]
+		if param.groupName and param.groupKey then
+			defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+		end
+		param.text = tostring(defaultSetting)
+		self.settingType = type(defaultSetting)
 		if self.settingType == "table" then
-			param.text = sb.printJson(value)
+			param.text = sb.printJson(defaultSetting)
 		end
 	end
 
@@ -773,10 +816,10 @@ function widgets.sbqTextBox:init(base, param)
 			if self.settingType == "number" then
                 local number = tonumber(self.text)
 				if number then
-					sbq.widgetScripts[self.script](self.setting,number,self.location)
+					sbq.widgetScripts[self.script](self.setting,number,self.groupName)
                 end
             else
-				sbq.widgetScripts[self.script](self.setting,tostring(self.text),self.location)
+				sbq.widgetScripts[self.script](self.setting,tostring(self.text),self.groupName)
 			end
 		end
     end

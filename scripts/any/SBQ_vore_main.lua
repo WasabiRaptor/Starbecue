@@ -44,6 +44,7 @@ function controlReleased(seat, control, time)
 end
 
 function sbq.init()
+	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
 		Occupants.addOccupant(...)
 	end)
@@ -53,12 +54,16 @@ function sbq.init()
 	message.setHandler("getEntitySettingsMenuData", function ()
 		return sbq.getSettingsPageData()
 	end)
-	message.setHandler("sbqSetLocationSetting", function (_,_, ...)
-		return sbq.setLocationSetting(...)
-	end)
+	message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
+		return sbq.setGroupedSetting(...)
+    end)
 	message.setHandler("sbqSetSetting", function (_,_, ...)
 		return sbq.setSetting(...)
+    end)
+	message.setHandler("sbqImportSettings", function (_,_, ...)
+		return sbq.importSettings(...)
 	end)
+
 
 	sbq.reloadVoreConfig(storage.lastVoreConfig)
 
@@ -172,11 +177,7 @@ function sbq.reloadVoreConfig(config)
 		Transformation.stateName = storage.lastState
 	end
 	-- put settings meant to be public and accessible by other entities in a status property
-	for k, v in pairs(sbq.config.publicSettings) do
-		if v then sbq.publicSettings[k] = sbq.settings[k] end
-	end
-	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-
+    sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 	Transformation:init()
 	Transformation.state:init()
@@ -196,10 +197,10 @@ end
 
 function sbq.getSettingsPageData()
 	local settingsPageData = {
-		storageSettings = storage.sbqSettings,
-		settings = sbq.settings,
-		voreConfig = sbq.voreConfig,
-		locations = Transformation.locations
+		storageSettings = storage.sbqSettings or {},
+		settings = sbq.settings or {},
+		voreConfig = sbq.voreConfig or {},
+		locations = Transformation.locations or {}
 	}
 	return settingsPageData
 end
@@ -215,18 +216,33 @@ function sbq.setSetting(k, v)
 	end
 end
 
-function sbq.setLocationSetting(name, k, v)
-	local old = sbq.settings.locations[name][k]
-	local location = Transformation:getLocation(name)
-	storage.sbqSettings.locations[name][k] = v
-	if old == sbq.settings.locations[name][k] then return end
+function sbq.setGroupedSetting(group, name, k, v)
+	local old = sbq.settings[group][name][k]
+	storage.sbqSettings[group][name][k] = v
+    if old == sbq.settings[group][name][k] then return end
+	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name,k,v) end
 	sbq.refreshSettings()
-	if location then
+	if sbq.config.publicSettings[k] then
+		sbq.publicSettings[group][name][k] = sbq.settings[group][name][k]
+		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+	end
+end
+
+function sbq.importSettings(newSettings)
+    storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
+    sbq.setupSettingMetatables(entity.entityType())
+	sbq.refreshPublicSettings()
+    sbq.refreshSettings()
+	for k, location in pairs(Transformation.locations) do
 		location.occupancy.settingsDirty = true
 	end
-	if sbq.config.publicSettings[k] then
-		sbq.publicSettings.locations[name][k] = sbq.settings.locations[name][k]
-		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+end
+
+sbq.groupedSettingChanged = {}
+function sbq.groupedSettingChanged.locations(name,k,v)
+    local location = Transformation:getLocation(name)
+	if location then
+		location.occupancy.settingsDirty = true
 	end
 end
 
@@ -645,7 +661,7 @@ function _Transformation:addLocation(name, config)
 end
 
 function _Location:hasSpace(size, subLocation)
-	if not sbq.tableMatches(self.activeSettings or {}, sbq.settings, true) then return false end
+	if not sbq.tableMatches(self.activeSettings, sbq.settings, true) then return false end
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
 	if self.settings.hammerspace then return math.huge end
 	local shared = 0
@@ -694,7 +710,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 	local prevVisualSize = self.occupancy.visualSize
 	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale()) then
 		self.occupancy.sizeDirty = false
-		self.occupancy.size = (self.settings.visualSizeAdd and self.settings.visualSize) or 0
+		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
 		if subLocationBehavior then
 			if subLocationBehavior == "average" then
 				local total = 0
@@ -721,7 +737,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			for _, occupant in ipairs(self.occupancy.list) do
 				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.size())
 			end
-			self.occupancy.size = math.max(self.settings.visualSize, self.occupancy.size)
+			self.occupancy.size = math.min(math.max(self.settings.visualMin, self.occupancy.size), self.settings.visualMax)
 			local addVisual = 0
 			for _, name in ipairs(self.addFill or {}) do
 				local location = Transformation:getLocation(name)
@@ -1029,7 +1045,7 @@ function _Occupant:refreshLocation(name, subLocation)
 			shared.occupancy.sizeDirty = true
 		end
 	end
-	if not sbq.tableMatches(location.activeSettings or {}, sbq.settings, true) then return self:remove() end
+	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
 
 	local attemptAnims = {
 		Transformation.stateName .. "_" .. location.tag .. "_" .. location.occupancy.visualSize,

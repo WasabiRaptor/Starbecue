@@ -1,0 +1,26 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [320, 256], // *internal* size (not including chrome)
+	"title" : ":settingsTitle",
+	"icon" : "/humanoid/any/sbqActionIcons/oralVore.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "settings.lua" ],
+	"children" : [
+		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
+			{ "type" : "tab", "id" : "mainSettings", "title" : ":mainSettings", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"mode":"horizontal"},
+				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
+					{"type":"panel","style":"convex", "id":"mainSettingsPanel" ,"children":[
+						{"mode":"vertical"},
+					]}
+				]},
+				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
+					{"type":"panel","style":"flat", "id":"locationSettingsPanel" ,"children":[
+						{"mode":"vertical"},
+					]}
+				]}
+			]}
+		], "bottomBar" : []}
+	],
+	"sourceRadius": -1
+}

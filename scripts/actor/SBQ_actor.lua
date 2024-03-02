@@ -7,7 +7,7 @@ function sbq.actorInit()
 	sbq.scale = mcontroller.scale
 	sbq.area = mcontroller.area
 
-	sbq.entityId = entity.entityId
+	sbq.entityId = entity.id
 	sbq.setProperty = status.setStatusProperty
 
 	sbq.stat = status.stat

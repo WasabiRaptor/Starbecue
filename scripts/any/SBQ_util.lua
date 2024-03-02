@@ -19,17 +19,15 @@ function sbq.tableMatches(a, b, maybeArrays)
 	if maybeArrays and a[1] then
 		for _, v in ipairs(a) do
 			if sbq.tableMatches(v,b) then return true end
-		end
+        end
+		return false
 	end
 	for k, v in pairs(a or {}) do
-	  if type(v) == "table"
-	  and type(b[k]) == "table"
-	  and not sbq.tableMatches(v, b[k]) then
-		return false
-	  end
-	  if v ~= b[k] then
-		return false
-	  end
+		if type(v) == "table" and type(b[k]) == "table" then
+			if not sbq.tableMatches(v, b[k]) then return false end
+		elseif v ~= b[k] then
+			return false
+		end
 	end
 	return true
 end
@@ -53,51 +51,103 @@ function sbq.setupSettingMetatables(entityType)
         sbq.voreConfig.defaultSettings or {},
 		(sbq.entityConfig or {}).defaultSettings or {}
     )
-	for k, v in pairs(storage.sbqSettings) do
-		if type(v) ~= type(sbq.defaultSettings[k]) then
-            storage.sbqSettings[k] = nil
-		end
-    end
-	for k, values in pairs(sbq.voreConfig.invalidSettings or {}) do
-		for _, v in ipairs(values) do
-			if storage.sbqSettings[k] == v then
-				storage.sbqSettings[k] = v
+    for setting, v in pairs(storage.sbqSettings) do
+		local defaultType = type(sbq.defaultSettings[setting])
+        if (type(v) ~= defaultType) then
+			storage.sbqSettings[setting] = nil
+            if (sbq.defaultSettings[setting] == nil) then
+                sbq.logWarn(string.format("Removed setting '%s' no defined default value.", setting))
+            else
+				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nShould be type '%s'", setting, v, defaultType))
+			end
+        end
+		if not sbq.config.groupedSettings[setting] then
+			local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(v)]
+			if result == "default" then
+                storage.sbqSettings[setting] = nil
+				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nInvalid with current species config.", setting, v))
+            elseif result ~= nil then
+                storage.sbqSettings[setting] = result
+				sbq.logWarn(string.format("Replaced setting '%s' value '%s' with new value '%s'\nOld value invalid with current species config.", setting, v, result))
 			end
 		end
+    end
+    sbq.lists.locations = {}
+    sbq.lists.voreTypes = {}
+    sbq.lists.infuseTypes = {}
+	for k, v in pairs(sbq.voreConfig.locations or {}) do
+		table.insert(sbq.lists.locations,k)
+    end
+	for k, v in pairs(sbq.config.voreTypeData or {}) do
+		table.insert(sbq.lists.voreTypes,k)
 	end
+	for k, v in pairs(sbq.config.infuseTypeData or {}) do
+		table.insert(sbq.lists.infuseTypes,k)
+	end
+    for k, v in pairs(sbq.config.groupedSettings) do
+		local list = {}
+        if type(v.list) == "string" then
+			list = sbq.lists[v.list] or {}
+		elseif type(v.list) == "table" then
+			list = v.list
+		end
+		sbq.defaultSettings[k] = sbq.defaultSettings[k] or {}
+        sbq.publicSettings[k] = {}
+        storage.sbqSettings[k] = storage.sbqSettings[k] or {}
+		sbq.settings[k] = sbq.settings[k] or {}
+		for _, name in ipairs(list) do
+            sbq.defaultSettings[k][name] = sb.jsonMerge(
+                v.defaultSettings or {},
+                sbq.defaultSettings[k][name] or {}
+			)
+            sbq.publicSettings[k][name] = {}
+			storage.sbqSettings[k][name] = storage.sbqSettings[k][name] or {}
+            sbq.settings[k][name] = sbq.settings[k][name] or {}
 
-	-- using sb.jsonMerge to de-reference tables
-	sbq.defaultSettings.locations = sb.jsonMerge(sbq.defaultSettings.locations or {}, {})
-	storage.sbqSettings.locations = sb.jsonMerge(storage.sbqSettings.locations or {}, {})
-	sbq.settings.locations = sb.jsonMerge(sbq.settings.locations or {}, {})
-	sbq.publicSettings.locations = sb.jsonMerge(sbq.publicSettings.locations or {}, {})
-	for name, location in pairs(sbq.voreConfig.locations or {}) do
-		sbq.defaultSettings.locations[name] = sb.jsonMerge(sbq.defaultSettings.locations[name] or {}, {})
-		storage.sbqSettings.locations[name] = sb.jsonMerge(storage.sbqSettings.locations[name] or {}, {})
-		sbq.settings.locations[name] = sb.jsonMerge(sbq.settings.locations[name] or {}, {})
+			for setting, v in pairs(storage.sbqSettings[k][name]) do
+				local defaultType = type(sbq.defaultSettings[k][name][setting])
+				if (type(v) ~= defaultType) then
+					storage.sbqSettings[k][name][setting] = nil
+					if (sbq.defaultSettings[k][name][setting] == nil) then
+						sbq.logWarn(string.format("Removed setting '%s.%s.%s'\nNo defined default value.", k, name, setting))
+					else
+						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting, v, sbq.defaultSettings[setting], defaultType))
+					end
+                end
+				local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(v)] or ((((sbq.voreConfig.invalidSettings or {})[k] or {})[name] or {})[setting] or {})[tostring(v)]
+				if result == "default" then
+					storage.sbqSettings[k][name][setting] = nil
+					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, sbq.defaultSettings[k][name][setting]))
+				elseif result ~= nil then
+					storage.sbqSettings[k][name][setting] = result
+					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, result))
+				end
+			end
+
+			setmetatable(sbq.defaultSettings[k][name], {__index = sbq.settings})
+			setmetatable(storage.sbqSettings[k][name], {__index = sbq.defaultSettings[k][name]})
+			setmetatable(sbq.settings[k][name], {__index= storage.sbqSettings[k][name]})
+		end
 	end
 
 	setmetatable(storage.sbqSettings, {__index = sbq.defaultSettings})
 	setmetatable(sbq.settings, {__index= storage.sbqSettings})
 
-	for name, location in pairs(sbq.voreConfig.locations or {}) do
-		setmetatable(sbq.defaultSettings.locations[name], {__index = sbq.config.defaultLocationSettings})
-		setmetatable(storage.sbqSettings.locations[name], {__index = sbq.defaultSettings.locations[name]})
-		setmetatable(sbq.settings.locations[name], {__index= storage.sbqSettings.locations[name]})
-	end
 	sbq.refreshOverrides()
 end
 
 function sbq.refreshOverrides()
 	sbq.overrideSettings = {}
-	for k, v in pairs(sbq.settings) do
-		sbq.overrideSettings[k] = true
-	end
-	sbq.overrideSettings.locations = {}
-	for k, v in pairs(sbq.settings.locations) do
-		sbq.overrideSettings.locations[k] = {}
-		for k2, _ in pairs(v) do
-			sbq.overrideSettings.locations[k][k2] = true
+    for setting, v in pairs(sbq.settings) do
+		if not sbq.config.groupedSettings[setting] then
+			sbq.overrideSettings[setting] = true
+		end
+    end
+	for k, v in pairs(sbq.config.groupedSettings) do
+		for name, settings in pairs(sbq.settings[k]) do
+			for setting, _ in pairs(settings) do
+				sbq.overrideSettings[k][name][setting] = true
+			end
 		end
 	end
 end
@@ -118,6 +168,22 @@ function sbq.replaceConfigTags(config, tags)
 		end
 	end
 	return newConfig
+end
+
+function sbq.getActionIcon(action, preferDirectories)
+	local directory = "/humanoid/any/sbqActionIcons/"
+	if type(preferDirectories) ~= "table" then
+		preferDirectories = {preferDirectories}
+    end
+	for _, v in ipairs(preferDirectories) do
+		if v and root.assetExists(action..".png", v) then
+			return v .. action .. ".png"
+		end
+	end
+	if root.assetExists(action..".png", directory) then
+		return directory .. action .. ".png"
+	end
+	return directory .. "unassigned.png"
 end
 
 function sbq.globalToLocal(pos, offset)
@@ -152,11 +218,20 @@ function sbq.localPartPoly(part, property)
 	return animator.transformPoly(animator.partProperty(part, property) or {{0.5,-0.5},{0.5,0.5},{-0.5,0.5},{-0.5,-0.5}}, part)
 end
 
-function sbq.logInfo(input)
-	sb.logInfo("["..world.entityName(entity.id()).."]".. input)
+function sbq.logOutput(input, pretty)
+	if pretty then
+		input = sb.printJson(input, pretty)
+    end
+	return "[SBQ][%s]%s", (world.entityName(sbq.entityId()) or sbq.entityId()), input
 end
-function sbq.logJson(input, pretty)
-	sb.logInfo("["..world.entityName(entity.id()).."]".. sb.printJson(input, pretty or 2))
+function sbq.logInfo(input, pretty)
+	sb.logInfo(sbq.logOutput(input,pretty))
+end
+function sbq.logWarn(input, pretty)
+	sb.logWarn(sbq.logOutput(input,pretty))
+end
+function sbq.logError(input, pretty)
+	sb.logError(sbq.logOutput(input,pretty))
 end
 
 function sbq.refreshSettings()
@@ -171,6 +246,22 @@ function sbq.refreshSettings()
 			Transformation:doAnimations(settingsAnim[2])
 		end
 	end
+end
+
+function sbq.refreshPublicSettings()
+	for setting, v in pairs(sbq.config.publicSettings) do
+        if v == true then sbq.publicSettings[setting] = sbq.settings[setting] end
+    end
+	for k, v in pairs(sbq.config.groupedSettings) do
+		for name, settings in pairs(sbq.defaultSettings[k]) do
+            for setting, _ in pairs(settings) do
+				if sbq.config.publicSettings[setting] == true then
+					sbq.publicSettings[k][name][setting] = sbq.settings[k][name][setting]
+				end
+			end
+		end
+    end
+	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 end
 
 function sbq.getString(str)

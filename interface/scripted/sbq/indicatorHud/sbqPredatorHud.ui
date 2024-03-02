@@ -1,0 +1,48 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "panel", // window (has titlebar), panel (just a frame) etc.
+	"size" : [96, 256], // *internal* size (not including chrome)
+	"title" : "",
+	"uniqueBy" : "path",
+	"anchor" : ["bottomRight", [3,3]],
+	"scripts" : ["predatorHud.lua", "hudActions.lua"],
+	"forceTheme" : "starbound",
+	"dismissable" : false,
+	"children" : [
+		{ "type" : "layout", "mode" : "manual", "size" : [96,256], "children" : [
+			{ "type" : "image", "file" : "/humanoid/meowscarada/mask/3.png", "noAutoCrop" : true },
+
+			{ "type" : "layout", "id" : "occupantSlots", "mode" : "manual", "size" : [96,224], "children" : [
+			]},
+
+			{ "type" : "layout", "id" : "occupantsArea", "mode" : "manual", "size" : [96,224], "children" : [
+			]},
+			{ "type" : "layout", "id" : "predHudBottom", "mode" : "manual", "position" : [0, 224], "size" : [96,32], "children" : [
+
+
+				{ "type" : "image", "file" : "predHudBottom.png", "noAutoCrop" : true },
+
+
+
+				{ "type" : "panel", "id" : "effectsPanel", "style" : "concave", "size" : [50,28], "position" : [9,3], "children" : [
+					{ "type" : "layout", "mode" : "vertical", "spacing" : 0, "children" : [
+						{ "type" : "layout", "mode" : "horizontal", "spacing" : -1, "children" :[
+							{ "type" : "sbqCheckBox", "id" : "noneButton", "value" : "none", "radioGroup" : "effectsGroup"},
+							{ "type" : "sbqCheckBox", "id" : "healButton", "value" : "heal",  "radioGroup" : "effectsGroup"},
+							{ "type" : "sbqCheckBox", "id" : "softDigestButton", "value" : "softDigest", "radioGroup" : "effectsGroup"},
+							{ "type" : "sbqCheckBox", "id" : "digestButton", "value" : "digest",  "radioGroup" : "effectsGroup"}
+						]},
+						{ "type" : "layout", "id" : "extraEffectTogglesLayout", "mode" : "horizontal", "spacing" : -1, "children" :[
+						]}
+					]}
+				]},
+				{ "type" : "iconButton", "id" : "prevLocation", "position" : [3, 8], "image" : "/interface/scripted/sbq/indicatorHud/leftSide.png", "hoverImage" : "/interface/scripted/sbq/indicatorHud/leftSide.png?replace;000000=FFFFFF" },
+				{ "type" : "iconButton", "id" : "nextLocation", "position" : [57, 8], "image" : "/interface/scripted/sbq/indicatorHud/leftSide.png?flipx", "hoverImage" : "/interface/scripted/sbq/indicatorHud/leftSide.png?replace;000000=FFFFFF?flipx" },
+				{ "type" : "checkBox", "id" : "impossibleEscape", "size": [12,12], "position" : [65,18], "toolTip" : "Make escaping impossible" },
+
+				{ "type" : "textBox", "id" : "escapeValue", "text" : "0", "size" : [17,14], "position" : [65,3], "toolTip": "Current Escape Difficulty" },
+
+				{ "type" : "iconButton", "id" : "settings", "position" : [85, 4], "image" : "settings.png", "hoverImage" : "settingshover.png", "pressImage" : "settingspress.png" }
+			]}
+		]}
+	]
+}

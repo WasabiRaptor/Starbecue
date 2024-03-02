@@ -9,9 +9,9 @@ local old = {
 
 dialogueBoxScripts = {}
 
--- require"/interface/scripted/sbq/sbqDialogueBox/sbqDialogueBoxScripts.lua"
--- require"/interface/scripted/sbq/sbqSettings/autoSetSettings.lua"
--- require"/interface/scripted/sbq/sbqDialogueBox/scripts/npc.lua"
+-- require"/interface/scripted/sbq/DialogueBox/sbqDialogueBoxScripts.lua"
+-- require"/interface/scripted/sbq/settings/autoSetSettings.lua"
+-- require"/interface/scripted/sbq/DialogueBox/scripts/npc.lua"
 
 require"/scripts/actor/SBQ_actor.lua"
 require"/scripts/any/SBQ_rewards.lua"

@@ -1,0 +1,21 @@
+cfg = root.assetJson("/interface/scripted/sbq/settings/settings.ui")
+
+player.setScriptContext("starbecue")
+sbq = player.callScript("sbq.getSettingsPageData")
+cfg.inputData = {
+	sbq = sbq
+}
+
+cfg.title = root.assetJson("/sbqStrings.config:settingsTitle")
+table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/preferences.config"))
+
+if sbq.helpTab then
+	table.insert(cfg.children[1].tabs, root.assetJson(sbq.helpTab))
+end
+
+table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/help.config"))
+
+table.insert(cfg.scripts, 1, "playerSettings.lua")
+
+table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/misc.config"))
+table.insert(cfg.scripts, "misc.lua")

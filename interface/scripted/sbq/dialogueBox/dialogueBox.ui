@@ -1,0 +1,46 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "panel", // window (has titlebar), panel (just a frame) etc.
+	"size" : [256, 72], // *internal* size (not including chrome)
+	"uniqueBy" : "path",
+	"anchor" : ["centerBottom", [0,-64]],
+	"scripts" : [ "sbqDialogueBox.lua" ],
+	"children" : [
+		{ "type" : "layout", "id" : "dialogueLayout", "mode" : "horizontal", "expandMode" : [1, 1], "children" : [
+			{ "type" : "layout", "id" : "portraitLayout", "mode" : "vertical", "expandMode" : [0, 1], "children" : [
+				[
+					{ "type" : "image", "id": "dialoguePortrait", "file" : "/empty_image.png", "visible" : false },
+					{ "type" : "canvas", "id": "dialoguePortraitCanvas", "size" : [64,64], "visible" : false }
+				],
+				{ "type" : "label", "id" : "nameLabel", "text": "", "inline" : true }
+			]},
+			{ "type" : "layout", "mode" : "vertical", "expandMode" : [1, 1], "children" : [
+				{ "type" : "panel", "id" : "dialoguePanel", "expandMode" : [1, 1], "style" : "convex", "children" : [
+					{ "type" : "scrollArea", "children" : [{ "type" : "label", "id" : "dialogueLabel", "text": ""}]}
+				]},
+				[
+					{ "type" : "iconButton", "id" : "close", "image" : "/interface/x.png", "hoverImage" : "/interface/xhover.png", "pressImage" : "/interface/xpress.png" },
+					{ "type" : "button", "id" : "dialogueCont", "expandMode" : [1, 0], "caption" : "..." },
+					{ "type" : "iconButton", "visible" : false, "id" : "oralVore", "toolTip" : "Eat me!", "image" : "/humanoid/any/sbqActionIcons/oralVore.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "tailVore", "tooltip" : "Have your tail eat me!", "image" : "/humanoid/any/sbqActionIcons/tailVore.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "absorbVore", "toolTip" : "Absorb me!", "image" : "/humanoid/any/sbqActionIcons/absorbVore.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "navelVore", "toolTip" : "Put me in your navel!", "image" : "/humanoid/any/sbqActionIcons/navelVore.png" },
+
+					{ "type" : "iconButton", "visible" : false, "id" : "analVore", "toolTip" : "Shove me up your butt!", "image" : "/humanoid/any/sbqActionIcons/analVore.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "cockVore", "toolTip" : "Stick me in your dick!", "image" : "/humanoid/any/sbqActionIcons/cockVore.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "breastVore", "toolTip" : "Put me in your boobs!", "image" : "/humanoid/any/sbqActionIcons/breastVore.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "unbirth", "toolTip" : "Shove me up your pussy!", "image" : "/humanoid/any/sbqActionIcons/unbirth.png" },
+
+					{ "type" : "iconButton", "visible" : false, "id" : "bellyInfusion", "toolTip" : "Turn me into your belly!", "image" : "/humanoid/any/sbqActionIcons/bellyInfusion.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "breastsInfusion", "toolTip" : "Turn me into your boobs!", "image" : "/humanoid/any/sbqActionIcons/breastsInfusion.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "pussyInfusion", "toolTip" : "Turn me into your pussy!", "image" : "/humanoid/any/sbqActionIcons/pussyInfusion.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "cockInfusion", "toolTip" : "Turn me into your cock!", "image" : "/humanoid/any/sbqActionIcons/cockInfusion.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "ballsInfusion", "toolTip" : "Turn me into your balls!", "image" : "/humanoid/any/sbqActionIcons/ballsInfusion.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "shaftBallsInfusion", "toolTip" : "Turn me into your cock and balls!", "image" : "/humanoid/any/sbqActionIcons/shaftBallsInfusion.png" },
+
+					{ "type" : "iconButton", "visible" : false, "id" : "changeBack", "toolTip" : "Change me back!", "image" : "/humanoid/any/sbqActionIcons/letout.png" },
+					{ "type" : "iconButton", "visible" : false, "id" : "letOut", "toolTip" : "Let me out!", "image" : "/humanoid/any/sbqActionIcons/letout.png" }
+				]
+			]}
+		]}
+	]
+}
