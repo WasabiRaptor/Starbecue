@@ -1,8 +1,8 @@
 [ // in file: /metagui/registry.json.patch
 	{ "op" : "add", "path" : "/panes/starbecue", "value" : {
-		"mainSettings" : "/interface/scripted/sbq/settings/buildPlayerSettings.lua",
+		"playerSettings" : "/interface/scripted/sbq/settings/buildPlayerSettings.lua",
 		"entitySettings" : "/interface/scripted/sbq/settings/buildEntitySettings.lua",
-		"predHud" : "/interface/scripted/sbq/indicatorHud/sbqPredatorHud.ui",
+		"predHud" : "/interface/scripted/sbq/predatorHud/predatorHud.ui",
 		"preyHud" : "/interface/scripted/sbq/indicatorHud/sbqIndicatorHud2.ui",
 		"dialogueBox" : "/interface/scripted/sbq/DialogueBox/sbqDialogueBox.ui",
 		"shop" : "/interface/scripted/sbq/shop/shop.ui",

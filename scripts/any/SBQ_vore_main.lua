@@ -963,14 +963,15 @@ function _Occupant:remove()
 	for i, occupant in ipairs(Occupants.list) do
 		if occupant.entityId == self.entityId then
 			table.remove(Occupants.list, i)
-			return
+			break
 		end
 	end
 	for k, occupant in pairs(Occupants.entityId) do
 		if occupant.entityId == self.entityId then
 			Occupants.entityId[k] = nil
 		end
-	end
+    end
+	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
 
 function Occupants.update(dt)
@@ -1022,7 +1023,7 @@ function _Occupant:update(dt)
 		if compression == "time" then
 			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat("sbqDigestPower") * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
-			self.sizeMultiplier = math.max( compressionMin, world.entityResourcePercentage("health"))
+			self.sizeMultiplier = math.max( compressionMin, world.entityResourcePercentage(self.entityId, "health"))
 		end
 		if oldMultiplier ~= self.sizeMultiplier then
 			location.occupancy.sizeDirty = true
@@ -1104,6 +1105,7 @@ function _Occupant:refreshLocation(name, subLocation)
 		progressBar = self.progressBar,
 		time = self.time,
 	})
+	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
 
 function _Occupant:attemptStruggle(control)

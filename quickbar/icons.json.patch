@@ -1,10 +1,10 @@
 [
-	{ "op" : "add", "path" : "/items/starbecue:mainSettings",
+	{ "op" : "add", "path" : "/items/starbecue:playerSettings",
 		"value" : {
 			"label" : "SBQ Settings",
 			"weight" : -10,
 			"icon" : "/humanoid/any/sbqActionIcons/oralVore.png",
-			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:mainSettings" } } ]
+			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:playerSettings" } } ]
 		}
 	},
 	{ "op" : "add", "path" : "/items/starbecue:crewMenu",

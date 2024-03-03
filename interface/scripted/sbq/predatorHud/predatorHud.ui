@@ -1,0 +1,35 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "panel", // window (has titlebar), panel (just a frame) etc.
+	"size" : [96, 256], // *internal* size (not including chrome)
+	"title" : "",
+	"uniqueBy" : "path",
+	"anchor" : ["bottomRight", [3,3]],
+	"scripts" : ["predatorHud.lua"],
+	"forceTheme" : "starbound",
+	"dismissable" : false,
+	"children" : [
+		{ "type" : "layout", "mode" : "manual", "size" : [96,256], "children" : [
+			{ "type" : "image", "file" : "/humanoid/meowscarada/mask/3.png", "noAutoCrop" : true },
+
+
+			{ "type" : "scrollArea", "id" : "occupantSlots", "scrollDirections":[0,1], "position" : [0, 19], "size" : [96,205], "children" : [
+				{"align":1, "spacing":-50, "expandMode":[0,0]}
+			]},
+			{ "type" : "image", "id" : "predHudTop", "file" : "predHudTop.png", "zLevel":999, "position":[0,19], "noAutoCrop" : true },
+
+			{ "type" : "layout", "id" : "predHudBottom", "mode" : "manual", "position" : [0, 224], "size" : [96,32], "children" : [
+
+
+				{ "type" : "image", "file" : "predHudBottom.png", "noAutoCrop" : true },
+				{ "type" : "label", "text" : "-TODO", "size" : [48,10], "position" : [10,10] },
+				// { "type" : "panel", "id" : "effectsPanel", "style" : "concave", "size" : [50,28], "position" : [9,3], "children" : [
+
+				// ]},
+				// { "type" : "iconButton", "id" : "prevLocation", "position" : [3, 8], "image" : "/interface/scripted/sbq/indicatorHud/leftSide.png", "hoverImage" : "/interface/scripted/sbq/indicatorHud/leftSide.png?replace;000000=FFFFFF" },
+				// { "type" : "iconButton", "id" : "nextLocation", "position" : [57, 8], "image" : "/interface/scripted/sbq/indicatorHud/leftSide.png?flipx", "hoverImage" : "/interface/scripted/sbq/indicatorHud/leftSide.png?replace;000000=FFFFFF?flipx" },
+
+				{ "type" : "iconButton", "id" : "settings", "position" : [85, 4], "image" : "settings.png", "hoverImage" : "settingshover.png", "pressImage" : "settingspress.png" }
+			]}
+		]}
+	]
+}

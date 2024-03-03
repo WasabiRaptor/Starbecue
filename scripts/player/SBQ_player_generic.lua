@@ -75,6 +75,10 @@ function init()
 				back = (struggleActions.back and (struggleActions.back.indicate or struggleActions.any.indicate or "default")),
 			}
 		}, id)
+    end)
+
+    message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
+		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants }, ui = "starbecue:predHud" })
 	end)
 
 

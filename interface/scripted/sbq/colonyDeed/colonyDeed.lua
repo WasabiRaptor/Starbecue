@@ -246,7 +246,7 @@ function sbq.refreshDeedPage()
 			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
 			sbq.refreshDeedPage()
         end
-		canvas:drawDrawables(portrait, {canvasSize[1]/2, canvasSize[2]/2})
+		canvas:drawDrawables(portrait, vec2.div(canvasWidget.size, 2))
 		function settings:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
 			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end

@@ -2,7 +2,6 @@
 sbq = {}
 
 require("/scripts/any/SBQ_RPC_handling.lua")
-require("/interface/scripted/sbq/indicatorHud/hudActions.lua")
 require "/items/active/sbqController/sbqControllerSetup.lua"
 
 
@@ -93,10 +92,7 @@ end
 
 function sbq.letout(id)
 	player.setScriptContext("starbecue")
-	local loungeAnchor = world.entityCurrentLounge(entity.id())
-	if loungeAnchor and (loungeAnchor.entityId == entity.id()) then
-		return player.callScript("sbq.tryAction", "pickLetout", id, storage.action)
-	end
+	return player.callScript("sbq.tryAction", "pickLetout", id, storage.action)
 end
 
 function sbq.clickAction()
