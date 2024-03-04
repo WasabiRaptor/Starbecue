@@ -15,7 +15,18 @@
 
 		"fatal" : true,
 		"send" : ["food", "health"],
-		"sendMultiplier" : [1,0.5]
+		"sendMultiplier" : [1,0.5],
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			}
+		},
+		"predModifiers" : [
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9}
+		]
+
 	},
 	"defaultDuration" : 5,
 

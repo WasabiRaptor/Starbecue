@@ -1,0 +1,22 @@
+{
+  "kind" : "sbq_digestnumber",
+  "definition" : {
+    "type" : "text",
+    "text" : "^shadow;-$dmg$",
+    "color" : [0, 255, 0, 180],
+    "light" : [70, 0, 0],
+    "fullbright" : true,
+    "initialVelocity" : [0.0, 0.0],
+    "finalVelocity" : [0.0, 0.0],
+    "size" : 0.5,
+    "approach" : [1, 1],
+    "timeToLive" : 0.7,
+    "layer" : "front",
+    "destructionAction" : "fade",
+    "destructionTime" : 0.5,
+    "variance" : {
+      "initialVelocity" : [2.0, 2.0]
+    },
+    "flippable" : false
+  }
+}

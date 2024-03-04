@@ -220,7 +220,7 @@ function selectAction(...)
 
 	if option.context and option.script then
 		player.setScriptContext(option.context)
-		player.callScript(script, table.unpack(args))
+		player.callScript(option.script, table.unpack(args))
 	elseif option.message and world.entityExists(messageTarget) then
 		world.sendEntityMessage(messageTarget, option.message, table.unpack(args))
 	end

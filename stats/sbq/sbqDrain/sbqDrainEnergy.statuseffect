@@ -5,20 +5,24 @@
 	"effectConfig" : {
 		"adjectives" : ["tingly"],
 
-		"drain" : "energy",
-		"send" : ["hunger", "energy"],
-		"regenStat": "energyRegenPercentageRate",
-		"drainRate" : 5,
-		"sendMultiplier" : [0.05,0.5],
-
 		"checkBoxIcon" : "/interface/scripted/sbq/energyDrain.png",
-		"description" : "energyDrainDesc"
+		"description" : "energyDrainDesc",
+		"preyStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 2
+			}
+		},
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "baseMultiplier",
+				"op" : "mul",
+				"base" : 2
+			}
+		}
 	},
 	"defaultDuration" : 5,
-
-	"scripts" : [
-		"sbqDrain.lua"
-	],
 
 	"label" : "Energy Being Drained",
 	"icon" : "/stats/sbq/sbqDrain/sbqDrainEnergy.png"

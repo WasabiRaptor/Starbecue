@@ -76,7 +76,7 @@ function sbq.update(dt)
 	if Transformation.active then
 		Occupants.update(dt)
 		Transformation:update(dt)
-		Transformation.state:update(dt)
+        Transformation.state:update(dt)
 	end
 	sbq.passiveStatChanges(dt)
 end
@@ -124,6 +124,8 @@ function sbq.getSettings(entityId)
 end
 
 function sbq.reloadVoreConfig(config)
+    sbq.clearStatModifiers("occupantModifiers")
+	Occupants.refreshOccupantModifiers = true
 	-- if reloading while another transformation is already active, uninitialize it first
 	if Transformation.active then
 		Transformation.state:uninit()
@@ -181,7 +183,7 @@ function sbq.reloadVoreConfig(config)
 	sbq.refreshSettings()
 	Transformation:init()
 	Transformation.state:init()
-	Transformation.active = true
+    Transformation.active = true
 end
 
 function sbq.tryAction(action, target, ...)
@@ -981,14 +983,11 @@ function _Occupant:remove()
 			Occupants.entityId[k] = nil
 		end
     end
-	sbq.clearStatModifiers(self.entityId .. "OccupantModifiers")
+	Occupants.refreshOccupantModifiers = true
 	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
 
 function Occupants.update(dt)
-	for _, occupant in ipairs(Occupants.list) do
-		occupant:update(dt)
-	end
 	for name, _ in pairs(Transformation.locations) do
 		local location = Transformation:getLocation(name)
 		for k, v in pairs(location.subLocations or {}) do
@@ -999,13 +998,27 @@ function Occupants.update(dt)
 			subLocation:updateOccupancy(dt)
 		end
 		location:updateOccupancy(dt, location.subLocationBehavior)
-
+    end
+	for _, occupant in ipairs(Occupants.list) do
+		occupant:update(dt)
+	end
+    for name, _ in pairs(Transformation.locations) do
+		local location = Transformation:getLocation(name)
 		for k, _ in pairs(location.subLocations or {}) do
 			local subLocation = Transformation:getLocation(name, k)
 			subLocation.occupancy.settingsDirty = false
 		end
 		location.occupancy.settingsDirty = false
-		Occupants.lastScale = sbq.scale()
+	end
+	Occupants.lastScale = sbq.scale()
+
+    if Occupants.refreshOccupantModifiers then
+        Occupants.refreshOccupantModifiers = false
+		local modifiers = {}
+        for _, occupant in ipairs(Occupants.list) do
+			util.appendLists(modifiers, occupant.predModifiers or {})
+        end
+		sbq.setStatModifiers("occupantModifiers", modifiers)
 	end
 end
 
@@ -1090,17 +1103,44 @@ function _Occupant:refreshLocation(name, subLocation)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
-        { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or false)) or 0}
+        { stat = "sbqGetDigestDrops", amount = location.settings.getDigestDrops and 1 or 0 },
+        { stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
+
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
-	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
-	util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
-	for setting, effects in pairs(location.toggleEffects or {}) do
-		if (location.settings[setting]) then
-			util.appendLists(persistentStatusEffects, effects or {})
+    util.appendLists(persistentStatusEffects, location.passiveEffects or {})
+	if not (self.flags.digested or self.flags.infused) then
+		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
+		for setting, effects in pairs(location.toggleEffects or {}) do
+			if (location.settings[setting]) then
+				util.appendLists(persistentStatusEffects, effects or {})
+			end
 		end
 	end
-	self:setLoungeStatusEffects(persistentStatusEffects)
+    local predModifiers = {}
+	local preyModifiers = {}
+
+	for _, effect in ipairs(persistentStatusEffects) do
+		if type(effect) == "string" then
+            local effectConfig = root.effectConfig(effect).effectConfig or {}
+			if effectConfig.predModifiers then
+				util.appendLists(predModifiers, effectConfig.predModifiers)
+            end
+			if effectConfig.preyModifiers then
+				util.appendLists(preyModifiers, effectConfig.preyModifiers)
+            end
+			if effectConfig.predStatModifiers then
+				util.appendLists(predModifiers, sbq.getModifiers(effectConfig.predStatModifiers, sbq.stat(location.powerMultiplier or "powerMultiplier")))
+			end
+			if effectConfig.preyStatModifiers then
+				util.appendLists(preyModifiers, sbq.getModifiers(effectConfig.preyStatModifiers, sbq.stat(location.powerMultiplier or "powerMultiplier")))
+			end
+		end
+    end
+	util.appendLists(persistentStatusEffects, preyModifiers)
+    self:setLoungeStatusEffects(persistentStatusEffects)
+	self.predModifiers = predModifiers
+    Occupants.refreshOccupantModifiers = true
 
 	self:setItemBlacklist(location.itemBlacklist or sbq.voreConfig.prey.itemBlacklist or sbq.config.prey.itemBlacklist)
 	self:setItemWhitelist(location.itemWhitelist or sbq.voreConfig.prey.itemWhitelist or sbq.config.prey.itemWhitelist)
@@ -1113,20 +1153,26 @@ function _Occupant:refreshLocation(name, subLocation)
 	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
 		progressBar = self.progressBar,
 		time = self.time,
-	})
+    })
     world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
+end
 
-    local predModifiers = {}
-	for _, effect in ipairs(persistentStatusEffects) do
-		if type(effect) == "string" then
-            local effectConfig = root.effectConfig(effect).effectConfig
-			if effectConfig.predModifiers then
-				util.appendLists(predModifiers, effectConfig.predModifiers)
-			end
-		end
-	end
-
-    sbq.setStatModifiers(self.entityId .. "OccupantModifiers", predModifiers)
+function sbq.getModifiers(modifiers, power)
+	local output = {}
+	for k, v in pairs(modifiers) do
+        local modifier = { stat = k }
+		if v.op == "div" then
+            modifier[v.type] = 1 / math.max(power * (v.base or 1), 1)
+		elseif v.op == "sub" then
+            modifier[v.type] = 1 - (power * (v.base or 1))
+        elseif v.op == "mul" then
+            modifier[v.type] = math.max(power * (v.base or 1), 1)
+		elseif v.op == "add" then
+			modifier[v.type] = (power * (v.base or 1))
+        end
+		table.insert(output, modifier)
+    end
+	return output
 end
 
 function _Occupant:attemptStruggle(control)

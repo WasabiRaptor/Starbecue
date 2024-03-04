@@ -17,7 +17,18 @@
 		"fatal" : true,
 
 		"send" : ["sbqLust"],
-		"sendMultiplier" : [0.33]
+		"sendMultiplier" : [0.33],
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			}
+		},
+		"predModifiers" : [
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9}
+		]
+
 	},
 	"defaultDuration" : 5,
 

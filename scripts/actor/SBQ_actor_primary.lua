@@ -1,6 +1,7 @@
 local old = {
 	init = init,
-	update = update
+    update = update,
+	applyDamageRequest = applyDamageRequest
 }
 sbq = {}
 
@@ -73,6 +74,8 @@ function init()
         scaleDuration = duration or 1
 		scaling = true
     end)
+    destScale = mcontroller.scale()
+	oldScale = mcontroller.scale()
 end
 
 function update(dt)
@@ -105,6 +108,46 @@ function update(dt)
 			end
 		end
 	end
+end
+
+function applyDamageRequest(damageRequest)
+    if (damageRequest.damageSourceKind == "sbq_digest")
+	or (damageRequest.damageSourceKind == "sbq_cumdigest")
+	or (damageRequest.damageSourceKind == "sbq_femcumdigest")
+	or (damageRequest.damageSourceKind == "sbq_milkdigest")
+	then
+		local healthLost = math.min(damageRequest.damage, status.resource("health"))
+		status.modifyResource("health", -damageRequest.damage)
+		return {{
+			sourceEntityId = damageRequest.sourceEntityId,
+			targetEntityId = entity.id(),
+			position = mcontroller.position(),
+			damageDealt = damageRequest.damage,
+			healthLost = healthLost,
+			hitType = damageRequest.hitType,
+            damageSourceKind = damageRequest.damageSourceKind,
+			targetMaterialKind = ""
+        }}
+    elseif damageRequest.damageSourceKind == "sbq_heal" then
+		return {{
+			sourceEntityId = damageRequest.sourceEntityId,
+			targetEntityId = entity.id(),
+			position = mcontroller.position(),
+			damageDealt = damageRequest.damage,
+			healthLost = status.giveResource("health", damageRequest.damage),
+			hitType = damageRequest.hitType,
+            damageSourceKind = damageRequest.damageSourceKind,
+			targetMaterialKind = ""
+        }}
+    elseif damageRequest.damageSourceKind == "sbq_size" then
+        scaling = true
+        oldScale = mcontroller.scale()
+        destScale = math.max(destScale + damageRequest.damage, 0.1)
+		scaleTime = 0
+        scaleDuration = math.max(scaleDuration, math.abs(damageRequest.damage))
+		return {}
+	end
+	return old.applyDamageRequest(damageRequest)
 end
 
 

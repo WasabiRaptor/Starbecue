@@ -5,25 +5,33 @@
 	"effectConfig" : {
 		"adjectives" : ["soothing", "wet"],
 
-		"effect" : "sbqUnbirthHeal",
-		"healStat" : "health",
-		"healRate" : 1,
-		"take" : ["food", "energy"],
-		"takeMultiplier" : [0.5, 15],
-		"takeThreshold" : [0.25, 0.5],
-
 		"checkBoxIcon" : "/interface/scripted/sbq/heal.png",
-		"description" : "unbirthHealDesc"
+		"description" : "unbirthHealDesc",
+
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			},
+			"foodDelta" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			}
+		},
+		"predModifiers" : [
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9},
+			{"stat":"foodDelta","baseMultiplier":1.1}
+		]
 
 	},
 	"defaultDuration" : 5,
-
-	"animationConfig" : "/stats/effects/heal/heal.animation",
 
 	"scripts" : [
 		"sbqHeal.lua"
 	],
 
-	"label" : "Healing Vore",
+	"label" : "Healing Unbirth",
 	"icon" : "/stats/sbq/sbqHeal/sbqHeal.png"
 }

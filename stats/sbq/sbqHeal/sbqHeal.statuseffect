@@ -5,14 +5,19 @@
 	"effectConfig" : {
 		"adjectives" : ["soothing", "wet"],
 
-		"effect" : "sbqHeal",
-		"healStat" : "health",
-		"healRate" : 0.5,
-		"take" : ["energy"],
-		"takeMultiplier" : [30],
-		"takeThreshold" : [0.5],
 		"checkBoxIcon" : "/interface/scripted/sbq/heal.png",
-		"description" : "healDesc"
+		"description" : "healDesc",
+
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			}
+		},
+		"predModifiers" : [
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9}
+		]
 
 	},
 	"defaultDuration" : 5,
@@ -20,8 +25,6 @@
 	"scripts" : [
 		"sbqHeal.lua"
 	],
-
-	"animationConfig" : "/stats/effects/heal/heal.animation",
 
 	"label" : "Healing Vore",
 	"icon" : "/stats/sbq/sbqHeal/sbqHeal.png"

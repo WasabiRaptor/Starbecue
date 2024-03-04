@@ -51,7 +51,6 @@ function init()
 
 		local widget = _ENV[voreType.."predPrefLayout"]
         if widget then
-			sb.logInfo(voreType)
 			widget:setVisible(sbq.voreConfig.availableVoreTypes[voreType] or false)
 		end
     end
