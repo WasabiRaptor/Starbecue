@@ -11,7 +11,8 @@ function build(directory, config, parameters, level, seed)
         parameters.scriptStorage.action,
         true,
 		parameters.scriptStorage.iconDirectory
-	)
+    )
+	config.description = config.description.."\n"..sbq.strings.controllerActionDescAppend
 
 	return config, parameters
 end

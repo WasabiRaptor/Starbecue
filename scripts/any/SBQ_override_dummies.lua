@@ -129,6 +129,10 @@ function sbq.setStatModifiers(category, modifiers)
 	sbq.calculateStats()
 end
 
+function sbq.clearStatModifiers(category)
+	storage.effectCategories[category] = nil
+end
+
 function sbq.calculateStats()
 	local stats = {}
 	for _, modifiers in pairs(storage.effectCategories) do

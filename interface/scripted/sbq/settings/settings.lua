@@ -1,5 +1,7 @@
 if not _ENV.metagui.inputData.sbq then sb.logInfo("failed to get settings data") return pane.dismiss() end
 
+local prefTemplate = root.assetJson("/interface/scripted/sbq/settings/prefTemplate.config")
+
 function init()
 	if _ENV.mainSettingsPanel then
 		_ENV.mainSettingsPanel:clearChildren()
@@ -39,7 +41,32 @@ function init()
 				end
 			end
 		end
+    end
+
+    for _, voreType in pairs(sbq.gui.voreTypeOrder) do
+		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred"}))
+		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey"}))
+        -- _ENV.vorePredPrefsPanel:updateGeometry()
+		-- _ENV.vorePreyPrefsPanel:updateGeometry()
+
+		local widget = _ENV[voreType.."predPrefLayout"]
+        if widget then
+			sb.logInfo(voreType)
+			widget:setVisible(sbq.voreConfig.availableVoreTypes[voreType] or false)
+		end
+    end
+    for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
+		_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred"}))
+		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey"}))
+        -- _ENV.infusePredPrefsPanel:updateGeometry()
+		-- _ENV.infusePreyPrefsPanel:updateGeometry()
+
+		local widget = _ENV[infuseType.."predPrefLayout"]
+		if widget then
+			widget:setVisible(sbq.voreConfig.availableInfuseTypes[infuseType] or false)
+		end
 	end
+
     sbq.assignSettingValues()
 	sbq.refreshSettingVisibility()
 end

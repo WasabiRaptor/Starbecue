@@ -31,7 +31,8 @@ function sbq.actorInit()
 	sbq.setResourcePercentage = status.setResourcePercentage
 	sbq.modifyResourcePercentage = status.modifyResourcePercentage
 
-	sbq.setStatModifiers = status.setPersistentEffects
+    sbq.setStatModifiers = status.setPersistentEffects
+	sbq.clearStatModifiers = status.clearPersistentEffects
 end
 
 function sbq.actorMessages()

@@ -24,19 +24,14 @@ function init()
 	end)
 
     message.setHandler("sbqControllerRadialMenuScript", function(_, _, script, ...)
+		if not script then return end
 		if RadialMenu[script] then
 			RadialMenu[script](RadialMenu, ...)
         else
 			sb.logInfo(string.format("[%s] Attmpted invalid radial menu script: %s(%s)", entity.id(), script, sb.printJson({...})))
     	end
 	end)
-	message.setHandler("sbqControllerCancel", function(_, _)
-		RadialMenu:cancel()
-	end)
 end
-
-local selectedPrey
-local selectedPreyIndex
 
 function dontDoRadialMenu(arg)
 	dontDoMenu = arg
@@ -87,7 +82,7 @@ function sbq.setAction(action)
 	local icon, shortdescription, description = sbq.getActionData(action, (player.callScript("sbq.actionAvailable", action) or {})[1], storage.iconDirectory)
 	activeItem.setInventoryIcon(icon)
 	activeItem.setFriendlyName(shortdescription)
-	activeItem.setDescription(description)
+	activeItem.setDescription(description.."\n"..sbq.strings.controllerActionDescAppend)
 end
 
 function sbq.letout(id)
@@ -165,21 +160,15 @@ function _RadialMenu:update()
 end
 function _RadialMenu:uninit()
 end
-function _RadialMenu:cancel()
-end
 function _RadialMenu:openRadialMenu(overrides)
     player.interact("ScriptPane", sb.jsonMerge(
 		{
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
-			selectOnClose = true,
 			default = {
 				context = "starbecue",
 				message = "sbqControllerRadialMenuScript"
-			},
-			cancel = {
-				message = "sbqControllerCancel",
-				script = false,
-			},
+            },
+			cancel = {}
 		},
 		overrides
 	), player.id())
@@ -202,31 +191,39 @@ function TopMenu:init()
 		{
 			args = {"letout"},
             name = sbq.strings.controllerLetOut,
-			locked = (not occupants) or (not occupants[1])
+            locked = (not occupants) or (not occupants[1]),
+			description = sbq.strings.controllerLetOutAnyDesc
         },
+        {
+            args = { "open", "OccupantsMenu" },
+			name = sbq.strings.controllerRPMenu,
+            locked = true,
+			description = sbq.strings.controllerRPMenuDesc
+		},
 		{
 			args = {"open","OccupantsMenu"},
             name = sbq.strings.occupants,
-			locked = (not occupants) or (not occupants[1])
-		},
+            locked = (not occupants) or (not occupants[1]),
+			description = sbq.strings.controllerOccupantsDesc
+
+        },
 		{
 			args = {"open","AssignMenu"},
-			name = sbq.strings.controllerAssign
+            name = sbq.strings.controllerAssign,
+			description = sbq.strings.controllerAssignDesc
 		}
 	}
-	self:openRadialMenu({options = options})
+    self:openRadialMenu({ options = options, cancel = {
+        script = false,
+		message = false
+	}})
 end
 
 local AssignMenu = {}
 RadialMenu.AssignMenu = AssignMenu
 setmetatable(AssignMenu, _RadialMenu)
 function AssignMenu:init()
-	local options = {
-		{
-			args = {"open","TopMenu"},
-			name = "<-",
-		}
-    }
+	local options = {}
 	player.setScriptContext("starbecue")
     for _, action in ipairs(player.callScript("sbq.actionList") or config.getParameter("actions")) do
 		if (player.callScript("sbq.actionAvailable", action) or {})[1] then
@@ -239,19 +236,16 @@ function AssignMenu:init()
 			})
 		end
 	end
-	self:openRadialMenu({options = options})
+    self:openRadialMenu({ options = options, cancel = {
+		args = {"open","TopMenu"}
+	}})
 end
 
 local OccupantsMenu = {}
 RadialMenu.OccupantsMenu = OccupantsMenu
 setmetatable(OccupantsMenu, _RadialMenu)
 function OccupantsMenu:init()
-	local options = {
-		{
-			args = {"open","TopMenu"},
-			name = "<-",
-		}
-    }
+	local options = {}
 	local occupants = loungeable.entitiesLounging()
 
 	for _, entityId in ipairs(occupants) do
@@ -261,7 +255,9 @@ function OccupantsMenu:init()
 			icon = world.entityPortrait(entityId, "bust")
 		})
 	end
-	self:openRadialMenu({options = options})
+    self:openRadialMenu({ options = options, cancel = {
+		args = {"open","TopMenu"},
+	}})
 end
 
 local SelectedOccupantMenu = {}
@@ -270,12 +266,9 @@ setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
 	local options = {
 		{
-			args = {"open","OccupantsMenu"},
-			name = "<-",
-		},
-		{
 			args = {"letout", entityId},
-			name = sbq.strings.controllerLetOut,
+            name = sbq.strings.controllerLetOut,
+			description = sbq.strings.controllerLetOutSelectedDesc
         }
     }
 	player.setScriptContext("starbecue")
@@ -293,8 +286,9 @@ function SelectedOccupantMenu:init(entityId)
 				script = "sbq.tryAction"
 			})
 		end
-	end
+    end
 
-
-	self:openRadialMenu({options = options})
+    self:openRadialMenu({ options = options, cancel = {
+		args = {"open","OccupantsMenu"}
+	}})
 end

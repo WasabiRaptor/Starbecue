@@ -67,6 +67,7 @@ end
 function default:pickLetout(name, action, target, preferredAction, skip, ...)
     if target then
         occupant = Occupants.entityId[tostring(target)]
+		if not occupant then return end
         location = Transformation:getLocation(occupant.location, occupant.subLocation)
         local exitTypes = location.exitTypes or location.entryTypes
 		if preferredAction then
@@ -140,7 +141,7 @@ function default:grabRelease(name, action, target, ...)
 end
 
 function default:turboDigestAvailable(name, action, target, ...)
-    local occupant = Occupants.list[tostring(target)]
+    local occupant = Occupants.entityId[tostring(target)]
     if not occupant then return false end
     local location = occupant:getLocation()
     local mainEffect = occupant.overrideEffect or location.settings.mainEffect or "none"
@@ -149,7 +150,7 @@ function default:turboDigestAvailable(name, action, target, ...)
 end
 function default:turboDigest(name, action, target, ...)
     if not self:turboDigestAvailable(name, action, target, ...) then return false end
-    local occupant = Occupants.list[tostring(target)]
+    local occupant = Occupants.entityId[tostring(target)]
     occupant:sendEntityMessage("sbqTurboDigest", sbq.resource("energy"))
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
 end

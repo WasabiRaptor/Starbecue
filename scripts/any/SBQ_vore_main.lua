@@ -222,6 +222,11 @@ function sbq.setSetting(k, v)
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+    end
+	if sbq.voreConfig.settingUpdateScripts[k] then
+		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
+			sbq[script](k,v)
+		end
 	end
 end
 
@@ -229,7 +234,12 @@ function sbq.setGroupedSetting(group, name, k, v)
 	local old = sbq.settings[group][name][k]
 	storage.sbqSettings[group][name][k] = v
     if old == sbq.settings[group][name][k] then return end
-	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name,k,v) end
+    if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
+	if sbq.voreConfig.settingUpdateScripts[k] then
+		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
+			sbq[script](k,v, group, name)
+		end
+	end
 	sbq.refreshSettings()
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[group][name][k] = sbq.settings[group][name][k]
@@ -971,6 +981,7 @@ function _Occupant:remove()
 			Occupants.entityId[k] = nil
 		end
     end
+	sbq.clearStatModifiers(self.entityId .. "OccupantModifiers")
 	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
 
@@ -1078,10 +1089,8 @@ function _Occupant:refreshLocation(name, subLocation)
 	end
 
 	local persistentStatusEffects = {
-		{ stat = "sbqDigestResistance", effectiveMultiplier = sbq.stat("sbqDigestPower") },
-        { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or false)) or 0},
-		{ stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or sbq.settings.getDigestDrops or false)) or 0}
-
+		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
+        { stat = "sbqGetDigestDrops", amount = (1 and (location.settings.getDigestDrops or false)) or 0}
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
 	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
@@ -1105,7 +1114,19 @@ function _Occupant:refreshLocation(name, subLocation)
 		progressBar = self.progressBar,
 		time = self.time,
 	})
-	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
+    world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
+
+    local predModifiers = {}
+	for _, effect in ipairs(persistentStatusEffects) do
+		if type(effect) == "string" then
+            local effectConfig = root.effectConfig(effect).effectConfig
+			if effectConfig.predModifiers then
+				util.appendLists(predModifiers, effectConfig.predModifiers)
+			end
+		end
+	end
+
+    sbq.setStatModifiers(self.entityId .. "OccupantModifiers", predModifiers)
 end
 
 function _Occupant:attemptStruggle(control)

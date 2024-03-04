@@ -12,7 +12,15 @@ end
 
 function initAnimator()
 	old.initAnimator()
-	--sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
+    --sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
+	sbq.refreshRemapTags()
+	sbq.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
+	sbq.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
+	sbq.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
+	sbq.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
+end
+
+function sbq.refreshRemapTags()
 	local defaultColorMap = root.speciesConfig("human").baseColorMap
 	local speciesConfig = root.speciesConfig(humanoid.species())
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
@@ -31,10 +39,6 @@ function initAnimator()
 			animator.setPartTag(part, tag, directives)
 		end
 	end
-	sbq.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
-	sbq.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
-	sbq.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
-	sbq.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
 end
 
 function sbq.chestSlot(itemDescriptor)

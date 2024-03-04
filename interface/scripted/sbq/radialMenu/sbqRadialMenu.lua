@@ -9,11 +9,22 @@ local activeSegment
 
 function init()
 	options = config.getParameter("options")
-	default = config.getParameter("default")
-	cancel = config.getParameter("cancel")
+	default = config.getParameter("default") or {}
+	cancel = config.getParameter("cancel") or {}
 	if not options then
 		pane.dismiss() -- empty radial menu, uh oh
-	end
+    end
+    local minOptions = config.getParameter("minOptions") or 2
+	if #options < minOptions then
+		for i = #options, minOptions-1 do
+			table.insert(options,{locked = true})
+		end
+    end
+	for _, option in ipairs(options) do
+		setmetatable(option, {__index = default})
+    end
+	setmetatable(cancel, {__index = default})
+
 
 	canvas = widget.bindCanvas( "canvas" )
 	widget.focus("canvas")
@@ -72,10 +83,7 @@ function update( dt )
 	local spacingOffset = 1 -- difference from segmentSpacing
 	local sidesPerSegment
     local innerRadius
-	if segments <= 4 then
-		sidesPerSegment = 10
-		innerRadius = 20
-	elseif segments <= 6 then
+	if segments <= 6 then
 		sidesPerSegment = 10
 		innerRadius = 30
 	elseif segments <= 10 then
@@ -100,7 +108,7 @@ function update( dt )
 
 	if math.sqrt(mpos[1]*mpos[1] + mpos[2]*mpos[2]) < 0.9*innerRadius then
 		activeSegment = -1 -- no selection in middle
-	end
+    end
 
 	-- drawing
 	canvas:clear()
@@ -110,8 +118,8 @@ function update( dt )
 		local segmentAngle = segmentSize * (i - 1.5) + segmentSpacing / 2 + 180
 		local r1, r2, ri, color
         if options[i].locked then
-			r1 = innerRadius + 5
-			r2 = outerRadius - 5
+			r1 = innerRadius
+			r2 = outerRadius - 15
 			ri = iconRadius
 			color = {170, 180, 190, 100}
 		elseif i == activeSegment then
@@ -139,26 +147,53 @@ function update( dt )
 				local size = root.imageSize(options[i].icon)
 				textOffset = (size[2] / 2) +3
 			end
+        end
+		if iconPos[2] < 100 then
+			textOffset = textOffset * -1
 		end
         if options[i].name then
-			local textBrightness = (options[i].locked and 0.75 or 1)
-			canvas:drawText(options[i].name, {
-				position = {iconPos[1] + 0.5, iconPos[2] - 0.5 + textOffset},
-				horizontalAnchor = "mid",
-				verticalAnchor = "mid"
-			}, 8, { 0, 0, 0 })
-			canvas:drawText(options[i].name, {
-				position = {iconPos[1] + 1, iconPos[2] - 1 + textOffset},
-				horizontalAnchor = "mid",
-				verticalAnchor = "mid"
-			}, 8, { 0, 0, 0 })
-			canvas:drawText(options[i].name, {
-				position = {iconPos[1], iconPos[2] + textOffset},
-				horizontalAnchor = "mid",
-				verticalAnchor = "mid"
-			}, 8, { 255 * textBrightness, 255 * textBrightness, 255 * textBrightness })
+			drawShadowText(options[i].name, {iconPos[1], iconPos[2] + textOffset}, options[i].nameColor or options[i].textColor or {255,255,255}, 50, options[i].locked)
 		end
+    end
+
+    if (options[activeSegment] or {}).description then
+		local color = {170, 180, 190, 200}
+		local radius = innerRadius - (spacingOffset * 3)
+		local triangles = {}
+		local theta = 360 / (segments * sidesPerSegment)
+		local first = radialPoint(0, radius)
+		local prev = radialPoint(theta, radius)
+		for i = 2, (segments * sidesPerSegment) - 1 do
+			local point = radialPoint(theta * i, radius)
+			table.insert(triangles, {first,point,prev})
+			prev = point
+        end
+        canvas:drawTriangles(triangles, color)
+		drawShadowText(options[activeSegment].description, {100,100}, options[activeSegment].descColor or options[activeSegment].textColor or {255,255,255}, radius*2 )
 	end
+end
+
+function drawShadowText(text, position, color, wrapWidth, greyed)
+    local textBrightness = (greyed and 0.75 or 1)
+	local shadowText = string.gsub(text, "%b^;", "")
+	canvas:drawText(shadowText, {
+		position = {position[1] + 0.5, position[2] - 0.5},
+		horizontalAnchor = "mid",
+		verticalAnchor = "mid",
+		wrapWidth = wrapWidth
+	}, 8, { 0, 0, 0 })
+	canvas:drawText(shadowText, {
+		position = {position[1] + 1, position[2] - 1},
+		horizontalAnchor = "mid",
+		verticalAnchor = "mid",
+		wrapWidth = wrapWidth
+	}, 8, { 0, 0, 0 })
+	canvas:drawText(text, {
+		position = {position[1], position[2]},
+		horizontalAnchor = "mid",
+		verticalAnchor = "mid",
+		wrapWidth = wrapWidth
+	}, 8, { color[1] * textBrightness, color[2] * textBrightness, color[3] * textBrightness })
 end
 
 function canvasClickEvent(position, mouseButton, isButtonDown, shift, ctrl, alt)
@@ -172,18 +207,9 @@ end
 
 function selectAction(...)
 	local args = {...}
-	local option = {}
+	local option = options[activeSegment] or cancel
 
-	if activeSegment == -1 then
-		option = cancel
-	else
-		option = options[activeSegment]
-    end
 	if option.locked then return end
-	local context = option.context or ((option.context == nil) and default.context)
-	local script = option.script or ((option.script == nil) and default.script)
-	local message = option.message or ((option.message == nil) and default.message)
-	local close = option.close or ((option.close == nil) and default.close)
 	local messageTarget = option.messageTarget or (pane.sourceEntity() == 0 and player.id()) or pane.sourceEntity()
 	if option.data then
 		table.insert(args, 1, option.data)
@@ -192,11 +218,11 @@ function selectAction(...)
 		table.insert(args, i,  v)
 	end
 
-	if context and script then
-		player.setScriptContext(context)
+	if option.context and option.script then
+		player.setScriptContext(option.context)
 		player.callScript(script, table.unpack(args))
-	elseif message and world.entityExists(messageTarget) then
-		world.sendEntityMessage(messageTarget, message, table.unpack(args))
+	elseif option.message and world.entityExists(messageTarget) then
+		world.sendEntityMessage(messageTarget, option.message, table.unpack(args))
 	end
-	if close then pane.dismiss() end
+	if option.close then pane.dismiss() end
 end
