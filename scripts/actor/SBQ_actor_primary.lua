@@ -71,14 +71,30 @@ function init()
 	end)
 
     message.setHandler("sbqScale", function(_, _, scale, duration)
+		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
+        destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
 		oldScale = mcontroller.scale()
-        destScale = scale or 1
 		scaleTime = 0
         scaleDuration = duration or 1
-		scaling = true
+        scaling = true
+		leftoverScale = 0
     end)
     destScale = mcontroller.scale()
-	oldScale = mcontroller.scale()
+    oldScale = mcontroller.scale()
+
+
+
+    -- captures
+    old.status_applySelfDamageRequest = status.applySelfDamageRequest
+    function status.applySelfDamageRequest(damageRequest)
+        if damageRequest.damageSourceKind == "falling" then
+			if self.fallDistance > (sbq.config.minimumFallDistance * mcontroller.scale()) then
+				old.status_applySelfDamageRequest(damageRequest)
+			end
+        else
+			old.status_applySelfDamageRequest(damageRequest)
+		end
+	end
 end
 
 function update(dt)
@@ -93,11 +109,8 @@ function update(dt)
 		elseif destScale < oldScale then
             currentScale = math.max(destScale, currentScale)
         end
-		mcontroller.setScale(currentScale)
-		local currentData = status.statusProperty("sbqCurrentData")
-		if currentData and (type(currentData.id) == "number") and world.entityExists(currentData.id) then
-			world.sendEntityMessage(currentData.id, "sbqOccupantHolderScale", currentScale)
-		end
+        mcontroller.setScale(currentScale)
+		status.setPersistentEffects("scalePower", {stat = "powerMultiplier", effectiveMultiplier = currentScale})
 		if scaleTime >= scaleDuration then
 			scaling = false
 		end
@@ -154,7 +167,7 @@ function applyDamageRequest(damageRequest)
         oldScale = mcontroller.scale()
 		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
         destScale = math.min(publicSettings.maximumScale or 1, math.max(destScale + scaleAmount, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
-        scaleDuration = math.max(scaleDuration - scaleTime, math.abs(damageRequest.damage / 0.5))
+        scaleDuration = math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2))
 		scaleTime = 0
 		return {}
 	end

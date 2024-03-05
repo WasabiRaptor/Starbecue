@@ -46,8 +46,6 @@ function init()
     for _, voreType in pairs(sbq.gui.voreTypeOrder) do
 		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred"}))
 		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey"}))
-        -- _ENV.vorePredPrefsPanel:updateGeometry()
-		-- _ENV.vorePreyPrefsPanel:updateGeometry()
 
 		local widget = _ENV[voreType.."predPrefLayout"]
         if widget then
@@ -57,14 +55,13 @@ function init()
     for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
 		_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred"}))
 		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey"}))
-        -- _ENV.infusePredPrefsPanel:updateGeometry()
-		-- _ENV.infusePreyPrefsPanel:updateGeometry()
 
 		local widget = _ENV[infuseType.."predPrefLayout"]
 		if widget then
 			widget:setVisible(sbq.voreConfig.availableInfuseTypes[infuseType] or false)
 		end
-	end
+    end
+	_ENV.currentScale:setText(tostring(sbq.currentScale))
 
     sbq.assignSettingValues()
 	sbq.refreshSettingVisibility()
@@ -130,6 +127,7 @@ function sbq.setupSetting(parent, setting, group, name)
 end
 
 function sbq.refreshSettingVisibility()
+	_ENV.currentScale.locked = not player.hasItemWithParameter("sbqSizeModifier", true)
 	for settingIdentifier, widget in pairs(sbq.settingWidgets) do
         local setting, group, name = table.unpack(sbq.settingIdentifiers[settingIdentifier])
         local label = _ENV[settingIdentifier .. "Label"]
@@ -206,7 +204,7 @@ function sbq.assignSettingValue(setting, group, name)
 	end
 end
 
-function sbq.widgetScripts.changeSetting(setting, value, group, name)
+function sbq.widgetScripts.changeSetting(value, setting, group, name)
 	local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(value)] or ((group and name) and ((((sbq.voreConfig.invalidSettings or {})[group] or {})[name] or {})[setting] or {})[tostring(value)])
 	if result then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
@@ -220,7 +218,7 @@ function sbq.widgetScripts.changeSetting(setting, value, group, name)
 	sbq.refreshSettingVisibility()
 end
 
-function sbq.widgetScripts.changeTableSetting(setting, value, group, name)
+function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
 	local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(value)] or ((group and name) and ((((sbq.voreConfig.invalidSettings or {})[group] or {})[name] or {})[setting] or {})[tostring(value)])
 	if result then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
@@ -274,4 +272,8 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
     end
 
 	return sb.jsonMerge(param, layout)
+end
+
+function sbq.widgetScripts.changeScale(value)
+	world.sendEntityMessage(sbq.entityId(), "sbqScale", value)
 end

@@ -211,7 +211,8 @@ function sbq.getSettingsPageData()
 		storageSettings = storage.sbqSettings or {},
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
-		locations = Transformation.locations or {}
+        locations = Transformation.locations or {},
+		currentScale = sbq.scale()
 	}
 	return settingsPageData
 end

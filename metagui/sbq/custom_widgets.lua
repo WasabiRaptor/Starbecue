@@ -15,6 +15,9 @@ storage = {}
 require("/scripts/any/SBQ_RPC_handling.lua")
 require("/scripts/any/SBQ_util.lua")
 
+function sbq.playErrorSound()
+	pane.playSound("/sfx/interface/clickon_error.ogg")
+end
 function sbq.widgetSettingIdentifier(w)
 	return sbq.concatStrings(w.setting, w.groupName, w.groupKey)
 end
@@ -239,7 +242,7 @@ function widgets.sbqSlider:init(base, param)
 
 	if self.script then
 		function self:onChange(index, value)
-			sbq.widgetScripts[self.script](self.handles[index].setting, value, self.handles[index].groupName, self.handles[index].groupKey)
+			sbq.widgetScripts[self.script]( value, self.handles[index].setting, self.handles[index].groupName, self.handles[index].groupKey)
 		end
 	end
 
@@ -579,7 +582,7 @@ function widgets.sbqCheckBox:init(base, param)
     end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.setting, self.value or self.checked, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value or self.checked,self.setting, self.groupName, self.groupKey)
 		end
 	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
@@ -800,6 +803,8 @@ function widgets.sbqTextBox:init(base, param)
     self.settingType = param.settingType or "string"
     self.script = param.script
     self.groupName = param.groupName
+    self.min = param.min
+	self.max = param.max
 
     if self.setting then
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
@@ -819,11 +824,23 @@ function widgets.sbqTextBox:init(base, param)
         function self:onEnter()
 			if self.settingType == "number" then
                 local number = tonumber(self.text)
-				if number then
-					sbq.widgetScripts[self.script](self.setting,number,self.groupName)
+                if type(number) == "number" then
+					local max = self.max or math.huge
+					local min = self.min or -math.huge
+					if type(max) == "string" then
+						max = sbq.settings[max]
+					end
+					if type(min) == "string" then
+						min = sbq.settings[min]
+					end
+                    number = math.min(max, math.max(number, min))
+					self:setText(tostring(number))
+                    sbq.widgetScripts[self.script](number, self.setting, self.groupName,self.groupKey)
+                else
+					sbq.playErrorSound()
                 end
             else
-				sbq.widgetScripts[self.script](self.setting,tostring(self.text),self.groupName)
+				sbq.widgetScripts[self.script](tostring(self.text),self.setting,self.groupName,self.groupKey)
 			end
 		end
     end
@@ -896,6 +913,37 @@ end
 function widgets.sbqTextBox:blur() self:releaseFocus() end
 
 function widgets.sbqTextBox:setText(t)
+	if self.settingType == "number" then
+		local value = tonumber(t)
+        local color = "FFFFFF"
+        local max = self.max
+        local min = self.min
+		if type(max) == "string" then
+			max = sbq.settings[max]
+        end
+		if type(min) == "string" then
+			min = sbq.settings[min]
+		end
+		if type(value) == "number" then
+			if ((type(max) == "number") and (value == max))
+			or ((type(min) == "number") and (value == min))
+			then
+				color = "FFFF00"
+			elseif(type(max) == "number") and (type(min) == "number") then
+				if (value > min) and (value < max) then
+					color = "00FF00"
+				end
+			end
+			if ((type(max) == "number") and (value > max))
+			or ((type(min) == "number") and (value < min))
+			then
+				color = "FF0000"
+			end
+		else
+			color = "FF0000"
+        end
+		self.color = color
+	end
 	local c = self.text
 	self.text = type(t) == "string" and t or ""
 	if self.text ~= c then
