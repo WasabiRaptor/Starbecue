@@ -1,64 +1,52 @@
 {
 	"frameGrid" : {
 		"size" : [32, 16],
-		"dimensions" : [4, 9],
+		"dimensions" : [3, 9],
 		"names" : [
-			[ "empty", null, null, null ],
-			[ "chargeGrow.1.1", "chargeGrow.1.2", "chargeGrow.1.3", "chargeGrow.1.4"],
-			[ "chargeGrow.2.1", "chargeGrow.2.2", "chargeGrow.2.3", "chargeGrow.2.4"],
-			[ "chargeGrow.3.1", "chargeGrow.3.2", "chargeGrow.3.3", "chargeGrow.3.4"],
-			[ "chargeGrow.4.1", "chargeGrow.4.2", null, null],
-			[ "chargeShrink.1.1", "chargeShrink.1.2", "chargeShrink.1.3", "chargeShrink.1.4"],
-			[ "chargeShrink.2.1", "chargeShrink.2.2", "chargeShrink.2.3", "chargeShrink.2.4"],
-			[ "chargeShrink.3.1", "chargeShrink.3.2", "chargeShrink.3.3", "chargeShrink.3.4"],
-			[ "chargeShrink.4.1", "chargeShrink.4.2", null, null]
+			[ "default", null, null ],
+			[ "chargeGrow.1.1", "chargeGrow.1.2", "chargeGrow.1.3"],
+			[ "chargeGrow.2.1", "chargeGrow.2.2", "chargeGrow.2.3"],
+			[ "chargeGrow.3.1", "chargeGrow.3.2", "chargeGrow.3.3"],
+			[ "chargeGrow.4.1", "chargeGrow.4.2", "chargeGrow.4.3"],
+			[ "chargeShrink.1.1", "chargeShrink.1.2", "chargeShrink.1.3"],
+			[ "chargeShrink.2.1", "chargeShrink.2.2", "chargeShrink.2.3"],
+			[ "chargeShrink.3.1", "chargeShrink.3.2", "chargeShrink.3.3"],
+			[ "chargeShrink.4.1", "chargeShrink.4.2", "chargeShrink.4.3"]
 		]
 	},
 	"aliases" : {
-		"chargeGrow.4.3" : "chargeGrow.4.1",
-		"chargeGrow.4.4" : "chargeGrow.4.2",
-
-		"chargeGrow.5.1" : "chargeGrow.4.1",
-		"chargeGrow.5.2" : "chargeGrow.4.2",
-		"chargeGrow.5.3" : "chargeGrow.4.1",
-		"chargeGrow.5.4" : "chargeGrow.4.2",
-
 		"fireGrow.1.1" : "chargeGrow.1.1",
-		"fireGrow.1.2" : "empty",
-		"fireGrow.1.3" : "empty",
+		"fireGrow.1.2" : "default",
+		"fireGrow.1.3" : "default",
+
 		"fireGrow.2.1" : "chargeGrow.2.1",
 		"fireGrow.2.2" : "chargeGrow.1.1",
-		"fireGrow.2.3" : "empty",
+		"fireGrow.2.3" : "default",
+
 		"fireGrow.3.1" : "chargeGrow.3.1",
 		"fireGrow.3.2" : "chargeGrow.2.1",
 		"fireGrow.3.3" : "chargeGrow.1.1",
+
 		"fireGrow.4.1" : "chargeGrow.3.1",
 		"fireGrow.4.2" : "chargeGrow.2.1",
 		"fireGrow.4.3" : "chargeGrow.1.1",
 
-		"chargeShrink.4.3" : "chargeShrink.4.1",
-		"chargeShrink.4.4" : "chargeShrink.4.2",
-
-		"chargeShrink.5.1" : "chargeShrink.4.1",
-		"chargeShrink.5.2" : "chargeShrink.4.2",
-		"chargeShrink.5.3" : "chargeShrink.4.1",
-		"chargeShrink.5.4" : "chargeShrink.4.2",
 
 		"fireShrink.1.1" : "chargeShrink.1.1",
-		"fireShrink.1.2" : "empty",
-		"fireShrink.1.3" : "empty",
+		"fireShrink.1.2" : "default",
+		"fireShrink.1.3" : "default",
+
 		"fireShrink.2.1" : "chargeShrink.2.1",
 		"fireShrink.2.2" : "chargeShrink.1.1",
-		"fireShrink.2.3" : "empty",
+		"fireShrink.2.3" : "default",
+
 		"fireShrink.3.1" : "chargeShrink.3.1",
 		"fireShrink.3.2" : "chargeShrink.2.1",
 		"fireShrink.3.3" : "chargeShrink.1.1",
+
 		"fireShrink.4.1" : "chargeShrink.3.1",
 		"fireShrink.4.2" : "chargeShrink.2.1",
-		"fireShrink.4.3" : "chargeShrink.1.1",
-		"fireShrink.5.1" : "chargeShrink.3.1",
-		"fireShrink.5.2" : "chargeShrink.2.1",
-		"fireShrink.5.3" : "chargeShrink.1.1"
+		"fireShrink.4.3" : "chargeShrink.1.1"
 
 	}
 }

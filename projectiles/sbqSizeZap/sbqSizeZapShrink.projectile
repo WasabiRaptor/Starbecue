@@ -11,21 +11,45 @@
       ]
     }
   ],
-  "lightColor" : [100, 100, 100],
+  "lightColor" : [142, 246, 254],
   "image" : "sbqSizeZapShrink.png",
   "animationCycle" : 0.25,
-  "frameNumber" : 1,
+  "frameNumber" : 2,
   "damagePoly" : [ [5, -5], [-5, -5], [-5, 5], [5, 5] ],
   "timeToLive" : 10,
   "pointLight" : true,
   "fullbright" : true,
   "speed" : 100,
-  "damageType" : "NoDamage",
-  "damageKind" : "default",
-  "power" : 0,
+  "damageType" : "IgnoresDef",
+  "damageKind" : "sbq_size",
+  "powerMultiplier" : 0,
+  "power" : -1,
   "damageTeam" : {
     "type" : "any"
   },
-  "scripts" : ["/projectiles/sbqMessageOnHit.lua"]
+  "periodicActions" : [
+    {
+      "time" : 0.05,
+      "repeat" : true,
+      "action" : "particle",
+      "rotate" : true,
+      "specification" : {
+          "fullbright" : true,
+          "type" : "ember",
+          "size" : 1,
+          "color" : [142, 246, 254],
+          "position" : [-0.75, 0],
+          "destructionAction" : "shrink",
+          "destructionTime" : 1,
+          "fade" : 1,
+          "layer" : "middle",
+          "timeToLive" : 1,
+          "variance" : {
+            "initialVelocity" : [2.0, 1.0],
+            "position" : [0.25, 1]
+          }
+      }
+    }
+  ]
 
 }

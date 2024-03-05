@@ -1,6 +1,7 @@
 {
 	"globalTagDefaults" : {
-		"charge": "1"
+		"charge": "1",
+		"glowdirectives":""
 	},
 	"animatedParts" : {
 		"stateTypes" : {
@@ -9,20 +10,20 @@
 				"states" : {
 					"off" : {},
 					"chargeGrow" : {
-						"frames" : 4,
+						"frames" : 3,
 						"cycle" : 0.5,
 						"mode" : "loop",
 						"properties" : {
-							"persistentSound" : "/sfx/gun/magnorbs_shield_loop2.ogg",
+							"persistentSound" : "/sfx/gun/magnorbs_shield_loop1.ogg",
 							"persistentSoundStopTime" : 0.5
 						}
 					},
 					"fullchargeGrow" : {
-						"frames" : 4,
+						"frames" : 3,
 						"cycle" : 0.5,
 						"mode" : "loop",
 						"properties" : {
-							"persistentSound" : "/sfx/gun/magnorbs_shield_loop2.ogg",
+							"persistentSound" : "/sfx/gun/magnorbs_shield_loop1.ogg",
 							"persistentSoundStopTime" : 0.5
 						}
 					},
@@ -33,7 +34,7 @@
 						"transition" : "off"
 					},
 					"chargeShrink" : {
-						"frames" : 4,
+						"frames" : 3,
 						"cycle" : 0.5,
 						"mode" : "loop",
 						"properties" : {
@@ -42,7 +43,7 @@
 						}
 					},
 					"fullchargeShrink" : {
-						"frames" : 4,
+						"frames" : 3,
 						"cycle" : 0.5,
 						"mode" : "loop",
 						"properties" : {
@@ -65,47 +66,9 @@
 				"properties" : {
 					"centered" : true,
 					"offset" : [1.0, 0.25],
-					"transformationGroups" : ["weapon"]
-				},
-
-				"partStates" : {
-					"firing" : {
-						"off" : {
-							"properties" : {
-								"image" : "<partImage>:empty"
-							}
-						},
-						"chargeGrow" : {
-							"properties" : {
-								"image" : "<partImage>:chargeGrow.<charge>.<frame>"
-							}
-						},
-						"fullchargeGrow" : {
-							"properties" : {
-								"image" : "<partImage>:chargeGrow.<charge>.<frame>"
-							}
-						},
-						"fireGrow" : {
-							"properties" : {
-								"image" : "<partImage>:fireGrow.<charge>.<frame>"
-							}
-						},
-						"chargeShrink" : {
-							"properties" : {
-								"image" : "<partImage>:chargeShrink.<charge>.<frame>"
-							}
-						},
-						"fullchargeShrink" : {
-							"properties" : {
-								"image" : "<partImage>:chargeShrink.<charge>.<frame>"
-							}
-						},
-						"fireShrink" : {
-							"properties" : {
-								"image" : "<partImage>:fireShrink.<charge>.<frame>"
-							}
-						}
-					}
+					"transformationGroups" : ["weapon"],
+					"image" : "<partImage>:default",
+					"zLevel" : 0
 				}
 			},
 			"gunfullbright" : {
@@ -121,27 +84,27 @@
 					"firing" : {
 						"off" : {
 							"properties" : {
-								"image" : "<partImage>:empty"
+								"image" : "<partImage>:default"
 							}
 						},
 						"chargeGrow" : {
 							"properties" : {
-								"image" : "<partImage>:chargeGrow.<charge>.<frame>"
+								"image" : "<partImage>:chargeGrow.<charge>.<frame><glowdirectives>"
 							}
 						},
 						"fireGrow" : {
 							"properties" : {
-								"image" : "<partImage>:fireGrow.<charge>.<frame>"
+								"image" : "<partImage>:fireGrow.<charge>.<frame><glowdirectives>"
 							}
 						},
 						"chargeShrink" : {
 							"properties" : {
-								"image" : "<partImage>:chargeShrink.<charge>.<frame>"
+								"image" : "<partImage>:chargeShrink.<charge>.<frame><glowdirectives>"
 							}
 						},
 						"fireShrink" : {
 							"properties" : {
-								"image" : "<partImage>:fireShrink.<charge>.<frame>"
+								"image" : "<partImage>:fireShrink.<charge>.<frame><glowdirectives>"
 							}
 						}
 					}

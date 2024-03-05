@@ -39,8 +39,7 @@ function ChargeFire:fireProjectile()
 	end
 	local projectileCount = self.chargeLevel.projectileCount or 1
 
-	params.power = (self.chargeLevel.baseDamage * config.getParameter("damageLevelMultiplier")) / projectileCount
-	params.powerMultiplier = activeItem.ownerPowerMultiplier()
+	params.powerMultiplier = self.chargeTimer * 0.5
 
 	local spreadAngle = util.toRadians(self.chargeLevel.spreadAngle or 0)
 	local totalSpread = spreadAngle * (projectileCount - 1)

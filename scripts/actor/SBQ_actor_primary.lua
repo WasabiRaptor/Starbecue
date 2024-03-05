@@ -14,9 +14,12 @@ local scaleTime = 0
 local scaleDuration = 0
 local oldScale = 1
 local scaling = false
+local leftoverScale = 0
 
 local seatToForce
 function init()
+	sbq.config = root.assetJson("/sbq.config")
+
 	sbq.actorInit()
     old.init()
 
@@ -140,11 +143,19 @@ function applyDamageRequest(damageRequest)
 			targetMaterialKind = ""
         }}
     elseif damageRequest.damageSourceKind == "sbq_size" then
+        local scaleAmount = damageRequest.damage + leftoverScale
+        leftoverScale = (scaleAmount % sbq.config.scaleSnap)
+		scaleAmount  = scaleAmount - leftoverScale
+		if (math.abs(scaleAmount)) < sbq.config.scaleSnap then
+			leftoverScale = leftoverScale + scaleAmount
+			return {}
+		end
         scaling = true
         oldScale = mcontroller.scale()
-        destScale = math.max(destScale + damageRequest.damage, 0.1)
+		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
+        destScale = math.min(publicSettings.maximumScale or 1, math.max(destScale + scaleAmount, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
+        scaleDuration = math.max(scaleDuration - scaleTime, math.abs(damageRequest.damage / 0.5))
 		scaleTime = 0
-        scaleDuration = math.max(scaleDuration, math.abs(damageRequest.damage))
 		return {}
 	end
 	return old.applyDamageRequest(damageRequest)

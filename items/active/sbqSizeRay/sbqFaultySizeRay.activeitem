@@ -10,12 +10,13 @@
 	"twoHanded" : true,
 	"itemTags" : ["weapon","ranged"],
 
-	"inventoryIcon" : "sbqFaultySizeRay.png:empty",
+	"inventoryIcon" : "sbqFaultySizeRay.png:default",
 
 	"animation" : "sbqSizeRay.animation",
 	"animationParts" : {
 		"gun" : "sbqFaultySizeRay.png",
-		"gunfullbright" : "sbqSizeRayFullbright.png"
+		"gunfullbright" : "sbqSizeRayFullbright.png",
+		"gunfullbright2" : "sbqSizeRayFullbright.png"
 	},
 	"animationCustom" : {},
 	"muzzleOffset" : [2.5, 0.5],
@@ -34,29 +35,26 @@
 				"energyCost" : 5,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"message":"sbqScale", "args":[1]},
-				"inaccuracy" : 0.008,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.1,
 				"fireSound" : "fire"
 			},
 			{
 				"time" : 1,
-				"energyCost" : 5,
+				"energyCost" : 10,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"message":"sbqScale", "args":[0.75]},
-				"inaccuracy" : 0.008,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.2,
 				"fireSound" : "fire"
 			},
 			{
 				"time" : 2,
-				"energyCost" : 40,
+				"energyCost" : 20,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"message":"sbqScale", "args":[0.5]},
-				"inaccuracy" : 0,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.3,
 				"fireSound" : "fire2"
 			},
 			{
@@ -64,19 +62,8 @@
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"message":"sbqScale", "args":[0.25]},
-				"inaccuracy" : 0,
-				"baseDamage" : 0,
-				"fireSound" : "fire2"
-			},
-			{
-				"time" : 5,
-				"energyCost" : 40,
-				"cooldown" : 0.25,
-				"projectileType" : "sbqSizeZapShrink",
-				"projectileParameters" : {"message":"sbqScale", "args":[0.1]},
-				"inaccuracy" : 0,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.4,
 				"fireSound" : "fire2"
 			}
 		]
@@ -90,29 +77,26 @@
 				"energyCost" : 5,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"message":"sbqScale", "args":[1]},
-				"inaccuracy" : 0.008,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.1,
 				"fireSound" : "fire"
 			},
 			{
 				"time" : 1,
-				"energyCost" : 5,
+				"energyCost" : 10,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"message":"sbqScale", "args":[1.25]},
-				"inaccuracy" : 0.008,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.2,
 				"fireSound" : "fire"
 			},
 			{
 				"time" : 2,
-				"energyCost" : 40,
+				"energyCost" : 20,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"message":"sbqScale", "args":[1.5]},
-				"inaccuracy" : 0,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.3,
 				"fireSound" : "fire2"
 			},
 			{
@@ -120,19 +104,8 @@
 				"energyCost" : 40,
 				"cooldown" : 0.25,
 				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"message":"sbqScale", "args":[2]},
-				"inaccuracy" : 0,
-				"baseDamage" : 0,
-				"fireSound" : "fire2"
-			},
-			{
-				"time" : 5,
-				"energyCost" : 40,
-				"cooldown" : 0.25,
-				"projectileType" : "sbqSizeZapGrow",
-				"projectileParameters" : {"message":"sbqScale", "args":[3]},
-				"inaccuracy" : 0,
-				"baseDamage" : 0,
+				"projectileParameters" : {},
+				"inaccuracy" : 0.4,
 				"fireSound" : "fire2"
 			}
 		]
