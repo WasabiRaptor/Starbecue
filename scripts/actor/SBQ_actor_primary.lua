@@ -110,7 +110,6 @@ function update(dt)
             currentScale = math.max(destScale, currentScale)
         end
         mcontroller.setScale(currentScale)
-		status.setPersistentEffects("scalePower", {stat = "powerMultiplier", effectiveMultiplier = currentScale})
 		if scaleTime >= scaleDuration then
 			scaling = false
 		end

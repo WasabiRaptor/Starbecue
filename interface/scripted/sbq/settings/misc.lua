@@ -32,7 +32,7 @@ end
 function sbq.generateSettingsCard(type)
     return { name = "secretnote", count = 1, parameters = {
 		shortdescription = sbq.strings[type.."SettingsCard"] or type.."SettingsCard",
-        description = os.date(sbq.strings.createdOnDate, os.time()),
+        description = sbq.createdDate(),
 		sbqSettings = sbq.getSettingsOf[type]()
     }, }
 end

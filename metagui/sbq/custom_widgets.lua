@@ -31,6 +31,9 @@ end
 function sbq.entityId()
 	return (pane.sourceEntity() == 0 and player.id()) or pane.sourceEntity()
 end
+function sbq.createdDate()
+	return os.date(sbq.strings.createdOnDate, os.time()).." v"..root.modMetadata("Starbecue").version
+end
 ---@diagnostic disable: undefined-global
 local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
@@ -804,7 +807,8 @@ function widgets.sbqTextBox:init(base, param)
     self.script = param.script
     self.groupName = param.groupName
     self.min = param.min
-	self.max = param.max
+    self.max = param.max
+	self.toolTip = mg.formatText(param.toolTip)
 
     if self.setting then
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}

@@ -310,7 +310,7 @@ function sbq.generateNPCItemCard(tenant)
 	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
 	item.parameters.inventoryIcon = root.npcPortrait("bust", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 	item.parameters.description = (npcConfig.scriptConfig or {}).cardDesc or ""
-	item.parameters.tooltipFields.collarNameLabel = os.date(sbq.strings.createdOnDate, os.time())
+	item.parameters.tooltipFields.collarNameLabel = sbq.createdDate()
 	item.parameters.tooltipFields.objectImage = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 	item.parameters.tooltipFields.subtitle = tenant.type
 	item.parameters.tooltipFields.collarIconImage = nil
