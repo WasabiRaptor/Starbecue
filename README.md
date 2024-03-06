@@ -11,6 +11,8 @@ Starbecue requires a modified executable that both improves and expands features
 Make sure to delete any previously installed versions of starbecue within the `Starbound/mods/`
 This includes any version of `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` or `SBQ_engine_assets.pak`
 
+**Starextensions is incompatible with any modified executable, remove it if it is installed**
+
 Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix)
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
