@@ -84,7 +84,7 @@ function update( dt )
 	for dir, color in pairs(buttons) do
 		if directions[dir] then
 			indicator:drawImageRect(
-				"/interface/scripted/sbq/indicatorHud/indicator.png"
+				"/interface/scripted/sbq/preyHud/indicator.png"
 					.. replace(colors.default, colors[color]),
 				directions[dir], directions[dir]
 			)
@@ -95,14 +95,14 @@ function update( dt )
 	local right = (facingRight and buttons.front) or buttons.back
 	if not buttons.left and left then
 		indicator:drawImageRect(
-			"/interface/scripted/sbq/indicatorHud/indicator.png"
+			"/interface/scripted/sbq/preyHud/indicator.png"
 				.. replace(colors.default, colors[left]),
 			directions.left, directions.left
 		)
 	end
 	if not buttons.right and right then
 		indicator:drawImageRect(
-			"/interface/scripted/sbq/indicatorHud/indicator.png"
+			"/interface/scripted/sbq/preyHud/indicator.png"
 				.. replace(colors.default, colors[right]),
 			directions.right, directions.right
 		)
