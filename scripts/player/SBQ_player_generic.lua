@@ -17,11 +17,23 @@ function init()
 
     sbq.actorInit()
     sbq.humanoidInit()
+	function sbq.setProperty(...)
+		if player.getProperty("sbqAgreedTerms") then status.setStatusProperty(...) end
+	end
 	if player.getProperty("sbqAgreedTerms") then
         sbq.init()
         sbq.actorMessages()
     else
-		status.setStatusProperty("sbqPublicSettings", nil)
+        status.setStatusProperty("sbqPublicSettings", nil)
+		message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
+			return sbq.setGroupedSetting(...)
+		end)
+		message.setHandler("sbqSetSetting", function (_,_, ...)
+			return sbq.setSetting(...)
+        end)
+		sbq.lists = {}
+		sbq.voreConfig = root.fetchConfigArray(storage.lastVoreConfig or {})
+		sbq.setupSettingMetatables("player")
     end
 	sbq.notifyPlayer()
 
@@ -62,7 +74,7 @@ function init()
 		sbq.currentLocationData = locationData
 		local struggleActions = locationData.struggleActions or {}
 		player.interact("ScriptPane", {
-			baseConfig = "/interface/scripted/sbq/indicatorHud/sbqIndicatorHud.config",
+			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
 			time = additionalData.time,
 			progressBar = additionalData.progressBar,
 			location = locationData.name,

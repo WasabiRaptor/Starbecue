@@ -226,7 +226,7 @@ function sbq.setSetting(k, v)
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
     end
-	if sbq.voreConfig.settingUpdateScripts[k] then
+	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
 			sbq[script](k,v)
 		end
@@ -238,7 +238,7 @@ function sbq.setGroupedSetting(group, name, k, v)
 	storage.sbqSettings[group][name][k] = v
     if old == sbq.settings[group][name][k] then return end
     if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
-	if sbq.voreConfig.settingUpdateScripts[k] then
+	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
 			sbq[script](k,v, group, name)
 		end

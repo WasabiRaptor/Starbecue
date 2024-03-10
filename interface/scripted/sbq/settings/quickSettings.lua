@@ -33,15 +33,13 @@ function _ENV.noFetishes:onClick()
 end
 
 function _ENV.allPred:onClick()
-	for _,v in ipairs(sbq.gui.allPred) do
-		sbq.widgetScripts.changeSetting(v[1],v[2])
-    end
+    sbq.setAll(true, "pred", "vorePrefs", "voreTypeData")
+	sbq.setAll(true, "pred", "infusePrefs", "infuseTypeData")
 	sbq.assignSettingValues()
 end
 function _ENV.allPrey:onClick()
-	for _,v in ipairs(sbq.gui.allPrey) do
-		sbq.widgetScripts.changeSetting(v[1],v[2])
-    end
+    sbq.setAll(true, "prey", "vorePrefs", "voreTypeData")
+	sbq.setAll(true, "prey", "infusePrefs", "infuseTypeData")
 	sbq.assignSettingValues()
 end
 function _ENV.allTF:onClick()
@@ -52,15 +50,13 @@ function _ENV.allTF:onClick()
 end
 
 function _ENV.noPred:onClick()
-	for _,v in ipairs(sbq.gui.allPred) do
-		sbq.widgetScripts.changeSetting(v[1],v[3] or (v[3] == nil and not v[2]))
-    end
+    sbq.setAll(false, "pred", "vorePrefs", "voreTypeData")
+	sbq.setAll(false, "pred", "infusePrefs", "infuseTypeData")
 	sbq.assignSettingValues()
 end
 function _ENV.noPrey:onClick()
-	for _,v in ipairs(sbq.gui.allPrey) do
-		sbq.widgetScripts.changeSetting(v[1],v[3] or (v[3] == nil and not v[2]))
-    end
+    sbq.setAll(false, "prey", "vorePrefs", "voreTypeData")
+	sbq.setAll(false, "prey", "infusePrefs", "infuseTypeData")
 	sbq.assignSettingValues()
 end
 function _ENV.noTF:onClick()
@@ -68,4 +64,10 @@ function _ENV.noTF:onClick()
 		sbq.widgetScripts.changeSetting(v[1],v[3] or (v[3] == nil and not v[2]))
     end
 	sbq.assignSettingValues()
+end
+
+function sbq.setAll(v, setting, pref, prefData)
+	for k, _ in pairs(sbq.config[prefData]) do
+		sbq.widgetScripts.changeSetting(v, setting, pref, k)
+    end
 end

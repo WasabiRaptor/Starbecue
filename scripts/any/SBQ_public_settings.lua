@@ -4,7 +4,6 @@ function sbq.setupPublicSettings()
 	storage = storage or {}
     sbq.config = root.assetJson("/sbq.config")
 	sbq.lists = {}
-    sbq.defaultSettings = sbq.config.entityTypeDefaultSettings[entityType] or { locations = {} }
     sbq.voreConfig = root.fetchConfigArray(storage.lastVoreConfig or {})
 	sbq.setupSettingMetatables(entityType)
 

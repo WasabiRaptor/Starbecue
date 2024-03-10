@@ -4,8 +4,10 @@
 	"uniqueBy" : "path",
 	"scripts" : [ "quickSettings.lua", "playerSettings.lua", "settings.lua" ],
 	"children" : [
-		{"mode" : "vertical" },
-		{"type":"canvas", "id":"titleCanvas", "size":[320,25]},
+		{"mode":"v"},
+		{"type":"panel","style":"flat","expandMode":[1,0],"children":[
+			{"type":"canvas", "id":"titleCanvas", "size":[320,25]}
+		]},
 		{"type":"panel","style":"convex","expandMode":[1,0],"children":[
 			{"type":"label", "align":"center", "text":":modDescription"},
 			[

@@ -1,6 +1,6 @@
 function sbq.notifyPlayer()
 	player.setUniverseFlag("foodhall_auriShop")
-	if not (root.modMetadata("Stardust Core") or root.modMetadata("StardustLib") or root.modMetadata("Stardust Core Lite")) then
+	if not (root.modMetadata("Stardust Core") or root.modMetadata("StardustLib") or root.modMetadata("QuickbarMini") or root.modMetadata("Stardust Core Lite")) then
 		player.confirm({
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
 			icon = "/interface/errorpopup/erroricon.png",

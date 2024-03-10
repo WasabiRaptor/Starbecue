@@ -48,7 +48,7 @@ function init()
 		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey"}))
 
 		local widget = _ENV[voreType.."predPrefLayout"]
-        if widget then
+        if widget and sbq.voreConfig.availableVoreTypes then
 			widget:setVisible(sbq.voreConfig.availableVoreTypes[voreType] or false)
 		end
     end
@@ -57,7 +57,7 @@ function init()
 		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey"}))
 
 		local widget = _ENV[infuseType.."predPrefLayout"]
-		if widget then
+		if widget and sbq.voreConfig.availableInfuseTypes then
 			widget:setVisible(sbq.voreConfig.availableInfuseTypes[infuseType] or false)
 		end
     end

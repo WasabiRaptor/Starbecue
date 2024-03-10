@@ -6,4 +6,4 @@ cfg.inputData = {
 	sbq = sbq
 }
 
-table.insert(cfg.children, 2, root.assetJson("/interface/scripted/sbq/settings/tabs/preferences.config:contents"))
+table.insert(cfg.children, #cfg.children, root.assetJson("/interface/scripted/sbq/settings/tabs/preferences.config:contents")[1])
