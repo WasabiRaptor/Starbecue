@@ -92,9 +92,6 @@ function init()
     message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants }, ui = "starbecue:predHud" })
 	end)
-
-
-	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:preyHud" })
 end
 
 function update(dt)
