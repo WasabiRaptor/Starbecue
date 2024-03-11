@@ -60,6 +60,9 @@ function sbq.init()
 	message.setHandler("sbqSetSetting", function (_,_, ...)
 		return sbq.setSetting(...)
     end)
+	message.setHandler("sbqSetUpgrade", function (_,_, ...)
+		return sbq.getUpgrade(...)
+    end)
 	message.setHandler("sbqImportSettings", function (_,_, ...)
 		return sbq.importSettings(...)
 	end)
@@ -208,7 +211,8 @@ end
 
 function sbq.getSettingsPageData()
 	local settingsPageData = {
-		storageSettings = storage.sbqSettings or {},
+        storageSettings = storage.sbqSettings or {},
+		storageUpgrades = storage.sbqUpgrades or {},
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
         locations = Transformation.locations or {},
@@ -231,6 +235,12 @@ function sbq.setSetting(k, v)
 			sbq[script](k,v)
 		end
 	end
+end
+
+function sbq.getUpgrade(upgradeName, tier, bonus)
+    storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
+    storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
+	sbq.refreshUpgrades()
 end
 
 function sbq.setGroupedSetting(group, name, k, v)

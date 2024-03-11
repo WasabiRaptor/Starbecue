@@ -256,6 +256,7 @@ local SelectedOccupantMenu = {}
 RadialMenu.SelectedOccupantMenu = SelectedOccupantMenu
 setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
+	local occupant, location = table.unpack(player.callScript("sbq.getOccupantData", entityId) or {})
 	local options = {
 		{
 			args = {"letout", entityId, storage.action},
@@ -272,7 +273,6 @@ function SelectedOccupantMenu:init(entityId)
 		})
 	end
 	player.setScriptContext("starbecue")
-    local occupant, location = table.unpack(player.callScript("sbq.getOccupantData", entityId) or {})
 	if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end
 	for _, action in ipairs(location.locationActions or {}) do
         local available, reason = table.unpack(player.callScript("sbq.actionAvailable", action.action, entityId))

@@ -19,14 +19,21 @@ require"/scripts/any/SBQ_vore_main.lua"
 
 function init()
 	sbq.config = root.assetJson("/sbq.config")
-	sbq.npcConfig = root.npcConfig(npc.npcType())
+    sbq.npcConfig = root.npcConfig(npc.npcType())
+	storage = storage or {}
+	storage.sbqUpgrades = storage.sbqUpgrades or {}
+    if not storage.sbqUpgrades.candiesEaten then
+        storage.sbqUpgrades.candiesEaten = {}
+		for i = 1, math.max(npc.level(), 1) do
+			storage.sbqUpgrades.candiesEaten[i] = 1
+		end
+	end
     old.init()
 	sbq.init()
 
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()
----@diagnostic disable-next-line: undefined-global
-		updateUniqueId()
+		_ENV.updateUniqueId()
 	end
 
 	-- for _, script in ipairs(sbq.dialogueBoxScripts or {}) do
@@ -71,6 +78,10 @@ function uninit()
 end
 
 function interact(args)
+	if npc.loungingIn() == args.sourceId then
+        sbq.say("-TODO Re-Implement Dialogue")
+		return
+	end
 	if true then -- TODO make this a check between whether dialogue is enabled on the NPC or not
 		local results = { Transformation:interact(args) }
 		if results[2] == "interactAction" then

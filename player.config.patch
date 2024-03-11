@@ -22,7 +22,15 @@
 		}
 	],
 	[
-		{ "op": "add", "path": "/defaultBlueprints/tier1/-", "value": { "item": "sbqController" } }
+		{ "op": "append", "path": "/defaultBlueprints/tier1", "value": [
+			{ "item": "sbqController" },
+			{ "item": "sbqCandy", "parameters":{"level":1} },
+			{ "item": "sbqCandy", "parameters":{"level":2} },
+			{ "item": "sbqCandy", "parameters":{"level":3} },
+			{ "item": "sbqCandy", "parameters":{"level":4} },
+			{ "item": "sbqCandy", "parameters":{"level":5} },
+			{ "item": "sbqCandy", "parameters":{"level":6} }
+		]}
 	],
 	[
 		{ "op": "test", "path": "/inventoryFilters/objectBag/tagBlacklist", "inverse": true },

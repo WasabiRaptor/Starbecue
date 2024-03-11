@@ -7,23 +7,18 @@
 	"description" : "A bottle of mysterious liquid... A full bottle is potent enough to be semi permanent, but a tipped dart would only last a few minutes.",
 	"shortdescription" : "Mysterious Potion",
 	"tooltipKind" : "tool",
-	"category" : "Potion",
+	"category" : "drink",
 	"twoHanded" : false,
 	"itemTags" : ["sbqTransformation"],
+	"emitters" : [ "drinking" ],
 
 	"inventoryIcon" : "sbqPotion.png",
 	"largeImage" : "sbqPotionLarge.png",
-
-	"animationParts" : {
-		"potion" : "sbqPotion.png"
-	},
 
 	"args" : [
 		{"species":"any"},
 		5
 	],
-
-	"animation" : "/items/active/sbqTransformation/sbqPotion.animation",
 
 	"builder" : "/items/active/sbqTransformation/sbqMysteriousPotion/sbqMysteriousPotionBuilder.lua",
 

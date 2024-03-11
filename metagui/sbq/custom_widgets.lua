@@ -55,7 +55,8 @@ function init()
         sbq[k] = v
     end
 	if sbq.storageSettings then
-		storage.sbqSettings = sbq.storageSettings
+        storage.sbqSettings = sbq.storageSettings or {}
+		storage.sbqUpgrades = sbq.storageUpgrades or {}
         sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
     end
 

@@ -10,6 +10,7 @@ require"/scripts/player/SBQ_player_notifs.lua"
 function init()
 	storage = storage or {}
     storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
+    storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
     sbq.targetPosition = player.aimPosition
 
@@ -102,5 +103,6 @@ function update(dt)
 end
 
 function uninit()
-	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
+    player.setProperty("sbqSettingsStorage", storage.sbqSettings)
+	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
 end

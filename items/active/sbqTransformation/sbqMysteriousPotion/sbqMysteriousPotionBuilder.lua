@@ -1,41 +1,34 @@
 local speciesFile
-
+local strings
 function build(directory, config, parameters, level, seed)
     local config = sb.jsonMerge(config, parameters or {})
-	parameters = parameters or {}
-	parameters.args = config.args
-
+	strings = root.assetJson("/sbqStrings.config")
 	if config.args and config.args[1] then
         local identity = config.args[1]
-		if identity.species and (identity.species ~= "any") then
-			speciesFile = root.speciesConfig(identity.species)
-			if speciesFile then
-                config.shortdescription = speciesFile.charCreationTooltip.title .. " Potion"
-				parameters.potionPath = speciesFile.potionPath or parameters.potionPath
-            end
-			if speciesFile.baseColorMap then
-				-- TODO make potions use the species colors
+        if identity.species then
+            if identity.species == "any" then
+                config.shortdescription = strings.mysteryPotionName
+				config.description = strings.mysteryPotionDesc
+			else
+				speciesFile = root.speciesConfig(identity.species)
+				if speciesFile then
+					config.shortdescription = sb.replaceTags(strings.speciesPotionName, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
+					config.description = sb.replaceTags(strings.speciesPotionDesc, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
+					if speciesFile.potionImagePath then
+                        config.inventoryIcon = speciesFile.potionImagePath .. "potion.png"
+						config.largeImage = speciesFile.potionImagePath .. "potionLarge.png"
+					end
+					if speciesFile.baseColorMap then
+						-- TODO make potions use the species colors
+                    end
+				end
 			end
         end
-		if identity.name then
-			config.shortdescription = parameters.name.." Potion"
+        if identity.name then
+            config.shortdescription = sb.replaceTags(strings.duplicatePotionName, { name = identity.name, duration = tostring(config.duration) })
+			config.description = sb.replaceTags(strings.duplicatePotionDesc, {name = identity.name, duration = tostring(config.duration)})
 		end
 	end
 
 	return config, parameters
-end
-
-function tableMatches(a, b)
-	local b = b or {}
-    for k, v in pairs(a or {}) do
-	  if type(v) == "table"
-	  and type(b[k]) == "table"
-	  and not tableMatches(v, b[k]) then
-		return false
-	  end
-	  if v ~= b[k] then
-		return false
-	  end
-	end
-	return true
 end

@@ -1,3 +1,16 @@
+function init()
+    local candiesEaten = storage.sbqUpgrades.candiesEaten or {}
+	local candies = {}
+	for i, v in pairs(candiesEaten) do
+		table.insert(candies, {tonumber(i),v})
+    end
+	table.sort(candies, function (a, b)
+		return a[1] < b[1]
+    end)
+	for _, v in ipairs(candies) do
+		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2]}})
+	end
+end
 function uninit()
     local item = _ENV.importSettingsSlot:item()
 	if item then player.giveItem(item) end

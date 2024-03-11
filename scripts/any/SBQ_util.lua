@@ -39,8 +39,25 @@ function sbq.metatableLayers(...)
 	end
 end
 
+function sbq.refreshUpgrades()
+	sbq.settings = sbq.settings or {}
+    storage.sbqUpgrades = storage.sbqUpgrades or {}
+    sbq.upgradeScores = {}
+	for k, v in pairs(storage.sbqUpgrades) do
+        sbq.upgradeScores[k] = 0
+		for _, value in pairs(v) do
+			sbq.upgradeScores[k] = sbq.upgradeScores[k] + value
+		end
+    end
+	local candiesEaten = (sbq.upgradeScores.candiesEaten or 0)
+	sbq.settings.maxDigestPower = 1 + candiesEaten
+	sbq.settings.maxPossibleScale = math.min(2 + candiesEaten, sbq.config.scaleCap)
+
+end
+
 function sbq.setupSettingMetatables(entityType)
     storage = storage or {}
+	sbq.refreshUpgrades()
 	sbq.voreConfig = sbq.voreConfig or {}
 	storage.sbqSettings = storage.sbqSettings or {}
     sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {}, (sbq.entityConfig or {}).overrideSettings or {})
