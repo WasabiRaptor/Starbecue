@@ -85,11 +85,6 @@ function sbq.setAction(action)
 	activeItem.setDescription(description.."\n"..sbq.strings.controllerActionDescAppend)
 end
 
-function sbq.letout(id)
-	player.setScriptContext("starbecue")
-	return player.callScript("sbq.tryAction", "pickLetout", id, storage.action)
-end
-
 function sbq.clickAction()
 	if not storage.action then return false end
 	local withoutEntityIds = loungeable.entitiesLounging()
@@ -178,10 +173,6 @@ function _RadialMenu:controllerAssign(action)
 	sbq.setAction(action)
 end
 
-function _RadialMenu:letout(id)
-	sbq.letout(id)
-end
-
 local TopMenu = {}
 RadialMenu.TopMenu = TopMenu
 setmetatable(TopMenu, _RadialMenu)
@@ -189,10 +180,11 @@ function TopMenu:init()
 	local occupants = loungeable.entitiesLounging()
 	local options = {
 		{
-			args = {"letout"},
-            name = sbq.strings.controllerLetOut,
+			args = {"letout", false, storage.action},
+            name = sbq.strings.letout,
             locked = (not occupants) or (not occupants[1]),
-			description = sbq.strings.controllerLetOutAnyDesc
+            description = sbq.strings.controllerLetOutAnyDesc,
+			script = "sbq.tryAction"
         },
         {
             args = { "open", "OccupantsMenu" },
@@ -266,11 +258,19 @@ setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
 	local options = {
 		{
-			args = {"letout", entityId},
-            name = sbq.strings.controllerLetOut,
-			description = sbq.strings.controllerLetOutSelectedDesc
+			args = {"letout", entityId, storage.action},
+            name = sbq.strings.letout,
+            description = sbq.strings.controllerLetOutSelectedDesc,
+			script = "sbq.tryAction"
         }
     }
+	if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
+        table.insert(options, {
+            name = sbq.strings.interact,
+			args = {occupant.entityId},
+			script = "player.interactWithEntity"
+		})
+	end
 	player.setScriptContext("starbecue")
     local occupant, location = table.unpack(player.callScript("sbq.getOccupantData", entityId) or {})
 	if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end

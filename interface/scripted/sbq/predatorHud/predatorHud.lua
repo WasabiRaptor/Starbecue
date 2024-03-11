@@ -36,7 +36,38 @@ function sbq.refreshOccupants()
 		local layout = sbq.replaceConfigTags(occupantTemplate, { entityId = occupant.entityId, entityName = world.entityName(occupant.entityId) })
 		Occupants.entityId[tostring(occupant.entityId)] = occupant
         _ENV.occupantSlots:addChild(layout)
-		sbq.refreshPortrait(occupant.entityId)
+        sbq.refreshPortrait(occupant.entityId)
+		local ActionButton = _ENV[occupant.entityId.."ActionButton"]
+        function ActionButton:onClick()
+            local actions = {
+				{ sbq.strings.letout, function ()
+					player.setScriptContext("starbecue")
+					player.callScript("sbq.tryAction", "letout", occupant.entityId)
+				end}
+			}
+			if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
+                table.insert(actions, { sbq.strings.interact, function()
+					player.interactWithEntity(occupant.entityId)
+				end})
+            end
+			player.setScriptContext("starbecue")
+			local occupant, location = table.unpack(player.callScript("sbq.getOccupantData", occupant.entityId) or {})
+			if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end
+			for _, action in ipairs(location.locationActions or {}) do
+				local available, reason = table.unpack(player.callScript("sbq.actionAvailable", action.action, occupant.entityId))
+                if (reason ~= "targetSettingsMismatch") and (reason ~= "settingsMismatch") and (reason ~= "invalidAction") then
+					if available then
+                        table.insert(actions, { sbq.getString(action.name or (":" .. action.action)), function()
+							player.setScriptContext("starbecue")
+							player.callScript("sbq.tryAction", action.action, occupant.entityId, table.unpack(action.args or {}))
+                        end, })
+                    else
+						table.insert(actions, {"^#555;"..sbq.getString(action.name or (":"..action.action)), function () end})
+					end
+				end
+            end
+			_ENV.metagui.dropDownMenu(actions,2)
+		end
     end
 	_ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (occupants + 1) })
     _ENV.predHudTop:setVisible((occupants >= 8))

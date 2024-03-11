@@ -64,7 +64,7 @@ end
 function default:tryLetout(name, action, target, ...)
 	return sbq.tryLetout(target, action.throughput)
 end
-function default:pickLetout(name, action, target, preferredAction, skip, ...)
+function default:letout(name, action, target, preferredAction, skip, ...)
     if target then
         occupant = Occupants.entityId[tostring(target)]
 		if not occupant then return end
@@ -88,7 +88,7 @@ function default:pickLetout(name, action, target, preferredAction, skip, ...)
     else
         for i = #Occupants.list, 1, -1 do
             local occupant = Occupants.list[i]
-			if Transformation:tryAction("pickLetout",occupant.entityId,preferredAction,true) then
+			if Transformation:tryAction("letout", occupant.entityId, preferredAction,true) then
 				return true
 			end
 		end
