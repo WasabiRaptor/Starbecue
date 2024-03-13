@@ -4,14 +4,23 @@ local switchAbility = {
 	primary = "alt",
 	alt = "primary"
 }
+local hueshift = 0
+function ChargeFire:currentChargeLevel()
+	hueshift = math.max(-45, math.min(45, hueshift + math.random(10) * ({1,0,-1})[math.random(3)]))
+	local bestChargeTime = 0
+	local bestChargeLevel
+	for i, chargeLevel in pairs(self.chargeLevels) do
+		if self.chargeTimer >= chargeLevel.time and self.chargeTimer >= bestChargeTime then
+			animator.setGlobalTag("charge", i)
+			bestChargeTime = chargeLevel.time
+			bestChargeLevel = chargeLevel
+		end
+    end
+	animator.setGlobalTag("glowdirectives", "?hueshift="..hueshift)
+	return bestChargeLevel
+end
 
 function ChargeFire:fire()
-	if world.lineTileCollision(mcontroller.position(), self:firePosition()) then
-		animator.setAnimationState("firing", "off")
-		self.cooldownTimer = self.chargeLevel.cooldown or 0
-		self:setState(self.cooldown, self.cooldownTimer)
-		return
-	end
 	local sizeRayMisfire
 	if math.random()<0.33 and not sizeRayHoldingShift then
 		sizeRayMisfire = true
@@ -24,7 +33,17 @@ function ChargeFire:fire()
 			abilityName = switchAbility[sizeRayWhichFireMode]
 		end
 		local otherAbility = config.getParameter(abilityName.."Ability")
-		self.chargeLevel = copy(otherAbility.chargeLevels[math.random(2,#otherAbility.chargeLevels)])
+        self.chargeLevel = copy(otherAbility.chargeLevels[math.random(#otherAbility.chargeLevels)])
+		self.chargeTimer = math.random(0, self.chargeTimer * 2)
+    end
+
+	if not sizeRayHoldingShift then
+		if world.lineTileCollision(mcontroller.position(), self:firePosition()) then
+			animator.setAnimationState("firing", self.chargeLevel.fireAnimationState or "fire")
+			self.cooldownTimer = self.chargeLevel.cooldown or 0
+			self:setState(self.cooldown, self.cooldownTimer)
+			return
+		end
 	end
 
 	if sizeRayMisfire then
