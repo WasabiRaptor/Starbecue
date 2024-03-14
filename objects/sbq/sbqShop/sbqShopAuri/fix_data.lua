@@ -1,12 +1,12 @@
 
-function dialogueBoxScripts.fixData(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.fixData(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	player.setProperty("sbqCurrentData", nil)
 	status.setStatusProperty("sbqCurrentData", nil)
 	player.setProperty("sbqPreyWarpData", nil)
 	return dialogueTree
 end
 
-function optionCheckScripts.fixData(settings, ...)
+function dialogueOptionScripts.fixData(settings, ...)
 	local preyWarp = player.getProperty("sbqPreyWarpData")
 	if preyWarp then return true end
 

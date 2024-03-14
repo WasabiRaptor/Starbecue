@@ -703,7 +703,9 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	local cfg = {
 		style = "contextMenu", scripts = {"/metagui/sbq/dropDownMenu.lua"}, menuId = menuId,
 		forceTheme = mg.cfg.theme, accentColor = mg.cfg.accentColor, -- carry over theme and accent color
-		children = { { mode = "vertical", spacing = s or 0 } }
+        children = { { mode = "vertical", spacing = s or 0 } },
+		dismissable = config.getParameter("dismissable"),
+		paneLayer = config.getParameter("paneLayer")
 	}
 	local height, width = 0, 0
 	local hooks = {}
@@ -757,6 +759,32 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	lastMenu = hooks
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
 end
+function mg.preyDialogueText(pos, text, id, lifetime)
+	if not pos or not text or text == "" then return nil end -- invalid argument passed
+	local menuId = "preyDialogueText:" .. (id or sb.makeRandomSource():randu64())
+	local cfg = {
+		style = "contextMenu", scripts = {"/metagui/sbq/dismissTimer.lua"}, menuId = menuId,
+		forceTheme = mg.cfg.theme, accentColor = mg.cfg.accentColor, -- carry over theme and accent color
+        children = { { type = "label", text = text } },
+        dismissable = config.getParameter("dismissable"),
+        paneLayer = config.getParameter("paneLayer"),
+		lifetime = lifetime or 5
+    }
+
+	local bm = theme.metrics.borderMargins.contextMenu
+    local width, height = table.unpack(mg.measureString(text, sbq.gui.preyDialogueWidth))
+	cfg.size = {width,height}
+	local calcSize = {width + bm[1] + bm[3], height + bm[2] + bm[4]}
+    local pushIn = -((bm[1] + bm[2]) / 2 + 2)
+	local position = vec2.add(vec2.mul(vec2.add(pane.position(), pos), {1, -1}), {-bm[1] - pushIn, calcSize[2] - bm[2] - pushIn} )
+	cfg.anchor = { "bottomLeft",
+		{position[1]-(calcSize[1]), math.min(0,position[2])}
+	}
+	theme.modifyContextMenu(cfg) -- give theme a chance to edit whatever it likes
+
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
+end
+
 mg.registerUninit(function() -- close any paired menus when this pane closes
 	if lastMenu and lastMenu.dismiss then lastMenu.dismiss() end
 end)

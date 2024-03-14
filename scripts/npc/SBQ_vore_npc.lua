@@ -7,9 +7,9 @@ local old = {
     preservedStorage = preservedStorage,
 }
 
-dialogueBoxScripts = {}
+dialogueStepScripts = {}
 
--- require"/interface/scripted/sbq/DialogueBox/sbqDialogueBoxScripts.lua"
+-- require"/interface/scripted/sbq/DialogueBox/sbqdialogueStepScripts.lua"
 -- require"/interface/scripted/sbq/settings/autoSetSettings.lua"
 -- require"/interface/scripted/sbq/DialogueBox/scripts/npc.lua"
 
@@ -36,7 +36,7 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
-	-- for _, script in ipairs(sbq.dialogueBoxScripts or {}) do
+	-- for _, script in ipairs(sbq.dialogueStepScripts or {}) do
 	-- 	require(script)
 	-- end
 
@@ -95,7 +95,7 @@ function interact(args)
 	-- setInteracted(args)
 
 
-	-- local dialogueBoxData = sbq.getDialogueBoxData()
+	-- local dialogueBoxData = dialogueProcessor.getDialogueBoxData()
 
 	-- if status.statusProperty("sbqType") == "prey" then
 	-- 	if args.predData then

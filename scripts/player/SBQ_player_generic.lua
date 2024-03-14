@@ -36,7 +36,11 @@ function init()
 		sbq.voreConfig = root.fetchConfigArray(storage.lastVoreConfig or {})
 		sbq.setupSettingMetatables("player")
     end
-	sbq.notifyPlayer()
+    sbq.notifyPlayer()
+
+	message.setHandler("sbqGuiMessage",function (_,_,message,...)
+		player.interact("Message", {messageType = message, messageArgs = {...}})
+	end)
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )

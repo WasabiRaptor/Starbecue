@@ -1165,7 +1165,8 @@ function _Occupant:refreshLocation(name, subLocation)
 		progressBar = self.progressBar,
 		time = self.time,
     })
-    world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
+    world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+	-- world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqPredHudPreyDialogue", self.entityId)
 end
 
 function sbq.getModifiers(modifiers, power)

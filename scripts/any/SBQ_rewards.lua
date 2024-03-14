@@ -267,7 +267,7 @@ function sbq.checkOccupantRewards(occupant, rewards, notify, recipient, holder, 
 		local rewardNotifyDelay = 0
 		for rewardName, data in pairs(newRewards) do
 			sendRewards = true
-			if notify and sbq.getRandomDialogue( treestart or ".rewardNotify", recipient, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool, isPrey = (occupant.id == entity.id()) }))) then
+			if notify and dialogueProcessor.getRandomDialogue( treestart or ".rewardNotify", recipient, sb.jsonMerge(storage.settings, sb.jsonMerge(sb.jsonMerge(occupant.flags, occupant.visited), { rewardName = rewardName, poolName = data.pool, isPrey = (occupant.id == entity.id()) }))) then
 				rewardNotifyDelay = rewardNotifyDelay + 5
 			end
 		end

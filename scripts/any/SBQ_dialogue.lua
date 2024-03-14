@@ -1,28 +1,27 @@
-function sbq.getDialogueBoxData()
+function dialogueProcessor.getDialogueBoxData()
 	local dialogueBoxData = {
 		entityPortrait = config.getParameter("entityPortrait"),
 		defaultPortrait = config.getParameter("defaultPortrait"),
 		portraitPath = config.getParameter("portraitPath"),
 		defaultName = config.getParameter("defaultName"),
 	}
-	dialogueBoxData.settings.ownerUuid = recruitable.ownerUuid()
-	dialogueBoxData.settings.isFollowing = recruitable.isFollowing()
-
+	dialogueBoxData.settings.ownerUuid = _ENV.recruitable.ownerUuid()
+	dialogueBoxData.settings.isFollowing = _ENV.recruitable.isFollowing()
 	return dialogueBoxData
 end
 
-local randomDialogueHandling = {
-	{ "randomDialogue", "dialogue" },
-	{ "randomPortrait", "portrait" },
-	{ "randomEmote", "emote" },
+dialogueProcessor = {}
+dialogue = {
+    position = 1,
+    result = {},
+	prev = {}
 }
-
-function sbq.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
-    if not dialogue.finished then return false, dialogueTree, dialogueTreeTop end
-	dialogue.finished = false
+function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
+    dialogue.finished = false
+	dialogue.position = 1
 	dialogue.result = {}
 	if path ~= nil then
-		_, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop or sbq.dialogueTree)
+		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop or sbq.dialogueTree)
 		if not dialogueTree then return false end
 		dialogue.path = path
 
@@ -30,7 +29,7 @@ function sbq.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
 			dialogue.randomRolls = {}
 		end
 		if type(dialogue.result.dialogue) == "string" then
-			dialogue.result.dialogue = sbq.getRedirectedDialogue(dialogue.result.dialogue, true, settings, dialogueTree, dialogueTreeTop)
+			dialogue.result.dialogue = dialogueProcessor.getRedirectedDialogue(dialogue.result.dialogue, true, settings, dialogueTree, dialogueTreeTop)
 			if type(dialogue.result.dialogue) == "table" and dialogue.result.dialogue.dialogue ~= nil then
 				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
 			end
@@ -38,14 +37,16 @@ function sbq.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
 		local handleRandom = true
 		local startIndex = 1
 		while handleRandom == true do
-			handleRandom = sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
+			handleRandom = dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
 			startIndex = #dialogue.randomRolls + 1
 		end
     end
-	return true, dialogueTree, dialogueTreeTop
+    dialogue.prev = dialogueTree
+	dialogue.prevTop = dialogueTreeTop
+	return true
 end
 
-function sbq.processDialogueResults()
+function dialogueProcessor.processDialogueResults()
 	if not dialogue.result.dialogue then
         dialogue.finished = true
 		return
@@ -58,80 +59,44 @@ function sbq.processDialogueResults()
 	local portrait = sbq.data.defaultPortrait
 
 	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "" }
-	local imagePortrait
 
-	local dialogueTarget = sbq.maxOfKey(dialogue.result, "dialogueTarget", dialogue.position)
-	local printDialogue = sbq.generateKeysmashes(sbq.maxOfKey(dialogue.result, "dialogue", dialogue.position))
+	local dialogueTarget = dialogueProcessor.maxOfKey(dialogue.result, "dialogueTarget", dialogue.position)
+	local printDialogue = dialogueProcessor.generateKeysmashes(dialogueProcessor.maxOfKey(dialogue.result, "dialogue", dialogue.position))
 
 
-    return
-		sbq.maxOfKey(dialogue.result, "source", dialogue.position),
-		sbq.maxOfKey(dialogue.result, "name", dialogue.position),
-		sbq.maxOfKey(dialogue.result, "portrait", dialogue.position),
-        sbq.maxOfKey(dialogue.result, "textSounds", dialogue.position),
-        sbq.maxOfKey(dialogue.result, "buttonText", dialogue.position),
-		,
+    return {
+		source = dialogueProcessor.maxOfKey(dialogue.result, "source", dialogue.position),
+		name = dialogueProcessor.maxOfKey(dialogue.result, "name", dialogue.position),
+		portrait = dialogueProcessor.maxOfKey(dialogue.result, "portrait", dialogue.position),
+		textSounds = dialogueProcessor.maxOfKey(dialogue.result, "textSounds", dialogue.position),
+        buttonText = dialogueProcessor.maxOfKey(dialogue.result, "buttonText", dialogue.position),
+        dialogue = printDialogue,
+		tags = tags
+	}
 end
 
-function sbq.maxOfKey(table, key, index)
+function dialogueProcessor.maxOfKey(table, key, index)
     if not table then return end
 	if not table[key] then return end
 	return table[key][index] or table[key][#table[key]]
 end
 
-function sbq.getRandomDialogue(path, eid, settings, dialogueTree, dialogueTreeTop, appendName)
-	if path ~= nil then
-		_, dialogueTree, dialogueTreeTop = sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop or sbq.dialogueTree)
-		if not dialogueTree then return false end
-		dialogue.path = path
+dialogueProcessor.randomKeys = {
+    randomPortrait = "portrait",
+    randomName = "name",
+    randomDialogue = "dialogue",
+    randomEmote = "emote",
+	randomButtonText = "buttonText"
+}
 
-		if not dialogue.result.useLastRandom then
-			dialogue.randomRolls = {}
-		end
-		if type(dialogue.result.dialogue) == "string" then
-			dialogue.result.dialogue = sbq.getRedirectedDialogue(dialogue.result.dialogue, true, settings, dialogueTree, dialogueTreeTop)
-			if type(dialogue.result.dialogue) == "table" and dialogue.result.dialogue.dialogue ~= nil then
-				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
-			end
-		end
-		local handleRandom = true
-		local startIndex = 1
-		while handleRandom == true do
-			handleRandom = sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
-			startIndex = #dialogue.randomRolls + 1
-		end
-	end
-
-	local entityname
-
-	if type(eid) == "number" then entityname = world.entityName(eid) end
-
-	local tags = { entityname = entityname or "", dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "", infusedName = sb.jsonQuery(settings, (dialogue.result.location or settings.location or "default").."InfusedItem.parameters.npcArgs.npcParam.identity.name") or "" }
-
-	if dialogue.result.dialogue and dialogue.result.dialogue[1] then
-		local dialogue = sb.jsonMerge(dialogue, {})
-		for i, line in ipairs(dialogue.result.dialogue) do
-			sbq.timer("dialogue" .. 1, (i - 1) * (dialogue.result.delay or 1.5), function ()
-				sbq.say(sbq.generateKeysmashes(line, dialogue.result.keysmashMin, dialogue.result.keysmashMax), tags,
-					(dialogue.result.portrait or {})[i], (dialogue.result.emote or {})[i], appendName)
-				if i >= #dialogue.result.dialogue then
-					sbq.finishDialogue()
-				end
-			end)
-		end
-	end
-end
-
-function sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
-	for _, v in ipairs(randomDialogueHandling) do
-		local randomVal = v[1]
-		local resultVal = v[2]
-		if not dialogue.result[resultVal] then
-			local randomResult = sbq.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
+function dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
+	for randomVal, resultVal in pairs(dialogueProcessor.randomKeys) do
+		if dialogue.result[randomVal] and not dialogue.result[resultVal] then
+			local randomResult = dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
 			if type(randomResult) == "table" then
-				dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
-				if randomResult.randomDialogue or randomResult.randomPortrait or randomResult.randomButtonText or randomResult.randomEmote or randomResult.randomName then
-					return true
+                dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
+				for k, v in pairs(dialogueProcessor.randomKeys) do
+					if randomResult[k] then return true end
 				end
 			elseif type(randomResult) == "string" then
 				dialogue.result[resultVal] = {randomResult}
@@ -140,47 +105,8 @@ function sbq.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, 
 	end
 end
 
-function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
-	if type(string) == "string" and string ~= "" then
-		if string:find("<love>") then
-			status.addEphemeralEffect("love")
-		end
-		if string:find("<slowlove>") then
-			status.addEphemeralEffect("slowlove")
-		end
-		if string:find("<confused>") then
-			status.addEphemeralEffect("sbqConfused")
-		end
-		if string:find("<sleepy>") then
-			status.addEphemeralEffect("sbqSleepy")
-		end
-		if string:find("<sad>") then
-			status.addEphemeralEffect("sbqSad")
-		end
-		if string:find("<dontSpeak>") then return end
-
-		string = sb.replaceTags(string, tags)
-		if string == "" then return end
-
-		if appendName then
-			string = world.entityName(entity.id())..":\n"..string
-		end
----@diagnostic disable-next-line: undefined-global
-		local options = {sound = randomChatSound()}
-		if type(imagePortrait) == "string" and config.getParameter("sayPortrait") then
-			sbq.sayPortrait(string, imagePortrait, nil, options)
-		else
-			sbq.say(string, nil, options )
-		end
-		if type(emote) == "string" then
-			sbq.emote(emote)
-		end
-	end
-end
-
-
 local keysmashchars = {"a","s","d","f","g","h","j","k","","l",";","\'"}
-function sbq.generateKeysmashes(input, lengthMin, lengthMax)
+function dialogueProcessor.generateKeysmashes(input, lengthMin, lengthMax)
 	input = input or ""
 	return input:gsub("<keysmash>", function ()
 		local keysmash = ""
@@ -197,17 +123,17 @@ dialogue = {
 	randomRolls = {},
 	position = 1,
 }
-function sbq.finishDialogue()
+function dialogueProcessor.finishDialogue()
 	dialogue.finished = false
 	dialogue.position = 1
 	dialogue.result = {}
 end
 
-function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
-	local dialogueTreeTop = sbq.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
-	local dialogueTree = sbq.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
+function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
+	local dialogueTreeTop = dialogueProcessor.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
+	local dialogueTree = dialogueProcessor.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
 	if not dialogueTree then return false end
-	sbq.processDialogueStep(dialogueTree)
+	dialogueProcessor.processDialogueStep(dialogueTree)
 	local finished = false
     if dialogueTree.next and not finished then
 		if dialogueTree.target then
@@ -225,14 +151,14 @@ function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTo
 		end
 		if dialogueTree.randomNext and type(dialogueTree.next) == "table" then
 			local step = dialogueTree.next[math.random(#dialogueTree.next)]
-			finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
+			finished = dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
 		elseif type(dialogueTree.next) == "table" then
 			for _, step in ipairs(dialogueTree.next) do
-				finished = sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
+				finished = dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
 				if finished then break end
 			end
 		elseif type(dialogueTree.next) == "string" then
-			finished = sbq.doNextStep(dialogueTree.next, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
+			finished = dialogueProcessor.doNextStep(dialogueTree.next, settings, eid, dialogueTree, dialogueTreeTop, dialogueTree.seperateNext)
 		end
 	end
 	if dialogueTree.addQueued then
@@ -251,24 +177,24 @@ function sbq.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTo
 	return finished or dialogueTree.finished or false, dialogueTree, dialogueTreeTop
 end
 
-function sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
+function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
 	if not useStepPath then
-		if dialogueBoxScripts[step] then
-			return sbq.getDialogueBranch("."..tostring((dialogueBoxScripts[step](dialogueTree, dialogueTreeTop, settings, branch, eid))), settings, eid, dialogueTree, dialogueTreeTop)
+		if dialogueStepScripts[step] then
+			return dialogueProcessor.getDialogueBranch("."..tostring((dialogueStepScripts[step](dialogueTree, dialogueTreeTop, settings, step, eid))), settings, eid, dialogueTree, dialogueTreeTop)
 		elseif settings[step] ~= nil then
-			return sbq.getDialogueBranch("."..tostring(settings[step]), settings, eid, dialogueTree, dialogueTreeTop)
+			return dialogueProcessor.getDialogueBranch("."..tostring(settings[step]), settings, eid, dialogueTree, dialogueTreeTop)
 		else
-			return sbq.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
+			return dialogueProcessor.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
 		end
 	elseif useStepPath and dialogueTree[step] then
-		local dialogueTree = sbq.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)
-		return sbq.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
+		local dialogueTree = dialogueProcessor.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)
+		return dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
 	else
 		return false
 	end
 end
 
-function sbq.processDialogueStep(dialogueTree)
+function dialogueProcessor.processDialogueStep(dialogueTree)
 	if dialogueTree.new then
 		dialogue.result = sb.jsonMerge({}, dialogueTree.new)
 		dialogue.queue = sb.jsonMerge({}, {})
@@ -318,7 +244,7 @@ function sbq.processDialogueStep(dialogueTree)
 	end
 end
 
-function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, dialogueTreeTop)
+function dialogueProcessor.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, dialogueTreeTop)
 	local returnVal = path
 	while type(returnVal) == "string" do
 		firstChar = returnVal:sub(1,1)
@@ -336,11 +262,11 @@ function sbq.getRedirectedDialogue(path, returnStrings, settings, dialogueTree, 
 	end
 end
 
-function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dialogueTree, dialogueTreeTop)
+function dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dialogueTree, dialogueTreeTop)
 	local rollNo = rollNo or 1
-	local randomTable = sbq.getRedirectedDialogue(randomTable, true, settings, dialogueTree, dialogueTreeTop)
+	local randomTable = dialogueProcessor.getRedirectedDialogue(randomTable, true, settings, dialogueTree, dialogueTreeTop)
 	if type(randomTable) == "table" then
-		if not sbq.checkSettings(randomTable.check, settings) then return end
+		if not sbq.tableMatches(randomTable.check, settings) then return end
 		if randomTable.percentage then
 			local percentage = 0.5
 			if randomTable.percentage == "selfHealth" then
@@ -353,17 +279,17 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 				percentage = settings[randomTable.percentage] or 0.5
 			end
 			if percentage >= 1 and randomTable.full then
-				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.full, dialogueTree, dialogueTreeTop)
+				return dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.full, dialogueTree, dialogueTreeTop)
 			elseif percentage <= 0 and randomTable.empty then
-				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.empty, dialogueTree, dialogueTreeTop)
+				return dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo + 1, randomTable.empty, dialogueTree, dialogueTreeTop)
 			end
-			return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)
+			return dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)
 		end
 		local location = dialogue.result.location or settings.location
 		if randomTable.infusedSlot and location then
 			local uuid = sb.jsonQuery(settings, location.."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
 			if uuid then
-				return sbq.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable[uuid] or randomTable.default, dialogueTree, dialogueTreeTop)
+				return dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable[uuid] or randomTable.default, dialogueTree, dialogueTreeTop)
 			end
 		end
 		if 	randomTable.dialogue or randomTable.portrait or randomTable.emote or randomTable.name or randomTable.buttonText or
@@ -382,7 +308,7 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 				dialogue.randomRolls[rollNo] = dialogue.randomRolls[rollNo] or
 				selectionRolls[math.random(#selectionRolls)]
 				---@diagnostic disable-next-line: cast-local-type
-				randomTable = sbq.getRandomDialogueTreeValue(settings, eid, rollNo + 1,
+				randomTable = dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo + 1,
 					selection[dialogue.randomRolls[rollNo]], dialogueTree, dialogueTreeTop)
 				if randomTable then
 					break
@@ -396,7 +322,10 @@ function sbq.getRandomDialogueTreeValue(settings, eid, rollNo, randomTable, dial
 	return randomTable
 end
 
-function dialogueBoxScripts.isOwner(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+dialogueStepScripts = {}
+dialogueOptionScripts = {}
+
+function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local result = false
 	if eid then
 		local uuid = world.entityUniqueId(eid)
@@ -405,7 +334,7 @@ function dialogueBoxScripts.isOwner(dialogueTree, dialogueTreeTop, settings, bra
 	return tostring(result)
 end
 
-function dialogueBoxScripts.percentage(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.percentage(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local best = "default"
 	local bestScore = 0
     for key, value in pairs(dialogueTree.percentage or {}) do

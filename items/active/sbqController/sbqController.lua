@@ -217,7 +217,7 @@ setmetatable(AssignMenu, _RadialMenu)
 function AssignMenu:init()
 	local options = {}
 	player.setScriptContext("starbecue")
-    for _, action in ipairs(player.callScript("sbq.actionList") or config.getParameter("actions")) do
+    for _, action in ipairs(player.callScript("sbq.actionList") or sbq.gui.actionOrder) do
 		if (player.callScript("sbq.actionAvailable", action) or {})[1] then
 			local icon, shortdescription, description = sbq.getActionData(action, true, storage.iconDirectory)
 			table.insert(options, {

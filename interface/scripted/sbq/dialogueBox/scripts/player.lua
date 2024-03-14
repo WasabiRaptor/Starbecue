@@ -1,6 +1,6 @@
 ---@diagnostic disable: undefined-global
 
-function dialogueBoxScripts.queueVore(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.queueVore(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", settings.voreType, { id = player.id(), willing = true })
 		sbq.timer("gotVored", dialogue.result.delay or 1.5, function()
@@ -14,13 +14,13 @@ function dialogueBoxScripts.queueVore(dialogueTree, dialogueTreeTop, settings, b
 	end)
 end
 
-function dialogueBoxScripts.queuePrey(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.queuePrey(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(player.id(), "requestTransition", settings.voreType, { id = pane.sourceEntity(), willing = true })
 	end)
 end
 
-function dialogueBoxScripts.giveTenantRewards(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.giveTenantRewards(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	if player ~= nil then
 		local uuid = world.entityUniqueId(pane.sourceEntity())
 		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
@@ -65,18 +65,18 @@ function dialogueBoxScripts.giveTenantRewards(dialogueTree, dialogueTreeTop, set
 end
 
 -- this doesn't work
-function dialogueBoxScripts.cockTFmePls(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.cockTFmePls(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", "cockVore",{ id = player.id(), force = true })
 	sbq.timer("ctfDelay", 0.25, function()
 		shaftBallsInfusion:onClick()
 	end)
 end
 
-function dialogueBoxScripts.dismiss(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.dismiss(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	pane.dismiss()
 end
 
-function dialogueBoxScripts.swapFollowing(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.swapFollowing(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqSwapFollowing"), function(data)
 		if data and data[1] then
 			if data[1] == "None" then
@@ -98,7 +98,7 @@ function dialogueBoxScripts.swapFollowing(dialogueTree, dialogueTreeTop, setting
 	end)
 end
 
-function dialogueBoxScripts.openNewDialogueBox(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+function dialogueStepScripts.openNewDialogueBox(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	player.interact("ScriptPane", { data = sb.jsonMerge(metagui.inputData, dialogue.result.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogue.result.ui }, pane.sourceEntity())
 	pane.dismiss()
 end

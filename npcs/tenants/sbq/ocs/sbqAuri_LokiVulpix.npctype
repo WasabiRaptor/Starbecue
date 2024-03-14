@@ -52,7 +52,7 @@
 				{ "type" : "label", "text" : "Favorites: CV, OV, Sentient Pudge"}
 			] }
 		]},
-		//"dialogueBoxScripts" : ["/npcs/tenants/sbq/ocs/sbqTemplateDialogueBoxScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
+		//"dialogueStepScripts" : ["/npcs/tenants/sbq/ocs/sbqTemplatedialogueStepScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
 		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 
 		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this

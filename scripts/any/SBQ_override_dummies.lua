@@ -31,6 +31,43 @@ end
 function sbq.sayPortrait(line, portrait, tags, config)
 end
 
+function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
+	if type(string) == "string" and string ~= "" then
+		if string:find("<love>") then
+			status.addEphemeralEffect("love")
+		end
+		if string:find("<slowlove>") then
+			status.addEphemeralEffect("slowlove")
+		end
+		if string:find("<confused>") then
+			status.addEphemeralEffect("sbqConfused")
+		end
+		if string:find("<sleepy>") then
+			status.addEphemeralEffect("sbqSleepy")
+		end
+		if string:find("<sad>") then
+			status.addEphemeralEffect("sbqSad")
+		end
+		if string:find("<dontSpeak>") then return end
+
+		string = sb.replaceTags(string, tags)
+		if string == "" then return end
+
+		if appendName then
+			string = world.entityName(entity.id())..":\n"..string
+        end
+		if type(imagePortrait) == "string" and config.getParameter("sayPortrait") then
+			sbq.sayPortrait(string, imagePortrait, nil, {})
+		else
+			sbq.say(string, nil, {})
+		end
+		if type(emote) == "string" then
+			sbq.emote(emote)
+		end
+	end
+end
+
+
 function sbq.setLoungeControlHeld(control)
 end
 function sbq.releaseLoungeControl(control)

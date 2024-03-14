@@ -52,7 +52,7 @@ function sbq.askToVore()
 		if sbq.timer("leaveUnresponsivePlayer", 30, function ()
 			sbq.getNextTarget()
 		end) then
-			local dialogueBoxData = sbq.getDialogueBoxData()
+			local dialogueBoxData = dialogueProcessor.getDialogueBoxData()
 			dialogueBoxData.dialogueTreeStart = ".vore"
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, {
 				voreType = storage.huntingTarget.voreType,
@@ -65,7 +65,7 @@ function sbq.askToVore()
 			voreType = storage.huntingTarget.voreType,
 			voreResponse = "selfRequest"
 		})
-		sbq.getRandomDialogue(".vore", storage.huntingTarget.id, settings)
+		dialogueProcessor.getRandomDialogue(".vore", storage.huntingTarget.id, settings)
 		local options = sb.jsonMerge(dialogue.result.options or {}, {})
 		sbq.addNamedRPC("sbqNPCGetConsent",
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqNPCGetConsent", entity.id(), storage.huntingTarget),
@@ -73,7 +73,7 @@ function sbq.askToVore()
 				if result == 1 then
 					settings.willing = true
 				end
-				sbq.getRandomDialogue((((options or {})[result] or {})[2] or {}), storage.huntingTarget.id, settings)
+				dialogueProcessor.getRandomDialogue((((options or {})[result] or {})[2] or {}), storage.huntingTarget.id, settings)
 				if result == 2 then -- "No."
 					sbq.getNextTarget()
 				end
@@ -89,7 +89,7 @@ function sbq.askToBeVored()
 		if sbq.timer("leaveUnresponsivePlayer", 30, function ()
 			sbq.getNextTarget()
 		end) then
-			local dialogueBoxData = sbq.getDialogueBoxData()
+			local dialogueBoxData = dialogueProcessor.getDialogueBoxData()
 			dialogueBoxData.dialogueTreeStart = ".preyRequest"
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, {
 				voreType = storage.huntingTarget.voreType,
@@ -100,7 +100,7 @@ function sbq.askToBeVored()
 		local settings = sb.jsonMerge(storage.settings, {
 			voreType = storage.huntingTarget.voreType,
 		})
-		sbq.getRandomDialogue(".preyRequest", storage.huntingTarget.id, settings)
+		dialogueProcessor.getRandomDialogue(".preyRequest", storage.huntingTarget.id, settings)
 
 		sbq.addNamedRPC("sbqNPCGetConsent",
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqNPCGetConsent", entity.id(), storage.huntingTarget),
@@ -108,7 +108,7 @@ function sbq.askToBeVored()
 				if result == 1 then
 					settings.willing = true
 				end
-				sbq.getRandomDialogue(dialogue.result.options[result][2], storage.huntingTarget.id, settings)
+				dialogueProcessor.getRandomDialogue(dialogue.result.options[result][2], storage.huntingTarget.id, settings)
 				if result == 2 then -- "No."
 					sbq.getNextTarget()
 				end
@@ -213,7 +213,7 @@ function sbq.combatEat()
 		if not storage.huntingTarget then return end
 		settings.doingVore = "after"
 		if sbq.checkOccupant(storage.huntingTarget.id) then
-			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+			dialogueProcessor.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 			storage.huntingTarget = nil
 			sbq.targetedEntities = {}
 		end
@@ -229,7 +229,7 @@ function sbq.eatUnprompted()
 				location = sbq.predatorConfig.voreTypes[storage.huntingTarget.voreType],
 				doingVore = "before"
 			}
-			sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+			dialogueProcessor.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 			local delay = dialogue.result.delay
 			sbq.timer("eatMessage", delay or 1.5, function()
 				if not storage.huntingTarget then sbq.getNextTarget() return end
@@ -239,12 +239,12 @@ function sbq.eatUnprompted()
 					if not storage.huntingTarget then sbq.getNextTarget() return end
 					settings.doingVore = "after"
 					if sbq.checkOccupant(storage.huntingTarget.id) then
-						sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+						dialogueProcessor.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 						storage.huntingTarget = nil
 						sbq.targetedEntities = {}
 					else
 						settings.voreResponse = "couldnt"
-						sbq.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
+						dialogueProcessor.getRandomDialogue(".vore", storage.huntingTarget.id, sb.jsonMerge(storage.settings, sb.jsonMerge(sbqPreyEnabled or {}, settings)))
 						self.board:setEntity("sbqHuntingTarget", storage.huntingTarget.id)
 					end
 				end)
@@ -257,7 +257,7 @@ end
 
 function sbq.forcePrey()
 	if not storage.huntingTarget then return end
-	sbq.getRandomDialogue(".forcingPrey", storage.huntingTarget.id, storage.settings)
+	dialogueProcessor.getRandomDialogue(".forcingPrey", storage.huntingTarget.id, storage.settings)
 	sbq.timer("forcedPreyDialogue", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(storage.huntingTarget.id, "requestTransition", storage.huntingTarget.voreType,
 			{ id = entity.id(), willing = true })

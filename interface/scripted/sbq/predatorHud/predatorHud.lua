@@ -6,10 +6,25 @@ function init()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
     backingCanvas:clear()
 
-	message.setHandler("sbqRefreshHudOccupants", function (_,_, occupants)
+    message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
         Occupants.list = occupants
 		sbq.refreshOccupants()
     end)
+    message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, lifetime)
+        local portrait = _ENV[entityId .. "PortraitCanvas"]
+        if portrait then
+            local pos = { 0, 0 }
+            local w = portrait
+			while w.parent do
+				pos = vec2.add(pos, w.position)
+				w = w.parent
+            end
+			if (pos[2] < 205) and (pos[2] > 19) then
+				_ENV.metagui.preyDialogueText({6, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, entityId.."HudDialogue", lifetime)
+			end
+            sbq.refreshPortrait(entityId)
+		end
+	end)
     Occupants.list = _ENV.metagui.inputData.occupants
 	sbq.refreshOccupants()
 end
