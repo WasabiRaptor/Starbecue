@@ -42,7 +42,9 @@ dialogueProcessor.resultKeys = {
 	"textSound",
 	"textSpeed",
 	"name",
-	"portrait",
+	"imagePortrait",
+	"imagePath",
+	"entityPortrait",
 	"emote",
 	"buttonText",
 	"tags"
@@ -69,7 +71,7 @@ function dialogueProcessor.processDialogueResults()
 	results.dialogue = dialogueProcessor.generateKeysmashes(results.dialogue)
 	results.buttonText = results.buttonText or "[...]"
 	results.tags = sb.jsonMerge(
-		{ sourceName = results.name, targetName = sbq.entityName(results.target), dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
+		{ sourceName = results.name.."^reset;", targetName = sbq.entityName(results.target).."^reset;", dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
 		results.tags or {},
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.source), { t = "source" }),
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.target), { t = "target" })
@@ -128,11 +130,6 @@ dialogue = {
 	randomRolls = {},
 	position = 1,
 }
-function dialogueProcessor.finishDialogue()
-	dialogue.finished = false
-	dialogue.position = 1
-	dialogue.result = {}
-end
 
 function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
 	local dialogueTreeTop = dialogueProcessor.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
