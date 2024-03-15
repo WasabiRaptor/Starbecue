@@ -15,6 +15,7 @@ function init()
     sbq.targetPosition = player.aimPosition
 
     sbq.config = root.assetJson("/sbq.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
     sbq.actorInit()
     sbq.humanoidInit()

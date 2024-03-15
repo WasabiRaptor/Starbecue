@@ -1,14 +1,3 @@
-function dialogueProcessor.getDialogueBoxData()
-	local dialogueBoxData = {
-		entityPortrait = config.getParameter("entityPortrait"),
-		defaultPortrait = config.getParameter("defaultPortrait"),
-		portraitPath = config.getParameter("portraitPath"),
-		defaultName = config.getParameter("defaultName"),
-	}
-	dialogueBoxData.settings.ownerUuid = _ENV.recruitable.ownerUuid()
-	dialogueBoxData.settings.isFollowing = _ENV.recruitable.isFollowing()
-	return dialogueBoxData
-end
 
 dialogueProcessor = {}
 dialogue = {
@@ -46,34 +35,52 @@ function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialog
 	return true
 end
 
+dialogueProcessor.resultKeys = {
+    "source",
+	"target",
+    "dialogue",
+    "name",
+    "portrait",
+    "emote",
+    "buttonText",
+	"tags"
+}
+
+
 function dialogueProcessor.processDialogueResults()
-	if not dialogue.result.dialogue then
-        dialogue.finished = true
-		return
+    local results = {}
+	for _, k in ipairs(dialogueProcessor.resultKeys) do
+		results[k] = dialogueProcessor.maxOfKey(dialogue.result, k, dialogue.position)
+    end
+    results.source = results.source or pane.sourceEntity()
+	if type(results.source) == "string" then
+		results.source = world.getUniqueEntityId(results.source)
 	end
-
-	local playerName = world.entityName(player.id())
-	local speaker = pane.sourceEntity()
-	local name = sbq.data.defaultName or world.entityName(pane.sourceEntity())
-	local buttonText = "..."
-	local portrait = sbq.data.defaultPortrait
-
-	local tags = { entityname = playerName, dontSpeak = "", love = "", slowlove = "", confused = "",  sleepy = "", sad = "" }
-
-	local dialogueTarget = dialogueProcessor.maxOfKey(dialogue.result, "dialogueTarget", dialogue.position)
-	local printDialogue = dialogueProcessor.generateKeysmashes(dialogueProcessor.maxOfKey(dialogue.result, "dialogue", dialogue.position))
-
-
-    return {
-		source = dialogueProcessor.maxOfKey(dialogue.result, "source", dialogue.position),
-		name = dialogueProcessor.maxOfKey(dialogue.result, "name", dialogue.position),
-		portrait = dialogueProcessor.maxOfKey(dialogue.result, "portrait", dialogue.position),
-		textSounds = dialogueProcessor.maxOfKey(dialogue.result, "textSounds", dialogue.position),
-        buttonText = dialogueProcessor.maxOfKey(dialogue.result, "buttonText", dialogue.position),
-        dialogue = printDialogue,
-		tags = tags
-	}
+    results.name = results.name or sbq.defaultName or world.entityName(results.source)
+	results.target = results.target or player.id()
+	if type(results.target) == "string" then
+		results.target = world.getUniqueEntityId(results.target)
+    end
+    results.portrait = results.portrait or sbq.defaultPortrait
+	results.dialogue = dialogueProcessor.generateKeysmashes(results.dialogue)
+	results.buttonText = results.buttonText or "[...]"
+    results.tags = sb.jsonMerge(
+        { dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
+        results.tags or {},
+        sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.source), { t = "source" }),
+		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.target), { t = "target" })
+	)
+    return results
 end
+
+function dialogueProcessor.getPronouns(entityId)
+	local pronouns = sbq.getPublicProperty(entityId, "sbqPronouns") or {}
+	for _, fallback in ipairs(pronouns.fallback or {world.entityGender(entityId) or "object", "neutral"}) do
+		pronouns = sb.jsonMerge(sbq.pronouns[fallback], pronouns)
+    end
+	return pronouns
+end
+
 
 function dialogueProcessor.maxOfKey(table, key, index)
     if not table then return end
@@ -81,25 +88,19 @@ function dialogueProcessor.maxOfKey(table, key, index)
 	return table[key][index] or table[key][#table[key]]
 end
 
-dialogueProcessor.randomKeys = {
-    randomPortrait = "portrait",
-    randomName = "name",
-    randomDialogue = "dialogue",
-    randomEmote = "emote",
-	randomButtonText = "buttonText"
-}
 
 function dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
-	for randomVal, resultVal in pairs(dialogueProcessor.randomKeys) do
-		if dialogue.result[randomVal] and not dialogue.result[resultVal] then
-			local randomResult = dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomVal], dialogueTree, dialogueTreeTop)
+    for _, key in ipairs(dialogueProcessor.resultKeys) do
+		local randomKey = key.."Random"
+		if dialogue.result[randomKey] and not dialogue.result[key] then
+			local randomResult = dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomKey], dialogueTree, dialogueTreeTop)
 			if type(randomResult) == "table" then
                 dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
-				for k, v in pairs(dialogueProcessor.randomKeys) do
-					if randomResult[k] then return true end
+				for _, k in ipairs(dialogueProcessor.resultKeys) do
+					if randomResult[k.."Random"] then return true end
 				end
 			elseif type(randomResult) == "string" then
-				dialogue.result[resultVal] = {randomResult}
+				dialogue.result[key] = {randomResult}
 			end
 		end
 	end

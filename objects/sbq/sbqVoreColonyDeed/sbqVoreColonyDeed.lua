@@ -12,7 +12,7 @@ sbq = {}
 require("/scripts/any/SBQ_RPC_handling.lua")
 
 function init()
-	sbq.config = root.assetJson("/sbqGeneral.config")
+	sbq.config = root.assetJson("/sbq.config")
 
 	if not storage.occupier then
 		storage = config.getParameter("scriptStorage") or {}

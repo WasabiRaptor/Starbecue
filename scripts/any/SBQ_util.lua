@@ -169,6 +169,20 @@ function sbq.refreshOverrides()
 	end
 end
 
+function sbq.getEntitySize(entityId)
+	if world.entityType(entityId) == "object" then
+		return math.sqrt(#world.objectSpaces()) / sbq.config.sizeConstant
+	end
+	return math.sqrt(world.entityArea(entityId)) / sbq.config.sizeConstant
+end
+
+function sbq.getPublicProperty(entityId, property)
+	if world.entityType(entityId) == "object" then
+		return world.getObjectParameter(entityId, property)
+	end
+	return world.getStatusProperty(entityId, property)
+end
+
 function sbq.replaceConfigTags(config, tags)
 	local newConfig = {}
 	for k, v in pairs(config) do

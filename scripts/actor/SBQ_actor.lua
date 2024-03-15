@@ -3,6 +3,8 @@ local old = {
 }
 
 function sbq.actorInit()
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+
 	sbq.facingDirection = mcontroller.facingDirection
 	sbq.scale = mcontroller.scale
 	sbq.area = mcontroller.area

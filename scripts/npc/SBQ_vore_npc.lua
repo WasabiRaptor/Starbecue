@@ -18,7 +18,9 @@ require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 
 function init()
-	sbq.config = root.assetJson("/sbq.config")
+    sbq.config = root.assetJson("/sbq.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+
     sbq.npcConfig = root.npcConfig(npc.npcType())
 	storage = storage or {}
 	storage.sbqUpgrades = storage.sbqUpgrades or {}

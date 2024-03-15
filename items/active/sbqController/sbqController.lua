@@ -276,7 +276,7 @@ function SelectedOccupantMenu:init(entityId)
 	if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end
 	for _, action in ipairs(location.locationActions or {}) do
         local available, reason = table.unpack(player.callScript("sbq.actionAvailable", action.action, entityId))
-		if (reason ~= "targetSettingsMismatch") and (reason ~= "settingsMismatch") and (reason ~= "invalidAction") then
+		if not sbq.gui.dontDisplayAction[tostring(reason)] then
 			table.insert(options, {
 				name = sbq.getString(action.name or (":"..action.action)),
 				args = { action.action, entityId, table.unpack(action.args or {}) },

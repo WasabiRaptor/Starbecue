@@ -112,20 +112,6 @@ function sbq.size()
 	return math.sqrt(sbq.area()) / sbq.config.sizeConstant
 end
 
-function sbq.getSize(entityId)
-	if world.entityType(entityId) == "object" then
-		return math.sqrt(#world.objectSpaces()) / sbq.config.sizeConstant
-	end
-	return math.sqrt(world.entityArea(entityId)) / sbq.config.sizeConstant
-end
-
-function sbq.getSettings(entityId)
-	if world.entityType(entityId) == "object" then
-		return world.getObjectParameter(entityId, "sbqPublicSettings")
-	end
-	return world.getStatusProperty(entityId, "sbqPublicSettings")
-end
-
 function sbq.reloadVoreConfig(config)
     sbq.clearStatModifiers("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true
@@ -279,7 +265,7 @@ function sbq.groupedSettingChanged.locations(name,k,v)
 end
 
 function sbq.tryVore(target, locationName, throughput)
-	local size = sbq.getSize(target)
+	local size = sbq.getEntitySize(target)
 	if throughput then
 		if (size) >= (throughput * sbq.size()) then return false, "tooBig" end
 	end
@@ -423,12 +409,12 @@ function _State:tryAction(name, target, ...)
 	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return self:actionFailed(name, action, target, "settingMismatch", ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
-		local targetSettings = sbq.getSettings(target)
+		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
 		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return self:actionFailed(name, action, target, "targetSettingsMismatch", ...) end
 		if not action.ignoreTargetOccupants then
 			local targetOccupants = world.entitiesLounging(target)
 			for _, occupant in ipairs(targetOccupants or {}) do
-				local occupantSettings = sbq.getSettings(occupant)
+				local occupantSettings = sbq.getPublicProperty(occupant, "sbqPublicSettings")
 				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return self:actionFailed(name, action, target, "targetPreySettingsMismatch", ...) end
 			end
 		end
@@ -485,8 +471,15 @@ function _State:actionAvailable(name, target, ...)
 	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return false, "settingsMismatch" end
 	if target and action.targetSettings then
 		if not world.entityExists(target) then return false, "targetMissing" end
-		local targetSettings = sbq.getSettings(target)
-		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch" end
+		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
+        if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch" end
+		if not action.ignoreTargetOccupants then
+			local targetOccupants = world.entitiesLounging(target)
+			for _, occupant in ipairs(targetOccupants or {}) do
+				local occupantSettings = sbq.getPublicProperty(occupant, "sbqPublicSettings")
+				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return false, "targetPreySettingsMismatch" end
+			end
+		end
 	end
 	if action.availableScript then
 		if self[action.availableScript] then

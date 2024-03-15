@@ -48,7 +48,8 @@ function init()
 	mg.cfg = config.getParameter("___") -- window config
     mg.inputData = mg.cfg.inputData -- alias
 
-	sbq.config = root.assetJson("/sbq.config")
+    sbq.config = root.assetJson("/sbq.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	sbq.gui = root.assetJson("/sbqGui.config")
 	for k, v in pairs((mg.inputData or {}).sbq or {}) do

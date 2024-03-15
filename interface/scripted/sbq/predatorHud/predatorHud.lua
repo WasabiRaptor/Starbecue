@@ -70,7 +70,7 @@ function sbq.refreshOccupants()
 			if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end
 			for _, action in ipairs(location.locationActions or {}) do
 				local available, reason = table.unpack(player.callScript("sbq.actionAvailable", action.action, occupant.entityId))
-                if (reason ~= "targetSettingsMismatch") and (reason ~= "settingsMismatch") and (reason ~= "invalidAction") then
+				if not sbq.gui.dontDisplayAction[tostring(reason)] then
 					if available then
                         table.insert(actions, { sbq.getString(action.name or (":" .. action.action)), function()
 							player.setScriptContext("starbecue")
