@@ -183,6 +183,13 @@ function sbq.getPublicProperty(entityId, property)
 	return world.getStatusProperty(entityId, property)
 end
 
+function sbq.entityName(entityId)
+	if world.entityType(entityId) == "object" then
+		return world.getObjectParameter(entityId, "entityName")
+	end
+	return world.entityName(entityId)
+end
+
 function sbq.replaceConfigTags(config, tags)
 	local newConfig = {}
 	for k, v in pairs(config) do

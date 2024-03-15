@@ -1,11 +1,6 @@
 dialogueBox = {}
 function init()
-	sbq.name = world.entityName(pane.sourceEntity())
-    _ENV.nameLabel:setText(sbq.name)
-
-    sbq.entityId = pane.sourceEntity
 	_ENV.actionButton:setVisible(sbq.actionButtons ~= nil)
-
 	for _, script in ipairs(sbq.dialogueStepScripts or {}) do
 		require(script)
     end
@@ -14,9 +9,8 @@ function init()
 	else
 		_ENV.dialoguePortrait:setVisible(true)
 	end
-	-- sbq.dialogueTree = sbq.data.dialogueTree
 
-	-- sbq.updateDialogueBox(sbq.data.dialogueTreeStart or ".greeting", sbq.dialogueTree)
+	dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree)
 end
 
 function update()

@@ -1,12 +1,12 @@
 
 dialogueProcessor = {}
 dialogue = {
-    position = 1,
-    result = {},
+	position = 1,
+	result = {},
 	prev = {}
 }
 function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
-    dialogue.finished = false
+	dialogue.finished = false
 	dialogue.position = 1
 	dialogue.result = {}
 	if path ~= nil then
@@ -29,73 +29,77 @@ function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialog
 			handleRandom = dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
 			startIndex = #dialogue.randomRolls + 1
 		end
-    end
-    dialogue.prev = dialogueTree
+	end
+	dialogue.prev = dialogueTree
 	dialogue.prevTop = dialogueTreeTop
 	return true
 end
 
 dialogueProcessor.resultKeys = {
-    "source",
+	"source",
 	"target",
-    "dialogue",
-    "name",
-    "portrait",
-    "emote",
-    "buttonText",
+	"dialogue",
+	"textSound",
+	"textSpeed",
+	"name",
+	"portrait",
+	"emote",
+	"buttonText",
 	"tags"
 }
 
-
 function dialogueProcessor.processDialogueResults()
-    local results = {}
+	local results = {}
 	for _, k in ipairs(dialogueProcessor.resultKeys) do
 		results[k] = dialogueProcessor.maxOfKey(dialogue.result, k, dialogue.position)
-    end
-    results.source = results.source or pane.sourceEntity()
+	end
+
+	results.source = results.source or pane.sourceEntity()
 	if type(results.source) == "string" then
 		results.source = world.getUniqueEntityId(results.source)
 	end
-    results.name = results.name or sbq.defaultName or world.entityName(results.source)
+	results.name = results.name or sbq.entityName(results.source)
+
 	results.target = results.target or player.id()
 	if type(results.target) == "string" then
 		results.target = world.getUniqueEntityId(results.target)
-    end
-    results.portrait = results.portrait or sbq.defaultPortrait
+	end
+
+	results.portrait = results.portrait or sbq.defaultPortrait
 	results.dialogue = dialogueProcessor.generateKeysmashes(results.dialogue)
 	results.buttonText = results.buttonText or "[...]"
-    results.tags = sb.jsonMerge(
-        { dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
-        results.tags or {},
-        sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.source), { t = "source" }),
+	results.tags = sb.jsonMerge(
+		{ sourceName = results.name, targetName = sbq.entityName(results.target), dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
+		results.tags or {},
+		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.source), { t = "source" }),
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.target), { t = "target" })
 	)
-    return results
+	return results
 end
 
 function dialogueProcessor.getPronouns(entityId)
 	local pronouns = sbq.getPublicProperty(entityId, "sbqPronouns") or {}
 	for _, fallback in ipairs(pronouns.fallback or {world.entityGender(entityId) or "object", "neutral"}) do
 		pronouns = sb.jsonMerge(sbq.pronouns[fallback], pronouns)
-    end
+	end
 	return pronouns
 end
 
 
 function dialogueProcessor.maxOfKey(table, key, index)
-    if not table then return end
+	if not table then return end
 	if not table[key] then return end
 	return table[key][index] or table[key][#table[key]]
 end
 
 
 function dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
-    for _, key in ipairs(dialogueProcessor.resultKeys) do
+	for _, key in ipairs(dialogueProcessor.resultKeys) do
 		local randomKey = key.."Random"
 		if dialogue.result[randomKey] and not dialogue.result[key] then
 			local randomResult = dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollno, dialogue.result[randomKey], dialogueTree, dialogueTreeTop)
 			if type(randomResult) == "table" then
-                dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
+				dialogue.result = sb.jsonMerge(dialogue.result, randomResult)
 				for _, k in ipairs(dialogueProcessor.resultKeys) do
 					if randomResult[k.."Random"] then return true end
 				end
@@ -136,19 +140,22 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 	if not dialogueTree then return false end
 	dialogueProcessor.processDialogueStep(dialogueTree)
 	local finished = false
-    if dialogueTree.next and not finished then
-		if dialogueTree.target then
-			if dialogueTree.target == "default" then
-                eid = sbq.defaultTarget
-				settings = world.getStatusProperty(eid, "sbqPublicSettings")
-			elseif dialogueTree.target == "source" then
-                eid = sbq.entityId()
+	if dialogueTree.next and not finished then
+		if dialogueTree.settings then
+			if dialogueTree.settings == "target" then
+				eid = sbq.target()
+				if eid and world.entityExists(eid) then
+					settings = sbq.getPublicProperty(eid, "sbqPublicSettings")
+				end
+			elseif dialogueTree.settings == "source" then
+				eid = sbq.entityId()
 				settings = sbq.settings
-            else
-                eid = world.getUniqueEntityId(dialogueTree.target)
-				settings = world.getStatusProperty(eid, "sbqPublicSettings")
-            end
-
+			else
+				eid = world.getUniqueEntityId(dialogueTree.settings)
+				if eid and world.entityExists(eid) then
+					settings = sbq.getPublicProperty(eid, "sbqPublicSettings")
+				end
+			end
 		end
 		if dialogueTree.randomNext and type(dialogueTree.next) == "table" then
 			local step = dialogueTree.next[math.random(#dialogueTree.next)]
@@ -338,11 +345,11 @@ end
 function dialogueStepScripts.percentage(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local best = "default"
 	local bestScore = 0
-    for key, value in pairs(dialogueTree.percentage or {}) do
+	for key, value in pairs(dialogueTree.percentage or {}) do
 		local checkValue
 		if world.entityIsResource(eid, key) then
-            checkValue = world.entityResourcePercentage(eid, key)
-        elseif type(settings[key]) == "number" then
+			checkValue = world.entityResourcePercentage(eid, key)
+		elseif type(settings[key]) == "number" then
 			checkValue = settings[key]
 		end
 
