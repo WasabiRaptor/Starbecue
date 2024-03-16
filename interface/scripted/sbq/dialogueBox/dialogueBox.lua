@@ -1,4 +1,6 @@
 require("/scripts/any/SBQ_dialogue.lua")
+require("/scripts/any/SBQ_dialogue_scripts.lua")
+require("/scripts/player/SBQ_player_dialogue_scripts.lua")
 dialogueBox = {
 	text = "",
 	textPosition = 1,
@@ -6,7 +8,7 @@ dialogueBox = {
 	textSound = nil,
 }
 function init()
-	_ENV.actionButton:setVisible(sbq.actionButtons ~= nil)
+    _ENV.actionButton:setVisible(sbq.actionButtons ~= nil)
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
 	end
@@ -18,6 +20,19 @@ function update()
 	sbq.checkRPCsFinished(dt)
     sbq.checkTimers(dt)
 	sbq.loopedMessage("interacted",pane.sourceEntity,"setInteracted",{player.id()})
+end
+
+function _ENV.dialogueLabel:setText(t)
+    local old = self.text
+    self.text = _ENV.metagui.formatText(t)
+    if self.text ~= old then
+        self:queueRedraw()
+		-- if I don't do this bullshit it lags the hell out of the game because it recalculates everything
+        local ugh = self.parent.parent
+		self.parent.parent = nil
+        self.parent:queueGeometryUpdate()
+		self.parent.parent = ugh
+    end
 end
 
 function _ENV.close:onClick()
@@ -100,9 +115,6 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		end
 	end
     local results = dialogueProcessor.processDialogueResults()
-    sb.logInfo(sb.printJson(results))
-	sb.logInfo(sb.printJson(dialogue.result))
-
 	if results.imagePortrait then
 		_ENV.imagePortrait:setVisible(true)
 		_ENV.entityPortraitPanel:setVisible(false)
@@ -138,16 +150,16 @@ function dialogueBox.scrollText()
 	while not dialogueBox.findNextRealCharacter() do
 	end
 	_ENV.dialogueLabel:setText(string.sub(dialogueBox.text, 1, dialogueBox.textPosition))
-    if dialogueBox.textSound then
+    if dialogueBox.textSound and string.sub(dialogueBox.text, dialogueBox.textPosition) ~= " " then
         local sound = dialogueBox.textSound
-		if type(sound == "table") then
+		while type(sound) == "table" do
 			sound = sound[math.random(#sound)]
 		end
 		pane.playSound(sound)
 	end
 
 	dialogueBox.textPosition = dialogueBox.textPosition + 1
-	sbq.timer(nil,dialogueBox.textSpeed/60,dialogueBox.scrollText)
+	sbq.timer(nil, (dialogueBox.textSpeed or 1) * 0.025, dialogueBox.scrollText)
 end
 function dialogueBox.findNextRealCharacter()
 	local char = string.sub(dialogueBox.text, dialogueBox.textPosition, dialogueBox.textPosition)

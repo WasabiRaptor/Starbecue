@@ -16,6 +16,8 @@ dialogueStepScripts = {}
 require"/scripts/actor/SBQ_actor.lua"
 require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_vore_main.lua"
+require"/scripts/any/SBQ_dialogue.lua"
+require"/scripts/any/SBQ_dialogue_scripts.lua"
 
 function init()
     sbq.config = root.assetJson("/sbq.config")
@@ -106,44 +108,6 @@ function interact(args)
 			return results[3]
 		end
 	end
-
-
-
-	-- local dialogueBoxData = dialogueProcessor.getDialogueBoxData()
-
-	-- if status.statusProperty("sbqType") == "prey" then
-	-- 	if args.predData then
-	-- 		sbq.predData = args.predData
-	-- 		local settings = args.predData.settings
-	-- 		settings.location = args.predData.location
-	-- 		settings.predator = args.predData.predator
-	-- 		settings.isPrey = true
-
-	-- 		settings.personality = storage.settings.personality
-	-- 		settings.mood = storage.settings.mood
-
-	-- 		dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, settings)
-	-- 		dialogueBoxData.dialogueTreeStart = ".struggling"
-	-- 		if args.predData.infused then
-	-- 			dialogueBoxData.dialogueTreeStart = ".infused"
-	-- 		end
-	-- 	else
-	-- 		return
-	-- 	end
-	-- else
-	-- 	local location = sbq.getOccupantArg(args.sourceId, "location")
-	-- 	if location ~= nil then
-	-- 		local flags = sbq.getOccupantArg(args.sourceId, "flags") or {}
-	-- 		dialogueBoxData.dialogueTreeStart = ".struggle"
-	-- 		dialogueBoxData.settings.location = location
-	-- 		dialogueBoxData.settings.playerPrey = true
-	-- 		if flags.infused then
-	-- 			dialogueBoxData.settings.predator = npc.species()
-	-- 			dialogueBoxData.dialogueTreeStart = ".infusedTease"
-	-- 		end
-	-- 	end
-	-- 	return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
-	-- end
 end
 
 function preservedStorage()

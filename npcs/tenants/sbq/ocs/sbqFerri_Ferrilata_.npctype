@@ -76,7 +76,7 @@
 			// settings come from itself
 			"greeting" : {
 				"new" : {"jump" : ".converse"},
-				"next" : "giveTenantRewards",
+				"next" : "giveRewards",
 				"rewards" : {
 					"replace" : {"randomDialogue" : [":defaultRewardsGreeting"]},
 					"next" : ["introduced"],

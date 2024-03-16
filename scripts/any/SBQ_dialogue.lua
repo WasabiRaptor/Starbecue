@@ -4,16 +4,18 @@ dialogue = {
 	position = 1,
 	result = {},
     prev = {},
-	default = {}
+    default = {},
+    path = "",
+	redirect = ""
 }
 function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
 	dialogue.finished = false
 	dialogue.position = 1
 	dialogue.result = {}
-	if path ~= nil then
+    if path ~= nil then
+		dialogue.path = path
 		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree or dialogue.prev, dialogueTreeTop or dialogue.prevTop)
 		if not dialogueTree then return false end
-		dialogue.path = path
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
@@ -47,7 +49,8 @@ function dialogueProcessor.processDialogueResults()
 	local results = {}
 	for _, k in ipairs(dialogueProcessor.resultKeys) do
 		results[k] = dialogueProcessor.maxOfKey(dialogue.result, k, dialogue.position)
-	end
+    end
+	results.dialogue = dialogueProcessor.getRedirectedDialogue(results.dialogue, true, sbq.settings, dialogue.prev, dialogue.prevTop)
 
 	results.source = results.source or sbq.entityId()
 	if type(results.source) == "string" then
@@ -63,8 +66,14 @@ function dialogueProcessor.processDialogueResults()
 	results.portrait = results.portrait or sbq.defaultPortrait
 	results.dialogue = dialogueProcessor.generateKeysmashes(results.dialogue)
 	results.buttonText = results.buttonText or "[...]"
-	results.tags = sb.jsonMerge(
-		{ sourceName = results.name.."^reset;", targetName = results.target and (sbq.entityName(results.target).."^reset;"), dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
+    results.tags = sb.jsonMerge(
+        {
+            dialoguePath = dialogue.path or "",
+			dialogueRedirect = dialogue.redirect or "",
+			sourceName = results.name .. "^reset;",
+        	targetName = results.target and (sbq.entityName(results.target) .. "^reset;"),
+			dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "",
+		},
 		results.tags or {},
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.source), { t = "source" }),
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.target), { t = "target" })
@@ -131,7 +140,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 	if not dialogueTree then return false end
 	dialogueProcessor.processDialogueStep(dialogueTree)
 	local finished = false
-	if dialogueTree.next and not finished then
+    if dialogueTree.next and not finished then
 		if dialogueTree.settings then
 			if dialogueTree.settings == "target" then
 				eid = sbq.target()
@@ -177,16 +186,16 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 end
 
 function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
-	if not useStepPath then
-		if dialogueStepScripts[step] then
+    if not useStepPath then
+        if dialogueStepScripts[step] then
 			return dialogueProcessor.getDialogueBranch("."..tostring((dialogueStepScripts[step](dialogueTree, dialogueTreeTop, settings, step, eid))), settings, eid, dialogueTree, dialogueTreeTop)
-		elseif settings[step] ~= nil then
+        elseif settings[step] ~= nil then
 			return dialogueProcessor.getDialogueBranch("."..tostring(settings[step]), settings, eid, dialogueTree, dialogueTreeTop)
-		else
+        else
 			return dialogueProcessor.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
 		end
 	elseif useStepPath and dialogueTree[step] then
-		local dialogueTree = dialogueProcessor.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)
+		dialogueTree = dialogueProcessor.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)
 		return dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop)
 	else
 		return false
@@ -194,7 +203,6 @@ function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogu
 end
 
 function dialogueProcessor.processDialogueStep(dialogueTree)
-	sb.logInfo(sb.printJson(dialogueTree,2))
 	if dialogueTree.new then
 		dialogue.result = sb.jsonMerge(dialogueTree.new, {})
 		dialogue.queue = {}
@@ -318,45 +326,3 @@ end
 
 dialogueStepScripts = {}
 dialogueOptionScripts = {}
-
-function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local result = false
-	if eid then
-		local uuid = world.entityUniqueId(eid)
-		result = uuid ~= nil and uuid == settings.ownerUuid
-	end
-	return tostring(result)
-end
-
-function dialogueStepScripts.percentage(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local best = "default"
-	local bestScore = 0
-	for key, value in pairs(dialogueTree.percentage or {}) do
-		local checkValue
-		if world.entityIsResource(eid, key) then
-			checkValue = world.entityResourcePercentage(eid, key)
-		elseif type(settings[key]) == "number" then
-			checkValue = settings[key]
-		end
-
-		if type(checkValue) == "number" then
-			local score
-			if value < 0 then
-				if checkValue < math.abs(value) then
-					score = checkValue - value
-				end
-			else
-				if checkValue > math.abs(value) then
-					score = value + checkValue
-				end
-			end
-			if type(score) == "number" then
-				if score > bestScore then
-					bestScore = score
-					best = key
-				end
-			end
-		end
-	end
-	return best
-end
