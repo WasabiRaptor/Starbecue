@@ -226,7 +226,7 @@ end
 function sbq.getUpgrade(upgradeName, tier, bonus)
     storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
     storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
-	sbq.refreshUpgrades()
+	sbq.refreshUpgrades(true)
 end
 
 function sbq.setGroupedSetting(group, name, k, v)
@@ -1159,7 +1159,6 @@ function _Occupant:refreshLocation(name, subLocation)
 		time = self.time,
     })
     world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
-	-- world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqPredHudPreyDialogue", self.entityId)
 end
 
 function sbq.getModifiers(modifiers, power)

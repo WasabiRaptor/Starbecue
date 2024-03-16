@@ -3,8 +3,8 @@ sbq = {
 	widgetScripts = {},
 	getWidget = {},
 	settingWidgets = {},
-    settings = {},
-    settingIdentifiers = {},
+	settings = {},
+	settingIdentifiers = {},
 	lists = {}
 }
 local old = {
@@ -25,7 +25,7 @@ function sbq.concatStrings(...)
 	local res = ""
 	for _, v in ipairs({...}) do
 		res = res..(v or "")
-    end
+	end
 	return res
 end
 function sbq.entityId()
@@ -43,25 +43,26 @@ function init()
 	function mg.setTitle(s)
 		mg.cfg.title = mg.formatText(s)
 		mg.queueFrameRedraw()
-    end
+	end
 	-- doing this early just because I can
 	mg.cfg = config.getParameter("___") -- window config
-    mg.inputData = mg.cfg.inputData -- alias
+	mg.inputData = mg.cfg.inputData -- alias
 
-    sbq.config = root.assetJson("/sbq.config")
+	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	sbq.gui = root.assetJson("/sbqGui.config")
+	sbq.target = player.id
 	for k, v in pairs((mg.inputData or {}).sbq or {}) do
-        sbq[k] = v
-    end
+		sbq[k] = v
+	end
 	if sbq.storageSettings then
-        storage.sbqSettings = sbq.storageSettings or {}
+		storage.sbqSettings = sbq.storageSettings or {}
 		storage.sbqUpgrades = sbq.storageUpgrades or {}
-        sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
-    end
+		sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+	end
 
-    old.init()
+	old.init()
 end
 
 local scrollMode = {true,true} -- local thing to the other one, which is dumb
@@ -69,8 +70,8 @@ local scrollMode = {true,true} -- local thing to the other one, which is dumb
 function widgets.textBox:preferredSize() return self.explicitSize or { 96, 14 } end
 
 function mg.formatText(str)
-    if not str then return nil end
-    if str:sub(1, 1) == ":" then
+	if not str then return nil end
+	if str:sub(1, 1) == ":" then
 		if sbq.strings then str = sbq.strings[str:sub(2,-1)] or str end
 	end
 	local colorSub = {
@@ -88,43 +89,43 @@ function widgets.sbqSetting:init(base, param)
 	sbq.timer(nil,0.1,function ()
 		self:delete()
 	end)
-    param.setting = param.setting or self.parent.setting
-    param.groupName = param.groupName or self.parent.groupName
+	param.setting = param.setting or self.parent.setting
+	param.groupName = param.groupName or self.parent.groupName
 	param.groupKey = param.groupKey or self.parent.groupKey
 
 	local defaultSetting = sbq.defaultSettings[param.setting]
-    if param.groupName and param.groupKey then
+	if param.groupName and param.groupKey then
 		if not sbq.defaultSettings[param.groupName] then
 			return sbq.logError("undefined setting group: ".. param.groupName)
-        end
+		end
 		if not sbq.defaultSettings[param.groupName][param.groupKey] then
 			return sbq.logError("undefined setting group entry: ".. param.groupName.."."..param.groupKey)
-        end
-        defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+		end
+		defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
 		if defaultSetting == nil then sbq.logError(string.format("Setting '%s.%s.%s' has no defined default", param.groupName, param.groupKey, param.setting)) end
-    else
+	else
 		if defaultSetting == nil then sbq.logError(string.format("Setting '%s' has no defined default", param.setting)) end
-    end
+	end
 	param.toolTip = mg.formatText(param.toolTip or sbq.strings[param.setting.."Tip"])
-    param.settingType = type(defaultSetting)
+	param.settingType = type(defaultSetting)
 
-    if sbq.gui.settingWidgets[param.setting] then
-        if type(sbq.gui.settingWidgets[param.setting]) == "string" then
+	if sbq.gui.settingWidgets[param.setting] then
+		if type(sbq.gui.settingWidgets[param.setting]) == "string" then
 			param = sbq.widgetScripts[sbq.gui.settingWidgets[param.setting]](param)
 		else
 			param = sb.jsonMerge(param, sbq.gui.settingWidgets[param.setting])
-        end
-    else
+		end
+	else
 		param = sb.jsonMerge(param, sbq.gui.defaultSettingTypeWidgets[param.settingType] or sbq.gui.defaultSettingTypeWidgets.invalidType)
-    end
+	end
 	if param.makeLabel then
-        param = { type = "layout", mode = "horizontal", children = {
-            param,
-			{ type = "label", text = ":"..param.setting}
+		param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", mode = "horizontal", children = {
+			param,
+			{ type = "label", id = sbq.widgetSettingIdentifier(param).."Label", text = ":"..param.setting}
 		}}
 	end
 	self.id = nil
-    self.parent:addChild(param)
+	self.parent:addChild(param)
 	self:delete()
 end
 
@@ -239,10 +240,10 @@ function widgets.sbqSlider:init(base, param)
 	self.percent = param.percent
 	self.min = param.min
 	self.max = param.max
-    self.script = param.script
+	self.script = param.script
 
 	self.setting = param.setting or self.parent.setting
-    self.groupName = param.groupName or self.parent.groupName
+	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 
 	if self.script then
@@ -277,19 +278,19 @@ function widgets.sbqSlider:init(base, param)
 	if #self.handles < 1 then
 		sb.logError("Slider with no handles! id: " .. self.id)
 	end
-    for i, h in ipairs(self.handles) do
+	for i, h in ipairs(self.handles) do
 		h.setting = h.setting or self.setting
-        if h.setting then
+		if h.setting then
 			local defaultSetting = sbq.defaultSettings[h.setting]
-            if (h.groupName and h.groupKey) then
+			if (h.groupName and h.groupKey) then
 				defaultSetting = sbq.defaultSettings[h.groupName][h.groupKey][h.setting]
-            elseif (self.groupKey and self.groupName) and not (h.groupName or h.groupKey) then
-                h.groupName = self.groupName
+			elseif (self.groupKey and self.groupName) and not (h.groupName or h.groupKey) then
+				h.groupName = self.groupName
 				h.groupKey = self.groupKey
 				defaultSetting = sbq.defaultSettings[self.groupName][self.groupKey][h.setting]
 			end
 			h.value = defaultSetting
-            sbq.settingWidgets[sbq.widgetSettingIdentifier(h)] = self
+			sbq.settingWidgets[sbq.widgetSettingIdentifier(h)] = self
 			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(h)] = {h.setting, h.groupName, h.groupKey}
 		end
 		if not h.value then
@@ -316,7 +317,7 @@ function widgets.sbqSlider:minSize() return {16, 16} end
 function widgets.sbqSlider:preferredSize() return self.explicitSize or { 64, 16 } end
 
 function widgets.sbqSlider:updateGeometry(noApply)
-    self.redraw = true
+	self.redraw = true
 end
 
 function widgets.sbqSlider:draw()
@@ -473,11 +474,11 @@ function widgets.sbqSlider:getToolTip()
 		if self.textToolTips then
 			local closest, index = getClosestValue(self.handles[self.current].value, self.notches)
 			if self.textToolTips[index] then return mg.formatText(self.handles[self.current].toolTip) .. "\n" .. mg.formatText(self.textToolTips[index]) end
-        end
+		end
 		local value = (math.floor(self.handles[self.current].value * 100 + 0.5) / 100)
 		if self.percent then
 			value = math.floor(value * 100)
-        end
+		end
 		if self.integer then
 			math.floor(value)
 		end
@@ -567,14 +568,14 @@ function widgets.sbqCheckBox:init(base, param)
 	self.backingWidget = mkwidget(base, { type = "canvas" })
 	self.checked = param.checked
 	self.radioGroup = param.radioGroup
-    self.value = param.value
+	self.value = param.value
 	self.script = param.script
 
-    self.setting = param.setting or self.parent.setting
+	self.setting = param.setting or self.parent.setting
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 
-    if self.setting then
+	if self.setting then
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
 		local defaultSetting = sbq.defaultSettings[param.setting]
@@ -584,7 +585,7 @@ function widgets.sbqCheckBox:init(base, param)
 		if type(defaultSetting) == "boolean" then
 			self.checked = defaultSetting
 		end
-    end
+	end
 	if self.script then
 		function self:onClick()
 			sbq.widgetScripts[self.script](self.value or self.checked,self.setting, self.groupName, self.groupKey)
@@ -614,16 +615,16 @@ function widgets.sbqCheckBox:draw()
 	if self.icon then
 		c:clear()
 		local directives = ""
-        if self.state == "press" then directives = "?brightness=-50" end
+		if self.state == "press" then directives = "?brightness=-50" end
 		if self.locked and not self.checked then directives = directives.."?saturation=-100" end
 
 		c:drawImageDrawable(self.icon..directives, pos, 1)
 		if self.checked then
 			c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
 		end
-    else
+	else
 		theme.drawCheckBox(self)
-    end
+	end
 	if self.locked then
 		c:drawImage("/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", pos, 1, nil, true )
 	end
@@ -643,7 +644,7 @@ function widgets.sbqCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 			self:queueRedraw()
 			theme.onCheckBoxClick(self)
 		elseif self.state == "press" then
-            self.state = "hover"
+			self.state = "hover"
 			if self.locked then return true end
 			if self.radioGroup then
 				if not self.checked then
@@ -704,7 +705,7 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	local cfg = {
 		style = "contextMenu", scripts = {"/metagui/sbq/dropDownMenu.lua"}, menuId = menuId,
 		forceTheme = mg.cfg.theme, accentColor = mg.cfg.accentColor, -- carry over theme and accent color
-        children = { { mode = "vertical", spacing = s or 0 } },
+		children = { { mode = "vertical", spacing = s or 0 } },
 		dismissable = config.getParameter("dismissable"),
 		paneLayer = config.getParameter("paneLayer")
 	}
@@ -766,17 +767,17 @@ function mg.preyDialogueText(pos, text, id, lifetime)
 	local cfg = {
 		style = "contextMenu", scripts = {"/metagui/sbq/dismissTimer.lua"}, menuId = menuId,
 		forceTheme = mg.cfg.theme, accentColor = mg.cfg.accentColor, -- carry over theme and accent color
-        children = { { type = "label", text = text } },
-        dismissable = config.getParameter("dismissable"),
-        paneLayer = config.getParameter("paneLayer"),
+		children = { { type = "label", text = text } },
+		dismissable = config.getParameter("dismissable"),
+		paneLayer = config.getParameter("paneLayer"),
 		lifetime = lifetime or 5
-    }
+	}
 
 	local bm = theme.metrics.borderMargins.contextMenu
-    local width, height = table.unpack(mg.measureString(text, sbq.gui.preyDialogueWidth))
+	local width, height = table.unpack(mg.measureString(text, sbq.gui.preyDialogueWidth))
 	cfg.size = {width,height}
 	local calcSize = {width + bm[1] + bm[3], height + bm[2] + bm[4]}
-    local pushIn = -((bm[1] + bm[2]) / 2 + 2)
+	local pushIn = -((bm[1] + bm[2]) / 2 + 2)
 	local position = vec2.add(vec2.mul(vec2.add(pane.position(), pos), {1, -1}), {-bm[1] - pushIn, calcSize[2] - bm[2] - pushIn} )
 	cfg.anchor = { "bottomLeft",
 		{position[1]-(calcSize[1]), math.min(0,position[2])}
@@ -828,19 +829,19 @@ function widgets.sbqTextBox:init(base, param)
 	if param.expand then self.expandMode = {2, 0} end
 
 	self.backingWidget = mkwidget(base, { type = "canvas" })
-    self.subWidgets = { content = mkwidget(base, { type = "canvas" }) }
+	self.subWidgets = { content = mkwidget(base, { type = "canvas" }) }
 
-    self.setting = param.setting or self.parent.setting
-    self.groupName = param.groupName or self.parent.groupName
+	self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
-    self.settingType = param.settingType or "string"
-    self.script = param.script
-    self.groupName = param.groupName
-    self.min = param.min
-    self.max = param.max
+	self.settingType = param.settingType or "string"
+	self.script = param.script
+	self.groupName = param.groupName
+	self.min = param.min
+	self.max = param.max
 	self.toolTip = mg.formatText(param.toolTip)
 
-    if self.setting then
+	if self.setting then
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
 		local defaultSetting = sbq.defaultSettings[param.setting]
@@ -855,10 +856,10 @@ function widgets.sbqTextBox:init(base, param)
 	end
 
 	if self.script then
-        function self:onEnter()
+		function self:onEnter()
 			if self.settingType == "number" then
-                local number = tonumber(self.text)
-                if type(number) == "number" then
+				local number = tonumber(self.text)
+				if type(number) == "number" then
 					local max = self.max or math.huge
 					local min = self.min or -math.huge
 					if type(max) == "string" then
@@ -867,24 +868,24 @@ function widgets.sbqTextBox:init(base, param)
 					if type(min) == "string" then
 						min = sbq.settings[min]
 					end
-                    number = math.min(max, math.max(number, min))
+					number = math.min(max, math.max(number, min))
 					self:setText(tostring(number))
-                    sbq.widgetScripts[self.script](number, self.setting, self.groupName,self.groupKey)
-                else
+					sbq.widgetScripts[self.script](number, self.setting, self.groupName,self.groupKey)
+				else
 					sbq.playErrorSound()
-                end
-            else
+				end
+			else
 				sbq.widgetScripts[self.script](tostring(self.text),self.setting,self.groupName,self.groupKey)
 			end
 		end
-    end
+	end
 	self:setText(param.text)
 end
 function widgets.sbqTextBox:preferredSize() return {(self.explicitSize or {})[1] or 96, 14} end
 function widgets.sbqTextBox:draw()
-    theme.drawTextBox(self)
+	theme.drawTextBox(self)
 	if self.locked then
-        local c = widget.bindCanvas(self.backingWidget)
+		local c = widget.bindCanvas(self.backingWidget)
 		c:drawImage("/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", {6,7}, 1, nil, true )
 	end
 	widget.setPosition(self.subWidgets.content, vec2.add(widget.getPosition(self.backingWidget), {self.frameWidth, 0}))
@@ -949,12 +950,12 @@ function widgets.sbqTextBox:blur() self:releaseFocus() end
 function widgets.sbqTextBox:setText(t)
 	if self.settingType == "number" then
 		local value = tonumber(t)
-        local color = "FFFFFF"
-        local max = self.max
-        local min = self.min
+		local color = "FFFFFF"
+		local max = self.max
+		local min = self.min
 		if type(max) == "string" then
 			max = sbq.settings[max]
-        end
+		end
 		if type(min) == "string" then
 			min = sbq.settings[min]
 		end
@@ -975,7 +976,7 @@ function widgets.sbqTextBox:setText(t)
 			end
 		else
 			color = "FF0000"
-        end
+		end
 		self.color = color
 	end
 	local c = self.text
@@ -1071,3 +1072,15 @@ function widgets.sbqTextBox:onEscape() end
 
 
 for id, t in pairs(widgets) do t.widgetType = id end
+
+
+
+-- the version of stardust from steam is out of date and this makes the width actually function
+function widgets.label:preferredSize(width)
+    if self.explicitSize then return self.explicitSize end
+    local s = mg.measureString(self.text, self.wrap and width or nil, self.fontSize)
+    -- extra pixel to fit cut-off descenders in multiline text
+    if s[2] > math.ceil(self.fontSize or 8) then s[2] = s[2] + 1 end
+    if self.width then s[1] = self.width end
+    return s
+end

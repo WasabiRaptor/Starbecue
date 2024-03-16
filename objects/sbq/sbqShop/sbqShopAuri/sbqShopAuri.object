@@ -46,58 +46,55 @@
 	"scripts": [
 		"sbqShopAuri.lua"
 	],
-
-	"portraitPath" : "/humanoid/sbqAuri_LokiVulpix/portraits/A",
-	"defaultPortrait" : "Neutral.png",
-	"defaultName" : "Auri",
+	"entityName" : "Auri",
 	"dialogueStepScripts" : ["/objects/sbq/sbqShop/sbqShopAuri/fix_data.lua"],
-	"dialogueTree" : {
-		"dialogueFile" : "/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.dialogue",
-		"greeting" : {
-			"new" : {
-				"randomButtonText" : ["[Options]"],
-				"randomDialogue" : [":shopGreeting"],
-				"options" : [
-					["What is this place?", ".place"],
-					["Can you eat me?", ".npc"],
-					["Tell me about yourself", ".talkAboutSelf"],
-					["I think I'm bugged!", ".fixData", { "checkScript":"fixData"} ]
-				]
-			}
-		},
-		"converse" : {
-			"new" : {
-				"randomButtonText" : ["[Options]"],
-				"randomDialogue" : [":shopConverse"],
-				"options" : [
-					["What is this place?", ".place"],
-					["Can you eat me?", ".npc"],
-					["Tell me about yourself", ".talkAboutSelf"],
-					["I think I'm bugged!", ".fixData", { "checkScript":"fixData"} ]
-				]
-			}
-		},
-		"place" : {
-			"new" : {
-				"dialogue" : ":shopPlace",
-				"jump" : ".converse"
-			}
-		},
-		"fixData" :{
-			"new" : {
-				"dialogue" : ":fixBug",
-				"jump" : ".converse"
+	"shopRecipes" : "/recipes/sbqShop/auriShopRecipes.config",
+	"dialogueTree" : [
+		"/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.npctype:scriptConfig.dialogueTree",
+		{
+			"greeting" : {
+				"new" : {
+					"randomButtonText" : ["[Options]"],
+					"randomDialogue" : [":shopGreeting"],
+					"options" : [
+						["What is this place?", ".place"],
+						["Can you eat me?", ".npc"],
+						["Tell me about yourself", ".talkAboutSelf"],
+						["I think I'm bugged!", ".fixData", { "checkScript":"fixData"} ]
+					]
+				}
 			},
-			"next" : "fixData"
-		},
-		"npc" : {
-			"new" : {
-				"randomDialogue" : ":checkNPC",
-				"jump" : ".converse"
-			}
-		},
-		"talkAboutKinks" : "/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.npctype:scriptConfig.dialogueTree.talkAboutKinks",
-		"talkAboutSelf" : "/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.npctype:scriptConfig.dialogueTree.talkAboutSelf",
-		"itemSelection" : "/npcs/tenants/sbq/ocs/sbqAuri_LokiVulpix.npctype:scriptConfig.dialogueTree.itemSelection"
-	}
+			"converse" : {
+				"new" : {
+					"randomButtonText" : ["[Options]"],
+					"randomDialogue" : [":shopConverse"],
+					"options" : [
+						["What is this place?", ".place"],
+						["Can you eat me?", ".npc"],
+						["Tell me about yourself", ".talkAboutSelf"],
+						["I think I'm bugged!", ".fixData", { "checkScript":"fixData"} ]
+					]
+				}
+			},
+			"place" : {
+				"new" : {
+					"dialogue" : ":shopPlace",
+					"jump" : ".converse"
+				}
+			},
+			"fixData" :{
+				"new" : {
+					"dialogue" : ":fixBug",
+					"jump" : ".converse"
+				},
+				"next" : "fixData"
+			},
+			"npc" : {
+				"new" : {
+					"randomDialogue" : ":checkNPC",
+					"jump" : ".converse"
+				}
+			},
+		}
+	]
 }

@@ -3,35 +3,28 @@ dialogueProcessor = {}
 dialogue = {
 	position = 1,
 	result = {},
-	prev = {}
+    prev = {},
+	default = {}
 }
 function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
 	dialogue.finished = false
 	dialogue.position = 1
 	dialogue.result = {}
 	if path ~= nil then
-		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop or sbq.dialogueTree)
+		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree or dialogue.prev, dialogueTreeTop or dialogue.prevTop)
 		if not dialogueTree then return false end
 		dialogue.path = path
-
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
-		if type(dialogue.result.dialogue) == "string" then
-			dialogue.result.dialogue = dialogueProcessor.getRedirectedDialogue(dialogue.result.dialogue, true, settings, dialogueTree, dialogueTreeTop)
-			if type(dialogue.result.dialogue) == "table" and dialogue.result.dialogue.dialogue ~= nil then
-				dialogue.result = sb.jsonMerge(dialogue.result, dialogue.result.dialogue)
-			end
-		end
-		local handleRandom = true
 		local startIndex = 1
-		while handleRandom == true do
-			handleRandom = dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex)
+		while dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex) do
 			startIndex = #dialogue.randomRolls + 1
 		end
-	end
-	dialogue.prev = dialogueTree
-	dialogue.prevTop = dialogueTreeTop
+    end
+	dialogue.result = sb.jsonMerge(dialogueTreeTop.defaultResults or {}, dialogue.result)
+	dialogue.prev = dialogueTree or {}
+	dialogue.prevTop = dialogueTreeTop or {}
 	return true
 end
 
@@ -56,13 +49,13 @@ function dialogueProcessor.processDialogueResults()
 		results[k] = dialogueProcessor.maxOfKey(dialogue.result, k, dialogue.position)
 	end
 
-	results.source = results.source or pane.sourceEntity()
+	results.source = results.source or sbq.entityId()
 	if type(results.source) == "string" then
 		results.source = world.getUniqueEntityId(results.source)
 	end
 	results.name = results.name or sbq.entityName(results.source)
 
-	results.target = results.target or player.id()
+	results.target = results.target or sbq.target()
 	if type(results.target) == "string" then
 		results.target = world.getUniqueEntityId(results.target)
 	end
@@ -71,15 +64,16 @@ function dialogueProcessor.processDialogueResults()
 	results.dialogue = dialogueProcessor.generateKeysmashes(results.dialogue)
 	results.buttonText = results.buttonText or "[...]"
 	results.tags = sb.jsonMerge(
-		{ sourceName = results.name.."^reset;", targetName = sbq.entityName(results.target).."^reset;", dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
+		{ sourceName = results.name.."^reset;", targetName = results.target and (sbq.entityName(results.target).."^reset;"), dontSpeak = "", love = "", slowlove = "", confused = "", sleepy = "", sad = "" },
 		results.tags or {},
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.source), { t = "source" }),
 		sbq.replaceConfigTags(dialogueProcessor.getPronouns(results.target), { t = "target" })
-	)
+    )
 	return results
 end
 
 function dialogueProcessor.getPronouns(entityId)
+    if not entityId then return {} end
 	local pronouns = sbq.getPublicProperty(entityId, "sbqPronouns") or {}
 	for _, fallback in ipairs(pronouns.fallback or {world.entityGender(entityId) or "object", "neutral"}) do
 		pronouns = sb.jsonMerge(sbq.pronouns[fallback], pronouns)
@@ -132,8 +126,8 @@ dialogue = {
 }
 
 function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
-	local dialogueTreeTop = dialogueProcessor.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
-	local dialogueTree = dialogueProcessor.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
+	dialogueTreeTop = dialogueProcessor.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
+	dialogueTree = dialogueProcessor.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
 	if not dialogueTree then return false end
 	dialogueProcessor.processDialogueStep(dialogueTree)
 	local finished = false
@@ -200,9 +194,10 @@ function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogu
 end
 
 function dialogueProcessor.processDialogueStep(dialogueTree)
+	sb.logInfo(sb.printJson(dialogueTree,2))
 	if dialogueTree.new then
-		dialogue.result = sb.jsonMerge({}, dialogueTree.new)
-		dialogue.queue = sb.jsonMerge({}, {})
+		dialogue.result = sb.jsonMerge(dialogueTree.new, {})
+		dialogue.queue = {}
 	end
 	if dialogueTree.clear then
 		for _, k in ipairs(dialogueTree.clear) do
@@ -225,7 +220,7 @@ function dialogueProcessor.processDialogueStep(dialogueTree)
 		end
 	end
 	if dialogueTree.newQueue then
-		dialogue.queue = sb.jsonMerge({}, dialogueTree.newQueue)
+		dialogue.queue = sb.jsonMerge(dialogueTree.newQueue, {})
 	end
 	if dialogueTree.clearQueue then
 		for _, k in ipairs(dialogueTree.clearQueue) do
@@ -290,18 +285,12 @@ function dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo, ran
 			end
 			return dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable.pools[math.min((math.floor((#randomTable.pools * percentage) + 0.5) + 1), #randomTable.pools)], dialogueTree, dialogueTreeTop)
 		end
-		local location = dialogue.result.location or settings.location
-		if randomTable.infusedSlot and location then
-			local uuid = sb.jsonQuery(settings, location.."InfusedItem.parameters.npcArgs.npcParam.scriptConfig.uniqueId")
-			if uuid then
-				return dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo+1, randomTable[uuid] or randomTable.default, dialogueTree, dialogueTreeTop)
-			end
-		end
 		if 	randomTable.dialogue or randomTable.portrait or randomTable.emote or randomTable.name or randomTable.buttonText or
 			randomTable.speaker or randomTable.randomDialogue or randomTable.randomPortrait or randomTable.randomButtonText or
 			randomTable.randomEmote or randomTable.randomName
 			then
 			return randomTable
+
 		end
 		local selection = randomTable.add or randomTable
 		if selection[1] ~= nil then

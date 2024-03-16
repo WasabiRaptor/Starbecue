@@ -3,26 +3,28 @@
 	"size" : [256, 72], // *internal* size (not including chrome)
 	"uniqueBy" : "path",
 	"anchor" : ["centerBottom", [0,-64]],
-	"scripts" : [ "sbqDialogueBox.lua" ],
+	"scripts" : [ "dialogueBox.lua" ],
 	"children" : [
-		{ "type" : "layout", "id" : "dialogueLayout", "mode" : "horizontal", "expandMode" : [1, 1], "children" : [
-			{ "type" : "layout", "id" : "portraitLayout", "mode" : "vertical", "expandMode" : [0, 1], "children" : [
-				[
+		{ "type" : "layout", "mode" : "vertical", "expandMode" : [1, 1], "children" : [
+			[
+				{"expandMode" : [2, 2], "scissoring":false},
+				{ "type" : "layout", "id" : "portraitLayout", "scissoring":false, "mode" : "vertical", "expandMode" : [0, 2], "children" : [
 					{ "type" : "image", "id": "dialoguePortrait", "file" : "/empty_image.png", "visible" : false },
 					{ "type" : "canvas", "id": "dialoguePortraitCanvas", "size" : [64,64], "visible" : false }
-				],
-				{ "type" : "label", "id" : "nameLabel", "text": "", "inline" : true }
-			]},
-			{ "type" : "layout", "mode" : "vertical", "expandMode" : [1, 1], "children" : [
-				{ "type" : "panel", "id" : "dialoguePanel", "expandMode" : [1, 1], "style" : "convex", "children" : [
-					{ "type" : "scrollArea", "children" : [{ "type" : "label", "id" : "dialogueLabel", "text": ""}]}
 				]},
-				[
-					{ "type" : "iconButton", "id" : "close", "image" : "/interface/x.png", "hoverImage" : "/interface/xhover.png", "pressImage" : "/interface/xpress.png" },
-					{ "type" : "button", "id" : "dialogueCont", "expandMode" : [1, 0], "caption" : "..." },
-					{ "type" : "button", "id" : "actionButton", "expandMode" : [0, 0], "caption" : ":actions" },
-				]
-			]}
+				{ "type" : "panel", "id" : "dialoguePanel", "expandMode" : [2, 2], "style" : "convex", "children" : [
+					{ "type" : "scrollArea", "children" : [{ "type" : "label", "id" : "dialogueLabel", "text": ""}]}
+				]}
+			],
+			[
+				{"expandMode" : [1, 0], "align":1},
+				{ "type" : "label", "id" : "nameLabel", "text": "", "align" : "center", "expandMode":[0,0] },
+				{ "type" : "button", "id" : "dialogueCont", "expandMode" : [1, 0], "caption" : "..." },
+				{ "type" : "button", "id" : "actionButton", "expandMode" : [0, 0], "caption" : ":actions" },
+				{ "type" : "iconButton", "id" : "settings", "image" : "/interface/scripted/sbq/predatorHud/settings.png", "hoverImage" : "/interface/scripted/sbq/predatorHud/settingshover.png", "pressImage" : "/interface/scripted/sbq/predatorHud/settingspress.png" },
+				{ "type" : "iconButton", "id" : "close", "image" : "/interface/x.png", "hoverImage" : "/interface/xhover.png", "pressImage" : "/interface/xpress.png", "visible":false }
+			]
 		]}
-	]
+	],
+	"sourceRadius": 10
 }

@@ -1,31 +1,21 @@
----@diagnostic disable: undefined-global
 
 local buyAmount = 1
-
-local shopRecipes = root.assetJson(metagui.inputData.shopRecipes or "/recipes/sbqShop/auriShopRecipes.config")
 local catagoryLabels = root.assetJson("/items/categories.config").labels
-
 local buyRecipe
-
-
-require("/interface/scripted/sbq/DialogueBox/dialogueBox.lua")
-
-local lastWasGreeting = true
-
+shop = {}
 function init()
-    -- if metagui.inputData.dialogueTree then
-	-- 	if type(metagui.inputData.dialogueTree.itemSelection) == "string" then
-	-- 		metagui.inputData.dialogueTree.itemSelection = root.assetJson(metagui.inputData.dialogueTree.itemSelection)
-	-- 	end
-    -- else
-		dialogueLayout:setVisible(false)
-    -- end
+	if type(sbq.shopRecipes) == "string" then
+		sbq.shopRecipes = root.assetJson(sbq.shopRecipes)
+	end
+	if not sbq.dialogueTree then
+		_ENV.dialogueLayout:setVisible(false)
+	end
 
-	for j, tabData in pairs(shopRecipes) do
+	for j, tabData in pairs(sbq.shopRecipes or {}) do
 		local tab = tabData.name
 		local recipes = tabData.recipes
 
-		shopTabField:newTab({
+		_ENV.shopTabField:newTab({
 			type = "tab", id = tab.."ShopTab", title = tabData.title or "", toolTip = tabData.toolTip, icon = tabData.icon, color = tabData.color or "ff00ff",
 			contents = { type = "panel", style = "flat", children = {{align = 0, expandMode = {2,2}},{{ type = "scrollArea", scrollDirections = {0, 1}, scrollBars = true, thumbScrolling = true, children = {
 				{ type = "layout", id = tab.."ScrollArea", mode = "vertical", spacing = -3, align = 0, children = {}}
@@ -68,58 +58,16 @@ function init()
 					}
 				}}}})
 
-				-- local image = resultItemConfig.config.inventoryIcon or "/empty_image.png"
-				-- local scale = 2
-				-- local wasObject
-
-				-- local objectImage = (
-				-- 	((((resultItemConfig.config.orientations or {})[1] or {}).imageLayers or {})[1] or {}).image
-				-- 	or ((resultItemConfig.config.orientations or {})[1] or {}).image
-				-- 	or ((resultItemConfig.config.orientations or {})[1] or {}).dualImage
-				-- )
-				-- if objectImage then
-				-- 	image = objectImage
-				-- 	wasObject = true
-				-- elseif resultItemConfig.config.largeImage ~= nil then
-				-- 	image = resultItemConfig.config.largeImage
-				-- 	scale = 1.5
-				-- end
-                -- ---@diagnostic disable-next-line: cast-local-type
-				-- if image then
-				-- 	image = sb.assetPath(image, resultItemConfig.directory or "/")
-				-- end
-
-
-				-- if wasObject and image ~= nil then
-				-- 	local success, size = pcall(root.imageSize,(image))
-				-- 	if success and (size[1] > 90 or size[2] > 90) then
-				-- 		local x = 90/(size[1])
-				-- 		local y = 90/(size[2])
-				-- 		if x > y then
-				-- 			scale = y
-				-- 		else
-				-- 			scale = x
-				-- 		end
-				-- 	else
-				-- 		scale = 1
-				-- 	end
-				-- end
-
 				function listItem:onClick()
 					buyRecipe = recipe
-					itemInfoPanelSlot:setItem({ name = recipe.result, parameters = recipe.parameters })
-					itemNameLabel:setText(resultItemConfig.parameters.shortdescription or resultItemConfig.config.shortdescription)
-					itemCategoryLabel:setText("^gray;"..(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category))
-					itemDescriptionLabel:setText(resultItemConfig.parameters.description or resultItemConfig.config.description)
-					itemImage:setFile(sb.replaceTags(image, { frame = 1, color = resultItemConfig.parameters.color or resultItemConfig.config.color or "default" }))
-					itemImage:setScale({scale, scale})
+					_ENV.itemInfoPanelSlot:setItem({ name = recipe.result, parameters = recipe.parameters })
+					_ENV.itemNameLabel:setText(resultItemConfig.parameters.shortdescription or resultItemConfig.config.shortdescription)
+					_ENV.itemCategoryLabel:setText("^gray;"..(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category))
+                    _ENV.itemDescriptionLabel:setText(resultItemConfig.parameters.description or resultItemConfig.config.description)
 
-					-- if sbq.data.dialogueTree.itemSelection[recipe.dialogue or recipe.result] ~= nil then
-					-- 	lastWasGreeting = false
-					-- 	sbq.updateDialogueBox(".itemSelection."..(recipe.dialogue or recipe.result), sbq.dialogueTree)
-					-- elseif not lastWasGreeting then
-					-- 	sbq.updateDialogueBox( metagui.inputData.dialogueTreeStart or ".converse", sbq.dialogueTree )
-					-- end
+					if not dialogueBox.refresh( recipe.dialogue or (".itemSelection."..recipe.result), dialogue.prev, sbq.dialogueTree) then
+						dialogueBox.refresh( ".converse", dialogue.prev, sbq.dialogueTree)
+					end
 				end
 			end
 		end
@@ -127,18 +75,18 @@ function init()
 end
 
 
-function decAmount:onClick()
+function _ENV.decAmount:onClick()
 	buyAmount = math.max(1, buyAmount - 1)
-	buyAmountLabel:setText(tostring(buyAmount))
+	_ENV.buyAmountLabel:setText(tostring(buyAmount))
 end
 
-function incAmount:onClick()
+function _ENV.incAmount:onClick()
 	buyAmount = buyAmount + 1
-	buyAmountLabel:setText(tostring(buyAmount))
+	_ENV.buyAmountLabel:setText(tostring(buyAmount))
 end
 
-function buy:onClick()
-	if hasMaterials() or player.isAdmin() then
+function _ENV.buy:onClick()
+	if shop.hasMaterials() or player.isAdmin() then
 		if not player.isAdmin() then
 			for _, material in ipairs(buyRecipe.materials) do
 				if not player.consumeItem({ name = material.item, count = material.count * buyAmount })then
@@ -148,15 +96,17 @@ function buy:onClick()
 		end
 		for i = 1, buyAmount do
 			player.giveItem({ name = buyRecipe.result, count = buyRecipe.count, parameters = buyRecipe.parameters })
-		end
-	else
+        end
+		dialogueBox.refresh( ".buy", dialogue.prev, sbq.dialogueTree)
+    else
+		dialogueBox.refresh( ".buyFail", dialogue.prev, sbq.dialogueTree)
 		pane.playSound("/sfx/interface/clickon_error.ogg")
 	end
 end
 
-function hasMaterials()
+function shop.hasMaterials()
 	for _, material in ipairs(buyRecipe.materials) do
-		if not ( (material.count * buyAmount) <= player.hasCountOfItem({ name = material.item}) or (material.count * buyAmount) <= player.currency(material.item)) then return false end
+		if not ( (material.count * buyAmount) <= player.hasCountOfItem(material, true) or (material.count * buyAmount) <= player.currency(material.item)) then return false end
 	end
 	return true
 end

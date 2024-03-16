@@ -1,3 +1,4 @@
+require("/scripts/any/SBQ_dialogue.lua")
 dialogueBox = {
 	text = "",
 	textPosition = 1,
@@ -6,27 +7,31 @@ dialogueBox = {
 }
 function init()
 	_ENV.actionButton:setVisible(sbq.actionButtons ~= nil)
-	for _, script in ipairs(sbq.dialogueStepScripts or {}) do
+	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
 	end
-	if sbq.entityPortrait then
-		_ENV.dialoguePortraitCanvas:setVisible(true)
-	else
-		_ENV.dialoguePortrait:setVisible(true)
-	end
-
 	dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree, sbq.dialogueTree)
 end
 
 function update()
 	local dt = script.updateDt()
 	sbq.checkRPCsFinished(dt)
-	sbq.checkTimers(dt)
+    sbq.checkTimers(dt)
+	sbq.loopedMessage("interacted",pane.sourceEntity,"setInteracted",{player.id()})
 end
 
 function _ENV.close:onClick()
 	pane.dismiss()
 end
+
+function _ENV.settings:onClick()
+	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "getEntitySettingsMenuData", player.id()), function(data)
+		player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  ("starbecue:entitySettings") }, pane.sourceEntity())
+	end, function ()
+		pane.playSound("/sfx/interface/clickon_error.ogg")
+	end)
+end
+
 function _ENV.dialogueCont:onClick()
 	if not dialogue.finished then
 		dialogueBox.refresh()
@@ -84,47 +89,61 @@ function dialogueBox.validateOption(option)
 	end }
 end
 
-function dialogueBox.refresh(path, _dialogueTree, _dialogueTreeTop)
-	dialogueTree = _dialogueTree or dialogue.prev
-	dialogueTreeTop = _dialogueTreeTop or sbq.dialogueTree
-
+function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	if path then
-		if not dialogueProcessor.getDialogue(path, sbq.entityId(), sbq.settings, dialogueTree, dialogueTreeTop) then return end
-	elseif dialogue.finished then return
+		if not dialogueProcessor.getDialogue(path, sbq.entityId(), sbq.settings, dialogueTree, dialogueTreeTop) then dialogue.finished = true return false end
+	elseif dialogue.finished then return true
 	else
 		dialogue.position = dialogue.position + 1
 		if dialogue.position >= #dialogue.result.dialogue then
 			dialogue.finished = true
 		end
 	end
-	local results = dialogueProcessor.processDialogueResults()
-	_ENV.nameLabel:setText(results.name)
-	_ENV.dialogueCont:setText(results.buttonText)
+    local results = dialogueProcessor.processDialogueResults()
+    sb.logInfo(sb.printJson(results))
+	sb.logInfo(sb.printJson(dialogue.result))
 
 	if results.imagePortrait then
 		_ENV.dialoguePortrait:setVisible(true)
 		_ENV.dialoguePortraitCanvas:setVisible(false)
-		_ENV.dialoguePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
+        _ENV.dialoguePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
+		_ENV.nameLabel.width = _ENV.dialoguePortrait.imgSize[1]
 	elseif results.entityPortrait then
 		_ENV.dialoguePortrait:setVisible(false)
-		_ENV.dialoguePortraitCanvas:setVisible(true)
+        _ENV.dialoguePortraitCanvas:setVisible(true)
+		_ENV.nameLabel.width = _ENV.dialoguePortraitCanvas.size[1]
 		local canvas = widget.bindCanvas( _ENV.dialoguePortraitCanvas.backingWidget )
-		canvas:drawDrawables(world.entityPortrait(results.source, results.entityPortrait), vec2.div(_ENV.dialoguePortraitCanvasvasWidget.size, 2))
-	end
+		canvas:drawDrawables(world.entityPortrait(results.source, results.entityPortrait), vec2.sub(vec2.div(_ENV.dialoguePortraitCanvas.size, 2), {0,6*4}), {4,4})
+    else
+		_ENV.dialoguePortrait:setVisible(false)
+        _ENV.dialoguePortraitCanvas:setVisible(false)
+		_ENV.nameLabel.width = nil
+    end
+    if results.name then
+        _ENV.nameLabel:setText(results.name)
+    else
+		_ENV.nameLabel:setText("")
+    end
+	_ENV.dialogueCont:setText(results.buttonText)
 
 	dialogueBox.text = sb.replaceTags(results.dialogue, results.tags)
 	dialogueBox.textSound = results.textSound
 	dialogueBox.textSpeed = results.textSpeed
 	dialogueBox.textPosition = 1
-	dialogueBox.scrollText()
+    dialogueBox.scrollText()
+	return true
 end
 function dialogueBox.scrollText()
 	if dialogueBox.textPosition > string.len(dialogueBox.text) then return end
 	while not dialogueBox.findNextRealCharacter() do
 	end
 	_ENV.dialogueLabel:setText(string.sub(dialogueBox.text, 1, dialogueBox.textPosition))
-	if dialogueBox.textSound then
-		pane.playSound(dialogueBox.textSound)
+    if dialogueBox.textSound then
+        local sound = dialogueBox.textSound
+		if type(sound == "table") then
+			sound = sound[math.random(#sound)]
+		end
+		pane.playSound(sound)
 	end
 
 	dialogueBox.textPosition = dialogueBox.textPosition + 1

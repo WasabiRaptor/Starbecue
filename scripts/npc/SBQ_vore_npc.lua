@@ -31,43 +31,42 @@ function init()
 		end
 	end
     old.init()
-	sbq.init()
-
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()
 		_ENV.updateUniqueId()
 	end
 
-	-- for _, script in ipairs(sbq.dialogueStepScripts or {}) do
-	-- 	require(script)
-	-- end
+	sbq.init()
+	sbq.dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree"))
+	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
+		require(script)
+	end
+	message.setHandler("sbqSetInteracted", function (_,_, id)
+		self.interacted = true
+		self.board:setEntity("interactionSource", id)
+    end)
 
-	-- message.setHandler("sbqSetInteracted", function (_,_, id)
-	-- 	self.interacted = true
-	-- 	self.board:setEntity("interactionSource", id)
-    -- end)
-
-	-- message.setHandler("sbqSwapFollowing", function(_, _)
-	-- 	if storage.behaviorFollowing then
-	-- 		if world.getProperty("ephemeral") then
-	-- 			recruitable.confirmUnfollowBehavior()
-	-- 			return { "None", {} }
-	-- 		else
-	-- 			return recruitable.generateUnfollowInteractAction()
-	-- 		end
-	-- 	else
-	-- 		return recruitable.generateFollowInteractAction()
-	-- 	end
-	-- end)
-	-- message.setHandler("recruit.confirmFollow", function(_,_)
-	-- 	recruitable.confirmFollow(true)
-	-- end)
-	-- message.setHandler("recruit.confirmUnfollow", function(_,_)
-	-- 	recruitable.confirmUnfollow(true)
-	-- end)
-	-- message.setHandler("recruit.confirmUnfollowBehavior", function(_,_)
-	-- 	recruitable.confirmUnfollowBehavior(true)
-    -- end)
+	message.setHandler("sbqSwapFollowing", function(_, _)
+		if storage.behaviorFollowing then
+			if world.getProperty("ephemeral") then
+				_ENV.recruitable.confirmUnfollowBehavior()
+				return { "None", {} }
+			else
+				return _ENV.recruitable.generateUnfollowInteractAction()
+			end
+		else
+			return _ENV.recruitable.generateFollowInteractAction()
+		end
+	end)
+	message.setHandler("recruit.confirmFollow", function(_,_)
+		_ENV.recruitable.confirmFollow(true)
+	end)
+	message.setHandler("recruit.confirmUnfollow", function(_,_)
+		_ENV.recruitable.confirmUnfollow(true)
+	end)
+	message.setHandler("recruit.confirmUnfollowBehavior", function(_,_)
+		_ENV.recruitable.confirmUnfollowBehavior(true)
+    end)
 end
 
 function update(dt)
@@ -80,21 +79,34 @@ function uninit()
 end
 
 function interact(args)
-	if npc.loungingIn() == args.sourceId then
-        sbq.say("-TODO Re-Implement Dialogue")
-		return
+	if _ENV.recruitable.isRecruitable() then
+		return _ENV.recruitable.generateRecruitInteractAction()
 	end
-	if true then -- TODO make this a check between whether dialogue is enabled on the NPC or not
+	_ENV.setInteracted(args)
+
+    if sbq.settings.interactDialogue then
+        local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+			dialogueTree = sbq.dialogueTree
+        })
+        if npc.loungingIn() == args.sourceId then
+            dialogueBoxData.dialogueTreeStart = ".predInteract"
+            -- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
+			-- 	entity.id(),
+            --     "The quick brown fox jumped over the lazy dog.",
+			-- }}}
+        elseif Occupants.entityId[tostring(args.sourceId)] then
+			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
+		end
+		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+    else
+        if npc.loungingIn() == args.sourceId then return end
+
 		local results = { Transformation:interact(args) }
 		if results[2] == "interactAction" then
 			return results[3]
 		end
 	end
 
-	-- if recruitable.isRecruitable() then
-	-- 	return recruitable.generateRecruitInteractAction()
-	-- end
-	-- setInteracted(args)
 
 
 	-- local dialogueBoxData = dialogueProcessor.getDialogueBoxData()
@@ -115,7 +127,6 @@ function interact(args)
 	-- 		if args.predData.infused then
 	-- 			dialogueBoxData.dialogueTreeStart = ".infused"
 	-- 		end
-	-- 		return {"ScriptPane", { data = dialogueBoxData, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }}
 	-- 	else
 	-- 		return
 	-- 	end

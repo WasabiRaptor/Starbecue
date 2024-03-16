@@ -6,6 +6,7 @@
 	"uniqueBy" : "path",
 	"scripts" : [ "shop.lua" ],
 	"children" : [
+		{"mode":"vertical"},
 		{ "type" : "layout", "id" : "shopLayout", "mode" : "horizontal", "expandMode" : [1, 1], "children" : [ { "type" : "panel", "id" : "shopPanel", "expandMode" : [1, 1], "style" : "flat", "children" : [ { "mode" : "horizontal" },
 			{ "type" : "tabField", "id" : "shopTabField", "layout" : "horizontal", "tabs" : [
 			]},
@@ -18,10 +19,9 @@
 							{ "type" : "label", "id" : "itemCategoryLabel", "text" : "" }
 						]
 					]}],
-					{ "type" : "layout", "id" : "itemContentsLayout", "mode" : "vertical", "expandMode" : [1,1], "children" : [
-						{ "type" : "layout", "expandMode" : [1,1]},
-						{ "type" : "image", "id" : "itemImage", "file" : "/empty_image.png"},
-						{ "type" : "layout", "expandMode" : [1,1]}
+					{ "type" : "layout", "id" : "itemContentsLayout", "mode" : "vertical", "expandMode" : [2,2], "children" : [
+						{"expandMode" : [2,2]},
+						{ "type" : "canvas", "id" : "itemCanvas" }
 					]},
 					[{ "type" : "panel", "id" : "itemBottomPanel", "expandMode" : [1,0], "style" : "convex", "children" : [
 						{ "type" : "label", "id" : "itemDescriptionLabel", "text" : " " }
