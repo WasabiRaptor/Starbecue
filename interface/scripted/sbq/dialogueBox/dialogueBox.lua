@@ -104,19 +104,19 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	sb.logInfo(sb.printJson(dialogue.result))
 
 	if results.imagePortrait then
-		_ENV.dialoguePortrait:setVisible(true)
-		_ENV.dialoguePortraitCanvas:setVisible(false)
-        _ENV.dialoguePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
-		_ENV.nameLabel.width = _ENV.dialoguePortrait.imgSize[1]
+		_ENV.imagePortrait:setVisible(true)
+		_ENV.entityPortraitPanel:setVisible(false)
+        _ENV.imagePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
+		_ENV.nameLabel.width = _ENV.imagePortrait.imgSize[1]
 	elseif results.entityPortrait then
-		_ENV.dialoguePortrait:setVisible(false)
-        _ENV.dialoguePortraitCanvas:setVisible(true)
-		_ENV.nameLabel.width = _ENV.dialoguePortraitCanvas.size[1]
-		local canvas = widget.bindCanvas( _ENV.dialoguePortraitCanvas.backingWidget )
-		canvas:drawDrawables(world.entityPortrait(results.source, results.entityPortrait), vec2.sub(vec2.div(_ENV.dialoguePortraitCanvas.size, 2), {0,6*4}), {4,4})
+		_ENV.imagePortrait:setVisible(false)
+        _ENV.entityPortraitPanel:setVisible(true)
+		_ENV.nameLabel.width = _ENV.entityPortraitPanel.size[1]
+		local canvas = widget.bindCanvas( _ENV.entityPortraitCanvas.backingWidget )
+		canvas:drawDrawables(world.entityPortrait(results.source, results.entityPortrait), vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), {0,6*4}), {4,4})
     else
-		_ENV.dialoguePortrait:setVisible(false)
-        _ENV.dialoguePortraitCanvas:setVisible(false)
+		_ENV.imagePortrait:setVisible(false)
+        _ENV.entityPortraitPanel:setVisible(false)
 		_ENV.nameLabel.width = nil
     end
     if results.name then
