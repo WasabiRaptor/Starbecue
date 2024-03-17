@@ -7,12 +7,14 @@ dialogueBox = {
 	textSpeed = 1,
 	textSound = nil,
 }
+local inital = true
 function init()
     _ENV.actionButton:setVisible(sbq.actionButtons ~= nil)
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
 	end
-	dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree, sbq.dialogueTree)
+    dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree, sbq.dialogueTree)
+	inital = false
 end
 
 function update()
@@ -141,8 +143,12 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	dialogueBox.text = sb.replaceTags(results.dialogue, results.tags)
 	dialogueBox.textSound = results.textSound
 	dialogueBox.textSpeed = results.textSpeed
-	dialogueBox.textPosition = 1
-    dialogueBox.scrollText()
+    dialogueBox.textPosition = 1
+    if inital then
+		sbq.timer(nil, 0.25, dialogueBox.scrollText)
+    else
+		dialogueBox.scrollText()
+	end
 	return true
 end
 function dialogueBox.scrollText()
