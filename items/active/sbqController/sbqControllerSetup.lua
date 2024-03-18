@@ -1,16 +1,16 @@
 require"/scripts/any/SBQ_util.lua"
-function sbq.getActionData(action, available, preferredDirectory)
+function sbq.getActionData(action, available, preferredDirectory, ignoreMissingIcon)
     local shortdescription = sbq.strings.unassignedAction
-    local description = sbq.strings.unassignedActionDesc
+    local description = sbq.strings.unassignedDesc
 	local icon = "/humanoid/any/sbqActionIcons/unassigned.png"
 
     if action then
-		icon = sbq.getActionIcon(action, preferredDirectory)
+		icon = sbq.getActionIcon(action, preferredDirectory, ignoreMissingIcon)
         shortdescription = sbq.strings[action] or (":"..action)
 		if available then
-			description = sbq.strings[action .. "ActionDesc"] or sbq.strings.genericActionDesc
+			description = sbq.strings[action .. "Desc"] or sbq.strings.genericDesc
         else
-			description = sbq.strings.unavailableActionDesc
+			description = sbq.strings.unavailableDesc
         end
 	end
 

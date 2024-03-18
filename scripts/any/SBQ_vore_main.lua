@@ -46,12 +46,12 @@ end
 function sbq.init()
 	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
-		Occupants.addOccupant(...)
+		return Occupants.addOccupant(...)
 	end)
-	message.setHandler("sbqTryAction", function(_, _, action, target, ...)
-		sbq.tryAction(action, target, ...)
+	message.setHandler("sbqTryAction", function(_, _, ...)
+		return sbq.tryAction(...)
 	end)
-	message.setHandler("getEntitySettingsMenuData", function ()
+	message.setHandler("sbqSettingsPageData", function ()
 		return sbq.getSettingsPageData()
 	end)
 	message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
@@ -66,7 +66,12 @@ function sbq.init()
 	message.setHandler("sbqImportSettings", function (_,_, ...)
 		return sbq.importSettings(...)
 	end)
-
+	message.setHandler("sbqActionList", function (_,_, ...)
+		return sbq.actionList(...)
+    end)
+	message.setHandler("sbqRequestAction", function (_,_, ...)
+		return sbq.requestAction(...)
+    end)
 
 	sbq.reloadVoreConfig(storage.lastVoreConfig)
 
@@ -175,14 +180,39 @@ function sbq.reloadVoreConfig(config)
     Transformation.active = true
 end
 
+function sbq.actionList(type, target)
+    local list = {}
+    local actions = sb.jsonMerge({}, sbq.voreConfig.actionList)
+	if target then
+        local occupant = Occupants.entityId[tostring(target)]
+        if occupant then
+            actions = sb.jsonMerge({}, occupant:getLocation().locationActions)
+            table.insert(actions, 1, { action = "letout", noDisplay = { predRadialMenuSelect = true } })
+		end
+	end
+	for _, action in ipairs(actions or {}) do
+        local available, reason = Transformation:actionAvailable(action.action, target, table.unpack(action.args or {}))
+		if (not sbq.config.dontDisplayAction[tostring(reason)]) and not (action.noDisplay or {})[type] then
+			table.insert(list, sb.jsonMerge(action, {available = available}))
+		end
+    end
+	sbq.logInfo(list, 2)
+	return list
+end
+
 function sbq.tryAction(action, target, ...)
-	if not Transformation.active then return {false} end
+	if not Transformation.active then return {false, "inactive"} end
 	return {Transformation:tryAction(action, target, ...)}
 end
 
 function sbq.actionAvailable(action, target, ...)
-	if not Transformation.active then return {false} end
+	if not Transformation.active then return {false, "inactive"} end
 	return {Transformation:actionAvailable(action, target, ...)}
+end
+
+function sbq.requestAction(action, target, consent, ...)
+	if not Transformation.active then return {false, "inactive"} end
+	return {Transformation:requestAction(action, target, consent, ...)}
 end
 
 function sbq.getOccupantData(entityId)
@@ -329,6 +359,10 @@ function _Transformation:actionAvailable(action, target, ...)
 	return self.state:actionAvailable(action, target, ...)
 end
 
+function _Transformation:requestAction(action, target, consent, ...)
+	return self.state:requestAction(action, target, consent, ...)
+end
+
 function _Transformation:doAnimations(...)
 	return self.state:doAnimations(...)
 end
@@ -443,6 +477,16 @@ function _State:tryAction(name, target, ...)
 		return result1, result2
 	end
 	return result1
+end
+
+function _State:requestAction(name, target, consent, ...)
+    -- TODO do stuff with checking consent here later
+	if not consent then return end
+	if world.entityType(entity.id()) == "player" or not sbq.settings.interactDialogue then
+		Transformation:tryAction(name, target, ...)
+    end
+	-- TODO do stuff with dialogue here later
+	Transformation:tryAction(name, target, ...)
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
@@ -903,6 +947,12 @@ end
 
 -- Occupant Handling
 function Occupants.addOccupant(entityId, size, location, subLocation)
+	-- check if we already have them
+    local occupant = Occupants.entityId[tostring(entityId)]
+    if occupant then
+		occupant:refreshLocation(location, subLocation)
+		return true
+	end
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
@@ -1289,7 +1339,10 @@ function _Occupant:controlPressed(control, time)
 		if self:controlHeld("Left") and self:controlHeld("Right") then
 			Transformation:emergencyEscape(self)
 			return
-		end
+        end
+    elseif control == "Interact" then
+		self:sendEntityMessage("sbqInteractWith", entity.id())
+		return
 	end
 	self:attemptStruggle(control)
 end

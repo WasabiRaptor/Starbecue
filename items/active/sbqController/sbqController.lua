@@ -70,10 +70,8 @@ function update(dt, fireMode, shiftHeld, controls)
 end
 
 function uninit()
-	if storage.action == "grab" then -- one unique case
-		player.setScriptContext("starbecue")
-		return player.callScript("sbq.tryAction", "grabRelease")
-	end
+	player.setScriptContext("starbecue")
+	return player.callScript("sbq.tryAction", "grabRelease")
 end
 
 function sbq.setAction(action)
@@ -82,7 +80,7 @@ function sbq.setAction(action)
 	local icon, shortdescription, description = sbq.getActionData(action, (player.callScript("sbq.actionAvailable", action) or {})[1], storage.iconDirectory)
 	activeItem.setInventoryIcon(icon)
 	activeItem.setFriendlyName(shortdescription)
-	activeItem.setDescription(description.."\n"..sbq.strings.controllerActionDescAppend)
+	activeItem.setDescription(description.."\n"..sbq.strings.controllerDescAppend)
 end
 
 function sbq.clickAction()
@@ -217,16 +215,15 @@ setmetatable(AssignMenu, _RadialMenu)
 function AssignMenu:init()
 	local options = {}
 	player.setScriptContext("starbecue")
-    for _, action in ipairs(player.callScript("sbq.actionList") or sbq.gui.actionOrder) do
-		if (player.callScript("sbq.actionAvailable", action) or {})[1] then
-			local icon, shortdescription, description = sbq.getActionData(action, true, storage.iconDirectory)
-			table.insert(options, {
-				args = {"controllerAssign", action},
-				name = shortdescription,
-                icon = icon,
-				description = description
-			})
-		end
+    for _, action in ipairs(player.callScript("sbq.actionList", "assign") or {}) do
+		local icon, shortdescription, description = sbq.getActionData(action.action, true, storage.iconDirectory)
+		table.insert(options, {
+			args = {"controllerAssign", action.action},
+			name = shortdescription,
+            icon = icon,
+			locked = not action.available,
+			description = description
+		})
 	end
     self:openRadialMenu({ options = options, cancel = {
 		args = {"open","TopMenu"}
@@ -256,12 +253,12 @@ local SelectedOccupantMenu = {}
 RadialMenu.SelectedOccupantMenu = SelectedOccupantMenu
 setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
-	local occupant, location = table.unpack(player.callScript("sbq.getOccupantData", entityId) or {})
 	local options = {
 		{
 			args = {"letout", entityId, storage.action},
             name = sbq.strings.letout,
             description = sbq.strings.controllerLetOutSelectedDesc,
+			locked = not player.callScript("sbq.actionAvailable", "letout", entityId),
 			script = "sbq.tryAction"
         }
     }
@@ -273,19 +270,16 @@ function SelectedOccupantMenu:init(entityId)
 		})
 	end
 	player.setScriptContext("starbecue")
-	if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end
-	for _, action in ipairs(location.locationActions or {}) do
-        local available, reason = table.unpack(player.callScript("sbq.actionAvailable", action.action, entityId))
-		if not sbq.gui.dontDisplayAction[tostring(reason)] then
-			table.insert(options, {
-				name = sbq.getString(action.name or (":"..action.action)),
-				args = { action.action, entityId, table.unpack(action.args or {}) },
-				locked = not available,
-				icon = action.icon,
-				description = sbq.getString(action.description or (":"..action.action.."Desc")),
-				script = "sbq.tryAction"
-			})
-		end
+    for _, action in ipairs(player.callScript("sbq.actionList", "predRadialMenuSelect", entityId) or {}) do
+		local icon, shortdescription, description = sbq.getActionData(action, action.available, storage.iconDirectory, true)
+		table.insert(options, {
+			name = shortdescription,
+			args = { action.action, entityId, table.unpack(action.args or {}) },
+			locked = not action.available,
+			icon = icon,
+			description = description,
+			script = "sbq.tryAction"
+		})
     end
 
     self:openRadialMenu({ options = options, cancel = {

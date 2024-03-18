@@ -9,7 +9,14 @@ dialogueBox = {
 }
 local inital = true
 function init()
-    _ENV.actionButton:setVisible(sbq.actionButtons ~= nil)
+    sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()),function(actions)
+		if actions and actions[1] then
+			_ENV.actionButton:setVisible(true)
+		end
+    end)
+	message.setHandler("sbqDialogueActionButtonVisible", function (_,_, visible)
+		_ENV.actionButton:setVisible(visible)
+	end)
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
 	end
@@ -42,10 +49,39 @@ function _ENV.close:onClick()
 end
 
 function _ENV.settings:onClick()
-	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "getEntitySettingsMenuData", player.id()), function(data)
+	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqSettingsPageData", player.id()), function(data)
 		player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  ("starbecue:entitySettings") }, pane.sourceEntity())
 	end, function ()
 		pane.playSound("/sfx/interface/clickon_error.ogg")
+	end)
+end
+
+function _ENV.actionButton:onClick()
+	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()), function (actions)
+        if actions and actions[1] then
+			local actionList = {}
+            for _, action in ipairs(actions) do
+				if action.available then
+					local requestAction = function ()
+						world.sendEntityMessage(pane.sourceEntity(), "sbqRequestAction", action.action, player.id(), true, table.unpack(action.args or {}) )
+					end
+					table.insert(actionList, {
+						_ENV.metagui.formatText(action.name or (":" .. action.action)),
+						requestAction,
+						_ENV.metagui.formatText(action.requestDescription or (":"..action.action.."RequestDesc"))
+                    })
+				else
+                    table.insert(actionList, {
+                        "^#555;^set;"..(_ENV.metagui.formatText(action.name or (":" .. action.action)) or ""),
+                        function() end,
+						_ENV.metagui.formatText(action.requestDescription or (":"..action.action.."RequestDesc"))
+					})
+				end
+			end
+			_ENV.metagui.dropDownMenu(actionList, 2)
+		else
+			_ENV.actionButton:setVisible(false)
+		end
 	end)
 end
 
@@ -97,11 +133,12 @@ function dialogueBox.validateOption(option)
 		elseif res == "unavailable" then
 			unavailable = true
 		end
-	end
+    end
+	local name = dialogueProcessor.getRedirectedDialogue(option[1], true, sbq.settings, dialogue.prev, dialogue.prevTop)
 	if unavailable then
-		return {"^#555;"..option[1], function () sbq.playErrorSound() end }
+		return {"^#555;^set;"..name, function () sbq.playErrorSound() end }
 	end
-	return {option[1], function ()
+	return {name, function ()
 		dialogueBox.refresh(option[2])
 	end }
 end

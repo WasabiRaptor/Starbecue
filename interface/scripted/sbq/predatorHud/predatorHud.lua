@@ -54,31 +54,29 @@ function sbq.refreshOccupants()
         sbq.refreshPortrait(occupant.entityId)
 		local ActionButton = _ENV[occupant.entityId.."ActionButton"]
         function ActionButton:onClick()
-            local actions = {
-				{ sbq.strings.letout, function ()
-					player.setScriptContext("starbecue")
-					player.callScript("sbq.tryAction", "letout", occupant.entityId)
-				end}
-			}
+            local actions = {}
 			if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
                 table.insert(actions, { sbq.strings.interact, function()
 					player.interactWithEntity(occupant.entityId)
 				end})
             end
 			player.setScriptContext("starbecue")
-			local occupant, location = table.unpack(player.callScript("sbq.getOccupantData", occupant.entityId) or {})
-			if (not occupant) or (not location) then animator.playSound("error") RadialMenu:open("OccupantsMenu") return end
-			for _, action in ipairs(location.locationActions or {}) do
-				local available, reason = table.unpack(player.callScript("sbq.actionAvailable", action.action, occupant.entityId))
-				if not sbq.gui.dontDisplayAction[tostring(reason)] then
-					if available then
-                        table.insert(actions, { sbq.getString(action.name or (":" .. action.action)), function()
+			for _, action in ipairs(player.callScript("sbq.actionList", "predHudSelect", occupant.entityId) or {}) do
+				if action.available then
+                    table.insert(actions, {
+						_ENV.metagui.formatText(action.name or (":"..action.action)),
+						function()
 							player.setScriptContext("starbecue")
 							player.callScript("sbq.tryAction", action.action, occupant.entityId, table.unpack(action.args or {}))
-                        end, })
-                    else
-						table.insert(actions, {"^#555;"..sbq.getString(action.name or (":"..action.action)), function () end})
-					end
+                        end,
+						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
+					})
+				else
+					table.insert(actions, {
+                        "^#555;^set;" .. sbq.getString(action.name or (":" .. action.action)),
+                        function() end,
+						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
+					})
 				end
             end
 			_ENV.metagui.dropDownMenu(actions,2)

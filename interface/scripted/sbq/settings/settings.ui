@@ -5,6 +5,8 @@
 	"icon" : "/humanoid/any/sbqActionIcons/oralVore.png",
 	"uniqueBy" : "path",
 	"scripts" : [ "settings.lua" ],
+	"sourceRadius": -1,
+	"dismissPrev":false,
 	"children" : [
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
 			{ "type" : "tab", "id" : "mainSettings", "title" : ":mainSettings", "visible" : true, "color" : "ff00ff", "contents" : [
@@ -21,6 +23,5 @@
 				]}
 			]}
 		], "bottomBar" : []}
-	],
-	"sourceRadius": -1
+	]
 }

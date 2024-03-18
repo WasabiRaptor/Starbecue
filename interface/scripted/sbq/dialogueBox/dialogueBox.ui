@@ -4,6 +4,9 @@
 	"uniqueBy" : "path",
 	"anchor" : ["centerBottom", [0,-64]],
 	"scripts" : [ "dialogueBox.lua" ],
+	"sourceRadius": 10,
+	"dismissPrev":false,
+	"paneLayer" : "Hud",
 	"children" : [
 		{ "type" : "layout", "mode" : "vertical", "expandMode" : [1, 1], "children" : [
 			[
@@ -25,11 +28,10 @@
 					{ "type" : "label", "id" : "nameLabel", "text": "", "align" : "center", "expandMode":[0,0] }
 				],
 				{ "type" : "button", "id" : "dialogueCont", "expandMode" : [1, 0], "caption" : "..." },
-				{ "type" : "button", "id" : "actionButton", "expandMode" : [0, 0], "caption" : ":actions" },
+				{ "type" : "button", "id" : "actionButton", "expandMode" : [0, 0], "caption" : ":actions", "visible":false },
 				{ "type" : "iconButton", "id" : "settings", "image" : "/interface/scripted/sbq/predatorHud/settings.png", "hoverImage" : "/interface/scripted/sbq/predatorHud/settingshover.png", "pressImage" : "/interface/scripted/sbq/predatorHud/settingspress.png" },
 				{ "type" : "iconButton", "id" : "close", "image" : "/interface/x.png", "hoverImage" : "/interface/xhover.png", "pressImage" : "/interface/xpress.png", "visible":false }
 			]
 		]}
-	],
-	"sourceRadius": 10
+	]
 }

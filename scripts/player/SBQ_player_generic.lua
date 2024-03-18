@@ -41,6 +41,9 @@ function init()
 
 	message.setHandler("sbqGuiMessage",function (_,_,message,...)
 		player.interact("Message", {messageType = message, messageArgs = {...}})
+    end)
+	message.setHandler("sbqInteractWith", function (_,_,entityId)
+		player.interactWithEntity(entityId)
 	end)
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)

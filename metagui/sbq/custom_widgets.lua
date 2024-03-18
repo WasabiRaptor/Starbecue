@@ -736,7 +736,7 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 			colWidths[col] = math.max(colWidths[col] or 0, size[1])
 
 			table.insert(cfg.children[insertRow + insertOffset], {
-				type = "menuItem", id = itemId, size = size, children = {
+				type = "menuItem", id = itemId, size = size, toolTip = mi[3], children = {
 					mi[1]
 				}
 			})

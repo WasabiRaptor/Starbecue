@@ -6,7 +6,7 @@ require("/scripts/any/SBQ_util.lua")
 
 function equipmentSlotUpdated(slot, itemDescriptor)
     old.equipmentSlotUpdated(slot, itemDescriptor)
-    slotFunc = sbq[slot.."Slot"] or function() end
+    local slotFunc = equipped[slot.."Slot"] or function(_) end
 	slotFunc(itemDescriptor)
 end
 
@@ -14,10 +14,12 @@ function initAnimator()
 	old.initAnimator()
     --sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
 	sbq.refreshRemapTags()
-	sbq.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
-	sbq.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
-	sbq.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
-	sbq.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
+	equipped.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
+	equipped.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
+	equipped.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
+    equipped.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
+	-- equipped.primary(humanoid.getItemSlot("primary"))
+	-- equipped.alt(humanoid.getItemSlot("alt"))
 end
 
 function sbq.refreshRemapTags()
@@ -41,49 +43,50 @@ function sbq.refreshRemapTags()
 	end
 end
 
-function sbq.chestSlot(itemDescriptor)
+equipped = {}
+function equipped.chestSlot(itemDescriptor)
 	if not humanoid.getItemSlot("chestCosmetic") then
-		sbq.chestCosmeticSlot(itemDescriptor)
+		equipped.chestCosmeticSlot(itemDescriptor)
 	end
 end
-function sbq.legsSlot(itemDescriptor)
+function equipped.legsSlot(itemDescriptor)
 	if not humanoid.getItemSlot("legsCosmetic") then
-		sbq.legsCosmeticSlot(itemDescriptor)
+		equipped.legsCosmeticSlot(itemDescriptor)
 	end
 end
-function sbq.headSlot(itemDescriptor)
+function equipped.headSlot(itemDescriptor)
 	if not humanoid.getItemSlot("headCosmetic") then
-		sbq.headCosmeticSlot(itemDescriptor)
+		equipped.headCosmeticSlot(itemDescriptor)
 	end
 end
-function sbq.backSlot(itemDescriptor)
+function equipped.backSlot(itemDescriptor)
 	if not humanoid.getItemSlot("backCosmetic") then
-		sbq.backCosmeticSlot(itemDescriptor)
+		equipped.backCosmeticSlot(itemDescriptor)
 	end
 end
 
-function sbq.chestCosmeticSlot(itemDescriptor)
+function equipped.chestCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("chest") end
     if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
 end
-function sbq.legsCosmeticSlot(itemDescriptor)
+function equipped.legsCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("legs") end
     if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
 end
-function sbq.headCosmeticSlot(itemDescriptor)
+function equipped.headCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("head") end
     if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
 end
-function sbq.backCosmeticSlot(itemDescriptor)
+function equipped.backCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("back") end
     if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
@@ -91,6 +94,10 @@ function sbq.backCosmeticSlot(itemDescriptor)
 	end
 end
 
+function equipped.primary(itemDescriptor)
+end
+function equipped.alt(itemDescriptor)
+end
 
 
 function sbq.remapColor(remaps, fromMap, toMap)

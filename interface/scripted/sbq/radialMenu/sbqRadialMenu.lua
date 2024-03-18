@@ -181,6 +181,12 @@ function drawShadowText(text, position, color, wrapWidth, greyed)
 		horizontalAnchor = "mid",
 		verticalAnchor = "mid",
 		wrapWidth = wrapWidth
+    }, 8, { 0, 0, 0 })
+	canvas:drawText(shadowText, {
+		position = {position[1], position[2] - 1},
+		horizontalAnchor = "mid",
+		verticalAnchor = "mid",
+		wrapWidth = wrapWidth
 	}, 8, { 0, 0, 0 })
 	canvas:drawText(shadowText, {
 		position = {position[1] + 1, position[2] - 1},

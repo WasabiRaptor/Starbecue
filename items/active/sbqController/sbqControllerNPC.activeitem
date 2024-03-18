@@ -1,7 +1,7 @@
 {
-	"itemName" : "sbqController",
-	"shortdescription" : "SBQ Controller",
-	"description" : "If you see this text, it's a bug.",
+	"itemName" : "sbqControllerNPC",
+	"shortdescription" : "Vore Controller",
+	"description" : "You shouldn't have this",
 	"price" : 1,
 	"maxStack" : 1,
 	"rarity" : "common",
@@ -13,8 +13,7 @@
 	"animation" : "sbqController.animation",
 
 	"retainScriptStorageInItem": true,
-	"builder" : "/items/active/sbqController/sbqControllerBuilder.lua",
 	"scripts" : [
-		"sbqController.lua"
+		"sbqControllerNPC.lua"
 	]
 }

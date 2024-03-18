@@ -250,7 +250,7 @@ function sbq.refreshDeedPage()
 		function settings:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
 			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end
-			sbq.addRPC(world.sendEntityMessage(id, "getEntitySettingsMenuData", player.id()), function(data)
+			sbq.addRPC(world.sendEntityMessage(id, "sbqSettingsPageData", player.id()), function(data)
 				player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  ("starbecue:entitySettings") }, id)
 			end, function ()
 				pane.playSound("/sfx/interface/clickon_error.ogg")

@@ -220,7 +220,7 @@ function sbq.replaceConfigTags(config, tags)
 	return newConfig
 end
 
-function sbq.getActionIcon(action, preferDirectories)
+function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)
 	local directory = "/humanoid/any/sbqActionIcons/"
 	if type(preferDirectories) ~= "table" then
 		preferDirectories = {preferDirectories}
@@ -232,8 +232,10 @@ function sbq.getActionIcon(action, preferDirectories)
 	end
 	if root.assetExists(action..".png", directory) then
 		return directory .. action .. ".png"
+    end
+	if not ignoreMissingIcon then
+		return directory .. "unassigned.png"
 	end
-	return directory .. "unassigned.png"
 end
 
 function sbq.globalToLocal(pos, offset)

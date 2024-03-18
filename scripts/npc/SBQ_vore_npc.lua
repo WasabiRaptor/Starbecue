@@ -88,10 +88,11 @@ function interact(args)
 
     if sbq.settings.interactDialogue then
         local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
-			dialogueTree = sbq.dialogueTree
+            dialogueTree = sbq.dialogueTree
         })
         if npc.loungingIn() == args.sourceId then
             dialogueBoxData.dialogueTreeStart = ".predInteract"
+			dialogueBoxData.noActions = true
             -- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
 			-- 	entity.id(),
             --     "The quick brown fox jumped over the lazy dog.",
@@ -107,6 +108,15 @@ function interact(args)
 		if results[2] == "interactAction" then
 			return results[3]
 		end
+	end
+end
+
+local _equipped_primary = equipped.primary
+function equipped.primary(itemDescriptor)
+	if not itemDescriptor then
+        npc.setItemSlot("primary", "sbqControllerNPC")
+    else
+		return _equipped_primary(itemDescriptor)
 	end
 end
 
