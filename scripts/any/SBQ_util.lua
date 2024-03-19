@@ -72,7 +72,12 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.refreshUpgrades()
 	sbq.voreConfig = sbq.voreConfig or {}
 	storage.sbqSettings = storage.sbqSettings or {}
-	sbq.settings = sb.jsonMerge(sbq.settings or {}, sbq.voreConfig.overrideSettings or {}, (sbq.entityConfig or {}).overrideSettings or {})
+	sbq.settings = sb.jsonMerge(
+		sbq.settings or {},
+		sbq.config.entityTypeOverrideSettings[entityType] or {},
+		sbq.voreConfig.overrideSettings or {},
+		(sbq.entityConfig or {}).overrideSettings or {}
+	)
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(
 		sbq.config.defaultSettings,
@@ -172,9 +177,9 @@ function sbq.refreshOverrides()
 			sbq.overrideSettings[setting] = true
 		end
 	end
-    for k, v in pairs(sbq.config.groupedSettings) do
+	for k, v in pairs(sbq.config.groupedSettings) do
 		sbq.overrideSettings[k] = {}
-        for name, settings in pairs(sbq.settings[k]) do
+		for name, settings in pairs(sbq.settings[k]) do
 			sbq.overrideSettings[k][name] = {}
 			for setting, _ in pairs(settings) do
 				sbq.overrideSettings[k][name][setting] = true
@@ -234,7 +239,7 @@ function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)
 	end
 	if root.assetExists(action..".png", directory) then
 		return directory .. action .. ".png"
-    end
+	end
 	if not ignoreMissingIcon then
 		return directory .. "unassigned.png"
 	end
