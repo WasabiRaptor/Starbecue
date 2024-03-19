@@ -435,10 +435,8 @@ function spawn(tenant, i)
 end
 
 function die()
-	if not storage.occupier.tenants then return end
-
 	-- Spawn NPC essence for all tenants
-	for _, tenant in pairs(storage.occupier.tenants) do
+	for _, tenant in pairs(((storage or {}).occupier or {}).tenants or {}) do
 		local item = sbq.generateNPCItemCard(tenant)
 		if item then
 			world.spawnItem(item, object.position())
