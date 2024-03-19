@@ -56,22 +56,22 @@ function sbq.init()
 	end)
 	message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
 		return sbq.setGroupedSetting(...)
-    end)
+	end)
 	message.setHandler("sbqSetSetting", function (_,_, ...)
 		return sbq.setSetting(...)
-    end)
+	end)
 	message.setHandler("sbqSetUpgrade", function (_,_, ...)
 		return sbq.getUpgrade(...)
-    end)
+	end)
 	message.setHandler("sbqImportSettings", function (_,_, ...)
 		return sbq.importSettings(...)
 	end)
 	message.setHandler("sbqActionList", function (_,_, ...)
 		return sbq.actionList(...)
-    end)
+	end)
 	message.setHandler("sbqRequestAction", function (_,_, ...)
 		return sbq.requestAction(...)
-    end)
+	end)
 
 	sbq.reloadVoreConfig(storage.lastVoreConfig)
 
@@ -84,7 +84,7 @@ function sbq.update(dt)
 	if Transformation.active then
 		Occupants.update(dt)
 		Transformation:update(dt)
-        Transformation.state:update(dt)
+		Transformation.state:update(dt)
 	end
 	sbq.passiveStatChanges(dt)
 end
@@ -118,7 +118,7 @@ function sbq.size()
 end
 
 function sbq.reloadVoreConfig(config)
-    sbq.clearStatModifiers("occupantModifiers")
+	sbq.clearStatModifiers("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true
 	-- if reloading while another transformation is already active, uninitialize it first
 	if Transformation.active then
@@ -173,29 +173,29 @@ function sbq.reloadVoreConfig(config)
 		Transformation.stateName = storage.lastState
 	end
 	-- put settings meant to be public and accessible by other entities in a status property
-    sbq.refreshPublicSettings()
+	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 	Transformation:init()
 	Transformation.state:init()
-    Transformation.active = true
+	Transformation.active = true
 end
 
 function sbq.actionList(type, target)
-    local list = {}
-    local actions = sb.jsonMerge({}, sbq.voreConfig.actionList)
+	local list = {}
+	local actions = sb.jsonMerge({}, sbq.voreConfig.actionList)
 	if target then
-        local occupant = Occupants.entityId[tostring(target)]
-        if occupant then
-            actions = sb.jsonMerge({}, occupant:getLocation().locationActions)
-            table.insert(actions, 1, { action = "letout", noDisplay = { predRadialMenuSelect = true } })
+		local occupant = Occupants.entityId[tostring(target)]
+		if occupant then
+			actions = sb.jsonMerge({}, occupant:getLocation().locationActions)
+			table.insert(actions, 1, { action = "letout", noDisplay = { predRadialMenuSelect = true } })
 		end
 	end
 	for _, action in ipairs(actions or {}) do
-        local available, reason = Transformation:actionAvailable(action.action, target, table.unpack(action.args or {}))
+		local available, reason = Transformation:actionAvailable(action.action, target, table.unpack(action.args or {}))
 		if (not sbq.config.dontDisplayAction[tostring(reason)]) and not (action.noDisplay or {})[type] then
 			table.insert(list, sb.jsonMerge(action, {available = available}))
 		end
-    end
+	end
 	sbq.logInfo(list, 2)
 	return list
 end
@@ -216,22 +216,22 @@ function sbq.requestAction(action, target, consent, ...)
 end
 
 function sbq.getOccupantData(entityId)
-    local occupant = Occupants.entityId[tostring(entityId)]
-    if not occupant then return false end
+	local occupant = Occupants.entityId[tostring(entityId)]
+	if not occupant then return false end
 	location = occupant:getLocation()
-    return {
-        occupant,
+	return {
+		occupant,
 		location:outputData(entityId)
 	}
 end
 
 function sbq.getSettingsPageData()
 	local settingsPageData = {
-        storageSettings = storage.sbqSettings or {},
+		storageSettings = storage.sbqSettings or {},
 		storageUpgrades = storage.sbqUpgrades or {},
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
-        locations = Transformation.locations or {},
+		locations = Transformation.locations or {},
 		currentScale = sbq.scale()
 	}
 	return settingsPageData
@@ -245,7 +245,7 @@ function sbq.setSetting(k, v)
 	if sbq.config.publicSettings[k] then
 		sbq.publicSettings[k] = sbq.settings[k]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-    end
+	end
 	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
 			sbq[script](k,v)
@@ -254,16 +254,16 @@ function sbq.setSetting(k, v)
 end
 
 function sbq.getUpgrade(upgradeName, tier, bonus)
-    storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
-    storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
+	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
+	storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
 	sbq.refreshUpgrades(true)
 end
 
 function sbq.setGroupedSetting(group, name, k, v)
 	local old = sbq.settings[group][name][k]
 	storage.sbqSettings[group][name][k] = v
-    if old == sbq.settings[group][name][k] then return end
-    if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
+	if old == sbq.settings[group][name][k] then return end
+	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
 	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
 			sbq[script](k,v, group, name)
@@ -277,10 +277,10 @@ function sbq.setGroupedSetting(group, name, k, v)
 end
 
 function sbq.importSettings(newSettings)
-    storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
-    sbq.setupSettingMetatables(entity.entityType())
+	storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
+	sbq.setupSettingMetatables(entity.entityType())
 	sbq.refreshPublicSettings()
-    sbq.refreshSettings()
+	sbq.refreshSettings()
 	for k, location in pairs(Transformation.locations) do
 		location.occupancy.settingsDirty = true
 	end
@@ -288,7 +288,7 @@ end
 
 sbq.groupedSettingChanged = {}
 function sbq.groupedSettingChanged.locations(name,k,v)
-    local location = Transformation:getLocation(name)
+	local location = Transformation:getLocation(name)
 	if location then
 		location.occupancy.settingsDirty = true
 	end
@@ -480,11 +480,11 @@ function _State:tryAction(name, target, ...)
 end
 
 function _State:requestAction(name, target, consent, ...)
-    -- TODO do stuff with checking consent here later
+	-- TODO do stuff with checking consent here later
 	if not consent then return end
 	if world.entityType(entity.id()) == "player" or not sbq.settings.interactDialogue then
 		Transformation:tryAction(name, target, ...)
-    end
+	end
 	-- TODO do stuff with dialogue here later
 	Transformation:tryAction(name, target, ...)
 end
@@ -516,7 +516,7 @@ function _State:actionAvailable(name, target, ...)
 	if target and action.targetSettings then
 		if not world.entityExists(target) then return false, "targetMissing" end
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
-        if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch" end
+		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch" end
 		if not action.ignoreTargetOccupants then
 			local targetOccupants = world.entitiesLounging(target)
 			for _, occupant in ipairs(targetOccupants or {}) do
@@ -819,8 +819,8 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
 			if transitionAnims then
 				Transformation:doAnimations(transitionAnims)
-            end
-            local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
+			end
+			local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
 			if idleAnims then
 				Transformation:doAnimations(idleAnims)
 			end
@@ -956,8 +956,8 @@ end
 -- Occupant Handling
 function Occupants.addOccupant(entityId, size, location, subLocation)
 	-- check if we already have them
-    local occupant = Occupants.entityId[tostring(entityId)]
-    if occupant then
+	local occupant = Occupants.entityId[tostring(entityId)]
+	if occupant then
 		occupant:refreshLocation(location, subLocation)
 		return true
 	end
@@ -1044,7 +1044,7 @@ function _Occupant:remove()
 		if occupant.entityId == self.entityId then
 			Occupants.entityId[k] = nil
 		end
-    end
+	end
 	Occupants.refreshOccupantModifiers = true
 	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
@@ -1060,11 +1060,11 @@ function Occupants.update(dt)
 			subLocation:updateOccupancy(dt)
 		end
 		location:updateOccupancy(dt, location.subLocationBehavior)
-    end
+	end
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:update(dt)
 	end
-    for name, _ in pairs(Transformation.locations) do
+	for name, _ in pairs(Transformation.locations) do
 		local location = Transformation:getLocation(name)
 		for k, _ in pairs(location.subLocations or {}) do
 			local subLocation = Transformation:getLocation(name, k)
@@ -1074,12 +1074,12 @@ function Occupants.update(dt)
 	end
 	Occupants.lastScale = sbq.scale()
 
-    if Occupants.refreshOccupantModifiers then
-        Occupants.refreshOccupantModifiers = false
+	if Occupants.refreshOccupantModifiers then
+		Occupants.refreshOccupantModifiers = false
 		local modifiers = {}
-        for _, occupant in ipairs(Occupants.list) do
+		for _, occupant in ipairs(Occupants.list) do
 			util.appendLists(modifiers, occupant.predModifiers or {})
-        end
+		end
 		sbq.setStatModifiers("occupantModifiers", modifiers)
 	end
 end
@@ -1165,12 +1165,12 @@ function _Occupant:refreshLocation(name, subLocation)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
-        { stat = "sbqGetDigestDrops", amount = location.settings.getDigestDrops and 1 or 0 },
-        { stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
+		{ stat = "sbqGetDigestDrops", amount = location.settings.getDigestDrops and 1 or 0 },
+		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
 
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
-    util.appendLists(persistentStatusEffects, location.passiveEffects or {})
+	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 	if not (self.flags.digested or self.flags.infused) then
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.toggleEffects or {}) do
@@ -1179,18 +1179,18 @@ function _Occupant:refreshLocation(name, subLocation)
 			end
 		end
 	end
-    local predModifiers = {}
+	local predModifiers = {}
 	local preyModifiers = {}
 
 	for _, effect in ipairs(persistentStatusEffects) do
 		if type(effect) == "string" then
-            local effectConfig = root.effectConfig(effect).effectConfig or {}
+			local effectConfig = root.effectConfig(effect).effectConfig or {}
 			if effectConfig.predModifiers then
 				util.appendLists(predModifiers, effectConfig.predModifiers)
-            end
+			end
 			if effectConfig.preyModifiers then
 				util.appendLists(preyModifiers, effectConfig.preyModifiers)
-            end
+			end
 			if effectConfig.predStatModifiers then
 				util.appendLists(predModifiers, sbq.getModifiers(effectConfig.predStatModifiers, sbq.stat(location.powerMultiplier or "powerMultiplier")))
 			end
@@ -1198,11 +1198,11 @@ function _Occupant:refreshLocation(name, subLocation)
 				util.appendLists(preyModifiers, sbq.getModifiers(effectConfig.preyStatModifiers, sbq.stat(location.powerMultiplier or "powerMultiplier")))
 			end
 		end
-    end
+	end
 	util.appendLists(persistentStatusEffects, preyModifiers)
-    self:setLoungeStatusEffects(persistentStatusEffects)
+	self:setLoungeStatusEffects(persistentStatusEffects)
 	self.predModifiers = predModifiers
-    Occupants.refreshOccupantModifiers = true
+	Occupants.refreshOccupantModifiers = true
 
 	self:setItemBlacklist(location.itemBlacklist or sbq.voreConfig.prey.itemBlacklist or sbq.config.prey.itemBlacklist)
 	self:setItemWhitelist(location.itemWhitelist or sbq.voreConfig.prey.itemWhitelist or sbq.config.prey.itemWhitelist)
@@ -1215,25 +1215,25 @@ function _Occupant:refreshLocation(name, subLocation)
 	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
 		progressBar = self.progressBar,
 		time = self.time,
-    })
-    world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+	})
+	world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
 end
 
 function sbq.getModifiers(modifiers, power)
 	local output = {}
 	for k, v in pairs(modifiers) do
-        local modifier = { stat = k }
+		local modifier = { stat = k }
 		if v.op == "div" then
-            modifier[v.type] = 1 / math.max(power * (v.base or 1), 1)
+			modifier[v.type] = 1 / math.max(power * (v.base or 1), 1)
 		elseif v.op == "sub" then
-            modifier[v.type] = 1 - (power * (v.base or 1))
-        elseif v.op == "mul" then
-            modifier[v.type] = math.max(power * (v.base or 1), 1)
+			modifier[v.type] = 1 - (power * (v.base or 1))
+		elseif v.op == "mul" then
+			modifier[v.type] = math.max(power * (v.base or 1), 1)
 		elseif v.op == "add" then
 			modifier[v.type] = (power * (v.base or 1))
-        end
+		end
 		table.insert(output, modifier)
-    end
+	end
 	return output
 end
 
@@ -1347,8 +1347,8 @@ function _Occupant:controlPressed(control, time)
 		if self:controlHeld("Left") and self:controlHeld("Right") then
 			Transformation:emergencyEscape(self)
 			return
-        end
-    elseif control == "Interact" then
+		end
+	elseif control == "Interact" then
 		self:sendEntityMessage("sbqInteractWith", entity.id())
 		return
 	end
