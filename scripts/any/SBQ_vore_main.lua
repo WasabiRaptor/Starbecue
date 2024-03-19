@@ -600,7 +600,10 @@ function _State:interact(args)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
-	for _, v in pairs(self.interactActions or {}) do
+	for action, v in pairs(self.interactActions or {}) do
+		if not v.action then
+			v.action = action
+		end
 		local p
 		local a
 		if (v.posPart or v.part) and v.pos then

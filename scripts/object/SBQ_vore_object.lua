@@ -1,4 +1,4 @@
-require "/scripts/any/SBQ_override_dummies.lua"
+require"/scripts/any/SBQ_override_dummies.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_dialogue.lua"
@@ -14,6 +14,7 @@ function sbq.initObject()
 
     sbq.setProperty = object.setConfigParameter
 
+    storage.lastVoreConfig = storage.lastVoreConfig or config.getParameter("voreConfig")
     storage.baseStats = config.getParameter("stats") or {}
     storage.effectCategories = sb.jsonMerge(config.getParameter("effectCategories") or {}, storage.effectCategories or {})
     storage.stats = storage.stats or {}
