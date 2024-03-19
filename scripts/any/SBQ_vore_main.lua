@@ -139,8 +139,8 @@ function sbq.reloadVoreConfig(config)
 		require(script)
 	end
 	SpeciesScript = { locations = {}, states = {} }
-	SpeciesScript.transformation = Species[sbq.voreConfig.transformation or "default"]
-	setmetatable(SpeciesScript, {__index = SpeciesScript.transformation})
+	SpeciesScript.species = Species[sbq.voreConfig.species or "default"]
+	setmetatable(SpeciesScript, {__index = SpeciesScript.species})
 
 	if sbq.voreConfig.pred.appendLists then
 		for k, list in pairs(sbq.voreConfig.pred) do
@@ -423,7 +423,7 @@ function _SpeciesScript:addState(stateName, config)
 	for actionName, action in pairs(state.actions or {}) do
 		setmetatable(action, _Action)
 	end
-	setmetatable(state, {__index = self.transformation.states[stateName] or _State})
+	setmetatable(state, {__index = self.species.states[stateName] or _State})
 	self.states[stateName] = state
 end
 
@@ -728,7 +728,7 @@ function _SpeciesScript:addLocation(name, config)
 	Occupants.locations[name] = location.occupancy
 	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.locations[location.settingsTable or name]})
-	setmetatable(location, {__index = self.transformation.locations[name] or _Location})
+	setmetatable(location, {__index = self.species.locations[name] or _Location})
 	self.locations[name] = location
 end
 
