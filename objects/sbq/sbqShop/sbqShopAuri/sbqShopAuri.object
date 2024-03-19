@@ -80,19 +80,12 @@
 					"jump" : ".converse"
 				}
 			},
-			"fixData" :{
-				"new" : {
-					"dialogue" : ":fixBug",
-					"jump" : ".converse"
-				},
-				"next" : "fixData"
-			},
 			"npc" : {
 				"new" : {
 					"randomDialogue" : ":checkNPC",
 					"jump" : ".converse"
 				}
-			},
+			}
 		}
 	]
 }

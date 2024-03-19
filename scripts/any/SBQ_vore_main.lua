@@ -816,6 +816,14 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
 		end
 		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true))) then
+			local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
+			if transitionAnims then
+				Transformation:doAnimations(transitionAnims)
+            end
+            local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
+			if idleAnims then
+				Transformation:doAnimations(idleAnims)
+			end
 			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
 			if interpolateAnims then
 				self.occupancy.interpolating = true
