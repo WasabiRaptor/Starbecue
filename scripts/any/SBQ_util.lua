@@ -172,8 +172,10 @@ function sbq.refreshOverrides()
 			sbq.overrideSettings[setting] = true
 		end
 	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		for name, settings in pairs(sbq.settings[k]) do
+    for k, v in pairs(sbq.config.groupedSettings) do
+		sbq.overrideSettings[k] = {}
+        for name, settings in pairs(sbq.settings[k]) do
+			sbq.overrideSettings[k][name] = {}
 			for setting, _ in pairs(settings) do
 				sbq.overrideSettings[k][name][setting] = true
 			end
