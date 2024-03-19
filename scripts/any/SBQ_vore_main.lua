@@ -6,8 +6,8 @@ require "/scripts/interp.lua"
 require "/scripts/any/SBQ_util.lua"
 require "/scripts/any/SBQ_override_dummies.lua"
 
-_Transformation = {}
-_Transformation.__index = _Transformation
+_SpeciesScript = {}
+_SpeciesScript.__index = _SpeciesScript
 
 _State = {}
 _State.__index = _State
@@ -21,8 +21,8 @@ _Location.__index = _Location
 _Occupant = {}
 _Occupant.__index = _Occupant
 
-Transformations = {}
-Transformation = {
+Species = {}
+SpeciesScript = {
 	locations = {},
 	states = {}
 }
@@ -35,11 +35,11 @@ Occupants = {
 }
 
 function controlPressed(seat, control, time)
-	if Transformation.active and Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
+	if SpeciesScript.active and Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
 	-- sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
 function controlReleased(seat, control, time)
-	if Transformation.active and Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
+	if SpeciesScript.active and Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
 	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
 
@@ -81,19 +81,19 @@ end
 
 function sbq.update(dt)
 	sbq.facingRight = (sbq.facingDirection() == 1)
-	if Transformation.active then
+	if SpeciesScript.active then
 		Occupants.update(dt)
-		Transformation:update(dt)
-		Transformation.state:update(dt)
+		SpeciesScript:update(dt)
+		SpeciesScript.state:update(dt)
 	end
 	sbq.passiveStatChanges(dt)
 end
 
 function sbq.uninit()
-	if Transformation.active then
-		Transformation:uninit()
-		Transformation.state:uninit()
-		Transformation.active = false
+	if SpeciesScript.active then
+		SpeciesScript:uninit()
+		SpeciesScript.state:uninit()
+		SpeciesScript.active = false
 	end
 end
 
@@ -121,10 +121,10 @@ function sbq.reloadVoreConfig(config)
 	sbq.clearStatModifiers("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true
 	-- if reloading while another transformation is already active, uninitialize it first
-	if Transformation.active then
-		Transformation.state:uninit()
-		Transformation:uninit()
-		Transformation.active = false
+	if SpeciesScript.active then
+		SpeciesScript.state:uninit()
+		SpeciesScript:uninit()
+		SpeciesScript.active = false
 	end
 	-- store the last input so it's used again on the next initiaization
 	storage.lastVoreConfig = config
@@ -138,9 +138,9 @@ function sbq.reloadVoreConfig(config)
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
 	end
-	Transformation = { locations = {}, states = {} }
-	Transformation.transformation = Transformations[sbq.voreConfig.transformation or "default"]
-	setmetatable(Transformation, {__index = Transformation.transformation})
+	SpeciesScript = { locations = {}, states = {} }
+	SpeciesScript.transformation = Species[sbq.voreConfig.transformation or "default"]
+	setmetatable(SpeciesScript, {__index = SpeciesScript.transformation})
 
 	if sbq.voreConfig.pred.appendLists then
 		for k, list in pairs(sbq.voreConfig.pred) do
@@ -158,26 +158,26 @@ function sbq.reloadVoreConfig(config)
 	end
 	-- initial setup of location data based on species and infusion
 	for location, locationData in pairs(sbq.voreConfig.locations) do
-		Transformation:addLocation(location, locationData)
+		SpeciesScript:addLocation(location, locationData)
 	end
 	-- load states
 	for name, stateConfig in pairs(sbq.voreConfig.states or {}) do
-		Transformation:addState(name, stateConfig)
+		SpeciesScript:addState(name, stateConfig)
 	end
-	if not storage.lastState or (not (Transformation.states[storage.lastState])) then
+	if not storage.lastState or (not (SpeciesScript.states[storage.lastState])) then
 		local defaultState = sbq.voreConfig.defaultState or "default"
-		Transformation.state = Transformation.states[defaultState]
-		Transformation.stateName = defaultState
+		SpeciesScript.state = SpeciesScript.states[defaultState]
+		SpeciesScript.stateName = defaultState
 	else
-		Transformation.state = Transformation.states[storage.lastState]
-		Transformation.stateName = storage.lastState
+		SpeciesScript.state = SpeciesScript.states[storage.lastState]
+		SpeciesScript.stateName = storage.lastState
 	end
 	-- put settings meant to be public and accessible by other entities in a status property
 	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
-	Transformation:init()
-	Transformation.state:init()
-	Transformation.active = true
+	SpeciesScript:init()
+	SpeciesScript.state:init()
+	SpeciesScript.active = true
 end
 
 function sbq.actionList(type, target)
@@ -191,7 +191,7 @@ function sbq.actionList(type, target)
 		end
 	end
 	for _, action in ipairs(actions or {}) do
-		local available, reason = Transformation:actionAvailable(action.action, target, table.unpack(action.args or {}))
+		local available, reason = SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
 		if (not sbq.config.dontDisplayAction[tostring(reason)]) and not (action.noDisplay or {})[type] then
 			table.insert(list, sb.jsonMerge(action, {available = available}))
 		end
@@ -201,18 +201,18 @@ function sbq.actionList(type, target)
 end
 
 function sbq.tryAction(action, target, ...)
-	if not Transformation.active then return {false, "inactive"} end
-	return {Transformation:tryAction(action, target, ...)}
+	if not SpeciesScript.active then return {false, "inactive"} end
+	return {SpeciesScript:tryAction(action, target, ...)}
 end
 
 function sbq.actionAvailable(action, target, ...)
-	if not Transformation.active then return {false, "inactive"} end
-	return {Transformation:actionAvailable(action, target, ...)}
+	if not SpeciesScript.active then return {false, "inactive"} end
+	return {SpeciesScript:actionAvailable(action, target, ...)}
 end
 
 function sbq.requestAction(action, target, consent, ...)
-	if not Transformation.active then return {false, "inactive"} end
-	return {Transformation:requestAction(action, target, consent, ...)}
+	if not SpeciesScript.active then return {false, "inactive"} end
+	return {SpeciesScript:requestAction(action, target, consent, ...)}
 end
 
 function sbq.getOccupantData(entityId)
@@ -231,7 +231,7 @@ function sbq.getSettingsPageData()
 		storageUpgrades = storage.sbqUpgrades or {},
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
-		locations = Transformation.locations or {},
+		locations = SpeciesScript.locations or {},
 		currentScale = sbq.scale()
 	}
 	return settingsPageData
@@ -281,14 +281,14 @@ function sbq.importSettings(newSettings)
 	sbq.setupSettingMetatables(entity.entityType())
 	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
-	for k, location in pairs(Transformation.locations) do
+	for k, location in pairs(SpeciesScript.locations) do
 		location.occupancy.settingsDirty = true
 	end
 end
 
 sbq.groupedSettingChanged = {}
 function sbq.groupedSettingChanged.locations(name,k,v)
-	local location = Transformation:getLocation(name)
+	local location = SpeciesScript:getLocation(name)
 	if location then
 		location.occupancy.settingsDirty = true
 	end
@@ -299,7 +299,7 @@ function sbq.tryVore(target, locationName, throughput)
 	if throughput then
 		if (size) >= (throughput * sbq.size()) then return false, "tooBig" end
 	end
-	local location = Transformation:getLocation(locationName)
+	local location = SpeciesScript:getLocation(locationName)
 	local space, subLocation = location:hasSpace(size)
 	if space then
 		if Occupants.addOccupant(target, size, locationName, subLocation) then
@@ -337,7 +337,7 @@ function sbq.moveToLocation(target, throughput, locationName, subLocationName)
 	if throughput then
 		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
 	end
-	local location = Transformation:getLocation(locationName, subLocationName)
+	local location = SpeciesScript:getLocation(locationName, subLocationName)
 	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier, subLocationName)
 	if space then
 		occupant:refreshLocation(locationName, subLocationName)
@@ -347,39 +347,39 @@ function sbq.moveToLocation(target, throughput, locationName, subLocationName)
 end
 
 -- transformation handling
-function _Transformation:getLocation(...)
+function _SpeciesScript:getLocation(...)
 	return self.state:getLocation(...)
 end
 
-function _Transformation:tryAction(action, target, ...)
+function _SpeciesScript:tryAction(action, target, ...)
 	return self.state:tryAction(action, target, ...)
 end
 
-function _Transformation:actionAvailable(action, target, ...)
+function _SpeciesScript:actionAvailable(action, target, ...)
 	return self.state:actionAvailable(action, target, ...)
 end
 
-function _Transformation:requestAction(action, target, consent, ...)
+function _SpeciesScript:requestAction(action, target, consent, ...)
 	return self.state:requestAction(action, target, consent, ...)
 end
 
-function _Transformation:doAnimations(...)
+function _SpeciesScript:doAnimations(...)
 	return self.state:doAnimations(...)
 end
 
-function _Transformation:checkAnimations(...)
+function _SpeciesScript:checkAnimations(...)
 	return self.state:checkAnimations(...)
 end
 
-function _Transformation:interact(...)
+function _SpeciesScript:interact(...)
 	return self.state:interact(...)
 end
 
-function _Transformation:emergencyEscape(...)
+function _SpeciesScript:emergencyEscape(...)
 	return self.state:emergencyEscape(...)
 end
 
-function _Transformation:changeState(stateName)
+function _SpeciesScript:changeState(stateName)
 	local state = self.states[stateName]
 	if not state then sbq.logError("Attempt to switch to invalid state: " .. stateName) return false end
 	if self.lockStateChanges then return false end
@@ -393,7 +393,7 @@ function _Transformation:changeState(stateName)
 end
 
 -- State Handling
-function _Transformation:addState(stateName, config)
+function _SpeciesScript:addState(stateName, config)
 	local state = sb.jsonMerge(config, {})
 	state.locations = state.locations or {}
 	for k, location in pairs(self.locations) do
@@ -462,7 +462,7 @@ function _State:tryAction(name, target, ...)
 		end
 	end
 	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
-	local longest = Transformation:doAnimations(action.animations, action.tags, target)
+	local longest = SpeciesScript:doAnimations(action.animations, action.tags, target)
 	local cooldown = action.cooldown or longest
 	action.onCooldown = true
 	sbq.timer(name.."Cooldown", cooldown, function (...)
@@ -483,10 +483,10 @@ function _State:requestAction(name, target, consent, ...)
 	-- TODO do stuff with checking consent here later
 	if not consent then return end
 	if world.entityType(entity.id()) == "player" or not sbq.settings.interactDialogue then
-		Transformation:tryAction(name, target, ...)
+		SpeciesScript:tryAction(name, target, ...)
 	end
 	-- TODO do stuff with dialogue here later
-	Transformation:tryAction(name, target, ...)
+	SpeciesScript:tryAction(name, target, ...)
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
@@ -613,7 +613,7 @@ function _State:interact(args)
 			a = sbq.localPartPoint(v.aimPart or v.part, v.aim)
 		end
 		-- check if we should even consider this action
-		local valid = Transformation:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
+		local valid = SpeciesScript:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
 		-- check if there either point must be within a radius
 		if valid and p and (v.posRadius or v.radius) then
 			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
@@ -652,7 +652,7 @@ function _State:interact(args)
 		end
 	end
 	if closest then
-		Transformation:tryAction(closest.action, args.sourceId, table.unpack(closest.args or {}))
+		SpeciesScript:tryAction(closest.action, args.sourceId, table.unpack(closest.args or {}))
 	end
 end
 
@@ -663,7 +663,7 @@ end
 
 
 -- Location handling
-function _Transformation:addLocation(name, config)
+function _SpeciesScript:addLocation(name, config)
 	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()))
 	location.tag = name
 	location.key = name
@@ -738,7 +738,7 @@ function _Location:hasSpace(size, subLocation)
 	if self.settings.hammerspace then return math.huge end
 	local shared = 0
 	for _, name in ipairs(self.sharedWith or {}) do
-		local location = Transformation:getLocation(name)
+		local location = SpeciesScript:getLocation(name)
 		shared = shared + location.occupancy.size
 	end
 	if not self.subLocations then
@@ -812,7 +812,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			self.occupancy.size = math.min(math.max(self.settings.visualMin, self.occupancy.size), self.settings.visualMax)
 			local addVisual = 0
 			for _, name in ipairs(self.addFill or {}) do
-				local location = Transformation:getLocation(name)
+				local location = SpeciesScript:getLocation(name)
 				location:updateOccupancy(0, name, location.subLocationBehavior)
 				addVisual = addVisual + location.occupancy.visualSize
 			end
@@ -821,17 +821,17 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true))) then
 			local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
 			if transitionAnims then
-				Transformation:doAnimations(transitionAnims)
+				SpeciesScript:doAnimations(transitionAnims)
 			end
 			local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
 			if idleAnims then
-				Transformation:doAnimations(idleAnims)
+				SpeciesScript:doAnimations(idleAnims)
 			end
 			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
 			if interpolateAnims then
 				self.occupancy.interpolating = true
 				self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
-				self.interpolateTime = Transformation:doAnimations(interpolateAnims)
+				self.interpolateTime = SpeciesScript:doAnimations(interpolateAnims)
 				self.interpolateCurTime = 0
 			end
 			self.occupancy.queuedInterpolateAnims = nil
@@ -873,7 +873,7 @@ function _Location:refreshStruggleDirection(id)
 		self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
 	end
 	for _, locationName in ipairs(self.sharedWith or {}) do
-		local location = Transformation:getLocation(locationName)
+		local location = SpeciesScript:getLocation(locationName)
 		for _, occupant in ipairs(location.occupancy.list) do
 			occupant:checkStruggleDirection(0)
 			self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
@@ -909,14 +909,14 @@ function _Location:refreshStruggleDirection(id)
 		end
 		if oldDirection and oldAction then
 			if oldAction.releaseAnimations then
-				local delay = Transformation:doAnimations(oldAction.releaseAnimations or {}, { s_direction = oldDirection }, id)
+				local delay = SpeciesScript:doAnimations(oldAction.releaseAnimations or {}, { s_direction = oldDirection }, id)
 				sbq.forceTimer(self.tag.."StruggleChange", delay, function ()
-					Transformation:doAnimations(newAnims, { s_direction = oldDirection }, id)
+					SpeciesScript:doAnimations(newAnims, { s_direction = oldDirection }, id)
 				end)
-				return Transformation:checkAnimations(false, newAnims, { s_direction = direction }, id) + delay, direction
+				return SpeciesScript:checkAnimations(false, newAnims, { s_direction = direction }, id) + delay, direction
 			end
 		end
-		return Transformation:doAnimations(newAnims, { s_direction = direction }, id), direction
+		return SpeciesScript:doAnimations(newAnims, { s_direction = direction }, id), direction
 	end
 	return 0, direction
 end
@@ -937,19 +937,19 @@ end
 
 function _Location:outputData(entityId)
 	local merge = {}
-	table.insert(merge, Transformation.locations[self.key] or {})
+	table.insert(merge, SpeciesScript.locations[self.key] or {})
 	if self.subKey then
-		table.insert(merge, Transformation.locations[self.key].subLocations[self.subKey] or {})
+		table.insert(merge, SpeciesScript.locations[self.key].subLocations[self.subKey] or {})
 	end
-	table.insert(merge, Transformation.state.locations[self.key] or {})
+	table.insert(merge, SpeciesScript.state.locations[self.key] or {})
 	if self.subKey then
-		table.insert(merge, Transformation.state.locations[self.key].subLocations[self.subKey] or {})
+		table.insert(merge, SpeciesScript.state.locations[self.key].subLocations[self.subKey] or {})
 	end
 	local location = sb.jsonMerge(table.unpack(merge))
 	location.occupancy = nil
 	location.settings = nil
 	for _, struggleAction in pairs(location.struggleActions or {}) do
-		if not Transformation:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
+		if not SpeciesScript:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
 			struggleAction.indicate = "default"
 		end
 	end
@@ -1016,12 +1016,12 @@ end
 
 function _Occupant:remove()
 	self:setLoungeEnabled(false)
-	local location = Transformation:getLocation(self.location)
+	local location = SpeciesScript:getLocation(self.location)
 
 	Occupants.seat[self.seat] = nil
 
 	if self.subLocation then
-		local subLocation = Transformation:getLocation(self.location, self.subLocation)
+		local subLocation = SpeciesScript:getLocation(self.location, self.subLocation)
 		for i, occupant in ipairs(subLocation.occupancy.list) do
 			if occupant.entityId == self.entityId then
 				subLocation.occupancy.sizeDirty = true
@@ -1053,10 +1053,10 @@ function _Occupant:remove()
 end
 
 function Occupants.update(dt)
-	for name, _ in pairs(Transformation.locations) do
-		local location = Transformation:getLocation(name)
+	for name, _ in pairs(SpeciesScript.locations) do
+		local location = SpeciesScript:getLocation(name)
 		for k, v in pairs(location.subLocations or {}) do
-			local subLocation = Transformation:getLocation(name, k)
+			local subLocation = SpeciesScript:getLocation(name, k)
 			location.occupancy.sizeDirty = subLocation.occupancy.sizeDirty or location.occupancy.sizeDirty
 			location.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
 			subLocation.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
@@ -1067,10 +1067,10 @@ function Occupants.update(dt)
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:update(dt)
 	end
-	for name, _ in pairs(Transformation.locations) do
-		local location = Transformation:getLocation(name)
+	for name, _ in pairs(SpeciesScript.locations) do
+		local location = SpeciesScript:getLocation(name)
 		for k, _ in pairs(location.subLocations or {}) do
-			local subLocation = Transformation:getLocation(name, k)
+			local subLocation = SpeciesScript:getLocation(name, k)
 			subLocation.occupancy.settingsDirty = false
 		end
 		location.occupancy.settingsDirty = false
@@ -1139,15 +1139,15 @@ function _Occupant:refreshLocation(name, subLocation)
 		table.insert(location.occupancy.list, self)
 		location.occupancy.sizeDirty = true
 		for _, sharedName in ipairs(location.sharedWith or {}) do
-			local shared = Transformation:getLocation(sharedName)
+			local shared = SpeciesScript:getLocation(sharedName)
 			shared.occupancy.sizeDirty = true
 		end
 	end
 	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
 
 	local attemptAnims = {
-		Transformation.stateName .. "_" .. location.tag .. "_" .. location.occupancy.visualSize,
-		Transformation.stateName .. "_" .. location.tag,
+		SpeciesScript.stateName .. "_" .. location.tag .. "_" .. location.occupancy.visualSize,
+		SpeciesScript.stateName .. "_" .. location.tag,
 		location.tag .. "_" .. location.occupancy.visualSize,
 		location.tag,
 		self.location .. "_" .. location.occupancy.visualSize,
@@ -1252,7 +1252,7 @@ function _Occupant:attemptStruggle(control)
 		self.struggleAction = struggleAction
 		self.struggleDirection = direction
 		if struggleAction.pressAnimations and not struggleAction.holdAnimations then
-			bonusTime = bonusTime + Transformation:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
+			bonusTime = bonusTime + SpeciesScript:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
 		end
 		if (bonusTime > 0) then
 			if not self:overConsumeResource("energy", sbq.config.struggleCost) then return end
@@ -1267,7 +1267,7 @@ end
 
 function _Occupant:getLocation()
 	if not self.location then return sb.jsonMerge(sbq.config.defaultLocationData, {}) end
-	return Transformation:getLocation(self.location, self.subLocation)
+	return SpeciesScript:getLocation(self.location, self.subLocation)
 end
 
 
@@ -1318,7 +1318,7 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 	if (not self.struggleAction) or (self:controlHeld("Shift")) then return false end
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
-		Transformation:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
+		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
 	end
 	self.struggleTime = (self.struggleTime or 0) + bonusTime
 	self.struggleCount = (self.struggleCount or 0) + inc
@@ -1329,7 +1329,7 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then
-			Transformation:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {}))
+			SpeciesScript:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {}))
 		end
 	end
 end
@@ -1348,7 +1348,7 @@ end
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
 		if self:controlHeld("Left") and self:controlHeld("Right") then
-			Transformation:emergencyEscape(self)
+			SpeciesScript:emergencyEscape(self)
 			return
 		end
 	elseif control == "Interact" then

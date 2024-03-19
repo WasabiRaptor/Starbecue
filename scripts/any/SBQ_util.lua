@@ -297,7 +297,7 @@ function sbq.refreshSettings()
 
 	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates or {}) do
 		if sbq.tableMatches(settingsAnim[1], sbq.settings, true) then
-			Transformation:doAnimations(settingsAnim[2])
+			SpeciesScript:doAnimations(settingsAnim[2])
 		end
 	end
 end

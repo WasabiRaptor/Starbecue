@@ -5,7 +5,7 @@ local Default = {
 	},
 	locations = {}
 }
-setmetatable(Default, _Transformation)
+setmetatable(Default, _SpeciesScript)
 for k, v in pairs(Default.states) do
 	v.__index = v
 	setmetatable(v, _State)
@@ -14,7 +14,7 @@ for k, v in pairs(Default.locations) do
 	v.__index = v
 	setmetatable(v, _Location)
 end
-Transformations.default = Default
+Species.default = Default
 Default.__index = Default
 
 function Default:init()
@@ -36,7 +36,7 @@ end
 local function actionSequence(funcName, action, target, actionList, ...)
 	local results
 	for _, actionData in ipairs(actionList or action.actionList) do
-		results = { Transformation[funcName](Transformation, actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
+		results = { SpeciesScript[funcName](SpeciesScript, actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
 		if action.untilFirstSuccess then
 			if results[1] then break end
 		else
@@ -80,12 +80,12 @@ local function letout(funcName, action, target, preferredAction, skip, ...)
 	if target then
 		occupant = Occupants.entityId[tostring(target)]
 		if not occupant then return end
-		location = Transformation:getLocation(occupant.location, occupant.subLocation)
+		location = SpeciesScript:getLocation(occupant.location, occupant.subLocation)
 		local exitTypes = location.exitTypes or location.entryTypes
 		if preferredAction then
 			for _, exitType in ipairs(exitTypes or {}) do
 				if exitType == preferredAction then
-					if Transformation[funcName](Transformation, exitType.."Letout", target) then
+					if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
 						return true
 					end
 				end
@@ -93,14 +93,14 @@ local function letout(funcName, action, target, preferredAction, skip, ...)
 		end
 		if skip then return false end
 		for _, exitType in ipairs(exitTypes or {}) do
-			if Transformation[funcName](Transformation, exitType.."Letout", target) then
+			if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
 				return true
 			end
 		end
 	else
 		for i = #Occupants.list, 1, -1 do
 			local occupant = Occupants.list[i]
-			if Transformation[funcName](Transformation, "letout", occupant.entityId, preferredAction,true) then
+			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction,true) then
 				return true
 			end
 		end
@@ -115,7 +115,7 @@ function default:letoutAvailable(name, ...)
 end
 
 function default:trySendDeeper(name, action, target, ...)
-	local location = Transformation:getLocation(action.location)
+	local location = SpeciesScript:getLocation(action.location)
 	local occupant = location.occupancy.list[1]
 	local sendDeeper = action.sendDeeper or location.sendDeeper
 	if occupant and sendDeeper then
@@ -124,13 +124,13 @@ function default:trySendDeeper(name, action, target, ...)
 end
 
 function default:grab(name, action, target, ...)
-	local location = Transformation:getLocation(action.location or "grabbed")
+	local location = SpeciesScript:getLocation(action.location or "grabbed")
 	if not location then return false end
 	local occupant = location.occupancy.list[1]
 	if occupant then
-		return Transformation:tryAction("grabRelease", occupant.entityId)
+		return SpeciesScript:tryAction("grabRelease", occupant.entityId)
 	else
-		return Transformation:tryAction("grabTarget", target)
+		return SpeciesScript:tryAction("grabTarget", target)
 	end
 end
 function default:grabTarget(name, action, target, ...)
@@ -144,7 +144,7 @@ end
 function default:grabRelease(name, action, target, ...)
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then
-		local location = Transformation:getLocation(action.location or "grabbed")
+		local location = SpeciesScript:getLocation(action.location or "grabbed")
 		if not location then return false end
 		occupant = location.occupancy.list[1]
 	end

@@ -104,7 +104,7 @@ function interact(args)
     else
         if npc.loungingIn() == args.sourceId then return end
 
-		local results = { Transformation:interact(args) }
+		local results = { SpeciesScript:interact(args) }
 		if results[2] == "interactAction" then
 			return results[3]
 		end
