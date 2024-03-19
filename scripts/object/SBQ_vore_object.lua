@@ -1,3 +1,9 @@
+require "/scripts/any/SBQ_override_dummies.lua"
+require"/scripts/any/SBQ_vore_main.lua"
+require"/scripts/any/SBQ_rewards.lua"
+require"/scripts/any/SBQ_dialogue.lua"
+require"/scripts/any/SBQ_dialogue_scripts.lua"
+
 function sbq.initObject()
 	sbq.facingDirection = object.direction
 
