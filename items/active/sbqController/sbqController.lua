@@ -1,7 +1,11 @@
 
 sbq = {}
-
-require("/scripts/any/SBQ_RPC_handling.lua")
+require "/scripts/util.lua"
+require "/scripts/vec2.lua"
+require "/scripts/rect.lua"
+require "/scripts/poly.lua"
+require "/scripts/interp.lua"
+require "/scripts/any/SBQ_RPC_handling.lua"
 require "/items/active/sbqController/sbqControllerSetup.lua"
 
 
@@ -85,29 +89,20 @@ end
 
 function sbq.clickAction()
 	if not storage.action then return false end
-	local withoutEntityIds = loungeable.entitiesLounging()
-	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), 2, {
+	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {
 		withoutEntityId = entity.id(),
-		withoutEntityIds = withoutEntityIds,
-		includedTypes = {"creature"}
-	})
-	local entityInRange = world.entityQuery(mcontroller.position(), 5, {
-		withoutEntityId = entity.id(),
-		withoutEntityIds = withoutEntityIds,
+		withoutEntityIds = loungeable.entitiesLounging(),
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
 	local result
 	for i, targetId in ipairs(entityaimed) do
-		for j, eid in ipairs(entityInRange) do
-			if targetId == eid and entity.entityInSight(targetId) then
-				local loungeAnchor = world.entityCurrentLounge(targetId)
-				if (not loungeAnchor) or loungeAnchor.dismountable then
-					result = player.callScript("sbq.tryAction", storage.action, targetId)
-					break
-				end
+		if entity.entityInSight(targetId) and ((sbq.config.actionRange * mcontroller.scale()) >= vec2.mag(entity.distanceToEntity(targetId))) then
+			local loungeAnchor = world.entityCurrentLounge(targetId)
+			if (not loungeAnchor) or loungeAnchor.dismountable then
+				result = player.callScript("sbq.tryAction", storage.action, targetId)
+				break
 			end
-		if result and result[1] then break end
 		end
 	end
 

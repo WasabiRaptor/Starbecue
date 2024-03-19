@@ -104,7 +104,8 @@ function init()
 end
 
 function update(dt)
-	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+    if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	sbq.checkRPCsFinished(dt)
     sbq.checkTimers(dt)
 
 	sbq.update(dt)
