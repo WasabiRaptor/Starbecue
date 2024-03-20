@@ -2,8 +2,8 @@ sbq.tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json")
 sbq.occupier = _ENV.metagui.inputData.occupier or {}
 sbq.validTenantCatalogueList = {}
 sbq.tenantIndex = 0
-sbq.itemTemplates = root.assetJson("/sbqItemTemplates.config")
 
+require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"
 function init()
 	sbq.refreshDeedPage()
 	for name, tenantName in pairs(sbq.tenantCatalogue) do
@@ -294,34 +294,4 @@ function sbq.refreshDeedPage()
 		end
 	end
 	_ENV.requiredTagsScrollArea:addChild({ type = "panel", style = "flat", children = colonyTagLabels })
-end
-
-function sbq.generateNPCItemCard(tenant)
-	local npcConfig = root.npcConfig(tenant.type)
-
-	local item = sb.jsonMerge(sbq.itemTemplates.npcCard,{})
-
-	if npcConfig.scriptConfig.isOC then
-		item.parameters.rarity = "rare"
-	elseif npcConfig.scriptConfig.sbqNPC then
-		item.parameters.rarity = "uncommon"
-	end
-
-	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
-	item.parameters.inventoryIcon = root.npcPortrait("bust", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
-	item.parameters.description = (npcConfig.scriptConfig or {}).cardDesc or ""
-	item.parameters.tooltipFields.collarNameLabel = sbq.createdDate()
-	item.parameters.tooltipFields.objectImage = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
-	item.parameters.tooltipFields.subtitle = tenant.type
-	item.parameters.tooltipFields.collarIconImage = nil
-	item.parameters.npcArgs = {
-		npcSpecies = tenant.species,
-		npcSeed = tenant.seed,
-		npcType = tenant.type,
-		npcLevel = tenant.level,
-		npcParam = tenant.overrides,
-		npcSpawn = tenant.spawn
-	}
-	item.parameters.preySize = 1
-	return item
 end
