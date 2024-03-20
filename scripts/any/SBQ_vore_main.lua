@@ -823,9 +823,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 				SpeciesScript:doAnimations(transitionAnims)
 			end
             local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
-			sbq.logInfo(self.occupancy.visualSize)
 			if idleAnims then
-				sbq.logInfo(idleAnims,2)
 				SpeciesScript:doAnimations(idleAnims)
 			end
 			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
@@ -1177,7 +1175,7 @@ function _Occupant:refreshLocation(name, subLocation)
 	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 	if not (self.flags.digested or self.flags.infused) then
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
-		for setting, effects in pairs(location.toggleEffects or {}) do
+		for setting, effects in pairs(location.secondaryEffects or {}) do
 			if (location.settings[setting]) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end

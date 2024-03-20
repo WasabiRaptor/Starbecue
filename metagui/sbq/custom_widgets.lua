@@ -612,15 +612,19 @@ function widgets.sbqCheckBox:draw()
 	local pos = vec2.mul(c:size(), 0.5)
 
 
-	if self.icon then
+    if self.icon then
 		c:clear()
 		local directives = ""
 		if self.state == "press" then directives = "?brightness=-50" end
 		if self.locked and not self.checked then directives = directives.."?saturation=-100" end
 
-		c:drawImageDrawable(self.icon..directives, pos, 1)
-		if self.checked then
-			c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
+        if type(self.icon) == "table" then
+			c:drawImageDrawable(((self.checked and self.icon[2]) or self.icon[1])..directives, pos, 1)
+        else
+			c:drawImageDrawable(self.icon..directives, pos, 1)
+			if self.checked then
+				c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
+			end
 		end
 	else
 		theme.drawCheckBox(self)
