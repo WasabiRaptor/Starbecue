@@ -18,7 +18,7 @@ function sbq.targetPosition()
 end
 
 function sbq.species()
-	return sbq.voreConfig.species or "sbq_dummy"
+	return sbq.voreConfig.entitySpecies or sbq.voreConfig.species or "sbq_dummy"
 end
 
 function sbq.directory()

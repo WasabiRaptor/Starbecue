@@ -9,46 +9,46 @@ require "/scripts/actor/SBQ_actor.lua"
 require"/scripts/player/SBQ_player_notifs.lua"
 function init()
 	storage = storage or {}
-    storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
-    storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
+	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
+	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
-    sbq.targetPosition = player.aimPosition
+	sbq.targetPosition = player.aimPosition
 
-    sbq.config = root.assetJson("/sbq.config")
+	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-    sbq.actorInit()
-    sbq.humanoidInit()
+	sbq.actorInit()
+	sbq.humanoidInit()
 	function sbq.setProperty(...)
 		if player.getProperty("sbqAgreedTerms") then status.setStatusProperty(...) end
 	end
 	if player.getProperty("sbqAgreedTerms") then
-        sbq.init()
-        sbq.actorMessages()
-    else
-        status.setStatusProperty("sbqPublicSettings", nil)
+		sbq.init()
+		sbq.actorMessages()
+	else
+		status.setStatusProperty("sbqPublicSettings", nil)
 		message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
 			return sbq.setGroupedSetting(...)
 		end)
 		message.setHandler("sbqSetSetting", function (_,_, ...)
 			return sbq.setSetting(...)
-        end)
+		end)
 		sbq.lists = {}
-		sbq.voreConfig = root.fetchConfigArray(storage.lastVoreConfig or {})
+		sbq.voreConfig = root.fetchConfigArray(sbq.lastVoreConfig or {})
 		sbq.setupSettingMetatables("player")
-    end
-    sbq.notifyPlayer()
+	end
+	sbq.notifyPlayer()
 
 	message.setHandler("sbqGuiMessage",function (_,_,message,...)
 		player.interact("Message", {messageType = message, messageArgs = {...}})
-    end)
+	end)
 	message.setHandler("sbqInteractWith", function (_,_,entityId)
 		player.interactWithEntity(entityId)
 	end)
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
-    end)
+	end)
 
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
 		if not uniqueId then return end
@@ -77,7 +77,7 @@ function init()
 
 		player.setProperty("sbqTenantRewards", tenantRewardsTable)
 		player.setProperty("sbqCumulativeData", cumulativeDataTable)
-    end)
+	end)
 
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, additionalData)
 		sbq.currentLocationData = locationData
@@ -96,22 +96,22 @@ function init()
 				back = (struggleActions.back and (struggleActions.back.indicate or struggleActions.any.indicate or "default")),
 			}
 		}, id)
-    end)
+	end)
 
-    message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
+	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants }, ui = "starbecue:predHud" })
 	end)
 end
 
 function update(dt)
-    if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	sbq.checkRPCsFinished(dt)
-    sbq.checkTimers(dt)
+	sbq.checkTimers(dt)
 
 	sbq.update(dt)
 end
 
 function uninit()
-    player.setProperty("sbqSettingsStorage", storage.sbqSettings)
+	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
 end

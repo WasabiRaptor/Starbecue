@@ -73,7 +73,7 @@ function sbq.init()
 		return sbq.requestAction(...)
 	end)
 
-	sbq.reloadVoreConfig(storage.lastVoreConfig)
+	sbq.reloadVoreConfig(sbq.lastVoreConfig)
 
 	-- require "/scripts/misc/SBQ_convert_scripts.lua"
 	-- sbq.createOccupantAnims()
@@ -127,7 +127,7 @@ function sbq.reloadVoreConfig(config)
 		SpeciesScript.active = false
 	end
 	-- store the last input so it's used again on the next initiaization
-	storage.lastVoreConfig = config
+	sbq.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
 	sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", sbq.directory())
@@ -822,8 +822,10 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			if transitionAnims then
 				SpeciesScript:doAnimations(transitionAnims)
 			end
-			local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
+            local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
+			sbq.logInfo(self.occupancy.visualSize)
 			if idleAnims then
+				sbq.logInfo(idleAnims,2)
 				SpeciesScript:doAnimations(idleAnims)
 			end
 			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
