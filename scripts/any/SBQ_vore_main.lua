@@ -196,7 +196,6 @@ function sbq.actionList(type, target)
 			table.insert(list, sb.jsonMerge(action, {available = available}))
 		end
 	end
-	sbq.logInfo(list, 2)
 	return list
 end
 
@@ -297,7 +296,7 @@ end
 function sbq.tryVore(target, locationName, throughput)
 	local size = sbq.getEntitySize(target)
 	if throughput then
-		if (size) >= (throughput * sbq.size()) then return false, "tooBig" end
+		if (size) >= (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	local location = SpeciesScript:getLocation(locationName)
 	local space, subLocation = location:hasSpace(size)
@@ -319,7 +318,7 @@ function sbq.tryLetout(target, throughput)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	if throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
+		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.scale()) then return false end
 	end
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
@@ -335,7 +334,7 @@ function sbq.moveToLocation(target, throughput, locationName, subLocationName)
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	if throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.size()) then return false end
+		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.scale()) then return false end
 	end
 	local location = SpeciesScript:getLocation(locationName, subLocationName)
 	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier, subLocationName)
@@ -482,7 +481,7 @@ end
 function _State:requestAction(name, target, consent, ...)
 	-- TODO do stuff with checking consent here later
 	if not consent then return end
-	if world.entityType(entity.id()) == "player" or not sbq.settings.interactDialogue then
+	if not sbq.settings.interactDialogue then
 		SpeciesScript:tryAction(name, target, ...)
 	end
 	-- TODO do stuff with dialogue here later
@@ -807,7 +806,7 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
-				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.size())
+				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale())
 			end
 			self.occupancy.size = math.min(math.max(self.settings.visualMin, self.occupancy.size), self.settings.visualMax)
 			local addVisual = 0
