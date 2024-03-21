@@ -206,9 +206,9 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.<bodyStateAnim>.<bodyStateFrame><directives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.<bodyStateAnim>.<bodyStateFrame><directives><bellymask>" } },
 
-						"dummyEat": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.idle.1<directives><bellymask>" } },
+						"dummyEat": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.idle.1<directives><bellymask>" } },
 
 						"none": { "properties": {}}
 					}
@@ -222,9 +222,9 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.<bodyStateAnim>.<bodyStateFrame>?addmask=/vehicles/sbq/sbqXeronious/skins/<skin>/foreground/body.png:<bellyOccupants>.<bodyStateAnim>.<bodyStateFrame>;0;0;<directives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.<bodyStateAnim>.<bodyStateFrame>?addmask=/vehicles/sbq/sbqXeronious/skins/<skin>/foreground/body.png:<bellySize>.<bodyStateAnim>.<bodyStateFrame>;0;0;<directives><bellymask>" } },
 
-						"dummyEat": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.idle.1?addmask=/vehicles/sbq/sbqXeronious/skins/<skin>/foreground/body.png:<bellyOccupants>.idle.1;0;0;<directives><bellymask>" } },
+						"dummyEat": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.idle.1?addmask=/vehicles/sbq/sbqXeronious/skins/<skin>/foreground/body.png:<bellySize>.idle.1;0;0;<directives><bellymask>" } },
 
 						"none": { "properties": {}}
 					}
@@ -328,7 +328,7 @@
 				},
 				"partStates": {
 					"tailState": {
-						"idle": { "properties": { "image": "skins/<skin>/tail.png:<tailOccupants>.<tailStateAnim>.<tailStateFrame>?addmask=/vehicles/sbq/sbqXeronious/skins/<skin>/foreground/tail.png:<tailOccupants>.<tailStateAnim>.<tailStateFrame>;0;0;<directives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/tail.png:<tailSize>.<tailStateAnim>.<tailStateFrame>?addmask=/vehicles/sbq/sbqXeronious/skins/<skin>/foreground/tail.png:<tailSize>.<tailStateAnim>.<tailStateFrame>;0;0;<directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}
@@ -342,7 +342,7 @@
 				},
 				"partStates": {
 					"tailState": {
-						"idle": { "properties": { "image": "skins/<skin>/tail.png:<tailOccupants>.<tailStateAnim>.<tailStateFrame><directives><bellymask>" } },
+						"idle": { "properties": { "image": "skins/<skin>/tail.png:<tailSize>.<tailStateAnim>.<tailStateFrame><directives><bellymask>" } },
 
 						"none": { "properties": {} }
 					}

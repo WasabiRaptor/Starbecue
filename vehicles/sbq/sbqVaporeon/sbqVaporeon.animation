@@ -274,11 +274,11 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.<state>.<bodyStateAnim>.<bodyStateFrame><directives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.<state>.<bodyStateAnim>.<bodyStateFrame><directives>" } },
 
-						"dummy": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.<state>.idle.1<directives>" } },
+						"dummy": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.<state>.idle.1<directives>" } },
 
-						"smol.idle": { "properties": { "image": "skins/<skin>/smol/smol_body.png:<bellyOccupants>.<bodyStateAnim>.<bodyStateFrame><directives>" } },
+						"smol.idle": { "properties": { "image": "skins/<skin>/smol/smol_body.png:<bellySize>.<bodyStateAnim>.<bodyStateFrame><directives>" } },
 
 						"smol.prey": { "properties": { "image": "skins/<skin>/smol/smol_body.png:smolprey.1<directives>" } },
 
@@ -296,11 +296,11 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.<state>.<bodyStateAnim>.<bodyStateFrame><directives>?addmask=/vehicles/sbq/sbqVaporeon/skins/<skin>/foreground/body.png:<bellyOccupants>.<state>.<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						"idle": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.<state>.<bodyStateAnim>.<bodyStateFrame><directives>?addmask=/vehicles/sbq/sbqVaporeon/skins/<skin>/foreground/body.png:<bellySize>.<state>.<bodyStateAnim>.<bodyStateFrame>;0;0" } },
 
-						"dummy": { "properties": { "image": "skins/<skin>/body.png:<bellyOccupants>.<state>.idle.1<directives>" } },
+						"dummy": { "properties": { "image": "skins/<skin>/body.png:<bellySize>.<state>.idle.1<directives>" } },
 
-						"smol.idle": { "properties": { "image": "skins/<skin>/smol/smol_body.png:<bellyOccupants>.<bodyStateAnim>.<bodyStateFrame><directives>?addmask=/vehicles/sbq/sbqVaporeon/skins/<skin>/smol/foreground/smol_body.png:<bellyOccupants>.<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						"smol.idle": { "properties": { "image": "skins/<skin>/smol/smol_body.png:<bellySize>.<bodyStateAnim>.<bodyStateFrame><directives>?addmask=/vehicles/sbq/sbqVaporeon/skins/<skin>/smol/foreground/smol_body.png:<bellySize>.<bodyStateAnim>.<bodyStateFrame>;0;0" } },
 
 						"none": { "properties": {} }
 					}

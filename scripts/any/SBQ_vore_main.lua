@@ -834,16 +834,16 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 				self.interpolateCurTime = 0
 			end
 			self.occupancy.queuedInterpolateAnims = nil
-			animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+			animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
 			if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings, true)) then
 				for _, subLocation in pairs(self.subLocations) do
-					animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+					animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
 				end
 			end
 		end
 	end
 	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) and not (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true)) then
-		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."_occupants", tostring(self.occupancy.visualSize))
+		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."Size", tostring(self.occupancy.visualSize))
 	end
 	if self.occupancy.interpolating then
 		self.interpolateCurTime = self.interpolateCurTime + dt
@@ -856,10 +856,10 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			self.interpolateSizes or self.struggleSizes or {0}
 		)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
-		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."_occupantsInterpolate", tostring(self.occupancy.interpolateSize))
+		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."InterpolateSize", tostring(self.occupancy.interpolateSize))
 		if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.setting, true)) then
 			for _, subLocation in pairs(self.subLocations) do
-				animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "_occupants", tostring(self.occupancy.visualSize))
+				animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
 			end
 		end
 	end

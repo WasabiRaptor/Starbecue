@@ -311,7 +311,7 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "skins/<skin>/belly.png:<bellyOccupants>.<bellyStateAnim>.<bellyStateFrame><directives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/belly.png:<bellySize>.<bellyStateAnim>.<bellyStateFrame><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -326,7 +326,7 @@
 				},
 				"partStates": {
 					"cockState": {
-						"idle": { "properties": { "image": "skins/<skin>/cock.png:<shaftOccupants>.<cockStateAnim>.<cockStateFrame><cockVisible><directives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/cock.png:<shaftSize>.<cockStateAnim>.<cockStateFrame><cockVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -340,7 +340,7 @@
 				},
 				"partStates": {
 					"ballsFrontState": {
-						"idle": { "properties": { "image": "skins/<skin>/foreground/balls.png:<ballsFrontOccupants>.<ballsFrontStateAnim>.<ballsFrontStateFrame><ballsVisible><directives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/foreground/balls.png:<ballsFrontSize>.<ballsFrontStateAnim>.<ballsFrontStateFrame><ballsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
@@ -354,7 +354,7 @@
 				},
 				"partStates": {
 					"ballsBackState": {
-						"idle": { "properties": { "image": "skins/<skin>/balls.png:<ballsBackOccupants>.<ballsBackStateAnim>.<ballsBackStateFrame><ballsVisible><directives>" } },
+						"idle": { "properties": { "image": "skins/<skin>/balls.png:<ballsBackSize>.<ballsBackStateAnim>.<ballsBackStateFrame><ballsVisible><directives>" } },
 
 						"none": { "properties": {} }
 					}
