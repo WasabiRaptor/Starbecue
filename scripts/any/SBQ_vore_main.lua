@@ -537,8 +537,6 @@ end
 function _State:animationTags(tags, target)
 	local targetTags = {
 		occupant = "occupant",
-		right = sbq.facingRight and "front" or "back",
-		left = sbq.facingRight and "back" or "front"
 	}
 	if target then
 		local occupant = Occupants.entityId[tostring(target)]
@@ -553,7 +551,7 @@ function _State:doAnimations(animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = sb.replaceTags(k, tags)
+		local state = animator.applyTags(sb.replaceTags(k, tags))
 		local anim = v
 		local force = false
 		local reversed = false
@@ -561,14 +559,14 @@ function _State:doAnimations(animations, tags, target)
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = sb.replaceTags(anim, tags)
+		anim = animator.applyTags(sb.replaceTags(anim, tags))
 		if animator.hasState(state, anim) then
 			if not waitForEnd or animator.animationEnded(state) then
 				animator.setAnimationState(state, anim, force, reversed)
 				local timer = animator.animationTimer(state)
 				longest = math.max(longest, timer[2] - timer[1])
 			end
-		else
+		elseif sbq.config.debug then
 			sbq.logError(string.format("No animation state '%s' '%s'", state, anim))
 		end
 	end
@@ -579,12 +577,12 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = sb.replaceTags(k, tags)
+		local state = animator.applyTags(sb.replaceTags(k, tags))
 		local anim = v
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = sb.replaceTags(anim, tags)
+		anim = animator.applyTags(sb.replaceTags(anim, tags))
 		if (animator.hasState(state, anim) and not activeOnly)
 		or (animator.hasState(state) and animator.animationState(state) == "anim")
 		then
@@ -785,10 +783,6 @@ function _Location:updateOccupancy(dt)
 			subLocation:updateOccupancy(dt)
 		end
 	end
-	local directionTags = {
-		right = sbq.facingRight and "front" or "back",
-		left = sbq.facingRight and "back" or "front"
-	}
 	local prevVisualSize = self.occupancy.visualSize
 	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale()) then
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
@@ -839,20 +833,22 @@ function _Location:updateOccupancy(dt)
 		)
 
 		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and self.occupancy.symmetry) then
-			self:changeSizeAnims(prevVisualSize, directionTags)
+			self:changeSizeAnims(prevVisualSize)
 			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
 					subLocation = SpeciesScript:getLocation(self.key, k)
 					if subLocation.occupancy.sided then
 						subLocation.occupancy.visualSize = self.occupancy.visualSize
-						subLocation:changeSizeAnims(prevVisualSize, directionTags)
+						subLocation:changeSizeAnims(prevVisualSize)
 					end
 				end
 			end
 		end
 	end
 	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
-		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."Size", tostring(self.occupancy.visualSize))
+		self.occupancy.facingRight = sbq.facingRight
+		animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
+		self:refreshStruggleDirection()
 	end
 	if self.occupancy.interpolating then
 		self.interpolateCurTime = self.interpolateCurTime + dt
@@ -865,13 +861,13 @@ function _Location:updateOccupancy(dt)
 			self.interpolateSizes or self.struggleSizes or {0}
 		)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
-		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."InterpolateSize", tostring(self.occupancy.interpolateSize))
+		animator.setGlobalTag(animator.applyTags(self.tag).."InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
 end
 
-function _Location:changeSizeAnims(prevVisualSize, directionTags)
-	sbq.logInfo({sb.replaceTags(self.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize)},0)
-	animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
+function _Location:changeSizeAnims(prevVisualSize)
+	sbq.logInfo({animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize)},0)
+	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 
 	local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
 	if transitionAnims then
