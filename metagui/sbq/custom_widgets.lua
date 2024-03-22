@@ -86,14 +86,12 @@ widgets.sbqSetting = mg.proto(mg.widgetBase, {
 })
 
 function widgets.sbqSetting:init(base, param)
-	sbq.timer(nil,0.1,function ()
-		self:delete()
-	end)
 	param.setting = param.setting or self.parent.setting
 	param.groupName = param.groupName or self.parent.groupName
 	param.groupKey = param.groupKey or self.parent.groupKey
 
 	local defaultSetting = sbq.defaultSettings[param.setting]
+	local errorString
 	if param.groupName and param.groupKey then
 		if not sbq.defaultSettings[param.groupName] then
 			return sbq.logError("undefined setting group: ".. param.groupName)
@@ -102,9 +100,9 @@ function widgets.sbqSetting:init(base, param)
 			return sbq.logError("undefined setting group entry: ".. param.groupName.."."..param.groupKey)
 		end
 		defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
-		if defaultSetting == nil then sbq.logError(string.format("Setting '%s.%s.%s' has no defined default", param.groupName, param.groupKey, param.setting)) end
+		if defaultSetting == nil then errorString = (string.format("Setting '%s.%s.%s' has no defined default", param.groupName, param.groupKey, param.setting)) end
 	else
-		if defaultSetting == nil then sbq.logError(string.format("Setting '%s' has no defined default", param.setting)) end
+		if defaultSetting == nil then errorString = (string.format("Setting '%s' has no defined default", param.setting)) end
 	end
 	param.toolTip = mg.formatText(param.toolTip or sbq.strings[param.setting.."Tip"])
 	param.settingType = type(defaultSetting)
@@ -116,6 +114,7 @@ function widgets.sbqSetting:init(base, param)
 			param = sb.jsonMerge(param, sbq.gui.settingWidgets[param.setting])
 		end
 	else
+		if errorString then sbq.logError(errorString) end
 		param = sb.jsonMerge(param, sbq.gui.defaultSettingTypeWidgets[param.settingType] or sbq.gui.defaultSettingTypeWidgets.invalidType)
 	end
 	if param.makeLabel then
@@ -612,15 +611,15 @@ function widgets.sbqCheckBox:draw()
 	local pos = vec2.mul(c:size(), 0.5)
 
 
-    if self.icon then
+	if self.icon then
 		c:clear()
 		local directives = ""
 		if self.state == "press" then directives = "?brightness=-50" end
 		if self.locked and not self.checked then directives = directives.."?saturation=-100" end
 
-        if type(self.icon) == "table" then
+		if type(self.icon) == "table" then
 			c:drawImageDrawable(((self.checked and self.icon[2]) or self.icon[1])..directives, pos, 1)
-        else
+		else
 			c:drawImageDrawable(self.icon..directives, pos, 1)
 			if self.checked then
 				c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
@@ -1081,10 +1080,10 @@ for id, t in pairs(widgets) do t.widgetType = id end
 
 -- the version of stardust from steam is out of date and this makes the width actually function
 function widgets.label:preferredSize(width)
-    if self.explicitSize then return self.explicitSize end
-    local s = mg.measureString(self.text, self.wrap and width or nil, self.fontSize)
-    -- extra pixel to fit cut-off descenders in multiline text
-    if s[2] > math.ceil(self.fontSize or 8) then s[2] = s[2] + 1 end
-    if self.width then s[1] = self.width end
-    return s
+	if self.explicitSize then return self.explicitSize end
+	local s = mg.measureString(self.text, self.wrap and width or nil, self.fontSize)
+	-- extra pixel to fit cut-off descenders in multiline text
+	if s[2] > math.ceil(self.fontSize or 8) then s[2] = s[2] + 1 end
+	if self.width then s[1] = self.width end
+	return s
 end
