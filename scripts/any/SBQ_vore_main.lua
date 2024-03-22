@@ -568,6 +568,8 @@ function _State:doAnimations(animations, tags, target)
 				local timer = animator.animationTimer(state)
 				longest = math.max(longest, timer[2] - timer[1])
 			end
+		else
+			sbq.logError(string.format("No animation state '%s' '%s'", state, anim))
 		end
 	end
 	return longest
@@ -714,14 +716,14 @@ function _SpeciesScript:addLocation(name, config)
 			interpolateFrom = 0,
 			interpolateTime = 0,
 		}
-		if k == "<left>" or k == "<right>" then
+		if (k == "<left>") or (k == "<right>") then
 			subLocation.occupancy.sided = true
 			subLocation.occupancy.facingRight = sbq.facingRight
 		end
-		subLocation.tag = name .. k
+		subLocation.tag = name .. "_".. k
 		subLocation.subKey = k
 		location.occupancy.subLocations[k] = subLocation.occupancy
-		setmetatable(subLocation, {__index = location})
+		setmetatable(subLocation, { __index = location })
 	end
 
 	Occupants.locations[name] = location.occupancy
@@ -773,17 +775,27 @@ function _Location:getRemainingSpace(maxFill, occupancy, size)
 	return remainingSpace
 end
 
-function _Location:updateOccupancy(dt, subLocationBehavior)
+function _Location:updateOccupancy(dt)
+	if not self.subKey then
+		for k, v in pairs(self.subLocations or {}) do
+			local subLocation = SpeciesScript:getLocation(self.key, k)
+			self.occupancy.sizeDirty = subLocation.occupancy.sizeDirty or self.occupancy.sizeDirty
+			self.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or self.occupancy.settingsDirty
+			subLocation.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or self.occupancy.settingsDirty
+			subLocation:updateOccupancy(dt)
+		end
+	end
 	local directionTags = {
 		right = sbq.facingRight and "front" or "back",
 		left = sbq.facingRight and "back" or "front"
 	}
 	local prevVisualSize = self.occupancy.visualSize
 	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale()) then
+		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
 		self.occupancy.sizeDirty = false
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
-		if subLocationBehavior then
-			if subLocationBehavior == "average" then
+		if self.subLocationBehavior and not self.subKey then
+			if self.subLocationBehavior == "average" then
 				local total = 0
 				local amount = 0
 				for _, subLocation in pairs(self.subLocations) do
@@ -791,13 +803,13 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 					amount = amount + 1
 				end
 				self.occupancy.size = (total / amount)
-			elseif subLocationBehavior == "largest" then
+			elseif self.subLocationBehavior == "largest" then
 				local best = 0
 				for _, subLocation in pairs(self.subLocations) do
 					best = math.max(best, subLocation.occupancy.size)
 				end
 				self.occupancy.size = self.occupancy.size + best
-			elseif subLocationBehavior == "smallest" then
+			elseif self.subLocationBehavior == "smallest" then
 				local best = self.maxFill
 				for _, subLocation in pairs(self.subLocations) do
 					best = math.min(best, subLocation.occupancy.size)
@@ -808,41 +820,38 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 			for _, occupant in ipairs(self.occupancy.list) do
 				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale())
 			end
-			self.occupancy.size = math.min(math.max(self.settings.visualMin, self.occupancy.size), self.settings.visualMax)
-			local addVisual = 0
-			for _, name in ipairs(self.addFill or {}) do
-				local location = SpeciesScript:getLocation(name)
-				location:updateOccupancy(0, name, location.subLocationBehavior)
-				addVisual = addVisual + location.occupancy.visualSize
-			end
-			self.occupancy.visualSize = sbq.getClosestValue(self.occupancy.size + addVisual, self.struggleSizes or { 0 })
 		end
-		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true))) then
-			local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
-			if transitionAnims then
-				SpeciesScript:doAnimations(transitionAnims)
-			end
-            local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
-			if idleAnims then
-				SpeciesScript:doAnimations(idleAnims)
-			end
-			local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
-			if interpolateAnims then
-				self.occupancy.interpolating = true
-				self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
-				self.interpolateTime = SpeciesScript:doAnimations(interpolateAnims)
-				self.interpolateCurTime = 0
-			end
-			self.occupancy.queuedInterpolateAnims = nil
-			animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
-			if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.settings, true)) then
-				for _, subLocation in pairs(self.subLocations) do
-					animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
+		local addVisual = 0
+		for _, name in ipairs(self.addFill or {}) do
+			local location = SpeciesScript:getLocation(name)
+			location:updateOccupancy(0, name)
+			addVisual = addVisual + location.occupancy.visualSize
+		end
+		self.occupancy.visualSize = sbq.getClosestValue(
+			math.min(
+				self.settings.visualMax,
+				math.max(
+					self.settings.visualMin,
+					(self.occupancy.size + addVisual)
+				)
+			),
+			self.struggleSizes or { 0 }
+		)
+
+		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and self.occupancy.symmetry) then
+			self:changeSizeAnims(prevVisualSize, directionTags)
+			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
+				for k, v in pairs(self.subLocations or {}) do
+					subLocation = SpeciesScript:getLocation(self.key, k)
+					if subLocation.occupancy.sided then
+						subLocation.occupancy.visualSize = self.occupancy.visualSize
+						subLocation:changeSizeAnims(prevVisualSize, directionTags)
+					end
 				end
 			end
 		end
 	end
-	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) and not (self.symmertySettings and sbq.tableMatches(self.symmertySettings, sbq.settings, true)) then
+	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
 		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."Size", tostring(self.occupancy.visualSize))
 	end
 	if self.occupancy.interpolating then
@@ -857,12 +866,29 @@ function _Location:updateOccupancy(dt, subLocationBehavior)
 		)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
 		animator.setGlobalTag(sb.replaceTags(self.tag, directionTags).."InterpolateSize", tostring(self.occupancy.interpolateSize))
-		if self.subLocations and (self.symmertySettings and sbq.tableMatches(self.symmertySettings or {}, sbq.setting, true)) then
-			for _, subLocation in pairs(self.subLocations) do
-				animator.setGlobalTag(sb.replaceTags(subLocation.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
-			end
-		end
 	end
+end
+
+function _Location:changeSizeAnims(prevVisualSize, directionTags)
+	sbq.logInfo({sb.replaceTags(self.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize)},0)
+	animator.setGlobalTag(sb.replaceTags(self.tag, directionTags) .. "Size", tostring(self.occupancy.visualSize))
+
+	local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
+	if transitionAnims then
+		SpeciesScript:doAnimations(transitionAnims)
+	end
+	local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
+	if idleAnims then
+		SpeciesScript:doAnimations(idleAnims)
+	end
+	local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
+	if interpolateAnims then
+		self.occupancy.interpolating = true
+		self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
+		self.interpolateTime = SpeciesScript:doAnimations(interpolateAnims)
+		self.interpolateCurTime = 0
+	end
+	self.occupancy.queuedInterpolateAnims = nil
 end
 
 function _Location:refreshStruggleDirection(id)
@@ -1054,14 +1080,7 @@ end
 function Occupants.update(dt)
 	for name, _ in pairs(SpeciesScript.locations) do
 		local location = SpeciesScript:getLocation(name)
-		for k, v in pairs(location.subLocations or {}) do
-			local subLocation = SpeciesScript:getLocation(name, k)
-			location.occupancy.sizeDirty = subLocation.occupancy.sizeDirty or location.occupancy.sizeDirty
-			location.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
-			subLocation.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or location.occupancy.settingsDirty
-			subLocation:updateOccupancy(dt)
-		end
-		location:updateOccupancy(dt, location.subLocationBehavior)
+		location:updateOccupancy(dt)
 	end
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:update(dt)
