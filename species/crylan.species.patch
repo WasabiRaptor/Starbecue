@@ -47,19 +47,36 @@
 						"offset" : [0.125,0.125]
 					}},
 					"cock":{"properties":{
-						"offset" : [0.125,0.125]
+						"offset" : [0,0.125]
 					}},
 					"pussy":{"properties":{
-						"offset" : [0.125,0.125]
+						"offset" : [0,0.125]
 					}},
 					"tail":{"properties":{
-						"offset" : [0.125,0.125]
+						"offset" : [0,0.125]
 					}}
 				}
 			}
 		}
-	]
-
-
-
+	],
+	"identityAnimationCustom" :{
+		"personalityIdle" : {
+			"idle.1" : {
+				"animatedParts":{"stateTypes":{"bodyState":{"states":{"idle":{"properties":{
+					"bellyOffset":{"translate" : [0.125,0]},
+					"crotchOffset":{"translate" : [0.125,0]},
+					"chestOffset":{"translate" : [0.125,0]},
+					"tailOffset":{"translate" : [0.125,0]}
+				}}}}}}
+			},
+			"idle.5" : {
+				"animatedParts":{"stateTypes":{"bodyState":{"states":{"idle":{"properties":{
+					"bellyOffset":{"translate" : [0.125,0]},
+					"crotchOffset":{"translate" : [0.125,0]},
+					"chestOffset":{"translate" : [0.125,0]},
+					"tailOffset":{"translate" : [0.125,0]}
+				}}}}}}
+			}
+		}
+	}
 }}]
