@@ -81,6 +81,21 @@ function mg.formatText(str)
 	return str
 end
 
+function mg.toolTip(inp)
+	-- convert an array of strings into a single string
+    if type(inp) == "table" and type(inp[1]) == "string" then
+		for i, v in ipairs(inp) do
+			inp[i] = mg.formatText(v)
+		end
+		inp = table.concat(inp, "\n")
+	end
+	if type(inp) ~= "string" then return inp end -- assume returning preconstructed table
+	if type(inp) == "string" then
+		inp = mg.formatText(inp)
+	end
+	return theme.toolTip(inp)
+end
+
 widgets.sbqSetting = mg.proto(mg.widgetBase, {
 	widgetType = "sbqSetting"
 })
@@ -110,8 +125,8 @@ function widgets.sbqSetting:init(base, param)
 	if sbq.gui.settingWidgets[param.setting] then
 		if type(sbq.gui.settingWidgets[param.setting]) == "string" then
 			param = sbq.widgetScripts[sbq.gui.settingWidgets[param.setting]](param)
-		else
-			param = sb.jsonMerge(param, sbq.gui.settingWidgets[param.setting])
+        else
+			param = sb.jsonMerge(param, sbq.replaceConfigTags(sbq.gui.settingWidgets[param.setting], {groupKey = param.groupKey, groupName = param.groupName, setting = param.setting}))
 		end
 	else
 		if errorString then sbq.logError(errorString) end

@@ -135,6 +135,16 @@ function sbq.setupSetting(parent, setting, group, name)
 	end
 end
 
+function sbq.settingVisibility(input, setting, group, name)
+    if not input then return true end
+	if type(input) == "table" then
+        return sbq.tableMatches(input, sbq.settings, true)
+    elseif type(input) == "string" then
+		return sbq.widgetScripts[input](setting,group,name)
+    end
+	return false
+end
+
 function sbq.refreshSettingVisibility()
 	_ENV.currentScale.locked = not player.hasItemWithParameter("sbqSizeModifier", true)
 	for settingIdentifier, widget in pairs(sbq.settingWidgets) do
@@ -142,9 +152,9 @@ function sbq.refreshSettingVisibility()
 		local label = _ENV[settingIdentifier .. "Label"]
 		local layout = _ENV[settingIdentifier .. "Layout"]
 		local panel = _ENV[settingIdentifier .. "Panel"]
-		local visible = sbq.tableMatches( sbq.gui.settingVisibility[setting] or {}, sbq.settings, true)
+		local visible = sbq.settingVisibility(sbq.gui.settingVisibility[setting] or {}, setting, group, name)
 		if group and name then
-			visible = visible and sbq.tableMatches((sbq.gui.groupSettingVisibility[group] or {})[setting] or {}, sbq.settings[group][name], true)
+			visible = visible and sbq.settingVisibility((sbq.gui.groupSettingVisibility[group] or {})[setting] or {}, setting, group, name)
 		end
 		if widget then
 			widget:setVisible(visible)
@@ -254,7 +264,7 @@ end
 
 function sbq.widgetScripts.makeMainEffectButtons(param)
 	local effectButtons = {}
-	local layout = { type = "panel", children = {{mode = "v"},{type = "label", text = ":mainEffect"},effectButtons}, makeLabel = false }
+	local layout = { type = "panel", expandMode = {1,0}, children = {{mode = "v", expandMode = {1,0}},{type = "label", text = ":mainEffect"},effectButtons}, makeLabel = false }
 	local location = sbq.locations[param.groupKey]
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location.mainEffect or {})[k] then
@@ -284,8 +294,8 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 function sbq.widgetScripts.makeSecondaryEffectButtons(param)
-	local effectButtons = {}
-	local layout = { type = "panel", children = {{mode = "v"},{type = "label", text = ":secondaryEffects"}, effectButtons}, makeLabel = false }
+    local effectButtons = {}
+	local layout = { type = "panel", expandMode = {1,0}, children = {{mode = "v", expandMode = {1,0}},{type = "label", text = ":secondaryEffects"}, effectButtons}, makeLabel = false }
 	local location = sbq.locations[param.groupKey]
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
 		if (location.secondaryEffects or {})[k] then
