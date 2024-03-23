@@ -55,7 +55,7 @@ function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
 
 		if appendName then
 			string = world.entityName(entity.id())..":\n"..string
-        end
+		end
 		if type(imagePortrait) == "string" and config.getParameter("sayPortrait") then
 			sbq.sayPortrait(string, imagePortrait, nil, {})
 		else
@@ -110,24 +110,24 @@ end
 function sbq.giveResource(name, value)
 	if not sbq.isResource(name) then return 0 end
 	local oldVal = sbq.resource(name)
-    sbq.modifyResource(name, value)
+	sbq.modifyResource(name, value)
 	return sbq.resource(name) - oldVal
 end
 function sbq.consumeResource(name, value)
 	if not sbq.isResource(name) then return false end
-    if value < 0 then return false end
+	if value < 0 then return false end
 	if sbq.resourceLocked(name) then return false end
 	if sbq.resource(name) >= value then
-        sbq.modifyResource(name, -value)
+		sbq.modifyResource(name, -value)
 		sbq.notifyResourceConsumed(name, value)
 		return true
 	end
 end
 function sbq.overConsumeResource(name, value)
 	if not sbq.isResource(name) then return false end
-    if value < 0 then return false end
+	if value < 0 then return false end
 	if sbq.resourceLocked(name) then return false end
-    sbq.modifyResource(name, -value)
+	sbq.modifyResource(name, -value)
 	sbq.notifyResourceConsumed(name, value)
 	return true
 end
@@ -162,7 +162,7 @@ function sbq.modifyResourcePercentage(name, value)
 end
 
 function sbq.setStatModifiers(category, modifiers)
-    storage.effectCategories[category] = modifiers
+	storage.effectCategories[category] = modifiers
 	sbq.calculateStats()
 end
 
@@ -175,9 +175,10 @@ function sbq.calculateStats()
 	for _, modifiers in pairs(storage.effectCategories) do
 		for _, modifier in ipairs(modifiers) do
 			if modifier.stat then
-                stats[modifier.stat] = stats[modifier.stat] or {baseModified = storage.baseStats[modifier.stat] or 0, effectiveMultiplier = 1}
+				storage.baseStats[modifier.stat] = storage.baseStats[modifier.stat] or 0
+				stats[modifier.stat] = stats[modifier.stat] or {baseModified = storage.baseStats[modifier.stat], effectiveMultiplier = 1}
 				if modifier.baseMultiplier then
-                    stats[modifier.stat].baseModified = stats[modifier.stat].baseModified + (storage.baseStats[modifier.stat] * (modifier.baseMultiplier - 1))
+					stats[modifier.stat].baseModified = stats[modifier.stat].baseModified + (storage.baseStats[modifier.stat] * (modifier.baseMultiplier - 1))
 				elseif modifier.amount then
 					stats[modifier.stat].baseModified = stats[modifier.stat].baseModified + modifier.amount
 				elseif modifier.effectiveMultiplier then
@@ -185,14 +186,14 @@ function sbq.calculateStats()
 				end
 			end
 		end
-    end
+	end
 	for stat, modifiers in pairs(stats) do
 		storage.stats[stat] = modifiers.baseModified * modifiers.effectiveMultiplier
 	end
 end
 function sbq.getDefaultResources()
-    local resources = {}
-    for name, data in pairs(storage.resourceData) do
+	local resources = {}
+	for name, data in pairs(storage.resourceData) do
 		resources[name] = data.initialValue or (data.initalPercentage and (data.initalPercentage * sbq.resourceMax(name))) or 0
 	end
 	return resources
@@ -200,7 +201,7 @@ end
 function sbq.resourceDeltas(dt)
 	for name, data in pairs(storage.resourceData) do
 		if data.deltaValue then
-            storage.resources[name] = storage.resources[name] + data.deltaValue * dt
+			storage.resources[name] = storage.resources[name] + data.deltaValue * dt
 		elseif data.deltaStat then
 			storage.resources[name] = storage.resources[name] + sbq.stat(data.deltaStat) * dt
 		end

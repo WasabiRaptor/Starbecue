@@ -62,7 +62,7 @@ function default:scriptSequence(name, action, target, scriptList, ...)
 		else
 			if not results[1] then break end
 		end
-    end
+	end
 	return table.unpack(results)
 end
 
@@ -171,4 +171,17 @@ function default:turboDigest(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboDigest", sbq.resource("energy"))
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+end
+
+function default:digestPrey(name, action, target, ...)
+	sbq.logInfo(target)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then sbq.logInfo("digest failed") return  false end
+	local location = occupant:getLocation()
+	occupant.flags.digested = true
+	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
+	occupant.size = action.size or location.digestedSize or 0
+    location.occupancy.sizeDirty = true
+	occupant:logInfo("digested")
+	return true, function () occupant:refreshLocation()  end
 end

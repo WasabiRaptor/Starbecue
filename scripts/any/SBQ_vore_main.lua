@@ -72,6 +72,9 @@ function sbq.init()
 	message.setHandler("sbqRequestAction", function (_,_, ...)
 		return sbq.requestAction(...)
 	end)
+	message.setHandler("sbqDigestPrey", function (_,_, ...)
+		return sbq.digestPrey(...)
+	end)
 
 	sbq.reloadVoreConfig(sbq.lastVoreConfig)
 
@@ -212,6 +215,11 @@ end
 function sbq.requestAction(action, target, consent, ...)
 	if not SpeciesScript.active then return {false, "inactive"} end
 	return {SpeciesScript:requestAction(action, target, consent, ...)}
+end
+
+function sbq.digestPrey(target, ...)
+    if not SpeciesScript.active then return { false, "inactive" } end
+	return {SpeciesScript:digestPrey(target, ...)}
 end
 
 function sbq.getOccupantData(entityId)
@@ -378,6 +386,14 @@ function _SpeciesScript:emergencyEscape(...)
 	return self.state:emergencyEscape(...)
 end
 
+function _SpeciesScript:digestPrey(target, ...)
+	sbq.logInfo(target)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then sb.logInfo("missingOccupant") return false, "missingOccupant" end
+	local location = occupant:getLocation()
+	return self.state:tryAction(location.digestAction or "digestPrey", target, ...)
+end
+
 function _SpeciesScript:changeState(stateName)
 	local state = self.states[stateName]
 	if not state then sbq.logError("Attempt to switch to invalid state: " .. stateName) return false end
@@ -471,11 +487,11 @@ function _State:tryAction(name, target, ...)
 		elseif type(result2) == "string" and type(self[result2]) == "function" then
 			self[result2](self, ...)
 		end
-	end, name, action, target, result2, ...)
+	end, name, action, target, result2, ..., longest)
 	if type(result2) ~= "function" then
-		return result1, result2
+		return result1, result2, longest
 	end
-	return result1
+	return result1, nil, longest
 end
 
 function _State:requestAction(name, target, consent, ...)
@@ -566,7 +582,7 @@ function _State:doAnimations(animations, tags, target)
 				local timer = animator.animationTimer(state)
 				longest = math.max(longest, timer[2] - timer[1])
 			end
-		elseif sbq.config.debug then
+		elseif sbq.config.debug or sbq.voreConfig.debug then
 			sbq.logError(string.format("No animation state '%s' '%s'", state, anim))
 		end
 	end
@@ -659,7 +675,6 @@ function _State:emergencyEscape(occupant)
 	world.spawnProjectile("sbqMemeExplosion", occupant:position())
 	occupant:remove()
 end
-
 
 -- Location handling
 function _SpeciesScript:addLocation(name, config)
@@ -866,7 +881,6 @@ function _Location:updateOccupancy(dt)
 end
 
 function _Location:changeSizeAnims(prevVisualSize)
-	sbq.logInfo({animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize)},0)
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 
 	local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
@@ -1126,7 +1140,7 @@ function _Occupant:update(dt)
 		if compression == "time" then
 			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat("sbqDigestPower") * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
-			self.sizeMultiplier = math.max( compressionMin, world.entityResourcePercentage(self.entityId, "health"))
+			self.sizeMultiplier = math.max( compressionMin, world.entityResourcePercentage(self.entityId, "health") or 0)
 		end
 		if oldMultiplier ~= self.sizeMultiplier then
 			location.occupancy.sizeDirty = true
