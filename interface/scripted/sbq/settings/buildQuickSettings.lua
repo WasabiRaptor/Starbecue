@@ -1,7 +1,7 @@
 cfg = root.assetJson("/interface/scripted/sbq/settings/quickSettings.ui")
 
 player.setScriptContext("starbecue")
-sbq = player.callScript("sbq.getSettingsPageData")
+local sbq = player.callScript("sbq.getSettingsPageData") or {}
 cfg.inputData = {
 	sbq = sbq
 }
