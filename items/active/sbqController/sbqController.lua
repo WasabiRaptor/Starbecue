@@ -17,23 +17,23 @@ function init()
 
 	activeItem.setHoldingItem(false)
 	storage = storage or {}
-    sbq.setAction(storage.action)
+	sbq.setAction(storage.action)
 
-    message.setHandler("sbqControllerRotation", function(_, _, enabled)
+	message.setHandler("sbqControllerRotation", function(_, _, enabled)
 		sbq.rotationEnabled = enabled
-        activeItem.setHoldingItem(enabled)
+		activeItem.setHoldingItem(enabled)
 		if not enabled then
 			activeItem.setFacingDirection(0)
 		end
 	end)
 
-    message.setHandler("sbqControllerRadialMenuScript", function(_, _, script, ...)
+	message.setHandler("sbqControllerRadialMenuScript", function(_, _, script, ...)
 		if not script then return end
 		if RadialMenu[script] then
 			RadialMenu[script](RadialMenu, ...)
-        else
+		else
 			sb.logInfo(string.format("[%s] Attmpted invalid radial menu script: %s(%s)", entity.id(), script, sb.printJson({...})))
-    	end
+		end
 	end)
 end
 
@@ -59,17 +59,17 @@ function update(dt, fireMode, shiftHeld, controls)
 	else
 		if (shiftHeldTime) > 0.2 and controls.up then
 			RadialMenu:open("TopMenu")
-        elseif fireMode ~= "none" and not clicked and not RadialMenu.activeMenu then
+		elseif fireMode ~= "none" and not clicked and not RadialMenu.activeMenu then
 			sbq.clickAction()
 			clicked = true
-        elseif fireMode == "none" then
+		elseif fireMode == "none" then
 			if sbq.rotationEnabled then
 				sbq.aimAngle, sbq.aimDirection = activeItem.aimAngleAndDirection(0, activeItem.ownerAimPosition())
 				activeItem.setArmAngle(sbq.aimAngle)
 				activeItem.setFacingDirection(sbq.aimDirection)
 			end
 			clicked = false
-        end
+		end
 	end
 end
 
@@ -111,7 +111,7 @@ function sbq.clickAction()
 	end
 	if result and not result[1] and not (result[2] == "targetMissing") then
 		animator.playSound("error")
-    end
+	end
 	-- sb.logInfo(string.format("[%s] Action results: %s:%s", entity.id(), storage.action, sb.printJson(result)))
 	return table.unpack(result or {false})
 end
@@ -125,9 +125,9 @@ function RadialMenu:open(menuName, ...)
 	if self[menuName] and self[menuName].isMenu then
 		self.activeMenuName = menuName
 		self.activeMenu = self[menuName]
-        self.activeMenu:init(...)
-        setmetatable(self, { __index = self.activeMenu })
-    else
+		self.activeMenu:init(...)
+		setmetatable(self, { __index = self.activeMenu })
+	else
 		sb.logInfo(string.format("[%s] no radial menu named: %s", entity.id(), menuName))
 	end
 end
@@ -136,7 +136,7 @@ function RadialMenu:close()
 		self.activeMenu:uninit()
 	end
 	self.activeMenuName = nil
-    self.activeMenu = nil
+	self.activeMenu = nil
 	player.interact("ScriptPane", {baseConfig = "/interface/scripted/sbq/close/sbqClose.config"}, player.id())
 end
 
@@ -149,13 +149,13 @@ end
 function _RadialMenu:uninit()
 end
 function _RadialMenu:openRadialMenu(overrides)
-    player.interact("ScriptPane", sb.jsonMerge(
+	player.interact("ScriptPane", sb.jsonMerge(
 		{
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			default = {
 				context = "starbecue",
 				message = "sbqControllerRadialMenuScript"
-            },
+			},
 			cancel = {}
 		},
 		overrides
@@ -174,32 +174,32 @@ function TopMenu:init()
 	local options = {
 		{
 			args = {"letout", false, storage.action},
-            name = sbq.strings.letout,
-            locked = (not occupants) or (not occupants[1]),
-            description = sbq.strings.controllerLetOutAnyDesc,
+			name = sbq.strings.letout,
+			locked = (not occupants) or (not occupants[1]),
+			description = sbq.strings.controllerLetOutAnyDesc,
 			script = "sbq.tryAction"
-        },
-        {
-            args = { "open", "OccupantsMenu" },
+		},
+		{
+			args = { "open", "OccupantsMenu" },
 			name = sbq.strings.controllerRPMenu,
-            locked = true,
+			locked = true,
 			description = sbq.strings.controllerRPMenuDesc
 		},
 		{
 			args = {"open","OccupantsMenu"},
-            name = sbq.strings.occupants,
-            locked = (not occupants) or (not occupants[1]),
+			name = sbq.strings.occupants,
+			locked = (not occupants) or (not occupants[1]),
 			description = sbq.strings.controllerOccupantsDesc
 
-        },
+		},
 		{
 			args = {"open","AssignMenu"},
-            name = sbq.strings.controllerAssign,
+			name = sbq.strings.controllerAssign,
 			description = sbq.strings.controllerAssignDesc
 		}
 	}
-    self:openRadialMenu({ options = options, cancel = {
-        script = false,
+	self:openRadialMenu({ options = options, cancel = {
+		script = false,
 		message = false
 	}})
 end
@@ -210,17 +210,17 @@ setmetatable(AssignMenu, _RadialMenu)
 function AssignMenu:init()
 	local options = {}
 	player.setScriptContext("starbecue")
-    for _, action in ipairs(player.callScript("sbq.actionList", "assign") or {}) do
+	for _, action in ipairs(player.callScript("sbq.actionList", "assign") or {}) do
 		local icon, shortdescription, description = sbq.getActionData(action.action, true, storage.iconDirectory)
 		table.insert(options, {
 			args = {"controllerAssign", action.action},
 			name = shortdescription,
-            icon = icon,
+			icon = icon,
 			locked = not action.available,
 			description = description
 		})
 	end
-    self:openRadialMenu({ options = options, cancel = {
+	self:openRadialMenu({ options = options, cancel = {
 		args = {"open","TopMenu"}
 	}})
 end
@@ -239,7 +239,7 @@ function OccupantsMenu:init()
 			icon = world.entityPortrait(entityId, "bust")
 		})
 	end
-    self:openRadialMenu({ options = options, cancel = {
+	self:openRadialMenu({ options = options, cancel = {
 		args = {"open","TopMenu"},
 	}})
 end
@@ -251,22 +251,23 @@ function SelectedOccupantMenu:init(entityId)
 	local options = {
 		{
 			args = {"letout", entityId, storage.action},
-            name = sbq.strings.letout,
-            description = sbq.strings.controllerLetOutSelectedDesc,
+			name = sbq.strings.letout,
+			description = sbq.strings.controllerLetOutSelectedDesc,
 			locked = not player.callScript("sbq.actionAvailable", "letout", entityId),
 			script = "sbq.tryAction"
-        }
-    }
-	if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
-        table.insert(options, {
-            name = sbq.strings.interact,
-			args = {occupant.entityId},
-			script = "player.interactWithEntity"
+		}
+	}
+	if world.isMonster(entityId) or world.isNpc(entityId) then
+		table.insert(options, {
+			name = sbq.strings.interact,
+			args = {entityId},
+			script = "player.interactWithEntity",
+			description = sbq.strings.interactDesc
 		})
 	end
 	player.setScriptContext("starbecue")
-    for _, action in ipairs(player.callScript("sbq.actionList", "predRadialMenuSelect", entityId) or {}) do
-		local icon, shortdescription, description = sbq.getActionData(action, action.available, storage.iconDirectory, true)
+	for _, action in ipairs(player.callScript("sbq.actionList", "predRadialMenuSelect", entityId) or {}) do
+		local icon, shortdescription, description = sbq.getActionData(action.action, action.available, storage.iconDirectory, true)
 		table.insert(options, {
 			name = shortdescription,
 			args = { action.action, entityId, table.unpack(action.args or {}) },
@@ -275,9 +276,9 @@ function SelectedOccupantMenu:init(entityId)
 			description = description,
 			script = "sbq.tryAction"
 		})
-    end
+	end
 
-    self:openRadialMenu({ options = options, cancel = {
+	self:openRadialMenu({ options = options, cancel = {
 		args = {"open","OccupantsMenu"}
 	}})
 end

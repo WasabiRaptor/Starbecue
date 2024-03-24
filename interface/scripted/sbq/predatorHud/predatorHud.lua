@@ -4,33 +4,33 @@ end
 
 function init()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
-    backingCanvas:clear()
+	backingCanvas:clear()
 
-    message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
-        Occupants.list = occupants
+	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
+		Occupants.list = occupants
 		sbq.refreshOccupants()
-    end)
-    message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, lifetime)
-        local portrait = _ENV[entityId .. "PortraitCanvas"]
-        if portrait then
-            local pos = { 0, 0 }
-            local w = portrait
+	end)
+	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, lifetime)
+		local portrait = _ENV[entityId .. "PortraitCanvas"]
+		if portrait then
+			local pos = { 0, 0 }
+			local w = portrait
 			while w.parent do
 				pos = vec2.add(pos, w.position)
 				w = w.parent
-            end
+			end
 			if (pos[2] < 205) and (pos[2] > 19) then
 				_ENV.metagui.preyDialogueText({6, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, entityId.."HudDialogue", lifetime)
 			end
-            sbq.refreshPortrait(entityId)
+			sbq.refreshPortrait(entityId)
 		end
 	end)
-    Occupants.list = _ENV.metagui.inputData.occupants
+	Occupants.list = _ENV.metagui.inputData.occupants
 	sbq.refreshOccupants()
 end
 
 Occupants = {
-    list = {},
+	list = {},
 	entityId = {}
 }
 
@@ -44,46 +44,46 @@ end
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantLayout.config")
 function sbq.refreshOccupants()
 	Occupants.entityId = {}
-    _ENV.occupantSlots:clearChildren()
-    local occupants = #Occupants.list
-    _ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (math.max(occupants, sbq.gui.predHudMaxOccupants) + 1) + 5 })
-    for _, occupant in ipairs(Occupants.list) do
+	_ENV.occupantSlots:clearChildren()
+	local occupants = #Occupants.list
+	_ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (math.max(occupants, sbq.gui.predHudMaxOccupants) + 1) + 5 })
+	for _, occupant in ipairs(Occupants.list) do
 		local layout = sbq.replaceConfigTags(occupantTemplate, { entityId = occupant.entityId, entityName = world.entityName(occupant.entityId) })
 		Occupants.entityId[tostring(occupant.entityId)] = occupant
-        _ENV.occupantSlots:addChild(layout)
-        sbq.refreshPortrait(occupant.entityId)
+		_ENV.occupantSlots:addChild(layout)
+		sbq.refreshPortrait(occupant.entityId)
 		local ActionButton = _ENV[occupant.entityId.."ActionButton"]
-        function ActionButton:onClick()
-            local actions = {}
+		function ActionButton:onClick()
+			local actions = {}
 			if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
-                table.insert(actions, { sbq.strings.interact, function()
+				table.insert(actions, { sbq.strings.interact, function()
 					player.interactWithEntity(occupant.entityId)
-				end})
-            end
+				end, sbq.strings.interactDesc})
+			end
 			player.setScriptContext("starbecue")
 			for _, action in ipairs(player.callScript("sbq.actionList", "predHudSelect", occupant.entityId) or {}) do
 				if action.available then
-                    table.insert(actions, {
+					table.insert(actions, {
 						_ENV.metagui.formatText(action.name or (":"..action.action)),
 						function()
 							player.setScriptContext("starbecue")
 							player.callScript("sbq.tryAction", action.action, occupant.entityId, table.unpack(action.args or {}))
-                        end,
+						end,
 						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
 					})
 				else
 					table.insert(actions, {
-                        "^#555;^set;" .. sbq.getString(action.name or (":" .. action.action)),
-                        function() end,
+						"^#555;^set;" .. sbq.getString(action.name or (":" .. action.action)),
+						function() end,
 						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
 					})
 				end
-            end
+			end
 			_ENV.metagui.dropDownMenu(actions,2)
 		end
-    end
+	end
 	_ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (occupants + 1) })
-    _ENV.predHudTop:setVisible((occupants >= 8))
+	_ENV.predHudTop:setVisible((occupants >= 8))
 	sbq.updateBars(0)
 end
 
@@ -104,9 +104,9 @@ sbq.bottomBar = {
 }
 
 function sbq.updateBars(dt)
-    for _, occupant in ipairs(Occupants.list) do
-        sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
-        if occupant.progressBar then
+	for _, occupant in ipairs(Occupants.list) do
+		sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
+		if occupant.progressBar then
 			occupant.progressBar.progress = occupant.progressBar.progress + (dt * (occupant.progressBar.args.speed or 1))
 			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], occupant.progressBar.args.color, (occupant.progressBar.progress or 0) / 100 )
 		end
@@ -123,7 +123,7 @@ function sbq.replace(from, to)
 end
 
 function sbq.progressBar(canvas, color, percent)
-    if not canvas then return end
+	if not canvas then return end
 	local bar = sbq[canvas.data.bar]
 	local progressBar = widget.bindCanvas( canvas.backingWidget )
 	progressBar:clear()
@@ -146,10 +146,10 @@ function sbq.progressBar(canvas, color, percent)
 end
 
 function sbq.refreshPortrait(entityId)
-    local canvasWidget = _ENV[entityId .. "PortraitCanvas"]
+	local canvasWidget = _ENV[entityId .. "PortraitCanvas"]
 	if not canvasWidget then return end
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
-    canvas:clear()
+	canvas:clear()
 	canvas:drawDrawables(world.entityPortrait(entityId, "bust"), vec2.sub(vec2.div(canvasWidget.size, 2), {0,6}))
 end
 
