@@ -88,6 +88,7 @@ function default:tryVore(name, action, target, throughput, locationName, subLoca
 		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	if not location then return false, "invalidLocation" end
 	local space, subLocation = location:hasSpace(size)
 	if space then
 		if Occupants.addOccupant(target, size, "dummy") then
