@@ -34,8 +34,8 @@ function update(dt)
 				effect.sourceEntity(),
 				config.getParameter("digestMessage") or "sbqDigestPrey",
 				entity.id()
-			), function (data)
-				if (not data) or (not data[1]) then self.digestSent = false end
+			), function (recieved)
+				if recieved then self.digestSent = false end
 			end, function ()
 				self.digestSent = false
 			end)

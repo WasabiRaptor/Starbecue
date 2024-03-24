@@ -24,6 +24,24 @@ function sbq.initObject()
 	storage.resourcesLocked = storage.resourcesLocked or {}
 end
 
+function onInteraction(args)
+	if sbq.settings.interactDialogue then
+		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+			dialogueTree = sbq.dialogueTree
+		})
+		if Occupants.entityId[tostring(args.sourceId)] then
+			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
+		end
+		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+	else
+		local results = { SpeciesScript:interact(args) }
+		if results[2] == "interactAction" then
+			return results[3]
+		end
+	end
+end
+
+
 function sbq.area()
 	return #object.spaces()
 end

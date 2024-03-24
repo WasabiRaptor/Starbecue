@@ -51,6 +51,9 @@ function sbq.init()
 	message.setHandler("sbqTryAction", function(_, _, ...)
 		return sbq.tryAction(...)
 	end)
+	message.setHandler("sbqQueueAction", function(_, _, ...)
+		return sbq.queueAction(...)
+	end)
 	message.setHandler("sbqSettingsPageData", function ()
 		return sbq.getSettingsPageData()
 	end)
@@ -85,6 +88,9 @@ end
 function sbq.update(dt)
 	sbq.facingRight = (sbq.facingDirection() == 1)
 	if SpeciesScript.active then
+		if (not SpeciesScript.lockActions) and SpeciesScript.actionQueue[1]  then
+			SpeciesScript:tryAction(table.unpack(table.remove(SpeciesScript.actionQueue, 1)))
+		end
 		Occupants.update(dt)
 		SpeciesScript:update(dt)
 		SpeciesScript.state:update(dt)
@@ -141,7 +147,7 @@ function sbq.reloadVoreConfig(config)
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
 	end
-	SpeciesScript = { locations = {}, states = {} }
+	SpeciesScript = { locations = {}, states = {}, actionQueue = {} }
 	SpeciesScript.species = Species[sbq.voreConfig.species or "default"]
 	setmetatable(SpeciesScript, {__index = SpeciesScript.species})
 
@@ -207,6 +213,11 @@ function sbq.tryAction(action, target, ...)
 	return {SpeciesScript:tryAction(action, target, ...)}
 end
 
+function sbq.queueAction(action, target, ...)
+	if not SpeciesScript.active then return false end
+	return SpeciesScript:queueAction(action, target, ...)
+end
+
 function sbq.actionAvailable(action, target, ...)
 	if not SpeciesScript.active then return {false, "inactive"} end
 	return {SpeciesScript:actionAvailable(action, target, ...)}
@@ -218,7 +229,7 @@ function sbq.requestAction(action, target, consent, ...)
 end
 
 function sbq.digestPrey(target, ...)
-    if not SpeciesScript.active then return { false, "inactive" } end
+	if not SpeciesScript.active then return { false, "inactive" } end
 	return {SpeciesScript:digestPrey(target, ...)}
 end
 
@@ -301,58 +312,6 @@ function sbq.groupedSettingChanged.locations(name,k,v)
 	end
 end
 
-function sbq.tryVore(target, locationName, throughput)
-	local size = sbq.getEntitySize(target)
-	if throughput then
-		if (size) >= (throughput * sbq.scale()) then return false, "tooBig" end
-	end
-	local location = SpeciesScript:getLocation(locationName)
-	local space, subLocation = location:hasSpace(size)
-	if space then
-		if Occupants.addOccupant(target, size, locationName, subLocation) then
-			sbq.lockActions = true
-			return true, function ()
-				sbq.lockActions = false
-			end
-		else
-			return false, "noSlots"
-		end
-	else
-		return false, "noSpace"
-	end
-end
-
-function sbq.tryLetout(target, throughput)
-	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
-	if throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.scale()) then return false end
-	end
-	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
-	occupant:getLocation().occupancy.sizeDirty = true
-	sbq.lockActions = true
-	return true, function()
-		sbq.lockActions = false
-		occupant:remove()
-	end
-end
-
-function sbq.moveToLocation(target, throughput, locationName, subLocationName)
-	if not target or not locationName then return false end
-	occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
-	if throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= (throughput * sbq.scale()) then return false end
-	end
-	local location = SpeciesScript:getLocation(locationName, subLocationName)
-	local space, subLocationName = location:hasSpace(occupant.size * occupant.sizeMultiplier, subLocationName)
-	if space then
-		occupant:refreshLocation(locationName, subLocationName)
-		return true
-	end
-	return false, "noSpace"
-end
-
 -- transformation handling
 function _SpeciesScript:getLocation(...)
 	return self.state:getLocation(...)
@@ -360,6 +319,10 @@ end
 
 function _SpeciesScript:tryAction(action, target, ...)
 	return self.state:tryAction(action, target, ...)
+end
+
+function _SpeciesScript:queueAction(action, target, ...)
+	return self.state:queueAction(action, target, ...)
 end
 
 function _SpeciesScript:actionAvailable(action, target, ...)
@@ -387,11 +350,10 @@ function _SpeciesScript:emergencyEscape(...)
 end
 
 function _SpeciesScript:digestPrey(target, ...)
-	sbq.logInfo(target)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then sb.logInfo("missingOccupant") return false, "missingOccupant" end
+	if not occupant then sb.logInfo("missingOccupant") return false end
 	local location = occupant:getLocation()
-	return self.state:tryAction(location.digestAction or "digestPrey", target, ...)
+	return self.state:queueAction(location.digestAction or "digestPrey", target, ...)
 end
 
 function _SpeciesScript:changeState(stateName)
@@ -450,10 +412,15 @@ function _State:getLocation(locationName, subLocation)
 	end
 end
 
+function _State:queueAction(name, target, ...)
+	if not SpeciesScript:actionAvailable(name, target, ...) then return false end
+	table.insert(SpeciesScript.actionQueue, {name, target, ...})
+end
+
 function _State:tryAction(name, target, ...)
 	local action = self.actions[name]
 	if not action then return self:actionFailed(name, action, target, "missingAction", ...) end
-	if sbq.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
+	if SpeciesScript.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
 	if action.onCooldown then return self:actionFailed(name, action, target, "onCooldown", ...) end
 	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return self:actionFailed(name, action, target, "settingMismatch", ...) end
 	if action.targetSettings then
@@ -551,13 +518,16 @@ function _State:actionAvailable(name, target, ...)
 end
 
 function _State:animationTags(tags, target)
-	local targetTags = {
-		occupant = "occupant",
-	}
+	local targetTags = {}
 	if target then
 		local occupant = Occupants.entityId[tostring(target)]
 		if occupant then
+			local location = occupant:getLocation()
 			targetTags.occupant = occupant.seat
+			targetTags.location = occupant.location
+			targetTags.subLocation = occupant.subLocation
+			targetTags.locationTag = location.tag
+			targetTags.locationSize = tostring(location.visualSize)
 		end
 	end
 	return sb.jsonMerge(tags or {}, targetTags)
@@ -610,12 +580,19 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 end
 
 function _State:interact(args)
+	local interactActions = self.interactActions
+	local occupant = Occupants.entityId[tostring(args.sourceId)]
+	if occupant then
+		location = occupant:getLocation()
+		interactActions = location.interactActions
+	end
 	-- find closest interaction point, 4d voronoi style
 	local pos = sbq.globalToLocal(args.sourcePosition)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
-	for action, v in pairs(self.interactActions or {}) do
+	sbq.logInfo(interactActions, 2)
+	for action, v in pairs(interactActions or {}) do
 		if not v.action then
 			v.action = action
 		end
@@ -848,13 +825,13 @@ function _Location:updateOccupancy(dt)
 		)
 
 		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and self.occupancy.symmetry) then
-			self:changeSizeAnims(prevVisualSize)
+			self:doSizeChangeAnims(prevVisualSize)
 			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
 					subLocation = SpeciesScript:getLocation(self.key, k)
 					if subLocation.occupancy.sided then
 						subLocation.occupancy.visualSize = self.occupancy.visualSize
-						subLocation:changeSizeAnims(prevVisualSize)
+						subLocation:doSizeChangeAnims(prevVisualSize)
 					end
 				end
 			end
@@ -863,6 +840,14 @@ function _Location:updateOccupancy(dt)
 	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
 		self.occupancy.facingRight = sbq.facingRight
 		animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
+		if self.idleAnims then
+			SpeciesScript:doAnimations(self.idleAnims)
+		end
+		if self.occpantAnims then
+			for _, occupant in ipairs(self.occupancy.list) do
+				SpeciesScript:doAnimations(self.occpantAnims, {}, occupant.entityId)
+			end
+		end
 		self:refreshStruggleDirection()
 	end
 	if self.occupancy.interpolating then
@@ -880,25 +865,27 @@ function _Location:updateOccupancy(dt)
 	end
 end
 
-function _Location:changeSizeAnims(prevVisualSize)
+function _Location:doSizeChangeAnims(prevVisualSize)
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
-
-	local transitionAnims = ((self.transitionAnims or {})[tostring(prevVisualSize)] or {})[tostring(self.occupancy.visualSize)]
-	if transitionAnims then
-		SpeciesScript:doAnimations(transitionAnims)
+	if self.idleAnims then
+		SpeciesScript:doAnimations(self.idleAnims)
 	end
-	local idleAnims = (self.idleAnims or {})[tostring(self.occupancy.visualSize)]
-	if idleAnims then
-		SpeciesScript:doAnimations(idleAnims)
+	if self.occpantAnims then
+		for _, occupant in ipairs(self.occupancy.list) do
+			SpeciesScript:doAnimations(self.occpantAnims, {}, occupant.entityId)
+		end
 	end
-	local interpolateAnims = self.occupancy.queuedInterpolateAnims or self.interpolateAnims
-	if interpolateAnims then
+	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
+	if sizeChangeAnims then
 		self.occupancy.interpolating = true
 		self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
-		self.interpolateTime = SpeciesScript:doAnimations(interpolateAnims)
+		self.interpolateTime = SpeciesScript:doAnimations(sizeChangeAnims, {
+			prevSize = tostring(prevVisualSize),
+			newSize = tostring(self.occupancy.visualSize)
+		})
 		self.interpolateCurTime = 0
 	end
-	self.occupancy.queuedInterpolateAnims = nil
+	self.occupancy.queuedSizeChangeAnims = nil
 end
 
 function _Location:refreshStruggleDirection(id)
@@ -1173,18 +1160,9 @@ function _Occupant:refreshLocation(name, subLocation)
 	end
 	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
 
-	local attemptAnims = {
-		SpeciesScript.stateName .. "_" .. location.tag .. "_" .. location.occupancy.visualSize,
-		SpeciesScript.stateName .. "_" .. location.tag,
-		location.tag .. "_" .. location.occupancy.visualSize,
-		location.tag,
-		self.location .. "_" .. location.occupancy.visualSize,
-		self.location
-	}
-	for _, v in ipairs(attemptAnims) do
-		if animator.hasState(self.seat .. "Location", v) then
-			animator.setAnimationState(self.seat.."Location", v)
-		end
+	local occupantAnims = location.occupantAnims
+	if occupantAnims then
+		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
 
 	if not self.locationStore[self.location] then

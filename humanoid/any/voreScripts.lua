@@ -66,15 +66,56 @@ function default:scriptSequence(name, action, target, scriptList, ...)
 	return table.unpack(results)
 end
 
-function default:moveToLocation(name, action, target, throughput, location, subLocation, ...)
-	return sbq.moveToLocation(target, throughput or action.throughput, action.location or location, action.subLocation or subLocation)
+function default:moveToLocation(name, action, target, throughput, locationName, subLocationName, ...)
+	if not target or not (action.location or locationName) then return false end
+	occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if throughput or action.throughput then
+		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
+	end
+	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier, subLocationName or action.subLocation)
+	if space then
+		occupant:refreshLocation(locationName, subLocation)
+		return true
+	end
+	return false, "noSpace"
 end
 
-function default:tryVore(name, action, target, ...)
-	return sbq.tryVore(target, action.location, action.throughput)
+function default:tryVore(name, action, target, throughput, locationName, subLocationName, ...)
+	local size = sbq.getEntitySize(target)
+	if throughput or action.throughput then
+		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
+	end
+	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	local space, subLocation = location:hasSpace(size)
+	if space then
+		if Occupants.addOccupant(target, size, "dummy") then
+			SpeciesScript.lockActions = true
+			return true, function()
+				Occupants.addOccupant(target, size, locationName or action.location, subLocation)
+				SpeciesScript.lockActions = false
+			end
+		else
+			return false, "noSlots"
+		end
+	else
+		return false, "noSpace"
+	end
 end
 function default:tryLetout(name, action, target, ...)
-	return sbq.tryLetout(target, action.throughput)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if action.throughput then
+		if (occupant.size * occupant.sizeMultiplier) >= (action.throughput * sbq.scale()) then return false end
+	end
+	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
+	occupant:getLocation().occupancy.sizeDirty = true
+	SpeciesScript.lockActions = true
+	return true, function()
+		SpeciesScript.lockActions = false
+		occupant:remove()
+	end
 end
 local function letout(funcName, action, target, preferredAction, skip, ...)
 	if target then
@@ -119,7 +160,7 @@ function default:trySendDeeper(name, action, target, ...)
 	local occupant = location.occupancy.list[1]
 	local sendDeeper = action.sendDeeper or location.sendDeeper
 	if occupant and sendDeeper then
-		return sbq.moveToLocation(occupant.entityId, sendDeeper.throughput, sendDeeper.location, sendDeeper.subLocation)
+		return self:moveToLocation(name, action, occupant.entityId, ...)
 	end
 end
 
@@ -134,7 +175,7 @@ function default:grab(name, action, target, ...)
 	end
 end
 function default:grabTarget(name, action, target, ...)
-	local success, result2 = sbq.tryVore(target, action.location or "grabbed", action.throughput or math.huge)
+	local success, result2 = self:tryVore(name, action, target, ...)
 	if success then
 		animator.playSound("grab")
 		world.sendEntityMessage(entity.id(), "sbqControllerRotation", true)
@@ -181,7 +222,7 @@ function default:digestPrey(name, action, target, ...)
 	occupant.flags.digested = true
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 	occupant.size = action.size or location.digestedSize or 0
-    location.occupancy.sizeDirty = true
+	location.occupancy.sizeDirty = true
 	occupant:logInfo("digested")
 	return true, function () occupant:refreshLocation()  end
 end
