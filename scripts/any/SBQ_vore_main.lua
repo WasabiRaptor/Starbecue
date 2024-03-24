@@ -487,7 +487,7 @@ function _State:actionFailed(name, action, target, reason, ...)
 	if type(result2) ~= "function" then
 		return result1, reason, result2, ...
 	end
-	return result1, reason, ...
+	return result1, reason, nil, ...
 end
 
 function _State:actionAvailable(name, target, ...)
@@ -722,7 +722,7 @@ function _SpeciesScript:addLocation(name, config)
 	self.locations[name] = location
 end
 
-function _Location:hasSpace(size, subLocation)
+function _Location:hasSpace(size)
 	if not sbq.tableMatches(self.activeSettings, sbq.settings, true) then return false end
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
 	if self.settings.hammerspace then return math.huge end
@@ -730,13 +730,9 @@ function _Location:hasSpace(size, subLocation)
 	for _, name in ipairs(self.sharedWith or {}) do
 		local location = SpeciesScript:getLocation(name)
 		shared = shared + location.occupancy.size
-	end
-	if not self.subLocations then
-		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size)
-	elseif subLocation then
-		if self.subLocations[subLocation].maxCount and (#self.occupancy.subLocations[subLocation].list >= self.subLocations[subLocation].maxCount) then return false end
-		-- if we got an input for a sublocation, check that specific one and return
-		return self:getRemainingSpace(self.subLocations[subLocation].maxFill, self.occupancy.subLocations[subLocation].size + shared, size), subLocation
+    end
+	if (not self.subLocations) or self.subKey then
+		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size), self.subKey
 	elseif self.subLocations[1] then
 		if self.subLocations[1].maxCount and (#self.occupancy.subLocations[1].list >= self.subLocations[1].maxCount) then return false end
 		-- if an array, assuming locations are ordered, only check if theres space in the first
@@ -1334,7 +1330,10 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then
-			SpeciesScript:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {}))
+			if SpeciesScript:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {})) then
+                self.struggleCount = math.ceil(math.sqrt(self.struggleCount))
+				self.struggleTime = math.sqrt(self.struggleTime)
+			end
 		end
 	end
 end

@@ -66,15 +66,15 @@ function default:scriptSequence(name, action, target, scriptList, ...)
 	return table.unpack(results)
 end
 
-function default:moveToLocation(name, action, target, throughput, locationName, subLocationName, ...)
-	if not target or not (action.location or locationName) then return false end
+function default:moveToLocation(name, action, target, locationName, subLocationName, throughput, ...)
+	if not target or not (locationName or action.location) then return false end
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	if throughput or action.throughput then
 		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
-	local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier, subLocationName or action.subLocation)
+	local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 	if space then
 		occupant:refreshLocation(locationName, subLocation)
 		return true
@@ -82,13 +82,24 @@ function default:moveToLocation(name, action, target, throughput, locationName, 
 	return false, "noSpace"
 end
 
-function default:tryVore(name, action, target, throughput, locationName, subLocationName, ...)
+function default:trySendDeeper(name, action, target, reason, locationName, subLocationName)
+	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+    if not location then return false, "invalidLocation" end
+	local occupant = location.occupancy.list[1]
+    if occupant and location.sendDeeperAction then
+		return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
+	end
+end
+
+function default:tryVore(name, action, target, locationName, subLocationName, throughput, ...)
 	local size = sbq.getEntitySize(target)
 	if throughput or action.throughput then
 		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
+	self:trySendDeeper(name, action, target, nil, locationName, subLocationName)
+
 	local space, subLocation = location:hasSpace(size)
 	if space then
 		if Occupants.addOccupant(target, size, "dummy") then
@@ -104,11 +115,11 @@ function default:tryVore(name, action, target, throughput, locationName, subLoca
 		return false, "noSpace"
 	end
 end
-function default:tryLetout(name, action, target, ...)
+function default:tryLetout(name, action, target, throughput, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
-	if action.throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= (action.throughput * sbq.scale()) then return false end
+	if throughput or action.throughput then
+		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
 	end
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
@@ -154,15 +165,6 @@ function default:letout(name, ...)
 end
 function default:letoutAvailable(name, ...)
 	letout("actionAvailable", ...)
-end
-
-function default:trySendDeeper(name, action, target, ...)
-	local location = SpeciesScript:getLocation(action.location)
-	local occupant = location.occupancy.list[1]
-	local sendDeeper = action.sendDeeper or location.sendDeeper
-	if occupant and sendDeeper then
-		return self:moveToLocation(name, action, occupant.entityId, ...)
-	end
 end
 
 function default:grab(name, action, target, ...)
