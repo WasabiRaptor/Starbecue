@@ -83,6 +83,5 @@ function uninit()
 			world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
 		end
 		status.setResource("health", -1)
-		mcontroller.resetAnchorState()
 	end
 end
