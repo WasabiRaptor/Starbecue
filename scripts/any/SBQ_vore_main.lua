@@ -1280,7 +1280,7 @@ end
 function _Occupant:checkStruggleDirection(dt)
 	local dx = 0
 	local dy = 0
-	local effectiveness = self.sizeMultiplier * self.size
+	local effectiveness = self.sizeMultiplier * self.size / sbq.scale()
 	local staleTime = 5
 	if self:controlHeld("Up") then
 		dy = dy + 1
