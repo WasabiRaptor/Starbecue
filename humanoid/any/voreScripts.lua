@@ -215,9 +215,8 @@ function default:turboDigest(name, action, target, ...)
 end
 
 function default:digestPrey(name, action, target, ...)
-	sbq.logInfo(target)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then sbq.logInfo("digest failed") return  false end
+	if not occupant then return  false end
 	local location = occupant:getLocation()
 	occupant.flags.digested = true
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1

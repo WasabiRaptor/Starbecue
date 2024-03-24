@@ -591,7 +591,6 @@ function _State:interact(args)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
-	sbq.logInfo(interactActions, 2)
 	for action, v in pairs(interactActions or {}) do
 		if not v.action then
 			v.action = action
