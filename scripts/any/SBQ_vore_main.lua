@@ -730,7 +730,7 @@ function _Location:hasSpace(size)
 	for _, name in ipairs(self.sharedWith or {}) do
 		local location = SpeciesScript:getLocation(name)
 		shared = shared + location.occupancy.size
-    end
+	end
 	if (not self.subLocations) or self.subKey then
 		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size), self.subKey
 	elseif self.subLocations[1] then
@@ -1001,7 +1001,7 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 	local occupant = {
 		entityId = entityId,
 		seat = seat,
-		flags = {},
+		flags = {newOccupant = true},
 		location = nil,
 		subLocation = nil,
 		size = size or 1,
@@ -1115,7 +1115,7 @@ function _Occupant:update(dt)
 		if self.progressBar.progress >= 100 then self.progressBar.callback(self, self.progressBar.args) end
 	end
 
-	if not self.flags.digested then
+	if not (self.flags.digested or self.flags.infused or self.flags.newOccupant) then
 		local oldMultiplier = self.sizeMultiplier
 		local compression = location.settings.compression
 		local compressionMin = location.settings.compressionMin
@@ -1175,7 +1175,7 @@ function _Occupant:refreshLocation(name, subLocation)
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
 	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
-	if not (self.flags.digested or self.flags.infused) then
+	if not (self.flags.digested or self.flags.infused or self.flags.newOccupant) then
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do
 			if (location.settings[setting]) then
@@ -1331,7 +1331,7 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then
 			if SpeciesScript:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {})) then
-                self.struggleCount = math.ceil(math.sqrt(self.struggleCount))
+				self.struggleCount = math.ceil(math.sqrt(self.struggleCount))
 				self.struggleTime = math.sqrt(self.struggleTime)
 			end
 		end

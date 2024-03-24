@@ -76,17 +76,24 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 	if space then
+		occupant.flags.newOccupant = true
 		occupant:refreshLocation(locationName, subLocation)
-		return true
+		return true, function ()
+			occupant = Occupants.entityId[tostring(target)]
+			if occupant then
+				occupant.flags.newOccupant = false
+				occupant:refreshLocation()
+			end
+		end
 	end
 	return false, "noSpace"
 end
 
 function default:trySendDeeper(name, action, target, reason, locationName, subLocationName)
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
-    if not location then return false, "invalidLocation" end
+	if not location then return false, "invalidLocation" end
 	local occupant = location.occupancy.list[1]
-    if occupant and location.sendDeeperAction then
+	if occupant and location.sendDeeperAction then
 		return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
 	end
 end
@@ -102,10 +109,14 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 
 	local space, subLocation = location:hasSpace(size)
 	if space then
-		if Occupants.addOccupant(target, size, "dummy") then
+		if Occupants.addOccupant(target, size, locationName or action.location, subLocation) then
 			SpeciesScript.lockActions = true
 			return true, function()
-				Occupants.addOccupant(target, size, locationName or action.location, subLocation)
+				local occupant = Occupants.entityId[tostring(target)]
+				if occupant then
+					occupant.flags.newOccupant = false
+					occupant:refreshLocation()
+				end
 				SpeciesScript.lockActions = false
 			end
 		else
