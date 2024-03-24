@@ -472,6 +472,7 @@ function _State:requestAction(name, target, consent, ...)
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
+	if not action then return false, reason, nil, ... end
 	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
 	local result1, result2  = false, false

@@ -148,7 +148,7 @@ local function letout(funcName, action, target, preferredAction, skip, ...)
 		local exitTypes = location.exitTypes or location.entryTypes
 		if preferredAction then
 			for _, exitType in ipairs(exitTypes or {}) do
-				if exitType == preferredAction then
+				if (exitType == preferredAction) or (preferredAction == "vore") then
 					if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
 						return true
 					end
@@ -164,7 +164,7 @@ local function letout(funcName, action, target, preferredAction, skip, ...)
 	else
 		for i = #Occupants.list, 1, -1 do
 			local occupant = Occupants.list[i]
-			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction,true) then
+			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction, true) then
 				return true
 			end
 		end
