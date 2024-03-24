@@ -103,9 +103,6 @@ return to the `Installed Files` tab and select `Verify integrity of game files`
 
 Steam will then re-download the unmodified versions of the game executable
 
-
-# WARNING! the following text explaining how the mod works may be innacurate while we are working on this major rewrite!
-
 # Getting Started
 
 On creation of a new character, a popup menu will open up to allow one to quickly assign the settings. To change those settings and access further settings, then open the toobar and select **Starbecue Settings** to open the settings menu.
@@ -228,7 +225,7 @@ One can also create their own OC for the mod using this template [here](https://
 - [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942)
 - [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956)
 
-# Predator Info
+# Being a Pred
 
 To be a pred, one must have opted in to being pred for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
 Eg: If you select Oral Vore pred, but don't require consent, you're allowing prey characters to attempt to force their way inside your mouth. If consent is enabled, then you will recieve a textbox prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
@@ -237,9 +234,9 @@ To perform predator actions, one requires a **SBQ Controller** these can be craf
 
 The action wheel will also let you release any prey you have eaten, or select a specific prey to perform prey specific actions only available through this menu.
 
-In the bottom right you will have a HUD to show you the health of your current occupants, as well as the progress bar for any extra effects they are currently being subject to. This HUD will also allow you to quickly change the current digest effect for the selected location.
+In the bottom right you will have a HUD to show you the health of your current occupants, as well as the progress bar for any extra effects they are currently being subject to. This HUD will also allow you to quickly change the current digest effect for the selected location, as well as select prey to perform actions on them.
 
-# Prey Info
+# Being Prey
 
 To be prey, one must have opted in to being prey for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
 Eg: if you select Oral Vore prey, but don't require consent, you're allowing pred characters to attempt to eat you without asking. If consent is enabled, you will recieve a textbox prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
