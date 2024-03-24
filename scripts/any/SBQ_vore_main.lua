@@ -256,6 +256,10 @@ function sbq.getSettingsPageData()
 end
 
 function sbq.setSetting(k, v)
+	local parent = sbq.parentEntity()
+	if parent then
+		world.sendEntityMessage(parent, "sbqParentSetSetting", entity.uniqueId(), k, v)
+	end
 	local old = sbq.settings[k]
 	storage.sbqSettings[k] = v
 	if old == sbq.settings[k] then return end
@@ -272,12 +276,20 @@ function sbq.setSetting(k, v)
 end
 
 function sbq.getUpgrade(upgradeName, tier, bonus)
+	local parent = sbq.parentEntity()
+	if parent then
+		world.sendEntityMessage(parent, "sbqParentGetUpgrade", entity.uniqueId(), upgradeName, tier, bonus)
+	end
 	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
 	storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
 	sbq.refreshUpgrades(true)
 end
 
 function sbq.setGroupedSetting(group, name, k, v)
+	local parent = sbq.parentEntity()
+	if parent then
+		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", entity.uniqueId(), group, name, k, v)
+	end
 	local old = sbq.settings[group][name][k]
 	storage.sbqSettings[group][name][k] = v
 	if old == sbq.settings[group][name][k] then return end
@@ -295,6 +307,10 @@ function sbq.setGroupedSetting(group, name, k, v)
 end
 
 function sbq.importSettings(newSettings)
+	local parent = sbq.parentEntity()
+	if parent then
+		world.sendEntityMessage(parent, "sbqParentImportSettings", entity.uniqueId(), newSettings)
+	end
 	storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
 	sbq.setupSettingMetatables(entity.entityType())
 	sbq.refreshPublicSettings()
@@ -1099,13 +1115,14 @@ function Occupants.update(dt)
 end
 
 function _Occupant:update(dt)
-	if not world.entityExists(self.entityId) then self:remove() end
+	if not world.entityExists(self.entityId) then return self:remove() end
 	local location = self:getLocation()
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
-		self:setHidden(animator.partProperty(self.seat, "hidden"))
-		self:setLoungeDance(animator.partProperty(self.seat, "dance"))
-		self:setLoungeEmote(animator.partProperty(self.seat, "emote"))
+		if self:animProperty("release") then return self:remove() end
+		self:setHidden(self:animProperty("hidden"))
+		self:setLoungeDance(self:animProperty("dance"))
+		self:setLoungeEmote(self:animProperty("emote"))
 	end
 	local locationStore = self.locationStore[self.location]
 
@@ -1403,6 +1420,10 @@ end
 
 function _Occupant:sendEntityMessage(...)
 	return world.sendEntityMessage(self.entityId, ...)
+end
+
+function _Occupant:animProperty(property)
+	return animator.partProperty(self.seat, property)
 end
 
 function _Occupant:position()

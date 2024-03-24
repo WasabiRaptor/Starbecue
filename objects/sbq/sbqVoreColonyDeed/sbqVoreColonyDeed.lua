@@ -11,6 +11,26 @@ sbq = {}
 
 require("/scripts/any/SBQ_RPC_handling.lua")
 
+sbqTenant = {}
+function sbqTenant:setSetting(k, v)
+	self.overrides.scriptConfig.sbqSettings = self.overrides.scriptConfig.sbqSettings or {}
+	self.overrides.scriptConfig.sbqSettings[k] = v
+end
+function sbqTenant:setGroupedSetting(group, name, k, v)
+	self.overrides.scriptConfig.sbqSettings = self.overrides.scriptConfig.sbqSettings or {}
+	self.overrides.scriptConfig.sbqSettings[group] = self.overrides.scriptConfig.sbqSettings[group] or {}
+	self.overrides.scriptConfig.sbqSettings[group][name] = self.overrides.scriptConfig.sbqSettings[group][name] or {}
+	self.overrides.scriptConfig.sbqSettings[group][name][k] = v
+end
+function sbqTenant:importSettings(newSettings)
+	self.overrides.scriptConfig.sbqSettings = newSettings
+end
+function sbqTenant:getUpgrade(upgradeName, tier, bonus)
+	self.overrides.scriptConfig.sbqUpgrades = self.overrides.scriptConfig.sbqUpgrades or {}
+	self.overrides.scriptConfig.sbqUpgrades[upgradeName] = self.overrides.scriptConfig.sbqUpgrades[upgradeName] or {}
+	self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] = math.max(self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] or 0, bonus)
+end
+
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 
@@ -22,6 +42,28 @@ function init()
 	end
 
 	old.init()
+
+	message.setHandler("sbqParentSetSetting", function(_, _, uuid, ...)
+		local i = findTenant(uuid)
+		if not i then return end
+		sbqTenant.setSetting(storage.occupier.tenants[i], ...)
+	end)
+	message.setHandler("sbqParentSetGroupedSetting", function(_, _, uuid, ...)
+		local i = findTenant(uuid)
+		if not i then return end
+		sbqTenant.setGroupedSetting(storage.occupier.tenants[i], ...)
+	end)
+	message.setHandler("sbqParentGetUpgrade", function(_, _, uuid, ...)
+		local i = findTenant(uuid)
+		if not i then return end
+		sbqTenant.getUpgrade(storage.occupier.tenants[i], ...)
+	end)
+	message.setHandler("sbqParentImportSettings", function(_, _, uuid, ...)
+		local i = findTenant(uuid)
+		if not i then return end
+		sbqTenant.importSettings(storage.occupier.tenants[i], ...)
+	end)
+
 
 	message.setHandler("sbqSaveSettings", function (_,_, settings, index)
 		local scriptConfig = storage.occupier.tenants[index or 1].overrides.scriptConfig or {}
@@ -64,7 +106,7 @@ function init()
 		if checkExistingUniqueIds(occupier) then return animator.playSound("error") end
 		evictTenants()
 
-        local data = occupier.checkRequirements or {}
+		local data = occupier.checkRequirements or {}
 		for i, tenant in ipairs(occupier.tenants) do
 			if tenant.spawn == "npc" then
 				for _, species in ipairs(tenant.species) do
@@ -138,7 +180,7 @@ function chooseTenants(seed, tags)
 
 	matches = util.filter(matches, function(match)
 
-        local data = match.checkRequirements or {}
+		local data = match.checkRequirements or {}
 		for i, tenant in ipairs(match.tenants) do
 			if tenant.spawn == "npc" then
 				for _, species in ipairs(tenant.species) do

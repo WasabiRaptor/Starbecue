@@ -136,8 +136,9 @@ function default:tryLetout(name, action, target, throughput, ...)
 	occupant:getLocation().occupancy.sizeDirty = true
 	SpeciesScript.lockActions = true
 	return true, function()
+		local occupant = Occupants.entityId[tostring(target)]
 		SpeciesScript.lockActions = false
-		occupant:remove()
+		if occupant then occupant:remove() end
 	end
 end
 local function letout(funcName, action, target, preferredAction, skip, ...)

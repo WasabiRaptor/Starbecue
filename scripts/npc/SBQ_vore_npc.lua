@@ -1,10 +1,10 @@
 
 local old = {
-    init = init,
-    update = update,
-    uninit = uninit,
+	init = init,
+	update = update,
+	uninit = uninit,
 
-    preservedStorage = preservedStorage,
+	preservedStorage = preservedStorage,
 }
 
 dialogueStepScripts = {}
@@ -20,19 +20,20 @@ require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
 
 function init()
-    sbq.config = root.assetJson("/sbq.config")
+	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-    sbq.npcConfig = root.npcConfig(npc.npcType())
+	sbq.npcConfig = root.npcConfig(npc.npcType())
 	storage = storage or {}
-	storage.sbqUpgrades = storage.sbqUpgrades or {}
-    if not storage.sbqUpgrades.candiesEaten then
-        storage.sbqUpgrades.candiesEaten = {}
+	storage.sbqSettings = sb.jsonMerge(config.getParameter("sbqSettings") or {}, storage.sbqSettings or {})
+	storage.sbqUpgrades = sb.jsonMerge(config.getParameter("sbqUpgrades") or {}, storage.sbqUpgrades or {})
+	if not storage.sbqUpgrades.candiesEaten then
+		storage.sbqUpgrades.candiesEaten = {}
 		for i = 1, math.max(npc.level(), 1) do
 			storage.sbqUpgrades.candiesEaten[i] = 1
 		end
 	end
-    old.init()
+	old.init()
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()
 		_ENV.updateUniqueId()
@@ -46,7 +47,7 @@ function init()
 	message.setHandler("sbqSetInteracted", function (_,_, id)
 		self.interacted = true
 		self.board:setEntity("interactionSource", id)
-    end)
+	end)
 
 	message.setHandler("sbqSwapFollowing", function(_, _)
 		if storage.behaviorFollowing then
@@ -68,11 +69,11 @@ function init()
 	end)
 	message.setHandler("recruit.confirmUnfollowBehavior", function(_,_)
 		_ENV.recruitable.confirmUnfollowBehavior(true)
-    end)
+	end)
 end
 
 function update(dt)
-    old.update(dt)
+	old.update(dt)
 	sbq.update(dt)
 end
 
@@ -86,23 +87,23 @@ function interact(args)
 	end
 	_ENV.setInteracted(args)
 
-    if sbq.settings.interactDialogue then
-        local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
-            dialogueTree = sbq.dialogueTree
-        })
-        if npc.loungingIn() == args.sourceId then
-            dialogueBoxData.dialogueTreeStart = ".predInteract"
+	if sbq.settings.interactDialogue then
+		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+			dialogueTree = sbq.dialogueTree
+		})
+		if npc.loungingIn() == args.sourceId then
+			dialogueBoxData.dialogueTreeStart = ".predInteract"
 			dialogueBoxData.noActions = true
-            -- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
+			-- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
 			-- 	entity.id(),
-            --     "The quick brown fox jumped over the lazy dog.",
+			--     "The quick brown fox jumped over the lazy dog.",
 			-- }}}
-        elseif Occupants.entityId[tostring(args.sourceId)] then
+		elseif Occupants.entityId[tostring(args.sourceId)] then
 			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
 		end
 		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
-    else
-        if npc.loungingIn() == args.sourceId then return end
+	else
+		if npc.loungingIn() == args.sourceId then return end
 
 		local results = { SpeciesScript:interact(args) }
 		if results[2] == "interactAction" then
@@ -114,17 +115,18 @@ end
 local _equipped_primary = equipped.primary
 function equipped.primary(itemDescriptor)
 	if not itemDescriptor then
-        npc.setItemSlot("primary", "sbqControllerNPC")
-    else
+		npc.setItemSlot("primary", "sbqControllerNPC")
+	else
 		return _equipped_primary(itemDescriptor)
 	end
 end
 
 function preservedStorage()
-    return sb.jsonMerge(old.preservedStorage(), {
+	return sb.jsonMerge(old.preservedStorage(), {
 		settings = storage.settings
 	})
 end
+
 
 -- I fucking hate starbound
 -- function recruitable.generateRecruitInfo()
