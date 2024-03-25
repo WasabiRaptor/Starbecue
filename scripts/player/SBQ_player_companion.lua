@@ -1,74 +1,65 @@
----@diagnostic disable: undefined-global
+require("/scripts/any/SBQ_petSpawner.lua")
+
 local old = {
-    init = init,
-    update = update,
-	uninit = uninit
+	init = init,
+	update = update,
+	uninit = uninit,
+	recruit_spawn = _ENV.Recruit._spawn,
 }
 
 function init()
 	old.init()
 
-	message.setHandler("sbqPlayerCompanions", function(_, _)
-		local crew = {}
-		for category, companions in pairs(recruitSpawner:storeCrew()) do
-			if category == "followers" then
-				util.appendLists(crew, companions)
-			elseif onOwnShip() and category == "shipCrew" then
-				util.appendLists(crew, companions)
-			end
+	message.setHandler("sbqParentSetSetting", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.recruitSpawner:getRecruit(recruitUuid)
+		if not recruit then
+			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
 		end
-		return crew
+		if not recruit then return end
+		recruit:sbqSetSetting(...)
 	end)
+	message.setHandler("sbqParentSetGroupedSetting", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.recruitSpawner:getRecruit(recruitUuid)
+		if not recruit then
+			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
+		end
+		if not recruit then return end
+		recruit:sbqSetGroupedSetting(...)
+	end)
+	message.setHandler("sbqParentGetUpgrade", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.recruitSpawner:getRecruit(recruitUuid)
+		if not recruit then
+			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
+		end
+		if not recruit then return end
+		recruit:sbqGetUpgrade(...)
 
-	local companionTypes = { "followers", "shipCrew" }
-	message.setHandler("sbqCrewSaveSettings", function(_, _, settings, uniqueId)
-		for _, companionType in ipairs(companionTypes) do
-			local companions = recruitSpawner[companionType]
-			for i, follower in pairs(companions) do
-				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
-					follower.spawnConfig.parameters.scriptConfig.sbqSettings = settings
-					break
-				end
-			end
-		end
-		recruitSpawner:markDirty()
 	end)
-	message.setHandler("sbqCrewSaveDigestedPrey", function(_, _, digestedStoredTable, uniqueId)
-		for _, companionType in ipairs(companionTypes) do
-			local companions = recruitSpawner[companionType]
-			for i, follower in pairs(companions) do
-				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
-					follower.spawnConfig.parameters.statusControllerSettings = follower.spawnConfig.parameters.statusControllerSettings or {}
-					follower.spawnConfig.parameters.statusControllerSettings.statusProperties = follower.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
-					follower.spawnConfig.parameters.statusControllerSettings.statusProperties.sbqStoredDigestedPrey = digestedStoredTable
-					break
-				end
-			end
+	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.recruitSpawner:getRecruit(recruitUuid)
+		if not recruit then
+			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
 		end
-		recruitSpawner:markDirty()
+		if not recruit then return end
+		recruit:sbqImportSettings(...)
 	end)
-	message.setHandler("sbqCrewSaveStatusProperty", function(_, _, property, data, uniqueId)
-		for _, companionType in ipairs(companionTypes) do
-			local companions = recruitSpawner[companionType]
-			for i, follower in pairs(companions) do
-				if follower.uniqueId == uniqueId or follower.spawnConfig.parameters.scriptConfig.preservedUuid == uniqueId then
-					follower.spawnConfig.parameters.statusControllerSettings = follower.spawnConfig.parameters.statusControllerSettings or {}
-					follower.spawnConfig.parameters.statusControllerSettings.statusProperties = follower.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
-					follower.spawnConfig.parameters.statusControllerSettings.statusProperties[property] = data
-					break
-				end
-			end
-		end
-		recruitSpawner:markDirty()
-	end)
-
 
 	message.setHandler( "sbqRequestFollow", function (_,_, uniqueId, recruitUuid, recruitInfo)
-		if not checkCrewLimits(recruitUuid) then
+		if not _ENV.checkCrewLimits(recruitUuid) then
 			return false
 		end
-		promises:add(world.sendEntityMessage(uniqueId, "recruit.confirmFollow"), function(success)
-			recruitSpawner:recruitFollowing(onOwnShip(), recruitUuid, recruitInfo)
+		_ENV.promises:add(world.sendEntityMessage(uniqueId, "recruit.confirmFollow"), function(success)
+			_ENV.recruitSpawner:recruitFollowing(_ENV.onOwnShip(), recruitUuid, recruitInfo)
 		end)
 	end)
+end
+
+function _ENV.Recruit:_spawn(position, parameters)
+	local scriptConfig = self:_scriptConfig(parameters)
+	if scriptConfig.sbqOverrideUniqueId then
+		self.uniqueId = scriptConfig.sbqOverrideUniqueId
+		scriptConfig.uniqueId = scriptConfig.sbqOverrideUniqueId
+	end
+	if world.getUniqueEntityId(self.uniqueId) then return end
+	old.recruit_spawn(self, position, parameters)
 end

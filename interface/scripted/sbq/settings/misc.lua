@@ -31,38 +31,39 @@ function _ENV.importSettings:onClick()
 		sbq.importSettings((item.parameters or {}).sbqSettings)
 	end
 end
+misc = {}
 
 function _ENV.exportAllSettings:onClick()
-	player.giveItem(sbq.generateSettingsCard("all"))
+	player.giveItem(misc.generateSettingsCard("all"))
 end
 function _ENV.exportPrefsOnly:onClick()
-	player.giveItem(sbq.generateSettingsCard("prefs"))
+	player.giveItem(misc.generateSettingsCard("prefs"))
 end
 function _ENV.exportLocationsOnly:onClick()
-	player.giveItem(sbq.generateSettingsCard("locations"))
+	player.giveItem(misc.generateSettingsCard("locations"))
 end
 
-function sbq.generateSettingsCard(type)
+function misc.generateSettingsCard(type)
     return { name = "secretnote", count = 1, parameters = {
 		shortdescription = sbq.strings[type.."SettingsCard"] or type.."SettingsCard",
         description = sbq.createdDate(),
-		sbqSettings = sbq.getSettingsOf[type]()
+		sbqSettings = misc.getSettingsOf[type]()
     }, }
 end
-sbq.getSettingsOf = {}
-function sbq.getSettingsOf.prefs()
+misc.getSettingsOf = {}
+function misc.getSettingsOf.prefs()
     local merged = sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
     return {
         vorePrefs = merged.vorePrefs,
 		infusePrefs = merged.infusePrefs
 	}
 end
-function sbq.getSettingsOf.locations()
+function misc.getSettingsOf.locations()
     local merged = sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
     return {
         locations = merged.locations,
 	}
 end
-function sbq.getSettingsOf.all()
+function misc.getSettingsOf.all()
     return sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
 end

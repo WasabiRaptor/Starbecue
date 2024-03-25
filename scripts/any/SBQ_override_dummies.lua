@@ -32,7 +32,6 @@ function sbq.sayPortrait(line, portrait, tags, config)
 end
 
 function sbq.parentEntity()
-	return storage.respawner
 end
 
 function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)

@@ -250,15 +250,16 @@ function sbq.getSettingsPageData()
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
 		locations = SpeciesScript.locations or {},
-		currentScale = sbq.scale()
+		currentScale = sbq.scale(),
+		parentEntityData = {sbq.parentEntity()}
 	}
 	return settingsPageData
 end
 
 function sbq.setSetting(k, v)
-	local parent = sbq.parentEntity()
+	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetSetting", entity.uniqueId(), k, v)
+		world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), k, v)
 	end
 	local old = sbq.settings[k]
 	storage.sbqSettings[k] = v
@@ -276,9 +277,9 @@ function sbq.setSetting(k, v)
 end
 
 function sbq.getUpgrade(upgradeName, tier, bonus)
-	local parent = sbq.parentEntity()
+	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentGetUpgrade", entity.uniqueId(), upgradeName, tier, bonus)
+		world.sendEntityMessage(parent, "sbqParentGetUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier, bonus)
 	end
 	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
 	storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
@@ -286,9 +287,9 @@ function sbq.getUpgrade(upgradeName, tier, bonus)
 end
 
 function sbq.setGroupedSetting(group, name, k, v)
-	local parent = sbq.parentEntity()
+	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", entity.uniqueId(), group, name, k, v)
+		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name, k, v)
 	end
 	local old = sbq.settings[group][name][k]
 	storage.sbqSettings[group][name][k] = v
@@ -307,9 +308,9 @@ function sbq.setGroupedSetting(group, name, k, v)
 end
 
 function sbq.importSettings(newSettings)
-	local parent = sbq.parentEntity()
+	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentImportSettings", entity.uniqueId(), newSettings)
+		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), newSettings)
 	end
 	storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
 	sbq.setupSettingMetatables(entity.entityType())

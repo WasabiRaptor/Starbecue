@@ -15,10 +15,10 @@ require"/scripts/any/SBQ_RPC_handling.lua"
 function init()
 	old.init()
 
-    sbq.config = root.assetJson("/sbq.config")
+	sbq.config = root.assetJson("/sbq.config")
 	sbq.targetPosition = npc.aimPosition
 	sbq.actorInit()
-    sbq.humanoidInit()
+	sbq.humanoidInit()
 	sbq.actorMessages()
 	sbq.setupPublicSettings()
 
@@ -78,4 +78,8 @@ function sbq.generateRecruitInfo()
 	local recruitInfo = old.getgenerateRecruitInfo()
 	recruitInfo.config.parameters.scriptConfig.preservedUuid = recruitInfo.uniqueId
 	return recruitInfo
+end
+
+function sbq.parentEntity()
+	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid()
 end

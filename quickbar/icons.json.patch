@@ -7,12 +7,12 @@
 			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:playerSettings" } } ]
 		}
 	},
-	{ "op" : "add", "path" : "/items/starbecue:crewMenu",
-		"value" : {
-			"label" : "SBQ Crew",
-			"weight" : -9,
-			"icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png",
-			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:crewMenu", "data" : { "crewUI" : true } } } ]
-		}
-	}
+	// { "op" : "add", "path" : "/items/starbecue:crewMenu",
+	// 	"value" : {
+	// 		"label" : "SBQ Crew",
+	// 		"weight" : -9,
+	// 		"icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png",
+	// 		"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:crewMenu", "data" : { "crewUI" : true } } } ]
+	// 	}
+	// }
 ]

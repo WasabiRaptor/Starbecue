@@ -43,32 +43,25 @@ function init()
 
 	old.init()
 
-	message.setHandler("sbqParentSetSetting", function(_, _, uuid, ...)
+	message.setHandler("sbqParentSetSetting", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
 		if not i then return end
 		sbqTenant.setSetting(storage.occupier.tenants[i], ...)
 	end)
-	message.setHandler("sbqParentSetGroupedSetting", function(_, _, uuid, ...)
+	message.setHandler("sbqParentSetGroupedSetting", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
 		if not i then return end
 		sbqTenant.setGroupedSetting(storage.occupier.tenants[i], ...)
 	end)
-	message.setHandler("sbqParentGetUpgrade", function(_, _, uuid, ...)
+	message.setHandler("sbqParentGetUpgrade", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
 		if not i then return end
 		sbqTenant.getUpgrade(storage.occupier.tenants[i], ...)
 	end)
-	message.setHandler("sbqParentImportSettings", function(_, _, uuid, ...)
+	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
 		if not i then return end
 		sbqTenant.importSettings(storage.occupier.tenants[i], ...)
-	end)
-
-
-	message.setHandler("sbqSaveSettings", function (_,_, settings, index)
-		local scriptConfig = storage.occupier.tenants[index or 1].overrides.scriptConfig or {}
-		scriptConfig.sbqSettings = settings
-		storage.occupier.tenants[index or 1].overrides.scriptConfig = scriptConfig
 	end)
 
 	message.setHandler("sbqSaveTenants", function(_, _, tenants)
