@@ -32,6 +32,9 @@ function getEntitySettingsMenu(entities, i)
 	if (not entities) or (not i) or (not entities[i]) or ((type(i) == "number" and type(entities[i]) == "number") and not world.entityExists(entities[i])) then return end
 	sbq.addRPC(world.sendEntityMessage( entities[i], "sbqSettingsPageData", entity.uniqueId() ), function (data)
 		if data then
+			if (not player.isAdmin()) and data.parentEntityData[2] and (entity.uniqueId() ~= data.parentEntityData[1]) then
+				return animator.playSound("error")
+			end
 			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  (data.ui or "starbecue:entitySettings") }, entities[i])
 		else
 			if entities[i+1] then

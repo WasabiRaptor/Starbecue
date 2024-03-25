@@ -42,12 +42,12 @@ function sbq.populateCatalogueList(name, tenantName)
 		for i, item in ipairs(data.checkItems) do
 			if not root.itemConfig(item) then return end
 		end
-    end
+	end
 	if data.checkMods then
 		for i, mod in ipairs(data.checkMods) do
 			if not root.modMetadata(mod) then return end
 		end
-    end
+	end
 	if data.checkAssets then
 		for i, path in ipairs(data.checkAssets) do
 			if not root.assetExists(path) then return end
@@ -245,12 +245,15 @@ function sbq.refreshDeedPage()
 			table.remove(_ENV.metagui.inputData.occupier.tenants, i)
 			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
 			sbq.refreshDeedPage()
-        end
+		end
 		canvas:drawDrawables(portrait, vec2.div(canvasWidget.size, 2))
 		function settings:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
 			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end
 			sbq.addRPC(world.sendEntityMessage(id, "sbqSettingsPageData", player.id()), function(data)
+				if (not data) or ((not player.isAdmin()) and data.parentEntityData[2] and (entity.uniqueId() ~= data.parentEntityData[1])) then
+					pane.playSound("/sfx/interface/clickon_error.ogg")
+				end
 				player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  ("starbecue:entitySettings") }, id)
 			end, function ()
 				pane.playSound("/sfx/interface/clickon_error.ogg")
