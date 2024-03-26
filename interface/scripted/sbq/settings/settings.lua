@@ -1,6 +1,7 @@
 if not _ENV.metagui.inputData.sbq then sb.logInfo("failed to get settings data") return pane.dismiss() end
 
 local prefTemplate = root.assetJson("/interface/scripted/sbq/settings/prefTemplate.config")
+local collapseLocationsOpen = player.getProperty("sbqCollapseLocationsOpen") or {}
 
 function init()
 	if _ENV.mainSettingsPanel then
@@ -37,34 +38,48 @@ function init()
 			local collapseLayout = _ENV[name .. "CollapseLayout"]
 			if collapseButton and collapseLayout then
 				function collapseButton:onClick()
-					collapseLayout:setVisible(self.checked)
+                    collapseLayout:setVisible(self.checked)
+					collapseLocationsOpen[name] = self.checked
 				end
 			end
 		end
+    end
+
+    local preyVisible = not (sbq.voreConfig.hidePreySettings or false)
+    local predVisible = not (sbq.voreConfig.hidePredSettings or false)
+	local infuseVisible = not (sbq.voreConfig.hideInfuseSettings or false)
+    local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
+	local sizeVisible = not (sbq.voreConfig.hideSizeSettings or false)
+	_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
+	_ENV.infusePreyPrefsPanel:setVisible(preyVisible and infuseVisible)
+	_ENV.transformationPrefsPanel:setVisible(TFVisible)
+	_ENV.resistancesPanel:setVisible(preyVisible)
+	_ENV.otherPrefsPanel:setVisible(preyVisible)
+	_ENV.sizePrefsPanel:setVisible(sizeVisible)
+	_ENV.vorePredPrefsPanel:setVisible((sbq.voreConfig.availableVoreTypes or false) and predVisible)
+	_ENV.infusePredPrefsPanel:setVisible((sbq.voreConfig.availableInfuseTypes or false) and predVisible and infuseVisible)
+	if not (_ENV.vorePredPrefsPanel.visible or _ENV.infusePredPrefsPanel.visible) then
+		_ENV.vorePredPrefsPanel.parent:setVisible(false)
+	end
+	if not (_ENV.vorePreyPrefsPanel.visible or _ENV.infusePreyPrefsPanel.visible) then
+		_ENV.vorePreyPrefsPanel.parent:setVisible(false)
+    end
+	if not (_ENV.sizePrefsPanel.visible) then
+		_ENV.sizePrefsPanel.parent:setVisible(false)
 	end
 
-	if sbq.voreConfig.availableVoreTypes then
-		_ENV.vorePredPrefsPanel:setVisible(true)
-		for _, voreType in pairs(sbq.gui.voreTypeOrder) do
-			_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred"}))
-			_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey"}))
-			local widget = _ENV[voreType.."predPrefLayout"]
-			if widget then widget:setVisible(sbq.voreConfig.availableVoreTypes[voreType] or false) end
-		end
-	else
-		_ENV.vorePredPrefsPanel:setVisible(false)
+	for _, voreType in pairs(sbq.gui.voreTypeOrder) do
+		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred"}))
+		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey"}))
+		local widget = _ENV[voreType.."predPrefLayout"]
+		if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
 	end
-	if sbq.voreConfig.availableInfuseTypes then
-		_ENV.infusePredPrefsPanel:setVisible(true)
-		for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
-			_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred"}))
-			_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey"}))
+	for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
+		_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred"}))
+		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey"}))
 
-			local widget = _ENV[infuseType.."predPrefLayout"]
-			if widget then widget:setVisible(sbq.voreConfig.availableInfuseTypes[infuseType] or false) end
-		end
-	else
-		_ENV.infusePredPrefsPanel:setVisible(false)
+		local widget = _ENV[infuseType.."predPrefLayout"]
+		if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
 	end
 	_ENV.currentScale:setText(tostring(sbq.currentScale))
 
@@ -91,7 +106,8 @@ function sbq.setupLocation(name, list)
 					icon = {
 						"/interface/scripted/sbq/collapseButton.png",
 						"/interface/scripted/sbq/collapseButtonOpen.png"
-					}
+					},
+					checked = collapseLocationsOpen[name]
 				},
 				{
 					align = "center",
@@ -100,7 +116,7 @@ function sbq.setupLocation(name, list)
 				}
 			},
 			{ type = "panel", style = "flat", children = {
-				{ type = "layout", id = name .. "CollapseLayout", mode = "vertical", visible = false, children = {
+				{ type = "layout", id = name .. "CollapseLayout", mode = "vertical", visible = collapseLocationsOpen[name] or false, children = {
 				}}
 			}}
 		}
@@ -136,12 +152,12 @@ function sbq.setupSetting(parent, setting, group, name)
 end
 
 function sbq.settingVisibility(input, setting, group, name)
-    if not input then return true end
+	if not input then return true end
 	if type(input) == "table" then
-        return sbq.tableMatches(input, sbq.settings, true)
-    elseif type(input) == "string" then
+		return sbq.tableMatches(input, sbq.settings, true)
+	elseif type(input) == "string" then
 		return sbq.widgetScripts[input](setting,group,name)
-    end
+	end
 	return false
 end
 
@@ -273,7 +289,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 			if not result then
 				local toolTip = sbq.strings[k] or k
 				local icon
-                for _, status in ipairs(location.mainEffect[k]) do
+				for _, status in ipairs(location.mainEffect[k]) do
 
 					if type(status) == "string" then
 						local effectConfig = (root.effectConfig(status) or {}).effectConfig or {}
@@ -282,7 +298,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 						end
 						if effectConfig.checkBoxIcon and not icon then
 							icon =  effectConfig.checkBoxIcon
-                        end
+						end
 					elseif status.icon and not icon then
 						icon = status.icon
 					end
@@ -294,7 +310,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 function sbq.widgetScripts.makeSecondaryEffectButtons(param)
-    local effectButtons = {}
+	local effectButtons = {}
 	local layout = { type = "panel", expandMode = {1,0}, children = {{mode = "v", expandMode = {1,0}},{type = "label", text = ":secondaryEffects"}, effectButtons}, makeLabel = false }
 	local location = sbq.locations[param.groupKey]
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
@@ -322,4 +338,8 @@ end
 
 function sbq.widgetScripts.changeScale(value)
 	world.sendEntityMessage(sbq.entityId(), "sbqScale", value)
+end
+
+function uninit()
+	player.setProperty("sbqCollapseLocationsOpen", collapseLocationsOpen)
 end

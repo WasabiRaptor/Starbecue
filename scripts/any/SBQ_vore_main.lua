@@ -5,6 +5,7 @@ require "/scripts/poly.lua"
 require "/scripts/interp.lua"
 require "/scripts/any/SBQ_util.lua"
 require "/scripts/any/SBQ_override_dummies.lua"
+require "/scripts/any/SBQ_settings.lua"
 
 _SpeciesScript = {}
 _SpeciesScript.__index = _SpeciesScript
@@ -43,7 +44,8 @@ function controlReleased(seat, control, time)
 	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
 
-function sbq.init()
+function sbq.init(config)
+	sbq.settingsInit()
 	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
 		return Occupants.addOccupant(...)
@@ -57,18 +59,6 @@ function sbq.init()
 	message.setHandler("sbqSettingsPageData", function ()
 		return sbq.getSettingsPageData()
 	end)
-	message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
-		return sbq.setGroupedSetting(...)
-	end)
-	message.setHandler("sbqSetSetting", function (_,_, ...)
-		return sbq.setSetting(...)
-	end)
-	message.setHandler("sbqSetUpgrade", function (_,_, ...)
-		return sbq.getUpgrade(...)
-	end)
-	message.setHandler("sbqImportSettings", function (_,_, ...)
-		return sbq.importSettings(...)
-	end)
 	message.setHandler("sbqActionList", function (_,_, ...)
 		return sbq.actionList(...)
 	end)
@@ -79,7 +69,7 @@ function sbq.init()
 		return sbq.digestPrey(...)
 	end)
 
-	sbq.reloadVoreConfig(sbq.lastVoreConfig)
+	sbq.reloadVoreConfig(config)
 
 	-- require "/scripts/misc/SBQ_convert_scripts.lua"
 	-- sbq.createOccupantAnims()
@@ -139,7 +129,7 @@ function sbq.reloadVoreConfig(config)
 	sbq.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-	sbq.voreConfig = root.fetchConfigArray(config or root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", sbq.directory())
+	sbq.voreConfig = root.fetchConfigArray(config, sbq.directory())
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 
@@ -244,7 +234,8 @@ function sbq.getOccupantData(entityId)
 end
 
 function sbq.getSettingsPageData()
-	local settingsPageData = {
+    local settingsPageData = {
+		settingsPageName = sbq.entityName(entity.id()),
 		storageSettings = storage.sbqSettings or {},
 		storageUpgrades = storage.sbqUpgrades or {},
 		settings = sbq.settings or {},
@@ -254,71 +245,6 @@ function sbq.getSettingsPageData()
 		parentEntityData = {sbq.parentEntity()}
 	}
 	return settingsPageData
-end
-
-function sbq.setSetting(k, v)
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), k, v)
-	end
-	local old = sbq.settings[k]
-	storage.sbqSettings[k] = v
-	if old == sbq.settings[k] then return end
-	sbq.refreshSettings()
-	if sbq.config.publicSettings[k] then
-		sbq.publicSettings[k] = sbq.settings[k]
-		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-	end
-	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
-		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
-			sbq[script](k,v)
-		end
-	end
-end
-
-function sbq.getUpgrade(upgradeName, tier, bonus)
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentGetUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier, bonus)
-	end
-	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
-	storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
-	sbq.refreshUpgrades(true)
-end
-
-function sbq.setGroupedSetting(group, name, k, v)
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name, k, v)
-	end
-	local old = sbq.settings[group][name][k]
-	storage.sbqSettings[group][name][k] = v
-	if old == sbq.settings[group][name][k] then return end
-	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
-	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
-		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
-			sbq[script](k,v, group, name)
-		end
-	end
-	sbq.refreshSettings()
-	if sbq.config.publicSettings[k] then
-		sbq.publicSettings[group][name][k] = sbq.settings[group][name][k]
-		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
-	end
-end
-
-function sbq.importSettings(newSettings)
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), newSettings)
-	end
-	storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
-	sbq.setupSettingMetatables(entity.entityType())
-	sbq.refreshPublicSettings()
-	sbq.refreshSettings()
-	for k, location in pairs(SpeciesScript.locations) do
-		location.occupancy.settingsDirty = true
-	end
 end
 
 sbq.groupedSettingChanged = {}

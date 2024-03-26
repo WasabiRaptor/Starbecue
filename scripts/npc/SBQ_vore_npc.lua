@@ -23,7 +23,6 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-	sbq.npcConfig = root.npcConfig(npc.npcType())
 	storage = storage or {}
 	storage.sbqSettings = sb.jsonMerge(config.getParameter("sbqSettings") or {}, storage.sbqSettings or {})
 	storage.sbqUpgrades = sb.jsonMerge(config.getParameter("sbqUpgrades") or {}, storage.sbqUpgrades or {})
@@ -39,7 +38,7 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
-	sbq.init()
+	sbq.init({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config.getParameter("voreConfig")})
 	sbq.dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree"))
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)

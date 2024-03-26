@@ -75,15 +75,13 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.settings = sb.jsonMerge(
 		sbq.settings or {},
 		sbq.config.entityTypeOverrideSettings[entityType] or {},
-		sbq.voreConfig.overrideSettings or {},
-		(sbq.entityConfig or {}).overrideSettings or {}
+		sbq.voreConfig.overrideSettings or {}
 	)
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(
 		sbq.config.defaultSettings,
 		sbq.config.entityTypeDefaultSettings[entityType] or {},
-		sbq.voreConfig.defaultSettings or {},
-		(sbq.entityConfig or {}).defaultSettings or {}
+		sbq.voreConfig.defaultSettings or {}
 	)
 	for setting, v in pairs(storage.sbqSettings) do
 		local defaultType = type(sbq.defaultSettings[setting])
@@ -291,36 +289,6 @@ function sbq.logWarn(input, pretty)
 end
 function sbq.logError(input, pretty)
 	sb.logError(sbq.logOutput(input,pretty))
-end
-
-function sbq.refreshSettings()
-	local modifiers = {}
-	for k, v in pairs(sbq.config.statSettings or {}) do
-		table.insert(modifiers, {stat = v, amount = sbq.settings[k]})
-	end
-	sbq.setStatModifiers("sbqStats", modifiers)
-
-	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates or {}) do
-		if sbq.tableMatches(settingsAnim[1], sbq.settings, true) then
-			SpeciesScript:doAnimations(settingsAnim[2])
-		end
-	end
-end
-
-function sbq.refreshPublicSettings()
-	for setting, v in pairs(sbq.config.publicSettings) do
-		if v == true then sbq.publicSettings[setting] = sbq.settings[setting] end
-	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		for name, settings in pairs(sbq.defaultSettings[k]) do
-			for setting, _ in pairs(settings) do
-				if sbq.config.publicSettings[setting] == true then
-					sbq.publicSettings[k][name][setting] = sbq.settings[k][name][setting]
-				end
-			end
-		end
-	end
-	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 end
 
 function sbq.getString(str)

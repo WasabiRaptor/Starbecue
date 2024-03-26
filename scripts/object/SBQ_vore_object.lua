@@ -14,7 +14,6 @@ function sbq.initObject()
 
 	sbq.setProperty = object.setConfigParameter
 
-	sbq.lastVoreConfig = config.getParameter("voreConfig")
 	storage.baseStats = config.getParameter("stats") or {}
 	storage.effectCategories = sb.jsonMerge(config.getParameter("effectCategories") or {}, storage.effectCategories or {})
 	storage.stats = storage.stats or {}

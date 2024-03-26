@@ -18,23 +18,18 @@ function init()
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	sbq.actorInit()
+	sbq.settingsInit()
 	sbq.humanoidInit()
 	function sbq.setProperty(...)
 		if player.getProperty("sbqAgreedTerms") then status.setStatusProperty(...) end
 	end
 	if player.getProperty("sbqAgreedTerms") then
-		sbq.init()
+		sbq.init(root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.actorMessages()
 	else
 		status.setStatusProperty("sbqPublicSettings", nil)
-		message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
-			return sbq.setGroupedSetting(...)
-		end)
-		message.setHandler("sbqSetSetting", function (_,_, ...)
-			return sbq.setSetting(...)
-		end)
 		sbq.lists = {}
-		sbq.voreConfig = root.fetchConfigArray(sbq.lastVoreConfig or {})
+		sbq.voreConfig = root.fetchConfigArray(root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.setupSettingMetatables("player")
 	end
 	sbq.notifyPlayer()
