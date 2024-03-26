@@ -1,20 +1,12 @@
 [
 
 	[
-		{ "op": "add", "path": "/statusControllerSettings", "value": {} },
-		{ "op": "add", "path": "/statusControllerSettings/statusProperties", "value": {} }
-	],
-	[
-		{ "op": "add", "path": "/statusControllerSettings/statusProperties/sbqDidVornyConvertCheck", "value": true },
-		{
-			"op": "add",
-			"path": "/statusControllerSettings/statusProperties/sbqPreyEnabled",
-			"value": {
-				"preyEnabled" : false,
-				"transformAllow": false,
-				"cumTransformAllow": false,
-				"genderswapAllow": false
-			}
-		}
+		{ "op": "add", "path": "/scriptConfig/", "value": {} },
+		{ "op": "add", "path": "/scriptConfig/voreConfig/", "value": [
+			"/humanoid/any/disableAllVorePred.config",
+			"/humanoid/any/disableAllVorePrey.config",
+			"/humanoid/any/disableAllTF.config",
+			"/humanoid/any/disableAllSize.config"
+		]}
 	]
 ]

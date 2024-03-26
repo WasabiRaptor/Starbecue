@@ -38,23 +38,24 @@ function init()
 			local collapseLayout = _ENV[name .. "CollapseLayout"]
 			if collapseButton and collapseLayout then
 				function collapseButton:onClick()
-                    collapseLayout:setVisible(self.checked)
+					collapseLayout:setVisible(self.checked)
 					collapseLocationsOpen[name] = self.checked
 				end
 			end
 		end
-    end
+	end
 
-    local preyVisible = not (sbq.voreConfig.hidePreySettings or false)
-    local predVisible = not (sbq.voreConfig.hidePredSettings or false)
+	local otherVisible = not (sbq.voreConfig.hideOtherSettings or false)
+	local preyVisible = not (sbq.voreConfig.hidePreySettings or false)
+	local predVisible = not (sbq.voreConfig.hidePredSettings or false)
 	local infuseVisible = not (sbq.voreConfig.hideInfuseSettings or false)
-    local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
+	local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
 	local sizeVisible = not (sbq.voreConfig.hideSizeSettings or false)
 	_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
 	_ENV.infusePreyPrefsPanel:setVisible(preyVisible and infuseVisible)
 	_ENV.transformationPrefsPanel:setVisible(TFVisible)
 	_ENV.resistancesPanel:setVisible(preyVisible)
-	_ENV.otherPrefsPanel:setVisible(preyVisible)
+	_ENV.otherPrefsPanel:setVisible(otherVisible)
 	_ENV.sizePrefsPanel:setVisible(sizeVisible)
 	_ENV.vorePredPrefsPanel:setVisible((sbq.voreConfig.availableVoreTypes or false) and predVisible)
 	_ENV.infusePredPrefsPanel:setVisible((sbq.voreConfig.availableInfuseTypes or false) and predVisible and infuseVisible)
@@ -63,7 +64,7 @@ function init()
 	end
 	if not (_ENV.vorePreyPrefsPanel.visible or _ENV.infusePreyPrefsPanel.visible) then
 		_ENV.vorePreyPrefsPanel.parent:setVisible(false)
-    end
+	end
 	if not (_ENV.sizePrefsPanel.visible) then
 		_ENV.sizePrefsPanel.parent:setVisible(false)
 	end

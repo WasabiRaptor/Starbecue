@@ -5,6 +5,7 @@ local entityType = world.entityType(pane.sourceEntity())
 cfg.title = sbq.settingsPageName .. " " .. root.assetJson("/sbqStrings.config:settings")
 cfg.inputData = {sbq = {voreConfig = {}}}
 if (entityType == "object") or (entityType == "vehicle") then
+	cfg.inputData.sbq.voreConfig.hideOtherSettings = true
 	cfg.inputData.sbq.voreConfig.hidePreySettings = true
 	cfg.inputData.sbq.voreConfig.hideTFsettings = true
 	cfg.inputData.sbq.voreConfig.hideSizeSettings = true
