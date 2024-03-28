@@ -62,7 +62,11 @@ function init()
 		local i = findTenant(uuid)
 		if not i then return end
 		sbqTenant.importSettings(storage.occupier.tenants[i], ...)
+    end)
+    message.setHandler("sbqParentUpdateType", function(_, _, recruitUuid, uuid, ...)
+		_ENV.replaceTenant(uuid, ...)
 	end)
+
 
 	message.setHandler("sbqSaveTenants", function(_, _, tenants)
 		local uniqueTenants = {}

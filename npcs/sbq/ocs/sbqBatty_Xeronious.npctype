@@ -1,0 +1,246 @@
+{
+	"type" : "sbqBatty_Xeronious",
+	"baseType" : "villager",
+
+	"scripts" : [
+		"/npcs/bmain.lua",
+		"/scripts/npc/SBQ_npc_bmain.lua",
+		"/scripts/npc/SBQ_vore_npc.lua"
+	],
+
+	// you really should make sure to define the npcname so the OC actually has the OC's name
+	"npcname" : "Batty",
+	"identity" : {
+	},
+	"scriptConfig" : {
+		"sbqNPC" : true,
+		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
+		"behavior" : "sbqvorevillager",
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
+			"graduation" : {
+				"nextNpcType" : [] // this prevents the NPC from graduating into crew
+			}
+		},
+		"sbqConvertType" : false,
+
+
+		"uniqueId" : "sbqBatty_Xeronious", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+
+		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
+		"defaultPortrait" : "bust",
+		// if you want to use specially drawn sprites for dialogue box portraits, remove the two portrait args above, and uncomment the args below
+		/*
+		"defaultPortrait" : "neutral.png",
+		"portraitPath" : "/humanoid/sbqTemplate/portraits/", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
+		"portraitPath" : "/npcs/sbq/ocs/sbqTemplate/portraits/",
+		*/
+
+		"dialogueStepScripts" : [], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
+		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
+
+		"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+
+		"sbqPredRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "ore" },
+			"timedReward2" : { "repeatable" : true, "time" : 10, "minTime" : 20, "pool" : "richOre" },
+
+			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "ore" },
+			"struggleReward2" : { "repeatable" : true, "struggles" : 100, "minStruggles" : 200, "pool" : "richOre" },
+
+			"CVStruggleReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "struggles" : 75, "pool" : "richOre" },
+			"CVStruggleReward2" : { "location" : ["shaft", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
+
+			"CVTimedReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "time" : 3, "minTime" : 0, "pool" : "richOre" },
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+		"sbqPreyRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "money" },
+
+			"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "money"},
+			"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "lowValueQuestRewards"},
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+
+
+		// when hunting for prey, a checklist to have them only seek out prey that match the settings
+		// any settings not defined in the checlkist for that vore type can be anything
+		// such as a digestion pred not wanting to eat prey with digestion immunity, or not want to eat other preds, etc.
+		"huntingChecklist" : {
+			"default" : { // mood
+				"preySettings" : {
+					// "digestImmunity" : "false" // example for a pred that would only seek out prey they can digest
+				},
+				"settings" : {
+					// "oralVorePred : "false" // example for a pred that wouldn't eat other oralVore preds
+				}
+			}
+		},
+		// when baiting a pred, a checklist to have them only seek out preds with certain settings
+		// any settings not defined in the checlkist for that vore type can be anything
+		// such as a prey not wanting to seek out preds that will digest them, or not wanting to seek out preds that do vore types they don't like, or not wanting to seek out preds who can also be prey
+		"baitingChecklist" : {
+			"default" : { // mood
+				"preySettings" : {
+					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
+				},
+				"settings" : {
+					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
+				}
+			}
+		},
+
+		// the pred prefrences and general settings for this NPC are set here!
+		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+
+		"sbqDefaultSettings" : {
+			"mood" : "default",
+			"personality" : "default",
+
+			"bellyEffectSlot" : "none", // the settings in this group exist for each location, just use the correct name (belly, balls, shaft, womb, tail, breasts)
+
+			"bellySounds" : true,
+			"displayDigest" : false,
+
+			"escapeDifficulty": 0,
+			"escapeDifficultyMin": 0,
+			"escapeDifficultyMax": 0,
+
+			"impossibleEscape": false,
+			"hammerspace" : false,
+
+			// predator prefrences
+			"oralVorePred" : true,
+			"tailVorePred" : false,
+			"absorbVorePred" : false,
+			"navelVorePred" : false,
+
+			"analVorePred" : false,
+			"unbirthPred" : true,
+			"cockVorePred" : false,
+			"breastVorePred" : true
+		},
+
+		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
+		"sbqOverrideSettings" : {
+			"crewmateGraduation" : false
+		},
+		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
+		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
+		"sbqOverridePreyEnabled" : {
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"maxEnergy" : {
+				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"sbqLustScriptMax" : {
+				"baseValue" : 0.5
+			},
+			"sbqLustScriptDelta" : {
+				"baseValue" : 0.0583
+			},
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
+				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
+			}
+		},
+		"resources" : {
+			"food" : {
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
+			}
+		},
+		"statusProperties" : {
+			"sbqDidVornyConvertCheck" : true,
+
+
+			// the prey prefrences for this NPC are set here!
+			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+
+			"sbqPreyEnabled" : {
+				"preyEnabled": true,
+
+				"digestAllow": true,
+
+				"cumDigestAllow": false,
+
+				"transformAllow": true,
+				"genderswapAllow": false,
+
+				"eggAllow": true,
+
+				"held": true,
+
+				"oralVore": true,
+				"tailVore": true,
+				"absorbVore": true,
+				"navelVore": true,
+
+				"analVore": true,
+				"unbirth": true,
+				"cockVore": true,
+				"breastVore": true,
+
+				"bellyInfusion" : true,
+				"cockInfusion" : true,
+				"pussyInfusion" : true,
+				"breastsInfusion" : true
+			}
+		}
+	}
+}

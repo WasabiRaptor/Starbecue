@@ -1,0 +1,256 @@
+{
+	"type" : "sbqThalins_Thalins",
+	"baseType" : "villager",
+
+	"scripts" : [
+		"/npcs/bmain.lua",
+		"/scripts/npc/SBQ_npc_bmain.lua",
+		"/scripts/npc/SBQ_vore_npc.lua"
+	],
+
+	// you really should make sure to define the npcname so the OC actually has the OC's name
+	"npcname" : "Thalins",
+	// identity is quite important if you don't want things to be randomly generated
+	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
+	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
+	// if one knows how to make a directives string too, they can just define it here for the specific parts
+	"identity" : {
+		/*
+		"hairType" : "0",
+		"facialHairType" : "",
+		"facialMaskType" : "",
+
+		"hairDirectives" : "",
+		"facialHairDirectives" : "",
+		"facialMaskDirectives" : "",
+		"emoteDirectives" : "",
+		"bodyDirectives" : "",
+
+		"gender" : "male",
+		"personalityArmIdle" : "idle.2",
+		"personalityIdle" : "idle.2",
+		*/
+	},
+	"scriptConfig" : {
+		"sbqNPC" : true,
+		"isPredator" : false,
+		"isPrey" : false,
+		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
+		"behavior" : "sbqvorevillager",
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
+			"graduation" : {
+				"nextNpcType" : [] // this prevents the NPC from graduating into crew
+			}
+		},
+		"sbqConvertType" : false,
+
+		"uniqueId" : "sbqThalins_Thalins", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+
+		"defaultPortrait" : "neutral.png",
+		"portraitPath" : "/humanoid/sbqThalins_Thalins/portraits/", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
+
+		//"dialogueStepScripts" : ["/npcs/sbq/ocs/sbqThalins_ThalinsdialogueStepScripts.lua"], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
+		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
+
+		"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		// when hunting for prey, a checklist to have them only seek out prey that match the settings
+		// any settings not defined in the checlkist for that vore type can be anything
+		// such as a digestion pred not wanting to eat prey with digestion immunity, or not want to eat other preds, etc.
+		"huntingChecklist" : {
+			"default" : { // mood
+				"preySettings" : {
+					// "digestImmunity" : "false" // example for a pred that would only seek out prey they can digest
+				},
+				"settings" : {
+					// "oralVorePred : "false" // example for a pred that wouldn't eat other oralVore preds
+				}
+			}
+		},
+		// when baiting a pred, a checklist to have them only seek out preds with certain settings
+		// any settings not defined in the checlkist for that vore type can be anything
+		// such as a prey not wanting to seek out preds that will digest them, or not wanting to seek out preds that do vore types they don't like, or not wanting to seek out preds who can also be prey
+		"baitingChecklist" : {
+			"default" : { // mood
+				"preySettings" : {
+					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
+				},
+				"settings" : {
+					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
+				}
+			}
+		},
+
+		// the pred prefrences and general settings for this NPC are set here!
+		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+
+		"sbqDefaultSettings" : {
+			"mood" : "default",
+			"personality" : "default",
+
+			"bellyEffectSlot" : "none", // the settings in this group exist for each location, just use the correct name (belly, balls, shaft, womb, tail, breasts)
+			//"bellyHammerspace" : false,
+			//"bellyVisualMin" : 0
+			//"bellyVisualMax" : 2
+			//"bellyNoneEnable" : true,
+			//"bellyHealEnable" : true,
+			//"bellyDigestEnable" : true,
+			//"bellySoftDigestEnable" : true,
+
+			"bellySounds" : true,
+			"displayDigest" : false,
+
+			"escapeDifficulty": 0,
+			"escapeDifficultyMin": 0,
+			"escapeDifficultyMax": 0,
+
+			"impossibleEscape": false,
+			"hammerspace" : false
+
+		},
+
+		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
+		"sbqOverrideSettings" : {
+			"crewmateGraduation" : false,
+
+			"bellyEffectSlot" : "none",
+			"wombEffectSlot" : "heal",
+			"breastsEffectSlot" : "heal",
+			"ballsEffectSlot" : "none",
+			"shaftEffectSlot" : "none",
+
+			"bellyPredDigestDrops" : false,
+			"tailPredDigestDrops" : false,
+			"wombPredDigestDrops" : false,
+
+			"oralVorePred" : false,
+			"tailVorePred" : false,
+			"absorbVorePred" : false,
+			"navelVorePred" : false,
+
+			"analVorePred" : false,
+			"unbirthPred" : false,
+			"cockVorePred" : false,
+			"breastVorePred" : false
+		},
+		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
+		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
+		"sbqOverridePreyEnabled" : {
+			"preyEnabled": false,
+
+			"digestAllow": false,
+			"cumDigestAllow": false,
+			"femcumDigestAllow": false,
+			"milkDigestAllow": false,
+
+			"cumTransformAllow": false,
+
+			"softDigestAllow" : false,
+			"cumSoftDigestAllow" : false,
+			"femcumSoftDigestAllow": false,
+			"milkSoftDigestAllow" : false,
+
+			"oralVore": false,
+			"tailVore": false,
+			"absorbVore": false,
+			"navelVore": false,
+
+			"analVore": false,
+			"unbirth": false,
+			"cockVore": false,
+			"breastVore": false,
+
+			"bellyInfusion" : false,
+			"cockInfusion" : false,
+			"pussyInfusion" : false,
+			"breastsInfusion" : false
+		}
+
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"maxEnergy" : {
+				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"sbqLustScriptMax" : {
+				"baseValue" : 0.5
+			},
+			"sbqLustScriptDelta" : {
+				"baseValue" : 0.0583
+			},
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
+				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
+			}
+		},
+		"resources" : {
+			"food" : {
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
+			}
+		},
+		"statusProperties" : {
+			"sbqDidVornyConvertCheck" : true,
+
+
+			// the prey prefrences for this NPC are set here!
+			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+
+			"sbqPreyEnabled" : {
+				"preyEnabled": false,
+
+				"digestAllow": false,
+
+				"cumDigestAllow": false,
+
+				"transformAllow": true,
+				"genderswapAllow": true,
+
+				"eggAllow": true,
+
+				"held": true,
+
+				"oralVore": false,
+				"tailVore": false,
+				"absorbVore": false,
+				"navelVore": false,
+
+				"analVore": false,
+				"unbirth": false,
+				"cockVore": false,
+				"breastVore": false,
+
+				"bellyInfusion" : false,
+				"cockInfusion" : false,
+				"pussyInfusion" : false,
+				"breastsInfusion" : false
+
+			}
+		}
+	}
+}

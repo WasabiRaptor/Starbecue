@@ -28,6 +28,11 @@ function init()
 		if not recruit then return end
 		recruit:sbqImportSettings(...)
 	end)
+    message.setHandler("sbqParentUpdateType", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
+		if not recruit then return end
+		recruit:sbqUpdateType(...)
+	end)
 
 end
 
@@ -71,5 +76,10 @@ function _ENV.Pet:sbqGetUpgrade(upgradeName, tier, bonus)
 	scriptConfig.sbqUpgrades = scriptConfig.sbqUpgrades or {}
 	scriptConfig.sbqUpgrades[upgradeName] = scriptConfig.sbqUpgrades[upgradeName] or {}
 	scriptConfig.sbqUpgrades[upgradeName][tier] = math.max(scriptConfig.sbqUpgrades[upgradeName][tier] or 0, bonus)
+	self.spawner:markDirty()
+end
+
+function _ENV.Pet:sbqUpdateType(newConfig)
+	util.mergeTable(self.spawnConfig, newConfig)
 	self.spawner:markDirty()
 end

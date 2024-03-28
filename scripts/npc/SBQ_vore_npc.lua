@@ -3,8 +3,6 @@ local old = {
 	init = init,
 	update = update,
 	uninit = uninit,
-
-	preservedStorage = preservedStorage,
 }
 
 dialogueStepScripts = {}
@@ -119,13 +117,6 @@ function equipped.primary(itemDescriptor)
 		return _equipped_primary(itemDescriptor)
 	end
 end
-
-function preservedStorage()
-	return sb.jsonMerge(old.preservedStorage(), {
-		settings = storage.settings
-	})
-end
-
 
 -- I fucking hate starbound
 -- function recruitable.generateRecruitInfo()

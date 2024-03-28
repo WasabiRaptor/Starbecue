@@ -1,23 +1,6 @@
 [
-	[
-		{
-			"op": "add",
-			"path": "/statusControllerSettings",
-			"value": {}
-		}
-	],
-	[
-		{
-			"op": "add",
-			"path": "/statusControllerSettings/statusProperties",
-			"value": {}
-		}
-	],
-	[
-		{
-			"op": "add",
-			"path": "/statusControllerSettings/statusProperties/sbqDidVornyConvertCheck",
-			"value": true
-		}
-	]
+	[{"op": "add","path": "/statusControllerSettings","value": {}}],
+	[{"op": "add","path": "/statusControllerSettings/statusProperties","value": {}}],
+	[{"op": "add","path": "/statusControllerSettings/statusProperties/sbqDidVornyConvertCheck","value": true}],
+	{"op": "add","path": "/scriptConfig/sbqConvertType","value": "sbqVoreCrewmemberChemistYellow"}
 ]
