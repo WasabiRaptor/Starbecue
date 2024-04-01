@@ -1262,7 +1262,7 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if (not self.struggleAction) or (self:controlHeld("Shift")) then return false end
+	if (not self.struggleAction) or (self:controlHeld("Shift")) or self:resourceLocked("energy") then return false end
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
@@ -1337,6 +1337,12 @@ function _Occupant:overConsumeResource(resource, amount, ignoreBlock)
 		return true
 	end
 	return false
+end
+
+function _Occupant:resourceLocked(resource)
+	-- if they don't have the resource, it can't be locked
+	if not world.entityIsResource(self.entityId, resource) then return false end
+	return world.entityResourceLocked(self.entityId, resource)
 end
 
 function _Occupant:stat(stat)
