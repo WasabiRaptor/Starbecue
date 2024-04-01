@@ -27,6 +27,7 @@ SpeciesScript = {
 	locations = {},
 	states = {}
 }
+setmetatable(SpeciesScript, _SpeciesScript)
 
 Occupants = {
 	list = {},
