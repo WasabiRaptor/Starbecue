@@ -11,13 +11,18 @@ local _dismiss
 function init()
 	player.setProperty("sbqSettingsVersion", root.modMetadata("Starbecue").version)
 	_dismiss = pane.dismiss
-	pane.dismiss = nil
+	pane.dismiss = function ()
+
+	end
 end
 
 function _ENV.agree:onClick()
+	local first = not player.getProperty("sbqAgreedTerms")
 	player.setProperty("sbqAgreedTerms", true)
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.init")
+	if first then
+		player.setScriptContext("starbecue")
+		player.callScript("sbq.init", root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+	end
 	_dismiss()
 end
 
