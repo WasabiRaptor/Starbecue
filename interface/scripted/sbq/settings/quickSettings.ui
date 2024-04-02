@@ -9,12 +9,15 @@
 			{"type":"canvas", "id":"titleCanvas", "size":[320,25]}
 		]},
 		{"type":"panel","style":"convex","expandMode":[1,0],"children":[
-			{"type":"label", "align":"center", "text":":modDescription"},
+			{"mode":"v","expandMode":[2,0]},
+			{"type":"label", "text":":modDescription", "size":[310,20], "align":"center"},
 			[
+				{"mode":"h","expandMode":[2,0]},
 				{"type":"button", "id":"allFetishes", "color":"008800", "caption":":allFetishes", "toolTip":":allFetishesTip"},
 				{"type":"button", "id":"noFetishes", "color":"880000", "caption":":noFetishes", "toolTip":":noFetishesTip"}
 			],
 			[
+				{"mode":"h","expandMode":[2,0]},
 				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
 					{"type":"button", "id":"allPred", "color":"008800", "caption":":allPred", "toolTip":":allPredTip"},
 					{"type":"button", "id":"noPred", "color":"880000", "caption":":noPred", "toolTip":":noPredTip"}
@@ -31,7 +34,7 @@
 		]},
 		{ "type" : "panel", "expandMode":[2,0], "style" : "convex", "children" : [
 			{"mode":"v","expandMode":[2,0]},
-			{"type":"label", "text":":terms"},
+			{"type":"label", "text":":terms", "size":[310,32], "align":"center"},
 			{"type":"button", "id":"agree", "caption":":agree","expandMode":[2,0]}
 		]}
 	],
