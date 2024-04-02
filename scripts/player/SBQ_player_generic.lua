@@ -89,6 +89,7 @@ function init()
 				right = (struggleActions.right and (struggleActions.right.indicate or struggleActions.any.indicate or "default")),
 				front = (struggleActions.front and (struggleActions.front.indicate or struggleActions.any.indicate or "default")),
 				back = (struggleActions.back and (struggleActions.back.indicate or struggleActions.any.indicate or "default")),
+				interact = world.isEntityInteractive(id) and "default"
 			}
 		}, id)
 	end)
