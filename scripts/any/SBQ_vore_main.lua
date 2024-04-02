@@ -395,14 +395,12 @@ function _State:tryAction(name, target, ...)
 		action.onCooldown = false
 		if type(result2) == "function" then
 			result2(...)
-		elseif type(result2) == "string" and type(self[result2]) == "function" then
-			self[result2](self, ...)
 		end
 	end, name, action, target, result2, ..., longest)
 	if type(result2) ~= "function" then
-		return result1, result2, longest
+		return result1, result2 or false, longest
 	end
-	return result1, nil, longest
+	return result1, false, longest
 end
 
 function _State:requestAction(name, target, consent, ...)
@@ -416,7 +414,7 @@ function _State:requestAction(name, target, consent, ...)
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
-	if not action then return false, reason, nil, ... end
+	if not action then return false, reason or false, nil, ... end
 	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
 	local result1, result2  = false, false
@@ -425,14 +423,12 @@ function _State:actionFailed(name, action, target, reason, ...)
 		action.onCooldown = false
 		if type(result2) == "function" then
 			result2(...)
-		elseif type(result2) == "string" and type(self[result2]) == "function" then
-			self[result2](self, ...)
 		end
 	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
-		return result1, reason, result2, ...
+		return result1, reason or false, result2 or false, ...
 	end
-	return result1, reason, nil, ...
+	return result1, reason or false, false, ...
 end
 
 function _State:actionAvailable(name, target, ...)
@@ -459,7 +455,7 @@ function _State:actionAvailable(name, target, ...)
 			return false, "missingScript"
 		end
 	end
-	return true
+	return true, false
 end
 
 function _State:animationTags(tags, target)

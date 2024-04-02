@@ -180,7 +180,7 @@ function default:letoutAvailable(name, ...)
 end
 
 function default:grab(name, action, target, ...)
-	local location = SpeciesScript:getLocation(action.location or "grabbed")
+	local location = SpeciesScript:getLocation(action.location)
 	if not location then return false end
 	local occupant = location.occupancy.list[1]
 	if occupant then
@@ -194,13 +194,13 @@ function default:grabTarget(name, action, target, ...)
 	if success then
 		animator.playSound("grab")
 		world.sendEntityMessage(entity.id(), "sbqControllerRotation", true)
-		return success, result2
 	end
+	return success, result2
 end
 function default:grabRelease(name, action, target, ...)
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then
-		local location = SpeciesScript:getLocation(action.location or "grabbed")
+		local location = SpeciesScript:getLocation(action.location)
 		if not location then return false end
 		occupant = location.occupancy.list[1]
 	end
