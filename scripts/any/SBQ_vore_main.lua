@@ -186,8 +186,14 @@ function sbq.actionList(type, target)
 	if target then
 		local occupant = Occupants.entityId[tostring(target)]
 		if occupant then
-			actions = sb.jsonMerge({}, occupant:getLocation().locationActions)
-			table.insert(actions, 1, { action = "letout", noDisplay = { predRadialMenuSelect = true } })
+			local location = occupant:getLocation()
+			if occupant.flags.infused then
+				actions = sb.jsonMerge({}, location.infusedActions)
+			elseif occupant.flags.digested then
+				actions = sb.jsonMerge({}, location.digestedActions)
+			else
+				actions = sb.jsonMerge({}, location.actions)
+			end
 		end
 	end
 	for _, action in ipairs(actions or {}) do
@@ -297,7 +303,7 @@ function _SpeciesScript:digestPrey(target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then sb.logInfo("missingOccupant") return false end
 	local location = occupant:getLocation()
-	return self.state:queueAction(location.digestAction or "digestPrey", target, ...)
+	return self.state:queueAction(location.digestAction or "digest", target, ...)
 end
 
 function _SpeciesScript:changeState(stateName)
@@ -942,7 +948,8 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 	local occupant = {
 		entityId = entityId,
 		seat = seat,
-		flags = {newOccupant = true},
+		flags = { newOccupant = true },
+		locationSettings = {},
 		location = nil,
 		subLocation = nil,
 		size = size or 1,
@@ -1057,14 +1064,16 @@ function _Occupant:update(dt)
 		if self.progressBar.progress >= 100 then self.progressBar.callback(self, self.progressBar.args) end
 	end
 
-	if not (self.flags.digested or self.flags.infused or self.flags.newOccupant) then
+	if self.flags.infused then
+	elseif self.flags.digested then
+	elseif not (self.flags.newOccupant) then
 		local oldMultiplier = self.sizeMultiplier
 		local compression = location.settings.compression
 		local compressionMin = location.settings.compressionMin
 		if compression == "time" then
 			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat("sbqDigestPower") * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
-			self.sizeMultiplier = math.max( compressionMin, world.entityResourcePercentage(self.entityId, "health") or 0)
+			self.sizeMultiplier = math.max( compressionMin, self:resourcePercentage("health"))
 		end
 		if oldMultiplier ~= self.sizeMultiplier then
 			location.occupancy.sizeDirty = true
@@ -1096,6 +1105,7 @@ function _Occupant:refreshLocation(name, subLocation)
 		end
 	end
 	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
+	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims
 	if occupantAnims then
@@ -1111,16 +1121,30 @@ function _Occupant:refreshLocation(name, subLocation)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
-		{ stat = "sbqGetDigestDrops", amount = location.settings.getDigestDrops and 1 or 0 },
+		{ stat = "sbqGetDigestDrops", amount = self.locationSettings.getDigestDrops and 1 or 0 },
 		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
 
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
-	util.appendLists(persistentStatusEffects, location.passiveEffects or {})
-	if not (self.flags.digested or self.flags.infused or self.flags.newOccupant) then
-		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or location.settings.mainEffect or "none"] or {})
+	if self.flags.infused then
+		util.appendLists(persistentStatusEffects, location.infusedPassiveEffects or {})
+		for setting, effects in pairs(location.infusedEffects or {}) do
+			if (self.locationSettings[setting]) then
+				util.appendLists(persistentStatusEffects, effects or {})
+			end
+		end
+	elseif self.flags.digested then
+		util.appendLists(persistentStatusEffects, location.digestedPassiveEffects or {})
+		for setting, effects in pairs(location.digestedEffects or {}) do
+			if (self.locationSettings[setting]) then
+				util.appendLists(persistentStatusEffects, effects or {})
+			end
+		end
+	elseif not (self.flags.newOccupant) then
+		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
+		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do
-			if (location.settings[setting]) then
+			if (self.locationSettings[setting]) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
@@ -1291,6 +1315,7 @@ function _Occupant:setProgressBar(name, args, callback, progress)
 		time = self.time,
 	})
 end
+
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
 		if self:controlHeld("Left") and self:controlHeld("Right") then
@@ -1339,6 +1364,18 @@ function _Occupant:resourceLocked(resource)
 	-- if they don't have the resource, it can't be locked
 	if not world.entityIsResource(self.entityId, resource) then return false end
 	return world.entityResourceLocked(self.entityId, resource)
+end
+
+function _Occupant:resourcePercentage(resource)
+	-- if they don't have the resource, treat it as empty
+	if not world.entityIsResource(self.entityId, resource) then return 0 end
+	return world.entityResourcePercentage(self.entityId, resource)
+end
+
+function _Occupant:resource(resource)
+	-- if they don't have the resource, treat it as empty
+	if not world.entityIsResource(self.entityId, resource) then return 0 end
+	return world.entityResource(self.entityId, resource)
 end
 
 function _Occupant:stat(stat)

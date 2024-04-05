@@ -1,0 +1,21 @@
+{
+	"name" : "sbqReformHeal",
+	"blockingStat" : "healingStatusImmunity",
+
+	"effectConfig" : {
+		"adjectives" : ["soothing"],
+
+		"checkBoxIcon" : "/interface/scripted/sbq/heal.png",
+		"description" : "reformHealDesc",
+
+		"healRate" : 0.5
+	},
+	"defaultDuration" : 5,
+
+	"scripts" : [
+		"sbqHeal.lua"
+	],
+
+	"label" : "Reforming",
+	"icon" : "/stats/sbq/sbqHeal/sbqHeal.png"
+}

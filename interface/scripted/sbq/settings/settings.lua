@@ -138,9 +138,8 @@ end
 
 function sbq.setupSetting(parent, setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
-	sbq.settingIdentifiers[settingIdentifier] = {setting, group, name }
-	if (sbq.settingWidgets[settingIdentifier] == nil) then
-		sbq.settingWidgets[settingIdentifier] = false
+	if (not sbq.settingIdentifiers[settingIdentifier]) then
+		sbq.settingIdentifiers[settingIdentifier] = {setting, group, name }
 		table.insert(parent, {
 			type = "sbqSetting",
 			id = settingIdentifier,
@@ -155,7 +154,7 @@ end
 function sbq.settingVisibility(input, setting, group, name)
 	if not input then return true end
 	if type(input) == "table" then
-		return sbq.tableMatches(input, sbq.settings, true)
+		return sbq.tableMatches(sbq.replaceConfigTags(input, {groupKey = name, groupName = group, setting = setting}), sbq.settings, true)
 	elseif type(input) == "string" then
 		return sbq.widgetScripts[input](setting,group,name)
 	end
@@ -164,8 +163,9 @@ end
 
 function sbq.refreshSettingVisibility()
 	_ENV.currentScale.locked = not player.hasItemWithParameter("sbqSizeModifier", true)
-	for settingIdentifier, widget in pairs(sbq.settingWidgets) do
-		local setting, group, name = table.unpack(sbq.settingIdentifiers[settingIdentifier])
+	for settingIdentifier, identifier in pairs(sbq.settingIdentifiers) do
+		local setting, group, name = table.unpack(identifier)
+		local widget = _ENV[settingIdentifier] or sbq.settingWidgets[settingIdentifier]
 		local label = _ENV[settingIdentifier .. "Label"]
 		local layout = _ENV[settingIdentifier .. "Layout"]
 		local panel = _ENV[settingIdentifier .. "Panel"]
@@ -198,14 +198,14 @@ function sbq.refreshSettingVisibility()
 end
 
 function sbq.assignSettingValues()
-	for settingIdentifier, widget in pairs(sbq.settingWidgets) do
-		sbq.assignSettingValue(table.unpack(sbq.settingIdentifiers[settingIdentifier]))
+	for settingIdentifier, identifier in pairs(sbq.settingIdentifiers) do
+		sbq.assignSettingValue(table.unpack(identifier))
 	end
 end
 
 function sbq.assignSettingValue(setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
-	local widget = sbq.settingWidgets[settingIdentifier]
+	local widget = _ENV[settingIdentifier] or sbq.settingWidgets[settingIdentifier]
 	local value = sbq.settings[setting]
 	local locked = sbq.overrideSettings[setting]
 	if group and name then
@@ -281,16 +281,22 @@ end
 
 function sbq.widgetScripts.makeMainEffectButtons(param)
 	local effectButtons = {}
-	local layout = { type = "panel", expandMode = {1,0}, children = {{mode = "v", expandMode = {1,0}},{type = "label", text = ":mainEffect"},effectButtons}, makeLabel = false }
+	local layout = {
+		type = "panel",
+		id = sbq.widgetSettingIdentifier(param).."Panel",
+		expandMode = { 1, 0 },
+		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":"..param.setting }, effectButtons },
+		makeLabel = false
+	}
 	local location = sbq.locations[param.groupKey]
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
-		if (location.mainEffect or {})[k] then
+		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = ((sbq.voreConfig.invalidSettings or {}).mainEffect or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {}).locations or {})[param.groupKey] or {}).mainEffect or {})[tostring(k)]
+			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {}).locations or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
 			if not result then
 				local toolTip = sbq.strings[k] or k
 				local icon
-				for _, status in ipairs(location.mainEffect[k]) do
+				for _, status in ipairs(location[param.setting][k]) do
 
 					if type(status) == "string" then
 						local effectConfig = (root.effectConfig(status) or {}).effectConfig or {}
@@ -304,7 +310,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 						icon = status.icon
 					end
 				end
-				table.insert(effectButtons, sb.jsonMerge(param,{type = "sbqCheckBox", script = "changeSetting", visible = visible, icon = icon, toolTip = toolTip, value = k, radioGroup = "mainEffect" }))
+				table.insert(effectButtons, sb.jsonMerge(param,{type = "sbqCheckBox", script = "changeSetting", visible = visible, icon = icon, toolTip = toolTip, value = k, radioGroup = param.setting }))
 			end
 		end
 	end
@@ -312,13 +318,22 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 end
 function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	local effectButtons = {}
-	local layout = { type = "panel", expandMode = {1,0}, children = {{mode = "v", expandMode = {1,0}},{type = "label", text = ":secondaryEffects"}, effectButtons}, makeLabel = false }
+	sbq.settingIdentifiers[sbq.widgetSettingIdentifier(param)] = {param.setting, param.groupName, param.groupKey}
+	local layout = {
+		type = "panel",
+		id = sbq.widgetSettingIdentifier(param).."Panel",
+		expandMode = { 1, 0 },
+		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, effectButtons },
+		makeLabel = false
+	}
 	local location = sbq.locations[param.groupKey]
+	local effects = location[param.setting]
+	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
-		if (location.secondaryEffects or {})[k] then
+		if (effects or {})[k] then
 			local toolTip = sbq.strings[k] or k
 			local icon
-			for _, status in ipairs(location.secondaryEffects[k]) do
+			for _, status in ipairs(effects[k]) do
 				if type(status) == "string" then
 
 					local effectConfig = (root.effectConfig(status) or {}).effectConfig or {}

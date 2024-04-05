@@ -55,11 +55,6 @@ function sbq.refreshOccupants()
 		local ActionButton = _ENV[occupant.entityId.."ActionButton"]
 		function ActionButton:onClick()
 			local actions = {}
-			if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
-				table.insert(actions, { sbq.strings.interact, function()
-					player.interactWithEntity(occupant.entityId)
-				end, sbq.strings.interactDesc})
-			end
 			player.setScriptContext("starbecue")
 			for _, action in ipairs(player.callScript("sbq.actionList", "predHudSelect", occupant.entityId) or {}) do
 				if action.available then
@@ -79,6 +74,12 @@ function sbq.refreshOccupants()
 					})
 				end
 			end
+			if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
+				table.insert(actions, ((#actions >= 1) and 2) or 1, { sbq.strings.interact, function()
+					player.interactWithEntity(occupant.entityId)
+				end, sbq.strings.interactDesc})
+			end
+
 			_ENV.metagui.dropDownMenu(actions,2)
 		end
 	end

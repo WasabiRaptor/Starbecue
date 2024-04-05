@@ -248,23 +248,7 @@ local SelectedOccupantMenu = {}
 RadialMenu.SelectedOccupantMenu = SelectedOccupantMenu
 setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
-	local options = {
-		{
-			args = {"letout", entityId, storage.action},
-			name = sbq.strings.letout,
-			description = sbq.strings.controllerLetOutSelectedDesc,
-			locked = not player.callScript("sbq.actionAvailable", "letout", entityId),
-			script = "sbq.tryAction"
-		}
-	}
-	if world.isMonster(entityId) or world.isNpc(entityId) then
-		table.insert(options, {
-			name = sbq.strings.interact,
-			args = {entityId},
-			script = "player.interactWithEntity",
-			description = sbq.strings.interactDesc
-		})
-	end
+	local options = {}
 	player.setScriptContext("starbecue")
 	for _, action in ipairs(player.callScript("sbq.actionList", "predRadialMenuSelect", entityId) or {}) do
 		local icon, shortdescription, description = sbq.getActionData(action.action, action.available, storage.iconDirectory, true)
@@ -275,6 +259,14 @@ function SelectedOccupantMenu:init(entityId)
 			icon = icon,
 			description = description,
 			script = "sbq.tryAction"
+		})
+	end
+	if world.isMonster(entityId) or world.isNpc(entityId) then
+		table.insert(options, ((#options >= 1) and 2) or 1, {
+			name = sbq.strings.interact,
+			args = {entityId},
+			script = "player.interactWithEntity",
+			description = sbq.strings.interactDesc
 		})
 	end
 

@@ -229,14 +229,32 @@ function default:turboDigest(name, action, target, ...)
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
 end
 
-function default:digestPrey(name, action, target, ...)
+function default:digest(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return  false end
+	if not occupant then return false end
 	local location = occupant:getLocation()
 	occupant.flags.digested = true
+	occupant.flags.digestedLocation = occupant.location
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 	occupant.size = action.size or location.digestedSize or 0
 	location.occupancy.sizeDirty = true
-	occupant:logInfo("digested")
 	return true, function () occupant:refreshLocation()  end
+end
+
+function default:reform(name, action, target)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if occupant:resourcePercentage("health") < 1 then
+		occupant.locationSettings.digestedReform = true
+		occupant:refreshLocation()
+		return false
+	end
+	local location = occupant:getLocation()
+	occupant.flags.infused = false
+	occupant.flags.digested = false
+	occupant.sizeMultiplier = action.sizeMultiplier or location.reformSizeMultiplier or ((occupant.locationSettings.compression ~= "none") and occupant.locationSettings.compressionMin) or 1
+	occupant.size = sbq.getEntitySize(occupant.entityId)
+	occupant.locationSettings.mainEffect = action.mainEffect or location.reformMainEffect or "none"
+	occupant:refreshLocation()
+	return true
 end

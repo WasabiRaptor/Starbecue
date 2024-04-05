@@ -8,6 +8,8 @@
 		"checkBoxIcon" : "/interface/scripted/sbq/heal.png",
 		"description" : "unbirthHealDesc",
 
+		"healRate" : 2,
+
 		"predStatModifiers" : {
 			"energyRegenPercentageRate" : {
 				"type" : "effectiveMultiplier",
@@ -21,7 +23,7 @@
 			}
 		},
 		"predModifiers" : [
-			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9},
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.95},
 			{"stat":"foodDelta","baseMultiplier":1.1}
 		]
 
