@@ -74,7 +74,7 @@ function sbq.importSettings(newSettings)
 	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 	for k, location in pairs(SpeciesScript.locations) do
-		location.occupancy.settingsDirty = true
+		location:markSettingsDirty()
 	end
 end
 

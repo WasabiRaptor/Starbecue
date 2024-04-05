@@ -67,14 +67,17 @@ function default:scriptSequence(name, action, target, scriptList, ...)
 end
 
 function default:moveToLocation(name, action, target, locationName, subLocationName, throughput, ...)
-	if not target or not (locationName or action.location) then return false end
+	if not target or not (locationName or action.location) then return false, "missingTarget" end
 	occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
-	if throughput or action.throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
-	end
+	if not occupant then return false, "missingOccupant" end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
-	local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
+	if not location then return false, "missingLocation" end
+	local size = (occupant.size * occupant.sizeMultiplier)
+	throughput = throughput or action.throughput
+	if throughput or action.throughput then
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
+	end
+	local space, subLocation = location:hasSpace(size)
 	if space then
 		occupant.flags.newOccupant = true
 		occupant:refreshLocation(locationName, subLocation)
@@ -89,7 +92,7 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	return false, "noSpace"
 end
 
-function default:trySendDeeper(name, action, target, reason, locationName, subLocationName)
+function default:trySendDeeper(name, action, target, reason, locationName, subLocationName,...)
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
 	local occupant = location.occupancy.list[1]
@@ -218,7 +221,7 @@ function default:turboDigestAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	local location = occupant:getLocation()
-	local mainEffect = occupant.overrideEffect or location.settings.mainEffect or "none"
+	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.digest) and (not location.mainEffect.softDigest)) then return false, "invalidAction" end
 	return (mainEffect == "digest") or (mainEffect == "softDigest")
 end
@@ -226,6 +229,21 @@ function default:turboDigest(name, action, target, ...)
 	if not self:turboDigestAvailable(name, action, target, ...) then return false end
 	local occupant = Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboDigest", sbq.resource("energy"))
+	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+end
+
+function default:turboHealAvailable(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	local location = occupant:getLocation()
+	local mainEffect = occupant.locationSettings.mainEffect
+	if (not location.mainEffect) or ((not location.mainEffect.heal)) then return false, "invalidAction" end
+	return (mainEffect == "heal")
+end
+function default:turboHeal(name, action, target, ...)
+	if not self:turboHealAvailable(name, action, target, ...) then return false end
+	local occupant = Occupants.entityId[tostring(target)]
+	occupant:sendEntityMessage("sbqTurboHeal", sbq.resource("energy"))
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
 end
 
@@ -237,11 +255,11 @@ function default:digest(name, action, target, ...)
 	occupant.flags.digestedLocation = occupant.location
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 	occupant.size = action.size or location.digestedSize or 0
-	location.occupancy.sizeDirty = true
+	location:markSizeDirty()
 	return true, function () occupant:refreshLocation()  end
 end
 
-function default:reform(name, action, target)
+function default:reform(name, action, target,...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	if occupant:resourcePercentage("health") < 1 then
@@ -256,5 +274,39 @@ function default:reform(name, action, target)
 	occupant.size = sbq.getEntitySize(occupant.entityId)
 	occupant.locationSettings.mainEffect = action.mainEffect or location.reformMainEffect or "none"
 	occupant:refreshLocation()
+	location:markSizeDirty()
 	return true
+end
+
+function default:turboReformAvailable(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if not (occupant.locationSettings.digestedReform or occupant.flags.infused) then return false, "invalidAction" end
+	return true
+end
+function default:turboReform(name, action, target, ...)
+	if not self:turboReformAvailable(name, action, target, ...) then return false end
+	local occupant = Occupants.entityId[tostring(target)]
+	occupant:sendEntityMessage("sbqTurboHeal", sbq.resource("energy"))
+	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+end
+
+
+function default:chooseLocation(name, action, target, predSelect, ...)
+	local locations = {}
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	for _, locationName in ipairs(action.locationOrder or sbq.voreConfig.locationOrder or root.assetJson("/sbqGui.config:locationOrder")) do
+		local location = SpeciesScript:getLocation(locationName)
+		if sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+			local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
+			table.insert(locations, {
+				name = location.name,
+				location = locationName,
+				subLocation = subLocation,
+				space = space
+			})
+		end
+	end
+	world.sendEntityMessage( (predSelect and entity.id()) or target, "sbqChooseLocation", entity.id(), target, locations)
 end

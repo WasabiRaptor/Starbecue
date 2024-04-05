@@ -212,18 +212,20 @@ function canvasClickEvent(position, mouseButton, isButtonDown, shift, ctrl, alt)
 end
 
 function selectAction(...)
-	local args = {...}
+	local args = {}
 	local option = options[activeSegment] or cancel
 
 	if option.locked then return end
 	local messageTarget = option.messageTarget or (pane.sourceEntity() == 0 and player.id()) or pane.sourceEntity()
+	if option.clickArgs then
+		args = {...}
+	end
 	if option.data then
 		table.insert(args, 1, option.data)
 	end
 	for i, v in ipairs(option.args or {}) do
 		table.insert(args, i,  v)
 	end
-
 	if option.context and option.script then
 		player.setScriptContext(option.context)
 		player.callScript(option.script, table.unpack(args))

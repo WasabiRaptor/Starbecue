@@ -258,7 +258,7 @@ sbq.groupedSettingChanged = {}
 function sbq.groupedSettingChanged.locations(name,k,v)
 	local location = SpeciesScript:getLocation(name)
 	if location then
-		location.occupancy.settingsDirty = true
+		location:markSettingsDirty()
 	end
 end
 
@@ -420,6 +420,7 @@ function _State:requestAction(name, target, consent, ...)
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
+	-- sbq.logInfo({name, target, reason},2)
 	if not action then return false, reason or false, nil, ... end
 	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
@@ -707,18 +708,37 @@ function _Location:getRemainingSpace(maxFill, occupancy, size)
 	return remainingSpace
 end
 
+function _Location:markSizeDirty()
+	self.occupancy.sizeDirty = true
+	if self.subKey then
+		local parentLocation = SpeciesScript:getLocation(self.key)
+		parentLocation.occupancy.sizeDirty = true
+	else
+		for k, v in pairs(self.subLocations or {}) do
+			local subLocation = SpeciesScript:getLocation(self.key, k)
+			subLocation.occupancy.sizeDirty = true
+		end
+	end
+end
+function _Location:markSettingsDirty()
+	self:markSizeDirty()
+	local parentLocation = SpeciesScript:getLocation(self.key)
+	parentLocation.occupancy.settingsDirty = true
+	for k, v in pairs(self.subLocations or {}) do
+		local subLocation = SpeciesScript:getLocation(self.key, k)
+		subLocation.occupancy.settingsDirty = true
+	end
+end
+
 function _Location:updateOccupancy(dt)
 	if not self.subKey then
 		for k, v in pairs(self.subLocations or {}) do
 			local subLocation = SpeciesScript:getLocation(self.key, k)
-			self.occupancy.sizeDirty = subLocation.occupancy.sizeDirty or self.occupancy.sizeDirty
-			self.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or self.occupancy.settingsDirty
-			subLocation.occupancy.settingsDirty = subLocation.occupancy.settingsDirty or self.occupancy.settingsDirty
 			subLocation:updateOccupancy(dt)
 		end
 	end
 	local prevVisualSize = self.occupancy.visualSize
-	if self.occupancy.sizeDirty or self.occupancy.settingsDirty or (Occupants.lastScale ~= sbq.scale()) then
+	if self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale()) then
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
 		self.occupancy.sizeDirty = false
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
@@ -989,7 +1009,7 @@ function _Occupant:remove()
 		local subLocation = SpeciesScript:getLocation(self.location, self.subLocation)
 		for i, occupant in ipairs(subLocation.occupancy.list) do
 			if occupant.entityId == self.entityId then
-				subLocation.occupancy.sizeDirty = true
+				subLocation:markSizeDirty()
 				table.remove(subLocation.occupancy.list, i)
 				break
 			end
@@ -997,7 +1017,7 @@ function _Occupant:remove()
 	end
 	for i, occupant in ipairs(location.occupancy.list) do
 		if occupant.entityId == self.entityId then
-			location.occupancy.sizeDirty = true
+			location:markSizeDirty()
 			table.remove(location.occupancy.list, i)
 			break
 		end
@@ -1076,7 +1096,7 @@ function _Occupant:update(dt)
 			self.sizeMultiplier = math.max( compressionMin, self:resourcePercentage("health"))
 		end
 		if oldMultiplier ~= self.sizeMultiplier then
-			location.occupancy.sizeDirty = true
+			location:markSizeDirty()
 		end
 	end
 	self:checkStruggleDirection(dt)
@@ -1086,11 +1106,13 @@ function _Occupant:refreshLocation(name, subLocation)
 	local location = self:getLocation()
 
 	if (name and (self.location ~= name)) or (subLocation and (self.subLocation ~= subLocation)) then
-		location.occupancy.sizeDirty = true
-		for i, occupant in ipairs(location.occupancy.list) do
-			if occupant.entityId == self.entityId then
-				table.remove(location.occupancy.list, i)
-				break
+		if self.location then
+			location:markSizeDirty()
+			for i, occupant in ipairs(location.occupancy.list) do
+				if occupant.entityId == self.entityId then
+					table.remove(location.occupancy.list, i)
+					break
+				end
 			end
 		end
 		self.location = name
@@ -1098,10 +1120,10 @@ function _Occupant:refreshLocation(name, subLocation)
 		location = self:getLocation()
 
 		table.insert(location.occupancy.list, self)
-		location.occupancy.sizeDirty = true
+		location:markSizeDirty()
 		for _, sharedName in ipairs(location.sharedWith or {}) do
 			local shared = SpeciesScript:getLocation(sharedName)
-			shared.occupancy.sizeDirty = true
+			shared:markSizeDirty()
 		end
 	end
 	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
@@ -1182,7 +1204,7 @@ function _Occupant:refreshLocation(name, subLocation)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
 	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
-	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
+	world.sendEntityMessage(self.entityId, "sbqGuiMessage", "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
 		progressBar = self.progressBar,
 		time = self.time,
 	})
@@ -1233,10 +1255,8 @@ function _Occupant:releaseStruggle(control, time)
 end
 
 function _Occupant:getLocation()
-	if not self.location then return sb.jsonMerge(sbq.config.defaultLocationData, {}) end
 	return SpeciesScript:getLocation(self.location, self.subLocation)
 end
-
 
 function _Occupant:checkStruggleDirection(dt)
 	local dx = 0

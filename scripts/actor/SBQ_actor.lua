@@ -38,10 +38,17 @@ function sbq.actorInit()
 end
 
 function sbq.actorMessages()
-	message.setHandler("sbqRefreshLocationData", function (_,_, id, locationData)
-		sbq.currentLocationData = locationData
-		sbq.checkComfortLevel()
+	message.setHandler("sbqGuiMessage", function(_, _, ...)
+		world.sendEntityMessage(entity.id(), ...)
+	end)
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData)
+		sbq.setCurrentLocationData(locationData)
     end)
+end
+
+function sbq.setCurrentLocationData(locationData)
+	sbq.currentLocationData = locationData
+	sbq.checkComfortLevel()
 end
 
 function sbq.checkComfortLevel()

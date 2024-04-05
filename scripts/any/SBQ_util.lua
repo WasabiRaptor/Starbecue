@@ -294,7 +294,8 @@ end
 function sbq.getString(str)
 	if not str then return "" end
 	if str:sub(1, 1) == ":" then
-		if sbq.strings then str = sbq.strings[str:sub(2,-1)] or str end
+		if not sbq.strings then sbq.strings = root.assetJson("/sbqStrings.config") end
+		str = sbq.strings[str:sub(2, -1)] or str
 	end
 	return str
 end

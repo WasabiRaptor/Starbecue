@@ -75,7 +75,7 @@ function init()
 	end)
 
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, additionalData)
-		sbq.currentLocationData = locationData
+		sbq.setCurrentLocationData(locationData)
 		local struggleActions = locationData.struggleActions or {}
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
@@ -96,6 +96,30 @@ function init()
 
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
 		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants }, ui = "starbecue:predHud" })
+	end)
+
+	message.setHandler("sbqChooseLocation", function(_, _, id, target, locations)
+		local options = {}
+		for _, data in ipairs(locations or {}) do
+			table.insert(options, {
+				name = sbq.getString(data.name),
+				args = { "moveToLocation", target, data.location, data.subLocation },
+				locked = not data.space,
+			})
+		end
+		player.interact("ScriptPane", {
+			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			options = options,
+			default = {
+				messageTarget = id,
+				message = "sbqTryAction",
+				close = true
+			},
+			cancel = {
+				args = false,
+				message = false
+			}
+		}, player.id())
 	end)
 end
 
