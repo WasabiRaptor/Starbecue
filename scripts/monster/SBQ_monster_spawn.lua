@@ -48,5 +48,5 @@ function update(dt)
 end
 
 function sbq.parentEntity()
-	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid()
+	return capturable.tetherUniqueId() or _ENV.capturable.ownerUuid() or storage.respawner, _ENV.capturable.podUuid()
 end
