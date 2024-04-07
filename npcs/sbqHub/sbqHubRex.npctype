@@ -83,9 +83,6 @@
 			"breastsInfusion" : false
 		},
 
-		"entityPortrait" : true,
-		"defaultPortrait" : "bust",
-
 		"dialogueTree" : {
 			"greeting": {
 				"next": "personality",
@@ -97,7 +94,7 @@
 							"Hey there.",
 							"Greetings!"
 						],
-						"randomButtonText": ["Hi."],
+						"buttonTextRandom": ["Hi."],
 						"jump": ["converse"]
 					},
 					"hungry": {
@@ -116,13 +113,13 @@
 					"What's on your mind?",
 					"What can I do for you?"
 					],
-				"randomButtonText" : ["[options]"],
+				"buttonTextRandom" : ["[options]"],
 				"options" : [
 					["Can we talk about you?", {
-						"randomButtonText" : ["[options]"],
+						"buttonTextRandom" : ["[options]"],
 						"randomDialogue" : [ "What about me?" ],
 						"options" : [
-							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "randomButtonText" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
+							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "buttonTextRandom" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
 							[ "Tell me more about these minigames.", {
 								"buttonText" : [
 									"Okay.",
@@ -160,8 +157,8 @@
 							[ "Thats all I wanted to know about you.", { "jump" : [ "converse" ] }]
 						]
 					}],
-					[ "What is this place?", { "randomButtonText" : ["Mhm."], "randomDialogue" : [ "A shop I came across after traversing the stars, lovely and warm place! Good enough I might set a little workshop for my projects."], "jump" : [ "converse" ]}],
-					[ "Do you have any wares?", { "randomButtonText" : ["Darn."], "randomDialogue" : [ "I too have potions, but they are too strong for you, traveler *wink*"], "jump" : [ "converse" ]}]
+					[ "What is this place?", { "buttonTextRandom" : ["Mhm."], "randomDialogue" : [ "A shop I came across after traversing the stars, lovely and warm place! Good enough I might set a little workshop for my projects."], "jump" : [ "converse" ]}],
+					[ "Do you have any wares?", { "buttonTextRandom" : ["Darn."], "randomDialogue" : [ "I too have potions, but they are too strong for you, traveler *wink*"], "jump" : [ "converse" ]}]
 				]
 			},
 

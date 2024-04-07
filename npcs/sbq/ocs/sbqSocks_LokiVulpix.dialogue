@@ -3,13 +3,13 @@
 	"blankLine": [
 		""
 	],
-	"defaultRewardsGreeting": [
+	"rewardsGreeting": [
 		"It was fun messing around!\nHave some stuff."
 	],
-	"defaultRewardsGreetingIntroduced": [
+	"rewardsGreetingIntroduced": [
 		"That was great <entityname>!\nI hope you like all this!"
 	],
-	"defaultGreeting": [
+	"greeting": [
 		"Oh, hi there!",
 		"Hello!"
 	],
@@ -17,7 +17,7 @@
 		"Hi <entityname>!",
 		"Hey there <entityname>!"
 	],
-	"defaultGreetingCrew": [
+	"greetingCrew": [
 		"Greetings Captain.",
 		"Hello Captain.",
 		"Captain."
@@ -27,12 +27,12 @@
 		"Did you want to ask me something?",
 		"Wanna talk?"
 	],
-	"defaultCrewStay": [
+	"crewStay": [
 		"I'll be right here.",
 		"Staying here.",
 		"Yeah I'll stay."
 	],
-	"defaultCrewFollow": [
+	"crewFollow": [
 		"Right behind you!",
 		"Here we go!",
 		"Lets go!"
@@ -167,7 +167,7 @@
 		"I think you'll really like what I've gotten you.",
 		"My next gift will be really good heh."
 	],
-	"defaultRequestOralVoreBefore": [
+	"oralVoreRequestBefore": [
 		"Want to take a nap inside~?",
 		"My insides are nice and soft, as a plushie should be~",
 		"You'll be nice and safe tucked away inside me~",
@@ -177,7 +177,7 @@
 		"Just slide on down my silky throat~",
 		"Asking a plushie to eat you~?"
 	],
-	"defaultRequestOralVoreAfter": [
+	"oralVoreRequestAfter": [
 		"Hehehe, eaten by a plushie~",
 		"I hope you like the feel of my fabric all snug around you~",
 		"Right where you belong~",
@@ -187,7 +187,7 @@
 		"I hope you like how soft it is in there~",
 		"Hope you enjoy the snuggles~"
 	],
-	"defaultUnpromptedOralVoreBefore": [
+	"oralVoreUnpromptedBefore": [
 		"I think I could use some extra belly stuffing~",
 		"I think you could use a rest in a nice, soft, comfortable belly~",
 		"I've got some empty space inside...\nand you seem like the perfect belly stuffing~",
@@ -197,8 +197,8 @@
 		"You know, if you don't snuggle your plushies...\nthey might come to snuggle you~",
 		"I demand snuggles~\nyou don't get a say where though~"
 	],
-	"defaultUnpromptedOralVoreAfter": ":defaultRequestOralVoreAfter",
-	"defaultSelfRequestOralVore": {
+	"oralVoreUnpromptedAfter": ":oralVoreRequestAfter",
+	"oralVoreSelfRequest": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -223,7 +223,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreYes": {
+	"oralVoreSelfRequestYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -248,7 +248,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreYesAfter": {
+	"oralVoreSelfRequestYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -265,7 +265,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreNo": {
+	"oralVoreSelfRequestNo": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -282,7 +282,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreNoYes": {
+	"oralVoreSelfRequestNoYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -299,7 +299,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreNoYesAfter": {
+	"oralVoreSelfRequestNoYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -316,25 +316,25 @@
 			]
 		]
 	},
-	"defaultNotFeelingIt": [
+	"notFeelingIt": [
 		"Don't really feel like that right now.",
 		"Not right now.",
 		"I'm not in the mood.",
 		"Eh, maybe later."
 	],
-	"defaultTooBig": [
+	"tooBig": [
 		"I don't want to tear myself trying to force you in.",
 		"You're a bit too large, I might pop a seam.",
 		"You should try and make yourself smaller~",
 		"You're a bit too big to stuff into this plushie."
 	],
-	"defaultTooSmall": [
+	"tooSmall": [
 		"Sorry but I need something a bit bigger then you",
 		"I don't think I'd really feel you at that size",
 		"You're too short for this ride buddy",
 		"Maybe if you where just a little bigger..."
 	],
-	"defaultOralVoreFull": [
+	"oralVoreFull": [
 		"I might pop a stitch if I try to eat any more!",
 		"My fabric is getting stretched pretty thin!",
 		"My belly is a great napping spot,\nbut already at full occupancy~",
@@ -344,19 +344,19 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"digestOralVoreFull": [
+	"oralVoreDigestFull": [
 		"Maybe after I melt down the last meal",
 		"Urrrrp!\n Won't be too long until I can fit you.",
 		"I've eaten too much already... but I'll probably have room soon.",
 		"I'll have to finish processing this meal first."
 	],
-	"compressionOralVoreFull": [
+	"oralVoreCompressionFull": [
 		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
 		"I'll swallow you down after my current snack gets a bit more compact",
 		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
 		"Just give me a sec to squish my friend here down, and then you'll be next!"
 	],
-	"defaultFull": [
+	"full": [
 		"I might pop a stitch if I try to fill myself any more!",
 		"My fabric is getting stretched pretty thin!",
 		"My body has some great napping spots, but already at full occupancy~",
@@ -366,10 +366,10 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"defaultNeedsInfusion": [
+	"needsInfusion": [
 		"I'd want someone merged in there"
 	],
-	"defaultRequestAnalVoreBefore": [
+	"analVoreRequestBefore": [
 		"You want to go up my butt?",
 		"Aren't satisfied with just staring at my plush butt?",
 		"Hehe, I was made for sitting on people...\nas well as putting them inside~",
@@ -379,21 +379,21 @@
 		"Hehe, you want to take the more interesting route to my soft belly~",
 		"Heheh, I'm going to squeeeze you so much you'll just want to take a nap~"
 	],
-	"defaultRequestAnalVoreAfter": [
+	"analVoreRequestAfter": [
 		"Heheh, I've got some elastic down there for some extra squeeze on the way in~",
 		"Ahhh~ just squirm on in those elastic tubes~",
 		"Some people think that tube is just so I'm fuckable...\nnow you know otherwise~",
 		"You better squirm for me now that you're my toy~"
 	],
-	"defaultUnpromptedAnalVoreBefore": [
+	"analVoreUnpromptedBefore": [
 		"You keep staring at my butt,\nand I'm pretty sure you aren't just reading the tag back there~",
 		"I've got some empty space inisde...\nand you're going to pleasure me on the way in~",
 		"Hmmm~ you seem like good stuffing...\nand plushies tend to get stuffed from the rear~",
 		"Most plushies just have a smooth null butt...\nI'm not one of them~",
 		"I demand snuggles~\nyou don't get a say where though~"
 	],
-	"defaultUnpromptedAnalVoreAfter": ":defaultRequestAnalVoreAfter",
-	"defaultSelfRequestAnalVore": {
+	"analVoreUnpromptedAfter": ":analVoreRequestAfter",
+	"analVoreSelfRequest": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -410,7 +410,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestAnalVoreYes": {
+	"analVoreSelfRequestYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -427,7 +427,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestAnalVoreYesAfter": {
+	"analVoreSelfRequestYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -444,7 +444,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestAnalVoreNo": {
+	"analVoreSelfRequestNo": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -461,7 +461,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestAnalVoreNoYes": {
+	"analVoreSelfRequestNoYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -478,7 +478,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestAnalVoreNoYesAfter": {
+	"analVoreSelfRequestNoYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -495,19 +495,19 @@
 			]
 		]
 	},
-	"defaultAnalVoreFull": [
+	"analVoreFull": [
 		"Sorry, all full back here!",
 		"Afraid I can't fit another in me!"
 	],
-	"digestAnalVoreFull": [
+	"analVoreDigestFull": [
 		"Wait your turn! Ill get to you soon.",
 		"Just need to make some room for ya. Do you mind waiting a bit?"
 	],
-	"compressionAnalVoreFull": [
+	"analVoreCompressionFull": [
 		"I got my back door busy with squeezing a guest down, come back later maybe.",
 		"I'm squeezing as hard as I can, that should pack em down enough to fit you in a bit."
 	],
-	"defaultRequestUnbirthBefore": [
+	"unbirthVoreRequestBefore": [
 		"Spied my zipper down there didn't cha~?",
 		"Hehe, you're gonna be zipped up in the softest sleeping bag possible~",
 		"Once I squeeze you in there you might never want to sleep anywhere else~",
@@ -516,7 +516,7 @@
 		"You better be ready for the most comfortable nap ever as I carry you around~",
 		"My womb was made with the softest fabric my creator could find, I'm sure you'll enjoy~"
 	],
-	"defaultRequestUnbirthAfter": [
+	"unbirthVoreRequestAfter": [
 		"Ahhh~ Get nice and comfortable in there, I'm gonna enjoy carrying you~",
 		"Mmmm~ I'd be perfectly happy for you to take a looooong nap in there~",
 		"Hehehe~ When I zip myself up I could just keep you trapped inside~",
@@ -526,7 +526,7 @@
 		"Hehe, Now you're safed and sound and tucked away in my most intimate place~",
 		"I really love putting people inside there,\nget them to drift of to sleep from my belly gently swaying as I walk~"
 	],
-	"defaultUnpromptedUnbirthBefore": [
+	"unbirthVoreUnpromptedBefore": [
 		"You look like you could use a nice soft and snug place to take a nap~",
 		"Mmm~ I think I know just the place to put you~",
 		"I'm going to snuggle you,\nand then I'm going to tuck you away in my plush womb~",
@@ -538,8 +538,8 @@
 		"You know, if you don't snuggle your plushies...\nthey might come to snuggle you~",
 		"I demand snuggles~\nyou don't get say where~"
 	],
-	"defaultUnpromptedUnbirthAfter": ":defaultRequestUnbirthAfter",
-	"defaultSelfRequestUnbirth": {
+	"unbirthVoreUnpromptedAfter": ":unbirthVoreRequestAfter",
+	"unbirthVoreSelfRequest": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -556,7 +556,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestUnbirthYes": {
+	"unbirthVoreSelfRequestYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -573,7 +573,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestUnbirthYesAfter": {
+	"unbirthVoreSelfRequestYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -590,7 +590,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestUnbirthNo": {
+	"unbirthVoreSelfRequestNo": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -607,7 +607,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestUnbirthNoYes": {
+	"unbirthVoreSelfRequestNoYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -624,7 +624,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestUnbirthNoYesAfter": {
+	"unbirthVoreSelfRequestNoYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -641,7 +641,7 @@
 			]
 		]
 	},
-	"defaultUnbirthFull": [
+	"unbirthVoreFull": [
 		"I might pop a stitch if I try to stuff any more in there!",
 		"My fabric is getting stretched pretty thin!",
 		"My womb is indeed the best napping spot,\nbut I'm already at full occupancy~",
@@ -651,13 +651,13 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"digestUnbirthFull": [
+	"unbirthVoreDigestFull": [
 		"I may be full at the moment, but they're melting down into juices... Check back soon~"
 	],
-	"compressionUnbirthFull": [
+	"unbirthVoreCompressionFull": [
 		"A bit full, but give me a moment or two to pack them down a bit."
 	],
-	"defaultStruggle": [
+	"struggle": [
 		"Snuggle my belly as much as you want~",
 		"Enjoying my soft plushie belly~?",
 		"I bet you'll drift off and take a nap soon enough~",
@@ -750,7 +750,7 @@
 		"Soon you'll be too tired to keep up all that moving.",
 		"Giving me a good show AND all of your energy? How generous!"
 	],
-	"wombDefaultStruggle": [
+	"wombStruggle": [
 		"Hehe, zipped up and trapped inside me~",
 		"Hope you like how it feels in there~",
 		"Tucking people up in my womb is my favorite thing~",
@@ -821,7 +821,7 @@
 		"Bleh! Did you get out before being encased, or is it something else?",
 		"If only you where easier to put in an egg, maybe I could've had more fun with you."
 	],
-	"letoutOralVoreStruggle": [
+	"oralVoreLetoutStruggle": [
 		[
 			"Are you sure you want out?",
 			"You're done with your nap?",
@@ -847,23 +847,23 @@
 			]
 		}
 	],
-	"letoutOralVoreStruggleDigested": ":blankLine",
-	"letoutOralVoreStruggleDigest": ":blankLine",
-	"letoutOralVoreStruggleDigestImmune": ":blankLine",
-	"letoutOralVoreStruggleSoftDigest": ":blankLine",
-	"letoutOralVoreStruggleHeal": [
+	"oralVoreLetoutStruggleDigested": ":blankLine",
+	"oralVoreLetoutStruggleDigest": ":blankLine",
+	"oralVoreLetoutStruggleDigestImmune": ":blankLine",
+	"oralVoreLetoutStruggleSoftDigest": ":blankLine",
+	"oralVoreLetoutStruggleHeal": [
 		"You do know its safer inside me right?",
 		"Are you sure you're ready to come out?",
 		"Maybe you should get back in... rest a little longer~",
 		"You can come back to rest any time~"
 	],
-	"letoutAnalVoreStruggle": ":letoutOralVoreStruggle",
-	"letoutAnalVoreStruggleDigested": ":blankLine",
-	"letoutAnalVoreStruggleDigest": ":blankLine",
-	"letoutAnalVoreStruggleDigestImmune": ":blankLine",
-	"letoutAnalVoreStruggleSoftDigest": ":blankLine",
-	"letoutAnalVoreStruggleHeal": ":letoutOralVoreStruggleHeal",
-	"letoutUnbirthStruggle": [
+	"analVoreLetoutStruggle": ":oralVoreLetoutStruggle",
+	"analVoreLetoutStruggleDigested": ":blankLine",
+	"analVoreLetoutStruggleDigest": ":blankLine",
+	"analVoreLetoutStruggleDigestImmune": ":blankLine",
+	"analVoreLetoutStruggleSoftDigest": ":blankLine",
+	"analVoreLetoutStruggleHeal": ":oralVoreLetoutStruggleHeal",
+	"unbirthVoreLetoutStruggle": [
 		"Happy birthday~",
 		"Ah~ Why'd you come out?",
 		"Mmm~ I thought you were pretty comfortable?",
@@ -874,11 +874,11 @@
 		"Are you done with your rest?",
 		"Hope you consider coming back for more~"
 	],
-	"letoutUnbirthStruggleDigested": ":error",
-	"letoutUnbirthStruggleDigest": ":error",
-	"letoutUnbirthStruggleDigestImmune": ":error",
-	"letoutUnbirthStruggleSoftDigest": ":error",
-	"letoutUnbirthStruggleHeal": ":letoutOralVoreStruggleHeal",
+	"unbirthVoreLetoutStruggleDigested": ":error",
+	"unbirthVoreLetoutStruggleDigest": ":error",
+	"unbirthVoreLetoutStruggleDigestImmune": ":error",
+	"unbirthVoreLetoutStruggleSoftDigest": ":error",
+	"unbirthVoreLetoutStruggleHeal": ":oralVoreLetoutStruggleHeal",
 	"letoutTransforming": ":missingButNotNecessary",
 	"letoutTransformingImmune": [
 		"You don't look any different from how you went in, strange...",
@@ -902,55 +902,55 @@
 		"Seems like eggs don't work on you.",
 		"I'm giving up on sealing you in an egg."
 	],
-	"letoutOralVore": [
+	"oralVoreLetout": [
 		"You can come out now.",
 		"Time to come out.",
 		"You can't stay in there forever.",
 		"Time to get out."
 	],
-	"letoutOralVoreDigested": [
+	"oralVoreLetoutDigested": [
 		"Here, let me reform you real quick.",
 		"You got digested, so I gotta reform you.",
 		"Ah, guess it's time to reform you.",
 		"Time to reform you, I guess."
 	],
-	"letoutOralVoreDigest": [
+	"oralVoreLetoutDigest": [
 		"Actually... You've probably spent enough time in there.",
 		"My hunger is satiated enough for now.",
 		"Probably best to get you out of there...",
 		"Don't feel like melting you entirely."
 	],
-	"letoutOralVoreDigestImmune": [
+	"oralVoreLetoutDigestImmune": [
 		"I can't even melt you down at all...",
 		"My hunger isn't going to be satiated with you in there.",
 		"Probably best to get you out of there, so I can eat something else.",
 		"Can't even melt you down the tiniest bit."
 	],
-	"letoutOralVoreSoftDigest": ":letoutOralVoreDigest",
-	"letoutOralVoreHeal": [
+	"oralVoreLetoutSoftDigest": ":oralVoreLetoutDigest",
+	"oralVoreLetoutHeal": [
 		"You're probably patched up enough.",
 		"I think you've spent enough time healing.",
 		"I think you should be feeling much better now.",
 		"My stomach does wonders for healing, doesn't it?"
 	],
-	"letoutAnalVore": [
+	"analVoreLetout": [
 		"Was the 'subway' a pleasant trip through?",
 		"Out though my lower exit, come again soon!"
 	],
-	"letoutAnalVoreDigested": ":letoutOralVoreDigested",
-	"letoutAnalVoreDigest": [
+	"analVoreLetoutDigested": ":oralVoreLetoutDigested",
+	"analVoreLetoutDigest": [
 		"I think you won't be adding to my rear today, butt buddy!",
 		"I'll let you go this time, but next time my rear will catch you!"
 	],
-	"letoutAnalVoreDigestImmune": [
+	"analVoreLetoutDigestImmune": [
 		"Just leave via my 'exit', since it can't even soften you up.",
 		"You're free to go, since my bottom can't melt you at all."
 	],
-	"letoutAnalVoreSoftDigest": [
+	"analVoreLetoutSoftDigest": [
 		"I think you won't be adding to my rear today, butt buddy!",
 		"I'll let you go this time, but next time my rear will catch you!"
 	],
-	"letoutAnalVoreHeal": {
+	"analVoreLetoutHeal": {
 		"percentage": "targetHealth",
 		"pools": [
 			[
@@ -961,22 +961,22 @@
 			"All better! Time to come out from the safety of my rear."
 		]
 	},
-	"letoutUnbirth": [
+	"unbirthVoreLetout": [
 		"Happy birthday.",
 		"I think you've had enough fun in there.",
 		"Maybe it's time for you to come out."
 	],
-	"letoutUnbirthDigested": [
+	"unbirthVoreLetoutDigested": [
 		"I'm going to reform you now... since you got all melted into juices, heh~"
 	],
-	"letoutUnbirthDigest": [
+	"unbirthVoreLetoutDigest": [
 		"Hm... let's stop before you're all melted into juices, heh~"
 	],
-	"letoutUnbirthDigestImmune": [
+	"unbirthVoreLetoutDigestImmune": [
 		"Seems like you're not melting, so I'm gonna let you out."
 	],
-	"letoutUnbirthSoftDigest": ":letoutUnbirthDigest",
-	"letoutUnbirthHeal": {
+	"unbirthVoreLetoutSoftDigest": ":unbirthVoreLetoutDigest",
+	"unbirthVoreLetoutHeal": {
 		"percentage": "targetHealth",
 		"pools": [
 			[
@@ -988,7 +988,7 @@
 		]
 	},
 	"error": ":missingDialogue",
-	"defaultUnwillingPredOralVore": {
+	"oralVoreUnwillingPred": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -1013,7 +1013,7 @@
 			]
 		]
 	},
-	"defaultUnwillingPredAnalVore": {
+	"analVoreUnwillingPred": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -1038,7 +1038,7 @@
 			]
 		]
 	},
-	"defaultUnwillingPredUnbirth": {
+	"unbirthVoreUnwillingPred": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -1205,22 +1205,22 @@
 		]
 	],
 	// Unused Dialogue
-	"defaultRequestCockVoreBefore": [
+	"cockVoreRequestBefore": [
 		"Spied my attachment down there didn't cha~?",
 		"<infusedName> was rather eager to be my new attachment~\nLets put it to use then~",
 		"I usually don't do this, but if <infusedName> enjoys it, then I do to~"
 	],
-	"defaultRequestCockVoreAfter": [
+	"cockVoreRequestAfter": [
 		"Get stuffed right down in there~",
 		"Get squeeeeeezed into my dildo dick hehe~",
 		"Ahh~ <infusedName> is sure to enjoy that~",
 		"Oooh~ I can really feel <infusedName> twitching down there hehe~"
 	],
-	"defaultCockVoreFull": [
+	"cockVoreFull": [
 		"Ahh~ my dildo does have a limit to how much it can stretch!",
 		"I don't think you'll be able to fit, even if <infusedName> wants to try..."
 	],
-	"shaftDefaultStruggle": [
+	"shaftStruggle": [
 		[
 			"Having a good time in there~?",
 			"Hope its comfortable~",
@@ -1232,20 +1232,20 @@
 			"Ahh I'm so glad I turned <infusedName> into a didlo~"
 		]
 	],
-	"ballsDefaultStruggle": [
+	"ballsStruggle": [
 		"Having a good time in there?",
 		"Keep squirming.",
 		"It feels so good having you in there~",
 		"Friends are stored in the balls~"
 	],
-	"letoutCockVoreStruggle": [
+	"cockVoreLetoutStruggle": [
 		"Ahh~ ahh that felt so good~",
 		"Could you get back in and squirm some more?",
 		"Mmm~ I thought you were pretty comfortable.",
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
-	"letoutCockVore": [
+	"cockVoreLetout": [
 		"Ahhhh~ ffff... I would have just cum if I could~",
 		"FFF... ahhh... I guess I came and forced you out?",
 		"Hnnnn i-is this what cumming feels like?"
@@ -1591,7 +1591,7 @@
 		"Hehe, does my belly want something?",
 		"Hehe, do you want something <infusedName>?"
 	],
-	"teaseInfusedTail": [
+	"tailVoreTeaseInfused": [
 		"I can still feel you back there~",
 		"I can still feel you back there, <entityname>~",
 		"Looking good back there, <entityname>!"
@@ -1703,7 +1703,7 @@
 		"Well... I could transform you into a dildo, and then I could attach that to myself. Or you could get someone's essence I could use.",
 		"So what do you say, do you want to become this plushie's dick~?"
 	],
-	"defaultCockVoreTooBig": [
+	"cockVoreTooBig": [
 		"I don't want to break <infusedName> trying to force you in.",
 		"You're a bit too large, I might break it.",
 		"You should try and make yourself smaller~",
@@ -1736,21 +1736,21 @@
 			"It would have been such fun to pop out a prize egg."
 		]
 	],
-	"letoutOralVoreStruggleTransformed": [
+	"oralVoreLetoutStruggleTransformed": [
 		"Hehe, look at you now,\na cute vee plush~",
 		"Hehe, now you're a plushie like me~"
 	],
-	"letoutOralVoreStruggleTransformingImmune": [
+	"oralVoreLetoutStruggleTransformingImmune": [
 		"Didn't want to become a plushie?",
 		"Oh darn, I'll have to start all over again."
 	],
-	"letoutOralVoreStruggleTransforming": [
+	"oralVoreLetoutStruggleTransforming": [
 		"I still think you'd have made a cute plushie"
 	],
-	"letoutUnbirthStruggleEgged": [
+	"unbirthVoreLetoutStruggleEgged": [
 		"Hah, egg"
 	],
-	"letoutUnbirthStruggleEggifyImmune": [
+	"unbirthVoreLetoutStruggleEggifyImmune": [
 		"Don't want to be in a prize egg?",
 		"I thought you'd look cute in a prize egg~"
 	],
@@ -1865,10 +1865,10 @@
 			]
 		}
 	],
-	"infusePreyBellyNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infusePreyShaftNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infusePreyBreastsNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
-	"infusePreyWombNotFeelingIt": ":defaultOralVoreNotFeelingIt", // duplicated lines
+	"infusePreyBellyNotFeelingIt": ":oralVoreNotFeelingIt", // duplicated lines
+	"infusePreyShaftNotFeelingIt": ":oralVoreNotFeelingIt", // duplicated lines
+	"infusePreyBreastsNotFeelingIt": ":oralVoreNotFeelingIt", // duplicated lines
+	"infusePreyWombNotFeelingIt": ":oralVoreNotFeelingIt", // duplicated lines
 	"infused.default.default.default.default.default": [
 		"<slowlove>",
 		"<love>",

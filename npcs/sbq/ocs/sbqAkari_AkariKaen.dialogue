@@ -1,18 +1,18 @@
 {
 	"missingDialogue": "Missing Dialogue\n<dialoguePath>",
-	"defaultRewardsGreeting": [
+	"rewardsGreeting": [
 		"It was fun messing around!\nHave some stuff."
 	],
-	"defaultRewardsGreetingIntroduced": [
+	"rewardsGreetingIntroduced": [
 		"That was great <entityname>!\nI hope you like all this!"
 	],
-	"defaultGreeting": [
+	"greeting": [
 		"Ah, hello there",
 		"merp?",
 		"yes?",
 		"yea?"
 	],
-	"defaultGreetingCrew": [
+	"greetingCrew": [
 		"Greetings Captain.",
 		"Hello Captain.",
 		"Captain."
@@ -21,12 +21,12 @@
 		"Did ya want to talk about something?",
 		"merp?"
 	],
-	"defaultCrewStay": [
+	"crewStay": [
 		"I'll be right here.",
 		"Staying here.",
 		"Yeah I'll stay."
 	],
-	"defaultCrewFollow": [
+	"crewFollow": [
 		"Right behind you!",
 		"Here we go!",
 		"Lets go!"
@@ -80,26 +80,26 @@
 		"I think you'll really like what I've gotten you.",
 		"My next gift will be really good heh."
 	],
-	"defaultRequestOralVoreBefore": [
+	"oralVoreRequestBefore": [
 		"You want me to eat you?",
 		"Alright, sure.",
 		"Yeah ok.",
 		"Sounds good."
 	],
-	"defaultRequestOralVoreAfter": [
+	"oralVoreRequestAfter": [
 		"Mmmmmmm... good.",
 		"Tasty.",
 		"Nice and filling.",
 		"Not too bad."
 	],
-	"defaultUnpromptedOralVoreBefore": [
+	"oralVoreUnpromptedBefore": [
 		"I think you'll fill me up.",
 		"I just need a bite to eat.",
 		"You seem like you'd make a good meal.",
 		"My belly's been grumbling..."
 	],
-	"defaultUnpromptedOralVoreAfter": ":defaultRequestOralVoreAfter",
-	"defaultSelfRequestOralVore": {
+	"oralVoreUnpromptedAfter": ":oralVoreRequestAfter",
+	"oralVoreSelfRequest": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -124,7 +124,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreYes": {
+	"oralVoreSelfRequestYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -149,7 +149,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreYesAfter": {
+	"oralVoreSelfRequestYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -166,7 +166,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreNo": {
+	"oralVoreSelfRequestNo": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -183,7 +183,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreNoYes": {
+	"oralVoreSelfRequestNoYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -200,7 +200,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestOralVoreNoYesAfter": {
+	"oralVoreSelfRequestNoYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -217,76 +217,76 @@
 			]
 		]
 	},
-	"defaultNotFeelingIt": [
+	"notFeelingIt": [
 		"Don't really feel like that right now.",
 		"Not right now.",
 		"I'm not in the mood.",
 		"Eh, maybe later."
 	],
-	"defaultTooBig": [
+	"tooBig": [
 		"I think you're a bit too big to fit in there...",
 		"I don't think I'd be able to get you in...",
 		"If only you were a bit smaller...",
 		"Thats a bit too much to ask of me..."
 	],
-	"defaultTooSmall": [
+	"tooSmall": [
 		"Sorry but I need something a bit bigger then you",
 		"I don't think I'd really feel you at that size",
 		"You're too short for this ride buddy",
 		"Maybe if you where just a little bigger..."
 	],
-	"defaultOralVoreFull": [
+	"oralVoreFull": [
 		"I'm a bit too full...",
 		"My belly can't stretch any further...",
 		"I've eaten too much already...",
 		"I would... but I'm too full..."
 	],
-	"digestOralVoreFull": [
+	"oralVoreDigestFull": [
 		"Maybe after I melt down the last meal",
 		"Urrrrp!\n Won't be too long until I can fit you.",
 		"I've eaten too much already... but I'll probably have room soon.",
 		"I'll have to finish processing this meal first."
 	],
-	"compressionOralVoreFull": [
+	"oralVoreCompressionFull": [
 		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
 		"I'll swallow you down after my current snack gets a bit more compact",
 		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
 		"Just give me a sec to squish my friend here down, and then you'll be next!"
 	],
-	"defaultFull": [
+	"full": [
 		"I'm a bit too full...",
 		"My body can't stretch any further...",
 		"I've been filled too much already...",
 		"I would... but I'm too full..."
 	],
-	"defaultNeedsInfusion": [
+	"needsInfusion": [
 		"I'd want someone merged in there"
 	],
-	"defaultRequestCockVoreBefore": [
+	"cockVoreRequestBefore": [
 		"lol horny for sergal pp",
 		"merp? you want in my shaft?",
 		"hope you fit",
 		"well? come on in"
 	],
-	"defaultRequestCockVoreAfter": [
+	"cockVoreRequestAfter": [
 		"ooh my merp that get me hard~",
 		"FFF~ you making this ergal very happy",
 		"great...im hard..hope no one notices...",
 		"m..merp merp~"
 	],
-	"defaultUnpromptedCockVoreBefore": [
+	"cockVoreUnpromptedBefore": [
 		"Surpised!",
 		"Gotcha",
 		"sorry but I have to do this~",
 		"I'm horny so come here~"
 	],
-	"defaultUnpromptedCockVoreAfter": [
+	"cockVoreUnpromptedAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me even more excited~",
 		"Ffff~ Now I'm all hard~",
 		"A-ahh~ Don't stop squirming~"
 	],
-	"defaultSelfRequestCockVore": {
+	"cockVoreSelfRequest": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -311,7 +311,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestCockVoreYes": {
+	"cockVoreSelfRequestYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -333,7 +333,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestCockVoreYesAfter": {
+	"cockVoreSelfRequestYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -354,7 +354,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestCockVoreNo": {
+	"cockVoreSelfRequestNo": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -371,7 +371,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestCockVoreNoYes": {
+	"cockVoreSelfRequestNoYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -388,7 +388,7 @@
 			]
 		]
 	},
-	"defaultSelfRequestCockVoreNoYesAfter": {
+	"cockVoreSelfRequestNoYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -405,33 +405,33 @@
 			]
 		]
 	},
-	"defaultCockVoreNotFeelingIt": [
+	"cockVoreNotFeelingIt": [
 		"Not in the mood pal",
 		"I'm busy",
 		"Mayber later im just rubbed it off awhile ago",
 		"I'm got other sergals things to do...like merping",
 		"my shaft is tired"
 	],
-	"defaultCockVoreTooBig": [
+	"cockVoreTooBig": [
 		"Sorry micros only",
 		"Woah maybe shrink youself down and I may",
 		"get youself a shrink ray form Auri and come back to me",
 		"smalelr folks only",
 		"your to merping big"
 	],
-	"defaultCockVoreFull": [
+	"cockVoreFull": [
 		"my sheese dispenser is full right now...",
 		"Hmmm if someone moves down to my balls you might fit~",
 		"This sergal shaft is full",
 		"Maybe when I bust a sergal nut"
 	],
-	"digestCockVoreFull": [
+	"cockVoreDigestFull": [
 		"Ah... give me a moment to melt my toys into cum, then I might be able to fit you."
 	],
-	"compressionCockVoreFull": [
+	"cockVoreCompressionFull": [
 		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
 	],
-	"defaultStruggle": [
+	"struggle": [
 		"enjoying yourself",
 		"Comfy?",
 		"merp?"
@@ -460,7 +460,7 @@
 		"Soon you'll be too tired to keep up all that moving.",
 		"Giving me a good show AND all of your energy? How generous!"
 	],
-	"shaftDefaultStruggle": [
+	"shaftStruggle": [
 		"ooohh hehe that tingles~",
 		"wooo boy..."
 	],
@@ -491,7 +491,7 @@
 		"Ahhh~ <infusedName> feels so great down there~",
 		"<keysmash>, you're gonna make <infusedName> cum~"
 	],
-	"ballsDefaultStruggle": [
+	"ballsStruggle": [
 		"merp...that feels nice feeling down there",
 		"Keep going.",
 		"It feels so good having you in there~",
@@ -542,71 +542,71 @@
 		"Bleh! Did you get out before being encased, or is it something else?",
 		"If only you where easier to put in an egg, maybe I could've had more fun with you."
 	],
-	"letoutOralVoreStruggle": [
+	"oralVoreLetoutStruggle": [
 		"*hack...cough*",
 		"alright alright come on out",
 		"aw man...come on..."
 	],
-	"letoutOralVoreStruggleDigested": [
+	"oralVoreLetoutStruggleDigested": [
 		"reformation central",
 		"beep boop reforming..haha jk I aint a synth...oh hope BLue didnt hear that",
 		"alright time to reform"
 	],
-	"letoutOralVoreStruggleDigest": [
+	"oralVoreLetoutStruggleDigest": [
 		"oh..huh enjoy the stay then",
 		"No hard feelings?",
 		"you're no fun \n",
 		"ooh? we got outselfs a fighter"
 	],
-	"letoutOralVoreStruggleDigestImmune": [
+	"oralVoreLetoutStruggleDigestImmune": [
 		"that's fine..I wasnt even that hungry",
 		"you're making me look bad infront of the others",
 		"Come on...It's my job"
 	],
-	"letoutOralVoreStruggleSoftDigest": [
+	"oralVoreLetoutStruggleSoftDigest": [
 		"wha...you were gona be fine..geez",
 		"what? you had that option selected",
 		"well...just stay there I guess"
 	],
-	"letoutOralVoreStruggleSoftDigestImmune": [
+	"oralVoreLetoutStruggleSoftDigestImmune": [
 		"Dang it... I was hungry... and you didn't even melt at all.",
 		"No hard feelings? Its not like my acid even managed to do anything.",
 		"Come on, my acid didn't even do anything to you...",
 		"If only you actually started to melt..."
 	],
-	"letoutOralVoreStruggleHeal": [
+	"oralVoreLetoutStruggleHeal": [
 		"come on..its like a suana in there",
 		"Are you sure you're ready to come out?",
 		"well...return to me if you need more healing",
 		"don't go whinning if you die cause you didnt fully heal up",
 		"next time stop spamming for medic"
 	],
-	"letoutCockVoreStruggle": [
+	"cockVoreLetoutStruggle": [
 		"Ahh~ man what a sensation~",
 		"come back anytime^^",
 		"you felt good in there~",
 		"what? didnt enjoy yourself in there?",
 		"merp...."
 	],
-	"letoutCockVoreStruggleDigested": [
+	"cockVoreLetoutStruggleDigested": [
 		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
 	],
-	"letoutCockVoreStruggleDigest": [
+	"cockVoreLetoutStruggleDigest": [
 		"Got out of my shaft before it made you mush, eh?",
 		"Did you have to leave? It felt so good having you melt into cum!",
 		"I'll be... You withstood my shaft's heat and wiggled out."
 	],
-	"letoutCockVoreStruggleDigestImmune": [
+	"cockVoreLetoutStruggleDigestImmune": [
 		"What the... Shouldn't you be turning into cum instead of getting out?",
 		"Most prey can't stand my shaft's heat. Why are you so resistant?",
 		"You wiggled out completely solid. That's strange..."
 	],
-	"letoutCockVoreStruggleSoftDigest": [
+	"cockVoreLetoutStruggleSoftDigest": [
 		"Got out of my shaft before it absorbed you, eh?",
 		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
 		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
 	],
-	"letoutCockVoreStruggleHeal": [
+	"cockVoreLetoutStruggleHeal": [
 		"I guess shaft therapy time is over.",
 		"You seem eager to be free. Just don't get 'cocky' and get hurt, or back in you go!",
 		"Feeling better now? If not, my rod of healing is always ready."
@@ -636,66 +636,66 @@
 		"Seems like eggs don't work on you.",
 		"I'm giving up on sealing you in an egg."
 	],
-	"letoutOralVore": [
+	"oralVoreLetout": [
 		"alright out you go",
 		"*hack and coughs* out you go",
 		"bleh...you didnt really taste that good",
 		"come on out we got work to do *burps* er excuse me"
 	],
-	"letoutOralVoreDigested": [
+	"oralVoreLetoutDigested": [
 		"time for you to go",
 		"get digested lol",
 		"hope it was worth the pixels",
 		"next yea when you get back"
 	],
-	"letoutOralVoreDigest": [
+	"oralVoreLetoutDigest": [
 		"ok I'm good for now",
 		"I'm satified you can go now",
 		"best you leave",
 		"I didnt really want to digest you"
 	],
-	"letoutOralVoreDigestImmune": [
+	"oralVoreLetoutDigestImmune": [
 		"what's the point?",
 		"that's no fun",
 		"best you go..this sergal is intrested in something else...oh beef jerky",
 		"I'ma go get some actual food"
 	],
-	"letoutOralVoreSoftDigest": [
+	"oralVoreLetoutSoftDigest": [
 		"I think your soft enough",
 		"I'm good for now thanks",
 		"now got out of here you silly",
 		"Didn't feel like it"
 	],
-	"letoutOralVoreSoftDigestImmune": [
+	"oralVoreLetoutSoftDigestImmune": [
 		"really?",
 		"well this is pointless",
 		"oh you selected that option...no fun",
 		"what am I sergal express?"
 	],
-	"letoutOralVoreHeal": [
+	"oralVoreLetoutHeal": [
 		"alright now get back out there!",
 		"Alrighty I think you're all good to go",
 		"feeling better?",
 		"I never though id have a stomach that heals",
 		"I never got my medical degree you know?"
 	],
-	"letoutCockVore": [
+	"cockVoreLetout": [
 		"Hhhhhh I'm gonna cum...",
 		"M..mmph god~",
 		"Gonna blast~",
 		"M..Meerpp....~"
 	],
-	"letoutCockVoreDigested": [
+	"cockVoreLetoutDigested": [
 		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
 	],
-	"letoutCockVoreDigest": [
+	"cockVoreLetoutDigest": [
 		"Hm... Maybe I won't melt you down entirely..."
 	],
-	"letoutCockVoreDigestImmune": [
+	"cockVoreLetoutDigestImmune": [
 		"I can't seem to melt you down... so I'll let you go."
 	],
-	"letoutCockVoreSoftDigest": ":letoutCockVoreDigest",
-	"letoutCockVoreHeal": {
+	"cockVoreLetoutSoftDigest": ":cockVoreLetoutDigest",
+	"cockVoreLetoutHeal": {
 		"percentage": "targetHealth",
 		"pools": [
 			[
@@ -708,7 +708,7 @@
 	},
 	"letoutCumTransforming": ":missingButNotNecessary",
 	"letoutCumTransformingImmune": ":missingButNotNecessary",
-	"defaultPreyRequestOralVore": {
+	"oralVorePreyRequest": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -733,7 +733,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestOralVoreYes": {
+	"oralVorePreyRequestYes": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -758,7 +758,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestOralVoreNo": {
+	"oralVorePreyRequestNo": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -775,7 +775,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestOralVoreNoYes": {
+	"oralVorePreyRequestNoYes": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -800,7 +800,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestCockVore": {
+	"cockVorePreyRequest": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -817,7 +817,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestCockVoreYes": {
+	"cockVorePreyRequestYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -834,7 +834,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestCockVoreNo": {
+	"cockVorePreyRequestNo": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -851,7 +851,7 @@
 			]
 		]
 	},
-	"defaultPreyRequestCockVoreNoYes": {
+	"cockVorePreyRequestNoYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -868,7 +868,7 @@
 			]
 		]
 	},
-	"defaultForcingPreyOralVore": {
+	"oralVoreForcingPrey": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -886,7 +886,7 @@
 			]
 		]
 	},
-	"defaultForcingPreyCockVore": {
+	"cockVoreForcingPrey": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -903,7 +903,7 @@
 			]
 		]
 	},
-	"defaultUnwillingPredOralVore": {
+	"oralVoreUnwillingPred": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -928,7 +928,7 @@
 			]
 		]
 	},
-	"defaultUnwillingPredCockVore": {
+	"cockVoreUnwillingPred": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -1146,22 +1146,22 @@
 		"Is it me, or is there something surrounding me that's not your spunk?",
 		"I feel like some kind of shell is forming around me!"
 	],
-	"voredOralVoreWilling": [ //blue here, doing these as last, LAST lines
+	"oralVoreVoredWilling": [ //blue here, doing these as last, LAST lines
 		"Oh yeah! Eat me up like the snack I am!",
 		"Make me your lunch, you know you're hungry!",
 		"I can't wait to wiggle down your throat!"
 	],
-	"voredCockVoreWilling": [
+	"cockVoreVoredWilling": [
 		"I want in your shaft, like right now!",
 		"Shove me into your lewd meat stick!",
 		"Let me wiggle into that cock of yours!"
 	],
-	"voredOralVore": [
+	"oralVoreVored": [
 		"euugh so slimey",
 		"happy to fill you up^^",
 		"ill never will get use to this >~<"
 	],
-	"voredCockVore": [
+	"cockVoreVored": [
 		"hehe now the fun begins",
 		"euugh..some got into my mouth",
 		"man it's tight",
@@ -1181,36 +1181,36 @@
 	"escapeStruggleEggifyImmune": [
 		"Looks like I'm free, though I wasn't worried since I resisted your egging."
 	],
-	"escapeOralVoreStruggle": [
+	"oralVoreEscapeStruggle": [
 		"won't deny it was cozy in there",
 		"well that was an expereince"
 	],
-	"escapeOralVoreStruggleDigest": [
+	"oralVoreEscapeStruggleDigest": [
 		"Whew... I got you to spit me out before I was done for!"
 	],
-	"escapeOralVoreStruggleDigestImmune": [
+	"oralVoreEscapeStruggleDigestImmune": [
 		"I got you to spit me out, though I wasn't really in any danger."
 	],
-	"escapeOralVoreStruggleSoftDigest": [
+	"oralVoreEscapeStruggleSoftDigest": [
 		"Whew... I got you to spit me out before I was done for!"
 	],
-	"escapeOralVoreStruggleHeal": [
+	"oralVoreEscapeStruggleHeal": [
 		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
 	],
-	"escapeCockVoreStruggle": [
+	"cockVoreEscapeStruggle": [
 		"ah man...its all over my clothes",
 		"man..it'll take me forever to wash the cum out"
 	],
-	"escapeCockVoreStruggleDigest": [
+	"cockVoreEscapeStruggleDigest": [
 		"Whew, I wiggled out of your shaft before it melted me!"
 	],
-	"escapeCockVoreStruggleDigestImmune": [
+	"cockVoreEscapeStruggleDigestImmune": [
 		"Looks like I got out your shaft, though it couldn't do any harm to me."
 	],
-	"escapeCockVoreStruggleSoftDigest": [
+	"cockVoreEscapeStruggleSoftDigest": [
 		"Whew, I wiggled out of your shaft before it melted me!"
 	],
-	"escapeCockVoreStruggleHeal": [
+	"cockVoreEscapeStruggleHeal": [
 		"I squirmed out your cock and I feel really good after all that!"
 	],
 	"escapeStruggleCumTransforming": ":missingButNotNecessary",
@@ -1227,36 +1227,36 @@
 	"escapeEggifyImmune": [
 		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
 	],
-	"escapeOralVore": [
+	"oralVoreEscape": [
 		"so that's whats it like to be swallowed",
 		"I'll never get used to this"
 	],
-	"escapeOralVoreDigest": [
+	"oralVoreEscapeDigest": [
 		"Thanks for spitting me up. I was going to be added to you!"
 	],
-	"escapeOralVoreDigestImmune": [
+	"oralVoreEscapeDigestImmune": [
 		"Thanks for spitting me up. Maybe you realized you can't digest me?"
 	],
-	"escapeOralVoreSoftDigest": [
+	"oralVoreEscapeSoftDigest": [
 		"Thanks for spitting me up. I was going to be added to you!"
 	],
-	"escapeOralVoreHeal": [
+	"oralVoreEscapeHeal": [
 		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
 	],
-	"escapeCockVore": [
+	"cockVoreEscape": [
 		"so salty..plhew",
 		"its in my mouth..."
 	],
-	"escapeCockVoreDigest": [
+	"cockVoreEscapeDigest": [
 		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
 	],
-	"escapeCockVoreDigestImmune": [
+	"cockVoreEscapeDigestImmune": [
 		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
 	],
-	"escapeCockVoreSoftDigest": [
+	"cockVoreEscapeSoftDigest": [
 		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
 	],
-	"escapeCockVoreHeal": [
+	"cockVoreEscapeHeal": [
 		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
 	],
 	"escapeCumTransforming": ":missingButNotNecessary",

@@ -27,15 +27,6 @@
 
 		"uniqueId" : "sbqBatty_Xeronious", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"entityPortrait" : true, // set this to true of you want the dialogue box portrait to use the entity's portrait
-		"defaultPortrait" : "bust",
-		// if you want to use specially drawn sprites for dialogue box portraits, remove the two portrait args above, and uncomment the args below
-		/*
-		"defaultPortrait" : "neutral.png",
-		"portraitPath" : "/humanoid/sbqTemplate/portraits/", // Depending on how you make your OC, you may want to have your portraits located in different places, so heres some suggestions
-		"portraitPath" : "/npcs/sbq/ocs/sbqTemplate/portraits/",
-		*/
-
 		"dialogueStepScripts" : [], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
 		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 
@@ -121,7 +112,7 @@
 		// the pred prefrences and general settings for this NPC are set here!
 		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
 
-		"sbqDefaultSettings" : {
+		"sbqSettings" : {
 			"mood" : "default",
 			"personality" : "default",
 
