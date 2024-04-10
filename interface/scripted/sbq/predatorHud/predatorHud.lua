@@ -109,7 +109,7 @@ function sbq.updateBars(dt)
 		sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
 		if occupant.progressBar then
 			occupant.progressBar.progress = occupant.progressBar.progress + (dt * (occupant.progressBar.args.speed or 1))
-			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], occupant.progressBar.args.color, (occupant.progressBar.progress or 0) / 100 )
+			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") )
 		end
 	end
 end

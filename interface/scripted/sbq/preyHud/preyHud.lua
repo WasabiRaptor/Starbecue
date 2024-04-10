@@ -2,7 +2,6 @@ sbq = {}
 
 require("/scripts/any/SBQ_util.lua")
 local buttons
-local progressBar
 local indicator
 local time = 0
 
@@ -59,7 +58,6 @@ end
 function init()
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	buttons = config.getParameter( "directions" )
-	progressBar = config.getParameter( "progressBar" )
 	time = config.getParameter( "time" )
 	location = config.getParameter( "location" )
 	icon = config.getParameter("icon")
@@ -81,7 +79,6 @@ function init()
 			interact = world.isEntityInteractive(id) and "default"
 		}
 		time = additionalData.time
-		progressBar = additionalData.progressBar
 		location = locationData.name
 	end)
 
@@ -129,10 +126,7 @@ function update( dt )
 	end
 
 	-- bar
-	local s = ((progressBar or {}).progress or 0) / 100 * bar.w
-	if progressBar then
-		progressBar.progress = progressBar.progress + (progressBar.args.speed or 1) * dt
-	end
+	local s = (status.statusProperty("sbqProgressBar") or 0) * bar.w
 	if s < bar.w then
 		indicator:drawImageRect(
 			bar.empty,
@@ -142,7 +136,7 @@ function update( dt )
 	end
 	if s > 0 then
 		indicator:drawImageRect(
-			bar.full .. replace(bar.color, progressBar.args.color),
+			bar.full .. replace(bar.color, status.statusProperty("sbqProgressBarColor")),
 			{0, 0, s, bar.h},
 			{bar.x, bar.y, bar.x + s, bar.y + bar.h}
 		)

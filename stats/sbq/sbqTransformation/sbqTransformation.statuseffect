@@ -1,0 +1,34 @@
+{
+	"name" : "sbqTransformation",
+	"blockingStats" : [
+		"sbqTransformationImmunity",
+		"sbqEggify"
+	],
+
+	"effectConfig" : {
+		"adjectives" : ["funny"],
+
+		"checkBoxIcon" : "/interface/scripted/sbq/transform.png",
+		"description" : "transformDesc",
+
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			}
+		},
+		"predModifiers" : [
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9}
+		]
+
+	},
+	"defaultDuration" : 5,
+
+	"scripts" : [
+		"sbqTransformation.lua"
+	],
+
+	"label" : "Transforming",
+	"icon" : "/stats/sbq/sbqTransformation/sbqTransformation.png"
+}
