@@ -1019,6 +1019,7 @@ function _Occupant:remove()
 		end
 	end
 	Occupants.refreshOccupantModifiers = true
+	self:sendEntityMessage("sbqReleased")
 	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
 
