@@ -1,13 +1,13 @@
 
 function sbq.humanoidInit()
-    sbq.species = humanoid.species
+	sbq.species = humanoid.species
 
 	message.setHandler("sbqDoTransformation", function (_,_, ...)
 		sbq.doTransformation(...)
 	end)
 	message.setHandler("sbqEndMysteriousPotionTF", function (_,_)
 		sbq.revertTF()
-    end)
+	end)
 	message.setHandler("sbqGetIdentity", function (_,_)
 		return humanoid.getIdentity()
 	end)
@@ -29,51 +29,52 @@ end
 
 
 function sbq.doTransformation(newIdentity, duration, perma, ...)
-	if world.pointTileCollision(entity.position(), {"Null"}) then return end
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	sb.logInfo(sb.printJson(newIdentity,2))
 	local currentIdentity =	humanoid.getIdentity()
-    local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
-    local originalSpecies = status.statusProperty("sbqOriginalSpecies")
-    local originalGender = status.statusProperty("sbqOriginalGender")
+	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
+	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
+	local originalGender = status.statusProperty("sbqOriginalGender")
 
-    if not originalSpecies then
+	if not originalSpecies then
 		originalSpecies = humanoid.species()
-        status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
-        speciesIdentites[originalSpecies] = currentIdentity
+		status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
+		speciesIdentites[originalSpecies] = currentIdentity
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
 	end
-    if not originalGender then
+	if not originalGender then
 		originalGender = humanoid.gender()
 		status.setStatusProperty("sbqOriginalGender", originalGender)
-    end
+	end
 
 	if sbq.settings.genderTF then
 		if newIdentity.gender == "random" then
 			newIdentity.gender = ({"male", "female"})[math.random(2)]
 		elseif newIdentity.gender == "swap" then
-            newIdentity.gender = ({ male = "female", female = "male" })[currentIdentity.gender]
-        else
+			newIdentity.gender = ({ male = "female", female = "male" })[currentIdentity.gender]
+		elseif not newIdentity.gender then
 			newIdentity.gender = currentIdentity.gender
-        end
-    else
+		end
+	else
 		newIdentity.gender = currentIdentity.gender
-    end
+	end
 
 	if sbq.settings.speciesTF then
 		if newIdentity.species == "any" then
 			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
 			newIdentity.species = speciesList[math.random(#speciesList)]
 		elseif newIdentity.species == "originalSpecies" then
-            newIdentity.species = originalSpecies
-        else
+			newIdentity.species = originalSpecies
+		elseif not newIdentity.species then
 			newIdentity.species = currentIdentity.species
-        end
-    else
+		end
+	else
 		newIdentity.species = currentIdentity.species
 	end
 
-    newIdentity = sb.jsonMerge(
-        humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
-        newIdentity,
+	newIdentity = sb.jsonMerge(
+		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
+		newIdentity,
 		((not newIdentity.force) and speciesIdentites[newIdentity.species]) or {}
 	)
 
@@ -85,23 +86,34 @@ function sbq.doTransformation(newIdentity, duration, perma, ...)
 		world.sendEntityMessage(entity.id(), "sbqUnlockedSpecies")
 	end
 
-    humanoid.setIdentity(newIdentity)
+	humanoid.setIdentity(newIdentity)
 
 	if duration and not (sbq.settings.indefiniteTF) then
 		sbq.forceTimer("revertTF", (duration or 5) * 60, sbq.revertTF)
-    end
+	end
 	if sbq.settings.permanentTF and perma then
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end
+	sbq.refreshPredHudPortrait()
 end
 
 function sbq.revertTF()
 	local currentData = humanoid.getIdentity()
-    local originalSpecies = status.statusProperty("sbqOriginalSpecies") or humanoid.species()
+	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or humanoid.species()
 	local originalGender = status.statusProperty("sbqOriginalGender") or humanoid.gender()
-    local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
-    local customData = speciesIdentities[originalSpecies] or humanoid.randomIdentity(originalSpecies, currentData.personalityIndex)
+	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
+	local customData = speciesIdentities[originalSpecies] or humanoid.randomIdentity(originalSpecies, currentData.personalityIndex)
 	customData.gender = originalGender
 	humanoid.setIdentity(customData)
+	sbq.refreshPredHudPortrait()
+end
+
+function sbq.refreshPredHudPortrait()
+	sbq.timer("predHudPortrait", 1, function ()
+		local loungeAnchor = world.entityCurrentLounge(entity.id())
+		if loungeAnchor then
+			world.sendEntityMessage(loungeAnchor.entityId, "sbqGuiMessage", "sbqHudRefreshPortrait", entity.id())
+		end
+	end)
 end

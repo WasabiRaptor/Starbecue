@@ -320,11 +320,12 @@ function default:transform(name, action, target, predSelect, ...)
 		occupant:refreshLocation()
 		return false
 	end
+	occupant.locationSettings.transform = false
+	occupant.locationSettings.digestedTransform = false
 	local location = occupant:getLocation()
-	world.sendEntityMessage(target, "sbqDoTransformation",
+	occupant:sendEntityMessage("sbqDoTransformation",
 		action.transformResult or location.transformResult or { species = humanoid.species() },
 		action.transformDuration or location.transformDuration,
 		action.transformPerma or location.transformPerma
 	)
-
 end

@@ -11,7 +11,7 @@ function init()
 	self.statusProperty = config.getParameter("transformProperty") or "sbqTransformProgress"
 	self.progressBarColor = config.getParameter("progressBarColor") or "default"
 
-	effect.addStatModifierGroup({stat = effect.name(), amount = 1})
+	effect.addStatModifierGroup({{stat = effect.name(), amount = 1}})
 
 	self.finished = false
 	self.progress = 0
@@ -34,7 +34,7 @@ function update(dt)
 			end)
 		end
 	else
-		local fillAmount = (self.turboFill * dt * status.stat("sbqDigestingPower")) * 0.1
+		local fillAmount = (self.fillRate * dt * status.stat("sbqDigestingPower")) * 0.1
 		if self.turboFill > 0 then
 			fillAmount = fillAmount * 10
 		end

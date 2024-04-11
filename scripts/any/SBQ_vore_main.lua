@@ -1188,7 +1188,11 @@ function _Occupant:refreshLocation(name, subLocation)
 	world.sendEntityMessage(self.entityId, "sbqGuiMessage", "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
 		time = self.time,
 	})
-	world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+	if self.flags.newOccupant then
+		world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+	else
+		world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqHudRefreshPortrait", self.entityId)
+	end
 end
 
 function sbq.getModifiers(modifiers, power)
@@ -1381,7 +1385,7 @@ function _Occupant:animProperty(property)
 	return animator.partProperty(self.seat, property)
 end
 function _Occupant:getPublicProperty(property)
-	return sbq.getPublicProperty(self.entityId, property)
+	return world.getStatusProperty(self.entityId, property)
 end
 function _Occupant:position()
 	return sbq.globalPartPoint(self.seat, "loungeOffset")
