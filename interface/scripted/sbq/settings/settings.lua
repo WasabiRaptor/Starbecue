@@ -352,6 +352,35 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 
+function sbq.widgetScripts.makeInfusionSlots(param)
+	local infuseSlots = {}
+	sbq.settingIdentifiers[sbq.widgetSettingIdentifier(param)] = {param.setting, param.groupName, param.groupKey}
+	local layout = {
+		type = "panel",
+		id = sbq.widgetSettingIdentifier(param).."Panel",
+		expandMode = { 1, 0 },
+		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, { type = "sbqItemGrid", autoInteract = true, slots = infuseSlots} },
+		makeLabel = false
+	}
+	local canInfuse = false
+	for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
+		if (sbq.voreConfig.availableInfuseTypes or {})[infuseType] then
+			canInfuse = true
+			local glyph = "/interface/scripted/sbq/" .. infuseType .. "Slot.png"
+			local item = sbq.settings[param.setting][infuseType].slot
+			table.insert(infuseSlots, {
+				visible = sbq.settings.infusePrefs[infuseType].pred or false,
+				item = item.name and item,
+				glyph = root.assetExists(glyph) and glyph,
+				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot)
+			})
+		end
+	end
+	if not canInfuse then return false end
+
+	return sb.jsonMerge(param, layout)
+end
+
 function sbq.widgetScripts.changeScale(value)
 	world.sendEntityMessage(sbq.entityId(), "sbqScale", value)
 end

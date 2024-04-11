@@ -83,7 +83,7 @@ end
 
 function mg.toolTip(inp)
 	-- convert an array of strings into a single string
-    if type(inp) == "table" and type(inp[1]) == "string" then
+	if type(inp) == "table" and type(inp[1]) == "string" then
 		for i, v in ipairs(inp) do
 			inp[i] = mg.formatText(v)
 		end
@@ -125,7 +125,7 @@ function widgets.sbqSetting:init(base, param)
 	if sbq.gui.settingWidgets[param.setting] then
 		if type(sbq.gui.settingWidgets[param.setting]) == "string" then
 			param = sbq.widgetScripts[sbq.gui.settingWidgets[param.setting]](param)
-        else
+		else
 			param = sb.jsonMerge(param, sbq.replaceConfigTags(sbq.gui.settingWidgets[param.setting], {groupKey = param.groupKey, groupName = param.groupName, setting = param.setting}))
 		end
 	else
@@ -1091,6 +1091,82 @@ function widgets.sbqTextBox:onEscape() end
 
 for id, t in pairs(widgets) do t.widgetType = id end
 
+
+widgets.sbqItemGrid = mg.proto(widgets.itemGrid, {
+})
+
+function widgets.sbqItemGrid:init(base, param)
+	self.children = self.children or { } -- always have a children table
+
+	self.columns = param.columns
+	self.spacing = param.spacing
+	if type(self.spacing) == "number" then self.spacing = {self.spacing, self.spacing} end
+	self.autoInteract = param.autoInteract or param.auto
+	self.containerSlot = param.containerSlot
+	if self.containerSlot then self.autoInteract = "container" end
+
+	self.directCache = param.directCache
+
+	self.backingWidget = mkwidget(base, { type = "layout", layoutType = "basic", scissoring = false })
+
+	self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
+
+	local slots = param.slots or 1
+	if type(slots) == "table" then
+		for _, slot in ipairs(slots) do
+			self:addSlot(nil, slot)
+		end
+	else
+		for i=1,slots do self:addSlot() end
+	end
+end
+
+function widgets.sbqItemGrid:addSlot(item, params)
+	local s = self:addChild (sb.jsonMerge({
+		type = "sbqItemSlot",
+		autoInteract = self.autoInteract,
+		directCache = self.directCache,
+		item = item,
+	}, params or {}))
+	if not self.autoInteract then
+		s.onMouseButtonEvent = function(...) return self.onSlotMouseEvent(...) end
+		s.onCaptureMouseMove = function(...) return self.onCaptureMouseMove(...) end
+	end
+	self:queueGeometryUpdate() -- new slots need positioned
+end
+
+widgets.sbqItemSlot = mg.proto(widgets.itemSlot, {
+})
+
+function widgets.sbqItemSlot:init(base, param)
+	self.size = nil -- force recalculate
+	self.hideRarity = param.hideRarity
+	self.glyph = mg.path(param.glyph or param.colorGlyph)
+	self.colorGlyph = not not param.colorGlyph -- some themes may want to render non-color glyphs as monochrome in their own colors
+	self.color = param.color -- might as well let themes have at this
+	self.autoInteract = param.autoInteract or param.auto
+	self.containerSlot = param.containerSlot
+	if self.containerSlot then self.autoInteract = "container" end
+
+	self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
+
+	self.directCache = param.directCache
+	--
+	self.backingWidget = mkwidget(base, { type = "canvas" })
+	self.subWidgets = {
+		slot = mkwidget(base, { type = "itemslot", callback = "_clickLeft", rightClickCallback = "_clickRight", showRarity = false, showCount = false }),
+		count = mkwidget(base, { type = "label", mouseTransparent = true, hAnchor = "right" })
+	}
+	if param.item then self:setItem(param.item) end
+	if self.autoInteract == "container" then -- start polling loop
+		if not containerSlots then mg.startEvent(containerLoop) end
+		table.insert(containerSlots, self)
+	end
+end
 
 
 -- the version of stardust from steam is out of date and this makes the width actually function
