@@ -14,10 +14,8 @@ function build(directory, config, parameters, level, seed)
 				if speciesFile then
 					config.shortdescription = sb.replaceTags(strings.speciesPotionName, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
 					config.description = sb.replaceTags(strings.speciesPotionDesc, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
-					if speciesFile.potionImagePath then
-						config.inventoryIcon = speciesFile.potionImagePath .. "potion.png"
-						config.largeImage = speciesFile.potionImagePath .. "potionLarge.png"
-					end
+					config.inventoryIcon = (speciesFile.potionImagePath or "") .. "potion.png"
+					config.largeImage = (speciesFile.potionImagePath or "") .. "potionLarge.png"
 					if speciesFile.baseColorMap then
 						-- TODO make potions use the species colors
 					end
