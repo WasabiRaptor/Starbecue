@@ -372,13 +372,21 @@ function sbq.widgetScripts.makeInfusionSlots(param)
 				visible = sbq.settings.infusePrefs[infuseType].pred or false,
 				item = item.name and item,
 				glyph = root.assetExists(glyph) and glyph,
-				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot)
+				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot),
+				setting = "slot",
+				groupName = param.setting,
+				groupKey = infuseType,
+				script = "changeSetting"
 			})
 		end
 	end
 	if not canInfuse then return false end
 
 	return sb.jsonMerge(param, layout)
+end
+
+function sbq.widgetScripts.infuseSlotAccepts()
+
 end
 
 function sbq.widgetScripts.changeScale(value)

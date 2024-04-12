@@ -1153,6 +1153,19 @@ function widgets.sbqItemSlot:init(base, param)
 	self.setting = param.setting or self.parent.setting
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
+	self.script = param.script
+
+	if self.script then
+		function self:onItemModified()
+			sbq.logInfo(self:item(),2)
+			sbq.widgetScripts[self.script](self:item(), self.setting, self.groupName,self.groupKey)
+		end
+	end
+	if self.acceptScript then
+		function self:acceptsItem(item)
+			sbq.widgetScripts[self.acceptScript](self, item)
+		end
+	end
 
 	self.directCache = param.directCache
 	--
