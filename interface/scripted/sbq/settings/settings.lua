@@ -385,8 +385,10 @@ function sbq.widgetScripts.makeInfusionSlots(param)
 	return sb.jsonMerge(param, layout)
 end
 
-function sbq.widgetScripts.infuseSlotAccepts()
-
+function sbq.widgetScripts.infuseSlotAccepts(w, item)
+	if w.locked then return false end
+	if not item then return true end
+	return sb.jsonQuery(item, string.format("parameters.npcArgs.npcParam.scriptConfig.sbqSettings.%s.%s.prey", w.groupName, w.groupKey)) or false
 end
 
 function sbq.widgetScripts.changeScale(value)
