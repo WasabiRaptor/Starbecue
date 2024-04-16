@@ -16,6 +16,8 @@ function dialogueStepScripts.percentage(dialogueTree, dialogueTreeTop, settings,
 			checkValue = world.entityResourcePercentage(eid, key)
 		elseif type(settings[key]) == "number" then
 			checkValue = settings[key]
+		elseif type(sbq.getPublicProperty(eid, key)) == "number" then
+			checkValue = sbq.getPublicProperty(eid, key)
 		end
 
 		if type(checkValue) == "number" then

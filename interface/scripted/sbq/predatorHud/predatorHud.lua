@@ -25,6 +25,10 @@ function init()
 			sbq.refreshPortrait(entityId)
 		end
 	end)
+	message.setHandler("sbqHudRefreshPortrait",function (_,_,entityId)
+		sbq.refreshPortrait(entityId)
+	end)
+
 	Occupants.list = _ENV.metagui.inputData.occupants
 	sbq.refreshOccupants()
 end
@@ -107,10 +111,7 @@ sbq.bottomBar = {
 function sbq.updateBars(dt)
 	for _, occupant in ipairs(Occupants.list) do
 		sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
-		if occupant.progressBar then
-			occupant.progressBar.progress = occupant.progressBar.progress + (dt * (occupant.progressBar.args.speed or 1))
-			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], occupant.progressBar.args.color, (occupant.progressBar.progress or 0) / 100 )
-		end
+		sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") )
 	end
 end
 

@@ -310,3 +310,25 @@ function default:chooseLocation(name, action, target, predSelect, ...)
 	end
 	world.sendEntityMessage( (predSelect and entity.id()) or target, "sbqChooseLocation", entity.id(), target, locations)
 end
+
+function default:transform(name, action, target, predSelect, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if not ((occupant.flags.digested and (occupant.locationSettings.digestedTransform))
+		or ((not occupant.flags.digested) and (occupant.locationSettings.transform)))
+	then
+		occupant.locationSettings.transform = true
+		occupant.locationSettings.digestedTransform = true
+		occupant:refreshLocation()
+		return false
+	elseif (occupant:getPublicProperty("sbqTransformProgress") or 0) < 1 then
+	end
+	occupant.locationSettings.transform = false
+	occupant.locationSettings.digestedTransform = false
+	local location = occupant:getLocation()
+	occupant:sendEntityMessage("sbqDoTransformation",
+		action.transformResult or location.transformResult or { species = humanoid.species() },
+		action.transformDuration or location.transformDuration,
+		action.transformPerma or location.transformPerma
+	)
+end

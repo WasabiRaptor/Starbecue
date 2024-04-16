@@ -80,7 +80,6 @@ function init()
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
 			time = additionalData.time,
-			progressBar = additionalData.progressBar,
 			location = locationData.name,
 			directions = {
 				up = (struggleActions.up and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),

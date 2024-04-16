@@ -1,6 +1,6 @@
 local old = {
 	init = init,
-    update = update,
+	update = update,
 	applyDamageRequest = applyDamageRequest
 }
 sbq = {}
@@ -21,27 +21,30 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 
 	sbq.actorInit()
-    old.init()
+	old.init()
+	status.setStatusProperty("sbqProgressBar", 0)
 
-	status.setStatusProperty("sbqType", nil)
+	message.setHandler("sbqReleased", function(_, _, data)
+		status.setStatusProperty("sbqProgressBar", 0)
+	end)
 
-    message.setHandler("sbqForceSit", function(_, _, data)
+	message.setHandler("sbqForceSit", function(_, _, data)
 		mcontroller.resetAnchorState()
 		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
 			seatToForce = data
 		end
 	end)
 
-    message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
-        local res = status.overConsumeResource(resource, amount)
+	message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
+		local res = status.overConsumeResource(resource, amount)
 		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
 		return res
-    end)
+	end)
 	message.setHandler("sbqConsumeResource", function (_,_, resource, amount, ignoreBlock)
-        local res = status.consumeResource(resource, amount)
+		local res = status.consumeResource(resource, amount)
 		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
 		return res
-    end)
+	end)
 
 	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)
 		for i, resource in ipairs(resources or {}) do
@@ -70,28 +73,28 @@ function init()
 		return amount - amountRemaining
 	end)
 
-    message.setHandler("sbqScale", function(_, _, scale, duration)
+	message.setHandler("sbqScale", function(_, _, scale, duration)
 		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
-        destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
+		destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
 		oldScale = mcontroller.scale()
 		scaleTime = 0
-        scaleDuration = duration or 1
-        scaling = true
+		scaleDuration = duration or 1
+		scaling = true
 		leftoverScale = 0
-    end)
-    destScale = mcontroller.scale()
-    oldScale = mcontroller.scale()
+	end)
+	destScale = mcontroller.scale()
+	oldScale = mcontroller.scale()
 
 
 
-    -- captures
-    old.status_applySelfDamageRequest = status.applySelfDamageRequest
-    function status.applySelfDamageRequest(damageRequest)
-        if damageRequest.damageSourceKind == "falling" then
+	-- captures
+	old.status_applySelfDamageRequest = status.applySelfDamageRequest
+	function status.applySelfDamageRequest(damageRequest)
+		if damageRequest.damageSourceKind == "falling" then
 			if self.fallDistance > (sbq.config.minimumFallDistance * mcontroller.scale()) then
 				old.status_applySelfDamageRequest(damageRequest)
 			end
-        else
+		else
 			old.status_applySelfDamageRequest(damageRequest)
 		end
 	end
@@ -101,24 +104,24 @@ function update(dt)
 	old.update(dt)
 	sbq.checkTimers(dt)
 
-    if scaling then
-        scaleTime = scaleTime + dt
-        local currentScale = oldScale + (destScale - oldScale) * (scaleTime / scaleDuration)
+	if scaling then
+		scaleTime = scaleTime + dt
+		local currentScale = oldScale + (destScale - oldScale) * (scaleTime / scaleDuration)
 		if destScale > oldScale then
-            currentScale = math.min(destScale, currentScale)
+			currentScale = math.min(destScale, currentScale)
 		elseif destScale < oldScale then
-            currentScale = math.max(destScale, currentScale)
-        end
-        mcontroller.setScale(currentScale)
+			currentScale = math.max(destScale, currentScale)
+		end
+		mcontroller.setScale(currentScale)
 		if scaleTime >= scaleDuration then
 			scaling = false
 		end
 	end
 
 	if seatToForce then
-        if world.entityExists(seatToForce.source) then
+		if world.entityExists(seatToForce.source) then
 			local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
-            if success then seatToForce = nil else
+			if success then seatToForce = nil else
 				-- sb.logError(error)
 			end
 		end
@@ -126,7 +129,7 @@ function update(dt)
 end
 
 function applyDamageRequest(damageRequest)
-    if (damageRequest.damageSourceKind == "sbq_digest")
+	if (damageRequest.damageSourceKind == "sbq_digest")
 	or (damageRequest.damageSourceKind == "sbq_cumdigest")
 	or (damageRequest.damageSourceKind == "sbq_femcumdigest")
 	or (damageRequest.damageSourceKind == "sbq_milkdigest")
@@ -140,10 +143,10 @@ function applyDamageRequest(damageRequest)
 			damageDealt = damageRequest.damage,
 			healthLost = healthLost,
 			hitType = damageRequest.hitType,
-            damageSourceKind = damageRequest.damageSourceKind,
+			damageSourceKind = damageRequest.damageSourceKind,
 			targetMaterialKind = ""
-        }}
-    elseif damageRequest.damageSourceKind == "sbq_heal" then
+		}}
+	elseif damageRequest.damageSourceKind == "sbq_heal" then
 		return {{
 			sourceEntityId = damageRequest.sourceEntityId,
 			targetEntityId = entity.id(),
@@ -151,22 +154,22 @@ function applyDamageRequest(damageRequest)
 			damageDealt = damageRequest.damage,
 			healthLost = status.giveResource("health", damageRequest.damage),
 			hitType = damageRequest.hitType,
-            damageSourceKind = damageRequest.damageSourceKind,
+			damageSourceKind = damageRequest.damageSourceKind,
 			targetMaterialKind = ""
-        }}
-    elseif damageRequest.damageSourceKind == "sbq_size" then
-        local scaleAmount = damageRequest.damage + leftoverScale
-        leftoverScale = (scaleAmount % sbq.config.scaleSnap)
+		}}
+	elseif damageRequest.damageSourceKind == "sbq_size" then
+		local scaleAmount = damageRequest.damage + leftoverScale
+		leftoverScale = (scaleAmount % sbq.config.scaleSnap)
 		scaleAmount  = scaleAmount - leftoverScale
 		if (math.abs(scaleAmount)) < sbq.config.scaleSnap then
 			leftoverScale = leftoverScale + scaleAmount
 			return {}
 		end
-        scaling = true
-        oldScale = mcontroller.scale()
+		scaling = true
+		oldScale = mcontroller.scale()
 		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
-        destScale = math.min(publicSettings.maximumScale or 1, math.max(destScale + scaleAmount, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
-        scaleDuration = math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2))
+		destScale = math.min(publicSettings.maximumScale or 1, math.max(destScale + scaleAmount, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
+		scaleDuration = math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2))
 		scaleTime = 0
 		return {}
 	end

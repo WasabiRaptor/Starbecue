@@ -7,7 +7,7 @@ function init()
 end
 
 function update(dt, fireMode, shiftHeld)
-    if not self.useTimer and fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
+	if not self.useTimer and fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
 		if sbq.tableMatches(config.getParameter("args")[1], humanoid.getIdentity()) then return end
 		self.useTimer = 0
 		activeItem.setArmAngle(0)
@@ -19,11 +19,12 @@ function update(dt, fireMode, shiftHeld)
 
 		if self.useTimer < 3.1 then
 			activeItem.setArmAngle(self.useTimer / 5)
-        else
+		else
 			self.useTimer = nil
 			activeItem.setArmAngle(-math.pi / 4)
-            player.setScriptContext("starbecue")
-			player.callScript("sbq.doTransformation", config.getParameter("args"))
+			player.setScriptContext("starbecue")
+			player.callScript("sbq.doTransformation", table.unpack(config.getParameter("args") or {}))
+			if not player.isAdmin() then item.consume(1) end
 		end
 	end
 end

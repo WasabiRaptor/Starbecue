@@ -66,9 +66,6 @@ function sbq.init(config)
 	message.setHandler("sbqRequestAction", function (_,_, ...)
 		return sbq.requestAction(...)
 	end)
-	message.setHandler("sbqDigestPrey", function (_,_, ...)
-		return sbq.digestPrey(...)
-	end)
 
 	sbq.reloadVoreConfig(config)
 
@@ -212,7 +209,7 @@ end
 
 function sbq.queueAction(action, target, ...)
 	if not SpeciesScript.active then return false end
-	return SpeciesScript:queueAction(action, target, ...)
+	return {SpeciesScript:queueAction(action, target, ...)}
 end
 
 function sbq.actionAvailable(action, target, ...)
@@ -223,11 +220,6 @@ end
 function sbq.requestAction(action, target, consent, ...)
 	if not SpeciesScript.active then return {false, "inactive"} end
 	return {SpeciesScript:requestAction(action, target, consent, ...)}
-end
-
-function sbq.digestPrey(target, ...)
-	if not SpeciesScript.active then return { false, "inactive" } end
-	return {SpeciesScript:digestPrey(target, ...)}
 end
 
 function sbq.getOccupantData(entityId)
@@ -298,13 +290,6 @@ function _SpeciesScript:emergencyEscape(...)
 	return self.state:emergencyEscape(...)
 end
 
-function _SpeciesScript:digestPrey(target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then sb.logInfo("missingOccupant") return false end
-	local location = occupant:getLocation()
-	return self.state:queueAction(location.digestAction or "digest", target, ...)
-end
-
 function _SpeciesScript:changeState(stateName)
 	local state = self.states[stateName]
 	if not state then sbq.logError("Attempt to switch to invalid state: " .. stateName) return false end
@@ -362,8 +347,9 @@ function _State:getLocation(locationName, subLocation)
 end
 
 function _State:queueAction(name, target, ...)
-	if not SpeciesScript:actionAvailable(name, target, ...) then return false end
-	table.insert(SpeciesScript.actionQueue, {name, target, ...})
+	local res = { SpeciesScript:actionAvailable(name, target, ...) }
+	if res[1] then table.insert(SpeciesScript.actionQueue, {name, target, ...}) end
+	return table.unpack(res)
 end
 
 function _State:tryAction(name, target, ...)
@@ -979,7 +965,6 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 		struggleCount = 0,
 		struggleVec = {0,0},
 		locationStore = {},
-		progressBar = nil,
 	}
 	setmetatable(occupant, _Occupant)
 	-- add occupant to tables for easily referencing it
@@ -1033,6 +1018,7 @@ function _Occupant:remove()
 		end
 	end
 	Occupants.refreshOccupantModifiers = true
+	self:sendEntityMessage("sbqReleased")
 	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
 end
 
@@ -1078,10 +1064,6 @@ function _Occupant:update(dt)
 
 	locationStore.time = locationStore.time + dt
 	self.time = self.time + dt
-	if self.progressBar then
-		self.progressBar.progress = self.progressBar.progress + (dt * (self.progressBar.args.speed or 1))
-		if self.progressBar.progress >= 100 then self.progressBar.callback(self, self.progressBar.args) end
-	end
 
 	if self.flags.infused then
 	elseif self.flags.digested then
@@ -1204,10 +1186,13 @@ function _Occupant:refreshLocation(name, subLocation)
 	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
 	world.sendEntityMessage(self.entityId, "sbqGuiMessage", "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
-		progressBar = self.progressBar,
 		time = self.time,
 	})
-	world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+	if self.flags.newOccupant then
+		world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+	else
+		world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqHudRefreshPortrait", self.entityId)
+	end
 end
 
 function sbq.getModifiers(modifiers, power)
@@ -1323,18 +1308,6 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 	end
 end
 
-function _Occupant:setProgressBar(name, args, callback, progress)
-	self.progressBar.progress = progress or 0
-	self.progressBar.args = args
-	self.progressBar.name = name
-	self.progressBar.callback = callback
-
-	world.sendEntityMessage(self.entityId, "sbqRefreshLocationData", entity.id(), self:getLocation():outputData(self.entityId), {
-		progressBar = self.progressBar,
-		time = self.time,
-	})
-end
-
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
 		if self:controlHeld("Left") and self:controlHeld("Right") then
@@ -1411,7 +1384,9 @@ end
 function _Occupant:animProperty(property)
 	return animator.partProperty(self.seat, property)
 end
-
+function _Occupant:getPublicProperty(property)
+	return world.getStatusProperty(self.entityId, property)
+end
 function _Occupant:position()
 	return sbq.globalPartPoint(self.seat, "loungeOffset")
 end
