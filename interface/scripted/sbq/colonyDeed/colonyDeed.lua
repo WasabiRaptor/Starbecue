@@ -1,4 +1,4 @@
-sbq.tenantCatalogue = root.assetJson("/npcs/tenants/sbqTenantCatalogue.json")
+sbq.tenantCatalogue = root.assetJson("/npcs/sbq/sbqTenantCatalogue.json")
 sbq.occupier = _ENV.metagui.inputData.occupier or {}
 sbq.validTenantCatalogueList = {}
 sbq.tenantIndex = 0
