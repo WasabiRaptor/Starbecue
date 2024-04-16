@@ -254,7 +254,6 @@ function sbq.getSettingsPageData()
 	return settingsPageData
 end
 
-sbq.groupedSettingChanged = {}
 function sbq.groupedSettingChanged.locations(name,k,v)
 	local location = SpeciesScript:getLocation(name)
 	if location then
