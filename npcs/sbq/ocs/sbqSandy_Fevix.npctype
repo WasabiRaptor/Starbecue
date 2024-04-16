@@ -47,18 +47,18 @@
 				"new" : {"jump" : ".converse"},
 				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : [":defaultRewardsGreeting"]},
+					"replace" : {"dialogueRandom" : ["rewardsGreeting"]},
 					"next" : ["introduced"],
 					"true" : {
-						"replace" : {"dialogueRandom" : [":defaultRewardsGreetingIntroduced"]}
+						"replace" : {"dialogueRandom" : ["rewardsGreetingIntroduced"]}
 					}
 				},
 				"default" : {
 					"next" : ["isOwner"],
-					"replace" : {"dialogueRandom" : [":defaultGreeting"]},
+					"replace" : {"dialogueRandom" : [":greeting"]},
 					"true" : {
 						"replace" : {
-							"dialogueRandom" : [":defaultGreetingCrew"]
+							"dialogueRandom" : [":greetingCrew"]
 						}
 					}
 				}
@@ -90,12 +90,12 @@
 				},
 				"stay" : {
 					"new" : {
-						"dialogueRandom" : [":defaultCrewStay"]
+						"dialogueRandom" : ["crewStay"]
 					}
 				},
 				"follow" : {
 					"new" : {
-						"dialogueRandom" : [":defaultCrewFollow"]
+						"dialogueRandom" : ["crewFollow"]
 					}
 				},
 				"fullCrew" : {
@@ -180,52 +180,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":oralVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":oralVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":oralVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".oralVore.selfRequest.response.yes" ],
-								["No.", ".oralVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".oralVore.selfRequest.response.noYes" ]
+								["Yes!", ".oralVore.prompt.response.yes" ],
+								["No.", ".oralVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".oralVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestYes"],
+									"dialogueRandom" : [":oralVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":oralVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":oralVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestNo"],
+									"dialogueRandom" : [":oralVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":oralVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":oralVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":oralVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -233,13 +233,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":oralVoreFull"]},
@@ -257,10 +257,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				},
 				"tailVore" : {
@@ -277,52 +277,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":tailVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":tailVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":tailVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":tailVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":tailVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".tailVore.selfRequest.response.yes" ],
-								["No.", ".tailVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".tailVore.selfRequest.response.noYes" ]
+								["Yes!", ".tailVore.prompt.response.yes" ],
+								["No.", ".tailVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".tailVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":tailVoreSelfRequestYes"],
+									"dialogueRandom" : [":tailVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":tailVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":tailVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":tailVoreSelfRequestNo"],
+									"dialogueRandom" : [":tailVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":tailVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":tailVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":tailVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":tailVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -330,13 +330,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":tailVoreFull"]},
@@ -354,10 +354,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				},
 				"absorbVore" : {
@@ -374,52 +374,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":absorbVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":absorbVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":absorbVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".absorbVore.selfRequest.response.yes" ],
-								["No.", ".absorbVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".absorbVore.selfRequest.response.noYes" ]
+								["Yes!", ".absorbVore.prompt.response.yes" ],
+								["No.", ".absorbVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".absorbVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":absorbVoreSelfRequestYes"],
+									"dialogueRandom" : [":absorbVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":absorbVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":absorbVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":absorbVoreSelfRequestNo"],
+									"dialogueRandom" : [":absorbVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":absorbVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":absorbVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":absorbVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":absorbVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -427,13 +427,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":absorbVoreFull"]},
@@ -451,10 +451,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				},
 				"cockVore" : {
@@ -471,52 +471,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":cockVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":cockVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":cockVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".cockVore.selfRequest.response.yes" ],
-								["No.", ".cockVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
+								["Yes!", ".cockVore.prompt.response.yes" ],
+								["No.", ".cockVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".cockVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestYes"],
+									"dialogueRandom" : [":cockVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":cockVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":cockVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestNo"],
+									"dialogueRandom" : [":cockVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":cockVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":cockVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":cockVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -524,13 +524,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":cockVoreFull"]},
@@ -548,10 +548,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				},
 				"unbirth" : {
@@ -568,52 +568,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":unbirthVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":unbirthVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":unbirthVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".unbirth.selfRequest.response.yes" ],
-								["No.", ".unbirth.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".unbirth.selfRequest.response.noYes" ]
+								["Yes!", ".unbirth.prompt.response.yes" ],
+								["No.", ".unbirth.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".unbirth.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":unbirthVoreSelfRequestYes"],
+									"dialogueRandom" : [":unbirthVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":unbirthVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":unbirthVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":unbirthVoreSelfRequestNo"],
+									"dialogueRandom" : [":unbirthVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":unbirthVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":unbirthVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":unbirthVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":unbirthVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -621,13 +621,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":unbirthVoreFull"]},
@@ -645,10 +645,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				},
 				"breastVore" : {
@@ -665,52 +665,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":breastVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":breastVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":breastVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":breastVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":breastVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".breastVore.selfRequest.response.yes" ],
-								["No.", ".breastVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".breastVore.selfRequest.response.noYes" ]
+								["Yes!", ".breastVore.prompt.response.yes" ],
+								["No.", ".breastVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".breastVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":breastVoreSelfRequestYes"],
+									"dialogueRandom" : [":breastVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":breastVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":breastVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":breastVoreSelfRequestNo"],
+									"dialogueRandom" : [":breastVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":breastVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":breastVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":breastVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":breastVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -718,13 +718,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":breastVoreFull"]},
@@ -742,10 +742,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				}
 
@@ -756,7 +756,7 @@
 			"struggle" : {
 				"new" : {
 					"hideVoreButtons" : true,
-					"dialogueRandom" : [":defaultStruggle"]
+					"dialogueRandom" : ["struggle"]
 				},
 				"next" : "location",
 				"any" : {
@@ -776,7 +776,7 @@
 				"taurBelly" : ".belly",
 				"belly" : {
 					"replace" : {
-						"dialogueRandom" : [":defaultStruggle"]
+						"dialogueRandom" : ["struggle"]
 					},
 					"seperateNext" : true,
 					"next" : [
@@ -802,7 +802,7 @@
 				},
 				"tail" : {
 					"replace" : {
-						"dialogueRandom" : [":defaultStruggle"]
+						"dialogueRandom" : ["struggle"]
 					},
 					"seperateNext" : true,
 					"next" : [
@@ -1445,7 +1445,7 @@
 			},
 
 			// for when an NPC is requesting a player or other NPC eats them
-			"preyRequest" : {
+			"requesting" : {
 				"next" : "voreType",
 				"new" : {
 					"dismissTime" : 30,
@@ -1454,8 +1454,8 @@
 				},
 				"oralVore" : {
 					"replace" : {
-						"dialogueRandom" : [":oralVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":oralVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".oralVore.response.yes" ],
 							["No.", ".oralVore.response.no" ],
@@ -1466,20 +1466,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestYes"],
+								"dialogueRandom" : [":oralVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestNo"],
+								"dialogueRandom" : [":oralVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestNoYes"],
+								"dialogueRandom" : [":oralVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -1488,8 +1488,8 @@
 				},
 				"tailVore" : {
 					"replace" : {
-						"dialogueRandom" : [":tailVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":tailVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".tailVore.response.yes" ],
 							["No.", ".tailVore.response.no" ],
@@ -1500,20 +1500,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":tailVorePreyRequestYes"],
+								"dialogueRandom" : [":tailVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":tailVorePreyRequestNo"],
+								"dialogueRandom" : [":tailVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":tailVorePreyRequestNoYes"],
+								"dialogueRandom" : [":tailVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -1522,8 +1522,8 @@
 				},
 				"absorbVore" : {
 					"replace" : {
-						"dialogueRandom" : [":absorbVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":absorbVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".absorbVore.response.yes" ],
 							["No.", ".absorbVore.response.no" ],
@@ -1534,20 +1534,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":absorbVorePreyRequestYes"],
+								"dialogueRandom" : [":absorbVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":absorbVorePreyRequestNo"],
+								"dialogueRandom" : [":absorbVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":absorbVorePreyRequestNoYes"],
+								"dialogueRandom" : [":absorbVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -1556,8 +1556,8 @@
 				},
 				"unbirth" : {
 					"replace" : {
-						"dialogueRandom" : [":unbirthVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":unbirthVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".unbirth.response.yes" ],
 							["No.", ".unbirth.response.no" ],
@@ -1568,20 +1568,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":unbirthVorePreyRequestYes"],
+								"dialogueRandom" : [":unbirthVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":unbirthVorePreyRequestNo"],
+								"dialogueRandom" : [":unbirthVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":unbirthVorePreyRequestNoYes"],
+								"dialogueRandom" : [":unbirthVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -1590,8 +1590,8 @@
 				},
 				"cockVore" : {
 					"replace" : {
-						"dialogueRandom" : [":cockVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":cockVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".cockVore.response.yes" ],
 							["No.", ".cockVore.response.no" ],
@@ -1602,20 +1602,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestYes"],
+								"dialogueRandom" : [":cockVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestNo"],
+								"dialogueRandom" : [":cockVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestNoYes"],
+								"dialogueRandom" : [":cockVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -1624,8 +1624,8 @@
 				},
 				"breastVore" : {
 					"replace" : {
-						"dialogueRandom" : [":breastVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":breastVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".breastVore.response.yes" ],
 							["No.", ".breastVore.response.no" ],
@@ -1636,20 +1636,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":breastVorePreyRequestYes"],
+								"dialogueRandom" : [":breastVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":breastVorePreyRequestNo"],
+								"dialogueRandom" : [":breastVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":breastVorePreyRequestNoYes"],
+								"dialogueRandom" : [":breastVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -1658,49 +1658,49 @@
 				}
 			},
 			// for when being prey and forcing their way into a pred without asking
-			"forcingPrey" : {
+			"Forcing" : {
 				"new" : {},
 				"next" : "voreType",
 				"oralVore" : {
-					"replace" : { "dialogueRandom" : [":oralVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":oralVoreForcing"]}
 				},
 				"tailVore" : {
-					"replace" : { "dialogueRandom" : [":tailVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":tailVoreForcing"]}
 				},
 				"absorbVore" : {
-					"replace" : { "dialogueRandom" : [":absorbVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":absorbVoreForcing"]}
 				},
 				"cockVore" : {
-					"replace" : { "dialogueRandom" : [":cockVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":cockVoreForcing"]}
 				},
 				"unbirth" : {
-					"replace" : { "dialogueRandom" : [":unbirthVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":unbirthVoreForcing"]}
 				},
 				"breastVore" : {
-					"replace" : { "dialogueRandom" : [":breastVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":breastVoreForcing"]}
 				}
 			},
 			// when being pred, response to prey forcing their way in unwillingly
-			"unwillingPred" : {
+			"Forced" : {
 				"new" : {},
 				"next" : "voreType",
 				"oralVore" : {
-					"replace" : { "dialogueRandom" : [":oralVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":oralVoreForced"]}
 				},
 				"tailVore" : {
-					"replace" : { "dialogueRandom" : [":tailVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":tailVoreForced"]}
 				},
 				"absorbVore" : {
-					"replace" : { "dialogueRandom" : [":absorbVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":absorbVoreForced"]}
 				},
 				"cockVore" : {
-					"replace" : { "dialogueRandom" : [":cockVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":cockVoreForced"]}
 				},
 				"unbirth" : {
-					"replace" : { "dialogueRandom" : [":unbirthVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":unbirthVoreForced"]}
 				},
 				"breastVore" : {
-					"replace" : { "dialogueRandom" : [":breastVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":breastVoreForced"]}
 				}
 			},
 
@@ -2387,7 +2387,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBellyAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"tail" : {
@@ -2408,9 +2408,9 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedBefore"]},
+							"replace" : { "dialogueRandom" : [":tailVoreInfuseUnprompted"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedBeforeLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedLayer"]}}
 						},
 						"after" : {
 							"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedAfter"]},
@@ -2418,7 +2418,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"breastsL" : ".breasts",
@@ -2451,7 +2451,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBreastsAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"womb" : ".pussy",
@@ -2483,7 +2483,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedPussyAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"cock" : ".shaft",
@@ -2515,7 +2515,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedShaftAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"ballsL" : ".balls",
@@ -2548,7 +2548,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBallsAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 				}
 			},
 

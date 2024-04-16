@@ -71,18 +71,18 @@
 				"new" : {"jump" : ".converse"},
 				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : [":defaultRewardsGreeting"]},
+					"replace" : {"dialogueRandom" : ["rewardsGreeting"]},
 					"next" : ["introduced"],
 					"true" : {
-						"replace" : {"dialogueRandom" : [":defaultRewardsGreetingIntroduced"]}
+						"replace" : {"dialogueRandom" : ["rewardsGreetingIntroduced"]}
 					}
 				},
 				"default" : {
 					"next" : ["isOwner"],
-					"replace" : {"dialogueRandom" : [":defaultGreeting"]},
+					"replace" : {"dialogueRandom" : [":greeting"]},
 					"true" : {
 						"replace" : {
-							"dialogueRandom" : [":defaultGreetingCrew"]
+							"dialogueRandom" : [":greetingCrew"]
 						}
 					}
 				}
@@ -121,13 +121,13 @@
 				},
 				"stay" : {
 					"new" : {
-						"dialogueRandom" : [":defaultCrewStay"],
+						"dialogueRandom" : ["crewStay"],
 						"jump" : ".converse"
 					}
 				},
 				"follow" : {
 					"new" : {
-						"dialogueRandom" : [":defaultCrewFollow"],
+						"dialogueRandom" : ["crewFollow"],
 						"jump" : ".converse"
 					}
 				},
@@ -256,52 +256,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":oralVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":oralVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":oralVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".oralVore.selfRequest.response.yes" ],
-								["No.", ".oralVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".oralVore.selfRequest.response.noYes" ]
+								["Yes!", ".oralVore.prompt.response.yes" ],
+								["No.", ".oralVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".oralVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestYes"],
+									"dialogueRandom" : [":oralVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":oralVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":oralVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestNo"],
+									"dialogueRandom" : [":oralVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":oralVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":oralVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":oralVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -309,13 +309,13 @@
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]}
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]}
+						"replace" : {"dialogueRandom" : ["tooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":oralVoreFull"]},
@@ -333,10 +333,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				},
 				"cockVore" : {
@@ -353,52 +353,52 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedBefore"]}
+							"replace" : {"dialogueRandom" : [":cockVoreUnprompted"]}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedAfter"]}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":cockVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":cockVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".cockVore.selfRequest.response.yes" ],
-								["No.", ".cockVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
+								["Yes!", ".cockVore.prompt.response.yes" ],
+								["No.", ".cockVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".cockVore.prompt.response.noYes" ]
 							]
 						},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestYes"],
+									"dialogueRandom" : [":cockVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":cockVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":cockVorePromptYesAfter"],
 										"dismissTime" : 2
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestNo"],
+									"dialogueRandom" : [":cockVorePromptNo"],
 									"dismissTime" : 2
 								}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":cockVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore"],
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":cockVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":cockVorePromptNoYesAfter"],
 										"dismissTime" : 2
 									}
 								}
@@ -412,7 +412,7 @@
 						"replace" : {"dialogueRandom" : [":cockVoreTooBig"]}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]}
+						"replace" : {"dialogueRandom" : ["tooSmall"]}
 					},
 					"full" : {
 						"replace" : {"dialogueRandom" : [":cockVoreFull"]},
@@ -430,10 +430,10 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]}
+						"replace" : {"dialogueRandom" : ["full"]}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]}
+						"replace" : {"dialogueRandom" : ["needsInfusion"]}
 					}
 				}
 			},
@@ -443,7 +443,7 @@
 			"struggle" : {
 				"new" : {
 					"hideVoreButtons" : true,
-					"dialogueRandom" : [":defaultStruggle"]
+					"dialogueRandom" : ["struggle"]
 				},
 				"next" : "location",
 				"any" : {
@@ -459,7 +459,7 @@
 				"taurBelly" : ".belly",
 				"belly" : {
 					"replace" : {
-						"dialogueRandom" : [":defaultStruggle"]
+						"dialogueRandom" : ["struggle"]
 					},
 					"seperateNext" : true,
 					"next" : [
@@ -751,7 +751,7 @@
 			},
 
 			// for when an NPC is requesting a player or other NPC eats them
-			"preyRequest" : {
+			"requesting" : {
 				"next" : "voreType",
 				"new" : {
 					"dismissTime" : 30,
@@ -760,8 +760,8 @@
 				},
 				"oralVore" : {
 					"replace" : {
-						"dialogueRandom" : [":oralVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":oralVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".oralVore.response.yes" ],
 							["No.", ".oralVore.response.no" ],
@@ -772,20 +772,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestYes"],
+								"dialogueRandom" : [":oralVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestNo"],
+								"dialogueRandom" : [":oralVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestNoYes"],
+								"dialogueRandom" : [":oralVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -794,8 +794,8 @@
 				},
 				"cockVore" : {
 					"replace" : {
-						"dialogueRandom" : [":cockVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":cockVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".cockVore.response.yes" ],
 							["No.", ".cockVore.response.no" ],
@@ -806,20 +806,20 @@
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestYes"],
+								"dialogueRandom" : [":cockVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestNo"],
+								"dialogueRandom" : [":cockVoreRequestingNo"],
 								"dismissTime" :2
 							}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestNoYes"],
+								"dialogueRandom" : [":cockVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey"]
@@ -828,25 +828,25 @@
 				}
 			},
 			// for when being prey and forcing their way into a pred without asking
-			"forcingPrey" : {
+			"Forcing" : {
 				"new" : {},
 				"next" : "voreType",
 				"oralVore" : {
-					"replace" : { "dialogueRandom" : [":oralVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":oralVoreForcing"]}
 				},
 				"cockVore" : {
-					"replace" : { "dialogueRandom" : [":cockVoreForcingPrey"]}
+					"replace" : { "dialogueRandom" : [":cockVoreForcing"]}
 				}
 			},
 			// when being pred, response to prey forcing their way in unwillingly
-			"unwillingPred" : {
+			"Forced" : {
 				"new" : {},
 				"next" : "voreType",
 				"oralVore" : {
-					"replace" : { "dialogueRandom" : [":oralVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":oralVoreForced"]}
 				},
 				"cockVore" : {
-					"replace" : { "dialogueRandom" : [":cockVoreUnwillingPred"]}
+					"replace" : { "dialogueRandom" : [":cockVoreForced"]}
 				}
 			},
 

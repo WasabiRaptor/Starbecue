@@ -92,14 +92,14 @@
 		"Nice and filling.",
 		"Not too bad."
 	],
-	"oralVoreUnpromptedBefore": [
+	"oralVoreUnprompted": [
 		"I think you'll fill me up.",
 		"I just need a bite to eat.",
 		"You seem like you'd make a good meal.",
 		"My belly's been grumbling..."
 	],
 	"oralVoreUnpromptedAfter": ":oralVoreRequestAfter",
-	"oralVoreSelfRequest": {
+	"oralVorePrompt": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -124,7 +124,7 @@
 			]
 		]
 	},
-	"oralVoreSelfRequestYes": {
+	"oralVorePromptYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -149,7 +149,7 @@
 			]
 		]
 	},
-	"oralVoreSelfRequestYesAfter": {
+	"oralVorePromptYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -166,7 +166,7 @@
 			]
 		]
 	},
-	"oralVoreSelfRequestNo": {
+	"oralVorePromptNo": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -183,7 +183,7 @@
 			]
 		]
 	},
-	"oralVoreSelfRequestNoYes": {
+	"oralVorePromptNoYes": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -200,7 +200,7 @@
 			]
 		]
 	},
-	"oralVoreSelfRequestNoYesAfter": {
+	"oralVorePromptNoYesAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -274,7 +274,7 @@
 		"great...im hard..hope no one notices...",
 		"m..merp merp~"
 	],
-	"cockVoreUnpromptedBefore": [
+	"cockVoreUnprompted": [
 		"Surpised!",
 		"Gotcha",
 		"sorry but I have to do this~",
@@ -286,7 +286,7 @@
 		"Ffff~ Now I'm all hard~",
 		"A-ahh~ Don't stop squirming~"
 	],
-	"cockVoreSelfRequest": {
+	"cockVorePrompt": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -311,7 +311,7 @@
 			]
 		]
 	},
-	"cockVoreSelfRequestYes": {
+	"cockVorePromptYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -333,7 +333,7 @@
 			]
 		]
 	},
-	"cockVoreSelfRequestYesAfter": {
+	"cockVorePromptYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -354,7 +354,7 @@
 			]
 		]
 	},
-	"cockVoreSelfRequestNo": {
+	"cockVorePromptNo": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -371,7 +371,7 @@
 			]
 		]
 	},
-	"cockVoreSelfRequestNoYes": {
+	"cockVorePromptNoYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -388,7 +388,7 @@
 			]
 		]
 	},
-	"cockVoreSelfRequestNoYesAfter": {
+	"cockVorePromptNoYesAfter": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -708,7 +708,7 @@
 	},
 	"letoutCumTransforming": ":missingButNotNecessary",
 	"letoutCumTransformingImmune": ":missingButNotNecessary",
-	"oralVorePreyRequest": {
+	"oralVoreRequesting": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -733,7 +733,7 @@
 			]
 		]
 	},
-	"oralVorePreyRequestYes": {
+	"oralVoreRequestingYes": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -758,7 +758,7 @@
 			]
 		]
 	},
-	"oralVorePreyRequestNo": {
+	"oralVoreRequestingNo": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -775,7 +775,7 @@
 			]
 		]
 	},
-	"oralVorePreyRequestNoYes": {
+	"oralVoreRequestingNoYes": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -800,7 +800,7 @@
 			]
 		]
 	},
-	"cockVorePreyRequest": {
+	"cockVoreRequesting": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -817,7 +817,7 @@
 			]
 		]
 	},
-	"cockVorePreyRequestYes": {
+	"cockVoreRequestingYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -834,7 +834,7 @@
 			]
 		]
 	},
-	"cockVorePreyRequestNo": {
+	"cockVoreRequestingNo": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -851,7 +851,7 @@
 			]
 		]
 	},
-	"cockVorePreyRequestNoYes": {
+	"cockVoreRequestingNoYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -868,7 +868,7 @@
 			]
 		]
 	},
-	"oralVoreForcingPrey": {
+	"oralVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
@@ -886,7 +886,7 @@
 			]
 		]
 	},
-	"cockVoreForcingPrey": {
+	"cockVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -903,7 +903,7 @@
 			]
 		]
 	},
-	"oralVoreUnwillingPred": {
+	"oralVoreForced": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -928,7 +928,7 @@
 			]
 		]
 	},
-	"cockVoreUnwillingPred": {
+	"cockVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%

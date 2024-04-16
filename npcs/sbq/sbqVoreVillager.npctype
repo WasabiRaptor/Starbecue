@@ -51,12 +51,12 @@
 				"new" : {"jump" : ".greeting"},
 				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : [":defaultRewardsGreeting"]},
+					"replace" : {"dialogueRandom" : ["rewardsGreeting"]},
 					"next" : ["personality", "introduced"],
 					"shy" : {"replace" : {"dialogueRandom" : [":rewardsGreetingShy"]}},
 					"flirty" : {"replace" : {"dialogueRandom" : [":rewardsGreetingFlirty"]}},
 					"true" : {
-						"replace" : {"dialogueRandom" : [":defaultRewardsGreetingIntroduced"]},
+						"replace" : {"dialogueRandom" : ["rewardsGreetingIntroduced"]},
 						"next" : ["personality"],
 						"shy" : {"replace" : {"dialogueRandom" : [":rewardsGreetingIntroducedShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":rewardsGreetingIntroducedFlirty"]}}
@@ -64,13 +64,13 @@
 				},
 				"default" : {
 					"next" : ["personality","isOwner"],
-					"replace" : {"dialogueRandom" : [":defaultGreeting"]},
+					"replace" : {"dialogueRandom" : [":greeting"]},
 					"shy" : {"replace" : {"dialogueRandom" : [":greetingShy"]}},
 					"flirty" : {"replace" : {"dialogueRandom" : [":greetingFlirty"]}},
 					"true" : {
 						"next" : ["personality","isFollowing"],
 						"replace" : {
-							"dialogueRandom" : [":defaultGreetingCrew"],
+							"dialogueRandom" : [":greetingCrew"],
 							"buttonText" : ["Stay"],
 							"callScript" : "swapFollowing"
 						},
@@ -81,7 +81,7 @@
 				},
 				"stay" : {
 					"new" : {
-						"dialogueRandom" : [":defaultCrewStay"]
+						"dialogueRandom" : ["crewStay"]
 					},
 					"next" : "personality",
 					"shy" : {"replace" : {"dialogueRandom" : [":crewStayShy"]}},
@@ -89,7 +89,7 @@
 				},
 				"follow" : {
 					"new" : {
-						"dialogueRandom" : [":defaultCrewFollow"]
+						"dialogueRandom" : ["crewFollow"]
 					},
 					"next" : "personality",
 					"shy" : {"replace" : {"dialogueRandom" : [":crewFollowShy"]}},
@@ -159,10 +159,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":oralVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":oralVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":oralVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":oralVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":oralVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]},
@@ -171,82 +171,82 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":oralVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":oralVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":oralVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".oralVore.selfRequest.response.yes" ],
-								["No.", ".oralVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".oralVore.selfRequest.response.noYes" ]
+								["Yes!", ".oralVore.prompt.response.yes" ],
+								["No.", ".oralVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".oralVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":oralVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":oralVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":oralVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":oralVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestYes"],
+									"dialogueRandom" : [":oralVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":oralVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":oralVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":oralVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":oralVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":oralVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":oralVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestNo"],
+									"dialogueRandom" : [":oralVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":oralVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":oralVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":oralVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":oralVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":oralVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":oralVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":oralVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":oralVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":oralVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":oralVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":oralVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]},
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":notFeelingItShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":notFeelingItFlirty"]}}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]},
+						"replace" : {"dialogueRandom" : ["tooBig"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooBigShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -276,13 +276,13 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]},
+						"replace" : {"dialogueRandom" : ["needsInfusion"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":needsInfusionShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":needsInfusionFlirty"]}}
@@ -308,10 +308,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":analVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":analVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":analVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":analVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":analVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":analVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":analVoreUnpromptedAfter"]},
@@ -320,82 +320,82 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":analVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":analVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":analVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".analVore.selfRequest.response.yes" ],
-								["No.", ".analVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".analVore.selfRequest.response.noYes" ]
+								["Yes!", ".analVore.prompt.response.yes" ],
+								["No.", ".analVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".analVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":analVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":analVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":analVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":analVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":analVoreSelfRequestYes"],
+									"dialogueRandom" : [":analVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":analVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":analVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":analVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":analVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":analVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":analVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":analVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":analVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":analVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":analVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":analVoreSelfRequestNo"],
+									"dialogueRandom" : [":analVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":analVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":analVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":analVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":analVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":analVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":analVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":analVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":analVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":analVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":analVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":analVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":analVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":analVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":analVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":analVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":analVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]},
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":notFeelingItShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":notFeelingItFlirty"]}}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]},
+						"replace" : {"dialogueRandom" : ["tooBig"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooBigShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -425,13 +425,13 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]},
+						"replace" : {"dialogueRandom" : ["needsInfusion"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":needsInfusionShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":needsInfusionFlirty"]}}
@@ -457,10 +457,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":tailVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":tailVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":tailVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":tailVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":tailVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":tailVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":tailVoreUnpromptedAfter"]},
@@ -469,82 +469,82 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":tailVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":tailVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":tailVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".tailVore.selfRequest.response.yes" ],
-								["No.", ".tailVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".tailVore.selfRequest.response.noYes" ]
+								["Yes!", ".tailVore.prompt.response.yes" ],
+								["No.", ".tailVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".tailVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":tailVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":tailVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":tailVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":tailVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":tailVoreSelfRequestYes"],
+									"dialogueRandom" : [":tailVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":tailVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":tailVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":tailVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":tailVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":tailVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":tailVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":tailVoreSelfRequestNo"],
+									"dialogueRandom" : [":tailVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":tailVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":tailVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":tailVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":tailVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":tailVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":tailVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":tailVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":tailVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":tailVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":tailVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":tailVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]},
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":notFeelingItShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":notFeelingItFlirty"]}}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]},
+						"replace" : {"dialogueRandom" : ["tooBig"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooBigShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -574,13 +574,13 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]},
+						"replace" : {"dialogueRandom" : ["needsInfusion"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":needsInfusionShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":needsInfusionFlirty"]}}
@@ -606,10 +606,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":navelVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":navelVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":navelVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":navelVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":navelVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":navelVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":navelVoreUnpromptedAfter"]},
@@ -618,82 +618,82 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":navelVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":navelVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":navelVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".navelVore.selfRequest.response.yes" ],
-								["No.", ".navelVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".navelVore.selfRequest.response.noYes" ]
+								["Yes!", ".navelVore.prompt.response.yes" ],
+								["No.", ".navelVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".navelVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":navelVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":navelVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":navelVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":navelVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":navelVoreSelfRequestYes"],
+									"dialogueRandom" : [":navelVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":navelVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":navelVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":navelVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":navelVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":navelVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":navelVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":navelVoreSelfRequestNo"],
+									"dialogueRandom" : [":navelVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":navelVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":navelVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":navelVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":navelVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":navelVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":navelVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":navelVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":navelVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":navelVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":navelVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":navelVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]},
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":notFeelingItShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":notFeelingItFlirty"]}}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]},
+						"replace" : {"dialogueRandom" : ["tooBig"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooBigShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -723,13 +723,13 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]},
+						"replace" : {"dialogueRandom" : ["needsInfusion"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":needsInfusionShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":needsInfusionFlirty"]}}
@@ -755,10 +755,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":absorbVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedAfter"]},
@@ -767,82 +767,82 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":absorbVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":absorbVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":absorbVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".absorbVore.selfRequest.response.yes" ],
-								["No.", ".absorbVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".absorbVore.selfRequest.response.noYes" ]
+								["Yes!", ".absorbVore.prompt.response.yes" ],
+								["No.", ".absorbVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".absorbVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":absorbVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":absorbVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":absorbVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":absorbVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":absorbVoreSelfRequestYes"],
+									"dialogueRandom" : [":absorbVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":absorbVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":absorbVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":absorbVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":absorbVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":absorbVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":absorbVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":absorbVoreSelfRequestNo"],
+									"dialogueRandom" : [":absorbVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":absorbVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":absorbVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":absorbVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":absorbVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":absorbVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":absorbVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":absorbVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":absorbVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":absorbVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":absorbVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":absorbVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]},
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":notFeelingItShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":notFeelingItFlirty"]}}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]},
+						"replace" : {"dialogueRandom" : ["tooBig"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooBigShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -872,13 +872,13 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
 					},
 					"needsInfusion" : {
-						"replace" : {"dialogueRandom" : [":defaultNeedsInfusion"]},
+						"replace" : {"dialogueRandom" : ["needsInfusion"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":needsInfusionShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":needsInfusionFlirty"]}}
@@ -904,10 +904,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":cockVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":cockVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":cockVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":cockVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":cockVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedAfter"]},
@@ -916,63 +916,63 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":cockVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":cockVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":cockVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".cockVore.selfRequest.response.yes" ],
-								["No.", ".cockVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".cockVore.selfRequest.response.noYes" ]
+								["Yes!", ".cockVore.prompt.response.yes" ],
+								["No.", ".cockVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".cockVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":cockVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":cockVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":cockVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":cockVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestYes"],
+									"dialogueRandom" : [":cockVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":cockVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":cockVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":cockVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":cockVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":cockVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":cockVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestNo"],
+									"dialogueRandom" : [":cockVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":cockVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":cockVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":cockVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":cockVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":cockVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":cockVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":cockVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":cockVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":cockVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":cockVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":cockVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
@@ -991,7 +991,7 @@
 						"flirty" : {"replace" : {"dialogueRandom" : [":cockVoreTooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -1021,7 +1021,7 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
@@ -1053,10 +1053,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":unbirthVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedAfter"]},
@@ -1065,70 +1065,70 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":unbirthVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":unbirthVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".unbirth.selfRequest.response.yes" ],
-								["No.", ".unbirth.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".unbirth.selfRequest.response.noYes" ]
+								["Yes!", ".unbirth.prompt.response.yes" ],
+								["No.", ".unbirth.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".unbirth.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":unbirthVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":unbirthVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":unbirthVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":unbirthVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":unbirthVoreSelfRequestYes"],
+									"dialogueRandom" : [":unbirthVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":unbirthVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":unbirthVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":unbirthVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":unbirthVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":unbirthVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":unbirthVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":unbirthVoreSelfRequestNo"],
+									"dialogueRandom" : [":unbirthVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":unbirthVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":unbirthVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":unbirthVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":unbirthVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":unbirthVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":unbirthVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":unbirthVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":unbirthVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":unbirthVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":unbirthVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":unbirthVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
 						}
 					},
 					"notFeelingIt" : {
-						"replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]},
+						"replace" : {"dialogueRandom" : ["notFeelingIt"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":unbirthVoreNotFeelingItShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":unbirthVoreNotFeelingItFlirty"]}}
@@ -1170,7 +1170,7 @@
 						}
 					},
 					"otherLocationFull" : {
-						"replace" : {"dialogueRandom" : [":defaultFull"]},
+						"replace" : {"dialogueRandom" : ["full"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":fullShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":fullFlirty"]}}
@@ -1202,10 +1202,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":breastVoreUnpromptedBefore"]},
+							"replace" : {"dialogueRandom" : [":breastVoreUnprompted"]},
 							"next" : "personality",
-							"shy" : {"replace" : {"dialogueRandom" : [":breastVoreUnpromptedBeforeShy"]}},
-							"flirty" : {"replace" : {"dialogueRandom" : [":breastVoreUnpromptedBeforeFlirty"]}}
+							"shy" : {"replace" : {"dialogueRandom" : [":breastVoreUnpromptedShy"]}},
+							"flirty" : {"replace" : {"dialogueRandom" : [":breastVoreUnpromptedFlirty"]}}
 						},
 						"after" : {
 							"replace" : {"dialogueRandom" : [":breastVoreUnpromptedAfter"]},
@@ -1214,63 +1214,63 @@
 							"flirty" : {"replace" : {"dialogueRandom" : [":breastVoreUnpromptedAfterFlirty"]}}
 						}
 					},
-					"selfRequest" : {
+					"prompt" : {
 						"replace" : {
 							"dismissTime" : 30,
-							"dialogueRandom" : [":breastVoreSelfRequest"],
-							"buttonText" : ["[Y/N]"],
+							"dialogueRandom" : [":breastVorePrompt"],
+							"buttonText" : [":ynPrompt"],
 							"options" : [
-								["Yes!", ".breastVore.selfRequest.response.yes" ],
-								["No.", ".breastVore.selfRequest.response.no" ],
-								["No... ^#555;(But actually Yes)", ".breastVore.selfRequest.response.noYes" ]
+								["Yes!", ".breastVore.prompt.response.yes" ],
+								["No.", ".breastVore.prompt.response.no" ],
+								["No... ^#555;(But actually Yes)", ".breastVore.prompt.response.noYes" ]
 							]
 						},
 						"next" : ["personality"],
-						"shy" : {"dialogueRandom" : [":breastVoreSelfRequestShy"]},
-						"flirty" : {"dialogueRandom" : [":breastVoreSelfRequestFlirty"]},
+						"shy" : {"dialogueRandom" : [":breastVorePromptShy"]},
+						"flirty" : {"dialogueRandom" : [":breastVorePromptFlirty"]},
 						"response" : {
 							"yes" : {
 								"new" : {
-									"dialogueRandom" : [":breastVoreSelfRequestYes"],
+									"dialogueRandom" : [":breastVorePromptYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":breastVorePromptYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":breastVorePromptYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":breastVoreSelfRequestYesAfter"],
+										"dialogueRandom" : [":breastVorePromptYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":breastVorePromptYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":breastVorePromptYesAfterFlirty"]}}
 									}
 								}
 							},
 							"no" : {
 								"new" : {
-									"dialogueRandom" : [":breastVoreSelfRequestNo"],
+									"dialogueRandom" : [":breastVorePromptNo"],
 									"dismissTime" : 2
 								},
 								"next" : ["personality"],
-								"shy" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestNoShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestNoFlirty"]}}
+								"shy" : {"replace":{"dialogueRandom":[":breastVorePromptNoShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":breastVorePromptNoFlirty"]}}
 							},
 							"noYes" : {
 								"new" : {
-									"dialogueRandom" : [":breastVoreSelfRequestNoYes"],
+									"dialogueRandom" : [":breastVorePromptNoYes"],
 									"dismissTime" : 2
 								},
 								"next" : ["queueVore","personality"],
-								"shy" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestNoYesShy"]}},
-								"flirty" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestNoYesFlirty"]}},
+								"shy" : {"replace":{"dialogueRandom":[":breastVorePromptNoYesShy"]}},
+								"flirty" : {"replace":{"dialogueRandom":[":breastVorePromptNoYesFlirty"]}},
 								"after" : {
 									"new" : {
-										"dialogueRandom" : [":breastVoreSelfRequestNoYesAfter"],
+										"dialogueRandom" : [":breastVorePromptNoYesAfter"],
 										"dismissTime" : 2,
 										"next" : ["personality"],
-										"shy" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestNoYesAfterShy"]}},
-										"flirty" : {"replace":{"dialogueRandom":[":breastVoreSelfRequestNoYesAfterFlirty"]}}
+										"shy" : {"replace":{"dialogueRandom":[":breastVorePromptNoYesAfterShy"]}},
+										"flirty" : {"replace":{"dialogueRandom":[":breastVorePromptNoYesAfterFlirty"]}}
 									}
 								}
 							}
@@ -1283,13 +1283,13 @@
 						"flirty" : {"replace" : {"dialogueRandom" : [":breastVoreNotFeelingItFlirty"]}}
 					},
 					"tooBig" : {
-						"replace" : {"dialogueRandom" : [":defaultTooBig"]},
+						"replace" : {"dialogueRandom" : ["tooBig"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooBigShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooBigFlirty"]}}
 					},
 					"tooSmall" : {
-						"replace" : {"dialogueRandom" : [":defaultTooSmall"]},
+						"replace" : {"dialogueRandom" : ["tooSmall"]},
 						"next" : "personality",
 						"shy" : {"replace" : {"dialogueRandom" : [":tooSmallShy"]}},
 						"flirty" : {"replace" : {"dialogueRandom" : [":tooSmallFlirty"]}}
@@ -1339,7 +1339,7 @@
 			"struggle" : {
 				"new" : {
 					"hideVoreButtons" : true,
-					"dialogueRandom" : [":defaultStruggle"]
+					"dialogueRandom" : ["struggle"]
 				},
 				"next" : "location",
 				"any" : {
@@ -1359,7 +1359,7 @@
 				"taurBelly" : ".belly",
 				"belly" : {
 					"replace" : {
-						"dialogueRandom" : [":defaultStruggle"]
+						"dialogueRandom" : ["struggle"]
 					},
 					"seperateNext" : true,
 					"next" : [
@@ -1385,7 +1385,7 @@
 				},
 				"tail" : {
 					"replace" : {
-						"dialogueRandom" : [":defaultStruggle"]
+						"dialogueRandom" : ["struggle"]
 					},
 					"seperateNext" : true,
 					"next" : [
@@ -2207,7 +2207,7 @@
 			},
 
 			// for when an NPC is requesting a player or other NPC eats them
-			"preyRequest" : {
+			"requesting" : {
 				"next" : "voreType",
 				"new" : {
 					"dismissTime" : 30,
@@ -2216,8 +2216,8 @@
 				},
 				"oralVore" : {
 					"replace" : {
-						"dialogueRandom" : [":oralVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":oralVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".oralVore.response.yes" ],
 							["No.", ".oralVore.response.no" ],
@@ -2227,43 +2227,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestYes"],
+								"dialogueRandom" : [":oralVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestNo"],
+								"dialogueRandom" : [":oralVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":oralVorePreyRequestNoYes"],
+								"dialogueRandom" : [":oralVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":oralVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":oralVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"tailVore" : {
 					"replace" : {
-						"dialogueRandom" : [":tailVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":tailVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".tailVore.response.yes" ],
 							["No.", ".tailVore.response.no" ],
@@ -2273,43 +2273,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":tailVorePreyRequestYes"],
+								"dialogueRandom" : [":tailVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":tailVorePreyRequestNo"],
+								"dialogueRandom" : [":tailVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":tailVorePreyRequestNoYes"],
+								"dialogueRandom" : [":tailVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":tailVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":tailVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"analVore" : {
 					"replace" : {
-						"dialogueRandom" : [":analVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":analVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".analVore.response.yes" ],
 							["No.", ".analVore.response.no" ],
@@ -2319,43 +2319,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":analVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":analVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":analVorePreyRequestYes"],
+								"dialogueRandom" : [":analVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":analVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":analVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":analVorePreyRequestNo"],
+								"dialogueRandom" : [":analVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":analVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":analVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":analVorePreyRequestNoYes"],
+								"dialogueRandom" : [":analVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":analVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":analVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":analVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"navelVore" : {
 					"replace" : {
-						"dialogueRandom" : [":navelVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":navelVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".navelVore.response.yes" ],
 							["No.", ".navelVore.response.no" ],
@@ -2365,43 +2365,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":navelVorePreyRequestYes"],
+								"dialogueRandom" : [":navelVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":navelVorePreyRequestNo"],
+								"dialogueRandom" : [":navelVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":navelVorePreyRequestNoYes"],
+								"dialogueRandom" : [":navelVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":navelVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":navelVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"absorbVore" : {
 					"replace" : {
-						"dialogueRandom" : [":absorbVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":absorbVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".absorbVore.response.yes" ],
 							["No.", ".absorbVore.response.no" ],
@@ -2411,43 +2411,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":absorbVorePreyRequestYes"],
+								"dialogueRandom" : [":absorbVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":absorbVorePreyRequestNo"],
+								"dialogueRandom" : [":absorbVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":absorbVorePreyRequestNoYes"],
+								"dialogueRandom" : [":absorbVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":absorbVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":absorbVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"unbirth" : {
 					"replace" : {
-						"dialogueRandom" : [":unbirthVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":unbirthVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".unbirth.response.yes" ],
 							["No.", ".unbirth.response.no" ],
@@ -2457,43 +2457,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":unbirthVorePreyRequestYes"],
+								"dialogueRandom" : [":unbirthVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":unbirthVorePreyRequestNo"],
+								"dialogueRandom" : [":unbirthVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":unbirthVorePreyRequestNoYes"],
+								"dialogueRandom" : [":unbirthVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":unbirthVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"cockVore" : {
 					"replace" : {
-						"dialogueRandom" : [":cockVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":cockVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".cockVore.response.yes" ],
 							["No.", ".cockVore.response.no" ],
@@ -2503,43 +2503,43 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestYes"],
+								"dialogueRandom" : [":cockVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestNo"],
+								"dialogueRandom" : [":cockVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":cockVorePreyRequestNoYes"],
+								"dialogueRandom" : [":cockVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":cockVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":cockVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				},
 				"breastVore" : {
 					"replace" : {
-						"dialogueRandom" : [":breastVorePreyRequest"],
-						"buttonText" : ["[Y/N]"],
+						"dialogueRandom" : [":breastVoreRequesting"],
+						"buttonText" : [":ynPrompt"],
 						"options" : [
 							["Yes!", ".breastVore.response.yes" ],
 							["No.", ".breastVore.response.no" ],
@@ -2549,144 +2549,144 @@
 					"seperateNext" : true,
 					"next" : ["personality"],
 					"personality" : {
-						"shy" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestShy"]}},
-						"flirty" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestFlirty"]}}
+						"shy" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingShy"]}},
+						"flirty" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingFlirty"]}}
 					},
 					"response" : {
 						"yes" : {
 							"new" : {
-								"dialogueRandom" : [":breastVorePreyRequestYes"],
+								"dialogueRandom" : [":breastVoreRequestingYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingYesFlirty"]}}
 						},
 						"no" : {
 							"new" : {
-								"dialogueRandom" : [":breastVorePreyRequestNo"],
+								"dialogueRandom" : [":breastVoreRequestingNo"],
 								"dismissTime" :2
 							},
 							"next" : ["personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestNoShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestNoFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingNoShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingNoFlirty"]}}
 						},
 						"noYes" : {
 							"new" : {
-								"dialogueRandom" : [":breastVorePreyRequestNoYes"],
+								"dialogueRandom" : [":breastVoreRequestingNoYes"],
 								"dismissTime" :2
 							},
 							"next" : ["queuePrey","personality"],
-							"shy" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestNoYesShy"]}},
-							"flirty" : { "replace" : { "dialogueRandom" : [":breastVorePreyRequestNoYesFlirty"]}}
+							"shy" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingNoYesShy"]}},
+							"flirty" : { "replace" : { "dialogueRandom" : [":breastVoreRequestingNoYesFlirty"]}}
 						}
 					}
 				}
 			},
 			// for when being prey and forcing their way into a pred without asking
-			"forcingPrey" : {
+			"Forcing" : {
 				"new" : {},
 				"next" : "voreType",
 				"oralVore" : {
-					"replace" : { "dialogueRandom" : [":oralVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":oralVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":oralVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":oralVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":oralVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":oralVoreForcingFlirty"]}}
 				},
 				"tailVore" : {
-					"replace" : { "dialogueRandom" : [":tailVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":tailVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":tailVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":tailVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":tailVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":tailVoreForcingFlirty"]}}
 				},
 				"absorbVore" : {
-					"replace" : { "dialogueRandom" : [":absorbVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":absorbVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":absorbVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":absorbVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":absorbVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":absorbVoreForcingFlirty"]}}
 				},
 				"navelVore" : {
-					"replace" : { "dialogueRandom" : [":navelVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":navelVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":navelVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":navelVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":navelVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":navelVoreForcingFlirty"]}}
 				},
 				"analVore" : {
-					"replace" : { "dialogueRandom" : [":analVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":analVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":analVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":analVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":analVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":analVoreForcingFlirty"]}}
 				},
 				"cockVore" : {
-					"replace" : { "dialogueRandom" : [":cockVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":cockVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":cockVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":cockVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":cockVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":cockVoreForcingFlirty"]}}
 				},
 				"unbirth" : {
-					"replace" : { "dialogueRandom" : [":unbirthVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":unbirthVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":unbirthVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":unbirthVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":unbirthVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":unbirthVoreForcingFlirty"]}}
 				},
 				"breastVore" : {
-					"replace" : { "dialogueRandom" : [":breastVoreForcingPrey"]},
+					"replace" : { "dialogueRandom" : [":breastVoreForcing"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":breastVoreForcingPreyShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":breastVoreForcingPreyFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":breastVoreForcingShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":breastVoreForcingFlirty"]}}
 				}
 			},
 			// when being pred, response to prey forcing their way in unwillingly
-			"unwillingPred" : {
+			"Forced" : {
 				"new" : {},
 				"next" : "voreType",
 				"oralVore" : {
-					"replace" : { "dialogueRandom" : [":oralVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":oralVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":oralVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":oralVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":oralVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":oralVoreForcedFlirty"]}}
 				},
 				"tailVore" : {
-					"replace" : { "dialogueRandom" : [":tailVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":tailVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":tailVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":tailVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":tailVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":tailVoreForcedFlirty"]}}
 				},
 				"absorbVore" : {
-					"replace" : { "dialogueRandom" : [":absorbVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":absorbVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":absorbVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":absorbVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":absorbVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":absorbVoreForcedFlirty"]}}
 				},
 				"navelVore" : {
-					"replace" : { "dialogueRandom" : [":navelVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":navelVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":navelVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":navelVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":navelVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":navelVoreForcedFlirty"]}}
 				},
 				"analVore" : {
-					"replace" : { "dialogueRandom" : [":analVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":analVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":analVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":analVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":analVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":analVoreForcedFlirty"]}}
 				},
 				"cockVore" : {
-					"replace" : { "dialogueRandom" : [":cockVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":cockVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":cockVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":cockVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":cockVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":cockVoreForcedFlirty"]}}
 				},
 				"unbirth" : {
-					"replace" : { "dialogueRandom" : [":unbirthVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":unbirthVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":unbirthVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":unbirthVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":unbirthVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":unbirthVoreForcedFlirty"]}}
 				},
 				"breastVore" : {
-					"replace" : { "dialogueRandom" : [":breastVoreUnwillingPred"]},
+					"replace" : { "dialogueRandom" : [":breastVoreForced"]},
 					"next" : "personality",
-					"shy" : {"replace" : { "dialogueRandom" : [":breastVoreUnwillingPredShy"]}},
-					"flirty" : {"replace" : { "dialogueRandom" : [":breastVoreUnwillingPredFlirty"]}}
+					"shy" : {"replace" : { "dialogueRandom" : [":breastVoreForcedShy"]}},
+					"flirty" : {"replace" : { "dialogueRandom" : [":breastVoreForcedFlirty"]}}
 				}
 			},
 
@@ -3514,7 +3514,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBellyAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"tail" : {
@@ -3535,9 +3535,9 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedBefore"]},
+							"replace" : { "dialogueRandom" : [":tailVoreInfuseUnprompted"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedBeforeLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedLayer"]}}
 						},
 						"after" : {
 							"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedAfter"]},
@@ -3545,7 +3545,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":tailVoreInfuseUnpromptedAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"breastsL" : ".breasts",
@@ -3578,7 +3578,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBreastsAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"womb" : ".pussy",
@@ -3610,7 +3610,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedPussyAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"cock" : ".shaft",
@@ -3642,7 +3642,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedShaftAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 
 				},
 				"ballsL" : ".balls",
@@ -3675,7 +3675,7 @@
 							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBallsAfterLayer"]}}
 						}
 					},
-					"notFeelingIt" : { "replace" : {"dialogueRandom" : [":defaultNotFeelingIt"]} }
+					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
 				}
 			},
 
