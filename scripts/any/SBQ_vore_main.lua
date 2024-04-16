@@ -255,38 +255,47 @@ end
 
 -- transformation handling
 function _SpeciesScript:getLocation(...)
+	if not self.state then return false end
 	return self.state:getLocation(...)
 end
 
 function _SpeciesScript:tryAction(action, target, ...)
+	if not self.state then return false, "missingState" end
 	return self.state:tryAction(action, target, ...)
 end
 
 function _SpeciesScript:queueAction(action, target, ...)
+	if not self.state then return false, "missingState" end
 	return self.state:queueAction(action, target, ...)
 end
 
 function _SpeciesScript:actionAvailable(action, target, ...)
+	if not self.state then return false, "missingState" end
 	return self.state:actionAvailable(action, target, ...)
 end
 
 function _SpeciesScript:requestAction(action, target, consent, ...)
+	if not self.state then return false, "missingState" end
 	return self.state:requestAction(action, target, consent, ...)
 end
 
 function _SpeciesScript:doAnimations(...)
+	if not self.state then return 0 end
 	return self.state:doAnimations(...)
 end
 
 function _SpeciesScript:checkAnimations(...)
+	if not self.state then return 0 end
 	return self.state:checkAnimations(...)
 end
 
 function _SpeciesScript:interact(...)
+	if not self.state then return false, "invalidState" end
 	return self.state:interact(...)
 end
 
 function _SpeciesScript:emergencyEscape(...)
+	if not self.state then return false, "invalidState" end
 	return self.state:emergencyEscape(...)
 end
 
