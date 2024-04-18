@@ -24,6 +24,7 @@ _Occupant.__index = _Occupant
 
 Species = {}
 SpeciesScript = {
+	baseLocations = {},
 	locations = {},
 	states = {}
 }
@@ -135,7 +136,7 @@ function sbq.reloadVoreConfig(config)
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
 	end
-	SpeciesScript = { locations = {}, states = {}, actionQueue = {} }
+	SpeciesScript = { baseLocations = {}, locations = {}, states = {}, actionQueue = {} }
 	SpeciesScript.species = Species[sbq.voreConfig.species or "default"]
 	setmetatable(SpeciesScript, {__index = SpeciesScript.species})
 
@@ -175,6 +176,11 @@ function sbq.reloadVoreConfig(config)
 	SpeciesScript:init()
 	SpeciesScript.state:init()
 	SpeciesScript.active = true
+
+	SpeciesScript:refreshInfusion()
+	for _, occupant in ipairs(Occupants.list) do
+		occupant:refreshLocation(occupant.location, occupant.subLocation, true)
+	end
 end
 
 function sbq.actionList(type, target)
@@ -592,25 +598,6 @@ function _SpeciesScript:addLocation(name, config)
 	location.tag = name
 	location.key = name
 	location.name = location.name or (":"..name)
-	-- if infusion is enabled and someone is in the slot then modify the properties of that location accordingly
-	if location.infusionSlot and sbq.settings[location.infusionType .. "Pred"] and sbq.settings[location.infusionSlot] then
-		local infused = sbq.settings[location.infusionSlot]
-		local species = infused.parameters.npcArgs.npcSpecies
-		local voreConfig = root.fetchConfigArray(infused.parameters.voreConfig or root.speciesConfig(species).voreConfig or "/humanoid/any/vore.config", sbq.directory())
-		location = sb.jsonMerge(sbq.config.locations[name],
-			{ species = voreConfig.tfSpecies or species },
-			root.fetchConfigArray(
-				sb.jsonQuery(voreConfig, "infusedLocations." .. species .. "." .. name) or
-				sb.jsonQuery(voreConfig, "infusedLocations." .. name) or {},
-			sbq.directory())
-		)
-		-- certain NPCs may not like performing certain actions, therefore they can disable them when infused
-		local metatable = getmetatable(sbq.settings)
-		sbq.settings = sb.jsonMerge(sbq.settings, root.fetchConfigArray(infused.parameters.overrideSettings or {}, infused.parameters.relativePath or sbq.directory()),
-			root.fetchConfigArray(sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. species .. "." .. name)
-				or sb.jsonQuery(infused.parameters, "conditionalOverrideSettings." .. name) or {}, infused.parameters.relativePath or sbq.directory()))
-		setmetatable(sbq.settings, metatable)
-	end
 	-- easier to make it default to math.huge than have it check if it's defined or not
 	location.maxFill = location.maxFill or math.huge
 	-- setup occupancy values
@@ -619,7 +606,7 @@ function _SpeciesScript:addLocation(name, config)
 		settingsDirty = true,
 		list = {},
 		size = 0,
-		visualSize = -1,
+		visualSize = -1, -- this forces it to refresh the size
 		interpolating = false,
 		struggleVec = {0,0},
 		interpolateFrom = 0,
@@ -634,7 +621,7 @@ function _SpeciesScript:addLocation(name, config)
 			settingsDirty = true,
 			list = {},
 			size = 0,
-			visualSize = -1,
+			visualSize = -1, -- forces size refresh
 			interpolating = false,
 			interpolateFrom = 0,
 			interpolateTime = 0,
@@ -652,10 +639,81 @@ function _SpeciesScript:addLocation(name, config)
 	Occupants.locations[name] = location.occupancy
 	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.locations[location.settingsTable or name]})
-	setmetatable(location, {__index = self.species.locations[name] or _Location})
+	setmetatable(location, { __index = self.species.locations[name] or _Location })
+	self.baseLocations[name] = location
 	self.locations[name] = location
 end
+function _SpeciesScript:refreshInfusion(slot)
+	for k, v in pairs(self.locations) do
+		local location = self:getLocation(k)
+		if (not slot) or (slot == location.infusionSlot) then
+			location:refreshInfusion()
+		end
+	end
+end
 
+function _Location:setInfusionData()
+	if self.infuseTagsSet then
+		for k, _ in pairs(self.infuseTagsSet.globalTags) do
+			animator.setGlobalTag(sbq.defaultAnimatorTags.globalTags[k] or "default")
+		end
+		for part, v in pairs(self.infuseTagsSet.partTags) do
+			for k, _ in pairs(v) do
+				animator.setPartTag(part, sbq.defaultAnimatorTags.partTags[part][k])
+			end
+		end
+	end
+	local infusedItem = sbq.settings.infusionSlots[location.infusionSlot].item
+	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "")
+	local infuseData = {}
+	if infuseSpeciesConfig then
+		infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
+		infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or infuseSpeciesConfig.infuseData.default or infuseSpeciesConfig.infuseData or {})
+	end
+
+	local metatable = getmetatable(sbq.settings)
+	sbq.settings = sb.jsonMerge(sbq.settings, infuseData.overrideSettings or {})
+	setmetatable(sbq.settings, metatable)
+
+	local tagsSet = {
+		globalTags = {},
+		partTags = {}
+	}
+	local defaultColorMap = root.speciesConfig("human").baseColorMap
+	for tag, remaps in pairs(infuseSpeciesConfig.colorRemapGlobalTags or {}) do
+		local sourceColorMap = sb.jsonQuery(infuseSpeciesConfig, "infuseColorRemapSources." .. tag)
+		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
+		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
+		--sb.logInfo(tag.." "..directives)
+		animator.setGlobalTag(tag, directives)
+		tagsSet.globalTags[tag] = true
+	end
+	for part, tags in pairs(infuseSpeciesConfig.colorRemapPartTags or {}) do
+		tagsSet.partTags[part] = {}
+		for tag, remaps in pairs(tags or {}) do
+			local sourceColorMap = sb.jsonQuery(infuseSpeciesConfig, "colorRemapSources." .. part ..".".. tag) or sb.jsonQuery(infuseSpeciesConfig, "colorRemapSources." .. tag)
+			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
+			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
+			--sb.logInfo(tag.." "..directives)
+			animator.setPartTag(part, tag, directives)
+			tagsSet.partTags[part][tag] = true
+		end
+	end
+
+	local locationData = sb.jsonMerge(infuseData.locationOverrides, {
+		infuseTagsSet = tagsSet
+	})
+	local base = SpeciesScript.baseLocations[self.key]
+	locationData.subLocations = locationData.subLocations or {}
+	for k, v in pairs(base.subLocations or {}) do
+		locationData.subLocations[k] = locationData.subLocations[k] or {}
+		setmetatable(locationData.subLocations[k], {__index = v})
+	end
+	setmetatable(locationData, { __index = base })
+	SpeciesScript.locations[self.key] = locationData
+	self:markSettingsDirty()
+	self:markSizeDirty()
+end
 function _Location:hasSpace(size)
 	if not sbq.tableMatches(self.activeSettings, sbq.settings, true) then return false end
 	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
@@ -704,6 +762,10 @@ function _Location:markSizeDirty()
 			local subLocation = SpeciesScript:getLocation(self.key, k)
 			subLocation.occupancy.sizeDirty = true
 		end
+	end
+	for _, sharedName in ipairs(self.sharedWith or {}) do
+		local shared = SpeciesScript:getLocation(sharedName)
+		shared.occupancy.sizeDirty = true
 	end
 end
 function _Location:markSettingsDirty()
@@ -906,16 +968,7 @@ function _Location:getStruggleAction(direction)
 end
 
 function _Location:outputData(entityId)
-	local merge = {}
-	table.insert(merge, SpeciesScript.locations[self.key] or {})
-	if self.subKey then
-		table.insert(merge, SpeciesScript.locations[self.key].subLocations[self.subKey] or {})
-	end
-	table.insert(merge, SpeciesScript.state.locations[self.key] or {})
-	if self.subKey then
-		table.insert(merge, SpeciesScript.state.locations[self.key].subLocations[self.subKey] or {})
-	end
-	local location = sb.jsonMerge(table.unpack(merge))
+	local location = sb.jsonMerge(sbq.metatableOutput(self))
 	location.occupancy = nil
 	location.settings = nil
 	for _, struggleAction in pairs(location.struggleActions or {}) do
@@ -931,7 +984,8 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 	-- check if we already have them
 	local occupant = Occupants.entityId[tostring(entityId)]
 	if occupant then
-		occupant:refreshLocation(location, subLocation)
+		occupant.flags.newOccupant = true
+		occupant:refreshLocation(location, subLocation, true)
 		return true
 	end
 	local seat
@@ -956,8 +1010,8 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 		seat = seat,
 		flags = { newOccupant = true },
 		locationSettings = {},
-		location = nil,
-		subLocation = nil,
+		location = location,
+		subLocation = subLocation,
 		size = size or 1,
 		sizeMultiplier = 1,
 		struggleGracePeriod = 0,
@@ -977,7 +1031,7 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 		Occupants.entityId[uuid] = occupant
 	end
 	-- refresh the location data for this occupant
-	occupant:refreshLocation(location, subLocation)
+	occupant:refreshLocation(location, subLocation, true)
 	occupant:setLoungeEnabled(true)
 	occupant:setDismountable(false)
 	world.sendEntityMessage(entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
@@ -1084,17 +1138,15 @@ function _Occupant:update(dt)
 	self:checkStruggleDirection(dt)
 end
 
-function _Occupant:refreshLocation(name, subLocation)
+function _Occupant:refreshLocation(name, subLocation, force)
 	local location = self:getLocation()
 
-	if (name and (self.location ~= name)) or (subLocation and (self.subLocation ~= subLocation)) then
-		if self.location then
-			location:markSizeDirty()
-			for i, occupant in ipairs(location.occupancy.list) do
-				if occupant.entityId == self.entityId then
-					table.remove(location.occupancy.list, i)
-					break
-				end
+	if force or (name and (self.location ~= name)) or (subLocation and (self.subLocation ~= subLocation)) then
+		location:markSizeDirty()
+		for i, occupant in ipairs(location.occupancy.list) do
+			if occupant.entityId == self.entityId then
+				table.remove(location.occupancy.list, i)
+				break
 			end
 		end
 		self.location = name
@@ -1103,10 +1155,6 @@ function _Occupant:refreshLocation(name, subLocation)
 
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
-		for _, sharedName in ipairs(location.sharedWith or {}) do
-			local shared = SpeciesScript:getLocation(sharedName)
-			shared:markSizeDirty()
-		end
 	end
 	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
 	setmetatable(self.locationSettings, {__index = location.settings})

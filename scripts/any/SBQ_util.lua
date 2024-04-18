@@ -38,6 +38,31 @@ function sbq.metatableLayers(...)
 		prevTable = table
 	end
 end
+function sbq.metatableOutput(input)
+	local last = input
+	local layers = {[input] = true}
+	local continue = true
+	local output = {}
+	while continue do
+		for k, v in pairs(last) do
+			if output[k] == nil then
+				if type(v) == "table" then
+					output[k] = sbq.metatableOutput(v)
+				else
+					output[k] = v
+				end
+			end
+		end
+		local mt = getmetatable(last)
+		if not mt then continue = false end
+		local index = mt.__index
+		if not index then continue = false end
+		if layers[index] then continue = false end
+		layers[index] = true
+		last = index
+	end
+	return output
+end
 
 function sbq.refreshUpgrades(upgraded)
 	storage.sbqSettings = storage.sbqSettings or {}

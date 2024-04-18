@@ -373,7 +373,7 @@ function sbq.widgetScripts.makeInfusionSlots(param)
 				item = item.name and item,
 				glyph = root.assetExists(glyph) and glyph,
 				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot),
-				setting = "slot",
+				setting = "item",
 				groupName = param.setting,
 				groupKey = infuseType,
 				script = "changeSetting"

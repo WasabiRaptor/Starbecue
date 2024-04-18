@@ -64,18 +64,16 @@ function misc.generateSettingsCard(type)
 end
 misc.getSettingsOf = {}
 function misc.getSettingsOf.prefs()
-	local merged = sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
 	return {
-		vorePrefs = merged.vorePrefs,
-		infusePrefs = merged.infusePrefs
+		vorePrefs = sbq.metatableOutput(sbq.settings.vorePrefs),
+		infusePrefs = sbq.metatableOutput(sbq.settings.infusePrefs)
 	}
 end
 function misc.getSettingsOf.locations()
-	local merged = sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
 	return {
-		locations = merged.locations,
+		locations = sb.metatableOutput(sbq.settings.locations),
 	}
 end
 function misc.getSettingsOf.all()
-	return sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
+	return sb.metatableOutput( sbq.settings)
 end
