@@ -63,6 +63,7 @@ function sbq.setGroupedSetting(group, name, k, v)
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 	end
 end
+sbq.groupedSettingChanged = {}
 
 function sbq.importSettings(newSettings)
 	local parent, recruitUuid = sbq.parentEntity()
