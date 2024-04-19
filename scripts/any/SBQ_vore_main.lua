@@ -673,6 +673,7 @@ function _Location:setInfusionData()
 	end
 	local infusedItem = sbq.settings.infusionSlots[self.infusionSlot].item
 	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "")
+	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParameters.identity") or {}
 	local infuseData = {}
 	if infuseSpeciesConfig then
 		infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
@@ -707,6 +708,8 @@ function _Location:setInfusionData()
 			tagsSet.partTags[part][tag] = true
 		end
 	end
+	animator.setGlobalTag(self.tag, (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or ""))
+	tagsSet.globalTags[self.tag] = true
 
 	local locationData = sb.jsonMerge(infuseData.locationOverrides, {
 		infuseTagsSet = tagsSet
