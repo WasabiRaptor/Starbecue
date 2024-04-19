@@ -654,8 +654,8 @@ end
 function _SpeciesScript:refreshInfusion(slot)
 	for k, v in pairs(self.locations) do
 		local location = self:getLocation(k)
-		if (not slot) or (slot == location.infusionSlot) then
-			location:refreshInfusion()
+		if location and location.infusionSlot and ((not slot) or (slot == location.infusionSlot)) then
+			location:setInfusionData()
 		end
 	end
 end
@@ -671,7 +671,7 @@ function _Location:setInfusionData()
 			end
 		end
 	end
-	local infusedItem = sbq.settings.infusionSlots[location.infusionSlot].item
+	local infusedItem = sbq.settings.infusionSlots[self.infusionSlot].item
 	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "")
 	local infuseData = {}
 	if infuseSpeciesConfig then
@@ -976,15 +976,16 @@ function _Location:getStruggleAction(direction)
 end
 
 function _Location:outputData(entityId)
-	local location = sb.jsonMerge(sbq.metatableOutput(self))
-	location.occupancy = nil
-	location.settings = nil
-	for _, struggleAction in pairs(location.struggleActions or {}) do
+	local output = {}
+	for _, k in ipairs(sbq.voreConfig.preyHudLocationOutput or sbq.config.preyHudLocationOutput) do
+		output[k] = self[k]
+	end
+	for _, struggleAction in pairs(output.struggleActions or {}) do
 		if not SpeciesScript:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
 			struggleAction.indicate = "default"
 		end
 	end
-	return location
+	return output
 end
 
 -- Occupant Handling

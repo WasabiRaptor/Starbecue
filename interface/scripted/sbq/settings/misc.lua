@@ -65,15 +65,43 @@ end
 misc.getSettingsOf = {}
 function misc.getSettingsOf.prefs()
 	return {
-		vorePrefs = sbq.metatableOutput(sbq.settings.vorePrefs),
-		infusePrefs = sbq.metatableOutput(sbq.settings.infusePrefs)
+		vorePrefs = misc.exportSettingGroup("vorePrefs"),
+		infusePrefs = misc.exportSettingGroup("infusePrefs")
 	}
 end
 function misc.getSettingsOf.locations()
 	return {
-		locations = sb.metatableOutput(sbq.settings.locations),
+		locations = misc.exportSettingGroup("locations"),
 	}
 end
 function misc.getSettingsOf.all()
-	return sb.metatableOutput( sbq.settings)
+	local output = misc.exportBaseSettings()
+	output.vorePrefs = misc.exportSettingGroup("vorePrefs")
+	output.infusePrefs = misc.exportSettingGroup("infusePrefs")
+	output.locations = misc.exportSettingGroup("locations")
+	return output
+end
+
+function misc.exportBaseSettings()
+	local output = {}
+	for k, _ in pairs(sbq.config.defaultSettings) do
+		output[k] = sbq.settings[k]
+	end
+	return output
+end
+function misc.exportSettingGroup(group)
+	local output = {}
+	local list = {}
+	local groupData = sbq.config.groupedSettings[group]
+	if type(groupData.list) == "string" then
+		list = sbq.lists[groupData.list] or {}
+	elseif type(groupData.list) == "table" then
+		list = groupData.list
+	end
+	for _, name in ipairs(list) do
+		for k, _ in pairs(groupData.defaultSettings) do
+			output[k] = sbq.settings[group][name][k]
+		end
+	end
+	return output
 end
