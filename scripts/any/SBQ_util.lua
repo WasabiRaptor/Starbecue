@@ -342,3 +342,7 @@ function sbq.exportSettingGroup(group)
 	end
 	return output
 end
+
+function sbq.createdDate()
+	return os.date(sbq.getString(":createdOnDate"), os.time()).." v"..root.modMetadata("Starbecue").version
+end

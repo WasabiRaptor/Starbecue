@@ -1,3 +1,4 @@
+require"/scripts/any/SBQ_util.lua"
 function sbq.generateNPCItemCard(tenant)
 	local npcConfig = root.npcConfig(tenant.type)
 

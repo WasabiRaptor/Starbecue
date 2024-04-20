@@ -31,9 +31,6 @@ end
 function sbq.entityId()
 	return (pane.sourceEntity() == 0 and player.id()) or pane.sourceEntity()
 end
-function sbq.createdDate()
-	return os.date(sbq.strings.createdOnDate, os.time()).." v"..root.modMetadata("Starbecue").version
-end
 ---@diagnostic disable: undefined-global
 local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
