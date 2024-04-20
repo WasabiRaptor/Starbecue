@@ -817,113 +817,80 @@
 				"falling" :{"replace" : {"dialogueRandom":[":gotStomped"]}}
 			}
 		},
-		// when hunting for prey, a checklist to have them only seek out prey that match the settings
-		// any settings not defined in the checlkist for that vore type can be anything
-		// such as a digestion pred not wanting to eat prey with digestion immunity, or not want to eat other preds, etc.
-		"huntingChecklist" : {
-			"default" : { // mood
-				"preySettings" : {
-					// "digestImmunity" : "false" // example for a pred that would only seek out prey they can digest
+		"voreConfig" : {
+			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+			"defaultSettings" : {
+				"pussy" : true,
+				"cock" : true,
+
+				"locations" : {
+					"womb" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"pussy" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"tail" : {
+						"mainEffect" : "softDigest",
+						"hammerspace" : true
+					},
+					"belly" : {
+						"mainEffect" : "softDigest",
+						"hammerspace" : true
+					},
+					"balls" : {
+						"mainEffect" : "softDigest",
+						"hammerspace" : true
+					},
+					"cock" : {
+						"hammerspace" : true
+					}
+				}
+			},
+			// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+			"overrideSettings" : {
+				"breasts" : false,
+				"infusePrefs" : {
+					"pawInfuse" : {
+						"prey" : false
+					}
 				},
-				"settings" : {
-					// "oralVorePred : "false" // example for a pred that wouldn't eat other oralVore preds
+				"vorePrefs" : {
+					"navelVore" : {
+						"pred" : false,
+						"prey" : false
+					},
+					"absorbVore" : {
+						"pred" : false
+					},
+					"breastVore" : {
+						"pred" : false
+					}
+				},
+				"locations" : {
+					"cock" : {
+						"mainEffect" : "none"
+					},
+					"ass" : {
+						"mainEffect" : "none"
+					}
+				},
+				"acidDigestFatal" : false,
+				"cumDigestFatal" : false,
+				"milkDigestFatal" : false,
+				"femcumDigestFatal" : false,
+				"femcumDigestDrops" : false,
+
+				"speciesTF" : false,
+				"genderTF" : false
+			},
+			"invalidSettings" : {
+				"mainEffect" : {
+					"digest" : "softDigest"
 				}
 			}
-		},
-		// when baiting a pred, a checklist to have them only seek out preds with certain settings
-		// any settings not defined in the checlkist for that vore type can be anything
-		// such as a prey not wanting to seek out preds that will digest them, or not wanting to seek out preds that do vore types they don't like, or not wanting to seek out preds who can also be prey
-		"baitingChecklist" : {
-			"default" : { // mood
-				"preySettings" : {
-					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
-				},
-				"settings" : {
-					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
-				}
-			}
-		},
-
-		// the pred prefrences and general settings for this NPC are set here!
-		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-		"sbqSettings" : {
-			"mood" : "default",
-			"personality" : "default",
-
-			"bellyEffectSlot" : "none", // the settings in this group exist for each location, just use the correct name (belly, balls, shaft, womb, tail, breasts)
-			//"bellyHammerspaceDisabled" : false,
-			//"bellyVisualMin" : 0,
-			//"bellyVisualMax" : 2,
-			//"bellyNoneEnable" : true,
-			//"bellyHealEnable" : true,
-			//"bellyDigestEnable" : true,
-			//"bellySoftDigestEnable" : true,
-			//"bellyDifficultyMod" : 0,
-			"bellySounds" : true,
-
-			"displayDigest" : false,
-
-			"escapeDifficulty": 5,
-
-			"impossibleEscape": false,
-
-			"shaftInfusedVisual" : true,
-
-			// predator prefrences
-			"oralVorePred" : true,
-
-			"cockVorePred" : false,
-			"oralVorePredUnwilling" : true,
-			"cockVorePredUnwilling" : true,
-			"cockInfusionPred" : true,
-			"cockInfusionPredUnwilling" : true
-		},
-
-		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
-		"sbqOverrideSettings" : {
-			"navel" : false,
-			"navelVorePred" : false,
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"analVorePred" : false,
-			"unbirthPred" : false,
-			"breastVorePred" : false,
-			"bellyInfusionPred" : false,
-			"pussyInfusionPred" : false,
-			"breastsInfusionPred" : false,
-
-			"crewmateGraduation" : false,
-
-			"ballsHammerspace" : true,
-			"bellyHammerspace" : true,
-			"wombHammerspace" : true,
-
-			"bellyPredDigestDrops" : false,
-
-			"shaftEffectSlot" : "none",
-			"shaftDigestEnable" : false,
-			"shaftSoftDigestEnable" : false,
-			"shaftHealEnable" : false
-
-		},
-		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
-		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
-		"sbqOverridePreyEnabled" : {
-			"preyEnabled" : false,
-			"navelVore": false,
-
-			"digestItemDropsAllow" : false,
-			"femcumDigestItemDropsAllow" : false,
-
-			"femcumSoftDigestAllow": false,
-
-			"digestAllow": false,
-			"cumDigestAllow": false,
-			"femcumDigestAllow": false,
-
-			"milkDigestAllow": false
-
 		},
 
 		// rewards given to the player for doing things for the pred are here! cumulative ones accumulate time between different sessions, otherwise it only counts up per the current session
@@ -1013,40 +980,6 @@
 							"emoteDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
 							"hairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
 							"facialMaskType" : "blank"
-						},
-						"statusControllerSettings" : {
-							"statusProperties": {
-								"sbqPreyEnabled": {
-									"milkDigestAllow": true,
-									"cumSoftDigestAllow": true,
-									"milkDigestItemDropsAllow": true,
-									"digestAllow": true,
-									"tailVore": true,
-									"digestItemDropsAllow": false,
-									"absorbVore": true,
-									"unbirth": true,
-									"pussyInfusion": true,
-									"femcumSoftDigestAllow": false,
-									"cockInfusion": true,
-									"cumDigestAllow": true,
-									"analVore": true,
-									"milkSoftDigestAllow": true,
-									"cumDigestItemDropsAllow": true,
-									"transformAllow": true,
-									"breastsInfusion": true,
-									"navelVore": false,
-									"bellyInfusion": true,
-									"eggAllow": true,
-									"femcumDigestItemDropsAllow": false,
-									"cumTransformAllow": true,
-									"softDigestAllow": true,
-									"genderswapAllow": true,
-									"oralVore": true,
-									"cockVore": true,
-									"femcumDigestAllow": false,
-									"breastVore": true
-								}
-							}
 						}
 					}
 				}
@@ -1107,53 +1040,7 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqDidVornyConvertCheck" : true,
-
-
-			// the prey prefrences for this NPC are set here!
-			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-			"sbqPreyEnabled" : {
-				"preyEnabled" : true,
-
-				"digestAllow": true,
-				"softDigestAllow" : true,
-				"digestItemDropsAllow" : true,
-
-				"cumDigestAllow": true,
-				"cumSoftDigestAllow": true,
-				"cumDigestItemDropsAllow" : true,
-
-				"femcumDigestAllow": true,
-				"femcumSoftDigestAllow": true,
-				"femcumDigestItemDropsAllow" : true,
-
-				"milkDigestAllow": true,
-				"milkSoftDigestAllow" : true,
-				"milkDigestItemDropsAllow" : true,
-
-				"transformAllow": true,
-				"cumTransformAllow": true,
-				"genderswapAllow": true,
-				"eggAllow": true,
-
-				"held" : true,
-
-				"oralVore" : true,
-				"tailVore" : true,
-				"absorbVore" : true,
-				"navelVore" : true,
-
-				"analVore" : true,
-				"unbirth" : true,
-				"cockVore" : true,
-				"breastVore" : true,
-
-				"bellyInfusion" : true,
-				"cockInfusion" : true,
-				"pussyInfusion" : true,
-				"breastsInfusion" : true
-			}
+			"sbqDidVornyConvertCheck" : true
 		}
 	},
 	"items" : {

@@ -292,7 +292,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {}).locations or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
+			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {})[param.groupName] or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
 			if not result then
 				local toolTip = sbq.strings[k] or k
 				local icon

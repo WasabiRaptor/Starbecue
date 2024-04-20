@@ -29,54 +29,6 @@
 		},
 		"sbqConvertType" : false,
 
-		"sbqSettings" : {
-			"mood" : "default",
-			"personality" : "default",
-			"oralVorePred" : true,
-			"analVorePred" : true,
-			"cockVorePred" : true,
-			"unbirthPred" : true,
-			"absorbVorePred" : true,
-
-			"oralVorePredEnable" : true,
-			"analVorePredEnable" : true,
-			"cockVorePredEnable" : true,
-			"unbirthPredEnable" : true,
-			"absorbVorePredEnable" : true
-		},
-		"sbqOverrideSettings" : {
-			"crewmateGraduation" : false,
-
-			"digestEnable" : false,
-			"shaftDigestEnable" : false,
-			"shaftSoftDigestEnable" : false,
-			"ballsDigestEnable" : false,
-			"wombDigestEnable" : false,
-			"wombSoftDigestEnable" : false,
-			"bellyPredDigestDrops" : false,
-
-			"tailPredDigestDrops" : false,
-			"wombPredDigestDrops" : false,
-
-			"navelVorePred" : false,
-			"breastVorePred" : false,
-			"tailVorePred" : false,
-
-			"shaftTFEnable" : false,
-			"wombTFEnable" : false
-		},
-		"sbqOverridePreyEnabled" : {
-			"digestItemDropsAllow" : false,
-			"femcumDigestItemDropsAllow" : false,
-
-			"digestAllow": false,
-			"cumDigestAllow": false,
-			"milkDigestAllow": false,
-			"femcumDigestAllow": false,
-			"femcumSoftDigestAllow": false,
-			"navelVore" : false
-		},
-
 		"dialogueStepScripts" : ["/npcs/sbq/ocs/pet_dialogue_script.lua"],
 
 		"dialogueTree" : {
@@ -2372,7 +2324,74 @@
 					]
 				}
 			}
+		},
+		"voreConfig" : {
+			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+			"defaultSettings" : {
+				"locations" : {
+					"breasts" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"womb" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"pussy" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"tail" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"belly" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"balls" : {
+						"mainEffect" : "heal",
+						"hammerspace" : true
+					},
+					"cock" : {
+						"hammerspace" : true
+					},
+					"ass" : {
+						"hammerspace" : true
+					}
+				}
+			},
+			// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+			"overrideSettings" : {
+				"vorePrefs" : {
+					"navelVore" : {
+						"pred" : false,
+						"prey" : false
+					}
+				},
+				"locations" : {
+					"cock" : {
+						"mainEffect" : "none"
+					},
+					"ass" : {
+						"mainEffect" : "none"
+					}
+				},
+				"acidDigestFatal" : false,
+				"cumDigestFatal" : false,
+				"milkDigestFatal" : false,
+				"femcumDigestFatal" : false,
+
+				"speciesTF" : false,
+				"genderTF" : false
+			},
+			"invalidSettings" : {
+				"mainEffect" : {
+					"digest" : "softDigest"
+				}
+			}
 		}
+
 	},
 
 	"statusControllerSettings" : {
@@ -2423,32 +2442,7 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqPreyEnabled" : {
-				"preyEnabled": true,
-				"digestAllow": false,
-
-				"cumDigestAllow": false,
-
-				"transformAllow": false,
-				"eggAllow": true,
-
-				"held": true,
-
-				"oralVore": true,
-				"tailVore": true,
-				"absorbVore": true,
-				"navelVore": false,
-
-				"analVore": true,
-				"unbirth": true,
-				"cockVore": true,
-				"breastVore": true,
-
-				"bellyInfusion" : true,
-				"cockInfusion" : true,
-				"pussyInfusion" : true,
-				"breastsInfusion" : true
-			}
+			"sbqDidVornyConvertCheck" : true
 		}
 	},
 	"items" : {
