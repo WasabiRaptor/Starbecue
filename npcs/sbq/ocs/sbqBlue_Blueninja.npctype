@@ -3174,63 +3174,47 @@
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		},
 
+		"voreConfig" : [
+			"/humanoid/any/disableAllInfusePred.config",
+			"/humanoid/any/disableAllInfusePrey.config",
+			{
+				// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+				"defaultSettings" : {
+					"locations" : {
+						"belly" : {
+							"gurgleSounds" : true
+						}
+					}
 
-		// the pred prefrences and general settings for this NPC are set here!
-		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
+				},
+				// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+				"overrideSettings" : {
+					"vorePrefs" : {
+						"navelVore" : {
+							"pred" : false
+						},
+						"tailVore" : {
+							"pred" : false
+						},
+						"absorbVore" : {
+							"pred" : false
+						},
+						"unbirthVore" : {
+							"pred" : false
+						},
+						"breastVore" : {
+							"pred" : false,
+							"prey" : false
+						}
+					},
+					"milkDigestFatal" : false,
+					"milkDigestResistance" : 0,
 
-		"sbqSettings" : {
-			"mood" : "default",
-			"personality" : "default",
-
-			"bellyEffect" : "sbqRemoveBellyEffects",
-			"bellySounds" : true,
-			"displayDigest" : false,
-
-			"escapeDifficulty": 0,
-			"escapeDifficultyMin": 1,
-			"escapeDifficultyMax": 8,
-
-			"impossibleEscape": false,
-			"hammerspace" : false,
-
-			// predator prefrences
-			"oralVorePred" : true,
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"navelVorePred" : false,
-
-			"analVorePred" : false,
-			"unbirthPred" : false,
-			"cockVorePred" : false,
-			"breastVorePred" : false
-		},
-
-		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
-		"sbqOverrideSettings" : {
-			"crewmateGraduation" : false,
-
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"navelVorePred" : false,
-
-			"unbirthPred" : false,
-			"breastVorePred" : false
-		},
-		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
-		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
-		"sbqOverridePreyEnabled" : {
-			"breastVore": false,
-			"milkDigestAllow": false,
-			"milkSoftDigestAllow": false,
-
-			"bellyInfusion" : false,
-			"cockInfusion" : false,
-			"pussyInfusion" : false,
-			"breastsInfusion" : false
-		}
-
-		// the args below are for randomizing specific settings between possible values in the table when the pred is first summoned
-		// specific OCs will probably have specific prefrences in mind, so they likely will not randomize
+					"speciesTF" : false,
+					"genderTF" : false
+				}
+			}
+		]
 	},
 	"statusControllerSettings" : {
 		"stats" : {
@@ -3280,35 +3264,7 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqDidVornyConvertCheck" : true,
-
-
-			// the prey prefrences for this NPC are set here!
-			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-			"sbqPreyEnabled" : {
-				"preyEnabled": true,
-
-				"digestAllow": true,
-				"cumDigestAllow": false,
-
-				"transformAllow": false,
-				"genderswapAllow": false,
-
-				"eggAllow": true,
-
-				"held": true,
-
-				"oralVore": true,
-				"tailVore": true,
-				"absorbVore": true,
-				"navelVore": true,
-
-				"analVore": true,
-				"unbirth": true,
-				"cockVore": true,
-				"breastVore": false
-			}
+			"sbqDidVornyConvertCheck" : true
 		}
 	}
 }

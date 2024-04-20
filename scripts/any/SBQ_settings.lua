@@ -1,5 +1,6 @@
 function sbq.settingsInit()
-	message.setHandler("sbqSetGroupedSetting", function (_,_, ...)
+	message.setHandler("sbqSetGroupedSetting", function(_, _, ...)
+		sbq.logInfo({...},2)
 		return sbq.setGroupedSetting(...)
 	end)
 	message.setHandler("sbqSetSetting", function (_,_, ...)
@@ -49,8 +50,13 @@ function sbq.setGroupedSetting(group, name, k, v)
 		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name, k, v)
 	end
 	local old = sbq.settings[group][name][k]
+	sbq.logInfo("old")
+	sbq.logInfo(old, 2)
+	sbq.logInfo("new")
+	sbq.logInfo(v,2)
+
 	storage.sbqSettings[group][name][k] = v
-	if old == sbq.settings[group][name][k] then return end
+	if type(v) ~= "table" and old == sbq.settings[group][name][k] then return end
 	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
 	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do

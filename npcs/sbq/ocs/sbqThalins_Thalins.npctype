@@ -106,62 +106,18 @@
 
 		},
 
-		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
-		"sbqOverrideSettings" : {
-			"crewmateGraduation" : false,
-
-			"bellyEffectSlot" : "none",
-			"wombEffectSlot" : "heal",
-			"breastsEffectSlot" : "heal",
-			"ballsEffectSlot" : "none",
-			"shaftEffectSlot" : "none",
-
-			"bellyPredDigestDrops" : false,
-			"tailPredDigestDrops" : false,
-			"wombPredDigestDrops" : false,
-
-			"oralVorePred" : false,
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"navelVorePred" : false,
-
-			"analVorePred" : false,
-			"unbirthPred" : false,
-			"cockVorePred" : false,
-			"breastVorePred" : false
-		},
-		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
-		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
-		"sbqOverridePreyEnabled" : {
-			"preyEnabled": false,
-
-			"digestAllow": false,
-			"cumDigestAllow": false,
-			"femcumDigestAllow": false,
-			"milkDigestAllow": false,
-
-			"cumTransformAllow": false,
-
-			"softDigestAllow" : false,
-			"cumSoftDigestAllow" : false,
-			"femcumSoftDigestAllow": false,
-			"milkSoftDigestAllow" : false,
-
-			"oralVore": false,
-			"tailVore": false,
-			"absorbVore": false,
-			"navelVore": false,
-
-			"analVore": false,
-			"unbirth": false,
-			"cockVore": false,
-			"breastVore": false,
-
-			"bellyInfusion" : false,
-			"cockInfusion" : false,
-			"pussyInfusion" : false,
-			"breastsInfusion" : false
-		}
+		"voreConfig" : [
+			"/humanoid/any/disableAllVorePred.config",
+			"/humanoid/any/disableAllVorePrey.config",
+			"/humanoid/any/disableAllInfusePred.config",
+			"/humanoid/any/disableAllInfusePrey.config",
+			{
+				"overrideSettings" : {
+					"breasts" : true,
+					"genderTF" : false
+				}
+			}
+		]
 
 	},
 	"statusControllerSettings" : {
@@ -212,42 +168,7 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqDidVornyConvertCheck" : true,
-
-
-			// the prey prefrences for this NPC are set here!
-			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-			"sbqPreyEnabled" : {
-				"preyEnabled": false,
-
-				"digestAllow": false,
-
-				"cumDigestAllow": false,
-
-				"transformAllow": true,
-				"genderswapAllow": true,
-
-				"eggAllow": true,
-
-				"held": true,
-
-				"oralVore": false,
-				"tailVore": false,
-				"absorbVore": false,
-				"navelVore": false,
-
-				"analVore": false,
-				"unbirth": false,
-				"cockVore": false,
-				"breastVore": false,
-
-				"bellyInfusion" : false,
-				"cockInfusion" : false,
-				"pussyInfusion" : false,
-				"breastsInfusion" : false
-
-			}
+			"sbqDidVornyConvertCheck" : true
 		}
 	}
 }

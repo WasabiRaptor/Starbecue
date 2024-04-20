@@ -3,6 +3,8 @@ local old = {
 	init = init,
 	update = update,
 	uninit = uninit,
+	tenant_setHome = tenant.setHome,
+	equipped_primary = equipped.primary
 }
 
 dialogueStepScripts = {}
@@ -16,7 +18,8 @@ require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
-
+function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
+end
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
@@ -109,67 +112,18 @@ function interact(args)
 	end
 end
 
-local _equipped_primary = equipped.primary
 function equipped.primary(itemDescriptor)
 	if not itemDescriptor then
 		npc.setItemSlot("primary", "sbqControllerNPC")
 	else
-		return _equipped_primary(itemDescriptor)
+		return old.equipped_primary(itemDescriptor)
 	end
 end
 
--- I fucking hate starbound
--- function recruitable.generateRecruitInfo()
--- 	local rank = config.getParameter("crew.rank") or storage.recruitRank or recruitable.generateRank()
--- 	local parameters = {
--- 		level = npc.level(),
--- 		identity = npc.humanoidIdentity(),
--- 		scriptConfig = {
--- 			personality = personality(),
--- 			crew = {
--- 				rank = rank
--- 			},
---             initialStorage = preservedStorage(),
--- 			sbqSettings = storage.settings,
--- 			uniqueId = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or entity.uniqueId(),
--- 			preservedUuid = config.getParameter("preservedUuid") or config.getParameter("uniqueId") or
--- 			entity.uniqueId()
--- 		},
--- 		statusControllerSettings = {
--- 			statusProperties = {
--- 				sbqPreyEnabled = status.statusProperty("sbqPreyEnabled"),
--- 				sbqStoredDigestedPrey = status.statusProperty("sbqStoredDigestedPrey"),
---                 sbqCumulativeData = status.statusProperty("sbqCumulativeData"),
--- 				speciesAnimOverrideSettings = status.statusProperty("speciesAnimOverrideSettings")
--- 			}
--- 		}
--- 	}
--- 	local poly = mcontroller.collisionPoly()
--- 	if #poly <= 0 then poly = nil end
-
--- 	local name = world.entityName(entity.id())
-
--- 	if not entity.uniqueId() then
--- 	  world.setUniqueId(entity.id(), sb.makeUuid())
--- 	end
-
--- 	storage.statusText = storage.statusText or randomStatusText(personalityType())
-
--- 	return {
--- 		name = name,
--- 		uniqueId = entity.uniqueId(),
--- 		portrait = world.entityPortrait(entity.id(), "full"),
--- 		collisionPoly = poly,
--- 		statusText = storage.statusText,
--- 		rank = rank,
--- 		uniform = storage.crewUniform,
--- 		status = getCurrentStatus(),
--- 		storage = preservedStorage(),
--- 		config = {
--- 			species = npc.species(),
--- 			type = npc.npcType(),
--- 			seed = npc.seed(),
--- 			parameters = parameters
--- 		}
--- 	}
--- end
+function tenant.setHome(...)
+	old.tenant_setHome(...)
+	local parent, recruitUuid = sbq.parentEntity()
+	if parent then
+		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), sbq.getSettingsOf.all())
+	end
+end

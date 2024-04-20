@@ -55,7 +55,7 @@ function sbq.refreshUpgrades(upgraded)
 	storage.sbqSettings.maxDigestPower = 1 + candiesEaten
 	storage.sbqSettings.maxPossibleScale = math.min(2 + candiesEaten, sbq.config.scaleCap)
 	if upgraded then
-		for _, k in ipairs({"digestPower", "cumDigestPower", "femcumDigestPower", "milkDigestPower"}) do
+		for _, k in ipairs({"acidDigestPower", "cumDigestPower", "femcumDigestPower", "milkDigestPower"}) do
 			if storage.sbqSettings[k] == oldMaxDigest then
 				storage.sbqSettings[k] = storage.sbqSettings.maxDigestPower
 			end
@@ -156,7 +156,6 @@ function sbq.setupSettingMetatables(entityType)
 				end
 			end
 
-			setmetatable(sbq.defaultSettings[k][name], {__index = sbq.settings})
 			setmetatable(storage.sbqSettings[k][name], {__index = sbq.defaultSettings[k][name]})
 			setmetatable(sbq.settings[k][name], {__index= storage.sbqSettings[k][name]})
 		end
@@ -298,4 +297,52 @@ function sbq.getString(str)
 		str = sbq.strings[str:sub(2, -1)] or str
 	end
 	return str
+end
+
+sbq.getSettingsOf = {}
+function sbq.getSettingsOf.prefs()
+	return {
+		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
+		infusePrefs = sbq.exportSettingGroup("infusePrefs")
+	}
+end
+function sbq.getSettingsOf.locations()
+	return {
+		locations = sbq.exportSettingGroup("locations"),
+	}
+end
+function sbq.getSettingsOf.all()
+	local output = sbq.exportBaseSettings()
+	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
+	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
+	output.locations = sbq.exportSettingGroup("locations")
+	return output
+end
+
+function sbq.exportBaseSettings()
+	local output = {}
+	for k, _ in pairs(sbq.config.defaultSettings) do
+		output[k] = sbq.settings[k]
+	end
+	return output
+end
+function sbq.exportSettingGroup(group)
+	local output = {}
+	local list = {}
+	local groupData = sbq.config.groupedSettings[group]
+	if type(groupData.list) == "string" then
+		list = sbq.lists[groupData.list] or {}
+	elseif type(groupData.list) == "table" then
+		list = groupData.list
+	end
+	for _, name in ipairs(list) do
+		for k, _ in pairs(groupData.defaultSettings) do
+			output[k] = sbq.settings[group][name][k]
+		end
+	end
+	return output
+end
+
+function sbq.createdDate()
+	return os.date(sbq.getString(":createdOnDate"), os.time()).." v"..root.modMetadata("Starbecue").version
 end

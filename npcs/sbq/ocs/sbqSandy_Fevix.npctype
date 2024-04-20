@@ -2675,81 +2675,53 @@
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "fishingGrandPrize" } // a full week
 		},
 
+		"voreConfig" : {
+			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+			"defaultSettings" : {
+				"breasts" : true,
+				"pussy" : true,
+				"cock" : true,
 
-		// when hunting for prey, a checklist to have them only seek out prey that match the settings
-		// any settings not defined in the checlkist for that vore type can be anything
-		// such as a digestion pred not wanting to eat prey with digestion immunity, or not want to eat other preds, etc.
-		"huntingChecklist" : {
-			"default" : { // mood
-				"preySettings" : {
-					// "digestImmunity" : "false" // example for a pred that would only seek out prey they can digest
-				},
-				"settings" : {
-					// "oralVorePred : "false" // example for a pred that wouldn't eat other oralVore preds
+				"locations" : {
+					"breasts" : {
+						"mainEffect" : "heal"
+					},
+					"womb" : {
+						"mainEffect" : "heal"
+					},
+					"pussy" : {
+						"mainEffect" : "heal"
+					},
+					"tail" : {
+						"mainEffect" : "softDigest"
+					},
+					"belly" : {
+						"mainEffect" : "softDigest",
+						"gurgleSounds" : true
+					},
+					"balls" : {
+						"mainEffect" : "softDigest"
+					},
+					"cock" : {
+						"mainEffect" : "softDigest"
+					}
 				}
-			}
-		},
-		// when baiting a pred, a checklist to have them only seek out preds with certain settings
-		// any settings not defined in the checlkist for that vore type can be anything
-		// such as a prey not wanting to seek out preds that will digest them, or not wanting to seek out preds that do vore types they don't like, or not wanting to seek out preds who can also be prey
-		"baitingChecklist" : {
-			"default" : { // mood
-				"preySettings" : {
-					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
+			},
+			// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+			"overrideSettings" : {
+				"vorePrefs" : {
+					"navelVore" : {
+						"pred" : false,
+						"prey" : false
+					},
+					"analVore" : {
+						"pred" : false,
+						"prey" : false
+					}
 				},
-				"settings" : {
-					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
-				}
+				"speciesTF" : false
 			}
-		},
-
-		// the pred prefrences and general settings for this NPC are set here!
-		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-		"sbqSettings" : {
-			"mood" : "default",
-			"personality" : "default",
-
-			"bellyEffectSlot" : "softDigest", // the settings in this group exist for each location, just use the correct name (belly, balls, shaft, womb, tail, breasts)
-
-			"bellySounds" : true,
-			"displayDigest" : false,
-
-			"escapeDifficulty": 0,
-			"escapeDifficultyMin": 0,
-			"escapeDifficultyMax": 0,
-
-			"impossibleEscape": false,
-			"hammerspace" : false,
-
-			// predator prefrences
-			"oralVorePred" : true,
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"navelVorePred" : false,
-
-			"analVorePred" : false,
-			"unbirthPred" : false,
-			"cockVorePred" : false,
-			"breastVorePred" : false
-		},
-
-		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
-		"sbqOverrideSettings" : {
-			"crewmateGraduation" : false,
-
-			"tailVorePred" : false,
-			"absorbVorePred" : false,
-			"analVorePred" : false,
-			"navelVorePred" : false
-		},
-		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
-		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
-		"sbqOverridePreyEnabled" : {
-			"analVore" : false,
-			"navelVore" : false
 		}
-
 	},
 	"statusControllerSettings" : {
 		"stats" : {
@@ -2799,40 +2771,7 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqDidVornyConvertCheck" : true,
-
-			// the prey prefrences for this NPC are set here!
-			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-			"sbqPreyEnabled" : {
-				"preyEnabled": true,
-
-				"digestAllow": true,
-				"cumDigestAllow": true,
-				"milkDigestAllow": true,
-
-				"transformAllow": true,
-				"genderswapAllow": true,
-
-				"eggAllow": true,
-
-				"held": true,
-
-				"oralVore": true,
-				"tailVore": true,
-				"absorbVore": true,
-				"navelVore": true,
-
-				"analVore": true,
-				"unbirth": true,
-				"cockVore": true,
-				"breastVore": true,
-
-				"bellyInfusion" : true,
-				"cockInfusion" : true,
-				"pussyInfusion" : true,
-				"breastsInfusion" : true
-			}
+			"sbqDidVornyConvertCheck" : true
 		}
 	}
 }

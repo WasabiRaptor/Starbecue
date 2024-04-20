@@ -59,23 +59,6 @@ function misc.generateSettingsCard(type)
 	return { name = "secretnote", count = 1, parameters = {
 		shortdescription = sbq.strings[type.."SettingsCard"] or type.."SettingsCard",
 		description = sbq.createdDate(),
-		sbqSettings = misc.getSettingsOf[type]()
+		sbqSettings = sbq.getSettingsOf[type]()
 	}, }
-end
-misc.getSettingsOf = {}
-function misc.getSettingsOf.prefs()
-	local merged = sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
-	return {
-		vorePrefs = merged.vorePrefs,
-		infusePrefs = merged.infusePrefs
-	}
-end
-function misc.getSettingsOf.locations()
-	local merged = sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
-	return {
-		locations = merged.locations,
-	}
-end
-function misc.getSettingsOf.all()
-	return sb.jsonMerge(sbq.defaultSettings, storage.sbqSettings, sbq.settings)
 end

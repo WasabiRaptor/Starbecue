@@ -2768,45 +2768,73 @@
 			]
 		},
 
+		"voreConfig" : {
+			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+			"defaultSettings" : {
+				"breasts" : true,
+				"pussy" : true,
+				"cock" : true,
 
+				"locations" : {
+					"breasts" : {
+						"mainEffect" : "softDigest"
+					},
+					"womb" : {
+						"mainEffect" : "heal"
+					},
+					"pussy" : {
+						"mainEffect" : "heal"
+					},
+					"tail" : {
+						"mainEffect" : "heal"
+					},
+					"belly" : {
+						"mainEffect" : "softDigest"
+					},
+					"balls" : {
+						"mainEffect" : "softDigest"
+					}
+				}
 
-		// any setting you define above can be modified by a player, this table allows you to define settings a player *cannot* modify, making sure your OC is always in line with your prefrences
-		"sbqOverrideSettings" : {
-			"crewmateGraduation" : false,
+			},
+			// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+			"overrideSettings" : {
+				"infusePrefs" : {
+					"pawInfuse" : {
+						"prey" : false
+					}
+				},
+				"vorePrefs" : {
+					"navelVore" : {
+						"pred" : false,
+						"prey" : false
+					},
+					"absorbVore" : {
+						"pred" : false
+					}
+				},
+				"locations" : {
+					"cock" : {
+						"mainEffect" : "none"
+					},
+					"ass" : {
+						"mainEffect" : "none"
+					}
+				},
+				"acidDigestFatal" : false,
+				"cumDigestFatal" : false,
+				"milkDigestFatal" : false,
+				"femcumDigestFatal" : false,
+				"femcumDigestDrops" : false,
 
-			"navel" : false,
-			"navelVorePred" : false,
-			"digestEnable" : false,
-
-			"wombDigestEnable" : false,
-			"wombSoftDigestEnable" : false,
-
-			"bellyPredDigestDrops" : false,
-			"tailPredDigestDrops" : false,
-			"wombPredDigestDrops" : false,
-
-			"bellyDigestEnable" : false,
-			"ballsDigestEnable" : false,
-			"tailDigestEnable" : false,
-			"breastsDigestEnable" : false,
-			"shaftEffectSlot" : "none",
-			"shaftDigestEnable" : false,
-			"shaftSoftDigestEnable" : false,
-			"shaftHealEnable" : false
-		},
-		// prey enabled settings are down below, but here are the override settings, which follow the same rules as below, however, a player is *not* allowed to modify any of these settings
-		// this is how you can enforce your OC only being prey for things they enjoy, or if they're prey at all
-		"sbqOverridePreyEnabled" : {
-			"navelVore": false,
-
-			"genderswapAllow": false,
-
-			"femcumSoftDigestAllow": false,
-
-			"digestAllow": false,
-			"cumDigestAllow": false,
-			"femcumDigestAllow": false,
-			"milkDigestAllow": false
+				"speciesTF" : false,
+				"genderTF" : false
+			},
+			"invalidSettings" : {
+				"mainEffect" : {
+					"digest" : "softDigest"
+				}
+			}
 		}
 	},
 	"statusControllerSettings" : {
@@ -2857,45 +2885,7 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqDidVornyConvertCheck" : true,
-
-			// the prey prefrences for this NPC are set here!
-			// set each one to the value you want, if there are any that are unset, they'll just go to the default values
-
-			"sbqPreyEnabled" : {
-				"preyEnabled": true,
-
-				"transformAllow": true,
-				"genderswapAllow": false,
-
-				"digestAllow": false,
-				"cumDigestAllow": false,
-				"femcumDigestAllow": false,
-				"milkDigestAllow": false,
-
-				"softDigestAllow" : true,
-				"cumSoftDigestAllow" : true,
-				"milkSoftDigestAllow" : true,
-
-				"eggAllow": true,
-
-				"held": true,
-
-				"oralVore": true,
-				"tailVore": true,
-				"absorbVore": true,
-				"navelVore": false,
-
-				"analVore": true,
-				"unbirth": true,
-				"cockVore": true,
-				"breastVore": true,
-
-				"bellyInfusion" : true,
-				"cockInfusion" : true,
-				"pussyInfusion" : true,
-				"breastsInfusion" : true
-			}
+			"sbqDidVornyConvertCheck" : true
 		}
 	},
 	"items" : {

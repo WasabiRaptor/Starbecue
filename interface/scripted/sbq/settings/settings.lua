@@ -292,7 +292,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {}).locations or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
+			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {})[param.groupName] or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
 			if not result then
 				local toolTip = sbq.strings[k] or k
 				local icon
@@ -352,7 +352,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 
-function sbq.widgetScripts.makeInfusionSlots(param)
+function sbq.widgetScripts.makeInfuseSlots(param)
 	local infuseSlots = {}
 	sbq.settingIdentifiers[sbq.widgetSettingIdentifier(param)] = {param.setting, param.groupName, param.groupKey}
 	local layout = {
@@ -367,13 +367,13 @@ function sbq.widgetScripts.makeInfusionSlots(param)
 		if (sbq.voreConfig.availableInfuseTypes or {})[infuseType] then
 			canInfuse = true
 			local glyph = "/interface/scripted/sbq/" .. infuseType .. "Slot.png"
-			local item = sbq.settings[param.setting][infuseType].slot
+			local item = sbq.settings[param.setting][infuseType].item
 			table.insert(infuseSlots, {
 				visible = sbq.settings.infusePrefs[infuseType].pred or false,
 				item = item.name and item,
 				glyph = root.assetExists(glyph) and glyph,
 				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot),
-				setting = "slot",
+				setting = "item",
 				groupName = param.setting,
 				groupKey = infuseType,
 				script = "changeSetting"

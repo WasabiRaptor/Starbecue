@@ -43,7 +43,7 @@ function update(dt)
 		end
 	else
 		local health = status.resource("health")
-		local digestAmount = (self.digestRate * dt * status.stat(config.getParameter("resistance") or "sbqDigestResistance") * status.stat("sbqDigestingPower"))
+		local digestAmount = (self.digestRate * dt * status.stat(config.getParameter("resistance") or "sbqAcidDigestResistance") * status.stat("sbqDigestingPower"))
 		if self.turboDigest > 0 then
 			digestAmount = digestAmount * 10
 		end

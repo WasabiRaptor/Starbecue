@@ -7,23 +7,27 @@
 		"bellyColorRemap" : "",
 		"bellyInfusedColorRemap" : "",
 		"bellyInfusedFade" : "",
+		"bellyInfusedDirectives" : "",
 
 		"tailImage" : "",
 		//"tailImage" : "/humanoid/any/sbqVoreParts/tail.png",
 		"tailColorRemap" : "",
 		"tailInfusedColorRemap" : "",
 		"tailInfusedFade" : "",
+		"tailInfusedDirectives" : "",
 
 		"cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
 		"cockColorRemap" : "",
 		"cockInfusedColorRemap" : "",
 		"cockInfusedFade" : "",
+		"cockInfusedDirectives" : "",
 
 		"balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
 		"balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
 		"ballsColorRemap" : "",
 		"ballsInfusedColorRemap" : "",
 		"ballsInfusedFade" : "",
+		"ballsInfusedDirectives" : "",
 
 		"breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
 		"breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
@@ -31,11 +35,13 @@
 		"breastsColorRemap" : "",
 		"breastsInfusedColorRemap" : "",
 		"breastsInfusedFade" : "",
+		"breastsInfusedDirectives" : "",
 
 		"pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
 		"pussyColorRemap" : "",
 		"pussyInfusedColorRemap" : "",
 		"pussyInfusedFade" : "",
+		"pussyInfusedDirectives" : "",
 
 		"bellySize" : "0",
 		"bellyInterpolateSize" : "0",
@@ -863,7 +869,7 @@
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<bellyInfusedColorRemap><bellyColorRemap><bodyDirectives><bellyInfusedFade>"
+					"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyColorRemap><bodyDirectives><bellyInfusedFade>"
 				},
 				"partStates": {
 					"bellyState": {
@@ -908,7 +914,7 @@
 					"zLevel": -0.5,
 					"transformationGroups": ["movementOffset", "tailOffset"],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<tailInfusedColorRemap><tailColorRemap><bodyDirectives><tailInfusedFade>"
+					"processingDirectives" : "<tailInfusedColorRemap><tailInfusedDirectives><tailColorRemap><bodyDirectives><tailInfusedFade>"
 				},
 				"partStates": {
 					"bodyState": {
@@ -953,7 +959,7 @@
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0.5, -1.5],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<cockInfusedColorRemap><cockColorRemap><bodyDirectives><cockInfusedFade>"
+					"processingDirectives" : "<cockInfusedColorRemap><cockInfusedDirectives><cockColorRemap><bodyDirectives><cockInfusedFade>"
 				},
 				"partStates": {
 					"bodyState": {
@@ -999,7 +1005,7 @@
 					"zLevel": 0.111,
 					"anchorPart": "cock",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<ballsInfusedColorRemap><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
+					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
 				},
 				"partStates": {
 					"balls_frontState": {
@@ -1046,7 +1052,7 @@
 					"zLevel": 0.101,
 					"anchorPart": "cock",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<ballsInfusedColorRemap><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
+					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
 				},
 				"partStates": {
 					"balls_backState": {
@@ -1122,7 +1128,7 @@
 					"zLevel": 0.601,
 					"anchorPart": "breasts",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<breastsInfusedColorRemap><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
+					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
 				},
 				"partStates": {
 					"breasts_frontState": {
@@ -1169,7 +1175,7 @@
 					"zLevel": 0.401,
 					"anchorPart": "breasts",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<breastsInfusedColorRemap><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
+					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
 				},
 				"partStates": {
 					"breasts_backState": {
@@ -1218,7 +1224,7 @@
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0, -2],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<pussyInfusedColorRemap><pussyColorRemap><bodyDirectives><pussyInfusedFade>"
+					"processingDirectives" : "<pussyInfusedColorRemap><pussyInfusedDirectives><pussyColorRemap><bodyDirectives><pussyInfusedFade>"
 				},
 				"partStates": {
 					"pussyState": {
