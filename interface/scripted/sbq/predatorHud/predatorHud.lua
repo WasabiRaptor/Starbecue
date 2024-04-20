@@ -72,7 +72,7 @@ function sbq.refreshOccupants()
 					})
 				else
 					table.insert(actions, {
-						"^#555;^set;" .. sbq.getString(action.name or (":" .. action.action)),
+						"^#555;^set;" .. _ENV.metagui.formatText(action.name or (":" .. action.action)),
 						function() end,
 						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
 					})
