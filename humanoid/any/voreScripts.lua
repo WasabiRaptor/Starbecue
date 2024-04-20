@@ -223,7 +223,8 @@ function default:turboDigestAvailable(name, action, target, ...)
 	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.digest) and (not location.mainEffect.softDigest)) then return false, "invalidAction" end
-	return (mainEffect == "digest") or (mainEffect == "softDigest")
+	if not ((mainEffect == "digest") or (mainEffect == "softDigest")) then return false, "invalidAction" end
+	return true
 end
 function default:turboDigest(name, action, target, ...)
 	if not self:turboDigestAvailable(name, action, target, ...) then return false end
@@ -234,11 +235,12 @@ end
 
 function default:turboHealAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.heal)) then return false, "invalidAction" end
-	return (mainEffect == "heal")
+	if not (mainEffect == "heal") then return false, "invalidAction" end
+	return true
 end
 function default:turboHeal(name, action, target, ...)
 	if not self:turboHealAvailable(name, action, target, ...) then return false end
@@ -247,7 +249,7 @@ function default:turboHeal(name, action, target, ...)
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
 end
 
-function default:digest(name, action, target, ...)
+function default:digested(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	local location = occupant:getLocation()
@@ -257,6 +259,29 @@ function default:digest(name, action, target, ...)
 	occupant.size = action.size or location.digestedSize or 0
 	location:markSizeDirty()
 	return true, function () occupant:refreshLocation()  end
+end
+
+function default:fatal(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+    if not occupant then return false end
+	occupant:modifyResourcePercentage("health", -2)
+end
+
+function default:mainEffectAvailable(name, action, target)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false, "invalidAction" end
+	if occupant.locationSettings.mainEffect == (action.mainEffect or name) then return false, "invalidAction" end
+	local location = occupant:getLocation()
+	if location.mainEffect[action.mainEffect or name] then
+		return true
+	end
+	return false, "invalidAction"
+end
+function default:setMainEffect(name, action, target)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	occupant.locationSettings.mainEffect = action.mainEffect or name
+	occupant:refreshLocation()
 end
 
 function default:reform(name, action, target,...)

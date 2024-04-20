@@ -33,7 +33,7 @@ function update(dt)
 			sbq.addRPC(world.sendEntityMessage(
 				effect.sourceEntity(),
 				"sbqQueueAction",
-				config.getParameter("digestAction") or "digest",
+				config.getParameter("digestedAction") or "digested",
 				entity.id()
 			), function (recieved)
 				if not recieved then self.digestSent = false end

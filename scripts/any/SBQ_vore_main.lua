@@ -260,7 +260,6 @@ function sbq.groupedSettingChanged.locations(name,k,v)
 end
 
 function sbq.groupedSettingChanged.infuseSlots(name, k, v)
-	sbq.logInfo(name.." changed")
 	SpeciesScript:refreshInfusion(name)
 end
 
@@ -676,12 +675,7 @@ function _Location:setInfusionData()
 			end
 		end
 	end
-	sbq.logInfo(self.tag)
-	sbq.logInfo(self.infuseType)
 	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-	sbq.logInfo(storage.sbqSettings.infuseSlots[self.infuseType].item)
-	sbq.logInfo(infusedItem)
-
 	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "") or {}
 	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParameters.identity") or {}
 	local infuseData = {}
