@@ -352,7 +352,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 
-function sbq.widgetScripts.makeInfusionSlots(param)
+function sbq.widgetScripts.makeInfuseSlots(param)
 	local infuseSlots = {}
 	sbq.settingIdentifiers[sbq.widgetSettingIdentifier(param)] = {param.setting, param.groupName, param.groupKey}
 	local layout = {
@@ -367,7 +367,7 @@ function sbq.widgetScripts.makeInfusionSlots(param)
 		if (sbq.voreConfig.availableInfuseTypes or {})[infuseType] then
 			canInfuse = true
 			local glyph = "/interface/scripted/sbq/" .. infuseType .. "Slot.png"
-			local item = sbq.settings[param.setting][infuseType].slot
+			local item = sbq.settings[param.setting][infuseType].item
 			table.insert(infuseSlots, {
 				visible = sbq.settings.infusePrefs[infuseType].pred or false,
 				item = item.name and item,

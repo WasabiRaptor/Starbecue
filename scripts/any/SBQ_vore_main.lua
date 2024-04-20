@@ -259,6 +259,11 @@ function sbq.groupedSettingChanged.locations(name,k,v)
 	end
 end
 
+function sbq.groupedSettingChanged.infuseSlots(name, k, v)
+	sbq.logInfo(name.." changed")
+	SpeciesScript:refreshInfusion(name)
+end
+
 -- transformation handling
 function _SpeciesScript:getLocation(...)
 	if not self.state then return false end
@@ -654,7 +659,7 @@ end
 function _SpeciesScript:refreshInfusion(slot)
 	for k, v in pairs(self.locations) do
 		local location = self:getLocation(k)
-		if location and location.infusionSlot and ((not slot) or (slot == location.infusionSlot)) then
+		if location and location.infuseType and ((not slot) or (slot == location.infuseType)) then
 			location:setInfusionData()
 		end
 	end
@@ -671,8 +676,13 @@ function _Location:setInfusionData()
 			end
 		end
 	end
-	local infusedItem = sbq.settings.infusionSlots[self.infusionSlot].item
-	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "")
+	sbq.logInfo(self.tag)
+	sbq.logInfo(self.infuseType)
+	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
+	sbq.logInfo(storage.sbqSettings.infuseSlots[self.infuseType].item)
+	sbq.logInfo(infusedItem)
+
+	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "") or {}
 	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParameters.identity") or {}
 	local infuseData = {}
 	if infuseSpeciesConfig then
@@ -680,9 +690,9 @@ function _Location:setInfusionData()
 		infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or infuseSpeciesConfig.infuseData.default or infuseSpeciesConfig.infuseData or {})
 	end
 
-	local metatable = getmetatable(sbq.settings)
-	sbq.settings = sb.jsonMerge(sbq.settings, infuseData.overrideSettings or {})
-	setmetatable(sbq.settings, metatable)
+	-- local metatable = getmetatable(sbq.settings)
+	-- sbq.settings = sb.jsonMerge(sbq.settings, infuseData.overrideSettings or {})
+	-- setmetatable(sbq.settings, metatable)
 
 	local tagsSet = {
 		globalTags = {},

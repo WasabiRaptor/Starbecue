@@ -18,7 +18,8 @@ require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
-
+function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
+end
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")

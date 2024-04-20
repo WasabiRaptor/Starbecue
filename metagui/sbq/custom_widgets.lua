@@ -129,14 +129,16 @@ function widgets.sbqSetting:init(base, param)
 		if errorString then sbq.logError(errorString) end
 		param = sb.jsonMerge(param, sbq.gui.defaultSettingTypeWidgets[param.settingType] or sbq.gui.defaultSettingTypeWidgets.invalidType)
 	end
-	if param.makeLabel then
-		param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", mode = "horizontal", children = {
-			param,
-			{ type = "label", id = sbq.widgetSettingIdentifier(param).."Label", text = ":"..param.setting}
-		}}
+	if param then
+		if param.makeLabel then
+			param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", mode = "horizontal", children = {
+				param,
+				{ type = "label", id = sbq.widgetSettingIdentifier(param).."Label", text = ":"..param.setting}
+			} }
+		end
+		self.parent:addChild(param)
 	end
 	self.id = nil
-	self.parent:addChild(param)
 	self:delete()
 end
 
@@ -1154,8 +1156,7 @@ function widgets.sbqItemSlot:init(base, param)
 
 	if self.script then
 		function self:onItemModified()
-			sbq.logInfo(self:item(),2)
-			sbq.widgetScripts[self.script](self:item(), self.setting, self.groupName,self.groupKey)
+			sbq.widgetScripts[self.script](self:item() or {}, self.setting, self.groupName, self.groupKey)
 		end
 	end
 	if self.acceptScript then
