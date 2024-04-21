@@ -47,6 +47,7 @@ function controlReleased(seat, control, time)
 end
 
 function sbq.init(config)
+	sbq.defaultAnimatorTags = animator.getTags()
 	sbq.settingsInit()
 	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
@@ -606,6 +607,7 @@ end
 
 -- Location handling
 function _SpeciesScript:addLocation(name, config)
+	local infuseLocation = {}
 	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()))
 	location.tag = name
 	location.key = name
@@ -645,7 +647,7 @@ function _SpeciesScript:addLocation(name, config)
 		subLocation.tag = name .. "_".. k
 		subLocation.subKey = k
 		location.occupancy.subLocations[k] = subLocation.occupancy
-		setmetatable(subLocation, { __index = location })
+		setmetatable(subLocation, { __index = infuseLocation })
 	end
 
 	Occupants.locations[name] = location.occupancy
@@ -653,7 +655,8 @@ function _SpeciesScript:addLocation(name, config)
 	setmetatable(location.settings, {__index = sbq.settings.locations[location.settingsTable or name]})
 	setmetatable(location, { __index = self.species.locations[name] or _Location })
 	self.baseLocations[name] = location
-	self.locations[name] = location
+	setmetatable(infuseLocation, {__index = location})
+	self.locations[name] = infuseLocation
 end
 function _SpeciesScript:refreshInfusion(slot)
 	for k, v in pairs(self.locations) do
@@ -667,11 +670,11 @@ end
 function _Location:setInfusionData()
 	if self.infuseTagsSet then
 		for k, _ in pairs(self.infuseTagsSet.globalTags) do
-			animator.setGlobalTag(sbq.defaultAnimatorTags.globalTags[k] or "default")
+			animator.setGlobalTag(k, sbq.defaultAnimatorTags.globalTags[k] or "default")
 		end
 		for part, v in pairs(self.infuseTagsSet.partTags) do
 			for k, _ in pairs(v) do
-				animator.setPartTag(part, sbq.defaultAnimatorTags.partTags[part][k])
+				animator.setPartTag(part, k, sbq.defaultAnimatorTags.partTags[part][k])
 			end
 		end
 	end
@@ -715,15 +718,10 @@ function _Location:setInfusionData()
 	local locationData = sb.jsonMerge(infuseData.locationOverrides, {
 		infuseTagsSet = tagsSet
 	})
-	local base = SpeciesScript.baseLocations[self.key]
-	locationData.subLocations = locationData.subLocations or {}
-	for k, v in pairs(base.subLocations or {}) do
-		locationData.subLocations[k] = locationData.subLocations[k] or {}
-		setmetatable(locationData.subLocations[k], {__index = v})
+	for k, _ in pairs(SpeciesScript.locations[self.key]) do
+		SpeciesScript.locations[self.key][k] = nil
 	end
-	sbq.logInfo(tagsSet,2)
-	setmetatable(locationData, { __index = base })
-	SpeciesScript.locations[self.key] = locationData
+	util.mergeTable(SpeciesScript.locations[self.key], locationData)
 	self:markSettingsDirty()
 	self:markSizeDirty()
 end

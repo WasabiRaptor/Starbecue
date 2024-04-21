@@ -11,7 +11,6 @@ function equipmentSlotUpdated(slot, itemDescriptor)
 end
 
 function initAnimator()
-	sbq.defaultAnimatorTags = animator.getTags()
 	old.initAnimator()
     --sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
 	sbq.refreshRemapTags()
