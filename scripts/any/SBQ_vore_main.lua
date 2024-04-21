@@ -104,7 +104,7 @@ function sbq.passiveStatChanges(dt)
 		end
 	end
 	if sbq.isResource("sbqRest") then
-		if sbq.isLounging() then
+		if sbq.loungingIn() then
 			sbq.modifyResource("sbqRest", sbq.stat("sbqRestScriptDelta") * dt * (sbq.resourcePercentage("health")))
 		else
 			sbq.modifyResource("sbqRest", sbq.stat("sbqRestScriptDelta") * dt * (1 - math.min(sbq.resourcePercentage("health"), 0.8)))
@@ -305,6 +305,11 @@ function _SpeciesScript:interact(...)
 	return self.state:interact(...)
 end
 
+function _SpeciesScript:interactAction(...)
+	if not self.state then return false, "invalidState" end
+	return self.state:interactAction(...)
+end
+
 function _SpeciesScript:emergencyEscape(...)
 	if not self.state then return false, "invalidState" end
 	return self.state:emergencyEscape(...)
@@ -415,10 +420,11 @@ function _State:tryAction(name, target, ...)
 end
 
 function _State:requestAction(name, target, consent, ...)
+	sbq.logInfo({name, target, consent})
 	-- TODO do stuff with checking consent here later
 	if not consent then return end
 	if not sbq.settings.interactDialogue then
-		SpeciesScript:tryAction(name, target, ...)
+		return SpeciesScript:tryAction(name, target, ...)
 	end
 	-- TODO do stuff with dialogue here later
 	SpeciesScript:tryAction(name, target, ...)
@@ -533,6 +539,55 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 end
 
 function _State:interact(args)
+	if sbq.settings.interactDialogue then
+		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+			dialogueTree = sbq.dialogueTree
+		})
+		if sbq.loungingIn() == args.sourceId then
+			dialogueBoxData.dialogueTreeStart = ".predInteract"
+			dialogueBoxData.noActions = true
+			-- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
+			-- 	entity.id(),
+			--     "The quick brown fox jumped over the lazy dog.",
+			-- }}}
+		elseif Occupants.entityId[tostring(args.sourceId)] then
+			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
+		end
+		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+	elseif Occupants.entityId[tostring(args.sourceId)] then
+		local options = {}
+		for _, action in ipairs(sbq.actionList("request", args.sourceId) or {}) do
+			table.insert(options, {
+				name = sbq.getString((action.name or (":" .. action.action)) or ""),
+				args = { action.action, args.sourceId, true, table.unpack(action.args or {}) },
+				locked = not action.available,
+				description = sbq.getString(action.requestDescription or (":"..action.action.."RequestDesc"))
+			})
+		end
+		return {"ScriptPane", {
+			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			options = options,
+			default = {
+				messageTarget = entity.id(),
+				message = "sbqRequestAction",
+				close = true
+			},
+			cancel = {
+				args = false,
+				message = false
+			}
+		}, args.sourceId}
+	else
+		if sbq.loungingIn() == args.sourceId then return end
+
+		local results = { SpeciesScript:interactAction(args) }
+		if results[2] == "interactAction" then
+			return results[3]
+		end
+	end
+end
+
+function _State:interactAction(args)
 	local interactActions = self.interactActions
 	local occupant = Occupants.entityId[tostring(args.sourceId)]
 	if occupant then
@@ -1140,7 +1195,7 @@ function _Occupant:update(dt)
 
 	if self.flags.infused then
 	elseif self.flags.digested then
-	elseif not (self.flags.newOccupant) then
+	elseif not (self.flags.newOccupant or self.flags.releasing) then
 		local oldMultiplier = self.sizeMultiplier
 		local compression = location.settings.compression
 		local compressionMin = location.settings.compressionMin
@@ -1210,7 +1265,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
-	elseif not (self.flags.newOccupant) then
+	elseif not (self.flags.newOccupant or self.flags.releasing) then
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do

@@ -30,6 +30,7 @@ function init()
 	sbq.sayPortrait = npc.sayPortrait
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.releaseLoungeControl = npc.releaseLoungeControl
+	sbq.loungingIn = npc.loungingIn
 
 
 	message.setHandler("sbqInteract", function(_, _, pred, predData)

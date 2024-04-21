@@ -87,29 +87,7 @@ function interact(args)
 	end
 	_ENV.setInteracted(args)
 
-	if sbq.settings.interactDialogue then
-		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
-			dialogueTree = sbq.dialogueTree
-		})
-		if npc.loungingIn() == args.sourceId then
-			dialogueBoxData.dialogueTreeStart = ".predInteract"
-			dialogueBoxData.noActions = true
-			-- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
-			-- 	entity.id(),
-			--     "The quick brown fox jumped over the lazy dog.",
-			-- }}}
-		elseif Occupants.entityId[tostring(args.sourceId)] then
-			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
-		end
-		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
-	else
-		if npc.loungingIn() == args.sourceId then return end
-
-		local results = { SpeciesScript:interact(args) }
-		if results[2] == "interactAction" then
-			return results[3]
-		end
-	end
+	return SpeciesScript:interact(args)
 end
 
 function equipped.primary(itemDescriptor)

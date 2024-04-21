@@ -19,6 +19,7 @@ function init()
 	sbq.sayPortrait = monster.sayPortrait
 	sbq.setLoungeControlHeld = monster.setLoungeControlHeld
 	sbq.releaseLoungeControl = monster.releaseLoungeControl
+	sbq.loungingIn = monster.loungingIn
 
 	if self.behavior then
 		local behavior = {}

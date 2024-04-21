@@ -135,6 +135,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	if throughput or action.throughput then
 		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
 	end
+	occupant.flags.releasing = true
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
 	SpeciesScript.lockActions = true
@@ -144,31 +145,25 @@ function default:tryLetout(name, action, target, throughput, ...)
 		if occupant then occupant:remove() end
 	end
 end
-local function letout(funcName, action, target, preferredAction, skip, ...)
+local function letout(funcName, action, target, preferredAction, ...)
 	if target then
 		occupant = Occupants.entityId[tostring(target)]
 		if not occupant then return end
 		location = SpeciesScript:getLocation(occupant.location, occupant.subLocation)
 		local exitTypes = location.exitTypes or location.entryTypes
-		if preferredAction then
-			for _, exitType in ipairs(exitTypes or {}) do
-				if (exitType == preferredAction) or (preferredAction == "vore") then
-					if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
-						return true
-					end
-				end
-			end
-		end
-		if skip then return false end
+
 		for _, exitType in ipairs(exitTypes or {}) do
-			if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
-				return true
+			if (exitType == preferredAction) or (preferredAction == "vore") or (not preferredAction) then
+				sbq.logInfo(exitType)
+				if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
+					return true
+				end
 			end
 		end
 	else
 		for i = #Occupants.list, 1, -1 do
 			local occupant = Occupants.list[i]
-			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction, true) then
+			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction) then
 				return true
 			end
 		end

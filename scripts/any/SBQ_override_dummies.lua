@@ -76,8 +76,7 @@ end
 function sbq.releaseLoungeControl(control)
 end
 
-function sbq.isLounging()
-	return world.entityCurrentLounge(entity.id())
+function sbq.loungingIn()
 end
 
 function sbq.isLoungeDismountable()
