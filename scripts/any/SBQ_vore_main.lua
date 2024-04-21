@@ -834,6 +834,10 @@ function _Location:updateOccupancy(dt)
 			location:updateOccupancy(0, name)
 			addVisual = addVisual + location.occupancy.visualSize
 		end
+		if self.infuseType then
+			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
+			addVisual = addVisual + ((sb.jsonQuery(infusedItem, "parameters.preySize") or 0) * self.settings.infusedSize)
+		end
 		self.occupancy.visualSize = sbq.getClosestValue(
 			math.min(
 				self.settings.visualMax,

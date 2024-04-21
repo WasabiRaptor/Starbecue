@@ -8,6 +8,10 @@ function sbq.generateNPCItemCard(tenant)
 	elseif npcConfig.scriptConfig.sbqNPC then
 		item.parameters.rarity = "uncommon"
 	end
+	local eid = world.getUniqueEntityId(tenant.uniqueId)
+	if eid then
+		item.parameters.preySize = sbq.getEntitySize(eid)
+	end
 
 	item.parameters.shortdescription = ((tenant.overrides or {}).identity or {}).name or ""
 	item.parameters.inventoryIcon = root.npcPortrait("bust", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
@@ -24,6 +28,5 @@ function sbq.generateNPCItemCard(tenant)
 		npcParam = tenant.overrides,
 		npcSpawn = tenant.spawn
 	}
-	item.parameters.preySize = 1
 	return item
 end
