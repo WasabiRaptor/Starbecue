@@ -681,8 +681,7 @@ function _Location:setInfusionData()
 	local infuseData = {}
 	if infuseSpeciesConfig then
 		infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-		infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or
-			infuseSpeciesConfig.infuseData.default or infuseSpeciesConfig.infuseData or {})
+		infuseData = sb.jsonMerge(root.fetchConfigArray(infuseSpeciesConfig.infuseData.default or {}), root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or {}))
 		infuseData = sb.jsonMerge(infuseData, sb.jsonQuery(infuseData, "locations."..self.tag) or {})
 	end
 	-- util.mergeTable(sbq.settings, infuseData.overrideSettings or {})
