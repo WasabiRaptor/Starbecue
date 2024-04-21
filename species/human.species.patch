@@ -44,53 +44,7 @@
 		"/humanoid/any/voreOccupants.animation" // this adds the animations for prey being eaten by the pred
 	],
 
-	"infuseData" : {
-		"default" : { // default infuse data used for any species
-			"overrideSettings" : {}, // override settings applied when infused anywhere
-			"locations" : {
-				"cock" : {
-					"overrideSettings" : {}, // override settings applied when infused in a specific location
-					"locationOverrides" : {}, // override for locationdata
-					"globalTags" : {}, // global tags to set in the animator, such as replacing the sprite for the part (will use the species' normal sprite for the part if not defined)
-					"colorRemapGlobalTags" : {
-						"cockInfuseColorRemap" : [
-							["primary","primary"],
-							["secondary","secondary"]
-						]
-					}
-				},
-				"balls" : {
-					"colorRemapGlobalTags" : {
-						"cockInfuseColorRemap" : [
-							["primary","secondary"],
-							["secondary","primary"]
-						]
-					}
-				},
-				"pussy" : {
-					"colorRemapGlobalTags" : {
-						"pussyInfuseColorRemap" : [
-							["primary","primary"],
-							["flesh","secondary"],
-							["secondary","secondary"]
-						]
-					}
-				},
-				"belly" : {
-					"colorRemapGlobalTags" : {
-						"pussyInfuseColorRemap" : [
-							{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
-							{"a94783":"ffc181", "check" : {"visibleNavel":false}},
-							["primary","primary"],
-							["secondary","secondary"]
-						]
-					}
-				}
-			}
-		},
-		"sbqAuri_LokiVulpix" : { // example for infuseData used by a specific species that has a different body layout and therefore may need different sprites
-
-		}
-	}
-
+	"infuseData" : [
+		"/humanoid/any/basicInfuseData.config"
+	]
 }}]

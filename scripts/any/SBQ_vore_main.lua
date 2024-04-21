@@ -676,44 +676,42 @@ function _Location:setInfusionData()
 		end
 	end
 	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-	local infuseSpeciesConfig = sb.jsonQuery(infusedItem, "parameters.speciesConfig") or root.speciesConfig(sb.jsonQuery(item, "parameters.npcArgs.npcSpecies") or "") or {}
-	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParameters.identity") or {}
+	local infuseSpeciesConfig = root.speciesConfig(sb.jsonQuery(infusedItem, "parameters.npcArgs.npcSpecies") or "") or sb.jsonQuery(infusedItem, "parameters.speciesConfig") or {}
+	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParam.identity") or {}
 	local infuseData = {}
 	if infuseSpeciesConfig then
 		infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-		infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or infuseSpeciesConfig.infuseData.default or infuseSpeciesConfig.infuseData or {})
+		infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or
+			infuseSpeciesConfig.infuseData.default or infuseSpeciesConfig.infuseData or {})
+		infuseData = sb.jsonMerge(infuseData, sb.jsonQuery(infuseData, "locations."..self.tag) or {})
 	end
-
-	-- local metatable = getmetatable(sbq.settings)
-	-- sbq.settings = sb.jsonMerge(sbq.settings, infuseData.overrideSettings or {})
-	-- setmetatable(sbq.settings, metatable)
+	-- util.mergeTable(sbq.settings, infuseData.overrideSettings or {})
 
 	local tagsSet = {
 		globalTags = {},
 		partTags = {}
 	}
 	local defaultColorMap = root.speciesConfig("human").baseColorMap
-	for tag, remaps in pairs(infuseSpeciesConfig.colorRemapGlobalTags or {}) do
-		local sourceColorMap = sb.jsonQuery(infuseSpeciesConfig, "infuseColorRemapSources." .. tag)
+	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
+		local sourceColorMap = sb.jsonQuery(infuseData, "infuseColorRemapSources." .. tag)
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
-		--sb.logInfo(tag.." "..directives)
 		animator.setGlobalTag(tag, directives)
-		tagsSet.globalTags[tag] = true
+		tagsSet.globalTags[tag] = directives
 	end
-	for part, tags in pairs(infuseSpeciesConfig.colorRemapPartTags or {}) do
+	for part, tags in pairs(infuseData.colorRemapPartTags or {}) do
 		tagsSet.partTags[part] = {}
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sb.jsonQuery(infuseSpeciesConfig, "colorRemapSources." .. part ..".".. tag) or sb.jsonQuery(infuseSpeciesConfig, "colorRemapSources." .. tag)
+			local sourceColorMap = sb.jsonQuery(infuseData, "infuseColorRemapSources." .. part ..".".. tag) or sb.jsonQuery(infuseSpeciesConfig, "colorRemapSources." .. tag)
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
-			--sb.logInfo(tag.." "..directives)
 			animator.setPartTag(part, tag, directives)
-			tagsSet.partTags[part][tag] = true
+			tagsSet.partTags[part][tag] = directives
 		end
 	end
-	animator.setGlobalTag(self.tag, (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or ""))
-	tagsSet.globalTags[self.tag] = true
+	local directives = (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or "")
+	animator.setGlobalTag(self.tag.."InfusedDirectives", (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or ""))
+	tagsSet.globalTags[self.tag.."InfusedDirectives"] = directives
 
 	local locationData = sb.jsonMerge(infuseData.locationOverrides, {
 		infuseTagsSet = tagsSet
@@ -724,6 +722,7 @@ function _Location:setInfusionData()
 		locationData.subLocations[k] = locationData.subLocations[k] or {}
 		setmetatable(locationData.subLocations[k], {__index = v})
 	end
+	sbq.logInfo(tagsSet,2)
 	setmetatable(locationData, { __index = base })
 	SpeciesScript.locations[self.key] = locationData
 	self:markSettingsDirty()
