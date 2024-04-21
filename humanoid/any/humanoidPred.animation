@@ -865,7 +865,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.5,
-					"transformationGroups": ["movementOffset", "bellyOffset"],
+					"anchorPart": "belly",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
 					"bodyFullbright" : true,
@@ -912,7 +912,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": -0.5,
-					"transformationGroups": ["movementOffset", "tailOffset"],
+					"anchorPart": "tail",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<tailInfusedColorRemap><tailInfusedDirectives><tailColorRemap><bodyDirectives><tailInfusedFade>"
 				},
@@ -956,7 +956,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.201,
-					"transformationGroups": ["movementOffset", "crotchOffset"],
+					"anchorPart": "cock",
 					"interact" : [0.5, -1.5],
 					"bodyFullbright" : true,
 					"processingDirectives" : "<cockInfusedColorRemap><cockInfusedDirectives><cockColorRemap><bodyDirectives><cockInfusedFade>"
@@ -1003,7 +1003,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.111,
-					"anchorPart": "cock",
+					"anchorPart": "balls_front",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
 				},
@@ -1050,7 +1050,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.101,
-					"anchorPart": "cock",
+					"anchorPart": "balls_back",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
 				},
@@ -1098,7 +1098,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.101,
-					"transformationGroups": ["movementOffset", "chestOffset"],
+					"anchorPart": "breasts",
 					"interact" : [0.375,-0.375],
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives><breastsInfusedFade>"
@@ -1126,7 +1126,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.601,
-					"anchorPart": "breasts",
+					"anchorPart": "breasts_front",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
 				},
@@ -1173,7 +1173,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.401,
-					"anchorPart": "breasts",
+					"anchorPart": "breasts_back",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
 				},
@@ -1221,7 +1221,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.011,
-					"transformationGroups": ["movementOffset", "crotchOffset"],
+					"anchorPart": "pussy",
 					"interact" : [0, -2],
 					"bodyFullbright" : true,
 					"processingDirectives" : "<pussyInfusedColorRemap><pussyInfusedDirectives><pussyColorRemap><bodyDirectives><pussyInfusedFade>"
