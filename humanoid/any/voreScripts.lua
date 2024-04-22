@@ -113,6 +113,7 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 	local space, subLocation = location:hasSpace(size)
 	if space then
 		if Occupants.addOccupant(target, size, locationName or action.location, subLocation) then
+			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
 			return true, function()
 				local occupant = Occupants.entityId[tostring(target)]
