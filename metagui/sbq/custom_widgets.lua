@@ -57,6 +57,11 @@ function init()
 		storage.sbqSettings = sbq.storageSettings or {}
 		storage.sbqUpgrades = sbq.storageUpgrades or {}
 		sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+    end
+	if sbq.locations and sbq.baseLocations then
+		for name, location in pairs(sbq.locations) do
+			setmetatable(location, {__index = sbq.baseLocations[name]})
+		end
 	end
 
 	old.init()

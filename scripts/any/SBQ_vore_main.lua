@@ -246,7 +246,8 @@ function sbq.getSettingsPageData()
 		storageUpgrades = storage.sbqUpgrades or {},
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
-		locations = SpeciesScript.locations or {},
+        locations = SpeciesScript.locations or {},
+		baseLocations = SpeciesScript.baseLocations or {},
 		currentScale = sbq.scale(),
 		parentEntityData = {sbq.parentEntity()}
 	}
