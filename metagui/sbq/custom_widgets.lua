@@ -152,7 +152,9 @@ end
 local tabHeight = 16
 
 local function evContentsTabChanged(self, tab)
-	self:setVisible(self.tab == tab)
+	if self.tab.parent == tab.parent then
+		self:setVisible(self.tab == tab)
+	end
 end
 
 local function evTabSelect(self)
@@ -161,10 +163,6 @@ local function evTabSelect(self)
 	tf.currentTab = self.tab
 	tf:pushEvent("tabChanged", self.tab, old)
 	mg.startEvent(tf.onTabChanged, tf, self.tab, old)
-
-	for i, subTab in ipairs(self.tab.subTabFields or {}) do
-		subTab.currentTab.tabWidget:onSelected()
-	end
 
 	self.tab:onSelect()
 end
@@ -510,12 +508,12 @@ function widgets.sbqSlider:onChange(index, value) end
 
 ----- fill bar -----
 
-widgets.fillbar = mg.proto(mg.widgetBase, {
+widgets.sbqFillbar = mg.proto(mg.widgetBase, {
 	expandMode = {1, 0},
-	widgetType = "fillbar"
+	widgetType = "sbqFillbar"
 })
 
-function widgets.fillbar:init(base, param)
+function widgets.sbqFillbar:init(base, param)
 	self.expandMode = param.expandMode
 	if param.inline then self.expandMode = {0, 0} end
 	if param.expand then self.expandMode = {2, 0} end
@@ -527,8 +525,8 @@ function widgets.fillbar:init(base, param)
 	self.max = param.max or 1
 end
 
-function widgets.fillbar:minSize() return {16, 8} end
-function widgets.fillbar:preferredSize() return { 64, 8 } end
+function widgets.sbqFillbar:minSize() return {16, 8} end
+function widgets.sbqFillbar:preferredSize() return { 64, 8 } end
 
 local function subColor(color1, color2)
 	return { math.max(color1[1] - color2[1],0), math.max(color1[2] - color2[2],0), math.max(color1[3] - color2[3],0) }
@@ -537,7 +535,7 @@ local function addColor(color1, color2)
 	return { math.min(color1[1] + color2[1], 255), math.min(color1[2] + color2[2],255), math.min(color1[3] + color2[3],255) }
 end
 
-function widgets.fillbar:draw()
+function widgets.sbqFillbar:draw()
 	local c = widget.bindCanvas(self.backingWidget)
 	c:clear()
 
@@ -558,14 +556,14 @@ function widgets.fillbar:draw()
 	c:drawRect({ x1, fillRect[4]-1, x2, fillRect[4]-2 }, addColor(self.color, {40,30,20}))
 end
 
-function widgets.fillbar:setValue(value)
+function widgets.sbqFillbar:setValue(value)
 	self.value = value
 	self:draw()
 end
 
 
-function widgets.fillbar:isMouseInteractable() return false end
-function widgets.fillbar:getToolTip()
+function widgets.sbqFillbar:isMouseInteractable() return false end
+function widgets.sbqFillbar:getToolTip()
 	return self.toolTip .. ": " .. self.value .. " / " .. self.max
 end
 

@@ -107,6 +107,7 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.lists.locations = {}
 	sbq.lists.voreTypes = {}
 	sbq.lists.infuseTypes = {}
+	sbq.lists.seekActions = {}
 	for k, v in pairs(sbq.voreConfig.locations or {}) do
 		table.insert(sbq.lists.locations,k)
 	end
@@ -116,6 +117,8 @@ function sbq.setupSettingMetatables(entityType)
 	for k, v in pairs(sbq.config.infuseTypeData or {}) do
 		table.insert(sbq.lists.infuseTypes,k)
 	end
+	util.appendLists(sbq.lists.seekActions, sbq.lists.voreTypes)
+	util.appendLists(sbq.lists.seekActions, sbq.lists.infuseTypes)
 	for k, v in pairs(sbq.config.groupedSettings) do
 		local list = {}
 		if type(v.list) == "string" then
@@ -207,21 +210,7 @@ function sbq.entityName(entityId)
 end
 
 function sbq.replaceConfigTags(config, tags)
-	local newConfig = {}
-	for k, v in pairs(config) do
-		local newKey = k
-		if type(k) == "string" then
-			newKey = sb.replaceTags(k, tags)
-		end
-		if type(v) == "table" then
-			newConfig[newKey] = sbq.replaceConfigTags(v, tags)
-		elseif type(v) == "string" then
-			newConfig[newKey] = sb.replaceTags(v, tags)
-		else
-			newConfig[newKey] = v
-		end
-	end
-	return newConfig
+	return sb.parseJson(sb.replaceTags(sb.printJson(config), tags))
 end
 
 function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)

@@ -1,35 +1,41 @@
+
 function init()
-	_ENV.mainTabField.tabs.behavior.subTabFields = {
-		_ENV.voreTypeBehaviorTabField,
-	}
-	local baseVoreTab = root.assetJson("/interface/scripted/sbq/settings/tabs/voreBehavior.config")
-	for i, voreType in ipairs(sbq.gui.voreTypeOrder) do
-		local data = sbq.config.voreTypeData[voreType]
-		local tab = sbq.replaceConfigTags(baseVoreTab, sb.jsonMerge(data.tags or {}, { voreType = voreType }))
-		tab.icon = sbq.getActionIcon(voreType, sbq.iconDirectory)
-		_ENV.voreTypeBehaviorTabField:newTab(tab)
+	local seekActions = {}
+	util.appendLists(seekActions, sbq.gui.voreTypeOrder)
+	util.appendLists(seekActions, sbq.gui.infuseTypeOrder)
+
+	local baseTab = root.assetJson("/interface/scripted/sbq/settings/tabs/actionBehavior.config")
+	for i, action in ipairs(seekActions) do
+		_ENV.behaviorTabField:newTab(sbq.replaceConfigTags(baseTab, {action = action}))
 	end
 
-	local baseInfuseTab = root.assetJson("/interface/scripted/sbq/settings/tabs/infuseBehavior.config")
-	for i, infuseType in ipairs(sbq.gui.infuseTypeOrder) do
-		local data = sbq.config.infuseTypeData[infuseType]
-		local tab = sbq.replaceConfigTags(baseInfuseTab, sb.jsonMerge(data.tags or {}, { infuseType = infuseType }))
-		tab.icon = sbq.getActionIcon(infuseType, sbq.iconDirectory)
-		_ENV.voreTypeBehaviorTabField:newTab(tab)
-	end
 end
 
 function sbq.refreshBehaviorTabVisibility()
-	for _, voreType in ipairs(sbq.gui.voreTypeOrder) do
-		tab = _ENV.voreTypeBehaviorTabField.tabs[voreType]
-		tab:setVisible(sbq.settings.vorePrefs[voreType].pred or sbq.settings.vorePrefs[voreType].prey or false)
-		_ENV[voreType .. "PredBehaviorPanel"]:setVisible(sbq.settings.vorePrefs[voreType].pred)
-		_ENV[voreType .. "PreyBehaviorPanel"]:setVisible(sbq.settings.vorePrefs[voreType].prey)
+end
+
+function update()
+	local source = pane.sourceEntity()
+	if world.entityIsResource(source, "health") then
+		_ENV.healthBar:setValue(world.entityResourcePercentage(source, "health"))
+	else
+		_ENV.healthBar.parent:setVisible(false)
 	end
-	for _, voreType in ipairs(sbq.gui.infuseTypeOrder) do
-		tab = _ENV.voreTypeBehaviorTabField.tabs[voreType]
-		tab:setVisible(sbq.settings.infusePrefs[voreType].pred or sbq.settings.infusePrefs[voreType].prey or false)
-		_ENV[voreType .. "PredBehaviorPanel"]:setVisible(sbq.settings.infusePrefs[voreType].pred)
-		_ENV[voreType .. "PreyBehaviorPanel"]:setVisible(sbq.settings.infusePrefs[voreType].prey)
+	if world.entityIsResource(source, "food") then
+		_ENV.hungerBar:setValue(world.entityResourcePercentage(source,"food"))
+	else
+		_ENV.hungerBar.parent:setVisible(false)
 	end
+	if world.entityIsResource(source, "sbqLust") then
+		_ENV.lustBar:setValue(world.entityResourcePercentage(source,"sbqLust"))
+	else
+		_ENV.lustBar.parent:setVisible(false)
+	end
+	if world.entityIsResource(source, "sbqRest") then
+		_ENV.restBar:setValue(world.entityResourcePercentage(source,"sbqRest"))
+	else
+		_ENV.restBar.parent:setVisible(false)
+	end
+
+
 end
