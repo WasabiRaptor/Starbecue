@@ -6,12 +6,31 @@ function init()
 
 	local baseTab = root.assetJson("/interface/scripted/sbq/settings/tabs/actionBehavior.config")
 	for i, action in ipairs(seekActions) do
-		_ENV.behaviorTabField:newTab(sbq.replaceConfigTags(baseTab, {action = action}))
+		local isVore = sbq.config.voreTypeData[action] ~= nil
+		local isInfuse = sbq.config.infuseTypeData[action] ~= nil
+		_ENV.behaviorTabField:newTab(sbq.replaceConfigTags(baseTab, {
+			action = action,
+			subBehavior = (isVore and ":preyBehavior") or (isInfuse and ":infuseeBehavior") or ":domBehavior",
+			domBehavior = (isVore and ":predBehavior") or (isInfuse and ":infuseHostBehavior") or ":subBehavior"
+		}))
 	end
 
 end
 
 function sbq.refreshBehaviorTabVisibility()
+	for action, tab in pairs(_ENV.behaviorTabField.tabs) do
+		local isVore = sbq.config.voreTypeData[action] ~= nil
+		local isInfuse = sbq.config.infuseTypeData[action] ~= nil
+		if isVore then
+			tab:setVisible(sbq.settings.vorePrefs[action].pred or sbq.settings.vorePrefs[action].prey)
+			_ENV[action.."SubBehaviorPanel"]:setVisible(sbq.settings.vorePrefs[action].prey)
+			_ENV[action.."DomBehaviorPanel"]:setVisible(sbq.settings.vorePrefs[action].pred)
+		elseif isInfuse then
+			tab:setVisible(sbq.settings.infusePrefs[action].pred or sbq.settings.infusePrefs[action].prey)
+			_ENV[action.."SubBehaviorPanel"]:setVisible(sbq.settings.infusePrefs[action].prey)
+			_ENV[action.."DomBehaviorPanel"]:setVisible(sbq.settings.infusePrefs[action].pred)
+		end
+	end
 end
 
 function update()

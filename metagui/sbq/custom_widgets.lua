@@ -307,7 +307,8 @@ function widgets.sbqSlider:init(base, param)
 			end
 			h.value = defaultSetting
 			sbq.settingWidgets[sbq.widgetSettingIdentifier(h)] = self
-			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(h)] = {h.setting, h.groupName, h.groupKey}
+			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(h)] = { h.setting, h.groupName, h.groupKey }
+			if not self.id then self.id = sbq.widgetSettingIdentifier(h) end
 		end
 		if not h.value then
 			sb.logError("Slider handle with no value! id: " .. self.id .. ", index: " .. i)
