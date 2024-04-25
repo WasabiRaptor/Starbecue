@@ -101,6 +101,30 @@ function default:trySendDeeper(name, action, target, reason, locationName, subLo
 	end
 end
 
+function default:voreAvailable(name, action, target, locationName, subLocationName, throughput, ...)
+	if not target then return true end
+	if target == sbq.loungingIn() then return false, "invalidAction" end
+	local loungeAnchor = world.entityCurrentLounge(target)
+	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
+	local size = sbq.getEntitySize(target)
+	if throughput or action.throughput then
+		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
+	end
+	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	if not location then return false, "invalidLocation" end
+
+	local space, subLocation = location:hasSpace(size)
+	if space then
+		if (#Occupants.list + 1) <= sbq.config.seatCount then
+			return true
+		else
+			return false, "noSlots"
+		end
+	else
+		return false, "noSpace"
+	end
+end
+
 function default:tryVore(name, action, target, locationName, subLocationName, throughput, ...)
 	if target == sbq.loungingIn() then return false, "invalidAction" end
 	local loungeAnchor = world.entityCurrentLounge(target)
