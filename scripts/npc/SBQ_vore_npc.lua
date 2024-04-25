@@ -86,7 +86,10 @@ function interact(args)
 		return _ENV.recruitable.generateRecruitInteractAction()
 	end
 	_ENV.setInteracted(args)
-
+	local prompted = sbq_hunting.prompted[args.sourceId]
+	if prompted then
+		return prompted
+	end
 	return SpeciesScript:interact(args)
 end
 
