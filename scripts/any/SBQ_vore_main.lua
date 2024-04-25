@@ -163,19 +163,11 @@ function sbq.reloadVoreConfig(config)
 	for name, stateConfig in pairs(sbq.voreConfig.states or {}) do
 		SpeciesScript:addState(name, stateConfig)
 	end
-	if not storage.lastState or (not (SpeciesScript.states[storage.lastState])) then
-		local defaultState = sbq.voreConfig.defaultState or "default"
-		SpeciesScript.state = SpeciesScript.states[defaultState]
-		SpeciesScript.stateName = defaultState
-	else
-		SpeciesScript.state = SpeciesScript.states[storage.lastState]
-		SpeciesScript.stateName = storage.lastState
-	end
 	-- put settings meant to be public and accessible by other entities in a status property
 	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 	SpeciesScript:init()
-	SpeciesScript.state:init()
+	SpeciesScript:changeState((SpeciesScript.states[storage.lastState or "default"] and storage.lastState) or "default")
 	SpeciesScript.active = true
 
 	SpeciesScript:refreshInfusion()
@@ -198,6 +190,9 @@ function sbq.actionList(type, target)
 			else
 				actions = sb.jsonMerge({}, location.actions)
 			end
+		elseif sbq.loungingIn() == target then
+			-- TODO some sort of list of actions for prey NPCs when they're inside? like asking them to struggle more, or stop struggling, idk, maybe just leave it as nothing
+			return {}
 		end
 	end
 	for _, action in ipairs(actions or {}) do
@@ -322,10 +317,15 @@ function _SpeciesScript:changeState(stateName)
 	if self.lockStateChanges then return false end
 	if stateName == self.stateName then return false end
 	storage.lastState = stateName
-	self.state:uninit()
+	local lastStateName
+	if self.state then
+		self.state:uninit(stateName)
+		lastStateName = self.stateName
+	end
 	self.stateName = stateName
 	self.state = state
-	self.state:init()
+	self.state:init(lastStateName)
+	self.state:refreshActions()
 	return true
 end
 
@@ -363,6 +363,26 @@ function _SpeciesScript:addState(stateName, config)
 	setmetatable(state, {__index = self.species.states[stateName] or _State})
 	self.states[stateName] = state
 end
+
+function _State:init(prevStateName)
+end
+function _State:uninit(newStateName)
+end
+function _State:update(dt)
+end
+
+function _State:refreshActions()
+	local publicActionData = {}
+	for k, action in pairs(self.actions) do
+		publicActionData[k] = {
+			targetSettings = action.targetSettings,
+			settings = action.settings
+		}
+	end
+	sbq.setProperty("sbqActionData", publicActionData)
+	sbq.logInfo(publicActionData,2)
+end
+
 
 function _State:getLocation(locationName, subLocation)
 	if subLocation then

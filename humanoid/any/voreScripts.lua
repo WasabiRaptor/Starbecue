@@ -102,6 +102,9 @@ function default:trySendDeeper(name, action, target, reason, locationName, subLo
 end
 
 function default:tryVore(name, action, target, locationName, subLocationName, throughput, ...)
+	if target == sbq.loungingIn() then return false, "invalidAction" end
+	local loungeAnchor = world.entityCurrentLounge(target)
+	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
 	if throughput or action.throughput then
 		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end

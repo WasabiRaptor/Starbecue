@@ -201,6 +201,14 @@ function sbq.getPublicProperty(entityId, property)
 	end
 	return world.getStatusProperty(entityId, property)
 end
+function sbq.getScriptParameter(entityId, property)
+	local entityType = world.entityType(entityId)
+	if entityType == "object" then
+		return world.getObjectParameter(entityId, property)
+	elseif entityType == "npc" then
+		return world.getNpcScriptParameter(entityId, property)
+	end
+end
 
 function sbq.entityName(entityId)
 	if world.entityType(entityId) == "object" then
