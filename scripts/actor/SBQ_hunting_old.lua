@@ -56,14 +56,14 @@ function sbq.askToVore()
 			dialogueBoxData.dialogueTreeStart = ".vore"
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, {
 				voreType = storage.huntingTarget.voreType,
-				voreResponse = "selfRequest"
+				voreResponse = "prompt"
 			})
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), dialogueBoxData )
 		end
 	elseif entityType == "npc" then
 		local settings = sb.jsonMerge(storage.settings, {
 			voreType = storage.huntingTarget.voreType,
-			voreResponse = "selfRequest"
+			voreResponse = "prompt"
 		})
 		dialogueProcessor.getRandomDialogue(".vore", storage.huntingTarget.id, settings)
 		local options = sb.jsonMerge(dialogue.result.options or {}, {})
@@ -90,7 +90,7 @@ function sbq.askToBeVored()
 			sbq.getNextTarget()
 		end) then
 			local dialogueBoxData = dialogueProcessor.getDialogueBoxData()
-			dialogueBoxData.dialogueTreeStart = ".preyRequest"
+			dialogueBoxData.dialogueTreeStart = ".requesting"
 			dialogueBoxData.settings = sb.jsonMerge(dialogueBoxData.settings, {
 				voreType = storage.huntingTarget.voreType,
 			})
@@ -100,7 +100,7 @@ function sbq.askToBeVored()
 		local settings = sb.jsonMerge(storage.settings, {
 			voreType = storage.huntingTarget.voreType,
 		})
-		dialogueProcessor.getRandomDialogue(".preyRequest", storage.huntingTarget.id, settings)
+		dialogueProcessor.getRandomDialogue(".requesting", storage.huntingTarget.id, settings)
 
 		sbq.addNamedRPC("sbqNPCGetConsent",
 			world.sendEntityMessage(storage.huntingTarget.id, "sbqNPCGetConsent", entity.id(), storage.huntingTarget),
@@ -257,7 +257,7 @@ end
 
 function sbq.forcePrey()
 	if not storage.huntingTarget then return end
-	dialogueProcessor.getRandomDialogue(".forcingPrey", storage.huntingTarget.id, storage.settings)
+	dialogueProcessor.getRandomDialogue(".Forcing", storage.huntingTarget.id, storage.settings)
 	sbq.timer("forcedPreyDialogue", dialogue.result.delay or 1.5, function ()
 		world.sendEntityMessage(storage.huntingTarget.id, "requestTransition", storage.huntingTarget.voreType,
 			{ id = entity.id(), willing = true })
@@ -267,7 +267,7 @@ function sbq.forcePrey()
 			if status.statusProperty("sbqType") == "prey" then
 				storage.huntingTarget = nil
 				sbq.targetedEntities = {}
-				world.sendEntityMessage(id, "sbqSayRandomLine", entity.id(), {voreType = voreType}, ".unwillingPred")
+				world.sendEntityMessage(id, "sbqSayRandomLine", entity.id(), {voreType = voreType}, ".Forced")
 			else
 				sbq.getNextTarget()
 			end
