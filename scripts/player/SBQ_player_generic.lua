@@ -120,7 +120,39 @@ function init()
 				message = false
 			}
 		}, player.id())
+    end)
+
+    message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
+		local options = {
+			{
+				name = sbq.getString(":no"),
+				args = {false, isDom, "no", action, entity.id()}
+            },
+            {
+				name = sbq.getString(":yes"),
+				args = {true, isDom, "yes", action, entity.id()}
+			},
+            {
+				name = sbq.getString(":noYes"),
+				args = {true, isDom, "noYes", action, entity.id()}
+			}
+		}
+		player.interact("ScriptPane", {
+			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			options = options,
+			default = {
+                messageTarget = id,
+				description = sb.replaceTags(sbq.getString((isDom and ":genericDomPrompt") or ":genericSubPrompt"), {actionName = sbq.getString(":"..action), entityName = sbq.entityName(id)}),
+				message = "sbqPromptResponse",
+				close = true
+			},
+			cancel = {
+				args = false,
+				message = false
+			}
+		}, player.id())
 	end)
+
 end
 
 function update(dt)

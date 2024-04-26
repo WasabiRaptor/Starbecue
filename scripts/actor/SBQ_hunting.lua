@@ -37,6 +37,10 @@ function sbq_hunting.dom()
 	sbq_hunting.targets = targets
 	sbq_hunting.action = action
 	sbq_hunting.isDom = true
+	sbq_hunting.nextTarget()
+end
+
+function sbq_hunting.nextTarget()
 	self.board:setEntity("sbqHuntingTarget", sbq_hunting.targets[1])
 	table.remove(sbq_hunting.targets, 1)
 end
@@ -76,18 +80,47 @@ function sbq_hunting.attemptAction(target)
 	if sbq_hunting.isDom then
 		if SpeciesScript:actionAvailable(sbq_hunting.action, target) then
 			if false and sbq.settings.interactDialogue then
-
-			else
-
 				if world.entityType(target) == "player" then
 
 				end
-				interactData = {"Message", {}}
+			else
+				if world.entityType(target) == "player" then
+					interactData = {"Message", { messageType = "sbqPromptAction", messageArgs = {entity.id(), sbq_hunting.action, sbq_hunting.isDom}}}
+				end
+				sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), sbq_hunting.action, sbq_hunting.isDom), sbq_hunting.promptResponse)
 			end
 			sbq_hunting.prompted[target] = interactData
-			sbq.forceTimer(target.."PromptTimeout", 5 * 60, function ()
+			sbq.forceTimer(target.."PromptTimeout", 3 * 60, function ()
 				sbq_hunting.prompted[target] = nil
 			end)
 		end
+	end
+end
+
+function sbq_hunting.promptResponse(response)
+	if not response then
+		sbq.timer("huntingNextTarget", 60, sbq_hunting.nextTarget)
+		return
+	end
+	local tryAction, isDom, line, action, target = table.unpack(response)
+	if tryAction then
+		if isDom then
+			local success, reason = SpeciesScript:tryAction(action, target)
+			if success then
+				-- TODO re-implement dialogue
+			else
+			end
+		else
+			sbq.addRPC(world.sendEntityMessage(target, "sbqTryAction", action, entity.id()), function (results)
+				if not results then return end
+				local success, reason = table.unpack(results)
+				if success then
+					-- TODO re-implement dialogue
+				else
+				end
+			end)
+		end
+	else
+		sbq_hunting.nextTarget()
 	end
 end

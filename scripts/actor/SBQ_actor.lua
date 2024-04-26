@@ -43,7 +43,12 @@ function sbq.actorMessages()
 	end)
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData)
 		sbq.setCurrentLocationData(locationData)
-    end)
+	end)
+	message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
+		-- TODO - non SBQ NPC's response to being asked about vore or something
+		-- general NPCs which don't have any specific behavior for vore probably should just respond false when asked for consent?
+		return {false, isDom, "no", action, entity.id()}
+	end)
 end
 
 function sbq.setCurrentLocationData(locationData)
