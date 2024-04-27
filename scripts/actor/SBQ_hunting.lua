@@ -4,7 +4,7 @@ sbq_hunting = {
 }
 
 function sbq_hunting.start()
-	if math.random() > sbq.settings.leanSubDom then
+	if math.random() < sbq.settings.leanSubDom then
 		sbq_hunting.dom()
 	else
 		sbq_hunting.sub()
