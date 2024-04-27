@@ -1,0 +1,48 @@
+{
+	"frameGrid" : {
+		"size" : [128, 64],
+		"dimensions" : [8, 5],
+		"names" : [
+			[ "stand.idle.1", "stand.flick.1", "sit.idle.1", "sit.flick.1", "lay.idle.1", "lay.flick.1", "back.idle.1", "back.flick.1"],
+			[ "walk.1", "walk.2", "walk.3", "walk.4", "walk.5", "walk.6", "walk.7", "walk.8"],
+			[ "jump.1", "jump.2", "jump.3", "jump.4", "fall.1", "fall.2", "fall.3", "fall.4"],
+			[ "sitdown.1", "sitdown.2", "fallasleep.1", "fallasleep.2", "asleep.1"],
+			[ "lay.rollover.1", "lay.rollover.2", "lay.rollover.3", "lay.rollover.4", "lay.rollover.5"]
+		]
+	},
+	"aliases" : {
+		"standup.1" : "sitdown.2",
+		"standup.2" : "sitdown.1",
+
+		"situp.1" : "sit.idle.1",
+
+		"wakeup.1" : "fallasleep.2",
+		"wakeup.2" : "fallasleep.1",
+
+		"run.1" : "walk.1",
+		"run.2" : "walk.2",
+		"run.3" : "walk.3",
+		"run.4" : "walk.4",
+		"run.5" : "walk.5",
+		"run.6" : "walk.6",
+		"run.7" : "walk.7",
+		"run.8" : "walk.8",
+
+		"swimidle.1" : "walk.1",
+
+		"swim.1" : "walk.1",
+		"swim.2" : "walk.2",
+		"swim.3" : "walk.3",
+		"swim.4" : "walk.4",
+		"swim.5" : "walk.5",
+		"swim.6" : "walk.6",
+		"swim.7" : "walk.7",
+		"swim.8" : "walk.8",
+
+		"back.rollover.1" : "lay.rollover.5",
+		"back.rollover.2" : "lay.rollover.4",
+		"back.rollover.3" : "lay.rollover.3",
+		"back.rollover.4" : "lay.rollover.2",
+		"back.rollover.5" : "lay.rollover.1"
+	}
+}

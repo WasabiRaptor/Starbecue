@@ -1,0 +1,112 @@
+{
+	"frameGrid" : {
+		"size" : [128, 64],
+		"dimensions" : [8, 16],
+		"names" : [
+			[ "idle.1", "sitdown.1", "sitdown.2", "sit.1", "laydown.1", "laydown.2", "lay.1", "back.1"],
+			[ "grab.1", "hug.1", "lay.rollover.1", "lay.rollover.2", "lay.rollover.3", "lay.rollover.4", "lay.rollover.5"],
+			[ "1.walk.1", "1.walk.2", "1.walk.3", "1.walk.4", "1.walk.5", "1.walk.6", "1.walk.7", "1.walk.8"],
+			[ "1.run.1", "1.run.2", "1.run.3", "1.run.4", "1.run.5", "1.run.6", "1.run.7", "1.run.8"],
+			[ "jump.1", "jump.2", "jump.3", "jump.4", "fall.1", "fall.2", "fall.3", "fall.4"],
+			[ "swimidle.1", "swim.1", "swim.2", "swim.3", "swim.4", "bap.1", "bap.2", "bap.3" ],
+			[ "lay.s_back.1", "lay.s_back.2", "lay.s_back.3", "lay.s_back.4", "lay.s_front.1", "lay.s_front.2", "lay.s_up.1", "lay.s_up.2" ],
+			[ "hug.s_back.1", "hug.s_back.2", "hug.s_front.1", "hug.s_front.2", "hug.s_up.1", "hug.s_up.2", "hug.s_down.1", "hug.s_down.2"]
+		]
+	},
+	"aliases" : {
+		"idle.default" : "idle.1",
+
+		"-1.run.1" : "1.run.8",
+		"-1.run.2" : "1.run.7",
+		"-1.run.3" : "1.run.6",
+		"-1.run.4" : "1.run.5",
+		"-1.run.5" : "1.run.4",
+		"-1.run.6" : "1.run.3",
+		"-1.run.7" : "1.run.2",
+		"-1.run.8" : "1.run.1",
+
+		"-1.walk.1" : "1.walk.8",
+		"-1.walk.2" : "1.walk.7",
+		"-1.walk.3" : "1.walk.6",
+		"-1.walk.4" : "1.walk.5",
+		"-1.walk.5" : "1.walk.4",
+		"-1.walk.6" : "1.walk.3",
+		"-1.walk.7" : "1.walk.2",
+		"-1.walk.8" : "1.walk.1",
+
+		"standup.1" : "sitdown.2",
+		"standup.2" : "sitdown.1",
+
+		"situp.1" : "laydown.2",
+		"situp.2" : "laydown.1",
+
+		"back.rollover.1" : "lay.rollover.5",
+		"back.rollover.2" : "lay.rollover.4",
+		"back.rollover.3" : "lay.rollover.3",
+		"back.rollover.4" : "lay.rollover.2",
+		"back.rollover.5" : "lay.rollover.1",
+
+		"lay.s_back.5" : "lay.1",
+		"lay.s_front.3" : "lay.s_front.2",
+		"lay.s_front.4" : "lay.s_front.1",
+		"lay.s_front.5" : "lay.1",
+		"lay.s_up.3" : "lay.s_up.2",
+		"lay.s_up.4" : "lay.s_up.1",
+		"lay.s_up.5" : "lay.1",
+
+		"sleep.s_front.1" : "lay.s_front.1",
+		"sleep.s_front.2" : "lay.s_front.2",
+		"sleep.s_front.3" : "lay.s_front.3",
+		"sleep.s_front.4" : "lay.s_front.4",
+		"sleep.s_front.5" : "lay.s_front.5",
+
+		"sleep.s_back.1" : "lay.s_back.1",
+		"sleep.s_back.2" : "lay.s_back.2",
+		"sleep.s_back.3" : "lay.s_back.3",
+		"sleep.s_back.4" : "lay.s_back.4",
+		"sleep.s_back.5" : "lay.s_back.5",
+
+		"sleep.s_up.1" : "lay.s_up.1",
+		"sleep.s_up.2" : "lay.s_up.2",
+		"sleep.s_up.3" : "lay.s_up.3",
+		"sleep.s_up.4" : "lay.s_up.4",
+		"sleep.s_up.5" : "lay.s_up.5",
+
+		"hug.s_back.3" : "hug.s_back.2",
+		"hug.s_back.4" : "hug.s_back.1",
+		"hug.s_back.5" : "hug.1",
+		"hug.s_front.3" : "hug.s_front.2",
+		"hug.s_front.4" : "hug.s_front.1",
+		"hug.s_front.5" : "hug.1",
+		"hug.s_up.3" : "hug.s_up.2",
+		"hug.s_up.4" : "hug.s_up.1",
+		"hug.s_up.5" : "hug.1",
+		"hug.s_down.3" : "hug.s_down.2",
+		"hug.s_down.4" : "hug.s_down.1",
+		"hug.s_down.5" : "hug.1",
+
+		"back.s_front.1" : "hug.s_front.1",
+		"back.s_front.2" : "hug.s_front.2",
+		"back.s_front.3" : "hug.s_front.3",
+		"back.s_front.4" : "hug.s_front.4",
+		"back.s_front.5" : "hug.s_front.5",
+
+		"back.s_back.1" : "hug.s_back.1",
+		"back.s_back.2" : "hug.s_back.2",
+		"back.s_back.3" : "hug.s_back.3",
+		"back.s_back.4" : "hug.s_back.4",
+		"back.s_back.5" : "hug.s_back.5",
+
+		"back.s_up.1" : "hug.s_up.1",
+		"back.s_up.2" : "hug.s_up.2",
+		"back.s_up.3" : "hug.s_up.3",
+		"back.s_up.4" : "hug.s_up.4",
+		"back.s_up.5" : "hug.s_up.5",
+
+		"back.s_down.1" : "hug.s_down.1",
+		"back.s_down.2" : "hug.s_down.2",
+		"back.s_down.3" : "hug.s_down.3",
+		"back.s_down.4" : "hug.s_down.4",
+		"back.s_down.5" : "hug.s_down.5"
+	}
+}

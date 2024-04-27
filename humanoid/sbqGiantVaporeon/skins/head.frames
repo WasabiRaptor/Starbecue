@@ -1,0 +1,33 @@
+{
+	"frameGrid" : {
+		"size" : [128, 64],
+		"dimensions" : [8, 4],
+		"names" : [
+			[ "idle.1", "blink.1", "look.1", "lick.1", "lick.2", "lick.3", "lick.4", "pinlook.1" ],
+			[ "waterspray.1", "fallasleep.1", "fallasleep.2", "back.1", "back.blink.1"],
+			[ "eat.1", "eat.2", "eat.3", "eat.4", "eat.5", "eat.6", "eat.7", "eat.8" ],
+			[ "lay.rollover.1", "lay.rollover.2", "lay.rollover.3", "lay.rollover.4", "lay.rollover.5"]
+		]
+	},
+	"aliases" : {
+		"lick.5" : "pinlook.1",
+		"wakeup.1" : "fallasleep.2",
+		"wakeup.2" : "fallasleep.1",
+
+		"back.rollover.1" : "lay.rollover.5",
+		"back.rollover.2" : "lay.rollover.4",
+		"back.rollover.3" : "lay.rollover.3",
+		"back.rollover.4" : "lay.rollover.2",
+		"back.rollover.5" : "lay.rollover.1",
+
+		"escape.1" : "eat.8",
+		"escape.2" : "eat.7",
+		"escape.3" : "eat.6",
+		"escape.4" : "eat.4",
+		"escape.5" : "eat.3",
+		"escape.6" : "eat.2",
+		"escape.7" : "eat.2",
+		"escape.8" : "eat.1"
+
+	}
+}
