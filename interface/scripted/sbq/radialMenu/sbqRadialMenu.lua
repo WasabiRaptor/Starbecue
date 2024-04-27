@@ -13,16 +13,16 @@ function init()
 	cancel = config.getParameter("cancel") or {}
 	if not options then
 		pane.dismiss() -- empty radial menu, uh oh
-    end
-    local minOptions = config.getParameter("minOptions") or 2
+	end
+	local minOptions = config.getParameter("minOptions") or 2
 	if #options < minOptions then
 		for i = #options, minOptions-1 do
 			table.insert(options,{locked = true})
 		end
-    end
+	end
 	for _, option in ipairs(options) do
 		setmetatable(option, {__index = default})
-    end
+	end
 	setmetatable(cancel, {__index = default})
 
 
@@ -82,7 +82,7 @@ function update( dt )
 	local segmentSpacing = 3
 	local spacingOffset = 1 -- difference from segmentSpacing
 	local sidesPerSegment
-    local innerRadius
+	local innerRadius
 	if segments <= 6 then
 		sidesPerSegment = 10
 		innerRadius = 30
@@ -108,7 +108,7 @@ function update( dt )
 
 	if math.sqrt(mpos[1]*mpos[1] + mpos[2]*mpos[2]) < 0.9*innerRadius then
 		activeSegment = -1 -- no selection in middle
-    end
+	end
 
 	-- drawing
 	canvas:clear()
@@ -117,7 +117,7 @@ function update( dt )
 	for i = 1, segments do
 		local segmentAngle = segmentSize * (i - 1.5) + segmentSpacing / 2 + 180
 		local r1, r2, ri, color
-        if options[i].locked then
+		if options[i].locked then
 			r1 = innerRadius
 			r2 = outerRadius - 15
 			ri = iconRadius
@@ -136,27 +136,28 @@ function update( dt )
 		canvas:drawTriangles(
 			generateSegment(segmentSize - segmentSpacing, segmentAngle, sidesPerSegment, spacingOffset, r1, r2),
 			color
-        )
+		)
 		local textOffset = 0
 		local iconPos = radialPoint(segmentSize * (i - 1) + 180, ri);
-        if options[i].icon then
-            if type(options[i].icon) == "table" then
+		if options[i].icon then
+			if type(options[i].icon) == "table" then
 				canvas:drawDrawables(options[i].icon, iconPos)
-            else
+			else
 				canvas:drawImage(options[i].icon, iconPos, nil, nil, true)
 				local size = root.imageSize(options[i].icon)
 				textOffset = (size[2] / 2) +3
 			end
-        end
+		end
 		if iconPos[2] < 100 then
 			textOffset = textOffset * -1
 		end
-        if options[i].name then
+		if options[i].name then
 			drawShadowText(options[i].name, {iconPos[1], iconPos[2] + textOffset}, options[i].nameColor or options[i].textColor or {255,255,255}, 50, options[i].locked)
 		end
-    end
+	end
 
-    if (options[activeSegment] or {}).description then
+	local segment = options[activeSegment] or cancel or {}
+	if segment.description then
 		local color = {170, 180, 190, 200}
 		local radius = innerRadius - (spacingOffset * 3)
 		local triangles = {}
@@ -167,21 +168,21 @@ function update( dt )
 			local point = radialPoint(theta * i, radius)
 			table.insert(triangles, {first,point,prev})
 			prev = point
-        end
-        canvas:drawTriangles(triangles, color)
-		drawShadowText(options[activeSegment].description, {100,100}, options[activeSegment].descColor or options[activeSegment].textColor or {255,255,255}, radius*2 )
+		end
+		canvas:drawTriangles(triangles, color)
+		drawShadowText(segment.description, {100,100}, segment.descColor or segment.textColor or {255,255,255}, radius*2 )
 	end
 end
 
 function drawShadowText(text, position, color, wrapWidth, greyed)
-    local textBrightness = (greyed and 0.75 or 1)
+	local textBrightness = (greyed and 0.75 or 1)
 	local shadowText = string.gsub(text, "%b^;", "")
 	canvas:drawText(shadowText, {
 		position = {position[1] + 0.5, position[2] - 0.5},
 		horizontalAnchor = "mid",
 		verticalAnchor = "mid",
 		wrapWidth = wrapWidth
-    }, 8, { 0, 0, 0 })
+	}, 8, { 0, 0, 0 })
 	canvas:drawText(shadowText, {
 		position = {position[1], position[2] - 1},
 		horizontalAnchor = "mid",

@@ -1,14 +1,14 @@
 
 function doSBQTargetAction(args, board)
-	if args.entity == nil or not world.entityExists(args.entity) then return false end
+	if (args.entity == nil) or (not world.entityExists(args.entity)) then return false end
 	sbq_hunting.attemptAction(args.entity)
 	return true
 end
 
 function sbqSetHostileTarget(args, board)
-	-- if args.entity ~= nil and world.entityExists(args.entity) and args.entity ~= (storage.huntingTarget or {}).id then
-	-- 	sbq.combatSwitchHuntingTarget(args.entity)
-	-- end
+	if (args.entity ~= nil) and world.entityExists(args.entity) and (args.entity ~= args.hunting) then
+		sbq_hunting.huntTarget(args.entity)
+	end
 	return true
 end
 

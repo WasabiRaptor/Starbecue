@@ -55,6 +55,9 @@ function sbq.init(config)
 	end)
 	message.setHandler("sbqTryAction", function(_, _, ...)
 		return sbq.tryAction(...)
+    end)
+	message.setHandler("sbqActionAvailable", function(_, _, ...)
+		return sbq.actionAvailable(...)
 	end)
 	message.setHandler("sbqQueueAction", function(_, _, ...)
 		return sbq.queueAction(...)
@@ -380,7 +383,6 @@ function _State:refreshActions()
 		}
 	end
 	sbq.setProperty("sbqActionData", publicActionData)
-	sbq.logInfo(publicActionData,2)
 end
 
 
@@ -441,7 +443,7 @@ function _State:tryAction(name, target, ...)
 end
 
 function _State:requestAction(name, target, consent, ...)
-	sbq.logInfo({name, target, consent})
+	-- sbq.logInfo({name, target, consent})
 	-- TODO do stuff with checking consent here later
 	if not consent then return end
 	if not sbq.settings.interactDialogue then

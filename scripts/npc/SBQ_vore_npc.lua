@@ -8,16 +8,12 @@ local old = {
 }
 
 dialogueStepScripts = {}
-
--- require"/interface/scripted/sbq/DialogueBox/sbqdialogueStepScripts.lua"
--- require"/interface/scripted/sbq/settings/autoSetSettings.lua"
--- require"/interface/scripted/sbq/DialogueBox/scripts/npc.lua"
-
 require"/scripts/actor/SBQ_actor.lua"
 require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
+require"/scripts/actor/SBQ_hunting.lua"
 function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
 end
 function init()
@@ -69,6 +65,9 @@ function init()
 	end)
 	message.setHandler("recruit.confirmUnfollowBehavior", function(_,_)
 		_ENV.recruitable.confirmUnfollowBehavior(true)
+    end)
+	message.setHandler("sbqPromptResponse", function (_,_,...)
+		sbq_hunting.promptResponse({...})
 	end)
 end
 

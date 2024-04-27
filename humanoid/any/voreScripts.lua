@@ -182,7 +182,6 @@ local function letout(funcName, action, target, preferredAction, ...)
 
 		for _, exitType in ipairs(exitTypes or {}) do
 			if (exitType == preferredAction) or (preferredAction == "vore") or (not preferredAction) then
-				sbq.logInfo(exitType)
 				if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
 					return true
 				end
