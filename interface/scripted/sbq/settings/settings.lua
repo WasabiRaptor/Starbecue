@@ -70,14 +70,14 @@ function init()
 	end
 
 	for _, voreType in pairs(sbq.gui.voreTypeOrder) do
-		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred"}))
-		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey"}))
+		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred", domOrSub = "dom"}))
+		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey", domOrSub = "sub"}))
 		local widget = _ENV[voreType.."predPrefLayout"]
 		if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
 	end
 	for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
-		_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred"}))
-		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey"}))
+		_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred", domOrSub = "dom"}))
+		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey", domOrSub = "sub"}))
 
 		local widget = _ENV[infuseType.."predPrefLayout"]
 		if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
