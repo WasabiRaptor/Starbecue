@@ -33,11 +33,19 @@ function sbq.actorInit()
 	sbq.setResourcePercentage = status.setResourcePercentage
 	sbq.modifyResourcePercentage = status.modifyResourcePercentage
 
-    sbq.setStatModifiers = status.setPersistentEffects
+	sbq.setStatModifiers = status.setPersistentEffects
 	sbq.clearStatModifiers = status.clearPersistentEffects
 end
-
+local responseMap = {
+	yes = true,
+	noYes = true,
+	no = false
+}
 function sbq.actorMessages()
+	sbq.actionWillingness = {
+		dom = {},
+		sub = {}
+	}
 	message.setHandler("sbqGuiMessage", function(_, _, ...)
 		world.sendEntityMessage(entity.id(), ...)
 	end)
@@ -45,9 +53,19 @@ function sbq.actorMessages()
 		sbq.setCurrentLocationData(locationData)
 	end)
 	message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
-		-- TODO - non SBQ NPC's response to being asked about vore or something
-		-- general NPCs which don't have any specific behavior for vore probably should just respond false when asked for consent?
-		return {false, isDom, "no", action, entity.id()}
+		local willingnessTable = sbq.actionWillingness[(isDom and "sub") or "dom"]
+		if willingnessTable[action] == nil then
+			local settings = sbq.settings[(isDom and "subBehavior") or "domBehavior"][action]
+			if math.random() < settings.willingness then
+				willingnessTable[action] = "yes"
+			else
+				willingnessTable[action] = "no"
+            end
+			sbq.timer(action.."ClearWillingness", 60, function ()
+				willingnessTable[action] = nil
+			end)
+		end
+		return {responseMap[willingnessTable[action] or "no"] or false, isDom, willingnessTable[action] or "no", action, entity.id()}
 	end)
 end
 

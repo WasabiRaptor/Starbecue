@@ -153,7 +153,15 @@ function init()
 			}
 		}, player.id())
 	end)
-
+	message.setHandler("sbqPromptResponse", function (_,_,tryAction, isDom, line, action, target)
+		if tryAction then
+			if isDom then
+				SpeciesScript:tryAction(action, target)
+			else
+				world.sendEntityMessage(target, "sbqTryAction", action, entity.id())
+			end
+		end
+	end)
 end
 
 function update(dt)

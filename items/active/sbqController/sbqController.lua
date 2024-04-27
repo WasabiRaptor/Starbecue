@@ -81,7 +81,7 @@ end
 function sbq.setAction(action)
 	storage.action = action
 	player.setScriptContext("starbecue")
-	local icon, shortdescription, description = sbq.getActionData(action, (player.callScript("sbq.actionAvailable", action) or {})[1], storage.iconDirectory)
+	local icon, shortdescription, description = sbq.getActionData(action, (player.callScript("sbq.actionAvailable", storage.action) or {})[1], storage.iconDirectory)
 	activeItem.setInventoryIcon(icon)
 	activeItem.setFriendlyName(shortdescription)
 	activeItem.setDescription(description.."\n"..sbq.strings.controllerDescAppend)
@@ -95,25 +95,44 @@ function sbq.clickAction()
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
-	local result
+	local result, reason
 	for i, targetId in ipairs(entityaimed) do
 		if entity.entityInSight(targetId) and ((sbq.config.actionRange * mcontroller.scale()) >= vec2.mag(entity.distanceToEntity(targetId))) then
 			local loungeAnchor = world.entityCurrentLounge(targetId)
 			if (not loungeAnchor) or loungeAnchor.dismountable then
-				result = player.callScript("sbq.tryAction", storage.action, targetId)
+				result, reason = sbq.attemptAction(targetId)
 				break
 			end
 		end
 	end
 
 	if result == nil then
-		result = player.callScript("sbq.tryAction", storage.action)
+		result, reason = table.unpack(player.callScript("sbq.tryAction", storage.action) or {})
 	end
-	if result and not result[1] and not (result[2] == "targetMissing") then
+	if (not result) and (reason ~= "targetMissing") then
 		animator.playSound("error")
 	end
-	-- sb.logInfo(string.format("[%s] Action results: %s:%s", entity.id(), storage.action, sb.printJson(result)))
-	return table.unpack(result or {false})
+	return result, reason
+end
+
+function sbq.attemptAction(targetId)
+	if shiftHeldTime > 0 then
+		local result, reason = table.unpack(player.callScript("sbq.actionAvailable", storage.action, targetId) or {})
+		if result then
+			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true), function(response)
+				if not response then return end
+				local tryAction, isDom, line, action, target = table.unpack(response)
+				if tryAction then
+					player.callScript("sbq.tryAction", storage.action, targetId)
+				end
+			end)
+		end
+		return result, reason
+	else
+		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
+		if sb.jsonQuery(targetSettings, "subBehavior."..storage.action..".consentRequired") then return false, "consentRequired" end
+		return table.unpack(player.callScript("sbq.tryAction", storage.action, targetId) or {})
+	end
 end
 
 RadialMenu = {}
