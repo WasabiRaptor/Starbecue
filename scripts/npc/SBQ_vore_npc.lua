@@ -68,12 +68,16 @@ function init()
     end)
 	message.setHandler("sbqPromptResponse", function (_,_,...)
 		sbq_hunting.promptResponse({...})
-	end)
+    end)
+	sbq.randomTimer("huntingCycle", 60, 5*60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 end
 
 function update(dt)
 	old.update(dt)
-	sbq.update(dt)
+    sbq.update(dt)
+	if sbq.randomTimer("huntingCycle", 5*60, 10*60) then
+		sbq_hunting.start()
+	end
 end
 
 function uninit()
