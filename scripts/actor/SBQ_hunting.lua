@@ -117,8 +117,8 @@ function sbq_hunting.checkTarget(action, isDom, target, consent)
 	local entityType = world.entityType(target)
 	if (entityType == "player") and settings.targetPlayer then return true end
 	if sbq.getScriptParameter(target, "sbqOC") and settings.targetOC then return true end
-	if (sbq.getScriptParameter(target, "sbqNPC") or sbq.getScriptParameter(target, "sbqObject")) and settings.targetOther then return true end
-	return false
+	if ((sbq.getScriptParameter(target, "sbqNPC") or sbq.getScriptParameter(target, "sbqObject"))) and settings.targetCompatible then return true end
+	return settings.targetOther or false
 end
 
 function sbq_hunting.checkResources(settings)

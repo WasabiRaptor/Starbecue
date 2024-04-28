@@ -168,6 +168,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	occupant:getLocation().occupancy.sizeDirty = true
 	SpeciesScript.lockActions = true
 	return true, function()
+		sbq.forceTimer("huntTargetSwitchCooldown", 30)
 		local occupant = Occupants.entityId[tostring(target)]
 		SpeciesScript.lockActions = false
 		if occupant then occupant:remove() end

@@ -6,7 +6,7 @@ function doSBQTargetAction(args, board)
 end
 
 function sbqSetHostileTarget(args, board)
-	if (args.entity ~= nil) and world.entityExists(args.entity) and (args.entity ~= args.hunting) then
+	if (args.entity ~= nil) and world.entityExists(args.entity) and (args.entity ~= args.hunting) and sbq.timer("huntTargetSwitchCooldown", 30) then
 		sbq_hunting.huntTarget(args.entity)
 	end
 	return true

@@ -133,6 +133,7 @@ function sbq.setupSettingMetatables(entityType)
 		for _, name in ipairs(list) do
 			sbq.defaultSettings[k][name] = sb.jsonMerge(
 				v.defaultSettings or {},
+				(sbq.voreConfig.groupedDefaultSettings or {})[k] or {},
 				sbq.defaultSettings[k][name] or {}
 			)
 			sbq.publicSettings[k][name] = {}
