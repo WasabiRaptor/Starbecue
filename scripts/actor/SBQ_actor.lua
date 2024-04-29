@@ -81,7 +81,7 @@ function sbq.checkComfortLevel()
 	for _, effect in ipairs(loungeEffects) do
 		if type(effect) == "string" then
 			local effectConfig = root.effectConfig(effect).effectConfig
-			util.appendLists(adjectives, effectConfig.adjectives)
+			util.appendLists(adjectives, effectConfig.adjectives or {})
 		end
 	end
 	-- until I define stuff for this we're just going to pretend

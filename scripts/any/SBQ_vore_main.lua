@@ -332,6 +332,9 @@ function _SpeciesScript:changeState(stateName)
 	return true
 end
 
+function _SpeciesScript:settingAnimations()
+end
+
 -- State Handling
 function _SpeciesScript:addState(stateName, config)
 	local state = sb.jsonMerge(config, {})
@@ -698,6 +701,7 @@ function _SpeciesScript:addLocation(name, config)
 		settingsDirty = true,
 		list = {},
 		size = 0,
+		count = 0,
 		visualSize = -1, -- this forces it to refresh the size
 		interpolating = false,
 		struggleVec = {0,0},
@@ -713,6 +717,7 @@ function _SpeciesScript:addLocation(name, config)
 			settingsDirty = true,
 			list = {},
 			size = 0,
+			count = 0,
 			visualSize = -1, -- forces size refresh
 			interpolating = false,
 			interpolateFrom = 0,
@@ -805,7 +810,7 @@ function _Location:setInfusionData()
 end
 function _Location:hasSpace(size)
 	if not sbq.tableMatches(self.activeSettings, sbq.settings, true) then return false end
-	if self.maxCount and (#self.occupancy.list >= self.maxCount) then return false end
+	if self.maxCount and (self.occupancy.count >= self.maxCount) then return false end
 	if self.settings.hammerspace then return math.huge end
 	local shared = 0
 	for _, name in ipairs(self.sharedWith or {}) do
@@ -879,6 +884,7 @@ function _Location:updateOccupancy(dt)
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
 		self.occupancy.sizeDirty = false
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
+		self.occupancy.count = 0
 		if self.subLocationBehavior and not self.subKey then
 			if self.subLocationBehavior == "average" then
 				local total = 0
@@ -903,7 +909,12 @@ function _Location:updateOccupancy(dt)
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
-				self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale())
+				if not (occupant.flags.digested or occupant.flags.infused) then
+					self.occupancy.count = self.occupancy.count + 1
+				end
+				if not occupant.flags.infused then
+					self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale())
+				end
 			end
 		end
 		local addVisual = 0
@@ -972,8 +983,8 @@ end
 
 function _Location:update(dt)
 	if sbq.randomTimer(self.tag.."_gurgle", 3, 15) then
-		if (#self.occupancy.list > 0) and self.settings.gurgleSounds then
-			local occupant = self.occupancy.list[math.random(#self.occupancy.list)]
+		if (self.occupancy.count > 0) and self.settings.gurgleSounds then
+			local occupant = self.occupancy.list[math.random(self.occupancy.count)]
 			animator.setSoundPosition(self.gurgleSound or "gurgle", occupant:localPosition())
 			if sbq.isResource(self.gurgleResource or "food") then
 				local res = sbq.resourcePercentage(self.gurgleResource or "food")
@@ -1159,6 +1170,11 @@ function _Occupant:remove()
 	local location = SpeciesScript:getLocation(self.location)
 
 	Occupants.seat[self.seat] = nil
+
+	if self.flags.infused then
+		location.infusedEntity = nil
+		sbq.settings.infuseSlots[self.flags.infuseType].item = nil
+	end
 
 	if self.subLocation then
 		local subLocation = SpeciesScript:getLocation(self.location, self.subLocation)
@@ -1452,7 +1468,7 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if (not self.struggleAction) or (self:controlHeld("Shift")) or self:resourceLocked("energy") then return false end
+	if (not self.struggleAction) or self.flags.newOccupant or self.flags.infused or self.flags.digested or self:controlHeld("Shift") or self:resourceLocked("energy") then return false end
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})

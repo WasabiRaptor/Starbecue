@@ -1,6 +1,14 @@
 {
-	"name" : "sbqTransformation",
+	"name" : "sbqPussyInfusion",
 	"blockingStats" : [
+		"sbqTailInfusion",
+		"sbqPawInfusion",
+		"sbqThighsInfusion",
+		"sbqBellyInfusion",
+		"sbqBreastInfusion",
+		"sbqCockInfusion",
+		//"sbqPussyInfusion",
+		"sbqTransformation",
 		"sbqEggify"
 	],
 
@@ -8,7 +16,10 @@
 		"adjectives" : ["funny"],
 
 		"checkBoxIcon" : "/interface/scripted/sbq/transform.png",
-		"description" : "transformDesc",
+		"description" : "pussyInfuseDesc",
+
+		"transformProperty": "sbqInfuseProgress",
+		"finishAction" : "pussyInfuse",
 
 		"predStatModifiers" : {
 			"energyRegenPercentageRate" : {
@@ -28,6 +39,6 @@
 		"sbqTransformation.lua"
 	],
 
-	"label" : "Transforming",
+	"label" : "Pussy TF",
 	"icon" : "/stats/sbq/sbqTransformation/sbqTransformation.png"
 }

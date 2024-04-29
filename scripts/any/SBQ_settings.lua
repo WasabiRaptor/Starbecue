@@ -89,11 +89,8 @@ function sbq.refreshSettings()
 		table.insert(modifiers, {stat = v, amount = tonumber(amount) or 0})
 	end
 	sbq.setStatModifiers("sbqStats", modifiers)
-
-	for _, settingsAnim in ipairs(sbq.voreConfig.settingAnimationStates or {}) do
-		if sbq.tableMatches(settingsAnim[1], sbq.settings, true) then
-			SpeciesScript:doAnimations(settingsAnim[2])
-		end
+	if SpeciesScript.active then
+		SpeciesScript:settingAnimations()
 	end
 end
 

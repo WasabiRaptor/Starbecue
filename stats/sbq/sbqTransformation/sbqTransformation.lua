@@ -1,5 +1,5 @@
-
-require("/stats/sbq/sbqEffectsGeneral.lua")
+sbq = {}
+require "/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
 	script.setUpdateDelta(5)
@@ -19,6 +19,7 @@ end
 
 
 function update(dt)
+	sbq.checkRPCsFinished(dt)
 	if self.finished then
 		if not self.messageSent then
 			self.messageSent = true

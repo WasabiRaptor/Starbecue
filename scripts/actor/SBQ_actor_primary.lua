@@ -175,6 +175,3 @@ function applyDamageRequest(damageRequest)
 	end
 	return old.applyDamageRequest(damageRequest)
 end
-
-
-require("/scripts/any/SBQ_generate_drop.lua")

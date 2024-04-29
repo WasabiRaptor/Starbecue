@@ -1,5 +1,5 @@
-
-require("/stats/sbq/sbqEffectsGeneral.lua")
+sbq = {}
+require "/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
 	script.setUpdateDelta(5)
@@ -16,6 +16,7 @@ end
 
 
 function update(dt)
+	sbq.checkRPCsFinished(dt)
 	if not status.isResource(self.healStat) then return end
 	local healAmount = (self.healRate * dt * status.stat("sbqDigestingPower"))
 	if self.turboHeal > 0 then

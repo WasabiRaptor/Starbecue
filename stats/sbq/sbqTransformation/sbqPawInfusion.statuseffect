@@ -1,6 +1,14 @@
 {
-	"name" : "sbqTransformation",
+	"name" : "sbqPawInfusion",
 	"blockingStats" : [
+		"sbqTailInfusion",
+		// "sbqPawInfusion",
+		"sbqThighsInfusion",
+		"sbqBellyInfusion",
+		"sbqBreastInfusion",
+		"sbqCockInfusion",
+		"sbqPussyInfusion",
+		"sbqTransformation",
 		"sbqEggify"
 	],
 
@@ -8,7 +16,10 @@
 		"adjectives" : ["funny"],
 
 		"checkBoxIcon" : "/interface/scripted/sbq/transform.png",
-		"description" : "transformDesc",
+		"description" : "pawsInfuseDesc",
+
+		"transformProperty": "sbqInfuseProgress",
+		"finishAction" : "pawsInfuse",
 
 		"predStatModifiers" : {
 			"energyRegenPercentageRate" : {
@@ -28,6 +39,6 @@
 		"sbqTransformation.lua"
 	],
 
-	"label" : "Transforming",
+	"label" : "Paw TF",
 	"icon" : "/stats/sbq/sbqTransformation/sbqTransformation.png"
 }

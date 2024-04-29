@@ -301,7 +301,9 @@ sbq.getSettingsOf = {}
 function sbq.getSettingsOf.prefs()
 	return {
 		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
-		infusePrefs = sbq.exportSettingGroup("infusePrefs")
+		infusePrefs = sbq.exportSettingGroup("infusePrefs"),
+		domBehavior = sbq.exportSettingGroup("domBehavior"),
+		subBehavior = sbq.exportSettingGroup("subBehavior")
 	}
 end
 function sbq.getSettingsOf.locations()
@@ -314,6 +316,8 @@ function sbq.getSettingsOf.all()
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
 	output.locations = sbq.exportSettingGroup("locations")
+	output.domBehavior = sbq.exportSettingGroup("domBehavior")
+	output.subBehavior = sbq.exportSettingGroup("subBehavior")
 	return output
 end
 
@@ -334,8 +338,9 @@ function sbq.exportSettingGroup(group)
 		list = groupData.list
 	end
 	for _, name in ipairs(list) do
+		output[name] = {}
 		for k, _ in pairs(groupData.defaultSettings) do
-			output[k] = sbq.settings[group][name][k]
+			output[name][k] = sbq.settings[group][name][k]
 		end
 	end
 	return output

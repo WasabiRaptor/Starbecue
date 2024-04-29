@@ -24,6 +24,10 @@ end
 function Default:uninit()
 end
 
+function Default:settingAnimations()
+
+end
+
 -- default state scripts
 local default = Default.states.default
 function default:init()
@@ -163,6 +167,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	if throughput or action.throughput then
 		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
 	end
+	if occupant.flags.digested or occupant.flags.infused then return false end
 	occupant.flags.releasing = true
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
@@ -311,11 +316,16 @@ function default:reform(name, action, target,...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	if occupant:resourcePercentage("health") < 1 then
-		occupant.locationSettings.digestedReform = true
+		occupant.locationSettings.reformDigested = true
 		occupant:refreshLocation()
-		return false
+		return true
 	end
 	local location = occupant:getLocation()
+	if occupant.flags.infused then
+		location.infusedEntity = nil
+		sbq.settings.infuseSlots[occupant.flags.infuseType].item = nil
+		SpeciesScript:refreshInfusion(occupant.flags.infuseType)
+	end
 	occupant.flags.infused = false
 	occupant.flags.digested = false
 	occupant.sizeMultiplier = action.sizeMultiplier or location.reformSizeMultiplier or ((occupant.locationSettings.compression ~= "none") and occupant.locationSettings.compressionMin) or 1
@@ -329,7 +339,7 @@ end
 function default:turboReformAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
-	if not (occupant.locationSettings.digestedReform or occupant.flags.infused) then return false, "invalidAction" end
+	if not (occupant.locationSettings.reformDigested or occupant.flags.infused) then return false, "invalidAction" end
 	return true
 end
 function default:turboReform(name, action, target, ...)
@@ -362,21 +372,69 @@ end
 function default:transform(name, action, target, predSelect, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
-	if not ((occupant.flags.digested and (occupant.locationSettings.digestedTransform))
+	if not ((occupant.flags.digested and (occupant.locationSettings.transformDigested))
 		or ((not occupant.flags.digested) and (occupant.locationSettings.transform)))
 	then
 		occupant.locationSettings.transform = true
-		occupant.locationSettings.digestedTransform = true
+		occupant.locationSettings.transformDigested = true
 		occupant:refreshLocation()
-		return false
+		return true
 	elseif (occupant:getPublicProperty("sbqTransformProgress") or 0) < 1 then
 	end
+	occupant.flags.transformed = true
 	occupant.locationSettings.transform = false
-	occupant.locationSettings.digestedTransform = false
+	occupant.locationSettings.transformDigested = false
 	local location = occupant:getLocation()
 	occupant:sendEntityMessage("sbqDoTransformation",
 		action.transformResult or location.transformResult or { species = humanoid.species() },
 		action.transformDuration or location.transformDuration,
 		action.transformPerma or location.transformPerma
 	)
+end
+
+function default:infuseAvailable(name, action, target, ...)
+	local location = SpeciesScript:getLocation(action.location)
+	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then return false, "alreadyInfused" end
+
+	local occupant = Occupants.entityId[tostring(target)]
+	if occupant then
+		return true
+	else
+		return SpeciesScript:actionAvailable(action.voreAction, target)
+	end
+end
+function default:tryInfuse(name, action, target, ...)
+	local location = SpeciesScript:getLocation(action.location)
+	local infuseType = action.infuseType or name
+	local occupant = Occupants.entityId[tostring(target)]
+	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)] then
+		occupant.locationSettings[infuseType.."Digested"] = false
+		occupant.locationSettings[infuseType] = false
+		occupant:refreshLocation()
+		return false, "alreadyInfused"
+	end
+	if occupant then
+		if not ((occupant.flags.digested and (occupant.locationSettings[infuseType.."Digested"]))
+		or ((not occupant.flags.digested) and (occupant.locationSettings[infuseType])))
+		then
+			occupant.locationSettings[infuseType.."Digested"] = true
+			occupant.locationSettings[infuseType] = true
+			occupant:refreshLocation()
+			return true
+		elseif (occupant:getPublicProperty("sbqInfuseProgress") or 0) < 1 then
+		end
+		location.infusedEntity = target
+		occupant.flags.infused = true
+		occupant.flags.infuseType = infuseType
+		occupant.locationSettings[infuseType.."Digested"] = false
+		occupant.locationSettings[infuseType] = false
+		sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function (card)
+			sbq.settings.infuseSlots[infuseType].item = card
+			SpeciesScript:refreshInfusion(infuseType)
+			occupant:refreshLocation(action.location)
+		end)
+		return true
+	elseif SpeciesScript:tryAction(action.voreAction, target) then
+		return SpeciesScript:queueAction(name, target)
+	end
 end

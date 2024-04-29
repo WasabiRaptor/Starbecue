@@ -1,6 +1,14 @@
 {
-	"name" : "sbqTransformation",
+	"name" : "sbqTailInfusion",
 	"blockingStats" : [
+		// "sbqTailInfusion",
+		"sbqPawInfusion",
+		"sbqThighsInfusion",
+		"sbqBellyInfusion",
+		"sbqBreastInfusion",
+		"sbqCockInfusion",
+		"sbqPussyInfusion",
+		"sbqTransformation",
 		"sbqEggify"
 	],
 
@@ -8,7 +16,10 @@
 		"adjectives" : ["funny"],
 
 		"checkBoxIcon" : "/interface/scripted/sbq/transform.png",
-		"description" : "transformDesc",
+		"description" : "tailInfuseDesc",
+
+		"transformProperty": "sbqInfuseProgress",
+		"finishAction" : "tailInfuse",
 
 		"predStatModifiers" : {
 			"energyRegenPercentageRate" : {
@@ -28,6 +39,6 @@
 		"sbqTransformation.lua"
 	],
 
-	"label" : "Transforming",
+	"label" : "Tail TF",
 	"icon" : "/stats/sbq/sbqTransformation/sbqTransformation.png"
 }

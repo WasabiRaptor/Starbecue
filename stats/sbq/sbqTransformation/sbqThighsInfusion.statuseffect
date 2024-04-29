@@ -1,6 +1,14 @@
 {
-	"name" : "sbqTransformation",
+	"name" : "sbqThighsInfusion",
 	"blockingStats" : [
+		"sbqTailInfusion",
+		"sbqPawInfusion",
+		// "sbqThighsInfusion",
+		"sbqBellyInfusion",
+		"sbqBreastInfusion",
+		"sbqCockInfusion",
+		"sbqPussyInfusion",
+		"sbqTransformation",
 		"sbqEggify"
 	],
 
@@ -8,7 +16,10 @@
 		"adjectives" : ["funny"],
 
 		"checkBoxIcon" : "/interface/scripted/sbq/transform.png",
-		"description" : "transformDesc",
+		"description" : "thighsInfuseDesc",
+
+		"transformProperty": "sbqInfuseProgress",
+		"finishAction" : "thighsInfuse",
 
 		"predStatModifiers" : {
 			"energyRegenPercentageRate" : {
@@ -28,6 +39,6 @@
 		"sbqTransformation.lua"
 	],
 
-	"label" : "Transforming",
+	"label" : "Sentient Fat",
 	"icon" : "/stats/sbq/sbqTransformation/sbqTransformation.png"
 }

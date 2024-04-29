@@ -21,6 +21,41 @@ function sbq.humanoidInit()
 		itemDrop.parameters.predColorMap = speciesFile.baseColorMap
 		world.spawnItem(itemDrop, mcontroller.position())
 	end)
+
+	message.setHandler("sbqGetCard", function()
+
+		local item = root.assetJson("/sbqItemTemplates.config:npcCard")
+		local entityType = entity.entityType()
+		if entityType == "npc" then
+			local npcConfig = root.npcConfig(npc.npcType())
+			if npcConfig.scriptConfig.isOC then
+				item.parameters.rarity = "rare"
+			elseif npcConfig.scriptConfig.sbqNPC then
+				item.parameters.rarity = "uncommon"
+			end
+			item.parameters.npcArgs.npcType = npc.npcType()
+			item.parameters.npcArgs.npcLevel = npc.level()
+			item.parameters.npcArgs.npcSeed = npc.seed()
+		elseif entityType == "player" then
+			item.parameters.rarity = "legendary"
+			item.parameters.npcArgs.npcType = "generictenant"
+			item.parameters.npcArgs.npcLevel = 1
+			item.parameters.npcArgs.npcSeed = 1
+			item.parameters.tooltipFields.subtitle = "player"
+			item.parameters.npcArgs.npcParam.wasPlayer = true
+		end
+		local identity = humanoid.getIdentity()
+		item.parameters.npcArgs.npcSpecies = humanoid.species()
+		item.parameters.shortdescription = world.entityName(entity.id())
+		item.parameters.npcArgs.npcParam.identity = identity
+		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.getSettingsOf.all()
+		item.parameters.tooltipFields.collarNameLabel = sbq.createdDate()
+		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")
+		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
+		item.parameters.preySize = sbq.size()
+
+		return item
+	end)
 end
 
 function sbq.directory()

@@ -1,4 +1,5 @@
-require("/stats/sbq/sbqEffectsGeneral.lua")
+sbq = {}
+require "/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
 	script.setUpdateDelta(5)
@@ -20,6 +21,7 @@ function init()
 end
 
 function update(dt)
+	sbq.checkRPCsFinished(dt)
 	if not status.isResource(self.drain) then return end
 	if (status.resourcePercentage(self.drain) > 0) and (not status.resourceLocked(self.drain)) then
 		local data = status.statusProperty("sbqDigestData") or {}
