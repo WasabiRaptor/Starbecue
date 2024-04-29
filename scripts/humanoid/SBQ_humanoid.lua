@@ -28,9 +28,8 @@ function sbq.directory()
 end
 
 
-function sbq.doTransformation(newIdentity, duration, perma, ...)
+function sbq.doTransformation(newIdentity, duration, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
-	sb.logInfo(sb.printJson(newIdentity,2))
 	local currentIdentity =	humanoid.getIdentity()
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
@@ -72,6 +71,7 @@ function sbq.doTransformation(newIdentity, duration, perma, ...)
 		newIdentity.species = currentIdentity.species
 	end
 
+
 	newIdentity = sb.jsonMerge(
 		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
 		newIdentity,
@@ -81,17 +81,24 @@ function sbq.doTransformation(newIdentity, duration, perma, ...)
 	local speciesFile = root.speciesConfig(newIdentity.species)
 
 	if (not speciesIdentites[newIdentity.species]) and not speciesFile.noUnlock then
+		local speciesCount = 0
+		for _, _ in pairs(speciesIdentites) do
+			speciesCount = speciesCount + 1
+		end
 		speciesIdentites[newIdentity.species] = newIdentity
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
-		world.sendEntityMessage(entity.id(), "sbqUnlockedSpecies")
+		if (speciesCount >= sbq.config.transformMenuUnlock) and player then
+			player.enableTech("sbqTransform")
+			player.radioMessage("sbqTransformUnlocked")
+		end
 	end
 
 	humanoid.setIdentity(newIdentity)
 
-	if duration and not (sbq.settings.indefiniteTF) then
+	if duration and (not sbq.settings.indefiniteTF) then
 		sbq.forceTimer("revertTF", (duration or 5) * 60, sbq.revertTF)
 	end
-	if sbq.settings.permanentTF and perma then
+	if sbq.settings.permanentTF then
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end

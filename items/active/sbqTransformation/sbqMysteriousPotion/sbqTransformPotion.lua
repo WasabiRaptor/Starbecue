@@ -32,7 +32,3 @@ end
 function transformationItemArgs(useType)
 	return { message = "sbqDoTransformation", itemName = item.name(), args = config.getParameter("args"), consume = true }
 end
-function fireTriggered()
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.doTransformation", config.getParameter("args"))
-end

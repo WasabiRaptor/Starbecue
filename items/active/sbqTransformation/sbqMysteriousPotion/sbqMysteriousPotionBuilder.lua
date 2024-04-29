@@ -4,8 +4,8 @@ function build(directory, config, parameters, level, seed)
 	local config = sb.jsonMerge(config, parameters or {})
     strings = root.assetJson("/sbqStrings.config")
 
-    config.identity = parameters.identity or (parameters.args or {})[1]
-    config.duration = parameters.duration or (parameters.args or {})[2]
+    config.identity = parameters.identity or (parameters.args or {})[1] or config.identity or config.args[1]
+    config.duration = parameters.duration or (parameters.args or {})[2] or config.duration or config.args[2]
 
     parameters.args = {
         config.identity,

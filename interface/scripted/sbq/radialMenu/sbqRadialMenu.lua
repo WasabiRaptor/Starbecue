@@ -170,7 +170,11 @@ function update( dt )
 			prev = point
 		end
 		canvas:drawTriangles(triangles, color)
-		drawShadowText(segment.description, {100,100}, segment.descColor or segment.textColor or {255,255,255}, radius*2 )
+		if type(segment.description) == "table" then
+			canvas:drawDrawables(segment.description, {100,100})
+		else
+			drawShadowText(segment.description, {100,100}, segment.descColor or segment.textColor or {255,255,255}, radius*2 )
+		end
 	end
 end
 

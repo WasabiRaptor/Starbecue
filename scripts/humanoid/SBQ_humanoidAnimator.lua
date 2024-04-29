@@ -107,7 +107,7 @@ function sbq.remapColor(remaps, fromMap, toMap)
 			local from = fromMap[remap[1]]
             local to = toMap[remap[2]]
             local check = remap[3]
-            if sbq.tableMatches(check, sbq.settings, true) then
+            if from and to and sbq.tableMatches(check, sbq.settings, true) then
                 for i, fromColor in ipairs(from) do
 					local toColor = to[i] or to[#to]
 					if (fromColor ~= toColor) then
