@@ -970,6 +970,20 @@ function _Location:updateOccupancy(dt)
 	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..string.format("%02x", math.floor(self.settings.infusedFade * 255)))
 end
 
+function _Location:update(dt)
+	if sbq.randomTimer(self.tag.."_gurgle", 3, 15) then
+		if (#self.occupancy.list > 0) and self.settings.gurgleSounds then
+			local occupant = self.occupancy.list[math.random(#self.occupancy.list)]
+			animator.setSoundPosition(self.gurgleSound or "gurgle", occupant:localPosition())
+			if sbq.isResource(self.gurgleResource or "food") then
+				local res = sbq.resourcePercentage(self.gurgleResource or "food")
+				animator.setSoundVolume(self.gurgleSound or "gurgle", 0.5 + ((self.gurgleResourceInvert and (1 - res)) or res), 0.25)
+			end
+			animator.playSound(self.gurgleSound or "gurgle")
+		end
+	end
+end
+
 function _Location:doSizeChangeAnims(prevVisualSize)
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 	if self.idleAnims then
@@ -1006,6 +1020,7 @@ function _Location:refreshStruggleDirection(id)
 			self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
 		end
 	end
+	local occupant = Occupants.entityId[tostring(id)]
 	local newVec = self.occupancy.struggleVec
 	local oldAction = self.occupancy.struggleAction
 	local oldDirection = self.occupancy.struggleDirection
@@ -1042,6 +1057,11 @@ function _Location:refreshStruggleDirection(id)
 				end)
 				return SpeciesScript:checkAnimations(false, newAnims, { s_direction = direction }, id) + delay, direction
 			end
+		end
+		if newAnims and self.settings.struggleSounds and occupant then
+			animator.setSoundPosition(self.struggleSound or "struggle", occupant:localPosition())
+			animator.setSoundVolume(self.struggleSound or "struggle", occupant:resourcePercentage("energy"), 0.25)
+			animator.playSound(self.struggleSound or "struggle")
 		end
 		return SpeciesScript:doAnimations(newAnims, { s_direction = direction }, id), direction
 	end
@@ -1177,6 +1197,7 @@ function Occupants.update(dt)
 	for name, _ in pairs(SpeciesScript.locations) do
 		local location = SpeciesScript:getLocation(name)
 		location:updateOccupancy(dt)
+		location:update(dt)
 	end
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:update(dt)
