@@ -1,6 +1,7 @@
 
 function sbq.humanoidInit()
 	sbq.species = humanoid.species
+	sbq.getItemSlot = humanoid.getItemSlot
 
 	message.setHandler("sbqDoTransformation", function (_,_, ...)
 		sbq.doTransformation(...)

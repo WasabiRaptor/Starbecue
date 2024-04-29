@@ -34,6 +34,9 @@ end
 function sbq.parentEntity()
 end
 
+function sbq.getItemSlot(slot)
+end
+
 function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
 	if type(string) == "string" and string ~= "" then
 		if string:find("<love>") then

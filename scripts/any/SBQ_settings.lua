@@ -89,7 +89,7 @@ function sbq.refreshSettings()
 		table.insert(modifiers, {stat = v, amount = tonumber(amount) or 0})
 	end
 	sbq.setStatModifiers("sbqStats", modifiers)
-	if SpeciesScript.active then
+	if SpeciesScript then
 		SpeciesScript:settingAnimations()
 	end
 end

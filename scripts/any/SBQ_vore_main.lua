@@ -1182,6 +1182,7 @@ function _Occupant:remove()
 			if occupant.entityId == self.entityId then
 				subLocation:markSizeDirty()
 				table.remove(subLocation.occupancy.list, i)
+				subLocation:refreshStruggleDirection()
 				break
 			end
 		end
@@ -1190,6 +1191,7 @@ function _Occupant:remove()
 		if occupant.entityId == self.entityId then
 			location:markSizeDirty()
 			table.remove(location.occupancy.list, i)
+			location:refreshStruggleDirection()
 			break
 		end
 	end

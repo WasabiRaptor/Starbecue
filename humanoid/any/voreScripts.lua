@@ -24,8 +24,37 @@ end
 function Default:uninit()
 end
 
-function Default:settingAnimations()
+function Default:settingAnimations(hideSlots)
+	hideSlots = hideSlots or {}
+	local legs = sbq.getItemSlot("legsCosmetic") or sbq.getItemSlot("legs")
+	sbq.logInfo(legs,2)
+	if (not hideSlots.legs) and legs and (not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
+		self:doAnimations(sbq.voreConfig.legsHide)
+	else
+		self:doAnimations((sbq.settings.cock and sbq.voreConfig.cockShow) or sbq.voreConfig.cockHide)
+		self:doAnimations((sbq.settings.pussy and sbq.voreConfig.pussyShow) or sbq.voreConfig.pussyHide)
+		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
+	end
+	local chest = sbq.getItemSlot("chestCosmetic") or sbq.getItemSlot("chest")
+	if (not hideSlots.chest) and chest and (not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
+		self:doAnimations(sbq.voreConfig.chestHide)
+	else
+		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
+	end
+end
 
+function Default:getHideSlotAnims(hideSlots)
+	local hide, show = {}, {}
+	for k, v in pairs(hideSlots) do
+		if v then
+			local item = sbq.getItemSlot(k.."Cosmetic") or sbq.getItemSlot(k)
+			if item and not ((sbq.voreConfig[k.."VoreWhitelist"] or {})[item.name])then
+				hide[k.."CosmeticHiddenState"] = "none"
+				show[k.."CosmeticHiddenState"] = "ignore"
+			end
+		end
+	end
+	return hide, show
 end
 
 -- default state scripts
@@ -146,7 +175,15 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 		if Occupants.addOccupant(target, size, locationName or action.location, subLocation) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
+
+			local hide, show = SpeciesScript:getHideSlotAnims(action.hideSlots or {})
+			SpeciesScript:doAnimations(hide)
+			SpeciesScript:settingAnimations(action.hideSlots)
 			return true, function()
+				sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
+					SpeciesScript:doAnimations(show)
+					SpeciesScript:settingAnimations()
+				end)
 				local occupant = Occupants.entityId[tostring(target)]
 				if occupant then
 					occupant.flags.newOccupant = false
@@ -172,7 +209,15 @@ function default:tryLetout(name, action, target, throughput, ...)
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
 	SpeciesScript.lockActions = true
+	local hide, show = SpeciesScript:getHideSlotAnims(action.hideSlots or {})
+	SpeciesScript:doAnimations(hide)
+	SpeciesScript:settingAnimations(action.hideSlots)
+	sbq.forceTimer("huntTargetSwitchCooldown", 30)
 	return true, function()
+		sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
+			SpeciesScript:doAnimations(show)
+			SpeciesScript:settingAnimations()
+		end)
 		sbq.forceTimer("huntTargetSwitchCooldown", 30)
 		local occupant = Occupants.entityId[tostring(target)]
 		SpeciesScript.lockActions = false

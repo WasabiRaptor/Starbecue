@@ -71,12 +71,18 @@ function equipped.chestCosmeticSlot(itemDescriptor)
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
+	if SpeciesScript then
+		SpeciesScript:settingAnimations()
+	end
 end
 function equipped.legsCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("legs") end
     if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
+	end
+	if SpeciesScript then
+		SpeciesScript:settingAnimations()
 	end
 end
 function equipped.headCosmeticSlot(itemDescriptor)
@@ -85,12 +91,18 @@ function equipped.headCosmeticSlot(itemDescriptor)
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
+	if SpeciesScript then
+		SpeciesScript:settingAnimations()
+	end
 end
 function equipped.backCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("back") end
     if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
+	end
+	if SpeciesScript then
+		SpeciesScript:settingAnimations()
 	end
 end
 
