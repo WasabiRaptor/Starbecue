@@ -921,7 +921,7 @@ function _Location:updateOccupancy(dt)
 		for _, name in ipairs(self.addFill or {}) do
 			local location = SpeciesScript:getLocation(name)
 			location:updateOccupancy(0, name)
-			addVisual = addVisual + location.occupancy.visualSize
+			addVisual = addVisual + location.occupancy.size
 		end
 		if self.infuseType then
 			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
