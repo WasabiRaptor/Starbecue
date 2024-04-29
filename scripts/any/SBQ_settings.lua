@@ -84,7 +84,7 @@ function sbq.refreshSettings()
 	for k, v in pairs(sbq.config.statSettings or {}) do
 		local amount = sbq.settings[k]
 		if type(amount) == "boolean" then
-			amount = amount and 1 or 0
+			amount = (amount and 1) or 0
 		end
 		table.insert(modifiers, {stat = v, amount = tonumber(amount) or 0})
 	end
