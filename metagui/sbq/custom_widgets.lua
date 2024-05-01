@@ -1185,11 +1185,109 @@ end
 
 
 -- the version of stardust from steam is out of date and this makes the width actually function
-function widgets.label:preferredSize(width)
-	if self.explicitSize then return self.explicitSize end
-	local s = mg.measureString(self.text, self.wrap and width or nil, self.fontSize)
-	-- extra pixel to fit cut-off descenders in multiline text
-	if s[2] > math.ceil(self.fontSize or 8) then s[2] = s[2] + 1 end
-	if self.width then s[1] = self.width end
-	return s
-end
+do -- label -------------------------------------------------------------------------------------------------------------------------------------
+	widgets.label = mg.proto(mg.widgetBase, {
+	  expandMode = {1, 0}, -- will expand horizontally, but not vertically
+	  text = "",
+	})
+
+	function widgets.label:init(base, param)
+	  self.text = mg.formatText(param.text)
+	  self.color = param.color
+	  self.fontSize = param.fontSize
+	  self.align = param.align
+	  self.wrap = not (param.wrap == false)
+	  self.expandMode = param.expandMode
+
+
+	  if param.inline then self.expandMode = {0, 0} end
+	  if param.expand then self.expandMode = {2, 0} end
+	  if param.width then
+		self.width = param.width
+		self.expandMode = {0, 0}
+	  end
+
+	  self.backingWidget = mkwidget(base, { type = "canvas" })
+	end
+
+	function widgets.label:preferredSize(width)
+	  if self.explicitSize then return self.explicitSize end
+	  local s = mg.measureString(self.text, self.wrap and width or nil, self.fontSize)
+	  -- extra pixel to fit cut-off descenders in multiline text
+	  if s[2] > math.ceil(self.fontSize or 8) then s[2] = s[2] + 1 end
+	  if self.width then s[1] = self.width end
+	  return s
+	end
+
+	function widgets.label:draw()
+	  local c = widget.bindCanvas(self.backingWidget) c:clear()
+	  local pos, ha = {0, self.size[2]}, "left"
+	  if self.align == "center" or self.align == "mid" then
+		pos[1], ha = self.size[1] / 2, "mid"
+	  elseif self.align == "right" then
+		pos[1], ha = self.size[1], "right"
+	  end
+	  local color = mg.getColor(self.color) or mg.getColor(theme.baseTextColor)
+	  if color then color = '#' .. color end
+	  c:drawText(self.text, { position = pos, horizontalAnchor = ha, verticalAnchor = "top", wrapWidth = self.wrap and self.size[1] + 1 or nil }, self.fontSize or 8, color)
+	end
+
+	function widgets.label:setText(t)
+	  local old = self.text
+	  self.text = mg.formatText(t)
+	  if self.text ~= old then -- only do expensive parts if text actually changed
+		self:queueRedraw()
+		if self.parent then self.parent:queueGeometryUpdate() end
+	  end
+	end
+  end do -- image -------------------------------------------------------------------------------------------------------------------------------------
+	widgets.image = mg.proto(mg.widgetBase, {
+	  file = "/assetmissing.png", -- fallback file
+	  imgSize = {0, 0},
+	  scale = 1
+	})
+
+	function widgets.image:init(base, param)
+	  self.size = nil -- force recalculate
+	  self.noAutoCrop = param.noAutoCrop
+	  self.file = mg.path(param.file)
+	  if self.noAutoCrop then
+		self.imgSize = root.imageSize(self.file)
+	  else
+		local r = root.nonEmptyRegion(self.file) or {0, 0, 0, 0}
+		self.imgSize = rect.size(r)
+	  end
+	  self.scale = param.scale
+	  if type(self.scale) == "number" then self.scale = {self.scale, self.scale} end
+
+	  self.backingWidget = mkwidget(base, { type = "canvas" })
+	end
+	function widgets.image:preferredSize()
+	  if self.explicitSize then return self.explicitSize end
+	  return {math.ceil(self.imgSize[1] * self.scale[1]), math.ceil(self.imgSize[2] * self.scale[2])}
+	end
+	function widgets.image:draw()
+	  local c = widget.bindCanvas(self.backingWidget)
+	  c:clear()
+	  if self.noAutoCrop then
+		c:drawImageDrawable(self.file, vec2.mul(c:size(), 0.5), self.scale)
+	  else
+		c:drawImageRect(self.file, root.nonEmptyRegion(self.file) or {0, 0, 0, 0}, rect.withCenter(vec2.mul(self.size, 0.5), vec2.mul(self.imgSize, self.scale)))
+	  end
+	end
+	function widgets.image:setFile(f, noAutoCrop)
+	  self.file = mg.path(f)
+	  if noAutoCrop ~= nil then self.noAutoCrop = noAutoCrop end
+	  if self.noAutoCrop then
+		self.imgSize = root.imageSize(self.file)
+	  else
+		local r = root.nonEmptyRegion(self.file) or {0, 0, 0, 0}
+		self.imgSize = rect.size(r)
+	  end
+	  if parent then parent:queueGeometryUpdate() end
+	end
+	function widgets.image:setScale(v)
+	  self.scale = v
+	  if parent then parent:queueGeometryUpdate() end
+	end
+  end
