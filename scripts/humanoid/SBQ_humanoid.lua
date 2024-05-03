@@ -66,6 +66,7 @@ end
 
 function sbq.doTransformation(newIdentity, duration, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	local force = newIdentity.force
 	local currentIdentity =	humanoid.getIdentity()
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
@@ -106,15 +107,59 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	else
 		newIdentity.species = currentIdentity.species
 	end
+	local oldSpeciesFile = root.speciesConfig(currentIdentity.species)
+	local speciesFile = root.speciesConfig(newIdentity.species)
+	if not speciesFile then return false end
+	local preserveColors = {
 
+	}
+	if oldSpeciesFile.baseColorMap and speciesFile.baseColorMap then
+		for _, oldColors in pairs(oldSpeciesFile.baseColorMap) do
+			for _, newColors in pairs(speciesFile.baseColorMap) do
+				if #oldColors == #newColors then
+					local same = true
+					for k, v in ipairs(oldColors) do
+						if not v == newColors[k] then same = false break end
+					end
+					if same then
+						for _, v in ipairs(oldColors) do
+							preserveColors[v] = true
+						end
+					end
+				end
+			end
+		end
+	end
+	for color, _ in pairs(preserveColors) do
+		for k, v in pairs(currentIdentity) do
+			if type(v) == "string" then
+				local _, last = string.find(v, color .. "=")
+				if last then
+					local _, found = string.find(v, ";", last)
+					if found then
+						preserveColors[color] = string.sub(v, last+1, found-1)
+					end
+				end
+			end
+		end
+	end
 
 	newIdentity = sb.jsonMerge(
 		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
 		newIdentity,
-		((not newIdentity.force) and speciesIdentites[newIdentity.species]) or {}
+		((not force) and speciesIdentites[newIdentity.species]) or {}
 	)
-
-	local speciesFile = root.speciesConfig(newIdentity.species)
+	if not force then
+		for k, v in pairs(newIdentity) do
+			if type(v) == "string" then
+				for color, replace in pairs(preserveColors) do
+					if type(replace) == "string" then
+						newIdentity[k] = string.gsub(v, color.."%b=;", color.."="..replace..";")
+					end
+				end
+			end
+		end
+	end
 
 	if (not speciesIdentites[newIdentity.species]) and not speciesFile.noUnlock then
 		local speciesCount = 0
