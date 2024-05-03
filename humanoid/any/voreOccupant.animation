@@ -31,7 +31,7 @@
 					"cleavage": { "frames": 1, "cycle": 0, "mode": "end" },
 					"cock": { "frames": 1, "cycle": 0, "mode": "end" },
 					"balls": { "frames": 1, "cycle": 0, "mode": "end" },
-					"grabbed": { "frames": 1, "cycle": 0, "mode": "end" },
+					"grabbed": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
 			// this animation state has a higher priority than the locations and will override it when it
@@ -102,27 +102,27 @@
 						"belly" : {"properties":{
 							"anchorPart":"belly",
 							"zLevel":-1,
-							"offset" : [0,-1],
+							"offset" : [0,-1]
 						}},
 						"womb" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.25],
+							"offset" : [0,-1.25]
 						}},
 						"shaft" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.75],
+							"offset" : [0,-1.75]
 						}},
 						"balls" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.5],
+							"offset" : [0,-1.5]
 						}},
 						"breasts" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-0.5],
+							"offset" : [0,-0.5]
 						}},
 						"grabbed" : {"properties":{
 							"anchorPart":"backarm",
@@ -146,7 +146,7 @@
 									{"scale":[-0.1, 0.1],	"translate":[0.25,0.25],	"rotate":100},
 									{"scale":[-0.1, 0.1],	"translate":[0,0.25],		"rotate":180},
 									{"scale":[0, 0],		"translate":[0,-0.5],		"rotate":90	},
-									{"scale":[0, 0],		"translate":[0,-1],			"rotate":0	},
+									{"scale":[0, 0],		"translate":[0,-1],			"rotate":0	}
 								],
 								"hidden":[
 									false,
@@ -156,10 +156,11 @@
 									false,
 									true,
 									true,
-									true,
+									true
 								]
 							},
 							"properties" : {
+								"anchorPart" :"head",
 								"zLevel" : 3.9
 							}
 
@@ -184,11 +185,12 @@
 									false,
 									true,
 									true,
-									true,
+									true
 								]
 							},
 							"properties" : {
-								"zLevel" : 3.9
+								"anchorPart" : "body",
+								"zLevel" : -3.9
 							}
 						},
 						"navelVore" : {
@@ -211,10 +213,11 @@
 									false,
 									true,
 									true,
-									true,
+									true
 								]
 							},
 							"properties" : {
+								"anchorPart" : "belly",
 								"zLevel" : 3.9
 							}
 						},
@@ -238,10 +241,11 @@
 									false,
 									true,
 									true,
-									true,
+									true
 								]
 							},
 							"properties" : {
+								"anchorPart" : "pussy",
 								"zLevel" : 3.9
 							}
 						},
@@ -265,10 +269,11 @@
 									false,
 									true,
 									true,
-									true,
+									true
 								]
 							},
 							"properties" : {
+								"anchorPart" : "cock",
 								"zLevel" : 3.9
 							}
 						},
@@ -292,10 +297,11 @@
 									false,
 									true,
 									true,
-									true,
+									true
 								]
 							},
 							"properties" : {
+								"anchorPart" : "breasts",
 								"zLevel" : 3.9
 							}
 						}

@@ -10,8 +10,31 @@
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
 
-	"humanoidConfig" : "/species/sbqQuadrupedPokemon.config",
-
+	"humanoidConfig" : "/species/sbqQuadruped.config",
+	"humanoidOverrides" : {
+		"particleEmitters": {
+			"deathPoof" : {
+				"particles" : [
+					{
+						"particle" : {
+							"type" : "animated",
+							"animation" : "/animations/playerdeath-Wasabi_Raptor_PokemonDeath/quadruped/playerdeath.animation",
+							"size" : 1,
+							"angularVelocity" : 0,
+							"fade" : 1,
+							"destructionTime" : 1,
+							"position" : [0, 0],
+							"initialVelocity" : [0, 0],
+							"finalVelocity" : [0, 0],
+							"approach" : [1, 1],
+							"timeToLive" : 1.0,
+							"layer" : "middle"
+						}
+					}
+				]
+			}
+		}
+	},
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
 
