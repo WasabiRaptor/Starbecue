@@ -292,8 +292,16 @@
 	"animationConfig" : "/humanoid/any/quadruped.animation",
 	"animationCustom" : [
 		"/humanoid/any/quadrupedPred.animation",
-		"/humanoid/any/voreOccupantsQuadruped.animation"
+		"/humanoid/any/voreOccupants.animation"
 	],
+	"voreConfig" : [
+		"/humanoid/any/vore_quadruped.config",
+		{
+			"defaultSettings" : {
+			}
+		}
+	],
+
 
 	"infuseData" : [
 		"/humanoid/any/basicInfuseData.config"

@@ -496,7 +496,7 @@
 						"none": { "properties": {} }
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyImage>:<pose>.<bellyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
 						"eat" : "expand"
 					},
 					"bodyHiddenState" : {
@@ -855,7 +855,7 @@
 						"none": { "properties": {} }
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyImage>:<pose>.<bellyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
 						"eat" : "expand"
 					},
 					"bodyHiddenState" : {
