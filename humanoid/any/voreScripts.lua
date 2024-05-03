@@ -27,7 +27,6 @@ end
 function Default:settingAnimations(hideSlots)
 	hideSlots = hideSlots or {}
 	local legs = sbq.getItemSlot("legsCosmetic") or sbq.getItemSlot("legs")
-	sbq.logInfo(legs,2)
 	if (not hideSlots.legs) and legs and (not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
 		self:doAnimations(sbq.voreConfig.legsHide)
 	else
