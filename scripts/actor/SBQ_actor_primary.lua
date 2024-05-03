@@ -26,6 +26,19 @@ function init()
 
 	message.setHandler("sbqReleased", function(_, _, data)
 		status.setStatusProperty("sbqProgressBar", 0)
+		if mcontroller.isCollisionStuck() then -- copy of vanilla's "checkStuck" but without the lounge check
+			-- sloppy catch-all correction for various cases of getting stuck in things
+			-- due to bad spawn position, failure to exit loungeable (on ships), etc.
+			local poly = mcontroller.collisionPoly()
+			local pos = mcontroller.position()
+			for maxDist = 2, 4 do
+				local resolvePos = world.resolvePolyCollision(poly, pos, maxDist)
+				if resolvePos then
+					mcontroller.setPosition(resolvePos)
+					break
+				end
+			end
+		end
 	end)
 
 	message.setHandler("sbqForceSit", function(_, _, data)
