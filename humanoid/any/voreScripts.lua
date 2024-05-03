@@ -414,9 +414,33 @@ function default:chooseLocation(name, action, target, predSelect, ...)
 	world.sendEntityMessage( (predSelect and entity.id()) or target, "sbqChooseLocation", entity.id(), target, locations)
 end
 
-function default:transform(name, action, target, predSelect, ...)
+function default:transformAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
+	local location = occupant:getLocation()
+	local transformResult = action.transformResult or location.transformResult or sbq.voreConfig.transformResult or { species = humanoid.species() }
+	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
+	if not transformResult then return false, "invalidAction" end
+	local checkSettings = {
+		speciesTF = transformResult.species and true,
+		genderTF = transformResult.gender and true
+	}
+	if not sbq.tableMatches(checkSettings, sbq.getPublicProperty(target, "sbqPublicSettings")) then return false, "targetSettingsMismatch" end
+	return true
+end
+function default:transform(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	local location = occupant:getLocation()
+	local transformResult = action.transformResult or location.transformResult or sbq.voreConfig.transformResult or { species = humanoid.species() }
+	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
+	if not transformResult then return false, "invalidAction" end
+	local checkSettings = {
+		speciesTF = transformResult.species and true,
+		genderTF = transformResult.gender and true
+	}
+	if not sbq.tableMatches(checkSettings, sbq.getPublicProperty(target, "sbqPublicSettings")) then return false, "targetSettingsMismatch" end
+
 	if not ((occupant.flags.digested and (occupant.locationSettings.transformDigested))
 		or ((not occupant.flags.digested) and (occupant.locationSettings.transform)))
 	then
@@ -424,17 +448,13 @@ function default:transform(name, action, target, predSelect, ...)
 		occupant.locationSettings.transformDigested = true
 		occupant:refreshLocation()
 		return true
-	elseif (occupant:getPublicProperty("sbqTransformProgress") or 0) < 1 then
+	elseif (not world.entityStatPositive(target, "sbqTransformation")) or ((occupant:getPublicProperty("sbqTransformProgress") or 0) < 1) then
 	end
+
 	occupant.flags.transformed = true
 	occupant.locationSettings.transform = false
 	occupant.locationSettings.transformDigested = false
-	local location = occupant:getLocation()
-	occupant:sendEntityMessage("sbqDoTransformation",
-		action.transformResult or location.transformResult or { species = humanoid.species() },
-		action.transformDuration or location.transformDuration,
-		action.transformPerma or location.transformPerma
-	)
+	occupant:sendEntityMessage("sbqDoTransformation", transformResult, transformDuration)
 end
 
 function default:infuseAvailable(name, action, target, ...)
@@ -466,7 +486,7 @@ function default:tryInfuse(name, action, target, ...)
 			occupant.locationSettings[infuseType] = true
 			occupant:refreshLocation()
 			return true
-		elseif (occupant:getPublicProperty("sbqInfuseProgress") or 0) < 1 then
+		elseif (not world.entityStatPositive(target, "sbq_"..infuseType)) or ((occupant:getPublicProperty("sbqInfuseProgress") or 0) < 1) then
 		end
 		location.infusedEntity = target
 		occupant.flags.infused = true

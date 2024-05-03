@@ -205,6 +205,15 @@
 		"/humanoid/any/quadrupedPred.animation",
 		"/humanoid/any/voreOccupantsQuadruped.animation"
 	],
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"overrideSettings" : {
+				"breasts" : false
+			},
+			"transformResult" : {"species":"vaporeon"}
+		}
+	],
 
 	"infuseData" : [
 		"/humanoid/any/basicInfuseData.config"

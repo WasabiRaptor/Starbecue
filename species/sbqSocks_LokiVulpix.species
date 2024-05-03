@@ -205,6 +205,17 @@
 		"/humanoid/any/voreOccupantsQuadruped.animation"
 	],
 
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : false,
+				"visibleNipples" : false
+			},
+			"transformResult" : {"species":"flareon"}
+		}
+	],
+
 	"infuseData" : [
 		"/humanoid/any/basicInfuseData.config"
 	]

@@ -172,6 +172,15 @@
 		"/humanoid/any/humanoidPred.animation",
 		"/humanoid/any/voreOccupants.animation",
 	],
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"visibleNavel" : true
+			},
+			"transformResult" : {"species":"any"}
+		}
+	],
 
 	"infuseData" : [
 		"/humanoid/any/basicInfuseData.config"
