@@ -587,7 +587,8 @@ QuestRelations.temporaryNpc = defineQueryRelation("temporaryNpc", true) {
   default = Relation.some
 }
 
-QuestRelations.species = defineQueryRelation("species", true) {
+-- Changed to be non-static, now that it can change
+QuestRelations.species = defineQueryRelation("species", false) {
   [case(1, Entity, NonNil)] = function (self, entity, species)
       if xor(self.negated, entity:entitySpecies() == species) then
         return {{entity, species}}
@@ -1153,13 +1154,12 @@ QuestRelations.commonItem = defineQueryRelation("commonItem", true) {
   default = Relation.empty
 }
 
--- Check an entity's species using species overrides, first
--- NOT static, as it CAN change... although it might be more performant to make it static unless we actually need a quest chain where this matters
-QuestRelations.sbq_species = defineQueryRelation("sbq_species", false) {
+-- Check an entity's original species
+QuestRelations.sbq_speciesOriginal = defineQueryRelation("sbq_speciesOriginal", true) {
   [case(1, Entity, NonNil)] = function (self, entity, species)
-    -- Get the species override value, or default to the original if there's no override
-    local customSpecies = entity:callScript("speciesOverride._species") or entity:entitySpecies()
-    if xor(self.negated, customSpecies == species) then
+    -- Get the original species value, or default to the usual method if there's not one
+    local originalSpecies = entity:callScript("status.statusProperty", "sbqOriginalSpecies") or entity:entitySpecies()
+    if xor(self.negated, originalSpecies == species) then
       return {{entity, species}}
     end
     return Relation.empty
@@ -1167,55 +1167,13 @@ QuestRelations.sbq_species = defineQueryRelation("sbq_species", false) {
 
   [case(2, Entity, Nil)] = function (self, entity)
     -- Same as above, but we're returning it instead
-    local customSpecies = entity:callScript("speciesOverride._species") or entity:entitySpecies()
+    local originalSpecies = entity:callScript("status.statusProperty", "sbqOriginalSpecies") or entity:entitySpecies()
     if self.negated then return Relation.some end
-    return {{entity, customSpecies}}
+    return {{entity, originalSpecies}}
   end,
 
   default = Relation.some
 }
-
--- Computed pool of all valid (installed) generic species
--- TODO - Kind of a hack! Uses the random NPC list for the SBQ hub. Could use something more definitive or specific to this
--- And maybe a way to keep this list after calculating it once, though quest generation is semi-rare so it's probably fine.
-local function getAllValidSpecies()
-  local validSpecies = {}
-  local allRandomNPCs = root.assetJson("/npcs/sbqHub/sbqHubRandomNpcList.config")
-  for _, npcData in pairs(allRandomNPCs) do
-    local species = npcData.npc
-    local requirements = npcData.checkRequirements or {}
-    local addToList = root.speciesConfig(species)
-    -- Use this NPC type to filter out the OCs and species not installed
-    if npcData.npcTypeName ~= "sbqVoreVillager" then
-      addToList = false
-    end
-    -- Check for required assets to make sure this species is installed
-    if addToList and requirements.checkItems then
-      for i, item in ipairs(requirements.checkItems) do
-        addToList = root.itemConfig(item)
-        if not addToList then break end
-      end
-    end
-    if addToList and requirements.checkMods then
-      for i, mod in ipairs(requirements.checkMods) do
-        addToList = root.modMetadata(mod)
-        if not addToList then break end
-      end
-    end
-    if addToList and requirements.checkAssets then
-      for i, path in ipairs(requirements.checkAssets) do
-        addToList = root.assetExists(path)
-        if not addToList then break end
-      end
-    end
-
-
-    if addToList then
-      validSpecies[species] = species
-    end
-  end
-  return validSpecies
-end
 
 -- Validate the species given as the first parameter to see if they are installed
 -- If they are, the second parameter will be populated with the species
@@ -1224,8 +1182,8 @@ end
 QuestRelations.sbq_speciesValidate = defineQueryRelation("sbq_speciesValidate", true) {
   -- See if the passed value is a valid species
   [case(1, NonNil, Nil)] = function (self, species)
-    local validSpecies = getAllValidSpecies() or {}
-    if xor(self.negated, validSpecies[species]) then
+    local validSpecies = root.speciesConfig(species) ~= nil
+    if xor(self.negated, validSpecies) then
       return {{species, species}}
     end
     return Relation.empty
@@ -1240,6 +1198,7 @@ QuestRelations.sbq_speciesValidate = defineQueryRelation("sbq_speciesValidate", 
 -- Check if the NPC is an OC
 -- Static, so it can only be used as a precondition, as quests aren't expected to be able to change this
 QuestRelations.sbq_isOC = defineQueryRelation("sbq_isOC", true) {
+  -- We're given an NPC, so check if it's an OC
   [case(1, Entity)] = function (self, npc)
     -- OC status is a config parameter
     if xor(self.negated, npc:callScript("config.getParameter", "isOC")) then
@@ -1248,7 +1207,7 @@ QuestRelations.sbq_isOC = defineQueryRelation("sbq_isOC", true) {
     return Relation.empty
   end,
 
-  --
+  -- No NPC has been chosen/found, so return a list of possible options
   [case(2, Nil)] = function (self)
     if self.negated then return Relation.some end
     -- Return a table of all of the known OCs in context
@@ -1265,6 +1224,7 @@ QuestRelations.sbq_isOC = defineQueryRelation("sbq_isOC", true) {
 
 -- Check if the NPC is a SBQ NPC
 QuestRelations.sbq_isSBQ = defineQueryRelation("sbq_isSBQ", true) {
+  -- We're given an NPC, so check if it's a SBQ NPC
   [case(1, Entity)] = function (self, npc)
     -- There's a config parameter to check this
     if xor(self.negated, npc:callScript("config.getParameter", "sbqNPC")) then
@@ -1273,7 +1233,7 @@ QuestRelations.sbq_isSBQ = defineQueryRelation("sbq_isSBQ", true) {
     return Relation.empty
   end,
 
-  --
+  -- No NPC has been chosen/found, so return a list of possible options
   [case(2, Nil)] = function (self)
     if self.negated then return Relation.some end
     -- Return a table of all of the known SBQ NPCs in context
@@ -1290,9 +1250,13 @@ QuestRelations.sbq_isSBQ = defineQueryRelation("sbq_isSBQ", true) {
 
 -- Check if an entity can be a pred in vore
 QuestRelations.sbq_isPred = defineQueryRelation("sbq_isPred", true) {
-  -- A pred capable of the specified vore type
+  -- We're given an NPC and a vore type, so see if they are a pred for that type
   [case(1, Entity, NonNil)] = function (self, entity, predType)
-    local isPred = entity:callScript("sbq.getLocationSetting", predType, "Pred", false) or false
+    local isPred = false
+    local settings = entity:callScript("status.statusProperty", "sbqPublicSettings") or {}
+    if settings.vorePrefs and settings.vorePrefs[predType] then
+      isPred = settings.vorePrefs[predType].pred or false
+    end
     if xor(self.negated, isPred) then
       return {{entity, predType}}
     end
@@ -1307,10 +1271,23 @@ QuestRelations.sbq_isPred = defineQueryRelation("sbq_isPred", true) {
     return {self.predicands}
   end,
 
-  -- Any kind of pred
-  -- TODO - Not implemented, yet. Ideally, we would return the list of every voreType allowed, kind of like in sbq_isPrey
+  -- We have an NPC, but no defined vore type, so return the list of vore types they're a pred for
   [case(3, Entity, Nil)] = function (self, entity)
-    return Relation.some
+    if self.negated then return Relation.some end
+    
+    local results = {}
+    local settings = entity:callScript("status.statusProperty", "sbqPublicSettings") or {}
+    if settings.vorePrefs then
+      for voreType,voreTypeSettings in pairs(settings.vorePrefs) do
+        if voreTypeSettings and voreTypeSettings.pred then
+          results[#results+1] = {entity, voreType}
+        end
+      end
+    end
+    if #results > 0 then
+      return results
+    end
+    return Relation.empty
   end,
 
   [case(4, Player, Nil)] = function (self, player)
@@ -1324,11 +1301,13 @@ QuestRelations.sbq_isPred = defineQueryRelation("sbq_isPred", true) {
 
 -- Check if an entity can be prey in vore
 QuestRelations.sbq_isPrey = defineQueryRelation("sbq_isPrey", true) {
-  -- Counts as prey for the specified vore type
+  -- We're given an NPC and a vore type, so see if they are a prey for that type
   [case(1, Entity, NonNil)] = function (self, entity, preyType)
-    -- TODO - SBQ merges this with a default table. Is that important? If so, could use a new function in SBQ to call
-    local preyEnabled = entity:callScript("status.statusProperty", "sbqPreyEnabled") or {}
-    local isPrey = preyEnabled.preyEnabled and preyEnabled[preyType]
+    local isPrey = false
+    local settings = entity:callScript("status.statusProperty", "sbqPublicSettings") or {}
+    if settings.vorePrefs and settings.vorePrefs[preyType] then
+      isPrey = settings.vorePrefs[preyType].prey or false
+    end
     if xor(self.negated, isPrey) then
       return {{entity, preyType}}
     end
@@ -1343,23 +1322,17 @@ QuestRelations.sbq_isPrey = defineQueryRelation("sbq_isPrey", true) {
     return {self.predicands}
   end,
 
-  -- Counts as prey at all, returning the prey settings that are enabled
-  -- TODO - Restrict to only vore types?
+  -- We have an NPC, but no defined vore type, so return the list of vore types they're a prey for
   [case(3, Entity, Nil)] = function (self, entity)
-    -- TODO - Maybe if this is negated and preyEnabled is false, we could return something?
-    -- However, you would need to pass something back to go into the second parameter
     if self.negated then return Relation.some end
-    -- TODO - Maybe same as above?
-    local preyEnabled = entity:callScript("status.statusProperty", "sbqPreyEnabled") or {}
-    -- If overall prey isn't enabled, we fail the whole relation here
-    if not preyEnabled.preyEnabled then return Relation.empty end
-    -- Now, we collect every voreType for which prey is enabled
+    
     local results = {}
-    for voreType,enabled in pairs(preyEnabled) do
-      -- TODO - A way to know which values are vore types without hard-coding them?
-      -- As it is, we'll just return every enabled prey setting
-      if enabled and voreType ~= "preyEnabled" then
-        results[#results+1] = {entity, voreType}
+    local settings = entity:callScript("status.statusProperty", "sbqPublicSettings") or {}
+    if settings.vorePrefs then
+      for voreType,voreTypeSettings in pairs(settings.vorePrefs) do
+        if voreTypeSettings and voreTypeSettings.prey then
+          results[#results+1] = {entity, voreType}
+        end
       end
     end
     if #results > 0 then
@@ -1381,11 +1354,10 @@ QuestRelations.sbq_isPrey = defineQueryRelation("sbq_isPrey", true) {
 -- Check if the NPC can be transformed into a different species
 QuestRelations.sbq_canTransformSpecies = defineQueryRelation("sbq_canTransformSpecies", true) {
 	[case(1, Entity)] = function (self, npc)
-	  -- TODO - SBQ merges this with a default table. Is that important? If so, could use a new function in SBQ to call
-	  local preyEnabled = npc:callScript("status.statusProperty", "sbqPreyEnabled") or {}
-	  local canTransform = preyEnabled.transformAllow
-	  if xor(self.negated, canTransform) then
-		return {{npc}}
+    local settings = npc:callScript("status.statusProperty", "sbqPublicSettings") or {}
+    local canTransformSpecies = settings.speciesTF
+	  if xor(self.negated, canTransformSpecies) then
+		  return {{npc}}
 	  end
 	  return Relation.empty
 	end,

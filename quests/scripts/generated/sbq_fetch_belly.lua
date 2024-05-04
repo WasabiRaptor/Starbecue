@@ -7,53 +7,32 @@ function onInit()
 end
 
 function onUpdate(dt)
-  -- Using object completion as a sort of state machine
+  -- Get quest giver's (pred's) entity id from their unique id
+  local questGiverEntityId = world.getUniqueEntityId(quest.parameters().questGiver.uniqueId)
+  -- If quest giver can't be found, don't progress the quest
+  if not questGiverEntityId then return end
+
+  -- Using objective completion as a sort of state machine
   if not objective("enter"):isComplete() then
-    checkEntered(dt)
+    if isPlayerInsideQuestGiver(questGiverEntityId) then
+      onEnter()
+    end
   -- The complete function above will take care of the fetch objective
   elseif not objective("exit"):isComplete() then
-    checkExited(dt)
-  end
-end
-
-function checkEntered(dt)
-  -- Must use a message to get the info we want
-  if self.enterPromise == nil then
-    self.enterPromise = world.sendEntityMessage(quest.parameters().questGiver.uniqueId, "sbqGetPreyEnabled")
-  else
-    if self.enterPromise:finished() then
-      if self.enterPromise:succeeded() then
-        local result = self.enterPromise:result()
-        if type(result) == "table" then
-          if type(result.preyList) == "table" and hasPlayerId(result.preyList) then
-            -- Player made it inside the pred
-            onEnter()
-          end
-        end
-      end
-      self.enterPromise = nil
+    if not isPlayerInsideQuestGiver(questGiverEntityId) then
+      onExit()
     end
   end
 end
 
-function checkExited(dt)
-  -- Must use a message to get the info we want
-  if self.exitPromise == nil then
-    self.exitPromise = world.sendEntityMessage(quest.parameters().questGiver.uniqueId, "sbqGetPreyEnabled")
-  else
-    if self.exitPromise:finished() then
-      if self.exitPromise:succeeded() then
-        local result = self.exitPromise:result()
-        if type(result) == "table" then
-          if type(result.preyList) == "table" and not hasPlayerId(result.preyList) then
-            -- Player made it out of the pred
-            onExit()
-          end
-        end
-      end
-      self.exitPromise = nil
-    end
-  end
+function isPlayerInsideQuestGiver(questGiverEntityId)
+  -- Find out what the player is lounging in, if anything
+  local loungeAnchor = world.entityCurrentLounge(player.id())
+  if not loungeAnchor then return false end
+
+  -- Return if Player is inside the quest giver
+  --TODO Check specifically for the belly location
+  return loungeAnchor.entityId == questGiverEntityId
 end
 
 function onEnter()
@@ -84,13 +63,6 @@ function hasItems()
     end
   end
   return true
-end
-
-function hasPlayerId(table)
-  for _,id in ipairs(table) do
-    if player.id() == id then return true end
-  end
-  return false
 end
 
 -- Vanilla fetch.lua uses this so the same script can handle multiple different quest templates.
