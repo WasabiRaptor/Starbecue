@@ -17,18 +17,18 @@ function update(dt, fireMode, shiftHeld)
 		self.useTimer = self.useTimer + dt
 
 		if self.useTimer < 3.1 then
-			activeItem.setArmAngle(self.useTimer/5)
-		elseif self.useTimer < 5.5 then
-			activeItem.setArmAngle(math.max(3.1/5 - (self.useTimer-3.1)*3, -math.pi/3))
+			activeItem.setArmAngle(self.useTimer / 5)
 		else
-			world.sendEntityMessage(entity.id(), "sbqEndMysteriousPotionTF")
+			self.useTimer = nil
+			activeItem.setArmAngle(-math.pi / 4)
+			player.setScriptContext("starbecue")
+			player.callScript("sbq.revertTF")
 			item.consume(1)
-			animator.playSound("activate")
 			init()
 		end
 	end
 end
 
 function transformationItemArgs(useType)
-	return { message = "sbqEndMysteriousPotionTF", itemName = item.name(), consume = true }
+	return { message = "sbqRevertTF", itemName = item.name(), consume = true }
 end

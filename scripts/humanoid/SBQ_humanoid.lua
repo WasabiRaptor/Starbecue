@@ -6,7 +6,7 @@ function sbq.humanoidInit()
 	message.setHandler("sbqDoTransformation", function (_,_, ...)
 		sbq.doTransformation(...)
 	end)
-	message.setHandler("sbqEndMysteriousPotionTF", function (_,_)
+	message.setHandler("sbqRevertTF", function (_,_)
 		sbq.revertTF()
 	end)
 	message.setHandler("sbqGetIdentity", function (_,_)
@@ -184,6 +184,9 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end
 	sbq.refreshPredHudPortrait()
+	if sbq.reloadVoreConfig then
+		sbq.reloadVoreConfig({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
+	end
 end
 
 function sbq.revertTF()

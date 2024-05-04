@@ -1,7 +1,7 @@
 local didHit = false
 function hit(eid)
     didHit = true
-    local rpc = world.sendEntityMessage(eid, config.getParameter("message"), table.unpack(config.getParameter("args")))
+    local rpc = world.sendEntityMessage(eid, config.getParameter("message"), table.unpack(config.getParameter("args") or {}))
 	if rpc:finished() then
 		if not rpc:succeeded() then didHit = false end
 	end
