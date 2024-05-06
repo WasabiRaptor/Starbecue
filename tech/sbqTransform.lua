@@ -208,29 +208,7 @@ function _RadialMenu:assignFavorite(slot, species)
 end
 function _RadialMenu:openCharCreation()
 	player.interact("OpenCharCreation",
-		{ speciesIdentites = speciesIdentites, currentSpecies = player.species(), hideWidgets = {
-			["btnSkipIntro"] = false,
-			["shirt.up"] = false,
-			["shirt.down"] = false,
-			["pants.up"] = false,
-			["pants.down"] = false,
-			["shirtColor.up"] = false,
-			["shirtColor.down"] = false,
-			["pantsColor.up"] = false,
-			["pantsColor.down"] = false,
-			["labelShirt"] = false,
-			["labelPants"] = false,
-			["labelShirtColor"] = false,
-			["labelPantsColor"] = false,
-			["mode"] = false,
-			["labelMode"] = false,
-			["labelCasualMode"] = false,
-			["labelSurvivalMode"] = false,
-			["labelHardcoreMode"] = false,
-			["lblSkipIntro"] = false,
-			["labelDifficulty"] = false,
-
-	}})
+		{ speciesIdentites = speciesIdentites, currentSpecies = player.species()})
 end
 
 function sbq_transform.getPortrait(portrait, species)
