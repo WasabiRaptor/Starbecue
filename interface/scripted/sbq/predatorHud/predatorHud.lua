@@ -116,7 +116,7 @@ function sbq.updateBars(dt)
 end
 
 function sbq.replace(from, to)
-	if to == nil or #to == 0 then return "" end
+	if not to then return "" end
 	local directive = "?replace;"
 	for i, f in ipairs(from) do
 		directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"

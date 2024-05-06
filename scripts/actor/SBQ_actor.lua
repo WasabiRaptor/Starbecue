@@ -77,7 +77,7 @@ end
 function sbq.checkComfortLevel()
 	local comfortLevel = 0
 	local adjectives = {}
-	local loungeEffects = status.getPersistentEffects("lounging")
+	local loungeEffects = status.getPersistentEffects("lounging") or {}
 	for _, effect in ipairs(loungeEffects) do
 		if type(effect) == "string" then
 			local effectConfig = root.effectConfig(effect).effectConfig
