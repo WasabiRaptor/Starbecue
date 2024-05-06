@@ -71,6 +71,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
 	local originalGender = status.statusProperty("sbqOriginalGender")
+	local currentName = currentIdentity.name
 
 	if not originalSpecies then
 		originalSpecies = humanoid.species()
@@ -143,6 +144,9 @@ function sbq.doTransformation(newIdentity, duration, ...)
 			end
 		end
 	end
+	if not force then
+		newIdentity.name = currentName
+	end
 
 	newIdentity = sb.jsonMerge(
 		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
@@ -169,6 +173,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		speciesIdentites[newIdentity.species] = newIdentity
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
 		if (speciesCount >= sbq.config.transformMenuUnlock) and player then
+			player.makeTechAvailable("sbqTransform")
 			player.enableTech("sbqTransform")
 			player.radioMessage("sbqTransformUnlocked")
 		end
