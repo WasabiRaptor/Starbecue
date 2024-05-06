@@ -1308,7 +1308,6 @@ function _Occupant:refreshLocation(name, subLocation, force)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
-		{ stat = "sbqGetDigestDrops", amount = self.locationSettings.getDigestDrops and 1 or 0 },
 		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
 
 	}
