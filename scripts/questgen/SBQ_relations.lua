@@ -222,3 +222,11 @@ QuestRelations.sbq_canTransformSpecies = defineQueryRelation("sbq_canTransformSp
 
 	default = Relation.some
 }
+
+local _maybeGenerateQuest = maybeGenerateQuest
+function maybeGenerateQuest(...)
+	if sbq.settings.offerQuests then
+		return _maybeGenerateQuest(...)
+	end
+	return false
+end
