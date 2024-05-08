@@ -136,6 +136,7 @@ end
 function default:voreAvailable(name, action, target, locationName, subLocationName, throughput, ...)
 	if not target then return true end
 	if target == sbq.loungingIn() then return false, "invalidAction" end
+	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local loungeAnchor = world.entityCurrentLounge(target)
 	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
@@ -159,6 +160,7 @@ end
 
 function default:tryVore(name, action, target, locationName, subLocationName, throughput, ...)
 	if target == sbq.loungingIn() then return false, "invalidAction" end
+	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local loungeAnchor = world.entityCurrentLounge(target)
 	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
@@ -198,7 +200,7 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 	end
 end
 function default:tryLetout(name, action, target, throughput, ...)
-	if sbq.statPositive("sbqIsPrey") then return false, "nested" end
+	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	if throughput or action.throughput then
@@ -225,7 +227,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	end
 end
 local function letout(funcName, action, target, preferredAction, ...)
-	if sbq.statPositive("sbqIsPrey") then return false, "nested" end
+	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	if target then
 		occupant = Occupants.entityId[tostring(target)]
 		if not occupant then return end
