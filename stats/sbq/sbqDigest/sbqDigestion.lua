@@ -78,7 +78,7 @@ function update(dt)
 	end
 end
 
-function uninit()
+function onExpire()
 	if (config.getParameter("fatal") and self.digested) and not status.statPositive((config.getParameter("digestType") or "sbqAcidDigest").."FatalImmune") then
 		local entityType = world.entityType(entity.id())
 		if entityType == "npc" or entityType == "monster" then

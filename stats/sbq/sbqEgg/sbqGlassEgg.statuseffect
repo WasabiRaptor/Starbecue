@@ -1,0 +1,59 @@
+{
+	"name" : "sbqGlassEgg",
+	"defaultDuration" : 1,
+	"animationConfig" : "/stats/sbq/sbqEgg/sbqEgg.animation",
+	"scripts" : [
+		"sbqEgg.lua"
+	],
+	"effectConfig" : {
+		"persistent" : true,
+		"eggParameters" : {
+			"cracks" : 0
+		},
+		"image": "/stats/sbq/sbqEgg/default/egg.png",
+		"shardsImage" : "/stats/sbq/sbqEgg/shards.png",
+		"shards" : 10,
+		"cracks" : 3,
+		"directives" : "?crop=0;0;0;0", //"?addmask=/stats/sbq/sbqEgg/mask.png",
+		"statModifiers" : [
+			{"stat":"breathprotection", "amount":1}
+		],
+		"ballRadius": 1.5,
+		"controlParameters" : {
+			"collisionPoly" : [
+				[-0.5,-2],[0.5,-2],[1.25,-1.625],[1.5,-1],[1.5,0],[1,1.5],[0.5,2],[-0.5,2],[-1,1.5],[-1.5,0],[-1.5,-1],[-1.25,-1.625]
+			],
+			"walkSpeed" : 0.01,
+			"runSpeed" : 4,
+			"flySpeed" : 0,
+			"airJumpProfile" : {
+				"jumpSpeed" : 5
+			},
+			"liquidJumpProfile" : {
+				"jumpSpeed" : 5
+			}
+		},
+		"colorOrder" : ["secondary", "primary"],
+		"baseColors" : {
+			"primary" : ["70695a", "a99f87", "eae0c8", "fff6de"], // main egg
+			"secondary" : ["47623a", "678857", "779e64", "9ccd83"] // egg spots
+		},
+		"colors" : {
+			"primary" : [
+				["352b127f", "f6b9197f", "fde03f7f", "fff8b57f"], // yellow
+				["40110a7f", "fa81317f", "feb0537f", "ffedc47f"], // orange
+				["4f160d7f", "ef54437f", "fe98757f", "ffe2c97f"], // red
+				["4c21537f", "f57afc7f", "f6bbg97f", "fee5ff7f"], // pink
+				["340e527f", "ae38f17f", "da89f77f", "fedbff7f"], // purple
+				["0c2b4b7f", "12c2e87f", "56ebf87f", "c7feff7f"], // cyan
+				["0c482d7f", "0cd6b87f", "4df4df7f", "c3fffc7f"], // teal
+				["0df00f7f", "17dc0d7f", "63f5747f", "c7ffdc7f"], // green
+				["2d510d7f", "8ae1007f", "c9f2367f", "fffdae7f"], // lime
+				["222d337f", "6ea2a97f", "a2dbdb7f", "deffff7f"] // pale
+			],
+			"secondary" : [
+				["70695a", "a99f87", "eae0c8", "fff6de"]
+			]
+		}
+	}
+}

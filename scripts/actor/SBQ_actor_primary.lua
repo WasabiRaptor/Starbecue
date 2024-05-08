@@ -142,7 +142,10 @@ function update(dt)
 end
 
 function applyDamageRequest(damageRequest)
-	if (damageRequest.damageSourceKind == "sbq_digest")
+	if damageRequest.damageSourceKind == "sbq_status" then
+		status.addEphemeralEffects(damageRequest.statusEffects, damageRequest.sourceEntityId)
+		return {}
+	elseif (damageRequest.damageSourceKind == "sbq_digest")
 	or (damageRequest.damageSourceKind == "sbq_cumdigest")
 	or (damageRequest.damageSourceKind == "sbq_femcumdigest")
 	or (damageRequest.damageSourceKind == "sbq_milkdigest")

@@ -12,6 +12,14 @@ local TagSet = _ENV.QuestPredicands.TagSet
 local NpcType = _ENV.QuestPredicands.NpcType
 
 
+-- local defineQueryRelation = _ENV.defineQueryRelation
+-- local QuestRelations = _ENV.QuestRelations
+-- local case = _ENV.case
+-- local NonNil = _ENV.NonNil
+-- local Relation = _ENV.Relation
+-- local xor = _ENV.xor
+-- local Nil = _ENV.Nil
+
 -- Check an entity's original species
 QuestRelations.sbq_speciesOriginal = defineQueryRelation("sbq_speciesOriginal", true) {
 	[case(1, Entity, NonNil)] = function(self, entity, species)

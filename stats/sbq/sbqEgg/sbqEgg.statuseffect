@@ -1,0 +1,62 @@
+{
+	"name" : "sbqEgg",
+	"defaultDuration" : 1,
+	"animationConfig" : "/stats/sbq/sbqEgg/sbqEgg.animation",
+	"scripts" : [
+		"sbqEgg.lua"
+	],
+	"effectConfig" : {
+		"persistent" : true,
+		"eggParameters" : {
+			"cracks" : 0
+		},
+		"image": "/stats/sbq/sbqEgg/default/egg.png",
+		"shardsImage" : "/stats/sbq/sbqEgg/shards.png",
+		"shards" : 10,
+		"cracks" : 3,
+		"directives" : "?crop=0;0;0;0", //"?addmask=/stats/sbq/sbqEgg/mask.png",
+		"statModifiers" : [
+			{"stat":"breathprotection", "amount":1}
+		],
+		"ballRadius": 1.5,
+		"controlParameters" : {
+			"collisionPoly" : [
+				[-0.5,-2],[0.5,-2],[1.25,-1.625],[1.5,-1],[1.5,0],[1,1.5],[0.5,2],[-0.5,2],[-1,1.5],[-1.5,0],[-1.5,-1],[-1.25,-1.625]
+			],
+			"walkSpeed" : 0,
+			"runSpeed" : 4,
+			"flySpeed" : 0,
+			"airJumpProfile" : {
+				"jumpSpeed" : 5
+			},
+			"liquidJumpProfile" : {
+				"jumpSpeed" : 5
+			}
+		},
+		"colorOrder" : ["secondary", "primary"],
+		"baseColors" : {
+			"primary" : ["70695a", "a99f87", "eae0c8", "fff6de"], // main egg
+			"secondary" : ["47623a", "678857", "779e64", "9ccd83"] // egg spots
+		},
+		"colors" : {
+			"primary" : [
+				["70695a", "a99f87", "eae0c8", "fff6de"], // tan
+				["6f6e6b", "a6a39d", "e6e3da", "fffcf3"], // white
+				["b64e18", "bf6936", "e99564", "f5b488"] // brown
+			],
+			"secondary" : [
+				["654040", "885757", "9e6464", "cd8383"], // red
+				["7b5b31", "98733f", "ad8243", "cb964c"], // orange
+				["7b6f2e", "988b3f", "ada543", "c7cb4c"], // yellow
+				["47623a", "678857", "779e64", "9ccd83"], // green
+				["2b7864", "3f9881", "43ad95", "4ccbaa"], // teal
+				["284770", "3f6698", "4f70aa", "6182df"], // blue
+				["4f2a75", "6b3f98", "7c4faa", "a361df"], // purble
+				["7d317b", "983f97", "aa4fa9", "df61d6"], // magenta
+				["444444", "6d6d6d", "a2a2a2", "d0d0d0"], // light grey
+				["000000", "222222", "303030", "404040"], // black
+				["70695a", "a99f87", "eae0c8", "fff6de"] // "tan" meant to be replaced again to make the egg color smooth with no spots
+			]
+		}
+	}
+}
