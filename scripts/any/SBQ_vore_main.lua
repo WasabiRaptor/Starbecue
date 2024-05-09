@@ -977,8 +977,11 @@ function _Location:updateOccupancy(dt)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
 		animator.setGlobalTag(animator.applyTags(self.tag).."InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
-
-	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..string.format("%02x", math.floor(self.settings.infusedFade * 255)))
+	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
+	if (fade == "fe") then -- so theres no accidental glowy
+		fade = "ff"
+	end
+	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
 end
 
 function _Location:update(dt)

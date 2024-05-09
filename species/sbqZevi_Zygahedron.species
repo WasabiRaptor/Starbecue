@@ -122,14 +122,14 @@
 		}
 	],
 	"baseColorMap" : {
-		"primary" : ["8b72a9","a38cbe","c3aae2"],
-		"tertiary" : ["8c8c8c","bfbfbf","e3e3e3"],
-		"secondary" : ["418093", "57a3b9", "70b9cf"],
-		"flesh" : ["418093", "57a3b9", "70b9cf"]
+		"primary" : ["a696be","bba9d5","d8cef7"], // purble
+		"tertiary" : ["b1bfd0","cbdee6","f3fcff"], // white
+		"secondary" : ["5b97cf", "6ab9d9", "7ddfff"], //blue
+		"flesh" : ["5b97cf", "6ab9d9", "7ddfff"]
 	},
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
-		{ "418093":"418093fe","57a3b9":"57a3b9fe","70b9cf":"70b9cffe" }
+		{ "5b97cf":"5b97cfFE","6ab9d9":"6ab9d9FE","7ddfff":"7ddfffFE" }
 	],
 	"undyColor" : [
 		""
@@ -140,17 +140,22 @@
 
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				["primary","primary"]
-			],
+			["primary","primary"]
+		],
 		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
+			["flesh","flesh"]
+		],
 		"cockColorRemap" : [
-				["primary","flesh"]
-			],
+			["primary","flesh"]
+		],
 		"ballsColorRemap" : [
-				["primary","primary"]
-			]
+			["primary","primary"]
+		],
+		"breastsColorRemap" : [
+			["primary","primary"],
+			["flesh","flesh", {"visibleNipples":true}],
+			["flesh","primary", {"visibleNipples":false}]
+		]
 	},
 	"infusedParts" :{
 		"cockColorRemap" : [
@@ -163,14 +168,15 @@
 				["primary","primary"]
 			],
 		"breastsColorRemap" : [
-				["primary","primary"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","primary", {"visibleNipples":false}]
-			]
+			["primary","primary"],
+			["flesh","flesh", {"visibleNipples":true}],
+			["flesh","primary", {"visibleNipples":false}]
+		]
 	},
+	"animationConfig" : "/humanoid/any/quadruped.animation",
 	"animationCustom" : [
-		"/humanoid/any/humanoidPred.animation",
-		"/humanoid/any/voreOccupants.animation",
+		"/humanoid/any/quadrupedPred.animation",
+		"/humanoid/any/voreOccupants.animation"
 	],
 	"voreConfig" : [
 		"/humanoid/any/vore.config",

@@ -83,6 +83,7 @@
 					"sit" : {"properties" : {
 					}},
 					"lay" : {"properties" : {
+						"crotchOffset" : {"translate":[0,0.5]}
 					}},
 					"walk" : {"properties" : {
 					}, "frameProperties":{
@@ -588,6 +589,9 @@
 					},
 					"cockHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
 					}
 				}
 			},
@@ -635,6 +639,9 @@
 					},
 					"ballsHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
 					}
 				}
 			},
@@ -682,6 +689,9 @@
 					},
 					"ballsHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
 					}
 				}
 			},

@@ -184,7 +184,7 @@
 					}},
 					"lay": { "frames": 1, "cycle": 1, "mode": "end", "properties" :{
 						"globalTags" : {
-							"pose" : "stand"
+							"pose" : "lay"
 						},
 						"movementOffset" :  {"translate":[0, -0.875]}
 					} },
@@ -1210,11 +1210,11 @@
 					"transformationGroups" : ["tailOffset"],
 					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>",
-					"offset" : [-1.75,-0.375]
+					"offset" : [-1.875,-0.5]
 				},
 				"partStates" : {
 					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
 						"run": "walk",
 						"jump": "walk",
