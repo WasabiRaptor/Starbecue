@@ -2,6 +2,27 @@
 	{"op":"merge", "path":"", "value": {
 		"animatedParts": {
 			"stateTypes": {
+				"mainState" : {
+					"priority" : 5,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
+				"transitionState" : {
+					"priority" : 10,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
+				"hugTransitionState" : {
+					"priority" : 2,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
+				"hugState" : {
+					"priority" : 1,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
+				"attackState" : {
+					"priority" : 2,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
+
 				"bellyState" : {
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
@@ -255,12 +276,19 @@
 
 				"pussy_infused" : {},
 
-
 				"legs_fg": {},
 				"legs_cosmetic_fg": {},
 
 				"legs_bg": {},
 				"legs_cosmetic_bg": {},
+
+				"hindlegs_fg": {},
+				"hindlegs_cosmetic_fg": {},
+
+				"hindlegs_bg": {},
+				"hindlegs_cosmetic_bg": {},
+
+				"head_fg" : {},
 
 				"occupant0": {"properties":{"hidden":true}},
 				"occupant1": {"properties":{"hidden":true}},
@@ -311,7 +339,6 @@
 			"lay": [],
 			"struggle": [],
 			"slurp" : []
-
 		},
 		"particleEmitters": {
 		}

@@ -1,0 +1,18 @@
+{
+	"frameGrid" : {
+		"size" : [128, 64],
+		"dimensions" : [8, 5],
+		"names" : [
+			[ "stand.idle.1", "stand.flick.1", "sit.idle.1", "sit.flick.1", "lay.idle.1", "lay.flick.1", "back.idle.1", "back.flick.1"],
+			[ "walk.1", "walk.2", "walk.3", "walk.4", "walk.5", "walk.6", "walk.7", "walk.8"],
+			[ "jump.1", "jump.2", "jump.3", "jump.4", "fall.1", "fall.2", "fall.3", "fall.4"],
+			[ "sitdown.1", "sitdown.2", "fallasleep.1", "fallasleep.2", "asleep.1"],
+			[ "rollover.1", "rollover.2", "rollover.3", "rollover.4", "rollover.5"]
+		]
+	},
+	"aliases" : {
+		"situp.1" : "sit.idle.1",
+
+		"swimidle.1" : "walk.1"
+	}
+}

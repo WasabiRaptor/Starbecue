@@ -3,9 +3,9 @@
 
 
 	"charCreationTooltip" : {
-			"title" : "Giant Vaporeon",
-			"subTitle" : "Dihydrogen Monoxide",
-			"description" : "Everyone's favorite fishcat, but bigger!"
+		"title" : "Giant Vaporeon",
+		"subTitle" : "Dihydrogen Monoxide",
+		"description" : "Everyone's favorite fishcat, but bigger!"
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
@@ -231,8 +231,7 @@
 		"/humanoid/sbqGiantVaporeon/vore.config"
 	],
 	"animationCustom" : [
-		"/humandoid/sbqGiantVaporeon/sbqGiantVaporeon.animation",
-		"/humanoid/any/humanoidPred.animation",
-		"/humanoid/any/voreOccupants.animation",
+		"/humanoid/sbqGiantVaporeon/sbqGiantVaporeon.animation",
+		"/humanoid/any/voreOccupants.animation"
 	]
 }
