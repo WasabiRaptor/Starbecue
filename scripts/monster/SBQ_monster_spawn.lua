@@ -11,6 +11,7 @@ require "/scripts/any/SBQ_public_settings.lua"
 
 function init()
 	old.init()
+	sbq.config = root.assetJson("/sbq.config")
 	sbq.actorInit()
 	sbq.actorMessages()
 	sbq.setupPublicSettings()

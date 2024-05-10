@@ -452,12 +452,14 @@ function default:transform(name, action, target, ...)
 		occupant:refreshLocation()
 		return true
 	elseif (not world.entityStatPositive(target, "sbqTransformation")) or ((occupant:getPublicProperty("sbqTransformProgress") or 0) < 1) then
+		return true
 	end
 
 	occupant.flags.transformed = true
 	occupant.locationSettings.transform = false
 	occupant.locationSettings.transformDigested = false
 	occupant:sendEntityMessage("sbqDoTransformation", transformResult, transformDuration)
+	return true
 end
 
 function default:infuseAvailable(name, action, target, ...)
@@ -489,7 +491,8 @@ function default:tryInfuse(name, action, target, ...)
 			occupant.locationSettings[infuseType] = true
 			occupant:refreshLocation()
 			return true
-		elseif (not world.entityStatPositive(target, "sbq_"..infuseType)) or ((occupant:getPublicProperty("sbqInfuseProgress") or 0) < 1) then
+		elseif (not world.entityStatPositive(target, "sbq_" .. infuseType)) or ((occupant:getPublicProperty("sbqInfuseProgress") or 0) < 1) then
+			return true
 		end
 		location.infusedEntity = target
 		occupant.flags.infused = true
@@ -505,4 +508,21 @@ function default:tryInfuse(name, action, target, ...)
 	elseif SpeciesScript:tryAction(action.voreAction, target) then
 		return SpeciesScript:queueAction(name, target)
 	end
+end
+
+
+function default:eggify(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if not occupant.locationSettings.eggify then
+		occupant.locationSettings.eggify = true
+		occupant:refreshLocation()
+		return true
+	elseif (not world.entityStatPositive(target, "sbqEggify")) or
+		((occupant:getPublicProperty("sbqEggifyProgress") or 0) < 1) then
+		return true
+	end
+	local location = occupant:getLocation()
+	occupant.locationSettings.eggify = false
+	occupant:sendEntityMessage("applyStatusEffect", action.eggStatus or location.eggStatus or sbq.voreConfig.eggStatus or "sbqEgg" )
 end

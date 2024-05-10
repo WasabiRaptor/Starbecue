@@ -18,10 +18,9 @@ local leftoverScale = 0
 
 local seatToForce
 function init()
-	sbq.config = root.assetJson("/sbq.config")
-
-	sbq.actorInit()
 	old.init()
+	sbq.config = root.assetJson("/sbq.config")
+	sbq.actorInit()
 	status.setStatusProperty("sbqProgressBar", 0)
 
 	message.setHandler("sbqReleased", function(_, _, data)

@@ -116,18 +116,18 @@
 						"chestOffset" : {"translate":[0,0.375]}
 					}, "frameProperties":{
 						"crotchOffset" : [
-							{"translate":[0,-0.375]},
-							{"translate":[0,-0.375]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.125]}
+							{"translate":[0,-0.125]},
+							{"translate":[0,0]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0.125]}
 						]
 					}},
 					"fall" : {"properties" : {
 						"chestOffset" : {"translate":[0,0.375]}
 					}, "frameProperties":{
 						"crotchOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,0]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0.125]},
 							{"translate":[0,0.125]},
 							{"translate":[0,0.25]}
 						]
@@ -458,7 +458,7 @@
 			"belly" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.5,
+					"zLevel": 0.1,
 					"transformationGroups": ["movementOffset", "bellyOffset"],
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],

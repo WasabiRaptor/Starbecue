@@ -115,10 +115,6 @@ function sbq.passiveStatChanges(dt)
 	end
 end
 
-function sbq.size()
-	return math.sqrt(sbq.area()) / sbq.config.sizeConstant
-end
-
 function sbq.reloadVoreConfig(config)
 	sbq.clearStatModifiers("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true

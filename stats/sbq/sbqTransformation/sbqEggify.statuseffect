@@ -1,0 +1,35 @@
+{
+	"name" : "sbqEggify",
+	"blockingStats" : [
+	],
+
+	"effectConfig" : {
+		"adjectives" : ["funny"],
+
+		"checkBoxIcon" : "/interface/scripted/sbq/eggify.png",
+		"description" : "eggifyDesc",
+
+		"transformProperty": "sbqEggifyProgress",
+		"finishAction" : "eggify",
+
+		"predStatModifiers" : {
+			"energyRegenPercentageRate" : {
+				"type" : "effectiveMultiplier",
+				"op" : "div",
+				"base" : 1
+			}
+		},
+		"predModifiers" : [
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9}
+		]
+
+	},
+	"defaultDuration" : 5,
+
+	"scripts" : [
+		"sbqTransformation.lua"
+	],
+
+	"label" : "Egg",
+	"icon" : "/interface/scripted/sbq/eggify.png"
+}

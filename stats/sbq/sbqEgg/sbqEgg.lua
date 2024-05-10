@@ -85,7 +85,7 @@ function update(dt)
 	end
 	updateAngularVelocity(dt)
 	animator.resetTransformationGroup("rotation")
-	animator.rotateTransformationGroup("rotation", self.angle)
+	animator.rotateTransformationGroup("rotation", mcontroller.rotation())
 end
 
 function updateAngularVelocity(dt)

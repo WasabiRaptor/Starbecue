@@ -101,6 +101,10 @@ function sbq.checkComfortLevel()
 	sbq.comfortLevel = comfortLevel
 end
 
+function sbq.size()
+	return math.sqrt(sbq.area()) / sbq.config.sizeConstant
+end
+
 local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
 	if sbq.timer("changeStruggleDirection", 2) then
