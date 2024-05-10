@@ -395,6 +395,15 @@ function sbq.widgetScripts.changeScale(value)
 	world.sendEntityMessage(sbq.entityId(), "sbqScale", value)
 end
 
+function sbq.widgetScripts.visualMinMax(param)
+	param.type = "sbqTextBox"
+	param.min = 0
+	local location = sbq.locations[param.groupKey]
+	param.max = location.maxFill
+	param.settingType = "number"
+	return param
+end
+
 function uninit()
 	player.setProperty("sbqCollapseLocationsOpen", collapseLocationsOpen)
 end

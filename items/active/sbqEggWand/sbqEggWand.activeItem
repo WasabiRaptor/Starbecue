@@ -12,7 +12,7 @@
 
 	"animation" : "/items/active/weapons/wand/generated/generatedwand.animation",
 	"animationParts" : {
-		"crown" : "/vehicles/sbq/sbqEgg/skins/default/icon.png",
+		"crown" : "/stats/sbq/sbqEgg/default/icon.png",
 		"handle" : "/items/active/weapons/wand/generated/handle/7.png",
 		"stone" : "/items/active/weapons/wand/generated/stone/electric.png",
 		"chargeEffect" : "/items/active/weapons/wand/generated/glow/electric.png"
@@ -24,7 +24,7 @@
 	],
 	"inventoryIcon" : [
 		{"image":"/items/active/weapons/wand/generated/handle/7.png"},
-		{"image":"/vehicles/sbq/sbqEgg/skins/default/icon.png"}
+		{"image":"/stats/sbq/sbqEgg/default/icon.png"}
 	],
 
 	"baseDamageFactor" : 0,
@@ -98,6 +98,10 @@
 
 		"projectileType" : "sbqEggify",
 		"projectileParameters" : {
+			"power" : 0,
+			"damageTeam" : {
+			  "type" : "any"
+			}
 		}
 	},
 

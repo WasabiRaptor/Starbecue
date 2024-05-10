@@ -18,14 +18,26 @@ local leftoverScale = 0
 
 local seatToForce
 function init()
-	sbq.config = root.assetJson("/sbq.config")
-
-	sbq.actorInit()
 	old.init()
+	sbq.config = root.assetJson("/sbq.config")
+	sbq.actorInit()
 	status.setStatusProperty("sbqProgressBar", 0)
 
 	message.setHandler("sbqReleased", function(_, _, data)
 		status.setStatusProperty("sbqProgressBar", 0)
+		if mcontroller.isCollisionStuck() then -- copy of vanilla's "checkStuck" but without the lounge check
+			-- sloppy catch-all correction for various cases of getting stuck in things
+			-- due to bad spawn position, failure to exit loungeable (on ships), etc.
+			local poly = mcontroller.collisionPoly()
+			local pos = mcontroller.position()
+			for maxDist = 2, 4 do
+				local resolvePos = world.resolvePolyCollision(poly, pos, maxDist)
+				if resolvePos then
+					mcontroller.setPosition(resolvePos)
+					break
+				end
+			end
+		end
 	end)
 
 	message.setHandler("sbqForceSit", function(_, _, data)
@@ -129,7 +141,10 @@ function update(dt)
 end
 
 function applyDamageRequest(damageRequest)
-	if (damageRequest.damageSourceKind == "sbq_digest")
+	if damageRequest.damageSourceKind == "sbq_status" then
+		status.addEphemeralEffects(damageRequest.statusEffects, damageRequest.sourceEntityId)
+		return {}
+	elseif (damageRequest.damageSourceKind == "sbq_digest")
 	or (damageRequest.damageSourceKind == "sbq_cumdigest")
 	or (damageRequest.damageSourceKind == "sbq_femcumdigest")
 	or (damageRequest.damageSourceKind == "sbq_milkdigest")

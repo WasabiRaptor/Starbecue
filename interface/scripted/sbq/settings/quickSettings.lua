@@ -21,7 +21,7 @@ function _ENV.agree:onClick()
 	player.setProperty("sbqAgreedTerms", true)
 	if first then
 		player.setScriptContext("starbecue")
-		player.callScript("sbq.init", root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+		player.callScript("sbq.init", root.speciesConfig(player.species()).voreConfig or "/humanoid/any/vore.config")
 	end
 	_dismiss()
 end

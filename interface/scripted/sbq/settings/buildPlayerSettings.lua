@@ -14,8 +14,9 @@ if sbq.helpTab then
 end
 
 table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/help.config"))
-
-table.insert(cfg.scripts, 1, "playerSettings.lua")
+table.insert(cfg.scripts, 1, "help.lua")
 
 table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/misc.config"))
 table.insert(cfg.scripts, "misc.lua")
+
+table.insert(cfg.scripts, 1, "playerSettings.lua")

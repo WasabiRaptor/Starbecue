@@ -1,0 +1,1189 @@
+{
+	"globalTagDefaults" : {
+		"colorRemap" : "",
+		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png",
+
+		"bellyImage" : "/humanoid/any/sbqVoreParts/quadruped/belly.png",
+		"bellyColorRemap" : "",
+		"bellyInfusedColorRemap" : "",
+		"bellyInfusedFade" : "",
+		"bellyInfusedDirectives" : "",
+
+		"tailImage" : "tail.png",
+		"tailColorRemap" : "",
+		"tailInfusedColorRemap" : "",
+		"tailInfusedFade" : "",
+		"tailInfusedDirectives" : "",
+
+		"cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
+		"cockColorRemap" : "",
+		"cockInfusedColorRemap" : "",
+		"cockInfusedFade" : "",
+		"cockInfusedDirectives" : "",
+
+		"balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+		"balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+		"ballsColorRemap" : "",
+		"ballsInfusedColorRemap" : "",
+		"ballsInfusedFade" : "",
+		"ballsInfusedDirectives" : "",
+
+		"breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+		"breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+		"breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+		"breastsColorRemap" : "",
+		"breastsInfusedColorRemap" : "",
+		"breastsInfusedFade" : "",
+		"breastsInfusedDirectives" : "",
+
+		"pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
+		"pussyColorRemap" : "",
+		"pussyInfusedColorRemap" : "",
+		"pussyInfusedFade" : "",
+		"pussyInfusedDirectives" : "",
+
+		"bellySize" : "0",
+		"bellyInterpolateSize" : "0",
+
+		"wombSize" : "0",
+		"wombInterpolateSize" : "0",
+		"pussySize" : "0",
+		"pussyInterpolateSize" : "0",
+
+		"cockSize" : "0",
+		"cockInterpolateSize" : "0",
+		"ballsSize" : "0",
+		"ballsInterpolateSize" : "0",
+		"balls_frontSize" : "0",
+		"balls_frontInterpolateSize" : "0",
+		"balls_backSize" : "0",
+		"balls_backInterpolateSize" : "0",
+		"bulgeSize" : "0",
+		"bulgeInterpolateSize" : "0",
+
+		"breastsSize" : "0",
+		"breastsInterpolateSize" : "0",
+		"breasts_frontSize" : "0",
+		"breasts_frontInterpolateSize" : "0",
+		"breasts_backSize" : "0",
+		"breasts_backInterpolateSize" : "0",
+
+		"tailSize" : "0",
+		"tailInterpolateSize" : "0"
+
+	},
+	"animatedParts": {
+		"stateTypes": {
+			"bodyState" : {
+				"states" : {
+					"idle" : {"properties" : {
+					}},
+					"duck" : {"properties" : {
+						"crotchOffset" : {"translate":[0,0.375]}
+					}},
+					"sit" : {"properties" : {
+					}},
+					"lay" : {"properties" : {
+						"crotchOffset" : {"translate":[0,0.5]}
+					}},
+					"walk" : {"properties" : {
+					}, "frameProperties":{
+						"tailOffset" : [
+							{"translate":[0.125,0]},
+							{"translate":[0.125,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]}
+						]
+					}},
+					"run" : {"properties" : {
+					}, "frameProperties":{
+						"tailOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0,0]},
+							{"translate":[0.125,0]},
+							{"translate":[0.125,0]},
+							{"translate":[0.25,0]},
+							{"translate":[0.125,0]}
+						]
+					}},
+					"jump" : {"properties" : {
+						"chestOffset" : {"translate":[0,0.375]}
+					}, "frameProperties":{
+						"crotchOffset" : [
+							{"translate":[0,-0.125]},
+							{"translate":[0,0]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0.125]}
+						]
+					}},
+					"fall" : {"properties" : {
+						"chestOffset" : {"translate":[0,0.375]}
+					}, "frameProperties":{
+						"crotchOffset" : [
+							{"translate":[0,0.125]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0.25]}
+						]
+					}},
+					"swim" : {"properties" : {
+					}},
+					"swimIdle" : {"properties" : {
+					}}
+				}
+			},
+			"bellyState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"bellyExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"tailState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"tailExpandState" : {
+				"priority" : 3,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"tailHiddenState" : {
+				"priority" : 4,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"cockState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"cockExpandState" : {
+				"priority" : 3,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"cockHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"balls_frontState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"balls_frontExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"balls_backState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"balls_backExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"ballsHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"breastsState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_frontState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_frontExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_backState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_backExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breastsHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"pussyState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"pussyExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"pussyHiddenState" : {
+				"priority" : 4,
+				"default": "none",
+				"states" : {
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			}
+		},
+		"parts": {
+			"belly" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.1,
+					"transformationGroups": ["movementOffset", "bellyOffset"],
+					"navelInteract" : [0.25,-1.25],
+					"absorbInteract" : [-0.25,-1.25],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bellyColorRemap><bodyDirectives>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"walk": "idle",
+						"run": "idle",
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"fall": "jump",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"bellyState": {
+						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front_press" : "s_front",
+						"s_front_hold" : "s_front",
+						"s_front_release" : "s_front",
+						"s_back" : "s_front",
+						"s_back_press" : "s_front",
+						"s_back_hold" : "s_front",
+						"s_back_release" : "s_front",
+						"s_up" : "s_front",
+						"s_up_press" : "s_front",
+						"s_up_hold" : "s_front",
+						"s_up_release" : "s_front",
+						"s_down" : "s_front",
+						"s_down_press" : "s_front",
+						"s_down_hold" : "s_front",
+						"s_down_release" : "s_front",
+						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"fall": "jump"
+					}
+				}
+			},
+
+			"tail" : {
+				"properties": {
+				},
+				"partStates": {
+					"tailState": {
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
+						"none": { "properties": {} }
+					},
+					"tailExpandState" : {
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					}
+				}
+			},
+
+			"cock" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.2,
+					"anchorPart": "body",
+					"transformationGroups" : ["crotchOffset"],
+					"interact" : [0.5, -1.5],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<cockColorRemap><bodyDirectives>",
+					"offset" : [-0.6875, 0.3125]
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<cockImage>:<cockSize>-<cockStateAnim>.<cockStateFrame>" } },
+						"walk": { "properties": { "image": "<cockImage>:<cockSize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"cockState": {
+						"s_front" : { "properties": { "image": "<cockImage>:<cockSize>-<cockStateAnim>.<cockStateFrame>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
+						"none": { "properties": {} }
+					},
+					"cockExpandState" : {
+						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"cockHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
+					}
+				}
+			},
+			"balls_front" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.11,
+					"anchorPart": "cock",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<ballsColorRemap><bodyDirectives>"
+				},
+				"partStates": {
+					"balls_frontState": {
+						"idle": { "properties": { "image": "<balls_frontImage>:<balls_frontSize>-<balls_frontStateAnim>.<balls_frontStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"balls_frontExpandState" : {
+						"expand": { "properties": { "image": "<balls_frontImage>:<balls_frontInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"ballsHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
+					}
+				}
+			},
+			"balls_back" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.1,
+					"anchorPart": "cock",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<ballsColorRemap><bodyDirectives>"
+				},
+				"partStates": {
+					"balls_backState": {
+						"idle": { "properties": { "image": "<balls_backImage>:<balls_backSize>-<balls_backStateAnim>.<balls_backStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"balls_backExpandState" : {
+						"expand": { "properties": { "image": "<balls_backImage>:<balls_backInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"ballsHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
+					}
+				}
+			},
+
+			"breasts" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 1,
+					"anchorPart" : "body",
+					"transformationGroups": ["chestOffset"],
+					"interact" : [0.375,-0.375],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<breastsColorRemap><bodyDirectives>",
+					"offset" : [0.5625,-0.3125]
+
+				},
+				"partStates": {
+					"breastsState": {
+						"idle": { "properties": { "image": "<breastsImage>" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"breasts_front" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 1.2,
+					"anchorPart": "breasts",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<breastsColorRemap><bodyDirectives>"
+				},
+				"partStates": {
+					"breasts_frontState": {
+						"idle": { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<breasts_frontStateAnim>.<breasts_frontStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"breasts_frontExpandState" : {
+						"expand": { "properties": { "image": "<breasts_frontImage>:<breasts_frontInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"breasts_back" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 1.1,
+					"anchorPart": "breasts",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<breastsColorRemap><bodyDirectives>"
+				},
+				"partStates": {
+					"breasts_backState": {
+						"idle": { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<breasts_backStateAnim>.<breasts_backStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"breasts_backExpandState" : {
+						"expand": { "properties": { "image": "<breasts_backImage>:<breasts_backInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+
+			"belly_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.51,
+					"anchorPart": "belly",
+					"navelInteract" : [0.25,-1.25],
+					"absorbInteract" : [-0.25,-1.25],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyColorRemap><bodyDirectives><bellyInfusedFade>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"walk": "idle",
+						"run": "idle",
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"fall": "jump",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"bellyState": {
+						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front_press" : "s_front",
+						"s_front_hold" : "s_front",
+						"s_front_release" : "s_front",
+						"s_back" : "s_front",
+						"s_back_press" : "s_front",
+						"s_back_hold" : "s_front",
+						"s_back_release" : "s_front",
+						"s_up" : "s_front",
+						"s_up_press" : "s_front",
+						"s_up_hold" : "s_front",
+						"s_up_release" : "s_front",
+						"s_down" : "s_front",
+						"s_down_press" : "s_front",
+						"s_down_hold" : "s_front",
+						"s_down_release" : "s_front",
+						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"fall": "jump"
+					}
+				}
+			},
+
+			"cock_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.201,
+					"anchorPart": "cock",
+					"interact" : [0.5, -1.5],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<cockInfusedColorRemap><cockInfusedDirectives><cockColorRemap><bodyDirectives><cockInfusedFade>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<cockImage>:<cockSize>-<cockStateAnim>.<cockStateFrame>" } },
+						"walk": { "properties": { "image": "<cockImage>:<cockSize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"cockState": {
+						"s_front" : { "properties": { "image": "<cockImage>:<cockSize>-<cockStateAnim>.<cockStateFrame>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
+						"none": { "properties": {} }
+					},
+					"cockExpandState" : {
+						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"cockHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
+					}
+				}
+			},
+			"balls_front_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.111,
+					"anchorPart": "balls_front",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
+				},
+				"partStates": {
+					"balls_frontState": {
+						"idle": { "properties": { "image": "<balls_frontImage>:<balls_frontSize>-<balls_frontStateAnim>.<balls_frontStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"balls_frontExpandState" : {
+						"expand": { "properties": { "image": "<balls_frontImage>:<balls_frontInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"ballsHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
+					}
+				}
+			},
+			"balls_back_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.101,
+					"anchorPart": "balls_back",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
+				},
+				"partStates": {
+					"balls_backState": {
+						"idle": { "properties": { "image": "<balls_backImage>:<balls_backSize>-<balls_backStateAnim>.<balls_backStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"balls_backExpandState" : {
+						"expand": { "properties": { "image": "<balls_backImage>:<balls_backInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"ballsHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
+					}
+				}
+			},
+
+			"breasts_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.101,
+					"anchorPart": "breasts",
+					"interact" : [0.375,-0.375],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
+				},
+				"partStates": {
+					"breastsState": {
+						"idle": { "properties": { "image": "<breastsImage>" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"breasts_front_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.601,
+					"anchorPart": "breasts_front",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
+				},
+				"partStates": {
+					"breasts_frontState": {
+						"idle": { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<breasts_frontStateAnim>.<breasts_frontStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"breasts_frontExpandState" : {
+						"expand": { "properties": { "image": "<breasts_frontImage>:<breasts_frontInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"breasts_back_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.401,
+					"anchorPart": "breasts_back",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
+				},
+				"partStates": {
+					"breasts_backState": {
+						"idle": { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<breasts_backStateAnim>.<breasts_backStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"breasts_backExpandState" : {
+						"expand": { "properties": { "image": "<breasts_backImage>:<breasts_backInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					},
+					"breastsHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+
+			"body" : {"properties" : {
+				"analInteract" : [-1,-2],
+				"front" : [3,0],
+				"back" : [-3,0]
+			}},
+			"head" : {"properties" : {
+				"interact" : [0.5,0.375]
+			}}
+
+		}
+	},
+	"transformationGroups": {
+		"chestOffset": {"interpolated": false},
+		"bellyOffset": {"interpolated": false},
+		"crotchOffset": {"interpolated": false},
+		"tailOffset": {"interpolated": false}
+	},
+	"sounds": {
+		"swallow": ["/sfx/objects/gulp.ogg"],
+		"gurgle": [ "/sfx/vore/digest/digest (17).ogg", "/sfx/vore/digest/digest (18).ogg", "/sfx/vore/digest/digest (25).ogg", "/sfx/vore/digest/digest (11).ogg", "/sfx/vore/digest/digest (13).ogg", "/sfx/vore/digest/digest (15).ogg", "/sfx/vore/digest/digest (16).ogg", "/sfx/vore/digest/digest (19).ogg", "/sfx/vore/digest/digest (20).ogg", "/sfx/vore/digest/digest (3).ogg", "/sfx/vore/digest/digest (31).ogg", "/sfx/vore/digest/digest (36).ogg", "/sfx/vore/digest/digest (37).ogg", "/sfx/vore/digest/digest (9).ogg" ],
+		"lay": ["/sfx/objects/eggLay.ogg"],
+		"struggle": ["/sfx/vore/struggle/burbslosh.ogg","/sfx/vore/struggle/blurbsquish2.ogg","/sfx/vore/struggle/blorbsquish.ogg","/sfx/vore/swallow/swallow (11).ogg"],
+		"slurp" : [ "/sfx/vore/common/slurp.ogg" ]
+	},
+	"particleEmitters": {
+	}
+
+}

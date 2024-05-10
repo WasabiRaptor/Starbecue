@@ -9,7 +9,7 @@ function init()
 		self.turboFill = amount
 	end)
 	self.statusProperty = config.getParameter("transformProperty") or "sbqTransformProgress"
-	self.progressBarColor = config.getParameter("progressBarColor") or "default"
+	self.progressBarColor = config.getParameter("progressBarColor") or {}
 
 	effect.addStatModifierGroup({{stat = effect.name(), amount = 1}})
 

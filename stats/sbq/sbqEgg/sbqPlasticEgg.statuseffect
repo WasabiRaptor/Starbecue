@@ -1,0 +1,82 @@
+{
+	"name" : "sbqPlasticEgg",
+	"defaultDuration" : 1,
+	"animationConfig" : "/stats/sbq/sbqEgg/sbqEgg.animation",
+	"scripts" : [
+		"sbqEgg.lua"
+	],
+	"label" : "Egg",
+	"icon" : "/interface/scripted/sbq/eggify.png",
+	"effectConfig" : {
+		"persistent" : true,
+		"eggParameters" : {
+			"cracks" : 0,
+			"icon" : "/stats/sbq/sbqEgg/plastic/icon.png"
+		},
+		"image": "/stats/sbq/sbqEgg/plastic/egg.png",
+		"shardsImage" : "/stats/sbq/sbqEgg/plastic/shards.png",
+		"blendShards" : true,
+		"shards" : 2,
+		"cracks" : 3,
+		"directives" : "?crop=0;0;0;0", //"?addmask=/stats/sbq/sbqEgg/mask.png",
+		"statModifiers" : [
+			{"stat":"breathprotection", "amount":1}
+		],
+		"dropItem" : {"name":"sbqPlasticEgg", "parameters":{}},
+		"ballRadius": 1.5,
+		"controlParameters" : {
+			"collisionPoly" : [
+				[-0.5,-2],[0.5,-2],[1.25,-1.625],[1.5,-1],[1.5,0],[1,1.5],[0.5,2],[-0.5,2],[-1,1.5],[-1.5,0],[-1.5,-1],[-1.25,-1.625]
+			],
+			"walkSpeed" : 0.01,
+			"runSpeed" : 4,
+			"flySpeed" : 0,
+			"airJumpProfile" : {
+				"jumpSpeed" : 5
+			},
+			"liquidJumpProfile" : {
+				"jumpSpeed" : 5
+			}
+		},
+		"colorOrder" : ["secondary", "primary"],
+		"baseColors" : {
+			"primary" : ["70695a", "a99f87", "eae0c8", "fff6de"], // main egg
+			"secondary" : ["47623a", "678857", "779e64", "9ccd83"] // egg spots
+		},
+		"colors" : {
+			"primary" : [
+				["777777", "999999", "cccccc", "ffffff"], // white
+				["516d29", "68883b", "7ea14c", "a7cc6d"], // lime
+				["968d31", "b1a83f", "CCC251", "e8de62"], // yellow
+				["b14e34", "c45d42", "df7154", "f28161"], // peach
+				["418396", "549aae", "66adc1", "79c4d9"], // blue
+				["934a62", "a95c75", "c7738e", "d9809e"], // pink
+				["563c6a", "634878", "75588b", "8968a1"], // purble
+				["777777bc", "999999bc", "ccccccbc", "ffffffbc"], // white
+				["516d29bc", "68883bbc", "7ea14cbc", "a7cc6dbc"], // lime
+				["968d31bc", "b1a83fbc", "CCC251bc", "e8de62bc"], // yellow
+				["b14e34bc", "c45d42bc", "df7154bc", "f28161bc"], // peach
+				["418396bc", "549aaebc", "66adc1bc", "79c4d9bc"], // blue
+				["934a62bc", "a95c75bc", "c7738ebc", "d9809ebc"], // pink
+				["563c6abc", "634878bc", "75588bbc", "8968a1bc"] // purble
+			],
+			"secondary" : [
+				["777777", "999999", "cccccc", "ffffff"], // white
+				["516d29", "68883b", "7ea14c", "a7cc6d"], // lime
+				["968d31", "b1a83f", "CCC251", "e8de62"], // yellow
+				["b14e34", "c45d42", "df7154", "f28161"], // peach
+				["418396", "549aae", "66adc1", "79c4d9"], // blue
+				["934a62", "a95c75", "c7738e", "d9809e"], // pink
+				["563c6a", "634878", "75588b", "8968a1"], // purble
+				["777777bc", "999999bc", "ccccccbc", "ffffffbc"], // white
+				["516d29bc", "68883bbc", "7ea14cbc", "a7cc6dbc"], // lime
+				["968d31bc", "b1a83fbc", "CCC251bc", "e8de62bc"], // yellow
+				["b14e34bc", "c45d42bc", "df7154bc", "f28161bc"], // peach
+				["418396bc", "549aaebc", "66adc1bc", "79c4d9bc"], // blue
+				["934a62bc", "a95c75bc", "c7738ebc", "d9809ebc"], // pink
+				["563c6abc", "634878bc", "75588bbc", "8968a1bc"], // purble
+				["70695a", "a99f87", "eae0c8", "fff6de"] // "tan" meant to make it easier to get random matching egg halves
+			]
+		}
+	}
+}

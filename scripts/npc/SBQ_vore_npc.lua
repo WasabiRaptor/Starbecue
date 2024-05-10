@@ -4,7 +4,8 @@ local old = {
 	update = update,
 	uninit = uninit,
 	tenant_setHome = tenant.setHome,
-	equipped_primary = equipped.primary
+	equipped_primary = equipped.primary,
+	participateInNewQuests = _ENV.participateInNewQuests,
 }
 
 dialogueStepScripts = {}
@@ -110,4 +111,8 @@ function tenant.setHome(...)
 	if parent then
 		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), sbq.getSettingsOf.all())
 	end
+end
+
+function participateInNewQuests()
+	return sbq.settings.questParticipation and old.participateInNewQuests()
 end

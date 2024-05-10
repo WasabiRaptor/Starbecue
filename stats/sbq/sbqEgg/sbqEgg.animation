@@ -1,0 +1,24 @@
+{
+	"globalTagDefaults" : {
+		"image" : "",
+		"cracks" : "0",
+		"directives" : "",
+		"direction" : "idle"
+
+	},
+	"animatedParts" :{
+		"parts" : {
+			"egg" : {
+				"properties" : {
+					"transformationGroups":["rotation"],
+					"processingDirectives" : "<directives>",
+					"image" : "<image>:<cracks>.<direction>.1"
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"rotation" : {"interpolated" : true}
+	}
+
+}

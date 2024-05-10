@@ -94,7 +94,7 @@ function TopMenu:init()
 	local options = {
 		{
 			args = {"open","AssignMenu"},
-			name = sbq.getString(":assignSpecies"),
+			icon = "/interface/scripted/sbq/predatorHud/settings.png",
 			description = sbq.getString(":assignSpeciesDesc")
 		}
 	}
@@ -137,7 +137,11 @@ RadialMenu.AssignMenu = AssignMenu
 setmetatable(AssignMenu, _RadialMenu)
 function AssignMenu:init()
 	local options = {
-		{locked = true}
+		{
+			icon = "/interface/scripted/sbq/customize.png",
+			args = { "openCharCreation" },
+			description = sbq.getString(":customizeDesc")
+		}
 	}
 	for i = 1, sbq.config.transformMenuSlots do
 		table.insert(options, {
@@ -202,6 +206,11 @@ function _RadialMenu:assignFavorite(slot, species)
 	player.setProperty("sbqFavoriteSpecies", favoriteSpecies)
 	self:open("TopMenu")
 end
+function _RadialMenu:openCharCreation()
+	player.interact("OpenCharCreation",
+		{ speciesIdentites = speciesIdentites, currentSpecies = player.species()})
+end
+
 function sbq_transform.getPortrait(portrait, species)
 	if not species then return end
 	local identity = speciesIdentites[species]

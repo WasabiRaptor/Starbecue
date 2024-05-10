@@ -4,9 +4,15 @@
 	"image" : "/projectiles/invisibleprojectile/invisibleprojectile.png",
 	"piercing" : true,
 	"bounces" : -1,
-	"statusEffectArea" : [ [-1, -1], [1, -1], [1, 1], [-1, 1] ],
+	"damagePoly" : [ [-1, -1], [1, -1], [1, 1], [-1, 1] ],
 	"timeToLive" : 0.5,
-	"persistentStatusEffects" : ["sbqEggify"],
+	"statusEffects" : ["sbqEgg"],
+	"damageType" : "Status",
+	"damageKind" : "sbq_status",
+	"power" : 0,
+	"damageTeam" : {
+	  "type" : "any"
+	},
 	"scripts" : ["/projectiles/activeitems/staff/staffprojectile.lua"]
 
 }

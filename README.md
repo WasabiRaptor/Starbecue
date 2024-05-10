@@ -2,16 +2,18 @@
 
 Starbecue is an 18+ fetish mod created for starbound that focuses mainly on Vore, Macro/Micro, and Transformation fetish content as well as many adjacent kinks.
 
-The mod has a opt-in based consent system for deciding what sort of actions you are subject to, as well as perform on other characters whether they be player or NPCs. While there is no way to prevent one from viewing other characters performing actions one may not have opted in to, those actions cannot be performed on you by anyone and NPCs will ignore you when seeking out those actions. NPCs can also be configured ingame in much the same way players can configure themselves, however, certain OCs may have certain settings locked to a specific value by their owner.
+The mod has a opt-in based consent system for deciding what sort of actions you are subject to, as well as perform on other characters whether they be player or NPCs. While there is no way to prevent one from viewing other characters performing actions one may not have opted in to, those actions cannot be performed on you by anyone, and NPCs will ignore you when seeking out those actions. NPCs can also be configured ingame in much the same way players can configure themselves, however, certain OCs may have certain settings locked to a specific value by their owner, please respect their wishes.
 
 # Install
 
 Starbecue requires a modified executable that both improves and expands features of the game for modders to take advantage of, most feature changes were to be in service of achieving the intended fetish content in an easier manner, however the changes to the engine itself do not include any fetish specific content, and are not exlusively in service of such content, most overall were meant to improve the game experience for players and modders.
 
-Make sure to delete any previously installed versions of starbecue within the `Starbound/mods/`
+If one wishes to use the modified engine without the fetish content, simply remove `sttarbecue.pak` from the mods folder, but keep `SBQ_engine_assets.pak` as the modified engine needs it to function.
+
+On a fresh install make sure to delete any previously installed versions of starbecue within the `Starbound/mods/`
 This includes any version of `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` or `SBQ_engine_assets.pak`
 
-**Starextensions is incompatible with any modified executable, remove it if it is installed**
+**Starextensions is incompatible with any modified executable, remove it if it is installed!**
 
 Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix)
 
@@ -26,9 +28,9 @@ Further steps are somewhat OS specific!
 ### Setup Script
 Double dlick the provided `setup.bat` file to execute it
 
-The script has will have copied the files into their correct place, you can now play starbound with the mod!
+The script has will have copied the files into the default steam starbound install, you can now play starbound with the mod!
 
-if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
+if this didn't work, try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located.
 
 ### Manual Setup
 Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
@@ -52,7 +54,7 @@ Input the following commands
 
 The script should have copied the files into their correct place, you can now play starbound with the mod!
 
-if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
+if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located.
 
 ### Manual Setup
 
@@ -77,7 +79,7 @@ Input the following commands
 
 The script should have copied the files into their correct place, you can now play starbound with the mod!
 
-if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located
+if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located.
 
 ### Manual Setup
 
@@ -105,11 +107,11 @@ Steam will then re-download the unmodified versions of the game executable
 
 # Getting Started
 
-On creation of a new character, a popup menu will open up to allow one to quickly assign the settings. To change those settings and access further settings, then open the toobar and select **Starbecue Settings** to open the settings menu.
+On creation of a new character, a popup menu will open up to allow one to quickly assign vore preferences, as well as an agreement to enable yourself to use the mod's content. To change those settings and access further settings, then open the toobar and select **Starbecue Settings** to open the settings menu.
 
 To get started with the mod, all you need to do is open your crafting interface, and craft the **SBQ Controller** this is the main item used to perform actions, and can be re-assigned via it's action wheel.
 
-Available actions are determined by your current species, what sort of state you're in, and most importantly, what settings you have enabled.
+Available actions are determined by your current species, what sort of state you're in, and most importantly, what settings you have enabled. Actions you cannot perform with your current settings will not be displayed to you, so if you think you're missing some actions, go check your settings. And if the requisite settings aren't being displayed, then it's just not something the current species can do.
 
 More content can be found via discovering **Auri's Shop** which you can get to via some mysterious fireplaces you might find on lush planets, they look like this:
 ![](/fireplace.png)
@@ -124,9 +126,9 @@ The **Prefs** tab controls consent based settings on what actions you can perfor
 
 The **Help** tab contains general information about the mod, it probably contains the same information in this readme!
 
-Depending on your species, you may also find an additional tab with a manual to explain that species' capabilities!
+Depending on your species, you may also find an additional tab with a manual to explain that species' specific capabilities!
 
-You can also use the **Nominomicon** to open the settings page for any SBQ NPC or Pred Object to edit their settings and read their manual in the same manner as you would for yourself, however OC NPCs may have certain settings locked to a specific value by their owner.
+You can also use the **Nominomicon** to open the settings page for any SBQ Compatible NPC, Monster, or Object to edit their settings and read their manual in the same manner as you would for yourself, however OC NPCs may have certain settings locked to a specific value by their owner.
 
 # Compatible Species
 Species which are supported are listed down below, unsupported races will still be able to use the controllers for the default available actions, but will not have any special animations when perfomring most of them.
@@ -135,11 +137,9 @@ Most species will only need a simple patch to be made compatible, as well as add
 
 One can also create their own OC for the mod using this template [here](https://github.com/WasabiRaptor/SBQ-NPC-Template)
 
-![](/vehicles/sbq/sbqVaporeon/sbqVaporeon.png)![](/vehicles/sbq/sbqEgg/sbqEgg.png)![](/vehicles/sbq/sbqSlime/sbqSlime.png)![](/vehicles/sbq/sbqXeronious/sbqXeronious.png)![](/vehicles/sbq/sbqAvian/sbqAvian.png)![](/vehicles/sbq/sbqZiellekDragon/sbqZiellekDragon.png)![](/vehicles/sbq/sbqFray_IcyVixen/sbqFray_IcyVixen.png)
-
 ### SBQ Special Species
 > These species are special species and may possess more abilities or play differently than one's standard state
-- Vaporeon
+- Giant Vaporeon
 - Kaiju (Xeronious)
 - Giant Avian
 - Slime
@@ -152,7 +152,6 @@ One can also create their own OC for the mod using this template [here](https://
 - Flareon
 - Meowscarada
 - Hellhound
-- Catfox
 
 ### OC NPCs
 > These characters cannot be played as, however can be spawned in via the **SBQ Colony Deed** which can be purchased in Auri's shop
@@ -228,20 +227,22 @@ One can also create their own OC for the mod using this template [here](https://
 # Being a Pred
 
 To be a pred, one must have opted in to being pred for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
-Eg: If you select Oral Vore pred, but don't require consent, you're allowing prey characters to attempt to force their way inside your mouth. If consent is enabled, then you will recieve a textbox prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
+Eg: If you select Oral Vore pred, but don't require consent, you're allowing prey characters to attempt to force their way inside you. If consent is enabled, then you will recieve a prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
 
 To perform predator actions, one requires a **SBQ Controller** these can be crafted for a single pixel. Open the action wheel and assign an action, available actions are determined by what settings you have enabled, as well as what species you are.
 
-The action wheel will also let you release any prey you have eaten, or select a specific prey to perform prey specific actions only available through this menu.
+The action wheel will also let you release any prey you have eaten, or select a specific prey to perform prey specific actions only available through this menu and the predator HUD.
 
 In the bottom right you will have a HUD to show you the health of your current occupants, as well as the progress bar for any extra effects they are currently being subject to. This HUD will also allow you to quickly change the current digest effect for the selected location, as well as select prey to perform actions on them.
 
 # Being Prey
 
 To be prey, one must have opted in to being prey for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
-Eg: if you select Oral Vore prey, but don't require consent, you're allowing pred characters to attempt to eat you without asking. If consent is enabled, you will recieve a textbox prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
+Eg: if you select Oral Vore prey, but don't require consent, you're allowing pred characters to attempt to eat you without asking. If consent is enabled, you will recieve a prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
 
-When you've been eaten a HUD will open up in the bottom right, indicating the directions one can press to cause a struggle animation. The color of the indicator arrow hints at what struggling in that direction might do for you. Holding **Shift** will prevent any actions from occuring from your struggles, only playing the animations, such as if one didn't want to escape.
+When you've been eaten a HUD will open up in the bottom right, indicating the directions one can press to cause a struggle animation. The color of the indicator arrow hints at what struggling in that direction might do for you.
+
+Holding **Shift** will prevent any actions from occuring from your struggles, only playing the animations, such as if one didn't want to escape.
 
 - Red
 > You might be able to escape the pred.

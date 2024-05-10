@@ -115,10 +115,6 @@ function sbq.passiveStatChanges(dt)
 	end
 end
 
-function sbq.size()
-	return math.sqrt(sbq.area()) / sbq.config.sizeConstant
-end
-
 function sbq.reloadVoreConfig(config)
 	sbq.clearStatModifiers("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true
@@ -177,6 +173,7 @@ function sbq.reloadVoreConfig(config)
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	end
+	sbq.refreshSettings()
 end
 
 function sbq.actionList(type, target)
@@ -977,8 +974,11 @@ function _Location:updateOccupancy(dt)
 		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
 		animator.setGlobalTag(animator.applyTags(self.tag).."InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
-
-	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..string.format("%02x", math.floor(self.settings.infusedFade * 255)))
+	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
+	if (fade == "fe") then -- so theres no accidental glowy
+		fade = "ff"
+	end
+	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
 end
 
 function _Location:update(dt)
@@ -1308,7 +1308,6 @@ function _Occupant:refreshLocation(name, subLocation, force)
 
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
-		{ stat = "sbqGetDigestDrops", amount = self.locationSettings.getDigestDrops and 1 or 0 },
 		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
 
 	}
