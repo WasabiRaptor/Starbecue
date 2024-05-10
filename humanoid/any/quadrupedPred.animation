@@ -79,6 +79,7 @@
 					"idle" : {"properties" : {
 					}},
 					"duck" : {"properties" : {
+						"crotchOffset" : {"translate":[0,0.375]}
 					}},
 					"sit" : {"properties" : {
 					}},
@@ -928,6 +929,9 @@
 					},
 					"cockHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
 					}
 				}
 			},
@@ -975,6 +979,9 @@
 					},
 					"ballsHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
 					}
 				}
 			},
@@ -1022,6 +1029,9 @@
 					},
 					"ballsHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority": {
+						"sit": { "properties": {} }
 					}
 				}
 			},

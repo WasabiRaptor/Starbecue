@@ -177,6 +177,7 @@ function sbq.reloadVoreConfig(config)
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	end
+	sbq.refreshSettings()
 end
 
 function sbq.actionList(type, target)

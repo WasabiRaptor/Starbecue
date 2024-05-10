@@ -235,21 +235,18 @@
 	],
 
 	"colorRemapGlobalTags" : {
-		"belly" : {
-			"imagePath" : "any/sbqVoreParts/quadruped",
-			"remapColors" : [
-				["primary","tertiary"]
-			],
+		"bellyColorRemap" :  [
+			["primary","tertiary"]
+		],
 		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
+			["flesh","flesh"]
+		],
 		"cockColorRemap" : [
-				["primary","flesh"]
-			],
+			["primary","flesh"]
+		],
 		"ballsColorRemap" : [
-				["primary","tertiary"]
-			]
-		}
+			["primary","tertiary"]
+		]
 	},
 	"animationConfig" : "/humanoid/any/quadruped.animation",
 	"animationCustom" : [
