@@ -49,12 +49,12 @@
 			// settings come from itself
 			"greeting" : {
 				"new" : {"jump" : ".converse"},
-				"next" : "giveTenantRewards",
+				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : [":rewardsGreeting"]},
+					"replace" : {"dialogueRandom" : [":greetingRewards"]},
 					"next" : ["introduced"],
 					"true" : {
-						"replace" : {"dialogueRandom" : [":rewardsGreetingIntroduced"]}
+						"replace" : {"dialogueRandom" : [":greetingRewardsIntroduced"]}
 					}
 				},
 				"default" : {
@@ -63,25 +63,35 @@
 					"true" : {
 						"next" : ["isFollowing"],
 						"replace" : {
-							"dialogueRandom" : [":greetingCrew"],
-							"buttonText" : ["Stay"],
-							"callScript" : "swapFollowing"
+							"dialogueRandom" : [":greetingCrew"]
 						},
-						"false" : { "replace" : {"buttonText": ["Follow"]}}
+						"true" : { "replace" : {
+							"buttonText" : ["Stay"],
+							"jump" : ".stay"
+						}},
+						"false" : {"replace" : {
+							"buttonText": ["Follow"],
+							"jump" : ".follow"
+						}}
 					}
 				},
 				"stay" : {
+					"next" : ["requestUnfollow"],
 					"new" : {
 						"dialogueRandom" : [":crewStay"]
 					}
 				},
 				"follow" : {
-					"new" : {
-						"dialogueRandom" : [":crewFollow"]
+					"next" : ["canGainFollowers"],
+					"false" : {
+						"new" : {"dialogueRandom" : [":fullCrew"]}
+					},
+					"true" : {
+						"next" : ["requestFollow"],
+						"new" : {
+							"dialogueRandom" : [":crewFollow"]
+						}
 					}
-				},
-				"fullCrew" : {
-					"new" : {"dialogueRandom" : [":fullCrew"]}
 				}
 			},
 

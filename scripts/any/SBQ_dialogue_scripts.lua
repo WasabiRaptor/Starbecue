@@ -48,5 +48,11 @@ function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, br
 end
 
 function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	return tostring(sbq.isFollowing())
+	local result = false
+	local parentEntityData = sbq.parentEntity()
+	if parentEntityData and parentEntityData[1] then
+		result = (world.entityUniqueId(eid) == parentEntityData[1]) and parentEntityData[3]
+	end
+
+	return tostring(result)
 end

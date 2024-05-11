@@ -154,9 +154,5 @@ function recruitable.generateRecruitInfo()
 end
 
 function sbq.parentEntity()
-	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid()
-end
-
-function sbq.isFollowing()
-	return _ENV.recruitable.isFollowing()
+	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid(), _ENV.recruitable.isFollowing()
 end

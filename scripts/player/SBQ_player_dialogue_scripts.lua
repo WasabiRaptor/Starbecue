@@ -62,11 +62,27 @@ function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, st
 end
 
 function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local isFollowing = false
+	local result = false
+	if sbq.parentEntityData and sbq.parentEntityData[1] then
+		result = (player.uniqueId() == sbq.parentEntityData[1]) and sbq.parentEntityData[3]
+	end
+	return tostring(result)
+end
+
+function dialogueStepScripts.requestFollow()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqRecruitFollow")
+
+end
+function dialogueStepScripts.requestUnfollow()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqRecruitUnfollow")
+end
+
+function dialogueStepScripts.canGainFollowers()
+	local canGainFollowers = false
 	if sbq.parentEntityData and sbq.parentEntityData[2] then
-		sbq.addRPC(world.sendEntityMessage(player.id(), "sbqIsRecruitFollowing", sbq.parentEntityData[2]), function (res)
-			isFollowing = res or false
+		sbq.addRPC(world.sendEntityMessage(player.id(), "sbqCanGainFollower", sbq.parentEntityData[2]), function (res)
+			canGainFollowers = res or false
 		end)
 	end
-	return tostring(isFollowing)
+	return tostring(canGainFollowers)
 end

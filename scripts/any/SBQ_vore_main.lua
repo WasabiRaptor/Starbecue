@@ -582,9 +582,9 @@ function _State:interact(args)
 	else
 		if sbq.loungingIn() == args.sourceId then return end
 
-		local parent, recruitUuid = sbq.parentEntity()
+		local parent, recruitUuid, following = sbq.parentEntity()
 		if world.entityUniqueId(args.sourceId) == parent then
-			return {"Message", {messageType = "sbqRequestRecruitActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId), sbq.isFollowing(), recruitUuid}}}
+			return {"Message", {messageType = "sbqRequestRecruitActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId), following, recruitUuid}}}
 		end
 
 		local results = { SpeciesScript:interactAction(args) }
