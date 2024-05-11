@@ -2,6 +2,7 @@ sbq = {}
 require "/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
+	effect.addStatModifierGroup({{stat = effect.name(), amount = 1}})
 	script.setUpdateDelta(5)
 	self.fillRate = config.getParameter("fillRate") or 1
 	self.turboFill = 0
@@ -10,8 +11,6 @@ function init()
 	end)
 	self.statusProperty = config.getParameter("transformProperty") or "sbqTransformProgress"
 	self.progressBarColor = config.getParameter("progressBarColor") or {}
-
-	effect.addStatModifierGroup({{stat = effect.name(), amount = 1}})
 
 	self.finished = false
 	self.progress = 0

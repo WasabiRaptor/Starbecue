@@ -2,6 +2,7 @@ sbq = {}
 require "/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
+	effect.addStatModifierGroup({{stat = effect.name(), amount = 1}})
 	script.setUpdateDelta(5)
 	self.healStat = config.getParameter("healStat") or "health"
 	self.healRate = config.getParameter("healRate") or 1
