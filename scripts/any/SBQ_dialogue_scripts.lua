@@ -1,11 +1,3 @@
-function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local result = false
-	if eid then
-		local uuid = world.entityUniqueId(eid)
-		result = uuid ~= nil and uuid == settings.ownerUuid
-	end
-	return tostring(result)
-end
 
 function dialogueStepScripts.percentage(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local best = "default"
@@ -44,4 +36,17 @@ end
 
 function dialogueStepScripts.giveRewards(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	return "default"
+end
+
+function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
+	local result = false
+	local parentEntityData = sbq.parentEntity()
+	if parentEntityData and parentEntityData[1] then
+		result = world.entityUniqueId(eid) == parentEntityData[1]
+	end
+	return tostring(result)
+end
+
+function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	return tostring(sbq.isFollowing())
 end

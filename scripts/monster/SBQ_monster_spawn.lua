@@ -52,3 +52,7 @@ end
 function sbq.parentEntity()
 	return capturable.tetherUniqueId() or _ENV.capturable.ownerUuid() or storage.respawner, _ENV.capturable.podUuid()
 end
+
+function sbq.isFollowing()
+	return true
+end

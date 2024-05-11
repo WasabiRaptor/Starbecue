@@ -52,3 +52,21 @@ function dialogueStepScripts.openNewDialogueBox(dialogueTree, dialogueTreeTop, s
 	player.interact("ScriptPane", { data = sb.jsonMerge(_ENV.metagui.inputData, dialogue.result.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogue.result.ui }, pane.sourceEntity())
 	pane.dismiss()
 end
+
+function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	local result = false
+	if sbq.parentEntityData and sbq.parentEntityData[1] then
+		result = player.uniqueId() == sbq.parentEntityData[1]
+	end
+	return tostring(result)
+end
+
+function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	local isFollowing = false
+	if sbq.parentEntityData and sbq.parentEntityData[2] then
+		sbq.addRPC(world.sendEntityMessage(player.id(), "sbqIsRecruitFollowing", sbq.parentEntityData[2]), function (res)
+			isFollowing = res or false
+		end)
+	end
+	return tostring(isFollowing)
+end

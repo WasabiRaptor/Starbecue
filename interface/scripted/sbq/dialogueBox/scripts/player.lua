@@ -1,33 +1,5 @@
 ---@diagnostic disable: undefined-global
 
-function dialogueStepScripts.queueVore(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
-		world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", settings.voreType, { id = player.id(), willing = true })
-		sbq.timer("gotVored", dialogue.result.delay or 1.5, function()
-			for i, occupant in pairs(sbq.occupant or {}) do
-				if occupant.id == player.id() then
-					sbq.updateDialogueBox( ".after", dialogueTree, dialogueTreeTop)
-					return
-				end
-			end
-		end)
-	end)
-end
-
-function dialogueStepScripts.queuePrey(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	sbq.timer("eatMessage", dialogue.result.delay or 1.5, function ()
-		world.sendEntityMessage(player.id(), "requestTransition", settings.voreType, { id = pane.sourceEntity(), willing = true })
-	end)
-end
-
--- this doesn't work
-function dialogueStepScripts.cockTFmePls(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
-	world.sendEntityMessage(sbq.data.occupantHolder or pane.sourceEntity(), "requestTransition", "cockVore",{ id = player.id(), force = true })
-	sbq.timer("ctfDelay", 0.25, function()
-		shaftBallsInfusion:onClick()
-	end)
-end
-
 function dialogueStepScripts.swapFollowing(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqSwapFollowing"), function(data)
 		if data and data[1] then

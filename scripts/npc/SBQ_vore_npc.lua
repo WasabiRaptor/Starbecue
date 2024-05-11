@@ -46,36 +46,27 @@ function init()
 		self.board:setEntity("interactionSource", id)
 	end)
 
-	message.setHandler("sbqSwapFollowing", function(_, _)
-		if storage.behaviorFollowing then
-			if world.getProperty("ephemeral") then
-				_ENV.recruitable.confirmUnfollowBehavior()
-				return { "None", {} }
-			else
-				return _ENV.recruitable.generateUnfollowInteractAction()
-			end
+	message.setHandler("sbqRecruitFollow", function (_,_)
+		world.sendEntityMessage(_ENV.recruitable.ownerUuid(), "recruits.requestFollow", entity.uniqueId(), _ENV.recruitable.recruitUuid(), _ENV.recruitable.generateRecruitInfo())
+	end)
+
+	message.setHandler("sbqRecruitUnfollow", function (_,_)
+		if world.getProperty("ephemeral") then
+			_ENV.recruitable.confirmUnfollowBehavior()
 		else
-			return _ENV.recruitable.generateFollowInteractAction()
+			world.sendEntityMessage(_ENV.recruitable.ownerUuid(), "recruits.requestUnfollow", entity.uniqueId(), _ENV.recruitable.recruitUuid())
 		end
 	end)
-	message.setHandler("recruit.confirmFollow", function(_,_)
-		_ENV.recruitable.confirmFollow(true)
-	end)
-	message.setHandler("recruit.confirmUnfollow", function(_,_)
-		_ENV.recruitable.confirmUnfollow(true)
-	end)
-	message.setHandler("recruit.confirmUnfollowBehavior", function(_,_)
-		_ENV.recruitable.confirmUnfollowBehavior(true)
-    end)
+
 	message.setHandler("sbqPromptResponse", function (_,_,...)
 		sbq_hunting.promptResponse({...})
-    end)
+	end)
 	sbq.randomTimer("huntingCycle", 60, 5*60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 end
 
 function update(dt)
 	old.update(dt)
-    sbq.update(dt)
+	sbq.update(dt)
 	if sbq.randomTimer("huntingCycle", 5*60, 10*60) then
 		sbq_hunting.start()
 	end

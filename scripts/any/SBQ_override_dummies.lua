@@ -33,6 +33,9 @@ end
 
 function sbq.parentEntity()
 end
+function sbq.isFollowing()
+	return false
+end
 
 function sbq.getItemSlot(slot)
 end
