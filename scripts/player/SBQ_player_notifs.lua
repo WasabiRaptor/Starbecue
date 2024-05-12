@@ -40,7 +40,7 @@ function sbq.notifyPlayer()
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
 			icon = "/interface/errorpopup/erroricon.png",
 			title = "Incorrect Installation",
-			message = string.format("Current install is engine ^yellow;v%s^reset;\n \nThis version of SBQ was intended for engine ^green;v%s^reset;\n \nPlease read the install instructions in README.md", version.sbq, metadata.designedEngineVersion)
+			message = string.format("Current install is engine ^yellow;v%s^reset;\n \nThis version of SBQ was intended for engine ^green;v%s^reset;\n \nPlease read the install instructions in README.md", version.sbq, metadata.intendedVersion)
 		})
 	end
 	if player.introComplete() then
