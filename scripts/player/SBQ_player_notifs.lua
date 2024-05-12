@@ -25,7 +25,15 @@ function sbq.notifyPlayer()
 			message = "Zygan SSVM Addons detected.\n \nThat mod is an older version of Starbecue before it was renamed, please remove it."
 		})
 	end
-	local version = root.version()
+	local version = {
+		sbq = "?",
+		star = "?",
+		source = "?",
+		architecture = "?"
+	}
+	if root.version then
+		version = root.version()
+	end
 	local metadata = root.modMetadata("Starbecue")
 	if (version.sbq ~= metadata.intendedVersion) then
 		player.confirm({
