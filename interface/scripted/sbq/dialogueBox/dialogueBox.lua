@@ -20,7 +20,7 @@ function init()
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
 	end
-	if (not player.isAdmin()) and sbq.parentEntityData[2] and (player.uniqueId() ~= sbq.parentEntityData[1]) then
+	if (not sbq.settings) or ((not player.isAdmin()) and (sbq.parentEntityData and sbq.parentEntityData[2] and (player.uniqueId() ~= sbq.parentEntityData[1]))) then
 		_ENV.settings:setVisible(false)
 	end
 
