@@ -34,7 +34,7 @@ function ChargeFire:fire()
 		end
 		local otherAbility = config.getParameter(abilityName.."Ability")
         self.chargeLevel = copy(otherAbility.chargeLevels[math.random(#otherAbility.chargeLevels)])
-		self.chargeTimer = math.random(0, self.chargeTimer * 2)
+		self.chargeTimer = math.random(0, math.floor(self.chargeTimer * 2))
     end
 
 	if not sizeRayHoldingShift then
