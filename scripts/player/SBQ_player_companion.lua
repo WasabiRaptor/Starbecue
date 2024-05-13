@@ -51,14 +51,8 @@ function init()
 		if not recruit then return end
 		recruit:sbqUpdateType(...)
 	end)
-
-	message.setHandler( "sbqRequestFollow", function (_,_, uniqueId, recruitUuid, recruitInfo)
-		if not _ENV.checkCrewLimits(recruitUuid) then
-			return false
-		end
-		_ENV.promises:add(world.sendEntityMessage(uniqueId, "recruit.confirmFollow"), function(success)
-			_ENV.recruitSpawner:recruitFollowing(_ENV.onOwnShip(), recruitUuid, recruitInfo)
-		end)
+	message.setHandler("sbqCanGainFollower", function (_,_, recruitUuid)
+		return _ENV.checkCrewLimits(recruitUuid) or false
 	end)
 end
 

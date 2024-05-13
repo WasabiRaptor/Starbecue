@@ -32,11 +32,6 @@ function init()
 	sbq.releaseLoungeControl = npc.releaseLoungeControl
 	sbq.loungingIn = npc.loungingIn
 
-
-	message.setHandler("sbqInteract", function(_, _, pred, predData)
-		return interact({ sourceId = pred, sourcePosition = world.entityPosition(pred), predData = predData })
-	end)
-
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()
 		local convertType = config.getParameter("sbqConvertType")
@@ -67,15 +62,20 @@ function init()
 
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
 		status.setStatusProperty("sbqDidVornyConvertCheck", true)
+		if not root.speciesConfig(npc.species).voreConfig then return end
+
 		if config.getParameter("sbqNPC") or config.getParameter("uniqueId") or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true) then
 			return
 		end
 		if tenant then
-			convertBackType = npc.npcType()
-			local convertType = config.getParameter("sbqConvertType")
-			if convertType and (math.random(8) == 8) then
-				sbq.tenant_setNpcType(convertType)
-			end
+			sbq.timer("maybeConvert", 0.1, function()
+				if sbq.parentEntity() then return end
+				convertBackType = npc.npcType()
+				local convertType = config.getParameter("sbqConvertType")
+				if convertType and (math.random(8) == 8) then
+					sbq.tenant_setNpcType(convertType)
+				end
+			end)
 		end
 	end
 end
@@ -153,9 +153,11 @@ tenant.setNpcType = sbq.tenant_setNpcType
 function recruitable.generateRecruitInfo()
 	local recruitInfo = old.recruitable_generateRecruitInfo()
 	recruitInfo.config.parameters.scriptConfig.sbqOverrideUniqueId = entity.uniqueId()
+	recruitInfo.config.parameters.scriptConfig.sbqSettings = storage.sbqSettings
+	recruitInfo.config.parameters.scriptConfig.sbqUpgrades = storage.sbqUpgrades
 	return recruitInfo
 end
 
 function sbq.parentEntity()
-	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid()
+	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid(), _ENV.recruitable.isFollowing()
 end

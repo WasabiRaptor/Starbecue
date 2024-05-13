@@ -33,7 +33,6 @@ end
 
 function sbq.parentEntity()
 end
-
 function sbq.getItemSlot(slot)
 end
 

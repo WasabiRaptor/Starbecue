@@ -52,3 +52,37 @@ function dialogueStepScripts.openNewDialogueBox(dialogueTree, dialogueTreeTop, s
 	player.interact("ScriptPane", { data = sb.jsonMerge(_ENV.metagui.inputData, dialogue.result.inputData), gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = dialogue.result.ui }, pane.sourceEntity())
 	pane.dismiss()
 end
+
+function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	local result = false
+	if sbq.parentEntityData and sbq.parentEntityData[1] then
+		result = player.uniqueId() == sbq.parentEntityData[1]
+	end
+	return tostring(result)
+end
+
+function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	local result = false
+	if sbq.parentEntityData and sbq.parentEntityData[1] then
+		result = (player.uniqueId() == sbq.parentEntityData[1]) and sbq.parentEntityData[3]
+	end
+	return tostring(result)
+end
+
+function dialogueStepScripts.requestFollow()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqRecruitFollow")
+
+end
+function dialogueStepScripts.requestUnfollow()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqRecruitUnfollow")
+end
+
+function dialogueStepScripts.canGainFollowers()
+	local canGainFollowers = false
+	if sbq.parentEntityData and sbq.parentEntityData[2] then
+		sbq.addRPC(world.sendEntityMessage(player.id(), "sbqCanGainFollower", sbq.parentEntityData[2]), function (res)
+			canGainFollowers = res or false
+		end)
+	end
+	return tostring(canGainFollowers)
+end

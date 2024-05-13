@@ -1,0 +1,1 @@
+-- this is just to prevent errors if it happened to be in the parameters on an npc somehow

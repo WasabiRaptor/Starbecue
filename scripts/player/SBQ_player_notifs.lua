@@ -25,9 +25,27 @@ function sbq.notifyPlayer()
 			message = "Zygan SSVM Addons detected.\n \nThat mod is an older version of Starbecue before it was renamed, please remove it."
 		})
 	end
-
-	if (player.getProperty("sbqSettingsVersion") ~= root.modMetadata("Starbecue").version) or not player.getProperty("sbqAgreedTerms") then
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
+	local version = {
+		sbq = "?",
+		star = "?",
+		source = "?",
+		architecture = "?"
+	}
+	if root.version then
+		version = root.version()
 	end
-
+	local metadata = root.modMetadata("Starbecue")
+	if (version.sbq ~= metadata.intendedVersion) then
+		player.confirm({
+			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
+			icon = "/interface/errorpopup/erroricon.png",
+			title = "Incorrect Installation",
+			message = string.format("Current install is engine ^yellow;v%s^reset;\n \nThis version of SBQ was intended for engine ^green;v%s^reset;\n \nPlease read the install instructions in README.md", version.sbq, metadata.intendedVersion)
+		})
+	end
+	if player.introComplete() then
+		if (player.getProperty("sbqSettingsVersion") ~= metadata.version) or not player.getProperty("sbqAgreedTerms") then
+			player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:quickSettings" })
+		end
+	end
 end

@@ -48,57 +48,53 @@
 			// greeting is the default start of the tree
 			// settings come from itself
 			"greeting" : {
-				"new" : {"jump" : ".greeting"},
+				"new" : {"jump" : ".converse"},
 				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : ["rewardsGreeting"]},
-					"next" : ["personality", "introduced"],
-					"shy" : {"replace" : {"dialogueRandom" : [":rewardsGreetingShy"]}},
-					"flirty" : {"replace" : {"dialogueRandom" : [":rewardsGreetingFlirty"]}},
+					"replace" : {"dialogueRandom" : [":greetingRewards"]},
+					"next" : ["introduced"],
 					"true" : {
-						"replace" : {"dialogueRandom" : ["rewardsGreetingIntroduced"]},
-						"next" : ["personality"],
-						"shy" : {"replace" : {"dialogueRandom" : [":rewardsGreetingIntroducedShy"]}},
-						"flirty" : {"replace" : {"dialogueRandom" : [":rewardsGreetingIntroducedFlirty"]}}
+						"replace" : {"dialogueRandom" : [":greetingRewardsIntroduced"]}
 					}
 				},
 				"default" : {
-					"next" : ["personality","isOwner"],
+					"next" : ["isOwner"],
 					"replace" : {"dialogueRandom" : [":greeting"]},
-					"shy" : {"replace" : {"dialogueRandom" : [":greetingShy"]}},
-					"flirty" : {"replace" : {"dialogueRandom" : [":greetingFlirty"]}},
 					"true" : {
-						"next" : ["personality","isFollowing"],
+						"next" : ["isFollowing"],
 						"replace" : {
-							"dialogueRandom" : [":greetingCrew"],
-							"buttonText" : ["Stay"],
-							"callScript" : "swapFollowing"
+							"dialogueRandom" : [":greetingCrew"]
 						},
-						"shy" : {"replace" : {"dialogueRandom" : [":greetingCrewShy"]}},
-						"flirty" : {"replace" : {"dialogueRandom" : [":greetingCrewFlirty"]}},
-						"false" : { "replace" : {"buttonText": ["Follow"]}}
+						"true" : { "replace" : {
+							"buttonText" : ["Stay"],
+							"jump" : ".stay"
+						}},
+						"false" : {"replace" : {
+							"buttonText": ["Follow"],
+							"jump" : ".follow"
+						}}
 					}
 				},
 				"stay" : {
+					"next" : ["requestUnfollow"],
 					"new" : {
-						"dialogueRandom" : ["crewStay"]
-					},
-					"next" : "personality",
-					"shy" : {"replace" : {"dialogueRandom" : [":crewStayShy"]}},
-					"flirty" : {"replace" : {"dialogueRandom" : [":crewStayFlirty"]}}
+						"dialogueRandom" : [":crewStay"]
+					}
 				},
 				"follow" : {
-					"new" : {
-						"dialogueRandom" : ["crewFollow"]
+					"next" : ["canGainFollowers"],
+					"false" : {
+						"new" : {"dialogueRandom" : [":fullCrew"]}
 					},
-					"next" : "personality",
-					"shy" : {"replace" : {"dialogueRandom" : [":crewFollowShy"]}},
-					"flirty" : {"replace" : {"dialogueRandom" : [":crewFollowFlirty"]}}
-				},
-				"fullCrew" : {
-					"new" : {"dialogueRandom" : [":fullCrew"]}
+					"true" : {
+						"next" : ["requestFollow"],
+						"new" : {
+							"dialogueRandom" : [":crewFollow"]
+						}
+					}
 				}
 			},
+
 			// lines triggered when a player may recieve a certain reward
 			"rewardNotify" :{
 				"new" : {},

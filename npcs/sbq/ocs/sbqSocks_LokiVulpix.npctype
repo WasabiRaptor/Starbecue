@@ -69,10 +69,10 @@
 				"new" : {"jump" : ".converse"},
 				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : ["rewardsGreeting"]},
+					"replace" : {"dialogueRandom" : ["greetingRewards"]},
 					"next" : ["introduced"],
 					"true" : {
-						"replace" : {"dialogueRandom" : ["rewardsGreetingIntroduced"]}
+						"replace" : {"dialogueRandom" : ["greetingRewardsIntroduced"]}
 					}
 				},
 				"default" : {
@@ -80,7 +80,7 @@
 					"replace" : {"dialogueRandom" : [":greeting"]},
 					"seperateNext" : true,
 					"introduced" : { "true" : { "replace" : {
-						"dialogueRandom" : [":introducedGreeting"]
+						"dialogueRandom" : [":greetingIntroduced"]
 					}}},
 					"isOwner" : {"true" : { "replace" : {
 						"dialogueRandom" : [":greetingCrew"]

@@ -162,6 +162,46 @@ function init()
 			end
 		end
 	end)
+
+	message.setHandler("sbqRequestActions", function (_,_, id, actionList)
+		player.interact("ScriptPane", {
+			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			options = sbq.buildActionRequestOptions(id, actionList),
+			cancel = {
+				args = false,
+				message = false,
+				close = true
+			}
+		}, entity.id())
+	end)
+	message.setHandler("sbqRequestRecruitActions", function(_, _, id, actionList, isFollowing, recruitUuid)
+		local options = sbq.buildActionRequestOptions(id, actionList)
+		if isFollowing then
+			table.insert(options, 1, {
+				name = sbq.getString(":stay"),
+				messageTarget = id,
+				message = "sbqRecruitUnfollow",
+				close = true
+			})
+		else
+			table.insert(options, 1, {
+				name = sbq.getString(":follow"),
+				messageTarget = id,
+				message = "sbqRecruitFollow",
+				close = true
+			})
+		end
+		player.interact("ScriptPane", {
+			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			options = options,
+			cancel = {
+				args = false,
+				message = false,
+				close = true
+			}
+		}, entity.id())
+	end)
+
 end
 
 function update(dt)
@@ -175,4 +215,20 @@ end
 function uninit()
 	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
+end
+
+function sbq.buildActionRequestOptions(id, actionList)
+	local options = {}
+	for _, action in ipairs(actionList or {}) do
+		table.insert(options, {
+			name = sbq.getString((action.name or (":" .. action.action)) or ""),
+			args = { action.action, entity.id(), true, table.unpack(action.args or {}) },
+			locked = not action.available,
+			description = sbq.getString(action.requestDescription or (":" .. action.action .. "RequestDesc")),
+			messageTarget = id,
+			message = "sbqRequestAction",
+			close = true
+		})
+	end
+	return options
 end

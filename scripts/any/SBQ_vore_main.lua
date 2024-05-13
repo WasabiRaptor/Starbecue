@@ -578,30 +578,14 @@ function _State:interact(args)
 		end
 		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
 	elseif Occupants.entityId[tostring(args.sourceId)] then
-		local options = {}
-		for _, action in ipairs(sbq.actionList("request", args.sourceId) or {}) do
-			table.insert(options, {
-				name = sbq.getString((action.name or (":" .. action.action)) or ""),
-				args = { action.action, args.sourceId, true, table.unpack(action.args or {}) },
-				locked = not action.available,
-				description = sbq.getString(action.requestDescription or (":"..action.action.."RequestDesc"))
-			})
-		end
-		return {"ScriptPane", {
-			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
-			options = options,
-			default = {
-				messageTarget = entity.id(),
-				message = "sbqRequestAction",
-				close = true
-			},
-			cancel = {
-				args = false,
-				message = false
-			}
-		}, args.sourceId}
+		return {"Message", {messageType = "sbqRequestActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId)}}}
 	else
 		if sbq.loungingIn() == args.sourceId then return end
+
+		local parent, recruitUuid, following = sbq.parentEntity()
+		if world.entityUniqueId(args.sourceId) == parent then
+			return {"Message", {messageType = "sbqRequestRecruitActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId), following, recruitUuid}}}
+		end
 
 		local results = { SpeciesScript:interactAction(args) }
 		if results[2] == "interactAction" then

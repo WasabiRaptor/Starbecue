@@ -71,10 +71,10 @@
 				"new" : {"jump" : ".greeting"},
 				"next" : "giveRewards",
 				"rewards" : {
-					"replace" : {"dialogueRandom" : ["rewardsGreeting"]},
+					"replace" : {"dialogueRandom" : ["greetingRewards"]},
 					"next" : ["introduced"],
 					"true" : {
-						"replace" : {"dialogueRandom" : ["rewardsGreetingIntroduced"]}
+						"replace" : {"dialogueRandom" : ["greetingRewardsIntroduced"]}
 					}
 				},
 				"default" : {
