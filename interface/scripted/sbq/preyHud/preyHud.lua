@@ -50,7 +50,9 @@ function replace(from, to)
 	if not to then return "" end
 	local directive = "?replace;"
 	for i, f in ipairs(from) do
-		directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
+		if to[i] then
+			directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
+		end
 	end
 	return directive
 end

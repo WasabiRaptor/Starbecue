@@ -10,7 +10,7 @@ function init()
 		self.turboFill = amount
 	end)
 	self.statusProperty = config.getParameter("transformProperty") or "sbqTransformProgress"
-	self.progressBarColor = config.getParameter("progressBarColor") or {}
+	self.progressBarColor = config.getParameter("progressBarColor")
 
 	self.finished = false
 	self.progress = 0

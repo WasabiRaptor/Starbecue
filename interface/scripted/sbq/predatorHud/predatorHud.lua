@@ -111,7 +111,7 @@ sbq.bottomBar = {
 function sbq.updateBars(dt)
 	for _, occupant in ipairs(Occupants.list) do
 		sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
-		sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") or 0 )
+		sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressBarColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") or 0 )
 	end
 end
 
@@ -119,7 +119,9 @@ function sbq.replace(from, to)
 	if not to then return "" end
 	local directive = "?replace;"
 	for i, f in ipairs(from) do
-		directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
+		if to[i] then
+			directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
+		end
 	end
 	return directive
 end
