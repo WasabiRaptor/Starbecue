@@ -323,8 +323,10 @@ end
 
 function sbq.exportBaseSettings()
 	local output = {}
-	for k, _ in pairs(sbq.config.defaultSettings) do
-		output[k] = sbq.settings[k]
+    for k, _ in pairs(sbq.defaultSettings) do
+		if not sbq.config.groupedSettings[k] then
+			output[k] = sbq.settings[k]
+		end
 	end
 	return output
 end
