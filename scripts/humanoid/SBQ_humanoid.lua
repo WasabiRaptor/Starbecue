@@ -111,6 +111,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	local oldSpeciesFile = root.speciesConfig(currentIdentity.species)
 	local speciesFile = root.speciesConfig(newIdentity.species)
 	if not speciesFile then return false end
+	newIdentity.species = speciesFile.kind
 	local preserveColors = {
 
 	}
