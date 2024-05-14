@@ -98,8 +98,7 @@ function sbq.clickAction()
 	local result, reason
 	for i, targetId in ipairs(entityaimed) do
 		if entity.entityInSight(targetId) and ((sbq.config.actionRange * mcontroller.scale()) >= vec2.mag(entity.distanceToEntity(targetId))) then
-			local loungeAnchor = world.entityCurrentLounge(targetId)
-			if (not loungeAnchor) or loungeAnchor.dismountable then
+			if sbq.isLoungeDismountable(targetId) then
 				result, reason = sbq.attemptAction(targetId)
 				break
 			end
