@@ -801,14 +801,14 @@ function _Location:hasSpace(size)
 	if (not self.subLocations) or self.subKey then
 		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size), self.subKey
 	elseif self.subLocations[1] then
-		if self.subLocations[1].maxCount and (#self.occupancy.subLocations[1].list >= self.subLocations[1].maxCount) then return false end
+		if self.subLocations[1].maxCount and (self.occupancy.count >= self.subLocations[1].maxCount) then return false end
 		-- if an array, assuming locations are ordered, only check if theres space in the first
 		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, size), 1
 	else
 		-- if an object assume any is valid and choose one with the most space available
 		local best = {0}
 		for k, v in pairs(self.subLocations) do
-			if not (v.maxCount and (#v.occupancy.list >= v.maxCount)) then
+			if not (v.maxCount and (v.occupancy.count >= v.maxCount)) then
 				local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
 				if space and space > best[1] then
 					best = {space, k}
