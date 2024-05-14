@@ -29,9 +29,9 @@ function update()
 	local position = stagehand.position()
 	if (world ~= nil) and (world.regionActive ~= nil) and world.regionActive({position[1]-1,position[2]-1,position[1]+1,position[2]+1}) then
 		if uuid then
-			local entity = world.loadUniqueEntity(uuid)
-			if entity then
-				if not world.entityExists(entity) then
+			local eid = world.loadUniqueEntity(uuid)
+			if eid then
+				if not world.entityExists(eid) then
 					doSpawn = true
 				end
 			else
@@ -47,7 +47,8 @@ function update()
 				world.callScriptedEntity(newEntityId, "tenant.setHome", storage.homePosition, storage.homeBoundary, storage.respawner, true)
 				local spawnerId = world.loadUniqueEntity(storage.respawner)
 				assert(spawnerId and world.entityExists(spawnerId))
-				world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {
+                world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {
+					replacing = false,
 					uniqueId = uuid,
 					type = npcTypeName,
 					species = npc,

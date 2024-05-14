@@ -143,6 +143,12 @@ function sbq.tenant_setNpcType(npcType)
 	}
 	world.spawnStagehand(entity.position(), "sbqReplaceNPC", parameters)
 
+	if storage.respawner then
+		local spawnerId = world.loadUniqueEntity(storage.respawner)
+		assert(spawnerId and world.entityExists(spawnerId))
+		world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {replacing = true})
+	end
+
 	function die()
 	end
 

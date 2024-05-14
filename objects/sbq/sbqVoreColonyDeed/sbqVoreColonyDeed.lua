@@ -404,7 +404,20 @@ function respawnTenants()
 		return
 	end
 	for i, tenant in ipairs(storage.occupier.tenants) do
-		if not tenant.uniqueId or not world.findUniqueEntity(tenant.uniqueId):result() then
+		local doSpawn = false
+		if tenant.uniqueId then
+			local eid = world.loadUniqueEntity(tenant.uniqueId)
+			if eid then
+				if not world.entityExists(eid) then
+					doSpawn = true
+				end
+			else
+				doSpawn = true
+			end
+		else
+			doSpawn = true
+		end
+		if doSpawn and not tenant.replacing then
 			local entityId = spawn(tenant, i)
 			tenant.uniqueId = tenant.uniqueId or sb.makeUuid()
 			world.setUniqueId(entityId, tenant.uniqueId)
