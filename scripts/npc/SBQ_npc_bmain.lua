@@ -62,7 +62,7 @@ function init()
 
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
 		status.setStatusProperty("sbqDidVornyConvertCheck", true)
-		if not root.speciesConfig(npc.species).voreConfig then return end
+		if not root.speciesConfig(npc.species()).voreConfig then return end
 
 		if config.getParameter("sbqNPC") or config.getParameter("uniqueId") or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true) then
 			return
