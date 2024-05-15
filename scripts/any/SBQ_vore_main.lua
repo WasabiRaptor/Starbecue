@@ -55,7 +55,7 @@ function sbq.init(config)
 	end)
 	message.setHandler("sbqTryAction", function(_, _, ...)
 		return sbq.tryAction(...)
-    end)
+	end)
 	message.setHandler("sbqActionAvailable", function(_, _, ...)
 		return sbq.actionAvailable(...)
 	end)
@@ -235,13 +235,13 @@ function sbq.getOccupantData(entityId)
 end
 
 function sbq.getSettingsPageData()
-    local settingsPageData = {
+	local settingsPageData = {
 		settingsPageName = sbq.entityName(entity.id()),
 		storageSettings = storage.sbqSettings or {},
 		storageUpgrades = storage.sbqUpgrades or {},
 		settings = sbq.settings or {},
 		voreConfig = sbq.voreConfig or {},
-        locations = SpeciesScript.locations or {},
+		locations = SpeciesScript.locations or {},
 		baseLocations = SpeciesScript.baseLocations or {},
 		currentScale = sbq.scale(),
 		parentEntityData = {sbq.parentEntity()}
@@ -792,13 +792,13 @@ end
 function _Location:hasSpace(size)
 	if not sbq.tableMatches(self.activeSettings, sbq.settings, true) then return false end
 	if self.maxCount and (self.occupancy.count >= self.maxCount) then return false end
-	if self.settings.hammerspace then return math.huge end
 	local shared = 0
 	for _, name in ipairs(self.sharedWith or {}) do
 		local location = SpeciesScript:getLocation(name)
 		shared = shared + location.occupancy.size
 	end
 	if (not self.subLocations) or self.subKey then
+		if self.settings.hammerspace then return math.huge, self.subKey end
 		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size), self.subKey
 	elseif self.subLocations[1] then
 		if self.subLocations[1].maxCount and (self.occupancy.count >= self.subLocations[1].maxCount) then return false end
@@ -806,17 +806,23 @@ function _Location:hasSpace(size)
 		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, size), 1
 	else
 		-- if an object assume any is valid and choose one with the most space available
-		local best = {0}
+		local best = { 0 }
+		local least = {math.huge}
 		for k, v in pairs(self.subLocations) do
 			if not (v.maxCount and (v.occupancy.count >= v.maxCount)) then
 				local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
-				if space and space > best[1] then
+				if space and space >= best[1] then
 					best = {space, k}
+				end
+				if v.occupancy.size <= least[1] then
+					least = {v.occupancy.size, k}
 				end
 			end
 		end
 		if best[2] then
 			return best[1], best[2]
+		elseif self.settings.hammerspace and least[2] then
+			return math.huge, least[2]
 		end
 	end
 	return false
