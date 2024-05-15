@@ -595,6 +595,7 @@ function widgets.sbqCheckBox:init(base, param)
 	if self.setting then
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
 		local defaultSetting = sbq.defaultSettings[param.setting]
 		if param.groupName and param.groupKey then
 			defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
@@ -865,6 +866,7 @@ function widgets.sbqTextBox:init(base, param)
 	if self.setting then
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
 		local defaultSetting = sbq.defaultSettings[param.setting]
 		if param.groupName and param.groupKey then
 			defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
@@ -1116,6 +1118,11 @@ function widgets.sbqItemGrid:init(base, param)
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 
+	if self.setting then
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
+	end
+
 	local slots = param.slots or 1
 	if type(slots) == "table" then
 		for _, slot in ipairs(slots) do
@@ -1157,6 +1164,10 @@ function widgets.sbqItemSlot:init(base, param)
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 	self.script = param.script
+	if self.setting then
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
+	end
 
 	if self.script then
 		function self:onItemModified()

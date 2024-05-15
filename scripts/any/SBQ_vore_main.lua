@@ -799,11 +799,11 @@ function _Location:hasSpace(size)
 	end
 	if (not self.subLocations) or self.subKey then
 		if self.settings.hammerspace then return math.huge, self.subKey end
-		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, size), self.subKey
+		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, (size or 0) * self.settings.multiplyFill), self.subKey
 	elseif self.subLocations[1] then
 		if self.subLocations[1].maxCount and (self.occupancy.count >= self.subLocations[1].maxCount) then return false end
 		-- if an array, assuming locations are ordered, only check if theres space in the first
-		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, size), 1
+		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, (size or 0) * self.settings.multiplyFill), 1
 	else
 		-- if an object assume any is valid and choose one with the most space available
 		local best = { 0 }
@@ -900,7 +900,7 @@ function _Location:updateOccupancy(dt)
 					self.occupancy.count = self.occupancy.count + 1
 				end
 				if not occupant.flags.infused then
-					self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier / sbq.scale())
+					self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale())
 				end
 			end
 		end
