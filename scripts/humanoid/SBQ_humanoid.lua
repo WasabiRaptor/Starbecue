@@ -183,7 +183,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	humanoid.setIdentity(newIdentity)
 
 	if duration and (not sbq.settings.indefiniteTF) then
-		status.addEphemeralEffect("sbqTransformed", (duration or 5) * 60)
+		status.addEphemeralEffect("sbqTransformed", (duration or sbq.config.defaultTFDuration) * 60)
 	end
 	if sbq.settings.permanentTF then
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)

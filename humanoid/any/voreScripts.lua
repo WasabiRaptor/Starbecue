@@ -422,7 +422,7 @@ function default:transformAvailable(name, action, target, ...)
 	if not occupant then return false end
 	local location = occupant:getLocation()
 	local transformResult = action.transformResult or location.transformResult or sbq.voreConfig.transformResult or { species = humanoid.species() }
-	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
+	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or sbq.config.defaultVoreTFDuration
 	if not transformResult then return false, "invalidAction" end
 	local checkSettings = {
 		speciesTF = transformResult.species and true,
