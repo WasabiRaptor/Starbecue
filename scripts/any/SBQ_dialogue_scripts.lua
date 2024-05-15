@@ -59,5 +59,32 @@ end
 
 function dialogueStepScripts.promptResponse(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	world.sendEntityMessage(pane.sourceEntity, "sbqPromptResponse", table.unpack(dialogueTree.promptResponse), eid)
-	return ""
 end
+
+function dialogueStepScripts.statPositive(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	return world.entityStatPositive(eid, step) and step
+end
+dialogueStepScripts.sbqHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqUnbirthHeal = dialogueStepScripts.statPositive
+
+dialogueStepScripts.sbqAcidSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqCumSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqFemcumSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqMilkSoftDigest = dialogueStepScripts.statPositive
+
+dialogueStepScripts.sbqAcidDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqCumDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqFemcumDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqMilkDigest = dialogueStepScripts.statPositive
+
+dialogueStepScripts.sbqTransformation = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqDrainEnergy = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqEggify = dialogueStepScripts.statPositive
+
+dialogueStepScripts.sbq_tailInfuse = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_pawInfuse = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_thighsInfuse = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_bellyInfuse = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_breastInfuse = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_cockInfuse = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_pussyInfuse = dialogueStepScripts.statPositive

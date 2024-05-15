@@ -85,7 +85,7 @@
 			"false" : {
 				"default" : {"new":{"dialogueRandom":":<action>Invalid"}},
 				"error" : {"new":{"dialogueRandom" : [":error"]}},
-				"no" : {"new" : {"dialogueRandom" : [":<action>RequestedNo"]}},
+				"no" : {"new" : {"dialogueRandom" : [":<action>No"]}},
 				"tooBig" : {"new" : {"dialogueRandom" : [":<action>TooBig"]}},
 				"tooSmall" : {"new" : {"dialogueRandom" : [":<action>TooSmall"]}},
 				"noSlots" : {"new" : {"dialogueRandom" : [":<action>NoSlots"]}},
@@ -97,7 +97,32 @@
 				"targetSettingsMismatch" : ".error",
 				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":<action>TargetPreySettingsMismatch"]}}
 			}
+		},
+		"oralVore" : {
+			// is the action available or not?
+			"true" : {
+				// dialogue said before the action
+				"new" : {"dialogueRandom" : [":oralVoreRequestedBefore"]},
+				// dialogue said after the action finishes
+				"after" : {"new" : {"dialogueRandom" : [":oralVoreRequestedAfter"]}}
+			},
+			"false" : {
+				"default" : {"new":{"dialogueRandom":":oralVoreInvalid"}},
+				"error" : {"new":{"dialogueRandom" : [":error"]}},
+				"no" : {"new" : {"dialogueRandom" : [":oralVoreNo"]}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":oralVoreTooBig"]}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":oralVoreTooSmall"]}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":oralVoreNoSlots"]}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":oralVoreFull"]}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":oralVoreNeedsInfusion"]}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":oralVoreAlreadyInfused"]}},
+				"invalidLocation" : ".error",
+				"settingsMismatch" : ".error",
+				"targetSettingsMismatch" : ".error",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":oralVoreTargetPreySettingsMismatch"]}}
+			}
 		}
+
 	},
 	// when they prompt doing an action to another character
 	"promptAction" : {
@@ -131,7 +156,39 @@
 				// what they say after doing the action (optional)
 				"after" : {"new" : {"dialogueRandom" : [":<action>PromptNoYesAfter"],"dismissTime" : 2}}
 			}
+		},
+		"oralVore" : {
+			"new" : {
+				"dialogueRandom" : [":oralVorePrompt"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			// responses based on their response to the prompt
+			"yes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, true, "yes", "oralVore"],
+				"new" : {"dialogueRandom" : [":oralVorePromptYes"],"dismissTime" : 2},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptYesAfter"],"dismissTime" : 2}}
+			},
+			"no" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [false, true, "no", "oralVore"],
+				"new" : {"dialogueRandom" : [":oralVorePromptNo"],"dismissTime" : 2}
+			},
+			"noYes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, true, "noYes", "oralVore"],
+				"new" : {"dialogueRandom" : [":oralVorePromptNoYes"],"dismissTime" : 2},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptNoYesAfter"],"dismissTime" : 2}}
+			}
 		}
+
 	},
 	// when they ask another character to do something to them
 	"requestAction":{
@@ -160,7 +217,34 @@
 				"promptResponse" : [true, false, "noYes", "<action>"],
 				"new" : {"dialogueRandom" : [":<action>RequestingNoYes"],"dismissTime" : 2}
 			}
+		},
+		"oralVore" : {
+			"new" : {
+				"dialogueRandom" : [":oralVoreRequesting"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			"yes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, false, "yes", "oralVore"],
+				"new" : {"dialogueRandom" : [":oralVoreRequestingYes"],"dismissTime" : 2}
+			},
+			"no" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [false, false, "no", "oralVore"],
+				"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2}
+			},
+			"noYes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, false, "noYes", "oralVore"],
+				"new" : {"dialogueRandom" : [":oralVoreRequestingNoYes"],"dismissTime" : 2}
+			}
 		}
+
 	},
 
 	// when they notify that they're about to do an action without asking first
@@ -168,6 +252,10 @@
 		"<action>" : {
 			"new" : {"dialogueRandom" : [":<action>NoPrompt"]},
 			"after" : {"new" : {"dialogueRandom" : [":<action>NoPromptAfter"]}}
+		},
+		"oralVore" : {
+			"new" : {"dialogueRandom" : [":oralVoreNoPrompt"]},
+			"after" : {"new" : {"dialogueRandom" : [":oralVoreNoPromptAfter"]}}
 		}
 	},
 	// responding to an action happening to them unprompted
@@ -175,6 +263,10 @@
 		"<action>" : {
 			"new" : {"dialogueRandom" : [":<action>Unprompted"]},
 			"after" : {"new" : {"dialogueRandom" : [":<action>UnpromptedAfter"]}}
+		},
+		"oralVore" : {
+			"new" : {"dialogueRandom" : [":oralVoreUnprompted"]},
+			"after" : {"new" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]}}
 		}
 	},
 
@@ -183,6 +275,10 @@
 		"<action>" : {
 			"replace" : { "dialogueRandom" : [":<action>Forcing"]},
 			"after":{"replace" : { "dialogueRandom" : [":<action>ForcingAfter"]}}
+		},
+		"oralVore" : {
+			"replace" : { "dialogueRandom" : [":oralVoreForcing"]},
+			"after":{"replace" : { "dialogueRandom" : [":oralVoreForcingAfter"]}}
 		}
 	},
 	// response to when another NPC forces them to do an action
@@ -190,6 +286,10 @@
 		"<action>" : {
 			"replace" : { "dialogueRandom" : [":<action>Forced"]},
 			"after":{"replace" : { "dialogueRandom" : [":<action>ForcedAfter"]}}
+		},
+		"oralVore" : {
+			"replace" : { "dialogueRandom" : [":oralVoreForced"]},
+			"after":{"replace" : { "dialogueRandom" : [":oralVoreForcedAfter"]}}
 		}
 	},
 
