@@ -1,0 +1,276 @@
+{
+	"dialogueFile" : "/npcs/tenants/sbq/sbqVoreVillager.dialogue",
+	// after following a path, next steps will automatically advance down the tree building the result dialogue
+
+	// overall default values for a "new" dialogue
+	"default" : {
+		"dialogueRandom" : [":missingDialogue"],
+		"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+	},
+	// greeting is the default start of the tree
+	// settings come from itself
+	"greeting" : {
+		"new" : {"jump" : ".converse"},
+		"next" : "giveRewards",
+		"rewards" : {
+			"replace" : {"dialogueRandom" : [":greetingRewards"]},
+			"next" : ["introduced"],
+			"true" : {
+				"replace" : {"dialogueRandom" : [":greetingRewardsIntroduced"]}
+			}
+		},
+		"default" : {
+			"next" : ["isOwner"],
+			"replace" : {"dialogueRandom" : [":greeting"]},
+			"true" : {
+				"next" : ["isFollowing"],
+				"replace" : {
+					"dialogueRandom" : [":greetingCrew"]
+				},
+				"true" : { "replace" : {
+					"buttonText" : ["Stay"],
+					"jump" : ".stay"
+				}},
+				"false" : {"replace" : {
+					"buttonText": ["Follow"],
+					"jump" : ".follow"
+				}}
+			}
+		},
+		"stay" : {
+			"next" : ["requestUnfollow"],
+			"new" : {
+				"dialogueRandom" : [":crewStay"]
+			}
+		},
+		"follow" : {
+			"next" : ["canGainFollowers"],
+			"false" : {
+				"new" : {"dialogueRandom" : [":fullCrew"]}
+			},
+			"true" : {
+				"next" : ["requestFollow"],
+				"new" : {"dialogueRandom" : [":crewFollow"]}
+			}
+		}
+	},
+	// lines triggered when a player may recieve a certain reward
+	"rewardNotify" :{
+		"new" : {},
+		"next" : ["poolName", "rewardName"],
+		"money" : {
+			"replace" : {"dialogueRandom":[":rewardNotifyMoney"]}
+		},
+		"lowValueQuestRewards" : {
+			"replace" : {"dialogueRandom":[":rewardNotifyLowValueQuestRewards"]}
+		},
+		"mediumValueQuestRewards" : {
+			"replace" : {"dialogueRandom":[":rewardNotifyMediumValueQuestRewards"]}
+		},
+		"highValueQuestRewards" : {
+			"replace" : {"dialogueRandom":[":rewardNotifyHighValueQuestRewards"]}
+		}
+	},
+
+	// responses when another character requests an action from them
+	"actionRequested" : {
+		"<action>" : {
+			// is the action available or not?
+			"true" : {
+				// dialogue said before the action
+				"new" : {"dialogueRandom" : [":<action>RequestedBefore"]},
+				// dialogue said after the action finishes
+				"after" : {"new" : {"dialogueRandom" : [":<action>RequestedAfter"]}}
+			},
+			"false" : {
+				"default" : {"new":{"dialogueRandom":":<action>Invalid"}},
+				"error" : {"new":{"dialogueRandom" : [":error"]}},
+				"no" : {"new" : {"dialogueRandom" : [":<action>RequestedNo"]}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":<action>TooBig"]}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":<action>TooSmall"]}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":<action>NoSlots"]}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":<action>Full"]}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":<action>NeedsInfusion"]}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":<action>AlreadyInfused"]}},
+				"invalidLocation" : ".error",
+				"settingsMismatch" : ".error",
+				"targetSettingsMismatch" : ".error",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":<action>TargetPreySettingsMismatch"]}}
+			}
+		}
+	},
+	// when they prompt doing an action to another character
+	"promptAction" : {
+		"<action>" : {
+			"new" : {
+				"dialogueRandom" : [":<action>Prompt"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			// responses based on their response to the prompt
+			"yes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, true, "yes", "<action>"],
+				"new" : {"dialogueRandom" : [":<action>PromptYes"],"dismissTime" : 2},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":<action>PromptYesAfter"],"dismissTime" : 2}}
+			},
+			"no" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [false, true, "no", "<action>"],
+				"new" : {"dialogueRandom" : [":<action>PromptNo"],"dismissTime" : 2}
+			},
+			"noYes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, true, "noYes", "<action>"],
+				"new" : {"dialogueRandom" : [":<action>PromptNoYes"],"dismissTime" : 2},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":<action>PromptNoYesAfter"],"dismissTime" : 2}}
+			}
+		}
+	},
+	// when they ask another character to do something to them
+	"requestAction":{
+		"<action>" : {
+			"new" : {
+				"dialogueRandom" : [":<action>Requesting"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			"yes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, false, "yes", "<action>"],
+				"new" : {"dialogueRandom" : [":<action>RequestingYes"],"dismissTime" : 2}
+			},
+			"no" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [false, false, "no", "<action>"],
+				"new" : {"dialogueRandom" : [":<action>RequestingNo"],"dismissTime" : 2}
+			},
+			"noYes" : {
+				"next" : ["promptResponse"],
+				"promptResponse" : [true, false, "noYes", "<action>"],
+				"new" : {"dialogueRandom" : [":<action>RequestingNoYes"],"dismissTime" : 2}
+			}
+		}
+	},
+
+	// when they notify that they're about to do an action without asking first
+	"noPromptAction" : {
+		"<action>" : {
+			"new" : {"dialogueRandom" : [":<action>NoPrompt"]},
+			"after" : {"new" : {"dialogueRandom" : [":<action>NoPromptAfter"]}}
+		}
+	},
+	// responding to an action happening to them unprompted
+	"unpromptedAction" : {
+		"<action>" : {
+			"new" : {"dialogueRandom" : [":<action>Unprompted"]},
+			"after" : {"new" : {"dialogueRandom" : [":<action>UnpromptedAfter"]}}
+		}
+	},
+
+	// for when forcing another character to do an action (mostly for prey forcing their way into a pred)
+	"forcingAction" : {
+		"<action>" : {
+			"replace" : { "dialogueRandom" : [":<action>Forcing"]},
+			"after":{"replace" : { "dialogueRandom" : [":<action>ForcingAfter"]}}
+		}
+	},
+	// response to when another NPC forces them to do an action
+	"forcedAction" : {
+		"<action>" : {
+			"replace" : { "dialogueRandom" : [":<action>Forced"]},
+			"after":{"replace" : { "dialogueRandom" : [":<action>ForcedAfter"]}}
+		}
+	},
+
+	// dialogue for when an occupant interacts with them
+	"occupantInteract" : ".occupantStruggle", // just points to struggle for now, could be it's own dialogue
+	// chance of saying one of these lines when one of their occupants struggles inside them
+	"occupantStruggle" : {
+		"next" : [
+			"adjectives",
+
+			"sbqHeal",
+			"sbqUnbirthHeal",
+
+			"sbqAcidSoftDigest",
+			"sbqCumSoftDigest",
+			"sbqFemcumSoftDigest",
+			"sbqMilkSoftDigest",
+
+			"sbqAcidDigest",
+			"sbqCumDigest",
+			"sbqFemcumDigest",
+			"sbqMilkDigest",
+
+			"sbqTransformation",
+			"sbqDrainEnergy",
+			"sbqEggify",
+
+			"sbq_tailInfuse",
+			"sbq_pawInfuse",
+			"sbq_thighsInfuse",
+			"sbq_bellyInfuse",
+			"sbq_breastInfuse",
+			"sbq_cockInfuse",
+			"sbq_pussyInfuse"
+		],
+		"adjectives" : {
+
+		},
+		"sbqHeal" : {},
+		"sbqUnbirthHeal" : {},
+		"sbqAcidSoftDigest" : {},
+		"sbqCumSoftDigest" : {},
+		"sbqFemcumSoftDigest" : {},
+		"sbqMilkSoftDigest" : {},
+		"sbqAcidDigest" : ".sbqAcidSoftDigest",
+		"sbqCumDigest" : ".sbqCumSoftDigest",
+		"sbqFemcumDigest" : ".sbqFemcumSoftDigest",
+		"sbqMilkDigest" : ".sbqMilkSoftDigest",
+
+		"sbqTransformation" : {},
+		"sbqDrainEnergy" : {},
+		"sbqEggify" : {},
+
+		"sbq_tailInfuse" : {},
+		"sbq_pawInfuse" : {},
+		"sbq_thighsInfuse" : {},
+		"sbq_bellyInfuse" : {},
+		"sbq_breastInfuse" : {},
+		"sbq_cockInfuse" : {},
+		"sbq_pussyInfuse" : {}
+	},
+
+	// when struggling in a pred
+	"struggling" : {},
+
+	// a line of dialogue triggered when size is changed by the size ray or something else
+	"sizeChanged" : {
+		"new" : {},
+		"next":"shrinkOrGrow",
+		"shrink" :{"replace" : {"dialogueRandom":[":shrinking"]}},
+		"grow" :{"replace" : {"dialogueRandom":[":growing"]}}
+	},
+	// when stepping on a character small enough
+	"didSteppy" : {
+		"new" : {"dialogueRandom":[":didSteppy"]}
+	},
+
+	// when stepped on by a larger character
+	"gotSteppy" : {
+		"new" : {"dialogueRandom":[":gotStepped"]},
+		"next" : "steppyType",
+		"falling" :{"replace" : {"dialogueRandom":[":gotStomped"]}}
+	}
+}
