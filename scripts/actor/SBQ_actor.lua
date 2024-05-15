@@ -60,7 +60,7 @@ function sbq.actorMessages()
 				willingnessTable[action] = "yes"
 			else
 				willingnessTable[action] = "no"
-            end
+			end
 			sbq.timer(action.."ClearWillingness", 60, function ()
 				willingnessTable[action] = nil
 			end)
@@ -107,6 +107,16 @@ end
 
 local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
+	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("strugglingDialogue", 5, 5) then
+		sbq.target = sbq.loungingIn
+		local gotDialogue =  dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree)
+        if gotDialogue and dialogue.result.dialogue then
+			sbq.logInfo(dialogue.result, 2)
+			sbq.speakDialogue()
+		else
+			dialogue.finished = true
+		end
+	end
 	if sbq.timer("changeStruggleDirection", 2) then
 		if true then -- do stuff with location data here to determine struggles later
 			local dir = struggleDirections[math.random(#struggleDirections)]
@@ -120,7 +130,21 @@ function sbq.struggleBehavior(dt)
 		end
 	end
 end
-
+function sbq.speakDialogue()
+	local results = dialogueProcessor.processDialogueResults()
+	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
+		world.sendEntityMessage(sbq.loungingIn(), "sbqGuiMessage", "sbqPredHudPreyDialogue", entity.id(),
+			sb.replaceTags(results.dialogue, results.tags), results.dismissTime or sbq.config.dialogueDismissTime)
+	else
+		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)
+	end
+	dialogue.position = dialogue.position + 1
+	if dialogue.position > #dialogue.result.dialogue then
+		dialogue.finished = true
+		return
+	end
+	sbq.timer("speakDialogue", results.dismissTime or sbq.config.dialogueDismissTime, sbq.speakDialogue)
+end
 function faceEntity(args, board)
 	if args.entity == nil or not world.entityExists(args.entity) then return false end
 	local loungeAnchor = world.entityCurrentLounge(args.entity)

@@ -81,11 +81,6 @@ end
 function sbq.loungingIn()
 end
 
-function sbq.isLoungeDismountable(eid)
-	local loungeAnchor = world.entityCurrentLounge(eid or entity.id())
-	return (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable)
-end
-
 function sbq.setProperty(name, value)
 end
 

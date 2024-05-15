@@ -15,6 +15,7 @@ require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
 require"/scripts/actor/SBQ_hunting.lua"
+
 function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
 end
 function init()

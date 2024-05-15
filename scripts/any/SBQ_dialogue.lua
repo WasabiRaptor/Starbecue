@@ -1,12 +1,15 @@
 
 dialogueProcessor = {}
 dialogue = {
+	finished = true,
 	position = 1,
+	queue = {},
+	randomRolls = {},
 	result = {},
 	prev = {},
 	default = {},
 	path = "",
-	redirect = ""
+	redirect = "",
 }
 function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
 	dialogue.finished = false
@@ -127,13 +130,6 @@ function dialogueProcessor.generateKeysmashes(input, lengthMin, lengthMax)
 	end)
 end
 
-dialogue = {
-	queue = {},
-	result = {},
-	randomRolls = {},
-	position = 1,
-}
-
 function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
 	dialogueTreeTop = dialogueProcessor.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
 	dialogueTree = dialogueProcessor.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
@@ -186,6 +182,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 end
 
 function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
+	sbq.logInfo(step)
 	if not useStepPath then
 		if dialogueStepScripts[step] then
 			return dialogueProcessor.getDialogueBranch("."..tostring((dialogueStepScripts[step](dialogueTree, dialogueTreeTop, settings, step, eid))), settings, eid, dialogueTree, dialogueTreeTop)
@@ -227,19 +224,19 @@ function dialogueProcessor.processDialogueStep(dialogueTree)
 			end
 		end
 	end
-	if dialogueTree.newQueue then
-		dialogue.queue = sb.jsonMerge(dialogueTree.newQueue, {})
+	if dialogueTree.queueNew then
+		dialogue.queue = sb.jsonMerge(dialogueTree.queueNew, {})
 	end
-	if dialogueTree.clearQueue then
-		for _, k in ipairs(dialogueTree.clearQueue) do
+	if dialogueTree.queueClear then
+		for _, k in ipairs(dialogueTree.queueClear) do
 			dialogue.queue[k] = nil
 		end
 	end
-	if dialogueTree.replaceQueue then
-		dialogue.queue = sb.jsonMerge(dialogue.queue, dialogueTree.replaceQueue)
+	if dialogueTree.queueReplace then
+		dialogue.queue = sb.jsonMerge(dialogue.queue, dialogueTree.queueReplace)
 	end
-	if dialogueTree.addQueue then
-		for k, v in pairs(dialogueTree.addQueue) do
+	if dialogueTree.queueAdd then
+		for k, v in pairs(dialogueTree.queueAdd) do
 			if type(v) == "table" then
 				dialogue.queue[k] = dialogue.queue[k] or {}
 				util.appendLists(dialogue.queue[k], v)

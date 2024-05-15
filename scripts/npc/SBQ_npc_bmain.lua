@@ -44,7 +44,7 @@ function init()
 		local behavior = {}
 		local _behavior = self.behavior
 		function behavior:run(...)
-			if sbq.isLoungeDismountable() then
+			if not status.statPositive("sbqIsPrey") then
 				_behavior:run(...)
 			else
 				sbq.struggleBehavior(...)

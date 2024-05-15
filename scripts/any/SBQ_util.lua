@@ -351,3 +351,8 @@ end
 function sbq.createdDate()
 	return os.date(sbq.getString(":createdOnDate"), os.time()).." v"..root.modMetadata("Starbecue").version
 end
+
+function sbq.isLoungeDismountable(eid)
+	local loungeAnchor = world.entityCurrentLounge(eid or entity.id())
+	return (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable)
+end

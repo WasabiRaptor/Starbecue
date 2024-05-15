@@ -194,6 +194,8 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	else
 		dialogueBox.scrollText()
 	end
+
+	dialogueBox.dismissAfterTimer(results.dismissTime)
 	return true
 end
 function dialogueBox.scrollText()
