@@ -1,8 +1,8 @@
 [{"op":"merge", "path":"", "value": {
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
-				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				{"a94783":"d39c6c", "check" : {"navelVisible":true}},
+				{"a94783":"ffc181", "check" : {"navelVisible":false}},
 				["primary","primary"]
 			],
 		"cockColorRemap" : [
@@ -16,8 +16,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","secondary", {"visibleNipples":false}]
+				["flesh","flesh", {"nipplesVisible":true}],
+				["flesh","secondary", {"nipplesVisible":false}]
 			]
 	},
 	"baseColorMap" : {
@@ -31,7 +31,7 @@
 		"/humanoid/any/vore.config",
 		{
 			"defaultSettings" : {
-				"visibleNavel" : false
+				"navelVisible" : false
 			}
 		}
 	],

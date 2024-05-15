@@ -156,8 +156,8 @@
 
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
-				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				{"a94783":"d39c6c", "check" : {"navelVisible":true}},
+				{"a94783":"ffc181", "check" : {"navelVisible":false}},
 				["primary","secondary"]
 			],
 		"cockColorRemap" : [
@@ -172,8 +172,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","secondary", {"visibleNipples":false}]
+				["flesh","flesh", {"nipplesVisible":true}],
+				["flesh","secondary", {"nipplesVisible":false}]
 			]
 	},
 	"infusedParts" :{
@@ -188,8 +188,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","secondary", {"visibleNipples":false}]
+				["flesh","flesh", {"nipplesVisible":true}],
+				["flesh","secondary", {"nipplesVisible":false}]
 			]
 	},
 	"animationCustom" : [
@@ -206,7 +206,7 @@
 		"/humanoid/any/vore.config",
 		{
 			"defaultSettings" : {
-				"visibleNavel" : true
+				"navelVisible" : true
 			},
 			"transformResult" : {"species":"sergal"}
 		}

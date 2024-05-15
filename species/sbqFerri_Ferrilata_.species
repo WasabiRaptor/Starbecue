@@ -5,7 +5,7 @@
 		"/humanoid/any/vore.config",
 		{
 			"defaultSettings" : {
-				"visibleNavel" : true
+				"navelVisible" : true
 			},
 			"transformResult" : {"species":"catfox"}
 		}
@@ -187,8 +187,8 @@
 		// nipples visible, just change the second entry in the remap to something else such as ["flesh","primary"]
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","secondary", {"visibleNipples":false}]
+				["flesh","flesh", {"nipplesVisible":true}],
+				["flesh","secondary", {"nipplesVisible":false}]
 			]
 	},
 

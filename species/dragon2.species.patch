@@ -1,8 +1,8 @@
 {
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"d39c6c", "check" : {"visibleNavel":true}},
-				{"a94783":"ffc181", "check" : {"visibleNavel":false}},
+				{"a94783":"d39c6c", "check" : {"navelVisible":true}},
+				{"a94783":"ffc181", "check" : {"navelVisible":false}},
 				["hair","hair"]
 			],
 		"cockColorRemap" : [
@@ -16,8 +16,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","hair"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","hair", {"visibleNipples":false}]
+				["flesh","flesh", {"nipplesVisible":true}],
+				["flesh","hair", {"nipplesVisible":false}]
 			]
 	}
 }

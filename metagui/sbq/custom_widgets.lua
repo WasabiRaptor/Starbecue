@@ -1147,6 +1147,24 @@ function widgets.sbqItemGrid:addSlot(item, params)
 	self:queueGeometryUpdate() -- new slots need positioned
 end
 
+function widgets.sbqItemGrid:updateGeometry()
+	local container = self.autoInteract == "container"
+	local slots = #(self.children)
+	local cols = math.modf((self.size[1] + self.spacing[1]) / (18 + self.spacing[1]))
+	local i = 1
+	for j, s in pairs(self.children) do
+		s.index = j -- shove this in for script use
+		if container then s.containerSlot = (self.containerSlot or 1) + i - 1 end
+		local row = math.modf((i-1) / cols)
+		local col = i - 1 - (row * cols)
+		s.position = { (18 + self.spacing[1]) * col, (18 + self.spacing[2]) * row }
+		if s.visible then
+			i = i + 1
+		end
+	end
+	self:applyGeometry()
+end
+
 widgets.sbqItemSlot = mg.proto(widgets.itemSlot, {
 })
 

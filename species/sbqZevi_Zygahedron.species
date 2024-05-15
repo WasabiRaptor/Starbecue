@@ -153,8 +153,8 @@
 		],
 		"breastsColorRemap" : [
 			["primary","primary"],
-			["flesh","flesh", {"visibleNipples":true}],
-			["flesh","primary", {"visibleNipples":false}]
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","primary", {"nipplesVisible":false}]
 		]
 	},
 	"infusedParts" :{
@@ -169,8 +169,8 @@
 			],
 		"breastsColorRemap" : [
 			["primary","primary"],
-			["flesh","flesh", {"visibleNipples":true}],
-			["flesh","primary", {"visibleNipples":false}]
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","primary", {"nipplesVisible":false}]
 		]
 	},
 	"animationConfig" : "/humanoid/any/quadruped.animation",
@@ -182,7 +182,7 @@
 		"/humanoid/any/vore.config",
 		{
 			"defaultSettings" : {
-				"visibleNavel" : true
+				"navelVisible" : true
 			},
 			"transformResult" : {"species":"any"}
 		}

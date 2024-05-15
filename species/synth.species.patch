@@ -14,8 +14,8 @@
 			],
 		"breastsColorRemap" : [
 				["primary","secondary"],
-				["flesh","flesh", {"visibleNipples":true}],
-				["flesh","secondary", {"visibleNipples":false}]
+				["flesh","flesh", {"nipplesVisible":true}],
+				["flesh","secondary", {"nipplesVisible":false}]
 			]
 	},
 	"baseColorMap" : {
@@ -28,7 +28,7 @@
 		"/humanoid/any/vore.config",
 		{
 			"defaultSettings" : {
-				"visibleNavel" : false
+				"navelVisible" : false
 			}
 		}
 	],
