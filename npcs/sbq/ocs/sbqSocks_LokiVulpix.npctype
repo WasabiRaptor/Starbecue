@@ -344,10 +344,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnprompted"]}
+							"replace" : {"dialogueRandom" : [":oralVoreNoPrompt"]}
 						},
 						"after" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]}
+							"replace" : {"dialogueRandom" : [":oralVoreNoPromptAfter"]}
 						}
 					},
 					"prompt" : {
@@ -441,10 +441,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":analVoreUnprompted"]}
+							"replace" : {"dialogueRandom" : [":analVoreNoPrompt"]}
 						},
 						"after" : {
-							"replace" : {"dialogueRandom" : [":analVoreUnpromptedAfter"]}
+							"replace" : {"dialogueRandom" : [":analVoreNoPromptAfter"]}
 						}
 					},
 					"prompt" : {
@@ -538,10 +538,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":unbirthVoreUnprompted"]}
+							"replace" : {"dialogueRandom" : [":unbirthVoreNoPrompt"]}
 						},
 						"after" : {
-							"replace" : {"dialogueRandom" : [":unbirthVoreUnpromptedAfter"]}
+							"replace" : {"dialogueRandom" : [":unbirthVoreNoPromptAfter"]}
 						}
 					},
 					"prompt" : {
@@ -1023,14 +1023,14 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : { "dialogueRandom" : [":infuseUnpromptedPussyBefore"]},
+							"replace" : { "dialogueRandom" : [":infuseNoPromptPussyBefore"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedPussyBeforeLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":infuseNoPromptPussyBeforeLayer"]}}
 						},
 						"after" : {
-							"replace" : { "dialogueRandom" : [":infuseUnpromptedPussyAfter"]},
+							"replace" : { "dialogueRandom" : [":infuseNoPromptPussyAfter"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedPussyAfterLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":infuseNoPromptPussyAfterLayer"]}}
 						}
 					},
 					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }

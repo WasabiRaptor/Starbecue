@@ -159,10 +159,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnprompted"]}
+							"replace" : {"dialogueRandom" : [":oralVoreNoPrompt"]}
 						},
 						"after" : {
-							"replace" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]}
+							"replace" : {"dialogueRandom" : [":oralVoreNoPromptAfter"]}
 						}
 					},
 					"prompt" : {
@@ -256,10 +256,10 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : {"dialogueRandom" : [":cockVoreUnprompted"]}
+							"replace" : {"dialogueRandom" : [":cockVoreNoPrompt"]}
 						},
 						"after" : {
-							"replace" : {"dialogueRandom" : [":cockVoreUnpromptedAfter"]}
+							"replace" : {"dialogueRandom" : [":cockVoreNoPromptAfter"]}
 						}
 					},
 					"prompt" : {
@@ -712,14 +712,14 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : { "dialogueRandom" : [":infuseUnpromptedShaftBefore"]},
+							"replace" : { "dialogueRandom" : [":infuseNoPromptShaftBefore"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedShaftBeforeLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":infuseNoPromptShaftBeforeLayer"]}}
 						},
 						"after" : {
-							"replace" : { "dialogueRandom" : [":infuseUnpromptedShaftAfter"]},
+							"replace" : { "dialogueRandom" : [":infuseNoPromptShaftAfter"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedShaftAfterLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":infuseNoPromptShaftAfterLayer"]}}
 						}
 					},
 					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
@@ -745,14 +745,14 @@
 					"unprompted" : {
 						"next" : "doingVore",
 						"before" : {
-							"replace" : { "dialogueRandom" : [":infuseUnpromptedBallsBefore"]},
+							"replace" : { "dialogueRandom" : [":infuseNoPromptBallsBefore"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBallsBeforeLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":infuseNoPromptBallsBeforeLayer"]}}
 						},
 						"after" : {
-							"replace" : { "dialogueRandom" : [":infuseUnpromptedBallsAfter"]},
+							"replace" : { "dialogueRandom" : [":infuseNoPromptBallsAfter"]},
 							"next" : "infuselayered",
-							"true" : {"replace" : { "dialogueRandom" : [":infuseUnpromptedBallsAfterLayer"]}}
+							"true" : {"replace" : { "dialogueRandom" : [":infuseNoPromptBallsAfterLayer"]}}
 						}
 					},
 					"notFeelingIt" : { "replace" : {"dialogueRandom" : ["notFeelingIt"]} }
