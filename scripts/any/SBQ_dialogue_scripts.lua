@@ -62,10 +62,10 @@ function dialogueStepScripts.promptResponse(dialogueTree, dialogueTreeTop, setti
 end
 
 function dialogueStepScripts.statPositive(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	return world.entityStatPositive(eid, step) and step
+	return world.entityStatPositive(eid, step) and step or step.."_notPositive"
 end
 dialogueStepScripts.sbqHeal = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqUnbirthHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqFemcumHeal = dialogueStepScripts.statPositive
 
 dialogueStepScripts.sbqAcidSoftDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqCumSoftDigest = dialogueStepScripts.statPositive
@@ -88,3 +88,8 @@ dialogueStepScripts.sbq_bellyInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_breastInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cockInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_pussyInfuse = dialogueStepScripts.statPositive
+
+dialogueStepScripts.sbqAcidDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqCumDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqFemcumDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbqMilkDigestResistance = dialogueStepScripts.statPositive

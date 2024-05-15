@@ -297,11 +297,14 @@
 	"occupantInteract" : ".occupantStruggle", // just points to struggle for now, could be it's own dialogue
 	// chance of saying one of these lines when one of their occupants struggles inside them
 	"occupantStruggle" : {
+		"settings" : "target",
+		"new" : {},
 		"next" : [
 			"adjectives",
+			"location",
 
 			"sbqHeal",
-			"sbqUnbirthHeal",
+			"sbqFemcumHeal",
 
 			"sbqAcidSoftDigest",
 			"sbqCumSoftDigest",
@@ -328,32 +331,303 @@
 		"adjectives" : {
 
 		},
-		"sbqHeal" : {},
-		"sbqUnbirthHeal" : {},
-		"sbqAcidSoftDigest" : {},
-		"sbqCumSoftDigest" : {},
-		"sbqFemcumSoftDigest" : {},
-		"sbqMilkSoftDigest" : {},
-		"sbqAcidDigest" : ".sbqAcidSoftDigest",
-		"sbqCumDigest" : ".sbqCumSoftDigest",
-		"sbqFemcumDigest" : ".sbqFemcumSoftDigest",
-		"sbqMilkDigest" : ".sbqMilkSoftDigest",
+		"location" : {
 
-		"sbqTransformation" : {},
-		"sbqDrainEnergy" : {},
-		"sbqEggify" : {},
+		},
+		"sbqHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleHeal"]
+			}
+		},
+		"sbqFemcumHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleFemcumHeal"]
+			}
+		},
+		"sbqAcidDigest" : {
+			"next" : ["sbqAcidDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleAcidDigest"]
+			},
+			"sbqAcidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : [":struggleAcidDigestImmune"]
+				}
+			}
+		},
+		"sbqCumDigest" : {
+			"next" : ["sbqCumDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleCumDigest"]
+			},
+			"sbqCumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : [":struggleCumDigestImmune"]
+				}
+			}
+		},
+		"sbqFemcumDigest" : {
+			"next" : ["sbqFemcumDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : ["struggleFemcumDigest"]
+			},
+			"sbqFemcumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : ["struggleFemcumDigestImmune"]
+				}
+			}
+		},
+		"sbqMilkDigest" : {
+			"next" : ["sbqMilkDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : ["struggleMilkDigest"]
+			},
+			"sbqMilkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : ["struggleMilkDigestImmune"]
+				}
+			}
+		},
+		"sbqAcidSoftDigest" : ".sbqAcidDigest",
+		"sbqCumSoftDigest" : ".sbqCumDigest",
+		"sbqFemcumSoftDigest" : ".sbqFemcumDigest",
+		"sbqMilkSoftDigest" : ".sbqMilkDigest",
 
-		"sbq_tailInfuse" : {},
-		"sbq_pawInfuse" : {},
-		"sbq_thighsInfuse" : {},
-		"sbq_bellyInfuse" : {},
-		"sbq_breastInfuse" : {},
-		"sbq_cockInfuse" : {},
-		"sbq_pussyInfuse" : {}
+		"sbqTransformation" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleTransforming"]
+			}
+		},
+		"sbqDrainEnergy" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleDrainEnergy"]
+			}
+		},
+		"sbqEggify" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleEggify"]
+			}
+		},
+
+		"sbq_tailInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleTailInfuse"]
+			}
+		},
+		"sbq_pawInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglePawInfuse"]
+			}
+		},
+		"sbq_thighsInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleThighsInfuse"]
+			}
+		},
+		"sbq_bellyInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleBellyInfuse"]
+			}
+		},
+		"sbq_breastInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleBreastInfuse"]
+			}
+		},
+		"sbq_cockInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleCockInfuse"]
+			}
+		},
+		"sbq_pussyInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglePussyInfuse"]
+			}
+		}
 	},
 
 	// when struggling in a pred
-	"struggling" : {},
+	"struggling" : {
+		"settings" : "self",
+		"new" : {},
+		"next" : [
+			"adjectives",
+			"location",
+
+			"sbqHeal",
+			"sbqFemcumHeal",
+
+			"sbqAcidSoftDigest",
+			"sbqCumSoftDigest",
+			"sbqFemcumSoftDigest",
+			"sbqMilkSoftDigest",
+
+			"sbqAcidDigest",
+			"sbqCumDigest",
+			"sbqFemcumDigest",
+			"sbqMilkDigest",
+
+			"sbqTransformation",
+			"sbqDrainEnergy",
+			"sbqEggify",
+
+			"sbq_tailInfuse",
+			"sbq_pawInfuse",
+			"sbq_thighsInfuse",
+			"sbq_bellyInfuse",
+			"sbq_breastInfuse",
+			"sbq_cockInfuse",
+			"sbq_pussyInfuse"
+		],
+		"adjectives" : {
+
+		},
+		"location" : {
+
+		},
+		"sbqHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingHeal"]
+			}
+		},
+		"sbqFemcumHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingFemcumHeal"]
+			}
+		},
+		"sbqAcidDigest" : {
+			"next" : ["sbqAcidDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingAcidDigest"]
+			},
+			"sbqAcidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : [":strugglingAcidDigestImmune"]
+				}
+			}
+		},
+		"sbqCumDigest" : {
+			"next" : ["sbqCumDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingCumDigest"]
+			},
+			"sbqCumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : [":strugglingCumDigestImmune"]
+				}
+			}
+		},
+		"sbqFemcumDigest" : {
+			"next" : ["sbqFemcumDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : ["strugglingFemcumDigest"]
+			},
+			"sbqFemcumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : ["strugglingFemcumDigestImmune"]
+				}
+			}
+		},
+		"sbqMilkDigest" : {
+			"next" : ["sbqMilkDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : ["strugglingMilkDigest"]
+			},
+			"sbqMilkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : ["strugglingMilkDigestImmune"]
+				}
+			}
+		},
+		"sbqAcidSoftDigest" : ".sbqAcidDigest",
+		"sbqCumSoftDigest" : ".sbqCumDigest",
+		"sbqFemcumSoftDigest" : ".sbqFemcumDigest",
+		"sbqMilkSoftDigest" : ".sbqMilkDigest",
+
+		"sbqTransformation" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingTransforming"]
+			}
+		},
+		"sbqDrainEnergy" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingDrainEnergy"]
+			}
+		},
+		"sbqEggify" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingEggify"]
+			}
+		},
+
+		"sbq_tailInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingTailInfuse"]
+			}
+		},
+		"sbq_pawInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingPawInfuse"]
+			}
+		},
+		"sbq_thighsInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingThighsInfuse"]
+			}
+		},
+		"sbq_bellyInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingBellyInfuse"]
+			}
+		},
+		"sbq_breastInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingBreastInfuse"]
+			}
+		},
+		"sbq_cockInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingCockInfuse"]
+			}
+		},
+		"sbq_pussyInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":strugglingPussyInfuse"]
+			}
+		}
+	},
 
 	// a line of dialogue triggered when size is changed by the size ray or something else
 	"sizeChanged" : {

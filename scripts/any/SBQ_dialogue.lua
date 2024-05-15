@@ -147,7 +147,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 				if eid and world.entityExists(eid) then
 					settings = sbq.getPublicProperty(eid, "sbqPublicSettings")
 				end
-			elseif dialogueTree.settings == "source" then
+			elseif dialogueTree.settings == "self" then
 				eid = sbq.entityId()
 				settings = sbq.settings
 			else
