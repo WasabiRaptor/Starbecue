@@ -368,8 +368,7 @@ function sbq.widgetScripts.makeInfuseSlots(param)
 			canInfuse = true
 			local glyph = "/interface/scripted/sbq/" .. infuseType .. "Slot.png"
 			local item = sbq.settings[param.setting][infuseType].item
-			table.insert(infuseSlots, {
-				visible = sbq.settings.infusePrefs[infuseType].pred or false,
+			local slot = {
 				item = item.name and item,
 				glyph = root.assetExists(glyph) and glyph,
 				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot),
@@ -377,7 +376,9 @@ function sbq.widgetScripts.makeInfuseSlots(param)
 				groupName = param.setting,
 				groupKey = infuseType,
 				script = "changeSetting"
-			})
+			}
+			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(slot)] = { slot.setting, slot.groupName, slot.groupKey }
+			table.insert(infuseSlots, slot)
 		end
 	end
 	if not canInfuse then return false end
@@ -401,7 +402,26 @@ function sbq.widgetScripts.visualMinMax(param)
 	local location = sbq.locations[param.groupKey]
 	param.max = location.maxFill
 	param.settingType = "number"
+	if storage.sbqSettings.locations[param.groupKey][param.setting] >= location.maxFill then
+		storage.sbqSettings.locations[param.groupKey][param.setting] = location.maxFill
+	end
 	return param
+end
+
+function sbq.widgetScripts.fillControlVisible(setting, group, name)
+	local location = sbq.locations[name]
+	if (not location.maxFill) or (location.maxFill == math.huge) then
+		return false
+	end
+	return true
+end
+
+function sbq.widgetScripts.infusedVisible(setting, group, name)
+	local location = sbq.locations[name]
+	if (not location.infuseType) or (not sbq.settings.infusePrefs[location.infuseType].pred) then
+		return false
+	end
+	return true
 end
 
 function uninit()
