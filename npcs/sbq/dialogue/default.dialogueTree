@@ -3,8 +3,11 @@
 	// after following a path, next steps will automatically advance down the tree building the result dialogue
 
 	// overall default values for a "new" dialogue
-	"default" : {
-		"dialogueRandom" : [":missingDialogue"],
+	"defaultResults" : {
+		"entityPortrait" : ["bust"],
+		// "dialogue" : [":missingDialogue"],
+		"textSound": ["/sfx/interface/aichatter1.ogg"],
+		"textVolume" : [1],
 		"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 	},
 	// greeting is the default start of the tree
@@ -465,7 +468,9 @@
 	// when struggling in a pred
 	"struggling" : {
 		"settings" : "self",
-		"new" : {},
+		"new" : {
+			"textVolume" : [0.5]
+		},
 		"next" : [
 			"adjectives",
 			"location",

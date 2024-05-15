@@ -187,7 +187,8 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 
 	dialogueBox.text = sb.replaceTags(results.dialogue, results.tags)
 	dialogueBox.textSound = results.textSound
-	dialogueBox.textSpeed = results.textSpeed
+    dialogueBox.textSpeed = results.textSpeed
+	dialogueBox.textVolume = results.textVolume or 1
 	dialogueBox.textPosition = 1
 	if inital then
 		sbq.timer(nil, 0.25, dialogueBox.scrollText)
@@ -208,7 +209,7 @@ function dialogueBox.scrollText()
 		while type(sound) == "table" do
 			sound = sound[math.random(#sound)]
 		end
-		pane.playSound(sound)
+		pane.playSound(sound, nil, dialogueBox.textVolume)
 	end
 
 	dialogueBox.textPosition = dialogueBox.textPosition + 1

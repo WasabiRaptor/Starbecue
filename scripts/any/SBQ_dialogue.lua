@@ -182,7 +182,6 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 end
 
 function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogueTreeTop, useStepPath)
-	sbq.logInfo(step)
 	if not useStepPath then
 		if dialogueStepScripts[step] then
 			return dialogueProcessor.getDialogueBranch("."..tostring((dialogueStepScripts[step](dialogueTree, dialogueTreeTop, settings, step, eid))), settings, eid, dialogueTree, dialogueTreeTop)
@@ -256,7 +255,7 @@ function dialogueProcessor.getRedirectedDialogue(path, returnStrings, settings, 
 		if firstChar == "/" then
 			returnVal = root.assetJson(returnVal) or {}
 		elseif firstChar == ":" then
-			local val = root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile)[returnVal.sub(2,-1)]
+			local val = root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile)[returnVal:sub(2,-1)]
 			if not val then
 				returnVal = sbq.getString(returnVal)
 				break

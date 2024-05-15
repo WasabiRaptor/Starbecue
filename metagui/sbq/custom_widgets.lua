@@ -57,7 +57,7 @@ function init()
 		storage.sbqSettings = sbq.storageSettings or {}
 		storage.sbqUpgrades = sbq.storageUpgrades or {}
 		sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
-    end
+	end
 	if sbq.locations and sbq.baseLocations then
 		for name, location in pairs(sbq.locations) do
 			setmetatable(location, {__index = sbq.baseLocations[name]})
@@ -783,16 +783,20 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	lastMenu = hooks
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
 end
-function mg.preyDialogueText(pos, text, id, lifetime)
+function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 	if not pos or not text or text == "" then return nil end -- invalid argument passed
 	local menuId = "preyDialogueText:" .. (id or sb.makeRandomSource():randu64())
 	local cfg = {
-		style = "contextMenu", scripts = {"/metagui/sbq/dismissTimer.lua"}, menuId = menuId,
+		style = "contextMenu", scripts = {"/metagui/sbq/dismissTimer.lua", "/metagui/sbq/scrollText.lua"}, menuId = menuId,
 		forceTheme = mg.cfg.theme, accentColor = mg.cfg.accentColor, -- carry over theme and accent color
-		children = { { type = "label", text = text } },
+		children = { { type = "label", id = "dialogueLabel", text = "" } },
 		dismissable = config.getParameter("dismissable"),
 		paneLayer = config.getParameter("paneLayer"),
-		lifetime = lifetime or 5
+		lifetime = lifetime or sbq.config.dialogueDismissTime,
+		text = text,
+		textSound = sound,
+        speed = speed,
+		volume = volume
 	}
 
 	local bm = theme.metrics.borderMargins.contextMenu

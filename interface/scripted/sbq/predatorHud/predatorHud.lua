@@ -10,7 +10,7 @@ function init()
 		Occupants.list = occupants
 		sbq.refreshOccupants()
 	end)
-	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, lifetime)
+	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
 		local portrait = _ENV[entityId .. "PortraitCanvas"]
 		if portrait then
 			local pos = { 0, 0 }
@@ -20,7 +20,7 @@ function init()
 				w = w.parent
 			end
 			if (pos[2] < 205) and (pos[2] > 19) then
-				_ENV.metagui.preyDialogueText({6, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, entityId.."HudDialogue", lifetime)
+				_ENV.metagui.preyDialogueText({6, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, sound, speed, volume, entityId.."HudDialogue", lifetime)
 			end
 			sbq.refreshPortrait(entityId)
 		end
