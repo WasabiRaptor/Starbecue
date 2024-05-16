@@ -62,6 +62,7 @@ function init()
 
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
 		status.setStatusProperty("sbqDidVornyConvertCheck", true)
+		if entity.uniqueId() then return end
 		if not root.speciesConfig(npc.species()).voreConfig then return end
 
 		if config.getParameter("sbqNPC") or config.getParameter("uniqueId") or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true) then
@@ -69,7 +70,7 @@ function init()
 		end
 		if tenant then
 			sbq.timer("maybeConvert", 0.1, function()
-				if sbq.parentEntity() then return end
+				if sbq.parentEntity() or entity.uniqueId() then return end
 				convertBackType = npc.npcType()
 				local convertType = config.getParameter("sbqConvertType")
 				if convertType and (math.random(8) == 8) then
