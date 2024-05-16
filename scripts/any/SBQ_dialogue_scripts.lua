@@ -67,15 +67,15 @@ end
 dialogueStepScripts.sbqHeal = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqFemcumHeal = dialogueStepScripts.statPositive
 
-dialogueStepScripts.sbqAcidSoftDigest = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqCumSoftDigest = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqFemcumSoftDigest = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqMilkSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_acidSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_cumSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_femcumSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_milkSoftDigest = dialogueStepScripts.statPositive
 
-dialogueStepScripts.sbqAcidDigest = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqCumDigest = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqFemcumDigest = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqMilkDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_acidDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_cumDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_femcumDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_milkDigest = dialogueStepScripts.statPositive
 
 dialogueStepScripts.sbqTransformation = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqDrainEnergy = dialogueStepScripts.statPositive
@@ -89,7 +89,7 @@ dialogueStepScripts.sbq_breastInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cockInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_pussyInfuse = dialogueStepScripts.statPositive
 
-dialogueStepScripts.sbqAcidDigestResistance = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqCumDigestResistance = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqFemcumDigestResistance = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqMilkDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_acidDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_cumDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_femcumDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_milkDigestResistance = dialogueStepScripts.statPositive

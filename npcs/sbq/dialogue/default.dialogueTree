@@ -309,15 +309,15 @@
 			"sbqHeal",
 			"sbqFemcumHeal",
 
-			"sbqAcidSoftDigest",
-			"sbqCumSoftDigest",
-			"sbqFemcumSoftDigest",
-			"sbqMilkSoftDigest",
+			"sbq_acidSoftDigest",
+			"sbq_cumSoftDigest",
+			"sbq_femcumSoftDigest",
+			"sbq_milkSoftDigest",
 
-			"sbqAcidDigest",
-			"sbqCumDigest",
-			"sbqFemcumDigest",
-			"sbqMilkDigest",
+			"sbq_acidDigest",
+			"sbq_cumDigest",
+			"sbq_femcumDigest",
+			"sbq_milkDigest",
 
 			"sbqTransformation",
 			"sbqDrainEnergy",
@@ -349,58 +349,58 @@
 				"dialogueRandom" : [":struggleFemcumHeal"]
 			}
 		},
-		"sbqAcidDigest" : {
-			"next" : ["sbqAcidDigestResistance"],
+		"sbq_acidDigest" : {
+			"next" : ["sbq_acidDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":struggleAcidDigest"]
 			},
-			"sbqAcidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_acidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : [":struggleAcidDigestImmune"]
 				}
 			}
 		},
-		"sbqCumDigest" : {
-			"next" : ["sbqCumDigestResistance"],
+		"sbq_cumDigest" : {
+			"next" : ["sbq_cumDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":struggleCumDigest"]
 			},
-			"sbqCumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_cumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : [":struggleCumDigestImmune"]
 				}
 			}
 		},
-		"sbqFemcumDigest" : {
-			"next" : ["sbqFemcumDigestResistance"],
+		"sbq_femcumDigest" : {
+			"next" : ["sbq_femcumDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : ["struggleFemcumDigest"]
 			},
-			"sbqFemcumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_femcumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : ["struggleFemcumDigestImmune"]
 				}
 			}
 		},
-		"sbqMilkDigest" : {
-			"next" : ["sbqMilkDigestResistance"],
+		"sbq_milkDigest" : {
+			"next" : ["sbq_milkDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : ["struggleMilkDigest"]
 			},
-			"sbqMilkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_milkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : ["struggleMilkDigestImmune"]
 				}
 			}
 		},
-		"sbqAcidSoftDigest" : ".sbqAcidDigest",
-		"sbqCumSoftDigest" : ".sbqCumDigest",
-		"sbqFemcumSoftDigest" : ".sbqFemcumDigest",
-		"sbqMilkSoftDigest" : ".sbqMilkDigest",
+		"sbq_acidSoftDigest" : ".sbq_acidDigest",
+		"sbq_cumSoftDigest" : ".sbq_cumDigest",
+		"sbq_femcumSoftDigest" : ".sbq_femcumDigest",
+		"sbq_milkSoftDigest" : ".sbq_milkDigest",
 
 		"sbqTransformation" : {
 			"addQueued" : true,
@@ -478,15 +478,15 @@
 			"sbqHeal",
 			"sbqFemcumHeal",
 
-			"sbqAcidSoftDigest",
-			"sbqCumSoftDigest",
-			"sbqFemcumSoftDigest",
-			"sbqMilkSoftDigest",
+			"sbq_acidSoftDigest",
+			"sbq_cumSoftDigest",
+			"sbq_femcumSoftDigest",
+			"sbq_milkSoftDigest",
 
-			"sbqAcidDigest",
-			"sbqCumDigest",
-			"sbqFemcumDigest",
-			"sbqMilkDigest",
+			"sbq_acidDigest",
+			"sbq_cumDigest",
+			"sbq_femcumDigest",
+			"sbq_milkDigest",
 
 			"sbqTransformation",
 			"sbqDrainEnergy",
@@ -518,58 +518,58 @@
 				"dialogueRandom" : [":strugglingFemcumHeal"]
 			}
 		},
-		"sbqAcidDigest" : {
-			"next" : ["sbqAcidDigestResistance"],
+		"sbq_acidDigest" : {
+			"next" : ["sbq_acidDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":strugglingAcidDigest"]
 			},
-			"sbqAcidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_acidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : [":strugglingAcidDigestImmune"]
 				}
 			}
 		},
-		"sbqCumDigest" : {
-			"next" : ["sbqCumDigestResistance"],
+		"sbq_cumDigest" : {
+			"next" : ["sbq_cumDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":strugglingCumDigest"]
 			},
-			"sbqCumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_cumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : [":strugglingCumDigestImmune"]
 				}
 			}
 		},
-		"sbqFemcumDigest" : {
-			"next" : ["sbqFemcumDigestResistance"],
+		"sbq_femcumDigest" : {
+			"next" : ["sbq_femcumDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : ["strugglingFemcumDigest"]
 			},
-			"sbqFemcumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_femcumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : ["strugglingFemcumDigestImmune"]
 				}
 			}
 		},
-		"sbqMilkDigest" : {
-			"next" : ["sbqMilkDigestResistance"],
+		"sbq_milkDigest" : {
+			"next" : ["sbq_milkDigestResistance"],
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : ["strugglingMilkDigest"]
 			},
-			"sbqMilkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+			"sbq_milkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : ["strugglingMilkDigestImmune"]
 				}
 			}
 		},
-		"sbqAcidSoftDigest" : ".sbqAcidDigest",
-		"sbqCumSoftDigest" : ".sbqCumDigest",
-		"sbqFemcumSoftDigest" : ".sbqFemcumDigest",
-		"sbqMilkSoftDigest" : ".sbqMilkDigest",
+		"sbq_acidSoftDigest" : ".sbq_acidDigest",
+		"sbq_cumSoftDigest" : ".sbq_cumDigest",
+		"sbq_femcumSoftDigest" : ".sbq_femcumDigest",
+		"sbq_milkSoftDigest" : ".sbq_milkDigest",
 
 		"sbqTransformation" : {
 			"addQueued" : true,

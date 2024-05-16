@@ -1252,7 +1252,7 @@ function _Occupant:update(dt)
 		local compression = location.settings.compression
 		local compressionMin = location.settings.compressionMin
 		if compression == "time" then
-			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat("sbqAcidDigestPower") * dt * sbq.config.compressionRate))
+			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat(location.powerMultiplier) * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
 			self.sizeMultiplier = math.max( compressionMin, self:resourcePercentage("health"))
 		end

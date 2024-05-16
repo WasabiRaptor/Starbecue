@@ -14,7 +14,7 @@ function init()
 	self.digestRate = config.getParameter("digestRate") or 1
 	self.digestKind = config.getParameter("damageSourceKind") or "sbq_digest"
 	self.digestSent = false
-	self.resistance = (config.getParameter("digestType") or "sbqAcidDigest").."Resistance"
+	self.resistance = "sbq_"..(config.getParameter("digestType") or "acidDigest").."Resistance"
 
 	message.setHandler("sbqTurboDigest", function(_,_, amount)
 		self.turboDigest = amount
@@ -43,7 +43,8 @@ function update(dt)
 				config.getParameter("digestedAction") or "digested",
 				entity.id(),
 				type(item) == "table" and item or {name = item},
-				config.getParameter("digestType")
+				config.getParameter("digestType"),
+				status.statPositive("sbq_"..config.getParameter("digestType").."DropsAllow")
 			), function (recieved)
 				if not recieved then self.digestSent = false end
 			end, function ()
@@ -87,7 +88,7 @@ function update(dt)
 end
 
 function onExpire()
-	if (config.getParameter("fatal") and self.digested) and not status.statPositive((config.getParameter("digestType") or "sbqAcidDigest").."FatalImmune") then
+	if (config.getParameter("fatal") and self.digested) and not status.statPositive("sbq_"..(config.getParameter("digestType") or "acidDigest").."FatalImmune") then
 		local entityType = world.entityType(entity.id())
 		if entityType == "npc" or entityType == "monster" then
 			world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")

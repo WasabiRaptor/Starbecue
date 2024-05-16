@@ -325,7 +325,7 @@ function default:turboHeal(name, action, target, ...)
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
 end
 
-function default:digested(name, action, target, item, ...)
+function default:digested(name, action, target, item, digestType, drop, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	local location = occupant:getLocation()
@@ -344,7 +344,7 @@ function default:digested(name, action, target, item, ...)
 			if humanoid then
 				item.parameters.predIdentity = humanoid.getIdentity()
 			end
-			if item.name then
+			if item.name and sbq.settings[digestType.."Drops"] and drop then
 				world.spawnItem(item, position)
 			end
 			item.name = "sbqNPCEssenceJar"
