@@ -21,6 +21,7 @@ function init()
 	sbq.setLoungeControlHeld = monster.setLoungeControlHeld
 	sbq.releaseLoungeControl = monster.releaseLoungeControl
 	sbq.loungingIn = monster.loungingIn
+	sbq.resetLounging = monster.resetLounging
 
 	if self.behavior then
 		local behavior = {}

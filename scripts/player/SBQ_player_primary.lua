@@ -4,5 +4,9 @@ local old = {
 	update = update
 }
 function init()
+	sbq.targetPosition = player.aimPosition
+	sbq.loungingIn = player.loungingIn
+	sbq.resetLounging = player.stopLounging
+
     old.init()
 end

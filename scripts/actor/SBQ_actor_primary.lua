@@ -24,7 +24,8 @@ function init()
 	status.setStatusProperty("sbqProgressBar", 0)
 
 	message.setHandler("sbqReleased", function(_, _, data)
-		status.setStatusProperty("sbqProgressBar", 0)
+        status.setStatusProperty("sbqProgressBar", 0)
+		seatToForce = nil
 		if mcontroller.isCollisionStuck() then -- copy of vanilla's "checkStuck" but without the lounge check
 			-- sloppy catch-all correction for various cases of getting stuck in things
 			-- due to bad spawn position, failure to exit loungeable (on ships), etc.
@@ -41,7 +42,7 @@ function init()
 	end)
 
 	message.setHandler("sbqForceSit", function(_, _, data)
-		mcontroller.resetAnchorState()
+		sbq.resetLounging()
 		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
 			seatToForce = data
 		end

@@ -31,6 +31,7 @@ function init()
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.releaseLoungeControl = npc.releaseLoungeControl
 	sbq.loungingIn = npc.loungingIn
+	sbq.resetLounging = npc.resetLounging
 
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()
