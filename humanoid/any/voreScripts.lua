@@ -138,7 +138,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	if target == sbq.loungingIn() then return false, "invalidAction" end
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local loungeAnchor = world.entityCurrentLounge(target)
-	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) then return false, "invalidAction" end
+	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
 	if throughput or action.throughput then
 		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
@@ -162,7 +162,7 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 	if target == sbq.loungingIn() then return false, "invalidAction" end
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local loungeAnchor = world.entityCurrentLounge(target)
-	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) then return false, "invalidAction" end
+	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
 	if throughput or action.throughput then
 		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
