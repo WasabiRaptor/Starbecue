@@ -12,19 +12,8 @@ function sbq.humanoidInit()
 	message.setHandler("sbqGetIdentity", function (_,_)
 		return humanoid.getIdentity()
 	end)
-	message.setHandler("sbqDigestDrop", function(_, _, itemDrop)
-		local itemDrop = itemDrop
-		local identity = humanoid.getIdentity()
-		local species = humanoid.species()
-		local speciesFile = root.speciesConfig(species)
-		itemDrop.parameters.predSpecies = species
-		itemDrop.parameters.predDirectives = (identity.bodyDirectives or "") .. (identity.hairDirectives or "")
-		itemDrop.parameters.predColorMap = speciesFile.baseColorMap
-		world.spawnItem(itemDrop, mcontroller.position())
-	end)
 
 	message.setHandler("sbqGetCard", function()
-
 		local item = root.assetJson("/sbqItemTemplates.config:npcCard")
 		local entityType = entity.entityType()
 		if entityType == "npc" then
@@ -37,6 +26,7 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcType = npc.npcType()
 			item.parameters.npcArgs.npcLevel = npc.level()
 			item.parameters.npcArgs.npcSeed = npc.seed()
+			item.parameters.tooltipFields.subtitle = npc.npcType()
 		elseif entityType == "player" then
 			item.parameters.rarity = "legendary"
 			item.parameters.npcArgs.npcType = "generictenant"
@@ -54,7 +44,7 @@ function sbq.humanoidInit()
 		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")
 		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
 		item.parameters.preySize = sbq.size()
-
+		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty("sbqPronouns")
 		return item
 	end)
 end

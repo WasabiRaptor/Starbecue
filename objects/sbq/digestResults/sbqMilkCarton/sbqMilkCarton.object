@@ -14,10 +14,14 @@
 		"primary" : ["34739b","4183ac","4792c1"],
 		"secondary" : ["336c93","4080a9","4f9fd1"]
 	},
+	"imageKeys" : {
+		"replaceMap" : "",
+		"replaceColors" : ""
+	},
 
-	"replaceDescPredPrey" : "A <predName> branded milk carton.\n<preyName><preyPossessive> face is printed on the side of it.",
-	"replaceDescPrey" : "A large milk carton.\n<preyName><preyPossessive> face is printed on the side of it.",
-	"replaceDescPred" : "A <predName> branded milk carton.",
+	"replaceDescPredPrey" : ["A <predName> branded milk carton.\n<preyName>'s face is printed on the side of it."],
+	"replaceDescPrey" : ["A large milk carton.\n<preyName>'s face is printed on the side of it."],
+	"replaceDescPred" : ["A <predName> branded milk carton."],
 
 	"replaceShortDescPredPrey" : "<preyName> Flavored Milk",
 	"replaceShortDescPrey" : "<preyName> Flavored Milk",
@@ -26,19 +30,10 @@
 	"builder" : "/objects/sbq/digestResults/digestResultBuilder.lua",
 	"retainObjectParametersInItem" : true,
 
-	"objectImage" : "object.png",
-	"iconImage" : "object.png",
-
-	"scripts" : ["/objects/sbq/setDirectivesTag.lua"],
-	"animation" : "/objects/sbq/digestResults/object.animation",
-	"animationParts" : {
-		"object" : "object.png"
-	},
-	"animationPosition" : [0, 8],
-	"inventoryIcon" : "object.png",
+	"inventoryIcon" : "object.png<replaceMap><replaceColors>",
 	"orientations" : [
 		{
-			"image" : "object.png",
+			"image" : "object.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "right",
@@ -47,7 +42,7 @@
 			"anchors" : [ "bottom" ]
 		},
 		{
-			"image" : "object.png",
+			"image" : "object.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "left",

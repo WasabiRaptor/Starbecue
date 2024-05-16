@@ -115,17 +115,6 @@ function sbq.updateBars(dt)
 	end
 end
 
-function sbq.replace(from, to)
-	if not to then return "" end
-	local directive = "?replace;"
-	for i, f in ipairs(from) do
-		if to[i] then
-			directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
-		end
-	end
-	return directive
-end
-
 function sbq.progressBar(canvas, color, percent)
 	if not canvas then return end
 	local bar = sbq[canvas.data.bar]

@@ -325,7 +325,7 @@ function default:turboHeal(name, action, target, ...)
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
 end
 
-function default:digested(name, action, target, ...)
+function default:digested(name, action, target, item, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
 	local location = occupant:getLocation()
@@ -334,12 +334,31 @@ function default:digested(name, action, target, ...)
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 	occupant.size = action.size or location.digestedSize or 0
 	location:markSizeDirty()
-	return true, function () occupant:refreshLocation()  end
+	return true, function()
+		local position = occupant:position()
+		occupant:refreshLocation()
+		if item then
+			item.parameters.predName = sbq.entityName(entity.id())
+			item.parameters.predUuid = entity.uniqueId()
+			item.parameters.predPronouns = sbq.getPublicProperty(entity.id(), "sbqPronouns")
+			if humanoid then
+				item.parameters.predIdentity = humanoid.getIdentity()
+			end
+			if item.name then
+				world.spawnItem(item, position)
+			end
+			item.name = "sbqNPCEssenceJar"
+			table.insert(storage.sbqSettings.recentlyDigested, 1, item)
+			while #storage.sbqSettings.recentlyDigested > sbq.config.recentlyDigestedCount do
+				table.remove(storage.sbqSettings.recentlyDigested, #storage.sbqSettings.recentlyDigested)
+			end
+		end
+	end
 end
 
 function default:fatal(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-    if not occupant then return false end
+	if not occupant then return false end
 	occupant:modifyResourcePercentage("health", -2)
 end
 

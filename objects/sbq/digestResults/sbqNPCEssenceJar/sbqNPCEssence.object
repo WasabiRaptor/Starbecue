@@ -10,17 +10,28 @@
 	"shortdescription" : "Essence Jar",
 	"race" : "generic",
 
-	"builder" : "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssence.lua",
+	"builder" : "/objects/sbq/digestResults/digestResultBuilder.lua",
 	"retainObjectParametersInItem" : true,
 
-	"scripts" : ["/objects/sbq/setDirectivesTag.lua"],
 	"animation" : "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJar.animation",
 
+	"replaceDescPrey" : ["A flickering flame representing the essence of <preyName>."],
+	"replaceShortDescPrey" : "<preyName>'s Essence",
+
+	"baseColorMap" : {
+		"primary" : [ "6f2919", "a85636", "e0975c", "ffca8a" ],
+		"secondary" : [ "951500", "be1b00", "dc1f00", "f32200" ]
+	},
+	"imageKeys" : {
+		"replaceMap" : "",
+		"replaceColors" : ""
+	},
+
 	"animationPosition" : [0, 8],
-	"inventoryIcon" : "sbqNPCEssenceJarCombo.png",
+	"inventoryIcon" : "object.png<replaceMap><replaceColors>",
 	"orientations" : [
 		{
-			"image" : "sbqNPCEssenceJar.png",
+			"image" : "object.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "right",
@@ -29,7 +40,7 @@
 			"anchors" : [ "bottom" ]
 		},
 		{
-			"image" : "sbqNPCEssenceJar.png",
+			"image" : "object.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "left",

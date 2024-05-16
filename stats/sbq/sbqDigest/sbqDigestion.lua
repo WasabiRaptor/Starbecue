@@ -31,12 +31,19 @@ function update(dt)
 	sbq.checkRPCsFinished(dt)
 	if self.digested then
 		if not self.digestSent then
+			local item = config.getParameter("itemDrop")
+			sbq.addRPC(world.sendEntityMessage(entity.id(), "sbqGetCard"), function(card)
+				card.name = item
+				item = card
+			end)
 			self.digestSent = true
 			sbq.addRPC(world.sendEntityMessage(
 				effect.sourceEntity(),
 				"sbqQueueAction",
 				config.getParameter("digestedAction") or "digested",
-				entity.id()
+				entity.id(),
+				type(item) == "table" and item or {name = item},
+				config.getParameter("digestType")
 			), function (recieved)
 				if not recieved then self.digestSent = false end
 			end, function ()

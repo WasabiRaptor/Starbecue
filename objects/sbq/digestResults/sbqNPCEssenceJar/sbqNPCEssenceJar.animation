@@ -1,6 +1,7 @@
 {
 	"globalTagDefaults" : {
-		"directives" : ""
+		"replaceMap" : "",
+		"replaceColors" : ""
 	},
 	"animatedParts": {
 		"stateTypes": {
@@ -19,7 +20,7 @@
 				},
 				"partStates": {
 					"essence" : {
-						"idle" : { "properties" : {"image": "sbqNPCEssence.png:<frame><directives>"}}
+						"idle" : { "properties" : {"image": "sbqNPCEssence.png:<frame><replaceMap><replaceColors>"}}
 					}
 				}
 			},

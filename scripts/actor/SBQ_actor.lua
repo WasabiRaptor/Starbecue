@@ -71,6 +71,7 @@ end
 
 function sbq.setCurrentLocationData(locationData)
 	sbq.currentLocationData = locationData
+	sbq.forceTimer("strugglingDialogue", 5)
 	sbq.checkComfortLevel()
 end
 

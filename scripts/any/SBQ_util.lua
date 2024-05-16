@@ -104,6 +104,11 @@ function sbq.setupSettingMetatables(entityType)
 			end
 		end
 	end
+	for setting, v in pairs(sbq.defaultSettings) do
+		if (type(v) == "table") and (storage.sbqSettings[setting] == nil) then
+			storage.sbqSettings[setting] = {}
+		end
+	end
 	sbq.lists.locations = {}
 	sbq.lists.voreTypes = {}
 	sbq.lists.infuseTypes = {}
@@ -159,6 +164,12 @@ function sbq.setupSettingMetatables(entityType)
 					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, result))
 				end
 			end
+			for setting, v in pairs(sbq.defaultSettings[k][name]) do
+				if (type(v) == "table") and (storage.sbqSettings[k][name][setting] == nil) then
+					storage.sbqSettings[setting] = {}
+				end
+			end
+
 
 			setmetatable(storage.sbqSettings[k][name], {__index = sbq.defaultSettings[k][name]})
 			setmetatable(sbq.settings[k][name], {__index= storage.sbqSettings[k][name]})
@@ -220,6 +231,17 @@ end
 
 function sbq.replaceConfigTags(config, tags)
 	return sb.parseJson(sb.replaceTags(sb.printJson(config), tags))
+end
+
+function sbq.replace(from, to)
+	if not to then return "" end
+	local directive = "?replace;"
+	for i, f in ipairs(from) do
+		if to[i] then
+			directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
+		end
+	end
+	return directive
 end
 
 function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)
@@ -312,7 +334,8 @@ function sbq.getSettingsOf.locations()
 	}
 end
 function sbq.getSettingsOf.all()
-	local output = sbq.exportBaseSettings()
+    local output = sbq.exportBaseSettings()
+	output.recentlyDigested = {}
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
 	output.locations = sbq.exportSettingGroup("locations")

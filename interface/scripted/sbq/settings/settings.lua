@@ -424,6 +424,25 @@ function sbq.widgetScripts.infusedVisible(setting, group, name)
 	return true
 end
 
+function sbq.widgetScripts.makeRecentlyDigested(param)
+	if not sbq.settings.recentlyDigested[1] then return false end
+	local slots = {}
+	local layout = {
+		type = "panel",
+		id = sbq.widgetSettingIdentifier(param).."Panel",
+		expandMode = { 1, 0 },
+		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, { type = "sbqItemGrid", autoInteract = true, slots = slots} },
+		makeLabel = false
+    }
+	for _, item in ipairs(sbq.settings.recentlyDigested) do
+		local slot = {
+			item = item.name and item,
+		}
+		table.insert(slots, slot)
+	end
+	return sb.jsonMerge(param, layout)
+end
+
 function uninit()
 	player.setProperty("sbqCollapseLocationsOpen", collapseLocationsOpen)
 end
