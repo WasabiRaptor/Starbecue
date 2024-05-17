@@ -10,12 +10,10 @@ dialogueBox = {
 local inital = true
 function init()
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()),function(actions)
-		if actions and actions[1] then
-			_ENV.actionButton:setVisible(true)
-		end
+		_ENV.actionButton:setVisible( actions and actions[1] and true and not sbq.noActions)
 	end)
 	message.setHandler("sbqDialogueActionButtonVisible", function (_,_, visible)
-		_ENV.actionButton:setVisible(visible)
+		_ENV.actionButton:setVisible(visible and not sbq.noActions)
 	end)
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
