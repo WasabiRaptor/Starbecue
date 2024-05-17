@@ -146,23 +146,30 @@ function sbq_hunting.attemptAction(target)
 	if sbq_hunting.prompted[target] ~= nil then return end
 	if sbq_hunting.isDom then
 		if SpeciesScript:actionAvailable(sbq_hunting.action, target) then
+			sbq.target = target
 			if not sbq_hunting.getConsent then -- if not getting consent, just eat them immediately
-				if sbq.settings.interactDialogue then
-					-- TODO dialogue here for before eating someone without consent
+				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					sbq.speakDialogue()
 				end
-				if SpeciesScript:tryAction(sbq_hunting.action, target) then
+				local success, reason, cooldown = SpeciesScript:tryAction(sbq_hunting.action, target)
+				if success then
 					if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
 						sbq_hunting.nextTarget()
 					else
 						sbq_hunting.clearTarget()
 					end
+					sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+						sbq.target = target
+						if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+							sbq.speakDialogue()
+						end
+					end)
 				else
 					sbq_hunting.nextTarget()
 				end
 				return
 			end
 			local interactData
-			sbq.target = target
 			if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 				if world.entityType(target) == "player" then
 					local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
@@ -197,21 +204,27 @@ function sbq_hunting.attemptAction(target)
 			if not results then sbq_hunting.nextTarget() return end
 			local success, reason = table.unpack(results)
 			if not success then sbq_hunting.nextTarget() return end
+			sbq.target = target
 			if not sbq_hunting.getConsent then -- if not getting consent, just eat them immediately
-				if sbq.settings.interactDialogue then
-					-- TODO dialogue here for before getting into someone without consent
+				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					sbq.speakDialogue()
 				end
 				sbq.addRPC(world.sendEntityMessage(target, "sbqTryAction", sbq_hunting.action, entity.id()), function (results)
 					if not results then sbq_hunting.nextTarget() return end
-					local success, reason = table.unpack(results)
+					local success, reason, cooldown = table.unpack(results)
 					if not success then sbq_hunting.nextTarget() return end
+					sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+						sbq.target = target
+						if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+							sbq.speakDialogue()
+						end
+					end)
 					sbq_hunting.clearTarget()
 				end)
 				return
 			end
 
 			local interactData
-			sbq.target = target
 			if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 				if world.entityType(target) == "player" then
 					local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
@@ -253,24 +266,37 @@ function sbq_hunting.promptResponse(response)
 	sbq_hunting.prompted[target] = nil
 	if tryAction then
 		if isDom then
-			local success, reason = SpeciesScript:tryAction(action, target)
+			local success, reason, cooldown = SpeciesScript:tryAction(action, target)
+			sbq.target = target
 			if success then
 				if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
 					sbq_hunting.nextTarget()
 				else
 					sbq_hunting.clearTarget()
 				end
+				sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+					sbq.target = target
+					if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action.."."..line..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+						sbq.speakDialogue()
+					end
+				end)
 			else
 				sbq_hunting.nextTarget()
 			end
 		else
-			sbq.addRPC(world.sendEntityMessage(target, "sbqTryAction", action, entity.id()), function (results)
+			sbq.addRPC(world.sendEntityMessage(target, "sbqTryAction", action, entity.id()), function(results)
+				sbq.target = target
 				if not results then return end
-				local success, reason = table.unpack(results)
+				local success, reason, cooldown = table.unpack(results)
 				if success then
 					sbq_hunting.clearTarget()
-					-- TODO re-implement dialogue
-				else
+					sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+						sbq.target = target
+						if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action.."."..line..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+							sbq.speakDialogue()
+						end
+					end)
+					else
 					sbq_hunting.nextTarget()
 				end
 			end)

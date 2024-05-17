@@ -61,7 +61,7 @@ function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
 		if appendName then
 			string = world.entityName(entity.id())..":\n"..string
 		end
-		if type(imagePortrait) == "string" and config.getParameter("sayPortrait") then
+		if type(imagePortrait) == "string" then
 			sbq.sayPortrait(string, imagePortrait, nil, {})
 		else
 			sbq.say(string, nil, {})

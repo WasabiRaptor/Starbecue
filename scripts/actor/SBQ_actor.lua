@@ -131,10 +131,18 @@ function sbq.struggleBehavior(dt)
 	end
 end
 function sbq.speakDialogue(callback)
+	sbq.timerList.speakDialogue = nil
 	local results = dialogueProcessor.processDialogueResults()
+	if not results.dialogue then
+		dialogue.finished = true
+		if callback then
+			callback()
+		end
+		return
+	end
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "sbqGuiMessage", "sbqPredHudPreyDialogue", entity.id(),
-			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume, results.dismissTime)
+			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, results.dismissTime or sbq.config.dialogueDismissTime)
 	else
 		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)
 	end

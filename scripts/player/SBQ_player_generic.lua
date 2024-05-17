@@ -36,8 +36,12 @@ function init()
 	end
 	sbq.notifyPlayer()
 
-	message.setHandler("sbqGuiMessage",function (_,_,message,...)
-		player.interact("Message", {messageType = message, messageArgs = {...}})
+	message.setHandler("sbqGuiMessage", function(_, _, message, ...)
+		local args = jarray() -- we have to double make sure the engine understands this is an array and not an object
+		for k, v in ipairs({...}) do
+			args[k] = v
+		end
+		player.interact("Message", {messageType = message, messageArgs = args})
 	end)
 	message.setHandler("sbqInteractWith", function (_,_,entityId)
 		player.interactWithEntity(entityId)

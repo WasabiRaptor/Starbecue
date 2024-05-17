@@ -14,7 +14,6 @@ dialogue = {
 function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
 	dialogue.finished = false
 	dialogue.position = 1
-	dialogue.result = {}
 	if path ~= nil then
 		dialogue.path = path
 		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree or dialogue.prev, dialogueTreeTop or dialogue.prevTop)
