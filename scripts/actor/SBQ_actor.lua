@@ -46,9 +46,6 @@ function sbq.actorMessages()
 		dom = {},
 		sub = {}
 	}
-	message.setHandler("sbqGuiMessage", function(_, _, ...)
-		world.sendEntityMessage(entity.id(), ...)
-	end)
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData)
 		sbq.setCurrentLocationData(locationData)
 	end)
@@ -141,7 +138,7 @@ function sbq.speakDialogue(callback)
 		return
 	end
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
-		world.sendEntityMessage(sbq.loungingIn(), "sbqGuiMessage", "sbqPredHudPreyDialogue", entity.id(),
+		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
 			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, results.dismissTime or sbq.config.dialogueDismissTime)
 	else
 		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)

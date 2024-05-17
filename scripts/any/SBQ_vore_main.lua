@@ -569,10 +569,6 @@ function _State:interact(args)
 		if sbq.loungingIn() == args.sourceId then
 			dialogueBoxData.dialogueTreeStart = ".predInteract"
 			dialogueBoxData.noActions = true
-			-- return { "Message", { messageType = "sbqPredHudPreyDialogue", messageArgs = {
-			-- 	entity.id(),
-			--     "The quick brown fox jumped over the lazy dog.",
-			-- }}}
 		elseif Occupants.entityId[tostring(args.sourceId)] then
 			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
 		end
@@ -1358,13 +1354,13 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
 	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
-	world.sendEntityMessage(self.entityId, "sbqGuiMessage", "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
+	world.sendEntityMessage(self.entityId, "scriptPaneMessage", "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
 		time = self.time,
 	})
 	if self.flags.newOccupant then
-		world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqRefreshHudOccupants", Occupants.list)
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list)
 	else
-		world.sendEntityMessage(entity.id(), "sbqGuiMessage", "sbqHudRefreshPortrait", self.entityId)
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId)
 	end
 end
 
