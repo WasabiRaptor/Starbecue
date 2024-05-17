@@ -29,7 +29,11 @@ function update(dt, fireMode, shiftHeld, controls)
 end
 
 function getEntitySettingsMenu(entities, i)
-	if (not entities) or (not i) or (not entities[i]) or ((type(i) == "number" and type(entities[i]) == "number") and not world.entityExists(entities[i])) then return end
+	if (not entities) or (not i) or (not entities[i]) or (not world.entityExists(entities[i])) then return end
+	if world.entityStatPositive(entities[i], "sbqIsPrey") then
+		getEntitySettingsMenu(entities, i+1)
+		return
+	end
 	sbq.addRPC(world.sendEntityMessage( entities[i], "sbqSettingsPageData", entity.uniqueId() ), function (data)
 		if data then
 			if (not player.isAdmin()) and data.parentEntityData[2] and (entity.uniqueId() ~= data.parentEntityData[1]) then
@@ -37,13 +41,9 @@ function getEntitySettingsMenu(entities, i)
 			end
 			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  (data.ui or "starbecue:entitySettings") }, entities[i])
 		else
-			if entities[i+1] then
-				getEntitySettingsMenu(entities, i+1)
-			end
-		end
-	end, function()
-		if entities[i+1] then
 			getEntitySettingsMenu(entities, i+1)
 		end
+	end, function()
+		getEntitySettingsMenu(entities, i+1)
 	end)
 end

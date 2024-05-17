@@ -131,6 +131,7 @@
 	"promptAction" : {
 		"<action>" : {
 			"new" : {
+				"settings" : "target",
 				"dialogueRandom" : [":<action>Prompt"],
 				"buttonText" : [":ynPrompt"],
 				"options" : [
@@ -141,26 +142,30 @@
 			},
 			// responses based on their response to the prompt
 			"yes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, true, "yes", "<action>"],
-				"new" : {"dialogueRandom" : [":<action>PromptYes"],"dismissTime" : 2},
+				"new" : {"dialogueRandom" : [":<action>PromptYes"],"dismissTime" : 2, "jump" : false},
 				// what they say after doing the action (optional)
-				"after" : {"new" : {"dialogueRandom" : [":<action>PromptYesAfter"],"dismissTime" : 2}}
+				"after" : {"new" : {"dialogueRandom" : [":<action>PromptYesAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"no" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [false, true, "no", "<action>"],
-				"new" : {"dialogueRandom" : [":<action>PromptNo"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":<action>PromptNo"],"dismissTime" : 2, "jump" : false}
 			},
 			"noYes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, true, "noYes", "<action>"],
-				"new" : {"dialogueRandom" : [":<action>PromptNoYes"],"dismissTime" : 2},
+				"new" : {"dialogueRandom" : [":<action>PromptNoYes"],"dismissTime" : 2, "jump" : false},
 				// what they say after doing the action (optional)
-				"after" : {"new" : {"dialogueRandom" : [":<action>PromptNoYesAfter"],"dismissTime" : 2}}
+				"after" : {"new" : {"dialogueRandom" : [":<action>PromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
 		},
 		"oralVore" : {
+			"settings" : "target",
 			"new" : {
 				"dialogueRandom" : [":oralVorePrompt"],
 				"buttonText" : [":ynPrompt"],
@@ -172,23 +177,26 @@
 			},
 			// responses based on their response to the prompt
 			"yes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, true, "yes", "oralVore"],
-				"new" : {"dialogueRandom" : [":oralVorePromptYes"],"dismissTime" : 2},
+				"new" : {"dialogueRandom" : [":oralVorePromptYes"],"dismissTime" : 2, "jump" : false},
 				// what they say after doing the action (optional)
-				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptYesAfter"],"dismissTime" : 2}}
+				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"no" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [false, true, "no", "oralVore"],
-				"new" : {"dialogueRandom" : [":oralVorePromptNo"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":oralVorePromptNo"],"dismissTime" : 2, "jump" : false}
 			},
 			"noYes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, true, "noYes", "oralVore"],
-				"new" : {"dialogueRandom" : [":oralVorePromptNoYes"],"dismissTime" : 2},
+				"new" : {"dialogueRandom" : [":oralVorePromptNoYes"],"dismissTime" : 2, "jump" : false},
 				// what they say after doing the action (optional)
-				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptNoYesAfter"],"dismissTime" : 2}}
+				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
 		}
 
@@ -196,6 +204,7 @@
 	// when they ask another character to do something to them
 	"requestAction":{
 		"<action>" : {
+			"settings" : "target",
 			"new" : {
 				"dialogueRandom" : [":<action>Requesting"],
 				"buttonText" : [":ynPrompt"],
@@ -206,22 +215,26 @@
 				]
 			},
 			"yes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, false, "yes", "<action>"],
-				"new" : {"dialogueRandom" : [":<action>RequestingYes"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":<action>RequestingYes"],"dismissTime" : 2, "jump" : false}
 			},
 			"no" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [false, false, "no", "<action>"],
-				"new" : {"dialogueRandom" : [":<action>RequestingNo"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":<action>RequestingNo"],"dismissTime" : 2, "jump" : false}
 			},
 			"noYes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, false, "noYes", "<action>"],
-				"new" : {"dialogueRandom" : [":<action>RequestingNoYes"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":<action>RequestingNoYes"],"dismissTime" : 2, "jump" : false}
 			}
 		},
 		"oralVore" : {
+			"settings" : "target",
 			"new" : {
 				"dialogueRandom" : [":oralVoreRequesting"],
 				"buttonText" : [":ynPrompt"],
@@ -232,19 +245,22 @@
 				]
 			},
 			"yes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, false, "yes", "oralVore"],
-				"new" : {"dialogueRandom" : [":oralVoreRequestingYes"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":oralVoreRequestingYes"],"dismissTime" : 2, "jump" : false}
 			},
 			"no" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [false, false, "no", "oralVore"],
-				"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2, "jump" : false}
 			},
 			"noYes" : {
+				"settings" : "target",
 				"next" : ["promptResponse"],
 				"promptResponse" : [true, false, "noYes", "oralVore"],
-				"new" : {"dialogueRandom" : [":oralVoreRequestingNoYes"],"dismissTime" : 2}
+				"new" : {"dialogueRandom" : [":oralVoreRequestingNoYes"],"dismissTime" : 2, "jump" : false}
 			}
 		}
 

@@ -45,7 +45,8 @@ dialogueProcessor.resultKeys = {
 	"entityPortrait",
 	"emote",
 	"buttonText",
-	"tags"
+	"tags",
+	"dismissTime"
 }
 
 function dialogueProcessor.processDialogueResults()
@@ -61,7 +62,7 @@ function dialogueProcessor.processDialogueResults()
 	end
 	results.name = results.name or sbq.entityName(results.source)
 
-	results.target = results.target or sbq.target()
+	results.target = results.target or sbq.target
 	if type(results.target) == "string" then
 		results.target = world.getUniqueEntityId(results.target)
 	end
@@ -96,7 +97,8 @@ end
 
 function dialogueProcessor.maxOfKey(table, key, index)
 	if not table then return end
-	if not table[key] then return end
+	if table[key] == nil then return end
+	if type(table[key]) ~= "table" then return table[key] end
 	return table[key][index] or table[key][#table[key]]
 end
 
@@ -139,7 +141,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 	if dialogueTree.next and not finished then
 		if dialogueTree.settings then
 			if dialogueTree.settings == "target" then
-				eid = sbq.target()
+				eid = sbq.target
 				if eid and world.entityExists(eid) then
 					settings = sbq.getPublicProperty(eid, "sbqPublicSettings")
 				end

@@ -24,7 +24,14 @@ function init()
 		_ENV.settings:setVisible(false)
 	end
 
-	dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree, sbq.dialogueTree)
+	if sbq.dialogue then
+		dialogue = sbq.dialogue
+		dialogue.position = dialogue.position - 1
+		dialogueBox.refresh()
+	else
+		dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree, sbq.dialogueTree)
+	end
+
 	inital = false
 end
 
@@ -150,15 +157,16 @@ function dialogueBox.validateOption(option)
 	end }
 end
 
+local dismissTime
 function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	if path then
 		if not dialogueProcessor.getDialogue(path, sbq.entityId(), sbq.settings, dialogueTree, dialogueTreeTop) then dialogue.finished = true return false end
 	elseif dialogue.finished then return true
 	else
 		dialogue.position = dialogue.position + 1
-		if dialogue.position >= #dialogue.result.dialogue then
-			dialogue.finished = true
-		end
+    end
+	if dialogue.position >= #dialogue.result.dialogue then
+		dialogue.finished = true
 	end
 	local results = dialogueProcessor.processDialogueResults()
 	if results.imagePortrait then
@@ -187,7 +195,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 
 	dialogueBox.text = sb.replaceTags(results.dialogue, results.tags)
 	dialogueBox.textSound = results.textSound
-    dialogueBox.textSpeed = results.textSpeed
+	dialogueBox.textSpeed = results.textSpeed
 	dialogueBox.textVolume = results.textVolume or 1
 	dialogueBox.textPosition = 1
 	if inital then
@@ -195,12 +203,15 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	else
 		dialogueBox.scrollText()
 	end
-
-	dialogueBox.dismissAfterTimer(results.dismissTime)
+    dismissTime = results.dismissTime
+	sbq.timerList.dismissAfterTime = nil
 	return true
 end
 function dialogueBox.scrollText()
-	if dialogueBox.textPosition > string.len(dialogueBox.text) then return end
+	if dialogueBox.textPosition > string.len(dialogueBox.text) then
+		dialogueBox.dismissAfterTimer(dismissTime)
+		return
+	end
 	while not dialogueBox.findNextRealCharacter() do
 	end
 	_ENV.dialogueLabel:setText(string.sub(dialogueBox.text, 1, dialogueBox.textPosition))

@@ -109,7 +109,7 @@ end
 local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
 	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("strugglingDialogue", 10, 30) then
-		sbq.target = sbq.loungingIn
+		sbq.target = sbq.loungingIn()
 		local gotDialogue =  dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree)
 		if gotDialogue and dialogue.result.dialogue then
 			sbq.speakDialogue()
@@ -130,7 +130,7 @@ function sbq.struggleBehavior(dt)
 		end
 	end
 end
-function sbq.speakDialogue()
+function sbq.speakDialogue(callback)
 	local results = dialogueProcessor.processDialogueResults()
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "sbqGuiMessage", "sbqPredHudPreyDialogue", entity.id(),
@@ -141,6 +141,9 @@ function sbq.speakDialogue()
 	dialogue.position = dialogue.position + 1
 	if dialogue.position > #dialogue.result.dialogue then
 		dialogue.finished = true
+		if callback then
+			callback()
+		end
 		return
 	end
 	sbq.timer("speakDialogue", results.dismissTime or sbq.config.dialogueDismissTime, sbq.speakDialogue)

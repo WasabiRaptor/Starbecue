@@ -58,7 +58,8 @@ function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings
 end
 
 function dialogueStepScripts.promptResponse(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	world.sendEntityMessage(pane.sourceEntity, "sbqPromptResponse", table.unpack(dialogueTree.promptResponse), eid)
+	local tryAction, isDom, line, action = table.unpack(dialogueTree.promptResponse)
+	world.sendEntityMessage(pane.sourceEntity(), "sbqPromptResponse", tryAction, isDom, line, action, eid)
 end
 
 function dialogueStepScripts.statPositive(dialogueTree, dialogueTreeTop, settings, step, eid, ...)

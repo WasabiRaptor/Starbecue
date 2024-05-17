@@ -162,9 +162,22 @@ function sbq_hunting.attemptAction(target)
 				return
 			end
 			local interactData
-			if false and sbq.settings.interactDialogue then
+			sbq.target = target
+			if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 				if world.entityType(target) == "player" then
-
+					local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+						dialogueTree = sbq.dialogueTree,
+						dialogueTreeStart = ".promptAction." .. sbq_hunting.action,
+						noActions = true,
+						dialogue = dialogue
+					})
+					interactData = {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+					world.sendEntityMessage(target, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), {sbq = dialogueBoxData} )
+					sbq.speakDialogue()
+				else
+					sbq.speakDialogue(function ()
+						sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), sbq_hunting.action, sbq_hunting.isDom), sbq_hunting.promptResponse)
+					end)
 				end
 			else
 				if world.entityType(target) == "player" then
@@ -198,9 +211,22 @@ function sbq_hunting.attemptAction(target)
 			end
 
 			local interactData
-			if false and sbq.settings.interactDialogue then
+			sbq.target = target
+			if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 				if world.entityType(target) == "player" then
-
+					local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+						dialogueTree = sbq.dialogueTree,
+						dialogueTreeStart = ".requestAction." .. sbq_hunting.action,
+						noActions = true,
+						dialogue = dialogue
+					})
+					interactData = {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+					world.sendEntityMessage(target, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), { sbq = dialogueBoxData })
+					sbq.speakDialogue()
+				else
+					sbq.speakDialogue(function ()
+						sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), sbq_hunting.action, sbq_hunting.isDom), sbq_hunting.promptResponse)
+					end)
 				end
 			else
 				if world.entityType(target) == "player" then

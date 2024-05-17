@@ -166,7 +166,7 @@ function sbq.setupSettingMetatables(entityType)
 			end
 			for setting, v in pairs(sbq.defaultSettings[k][name]) do
 				if (type(v) == "table") and (storage.sbqSettings[k][name][setting] == nil) then
-					storage.sbqSettings[setting] = {}
+					storage.sbqSettings[k][name][setting] = {}
 				end
 			end
 
