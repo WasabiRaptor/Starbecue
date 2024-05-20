@@ -15,6 +15,10 @@ function init()
 	message.setHandler("sbqDialogueActionButtonVisible", function (_,_, visible)
 		_ENV.actionButton:setVisible(visible and not sbq.noActions)
 	end)
+	message.setHandler("sbqCloseDialogueBox", function ()
+		pane.dismiss()
+	end)
+
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
 	end
@@ -37,7 +41,7 @@ function update()
 	local dt = script.updateDt()
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
-	sbq.loopedMessage("interacted",pane.sourceEntity,"setInteracted",{player.id()})
+	sbq.loopedMessage("interacted", pane.sourceEntity(), "sbqSetInteracted", {player.id()})
 end
 
 function _ENV.dialogueLabel:setText(t)
@@ -73,22 +77,14 @@ function _ENV.actionButton:onClick()
 		if actions and actions[1] then
 			local actionList = {}
 			for _, action in ipairs(actions) do
-				if action.available then
-					local requestAction = function ()
-						world.sendEntityMessage(pane.sourceEntity(), "sbqRequestAction", action.action, player.id(), true, table.unpack(action.args or {}) )
-					end
-					table.insert(actionList, {
-						_ENV.metagui.formatText(action.name or (":" .. action.action)),
-						requestAction,
-						_ENV.metagui.formatText(action.requestDescription or (":"..action.action.."RequestDesc"))
-					})
-				else
-					table.insert(actionList, {
-						"^#555;^set;"..(_ENV.metagui.formatText(action.name or (":" .. action.action)) or ""),
-						function() end,
-						_ENV.metagui.formatText(action.requestDescription or (":"..action.action.."RequestDesc"))
-					})
+				local requestAction = function ()
+					world.sendEntityMessage(pane.sourceEntity(), "sbqRequestAction", action.action, player.id(), table.unpack(action.args or {}) )
 				end
+				table.insert(actionList, {
+					action.available and sbq.getString(action.name or (":" .. action.action)) or "^#555;^set;"..(sbq.getString(action.name or (":" .. action.action)) or ""),
+					requestAction,
+					sbq.getString(action.requestDescription or (":"..action.action.."RequestDesc"))
+				})
 			end
 			_ENV.metagui.dropDownMenu(actionList, 2)
 		else

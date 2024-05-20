@@ -109,7 +109,7 @@ function sbq.struggleBehavior(dt)
 		sbq.target = sbq.loungingIn()
 		local gotDialogue =  dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree)
 		if gotDialogue and dialogue.result.dialogue then
-			sbq.speakDialogue()
+			dialogueProcessor.speakDialogue()
 		else
 			dialogue.finished = true
 		end
@@ -126,32 +126,6 @@ function sbq.struggleBehavior(dt)
 			end
 		end
 	end
-end
-function sbq.speakDialogue(callback)
-	sbq.timerList.speakDialogue = nil
-	local results = dialogueProcessor.processDialogueResults()
-	if not results.dialogue then
-		dialogue.finished = true
-		if callback then
-			callback()
-		end
-		return
-	end
-	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
-		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
-			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, results.dismissTime or sbq.config.dialogueDismissTime)
-	else
-		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)
-	end
-	dialogue.position = dialogue.position + 1
-	if dialogue.position > #dialogue.result.dialogue then
-		dialogue.finished = true
-		if callback then
-			callback()
-		end
-		return
-	end
-	sbq.timer("speakDialogue", results.dismissTime or sbq.config.dialogueDismissTime, sbq.speakDialogue)
 end
 function faceEntity(args, board)
 	if args.entity == nil or not world.entityExists(args.entity) then return false end

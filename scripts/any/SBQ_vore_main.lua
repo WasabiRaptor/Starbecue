@@ -219,9 +219,9 @@ function sbq.actionAvailable(action, target, ...)
 	return {SpeciesScript:actionAvailable(action, target, ...)}
 end
 
-function sbq.requestAction(action, target, consent, ...)
+function sbq.requestAction(action, target, ...)
 	if not SpeciesScript.active then return {false, "inactive"} end
-	return {SpeciesScript:requestAction(action, target, consent, ...)}
+	return {SpeciesScript:requestAction(action, target, ...)}
 end
 
 function sbq.getOccupantData(entityId)
@@ -281,9 +281,9 @@ function _SpeciesScript:actionAvailable(action, target, ...)
 	return self.state:actionAvailable(action, target, ...)
 end
 
-function _SpeciesScript:requestAction(action, target, consent, ...)
+function _SpeciesScript:requestAction(action, target, ...)
 	if not self.state then return false, "missingState" end
-	return self.state:requestAction(action, target, consent, ...)
+	return self.state:requestAction(action, target, ...)
 end
 
 function _SpeciesScript:doAnimations(...)
@@ -442,20 +442,46 @@ function _State:tryAction(name, target, ...)
 	return result1, false, longest
 end
 
-function _State:requestAction(name, target, consent, ...)
-	-- sbq.logInfo({name, target, consent})
-	-- TODO do stuff with checking consent here later
-	if not consent then return end
-	if not sbq.settings.interactDialogue then
-		return SpeciesScript:tryAction(name, target, ...)
+function _State:requestAction(name, target, ...)
+	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
+	sbq.target = target
+	if success then
+		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+			dialogueProcessor.sendPlayerDialogueBox()
+			local wait = dialogueProcessor.predictTime()
+			cooldown = cooldown + wait
+			local args = { ... }
+			local callback = function ()
+				local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
+				if success then
+					sbq.forceTimer("huntingDialogueAfter", cooldown, function ()
+						sbq.target = target
+						if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+							dialogueProcessor.sendPlayerDialogueBox()
+							dialogueProcessor.speakDialogue()
+						end
+					end)
+				end
+			end
+			dialogueProcessor.speakDialogue(callback)
+		else
+			success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
+			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+		end
+	else
+		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..reason, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+			dialogueProcessor.sendPlayerDialogueBox()
+			dialogueProcessor.speakDialogue()
+		else
+			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+		end
 	end
-	-- TODO do stuff with dialogue here later
-	SpeciesScript:tryAction(name, target, ...)
+	return success or false, reason or false, cooldown or 0
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
 	-- sbq.logInfo({name, target, reason},2)
-	if not action then return false, reason or false, nil, ... end
+	if not action then return false, reason or false, 0, ... end
 	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
 	local result1, result2  = false, false
@@ -467,9 +493,9 @@ function _State:actionFailed(name, action, target, reason, ...)
 		end
 	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
-		return result1, reason or false, result2 or false, ...
+		return result1, reason or false, cooldown or 0, result2 or false, ...
 	end
-	return result1, reason or false, false, ...
+	return result1, reason or false, cooldown or 0, ...
 end
 
 function _State:actionAvailable(name, target, ...)
@@ -489,14 +515,16 @@ function _State:actionAvailable(name, target, ...)
 			end
 		end
 	end
+	local result1, result2 = true, false
 	if action.availableScript then
 		if self[action.availableScript] then
-			return self[action.availableScript](self, name, action, target, ...)
+			result1, result2 = self[action.availableScript](self, name, action, target, ...)
 		else
-			return false, "missingScript"
+			return false, "missingScript", 0
 		end
 	end
-	return true, false
+	local longest = SpeciesScript:checkAnimations(false, action.animations, action.tags, target)
+	return result1 or false, result2 or false, longest or 0
 end
 
 function _State:animationTags(tags, target)

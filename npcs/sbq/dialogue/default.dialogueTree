@@ -81,48 +81,46 @@
 			// is the action available or not?
 			"true" : {
 				// dialogue said before the action
-				"new" : {"dialogueRandom" : [":<action>RequestedBefore"]},
+				"new" : {"dialogueRandom" : [":<action>RequestedBefore"],"dismissTime" : 2, "jump" : false},
 				// dialogue said after the action finishes
-				"after" : {"new" : {"dialogueRandom" : [":<action>RequestedAfter"]}}
+				"after" : {"new" : {"dialogueRandom" : [":<action>RequestedAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"false" : {
-				"default" : {"new":{"dialogueRandom":":<action>Invalid"}},
-				"error" : {"new":{"dialogueRandom" : [":error"]}},
-				"no" : {"new" : {"dialogueRandom" : [":<action>No"]}},
-				"tooBig" : {"new" : {"dialogueRandom" : [":<action>TooBig"]}},
-				"tooSmall" : {"new" : {"dialogueRandom" : [":<action>TooSmall"]}},
-				"noSlots" : {"new" : {"dialogueRandom" : [":<action>NoSlots"]}},
-				"noSpace" : {"new" : {"dialogueRandom" : [":<action>Full"]}},
-				"needsInfusion" : {"new" : {"dialogueRandom" : [":<action>NeedsInfusion"]}},
-				"alreadyInfused" : {"new" : {"dialogueRandom" : [":<action>AlreadyInfused"]}},
+				"invalidAction" : {"new":{"dialogueRandom":[":<action>Invalid"],"dismissTime" : 2, "jump" : false}},
+				"no" : {"new" : {"dialogueRandom" : [":<action>No"],"dismissTime" : 2, "jump" : false}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":<action>TooBig"],"dismissTime" : 2, "jump" : false}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":<action>TooSmall"],"dismissTime" : 2, "jump" : false}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":<action>NoSlots"],"dismissTime" : 2, "jump" : false}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":<action>Full"],"dismissTime" : 2, "jump" : false}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":<action>NeedsInfusion"],"dismissTime" : 2, "jump" : false}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":<action>AlreadyInfused"],"dismissTime" : 2, "jump" : false}},
 				"invalidLocation" : ".error",
 				"settingsMismatch" : ".error",
 				"targetSettingsMismatch" : ".error",
-				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":<action>TargetPreySettingsMismatch"]}}
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":<action>TargetPreySettingsMismatch"],"dismissTime" : 2, "jump" : false}}
 			}
 		},
 		"oralVore" : {
 			// is the action available or not?
 			"true" : {
 				// dialogue said before the action
-				"new" : {"dialogueRandom" : [":oralVoreRequestedBefore"]},
+				"new" : {"dialogueRandom" : [":oralVoreRequestedBefore"],"dismissTime" : 2, "jump" : false},
 				// dialogue said after the action finishes
-				"after" : {"new" : {"dialogueRandom" : [":oralVoreRequestedAfter"]}}
+				"after" : {"new" : {"dialogueRandom" : [":oralVoreRequestedAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"false" : {
-				"default" : {"new":{"dialogueRandom":":oralVoreInvalid"}},
-				"error" : {"new":{"dialogueRandom" : [":error"]}},
-				"no" : {"new" : {"dialogueRandom" : [":oralVoreNo"]}},
-				"tooBig" : {"new" : {"dialogueRandom" : [":oralVoreTooBig"]}},
-				"tooSmall" : {"new" : {"dialogueRandom" : [":oralVoreTooSmall"]}},
-				"noSlots" : {"new" : {"dialogueRandom" : [":oralVoreNoSlots"]}},
-				"noSpace" : {"new" : {"dialogueRandom" : [":oralVoreFull"]}},
-				"needsInfusion" : {"new" : {"dialogueRandom" : [":oralVoreNeedsInfusion"]}},
-				"alreadyInfused" : {"new" : {"dialogueRandom" : [":oralVoreAlreadyInfused"]}},
-				"invalidLocation" : ".error",
-				"settingsMismatch" : ".error",
-				"targetSettingsMismatch" : ".error",
-				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":oralVoreTargetPreySettingsMismatch"]}}
+				"invalidAction" : {"new":{"dialogueRandom":[":oralVoreInvalid"],"dismissTime" : 2, "jump" : false}},
+				"no" : {"new" : {"dialogueRandom" : [":oralVoreNo"],"dismissTime" : 2, "jump" : false}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":oralVoreTooBig"],"dismissTime" : 2, "jump" : false}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":oralVoreTooSmall"],"dismissTime" : 2, "jump" : false}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":oralVoreNoSlots"],"dismissTime" : 2, "jump" : false}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":oralVoreFull"],"dismissTime" : 2, "jump" : false}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":oralVoreNeedsInfusion"],"dismissTime" : 2, "jump" : false}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":oralVoreAlreadyInfused"],"dismissTime" : 2, "jump" : false}},
+				"invalidLocation" : ".invalidAction",
+				"settingsMismatch" : ".invalidAction",
+				"targetSettingsMismatch" : ".invalidAction",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":oralVoreTargetPreySettingsMismatch"],"dismissTime" : 2, "jump" : false}}
 			}
 		}
 
@@ -251,7 +249,7 @@
 					"next" : ["promptResponse", "dismiss"],
 					"promptResponse" : [false, false, "no", "<action>"]
 				},
-				"new" : {"dialogueRandom" : [":<action>RequestingNo"],"dismissTime" : 2, "jump" : ".finish"},
+				"new" : {"dialogueRandom" : [":<action>RequestingNo"],"dismissTime" : 2, "jump" : ".finish"}
 			},
 			"noYes" : {
 				"settings" : "target",
@@ -292,7 +290,7 @@
 					"next" : ["promptResponse", "dismiss"],
 					"promptResponse" : [false, false, "no", "oralVore"]
 				},
-				"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2, "jump" : ".finish"},
+				"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2, "jump" : ".finish"}
 			},
 			"noYes" : {
 				"settings" : "target",
@@ -310,46 +308,46 @@
 	// when they notify that they're about to do an action without asking first
 	"noPromptAction" : {
 		"<action>" : {
-			"new" : {"dialogueRandom" : [":<action>NoPrompt"]},
-			"after" : {"new" : {"dialogueRandom" : [":<action>NoPromptAfter"]}}
+			"new" : {"dialogueRandom" : [":<action>NoPrompt"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":<action>NoPromptAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"oralVore" : {
-			"new" : {"dialogueRandom" : [":oralVoreNoPrompt"]},
-			"after" : {"new" : {"dialogueRandom" : [":oralVoreNoPromptAfter"]}}
+			"new" : {"dialogueRandom" : [":oralVoreNoPrompt"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":oralVoreNoPromptAfter"],"dismissTime" : 2, "jump" : false}}
 		}
 	},
 	// responding to an action happening to them unprompted
 	"unpromptedAction" : {
 		"<action>" : {
-			"new" : {"dialogueRandom" : [":<action>Unprompted"]},
-			"after" : {"new" : {"dialogueRandom" : [":<action>UnpromptedAfter"]}}
+			"new" : {"dialogueRandom" : [":<action>Unprompted"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":<action>UnpromptedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"oralVore" : {
-			"new" : {"dialogueRandom" : [":oralVoreUnprompted"]},
-			"after" : {"new" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"]}}
+			"new" : {"dialogueRandom" : [":oralVoreUnprompted"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":oralVoreUnpromptedAfter"],"dismissTime" : 2, "jump" : false}}
 		}
 	},
 
 	// for when forcing another character to do an action (mostly for prey forcing their way into a pred)
 	"forcingAction" : {
 		"<action>" : {
-			"replace" : { "dialogueRandom" : [":<action>Forcing"]},
-			"after":{"replace" : { "dialogueRandom" : [":<action>ForcingAfter"]}}
+			"new" : { "dialogueRandom" : [":<action>Forcing"],"dismissTime" : 2, "jump" : false},
+			"after":{"new" : { "dialogueRandom" : [":<action>ForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"oralVore" : {
-			"replace" : { "dialogueRandom" : [":oralVoreForcing"]},
-			"after":{"replace" : { "dialogueRandom" : [":oralVoreForcingAfter"]}}
+			"new" : { "dialogueRandom" : [":oralVoreForcing"],"dismissTime" : 2, "jump" : false},
+			"after":{"new" : { "dialogueRandom" : [":oralVoreForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		}
 	},
 	// response to when another NPC forces them to do an action
 	"forcedAction" : {
 		"<action>" : {
-			"replace" : { "dialogueRandom" : [":<action>Forced"]},
-			"after":{"replace" : { "dialogueRandom" : [":<action>ForcedAfter"]}}
+			"new" : { "dialogueRandom" : [":<action>Forced"],"dismissTime" : 2, "jump" : false},
+			"after":{"new" : { "dialogueRandom" : [":<action>ForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"oralVore" : {
-			"replace" : { "dialogueRandom" : [":oralVoreForced"]},
-			"after":{"replace" : { "dialogueRandom" : [":oralVoreForcedAfter"]}}
+			"new" : { "dialogueRandom" : [":oralVoreForced"],"dismissTime" : 2, "jump" : false},
+			"after":{"new" : { "dialogueRandom" : [":oralVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		}
 	},
 

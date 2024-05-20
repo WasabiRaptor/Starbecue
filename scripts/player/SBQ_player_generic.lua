@@ -220,7 +220,7 @@ function sbq.buildActionRequestOptions(id, actionList)
 	for _, action in ipairs(actionList or {}) do
 		table.insert(options, {
 			name = sbq.getString((action.name or (":" .. action.action)) or ""),
-			args = { action.action, entity.id(), true, table.unpack(action.args or {}) },
+			args = { action.action, entity.id(), table.unpack(action.args or {}) },
 			locked = not action.available,
 			description = sbq.getString(action.requestDescription or (":" .. action.action .. "RequestDesc")),
 			messageTarget = id,

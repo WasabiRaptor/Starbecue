@@ -792,7 +792,7 @@ function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 		children = { { type = "label", id = "dialogueLabel", text = "" } },
 		dismissable = config.getParameter("dismissable"),
 		paneLayer = config.getParameter("paneLayer"),
-		lifetime = lifetime or sbq.config.dialogueDismissTime,
+		lifetime = math.max(lifetime, sbq.config.preyDialogueDismissTime),
 		text = text,
 		textSound = sound,
         speed = speed,

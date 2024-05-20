@@ -327,5 +327,59 @@ function dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo, ran
 	return randomTable
 end
 
+function dialogueProcessor.sendPlayerDialogueBox()
+	if world.entityType(sbq.target) == "player" then
+		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+			dialogueTree = sbq.dialogueTree,
+			dialogueTreeStart = dialogue.path,
+			noActions = true,
+			dialogue = dialogue
+		})
+		world.sendEntityMessage(sbq.target, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), { sbq = dialogueBoxData })
+		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+	end
+end
+
+function dialogueProcessor.speakDialogue(callback)
+	sbq.timerList.speakDialogue = nil
+	local results = dialogueProcessor.processDialogueResults()
+	if not results.dialogue then
+		dialogue.finished = true
+		if callback then
+			callback()
+		end
+		return
+	end
+	if self.board then
+		self.interacted = true
+		self.board:setEntity("interactionSource", sbq.target)
+	end
+
+	local lifetime = (results.dismissTime or 0) + ((results.textSpeed or 0.01) * string.len(results.dialogue))
+	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
+		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
+			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
+	else
+		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)
+	end
+	dialogue.position = dialogue.position + 1
+	if dialogue.position > #dialogue.result.dialogue then
+		dialogue.finished = true
+		sbq.timer("speakDialogue", lifetime, callback)
+		return
+	end
+	sbq.timer("speakDialogue", lifetime, dialogueProcessor.speakDialogue)
+end
+function dialogueProcessor.predictTime()
+	local time = 0
+	for i, v in ipairs(dialogue.result.dialogue) do
+		local dismissTime = dialogueProcessor.maxOfKey(dialogue.result, "dismissTime", i)
+		local textSpeed = dialogueProcessor.maxOfKey(dialogue.result, "textSpeed", i)
+		time = time + (dismissTime or 0) + (string.len(v) * (textSpeed or 0.01))
+	end
+	return time
+end
+
+
 dialogueStepScripts = {}
 dialogueOptionScripts = {}
