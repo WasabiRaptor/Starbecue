@@ -173,10 +173,9 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 
 	local space, subLocation = location:hasSpace(size)
 	if space then
-		if Occupants.addOccupant(target, size, locationName or action.location, subLocation) then
+		if Occupants.addOccupant(target, size, locationName or action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
-
 			local hide, show = SpeciesScript:getHideSlotAnims(action.hideSlots or {})
 			SpeciesScript:doAnimations(hide)
 			SpeciesScript:settingAnimations(action.hideSlots)
@@ -506,6 +505,7 @@ function default:tryInfuse(name, action, target, ...)
 		if not ((occupant.flags.digested and (occupant.locationSettings[infuseType.."Digested"]))
 		or ((not occupant.flags.digested) and (occupant.locationSettings[infuseType])))
 		then
+			occupant.flags.infusing = true
 			occupant.locationSettings[infuseType.."Digested"] = true
 			occupant.locationSettings[infuseType] = true
 			occupant:refreshLocation()

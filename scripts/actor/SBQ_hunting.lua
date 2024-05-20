@@ -5,10 +5,20 @@ sbq_hunting = {
 
 function sbq_hunting.start()
 	if math.random() < sbq.settings.leanSubDom then
-		sbq_hunting.dom()
+		return sbq_hunting.dom()
 	else
-		sbq_hunting.sub()
+		return sbq_hunting.sub()
 	end
+end
+
+function sbq_hunting.log()
+    local curTarget = self.board:getEntity("sbqHuntingTarget")
+	if not curTarget then return string.format("No %s target for %s", sbq_hunting.isDom and "hunting" or "baiting", sbq_hunting.action) end
+    local targets = sb.printJson({sbq.entityName(curTarget), curTarget}).."\n"
+	for _, v in ipairs(sbq_hunting.targets) do
+		targets = targets..sb.printJson({sbq.entityName(curTarget), curTarget}).."\n"
+	end
+	return string.format("%s for %s\npotential targets:\n%s", sbq_hunting.isDom and "Hunting" or "Baiting", sbq_hunting.action, targets)
 end
 
 function sbq_hunting.dom()
@@ -39,7 +49,8 @@ function sbq_hunting.dom()
 	sbq_hunting.action = action
 	sbq_hunting.isDom = true
 	sbq_hunting.getConsent = consent
-	sbq_hunting.nextTarget()
+    sbq_hunting.nextTarget()
+	return sbq_hunting.log()
 end
 
 function sbq_hunting.huntTarget(target)
@@ -62,9 +73,11 @@ function sbq_hunting.huntTarget(target)
 end
 
 function sbq_hunting.nextTarget()
+	sbq.expectedActions = {}
 	self.board:setEntity("sbqHuntingTarget", table.remove(sbq_hunting.targets, 1))
 end
 function sbq_hunting.clearTarget()
+	sbq.expectedActions = {}
 	self.board:setEntity("sbqHuntingTarget", nil)
 	sbq_hunting.targets = {}
 	sbq_hunting.prompted = {}
@@ -75,7 +88,7 @@ function sbq_hunting.sub()
 	local actions = {}
 	for _, action in ipairs(sbq.lists.seekActions) do
 		local settings = sbq.settings.subBehavior[action]
-		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and SpeciesScript:actionAvailable(action) then
+		if (settings.favored > 0) and sbq_hunting.checkResources(settings) then
 			for i = 1, settings.favored do
 				table.insert(actions, action)
 			end
@@ -104,6 +117,7 @@ function sbq_hunting.sub()
 	sbq_hunting.isDom = false
 	sbq_hunting.getConsent = consent
 	sbq_hunting.nextTarget()
+	return sbq_hunting.log()
 end
 
 function sbq_hunting.checkTarget(action, isDom, target, consent)
@@ -191,7 +205,7 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 			else
 				sbq_hunting.clearTarget()
 			end
-			sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+			sbq.forceTimer("dialogueAfter", cooldown, function()
 				sbq.target = target
 				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action.."."..line..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 					dialogueProcessor.sendPlayerDialogueBox()
@@ -246,7 +260,7 @@ function sbq_hunting.domNoPrompt(target)
 			else
 				sbq_hunting.clearTarget()
 			end
-			sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+			sbq.forceTimer("dialogueAfter", cooldown, function()
 				sbq.target = target
 				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 					dialogueProcessor.speakDialogue()
@@ -271,16 +285,16 @@ end
 
 function sbq_hunting.subPromptResponse(try, line, action, target)
 	if try then
-		sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", action, entity.id()), function(results)
+		sbq.expectedActions[sbq_hunting.action] = true
+		sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id()), function(results)
 			sbq.target = target
 			if not results then return end
 			local success, reason, cooldown = table.unpack(results)
 			if success then
 				sbq_hunting.clearTarget()
-				sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+				sbq.forceTimer("dialogueAfter", cooldown, function()
 					sbq.target = target
 					if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action.."."..line..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
-						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
 					end
 				end, sbq_hunting.nextTarget)
@@ -324,13 +338,14 @@ function sbq_hunting.subSendPrompt(target)
 end
 
 function sbq_hunting.subNoPrompt(target)
+	sbq.expectedActions[sbq_hunting.action] = true
 	sbq.target = target
 	local function callback()
-		sbq.addRPC(world.sendEntityMessage(target, "sbqTryAction", sbq_hunting.action, entity.id()), function (results)
+		sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", true, sbq_hunting.action, entity.id()), function (results)
 			if not results then sbq_hunting.nextTarget() return end
 			local success, reason, cooldown = table.unpack(results)
 			if not success then sbq_hunting.nextTarget() return end
-			sbq.forceTimer("huntingDialogueAfter", cooldown, function()
+			sbq.forceTimer("dialogueAfter", cooldown, function()
 				sbq.target = target
 				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 					dialogueProcessor.speakDialogue()
@@ -341,8 +356,8 @@ function sbq_hunting.subNoPrompt(target)
 	end
 	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 		dialogueProcessor.sendPlayerDialogueBox()
-        dialogueProcessor.speakDialogue(callback)
-    else
+		dialogueProcessor.speakDialogue(callback)
+	else
 		callback()
 	end
 end

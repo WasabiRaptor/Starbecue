@@ -101,7 +101,7 @@ function init()
 		for _, data in ipairs(locations or {}) do
 			table.insert(options, {
 				name = sbq.getString(data.name),
-				args = { "moveToLocation", target, data.location, data.subLocation },
+				args = { false, "moveToLocation", target, data.location, data.subLocation },
 				locked = not data.space,
 			})
 		end
@@ -110,7 +110,7 @@ function init()
 			options = options,
 			default = {
 				messageTarget = id,
-				message = "sbqTryAction",
+				message = "sbqRequestAction",
 				close = true
 			},
 			cancel = {
@@ -154,9 +154,9 @@ function init()
 	message.setHandler("sbqPromptResponse", function (_,_,tryAction, isDom, line, action, target)
 		if tryAction then
 			if isDom then
-				SpeciesScript:tryAction(action, target)
+				SpeciesScript:requestAction(false, action, target)
 			else
-				world.sendEntityMessage(target, "sbqTryAction", action, entity.id())
+				world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id())
 			end
 		end
 	end)
@@ -220,7 +220,7 @@ function sbq.buildActionRequestOptions(id, actionList)
 	for _, action in ipairs(actionList or {}) do
 		table.insert(options, {
 			name = sbq.getString((action.name or (":" .. action.action)) or ""),
-			args = { action.action, entity.id(), table.unpack(action.args or {}) },
+			args = { false, action.action, entity.id(), table.unpack(action.args or {}) },
 			locked = not action.available,
 			description = sbq.getString(action.requestDescription or (":" .. action.action .. "RequestDesc")),
 			messageTarget = id,

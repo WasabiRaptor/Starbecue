@@ -219,9 +219,9 @@ function sbq.actionAvailable(action, target, ...)
 	return {SpeciesScript:actionAvailable(action, target, ...)}
 end
 
-function sbq.requestAction(action, target, ...)
+function sbq.requestAction(forcing, action, target, ...)
 	if not SpeciesScript.active then return {false, "inactive"} end
-	return {SpeciesScript:requestAction(action, target, ...)}
+	return {SpeciesScript:requestAction(forcing, action, target, ...)}
 end
 
 function sbq.getOccupantData(entityId)
@@ -258,6 +258,7 @@ end
 
 function sbq.groupedSettingChanged.infuseSlots(name, k, v)
 	SpeciesScript:refreshInfusion(name)
+	sbq.setupSettingMetatables()
 end
 
 -- transformation handling
@@ -281,9 +282,9 @@ function _SpeciesScript:actionAvailable(action, target, ...)
 	return self.state:actionAvailable(action, target, ...)
 end
 
-function _SpeciesScript:requestAction(action, target, ...)
+function _SpeciesScript:requestAction(forcing, action, target, ...)
 	if not self.state then return false, "missingState" end
-	return self.state:requestAction(action, target, ...)
+	return self.state:requestAction(forcing, action, target, ...)
 end
 
 function _SpeciesScript:doAnimations(...)
@@ -427,6 +428,7 @@ function _State:tryAction(name, target, ...)
 		end
 	end
 	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
+
 	local longest = SpeciesScript:doAnimations(action.animations, action.tags, target)
 	local cooldown = action.cooldown or longest
 	action.onCooldown = true
@@ -436,15 +438,37 @@ function _State:tryAction(name, target, ...)
 			result2(...)
 		end
 	end, name, action, target, result2, ..., longest)
+
+	world.sendEntityMessage(target, "sbqActionOccuring", entity.id(), name)
+
 	if type(result2) ~= "function" then
 		return result1, result2 or false, longest
 	end
 	return result1, false, longest
 end
 
-function _State:requestAction(name, target, ...)
-	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
+function _State:requestAction(forcing, name, target, ...)
 	sbq.target = target
+	if forcing then
+		local success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
+		if success then
+			if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+				dialogueProcessor.sendPlayerDialogueBox()
+				dialogueProcessor.speakDialogue()
+				local wait = dialogueProcessor.predictTime()
+				sbq.forceTimer("dialogueAfter", cooldown, function ()
+					sbq.target = target
+					if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+						dialogueProcessor.sendPlayerDialogueBox()
+						dialogueProcessor.speakDialogue()
+					end
+				end)
+				cooldown = cooldown + wait
+			end
+		end
+		return success or false, reason or false, cooldown or 0
+	end
+	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
 	if success then
 		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 			dialogueProcessor.sendPlayerDialogueBox()
@@ -454,7 +478,7 @@ function _State:requestAction(name, target, ...)
 			local callback = function ()
 				local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
 				if success then
-					sbq.forceTimer("huntingDialogueAfter", cooldown, function ()
+					sbq.forceTimer("dialogueAfter", cooldown, function ()
 						sbq.target = target
 						if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 							dialogueProcessor.sendPlayerDialogueBox()
@@ -1121,11 +1145,11 @@ function _Location:outputData(entityId)
 end
 
 -- Occupant Handling
-function Occupants.addOccupant(entityId, size, location, subLocation)
+function Occupants.addOccupant(entityId, size, location, subLocation, flags)
 	-- check if we already have them
 	local occupant = Occupants.entityId[tostring(entityId)]
 	if occupant then
-		occupant.flags.newOccupant = true
+		occupant.flags = sb.jsonMerge(occupant.flags, flags or {}, { newOccupant = true })
 		occupant:refreshLocation(location, subLocation, true)
 		return true
 	end
@@ -1149,7 +1173,7 @@ function Occupants.addOccupant(entityId, size, location, subLocation)
 	local occupant = {
 		entityId = entityId,
 		seat = seat,
-		flags = { newOccupant = true },
+		flags = sb.jsonMerge(flags or {}, { newOccupant = true }),
 		locationSettings = {},
 		location = location,
 		subLocation = subLocation,
@@ -1305,7 +1329,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
 	end
-	if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then return self:remove() end
+	if (not self.flags.infusing) and (not sbq.tableMatches(location.activeSettings, sbq.settings, true)) then return self:remove() end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims
@@ -1497,7 +1521,7 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then
-			if SpeciesScript:tryAction(self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {})) then
+			if SpeciesScript:requestAction(true, self.struggleAction.action, self.entityId, table.unpack(self.struggleAction.args or {})) then
 				self.struggleCount = math.ceil(math.sqrt(self.struggleCount))
 				self.struggleTime = math.sqrt(self.struggleTime)
 			end

@@ -17,7 +17,7 @@ function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialog
 	if path ~= nil then
 		dialogue.path = path
 		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree or dialogue.prev, dialogueTreeTop or dialogue.prevTop)
-		if not dialogueTree then return false end
+		if not dialogueTree then dialogue.finished = true return false end
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
@@ -363,7 +363,7 @@ function dialogueProcessor.speakDialogue(callback)
 		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)
 	end
 	dialogue.position = dialogue.position + 1
-	if dialogue.position > #dialogue.result.dialogue then
+	if dialogue.position > #(dialogue.result.dialogue or {}) then
 		dialogue.finished = true
 		sbq.timer("speakDialogue", lifetime, callback)
 		return

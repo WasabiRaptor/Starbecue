@@ -78,7 +78,7 @@ function _ENV.actionButton:onClick()
 			local actionList = {}
 			for _, action in ipairs(actions) do
 				local requestAction = function ()
-					world.sendEntityMessage(pane.sourceEntity(), "sbqRequestAction", action.action, player.id(), table.unpack(action.args or {}) )
+					world.sendEntityMessage(pane.sourceEntity(), "sbqRequestAction", false, action.action, player.id(), table.unpack(action.args or {}) )
 				end
 				table.insert(actionList, {
 					action.available and sbq.getString(action.name or (":" .. action.action)) or "^#555;^set;"..(sbq.getString(action.name or (":" .. action.action)) or ""),

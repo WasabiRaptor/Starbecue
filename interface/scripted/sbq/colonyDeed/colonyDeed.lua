@@ -245,7 +245,8 @@ function sbq.refreshDeedPage()
 			table.remove(_ENV.metagui.inputData.occupier.tenants, i)
 			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
 			sbq.refreshDeedPage()
-		end
+        end
+		canvas:clear()
 		canvas:drawDrawables(portrait, vec2.div(canvasWidget.size, 2))
 		function settings:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)

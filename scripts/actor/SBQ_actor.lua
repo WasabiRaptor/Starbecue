@@ -46,6 +46,7 @@ function sbq.actorMessages()
 		dom = {},
 		sub = {}
 	}
+	sbq.expectedActions = {}
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData)
 		sbq.setCurrentLocationData(locationData)
 	end)
@@ -63,6 +64,13 @@ function sbq.actorMessages()
 			end)
 		end
 		return {responseMap[willingnessTable[action] or "no"] or false, isDom, willingnessTable[action] or "no", action, entity.id()}
+	end)
+	message.setHandler("sbqActionOccuring", function (_,_, id, action)
+		if sbq.expectedActions[action] then return end
+		sbq.target = id
+		if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+			dialogueProcessor.speakDialogue()
+		end
 	end)
 end
 
@@ -107,12 +115,8 @@ local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
 	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("strugglingDialogue", 10, 30) then
 		sbq.target = sbq.loungingIn()
-		local gotDialogue =  dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree)
-		if gotDialogue and dialogue.result.dialogue then
-			dialogueProcessor.speakDialogue()
-		else
-			dialogue.finished = true
-		end
+		dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree)
+		dialogueProcessor.speakDialogue()
 	end
 	if sbq.timer("changeStruggleDirection", 2) then
 		if true then -- do stuff with location data here to determine struggles later
