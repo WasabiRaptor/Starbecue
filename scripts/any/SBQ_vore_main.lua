@@ -1297,8 +1297,8 @@ function _Occupant:update(dt)
 	elseif self.flags.digested then
 	elseif not (self.flags.newOccupant or self.flags.releasing) then
 		local oldMultiplier = self.sizeMultiplier
-		local compression = location.settings.compression
-		local compressionMin = location.settings.compressionMin
+		local compression = self.locationSettings.compression
+		local compressionMin = self.locationSettings.compressionMin
 		if compression == "time" then
 			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat(location.powerMultiplier) * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
@@ -1364,7 +1364,8 @@ function _Occupant:refreshLocation(name, subLocation, force)
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
-	elseif not (self.flags.newOccupant or self.flags.releasing) then
+    elseif not (self.flags.newOccupant or self.flags.releasing) then
+		table.insert(persistentStatusEffects, {stat = "sbq_compression_"..self.locationSettings.compression, amount = 1})
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do

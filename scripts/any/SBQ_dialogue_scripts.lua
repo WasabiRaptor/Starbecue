@@ -82,6 +82,8 @@ dialogueStepScripts.sbqTransformation = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqDrainEnergy = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqEggify = dialogueStepScripts.statPositive
 
+dialogueStepScripts.sbq_compression_time = dialogueStepScripts.statPositive
+
 dialogueStepScripts.sbq_tailInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_pawInfuse = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_thighsInfuse = dialogueStepScripts.statPositive
@@ -94,3 +96,6 @@ dialogueStepScripts.sbq_acidDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cumDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_milkDigestResistance = dialogueStepScripts.statPositive
+
+dialogueStepScripts.sbq_isDigested = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_isInfused = dialogueStepScripts.statPositive
