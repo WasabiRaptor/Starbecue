@@ -46,10 +46,10 @@
 			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "ore" },
 			"struggleReward2" : { "repeatable" : true, "struggles" : 100, "minStruggles" : 200, "pool" : "richOre" },
 
-			"CVStruggleReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "struggles" : 75, "pool" : "richOre" },
-			"CVStruggleReward2" : { "location" : ["shaft", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
+			"CVStruggleReward1" : { "repeatable" : true, "location" : ["cock", "balls"], "struggles" : 75, "pool" : "richOre" },
+			"CVStruggleReward2" : { "location" : ["cock", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
 
-			"CVTimedReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "time" : 3, "minTime" : 0, "pool" : "richOre" },
+			"CVTimedReward1" : { "repeatable" : true, "location" : ["cock", "balls"], "time" : 3, "minTime" : 0, "pool" : "richOre" },
 
 			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
 			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
@@ -104,7 +104,7 @@
 					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
 				},
 				"settings" : {
-					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
+					// "bellyEffect" : ["sbqRemoveBellyEffects","sbq_acidHeal"] // example for a prey that would only seek out endo preds
 				}
 			}
 		}
@@ -124,7 +124,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583

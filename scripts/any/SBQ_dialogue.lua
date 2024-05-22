@@ -355,7 +355,7 @@ function dialogueProcessor.speakDialogue(callback)
 		self.board:setEntity("interactionSource", sbq.target)
 	end
 
-	local lifetime = (results.dismissTime or 0) + ((results.textSpeed or 0.01) * string.len(results.dialogue))
+	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * string.len(results.dialogue))
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
 			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
@@ -375,7 +375,7 @@ function dialogueProcessor.predictTime()
 	for i, v in ipairs(dialogue.result.dialogue) do
 		local dismissTime = dialogueProcessor.maxOfKey(dialogue.result, "dismissTime", i)
 		local textSpeed = dialogueProcessor.maxOfKey(dialogue.result, "textSpeed", i)
-		time = time + (dismissTime or 0) + (string.len(v) * (textSpeed or 0.01))
+		time = time + (dismissTime or 0) + (string.len(v) * ((textSpeed or 1) * sbq.config.textSpeedMul))
 	end
 	return time
 end

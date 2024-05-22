@@ -66,10 +66,10 @@ function init()
 
 	indicator = widget.bindCanvas("indicator")
 
-	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, additionalData)
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, occupantData)
 		if id ~= pane.sourceEntity() then pane.dismiss() end
 		player.setScriptContext("starbecue")
-		player.callScript("sbq.setCurrentLocationData", locationData)
+		player.callScript("sbq.setCurrentLocationData", locationData, occupantData)
 		local struggleActions = locationData.struggleActions or {}
 		buttons = {
 			up = (struggleActions.up and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
@@ -80,7 +80,7 @@ function init()
 			back = (struggleActions.back and (struggleActions.back.indicate or struggleActions.any.indicate or "default")),
 			interact = world.isEntityInteractive(id) and "default"
 		}
-		time = additionalData.time
+		time = occupantData.time
 		location = locationData.name
 	end)
 

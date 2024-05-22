@@ -77,6 +77,8 @@ function sbq.setLoungeControlHeld(control)
 end
 function sbq.releaseLoungeControl(control)
 end
+function sbq.isLoungeControlHeld(control)
+end
 
 function sbq.loungingIn()
 end

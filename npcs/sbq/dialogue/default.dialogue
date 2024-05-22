@@ -80,7 +80,9 @@
 		"Maybe if you where just a little bigger..."
 	],
 	"oralVoreNoSlots": ":noSlots", // duplicated lines
-	"noSlots": ["I think I'm at maximum capacity..."],
+	"noSlots": [
+		"I think I'm at maximum capacity..."
+	],
 	"oralVoreFull": [
 		"I'm a bit too full...",
 		"My belly can't stretch any further...",
@@ -408,23 +410,6 @@
 	],
 	"cockVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-
-	"thighsInfuseRequested": "Missing: thighsInfuseRequested",
-	"thighsInfuseRequestedAfter": "Missing: thighsInfuseRequestedAfter",
-	"thighsInfuseInvalid": "There must be an error, thighsInfuse is invalid",
-	"thighsInfuseNo": ":defaultNo", // duplicated lines
-	"thighsInfuseTooBig": ":tooBig", // duplicated lines
-	"thighsInfuseTooSmall": ":tooSmall", // duplicated lines
-	"thighsInfuseNoSlots": ":noSlots", // duplicated lines
-	"thighsInfuseFull": ":infuseFull",
-	"infuseFull" : [
-		"I can't even fit you in there to get started.",
-		"I'm too full to get started on you."
-	],
-	"thighsInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"thighsInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"thighsInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-
 	"bellyInfuseRequested": [
 		"Youre gonna love it down there, I guarantee it!",
 		"Let's be honest, you look a lot cuter this way.",
@@ -447,7 +432,11 @@
 	"bellyInfuseTooBig": ":tooBig", // duplicated lines
 	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
 	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
-	"bellyInfuseFull": ":infuseFull",
+	"bellyInfuseFull": ":infuseFull", // duplicated lines
+	"infuseFull": [
+		"I can't even fit you in there to get started.",
+		"I'm too full to get started on you."
+	],
 	"bellyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
 	"bellyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
@@ -466,7 +455,7 @@
 	"breastInfuseTooBig": ":tooBig", // duplicated lines
 	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
 	"breastInfuseNoSlots": ":noSlots", // duplicated lines
-	"breastInfuseFull": ":infuseFull",
+	"breastInfuseFull": ":infuseFull", // duplicated lines
 	"breastInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
 	"breastInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
@@ -492,7 +481,7 @@
 	"pussyInfuseTooBig": ":tooBig", // duplicated lines
 	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
 	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
-	"pussyInfuseFull": ":infuseFull",
+	"pussyInfuseFull": ":infuseFull", // duplicated lines
 	"pussyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
 	"pussyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
@@ -511,39 +500,10 @@
 	"cockInfuseTooBig": ":tooBig", // duplicated lines
 	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
 	"cockInfuseNoSlots": ":noSlots", // duplicated lines
-	"cockInfuseFull": ":infuseFull",
+	"cockInfuseFull": ":infuseFull", // duplicated lines
 	"cockInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
 	"cockInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"pawInfuseRequested": "Missing: pawInfuseRequested",
-	"pawInfuseRequestedAfter": "Missing: pawInfuseRequestedAfter",
-	"pawInfuseInvalid": "There must be an error, pawInfuse is invalid",
-	"pawInfuseNo": ":defaultNo", // duplicated lines
-	"pawInfuseTooBig": ":tooBig", // duplicated lines
-	"pawInfuseTooSmall": ":tooSmall", // duplicated lines
-	"pawInfuseNoSlots": ":noSlots", // duplicated lines
-	"pawInfuseFull": ":infuseFull",
-	"pawInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"pawInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"pawInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"tailInfuseRequested": [
-		"Looking to be a part of my tail, huh? Can't say I blame you!",
-		"You're gonna make a nice bit of extra length!",
-		"I knew you were staring at my tail for a reason!"
-	],
-	"tailInfuseRequestedAfter": [
-		"Looking good back there, <entityname>!",
-		"All a part of me, now!"
-	],
-	"tailInfuseInvalid": "There must be an error, tailInfuse is invalid",
-	"tailInfuseNo": ":defaultNo", // duplicated lines
-	"tailInfuseTooBig": ":tooBig", // duplicated lines
-	"tailInfuseTooSmall": ":tooSmall", // duplicated lines
-	"tailInfuseNoSlots": ":noSlots", // duplicated lines
-	"tailInfuseFull": ":infuseFull",
-	"tailInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"tailInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"tailInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"oralVoreLetoutRequested": [
 		"You can come out now.",
 		"Time to come out.",
@@ -1430,48 +1390,6 @@
 			]
 		]
 	},
-	"thighsInfusePrompt": "Missing: thighsInfusePrompt",
-	"thighsInfusePromptYes": "Missing: thighsInfusePromptYes",
-	"thighsInfusePromptYesAfter": "Missing: thighsInfusePromptYesAfter",
-	"thighsInfusePromptNo": ":defaultNo", // duplicated lines
-	"thighsInfusePromptNoYes": "Missing: thighsInfusePromptNoYes",
-	"thighsInfusePromptNoYesAfter": "Missing: thighsInfusePromptNoYesAfter",
-	"bellyInfusePrompt": "Missing: bellyInfusePrompt",
-	"bellyInfusePromptYes": "Missing: bellyInfusePromptYes",
-	"bellyInfusePromptYesAfter": "Missing: bellyInfusePromptYesAfter",
-	"bellyInfusePromptNo": ":defaultNo", // duplicated lines
-	"bellyInfusePromptNoYes": "Missing: bellyInfusePromptNoYes",
-	"bellyInfusePromptNoYesAfter": "Missing: bellyInfusePromptNoYesAfter",
-	"breastInfusePrompt": "Missing: breastInfusePrompt",
-	"breastInfusePromptYes": "Missing: breastInfusePromptYes",
-	"breastInfusePromptYesAfter": "Missing: breastInfusePromptYesAfter",
-	"breastInfusePromptNo": ":defaultNo", // duplicated lines
-	"breastInfusePromptNoYes": "Missing: breastInfusePromptNoYes",
-	"breastInfusePromptNoYesAfter": "Missing: breastInfusePromptNoYesAfter",
-	"pussyInfusePrompt": "Missing: pussyInfusePrompt",
-	"pussyInfusePromptYes": "Missing: pussyInfusePromptYes",
-	"pussyInfusePromptYesAfter": "Missing: pussyInfusePromptYesAfter",
-	"pussyInfusePromptNo": ":defaultNo", // duplicated lines
-	"pussyInfusePromptNoYes": "Missing: pussyInfusePromptNoYes",
-	"pussyInfusePromptNoYesAfter": "Missing: pussyInfusePromptNoYesAfter",
-	"cockInfusePrompt": "Missing: cockInfusePrompt",
-	"cockInfusePromptYes": "Missing: cockInfusePromptYes",
-	"cockInfusePromptYesAfter": "Missing: cockInfusePromptYesAfter",
-	"cockInfusePromptNo": ":defaultNo", // duplicated lines
-	"cockInfusePromptNoYes": "Missing: cockInfusePromptNoYes",
-	"cockInfusePromptNoYesAfter": "Missing: cockInfusePromptNoYesAfter",
-	"pawInfusePrompt": "Missing: pawInfusePrompt",
-	"pawInfusePromptYes": "Missing: pawInfusePromptYes",
-	"pawInfusePromptYesAfter": "Missing: pawInfusePromptYesAfter",
-	"pawInfusePromptNo": ":defaultNo", // duplicated lines
-	"pawInfusePromptNoYes": "Missing: pawInfusePromptNoYes",
-	"pawInfusePromptNoYesAfter": "Missing: pawInfusePromptNoYesAfter",
-	"tailInfusePrompt": "Missing: tailInfusePrompt",
-	"tailInfusePromptYes": "Missing: tailInfusePromptYes",
-	"tailInfusePromptYesAfter": "Missing: tailInfusePromptYesAfter",
-	"tailInfusePromptNo": ":defaultNo", // duplicated lines
-	"tailInfusePromptNoYes": "Missing: tailInfusePromptNoYes",
-	"tailInfusePromptNoYesAfter": "Missing: tailInfusePromptNoYesAfter",
 	"oralVoreRequesting": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1522,7 +1440,6 @@
 			]
 		]
 	},
-	"oralVoreRequestingYesAfter": "Missing: oralVoreRequestingYesAfter",
 	"oralVoreRequestingNo": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1565,7 +1482,6 @@
 			]
 		]
 	},
-	"oralVoreRequestingNoYesAfter": "Missing: oralVoreRequestingNoYesAfter",
 	"tailVoreRequesting": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1600,7 +1516,6 @@
 			]
 		]
 	},
-	"tailVoreRequestingYesAfter": "Missing: tailVoreRequestingYesAfter",
 	"tailVoreRequestingNo": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1635,7 +1550,6 @@
 			]
 		]
 	},
-	"tailVoreRequestingNoYesAfter": "Missing: tailVoreRequestingNoYesAfter",
 	"absorbVoreRequesting": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1670,7 +1584,6 @@
 			]
 		]
 	},
-	"absorbVoreRequestingYesAfter": "Missing: absorbVoreRequestingYesAfter",
 	"absorbVoreRequestingNo": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1705,7 +1618,6 @@
 			]
 		]
 	},
-	"absorbVoreRequestingNoYesAfter": "Missing: absorbVoreRequestingNoYesAfter",
 	"navelVoreRequesting": { // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"percentage": "sbqRest",
 		"pools": [
@@ -1740,7 +1652,6 @@
 			]
 		]
 	},
-	"navelVoreRequestingYesAfter": "Missing: navelVoreRequestingYesAfter",
 	"navelVoreRequestingNo": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1775,7 +1686,6 @@
 			]
 		]
 	},
-	"navelVoreRequestingNoYesAfter": "Missing: navelVoreRequestingNoYesAfter",
 	"analVoreRequesting": [
 		"You wouldn't mind if I just let myself in, would you?",
 		"Could you do me a favor and bend over?"
@@ -1784,7 +1694,6 @@
 		"You'll let me in? I can't wait to be in your booty!",
 		"Sweet! I'm going to love being in that butt!"
 	],
-	"analVoreRequestingYesAfter": "Missing: analVoreRequestingYesAfter",
 	"analVoreRequestingNo": [
 		"Oh... well it was worth asking.",
 		"No booty for me today, huh?"
@@ -1793,7 +1702,6 @@
 		"Well that's too bad, because I'm going in that butt anyway!",
 		"I think you'll change your tune once you feel me wiggling inside your rear!"
 	],
-	"analVoreRequestingNoYesAfter": "Missing: analVoreRequestingNoYesAfter",
 	"unbirthVoreRequesting": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1828,7 +1736,6 @@
 			]
 		]
 	},
-	"unbirthVoreRequestingYesAfter": "Missing: unbirthVoreRequestingYesAfter",
 	"unbirthVoreRequestingNo": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1863,7 +1770,6 @@
 			]
 		]
 	},
-	"unbirthVoreRequestingNoYesAfter": "Missing: unbirthVoreRequestingNoYesAfter",
 	"breastVoreRequesting": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1898,7 +1804,6 @@
 			]
 		]
 	},
-	"breastVoreRequestingYesAfter": "Missing: breastVoreRequestingYesAfter",
 	"breastVoreRequestingNo": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1933,7 +1838,6 @@
 			]
 		]
 	},
-	"breastVoreRequestingNoYesAfter": "Missing: breastVoreRequestingNoYesAfter",
 	"cockVoreRequesting": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1968,7 +1872,6 @@
 			]
 		]
 	},
-	"cockVoreRequestingYesAfter": "Missing: cockVoreRequestingYesAfter",
 	"cockVoreRequestingNo": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2003,49 +1906,6 @@
 			]
 		]
 	},
-	"cockVoreRequestingNoYesAfter": "Missing: cockVoreRequestingNoYesAfter",
-	"thighsInfuseRequesting": "Missing: thighsInfuseRequesting",
-	"thighsInfuseRequestingYes": "Missing: thighsInfuseRequestingYes",
-	"thighsInfuseRequestingYesAfter": "Missing: thighsInfuseRequestingYesAfter",
-	"thighsInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"thighsInfuseRequestingNoYes": "Missing: thighsInfuseRequestingNoYes",
-	"thighsInfuseRequestingNoYesAfter": "Missing: thighsInfuseRequestingNoYesAfter",
-	"bellyInfuseRequesting": "Missing: bellyInfuseRequesting",
-	"bellyInfuseRequestingYes": "Missing: bellyInfuseRequestingYes",
-	"bellyInfuseRequestingYesAfter": "Missing: bellyInfuseRequestingYesAfter",
-	"bellyInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"bellyInfuseRequestingNoYes": "Missing: bellyInfuseRequestingNoYes",
-	"bellyInfuseRequestingNoYesAfter": "Missing: bellyInfuseRequestingNoYesAfter",
-	"breastInfuseRequesting": "Missing: breastInfuseRequesting",
-	"breastInfuseRequestingYes": "Missing: breastInfuseRequestingYes",
-	"breastInfuseRequestingYesAfter": "Missing: breastInfuseRequestingYesAfter",
-	"breastInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"breastInfuseRequestingNoYes": "Missing: breastInfuseRequestingNoYes",
-	"breastInfuseRequestingNoYesAfter": "Missing: breastInfuseRequestingNoYesAfter",
-	"pussyInfuseRequesting": "Missing: pussyInfuseRequesting",
-	"pussyInfuseRequestingYes": "Missing: pussyInfuseRequestingYes",
-	"pussyInfuseRequestingYesAfter": "Missing: pussyInfuseRequestingYesAfter",
-	"pussyInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"pussyInfuseRequestingNoYes": "Missing: pussyInfuseRequestingNoYes",
-	"pussyInfuseRequestingNoYesAfter": "Missing: pussyInfuseRequestingNoYesAfter",
-	"cockInfuseRequesting": "Missing: cockInfuseRequesting",
-	"cockInfuseRequestingYes": "Missing: cockInfuseRequestingYes",
-	"cockInfuseRequestingYesAfter": "Missing: cockInfuseRequestingYesAfter",
-	"cockInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"cockInfuseRequestingNoYes": "Missing: cockInfuseRequestingNoYes",
-	"cockInfuseRequestingNoYesAfter": "Missing: cockInfuseRequestingNoYesAfter",
-	"pawInfuseRequesting": "Missing: pawInfuseRequesting",
-	"pawInfuseRequestingYes": "Missing: pawInfuseRequestingYes",
-	"pawInfuseRequestingYesAfter": "Missing: pawInfuseRequestingYesAfter",
-	"pawInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"pawInfuseRequestingNoYes": "Missing: pawInfuseRequestingNoYes",
-	"pawInfuseRequestingNoYesAfter": "Missing: pawInfuseRequestingNoYesAfter",
-	"tailInfuseRequesting": "Missing: tailInfuseRequesting",
-	"tailInfuseRequestingYes": "Missing: tailInfuseRequestingYes",
-	"tailInfuseRequestingYesAfter": "Missing: tailInfuseRequestingYesAfter",
-	"tailInfuseRequestingNo": ":defaultNo", // duplicated lines
-	"tailInfuseRequestingNoYes": "Missing: tailInfuseRequestingNoYes",
-	"tailInfuseRequestingNoYesAfter": "Missing: tailInfuseRequestingNoYesAfter",
 	"oralVoreNoPrompt": [
 		"I think you'll fill me up nicely.",
 		"I just need a quick bite to eat.",
@@ -2230,8 +2090,6 @@
 			]
 		]
 	},
-	"thighsInfuseNoPrompt": "Missing: thighsInfuseNoPrompt",
-	"thighsInfuseNoPromptAfter": "Missing: thighsInfuseNoPromptAfter",
 	"bellyInfuseNoPrompt": [
 		"I think... I need you in my belly... or... as my belly..."
 	],
@@ -2271,8 +2129,6 @@
 		"You belong right where you are, throbbing between my legs~",
 		"Mmm~ Feels right to have you there~"
 	],
-	"pawInfuseNoPrompt": "Missing: pawInfuseNoPrompt",
-	"pawInfuseNoPromptAfter": "Missing: pawInfuseNoPromptAfter",
 	"tailInfuseNoPrompt": [
 		"Might as well keep you back there, since you squirmed so nicely!",
 		"I think you'll look good as part of my tail. Wouldn't you agree?"
@@ -2286,63 +2142,65 @@
 		"You look hungry, are you about to- ahh!",
 		"I might look like a snack to you, but I'm not- wah!"
 	],
-	"oralVoreUnpromptedAfter": "Missing: oralVoreUnpromptedAfter",
 	"tailVoreUnprompted": [
 		"Your tail is getting close to me, why are you- mmph!",
 		"I see you moving your tail closer, don't think you can just- ah!",
 		"You don't need to show off your tail like that, unless- wah!"
 	],
-	"tailVoreUnpromptedAfter": "Missing: tailVoreUnpromptedAfter",
 	"absorbVoreUnprompted": [
 		"Well, this is a nice hug, but I feel like sinking into- ah!",
 		"I don't like the look in your eye. Don't you dare hug me like- mmph!",
 		"You want a hug? Well sure, what's the worst that could- wah!"
 	],
-	"absorbVoreUnpromptedAfter": "Missing: absorbVoreUnpromptedAfter",
 	"navelVoreUnprompted": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"Why are you pushing me to your belly button- mmph!",
 		"You have a nice belly, but why get me closer to look- ah!",
 		"You don't need to show off your belly like that. Wait, why are you- wah!"
 	],
-	"navelVoreUnpromptedAfter": "Missing: navelVoreUnpromptedAfter",
 	"analVoreUnprompted": [
 		"Why are you turning like that and showing me your butt- ah!",
 		"I don't know why you're wiggling your butt like that, but don't- mmph!",
 		"Yes, I see you have a nice rear, but why make me look at- wah!"
 	],
-	"analVoreUnpromptedAfter": "Missing: analVoreUnpromptedAfter",
 	"unbirthVoreUnprompted": [
 		"You shouldn't flash your nethers like that. Wait, are you trying to- ah!",
 		"I don't see anything other then your lewd lips. Why'd you want me to look- mmph!",
 		"Why are you spreading your legs at me? Don't tell me you're about to- wah!"
 	],
-	"unbirthVoreUnpromptedAfter": "Missing: unbirthVoreUnpromptedAfter",
 	"breastVoreUnprompted": [
 		"Why are you showing off your rack like that? You don't intend to- ah!",
 		"Hmmm, I don't see anything strange about your breast, is there any reason why- mmph!",
 		"Hey, what's with that look you got? Why are you coming closer with your boobs out, wait- wah!"
 	],
-	"breastVoreUnpromptedAfter": "Missing: breastVoreUnpromptedAfter",
 	"cockVoreUnprompted": [
 		"UwU",
 		"Oh my!",
 		"You're putting me in your shaf- wah!"
 	],
-	"cockVoreUnpromptedAfter": "Missing: cockVoreUnpromptedAfter",
-	"thighsInfuseUnprompted": "Missing: thighsInfuseUnprompted",
-	"thighsInfuseUnpromptedAfter": "Missing: thighsInfuseUnpromptedAfter",
-	"bellyInfuseUnprompted": "Missing: bellyInfuseUnprompted",
-	"bellyInfuseUnpromptedAfter": "Missing: bellyInfuseUnpromptedAfter",
-	"breastInfuseUnprompted": "Missing: breastInfuseUnprompted",
-	"breastInfuseUnpromptedAfter": "Missing: breastInfuseUnpromptedAfter",
-	"pussyInfuseUnprompted": "Missing: pussyInfuseUnprompted",
-	"pussyInfuseUnpromptedAfter": "Missing: pussyInfuseUnpromptedAfter",
-	"cockInfuseUnprompted": "Missing: cockInfuseUnprompted",
-	"cockInfuseUnpromptedAfter": "Missing: cockInfuseUnpromptedAfter",
-	"pawInfuseUnprompted": "Missing: pawInfuseUnprompted",
-	"pawInfuseUnpromptedAfter": "Missing: pawInfuseUnpromptedAfter",
-	"tailInfuseUnprompted": "Missing: tailInfuseUnprompted",
-	"tailInfuseUnpromptedAfter": "Missing: tailInfuseUnpromptedAfter",
+	"oralVoreLetoutUnpromptedAfter": [
+		"Ah, freedom! Thanks for spitting me up."
+	],
+	"tailVoreLetoutUnpromptedAfter": [
+		"Thanks for letting me out of your tail!"
+	],
+	"absorbVoreLetoutUnpromptedAfter": [
+		"Thanks for letting me out of your form!"
+	],
+	"navelVoreLetoutUnpromptedAfter": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
+		"Thanks for pushing me out through your navel!"
+	],
+	"analVoreLetoutUnpromptedAfter": [
+		"W-wah! Thanks for squeezing me out your butt!"
+	],
+	"unbirthVoreLetoutUnpromptedAfter": [
+		"Thanks for squeezing me out of your womb!"
+	],
+	"breastVoreLetoutUnpromptedAfter": [
+		"Thanks for pushing me out your boob!"
+	],
+	"cockVoreLetoutUnpromptedAfter": [
+		"Thanks for squeezing me out your shaft!"
+	],
 	"oralVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -2361,7 +2219,6 @@
 			]
 		]
 	},
-	"oralVoreForcingAfter": "Missing: oralVoreForcingAfter",
 	"tailVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -2379,7 +2236,6 @@
 			]
 		]
 	},
-	"tailVoreForcingAfter": "Missing: tailVoreForcingAfter",
 	"absorbVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -2397,7 +2253,6 @@
 			]
 		]
 	},
-	"absorbVoreForcingAfter": "Missing: absorbVoreForcingAfter",
 	"navelVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -2415,7 +2270,6 @@
 			]
 		]
 	},
-	"navelVoreForcingAfter": "Missing: navelVoreForcingAfter",
 	"analVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2433,7 +2287,6 @@
 			]
 		]
 	},
-	"analVoreForcingAfter": "Missing: analVoreForcingAfter",
 	"unbirthVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2451,7 +2304,6 @@
 			]
 		]
 	},
-	"unbirthVoreForcingAfter": "Missing: unbirthVoreForcingAfter",
 	"breastVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2469,7 +2321,6 @@
 			]
 		]
 	},
-	"breastVoreForcingAfter": "Missing: breastVoreForcingAfter",
 	"cockVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2487,21 +2338,30 @@
 			]
 		]
 	},
-	"cockVoreForcingAfter": "Missing: cockVoreForcingAfter",
-	"thighsInfuseForcing": "Missing: thighsInfuseForcing",
-	"thighsInfuseForcingAfter": "Missing: thighsInfuseForcingAfter",
-	"bellyInfuseForcing": "Missing: bellyInfuseForcing",
-	"bellyInfuseForcingAfter": "Missing: bellyInfuseForcingAfter",
-	"breastInfuseForcing": "Missing: breastInfuseForcing",
-	"breastInfuseForcingAfter": "Missing: breastInfuseForcingAfter",
-	"pussyInfuseForcing": "Missing: pussyInfuseForcing",
-	"pussyInfuseForcingAfter": "Missing: pussyInfuseForcingAfter",
-	"cockInfuseForcing": "Missing: cockInfuseForcing",
-	"cockInfuseForcingAfter": "Missing: cockInfuseForcingAfter",
-	"pawInfuseForcing": "Missing: pawInfuseForcing",
-	"pawInfuseForcingAfter": "Missing: pawInfuseForcingAfter",
-	"tailInfuseForcing": "Missing: tailInfuseForcing",
-	"tailInfuseForcingAfter": "Missing: tailInfuseForcingAfter",
+	"oralVoreLetoutForcingAfter": [
+		"Woo! I got you to spit me out."
+	],
+	"tailVoreLetoutForcingAfter": [
+		"Hah! I wiggled my way out your tail."
+	],
+	"absorbVoreLetoutForcingAfter": [
+		"Wow, I managed to crawl out of your body!"
+	],
+	"navelVoreLetoutForcingAfter": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
+		"Yes! I got out through your navel."
+	],
+	"analVoreLetoutForcingAfter": [
+		"I managed to wiggle out your butt!"
+	],
+	"unbirthVoreLetoutForcingAfter": [
+		"Yes! I squirmed out of your womb."
+	],
+	"breastVoreLetoutForcingAfter": [
+		"Yes! I squirmed out your boob!"
+	],
+	"cockVoreLetoutForcingAfter": [
+		"Well, seems like I managed to squirm out of your cock!"
+	],
 	"oralVoreForced": {
 		"percentage": "food",
 		"pools": [
@@ -2527,7 +2387,6 @@
 			]
 		]
 	},
-	"oralVoreForcedAfter": "Missing: oralVoreForcedAfter",
 	"tailVoreForced": {
 		"percentage": "food",
 		"pools": [
@@ -2553,7 +2412,6 @@
 			]
 		]
 	},
-	"tailVoreForcedAfter": "Missing: tailVoreForcedAfter",
 	"absorbVoreForced": {
 		"percentage": "food",
 		"pools": [
@@ -2579,7 +2437,6 @@
 			]
 		]
 	},
-	"absorbVoreForcedAfter": "Missing: absorbVoreForcedAfter",
 	"navelVoreForced": {
 		"percentage": "food",
 		"pools": [
@@ -2605,7 +2462,6 @@
 			]
 		]
 	},
-	"navelVoreForcedAfter": "Missing: navelVoreForcedAfter",
 	"analVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2631,7 +2487,6 @@
 			]
 		]
 	},
-	"analVoreForcedAfter": "Missing: analVoreForcedAfter",
 	"unbirthVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2657,7 +2512,6 @@
 			]
 		]
 	},
-	"unbirthVoreForcedAfter": "Missing: unbirthVoreForcedAfter",
 	"breastVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2683,7 +2537,6 @@
 			]
 		]
 	},
-	"breastVoreForcedAfter": "Missing: breastVoreForcedAfter",
 	"cockVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -2708,21 +2561,6 @@
 			]
 		]
 	},
-	"cockVoreForcedAfter": "Missing: cockVoreForcedAfter",
-	"thighsInfuseForced": "Missing: thighsInfuseForced",
-	"thighsInfuseForcedAfter": "Missing: thighsInfuseForcedAfter",
-	"bellyInfuseForced": "Missing: bellyInfuseForced",
-	"bellyInfuseForcedAfter": "Missing: bellyInfuseForcedAfter",
-	"breastInfuseForced": "Missing: breastInfuseForced",
-	"breastInfuseForcedAfter": "Missing: breastInfuseForcedAfter",
-	"pussyInfuseForced": "Missing: pussyInfuseForced",
-	"pussyInfuseForcedAfter": "Missing: pussyInfuseForcedAfter",
-	"cockInfuseForced": "Missing: cockInfuseForced",
-	"cockInfuseForcedAfter": "Missing: cockInfuseForcedAfter",
-	"pawInfuseForced": "Missing: pawInfuseForced",
-	"pawInfuseForcedAfter": "Missing: pawInfuseForcedAfter",
-	"tailInfuseForced": "Missing: tailInfuseForced",
-	"tailInfuseForcedAfter": "Missing: tailInfuseForcedAfter",
 	"oralVoreLetoutForced": [
 		"Ahh... Ok, you want out.",
 		"Why leave?",
@@ -2768,6 +2606,49 @@
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
+	"struggle": [
+		"Having a good time in there?",
+		"I hope it's comfortable enough for you.",
+		"I can feel you squirming around in there..."
+	],
+	"struggleBelly": [
+		"Having a good time in there?",
+		"I hope it's comfortable enough for you.",
+		"I can feel you squirming around in there..."
+	],
+	"struggleWomb": [
+		"Ahh.. I can feel you kicking hehe...",
+		"MMM~ keep that up~"
+	],
+	"struggleTail": ":struggle",
+	"struggleBreasts": [
+		"Having a good time in there?",
+		"Hope it's comfortable.",
+		"Give yourself a nice milk bath~",
+		"Feel free to take a drink, don't want to start leaking after all~",
+		"Hehe, look at how much bigger they are with you in there~"
+	],
+	"struggleBreastsShirt": [
+		"Careful, you're gonna cause me to have a wardrobe malfunction~",
+		"Whoops, almost bounced my shirt off.",
+		"Things a bit tight behind my top?"
+	],
+	"strugglePussy": [
+		"Yesss keep squirming around in there my little toy~"
+	],
+	"struggleCock": [
+		"Ahhh~ yesss I'm gonna get so hard~",
+		"Mmmm bet you love the feel of my meat throbbing all around you~",
+		"Careful~ I might end up cumming you back out!"
+	],
+	"struggleBalls": [
+		"Having a good time in there?",
+		"Keep squirming.",
+		"It feels so good having you in there~",
+		"Friends are stored in the balls~"
+	],
+	"struggleAss": "Missing: struggleAss <dialoguePath>",
+	"struggleAcidHeal": ":struggleHeal", // duplicated lines
 	"struggleHeal": [
 		"Now you're nice and safe.",
 		"Hope you like how it feels in there."
@@ -2777,6 +2658,14 @@
 		"With all that struggling, you must already be feeling better!",
 		"Don't panic. Inside my womb, you're being taking good care of."
 	],
+	"struggleCumHeal": ":struggleHeal", // duplicated lines
+	"struggleMilkHeal": [
+		"Now you're nice and safe.",
+		"Hope you like how it feels in there.",
+		"Just snuggle into the walls~",
+		"Get yourself nice and soaked in my milk~"
+	],
+	"strugglePlushHeal": ":struggleHeal", // duplicated lines
 	"struggleCompression": [
 		"I can feel you getting so neatly packed in there.",
 		"You're gonna find it hard to move as it gets sooo much tighter.",
@@ -2799,6 +2688,10 @@
 		"Heh, I can feel you sloshing around.",
 		"Seems like you're not quite solid anymore."
 	],
+	"struggleCumDigestBalls": [
+		"Soon you'll become a part of that cum you're splashing around in~.",
+		"You're getting harder to tell the difference between the cum sloshing around in my sack, and you~"
+	],
 	"struggleCumDigestImmune": [
 		"Huh, surprised you're still fighting. You're supposed to be cum by now...",
 		"You don't feel like you're getting softer in my shaft... What's going on?",
@@ -2818,11 +2711,14 @@
 		"Let all your worries just melt away~",
 		"Mmmmm, can't wait to taste whatever flavor you'll make~"
 	],
-	"struggleMilkDigestImmune": [
-		"You still struggling in there? Why aren't you adding to my breast?",
-		"You're supposed to be milk mush by now, you shouldn't be squirming around that much.",
-		"You're still kicking and not softening up? Are you lactose intolerant or something?" //blue here, wouldn't it be a nightmare to be in a boob full of milk and be lactose intolerant? or would it be a dream?
+	"struggleMilkDigestBreastsShirt": [
+		"Hey! careful! if you leak too much you might end up staining my top!"
 	],
+	"struggleMilkDigestImmune": [
+		"Hmm... doesn't seem like you're getting churned up."
+	],
+	"strugglePlushDigest": ":struggleAcidDigest", // duplicated lines
+	"strugglePlushDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
 	"struggleTransforming": {
 		"percentage": "transforming",
 		"pools": [
@@ -2853,13 +2749,10 @@
 		"Can you feel that egg forming around you?",
 		"Soon, you'll be entirely contained in an egg."
 	],
-	"struggleTailInfuse": "Missing: struggleTailInfuse",
-	"strugglePawInfuse": "Missing: strugglePawInfuse",
-	"struggleThighsInfuse": "Missing: struggleThighsInfuse",
-	"struggleBellyInfuse": "Missing: struggleBellyInfuse",
-	"struggleBreastInfuse": "Missing: struggleBreastInfuse",
-	"struggleCockInfuse": "Missing: struggleCockInfuse",
-	"strugglePussyInfuse": "Missing: strugglePussyInfuse",
+	"anyInfusedOccupant": [
+		"Just a part of my body~",
+		"Just a part of my body <infusedName>~" // very very placeholder
+	],
 	"thighsInfusedOccupant": "Missing: thighsInfusedOccupant <dialoguePath>",
 	"bellyInfusedOccupant": [
 		"Hehe, does my belly want something?",
@@ -2929,13 +2822,62 @@
 		"I can still feel you back there, <entityname>~",
 		"Looking good back there, <entityname>!"
 	],
+	"strugglingBelly": [
+		"Mmmm, pretty comfortable.",
+		"Ahh... Your belly is so soft..."
+	],
+	"strugglingWomb": [
+		"Ahh~ It's so soft in here~",
+		"Ohhh~ Your womb is so snug and soft~",
+		"This is so hot~"
+	],
+	"strugglingTail": [
+		"Your tail is so slimy on the inside!",
+		"Darn tail, swaying me around like you own me...",
+		"I'll wiggle til I'm free of this tail!"
+	],
+	"strugglingBreasts": [
+		"It's really soft in here...",
+		"Nice and warm, heh.",
+		"So bouncy...",
+		"I can hear your heartbeat..."
+	],
+	"strugglingBreastsShirt": [
+		"Goodness, it's tight...",
+		"It's very snug..."
+	],
+	"strugglingPussy": "Missing: strugglingPussy <dialoguePath>",
+	"strugglingCock": [
+		"Ahh~ Your cock is squeezing tight around me~",
+		"Ohhh~ Your shaft is squeezing so hard~",
+		"This is so hot~"
+	],
+	"strugglingBalls": [
+		"All this cum sloshing around me~",
+		"Ahhh... I'm stored in the balls~",
+		"Stuck down here in your balls~",
+		"This is so hot~"
+	],
+	"strugglingAss": "Missing: strugglingAss <dialoguePath>",
+	"strugglingAcidHeal": ":strugglingHeal", // duplicated lines
 	"strugglingHeal": [
 		"Ahh... It's so soothing.",
 		"I can feel all my troubles melting away...",
 		"It's so comfortable in here."
 	],
-	"strugglingFemcumHeal": "Missing: strugglingFemcumHeal",
-	"strugglingCompression": "Missing: strugglingCompression <dialoguePath>",
+	"strugglingFemcumHeal": ":strugglingHeal", // duplicated lines
+	"strugglingCumHeal": ":strugglingHeal", // duplicated lines
+	"strugglingMilkHeal": [
+		"Heh, a very good milk bath...",
+		"Ahh, feeling better now...",
+		"Comfy and soothing..."
+	],
+	"strugglingPlushHeal": ":strugglingHeal", // duplicated lines
+	"strugglingCompression": [
+		"Ahh.. it just keeps getting tighter in here!",
+		"Sooo... snug...",
+		"Getting hugged from all sides..."
+	],
 	"strugglingAcidDigest": [
 		"Ahh... I'm starting to melt.",
 		"Oh my... I'm just gonna be food."
@@ -2952,7 +2894,9 @@
 	"strugglingCumDigest": [
 		"It's so hot in here, I think I'm melting~",
 		"I might be starting to turn white~",
-		"I'm feeling goopy inside your shaft..."
+	],
+	"strugglingCumDigestBalls": [
+		"It won't be long until I'm just cum sloshing around in your nuts~"
 	],
 	"strugglingCumDigestImmune": [
 		"Mmm... this isn't strong enough to melt me!",
@@ -2969,8 +2913,20 @@
 		"Heh... not going to end up climaxing me out.",
 		"You won't be melting *me* down into a cumstain~"
 	],
-	"strugglingMilkDigest": "Missing: strugglingMilkDigest <dialoguePath>",
-	"strugglingMilkDigestImmune": "Missing: strugglingMilkDigestImmune <dialoguePath>",
+	"strugglingMilkDigest": [
+		"Huh, there's more milk in here... wait.  Oh.",
+		"Guess you want to know what I taste like?",
+		"Heh, me-flavored milk.",
+		"Making me into a fresh batch of milk?"
+	],
+	"strugglingMilkDigestBreastsShirt": [
+		"Careful, I'll stain your top..."
+	],
+	"strugglingMilkDigestImmune": [
+		"Huh, kinda squeezy..."
+	],
+	"strugglingPlushDigest": "Missing: strugglingPlushDigest <dialoguePath>",
+	"strugglingPlushDigestImmune": "Missing: strugglingPlushDigestImmune <dialoguePath>",
 	"strugglingTransforming": [
 		"It feels kinda weird in here?",
 		"It feels like... I'm changing?"
@@ -2978,19 +2934,29 @@
 	"strugglingDrainEnergy": [
 		"It's getting even harder to struggle...",
 		"I'm feeling... so drained...",
-		"I can't keep this up..."
+		"I can't keep this up...",
+		"I... I'm feeling so tired...",
+		"It's getting harder to move...",
+		"I'm losing the energy to struggle...",
+		"I can barely even squirm..."
 	],
 	"strugglingEggify": [
 		"Is... is this an egg?",
 		"Are you... putting me in an egg?"
 	],
-	"strugglingTailInfuse": "Missing: strugglingTailInfuse",
-	"strugglingPawInfuse": "Missing: strugglingPawInfuse",
-	"strugglingThighsInfuse": "Missing: strugglingThighsInfuse",
-	"strugglingBellyInfuse": "Missing: strugglingBellyInfuse",
-	"strugglingBreastInfuse": "Missing: strugglingBreastInfuse",
-	"strugglingCockInfuse": "Missing: strugglingCockInfuse",
-	"strugglingPussyInfuse": "Missing: strugglingPussyInfuse",
+	"anyInfused": [
+		"<slowlove>",
+		"<love>",
+		[
+			[
+				"^#ffffff7f;(Just a part of your body~)",
+				"^#ffffff7f;(Just a part of <entityname>'s body~)"
+			],
+			"<slowlove>^#ffffff7f;(I belong here, don't I...~)",
+			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
+			"<love>^#ffffff7f;(<keysmash>)"
+		]
+	],
 	"thighsInfused": "Missing: thighsInfused <dialoguePath>",
 	"bellyInfused": [
 		"<slowlove>",
@@ -3049,6 +3015,45 @@
 		"<slowlove>^#ffffff7f;(Back and forth. Back and forth. Just a tail now~)",
 		"<slowlove>^#ffffff7f;(I belong back here... just a part of <entityname>~)"
 	],
+	"climax": [
+		"Ahhh~! FUCK that felt good~!"
+	],
+	"climaxWomb": [
+		{
+			"dialogue": [
+				"Yes! YES! Don't stop kicking!",
+				"*Moans*~",
+				"Ahhh... That felt great..."
+			]
+		}
+	],
+	"climaxBreasts": [
+		{
+			"dialogue": [
+				"Ffff... I think I'm! AH!",
+				"*Moans*~",
+				"Ahhh... Oh... hehe... I might have sprayed some milk everywhere..."
+			]
+		}
+	],
+	"climaxCock": [
+		{
+			"dialogue": [
+				"Agh, I'm... I'm so hard! So close, I'm! ...I'm-",
+				"Gahhhh~",
+				"Ahhh... Finally came... That felt great~"
+			]
+		}
+	],
+	"climaxBalls": [
+		{
+			"dialogue": [
+				"So much cum sloshing around! So close, I'm! ...I'm-",
+				"Gahhhh~",
+				"Ahhh... Finally came... That felt great~"
+			]
+		}
+	],
 	"shrinking": [
 		"Why's everything getting bigger?",
 		"Ah! I'm shrinking!"
@@ -3097,907 +3102,232 @@
 	],
 	"vanilla": {},
 	// Unused Dialogue
-	"missingDialogue": "Missing Dialogue\n<dialoguePath>",
-	"struggleWomb": [
-		"Ooh, that feels good! Keep up with that moving.",
-		"My womb's a bit harder to get out of than you thought, huh?"
-	],
-	"struggleWombCompression": [
-		"Do you feel my womb tightening around you as you move around?",
-		"I don't think that struggling will stop you from getting compressed in my womb.",
-		"How long can you really keep resisting the ever-tightening space within my womb?"
-	],
-	"struggleWombEnergyDrain": [
-		"You must be getting tired with my womb sapping you of your energy, the more you move.",
-		"You would be better off resting in my womb, and let it slowly consume your energy.",
-		"You won't be able to move around much longer with my womb slowly draining your strength."
-	],
-	"struggleShaft": [
-		"Is being stuck in my shaft a little too lewd for you?",
-		"You're so squirmy in there! Be careful you don't squirm into my balls, or you might slip down deeper.",
-		"You're moving a lot in there. Are you embarrassed about being inside my shaft?"
-	],
-	"struggleCumHeal": [
-		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
-		"You don't have to move so much while I'm healing you, unless you want in my sack...",
-		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
-	],
-	"struggleShaftCompression": [
-		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
-		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
-		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
-	],
-	"struggleShaftEnergyDrain": [
-		"The more you fight, the more my shaft will drain your energy. I don't mind.",
-		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
-		"You know you're being drained of energy right? My rod always wins."
-	],
-	"struggleCumTransforming": [
-		"I can feel you getting goopy in there.",
-		"I can feel you starting to turn~"
-	],
-	"struggleCumTransformingImmune": [
-		"Hm... You don't seem to be getting any softer in there..."
-	],
-	"struggleShaftInfused": [
-		"Ahhh~ <infusedName> feels so great down there~",
-		"<keysmash>, you're gonna make <infusedName> cum~"
-	],
-	"struggleBalls": [
-		"Having a good time in there?",
-		"Keep squirming.",
-		"It feels so good having you in there~",
-		"Friends are stored in the balls~"
-	],
-	"struggleCumDigestBalls": [
-		"Soon you'll become a part of that cum you're splashing around.",
-		"Getting hot in my sack? I would hope so, it means you're melting nicely.",
-		"Feels like you're getting softer and weaker in my balls."
-	],
-	"struggleCumDigestImmuneBalls": [
-		"You're supposed to be melting into cum right now... not squirming like that.",
-		"I don't know how you are still kicking in my sack. You should be adding to my seed.",
-		"Shouldn't you be busy melting, and not struggling?"
-	],
-	"struggleBallsHeal": [
-		"My seed can mend wounds, so don't panic. You'll be fine, I swear!",
-		"Seems you're pretty healthy if you can wiggle like that!",
-		"Just relax and let my sticky sauna soothe you."
-	],
-	"struggleBallsCompression": [
-		"You're squirming pretty hard for someone in a tightening sack.",
-		"Better get out all that fight while you can, you won't be able to move much soon.",
-		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
-	],
-	"struggleBallsEnergyDrain": [
-		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
-		"You won't last long fighting like that. It's better to just rest and let your energy go.",
-		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
-	],
-	"struggleBreasts": [
-		"Having a good time in there?",
-		"Hope it's comfortable.",
-		"Give yourself a nice milk bath~",
-		"Feel free to take a drink, don't want to start leaking after all~",
-		"Hehe, look at how much bigger they are with you in there~"
-	],
-	"struggleMilkHeal": [
-		"Now you're nice and safe.",
-		"Hope you like how it feels in there.",
-		"Just snuggle into the walls~",
-		"Get yourself nice and soaked in my milk~"
-	],
-	"struggleBreastsShirt": [
-		"Careful, you're gonna cause me to have a wardrobe malfunction~",
-		"Whoops, almost bounced my shirt off.",
-		"Things a bit tight behind my top?"
-	],
-	"struggleLetoutTransforming": {
-		"percentage": "transforming",
-		"pools": [
-			[
-				"Didn't want to become something like me?",
-				"Didn't like the changes I was making?"
-			]
-		],
-		"full": [
-			":struggleLetoutTransformed"
-		]
-	},
-	"struggleLetoutTransformed": [
-		"Now you can see the new you.",
-		"You might look a bit different now."
-	],
-	"letoutTransformingImmune": [
-		"You don't look any different from how you went in, strange...",
-		"Did you have some kind of device to keep you from morphing?",
-		"Seems your body is rather hard to modify, tsk..."
-	],
-	"struggleLetoutEggify": [
-		"Don't want to be trapped in an egg?",
-		"You don't like eggs?"
-	],
-	"struggleLetoutEggifyImmune": [
-		"Fine then, it didn't seem like the shell was forming right anyway!",
-		"Bleh! Did you get out before being encased, or is it something else?",
-		"If only you where easier to put in an egg, maybe I could've had more fun with you."
-	],
-	"struggleLetoutCumTransforming": ":missingButNotNecessary",
-	"missingButNotNecessary": "",
-	"struggleLetoutCumTransformingImmune": ":missingButNotNecessary",
-	"letoutTransforming": ":missingButNotNecessary",
-	"letoutEggify": {
-		"percentage": "eggifying",
-		"pools": [
-			[
-				"Seems like I let you out a bit too early.",
-				"I was a bit too hasty. The egg didn't form."
-			]
-		],
-		"full": [
-			":LetoutEgged"
-		]
-	},
-	"LetoutEgged": ":missingButNotNecessary",
-	"letoutEggifyImmune": [
-		"Guess I just can't put you in an egg.",
-		"Seems like eggs don't work on you.",
-		"I'm giving up on sealing you in an egg."
-	],
-	"struggling": [
-		[
-			"I'm stuck here aren't I?",
-			"Is there even a way out?",
-			"Trapped..."
-		]
-	],
-	"strugglingSlime": [
-		"This slime is so sticky.",
-		"Stuck suspended in slime...",
-		"Suspended in sticky goo..."
-	],
-	"strugglingSlimeDigest": [
-		"Ahh... I'm starting to melt into slime.",
-		"Oh my... I'm dissolving.",
-		"I'm gonna be absorbed..."
-	],
-	"strugglingSlimeDigestImmune": [
-		[
-			"Heh, trying to melt me into more slime?",
-			"Heh, trying to melt me into more slime?\nThat's not gonna work."
-		],
-		"Sorry, I'm not soluble.",
-		"You're gonna have to try harder to absorb me."
-	],
-	"strugglingSlimeHeal": [
-		"This slime feels pretty nice.",
-		"Ahh... this is... oddly satisfying...",
-		"I wouldn't mind staying suspended in here..."
-	],
-	"strugglingEnergyDrain": [
-		"I... I'm feeling so tired...",
-		"It's getting harder to move...",
-		"I'm losing the energy to struggle...",
-		"I can barely even squirm..."
-	],
-	"strugglingSlimeTransforming": {
-		"percentage": "sbqTransformProgress",
-		"full": ":strugglingSlimeTransformed",
-		"pools": [
-			[
-				"Ahh... I'm being turned into slime...",
-				"It's like my limbs are turning into jelly..."
-			]
-		]
-	},
-	"strugglingSlimeTransformed": [
-		"I've been turned into a slime!",
-		"Oh my... I'm a slime now.",
-		"I'm just a blob of slime now..."
-	],
-	"strugglingBelly": [
-		"Mmmm, pretty comfortable.",
-		"Ahh... Your belly is so soft..."
-	],
-	"strugglingBellyNoisy": [
-		"Your belly is so noisy.",
-		"Mmm... I like the sounds your belly is making."
-	],
-	"strugglingBellyNoisyDigest": [
-		"Your belly is so noisy... I'm going to be gurgled up, aren't I?",
-		"All this grumbling... You must be pretty hungry."
-	],
-	"strugglingBellyNoisyHeal": [
-		"I really like the sounds your belly makes... Very calming.",
-		"I could just drift off to sleep listening to the sounds of your body..."
-	],
-	"strugglingBellyTransforming": [
-		"What's happening? I feel like I'm changing inside this gut!",
-		"The more I squirm in this belly, the less I feel like myself...",
-		"What are you doing to me inside your belly? I feel strange!"
-	],
-	"strugglingTransformingImmune": [
-		"I don't think whatever you're doing is affecting me.",
-		"Feels like you're trying to change me, but uh... that's not gonna happen.",
-		"Your body isn't going to morph mine like that, so let me out!"
-	],
-	"strugglingTail": [
-		"Your tail is so slimy on the inside!",
-		"Darn tail, swaying me around like you own me...",
-		"I'll wiggle til I'm free of this tail!"
-	],
-	"strugglingTailDigest": [
-		"I'm feeling... softer in this tail...",
-		"I don't know if I'll last much longer in this tail!",
-		"This tail is making me all mushy..."
-	],
-	"strugglingTailDigestImmune": [
-		"Your tail isn't strong enough to digest me.",
-		"I'm not going to get any softer in your tail.",
-		"You know your tail can't digest me, right?"
-	],
-	"strugglingTailHeal": [
-		"Weird, I'm feeling better inside your tail somehow...",
-		"I can really move thanks to your tail's healing power!",
-		"Being in your tail is so relaxing..."
-	],
-	"strugglingTailCompression": [
-		"Your tail is squeezing me real hard!",
-		"Is your tail trying to compact me? It's getting tight...",
-		"It's getting hard to move with the space in your tail shrinking..."
-	],
-	"strugglingTailEnergyDrain": [
-		"I'm having trouble squirming... Is your tail draining me?",
-		"I'm so tired in your tail suddenly... Can't keep struggling...",
-		"Why am I getting so exhausted, like my strength is leaving me?"
-	],
-	"strugglingTailTransforming": [
-		"I feel like I'm being morphed inside your tail!",
-		"My body feels strange, is your tail doing something to it?!",
-		"I'm feeling like I'm turning into something. What's your tail doing!?"
-	],
-	"strugglingTailEggify": [
-		"Is there a shell forming around me? What's your tail doing?!",
-		"I feel like I'm being encased in something inside your tail.",
-		"Wait, is there something surrounding me inside your tail?"
-	],
-	"strugglingWomb": [
-		"Ahh~ It's so soft in here~",
-		"Ohhh~ Your womb is so snug and soft~",
-		"This is so hot~"
-	],
-	"strugglingShaft": [
-		"Ahh~ Your cock is squeezing tight around me~",
-		"Ohhh~ Your shaft is squeezing so hard~",
-		"This is so hot~"
-	],
-	"strugglingShaftHeal": [
-		"Who would have thought your cock could heal so well.",
-		"Your shaft is rather soothing it seems. Weird.",
-		"Your cock is making my pain go away. It's so relaxing in here!"
-	],
-	"strugglingShaftCompression": [
-		"This shaft of yours is squeezing me really hard!",
-		"It's hard to move when your cock is putting so much pressure on me.",
-		"I feel like I'm getting compacted inside your dick!"
-	],
-	"strugglingShaftEnergyDrain": [
-		"I'm feeling more and more tired as I squirm in your dick.",
-		"Why do I feel so exhausted struggling inside your shaft?",
-		"It feels like your cock is taking my energy away..."
-	],
-	"strugglingShaftTransforming": [
-		"Is your cock changing my body!?",
-		"I'm starting to feel weird inside your shaft, like I'm not myself.",
-		"I think I'm turning into something within your shaft."
-	],
-	"strugglingShaftEggify": [
-		"Is there a shell forming around me inside your dick!?",
-		"There is some sort of shell forming around me. What's your cock doing??",
-		"Is your shaft getting harder... or is there something hardening around me?"
-	],
-	"strugglingBalls": [
-		"All this cum sloshing around me~",
-		"Ahhh... I'm stored in the balls~",
-		"Stuck down here in your balls~",
-		"This is so hot~"
-	],
-	"strugglingBallsDigest": [
-		"It's so hot in your nuts, I feel like I'm melting.",
-		"The seed in your balls is all over me. I think I'm melting into it.",
-		"I'm unsure how long I'll stay solid in your sack at this rate."
-	],
-	"strugglingBallsDigestImmune": [
-		"You know I'm not going to be adding to your spunk, right?",
-		"Despite the heat, I'm not going to melt in your balls.",
-		"I don't think your nuts can soften me up."
-	],
-	"strugglingBallsHeal": [
-		"Your healing seed is washing over me, I feel my pain going away!",
-		"Seems your balls make for a great therapeutic sauna and spa.",
-		"The soothing properties of your spunk is crazy. How novel."
-	],
-	"strugglingBallsCompression": [
-		"It feels as though your sack is shrinking. It's so tight in here.",
-		"I'm barely able to move with how your nuts are closing in on me.",
-		"Your orbs are tightening. There's so much pressure on me in here!"
-	],
-	"strugglingBallsEnergyDrain": [
-		"I feel so tired splashing around in your sack. What's going on?",
-		"Is your seed sapping my energy away? I feel fatigued...",
-		"The more I move in your orbs, the more exhausted I feel..."
-	],
-	"strugglingBallsCumTransforming": ":missingButNotNecessary",
-	"strugglingCumTransformingImmune": ":missingButNotNecessary",
-	"strugglingBallsEggify": [
-		"I think a shell is forming around me in your sack!",
-		"Is it me, or is there something surrounding me that's not your spunk?",
-		"I feel like some kind of shell is forming around me!"
-	],
-	"strugglingBreasts": [
-		"It's really soft in here...",
-		"Nice and warm, heh.",
-		"So bouncy...",
-		"I can hear your heartbeat..."
-	],
-	"strugglingBreastsDigest": [
-		"Huh, there's more milk in here... wait.  Oh.",
-		"Guess you want to know what I taste like?",
-		"Heh, me-flavored milk.",
-		"Making me into a fresh batch of milk?"
-	],
-	"strugglingBreastsDigestImmune": [
-		"Huh, kinda squeezy..."
-	],
-	"strugglingBreastsDigestShirt": [
-		"Careful, I'll stain your top..."
-	],
-	"strugglingBreastsHeal": [
-		"Heh, a very good milk bath...",
-		"Ahh, feeling better now...",
-		"Comfy and soothing..."
-	],
-	"strugglingBreastsCompression": [
-		"Your boob is squeezing on me hard, I can barely move!",
-		"I feel like I'm being compacted inside of your boob.",
-		"The walls are closing in. It's getting tight in your boob."
-	],
-	"strugglingBreastsEnergyDrain": [
-		"Does your milk make people drowsy? I'm feeling more and more tired...",
-		"I can't keep up this squirming... I feel like I'm getting drained in your boob.",
-		"I'm getting exhausted... Is your breast stealing my energy?"
-	],
-	"strugglingBreastsTransforming": [
-		"I feel weird, am I changing inside your boob?",
-		"Does your milk have transformation properties, by chance?",
-		"I don't feel quite like myself... Is your breast changing me?"
-	],
-	"strugglingBreastsShirt": [
-		"Goodness, it's tight...",
-		"It's very snug..."
-	],
-	"oralVoreUnpromptedWilling": [ //blue here, doing these as last, LAST lines
-		"Oh yeah! Eat me up like the snack I am!",
-		"Make me your lunch, you know you're hungry!",
-		"I can't wait to wiggle down your throat!"
-	],
-	"analVoreUnpromptedWilling": [
-		"Make me your butt plug!",
-		"Let me in that hot rear of yours!",
-		"It's so warm in here, I'm loving it!",
-		"Thanks, butt buddy! Your rear is so cozy."
-	],
-	"tailVoreUnpromptedWilling": [
-		"I can't wait to squirm down that tail you got!",
-		"I hope your tail can handle me inside it!",
-		"Such a great looking tail, I gotta get in!"
-	],
-	"navelVoreUnpromptedWilling": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
-		"Let me in that navel you got!",
-		"This is going to be a quick, yet awesome, trip from navel to belly!",
-		"I'm going to slip into that belly button of yours!"
-	],
-	"absorbVoreUnpromptedWilling": [
-		"Yeah! Surround me with your body!",
-		"Go ahead and engulf me with your form!",
-		"Just pull me into your body already!"
-	],
-	"cockVoreUnpromptedWilling": [
-		"I want in your shaft, like right now!",
-		"Shove me into your lewd meat stick!",
-		"Let me wiggle into that cock of yours!"
-	],
-	"unbirthVoreUnpromptedWilling": [
-		"I'm going right into your folds, right this second!",
-		"Spread those legs, because I'm getting in your womb!",
-		"I'll enjoy slipping behind those lewd lips!"
-	],
-	"breastVoreUnpromptedWilling": [
-		"Just let me in your rack already!",
-		"I can't wait to squirm into that nipple of yours!",
-		"I'm about to have a blast in your milk pool!"
-	],
-	"struggleEscapeTransforming": [
-		"If I didn't get out any sooner, I wouldn't be me!"
-	],
-	"struggleEscapeTransformingImmune": [
-		"I managed to get out, though I don't think anything was really happening to me."
-	],
-	"struggleEscapeEggify": [
-		"Hah! I got out before I was egged!"
-	],
-	"struggleEscapeEggifyImmune": [
-		"Looks like I'm free, though I wasn't worried since I resisted your egging."
-	],
-	"struggleOralVoreEscape": [
-		"Woo! I got you to spit me out."
-	],
-	"struggleOralVoreEscapeDigest": [
-		"Whew... I got you to spit me out before I was done for!"
-	],
-	"struggleOralVoreEscapeDigestImmune": [
-		"I got you to spit me out, though I wasn't really in any danger."
-	],
-	"struggleOralVoreEscapeSoftDigest": [
-		"Whew... I got you to spit me out before I was done for!"
-	],
-	"struggleOralVoreEscapeHeal": [
-		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
-	],
-	"struggleAnalVoreEscape": [
-		"I managed to wiggle out your butt!"
-	],
-	"struggleAnalVoreEscapeDigest": [
-		"Whew, I barely got out of your rear without adding to it!"
-	],
-	"struggleAnalVoreEscapeDigestImmune": [
-		"Looks like I managed to get out though your bottom, though I wasn't in any danger."
-	],
-	"struggleAnalVoreEscapeSoftDigest": [
-		"Whew, I barely got out of your rear without adding to it!"
-	],
-	"struggleAnalVoreEscapeHeal": [
-		"Who knew you could come out a butt so refreshed!"
-	],
-	"struggleTailVoreEscape": [
-		"Hah! I wiggled my way out your tail."
-	],
-	"struggleTailVoreEscapeDigest": [
-		"Whew, I got out of your tail before I became part of it."
-	],
-	"struggleTailVoreEscapeDigestImmune": [
-		"Looks like I escaped your tail, though I wasn't in danger inside it."
-	],
-	"struggleTailVoreEscapeSoftDigest": [
-		"Whew, I got out of your tail before I became part of it."
-	],
-	"struggleTailVoreEscapeHeal": [
-		"I squirmed out your tail and boy, do I feel great after that stay!"
-	],
-	"struggleNavelVoreEscape": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
-		"Yes! I got out through your navel."
-	],
-	"struggleNavelVoreEscapeDigest": [
-		"Whew! Good thing I took a shortcut though your navel. I almost was pudge!"
-	],
-	"struggleNavelVoreEscapeDigestImmune": [
-		"Seems I found my way out your navel, though I wasn't in much danger"
-	],
-	"struggleNavelVoreEscapeSoftDigest": [
-		"Whew! Good thing I took a shortcut though your navel, I almost was pudge!"
-	],
-	"struggleNavelVoreEscapeHeal": [
-		"I squirmed out your navel, and I feel so much better after my stay!"
-	],
-	"struggleAbsorbVoreEscape": [
-		"Wow, I managed to crawl out of your body!"
-	],
-	"struggleAbsorbVoreEscapeDigest": [
-		"Thank goodness I got out of your body. I was almost a part of it!"
-	],
-	"struggleAbsorbVoreEscapeDigestImmune": [
-		"Looks like I got out of your body, though I wasn't at any risk inside."
-	],
-	"struggleAbsorbVoreEscapeSoftDigest": [
-		"Thank goodness I got out of your body. I was almost a part of it!"
-	],
-	"struggleAbsorbVoreEscapeHeal": [
-		"I managed to get out of your soothing form and I feel great!"
-	],
-	"struggleCockVoreEscape": [
-		"Well, seems like I managed to squirm out of your cock!"
-	],
-	"struggleCockVoreEscapeDigest": [
-		"Whew, I wiggled out of your shaft before it melted me!"
-	],
-	"struggleCockVoreEscapeDigestImmune": [
-		"Looks like I got out your shaft, though it couldn't do any harm to me."
-	],
-	"struggleCockVoreEscapeSoftDigest": [
-		"Whew, I wiggled out of your shaft before it melted me!"
-	],
-	"struggleCockVoreEscapeHeal": [
-		"I squirmed out your cock and I feel really good after all that!"
-	],
-	"struggleEscapeCumTransforming": ":missingButNotNecessary",
-	"struggleEscapeCumTransformingImmune": ":missingButNotNecessary",
-	"struggleUnbirthVoreEscape": [
-		"Yes! I squirmed out of your womb."
-	],
-	"struggleUnbirthVoreEscapeDigest": [
-		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
-	],
-	"struggleUnbirthVoreEscapeDigestImmune": [
-		"Looks like I got out your womb, though I wasn't really in danger inside it."
-	],
-	"struggleUnbirthVoreEscapeSoftDigest": [
-		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
-	],
-	"struggleUnbirthVoreEscapeHeal": [
-		"I wiggled my way out your womb and I feel as good as new!"
-	],
-	"struggleBreastVoreEscape": [
-		"Yes! I squirmed out your boob!"
-	],
-	"struggleBreastVoreEscapeDigest": [
-		"Whew, I got out of your boob before I was added to its milk!"
-	],
-	"struggleBreastVoreEscapeDigestImmune": [
-		"Looks like I found my way out your boob, though I wasn't in danger inside it."
-	],
-	"struggleBreastVoreEscapeSoftDigest": [
-		"Whew, I got out of your boob before I was added to its milk!"
-	],
-	"struggleBreastVoreEscapeHeal": [
-		"Ah... I wiggled my way out your boob, and I feel so much better too!"
-	],
-	"escapeTransforming": [
-		"Thanks for letting me out. I was almost completely morphed!"
-	],
-	"escapeTransformingImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I can't be transformed."
-	],
-	"escapeEggify": [
-		"Thanks for letting me out. I was almost encased in an egg!"
-	],
-	"escapeEggifyImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
-	],
-	"oralVoreEscape": [
-		"Ah, freedom! Thanks for spitting me up."
-	],
-	"oralVoreEscapeDigest": [
-		"Thanks for spitting me up. I was going to be added to you!"
-	],
-	"oralVoreEscapeDigestImmune": [
-		"Thanks for spitting me up. Maybe you realized you can't digest me?"
-	],
-	"oralVoreEscapeSoftDigest": [
-		"Thanks for spitting me up. I was going to be added to you!"
-	],
-	"oralVoreEscapeHeal": [
-		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
-	],
-	"analVoreEscape": [
-		"W-wah! Thanks for squeezing me out your butt!"
-	],
-	"analVoreEscapeDigest": [
-		"W-wah! Thanks for releasing me out your rear before I was added to it!"
-	],
-	"analVoreEscapeDigestImmune": [
-		"Well, looks like you pushed me out your rear. Did you realize I can't be added to it?"
-	],
-	"analVoreEscapeSoftDigest": [
-		"W-wah! Thanks for releasing me out your rear before was I added to it!"
-	],
-	"analVoreEscapeHeal": [
-		"W-wah! I never felt so good after being squeezed out a butt!"
-	],
-	"tailVoreEscape": [
-		"Thanks for letting me out of your tail!"
-	],
-	"tailVoreEscapeDigest": [
-		"Whew! Thanks for getting me out of your tail before I was added to it!"
-	],
-	"tailVoreEscapeDigestImmune": [
-		"Well, seems you let me out of your tail. Did you figure out I can't be digested by it?"
-	],
-	"tailVoreEscapeSoftDigest": [
-		"Whew! Thanks for getting me out of your tail before was I added to it!"
-	],
-	"tailVoreEscapeHeal": [
-		"Thanks for letting me out out your tail. It was quite a soothing stay!"
-	],
-	"navelVoreEscape": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
-		"Thanks for pushing me out through your navel!"
-	],
-	"navelVoreEscapeDigest": [
-		"Whew! Thank goodness you pushed me out your navel, I was almost melted!"
-	],
-	"navelVoreEscapeDigestImmune": [
-		"Looks like you pushed me out your navel, though I wasn't in any real danger."
-	],
-	"navelVoreEscapeSoftDigest": [
-		"Whew! Thank goodness you pushed me out your navel, I was almost melted!"
-	],
-	"navelVoreEscapeHeal": [
-		"Ah, thanks for pushing me out though your navel. I feel like a million bucks!"
-	],
-	"absorbVoreEscape": [
-		"Thanks for letting me out of your form!"
-	],
-	"absorbVoreEscapeDigest": [
-		"Whew, thanks for pushing me out of your form, I was almost added to it!"
-	],
-	"absorbVoreEscapeDigestImmune": [
-		"Seems you let me out of your form. Did you realize it can't digest me?"
-	],
-	"absorbVoreEscapeSoftDigest": [
-		"Whew, thanks for pushing me out of your form, I was almost added to it!"
-	],
-	"absorbVoreEscapeHeal": [
-		"Ah, thanks for letting me out of your form. Your body surrounded and soothed every part of mine."
-	],
-	"cockVoreEscape": [
-		"Thanks for squeezing me out your shaft!"
-	],
-	"cockVoreEscapeDigest": [
-		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
-	],
-	"cockVoreEscapeDigestImmune": [
-		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
-	],
-	"cockVoreEscapeSoftDigest": [
-		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
-	],
-	"cockVoreEscapeHeal": [
-		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
-	],
-	"escapeCumTransforming": ":missingButNotNecessary",
-	"escapeCumTransformingImmune": ":missingButNotNecessary",
-	"unbirthVoreEscape": [
-		"Thanks for squeezing me out of your womb!"
-	],
-	"unbirthVoreEscapeDigest": [
-		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
-	],
-	"unbirthVoreEscapeDigestImmune": [
-		"Looks like you freed me from your womb. Guess you realized I won't melt in it?"
-	],
-	"unbirthVoreEscapeSoftDigest": [
-		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
-	],
-	"unbirthVoreEscapeHeal": [
-		"Ah, thanks for squeezing me out your womb. Your rejuvenating chamber has left me feeling amazing!"
-	],
-	"breastVoreEscape": [
-		"Thanks for pushing me out your boob!"
-	],
-	"breastVoreEscapeDigest": [
-		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
-	],
-	"breastVoreEscapeDigestImmune": [
-		"Looks like you pushed me out your boob, though I was in no danger from turning into milk."
-	],
-	"breastVoreEscapeSoftDigest": [
-		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
-	],
-	"breastVoreEscapeHeal": [
-		"Ah, thanks for pushing me out your boob. That soothing milk bath has made me feel stronger!"
-	],
-	"ballsInfuseRequested": [
-		"Oh, so you want to be my balls~?",
-		"You want to be swinging around between my legs~?"
-	],
-	"ballsInfuseRequestedAfter": [
-		"Hehe, there you go, hanging down from my crotch~ Right where you belong~",
-		"Usually friends are stored IN the balls... but I like this arrangement too~"
-	],
-	"ballsInfuseNoPrompt": [
-		"Hmmm~ I think you'd make a nice pair of balls~"
-	],
-	"ballsInfuseNoPromptAfter": [
-		"Perfect, you feel perfect hanging around down there~"
-	],
-	"infused": [
-		"<slowlove>",
-		"<love>",
-		[
-			[
-				"^#ffffff7f;(Just a part of your body~)",
-				"^#ffffff7f;(Just a part of <entityname>'s body~)"
-			],
-			"<slowlove>^#ffffff7f;(I belong here, don't I...~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
-		]
-	],
-	"bellyNoisyInfused": [
-		[
-			"^#ffffff7f;(Just a grumbling belly~)",
-			"^#ffffff7f;(Just your grumbling belly~)",
-			"^#ffffff7f;(Just <entityname>'s grumbling belly~)",
-			"^#ffffff7f;(Just a noisy belly~)",
-			"^#ffffff7f;(Just your noisy belly~)",
-			"^#ffffff7f;(Just <entityname>'s noisy belly~)"
-		]
-	],
-	"ballsInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here, don't I...~)",
-			"<slowlove>^#ffffff7f;(I'm just your balls~)",
-			"<slowlove>^#ffffff7f;(Ahh~ so full of cum sloshing around~)",
-			"<slowlove>^#ffffff7f;(I'm just <entityname>'s balls~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
-		]
-	],
-	"teaseInfused": [
-		"Just a part of my body~",
-		"Just a part of my body <infusedName>~" // very very placeholder
-	],
-	"bellyNoisyInfusedOccupant": [
-		"Hehe, grumbling <infusedName>?",
-		"Does my noisy belly want something~?"
-	],
-	"breastsSizeInfusedOccupant": [
-		[
-			"<love>I love how much bigger you make my boobs~",
-			"<love>I love how much bigger you make my boobs <infusedName>~"
-		],
-		[
-			"<love>You're better as extra size for me~",
-			"<love>You're better as extra size for me <infusedName>~"
-		]
-	],
-	"shaftSizeInfusedOccupant": [
-		[
-			"<love>I love how much bigger you make my cock~",
-			"<love>I love how much bigger you make my cock <infusedName>~"
-		],
-		[
-			"<love>You're better as extra size for me~",
-			"<love>You're better as extra size for me <infusedName>~"
-		]
-	],
-	"ballsInfusedOccupant": [
-		[
-			"<love>Heh, I can feel you twitching down there~",
-			"<love>Heh, I can feel you twitching down there <infusedName>~"
-		],
-		[
-			"<love>Are you enjoying your new purpose?~",
-			"<love>Are you enjoying your new purpose <infusedName>?~"
-		],
-		[
-			"<love>Mmm, all that cum sloshing around down there~",
-			"<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"
-		],
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <infusedName>"
-		]
-	],
-	"ballsSizeInfusedOccupant": [
-		[
-			"<love>I love how much bigger you make my balls~",
-			"<love>I love how much bigger you make my balls <infusedName>~"
-		],
-		[
-			"<love>You're better as extra size for me~",
-			"<love>You're better as extra size for me <infusedName>~"
-		]
-	],
-	"climax": [
-		"Ahhh~! FUCK that felt good~!"
-	],
-	"climaxWomb": [
-		{
-			"dialogue": [
-				"Yes! YES! Don't stop kicking!",
-				"*Moans*~",
-				"Ahhh... That felt great..."
-			]
-		}
-	],
-	"climaxBreasts": [
-		{
-			"dialogue": [
-				"Ffff... I think I'm! AH!",
-				"*Moans*~",
-				"Ahhh... Oh... hehe... I might have sprayed some milk everywhere..."
-			]
-		}
-	],
-	"climaxShaft": [
-		{
-			"dialogue": [
-				"Agh, I'm... I'm so hard! So close, I'm! ...I'm-",
-				"Gahhhh~",
-				"Ahhh... Finally came... That felt great~"
-			]
-		}
-	],
-	"climaxBalls": [
-		{
-			"dialogue": [
-				"So much cum sloshing around! So close, I'm! ...I'm-",
-				"Gahhhh~",
-				"Ahhh... Finally came... That felt great~"
-			]
-		}
-	],
-	"strugglingBallsTransforming": [
-		"It feels kinda weird in here?",
-		"I think... I think I'm turning white?",
-		"I think... I'm starting to feel goopy?"
-	],
-	"tailInfusePromptAfter": [
+	"oralVoreForcingAfter": "Missing: oralVoreForcingAfter",
+	"tailVoreForcingAfter": "Missing: tailVoreForcingAfter",
+	"absorbVoreForcingAfter": "Missing: absorbVoreForcingAfter",
+	"navelVoreForcingAfter": "Missing: navelVoreForcingAfter",
+	"analVoreForcingAfter": "Missing: analVoreForcingAfter",
+	"unbirthVoreForcingAfter": "Missing: unbirthVoreForcingAfter",
+	"breastVoreForcingAfter": "Missing: breastVoreForcingAfter",
+	"cockVoreForcingAfter": "Missing: cockVoreForcingAfter",
+	"thighsInfuseForcing": "Missing: thighsInfuseForcing",
+	"thighsInfuseForcingAfter": "Missing: thighsInfuseForcingAfter",
+	"bellyInfuseForcing": "Missing: bellyInfuseForcing",
+	"bellyInfuseForcingAfter": "Missing: bellyInfuseForcingAfter",
+	"breastInfuseForcing": "Missing: breastInfuseForcing",
+	"breastInfuseForcingAfter": "Missing: breastInfuseForcingAfter",
+	"pussyInfuseForcing": "Missing: pussyInfuseForcing",
+	"pussyInfuseForcingAfter": "Missing: pussyInfuseForcingAfter",
+	"cockInfuseForcing": "Missing: cockInfuseForcing",
+	"cockInfuseForcingAfter": "Missing: cockInfuseForcingAfter",
+	"pawInfuseForcing": "Missing: pawInfuseForcing",
+	"pawInfuseForcingAfter": "Missing: pawInfuseForcingAfter",
+	"tailInfuseForcing": "Missing: tailInfuseForcing",
+	"tailInfuseForcingAfter": "Missing: tailInfuseForcingAfter",
+	"oralVoreUnpromptedAfter": "Missing: oralVoreUnpromptedAfter",
+	"tailVoreUnpromptedAfter": "Missing: tailVoreUnpromptedAfter",
+	"absorbVoreUnpromptedAfter": "Missing: absorbVoreUnpromptedAfter",
+	"navelVoreUnpromptedAfter": "Missing: navelVoreUnpromptedAfter",
+	"analVoreUnpromptedAfter": "Missing: analVoreUnpromptedAfter",
+	"unbirthVoreUnpromptedAfter": "Missing: unbirthVoreUnpromptedAfter",
+	"breastVoreUnpromptedAfter": "Missing: breastVoreUnpromptedAfter",
+	"cockVoreUnpromptedAfter": "Missing: cockVoreUnpromptedAfter",
+	"thighsInfuseUnprompted": "Missing: thighsInfuseUnprompted",
+	"thighsInfuseUnpromptedAfter": "Missing: thighsInfuseUnpromptedAfter",
+	"bellyInfuseUnprompted": "Missing: bellyInfuseUnprompted",
+	"bellyInfuseUnpromptedAfter": "Missing: bellyInfuseUnpromptedAfter",
+	"breastInfuseUnprompted": "Missing: breastInfuseUnprompted",
+	"breastInfuseUnpromptedAfter": "Missing: breastInfuseUnpromptedAfter",
+	"pussyInfuseUnprompted": "Missing: pussyInfuseUnprompted",
+	"pussyInfuseUnpromptedAfter": "Missing: pussyInfuseUnpromptedAfter",
+	"cockInfuseUnprompted": "Missing: cockInfuseUnprompted",
+	"cockInfuseUnpromptedAfter": "Missing: cockInfuseUnpromptedAfter",
+	"pawInfuseUnprompted": "Missing: pawInfuseUnprompted",
+	"pawInfuseUnpromptedAfter": "Missing: pawInfuseUnpromptedAfter",
+	"tailInfuseUnprompted": "Missing: tailInfuseUnprompted",
+	"tailInfuseUnpromptedAfter": "Missing: tailInfuseUnpromptedAfter",
+	"oralVoreForcedAfter": "Missing: oralVoreForcedAfter",
+	"tailVoreForcedAfter": "Missing: tailVoreForcedAfter",
+	"absorbVoreForcedAfter": "Missing: absorbVoreForcedAfter",
+	"navelVoreForcedAfter": "Missing: navelVoreForcedAfter",
+	"analVoreForcedAfter": "Missing: analVoreForcedAfter",
+	"unbirthVoreForcedAfter": "Missing: unbirthVoreForcedAfter",
+	"breastVoreForcedAfter": "Missing: breastVoreForcedAfter",
+	"cockVoreForcedAfter": "Missing: cockVoreForcedAfter",
+	"thighsInfuseForced": "Missing: thighsInfuseForced",
+	"thighsInfuseForcedAfter": "Missing: thighsInfuseForcedAfter",
+	"bellyInfuseForced": "Missing: bellyInfuseForced",
+	"bellyInfuseForcedAfter": "Missing: bellyInfuseForcedAfter",
+	"breastInfuseForced": "Missing: breastInfuseForced",
+	"breastInfuseForcedAfter": "Missing: breastInfuseForcedAfter",
+	"pussyInfuseForced": "Missing: pussyInfuseForced",
+	"pussyInfuseForcedAfter": "Missing: pussyInfuseForcedAfter",
+	"cockInfuseForced": "Missing: cockInfuseForced",
+	"cockInfuseForcedAfter": "Missing: cockInfuseForcedAfter",
+	"pawInfuseForced": "Missing: pawInfuseForced",
+	"pawInfuseForcedAfter": "Missing: pawInfuseForcedAfter",
+	"tailInfuseForced": "Missing: tailInfuseForced",
+	"tailInfuseForcedAfter": "Missing: tailInfuseForcedAfter",
+	"pawInfuseNoPrompt": "Missing: pawInfuseNoPrompt",
+	"pawInfuseNoPromptAfter": "Missing: pawInfuseNoPromptAfter",
+	"struggleTailInfuse": "Missing: struggleTailInfuse",
+	"strugglePawInfuse": "Missing: strugglePawInfuse",
+	"struggleThighsInfuse": "Missing: struggleThighsInfuse",
+	"struggleBellyInfuse": "Missing: struggleBellyInfuse",
+	"struggleBreastInfuse": "Missing: struggleBreastInfuse",
+	"struggleCockInfuse": "Missing: struggleCockInfuse",
+	"strugglePussyInfuse": "Missing: strugglePussyInfuse",
+	"strugglingTailInfuse": "Missing: strugglingTailInfuse",
+	"strugglingPawInfuse": "Missing: strugglingPawInfuse",
+	"strugglingThighsInfuse": "Missing: strugglingThighsInfuse",
+	"strugglingBellyInfuse": "Missing: strugglingBellyInfuse",
+	"strugglingBreastInfuse": "Missing: strugglingBreastInfuse",
+	"strugglingCockInfuse": "Missing: strugglingCockInfuse",
+	"strugglingPussyInfuse": "Missing: strugglingPussyInfuse",
+	"bellyInfusePrompt": "Missing: bellyInfusePrompt",
+	"bellyInfusePromptYes": "Missing: bellyInfusePromptYes",
+	"bellyInfusePromptYesAfter": "Missing: bellyInfusePromptYesAfter",
+	"bellyInfusePromptNo": ":defaultNo", // duplicated lines
+	"bellyInfusePromptNoYes": "Missing: bellyInfusePromptNoYes",
+	"bellyInfusePromptNoYesAfter": "Missing: bellyInfusePromptNoYesAfter",
+	"breastInfusePrompt": "Missing: breastInfusePrompt",
+	"breastInfusePromptYes": "Missing: breastInfusePromptYes",
+	"breastInfusePromptYesAfter": "Missing: breastInfusePromptYesAfter",
+	"breastInfusePromptNo": ":defaultNo", // duplicated lines
+	"breastInfusePromptNoYes": "Missing: breastInfusePromptNoYes",
+	"breastInfusePromptNoYesAfter": "Missing: breastInfusePromptNoYesAfter",
+	"pussyInfusePrompt": "Missing: pussyInfusePrompt",
+	"pussyInfusePromptYes": "Missing: pussyInfusePromptYes",
+	"pussyInfusePromptYesAfter": "Missing: pussyInfusePromptYesAfter",
+	"pussyInfusePromptNo": ":defaultNo", // duplicated lines
+	"pussyInfusePromptNoYes": "Missing: pussyInfusePromptNoYes",
+	"pussyInfusePromptNoYesAfter": "Missing: pussyInfusePromptNoYesAfter",
+	"cockInfusePrompt": "Missing: cockInfusePrompt",
+	"cockInfusePromptYes": "Missing: cockInfusePromptYes",
+	"cockInfusePromptYesAfter": "Missing: cockInfusePromptYesAfter",
+	"cockInfusePromptNo": ":defaultNo", // duplicated lines
+	"cockInfusePromptNoYes": "Missing: cockInfusePromptNoYes",
+	"cockInfusePromptNoYesAfter": "Missing: cockInfusePromptNoYesAfter",
+	"thighsInfuseRequested": "Missing: thighsInfuseRequested",
+	"thighsInfuseRequestedAfter": "Missing: thighsInfuseRequestedAfter",
+	"thighsInfuseInvalid": "There must be an error, thighsInfuse is invalid",
+	"thighsInfuseNo": ":defaultNo", // duplicated lines
+	"thighsInfuseTooBig": ":tooBig", // duplicated lines
+	"thighsInfuseTooSmall": ":tooSmall", // duplicated lines
+	"thighsInfuseNoSlots": ":noSlots", // duplicated lines
+	"thighsInfuseFull": ":infuseFull", // duplicated lines
+	"thighsInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"thighsInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"thighsInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"pawInfuseRequested": "Missing: pawInfuseRequested",
+	"pawInfuseRequestedAfter": "Missing: pawInfuseRequestedAfter",
+	"pawInfuseInvalid": "There must be an error, pawInfuse is invalid",
+	"pawInfuseNo": ":defaultNo", // duplicated lines
+	"pawInfuseTooBig": ":tooBig", // duplicated lines
+	"pawInfuseTooSmall": ":tooSmall", // duplicated lines
+	"pawInfuseNoSlots": ":noSlots", // duplicated lines
+	"pawInfuseFull": ":infuseFull", // duplicated lines
+	"pawInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"pawInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"pawInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"tailInfuseRequested": [
+		"Looking to be a part of my tail, huh? Can't say I blame you!",
+		"You're gonna make a nice bit of extra length!",
+		"I knew you were staring at my tail for a reason!"
+	],
+	"tailInfuseRequestedAfter": [
+		"Looking good back there, <entityname>!",
+		"All a part of me, now!"
+	],
+	"tailInfuseInvalid": "There must be an error, tailInfuse is invalid",
+	"tailInfuseNo": ":defaultNo", // duplicated lines
+	"tailInfuseTooBig": ":tooBig", // duplicated lines
+	"tailInfuseTooSmall": ":tooSmall", // duplicated lines
+	"tailInfuseNoSlots": ":noSlots", // duplicated lines
+	"tailInfuseFull": ":infuseFull", // duplicated lines
+	"tailInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"tailInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"tailInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"thighsInfusePrompt": "Missing: thighsInfusePrompt",
+	"thighsInfusePromptYes": "Missing: thighsInfusePromptYes",
+	"thighsInfusePromptYesAfter": "Missing: thighsInfusePromptYesAfter",
+	"thighsInfusePromptNo": ":defaultNo", // duplicated lines
+	"thighsInfusePromptNoYes": "Missing: thighsInfusePromptNoYes",
+	"thighsInfusePromptNoYesAfter": "Missing: thighsInfusePromptNoYesAfter",
+	"pawInfusePrompt": "Missing: pawInfusePrompt",
+	"pawInfusePromptYes": "Missing: pawInfusePromptYes",
+	"pawInfusePromptYesAfter": "Missing: pawInfusePromptYesAfter",
+	"pawInfusePromptNo": ":defaultNo", // duplicated lines
+	"pawInfusePromptNoYes": "Missing: pawInfusePromptNoYes",
+	"pawInfusePromptNoYesAfter": "Missing: pawInfusePromptNoYesAfter",
+	"tailInfusePrompt": "Missing: tailInfusePrompt",
+	"tailInfusePromptYes": "Missing: tailInfusePromptYes",
+	"tailInfusePromptYesAfter": [
 		"Looking good back there, <entityname>!",
 		"All a part of me, now! Hope you enjoy the stay!",
 		"Got you all to myself, now!"
 	],
-	"struggleEgged": [
-		"Now you're trapped in an egg"
-	],
-	"struggleLetoutEgged": [
-		"Hah, egg"
-	],
-	"oralVoreLetoutRequestedTransforming": [
-		"Maybe I shouldn't change you.",
-		"Maybe I should stop this."
-	],
-	"oralVoreLetoutRequestedTransformingImmune": [
-		"Seems like I can't change you.",
-		"For some reason this isn't working..."
-	],
-	"oralVoreLetoutRequestedEgged": [
-		"Mmm time to get this egg out."
-	],
-	"unbirthVoreLetoutRequestedEgged": [
-		"Well, time to lay an egg."
-	],
-	"unbirthVoreLetoutFlrityEgged": [
-		"Well, time to lay an egg~",
-		"Hehe I love popping eggs out~"
-	],
-	"cockVoreLetoutForcedTransformed": [
-		"Heh, now you're a blob of cum~",
-		"Ahhh~ I came~"
-	],
-	"cockVoreLetoutForcedTransforming": [
-		"If only you stayed a bit longer...",
-		"Ahh~ you didn't stay in long enough.",
-		"Maybe you should stay in a little longer."
-	],
-	"cockVoreLetoutForcedTransformingImmune": [
-		"Hmmm why aren't you turning?",
-		"Come on, don't you want to see what happens?"
-	],
-	"cockVoreLetoutRequestedTransforming": [
-		"Ffff... came too early...",
-		"C-couldn't hold back long enough..."
-	],
-	"cockVoreLetoutRequestedTransfomringImmune": [
-		"Ffffff... shouldn't you have turned...?",
-		"Ahhh~ oh... you didn't turn..."
-	],
-	"vored": [
-		"Ah!"
-	],
-	"struggleEscape": [
-		"I got out."
-	],
-	"escape": [
-		"Ah, back outside"
-	],
-	"bellyHungryInfused": [
-		[
-			"<slowlove>^#ffffff7f;(Feeed meee~)",
-			"^#ffffff7f;(Hungry...)"
-		]
-	]
+	"tailInfusePromptNo": ":defaultNo", // duplicated lines
+	"tailInfusePromptNoYes": "Missing: tailInfusePromptNoYes",
+	"tailInfusePromptNoYesAfter": "Missing: tailInfusePromptNoYesAfter",
+	"thighsInfuseNoPrompt": "Missing: thighsInfuseNoPrompt",
+	"thighsInfuseNoPromptAfter": "Missing: thighsInfuseNoPromptAfter",
+	"thighsInfuseRequesting": "Missing: thighsInfuseRequesting",
+	"thighsInfuseRequestingYes": "Missing: thighsInfuseRequestingYes",
+	"thighsInfuseRequestingYesAfter": "Missing: thighsInfuseRequestingYesAfter",
+	"thighsInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"thighsInfuseRequestingNoYes": "Missing: thighsInfuseRequestingNoYes",
+	"thighsInfuseRequestingNoYesAfter": "Missing: thighsInfuseRequestingNoYesAfter",
+	"bellyInfuseRequesting": "Missing: bellyInfuseRequesting",
+	"bellyInfuseRequestingYes": "Missing: bellyInfuseRequestingYes",
+	"bellyInfuseRequestingYesAfter": "Missing: bellyInfuseRequestingYesAfter",
+	"bellyInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"bellyInfuseRequestingNoYes": "Missing: bellyInfuseRequestingNoYes",
+	"bellyInfuseRequestingNoYesAfter": "Missing: bellyInfuseRequestingNoYesAfter",
+	"breastInfuseRequesting": "Missing: breastInfuseRequesting",
+	"breastInfuseRequestingYes": "Missing: breastInfuseRequestingYes",
+	"breastInfuseRequestingYesAfter": "Missing: breastInfuseRequestingYesAfter",
+	"breastInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"breastInfuseRequestingNoYes": "Missing: breastInfuseRequestingNoYes",
+	"breastInfuseRequestingNoYesAfter": "Missing: breastInfuseRequestingNoYesAfter",
+	"pussyInfuseRequesting": "Missing: pussyInfuseRequesting",
+	"pussyInfuseRequestingYes": "Missing: pussyInfuseRequestingYes",
+	"pussyInfuseRequestingYesAfter": "Missing: pussyInfuseRequestingYesAfter",
+	"pussyInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"pussyInfuseRequestingNoYes": "Missing: pussyInfuseRequestingNoYes",
+	"pussyInfuseRequestingNoYesAfter": "Missing: pussyInfuseRequestingNoYesAfter",
+	"cockInfuseRequesting": "Missing: cockInfuseRequesting",
+	"cockInfuseRequestingYes": "Missing: cockInfuseRequestingYes",
+	"cockInfuseRequestingYesAfter": "Missing: cockInfuseRequestingYesAfter",
+	"cockInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"cockInfuseRequestingNoYes": "Missing: cockInfuseRequestingNoYes",
+	"cockInfuseRequestingNoYesAfter": "Missing: cockInfuseRequestingNoYesAfter",
+	"pawInfuseRequesting": "Missing: pawInfuseRequesting",
+	"pawInfuseRequestingYes": "Missing: pawInfuseRequestingYes",
+	"pawInfuseRequestingYesAfter": "Missing: pawInfuseRequestingYesAfter",
+	"pawInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"pawInfuseRequestingNoYes": "Missing: pawInfuseRequestingNoYes",
+	"pawInfuseRequestingNoYesAfter": "Missing: pawInfuseRequestingNoYesAfter",
+	"tailInfuseRequesting": "Missing: tailInfuseRequesting",
+	"tailInfuseRequestingYes": "Missing: tailInfuseRequestingYes",
+	"tailInfuseRequestingYesAfter": "Missing: tailInfuseRequestingYesAfter",
+	"tailInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"tailInfuseRequestingNoYes": "Missing: tailInfuseRequestingNoYes",
+	"tailInfuseRequestingNoYesAfter": "Missing: tailInfuseRequestingNoYesAfter",
+	"cockVoreRequestingYesAfter": "Missing: cockVoreRequestingYesAfter",
+	"cockVoreRequestingNoYesAfter": "Missing: cockVoreRequestingNoYesAfter",
+	"oralVoreRequestingYesAfter": "Missing: oralVoreRequestingYesAfter",
+	"oralVoreRequestingNoYesAfter": "Missing: oralVoreRequestingNoYesAfter",
+	"tailVoreRequestingYesAfter": "Missing: tailVoreRequestingYesAfter",
+	"tailVoreRequestingNoYesAfter": "Missing: tailVoreRequestingNoYesAfter",
+	"absorbVoreRequestingYesAfter": "Missing: absorbVoreRequestingYesAfter",
+	"absorbVoreRequestingNoYesAfter": "Missing: absorbVoreRequestingNoYesAfter",
+	"navelVoreRequestingYesAfter": "Missing: navelVoreRequestingYesAfter",
+	"navelVoreRequestingNoYesAfter": "Missing: navelVoreRequestingNoYesAfter",
+	"analVoreRequestingYesAfter": "Missing: analVoreRequestingYesAfter",
+	"analVoreRequestingNoYesAfter": "Missing: analVoreRequestingNoYesAfter",
+	"unbirthVoreRequestingYesAfter": "Missing: unbirthVoreRequestingYesAfter",
+	"unbirthVoreRequestingNoYesAfter": "Missing: unbirthVoreRequestingNoYesAfter",
+	"breastVoreRequestingYesAfter": "Missing: breastVoreRequestingYesAfter",
+	"breastVoreRequestingNoYesAfter": "Missing: breastVoreRequestingNoYesAfter"
 }

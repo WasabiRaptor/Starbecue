@@ -372,7 +372,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -386,12 +386,10 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
-				},
-				"cock" : ".shaft",
-				"shaft" : {
+				},				"cock" : {
 					"replace" : {
 						"dialogueRandom" : [":struggleShaft"]
 					},
@@ -399,7 +397,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming",
 						"locationInfused"
@@ -414,7 +412,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleShaftHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleShaftCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleShaftEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleShaftDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":struggleCumTransforming"]},
 						"addQueued" : true,
@@ -443,7 +441,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -457,7 +455,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleBallsHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleBallsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleBallsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleBallsDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				}
@@ -692,9 +690,7 @@
 			// lines for when an NPC infuses someone (CTF, Boobsorb, etc.)
 			"infusePrey" : {
 				"new" : {"dismissTime" : 2},
-				"next" : "location",
-				"cock" : ".shaft",
-				"shaft" : {
+				"next" : "location",				"cock" : {
 					"next" : "voreResponse",
 					"request" : {
 						"next" : "doingVore",
@@ -772,9 +768,7 @@
 					"dialogueRandom":[":teaseInfused"],
 					"hideVoreButtons" : true
 				},
-				"next" : "location",
-				"cock":".shaft",
-				"shaft" : {"replace" :{"dialogueRandom" : [":cockInfusedOccupant"]}},
+				"next" : "location",				"cock" : {"replace" :{"dialogueRandom" : [":cockInfusedOccupant"]}},
 				"ballsL":".balls",
 				"ballsR":".balls",
 				"balls" : {"replace" :{"dialogueRandom" : [":ballsInfusedOccupant"]}}
@@ -790,9 +784,7 @@
 				"next" : "location",
 				"pussy":".womb",
 				"womb" : {"replace" :{"dialogueRandom" : [":climaxWomb"]}},
-				"breasts" : {"replace" :{"dialogueRandom" : [":climaxBreasts"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"dialogueRandom" : [":climaxShaft"]}},
+				"breasts" : {"replace" :{"dialogueRandom" : [":climaxBreasts"]}},				"cock" : {"replace" :{"dialogueRandom" : [":climaxShaft"]}},
 				"ballsL":".balls",
 				"ballsR":".balls",
 				"balls" : {"replace" :{"dialogueRandom" : [":climaxBalls"]}}
@@ -1007,7 +999,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583

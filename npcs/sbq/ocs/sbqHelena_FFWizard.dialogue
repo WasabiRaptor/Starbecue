@@ -1254,7 +1254,7 @@
 				"Oh my, I thought you'd *never* ask~"
 			],
 			{
-				"slotInfused": true,
+				"infuseType": true,
 				"sbqLoki_LokiVulpix": [
 					[
 						"Heads up, my dear secret. You've got a fun surprise incoming~",
@@ -1278,7 +1278,7 @@
 				"Make sure to play nice, you two~"
 			],
 			{
-				"slotInfused": true,
+				"infuseType": true,
 				"sbqLoki_LokiVulpix": [
 					[
 						"Ah, that burst of horny energy is perfect~",
@@ -1302,7 +1302,7 @@
 				"Time to introduce you to a hot dog's hot dog~"
 			],
 			{
-				"slotInfused": true,
+				"infuseType": true,
 				"sbqLoki_LokiVulpix": [
 					[
 						"Getting a good feel for this one, hm~?",
@@ -1326,7 +1326,7 @@
 				"Aaaah, so good~"
 			],
 			{
-				"slotInfused": true,
+				"infuseType": true,
 				"sbqLoki_LokiVulpix": [
 					[
 						"Heh, it was really her idea, not mine~",
@@ -2656,24 +2656,24 @@
 			"Tired.png"
 		]
 	},
-	"struggleShaft": [
+	"struggleCock": [
 		"Is being stuck in my shaft a little too lewd for you?",
 		"You're so squirmy in there! Be careful you don't squirm into my balls, or you might slip down deeper.",
 		"You're moving a lot in there. Are you embarrassed about being inside my shaft?"
 	],
-	"struggleShaftSoftDigest": ":missingDialogue",
-	"struggleShaftDigestImmune": ":missingDialogue",
-	"struggleShaftHeal": [
+	"struggleCockSoftDigest": ":missingDialogue",
+	"struggleCockDigestImmune": ":missingDialogue",
+	"struggleCockHeal": [
 		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
 		"You don't have to move so much while I'm healing you, unless you want in my sack...",
 		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
 	],
-	"struggleShaftCompression": [
+	"struggleCockCompression": [
 		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
 		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
 		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
 	],
-	"struggleShaftEnergyDrain": [
+	"struggleCockDrainEnergy": [
 		"The more you fight, the more my shaft will drain your energy. I don't mind.",
 		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
 		"You know you're being drained of energy right? My rod always wins."
@@ -2687,7 +2687,7 @@
 	"struggleCumTransformingImmune": [
 		"Hm... You don't seem to be getting any softer in there..."
 	],
-	"struggleShaftInfused": [
+	"struggleCockInfused": [
 		"Ahhh~ <infusedName> feels so great down there~",
 		"<keysmash>, you're gonna make <infusedName> cum~"
 	],
@@ -2709,7 +2709,7 @@
 		"Better get out all that fight while you can, you won't be able to move much soon.",
 		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
 	],
-	"struggleBallsEnergyDrain": [
+	"struggleBallsDrainEnergy": [
 		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
 		"You won't last long fighting like that. It's better to just rest and let your energy go.",
 		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
@@ -2790,7 +2790,7 @@
 		]
 	},
 	"struggleBreastsHungryCompression": ":missingDialogue",
-	"struggleBreastsEnergyDrain": [
+	"struggleBreastsDrainEnergy": [
 		"Your energy will add some spice to my milk with all those struggles mixing it up.",
 		"How long can you really hold out til your too tired to be moving around in my boob?",
 		"The more you fight it, the more my breast takes energy away. You might as well just relax now."
@@ -4152,7 +4152,7 @@
 			"OwO.png"
 		]
 	},
-	"strugglingEnergyDrain": [
+	"strugglingDrainEnergy": [
 		"I... I'm feeling so tired...",
 		"It's getting harder to move...",
 		"I'm losing the energy to struggle...",
@@ -4384,7 +4384,7 @@
 		"I can barely move in here...",
 		"I can't keep it... from compacting me."
 	],
-	"strugglingBellyEnergyDrain": [
+	"strugglingBellyDrainEnergy": [
 		"Your stomach, it's sapping my energy as I move.",
 		"I barely have the energy... to keep resisting this belly.",
 		"This gut is draining my energy, how long I can keep squirming...?"
@@ -4417,7 +4417,7 @@
 		"Is your tail trying to compact me? It's getting tight...",
 		"It's getting hard to move with the space in your tail shrinking..."
 	],
-	"strugglingTailEnergyDrain": [
+	"strugglingTailDrainEnergy": [
 		"I'm having trouble squirming... Is your tail draining me?",
 		"I'm so tired in your tail suddenly... Can't keep struggling...",
 		"Why am I getting so exhausted, like my strength is leaving me?"
@@ -4509,7 +4509,7 @@
 		"I feel like I'm getting compacted inside your womb.",
 		"Your womb's walls are closing in on me! It's getting tight!"
 	],
-	"strugglingWombEnergyDrain": [
+	"strugglingWombDrainEnergy": [
 		"It's hard to move around in your womb... or am I getting tired?",
 		"I think your womb is stealing my energy... I'm barely able to squirm.",
 		"Fighting your womb is exhausting... Why am I so tired?"
@@ -4525,31 +4525,31 @@
 		]
 	},
 	"strugglingWombEggify": ":strugglingWombTransforming",
-	"strugglingShaft": [
+	"strugglingCock": [
 		"Ahh~ Your cock is squeezing tight around me~",
 		"Ohhh~ Your shaft is squeezing so hard~",
 		"This is so hot~"
 	],
-	"strugglingShaftSoftDigest": ":missingDialogue",
-	"strugglingShaftDigestImmune": ":strugglingDigestImmune",
-	"strugglingShaftHeal": [
+	"strugglingCockSoftDigest": ":missingDialogue",
+	"strugglingCockDigestImmune": ":strugglingDigestImmune",
+	"strugglingCockHeal": [
 		"Who would have thought your cock could heal so well.",
 		"Your shaft is rather soothing it seems. Weird.",
 		"Your cock is making my pain go away. It's so relaxing in here!"
 	],
-	"strugglingShaftCompression": [
+	"strugglingCockCompression": [
 		"This shaft of yours is squeezing me really hard!",
 		"It's hard to move when your cock is putting so much pressure on me.",
 		"I feel like I'm getting compacted inside your dick!"
 	],
-	"strugglingShaftEnergyDrain": [
+	"strugglingCockDrainEnergy": [
 		"I'm feeling more and more tired as I squirm in your dick.",
 		"Why do I feel so exhausted struggling inside your shaft?",
 		"It feels like your cock is taking my energy away..."
 	],
-	"strugglingShaftCumTransforming": ":missingDialogue",
+	"strugglingCockCumTransforming": ":missingDialogue",
 	"strugglingCumTransformingImmune": ":strugglingTransformingImmune",
-	"strugglingShaftEggify": [
+	"strugglingCockEggify": [
 		"Is there a shell forming around me inside your dick!?",
 		"There is some sort of shell forming around me. What's your cock doing??",
 		"Is your shaft getting harder... or is there something hardening around me?"
@@ -4572,7 +4572,7 @@
 		"I'm barely able to move with how your nuts are closing in on me.",
 		"Your orbs are tightening. There's so much pressure on me in here!"
 	],
-	"strugglingBallsEnergyDrain": [
+	"strugglingBallsDrainEnergy": [
 		"I feel so tired splashing around in your sack. What's going on?",
 		"Is your seed sapping my energy away? I feel fatigued...",
 		"The more I move in your orbs, the more exhausted I feel..."
@@ -4660,7 +4660,7 @@
 		"I feel like I'm being compacted inside of your boob.",
 		"The walls are closing in. It's getting tight in your boob."
 	],
-	"strugglingBreastsEnergyDrain": [
+	"strugglingBreastsDrainEnergy": [
 		"Does your milk make people drowsy? I'm feeling more and more tired...",
 		"I can't keep up this squirming... I feel like I'm getting drained in your boob.",
 		"I'm getting exhausted... Is your breast stealing my energy?"
@@ -4813,7 +4813,7 @@
 	"struggleEscapeEggifyImmune": [
 		"Looks like I'm free, though I wasn't worried since I resisted your egging."
 	],
-	"struggleOralVoreEscape": {
+	"oralVoreLetoutForcingAfter": {
 		"dialogueRandom": [
 			"Oops! I must've upset your stomach.",
 			"Couldn't keep me in, hm?",
@@ -4824,7 +4824,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleOralVoreEscapeHungry": {
+	"oralVoreLetoutForcingAfterHungry": {
 		"dialogueRandom": [
 			"Sorry, but I'm hungry, too.",
 			"I'd stay, but my own stomach is talking to me.",
@@ -4835,7 +4835,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleOralVoreEscapeHorny": {
+	"oralVoreLetoutForcingAfterHorny": {
 		"dialogueRandom": [
 			"I've had enough fun in your gut~",
 			"I hope you enjoyed having me as a treat~",
@@ -4846,28 +4846,28 @@
 			"OwO.png"
 		]
 	},
-	"struggleOralVoreEscapeSoftDigest": [
+	"oralVoreLetoutForcingAfterSoftDigest": [
 		"Whew... I got you to spit me out before I was done for!"
 	],
-	"struggleOralVoreEscapeDigestImmune": [
+	"oralVoreLetoutForcingAfterDigestImmune": [
 		"I got you to spit me out, though I wasn't really in any danger."
 	],
-	"struggleOralVoreEscapeHeal": [
+	"oralVoreLetoutForcingAfterHeal": [
 		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
 	],
-	"struggleAnalVoreEscape": [
+	"analVoreLetoutForcingAfter": [
 		"I managed to wiggle out your butt!"
 	],
-	"struggleAnalVoreEscapeSoftDigest": [
+	"analVoreLetoutForcingAfterSoftDigest": [
 		"Whew, I barely got out of your rear without adding to it!"
 	],
-	"struggleAnalVoreEscapeDigestImmune": [
+	"analVoreLetoutForcingAfterDigestImmune": [
 		"Looks like I managed to get out though your bottom, though I wasn't in any danger."
 	],
-	"struggleAnalVoreEscapeHeal": [
+	"analVoreLetoutForcingAfterHeal": [
 		"Who knew you could come out a butt so refreshed!"
 	],
-	"struggleCockVoreEscape": {
+	"cockVoreLetoutForcingAfter": {
 		"dialogueRandom": [
 			"Oops! I squeezed right on out.",
 			"Couldn't keep it tucked away in your pants, hm?",
@@ -4878,7 +4878,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleCockVoreEscapeHungry": {
+	"cockVoreLetoutForcingAfterHungry": {
 		"dialogueRandom": [
 			"Sorry, but I'm hungry. No, not for your dick.",
 			"I'd stay, but my stomach is requesting some actual food.",
@@ -4889,7 +4889,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleCockVoreEscapeHorny": {
+	"cockVoreLetoutForcingAfterHorny": {
 		"dialogueRandom": [
 			"I've had enough fun exploring your shaft~",
 			"That was a treat to squirm in your meat~",
@@ -4900,18 +4900,18 @@
 			"UwU.png"
 		]
 	},
-	"struggleCockVoreEscapeSoftDigest": [
+	"cockVoreLetoutForcingAfterSoftDigest": [
 		"Whew, I wiggled out of your shaft before it melted me!"
 	],
-	"struggleCockVoreEscapeDigestImmune": [
+	"cockVoreLetoutForcingAfterDigestImmune": [
 		"Looks like I got out your shaft, though it couldn't do any harm to me."
 	],
-	"struggleCockVoreEscapeHeal": [
+	"cockVoreLetoutForcingAfterHeal": [
 		"I squirmed out your cock and I feel really good after all that!"
 	],
 	"struggleEscapeCumTransforming": ":missingButNotNecessary",
 	"struggleEscapeCumTransformingImmune": ":missingButNotNecessary",
-	"struggleUnbirthVoreEscape": {
+	"unbirthVoreLetoutForcingAfter": {
 		"dialogueRandom": [
 			"Oops! I slipped out. You were a little too wet~",
 			"A little too steamy for me! Let me get my bearings.",
@@ -4922,7 +4922,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleUnbirthVoreEscapeHungry": {
+	"unbirthVoreLetoutForcingAfterHungry": {
 		"dialogueRandom": [
 			"Sorry, but I'm hungry and didn't feel like being corded.",
 			"I'd stay, but my stomach is talking to me.",
@@ -4933,7 +4933,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleUnbirthVoreEscapeHorny": {
+	"unbirthVoreLetoutForcingAfterHorny": {
 		"dialogueRandom": [
 			"Ooh, I must've pushed too hard~",
 			"Your womb felt great. I want to return the favor~",
@@ -4944,16 +4944,16 @@
 			"UwU.png"
 		]
 	},
-	"struggleUnbirthVoreEscapeSoftDigest": [
+	"unbirthVoreLetoutForcingAfterSoftDigest": [
 		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
 	],
-	"struggleUnbirthVoreEscapeDigestImmune": [
+	"unbirthVoreLetoutForcingAfterDigestImmune": [
 		"Looks like I got out your womb, though I wasn't really in danger inside it."
 	],
-	"struggleUnbirthVoreEscapeHeal": [
+	"unbirthVoreLetoutForcingAfterHeal": [
 		"I wiggled my way out your womb and I feel as good as new!"
 	],
-	"struggleBreastVoreEscape": {
+	"breastVoreLetoutForcingAfter": {
 		"dialogueRandom": [
 			"Oops! I slipped out. Should've worn a bra.",
 			"Couldn't keep me in, hm? Your chest was a little loose.",
@@ -4964,7 +4964,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleBreastVoreEscapeHungry": {
+	"breastVoreLetoutForcingAfterHungry": {
 		"dialogueRandom": [
 			"Sorry, but I'm hungry. Your milk helped, though!",
 			"I'd stay, but my stomach is talking to me. It wants something more solid.",
@@ -4975,7 +4975,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleBreastVoreEscapeHorny": {
+	"breastVoreLetoutForcingAfterHorny": {
 		"dialogueRandom": [
 			"I've had enough fun in your fun bags~",
 			"That was a treat being held in a teat~",
@@ -4986,13 +4986,13 @@
 			"UwU.png"
 		]
 	},
-	"struggleBreastVoreEscapeSoftDigest": [
+	"breastVoreLetoutForcingAfterSoftDigest": [
 		"Whew, I got out of your boob before I was added to its milk!"
 	],
-	"struggleBreastVoreEscapeDigestImmune": [
+	"breastVoreLetoutForcingAfterDigestImmune": [
 		"Looks like I found my way out your boob, though I wasn't in danger inside it."
 	],
-	"struggleBreastVoreEscapeHeal": [
+	"breastVoreLetoutForcingAfterHeal": [
 		"Ah... I wiggled my way out your boob, and I feel so much better too!"
 	],
 	"escapeTransforming": [
@@ -5007,7 +5007,7 @@
 	"escapeEggifyImmune": [
 		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
 	],
-	"oralVoreEscape": {
+	"oralVoreLetoutUnpromptedAfter": {
 		"dialogueRandom": [
 			"Aw, already?",
 			"Tired? I'd gladly carry you in my belly.",
@@ -5018,7 +5018,7 @@
 			"Happy.png"
 		]
 	},
-	"oralVoreEscapeHungry": {
+	"oralVoreLetoutUnpromptedAfterHungry": {
 		"dialogueRandom": [
 			"Thanks, I need to find something for my own hunger.",
 			"I appreciate it. Catch you soon.",
@@ -5029,7 +5029,7 @@
 			"Tired.png"
 		]
 	},
-	"oralVoreEscapeHorny": {
+	"oralVoreLetoutUnpromptedAfterHorny": {
 		"dialogueRandom": [
 			"Mm, alright~",
 			"Want my tummy to return the favor~?",
@@ -5040,28 +5040,28 @@
 			"OwO.png"
 		]
 	},
-	"oralVoreEscapeSoftDigest": [
+	"oralVoreLetoutUnpromptedAfterSoftDigest": [
 		"Thanks for spitting me up. I was going to be added to you!"
 	],
-	"oralVoreEscapeDigestImmune": [
+	"oralVoreLetoutUnpromptedAfterDigestImmune": [
 		"Thanks for spitting me up. Maybe you realized you can't digest me?"
 	],
-	"oralVoreEscapeHeal": [
+	"oralVoreLetoutUnpromptedAfterHeal": [
 		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
 	],
-	"analVoreEscape": [
+	"analVoreLetoutUnpromptedAfter": [
 		"W-wah! Thanks for squeezing me out your butt!"
 	],
-	"analVoreEscapeSoftDigest": [
+	"analVoreLetoutUnpromptedAfterSoftDigest": [
 		"W-wah! Thanks for releasing me out your rear before was I added to it!"
 	],
-	"analVoreEscapeDigestImmune": [
+	"analVoreLetoutUnpromptedAfterDigestImmune": [
 		"Well, looks like you pushed me out your rear. Did you realize I can't be added to it?"
 	],
-	"analVoreEscapeHeal": [
+	"analVoreLetoutUnpromptedAfterHeal": [
 		"W-wah! I never felt so good after being squeezed out a butt!"
 	],
-	"cockVoreEscape": {
+	"cockVoreLetoutUnpromptedAfter": {
 		"dialogueRandom": [
 			"Aw, already hit your limit?",
 			"Tired? I'd gladly carry you and your package within me.",
@@ -5072,7 +5072,7 @@
 			"Happy.png"
 		]
 	},
-	"cockVoreEscapeHungry": {
+	"cockVoreLetoutUnpromptedAfterHungry": {
 		"dialogueRandom": [
 			"Thanks. I need to find something to eat that is actually solid.",
 			"I appreciate it. Catch you soon, hot stuff.",
@@ -5083,7 +5083,7 @@
 			"Tired.png"
 		]
 	},
-	"cockVoreEscapeHorny": {
+	"cockVoreLetoutUnpromptedAfterHorny": {
 		"dialogueRandom": [
 			"Mm, alright~",
 			"Want me to return the favor~? I can easily take ALL of you in me~",
@@ -5094,18 +5094,18 @@
 			"UwU.png"
 		]
 	},
-	"cockVoreEscapeSoftDigest": [
+	"cockVoreLetoutUnpromptedAfterSoftDigest": [
 		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
 	],
-	"cockVoreEscapeDigestImmune": [
+	"cockVoreLetoutUnpromptedAfterDigestImmune": [
 		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
 	],
-	"cockVoreEscapeHeal": [
+	"cockVoreLetoutUnpromptedAfterHeal": [
 		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
 	],
 	"escapeCumTransforming": ":missingButNotNecessary",
 	"escapeCumTransformingImmune": ":missingButNotNecessary",
-	"unbirthVoreEscape": {
+	"unbirthVoreLetoutUnpromptedAfter": {
 		"dialogueRandom": [
 			"Aw, already?",
 			"Tired? I'd gladly do the carrying this time.",
@@ -5116,7 +5116,7 @@
 			"Happy.png"
 		]
 	},
-	"unbirthVoreEscapeHungry": {
+	"unbirthVoreLetoutUnpromptedAfterHungry": {
 		"dialogueRandom": [
 			"Thanks. Your womb was nice, but I need some solid food.",
 			"I appreciate you lugging me around. Catch you very soon.",
@@ -5127,7 +5127,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthVoreEscapeHorny": {
+	"unbirthVoreLetoutUnpromptedAfterHorny": {
 		"dialogueRandom": [
 			"Mm, alright. I'll visit again shortly~",
 			"Want me to return the favor~? I'd be glad to.",
@@ -5138,16 +5138,16 @@
 			"UwU.png"
 		]
 	},
-	"unbirthVoreEscapeSoftDigest": [
+	"unbirthVoreLetoutUnpromptedAfterSoftDigest": [
 		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
 	],
-	"unbirthVoreEscapeDigestImmune": [
+	"unbirthVoreLetoutUnpromptedAfterDigestImmune": [
 		"Looks like you freed me from your womb. Guess you realized I won't melt in it?"
 	],
-	"unbirthVoreEscapeHeal": [
+	"unbirthVoreLetoutUnpromptedAfterHeal": [
 		"Ah, thanks for squeezing me out your womb. Your rejuvenating chamber has left me feeling amazing!"
 	],
-	"breastVoreEscape": {
+	"breastVoreLetoutUnpromptedAfter": {
 		"dialogueRandom": [
 			"Aw, already?",
 			"Tired? I'd gladly carry you within me.",
@@ -5158,7 +5158,7 @@
 			"Happy.png"
 		]
 	},
-	"breastVoreEscapeHungry": {
+	"breastVoreLetoutUnpromptedAfterHungry": {
 		"dialogueRandom": [
 			"Thanks, I need to find something to eat. The drinks were nice, though.",
 			"I appreciate it. Catch you soon, sexy.",
@@ -5169,7 +5169,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreEscapeHorny": {
+	"breastVoreLetoutUnpromptedAfterHorny": {
 		"dialogueRandom": [
 			"Mm, alright~",
 			"Want me to return the favor~ I'm more than ready~?",
@@ -5180,13 +5180,13 @@
 			"UwU.png"
 		]
 	},
-	"breastVoreEscapeSoftDigest": [
+	"breastVoreLetoutUnpromptedAfterSoftDigest": [
 		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
 	],
-	"breastVoreEscapeDigestImmune": [
+	"breastVoreLetoutUnpromptedAfterDigestImmune": [
 		"Looks like you pushed me out your boob, though I was in no danger from turning into milk."
 	],
-	"breastVoreEscapeHeal": [
+	"breastVoreLetoutUnpromptedAfterHeal": [
 		"Ah, thanks for pushing me out your boob. That soothing milk bath has made me feel stronger!"
 	],
 	"bellyInfuseRequested": [
@@ -5601,7 +5601,7 @@
 			]
 		}
 	],
-	"climaxShaft": [
+	"climaxCock": [
 		{
 			"dialogue": [
 				"Agh, I'm... I'm so hard! So close, I'm! ...I'm-",
@@ -5908,7 +5908,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreEscapeFiendly": {
+	"breastVoreLetoutUnpromptedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Thanks. Your breasts are amazing.",
 			"^red;Is it my turn next? I can do so, too.",
@@ -5919,7 +5919,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleBreastVoreEscapeFiendly": {
+	"breastVoreLetoutForcingAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Sorry, I'm done. Even I'm getting flustered.",
 			"^red;I got things to do. Nice chest, though.",
@@ -5930,7 +5930,7 @@
 			"Mad.png"
 		]
 	},
-	"cockVoreEscapeFiendly": {
+	"cockVoreLetoutUnpromptedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Thanks. My nose was hurting a bit.",
 			"^red;Is it my turn next? Your pick.",
@@ -5941,7 +5941,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleCockVoreEscapeFiendly": {
+	"cockVoreLetoutForcingAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Done being hot dog stuffing. Be back soon.",
 			"^red;I got things to do. No, not you.",
@@ -5952,7 +5952,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreEscapeFiendly": {
+	"unbirthVoreLetoutUnpromptedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Thanks. I felt safe.",
 			"^red;Is it my turn next? My body is ready.",
@@ -5963,7 +5963,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleUnbirthVoreEscapeFiendly": {
+	"unbirthVoreLetoutForcingAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Sorry, I'm due for something.",
 			"^red;I got things to do. You're welcome to ride along.",
@@ -5974,7 +5974,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreEscapeFiendly": {
+	"oralVoreLetoutUnpromptedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Thanks.",
 			"^red;Is it my turn next?",
@@ -5985,7 +5985,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleOralVoreEscapeFiendly": {
+	"oralVoreLetoutForcingAfterFiendly": {
 		"dialogueRandom": [
 			"^red;Sorry, I pushed too hard.",
 			"^red;Nice gut. Care to visit mine?",

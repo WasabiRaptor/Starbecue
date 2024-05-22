@@ -73,7 +73,7 @@
 					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
 				},
 				"settings" : {
-					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
+					// "bellyEffect" : ["sbqRemoveBellyEffects","sbq_acidHeal"] // example for a prey that would only seek out endo preds
 				}
 			}
 		},
@@ -135,7 +135,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583

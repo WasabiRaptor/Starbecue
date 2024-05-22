@@ -465,7 +465,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -479,12 +479,11 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				},
-				"cock" : ".shaft",
-				"shaft" : {
+				"cock" : {
 					"replace" : {
 						"dialogueRandom" : [":struggleShaft"]
 					},
@@ -492,7 +491,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming",
 						"locationInfused"
@@ -507,7 +506,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleShaftHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleShaftCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleShaftEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleShaftDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":error"]},
 						"addQueued" : true
@@ -529,7 +528,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -543,7 +542,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleBallsHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleBallsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleBallsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleBallsDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":error"]},
 						"addQueued" : true
@@ -867,7 +866,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -881,7 +880,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingBellyHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingBellyCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBellyEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBellyDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingBellyTransforming"]},
 						"addQueued" : true,
@@ -895,8 +894,7 @@
 						"false" : {"queueReplace":{"dialogueRandom" : [":strugglingEggifyImmune"]}}
 					}}
 				},
-				"cock" : ".shaft",
-				"shaft" : {
+				"cock" : {
 					"replace" : {
 						"dialogueRandom" : [":strugglingShaft"]
 					},
@@ -904,7 +902,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -918,7 +916,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingShaftHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingShaftCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingShaftEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingShaftDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingShaftCumTransforming"]},
 						"addQueued" : true,
@@ -942,7 +940,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -956,7 +954,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingBallsHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingBallsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBallsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBallsDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingBallsCumTransforming"]},
 						"addQueued" : true,
@@ -1011,7 +1009,7 @@
 					},
 					"oralVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleOralVoreEscape"]
+							"dialogueRandom" : [":oralVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1021,23 +1019,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleOralVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
 					},
 					"cockVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleCockVoreEscape"]
+							"dialogueRandom" : [":cockVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1047,16 +1045,16 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleCockVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : {"true" : {
 							"queueReplace" : {"dialogueRandom" : [":struggleEscapeCumTransforming"]},
@@ -1090,7 +1088,7 @@
 					},
 					"oralVore" : {
 						"replace" : {
-							"dialogueRandom" : [":oralVoreEscape"]
+							"dialogueRandom" : [":oralVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1100,23 +1098,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":oralVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":oralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":oralVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":oralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":oralVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
 					},
 					"cockVore" : {
 						"replace" : {
-							"dialogueRandom" : [":cockVoreEscape"]
+							"dialogueRandom" : [":cockVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1126,16 +1124,16 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":cockVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":cockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":cockVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":cockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":cockVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : {"true" : {
 							"queueReplace" : {"dialogueRandom" : [":escapeCumTransforming"]},
@@ -1190,8 +1188,7 @@
 				"pussy":".womb",
 				"womb" : {"replace" :{"dialogueRandom" : [":climaxWomb"]}},
 				"breasts" : {"replace" :{"dialogueRandom" : [":climaxBreasts"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"dialogueRandom" : [":climaxShaft"]}},
+				"cock" : {"replace" :{"dialogueRandom" : [":climaxShaft"]}},
 				"ballsL":".balls",
 				"ballsR":".balls",
 				"balls" : {"replace" :{"dialogueRandom" : [":climaxBalls"]}}
@@ -1311,7 +1308,7 @@
 			/*
 			"exampleReward" : { // example reward that uses all possible args
 				"repeatable" : true, // whether this reward repeats each time its requirements are met, a 5min reward would repeat at 10min and etc
-				"location" : ["belly", "womb", "shaft", "balls", "breasts", "tail"], // whether the counters for this are for a specific location, it adds the timers and counters for all the locations listed in this arg, otherwise its just the overall count/time
+				"location" : ["belly", "womb", "cock", "balls", "breasts", "tail"], // whether the counters for this are for a specific location, it adds the timers and counters for all the locations listed in this arg, otherwise its just the overall count/time
 				"pool" : "richOre", // the treasure pool this reward gives the player, look up how these are defined, make sure they don't conflict in name
 
 				// per session, resets each time you escape the pred
@@ -1400,7 +1397,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583

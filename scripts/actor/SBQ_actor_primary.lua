@@ -58,6 +58,10 @@ function init()
 		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
 		return res
 	end)
+	message.setHandler("sbqGiveResource", function (_,_, resource, amount)
+		return status.giveResource(resource, amount)
+	end)
+
 
 	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)
 		for i, resource in ipairs(resources or {}) do

@@ -218,7 +218,7 @@ function dialogueBox.scrollText()
 	end
 
 	dialogueBox.textPosition = dialogueBox.textPosition + 1
-	sbq.timer(nil, (dialogueBox.textSpeed or 1) * 0.025, dialogueBox.scrollText)
+	sbq.timer(nil, (dialogueBox.textSpeed or 1) * sbq.config.textSpeedMul, dialogueBox.scrollText)
 end
 function dialogueBox.findNextRealCharacter()
 	local char = string.sub(dialogueBox.text, dialogueBox.textPosition, dialogueBox.textPosition)

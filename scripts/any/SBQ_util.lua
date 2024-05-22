@@ -122,8 +122,9 @@ function sbq.setupSettingMetatables(entityType)
 	for k, v in pairs(sbq.config.infuseTypeData or {}) do
 		table.insert(sbq.lists.infuseTypes,k)
 	end
-	util.appendLists(sbq.lists.seekActions, sbq.lists.voreTypes)
-	util.appendLists(sbq.lists.seekActions, sbq.lists.infuseTypes)
+	for k, v in pairs(sbq.config.seekActionsSettings.dom) do
+		table.insert(sbq.lists.seekActions, k)
+	end
 	for k, v in pairs(sbq.config.groupedSettings) do
 		local list = {}
 		if type(v.list) == "string" then
@@ -334,7 +335,7 @@ function sbq.getSettingsOf.locations()
 	}
 end
 function sbq.getSettingsOf.all()
-    local output = sbq.exportBaseSettings()
+	local output = sbq.exportBaseSettings()
 	output.recentlyDigested = {}
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
@@ -346,7 +347,7 @@ end
 
 function sbq.exportBaseSettings()
 	local output = {}
-    for k, _ in pairs(sbq.defaultSettings) do
+	for k, _ in pairs(sbq.defaultSettings) do
 		if not sbq.config.groupedSettings[k] then
 			output[k] = sbq.settings[k]
 		end

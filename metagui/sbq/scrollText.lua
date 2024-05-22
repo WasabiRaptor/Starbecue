@@ -25,7 +25,7 @@ function scrollText()
 	end
 
 	textPosition = textPosition + 1
-	sbq.timer(nil, (textSpeed or 1) * 0.025, scrollText)
+	sbq.timer(nil, (textSpeed or 1) * sbq.config.textSpeedMul, scrollText)
 end
 function findNextRealCharacter()
 	local char = string.sub(text, textPosition, textPosition)

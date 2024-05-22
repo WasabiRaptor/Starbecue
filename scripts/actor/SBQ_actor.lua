@@ -47,8 +47,8 @@ function sbq.actorMessages()
 		sub = {}
 	}
 	sbq.expectedActions = {}
-	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData)
-		sbq.setCurrentLocationData(locationData)
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, occupantData)
+		sbq.setCurrentLocationData(locationData, occupantData)
 	end)
 	message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
 		local willingnessTable = sbq.actionWillingness[(isDom and "sub") or "dom"]
@@ -65,16 +65,44 @@ function sbq.actorMessages()
 		end
 		return {responseMap[willingnessTable[action] or "no"] or false, isDom, willingnessTable[action] or "no", action, entity.id()}
 	end)
-	message.setHandler("sbqActionOccuring", function (_,_, id, action)
-		if sbq.expectedActions[action] then return end
+	message.setHandler("sbqStruggleAction", function (_,_, id, action)
+		sbq.struggleAction = action
+	end)
+	message.setHandler("sbqActionOccuring", function (_,_, id, action, cooldown)
+		if sbq.expectedActions[action] then
+			sbq.expectedActions[action] = nil
+			return
+		end
 		sbq.target = id
-		if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
-			dialogueProcessor.speakDialogue()
+		if (action == sbq.struggleAction) and not sbq.isLoungeControlHeld("Shift") then
+			if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..action, sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+				dialogueProcessor.speakDialogue()
+			end
+			if not cooldown then return end
+			sbq.timer("dialogueAfter", cooldown + 1, function()
+				sbq.target = id
+				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..action..".after", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					dialogueProcessor.speakDialogue()
+				end
+			end)
+			return
+		else
+			if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action, sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+				dialogueProcessor.speakDialogue()
+			end
+			if not cooldown then return end
+			sbq.timer("dialogueAfter", cooldown + 1, function()
+				sbq.target = id
+				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action..".after", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					dialogueProcessor.speakDialogue()
+				end
+			end)
 		end
 	end)
 end
 
-function sbq.setCurrentLocationData(locationData)
+function sbq.setCurrentLocationData(locationData, occupantData)
+	status.setStatusProperty("sbqOccupantData", occupantData)
 	sbq.currentLocationData = locationData
 	sbq.forceTimer("strugglingDialogue", 5)
 	sbq.checkComfortLevel()
@@ -113,10 +141,11 @@ end
 
 local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
-	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("strugglingDialogue", 10, 30) then
+	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) then
 		sbq.target = sbq.loungingIn()
-		dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree)
-		dialogueProcessor.speakDialogue()
+		if dialogueProcessor.getDialogue(".struggling", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+			dialogueProcessor.speakDialogue()
+		end
 	end
 	if sbq.timer("changeStruggleDirection", 2) then
 		if true then -- do stuff with location data here to determine struggles later

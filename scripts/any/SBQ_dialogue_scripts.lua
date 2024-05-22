@@ -65,8 +65,10 @@ end
 function dialogueStepScripts.statPositive(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	return world.entityStatPositive(eid, step) and step or step.."_notPositive"
 end
-dialogueStepScripts.sbqHeal = dialogueStepScripts.statPositive
-dialogueStepScripts.sbqFemcumHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_acidHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_femcumHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_cumHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_milkHeal = dialogueStepScripts.statPositive
 
 dialogueStepScripts.sbq_acidSoftDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cumSoftDigest = dialogueStepScripts.statPositive
@@ -97,5 +99,13 @@ dialogueStepScripts.sbq_cumDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_milkDigestResistance = dialogueStepScripts.statPositive
 
-dialogueStepScripts.sbq_isDigested = dialogueStepScripts.statPositive
-dialogueStepScripts.sbq_isInfused = dialogueStepScripts.statPositive
+function dialogueStepScripts.occupantFlag(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	local flags = sbq.getPublicProperty(eid, "sbqOccupantData") or {}
+	return step.."."..(tostring(flags[step]))
+end
+
+dialogueStepScripts.digested = dialogueStepScripts.occupantFlag
+dialogueStepScripts.infused = dialogueStepScripts.occupantFlag
+dialogueStepScripts.location = dialogueStepScripts.occupantFlag
+dialogueStepScripts.subLocation = dialogueStepScripts.occupantFlag
+dialogueStepScripts.infuseType = dialogueStepScripts.occupantFlag

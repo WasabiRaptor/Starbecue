@@ -198,7 +198,7 @@
 						"default" : {
 							"next" : "getLocationEffect",
 							"default" : { "randomDialogue" : [ "Heh, having fun in there?~","I do enjoy it when you wiggle around~","Mmh, quite filling!~","That hit the spot nicely!~" ]},
-							"sbqHeal" : { "randomDialogue" : [ "I will make you feel all better~","Not many know this, but I do also have dreamy liquids that heal~","Arhh, you feel so warm in there~" ]},
+							"sbq_acidHeal" : { "randomDialogue" : [ "I will make you feel all better~","Not many know this, but I do also have dreamy liquids that heal~","Arhh, you feel so warm in there~" ]},
 							"sbq_acidSoftDigest" : { "randomDialogue" : [ "Heh, having fun melting down in there?~","I can feel you getting weaker in there~","I wonder how many feathers you will grow on me~","I got a place for you among the stars~" ] },
 							"sbq_acidDigest" : { "randomDialogue" : [ "Heh, having fun melting down in there?~","I'm sure you will look even better on my feathers once you're gone~","Going to be part of this crylan very soon!~","Enjoy your last squirms before you're gone~" ] }
 						}
@@ -223,7 +223,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583

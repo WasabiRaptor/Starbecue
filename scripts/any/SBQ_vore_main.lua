@@ -312,6 +312,11 @@ function _SpeciesScript:emergencyEscape(...)
 	return self.state:emergencyEscape(...)
 end
 
+function _SpeciesScript:climax(...)
+	if not self.state then return false, "invalidState" end
+	return self.state:climax(...)
+end
+
 function _SpeciesScript:changeState(stateName)
 	local state = self.states[stateName]
 	if not state then sbq.logError("Attempt to switch to invalid state: " .. stateName) return false end
@@ -439,7 +444,7 @@ function _State:tryAction(name, target, ...)
 		end
 	end, name, action, target, result2, ..., longest)
 
-	world.sendEntityMessage(target, "sbqActionOccuring", entity.id(), name)
+	world.sendEntityMessage(target, "sbqActionOccuring", entity.id(), name, longest)
 
 	if type(result2) ~= "function" then
 		return result1, result2 or false, longest
@@ -449,48 +454,47 @@ end
 
 function _State:requestAction(forcing, name, target, ...)
 	sbq.target = target
+	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
+	local wait = 0
 	if forcing then
-		local success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
+		success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
 		if success then
 			if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 				dialogueProcessor.sendPlayerDialogueBox()
 				dialogueProcessor.speakDialogue()
-				local wait = dialogueProcessor.predictTime()
-				sbq.forceTimer("dialogueAfter", cooldown, function ()
+				wait = dialogueProcessor.predictTime()
+			end
+			sbq.forceTimer("dialogueAfter", cooldown + 1, function ()
+				sbq.target = target
+				if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					dialogueProcessor.sendPlayerDialogueBox()
+					dialogueProcessor.speakDialogue()
+				end
+			end)
+		end
+		return success or false, reason or false, (cooldown or 0) + wait
+	end
+	if success then
+		local args = { ... }
+		local callback = function ()
+			success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
+			if success then
+				sbq.forceTimer("dialogueAfter", cooldown + wait + 1, function ()
 					sbq.target = target
-					if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
 					end
 				end)
-				cooldown = cooldown + wait
 			end
 		end
-		return success or false, reason or false, cooldown or 0
-	end
-	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
-	if success then
 		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
 			dialogueProcessor.sendPlayerDialogueBox()
-			local wait = dialogueProcessor.predictTime()
-			cooldown = cooldown + wait
-			local args = { ... }
-			local callback = function ()
-				local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
-				if success then
-					sbq.forceTimer("dialogueAfter", cooldown, function ()
-						sbq.target = target
-						if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
-							dialogueProcessor.sendPlayerDialogueBox()
-							dialogueProcessor.speakDialogue()
-						end
-					end)
-				end
-			end
+			wait = dialogueProcessor.predictTime()
 			dialogueProcessor.speakDialogue(callback)
 		else
-			success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
 			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+			callback()
 		end
 	else
 		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..reason, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
@@ -500,7 +504,7 @@ function _State:requestAction(forcing, name, target, ...)
 			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
 		end
 	end
-	return success or false, reason or false, cooldown or 0
+	return success or false, reason or false, (cooldown or 0) + wait
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
@@ -713,6 +717,18 @@ end
 function _State:emergencyEscape(occupant)
 	world.spawnProjectile("sbqMemeExplosion", occupant:position())
 	occupant:remove()
+end
+
+function _State:climax(entityId)
+	SpeciesScript:doAnimations(self.climaxAnimations, {}, entityId)
+	sbq.target = entityId
+	if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".climax", entity.id(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+		dialogueProcessor.speakDialogue(function ()
+			sbq.resetResource("sbqLust")
+		end)
+	else
+		sbq.resetResource("sbqLust")
+	end
 end
 
 -- Location handling
@@ -1364,7 +1380,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
-    elseif not (self.flags.newOccupant or self.flags.releasing) then
+	elseif not (self.flags.newOccupant or self.flags.releasing) then
 		table.insert(persistentStatusEffects, {stat = "sbq_compression_"..self.locationSettings.compression, amount = 1})
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
@@ -1407,9 +1423,16 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
 	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
-	world.sendEntityMessage(self.entityId, "scriptPaneMessage", "sbqRefreshLocationData", entity.id(), location:outputData(self.entityId), {
-		time = self.time,
-	})
+    self:sendEntityMessage(
+		"scriptPaneMessage",
+		"sbqRefreshLocationData",
+		entity.id(),
+		location:outputData(self.entityId),
+		sb.jsonMerge(self.flags, {
+			time = self.time,
+			location = self.location
+		})
+	)
 	if self.flags.newOccupant then
 		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list)
 	else
@@ -1443,14 +1466,35 @@ function _Occupant:attemptStruggle(control)
 	if locationDirection == direction then
 		bonusTime = bonusTime + maybeBonus
 	end
+	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("occupantStruggleDialogue", sbq.voreConfig.occupantStruggleDialogueMin or sbq.config.occupantStruggleDialogueMin, sbq.voreConfig.occupantStruggleDialogueMax or sbq.config.occupantStruggleDialogueMax) then
+		sbq.target = self.entityId
+		if dialogueProcessor.getDialogue(".occupantStruggle", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+			dialogueProcessor.speakDialogue()
+		end
+	end
 	if struggleAction then
 		self.struggleAction = struggleAction
 		self.struggleDirection = direction
+		if struggleAction.action then
+			self:sendEntityMessage("sbqStruggleAction", entity.id(), struggleAction.action)
+		end
+
 		if struggleAction.pressAnimations and not struggleAction.holdAnimations then
 			bonusTime = bonusTime + SpeciesScript:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
 		end
 		if (bonusTime > 0) then
-			if not self:overConsumeResource("energy", sbq.config.struggleCost) then return end
+			sbq.modifyResource("energy", -(struggleAction.predCost or sbq.config.predStruggleCost))
+			if not self:overConsumeResource("energy", (struggleAction.preyCost or sbq.config.preyStruggleCost)) then return end
+
+			for k, v in pairs(struggleAction.givePreyResource or {}) do
+				self:giveResource(k,v)
+			end
+			for k, v in pairs(struggleAction.givePredResource or {}) do
+				sbq.giveResource(k,v)
+			end
+			if sbq.isResource("sbqLust") and sbq.resourcePercentage("sbqLust") >= 1 then
+				SpeciesScript:climax(self.entityId)
+			end
 		end
 		self:tryStruggleAction((bonusTime > 0) and 1 or 0, bonusTime)
 	end
@@ -1489,7 +1533,7 @@ function _Occupant:checkStruggleDirection(dt)
 	if (dx ~= 0 or dy ~= 0) then
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
-		if not self:consumeResource("energy", sbq.config.struggleCost * dt, true) then return end
+		if not self:consumeResource("energy", ((self.struggleAction or {}).preyCost or sbq.config.preyStruggleCost) * dt, true) then return end
 		self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
 		if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
 			self:tryStruggleAction(0,0)
@@ -1590,6 +1634,12 @@ function _Occupant:resource(resource)
 	-- if they don't have the resource, treat it as empty
 	if not world.entityIsResource(self.entityId, resource) then return 0 end
 	return world.entityResource(self.entityId, resource)
+end
+
+function _Occupant:giveResource(resource, amount)
+	-- if they don't have the resource, do nothing
+	if not world.entityIsResource(self.entityId, resource) then return end
+	return world.sendEntityMessage(self.entityId, "sbqGiveResource", resource, amount)
 end
 
 function _Occupant:stat(stat)

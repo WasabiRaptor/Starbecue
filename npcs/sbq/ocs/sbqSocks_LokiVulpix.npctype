@@ -655,7 +655,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -669,7 +669,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				},
@@ -681,7 +681,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -695,7 +695,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleFemcumHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleWombCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleWombEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleWombDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				}
@@ -1229,7 +1229,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583

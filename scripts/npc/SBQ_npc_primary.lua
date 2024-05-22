@@ -7,6 +7,7 @@ function init()
 	sbq.say = npc.say
 	sbq.sayPortrait = npc.sayPortrait
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
+	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
 	sbq.releaseLoungeControl = npc.releaseLoungeControl
 	sbq.loungingIn = npc.loungingIn
 	sbq.resetLounging = npc.resetLounging

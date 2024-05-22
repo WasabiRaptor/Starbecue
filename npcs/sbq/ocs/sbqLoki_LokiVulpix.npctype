@@ -693,7 +693,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -707,7 +707,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				},
@@ -719,7 +719,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -733,7 +733,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
 				},
@@ -745,7 +745,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -759,12 +759,10 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleFemcumHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleWombCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleWombEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleWombDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : ".struggle.any.eggify"
-				},
-				"cock" : ".shaft",
-				"shaft" : {
+				},				"cock" : {
 					"replace" : {
 						"dialogueRandom" : [":struggleShaft"]
 					},
@@ -772,7 +770,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming",
 						"locationInfused"
@@ -787,7 +785,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleShaftHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleShaftCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleShaftEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleShaftDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":struggleCumTransforming"]},
 						"addQueued" : true,
@@ -811,7 +809,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -825,7 +823,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":struggleBallsHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleBallsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleBallsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleBallsDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":struggleCumTransforming"]},
 						"addQueued" : true,
@@ -844,7 +842,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming",
 						"shirt"
@@ -861,7 +859,7 @@
 						}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":struggleBreastsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":struggleBreastsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":struggleBreastsDrainEnergy"]}}},
 					"transforming" : ".struggle.any.transforming",
 					"eggify" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":struggleEggify"]},
@@ -1595,7 +1593,7 @@
 					"seperateNext" : true,
 					"next" : [
 						"locationEffectSlot",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"transforming"
 					],
 					"locationEffectSlot" : {
@@ -1607,7 +1605,7 @@
 						},
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingSlimeHeal"]}}
 					},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingSlimeTransforming"]},
 						"addQueued" : true,
@@ -1624,7 +1622,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -1638,7 +1636,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingBellyHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingBellyCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBellyEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBellyDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingBellyTransforming"]},
 						"addQueued" : true,
@@ -1660,7 +1658,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -1674,7 +1672,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingTailHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingTailCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingTailEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingTailDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingTailTransforming"]},
 						"addQueued" : true,
@@ -1696,7 +1694,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -1710,7 +1708,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingWombHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingWombCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingWombEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingWombDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingWombTransforming"]},
 						"addQueued" : true,
@@ -1723,9 +1721,7 @@
 						"next" : "eggAllow",
 						"false" : {"queueReplace":{"dialogueRandom" : [":strugglingEggifyImmune"]}}
 					}}
-				},
-				"cock" : ".shaft",
-				"shaft" : {
+				},				"cock" : {
 					"replace" : {
 						"dialogueRandom" : [":strugglingShaft"]
 					},
@@ -1733,7 +1729,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -1747,7 +1743,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingShaftHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingShaftCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingShaftEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingShaftDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingShaftCumTransforming"]},
 						"addQueued" : true,
@@ -1771,7 +1767,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -1785,7 +1781,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingBallsHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingBallsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBallsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBallsDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingBallsCumTransforming"]},
 						"addQueued" : true,
@@ -1809,7 +1805,7 @@
 					"next" : [
 						"locationEffectSlot",
 						"locationCompression",
-						"locationEnergyDrain",
+						"locationDrainEnergy",
 						"eggify",
 						"transforming"
 					],
@@ -1823,7 +1819,7 @@
 						"heal" : { "replace" : {"dialogueRandom" : [":strugglingBreastsHeal"]}}
 					},
 					"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingBreastsCompression"]}}},
-					"locationEnergyDrain" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBreastsEnergyDrain"]}}},
+					"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBreastsDrainEnergy"]}}},
 					"transforming" : {"true" : {
 						"queueReplace" : {"dialogueRandom" : [":strugglingBreastsTransforming"]},
 						"addQueued" : true,
@@ -1882,7 +1878,7 @@
 					},
 					"oralVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleOralVoreEscape"]
+							"dialogueRandom" : [":oralVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1892,23 +1888,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleOralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleOralVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":oralVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
 					},
 					"analVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleAnalVoreEscape"]
+							"dialogueRandom" : [":analVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1918,23 +1914,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleAnalVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":analVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleAnalVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":analVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleAnalVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":analVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleAnalVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":analVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleAnalVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":analVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
 					},
 					"tailVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleTailVoreEscape"]
+							"dialogueRandom" : [":tailVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1944,23 +1940,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleTailVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":tailVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleTailVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":tailVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleTailVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":tailVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleTailVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":tailVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleTailVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":tailVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
 					},
 					"absorbVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleAbsorbVoreEscape"]
+							"dialogueRandom" : [":absorbVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1970,23 +1966,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleAbsorbVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":absorbVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleAbsorbVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":absorbVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleAbsorbVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":absorbVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleAbsorbVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":absorbVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleAbsorbVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":absorbVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
 					},
 					"cockVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleCockVoreEscape"]
+							"dialogueRandom" : [":cockVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -1996,16 +1992,16 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleCockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleCockVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":cockVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : {"true" : {
 							"queueReplace" : {"dialogueRandom" : [":struggleEscapeCumTransforming"]},
@@ -2022,7 +2018,7 @@
 					},
 					"unbirth" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleUnbirthVoreEscape"]
+							"dialogueRandom" : [":unbirthVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2032,23 +2028,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleUnbirthVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":unbirthVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleUnbirthVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":unbirthVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleUnbirthVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":unbirthVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleUnbirthVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":unbirthVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleUnbirthVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":unbirthVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
 					},
 					"breastVore" : {
 						"replace" : {
-							"dialogueRandom" : [":struggleBreastVoreEscape"]
+							"dialogueRandom" : [":breastVoreLetoutForcingAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2058,16 +2054,16 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":struggleBreastVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":breastVoreLetoutForcingAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleBreastVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":breastVoreLetoutForcingAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":struggleBreastVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":breastVoreLetoutForcingAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":struggleBreastVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":breastVoreLetoutForcingAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":struggleBreastVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":breastVoreLetoutForcingAfterHeal"]}}
 						},
 						"transforming" : ".escape.true.any.transforming",
 						"eggify" : ".escape.true.any.eggify"
@@ -2091,7 +2087,7 @@
 					},
 					"oralVore" : {
 						"replace" : {
-							"dialogueRandom" : [":oralVoreEscape"]
+							"dialogueRandom" : [":oralVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2101,23 +2097,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":oralVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":oralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":oralVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":oralVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":oralVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":oralVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
 					},
 					"analVore" : {
 						"replace" : {
-							"dialogueRandom" : [":analVoreEscape"]
+							"dialogueRandom" : [":analVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2127,23 +2123,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":analVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":analVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":analVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":analVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":analVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":analVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":analVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":analVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":analVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":analVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
 					},
 					"tailVore" : {
 						"replace" : {
-							"dialogueRandom" : [":tailVoreEscape"]
+							"dialogueRandom" : [":tailVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2153,23 +2149,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":tailVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":tailVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":tailVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":tailVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":tailVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":tailVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":tailVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":tailVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":tailVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":tailVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
 					},
 					"absorbVore" : {
 						"replace" : {
-							"dialogueRandom" : [":absorbVoreEscape"]
+							"dialogueRandom" : [":absorbVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2179,23 +2175,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":absorbVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":absorbVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":absorbVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":absorbVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":absorbVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":absorbVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":absorbVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":absorbVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":absorbVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":absorbVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
 					},
 					"cockVore" : {
 						"replace" : {
-							"dialogueRandom" : [":cockVoreEscape"]
+							"dialogueRandom" : [":cockVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2205,16 +2201,16 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":cockVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":cockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":cockVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "cumDigestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":cockVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":cockVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":cockVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : {"true" : {
 							"queueReplace" : {"dialogueRandom" : [":escapeCumTransforming"]},
@@ -2231,7 +2227,7 @@
 					},
 					"unbirth" : {
 						"replace" : {
-							"dialogueRandom" : [":unbirthVoreEscape"]
+							"dialogueRandom" : [":unbirthVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2241,23 +2237,23 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":unbirthVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":unbirthVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":unbirthVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":unbirthVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":unbirthVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":unbirthVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":unbirthVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":unbirthVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":unbirthVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":unbirthVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
 					},
 					"breastVore" : {
 						"replace" : {
-							"dialogueRandom" : [":breastVoreEscape"]
+							"dialogueRandom" : [":breastVoreLetoutUnpromptedAfter"]
 						},
 						"seperateNext" : true,
 						"next" : [
@@ -2267,16 +2263,16 @@
 						],
 						"locationEffectSlot" : {
 							"digest" : {
-								"replace" : {"dialogueRandom" : [":breastVoreEscapeDigest"]},
+								"replace" : {"dialogueRandom" : [":breastVoreLetoutUnpromptedAfterDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":breastVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":breastVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
 							"softDigest" : {
-								"replace" : {"dialogueRandom" : [":breastVoreEscapeSoftDigest"]},
+								"replace" : {"dialogueRandom" : [":breastVoreLetoutUnpromptedAfterSoftDigest"]},
 								"next" : "digestImmunity",
-								"true" : {"replace" : {"dialogueRandom" : [":breastVoreEscapeDigestImmune"]}}
+								"true" : {"replace" : {"dialogueRandom" : [":breastVoreLetoutUnpromptedAfterDigestImmune"]}}
 							},
-							"heal" : { "replace" : {"dialogueRandom" : [":breastVoreEscapeHeal"]}}
+							"heal" : { "replace" : {"dialogueRandom" : [":breastVoreLetoutUnpromptedAfterHeal"]}}
 						},
 						"transforming" : ".escape.false.any.transforming",
 						"eggify" : ".escape.false.any.eggify"
@@ -2414,9 +2410,7 @@
 					},
 					"defaultNo" : { "replace" : {"dialogueRandom" : ["defaultNo"]} }
 
-				},
-				"cock" : ".shaft",
-				"shaft" : {
+				},				"cock" : {
 					"next" : "voreResponse",
 					"request" : {
 						"next" : "doingVore",
@@ -2494,9 +2488,7 @@
 				"pussy" : {"replace" :{"dialogueRandom" : [":pussyInfused"]}},
 				"breastsL":".breasts",
 				"breastsR":".breasts",
-				"breasts" : {"replace" :{"dialogueRandom" : [":breastInfused"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"dialogueRandom" : [":cockInfused"]}},
+				"breasts" : {"replace" :{"dialogueRandom" : [":breastInfused"]}},				"cock" : {"replace" :{"dialogueRandom" : [":cockInfused"]}},
 				"ballsL":".balls",
 				"ballsR":".balls",
 				"balls" : {"replace" :{"dialogueRandom" : [":ballsInfused"]}}
@@ -2516,9 +2508,7 @@
 				"pussy" : {"replace" :{"dialogueRandom" : [":pussyInfusedOccupant"]}},
 				"breastsL":".breasts",
 				"breastsR":".breasts",
-				"breasts" : {"replace" :{"dialogueRandom" : [":breastInfusedOccupant"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"dialogueRandom" : [":cockInfusedOccupant"]}},
+				"breasts" : {"replace" :{"dialogueRandom" : [":breastInfusedOccupant"]}},				"cock" : {"replace" :{"dialogueRandom" : [":cockInfusedOccupant"]}},
 				"ballsL":".balls",
 				"ballsR":".balls",
 				"balls" : {"replace" :{"dialogueRandom" : [":ballsInfusedOccupant"]}}
@@ -2534,9 +2524,7 @@
 				"next" : "location",
 				"pussy":".womb",
 				"womb" : {"replace" :{"dialogueRandom" : [":climaxWomb"]}},
-				"breasts" : {"replace" :{"dialogueRandom" : [":climaxBreasts"]}},
-				"cock":".shaft",
-				"shaft" : {"replace" :{"dialogueRandom" : [":climaxShaft"]}},
+				"breasts" : {"replace" :{"dialogueRandom" : [":climaxBreasts"]}},				"cock" : {"replace" :{"dialogueRandom" : [":climaxShaft"]}},
 				"ballsL":".balls",
 				"ballsR":".balls",
 				"balls" : {"replace" :{"dialogueRandom" : [":climaxBalls"]}}
@@ -2576,10 +2564,10 @@
 			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "ore" },
 			"struggleReward2" : { "repeatable" : true, "struggles" : 100, "minStruggles" : 200, "pool" : "richOre" },
 
-			"CVStruggleReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "struggles" : 75, "pool" : "richOre" },
-			"CVStruggleReward2" : { "location" : ["shaft", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
+			"CVStruggleReward1" : { "repeatable" : true, "location" : ["cock", "balls"], "struggles" : 75, "pool" : "richOre" },
+			"CVStruggleReward2" : { "location" : ["cock", "balls"], "struggles" : 200, "pool" : "mediumValueQuestRewards" },
 
-			"CVTimedReward1" : { "repeatable" : true, "location" : ["shaft", "balls"], "time" : 3, "minTime" : 0, "pool" : "richOre" },
+			"CVTimedReward1" : { "repeatable" : true, "location" : ["cock", "balls"], "time" : 3, "minTime" : 0, "pool" : "richOre" },
 
 			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
 			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
@@ -2635,7 +2623,7 @@
 					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
 				},
 				"settings" : {
-					// "bellyEffect" : ["sbqRemoveBellyEffects","sbqHeal"] // example for a prey that would only seek out endo preds
+					// "bellyEffect" : ["sbqRemoveBellyEffects","sbq_acidHeal"] // example for a prey that would only seek out endo preds
 				}
 			}
 		},
@@ -2973,7 +2961,7 @@
 				"baseValue" : -0.0583 // -70 food over 20 minutes
 			},
 			"sbqLustScriptMax" : {
-				"baseValue" : 0.5
+				"baseValue" : 0.33
 			},
 			"sbqLustScriptDelta" : {
 				"baseValue" : 0.0583
