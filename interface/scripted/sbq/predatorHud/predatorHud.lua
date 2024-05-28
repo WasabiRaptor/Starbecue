@@ -10,7 +10,8 @@ function init()
 		Occupants.list = occupants
 		sbq.refreshOccupants()
 	end)
-	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
+    message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
+		if not world.entityExists(entityId) then return end
 		local portrait = _ENV[entityId .. "PortraitCanvas"]
 		if portrait then
 			local pos = { 0, 0 }
@@ -110,8 +111,10 @@ sbq.bottomBar = {
 
 function sbq.updateBars(dt)
 	for _, occupant in ipairs(Occupants.list) do
-		sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
-		sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressBarColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") or 0 )
+		if world.entityExists(occupant.entityId) then
+			sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
+			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressBarColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") or 0 )
+		end
 	end
 end
 

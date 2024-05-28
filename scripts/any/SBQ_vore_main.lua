@@ -444,7 +444,9 @@ function _State:tryAction(name, target, ...)
 		end
 	end, name, action, target, result2, ..., longest)
 
-	world.sendEntityMessage(target, "sbqActionOccuring", entity.id(), name, longest)
+	if target then
+		world.sendEntityMessage(target, "sbqActionOccuring", entity.id(), name, longest)
+	end
 
 	if type(result2) ~= "function" then
 		return result1, result2 or false, longest
@@ -1423,7 +1425,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
 	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
-    self:sendEntityMessage(
+	self:sendEntityMessage(
 		"scriptPaneMessage",
 		"sbqRefreshLocationData",
 		entity.id(),
@@ -1650,6 +1652,7 @@ function _Occupant:statPositive(stat)
 end
 
 function _Occupant:sendEntityMessage(...)
+	if not world.entityExists(self.entityId) then return false end
 	return world.sendEntityMessage(self.entityId, ...)
 end
 
