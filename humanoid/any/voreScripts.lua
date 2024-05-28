@@ -27,7 +27,7 @@ end
 function Default:settingAnimations(hideSlots)
 	hideSlots = hideSlots or {}
 	local legs = sbq.getItemSlot("legsCosmetic") or sbq.getItemSlot("legs")
-	if (not hideSlots.legs) and legs and (not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
+	if (not hideSlots.legs) and legs and (not root.itemConfig(legs).config.showVoreAnims) and (sbq.voreConfig.legsVoreWhitelist and not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
 		self:doAnimations(sbq.voreConfig.legsHide)
 	else
 		self:doAnimations((sbq.settings.cock and sbq.voreConfig.cockShow) or sbq.voreConfig.cockHide)
@@ -35,7 +35,7 @@ function Default:settingAnimations(hideSlots)
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 	end
 	local chest = sbq.getItemSlot("chestCosmetic") or sbq.getItemSlot("chest")
-	if (not hideSlots.chest) and chest and (not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
+	if (not hideSlots.chest) and chest and (not root.itemConfig(chest).config.showVoreAnims) and (sbq.voreConfig.chestVoreWhitelist and not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
 		self:doAnimations(sbq.voreConfig.chestHide)
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
