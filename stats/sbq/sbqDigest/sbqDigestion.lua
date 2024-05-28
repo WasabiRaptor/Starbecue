@@ -42,7 +42,7 @@ function update(dt)
 				"sbqQueueAction",
 				config.getParameter("digestedAction") or "digested",
 				entity.id(),
-				type(item) == "table" and item or {name = item},
+				(item ~= nil) and (((type(item) == "table") and item) or {name = item, parameters = {}}),
 				config.getParameter("digestType"),
 				status.statPositive("sbq_"..config.getParameter("digestType").."DropsAllow")
 			), function (recieved)
