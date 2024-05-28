@@ -9,11 +9,14 @@ dialogueBox = {
 }
 local inital = true
 function init()
-	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()),function(actions)
-		_ENV.actionButton:setVisible( actions and actions[1] and true and not sbq.noActions)
-	end)
-	message.setHandler("sbqDialogueActionButtonVisible", function (_,_, visible)
-		_ENV.actionButton:setVisible(visible and not sbq.noActions)
+	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()), function(actions)
+		if actions and actions[1] then
+			_ENV.actionButton:setVisible(not sbq.noActions)
+		else
+			_ENV.actionButton:setVisible(false)
+		end
+	end, function ()
+		_ENV.actionButton:setVisible(false)
 	end)
 	message.setHandler("sbqCloseDialogueBox", function ()
 		pane.dismiss()
@@ -158,7 +161,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	elseif dialogue.finished then return true
 	else
 		dialogue.position = dialogue.position + 1
-    end
+	end
 	if dialogue.position >= #dialogue.result.dialogue then
 		dialogue.finished = true
 	end
@@ -197,7 +200,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	else
 		dialogueBox.scrollText()
 	end
-    dismissTime = results.dismissTime
+	dismissTime = results.dismissTime
 	sbq.timerList.dismissAfterTime = nil
 	return true
 end
