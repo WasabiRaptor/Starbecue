@@ -25,6 +25,7 @@
 # Ferrilata_
 	Ferri NPC
 	Catfox race
+	Digested bone pile
 
 # FFWizard
 	Helena NPC dialogue

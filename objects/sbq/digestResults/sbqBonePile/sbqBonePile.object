@@ -1,0 +1,69 @@
+{
+	"objectName" : "sbqBonePile",
+	"colonyTags" : ["dvore", "vore", "bone"],
+	"rarity" : "Common",
+	"category" : "decorative",
+	"price" : 100,
+	"maxStack" : 64,
+
+	"description" : "Bone pile.",
+	"shortdescription" : "Bone Pile",
+	"race" : "generic",
+
+	"baseColorMap":{
+		"primary" : ["b48520","dfa831","ffc341"],
+		"secondary" : ["000000","523e13","725927"]
+	},
+	"imageKeys" : {
+		"replaceMap" : "",
+		"replaceColors" : "",
+		"variant" : "1",
+		"species" : "any"
+	},
+	"variants" : {
+		"any" : 3
+	},
+
+	"replaceDescPredPrey" : [
+		"All that remains of <preyName> after they met <predName>."
+	],
+	"replaceDescPrey" : [
+		"<preyName>'s remains."
+	],
+	"replaceDescPred" : [
+		"The remains of <predName>'s meal."
+	],
+	"replaceDescForgetful" : [
+		"The remains of <predName>'s meal... whoever they were."
+	],
+	"replaceShortDescForgetful" : "Remains of <predName>'s Meal",
+	"replaceShortDescPredPrey" : "<preyName>'s Remains",
+	"replaceShortDescPrey" : "<preyName>'s Remains",
+	"replaceShortDescPred" : "Remains of <predName>'s Meal",
+
+	"builder" : "/objects/sbq/digestResults/digestResultBuilder.lua",
+	"retainObjectParametersInItem" : true,
+
+	"inventoryIcon" : "variants/<species><variant>.png<replaceMap><replaceColors>",
+	"orientations" : [
+		{
+			"image" : "variants/<species><variant>.png<replaceMap><replaceColors>",
+			"imagePosition" : [-8, 0],
+
+			"direction" : "right",
+
+			"spaceScan" : 0.1,
+			"anchors" : [ "bottom" ]
+		},
+		{
+			"image" : "variants/<species><variant>.png<replaceMap><replaceColors>",
+			"imagePosition" : [-8, 0],
+
+			"direction" : "left",
+			"flipImages" : true,
+
+			"spaceScan" : 0.1,
+			"anchors" : [ "bottom" ]
+		}
+	]
+}
