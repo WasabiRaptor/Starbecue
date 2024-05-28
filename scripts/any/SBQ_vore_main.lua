@@ -298,7 +298,7 @@ function _SpeciesScript:checkAnimations(...)
 end
 
 function _SpeciesScript:interact(...)
-	if not self.state then return false, "invalidState" end
+	if not self.state then return end
 	return self.state:interact(...)
 end
 
@@ -308,12 +308,12 @@ function _SpeciesScript:interactAction(...)
 end
 
 function _SpeciesScript:emergencyEscape(...)
-	if not self.state then return false, "invalidState" end
+	if not self.state then return end
 	return self.state:emergencyEscape(...)
 end
 
 function _SpeciesScript:climax(...)
-	if not self.state then return false, "invalidState" end
+	if not self.state then return end
 	return self.state:climax(...)
 end
 
@@ -625,7 +625,7 @@ function _State:interact(args)
 			dialogueTree = sbq.dialogueTree
 		})
 		if sbq.loungingIn() == args.sourceId then
-			dialogueBoxData.dialogueTreeStart = ".predInteract"
+			dialogueBoxData.dialogueTreeStart = ".loungingInteract"
 			dialogueBoxData.noActions = true
 		elseif Occupants.entityId[tostring(args.sourceId)] then
 			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
