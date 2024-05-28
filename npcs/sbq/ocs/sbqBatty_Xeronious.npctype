@@ -79,34 +79,6 @@
 
 			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
-		},
-
-
-		// when hunting for prey, a checklist to have them only seek out prey that match the settings
-		// any settings not defined in the checlkist for that vore type can be anything
-		// such as a digestion pred not wanting to eat prey with digestion immunity, or not want to eat other preds, etc.
-		"huntingChecklist" : {
-			"default" : { // mood
-				"preySettings" : {
-					// "digestImmunity" : "false" // example for a pred that would only seek out prey they can digest
-				},
-				"settings" : {
-					// "oralVorePred : "false" // example for a pred that wouldn't eat other oralVore preds
-				}
-			}
-		},
-		// when baiting a pred, a checklist to have them only seek out preds with certain settings
-		// any settings not defined in the checlkist for that vore type can be anything
-		// such as a prey not wanting to seek out preds that will digest them, or not wanting to seek out preds that do vore types they don't like, or not wanting to seek out preds who can also be prey
-		"baitingChecklist" : {
-			"default" : { // mood
-				"preySettings" : {
-					// "preyEnabled" : "false" // example for a prey that would only seek out pure preds, not switches
-				},
-				"settings" : {
-					// "bellyEffect" : ["sbqRemoveBellyEffects","sbq_acidHeal"] // example for a prey that would only seek out endo preds
-				}
-			}
 		}
 	},
 	"statusControllerSettings" : {

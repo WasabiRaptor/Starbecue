@@ -385,7 +385,13 @@ function default:reform(name, action, target,...)
 		occupant.locationSettings.reformDigested = true
 		occupant:refreshLocation()
 		return true
+	else
+		return SpeciesScript:tryAction("reformed", target)
 	end
+end
+function default:reformed(name, action, target,...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
 		location.infusedEntity = nil
@@ -462,16 +468,25 @@ function default:transform(name, action, target, ...)
 	}
 	if not sbq.tableMatches(checkSettings, sbq.getPublicProperty(target, "sbqPublicSettings")) then return false, "targetSettingsMismatch" end
 
-	if not ((occupant.flags.digested and (occupant.locationSettings.transformDigested))
-		or ((not occupant.flags.digested) and (occupant.locationSettings.transform)))
-	then
+	if not occupant.flags.transformed then
 		occupant.locationSettings.transform = true
 		occupant.locationSettings.transformDigested = true
 		occupant:refreshLocation()
 		return true
-	elseif (not world.entityStatPositive(target, "sbqTransformation")) or ((occupant:getPublicProperty("sbqTransformProgress") or 0) < 1) then
-		return true
 	end
+end
+function default:transformed(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	local location = occupant:getLocation()
+	local transformResult = action.transformResult or location.transformResult or sbq.voreConfig.transformResult or { species = humanoid.species() }
+	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
+	if not transformResult then return false, "invalidAction" end
+	local checkSettings = {
+		speciesTF = transformResult.species and true,
+		genderTF = transformResult.gender and true
+	}
+	if not sbq.tableMatches(checkSettings, sbq.getPublicProperty(target, "sbqPublicSettings")) then return false, "targetSettingsMismatch" end
 
 	occupant.flags.transformed = true
 	occupant.locationSettings.transform = false

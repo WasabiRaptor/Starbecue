@@ -19,6 +19,21 @@ function build(directory, config, parameters, level, seed)
 		elseif parameters.predName and config.replaceDescPred then
 			parameters.descIndex = math.random(#config.replaceDescPred)
 		end
+
+		if config.variants then
+			local species = "any"
+			if preyIdentity.species and config.variants and config.variants[preyIdentity.species] then
+				species = preyIdentity.species
+			end
+			local replaceTags = {
+				species = species,
+				variant = tostring(math.random(config.variants[species]))
+			}
+			parameters.imageKeys = sb.jsonMerge(parameters.imageKeys or {}, replaceTags)
+			parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
+			parameters.animationCustom = parameters.animationCustom or {}
+			parameters.animationCustom.globalTagDefaults = sb.jsonMerge(parameters.animationCustom.globalTagDefaults or {}, replaceTags)
+		end
 	end
 	if parameters.directives then -- because of the old ones
 		parameters.imageKeys = sb.jsonMerge(config.imageKeys, {
@@ -65,7 +80,7 @@ function setupReplaceColors(config, parameters, identity)
 		replaceTags.replaceMap = replaceTags.replaceMap..sbq.replace(v, speciesFile.baseColorMap[k])
 	end
 	parameters.imageKeys = sb.jsonMerge(config.imageKeys, replaceTags)
-    parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
+	parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
 	parameters.animationCustom = parameters.animationCustom or {}
 	parameters.animationCustom.globalTagDefaults = sb.jsonMerge((config.animationCustom or {}).globalTagDefaults or {}, replaceTags)
 

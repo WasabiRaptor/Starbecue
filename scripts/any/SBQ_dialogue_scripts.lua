@@ -69,16 +69,19 @@ dialogueStepScripts.sbq_acidHeal = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumHeal = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cumHeal = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_milkHeal = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_miscHeal = dialogueStepScripts.statPositive
 
 dialogueStepScripts.sbq_acidSoftDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cumSoftDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumSoftDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_milkSoftDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_miscSoftDigest = dialogueStepScripts.statPositive
 
 dialogueStepScripts.sbq_acidDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cumDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumDigest = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_milkDigest = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_miscDigest = dialogueStepScripts.statPositive
 
 dialogueStepScripts.sbqTransformation = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqDrainEnergy = dialogueStepScripts.statPositive
@@ -98,6 +101,8 @@ dialogueStepScripts.sbq_acidDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_cumDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_milkDigestResistance = dialogueStepScripts.statPositive
+dialogueStepScripts.sbq_miscDigestResistance = dialogueStepScripts.statPositive
+
 
 function dialogueStepScripts.occupantFlag(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local flags = sbq.getPublicProperty(eid, "sbqOccupantData") or {}
