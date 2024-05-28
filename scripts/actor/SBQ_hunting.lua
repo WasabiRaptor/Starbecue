@@ -166,7 +166,6 @@ function sbq_hunting.attemptAction(target)
 		end
 	else -- being prey
 		sbq.addRPC(world.sendEntityMessage(target, "sbqActionAvailable", sbq_hunting.action, entity.id()), function (results)
-			sbq.logInfo(results)
 			if not results then sbq_hunting.nextTarget() return end
 			local success, reason = table.unpack(results)
 			if not success then sbq_hunting.nextTarget() return end
