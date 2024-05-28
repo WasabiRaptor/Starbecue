@@ -28,7 +28,7 @@ function init()
 		local behavior = {}
 		local _behavior = self.behavior
 		function behavior:run(...)
-			if status.statPositive("sbqIsPrey") then
+			if not status.statPositive("sbqIsPrey") then
 				return _behavior:run(...)
 			else
 				sbq.struggleBehavior(...)
