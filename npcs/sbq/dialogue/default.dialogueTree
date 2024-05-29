@@ -38,6 +38,12 @@
 					"buttonText": [":follow"],
 					"jump" : ".follow"
 				}}
+			},
+			"false" : {
+				"next" : ["introduced"],
+				"true" : {
+					"replace" : {"dialogueRandom" : [":greetingIntroduced"]}
+				}
 			}
 		}
 	},

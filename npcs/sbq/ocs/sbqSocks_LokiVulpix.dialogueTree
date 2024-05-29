@@ -20,15 +20,40 @@
 			}
 		},
 		"default" : {
-			"next" : ["introduced","isOwner"],
-			"replace" : {"dialogueRandom" : [":greeting"]},
-			"seperateNext" : true,
-			"introduced" : { "true" : { "replace" : {
-				"dialogueRandom" : [":greetingIntroduced"]
-			}}},
-			"isOwner" : {"true" : { "replace" : {
-				"dialogueRandom" : [":greetingCrew"]
-			}}}
+			"next" : ["isOwner"],
+			"replace" : {
+				"dialogueRandom" : [":greeting"]
+			},
+			"true" : {
+				"next" : ["isFollowing", "addConverse"],
+				"replace" : {
+					"dialogueRandom" : [":greetingCrew"],
+					"buttonText" : ":optionsPrompt"
+				},
+				"true" : { "replace" : {
+					"options" : [[":stay", ".stay"]]
+				}},
+				"false" : {"replace" : {
+					"options" : [[":follow", ".follow"]]
+				}},
+				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
+			}
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
+			"new" : {"dialogueRandom" : [":fullCrew"]}
+		},
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
 	"converse" : {
@@ -36,55 +61,19 @@
 			"dialogueRandom" : [":converse"],
 			"buttonText" : ":optionsPrompt",
 			"options" : [
-				[ "* Pet", ".pet"],
-				[ "My name is...", ".introduce", {"check" : {"introduced" : false}}]
+				[ "* Pet", ".pet"]
 			]
 		},
-		"next" : ["isOwner", "otherOptions"],
-		"true" : {
-			"addQueued" : true,
-			"queueReplace" : {
-				"options" : [
-					[":stay", ["swapFollowing"]]
-				]
-			},
-			"next" : ["isFollowing"],
-			"false" : {
-				"queueReplace" : {
-					"options" : [
-						[":follow", ["swapFollowing"]]
-					]
-				}
-			}
-		},
-		"otherOptions" : {
-			"add" : {
-				"options" : [
-					["Tell me about yourself", ".talkAboutSelf", {"check" : {"introduced" : true}}],
-					["Tell me about your body", ".talkAboutBody", {"check" : {"introduced" : true}}],
-					//["Lets talk about kinks", ".talkAboutKinks", {"check" : {"introduced" : true}}],
-					["Have any fun stories?", ".tellAStory", {"check" : {"introduced" : true}}]
-				]
-			}
-		},
-		"stay" : {
-			"new" : {
-				"dialogueRandom" : ["crewStay"],
-				"jump" : ".converse"
-			}
-		},
-		"follow" : {
-			"new" : {
-				"dialogueRandom" : ["crewFollow"],
-				"jump" : ".converse"
-			}
-		},
-		"fullCrew" : {
-			"new" : {
-				"dialogueRandom" : [":fullCrew"],
-				"jump" : ".converse"
-			}
-		},
+		"next" : ["introduced"],
+		"true" : {"add" : {"options" : [
+			["Tell me about yourself", ".talkAboutSelf"],
+			["Tell me about your body", ".talkAboutBody"],
+			//["Lets talk about kinks", ".talkAboutKinks"],
+			["Have any fun stories?", ".tellAStory"]
+		]}},
+		"false" : {"add" : {"options" : [
+			[ ":myNameIs", ".introduce" ]
+		]}},
 		"introduce" :{
 			"new" : {
 				"playerSaveSettings" : { "introduced" : true },

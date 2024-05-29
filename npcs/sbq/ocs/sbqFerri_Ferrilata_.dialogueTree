@@ -20,27 +20,49 @@
 			}
 		},
 		"default" : {
-			"next" : ["percentage", "isOwner" ],
-			"replace" : {"dialogueRandom" : [":greeting"]},
-			"true" : {
-				"replace" : {
-					"dialogueRandom" : [":greetingCrew"]
-				}
+			"next" : ["isOwner"],
+			"replace" : {
+				"dialogueRandom" : [":greeting"]
 			},
-			"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-			"sbqLust" : {"replace" : {"dialogueRandom" : [":greetingHorny"]}},
-			"food" : {"replace" : {"dialogueRandom" : [":greetingHungry"]}
+			"true" : {
+				"next" : ["isFollowing", "addConverse"],
+				"replace" : {
+					"dialogueRandom" : [":greetingCrew"],
+					"buttonText" : ":optionsPrompt"
+				},
+				"true" : { "replace" : {
+					"options" : [[":stay", ".stay"]]
+				}},
+				"false" : {"replace" : {
+					"options" : [[":follow", ".follow"]]
+				}},
+				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
 			}
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
+			"new" : {"dialogueRandom" : [":fullCrew"]}
+		},
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
 	"converse" : {
 		"new" : {
 			"dialogueRandom" : [":converse"],
 			"buttonText" : ":optionsPrompt",
-			"options" : [
-			]
+			"options" : []
 		},
-		"next" : ["percentage","playerRace","isOwner", "otherOptions"],
+		"next" : ["percentage","playerRace","otherOptions"],
 		"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
 		"sbqLust" : {"replace" : {"dialogueRandom" : [":hornyConverse"]}},
 		"food" : {"replace" : {"dialogueRandom" : [":hungryConverse"]}},
@@ -52,41 +74,12 @@
 			"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundHornyConverse"]}},
 			"food" : {"replace" : {"dialogueRandom" : [":hellhoundHungryConverse"]}}
 		},
-		"true" : {
-			"addQueued" : true,
-			"queueReplace" : {
-				"options" : [
-					[":stay", ["swapFollowing"]]
-				]
-			},
-			"next" : ["isFollowing"],
-			"false" : {
-				"queueReplace" : {
-					"options" : [
-						[":follow", ["swapFollowing"]]
-					]
-				}
-			}
-		},
 		"otherOptions" : {
 			"add" : {
 				"options" : [
 					["I was curious.", ".curious"]
 				]
 			}
-		},
-		"stay" : {
-			"new" : {
-				"dialogueRandom" : ["crewStay"]
-			}
-		},
-		"follow" : {
-			"new" : {
-				"dialogueRandom" : ["crewFollow"]
-			}
-		},
-		"fullCrew" : {
-			"new" : {"dialogueRandom" : [":fullCrew"]}
 		}
 	},
 	"curious" : {

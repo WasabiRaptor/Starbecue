@@ -21,12 +21,39 @@
 		},
 		"default" : {
 			"next" : ["isOwner"],
-			"replace" : {"dialogueRandom" : [":greeting"]},
+			"replace" : {
+				"dialogueRandom" : [":greeting"]
+			},
 			"true" : {
+				"next" : ["isFollowing", "addConverse"],
 				"replace" : {
-					"dialogueRandom" : [":greetingCrew"]
-				}
+					"dialogueRandom" : [":greetingCrew"],
+					"buttonText" : ":optionsPrompt"
+				},
+				"true" : { "replace" : {
+					"options" : [[":stay", ".stay"]]
+				}},
+				"false" : {"replace" : {
+					"options" : [[":follow", ".follow"]]
+				}},
+				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
 			}
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
+			"new" : {"dialogueRandom" : [":fullCrew"]}
+		},
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
 	"converse" : {
@@ -37,36 +64,7 @@
 				[ "* Pet", ".pet"]
 			]
 		},
-		"next" : ["isOwner", "otherOptions"],
-		"true" : {
-			"addQueued" : true,
-			"queueReplace" : {
-				"options" : [
-					[":stay", ["swapFollowing"]]
-				]
-			},
-			"next" : ["isFollowing"],
-			"false" : {
-				"queueReplace" : {
-					"options" : [
-						[":follow", ["swapFollowing"]]
-					]
-				}
-			}
-		},
-		"stay" : {
-			"new" : {
-				"dialogueRandom" : ["crewStay"]
-			}
-		},
-		"follow" : {
-			"new" : {
-				"dialogueRandom" : ["crewFollow"]
-			}
-		},
-		"fullCrew" : {
-			"new" : {"dialogueRandom" : [":fullCrew"]}
-		}
+		"next" : ["otherOptions"]
 	},
 	"pet" : {
 		"new" : {

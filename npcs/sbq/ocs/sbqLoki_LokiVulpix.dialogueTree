@@ -21,12 +21,39 @@
 		},
 		"default" : {
 			"next" : ["isOwner"],
-			"replace" : {"dialogueRandom" : [":greeting"]},
+			"replace" : {
+				"dialogueRandom" : [":greeting"]
+			},
 			"true" : {
+				"next" : ["isFollowing", "addConverse"],
 				"replace" : {
-					"dialogueRandom" : [":greetingCrew"]
-				}
+					"dialogueRandom" : [":greetingCrew"],
+					"buttonText" : ":optionsPrompt"
+				},
+				"true" : { "replace" : {
+					"options" : [[":stay", ".stay"]]
+				}},
+				"false" : {"replace" : {
+					"options" : [[":follow", ".follow"]]
+				}},
+				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
 			}
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
+			"new" : {"dialogueRandom" : [":fullCrew"]}
+		},
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
 
@@ -35,12 +62,15 @@
 			"dialogueRandom" :[":converse"],
 			"options" : [
 				["Can you help me make something?", ".converse.lokiShop"],
-				["My name is...", ".converse.introduce", {"check" : {"introduced":"false"}}],
 				["Tell me about yourself", ".talkAboutSelf"],
 				["Tell me about your kinks", ".talkAboutKinks"],
 				["Tell me about your body", ".talkAboutBody"]
 			]
 		},
+		"next" : ["introduced"],
+		"false" : {"add" : {"options" : [
+			[ ":myNameIs", ".introduce" ]
+		]}},
 
 		"lokiShop" : {
 			"next" : "openNewDialogueBox",

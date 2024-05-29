@@ -25,25 +25,39 @@
 			"true" : {
 				"next" : ["isFollowing"],
 				"replace" : {
-					"dialogueRandom" : [":greetingCrew"],
-					"buttonText" : [":stay"],
-					"callScript" : "swapFollowing"
+					"dialogueRandom" : [":greetingCrew"]
 				},
-				"false" : { "replace" : {"buttonText": [":follow"]}}
+				"true" : { "replace" : {
+					"buttonText" : [":stay"],
+					"jump" : ".stay"
+				}},
+				"false" : {"replace" : {
+					"buttonText": [":follow"],
+					"jump" : ".follow"
+				}}
+			},
+			"false" : {
+				"next" : ["introduced"],
+				"true" : {
+					"replace" : {"dialogueRandom" : [":greetingIntroduced"]}
+				}
 			}
-		},
-		"stay" : {
-			"new" : {
-				"dialogueRandom" : ["crewStay"]
-			}
-		},
-		"follow" : {
-			"new" : {
-				"dialogueRandom" : ["crewFollow"]
-			}
-		},
-		"fullCrew" : {
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
 			"new" : {"dialogueRandom" : [":fullCrew"]}
+		},
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
 	// lines triggered when a player may recieve a certain reward

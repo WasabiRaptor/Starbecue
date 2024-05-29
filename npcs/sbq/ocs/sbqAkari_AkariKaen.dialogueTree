@@ -64,35 +64,13 @@
 			"dialogueRandom" : [":converse"],
 			"buttonText" : ":optionsPrompt",
 			"options" : [
-				[ "My name is...", ".introduce", {"check" : {"introduced" : false}}]
+				[ ":tellMeAboutSelf", ".talkAboutSelf"]
 			]
 		},
-		"next" : ["otherOptions"],
-		"otherOptions" : {
-			"add" : {
-				"options" : [
-					[ "Tell me more about you", ".talkAboutSelf"]
-				]
-			}
-		},
-		"stay" : {
-			"new" : {
-				"dialogueRandom" : ["crewStay"],
-				"jump" : ".converse"
-			}
-		},
-		"follow" : {
-			"new" : {
-				"dialogueRandom" : ["crewFollow"],
-				"jump" : ".converse"
-			}
-		},
-		"fullCrew" : {
-			"new" : {
-				"dialogueRandom" : [":fullCrew"],
-				"jump" : ".converse"
-			}
-		},
+		"next" : ["introduced"],
+		"false" : {"add" : {"options" : [
+			[ ":myNameIs", ".introduce" ]
+		]}},
 		"introduce" :{
 			"new" : {
 				"playerSaveSettings" : { "introduced" : true },
