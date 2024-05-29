@@ -77,9 +77,7 @@
 				}
 			]
 		],
-		"buttonTextRandom": [
-			"[Options]"
-		]
+		"buttonText": ":optionsPrompt"
 	},
 	"introduce": ":missingDialogue",
 	"shopConverse": [
@@ -93,14 +91,14 @@
 			"What did you want to ask?",
 			"Ask away."
 		],
-		"buttonTextRandom": "[Options]"
+		"buttonText": ":optionsPrompt"
 	},
 	"talkAboutKinks": {
 		"dialogueRandom": [
 			"So what kinky stuff did you want to know?",
 			"What're today's horny questions?"
 		],
-		"buttonTextRandom": "[Options]"
+		"buttonText": ":optionsPrompt"
 	},
 	"talkAboutBody": ":missingDialogue",
 	"itemSelectionPotionVaporeon": {
@@ -418,13 +416,13 @@
 		"You're doing amazing, I'll have some extra nice stuff for you~",
 		"Mmm~ are you trying to get gifts, or is keeping me happy a reward itself~?"
 	],
-	"oralVoreRequestBefore": [
+	"oralVoreRequested": [
 		"You want me to eat you?",
 		"Alright, sure.",
 		"Yeah ok.",
 		"Sounds good."
 	],
-	"oralVoreRequestAfter": [
+	"oralVoreRequestedAfter": [
 		"Mmmmmmm... good.",
 		"Tasty.",
 		"Nice and filling.",
@@ -436,7 +434,7 @@
 		"You seem like you'd make a good meal.",
 		"My belly's been grumbling..."
 	],
-	"oralVoreNoPromptAfter": ":oralVoreRequestAfter",
+	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter",
 	"oralVorePrompt": {
 		"percentage": "food",
 		"pools": [
@@ -597,7 +595,7 @@
 		"I've been filled too much already...",
 		"I would... but I'm too full..."
 	],
-	"tailVoreRequestBefore": {
+	"tailVoreRequested": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -614,7 +612,7 @@
 			]
 		]
 	},
-	"tailVoreRequestAfter": {
+	"tailVoreRequestedAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -779,12 +777,12 @@
 		"My tail is full, but it's prey is getting compacted, so there'll be room soon!",
 		"Once my tail has squeeze down it's current guest, I might squeeze you in."
 	],
-	"cockVoreRequestBefore": [
+	"cockVoreRequested": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my dick?",
 		"Thats going to be a real tight fit."
 	],
-	"cockVoreRequestAfter": [
+	"cockVoreRequestedAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me all excited~",
 		"Ffff~ Now I'm all hard~",
@@ -933,13 +931,13 @@
 	"cockVoreCompressionFull": [
 		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
 	],
-	"unbirthVoreRequestBefore": [
+	"unbirthVoreRequested": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my pussy?",
 		"You know thats where dicks are supposed to go right?",
 		"Thats going to be a real tight fit."
 	],
-	"unbirthVoreRequestAfter": [
+	"unbirthVoreRequestedAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me excited~",
 		"Ffff~ Now I'm all wet~",
@@ -1063,14 +1061,14 @@
 	"unbirthVoreCompressionFull": [
 		"A bit full, but give me a moment or two to pack them down a bit."
 	],
-	"breastVoreRequestBefore": [
+	"breastVoreRequested": [
 		"Hah, you're horny.",
 		"You want to squirm into one of my boobs?",
 		"Hehe, you want a bit more than just a drink of milk don't you~",
 		"Thats going to be a real tight fit.",
 		"Now to decide which side to put you on..."
 	],
-	"breastVoreRequestAfter": [
+	"breastVoreRequestedAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me excited~",
 		"Ffff~ hehe now they look even bigger~",
@@ -2545,7 +2543,7 @@
 			"You can't melt me!"
 		]
 	],
-	"strugglingBellyHeal": [
+	"strugglingAcidHeal": [
 		[
 			"Ahh... its so soothing.",
 			"I can feel all my troubles melting away...",
@@ -3112,17 +3110,17 @@
 	"bellyInfuseNoPromptLayer": ":bellyInfuseNoPrompt",
 	"bellyInfuseNoPromptAfter": ":bellyInfuseRequestedAfterLayer",
 	"bellyInfuseNoPromptAfterLayer": ":bellyInfuseNoPromptLayer",
-	"tailInfuseRequestBefore": [
+	"tailInfuseRequested": [
 		"Looking to be a part of my tail, huh? Can't say I blame you!",
 		"You're gonna make a nice bit of extra length!",
 		"I knew you were staring at my tail for a reason!"
 	],
-	"tailInfuseRequestBeforeLayer": ":tailInfuseRequestBefore",
-	"tailInfuseRequestAfter": [
+	"tailInfuseRequestedLayer": ":tailInfuseRequested",
+	"tailInfuseRequestedAfter": [
 		"Looking good back there, <entityname>!",
 		"All a part of me, now!"
 	],
-	"tailInfuseRequestAfterLayer": ":tailInfuseRequestAfter",
+	"tailInfuseRequestedAfterLayer": ":tailInfuseRequestedAfter",
 	"tailInfuseNoPrompt": [
 		"Might as well keep you back there, since you squirmed so nicely!",
 		"I think you'll look good as part of my tail. Wouldn't you agree?"
@@ -3735,13 +3733,13 @@
 		"If only you were a bit smaller...",
 		"Thats a bit too much to ask of me..."
 	],
-	"analVoreRequestBefore": [
+	"analVoreRequested": [
 		"You want to go up my butt?",
 		"You know thats the wrong way right?",
 		"That's going to be a tight fit.",
 		"Thats an interesting request."
 	],
-	"analVoreRequestAfter": [
+	"analVoreRequestedAfter": [
 		"Ahhh~ Hope I'm not squeezing too much.",
 		"Mmm~ This actually feels pretty good.",
 		"Heh~ it's almost like you're a living dildo.",
@@ -3790,7 +3788,7 @@
 		"Having a good time in there?",
 		"Hope its comfortable."
 	],
-	"struggleBellyHeal": [
+	"struggleAcidHeal": [
 		[
 			"Now you're nice and safe.",
 			"Hope you like how it feels in there.",

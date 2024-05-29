@@ -113,10 +113,10 @@
 					"What's on your mind?",
 					"What can I do for you?"
 					],
-				"buttonTextRandom" : ["[options]"],
+				"buttonTextRandom" : ":optionsPrompt",
 				"options" : [
 					["Can we talk about you?", {
-						"buttonTextRandom" : ["[options]"],
+						"buttonTextRandom" : ":optionsPrompt",
 						"randomDialogue" : [ "What about me?" ],
 						"options" : [
 							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "buttonTextRandom" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],

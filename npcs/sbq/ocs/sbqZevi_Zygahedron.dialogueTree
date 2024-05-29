@@ -13,10 +13,10 @@
 		"new" : {"jump" : ".converse"},
 		"next" : "giveRewards",
 		"rewards" : {
-			"replace" : {"dialogueRandom" : ["greetingRewards"]},
+			"replace" : {"dialogueRandom" : [":greetingRewards"]},
 			"next" : ["introduced"],
 			"true" : {
-				"replace" : {"dialogueRandom" : ["greetingRewardsIntroduced"]}
+				"replace" : {"dialogueRandom" : [":greetingRewardsIntroduced"]}
 			}
 		},
 		"default" : {
@@ -32,7 +32,7 @@
 	"converse" : {
 		"new" : {
 			"dialogueRandom" : [":converse"],
-			"buttonText" : ["[Options]"],
+			"buttonText" : ":optionsPrompt",
 			"options" : [
 				[ "* Pet", ".pet"]
 			]
@@ -42,14 +42,14 @@
 			"addQueued" : true,
 			"queueReplace" : {
 				"options" : [
-					["Stay", ["swapFollowing"]]
+					[":stay", ["swapFollowing"]]
 				]
 			},
 			"next" : ["isFollowing"],
 			"false" : {
 				"queueReplace" : {
 					"options" : [
-						["Follow", ["swapFollowing"]]
+						[":follow", ["swapFollowing"]]
 					]
 				}
 			}
@@ -128,10 +128,10 @@
 			"request" : {
 				"next" : "doingVore",
 				"before" : {
-					"replace" : {"dialogueRandom" : [":tailVoreRequestBefore"]}
+					"replace" : {"dialogueRandom" : [":tailVoreRequested"]}
 				},
 				"after" : {
-					"replace" : {"dialogueRandom" : [":tailVoreRequestAfter"]}
+					"replace" : {"dialogueRandom" : [":tailVoreRequestedAfter"]}
 				}
 			},
 			"unprompted" : {
@@ -225,10 +225,10 @@
 			"request" : {
 				"next" : "doingVore",
 				"before" : {
-					"replace" : {"dialogueRandom" : [":cockVoreRequestBefore"]}
+					"replace" : {"dialogueRandom" : [":cockVoreRequested"]}
 				},
 				"after" : {
-					"replace" : {"dialogueRandom" : [":cockVoreRequestAfter"]}
+					"replace" : {"dialogueRandom" : [":cockVoreRequestedAfter"]}
 				}
 			},
 			"unprompted" : {
@@ -322,10 +322,10 @@
 			"request" : {
 				"next" : "doingVore",
 				"before" : {
-					"replace" : {"dialogueRandom" : [":unbirthVoreRequestBefore"]}
+					"replace" : {"dialogueRandom" : [":unbirthVoreRequested"]}
 				},
 				"after" : {
-					"replace" : {"dialogueRandom" : [":unbirthVoreRequestAfter"]}
+					"replace" : {"dialogueRandom" : [":unbirthVoreRequestedAfter"]}
 				}
 			},
 			"unprompted" : {
@@ -1300,7 +1300,7 @@
 					"next" : "digestImmunity",
 					"true" : {"replace" : {"dialogueRandom" : [":strugglingAcidDigestImmune"]}}
 				},
-				"heal" : { "replace" : {"dialogueRandom" : [":strugglingBellyHeal"]}}
+				"heal" : { "replace" : {"dialogueRandom" : [":strugglingAcidHeal"]}}
 			},
 			"locationCompression" : { "time" : { "add" : { "dialogueRandom" : [":strugglingBellyCompression"]}}},
 			"locationDrainEnergy" : { "true" : { "add" : { "dialogueRandom" : [":strugglingBellyDrainEnergy"]}}},
@@ -1988,14 +1988,14 @@
 			"request" : {
 				"next" : "doingVore",
 				"before" : {
-					"replace" : { "dialogueRandom" : [":tailInfuseRequestBefore"]},
+					"replace" : { "dialogueRandom" : [":tailInfuseRequested"]},
 					"next" : "infuselayered",
-					"true" : {"replace" : { "dialogueRandom" : [":tailInfuseRequestBeforeLayer"]}}
+					"true" : {"replace" : { "dialogueRandom" : [":tailInfuseRequestedLayer"]}}
 				},
 				"after" : {
-					"replace" : { "dialogueRandom" : [":tailInfuseRequestAfter"]},
+					"replace" : { "dialogueRandom" : [":tailInfuseRequestedAfter"]},
 					"next" : "infuselayered",
-					"true" : {"replace" : { "dialogueRandom" : [":tailInfuseRequestAfterLayer"]}}
+					"true" : {"replace" : { "dialogueRandom" : [":tailInfuseRequestedAfterLayer"]}}
 				}
 			},
 			"unprompted" : {

@@ -211,11 +211,7 @@
 		"portrait": [
 			"Sleepy.png"
 		],
-		"buttonTextRandom": [
-			"[Choose]",
-			"[Choose]",
-			"[Choose]"
-		]
+		"buttonText": ":choosePrompt"
 	},
 	"curiousWhoAreYou": {
 		"dialogue": [
@@ -485,10 +481,10 @@
 			"Sleepy.png"
 		]
 	},
-	"curiousBellyHeal": [
+	"curiousAcidHeal": [
 		"It's surprisingly therapeutic right now. Think of it as a nice sauna."
 	],
-	"hornyCuriousBellyHeal": {
+	"hornyCuriousAcidHeal": {
 		"dialogue": [
 			"It has a few of my healing embers going. Perfect for mending a tired soul~"
 		],
@@ -496,7 +492,7 @@
 			"Determined.png"
 		]
 	},
-	"hungryCuriousBellyHeal": {
+	"hungryCuriousAcidHeal": {
 		"dialogue": [
 			"I think I can trick it into patching you up if you need it."
 		],
@@ -610,13 +606,13 @@
 		"I could probably give you a lick, but that's it...",
 		" ...Not right now, my body has its limits..."
 	],
-	"oralVoreRequestBefore": [
+	"oralVoreRequested": [
 		"Ah, yes. Time for you to slip down the hatch.",
 		"Your body told me all that I need to know. Get in.",
 		"Can't resist, can you? Neither can I.",
 		"My demonic allure too much for you? Come right on inside~"
 	],
-	"oralVoreHungryRequestBefore": {
+	"oralVoreHungryRequested": {
 		"dialogueRandom": [
 			"Offering yourself to me? I appreciate it. My gut will, too.",
 			"I certainly don't mind a willing snack.",
@@ -627,7 +623,7 @@
 			"Sleepy.png"
 		]
 	},
-	"oralVoreHornyRequestBefore": {
+	"oralVoreHornyRequested": {
 		"dialogueRandom": [
 			"I bet you can't wait to be trapped in my hot, gurgly gut. Who knows if I'll ever let you out~",
 			"My my, what a hot looking <entityname>~",
@@ -638,7 +634,7 @@
 			"Determined.png"
 		]
 	},
-	"oralVoreRequestAfter": {
+	"oralVoreRequestedAfter": {
 		"dialogueRandom": [
 			"Goodness, you're quite the meal. Not bad tasting, either!",
 			"*glk* There, tucked away where prey like you belong~",
@@ -649,7 +645,7 @@
 			"Happy.png"
 		]
 	},
-	"oralVoreHungryRequestAfter": {
+	"oralVoreHungryRequestedAfter": {
 		"dialogueRandom": [
 			"Absolutely divine. My taste buds and gut both send their compliments.",
 			"You are just what I needed, <entityname>.",
@@ -660,7 +656,7 @@
 			"Relieved.png"
 		]
 	},
-	"oralVoreHornyRequestAfter": {
+	"oralVoreHornyRequestedAfter": {
 		"dialogueRandom": [
 			"Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~",
 			"In terms of taste, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~",
@@ -1010,13 +1006,13 @@
 	"needsInfusion": [
 		"I'd want someone merged in there"
 	],
-	"analVoreRequestBefore": [
+	"analVoreRequested": [
 		"Ah, yes. Time for you to slip right on up.",
 		"Your body told me all that I need to know. Get in.",
 		"Can't resist, can you? Neither can I.",
 		"My demonic allure too much for you? Come right on inside~"
 	],
-	"analVoreRequestAfter": {
+	"analVoreRequestedAfter": {
 		"dialogueRandom": [
 			"Goodness, you're quite the meal. Felt great going in, too!",
 			"There, tucked away where you belong~",
@@ -1027,7 +1023,7 @@
 			"Happy.png"
 		]
 	},
-	"analVoreHungryRequestAfter": {
+	"analVoreHungryRequestedAfter": {
 		"dialogueRandom": [
 			"Absolutely splendid. My rear and gut both send their compliments.",
 			"You are just what I needed, <entityname>.",
@@ -1038,7 +1034,7 @@
 			"Relieved.png"
 		]
 	},
-	"analVoreHornyRequestAfter": {
+	"analVoreHornyRequestedAfter": {
 		"dialogueRandom": [
 			"Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~",
 			"In terms of feel, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~",
@@ -1245,7 +1241,7 @@
 		"I got my back door busy with squeezing a guest down, come back later maybe.",
 		"I'm squeezing as hard as I can, that should pack em down enough to fit you in a bit."
 	],
-	"cockVoreRequestBefore": {
+	"cockVoreRequested": {
 		"dialogueRandom": [
 			[
 				"Heh, did you think I forgot about this kind of vore? I didn't.",
@@ -1269,7 +1265,7 @@
 			"Determined.png"
 		]
 	},
-	"cockVoreRequestAfter": {
+	"cockVoreRequestedAfter": {
 		"dialogueRandom": [
 			[
 				"That's the spot. Make sure to squirm lots for both of us, dear.",
@@ -1497,13 +1493,13 @@
 	"cockVoreCompressionFull": [
 		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
 	],
-	"unbirthVoreRequestBefore": [
+	"unbirthVoreRequested": [
 		"It's going to get ^pink;hot^reset;. Oh! You're into that.",
 		"I figured you were never going to ask. I'm ready~",
 		"Mhm, let's do this~",
 		"I could practically smell how willing you are. Slip on in~"
 	],
-	"unbirthHungryRequestBefore": {
+	"unbirthHungryRequested": {
 		"dialogueRandom": [
 			"Not quite the hole I had in mind, but I don't mind.",
 			"Sure! Might help me get a few discounts.",
@@ -1514,7 +1510,7 @@
 			"Sleepy.png"
 		]
 	},
-	"unbirthHornyRequestBefore": {
+	"unbirthHornyRequested": {
 		"dialogueRandom": [
 			"Time for you to find out just how strong those muscles are~",
 			"I do love a willing toy~",
@@ -1525,7 +1521,7 @@
 			"Determined.png"
 		]
 	},
-	"unbirthVoreRequestAfter": {
+	"unbirthVoreRequestedAfter": {
 		"dialogueRandom": [
 			"Mmmf, that tickles~",
 			"This feeling never gets old. Enjoy~",
@@ -1536,7 +1532,7 @@
 			"Happy.png"
 		]
 	},
-	"unbirthHungryRequestAfter": {
+	"unbirthHungryRequestedAfter": {
 		"dialogueRandom": [
 			"All nice and tucked away.",
 			"Just relax. I'll find something for both of us.",
@@ -1547,7 +1543,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthHornyRequestAfter": {
+	"unbirthHornyRequestedAfter": {
 		"dialogueRandom": [
 			"Exactly what this hound has been desiring~",
 			"Carrying you around is going to give me quite the workout~",
@@ -1839,13 +1835,13 @@
 	"unbirthVoreCompressionFull": [
 		"A bit full, but give me a moment or two to pack them down a bit."
 	],
-	"breastVoreRequestBefore": [
+	"breastVoreRequested": [
 		"I see where your gaze is. How about you get a closer look?",
 		"Interested? Go on, give them a touch~",
 		"Want to experience one of my infamous hugs? Get over here.",
 		"Judging by how ^pink;flustered^reset; you look, I think I know what you want."
 	],
-	"breastVoreHungryRequestBefore": {
+	"breastVoreHungryRequested": {
 		"dialogueRandom": [
 			"Not exactly what I had in mind, but sure!",
 			"Sure. I could use the milk you'd help make.",
@@ -1856,7 +1852,7 @@
 			"Sleepy.png"
 		]
 	},
-	"breastVoreHornyRequestBefore": {
+	"breastVoreHornyRequested": {
 		"dialogueRandom": [
 			"I knew you couldn't resist, hot stuff. Let me give you a hug~",
 			"Hmhm, that I can do. Your paradise of milk awaits~",
@@ -1867,7 +1863,7 @@
 			"Determined.png"
 		]
 	},
-	"breastVoreRequestAfter": {
+	"breastVoreRequestedAfter": {
 		"dialogueRandom": [
 			"Mmm, mind if I keep you for a while? Say, forever?",
 			"Just lovely~ Now you know how my shirts get torn up.",
@@ -1878,7 +1874,7 @@
 			"Happy.png"
 		]
 	},
-	"breastVoreHungryRequestAfter": {
+	"breastVoreHungryRequestedAfter": {
 		"dialogueRandom": [
 			"At least you're nestled right on top of my hungry belly.",
 			"Time to grab some cookies, then.",
@@ -1889,7 +1885,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreHornyRequestAfter": {
+	"breastVoreHornyRequestedAfter": {
 		"dialogueRandom": [
 			"You fit in perfectly~ Might have to get myself a few meme sweaters.",
 			"Absolutely wonderful~ You really know how to pad a demon out~",
@@ -4308,7 +4304,7 @@
 		]
 	},
 	"strugglingBellyHornySoftDigest": ":missingDialogue",
-	"strugglingBellyHeal": {
+	"strugglingAcidHeal": {
 		"dialogueRandom": [
 			[
 				"It's rare that someone cares about my well-being. Thanks.",
@@ -5212,17 +5208,17 @@
 	"bellyInfuseNoPromptLayer": ":bellyInfuseNoPrompt",
 	"bellyInfuseNoPromptAfter": ":bellyInfuseRequestedAfterLayer",
 	"bellyInfuseNoPromptAfterLayer": ":bellyInfuseNoPromptLayer",
-	"tailInfuseRequestBefore": [
+	"tailInfuseRequested": [
 		"Looking to be a part of my tail, huh? Can't say I blame you!",
 		"You're gonna make a nice bit of extra length!",
 		"I knew you were staring at my tail for a reason!"
 	],
-	"tailInfuseRequestBeforeLayer": ":tailInfuseRequestBefore",
-	"tailInfuseRequestAfter": [
+	"tailInfuseRequestedLayer": ":tailInfuseRequested",
+	"tailInfuseRequestedAfter": [
 		"Looking good back there, <entityname>!",
 		"All a part of me, now!"
 	],
-	"tailInfuseRequestAfterLayer": ":tailInfuseRequestAfter",
+	"tailInfuseRequestedAfterLayer": ":tailInfuseRequestedAfter",
 	"tailInfuseNoPrompt": [
 		"Might as well keep you back there, since you squirmed so nicely!",
 		"I think you'll look good as part of my tail. Wouldn't you agree?"
@@ -6226,11 +6222,7 @@
 		"portrait": [
 			"Angry.png"
 		],
-		"buttonTextRandom": [
-			"...",
-			"...",
-			"..."
-		]
+		"buttonText": ["..."]
 	},
 	"converseFiendly.continue": {
 		"dialogueRandom": [
@@ -6274,7 +6266,7 @@
 			"Angry.png"
 		]
 	},
-	"oralVoreFiendlyRequestBefore": {
+	"oralVoreFiendlyRequested": {
 		"dialogueRandom": [
 			"^red;Not afraid? Good.",
 			"^red;Seriously? Fine.",
@@ -6285,7 +6277,7 @@
 			"Angry.png"
 		]
 	},
-	"oralVoreFiendlyRequestAfter": {
+	"oralVoreFiendlyRequestedAfter": {
 		"dialogueRandom": [
 			"^red;You're safe.",
 			"^red;It'll be okay.",
@@ -6385,7 +6377,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyRequestBefore": {
+	"breastVoreFiendlyRequested": {
 		"dialogueRandom": [
 			"^red;Really. Fine.",
 			"^red;Whatever floats your boat.",
@@ -6396,7 +6388,7 @@
 			"Angry.png"
 		]
 	},
-	"breastVoreFiendlyRequestAfter": {
+	"breastVoreFiendlyRequestedAfter": {
 		"dialogueRandom": [
 			"^red;You happy? Good.",
 			"^red;Don't drown.",
@@ -6485,7 +6477,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyRequestBefore": {
+	"unbirthFiendlyRequested": {
 		"dialogueRandom": [
 			"^red;Just get in.",
 			"^red;Since you asked.",
@@ -6496,7 +6488,7 @@
 			"Angry.png"
 		]
 	},
-	"unbirthFiendlyRequestAfter": {
+	"unbirthFiendlyRequestedAfter": {
 		"dialogueRandom": [
 			"^red;This helps. Thanks.",
 			"^red;Claimed by me.",

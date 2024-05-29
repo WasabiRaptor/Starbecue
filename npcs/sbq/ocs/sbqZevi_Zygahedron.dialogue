@@ -55,7 +55,7 @@
 		"I think you'll really like what I've gotten you.",
 		"My next gift will be really good heh."
 	],
-	"tailVoreRequestBefore": {
+	"tailVoreRequested": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -72,7 +72,7 @@
 			]
 		]
 	},
-	"tailVoreRequestAfter": {
+	"tailVoreRequestedAfter": {
 		"percentage": "food",
 		"pools": [
 			[ // 0% - 25%
@@ -264,12 +264,12 @@
 	"needsInfusion": [
 		"I'd want someone merged in there"
 	],
-	"cockVoreRequestBefore": [
+	"cockVoreRequested": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my dick?",
 		"Thats going to be a real tight fit."
 	],
-	"cockVoreRequestAfter": [
+	"cockVoreRequestedAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me all excited~",
 		"Ffff~ Now I'm all hard~",
@@ -418,13 +418,13 @@
 	"cockVoreCompressionFull": [
 		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
 	],
-	"unbirthVoreRequestBefore": [
+	"unbirthVoreRequested": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my pussy?",
 		"You know thats where dicks are supposed to go right?",
 		"Thats going to be a real tight fit."
 	],
-	"unbirthVoreRequestAfter": [
+	"unbirthVoreRequestedAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me excited~",
 		"Ffff~ Now I'm all wet~",
@@ -606,8 +606,8 @@
 		"Soon you'll be too tired to keep up all that moving.",
 		"Giving me a good show AND all of your energy? How generous!"
 	],
-	"struggleWomb": ":struggleBellyHeal",
-	"struggleBellyHeal": [
+	"struggleWomb": ":struggleAcidHeal",
+	"struggleAcidHeal": [
 		"Now you're nice and safe.",
 		"Hope you like how it feels in there."
 	],
@@ -1754,7 +1754,7 @@
 			"You can't melt me!"
 		]
 	],
-	"strugglingBellyHeal": [
+	"strugglingAcidHeal": [
 		[
 			"Ahh... its so soothing.",
 			"I can feel all my troubles melting away...",
@@ -2356,17 +2356,17 @@
 	"bellyInfuseNoPromptLayer": [],
 	"bellyInfuseNoPromptAfter": ":bellyInfuseRequestedAfterLayer",
 	"bellyInfuseNoPromptAfterLayer": ":bellyInfuseNoPromptLayer",
-	"tailInfuseRequestBefore": [
+	"tailInfuseRequested": [
 		"Looking to be a part of my tail, huh? Can't say I blame you!",
 		"You're gonna make a nice bit of extra length!",
 		"I knew you were staring at my tail for a reason!"
 	],
-	"tailInfuseRequestBeforeLayer": ":tailInfuseRequestBefore",
-	"tailInfuseRequestAfter": [
+	"tailInfuseRequestedLayer": ":tailInfuseRequested",
+	"tailInfuseRequestedAfter": [
 		"Looking good back there, <entityname>!",
 		"All a part of me, now!"
 	],
-	"tailInfuseRequestAfterLayer": ":tailInfuseRequestAfter",
+	"tailInfuseRequestedAfterLayer": ":tailInfuseRequestedAfter",
 	"tailInfuseNoPrompt": [
 		"Might as well keep you back there, since you squirmed so nicely!",
 		"I think you'll look good as part of my tail. Wouldn't you agree?"
@@ -2754,13 +2754,13 @@
 	],
 	// Unused Dialogue
 	// Unused Dialogue
-	"oralVoreRequestBefore": [
+	"oralVoreRequested": [
 		"You want me to eat you?",
 		"Alright, sure.",
 		"Yeah ok.",
 		"Sounds good."
 	],
-	"oralVoreRequestAfter": [
+	"oralVoreRequestedAfter": [
 		"Mmmmmmm... good.",
 		"Tasty.",
 		"Nice and filling.",
@@ -2772,7 +2772,7 @@
 		"You seem like you'd make a good meal.",
 		"My belly's been grumbling..."
 	],
-	"oralVoreNoPromptAfter": ":oralVoreRequestAfter",
+	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter",
 	"oralVorePrompt": {
 		"percentage": "food",
 		"pools": [
@@ -2909,13 +2909,13 @@
 		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
 		"Just give me a sec to squish my friend here down, and then you'll be next!"
 	],
-	"analVoreRequestBefore": [
+	"analVoreRequested": [
 		"You want to go up my butt?",
 		"You know thats the wrong way right?",
 		"That's going to be a tight fit.",
 		"Thats an interesting request."
 	],
-	"analVoreRequestAfter": [
+	"analVoreRequestedAfter": [
 		"Ahhh~ Hope I'm not squeezing too much.",
 		"Mmm~ This actually feels pretty good.",
 		"Heh~ it's almost like you're a living dildo.",
@@ -3047,11 +3047,11 @@
 		"I got my back door busy with squeezing a guest down, come back later maybe.",
 		"I'm squeezing as hard as I can, that should pack em down enough to fit you in a bit."
 	],
-	"absorbVoreRequestBefore": [ // these lines should be proofread and or redone when Absorb is actually implemented for NPCs/players
+	"absorbVoreRequested": [ // these lines should be proofread and or redone when Absorb is actually implemented for NPCs/players
 		"You want to be entirely engulfed within me? why not! come here.",
 		"Heh, now to give you a hug, and pull you into a full body hug."
 	],
-	"absorbVoreRequestAfter": [
+	"absorbVoreRequestedAfter": [
 		"Ah.. easy instant snack, settle in my buddy.",
 		"You fit like a glove in me, might as well got comfortable."
 	],

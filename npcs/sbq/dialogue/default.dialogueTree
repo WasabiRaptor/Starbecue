@@ -31,30 +31,30 @@
 					"dialogueRandom" : [":greetingCrew"]
 				},
 				"true" : { "replace" : {
-					"buttonText" : ["Stay"],
+					"buttonText" : [":stay"],
 					"jump" : ".stay"
 				}},
 				"false" : {"replace" : {
-					"buttonText": ["Follow"],
+					"buttonText": [":follow"],
 					"jump" : ".follow"
 				}}
 			}
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
+			"new" : {"dialogueRandom" : [":fullCrew"]}
 		},
-		"stay" : {
-			"next" : ["requestUnfollow"],
-			"new" : {
-				"dialogueRandom" : [":crewStay"]
-			}
-		},
-		"follow" : {
-			"next" : ["canGainFollowers"],
-			"false" : {
-				"new" : {"dialogueRandom" : [":fullCrew"]}
-			},
-			"true" : {
-				"next" : ["requestFollow"],
-				"new" : {"dialogueRandom" : [":crewFollow"]}
-			}
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
 	// lines triggered when a player may recieve a certain reward
@@ -2944,7 +2944,7 @@
 	// when stepped on by a larger character
 	"gotSteppy" : {
 		"new" : {"dialogueRandom":[":gotStepped"]},
-		"next" : "steppyType",
+		"next" : ["steppyType"],
 		"falling" :{"replace" : {"dialogueRandom":[":gotStomped"]}}
 	}
 }

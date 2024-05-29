@@ -17,22 +17,22 @@
 		"Hello Captain.",
 		"Captain."
 	],
-	"converse": [
-		"Did ya want to talk about something?",
-		"merp?"
-	],
 	"crewStay": [
 		"I'll be right here.",
 		"Staying here.",
 		"Yeah I'll stay."
+	],
+	"fullCrew": [
+		"I can't, you've got a full crew."
 	],
 	"crewFollow": [
 		"Right behind you!",
 		"Here we go!",
 		"Lets go!"
 	],
-	"fullCrew": [
-		"I can't, you've got a full crew."
+	"converse": [
+		"Did ya want to talk about something?",
+		"merp?"
 	],
 	"introduce": [
 		"well...\n nice to make you acquittance <entityname>"
@@ -80,25 +80,117 @@
 		"I think you'll really like what I've gotten you.",
 		"My next gift will be really good heh."
 	],
-	"oralVoreRequestBefore": [
+	"oralVoreRequested": [
 		"You want me to eat you?",
 		"Alright, sure.",
 		"Yeah ok.",
 		"Sounds good."
 	],
-	"oralVoreRequestAfter": [
+	"oralVoreRequestedAfter": [
 		"Mmmmmmm... good.",
 		"Tasty.",
 		"Nice and filling.",
 		"Not too bad."
 	],
-	"oralVoreNoPrompt": [
-		"I think you'll fill me up.",
-		"I just need a bite to eat.",
-		"You seem like you'd make a good meal.",
-		"My belly's been grumbling..."
+	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
+	"oralVoreNo": ":defaultNo", // duplicated lines
+	"defaultNo": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
 	],
-	"oralVoreNoPromptAfter": ":oralVoreRequestAfter",
+	"oralVoreTooBig": ":tooBig", // duplicated lines
+	"tooBig": [
+		"I think you're a bit too big to fit in there...",
+		"I don't think I'd be able to get you in...",
+		"If only you were a bit smaller...",
+		"Thats a bit too much to ask of me..."
+	],
+	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"tooSmall": [
+		"Sorry but I need something a bit bigger then you",
+		"I don't think I'd really feel you at that size",
+		"You're too short for this ride buddy",
+		"Maybe if you where just a little bigger..."
+	],
+	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"noSlots": [
+		"I think I'm at maximum capacity..."
+	],
+	"oralVoreFull": [
+		"I'm a bit too full...",
+		"My belly can't stretch any further...",
+		"I've eaten too much already...",
+		"I would... but I'm too full..."
+	],
+	"oralVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"needsInfusion": [
+		"I'd want someone merged in there"
+	],
+	"oralVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"alreadyInfused": [
+		"I think I'm already occupied there."
+	],
+	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"targetPreySettingsMismatch": [
+		"One of your occupants might not appreciate that."
+	],
+	"cockVoreRequested": [
+		"lol horny for sergal pp",
+		"merp? you want in my shaft?",
+		"hope you fit",
+		"well? come on in"
+	],
+	"cockVoreRequestedAfter": [
+		"ooh my merp that get me hard~",
+		"FFF~ you making this ergal very happy",
+		"great...im hard..hope no one notices...",
+		"m..merp merp~"
+	],
+	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
+	"cockVoreNo": [
+		"Not in the mood pal",
+		"I'm busy",
+		"Mayber later im just rubbed it off awhile ago",
+		"I'm got other sergals things to do...like merping",
+		"my shaft is tired"
+	],
+	"cockVoreTooBig": [
+		"Sorry micros only",
+		"Woah maybe shrink youself down and I may",
+		"get youself a shrink ray form Auri and come back to me",
+		"smalelr folks only",
+		"your to merping big"
+	],
+	"cockVoreTooSmall": ":tooSmall", // duplicated lines
+	"cockVoreNoSlots": ":noSlots", // duplicated lines
+	"cockVoreFull": [
+		"my sheese dispenser is full right now...",
+		"Hmmm if someone moves down to my balls you might fit~",
+		"This sergal shaft is full",
+		"Maybe when I bust a sergal nut"
+	],
+	"cockVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"oralVoreLetoutRequested": [
+		"alright out you go",
+		"*hack and coughs* out you go",
+		"bleh...you didnt really taste that good",
+		"come on out we got work to do *burps* er excuse me"
+	],
+	"cockVoreLetoutRequested": [
+		"Hhhhhh I'm gonna cum...",
+		"M..mmph god~",
+		"Gonna blast~",
+		"M..Meerpp....~"
+	],
+	"reformRequested": [
+		"reformation central",
+		"beep boop reforming..haha jk I aint a synth...oh hope Blue didnt hear that",
+		"alright time to reform"
+	],
 	"oralVorePrompt": {
 		"percentage": "food",
 		"pools": [
@@ -217,75 +309,6 @@
 			]
 		]
 	},
-	"defaultNo": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
-	"tooBig": [
-		"I think you're a bit too big to fit in there...",
-		"I don't think I'd be able to get you in...",
-		"If only you were a bit smaller...",
-		"Thats a bit too much to ask of me..."
-	],
-	"tooSmall": [
-		"Sorry but I need something a bit bigger then you",
-		"I don't think I'd really feel you at that size",
-		"You're too short for this ride buddy",
-		"Maybe if you where just a little bigger..."
-	],
-	"oralVoreFull": [
-		"I'm a bit too full...",
-		"My belly can't stretch any further...",
-		"I've eaten too much already...",
-		"I would... but I'm too full..."
-	],
-	"oralVoreDigestFull": [
-		"Maybe after I melt down the last meal",
-		"Urrrrp!\n Won't be too long until I can fit you.",
-		"I've eaten too much already... but I'll probably have room soon.",
-		"I'll have to finish processing this meal first."
-	],
-	"oralVoreCompressionFull": [
-		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
-		"I'll swallow you down after my current snack gets a bit more compact",
-		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
-		"Just give me a sec to squish my friend here down, and then you'll be next!"
-	],
-	"full": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
-	],
-	"needsInfusion": [
-		"I'd want someone merged in there"
-	],
-	"cockVoreRequestBefore": [
-		"lol horny for sergal pp",
-		"merp? you want in my shaft?",
-		"hope you fit",
-		"well? come on in"
-	],
-	"cockVoreRequestAfter": [
-		"ooh my merp that get me hard~",
-		"FFF~ you making this ergal very happy",
-		"great...im hard..hope no one notices...",
-		"m..merp merp~"
-	],
-	"cockVoreNoPrompt": [
-		"Surpised!",
-		"Gotcha",
-		"sorry but I have to do this~",
-		"I'm horny so come here~"
-	],
-	"cockVoreNoPromptAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me even more excited~",
-		"Ffff~ Now I'm all hard~",
-		"A-ahh~ Don't stop squirming~"
-	],
 	"cockVorePrompt": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -405,309 +428,6 @@
 			]
 		]
 	},
-	"cockVoreNo": [
-		"Not in the mood pal",
-		"I'm busy",
-		"Mayber later im just rubbed it off awhile ago",
-		"I'm got other sergals things to do...like merping",
-		"my shaft is tired"
-	],
-	"cockVoreTooBig": [
-		"Sorry micros only",
-		"Woah maybe shrink youself down and I may",
-		"get youself a shrink ray form Auri and come back to me",
-		"smalelr folks only",
-		"your to merping big"
-	],
-	"cockVoreFull": [
-		"my sheese dispenser is full right now...",
-		"Hmmm if someone moves down to my balls you might fit~",
-		"This sergal shaft is full",
-		"Maybe when I bust a sergal nut"
-	],
-	"cockVoreDigestFull": [
-		"Ah... give me a moment to melt my toys into cum, then I might be able to fit you."
-	],
-	"cockVoreCompressionFull": [
-		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
-	],
-	"struggle": [
-		"enjoying yourself",
-		"Comfy?",
-		"merp?"
-	],
-	"error": ":missingDialogue",
-	"struggleAcidDigest": [
-		"melting so good~",
-		"Be a good moursel and just melt~",
-		"Im merping you down will good..hehe"
-	],
-	"struggleAcidDigestImmune": [
-		"merp?",
-		"doesn't feel like your melting"
-	],
-	"struggleHeal": [
-		"relax...you are injured",
-		"stop moving to much..just heal up"
-	],
-	"struggleCompression": [
-		"I can feel you getting so neatly packed in there.",
-		"You're gonna find it hard to move as it gets sooo much tighter.",
-		"You're really struggling while you become travel-sized!"
-	],
-	"struggleDrainEnergy": [
-		"Struggle all you want, you're just helping me drain you faster.",
-		"Soon you'll be too tired to keep up all that moving.",
-		"Giving me a good show AND all of your energy? How generous!"
-	],
-	"struggleCock": [
-		"ooohh hehe that tingles~",
-		"wooo boy..."
-	],
-	"struggleCockDigest": [
-		"mmm melting down you go~",
-		"merp for me~"
-	],
-	"struggleCockDigestImmune": [
-		"less talking more melting",
-		"just mely down and enjoy youself"
-	],
-	"struggleCockHeal": [
-		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
-		"You don't have to move so much while I'm healing you, unless you want in my sack...",
-		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
-	],
-	"struggleCockCompression": [
-		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
-		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
-		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
-	],
-	"struggleCockDrainEnergy": [
-		"The more you fight, the more my shaft will drain your energy. I don't mind.",
-		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
-		"You know you're being drained of energy right? My rod always wins."
-	],
-	"struggleCockInfused": [
-		"Ahhh~ <infusedName> feels so great down there~",
-		"<keysmash>, you're gonna make <infusedName> cum~"
-	],
-	"struggleBalls": [
-		"merp...that feels nice feeling down there",
-		"Keep going.",
-		"It feels so good having you in there~",
-		"Friends are stored in the balls~"
-	],
-	"struggleBallsDigest": [
-		"yes become nice sergal cum for me~",
-		"time to be sergal cummies~"
-	],
-	"struggleBallsDigestImmune": [
-		"not melting",
-		"This sergal wants you to melt"
-	],
-	"struggleBallsHeal": [
-		"My seed can mend wounds, so don't panic. You'll be fine, I swear!",
-		"Seems you're pretty healthy if you can wiggle like that!",
-		"Just relax and let my sticky sauna soothe you."
-	],
-	"struggleBallsCompression": [
-		"You're squirming pretty hard for someone in a tightening sack.",
-		"Better get out all that fight while you can, you won't be able to move much soon.",
-		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
-	],
-	"struggleBallsDrainEnergy": [
-		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
-		"You won't last long fighting like that. It's better to just rest and let your energy go.",
-		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
-	],
-	"struggleLetoutTransforming": {
-		"percentage": "transforming",
-		"pools": [
-			[
-				"Didn't want to become something like me?",
-				"Didn't like the changes I was making?"
-			]
-		],
-		"full": [
-			":struggleLetoutTransformed"
-		]
-	},
-	"struggleLetoutTransformingImmune": ":missingDialogue",
-	"struggleLetoutEggify": [
-		"Don't want to be trapped in an egg?",
-		"You don't like eggs?"
-	],
-	"struggleLetoutEggifyImmune": [
-		"Fine then, it didn't seem like the shell was forming right anyway!",
-		"Bleh! Did you get out before being encased, or is it something else?",
-		"If only you where easier to put in an egg, maybe I could've had more fun with you."
-	],
-	"oralVoreLetoutForced": [
-		"*hack...cough*",
-		"alright alright come on out",
-		"aw man...come on..."
-	],
-	"oralVoreLetoutForcedDigested": [
-		"reformation central",
-		"beep boop reforming..haha jk I aint a synth...oh hope BLue didnt hear that",
-		"alright time to reform"
-	],
-	"oralVoreLetoutForcedDigest": [
-		"oh..huh enjoy the stay then",
-		"No hard feelings?",
-		"you're no fun \n",
-		"ooh? we got outselfs a fighter"
-	],
-	"oralVoreLetoutForcedDigestImmune": [
-		"that's fine..I wasnt even that hungry",
-		"you're making me look bad infront of the others",
-		"Come on...It's my job"
-	],
-	"oralVoreLetoutForcedSoftDigest": [
-		"wha...you were gona be fine..geez",
-		"what? you had that option selected",
-		"well...just stay there I guess"
-	],
-	"oralVoreLetoutForcedSoftDigestImmune": [
-		"Dang it... I was hungry... and you didn't even melt at all.",
-		"No hard feelings? Its not like my acid even managed to do anything.",
-		"Come on, my acid didn't even do anything to you...",
-		"If only you actually started to melt..."
-	],
-	"oralVoreLetoutForcedHeal": [
-		"come on..its like a suana in there",
-		"Are you sure you're ready to come out?",
-		"well...return to me if you need more healing",
-		"don't go whinning if you die cause you didnt fully heal up",
-		"next time stop spamming for medic"
-	],
-	"cockVoreLetoutForced": [
-		"Ahh~ man what a sensation~",
-		"come back anytime^^",
-		"you felt good in there~",
-		"what? didnt enjoy yourself in there?",
-		"merp...."
-	],
-	"cockVoreLetoutForcedDigested": [
-		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
-	],
-	"cockVoreLetoutForcedDigest": [
-		"Got out of my shaft before it made you mush, eh?",
-		"Did you have to leave? It felt so good having you melt into cum!",
-		"I'll be... You withstood my shaft's heat and wiggled out."
-	],
-	"cockVoreLetoutForcedDigestImmune": [
-		"What the... Shouldn't you be turning into cum instead of getting out?",
-		"Most prey can't stand my shaft's heat. Why are you so resistant?",
-		"You wiggled out completely solid. That's strange..."
-	],
-	"cockVoreLetoutForcedSoftDigest": [
-		"Got out of my shaft before it absorbed you, eh?",
-		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
-		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
-	],
-	"cockVoreLetoutForcedHeal": [
-		"I guess shaft therapy time is over.",
-		"You seem eager to be free. Just don't get 'cocky' and get hurt, or back in you go!",
-		"Feeling better now? If not, my rod of healing is always ready."
-	],
-	"struggleLetoutCumTransforming": ":missingButNotNecessary",
-	"struggleLetoutCumTransformingImmune": ":missingButNotNecessary",
-	"letoutTransforming": ":missingButNotNecessary",
-	"letoutTransformingImmune": [
-		"You don't look any different from how you went in, strange...",
-		"Did you have some kind of device to keep you from morphing?",
-		"Seems your body is rather hard to modify, tsk..."
-	],
-	"letoutEggify": {
-		"percentage": "eggifying",
-		"pools": [
-			[
-				"Seems like I let you out a bit too early.",
-				"I was a bit too hasty. The egg didn't form."
-			]
-		],
-		"full": [
-			":LetoutEgged"
-		]
-	},
-	"letoutEggifyImmune": [
-		"Guess I just can't put you in an egg.",
-		"Seems like eggs don't work on you.",
-		"I'm giving up on sealing you in an egg."
-	],
-	"oralVoreLetoutRequested": [
-		"alright out you go",
-		"*hack and coughs* out you go",
-		"bleh...you didnt really taste that good",
-		"come on out we got work to do *burps* er excuse me"
-	],
-	"oralVoreLetoutRequestedDigested": [
-		"time for you to go",
-		"get digested lol",
-		"hope it was worth the pixels",
-		"next yea when you get back"
-	],
-	"oralVoreLetoutRequestedDigest": [
-		"ok I'm good for now",
-		"I'm satified you can go now",
-		"best you leave",
-		"I didnt really want to digest you"
-	],
-	"oralVoreLetoutRequestedDigestImmune": [
-		"what's the point?",
-		"that's no fun",
-		"best you go..this sergal is intrested in something else...oh beef jerky",
-		"I'ma go get some actual food"
-	],
-	"oralVoreLetoutRequestedSoftDigest": [
-		"I think your soft enough",
-		"I'm good for now thanks",
-		"now got out of here you silly",
-		"Didn't feel like it"
-	],
-	"oralVoreLetoutRequestedSoftDigestImmune": [
-		"really?",
-		"well this is pointless",
-		"oh you selected that option...no fun",
-		"what am I sergal express?"
-	],
-	"oralVoreLetoutRequestedHeal": [
-		"alright now get back out there!",
-		"Alrighty I think you're all good to go",
-		"feeling better?",
-		"I never though id have a stomach that heals",
-		"I never got my medical degree you know?"
-	],
-	"cockVoreLetoutRequested": [
-		"Hhhhhh I'm gonna cum...",
-		"M..mmph god~",
-		"Gonna blast~",
-		"M..Meerpp....~"
-	],
-	"cockVoreLetoutRequestedDigested": [
-		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
-	],
-	"cockVoreLetoutRequestedDigest": [
-		"Hm... Maybe I won't melt you down entirely..."
-	],
-	"cockVoreLetoutRequestedDigestImmune": [
-		"I can't seem to melt you down... so I'll let you go."
-	],
-	"cockVoreLetoutRequestedSoftDigest": ":cockVoreLetoutRequestedDigest",
-	"cockVoreLetoutRequestedHeal": {
-		"percentage": "targetHealth",
-		"pools": [
-			[
-				"I don't have the time to patch you up fully. I hope you soaked in my cum long enough!"
-			]
-		],
-		"full": [
-			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
-		]
-	},
-	"letoutCumTransforming": ":missingButNotNecessary",
-	"letoutCumTransformingImmune": ":missingButNotNecessary",
 	"oralVoreRequesting": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -868,6 +588,46 @@
 			]
 		]
 	},
+	"oralVoreNoPrompt": [
+		"I think you'll fill me up.",
+		"I just need a bite to eat.",
+		"You seem like you'd make a good meal.",
+		"My belly's been grumbling..."
+	],
+	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter", // duplicated lines
+	"cockVoreNoPrompt": [
+		"Surpised!",
+		"Gotcha",
+		"sorry but I have to do this~",
+		"I'm horny so come here~"
+	],
+	"cockVoreNoPromptAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me even more excited~",
+		"Ffff~ Now I'm all hard~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"oralVoreUnprompted": [
+		"euugh so slimey",
+		"happy to fill you up^^",
+		"ill never will get use to this >~<"
+	],
+	"cockVoreUnprompted": [
+		"hehe now the fun begins",
+		"euugh..some got into my mouth",
+		"man it's tight",
+		"Friends are stored in the balls...heh Auri would be proud",
+		"needing to refuel? happy to help^^",
+		"ill never will get use to this >~<"
+	],
+	"oralVoreLetoutUnpromptedAfter": [
+		"so that's whats it like to be swallowed",
+		"I'll never get used to this"
+	],
+	"cockVoreLetoutUnpromptedAfter": [
+		"so salty..plhew",
+		"its in my mouth..."
+	],
 	"oralVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -903,6 +663,14 @@
 			]
 		]
 	},
+	"oralVoreLetoutForcingAfter": [
+		"won't deny it was cozy in there",
+		"well that was an expereince"
+	],
+	"cockVoreLetoutForcingAfter": [
+		"ah man...its all over my clothes",
+		"man..it'll take me forever to wash the cum out"
+	],
 	"oralVoreForced": {
 		"percentage": "food",
 		"pools": [
@@ -952,12 +720,99 @@
 			]
 		]
 	},
-	"struggling": [
-		[
-			"I'm stuck here aren't I?",
-			"Is there even a way out?",
-			"Trapped..."
-		]
+	"oralVoreLetoutForced": [
+		"*hack...cough*",
+		"alright alright come on out",
+		"aw man...come on..."
+	],
+	"cockVoreLetoutForced": [
+		"Ahh~ man what a sensation~",
+		"come back anytime^^",
+		"you felt good in there~",
+		"what? didnt enjoy yourself in there?",
+		"merp...."
+	],
+	"struggleBelly": [
+		"enjoying yourself",
+		"Comfy?",
+		"merp?"
+	],
+	"struggleCock": [
+		"ooohh hehe that tingles~",
+		"wooo boy..."
+	],
+	"struggleBalls": [
+		"merp...that feels nice feeling down there",
+		"Keep going.",
+		"It feels so good having you in there~",
+		"Friends are stored in the balls~"
+	],
+	"struggleAcidHeal": [
+		"relax...you are injured",
+		"stop moving to much..just heal up"
+	],
+	"struggleCumHeal": [
+		"My seed can mend wounds, so don't panic. You'll be fine, I swear!",
+		"Seems you're pretty healthy if you can wiggle like that!",
+		"Just relax and let my sticky sauna soothe you."
+	],
+	"struggleCumHealCock": [
+		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
+		"You don't have to move so much while I'm healing you, unless you want in my sack...",
+		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
+	],
+	"struggleCompression": [
+		"I can feel you getting so neatly packed in there.",
+		"You're gonna find it hard to move as it gets sooo much tighter.",
+		"You're really struggling while you become travel-sized!"
+	],
+	"struggleCompressionCock": [
+		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
+		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
+		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
+	],
+	"struggleCompressionBalls": [
+		"You're squirming pretty hard for someone in a tightening sack.",
+		"Better get out all that fight while you can, you won't be able to move much soon.",
+		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
+	],
+	"struggleAcidDigest": [
+		"melting so good~",
+		"Be a good moursel and just melt~",
+		"Im merping you down will good..hehe"
+	],
+	"struggleAcidDigestImmune": [
+		"merp?",
+		"doesn't feel like your melting"
+	],
+	"struggleCumDigest": [
+		"mmm melting down you go~",
+		"merp for me~"
+	],
+	"struggleCumDigestBalls": [
+		"yes become nice sergal cum for me~",
+		"time to be sergal cummies~"
+	],
+	"struggleCumDigestImmune": [
+		"not melting",
+		"This sergal wants you to melt",
+		"less talking more melting",
+		"just melt down and enjoy youself"
+	],
+	"struggleDrainEnergy": [
+		"Struggle all you want, you're just helping me drain you faster.",
+		"Soon you'll be too tired to keep up all that moving.",
+		"Giving me a good show AND all of your energy? How generous!"
+	],
+	"struggleDrainEnergyCock": [
+		"The more you fight, the more my shaft will drain your energy. I don't mind.",
+		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
+		"You know you're being drained of energy right? My rod always wins."
+	],
+	"struggleDrainEnergyBalls": [
+		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
+		"You won't last long fighting like that. It's better to just rest and let your energy go.",
+		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
 	],
 	"strugglingBelly": [
 		[
@@ -984,130 +839,10 @@
 			]
 		}
 	],
-	"strugglingAcidDigest": [
-		[
-			"man this hurts...",
-			"hmmph..nothing but pudge",
-			{
-				"check": {
-					"bellySounds": true
-				},
-				"add": [
-					"so much...noise",
-					"All this grumbling... you must be pretty hungry."
-				]
-			}
-		],
-		{
-			"check": {
-				"predator": "sbqVaporeon"
-			},
-			"add": [
-				" ....vappy goo...."
-			]
-		}
-	],
-	"strugglingAcidDigestImmune": [
-		[
-			[
-				"Trying to melt me down?",
-				"Trying to melt me down?\nThats not gonna work."
-			],
-			"Heh, I can actually stay in here as long as I want.",
-			"I'm @#%@@#$ invincible! *enter metal gear rising refereence here*",
-			"I'm immune so good luck \n"
-		]
-	],
-	"strugglingBellyHeal": [
-		[
-			"hmm...it aint melting me..that's good right?",
-			"its like a healing bath",
-			"thi feels wonderful",
-			{
-				"check": {
-					"bellySounds": true
-				},
-				"add": [
-					"I really like the sounds your belly makes... very calming.",
-					"I could just drift off to sleep listening to the sounds of your body..."
-				]
-			}
-		],
-		{
-			"check": {
-				"predator": "sbqVaporeon"
-			},
-			"add": [
-				"did you kno-*get's slooshed around*..nvm"
-			]
-		}
-	],
-	"strugglingBellyCompression": [
-		"It's getting so tight in here!",
-		"I can barely move in here...",
-		"I can't keep it... from compacting me."
-	],
-	"strugglingBellyDrainEnergy": [
-		"Your stomach, it's sapping my energy as I move.",
-		"I barely have the energy... to keep resisting this belly.",
-		"This gut is draining my energy, how long I can keep squirming...?"
-	],
-	"strugglingBellyTransforming": [
-		"What's happening? I feel like I'm changing inside this gut!",
-		"The more I squirm in this belly, the less I feel like myself...",
-		"What are you doing to me inside your belly? I feel strange!"
-	],
-	"strugglingTransformingImmune": [
-		"I don't think whatever you're doing is affecting me.",
-		"Feels like you're trying to change me, but uh... that's not gonna happen.",
-		"Your body isn't going to morph mine like that, so let me out!"
-	],
-	"strugglingBellyEggify": [
-		"W-what's this shell forming around me in this gut?!",
-		"Hey, the stuff in your belly is hardening around me. What's happening!?",
-		"The belly walls are getting harder, or wait, is something forming around me?!"
-	],
-	"strugglingEggifyImmune": [
-		"I think a shell is trying to form around me, but uh... it's not gonna work.",
-		"You know I'm un-egg-able right?",
-		"I'm not going into an egg, it's not going to work."
-	],
 	"strugglingCock": [
 		"yes..squish me harder`",
 		"nice and smelly",
 		"This is so hot~"
-	],
-	"strugglingCockDigest": [
-		"It's so hot in here, is your shaft... melting me?",
-		"I think your cock is softening me up!",
-		"I'm feeling goopy inside your shaft..."
-	],
-	"strugglingCockDigestImmune": [
-		"I don't think your cock can melt me.",
-		"You should know that I won't soften up inside your shaft.",
-		"I'm resistant to your shaft trying to melt me."
-	],
-	"strugglingCockHeal": [
-		"Who would have thought your cock could heal so well.",
-		"Your shaft is rather soothing it seems. Weird.",
-		"Your cock is making my pain go away. It's so relaxing in here!"
-	],
-	"strugglingCockCompression": [
-		"This shaft of yours is squeezing me really hard!",
-		"It's hard to move when your cock is putting so much pressure on me.",
-		"I feel like I'm getting compacted inside your dick!"
-	],
-	"strugglingCockDrainEnergy": [
-		"I'm feeling more and more tired as I squirm in your dick.",
-		"Why do I feel so exhausted struggling inside your shaft?",
-		"It feels like your cock is taking my energy away..."
-	],
-	"strugglingCockCumTransforming": ":missingDialogue",
-	"strugglingCumTransformingImmune": ":missingButNotNecessary",
-	"strugglingCockEggify": [
-		"Is there a shell forming around me inside your dick!?",
-		"There is some sort of shell forming around me. What's your cock doing??",
-		"Is your shaft getting harder... or is there something hardening around me?"
 	],
 	"strugglingBalls": [
 		"All this cum sloshing around me~",
@@ -1115,189 +850,113 @@
 		"Stuck down here in your balls~",
 		"This is so hot~"
 	],
-	"strugglingBallsDigest": [
-		"It's so hot in your nuts, I feel like I'm melting.",
-		"The seed in your balls is all over me. I think I'm melting into it.",
-		"I'm unsure how long I'll stay solid in your sack at this rate."
+	"strugglingAcidHeal": [
+		"hmm...it aint melting me..that's good right?",
+		"its like a healing bath",
+		"this feels wonderful"
 	],
-	"strugglingBallsDigestImmune": [
-		"You know I'm not going to be adding to your spunk, right?",
-		"Despite the heat, I'm not going to melt in your balls.",
-		"I don't think your nuts can soften me up."
+	"strugglingCumHeal": ":strugglingCumHeal", // duplicated lines
+	"strugglingCumHealCock": [
+		"Who would have thought your cock could heal so well.",
+		"Your shaft is rather soothing it seems. Weird.",
+		"Your cock is making my pain go away. It's so relaxing in here!"
 	],
-	"strugglingBallsHeal": [
+	"strugglingCumHealBalls": [
 		"Your healing seed is washing over me, I feel my pain going away!",
 		"Seems your balls make for a great therapeutic sauna and spa.",
 		"The soothing properties of your spunk is crazy. How novel."
 	],
-	"strugglingBallsCompression": [
+	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingCompression": [
+		"It's getting so tight in here!",
+		"I can barely move in here...",
+		"I can't keep it... from compacting me."
+	],
+	"strugglingCompressionCock": [
+		"This shaft of yours is squeezing me really hard!",
+		"It's hard to move when your cock is putting so much pressure on me.",
+		"I feel like I'm getting compacted inside your dick!"
+	],
+	"strugglingCompressionBalls": [
 		"It feels as though your sack is shrinking. It's so tight in here.",
 		"I'm barely able to move with how your nuts are closing in on me.",
 		"Your orbs are tightening. There's so much pressure on me in here!"
 	],
-	"strugglingBallsDrainEnergy": [
+	"strugglingAcidDigest": [
+		"man this hurts...",
+		"hmmph..nothing but pudge"
+	],
+	"strugglingAcidDigestImmune": [
+		[
+			"Trying to melt me down?",
+			"Trying to melt me down?\nThats not gonna work."
+		],
+		"Heh, I can actually stay in here as long as I want.",
+		"I'm @#%@@#$ invincible! *enter metal gear rising refereence here*",
+		"I'm immune so good luck \n"
+	],
+	"strugglingCumDigest": [
+		"It's so hot in here, is your cum... melting me?",
+		"I think your cum is softening me up!",
+		"I'm feeling goopy inside here..."
+	],
+	"strugglingCumDigestBalls": [
+		"It's so hot in your nuts, I feel like I'm melting.",
+		"The seed in your balls is all over me. I think I'm melting into it.",
+		"I'm unsure how long I'll stay solid in your sack at this rate."
+	],
+	"strugglingCumDigestImmune": [
+		"I don't think your cum can melt me.",
+		"You should know that I won't soften up in your seed.",
+		"I'm resistant to your cum trying to melt me."
+	],
+	"strugglingCumDigestImmuneBalls": [
+		"You know I'm not going to be adding to your spunk, right?",
+		"Despite the heat, I'm not going to melt in your balls.",
+		"I don't think your nuts can soften me up."
+	],
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingTransforming": [
+		"What's happening? I feel like I'm changing in here!",
+		"The more I squirm in here, the less I feel like myself...",
+		"What are you doing to me in here? I feel strange!"
+	],
+	"strugglingDrainEnergy": [
+		"You're sapping my energy as I move...",
+		"I barely have the energy... to keep resisting this...",
+		"You're draining my energy, how long I can keep squirming...?"
+	],
+	"strugglingDrainEnergyCock": [
+		"I'm feeling more and more tired as I squirm in your dick.",
+		"Why do I feel so exhausted struggling inside your shaft?",
+		"It feels like your cock is taking my energy away..."
+	],
+	"strugglingDrainEnergyBalls": [
 		"I feel so tired splashing around in your sack. What's going on?",
 		"Is your seed sapping my energy away? I feel fatigued...",
 		"The more I move in your orbs, the more exhausted I feel..."
 	],
-	"strugglingBallsCumTransforming": ":missingButNotNecessary",
-	"strugglingBallsEggify": [
+	"strugglingEggify": [
+		"W-what's this shell forming around me in here?!",
+		"Hey, the stuff in here is hardening around me. What's happening!?",
+		"The walls are getting harder, or wait, is something forming around me?!"
+	],
+	"strugglingEggifyCock": [
+		"Is there a shell forming around me inside your dick!?",
+		"There is some sort of shell forming around me. What's your cock doing??",
+		"Is your shaft getting harder... or is there something hardening around me?"
+	],
+	"strugglingEggifyBalls": [
 		"I think a shell is forming around me in your sack!",
 		"Is it me, or is there something surrounding me that's not your spunk?",
 		"I feel like some kind of shell is forming around me!"
 	],
-	"oralVoreUnpromptedWilling": [ //blue here, doing these as last, LAST lines
-		"Oh yeah! Eat me up like the snack I am!",
-		"Make me your lunch, you know you're hungry!",
-		"I can't wait to wiggle down your throat!"
-	],
-	"cockVoreUnpromptedWilling": [
-		"I want in your shaft, like right now!",
-		"Shove me into your lewd meat stick!",
-		"Let me wiggle into that cock of yours!"
-	],
-	"oralVoreUnprompted": [
-		"euugh so slimey",
-		"happy to fill you up^^",
-		"ill never will get use to this >~<"
-	],
-	"cockVoreUnprompted": [
-		"hehe now the fun begins",
-		"euugh..some got into my mouth",
-		"man it's tight",
-		"Friends are stored in the balls...heh Auri would be proud",
-		"needing to refuel? happy to help^^",
-		"ill never will get use to this >~<"
-	],
-	"struggleEscapeTransforming": [
-		"If I didn't get out any sooner, I wouldn't be me!"
-	],
-	"struggleEscapeTransformingImmune": [
-		"I managed to get out, though I don't think anything was really happening to me."
-	],
-	"struggleEscapeEggify": [
-		"Hah! I got out before I was egged!"
-	],
-	"struggleEscapeEggifyImmune": [
-		"Looks like I'm free, though I wasn't worried since I resisted your egging."
-	],
-	"oralVoreLetoutForcingAfter": [
-		"won't deny it was cozy in there",
-		"well that was an expereince"
-	],
-	"oralVoreLetoutForcingAfterDigest": [
-		"Whew... I got you to spit me out before I was done for!"
-	],
-	"oralVoreLetoutForcingAfterDigestImmune": [
-		"I got you to spit me out, though I wasn't really in any danger."
-	],
-	"oralVoreLetoutForcingAfterSoftDigest": [
-		"Whew... I got you to spit me out before I was done for!"
-	],
-	"oralVoreLetoutForcingAfterHeal": [
-		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
-	],
-	"cockVoreLetoutForcingAfter": [
-		"ah man...its all over my clothes",
-		"man..it'll take me forever to wash the cum out"
-	],
-	"cockVoreLetoutForcingAfterDigest": [
-		"Whew, I wiggled out of your shaft before it melted me!"
-	],
-	"cockVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I got out your shaft, though it couldn't do any harm to me."
-	],
-	"cockVoreLetoutForcingAfterSoftDigest": [
-		"Whew, I wiggled out of your shaft before it melted me!"
-	],
-	"cockVoreLetoutForcingAfterHeal": [
-		"I squirmed out your cock and I feel really good after all that!"
-	],
-	"struggleEscapeCumTransforming": ":missingButNotNecessary",
-	"struggleEscapeCumTransformingImmune": ":missingButNotNecessary",
-	"escapeTransforming": [
-		"Thanks for letting me out. I was almost completely morphed!"
-	],
-	"escapeTransformingImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I can't be transformed."
-	],
-	"escapeEggify": [
-		"Thanks for letting me out. I was almost encased in an egg!"
-	],
-	"escapeEggifyImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
-	],
-	"oralVoreLetoutUnpromptedAfter": [
-		"so that's whats it like to be swallowed",
-		"I'll never get used to this"
-	],
-	"oralVoreLetoutUnpromptedAfterDigest": [
-		"Thanks for spitting me up. I was going to be added to you!"
-	],
-	"oralVoreLetoutUnpromptedAfterDigestImmune": [
-		"Thanks for spitting me up. Maybe you realized you can't digest me?"
-	],
-	"oralVoreLetoutUnpromptedAfterSoftDigest": [
-		"Thanks for spitting me up. I was going to be added to you!"
-	],
-	"oralVoreLetoutUnpromptedAfterHeal": [
-		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
-	],
-	"cockVoreLetoutUnpromptedAfter": [
-		"so salty..plhew",
-		"its in my mouth..."
-	],
-	"cockVoreLetoutUnpromptedAfterDigest": [
-		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
-	],
-	"cockVoreLetoutUnpromptedAfterDigestImmune": [
-		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
-	],
-	"cockVoreLetoutUnpromptedAfterSoftDigest": [
-		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
-	],
-	"cockVoreLetoutUnpromptedAfterHeal": [
-		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
-	],
-	"escapeCumTransforming": ":missingButNotNecessary",
-	"escapeCumTransformingImmune": ":missingButNotNecessary",
-	"infused": [
-		"<slowlove>",
-		"<love>",
-		[
-			[
-				"^#ffffff7f;(Just a part of your body~)",
-				"^#ffffff7f;(Just a part of <entityname>'s body~)"
-			],
-			"<slowlove>^#ffffff7f;(I belong here, don't I...~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
-		]
-	],
-	"teaseInfused": [
-		"Just a part of my body~",
-		"Just a part of my body <infusedName>~" // very very placeholder
+	"strugglingVaporeon": [
+		"did you kno-*get's slooshed around*..nvm"
 	],
 	"climax": [
 		"Ahhh~! FUCK that felt good~!"
-	],
-	"climaxWomb": [
-		{
-			"dialogue": [
-				"Yes! YES! Don't stop kicking!",
-				"*Moans*~",
-				"Ahhh... That felt great..."
-			]
-		}
-	],
-	"climaxBreasts": [
-		{
-			"dialogue": [
-				"Ffff... I think I'm! AH!",
-				"*Moans*~",
-				"Ahhh... Oh... hehe... I might have sprayed some milk everywhere..."
-			]
-		}
 	],
 	"climaxCock": [
 		{
@@ -1365,8 +1024,300 @@
 		"Woah...watch where you step",
 		"woah..falls on butt*...ow"
 	],
+	"vanilla": {},
 	// Unused Dialogue
 	// Unused Dialogue
+	// Unused Dialogue
+	// Unused Dialogue
+	// Unused Dialogue
+	"strugglingGurgleSoundsDigest": [
+		"so much...noise",
+		"All this grumbling... you must be pretty hungry."
+	],
+	"strugglingGurgleSoundsBelly": [
+		"I really like the sounds your belly makes... very calming.",
+		"I could just drift off to sleep listening to the sounds of your body..."
+	],
+	"defaultFull": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
+	"oralVoreDigestFull": [
+		"Maybe after I melt down the last meal",
+		"Urrrrp!\n Won't be too long until I can fit you.",
+		"I've eaten too much already... but I'll probably have room soon.",
+		"I'll have to finish processing this meal first."
+	],
+	"oralVoreCompressionFull": [
+		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
+		"I'll swallow you down after my current snack gets a bit more compact",
+		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
+		"Just give me a sec to squish my friend here down, and then you'll be next!"
+	],
+	"cockVoreDigestFull": [
+		"Ah... give me a moment to melt my toys into cum, then I might be able to fit you."
+	],
+	"cockVoreCompressionFull": [
+		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
+	],
+	"struggleCockInfused": [
+		"Ahhh~ <infusedName> feels so great down there~",
+		"<keysmash>, you're gonna make <infusedName> cum~"
+	],
+	"struggleLetoutTransforming": {
+		"percentage": "transforming",
+		"pools": [
+			[
+				"Didn't want to become something like me?",
+				"Didn't like the changes I was making?"
+			]
+		],
+		"full": [
+			":struggleLetoutTransformed"
+		]
+	},
+	"struggleLetoutEggify": [
+		"Don't want to be trapped in an egg?",
+		"You don't like eggs?"
+	],
+	"struggleLetoutEggifyImmune": [
+		"Fine then, it didn't seem like the shell was forming right anyway!",
+		"Bleh! Did you get out before being encased, or is it something else?",
+		"If only you where easier to put in an egg, maybe I could've had more fun with you."
+	],
+	"oralVoreLetoutForcedDigest": [
+		"oh..huh enjoy the stay then",
+		"No hard feelings?",
+		"you're no fun \n",
+		"ooh? we got outselfs a fighter"
+	],
+	"oralVoreLetoutForcedDigestImmune": [
+		"that's fine..I wasnt even that hungry",
+		"you're making me look bad infront of the others",
+		"Come on...It's my job"
+	],
+	"oralVoreLetoutForcedSoftDigest": [
+		"wha...you were gona be fine..geez",
+		"what? you had that option selected",
+		"well...just stay there I guess"
+	],
+	"oralVoreLetoutForcedSoftDigestImmune": [
+		"Dang it... I was hungry... and you didn't even melt at all.",
+		"No hard feelings? Its not like my acid even managed to do anything.",
+		"Come on, my acid didn't even do anything to you...",
+		"If only you actually started to melt..."
+	],
+	"oralVoreLetoutForcedHeal": [
+		"come on..its like a suana in there",
+		"Are you sure you're ready to come out?",
+		"well...return to me if you need more healing",
+		"don't go whinning if you die cause you didnt fully heal up",
+		"next time stop spamming for medic"
+	],
+	"cockVoreLetoutForcedDigested": [
+		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
+	],
+	"cockVoreLetoutForcedDigest": [
+		"Got out of my shaft before it made you mush, eh?",
+		"Did you have to leave? It felt so good having you melt into cum!",
+		"I'll be... You withstood my shaft's heat and wiggled out."
+	],
+	"cockVoreLetoutForcedDigestImmune": [
+		"What the... Shouldn't you be turning into cum instead of getting out?",
+		"Most prey can't stand my shaft's heat. Why are you so resistant?",
+		"You wiggled out completely solid. That's strange..."
+	],
+	"cockVoreLetoutForcedSoftDigest": [
+		"Got out of my shaft before it absorbed you, eh?",
+		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
+		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
+	],
+	"cockVoreLetoutForcedHeal": [
+		"I guess shaft therapy time is over.",
+		"You seem eager to be free. Just don't get 'cocky' and get hurt, or back in you go!",
+		"Feeling better now? If not, my rod of healing is always ready."
+	],
+	"letoutTransformingImmune": [
+		"You don't look any different from how you went in, strange...",
+		"Did you have some kind of device to keep you from morphing?",
+		"Seems your body is rather hard to modify, tsk..."
+	],
+	"letoutEggify": {
+		"percentage": "eggifying",
+		"pools": [
+			[
+				"Seems like I let you out a bit too early.",
+				"I was a bit too hasty. The egg didn't form."
+			]
+		],
+		"full": [
+			":LetoutEgged"
+		]
+	},
+	"letoutEggifyImmune": [
+		"Guess I just can't put you in an egg.",
+		"Seems like eggs don't work on you.",
+		"I'm giving up on sealing you in an egg."
+	],
+	"oralVoreLetoutRequestedDigested": [
+		"time for you to go",
+		"get digested lol",
+		"hope it was worth the pixels",
+		"next yea when you get back"
+	],
+	"oralVoreLetoutRequestedDigest": [
+		"ok I'm good for now",
+		"I'm satified you can go now",
+		"best you leave",
+		"I didnt really want to digest you"
+	],
+	"oralVoreLetoutRequestedDigestImmune": [
+		"what's the point?",
+		"that's no fun",
+		"best you go..this sergal is intrested in something else...oh beef jerky",
+		"I'ma go get some actual food"
+	],
+	"oralVoreLetoutRequestedSoftDigest": [
+		"I think your soft enough",
+		"I'm good for now thanks",
+		"now got out of here you silly",
+		"Didn't feel like it"
+	],
+	"oralVoreLetoutRequestedSoftDigestImmune": [
+		"really?",
+		"well this is pointless",
+		"oh you selected that option...no fun",
+		"what am I sergal express?"
+	],
+	"oralVoreLetoutRequestedHeal": [
+		"alright now get back out there!",
+		"Alrighty I think you're all good to go",
+		"feeling better?",
+		"I never though id have a stomach that heals",
+		"I never got my medical degree you know?"
+	],
+	"cockVoreLetoutRequestedDigested": [
+		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
+	],
+	"cockVoreLetoutRequestedDigest": [
+		"Hm... Maybe I won't melt you down entirely..."
+	],
+	"cockVoreLetoutRequestedDigestImmune": [
+		"I can't seem to melt you down... so I'll let you go."
+	],
+	"cockVoreLetoutRequestedSoftDigest": ":cockVoreLetoutRequestedDigest",
+	"cockVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I don't have the time to patch you up fully. I hope you soaked in my cum long enough!"
+			]
+		],
+		"full": [
+			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
+		]
+	},
+	"struggling": [
+		[
+			"I'm stuck here aren't I?",
+			"Is there even a way out?",
+			"Trapped..."
+		]
+	],
+	"strugglingTransformingImmune": [
+		"I don't think whatever you're doing is affecting me.",
+		"Feels like you're trying to change me, but uh... that's not gonna happen.",
+		"Your body isn't going to morph mine like that, so let me out!"
+	],
+	"strugglingEggifyImmune": [
+		"I think a shell is trying to form around me, but uh... it's not gonna work.",
+		"You know I'm un-egg-able right?",
+		"I'm not going into an egg, it's not going to work."
+	],
+	"oralVoreUnpromptedWilling": [ //blue here, doing these as last, LAST lines
+		"Oh yeah! Eat me up like the snack I am!",
+		"Make me your lunch, you know you're hungry!",
+		"I can't wait to wiggle down your throat!"
+	],
+	"cockVoreUnpromptedWilling": [
+		"I want in your shaft, like right now!",
+		"Shove me into your lewd meat stick!",
+		"Let me wiggle into that cock of yours!"
+	],
+	"struggleEscapeTransforming": [
+		"If I didn't get out any sooner, I wouldn't be me!"
+	],
+	"struggleEscapeTransformingImmune": [
+		"I managed to get out, though I don't think anything was really happening to me."
+	],
+	"struggleEscapeEggify": [
+		"Hah! I got out before I was egged!"
+	],
+	"struggleEscapeEggifyImmune": [
+		"Looks like I'm free, though I wasn't worried since I resisted your egging."
+	],
+	"oralVoreLetoutForcingAfterDigest": [
+		"Whew... I got you to spit me out before I was done for!"
+	],
+	"oralVoreLetoutForcingAfterDigestImmune": [
+		"I got you to spit me out, though I wasn't really in any danger."
+	],
+	"oralVoreLetoutForcingAfterSoftDigest": [
+		"Whew... I got you to spit me out before I was done for!"
+	],
+	"oralVoreLetoutForcingAfterHeal": [
+		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
+	],
+	"cockVoreLetoutForcingAfterDigest": [
+		"Whew, I wiggled out of your shaft before it melted me!"
+	],
+	"cockVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I got out your shaft, though it couldn't do any harm to me."
+	],
+	"cockVoreLetoutForcingAfterSoftDigest": [
+		"Whew, I wiggled out of your shaft before it melted me!"
+	],
+	"cockVoreLetoutForcingAfterHeal": [
+		"I squirmed out your cock and I feel really good after all that!"
+	],
+	"escapeTransforming": [
+		"Thanks for letting me out. I was almost completely morphed!"
+	],
+	"escapeTransformingImmune": [
+		"Oh, it's good that you let me out. Seems like you know now that I can't be transformed."
+	],
+	"escapeEggify": [
+		"Thanks for letting me out. I was almost encased in an egg!"
+	],
+	"escapeEggifyImmune": [
+		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
+	],
+	"oralVoreLetoutUnpromptedAfterDigest": [
+		"Thanks for spitting me up. I was going to be added to you!"
+	],
+	"oralVoreLetoutUnpromptedAfterDigestImmune": [
+		"Thanks for spitting me up. Maybe you realized you can't digest me?"
+	],
+	"oralVoreLetoutUnpromptedAfterSoftDigest": [
+		"Thanks for spitting me up. I was going to be added to you!"
+	],
+	"oralVoreLetoutUnpromptedAfterHeal": [
+		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
+	],
+	"cockVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
+	],
+	"cockVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
+	],
+	"cockVoreLetoutUnpromptedAfterSoftDigest": [
+		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
+	],
+	"cockVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
+	],
 	"struggling.default.default.default.default.default.default": [
 		[
 			"how long you gonna keep me here?",
