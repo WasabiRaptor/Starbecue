@@ -229,6 +229,13 @@ function sbq.entityName(entityId)
 	end
 	return world.entityName(entityId)
 end
+function sbq.entitySpecies(entityId)
+	if world.entityType(entityId) == "object" then
+		return world.getObjectParameter(entityId, "entitySpecies")
+	end
+	return world.entitySpecies(entityId)
+end
+
 
 function sbq.replaceConfigTags(config, tags)
 	return sb.parseJson(sb.replaceTags(sb.printJson(config), tags))

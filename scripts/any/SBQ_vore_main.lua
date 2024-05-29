@@ -367,7 +367,9 @@ function _SpeciesScript:addState(stateName, config)
 		setmetatable(state.locations[k], { __index = location })
 	end
 	for actionName, action in pairs(state.actions or {}) do
-		setmetatable(action, _Action)
+		if action then
+			setmetatable(action, _Action)
+		end
 	end
 	setmetatable(state, {__index = self.species.states[stateName] or _State})
 	self.states[stateName] = state
@@ -383,10 +385,12 @@ end
 function _State:refreshActions()
 	local publicActionData = {}
 	for k, action in pairs(self.actions) do
-		publicActionData[k] = {
-			targetSettings = action.targetSettings,
-			settings = action.settings
-		}
+		if action then
+			publicActionData[k] = {
+				targetSettings = action.targetSettings,
+				settings = action.settings
+			}
+		end
 	end
 	sbq.setProperty("sbqActionData", publicActionData)
 end
@@ -736,7 +740,7 @@ end
 -- Location handling
 function _SpeciesScript:addLocation(name, config)
 	local infuseLocation = {}
-	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()))
+	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()), sbq.voreConfig.locationOverrides or {})
 	location.tag = name
 	location.key = name
 	location.name = location.name or (":"..name)
@@ -1371,14 +1375,14 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.infused then
 		util.appendLists(persistentStatusEffects, location.infusedPassiveEffects or {})
 		for setting, effects in pairs(location.infusedEffects or {}) do
-			if (self.locationSettings[setting]) then
+			if (effects and self.locationSettings[setting]) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
 	elseif self.flags.digested then
 		util.appendLists(persistentStatusEffects, location.digestedPassiveEffects or {})
 		for setting, effects in pairs(location.digestedEffects or {}) do
-			if (self.locationSettings[setting]) then
+			if (effects and self.locationSettings[setting]) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
@@ -1387,7 +1391,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do
-			if (self.locationSettings[setting]) then
+			if (effects and self.locationSettings[setting]) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end

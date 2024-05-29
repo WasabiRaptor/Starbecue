@@ -114,3 +114,7 @@ dialogueStepScripts.infused = dialogueStepScripts.occupantFlag
 dialogueStepScripts.location = dialogueStepScripts.occupantFlag
 dialogueStepScripts.subLocation = dialogueStepScripts.occupantFlag
 dialogueStepScripts.infuseType = dialogueStepScripts.occupantFlag
+
+function dialogueStepScripts.species(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	return step.."."..tostring(sbq.entitySpecies(eid))
+end

@@ -113,15 +113,16 @@ function dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dia
 					if randomResult[k.."Random"] then return true end
 				end
 			elseif type(randomResult) == "string" then
-				dialogue.result[key] = {randomResult}
+				dialogue.result[key] = randomResult
 			end
 		end
+		dialogue.result[key] = dialogueProcessor.getRedirectedDialogue(dialogue.result[key], true, settings, dialogueTree, dialogueTreeTop)
 	end
 end
 
 local keysmashchars = {"a","s","d","f","g","h","j","k","","l",";","\'"}
 function dialogueProcessor.generateKeysmashes(input, lengthMin, lengthMax)
-	input = input or ""
+	if not input then return end
 	return input:gsub("<keysmash>", function ()
 		local keysmash = ""
 		for i = 1, math.random(lengthMin or 5, lengthMax or 15) do
