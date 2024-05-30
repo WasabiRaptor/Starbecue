@@ -56,9 +56,12 @@ function _ENV.convertNPC:onClick()
 end
 
 function misc.generateSettingsCard(type)
+	local settings = sbq.getSettingsOf[type]()
+	sbq.logInfo("Exported"..type.."settings")
+	sbq.logInfo(settings,2)
 	return { name = "secretnote", count = 1, parameters = {
 		shortdescription = sbq.strings[type.."SettingsCard"] or type.."SettingsCard",
 		description = sbq.createdDate(),
-		sbqSettings = sbq.getSettingsOf[type]()
+		sbqSettings = settings
 	}, }
 end

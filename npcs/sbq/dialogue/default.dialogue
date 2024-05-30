@@ -2925,8 +2925,8 @@
 	"strugglingMilkDigestImmune": [
 		"Huh, kinda squeezy..."
 	],
-	"strugglingMiscDigest": "Missing: strugglingMiscDigest <dialoguePath>",
-	"strugglingMiscDigestImmune": "Missing: strugglingMiscDigestImmune <dialoguePath>",
+	"strugglingMiscDigest": ":strugglingAcidDigest",
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
 	"strugglingTransforming": [
 		"It feels kinda weird in here?",
 		"It feels like... I'm changing?"
@@ -3100,7 +3100,221 @@
 			"*wheeze*"
 		]
 	],
-	"vanilla": {},
+	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
+		"tagCriteria": {
+			"default": {
+				"default": [
+					"Something in my place has changed, I don't like it!"
+				]
+			}
+		},
+		"enclosedArea": {
+			"default": {
+				"default": [
+					"My home could use some repairs!"
+				]
+			}
+		},
+		"otherDeed": {
+			"default": {
+				"default": [
+					"I thought this place was for me!"
+				]
+			}
+		},
+		"severe": {
+			"default": {
+				"default": [
+					"I can't live in these conditions!"
+				]
+			}
+		},
+		"final": {
+			"default": {
+				"default": [
+					"I've had enough of this!"
+				]
+			}
+		},
+		"beacon": {
+			"default": {
+				"default": [
+					"I'm home!"
+				]
+			}
+		},
+		"rent": {
+			"default": {
+				"default": [
+					"Here's a gift for all your help!"
+				]
+			}
+		},
+		"helpme": {
+			"default": {
+				"default": [
+					"Oh no! Help me!",
+					"Help!",
+					"Uh-oh.",
+					"I'm unarmed! Help!",
+					"I need help! I can't defend myself!",
+					"Ah! Stop it!",
+					"What!? What did I do!?"
+				]
+			}
+		},
+		"safe": {
+			"default": {
+				"default": [
+					"Phew, I think I got away.",
+					"Thank goodness that's over.",
+					"Is it over?",
+					"Is it safe now?",
+					"I made it!"
+				]
+			}
+		},
+		"accuse": {
+			"default": {
+				"default": [
+					"Hey, that doesn't belong to you!"
+				]
+			}
+		},
+		"alert": {
+			"default": {
+				"default": [
+					"Guards! There is a criminal here!"
+				]
+			}
+		},
+		"offer": {
+			"default": {
+				"default": [
+					"Hello adventurer, mind if I join you?",
+					"I'm <selfname>, and I really want to join a ship. Do you want to employ me?",
+					"You are JUST the kind of person I should work with! Fancy employing me?",
+					"I'm looking for a ship's crew to join. Are you interested?",
+					"I'm looking for a place among a crew. Can I join yours?"
+				]
+			}
+		},
+		"roleDescription": {
+			"default": {
+				"default": [
+					"I'll be here for you if you need someone to help you fight bad guys!",
+					"If you need protection, you know where to find me!",
+					"If you need me in battle, I'll be here!"
+				]
+			}
+		},
+		"respawned": {
+			"default": {
+				"default": [
+					"Heh... Dying tickles.",
+					"What just happened?",
+					"I'm back! And alive!",
+					"I'm back and in one piece!",
+					"I'm alive again! That's good.",
+					"I don't think I respawned properly...",
+					"My head hurts.",
+					"What was I doing just before I died?"
+				]
+			}
+		},
+		"crewcantreach": {
+			"default": {
+				"default": [
+					"I can't reach you!",
+					"You're too far!",
+					"Hey, wait up!",
+					"Don't go too far!",
+					"Let me catch up!"
+				]
+			}
+		},
+		"reattack": {
+			"default": {
+				"default": [
+					"You again!",
+					"You returned!",
+					"Aha!",
+					"You came back?",
+					"So you came back."
+				]
+			}
+		},
+		"attack": {
+			"default": {
+				"default": [
+					"Attack!"
+				]
+			}
+		},
+		"killedTarget": {
+			"default": {
+				"default": [
+					"Never mess with me!",
+					"Victory!",
+					"Phew!",
+					"Another victory!",
+					"I didn't even break a sweat!",
+					"Heh.",
+					"Of course I won!",
+					"I'm pretty good at this!",
+					"That was stressful...",
+					"Another easy win!",
+					"Yes!",
+					"That's what you get!"
+				]
+			}
+		},
+		"lostTarget": {
+			"default": {
+				"default": [
+					"I will get you one day!",
+					"It's not over!",
+					"Don't come back!",
+					"Where are you...",
+					"What a hassle.",
+					"Just you wait!"
+				]
+			}
+		},
+		"outOfSight": {
+			"default": {
+				"default": [
+					"Sneaky! This is sneaky! How did you disappear?",
+					"They're getting away!",
+					"Where'd you go?",
+					"Get back here!",
+					"How did this happen?"
+				]
+			}
+		},
+		"cantReachEnemy": {
+			"default": {
+				"default": [
+					"Get over here!",
+					"Come here!",
+					"Get back here!",
+					"How did you get over there?",
+					"I can't reach!"
+				]
+			}
+		},
+		"cheerOn": {
+			"default": {
+				"default": [
+					"I have a plan!",
+					"Get them!",
+					"Everybody is in my way.",
+					"Why aren't they already dead?",
+					"Come on!"
+				]
+			}
+		}
+	},
 	// Unused Dialogue
 	"oralVoreForcingAfter": "Missing: oralVoreForcingAfter",
 	"tailVoreForcingAfter": "Missing: tailVoreForcingAfter",

@@ -5,7 +5,6 @@
 	// overall default values for a "new" dialogue
 	"defaultResults" : {
 		"entityPortrait" : ["bust"],
-		// "dialogue" : [":missingDialogue"],
 		"textSound": ["/sfx/interface/aichatter1.ogg"],
 		"textVolume" : [1],
 		"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
@@ -65,19 +64,17 @@
 	},
 	// lines triggered when a player may recieve a certain reward
 	"rewardNotify" :{
-		"new" : {},
-		"next" : ["poolName", "rewardName"],
 		"money" : {
-			"replace" : {"dialogueRandom":[":rewardNotifyMoney"]}
+			"new" : {"dialogueRandom":[":rewardNotifyMoney"]}
 		},
 		"lowValueQuestRewards" : {
-			"replace" : {"dialogueRandom":[":rewardNotifyLowValueQuestRewards"]}
+			"new" : {"dialogueRandom":[":rewardNotifyLowValueQuestRewards"]}
 		},
 		"mediumValueQuestRewards" : {
-			"replace" : {"dialogueRandom":[":rewardNotifyMediumValueQuestRewards"]}
+			"new" : {"dialogueRandom":[":rewardNotifyMediumValueQuestRewards"]}
 		},
 		"highValueQuestRewards" : {
-			"replace" : {"dialogueRandom":[":rewardNotifyHighValueQuestRewards"]}
+			"new" : {"dialogueRandom":[":rewardNotifyHighValueQuestRewards"]}
 		}
 	},
 
