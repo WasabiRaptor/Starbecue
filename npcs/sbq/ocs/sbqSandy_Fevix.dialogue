@@ -2252,10 +2252,7 @@
 			]
 		}
 	],
-	"strugglingFemcumHeal": "Missing: strugglingFemcumHeal <dialoguePath>",
-	"strugglingCumHeal": "Missing: strugglingCumHeal <dialoguePath>",
 	"strugglingMiscHeal": ":strugglingAcidHeal",
-	"strugglingCompression": "Missing: strugglingCompression <dialoguePath>",
 	"strugglingAcidDigest": [
 		[
 			"Ahh... I'm starting to melt.",
@@ -2314,12 +2311,12 @@
 					"bellySounds": true
 				},
 				"add": [
-					"^#ffffff7f;(Just a grumbling belly~)",
-					"^#ffffff7f;(Just your grumbling belly~)",
-					"^#ffffff7f;(Just <entityname>'s grumbling belly~)",
-					"^#ffffff7f;(Just a noisy belly~)",
-					"^#ffffff7f;(Just your noisy belly~)",
-					"^#ffffff7f;(Just <entityname>'s noisy belly~)"
+					"(Just a grumbling belly~)",
+					"(Just your grumbling belly~)",
+					"(Just <entityname>'s grumbling belly~)",
+					"(Just a noisy belly~)",
+					"(Just your noisy belly~)",
+					"(Just <entityname>'s noisy belly~)"
 				]
 			},
 			{
@@ -2327,62 +2324,62 @@
 					"mood": "hungry"
 				},
 				"add": [
-					"<slowlove>^#ffffff7f;(Feeed meee~)",
-					"^#ffffff7f;(Hungry...)"
+					"<slowlove>(Feeed meee~)",
+					"(Hungry...)"
 				]
 			},
 			[
-				"^#ffffff7f;(Just a belly~)",
-				"^#ffffff7f;(Just your belly~)",
-				"^#ffffff7f;(Just <entityname>'s belly~)"
+				"(Just a belly~)",
+				"(Just your belly~)",
+				"(Just <entityname>'s belly~)"
 			],
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
 		]
 	],
 	"breastInfused": [
 		"<slowlove>",
 		"<love>",
 		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(Producing milk...~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(Producing milk...~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
 		]
 	],
 	"pussyInfused": [
 		"<slowlove>",
 		"<love>",
 		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(I'm getting so wet ahh~)",
-			"<slowlove>^#ffffff7f;(Mmm put something inside me~)",
-			"<slowlove>^#ffffff7f;(<entityname>'s pussy~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I'm getting so wet ahh~)",
+			"<slowlove>(Mmm put something inside me~)",
+			"<slowlove>(<entityname>'s pussy~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
 		]
 	],
 	"cockInfused": [
 		"<slowlove>",
 		"<love>",
 		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(I'm just a cock~)",
-			"<slowlove>^#ffffff7f;(I can't wait to be used~)",
-			"<slowlove>^#ffffff7f;(Ahh~ I'm throbbing with excitment~)",
-			"<slowlove>^#ffffff7f;(I'm just <entityname>'s cock~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I'm just a cock~)",
+			"<slowlove>(I can't wait to be used~)",
+			"<slowlove>(Ahh~ I'm throbbing with excitment~)",
+			"<slowlove>(I'm just <entityname>'s cock~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
 		]
 	],
 	"pawInfused": "Missing: pawInfused <dialoguePath>",
 	"tailInfused": [
-		"<slowlove>^#ffffff7f;(I belong back here~)",
-		"<slowlove>^#ffffff7f;(Back and forth. Back and forth. Just a tail now~)",
-		"<slowlove>^#ffffff7f;(I belong back here... just a part of <entityname>~)"
+		"<slowlove>(I belong back here~)",
+		"<slowlove>(Back and forth. Back and forth. Just a tail now~)",
+		"<slowlove>(I belong back here... just a part of <entityname>~)"
 	],
 	"climax": [
 		"Ahhh~! FUCK that felt good~!"
@@ -3238,7 +3235,7 @@
 		"Ahh... I'm being turned into slime...",
 		"Its like my limbs are turning into jelly..."
 	],
-	"strugglingCompressionBelly": [
+	"strugglingCompression": [
 		"It's getting so tight in here!",
 		"I can barely move in here...",
 		"I can't keep it... from compacting me."
@@ -3323,7 +3320,7 @@
 		"Trying to get your womb to break me down? Not gonna work.",
 		"As great as being digested in your womb sounds, it's not gonna happen."
 	],
-	"strugglingHealWomb": [
+	"strugglingFemcumHeal": [
 		"Your womb is soothing me so well!",
 		"I can feel my pain vanishing within your womb.",
 		"Is your womb making me feel better? Strange..."
@@ -3369,7 +3366,7 @@
 		"You should know that I won't soften up inside your shaft.",
 		"I'm resistant to your shaft trying to melt me."
 	],
-	"strugglingHealCock": [
+	"strugglingCumHeal": [
 		"Who would have thought your cock could heal so well.",
 		"Your shaft is rather soothing it seems. Weird.",
 		"Your cock is making my pain go away. It's so relaxing in here!"
@@ -3692,25 +3689,25 @@
 		"<love>",
 		[
 			[
-				"^#ffffff7f;(Just a part of your body~)",
-				"^#ffffff7f;(Just a part of <entityname>'s body~)"
+				"(Just a part of your body~)",
+				"(Just a part of <entityname>'s body~)"
 			],
-			"<slowlove>^#ffffff7f;(I belong here, don't I...~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
+			"<slowlove>(I belong here, don't I...~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
 		]
 	],
 	"ballsInfused": [
 		"<slowlove>",
 		"<love>",
 		[
-			"<slowlove>^#ffffff7f;(Ahh... I just feel so good...~)",
-			"<slowlove>^#ffffff7f;(I belong here don't I...~)",
-			"<slowlove>^#ffffff7f;(I'm just your balls~)",
-			"<slowlove>^#ffffff7f;(Ahh~ so full of cum sloshing around~)",
-			"<slowlove>^#ffffff7f;(I'm just <entityname>'s balls~)",
-			"<slowlove>^#ffffff7f;(I belong here... just a part of <entityname>~)",
-			"<love>^#ffffff7f;(<keysmash>)"
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I'm just your balls~)",
+			"<slowlove>(Ahh~ so full of cum sloshing around~)",
+			"<slowlove>(I'm just <entityname>'s balls~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
 		]
 	],
 	"anyInfusedOccupant": [
