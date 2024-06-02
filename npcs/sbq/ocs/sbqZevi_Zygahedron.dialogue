@@ -1,34 +1,15 @@
 {
-	"missingDialogue": "Missing Dialogue\n<dialoguePath>",
-	"greetingRewards": [
-		"It was fun messing around!\nHave some stuff."
-	],
-	"greetingRewardsIntroduced": [
-		"That was great <entityname>!\nI hope you like all this!"
-	],
+	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards", // external lines
+	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
 	"greeting": [
 		"Hi.",
 		"Hey there.",
 		"Mrow."
 	],
-	"greetingCrew": [
-		"Greetings Captain.",
-		"Hello Captain.",
-		"Captain."
-	],
-	"crewStay": [
-		"I'll be right here.",
-		"Staying here.",
-		"Yeah I'll stay."
-	],
-	"fullCrew": [
-		"I can't, you've got a full crew."
-	],
-	"crewFollow": [
-		"Right behind you!",
-		"Here we go!",
-		"Lets go!"
-	],
+	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
+	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
+	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
+	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
 	"converse": [
 		"So what did you want to talk about?"
 	],
@@ -39,131 +20,51 @@
 	"problemPet": [
 		"<dontSpeak>* It's possible that you may have a problem."
 	],
-	"rewardNotifyMoney": [
-		"This is nice, I think I'll give you some of my spare change.",
-		"I'll give you a few pixels for giving me a good time."
-	],
-	"rewardNotifyLowValueQuestRewards": [
-		"Hmm, I think you deserve something after this.",
-		"I think I'll give you some sort of small gift."
-	],
-	"rewardNotifyMediumValueQuestRewards": [
-		"Maybe I've got something a bit better for you this time.",
-		"I've got another gift for you after this."
-	],
-	"rewardNotifyHighValueQuestRewards": [
-		"I think you'll really like what I've gotten you.",
-		"My next gift will be really good heh."
-	],
-	"oralVoreRequested": [
-		"You want me to eat you?",
-		"Alright, sure.",
-		"Yeah ok.",
-		"Sounds good."
-	],
-	"oralVoreRequestedAfter": [
-		"Mmmmmmm... good.",
-		"Tasty.",
-		"Nice and filling.",
-		"Not too bad."
-	],
+	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney", // external lines
+	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards", // external lines
+	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards", // external lines
+	"rewardNotifyHighValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyHighValueQuestRewards", // external lines
+	"oralVoreRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequested", // external lines
+	"oralVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter", // external lines
 	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
-	"oralVoreNo": ":defaultNo",
-	"oralVoreTooBig": ":tooBig",
-	"oralVoreTooSmall": ":tooSmall",
-	"oralVoreNoSlots": ":noSlots",
-	"oralVoreFull": [
-		"I'm a bit too full...",
-		"My belly can't stretch any further...",
-		"I've eaten too much already...",
-		"I would... but I'm too full..."
-	],
-	"oralVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"oralVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"tailVoreRequested": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Oh thats great! I've been starving, and you look like you'll fill my tail up nicely!"
-			],
-			[ // 25% - 50%
-				"That should help me deal with this hunger, now to just slurp you up!"
-			],
-			[ // 50% - 75%
-				"Ah, you noticed my tail, well it's perfectly ready to slurp you up!"
-			],
-			[ // 75% - 100%
-				"So you want to see what the inside of my tail is like?"
-			]
-		]
-	},
-	"tailVoreRequestedAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Mmm~ You make such a wonderful tail bulge, hope you don't mind it squeezing from how hungry it is!"
-			],
-			[ // 25% - 50%
-				"Nice and filling, heh, you're quite a nice bulge in my tail!"
-			],
-			[ // 50% - 75%
-				"How do you like how it's squeezing and slurping around you hmm?"
-			],
-			[ // 75% - 100%
-				"Like a long squeezy wet sleeping bag slurping around you right?"
-			]
-		]
-	},
+	"oralVoreNo": ":defaultNo", // duplicated lines
+	"defaultNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
+	"oralVoreTooBig": ":tooBig", // duplicated lines
+	"tooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig", // external lines
+	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall", // external lines
+	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots", // external lines
+	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull", // external lines
+	"oralVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"defaultNeedsInfusion": "Missing: defaultNeedsInfusion <dialoguePath>",
+	"oralVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"defaultAlreadyInfused": "Missing: defaultAlreadyInfused <dialoguePath>",
+	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"targetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:targetPreySettingsMismatch", // external lines
+	"tailVoreRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequested", // external lines
+	"tailVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestedAfter", // external lines
 	"tailVoreInvalid": "Whoops! tailVore is invalid <dialoguePath>",
-	"tailVoreNo": ":defaultNo",
-	"tailVoreTooBig": ":tooBig",
-	"tailVoreTooSmall": ":tooSmall",
-	"tailVoreNoSlots": ":noSlots",
-	"tailVoreFull": [
-		"Sorry but my tail is already filled up.",
-		"My tail can't fit any more prey, sorry!"
-	],
-	"tailVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"tailVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"absorbVoreRequested": [ // these lines should be proofread and or redone when Absorb is actually implemented for NPCs/players
-		"You want to be entirely engulfed within me? why not! come here.",
-		"Heh, now to give you a hug, and pull you into a full body hug."
-	],
-	"absorbVoreRequestedAfter": [
-		"Ah.. easy instant snack, settle in my buddy.",
-		"You fit like a glove in me, might as well got comfortable."
-	],
+	"tailVoreNo": ":defaultNo", // duplicated lines
+	"tailVoreTooBig": ":tooBig", // duplicated lines
+	"tailVoreTooSmall": ":tooSmall", // duplicated lines
+	"tailVoreNoSlots": ":noSlots", // duplicated lines
+	"tailVoreFull": "/npcs/sbq/dialogue/default.dialogue:tailVoreFull", // external lines
+	"tailVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"tailVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"absorbVoreRequested": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequested", // external lines
+	"absorbVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestedAfter", // external lines
 	"absorbVoreInvalid": "Whoops! absorbVore is invalid <dialoguePath>",
-	"absorbVoreNo": ":defaultNo",
-	"absorbVoreTooBig": ":tooBig",
-	"absorbVoreTooSmall": ":tooSmall",
-	"absorbVoreNoSlots": ":noSlots",
-	"absorbVoreFull": [
-		"I'd push you in, but my form is stretched out enough as is!",
-		"No room in my body for you bud."
-	],
-	"absorbVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"absorbVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"absorbVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"navelVoreRequested": "Missing: navelVoreRequested <dialoguePath>",
-	"navelVoreRequestedAfter": "Missing: navelVoreRequestedAfter <dialoguePath>",
-	"navelVoreInvalid": "Whoops! navelVore is invalid <dialoguePath>",
-	"navelVoreNo": ":defaultNo",
-	"navelVoreTooBig": ":tooBig",
-	"navelVoreTooSmall": ":tooSmall",
-	"navelVoreNoSlots": ":noSlots",
-	"navelVoreFull": ":defaultFull",
-	"navelVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"navelVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"navelVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"analVoreRequested": [
-		"You want to go up my butt?",
-		"You know thats the wrong way right?",
-		"That's going to be a tight fit.",
-		"Thats an interesting request."
-	],
+	"absorbVoreNo": ":defaultNo", // duplicated lines
+	"absorbVoreTooBig": ":tooBig", // duplicated lines
+	"absorbVoreTooSmall": ":tooSmall", // duplicated lines
+	"absorbVoreNoSlots": ":noSlots", // duplicated lines
+	"absorbVoreFull": "/npcs/sbq/dialogue/default.dialogue:absorbVoreFull", // external lines
+	"absorbVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"absorbVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"absorbVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"analVoreRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreRequested", // external lines
 	"analVoreRequestedAfter": [
 		"Ahhh~ Hope I'm not squeezing too much.",
 		"Mmm~ This actually feels pretty good.",
@@ -171,17 +72,14 @@
 		"Oooh~ That squirming is rather nice."
 	],
 	"analVoreInvalid": "Whoops! analVore is invalid <dialoguePath>",
-	"analVoreNo": ":defaultNo",
-	"analVoreTooBig": ":tooBig",
-	"analVoreTooSmall": ":tooSmall",
-	"analVoreNoSlots": ":noSlots",
-	"analVoreFull": [
-		"Sorry, all full back here!",
-		"Afraid I can't fit another in me!"
-	],
-	"analVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"analVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"analVoreNo": ":defaultNo", // duplicated lines
+	"analVoreTooBig": ":tooBig", // duplicated lines
+	"analVoreTooSmall": ":tooSmall", // duplicated lines
+	"analVoreNoSlots": ":noSlots", // duplicated lines
+	"analVoreFull": "/npcs/sbq/dialogue/default.dialogue:analVoreFull", // external lines
+	"analVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"analVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"unbirthVoreRequested": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my pussy?",
@@ -195,30 +93,31 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
-	"unbirthVoreNo": ":defaultNo",
-	"unbirthVoreTooBig": ":tooBig",
-	"unbirthVoreTooSmall": ":tooSmall",
-	"unbirthVoreNoSlots": ":noSlots",
+	"unbirthVoreNo": ":defaultNo", // duplicated lines
+	"unbirthVoreTooBig": ":tooBig", // duplicated lines
+	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
+	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
 	"unbirthVoreFull": [
 		"My womb is already occupied~",
 		"Maybe after I'm done carrying my current occupants around~",
 		"Hehe, I would if I wasn't already full down there~",
 		"Maybe after I climax heh~"
 	],
-	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"breastVoreRequested": "Missing: breastVoreRequested <dialoguePath>",
-	"breastVoreRequestedAfter": "Missing: breastVoreRequestedAfter <dialoguePath>",
+	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastVoreRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequested", // external lines
+	"breastVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestedAfter", // external lines
 	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
-	"breastVoreNo": ":defaultNo",
-	"breastVoreTooBig": ":tooBig",
-	"breastVoreTooSmall": ":tooSmall",
-	"breastVoreNoSlots": ":noSlots",
-	"breastVoreFull": ":defaultFull",
-	"breastVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"breastVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"breastVoreNo": ":defaultNo", // duplicated lines
+	"breastVoreTooBig": ":tooBig", // duplicated lines
+	"breastVoreTooSmall": ":tooSmall", // duplicated lines
+	"breastVoreNoSlots": ":noSlots", // duplicated lines
+	"breastVoreFull": ":defaultFull", // duplicated lines
+	"defaultFull": "Missing: defaultFull <dialoguePath>",
+	"breastVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockVoreRequested": [
 		"Hah, you're horny.",
 		"You want to get squeezed into my dick?",
@@ -231,19 +130,14 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
-	"cockVoreNo": ":defaultNo",
-	"cockVoreTooBig": ":tooBig",
-	"cockVoreTooSmall": ":tooSmall",
-	"cockVoreNoSlots": ":noSlots",
-	"cockVoreFull": [
-		"Already got someone plugging my shaft~",
-		"Mmm maybe if someone squirmed a little further in, I might have space for you.",
-		"Hehe, I would if someone wasn't already squeezed in there~",
-		"Maybe after I cum heh~"
-	],
-	"cockVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"cockVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"cockVoreNo": ":defaultNo", // duplicated lines
+	"cockVoreTooBig": ":tooBig", // duplicated lines
+	"cockVoreTooSmall": ":tooSmall", // duplicated lines
+	"cockVoreNoSlots": ":noSlots", // duplicated lines
+	"cockVoreFull": "/npcs/sbq/dialogue/default.dialogue:cockVoreFull", // external lines
+	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"bellyInfuseRequested": [
 		"Mm, you love my belly so much... you want to be a part of it?",
 		"You want to become my belly?",
@@ -255,14 +149,14 @@
 		"Try not to make me too hungry..."
 	],
 	"bellyInfuseInvalid": "Whoops! bellyInfuse is invalid <dialoguePath>",
-	"bellyInfuseNo": ":defaultNo",
-	"bellyInfuseTooBig": ":tooBig",
-	"bellyInfuseTooSmall": ":tooSmall",
-	"bellyInfuseNoSlots": ":noSlots",
-	"bellyInfuseFull": ":defaultFull",
-	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"bellyInfuseNo": ":defaultNo", // duplicated lines
+	"bellyInfuseTooBig": ":tooBig", // duplicated lines
+	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
+	"bellyInfuseFull": ":defaultFull", // duplicated lines
+	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"breastInfuseRequested": [
 		"You want to be my boobs?",
 		"Mm, can't wait to be jiggling on my chest can you?",
@@ -274,14 +168,14 @@
 		"Ah, you're already leaking milk~"
 	],
 	"breastInfuseInvalid": "Whoops! breastInfuse is invalid <dialoguePath>",
-	"breastInfuseNo": ":defaultNo",
-	"breastInfuseTooBig": ":tooBig",
-	"breastInfuseTooSmall": ":tooSmall",
-	"breastInfuseNoSlots": ":noSlots",
-	"breastInfuseFull": ":defaultFull",
-	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"breastInfuseNo": ":defaultNo", // duplicated lines
+	"breastInfuseTooBig": ":tooBig", // duplicated lines
+	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
+	"breastInfuseNoSlots": ":noSlots", // duplicated lines
+	"breastInfuseFull": ":defaultFull", // duplicated lines
+	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"pussyInfuseRequested": [
 		"You want to be my pussy?",
 		"Mm, can't wait to be soaking wet down there can you?",
@@ -293,14 +187,14 @@
 		"Ah, you're already sopping wet with excitment~"
 	],
 	"pussyInfuseInvalid": "Whoops! pussyInfuse is invalid <dialoguePath>",
-	"pussyInfuseNo": ":defaultNo",
-	"pussyInfuseTooBig": ":tooBig",
-	"pussyInfuseTooSmall": ":tooSmall",
-	"pussyInfuseNoSlots": ":noSlots",
-	"pussyInfuseFull": ":defaultFull",
-	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"pussyInfuseNo": ":defaultNo", // duplicated lines
+	"pussyInfuseTooBig": ":tooBig", // duplicated lines
+	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
+	"pussyInfuseFull": ":defaultFull", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockInfuseRequested": [
 		"You want to be my cock?",
 		"Mm, can't wait to be throbbing down there can you?",
@@ -312,1154 +206,91 @@
 		"Ah, you're already throbbing with excitment~"
 	],
 	"cockInfuseInvalid": "Whoops! cockInfuse is invalid <dialoguePath>",
-	"cockInfuseNo": ":defaultNo",
-	"cockInfuseTooBig": ":tooBig",
-	"cockInfuseTooSmall": ":tooSmall",
-	"cockInfuseNoSlots": ":noSlots",
-	"cockInfuseFull": ":defaultFull",
-	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"oralVoreLetoutRequested": [
-		"You can come out now.",
-		"Time to come out.",
-		"You can't stay in there forever.",
-		"Time to get out."
-	],
-	"tailVoreLetoutRequested": [
-		"I think you've spent enough time in tail-jail.",
-		"Times up, tail snack. You're free to leave my tail for now."
-	],
-	"absorbVoreLetoutRequested": [
-		"I think you've spent enough time in my form.",
-		"Time to get out of me, buddy."
-	],
-	"navelVoreLetoutRequested": "Missing: navelVoreLetoutRequested <dialoguePath>",
-	"analVoreLetoutRequested": [
-		"Was the 'subway' a pleasant trip through?",
-		"Out though my lower exit, come again soon!"
-	],
-	"unbirthVoreLetoutRequested": [
-		"Happy birthday.",
-		"I think you've had enough fun in there.",
-		"Maybe it's time for you to come out."
-	],
-	"breastVoreLetoutRequested": "Missing: breastVoreLetoutRequested <dialoguePath>",
-	"cockVoreLetoutRequested": [
-		"Hhhhhh, I'm gonna cum...",
-		"C-can't hold back much longer~",
-		"Gonna blast you out with a load~",
-		"Ahhhh, feeels soooo goood~"
-	],
-	"oralVorePrompt": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I'm soooo hungry... I need to eat something...\nAnd You're looking rather tasty...",
-				"Starving... you... please... feed me...",
-				"My belly is so empty... You're kinda looking a bit like food..."
-			],
-			[ // 25% - 50%
-				"Mmmmm hungry... can I... have a taste?",
-				"Ugh... I need some real food to fill me up... would you spend some time in my gut?",
-				"O-ooh, I can feel my tank running dry. Fill me up, please?"
-			],
-			[ // 50% - 75%
-				"I could use a meal... would you want to be part of it?",
-				"I'm not THAT hungry, but a belly filler would be nice. You in?",
-				"Gotta admit, I think you'd fit in me nicely. Care to try?"
-			],
-			[ // 75% - 100%
-				"I'm a bit peckish... can I eat you to top off?",
-				"Something light would be nice. You might fit the bill.",
-				"Even if I'm not hungry, you look tasty. May I?"
-			]
-		]
-	},
-	"oralVorePromptYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Thank you so much! I thought I'd starve!",
-				"I appreciate it. I might reward you for this later.",
-				"I was hoping you'd say that. You're a life-saver."
-			],
-			[ // 25% - 50%
-				"Thanks... I was really hungry.",
-				"Whew... I really didn't want to starve.",
-				"You're the best. Honest!"
-			],
-			[ // 50% - 75%
-				"Thank you! I just needed to satiate those grumbles.",
-				"Perfect, I'll make it worth your while.",
-				"Mmm, I was hoping you'd agree."
-			],
-			[ // 75% - 100%
-				"Thanks, you should be just the snack I need.",
-				"Nice, now just relax and enjoy the ride.",
-				"Lovely, let's not waste any time."
-			]
-		]
-	},
-	"oralVorePromptYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Ahhh~ you *Really* hit the spot there."
-			],
-			[ // 25% - 50%
-				"MMmmmm... feeling better already."
-			],
-			[ // 50% - 75%
-				"You're filling me right up."
-			],
-			[ // 75% - 100%
-				"Mmm, the perfect snack."
-			]
-		]
-	},
-	"oralVorePromptNo": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Ahh... I'll have to find something else..."
-			],
-			[ // 25% - 50%
-				"Thats alright... I'll find another meal..."
-			],
-			[ // 50% - 75%
-				"Thats ok, not everyone wants to be a meal."
-			],
-			[ // 75% - 100%
-				"Eh I just wanted a snack, don't fret on it."
-			]
-		]
-	},
-	"oralVorePromptNoYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Sorry... I can't take no for an answer right now!"
-			],
-			[ // 25% - 50%
-				"Mmm... I think my grumbling belly disagrees with that."
-			],
-			[ // 50% - 75%
-				"Why don't you try it out first, then we'll see."
-			],
-			[ // 75% - 100%
-				"Are you quite sure? why don't we see what you think once you're inside."
-			]
-		]
-	},
-	"oralVorePromptNoYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"You should know denying a starving predator a meal isn't really an option~"
-			],
-			[ // 25% - 50%
-				"Ah! my gut is much happier with this outcome, Wouldn't you agree now?"
-			],
-			[ // 50% - 75%
-				"And now that I've swallowed you, why not just stay?"
-			],
-			[ // 75% - 100%
-				"See? you are right where you should be now, down my throat and in my belly!"
-			]
-		]
-	},
-	"tailVorePrompt": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I'm starving... my belly and my tail are grumbling... can I slurp you up?"
-			],
-			[ // 25% - 50%
-				"Hungry... I wanna slurp someone up in my tail... want to volunteer?"
-			],
-			[ // 50% - 75%
-				"...Did you know I can put things in my tail? Like entire people? Want to see?"
-			],
-			[ // 75% - 100%
-				"I think you'd have a nice time swishing around in my tail, want me to slurp you up?"
-			]
-		]
-	},
-	"tailVorePromptYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Thank you! Now for you to satiate my tail's grumbles..."
-			],
-			[ // 25% - 50%
-				"Yay! now, hold still, sometimes I like to coil it around my prey first..."
-			],
-			[ // 50% - 75%
-				"Nice, now, just look closer, watch as that tailmaw opens up right in front of you..."
-			],
-			[ // 75% - 100%
-				"I knew you'd want to! Just relax and let me slurp you up inside all cozy like..."
-			]
-		]
-	},
-	"tailVorePromptYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Ahh, nice and full, now just let yourself relax as my tail squeezes around you..."
-			],
-			[ // 25% - 50%
-				"And now you're nice and snug and squeezed inside my tail."
-			],
-			[ // 50% - 75%
-				"Mmm delicious~ I hope you like how it feels in there, squeezing and slurping around you."
-			],
-			[ // 75% - 100%
-				"Mmm, nice and snug, a good bulge in my tail as I swish it around"
-			]
-		]
-	},
-	"tailVorePromptNo": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Mmm... I'll have to find something else... be careful I don't snatch you by accident."
-			],
-			[ // 25% - 50%
-				"Alright... stay away from my tail just in case..."
-			],
-			[ // 50% - 75%
-				"Sad, I just wanted you to see my tailmaw."
-			],
-			[ // 75% - 100%
-				"Alright, maybe I'll get you another time."
-			]
-		]
-	},
-	"tailVorePromptNoYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"No...? then... sorry! I can't help myself! My tail is gonna snatch you up!"
-			],
-			[ // 25% - 50%
-				"Maybe... maybe you'll change your mind once I have you coiled up in it?"
-			],
-			[ // 50% - 75%
-				"Come on! just take a look, just stare right into that open maw..."
-			],
-			[ // 75% - 100%
-				"No? Come on, it'll be so nice and snug in there! here, lets just try it out!"
-			]
-		]
-	},
-	"tailVorePromptNoYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Mm... sorry again! But you were so tasty, I couldn't deny slurping up a treat like you!"
-			],
-			[ // 25% - 50%
-				"Mmm... theres no escape from my tail once I set my eyes on something, so you might as well enjoy yourself in there!"
-			],
-			[ // 50% - 75%
-				"Hehe, you just couldn't look away, and now you're getting squeezed deep inside it!"
-			],
-			[ // 75% - 100%
-				"Mwah~ I knew you'd like it in there, don't even try lying to me, getting squeezed and swished around, you love it!"
-			]
-		]
-	},
-	"absorbVorePrompt": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Feeling empty, can I just throw you into me and fill that void?"
-			],
-			[ // 25% - 50%
-				"It's almost lunch, cool if I just shove you into my body?"
-			],
-			[ // 50% - 75%
-				"Would you care to be absorbed today friend?"
-			],
-			[ // 75% - 100%
-				"Hey you, mind if I take you into my body real quick?"
-			]
-		]
-	},
-	"absorbVorePromptYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Yes! I can't wait for you to fill me up, give me a tight hug!"
-			],
-			[ // 25% - 50%
-				"Glad you see it my way, now come here and get in!"
-			],
-			[ // 50% - 75%
-				"Wonderful, let's get you in buddy, my body is ready!"
-			],
-			[ // 75% - 100%
-				"Great! just let me get my arms around you and..."
-			]
-		]
-	},
-	"absorbVorePromptYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"You fill my form up in just the right way!"
-			],
-			[ // 25% - 50%
-				"Ah yes, I won't be needing lunch anymore, now that you're all in me."
-			],
-			[ // 50% - 75%
-				"Seems you went into me nicely, like a rock into Jello."
-			],
-			[ // 75% - 100%
-				"There we are, every bit of you is surrounded by every bit of me."
-			]
-		]
-	},
-	"absorbVorePromptNo": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"You'd leave me feeling empty? how cold."
-			],
-			[ // 25% - 50%
-				"Huh, I might have to eat something normally now."
-			],
-			[ // 50% - 75%
-				"Dang, would have like to feel you in me."
-			],
-			[ // 75% - 100%
-				"Aww, well fine then, guess I'll absorb someone else."
-			]
-		]
-	},
-	"absorbVorePromptNoYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"what's that? couldn't hear you over my belly grumbling! must have been a yes."
-			],
-			[ // 25% - 50%
-				"Not feeling like going and getting lunch elsewhere, so no to a no."
-			],
-			[ // 50% - 75%
-				"c'mon! why don't I just shove you into me so you better get me."
-			],
-			[ // 75% - 100%
-				"I think that's a soft no, let me get you in and see if that's still the case."
-			]
-		]
-	},
-	"absorbVorePromptNoYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Ah.. I feel so much better now, and I feel every bit of you too."
-			],
-			[ // 25% - 50%
-				"That wasn't so bad now was it? I get a snack and you get absorbed!"
-			],
-			[ // 50% - 75%
-				"You might not be happy with how this went, but I am for sure."
-			],
-			[ // 75% - 100%
-				"There we are, can't believe you'd try and get out of this."
-			]
-		]
-	},
-	"navelVorePrompt": "Missing: navelVorePrompt <dialoguePath>",
-	"navelVorePromptYes": "Missing: navelVorePromptYes <dialoguePath>",
-	"navelVorePromptYesAfter": "Missing: navelVorePromptYesAfter <dialoguePath>",
-	"navelVorePromptNo": ":defaultNo",
-	"navelVorePromptNoYes": "Missing: navelVorePromptNoYes <dialoguePath>",
-	"navelVorePromptNoYesAfter": "Missing: navelVorePromptNoYesAfter <dialoguePath>",
-	"analVorePrompt": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hey, I feel like I need something plugging my ass..."
-			],
-			[ // 25% - 50%
-				"Hm... You seem like you'd be a good buttplug."
-			],
-			[ // 50% - 75%
-				"Ahhh I've just been feeling so horny! And you seem like you'd be a good toy"
-			],
-			[ // 75% - 100%
-				"Hufff all these urges! I need something to satisfy me! Hmm you look like you're pretty squirmy~"
-			]
-		]
-	},
-	"analVorePromptYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"You're volunteering to get shoved up my butt? Interesting~"
-			],
-			[ // 25% - 50%
-				"Hehe, just as I thought, now to shove you in there..."
-			],
-			[ // 50% - 75%
-				"Yes! Oh thanks for helping me out with these urges~"
-			],
-			[ // 75% - 100%
-				"Heheh! I can't wait to clench down and feel you squirm~"
-			]
-		]
-	},
-	"analVorePromptYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ooh, you fit in there rather nicely~"
-			],
-			[ // 25% - 50%
-				"Mmm~ you like it when I clench down on you~?"
-			],
-			[ // 50% - 75%
-				"Just the perfect little toy for me to squeeze and clench on~"
-			],
-			[ // 75% - 100%
-				"Oooh~ I do love it when you squirm, do it more~!"
-			]
-		]
-	},
-	"analVorePromptNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Oh well, maybe another time then."
-			],
-			[ // 25% - 50%
-				"I suppose I'll find something or someone else to stick up there."
-			],
-			[ // 50% - 75%
-				"Mm... I really did need some help dealing with that..."
-			],
-			[ // 75% - 100%
-				"Really? well now I'm going to have to find someone else..."
-			]
-		]
-	},
-	"analVorePromptNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hm, I think we should try it out anyway, go on and kneel down for me..."
-			],
-			[ // 25% - 50%
-				"Are you sure? maybe you'll change your mind once I've got your head between my legs~"
-			],
-			[ // 50% - 75%
-				"Listen here, I need a nice buttplug and you're looking like you'll be a really squirmy toy~"
-			],
-			[ // 75% - 100%
-				"Really? You should have known that wasn't the correct answer, toy~"
-			]
-		]
-	},
-	"analVorePromptNoYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ahhh~ Lemme give you a nice squeeze just to hold you in."
-			],
-			[ // 25% - 50%
-				"You fit rather nicely, I might say you secretly wanted to be in there~"
-			],
-			[ // 50% - 75%
-				"Oooh yes~ Such a squirmy toy! You should have known this is where you belong~"
-			],
-			[ // 75% - 100%
-				"Ahhh~ just need to give you a nice good clench~ You're right where you should be, toy~"
-			]
-		]
-	},
-	"unbirthVorePrompt": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Mm, I need a little toy to squirm around in me, you up for that~?"
-			],
-			[ // 25% - 50%
-				"My womb feels so empty... hey, would you mind squirming up in there for me~?"
-			],
-			[ // 50% - 75%
-				"I'm feeling the need... weh... hey you! Want to squirm around my pussy to help me out~?"
-			],
-			[ // 75% - 100%
-				"Ah... so much heat! I need a toy! and you look perfect for shoving up into my womb~"
-			]
-		]
-	},
-	"unbirthVorePromptYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Thanks! hehe, you're gonna feel pretty good in there~"
-			],
-			[ // 25% - 50%
-				"Ooh, this is going to be great!"
-			],
-			[ // 50% - 75%
-				"Yes! Now please get in there quickly!"
-			],
-			[ // 75% - 100%
-				"Thanks! You're a lifesaver~ now get in there toy~"
-			]
-		]
-	},
-	"unbirthVorePromptYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hehe, thank you womb filler~"
-			],
-			[ // 25% - 50%
-				"Perfect... just the filler I needed~ Now squirm around a bit for me will you~?"
-			],
-			[ // 50% - 75%
-				"Ahhhh~ Just the perfect little squirmy toy to get me all wet~"
-			],
-			[ // 75% - 100%
-				"Ohhh~ it feels so wonderful having a toy in there~ Now squirm for me!"
-			]
-		]
-	},
-	"unbirthVorePromptNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ah, thats ok."
-			],
-			[ // 25% - 50%
-				"I'll find someone else."
-			],
-			[ // 50% - 75%
-				"Huff... fine I'll find someone else..."
-			],
-			[ // 75% - 100%
-				"You're going to say no when I'm dripping wet like this? ugh..."
-			]
-		]
-	},
-	"unbirthVorePromptNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Are you sure? maybe we should try it out at least..."
-			],
-			[ // 25% - 50%
-				"You said no... but you keep looking down there, why not give it a try~"
-			],
-			[ // 50% - 75%
-				"That look in your eyes though... I think you're not being honest with me~"
-			],
-			[ // 75% - 100%
-				"Don't lie to me, I can see the desire in your eyes, you want to be my toy~"
-			]
-		]
-	},
-	"unbirthVorePromptNoYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"See, I knew you'd like it~"
-			],
-			[ // 25% - 50%
-				"Hehe, I bet you're enjoying yourself in there now, aren't you?"
-			],
-			[ // 50% - 75%
-				"Mhhmm~ I was right about you wanting to be my little toy~"
-			],
-			[ // 75% - 100%
-				"Ahh, right were you belong right~? squirming around as my toy~"
-			]
-		]
-	},
-	"breastVorePrompt": "Missing: breastVorePrompt <dialoguePath>",
-	"breastVorePromptYes": "Missing: breastVorePromptYes <dialoguePath>",
-	"breastVorePromptYesAfter": "Missing: breastVorePromptYesAfter <dialoguePath>",
-	"breastVorePromptNo": ":defaultNo",
-	"breastVorePromptNoYes": "Missing: breastVorePromptNoYes <dialoguePath>",
-	"breastVorePromptNoYesAfter": "Missing: breastVorePromptNoYesAfter <dialoguePath>",
-	"cockVorePrompt": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hey so... my balls are feeling a bit empty, would you want to get inside?",
-				"I was just, thinking about squeezing you into my cock...",
-				"Have you ever thought about... being squeezed down my shaft?"
-			],
-			[ // 25% - 50%
-				"Hey so uh... I've been feeling a little horny... can I put you in my balls?",
-				"Been having some urges... can I try... squeezing you into my cock?",
-				"I heard that uh, friends are stored in the balls, I think we're on friendly enough terms for that?"
-			],
-			[ // 50% - 75%
-				"Ahhh I've just been, feeling so horny! I need to have someone squirming around in my sack!",
-				"Huffff... so hard, all these urges to shove someone down into my dick! Help me deal with em!",
-				"Gosh I just keep looking at you... and wanting to feel you getting squeezed down my shaft!"
-			],
-			[ // 75% - 100%
-				"Ahhh~ I'm feeling so close! I just need... I need you in my cock!",
-				"I'm so worked up! right on the edge hufff~ and you're exactly what I need shoved down into my balls~",
-				"I've just been overwhelmed with these urges... the urge to have someone squirming around in my dick!"
-			]
-		]
-	},
-	"cockVorePromptYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ah thank you so much! you'll be a great filler for my balls...",
-				"Thats great! I've wanted to do this...",
-				"This should be fun... and exciting... hope I don't squeeze too much when I get hard."
-			],
-			[ // 25% - 50%
-				"This is going to be great... thanks for helping with these urges!",
-				"Thank you, hehe, now get ready to squeeze down my shaft!"
-			],
-			[ // 50% - 75%
-				"You said yes! gosh I'm so excited! My cock is too!",
-				"Aha! You do want to! I knew asking you was the right choice!"
-			],
-			[ // 75% - 100%
-				"Thank you! Tank you Thank you! I needed this so much so much!",
-				"Ahhh Yesss! Please get in there as quick as you can!"
-			]
-		]
-	},
-	"cockVorePromptYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ahh~ thats great, I hope my cock isn't squeezing to hard~",
-				"MM~ I might get a bit too hard from this if you keep squirming..."
-			],
-			[ // 25% - 50%
-				"Fff~ ooh~ That's certainly going to get me more excited~",
-				"Ahhh~ keep squirming around for me, I want to feel everything~"
-			],
-			[ // 50% - 75%
-				"Yessss~! This is EXACTLY what I needed, squrim even more for me~!",
-				"Push me closer! keep squirming! I want to feel even more!"
-			],
-			[ // 75% - 100%
-				"AhhhH~ ffff I might just cum with all this squirming! don't stop!",
-				"Keep going! Yes! YES~! Try to make me cum! I want it so much!"
-			]
-		]
-	},
-	"cockVorePromptNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Thats alright."
-			],
-			[ // 25% - 50%
-				"Dissapointing, but ok."
-			],
-			[ // 50% - 75%
-				"Alright... I'll have to find someone else to help..."
-			],
-			[ // 75% - 100%
-				"Huffff... Fine... I'll find another..."
-			]
-		]
-	},
-	"cockVorePromptNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hmm... you keep looking through, how about you give it a try~"
-			],
-			[ // 25% - 50%
-				"But I can see that look in your eyes as you stare at my cock, you want to be in there don't you?"
-			],
-			[ // 50% - 75%
-				"Hmm~ I can see you staring... and I wasn't going to take no for an answer anyway~"
-			],
-			[ // 75% - 100%
-				"Heh, wrong choice! Huff~ You should have known I wasn't going to accept a no when I'm this close~"
-			]
-		]
-	},
-	"cockVorePromptNoYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I knew it heh, look at you squirming around in there~"
-			],
-			[ // 25% - 50%
-				"Heheh don't tell me I'm wrong, you love it in there in my cock don't you~"
-			],
-			[ // 50% - 75%
-				"Ahh~ I love it when you play and put up a little fight, even when you want to be squeezed in my throbbing dick~"
-			],
-			[ // 75% - 100%
-				"MMMM! pretend to fight as much as you want, you know you want to be in my cock~ and you want me to cum just as much!"
-			]
-		]
-	},
-	"oralVoreRequesting": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Your belly, I can hear it calling to me... Please! I need you to swallow me whole!",
-				"I just... I can't stop thinking about it! I need to be eaten by you, please!",
-				"I can't help it, I just need to feel the embrace of your belly. I need to be your meal!"
-			],
-			[ // 25% - 50%
-				"I really need a rest. Would you, please send me down to your gut?",
-				"Would you eat me? Please? I really need to feel your belly squeezing around me...",
-				"Your belly... it looks so nice. I just need to be inside it. Please, eat me!"
-			],
-			[ // 50% - 75%
-				"I keep imagining myself inside your belly, like you could totally eat me right now and I would not fight back at all.\nHaha.",
-				"You know, there's nothing really stopping you from just eating me. You could just do it right here and I wouldn't complain.",
-				"Hey, if you're, hungry, like, at all, you've got a totally willing snack right here. You could just eat me if you want."
-			],
-			[ // 75% - 100%
-				"I think it would be nice to have a rest in your gut. If you want to eat me that is.",
-				"How full are you? I wouldn't mind chilling in your belly if you're wanting to top up.",
-				"I kinda want to be carried around... in your belly, if you don't mind eating me."
-			]
-		]
-	},
-	"oralVoreRequestingYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Thank you! Thank you! Thank you! Now, open wide so I can just dive right in there!",
-				"Yes! Thank you! Gosh, I almost dove in when you opened your mouth to say 'yes'!",
-				"Thank you! Ahhh... I can't wait to slip right on down your throat and be all yours!"
-			],
-			[ // 25% - 50%
-				"Ahh! I'm so happy I get to be your meal!",
-				"I'm really gonna get to be in your belly? Thank you!",
-				"Yes! I can't wait to be making a bulge in your gut!"
-			],
-			[ // 50% - 75%
-				"You'd really do that? Just eat me whole?",
-				"You're really going to eat me? Right here? Right now?",
-				"Oh my gosh! You're actually going to eat me?"
-			],
-			[ // 75% - 100%
-				"Yes? Oh, this is going to be fun!",
-				"I get to be your snack!",
-				"Yes! I just love bellies so much!"
-			]
-		]
-	},
-	"oralVoreRequestingNo": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Ah... I guess I was too excited... I'll find someone else..."
-			],
-			[ // 25% - 50%
-				"That's alright... I'll find someone else."
-			],
-			[ // 50% - 75%
-				"Hah, yeah... I wonder if anyone else would."
-			],
-			[ // 75% - 100%
-				"That's alright, I can ask someone else."
-			]
-		]
-	},
-	"oralVoreRequestingNoYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I... sorry! I need this too much! I'm diving into your maw and you can't stop me!",
-				"You're probably not listening to your belly! I know you want me inside just as much as I need to be!",
-				"That doesn't sound right, I can sense you're hungry! It's fine, I promise! I'm going to be your meal! I'll show you!"
-			],
-			[ // 25% - 50%
-				"Huh...? No? But your eyes tell me otherwise... You're hungry! How about I help you with that...",
-				"I may need a rest, but I've got enough energy left in me to force my way down your throat!",
-				"You're really going to say no? I can see the hunger in your eyes! Let me in!"
-			],
-			[ // 50% - 75%
-				"Hey, no need to be shy about it... I can tell you want to, so here, how about I stick my head in your maw and we'll see where that leads...",
-				"No? You don't seem very confident there... I could just force myself into your mouth, are you going to stop me?",
-				"Hmm? Really? I thought you were sizing me up just now, you know you can do it... Here, open your maw, let me show you..."
-			],
-			[ // 75% - 100%
-				"You don't sound too confident there... Why don't I just push my way into your maw and find out what you *really* think?",
-				"Hmmm, I think you're lying to me. I think you secretly want me to be bulging out your gut just as much as I do.",
-				"Hm? Did you say no? That can't be right, let me do an internal inspection juuuust to make sure."
-			]
-		]
-	},
-	"tailVoreRequesting": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Your tail looks like the perfect sleeping bag, may I get in?"
-			],
-			[ // 25% - 50%
-				"I could use some rest, can I get in your tail for some?"
-			],
-			[ // 50% - 75%
-				"Would care to eat me up with your tail?"
-			],
-			[ // 75% - 100%
-				"Hey, can I get into your tail?"
-			]
-		]
-	},
-	"tailVoreRequestingYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Thank you, I can already imagine how soft it is inside!"
-			],
-			[ // 25% - 50%
-				"Oh yes, I can't wait to be inside that nice tail you've got!"
-			],
-			[ // 50% - 75%
-				"I'm all yours, eat me up with that tail."
-			],
-			[ // 75% - 100%
-				"Great! I'll just let myself in."
-			]
-		]
-	},
-	"tailVoreRequestingNo": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I was so wanting into that tail, darn."
-			],
-			[ // 25% - 50%
-				"I'm going to have find a normal bed now."
-			],
-			[ // 50% - 75%
-				"Flipped a coin and it came up heads?"
-			],
-			[ // 75% - 100%
-				"Well darn, no 'tails' to tell me, huh?"
-			]
-		]
-	},
-	"tailVoreRequestingNoYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"You see, I'm getting into that tail regardless. I need in!"
-			],
-			[ // 25% - 50%
-				"I need a sleeping spot, and your tail is just too perfect. I'm diving in!"
-			],
-			[ // 50% - 75%
-				"I see... so I'm going to have to force my way in that tail, then? So be it!"
-			],
-			[ // 75% - 100%
-				"Sorry, but your tail is calling my name, so I'm gonna get in."
-			]
-		]
-	},
-	"absorbVoreRequesting": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I'm really in need of rest, mind absorbing me?"
-			],
-			[ // 25% - 50%
-				"I'm tired, can you absorb me?"
-			],
-			[ // 50% - 75%
-				"Can I just, get inside your form?"
-			],
-			[ // 75% - 100%
-				"May I get absorbed by you?"
-			]
-		]
-	},
-	"absorbVoreRequestingYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Yes, time to disappear into your body!"
-			],
-			[ // 25% - 50%
-				"Awesome, I'm going to just dive in."
-			],
-			[ // 50% - 75%
-				"I'm going to enjoy getting encased in you!"
-			],
-			[ // 75% - 100%
-				"Thanks, come give me a tight hug!"
-			]
-		]
-	},
-	"absorbVoreRequestingNo": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I was looking forward to being in you, darn it!"
-			],
-			[ // 25% - 50%
-				"Fine, I'll sleep in a normal bed then..."
-			],
-			[ // 50% - 75%
-				"Really? Well, shoot then."
-			],
-			[ // 75% - 100%
-				"Aw, I'm not absorbed and sad now."
-			]
-		]
-	},
-	"absorbVoreRequestingNoYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I'm too tired for this. Just be still as I get in you!"
-			],
-			[ // 25% - 50%
-				"Whelp, seems I must cannonball into you to get what I want."
-			],
-			[ // 50% - 75%
-				"Well then, come give me a hug at least. A very, very close one!"
-			],
-			[ // 75% - 100%
-				"No? But can you even stop me if I walk into you? Like this!"
-			]
-		]
-	},
-	"navelVoreRequesting": "Missing: navelVoreRequesting <dialoguePath>",
-	"navelVoreRequestingYes": "Missing: navelVoreRequestingYes <dialoguePath>",
-	"navelVoreRequestingNo": ":defaultNo",
-	"navelVoreRequestingNoYes": "Missing: navelVoreRequestingNoYes <dialoguePath>",
-	"analVoreRequesting": [
-		"You wouldn't mind if I just let myself in, would you?",
-		"Could you do me a favor and bend over?"
-	],
-	"analVoreRequestingYes": [
-		"You'll let me in? I can't wait to be in your booty!",
-		"Sweet! I'm going to love being in that butt!"
-	],
-	"analVoreRequestingNo": [
-		"Oh... well it was worth asking.",
-		"No booty for me today, huh?"
-	],
-	"analVoreRequestingNoYes": [
-		"Well that's too bad, because I'm going in that butt anyway!",
-		"I think you'll change your tune once you feel me wiggling inside your rear!"
-	],
-	"unbirthVoreRequesting": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Your womb seems like it'd be cozy... can I get in?"
-			],
-			[ // 25% - 50%
-				"I want... I want to get inside you... just hide myself away in your womb."
-			],
-			[ // 50% - 75%
-				"Ahh... I just can't get it off my mind! I just want to be slid right into your wet folds and hidden away in your womb!"
-			],
-			[ // 75% - 100%
-				"Wehhh! The thought of being inside you! Tucked away in your womb! Feeling the wet walls squeezing around me! Please!"
-			]
-		]
-	},
-	"unbirthVoreRequestingYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Oh, thank you! I think this is going to be wonderful for both of us!"
-			],
-			[ // 25% - 50%
-				"Yes! Thank you! I just love the feeling of being inside so much!"
-			],
-			[ // 50% - 75%
-				"Eeee! I'm so excited! I get to be your little toy, squirming inside!"
-			],
-			[ // 75% - 100%
-				"Yesss! Oh, I'm going to be such a wonderful toy for you! Now, squeeze me inside!"
-			]
-		]
-	},
-	"unbirthVoreRequestingNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ah, perhaps another time, then?"
-			],
-			[ // 25% - 50%
-				"Alright, I'll find someone else."
-			],
-			[ // 50% - 75%
-				"I'll... find someone else."
-			],
-			[ // 75% - 100%
-				"Huff... Sorry I asked..."
-			]
-		]
-	},
-	"unbirthVoreRequestingNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Are you sure...? Maybe we can try it out first, just a little bit."
-			],
-			[ // 25% - 50%
-				"Hm, is that so? Maybe we should try it out first. You might change your mind~"
-			],
-			[ // 50% - 75%
-				"Hmm... your mouth said one thing, but your eyes are telling me something else~"
-			],
-			[ // 75% - 100%
-				"Huff! I need to get in there! I need your body squeezing around me! You'll like this, I promise!"
-			]
-		]
-	},
-	"breastVoreRequesting": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"May I get into your breast, please?"
-			],
-			[ // 25% - 50%
-				"I would really like to be in your rack."
-			],
-			[ // 50% - 75%
-				"I'm real needy, and would love to relax in your milkers!"
-			],
-			[ // 75% - 100%
-				"I wanna be bouncing in those jugs of yours!"
-			]
-		]
-	},
-	"breastVoreRequestingYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Yes! Let me through those nipples and into those jugs!"
-			],
-			[ // 25% - 50%
-				"This is going to be great! Boobs, here I come!"
-			],
-			[ // 50% - 75%
-				"Awesome, now to get in that milk tub."
-			],
-			[ // 75% - 100%
-				"Alright! Time to get into that boob."
-			]
-		]
-	},
-	"breastVoreRequestingNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Damn, was worth asking."
-			],
-			[ // 25% - 50%
-				"Welp, no boobs for me, huh?"
-			],
-			[ // 50% - 75%
-				"I was looking forward to getting in that milk bath."
-			],
-			[ // 75% - 100%
-				"Just my luck, I get no breast just when I'm wanting them most!"
-			]
-		]
-	},
-	"breastVoreRequestingNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I'm sorry, but you're not standing between me and those nice breasts!"
-			],
-			[ // 25% - 50%
-				"Don't you see I'm in need of your soft jugs? Let me show you."
-			],
-			[ // 50% - 75%
-				"While you were saying no, I got close enough to just shove in, soooo..."
-			],
-			[ // 75% - 100%
-				"You might think differently once I'm inside them!"
-			]
-		]
-	},
-	"cockVoreRequesting": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ah... I was just looking, but... can I have a closer look at your dick?"
-			],
-			[ // 25% - 50%
-				"I can't help but stare... Can I give your rod a feel... maybe a little more?"
-			],
-			[ // 50% - 75%
-				"Oh my gosh... I just want to get right up close to your dick... can I pleeease?"
-			],
-			[ // 75% - 100%
-				"Wehh! Your dick just looks so gooood! I wanna feel it so much! I wanna feel it squeezing me!"
-			]
-		]
-	},
-	"cockVoreRequestingYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ah, thank you! Mmm... getting a bit firm, just how I like!"
-			],
-			[ // 25% - 50%
-				"Oh, you've got a real nice one... This is going to be great~"
-			],
-			[ // 50% - 75%
-				"Eee! This is going to be so good... Your dick just looks so nice, I can't wait!"
-			],
-			[ // 75% - 100%
-				"To get the opportunity to be squeezed inside your nice, hard, *twitching* shaft! I love it!"
-			]
-		]
-	},
-	"cockVoreRequestingNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ah, perhaps another time then?"
-			],
-			[ // 25% - 50%
-				"Alright, I'll find someone else."
-			],
-			[ // 50% - 75%
-				"I'll... find someone else."
-			],
-			[ // 75% - 100%
-				"Huff... Sorry I asked..."
-			]
-		]
-	},
-	"cockVoreRequestingNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Are you sure...? Maybe we can try it out first, just a little bit."
-			],
-			[ // 25% - 50%
-				"Hm, is that so? Maybe we should try it out first, you might change your mind~"
-			],
-			[ // 50% - 75%
-				"Hmm... your mouth said one thing, but your eyes are telling me something else~"
-			],
-			[ // 75% - 100%
-				"Huff! I need to get in there! I need your body squeezing around me! You'll like this, I promise!"
-			]
-		]
-	},
+	"cockInfuseNo": ":defaultNo", // duplicated lines
+	"cockInfuseTooBig": ":tooBig", // duplicated lines
+	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
+	"cockInfuseNoSlots": ":noSlots", // duplicated lines
+	"cockInfuseFull": ":defaultFull", // duplicated lines
+	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
+	"tailVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutRequested", // external lines
+	"absorbVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutRequested", // external lines
+	"analVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutRequested", // external lines
+	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested", // external lines
+	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested", // external lines
+	"cockVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutRequested", // external lines
+	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt", // external lines
+	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes", // external lines
+	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter", // external lines
+	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo", // external lines
+	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes", // external lines
+	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter", // external lines
+	"tailVorePrompt": "/npcs/sbq/dialogue/default.dialogue:tailVorePrompt", // external lines
+	"tailVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYes", // external lines
+	"tailVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYesAfter", // external lines
+	"tailVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNo", // external lines
+	"tailVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYes", // external lines
+	"tailVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYesAfter", // external lines
+	"absorbVorePrompt": "/npcs/sbq/dialogue/default.dialogue:absorbVorePrompt", // external lines
+	"absorbVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptYes", // external lines
+	"absorbVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptYesAfter", // external lines
+	"absorbVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNo", // external lines
+	"absorbVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNoYes", // external lines
+	"absorbVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNoYesAfter", // external lines
+	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt", // external lines
+	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes", // external lines
+	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter", // external lines
+	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo", // external lines
+	"analVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYes", // external lines
+	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter", // external lines
+	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt", // external lines
+	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes", // external lines
+	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter", // external lines
+	"unbirthVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNo", // external lines
+	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes", // external lines
+	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter", // external lines
+	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt", // external lines
+	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes", // external lines
+	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter", // external lines
+	"breastVorePromptNo": ":defaultNo", // duplicated lines
+	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes", // external lines
+	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter", // external lines
+	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt", // external lines
+	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes", // external lines
+	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter", // external lines
+	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo", // external lines
+	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes", // external lines
+	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter", // external lines
+	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting", // external lines
+	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes", // external lines
+	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo", // external lines
+	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes", // external lines
+	"tailVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequesting", // external lines
+	"tailVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingYes", // external lines
+	"tailVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNo", // external lines
+	"tailVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNoYes", // external lines
+	"absorbVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequesting", // external lines
+	"absorbVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingYes", // external lines
+	"absorbVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingNo", // external lines
+	"absorbVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingNoYes", // external lines
+	"analVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:analVoreRequesting", // external lines
+	"analVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingYes", // external lines
+	"analVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNo", // external lines
+	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNoYes", // external lines
+	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting", // external lines
+	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes", // external lines
+	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo", // external lines
+	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes", // external lines
+	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting", // external lines
+	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes", // external lines
+	"breastVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNo", // external lines
+	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes", // external lines
+	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting", // external lines
+	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes", // external lines
+	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo", // external lines
+	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes", // external lines
 	"oralVoreNoPrompt": [
 		"I think you'll fill me up.",
 		"I just need a bite to eat.",
@@ -1467,52 +298,10 @@
 		"My belly's been grumbling..."
 	],
 	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter", // duplicated lines
-	"tailVoreNoPrompt": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"So hungry... Looks like you're going to be nothing but tail filler soon..."
-			],
-			[ // 25% - 50%
-				"Hey... I wouldn't get too close to my tail while I'm hungry like this..."
-			],
-			[ // 50% - 75%
-				"...Did you know I can put things in my tail? Like entire people? You should take a look!"
-			],
-			[ // 75% - 100%
-				"I think you'd have a nice time swishing around in my tail, so I'm gonna slurp you up!"
-			]
-		]
-	},
-	"tailVoreNoPromptAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Slurped and gulped up entirely, just tail filler, you should watch out for hungry tailmaws next time snack~"
-			],
-			[ // 25% - 50%
-				"My tail can get out of control when I'm hungry, and you were just close enough to be my meal."
-			],
-			[ // 50% - 75%
-				"I told ya, now I got a nice bulge in my tail to squeeze!"
-			],
-			[ // 75% - 100%
-				"Mmm, heh, I hope me wagging my tail doesn't make you too dizzy!"
-			]
-		]
-	},
-	"absorbVoreNoPrompt": [ // blue here, absorbing time! not very confadent about these lines, tried to keep it vague as to not make it any kind of body absorb (slime, latex, ect..) while making it unque to this vore type
-		"Wanna see a neat trick? I'm about to make you disappear... into me!",
-		"I'm about to surround you completely with my body, just like a blanket!",
-		"Seems you're in need of a hug, let me hug you reeeeal close~"
-	],
-	"absorbVoreNoPromptAfter": [
-		"Mmmh, I wonder if this counts as 'eating' or 'combining', eh, doesn't really matter now.",
-		"Ah, must feel strange to pass into me like that, I know I like the feeling though~",
-		"Life's easy when you can just do that to 'eat' things, ain't that right buddy?"
-	],
-	"navelVoreNoPrompt": "Missing: navelVoreNoPrompt <dialoguePath>",
-	"navelVoreNoPromptAfter": "Missing: navelVoreNoPromptAfter <dialoguePath>",
+	"tailVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPrompt", // external lines
+	"tailVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPromptAfter", // external lines
+	"absorbVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:absorbVoreNoPrompt", // external lines
+	"absorbVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreNoPromptAfter", // external lines
 	"analVoreNoPrompt": [
 		"Hey, I want to try something.",
 		"Hey... what if I shoved you up my ass?",
@@ -1538,8 +327,8 @@
 		"Ffff~ Now I'm all wet~",
 		"A-ahh~ Don't stop squirming~"
 	],
-	"breastVoreNoPrompt": "Missing: breastVoreNoPrompt <dialoguePath>",
-	"breastVoreNoPromptAfter": "Missing: breastVoreNoPromptAfter <dialoguePath>",
+	"breastVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPrompt", // external lines
+	"breastVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPromptAfter", // external lines
 	"cockVoreNoPromptAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me even more excited~",
@@ -1549,419 +338,71 @@
 	"bellyInfuseNoPrompt": [
 		"I think... I need you in my belly... or... as my belly"
 	],
-	"breastInfuseNoPrompt": [
-		"Hehe, I think you belong as something else~",
-		"Mm~ I think it'd be fitting to have you jiggling on my chest~",
-		"I think I have a far better use for you~"
-	],
+	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter", // external lines
+	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt", // external lines
 	"breastInfuseNoPromptAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, jiggling on my chest~",
 		"Mmm~ feels right to have you there~"
 	],
-	"pussyInfuseNoPrompt": [
-		"Hehe, I think you belong as something else~",
-		"Mm~ I think it'd be fitting to have you dripping between my legs~",
-		"I think I have a far better use for you~"
-	],
+	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt", // external lines
 	"pussyInfuseNoPromptAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, soaking between my legs~",
 		"Mmm~ feels right to have you there~"
 	],
-	"cockInfuseNoPrompt": [
-		"Hehe, I think you belong as something else~",
-		"Mm~ I think it'd be fitting to have you throbbing between my legs~",
-		"You're always so twitchy... which would make you a good cock~",
-		"I think I have a far better use for you~"
-	],
+	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt", // external lines
 	"cockInfuseNoPromptAfter": [
 		"Ahh~ finally got you where you belong~",
 		"You belong right where you are, throbbing between my legs~",
 		"Mmm~ feels right to have you there~"
 	],
-	"tailInfuseNoPrompt": [
-		"Might as well keep you back there, since you squirmed so nicely!",
-		"I think you'll look good as part of my tail. Wouldn't you agree?"
-	],
-	"tailInfuseNoPromptAfter": [
-		"Looking good back there!",
-		"What was their name again? <entityname>?"
-	],
-	"oralVoreUnprompted": [
-		"Why are drooling? Wait, don't you- mmph!",
-		"You look hungry, are you about to- ahh!",
-		"I might look like a snack to you, but I'm not- wah!"
-	],
-	"tailVoreUnprompted": [
-		"Your tail is getting close to me, why are you- mmph!",
-		"I see you moving your tail closer, don't think you can just- ah!",
-		"You don't need to show off your tail like that, unless- wah!"
-	],
-	"absorbVoreUnprompted": [
-		"Well, this is a nice hug, but I feel like sinking into- ah!",
-		"I don't like the look in your eye. Don't you dare hug me like- mmph!",
-		"You want a hug? Well sure, what's the worst that could- wah!"
-	],
-	"navelVoreUnprompted": "Missing: navelVoreUnprompted <dialoguePath>",
-	"analVoreUnprompted": [
-		"Why are you turning like that and showing me your butt- ah!",
-		"I don't know why you're wiggling your butt like that, but don't- mmph!",
-		"Yes, I see you have a nice rear, but why make me look at- wah!"
-	],
-	"unbirthVoreUnprompted": [
-		"You shouldn't flash your nethers like that. Wait, are you trying to- ah!",
-		"I don't see anything other then your lewd lips. Why'd you want me to look- mmph!",
-		"Why are you spreading your legs at me? Don't tell me you're about to- wah!"
-	],
-	"breastVoreUnprompted": [
-		"Why are you showing off your rack like that? You don't intend to- ah!",
-		"Hmmm, I don't see anything strange about your breast, is there any reason why- mmph!",
-		"Hey, what's with that look you got? Why are you coming closer with your boobs out, wait- wah!"
-	],
-	"cockVoreUnprompted": [
-		"UwU",
-		"Oh my!",
-		"You're putting me in your shaf- wah!"
-	],
-	"oralVoreLetoutUnpromptedAfter": [
-		"Ah, freedom! Thanks for spitting me up."
-	],
-	"tailVoreLetoutUnpromptedAfter": [
-		"Thanks for letting me out of your tail!"
-	],
-	"absorbVoreLetoutUnpromptedAfter": [
-		"Thanks for letting me out of your form!"
-	],
-	"navelVoreLetoutUnpromptedAfter": "Missing: navelVoreLetoutUnpromptedAfter <dialoguePath>",
-	"analVoreLetoutUnpromptedAfter": [
-		"W-wah! Thanks for squeezing me out your butt!"
-	],
-	"unbirthVoreLetoutUnpromptedAfter": [
-		"Thanks for squeezing me out of your womb!"
-	],
-	"breastVoreLetoutUnpromptedAfter": [
-		"Thanks for pushing me out your boob!"
-	],
-	"cockVoreLetoutUnpromptedAfter": [
-		"Thanks for squeezing me out your shaft!"
-	],
-	"oralVoreForcing": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I... I just can't help myself! I'm going to get in your belly!",
-				"It's calling to me... your belly... Open up, I'm diving in!"
-			],
-			[ // 25% - 50%
-				"You look... amazing... I bet you'd look even better with me in your belly!"
-			],
-			[ // 50% - 75%
-				"You know, I could force my way down your throat... and there's not much you could do to stop me!"
-			],
-			[ // 75% - 100%
-				"I'm gonna fill you up... I want to be carried around in your belly!"
-			]
-		]
-	},
-	"tailVoreForcing": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I see your tail staring. It wants me, and I want it! I'm going in~"
-			],
-			[ // 25% - 50%
-				"Your tail looks peckish. I think I can help with that though, come here~"
-			],
-			[ // 50% - 75%
-				"You got a nice tail maw. I think it deserves a treat: me!"
-			],
-			[ // 75% - 100%
-				"I see your tail maw there... I think I'm going to make myself at home~"
-			]
-		]
-	},
-	"absorbVoreForcing": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Get out the way, I'm cannon-balling right into your body! Geronimo!!"
-			],
-			[ // 25% - 50%
-				"I want some time inside you, buddy, and if I have to slide into you, I will~"
-			],
-			[ // 50% - 75%
-				"Hey uh, don't mind me, just walking to ya. I may or may not walk into you~"
-			],
-			[ // 75% - 100%
-				"I think I'm just gonna stroll right into you real quick..."
-			]
-		]
-	},
-	"navelVoreForcing": "Missing: navelVoreForcing <dialoguePath>",
-	"analVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Don't mind me, I'm just going to get myself nice and comfy in your bum~"
-			],
-			[ // 25% - 50%
-				"Hate to make an ass of myself, but I'm going to shove myself up your butt!"
-			],
-			[ // 50% - 75%
-				"You better keep your back to me, cause I'm coming for that booty and taking the rear entrance~"
-			],
-			[ // 75% - 100%
-				"Just bend over for me. I want in that rear badly, and I'm going to get in!"
-			]
-		]
-	},
-	"unbirthVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I have an interest in slipping in those folds of your, so let me just..."
-			],
-			[ // 25% - 50%
-				"I want in your crotch taco! I'll be the perfect addition~" //blue here, if this is too much i'll change it, I just thought this line was too great not to try and add!
-			],
-			[ // 50% - 75%
-				"I think I'm going to lewdly spread your legs for a moment, so I can go vag diving!"
-			],
-			[ // 75% - 100%
-				"I'm getting super attracted to your private lips. Let me shove my head in there!"
-			]
-		]
-	},
-	"breastVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I spotted my next resting spot, and it's on your chest!"
-			],
-			[ // 25% - 50%
-				"Those badonkadonks could use a little something: me!" //blue here, I regret nothing.
-			],
-			[ // 50% - 75%
-				"I got a craving for milk, so I think I'll go right to the source!"
-			],
-			[ // 75% - 100%
-				"I can't stop staring at those soft mounds. I must get in them!"
-			]
-		]
-	},
-	"cockVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I feel an urge to just... take a trip down your rod!"
-			],
-			[ // 25% - 50%
-				"I shall be taking the shaft down, and by shaft I mean your cock~"
-			],
-			[ // 50% - 75%
-				"I feel the pull of your member, it wants me inside it. Who am I to deny it?"
-			],
-			[ // 75% - 100%
-				"I desire being in that lewd stick of yours. Just relax and let me in already!"
-			]
-		]
-	},
-	"oralVoreLetoutForcingAfter": [
-		"Woo! I got you to spit me out."
-	],
-	"tailVoreLetoutForcingAfter": [
-		"Hah! I wiggled my way out your tail."
-	],
-	"absorbVoreLetoutForcingAfter": [
-		"Wow, I managed to crawl out of your body!"
-	],
-	"navelVoreLetoutForcingAfter": "Missing: navelVoreLetoutForcingAfter <dialoguePath>",
-	"analVoreLetoutForcingAfter": [
-		"I managed to wiggle out your butt!"
-	],
-	"unbirthVoreLetoutForcingAfter": [
-		"Yes! I squirmed out of your womb."
-	],
-	"breastVoreLetoutForcingAfter": [
-		"Yes! I squirmed out your boob!"
-	],
-	"cockVoreLetoutForcingAfter": [
-		"Well, seems like I managed to squirm out of your cock!"
-	],
-	"oralVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Oof, wasn't expecting that...! I just wanted to know if you had any food...",
-				"*glk*, note to self... don't let prey hear my hungry stomach grumble...",
-				"Mmph... I shouldn't have skipped lunch... People just... jump right in..."
-			],
-			[ // 25% - 50%
-				"*urp*, not exactly what I had in mind to fix my hunger, but you ARE filling.",
-				"Haa-ah... Nice joke... Now, when are you getting out?",
-				"Erf... A little warning before you force my jaws open would've been nice."
-			],
-			[ // 50% - 75%
-				"Ugh, I was supposed to be on a diet. You do taste good, though.",
-				"Oof! That's a little too forward, isn't it?",
-				"Hey, you're supposed to treat me to dinner first before you--oh."
-			],
-			[ // 75% - 100%
-				"Whew, I thought you were joking when you were offering me a snack!",
-				"Gah, is this your way of saying hello?",
-				"*gulp*, Was it something I said?"
-			]
-		]
-	},
-	"tailVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Was looking at my drooling tail maw really a good excuse to jump in?",
-				"I know my tail was giving very hungry looks, but ask its owner before you feed it!",
-				"I'd be more upset, but it's past treat time for my tail. I'll let it slide this time."
-			],
-			[ // 25% - 50%
-				"I know my tail has a nice maw, but you should really ask first before letting it have you!",
-				"Darn you, don't just jump into random tail maws! But since I was peckish, I'll look past it.",
-				"Well, it was getting close to treat time... I still don't condone the random feeding, though!"
-			],
-			[ // 50% - 75%
-				"Just because my tail was giving you looks doesn't mean it's hungry! Most of the time...",
-				"Well, I hope you're happy. My greedy tail won't be letting you out so easily...",
-				"Darn it tail, you can't just eat anyone... At least without me saying so!"
-			],
-			[ // 75% - 100%
-				"I just fed the thing! My tail is far too spoiled with tasty treats...",
-				"Oof, now my balance is going to be all messed up. Darn it!",
-				"W-wah! You can't just jump in tails like that, you know?"
-			]
-		]
-	},
-	"absorbVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"*burp* W-well, I was about to get some food, but you just jumped into me... I suppose you can stay, then.",
-				"Mmmm, alright. I'll let your sudden invasion of my body slide, since you feel pretty good and filling in there.",
-				"If I wasn't so hungry, I would be more upset that you just dived inside me... Probably..."
-			],
-			[ // 25% - 50%
-				"I can't believe you just did that! I'm not upset... Just ask before you're absorbed next time?",
-				"Well, aren't you eager! I feel like you should have asked before leaping into me.",
-				"Okay then... While I might be a little peckish, people sinking into me without warning is still strange!"
-			],
-			[ // 50% - 75%
-				"I'm not a darn sponge! Please don't jump into me randomly just because you can... Anyway, you better get comfy.",
-				"While it does feel nice surrounding you like this, I'd rather you ask first.",
-				"I find this, uh, sudden dive you made unprompted! ...But not entirely unwanted..."
-			],
-			[ // 75% - 100%
-				"W-wah! How dare you, you can't just sink into me like that. Ask first!",
-				"H-hey, well shoot, this is the downside to being semi-solid...", // blue here, it's only now that I relised I may be treating absorbion wrong, tell me if I need to change this or simular!
-				"What the heck! Just because you can walk into me doesn't mean you should!"
-			]
-		]
-	},
-	"navelVoreForced": "Missing: navelVoreForced <dialoguePath>",
-	"analVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"*sigh* Well, I should have expected this when you came running while only looking at my booty.",
-				"I can't even bend down to pick something up without someone flying into my ass!", //blue here, this line makes me laugh, I don't know why!
-				"Did... did you really just shove yourself up my butt!?"
-			],
-			[ // 25% - 50%
-				"I don't know why you felt like plunging into my ass like that, but hey, I'm not going to complain.",
-				"If you're trying to brown nose me by going up my rear... It's sorta working?",
-				"I, uh... don't know what to tell you. Don't jump into people's butts unannounced?"
-			],
-			[ // 50% - 75%
-				"You a cave explorer or something, since you dived right into my butt? Well, explore as much as you like, then.",
-				"You're lucky I'm sorta in the mood for something being shoved up my rear. I won't mind you in there this time.",
-				"Do you go up people's back doors randomly often? Or is mine just special?"
-			],
-			[ // 75% - 100%
-				"If I wasn't so needy right now, I'd be way more upset! Now, get to wiggling in my rear!",
-				"You caught me in a good mood, so if you behave yourself in my ass, I'll let you stay.",
-				"You better not make random butt diving a habit! ...But you do feel really good up there."
-			]
-		]
-	},
-	"unbirthVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"H-hey, throwing yourself up my snatch without a word is rude! Ask next time.",
-				"My folds aren't a pool. You can't just dive in whenever, you know!",
-				"I understand you're excited, but try to control yourself! You can't be jumping into someone's privates like that!"
-			],
-			[ // 25% - 50%
-				"Hey! If you were cold I could've just snuggled with you. There's no need to hop into my womb!",
-				"Is it too much to ask for a heads up before you shove your head into my folds?",
-				"I get that you wanted in, but don't you think forcing your way in my pussy was a bit much?"
-			],
-			[ // 50% - 75%
-				"Well, here we are with you sneaking into my womb. You feel good, so I'll let it slide this time.",
-				"While I'm liking this pleasure, I would like a warning before you enter my folds.",
-				"I was feeling a bit heated, so you climbing up my pussy is welcome. But still, could you ask first?"
-			],
-			[ // 75% - 100%
-				"Was I looking that lustful that you went straight ahead into my folds? I guess so...",
-				"You went in my vag so smoothly! I must be rather horny. Thanks, but try to warn me next time.",
-				"Wow! You feel good in there. I'll let your little unannounced dive into my womb slide due to this..."
-			]
-		]
-	},
-	"breastVoreForced": "Missing: breastVoreForced <dialoguePath>",
-	"cockVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hmm, maybe I should start wearing a belt more if I don't want others randomly diving into my cock, hmm...",
-				"Hufff~... You know, you really should have asked before shoving yourself in my cock..."
-			],
-			[ // 25% - 50%
-				"Ahhh~! I would have preferred you asked before diving in my shaft... but I was already a bit horny, so I'll let it slide this time.",
-				"Hufff~! Jeez, a little warning before you push yourself down my rod would be appreciated!",
-				"Ahahaha~... Did you just... shove yourself into my cock!?"
-			],
-			[ // 50% - 75%
-				"Ahhh~ Well ain't you a 'cocky' little guy? Because you're so bold, I'll let you be for the moment.",
-				"MMM~ I was just getting a bit aroused, so I won't force you out. But could you warn me next time?",
-				"Hehehe, it seems I've 'gotten lucky' as I was just thinking about sticking someone in my shaft~ So I'll make the most of your spontaneity~"
-			],
-			[ // 75% - 100%
-				"Ahh~ FFFfff~ You just walked up and slid right down my shaft, didn't you~?",
-				"Hhhh... I should have known having my rock hard shaft on display would have attracted someone like you~",
-				"MMM~ Hhhhhaaa~! I was just about to cum before you dived in there! Horny little freak~"
-			]
-		]
-	},
+	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
+	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
+	"oralVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnprompted", // external lines
+	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted", // external lines
+	"absorbVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:absorbVoreUnprompted", // external lines
+	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted", // external lines
+	"unbirthVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnprompted", // external lines
+	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted", // external lines
+	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
+	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter", // external lines
+	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter", // external lines
+	"absorbVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutUnpromptedAfter", // external lines
+	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter", // external lines
+	"unbirthVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutUnpromptedAfter", // external lines
+	"breastVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutUnpromptedAfter", // external lines
+	"cockVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutUnpromptedAfter", // external lines
+	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing", // external lines
+	"tailVoreForcing": "/npcs/sbq/dialogue/default.dialogue:tailVoreForcing", // external lines
+	"absorbVoreForcing": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForcing", // external lines
+	"analVoreForcing": "/npcs/sbq/dialogue/default.dialogue:analVoreForcing", // external lines
+	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing", // external lines
+	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing", // external lines
+	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing", // external lines
+	"oralVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutForcingAfter", // external lines
+	"tailVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForcingAfter", // external lines
+	"absorbVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForcingAfter", // external lines
+	"analVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForcingAfter", // external lines
+	"unbirthVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutForcingAfter", // external lines
+	"breastVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForcingAfter", // external lines
+	"cockVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForcingAfter", // external lines
+	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced", // external lines
+	"tailVoreForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreForced", // external lines
+	"absorbVoreForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForced", // external lines
+	"analVoreForced": "/npcs/sbq/dialogue/default.dialogue:analVoreForced", // external lines
+	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced", // external lines
+	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced", // external lines
+	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced", // external lines
 	"oralVoreLetoutForced": [
 		"Ahh... ok you want out.",
 		"Why leave?",
 		"Mmm... fine you can come out.",
 		"I actually liked having you in there..."
 	],
-	"tailVoreLetoutForced": [
-		"Got out of my tail huh? And I was just getting used to your heft back there...",
-		"Slipped out of tail did you? Not an easy feat!",
-		"Aww, my tail feels so empty and light now that you're outside of it."
-	],
-	"absorbVoreLetoutForced": [
-		"I'm surprised you found any footing to push yourself out of me.",
-		"My body lost its grip on you, it seems...",
-		"Impressive, you managed to struggle out of my body!"
-	],
-	"navelVoreLetoutForced": "Missing: navelVoreLetoutForced <dialoguePath>",
-	"analVoreLetoutForced": [
-		"A-ah! You managed to wiggle your way out my rear, huh?",
-		"I'm impressed you were able to get out of my booty.",
-		"I guess when it comes to my butt and your squirming, you win."
-	],
+	"tailVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForced", // external lines
+	"absorbVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForced", // external lines
+	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced", // external lines
 	"unbirthVoreLetoutForced": [
 		"Happy birthday.",
 		"Ah~ Why'd you come out?",
@@ -1969,7 +410,7 @@
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
-	"breastVoreLetoutForced": "Missing: breastVoreLetoutForced <dialoguePath>",
+	"breastVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForced", // external lines
 	"cockVoreLetoutForced": [
 		"Ahh~ ahh that felt so good~",
 		"Could you get back in and squirm some more?",
@@ -1982,34 +423,19 @@
 		"Hope its comfortable."
 	],
 	"struggleWomb": ":struggleAcidHeal", // duplicated lines
-	"struggleAcidHeal": [
-		"Now you're nice and safe.",
-		"Hope you like how it feels in there."
-	],
-	"struggleTail": "Missing: struggleTail <dialoguePath>",
-	"struggleBreasts": "Missing: struggleBreasts <dialoguePath>",
-	"struggleBreastsShirt": "Missing: struggleBreastsShirt <dialoguePath>",
-	"strugglePussy": "Missing: strugglePussy <dialoguePath>",
+	"struggleAcidHeal": "/npcs/sbq/dialogue/default.dialogue:struggleHeal", // external lines
+	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail", // external lines
+	"struggleBreasts": "/npcs/sbq/dialogue/default.dialogue:struggleBreasts", // external lines
+	"struggleBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleBreastsShirt", // external lines
+	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy", // external lines
 	"struggleCock": ":struggleBelly", // duplicated lines
-	"struggleBalls": [
-		"Having a good time in there?",
-		"Keep squirming.",
-		"It feels so good having you in there~",
-		"Friends are stored in the balls~"
-	],
-	"struggleAss": "Missing: struggleAss <dialoguePath>",
-	"struggleFemcumHeal": [
-		"Hey now, just let my soft womb walls mend and sooth you.",
-		"With all that struggling, you must already be feeling better!",
-		"Don't panic. Inside my womb, you're being taking good care of."
-	],
-	"struggleCumHeal": "Missing: struggleCumHeal <dialoguePath>",
-	"struggleMiscHeal": ":struggleAcidHeal",
-	"struggleCompression": [
-		"I can feel you getting so neatly packed in there.",
-		"You're gonna find it hard to move as it gets sooo much tighter.",
-		"You're really struggling while you become travel-sized!"
-	],
+	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls", // external lines
+	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss", // external lines
+	"struggleFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumHeal", // external lines
+	"struggleCumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleCumHeal", // external lines
+	"struggleMilkHeal": "/npcs/sbq/dialogue/default.dialogue:struggleMilkHeal", // external lines
+	"struggleMiscHeal": ":struggleAcidHeal", // duplicated lines
+	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression", // external lines
 	"struggleAcidDigest": [
 		"Time to melt you down into pudge.",
 		"Just be a good meal and melt."
@@ -2018,35 +444,29 @@
 		"Why aren't you melting down?",
 		"Doesn't feel like you're melting."
 	],
-	"struggleCumDigest": "Missing: struggleCumDigest <dialoguePath>",
-	"struggleCumDigestImmune": "Missing: struggleCumDigestImmune <dialoguePath>",
-	"struggleMilkDigestBreastsShirt": "Missing: struggleMilkDigestBreastsShirt <dialoguePath>",
-	"struggleMiscDigest": ":struggleAcidDigest",
-	"struggleMiscDigestImmune": ":struggleAcidDigestImmune",
-	"struggleTransforming": {
-		"percentage": "transforming",
-		"pools": [
-			[
-				"You'll be a bit different after this is all done.",
-				"These changes should be an improvement.",
-				"Do you feel yourself changing?"
-			]
-		],
-		"full": [
-			":struggleTransformed"
-		]
-	},
-	"struggleTransformed": "Missing: struggleTransformed <dialoguePath>",
-	"struggleDrainEnergy": [
-		"Struggle all you want, you're just helping me drain you faster.",
-		"Soon you'll be too tired to keep up all that moving.",
-		"Giving me a good show AND all of your energy? How generous!"
+	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest", // external lines
+	"struggleCumDigestBalls": [
+		"Soon you'll become a part of that cum you're splashing around.",
+		"Getting hot in my sack? I would hope so, it means you're melting nicely.",
+		"Feels like you're getting softer and weaker in my balls."
 	],
+	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune", // external lines
+	"struggleFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigest", // external lines
+	"struggleFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigestImmune", // external lines
+	"struggleMilkDigest": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigest", // external lines
+	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt", // external lines
+	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune", // external lines
+	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
+	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
+	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming", // external lines
+	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
+	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
 	"struggleEggify": [
 		"Can you feel that egg forming around you?",
 		"Soon, your squirming won't do a thing."
 	],
-	"thighsInfusedOccupant": "Missing: thighsInfusedOccupant <dialoguePath>",
+	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant", // external lines
+	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant", // external lines
 	"bellyInfusedOccupant": [
 		{
 			"check": {
@@ -2148,12 +568,8 @@
 			"<love>You're far more useful like this <infusedName>"
 		]
 	],
-	"pawInfusedOccupant": "Missing: pawInfusedOccupant <dialoguePath>",
-	"tailInfusedOccupant": [
-		"I can still feel you back there~",
-		"I can still feel you back there, <entityname>~",
-		"Looking good back there, <entityname>!"
-	],
+	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant", // external lines
+	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant", // external lines
 	"strugglingBelly": [
 		[
 			"Mmmm pretty comfortable.",
@@ -2186,31 +602,17 @@
 		"Ohhh~ Your womb is so snug and soft~",
 		"This is so hot~"
 	],
-	"strugglingTail": [
-		"Your tail is so slimy on the inside!",
-		"Darn tail, swaying me around like you own me...",
-		"I'll wiggle til I'm free of this tail!"
-	],
-	"strugglingBreasts": [
-		"It's really soft in here...",
-		"Nice and warm, heh.",
-		"So bouncy...",
-		"I can hear your heartbeat..."
-	],
-	"strugglingBreastsShirt": "Missing: strugglingBreastsShirt <dialoguePath>",
-	"strugglingPussy": "Missing: strugglingPussy <dialoguePath>",
+	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail", // external lines
+	"strugglingBreasts": "/npcs/sbq/dialogue/default.dialogue:strugglingBreasts", // external lines
+	"strugglingBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingBreastsShirt", // external lines
+	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy", // external lines
 	"strugglingCock": [
 		"Ahh~ your cock is squeezing tight around me~",
 		"Ohhh~ Your shaft is squeezing so hard~",
 		"This is so hot~"
 	],
-	"strugglingBalls": [
-		"All this cum sloshing around me~",
-		"Ahhh... I'm stored in the balls~",
-		"Stuck down here in your balls~",
-		"This is so hot~"
-	],
-	"strugglingAss": "Missing: strugglingAss <dialoguePath>",
+	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls", // external lines
+	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss", // external lines
 	"strugglingAcidHeal": [
 		[
 			"Ahh... its so soothing.",
@@ -2238,7 +640,23 @@
 			]
 		}
 	],
-	"strugglingMiscHeal": ":strugglingAcidHeal",
+	"strugglingFemcumHeal": [
+		"Your womb is soothing me so well!",
+		"I can feel my pain vanishing within your womb.",
+		"Is your womb making me feel better? Strange..."
+	],
+	"strugglingCumHeal": [
+		"Who would have thought your cock could heal so well.",
+		"Your shaft is rather soothing it seems. Weird.",
+		"Your cock is making my pain go away. It's so relaxing in here!"
+	],
+	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal", // external lines
+	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingCompression": [
+		"It's getting so tight in here!",
+		"I can barely move in here...",
+		"I can't keep it... from compacting me."
+	],
 	"strugglingAcidDigest": [
 		[
 			"Ahh... I'm starting to melt.",
@@ -2276,21 +694,42 @@
 			"You can't melt me!"
 		]
 	],
-	"strugglingCumDigest": "Missing: strugglingCumDigest <dialoguePath>",
-
-	"strugglingCumDigestImmune": "Missing: strugglingCumDigestImmune <dialoguePath>",
-	"strugglingMilkDigestBreastsShirt": "Missing: strugglingMilkDigestBreastsShirt <dialoguePath>",
-	"strugglingMiscDigest": ":strugglingAcidDigest",
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
-	"strugglingTransforming": "Missing: strugglingTransforming <dialoguePath>",
+	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest", // external lines
+	"strugglingCumDigestBalls": [
+		"It's so hot in your nuts, I feel like I'm melting.",
+		"The seed in your balls is all over me. I think I'm melting into it.",
+		"I'm unsure how long I'll stay solid in your sack at this rate."
+	],
+	"strugglingCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestImmune", // external lines
+	"strugglingFemcumDigest": [
+		"It's so hot inside your womb, I think I'm melting...",
+		"Your womb is softening me up!",
+		"I think I'll be mush if I stay any longer in your womb!"
+	],
+	"strugglingFemcumDigestImmune": [
+		"You know your womb can't melt me, right?",
+		"Trying to get your womb to break me down? Not gonna work.",
+		"As great as being digested in your womb sounds, it's not gonna happen."
+	],
+	"strugglingMilkDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigest", // external lines
+	"strugglingMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestBreastsShirt", // external lines
+	"strugglingMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestImmune", // external lines
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
 	"strugglingDrainEnergy": [
 		"I... I'm feeling so tired...",
 		"It's getting harder to move...",
 		"I'm losing the energy to struggle...",
 		"I can barely even squirm..."
 	],
-	"anyInfused": "Missing: anyInfused <dialoguePath>",
-	"thighsInfused": "Missing: thighsInfused <dialoguePath>",
+	"strugglingEggify": [
+		"Is this... an egg?",
+		"Are you making an egg around me?",
+		"I'm gonna be trapped in an egg!"
+	],
+	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
+	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused", // external lines
 	"bellyInfused": [
 		"<slowlove>",
 		"<love>",
@@ -2364,59 +803,15 @@
 			"<love>(<keysmash>)"
 		]
 	],
-	"pawInfused": "Missing: pawInfused <dialoguePath>",
-	"tailInfused": [
-		"<slowlove>(I belong back here~)",
-		"<slowlove>(Back and forth. Back and forth. Just a tail now~)",
-		"<slowlove>(I belong back here... just a part of <entityname>~)"
-	],
-	"climax": [
-		"Ahhh~! FUCK that felt good~!"
-	],
-	"climaxWomb": [
-		{
-			"dialogue": [
-				"Yes! YES! Don't stop kicking!",
-				"*Moans*~",
-				"Ahhh... That felt great..."
-			]
-		}
-	],
-	"climaxBreasts": [
-		{
-			"dialogue": [
-				"Ffff... I think I'm! AH!",
-				"*Moans*~",
-				"Ahhh... Oh... hehe... I might have sprayed some milk everywhere..."
-			]
-		}
-	],
-	"climaxCock": [
-		{
-			"dialogue": [
-				"Agh, I'm... I'm so hard! So close, I'm! ...I'm-",
-				"Gahhhh~",
-				"Ahhh... Finally came... That felt great~"
-			]
-		}
-	],
-	"climaxBalls": [
-		{
-			"dialogue": [
-				"So much cum sloshing around! So close, I'm! ...I'm-",
-				"Gahhhh~",
-				"Ahhh... Finally came... That felt great~"
-			]
-		}
-	],
-	"shrinking": [
-		"Why's everything getting bigger?",
-		"Ah! I'm shrinking!"
-	],
-	"growing": [
-		"Why's everything getting smaller?",
-		"Ah! I'm growing!"
-	],
+	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused", // external lines
+	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused", // external lines
+	"climax": "/npcs/sbq/dialogue/default.dialogue:climax", // external lines
+	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb", // external lines
+	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts", // external lines
+	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock", // external lines
+	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls", // external lines
+	"shrinking": "/npcs/sbq/dialogue/default.dialogue:shrinking", // external lines
+	"growing": "/npcs/sbq/dialogue/default.dialogue:growing", // external lines
 	"didSteppy": [
 		"hehe, whoops!",
 		"Oh did I step on something?",
@@ -2454,1150 +849,6 @@
 			"I'm getting smushed!",
 			"*wheeze*"
 		]
-	],
-	// Unused Dialogue
-	"defaultNo": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
-	"tooBig": [
-		"I think you're a bit too big to fit in there...",
-		"I don't think I'd be able to get you in...",
-		"If only you were a bit smaller...",
-		"Thats a bit too much to ask of me..."
-	],
-	"tooSmall": [
-		"Sorry but I need something a bit bigger then you",
-		"I don't think I'd really feel you at that size",
-		"You're too short for this ride buddy",
-		"Maybe if you where just a little bigger..."
-	],
-	"tailVoreDigestFull": [
-		"My tail is working it's prey down at the moment, come back later!",
-		"My tail's full, but once it's prey melts a bit, there'll be room!"
-	],
-	"tailVoreCompressionFull": [
-		"My tail is full, but it's prey is getting compacted, so there'll be room soon!",
-		"Once my tail has squeeze down it's current guest, I might squeeze you in."
-	],
-	"full": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
-	],
-	"needsInfusion": [
-		"I'd want someone merged in there"
-	],
-	"cockVoreDigestFull": [
-		"Ah... give me a moment to melt my toys into cum, then I might be able to fit you."
-	],
-	"cockVoreCompressionFull": [
-		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
-	],
-	"unbirthVoreDigestFull": [
-		"I may be full at the moment, but they're melting down into juices... Check back soon~"
-	],
-	"unbirthVoreCompressionFull": [
-		"A bit full, but give me a moment or two to pack them down a bit."
-	],
-	"struggle": [
-		"Having a good time in there?",
-		"I hope it's comfortable enough for you.",
-		"I can feel you squirming around in there..."
-	],
-	"struggleTransformingImmune": [
-		[
-			"You don't want to change?",
-			"Come on, don't you want to be different?",
-			"Hm... You should be changing..."
-		]
-	],
-	"struggleEggifyImmune": [
-		"You should be in an egg by now. How are you still struggling?!",
-		"I'd think you'd be in a egg by now, yet you're still so active!",
-		"You must be resisting so much that it's keeping the shell from forming...",
-		"Hm... Why won't the shell form?"
-	],
-	"struggleHeal": [
-		"Now you're nice and safe.",
-		"Hope you like how it feels in there."
-	],
-	"struggleFemcumDigest": [
-		"You're getting so soft...",
-		"Melt for me!"
-	],
-	"struggleFemcumDigestImmune": [
-		"You still kicking in there...? Thought you'd be soft by now.",
-		"Oof! Is my womb not strong enough to melt you or something?",
-		"How are you still fighting? You should be mush in my womb by now!"
-	],
-	"struggleCompressionWomb": [
-		"Do you feel my womb tightening around you as you move around?",
-		"I don't think that struggling will stop you from getting compressed in my womb.",
-		"How long can you really keep resisting the ever-tightening space within my womb?"
-	],
-	"struggleDrainEnergyWomb": [
-		"You must be getting tired with my womb sapping you of your energy, the more you move.",
-		"You would be better off resting in my womb, and let it slowly consume your energy.",
-		"You won't be able to move around much longer with my womb slowly draining your strength."
-	],
-	"struggleDigestCock": [
-		[
-			"Heh, I can feel you sloshing around.",
-			"Seems like you're not quite solid anymore."
-		]
-	],
-	"struggleDigestImmuneCock": [
-		"Huh, surprised you're still fighting. You're supposed to be cum by now...",
-		"You don't feel like you're getting softer in my shaft... What's going on?",
-		"How has my cock not melted you down yet? You shouldn't be moving!"
-	],
-	"struggleHealCock": [
-		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
-		"You don't have to move so much while I'm healing you, unless you want in my sack...",
-		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
-	],
-	"struggleCompressionCock": [
-		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
-		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
-		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
-	],
-	"struggleDrainEnergyCock": [
-		"The more you fight, the more my shaft will drain your energy. I don't mind.",
-		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
-		"You know you're being drained of energy right? My rod always wins."
-	],
-	"struggleCumTransforming": [
-		[
-			"I can feel you getting goopy in there.",
-			"I can feel you starting to turn~"
-		]
-	],
-	"struggleCumTransformingImmune": [
-		"Hm... You don't seem to be getting any softer in there..."
-	],
-	"struggleInfusedCock": [
-		"Ahhh~ <infusedName> feels so great down there~",
-		"<keysmash>, you're gonna make <infusedName> cum~"
-	],
-	"struggleCumDigestBalls": [
-		"Soon you'll become a part of that cum you're splashing around.",
-		"Getting hot in my sack? I would hope so, it means you're melting nicely.",
-		"Feels like you're getting softer and weaker in my balls."
-	],
-	"struggleDigestImmuneBalls": [
-		"You're supposed to be melting into cum right now... not squirming like that.",
-		"I don't know how you are still kicking in my sack. You should be adding to my seed.",
-		"Shouldn't you be busy melting, and not struggling?"
-	],
-	"struggleHealBalls": [
-		"My seed can mend wounds, so don't panic. You'll be fine, I swear!",
-		"Seems you're pretty healthy if you can wiggle like that!",
-		"Just relax and let my sticky sauna soothe you."
-	],
-	"struggleCompressionBalls": [
-		"You're squirming pretty hard for someone in a tightening sack.",
-		"Better get out all that fight while you can, you won't be able to move much soon.",
-		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
-	],
-	"struggleDrainEnergyBalls": [
-		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
-		"You won't last long fighting like that. It's better to just rest and let your energy go.",
-		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
-	],
-	"struggleLetoutTransforming": {
-		"percentage": "transforming",
-		"pools": [
-			[
-				"Didn't want to become something like me?",
-				"Didn't like the changes I was making?"
-			]
-		],
-		"full": [
-			":struggleLetoutTransformed"
-		]
-	},
-	"struggleLetoutEggify": [
-		"Don't want to be trapped in an egg?",
-		"You don't like eggs?"
-	],
-	"struggleLetoutEggifyImmune": [
-		"Fine then, it didn't seem like the shell was forming right anyway!",
-		"Bleh! Did you get out before being encased, or is it something else?",
-		"If only you where easier to put in an egg, maybe I could've had more fun with you."
-	],
-	"tailVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested",
-	"tailVoreLetoutForcedDigest": [
-		"You were just starting to soften up in my tail, too. Don't want to be tail pudge?",
-		"Don't you want to add to my tail? You'd be a great addition to it.",
-		"Oof, I won't let you out my tail so easily next time."
-	],
-	"tailVoreLetoutForcedDigestImmune": [
-		"Was my tail not strong enough to turn you into pudge?",
-		"I can't believe you managed to escape my tail unscratched!",
-		"How did you resist being melted be my tail? What's your tale?"
-	],
-	"tailVoreLetoutForcedSoftDigest": [
-		"You were just starting to soften up in my tail, too. You'd only be tail pudge for a while.",
-		"Don't you want to add to my tail? You'd be a great temporary addition to it.",
-		"Oof, I won't let you out my tail so easily next time."
-	],
-	"tailVoreLetoutForcedHeal": [
-		"I wish you'd stay longer in my tail, even if you don't need the healing.",
-		"I hope you're feeling better after staying in my tail, since you wiggled out",
-		"You'd think my soothing tail would relax you too much to squirm out of it."
-	],
-	"cockVoreLetoutForcedDigested": [
-		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
-	],
-	"cockVoreLetoutForcedDigest": [
-		"Got out of my shaft before it made you mush, eh?",
-		"Did you have to leave? It felt so good having you melt into cum!",
-		"I'll be... You withstood my shaft's heat and wiggled out."
-	],
-	"cockVoreLetoutForcedDigestImmune": [
-		"What the... Shouldn't you be turning into cum instead of getting out?",
-		"Most prey can't stand my shaft's heat. Why are you so resistant?",
-		"You wiggled out completely solid. That's strange..."
-	],
-	"cockVoreLetoutForcedSoftDigest": [
-		"Got out of my shaft before it absorbed you, eh?",
-		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
-		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
-	],
-	"cockVoreLetoutForcedHeal": [
-		"I guess shaft therapy time is over.",
-		"You seem eager to be free. Just don't get 'cocky' and get hurt, or back in you go!",
-		"Feeling better now? If not, my rod of healing is always ready."
-	],
-	"unbirthVoreLetoutForcedDigested": [
-		"Ah... you're gonna need a new body after becoming nothing but juices..."
-	],
-	"unbirthVoreLetoutForcedDigest": [
-		"You were melting nicely in my womb. If you'd only stayed a bit longer...",
-		"Things were just heating up in my womb...",
-		"My womb was just starting to soften you up before you wiggled out."
-	],
-	"unbirthVoreLetoutForcedDigestImmune": [
-		"The heck? Somehow my womb's heat is not affecting you!",
-		"Why didn't you start softening up in my womb? What's your secret?",
-		"Most would've succumb to my womb. Why aren't you?"
-	],
-	"unbirthVoreLetoutForcedSoftDigest": [
-		"You were melting nicely in my womb. If you'd only stayed a bit longer, you would've been fine...",
-		"Things were just heating up in my womb... It wouldn't be permanent...",
-		"My womb was just starting to soften you up before you wiggled out. It's safe, honest!"
-	],
-	"unbirthVoreLetoutForcedHeal": [
-		"I hope my womb was being gentle with you and keeping you soothed!",
-		"I hope the healing ride was pleasant. If you need some more time in my oven, I wouldn't mind...",
-		"Such a healthy kick! You squirmed out of my folds all on your own."
-	],
-	"letoutTransformingImmune": [
-		"You don't look any different from how you went in, strange...",
-		"Did you have some kind of device to keep you from morphing?",
-		"Seems your body is rather hard to modify, tsk..."
-	],
-	"letoutEggify": {
-		"percentage": "eggifying",
-		"pools": [
-			[
-				"Seems like I let you out a bit too early.",
-				"I was a bit too hasty. The egg didn't form."
-			]
-		],
-		"full": [
-			":LetoutEgged"
-		]
-	},
-	"letoutEggifyImmune": [
-		"Guess I just can't put you in an egg.",
-		"Seems like eggs don't work on you.",
-		"I'm giving up on sealing you in an egg."
-	],
-	"oralVoreLetoutRequestedDigested": [
-		"Here, let me reform you real quick.",
-		"You got digested, so I gotta reform you.",
-		"Ah, guess it's time to reform you.",
-		"Time to reform you, I guess."
-	],
-	"oralVoreLetoutRequestedDigest": [
-		"Actually... You've probably spent enough time in there.",
-		"My hunger is satiated enough for now.",
-		"Probably best to get you out of there...",
-		"Don't feel like melting you entirely."
-	],
-	"oralVoreLetoutRequestedDigestImmune": [
-		"I can't even melt you down at all...",
-		"My hunger isn't going to be satiated with you in there.",
-		"Probably best to get you out of there, so I can eat something else.",
-		"Can't even melt you down the tiniest bit."
-	],
-	"oralVoreLetoutRequestedSoftDigest": ":oralVoreLetoutRequestedDigest",
-	"oralVoreLetoutRequestedHeal": [
-		"You're probably patched up enough.",
-		"I think you've spent enough time healing.",
-		"I think you should be feeling much better now.",
-		"My stomach does wonders for healing, doesn't it?"
-	],
-	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
-	"analVoreLetoutRequestedDigest": [
-		"I think you won't be adding to my rear today, butt buddy!",
-		"I'll let you go this time, but next time my rear will catch you!"
-	],
-	"analVoreLetoutRequestedDigestImmune": [
-		"Just leave via my 'exit', since it can't even soften you up.",
-		"You're free to go, since my bottom can't melt you at all."
-	],
-	"analVoreLetoutRequestedSoftDigest": [
-		"I think you won't be adding to my rear today, butt buddy!",
-		"I'll let you go this time, but next time my rear will catch you!"
-	],
-	"analVoreLetoutRequestedHeal": {
-		"percentage": "targetHealth",
-		"pools": [
-			[
-				"I think my healing booty has done enough. I hope it soothed you!"
-			]
-		],
-		"full": [
-			"All better! Time to come out from the safety of my rear."
-		]
-	},
-	"tailVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
-	"tailVoreLetoutRequestedDigest": [
-		"I'll let my tail digest you some other day, snack.",
-		"I'll give you some mercy from my tail and let you go."
-	],
-	"tailVoreLetoutRequestedDigestImmune": [
-		"Enjoy your freedom, since my tail just can't melt you.",
-		"I can't soften you in my tail no matter how much I try, so it's time to go."
-	],
-	"tailVoreLetoutRequestedSoftDigest": [
-		"I'll let my tail absorb you some other day, snack.",
-		"I'll give you some mercy from my tail and let you go."
-	],
-	"tailVoreLetoutRequestedHeal": {
-		"percentage": "targetHealth",
-		"pools": [
-			[
-				"Hope you've enjoyed healing in my tail, but it's time to leave."
-			]
-		],
-		"full": [
-			"Time to come out my tail spa and feel how fully invigorated you are!"
-		]
-	},
-	"absorbVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
-	"absorbVoreLetoutRequestedDigest": [
-		"I'll skip completely melting you into my form. This time.",
-		"Be thankful I'm letting you out of me instead of just keeping you."
-	],
-	"absorbVoreLetoutRequestedDigestImmune": [
-		"You can leave now, since you're not getting soft at all.",
-		"Seems my form can't break you down, so it's time to push you out."
-	],
-	"absorbVoreLetoutRequestedSoftDigest": [
-		"I'll skip completely melting you into my form, even if it's temporary",
-		"Be thankful I'm letting you out of my body and not making you a short-term addition."
-	],
-	"absorbVoreLetoutRequestedHeal": {
-		"percentage": "targetHealth",
-		"pools": [
-			[
-				"Did my body heal you up well? If not, you can come back again."
-			]
-		],
-		"full": [
-			"I hope you enjoyed getting massaged all over and healed by my form!"
-		]
-	},
-	"cockVoreLetoutRequestedDigested": [
-		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
-	],
-	"cockVoreLetoutRequestedDigest": [
-		"Hm... Maybe I won't melt you down entirely..."
-	],
-	"cockVoreLetoutRequestedDigestImmune": [
-		"I can't seem to melt you down... so I'll let you go."
-	],
-	"cockVoreLetoutRequestedSoftDigest": ":cockVoreLetoutRequestedDigest",
-	"cockVoreLetoutRequestedHeal": {
-		"percentage": "targetHealth",
-		"pools": [
-			[
-				"I don't have the time to patch you up fully. I hope you soaked in my cum long enough!"
-			]
-		],
-		"full": [
-			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
-		]
-	},
-	"unbirthVoreLetoutRequestedDigested": [
-		"I'm going to reform you now... since you got all melted into juices, heh~"
-	],
-	"unbirthVoreLetoutRequestedDigest": [
-		"Hm... let's stop before you're all melted into juices, heh~"
-	],
-	"unbirthVoreLetoutRequestedDigestImmune": [
-		"Seems like you're not melting, so I'm gonna let you out."
-	],
-	"unbirthVoreLetoutRequestedSoftDigest": ":unbirthVoreLetoutRequestedDigest",
-	"unbirthVoreLetoutRequestedHeal": {
-		"percentage": "targetHealth",
-		"pools": [
-			[
-				"I hope my womb was cozy, but I can't keep holding you in there. Even if you aren't fully healed yet..."
-			]
-		],
-		"full": [
-			"Feels like my womb's juices have gotten you all patched up, so i'ts time to let you out."
-		]
-	},
-	"struggling": [
-		[
-			"I'm stuck here aren't I?",
-			"Is there even a way out?",
-			"Trapped..."
-		]
-	],
-	"strugglingSlime": [
-		"This slime is so sticky.",
-		"Stuck suspended in slime...",
-		"Suspended in sticky goo..."
-	],
-	"strugglingSlimeDigestImmune": [
-		[
-			"Heh trying to melt me into more slime?",
-			"Heh trying to melt me into more slime?\nThats not gonna work."
-		],
-		"Sorry, I'm not soluble.",
-		"You're gonna have to try harder to absorb me."
-	],
-	"strugglingSlimeHeal": [
-		"This slime feels pretty nice.",
-		"Ahh... this is... oddly satisfying...",
-		"I wouldn't mind staying suspended in here..."
-	],
-	"strugglingSlimeTransforming": [
-		"Ahh... I'm being turned into slime...",
-		"Its like my limbs are turning into jelly..."
-	],
-	"strugglingCompression": [
-		"It's getting so tight in here!",
-		"I can barely move in here...",
-		"I can't keep it... from compacting me."
-	],
-	"strugglingDrainEnergyBelly": [
-		"Your stomach, it's sapping my energy as I move.",
-		"I barely have the energy... to keep resisting this belly.",
-		"This gut is draining my energy, how long I can keep squirming...?"
-	],
-	"strugglingTransformingBelly": [
-		[
-			"It feels kinda weird in here?",
-			"It feels like... I'm changing?"
-		],
-		{
-			"check": {
-				"predator": [
-					"sbqVaporeon",
-					"vaporeon"
-				]
-			},
-			"add": [
-				"Its... its like I'm turning into goo?",
-				"I'm being turned into a Vapreon..."
-			]
-		}
-	],
-	"strugglingTransformingImmune": [
-		"I don't think whatever you're doing is affecting me.",
-		"Feels like you're trying to change me, but uh... that's not gonna happen.",
-		"Your body isn't going to morph mine like that, so let me out!"
-	],
-	"strugglingEggifyBelly": [
-		"W-what's this shell forming around me in this gut?!",
-		"Hey, the stuff in your belly is hardening around me. What's happening!?",
-		"The belly walls are getting harder, or wait, is something forming around me?!"
-	],
-	"strugglingEggifyImmune": [
-		"I think a shell is trying to form around me, but uh... it's not gonna work.",
-		"You know I'm un-egg-able right?",
-		"I'm not going into an egg, it's not going to work."
-	],
-	"strugglingDigestTail": [
-		"I'm feeling... softer in this tail...",
-		"I don't know if I'll last much longer in this tail!",
-		"This tail is making me all mushy..."
-	],
-	"strugglingDigestImmuneTail": [
-		"Your tail isn't strong enough to digest me.",
-		"I'm not going to get any softer in your tail.",
-		"You know your tail can't digest me, right?"
-	],
-	"strugglingHealTail": [
-		"Weird, I'm feeling better inside your tail somehow...",
-		"I can really move thanks to your tail's healing power!",
-		"Being in your tail is so relaxing..."
-	],
-	"strugglingCompressionTail": [
-		"Your tail is squeezing me real hard!",
-		"Is your tail trying to compact me? It's getting tight...",
-		"It's getting hard to move with the space in your tail shrinking..."
-	],
-	"strugglingDrainEnergyTail": [
-		"I'm having trouble squirming... Is your tail draining me?",
-		"I'm so tired in your tail suddenly... Can't keep struggling...",
-		"Why am I getting so exhausted, like my strength is leaving me?"
-	],
-	"strugglingTransformingTail": [
-		"I feel like I'm being morphed inside your tail!",
-		"My body feels strange, is your tail doing something to it?!",
-		"I'm feeling like I'm turning into something. What's your tail doing!?"
-	],
-	"strugglingEggifyTail": [
-		"Is there a shell forming around me? What's your tail doing?!",
-		"I feel like I'm being encased in something inside your tail.",
-		"Wait, is there something surrounding me inside your tail?"
-	],
-	"strugglingFemcumDigest": [
-		"It's so hot inside your womb, I think I'm melting...",
-		"Your womb is softening me up!",
-		"I think I'll be mush if I stay any longer in your womb!"
-	],
-	"strugglingFemcumDigestImmune": [
-		"You know your womb can't melt me, right?",
-		"Trying to get your womb to break me down? Not gonna work.",
-		"As great as being digested in your womb sounds, it's not gonna happen."
-	],
-	"strugglingFemcumHeal": [
-		"Your womb is soothing me so well!",
-		"I can feel my pain vanishing within your womb.",
-		"Is your womb making me feel better? Strange..."
-	],
-	"strugglingCompressionWomb": [
-		"Why is your womb so tight? I can barely move!",
-		"I feel like I'm getting compacted inside your womb.",
-		"Your womb's walls are closing in on me! It's getting tight!"
-	],
-	"strugglingDrainEnergyWomb": [
-		"It's hard to move around in your womb... or am I getting tired?",
-		"I think your womb is stealing my energy... I'm barely able to squirm.",
-		"Fighting your womb is exhausting... Why am I so tired?"
-	],
-	"strugglingTransformingWomb": [
-		[
-			"It feels kinda weird in here?",
-			"I think... I think changing?",
-			"I think... I'm starting to feel goopy?"
-		],
-		{
-			"check": {
-				"egged": true
-			},
-			"add": [
-				"I think this egg is doing something?",
-				"Is this egg changing me?"
-			]
-		}
-	],
-	"strugglingEggify": [
-		"Is this... an egg?",
-		"Are you making an egg around me?",
-		"I'm gonna be trapped in an egg!"
-	],
-	"strugglingDigestCock": [
-		"It's so hot in here, is your shaft... melting me?",
-		"I think your cock is softening me up!",
-		"I'm feeling goopy inside your shaft..."
-	],
-	"strugglingDigestImmuneCock": [
-		"I don't think your cock can melt me.",
-		"You should know that I won't soften up inside your shaft.",
-		"I'm resistant to your shaft trying to melt me."
-	],
-	"strugglingCumHeal": [
-		"Who would have thought your cock could heal so well.",
-		"Your shaft is rather soothing it seems. Weird.",
-		"Your cock is making my pain go away. It's so relaxing in here!"
-	],
-	"strugglingCompressionCock": [
-		"This shaft of yours is squeezing me really hard!",
-		"It's hard to move when your cock is putting so much pressure on me.",
-		"I feel like I'm getting compacted inside your dick!"
-	],
-	"strugglingDrainEnergyCock": [
-		"I'm feeling more and more tired as I squirm in your dick.",
-		"Why do I feel so exhausted struggling inside your shaft?",
-		"It feels like your cock is taking my energy away..."
-	],
-	"strugglingEggifyCock": [
-		"Is there a shell forming around me inside your dick!?",
-		"There is some sort of shell forming around me. What's your cock doing??",
-		"Is your shaft getting harder... or is there something hardening around me?"
-	],
-	"strugglingCumDigestBalls": [
-		"It's so hot in your nuts, I feel like I'm melting.",
-		"The seed in your balls is all over me. I think I'm melting into it.",
-		"I'm unsure how long I'll stay solid in your sack at this rate."
-	],
-	"strugglingCumDigestImmuneBalls": [
-		"You know I'm not going to be adding to your spunk, right?",
-		"Despite the heat, I'm not going to melt in your balls.",
-		"I don't think your nuts can soften me up."
-	],
-	"strugglingHealBalls": [
-		"Your healing seed is washing over me, I feel my pain going away!",
-		"Seems your balls make for a great therapeutic sauna and spa.",
-		"The soothing properties of your spunk is crazy. How novel."
-	],
-	"strugglingCompressionBalls": [
-		"It feels as though your sack is shrinking. It's so tight in here.",
-		"I'm barely able to move with how your nuts are closing in on me.",
-		"Your orbs are tightening. There's so much pressure on me in here!"
-	],
-	"strugglingDrainEnergyBalls": [
-		"I feel so tired splashing around in your sack. What's going on?",
-		"Is your seed sapping my energy away? I feel fatigued...",
-		"The more I move in your orbs, the more exhausted I feel..."
-	],
-	"strugglingEggifyBalls": [
-		"I think a shell is forming around me in your sack!",
-		"Is it me, or is there something surrounding me that's not your spunk?",
-		"I feel like some kind of shell is forming around me!"
-	],
-	"strugglingMilkDigest": [
-		"Huh, there's more milk in here... wait.  Oh.",
-		"Guess you want to know what I taste like?",
-		"Heh, me-flavored milk.",
-		"Making me into a fresh batch of milk?"
-	],
-	"strugglingMilkDigestImmune": [
-		"Huh, kinda squeezy..."
-	],
-	"strugglingMilkHeal": [
-		"Heh, a very good milk bath...",
-		"Ahh, feeling better now...",
-		"Comfy and soothing..."
-	],
-	"strugglingCompressionBreasts": [
-		"Your boob is squeezing on me hard, I can barely move!",
-		"I feel like I'm being compacted inside of your boob.",
-		"The walls are closing in. It's getting tight in your boob."
-	],
-	"strugglingDrainEnergyBreasts": [
-		"Does your milk make people drowsy? I'm feeling more and more tired...",
-		"I can't keep up this squirming... I feel like I'm getting drained in your boob.",
-		"I'm getting exhausted... Is your breast stealing my energy?"
-	],
-	"strugglingTransformingBreasts": [
-		"I feel weird, am I changing inside your boob?",
-		"Does your milk have transformation properties, by chance?",
-		"I don't feel quite like myself... Is your breast changing me?"
-	],
-	"oralVoreUnpromptedWilling": [ //blue here, doing these as last, LAST lines
-		"Oh yeah! Eat me up like the snack I am!",
-		"Make me your lunch, you know you're hungry!",
-		"I can't wait to wiggle down your throat!"
-	],
-	"analVoreUnpromptedWilling": [
-		"Make me your butt plug!",
-		"Let me in that hot rear of yours!",
-		"It's so warm in here, I'm loving it!",
-		"Thanks, butt buddy! Your rear is so cozy."
-	],
-	"tailVoreUnpromptedWilling": [
-		"I can't wait to squirm down that tail you got!",
-		"I hope your tail can handle me inside it!",
-		"Such a great looking tail, I gotta get in!"
-	],
-	"absorbVoreUnpromptedWilling": [
-		"Yeah! Surround me with your body!",
-		"Go ahead and engulf me with your form!",
-		"Just pull me into your body already!"
-	],
-	"cockVoreUnpromptedWilling": [
-		"I want in your shaft, like right now!",
-		"Shove me into your lewd meat stick!",
-		"Let me wiggle into that cock of yours!"
-	],
-	"unbirthVoreUnpromptedWilling": [
-		"I'm going right into your folds, right this second!",
-		"Spread those legs, because I'm getting in your womb!",
-		"I'll enjoy slipping behind those lewd lips!"
-	],
-	"breastVoreUnpromptedWilling": [
-		"Just let me in your rack already!",
-		"I can't wait to squirm into that nipple of yours!",
-		"I'm about to have a blast in your milk pool!"
-	],
-	"struggleEscapeTransforming": [
-		"If I didn't get out any sooner, I wouldn't be me!"
-	],
-	"struggleEscapeTransformingImmune": [
-		"I managed to get out, though I don't think anything was really happening to me."
-	],
-	"struggleEscapeEggify": [
-		"Hah! I got out before I was egged!"
-	],
-	"struggleEscapeEggifyImmune": [
-		"Looks like I'm free, though I wasn't worried since I resisted your egging."
-	],
-	"oralVoreLetoutForcingAfterDigest": [
-		"Whew... I got you to spit me out before I was done for!"
-	],
-	"oralVoreLetoutForcingAfterDigestImmune": [
-		"I got you to spit me out, though I wasn't really in any danger."
-	],
-	"oralVoreLetoutForcingAfterSoftDigest": [
-		"Whew... I got you to spit me out before I was done for!"
-	],
-	"oralVoreLetoutForcingAfterHeal": [
-		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
-	],
-	"analVoreLetoutForcingAfterDigest": [
-		"Whew, I barely got out of your rear without adding to it!"
-	],
-	"analVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I managed to get out though your bottom, though I wasn't in any danger."
-	],
-	"analVoreLetoutForcingAfterSoftDigest": [
-		"Whew, I barely got out of your rear without adding to it!"
-	],
-	"analVoreLetoutForcingAfterHeal": [
-		"Who knew you could come out a butt so refreshed!"
-	],
-	"tailVoreLetoutForcingAfterDigest": [
-		"Whew, I got out of your tail before I became part of it."
-	],
-	"tailVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I escaped your tail, though I wasn't in danger inside it."
-	],
-	"tailVoreLetoutForcingAfterSoftDigest": [
-		"Whew, I got out of your tail before I became part of it."
-	],
-	"tailVoreLetoutForcingAfterHeal": [
-		"I squirmed out your tail and boy, do I feel great after that stay!"
-	],
-	"absorbVoreLetoutForcingAfterDigest": [
-		"Thank goodness I got out of your body. I was almost a part of it!"
-	],
-	"absorbVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I got out of your body, though I wasn't at any risk inside."
-	],
-	"absorbVoreLetoutForcingAfterSoftDigest": [
-		"Thank goodness I got out of your body. I was almost a part of it!"
-	],
-	"absorbVoreLetoutForcingAfterHeal": [
-		"I managed to get out of your soothing form and I feel great!"
-	],
-	"cockVoreLetoutForcingAfterDigest": [
-		"Whew, I wiggled out of your shaft before it melted me!"
-	],
-	"cockVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I got out your shaft, though it couldn't do any harm to me."
-	],
-	"cockVoreLetoutForcingAfterSoftDigest": [
-		"Whew, I wiggled out of your shaft before it melted me!"
-	],
-	"cockVoreLetoutForcingAfterHeal": [
-		"I squirmed out your cock and I feel really good after all that!"
-	],
-	"unbirthVoreLetoutForcingAfterDigest": [
-		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
-	],
-	"unbirthVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I got out your womb, though I wasn't really in danger inside it."
-	],
-	"unbirthVoreLetoutForcingAfterSoftDigest": [
-		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
-	],
-	"unbirthVoreLetoutForcingAfterHeal": [
-		"I wiggled my way out your womb and I feel as good as new!"
-	],
-	"breastVoreLetoutForcingAfterDigest": [
-		"Whew, I got out of your boob before I was added to its milk!"
-	],
-	"breastVoreLetoutForcingAfterDigestImmune": [
-		"Looks like I found my way out your boob, though I wasn't in danger inside it."
-	],
-	"breastVoreLetoutForcingAfterSoftDigest": [
-		"Whew, I got out of your boob before I was added to its milk!"
-	],
-	"breastVoreLetoutForcingAfterHeal": [
-		"Ah... I wiggled my way out your boob, and I feel so much better too!"
-	],
-	"escapeTransforming": [
-		"Thanks for letting me out. I was almost completely morphed!"
-	],
-	"escapeTransformingImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I can't be transformed."
-	],
-	"escapeEggify": [
-		"Thanks for letting me out. I was almost encased in an egg!"
-	],
-	"escapeEggifyImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
-	],
-	"oralVoreLetoutUnpromptedAfterDigest": [
-		"Thanks for spitting me up. I was going to be added to you!"
-	],
-	"oralVoreLetoutUnpromptedAfterDigestImmune": [
-		"Thanks for spitting me up. Maybe you realized you can't digest me?"
-	],
-	"oralVoreLetoutUnpromptedAfterSoftDigest": [
-		"Thanks for spitting me up. I was going to be added to you!"
-	],
-	"oralVoreLetoutUnpromptedAfterHeal": [
-		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
-	],
-	"analVoreLetoutUnpromptedAfterDigest": [
-		"W-wah! Thanks for releasing me out your rear before I was added to it!"
-	],
-	"analVoreLetoutUnpromptedAfterDigestImmune": [
-		"Well, looks like you pushed me out your rear. Did you realize I can't be added to it?"
-	],
-	"analVoreLetoutUnpromptedAfterSoftDigest": [
-		"W-wah! Thanks for releasing me out your rear before was I added to it!"
-	],
-	"analVoreLetoutUnpromptedAfterHeal": [
-		"W-wah! I never felt so good after being squeezed out a butt!"
-	],
-	"tailVoreLetoutUnpromptedAfterDigest": [
-		"Whew! Thanks for getting me out of your tail before I was added to it!"
-	],
-	"tailVoreLetoutUnpromptedAfterDigestImmune": [
-		"Well, seems you let me out of your tail. Did you figure out I can't be digested by it?"
-	],
-	"tailVoreLetoutUnpromptedAfterSoftDigest": [
-		"Whew! Thanks for getting me out of your tail before was I added to it!"
-	],
-	"tailVoreLetoutUnpromptedAfterHeal": [
-		"Thanks for letting me out out your tail. It was quite a soothing stay!"
-	],
-	"absorbVoreLetoutUnpromptedAfterDigest": [
-		"Whew, thanks for pushing me out of your form, I was almost added to it!"
-	],
-	"absorbVoreLetoutUnpromptedAfterDigestImmune": [
-		"Seems you let me out of your form. Did you realize it can't digest me?"
-	],
-	"absorbVoreLetoutUnpromptedAfterSoftDigest": [
-		"Whew, thanks for pushing me out of your form, I was almost added to it!"
-	],
-	"absorbVoreLetoutUnpromptedAfterHeal": [
-		"Ah, thanks for letting me out of your form. Your body surrounded and soothed every part of mine."
-	],
-	"cockVoreLetoutUnpromptedAfterDigest": [
-		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
-	],
-	"cockVoreLetoutUnpromptedAfterDigestImmune": [
-		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
-	],
-	"cockVoreLetoutUnpromptedAfterSoftDigest": [
-		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
-	],
-	"cockVoreLetoutUnpromptedAfterHeal": [
-		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
-	],
-	"unbirthVoreLetoutUnpromptedAfterDigest": [
-		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
-	],
-	"unbirthVoreLetoutUnpromptedAfterDigestImmune": [
-		"Looks like you freed me from your womb. Guess you realized I won't melt in it?"
-	],
-	"unbirthVoreLetoutUnpromptedAfterSoftDigest": [
-		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
-	],
-	"unbirthVoreLetoutUnpromptedAfterHeal": [
-		"Ah, thanks for squeezing me out your womb. Your rejuvenating chamber has left me feeling amazing!"
-	],
-	"breastVoreLetoutUnpromptedAfterDigest": [
-		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
-	],
-	"breastVoreLetoutUnpromptedAfterDigestImmune": [
-		"Looks like you pushed me out your boob, though I was in no danger from turning into milk."
-	],
-	"breastVoreLetoutUnpromptedAfterSoftDigest": [
-		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
-	],
-	"breastVoreLetoutUnpromptedAfterHeal": [
-		"Ah, thanks for pushing me out your boob. That soothing milk bath has made me feel stronger!"
-	],
-	"tailInfuseRequested": [
-		"Looking to be a part of my tail, huh? Can't say I blame you!",
-		"You're gonna make a nice bit of extra length!",
-		"I knew you were staring at my tail for a reason!"
-	],
-	"tailInfuseRequestedAfter": [
-		"Looking good back there, <entityname>!",
-		"All a part of me, now!"
-	],
-	"ballsInfuseRequested": [
-		"Oh, so you want to be my balls~?",
-		"You want to be swinging around between my legs~?"
-	],
-	"ballsInfuseRequestedAfter": [
-		"Hehe, there you go, hanging down from my crotch~ Right where you belong~",
-		"Usually friends are stored IN the balls... but I like this arrangement too~"
-	],
-	"ballsInfuseNoPrompt": [
-		"Hmmm~ I think you'd make a nice pair of balls~"
-	],
-	"ballsInfuseNoPromptAfter": [
-		"Perfect, you feel perfect hanging around down there~"
-	],
-	"infused": [
-		"<slowlove>",
-		"<love>",
-		[
-			[
-				"(Just a part of your body~)",
-				"(Just a part of <entityname>'s body~)"
-			],
-			"<slowlove>(I belong here, don't I...~)",
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
-	"ballsInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>(Ahh... I just feel so good...~)",
-			"<slowlove>(I belong here don't I...~)",
-			"<slowlove>(I'm just your balls~)",
-			"<slowlove>(Ahh~ so full of cum sloshing around~)",
-			"<slowlove>(I'm just <entityname>'s balls~)",
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
-	"anyInfusedOccupant": [
-		"Just a part of my body~",
-		"Just a part of my body <infusedName>~" // very very placeholder
-	],
-	"ballsInfusedOccupant": [
-		[
-			"<love>Heh, I can feel you twitching down there~",
-			"<love>Heh, I can feel you twitching down there <infusedName>~"
-		],
-		[
-			"<love>Are you enjoying your new purpose?~",
-			"<love>Are you enjoying your new purpose <infusedName>?~"
-		],
-		[
-			"<love>Mmm, all that cum sloshing around down there~",
-			"<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"
-		],
-		{
-			"check": {
-				"ballsInfusedSize": true
-			},
-			"add": [
-				[
-					"<love>I love how much bigger you make my balls~",
-					"<love>I love how much bigger you make my balls <infusedName>~"
-				],
-				[
-					"<love>You're better as extra size for me~",
-					"<love>You're better as extra size for me <infusedName>~"
-				]
-			]
-		},
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <infusedName>"
-		]
-	],
-	"oralVoreDigestFull": [
-		"Maybe after I melt down the last meal",
-		"Urrrrp!\n Won't be too long until I can fit you.",
-		"I've eaten too much already... but I'll probably have room soon.",
-		"I'll have to finish processing this meal first."
-	],
-	"oralVoreCompressionFull": [
-		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
-		"I'll swallow you down after my current snack gets a bit more compact",
-		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
-		"Just give me a sec to squish my friend here down, and then you'll be next!"
-	],
-	"analVoreDigestFull": [
-		"Wait your turn! Ill get to you soon.",
-		"Just need to make some room for ya. Do you mind waiting a bit?"
-	],
-	"analVoreCompressionFull": [
-		"I got my back door busy with squeezing a guest down, come back later maybe.",
-		"I'm squeezing as hard as I can, that should pack em down enough to fit you in a bit."
-	],
-	"absorbVoreDigestFull": [
-		"My form is at max, but once I've melted some guest down, I might take ya.",
-		"Let my form deal with it's current meals, then we'll talk."
-	],
-	"absorbVoreCompressionFull": [
-		"My form is at cap, but soon there might be room after I get some guests compacted.",
-		"Give my body time to down size it's prey, then see if there's room for you."
-	],
-	"oralVoreLetoutForcedDigested": [
-		"Ah... you want out... just a moment to reform.",
-		"Ah ok, I'll reform you now.",
-		"Fine, I'll reform you now.",
-		"Alright, I'll reform you."
-	],
-	"oralVoreLetoutForcedDigest": [
-		"Dang it... I was hungry.",
-		"No hard feelings?",
-		"Come on, you were almost done...",
-		"If only you weren't such a fighter..."
-	],
-	"oralVoreLetoutForcedDigestImmune": [
-		"Dang it... I was hungry... and you didn't even melt at all.",
-		"No hard feelings? Its not like my acid even managed to do anything.",
-		"Come on, my acid didn't even do anything to you...",
-		"If only you actually started to melt..."
-	],
-	"oralVoreLetoutForcedSoftDigest": [
-		"Darn it... I was hungry, you were gonna be fine anyway.",
-		"No hard feelings? Its not like I was going to go all the way...",
-		"Come on, you were almost done...",
-		"If only you weren't such a fighter..."
-	],
-	"oralVoreLetoutForcedHeal": [
-		"You do know its safer inside me right?",
-		"Are you sure you're ready to come out?",
-		"Maybe you should get back in... heal a little longer.",
-		"You can come back to heal any time."
-	],
-	"analVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested",
-	"analVoreLetoutForcedDigest": [
-		"Darn, guess you got out though my rear before it claimed you.",
-		"Are you sure you wanna escape from being added to my cheeks?",
-		"I won't let you out my butt so easily next time... I'll make you my pudge one day."
-	],
-	"analVoreLetoutForcedDigestImmune": [
-		"Odd, you don't even look a little softer after escaping my tush.",
-		"How did you survive my rear without being added to it?!",
-		"Don't get cheeky just cause you slipped out my cheeks unscratched."
-	],
-	"analVoreLetoutForcedSoftDigest": [
-		"Darn, guess you got out though my rear before you added to it.", //blue here, did a copy paste here as i'm unsure what would be different, i know the diff between digest & softDigest macanically, but not context wise, thought it was same context but diff macanics
-		"Are you sure you wanna escape from being added to my cheeks?",
-		"I won't let you out my butt so easily next time... I'll make you my temporary pudge one day."
-	],
-	"analVoreLetoutForcedHeal": [
-		"I hope you're all better now, otherwise you're going back up this butt!",
-		"Aww, I enjoyed feeling you wiggle around in my rear while it patched you up!",
-		"You gotta be healthy to squirm out my bottom like that."
-	],
-	"absorbVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested",
-	"absorbVoreLetoutForcedDigest": [
-		"You should've stayed and become one with my body.",
-		"Getting broken down into my body isn't that bad. Why run away?",
-		"You could've stayed suspended inside and added to me, but noOOoo!"
-	],
-	"absorbVoreLetoutForcedDigestImmune": [
-		"My body covered every inch of yours, how are you not mush? How'd you even get out?",
-		"You'd think being surrounded by my body would make it easy to digest you. Hmph!",
-		"Is my form simply too weak to soften you up and keep you contained?"
-	],
-	"absorbVoreLetoutForcedSoftDigest": [
-		"You should've stayed and become one with my body. It's only for a little while.",
-		"Getting broken down into my body isn't that bad. I can easily reform you.",
-		"You could've stayed suspended inside and added to me, but noOOoo! I'd even reform you!"
-	],
-	"absorbVoreLetoutForcedHeal": [
-		"Didn't you like feeling every little bit of me soothing all of you?",
-		"I hope my body's healing properties help make you feel better!",
-		"If you don't wanna get engulfed by my form, don't get hurt!"
-	],
-	// Unused Dialogue
-	// Unused Dialogue
-	"greeting.default.fearful": [
-		"AH!",
-		"I-I didn't see you there!",
-		"O-oh its you!"
-	],
-	"greeting.default.horny": [
-		"UwU",
-		"Hehe, hey there~",
-		"Mrow~"
-	],
-	"greeting.default.friendly": [
-		"Hi!",
-		"Hey <entityname>!",
-		"Nya!"
-	],
-	"greeting.default.hungry": [
-		"Mmmm... feeling a bit hungry.",
-		"Hey <entityname>, I'm looking for some food, have any?",
-		"Oh huh, I probably need to find something to eat."
-	],
-	"struggleTransformedBelly": [
-		[
-			"Seems like you're finished.",
-			"I think you're finished changing."
-		]
-	],
-	"struggleTransformingBelly": [
-		[
-			"You'll be a bit different after this is all done.",
-			"These changes should be an improvement."
-		]
-	],
-	"struggleTransformingImmuneBelly": [],
-	"struggleEggedBelly": [
-		"Now you're trapped in an egg"
-	],
-	"struggleEggifyBelly": [
-		[
-			"Can you feel that egg forming around you?",
-			"Soon your squirming won't do a thing."
-		]
-	],
-	"struggleEggifyImmuneBelly": ":struggleTransformingImmuneBelly", // duplicated lines
-	"struggleTransformedWomb": [
-		[
-			"Seems like you're finished.",
-			"I think you're finished changing."
-		]
-	],
-	"struggleTransformingWomb": [
-		[
-			"You'll be a bit different after this is all done.",
-			"These changes should be an improvement."
-		]
-	],
-	"struggleTransformingImmuneWomb": [
-		[
-			"You don't want to change?",
-			"Come on, don't you want to be different?"
-		]
-	],
-	"struggleEggedWomb": ":struggleEggedBelly", // duplicated lines
-	"struggleEggifyImmuneWomb": [],
-	"struggleTransformedCock": [
-		[
-			"Heh, I can feel you sloshing around.",
-			"Seems like you're not quite solid anymore."
-		]
-	],
-	"struggleTransformingCock": [
-		[
-			"I can feel you getting goopy in there.",
-			"I can feel you tarting to turn~"
-		]
-	],
-	"struggleTransformingImmuneCock": ":struggleEggifyImmuneWomb", // duplicated lines
-	"struggleTransformedBalls": ":struggleShaftTransformed", // duplicated lines
-	"struggleTransformingBalls": ":struggleShaftTransforming", // duplicated lines
-	"struggleTransformingImmuneBalls": ":struggleTransformingImmuneBelly", // duplicated lines
-	"oralVoreLetoutForcedSoftDigestImmune": ":oralVoreLetoutForcedDigestImmune", // duplicated lines
-	"oralVoreLetoutForcedTransformed": [
-		"Now you can see the new you.",
-		"You might look a bit different now."
 	],
 	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
 		"tagCriteria": {
@@ -3814,19 +1065,1033 @@
 			}
 		}
 	},
-
+	// Unused Dialogue
+	"missingDialogue": "Missing Dialogue\n<dialoguePath>",
+	"navelVoreRequested": "Missing: navelVoreRequested <dialoguePath>",
+	"navelVoreRequestedAfter": "Missing: navelVoreRequestedAfter <dialoguePath>",
+	"navelVoreInvalid": "Whoops! navelVore is invalid <dialoguePath>",
+	"navelVoreNo": ":defaultNo", // duplicated lines
+	"navelVoreTooBig": ":tooBig", // duplicated lines
+	"navelVoreTooSmall": ":tooSmall", // duplicated lines
+	"navelVoreNoSlots": ":noSlots", // duplicated lines
+	"navelVoreFull": ":defaultFull", // duplicated lines
+	"navelVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"navelVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"navelVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"navelVoreLetoutRequested": "Missing: navelVoreLetoutRequested <dialoguePath>",
+	"navelVorePrompt": "Missing: navelVorePrompt <dialoguePath>",
+	"navelVorePromptYes": "Missing: navelVorePromptYes <dialoguePath>",
+	"navelVorePromptYesAfter": "Missing: navelVorePromptYesAfter <dialoguePath>",
+	"navelVorePromptNo": ":defaultNo", // duplicated lines
+	"navelVorePromptNoYes": "Missing: navelVorePromptNoYes <dialoguePath>",
+	"navelVorePromptNoYesAfter": "Missing: navelVorePromptNoYesAfter <dialoguePath>",
+	"navelVoreRequesting": "Missing: navelVoreRequesting <dialoguePath>",
+	"navelVoreRequestingYes": "Missing: navelVoreRequestingYes <dialoguePath>",
+	"navelVoreRequestingNo": ":defaultNo", // duplicated lines
+	"navelVoreRequestingNoYes": "Missing: navelVoreRequestingNoYes <dialoguePath>",
+	"navelVoreNoPrompt": "Missing: navelVoreNoPrompt <dialoguePath>",
+	"navelVoreNoPromptAfter": "Missing: navelVoreNoPromptAfter <dialoguePath>",
+	"navelVoreUnprompted": "Missing: navelVoreUnprompted <dialoguePath>",
+	"navelVoreLetoutUnpromptedAfter": "Missing: navelVoreLetoutUnpromptedAfter <dialoguePath>",
+	"navelVoreForcing": "Missing: navelVoreForcing <dialoguePath>",
+	"navelVoreLetoutForcingAfter": "Missing: navelVoreLetoutForcingAfter <dialoguePath>",
+	"navelVoreForced": "Missing: navelVoreForced <dialoguePath>",
+	"navelVoreLetoutForced": "Missing: navelVoreLetoutForced <dialoguePath>",
+	"tailVoreDigestFull": [
+		"My tail is working it's prey down at the moment, come back later!",
+		"My tail's full, but once it's prey melts a bit, there'll be room!"
+	],
+	"tailVoreCompressionFull": [
+		"My tail is full, but it's prey is getting compacted, so there'll be room soon!",
+		"Once my tail has squeeze down it's current guest, I might squeeze you in."
+	],
+	"full": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
+	"needsInfusion": [
+		"I'd want someone merged in there"
+	],
+	"cockVoreDigestFull": [
+		"Ah... give me a moment to melt my toys into cum, then I might be able to fit you."
+	],
+	"cockVoreCompressionFull": [
+		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
+	],
+	"unbirthVoreDigestFull": [
+		"I may be full at the moment, but they're melting down into juices... Check back soon~"
+	],
+	"unbirthVoreCompressionFull": [
+		"A bit full, but give me a moment or two to pack them down a bit."
+	],
+	"struggle": "/npcs/sbq/dialogue/default.dialogue:struggleBelly", // external lines
+	"struggleTransformingImmune": [
+		[
+			"You don't want to change?",
+			"Come on, don't you want to be different?",
+			"Hm... You should be changing..."
+		]
+	],
+	"struggleEggifyImmune": [
+		"You should be in an egg by now. How are you still struggling?!",
+		"I'd think you'd be in a egg by now, yet you're still so active!",
+		"You must be resisting so much that it's keeping the shell from forming...",
+		"Hm... Why won't the shell form?"
+	],
+	"struggleHeal": "/npcs/sbq/dialogue/default.dialogue:struggleHeal", // external lines
+	"struggleCompressionWomb": [
+		"Do you feel my womb tightening around you as you move around?",
+		"I don't think that struggling will stop you from getting compressed in my womb.",
+		"How long can you really keep resisting the ever-tightening space within my womb?"
+	],
+	"struggleDrainEnergyWomb": [
+		"You must be getting tired with my womb sapping you of your energy, the more you move.",
+		"You would be better off resting in my womb, and let it slowly consume your energy.",
+		"You won't be able to move around much longer with my womb slowly draining your strength."
+	],
+	"struggleDigestCock": [
+		[
+			"Heh, I can feel you sloshing around.",
+			"Seems like you're not quite solid anymore."
+		]
+	],
+	"struggleDigestImmuneCock": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune", // external lines
+	"struggleHealCock": [
+		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
+		"You don't have to move so much while I'm healing you, unless you want in my sack...",
+		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
+	],
+	"struggleCompressionCock": [
+		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
+		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
+		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
+	],
+	"struggleDrainEnergyCock": [
+		"The more you fight, the more my shaft will drain your energy. I don't mind.",
+		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
+		"You know you're being drained of energy right? My rod always wins."
+	],
+	"struggleCumTransforming": [
+		[
+			"I can feel you getting goopy in there.",
+			"I can feel you starting to turn~"
+		]
+	],
+	"struggleCumTransformingImmune": [
+		"Hm... You don't seem to be getting any softer in there..."
+	],
+	"struggleInfusedCock": [
+		"Ahhh~ <infusedName> feels so great down there~",
+		"<keysmash>, you're gonna make <infusedName> cum~"
+	],
+	"struggleDigestImmuneBalls": [
+		"You're supposed to be melting into cum right now... not squirming like that.",
+		"I don't know how you are still kicking in my sack. You should be adding to my seed.",
+		"Shouldn't you be busy melting, and not struggling?"
+	],
+	"struggleHealBalls": [
+		"My seed can mend wounds, so don't panic. You'll be fine, I swear!",
+		"Seems you're pretty healthy if you can wiggle like that!",
+		"Just relax and let my sticky sauna soothe you."
+	],
+	"struggleCompressionBalls": [
+		"You're squirming pretty hard for someone in a tightening sack.",
+		"Better get out all that fight while you can, you won't be able to move much soon.",
+		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
+	],
+	"struggleDrainEnergyBalls": [
+		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
+		"You won't last long fighting like that. It's better to just rest and let your energy go.",
+		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
+	],
+	"struggleLetoutTransforming": {
+		"percentage": "transforming",
+		"pools": [
+			[
+				"Didn't want to become something like me?",
+				"Didn't like the changes I was making?"
+			]
+		],
+		"full": [
+			":struggleLetoutTransformed"
+		]
+	},
+	"struggleLetoutEggify": [
+		"Don't want to be trapped in an egg?",
+		"You don't like eggs?"
+	],
+	"struggleLetoutEggifyImmune": [
+		"Fine then, it didn't seem like the shell was forming right anyway!",
+		"Bleh! Did you get out before being encased, or is it something else?",
+		"If only you where easier to put in an egg, maybe I could've had more fun with you."
+	],
+	"tailVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested", // duplicated lines
+	"tailVoreLetoutForcedDigest": [
+		"You were just starting to soften up in my tail, too. Don't want to be tail pudge?",
+		"Don't you want to add to my tail? You'd be a great addition to it.",
+		"Oof, I won't let you out my tail so easily next time."
+	],
+	"tailVoreLetoutForcedDigestImmune": [
+		"Was my tail not strong enough to turn you into pudge?",
+		"I can't believe you managed to escape my tail unscratched!",
+		"How did you resist being melted be my tail? What's your tale?"
+	],
+	"tailVoreLetoutForcedSoftDigest": [
+		"You were just starting to soften up in my tail, too. You'd only be tail pudge for a while.",
+		"Don't you want to add to my tail? You'd be a great temporary addition to it.",
+		"Oof, I won't let you out my tail so easily next time."
+	],
+	"tailVoreLetoutForcedHeal": [
+		"I wish you'd stay longer in my tail, even if you don't need the healing.",
+		"I hope you're feeling better after staying in my tail, since you wiggled out",
+		"You'd think my soothing tail would relax you too much to squirm out of it."
+	],
+	"cockVoreLetoutForcedDigested": [
+		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
+	],
+	"cockVoreLetoutForcedDigest": [
+		"Got out of my shaft before it made you mush, eh?",
+		"Did you have to leave? It felt so good having you melt into cum!",
+		"I'll be... You withstood my shaft's heat and wiggled out."
+	],
+	"cockVoreLetoutForcedDigestImmune": [
+		"What the... Shouldn't you be turning into cum instead of getting out?",
+		"Most prey can't stand my shaft's heat. Why are you so resistant?",
+		"You wiggled out completely solid. That's strange..."
+	],
+	"cockVoreLetoutForcedSoftDigest": [
+		"Got out of my shaft before it absorbed you, eh?",
+		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
+		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
+	],
+	"cockVoreLetoutForcedHeal": [
+		"I guess shaft therapy time is over.",
+		"You seem eager to be free. Just don't get 'cocky' and get hurt, or back in you go!",
+		"Feeling better now? If not, my rod of healing is always ready."
+	],
+	"unbirthVoreLetoutForcedDigested": [
+		"Ah... you're gonna need a new body after becoming nothing but juices..."
+	],
+	"unbirthVoreLetoutForcedDigest": [
+		"You were melting nicely in my womb. If you'd only stayed a bit longer...",
+		"Things were just heating up in my womb...",
+		"My womb was just starting to soften you up before you wiggled out."
+	],
+	"unbirthVoreLetoutForcedDigestImmune": [
+		"The heck? Somehow my womb's heat is not affecting you!",
+		"Why didn't you start softening up in my womb? What's your secret?",
+		"Most would've succumb to my womb. Why aren't you?"
+	],
+	"unbirthVoreLetoutForcedSoftDigest": [
+		"You were melting nicely in my womb. If you'd only stayed a bit longer, you would've been fine...",
+		"Things were just heating up in my womb... It wouldn't be permanent...",
+		"My womb was just starting to soften you up before you wiggled out. It's safe, honest!"
+	],
+	"unbirthVoreLetoutForcedHeal": [
+		"I hope my womb was being gentle with you and keeping you soothed!",
+		"I hope the healing ride was pleasant. If you need some more time in my oven, I wouldn't mind...",
+		"Such a healthy kick! You squirmed out of my folds all on your own."
+	],
+	"letoutTransformingImmune": [
+		"You don't look any different from how you went in, strange...",
+		"Did you have some kind of device to keep you from morphing?",
+		"Seems your body is rather hard to modify, tsk..."
+	],
+	"letoutEggify": {
+		"percentage": "eggifying",
+		"pools": [
+			[
+				"Seems like I let you out a bit too early.",
+				"I was a bit too hasty. The egg didn't form."
+			]
+		],
+		"full": [
+			":LetoutEgged"
+		]
+	},
+	"letoutEggifyImmune": [
+		"Guess I just can't put you in an egg.",
+		"Seems like eggs don't work on you.",
+		"I'm giving up on sealing you in an egg."
+	],
+	"oralVoreLetoutRequestedDigested": [
+		"Here, let me reform you real quick.",
+		"You got digested, so I gotta reform you.",
+		"Ah, guess it's time to reform you.",
+		"Time to reform you, I guess."
+	],
+	"oralVoreLetoutRequestedDigest": [
+		"Actually... You've probably spent enough time in there.",
+		"My hunger is satiated enough for now.",
+		"Probably best to get you out of there...",
+		"Don't feel like melting you entirely."
+	],
+	"oralVoreLetoutRequestedDigestImmune": [
+		"I can't even melt you down at all...",
+		"My hunger isn't going to be satiated with you in there.",
+		"Probably best to get you out of there, so I can eat something else.",
+		"Can't even melt you down the tiniest bit."
+	],
+	"oralVoreLetoutRequestedSoftDigest": ":oralVoreLetoutRequestedDigest", // duplicated lines
+	"oralVoreLetoutRequestedHeal": [
+		"You're probably patched up enough.",
+		"I think you've spent enough time healing.",
+		"I think you should be feeling much better now.",
+		"My stomach does wonders for healing, doesn't it?"
+	],
+	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
+	"analVoreLetoutRequestedDigest": [
+		"I think you won't be adding to my rear today, butt buddy!",
+		"I'll let you go this time, but next time my rear will catch you!"
+	],
+	"analVoreLetoutRequestedDigestImmune": [
+		"Just leave via my 'exit', since it can't even soften you up.",
+		"You're free to go, since my bottom can't melt you at all."
+	],
+	"analVoreLetoutRequestedSoftDigest": ":analVoreLetoutRequestedDigest", // duplicated lines
+	"analVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I think my healing booty has done enough. I hope it soothed you!"
+			]
+		],
+		"full": [
+			"All better! Time to come out from the safety of my rear."
+		]
+	},
+	"tailVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
+	"tailVoreLetoutRequestedDigest": [
+		"I'll let my tail digest you some other day, snack.",
+		"I'll give you some mercy from my tail and let you go."
+	],
+	"tailVoreLetoutRequestedDigestImmune": [
+		"Enjoy your freedom, since my tail just can't melt you.",
+		"I can't soften you in my tail no matter how much I try, so it's time to go."
+	],
+	"tailVoreLetoutRequestedSoftDigest": [
+		"I'll let my tail absorb you some other day, snack.",
+		"I'll give you some mercy from my tail and let you go."
+	],
+	"tailVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"Hope you've enjoyed healing in my tail, but it's time to leave."
+			]
+		],
+		"full": [
+			"Time to come out my tail spa and feel how fully invigorated you are!"
+		]
+	},
+	"absorbVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
+	"absorbVoreLetoutRequestedDigest": [
+		"I'll skip completely melting you into my form. This time.",
+		"Be thankful I'm letting you out of me instead of just keeping you."
+	],
+	"absorbVoreLetoutRequestedDigestImmune": [
+		"You can leave now, since you're not getting soft at all.",
+		"Seems my form can't break you down, so it's time to push you out."
+	],
+	"absorbVoreLetoutRequestedSoftDigest": [
+		"I'll skip completely melting you into my form, even if it's temporary",
+		"Be thankful I'm letting you out of my body and not making you a short-term addition."
+	],
+	"absorbVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"Did my body heal you up well? If not, you can come back again."
+			]
+		],
+		"full": [
+			"I hope you enjoyed getting massaged all over and healed by my form!"
+		]
+	},
+	"cockVoreLetoutRequestedDigested": [
+		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
+	],
+	"cockVoreLetoutRequestedDigest": [
+		"Hm... Maybe I won't melt you down entirely..."
+	],
+	"cockVoreLetoutRequestedDigestImmune": [
+		"I can't seem to melt you down... so I'll let you go."
+	],
+	"cockVoreLetoutRequestedSoftDigest": ":cockVoreLetoutRequestedDigest", // duplicated lines
+	"cockVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I don't have the time to patch you up fully. I hope you soaked in my cum long enough!"
+			]
+		],
+		"full": [
+			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
+		]
+	},
+	"unbirthVoreLetoutRequestedDigested": [
+		"I'm going to reform you now... since you got all melted into juices, heh~"
+	],
+	"unbirthVoreLetoutRequestedDigest": [
+		"Hm... let's stop before you're all melted into juices, heh~"
+	],
+	"unbirthVoreLetoutRequestedDigestImmune": [
+		"Seems like you're not melting, so I'm gonna let you out."
+	],
+	"unbirthVoreLetoutRequestedSoftDigest": ":unbirthVoreLetoutRequestedDigest", // duplicated lines
+	"unbirthVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I hope my womb was cozy, but I can't keep holding you in there. Even if you aren't fully healed yet..."
+			]
+		],
+		"full": [
+			"Feels like my womb's juices have gotten you all patched up, so i'ts time to let you out."
+		]
+	},
+	"struggling": [
+		[
+			"I'm stuck here aren't I?",
+			"Is there even a way out?",
+			"Trapped..."
+		]
+	],
+	"strugglingSlime": [
+		"This slime is so sticky.",
+		"Stuck suspended in slime...",
+		"Suspended in sticky goo..."
+	],
+	"strugglingSlimeDigestImmune": [
+		[
+			"Heh trying to melt me into more slime?",
+			"Heh trying to melt me into more slime?\nThats not gonna work."
+		],
+		"Sorry, I'm not soluble.",
+		"You're gonna have to try harder to absorb me."
+	],
+	"strugglingSlimeHeal": [
+		"This slime feels pretty nice.",
+		"Ahh... this is... oddly satisfying...",
+		"I wouldn't mind staying suspended in here..."
+	],
+	"strugglingSlimeTransforming": [
+		"Ahh... I'm being turned into slime...",
+		"Its like my limbs are turning into jelly..."
+	],
+	"strugglingDrainEnergyBelly": [
+		"Your stomach, it's sapping my energy as I move.",
+		"I barely have the energy... to keep resisting this belly.",
+		"This gut is draining my energy, how long I can keep squirming...?"
+	],
+	"strugglingTransformingBelly": [
+		[
+			"It feels kinda weird in here?",
+			"It feels like... I'm changing?"
+		],
+		{
+			"check": {
+				"predator": [
+					"sbqVaporeon",
+					"vaporeon"
+				]
+			},
+			"add": [
+				"Its... its like I'm turning into goo?",
+				"I'm being turned into a Vapreon..."
+			]
+		}
+	],
+	"strugglingTransformingImmune": [
+		"I don't think whatever you're doing is affecting me.",
+		"Feels like you're trying to change me, but uh... that's not gonna happen.",
+		"Your body isn't going to morph mine like that, so let me out!"
+	],
+	"strugglingEggifyBelly": [
+		"W-what's this shell forming around me in this gut?!",
+		"Hey, the stuff in your belly is hardening around me. What's happening!?",
+		"The belly walls are getting harder, or wait, is something forming around me?!"
+	],
+	"strugglingEggifyImmune": [
+		"I think a shell is trying to form around me, but uh... it's not gonna work.",
+		"You know I'm un-egg-able right?",
+		"I'm not going into an egg, it's not going to work."
+	],
+	"strugglingDigestTail": [
+		"I'm feeling... softer in this tail...",
+		"I don't know if I'll last much longer in this tail!",
+		"This tail is making me all mushy..."
+	],
+	"strugglingDigestImmuneTail": [
+		"Your tail isn't strong enough to digest me.",
+		"I'm not going to get any softer in your tail.",
+		"You know your tail can't digest me, right?"
+	],
+	"strugglingHealTail": [
+		"Weird, I'm feeling better inside your tail somehow...",
+		"I can really move thanks to your tail's healing power!",
+		"Being in your tail is so relaxing..."
+	],
+	"strugglingCompressionTail": [
+		"Your tail is squeezing me real hard!",
+		"Is your tail trying to compact me? It's getting tight...",
+		"It's getting hard to move with the space in your tail shrinking..."
+	],
+	"strugglingDrainEnergyTail": [
+		"I'm having trouble squirming... Is your tail draining me?",
+		"I'm so tired in your tail suddenly... Can't keep struggling...",
+		"Why am I getting so exhausted, like my strength is leaving me?"
+	],
+	"strugglingTransformingTail": [
+		"I feel like I'm being morphed inside your tail!",
+		"My body feels strange, is your tail doing something to it?!",
+		"I'm feeling like I'm turning into something. What's your tail doing!?"
+	],
+	"strugglingEggifyTail": [
+		"Is there a shell forming around me? What's your tail doing?!",
+		"I feel like I'm being encased in something inside your tail.",
+		"Wait, is there something surrounding me inside your tail?"
+	],
+	"strugglingCompressionWomb": [
+		"Why is your womb so tight? I can barely move!",
+		"I feel like I'm getting compacted inside your womb.",
+		"Your womb's walls are closing in on me! It's getting tight!"
+	],
+	"strugglingDrainEnergyWomb": [
+		"It's hard to move around in your womb... or am I getting tired?",
+		"I think your womb is stealing my energy... I'm barely able to squirm.",
+		"Fighting your womb is exhausting... Why am I so tired?"
+	],
+	"strugglingTransformingWomb": [
+		[
+			"It feels kinda weird in here?",
+			"I think... I think changing?",
+			"I think... I'm starting to feel goopy?"
+		],
+		{
+			"check": {
+				"egged": true
+			},
+			"add": [
+				"I think this egg is doing something?",
+				"Is this egg changing me?"
+			]
+		}
+	],
+	"strugglingDigestCock": [
+		"It's so hot in here, is your shaft... melting me?",
+		"I think your cock is softening me up!",
+		"I'm feeling goopy inside your shaft..."
+	],
+	"strugglingDigestImmuneCock": [
+		"I don't think your cock can melt me.",
+		"You should know that I won't soften up inside your shaft.",
+		"I'm resistant to your shaft trying to melt me."
+	],
+	"strugglingCompressionCock": [
+		"This shaft of yours is squeezing me really hard!",
+		"It's hard to move when your cock is putting so much pressure on me.",
+		"I feel like I'm getting compacted inside your dick!"
+	],
+	"strugglingDrainEnergyCock": [
+		"I'm feeling more and more tired as I squirm in your dick.",
+		"Why do I feel so exhausted struggling inside your shaft?",
+		"It feels like your cock is taking my energy away..."
+	],
+	"strugglingEggifyCock": [
+		"Is there a shell forming around me inside your dick!?",
+		"There is some sort of shell forming around me. What's your cock doing??",
+		"Is your shaft getting harder... or is there something hardening around me?"
+	],
+	"strugglingCumDigestImmuneBalls": [
+		"You know I'm not going to be adding to your spunk, right?",
+		"Despite the heat, I'm not going to melt in your balls.",
+		"I don't think your nuts can soften me up."
+	],
+	"strugglingHealBalls": [
+		"Your healing seed is washing over me, I feel my pain going away!",
+		"Seems your balls make for a great therapeutic sauna and spa.",
+		"The soothing properties of your spunk is crazy. How novel."
+	],
+	"strugglingCompressionBalls": [
+		"It feels as though your sack is shrinking. It's so tight in here.",
+		"I'm barely able to move with how your nuts are closing in on me.",
+		"Your orbs are tightening. There's so much pressure on me in here!"
+	],
+	"strugglingDrainEnergyBalls": [
+		"I feel so tired splashing around in your sack. What's going on?",
+		"Is your seed sapping my energy away? I feel fatigued...",
+		"The more I move in your orbs, the more exhausted I feel..."
+	],
+	"strugglingEggifyBalls": [
+		"I think a shell is forming around me in your sack!",
+		"Is it me, or is there something surrounding me that's not your spunk?",
+		"I feel like some kind of shell is forming around me!"
+	],
+	"strugglingCompressionBreasts": [
+		"Your boob is squeezing on me hard, I can barely move!",
+		"I feel like I'm being compacted inside of your boob.",
+		"The walls are closing in. It's getting tight in your boob."
+	],
+	"strugglingDrainEnergyBreasts": [
+		"Does your milk make people drowsy? I'm feeling more and more tired...",
+		"I can't keep up this squirming... I feel like I'm getting drained in your boob.",
+		"I'm getting exhausted... Is your breast stealing my energy?"
+	],
+	"strugglingTransformingBreasts": [
+		"I feel weird, am I changing inside your boob?",
+		"Does your milk have transformation properties, by chance?",
+		"I don't feel quite like myself... Is your breast changing me?"
+	],
+	"oralVoreUnpromptedWilling": [ //blue here, doing these as last, LAST lines
+		"Oh yeah! Eat me up like the snack I am!",
+		"Make me your lunch, you know you're hungry!",
+		"I can't wait to wiggle down your throat!"
+	],
+	"analVoreUnpromptedWilling": [
+		"Make me your butt plug!",
+		"Let me in that hot rear of yours!",
+		"It's so warm in here, I'm loving it!",
+		"Thanks, butt buddy! Your rear is so cozy."
+	],
+	"tailVoreUnpromptedWilling": [
+		"I can't wait to squirm down that tail you got!",
+		"I hope your tail can handle me inside it!",
+		"Such a great looking tail, I gotta get in!"
+	],
+	"absorbVoreUnpromptedWilling": [
+		"Yeah! Surround me with your body!",
+		"Go ahead and engulf me with your form!",
+		"Just pull me into your body already!"
+	],
+	"cockVoreUnpromptedWilling": [
+		"I want in your shaft, like right now!",
+		"Shove me into your lewd meat stick!",
+		"Let me wiggle into that cock of yours!"
+	],
+	"unbirthVoreUnpromptedWilling": [
+		"I'm going right into your folds, right this second!",
+		"Spread those legs, because I'm getting in your womb!",
+		"I'll enjoy slipping behind those lewd lips!"
+	],
+	"breastVoreUnpromptedWilling": [
+		"Just let me in your rack already!",
+		"I can't wait to squirm into that nipple of yours!",
+		"I'm about to have a blast in your milk pool!"
+	],
+	"struggleEscapeTransforming": [
+		"If I didn't get out any sooner, I wouldn't be me!"
+	],
+	"struggleEscapeTransformingImmune": [
+		"I managed to get out, though I don't think anything was really happening to me."
+	],
+	"struggleEscapeEggify": [
+		"Hah! I got out before I was egged!"
+	],
+	"struggleEscapeEggifyImmune": [
+		"Looks like I'm free, though I wasn't worried since I resisted your egging."
+	],
+	"oralVoreLetoutForcingAfterDigest": [
+		"Whew... I got you to spit me out before I was done for!"
+	],
+	"oralVoreLetoutForcingAfterDigestImmune": [
+		"I got you to spit me out, though I wasn't really in any danger."
+	],
+	"oralVoreLetoutForcingAfterSoftDigest": ":oralVoreLetoutForcingAfterDigest", // duplicated lines
+	"oralVoreLetoutForcingAfterHeal": [
+		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
+	],
+	"analVoreLetoutForcingAfterDigest": [
+		"Whew, I barely got out of your rear without adding to it!"
+	],
+	"analVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I managed to get out though your bottom, though I wasn't in any danger."
+	],
+	"analVoreLetoutForcingAfterSoftDigest": ":analVoreLetoutForcingAfterDigest", // duplicated lines
+	"analVoreLetoutForcingAfterHeal": [
+		"Who knew you could come out a butt so refreshed!"
+	],
+	"tailVoreLetoutForcingAfterDigest": [
+		"Whew, I got out of your tail before I became part of it."
+	],
+	"tailVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I escaped your tail, though I wasn't in danger inside it."
+	],
+	"tailVoreLetoutForcingAfterSoftDigest": ":tailVoreLetoutForcingAfterDigest", // duplicated lines
+	"tailVoreLetoutForcingAfterHeal": [
+		"I squirmed out your tail and boy, do I feel great after that stay!"
+	],
+	"absorbVoreLetoutForcingAfterDigest": [
+		"Thank goodness I got out of your body. I was almost a part of it!"
+	],
+	"absorbVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I got out of your body, though I wasn't at any risk inside."
+	],
+	"absorbVoreLetoutForcingAfterSoftDigest": ":absorbVoreLetoutForcingAfterDigest", // duplicated lines
+	"absorbVoreLetoutForcingAfterHeal": [
+		"I managed to get out of your soothing form and I feel great!"
+	],
+	"cockVoreLetoutForcingAfterDigest": [
+		"Whew, I wiggled out of your shaft before it melted me!"
+	],
+	"cockVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I got out your shaft, though it couldn't do any harm to me."
+	],
+	"cockVoreLetoutForcingAfterSoftDigest": ":cockVoreLetoutForcingAfterDigest", // duplicated lines
+	"cockVoreLetoutForcingAfterHeal": [
+		"I squirmed out your cock and I feel really good after all that!"
+	],
+	"unbirthVoreLetoutForcingAfterDigest": [
+		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
+	],
+	"unbirthVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I got out your womb, though I wasn't really in danger inside it."
+	],
+	"unbirthVoreLetoutForcingAfterSoftDigest": ":unbirthVoreLetoutForcingAfterDigest", // duplicated lines
+	"unbirthVoreLetoutForcingAfterHeal": [
+		"I wiggled my way out your womb and I feel as good as new!"
+	],
+	"breastVoreLetoutForcingAfterDigest": [
+		"Whew, I got out of your boob before I was added to its milk!"
+	],
+	"breastVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I found my way out your boob, though I wasn't in danger inside it."
+	],
+	"breastVoreLetoutForcingAfterSoftDigest": ":breastVoreLetoutForcingAfterDigest", // duplicated lines
+	"breastVoreLetoutForcingAfterHeal": [
+		"Ah... I wiggled my way out your boob, and I feel so much better too!"
+	],
+	"escapeTransforming": [
+		"Thanks for letting me out. I was almost completely morphed!"
+	],
+	"escapeTransformingImmune": [
+		"Oh, it's good that you let me out. Seems like you know now that I can't be transformed."
+	],
+	"escapeEggify": [
+		"Thanks for letting me out. I was almost encased in an egg!"
+	],
+	"escapeEggifyImmune": [
+		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
+	],
+	"oralVoreLetoutUnpromptedAfterDigest": [
+		"Thanks for spitting me up. I was going to be added to you!"
+	],
+	"oralVoreLetoutUnpromptedAfterDigestImmune": [
+		"Thanks for spitting me up. Maybe you realized you can't digest me?"
+	],
+	"oralVoreLetoutUnpromptedAfterSoftDigest": ":oralVoreLetoutUnpromptedAfterDigest", // duplicated lines
+	"oralVoreLetoutUnpromptedAfterHeal": [
+		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
+	],
+	"analVoreLetoutUnpromptedAfterDigest": [
+		"W-wah! Thanks for releasing me out your rear before I was added to it!"
+	],
+	"analVoreLetoutUnpromptedAfterDigestImmune": [
+		"Well, looks like you pushed me out your rear. Did you realize I can't be added to it?"
+	],
+	"analVoreLetoutUnpromptedAfterSoftDigest": [
+		"W-wah! Thanks for releasing me out your rear before was I added to it!"
+	],
+	"analVoreLetoutUnpromptedAfterHeal": [
+		"W-wah! I never felt so good after being squeezed out a butt!"
+	],
+	"tailVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out of your tail before I was added to it!"
+	],
+	"tailVoreLetoutUnpromptedAfterDigestImmune": [
+		"Well, seems you let me out of your tail. Did you figure out I can't be digested by it?"
+	],
+	"tailVoreLetoutUnpromptedAfterSoftDigest": [
+		"Whew! Thanks for getting me out of your tail before was I added to it!"
+	],
+	"tailVoreLetoutUnpromptedAfterHeal": [
+		"Thanks for letting me out out your tail. It was quite a soothing stay!"
+	],
+	"absorbVoreLetoutUnpromptedAfterDigest": [
+		"Whew, thanks for pushing me out of your form, I was almost added to it!"
+	],
+	"absorbVoreLetoutUnpromptedAfterDigestImmune": [
+		"Seems you let me out of your form. Did you realize it can't digest me?"
+	],
+	"absorbVoreLetoutUnpromptedAfterSoftDigest": ":absorbVoreLetoutUnpromptedAfterDigest", // duplicated lines
+	"absorbVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for letting me out of your form. Your body surrounded and soothed every part of mine."
+	],
+	"cockVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
+	],
+	"cockVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
+	],
+	"cockVoreLetoutUnpromptedAfterSoftDigest": ":cockVoreLetoutUnpromptedAfterDigest", // duplicated lines
+	"cockVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
+	],
+	"unbirthVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
+	],
+	"unbirthVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you freed me from your womb. Guess you realized I won't melt in it?"
+	],
+	"unbirthVoreLetoutUnpromptedAfterSoftDigest": ":unbirthVoreLetoutUnpromptedAfterDigest", // duplicated lines
+	"unbirthVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for squeezing me out your womb. Your rejuvenating chamber has left me feeling amazing!"
+	],
+	"breastVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
+	],
+	"breastVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you pushed me out your boob, though I was in no danger from turning into milk."
+	],
+	"breastVoreLetoutUnpromptedAfterSoftDigest": ":breastVoreLetoutUnpromptedAfterDigest", // duplicated lines
+	"breastVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for pushing me out your boob. That soothing milk bath has made me feel stronger!"
+	],
+	"tailInfuseRequested": "/npcs/sbq/dialogue/default.dialogue:tailInfuseRequested", // external lines
+	"tailInfuseRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseRequestedAfter", // external lines
+	"ballsInfuseRequested": [
+		"Oh, so you want to be my balls~?",
+		"You want to be swinging around between my legs~?"
+	],
+	"ballsInfuseRequestedAfter": [
+		"Hehe, there you go, hanging down from my crotch~ Right where you belong~",
+		"Usually friends are stored IN the balls... but I like this arrangement too~"
+	],
+	"ballsInfuseNoPrompt": [
+		"Hmmm~ I think you'd make a nice pair of balls~"
+	],
+	"ballsInfuseNoPromptAfter": [
+		"Perfect, you feel perfect hanging around down there~"
+	],
+	"infused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
+	"ballsInfused": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I'm just your balls~)",
+			"<slowlove>(Ahh~ so full of cum sloshing around~)",
+			"<slowlove>(I'm just <entityname>'s balls~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
+		]
+	],
+	"ballsInfusedOccupant": [
+		[
+			"<love>Heh, I can feel you twitching down there~",
+			"<love>Heh, I can feel you twitching down there <infusedName>~"
+		],
+		[
+			"<love>Are you enjoying your new purpose?~",
+			"<love>Are you enjoying your new purpose <infusedName>?~"
+		],
+		[
+			"<love>Mmm, all that cum sloshing around down there~",
+			"<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"
+		],
+		{
+			"check": {
+				"ballsInfusedSize": true
+			},
+			"add": [
+				[
+					"<love>I love how much bigger you make my balls~",
+					"<love>I love how much bigger you make my balls <infusedName>~"
+				],
+				[
+					"<love>You're better as extra size for me~",
+					"<love>You're better as extra size for me <infusedName>~"
+				]
+			]
+		},
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <infusedName>"
+		]
+	],
+	"oralVoreDigestFull": [
+		"Maybe after I melt down the last meal",
+		"Urrrrp!\n Won't be too long until I can fit you.",
+		"I've eaten too much already... but I'll probably have room soon.",
+		"I'll have to finish processing this meal first."
+	],
+	"oralVoreCompressionFull": [
+		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
+		"I'll swallow you down after my current snack gets a bit more compact",
+		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
+		"Just give me a sec to squish my friend here down, and then you'll be next!"
+	],
+	"analVoreDigestFull": [
+		"Wait your turn! Ill get to you soon.",
+		"Just need to make some room for ya. Do you mind waiting a bit?"
+	],
+	"analVoreCompressionFull": [
+		"I got my back door busy with squeezing a guest down, come back later maybe.",
+		"I'm squeezing as hard as I can, that should pack em down enough to fit you in a bit."
+	],
+	"absorbVoreDigestFull": [
+		"My form is at max, but once I've melted some guest down, I might take ya.",
+		"Let my form deal with it's current meals, then we'll talk."
+	],
+	"absorbVoreCompressionFull": [
+		"My form is at cap, but soon there might be room after I get some guests compacted.",
+		"Give my body time to down size it's prey, then see if there's room for you."
+	],
+	"oralVoreLetoutForcedDigested": [
+		"Ah... you want out... just a moment to reform.",
+		"Ah ok, I'll reform you now.",
+		"Fine, I'll reform you now.",
+		"Alright, I'll reform you."
+	],
+	"oralVoreLetoutForcedDigest": [
+		"Dang it... I was hungry.",
+		"No hard feelings?",
+		"Come on, you were almost done...",
+		"If only you weren't such a fighter..."
+	],
+	"oralVoreLetoutForcedDigestImmune": [
+		"Dang it... I was hungry... and you didn't even melt at all.",
+		"No hard feelings? Its not like my acid even managed to do anything.",
+		"Come on, my acid didn't even do anything to you...",
+		"If only you actually started to melt..."
+	],
+	"oralVoreLetoutForcedSoftDigest": [
+		"Darn it... I was hungry, you were gonna be fine anyway.",
+		"No hard feelings? Its not like I was going to go all the way...",
+		"Come on, you were almost done...",
+		"If only you weren't such a fighter..."
+	],
+	"oralVoreLetoutForcedHeal": [
+		"You do know its safer inside me right?",
+		"Are you sure you're ready to come out?",
+		"Maybe you should get back in... heal a little longer.",
+		"You can come back to heal any time."
+	],
+	"analVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested", // duplicated lines
+	"analVoreLetoutForcedDigest": [
+		"Darn, guess you got out though my rear before it claimed you.",
+		"Are you sure you wanna escape from being added to my cheeks?",
+		"I won't let you out my butt so easily next time... I'll make you my pudge one day."
+	],
+	"analVoreLetoutForcedDigestImmune": [
+		"Odd, you don't even look a little softer after escaping my tush.",
+		"How did you survive my rear without being added to it?!",
+		"Don't get cheeky just cause you slipped out my cheeks unscratched."
+	],
+	"analVoreLetoutForcedSoftDigest": [
+		"Darn, guess you got out though my rear before you added to it.", //blue here, did a copy paste here as i'm unsure what would be different, i know the diff between digest & softDigest macanically, but not context wise, thought it was same context but diff macanics
+		"Are you sure you wanna escape from being added to my cheeks?",
+		"I won't let you out my butt so easily next time... I'll make you my temporary pudge one day."
+	],
+	"analVoreLetoutForcedHeal": [
+		"I hope you're all better now, otherwise you're going back up this butt!",
+		"Aww, I enjoyed feeling you wiggle around in my rear while it patched you up!",
+		"You gotta be healthy to squirm out my bottom like that."
+	],
+	"absorbVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested", // duplicated lines
+	"absorbVoreLetoutForcedDigest": [
+		"You should've stayed and become one with my body.",
+		"Getting broken down into my body isn't that bad. Why run away?",
+		"You could've stayed suspended inside and added to me, but noOOoo!"
+	],
+	"absorbVoreLetoutForcedDigestImmune": [
+		"My body covered every inch of yours, how are you not mush? How'd you even get out?",
+		"You'd think being surrounded by my body would make it easy to digest you. Hmph!",
+		"Is my form simply too weak to soften you up and keep you contained?"
+	],
+	"absorbVoreLetoutForcedSoftDigest": [
+		"You should've stayed and become one with my body. It's only for a little while.",
+		"Getting broken down into my body isn't that bad. I can easily reform you.",
+		"You could've stayed suspended inside and added to me, but noOOoo! I'd even reform you!"
+	],
+	"absorbVoreLetoutForcedHeal": [
+		"Didn't you like feeling every little bit of me soothing all of you?",
+		"I hope my body's healing properties help make you feel better!",
+		"If you don't wanna get engulfed by my form, don't get hurt!"
+	],
+	// Unused Dialogue
+	// Unused Dialogue
+	"greeting.default.fearful": [
+		"AH!",
+		"I-I didn't see you there!",
+		"O-oh its you!"
+	],
+	"greeting.default.horny": [
+		"UwU",
+		"Hehe, hey there~",
+		"Mrow~"
+	],
+	"greeting.default.friendly": [
+		"Hi!",
+		"Hey <entityname>!",
+		"Nya!"
+	],
+	"greeting.default.hungry": [
+		"Mmmm... feeling a bit hungry.",
+		"Hey <entityname>, I'm looking for some food, have any?",
+		"Oh huh, I probably need to find something to eat."
+	],
+	"struggleTransformedBelly": [
+		[
+			"Seems like you're finished.",
+			"I think you're finished changing."
+		]
+	],
+	"struggleTransformingBelly": [
+		[
+			"You'll be a bit different after this is all done.",
+			"These changes should be an improvement."
+		]
+	],
+	"struggleTransformingImmuneBelly": [],
+	"struggleEggedBelly": [
+		"Now you're trapped in an egg"
+	],
+	"struggleEggifyBelly": [
+		[
+			"Can you feel that egg forming around you?",
+			"Soon your squirming won't do a thing."
+		]
+	],
+	"struggleEggifyImmuneBelly": ":struggleTransformingImmuneBelly", // duplicated lines
+	"struggleTransformedWomb": ":struggleTransformedBelly", // duplicated lines
+	"struggleTransformingWomb": ":struggleTransformingBelly", // duplicated lines
+	"struggleTransformingImmuneWomb": [
+		[
+			"You don't want to change?",
+			"Come on, don't you want to be different?"
+		]
+	],
+	"struggleEggedWomb": ":struggleEggedBelly", // duplicated lines
+	"struggleEggifyImmuneWomb": ":struggleTransformingImmuneBelly", // duplicated lines
+	"struggleTransformedCock": ":struggleDigestCock", // duplicated lines
+	"struggleTransformingCock": [
+		[
+			"I can feel you getting goopy in there.",
+			"I can feel you tarting to turn~"
+		]
+	],
+	"struggleTransformingImmuneCock": ":struggleEggifyImmuneWomb", // duplicated lines
+	"struggleTransformedBalls": ":struggleShaftTransformed", // duplicated lines
+	"struggleTransformingBalls": ":struggleShaftTransforming", // duplicated lines
+	"struggleTransformingImmuneBalls": ":struggleTransformingImmuneBelly", // duplicated lines
+	"oralVoreLetoutForcedSoftDigestImmune": ":oralVoreLetoutForcedDigestImmune", // duplicated lines
+	"oralVoreLetoutForcedTransformed": [
+		"Now you can see the new you.",
+		"You might look a bit different now."
+	],
 	"oralVoreLetoutForcedTransformingImmune": [
 		"Didn't want to become something like me?",
 		"Didn't like the changes I was making?"
 	],
-	"oralVoreLetoutForcedTransforming": [],
+	"oralVoreLetoutForcedTransforming": ":struggleTransformingImmuneBelly", // duplicated lines
 	"oralVoreLetoutForcedEgged": [
 		"Hah, egg"
 	],
-	"oralVoreLetoutForcedEggifyImmune": [
-		"Don't want to be trapped in an egg?",
-		"You don't like eggs?"
-	],
+	"oralVoreLetoutForcedEggifyImmune": ":struggleLetoutEggify", // duplicated lines
 	"oralVoreLetoutForcedEggify": ":oralVoreLetoutForcedTransforming", // duplicated lines
 	"unbirthVoreLetoutForcedEgged": ":oralVoreLetoutForcedEgged", // duplicated lines
 	"unbirthVoreLetoutForcedEggifyImmune": ":oralVoreLetoutForcedEggifyImmune", // duplicated lines
@@ -3844,13 +2109,7 @@
 		"Hmmm why aren't you turning?",
 		"Come on, don't you want to see what happens?"
 	],
-	"struggling.default.default.default.default.default.default": [
-		[
-			"I'm stuck here aren't I?",
-			"Is there even a way out?",
-			"Trapped..."
-		]
-	],
+	"struggling.default.default.default.default.default.default": ":struggling", // duplicated lines
 	"struggling.default.default.default.shy.default.default": [
 		[
 			"I-I'm stuck here aren't I?",
@@ -3858,7 +2117,7 @@
 			"T-trapped..."
 		]
 	],
-	"strugglingTransformingImmuneBelly": [],
+	"strugglingTransformingImmuneBelly": ":struggleTransformingImmuneBelly", // duplicated lines
 	"strugglingSlimeDigest": [
 		"Ahh... I'm starting to melt into slime.",
 		"Oh my... I'm dissolving.",
@@ -3939,8 +2198,5 @@
 			"<love>(<keysmash>)"
 		]
 	],
-	"anyInfusedOccupant.default.default.default.default.default": [
-		"Just a part of my body~",
-		"Just a part of my body <infusedName>~" // very very placeholder
-	]
+	"anyInfusedOccupant.default.default.default.default.default": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant" // external lines
 }

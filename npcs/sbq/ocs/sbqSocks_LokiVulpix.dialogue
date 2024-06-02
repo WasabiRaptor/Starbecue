@@ -1,5 +1,4 @@
 {
-	"missingDialogue": "Missing Dialogue\n<dialoguePath>",
 	"greetingRewards": [
 		"It was fun messing around!\nHave some stuff."
 	],
@@ -70,6 +69,8 @@
 			"Hehe~"
 		]
 	},
+	"talkAboutKinks": "Missing: talkAboutKinks <dialoguePath>",
+	"talkAboutBody": "Missing: talkAboutBody <dialoguePath>",
 	"talkAboutBodyBelly": [
 		"Its all lined with nice soft fabric~\nSuper cozy and warm~\nPerfect for snuggling~"
 	],
@@ -179,10 +180,29 @@
 		"Hope you enjoy the snuggles~"
 	],
 	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
-	"oralVoreNo": ":defaultNo",
-	"oralVoreTooBig": ":tooBig",
-	"oralVoreTooSmall": ":tooSmall",
-	"oralVoreNoSlots": ":noSlots",
+	"oralVoreNo": ":defaultNo", // duplicated lines
+	"defaultNo": [
+		"Don't really feel like that right now.",
+		"Not right now.",
+		"I'm not in the mood.",
+		"Eh, maybe later."
+	],
+	"oralVoreTooBig": ":tooBig", // duplicated lines
+	"tooBig": [
+		"I don't want to tear myself trying to force you in.",
+		"You're a bit too large, I might pop a seam.",
+		"You should try and make yourself smaller~",
+		"You're a bit too big to stuff into this plushie."
+	],
+	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"tooSmall": [
+		"Sorry but I need something a bit bigger then you",
+		"I don't think I'd really feel you at that size",
+		"You're too short for this ride buddy",
+		"Maybe if you where just a little bigger..."
+	],
+	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"noSlots": "Missing: noSlots <dialoguePath>",
 	"oralVoreFull": [
 		"I might pop a stitch if I try to eat any more!",
 		"My fabric is getting stretched pretty thin!",
@@ -193,42 +213,24 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"oralVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"oralVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"oralVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"defaultNeedsInfusion": "Missing: defaultNeedsInfusion <dialoguePath>",
+	"oralVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"defaultAlreadyInfused": "Missing: defaultAlreadyInfused <dialoguePath>",
+	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"targetPreySettingsMismatch": "Missing: targetPreySettingsMismatch <dialoguePath>",
 	"tailVoreRequested": "Missing: tailVoreRequested <dialoguePath>",
 	"tailVoreRequestedAfter": "Missing: tailVoreRequestedAfter <dialoguePath>",
 	"tailVoreInvalid": "Whoops! tailVore is invalid <dialoguePath>",
-	"tailVoreNo": ":defaultNo",
-	"tailVoreTooBig": ":tooBig",
-	"tailVoreTooSmall": ":tooSmall",
-	"tailVoreNoSlots": ":noSlots",
-	"tailVoreFull": ":defaultFull",
-	"tailVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"tailVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"absorbVoreRequested": "Missing: absorbVoreRequested <dialoguePath>",
-	"absorbVoreRequestedAfter": "Missing: absorbVoreRequestedAfter <dialoguePath>",
-	"absorbVoreInvalid": "Whoops! absorbVore is invalid <dialoguePath>",
-	"absorbVoreNo": ":defaultNo",
-	"absorbVoreTooBig": ":tooBig",
-	"absorbVoreTooSmall": ":tooSmall",
-	"absorbVoreNoSlots": ":noSlots",
-	"absorbVoreFull": ":defaultFull",
-	"absorbVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"absorbVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"absorbVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
-	"navelVoreRequested": "Missing: navelVoreRequested <dialoguePath>",
-	"navelVoreRequestedAfter": "Missing: navelVoreRequestedAfter <dialoguePath>",
-	"navelVoreInvalid": "Whoops! navelVore is invalid <dialoguePath>",
-	"navelVoreNo": ":defaultNo",
-	"navelVoreTooBig": ":tooBig",
-	"navelVoreTooSmall": ":tooSmall",
-	"navelVoreNoSlots": ":noSlots",
-	"navelVoreFull": ":defaultFull",
-	"navelVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"navelVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"navelVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"tailVoreNo": ":defaultNo", // duplicated lines
+	"tailVoreTooBig": ":tooBig", // duplicated lines
+	"tailVoreTooSmall": ":tooSmall", // duplicated lines
+	"tailVoreNoSlots": ":noSlots", // duplicated lines
+	"tailVoreFull": ":defaultFull", // duplicated lines
+	"defaultFull": "Missing: defaultFull <dialoguePath>",
+	"tailVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"tailVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"analVoreRequested": [
 		"You want to go up my butt?",
 		"Aren't satisfied with just staring at my plush butt?",
@@ -246,17 +248,17 @@
 		"You better squirm for me now that you're my toy~"
 	],
 	"analVoreInvalid": "Whoops! analVore is invalid <dialoguePath>",
-	"analVoreNo": ":defaultNo",
-	"analVoreTooBig": ":tooBig",
-	"analVoreTooSmall": ":tooSmall",
-	"analVoreNoSlots": ":noSlots",
+	"analVoreNo": ":defaultNo", // duplicated lines
+	"analVoreTooBig": ":tooBig", // duplicated lines
+	"analVoreTooSmall": ":tooSmall", // duplicated lines
+	"analVoreNoSlots": ":noSlots", // duplicated lines
 	"analVoreFull": [
 		"Sorry, all full back here!",
 		"Afraid I can't fit another in me!"
 	],
-	"analVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"analVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"analVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"analVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"unbirthVoreRequested": [
 		"Spied my zipper down there didn't cha~?",
 		"Hehe, you're gonna be zipped up in the softest sleeping bag possible~",
@@ -277,10 +279,10 @@
 		"I really love putting people inside there,\nget them to drift of to sleep from my belly gently swaying as I walk~"
 	],
 	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
-	"unbirthVoreNo": ":defaultNo",
-	"unbirthVoreTooBig": ":tooBig",
-	"unbirthVoreTooSmall": ":tooSmall",
-	"unbirthVoreNoSlots": ":noSlots",
+	"unbirthVoreNo": ":defaultNo", // duplicated lines
+	"unbirthVoreTooBig": ":tooBig", // duplicated lines
+	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
+	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
 	"unbirthVoreFull": [
 		"I might pop a stitch if I try to stuff any more in there!",
 		"My fabric is getting stretched pretty thin!",
@@ -291,20 +293,20 @@
 		"How about we just snuggle with you out here for now~",
 		"Perhaps we can think of something else to do hmmm~?"
 	],
-	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"breastVoreRequested": "Missing: breastVoreRequested <dialoguePath>",
 	"breastVoreRequestedAfter": "Missing: breastVoreRequestedAfter <dialoguePath>",
 	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
-	"breastVoreNo": ":defaultNo",
-	"breastVoreTooBig": ":tooBig",
-	"breastVoreTooSmall": ":tooSmall",
-	"breastVoreNoSlots": ":noSlots",
-	"breastVoreFull": ":defaultFull",
-	"breastVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"breastVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"breastVoreNo": ":defaultNo", // duplicated lines
+	"breastVoreTooBig": ":tooBig", // duplicated lines
+	"breastVoreTooSmall": ":tooSmall", // duplicated lines
+	"breastVoreNoSlots": ":noSlots", // duplicated lines
+	"breastVoreFull": ":defaultFull", // duplicated lines
+	"breastVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockVoreRequested": [
 		"Spied my attachment down there didn't cha~?",
 		"<infusedName> was rather eager to be my new attachment~\nLets put it to use then~",
@@ -317,22 +319,22 @@
 		"Oooh~ I can really feel <infusedName> twitching down there hehe~"
 	],
 	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
-	"cockVoreNo": ":defaultNo",
+	"cockVoreNo": ":defaultNo", // duplicated lines
 	"cockVoreTooBig": [
 		"I don't want to break <infusedName> trying to force you in.",
 		"You're a bit too large, I might break it.",
 		"You should try and make yourself smaller~",
 		"You're a bit too big to stuff into my dildo."
 	],
-	"cockVoreTooSmall": ":tooSmall",
-	"cockVoreNoSlots": ":noSlots",
+	"cockVoreTooSmall": ":tooSmall", // duplicated lines
+	"cockVoreNoSlots": ":noSlots", // duplicated lines
 	"cockVoreFull": [
 		"Ahh~ my dildo does have a limit to how much it can stretch!",
 		"I don't think you'll be able to fit, even if <infusedName> wants to try..."
 	],
-	"cockVoreNeedsInfusion": ":defaultNeedsInfusion",
-	"cockVoreAlreadyInfused": ":defaultAlreadyInfused",
-	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"bellyInfuseRequested": [
 		"Mm, you love my belly so much... you want to be a part of it?",
 		"You want to become my belly?",
@@ -344,14 +346,14 @@
 		"Try not to make me too hungry..."
 	],
 	"bellyInfuseInvalid": "Whoops! bellyInfuse is invalid <dialoguePath>",
-	"bellyInfuseNo": ":defaultNo",
-	"bellyInfuseTooBig": ":tooBig",
-	"bellyInfuseTooSmall": ":tooSmall",
-	"bellyInfuseNoSlots": ":noSlots",
-	"bellyInfuseFull": ":defaultFull",
-	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"bellyInfuseNo": ":defaultNo", // duplicated lines
+	"bellyInfuseTooBig": ":tooBig", // duplicated lines
+	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
+	"bellyInfuseFull": ":defaultFull", // duplicated lines
+	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"breastInfuseRequested": [
 		"You want to be my boobs?",
 		"Mm, can't wait to be jiggling on my chest can you?",
@@ -363,14 +365,14 @@
 		"Ah, you're already leaking milk~"
 	],
 	"breastInfuseInvalid": "Whoops! breastInfuse is invalid <dialoguePath>",
-	"breastInfuseNo": ":defaultNo",
-	"breastInfuseTooBig": ":tooBig",
-	"breastInfuseTooSmall": ":tooSmall",
-	"breastInfuseNoSlots": ":noSlots",
-	"breastInfuseFull": ":defaultFull",
-	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"breastInfuseNo": ":defaultNo", // duplicated lines
+	"breastInfuseTooBig": ":tooBig", // duplicated lines
+	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
+	"breastInfuseNoSlots": ":noSlots", // duplicated lines
+	"breastInfuseFull": ":defaultFull", // duplicated lines
+	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"pussyInfuseRequested": [
 		"You want to be my pussy?",
 		"Mm, can't wait to be soaking wet down there can you?",
@@ -382,14 +384,14 @@
 		"Ah, you're already sopping wet with excitment~"
 	],
 	"pussyInfuseInvalid": "Whoops! pussyInfuse is invalid <dialoguePath>",
-	"pussyInfuseNo": ":defaultNo",
-	"pussyInfuseTooBig": ":tooBig",
-	"pussyInfuseTooSmall": ":tooSmall",
-	"pussyInfuseNoSlots": ":noSlots",
-	"pussyInfuseFull": ":defaultFull",
-	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"pussyInfuseNo": ":defaultNo", // duplicated lines
+	"pussyInfuseTooBig": ":tooBig", // duplicated lines
+	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
+	"pussyInfuseFull": ":defaultFull", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockInfuseRequested": [
 		"You want to be my cock?",
 		"Mm, can't wait to be throbbing down there can you?",
@@ -401,14 +403,14 @@
 		"Ah, you're already throbbing with excitment~"
 	],
 	"cockInfuseInvalid": "Whoops! cockInfuse is invalid <dialoguePath>",
-	"cockInfuseNo": ":defaultNo",
-	"cockInfuseTooBig": ":tooBig",
-	"cockInfuseTooSmall": ":tooSmall",
-	"cockInfuseNoSlots": ":noSlots",
-	"cockInfuseFull": ":defaultFull",
-	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion",
-	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused",
-	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
+	"cockInfuseNo": ":defaultNo", // duplicated lines
+	"cockInfuseTooBig": ":tooBig", // duplicated lines
+	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
+	"cockInfuseNoSlots": ":noSlots", // duplicated lines
+	"cockInfuseFull": ":defaultFull", // duplicated lines
+	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"oralVoreLetoutRequested": [
 		"You can come out now.",
 		"Time to come out.",
@@ -416,8 +418,6 @@
 		"Time to get out."
 	],
 	"tailVoreLetoutRequested": "Missing: tailVoreLetoutRequested <dialoguePath>",
-	"absorbVoreLetoutRequested": "Missing: absorbVoreLetoutRequested <dialoguePath>",
-	"navelVoreLetoutRequested": "Missing: navelVoreLetoutRequested <dialoguePath>",
 	"analVoreLetoutRequested": [
 		"Was the 'subway' a pleasant trip through?",
 		"Out though my lower exit, come again soon!"
@@ -554,21 +554,9 @@
 	"tailVorePrompt": "Missing: tailVorePrompt <dialoguePath>",
 	"tailVorePromptYes": "Missing: tailVorePromptYes <dialoguePath>",
 	"tailVorePromptYesAfter": "Missing: tailVorePromptYesAfter <dialoguePath>",
-	"tailVorePromptNo": ":defaultNo",
+	"tailVorePromptNo": ":defaultNo", // duplicated lines
 	"tailVorePromptNoYes": "Missing: tailVorePromptNoYes <dialoguePath>",
 	"tailVorePromptNoYesAfter": "Missing: tailVorePromptNoYesAfter <dialoguePath>",
-	"absorbVorePrompt": "Missing: absorbVorePrompt <dialoguePath>",
-	"absorbVorePromptYes": "Missing: absorbVorePromptYes <dialoguePath>",
-	"absorbVorePromptYesAfter": "Missing: absorbVorePromptYesAfter <dialoguePath>",
-	"absorbVorePromptNo": ":defaultNo",
-	"absorbVorePromptNoYes": "Missing: absorbVorePromptNoYes <dialoguePath>",
-	"absorbVorePromptNoYesAfter": "Missing: absorbVorePromptNoYesAfter <dialoguePath>",
-	"navelVorePrompt": "Missing: navelVorePrompt <dialoguePath>",
-	"navelVorePromptYes": "Missing: navelVorePromptYes <dialoguePath>",
-	"navelVorePromptYesAfter": "Missing: navelVorePromptYesAfter <dialoguePath>",
-	"navelVorePromptNo": ":defaultNo",
-	"navelVorePromptNoYes": "Missing: navelVorePromptNoYes <dialoguePath>",
-	"navelVorePromptNoYesAfter": "Missing: navelVorePromptNoYesAfter <dialoguePath>",
 	"analVorePrompt": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -776,46 +764,38 @@
 	"breastVorePrompt": "Missing: breastVorePrompt <dialoguePath>",
 	"breastVorePromptYes": "Missing: breastVorePromptYes <dialoguePath>",
 	"breastVorePromptYesAfter": "Missing: breastVorePromptYesAfter <dialoguePath>",
-	"breastVorePromptNo": ":defaultNo",
+	"breastVorePromptNo": ":defaultNo", // duplicated lines
 	"breastVorePromptNoYes": "Missing: breastVorePromptNoYes <dialoguePath>",
 	"breastVorePromptNoYesAfter": "Missing: breastVorePromptNoYesAfter <dialoguePath>",
 	"cockVorePrompt": "Missing: cockVorePrompt <dialoguePath>",
 	"cockVorePromptYes": "Missing: cockVorePromptYes <dialoguePath>",
 	"cockVorePromptYesAfter": "Missing: cockVorePromptYesAfter <dialoguePath>",
-	"cockVorePromptNo": ":defaultNo",
+	"cockVorePromptNo": ":defaultNo", // duplicated lines
 	"cockVorePromptNoYes": "Missing: cockVorePromptNoYes <dialoguePath>",
 	"cockVorePromptNoYesAfter": "Missing: cockVorePromptNoYesAfter <dialoguePath>",
 	"oralVoreRequesting": "Missing: oralVoreRequesting <dialoguePath>",
 	"oralVoreRequestingYes": "Missing: oralVoreRequestingYes <dialoguePath>",
-	"oralVoreRequestingNo": ":defaultNo",
+	"oralVoreRequestingNo": ":defaultNo", // duplicated lines
 	"oralVoreRequestingNoYes": "Missing: oralVoreRequestingNoYes <dialoguePath>",
 	"tailVoreRequesting": "Missing: tailVoreRequesting <dialoguePath>",
 	"tailVoreRequestingYes": "Missing: tailVoreRequestingYes <dialoguePath>",
-	"tailVoreRequestingNo": ":defaultNo",
+	"tailVoreRequestingNo": ":defaultNo", // duplicated lines
 	"tailVoreRequestingNoYes": "Missing: tailVoreRequestingNoYes <dialoguePath>",
-	"absorbVoreRequesting": "Missing: absorbVoreRequesting <dialoguePath>",
-	"absorbVoreRequestingYes": "Missing: absorbVoreRequestingYes <dialoguePath>",
-	"absorbVoreRequestingNo": ":defaultNo",
-	"absorbVoreRequestingNoYes": "Missing: absorbVoreRequestingNoYes <dialoguePath>",
-	"navelVoreRequesting": "Missing: navelVoreRequesting <dialoguePath>",
-	"navelVoreRequestingYes": "Missing: navelVoreRequestingYes <dialoguePath>",
-	"navelVoreRequestingNo": ":defaultNo",
-	"navelVoreRequestingNoYes": "Missing: navelVoreRequestingNoYes <dialoguePath>",
 	"analVoreRequesting": "Missing: analVoreRequesting <dialoguePath>",
 	"analVoreRequestingYes": "Missing: analVoreRequestingYes <dialoguePath>",
-	"analVoreRequestingNo": ":defaultNo",
+	"analVoreRequestingNo": ":defaultNo", // duplicated lines
 	"analVoreRequestingNoYes": "Missing: analVoreRequestingNoYes <dialoguePath>",
 	"unbirthVoreRequesting": "Missing: unbirthVoreRequesting <dialoguePath>",
 	"unbirthVoreRequestingYes": "Missing: unbirthVoreRequestingYes <dialoguePath>",
-	"unbirthVoreRequestingNo": ":defaultNo",
+	"unbirthVoreRequestingNo": ":defaultNo", // duplicated lines
 	"unbirthVoreRequestingNoYes": "Missing: unbirthVoreRequestingNoYes <dialoguePath>",
 	"breastVoreRequesting": "Missing: breastVoreRequesting <dialoguePath>",
 	"breastVoreRequestingYes": "Missing: breastVoreRequestingYes <dialoguePath>",
-	"breastVoreRequestingNo": ":defaultNo",
+	"breastVoreRequestingNo": ":defaultNo", // duplicated lines
 	"breastVoreRequestingNoYes": "Missing: breastVoreRequestingNoYes <dialoguePath>",
 	"cockVoreRequesting": "Missing: cockVoreRequesting <dialoguePath>",
 	"cockVoreRequestingYes": "Missing: cockVoreRequestingYes <dialoguePath>",
-	"cockVoreRequestingNo": ":defaultNo",
+	"cockVoreRequestingNo": ":defaultNo", // duplicated lines
 	"cockVoreRequestingNoYes": "Missing: cockVoreRequestingNoYes <dialoguePath>",
 	"oralVoreNoPrompt": [
 		"I think I could use some extra belly stuffing~",
@@ -830,10 +810,6 @@
 	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter", // duplicated lines
 	"tailVoreNoPrompt": "Missing: tailVoreNoPrompt <dialoguePath>",
 	"tailVoreNoPromptAfter": "Missing: tailVoreNoPromptAfter <dialoguePath>",
-	"absorbVoreNoPrompt": "Missing: absorbVoreNoPrompt <dialoguePath>",
-	"absorbVoreNoPromptAfter": "Missing: absorbVoreNoPromptAfter <dialoguePath>",
-	"navelVoreNoPrompt": "Missing: navelVoreNoPrompt <dialoguePath>",
-	"navelVoreNoPromptAfter": "Missing: navelVoreNoPromptAfter <dialoguePath>",
 	"analVoreNoPrompt": [
 		"You keep staring at my butt,\nand I'm pretty sure you aren't just reading the tag back there~",
 		"I've got some empty space inisde...\nand you're going to pleasure me on the way in~",
@@ -862,6 +838,7 @@
 	"bellyInfuseNoPrompt": [
 		"I think... I need you in my belly... or... as my belly"
 	],
+	"bellyInfuseNoPromptAfter": "Missing: bellyInfuseNoPromptAfter <dialoguePath>",
 	"breastInfuseNoPrompt": [
 		"Hehe, I think you belong as something else~",
 		"Mm~ I think it'd be fitting to have you jiggling on my chest~",
@@ -897,32 +874,24 @@
 	"tailInfuseNoPromptAfter": "Missing: tailInfuseNoPromptAfter <dialoguePath>",
 	"oralVoreUnprompted": "Missing: oralVoreUnprompted <dialoguePath>",
 	"tailVoreUnprompted": "Missing: tailVoreUnprompted <dialoguePath>",
-	"absorbVoreUnprompted": "Missing: absorbVoreUnprompted <dialoguePath>",
-	"navelVoreUnprompted": "Missing: navelVoreUnprompted <dialoguePath>",
 	"analVoreUnprompted": "Missing: analVoreUnprompted <dialoguePath>",
 	"unbirthVoreUnprompted": "Missing: unbirthVoreUnprompted <dialoguePath>",
 	"breastVoreUnprompted": "Missing: breastVoreUnprompted <dialoguePath>",
 	"cockVoreUnprompted": "Missing: cockVoreUnprompted <dialoguePath>",
 	"oralVoreLetoutUnpromptedAfter": "Missing: oralVoreLetoutUnpromptedAfter <dialoguePath>",
 	"tailVoreLetoutUnpromptedAfter": "Missing: tailVoreLetoutUnpromptedAfter <dialoguePath>",
-	"absorbVoreLetoutUnpromptedAfter": "Missing: absorbVoreLetoutUnpromptedAfter <dialoguePath>",
-	"navelVoreLetoutUnpromptedAfter": "Missing: navelVoreLetoutUnpromptedAfter <dialoguePath>",
 	"analVoreLetoutUnpromptedAfter": "Missing: analVoreLetoutUnpromptedAfter <dialoguePath>",
 	"unbirthVoreLetoutUnpromptedAfter": "Missing: unbirthVoreLetoutUnpromptedAfter <dialoguePath>",
 	"breastVoreLetoutUnpromptedAfter": "Missing: breastVoreLetoutUnpromptedAfter <dialoguePath>",
 	"cockVoreLetoutUnpromptedAfter": "Missing: cockVoreLetoutUnpromptedAfter <dialoguePath>",
 	"oralVoreForcing": "Missing: oralVoreForcing <dialoguePath>",
 	"tailVoreForcing": "Missing: tailVoreForcing <dialoguePath>",
-	"absorbVoreForcing": "Missing: absorbVoreForcing <dialoguePath>",
-	"navelVoreForcing": "Missing: navelVoreForcing <dialoguePath>",
 	"analVoreForcing": "Missing: analVoreForcing <dialoguePath>",
 	"unbirthVoreForcing": "Missing: unbirthVoreForcing <dialoguePath>",
 	"breastVoreForcing": "Missing: breastVoreForcing <dialoguePath>",
 	"cockVoreForcing": "Missing: cockVoreForcing <dialoguePath>",
 	"oralVoreLetoutForcingAfter": "Missing: oralVoreLetoutForcingAfter <dialoguePath>",
 	"tailVoreLetoutForcingAfter": "Missing: tailVoreLetoutForcingAfter <dialoguePath>",
-	"absorbVoreLetoutForcingAfter": "Missing: absorbVoreLetoutForcingAfter <dialoguePath>",
-	"navelVoreLetoutForcingAfter": "Missing: navelVoreLetoutForcingAfter <dialoguePath>",
 	"analVoreLetoutForcingAfter": "Missing: analVoreLetoutForcingAfter <dialoguePath>",
 	"unbirthVoreLetoutForcingAfter": "Missing: unbirthVoreLetoutForcingAfter <dialoguePath>",
 	"breastVoreLetoutForcingAfter": "Missing: breastVoreLetoutForcingAfter <dialoguePath>",
@@ -953,8 +922,6 @@
 		]
 	},
 	"tailVoreForced": "Missing: tailVoreForced <dialoguePath>",
-	"absorbVoreForced": "Missing: absorbVoreForced <dialoguePath>",
-	"navelVoreForced": "Missing: navelVoreForced <dialoguePath>",
 	"analVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1034,8 +1001,6 @@
 		}
 	],
 	"tailVoreLetoutForced": "Missing: tailVoreLetoutForced <dialoguePath>",
-	"absorbVoreLetoutForced": "Missing: absorbVoreLetoutForced <dialoguePath>",
-	"navelVoreLetoutForced": "Missing: navelVoreLetoutForced <dialoguePath>",
 	"analVoreLetoutForced": ":oralVoreLetoutForced", // duplicated lines
 	"unbirthVoreLetoutForced": [
 		"Happy birthday~",
@@ -1112,7 +1077,8 @@
 		]
 	],
 	"struggleCumHeal": "Missing: struggleCumHeal <dialoguePath>",
-	"struggleMiscHeal": ":struggleAcidHeal",
+	"struggleMilkHeal": "Missing: struggleMilkHeal <dialoguePath>",
+	"struggleMiscHeal": ":struggleAcidHeal", // duplicated lines
 	"struggleCompression": [
 		"I can feel you getting so neatly packed in there.",
 		"You're gonna find it hard to move as it gets sooo much tighter.",
@@ -1132,10 +1098,22 @@
 		"How are you still moving around in there?"
 	],
 	"struggleCumDigest": "Missing: struggleCumDigest <dialoguePath>",
+	"struggleCumDigestBalls": "Missing: struggleCumDigestBalls <dialoguePath>",
 	"struggleCumDigestImmune": "Missing: struggleCumDigestImmune <dialoguePath>",
+	"struggleFemcumDigest": [
+		"You're getting so soft...",
+		"Melt for me!"
+	],
+	"struggleFemcumDigestImmune": [
+		"You still kicking in there...? Thought you'd be soft by now.",
+		"Oof! Is my womb not strong enough to melt you or something?",
+		"How are you still fighting? You should be mush in my womb by now!"
+	],
+	"struggleMilkDigest": "Missing: struggleMilkDigest <dialoguePath>",
 	"struggleMilkDigestBreastsShirt": "Missing: struggleMilkDigestBreastsShirt <dialoguePath>",
-	"struggleMiscDigest": ":struggleAcidDigest",
-	"struggleMiscDigestImmune": ":struggleAcidDigestImmune",
+	"struggleMilkDigestImmune": "Missing: struggleMilkDigestImmune <dialoguePath>",
+	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
+	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
 	"struggleTransforming": {
 		"percentage": "transforming",
 		"pools": [
@@ -1161,6 +1139,14 @@
 		"Struggle all you want, you're just helping me drain you faster.",
 		"Soon you'll be too tired to keep up all that moving.",
 		"Giving me a good show AND all of your energy? How generous!"
+	],
+	"struggleEggify": [
+		"Hehe, you're gonna be like a toy in a prize egg soon",
+		"Once this egg is done, you'll be like a hidden prize~"
+	],
+	"anyInfusedOccupant": [
+		"Just a part of my body~",
+		"Just a part of my body <infusedName>~" // very very placeholder
 	],
 	"thighsInfusedOccupant": "Missing: thighsInfusedOccupant <dialoguePath>",
 	"bellyInfusedOccupant": [
@@ -1360,7 +1346,11 @@
 			]
 		}
 	],
-	"strugglingMiscHeal": ":strugglingAcidHeal",
+	"strugglingFemcumHeal": "Missing: strugglingFemcumHeal <dialoguePath>",
+	"strugglingCumHeal": "Missing: strugglingCumHeal <dialoguePath>",
+	"strugglingMilkHeal": "Missing: strugglingMilkHeal <dialoguePath>",
+	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingCompression": "Missing: strugglingCompression <dialoguePath>",
 	"strugglingAcidDigest": [
 		"Ahh... these acids are soaking into me!",
 		"Ahhh... starting to get mushy...",
@@ -1381,17 +1371,47 @@
 		"I'm really going to need a wash after this..."
 	],
 	"strugglingCumDigest": "Missing: strugglingCumDigest <dialoguePath>",
-
+	"strugglingCumDigestBalls": [
+		"All this cum sloshing around me~",
+		"Ahhh... I'm stored in the balls~",
+		"Stuck down here in your balls~",
+		"This is so hot~",
+		"I-I'm getting stained white...",
+		"Ohh... I'm getting all mushy...",
+		"Mmmm... I'm just... so soaked with cum~",
+		"Aaaa~ I'm going to need much more than a wash after this!~"
+	],
 	"strugglingCumDigestImmune": "Missing: strugglingCumDigestImmune <dialoguePath>",
+	"strugglingFemcumDigest": "Missing: strugglingFemcumDigest <dialoguePath>",
+	"strugglingFemcumDigestImmune": [
+		"A-all this is doing is staining me white!",
+		"I-I'm never going to turn,\nall you're doing is making me more messy!",
+		"Wombs are supposed to be a safe place..."
+	],
+	"strugglingMilkDigest": [
+		"All this milk is starting to stain me!",
+		"Ahhh~ I'm getting all mushy from all this squeezing!",
+		"Aaaa I'm going to need much more than a wash after this!~"
+	],
 	"strugglingMilkDigestBreastsShirt": "Missing: strugglingMilkDigestBreastsShirt <dialoguePath>",
-	"strugglingMiscDigest": ":strugglingAcidDigest",
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
+	"strugglingMilkDigestImmune": ":strugglingCumDigestImmuneBalls", // duplicated lines
+	"strugglingCumDigestImmuneBalls": [
+		"A-all this is doing is staining me white!",
+		"I-I'm not going to turn,\nall you're doing is making me more messy!"
+	],
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingTransforming": "Missing: strugglingTransforming <dialoguePath>",
 	"strugglingDrainEnergy": [
 		"I... I'm feeling so tired...",
 		"It's getting harder to move...",
 		"I'm losing the energy to struggle...",
 		"I can barely even squirm..."
+	],
+	"strugglingEggify": [
+		"Is this... an egg?",
+		"Are you making an egg around me?",
+		"I'm gonna be trapped in an egg!"
 	],
 	"anyInfused": "Missing: anyInfused <dialoguePath>",
 	"thighsInfused": "Missing: thighsInfused <dialoguePath>",
@@ -1770,6 +1790,68 @@
 			}
 		}
 	},
+	// Unused Dialogue 
+	"missingDialogue": "Missing Dialogue\n<dialoguePath>",
+	"absorbVoreRequested": "Missing: absorbVoreRequested <dialoguePath>",
+	"absorbVoreRequestedAfter": "Missing: absorbVoreRequestedAfter <dialoguePath>",
+	"absorbVoreInvalid": "Whoops! absorbVore is invalid <dialoguePath>",
+	"absorbVoreNo": ":defaultNo", // duplicated lines
+	"absorbVoreTooBig": ":tooBig", // duplicated lines
+	"absorbVoreTooSmall": ":tooSmall", // duplicated lines
+	"absorbVoreNoSlots": ":noSlots", // duplicated lines
+	"absorbVoreFull": ":defaultFull", // duplicated lines
+	"absorbVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"absorbVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"absorbVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"navelVoreRequested": "Missing: navelVoreRequested <dialoguePath>",
+	"navelVoreRequestedAfter": "Missing: navelVoreRequestedAfter <dialoguePath>",
+	"navelVoreInvalid": "Whoops! navelVore is invalid <dialoguePath>",
+	"navelVoreNo": ":defaultNo", // duplicated lines
+	"navelVoreTooBig": ":tooBig", // duplicated lines
+	"navelVoreTooSmall": ":tooSmall", // duplicated lines
+	"navelVoreNoSlots": ":noSlots", // duplicated lines
+	"navelVoreFull": ":defaultFull", // duplicated lines
+	"navelVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"navelVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"navelVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"absorbVoreLetoutRequested": "Missing: absorbVoreLetoutRequested <dialoguePath>",
+	"navelVoreLetoutRequested": "Missing: navelVoreLetoutRequested <dialoguePath>",
+	"absorbVorePrompt": "Missing: absorbVorePrompt <dialoguePath>",
+	"absorbVorePromptYes": "Missing: absorbVorePromptYes <dialoguePath>",
+	"absorbVorePromptYesAfter": "Missing: absorbVorePromptYesAfter <dialoguePath>",
+	"absorbVorePromptNo": ":defaultNo", // duplicated lines
+	"absorbVorePromptNoYes": "Missing: absorbVorePromptNoYes <dialoguePath>",
+	"absorbVorePromptNoYesAfter": "Missing: absorbVorePromptNoYesAfter <dialoguePath>",
+	"navelVorePrompt": "Missing: navelVorePrompt <dialoguePath>",
+	"navelVorePromptYes": "Missing: navelVorePromptYes <dialoguePath>",
+	"navelVorePromptYesAfter": "Missing: navelVorePromptYesAfter <dialoguePath>",
+	"navelVorePromptNo": ":defaultNo", // duplicated lines
+	"navelVorePromptNoYes": "Missing: navelVorePromptNoYes <dialoguePath>",
+	"navelVorePromptNoYesAfter": "Missing: navelVorePromptNoYesAfter <dialoguePath>",
+	"absorbVoreRequesting": "Missing: absorbVoreRequesting <dialoguePath>",
+	"absorbVoreRequestingYes": "Missing: absorbVoreRequestingYes <dialoguePath>",
+	"absorbVoreRequestingNo": ":defaultNo", // duplicated lines
+	"absorbVoreRequestingNoYes": "Missing: absorbVoreRequestingNoYes <dialoguePath>",
+	"navelVoreRequesting": "Missing: navelVoreRequesting <dialoguePath>",
+	"navelVoreRequestingYes": "Missing: navelVoreRequestingYes <dialoguePath>",
+	"navelVoreRequestingNo": ":defaultNo", // duplicated lines
+	"navelVoreRequestingNoYes": "Missing: navelVoreRequestingNoYes <dialoguePath>",
+	"absorbVoreNoPrompt": "Missing: absorbVoreNoPrompt <dialoguePath>",
+	"absorbVoreNoPromptAfter": "Missing: absorbVoreNoPromptAfter <dialoguePath>",
+	"navelVoreNoPrompt": "Missing: navelVoreNoPrompt <dialoguePath>",
+	"navelVoreNoPromptAfter": "Missing: navelVoreNoPromptAfter <dialoguePath>",
+	"absorbVoreUnprompted": "Missing: absorbVoreUnprompted <dialoguePath>",
+	"navelVoreUnprompted": "Missing: navelVoreUnprompted <dialoguePath>",
+	"absorbVoreLetoutUnpromptedAfter": "Missing: absorbVoreLetoutUnpromptedAfter <dialoguePath>",
+	"navelVoreLetoutUnpromptedAfter": "Missing: navelVoreLetoutUnpromptedAfter <dialoguePath>",
+	"absorbVoreForcing": "Missing: absorbVoreForcing <dialoguePath>",
+	"navelVoreForcing": "Missing: navelVoreForcing <dialoguePath>",
+	"absorbVoreLetoutForcingAfter": "Missing: absorbVoreLetoutForcingAfter <dialoguePath>",
+	"navelVoreLetoutForcingAfter": "Missing: navelVoreLetoutForcingAfter <dialoguePath>",
+	"absorbVoreForced": "Missing: absorbVoreForced <dialoguePath>",
+	"navelVoreForced": "Missing: navelVoreForced <dialoguePath>",
+	"absorbVoreLetoutForced": "Missing: absorbVoreLetoutForced <dialoguePath>",
+	"navelVoreLetoutForced": "Missing: navelVoreLetoutForced <dialoguePath>",
 	// Unused Dialogue
 	"blankLine": [
 		""
@@ -1777,24 +1859,6 @@
 	"greetingIntroduced": [
 		"Hi <entityname>!",
 		"Hey there <entityname>!"
-	],
-	"defaultNo": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
-	"tooBig": [
-		"I don't want to tear myself trying to force you in.",
-		"You're a bit too large, I might pop a seam.",
-		"You should try and make yourself smaller~",
-		"You're a bit too big to stuff into this plushie."
-	],
-	"tooSmall": [
-		"Sorry but I need something a bit bigger then you",
-		"I don't think I'd really feel you at that size",
-		"You're too short for this ride buddy",
-		"Maybe if you where just a little bigger..."
 	],
 	"oralVoreDigestFull": [
 		"Maybe after I melt down the last meal",
@@ -1878,15 +1942,6 @@
 			"You should stay for a while,\nI'll keep you safe tucked away inside me~"
 		]
 	],
-	"struggleFemcumDigest": [
-		"You're getting so soft...",
-		"Melt for me!"
-	],
-	"struggleFemcumDigestImmune": [
-		"You still kicking in there...? Thought you'd be soft by now.",
-		"Oof! Is my womb not strong enough to melt you or something?",
-		"How are you still fighting? You should be mush in my womb by now!"
-	],
 	"struggleCompressionWomb": [
 		"Do you feel my womb tightening around you as you move around?",
 		"I don't think that struggling will stop you from getting compressed in my womb.",
@@ -1918,26 +1973,26 @@
 		"Bleh! Did you get out before being encased, or is it something else?",
 		"If only you where easier to put in an egg, maybe I could've had more fun with you."
 	],
-	"oralVoreLetoutForcedDigested": ":blankLine",
-	"oralVoreLetoutForcedDigest": ":blankLine",
-	"oralVoreLetoutForcedDigestImmune": ":blankLine",
-	"oralVoreLetoutForcedSoftDigest": ":blankLine",
+	"oralVoreLetoutForcedDigested": ":blankLine", // duplicated lines
+	"oralVoreLetoutForcedDigest": ":blankLine", // duplicated lines
+	"oralVoreLetoutForcedDigestImmune": ":blankLine", // duplicated lines
+	"oralVoreLetoutForcedSoftDigest": ":blankLine", // duplicated lines
 	"oralVoreLetoutForcedHeal": [
 		"You do know its safer inside me right?",
 		"Are you sure you're ready to come out?",
 		"Maybe you should get back in... rest a little longer~",
 		"You can come back to rest any time~"
 	],
-	"analVoreLetoutForcedDigested": ":blankLine",
-	"analVoreLetoutForcedDigest": ":blankLine",
-	"analVoreLetoutForcedDigestImmune": ":blankLine",
-	"analVoreLetoutForcedSoftDigest": ":blankLine",
-	"analVoreLetoutForcedHeal": ":oralVoreLetoutForcedHeal",
-	"unbirthVoreLetoutForcedDigested": ":error",
-	"unbirthVoreLetoutForcedDigest": ":error",
-	"unbirthVoreLetoutForcedDigestImmune": ":error",
-	"unbirthVoreLetoutForcedSoftDigest": ":error",
-	"unbirthVoreLetoutForcedHeal": ":oralVoreLetoutForcedHeal",
+	"analVoreLetoutForcedDigested": ":blankLine", // duplicated lines
+	"analVoreLetoutForcedDigest": ":blankLine", // duplicated lines
+	"analVoreLetoutForcedDigestImmune": ":blankLine", // duplicated lines
+	"analVoreLetoutForcedSoftDigest": ":blankLine", // duplicated lines
+	"analVoreLetoutForcedHeal": ":oralVoreLetoutForcedHeal", // duplicated lines
+	"unbirthVoreLetoutForcedDigested": ":error", // duplicated lines
+	"unbirthVoreLetoutForcedDigest": ":error", // duplicated lines
+	"unbirthVoreLetoutForcedDigestImmune": ":error", // duplicated lines
+	"unbirthVoreLetoutForcedSoftDigest": ":error", // duplicated lines
+	"unbirthVoreLetoutForcedHeal": ":oralVoreLetoutForcedHeal", // duplicated lines
 	"letoutTransformingImmune": [
 		"You don't look any different from how you went in, strange...",
 		"Did you have some kind of device to keep you from morphing?",
@@ -1978,14 +2033,14 @@
 		"Probably best to get you out of there, so I can eat something else.",
 		"Can't even melt you down the tiniest bit."
 	],
-	"oralVoreLetoutRequestedSoftDigest": ":oralVoreLetoutRequestedDigest",
+	"oralVoreLetoutRequestedSoftDigest": ":oralVoreLetoutRequestedDigest", // duplicated lines
 	"oralVoreLetoutRequestedHeal": [
 		"You're probably patched up enough.",
 		"I think you've spent enough time healing.",
 		"I think you should be feeling much better now.",
 		"My stomach does wonders for healing, doesn't it?"
 	],
-	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
+	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
 	"analVoreLetoutRequestedDigest": [
 		"I think you won't be adding to my rear today, butt buddy!",
 		"I'll let you go this time, but next time my rear will catch you!"
@@ -1994,10 +2049,7 @@
 		"Just leave via my 'exit', since it can't even soften you up.",
 		"You're free to go, since my bottom can't melt you at all."
 	],
-	"analVoreLetoutRequestedSoftDigest": [
-		"I think you won't be adding to my rear today, butt buddy!",
-		"I'll let you go this time, but next time my rear will catch you!"
-	],
+	"analVoreLetoutRequestedSoftDigest": ":analVoreLetoutRequestedDigest", // duplicated lines
 	"analVoreLetoutRequestedHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -2018,7 +2070,7 @@
 	"unbirthVoreLetoutRequestedDigestImmune": [
 		"Seems like you're not melting, so I'm gonna let you out."
 	],
-	"unbirthVoreLetoutRequestedSoftDigest": ":unbirthVoreLetoutRequestedDigest",
+	"unbirthVoreLetoutRequestedSoftDigest": ":unbirthVoreLetoutRequestedDigest", // duplicated lines
 	"unbirthVoreLetoutRequestedHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -2030,10 +2082,6 @@
 			"Feels like my womb's juices have gotten you all patched up, so i'ts time to let you out."
 		]
 	},
-	"anyInfusedOccupant": [
-		"Just a part of my body~",
-		"Just a part of my body <infusedName>~" // very very placeholder
-	],
 	"strugglingSlime": [
 		"This slime is so sticky.",
 		"Stuck suspended in slime...",
@@ -2069,16 +2117,6 @@
 			]
 		]
 	},
-	"strugglingFemcumDigestImmune": [
-		"A-all this is doing is staining me white!",
-		"I-I'm never going to turn,\nall you're doing is making me more messy!",
-		"Wombs are supposed to be a safe place..."
-	],
-	"strugglingEggify": [
-		"Is this... an egg?",
-		"Are you making an egg around me?",
-		"I'm gonna be trapped in an egg!"
-	],
 	"strugglingDigestCock": [
 		"Ahh~ your cock is squeezing tight around me~",
 		"Ohhh~ Your shaft is squeezing so hard~",
@@ -2089,27 +2127,7 @@
 		"Ahhh~ I'm getting all mushy from all this throbbing and squeezing!",
 		"Aaaa I'm going to need much more than a wash after this!~"
 	],
-	"strugglingDigestImmuneCock": ":strugglingCumDigestImmuneBalls",
-	"strugglingCumDigestImmuneBalls": [
-		"A-all this is doing is staining me white!",
-		"I-I'm not going to turn,\nall you're doing is making me more messy!"
-	],
-	"strugglingCumDigestBalls": [
-		"All this cum sloshing around me~",
-		"Ahhh... I'm stored in the balls~",
-		"Stuck down here in your balls~",
-		"This is so hot~",
-		"I-I'm getting stained white...",
-		"Ohh... I'm getting all mushy...",
-		"Mmmm... I'm just... so soaked with cum~",
-		"Aaaa~ I'm going to need much more than a wash after this!~"
-	],
-	"strugglingMilkDigest": [
-		"All this milk is starting to stain me!",
-		"Ahhh~ I'm getting all mushy from all this squeezing!",
-		"Aaaa I'm going to need much more than a wash after this!~"
-	],
-	"strugglingMilkDigestImmune": ":strugglingCumDigestImmuneBalls",
+	"strugglingDigestImmuneCock": ":strugglingCumDigestImmuneBalls", // duplicated lines
 	"ballsInfused": [
 		"<slowlove>",
 		"<love>",
@@ -2167,11 +2185,7 @@
 	"struggleEggedWomb": [
 		"Now you're trapped in an egg"
 	],
-	"struggleEggify": [
-		"Hehe, you're gonna be like a toy in a prize egg soon",
-		"Once this egg is done, you'll be like a hidden prize~"
-	],
-	"struggleTransformingEgged" : [
+	"struggleTransformingEgged": [
 		"Hehe, you'll just be a plushie toy in a prize egg when I'm done~"
 	],
 	"struggleEggifyImmuneWomb": [

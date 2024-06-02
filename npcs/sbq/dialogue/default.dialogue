@@ -16,6 +16,9 @@
 		"Hello Captain.",
 		"Captain."
 	],
+	"greetingIntroduced": [
+		"Hi there <entityName>!"
+	],
 	"crewStay": [
 		"I'll be right here.",
 		"Staying here.",
@@ -383,18 +386,8 @@
 		]
 	},
 	"cockVoreInvalid": "There must be an error, cockVore is invalid",
-	"cockVoreNo": [
-		"Don't really feel like that right now.",
-		"Not right now.",
-		"I'm not in the mood.",
-		"Eh, maybe later."
-	],
-	"cockVoreTooBig": [
-		"I think you're a bit too big to fit in there...",
-		"I don't think I'd be able to get you in...",
-		"If only you were a bit smaller...",
-		"Thats a bit too much to ask of me..."
-	],
+	"cockVoreNo": ":defaultNo", // duplicated lines
+	"cockVoreTooBig": ":tooBig", // duplicated lines
 	"cockVoreTooSmall": ":tooSmall", // duplicated lines
 	"cockVoreNoSlots": ":noSlots", // duplicated lines
 	"cockVoreFull": [
@@ -2606,11 +2599,6 @@
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
-	"struggle": [
-		"Having a good time in there?",
-		"I hope it's comfortable enough for you.",
-		"I can feel you squirming around in there..."
-	],
 	"struggleBelly": [
 		"Having a good time in there?",
 		"I hope it's comfortable enough for you.",
@@ -2620,7 +2608,7 @@
 		"Ahh.. I can feel you kicking hehe...",
 		"MMM~ keep that up~"
 	],
-	"struggleTail": ":struggle",
+	"struggleTail": ":struggleBelly", // duplicated lines
 	"struggleBreasts": [
 		"Having a good time in there?",
 		"Hope it's comfortable.",
@@ -2900,7 +2888,7 @@
 	],
 	"strugglingCumDigest": [
 		"It's so hot in here, I think I'm melting~",
-		"I might be starting to turn white~",
+		"I might be starting to turn white~"
 	],
 	"strugglingCumDigestBalls": [
 		"It won't be long until I'm just cum sloshing around in your nuts~"
@@ -2932,8 +2920,8 @@
 	"strugglingMilkDigestImmune": [
 		"Huh, kinda squeezy..."
 	],
-	"strugglingMiscDigest": ":strugglingAcidDigest",
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingTransforming": [
 		"It feels kinda weird in here?",
 		"It feels like... I'm changing?"
@@ -3017,7 +3005,8 @@
 		]
 	],
 	"pawInfused": [
-
+		"<slowlove>(I belong down here~)",
+		"<slowlove>(Pressed underfoot~)"
 	],
 	"tailInfused": [
 		"<slowlove>(I belong back here~)",
