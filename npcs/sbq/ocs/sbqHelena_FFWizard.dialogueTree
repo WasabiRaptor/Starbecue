@@ -69,8 +69,8 @@
 			"replace" : {"dialogueRandom":[":hellhoundConverse"]},
 			"next" : "percentage",
 			"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-			"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundHornyConverse"]}},
-			"food" : {"replace" : {"dialogueRandom" : [":hellhoundHungryConverse"]}}
+			"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundConverseHorny"]}},
+			"food" : {"replace" : {"dialogueRandom" : [":hellhoundConverseHungry"]}}
 		},
 		"otherOptions" : {
 			"add" : {
@@ -128,8 +128,8 @@
 				"replace" : {"dialogueRandom":[":hellhoundCurious"]},
 				"next" : "percentage",
 				"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-				"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundHornyCurious"]}},
-				"food" : {"replace" : {"dialogueRandom" : [":hellhoundHungryCurious"]}}
+				"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundCuriousHorny"]}},
+				"food" : {"replace" : {"dialogueRandom" : [":hellhoundCuriousHungry"]}}
 			}
 		},
 		"who" : {
@@ -158,12 +158,12 @@
 					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
 					"sbqLust" : {
 						"replace" : {
-							"dialogueRandom" : [":hellhoundHornyCuriousWhoAreYou"]
+							"dialogueRandom" : [":hellhoundCuriousWhoAreYouHorny"]
 						}
 					},
 					"food" : {
 						"replace" : {
-							"dialogueRandom" : [":hellhoundHungryCuriousWhoAreYou"]
+							"dialogueRandom" : [":hellhoundCuriousWhoAreYouHungry"]
 						}
 					}
 				}
@@ -194,12 +194,12 @@
 					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
 					"sbqLust" : {
 						"replace" : {
-							"dialogueRandom" : [":hellhoundHornyCuriousHellhound"]
+							"dialogueRandom" : [":hellhoundCuriousHellhoundHorny"]
 						}
 					},
 					"food" : {
 						"replace" : {
-							"dialogueRandom" : [":hellhoundHungryCuriousHellhound"]
+							"dialogueRandom" : [":hellhoundCuriousHellhoundHungry"]
 						}
 					}
 				}
@@ -282,8 +282,8 @@
 					"replace" : {"dialogueRandom":[":hellhoundQuestionAnswered2"]},
 					"next" : ["percentage"],
 					"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-					"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundHornyQuestionAnswered2"]}},
-					"food" : {"replace" : {"dialogueRandom" : [":hellhoundHungryQuestionAnswered2"]}}
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundQuestionAnswered2Horny"]}},
+					"food" : {"replace" : {"dialogueRandom" : [":hellhoundQuestionAnswered2Hungry"]}}
 				}
 			}
 		}

@@ -63,7 +63,7 @@
 		]
 	},
 	"hellhoundConverse": ":converse", // duplicated lines
-	"hellhoundHornyConverse": {
+	"hellhoundConverseHorny": {
 		"dialogueRandom": [
 			"You're looking like fire today.",
 			"My my, such a delightful demonic body.",
@@ -78,7 +78,7 @@
 			"Thanks!"
 		]
 	},
-	"hellhoundHungryConverse": ":hungryConverse", // duplicated lines
+	"hellhoundConverseHungry": ":hungryConverse", // duplicated lines
 	"curious": {
 		"dialogueRandom": [
 			"So, what are you curious about?",
@@ -107,8 +107,8 @@
 		]
 	},
 	"hellhoundCurious": ":curious", // duplicated lines
-	"hellhoundHornyCurious": ":hornyCurious", // duplicated lines
-	"hellhoundHungryCurious": {
+	"hellhoundCuriousHorny": ":hornyCurious", // duplicated lines
+	"hellhoundCuriousHungry": {
 		"dialogueRandom": [
 			"Sorry in advance if you hear me grumble. That's just my belly talking.",
 			"Better not forget my table manners. What's up?",
@@ -176,7 +176,7 @@
 			"Happy.png"
 		]
 	},
-	"hellhoundHornyCuriousWhoAreYou": {
+	"hellhoundCuriousWhoAreYouHorny": {
 		"dialogue": [
 			"I'm ^red;Helena^reset;, a hellhound that's unfortunately still not related to that sexy one named after the moon.",
 			"Has anyone ever told you just how good you look as a hellhound?",
@@ -191,7 +191,7 @@
 			"OwO.png"
 		]
 	},
-	"hellhoundHungryCuriousWhoAreYou": {
+	"hellhoundCuriousWhoAreYouHungry": {
 		"dialogue": [
 			"*gurgle* Sorry, but our chat has to be a little short. I'm ^red;Helena^reset;. A hellhound, much like yourself.",
 			"Heh, I'm pretty sure why, but somehow you look even tastier than before.",
@@ -257,7 +257,7 @@
 			"Happy.png"
 		]
 	},
-	"hellhoundHornyCuriousHellhound": {
+	"hellhoundCuriousHellhoundHorny": {
 		"dialogue": [
 			"Yep. We're not succubi, but we certainly know how to get things nice and heated up~",
 			"You'll get a better feel for it as you go along, <entityname>. Your prey might literally melt within you~",
@@ -272,7 +272,7 @@
 			"Blep.png"
 		]
 	},
-	"hellhoundHungryCuriousHellhound": {
+	"hellhoundCuriousHellhoundHungry": {
 		"dialogue": [
 			"Yep. Most of us have pretty legendary appetites. Think of it like a hot dog eating contest, only it's a hot dog doing the eating. You, me, we're both hot dogs.",
 			"Trust me, our insides can get warmer than most volcanic planets. Want to test that out?"
@@ -406,10 +406,10 @@
 			"Sleepy.png"
 		]
 	},
-	"curiousBellySoftDigest": [
+	"curiousBellyDigest": [
 		"It's pretty active right now. No need to worry, though."
 	],
-	"hornyCuriousBellySoftDigest": {
+	"hornyCuriousBellyDigest": {
 		"dialogue": [
 			"It's going to be slightly hotter than what you'd like. Just enough to sizzle you down~"
 		],
@@ -417,7 +417,7 @@
 			"Determined.png"
 		]
 	},
-	"hungryCuriousBellySoftDigest": {
+	"hungryCuriousBellyDigest": {
 		"dialogue": [
 			"It'll be hot. Melty, even. I can still keep you safe, though."
 		],
@@ -454,7 +454,7 @@
 			"Happy.png"
 		]
 	},
-	"hellhoundHornyQuestionAnswered2": {
+	"hellhoundQuestionAnswered2Horny": {
 		"dialogue": [
 			"Sure! It's rare to talk to someone that looks as hot as you do as a hellhound."
 		],
@@ -462,7 +462,7 @@
 			"OwO.png"
 		]
 	},
-	"hellhoundHungryQuestionAnswered2": {
+	"hellhoundQuestionAnswered2Hungry": {
 		"dialogue": [
 			"Of course! Ask away, you tasty dog.",
 			"Sure! It's rare to have someone that doesn't just run away upon seeing me so hungry."
@@ -2192,7 +2192,7 @@
 		"I could probably give you a lick, but that's it...",
 		" ...Not right now, my body has its limits..."
 	],
-	"oralVoreHungryRequested": {
+	"oralVoreRequestedHungry": {
 		"dialogueRandom": [
 			"Offering yourself to me? I appreciate it. My gut will, too.",
 			"I certainly don't mind a willing snack.",
@@ -2203,7 +2203,7 @@
 			"Sleepy.png"
 		]
 	},
-	"oralVoreHornyRequested": {
+	"oralVoreRequestedHorny": {
 		"dialogueRandom": [
 			"I bet you can't wait to be trapped in my hot, gurgly gut. Who knows if I'll ever let you out~",
 			"My my, what a hot looking <entityname>~",
@@ -2214,7 +2214,7 @@
 			"Determined.png"
 		]
 	},
-	"oralVoreHungryRequestedAfter": {
+	"oralVoreRequestedAfterHungry": {
 		"dialogueRandom": [
 			"Absolutely divine. My taste buds and gut both send their compliments.",
 			"You are just what I needed, <entityname>.",
@@ -2225,7 +2225,7 @@
 			"Relieved.png"
 		]
 	},
-	"oralVoreHornyRequestedAfter": {
+	"oralVoreRequestedAfterHorny": {
 		"dialogueRandom": [
 			"Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~",
 			"In terms of taste, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~",
@@ -2236,7 +2236,7 @@
 			"Blep.png"
 		]
 	},
-	"oralVoreHungryNoPrompt": {
+	"oralVoreNoPromptHungry": {
 		"dialogueRandom": [
 			"My stomach won't stop grumbling. You should do nicely.",
 			"Your adventure is going to have to wait.",
@@ -2247,7 +2247,7 @@
 			"Sleepy.png"
 		]
 	},
-	"oralVoreHornyNoPrompt": {
+	"oralVoreNoPromptHorny": {
 		"dialogueRandom": [
 			"I was going to ask, but nope. You're far too hot to pass up~",
 			"Am I being too forward? Maybe. But the only direction you're going is down~",
@@ -2258,7 +2258,7 @@
 			"Determined.png"
 		]
 	},
-	"oralVoreHungryNoPromptAfter": {
+	"oralVoreNoPromptAfterHungry": {
 		"dialogueRandom": [
 			"Mm, that might quell my inner fire a bit.",
 			"There there, stomach, help is on the way.",
@@ -2269,7 +2269,7 @@
 			"Relieved.png"
 		]
 	},
-	"oralVoreHornyNoPromptAfter": {
+	"oralVoreNoPromptAfterHorny": {
 		"dialogueRandom": [
 			"I gotta say, you taste as good as you look~",
 			"You're all mine now~",
@@ -2280,7 +2280,7 @@
 			"Blep.png"
 		]
 	},
-	"oralVoreHungryNo": {
+	"oralVoreNoHungry": {
 		"dialogueRandom": [
 			"While I am positively ^red;ravenous^reset;, I can't guarantee your safety. Ask me again once I have things under control.",
 			"Sorry, no can do. ^red;It wouldn't be pleasant.^reset;",
@@ -2291,7 +2291,7 @@
 			"Hurt.png"
 		]
 	},
-	"oralVoreHornyNo": {
+	"oralVoreNoHorny": {
 		"dialogueRandom": [
 			"Sorry, you'll have to wait. I'm getting the temperature just right~",
 			"My tummy is off limits for now. I'm not quite ready.",
@@ -2302,7 +2302,7 @@
 			"Relieved.png"
 		]
 	},
-	"oralVoreHungryTooBig": {
+	"oralVoreTooBigHungry": {
 		"dialogueRandom": [
 			"Wow! You're far too big for even me to handle with how hungry I am.",
 			"I really, REALLY, want to, but even I know my limits.",
@@ -2313,7 +2313,7 @@
 			"Shocked.png"
 		]
 	},
-	"oralVoreHornyTooBig": {
+	"oralVoreTooBigHorny": {
 		"dialogueRandom": [
 			"Wow! You're far too big for even me to handle with how ^pink;heated^reset; I am.",
 			"I badly want to, but even I know my limits.",
@@ -2324,7 +2324,7 @@
 			"awe.png"
 		]
 	},
-	"oralVoreHungryFull": {
+	"oralVoreFullHungry": {
 		"dialogueRandom": [
 			"Normally, I'd be all 'heck yeah', but heck no. I don't have room.",
 			"They're keeping my gut nice and quiet. You look like you'd get the party started. Next time, dear.",
@@ -2335,7 +2335,7 @@
 			"Sleepy.png"
 		]
 	},
-	"oralVoreHornyFull": {
+	"oralVoreFullHorny": {
 		"dialogueRandom": [
 			"A tad late, dear. We're sharing a bit of a private moment~",
 			"Next time, good lookin'. Don't worry, I have plans for you~",
@@ -2346,13 +2346,13 @@
 			"Determined.png"
 		]
 	},
-	"oralVoreSoftDigestFull": [
+	"oralVoreDigestFull": [
 		"It might look like I've got space, but they want me all to themselves. Sorry~",
 		"Ah, there's no need to worry. They'll be perfectly fine. \nYou will be too once I get to you~",
 		"Eager to get turned into pudge, are you? It'll be a bit of a wait. Maybe even a long one...",
 		"Hmhm, do I look nice and empty? Oh, it's nothing."
 	],
-	"oralVoreHungryFullSoftDigest": {
+	"oralVoreFullDigestHungry": {
 		"dialogueRandom": [
 			"Hm? Nothing to see here. Any cries for help are just your imagination.",
 			"Yummy... Just reminiscing about a tasty meal. Come back later.",
@@ -2363,7 +2363,7 @@
 			"Sleepy.png"
 		]
 	},
-	"oralVoreHornyFullSoftDigest": {
+	"oralVoreFullDigestHorny": {
 		"dialogueRandom": [
 			"Mmnf, this is easily my favorite part. Oh? It's nothing~",
 			"They're on an extended vacation. It's somewhere ^pink;steamy^reset; and noisy.",
@@ -2380,7 +2380,7 @@
 		"Eager for healing as well, are you? Perhaps I have an opening elsewhere~",
 		"The sauna's occupied. You'll have to book a later session."
 	],
-	"oralVoreHungryFullHeal": {
+	"oralVoreFullHealHungry": {
 		"dialogueRandom": [
 			"Ssh... My belly's trying to rest. Oh, and my prey, too.",
 			"Their adventure is on pause right now. Come back later and I'll pause yours, too.",
@@ -2391,7 +2391,7 @@
 			"Sleepy.png"
 		]
 	},
-	"oralVoreHornyFullHeal": {
+	"oralVoreFullHealHorny": {
 		"dialogueRandom": [
 			"Soon. Both of us have needs we're currently filling.",
 			"Mm, I may be able to fit you in elsewhere~ \nThey're getting some much needed rest.",
@@ -2411,7 +2411,7 @@
 	"needsInfusion": [
 		"I'd want someone merged in there"
 	],
-	"analVoreHungryRequestedAfter": {
+	"analVoreRequestedAfterHungry": {
 		"dialogueRandom": [
 			"Absolutely splendid. My rear and gut both send their compliments.",
 			"You are just what I needed, <entityname>.",
@@ -2422,7 +2422,7 @@
 			"Relieved.png"
 		]
 	},
-	"analVoreHornyRequestedAfter": {
+	"analVoreRequestedAfterHorny": {
 		"dialogueRandom": [
 			"Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~",
 			"In terms of feel, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~",
@@ -2433,7 +2433,7 @@
 			"Blep.png"
 		]
 	},
-	"analVoreHungryNoPrompt": {
+	"analVoreNoPromptHungry": {
 		"dialogueRandom": [
 			"My stomach won't stop grumbling. You should do nicely.",
 			"Your adventure is going to have to wait.",
@@ -2444,7 +2444,7 @@
 			"Sleepy.png"
 		]
 	},
-	"analVoreHornyNoPrompt": {
+	"analVoreNoPromptHorny": {
 		"dialogueRandom": [
 			"I was going to ask, but nope. You're far too hot to pass up~",
 			"Am I being too forward? Maybe. But the only direction you're going is up~",
@@ -2455,7 +2455,7 @@
 			"Determined.png"
 		]
 	},
-	"analVoreHornyNoPromptAfter": {
+	"analVoreNoPromptAfterHorny": {
 		"dialogueRandom": [
 			"I gotta say, you squirm like a champ~",
 			"You're all mine now~",
@@ -2466,7 +2466,7 @@
 			"Blep.png"
 		]
 	},
-	"analVoreHungryTooBig": {
+	"analVoreTooBigHungry": {
 		"dialogueRandom": [
 			"Wow! You're far too big for even me to handle with how hungry I am.",
 			"I really, REALLY, want to, but even I know my limits.",
@@ -2477,14 +2477,10 @@
 			"Shocked.png"
 		]
 	},
-	"analVoreCompressionFull": [
-		"I got my back door busy with squeezing a guest down, come back later maybe.",
-		"I'm squeezing as hard as I can, that should pack em down enough to fit you in a bit."
-	],
 	"cockVoreCompressionFull": [
 		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
 	],
-	"unbirthHungryRequested": {
+	"unbirthRequestedHungry": {
 		"dialogueRandom": [
 			"Not quite the hole I had in mind, but I don't mind.",
 			"Sure! Might help me get a few discounts.",
@@ -2495,7 +2491,7 @@
 			"Sleepy.png"
 		]
 	},
-	"unbirthHornyRequested": {
+	"unbirthRequestedHorny": {
 		"dialogueRandom": [
 			"Time for you to find out just how strong those muscles are~",
 			"I do love a willing toy~",
@@ -2506,7 +2502,7 @@
 			"Determined.png"
 		]
 	},
-	"unbirthHungryRequestedAfter": {
+	"unbirthRequestedAfterHungry": {
 		"dialogueRandom": [
 			"All nice and tucked away.",
 			"Just relax. I'll find something for both of us.",
@@ -2517,7 +2513,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthHornyRequestedAfter": {
+	"unbirthRequestedAfterHorny": {
 		"dialogueRandom": [
 			"Exactly what this hound has been desiring~",
 			"Carrying you around is going to give me quite the workout~",
@@ -2528,7 +2524,7 @@
 			"OwO.png"
 		]
 	},
-	"unbirthHungryNoPrompt": {
+	"unbirthNoPromptHungry": {
 		"dialogueRandom": [
 			"I've got two ^pink;burning^reset; ^red;hungers^reset;, and I know which one you're gonna fill.",
 			"Gonna use you as a toy to put my mind off my hunger.",
@@ -2539,7 +2535,7 @@
 			"Sleepy.png"
 		]
 	},
-	"unbirthHornyNoPrompt": {
+	"unbirthNoPromptHorny": {
 		"dialogueRandom": [
 			"Oh look, the perfect shape~",
 			"My fire needs some stoking. You'll do~",
@@ -2550,7 +2546,7 @@
 			"OwO.png"
 		]
 	},
-	"unbirthHungryNoPromptAfter": {
+	"unbirthNoPromptAfterHungry": {
 		"dialogueRandom": [
 			"Umpf~ That takes care of one thing.",
 			"Now I'm hungry AND wet. Ah well~",
@@ -2561,7 +2557,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthHornyNoPromptAfter": {
+	"unbirthNoPromptAfterHorny": {
 		"dialogueRandom": [
 			"Mm-ng~! You're squirmy~",
 			"Now now, your new room isn't permanent... Probably~",
@@ -2572,7 +2568,7 @@
 			"UwU.png"
 		]
 	},
-	"unbirthHungryFull": {
+	"unbirthFullHungry": {
 		"dialogueRandom": [
 			"Lugging them around has gotten me peckish. Got any snacks?",
 			"Oh! Feel my belly. You might feel their movements. Don't mind the occasional grumble.",
@@ -2583,7 +2579,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthHornyFull": {
+	"unbirthFullHorny": {
 		"dialogueRandom": [
 			"What happened? We were just having a little fun and they slipped right on in~",
 			"Hng~ Sorry, they pushed just the right spot~",
@@ -2594,7 +2590,7 @@
 			"OwO.png"
 		]
 	},
-	"unbirthFullSoftDigest": {
+	"unbirthFullDigest": {
 		"dialogueRandom": [
 			"Don't be afraid. They'll reform when they're due~",
 			"You saw a kick? Must've been your imagination.",
@@ -2605,7 +2601,7 @@
 			"Happy.png"
 		]
 	},
-	"unbirthHungryFullSoftDigest": {
+	"unbirthFullDigestHungry": {
 		"dialogueRandom": [
 			"I can't, but you're welcome to watch them get nice and soft.",
 			"Oh? You saw a bit of ^pink;steam^reset; come out? They must be having fun.",
@@ -2616,7 +2612,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthHornyFullSoftDigest": {
+	"unbirthFullDigestHorny": {
 		"dialogueRandom": [
 			"I'd prefer not to open the floodgates just yet, dear. You might drown~",
 			"I can reform them at any time, but I'd like to keep them... for a while longer~",
@@ -2638,7 +2634,7 @@
 			"Happy.png"
 		]
 	},
-	"unbirthHungryFullHeal": {
+	"unbirthFullHealHungry": {
 		"dialogueRandom": [
 			"I always love this part, even if I'm starving. It's rare to heal someone in such a tender manner~",
 			"Honestly, I would if I could. I'd gladly heal you too~",
@@ -2649,7 +2645,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthHornyFullHeal": {
+	"unbirthFullHealHorny": {
 		"dialogueRandom": [
 			"Haa~ They're slowly mending~",
 			"They're probably good now, but I'd like to make doubly sure~",
@@ -2660,10 +2656,7 @@
 			"OwO.png"
 		]
 	},
-	"unbirthVoreCompressionFull": [
-		"A bit full, but give me a moment or two to pack them down a bit."
-	],
-	"breastVoreHungryRequested": {
+	"breastVoreRequestedHungry": {
 		"dialogueRandom": [
 			"Not exactly what I had in mind, but sure!",
 			"Sure. I could use the milk you'd help make.",
@@ -2674,7 +2667,7 @@
 			"Sleepy.png"
 		]
 	},
-	"breastVoreHornyRequested": {
+	"breastVoreRequestedHorny": {
 		"dialogueRandom": [
 			"I knew you couldn't resist, hot stuff. Let me give you a hug~",
 			"Hmhm, that I can do. Your paradise of milk awaits~",
@@ -2685,7 +2678,7 @@
 			"Determined.png"
 		]
 	},
-	"breastVoreHungryRequestedAfter": {
+	"breastVoreRequestedAfterHungry": {
 		"dialogueRandom": [
 			"At least you're nestled right on top of my hungry belly.",
 			"Time to grab some cookies, then.",
@@ -2696,7 +2689,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreHornyRequestedAfter": {
+	"breastVoreRequestedAfterHorny": {
 		"dialogueRandom": [
 			"You fit in perfectly~ Might have to get myself a few meme sweaters.",
 			"Absolutely wonderful~ You really know how to pad a demon out~",
@@ -2707,7 +2700,7 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreHungryNoPrompt": {
+	"breastVoreNoPromptHungry": {
 		"dialogueRandom": [
 			"Alright, time for you to go down the hatc--whoops!",
 			"'Hold ^green;[Shift]^reset;, then press ^green;[Up]^reset;'--ack!",
@@ -2718,7 +2711,7 @@
 			"Shocked.png"
 		]
 	},
-	"breastVoreHornyNoPrompt": {
+	"breastVoreNoPromptHorny": {
 		"dialogueRandom": [
 			"You look like the type to enjoy this~",
 			"You wouldn't mind a quick hug, would you?",
@@ -2729,7 +2722,7 @@
 			"Determined.png"
 		]
 	},
-	"breastVoreHungryNoPromptAfter": {
+	"breastVoreNoPromptAfterHungry": {
 		"dialogueRandom": [
 			"I hate it when I misclick.",
 			"That's not my stomach. Damn.",
@@ -2740,7 +2733,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreHornyNoPromptAfter": {
+	"breastVoreNoPromptAfterHorny": {
 		"dialogueRandom": [
 			"Oops~ You fell right into my booby trap~",
 			"Hmhm, gets them every time~",
@@ -2751,7 +2744,7 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreHungryNo": {
+	"breastVoreNoHungry": {
 		"dialogueRandom": [
 			"It's something else that needs attention, dear.",
 			"More 'om nom', not 'gl-omp'.",
@@ -2762,7 +2755,7 @@
 			"Sleepy.png"
 		]
 	},
-	"breastVoreHornyNo": {
+	"breastVoreNoHorny": {
 		"dialogueRandom": [
 			"Yes, but no. I have other needs I want filled~",
 			"Off limits for now. You can look and touch as much as you'd like, though~",
@@ -2773,7 +2766,7 @@
 			"Determined.png"
 		]
 	},
-	"breastVoreHungryTooBig": {
+	"breastVoreTooBigHungry": {
 		"dialogueRandom": [
 			"Sorry. I like being able to fit into most kitchens~",
 			"I'm pretty sure my boobs can't handle that, dear.",
@@ -2784,7 +2777,7 @@
 			"Shocked.png"
 		]
 	},
-	"breastVoreHornyTooBig": {
+	"breastVoreTooBigHorny": {
 		"dialogueRandom": [
 			"Sorry. I like being able to fit into most bedrooms~",
 			"I'm pretty sure my bed can't handle that, dear.",
@@ -2795,7 +2788,7 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreHungryFull": {
+	"breastVoreFullHungry": {
 		"dialogueRandom": [
 			"They're full. My stomach, on the other hand, is getting pretty grumbly.",
 			"You could always slip into my stomach and give them a good bump from below~",
@@ -2806,7 +2799,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreHornyFull": {
+	"breastVoreFullHorny": {
 		"dialogueRandom": [
 			"If I was anatomically correct, I might've had extra rooms. Sadly, I'm not~",
 			"Hmhm, how horny~ Look into my other vacancies if you really want inside me~",
@@ -2817,7 +2810,7 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreFullSoftDigest": {
+	"breastVoreFullDigest": {
 		"dialogueRandom": [
 			"Looking for someone? I'm sure you'll find them eventually. Care for a warm sip?",
 			"Hm? It looks like my boobs are moving? Must be your imagination~",
@@ -2828,7 +2821,7 @@
 			"Happy.png"
 		]
 	},
-	"breastVoreHungryFullSoftDigest": {
+	"breastVoreFullDigestHungry": {
 		"dialogueRandom": [
 			"Have some cookies handy? I've got plenty of milk to spare.",
 			"Perfect, you're just in time. Mind dropping some excess milk at Auri's shop for me?",
@@ -2839,7 +2832,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreHornyFullSoftDigest": {
+	"breastVoreFullDigestHorny": {
 		"dialogueRandom": [
 			"You thought you heard a moan? Who knows where that came from~",
 			"Mm, it's just me and my milk-bags over here~",
@@ -2861,7 +2854,7 @@
 			"Happy.png"
 		]
 	},
-	"breastVoreHungryFullHeal": {
+	"breastVoreFullHealHungry": {
 		"dialogueRandom": [
 			"My milk is healing them up, but it could be even faster if I wasn't as hungry...",
 			"While I'm fixing them up, why don't you fix me up? I'm starving.",
@@ -2872,7 +2865,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreHornyFullHeal": {
+	"breastVoreFullHealHorny": {
 		"dialogueRandom": [
 			"They're getting patched up. We had a ^pink;rough^reset; session earlier~",
 			"It may take them a while. Care to discuss any ^pink;sizzling^reset; secrets?",
@@ -2883,9 +2876,6 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreCompressionFull": [
-		"I just gotta... squeeze em in my tits some more, then maybe you'll fit too..."
-	],
 	"struggle": {
 		"dialogueRandom": [
 			"All nice and snug, dear.",
@@ -2908,12 +2898,6 @@
 			"Happy.png"
 		]
 	},
-	"struggleEggifyImmune": [
-		"You should be in an egg by now. How are you still struggling?!",
-		"I'd think you'd be in a egg by now, yet you're still so active!",
-		"You must be resisting so much that it's keeping the shell from forming...",
-		"Hm... Why won't the shell form?"
-	],
 	"struggleEggifyHorny": {
 		"dialogueRandom": [
 			"One portable sauna, coming up~",
@@ -2950,7 +2934,7 @@
 			"Blep.png"
 		]
 	},
-	"struggleHornyBelly": {
+	"struggleBellyHorny": {
 		"dialogueRandom": [
 			"Ooh~ Push there again, please~",
 			"That's good~ You're checking all of my boxes~",
@@ -2961,7 +2945,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryBelly": {
+	"struggleBellyHungry": {
 		"dialogueRandom": [
 			"Careful, dear. You might reawaken my hunger.",
 			"It wouldn't be that bad if I digest you. Honest.",
@@ -2972,7 +2956,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleSoftDigest": {
+	"struggleDigest": {
 		"dialogueRandom": [
 			"Time to melt you down for a bit.",
 			"I didn't turn the heat up that much. Just enough that you'll get nice and soft.",
@@ -2983,7 +2967,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleSoftDigestImmune": {
+	"struggleDigestImmune": {
 		"dialogueRandom": [
 			"Not into melting? I can respect that.",
 			"For you, this should feel like a nice sauna.",
@@ -2994,7 +2978,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHornyDigestImmune": {
+	"struggleDigestImmuneHorny": {
 		"dialogueRandom": [
 			"You're immune? Ooh~ so I can really dial it up~",
 			"So many lovely noises coming from both inside and out~",
@@ -3005,7 +2989,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryDigestImmune": {
+	"struggleDigestImmuneHungry": {
 		"dialogueRandom": [
 			"I'm still hungry, so just pretend to melt. Shout for help, too. Might trick my gut.",
 			"Thankfully, I can still fit in my usual snacks. Sorry if it gets messy in there.",
@@ -3016,7 +3000,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHornySoftDigestBelly": {
+	"struggleDigestBellyHorny": {
 		"dialogueRandom": [
 			"I need a bit more fuel for my next session. You'll be fine~",
 			"Unn~ Your bulges are starting to fade away~",
@@ -3027,7 +3011,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungrySoftDigestBelly": {
+	"struggleDigestBellyHungry": {
 		"dialogueRandom": [
 			"Yes, I'm digesting you. \nYes, I'm going to reform you.",
 			"Being my pudge for a while ain't that bad. Plenty of people will oogle you.",
@@ -3049,7 +3033,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHornyHealBelly": {
+	"struggleHealBellyHorny": {
 		"dialogueRandom": [
 			"Heal up, I've got plans for you~",
 			"Each push is better than the last~",
@@ -3060,7 +3044,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryHealBelly": {
+	"struggleHealBellyHungry": {
 		"dialogueRandom": [
 			"How're you doing? Squirm for 'alright' and writhe for 'I want to be a hellhound's snack'.",
 			"Keep it up. I feel like you're not 100% yet.",
@@ -3071,7 +3055,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHornyCompressionBelly": {
+	"struggleCompressionBellyHorny": {
 		"dialogueRandom": [
 			"Mmm... Nice and squished~",
 			"Not even a single lump~ You're hidden.",
@@ -3082,7 +3066,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryCompressionBelly": {
+	"struggleCompressionBellyHungry": {
 		"dialogueRandom": [
 			"You could call for help, but my gurgles will likely drown it out.",
 			"There's no sign of you now, my tasty snack.",
@@ -3093,7 +3077,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHornyWomb": {
+	"struggleWombHorny": {
 		"dialogueRandom": [
 			"What? Don't like your hiding place?",
 			"Ha-aa~, right there~",
@@ -3104,7 +3088,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryWomb": {
+	"struggleWombHungry": {
 		"dialogueRandom": [
 			"You're safe from my hunger in there.",
 			"Settle down, you'll scare any potential prey.",
@@ -3115,7 +3099,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleSoftDigestWomb": {
+	"struggleDigestWomb": {
 		"dialogueRandom": [
 			"Just think of it as a temporary weight loss program for both of us.",
 			"Squirm if you like. I'll always reform you.",
@@ -3126,7 +3110,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleSoftDigestImmuneWomb": {
+	"struggleDigestImmuneWomb": {
 		"dialogueRandom": [
 			"It's going to get insanely warm. You shouldn't notice a difference.",
 			"Nice fire resistance. Keep it up.",
@@ -3137,7 +3121,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHornyDigestImmuneWomb": {
+	"struggleDigestImmuneWombHorny": {
 		"dialogueRandom": [
 			"Oh? You're not melting? Even better~",
 			"Damn, I was going to play a harmless trick~",
@@ -3148,7 +3132,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryDigestImmuneWomb": {
+	"struggleDigestImmuneWombHungry": {
 		"dialogueRandom": [
 			"You're probably going to get squeezed. A lot.",
 			"You really want to stay solid, huh? I gotcha.",
@@ -3159,7 +3143,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHornySoftDigestWomb": {
+	"struggleDigestWombHorny": {
 		"dialogueRandom": [
 			"How naughty~ Your spa package includes a full makeover, you know~",
 			"A little too ^pink;steamy^reset; for you?",
@@ -3170,7 +3154,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungrySoftDigestWomb": {
+	"struggleDigestWombHungry": {
 		"dialogueRandom": [
 			"Oops, looks like my stomach taught my womb something new~",
 			"I bet it's getting real tight and warm, isn't it?",
@@ -3181,7 +3165,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHornyHealWomb": {
+	"struggleHealWombHorny": {
 		"dialogueRandom": [
 			"Rest your body, dear. I've got you~",
 			"Ooh~ That was a nice, strong kick~",
@@ -3192,7 +3176,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryHealWomb": {
+	"struggleHealWombHungry": {
 		"dialogueRandom": [
 			"Stay calm... I'm here for you.",
 			"I'll be your shield as long as you need.",
@@ -3214,7 +3198,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHornyCompressionWomb": {
+	"struggleCompressionWombHorny": {
 		"dialogueRandom": [
 			"Heh, my treasure is nice and hidden away~",
 			"Unnf~ Even when compressed, you still feel great inside me.",
@@ -3225,7 +3209,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHungryCompressionWomb": {
+	"struggleCompressionWombHungry": {
 		"dialogueRandom": [
 			"Heh, no one will suspect a thing.",
 			"Mm, hidden away.",
@@ -3236,50 +3220,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHealCock": [
-		"I know it's strange, but this will heal you up. So don't worry about being in my cock!",
-		"You don't have to move so much while I'm healing you, unless you want in my sack...",
-		"While I'm enjoying your struggles a bit, do know that you're safe in my rod."
-	],
-	"struggleCompressionCock": [
-		"Heh, it feels like your struggles lessen as my shaft gets tighter around you.",
-		"How long you gonna struggle? Until you're fully compacted by my shaft's walls?",
-		"Must be hard to move like that while you're getting compressed by lewd, throbbing, cock walls."
-	],
-	"struggleDrainEnergyCock": [
-		"The more you fight, the more my shaft will drain your energy. I don't mind.",
-		"Getting tired? Soon, you won't have the energy to move around like that in my cock.",
-		"You know you're being drained of energy right? My rod always wins."
-	],
-	"struggleCumTransforming": [
-		[
-			"I can feel you getting goopy in there.",
-			"I can feel you starting to turn~"
-		]
-	],
-	"struggleCumTransformingImmune": [
-		"Hm... You don't seem to be getting any softer in there..."
-	],
-	"struggleInfusedCock": [
-		"Ahhh~ <infusedName> feels so great down there~",
-		"<keysmash>, you're gonna make <infusedName> cum~"
-	],
-	"struggleHealBalls": [
-		"My seed can mend wounds, so don't panic. You'll be fine, I swear!",
-		"Seems you're pretty healthy if you can wiggle like that!",
-		"Just relax and let my sticky sauna soothe you."
-	],
-	"struggleCompressionBalls": [
-		"You're squirming pretty hard for someone in a tightening sack.",
-		"Better get out all that fight while you can, you won't be able to move much soon.",
-		"You're getting pretty worked up, but my ball's walls will keep you compact and contained."
-	],
-	"struggleDrainEnergyBalls": [
-		"Why don't you stop all that moving and enjoy the sticky spa? I'm sure you're getting sleepy.",
-		"You won't last long fighting like that. It's better to just rest and let your energy go.",
-		"Why are you in such a hurry to get all tuckered out? You're just wasting energy."
-	],
-	"struggleHornyBreasts": {
+	"struggleBreastsHorny": {
 		"dialogueRandom": [
 			"Fwah, this always feels so good~",
 			"I wonder who's more aroused: me or you~?",
@@ -3290,7 +3231,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleSoftDigestBreasts": {
+	"struggleDigestBreasts": {
 		"dialogueRandom": [
 			"I'll put your excess in a carton for one of us to drink later.",
 			"Any of your friends nearby? I'm sure one of them will be thirsty~",
@@ -3312,7 +3253,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHornyCompressionBreasts": {
+	"struggleCompressionBreastsHorny": {
 		"dialogueRandom": [
 			"Mmm, you think anyone will check for you in there~?",
 			"Not a single bulge is visible~",
@@ -3323,11 +3264,6 @@
 			"OwO.png"
 		]
 	},
-	"struggleDrainEnergyBreasts": [
-		"Your energy will add some spice to my milk with all those struggles mixing it up.",
-		"How long can you really hold out til your too tired to be moving around in my boob?",
-		"The more you fight it, the more my breast takes energy away. You might as well just relax now."
-	],
 	"struggleLetoutTransforming": {
 		"pools": [
 			":struggleLetoutTransformingImmune"
@@ -3356,13 +3292,13 @@
 			"Joyful.png"
 		]
 	},
-	"struggleLetoutHornyTransforming": {
+	"struggleLetoutTransformingHorny": {
 		"pools": [
 			":struggleLetoutTransformingImmune"
 		],
-		"full": ":struggleLetoutHornyTransformed"
+		"full": ":struggleLetoutTransformedHorny"
 	},
-	"struggleLetoutHornyTransformed": {
+	"struggleLetoutTransformedHorny": {
 		"dialogueRandom": [
 			"Damn, you look even hotter now.",
 			"I hope you like having a bit of me with you, you hot dog.",
@@ -3430,7 +3366,7 @@
 			"Happy.png"
 		]
 	},
-	"oralVoreLetoutForcedHungryDigested": {
+	"oralVoreLetoutForcedDigestedHungry": {
 		"dialogueRandom": [
 			"Thanks, you don't know how much that helped. Time to reform you.",
 			"Melting you down felt... perfect. Back to the outside world you go.",
@@ -3441,7 +3377,7 @@
 			"Tired.png"
 		]
 	},
-	"oralVoreLetoutForcedSoftDigest": {
+	"oralVoreLetoutForcedDigest": {
 		"dialogueRandom": [
 			"Heh, can't handle the heat? You sure got out of this hellhound fast.",
 			"Don't worry, I never really play for keeps",
@@ -3452,7 +3388,7 @@
 			"Happy.png"
 		]
 	},
-	"oralVoreLetoutForcedSoftDigestImmune": {
+	"oralVoreLetoutForcedDigestImmune": {
 		"dialogueRandom": [
 			"Thanks for allowing me to really let loose.",
 			"The heat too much for you, <entityname>?",
@@ -3474,21 +3410,7 @@
 			"Happy.png"
 		]
 	},
-	"analVoreLetoutForcedDigested": ":oralVoreLetoutForcedDigested", // duplicated lines
-	"analVoreLetoutForcedSoftDigest": [
-		"Darn, guess you got out though my rear before you added to it.", //blue here, did a copy paste here as i'm unsure what would be different, i know the diff between digest & softDigest macanically, but not context wise, thought it was same context but diff macanics
-		"Are you sure you wanna escape from being added to my cheeks?",
-		"I won't let you out my butt so easily next time... I'll make you my temporary pudge one day."
-	],
-	"analVoreLetoutForcedHeal": [
-		"I hope you're all better now, otherwise you're going back up this butt!",
-		"Aww, I enjoyed feeling you wiggle around in my rear while it patched you up!",
-		"You gotta be healthy to squirm out my bottom like that."
-	],
-	"cockVoreLetoutForcedDigested": [
-		"I guess you'd want to reform into yourself after you got melted down into all that cum~"
-	],
-	"cockVoreLetoutForcedSoftDigest": [
+	"cockVoreLetoutForcedDigest": [
 		"Got out of my shaft before it absorbed you, eh?",
 		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
 		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
@@ -3531,7 +3453,7 @@
 			"Happy.png"
 		]
 	},
-	"unbirthVoreLetoutForcedHornyDigested": {
+	"unbirthVoreLetoutForcedDigestedHorny": {
 		"dialogueRandom": [
 			"Uunf~ Damn, I think I'm about to--",
 			"Ugh, I never should've trusted that discount aphrodisiac. Side effects include sudden--",
@@ -3542,7 +3464,7 @@
 			"OwO.png"
 		]
 	},
-	"unbirthVoreLetoutForcedSoftDigest": {
+	"unbirthVoreLetoutForcedDigest": {
 		"dialogueRandom": [
 			"That's quite the kick. It almost makes me think--oh! You want out.",
 			"Getting too hot in there? You should've said something. You did?",
@@ -3586,7 +3508,7 @@
 			"Happy.png"
 		]
 	},
-	"breastVoreLetoutForcedHornyDigested": {
+	"breastVoreLetoutForcedDigestedHorny": {
 		"dialogueRandom": [
 			"Tired of me squeezing you once in a while~? Time to reform, then~",
 			"I got quite a few jealous looks~ If you want out, that's okay.",
@@ -3597,7 +3519,7 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreLetoutForcedSoftDigest": {
+	"breastVoreLetoutForcedDigest": {
 		"dialogueRandom": [
 			"Not interested in being milk for a bit? No booby for you, then.",
 			"Aw, I was just about to buy a nice bottle of milk. Just kidding.",
@@ -3608,7 +3530,7 @@
 			"Happy.png"
 		]
 	},
-	"breastVoreLetoutForcedHungrySoftDigest": {
+	"breastVoreLetoutForcedDigestHungry": {
 		"dialogueRandom": [
 			"Shoot, I was going to drink you down and tease you as you reformed in my belly~",
 			"Alright, alright. I won't dip any cookies in you.",
@@ -3619,7 +3541,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreLetoutForcedHornySoftDigest": {
+	"breastVoreLetoutForcedDigestHorny": {
 		"dialogueRandom": [
 			"Heh, I wasn't going to go to the coffee shop and tease the customers~",
 			"Damn, it was fun watching you really slosh around.",
@@ -3641,28 +3563,6 @@
 			"Happy.png"
 		]
 	},
-	"letoutTransformingImmune": [
-		"You don't look any different from how you went in, strange...",
-		"Did you have some kind of device to keep you from morphing?",
-		"Seems your body is rather hard to modify, tsk..."
-	],
-	"letoutEggify": {
-		"percentage": "eggifying",
-		"pools": [
-			[
-				"Seems like I let you out a bit too early.",
-				"I was a bit too hasty. The egg didn't form."
-			]
-		],
-		"full": [
-			":LetoutEgged"
-		]
-	},
-	"letoutEggifyImmune": [
-		"Guess I just can't put you in an egg.",
-		"Seems like eggs don't work on you.",
-		"I'm giving up on sealing you in an egg."
-	],
 	"oralVoreLetoutRequestedHorny": {
 		"dialogueRandom": [
 			"Mmnf, that was good~ Thanks for the assist, sweetie.",
@@ -3691,7 +3591,7 @@
 		"Ah, guess it's time to reform you.",
 		"Time to reform you, I guess."
 	],
-	"oralVoreLetoutRequestedHornyDigested": {
+	"oralVoreLetoutRequestedDigestedHorny": {
 		"dialogueRandom": [
 			"It's been fun, but these love handles are getting to be a bit much~",
 			"You as pudge is nice, but these hugs are too one-sided. Time to reform~",
@@ -3702,7 +3602,7 @@
 			"OwO.png"
 		]
 	},
-	"oralVoreLetoutRequestedHungryDigested": {
+	"oralVoreLetoutRequestedDigestedHungry": {
 		"dialogueRandom": [
 			"Lugging you around as fat is nice, but I don't want to use you as fuel. Come on out.",
 			"I need a little extra space, so I gotta reform you and let you out.",
@@ -3713,9 +3613,9 @@
 			"Tired.png"
 		]
 	},
-	"oralVoreLetoutRequestedSoftDigest": ":oralVoreLetoutRequestedDigest", // duplicated lines
-	"oralVoreLetoutRequestedHornySoftDigestImmune": ":oralVoreLetoutRequestedHungrySoftDigestImmune", // duplicated lines
-	"oralVoreLetoutRequestedHungrySoftDigestImmune": {
+	"oralVoreLetoutRequestedDigest": ":oralVoreLetoutRequestedDigest", // duplicated lines
+	"oralVoreLetoutRequestedDigestImmuneHorny": ":oralVoreLetoutRequestedDigestImmuneHungry", // duplicated lines
+	"oralVoreLetoutRequestedDigestImmuneHungry": {
 		"dialogueRandom": [
 			"I'd love to keep you for longer, but I feel a change coming on.",
 			"My poor belly needs a break. Give me a bit to recover, okay?",
@@ -3726,7 +3626,7 @@
 			"Tired.png"
 		]
 	},
-	"oralVoreLetoutRequestedHornySoftDigest": {
+	"oralVoreLetoutRequestedDigestHorny": {
 		"dialogueRandom": [
 			"Ooh, don't want you to melt. That would end our fun too early~",
 			"Nah, I don't want you as fat. I want you~",
@@ -3737,7 +3637,7 @@
 			"OwO.png"
 		]
 	},
-	"oralVoreLetoutRequestedHungrySoftDigest": {
+	"oralVoreLetoutRequestedDigestHungry": {
 		"dialogueRandom": [
 			"Oh, uh, change of plans. My gut wanted to go all the way.",
 			"Sorry, belly, but you can't keep them.",
@@ -3754,7 +3654,7 @@
 		"I think you should be feeling much better now.",
 		"My stomach does wonders for healing, doesn't it?"
 	],
-	"oralVoreLetoutRequestedHornyHeal": {
+	"oralVoreLetoutRequestedHealHorny": {
 		"dialogueRandom": [
 			"Nice and rejuvenated~",
 			"There, all good~? Ready for another round~?",
@@ -3765,7 +3665,7 @@
 			"OwO.png"
 		]
 	},
-	"oralVoreLetoutRequestedHungryHeal": {
+	"oralVoreLetoutRequestedHealHungry": {
 		"dialogueRandom": [
 			"It probably isn't enough. My hunger is just too much, though.",
 			"I'd love to keep you for longer, but it's not going to be safe for long.",
@@ -3777,7 +3677,7 @@
 		]
 	},
 	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
-	"analVoreLetoutRequestedSoftDigest": [
+	"analVoreLetoutRequestedDigest": [
 		"I think you won't be adding to my rear today, butt buddy!",
 		"I'll let you go this time, but next time my rear will catch you!"
 	],
@@ -3792,10 +3692,7 @@
 			"All better! Time to come out from the safety of my rear."
 		]
 	},
-	"cockVoreLetoutRequestedDigested": [
-		"Ahh~ Here's your new body... since your old one is nothing but cum now~"
-	],
-	"cockVoreLetoutRequestedSoftDigest": ":cockVoreLetoutRequestedDigest", // duplicated lines
+	"cockVoreLetoutRequestedDigest": ":cockVoreLetoutRequestedDigest", // duplicated lines
 	"cockVoreLetoutRequestedHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -3829,10 +3726,7 @@
 			"Tired.png"
 		]
 	},
-	"unbirthVoreLetoutRequestedDigested": [
-		"I'm going to reform you now... since you got all melted into juices, heh~"
-	],
-	"unbirthVoreLetoutRequestedSoftDigest": ":unbirthVoreLetoutRequestedDigest", // duplicated lines
+	"unbirthVoreLetoutRequestedDigest": ":unbirthVoreLetoutRequestedDigest", // duplicated lines
 	"unbirthVoreLetoutRequestedHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -3866,11 +3760,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreLetoutRequestedDigested": [
-		"You're all milk now, and even filled my breast out nicely!",
-		"Seems you've been melted inside my boobs. Good for you!"
-	],
-	"breastVoreLetoutRequestedHornyDigested": {
+	"breastVoreLetoutRequestedDigestedHorny": {
 		"dialogueRandom": [
 			"Alright, that's enough teasing from me~ Time to reform~",
 			"Aw, no takers on wanting you as a drink. I'll reform you, then.",
@@ -3881,11 +3771,11 @@
 			"OwO.png"
 		]
 	},
-	"breastVoreLetoutRequestedSoftDigest": [
+	"breastVoreLetoutRequestedDigest": [
 		"Be glad I'm not making you into a temporary batch of milk today.",
 		"I'll let you go for now, but you're adding to my jugs next time!"
 	],
-	"breastVoreLetoutRequestedHungrySoftDigest": {
+	"breastVoreLetoutRequestedDigestHungry": {
 		"dialogueRandom": [
 			"While it's tempting to turn you into milk, I'd prefer a more solid meal if you catch my drift~",
 			"Getting a little too soft for my tastes.",
@@ -3896,7 +3786,7 @@
 			"Tired.png"
 		]
 	},
-	"breastVoreLetoutRequestedHornySoftDigest": {
+	"breastVoreLetoutRequestedDigestHorny": {
 		"dialogueRandom": [
 			"I hope you enjoyed your stay~ It's getting too steamy, though, so you'll have to leave.",
 			"Damn, my body has the worst timing sometimes.",
@@ -3918,7 +3808,7 @@
 			"I think your milk bath is done! How do you feel?"
 		]
 	},
-	"breastVoreLetoutRequestedHungryHeal": {
+	"breastVoreLetoutRequestedHealHungry": {
 		"dialogueRandom": [
 			"I think that's enough milk for you. I'd like to still be able to squeeze you out!",
 			"All healed up? Good, that'll be 100 Pixels per gallon. Just kidding~",
@@ -3950,8 +3840,8 @@
 			"Bork.png"
 		]
 	},
-	"strugglingHungryDigestImmune": ":strugglingDigestImmune", // duplicated lines
-	"strugglingHornyDigestImmune": ":strugglingDigestImmune", // duplicated lines
+	"strugglingDigestImmuneHungry": ":strugglingDigestImmune", // duplicated lines
+	"strugglingDigestImmuneHorny": ":strugglingDigestImmune", // duplicated lines
 	"strugglingSlime": {
 		"dialogueRandom": [
 			"Nice, I can see out of you slightly.",
@@ -3996,7 +3886,7 @@
 			"Happy.png"
 		]
 	},
-	"strugglingSlimeSoftDigest": {
+	"strugglingSlimeDigest": {
 		"dialogueRandom": [
 			"I'll gladly join you.",
 			"Seeing myself disappear is oddly exciting!",
@@ -4007,7 +3897,7 @@
 			"Happy.png"
 		]
 	},
-	"strugglingSlimeHungrySoftDigest": {
+	"strugglingSlimeDigestHungry": {
 		"dialogueRandom": [
 			"I'll gladly join you. Let's absorb lots together.",
 			"So this is what it's like in my stomach right now.",
@@ -4018,7 +3908,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingSlimeHornySoftDigest": {
+	"strugglingSlimeDigestHorny": {
 		"dialogueRandom": [
 			"I'll gladly add even more to your slime~",
 			"Seeing myself disappear is so arousing~",
@@ -4040,7 +3930,7 @@
 			"Happy.png"
 		]
 	},
-	"strugglingSlimeHungryHeal": {
+	"strugglingSlimeHealHungry": {
 		"dialogueRandom": [
 			"I like this. It helps keep my mind off the hunger.",
 			"That feels... nice...",
@@ -4051,7 +3941,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingSlimeHornyHeal": {
+	"strugglingSlimeHealHorny": {
 		"dialogueRandom": [
 			"You can heal, too? My, such a talented slime~",
 			"Keeping me energized, huh? Alright~",
@@ -4071,7 +3961,7 @@
 			"Confused.png"
 		]
 	},
-	"strugglingHungryBelly": {
+	"strugglingBellyHungry": {
 		"dialogueRandom": [
 			[
 				"Nice. Not quite as eager as my gut, but I like it.",
@@ -4106,7 +3996,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingHornyBelly": {
+	"strugglingBellyHorny": {
 		"dialogueRandom": [
 			[
 				"Nice~ I hope you don't mind if it gets steamy in here~",
@@ -4141,7 +4031,7 @@
 			"OwO.png"
 		]
 	},
-	"strugglingSoftDigestBelly": {
+	"strugglingDigestBelly": {
 		"dialogueRandom": [
 			"Ah, now the fun's really getting started.",
 			"Goodness, I'm really starting to get soft.",
@@ -4152,8 +4042,8 @@
 			"Happy.png"
 		]
 	},
-	"strugglingHungryDigestImmuneBelly": ":strugglingDigestImmune", // duplicated lines
-	"strugglingHornyDigestImmuneBelly": {
+	"strugglingDigestImmuneBellyHungry": ":strugglingDigestImmune", // duplicated lines
+	"strugglingDigestImmuneBellyHorny": {
 		"dialogueRandom": [
 			"I appreciate the effort, but I'm off limits~",
 			"It basically feels like a pleasant tingle~",
@@ -4164,7 +4054,7 @@
 			"OwO.png"
 		]
 	},
-	"strugglingHungrySoftDigestBelly": {
+	"strugglingDigestBellyHungry": {
 		"dialogueRandom": [
 			"Ah, this should take my mind off my own stomach.",
 			"Goodness, your belly is just as eager as mine.",
@@ -4175,7 +4065,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingHornyHealBelly": {
+	"strugglingHealBellyHorny": {
 		"dialogueRandom": [
 			[
 				"You're so kind~ Thanks, dear~",
@@ -4210,21 +4100,11 @@
 			"OwO.png"
 		]
 	},
-	"strugglingDrainEnergyBelly": [
-		"Your stomach, it's sapping my energy as I move.",
-		"I barely have the energy... to keep resisting this belly.",
-		"This gut is draining my energy, how long I can keep squirming...?"
-	],
 	"strugglingTransformingImmune": ":strugglingTransformingImmune", // duplicated lines
 	"strugglingEggifyBelly": [
 		"W-what's this shell forming around me in this gut?!",
 		"Hey, the stuff in your belly is hardening around me. What's happening!?",
 		"The belly walls are getting harder, or wait, is something forming around me?!"
-	],
-	"strugglingEggifyImmune": [
-		"I think a shell is trying to form around me, but uh... it's not gonna work.",
-		"You know I'm un-egg-able right?",
-		"I'm not going into an egg, it's not going to work."
 	],
 	"strugglingDigestImmuneTail": ":strugglingDigestImmune", // duplicated lines
 	"strugglingHealTail": [
@@ -4252,7 +4132,7 @@
 		"I feel like I'm being encased in something inside your tail.",
 		"Wait, is there something surrounding me inside your tail?"
 	],
-	"strugglingHungryWomb": {
+	"strugglingWombHungry": {
 		"dialogueRandom": [
 			"Your womb is incredibly comfy.",
 			"This feels lovely. You're a wonderful host.",
@@ -4263,7 +4143,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingHornyWomb": {
+	"strugglingWombHorny": {
 		"dialogueRandom": [
 			"Your womb is the best out of all the ones I've been in~",
 			"One hand to rub you, and one hand for me~",
@@ -4274,7 +4154,7 @@
 			"OwO.png"
 		]
 	},
-	"strugglingSoftDigestWomb": {
+	"strugglingDigestWomb": {
 		"dialogueRandom": [
 			"Ooh, melting me down? How naughty.",
 			"I see I'm starting to get soft. Want to hide me, then?",
@@ -4285,7 +4165,7 @@
 			"Happy.png"
 		]
 	},
-	"strugglingHungrySoftDigestWomb": {
+	"strugglingDigestWombHungry": {
 		"dialogueRandom": [
 			"Ooh, melting me down?",
 			"I see I'm starting to get soft.",
@@ -4296,7 +4176,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingHornySoftDigestWomb": {
+	"strugglingDigestWombHorny": {
 		"dialogueRandom": [
 			"Ooh, melting me down?~ How kinky~",
 			"Ooh, trying to hide me from your friends~?",
@@ -4307,55 +4187,10 @@
 			"OwO.png"
 		]
 	},
-	"strugglingCompressionWomb": [
-		"Why is your womb so tight? I can barely move!",
-		"I feel like I'm getting compacted inside your womb.",
-		"Your womb's walls are closing in on me! It's getting tight!"
-	],
-	"strugglingDrainEnergyWomb": [
-		"It's hard to move around in your womb... or am I getting tired?",
-		"I think your womb is stealing my energy... I'm barely able to squirm.",
-		"Fighting your womb is exhausting... Why am I so tired?"
-	],
 	"strugglingDigestImmuneCock": ":strugglingDigestImmune", // duplicated lines
-	"strugglingCompressionCock": [
-		"This shaft of yours is squeezing me really hard!",
-		"It's hard to move when your cock is putting so much pressure on me.",
-		"I feel like I'm getting compacted inside your dick!"
-	],
-	"strugglingDrainEnergyCock": [
-		"I'm feeling more and more tired as I squirm in your dick.",
-		"Why do I feel so exhausted struggling inside your shaft?",
-		"It feels like your cock is taking my energy away..."
-	],
 	"strugglingCumTransformingImmune": ":strugglingTransformingImmune", // duplicated lines
-	"strugglingEggifyCock": [
-		"Is there a shell forming around me inside your dick!?",
-		"There is some sort of shell forming around me. What's your cock doing??",
-		"Is your shaft getting harder... or is there something hardening around me?"
-	],
 	"strugglingCumDigestImmuneBalls": ":strugglingDigestImmune", // duplicated lines
-	"strugglingHealBalls": [
-		"Your healing seed is washing over me, I feel my pain going away!",
-		"Seems your balls make for a great therapeutic sauna and spa.",
-		"The soothing properties of your spunk is crazy. How novel."
-	],
-	"strugglingCompressionBalls": [
-		"It feels as though your sack is shrinking. It's so tight in here.",
-		"I'm barely able to move with how your nuts are closing in on me.",
-		"Your orbs are tightening. There's so much pressure on me in here!"
-	],
-	"strugglingDrainEnergyBalls": [
-		"I feel so tired splashing around in your sack. What's going on?",
-		"Is your seed sapping my energy away? I feel fatigued...",
-		"The more I move in your orbs, the more exhausted I feel..."
-	],
-	"strugglingEggifyBalls": [
-		"I think a shell is forming around me in your sack!",
-		"Is it me, or is there something surrounding me that's not your spunk?",
-		"I feel like some kind of shell is forming around me!"
-	],
-	"strugglingHungryBreasts": {
+	"strugglingBreastsHungry": {
 		"dialogueRandom": [
 			"Your breasts are incredibly comfy.",
 			"This feels lovely. You're a wonderful host.",
@@ -4366,7 +4201,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingHornyBreasts": {
+	"strugglingBreastsHorny": {
 		"dialogueRandom": [
 			"Your breasts are the best out of all the ones I've been in~",
 			"One hand per boob, hehe~",
@@ -4377,7 +4212,7 @@
 			"OwO.png"
 		]
 	},
-	"strugglingSoftDigestBreasts": {
+	"strugglingDigestBreasts": {
 		"dialogueRandom": [
 			"Ooh, turning me into a fresh glass? How naughty.",
 			"I see I'm starting to get soft.",
@@ -4388,7 +4223,7 @@
 			"Happy.png"
 		]
 	},
-	"strugglingHungrySoftDigestBreasts": {
+	"strugglingDigestBreastsHungry": {
 		"dialogueRandom": [
 			"Ooh, turning me into milk?",
 			"Mmm, don't forget the cookies, then.",
@@ -4399,7 +4234,7 @@
 			"Tired.png"
 		]
 	},
-	"strugglingHornySoftDigestBreasts": {
+	"strugglingDigestBreastsHorny": {
 		"dialogueRandom": [
 			"Ooh, making me into milk?~ How kinky~",
 			"Ooh, trying to shrink down a few sizes~?",
@@ -4421,32 +4256,6 @@
 		"I'm getting exhausted... Is your breast stealing my energy?"
 	],
 	"strugglingTransformingBreasts": ":strugglingTransformingWomb", // duplicated lines
-	"oralVoreUnpromptedWilling": [ //blue here, doing these as last, LAST lines
-		"Oh yeah! Eat me up like the snack I am!",
-		"Make me your lunch, you know you're hungry!",
-		"I can't wait to wiggle down your throat!"
-	],
-	"analVoreUnpromptedWilling": [
-		"Make me your butt plug!",
-		"Let me in that hot rear of yours!",
-		"It's so warm in here, I'm loving it!",
-		"Thanks, butt buddy! Your rear is so cozy."
-	],
-	"cockVoreUnpromptedWilling": [
-		"I want in your shaft, like right now!",
-		"Shove me into your lewd meat stick!",
-		"Let me wiggle into that cock of yours!"
-	],
-	"unbirthVoreUnpromptedWilling": [
-		"I'm going right into your folds, right this second!",
-		"Spread those legs, because I'm getting in your womb!",
-		"I'll enjoy slipping behind those lewd lips!"
-	],
-	"breastVoreUnpromptedWilling": [
-		"Just let me in your rack already!",
-		"I can't wait to squirm into that nipple of yours!",
-		"I'm about to have a blast in your milk pool!"
-	],
 	"oralVoreUnpromptedHungry": {
 		"dialogueRandom": [
 			"Oh!",
@@ -4513,18 +4322,6 @@
 			"OwO.png"
 		]
 	},
-	"struggleEscapeTransforming": [
-		"If I didn't get out any sooner, I wouldn't be me!"
-	],
-	"struggleEscapeTransformingImmune": [
-		"I managed to get out, though I don't think anything was really happening to me."
-	],
-	"struggleEscapeEggify": [
-		"Hah! I got out before I was egged!"
-	],
-	"struggleEscapeEggifyImmune": [
-		"Looks like I'm free, though I wasn't worried since I resisted your egging."
-	],
 	"oralVoreLetoutForcingAfterHungry": {
 		"dialogueRandom": [
 			"Sorry, but I'm hungry, too.",
@@ -4547,7 +4344,7 @@
 			"OwO.png"
 		]
 	},
-	"oralVoreLetoutForcingAfterSoftDigest": [
+	"oralVoreLetoutForcingAfterDigest": [
 		"Whew... I got you to spit me out before I was done for!"
 	],
 	"oralVoreLetoutForcingAfterDigestImmune": [
@@ -4556,7 +4353,7 @@
 	"oralVoreLetoutForcingAfterHeal": [
 		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
 	],
-	"analVoreLetoutForcingAfterSoftDigest": [
+	"analVoreLetoutForcingAfterDigest": [
 		"Whew, I barely got out of your rear without adding to it!"
 	],
 	"analVoreLetoutForcingAfterDigestImmune": [
@@ -4587,7 +4384,7 @@
 			"UwU.png"
 		]
 	},
-	"cockVoreLetoutForcingAfterSoftDigest": [
+	"cockVoreLetoutForcingAfterDigest": [
 		"Whew, I wiggled out of your shaft before it melted me!"
 	],
 	"cockVoreLetoutForcingAfterDigestImmune": [
@@ -4618,7 +4415,7 @@
 			"UwU.png"
 		]
 	},
-	"unbirthVoreLetoutForcingAfterSoftDigest": [
+	"unbirthVoreLetoutForcingAfterDigest": [
 		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
 	],
 	"unbirthVoreLetoutForcingAfterDigestImmune": [
@@ -4649,7 +4446,7 @@
 			"UwU.png"
 		]
 	},
-	"breastVoreLetoutForcingAfterSoftDigest": [
+	"breastVoreLetoutForcingAfterDigest": [
 		"Whew, I got out of your boob before I was added to its milk!"
 	],
 	"breastVoreLetoutForcingAfterDigestImmune": [
@@ -4657,18 +4454,6 @@
 	],
 	"breastVoreLetoutForcingAfterHeal": [
 		"Ah... I wiggled my way out your boob, and I feel so much better too!"
-	],
-	"escapeTransforming": [
-		"Thanks for letting me out. I was almost completely morphed!"
-	],
-	"escapeTransformingImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I can't be transformed."
-	],
-	"escapeEggify": [
-		"Thanks for letting me out. I was almost encased in an egg!"
-	],
-	"escapeEggifyImmune": [
-		"Oh, it's good that you let me out. Seems like you know now that I'm unable to be egged."
 	],
 	"oralVoreLetoutUnpromptedAfterHungry": {
 		"dialogueRandom": [
@@ -4692,7 +4477,7 @@
 			"OwO.png"
 		]
 	},
-	"oralVoreLetoutUnpromptedAfterSoftDigest": [
+	"oralVoreLetoutUnpromptedAfterDigest": [
 		"Thanks for spitting me up. I was going to be added to you!"
 	],
 	"oralVoreLetoutUnpromptedAfterDigestImmune": [
@@ -4701,7 +4486,7 @@
 	"oralVoreLetoutUnpromptedAfterHeal": [
 		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
 	],
-	"analVoreLetoutUnpromptedAfterSoftDigest": [
+	"analVoreLetoutUnpromptedAfterDigest": [
 		"W-wah! Thanks for releasing me out your rear before was I added to it!"
 	],
 	"analVoreLetoutUnpromptedAfterDigestImmune": [
@@ -4732,7 +4517,7 @@
 			"UwU.png"
 		]
 	},
-	"cockVoreLetoutUnpromptedAfterSoftDigest": [
+	"cockVoreLetoutUnpromptedAfterDigest": [
 		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
 	],
 	"cockVoreLetoutUnpromptedAfterDigestImmune": [
@@ -4763,7 +4548,7 @@
 			"UwU.png"
 		]
 	},
-	"unbirthVoreLetoutUnpromptedAfterSoftDigest": [
+	"unbirthVoreLetoutUnpromptedAfterDigest": [
 		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
 	],
 	"unbirthVoreLetoutUnpromptedAfterDigestImmune": [
@@ -4794,7 +4579,7 @@
 			"UwU.png"
 		]
 	},
-	"breastVoreLetoutUnpromptedAfterSoftDigest": [
+	"breastVoreLetoutUnpromptedAfterDigest": [
 		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
 	],
 	"breastVoreLetoutUnpromptedAfterDigestImmune": [
@@ -4802,22 +4587,6 @@
 	],
 	"breastVoreLetoutUnpromptedAfterHeal": [
 		"Ah, thanks for pushing me out your boob. That soothing milk bath has made me feel stronger!"
-	],
-	"tailInfuseRequested": "/npcs/sbq/dialogue/default.dialogue:tailInfuseRequested", // external lines
-	"tailInfuseRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseRequestedAfter", // external lines
-	"ballsInfuseRequested": [
-		"Oh, so you want to be my balls~?",
-		"You want to be swinging around between my legs~?"
-	],
-	"ballsInfuseRequestedAfter": [
-		"Hehe, there you go, hanging down from my crotch~ Right where you belong~",
-		"Usually friends are stored IN the balls... but I like this arrangement too~"
-	],
-	"ballsInfuseNoPrompt": [
-		"Hmmm~ I think you'd make a nice pair of balls~"
-	],
-	"ballsInfuseNoPromptAfter": [
-		"Perfect, you feel perfect hanging around down there~"
 	],
 	"infused": [
 		"<slowlove>",
@@ -4830,52 +4599,6 @@
 			"<slowlove>(I belong here don't I...~)",
 			"<slowlove>(I belong here... just a part of <entityname>~)",
 			"<love>(<keysmash>)"
-		]
-	],
-	"ballsInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>(Ahh... I just feel so good...~)",
-			"<slowlove>(I belong here don't I...~)",
-			"<slowlove>(I'm just your balls~)",
-			"<slowlove>(Ahh~ so full of cum sloshing around~)",
-			"<slowlove>(I'm just <entityname>'s balls~)",
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
-	"ballsInfusedOccupant": [
-		[
-			"<love>Heh, I can feel you twitching down there~",
-			"<love>Heh, I can feel you twitching down there <infusedName>~"
-		],
-		[
-			"<love>Are you enjoying your new purpose?~",
-			"<love>Are you enjoying your new purpose <infusedName>?~"
-		],
-		[
-			"<love>Mmm, all that cum sloshing around down there~",
-			"<love>Mmm, all that cum sloshing around down there, you sure are enjoying yourself <infusedName>~"
-		],
-		{
-			"check": {
-				"ballsInfusedSize": true
-			},
-			"add": [
-				[
-					"<love>I love how much bigger you make my balls~",
-					"<love>I love how much bigger you make my balls <infusedName>~"
-				],
-				[
-					"<love>You're better as extra size for me~",
-					"<love>You're better as extra size for me <infusedName>~"
-				]
-			]
-		},
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <infusedName>"
 		]
 	],
 	// Unused Dialogue
@@ -4913,7 +4636,7 @@
 			"Confused.png"
 		]
 	},
-	"strugglingHornyTransformed": {
+	"strugglingTransformedHorny": {
 		"dialogueRandom": [
 			"Mm, sorry~"
 		],
@@ -4921,7 +4644,7 @@
 			"Confused.png"
 		]
 	},
-	"strugglingHornyTransforming": {
+	"strugglingTransformingHorny": {
 		"dialogueRandom": [
 			"Mm, no~?"
 		],
@@ -5029,7 +4752,7 @@
 		]
 	},
 	"infusePreyNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
-	"sizeChangedFiendlyShrink": {
+	"sizeChangedShrinkFiendly": {
 		"dialogueRandom": [
 			"^red;Going to throw me at someone?",
 			"^red;Small or not, I'm still capable.",
@@ -5183,7 +4906,7 @@
 			"Mad.png"
 		]
 	},
-	"sizeChangedFiendlyGrow": {
+	"sizeChangedGrowFiendly": {
 		"dialogueRandom": [
 			"^red;Good. No one will mess with us.",
 			"^red;Sorry if I step on you.",
@@ -5264,8 +4987,7 @@
 			"Angry.png"
 		]
 	},
-	"converseFiendly.continue.options.3.1.digest": ":converse.continue.options.3.1.digest", // duplicated lines
-	"converseFiendly.continue.options.3.1.softDigest": {
+	"converseFiendly.continue.options.3.1.digest": {
 		"dialogue": [
 			"^red;You're going to melt. Become pudge. But it isn't fatal."
 		],
@@ -5316,10 +5038,9 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreDigestFull": [
+	"hmph": [
 		"^red;Hmph.^reset;"
-	],
-	"hmph": ":oralVoreDigestFull", // duplicated lines
+	], // duplicated lines
 	"greetingFiendly": {
 		"dialogueRandom": [
 			"^red;Yo.",
@@ -5405,7 +5126,7 @@
 			"Angry.png"
 		]
 	},
-	"oralVoreFiendlyRequested": {
+	"oralVoreRequestedFiendly": {
 		"dialogueRandom": [
 			"^red;Not afraid? Good.",
 			"^red;Seriously? Fine.",
@@ -5416,7 +5137,7 @@
 			"Angry.png"
 		]
 	},
-	"oralVoreFiendlyRequestedAfter": {
+	"oralVoreRequestedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;You're safe.",
 			"^red;It'll be okay.",
@@ -5427,7 +5148,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreFiendlyNoPrompt": {
+	"oralVoreNoPromptFiendly": {
 		"dialogueRandom": [
 			"^red;I'm not asking.",
 			"^red;I smell danger.",
@@ -5438,7 +5159,7 @@
 			"Angry.png"
 		]
 	},
-	"oralVoreFiendlyNoPromptAfter": {
+	"oralVoreNoPromptAfterFiendly": {
 		"dialogueRandom": [
 			"^red;You're mine now.",
 			"^red;Don't fight this.",
@@ -5449,7 +5170,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreFiendlyNo": {
+	"oralVoreNoFiendly": {
 		"dialogueRandom": [
 			"^red;Bad idea. You won't just melt.",
 			"^red;No.",
@@ -5460,7 +5181,7 @@
 			"Angry.png"
 		]
 	},
-	"oralVoreFiendlyFull": {
+	"oralVoreFullFiendly": {
 		"dialogueRandom": [
 			"^red;I can't.",
 			"^red;Already occupied.",
@@ -5471,7 +5192,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreFiendlyFullHeal": {
+	"oralVoreFullHealFiendly": {
 		"dialogueRandom": [
 			"^red;They're hurt. I'm full. Sorry.",
 			"^red;Gotta heal them first.",
@@ -5482,8 +5203,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreFiendlyFullDigest": ":oralVoreDigestFull", // duplicated lines
-	"oralVoreFiendlyFullSoftDigest": {
+	"oralVoreFullDigestFiendly": {
 		"dialogueRandom": [
 			"^red;I'm full. They'll be fine.",
 			"^red;It's hard to walk. Making them pudge helps.",
@@ -5505,7 +5225,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreFiendlyTooBig": {
+	"oralVoreTooBigFiendly": {
 		"dialogueRandom": [
 			"^red;You're big enough. Protect yourself.",
 			"^red;It's no use. You're too big.",
@@ -5516,7 +5236,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyRequested": {
+	"breastVoreRequestedFiendly": {
 		"dialogueRandom": [
 			"^red;Really. Fine.",
 			"^red;Whatever floats your boat.",
@@ -5527,7 +5247,7 @@
 			"Angry.png"
 		]
 	},
-	"breastVoreFiendlyRequestedAfter": {
+	"breastVoreRequestedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;You happy? Good.",
 			"^red;Don't drown.",
@@ -5538,7 +5258,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyNoPrompt": {
+	"breastVoreNoPromptFiendly": {
 		"dialogueRandom": [
 			"^red;I'm low on time. This'll do.",
 			"^red;They're coming. I'll hide you.",
@@ -5549,7 +5269,7 @@
 			"Angry.png"
 		]
 	},
-	"breastVoreFiendlyNoPromptAfter": {
+	"breastVoreNoPromptAfterFiendly": {
 		"dialogueRandom": [
 			"^red;I'll carry you.",
 			"^red;It'll be fine.",
@@ -5560,7 +5280,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyNo": {
+	"breastVoreNoFiendly": {
 		"dialogueRandom": [
 			"^red;Seriously? Not in the mood.",
 			"^red;I'm sore. Ask later.",
@@ -5571,7 +5291,7 @@
 			"Angry.png"
 		]
 	},
-	"breastVoreFiendlyFull": {
+	"breastVoreFullFiendly": {
 		"dialogueRandom": [
 			"^red;What? Admiring my assets? Fine.",
 			"^red;You may stare.",
@@ -5582,7 +5302,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyFullHeal": {
+	"breastVoreFullHealFiendly": {
 		"dialogueRandom": [
 			"^red;Stop worrying. They'll be fine.",
 			"^red;They're thirsty. Please wait.",
@@ -5593,8 +5313,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyFullDigest": ":oralVoreDigestFull", // duplicated lines
-	"breastVoreFiendlyFullSoftDigest": {
+	"breastVoreFullDigestFiendly": {
 		"dialogueRandom": [
 			"^red;Want a drink? Might burn your tongue.",
 			"^red;Someone missing? Haven't seen them.",
@@ -5605,7 +5324,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreFiendlyTooBig": {
+	"breastVoreTooBigFiendly": {
 		"dialogueRandom": [
 			"^red;Too big. Please shrink down.",
 			"^red;I'd never fit in another shirt. No.",
@@ -5616,7 +5335,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyRequested": {
+	"unbirthRequestedFiendly": {
 		"dialogueRandom": [
 			"^red;Just get in.",
 			"^red;Since you asked.",
@@ -5627,7 +5346,7 @@
 			"Angry.png"
 		]
 	},
-	"unbirthFiendlyRequestedAfter": {
+	"unbirthRequestedAfterFiendly": {
 		"dialogueRandom": [
 			"^red;This helps. Thanks.",
 			"^red;Claimed by me.",
@@ -5638,7 +5357,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyNoPrompt": {
+	"unbirthNoPromptFiendly": {
 		"dialogueRandom": [
 			"^red;My body needs this.",
 			"^red;This'll be rough.",
@@ -5649,7 +5368,7 @@
 			"Angry.png"
 		]
 	},
-	"unbirthFiendlyNoPromptAfter": {
+	"unbirthNoPromptAfterFiendly": {
 		"dialogueRandom": [
 			"^red;O-ooh...",
 			"^red;F-fwah...",
@@ -5660,7 +5379,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyFull": {
+	"unbirthFullFiendly": {
 		"dialogueRandom": [
 			"^red;You're too late. They're mine. For now.",
 			"^red;I couldn't resist. Sorry.",
@@ -5671,7 +5390,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyFullHeal": {
+	"unbirthFullHealFiendly": {
 		"dialogueRandom": [
 			"^red;Getting them fixed.",
 			"^red;Quiet. They're tired.",
@@ -5682,8 +5401,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyFullDigest": ":oralVoreDigestFull", // duplicated lines
-	"unbirthFiendlyFullSoftDigest": {
+	"unbirthFullDigestFiendly": {
 		"dialogueRandom": [
 			"^red;All mine.",
 			"^red;Mostly soft by now.",
@@ -5694,7 +5412,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthFiendlyTooBig": {
+	"unbirthTooBigFiendly": {
 		"dialogueRandom": [
 			"^red;One of us would get crushed.",
 			"^red;I'm not that desperate.",
@@ -5705,7 +5423,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyBelly": {
+	"struggleBellyFiendly": {
 		"dialogueRandom": [
 			"^red;Quit it. You're safe.",
 			"^red;Stay down.",
@@ -5716,7 +5434,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyHealBelly": {
+	"struggleHealBellyFiendly": {
 		"dialogueRandom": [
 			"^red;You're hurt. Don't.",
 			"^red;Eager to risk it all? Pass.",
@@ -5727,7 +5445,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlySoftDigestBelly": {
+	"struggleDigestBellyFiendly": {
 		"dialogueRandom": [
 			"^red;It won't last long. I'll reform you.",
 			"^red;Melt. Let me bear your burdens for now.",
@@ -5738,7 +5456,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyDigestImmuneBelly": {
+	"struggleDigestImmuneBellyFiendly": {
 		"dialogueRandom": [
 			"^red;Sorry. My gut wants to try anyway.",
 			"^red;You're tough. Few resist this.",
@@ -5749,7 +5467,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyCompressionBelly": {
+	"struggleCompressionBellyFiendly": {
 		"dialogueRandom": [
 			"^red;No bulges. Perfect.",
 			"^red;Just relax. You're safe from everyone.",
@@ -5760,7 +5478,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeBelly": {
+	"struggleNoEscapeBellyFiendly": {
 		"dialogueRandom": [
 			"^red;I told you to settle down.",
 			"^red;I don't joke. It's futile.",
@@ -5771,7 +5489,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeCountdownBelly": {
+	"struggleNoEscapeCountdownBellyFiendly": {
 		"dialogue": [
 			"^red;Keep it up and I'll keep you.",
 			"^red;Not going to give up?",
@@ -5782,7 +5500,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeReleaseBelly": {
+	"struggleNoEscapeReleaseBellyFiendly": {
 		"dialogue": [
 			"^red;I think it's safe now.",
 			"^red;You put up a good effort.",
@@ -5793,7 +5511,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyWomb": {
+	"struggleWombFiendly": {
 		"dialogueRandom": [
 			"^red;Good. Keep moving.",
 			"^red;Hush.",
@@ -5804,7 +5522,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyHealWomb": {
+	"struggleHealWombFiendly": {
 		"dialogueRandom": [
 			"^red;Relax. You deserve this.",
 			"^red;I will always protect you.",
@@ -5815,7 +5533,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyTransformedWomb": {
+	"struggleTransformedWombFiendly": {
 		"dialogueRandom": [
 			"^red;You're like me now.",
 			"^red;Safety in numbers.",
@@ -5826,7 +5544,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyTransformingWomb": {
+	"struggleTransformingWombFiendly": {
 		"dialogueRandom": [
 			"^red;You're slowly changing now.",
 			"^red;A bit of me to protect you.",
@@ -5837,7 +5555,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyTransformingImmuneWomb": {
+	"struggleTransformingImmuneWombFiendly": {
 		"dialogueRandom": [
 			"^red;Immune? That's okay.",
 			"^red;Sorry, can't help it.",
@@ -5848,7 +5566,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyEggedWomb": {
+	"struggleEggedWombFiendly": {
 		"dialogueRandom": [
 			"^red;Smash Bros 64. Yoshi. Murrr."
 		],
@@ -5856,7 +5574,7 @@
 			"Blep.png"
 		]
 	},
-	"struggleFiendlyEggifyWomb": {
+	"struggleEggifyWombFiendly": {
 		"dialogueRandom": [
 			"^red;Heh. Egg.",
 			"^red;Hope this one doesn't explode.",
@@ -5867,8 +5585,8 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyEggifyImmuneWomb": ":struggleEggifyImmuneWomb", // duplicated lines
-	"struggleFiendlySoftDigestWomb": {
+	"struggleEggifyImmuneWombFiendly": ":struggleEggifyImmuneWomb", // duplicated lines
+	"struggleDigestWombFiendly": {
 		"dialogueRandom": [
 			"^red;I know. It'll be fine.",
 			"^red;Feels good. You're softer now.",
@@ -5879,7 +5597,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyDigestImmuneWomb": {
+	"struggleDigestImmuneWombFiendly": {
 		"dialogueRandom": [
 			"^red;It's spicy, I know.",
 			"^red;Push there again. \nThanks.",
@@ -5890,7 +5608,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyCompressionWomb": {
+	"struggleCompressionWombFiendly": {
 		"dialogueRandom": [
 			"^red;Gonna keep you a secret.",
 			"^red;Not even a single bump~",
@@ -5901,7 +5619,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeWomb": {
+	"struggleNoEscapeWombFiendly": {
 		"dialogueRandom": [
 			"^red;This contract is unbreakable.",
 			"^red;Struggle. Relax. You're fine both ways.",
@@ -5912,7 +5630,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeCountdownWomb": {
+	"struggleNoEscapeCountdownWombFiendly": {
 		"dialogue": [
 			"^red;Don't want you to slip out.",
 			"^red;A little fire. \nMixed with my desire.",
@@ -5923,7 +5641,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeReleaseWomb": {
+	"struggleNoEscapeReleaseWombFiendly": {
 		"dialogue": [
 			"^red;Spell is wearing off.",
 			"^red;Mmm, starting to quiver.",
@@ -5934,7 +5652,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyBreasts": {
+	"struggleBreastsFiendly": {
 		"dialogueRandom": [
 			"^red;You're such a freak for enjoying this.",
 			"^red;I bet my growls feel real good to you.",
@@ -5945,7 +5663,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlySoftDigestBreasts": {
+	"struggleDigestBreastsFiendly": {
 		"dialogueRandom": [
 			"^red;I turned up the heat. Not sorry.",
 			"^red;Your sloshing is getting louder.",
@@ -5956,7 +5674,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyDigestImmuneBreasts": {
+	"struggleDigestImmuneBreastsFiendly": {
 		"dialogueRandom": [
 			"^red;Distracting, but I like it.",
 			"^red;Don't want to be milk? I'll stop.",
@@ -5967,7 +5685,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyCompressionBreasts": {
+	"struggleCompressionBreastsFiendly": {
 		"dialogueRandom": [
 			"^red;Heh, hidden from sight.",
 			"^red;My little secret.",
@@ -5978,7 +5696,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeBreasts": {
+	"struggleNoEscapeBreastsFiendly": {
 		"dialogueRandom": [
 			"^red;This metal is older than you are. It won't break.",
 			"^red;Hmhm, shake shake...",
@@ -5989,7 +5707,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeCountdownBreasts": {
+	"struggleNoEscapeCountdownBreastsFiendly": {
 		"dialogue": [
 			"^red;Hmph, you almost slipped out.",
 			"^red;I don't want you to leave just yet.",
@@ -6000,7 +5718,7 @@
 			"Mad.png"
 		]
 	},
-	"struggleFiendlyNoEscapeReleaseBreasts": {
+	"struggleNoEscapeReleaseBreastsFiendly": {
 		"dialogue": [
 			"^red;Looks like it's coming loose.",
 			"^red;Heh. It only cost ten Pixels.",
@@ -6022,7 +5740,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutForcedFiendlyHeal": {
+	"oralVoreLetoutForcedHealFiendly": {
 		"dialogueRandom": [
 			"^red;I'm not done. Come here.",
 			"^red;You sure?",
@@ -6033,7 +5751,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutForcedFiendlySoftDigest": {
+	"oralVoreLetoutForcedDigestFiendly": {
 		"dialogueRandom": [
 			"^red;Sorry, needed to be slimmer.",
 			"^red;Too hot? Okay.",
@@ -6044,7 +5762,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutForcedFiendlySoftDigestImmune": {
+	"oralVoreLetoutForcedDigestImmuneFiendly": {
 		"dialogueRandom": [
 			"^red;You were fine.",
 			"^red;It wasn't bad, was it?",
@@ -6055,7 +5773,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutForcedFiendlyDigested": {
+	"oralVoreLetoutForcedDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;Want out? One moment.",
 			"^red;Done being pudge? Alright.",
@@ -6077,7 +5795,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutFiendlyHeal": {
+	"oralVoreLetoutHealFiendly": {
 		"dialogueRandom": [
 			"^red;You're good now. I'm pushing you out.",
 			"^red;If you're hurt, come back.",
@@ -6088,7 +5806,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutFiendlySoftDigest": {
+	"oralVoreLetoutDigestFiendly": {
 		"dialogueRandom": [
 			"^red;You're melting. Time to leave.",
 			"^red;Sorry. Gotta let you out.",
@@ -6099,7 +5817,7 @@
 			"Mad.png"
 		]
 	},
-	"oralVoreLetoutFiendlyDigested": {
+	"oralVoreLetoutDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;It's safe. I'll reform you.",
 			"^red;They couldn't find you. Bringing you back.",
@@ -6121,7 +5839,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutForcedFiendlyHeal": {
+	"unbirthVoreLetoutForcedHealFiendly": {
 		"dialogueRandom": [
 			"^red;I'm not done. Get back in.",
 			"^red;I could keep you. But you know better.",
@@ -6132,7 +5850,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutForcedFiendlySoftDigest": {
+	"unbirthVoreLetoutForcedDigestFiendly": {
 		"dialogueRandom": [
 			"^red;I understand. Here goes.",
 			"^red;My mistake. I'll let you out.",
@@ -6143,7 +5861,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutForcedFiendlyTransformed": {
+	"unbirthVoreLetoutForcedTransformedFiendly": {
 		"dialogueRandom": [
 			"^red;Hot damn. You look good.",
 			"^red;See? It's not bad.",
@@ -6154,7 +5872,7 @@
 			"Joyful.png"
 		]
 	},
-	"unbirthVoreLetoutForcedFiendlyTransforming": {
+	"unbirthVoreLetoutForcedTransformingFiendly": {
 		"dialogueRandom": [
 			"^red;No changes? I understand.",
 			"^red;You would've looked sexy.",
@@ -6165,9 +5883,9 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutForcedFiendlyTransformingImmune": ":unbirthVoreLetoutForcedTransforming", // duplicated lines
-	"unbirthVoreLetoutForcedFiendlyEgged": ":unbirthVoreLetoutForcedEgged", // duplicated lines
-	"unbirthVoreLetoutForcedFiendlyEggify": {
+	"unbirthVoreLetoutForcedTransformingImmuneFiendly": ":unbirthVoreLetoutForcedTransforming", // duplicated lines
+	"unbirthVoreLetoutForcedEggedFiendly": ":unbirthVoreLetoutForcedEgged", // duplicated lines
+	"unbirthVoreLetoutForcedEggifyFiendly": {
 		"dialogueRandom": [
 			"^red;No egg? Alright.",
 			"^red;I see. Not in the mood?",
@@ -6178,8 +5896,8 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutForcedFiendlyEggifyImmune": ":unbirthVoreLetoutForcedTransforming", // duplicated lines
-	"unbirthVoreLetoutForcedFiendlyDigested": {
+	"unbirthVoreLetoutForcedEggifyImmuneFiendly": ":unbirthVoreLetoutForcedTransforming", // duplicated lines
+	"unbirthVoreLetoutForcedDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;Good flow. I'll reform you.",
 			"^red;Done in there? I'll push, then.",
@@ -6201,7 +5919,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutFiendlyHeal": {
+	"unbirthVoreLetoutHealFiendly": {
 		"dialogueRandom": [
 			"^red;Get hurt again; you know where to find me.",
 			"^red;Gotta make room. Someone might be hurt.",
@@ -6212,7 +5930,7 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutFiendlySoftDigest": {
+	"unbirthVoreLetoutDigestFiendly": {
 		"dialogueRandom": [
 			"^red;Not good. You're melting too much. Back outside you go.",
 			"^red;My womb wants too much. I'm releasing you.",
@@ -6223,8 +5941,8 @@
 			"Mad.png"
 		]
 	},
-	"unbirthVoreLetoutFiendlyTransformed": ":unbirthVoreLetoutForcedFiendlyTransformed", // duplicated lines
-	"unbirthVoreLetoutFiendlyDigested": {
+	"unbirthVoreLetoutTransformedFiendly": ":unbirthVoreLetoutForcedTransformedFiendly", // duplicated lines
+	"unbirthVoreLetoutDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;Fun and sloshy. Time to return, though.",
 			"^red;I'm reforming you. My fun is done.",
@@ -6246,7 +5964,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreLetoutForcedFiendlyHeal": {
+	"breastVoreLetoutForcedHealFiendly": {
 		"dialogueRandom": [
 			"^red;Don't like milk? Fine.",
 			"^red;More milk for me, then.",
@@ -6257,7 +5975,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreLetoutForcedFiendlySoftDigest": {
+	"breastVoreLetoutForcedDigestFiendly": {
 		"dialogueRandom": [
 			"^red;It's burning? Sorry.",
 			"^red;Too much heat? Okay.",
@@ -6268,7 +5986,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreLetoutForcedFiendlyDigested": {
+	"breastVoreLetoutForcedDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;Done hanging around?",
 			"^red;One fresh squeeze, then.",
@@ -6290,7 +6008,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreLetoutFiendlyHeal": {
+	"breastVoreLetoutHealFiendly": {
 		"dialogueRandom": [
 			"^red;I think you're healed now.",
 			"^red;Gotta save some milk for others.",
@@ -6301,7 +6019,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreLetoutFiendlySoftDigest": {
+	"breastVoreLetoutDigestFiendly": {
 		"dialogueRandom": [
 			"^red;Damn, nearly melted you.",
 			"^red;I got too excited.",
@@ -6312,7 +6030,7 @@
 			"Mad.png"
 		]
 	},
-	"breastVoreLetoutFiendlyDigested": {
+	"breastVoreLetoutDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;You're slipping. I'm reforming you.",
 			"^red;Time to face the world again.",
@@ -6356,7 +6074,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHungryNoEscapeBelly": {
+	"struggleNoEscapeBellyHungry": {
 		"dialogueRandom": [
 			"Keep it up. My stomach hasn't gurgled like this in a long time.",
 			"Too warm for you? I am hungry, after all.",
@@ -6367,7 +6085,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHungryNoEscapeCountdownBelly": {
+	"struggleNoEscapeCountdownBellyHungry": {
 		"dialogue": [
 			"Gotta say, my gut's getting rather restless with all your squirming.",
 			"Keep that up, and I'm letting you get front row seats to my hunger.",
@@ -6378,7 +6096,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHungryNoEscapeReleaseBelly": {
+	"struggleNoEscapeReleaseBellyHungry": {
 		"dialogue": [
 			"I think you've spent enough time in there.",
 			"Just play nice, alright?",
@@ -6389,7 +6107,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHornyNoEscapeBelly": {
+	"struggleNoEscapeBellyHorny": {
 		"dialogueRandom": [
 			"Don't stop~ I haven't had a good prey squirm about in years~.",
 			"Knowing you'll never escape right now~? Mmnf~",
@@ -6400,13 +6118,13 @@
 			"OwO.png"
 		]
 	},
-	"struggleHornyNoEscapeCountdownBelly": [
+	"struggleNoEscapeCountdownBellyHorny": [
 		"Uu~ That's starting to really feel good.",
 		"Don't mind me if I... mm... throw away the key for a bit..",
 		"Just checking my phone and...",
 		" ...and now our fun has just started~"
 	],
-	"struggleHornyNoEscapeReleaseBelly": {
+	"struggleNoEscapeReleaseBellyHorny": {
 		"dialogue": [
 			"That was amazing~",
 			"I think you deserve a nice break~",
@@ -6450,7 +6168,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHungryNoEscapeWomb": {
+	"struggleNoEscapeWombHungry": {
 		"dialogueRandom": [
 			"I gotta say, knowing you can't get out, mmng, makes this even better~",
 			"Keep squirming, my delightful bump~",
@@ -6461,7 +6179,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHungryNoEscapeCountdownWomb": {
+	"struggleNoEscapeCountdownWombHungry": {
 		"dialogue": [
 			"Your free time is running out, dear~",
 			"Just a dash of magic and some of my fire, and your exit will suit my desire~",
@@ -6472,7 +6190,7 @@
 			"Tired.png"
 		]
 	},
-	"struggleHungryNoEscapeReleaseWomb": {
+	"struggleNoEscapeReleaseWombHungry": {
 		"dialogue": [
 			"Ah, my spell's fading.",
 			"Next time, I'll... Mmm~",
@@ -6516,7 +6234,7 @@
 			"Happy.png"
 		]
 	},
-	"struggleHornyNoEscapeBreasts": {
+	"struggleNoEscapeBreastsHorny": {
 		"dialogueRandom": [
 			"Mmm, defeated by such a small piece of metal~",
 			"Jiggle as much as you like, dear~",
@@ -6527,7 +6245,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHornyNoEscapeCountdownBreasts": {
+	"struggleNoEscapeCountdownBreastsHorny": {
 		"dialogue": [
 			"Getting a little eager, dear~?",
 			"Just a small piercing of hellhound-forged steel should keep you in.",
@@ -6538,7 +6256,7 @@
 			"OwO.png"
 		]
 	},
-	"struggleHornyNoEscapeReleaseBreasts": {
+	"struggleNoEscapeReleaseBreastsHorny": {
 		"dialogue": [
 			"Not bad! You're a pro at hitting all the right spots~",
 			"Aah~ I think my piercing is melting from all the heat~",
@@ -6549,7 +6267,7 @@
 			"OwO.png"
 		]
 	},
-	"strugglingFiendlyBelly": {
+	"strugglingBellyFiendly": {
 		"dialogueRandom": [
 			[
 				"^red;I like this.",
@@ -6584,7 +6302,7 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyHealBelly": {
+	"strugglingHealBellyFiendly": {
 		"dialogueRandom": [
 			[
 				"^red;Thanks.",
@@ -6619,7 +6337,7 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyDigestImmuneBelly": {
+	"strugglingDigestImmuneBellyFiendly": {
 		"dialogueRandom": [
 			"^red;No digestion.",
 			"^red;I'm not melting.",
@@ -6630,8 +6348,7 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyDigestBelly": ":strugglingAcidDigest", // duplicated lines
-	"strugglingFiendlySoftDigestBelly": {
+	"strugglingDigestBellyFiendly": {
 		"dialogueRandom": [
 			"^red;Ooh, getting soft.",
 			"^red;Mm, take me for now.",
@@ -6642,7 +6359,7 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyTransformedBelly": {
+	"strugglingTransformedBellyFiendly": {
 		"dialogueRandom": [
 			"^red;Mm, sorry."
 		],
@@ -6650,7 +6367,7 @@
 			"Confused.png"
 		]
 	},
-	"strugglingFiendlyTransformingBelly": {
+	"strugglingTransformingBellyFiendly": {
 		"dialogueRandom": [
 			"^red;Mm, no?"
 		],
@@ -6658,7 +6375,7 @@
 			"Confused.png"
 		]
 	},
-	"strugglingFiendlyTransformingImmuneBelly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingTransformingImmuneBellyFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
 	"strugglingFiendly": {
 		"dialogueRandom": [
 			[
@@ -6683,13 +6400,13 @@
 			"Mad.png"
 		]
 	},
-	"strugglingSlimeFiendlyHeal": [
+	"strugglingSlimeHealFiendly": [
 		"^red;Not bad. Keep it going, please.",
 		"^red;That feels good.",
 		"^red;I feel much better.",
 		"^red;Delightful..."
 	],
-	"strugglingSlimeFiendlySoftDigest": {
+	"strugglingSlimeDigestFiendly": {
 		"dialogueRandom": [
 			"^red;Try not to absorb my angy.",
 			"^red;Slowly fading away for now.",
@@ -6700,8 +6417,8 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyBreasts": ":strugglingFiendlyWomb", // duplicated lines
-	"strugglingFiendlySoftDigestBreasts": {
+	"strugglingBreastsFiendly": ":strugglingWombFiendly", // duplicated lines
+	"strugglingDigestBreastsFiendly": {
 		"dialogueRandom": [
 			"^red;Aw, making me into milk?",
 			"^red;I wanted to stay solid longer...",
@@ -6712,13 +6429,12 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyDigestBreasts": ":strugglingAcidDigest", // duplicated lines
-	"strugglingFiendlyTransformedBreasts": ":strugglingTransformedBelly", // duplicated lines
-	"strugglingFiendlyTransformingBreasts": ":strugglingTransformingWomb", // duplicated lines
-	"strugglingFiendlyTransformingImmuneBreasts": ":strugglingTransformingImmuneBelly", // duplicated lines
-	"strugglingFiendlyEggifyBreasts": ":strugglingTransformingWomb", // duplicated lines
-	"strugglingFiendlyEggifyImmuneBreasts": ":strugglingTransformingImmuneBelly", // duplicated lines
-	"strugglingFiendlyWomb": {
+	"strugglingTransformedBreastsFiendly": ":strugglingTransformedBelly", // duplicated lines
+	"strugglingTransformingBreastsFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingTransformingImmuneBreastsFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingEggifyBreastsFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingEggifyImmuneBreastsFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingWombFiendly": {
 		"dialogueRandom": [
 			"^red;This is so calming...",
 			"^red;I don't want to leave...",
@@ -6729,7 +6445,7 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlySoftDigestWomb": {
+	"strugglingDigestWombFiendly": {
 		"dialogueRandom": [
 			"^red;Aw, melting me down?",
 			"^red;I wanted to stay solid longer...",
@@ -6740,12 +6456,11 @@
 			"Mad.png"
 		]
 	},
-	"strugglingFiendlyDigestWomb": ":strugglingAcidDigest", // duplicated lines
-	"strugglingFiendlyTransformedWomb": ":strugglingTransformedBelly", // duplicated lines
-	"strugglingFiendlyTransformingWomb": ":strugglingTransformingWomb", // duplicated lines
-	"strugglingFiendlyTransformingImmuneWomb": ":strugglingTransformingImmuneBelly", // duplicated lines
-	"strugglingFiendlyEggifyWomb": ":strugglingTransformingWomb", // duplicated lines
-	"strugglingFiendlyEggifyImmuneWomb": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingTransformedWombFiendly": ":strugglingTransformedBelly", // duplicated lines
+	"strugglingTransformingWombFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingTransformingImmuneWombFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingEggifyWombFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingEggifyImmuneWombFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
 	"voredFiendly": {
 		"dialogueRandom": [
 			"^red;Oh.",

@@ -70,8 +70,8 @@
 			"replace" : {"dialogueRandom":[":hellhoundConverse"]},
 			"next" : "percentage",
 			"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-			"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundHornyConverse"]}},
-			"food" : {"replace" : {"dialogueRandom" : [":hellhoundHungryConverse"]}}
+			"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundConverseHorny"]}},
+			"food" : {"replace" : {"dialogueRandom" : [":hellhoundConverseHungry"]}}
 		},
 		"otherOptions" : {
 			"add" : {
