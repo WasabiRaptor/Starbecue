@@ -691,19 +691,6 @@
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":struggleCompression"]
-			},
-			"next" : ["location"],
-			"location" : {
-				"cock" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":struggleCompressionCock"]
-					}
-				},
-				"balls" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":struggleCompressionBalls"]
-					}
-				}
 			}
 		},
 
@@ -745,19 +732,6 @@
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":struggleDrainEnergy"]
-			},
-			"next" : ["location"],
-			"location" : {
-				"cock" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":struggleDrainEnergyCock"]
-					}
-				},
-				"balls" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":struggleDrainEnergyBalls"]
-					}
-				}
 			}
 		}
 	},
@@ -883,19 +857,6 @@
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":strugglingCompression"]
-			},
-			"next" : ["location"],
-			"location" : {
-				"cock" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":strugglingCompressionCock"]
-					}
-				},
-				"balls" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":strugglingCompressionBalls"]
-					}
-				}
 			}
 		},
 
@@ -927,14 +888,6 @@
 			"sbq_cumDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
 					"dialogueRandom" : [":strugglingCumDigestImmune"]
-				},
-				"next" : ["location"],
-				"location" : {
-					"balls" : {
-						"queueReplace" : {
-							"dialogueRandom" : [":strugglingCumDigestImmuneBalls"]
-						}
-					}
 				}
 			}
 		},
@@ -964,38 +917,12 @@
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":strugglingDrainEnergy"]
-			},
-			"next" : ["location"],
-			"location" : {
-				"cock" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":strugglingDrainEnergyCock"]
-					}
-				},
-				"balls" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":strugglingDrainEnergyBalls"]
-					}
-				}
 			}
 		},
 		"sbqEggify" : {
 			"addQueued" : true,
 			"queueReplace" : {
 				"dialogueRandom" : [":strugglingEggify"]
-			},
-			"next" : ["location"],
-			"location" : {
-				"cock" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":strugglingEggifyCock"]
-					}
-				},
-				"balls" : {
-					"queueAdd" : {
-						"dialogueRandom" : [":strugglingEggifyBalls"]
-					}
-				}
 			}
 		},
 

@@ -78,14 +78,14 @@
 			"next" : "openNewDialogueBox",
 			"new" : {
 				"ui" : "starbecue:shop",
-				"inputData" : { "shopRecipes" : "/recipes/sbqShop/auriShopRecipes.config", "dialogueTreeStart" : ".shopConverse" }
+				"inputData" : { "shopRecipes" : "/recipes/sbqShop/auriShopRecipes.config", "dialogueTreeStart" : ".converseShop" }
 			}
 		},
 		"introduce" : {"new" : { "dialogue" : ":introduce"}}
 	},
-	"shopConverse" : {
+	"converseShop" : {
 		"new" : {
-			"dialogueRandom" :[":shopConverse"],
+			"dialogueRandom" :[":converseShop"],
 			"options" : [
 				["My name is...", ".converse.introduce", [["checkFlags", {"introduced" : false}]]],
 				["Tell me about yourself", ".talkAboutSelf"],
@@ -116,7 +116,7 @@
 				["Whats your belly like?", ".locations.belly", {"voreType" : "oralVore"}],
 				["Whats your breasts like?", ".locations.breasts", {"voreType" : "breastVore"}],
 				["What are your tails like?", ".locations.tail", {"voreType" : "tailVore"}],
-				["Whats your womb like?", ".locations.womb", {"voreType" : "unbirth"}],
+				["Whats your womb like?", ".locations.womb", {"voreType" : "unbirthVore"}],
 				["Whats your cock like?", ".locations.shaft", {"voreType" : "cockVore"}],
 				["Whats your balls like?", ".locations.balls", {"voreType" : "cockVore"}]
 			]

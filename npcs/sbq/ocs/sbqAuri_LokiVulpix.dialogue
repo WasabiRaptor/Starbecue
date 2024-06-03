@@ -17,7 +17,7 @@
 	"introduce": [
 		"I'll try to remember your name <entityName>, I'm not great with names."
 	],
-	"shopConverse": [
+	"converseShop": [
 		"Got any tasty rocks to pay me with?",
 		"I've got plenty of strange things to sell, as long as you're interested~",
 		"So you're gonna buy something?"
@@ -73,11 +73,11 @@
 			"This thing I like, made in a single day, in a frenzy of energy.",
 			"Do be aware that some people can be immune to TF."
 		],
-		"portraitRandom": [
-			"Joyful.png",
-			"Neutral.png",
-			"Happy.png",
-			"Neutral.png"
+		"imagePortraitRandom": [
+			"AJoyful.png",
+			"ANeutral.png",
+			"AHappy.png",
+			"ANeutral.png"
 		]
 	},
 	"itemSelectionNominomicon": [
@@ -87,12 +87,12 @@
 		"dialogueRandom": [
 			"These! These are so fun, its so dumb but they're so fun I love them.",
 			"These are entirely reusable, and random ones can come in mismatched colors",
-			"Did you know if you get unbirthed by a robotic species you'll get put in one of these?"
+			"Did you know if you get unbirthVoreed by a robotic species you'll get put in one of these?"
 		],
-		"portraitRandom": [
-			"Happy.png",
-			"Neutral.png",
-			"Blep.png"
+		"imagePortraitRandom": [
+			"AHappy.png",
+			"ANeutral.png",
+			"ABlep.png"
 		]
 	},
 	"itemSelectionEggWand": {
@@ -101,7 +101,7 @@
 			"I know I had one of these laying around somewhere...",
 			"Yeah I know 9999 is ridiculous but I can't just hand out something like this."
 		],
-		"portraitRandom": "Confused.png"
+		"imagePortraitRandom": "AConfused.png"
 	},
 	"itemSelectionSizeRay": {
 		"dialogueRandom": [
@@ -114,27 +114,27 @@
 			"This thing is so much fun!",
 			"If you have this in your inventory you can set a scale manually in the settings."
 		],
-		"portraitRandom": [
-			"Joyful.png",
-			"Neutral.png",
-			"Happy.png",
-			"Neutral.png"
+		"imagePortraitRandom": [
+			"AJoyful.png",
+			"ANeutral.png",
+			"AHappy.png",
+			"ANeutral.png"
 		]
 	},
 	"itemSelectionBallsPoster": {
 		"dialogueRandom": [
 			"Hehehehe, friends are stored in the balls~"
 		],
-		"portraitRandom": [
-			"Joyful.png"
+		"imagePortraitRandom": [
+			"AJoyful.png"
 		]
 	},
 	"itemSelectionLargeWoodenArmchair": {
 		"dialogueRandom": [
 			"Beeg chair for beeg friends."
 		],
-		"portraitRandom": [
-			"Neutral.png"
+		"imagePortraitRandom": [
+			"ANeutral.png"
 		]
 	},
 	"itemSelectionLoki_LokiVulpix_clothes": [
@@ -151,16 +151,16 @@
 			"Do note that I'm not maintaining any of that mod's content.",
 			"While this was originally an add-on to SSVM, SBQ is entirely standalone from it now."
 		],
-		"portraitRandom": [
-			"Neutral.png"
+		"imagePortraitRandom": [
+			"ANeutral.png"
 		]
 	},
 	"itemSelectionCoreCharem": {
 		"dialogue": [
 			"So, someone edited the shop recipes and also added this back into the game, fucking disgusting. This person expliclty allowed minors into vore spaces and was pedophillic, I don't want to associate with them."
 		],
-		"portrait": [
-			"Mad.png"
+		"imagePortrait": [
+			"AMad.png"
 		]
 	},
 	"rewardNotifyRichOre": [
@@ -576,6 +576,40 @@
 	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression", // external lines
 	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest", // external lines
 	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune", // external lines
+	"struggleCumDigest": [
+		[
+			"Yessss get turned into some nice sticky cum~",
+			"Mmm~ letting yourself melt down into my cum~?",
+			{
+				"check": {
+					"analVore": true
+				},
+				"add": [
+					"Maybe I'll find a nice ass to pump you out in when we're done~"
+				]
+			},
+			{
+				"check": {
+					"unbirthVore": true
+				},
+				"add": [
+					"Maybe I'll find a nice pussy to pump you out in when we're done~"
+				]
+			},
+			{
+				"check": {
+					"oralVore": true
+				},
+				"add": [
+					"Maybe I'll find a nice throat to pump you down when we're done~"
+				]
+			},
+			"Ffff, you're getting softer~",
+			"Clooooser~",
+			"Just relaaaax as I melt you down~",
+			"Feels like I've got more cum than usual sloshing around down there~"
+		]
+	],
 	"struggleCumDigestBalls": [
 		"Hehehe just melt down and stew in all that cum heheh.",
 		"I can feel you starting to slosh around with the rest of the cum hehe~"
@@ -1135,6 +1169,7 @@
 		}
 	},
 	// Unused Dialogue
+	// Unused Dialogue
 	"greetingIntroduced": [
 		"Hi <entityname>!"
 	],
@@ -1149,10 +1184,10 @@
 			"Interesting.",
 			"Fucking Hell."
 		],
-		"portraitRandom": [
-			"UwU.png",
-			"Neutral.png",
-			"Blep.png"
+		"imagePortraitRandom": [
+			"AUwU.png",
+			"ANeutral.png",
+			"ABlep.png"
 		]
 	},
 	"itemSelectionPotionGiantAvian": {
@@ -1162,11 +1197,11 @@
 			"I doubt the Stargazers would approve of this haha!",
 			"Make sure to check out the settings on this, theres some fun things that aren't enabled by default for obvious reasons!"
 		],
-		"portraitRandom": [
-			"Dizzy.png",
-			"Blep.png",
-			"Joyful.png",
-			"Happy.png"
+		"imagePortraitRandom": [
+			"ADizzy.png",
+			"ABlep.png",
+			"AJoyful.png",
+			"AHappy.png"
 		]
 	},
 	"itemSelectionPotionXeronious": {
@@ -1177,8 +1212,8 @@
 			"If I have to say the most difficult part making this, I think it'd probably be the grab system, which started here, had to redo how I handled the transformation groups to make it work.",
 			"The inhale that he can do is really fun to use"
 		],
-		"portraitRandom": [
-			"Neutral.png"
+		"imagePortraitRandom": [
+			"ANeutral.png"
 		]
 	},
 	"itemSelectionPotionSlime": {
@@ -1186,9 +1221,9 @@
 			"I actually made this whole thing in like, a few hours, it was done in one night. So yeah its really simple but rather fun!",
 			"Slime"
 		],
-		"portraitRandom": [
-			"Neutral.png",
-			"Blep.png"
+		"imagePortraitRandom": [
+			"ANeutral.png",
+			"ABlep.png"
 		]
 	},
 	"itemSelectionCoreZiellekDragon": [
@@ -1200,8 +1235,8 @@
 			"Halloween is my favorite!",
 			"My pet plushie Socks probably would like one of these in her house."
 		],
-		"portraitRandom": [
-			"Joyful.png"
+		"imagePortraitRandom": [
+			"AJoyful.png"
 		]
 	},
 	"greetingShop": [
@@ -1211,10 +1246,10 @@
 		"Oh this is just some weird little planet linked to a bunch of others, so I decided to build my shop here to sell this weird stuff."
 	],
 	"checkNPC": {
-		"portrait": [
-			"Joyful.png",
-			"Smug.png",
-			"Happy.png"
+		"imagePortrait": [
+			"AJoyful.png",
+			"ASmug.png",
+			"AHappy.png"
 		],
 		"dialogue": [
 			"I could probably, but my real world counterpart hasn't animated that for this form yet!",
@@ -1231,7 +1266,7 @@
 		"dialogueRandom": [
 			"I thought I'd give you a free sample of my wares!"
 		],
-		"portraitRandom": "Joyful.png"
+		"imagePortraitRandom": "AJoyful.png"
 	},
 	"converse.options.1.1": [
 		"Well hi there <entityname>!",
@@ -1244,40 +1279,40 @@
 		"dialogue": [
 			"Other than that it should be pretty comfortable for you!"
 		],
-		"portrait": [
-			"Happy.png"
+		"imagePortrait": [
+			"AHappy.png"
 		]
 	},
 	"converse.options.3.1.continue.heal": {
 		"dialogue": [
 			"My juices in there should patch you up and be really soothing!"
 		],
-		"portrait": [
-			"Joyful.png"
+		"imagePortrait": [
+			"AJoyful.png"
 		]
 	},
 	"converse.options.3.1.continue.softDigest": {
 		"dialogue": [
 			"Well, you'd probably drift off to a nice relaxing goopy nap as I melt you down to keep as some pudge."
 		],
-		"portrait": [
-			"Smug.png"
+		"imagePortrait": [
+			"ASmug.png"
 		]
 	},
 	"converse.options.4.1.default": {
 		"dialogue": [
 			"Should be nice and comfy in there."
 		],
-		"portrait": [
-			"Happy.png"
+		"imagePortrait": [
+			"AHappy.png"
 		]
 	},
 	"converse.options.4.1.heal": {
 		"dialogue": [
 			"You'll feel so comfy and rested in there, I've heard its very nice~"
 		],
-		"portrait": [
-			"Happy.png"
+		"imagePortrait": [
+			"AHappy.png"
 		]
 	},
 	"converse.options.5.1.default": [
@@ -1293,8 +1328,8 @@
 		"dialogue": [
 			"Hehe, I'll probably get pretty hard if you squirm your way in there~"
 		],
-		"portrait": [
-			"Smug.png"
+		"imagePortrait": [
+			"ASmug.png"
 		]
 	},
 	"converse.options.7.1.default": [
@@ -1377,39 +1412,5 @@
 			"Hehe, part of my hoard~",
 			"Looks like I'll be keeping you in my hoard~"
 		]
-	],
-	"struggleCumDigest": [
-		[
-			"Yessss get turned into some nice sticky cum~",
-			"Mmm~ letting yourself melt down into my cum~?",
-			{
-				"check": {
-					"analVore": true
-				},
-				"add": [
-					"Maybe I'll find a nice ass to pump you out in when we're done~"
-				]
-			},
-			{
-				"check": {
-					"unbirth": true
-				},
-				"add": [
-					"Maybe I'll find a nice pussy to pump you out in when we're done~"
-				]
-			},
-			{
-				"check": {
-					"oralVore": true
-				},
-				"add": [
-					"Maybe I'll find a nice throat to pump you down when we're done~"
-				]
-			},
-			"Ffff, you're getting softer~",
-			"Clooooser~",
-			"Just relaaaax as I melt you down~",
-			"Feels like I've got more cum than usual sloshing around down there~"
-		]
-	],
+	]
 }

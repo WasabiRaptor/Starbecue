@@ -4,6 +4,9 @@
 
 	// overall default values for a "new" dialogue
 	"defaultResults" : {
+		"imagePath" : ["/humanoid/sbqSocks_LokiVulpix/portraits/"],
+		"imagePortrait" : ["SNeutral.png"],
+		"textSound": ["/sfx/undertale/SND_TXT1.ogg"],
 		"jump" : ".converse" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 	},
 	// greeting is the default start of the tree

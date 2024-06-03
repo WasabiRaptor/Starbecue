@@ -4,6 +4,9 @@
 
 	// overall default values for a "new" dialogue
 	"defaultResults" : {
+		"imagePath" : ["/humanoid/sbqFerri_Ferrilata_/portraits/"],
+		"imagePortrait" : ["Neutral.png"],
+		"textSound": ["/sfx/undertale/SND_TXT1.ogg"],
 		"jump" : ".converse" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 	},
 	// greeting is the default start of the tree
@@ -19,10 +22,13 @@
 			}
 		},
 		"default" : {
-			"next" : ["isOwner"],
+			"next" : ["percentage","isOwner"],
 			"replace" : {
 				"dialogueRandom" : [":greeting"]
 			},
+			"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+			"sbqLust" : {"replace" : {"dialogueRandom" : [":greetingHorny"]}},
+			"food" : {"replace" : {"dialogueRandom" : [":greetingHungry"]}},
 			"true" : {
 				"next" : ["isFollowing", "addConverse"],
 				"replace" : {
@@ -61,18 +67,8 @@
 			"buttonText" : ":optionsPrompt",
 			"options" : []
 		},
-		"next" : ["percentage","playerRace","otherOptions"],
-		"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-		"sbqLust" : {"replace" : {"dialogueRandom" : [":hornyConverse"]}},
-		"food" : {"replace" : {"dialogueRandom" : [":hungryConverse"]}},
-		"sbqHelena_FFWizard" : ".hellhound",
-		"hellhound" : {
-			"replace" : {"dialogueRandom":[":hellhoundConverse"]},
-			"next" : "percentage",
-			"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-			"sbqLust" : {"replace" : {"dialogueRandom" : [":hellhoundConverseHorny"]}},
-			"food" : {"replace" : {"dialogueRandom" : [":hellhoundConverseHungry"]}}
-		},
+		"next" : ["otherOptions"],
+
 		"otherOptions" : {
 			"add" : {
 				"options" : [
@@ -88,41 +84,9 @@
 			"options" : [
 				["Who are you?", ".who"],
 				["So you mentioned you're a catfox?\nIs that, like, a cat and a fox?", ".catfox"],
-				["So you mentioned you could help me out some ways?", ".help"],
-				["So what's your stomach like?", ".belly"]
+				["So you mentioned you could help me out some ways?", ".help"]
+				// ["So what's your stomach like?", ".belly"]
 			]
-		},
-		"seperateNext" : true,
-		"next" : ["percentage"],
-		"percentage" : {
-			"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-			"sbqLust" : {
-				"replace" : {
-					"dialogueRandom" : [":hornyCurious"]
-				},
-				"add" : {
-					"options" : [
-						["Getting heated, huh?", ".heat"]
-					]
-				}
-			},
-			"food" : {
-				"replace" : {
-					"dialogueRandom" : [":hungryCurious"]
-				},
-				"add" : {
-					"options" : [
-						["How bad does your hunger get?", ".hunger"]
-					]
-				}
-			},
-			"default" : {
-				"add" : {
-					"options" : [
-						["How did you get those scars?", ".scars"]
-					]
-				}
-			}
 		},
 		"who" : {
 			"new" : {
@@ -144,20 +108,20 @@
 			}
 		},
 
-		"belly" : {
-			"new" : {
-				"location" : "belly",
-				"dialogue" : ":curiousBelly",
-				"jump" : ".curious.questionAnswered"
-			},
-			"next" : ["percentage","locationEffectSlot"],
-			"percentage" : { "sbqLust" : 0.55, "food" : -0.55 },
-			"sbqLust" : {"replace" : {"dialogueRandom" : [":hornyCuriousBelly"]}},
-			"food" : {"replace" : {"dialogueRandom" : [":hungryCuriousBelly"]}},
-			"heal" : {"replace" : { "dialogueRandom" : [":curiousAcidHeal"]}},
-			"dDigest" : {"replace" : { "dialogueRandom" : [":curiousAcidDigest"]}},
-			"softDigest" : {"replace" : { "dialogueRandom" : [":curiousBellySoftDigest"]}}
-		},
+		// "belly" : {
+		// 	"new" : {
+		// 		"location" : "belly",
+		// 		"dialogue" : ":curiousBelly",
+		// 		"jump" : ".curious.questionAnswered"
+		// 	},
+		// 	"next" : ["percentage","locationEffectSlot"],
+		// 	"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+		// 	"sbqLust" : {"replace" : {"dialogueRandom" : [":curiousBellyHorny"]}},
+		// 	"food" : {"replace" : {"dialogueRandom" : [":curiousBellyHungry"]}},
+		// 	"heal" : {"replace" : { "dialogueRandom" : [":curiousAcidHeal"]}},
+		// 	"dDigest" : {"replace" : { "dialogueRandom" : [":curiousAcidDigest"]}},
+		// 	"softDigest" : {"replace" : { "dialogueRandom" : [":curiousBellySoftDigest"]}}
+		// },
 		"questionAnswered" : {
 			"new" : {
 				"dialogueRandom" : [":questionAnswered1"],

@@ -1,4 +1,23 @@
 {
+	"greetingRewards": [
+		"You were an excellent part of my perfomance, so have this~",
+		{
+			"check": {
+				"introduced": true
+			},
+			"add": [
+				[
+					"You were a great assistant <entityname>!\nEnjoy~"
+				]
+			]
+		}
+	],
+	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
+	"greeting": "/npcs/sbq/dialogue/default.dialogue:greeting", // external lines
+	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
+	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
+	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
+	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
 	"oralVoreRequested": [
 		"Hehe, time for our little dissapearing act then~",
 		"Here, just lean in and give me a kiss..~",
@@ -361,7 +380,6 @@
 	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
 	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
 	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming", // external lines
-	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
 	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
 	"struggleEggify": [
 		[
@@ -671,26 +689,8 @@
 			}
 		}
 	},
-	// Unused Dialogue
-	"greetingRewards": [
-		"You were an excellent part of my perfomance, so have this~",
-		{
-			"check": {
-				"introduced": true
-			},
-			"add": [
-				[
-					"You were a great assistant <entityname>!\nEnjoy~"
-				]
-			]
-		}
-	],
-	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
-	"greeting": "/npcs/sbq/dialogue/default.dialogue:greeting", // external lines
-	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
-	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
-	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
-	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
+	// Unused Dialogue 
+	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
 	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney", // external lines
 	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards", // external lines
 	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards", // external lines

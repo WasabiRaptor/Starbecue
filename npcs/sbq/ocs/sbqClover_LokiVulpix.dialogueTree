@@ -1,4 +1,59 @@
 {
+	"defaultResults" : {
+		"imagePath" : ["/humanoid/sbqClover_LokiVulpix/portraits/"],
+		"imagePortrait" : ["CNeutral.png"],
+		"textSound": ["/sfx/undertale/SND_TXT1.ogg"],
+		"jump" : ".converse" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
+	},
+
+	"greeting" : {
+		"new" : {"jump" : ".converse"},
+		"next" : "giveRewards",
+		"rewards" : {
+			"replace" : {"dialogueRandom" : [":greetingRewards"]},
+			"next" : ["introduced"],
+			"true" : {
+				"replace" : {"dialogueRandom" : [":greetingRewardsIntroduced"]}
+			}
+		},
+		"default" : {
+			"next" : ["isOwner"],
+			"replace" : {
+				"dialogueRandom" : [":greeting"]
+			},
+			"true" : {
+				"next" : ["isFollowing", "addConverse"],
+				"replace" : {
+					"dialogueRandom" : [":greetingCrew"],
+					"buttonText" : ":optionsPrompt"
+				},
+				"true" : { "replace" : {
+					"options" : [[":stay", ".stay"]]
+				}},
+				"false" : {"replace" : {
+					"options" : [[":follow", ".follow"]]
+				}},
+				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
+			}
+		}
+	},
+	"stay" : {
+		"next" : ["requestUnfollow"],
+		"new" : {
+			"dialogueRandom" : [":crewStay"]
+		}
+	},
+	"follow" : {
+		"next" : ["canGainFollowers"],
+		"false" : {
+			"new" : {"dialogueRandom" : [":fullCrew"]}
+		},
+		"true" : {
+			"next" : ["requestFollow"],
+			"new" : {"dialogueRandom" : [":crewFollow"]}
+		}
+	},
+
 	// responses when another character requests an action from them
 	"actionRequested" : {
 		// "<action>" : {

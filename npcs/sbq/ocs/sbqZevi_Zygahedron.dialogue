@@ -359,13 +359,18 @@
 	],
 	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
 	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
-	"oralVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnprompted", // external lines
+	"oralVoreUnprompted": ":defaultUnprompted", // duplicated lines
+	"defaultUnprompted": [
+		"Ah!"
+	],
 	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted", // external lines
 	"absorbVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:absorbVoreUnprompted", // external lines
 	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted", // external lines
-	"unbirthVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnprompted", // external lines
+	"unbirthVoreUnprompted": ":cockVoreUnprompted", // duplicated lines
+	"cockVoreUnprompted": [
+		"UwU"
+	],
 	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted", // external lines
-	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
 	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter", // external lines
 	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter", // external lines
 	"absorbVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutUnpromptedAfter", // external lines
@@ -459,7 +464,6 @@
 	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
 	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
 	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming", // external lines
-	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
 	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
 	"struggleEggify": [
 		"Can you feel that egg forming around you?",
@@ -1065,6 +1069,8 @@
 			}
 		}
 	},
+	// Unused Dialogue 
+	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
 	// Unused Dialogue
 	"full": [
 		"I'm a bit too full...",
@@ -1227,14 +1233,6 @@
 			]
 		}
 	],
-	"vored.default.default.default.default.default": [
-		"Ah!"
-	],
-	"vored.oralVore.default.default.default.default": ":vored.default.default.default.default.default", // duplicated lines
-	"vored.cockVore.default.default.default.default": [
-		"UwU"
-	],
-	"vored.unbirth.default.default.default.default": ":vored.cockVore.default.default.default.default", // duplicated lines
 	"escape.default.default.true.default.default.default": [
 		"I got out."
 	],

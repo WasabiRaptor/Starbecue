@@ -100,9 +100,9 @@
 			"M-maybe I can tell you that story myself later...", // Loki
 			"Fluff for brains here might get the story wrong or something." // Loki
 		],
-		"portrait": [
+		"imagePortrait": [
 			"/humanoid/sbqLoki_LokiVulpix/portraits/LConfused.png",
-			"Neutral.png",
+			"SNeutral.png",
 			"/humanoid/sbqLoki_LokiVulpix/portraits/LShocked.png",
 			"/humanoid/sbqLoki_LokiVulpix/portraits/LConfused.png"
 		]
@@ -187,7 +187,16 @@
 	"tailVoreTooSmall": ":tooSmall", // duplicated lines
 	"tailVoreNoSlots": ":noSlots", // duplicated lines
 	"tailVoreFull": ":defaultFull", // duplicated lines
-	"defaultFull": "Missing: defaultFull <dialoguePath>",
+	"defaultFull": [
+		"I might pop a stitch if I try to fill myself any more!",
+		"My fabric is getting stretched pretty thin!",
+		"My body has some great napping spots, but already at full occupancy~",
+		"You can hug me from the outside if you want~",
+		"You just can't resist the call of my soft plushie body, can you~",
+		"Maybe if you squish your paws on my belly enough I might give you a turn somewhere~",
+		"How about we just snuggle with you out here for now~",
+		"Perhaps we can think of something else to do hmmm~?"
+	],
 	"tailVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
 	"tailVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
 	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
@@ -289,7 +298,10 @@
 		"Ahh~ my dildo does have a limit to how much it can stretch!",
 		"I don't think you'll be able to fit, even if <infusedName> wants to try..."
 	],
-	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockVoreNeedsInfusion": [
+		"I don't have one of those normally, I'd need a *special* kind of dildo~",
+		"Mmm~ I can't quite do that to you at the moment, but I could do something else~"
+	],
 	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
 	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"bellyInfuseRequested": [
@@ -500,12 +512,50 @@
 	],
 	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
 	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
-	"oralVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnprompted", // external lines
+	"oralVoreUnprompted": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"Ah! plushies are supposed to be for snuggling!",
+		"Meep! I thought you were just going for a smooch!",
+		"Are you sure you want to eat me?\nI'm just a plushie!",
+		"I-I guess I can snuggle in your belly!",
+		"You're drooling on me~!\nI-I might need a wash after this!"
+	],
 	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted", // external lines
 	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted", // external lines
-	"unbirthVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnprompted", // external lines
-	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted", // external lines
-	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
+	"unbirthVoreUnprompted": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"<keysmash>",
+		"UwU",
+		"W-wait I'm the one who's supposed to unbirthVore YOU!",
+		"O-oh my you're gonna snuggle ME like this~?",
+		"Your pussy is so wet~!\nI-I might need a wash after this!"
+	],
+	"breastVoreUnprompted": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"<keysmash>",
+		"UwU",
+		"A-ah I thought you were just snuggling me against your boobs!",
+		"You're gonna soak me in milk~! I-I might need a wash after this!"
+	],
+	"cockVoreUnprompted": [
+		"Ah!",
+		"Meep!",
+		"Yip!",
+		"Yap!",
+		"<keysmash>",
+		"UwU",
+		"O-oh my usually people put their dicks in me!\nnot the other way around!",
+		"You're gonna get me cum soaked~!\nI-I might need a wash after this!"
+	],
 	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter", // external lines
 	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter", // external lines
 	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter", // external lines
@@ -577,7 +627,24 @@
 		"I thought you liked it in there.",
 		"Oh... alright."
 	],
-	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly", // external lines
+	"struggleBelly": [
+		"Snuggle my belly as much as you want~",
+		"Enjoying my soft plushie belly~?",
+		"I bet you'll drift off and take a nap soon enough~",
+		"Mmm~ I love your little squirms~",
+		"I bet you just love the sway of my belly as I walk~",
+		"Its nice and comfortable in there right~?",
+		"My belly was designed to be nice and soft to take naps in~",
+		"You should consider staying in there for a while~",
+		"I bet you just love squishing your hands into the soft plush walls of my belly~",
+		"Mmmm~ knead your hands alllll over in there for me~",
+		"I love snuggles, inside and out~",
+		"Mmmm, just giving you a full body hug~",
+		"You're trapped inside a plushie's belly~",
+		"You're just loving the warmth of my belly aren't you~",
+		"These are some of my favorite snuggles~",
+		"Hehe, stuck inside a plushie~"
+	],
 	"struggleWomb": [
 		"Hehe, zipped up and trapped inside me~",
 		"Hope you like how it feels in there~",
@@ -613,7 +680,19 @@
 	],
 	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls", // external lines
 	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss", // external lines
-	"struggleAcidHeal": "/npcs/sbq/dialogue/default.dialogue:struggleAcidHeal", // external lines
+	"struggleAcidHeal": [
+		[
+			"You should start feeling a lot better after this rest~",
+			"You should stay nice and snug in my belly until you feel better~",
+			"Let me patch you up~",
+			"A rest in my belly should soothe all your troubles away~",
+			"You're nice and safe tucked away in my belly~",
+			"My plush belly should keep you nice and safe~",
+			"You'll be well protected in my belly~",
+			"All of my plush padding should keep you safe~",
+			"You should stay for a while,\nI'll keep you safe tucked away inside me~"
+		]
+	],
 	"struggleFemcumHeal": [
 		[
 			"You should start feeling a lot better after this rest~",
@@ -888,7 +967,16 @@
 		"I'm flattered you think I'm so tasty,\nbut I'm not really food.",
 		"I'm really going to need a wash after this..."
 	],
-	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest", // external lines
+	"strugglingCumDigest": [
+		"Ahh~ your cock is squeezing tight around me~",
+		"Ohhh~ Your shaft is squeezing so hard~",
+		"This is so hot~",
+		"I-I can feel the cum getting forced through me",
+		"FFff~ I'm getting soaked with cum!",
+		"All this cum is starting to stain me!",
+		"Ahhh~ I'm getting all mushy from all this throbbing and squeezing!",
+		"Aaaa I'm going to need much more than a wash after this!~"
+	],
 	"strugglingCumDigestBalls": [
 		"All this cum sloshing around me~",
 		"Ahhh... I'm stored in the balls~",
@@ -899,7 +987,10 @@
 		"Mmmm... I'm just... so soaked with cum~",
 		"Aaaa~ I'm going to need much more than a wash after this!~"
 	],
-	"strugglingCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestImmune", // external lines
+	"strugglingCumDigestImmune": [
+		"A-all this is doing is staining me white!",
+		"I-I'm not going to turn,\nall you're doing is making me more messy!"
+	],
 	"strugglingFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingFemcumDigest", // external lines
 	"strugglingFemcumDigestImmune": [
 		"A-all this is doing is staining me white!",
@@ -912,11 +1003,7 @@
 		"Aaaa I'm going to need much more than a wash after this!~"
 	],
 	"strugglingMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestBreastsShirt", // external lines
-	"strugglingMilkDigestImmune": ":strugglingCumDigestImmuneBalls", // duplicated lines
-	"strugglingCumDigestImmuneBalls": [
-		"A-all this is doing is staining me white!",
-		"I-I'm not going to turn,\nall you're doing is making me more messy!"
-	],
+	"strugglingMilkDigestImmune": ":strugglingCumDigestImmune", // duplicated lines
 	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
 	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
@@ -1274,83 +1361,24 @@
 		"Hi <entityname>!",
 		"Hey there <entityname>!"
 	],
-	"full": [
-		"I might pop a stitch if I try to fill myself any more!",
-		"My fabric is getting stretched pretty thin!",
-		"My body has some great napping spots, but already at full occupancy~",
-		"You can hug me from the outside if you want~",
-		"You just can't resist the call of my soft plushie body, can you~",
-		"Maybe if you squish your paws on my belly enough I might give you a turn somewhere~",
-		"How about we just snuggle with you out here for now~",
-		"Perhaps we can think of something else to do hmmm~?"
-	],
-	"needsInfusion": [
-		"I'd want someone merged in there"
-	],
-	"struggle": [
-		"Snuggle my belly as much as you want~",
-		"Enjoying my soft plushie belly~?",
-		"I bet you'll drift off and take a nap soon enough~",
-		"Mmm~ I love your little squirms~",
-		"I bet you just love the sway of my belly as I walk~",
-		"Its nice and comfortable in there right~?",
-		"My belly was designed to be nice and soft to take naps in~",
-		"You should consider staying in there for a while~",
-		"I bet you just love squishing your hands into the soft plush walls of my belly~",
-		"Mmmm~ knead your hands alllll over in there for me~",
-		"I love snuggles, inside and out~",
-		"Mmmm, just giving you a full body hug~",
-		"You're trapped inside a plushie's belly~",
-		"You're just loving the warmth of my belly aren't you~",
-		"These are some of my favorite snuggles~",
-		"Hehe, stuck inside a plushie~"
-	],
 	"struggleTransformingImmune": [
 		[
 			"A real shame you're resisting,\nI think you'd make a cute plushie~",
 			"Guess I won't be having a new vee plush to snuggle..."
 		]
 	],
-	"struggleHeal": [
-		[
-			"You should start feeling a lot better after this rest~",
-			"You should stay nice and snug in my belly until you feel better~",
-			"Let me patch you up~",
-			"A rest in my belly should soothe all your troubles away~",
-			"You're nice and safe tucked away in my belly~",
-			"My plush belly should keep you nice and safe~",
-			"You'll be well protected in my belly~",
-			"All of my plush padding should keep you safe~",
-			"You should stay for a while,\nI'll keep you safe tucked away inside me~"
-		]
-	],
-	"oralVoreLetoutForcedDigested": ":blankLine", // duplicated lines
-	"oralVoreLetoutForcedDigest": ":blankLine", // duplicated lines
-	"oralVoreLetoutForcedDigestImmune": ":blankLine", // duplicated lines
-	"oralVoreLetoutForcedSoftDigest": ":blankLine", // duplicated lines
 	"oralVoreLetoutForcedHeal": [
 		"You do know its safer inside me right?",
 		"Are you sure you're ready to come out?",
 		"Maybe you should get back in... rest a little longer~",
 		"You can come back to rest any time~"
 	],
-	"analVoreLetoutForcedDigested": ":blankLine", // duplicated lines
-	"analVoreLetoutForcedDigest": ":blankLine", // duplicated lines
-	"analVoreLetoutForcedDigestImmune": ":blankLine", // duplicated lines
-	"analVoreLetoutForcedSoftDigest": ":blankLine", // duplicated lines
-	"analVoreLetoutForcedHeal": ":oralVoreLetoutForcedHeal", // duplicated lines
-	"unbirthVoreLetoutForcedDigested": ":error", // duplicated lines
-	"unbirthVoreLetoutForcedDigest": ":error", // duplicated lines
-	"unbirthVoreLetoutForcedDigestImmune": ":error", // duplicated lines
-	"unbirthVoreLetoutForcedSoftDigest": ":error", // duplicated lines
-	"unbirthVoreLetoutForcedHeal": ":oralVoreLetoutForcedHeal", // duplicated lines
 	"oralVoreLetoutRequestedDigested": [
 		"Here, let me reform you real quick.",
 		"You got digested, so I gotta reform you.",
 		"Ah, guess it's time to reform you.",
 		"Time to reform you, I guess."
 	],
-	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
 	"strugglingSlime": [
 		"This slime is so sticky.",
 		"Stuck suspended in slime...",
@@ -1386,24 +1414,10 @@
 			]
 		]
 	},
-	"strugglingDigestCock": [
-		"Ahh~ your cock is squeezing tight around me~",
-		"Ohhh~ Your shaft is squeezing so hard~",
-		"This is so hot~",
-		"I-I can feel the cum getting forced through me",
-		"FFff~ I'm getting soaked with cum!",
-		"All this cum is starting to stain me!",
-		"Ahhh~ I'm getting all mushy from all this throbbing and squeezing!",
-		"Aaaa I'm going to need much more than a wash after this!~"
-	],
-	"strugglingDigestImmuneCock": ":strugglingCumDigestImmuneBalls", // duplicated lines
+	"strugglingDigestImmuneCock": ":strugglingCumDigestImmune", // duplicated lines
 	"cockTFme": [
 		"Well... I could transform you into a dildo, and then I could attach that to myself. Or you could get someone's essence I could use.",
 		"So what do you say, do you want to become this plushie's dick~?"
-	],
-	"vore.cockVore.default.default.default.needsInfusion": [
-		"I don't have one of those normally, I'd need a *special* kind of dildo~",
-		"Mmm~ I can't quite do that to you at the moment, but I could do something else~"
 	],
 	"struggleTransformingEgged": [
 		"Hehe, you'll just be a plushie toy in a prize egg when I'm done~"
@@ -1448,53 +1462,11 @@
 		"I-I'm not going to turn,\nall you're doing is making me more messy!"
 	],
 	"strugglingEggifyImmuneWomb": [],
-	"vored.default.default.default.default.default": [
+	"defaultUnprompted": [
 		"Ah!",
 		"Meep!",
 		"Yip!",
 		"Yap!"
-	],
-	"vored.oralVore.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"Ah! plushies are supposed to be for snuggling!",
-		"Meep! I thought you were just going for a smooch!",
-		"Are you sure you want to eat me?\nI'm just a plushie!",
-		"I-I guess I can snuggle in your belly!",
-		"You're drooling on me~!\nI-I might need a wash after this!"
-	],
-	"vored.cockVore.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"<keysmash>",
-		"UwU",
-		"O-oh my usually people put their dicks in me!\nnot the other way around!",
-		"You're gonna get me cum soaked~!\nI-I might need a wash after this!"
-	],
-	"vored.unbirth.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"<keysmash>",
-		"UwU",
-		"W-wait I'm the one who's supposed to unbirth YOU!",
-		"O-oh my you're gonna snuggle ME like this~?",
-		"Your pussy is so wet~!\nI-I might need a wash after this!"
-	],
-	"vored.breastVore.default.default.default.default": [
-		"Ah!",
-		"Meep!",
-		"Yip!",
-		"Yap!",
-		"<keysmash>",
-		"UwU",
-		"A-ah I thought you were just snuggling me against your boobs!",
-		"You're gonna soak me in milk~! I-I might need a wash after this!"
 	],
 	"escape.default.default.true.default.default.default": [
 		[

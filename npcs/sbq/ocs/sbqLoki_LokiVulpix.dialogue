@@ -349,11 +349,16 @@
 	],
 	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
 	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
-	"oralVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnprompted", // external lines
+	"oralVoreUnprompted": ":defaultUnprompted", // duplicated lines
+	"defaultUnprompted": [
+		"Ah!"
+	],
 	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted", // external lines
 	"unbirthVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnprompted", // external lines
 	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted", // external lines
-	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
+	"cockVoreUnprompted": [
+		"UwU"
+	],
 	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter", // external lines
 	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter", // external lines
 	"unbirthVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutUnpromptedAfter", // external lines
@@ -496,6 +501,40 @@
 	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression", // external lines
 	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest", // external lines
 	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune", // external lines
+	"struggleCumDigest": [
+		[
+			"Yessss get turned into some nice sticky cum~",
+			"Mmm~ letting yourself melt down into my cum~?",
+			{
+				"check": {
+					"analVore": true
+				},
+				"add": [
+					"Maybe I'll find a nice ass to pump you out in when we're done~"
+				]
+			},
+			{
+				"check": {
+					"unbirthVore": true
+				},
+				"add": [
+					"Maybe I'll find a nice pussy to pump you out in when we're done~"
+				]
+			},
+			{
+				"check": {
+					"oralVore": true
+				},
+				"add": [
+					"Maybe I'll find a nice throat to pump you down when we're done~"
+				]
+			},
+			"Ffff, you're getting softer~",
+			"Clooooser~",
+			"Just relaaaax as I melt you down~",
+			"Feels like I've got more cum than usual sloshing around down there~"
+		]
+	],
 	"struggleCumDigestBalls": [
 		"Soon you'll become a part of that cum you're splashing around.",
 		"Getting hot in my sack? I would hope so, it means you're melting nicely.",
@@ -510,7 +549,6 @@
 	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
 	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
 	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming", // external lines
-	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
 	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
 	"struggleEggify": [
 		"Can you feel that egg forming around you?",
@@ -1213,40 +1251,6 @@
 			]
 		}
 	],
-	"struggleCumDigest": [
-		[
-			"Yessss get turned into some nice sticky cum~",
-			"Mmm~ letting yourself melt down into my cum~?",
-			{
-				"check": {
-					"analVore": true
-				},
-				"add": [
-					"Maybe I'll find a nice ass to pump you out in when we're done~"
-				]
-			},
-			{
-				"check": {
-					"unbirth": true
-				},
-				"add": [
-					"Maybe I'll find a nice pussy to pump you out in when we're done~"
-				]
-			},
-			{
-				"check": {
-					"oralVore": true
-				},
-				"add": [
-					"Maybe I'll find a nice throat to pump you down when we're done~"
-				]
-			},
-			"Ffff, you're getting softer~",
-			"Clooooser~",
-			"Just relaaaax as I melt you down~",
-			"Feels like I've got more cum than usual sloshing around down there~"
-		]
-	],
 	"oralVoreLetoutForcedTransforming": [],
 	"struggling.default.default.default.default.default.default": ":struggling", // duplicated lines
 	"struggling.default.default.default.shy.default.default": [
@@ -1273,14 +1277,6 @@
 			]
 		}
 	],
-	"vored.default.default.default.default.default": [
-		"Ah!"
-	],
-	"vored.oralVore.default.default.default.default": ":vored.default.default.default.default.default", // duplicated lines
-	"vored.cockVore.default.default.default.default": [
-		"UwU"
-	],
-	"vored.unbirth.default.default.default.default": ":vored.cockVore.default.default.default.default", // duplicated lines
 	"escape.default.default.true.default.default.default": [
 		"I got out."
 	],

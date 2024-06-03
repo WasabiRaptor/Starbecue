@@ -7,13 +7,43 @@
 			"Welcome!",
 			"Hi! Good to see you."
 		],
-		"portrait": [
+		"imagePortrait": [
 			"Neutral.png"
 		],
 		"buttonTextRandom": [
 			"Hi.",
 			"Thanks.",
 			"Hiya. Same to you."
+		]
+	},
+	"greetingHorny": {
+		"dialogueRandom": [
+			"I been solid too long... Need ta melt~",
+			"Hnnnnngghh,,, I've been thinkin about those preds,,,",
+			"Mnnnyyeehhhh~... OH! Sorry, I was just daydreaming about something."
+		],
+		"imagePortrait": [
+			"Uwu.png"
+		],
+		"buttonTextRandom": [
+			"Um, okay.",
+			"Fascinating.",
+			"I can't possibly imagine what."
+		]
+	},
+	"greetingHungry": {
+		"dialogueRandom": [
+			"Mnnnnnhhhhmmmm... Mnyyeehhhhh...",
+			"Can't wait to curl up... and sleep... wanna (*unintelligible*)...",
+			"(*mumblemumble*) Prrr... Bedtime I think..."
+		],
+		"imagePortrait": [
+			"Sleepy.png"
+		],
+		"buttonTextRandom": [
+			"Uh, hi.",
+			"Hello?",
+			"Hi there."
 		]
 	},
 	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
@@ -32,11 +62,6 @@
 			"I wanted to talk a little."
 		]
 	},
-	"hornyConverse": "Missing: hornyConverse <dialoguePath>",
-	"hungryConverse": "Missing: hungryConverse <dialoguePath>",
-	"hellhoundConverse": "Missing: hellhoundConverse <dialoguePath>",
-	"hellhoundConverseHorny": "Missing: hellhoundConverseHorny <dialoguePath>",
-	"hellhoundConverseHungry": "Missing: hellhoundConverseHungry <dialoguePath>",
 	"curious": {
 		"dialogueRandom": [
 			"Stay as long as ya want!",
@@ -45,8 +70,6 @@
 		],
 		"buttonText": ":choosePrompt"
 	},
-	"hornyCurious": "Missing: hornyCurious <dialoguePath>",
-	"hungryCurious": "Missing: hungryCurious <dialoguePath>",
 	"curiousWhoAreYou": {
 		"dialogue": [
 			"My name's Ferris, but everyone calls me ^orange;Ferri^reset; because it sounds cute. I'm a catfox who draws and makes things sometimes. Who are you?",
@@ -97,20 +120,6 @@
 			"Oh. I'll keep it in mind."
 		]
 	},
-	"curiousBelly": [
-		"Calm and cool, you can take a nap in it if ya want~."
-	],
-	"hornyCuriousBelly": "Missing: hornyCuriousBelly <dialoguePath>",
-	"hungryCuriousBelly": "Missing: hungryCuriousBelly <dialoguePath>",
-	"curiousAcidHeal": [
-		"Clean and ready to heal~!"
-	],
-	"curiousAcidDigest": [
-		"It's real hungry, and it wants to churn something~"
-	],
-	"curiousBellySoftDigest": [
-		"It'll melt ya down for a little bit, sounds nice~"
-	],
 	"questionAnswered1": {
 		"dialogueRandom": [
 			"So, anything else ya wanted to know?",
@@ -296,7 +305,12 @@
 	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
 	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
 	"bellyInfuseFull": ":defaultFull", // duplicated lines
-	"defaultFull": "Missing: defaultFull <dialoguePath>",
+	"defaultFull": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
 	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
 	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
 	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
@@ -1359,41 +1373,20 @@
 		}
 	},
 	// Unused Dialogue
-	"greetingHorny": {
-		"dialogueRandom": [
-			"I been solid too long... Need ta melt~",
-			"Hnnnnngghh,,, I've been thinkin about those preds,,,",
-			"Mnnnyyeehhhh~... OH! Sorry, I was just daydreaming about something."
-		],
-		"portrait": [
-			"Uwu.png"
-		],
-		"buttonTextRandom": [
-			"Um, okay.",
-			"Fascinating.",
-			"I can't possibly imagine what."
-		]
-	},
-	"greetingHungry": {
-		"dialogueRandom": [
-			"Mnnnnnhhhhmmmm... Mnyyeehhhhh...",
-			"Can't wait to curl up... and sleep... wanna (*unintelligible*)...",
-			"(*mumblemumble*) Prrr... Bedtime I think..."
-		],
-		"portrait": [
-			"Sleepy.png"
-		],
-		"buttonTextRandom": [
-			"Uh, hi.",
-			"Hello?",
-			"Hi there."
-		]
-	},
-	"full": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
+	// Unused Dialogue
+	"curiousBelly": [
+		"Calm and cool, you can take a nap in it if ya want~."
+	],
+	"curiousBellyHorny": "Missing: curiousBellyHorny <dialoguePath>",
+	"curiousBellyHungry": "Missing: curiousBellyHungry <dialoguePath>",
+	"curiousAcidHeal": [
+		"Clean and ready to heal~!"
+	],
+	"curiousAcidDigest": [
+		"It's real hungry, and it wants to churn something~"
+	],
+	"curiousBellySoftDigest": [
+		"It'll melt ya down for a little bit, sounds nice~"
 	],
 	"needsInfusion": [
 		"I'd want someone merged in there"
@@ -1531,7 +1524,7 @@
 			"Yes?",
 			"Hiii! I'm happy to see you!!"
 		],
-		"portrait": [
+		"imagePortrait": [
 			"Happy.png"
 		],
 		"buttonTextRandom": [
@@ -1572,5 +1565,5 @@
 	],
 	"escape": [
 		"I'm out!! ...Are ya gonna put me back in?"
-	],
+	]
 }
