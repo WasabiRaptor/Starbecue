@@ -14,7 +14,7 @@
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_female1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
 
 
-	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "HUMAN", "Personality" ],
+	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "Drimyr", "Personality" ],
 	"skull" : "/humanoid/human/dead.png",
 	"effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
 	"defaultBlueprints" : {
@@ -106,8 +106,8 @@
 			"hair" : [ "0" ],
 			"shirt" : [ "sbq_nude_chest" ],
 			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
+			"facialHairGroup" : "mane",
+			"facialHair" : [ "0", "blank" ],
 			"facialMaskGroup" : "ears",
 			"facialMask" : [ "0" ]
 		},
@@ -119,8 +119,8 @@
 			"hair" : [ "0" ],
 			"shirt" : [ "sbq_nude_chest" ],
 			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
+			"facialHairGroup" : "mane",
+			"facialHair" : [ "0", "blank" ],
 			"facialMaskGroup" : "ears",
 			"facialMask" : [ "0" ]
 		}
@@ -133,6 +133,7 @@
 		"flesh" : ["451ea9", "5227c2", "5f2fdc"]
 	},
 
+	"headOptionAsFacialhair" : true,
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
 		{
@@ -232,7 +233,18 @@
 			[ "idle.5", "idle.2", [0, 0], [0, 0] ], //fabulous
 			[ "idle.4", "idle.1", [0, 0], [0, 0] ], //stoic
 			[ "idle.5", "idle.3", [0, 0], [0, 0] ] //nervous
-		]
+		],
+		"humanoidTiming" : {
+			// Idle, Walk, Run, Jump, Fall, Swim, SwimIdle, Duck, Sit, Lay
+			"stateCycle" : [1.0, 0.75, 0.75, 0.25, 0.25, 0.50, 0.50, 1.0, 1.0, 1.0],
+			"stateFrames" : [1, 8, 8, 4, 4, 7, 2, 1, 1, 1],
+
+			// EmoteIdle, Blabbering, Shouting, Happy, Sad, NEUTRAL, Laugh, Annoyed, Oh, OOOH, Blink, Wink Eat Sleep
+			//					, normal		, caps		, :)	 , :'(, :|		 , :D	 ,				, :o, :O	,			, ;)
+			"emoteCycle" : [1.0, 0.3, 0.3, 0.3, 1.0, 0.3, 0.5, 1.0, 1.0, 1.0, 1.0, 0.5, 0.3, 1.0],
+			"emoteFrames" : [1, 2, 2, 2, 5, 2, 2, 2, 2, 3, 4, 5, 2, 2]
+		}
+
 	},
 	"voreConfig" : [
 		"/humanoid/any/vore.config",
@@ -251,113 +263,9 @@
 		}
 	],
 	"identityAnimationCustom" : [],
-	"animationConfig" : "/humanoid/any/quadruped.animation",
+	"animationConfig" : "/humanoid/sbqAuri_LokiVulpix/auri.animation",
 	"animationCustom" : [
-		{}, // put the vore parts for quadrupeds here later
-		{
-			"globalTagDefaults" : {
-				"eyesX":"0",
-				"eyesY":"0"
-			},
-			"animatedParts" : {
-				"stateTypes" : {
-					"bodyState" : {"states":{
-						"jump" : {"frameProperties":{
-							"movementOffset" : [
-								{"translate":[0,0.125]},
-								{"translate":[0,0.25]},
-								{"translate":[0,0.375]},
-								{"translate":[0,0.375]},
-							],
-							"crotchOffset" : [
-								{"translate":[0,-0.125]},
-								{"translate":[0,-0.25]},
-								{"translate":[0,-0.375]},
-								{"translate":[0,-0.375]},
-							],
-							"tailOffset" : [
-								{"translate":[0,-0.125]},
-								{"translate":[0,-0.25]},
-								{"translate":[0,-0.375]},
-								{"translate":[0,-0.375]},
-							]
-
-						}},
-						"fall" : {"frameProperties":{
-							"movementOffset" : [
-								{"translate":[0,0.25]},
-								{"translate":[0,0.0]},
-								{"translate":[0,0.0]},
-								{"translate":[0,0.0]},
-							],
-							"crotchOffset" : [
-								{"translate":[0,-0.125]},
-								{"translate":[0,0]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.25]},
-							],
-							"tailOffset" : [
-								{"translate":[0,-0.125]},
-								{"translate":[0,0]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.25]},
-							]
-						}},
-						"sit" : {"properties":{
-							"tailOffset" : {"translate":[0.75,-1.375]},
-							"headOffset" : {"translate":[-0.25,0.125]}
-						}},
-						"lay" : {"properties":{
-							"tailOffset" : {"translate":[0,0]},
-							"headOffset" : {"translate":[0.25,-0.5]},
-							"scaleDifference" : [2.5, -2] // y and x are swapped with this one because of seat rotate
-						}},
-						"duck" : {"properties":{
-							"tailOffset" : {"translate":[-0.345,0]},
-							"headOffset" : {"translate":[0.25,-0.375]}
-						}}
-					}}
-				},
-				"parts" : {
-					"anchor" : {
-						"partStates" : {
-							"bodyState" : {
-								"sit" : {"properties":{
-									"offset" : [-0.75,1.375]
-								}},
-								"lay" : {"properties":{
-									"offset" : [-1,1.375],
-									"transforms" : {"scale":[-1,1]}
-								}}
-							}
-						}
-					},
-					"frontarm" : {"partStates" : {
-						"frontarmRotationState" : {
-							"properties" : {"anchorPart":"body"}
-						},
-						"bodyState" : {
-							"lay": { "properties": { "zLevel":0.99, "image": "<bodyImagePath>frontarm.png:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } }
-						}
-					}},
-					"backarm" : {"partStates" : {
-						"backarmRotationState" : {
-							"properties" : {"anchorPart":"body"}
-						},
-						"bodyState" : {
-							"sit": { "properties": { "zLevel":-0.99, "image": "<bodyImagePath>backarm.png:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } }
-						}
-					}},
-					"eyes" : {
-						"properties" : {
-							"zLevel":2.1,"anchorPart":"head","offset":[2,0.5],
-							"eyePos" : [0,0],
-							"image":"eyes.png:<eyesX>.<eyesY><bodyDirectives>"
-						}
-					}
-				}
-			}
-		}
+		{}
 	],
 
 	"animationCustomAnthro" : [
