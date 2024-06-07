@@ -7,8 +7,8 @@
 			[ "1.eat.1", "1.eat.2", "1.eat.3", "1.eat.4", "1.eat.5", "1.eat.6", "1.eat.7", "1.eat.8"],
 			[ "1.idle.1", "1.run.2", "1.run.3"],
 			[ "0.shrink.1", "0.shrink.2", "0.shrink.3", "0.shrink.4", "0.shrink.5", "0.shrink.6", "0.shrink.7", "0.shrink.8"],
-			[ "1.s_up.1", "1.s_up.2", "1.s_up.3", "1.s_up.4", "1.s_down.1", "1.s_down.2", "1.s_down.3", "1.s_down.4"],
-			[ "1.s_back.1", "1.s_back.2", "1.s_back.3", "1.s_back.4", "1.s_front.1", "1.s_front.2", "1.s_front.3", "1.s_front.4"]
+			[ "1.s_up_press.1", "1.s_up_press.2", "1.s_up_hold.1", "1.s_up_release.1", "1.s_down_press.1", "1.s_down_press.2", "1.s_down_hold.1", "1.s_down_release.1"],
+			[ "1.s_back_press.1", "1.s_back_press.2", "1.s_back_hold.1", "1.s_back_release.1", "1.s_front_press.1", "1.s_front_press.2", "1.s_front_hold.1", "1.s_front_release.1"]
 		]
 	},
 	"aliases" : {
@@ -40,32 +40,32 @@
 		"0.escape.7" : "1.eat.2",
 		"0.escape.8" : "1.eat.1",
 
-		"1.s_up.5" : "1.idle.1",
-		"1.s_down.5" : "1.idle.1",
-		"1.s_front.5" : "1.idle.1",
-		"1.s_back.5" : "1.idle.1",
+		"1.s_up_release.2" : "1.idle.1",
+		"1.s_down_release.2" : "1.idle.1",
+		"1.s_front_release.2" : "1.idle.1",
+		"1.s_back_release.2" : "1.idle.1",
 
 		// error handling
 
-		"0.s_back.1" : "0.idle.1",
-		"0.s_back.2" : "0.idle.1",
-		"0.s_back.3" : "0.idle.1",
-		"0.s_back.4" : "0.idle.1",
-		"0.s_back.5" : "0.idle.1",
-		"0.s_front.1" : "0.idle.1",
-		"0.s_front.2" : "0.idle.1",
-		"0.s_front.3" : "0.idle.1",
-		"0.s_front.4" : "0.idle.1",
-		"0.s_front.5" : "0.idle.1",
-		"0.s_up.1" : "0.idle.1",
-		"0.s_up.2" : "0.idle.1",
-		"0.s_up.3" : "0.idle.1",
-		"0.s_up.4" : "0.idle.1",
-		"0.s_up.5" : "0.idle.1",
-		"0.s_down.1" : "0.idle.1",
-		"0.s_down.2" : "0.idle.1",
-		"0.s_down.3" : "0.idle.1",
-		"0.s_down.4" : "0.idle.1",
-		"0.s_down.5" : "0.idle.1"
+		"0.s_back_press.1" : "0.idle.1",
+		"0.s_back_press.2" : "0.idle.1",
+		"0.s_back_hold.1" : "0.idle.1",
+		"0.s_back_release.1" : "0.idle.1",
+		"0.s_back_release.2" : "0.idle.1",
+		"0.s_front_press.1" : "0.idle.1",
+		"0.s_front_press.2" : "0.idle.1",
+		"0.s_front_hold.1" : "0.idle.1",
+		"0.s_front_release.1" : "0.idle.1",
+		"0.s_front_release.2" : "0.idle.1",
+		"0.s_up_press.1" : "0.idle.1",
+		"0.s_up_press.2" : "0.idle.1",
+		"0.s_up_hold.1" : "0.idle.1",
+		"0.s_up_release.1" : "0.idle.1",
+		"0.s_up_release.2" : "0.idle.1",
+		"0.s_down_press.1" : "0.idle.1",
+		"0.s_down_press.2" : "0.idle.1",
+		"0.s_down_hold.1" : "0.idle.1",
+		"0.s_down_release.1" : "0.idle.1",
+		"0.s_down_release.2" : "0.idle.1"
 	}
 }

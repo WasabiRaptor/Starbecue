@@ -52,23 +52,17 @@ function init()
 	local infusePreyVisible = not (sbq.voreConfig.hideInfusePreySettings or false)
 	local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
 	local sizeVisible = not (sbq.voreConfig.hideSizeSettings or false)
+
 	_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
 	_ENV.infusePreyPrefsPanel:setVisible(infusePreyVisible)
+
 	_ENV.transformationPrefsPanel:setVisible(TFVisible)
 	_ENV.resistancesPanel:setVisible(preyVisible)
 	_ENV.otherPrefsPanel:setVisible(otherVisible)
 	_ENV.sizePrefsPanel:setVisible(sizeVisible)
+
 	_ENV.vorePredPrefsPanel:setVisible((sbq.voreConfig.availableVoreTypes or false) and predVisible)
 	_ENV.infusePredPrefsPanel:setVisible((sbq.voreConfig.availableInfuseTypes or false) and infusePredVisible)
-	if not (_ENV.vorePredPrefsPanel.visible or _ENV.infusePredPrefsPanel.visible) then
-		_ENV.vorePredPrefsPanel.parent:setVisible(false)
-	end
-	if not (_ENV.vorePreyPrefsPanel.visible or _ENV.infusePreyPrefsPanel.visible) then
-		_ENV.vorePreyPrefsPanel.parent:setVisible(false)
-	end
-	if not (_ENV.sizePrefsPanel.visible) then
-		_ENV.sizePrefsPanel.parent:setVisible(false)
-	end
 
 	for _, voreType in pairs(sbq.gui.voreTypeOrder) do
 		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred", domOrSub = "dom"}))
@@ -434,7 +428,7 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 		expandMode = { 1, 0 },
 		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, { type = "sbqItemGrid", autoInteract = true, slots = slots} },
 		makeLabel = false
-    }
+	}
 	for _, item in ipairs(sbq.settings.recentlyDigested) do
 		local slot = {
 			item = item.name and item,

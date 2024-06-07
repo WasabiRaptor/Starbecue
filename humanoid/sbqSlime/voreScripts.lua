@@ -1,31 +1,30 @@
 
-local Auri = {
+local Slime = {
 	states = {
 		default = {},
 	},
 	locations = {}
 }
-setmetatable(Auri, Species.default)
-for k, v in pairs(Auri.states) do
+setmetatable(Slime, Species.default)
+for k, v in pairs(Slime.states) do
 	setmetatable(v, Species.default.states[k] or _State)
 end
-for k, v in pairs(Auri.locations) do
+for k, v in pairs(Slime.locations) do
 	setmetatable(v, Species.default.locations[k] or _Location)
 end
 
-Species.Auri = Auri
-Auri.__index = Auri
+Species.Slime = Slime
+Slime.__index = Slime
 
-function Auri:init()
+function Slime:init()
 end
-function Auri:update(dt)
-	sbq.eyeTracking()
+function Slime:update(dt)
 end
-function Auri:uninit()
+function Slime:uninit()
 end
 
 -- default state scripts
-local default = Auri.states.default
+local default = Slime.states.default
 function default:init()
 end
 function default:update(dt)

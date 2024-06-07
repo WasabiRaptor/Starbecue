@@ -995,7 +995,7 @@ function _Location:updateOccupancy(dt)
 			self.struggleSizes or { 0 }
 		)
 
-		if (prevVisualSize ~= self.occupancy.visualSize) and not (self.occupancy.sided and self.occupancy.symmetry) then
+		if ((prevVisualSize ~= self.occupancy.visualSize) or self.countBasedOccupancy) and not (self.occupancy.sided and self.occupancy.symmetry) then
 			self:doSizeChangeAnims(prevVisualSize)
 			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
@@ -1010,6 +1010,7 @@ function _Location:updateOccupancy(dt)
 	end
 	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
 		self.occupancy.facingRight = sbq.facingRight
+		animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
 		animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 		if self.idleAnims then
 			SpeciesScript:doAnimations(self.idleAnims)
@@ -1056,6 +1057,7 @@ function _Location:update(dt)
 end
 
 function _Location:doSizeChangeAnims(prevVisualSize)
+	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 	if self.idleAnims then
 		SpeciesScript:doAnimations(self.idleAnims)

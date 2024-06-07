@@ -6,7 +6,7 @@
 			[ "0.idle.1", "0.run.2", "0.run.3", "0.run.4", "0.run.5"],
 
 			[ "1.eat.1", "1.eat.2", "1.eat.3", "1.eat.4", "1.eat.5"],
-			[ "1.idle.1", "1.run.2", "1.run.3", "1.run.4", "1.run.5", null, "1.s_up.1", "1.s_back.1"]
+			[ "1.idle.1", "1.run.2", "1.run.3", "1.run.4", "1.run.5", null, "1.s_up_press.1", "1.s_back_press.1"]
 		]
 	},
 	"aliases" : {
@@ -26,12 +26,12 @@
 		"0.fall.3" : "0.run.2",
 		"0.fall.4" : "0.run.1",
 
-		"1.s_front.1" : "1.eat.5",
-		"1.s_down.1" : "1.run.2",
-		"1.s_up.2" : "1.idle.1",
-		"1.s_down.2" : "1.idle.1",
-		"1.s_front.2" : "1.idle.1",
-		"1.s_back.2" : "1.idle.1",
+		"1.s_front_press.1" : "1.eat.5",
+		"1.s_down_press.1" : "1.run.2",
+		"1.s_up_press.2" : "1.idle.1",
+		"1.s_down_press.2" : "1.idle.1",
+		"1.s_front_press.2" : "1.idle.1",
+		"1.s_back_press.2" : "1.idle.1",
 
 		"1.run.1" : "1.idle.1",
 		"1.run.6" : "1.run.4",

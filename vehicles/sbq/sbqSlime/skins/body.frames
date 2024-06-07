@@ -7,8 +7,8 @@
 			[ "1.eat.1", "1.eat.2", "1.eat.3", "1.eat.4", "1.eat.5", "1.eat.6", "1.eat.7", "1.eat.8"],
 
 			[ "1.idle.1", "1.idle.2", "1.idle.3", "1.fall.1", "1.walk.1", "1.walk.2", "1.walk.3", "1.walk.4" ],
-			[ "1.s_up.1", "1.s_up.2", "1.s_up.3", "1.s_up.4", "1.s_down.1", "1.s_down.2", "1.s_down.3", "1.s_down.4"],
-			[ "1.s_back.1", "1.s_back.2", "1.s_back.3", "1.s_back.4", "1.s_front.1", "1.s_front.2", "1.s_front.3", "1.s_front.4"]
+			[ "1.s_up_press.1", "1.s_up_press.2", "1.s_up_hold.1", "1.s_up_release.1", "1.s_down_press.1", "1.s_down_press.2", "1.s_down_hold.1", "1.s_down_release.1"],
+			[ "1.s_back_press.1", "1.s_back_press.2", "1.s_back_hold.1", "1.s_back_release.1", "1.s_front_press.1", "1.s_front_press.2", "1.s_front_hold.1", "1.s_front_release.1"]
 		]
 	},
 	"aliases" : {
@@ -22,10 +22,10 @@
 		"1.walk.5" : "1.walk.3",
 		"1.walk.6" : "1.walk.2",
 
-		"1.s_up.5" : "1.idle.1",
-		"1.s_down.5" : "1.idle.1",
-		"1.s_front.5" : "1.idle.1",
-		"1.s_back.5" : "1.idle.1",
+		"1.s_up_release.2" : "1.idle.1",
+		"1.s_down_release.2" : "1.idle.1",
+		"1.s_front_release.2" : "1.idle.1",
+		"1.s_back_release.2" : "1.idle.1",
 
 		"0.escape.1" : "1.eat.8",
 		"0.escape.2" : "1.eat.7",

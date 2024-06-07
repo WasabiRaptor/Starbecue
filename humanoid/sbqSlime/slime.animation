@@ -1,0 +1,549 @@
+{
+	"noHumanoidConfigOverride" : true,
+	"useModifiedAnimator" : true,
+	"globalTagDefaults" : {
+		"partImage" : "",
+		"personality" : "1",
+		"personalityIdle" : "1",
+		"personalityArmIdle" : "1",
+		"hairGroup" : "hair",
+		"facialHairGroup" : "",
+		"facialMaskGroup" : "",
+		"hairType" : "",
+		"facialHairType" : "",
+		"facialMaskType" : "",
+		"hairDirectives" : "",
+		"bodyDirectives" : "",
+		"emoteDirectives" : "",
+		"facialHairDirectives" : "",
+		"facialMaskDirectives" : "",
+		"frontarmRotationFrame" : "rotation",
+		"backarmRotationFrame" : "rotation",
+		"headArmor" : "",
+		"backArmor" : "",
+		"chestArmor" : "",
+		"legsArmor" : "",
+		"backSleeve" : "",
+		"frontSleeve" : "",
+		"headArmorDirectives" : "",
+		"backArmorDirectives" : "",
+		"chestArmorDirectives" : "",
+		"legsArmorDirectives" : "",
+		"bodyImagePath" : "",
+
+		"slimeCount" : "0"
+	},
+	"animatedParts": {
+		"stateTypes": {
+			"justHead" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 0, "cycle": 0, "mode": "end" },
+					"head": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"noFacialHair" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"noFacialMask" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"noHair" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"bodyHiddenState" : {
+				"priority" : 100,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"hiddenState" : {
+				"priority" : 1000,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"clothesHiddenState" : {
+				"priority" : 100,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"headCosmeticHiddenState" : {
+				"priority" : 100,
+				"default": "ignore",
+				"states" : {
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+
+			"bodyDanceState" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"dance": { "frames": 1, "cycle": 0, "mode": "end" },
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"frontarmDanceState" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"dance": { "frames": 1, "cycle": 0, "mode": "end" },
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"backarmDanceState" : {
+				"priority" : 10,
+				"default": "ignore",
+				"states" : {
+					"dance": { "frames": 1, "cycle": 0, "mode": "end" },
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"bodyState": {
+				"priority" : 0,
+				"default": "idle",
+				"states": {
+					"idle": { "frames": 4, "cycle": 3, "mode": "loop", "properties" :{
+					},"frameProperties":{
+						"headOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,-0.25]},
+							{"translate":[0,-0.125]}
+						]
+					}},
+					"duck": { "frames": 4, "cycle": 3, "mode": "end", "properties" :{
+					},"frameProperties":{
+						"headOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,-0.25]},
+							{"translate":[0,-0.125]}
+						]
+					}},
+					"sit": { "frames": 4, "cycle": 3, "mode": "end", "properties" :{
+						"scaleDifference" : [0, -13]
+					},"frameProperties":{
+						"headOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,-0.25]},
+							{"translate":[0,-0.125]}
+						]
+					}},
+					"lay": { "frames": 4, "cycle": 6, "mode": "end", "properties" :{
+					},"frameProperties":{
+						"headOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,-0.25]},
+							{"translate":[0,-0.125]}
+						]
+					}},
+					"walk": { "frames": 6, "cycle": 2, "mode": "loop", "properties" :{
+					}, "frameProperties":{
+						"headOffset" : [
+							{"translate":[0.125,0]},
+							{"translate":[0.25,0]},
+							{"translate":[0.375,0]},
+							{"translate":[0.5,0]},
+							{"translate":[0.375,0]},
+							{"translate":[0.25,0]}
+						]
+					}},
+					"run": { "frames": 6, "cycle": 1.5, "mode": "loop", "properties" :{
+					}, "frameProperties":{
+						"headOffset" : [
+							{"translate":[0.125,0]},
+							{"translate":[0.25,0]},
+							{"translate":[0.375,0]},
+							{"translate":[0.5,0]},
+							{"translate":[0.375,0]},
+							{"translate":[0.25,0]}
+						]
+					}},
+					"jump": { "frames": 1, "cycle": 0.25, "mode": "end", "properties" :{
+					}, "frameProperties":{
+						"headOffset" : [
+							{"translate":[0,1.5]}
+						]
+					}},
+					"fall": { "frames": 1, "cycle": 0.25, "mode": "end", "properties" :{
+					}, "frameProperties":{
+						"headOffset" : [
+							{"translate":[0,1.5]}
+						]
+					}},
+					"swim": { "frames": 6, "cycle": 2, "mode": "loop", "properties" :{
+					}, "frameProperties":{
+						"headOffset" : [
+							{"translate":[0.125,0]},
+							{"translate":[0.25,0]},
+							{"translate":[0.375,0]},
+							{"translate":[0.5,0]},
+							{"translate":[0.375,0]},
+							{"translate":[0.25,0]}
+						]
+					}},
+					"swimIdle": { "frames": 4, "cycle": 3, "mode": "end", "properties" :{
+					},"frameProperties":{
+						"headOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,-0.25]},
+							{"translate":[0,-0.125]}
+						]
+					}},
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
+					}},
+					"none": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
+					}}
+				}
+			},
+			"bodyStateHighPriority": {
+				"priority" : 50,
+				"default": "idle",
+				"states": {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"duck": { "frames": 1, "cycle": 0, "mode": "end" },
+					"sit": { "frames": 1, "cycle": 0, "mode": "end" },
+					"lay": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"walk": { "frames": 1, "cycle": 0, "mode": "loop" },
+					"run": { "frames": 1, "cycle": 0, "mode": "loop" },
+
+					"jump": { "frames": 1, "cycle": 0, "mode": "end" },
+					"fall": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"swim": { "frames": 1, "cycle": 0, "mode": "loop" },
+					"swimIdle": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+			"frontarmRotationState": {
+				"priority" : 1,
+				"default": "ignore",
+				"states": {
+					"rotation": { "frames": 1, "cycle": 1, "mode": "end" },
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"backarmRotationState": {
+				"priority" : 1,
+				"default": "ignore",
+				"states": {
+					"rotation": { "frames": 1, "cycle": 1, "mode": "end" },
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"headState": {
+				"priority" : 0,
+				"default": "normal",
+				"states": {
+					"normal": { "frames": 1, "cycle": 1, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"emoteState": {
+				"priority" : 0,
+				"default": "idle",
+				"states": {
+					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
+
+					"blabber": { "frames": 2, "cycle": 0.3, "mode": "loop" },
+					"shout": { "frames": 2, "cycle": 0.3, "mode": "loop" },
+
+					"happy": { "frames": 2, "cycle": 0.3, "mode": "end" },
+					"sad": { "frames": 5, "cycle": 1, "mode": "loop" },
+					"neutral": { "frames": 2, "cycle": 0.3, "mode": "end" },
+					"laugh": { "frames": 2, "cycle": 0.5, "mode": "loop" },
+
+					"annoyed": { "frames": 2, "cycle": 1, "mode": "end" },
+
+					"oh": { "frames": 2, "cycle": 1, "mode": "end" },
+					"oooh": { "frames": 3, "cycle": 1, "mode": "end" },
+
+					"blink": { "frames": 3, "cycle": 1, "mode": "end" },
+					"wink": { "frames": 5, "cycle": 0.5, "mode": "end" },
+
+					"eat": { "frames": 2, "cycle": 0.3, "mode": "loop" },
+					"sleep": { "frames": 2, "cycle": 1, "mode": "loop" },
+
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"emoteStateHighPriority": {
+				"priority" : 50,
+				"default": "idle",
+				"states": {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"blabber": { "frames": 1, "cycle": 0, "mode": "loop" },
+					"shout": { "frames": 1, "cycle": 0, "mode": "loop" },
+
+					"happy": { "frames": 1, "cycle": 0, "mode": "end" },
+					"sad": { "frames": 1, "cycle": 0, "mode": "loop" },
+					"neutral": { "frames": 1, "cycle": 0, "mode": "end" },
+					"laugh": { "frames": 1, "cycle": 0, "mode": "loop" },
+
+					"annoyed": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"oh": { "frames": 1, "cycle": 0, "mode": "end" },
+					"oooh": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"blink": { "frames": 1, "cycle": 0, "mode": "end" },
+					"wink": { "frames": 1, "cycle": 0, "mode": "end" },
+
+					"eat": { "frames": 1, "cycle": 0, "mode": "loop" },
+					"sleep": { "frames": 1, "cycle": 0, "mode": "loop" },
+
+					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+
+
+			"bellyState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"bellyExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"eat": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle": 0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			}
+
+		},
+		"parts": {
+			"anchor" : {
+				"properties" : {},
+				"partStates" : {
+					"bodyState" : {
+						"lay" : {"properties":{"offset":[0, 0.0625], "transforms":{"rotate":-90}}}, // quadrupeds are in a differient orientation than the game expects for lay, so we un-rotate the expected 90 degress rotation
+						"sit" : {"properties":{"offset":[0, 0.0625]}}
+					}
+				}
+			},
+			"body": {
+				"properties": {
+					"centered": true,
+					"zLevel": 2,
+					"anchorPart": "anchor",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": "idle",
+						"sit": "idle",
+						"lay" : "idle",
+						"walk" : "idle",
+						"run" : "idle",
+						"jump" : "idle",
+						"fall" : "idle",
+						"swim" : "idle",
+						"swimIdle" : "idle",
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"bodyStateHighPriority" : {
+						"walk" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"run" : "walk",
+						"jump" : "walk",
+						"fall" : "walk"
+					},
+					"bellyState": {
+						"s_front" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front_press" : "s_front",
+						"s_front_hold" : "s_front",
+						"s_front_release" : "s_front",
+						"s_back" : "s_front",
+						"s_back_press" : "s_front",
+						"s_back_hold" : "s_front",
+						"s_back_release" : "s_front",
+						"s_up" : "s_front",
+						"s_up_press" : "s_front",
+						"s_up_hold" : "s_front",
+						"s_up_release" : "s_front",
+						"s_down" : "s_front",
+						"s_down_press" : "s_front",
+						"s_down_hold" : "s_front",
+						"s_down_release" : "s_front",
+						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"eat": { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<bellyExpandStateAnim>.<bellyExpandStateFrame>" } }
+					}
+				}
+			},
+
+			"frontarm": {
+				"properties": {
+					"centered": true,
+					"zLevel": 1,
+					"transformationGroups": [],
+					"anchorPart": "body",
+					"itemHidden": true,
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"frontarmRotationState" : {
+						"rotation": { "properties": {
+							"itemHidden": false,
+							"transformationGroups": ["frontarmrotation"]
+						} },
+						"none": { "properties": {} }
+					},
+					"frontarmDanceState" : {
+						"dance": { "properties": { } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					}
+				}
+			},
+			"backarm": {
+				"properties": {
+					"centered": true,
+					"zLevel": -5,
+					"transformationGroups": [],
+					"anchorPart": "head",
+					"itemHidden": true,
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"backarmRotationState" : {
+						"rotation": { "properties": {
+							"itemHidden": false,
+							"transformationGroups": ["backarmrotation"]
+						} },
+						"none": { "properties": {} }
+					},
+					"backarmDanceState" : {
+						"dance": { "properties": { } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
+					}
+				}
+			},
+
+			"head_cosmetic": {
+				"properties": {
+					"centered": true,
+					"zLevel": 4.7,
+					"transformationGroups": ["headOffset"],
+					"anchorPart": "body",
+					"processingDirectives" : "<headArmorDirectives>"
+				},
+				"partStates": {
+					"headState": {
+						"normal": { "properties": { "image": "<headArmor>:<headStateAnim>" } },
+						"idle": { "properties": { "image": "<headArmor>:<headStateAnim>.<headStateFrame>" } },
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"clothesHiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups": {
+		"headOffset": {"interpolated": false},
+		"movementOffset": {"interpolated": false},
+		"armOffset": {"interpolated": false},
+		"frontarmrotation": {"interpolated": true},
+		"backarmrotation": {"interpolated": true},
+		"frontHandPosition": {"interpolated": false},
+		"backHandPosition": {"interpolated": false}
+	},
+	"sounds": {
+	},
+	"particleEmitters": {
+	}
+}
