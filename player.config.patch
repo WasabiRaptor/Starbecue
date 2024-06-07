@@ -21,95 +21,86 @@
 			"value": "/scripts/player/SBQ_player_generic.lua"
 		}
 	],
-	[
-		{ "op": "append", "path": "/defaultBlueprints/tier1", "value": [
-			{ "item": "sbqController" },
-			{ "item": "sbqCandy", "parameters":{"level":1} },
-			{ "item": "sbqCandy", "parameters":{"level":2} },
-			{ "item": "sbqCandy", "parameters":{"level":3} },
-			{ "item": "sbqCandy", "parameters":{"level":4} },
-			{ "item": "sbqCandy", "parameters":{"level":5} },
-			{ "item": "sbqCandy", "parameters":{"level":6} }
-		]}
-	],
-	[
-		{ "op": "test", "path": "/inventoryFilters/objectBag/tagBlacklist", "inverse": true },
-		{ "op": "add", "path": "/inventoryFilters/objectBag/tagBlacklist", "value": [] }
-	],
-	[
-		{ "op": "add", "path": "/inventoryFilters/objectBag/tagBlacklist/-", "value": "sbqSpawner" },
-		{ "op": "add", "path": "/inventoryFilters/reagentBag/tagWhitelist/-", "value": "sbqSpawner" }
-	],
-	[
-		{ "op" : "add", "path" : "/defaultCodexes/sbqAuri_LokiVulpix", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqLoki_LokiVulpix", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqAuroria_Auroria", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqThalins_Thalins", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqZevi_Zygahedron", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqSandy_Fevix", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/vaporeon", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqGiantVaporeon", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqSocks_LokiVulpix", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/flareon", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqHelena_FFWizard", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/hellhound", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqClover_LokiVulpix", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/meowscarada", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqBatty_Xeronious", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqFerri_Ferrilata_", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqAkari_AkariKaen", "value" : [ "protectorate1", "protectorate2" ] },
-		{ "op" : "add", "path" : "/defaultCodexes/sbqSlime", "value" : [ "protectorate1", "protectorate2" ] },
-	],
-	[
-		{ "op" : "add", "path" : "/species/-","value" : "sbqAuri_LokiVulpix" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqLoki_LokiVulpix" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqAuroria_Auroria" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqThalins_Thalins" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqZevi_Zygahedron" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqSandy_Fevix" },
-		{ "op" : "add", "path" : "/species/-","value" : "vaporeon" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqGiantVaporeon" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqSocks_LokiVulpix" },
-		{ "op" : "add", "path" : "/species/-","value" : "flareon" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqHelena_FFWizard" },
-		{ "op" : "add", "path" : "/species/-","value" : "hellhound" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqClover_LokiVulpix" },
-		{ "op" : "add", "path" : "/species/-","value" : "meowscarada" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqBatty_Xeronious" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqFerri_Ferrilata_" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqAkari_AkariKaen" },
-		{ "op" : "add", "path" : "/species/-","value" : "sbqSlime" }
-	],
-
-	{ "op" : "merge", "path" : "/statusControllerSettings", "value" : {
-		"stats" : {
-			"sbqLustScriptMax" : {
-				"baseValue" : 0.33
-			},
-			"sbqLustScriptDelta" : {
-				"baseValue" : 0.0583
-			},
-			"sbqLustDelta" : {
-				"baseValue" : 0
-			},
-			"sbqRestScriptDelta" : {
-				"baseValue" : -0.0583
-			},
-			"sbqRestDelta" : {
-				"baseValue" : 0
-			}
+	{ "op": "append", "path": "/species", "value": [
+		"sbqAuri_LokiVulpix",
+		"sbqLoki_LokiVulpix",
+		"sbqAuroria_Auroria",
+		"sbqThalins_Thalins",
+		"sbqZevi_Zygahedron",
+		"sbqSandy_Fevix",
+		"vaporeon",
+		"sbqGiantVaporeon",
+		"sbqSocks_LokiVulpix",
+		"flareon",
+		"sbqHelena_FFWizard",
+		"hellhound",
+		"sbqClover_LokiVulpix",
+		"meowscarada",
+		"sbqBatty_Xeronious",
+		"sbqFerri_Ferrilata_",
+		"sbqAkari_AkariKaen",
+		"sbqSlime"
+	]},
+	{ "op": "merge", "path": "", "value" : {
+		"defaultCodexes" : {
+			"sbqAuri_LokiVulpix" : [ "protectorate1", "protectorate2" ],
+			"sbqLoki_LokiVulpix" : [ "protectorate1", "protectorate2" ],
+			"sbqAuroria_Auroria" : [ "protectorate1", "protectorate2" ],
+			"sbqThalins_Thalins" : [ "protectorate1", "protectorate2" ],
+			"sbqZevi_Zygahedron" : [ "protectorate1", "protectorate2" ],
+			"sbqSandy_Fevix" : [ "protectorate1", "protectorate2" ],
+			"vaporeon" : [ "protectorate1", "protectorate2" ],
+			"sbqGiantVaporeon" : [ "protectorate1", "protectorate2" ],
+			"sbqSocks_LokiVulpix" : [ "protectorate1", "protectorate2" ],
+			"flareon" : [ "protectorate1", "protectorate2" ],
+			"sbqHelena_FFWizard" : [ "protectorate1", "protectorate2" ],
+			"hellhound" : [ "protectorate1", "protectorate2" ],
+			"sbqClover_LokiVulpix" : [ "protectorate1", "protectorate2" ],
+			"meowscarada" : [ "protectorate1", "protectorate2" ],
+			"sbqBatty_Xeronious" : [ "protectorate1", "protectorate2" ],
+			"sbqFerri_Ferrilata_" : [ "protectorate1", "protectorate2" ],
+			"sbqAkari_AkariKaen" : [ "protectorate1", "protectorate2" ],
+			"sbqSlime" : [ "protectorate1", "protectorate2" ]
 		},
-		"resources" : {
-			"sbqLust" : {
-				"deltaStat" : "sbqLustDelta",
-				"initialPercentage" : 0.0,
-				"maxValue" : 100
+		"statusControllerSettings" : {
+			"stats" : {
+				"sbqLustScriptMax" : {
+					"baseValue" : 0.33
+				},
+				"sbqLustScriptDelta" : {
+					"baseValue" : 0.0583
+				},
+				"sbqLustDelta" : {
+					"baseValue" : 0
+				},
+				"sbqRestScriptDelta" : {
+					"baseValue" : -0.0583
+				},
+				"sbqRestDelta" : {
+					"baseValue" : 0
+				}
 			},
-			"sbqRest" : {
-				"deltaStat" : "sbqRestDelta",
-				"initialPercentage" : 1.0,
-				"maxValue" : 100
+			"resources" : {
+				"sbqLust" : {
+					"deltaStat" : "sbqLustDelta",
+					"initialPercentage" : 0.0,
+					"maxValue" : 100
+				},
+				"sbqRest" : {
+					"deltaStat" : "sbqRestDelta",
+					"initialPercentage" : 1.0,
+					"maxValue" : 100
+				}
 			}
 		}
-	}}
+	}},
+	{ "op": "append", "path": "/defaultBlueprints/tier1", "value": [
+		{ "item": "sbqController" },
+		{ "item": "sbqCandy", "parameters":{"level":1} },
+		{ "item": "sbqCandy", "parameters":{"level":2} },
+		{ "item": "sbqCandy", "parameters":{"level":3} },
+		{ "item": "sbqCandy", "parameters":{"level":4} },
+		{ "item": "sbqCandy", "parameters":{"level":5} },
+		{ "item": "sbqCandy", "parameters":{"level":6} }
+	]}
 ]
