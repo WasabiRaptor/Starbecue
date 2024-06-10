@@ -210,4 +210,9 @@ function sbq.resourceDeltas(dt)
 end
 
 function sbq.notifyResourceConsumed(resource, amount)
+	function notifyResourceConsumed(resourceName, amount)
+		if resourceName == "energy" and amount > 0 then
+			sbq.setResourcePercentage("energyRegenBlock", 1.0)
+		end
+	end
 end

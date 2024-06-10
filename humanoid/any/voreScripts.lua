@@ -560,3 +560,14 @@ function default:eggify(name, action, target, ...)
 	occupant.locationSettings.eggify = false
 	occupant:sendEntityMessage("applyStatusEffect", action.eggStatus or location.eggStatus or sbq.voreConfig.eggStatus or "sbqEgg" )
 end
+
+function default:lockDown()
+	if sbq.statPositive("sbqLockDown") then
+		sbq.clearStatModifiers("sbqLockDown")
+	else
+		sbq.setStatModifiers("sbqLockDown", {
+			{ stat = "sbqLockDown", amount = 1 },
+			{ stat = "energyRegenPercentageRate", baseMultiplier = 0}
+		})
+	end
+end

@@ -23,11 +23,13 @@
 
 
 				{ "type" : "image", "file" : "predHudBottom.png", "noAutoCrop" : true },
-				{ "type" : "panel", "id" : "effectsPanel", "style" : "flat", "size" : [60,35], "position" : [8,1], "children" : [
+				{ "type" : "panel", "id" : "effectsPanel", "style" : "flat", "size" : [58,35], "position" : [8,1], "children" : [
 					{"mode":"vertical", "spacing":-3}
 				]},
 				{ "type" : "iconButton", "id" : "prevLocation", "position" : [1, 4], "image" : "pickup.png", "hoverImage" : "pickupover.png" },
 				{ "type" : "iconButton", "id" : "nextLocation", "position" : [1, 13], "image" : "pickup.png?flipy", "hoverImage" : "pickupover.png?flipy" },
+
+				{ "type" : "button", "id" : "lockDown", "caption" : ":lockDown", "toolTip" : ":lockDownDesc", "color":"880000", "size" : [28,28], "position" : [67, 3] },
 
 				{ "type" : "iconButton", "id" : "settings", "position" : [1, 22], "toolTip":":settings", "image" : "settings.png", "hoverImage" : "settingshover.png", "pressImage" : "settingspress.png" }
 			]}

@@ -1491,8 +1491,10 @@ function _Occupant:attemptStruggle(control)
 			bonusTime = bonusTime + SpeciesScript:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
 		end
 		if (bonusTime > 0) then
-			sbq.modifyResource("energy", -(struggleAction.predCost or sbq.config.predStruggleCost))
-			if not self:overConsumeResource("energy", (struggleAction.preyCost or sbq.config.preyStruggleCost)) then return end
+			if not self:controlHeld("Shift") then
+				sbq.modifyResource("energy", -(struggleAction.predCost or (sbq.config.predStruggleCost * bonusTime)))
+			end
+			if not self:overConsumeResource("energy", (struggleAction.preyCost or (sbq.config.preyStruggleCost * bonusTime))) then return end
 
 			for k, v in pairs(struggleAction.givePreyResource or {}) do
 				self:giveResource(k,v)
@@ -1560,7 +1562,11 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if (not self.struggleAction) or self.flags.newOccupant or self.flags.infused or self.flags.digested or self:controlHeld("Shift") or self:resourceLocked("energy") then return false end
+	if (not self.struggleAction) or self.flags.newOccupant or self.flags.infused or self.flags.digested
+		or self:controlHeld("Shift") or self:resourceLocked("energy")
+		or (sbq.statPositive("sbqLockDown") and (sbq.resource("energy") > 0))
+	then return false end
+	sbq.clearStatModifiers("sbqLockDown")
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})

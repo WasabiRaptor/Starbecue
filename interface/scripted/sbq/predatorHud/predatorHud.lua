@@ -235,5 +235,10 @@ end
 function _ENV.nextLocation:onClick()
 	sbq.changeLocation(1)
 end
+function _ENV.lockDown:onClick()
+	player.setScriptContext("starbecue")
+	player.callScript("sbq.tryAction", "lockDown")
+end
+
 
 ----------------------------------------------------------------------------------------------------------------

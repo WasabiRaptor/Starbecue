@@ -15,13 +15,13 @@
 		"sendMultiplier" : [0.33],
 		"predStatModifiers" : {
 			"energyRegenPercentageRate" : {
-				"type" : "baseMultiplier",
+				"type" : "effectiveMultiplier",
 				"op" : "div",
-				"base" : 2
+				"base" : 1
 			}
 		},
 		"predModifiers" : [
-			{"stat":"energyRegenPercentageRate","baseMultiplier":0.9}
+			{"stat":"energyRegenPercentageRate","baseMultiplier":0.95}
 		]
 	},
 	"defaultDuration" : 5,
