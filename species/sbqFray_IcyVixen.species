@@ -19,7 +19,7 @@
 	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
 
 
-	"charGenTextLabels" : [ "Underbelly", "Hair style", "Shirt", "Legwear", "Fur colour", "Floof colour", "Shirt colour", "Legwear colour", "Flareon", "Personality" ],
+	"charGenTextLabels" : [ "Underbelly", "Hair style", "-", "-", "Fur colour", "Floof colour", "-", "-", "Vulpix", "Personality" ],
 	"skull" : "/humanoid/human/dead.png",
 	"effectDirectives" : "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=ff99e6FF;31a6ffFF=e359b9FF",
 	"defaultBlueprints" : {
@@ -137,9 +137,7 @@
 	},
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
-		{ // default
-			"afb3cd":"b6552c","c8cbdf":"cc663a","eef0ff":"e87c4c"
-		}
+		{}
 	],
 	"undyColor" : [
 		{}
@@ -148,6 +146,7 @@
 		{}
 	],
 
+	"potionImagePath" : "/humanoid/sbqFray_IcyVixen/potion/",
 	"animationConfig" : "/humanoid/sbqFray_IcyVixen/fray.animation",
 	"animationCustom" : [
 		{}

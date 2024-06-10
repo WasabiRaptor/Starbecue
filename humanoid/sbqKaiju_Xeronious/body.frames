@@ -1,0 +1,71 @@
+{
+	"frameGrid" : {
+		"size" : [96, 96],
+		"dimensions" : [8, 14],
+		"names" : [
+			[ "0-idle.1", "1-idle.1", "1-idle.2", "2-idle.1", "2-idle.2", "3-idle.1", "3-idle.2"],
+			[ "0-duck.1", "0-duckdown.1", "1-duck.1", "1-duckdown.1", "2-duck.1", "2-duckdown.1", "3-duck.1", "3-duckdown.1"],
+			[ ],
+			[ "0.125-expand", "0.25-expand", "0.375-expand", "0.5-expand", "0.625-expand", "0.75-expand", "0.875-expand", "1-expand" ],
+
+			[ "1-s_back_press.1", "1-s_back_press.2", "1-s_back_hold.1", "1-s_back_release.1", "1-s_front_press.1", "1-s_front_press.2", "1-s_front_hold.1", "1-s_front_release.1" ],
+			[ "1-s_up_press.1", "1-s_up_press.2", "1-s_up_hold.1", "1-s_up_release.1", "1-s_down_press.1", "1-s_down_press.2", "1-s_down_hold.1", "1-s_down_release.1" ],
+			[ ],
+			[ "1.125-expand", "1.25-expand", "1.375-expand", "1.5-expand", "1.625-expand", "1.75-expand", "1.875-expand", "2-expand" ],
+
+			[ "2-s_back_press.1", "2-s_back_press.2", "2-s_back_hold.1", "2-s_back_release.1", "2-s_front_press.1", "2-s_front_press.2", "2-s_front_hold.1", "2-s_front_release.1" ],
+			[ "2-s_up_press.1", "2-s_up_press.2", "2-s_up_hold.1", "2-s_up_release.1", "2-s_down_press.1", "2-s_down_press.2", "2-s_down_hold.1", "2-s_down_release.1" ],
+			[ ],
+			[ "2.125-expand", "2.25-expand", "2.375-expand", "2.5-expand", "2.625-expand", "2.75-expand.6", "2.875-expand", "3-expand" ],
+
+			[ "3-s_back_press.1", "3-s_back_press.2", "3-s_back_hold.1", "3-s_back_release.1", "3-s_front_press.1", "3-s_front_press.2", "3-s_front_hold.1", "3-s_front_release.1" ],
+			[ "3-s_up_press.1", "3-s_up_press.2", "3-s_up_hold.1", "3-s_up_release.1", "3-s_down_press.1", "3-s_down_press.2", "3-s_down_hold.1", "3-s_down_release.1" ]
+
+		]
+	},
+	"aliases" : {"idle.default" : "0-idle.1", "idle.1" : "0-idle.1",
+		"0-idle.2" : "0-idle.1",
+
+		"0-crawl.1" : "0-duck.1",
+		"1-crawl.1" : "1-duck.1",
+		"2-crawl.1" : "2-duck.1",
+		"3-crawl.1" : "3-duck.1",
+
+		"1-s_back_release.2" : "1-idle.1",
+		"1-s_front_release.2" : "1-idle.1",
+		"1-s_up_release.2" : "1-idle.1",
+		"1-s_down_release.2" : "1-idle.1",
+
+		"2-s_back_release.2" : "2-idle.1",
+		"2-s_front_release.2" : "2-idle.1",
+		"2-s_up_release.2" : "2-idle.1",
+		"2-s_down_release.2" : "2-idle.1",
+
+		"3-s_back_release.2" : "3-idle.1",
+		"3-s_front_release.2" : "3-idle.1",
+		"3-s_up_release.2" : "3-idle.1",
+		"3-s_down_release.2" : "3-idle.1",
+
+		// error handling
+		"0-s_back_press.1" : "0-idle.1",
+		"0-s_back_press.2" : "0-idle.1",
+		"0-s_back_hold.1" : "0-idle.1",
+		"0-s_back_release.1" : "0-idle.1",
+		"0-s_back_release.2" : "0-idle.1",
+		"0-s_front_press.1" : "0-idle.1",
+		"0-s_front_press.2" : "0-idle.1",
+		"0-s_front_hold.1" : "0-idle.1",
+		"0-s_front_release.1" : "0-idle.1",
+		"0-s_front_release.2" : "0-idle.1",
+		"0-s_up_press.1" : "0-idle.1",
+		"0-s_up_press.2" : "0-idle.1",
+		"0-s_up_hold.1" : "0-idle.1",
+		"0-s_up_release.1" : "0-idle.1",
+		"0-s_up_release.2" : "0-idle.1",
+		"0-s_down_press.1" : "0-idle.1",
+		"0-s_down_press.2" : "0-idle.1",
+		"0-s_down_hold.1" : "0-idle.1",
+		"0-s_down_release.1" : "0-idle.1",
+		"0-s_down_release.2" : "0-idle.1"
+	}
+}
