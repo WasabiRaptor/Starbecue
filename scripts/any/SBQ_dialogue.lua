@@ -27,6 +27,11 @@ function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialog
 		end
 	end
 	dialogue.result = sb.jsonMerge(dialogueTreeTop.defaultResults or {}, dialogue.result)
+	for _, key in ipairs(dialogueProcessor.resultKeys) do
+		if dialogue.result[key] and type(dialogue.result[key]) ~= "table" then
+			dialogue.result[key] = {dialogue.result[key]}
+		end
+	end
 	dialogue.prev = dialogueTree or {}
 	dialogue.prevTop = dialogueTreeTop or {}
 	return true
@@ -48,7 +53,7 @@ dialogueProcessor.resultKeys = {
 	"dismissTime"
 }
 
-function dialogueProcessor.processDialogueResults()
+function dialogueProcessor.processDialogueResults(i)
 	local results = {}
 	for _, k in ipairs(dialogueProcessor.resultKeys) do
 		results[k] = dialogueProcessor.maxOfKey(dialogue.result, k, dialogue.position)
@@ -115,11 +120,13 @@ function dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dia
 				for _, k in ipairs(dialogueProcessor.resultKeys) do
 					if randomResult[k.."Random"] then return true end
 				end
-			elseif type(randomResult) == "string" then
+			else
 				dialogue.result[key] = randomResult
 			end
 		end
-		dialogue.result[key] = dialogueProcessor.getRedirectedDialogue(dialogue.result[key], true, settings, dialogueTree, dialogueTreeTop)
+		if type(dialogue.result[key]) == "string" then
+			dialogue.result[key] = dialogueProcessor.getRedirectedDialogue(dialogue.result[key], true, settings, dialogueTree, dialogueTreeTop)
+		end
 	end
 end
 
@@ -347,7 +354,7 @@ end
 function dialogueProcessor.speakDialogue(callback)
 	sbq.timerList.speakDialogue = nil
 	local results = dialogueProcessor.processDialogueResults()
-	if not results.dialogue then
+	if (not results.dialogue) or dialogue.finished then
 		dialogue.finished = true
 		if callback then
 			callback()
@@ -358,7 +365,6 @@ function dialogueProcessor.speakDialogue(callback)
 		self.interacted = true
 		self.board:setEntity("interactionSource", sbq.target)
 	end
-
 	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * string.len(results.dialogue))
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
@@ -369,14 +375,12 @@ function dialogueProcessor.speakDialogue(callback)
 	dialogue.position = dialogue.position + 1
 	if dialogue.position > #(dialogue.result.dialogue or {}) then
 		dialogue.finished = true
-		sbq.timer("speakDialogue", lifetime, callback)
-		return
 	end
-	sbq.timer("speakDialogue", lifetime, dialogueProcessor.speakDialogue)
+	sbq.timer(nil, lifetime, dialogueProcessor.speakDialogue, callback)
 end
 function dialogueProcessor.predictTime()
 	local time = 0
-	for i, v in ipairs(dialogue.result.dialogue) do
+	for i, v in ipairs(dialogue.result.dialogue or {}) do
 		local dismissTime = dialogueProcessor.maxOfKey(dialogue.result, "dismissTime", i)
 		local textSpeed = dialogueProcessor.maxOfKey(dialogue.result, "textSpeed", i)
 		time = time + (dismissTime or 0) + (string.len(v) * ((textSpeed or 1) * sbq.config.textSpeedMul))

@@ -115,6 +115,86 @@
 				"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "fishingGrandPrize" }, // a full day
 				"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "fishingGrandPrize" } // a full week
 			}
+		},
+
+		"sbqRandomizeSettings" : {
+			"vorePrefs" : {
+				"oralVore" : {"pred":[true,false]},
+				"tailVore" : {"pred":[true,false]},
+				"absorbVore" : {"pred":[true,false]},
+				"navelVore" : {"pred":[true,false]},
+				"analVore" : {"pred":[true,false]},
+				"unbirthVore" : {"pred":[true,false]},
+				"breastVore" : {"pred":[true,false]},
+				"cockVore" : {"pred":[true,false]}
+			},
+			"infusePrefs" : {
+				"thighsInfuse" : {"pred":[true,false]},
+				"bellyInfuse" : {"pred":[true,false]},
+				"breastInfuse" : {"pred":[true,false]},
+				"pussyInfuse" : {"pred":[true,false]},
+				"cockInfuse" : {"pred":[true,false]},
+				"pawInfuse" : {"pred":[true,false]},
+				"tailInfuse" : {"pred":[true,false]}
+			},
+			"locations" : {
+				"belly" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"ass" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"womb" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"pussy" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"tail" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"cock" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"balls" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				},
+				"breasts" : {
+					"mainEffect" : ["none","heal","softDigest"],
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : [true,false]
+				}
+			}
 		}
 	},
 	"statusControllerSettings" : {

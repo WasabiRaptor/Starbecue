@@ -38,8 +38,27 @@ function init()
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	storage = storage or {}
-	storage.sbqSettings = sb.jsonMerge(config.getParameter("sbqSettings") or {}, storage.sbqSettings or {})
-	storage.sbqUpgrades = sb.jsonMerge(config.getParameter("sbqUpgrades") or {}, storage.sbqUpgrades or {})
+	storage.sbqSettings = sb.jsonMerge(config.getParameter("sbqSettings") or {}, storage.sbqSettings)
+	storage.sbqUpgrades = sb.jsonMerge(config.getParameter("sbqUpgrades") or {}, storage.sbqUpgrades)
+	local randomizeSettings = config.getParameter("sbqRandomizeSettings")
+	if randomizeSettings and not storage.sbqSettings then
+		randomizeSettings = sb.fetchConfigArray(randomizeSettings)
+		storage.sbqSettings = {}
+		for k, v in pairs(randomizeSettings) do
+			if sbq.config.groupedSettings[k] then
+				storage.sbqSettings[k] = {}
+				for g, settings in pairs(v) do
+					storage.sbqSettings[k][g] = {}
+					for setting, v in pairs(settings) do
+						storage.sbqSettings[k][g][setting] = v[math.random(#v)]
+					end
+				end
+			else
+				storage.sbqSettings[k] = v[math.random(#v)]
+			end
+		end
+	end
+
 	if not storage.sbqUpgrades.candiesEaten then
 		storage.sbqUpgrades.candiesEaten = {}
 		for i = 1, math.max(npc.level(), 1) do

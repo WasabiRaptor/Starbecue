@@ -16,12 +16,12 @@ end
 function sbq.checkRPCFinished(rpc, callback, failCallback, ...)
 	if rpc:finished() then
 		if rpc:succeeded() and callback then
-            callback(rpc:result(), ...)
-        elseif failCallback ~= nil then
+			callback(rpc:result(), ...)
+		elseif failCallback ~= nil then
 			failCallback(false, ...)
-        end
+		end
 		return true
-    end
+	end
 	return false
 end
 
@@ -53,7 +53,7 @@ function sbq.loopedMessage(name, eid, message, args, callback, failCallback)
 				callback = callback,
 				failCallback = failCallback
 			}
-        end
+		end
 		if sbq.checkRPCFinished(sbq.loopedMessages[name].rpc, sbq.loopedMessages[name].callback, sbq.loopedMessages[name].failCallback) then
 			sbq.loopedMessages[name] = nil
 		end
@@ -75,7 +75,7 @@ function sbq.randomTimer(name, min, max, callback, ...)
 		local timer = {
 			targetTime = (math.random(min * 100, max * 100))/100,
 			currTime = 0,
-            callback = callback,
+			callback = callback,
 			args = {...}
 		}
 		if name ~= nil then
@@ -92,7 +92,7 @@ function sbq.timer(name, time, callback, ...)
 		local timer = {
 			targetTime = time,
 			currTime = 0,
-            callback = callback,
+			callback = callback,
 			args = {...}
 		}
 		if name ~= nil then
@@ -105,18 +105,18 @@ function sbq.timer(name, time, callback, ...)
 end
 
 function sbq.forceTimer(name, time, callback, ...)
-		local timer = {
-			targetTime = time,
-			currTime = 0,
-        	callback = callback,
-			args = {...}
-		}
-		if name ~= nil then
-			sbq.timerList[name] = timer
-		else
-			table.insert(sbq.timerList, timer)
-		end
-		return true
+	local timer = {
+		targetTime = time,
+		currTime = 0,
+		callback = callback,
+		args = {...}
+	}
+	if name ~= nil then
+		sbq.timerList[name] = timer
+	else
+		table.insert(sbq.timerList, timer)
+	end
+	return true
 end
 
 function sbq.checkTimers(dt)

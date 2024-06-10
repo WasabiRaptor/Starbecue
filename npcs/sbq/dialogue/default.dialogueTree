@@ -107,7 +107,7 @@
 			// is the action available or not?
 			"true" : {
 				// dialogue said before the action
-				"new" : {"dialogueRandom" : [":oralVoreRequested"],"dismissTime" : 2, "jump" : false},
+				"new" : {"dialogueRandom" : [":oralVoreRequested"], "dismissTime" : 2, "jump" : false},
 				// dialogue said after the action finishes
 				"after" : {"new" : {"dialogueRandom" : [":oralVoreRequestedAfter"],"dismissTime" : 2, "jump" : false}}
 			},

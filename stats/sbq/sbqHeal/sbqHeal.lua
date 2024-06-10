@@ -19,6 +19,24 @@ end
 function update(dt)
 	sbq.checkRPCsFinished(dt)
 	if not status.isResource(self.healStat) then return end
+	if status.resourcePercentage(self.healStat) >= 1 then
+		if not self.messageSent and config.getParameter("finishAction") then
+			self.messageSent = true
+			sbq.addRPC(world.sendEntityMessage(
+				effect.sourceEntity(),
+				"sbqQueueAction",
+				config.getParameter("finishAction"),
+				entity.id()
+			), function (recieved)
+				if not recieved then self.messageSent = false end
+			end, function ()
+				self.messageSent = false
+			end)
+		end
+		return
+	else
+		self.messageSent = false
+	end
 	local healAmount = (self.healRate * dt * status.stat("sbqDigestingPower"))
 	if self.turboHeal > 0 then
 		healAmount = healAmount * 10

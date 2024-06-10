@@ -482,8 +482,8 @@ function _State:requestAction(forcing, name, target, ...)
 	end
 	if success then
 		local args = { ... }
-		local callback = function ()
-			success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
+		local callback = function()
+			local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
 			if success then
 				sbq.forceTimer("dialogueAfter", cooldown + wait + 1, function ()
 					sbq.target = target
@@ -1377,14 +1377,14 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.infused then
 		util.appendLists(persistentStatusEffects, location.infusedPassiveEffects or {})
 		for setting, effects in pairs(location.infusedEffects or {}) do
-			if (effects and self.locationSettings[setting]) then
+			if self:checkValidEffects(setting, effects) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
 	elseif self.flags.digested then
 		util.appendLists(persistentStatusEffects, location.digestedPassiveEffects or {})
 		for setting, effects in pairs(location.digestedEffects or {}) do
-			if (effects and self.locationSettings[setting]) then
+			if self:checkValidEffects(setting, effects) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
@@ -1393,7 +1393,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do
-			if (effects and self.locationSettings[setting]) then
+			if self:checkValidEffects(setting, effects) then
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
@@ -1446,6 +1446,19 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	else
 		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId)
 	end
+end
+
+function _Occupant:checkValidEffects(setting, effects)
+	if not (effects and self.locationSettings[setting]) then return false end
+	for _, effect in ipairs(effects) do
+		if type(effect) == "string" then
+			local effectConfig = root.effectConfig(effect).effectConfig or {}
+			if effectConfig.finishAction then
+				if not SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId) then return false end
+			end
+		end
+	end
+	return true
 end
 
 function sbq.getModifiers(modifiers, power)
