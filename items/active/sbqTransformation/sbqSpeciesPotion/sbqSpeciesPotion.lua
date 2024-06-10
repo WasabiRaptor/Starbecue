@@ -5,8 +5,7 @@ end
 
 function update(dt, fireMode, shiftHeld)
 	if fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-        player.giveItem({ name = "sbqMysteriousPotion", parameters = {
-            rarity = "rare",
+		player.giveItem({ name = "sbqMysteriousPotion", parameters = {
 			args = {{species = humanoid.species()},5},
 		}})
 		item.consume(1)

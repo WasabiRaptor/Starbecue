@@ -1,11 +1,11 @@
 {
 	"kind" : "sbqFray_IcyVixen",
 
-
+	"forceName" : "Fray",
 	"charCreationTooltip" : {
 			"title" : "Fray",
 			"subTitle" : "-",
-			"description" : "Hey, you shouldn't be able to see this."
+			"description" : "Vulp."
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
@@ -151,6 +151,7 @@
 	"animationCustom" : [
 		{}
 	],
+	"potionRarity" : "essential",
 	"voreConfig" : [
 		"/humanoid/any/vore_quadruped.config",
 		{

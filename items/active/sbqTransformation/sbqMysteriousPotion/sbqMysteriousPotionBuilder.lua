@@ -2,13 +2,13 @@ local speciesFile
 local strings
 function build(directory, config, parameters, level, seed)
 	local config = sb.jsonMerge(config, parameters or {})
-    strings = root.assetJson("/sbqStrings.config")
+	strings = root.assetJson("/sbqStrings.config")
 
-    config.identity = parameters.identity or (parameters.args or {})[1] or config.identity or config.args[1]
-    config.duration = parameters.duration or (parameters.args or {})[2] or config.duration or config.args[2]
+	config.identity = parameters.identity or (parameters.args or {})[1] or config.identity or config.args[1]
+	config.duration = parameters.duration or (parameters.args or {})[2] or config.duration or config.args[2]
 
-    parameters.args = {
-        config.identity,
+	parameters.args = {
+		config.identity,
 		config.duration
 	}
 
@@ -26,6 +26,14 @@ function build(directory, config, parameters, level, seed)
 					config.largeImage = (speciesFile.potionImagePath or "") .. "potionLarge.png"
 					if speciesFile.baseColorMap then
 						-- TODO make potions use the species colors
+					end
+					if speciesFile.potionRarity then
+						parameters.rarity = speciesFile.potionRarity
+					else
+						parameters.rarity = "rare"
+					end
+					if speciesFile.forceName then
+						config.identity.name = speciesFile.forceName
 					end
 				end
 			end

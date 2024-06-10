@@ -1,6 +1,6 @@
 {
 	"kind" : "sbqAuri_LokiVulpix",
-
+	"forceName" : "Auri",
 	"charCreationTooltip" : {
 			"title" : "Auri",
 			"subTitle" : "(Zn,Cu)5(CO3)2(OH)6",
@@ -100,8 +100,8 @@
 	"genders" : [
 		{
 			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "sbq_nude_chest" ],
@@ -246,6 +246,7 @@
 		}
 
 	},
+	"potionRarity" : "essential",
 	"voreConfig" : [
 		"/humanoid/any/vore.config",
 		{

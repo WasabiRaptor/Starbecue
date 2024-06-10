@@ -1,7 +1,7 @@
 {
 	"kind" : "sbqSocks_LokiVulpix",
 
-
+	"forceName" : "Socks",
 	"charCreationTooltip" : {
 			"title" : "Socks",
 			"subTitle" : "The Plushie.",
@@ -128,8 +128,8 @@
 	"genders" : [
 		{
 			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "sbq_nude_chest" ],
@@ -205,6 +205,7 @@
 		"/humanoid/any/voreOccupantsQuadruped.animation"
 	],
 
+	"potionRarity" : "essential",
 	"voreConfig" : [
 		"/humanoid/any/vore.config",
 		{

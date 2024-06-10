@@ -1,6 +1,8 @@
 {
 	"kind" : "sbqHelena_FFWizard",
 
+	"forceName" : "Helena",
+	"potionRarity" : "essential",
 	"voreConfig" : [
 		"/humanoid/any/vore.config",
 		{
@@ -14,7 +16,7 @@
 	"charCreationTooltip" : {
 			"title" : "Helena",
 			"subTitle" : "S8",
-			"description" : "Are you sure you're supposed to be able to read this?"
+			"description" : "Hot dog."
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
@@ -110,8 +112,8 @@
 	"genders" : [
 		{
 			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "sbq_nude_chest" ],

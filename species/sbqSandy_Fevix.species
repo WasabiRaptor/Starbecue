@@ -1,11 +1,11 @@
 {
 	"kind" : "sbqSandy_Fevix",
 
-
+	"forceName" : "Sandy",
 	"charCreationTooltip" : {
 			"title" : "Sandy",
 			"subTitle" : "The Floatporeon.",
-			"description" : "Are you sure you're supposed to be able to read this?"
+			"description" : "Blub."
 	},
 
 	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
@@ -126,8 +126,8 @@
 	"genders" : [
 		{
 			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/interface/title/female.png",
 			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
 			"hair" : [ "0" ],
 			"shirt" : [ "sbq_nude_chest" ],
@@ -204,6 +204,7 @@
 		"/humanoid/any/quadrupedPred.animation",
 		"/humanoid/any/voreOccupantsQuadruped.animation"
 	],
+	"potionRarity" : "essential",
 	"voreConfig" : [
 		"/humanoid/any/vore.config",
 		{

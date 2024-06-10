@@ -138,6 +138,9 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	if not force then
 		newIdentity.name = currentName
 	end
+	if speciesFile.forceName then
+		newIdentity.name = speciesFile.forceName
+	end
 
 	newIdentity = sb.jsonMerge(
 		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),

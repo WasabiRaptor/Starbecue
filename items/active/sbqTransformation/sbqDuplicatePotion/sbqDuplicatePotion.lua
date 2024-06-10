@@ -8,7 +8,6 @@ function update(dt, fireMode, shiftHeld)
 	if fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
         player.giveItem({ name = "sbqMysteriousPotion", parameters = {
             args = { sb.jsonMerge(humanoid.getIdentity(), { force = true }), 5 },
-			rarity = "legendary"
 		}})
 		item.consume(1)
 	end
