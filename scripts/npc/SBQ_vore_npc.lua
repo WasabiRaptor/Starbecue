@@ -1,13 +1,3 @@
-
-local old = {
-	init = init,
-	update = update,
-	uninit = uninit,
-	tenant_setHome = tenant.setHome,
-	equipped_primary = equipped.primary,
-	participateInNewQuests = _ENV.participateInNewQuests,
-}
-
 dialogueStepScripts = {}
 require"/scripts/actor/SBQ_actor.lua"
 require"/scripts/any/SBQ_rewards.lua"
@@ -16,8 +6,33 @@ require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
 require"/scripts/actor/SBQ_hunting.lua"
 
+local old = {
+	init = init,
+	update = update,
+	uninit = uninit,
+	tenant_setHome = tenant.setHome,
+	equipped_primary = equipped.primary,
+	tenant_graduate = tenant.graduate,
+	participateInNewQuests = _ENV.participateInNewQuests,
+	sbq_getSettingsPageData = sbq.getSettingsPageData
+}
+
 function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
 end
+function sbq.getSettingsPageData()
+	local settingsPageData = old.sbq_getSettingsPageData()
+	settingsPageData.cosmeticSlots = {
+		headCosmetic = humanoid.getItemSlot("headCosmetic"),
+		chestCosmetic = humanoid.getItemSlot("chestCosmetic"),
+		legsCosmetic = humanoid.getItemSlot("legsCosmetic"),
+		backCosmetic = humanoid.getItemSlot("backCosmetic"),
+	}
+	return settingsPageData
+end
+function _ENV.recruitable.setUniform()
+	-- we don't want them overriding the cosmetics we give them
+end
+
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
@@ -62,6 +77,11 @@ function init()
 	message.setHandler("sbqPromptResponse", function (_,_,...)
 		sbq_hunting.promptResponse({...})
 	end)
+	message.setHandler("sbqUpdateCosmeticSlot", function(_, _, slot, item)
+		_ENV.setNpcItemSlot(slot, item)
+		tenant.backup()
+	end)
+
 	sbq.randomTimer("huntingCycle", 60, 5*60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 end
 
@@ -103,6 +123,11 @@ function tenant.setHome(...)
 	if parent then
 		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), sbq.getSettingsOf.all())
 	end
+end
+
+function tenant.graduate()
+	if not sbq.settings.npcGraduation then return end
+	old.tenant_graduate()
 end
 
 function participateInNewQuests()

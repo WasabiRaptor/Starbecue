@@ -16,6 +16,12 @@ function init()
 			_ENV.resultTypeLabel:setText(tostring(convertible))
 			_ENV.convertNPCPanel:setVisible(true)
 		end
+		if sbq.cosmeticSlots and world.getNpcScriptParameter(pane.sourceEntity(), "sbqNPC") then
+			_ENV.npcCosmeticSlots:setVisible(true)
+			for k, v in pairs(sbq.cosmeticSlots) do
+				_ENV[k]:setItem(v)
+			end
+		end
 	end
 end
 function uninit()
@@ -65,3 +71,28 @@ function misc.generateSettingsCard(type)
 		sbqSettings = settings
 	}, }
 end
+
+local cosmeticItemType = {
+	headCosmetic = "headarmor",
+	chestCosmetic = "chestarmor",
+	legsCosmetic = "legsarmor",
+	backCosmetic = "backarmor"
+}
+
+function misc.cosmeticAcceptsItem(slot, item)
+	if not item then return true end
+	return root.itemType(item.name) == cosmeticItemType[slot.id]
+end
+function misc.cosmeticUpdated(slot)
+	world.sendEntityMessage(pane.sourceEntity(), "sbqUpdateCosmeticSlot", slot.id, slot:item())
+end
+
+_ENV.headCosmetic.acceptsItem = misc.cosmeticAcceptsItem
+_ENV.chestCosmetic.acceptsItem = misc.cosmeticAcceptsItem
+_ENV.legsCosmetic.acceptsItem = misc.cosmeticAcceptsItem
+_ENV.backCosmetic.acceptsItem = misc.cosmeticAcceptsItem
+
+_ENV.headCosmetic.onItemModified = misc.cosmeticUpdated
+_ENV.chestCosmetic.onItemModified = misc.cosmeticUpdated
+_ENV.legsCosmetic.onItemModified = misc.cosmeticUpdated
+_ENV.backCosmetic.onItemModified = misc.cosmeticUpdated
