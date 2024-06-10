@@ -177,6 +177,9 @@ function sbq.changeLocation(dir)
 		{type = "sbqSetting", setting = "mainEffect", groupName = "locations", groupKey = location},
 		{type = "sbqSetting", setting = "secondaryEffects", groupName = "locations", groupKey = location}
 	}, })
+	sbq.assignSettingValues()
+	sbq.refreshSettingVisibility()
+
 	local j, nextLocation, nextLocationData = sbq.nextValidLocationIndex(1)
 	local _, prevLocation, prevLocationData = sbq.nextValidLocationIndex(-1)
 	if j == sbq.locationIndex then
