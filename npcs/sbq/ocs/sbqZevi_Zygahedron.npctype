@@ -25,7 +25,13 @@
 			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
 			"graduation" : {
 				"nextNpcType" : []
-			}
+			},
+			"enableParticipation" : true,
+
+			"timeLimit" : 30,
+			"nearbyQuestLimit" : 2,
+			"nearbyQuestRange" : 50,
+			"chance" : 0.04
 		},
 		"sbqConvertType" : false,
 
