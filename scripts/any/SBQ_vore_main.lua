@@ -1270,7 +1270,7 @@ function _Occupant:remove()
 	end
 	Occupants.refreshOccupantModifiers = true
 	self:sendEntityMessage("sbqReleased")
-	world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", Occupants.list)
+	world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
 end
 
 function Occupants.update(dt)
@@ -1442,7 +1442,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		})
 	)
 	if self.flags.newOccupant then
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list)
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
 	else
 		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId)
 	end

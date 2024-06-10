@@ -45,39 +45,41 @@ function init()
 		end
 	end
 
-	local otherVisible = not (sbq.voreConfig.hideOtherSettings or false)
-	local preyVisible = not (sbq.voreConfig.hidePreySettings or false)
-	local predVisible = not (sbq.voreConfig.hidePredSettings or false)
-	local infusePredVisible = not (sbq.voreConfig.hideInfusePredSettings or false)
-	local infusePreyVisible = not (sbq.voreConfig.hideInfusePreySettings or false)
-	local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
-	local sizeVisible = not (sbq.voreConfig.hideSizeSettings or false)
+	if _ENV.mainPrefsPanel then
+		local otherVisible = not (sbq.voreConfig.hideOtherSettings or false)
+		local preyVisible = not (sbq.voreConfig.hidePreySettings or false)
+		local predVisible = not (sbq.voreConfig.hidePredSettings or false)
+		local infusePredVisible = not (sbq.voreConfig.hideInfusePredSettings or false)
+		local infusePreyVisible = not (sbq.voreConfig.hideInfusePreySettings or false)
+		local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
+		local sizeVisible = not (sbq.voreConfig.hideSizeSettings or false)
 
-	_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
-	_ENV.infusePreyPrefsPanel:setVisible(infusePreyVisible)
+		_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
+		_ENV.infusePreyPrefsPanel:setVisible(infusePreyVisible)
 
-	_ENV.transformationPrefsPanel:setVisible(TFVisible)
-	_ENV.resistancesPanel:setVisible(preyVisible)
-	_ENV.otherPrefsPanel:setVisible(otherVisible)
-	_ENV.sizePrefsPanel:setVisible(sizeVisible)
+		_ENV.transformationPrefsPanel:setVisible(TFVisible)
+		_ENV.resistancesPanel:setVisible(preyVisible)
+		_ENV.otherPrefsPanel:setVisible(otherVisible)
+		_ENV.sizePrefsPanel:setVisible(sizeVisible)
 
-	_ENV.vorePredPrefsPanel:setVisible((sbq.voreConfig.availableVoreTypes or false) and predVisible)
-	_ENV.infusePredPrefsPanel:setVisible((sbq.voreConfig.availableInfuseTypes or false) and infusePredVisible)
+		_ENV.vorePredPrefsPanel:setVisible((sbq.voreConfig.availableVoreTypes or false) and predVisible)
+		_ENV.infusePredPrefsPanel:setVisible((sbq.voreConfig.availableInfuseTypes or false) and infusePredVisible)
 
-	for _, voreType in pairs(sbq.gui.voreTypeOrder) do
-		_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred", domOrSub = "dom"}))
-		_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey", domOrSub = "sub"}))
-		local widget = _ENV[voreType.."predPrefLayout"]
-		if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
+		for _, voreType in pairs(sbq.gui.voreTypeOrder) do
+			_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred", domOrSub = "dom"}))
+			_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey", domOrSub = "sub"}))
+			local widget = _ENV[voreType.."predPrefLayout"]
+			if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
+		end
+		for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
+			_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred", domOrSub = "dom"}))
+			_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey", domOrSub = "sub"}))
+
+			local widget = _ENV[infuseType.."predPrefLayout"]
+			if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
+		end
+		_ENV.currentScale:setText(tostring(sbq.currentScale))
 	end
-	for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
-		_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred", domOrSub = "dom"}))
-		_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey", domOrSub = "sub"}))
-
-		local widget = _ENV[infuseType.."predPrefLayout"]
-		if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
-	end
-	_ENV.currentScale:setText(tostring(sbq.currentScale))
 
 	sbq.assignSettingValues()
 	sbq.refreshSettingVisibility()
@@ -157,7 +159,9 @@ function sbq.settingVisibility(input, setting, group, name)
 end
 
 function sbq.refreshSettingVisibility()
-	_ENV.currentScale.locked = not player.hasItemWithParameter("sbqSizeModifier", true)
+	if _ENV.currentScale then
+		_ENV.currentScale.locked = not player.hasItemWithParameter("sbqSizeModifier", true)
+	end
 	for settingIdentifier, identifier in pairs(sbq.settingIdentifiers) do
 		local setting, group, name = table.unpack(identifier)
 		local widget = _ENV[settingIdentifier] or sbq.settingWidgets[settingIdentifier]
@@ -275,12 +279,17 @@ function sbq.importSettings(newSettings)
 end
 
 function sbq.widgetScripts.makeMainEffectButtons(param)
-	local effectButtons = {}
+	local effectButtons = {
+		{mode = "h", spacing = 0, expandMode = {0,0}}
+	}
 	local layout = {
 		type = "panel",
 		id = sbq.widgetSettingIdentifier(param).."Panel",
 		expandMode = { 1, 0 },
-		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":"..param.setting }, effectButtons },
+		children = param.makeLabel and {
+			{ mode = "v", expandMode = { 1, 0 } },
+			{ type = "label", text = ":" .. param.setting },
+			effectButtons } or effectButtons,
 		makeLabel = false
 	}
 	local location = sbq.locations[param.groupKey]
@@ -289,7 +298,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 			local visible = true
 			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {})[param.groupName] or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
 			if not result then
-				local toolTip = sbq.strings[k] or k
+				local toolTip = sbq.getString(location.name or (":"..param.groupKey)).." "..sbq.getString(":"..k)
 				local icon
 				for _, status in ipairs(location[param.setting][k]) do
 
@@ -312,13 +321,19 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 function sbq.widgetScripts.makeSecondaryEffectButtons(param)
-	local effectButtons = {}
+	local effectButtons = {
+		{mode = "h", spacing = 0, expandMode = {0,0}}
+	}
 	sbq.settingIdentifiers[sbq.widgetSettingIdentifier(param)] = {param.setting, param.groupName, param.groupKey}
 	local layout = {
 		type = "panel",
 		id = sbq.widgetSettingIdentifier(param).."Panel",
 		expandMode = { 1, 0 },
-		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, effectButtons },
+		children = param.makeLabel and {
+			{ mode = "v", expandMode = { 1, 0 } },
+			{ type = "label", text = ":" .. param.setting },
+			effectButtons,
+		} or effectButtons,
 		makeLabel = false
 	}
 	local location = sbq.locations[param.groupKey]
@@ -326,7 +341,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
 		if (effects or {})[k] then
-			local toolTip = sbq.strings[k] or k
+			local toolTip = sbq.getString(location.name or (":"..param.groupKey)).." "..sbq.getString(":"..k)
 			local icon
 			for _, status in ipairs(effects[k]) do
 				if type(status) == "string" then

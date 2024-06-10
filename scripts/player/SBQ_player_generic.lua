@@ -92,8 +92,8 @@ function init()
 		}, id)
 	end)
 
-	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants }, ui = "starbecue:predHud" })
+	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
+		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants, sbq = settingsData }, ui = "starbecue:predHud" })
 	end)
 
 	message.setHandler("sbqChooseLocation", function(_, _, id, target, locations)

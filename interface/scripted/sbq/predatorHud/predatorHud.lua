@@ -6,11 +6,26 @@ function init()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
 	backingCanvas:clear()
 
-	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants)
+	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
 		Occupants.list = occupants
+		for k, v in pairs(settingsData) do
+			sbq[k] = v
+		end
+		if sbq.storageSettings then
+			storage.sbqSettings = sbq.storageSettings or {}
+			storage.sbqUpgrades = sbq.storageUpgrades or {}
+			sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+		end
+		if sbq.locations and sbq.baseLocations then
+			for name, location in pairs(sbq.locations) do
+				setmetatable(location, {__index = sbq.baseLocations[name]})
+			end
+		end
+		sbq.assignSettingValues()
+		sbq.refreshSettingVisibility()
 		sbq.refreshOccupants()
 	end)
-    message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
+	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
 		if not world.entityExists(entityId) then return end
 		local portrait = _ENV[entityId .. "PortraitCanvas"]
 		if portrait then
@@ -32,6 +47,7 @@ function init()
 
 	Occupants.list = _ENV.metagui.inputData.occupants
 	sbq.refreshOccupants()
+	sbq.changeLocation(1)
 end
 
 Occupants = {
@@ -149,10 +165,75 @@ function sbq.refreshPortrait(entityId)
 	canvas:drawDrawables(world.entityPortrait(entityId, "bust"), vec2.sub(vec2.div(canvasWidget.size, 2), {0,6}))
 end
 
+sbq.locationIndex = 0
+function sbq.changeLocation(dir)
+	local i, location, locationData = sbq.nextValidLocationIndex(dir)
+	if not i then return end
+	sbq.locationIndex = i
+	_ENV.effectsPanel:clearChildren()
+	_ENV.effectsPanel:addChild({ type = "scrollArea", scrollBars = false, scrollDirections = {1,0}, children = {
+		{ mode = "v", spacing = -2 },
+		{ type = "spacer", size = 1 },
+		{type = "sbqSetting", setting = "mainEffect", groupName = "locations", groupKey = location},
+		{type = "sbqSetting", setting = "secondaryEffects", groupName = "locations", groupKey = location}
+	}, })
+	local j, nextLocation, nextLocationData = sbq.nextValidLocationIndex(1)
+	local _, prevLocation, prevLocationData = sbq.nextValidLocationIndex(-1)
+	if j == sbq.locationIndex then
+		_ENV.prevLocation:setVisible(false)
+		_ENV.nextLocation:setVisible(false)
+		return
+	end
+	if prevLocationData then
+		_ENV.prevLocation.toolTip = sbq.getString(prevLocationData.name or (":" .. prevLocation))
+		_ENV.prevLocation:setVisible(true)
+	else
+		_ENV.prevLocation:setVisible(false)
+	end
+	if nextLocationData then
+		_ENV.nextLocation.toolTip = sbq.getString(nextLocationData.name or (":" .. nextLocation))
+		_ENV.nextLocation:setVisible(true)
+	else
+		_ENV.nextLocation:setVisible(false)
+	end
+end
+
+function sbq.nextValidLocationIndex(dir)
+	local wrapped = false
+	local location
+	local locationData
+	local locationOrder = sbq.voreConfig.locationOrder or sbq.gui.locationOrder
+	local i = sbq.locationIndex
+	while true do
+		i = i + dir
+		if i > #locationOrder then
+			if wrapped then return end
+			wrapped = true
+			i = 1
+		elseif i < 1 then
+			if wrapped then return end
+			wrapped = true
+			i = #locationOrder
+		end
+		location = locationOrder[i]
+		locationData = sbq.locations[location]
+		if locationData and sbq.tableMatches(locationData.activeSettings, sbq.settings, true) then
+			return i, location, locationData
+		end
+	end
+end
+
 ----------------------------------------------------------------------------------------------------------------
 
 function _ENV.settings:onClick()
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:playerSettings" })
+end
+
+function _ENV.prevLocation:onClick()
+	sbq.changeLocation(-1)
+end
+function _ENV.nextLocation:onClick()
+	sbq.changeLocation(1)
 end
 
 ----------------------------------------------------------------------------------------------------------------
