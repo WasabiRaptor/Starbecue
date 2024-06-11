@@ -13,7 +13,7 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	sbq.gui = root.assetJson("/sbqGui.config")
-
+	sbq.entityId = player.id
 
 	activeItem.setHoldingItem(false)
 	storage = storage or {}
@@ -95,23 +95,23 @@ function sbq.clickAction()
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
-	local result, reason
+	local result
 	for i, targetId in ipairs(entityaimed) do
 		if entity.entityInSight(targetId) and ((sbq.config.actionRange * mcontroller.scale()) >= vec2.mag(entity.distanceToEntity(targetId))) then
 			if sbq.isLoungeDismountable(targetId) then
-				result, reason = sbq.attemptAction(targetId)
+				result = {sbq.attemptAction(targetId)}
 				break
 			end
 		end
 	end
 
 	if result == nil then
-		result, reason = table.unpack(player.callScript("sbq.tryAction", storage.action) or {})
+		result = player.callScript("sbq.tryAction", storage.action) or {}
 	end
-	if (not result) and (reason ~= "targetMissing") then
+	if (not result[1]) and (result[2] ~= "targetMissing") then
 		animator.playSound("error")
 	end
-	return result, reason
+	return table.unpack(result)
 end
 
 function sbq.attemptAction(targetId)

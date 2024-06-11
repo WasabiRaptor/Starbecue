@@ -136,17 +136,31 @@ function default:trySendDeeper(name, action, target, reason, locationName, subLo
 end
 
 function default:voreAvailable(name, action, target, locationName, subLocationName, throughput, ...)
-	if not target then return true end
-	if target == sbq.loungingIn() then return false, "invalidAction" end
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
-	local loungeAnchor = world.entityCurrentLounge(target)
-	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
-	local size = sbq.getEntitySize(target)
-	if throughput or action.throughput then
-		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
+	local size
+	if target then
+		if (target == sbq.loungingIn()) then return false, "invalidAction" end
+		local loungeAnchor = world.entityCurrentLounge(target)
+		if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
+		size = sbq.getEntitySize(target)
+		if throughput or action.throughput then
+			if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
+		end
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
+	if location.activeSettings then
+		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+			if location.infuseType then
+				if not (action.flags and action.flags.infusing) then
+					return false, "needsInfusion"
+				end
+			else
+				return false, "invalidLocation"
+			end
+		end
+	end
+	if not target then return true end
 
 	local space, subLocation = location:hasSpace(size)
 	if space then
@@ -161,8 +175,8 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 end
 
 function default:tryVore(name, action, target, locationName, subLocationName, throughput, ...)
-	if target == sbq.loungingIn() then return false, "invalidAction" end
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
+	if target == sbq.loungingIn() then return false, "invalidAction" end
 	local loungeAnchor = world.entityCurrentLounge(target)
 	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
@@ -171,10 +185,21 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
+	if location.activeSettings then
+		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+			if location.infuseType then
+				if not (action.flags and action.flags.infusing) then
+					return false, "needsInfusion"
+				end
+			else
+				return false, "invalidLocation"
+			end
+		end
+	end
 	self:trySendDeeper(name, action, nil, nil, locationName, subLocationName)
 
 	local space, subLocation = location:hasSpace(size)
-	if space then
+	if space or (action.flags and action.flags.infusing) then
 		if Occupants.addOccupant(target, size, locationName or action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
@@ -246,6 +271,12 @@ local function letout(funcName, action, target, preferredAction, ...)
 		for i = #Occupants.list, 1, -1 do
 			local occupant = Occupants.list[i]
 			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction) then
+				return true
+			end
+		end
+		for i = #Occupants.list, 1, -1 do
+			local occupant = Occupants.list[i]
+			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId) then
 				return true
 			end
 		end
@@ -411,8 +442,10 @@ function default:reformed(name, action, target,...)
 	if occupant.flags.infused then
 		location.infusedEntity = nil
 		sbq.settings.infuseSlots[occupant.flags.infuseType].item = nil
+		sbq.infuseOverrideSettings[occupant.flags.infuseType] = nil
 		SpeciesScript:refreshInfusion(occupant.flags.infuseType)
 	end
+	occupant.flags.infuseType = nil
 	occupant.flags.infused = false
 	occupant.flags.digested = false
 	occupant.sizeMultiplier = action.sizeMultiplier or location.reformSizeMultiplier or ((occupant.locationSettings.compression ~= "none") and occupant.locationSettings.compressionMin) or 1
@@ -511,7 +544,7 @@ function default:transformed(name, action, target, ...)
 end
 
 function default:infuseAvailable(name, action, target, ...)
-    local location = SpeciesScript:getLocation(action.location)
+	local location = SpeciesScript:getLocation(action.location)
 	if not location then return false, "invalidLocation" end
 	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then return false, "alreadyInfused" end
 
@@ -524,40 +557,49 @@ function default:infuseAvailable(name, action, target, ...)
 end
 function default:tryInfuse(name, action, target, ...)
 	local location = SpeciesScript:getLocation(action.location)
-	local infuseType = action.infuseType or name
+	local infuseType = action.infuseType or location.infuseType or name
+	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)] then return false, "alreadyInfused" end
 	local occupant = Occupants.entityId[tostring(target)]
+	if occupant then
+		occupant.locationSettings[infuseType.."Digested"] = true
+		occupant.locationSettings[infuseType] = true
+		occupant:refreshLocation()
+		return true
+	else
+		local res = { SpeciesScript:tryAction(action.voreAction, target) }
+		if res[1] then
+			SpeciesScript:queueAction(action.finishAction or name, target)
+		end
+		return table.unpack(res)
+	end
+end
+function default:infused(name, action, target)
+	local location = SpeciesScript:getLocation(action.location)
+	local infuseType = action.infuseType or location.infuseType or name
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false, "missingOccupant" end
 	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)] then
 		occupant.locationSettings[infuseType.."Digested"] = false
 		occupant.locationSettings[infuseType] = false
 		occupant:refreshLocation()
 		return false, "alreadyInfused"
 	end
-	if occupant then
-		if not ((occupant.flags.digested and (occupant.locationSettings[infuseType.."Digested"]))
-		or ((not occupant.flags.digested) and (occupant.locationSettings[infuseType])))
-		then
-			occupant.flags.infusing = true
-			occupant.locationSettings[infuseType.."Digested"] = true
-			occupant.locationSettings[infuseType] = true
-			occupant:refreshLocation()
-			return true
-		elseif (not world.entityStatPositive(target, "sbq_" .. infuseType)) or ((occupant:getPublicProperty("sbqInfuseProgress") or 0) < 1) then
-			return true
-		end
-		location.infusedEntity = target
-		occupant.flags.infused = true
-		occupant.flags.infuseType = infuseType
-		occupant.locationSettings[infuseType.."Digested"] = false
-		occupant.locationSettings[infuseType] = false
-		sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function (card)
-			sbq.settings.infuseSlots[infuseType].item = card
-			SpeciesScript:refreshInfusion(infuseType)
-			occupant:refreshLocation(action.location)
-		end)
-		return true
-	elseif SpeciesScript:tryAction(action.voreAction, target) then
-		return SpeciesScript:queueAction(name, target)
-	end
+	location.infusedEntity = target
+	occupant.flags.infused = true
+	occupant.flags.infusing = false
+	occupant.flags.infuseType = infuseType
+	occupant.locationSettings[infuseType.."Digested"] = false
+	occupant.locationSettings[infuseType] = false
+	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+		sbq.settings.infuseSlots[infuseType].item = card
+		sbq.infuseOverrideSettings[infuseType] = {
+			infuseSlots = { [infuseType] = { item = card}}
+		}
+		SpeciesScript:refreshInfusion(infuseType)
+		occupant:refreshLocation(action.location)
+		location:markSizeDirty()
+	end)
+	return true
 end
 
 

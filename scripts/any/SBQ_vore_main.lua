@@ -244,7 +244,8 @@ function sbq.getSettingsPageData()
 		locations = SpeciesScript.locations or {},
 		baseLocations = SpeciesScript.baseLocations or {},
 		currentScale = sbq.scale(),
-		parentEntityData = {sbq.parentEntity()}
+        parentEntityData = { sbq.parentEntity() },
+		infuseOverrideSettings = sbq.infuseOverrideSettings or {}
 	}
 	return settingsPageData
 end
@@ -258,7 +259,6 @@ end
 
 function sbq.groupedSettingChanged.infuseSlots(name, k, v)
 	SpeciesScript:refreshInfusion(name)
-	sbq.setupSettingMetatables()
 end
 
 -- transformation handling
@@ -794,6 +794,8 @@ function _SpeciesScript:addLocation(name, config)
 	setmetatable(infuseLocation, {__index = location})
 	self.locations[name] = infuseLocation
 end
+
+sbq.infuseOverrideSettings = {}
 function _SpeciesScript:refreshInfusion(slot)
 	for k, v in pairs(self.locations) do
 		local location = self:getLocation(k)
@@ -801,7 +803,10 @@ function _SpeciesScript:refreshInfusion(slot)
 			location:setInfusionData()
 		end
 	end
+	sbq.setupSettingMetatables(entity.entityType())
+	sbq.refreshSettings()
 end
+
 
 function _Location:setInfusionData()
 	if self.infuseTagsSet then
@@ -818,12 +823,15 @@ function _Location:setInfusionData()
 	local infuseSpeciesConfig = root.speciesConfig(sb.jsonQuery(infusedItem, "parameters.npcArgs.npcSpecies") or "") or sb.jsonQuery(infusedItem, "parameters.speciesConfig") or {}
 	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParam.identity") or {}
 	local infuseData = {}
+	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
+		infusedItem.name = self.infusedItemType
+	end
 	if infuseSpeciesConfig then
 		infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
 		infuseData = sb.jsonMerge(root.fetchConfigArray(infuseSpeciesConfig.infuseData.default or {}), root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or {}))
 		infuseData = sb.jsonMerge(infuseData, sb.jsonQuery(infuseData, "locations."..self.tag) or {})
 	end
-	-- util.mergeTable(sbq.settings, infuseData.overrideSettings or {})
+	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
 
 	local tagsSet = {
 		globalTags = {},
@@ -971,7 +979,7 @@ function _Location:updateOccupancy(dt)
 				if not (occupant.flags.digested or occupant.flags.infused) then
 					self.occupancy.count = self.occupancy.count + 1
 				end
-				if not occupant.flags.infused then
+				if not (occupant.flags.infused or occupant.flags.infusing) then
 					self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale())
 				end
 			end
@@ -1374,7 +1382,6 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
 		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
-
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
 	if self.flags.infused then
@@ -1458,7 +1465,6 @@ function _Occupant:checkValidEffects(setting, effects)
 			local effectConfig = root.effectConfig(effect).effectConfig or {}
 			if effectConfig.finishAction then
 				local success, reason = SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
-				sbq.logInfo({effect, effectConfig.finishAction, success, reason})
 				if not success then return false end
 			end
 		end

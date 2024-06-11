@@ -73,10 +73,13 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.voreConfig = sbq.voreConfig or {}
 	storage.sbqSettings = storage.sbqSettings or {}
 	sbq.settings = sb.jsonMerge(
-		sbq.settings or {},
 		sbq.config.entityTypeOverrideSettings[entityType] or {},
 		sbq.voreConfig.overrideSettings or {}
 	)
+	for _, overrides in pairs(sbq.infuseOverrideSettings or {}) do
+		sbq.settings = sb.jsonMerge(sbq.settings, overrides or {})
+	end
+
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(
 		sbq.config.defaultSettings,
@@ -84,6 +87,7 @@ function sbq.setupSettingMetatables(entityType)
 		sbq.voreConfig.defaultSettings or {}
 	)
 	for setting, v in pairs(storage.sbqSettings) do
+		local override = sbq.settings[setting]
 		local defaultType = type(sbq.defaultSettings[setting])
 		if (type(v) ~= defaultType) then
 			storage.sbqSettings[setting] = nil
@@ -95,12 +99,13 @@ function sbq.setupSettingMetatables(entityType)
 		end
 		if not sbq.config.groupedSettings[setting] then
 			local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(v)]
-			if result == "default" then
-				storage.sbqSettings[setting] = nil
-				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nInvalid with current species config.", setting, v))
-			elseif result ~= nil then
+			if result then
 				storage.sbqSettings[setting] = result
-				sbq.logWarn(string.format("Replaced setting '%s' value '%s' with new value '%s'\nOld value invalid with current species config.", setting, v, result))
+				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nInvalid with current species config.", setting, v, result))
+			end
+			local result2 = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(override)]
+			if result2 then
+				sbq.settings[setting] = result2
 			end
 		end
 	end
@@ -147,6 +152,7 @@ function sbq.setupSettingMetatables(entityType)
 			sbq.settings[k][name] = sbq.settings[k][name] or {}
 
 			for setting, v in pairs(storage.sbqSettings[k][name]) do
+				local override = sbq.settings[k][name][setting]
 				local defaultType = type(sbq.defaultSettings[k][name][setting])
 				if (type(v) ~= defaultType) then
 					storage.sbqSettings[k][name][setting] = nil
@@ -157,12 +163,13 @@ function sbq.setupSettingMetatables(entityType)
 					end
 				end
 				local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(v)] or ((((sbq.voreConfig.invalidSettings or {})[k] or {})[name] or {})[setting] or {})[tostring(v)]
-				if result == "default" then
-					storage.sbqSettings[k][name][setting] = nil
-					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, sbq.defaultSettings[k][name][setting]))
-				elseif result ~= nil then
+				if result then
 					storage.sbqSettings[k][name][setting] = result
 					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, result))
+				end
+				local result2 = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(override)] or ((((sbq.voreConfig.invalidSettings or {})[k] or {})[name] or {})[setting] or {})[tostring(override)]
+				if result2 then
+					sbq.settings[k][name][setting] = result2
 				end
 			end
 			for setting, v in pairs(sbq.defaultSettings[k][name]) do
@@ -304,7 +311,7 @@ end
 
 function sbq.logOutput(input, pretty)
 	if pretty then
-		input = sb.printJson(input, pretty)
+		input = sb.printJson(input, pretty, true)
 	end
 	return "[SBQ][%s]%s", (world.entityName(sbq.entityId()) or sbq.entityId()), input
 end
