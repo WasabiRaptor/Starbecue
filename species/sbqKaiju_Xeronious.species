@@ -187,6 +187,7 @@
 	"voreConfig" : [
 		"/humanoid/any/disableAllVorePrey.config",
 		"/humanoid/any/disableAllInfusePrey.config",
+		"/humanoid/any/basicActions.config",
 	{
 		"pred" : {},
 		"prey" : {},
@@ -214,60 +215,6 @@
 		"states" : {
 			"default" : {
 				"actions" : {
-					"letout" : {
-						"script" : "letout"
-					},
-					"reform" : {
-						"script" : "reform"
-					},
-					"reformed" : {
-						"script" : "reformed"
-					},
-					"turboReform" :{
-						"availableScript" : "turboReformAvailable",
-						"script" : "turboReform"
-					},
-					"turboDigest" :{
-						"availableScript" : "turboDigestAvailable",
-						"script" : "turboDigest"
-					},
-					"turboHeal" :{
-						"availableScript" : "turboHealAvailable",
-						"script" : "turboHeal"
-					},
-					"eggify" :{
-						"script" : "eggify"
-					},
-					"digested" : {
-						"script" : "digested"
-					},
-					"digest" : {
-						"availableScript" : "mainEffectAvailable",
-						"script" : "setMainEffect"
-					},
-					"softDigest" : {
-						"availableScript" : "mainEffectAvailable",
-						"script" : "setMainEffect"
-					},
-					"heal" : {
-						"availableScript" : "mainEffectAvailable",
-						"script" : "setMainEffect"
-					},
-					"none" : {
-						"availableScript" : "mainEffectAvailable",
-						"script" : "setMainEffect"
-					},
-					"fatal" : {
-						"script" : "fatal"
-					},
-					"transform" : {
-						"targetSettings":{"speciesTF":true},
-						"script" : "transform"
-					},
-					"transformed" : {
-						"targetSettings":{"speciesTF":true},
-						"script" : "transform"
-					},
 					"vore" : {
 						"script" : "actionSequence",
 						"availableScript" : "actionSequenceAvailable",

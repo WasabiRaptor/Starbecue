@@ -61,7 +61,9 @@ function init()
 	message.setHandler("sbqGiveResource", function (_,_, resource, amount)
 		return status.giveResource(resource, amount)
 	end)
-
+	message.setHandler("sbqModifyResourcePercentage", function (_,_, resource, amount)
+		return status.modifyResourcePercentage(resource, amount)
+	end)
 
 	message.setHandler("sbqAddToResources", function(_, _, amount, resources, multipliers)
 		for i, resource in ipairs(resources or {}) do

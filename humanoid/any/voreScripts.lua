@@ -330,6 +330,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 	local location = occupant:getLocation()
 	occupant.flags.digested = true
 	occupant.flags.digestedLocation = occupant.location
+	occupant.flags.digestType = digestType
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 	occupant.size = action.size or location.digestedSize or 0
 	location:markSizeDirty()
@@ -355,10 +356,22 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 	end
 end
 
+function default:fatalAvailable(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false end
+	if not occupant.flags.digested then return false, "invalidAction" end
+	if not occupant.flags.digestType then return false, "invalidAction" end
+	if occupant:entityStatPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
+	return true
+end
 function default:fatal(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
+	if not occupant.flags.digested then return false, "invalidAction" end
+	if not occupant.flags.digestType then return false, "invalidAction" end
+	if occupant:entityStatPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
 	occupant:modifyResourcePercentage("health", -2)
+	return true
 end
 
 function default:mainEffectAvailable(name, action, target)

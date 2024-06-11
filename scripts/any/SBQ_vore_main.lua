@@ -1659,6 +1659,12 @@ function _Occupant:resourcePercentage(resource)
 	return world.entityResourcePercentage(self.entityId, resource)
 end
 
+function _Occupant:modifyResourcePercentage(resource, amount)
+	-- if they don't have the resource, treat it as empty
+	if not world.entityIsResource(self.entityId, resource) then return 0 end
+	return world.sendEntityMessage(self.entityId, "sbqModifyResourcePercentage", amount)
+end
+
 function _Occupant:resource(resource)
 	-- if they don't have the resource, treat it as empty
 	if not world.entityIsResource(self.entityId, resource) then return 0 end
