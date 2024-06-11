@@ -1009,6 +1009,7 @@ function _Location:updateOccupancy(dt)
 				end
 			end
 		end
+		-- sbq.logInfo(("[%s]:%s"):format(self.tag, sb.printJson(self.occupancy, 2, true)))
 	end
 	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
 		self.occupancy.facingRight = sbq.facingRight
@@ -1133,7 +1134,7 @@ function _Location:refreshStruggleDirection(id)
 				return SpeciesScript:checkAnimations(false, newAnims, { s_direction = direction }, id) + delay, direction
 			end
 		end
-		if newAnims and self.settings.struggleSounds and occupant then
+		if newAnims and self.settings.struggleSounds and occupant and not (occupant.flags.digested or occupant.flags.infused) then
 			animator.setSoundPosition(self.struggleSound or "struggle", occupant:localPosition())
 			animator.setSoundVolume(self.struggleSound or "struggle", occupant:resourcePercentage("energy"), 0.25)
 			animator.playSound(self.struggleSound or "struggle")

@@ -511,7 +511,8 @@ function default:transformed(name, action, target, ...)
 end
 
 function default:infuseAvailable(name, action, target, ...)
-	local location = SpeciesScript:getLocation(action.location)
+    local location = SpeciesScript:getLocation(action.location)
+	if not location then return false, "invalidLocation" end
 	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then return false, "alreadyInfused" end
 
 	local occupant = Occupants.entityId[tostring(target)]
