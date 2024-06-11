@@ -1934,7 +1934,7 @@
 			"sbq_pussyInfuse"
 		],
 		"infused" : {"true":".occupantInfused"},
-		"digested" : {"true":".digestedOccupant"},
+		"digested" : {"true":".occupantDigested"},
 
 		"adjectives" : {
 		},
@@ -2204,7 +2204,7 @@
 			"add" : {"dialogueRandom" : [":tailInfusedOccupant"]}
 		}
 	},
-	"digestedOccupant" : {
+	"occupantDigested" : {
 		"finished" : true,
 		"settings" : "target",
 		"new" : {}

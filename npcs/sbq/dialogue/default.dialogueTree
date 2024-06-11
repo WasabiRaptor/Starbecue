@@ -2309,7 +2309,7 @@
 			"sbq_pussyInfuse"
 		],
 		"infused" : {"true":".occupantInfused"},
-		"digested" : {"true":".digestedOccupant"},
+		"digested" : {"true":".occupantDigested"},
 
 		"adjectives" : {
 		},
@@ -2579,7 +2579,7 @@
 			"add" : {"dialogueRandom" : [":tailInfusedOccupant"]}
 		}
 	},
-	"digestedOccupant" : {
+	"occupantDigested" : {
 		"finished" : true,
 		"settings" : "target",
 		"new" : {}
@@ -2631,8 +2631,8 @@
 			"sbq_cockInfuse",
 			"sbq_pussyInfuse"
 		],
-		"infused" : {"true":".infused"},
-		"digested" : {"true":".digested"},
+		"infused" : {"true":".strugglingInfused"},
+		"digested" : {"true":".strugglingDigested"},
 
 		"adjectives" : {
 
@@ -2874,10 +2874,13 @@
 		// 	}
 		// }
 	},
-	"infused" : {
+	"strugglingInfused" : {
 		"finished" : true,
 		"settings" : "self",
-		"new" : {"dialogueRandom" : [":anyInfused"]},
+		"new" : {
+			"textVolume" : [0.25],
+			"dialogueRandom" : [":anyInfused"]
+		},
 		"next" : [
 			"infuseType"
 		],
@@ -2903,10 +2906,12 @@
 			"add" : {"dialogueRandom" : [":tailInfused"]}
 		}
 	},
-	"digested" : {
+	"strugglingDigested" : {
 		"finished" : true,
 		"settings" : "self",
-		"new" : {}
+		"new" : {
+			"textVolume" : [0.25]
+		}
 	},
 
 	"climax" : {
