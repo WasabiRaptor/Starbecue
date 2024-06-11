@@ -7,19 +7,19 @@ require "/scripts/any/SBQ_util.lua"
 require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/any/SBQ_settings.lua"
 
-_SpeciesScript = {}
+_SpeciesScript = {scripted = true}
 _SpeciesScript.__index = _SpeciesScript
 
-_State = {}
+_State = {scripted = true}
 _State.__index = _State
 
-_Action = {}
+_Action = {scripted = true}
 _Action.__index = _Action
 
-_Location = {}
+_Location = {scripted = true}
 _Location.__index = _Location
 
-_Occupant = {}
+_Occupant = {scripted = true}
 _Occupant.__index = _Occupant
 
 Species = {}
@@ -397,11 +397,13 @@ end
 
 
 function _State:getLocation(locationName, subLocation)
-	if subLocation then
-		return self.locations[locationName].subLocations[subLocation]
-	else
-		return self.locations[locationName]
+	local location = self.locations[locationName]
+	if not location then return end
+	if subLocation and location.subLocations then
+		location = location.subLocations[subLocation] or location
 	end
+	if not location.scripted then return end
+	return location
 end
 
 function _State:queueAction(name, target, ...)

@@ -103,7 +103,7 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
-	if not location then return false, "missingLocation" end
+	if not location then return false, "invalidLocation" end
 	local size = (occupant.size * occupant.sizeMultiplier)
 	throughput = throughput or action.throughput
 	if throughput or action.throughput then
@@ -127,9 +127,11 @@ end
 function default:trySendDeeper(name, action, target, reason, locationName, subLocationName,...)
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
-	local occupant = location.occupancy.list[1]
-	if occupant and location.sendDeeperAction then
-		return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
+	if not location.sendDeeperAction then return false, "invalidAction" end
+	for i, occupant in ipairs(location.occupancy.list) do
+		if not (occupant.flags.infused or occupant.flags.digested) then
+			return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
+		end
 	end
 end
 
@@ -169,7 +171,7 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
-	self:trySendDeeper(name, action, target, nil, locationName, subLocationName)
+	self:trySendDeeper(name, action, nil, nil, locationName, subLocationName)
 
 	local space, subLocation = location:hasSpace(size)
 	if space then
