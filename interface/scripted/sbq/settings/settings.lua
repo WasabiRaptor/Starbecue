@@ -298,7 +298,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 			local visible = true
 			local result = ((sbq.voreConfig.invalidSettings or {})[param.setting] or {})[tostring(k)] or ((((sbq.voreConfig.invalidSettings or {})[param.groupName] or {})[param.groupKey] or {})[param.setting] or {})[tostring(k)]
 			if not result then
-				local toolTip = sbq.getString(location.name or (":"..param.groupKey)).." "..sbq.getString(":"..k)
+				local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 				local icon
 				for _, status in ipairs(location[param.setting][k]) do
 
@@ -341,7 +341,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
 		if (effects or {})[k] then
-			local toolTip = sbq.getString(location.name or (":"..param.groupKey)).." "..sbq.getString(":"..k)
+			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
 			for _, status in ipairs(effects[k]) do
 				if type(status) == "string" then

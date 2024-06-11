@@ -25,7 +25,7 @@ function update(dt)
 			sbq.addRPC(world.sendEntityMessage(
 				effect.sourceEntity(),
 				"sbqQueueAction",
-				config.getParameter("finishAction") or "transform",
+				config.getParameter("finishAction") or "transformed",
 				entity.id()
 			), function (recieved)
 				if not recieved then self.messageSent = false end

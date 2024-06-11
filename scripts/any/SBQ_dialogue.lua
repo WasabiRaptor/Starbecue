@@ -272,7 +272,8 @@ function dialogueProcessor.getRedirectedDialogue(path, returnStrings, settings, 
 		if firstChar == "/" then
 			returnVal = root.assetJson(returnVal) or {}
 		elseif firstChar == ":" then
-			local val = root.assetJson(dialogue.result.useFile or dialogueTreeTop.dialogueFile)[returnVal:sub(2,-1)]
+			local key = returnVal:sub(2,-1)
+			local val = (dialogue.result.useFile and root.assetJson(dialogue.result.useFile)[key]) or root.assetJson(dialogueTreeTop.dialogueFile)[key]
 			if not val then
 				returnVal = sbq.getString(returnVal)
 				break

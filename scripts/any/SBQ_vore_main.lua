@@ -1454,7 +1454,9 @@ function _Occupant:checkValidEffects(setting, effects)
 		if type(effect) == "string" then
 			local effectConfig = root.effectConfig(effect).effectConfig or {}
 			if effectConfig.finishAction then
-				if not SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId) then return false end
+				local success, reason = SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
+				sbq.logInfo({effect, effectConfig.finishAction, success, reason})
+				if not success then return false end
 			end
 		end
 	end
