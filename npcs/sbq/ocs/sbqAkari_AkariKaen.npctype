@@ -239,21 +239,6 @@
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		}
 
-
-		// the args below are for randomizing specific settings between possible values in the table when the pred is first summoned, a few examples have been defined
-		// specific OCs will probably have specific prefrences in mind, so you may not want things to randomize at all
-		/*
-		"sbqRandomizeSettings" : {
-			"oralVorePred" : [true,false],
-
-			"bellyEffectSlot" : [ "none", "heal", "softDigest", "digest"],
-
-			// we shouldn't have the randomly generated preds generate with nsfw stuff
-			// not everyone wants to stumble across an NPC with their dick out
-
-			//"cockVorePred" : [true,false],
-		}
-		*/
 	},
 	"statusControllerSettings" : {
 		"stats" : {

@@ -195,59 +195,12 @@
 
 			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
-		},
+		}
 
 
 		// the args below are for randomizing specific settings between possible values in the table when the pred is first summoned, a few examples have been defined
 		// specific OCs will probably have specific prefrences in mind, so you may not want things to randomize at all
 
-		"sbqRandomizeSettings" : {
-
-			"bellyEffectSlot" : [ "none", "heal", "softDigest"],
-			"ballsEffectSlot" : [ "none", "heal", "softDigest"],
-			"ballsInfusedItem" : "cockInfusedItem",
-			"cockInfusedItem" : [{ "name": "sbqNPCEssenceJar", "count": 1, "parameters": {
-				"shortdescription" : "Cherry's Essence",
-				"description" : "Clover's \"Assistant\" looks like all she's doing right now is twitching between his legs~",
-				"preySize" : 1,
-				"npcArgs" : {
-					"npcSpecies" : "meowscarada",
-					"npcType" : "sbqCherry_LokiVulpix",
-					"npcParam" : {
-						"scriptConfig" : {
-							"isOC" : true,
-							"uniqueId" : "sbqCherry_LokiVulpix"
-						},
-						"identity" : {
-							"body" : "5",
-							"arm" : "3",
-							"facialHairType" : "0",
-							"facialHairGroup" : "ears",
-							"hairType" : "0",
-							"bodyDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"personalityArmIdle" : "idle.3",
-							"gender" : "female",
-							"hairGroup" : "hair",
-							"facialMaskDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"personalityIdle" : "idle.5",
-							"name" : "Cherry",
-							"facialMaskGroup" : "mask",
-							"facialHairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"imagePath" : "meowscarada",
-							"emoteDirectives" : "?replace;aaccc0=ccaab5fe;882c4a=882c4a;c2cfcb=cfc2c6fe;65deb5=df658efe;b9446b=b9446b;df658e=df658e;44b992=b9446bfe?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"hairDirectives" : "?replace;265529=b9549b;1a2617=65133a;23311f=721e46;2d6231=cc69af;131c10=5a062f;1c421e=a93c89?replace;c3daa5=f5bad8;ddf2bf=ffd7eb;e9fcce=ffe2f0;a0b686=eda7cb",
-							"facialMaskType" : "blank"
-						}
-					}
-				}
-			}}]
-
-		}
-		/*
-		"sbqRandomizePreySettings" : {
-			"oralVore" : [true,false]
-		},
-		*/
 	},
 	"statusControllerSettings" : {
 		"stats" : {

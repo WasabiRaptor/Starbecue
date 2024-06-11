@@ -38,11 +38,12 @@ function init()
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	storage = storage or {}
-	storage.sbqSettings = sb.jsonMerge(config.getParameter("sbqSettings") or {}, storage.sbqSettings)
-	storage.sbqUpgrades = sb.jsonMerge(config.getParameter("sbqUpgrades") or {}, storage.sbqUpgrades)
+	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings")
+	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
 	local randomizeSettings = config.getParameter("sbqRandomizeSettings")
 	if randomizeSettings and not storage.sbqSettings then
-		randomizeSettings = sb.fetchConfigArray(randomizeSettings)
+		math.randomseed(npc.seed())
+		randomizeSettings = root.fetchConfigArray(randomizeSettings)
 		storage.sbqSettings = {}
 		for k, v in pairs(randomizeSettings) do
 			if sbq.config.groupedSettings[k] then

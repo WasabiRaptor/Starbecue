@@ -17,10 +17,11 @@ function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialog
 	if path ~= nil then
 		dialogue.path = path
 		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree or dialogue.prev, dialogueTreeTop or dialogue.prevTop)
-		if not dialogueTree then dialogue.finished = true return false end
+		if (not dialogueTree) or (not dialogueTreeTop) then dialogue.finished = true return false end
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
+		dialogueProcessor.getDialogueBranch(".defaultResults", settings, eid, dialogueTree, dialogueTreeTop)
 		local startIndex = 1
 		while dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex) do
 			startIndex = #dialogue.randomRolls + 1
@@ -215,6 +216,10 @@ function dialogueProcessor.processDialogueStep(dialogueTree)
 		dialogue.result = sb.jsonMerge(dialogueTree.new, {})
 		dialogue.queue = {}
 	end
+	if dialogueTree.fill then
+		dialogue.result = sb.jsonMerge(dialogueTree.fill, dialogue.result)
+	end
+
 	if dialogueTree.clear then
 		for _, k in ipairs(dialogueTree.clear) do
 			dialogue.result[k] = nil

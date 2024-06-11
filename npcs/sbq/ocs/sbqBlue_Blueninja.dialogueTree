@@ -3,9 +3,9 @@
 	// after following a path, next steps will automatically advance down the tree building the result dialogue
 
 	// overall default values for a "new" dialogue
-	"defaultResults" : {
+	"defaultResults" : { "fill" : {
 		"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
-	},
+	}},
 	// greeting is the default start of the tree
 	// settings come from itself
 	"greeting" : {
