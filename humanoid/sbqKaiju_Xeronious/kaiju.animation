@@ -939,7 +939,15 @@
 					"tailExpandState" : {
 						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<tailStateFrame>" } },
 						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-expand" } }
-
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"justHead" : {
+						"head": { "properties": {} }
 					}
 				}
 			}
