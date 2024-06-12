@@ -1,5 +1,4 @@
 {
-	"noHumanoidConfigOverride" : true,
 	"useModifiedAnimator" : true,
 	"globalTagDefaults" : {
 		"partImage" : "",
@@ -129,6 +128,7 @@
 				}
 			},
 			"bodyState": {
+				"noHumanoidConfigOverride" : true,
 				"priority" : 0,
 				"default": "idle",
 				"states": {
@@ -366,7 +366,19 @@
 				"priority" : 2,
 				"default": "ignore",
 				"states" : {
-					"eat": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
+					"eat": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore", "frameProperties" : {
+						"headOffset" : [
+							{"translate":[0,0]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0.25]},
+							{"translate":[0,0.375]},
+							{"translate":[0,0.625]},
+							{"translate":[0,1]},
+							{"translate":[0,1.25]},
+							{"translate":[0,1.5]},
+							{"translate":[0,2]}
+						]
+					}},
 					"ignore": { "frames": 1, "cycle": 0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
@@ -447,7 +459,7 @@
 					"centered": true,
 					"zLevel": 1,
 					"transformationGroups": [],
-					"anchorPart": "body",
+					"anchorPart": "head_cosmetic",
 					"itemHidden": true,
 					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
@@ -480,7 +492,7 @@
 					"centered": true,
 					"zLevel": -5,
 					"transformationGroups": [],
-					"anchorPart": "head",
+					"anchorPart": "head_cosmetic",
 					"itemHidden": true,
 					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
@@ -515,7 +527,8 @@
 					"zLevel": 4.7,
 					"transformationGroups": ["headOffset"],
 					"anchorPart": "body",
-					"processingDirectives" : "<headArmorDirectives>"
+					"processingDirectives" : "<headArmorDirectives>",
+					"offset" : [0,-1.75]
 				},
 				"partStates": {
 					"headState": {

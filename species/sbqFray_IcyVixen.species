@@ -145,8 +145,17 @@
 	],
 
 	"humanoidOverrides" : {
+		"feetOffset" : [0,-32],
+
+		"duckOffset" : 0,
+
 		"walkBob" : [0, 0, 0, 0, 0, 0, 0, 0],
 		"runBob" : [0, 0, 1, 1, 0, 0, -1, -1],
+
+		"frontArmRotationCenter" : [24,-5],
+		"backArmRotationCenter" : [24,-5],
+		"frontHandPosition" : [24,-5],
+		"backArmOffset" : [4,0],
 
 		"movementParameters" : {
 			"standingPoly" : [

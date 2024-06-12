@@ -147,11 +147,12 @@
 		"runFallOffset" : 0,
 		"jumpBob" : 0, // jump bob is handled by my animation file
 		"globalOffset" : [0.0, 0.0],
+		"feetOffset" : [0,-24],
 
-		"frontArmRotationCenter" : [8,-7],
-		"backArmRotationCenter" : [8,-7], // would be [13,7] but we have to offset it because backArmOffset is added to it
-		"frontHandPosition" : [22,-8],
-		"backArmOffset" : [4,0],
+		"frontArmRotationCenter" : [10,0],
+		"backArmRotationCenter" : [10,0],
+		"frontHandPosition" : [10,0],
+		"backArmOffset" : [-20,0],
 
 		"movementParameters" : {
 			"standingPoly" : [
@@ -171,7 +172,7 @@
 			"walkSpeed": 3,
 			"runSpeed": 5,
 			"airJumpProfile" : {
-				"jumpSpeed" : 30
+				"jumpSpeed" : 40
 			},
 			"liquidJumpProfile" : {
 				"jumpSpeed" : 30
