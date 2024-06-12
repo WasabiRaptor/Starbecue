@@ -20,11 +20,6 @@ function init()
 		state.tag = nil
 	end
 
-	message.setHandler("sbqRefreshDialogueBoxData", function (_,_, id, isPrey)
-		talkingWithPrey = (isPrey == "prey")
-		dialogueBoxOpen = 0.5
-		return { occupantHolder = occupantHolder }
-	end)
 	message.setHandler("sbqSay", function (_,_, string, tags)
 		object.say(string, tags)
 	end)

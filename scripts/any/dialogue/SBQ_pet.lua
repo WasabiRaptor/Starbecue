@@ -22,6 +22,8 @@ function dialogueStepScripts.petting(dialogueTree, dialogueTreeTop, settings, br
 		for i = #dialogue.result.options + 1, optionCount do
 			table.insert(dialogue.result.options, dialogue.result.options[#dialogue.result.options] )
 		end
+	else
+		dialogue.result.options = nil
 	end
 
 	return petType

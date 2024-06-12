@@ -63,10 +63,12 @@ function init()
 					_ENV.itemInfoPanelSlot:setItem({ name = recipe.result, parameters = recipe.parameters })
 					_ENV.itemNameLabel:setText(resultItemConfig.parameters.shortdescription or resultItemConfig.config.shortdescription)
 					_ENV.itemCategoryLabel:setText("^gray;"..(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category))
-                    _ENV.itemDescriptionLabel:setText(resultItemConfig.parameters.description or resultItemConfig.config.description)
+					_ENV.itemDescriptionLabel:setText(resultItemConfig.parameters.description or resultItemConfig.config.description)
 
-					if not dialogueBox.refresh( recipe.dialogue or (".itemSelection."..recipe.result), dialogue.prev, sbq.dialogueTree) then
-						dialogueBox.refresh( ".converse", dialogue.prev, sbq.dialogueTree)
+					if not dialogueBox.refresh((".itemSelection."..( recipe.dialogue or recipe.result)), dialogue.prev, sbq.dialogueTree) then
+						if dialogue.path ~= ".converse" then
+							dialogueBox.refresh( ".converse", dialogue.prev, sbq.dialogueTree)
+						end
 					end
 				end
 			end
@@ -96,9 +98,9 @@ function _ENV.buy:onClick()
 		end
 		for i = 1, buyAmount do
 			player.giveItem({ name = buyRecipe.result, count = buyRecipe.count, parameters = buyRecipe.parameters })
-        end
+		end
 		dialogueBox.refresh( ".buy", dialogue.prev, sbq.dialogueTree)
-    else
+	else
 		dialogueBox.refresh( ".buyFail", dialogue.prev, sbq.dialogueTree)
 		pane.playSound("/sfx/interface/clickon_error.ogg")
 	end

@@ -58,8 +58,6 @@
 			]}
 		]},
 
-		"dialogueStepScripts" : ["/npcs/sbq/ocs/pet_dialogue_script.lua"],
-		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
 		"dialogueTree" : "/npcs/sbq/ocs/sbqSocks_LokiVulpix.dialogueTree",
 
 		"sbqPredRewards" : {

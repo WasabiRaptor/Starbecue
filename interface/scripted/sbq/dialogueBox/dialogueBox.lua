@@ -190,18 +190,15 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	end
 	_ENV.dialogueCont:setText(results.buttonText)
 
-	local newText = sb.replaceTags(results.dialogue, results.tags)
-	if dialogueBox.text ~= newText then
-		dialogueBox.text = newText
-		dialogueBox.textSound = results.textSound
-		dialogueBox.textSpeed = results.textSpeed
-		dialogueBox.textVolume = results.textVolume or 1
-		dialogueBox.textPosition = 1
-		if inital then
-			sbq.timer(nil, 0.25, dialogueBox.scrollText)
-		else
-			dialogueBox.scrollText()
-		end
+	dialogueBox.text = sb.replaceTags(results.dialogue, results.tags)
+	dialogueBox.textSound = results.textSound
+	dialogueBox.textSpeed = results.textSpeed
+	dialogueBox.textVolume = results.textVolume or 1
+	dialogueBox.textPosition = 1
+	if inital then
+		sbq.timer(nil, 0.25, dialogueBox.scrollText)
+	else
+		dialogueBox.scrollText()
 	end
 	dismissTime = results.dismissTime
 	sbq.timerList.dismissAfterTime = nil

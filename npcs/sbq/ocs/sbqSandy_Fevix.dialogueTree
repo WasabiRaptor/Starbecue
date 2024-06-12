@@ -1,4 +1,5 @@
 {
+	"dialogueStepScripts" : ["/scripts/any/dialogue/SBQ_pet.lua"],
 	"dialogueFile" : "/npcs/sbq/ocs/sbqSandy_Fevix.dialogue",
 	// after following a path, next steps will automatically advance down the tree building the result dialogue
 
@@ -94,7 +95,10 @@
 		},
 		"problem" : {
 			"replace" : {
+				"name" : "",
+				"imagePortrait" : false,
 				"dialogueRandom" : [":problemPet"],
+				"textSound": ["/sfx/undertale/SND_TXT1.ogg"],
 				"buttonText" : ["[ACT]"],
 				"jump" : ".pet"
 			}
@@ -2017,7 +2021,7 @@
 	// chance of saying one of these lines when one of their occupants struggles inside them
 	"occupantStruggle" : {
 		"settings" : "target",
-		"new" : {"jump":".occupantStruggle"},
+		"new" : {"jump":".occupantStruggle", "dismissTime":2},
 		"next" : [
 			"infused",
 			"digested",
@@ -2302,7 +2306,7 @@
 	"occupantInfused" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":".occupantInfused"},
+		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":".occupantInfused", "dismissTime":2},
 		"next" : [
 			"infuseType"
 		],
@@ -2331,7 +2335,7 @@
 	"occupantDigested" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"jump":".occupantDigested"}
+		"new" : {"jump":".occupantDigested", "dismissTime":2}
 	},
 
 	"loungingInteract" : ".struggling",
@@ -2339,7 +2343,7 @@
 	"struggling" : {
 		"settings" : "self",
 		"new" : {
-			"jump" : ".struggling",
+			"jump":".struggling", "dismissTime":2,
 			"textVolume" : [0.5]
 		},
 		"next" : [
@@ -2627,7 +2631,7 @@
 	"strugglingInfused" : {
 		"finished" : true,
 		"settings" : "self",
-		"new" : {"dialogueRandom" : [":anyInfused"], "jump":".strugglingInfused"},
+		"new" : {"textVolume" : [0.25], "dialogueRandom" : [":anyInfused"], "jump":".strugglingInfused", "dismissTime":2},
 		"next" : [
 			"infuseType"
 		],
@@ -2656,7 +2660,7 @@
 	"strugglingDigested" : {
 		"finished" : true,
 		"settings" : "self",
-		"new" : {"jump":".strugglingDigested"}
+		"new" : {"textVolume" : [0.25], "jump":".strugglingDigested", "dismissTime":2}
 	},
 
 	"climax" : {

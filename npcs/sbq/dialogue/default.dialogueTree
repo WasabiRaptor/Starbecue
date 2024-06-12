@@ -8,7 +8,6 @@
 			"entityPortrait" : ["bust"],
 			"textSound": ["/sfx/interface/aichatter1.ogg"],
 			"textVolume" : [1],
-			"jump" : ".greeting" // if a part of the dialogue tree goes to a part that has no data for continuation via the button it will jump to which one of these it saw last while moving down the tree
 		},
 		"next" : ["personality"],
 		"shy" : {"fill" : {"useFile":"/npcs/sbq/dialogue/shy.dialogue"}},
@@ -2268,7 +2267,7 @@
 	// chance of saying one of these lines when one of their occupants struggles inside them
 	"occupantStruggle" : {
 		"settings" : "target",
-		"new" : {"jump":".occupantStruggle"},
+		"new" : {"jump":".occupantStruggle", "dismissTime":2},
 		"next" : [
 			"infused",
 			"digested",
@@ -2553,7 +2552,7 @@
 	"occupantInfused" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":".occupantInfused"},
+		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":".occupantInfused", "dismissTime":2},
 		"next" : [
 			"infuseType"
 		],
@@ -2582,7 +2581,7 @@
 	"occupantDigested" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"jump":".occupantDigested"}
+		"new" : {"jump":".occupantDigested", "dismissTime":2}
 	},
 
 	"loungingInteract" : ".struggling",
@@ -2590,7 +2589,7 @@
 	"struggling" : {
 		"settings" : "self",
 		"new" : {
-			"jump" : ".struggling",
+			"jump":".struggling", "dismissTime":2,
 			"textVolume" : [0.5]
 		},
 		"next" : [
@@ -2879,6 +2878,7 @@
 		"finished" : true,
 		"settings" : "self",
 		"new" : {
+			"jump":".strugglingInfused", "dismissTime":2,
 			"textVolume" : [0.25],
 			"dialogueRandom" : [":anyInfused"]
 		},
@@ -2911,6 +2911,7 @@
 		"finished" : true,
 		"settings" : "self",
 		"new" : {
+			"jump":".strugglingDigested", "dismissTime":2,
 			"textVolume" : [0.25]
 		}
 	},

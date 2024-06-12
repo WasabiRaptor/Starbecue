@@ -615,7 +615,7 @@
 	// chance of saying one of these lines when one of their occupants struggles inside them
 	"occupantStruggle" : {
 		"settings" : "target",
-		"new" : {"jump":".occupantStruggle"},
+		"new" : {"jump":".occupantStruggle", "dismissTime":2},
 		"next" : [
 			"infused",
 			"digested",
@@ -738,12 +738,12 @@
 	"occupantInfused" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"jump":".occupantInfused"}
+		"new" : {"jump":".occupantInfused", "dismissTime":2}
 	},
 	"occupantDigested" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"jump":".occupantDigested"}
+		"new" : {"jump":".occupantDigested", "dismissTime":2}
 	},
 
 	"loungingInteract" : ".struggling",
@@ -751,7 +751,7 @@
 	"struggling" : {
 		"settings" : "self",
 		"new" : {
-			"jump" : ".struggling",
+			"jump":".struggling", "dismissTime":2,
 			"textVolume" : [0.5]
 		},
 		"next" : [
@@ -943,12 +943,12 @@
 	"strugglingInfused" : {
 		"finished" : true,
 		"settings" : "self",
-		"new" : {"jump":".strugglingInfused"}
+		"new" : {"textVolume" : [0.25], "jump":".strugglingInfused", "dismissTime":2}
 	},
 	"strugglingDigested" : {
 		"finished" : true,
 		"settings" : "self",
-		"new" : {"jump":".strugglingDigested"}
+		"new" : {"textVolume" : [0.25], "jump":".strugglingDigested", "dismissTime":2}
 	},
 
 	"climax" : {

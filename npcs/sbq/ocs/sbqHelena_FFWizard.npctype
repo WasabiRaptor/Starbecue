@@ -34,11 +34,8 @@
 
 		"uniqueId" : "sbqHelena_FFWizard", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
-		"dialogueStepScripts" : [], // this is for scripts used by both the dialogue box and the NPC itself, used for adding extra behavior step scripts to the dialogue tree
-		// as the scripts here are being called on both a UI and on the NPC, do avoid using the player or npc lua tables in such scripts unless said script would only trigger in the context of it having said table
-
-		//"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : "/npcs/sbq/ocs/sbqHelena_FFWizard.dialogueTree",
+
 		"sbqPredRewards" : {
 			// Time is in minutes here!
 			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
