@@ -2267,7 +2267,7 @@
 	// chance of saying one of these lines when one of their occupants struggles inside them
 	"occupantStruggle" : {
 		"settings" : "target",
-		"new" : {"jump":".occupantStruggle", "dismissTime":2},
+		"new" : {"jump":false, "dismissTime":2},
 		"next" : [
 			"infused",
 			"digested",
@@ -2552,7 +2552,7 @@
 	"occupantInfused" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":".occupantInfused", "dismissTime":2},
+		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":false, "dismissTime":2},
 		"next" : [
 			"infuseType"
 		],
@@ -2581,7 +2581,7 @@
 	"occupantDigested" : {
 		"finished" : true,
 		"settings" : "target",
-		"new" : {"jump":".occupantDigested", "dismissTime":2}
+		"new" : {"jump":false, "dismissTime":2}
 	},
 
 	"loungingInteract" : ".struggling",
@@ -2589,7 +2589,7 @@
 	"struggling" : {
 		"settings" : "self",
 		"new" : {
-			"jump":".struggling", "dismissTime":2,
+			"jump":false, "dismissTime":2,
 			"textVolume" : [0.5]
 		},
 		"next" : [
@@ -2878,7 +2878,7 @@
 		"finished" : true,
 		"settings" : "self",
 		"new" : {
-			"jump":".strugglingInfused", "dismissTime":2,
+			"jump":false, "dismissTime":2,
 			"textVolume" : [0.25],
 			"dialogueRandom" : [":anyInfused"]
 		},
@@ -2911,7 +2911,7 @@
 		"finished" : true,
 		"settings" : "self",
 		"new" : {
-			"jump":".strugglingDigested", "dismissTime":2,
+			"jump":false, "dismissTime":2,
 			"textVolume" : [0.25]
 		}
 	},

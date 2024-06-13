@@ -162,6 +162,10 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	else
 		dialogue.position = dialogue.position + 1
 	end
+	if not dialogue.result.dialogue then
+		dialogue.finished = true
+		return
+	end
 	if dialogue.position >= #dialogue.result.dialogue then
 		dialogue.finished = true
 	end
@@ -201,6 +205,9 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		dialogueBox.scrollText()
 	end
 	dismissTime = results.dismissTime
+	if dismissTime and not dialogue.result.jump then
+		_ENV.dialogueCont:setVisible(false)
+	end
 	sbq.timerList.dismissAfterTime = nil
 	return true
 end
@@ -242,7 +249,7 @@ function dialogueBox.dismissAfterTimer(time)
 		sbq.forceTimer("dismissAfterTime", time, function()
 			if not dialogue.finished then
 				dialogueBox.refresh()
-			elseif dialogue.result.jump then
+			elseif dialogue.result.jump and (dialogue.result.jump ~= dialogue.path) then
 				dialogueBox.refresh(dialogue.result.jump, dialogue.prev)
 			else
 				pane.dismiss()
