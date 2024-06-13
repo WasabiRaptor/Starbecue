@@ -294,7 +294,12 @@
 					"bodyState" : {
 						"lay" : {"properties":{"offset":[0, 0]}}, // quadrupeds are in a differient orientation than the game expects for lay, so we un-rotate the expected 90 degress rotation
 						"sit" : {"properties":{"offset":[0,-0.0625]}}
+					},
+					"portraitMode" : {
+						"head" : { "properties": {"offset":[-0.875,-1.5], "transforms":{"scale":[0.6,0.6]}} },
+						"bust" : "head"
 					}
+
 				}
 			},
 			"body": {
@@ -340,6 +345,10 @@
 						"duck": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyStateAnim>.<bodyStateFrame>", "transformationGroups": [] } },
 						"crawl": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyStateAnim>.1", "transformationGroups": [] } }
 
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -372,6 +381,10 @@
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -404,6 +417,10 @@
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -435,11 +452,12 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"portraitMode" : {
-						"head": { "properties": {} }
-					},
 					"legsCosmeticHiddenState" : {
 						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -472,10 +490,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
-					},
-					"legsCosmeticHiddenState" : {
-						"none": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -510,7 +526,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -544,7 +561,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -590,7 +608,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -635,7 +654,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -675,7 +695,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -714,7 +735,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -739,6 +761,10 @@
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {"image": "<bodyImagePath>head.png:idle.1"} },
+						"bust" : "head"
 					}
 				}
 			},
@@ -748,7 +774,8 @@
 					"centered": true,
 					"zLevel": 4.7,
 					"anchorPart": "head",
-					"processingDirectives" : "<headArmorDirectives>"
+					"processingDirectives" : "<headArmorDirectives>",
+					"offset" : [1.0625,2.4375]
 				},
 				"partStates": {
 					"headState": {
@@ -803,7 +830,8 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {} }
+						"head" : { "properties": {} },
+						"bust" : "head"
 					}
 				}
 			}
