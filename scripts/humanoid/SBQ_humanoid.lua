@@ -183,9 +183,6 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end
 	sbq.refreshPredHudPortrait()
-	if sbq.reloadVoreConfig then
-		sbq.reloadVoreConfig({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
-	end
 end
 
 function sbq.revertTF()

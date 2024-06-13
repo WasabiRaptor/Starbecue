@@ -1,25 +1,31 @@
 local old = {
-    initAnimator = initAnimator or (function ()end),
+	initAnimator = initAnimator or (function ()end),
 	equipmentSlotUpdated = equipmentSlotUpdated or (function ()end)
 }
 require("/scripts/any/SBQ_util.lua")
 
 function equipmentSlotUpdated(slot, itemDescriptor)
-    old.equipmentSlotUpdated(slot, itemDescriptor)
-    local slotFunc = equipped[slot.."Slot"] or function(_) end
+	old.equipmentSlotUpdated(slot, itemDescriptor)
+	local slotFunc = equipped[slot.."Slot"] or function(_) end
 	slotFunc(itemDescriptor)
 end
 
+local prevAnimSpecies
 function initAnimator()
 	old.initAnimator()
-    --sb.logInfo(entity.entityType().." "..humanoid.getIdentity().name)
 	sbq.refreshRemapTags()
 	equipped.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
 	equipped.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
 	equipped.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
-    equipped.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
+	equipped.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
 	-- equipped.primary(humanoid.getItemSlot("primary"))
 	-- equipped.alt(humanoid.getItemSlot("alt"))
+	if prevAnimSpecies and (prevAnimSpecies ~= humanoid.species()) then
+		if sbq.reloadVoreConfig then
+			sbq.reloadVoreConfig({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
+		end
+	end
+	prevAnimSpecies = humanoid.species()
 end
 
 function sbq.refreshRemapTags()
@@ -67,7 +73,7 @@ end
 
 function equipped.chestCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("chest") end
-    if itemDescriptor then
+	if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
@@ -77,7 +83,7 @@ function equipped.chestCosmeticSlot(itemDescriptor)
 end
 function equipped.legsCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("legs") end
-    if itemDescriptor then
+	if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
@@ -87,7 +93,7 @@ function equipped.legsCosmeticSlot(itemDescriptor)
 end
 function equipped.headCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("head") end
-    if itemDescriptor then
+	if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
@@ -97,7 +103,7 @@ function equipped.headCosmeticSlot(itemDescriptor)
 end
 function equipped.backCosmeticSlot(itemDescriptor)
 	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("back") end
-    if itemDescriptor then
+	if itemDescriptor then
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
@@ -114,28 +120,28 @@ end
 
 function sbq.remapColor(remaps, fromMap, toMap)
 	local directives = "?replace"
-    for _, remap in ipairs(remaps or {}) do
-        if remap[1] then
+	for _, remap in ipairs(remaps or {}) do
+		if remap[1] then
 			local from = fromMap[remap[1]]
-            local to = toMap[remap[2]]
-            local check = remap[3]
-            if from and to and sbq.tableMatches(check, sbq.settings, true) then
-                for i, fromColor in ipairs(from) do
+			local to = toMap[remap[2]]
+			local check = remap[3]
+			if from and to and sbq.tableMatches(check, sbq.settings, true) then
+				for i, fromColor in ipairs(from) do
 					local toColor = to[i] or to[#to]
 					if (fromColor ~= toColor) then
 						directives = directives..";"..fromColor.."="..toColor
 					end
 				end
-            end
-        elseif sbq.tableMatches(remap.check, sbq.settings, true) then
+			end
+		elseif sbq.tableMatches(remap.check, sbq.settings, true) then
 			for color, replace in pairs(remap or {}) do
 				if type(replace) == "string" then
 					directives = directives .. ";" .. color .. "=" .. replace
 				end
-            end
+			end
 			directives = directives .. "?replace"
 		end
-    end
+	end
 	return ((directives ~= "?replace") and directives) or ""
 end
 

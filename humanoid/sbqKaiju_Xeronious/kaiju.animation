@@ -48,122 +48,7 @@
 	},
 	"animatedParts": {
 		"stateTypes": {
-			"justHead" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 0, "cycle": 0, "mode": "end" },
-					"head": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"noFacialHair" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"noFacialMask" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"noHair" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"bodyHiddenState" : {
-				"priority" : 100,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"hiddenState" : {
-				"priority" : 1000,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"clothesHiddenState" : {
-				"priority" : 100,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"legsCosmeticHiddenState" : {
-				"priority" : 100,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"chestCosmeticHiddenState" : {
-				"priority" : 100,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"headCosmeticHiddenState" : {
-				"priority" : 100,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"backCosmeticHiddenState" : {
-				"priority" : 100,
-				"default": "ignore",
-				"states" : {
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
 
-			"bodyDanceState" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"dance": { "frames": 1, "cycle": 0, "mode": "end" },
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"frontarmDanceState" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"dance": { "frames": 1, "cycle": 0, "mode": "end" },
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"backarmDanceState" : {
-				"priority" : 10,
-				"default": "ignore",
-				"states" : {
-					"dance": { "frames": 1, "cycle": 0, "mode": "end" },
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
 			"bodyState": {
 				"priority" : 0,
 				"default": "idle",
@@ -329,35 +214,6 @@
 
 					"eat": { "frames": 2, "cycle": 0.3, "mode": "loop" },
 					"sleep": { "frames": 2, "cycle": 1, "mode": "loop" },
-
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"emoteStateHighPriority": {
-				"priority" : 50,
-				"default": "idle",
-				"states": {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-
-					"blabber": { "frames": 1, "cycle": 0, "mode": "loop" },
-					"shout": { "frames": 1, "cycle": 0, "mode": "loop" },
-
-					"happy": { "frames": 1, "cycle": 0, "mode": "end" },
-					"sad": { "frames": 1, "cycle": 0, "mode": "loop" },
-					"neutral": { "frames": 1, "cycle": 0, "mode": "end" },
-					"laugh": { "frames": 1, "cycle": 0, "mode": "loop" },
-
-					"annoyed": { "frames": 1, "cycle": 0, "mode": "end" },
-
-					"oh": { "frames": 1, "cycle": 0, "mode": "end" },
-					"oooh": { "frames": 1, "cycle": 0, "mode": "end" },
-
-					"blink": { "frames": 1, "cycle": 0, "mode": "end" },
-					"wink": { "frames": 1, "cycle": 0, "mode": "end" },
-
-					"eat": { "frames": 1, "cycle": 0, "mode": "loop" },
-					"sleep": { "frames": 1, "cycle": 0, "mode": "loop" },
 
 					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
@@ -579,7 +435,7 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					},
 					"legsCosmeticHiddenState" : {
@@ -615,7 +471,7 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					},
 					"legsCosmeticHiddenState" : {
@@ -653,7 +509,7 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
@@ -687,7 +543,7 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
@@ -733,7 +589,7 @@
 					"hiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
@@ -778,7 +634,7 @@
 					"hiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
@@ -818,7 +674,7 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
@@ -857,7 +713,7 @@
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
@@ -946,7 +802,7 @@
 					"hiddenState" : {
 						"none": { "properties": {} }
 					},
-					"justHead" : {
+					"portraitMode" : {
 						"head": { "properties": {} }
 					}
 				}
