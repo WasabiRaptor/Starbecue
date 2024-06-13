@@ -20,7 +20,7 @@ function build(directory, config, parameters, level, seed)
 			parameters.descIndex = math.random(#config.replaceDescPred)
 		end
 
-		if config.variants then
+		if config.variants and preyIdentity then
 			local species = "any"
 			if preyIdentity.species and config.variants and config.variants[preyIdentity.species] then
 				species = preyIdentity.species
