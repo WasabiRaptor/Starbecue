@@ -53,8 +53,8 @@ function sbq.actorMessages()
 	message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
 		local willingnessTable = sbq.actionWillingness[(isDom and "sub") or "dom"]
 		if willingnessTable[action] == nil then
-			local settings = sbq.settings[(isDom and "subBehavior") or "domBehavior"][action]
-			if math.random() < settings.willingness then
+			local settings = sbq.settings[(isDom and "subBehavior") or "domBehavior"][action] or {}
+			if math.random() < (settings.willingness) or 0 then
 				willingnessTable[action] = "yes"
 			else
 				willingnessTable[action] = "no"
