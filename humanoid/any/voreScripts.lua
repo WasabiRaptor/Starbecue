@@ -200,7 +200,7 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 
 	local space, subLocation = location:hasSpace(size)
 	if space or (action.flags and action.flags.infusing) then
-		if Occupants.addOccupant(target, size, locationName or action.location, subLocation, action.flags) then
+		if Occupants.newOccupant(target, size, locationName or action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
 			local hide, show = SpeciesScript:getHideSlotAnims(action.hideSlots or {})
@@ -366,6 +366,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 	occupant.flags.digestType = digestType
 	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 	occupant.size = action.size or location.digestedSize or 0
+	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
 	location:markSizeDirty()
 	return true, function()
 		local position = occupant:position()
@@ -590,6 +591,7 @@ function default:infused(name, action, target)
 	occupant.flags.infuseType = infuseType
 	occupant.locationSettings[infuseType.."Digested"] = false
 	occupant.locationSettings[infuseType] = false
+	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, occupant.flags.digestType), sbq.recieveOccupants)
 	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 		sbq.settings.infuseSlots[infuseType].item = card
 		sbq.infuseOverrideSettings[infuseType] = {

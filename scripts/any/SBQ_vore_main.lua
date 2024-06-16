@@ -51,7 +51,7 @@ function sbq.init(config)
 	sbq.settingsInit()
 	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
-		return Occupants.addOccupant(...)
+		return Occupants.newOccupant(...)
 	end)
 	message.setHandler("sbqTryAction", function(_, _, ...)
 		return sbq.tryAction(...)
@@ -70,6 +70,12 @@ function sbq.init(config)
 	end)
 	message.setHandler("sbqRequestAction", function (_,_, ...)
 		return sbq.requestAction(...)
+	end)
+	message.setHandler("sbqRecieveOccupants", function (_,_, ...)
+		return sbq.recieveOccupants(...)
+	end)
+	message.setHandler("sbqDumpOccupants", function (_,_, ...)
+		return sbq.dumpOccupants(...)
 	end)
 
 	sbq.reloadVoreConfig(config)
@@ -224,6 +230,15 @@ function sbq.requestAction(forcing, action, target, ...)
 	return {SpeciesScript:requestAction(forcing, action, target, ...)}
 end
 
+function sbq.recieveOccupants(newOccupants)
+	if not SpeciesScript.active then return false end
+	return SpeciesScript:recieveOccupants(newOccupants)
+end
+function sbq.dumpOccupants(location, subLocation)
+	if not SpeciesScript.active then return false end
+	return SpeciesScript:dumpOccupants(location, subLocation)
+end
+
 function sbq.getOccupantData(entityId)
 	local occupant = Occupants.entityId[tostring(entityId)]
 	if not occupant then return false end
@@ -244,7 +259,7 @@ function sbq.getSettingsPageData()
 		locations = SpeciesScript.locations or {},
 		baseLocations = SpeciesScript.baseLocations or {},
 		currentScale = sbq.scale(),
-        parentEntityData = { sbq.parentEntity() },
+		parentEntityData = { sbq.parentEntity() },
 		infuseOverrideSettings = sbq.infuseOverrideSettings or {}
 	}
 	return settingsPageData
@@ -285,6 +300,15 @@ end
 function _SpeciesScript:requestAction(forcing, action, target, ...)
 	if not self.state then return false, "missingState" end
 	return self.state:requestAction(forcing, action, target, ...)
+end
+
+function _SpeciesScript:recieveOccupants(newOccupants)
+	if not self.state then return false end
+	return self.state:recieveOccupants(newOccupants)
+end
+function _SpeciesScript:dumpOccupants(location, subLocation)
+	if not self.state then return false end
+	return self.state:dumpOccupants(location, subLocation)
 end
 
 function _SpeciesScript:doAnimations(...)
@@ -395,6 +419,42 @@ function _State:refreshActions()
 	sbq.setProperty("sbqActionData", publicActionData)
 end
 
+function _State:recieveOccupants(newOccupants)
+	for _, newOccupant in ipairs(newOccupants) do
+		if not Occupants.insertOccupant(newOccupant) then
+			sbq.logInfo(("Could not recieve Occupant: %s %s"):format(newOccupant.entityId, sbq.entityName(newOccupant.entityId)))
+		end
+	end
+	return true
+end
+function _State:dumpOccupants(location, subLocation, digestType)
+	local dump = {}
+	for _, occupant in ipairs(Occupants.list) do
+		local output = sb.jsonMerge(occupant, {})
+		output.seat = nil
+		output.location = location
+		output.subLocation = subLocation
+		output.struggleVec = { 0, 0 }
+		output.struggleGracePeriod = 0
+		output.time = 0
+		output.struggleTime = 0
+		output.struggleCount = 0
+		output.locationStore = {}
+		output.locationSettings = {}
+		if occupant.flags.infused then
+			occupant.flags.infused = false
+			occupant.flags.infuseType = nil
+			occupant.flags.digested = true
+		end
+		if occupant.flags.digested and digestType then
+			occupant.flags.digestedLocation = location
+			occupant.flags.digestType = digestType
+		end
+		table.insert(dump, output)
+		occupant:remove()
+	end
+	return dump
+end
 
 function _State:getLocation(locationName, subLocation)
 	local location = self.locations[locationName]
@@ -1175,7 +1235,7 @@ function _Location:outputData(entityId)
 end
 
 -- Occupant Handling
-function Occupants.addOccupant(entityId, size, location, subLocation, flags)
+function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	-- check if we already have them
 	local occupant = Occupants.entityId[tostring(entityId)]
 	if occupant then
@@ -1186,7 +1246,7 @@ function Occupants.addOccupant(entityId, size, location, subLocation, flags)
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
-		if not loungeable.entityLoungingIn("occupant"..i) then
+		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
 		end
@@ -1216,20 +1276,40 @@ function Occupants.addOccupant(entityId, size, location, subLocation, flags)
 		struggleVec = {0,0},
 		locationStore = {},
 	}
+	return Occupants.finishOccupantSetup(occupant)
+end
+
+function Occupants.insertOccupant(newOccupant)
+	local seat
+	-- check for unoccupied occupant seat
+	for i = 0, sbq.config.seatCount - 1 do
+		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
+			seat = "occupant"..i
+			break
+		end
+	end
+	if not seat then return false end
+	local occupant = sb.jsonMerge(newOccupant, {
+		seat = seat
+	})
+	return Occupants.finishOccupantSetup(occupant)
+end
+
+function Occupants.finishOccupantSetup(occupant)
 	setmetatable(occupant, _Occupant)
 	-- add occupant to tables for easily referencing it
 	table.insert(Occupants.list, occupant)
-	Occupants.seat[seat] = occupant
-	Occupants.entityId[tostring(entityId)] = occupant
-	local uuid = world.entityUniqueId(entityId)
+	Occupants.seat[occupant.seat] = occupant
+	Occupants.entityId[tostring(occupant.entityId)] = occupant
+	local uuid = world.entityUniqueId(occupant.entityId)
 	if uuid then
 		Occupants.entityId[uuid] = occupant
 	end
 	-- refresh the location data for this occupant
-	occupant:refreshLocation(location, subLocation, true)
+	occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	occupant:setLoungeEnabled(true)
 	occupant:setDismountable(false)
-	world.sendEntityMessage(entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
+	world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 	return true
 end
 
@@ -1366,6 +1446,10 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	if occupantAnims then
 		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
+	if self:animProperty("release") then return self:remove() end
+	self:setHidden(self:animProperty("hidden"))
+	self:setLoungeDance(self:animProperty("dance"))
+	self:setLoungeEmote(self:animProperty("emote"))
 
 	if not self.locationStore[self.location] then
 		self.locationStore[self.location] = {

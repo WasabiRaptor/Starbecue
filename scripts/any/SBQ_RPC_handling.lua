@@ -27,6 +27,7 @@ end
 
 sbq.rpcList = {}
 function sbq.addRPC(rpc, callback, failCallback, ...)
+	if not rpc then return end
 	if not sbq.checkRPCFinished(rpc, callback, failCallback, 0, ...) then
 		if callback ~= nil or failCallback ~= nil  then
 			table.insert(sbq.rpcList, {rpc = rpc, callback = callback, failCallback = failCallback, dt = 0, args = {...}})
@@ -36,6 +37,7 @@ end
 
 sbq.namedRPCList = {}
 function sbq.addNamedRPC(name, rpc, callback, failCallback, ...)
+	if not rpc then return end
 	if not sbq.checkRPCFinished(rpc, callback, failCallback, 0, ...) then
 		if (callback ~= nil or failCallback ~= nil) and name and not sbq.namedRPCList[name] then
 			sbq.namedRPCList[name] = {rpc = rpc, callback = callback, failCallback = failCallback, dt = 0, args = {...}}
