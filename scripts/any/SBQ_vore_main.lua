@@ -461,20 +461,18 @@ function _State:tryAction(name, target, ...)
 end
 
 function _State:requestAction(forcing, name, target, ...)
-	sbq.target = target
 	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
 	local wait = 0
 	if forcing then
 		success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
 		if success then
-			if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+			if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target) then
 				dialogueProcessor.sendPlayerDialogueBox()
 				dialogueProcessor.speakDialogue()
 				wait = dialogueProcessor.predictTime()
 			end
 			sbq.forceTimer("dialogueAfter", cooldown + 1, function ()
-				sbq.target = target
-				if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+				if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target) then
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
 				end
@@ -488,15 +486,14 @@ function _State:requestAction(forcing, name, target, ...)
 			local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
 			if success then
 				sbq.forceTimer("dialogueAfter", cooldown + wait + 1, function ()
-					sbq.target = target
-					if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+					if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
 					end
 				end)
 			end
 		end
-		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target) then
 			dialogueProcessor.sendPlayerDialogueBox()
 			wait = dialogueProcessor.predictTime()
 			dialogueProcessor.speakDialogue(callback)
@@ -505,7 +502,7 @@ function _State:requestAction(forcing, name, target, ...)
 			callback()
 		end
 	else
-		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..reason, target, sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+		if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..reason, target) then
 			dialogueProcessor.sendPlayerDialogueBox()
 			dialogueProcessor.speakDialogue()
 		else
@@ -626,17 +623,16 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 end
 
 function _State:interact(args)
-	if sbq.settings.interactDialogue then
-		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
-			dialogueTree = sbq.dialogueTree
-		})
-		if sbq.loungingIn() == args.sourceId then
-			dialogueBoxData.dialogueTreeStart = ".loungingInteract"
-			dialogueBoxData.noActions = true
-		elseif Occupants.entityId[tostring(args.sourceId)] then
-			dialogueBoxData.dialogueTreeStart = ".occupantInteract"
-		end
-		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+	local start = ".greeting"
+	local actions = true
+	if sbq.loungingIn() == args.sourceId then
+		start = ".loungingInteract"
+		actions = false
+	elseif Occupants.entityId[tostring(args.sourceId)] then
+		start = ".occupantInteract"
+	end
+	if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(start, args.sourceId) then
+		return dialogueProcessor.getPlayerDialogueBox(actions)
 	elseif Occupants.entityId[tostring(args.sourceId)] then
 		return {"Message", {messageType = "sbqRequestActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId)}}}
 	else
@@ -729,8 +725,7 @@ end
 
 function _State:climax(entityId)
 	SpeciesScript:doAnimations(self.climaxAnimations, {}, entityId)
-	sbq.target = entityId
-	if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".climax", entity.id(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+	if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".climax", entityId) then
 		dialogueProcessor.speakDialogue(function ()
 			sbq.resetResource("sbqLust")
 		end)
@@ -1499,8 +1494,7 @@ function _Occupant:attemptStruggle(control)
 		bonusTime = bonusTime + maybeBonus
 	end
 	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("occupantStruggleDialogue", sbq.voreConfig.occupantStruggleDialogueMin or sbq.config.occupantStruggleDialogueMin, sbq.voreConfig.occupantStruggleDialogueMax or sbq.config.occupantStruggleDialogueMax) then
-		sbq.target = self.entityId
-		if dialogueProcessor.getDialogue(".occupantStruggle", sbq.entityId(), sbq.settings, sbq.dialogueTree, sbq.dialogueTree) then
+		if dialogueProcessor.getDialogue(".occupantStruggle", self.entityId) then
 			dialogueProcessor.speakDialogue()
 		end
 	end

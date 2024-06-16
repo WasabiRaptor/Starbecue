@@ -11,28 +11,30 @@ dialogue = {
 	path = "",
 	redirect = "",
 }
-function dialogueProcessor.getDialogue(path, eid, settings, dialogueTree, dialogueTreeTop)
+function dialogueProcessor.getDialogue(path, eid, dialogueTree, dialogueTreeTop)
 	dialogue.finished = false
 	dialogue.position = 1
+	dialogue.target = eid
 	if path ~= nil then
 		dialogue.path = path
-		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree or dialogue.prev, dialogueTreeTop or dialogue.prevTop)
+		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, sbq.settings, sbq.entityId(), dialogueTree or dialogue.prev or sbq.dialogueTree, dialogueTreeTop or dialogue.prevTop or sbq.dialogueTree)
 		if (not dialogueTree) or (not dialogueTreeTop) then dialogue.finished = true return false end
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
-		dialogueProcessor.getDialogueBranch(".defaultResults", settings, eid, dialogueTree, dialogueTreeTop)
+		dialogueProcessor.getDialogueBranch(".defaultResults", sbq.settings, sbq.entityId(), dialogueTree, dialogueTreeTop)
 		local startIndex = 1
-		while dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, startIndex) do
+		while dialogueProcessor.handleRandomDialogue(sbq.settings, sbq.entityId(), dialogueTree, dialogueTreeTop, startIndex) do
 			startIndex = #dialogue.randomRolls + 1
 		end
 	end
-	dialogue.result = sb.jsonMerge(dialogueTreeTop.defaultResults or {}, dialogue.result)
+	if not dialogue.result.dialogue then dialogue.finished = true return false end
 	for _, key in ipairs(dialogueProcessor.resultKeys) do
 		if dialogue.result[key] and type(dialogue.result[key]) ~= "table" then
 			dialogue.result[key] = {dialogue.result[key]}
 		end
 	end
+	if not dialogue.result.dialogue[1] then dialogue.finished = true return false end
 	dialogue.prev = dialogueTree or {}
 	dialogue.prevTop = dialogueTreeTop or {}
 	return true
@@ -67,7 +69,7 @@ function dialogueProcessor.processDialogueResults(i)
 	end
 	results.name = results.name or sbq.entityName(results.source)
 
-	results.target = results.target or sbq.target
+	results.target = results.target or dialogue.target
 	if type(results.target) == "string" then
 		results.target = world.getUniqueEntityId(results.target)
 	end
@@ -152,7 +154,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 	if dialogueTree.next and not finished then
 		if dialogueTree.settings then
 			if dialogueTree.settings == "target" then
-				eid = sbq.target
+				eid = dialogue.target
 				if eid and world.entityExists(eid) then
 					settings = sbq.getPublicProperty(eid, "sbqPublicSettings")
 				end
@@ -344,17 +346,22 @@ function dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo, ran
 	return randomTable
 end
 
-function dialogueProcessor.sendPlayerDialogueBox()
-	if world.entityType(sbq.target) == "player" then
-		local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
-			dialogueTree = sbq.dialogueTree,
-			dialogueTreeStart = dialogue.path,
-			noActions = true,
-			dialogue = dialogue
-		})
-		world.sendEntityMessage(sbq.target, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), { sbq = dialogueBoxData })
-		return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+function dialogueProcessor.sendPlayerDialogueBox(actions)
+	if world.entityType(dialogue.target) == "player" then
+		local interact = dialogueProcessor.getPlayerDialogueBox(actions)
+		world.sendEntityMessage(dialogue.target, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), interact[2].data)
+		return interact
 	end
+end
+
+function dialogueProcessor.getPlayerDialogueBox(actions)
+	local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+		dialogueTree = sbq.dialogueTree,
+		dialogueTreeStart = dialogue.path,
+		noActions = not actions,
+		dialogue = dialogue
+	})
+	return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
 end
 
 function dialogueProcessor.speakDialogue(callback)
@@ -369,7 +376,7 @@ function dialogueProcessor.speakDialogue(callback)
 	end
 	if self.board then
 		self.interacted = true
-		self.board:setEntity("interactionSource", sbq.target)
+		self.board:setEntity("interactionSource", dialogue.target)
 	end
 	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * string.len(results.dialogue))
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then

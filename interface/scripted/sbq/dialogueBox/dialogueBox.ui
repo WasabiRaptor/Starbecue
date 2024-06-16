@@ -27,8 +27,9 @@
 					{"expandMode" : [0, 2], "mode":"horizontal", "align":1},
 					{ "type" : "label", "id" : "nameLabel", "text": "", "align" : "center", "expandMode":[0,0] }
 				],
-				{ "type" : "button", "id" : "dialogueCont", "expandMode" : [1, 0], "caption" : "..." },
-				{ "type" : "button", "id" : "actionButton", "expandMode" : [0, 0], "caption" : ":actions", "visible":false },
+				{ "type" : "button", "id" : "dialogueCont", "expandMode" : [4, 0], "caption" : "..." },
+				{ "type" : "button", "id" : "actionButton", "expandMode" : [3, 0], "caption" : ":actions", "visible":false },
+				[{"expandMode":[2,0]}],
 				{ "type" : "iconButton", "id" : "settings", "image" : "/interface/scripted/sbq/predatorHud/settings.png", "hoverImage" : "/interface/scripted/sbq/predatorHud/settingshover.png", "pressImage" : "/interface/scripted/sbq/predatorHud/settingspress.png" },
 				{ "type" : "iconButton", "id" : "close", "image" : "/interface/x.png", "hoverImage" : "/interface/xhover.png", "pressImage" : "/interface/xpress.png", "visible":false }
 			]

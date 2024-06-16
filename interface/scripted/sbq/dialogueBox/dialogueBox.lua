@@ -157,7 +157,7 @@ end
 local dismissTime
 function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	if path then
-		if not dialogueProcessor.getDialogue(path, sbq.entityId(), sbq.settings, dialogueTree, dialogueTreeTop) then dialogue.finished = true return false end
+		if not dialogueProcessor.getDialogue(path, player.id(), dialogueTree, dialogueTreeTop) then dialogue.finished = true return false end
 	elseif dialogue.finished then return true
 	else
 		dialogue.position = dialogue.position + 1

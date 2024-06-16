@@ -394,7 +394,7 @@ function default:fatalAvailable(name, action, target, ...)
 	if not occupant then return false end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
-	if occupant:entityStatPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
+	if occupant:statPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
 	return true
 end
 function default:fatal(name, action, target, ...)
@@ -402,7 +402,7 @@ function default:fatal(name, action, target, ...)
 	if not occupant then return false end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
-	if occupant:entityStatPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
+	if occupant:statPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
 	occupant:modifyResourcePercentage("health", -2)
 	return true
 end

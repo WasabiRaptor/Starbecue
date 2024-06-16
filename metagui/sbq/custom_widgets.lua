@@ -49,7 +49,6 @@ function init()
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	sbq.gui = root.assetJson("/sbqGui.config")
-	sbq.target = player.id()
 	for k, v in pairs((mg.inputData or {}).sbq or {}) do
 		sbq[k] = v
 	end
