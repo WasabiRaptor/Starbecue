@@ -253,52 +253,6 @@
 	},
 	// when they prompt doing an action to another character
 	"promptAction" : {
-		// "<action>" : {
-		// 	"new" : {
-		// 		"settings" : "target",
-		// 		"dialogueRandom" : [":<action>Prompt"],
-		// 		"buttonText" : [":ynPrompt"],
-		// 		"options" : [
-		// 			[":optionYes", ".yes" ],
-		// 			[":optionNo", ".no" ],
-		// 			[":optionNoYes", ".noYes" ]
-		// 		]
-		// 	},
-		// 	// responses based on their response to the prompt
-		// 	"yes" : {
-		// 		"settings" : "target",
-		// 		"jump" : ".finish",
-		// 		"finish" : {
-		// 			"settings" : "target",
-		// 			"next" : ["promptResponse", "dismiss"],
-		// 			"promptResponse" : [true, true, "yes", "<action>"]
-		// 		},
-		// 		"new" : {"dialogueRandom" : [":<action>PromptYes"],"dismissTime" : 2, "jump" : ".finish"},
-		// 		// what they say after doing the action (optional)
-		// 		"after" : {"new" : {"dialogueRandom" : [":<action>PromptYesAfter"],"dismissTime" : 2, "jump" : false}}
-		// 	},
-		// 	"no" : {
-		// 		"settings" : "target",
-		// 		"finish" : {
-		// 			"settings" : "target",
-		// 			"next" : ["promptResponse", "dismiss"],
-		// 			"promptResponse" : [false, true, "no", "<action>"]
-		// 		},
-		// 		"new" : {"dialogueRandom" : [":<action>PromptNo"],"dismissTime" : 2, "jump" : ".finish"}
-		// 	},
-		// 	"noYes" : {
-		// 		"settings" : "target",
-		// 		"jump" : ".finish",
-		// 		"finish" : {
-		// 			"settings" : "target",
-		// 			"next" : ["promptResponse", "dismiss"],
-		// 			"promptResponse" : [true, true, "noYes", "<action>"]
-		// 		},
-		// 		"new" : {"dialogueRandom" : [":<action>PromptNoYes"],"dismissTime" : 2, "jump" : ".finish"},
-		// 		// what they say after doing the action (optional)
-		// 		"after" : {"new" : {"dialogueRandom" : [":<action>PromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
-		// 	}
-		// },
 		"oralVore" : {
 			"settings" : "target",
 			"new" : {
@@ -313,32 +267,24 @@
 			// responses based on their response to the prompt
 			"yes" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, true, "yes", "oralVore"]
-				},
-				"new" : {"dialogueRandom" : [":oralVorePromptYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "yes", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVorePromptYes"],"dismissTime" : 2, "jump" : false}},
 				// what they say after doing the action (optional)
 				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"no" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [false, true, "no", "oralVore"]
-				},
-				"new" : {"dialogueRandom" : [":oralVorePromptNo"],"dismissTime" : 2, "jump" : ".finish"}
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, true, "no", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVorePromptNo"],"dismissTime" : 2, "jump" : false}}
+
 			},
 			"noYes" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, true, "noYes", "oralVore"]
-				},
-				"new" : {"dialogueRandom" : [":oralVorePromptNoYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "noYes", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVorePromptNoYes"],"dismissTime" : 2, "jump" : false}},
 				// what they say after doing the action (optional)
 				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
@@ -357,34 +303,24 @@
 			// responses based on their response to the prompt
 			"yes" : {
 				"settings" : "target",
-				"jump" : ".finish",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, true, "yes", "cockVore"]
-				},
-				"new" : {"dialogueRandom" : [":cockVorePromptYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "yes", "cockVore"],
+				"before":{"new" : {"dialogueRandom" : [":cockVorePromptYes"],"dismissTime" : 2, "jump" : false}},
 				// what they say after doing the action (optional)
 				"after" : {"new" : {"dialogueRandom" : [":cockVorePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"no" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [false, true, "no", "cockVore"]
-				},
-				"new" : {"dialogueRandom" : [":cockVorePromptNo"],"dismissTime" : 2, "jump" : ".finish"}
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, true, "no", "cockVore"],
+				"before":{"new" : {"dialogueRandom" : [":cockVorePromptNo"],"dismissTime" : 2, "jump" : false}}
+
 			},
 			"noYes" : {
 				"settings" : "target",
-				"jump" : ".finish",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, true, "noYes", "cockVore"]
-				},
-				"new" : {"dialogueRandom" : [":cockVorePromptNoYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "noYes", "cockVore"],
+				"before":{"new" : {"dialogueRandom" : [":cockVorePromptNoYes"],"dismissTime" : 2, "jump" : false}},
 				// what they say after doing the action (optional)
 				"after" : {"new" : {"dialogueRandom" : [":cockVorePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
@@ -392,47 +328,6 @@
 	},
 	// when they ask another character to do something to them
 	"requestAction":{
-		// "<action>" : {
-		// 	"settings" : "target",
-		// 	"new" : {
-		// 		"dialogueRandom" : [":<action>Requesting"],
-		// 		"buttonText" : [":ynPrompt"],
-		// 		"options" : [
-		// 			[":optionYes", ".yes" ],
-		// 			[":optionNo", ".no" ],
-		// 			[":optionNoYes", ".noYes" ]
-		// 		]
-		// 	},
-		// 	"yes" : {
-		// 		"settings" : "target",
-		// 		"finish" : {
-		// 			"settings" : "target",
-		// 			"next" : ["promptResponse", "dismiss"],
-		// 			"promptResponse" : [true, false, "yes", "<action>"]
-		// 		},
-		// 		"new" : {"dialogueRandom" : [":<action>RequestingYes"],"dismissTime" : 2, "jump" : ".finish"},
-		// 		"after" : {"new" : {"dialogueRandom" : [":<action>RequestingYesAfter"],"dismissTime" : 2, "jump" : false}}
-		// 	},
-		// 	"no" : {
-		// 		"settings" : "target",
-		// 		"finish" : {
-		// 			"settings" : "target",
-		// 			"next" : ["promptResponse", "dismiss"],
-		// 			"promptResponse" : [false, false, "no", "<action>"]
-		// 		},
-		// 		"new" : {"dialogueRandom" : [":<action>RequestingNo"],"dismissTime" : 2, "jump" : ".finish"}
-		// 	},
-		// 	"noYes" : {
-		// 		"settings" : "target",
-		// 		"finish" : {
-		// 			"settings" : "target",
-		// 			"next" : ["promptResponse", "dismiss"],
-		// 			"promptResponse" : [true, false, "noYes", "<action>"]
-		// 		},
-		// 		"new" : {"dialogueRandom" : [":<action>RequestingNoYes"],"dismissTime" : 2, "jump" : ".finish"},
-		// 		"after" : {"new" : {"dialogueRandom" : [":<action>RequestingNoYesAfter"],"dismissTime" : 2, "jump" : false}}
-		// 	}
-		// },
 		"oralVore" : {
 			"settings" : "target",
 			"new" : {
@@ -446,31 +341,23 @@
 			},
 			"yes" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, false, "yes", "oralVore"]
-				},
-				"new" : {"dialogueRandom" : [":oralVoreRequestingYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, false, "yes", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVoreRequestingYes"],"dismissTime" : 2, "jump" : false}}
 				// "after" : {"new" : {"dialogueRandom" : [":oralVoreRequestingYesAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"no" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [false, false, "no", "oralVore"]
-				},
-				"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2, "jump" : ".finish"}
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, false, "no", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVoreRequestingNo"],"dismissTime" : 2, "jump" : false}}
+
 			},
 			"noYes" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, false, "noYes", "oralVore"]
-				},
-				"new" : {"dialogueRandom" : [":oralVoreRequestingNoYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, false, "noYes", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVoreRequestingNoYes"],"dismissTime" : 2, "jump" : false}}
 				// "after" : {"new" : {"dialogueRandom" : [":oralVoreRequestingNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
 		},
@@ -487,31 +374,23 @@
 			},
 			"yes" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, false, "yes", "cockVore"]
-				},
-				"new" : {"dialogueRandom" : [":cockVoreRequestingYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, false, "yes", "cockVore"],
+				"before":{"new" : {"dialogueRandom" : [":cockVoreRequestingYes"],"dismissTime" : 2, "jump" : false}}
 				// "after" : {"new" : {"dialogueRandom" : [":cockVoreRequestingYesAfter"],"dismissTime" : 2, "jump" : false}}
 			},
 			"no" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [false, false, "no", "cockVore"]
-				},
-				"new" : {"dialogueRandom" : [":cockVoreRequestingNo"],"dismissTime" : 2, "jump" : ".finish"}
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, false, "no", "cockVore"],
+				"before":{"new" : {"dialogueRandom" : [":cockVoreRequestingNo"],"dismissTime" : 2, "jump" : false}}
+
 			},
 			"noYes" : {
 				"settings" : "target",
-				"finish" : {
-					"settings" : "target",
-					"next" : ["promptResponse", "dismiss"],
-					"promptResponse" : [true, false, "noYes", "cockVore"]
-				},
-				"new" : {"dialogueRandom" : [":cockVoreRequestingNoYes"],"dismissTime" : 2, "jump" : ".finish"},
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, false, "noYes", "cockVore"],
+				"before":{"new" : {"dialogueRandom" : [":cockVoreRequestingNoYes"],"dismissTime" : 2, "jump" : false}}
 				// "after" : {"new" : {"dialogueRandom" : [":cockVoreRequestingNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
 		}

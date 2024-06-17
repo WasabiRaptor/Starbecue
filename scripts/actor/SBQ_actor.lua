@@ -63,6 +63,9 @@ function sbq.actorMessages()
 				willingnessTable[action] = nil
 			end)
 		end
+		if isDom and responseMap[willingnessTable[action] or "no"] then
+			sbq.expectedActions[action] = true
+		end
 		return {responseMap[willingnessTable[action] or "no"] or false, isDom, willingnessTable[action] or "no", action, entity.id()}
 	end)
 	message.setHandler("sbqStruggleAction", function (_,_, id, action)
