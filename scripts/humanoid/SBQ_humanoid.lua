@@ -56,6 +56,11 @@ end
 
 function sbq.doTransformation(newIdentity, duration, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+	if sbq.config.transformationBlacklist[humanoid.species()] then
+		if player then player.radioMessage("sbqTransformFromBlacklist") end
+		return false
+	end
+
 	local force = newIdentity.force
 	local currentIdentity =	humanoid.getIdentity()
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
@@ -89,7 +94,9 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	if sbq.settings.speciesTF then
 		if newIdentity.species == "any" then
 			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
-			newIdentity.species = speciesList[math.random(#speciesList)]
+			while ((newIdentity.species == "any") or sbq.config.transformationBlacklist[newIdentity.species]) do
+				newIdentity.species = speciesList[math.random(#speciesList)]
+			end
 		elseif newIdentity.species == "originalSpecies" then
 			newIdentity.species = originalSpecies
 		elseif not newIdentity.species then
@@ -97,6 +104,10 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		end
 	else
 		newIdentity.species = currentIdentity.species
+	end
+	if sbq.config.transformationBlacklist[newIdentity.species] then
+		if player then player.radioMessage("sbqTransformIntoBlacklist") end
+		return false
 	end
 	local oldSpeciesFile = root.speciesConfig(currentIdentity.species)
 	local speciesFile = root.speciesConfig(newIdentity.species)
