@@ -6,7 +6,8 @@ require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/humanoid/SBQ_humanoid.lua"
 require "/scripts/actor/SBQ_actor.lua"
-require"/scripts/player/SBQ_player_notifs.lua"
+require "/scripts/player/SBQ_player_notifs.lua"
+local predHudOpen = false
 function init()
 	storage = storage or {}
 	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
@@ -78,6 +79,7 @@ function init()
 		local struggleActions = locationData.struggleActions or {}
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
+			gui = predHudOpen and {panefeature = {offset = {-96,0}}} or {},
 			time = additionalData.time,
 			location = locationData.name,
 			directions = {
@@ -229,4 +231,7 @@ function sbq.buildActionRequestOptions(id, actionList)
 		})
 	end
 	return options
+end
+function sbq.predHudOpen(open)
+	predHudOpen = open
 end

@@ -5,7 +5,12 @@ end
 function init()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
 	backingCanvas:clear()
+	player.setScriptContext("starbecue")
+	player.callScript("sbq.predHudOpen", true)
 
+	message.setHandler("sbqDismissPredHud", function(_, _)
+		pane.dismiss()
+	end)
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
 		Occupants.list = occupants
 		for k, v in pairs(settingsData) do
@@ -60,6 +65,11 @@ function update()
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
 	sbq.updateBars(dt)
+end
+
+function uninit()
+	player.setScriptContext("starbecue")
+	player.callScript("sbq.predHudOpen", false)
 end
 
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantLayout.config")
