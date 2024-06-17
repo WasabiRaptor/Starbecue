@@ -207,7 +207,7 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 				else
 					sbq_hunting.clearTarget()
 				end
-				sbq.forceTimer("dialogueAfter", cooldown + 1, function()
+				sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 					if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
@@ -262,7 +262,7 @@ function sbq_hunting.domNoPrompt(target)
 			else
 				sbq_hunting.clearTarget()
 			end
-			sbq.forceTimer("dialogueAfter", cooldown + 1, function()
+			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end
@@ -298,7 +298,7 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 					sbq.releaseLoungeControl("Shift")
 				end)
 				sbq_hunting.clearTarget()
-				sbq.forceTimer("dialogueAfter", cooldown + 1, function()
+				sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 					if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".after", target) then
 						dialogueProcessor.speakDialogue()
 					end
@@ -353,7 +353,7 @@ function sbq_hunting.subNoPrompt(target)
 			sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
 				sbq.releaseLoungeControl("Shift")
 			end)
-			sbq.forceTimer("dialogueAfter", cooldown + 1, function()
+			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end

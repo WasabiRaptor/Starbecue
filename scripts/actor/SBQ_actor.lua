@@ -81,7 +81,7 @@ function sbq.actorMessages()
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
-			sbq.timer("dialogueAfter", cooldown + 1, function()
+			sbq.timer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..action..".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
@@ -92,7 +92,7 @@ function sbq.actorMessages()
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
-			sbq.timer("dialogueAfter", cooldown + 1, function()
+			sbq.timer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action..".after", id) then
 					dialogueProcessor.speakDialogue()
 				end

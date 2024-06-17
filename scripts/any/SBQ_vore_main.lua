@@ -531,7 +531,7 @@ function _State:requestAction(forcing, name, target, ...)
 				dialogueProcessor.speakDialogue()
 				wait = dialogueProcessor.predictTime()
 			end
-			sbq.forceTimer("dialogueAfter", cooldown + 1, function ()
+			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function ()
 				if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target) then
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
@@ -545,7 +545,7 @@ function _State:requestAction(forcing, name, target, ...)
 		local callback = function()
 			local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
 			if success then
-				sbq.forceTimer("dialogueAfter", cooldown + wait + 1, function ()
+				sbq.forceTimer("dialogueAfter", cooldown + wait + sbq.config.afterDialogueDelay, function ()
 					if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
@@ -683,17 +683,20 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 end
 
 function _State:interact(args)
+	if SpeciesScript.lockActions or sbq.timerRunning("dialogueAfter") then return end
 	local start = ".greeting"
 	local actions = true
+	local occupant = Occupants.entityId[tostring(args.sourceId)]
 	if sbq.loungingIn() == args.sourceId then
 		start = ".loungingInteract"
 		actions = false
-	elseif Occupants.entityId[tostring(args.sourceId)] then
+	elseif occupant then
 		start = ".occupantInteract"
 	end
 	if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(start, args.sourceId) then
+		dialogueProcessor.speakDialogue()
 		return dialogueProcessor.getPlayerDialogueBox(actions)
-	elseif Occupants.entityId[tostring(args.sourceId)] then
+	elseif occupant then
 		return {"Message", {messageType = "sbqRequestActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId)}}}
 	else
 		if sbq.loungingIn() == args.sourceId then return end

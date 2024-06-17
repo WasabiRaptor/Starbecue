@@ -137,3 +137,7 @@ function sbq.checkTimers(dt)
 		end
 	end
 end
+
+function sbq.timerRunning(name)
+	return (sbq.timerList[name] or {}).currTime
+end
