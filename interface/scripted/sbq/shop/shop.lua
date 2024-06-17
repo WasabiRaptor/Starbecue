@@ -30,21 +30,22 @@ function init()
 				local toolTip = nil
 				if not recipe.materials then
 					recipe.materials = {
-						{ item = "money", count = resultItemConfig.config.price or 1 }
+						{ item = "money", count = math.floor(resultItemConfig.config.price or 1) }
 					}
 				end
 				for _, material in ipairs(recipe.materials) do
+					local count = tostring(math.floor(material.count))
 					if material.item == "money" then
 						table.insert(bottom, { type = "image", file = "/interface/merchant/pixels.png", align = 1 })
-						table.insert(bottom, { type = "label", text = (tostring(material.count)), inline = true, align = 1 })
+						table.insert(bottom, { type = "label", text = count, inline = true, align = 1 })
 					end
 					if material.item == "essence" then
 						table.insert(bottom, { type = "image", file = "/interface/scripted/sbq/shop/essence.png", align = 1 })
-						table.insert(bottom, { type = "label", text = (tostring(material.count)), inline = true, align = 1 })
+						table.insert(bottom, { type = "label", text = count, inline = true, align = 1 })
 					end
 					local materialConfig = root.itemConfig(material.item)
 					if materialConfig then
-						toolTip = (toolTip or "")..materialConfig.config.shortdescription.." ^#555;×"..material.count.."^reset;\n"
+						toolTip = (toolTip or "")..materialConfig.config.shortdescription.." ^#555;×"..count.."^reset;\n"
 					end
 				end
 				local listItem = tabScrollArea:addChild({ type = "menuItem", selectionGroup = "buyItem", toolTip = toolTip, children = {{ type = "panel", style = "convex", children = {{ mode = "horizontal"},
