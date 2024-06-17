@@ -234,9 +234,9 @@ function sbq.recieveOccupants(newOccupants)
 	if not SpeciesScript.active then return false end
 	return SpeciesScript:recieveOccupants(newOccupants)
 end
-function sbq.dumpOccupants(location, subLocation)
+function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not SpeciesScript.active then return false end
-	return SpeciesScript:dumpOccupants(location, subLocation)
+	return SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 end
 
 function sbq.getOccupantData(entityId)
@@ -306,9 +306,9 @@ function _SpeciesScript:recieveOccupants(newOccupants)
 	if not self.state then return false end
 	return self.state:recieveOccupants(newOccupants)
 end
-function _SpeciesScript:dumpOccupants(location, subLocation)
+function _SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 	if not self.state then return false end
-	return self.state:dumpOccupants(location, subLocation)
+	return self.state:dumpOccupants(location, subLocation, digestType, ...)
 end
 
 function _SpeciesScript:doAnimations(...)
