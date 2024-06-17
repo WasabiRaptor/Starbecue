@@ -1,0 +1,19 @@
+{
+	"type" : "sbq/Ferrilata_/Ferri-Hub",
+
+	// this should be your base NPC's type
+	"baseType" : "sbq/Ferrilata_/Ferri",
+
+	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}

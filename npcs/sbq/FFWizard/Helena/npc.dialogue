@@ -1,0 +1,6373 @@
+{
+	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards", // external lines
+	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
+	"greeting": {
+		"dialogueRandom": [
+			"Hello there.",
+			"It's a fine day today, isn't it?",
+			"Hmm, how interesting... Oh, hello there."
+		],
+		"imagePortrait": [
+			"HNeutral.png"
+		],
+		"buttonTextRandom": [
+			"Hi.",
+			"Yes, it is.",
+			"Hiya."
+		]
+	},
+	"greetingHorny": {
+		"dialogueRandom": [
+			"Sorry in advance if you hear me grumble. That's just me wanting you somewhere nice and private~",
+			"Don't mind me. I'm just, mm, sizing you up~",
+			"Ooh, I like what I see. Hello there, cute stuff."
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		],
+		"buttonTextRandom": [
+			"Um, okay.",
+			"Alright, then.",
+			"Hey."
+		]
+	},
+	"greetingHungry": {
+		"dialogueRandom": [
+			"I could go for a nice space chicken right about now...",
+			"Perhaps a nice synthetic would be fun...",
+			"Mmm, can't go wrong with someone alive and wriggling..."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		],
+		"buttonTextRandom": [
+			"Uh, hi.",
+			"Hi.",
+			"Hi there."
+		]
+	},
+	"greetingHellhound": {
+		"dialogueRandom": [
+			"Hello there. Looking good.",
+			"Mmm, that look suits you.",
+			"Hmm, not bad... Oh, hello there."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		],
+		"buttonTextRandom": [
+			"Hello.",
+			"Thanks.",
+			"Hello to you, too."
+		]
+	},
+	"greetingHellhoundHorny": {
+		"dialogueRandom": [
+			"Sorry in advance if you hear me grumble. That's just me wanting you somewhere nice and private again~",
+			"Don't mind me. I'm just, mm, sizing your new form up~",
+			"Ooh, I like what I see even more. Hello there, <entityname>."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		],
+		"buttonTextRandom": [
+			"Okay.",
+			"Alright, then.",
+			"Hello."
+		]
+	},
+	"greetingHellhoundHungry": {
+		"dialogueRandom": [
+			"I could go for a nice space hellhound right about now...",
+			"Perhaps a tasty demon would be fun...",
+			"Mmm, can't go wrong with a fellow demon that's alive and wriggling..."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		],
+		"buttonTextRandom": [
+			"Uh, hello.",
+			"Hello.",
+			"Hello there."
+		]
+	},
+	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
+	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
+	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
+	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
+	"converse": {
+		"dialogueRandom": [
+			"So, what's up?",
+			"So, what's up?",
+			"So, what's up?"
+		],
+		"buttonTextRandom": [
+			"I was curious.",
+			"Um.",
+			"Well..."
+		]
+	},
+	"converseHorny": {
+		"dialogueRandom": [
+			"You're looking fine today.",
+			"My my, such a delightful body.",
+			"Ooh, you're looking irresistible!"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		],
+		"buttonTextRandom": [
+			"Thanks. You too.",
+			"...",
+			"Thanks!"
+		]
+	},
+	"converseHungry": {
+		"dialogueRandom": [
+			"Oops, got caught daydreaming again.",
+			"What's a demon gotta do to get a tasty--why, hello there.",
+			"Mmnf... If only normal food actually lasted..."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		],
+		"buttonTextRandom": [
+			"Hey...",
+			"Hey...",
+			"Um..."
+		]
+	},
+	"converseHellhound": ":converse", // duplicated lines
+	"converseHellhoundHorny": {
+		"dialogueRandom": [
+			"You're looking like fire today.",
+			"My my, such a delightful demonic body.",
+			"Ooh, you're looking even more irresistible!"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		],
+		"buttonTextRandom": [
+			"Thanks. You too.",
+			"...",
+			"Thanks!"
+		]
+	},
+	"converseHellhoundHungry": ":converseHungry", // duplicated lines
+	"curious": {
+		"dialogueRandom": [
+			"So, what are you curious about?",
+			"I could tell you've got a burning question.",
+			"Sure. What's eating at you?"
+		]
+	},
+	"curiousHorny": {
+		"dialogueRandom": [
+			"Better not forget my bedside manners. What's up?",
+			"Sorry, I'm getting carried away. You need something?",
+			"Don't mind me. Do you have a question?"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"curiousHungry": {
+		"dialogueRandom": [
+			"Sorry in advance if you hear me grumble. That's just my belly talking.",
+			"Better not forget my table manners. What's up?",
+			"Mm, got a question, dear?"
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"curiousHellhound": ":curious", // duplicated lines
+	"curiousHellhoundHorny": ":curiousHorny", // duplicated lines
+	"curiousHellhoundHungry": {
+		"dialogueRandom": [
+			"Sorry in advance if you hear me grumble. That's just my belly talking.",
+			"Better not forget my table manners. What's up?",
+			"Mm, got a question, <entityname>?"
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		],
+		"buttonText": ":choosePrompt"
+	},
+	"curiousWhoAreYou": {
+		"dialogue": [
+			"So for starters, I'm ^red;Helena^reset;, a hellhound who enjoys both side of the coin. Considering you're speaking with me, you must be curious. Mind telling me your name?",
+			"Pleased to meet you, <entityname>. And before we go any further, I have zero plans of taking your soul. I ain't that kind of demon. \n^red;Even if you really want me to.",
+			"I'm a demon who likes things more rough and tumble. Doesn't mean that I don't know how to play nice. There's plenty for us to explore~"
+		],
+		"buttonText": [
+			"Sure.",
+			"Ok.",
+			"Alright."
+		]
+	},
+	"curiousWhoAreYouHorny": {
+		"imagePortrait": [
+			"HDetermined.png"
+		],
+		"dialogue": [
+			"I'm ^red;Helena^reset;, a hellhound that's unfortunately not related to that sexy one named after the moon. Mind telling me your name, hot stuff?",
+			"Nice to meet you, <entityname>. Has anyone ever told you just how good you look?",
+			"Just a warning, despite how ^pink;heated^reset; I get, I don't want your soul. It doesn't matter how ^red;hardcore^reset; you are."
+		],
+		"buttonText": [
+			"Sure.",
+			"Maybe.",
+			"Alright."
+		]
+	},
+	"curiousWhoAreYouHungry": {
+		"imagePortrait": [
+			"HSleepy.png"
+		],
+		"dialogue": [
+			"*gurgle* Sorry, but our chat has to be a little short. I'm ^red;Helena^reset;. Mind telling me your name?",
+			"Nice to meet you, <entityname>. What spices do you think you go well with? Ooh! Perhaps a little dash of pepper, too.",
+			"In any case, despite how ^red;ravenous^reset; I get, neither me nor my stomach are interested in your soul."
+		],
+		"buttonText": [
+			"Sure.",
+			"Okay?",
+			"Alright."
+		]
+	},
+	"curiousWhoAreYouHellhound": {
+		"dialogue": [
+			"Still just ^red;Helena^reset;, a hellhound who enjoys both side of the coin. Why, something bothering you?",
+			"I truly have zero plans of taking your soul, <entityname>. I ain't that kind of demon.",
+			"I'm a demon who likes things more rough and tumble. Doesn't mean that I don't know how to play nice. There's plenty more for us to explore~"
+		],
+		"buttonText": [
+			"Maybe.",
+			"Ok.",
+			"Alright."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"curiousWhoAreYouHellhoundHorny": {
+		"dialogue": [
+			"I'm ^red;Helena^reset;, a hellhound that's unfortunately still not related to that sexy one named after the moon.",
+			"Has anyone ever told you just how good you look as a hellhound?",
+			"Just a warning, despite how ^pink;heated^reset; I get, I truly don't want your soul. It doesn't matter how ^red;hardcore^reset; you are."
+		],
+		"buttonText": [
+			"Sure.",
+			"Maybe.",
+			"Got it."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"curiousWhoAreYouHellhoundHungry": {
+		"dialogue": [
+			"*gurgle* Sorry, but our chat has to be a little short. I'm ^red;Helena^reset;. A hellhound, much like yourself.",
+			"Heh, I'm pretty sure why, but somehow you look even tastier than before.",
+			"In any case, despite how ^red;ravenous^reset; I get, neither me nor my stomach are interested in your soul."
+		],
+		"buttonText": [
+			"Sure.",
+			"Okay?",
+			"Alright."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"curiousAboutHellhound": {
+		"dialogue": [
+			"Yep, I very rarely breathe fire, though. It expends more calories than you would think! Still got the hunger of one, though.",
+			"You're more than welcome to join me in any case. In more ways than one~"
+		],
+		"buttonText": [
+			"I see.",
+			"Maybe."
+		]
+	},
+	"curiousAboutHellhoundHorny": {
+		"imagePortrait": [
+			"HBlep.png"
+		],
+		"dialogue": [
+			"Yep. I'm no succubus, but I certainly know how to get things nice and ^pink;heated^reset; up~",
+			"One minute in my steamy tummy, and you may never want to leave. That is, if I ever let you leave~",
+			"Of course, the opposite is true. If you want my subtle, soothing warmth inside you, I'll gladly oblige someone as good looking as you~"
+		],
+		"buttonText": [
+			"Hot, huh.",
+			"Hm.",
+			"Maybe."
+		]
+	},
+	"curiousAboutHellhoundHungry": {
+		"imagePortrait": [
+			"HSleepy.png"
+		],
+		"dialogue": [
+			"Yep. Most of us have pretty legendary appetites. Think of it like a hot dog eating contest, only it's a hot dog doing the eating.",
+			"Trust me, my insides can get warmer than most volcanic planets. Want to test that out?"
+		],
+		"buttonText": [
+			"Hot, huh.",
+			"Maybe."
+		]
+	},
+	"curiousAboutHellhoundHellhound": {
+		"dialogue": [
+			"Yep. Not a full-fledged one, though. There are ways to reverse it if you're worried. You look good, in any case!",
+			"You'd have to train for a long time in order to breathe fire. Your hunger may have increased, however. Care to test it out?"
+		],
+		"buttonText": [
+			"I see.",
+			"Maybe."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"curiousAboutHellhoundHellhoundHorny": {
+		"dialogue": [
+			"Yep. We're not succubi, but we certainly know how to get things nice and heated up~",
+			"You'll get a better feel for it as you go along, <entityname>. Your prey might literally melt within you~",
+			"That being said, you may find other desires have gotten fired up as well. I know some of mine are looking at you~"
+		],
+		"buttonText": [
+			"Hot, huh.",
+			"Hm.",
+			"Maybe."
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"curiousAboutHellhoundHellhoundHungry": {
+		"dialogue": [
+			"Yep. Most of us have pretty legendary appetites. Think of it like a hot dog eating contest, only it's a hot dog doing the eating. You, me, we're both hot dogs.",
+			"Trust me, our insides can get warmer than most volcanic planets. Want to test that out?"
+		],
+		"buttonText": [
+			"Hot, huh.",
+			"Maybe."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"curiousScars": {
+		"dialogue": [
+			"Well, you see... When a male hellhound loves a female hellhound very much...",
+			"Just kidding. I fell down a flight of stairs while helping a very clumsy Synth. He told me I made for a soft landing. \nThen I ate him, of course."
+		],
+		"buttonText": [
+			"lalalalala",
+			"Huh."
+		]
+	},
+	"curiousScarsHellhound": {
+		"dialogue": [
+			"Well, you see now that you're a hellhound... When a male hellhound loves a female hellhound very much...",
+			"Just kidding. I got in a pretty nasty accident with my Synth buddy, Mystic. He carried me to a medbay and basically saved my life.",
+			"He's a bit of a sweetie. Incredibly shy, too. Maybe you'll meet him someday."
+		],
+		"buttonText": [
+			"lalalalala",
+			"Oh.",
+			"Maybe!"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"curiousHunger": {
+		"imagePortrait": [
+			"HHurt.png"
+		],
+		"dialogue": [
+			"It gets pretty bad. Although I suppose if you like being surrounded by noisy, slick flesh, you might like it.",
+			"That being said, I can usually get my gut to pipe down. Usually."
+		],
+		"buttonText": [
+			"Hm.",
+			"Huh."
+		]
+	},
+	"curiousHungerHellhound": {
+		"dialogue": [
+			"It gets up there! Although I suppose if you like keeping your friends nice and toasty, you might like it.",
+			"That being said, I can usually get my gut to pipe down. Usually. You can too, with a bit of practice.",
+			"You don't have to worry about claiming someone's soul on accident. Their Pixels, on the other hand..."
+		],
+		"buttonText": [
+			"Hm.",
+			"What about souls?",
+			"Cha-ching."
+		],
+		"imagePortrait": [
+			"HHurt.png"
+		]
+	},
+	"curiousHeat": {
+		"imagePortrait": [
+			"HOwO.png"
+		],
+		"dialogue": [
+			"Of course! I look at you and can't help but imagine how each bit would look jutting out from within me. All nice and trapped~",
+			"There's a few places I have in mind. All of them yearning to be filled~",
+			"On the other hand, if you were to jam me in somewhere, I certainly wouldn't complain. Let's see who gets who first~"
+		],
+		"buttonText": [
+			"Oh?",
+			"Oh.",
+			"Oh~"
+		]
+	},
+	"curiousHeatHellhound": {
+		"dialogue": [
+			"Of course! I look at you and can't help but imagine how each bit would look jutting out from within me. All nice and trapped~",
+			"There's a few places I have in mind. All of them yearning to be filled~",
+			"On the other hand, if you were to jam me in somewhere, I certainly wouldn't complain. Let's see which dog comes out on top~"
+		],
+		"buttonText": [
+			"Oh?",
+			"Oh.",
+			"Oh~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"questionAnswered1": [
+		"So, do you have any other questions for me?",
+		"That answers that. Anything else?"
+	],
+	"questionAnswered2": [
+		"Of course! Ask away.",
+		"Sure! It's rare to have someone that doesn't just run away upon seeing me."
+	],
+	"hornyQuestionAnswered2": {
+		"dialogueRandom": [
+			"Of course! Ask away, hot stuff~",
+			"Sure! It's rare to have someone that doesn't just run away upon seeing me all ^pink;steamed up^reset; like this."
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"hungryQuestionAnswered2": [
+		"Of course! Ask away. Until I stuff you into my gut, that is~",
+		"Sure! It's rare to have someone that doesn't just run away upon seeing me this hungry."
+	],
+	"hellhoundQuestionAnswered2": {
+		"dialogue": [
+			"Sure! It's rare to speak to a fellow hellhound."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"hellhoundQuestionAnswered2Horny": {
+		"dialogue": [
+			"Sure! It's rare to talk to someone that looks as hot as you do as a hellhound."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"hellhoundQuestionAnswered2Hungry": {
+		"dialogue": [
+			"Of course! Ask away, you tasty dog.",
+			"Sure! It's rare to have someone that doesn't just run away upon seeing me so hungry."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney", // external lines
+	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards", // external lines
+	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards", // external lines
+	"rewardNotifyHighValueQuestRewards": [
+		"You always manage to surprise me. I'll give you something from my personal wardrobe, then.",
+		"I cherish these moments dearly. I'll get you a token of my appreciation.",
+		"Now this deserves a reward. Don't let me forget.",
+		"I'd be lying if I said I didn't enjoy our time together."
+	],
+	"oralVoreRequested": [
+		"Ah, yes. Time for you to slip down the hatch.",
+		"Your body told me all that I need to know. Get in.",
+		"Can't resist, can you? Neither can I.",
+		"My demonic allure too much for you? Come right on inside~"
+	],
+	"oralVoreRequestedHungry": {
+		"dialogueRandom": [
+			"Offering yourself to me? I appreciate it. My gut will, too.",
+			"I certainly don't mind a willing snack.",
+			"Hm, does the sound of an eager stomach get you worked up? Let me give you a private tour.",
+			"Oh? You're approaching me instead of running away?"
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"oralVoreRequestedHorny": {
+		"dialogueRandom": [
+			"I bet you can't wait to be trapped in my hot, gurgly gut. Who knows if I'll ever let you out~",
+			"My my, what a hot looking <entityname>~",
+			"Hehe, such a sexy offering. Let me put you in your proper place~",
+			"If you're lucky, your friends might hear you over my gurgling tummy. Maybe not~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"oralVoreRequestedAfter": {
+		"dialogueRandom": [
+			"Goodness, you're quite the meal. Not bad tasting, either!",
+			"*glk* There, tucked away where prey like you belong~",
+			"Mmm, just what I needed...",
+			"Hmhm, you filled me up nicely. I might have to keep you in there."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreRequestedAfterHungry": {
+		"dialogueRandom": [
+			"Absolutely divine. My taste buds and gut both send their compliments.",
+			"You are just what I needed, <entityname>.",
+			"Mmm, hope you enjoy being surrounded by my noisy gut.",
+			"Nothing beats a tasty prey when it comes to filling an empty gut."
+		],
+		"imagePortrait": [
+			"HRelieved.png"
+		]
+	},
+	"oralVoreRequestedAfterHorny": {
+		"dialogueRandom": [
+			"Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~",
+			"In terms of taste, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~",
+			"Mmm, enjoy your private room, dear. Better hope I don't lose the key~",
+			"Absolutely delightful. Relax, curl up, and let my ^pink;steam^reset; loosen you up~"
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
+	"oralVoreNo": ":defaultNo", // duplicated lines
+	"defaultNo": {
+		"dialogueRandom": [
+			"Sorry, you'll have to wait. It shouldn't be too long.",
+			"I'll have to pass. It's a bit too hostile in my gut right now.",
+			"I might look like I'm starving. I am. But it's not safe for me to eat you.",
+			"Mmmf... Gotta put some normal food in me, sorry."
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"oralVoreNoHungry": {
+		"dialogueRandom": [
+			"While I am positively ^red;ravenous^reset;, I can't guarantee your safety. Ask me again once I have things under control.",
+			"Sorry, no can do. ^red;It wouldn't be pleasant.^reset;",
+			"Nope. Not safe. You're going to have to wait.",
+			"Not now. Sorry, but it just isn't a good idea."
+		],
+		"imagePortrait": [
+			"HHurt.png"
+		]
+	},
+	"oralVoreNoHorny": {
+		"dialogueRandom": [
+			"Sorry, you'll have to wait. I'm getting the temperature just right~",
+			"My tummy is off limits for now. I'm not quite ready.",
+			"I'm very eager to cram you in me. I just need some more time.",
+			"Good things come to those who wait. Or bad things, in the case of me~"
+		],
+		"imagePortrait": [
+			"HRelieved.png"
+		]
+	},
+	"oralVoreTooBig": ":tooBig", // duplicated lines
+	"tooBig": [
+		"Wow! You're far too big for even me to handle.",
+		"I really want to, but even I know my limits.",
+		"I can't. I'm pretty sure my gut would pop instantly.",
+		"No way. Not after the last time I tried with someone as big as you."
+	],
+	"oralVoreTooBigHungry": {
+		"dialogueRandom": [
+			"Wow! You're far too big for even me to handle with how hungry I am.",
+			"I really, REALLY, want to, but even I know my limits.",
+			"I can't. I'm pretty sure my rumbly gut would pop instantly.",
+			"No way. Not after the last time I tried with someone as big as you. Thanks, belly."
+		],
+		"imagePortrait": [
+			"HShocked.png"
+		]
+	},
+	"oralVoreTooBigHorny": {
+		"dialogueRandom": [
+			"Wow! You're far too big for even me to handle with how ^pink;heated^reset; I am.",
+			"I badly want to, but even I know my limits.",
+			"I can't. I'm pretty sure my ^pink;steamy^reset; gut would pop instantly.",
+			"No way. Not after the last time I tried with someone as big as you."
+		],
+		"imagePortrait": [
+			"Hawe.png"
+		]
+	},
+	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall", // external lines
+	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots", // external lines
+	"oralVoreFull": [
+		"As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.",
+		"I haven't been this full in a long time. Sorry, maybe next time.",
+		"You look tasty, but I can't right now...",
+		"Mmm, no can do... I might have other options available, however..."
+	],
+	"oralVoreFullHungry": {
+		"dialogueRandom": [
+			"Normally, I'd be all 'heck yeah', but heck no. I don't have room.",
+			"They're keeping my gut nice and quiet. You look like you'd get the party started. Next time, dear.",
+			"No space for you right now. I wouldn't mind a belly rub, though.",
+			"If you want it be nice and noisy for your visit, you'll have to wait."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"oralVoreFullHorny": {
+		"dialogueRandom": [
+			"A tad late, dear. We're sharing a bit of a private moment~",
+			"Next time, good lookin'. Don't worry, I have plans for you~",
+			"Is this your friend? Don't worry, you'll get them back. Eventually~",
+			"I can't fit you in, but I'm sure they wouldn't mind you feeling all the neat bulges they make~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"oralVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"defaultNeedsInfusion": [
+		"I'd want someone merged in there"
+	],
+	"oralVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"defaultAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:alreadyInfused", // external lines
+	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"targetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:targetPreySettingsMismatch", // external lines
+	"analVoreRequested": [
+		"Ah, yes. Time for you to slip right on up.",
+		"Your body told me all that I need to know. Get in.",
+		"Can't resist, can you? Neither can I.",
+		"My demonic allure too much for you? Come right on inside~"
+	],
+	"analVoreRequestedHungry": ":analVoreRequested", // duplicated lines
+	"analVoreRequestedHorny": ":analVoreRequested", // duplicated lines
+	"analVoreRequestedAfter": {
+		"dialogueRandom": [
+			"Goodness, you're quite the meal. Felt great going in, too!",
+			"There, tucked away where you belong~",
+			"Mmm, just what I needed...",
+			"Hmhm, you filled me up nicely. I might have to keep you in there."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"analVoreRequestedAfterHungry": {
+		"dialogueRandom": [
+			"Absolutely splendid. My rear and gut both send their compliments.",
+			"You are just what I needed, <entityname>.",
+			"Mmm, hope you enjoy being surrounded by my noisy gut.",
+			"Nothing beats a squirmy prey when it comes to filling an empty gut."
+		],
+		"imagePortrait": [
+			"HRelieved.png"
+		]
+	},
+	"analVoreRequestedAfterHorny": {
+		"dialogueRandom": [
+			"Ooooh, yes... Enjoy your nice and ^pink;steamy^reset; home, dear~",
+			"In terms of feel, you simply can't be beat. Settle in and enjoy my ^pink;heat^reset;~",
+			"Mmm, enjoy your private room, dear. Better hope I don't lose the key~",
+			"Absolutely delightful. Relax, curl up, and let my ^pink;steam^reset; loosen you up~"
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"analVoreInvalid": "Whoops! analVore is invalid <dialoguePath>",
+	"analVoreNo": {
+		"dialogueRandom": [
+			"Sorry, you'll have to wait. It shouldn't be too long.",
+			"I'll have to pass. It's a bit too hostile in my gut right now.",
+			"I might look like I'm starving. I am. But it's not safe for me to eat you. With either end.",
+			"Mmmf... Gotta put some normal food in me, sorry."
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"analVoreNoHungry": ":analVoreNo", // duplicated lines
+	"analVoreNoHorny": ":analVoreNo", // duplicated lines
+	"analVoreTooBig": ":tooBig", // duplicated lines
+	"analVoreTooBigHungry": {
+		"dialogueRandom": [
+			"Wow! You're far too big for even me to handle with how hungry I am.",
+			"I really, REALLY, want to, but even I know my limits.",
+			"I can't. I'm pretty sure my rumbly gut would pop instantly.",
+			"No way. Not after the last time I tried with someone as big as you. Thanks, butt."
+		],
+		"imagePortrait": [
+			"HShocked.png"
+		]
+	},
+	"analVoreTooBigHorny": ":analVoreTooBig", // duplicated lines
+	"analVoreTooSmall": ":tooSmall", // duplicated lines
+	"analVoreNoSlots": ":noSlots", // duplicated lines
+	"analVoreFull": [
+		"As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.",
+		"I haven't been this full in a long time. Sorry, maybe next time.",
+		"You look like a fun time, but I can't right now...",
+		"Mmm, no can do... I might have other options available, however..."
+	],
+	"analVoreFullHungry": ":analVoreFull", // duplicated lines
+	"analVoreFullHorny": ":analVoreFull", // duplicated lines
+	"analVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"analVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"unbirthVoreRequested": [
+		"It's going to get ^pink;hot^reset;. Oh! You're into that.",
+		"I figured you were never going to ask. I'm ready~",
+		"Mhm, let's do this~",
+		"I could practically smell how willing you are. Slip on in~"
+	],
+	"unbirthVoreRequestedHungry": {
+		"dialogueRandom": [
+			"Not quite the hole I had in mind, but I don't mind.",
+			"Sure! Might help me get a few discounts.",
+			"Well, it was either this or my mouth. I still get a gravid belly regardless.",
+			"Careful, I might not let you back out for a long time~"
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"unbirthVoreRequestedHorny": {
+		"dialogueRandom": [
+			"Time for you to find out just how strong those muscles are~",
+			"I do love a willing toy~",
+			"Excellent. Your ^pink;VIP suite^reset; is ready~",
+			"I've got a nice ^pink;steamy^reset; cavern for you to explore~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"unbirthVoreRequestedAfter": {
+		"dialogueRandom": [
+			"Mmmf, that tickles~",
+			"This feeling never gets old. Enjoy~",
+			"Feel free to express yourself in there. I won't mind~",
+			"Hmhm, I suppose I do have some charm~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreRequestedAfterHungry": {
+		"dialogueRandom": [
+			"All nice and tucked away.",
+			"Just relax. I'll find something for both of us.",
+			"Great, now I have to eat for more than just me.",
+			"I was going to complain, but this feels too good."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreRequestedAfterHorny": {
+		"dialogueRandom": [
+			"Exactly what this hound has been desiring~",
+			"Carrying you around is going to give me quite the workout~",
+			"Oh geez, and I thought I was wet before~",
+			"Mmmmmn... bork..."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
+	"unbirthVoreNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreNo", // external lines
+	"unbirthVoreNoHungry": ":unbirthVoreNo", // duplicated lines
+	"unbirthVoreNoHorny": ":unbirthVoreNo", // duplicated lines
+	"unbirthVoreTooBig": {
+		"dialogueRandom": [
+			"T-tempting, but even I'm not that stretchy~",
+			"Woof. You're big!",
+			"No. I did consider it, though!",
+			"I wouldn't be able to walk straight for weeks, so no."
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"unbirthVoreTooBigHungry": ":unbirthVoreTooBig", // duplicated lines
+	"unbirthVoreTooBigHorny": ":unbirthVoreTooBig", // duplicated lines
+	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
+	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
+	"unbirthVoreFull": {
+		"dialogueRandom": [
+			"It's our time right now. Yours will come soon enough~",
+			"I'm not a Greyhound bus, dear. My capacity is sadly limited.",
+			"You could ask them politely to leave. I might not let them, though~",
+			"They're exploring an instanced dungeon. You'll have to wait~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreFullHungry": {
+		"dialogueRandom": [
+			"Lugging them around has gotten me peckish. Got any snacks?",
+			"Oh! Feel my belly. You might feel their movements. Don't mind the occasional grumble.",
+			"Ugh, I'm nearly out of space and I'm still hungry...",
+			"I'll gladly meet your needs any other time."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreFullHorny": {
+		"dialogueRandom": [
+			"What happened? We were just having a little fun and they slipped right on in~",
+			"Hng~ Sorry, they pushed just the right spot~",
+			"Ah, this is certainly the life. I'll take your details if you're interested in being next~",
+			"Poke them if you'd like. I'm nearly there from all that squirming~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastVoreRequested": [
+		"I see where your gaze is. How about you get a closer look?",
+		"Interested? Go on, give them a touch~",
+		"Want to experience one of my infamous hugs? Get over here.",
+		"Judging by how ^pink;flustered^reset; you look, I think I know what you want."
+	],
+	"breastVoreRequestedHungry": {
+		"dialogueRandom": [
+			"Not exactly what I had in mind, but sure!",
+			"Sure. I could use the milk you'd help make.",
+			"Okay, I guess? Might help me catch some prey.",
+			"Don't complain if I leave you in there until my hunger wears off."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"breastVoreRequestedHorny": {
+		"dialogueRandom": [
+			"I knew you couldn't resist, hot stuff. Let me give you a hug~",
+			"Hmhm, that I can do. Your paradise of milk awaits~",
+			"Honestly? Yeah. I can't think of a better place.",
+			"Ooh, yes~ Let's do so before someone finds out."
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"breastVoreRequestedAfter": {
+		"dialogueRandom": [
+			"Mmm, mind if I keep you for a while? Say, forever?",
+			"Just lovely~ Now you know how my shirts get torn up.",
+			"All nice and plumped up~ Now, where did that Avali go...",
+			"Enjoy the ride, dear. Complimentary drinks have been provided~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreRequestedAfterHungry": {
+		"dialogueRandom": [
+			"At least you're nestled right on top of my hungry belly.",
+			"Time to grab some cookies, then.",
+			"Now to get a proper meal.",
+			"Doesn't feel half bad, honestly."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreRequestedAfterHorny": {
+		"dialogueRandom": [
+			"You fit in perfectly~ Might have to get myself a few meme sweaters.",
+			"Absolutely wonderful~ You really know how to pad a demon out~",
+			"You wouldn't mind if I slipped on a bra or a piercing, would you? So you can't escape~",
+			"Heh, hope you don't mind me squeezing you. I just love how you made me look~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
+	"breastVoreNo": [
+		"Tempting! But no.",
+		"No room for you, dear.",
+		"Ah, maybe later.",
+		"I'm not ready. You're welcome to touch, however~"
+	],
+	"breastVoreNoHungry": {
+		"dialogueRandom": [
+			"It's something else that needs attention, dear.",
+			"More 'om nom', not 'gl-omp'.",
+			"Settle my inner fire a bit, then you can spend as much time as you like with them~",
+			"My maw is up here, <entityname>."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"breastVoreNoHorny": {
+		"dialogueRandom": [
+			"Yes, but no. I have other needs I want filled~",
+			"Off limits for now. You can look and touch as much as you'd like, though~",
+			"I appreciate the offer, but you'd burn up in an instant. It's too hot in there~",
+			"Maybe later. I'm a bit too sensitive~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"breastVoreTooBig": [
+		"Sorry. I like being able to fit through most doorways, thank you.",
+		"I'm pretty sure my back can't handle that, dear.",
+		"If I was a cow, then maybe. But I'm not.",
+		"That's impossible, even for me."
+	],
+	"breastVoreTooBigHungry": {
+		"dialogueRandom": [
+			"Sorry. I like being able to fit into most kitchens~",
+			"I'm pretty sure my boobs can't handle that, dear.",
+			"If I was a slime, then maybe. But I'm not.",
+			"That's impossible, even though I think it'd be fun."
+		],
+		"imagePortrait": [
+			"HShocked.png"
+		]
+	},
+	"breastVoreTooBigHorny": {
+		"dialogueRandom": [
+			"Sorry. I like being able to fit into most bedrooms~",
+			"I'm pretty sure my bed can't handle that, dear.",
+			"If I was a succubus, then maybe. But I'm not.",
+			"That's impossible, even though I really want to."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreTooSmall": ":tooSmall", // duplicated lines
+	"breastVoreNoSlots": ":noSlots", // duplicated lines
+	"breastVoreFull": {
+		"dialogueRandom": [
+			"Sorry, they're occupied. Your milky adventure will have to wait.",
+			"Your gaze tell me everything. It'll have to wait.",
+			"My eyes are up here. Oh? You can't see them? Feel free to keep staring, then~",
+			"Jealous? I might have an opening elsewhere, dear~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreFullHungry": {
+		"dialogueRandom": [
+			"They're full. My stomach, on the other hand, is getting pretty grumbly.",
+			"You could always slip into my stomach and give them a good bump from below~",
+			"Other accommodations might be available~",
+			"How about I reserve a boob for you if you fix my hunger?"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreFullHorny": {
+		"dialogueRandom": [
+			"If I was anatomically correct, I might've had extra rooms. Sadly, I'm not~",
+			"Hmhm, how horny~ Look into my other vacancies if you really want inside me~",
+			"Maybe if you give them a good squeeze, someone might come out~",
+			"If you notice any leaks, you're welcome to lap them up~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockVoreRequested": {
+		"dialogueRandom": [
+			[
+				"Heh, did you think I forgot about this kind of vore? I didn't.",
+				"Took me long enough, didn't it?",
+				"Mmm, we love this part, don't we <entityName>?",
+				"Oh my, I thought you'd *never* ask~"
+			],
+			{
+				"infuseType": true,
+				"sbq/LokiVulpix/Loki": [
+					[
+						"Heads up, my dear secret. You've got a fun surprise incoming~",
+						"Honestly, I'm not sure who enjoys this more: me or her~",
+						"Looks like you've got someone's full attention, heh~",
+						"Oooh, safe to say we've both been waiting for this~"
+					]
+				]
+			}
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"cockVoreRequestedHungry": ":cockVoreRequested", // duplicated lines
+	"cockVoreRequestedHorny": ":cockVoreRequested", // duplicated lines
+	"cockVoreRequestedAfter": {
+		"dialogueRandom": [
+			[
+				"That's the spot. Make sure to squirm lots for both of us, dear.",
+				"I'll never get tired of this feeling~",
+				"O-oh! That's perfect.",
+				"Make sure to play nice, you two~"
+			],
+			{
+				"infuseType": true,
+				"sbq/LokiVulpix/Loki": [
+					[
+						"Ah, that burst of horny energy is perfect~",
+						"Oh my, I think you've got a fan~",
+						"Careful, <entityname>. She's got you now~",
+						"Finally~"
+					]
+				]
+			}
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"cockVoreRequestedAfterHungry": ":cockVoreRequestedAfter", // duplicated lines
+	"cockVoreRequestedAfterHorny": ":cockVoreRequestedAfter", // duplicated lines
+	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
+	"cockVoreNo": {
+		"dialogueRandom": [
+			"Sorry, I'm giving my goods a much deserved break. Next time, dear.",
+			"Gotta take care of my package. You'll have to wait your turn~",
+			"Heh, <entityName>'s feeling a little shy. They'll come out later~",
+			"Come back in the morning, dear. We'll be nice and firm then~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"cockVoreNoHungry": ":cockVoreNo", // duplicated lines
+	"cockVoreNoHorny": ":cockVoreNo", // duplicated lines
+	"cockVoreTooBig": {
+		"dialogueRandom": [
+			"If it was anywhere else, I'd probably agree, but I have to take good care of <entityName>~",
+			"I'm flattered, but we're not *that* stretchy.",
+			"No can do. I'm not going to stress out my goods~",
+			"You're just a little too big for us, dear."
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"cockVoreTooBigHungry": ":cockVoreTooBig", // duplicated lines
+	"cockVoreTooBigHorny": ":cockVoreTooBig", // duplicated lines
+	"cockVoreTooSmall": ":tooSmall", // duplicated lines
+	"cockVoreNoSlots": ":noSlots", // duplicated lines
+	"cockVoreFull": {
+		"dialogueRandom": [
+			"Someone else is having their fun with <entityName> right now~",
+			"Only one at a time. Maybe you can get them to go a little deeper~?",
+			"Sorry, only one guest at time~",
+			"If you want in, you'll have to coax them into moving~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"cockVoreFullHungry": ":cockVoreFull", // duplicated lines
+	"cockVoreFullHorny": ":cockVoreFull", // duplicated lines
+	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"bellyInfuseRequested": [
+		"Mm, you love my belly so much... you want to be a part of it?",
+		"You want to become my belly?",
+		"You want to become a part of me...?"
+	],
+	"bellyInfuseRequestedAfter": [
+		"Ahh... there you are... just my belly now",
+		"Just a part of me now",
+		"Try not to make me too hungry..."
+	],
+	"bellyInfuseInvalid": "Whoops! bellyInfuse is invalid <dialoguePath>",
+	"bellyInfuseNo": ":defaultNo", // duplicated lines
+	"bellyInfuseTooBig": ":tooBig", // duplicated lines
+	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
+	"bellyInfuseFull": ":defaultFull", // duplicated lines
+	"defaultFull": [
+		"While I have space where you want to go, it'd get way too cramped...",
+		" ..'mmph!'.. I don't know who said that, but that means I'm out of room...",
+		"I do indulging myself, but even this is too much...",
+		" ...Not right now, my thiccness has its limits..."
+	],
+	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastInfuseRequested": [
+		"You want to be my boobs?",
+		"Mm, can't wait to be jiggling on my chest can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"breastInfuseRequestedAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already leaking milk~"
+	],
+	"breastInfuseInvalid": "Whoops! breastInfuse is invalid <dialoguePath>",
+	"breastInfuseNo": ":defaultNo", // duplicated lines
+	"breastInfuseTooBig": ":tooBig", // duplicated lines
+	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
+	"breastInfuseNoSlots": ":noSlots", // duplicated lines
+	"breastInfuseFull": ":defaultFull", // duplicated lines
+	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"pussyInfuseRequested": [
+		"You want to be my pussy?",
+		"Mm, can't wait to be soaking wet down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"pussyInfuseRequestedAfter": [
+		"Hehe, I can feel you leaking with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already sopping wet with excitment~"
+	],
+	"pussyInfuseInvalid": "Whoops! pussyInfuse is invalid <dialoguePath>",
+	"pussyInfuseNo": ":defaultNo", // duplicated lines
+	"pussyInfuseTooBig": ":tooBig", // duplicated lines
+	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
+	"pussyInfuseFull": ":defaultFull", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockInfuseRequested": [
+		"You want to be my cock?",
+		"Mm, can't wait to be throbbing down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"cockInfuseRequestedAfter": [
+		"Hehe, I can feel you twitching with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already throbbing with excitment~"
+	],
+	"cockInfuseInvalid": "Whoops! cockInfuse is invalid <dialoguePath>",
+	"cockInfuseNo": ":defaultNo", // duplicated lines
+	"cockInfuseTooBig": ":tooBig", // duplicated lines
+	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
+	"cockInfuseNoSlots": ":noSlots", // duplicated lines
+	"cockInfuseFull": ":defaultFull", // duplicated lines
+	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
+	"oralVoreLetoutRequestedHungry": {
+		"dialogueRandom": [
+			"I'm getting way too hungry, you gotta bounce.",
+			"Just in the nick of time. My gut wanted to play for keeps.",
+			"If you weren't on my list, I wouldn't bother, but you are. Out.",
+			"Your adventure will be over if you stay any longer. I'm letting you out"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutRequestedHorny": {
+		"dialogueRandom": [
+			"Mmnf, that was good~ Thanks for the assist, sweetie.",
+			"Mm, my tummy's a tad tired. Come again soon~",
+			"I'll admit it, I'm vain. I want to see your face again~",
+			"Time to take a break, dear~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"analVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutRequested", // external lines
+	"analVoreLetoutRequestedHungry": ":analVoreLetoutRequested", // duplicated lines
+	"analVoreLetoutRequestedHorny": ":analVoreLetoutRequested", // duplicated lines
+	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested", // external lines
+	"unbirthVoreLetoutRequestedHungry": {
+		"dialogueRandom": [
+			"Sorry for the sudden eviction, but I'm famished.",
+			"Being hungry sucks. Eating for more than just me doubly sucks. Sorry, but you're out.",
+			"I swear, my hunger kicks in at the worst times. Give me a bit, then we can continue later.",
+			"Almost leaning into hangry territory, so I'm letting you out for now."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreLetoutRequestedHorny": {
+		"dialogueRandom": [
+			"Ah, the VIP suite needs some renovations~ Come back in a bit~",
+			"I want to keep you for a LOT longer, but I'm starting to lose focus, heh.",
+			"Oooh~ That's what I needed~ Just a bit more and I might--!",
+			"H-haa~ The stream camera is in place~ Ready for your grand debut~?"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested", // external lines
+	"breastVoreLetoutRequestedHungry": {
+		"dialogueRandom": [
+			"Sorry, I'm starting to get sore. Gotta let you out.",
+			"I'd lug you around for longer, but my back needs a break. Mind rubbing it?",
+			"Good enough. I think this video should get lots of views.",
+			"I'm good to keep going, but I just want to give you a proper hug real quick."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreLetoutRequestedHorny": {
+		"dialogueRandom": [
+			"Hehe, enjoy yourself in there~? Sadly, I'm getting tired.",
+			"Just between you and me, I hope I can figure out how to keep someone nestled in safely... Forever~",
+			"I hope you enjoyed listening to my heartbeat~ It makes this next part even more heartbreaking.",
+			"Umpf~ I'm getting way too sensitive, so you gotta go. Sorry."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"cockVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutRequested", // external lines
+	"cockVoreLetoutRequestedHungry": ":cockVoreLetoutRequested", // duplicated lines
+	"cockVoreLetoutRequestedHorny": ":cockVoreLetoutRequested", // duplicated lines
+	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt", // external lines
+	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes", // external lines
+	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter", // external lines
+	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo", // external lines
+	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes", // external lines
+	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter", // external lines
+	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt", // external lines
+	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes", // external lines
+	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter", // external lines
+	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo", // external lines
+	"analVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYes", // external lines
+	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter", // external lines
+	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt", // external lines
+	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes", // external lines
+	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter", // external lines
+	"unbirthVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNo", // external lines
+	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes", // external lines
+	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter", // external lines
+	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt", // external lines
+	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes", // external lines
+	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter", // external lines
+	"breastVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNo", // external lines
+	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes", // external lines
+	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter", // external lines
+	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt", // external lines
+	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes", // external lines
+	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter", // external lines
+	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo", // external lines
+	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes", // external lines
+	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter", // external lines
+	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting", // external lines
+	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes", // external lines
+	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo", // external lines
+	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes", // external lines
+	"analVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:analVoreRequesting", // external lines
+	"analVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingYes", // external lines
+	"analVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNo", // external lines
+	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNoYes", // external lines
+	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting", // external lines
+	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes", // external lines
+	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo", // external lines
+	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes", // external lines
+	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting", // external lines
+	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes", // external lines
+	"breastVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNo", // external lines
+	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes", // external lines
+	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting", // external lines
+	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes", // external lines
+	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo", // external lines
+	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes", // external lines
+	"oralVoreNoPrompt": [
+		"Heh, you look too good to pass up. Sorry about this. \nJust kidding, I'm not sorry.",
+		"Oh no, a poor, defenseless <entityname>! Let me give you some shelter.",
+		"You're the 999th person I've seen here. Your prize: a world class trip to a private sauna.",
+		"Looking for a nice, warm place. No, I wasn't asking."
+	],
+	"oralVoreNoPromptHungry": {
+		"dialogueRandom": [
+			"My stomach won't stop grumbling. You should do nicely.",
+			"Your adventure is going to have to wait.",
+			"Ooh, I've heard tasty things about you, <entityname>.",
+			"Normally, I'd tease you, but I'm a hungry b!***."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"oralVoreNoPromptHorny": {
+		"dialogueRandom": [
+			"I was going to ask, but nope. You're far too hot to pass up~",
+			"Am I being too forward? Maybe. But the only direction you're going is down~",
+			"I'd like to fit you in somewhere else, but my tummy has other plans~",
+			"<entityname>. Known to be incredibly yummy. Time to find out~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"oralVoreNoPromptAfter": {
+		"dialogueRandom": [
+			"Such a delightful taste.",
+			"You're all mine now~",
+			"Try not to get too heated in there, dear.",
+			"An unsuspecting treat is always a delight to meet~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreNoPromptAfterHungry": {
+		"dialogueRandom": [
+			"Mm, that might quell my inner fire a bit.",
+			"There there, stomach, help is on the way.",
+			"Ooh, that might've made my gut more excited!",
+			"Now to find somewhere to relax..."
+		],
+		"imagePortrait": [
+			"HRelieved.png"
+		]
+	},
+	"oralVoreNoPromptAfterHorny": {
+		"dialogueRandom": [
+			"I gotta say, you taste as good as you look~",
+			"You're all mine now~",
+			"Let your friends know you're going to be late. Very, very late~",
+			"Enjoy the ride, dear. It's going to be a long one~"
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"analVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:analVoreNoPrompt", // external lines
+	"analVoreNoPromptHungry": {
+		"dialogueRandom": [
+			"My stomach won't stop grumbling. You should do nicely.",
+			"Your adventure is going to have to wait.",
+			"Ooh, I've heard spicy things about you, <entityname>.",
+			"Normally, I'd tease you, but I'm a hungry b!***."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"analVoreNoPromptHorny": {
+		"dialogueRandom": [
+			"I was going to ask, but nope. You're far too hot to pass up~",
+			"Am I being too forward? Maybe. But the only direction you're going is up~",
+			"I'd like to fit you in somewhere else, but my tummy has other plans~",
+			"<entityname>. Known to be incredibly good at squirming. Time to find out~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"analVoreNoPromptAfter": {
+		"dialogueRandom": [
+			"Such a good squeeze.",
+			"You're all mine now~",
+			"Try not to get too heated in there, dear.",
+			"An unsuspecting toy is perfect to play coy with~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"analVoreNoPromptAfterHungry": ":analVoreNoPromptAfter", // duplicated lines
+	"analVoreNoPromptAfterHorny": {
+		"dialogueRandom": [
+			"I gotta say, you squirm like a champ~",
+			"You're all mine now~",
+			"Let your friends know you're going to be late. Very, very late~",
+			"Enjoy the ride, dear. It's going to be a long one~"
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"unbirthVoreNoPrompt": [
+		"Oh, perfect. I've got a swimsuit shoot coming up. 'Big Gals, Bigger Bellies'~",
+		"Oooh~ I could just snatch you up~",
+		"Your little adventure is going on a hot detour~",
+		"You look like you could use some loving."
+	],
+	"unbirthVoreNoPromptHungry": {
+		"dialogueRandom": [
+			"I've got two ^pink;burning^reset; ^red;hungers^reset;, and I know which one you're gonna fill.",
+			"Gonna use you as a toy to put my mind off my hunger.",
+			"My friend loves a big gut. Might trick him into feeding me.",
+			"Sorry, stomach. This B!tch's needs come first~"
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"unbirthVoreNoPromptHorny": {
+		"dialogueRandom": [
+			"Oh look, the perfect shape~",
+			"My fire needs some stoking. You'll do~",
+			"You're going inside me. ALL of you~",
+			"Heh, I've seen your search history, <entityname>."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"unbirthVoreNoPromptAfter": {
+		"dialogueRandom": [
+			"Goodness, you're bigger than I expected~",
+			"Lovely. I'll get even more attention now.",
+			"Mmm~ I'm positively glowing now~",
+			"Toy goes in, fluids come out~ \nToy does too... ^pink;eventually~^reset;"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreNoPromptAfterHungry": {
+		"dialogueRandom": [
+			"Umpf~ That takes care of one thing.",
+			"Now I'm hungry AND wet. Ah well~",
+			"If I was more flexible, I'd squeeze you right into my mouth later~",
+			"Mhm, now to grab a proper meal~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreNoPromptAfterHorny": {
+		"dialogueRandom": [
+			"Mm-ng~! You're squirmy~",
+			"Now now, your new room isn't permanent... Probably~",
+			"Now to slip somewhere secluded and enjoy this moment~",
+			"Vanished without a trace~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"breastVoreNoPrompt": [
+		"I've got a ^pink;sizzling^reset; e-date coming up, so sorry in advance.",
+		"Ooh, you'll do nicely. I need to go up a few sizes.",
+		"You look thirsty. Let me fix that.",
+		"Your next quest involves being trapped in my breasts. *glomp*"
+	],
+	"breastVoreNoPromptHungry": {
+		"dialogueRandom": [
+			"Alright, time for you to go down the hatc--whoops!",
+			"'Hold ^green;[Shift]^reset;, then press ^green;[Up]^reset;'--ack!",
+			"All I have to do is grab them and-<keysmash>",
+			"Alright. This spell should do the trick."
+		],
+		"imagePortrait": [
+			"HShocked.png"
+		]
+	},
+	"breastVoreNoPromptHorny": {
+		"dialogueRandom": [
+			"You look like the type to enjoy this~",
+			"You wouldn't mind a quick hug, would you?",
+			"Quick! I need help with my latest cosplay!",
+			"I think I have a smudge on my collar. Mind taking a quick peek?"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"breastVoreNoPromptAfter": {
+		"dialogueRandom": [
+			"Oh shush. We both know you want this~",
+			"A little bumpy, but those will smooth as you settle in.",
+			"And not a single drop wasted. Hope you don't mind getting soaked~",
+			"I knew you'd fit in perfectly~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreNoPromptAfterHungry": {
+		"dialogueRandom": [
+			"I hate it when I misclick.",
+			"That's not my stomach. Damn.",
+			"Whatever, this still feels good.",
+			"I meant to do that."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreNoPromptAfterHorny": {
+		"dialogueRandom": [
+			"Oops~ You fell right into my booby trap~",
+			"Hmhm, gets them every time~",
+			"Mm, now I just need an apron to complete the look~",
+			"Perfect. You're just the right size~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"cockVoreNoPrompt": {
+		"dialogueRandom": [
+			[
+				"What's that <entityName>? You want them? Sure thing~",
+				"Heh, this horn dog has you in her sights~",
+				"I was going to pass you up, but my dick has other thoughts~",
+				"Time to introduce you to a hot dog's hot dog~"
+			],
+			{
+				"infuseType": true,
+				"sbq/LokiVulpix/Loki": [
+					[
+						"Getting a good feel for this one, hm~?",
+						"Mm, I agree. <entityname> will make a perfect fit for us~",
+						"I think it's time to turn up the heat, don't you?",
+						"Oooh, think they'll make good filler for our next hotel visit~?"
+					]
+				]
+			}
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"cockVoreNoPromptHungry": ":cockVoreNoPrompt", // duplicated lines
+	"cockVoreNoPromptHorny": ":cockVoreNoPrompt", // duplicated lines
+	"cockVoreNoPromptAfter": {
+		"dialogueRandom": [
+			[
+				"Hmhm, don't blame me, blame how eager <entityName> got~",
+				"Mmmng~ You sure fit in nicely~",
+				"How delightfully hard~",
+				"Aaaah, so good~"
+			],
+			{
+				"infuseType": true,
+				"sbq/LokiVulpix/Loki": [
+					[
+						"Heh, it was really her idea, not mine~",
+						"Woof, THAT was a good horny vibe~",
+						"Whew, making both of us warm up nicely~",
+						"Heh, this is almost like when I caught you, dear~"
+					]
+				]
+			}
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"cockVoreNoPromptAfterHungry": ":cockVoreNoPromptAfter", // duplicated lines
+	"cockVoreNoPromptAfterHorny": ":cockVoreNoPromptAfter", // duplicated lines
+	"bellyInfuseNoPrompt": [
+		"I think... I need you in my belly... or... as my belly"
+	],
+	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter", // external lines
+	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt", // external lines
+	"breastInfuseNoPromptAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, jiggling on my chest~",
+		"Mmm~ feels right to have you there~"
+	],
+	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt", // external lines
+	"pussyInfuseNoPromptAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, soaking between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt", // external lines
+	"cockInfuseNoPromptAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, throbbing between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
+	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
+	"oralVoreUnprompted": {
+		"dialogueRandom": [
+			"Oh!",
+			"I love this part.",
+			"Yes, gobble me up.",
+			"Squeeze me down~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreUnpromptedHungry": {
+		"dialogueRandom": [
+			"Oh!",
+			"I knew I should've struck first.",
+			"You win for now.",
+			"My thoughts exactly."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreUnpromptedHorny": {
+		"dialogueRandom": [
+			"Oh~",
+			"I was hoping you would~",
+			"Mmm~",
+			"Such a strong throat~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted", // external lines
+	"analVoreUnpromptedHungry": ":analVoreUnprompted", // duplicated lines
+	"analVoreUnpromptedHorny": ":analVoreUnprompted", // duplicated lines
+	"unbirthVoreUnprompted": {
+		"dialogueRandom": [
+			"Oh!",
+			"Tucking me away, hm?",
+			"Mm, snug and secure.",
+			"I'm happy to oblige."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreUnpromptedHungry": {
+		"dialogueRandom": [
+			"Oh!",
+			"This feels nice.",
+			"Just what I needed~",
+			"Wow, you're warm."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreUnpromptedHorny": {
+		"dialogueRandom": [
+			"Oh~",
+			"I'll gladly slip on in~",
+			"My, you're wet too.",
+			"Such a warm body~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreUnprompted": {
+		"dialogueRandom": [
+			"Oh!",
+			"Need me as filler? Gladly.",
+			"Mm, tucked away.",
+			"I'll jiggle as much as you like."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreUnpromptedHungry": {
+		"dialogueRandom": [
+			"Oh!",
+			"This feels lovely.",
+			"Heh, certainly~",
+			"Wow, that's hot."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreUnpromptedHorny": {
+		"dialogueRandom": [
+			"Oh~",
+			"I'll gladly pad you out~",
+			"My, that's a lot of boob.",
+			"Such a warm bosom~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
+	"cockVoreUnpromptedHungry": ":cockVoreUnprompted", // duplicated lines
+	"cockVoreUnpromptedHorny": ":cockVoreUnprompted", // duplicated lines
+	"oralVoreLetoutUnpromptedAfter": {
+		"dialogueRandom": [
+			"Aw, already?",
+			"Tired? I'd gladly carry you in my belly.",
+			"Thanks. I had fun.",
+			"Hit me up anytime for a gurgle or two."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutUnpromptedAfterHungry": {
+		"dialogueRandom": [
+			"Thanks, I need to find something for my own hunger.",
+			"I appreciate it. Catch you soon.",
+			"Oh? Care to switch roles, then?",
+			"I liked being a meal. Let's do it again."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutUnpromptedAfterHorny": {
+		"dialogueRandom": [
+			"Mm, alright~",
+			"Want my tummy to return the favor~?",
+			"That was hot in every sense of the word~",
+			"I'm always eager to be a meal or make you a meal, dear~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter", // external lines
+	"analVoreLetoutUnpromptedAfterHungry": ":analVoreLetoutUnpromptedAfter", // duplicated lines
+	"analVoreLetoutUnpromptedAfterHorny": ":analVoreLetoutUnpromptedAfter", // duplicated lines
+	"unbirthVoreLetoutUnpromptedAfter": {
+		"dialogueRandom": [
+			"Aw, already?",
+			"Tired? I'd gladly do the carrying this time.",
+			"Thanks. I haven't felt that safe in a while.",
+			"Hit me up anytime. You in me, me in you, whatever works."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreLetoutUnpromptedAfterHungry": {
+		"dialogueRandom": [
+			"Thanks. Your womb was nice, but I need some solid food.",
+			"I appreciate you lugging me around. Catch you very soon.",
+			"Oh? Care to switch roles, then? I don't mind carrying you while I hunt.",
+			"That was nice. Let's do it again."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreLetoutUnpromptedAfterHorny": {
+		"dialogueRandom": [
+			"Mm, alright. I'll visit again shortly~",
+			"Want me to return the favor~? I'd be glad to.",
+			"That was hot~ Your womb is easily one of the best I've been in. Comfy, too!",
+			"You know where to find me, dear~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"breastVoreLetoutUnpromptedAfter": {
+		"dialogueRandom": [
+			"Aw, already?",
+			"Tired? I'd gladly carry you within me.",
+			"Thanks. I haven't felt that snug in a while.",
+			"Hit me up anytime. Your boobs were great."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreLetoutUnpromptedAfterHungry": {
+		"dialogueRandom": [
+			"Thanks, I need to find something to eat. The drinks were nice, though.",
+			"I appreciate it. Catch you soon, sexy.",
+			"Oh? Care to switch roles, then?",
+			"I liked that. I'd gladly stuff your breasts again."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreLetoutUnpromptedAfterHorny": {
+		"dialogueRandom": [
+			"Mm, alright~",
+			"Want me to return the favor~ I'm more than ready~?",
+			"That was hot~ It gave me a few ideas~",
+			"Why don't we find someone and really tease them? Pin them between some prey-padded boobs~?"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"cockVoreLetoutUnpromptedAfter": {
+		"dialogueRandom": [
+			"Aw, already hit your limit?",
+			"Tired? I'd gladly carry you and your package within me.",
+			"Thanks. I had fun sloshing around in you.",
+			"Push me in anytime, dear."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"cockVoreLetoutUnpromptedAfterHungry": {
+		"dialogueRandom": [
+			"Thanks. I need to find something to eat that is actually solid.",
+			"I appreciate it. Catch you soon, hot stuff.",
+			"Oh? Care to switch roles, then? I don't have a dick, but I have plenty of other options~",
+			"I liked that, even if I'm going to smell like <entityname> spunk for a day."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"cockVoreLetoutUnpromptedAfterHorny": {
+		"dialogueRandom": [
+			"Mm, alright~",
+			"Want me to return the favor~? I can easily take ALL of you in me~",
+			"That was hot~ I need one of those~",
+			"You know where to put me, dear~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing", // external lines
+	"analVoreForcing": "/npcs/sbq/dialogue/default.dialogue:analVoreForcing", // external lines
+	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing", // external lines
+	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing", // external lines
+	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing", // external lines
+	"oralVoreLetoutForcingAfter": {
+		"dialogueRandom": [
+			"Oops! I must've upset your stomach.",
+			"Couldn't keep me in, hm?",
+			"Ready for another helping of me?",
+			"Mm, fresh air."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutForcingAfterHungry": {
+		"dialogueRandom": [
+			"Sorry, but I'm hungry, too.",
+			"I'd stay, but my own stomach is talking to me.",
+			"My stomach needs tending to. Care to repay the favor?",
+			"I gotta hunt, so I'm out for now."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutForcingAfterHorny": {
+		"dialogueRandom": [
+			"I've had enough fun in your gut~",
+			"I hope you enjoyed having me as a treat~",
+			"Did I squirm too much, dear~?",
+			"That was a delight~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"analVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForcingAfter", // external lines
+	"analVoreLetoutForcingAfterHungry": ":analVoreLetoutForcingAfter", // duplicated lines
+	"analVoreLetoutForcingAfterHorny": ":analVoreLetoutForcingAfter", // duplicated lines
+	"unbirthVoreLetoutForcingAfter": {
+		"dialogueRandom": [
+			"Oops! I slipped out. You were a little too wet~",
+			"A little too steamy for me! Let me get my bearings.",
+			"Shall we go again?",
+			"Mm, want me to carry you next?"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreLetoutForcingAfterHungry": {
+		"dialogueRandom": [
+			"Sorry, but I'm hungry and didn't feel like being corded.",
+			"I'd stay, but my stomach is talking to me.",
+			"My stomach needs tending to. I'll be back later, promise.",
+			"I gotta hunt down some snacks."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreLetoutForcingAfterHorny": {
+		"dialogueRandom": [
+			"Ooh, I must've pushed too hard~",
+			"Your womb felt great. I want to return the favor~",
+			"My favorite show is on. Let's go again soon~",
+			"That warmth is something else~ I got a little hot under the collar!"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"breastVoreLetoutForcingAfter": {
+		"dialogueRandom": [
+			"Oops! I slipped out. Should've worn a bra.",
+			"Couldn't keep me in, hm? Your chest was a little loose.",
+			"Ready for the next round? Either boob works for me.",
+			"Mm, you can spend time in mine if you'd like."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreLetoutForcingAfterHungry": {
+		"dialogueRandom": [
+			"Sorry, but I'm hungry. Your milk helped, though!",
+			"I'd stay, but my stomach is talking to me. It wants something more solid.",
+			"My stomach needs tending to. Have some cookies handy?",
+			"It was nice. I'll carry you if you'd like."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreLetoutForcingAfterHorny": {
+		"dialogueRandom": [
+			"I've had enough fun in your fun bags~",
+			"That was a treat being held in a teat~",
+			"Let's go again soon~ I'd like to pick the boob this time.",
+			"That really got me going~ Your heartbeat was so nice~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"cockVoreLetoutForcingAfter": {
+		"dialogueRandom": [
+			"Oops! I squeezed right on out.",
+			"Couldn't keep it tucked away in your pants, hm?",
+			"Ready for another round?",
+			"Mm, fresh and not musky air."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"cockVoreLetoutForcingAfterHungry": {
+		"dialogueRandom": [
+			"Sorry, but I'm hungry. No, not for your dick.",
+			"I'd stay, but my stomach is requesting some actual food.",
+			"My stomach needs tending to. Care to repay the favor? No, not like that, although it would be fun.",
+			"I gotta hunt, so I'm out."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"cockVoreLetoutForcingAfterHorny": {
+		"dialogueRandom": [
+			"I've had enough fun exploring your shaft~",
+			"That was a treat to squirm in your meat~",
+			"Let's go again soon~",
+			"That really got me going~ You too, by the looks of it~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced", // external lines
+	"analVoreForced": "/npcs/sbq/dialogue/default.dialogue:analVoreForced", // external lines
+	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced", // external lines
+	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced", // external lines
+	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced", // external lines
+	"oralVoreLetoutForced": {
+		"dialogueRandom": [
+			"Have enough fun, dear?",
+			"You're always welcome back, provided I have room.",
+			"I certainly enjoyed you.",
+			"Back on your adventure, then."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutForcedHungry": {
+		"dialogueRandom": [
+			"I was this close to deciding to melt you for a while.",
+			"Ah, the grumbling getting to you?",
+			"Yeah, I get it. I'll have a snack beforehand next time..",
+			"Shoot. I was hoping you'd get comfy~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutForcedHorny": {
+		"dialogueRandom": [
+			"I'd be lying if I said I didn't want to keep you for longer~",
+			"Interested in another round~?",
+			"Mind, uh, getting back in?",
+			"You hit all the right buttons, dear~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced", // external lines
+	"analVoreLetoutForcedHungry": ":analVoreLetoutForced", // duplicated lines
+	"analVoreLetoutForcedHorny": ":analVoreLetoutForced", // duplicated lines
+	"unbirthVoreLetoutForced": {
+		"dialogueRandom": [
+			"Getting restless, hm? I'll let you out.",
+			"I could keep you for longer, but you seem to really want out. Alright.",
+			"Mm, that's a bit of a bummer. I'll push you out.",
+			"Not having fun? You should've told me."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreLetoutForcedHungry": {
+		"dialogueRandom": [
+			"Alright, alright, I'll let you out.",
+			"Lugging you around has gotten me peckish. Mind helping with that once you're out?",
+			"I could go for a nice <entityname> right about now. Oh! You want out.",
+			"I won't complain. My hunger's starting to really get bad."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreLetoutForcedHorny": {
+		"dialogueRandom": [
+			"Watch where you kick, dear~ You might accidentally--",
+			"Leaving your VIP suite so soon? One last bit of fun, then~",
+			"Aw, I wanted to lay down and dote on my lovely belly~ Alright...",
+			"H-Haa, I suppose you want to resume your adventure~ Here goes~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreLetoutForced": {
+		"dialogueRandom": [
+			"Hey. They're fun bags, not punching bags. You could've just asked.",
+			"You want out? Alright.",
+			"Someone watching my livestream just fainted. Nice. I'll get you out now.",
+			"Starting to get a bit sore, so you win for now."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreLetoutForcedHungry": ":breastVoreLetoutForced", // duplicated lines
+	"breastVoreLetoutForcedHorny": {
+		"dialogueRandom": [
+			"Ah, a little too intimate for you? I won't tell~",
+			"Just be glad I didn't find that Avali. Maybe he would've enjoyed your escape attempts~",
+			"My heartbeat getting to be a little much? It's just showing how much I adore you~",
+			"Aw, alright. Come back for another hug soon, alright?"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"cockVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForced", // external lines
+	"cockVoreLetoutForcedHungry": ":cockVoreLetoutForced", // duplicated lines
+	"cockVoreLetoutForcedHorny": ":cockVoreLetoutForced", // duplicated lines
+	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly", // external lines
+	"struggleBellyHungry": {
+		"dialogueRandom": [
+			"Careful, dear. You might reawaken my hunger.",
+			"It wouldn't be that bad if I digest you. Honest.",
+			"Relax, you're not melting. Yet.",
+			"Wake my stomach back up and it might decide to keep you."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleBellyHorny": {
+		"dialogueRandom": [
+			"Ooh~ Push there again, please~",
+			"That's good~ You're checking all of my boxes~",
+			"Gah~ I knew I should've stuffed you elsewhere~",
+			"Delightful. Let's keep going~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleWomb": {
+		"dialogueRandom": [
+			"Just relax and enjoy the ^pink;warmth^reset;...",
+			"Ssh... It's alright.",
+			"I've got you.",
+			"Oof, I felt that kick. Keep it up."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleWombHungry": {
+		"dialogueRandom": [
+			"You're safe from my hunger in there.",
+			"Settle down, you'll scare any potential prey.",
+			"Quit it. I'm getting ready to hunt.",
+			"You're lucky I don't know how to warp you right into my stomach."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleWombHorny": {
+		"dialogueRandom": [
+			"What? Don't like your hiding place?",
+			"Ha-aa~, right there~",
+			"Sink into my ^pink;warm^reset; abyss~",
+			"I'm close~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail", // external lines
+	"struggleBreasts": {
+		"dialogueRandom": [
+			"Nice and secure inside my treasure chest...",
+			"Trying to arouse my next prey?",
+			"Whenever you're thirsty, feel free to drink.",
+			"Heh, stuffed breasts~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleBreastsHungry": ":struggleBreasts", // duplicated lines
+	"struggleBreastsHorny": {
+		"dialogueRandom": [
+			"Fwah, this always feels so good~",
+			"I wonder who's more aroused: me or you~?",
+			"Drinks are on the house~",
+			"No need to get all stirred up~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy", // external lines
+	"struggleCock": [
+		"Is being stuck in my shaft a little too lewd for you?",
+		"You're so squirmy in there! Be careful you don't squirm into my balls, or you might slip down deeper.",
+		"You're moving a lot in there. Are you embarrassed about being inside my shaft?"
+	],
+	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls", // external lines
+	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss", // external lines
+	"struggleAcidHeal": {
+		"dialogueRandom": [
+			"That's right. Let that steam really work its way into you.",
+			"Good, your strength is returning.",
+			"A good effort, but I'm not convinced you're fully healed yet.",
+			"Might have to keep you for longer."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleAcidHealHungry": {
+		"dialogueRandom": [
+			"How're you doing? Squirm for 'alright' and writhe for 'I want to be a hellhound's snack'.",
+			"Keep it up. I feel like you're not 100% yet.",
+			"Hmm, will you heal up before my stomach decides to churn you back down?",
+			"I'm not sure. I might have to keep you for longer."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleAcidHealHorny": {
+		"dialogueRandom": [
+			"Heal up, I've got plans for you~",
+			"Each push is better than the last~",
+			"You're gonna make me squirm if you keep that up~",
+			"Watching you squirm under my pelt is really hot~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleFemcumHeal": {
+		"dialogueRandom": [
+			"Heal up, dear. My womb is your private sanctuary.",
+			"Mmm, yes... Get yourself nice and coated in my healing fluids.",
+			"There's no rush, dear. I've got all the time in the world.",
+			"Hush... No one can hurt you..."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleFemcumHealHungry": {
+		"dialogueRandom": [
+			"Stay calm... I'm here for you.",
+			"I'll be your shield as long as you need.",
+			"Your adventure isn't going anywhere.",
+			"Let my steady heartbeat and occasional gurgle help you drift away..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleFemcumHealHorny": {
+		"dialogueRandom": [
+			"Rest your body, dear. I've got you~",
+			"Ooh~ That was a nice, strong kick~",
+			"I'll always be your private getaway~",
+			"Mmhm... <entityname>..."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleCumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleCumHeal", // external lines
+	"struggleMilkHeal": [
+		[
+			"Now you're nice and safe.",
+			"Hope you like how it feels in there.",
+			"Just snuggle into the walls~",
+			"Get yourself nice and soaked in my milk~"
+		]
+	],
+	"struggleMiscHeal": ":struggleAcidHeal", // duplicated lines
+	"struggleCompression": {
+		"dialogueRandom": [
+			"Heh, going to store you away for later.",
+			"Hidden from all of your friends.",
+			"Just settle in and disappear for a bit.",
+			"You're my tasty prey."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleCompressionBellyHungry": {
+		"dialogueRandom": [
+			"You could call for help, but my gurgles will likely drown it out.",
+			"There's no sign of you now, my tasty snack.",
+			"With you hidden like this, I think I might have some pie.",
+			"Both my belly and I agree: you're mine."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleCompressionBellyHorny": {
+		"dialogueRandom": [
+			"Mmm... Nice and squished~",
+			"Not even a single lump~ You're hidden.",
+			"I love having a 'slim' belly, hehe.",
+			"You're all mine~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleCompressionWomb": {
+		"dialogueRandom": [
+			"Feeling good in there? I hope so.",
+			"Hidden away like a precious treasure.",
+			"You deserve a break. Honest.",
+			" You're mine..."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleCompressionWombHungry": {
+		"dialogueRandom": [
+			"Heh, no one will suspect a thing.",
+			"Mm, hidden away.",
+			"I bet it's real nice and snug now, isn't it?",
+			"Mmm... Mine..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleCompressionWombHorny": {
+		"dialogueRandom": [
+			"Heh, my treasure is nice and hidden away~",
+			"Unnf~ Even when compressed, you still feel great inside me.",
+			"Don't fight it, dear~ I'd gladly carry you forever~",
+			"Ssh.. No one will take you from me.."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleCompressionBreasts": {
+		"dialogueRandom": [
+			"Now you're really nice and tucked away.",
+			"Hmhm, I might forget you're in there, now.",
+			"You're all mine, dear.",
+			"Now you're my little secret."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleCompressionBreastsHungry": ":struggleCompressionBreasts", // duplicated lines
+	"struggleCompressionBreastsHorny": {
+		"dialogueRandom": [
+			"Mmm, you think anyone will check for you in there~?",
+			"Not a single bulge is visible~",
+			"You're all mine, dear~",
+			"Now you're my little secret~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest", // external lines
+	"struggleAcidDigestHungry": {
+		"dialogueRandom": [
+			"Yes, I'm digesting you. \nYes, I'm going to reform you.",
+			"Being my pudge for a while ain't that bad. Plenty of people will oogle you.",
+			"I almost think you want out. Almost.",
+			"You squirm better than my usual fare of souls and a special Synth."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleAcidDigestHorny": {
+		"dialogueRandom": [
+			"I need a bit more fuel for my next session. You'll be fine~",
+			"Unn~ Your bulges are starting to fade away~",
+			"Getting so soft~",
+			"I'll give you lots of attention once you're my pudge~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune", // external lines
+	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest", // external lines
+	"struggleCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestBalls", // external lines
+	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune", // external lines
+	"struggleFemcumDigest": {
+		"dialogueRandom": [
+			"Just think of it as a temporary weight loss program for both of us.",
+			"Squirm if you like. I'll always reform you.",
+			"Getting softer, dear. Soon you'll be just a cute little bump.",
+			"I barely felt that."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleFemcumDigestHungry": {
+		"dialogueRandom": [
+			"Oops, looks like my stomach taught my womb something new~",
+			"I bet it's getting real tight and warm, isn't it?",
+			"Damn, this feels good~",
+			"I told you I was hungry."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleFemcumDigestHorny": {
+		"dialogueRandom": [
+			"How naughty~ Your spa package includes a full makeover, you know~",
+			"A little too ^pink;steamy^reset; for you?",
+			"Just sink below the surface. You'll be renewed when you come back up~",
+			"You wouldn't mind if I had some fun, would you?"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleFemcumDigestImmune": {
+		"dialogueRandom": [
+			"It's going to get insanely warm. You shouldn't notice a difference.",
+			"Nice fire resistance. Keep it up.",
+			"Oh? I didn't even notice the change. Did you?",
+			"Don't mind me. I'm going to turn up the ^pink;steam^reset; a lot~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleFemcumDigestImmuneHungry": {
+		"dialogueRandom": [
+			"You're probably going to get squeezed. A lot.",
+			"You really want to stay solid, huh? I gotcha.",
+			"Just between you and me, this feels just as good with you solid.",
+			"Nice. I can tell you're still nice and firm in there."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleFemcumDigestImmuneHorny": {
+		"dialogueRandom": [
+			"Oh? You're not melting? Even better~",
+			"Damn, I was going to play a harmless trick~",
+			"Aah~ I see.. Might be a bit longer before your exit is loosened up~",
+			"Should be getting really ^pink;steamy^reset; now~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleMilkDigest": {
+		"dialogueRandom": [
+			"I'll put your excess in a carton for one of us to drink later.",
+			"Any of your friends nearby? I'm sure one of them will be thirsty~",
+			"I might bottle you up and leave you at Auri's shop. \nIt will be a fun surprise for both of you when you suddenly return to normal~",
+			"Need to shrink you down a bit. My shirt is almost legible when I wear it."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt", // external lines
+	"struggleMilkDigestImmune": {
+		"dialogueRandom": [
+			"Nice. <entityname>-controlled jiggle physics.",
+			"Fine, but you're staying longer if my shirt has any tears. \n(heh)",
+			"Good, still firm. I've got a commission coming up.",
+			"Keep it up. The next time I stream is going to be ^pink;spicy^reset;."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleMiscDigest": {
+		"dialogueRandom": [
+			"Time to melt you down for a bit.",
+			"I didn't turn the heat up that much. Just enough that you'll get nice and soft.",
+			"I can tell you're getting softer.",
+			"Keep struggling, dear."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleMiscDigestHungry": ":struggleMiscDigest", // duplicated lines
+	"struggleMiscDigestHorny": ":struggleMiscDigest", // duplicated lines
+	"struggleMiscDigestImmune": {
+		"dialogueRandom": [
+			"Not into melting? I can respect that.",
+			"For you, this should feel like a nice sauna.",
+			"My gut doesn't know the difference, so thanks for suppressing my hunger.",
+			"Since you can't melt, I'm going to return to my normal heat. Let me know if that's too much."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleMiscDigestImmuneHungry": {
+		"dialogueRandom": [
+			"I'm still hungry, so just pretend to melt. Shout for help, too. Might trick my gut.",
+			"Thankfully, I can still fit in my usual snacks. Sorry if it gets messy in there.",
+			"It's good you're immune. Means you can struggle for a lot longer~",
+			"Might keep you in there anyway. It feels like you're massaging my gut nicely~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleMiscDigestImmuneHorny": {
+		"dialogueRandom": [
+			"You're immune? Ooh~ so I can really dial it up~",
+			"So many lovely noises coming from both inside and out~",
+			"I wonder if I could make you flustered enough to melt in a different way~",
+			"Even better~ I get a gurgly gut and a trapped prey to play with~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleTransforming": {
+		"percentage": "transforming",
+		"pools": [
+			{
+				"dialogueRandom": [
+					"I'm sprinkling a bit of my essence on you.",
+					"I'm slowly adding you to the pack. It's not permanent.",
+					"Won't be long before you're just like me.",
+					"I think you're gonna look ^pink;smoking hot^reset; once I'm done~"
+				],
+				"imagePortrait": [
+					"HHappy.png"
+				]
+			}
+		],
+		"full": [
+			":struggleTransformed"
+		]
+	},
+	"struggleTransformed": {
+		"dialogueRandom": [
+			"Welcome to the pack.",
+			"Should be done now.",
+			"Can't go wrong with more borks.",
+			"One brand new ^pink;sexy^reset; hellhound, ready to claim the world~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
+	"struggleEggify": {
+		"percentage": "Eggify",
+		"pools": [
+			{
+				"dialogueRandom": [
+					"Eggs are fun, don't you think?",
+					"Don't worry. I won't drop you into a bottomless pit. Even though he still remembers.",
+					"Heh, doggo make eggo~",
+					"It's fine. My eggs aren't nearly as possessive as I am."
+				],
+				"imagePortrait": [
+					"HHappy.png"
+				]
+			}
+		],
+		"full": "struggleEgged"
+	},
+	"struggleEggifyHungry": {
+		"percentage": "Eggify",
+		"pools": [
+			{
+				"dialogueRandom": [
+					"Sadly, I lack a giant frying pan.",
+					"It's tempting to swallow the egg whole once I'm done. I'm that hungry.",
+					"I better start cooking up some waffles.",
+					"Don't be afraid. I won't yeet you at any giant frogs."
+				],
+				"imagePortrait": [
+					"HTired.png"
+				]
+			}
+		],
+		"full": ":struggleEgged"
+	},
+	"struggleEgged": {
+		"dialogueRandom": [
+			"Learned how to do this from a Yoshi. No, I'm not going to elaborate on how."
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"struggleEggifyHorny": {
+		"dialogueRandom": [
+			"One portable sauna, coming up~",
+			"The feeling of a smooth egg coming out is just~ Mm~",
+			"Maybe I should influence the egg to keep you for a lot longer, too~",
+			"Woof, this is gonna be good~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant", // external lines
+	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant", // external lines
+	"bellyInfusedOccupant": [
+		{
+			"check": {
+				"bellySounds": true
+			},
+			"add": [
+				"Hehe, grumbling <entityName>?",
+				"Does my noisy belly want something~?"
+			]
+		},
+		"Hehe, does my belly want something?",
+		"Hehe, do you want something <entityName>?"
+	],
+	"breastInfusedOccupant": [
+		[
+			"<slowlove>Mmm, you make them so much more sensitive~",
+			"<slowlove>Mmm, <entityName> you make them so much more sensitive~"
+		],
+		[
+			"<slowlove>Ahh I can just feel you making even more milk~",
+			"<slowlove>Ahh I can just feel you making even more milk <entityName>~"
+		],
+		[
+			"<slowlove>Jiggling on my chest, right where you belong~",
+			"<slowlove>Jiggling on my chest, right where you belong <entityName>~"
+		],
+		{
+			"check": {
+				"breastInfusedSize": true
+			},
+			"add": [
+				[
+					"<love>I love how much bigger you make my boobs~",
+					"<love>I love how much bigger you make my boobs <entityName>~"
+				],
+				[
+					"<love>You're better as extra size for me~",
+					"<love>You're better as extra size for me <entityName>~"
+				]
+			]
+		},
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <entityName>"
+		]
+	],
+	"pussyInfusedOccupant": [
+		[
+			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
+			"<slowlove>Ahh, <entityName>~ I'm so much more sensitive with you down there~"
+		],
+		[
+			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
+			"<slowlove>Fff, ahh... <entityName> I keep getting wet thinking about you down there~"
+		],
+		[
+			"<slowlove>Hehe... dripping wet, right where you belong~",
+			"Hehe... dripping wet, right where you belong <entityName>~"
+		],
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <entityName>"
+		]
+	],
+	"cockInfusedOccupant": [
+		[
+			"<love>Heh, I can feel you twitching down there~",
+			"<love>Heh, I can feel you twitching down there <entityName>~"
+		],
+		[
+			"<love>Are you enjoying your new purpose?~",
+			"<love>Are you enjoying your new purpose <entityName>?~"
+		],
+		[
+			"<slowlove>Just twitch and throb away, you're right where you belong~",
+			"<slowlove>Just twitch and throb away <entityName> you're right where you belong~"
+		],
+		[
+			"<love>Heh, you belong right there, twitching and throbbing between my legs~",
+			"<love>Heh, you belong right there <entityName>, twitching and throbbing between my legs~"
+		],
+		{
+			"check": {
+				"cockInfusedSize": true
+			},
+			"add": [
+				[
+					"<love>I love how much bigger you make my cock~",
+					"<love>I love how much bigger you make my cock <entityName>~"
+				],
+				[
+					"<love>You're better as extra size for me~",
+					"<love>You're better as extra size for me <entityName>~"
+				]
+			]
+		},
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <entityName>"
+		]
+	],
+	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant", // external lines
+	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant", // external lines
+	"strugglingBelly": {
+		"dialogueRandom": [
+			[
+				"Nice. Not quite as warm as my gut, but I like it.",
+				"Keep me for as long as you like~",
+				"Mmm, how about I push here?",
+				"Thanks for the ride, dear.",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"I love a good gurgle.",
+						"Just what I like to hear. You go, belly.",
+						"My my, how active.",
+						"Mind if I get a sound recording?"
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"This feels nice, too. So much goo...",
+					"Mmm, don't mind me heating your goo up a bit.",
+					"I'd love for us to both disappear into some water~",
+					"Looks like you know about type advantages, hehe."
+				]
+			}
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingBellyHungry": {
+		"dialogueRandom": [
+			[
+				"Nice. Not quite as eager as my gut, but I like it.",
+				"I might need a snack myself in a bit.",
+				"Mmm, I'm getting rather hungry, myself.",
+				"Thanks for the ride, dear. Mind finding us a mutual meal?",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"I love a good gurgle. Sounds just like my gut right now.",
+						"I'm hearing both our bellies go at it.",
+						"My my, how active for both of us.",
+						"Mind if I get a recording? Two sets of gurgling guts should be pleasant."
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"This feels nice, too. I might have to take a quick sip...",
+					"Mmm, don't mind me nibbling on your goo a bit.",
+					"Is that... a mostly eaten apple core? No, I must be seeing things.",
+					"Looks like you know about type advantages, hehe. Mind finding a Grass type for me to munch on?"
+				]
+			}
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingBellyHorny": {
+		"dialogueRandom": [
+			[
+				"Nice~ I hope you don't mind if it gets steamy in here~",
+				"Mmm~ Don't mind me, keep me as long as you'd like~",
+				"Oh my~ You have such a nice belly~",
+				"Thanks for the ride~",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"Oh! That gurgle was nice and low~",
+						"The occasional rumble is so nice~",
+						"My, that was a loud one~",
+						"Mind if I get a sound recording for.. Mmm, later?"
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"This feels so pleasant~ So much goo to play with...",
+					"Mmm, don't mind me if I heat up your goo a lot.",
+					"I'd love for us to both disappear into some water~ Only you know when we'd resurface~",
+					"If I were a Pokémon, I'd love to have Steam Engine right now~"
+				]
+			}
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingWomb": {
+		"dialogueRandom": [
+			"It's so nice and warm in here. I could easily drift off.",
+			"Let me give you a massage from within to show my appreciation.",
+			"This is easily the best. Thanks for this.",
+			"All yours..."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingWombHungry": {
+		"dialogueRandom": [
+			"Your womb is incredibly comfy.",
+			"This feels lovely. You're a wonderful host.",
+			"I haven't felt this relaxed in a long time. Thanks.",
+			"Mmm..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingWombHorny": {
+		"dialogueRandom": [
+			"Your womb is the best out of all the ones I've been in~",
+			"One hand to rub you, and one hand for me~",
+			"This is seriously hot~",
+			"Mm-ng~~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail", // external lines
+	"strugglingBreasts": {
+		"dialogueRandom": [
+			"It's so snug and secure in here. I could easily drift off.",
+			"Your heartbeat is so soothing...",
+			"This is easily the best.",
+			"All yours..."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingBreastsHungry": {
+		"dialogueRandom": [
+			"Your breasts are incredibly comfy.",
+			"This feels lovely. You're a wonderful host.",
+			"I haven't felt this relaxed in a long time. Thanks.",
+			"Mmm..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingBreastsHorny": {
+		"dialogueRandom": [
+			"Your breasts are the best out of all the ones I've been in~",
+			"One hand per boob, hehe~",
+			"This is seriously sexy~",
+			"Mm-ng~~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy", // external lines
+	"strugglingCock": "/npcs/sbq/dialogue/default.dialogue:strugglingCock", // external lines
+	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls", // external lines
+	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss", // external lines
+	"strugglingAcidHeal": {
+		"dialogueRandom": [
+			[
+				"It's rare that someone cares about my well-being. Thanks.",
+				"Let me give you a nice rub to show my appreciation.",
+				"Ah, that's more like it.",
+				"You're truly a caring person. Trust me, I checked.",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"Some good gurgles AND healing? This is perfect.",
+						"Mmm... Thanks...",
+						"Drifting off sounds nice right now...",
+						"Such a pleasant soundscape to be trapped within..."
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"Are you using Aqua Ring? If so, thanks~",
+					"That feels pleasant.",
+					"Mm, I'm tempted to use Rest.",
+					"It's nice..."
+				]
+			}
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingAcidHealHungry": ":strugglingAcidHeal", // duplicated lines
+	"strugglingAcidHealHorny": {
+		"dialogueRandom": [
+			[
+				"You're so kind~ Thanks, dear~",
+				"Let me give you a nice rub to show my appreciation~",
+				"Ah, that's even better~",
+				"You're truly a caring person~ Trust me, I checked~",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"Some sexy gurgles AND healing? This is perfect~",
+						"Mmm... Thanks a bunch...",
+						"Drifting off sounds nice~",
+						"That does the trick~"
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"Ooh, that feels even better now~ Thanks~",
+					"Heh, making me jealous of your water abilities.",
+					"Wow, you really are the most compatible~",
+					"That's good..."
+				]
+			}
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingFemcumHeal": [
+		"Your womb is soothing me so well!",
+		"I can feel my pain vanishing within your womb.",
+		"Is your womb making me feel better? Strange..."
+	],
+	"strugglingCumHeal": [
+		"Who would have thought your cock could heal so well.",
+		"Your shaft is rather soothing it seems. Weird.",
+		"Your cock is making my pain go away. It's so relaxing in here!"
+	],
+	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal", // external lines
+	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingCompression": [
+		"It's getting so tight in here!",
+		"I can barely move in here...",
+		"I can't keep it... from compacting me."
+	],
+	"strugglingAcidDigest": {
+		"dialogueRandom": [
+			"Ah, now the fun's really getting started.",
+			"Goodness, I'm really starting to get soft.",
+			"Mm, want me to yell for help?",
+			"So, where are you going to add me to for now?"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingAcidDigestHungry": {
+		"dialogueRandom": [
+			"Ah, this should take my mind off my own stomach.",
+			"Goodness, your belly is just as eager as mine.",
+			"Mm, want me to yell for help?",
+			"Careful, my hunger might double yours while we're together~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingAcidDigestHorny": ":strugglingAcidDigest", // duplicated lines
+	"strugglingAcidDigestImmune": ":strugglingDigestImmune", // duplicated lines
+	"strugglingDigestImmune": {
+		"dialogueRandom": [
+			"I appreciate the effort, but you can't claim me like that.",
+			"It basically feels like a pleasant tingle.",
+			"If you go a little softer, I'll gladly indulge you.",
+			"I never digest fully; both as predator and prey. Sorry~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingAcidDigestImmuneHungry": ":strugglingDigestImmune", // duplicated lines
+	"strugglingAcidDigestImmuneHorny": {
+		"dialogueRandom": [
+			"I appreciate the effort, but I'm off limits~",
+			"It basically feels like a pleasant tingle~",
+			"If you go a little softer, I'll gladly moan as I melt~.",
+			"I never go all the way; both as predator and prey. Sorry~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest", // external lines
+	"strugglingCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestBalls", // external lines
+	"strugglingCumDigestImmune": ":strugglingDigestImmune", // duplicated lines
+	"strugglingFemcumDigest": {
+		"dialogueRandom": [
+			"Ooh, melting me down? How naughty.",
+			"I see I'm starting to get soft. Want to hide me, then?",
+			"Ah, let me get one more belly rub going, then.",
+			"Turning up the heat, are you?"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingFemcumDigestHungry": {
+		"dialogueRandom": [
+			"Ooh, melting me down?",
+			"I see I'm starting to get soft.",
+			"Ah, let me enjoy myself for a little longer, then.",
+			"Now you're really getting hot."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingFemcumDigestHorny": {
+		"dialogueRandom": [
+			"Ooh, melting me down?~ How kinky~",
+			"Ooh, trying to hide me from your friends~?",
+			"A-ah, let me get one more rub going, then~",
+			"I may melt away, but I always come back~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingFemcumDigestImmune": ":strugglingDigestImmune", // duplicated lines
+	"strugglingMilkDigest": {
+		"dialogueRandom": [
+			"Ooh, turning me into a fresh glass? How naughty.",
+			"I see I'm starting to get soft.",
+			"Heh, let me give your chest one last rub, then.",
+			"Mmm, so much milk..."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingMilkDigestHungry": {
+		"dialogueRandom": [
+			"Ooh, turning me into milk?",
+			"Mmm, don't forget the cookies, then.",
+			"Ah, let me enjoy myself for a little longer, then.",
+			"Now you're really gonna be hot."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingMilkDigestHorny": {
+		"dialogueRandom": [
+			"Ooh, making me into milk?~ How kinky~",
+			"Ooh, trying to shrink down a few sizes~?",
+			"A-ah, let me rub a little more, please~",
+			"I may go well with cookies, but I always come back~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingMilkDigestImmune": ":strugglingDigestImmune", // duplicated lines
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
+	"strugglingDrainEnergy": [
+		"I... I'm feeling so tired...",
+		"It's getting harder to move...",
+		"I'm losing the energy to struggle...",
+		"I can barely even squirm..."
+	],
+	"strugglingEggify": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingTransformingWomb": {
+		"dialogueRandom": [
+			[
+				"Mm, no?"
+			]
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
+	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused", // external lines
+	"bellyInfused": [
+		"<slowlove>",
+		"<love>",
+		[
+			{
+				"check": {
+					"bellySounds": true
+				},
+				"add": [
+					"(Just a grumbling belly~)",
+					"(Just your grumbling belly~)",
+					"(Just <entityname>'s grumbling belly~)",
+					"(Just a noisy belly~)",
+					"(Just your noisy belly~)",
+					"(Just <entityname>'s noisy belly~)"
+				]
+			},
+			{
+				"check": {
+					"mood": "hungry"
+				},
+				"add": [
+					"<slowlove>(Feeed meee~)",
+					"(Hungry...)"
+				]
+			},
+			[
+				"(Just a belly~)",
+				"(Just your belly~)",
+				"(Just <entityname>'s belly~)"
+			],
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
+		]
+	],
+	"breastInfused": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(Producing milk...~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
+		]
+	],
+	"pussyInfused": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I'm getting so wet ahh~)",
+			"<slowlove>(Mmm put something inside me~)",
+			"<slowlove>(<entityname>'s pussy~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
+		]
+	],
+	"cockInfused": [
+		"<slowlove>",
+		"<love>",
+		[
+			"<slowlove>(Ahh... I just feel so good...~)",
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I'm just a cock~)",
+			"<slowlove>(I can't wait to be used~)",
+			"<slowlove>(Ahh~ I'm throbbing with excitment~)",
+			"<slowlove>(I'm just <entityname>'s cock~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
+		]
+	],
+	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused", // external lines
+	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused", // external lines
+	"climax": "/npcs/sbq/dialogue/default.dialogue:climax", // external lines
+	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb", // external lines
+	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts", // external lines
+	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock", // external lines
+	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls", // external lines
+	"shrinking": {
+		"dialogueRandom": [
+			"Mm, looking to make me more manageable?",
+			"Oh? I wonder what you have in mind, dear.",
+			"Hmm, I don't remember using Minimize.",
+			"Big or small, I'm happy either way."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"shrinkingHungry": {
+		"dialogueRandom": [
+			"Can you shrink down my hunger as well?",
+			"I suppose I can make due with less food now.",
+			"Hmm, I think I can still manage to get a good-sized meal in me.",
+			"Are you looking to fit into a warm, snug space~?"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"shrinkingHorny": {
+		"dialogueRandom": [
+			"Goodness, I can only wonder what you have in mind~",
+			"Mmm, looking to make me into a fun toy~?",
+			"No matter my size, I would love to squeeze you somewhere warm and cramped~",
+			"Oh my, this could be fun~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"growing": {
+		"dialogueRandom": [
+			"Making me bigger, are you?",
+			"Careful, dear, I might not watch my step.",
+			"Hmhm, you must like big dogs. Don't worry, I can keep a secret~",
+			"Big or small, I'm happy either way."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"growingHungry": {
+		"dialogueRandom": [
+			"Watch out. My appetite scales with my size, dear.",
+			"You are looking pretty tasty from this point of view.",
+			"Ah, this works. Now I can cram in more tasty morsels.",
+			"Being hungry sucks. Being bigger and hungry, not so much."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"growingHorny": {
+		"dialogueRandom": [
+			"Hmhm, want me to hide you without a trace~?",
+			"Just a warning, dear: the bigger I get, the more places you'll fit~",
+			"Mm, let me be your shelter~",
+			"The possibilities keep growing, as do I~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"didSteppy": {
+		"dialogueRandom": [
+			"Ah, sorry about that.",
+			"Oops! Better watch where I'm <steppytype>.",
+			"Oh! Hello down there.",
+			"Oh? Did I hear a squish?"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"didSteppyHungry": {
+		"dialogueRandom": [
+			"Oh? A potential snack?",
+			"A little too small to quell my hunger.",
+			"You might help put a small dent in my hunger.",
+			"Heh, you'd fit perfectly in a hot dog bun."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"didSteppyHorny": {
+		"dialogueRandom": [
+			"My my, something feels nice under my paws~",
+			"Oh? An admirer? Please, feel free to indulge yourself~",
+			"Mmm, care to give me a rub or two~?",
+			"Fun sized, hmm? I can think of a few places for you~"
+		],
+		"imagePortrait": [
+			"HUwU.png"
+		]
+	},
+	"gotStepped": {
+		"dialogueRandom": [
+			"Oh! Hello to you, too.",
+			"Need a little pep in your step? Bring me along!",
+			"Heh, I'm down here, dear.",
+			"My, what nice feet you have~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"gotStomped": [
+		"Bork?!",
+		"Bork.",
+		"Bork!",
+		" ...bork."
+	],
+	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
+		"tagCriteria": {
+			"default": {
+				"default": [
+					"Something in my place has changed, I don't like it!"
+				]
+			}
+		},
+		"enclosedArea": {
+			"default": {
+				"default": [
+					"My home could use some repairs!"
+				]
+			}
+		},
+		"otherDeed": {
+			"default": {
+				"default": [
+					"I thought this place was for me!"
+				]
+			}
+		},
+		"severe": {
+			"default": {
+				"default": [
+					"I can't live in these conditions!"
+				]
+			}
+		},
+		"final": {
+			"default": {
+				"default": [
+					"I've had enough of this!"
+				]
+			}
+		},
+		"beacon": {
+			"default": {
+				"default": [
+					"I'm home!"
+				]
+			}
+		},
+		"rent": {
+			"default": {
+				"default": [
+					"Here's a gift for all your help!"
+				]
+			}
+		},
+		"helpme": {
+			"default": {
+				"default": [
+					"Oh no! Help me!",
+					"Help!",
+					"Uh-oh.",
+					"I'm unarmed! Help!",
+					"I need help! I can't defend myself!",
+					"Ah! Stop it!",
+					"What!? What did I do!?"
+				]
+			}
+		},
+		"safe": {
+			"default": {
+				"default": [
+					"Phew, I think I got away.",
+					"Thank goodness that's over.",
+					"Is it over?",
+					"Is it safe now?",
+					"I made it!"
+				]
+			}
+		},
+		"accuse": {
+			"default": {
+				"default": [
+					"Hey, that doesn't belong to you!"
+				]
+			}
+		},
+		"alert": {
+			"default": {
+				"default": [
+					"Guards! There is a criminal here!"
+				]
+			}
+		},
+		"offer": {
+			"default": {
+				"default": [
+					"Hello adventurer, mind if I join you?",
+					"I'm <selfname>, and I really want to join a ship. Do you want to employ me?",
+					"You are JUST the kind of person I should work with! Fancy employing me?",
+					"I'm looking for a ship's crew to join. Are you interested?",
+					"I'm looking for a place among a crew. Can I join yours?"
+				]
+			}
+		},
+		"roleDescription": {
+			"default": {
+				"default": [
+					"I'll be here for you if you need someone to help you fight bad guys!",
+					"If you need protection, you know where to find me!",
+					"If you need me in battle, I'll be here!"
+				]
+			}
+		},
+		"respawned": {
+			"default": {
+				"default": [
+					"Heh... Dying tickles.",
+					"What just happened?",
+					"I'm back! And alive!",
+					"I'm back and in one piece!",
+					"I'm alive again! That's good.",
+					"I don't think I respawned properly...",
+					"My head hurts.",
+					"What was I doing just before I died?"
+				]
+			}
+		},
+		"crewcantreach": {
+			"default": {
+				"default": [
+					"I can't reach you!",
+					"You're too far!",
+					"Hey, wait up!",
+					"Don't go too far!",
+					"Let me catch up!"
+				]
+			}
+		},
+		"reattack": {
+			"default": {
+				"default": [
+					"You again!",
+					"You returned!",
+					"Aha!",
+					"You came back?",
+					"So you came back."
+				]
+			}
+		},
+		"attack": {
+			"default": {
+				"default": [
+					"Attack!"
+				]
+			}
+		},
+		"killedTarget": {
+			"default": {
+				"default": [
+					"Never mess with me!",
+					"Victory!",
+					"Phew!",
+					"Another victory!",
+					"I didn't even break a sweat!",
+					"Heh.",
+					"Of course I won!",
+					"I'm pretty good at this!",
+					"That was stressful...",
+					"Another easy win!",
+					"Yes!",
+					"That's what you get!"
+				]
+			}
+		},
+		"lostTarget": {
+			"default": {
+				"default": [
+					"I will get you one day!",
+					"It's not over!",
+					"Don't come back!",
+					"Where are you...",
+					"What a hassle.",
+					"Just you wait!"
+				]
+			}
+		},
+		"outOfSight": {
+			"default": {
+				"default": [
+					"Sneaky! This is sneaky! How did you disappear?",
+					"They're getting away!",
+					"Where'd you go?",
+					"Get back here!",
+					"How did this happen?"
+				]
+			}
+		},
+		"cantReachEnemy": {
+			"default": {
+				"default": [
+					"Get over here!",
+					"Come here!",
+					"Get back here!",
+					"How did you get over there?",
+					"I can't reach!"
+				]
+			}
+		},
+		"cheerOn": {
+			"default": {
+				"default": [
+					"I have a plan!",
+					"Get them!",
+					"Everybody is in my way.",
+					"Why aren't they already dead?",
+					"Come on!"
+				]
+			}
+		}
+	},
+	// Unused Dialogue
+	"curiousBelly": [
+		"It's nice and quiet. Perfect if you want to take a nap."
+	],
+	"curiousBellyHorny": {
+		"dialogue": [
+			"It's nice, quiet, and just the right temperature for you, <entityname>~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"curiousBellyHungry": {
+		"dialogue": [
+			"I can probably keep it quiet enough with you in there."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"curiousAcidHeal": [
+		"It's surprisingly therapeutic right now. Think of it as a nice sauna."
+	],
+	"curiousAcidHealHorny": {
+		"dialogue": [
+			"It has a few of my healing embers going. Perfect for mending a tired soul~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"curiousAcidHealHungry": {
+		"dialogue": [
+			"I think I can trick it into patching you up if you need it."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	// Unused Dialogue
+	"curiousBellyDigest": [
+		"It's pretty active right now. No need to worry, though."
+	],
+	"curiousBellyDigestHorny": {
+		"dialogue": [
+			"It's going to be slightly hotter than what you'd like. Just enough to sizzle you down~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"curiousBellyDigestHungry": {
+		"dialogue": [
+			"It'll be hot. Melty, even. I can still keep you safe, though."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"defaultFullHorny": {
+		"dialogueRandom": [
+			"That's incredibly hot that you want to try, but I'd explode...",
+			"I'm way past full...",
+			"Oooh, I can't... I'd appreciate some room service, though...",
+			"Pretty sure I'd pass my limits..."
+		],
+		"imagePortrait": [
+			"HRelieved.png"
+		]
+	},
+	"defaultFullHungry": [
+		"While my body really wants you inside it, it'd get way too cramped...",
+		"Trust me, I want to. My body wants to. You want to. But I can't.",
+		"I could probably give you a lick, but that's it...",
+		" ...Not right now, my body has its limits..."
+	],
+	"oralVoreDigestFull": [
+		"It might look like I've got space, but they want me all to themselves. Sorry~",
+		"Ah, there's no need to worry. They'll be perfectly fine. \nYou will be too once I get to you~",
+		"Eager to get turned into pudge, are you? It'll be a bit of a wait. Maybe even a long one...",
+		"Hmhm, do I look nice and empty? Oh, it's nothing."
+	],
+	"oralVoreFullDigestHungry": {
+		"dialogueRandom": [
+			"Hm? Nothing to see here. Any cries for help are just your imagination.",
+			"Yummy... Just reminiscing about a tasty meal. Come back later.",
+			"My belly is a bit busy. Somewhere else may prove more fruitful~",
+			"Who's the unlucky prey? Probably someone you know~"
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"oralVoreFullDigestHorny": {
+		"dialogueRandom": [
+			"Mmnf, this is easily my favorite part. Oh? It's nothing~",
+			"They're on an extended vacation. It's somewhere ^pink;steamy^reset; and noisy.",
+			"Looking for someone? Can't say that I've-*urp*-seen them~",
+			"I'll have to squeeze you in later. I need to find a place to rest and, mhm, digest~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"oralVoreHealFull": [
+		"Sorry, dear, but you're going to have to wait.",
+		"I'd love to, but they had a scratch. Can't let them out until they're all patched up.",
+		"Eager for healing as well, are you? Perhaps I have an opening elsewhere~",
+		"The sauna's occupied. You'll have to book a later session."
+	],
+	"oralVoreFullHealHungry": {
+		"dialogueRandom": [
+			"Ssh... My belly's trying to rest. Oh, and my prey, too.",
+			"Their adventure is on pause right now. Come back later and I'll pause yours, too.",
+			"I might have another opening for you, but they need to recover.",
+			"Tempting, but I'm pretty sure my gut would switch over to melting all of you down."
+		],
+		"imagePortrait": [
+			"HSleepy.png"
+		]
+	},
+	"oralVoreFullHealHorny": {
+		"dialogueRandom": [
+			"Soon. Both of us have needs we're currently filling.",
+			"Mm, I may be able to fit you in elsewhere~ \nThey're getting some much needed rest.",
+			"If you're hurt, I could give you a quick smooch to take your mind off it~",
+			"Just imagine: this will be you and me in due time~"
+		],
+		"imagePortrait": [
+			"HDetermined.png"
+		]
+	},
+	"oralVoreCompressionFull": [
+		"Just give my prey some time to fit more snugly in, then I'll fit you in.",
+		"I'll swallow you down after my current snack gets a bit more compact",
+		"I'm pretty full right now, but my meal is getting downsized, so you'll fit soon!",
+		"Just give me a sec to squish my friend here down, and then you'll be next!"
+	],
+	"cockVoreCompressionFull": [
+		"Oh I'm squeezing them all down to a smaller size as I get harder, then maybe you'll fit in with them~"
+	],
+	"unbirthVoreFullDigest": {
+		"dialogueRandom": [
+			"Don't be afraid. They'll reform when they're due~",
+			"You saw a kick? Must've been your imagination.",
+			"They're definitely a keeper. You look like one, too~",
+			"Looking to play? You'll have to wait your turn~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreFullDigestHungry": {
+		"dialogueRandom": [
+			"I can't, but you're welcome to watch them get nice and soft.",
+			"Oh? You saw a bit of ^pink;steam^reset; come out? They must be having fun.",
+			"Are you jealous? Don't be. You might be next~",
+			"This doesn't really fix my hunger, but it still feels wonderful."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreFullDigestHorny": {
+		"dialogueRandom": [
+			"I'd prefer not to open the floodgates just yet, dear. You might drown~",
+			"I can reform them at any time, but I'd like to keep them... for a while longer~",
+			"Pry as much as you like, you're not getting in just yet~",
+			"They're mine for now~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"unbirthVoreHealFull": {
+		"dialogueRandom": [
+			"Mm, I'm rekindling their fire.",
+			"Didn't want to melt them by accident. Hm? Okay, fine. I didn't want to digest them by accident.",
+			"You're welcome to touch. Feel their movements getting stronger",
+			"Sorry that I can't tend to you. I may be able to fit you in elsewhere, though~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreFullHealHungry": {
+		"dialogueRandom": [
+			"I always love this part, even if I'm starving. It's rare to heal someone in such a tender manner~",
+			"Honestly, I would if I could. I'd gladly heal you too~",
+			"Mind fetching me a snack? I feel like my healing could be faster.\nDoesn't mean their stay will be any shorter, though~",
+			"Ssh... They're resting..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"unbirthVoreFullHealHorny": {
+		"dialogueRandom": [
+			"Haa~ They're slowly mending~",
+			"They're probably good now, but I'd like to make doubly sure~",
+			"No more room in the ^pink;VIP suite^reset;, I'm afraid~ Book another slot?",
+			"You can feel if you'd like in the meantime~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreFullDigest": {
+		"dialogueRandom": [
+			"Looking for someone? I'm sure you'll find them eventually. Care for a warm sip?",
+			"Hm? It looks like my boobs are moving? Must be your imagination~",
+			"You'll have to wait your turn. You're welcome to shake them up, though.",
+			"If you place your ear against me, they say you can hear the ocean~ \nAnd maybe the occasional call for help."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreFullDigestHungry": {
+		"dialogueRandom": [
+			"Have some cookies handy? I've got plenty of milk to spare.",
+			"Perfect, you're just in time. Mind dropping some excess milk at Auri's shop for me?",
+			"In case you're curious, they're fine. Any milk is just excess water weight and such.",
+			"If you call me a cow, you're next."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreFullDigestHorny": {
+		"dialogueRandom": [
+			"You thought you heard a moan? Who knows where that came from~",
+			"Mm, it's just me and my milk-bags over here~",
+			"You're welcome to watch them jiggle away if you'd like~",
+			"Thirsty? I can fetch a glass. It'll be a little spicy~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreHealFull": {
+		"dialogueRandom": [
+			"Ever have a glass of warm milk right before bed? That's them right now.",
+			"They wanted a good soak to wash the stress away. Come back later~",
+			"They're gonna be a while. Maybe try somewhere else?",
+			"They're fun to watch move around, aren't they? Try not to get hypnotized~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreFullHealHungry": {
+		"dialogueRandom": [
+			"My milk is healing them up, but it could be even faster if I wasn't as hungry...",
+			"While I'm fixing them up, why don't you fix me up? I'm starving.",
+			"If you're hurt that badly, I'm sure you could take a little sip.",
+			"While I am hungry, they were hurt. I'm not a complete b!tch."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreFullHealHorny": {
+		"dialogueRandom": [
+			"They're getting patched up. We had a ^pink;rough^reset; session earlier~",
+			"It may take them a while. Care to discuss any ^pink;sizzling^reset; secrets?",
+			"Mmmf... You'll get your turn eventually~",
+			"You're more than welcome to nestle your head in-between my breasts while you wait~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggle": {
+		"dialogueRandom": [
+			"All nice and snug, dear.",
+			"I don't mind. Keep it up.",
+			"Not bad! I could get used to this.",
+			"Careful. I might make your stay last far longer~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleTransformingImmune": {
+		"dialogueRandom": [
+			"Staying true to yourself is a good trait.",
+			"This works, too. Keep wiggling anyway.",
+			"I'll lay off my personal spices for now. I couldn't resist~",
+			"You'd make for a sexy hellhound, but I won't force you."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleLetoutTransforming": {
+		"pools": [
+			":struggleLetoutTransformingImmune"
+		],
+		"full": ":struggleLetoutTransformed"
+	},
+	"struggleLetoutTransformingImmune": {
+		"dialogueRandom": [
+			"Not interested in joining the pack?",
+			"Scared? Don't be, it's not permanent.",
+			"You would've been so sexy, too...",
+			"I can understand that. Let me know next time."
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"struggleLetoutTransformed": {
+		"dialogueRandom": [
+			"Damn, that's a good look for you.",
+			"I hope you like having a bit of me within you temporarily.",
+			"It's not permanent, so don't worry.",
+			"Heh, now you can really bork properly."
+		],
+		"imagePortrait": [
+			"HJoyful.png"
+		]
+	},
+	"struggleLetoutTransformingHorny": {
+		"pools": [
+			":struggleLetoutTransformingImmune"
+		],
+		"full": ":struggleLetoutTransformedHorny"
+	},
+	"struggleLetoutTransformedHorny": {
+		"dialogueRandom": [
+			"Damn, you look even hotter now.",
+			"I hope you like having a bit of me with you, you hot dog.",
+			"It's not permanent~",
+			"Heh, now you can really bork~"
+		],
+		"imagePortrait": [
+			"HJoyful.png"
+		]
+	},
+	"struggleLetoutEggify": {
+		"percentage": "Eggify",
+		"pools": [],
+		"full": ":struggleLetoutEgged"
+	},
+	"struggleLetoutEgged": {
+		"dialogueRandom": [
+			"Yoshi would be proud, I think."
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"struggleLetoutEggifyImmune": {
+		"dialogueRandom": [
+			"I'm not a Pokémon Trainer. I won't jam you in a box if your IVs are bad.",
+			"Not interested? I totally wouldn't yeet or eat the egg.",
+			"Don't want to be doubly trapped? I can respect that.",
+			"Damn, I had so many hatchday jokes ready."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutForcedDigested": {
+		"dialogueRandom": [
+			"And there! Good as new. Maybe even better.",
+			"A moment on my lips thankfully isn't a lifetime on my hips for you.",
+			"I could make the stay a lot longer next time if you'd like~",
+			"Oh? Got something to do? Come back later and we'll continue where we left off~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutForcedDigestedHungry": {
+		"dialogueRandom": [
+			"Thanks, you don't know how much that helped. Time to reform you.",
+			"Melting you down felt... perfect. Back to the outside world you go.",
+			"I'm in your debt. Seriously. You don't know how bad my hunger gets.",
+			"Ah, you were a delightful meal. Toodles."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutForcedDigest": {
+		"dialogueRandom": [
+			"Heh, can't handle the heat? You sure got out of this hellhound fast.",
+			"Don't worry, I never really play for keeps",
+			"Ooh, so close to being pudge. Maybe next time~",
+			"Mm, that still helped quell my hunger a bit. Thanks."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutForcedDigestImmune": {
+		"dialogueRandom": [
+			"Thanks for allowing me to really let loose.",
+			"The heat too much for you, <entityname>?",
+			"Not a bad escape. I'll have to keep that one in mind.",
+			"And not a single pixel on you harmed."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutForcedHeal": {
+		"dialogueRandom": [
+			"Feeling better? Good.",
+			"Looks like you still have a scratch. Care for another visit?",
+			"I'm here anytime if you get hurt.",
+			"Tell your friends about my services, too."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"cockVoreLetoutForcedDigest": [
+		"Got out of my shaft before it absorbed you, eh?",
+		"Did you have to leave? It felt so good having you melt into cum! You would've been fine, promise.",
+		"I'll be... You withstood my shaft's heat and wiggled out before I was done."
+	],
+	"cockVoreLetoutForcedHeal": [
+		"I guess shaft therapy time is over.",
+		"You seem eager to be free. Just don't get 'cocky' and get hurt, or back in you go!",
+		"Feeling better now? If not, my rod of healing is always ready."
+	],
+	"unbirthVoreLetoutForcedDigested": {
+		"dialogueRandom": [
+			"Based on your sloshing, you want out. I'll gladly reform you.",
+			"You've still got some punch in your current form. Let me reform you properly.",
+			"Mmm-ngg, keep flowing in that direction and--",
+			"You need out? Alright."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreLetoutForcedDigestedHorny": {
+		"dialogueRandom": [
+			"Uunf~ Damn, I think I'm about to--",
+			"Ugh, I never should've trusted that discount aphrodisiac. Side effects include sudden--",
+			"Mmm, I've got a lot of steam built up this time~ Time to let loose~",
+			"I'd keep you for even longer, sweetie, but I'm afraid you'd disappear into thin air. Time to reform you~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"unbirthVoreLetoutForcedDigest": {
+		"dialogueRandom": [
+			"That's quite the kick. It almost makes me think--oh! You want out.",
+			"Getting too hot in there? You should've said something. You did?",
+			"Guh, you really want out. It's gonna be slick.",
+			"H-hey, if you keep pushing there, I'm gonna--"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"unbirthVoreLetoutForcedHeal": {
+		"dialogueRandom": [
+			"I see, you don't need my healing...",
+			"Okay, just give me a moment to push you out.",
+			"I won't keep you against your will this time, even though I really think you should stay and recover.",
+			"I get the message. Hold on."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreLetoutForcedDigested": {
+		"dialogueRandom": [
+			"Tired of being oogled? Back to normal for you, then.",
+			"Reforming you will be a snap. No crackle and pop, though.",
+			"You think I should start my own brand of milk? 'That B!tch's Milk'?",
+			"Thanks, it was fun jiggling you around~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreLetoutForcedDigestedHorny": {
+		"dialogueRandom": [
+			"Tired of me squeezing you once in a while~? Time to reform, then~",
+			"I got quite a few jealous looks~ If you want out, that's okay.",
+			"Fine, I'll have to find someone else to be padding~",
+			"Thanks, it was fun jiggling you around~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreLetoutForcedDigest": {
+		"dialogueRandom": [
+			"Not interested in being milk for a bit? No booby for you, then.",
+			"Aw, I was just about to buy a nice bottle of milk. Just kidding.",
+			"Being milk ain't bad. It's nutritious!",
+			"I was going to enjoy watching my boobs slowly shrink."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"breastVoreLetoutForcedDigestHungry": {
+		"dialogueRandom": [
+			"Shoot, I was going to drink you down and tease you as you reformed in my belly~",
+			"Alright, alright. I won't dip any cookies in you.",
+			"Being milk ain't bad. It's nutritious! Especially for me!",
+			"Damn. I was going to enjoy a nice drink."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreLetoutForcedDigestHorny": {
+		"dialogueRandom": [
+			"Heh, I wasn't going to go to the coffee shop and tease the customers~",
+			"Damn, it was fun watching you really slosh around.",
+			"Don't like steamed milk? I understand.",
+			"Aw. I was going to enjoy my hidden treasure~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreLetoutForcedHeal": {
+		"dialogueRandom": [
+			"You want out? Fine, just let me know if you're still interested.",
+			"Mmm, but don't you want to be even stronger?",
+			"All done? Get ready for the squeeze, then.",
+			"Milk is good for you. Anything you don't drink, I will~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"oralVoreLetoutRequestedDigested": [
+		"Here, let me reform you real quick.",
+		"You got digested, so I gotta reform you.",
+		"Ah, guess it's time to reform you.",
+		"Time to reform you, I guess."
+	],
+	"oralVoreLetoutRequestedDigestedHorny": {
+		"dialogueRandom": [
+			"It's been fun, but these love handles are getting to be a bit much~",
+			"You as pudge is nice, but these hugs are too one-sided. Time to reform~",
+			"Have to let you go for now. My next session might cause you to melt even more~",
+			"Sure, I'd love to keep you forever, but your adventure awaits."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"oralVoreLetoutRequestedDigestedHungry": {
+		"dialogueRandom": [
+			"Lugging you around as fat is nice, but I don't want to use you as fuel. Come on out.",
+			"I need a little extra space, so I gotta reform you and let you out.",
+			"I need a proper bite, so out you go.",
+			"This doesn't quite quell my hunger. Sorry, you gotta go."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutRequestedDigest": ":oralVoreLetoutRequestedDigest", // duplicated lines
+	"oralVoreLetoutRequestedDigestImmuneHorny": ":oralVoreLetoutRequestedDigestImmuneHungry", // duplicated lines
+	"oralVoreLetoutRequestedDigestImmuneHungry": {
+		"dialogueRandom": [
+			"I'd love to keep you for longer, but I feel a change coming on.",
+			"My poor belly needs a break. Give me a bit to recover, okay?",
+			"Time's up, dear.",
+			"Better stretch those muscles. I don't want you wasting away in me."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutRequestedDigestHorny": {
+		"dialogueRandom": [
+			"Ooh, don't want you to melt. That would end our fun too early~",
+			"Nah, I don't want you as fat. I want you~",
+			"Mhm, I think I have a better use for you~",
+			"Time to let you out~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"oralVoreLetoutRequestedDigestHungry": {
+		"dialogueRandom": [
+			"Oh, uh, change of plans. My gut wanted to go all the way.",
+			"Sorry, belly, but you can't keep them.",
+			"Sorry if you wanted to melt, but I'm losing control.",
+			"That takes off the edge of my hunger a bit. Thanks."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"oralVoreLetoutRequestedHeal": [
+		"You're probably patched up enough.",
+		"I think you've spent enough time healing.",
+		"I think you should be feeling much better now.",
+		"My stomach does wonders for healing, doesn't it?"
+	],
+	"oralVoreLetoutRequestedHealHorny": {
+		"dialogueRandom": [
+			"Nice and rejuvenated~",
+			"There, all good~? Ready for another round~?",
+			"Mm, sorry. My belly's starting to get in the way of my hands~",
+			"Should be good now~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"oralVoreLetoutRequestedHealHungry": {
+		"dialogueRandom": [
+			"It probably isn't enough. My hunger is just too much, though.",
+			"I'd love to keep you for longer, but it's not going to be safe for long.",
+			"Shoot, you might want to try somewhere else.",
+			"I know you want to stay in. I have to let you out, though."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
+	"analVoreLetoutRequestedDigest": [
+		"I think you won't be adding to my rear today, butt buddy!",
+		"I'll let you go this time, but next time my rear will catch you!"
+	],
+	"analVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I think my healing booty has done enough. I hope it soothed you!"
+			]
+		],
+		"full": [
+			"All better! Time to come out from the safety of my rear."
+		]
+	},
+	"cockVoreLetoutRequestedDigest": ":cockVoreLetoutRequestedDigest", // duplicated lines
+	"cockVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I don't have the time to patch you up fully. I hope you soaked in my cum long enough!"
+			]
+		],
+		"full": [
+			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
+		]
+	},
+	"unbirthVoreLetoutRequestedDigest": ":unbirthVoreLetoutRequestedDigest", // duplicated lines
+	"unbirthVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I hope my womb was cozy, but I can't keep holding you in there. Even if you aren't fully healed yet..."
+			]
+		],
+		"full": [
+			"Feels like my womb's juices have gotten you all patched up, so i'ts time to let you out."
+		]
+	},
+	"breastVoreLetoutRequestedDigestedHorny": {
+		"dialogueRandom": [
+			"Alright, that's enough teasing from me~ Time to reform~",
+			"Aw, no takers on wanting you as a drink. I'll reform you, then.",
+			"You looked good on me. My fur keeps getting wet, so I'm reforming you.",
+			"Thanks, it was fun seeing who I could tease~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreLetoutRequestedDigest": [
+		"Be glad I'm not making you into a temporary batch of milk today.",
+		"I'll let you go for now, but you're adding to my jugs next time!"
+	],
+	"breastVoreLetoutRequestedDigestHungry": {
+		"dialogueRandom": [
+			"While it's tempting to turn you into milk, I'd prefer a more solid meal if you catch my drift~",
+			"Getting a little too soft for my tastes.",
+			"I'm hungry. Could I trouble you to fetch me something?",
+			"Ugh, I need to be a little more aerodynamic to catch my prey. Sorry."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"breastVoreLetoutRequestedDigestHorny": {
+		"dialogueRandom": [
+			"I hope you enjoyed your stay~ It's getting too steamy, though, so you'll have to leave.",
+			"Damn, my body has the worst timing sometimes.",
+			"Sorry, I'm just getting way too heated. I can give you a glass if you'd like, though?",
+			"My friend likes me nice and big, so you'll have to wait until next time~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"breastVoreLetoutRequestedHeal": {
+		"percentage": "targetHealth",
+		"pools": [
+			[
+				"I know my boobs are cozy... but I gotta let you out, even if the milk bath hasn't finished soothing your wounds..."
+			]
+		],
+		"full": [
+			"I think your milk bath is done! How do you feel?"
+		]
+	},
+	"breastVoreLetoutRequestedHealHungry": {
+		"dialogueRandom": [
+			"I think that's enough milk for you. I'd like to still be able to squeeze you out!",
+			"All healed up? Good, that'll be 100 Pixels per gallon. Just kidding~",
+			"Ooh, I can tell you're stronger than before. Go kick some ass!",
+			"Hehe, would you like some cookies as well?"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggling": {
+		"dialogueRandom": [
+			[
+				"This feels quite nice.",
+				"Are you enjoying yourself? I am.",
+				"Ooh, this is a new one for me.",
+				"I'll keep going for as long as you like."
+			]
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingDigest": {
+		"dialogueRandom": [
+			"^red;Not a great idea, <entityname>."
+		],
+		"imagePortrait": [
+			"HBork.png"
+		]
+	},
+	"strugglingDigestImmuneHungry": ":strugglingDigestImmune", // duplicated lines
+	"strugglingDigestImmuneHorny": ":strugglingDigestImmune", // duplicated lines
+	"strugglingSlime": {
+		"dialogueRandom": [
+			"Nice, I can see out of you slightly.",
+			"Mm, this is fancy.",
+			"I see. So this is why slimes are starter enemies.",
+			"I haven't been this wet in a while."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingSlimeHungry": {
+		"dialogueRandom": [
+			"Sorry if I nibble on you a bit. I'm starving.",
+			"Mmm, I wonder how you taste from within?",
+			"Mind absorbing a quick snack for me?",
+			"It's like being inside a nice dessert..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingSlimeHorny": {
+		"dialogueRandom": [
+			"This feels good~ Hope you don't mind me adding my fluids to your mix~",
+			"Feel free to explore as much as you like~",
+			"Ooh, this is perfect~",
+			"Nice, sticky, and wet~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingSlimeDigestImmune": {
+		"dialogueRandom": [
+			"Ah, naughty. I can't melt like that, dear.",
+			"Try to claim me as much as you want. I won't melt completely.",
+			"If you lighten up, I'll gladly join you for a bit.",
+			"Slimes are weak for a reason. You can't melt me."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingSlimeDigest": {
+		"dialogueRandom": [
+			"I'll gladly join you.",
+			"Seeing myself disappear is oddly exciting!",
+			"Heh, we're about to become cinnamon-flavored.",
+			"How intimate~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingSlimeDigestHungry": {
+		"dialogueRandom": [
+			"I'll gladly join you. Let's absorb lots together.",
+			"So this is what it's like in my stomach right now.",
+			"Heh, we're about to become cinnamon-flavored.",
+			"How intimate~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingSlimeDigestHorny": {
+		"dialogueRandom": [
+			"I'll gladly add even more to your slime~",
+			"Seeing myself disappear is so arousing~",
+			"Heh, we're about to become cinnamon-flavored~",
+			"Hope you don't absorb my libido, too~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingSlimeHeal": {
+		"dialogueRandom": [
+			"That's good. I'm feeling much better.",
+			"Ooh, that tingles!",
+			"Thanks, but those scars are permanent.",
+			"I like this a lot."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"strugglingSlimeHealHungry": {
+		"dialogueRandom": [
+			"I like this. It helps keep my mind off the hunger.",
+			"That feels... nice...",
+			"Just a nibble, okay? No? Alright.",
+			"Now I just need a snack and this will be perfect..."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingSlimeHealHorny": {
+		"dialogueRandom": [
+			"You can heal, too? My, such a talented slime~",
+			"Keeping me energized, huh? Alright~",
+			"Mm-ng~ That's nice...",
+			"H-haaa~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingSlimeTransforming": ":strugglingTransformingBelly", // duplicated lines
+	"strugglingTransformingBelly": {
+		"dialogueRandom": [
+			"Mm, no?"
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"strugglingCumTransformingImmune": ":strugglingTransformingImmune", // duplicated lines
+	"strugglingCumDigestImmuneBalls": ":strugglingDigestImmune", // duplicated lines
+	"oralVoreLetoutForcingAfterDigest": [
+		"Whew... I got you to spit me out before I was done for!"
+	],
+	"oralVoreLetoutForcingAfterDigestImmune": [
+		"I got you to spit me out, though I wasn't really in any danger."
+	],
+	"oralVoreLetoutForcingAfterHeal": [
+		"Sorry, but I'm all healed up, I think. I needed you to spit me up."
+	],
+	"analVoreLetoutForcingAfterDigest": [
+		"Whew, I barely got out of your rear without adding to it!"
+	],
+	"analVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I managed to get out though your bottom, though I wasn't in any danger."
+	],
+	"analVoreLetoutForcingAfterHeal": [
+		"Who knew you could come out a butt so refreshed!"
+	],
+	"cockVoreLetoutForcingAfterDigest": [
+		"Whew, I wiggled out of your shaft before it melted me!"
+	],
+	"cockVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I got out your shaft, though it couldn't do any harm to me."
+	],
+	"cockVoreLetoutForcingAfterHeal": [
+		"I squirmed out your cock and I feel really good after all that!"
+	],
+	"unbirthVoreLetoutForcingAfterDigest": [
+		"Whew, I managed to get out of your womb. If I didn't, I'd be melted by now!"
+	],
+	"unbirthVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I got out your womb, though I wasn't really in danger inside it."
+	],
+	"unbirthVoreLetoutForcingAfterHeal": [
+		"I wiggled my way out your womb and I feel as good as new!"
+	],
+	"breastVoreLetoutForcingAfterDigest": [
+		"Whew, I got out of your boob before I was added to its milk!"
+	],
+	"breastVoreLetoutForcingAfterDigestImmune": [
+		"Looks like I found my way out your boob, though I wasn't in danger inside it."
+	],
+	"breastVoreLetoutForcingAfterHeal": [
+		"Ah... I wiggled my way out your boob, and I feel so much better too!"
+	],
+	"oralVoreLetoutUnpromptedAfterDigest": [
+		"Thanks for spitting me up. I was going to be added to you!"
+	],
+	"oralVoreLetoutUnpromptedAfterDigestImmune": [
+		"Thanks for spitting me up. Maybe you realized you can't digest me?"
+	],
+	"oralVoreLetoutUnpromptedAfterHeal": [
+		"Oh man, that was a great experience. I feel so refreshed after some time in your gut."
+	],
+	"analVoreLetoutUnpromptedAfterDigest": [
+		"W-wah! Thanks for releasing me out your rear before was I added to it!"
+	],
+	"analVoreLetoutUnpromptedAfterDigestImmune": [
+		"Well, looks like you pushed me out your rear. Did you realize I can't be added to it?"
+	],
+	"analVoreLetoutUnpromptedAfterHeal": [
+		"W-wah! I never felt so good after being squeezed out a butt!"
+	],
+	"cockVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out your shaft, I was about to be gooey mush!"
+	],
+	"cockVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you let me out your shaft. Figured out I can't get melted by it?"
+	],
+	"cockVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for letting me out your cock. I never felt better after my time inside it!"
+	],
+	"unbirthVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out of your womb, I was almost melted by it!"
+	],
+	"unbirthVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you freed me from your womb. Guess you realized I won't melt in it?"
+	],
+	"unbirthVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for squeezing me out your womb. Your rejuvenating chamber has left me feeling amazing!"
+	],
+	"breastVoreLetoutUnpromptedAfterDigest": [
+		"Whew! Thanks for getting me out your boob, I was almost added to your milk!"
+	],
+	"breastVoreLetoutUnpromptedAfterDigestImmune": [
+		"Looks like you pushed me out your boob, though I was in no danger from turning into milk."
+	],
+	"breastVoreLetoutUnpromptedAfterHeal": [
+		"Ah, thanks for pushing me out your boob. That soothing milk bath has made me feel stronger!"
+	],
+	"infused": [
+		"<slowlove>",
+		"<love>",
+		[
+			[
+				"(Just a part of your body~)",
+				"(Just a part of <entityname>'s body~)"
+			],
+			"<slowlove>(I belong here don't I...~)",
+			"<slowlove>(I belong here... just a part of <entityname>~)",
+			"<love>(<keysmash>)"
+		]
+	],
+	"strugglingHungry": {
+		"dialogueRandom": [
+			[
+				"Not bad. Getting a little hungry, though.",
+				"Are you enjoying yourself? I am, but I might need a snack in a bit.",
+				"Ugh, I might have to ask you to send me some food.",
+				"I'll keep going for as long as you like. Or until my hunger gets too hard to bear."
+			]
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"strugglingHorny": {
+		"dialogueRandom": [
+			[
+				"This feels amazing~",
+				"Are you having fun? I am, too~",
+				"Ooh, this is a sexy new experience for me.",
+				"Don't mind me if I get quiet all of a sudden~"
+			]
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingTransformed": {
+		"dialogueRandom": [
+			"Mm, sorry."
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"strugglingTransformedHorny": {
+		"dialogueRandom": [
+			"Mm, sorry~"
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"strugglingTransformingHorny": {
+		"dialogueRandom": [
+			"Mm, no~?"
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"vored": {
+		"dialogueRandom": [
+			"Oh!",
+			"How exciting!",
+			"Yes, take me.",
+			"That's new!"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"voredHungry": {
+		"dialogueRandom": [
+			"Oh!",
+			"I knew I should've struck first.",
+			"You win.",
+			"Where am I going?"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"voredHorny": {
+		"dialogueRandom": [
+			"Oh~",
+			"I was hoping you would~",
+			"Mmm~",
+			"A-ah!"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleEscape": {
+		"dialogueRandom": [
+			"Oops! I slipped out.",
+			"Couldn't keep me in, hm?",
+			"Ready for the next round?",
+			"Mm, fresh air."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleEscapeHungry": {
+		"dialogueRandom": [
+			"Sorry, but I'm hungry.",
+			"I'd stay, but my stomach is talking to me.",
+			"My stomach needs tending to. Care to repay the favor?",
+			"I gotta hunt, so I'm out for now."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleEscapeHorny": {
+		"dialogueRandom": [
+			"I've had enough fun~",
+			"That was a treat~",
+			"Let's go again soon~",
+			"That really got me going~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"escape": {
+		"dialogueRandom": [
+			"Aw, already?",
+			"Tired? I'd gladly do the same.",
+			"Thanks. I had fun.",
+			"Hit me up anytime."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"escapeHungry": {
+		"dialogueRandom": [
+			"Thanks, I need to find something to eat.",
+			"I appreciate it. Catch you soon.",
+			"Oh? Care to switch roles, then?",
+			"I liked that. Let's do it again."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"escapeHorny": {
+		"dialogueRandom": [
+			"Mm, alright~",
+			"Want me to return the favor~?",
+			"That was hot~",
+			"You know where to find me, dear~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"infusePreyNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
+	"sizeChangedShrinkFiendly": {
+		"dialogueRandom": [
+			"^red;Going to throw me at someone?",
+			"^red;Small or not, I'm still capable.",
+			"^red;Be careful where you put me.",
+			"^red;I'm trusting you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutUnpromptedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Thanks. Your breasts are amazing.",
+			"^red;Is it my turn next? I can do so, too.",
+			"^red;Kind of rare to do that. I liked it.",
+			"^red;Great, now I'm pissed again. Your boobs were comfy!"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutForcingAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Sorry, I'm done. Even I'm getting flustered.",
+			"^red;I got things to do. Nice chest, though.",
+			"^red;Heh, not bad. Want to try mine?",
+			"^red;I had fun. Another time, dear."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"cockVoreLetoutUnpromptedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Thanks. My nose was hurting a bit.",
+			"^red;Is it my turn next? Your pick.",
+			"^red;How about we both tease someone? It'd be great.",
+			"^red;Great, now I'm pissed again. Not that kind."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"cockVoreLetoutForcingAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Done being hot dog stuffing. Be back soon.",
+			"^red;I got things to do. No, not you.",
+			"^red;Another time. I love it in there.",
+			"^red;Be thankful I'm gentle."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutUnpromptedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Thanks. I felt safe.",
+			"^red;Is it my turn next? My body is ready.",
+			"^red;How about we both tease someone? Pin a gravid gut against them.",
+			"^red;Great, now I'm pissed again. That's how nice your womb felt."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcingAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Sorry, I'm due for something.",
+			"^red;I got things to do. You're welcome to ride along.",
+			"^red;Don't be sad. I'll be back shortly.",
+			"^red;I'm getting restless."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutUnpromptedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Thanks.",
+			"^red;Is it my turn next?",
+			"^red;How about we both catch someone?",
+			"^red;Great, now I'm pissed again. Your gut was nice to be in."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutForcingAfterFiendly": {
+		"dialogueRandom": [
+			"^red;Sorry, I pushed too hard.",
+			"^red;Nice gut. Care to visit mine?",
+			"^red;Heh, not bad. You've got a nice belly.",
+			"^red;Can't keep a feisty demon down?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"escapeFiendly": {
+		"dialogueRandom": [
+			"^red;Thanks.",
+			"^red;Is it my turn next?",
+			"^red;How about we both tease someone?",
+			"^red;Great, now I'm pissed again."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreUnpromptedFiendly": {
+		"dialogueRandom": [
+			"^red;Oh.",
+			"^red;So soft...",
+			"^red;Got a hot date?.",
+			"^red;So kinky~"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreUnpromptedFiendly": {
+		"dialogueRandom": [
+			"^red;Oh.",
+			"^red;Nice catch.",
+			"^red;Can you handle me?",
+			"^red;How smooth."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreUnpromptedFiendly": {
+		"dialogueRandom": [
+			"^red;Oh.",
+			"^red;So wet...",
+			"^red;I'm all yours.",
+			"^red;So kinky!"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleEscapeFiendly": {
+		"dialogueRandom": [
+			"^red;Sorry, I'm done.",
+			"^red;I got things to do.",
+			"^red;Heh, not bad. But I'm better.",
+			"^red;Can't keep a feisty demon down."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"sizeChangedGrowFiendly": {
+		"dialogueRandom": [
+			"^red;Good. No one will mess with us.",
+			"^red;Sorry if I step on you.",
+			"^red;Need protection? Come here.",
+			"^red;Now I can keep you safe."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"didSteppyFiendly": {
+		"dialogueRandom": [
+			"^red;Hey, be careful.",
+			"^red;Sorry, I'm on the move.",
+			"^red;Grrrr, at least you're not a Lego.",
+			"^red;Odd, they were here a moment ago."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"converseFiendly.continue.options.0.1": {
+		"dialogue": [
+			"^red;I'm Helena. What's your name?",
+			"<entityname>. ^red;Good. You're on my list.",
+			"^red;List of souls I won't take. Don't ask. I won't do it."
+		],
+		"buttonText": [
+			"Sure.",
+			"List?",
+			"Alright."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.continue.options.1.1": {
+		"dialogue": [
+			"^red;Yes. It shows in times like this.",
+			"^red;You're safe, in any case. I've learned to control myself.",
+			"^red;Yes. I'm 'That B!**h' for a reason."
+		],
+		"buttonText": [
+			"Is it safe?",
+			"Are you okay?",
+			"Alright."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"converseFiendly.continue.options.2.1": {
+		"dialogue": [
+			"^red;Ah. That. Take off the r.",
+			"^red;Yeah. Next time my clumsy friend visits, I'm gonna eat him."
+		],
+		"buttonText": [
+			"Alright?",
+			"Okay."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.continue.options.3.1": {
+		"dialogue": [
+			"^red;Nothing special. Take what you will of that."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.continue.options.3.1.heal": {
+		"dialogue": [
+			"^red;Only part of me not angry. Might mend you up."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.continue.options.3.1.digest": {
+		"dialogue": [
+			"^red;You're going to melt. Become pudge. But it isn't fatal."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"hhconverseFiendly.continue.options.0.1": {
+		"dialogue": [
+			"^red;I'm Helena. This anger doesn't happen to you.",
+			"^red;You're on my list.",
+			"^red;List of souls I won't take. Don't ask. I won't do it."
+		],
+		"buttonText": [
+			"Sure.",
+			"List?",
+			"Alright."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"hhconverseFiendly.continue.options.1.1": {
+		"dialogue": [
+			"^red;Yes. But not fully.",
+			"^red;You're safe. You don't have this rage. It can be hard to smother.",
+			"^red;Yes. I'm 'That B!tch' for a reason."
+		],
+		"buttonText": [
+			"Is it safe?",
+			"Are you okay?",
+			"Alright."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"hhconverseFiendly.continue.options.2.1": {
+		"dialogue": [
+			"^red;Ah. That. Take off the r.",
+			"^red;Yeah. Next time I see Mystic, I'm gonna eat him."
+		],
+		"buttonText": [
+			"Fiendly?",
+			"Noted."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"hmph": [
+		"^red;Hmph.^reset;"
+	], // duplicated lines
+	"greetingFiendly": {
+		"dialogueRandom": [
+			"^red;Yo.",
+			"^red;Yes?",
+			"^red;Hello."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		],
+		"buttonTextRandom": [
+			"Hiya.",
+			"Hi.",
+			"Hey."
+		]
+	},
+	"greetingFiendlyHellhound": {
+		"dialogueRandom": [
+			"^red;HellYo.",
+			"^red;Yes?",
+			"^red;Hello."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		],
+		"buttonTextRandom": [
+			"HellYo.",
+			"Hello.",
+			"Hello!"
+		]
+	},
+	"converseFiendly": {
+		"dialogueRandom": [
+			"^red;Not the best time.",
+			"^red;Make it quick.",
+			"^red;Keep it short and sweet."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		],
+		"buttonText": [
+			"..."
+		]
+	},
+	"converseFiendly.continue": {
+		"dialogueRandom": [
+			"^red;So, spit it out.",
+			"^red;Speak.",
+			"^red;What is it?"
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.question.random1": {
+		"dialogue": [
+			"^red;Anything else?"
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.question.random1.continue": {
+		"dialogue": [
+			"^red;Fine."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.question.random2": {
+		"dialogue": [
+			"^red;There. Still curious?"
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"converseFiendly.question.random2.continue": {
+		"dialogue": [
+			"^red;And?"
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"oralVoreRequestedFiendly": {
+		"dialogueRandom": [
+			"^red;Not afraid? Good.",
+			"^red;Seriously? Fine.",
+			"^red;Need protection? Get in.",
+			"^red;Desperate, huh?"
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"oralVoreRequestedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;You're safe.",
+			"^red;It'll be okay.",
+			"^red;Now relax.",
+			"^red;I'll protect you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreNoPromptFiendly": {
+		"dialogueRandom": [
+			"^red;I'm not asking.",
+			"^red;I smell danger.",
+			"^red;It's not safe.",
+			"^red;I found you."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"oralVoreNoPromptAfterFiendly": {
+		"dialogueRandom": [
+			"^red;You're mine now.",
+			"^red;Don't fight this.",
+			"^red;Take it easy.",
+			"^red;Let me help."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreNoFiendly": {
+		"dialogueRandom": [
+			"^red;Bad idea. You won't just melt.",
+			"^red;No.",
+			"^red;Not. Now.",
+			"^red;Soon. I promise."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"oralVoreFullFiendly": {
+		"dialogueRandom": [
+			"^red;I can't.",
+			"^red;Already occupied.",
+			"^red;Try again later.",
+			"^red;Sorry. I'm full."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreFullHealFiendly": {
+		"dialogueRandom": [
+			"^red;They're hurt. I'm full. Sorry.",
+			"^red;Gotta heal them first.",
+			"^red;No more room.",
+			"^red;Give them time."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreFullDigestFiendly": {
+		"dialogueRandom": [
+			"^red;I'm full. They'll be fine.",
+			"^red;It's hard to walk. Making them pudge helps.",
+			"^red;They're melting. It's safe. You can join later.",
+			"^red;Rub my belly. Please?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"fiendlyOtherFull": {
+		"dialogueRandom": [
+			"^red;I'm at my limits. Sorry.",
+			"^red;You'll have to protect yourself. You won't fit.",
+			"^red;I'd try, but it'd be bad.",
+			"^red;Too many... prey..."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreTooBigFiendly": {
+		"dialogueRandom": [
+			"^red;You're big enough. Protect yourself.",
+			"^red;It's no use. You're too big.",
+			"^red;That's impossible.",
+			"^red;I tried once when I was like this. It sucked."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreRequestedFiendly": {
+		"dialogueRandom": [
+			"^red;Really. Fine.",
+			"^red;Whatever floats your boat.",
+			"^red;As you wish.",
+			"^red;You're that horny, huh?"
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"breastVoreRequestedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;You happy? Good.",
+			"^red;Don't drown.",
+			"^red;Now drink up.",
+			"^red;At least you're safe."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreNoPromptFiendly": {
+		"dialogueRandom": [
+			"^red;I'm low on time. This'll do.",
+			"^red;They're coming. I'll hide you.",
+			"^red;It's dangerous. Let me hug you.",
+			"^red;Caught you looking."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"breastVoreNoPromptAfterFiendly": {
+		"dialogueRandom": [
+			"^red;I'll carry you.",
+			"^red;It'll be fine.",
+			"^red;Just trust me.",
+			"^red;Try not to move so much."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreNoFiendly": {
+		"dialogueRandom": [
+			"^red;Seriously? Not in the mood.",
+			"^red;I'm sore. Ask later.",
+			"^red;You'd disappear into the abyss. Not right now.",
+			"^red;Sorry. Pick somewhere else."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"breastVoreFullFiendly": {
+		"dialogueRandom": [
+			"^red;What? Admiring my assets? Fine.",
+			"^red;You may stare.",
+			"^red;It's full. Find another opening.",
+			"^red;Give them a squeeze. If you'd like."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreFullHealFiendly": {
+		"dialogueRandom": [
+			"^red;Stop worrying. They'll be fine.",
+			"^red;They're thirsty. Please wait.",
+			"^red;Almost done. Maybe not.",
+			"^red;Mind rubbing them?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreFullDigestFiendly": {
+		"dialogueRandom": [
+			"^red;Want a drink? Might burn your tongue.",
+			"^red;Someone missing? Haven't seen them.",
+			"^red;I can't. No room.",
+			"^red;Feel free to feel them."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreTooBigFiendly": {
+		"dialogueRandom": [
+			"^red;Too big. Please shrink down.",
+			"^red;I'd never fit in another shirt. No.",
+			"^red;I just can't. You're massive.",
+			"^red;I'd love to. But I'd crash e621."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreRequestedFiendly": {
+		"dialogueRandom": [
+			"^red;Just get in.",
+			"^red;Since you asked.",
+			"^red;It'll be hot and wet.",
+			"^red;Slip into my abyss."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"unbirthVoreRequestedAfterFiendly": {
+		"dialogueRandom": [
+			"^red;This helps. Thanks.",
+			"^red;Claimed by me.",
+			"^red;Safety in numbers.",
+			"^red;The calm within the storm."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreNoPromptFiendly": {
+		"dialogueRandom": [
+			"^red;My body needs this.",
+			"^red;This'll be rough.",
+			"^red;You'll be fine.",
+			"^red;Surprise."
+		],
+		"imagePortrait": [
+			"HAngry.png"
+		]
+	},
+	"unbirthVoreNoPromptAfterFiendly": {
+		"dialogueRandom": [
+			"^red;O-ooh...",
+			"^red;F-fwah...",
+			"^red;A-ahh...",
+			"^red;M-mmn..."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreFullFiendly": {
+		"dialogueRandom": [
+			"^red;You're too late. They're mine. For now.",
+			"^red;I couldn't resist. Sorry.",
+			"^red;I'd like a belly rub.",
+			"^red;Should be done soon."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreFullHealFiendly": {
+		"dialogueRandom": [
+			"^red;Getting them fixed.",
+			"^red;Quiet. They're tired.",
+			"^red;Join us later.",
+			"^red;You can be next."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreFullDigestFiendly": {
+		"dialogueRandom": [
+			"^red;All mine.",
+			"^red;Mostly soft by now.",
+			"^red;They will reform.",
+			"^red;Interested?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreTooBigFiendly": {
+		"dialogueRandom": [
+			"^red;One of us would get crushed.",
+			"^red;I'm not that desperate.",
+			"^red;You're big. I'm not so big.",
+			"^red;I'd consider it. But I know better."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleBellyFiendly": {
+		"dialogueRandom": [
+			"^red;Quit it. You're safe.",
+			"^red;Stay down.",
+			"^red;Feels good, but stop.",
+			"^red;Want me to keep you there?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleHealBellyFiendly": {
+		"dialogueRandom": [
+			"^red;You're hurt. Don't.",
+			"^red;Eager to risk it all? Pass.",
+			"^red;Grrrr....",
+			"^red;I'm trying to help."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleDigestBellyFiendly": {
+		"dialogueRandom": [
+			"^red;It won't last long. I'll reform you.",
+			"^red;Melt. Let me bear your burdens for now.",
+			"^red;I need to be more compact. Sorry.",
+			"^red;It'll be fine."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleDigestImmuneBellyFiendly": {
+		"dialogueRandom": [
+			"^red;Sorry. My gut wants to try anyway.",
+			"^red;You're tough. Few resist this.",
+			"^red;It's just gurgling. It's okay.",
+			"^red;Immune? Good, I can let loose."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleCompressionBellyFiendly": {
+		"dialogueRandom": [
+			"^red;No bulges. Perfect.",
+			"^red;Just relax. You're safe from everyone.",
+			"^red;Hidden from danger.",
+			"^red;Mine now."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeBellyFiendly": {
+		"dialogueRandom": [
+			"^red;I told you to settle down.",
+			"^red;I don't joke. It's futile.",
+			"^red;I'll let you out. Eventually.",
+			"^red;I won't let you get hurt."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeCountdownBellyFiendly": {
+		"dialogue": [
+			"^red;Keep it up and I'll keep you.",
+			"^red;Not going to give up?",
+			"^red;Hmph.",
+			"^red; No escape now."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeReleaseBellyFiendly": {
+		"dialogue": [
+			"^red;I think it's safe now.",
+			"^red;You put up a good effort.",
+			"^red;I'll let you out now.",
+			"^red;You're good to go."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleWombFiendly": {
+		"dialogueRandom": [
+			"^red;Good. Keep moving.",
+			"^red;Hush.",
+			"^red;Your safety comes first.",
+			"^red;I can handle you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleFemcumHealFiendly": {
+		"dialogueRandom": [
+			"^red;Relax. You deserve this.",
+			"^red;I will always protect you.",
+			"^red;Ssh... It's fine.",
+			"^red;Let your enemies try me. They will fail."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleTransformedWombFiendly": {
+		"dialogueRandom": [
+			"^red;You're like me now.",
+			"^red;Safety in numbers.",
+			"^red;We both bork now.",
+			"^red;A new you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleTransformingWombFiendly": {
+		"dialogueRandom": [
+			"^red;You're slowly changing now.",
+			"^red;A bit of me to protect you.",
+			"^red;I'm reshaping your heat.",
+			"^red;You'll be hot. I promise."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleTransformingImmuneWombFiendly": {
+		"dialogueRandom": [
+			"^red;Immune? That's okay.",
+			"^red;Sorry, can't help it.",
+			"^red;Keep squirming, anyway. Feels good.",
+			"^red;You're too pure. I love it."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleEggedWombFiendly": {
+		"dialogueRandom": [
+			"^red;Smash Bros 64. Yoshi. Murrr."
+		],
+		"imagePortrait": [
+			"HBlep.png"
+		]
+	},
+	"struggleEggifyWombFiendly": {
+		"dialogueRandom": [
+			"^red;Heh. Egg.",
+			"^red;Hope this one doesn't explode.",
+			"^red;Makes me feel like a Pokémon.",
+			"^red;A good look for you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleEggifyImmuneWombFiendly": ":struggleEggifyImmuneWomb", // duplicated lines
+	"struggleFemcumDigestFiendly": {
+		"dialogueRandom": [
+			"^red;I know. It'll be fine.",
+			"^red;Feels good. You're softer now.",
+			"^red;Struggle more. It'll get hotter.",
+			"^red;You'll reform later."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleFemcumDigestImmuneFiendly": {
+		"dialogueRandom": [
+			"^red;It's spicy, I know.",
+			"^red;Push there again. \nThanks.",
+			"^red;Nice and firm~",
+			"^red;Getting me more horny~"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleCompressionWombFiendly": {
+		"dialogueRandom": [
+			"^red;Gonna keep you a secret.",
+			"^red;Not even a single bump~",
+			"^red;Hush.. You're mine now..",
+			"^red;Just let me keep you hidden. The world is cruel."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeWombFiendly": {
+		"dialogueRandom": [
+			"^red;This contract is unbreakable.",
+			"^red;Struggle. Relax. You're fine both ways.",
+			"^red;Kick, punch, and chop away. You're still blocked in.",
+			"^red;I'll let you out. Once I'm satisfied."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeCountdownWombFiendly": {
+		"dialogue": [
+			"^red;Don't want you to slip out.",
+			"^red;A little fire. \nMixed with my desire.",
+			"^red;Will keep my lower lips. \nFrom ever getting tired.",
+			"^red;The deed is done."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeReleaseWombFiendly": {
+		"dialogue": [
+			"^red;Spell is wearing off.",
+			"^red;Mmm, starting to quiver.",
+			"^red;Mm, can't hold much longer.",
+			"^red;Want to leave? You can now."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleBreastsFiendly": {
+		"dialogueRandom": [
+			"^red;You're such a freak for enjoying this.",
+			"^red;I bet my growls feel real good to you.",
+			"^red;Drink if you're thirsty.",
+			"^red;Squirm more. All the perverts love it. Me too."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleDigestBreastsFiendly": {
+		"dialogueRandom": [
+			"^red;I turned up the heat. Not sorry.",
+			"^red;Your sloshing is getting louder.",
+			"^red;Grrrr, that feels nice.",
+			"^red;I can feel you. You're soft."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleDigestImmuneBreastsFiendly": {
+		"dialogueRandom": [
+			"^red;Distracting, but I like it.",
+			"^red;Don't want to be milk? I'll stop.",
+			"^red;Alright. Being this big is nice, too.",
+			"^red;Relax. Nothing's happening."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleCompressionBreastsFiendly": {
+		"dialogueRandom": [
+			"^red;Heh, hidden from sight.",
+			"^red;My little secret.",
+			"^red;No one can find you.",
+			"^red;Relax. You're all mine."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeBreastsFiendly": {
+		"dialogueRandom": [
+			"^red;This metal is older than you are. It won't break.",
+			"^red;Hmhm, shake shake...",
+			"^red;Damn, that's so hot.",
+			"^red;Didn't read my shirt, did you?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeCountdownBreastsFiendly": {
+		"dialogue": [
+			"^red;Hmph, you almost slipped out.",
+			"^red;I don't want you to leave just yet.",
+			"^red;This old piercing should do the trick.",
+			"^red;*click* Tucked away."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeReleaseBreastsFiendly": {
+		"dialogue": [
+			"^red;Looks like it's coming loose.",
+			"^red;Heh. It only cost ten Pixels.",
+			"^red;You're almost there.",
+			"^red;Ah, it broke."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutForcedFiendly": {
+		"dialogueRandom": [
+			"^red;It's dangerous. Get back in.",
+			"^red;You're fine. I can carry you.",
+			"^red;Alright, fine.",
+			"^red;Got places to be?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutForcedHealFiendly": {
+		"dialogueRandom": [
+			"^red;I'm not done. Come here.",
+			"^red;You sure?",
+			"^red;Come back if you need healing.",
+			"^red;...Okay."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutForcedDigestFiendly": {
+		"dialogueRandom": [
+			"^red;Sorry, needed to be slimmer.",
+			"^red;Too hot? Okay.",
+			"^red;I was trying to hide you.",
+			"^red;Fine."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutForcedDigestImmuneFiendly": {
+		"dialogueRandom": [
+			"^red;You were fine.",
+			"^red;It wasn't bad, was it?",
+			"^red;No harm done.",
+			"^red;Help yourself, then."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutForcedDigestedFiendly": {
+		"dialogueRandom": [
+			"^red;Want out? One moment.",
+			"^red;Done being pudge? Alright.",
+			"^red;Careful. You're weak.",
+			"^red;I'll reform you, then."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutFiendly": {
+		"dialogueRandom": [
+			"^red;It's safe now. Come out.",
+			"^red;This should do. Out you go.",
+			"^red;No enemies in sight. I'm releasing you.",
+			"^red;I took care of it."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutHealFiendly": {
+		"dialogueRandom": [
+			"^red;You're good now. I'm pushing you out.",
+			"^red;If you're hurt, come back.",
+			"^red;Can you fight? Okay, I'm done.",
+			"^red;Don't thank me. I'll always help."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutDigestFiendly": {
+		"dialogueRandom": [
+			"^red;You're melting. Time to leave.",
+			"^red;Sorry. Gotta let you out.",
+			"^red;Damn, not now. My belly isn't safe.",
+			"^red;Losing control. I have to release you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"oralVoreLetoutDigestedFiendly": {
+		"dialogueRandom": [
+			"^red;It's safe. I'll reform you.",
+			"^red;They couldn't find you. Bringing you back.",
+			"^red;Fat is nice. Using it as fuel is not. Get out.",
+			"^red;Hunting is difficult. You have to leave."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcedFiendly": {
+		"dialogueRandom": [
+			"^red;Damn. Okay.",
+			"^red;I was having fun...",
+			"^red;It'll be slick. Watch your step.",
+			"^red;Seriously? I was feeling--"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcedHealFiendly": {
+		"dialogueRandom": [
+			"^red;I'm not done. Get back in.",
+			"^red;I could keep you. But you know better.",
+			"^red;Out you go, then.",
+			"^red;...buzzkill."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcedDigestFiendly": {
+		"dialogueRandom": [
+			"^red;I understand. Here goes.",
+			"^red;My mistake. I'll let you out.",
+			"^red;It's too hot? One second.",
+			"^red;I didn't realize. Let me help you out."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcedTransformedFiendly": {
+		"dialogueRandom": [
+			"^red;Hot damn. You look good.",
+			"^red;See? It's not bad.",
+			"^red;It's temporary. Milk helps.",
+			"^red;My friend will be jealous."
+		],
+		"imagePortrait": [
+			"HJoyful.png"
+		]
+	},
+	"unbirthVoreLetoutForcedTransformingFiendly": {
+		"dialogueRandom": [
+			"^red;No changes? I understand.",
+			"^red;You would've looked sexy.",
+			"^red;Ask again later if you like.",
+			"^red;Ow. Tell me next time."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcedTransformingImmuneFiendly": ":unbirthVoreLetoutForcedTransforming", // duplicated lines
+	"unbirthVoreLetoutForcedEggedFiendly": ":unbirthVoreLetoutForcedEgged", // duplicated lines
+	"unbirthVoreLetoutForcedEggifyFiendly": {
+		"dialogueRandom": [
+			"^red;No egg? Alright.",
+			"^red;I see. Not in the mood?",
+			"^red;Another day, another egg.",
+			"^red;I wouldn't nickname you. You're not a Pokémon."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutForcedEggifyImmuneFiendly": ":unbirthVoreLetoutForcedTransforming", // duplicated lines
+	"unbirthVoreLetoutForcedDigestedFiendly": {
+		"dialogueRandom": [
+			"^red;Good flow. I'll reform you.",
+			"^red;Done in there? I'll push, then.",
+			"^red;Longer would've been nice...",
+			"^red;Okay. Make sure to heal."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutFiendly": {
+		"dialogueRandom": [
+			"^red;Heh. Birthed by a b!tch.",
+			"^red;Good enough. Out.",
+			"^red;Come out, or I'm coming.",
+			"^red;My rent is too high. You're evicted."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutHealFiendly": {
+		"dialogueRandom": [
+			"^red;Get hurt again; you know where to find me.",
+			"^red;Gotta make room. Someone might be hurt.",
+			"^red;Our time is up for now.",
+			"^red;I liked this. Let's do it again."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutDigestFiendly": {
+		"dialogueRandom": [
+			"^red;Not good. You're melting too much. Back outside you go.",
+			"^red;My womb wants too much. I'm releasing you.",
+			"^red;Change of plans. I need you more firm.",
+			"^red;Ah, too hot. You're melting."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"unbirthVoreLetoutTransformedFiendly": ":unbirthVoreLetoutForcedTransformedFiendly", // duplicated lines
+	"unbirthVoreLetoutDigestedFiendly": {
+		"dialogueRandom": [
+			"^red;Fun and sloshy. Time to return, though.",
+			"^red;I'm reforming you. My fun is done.",
+			"^red;Thanks, this made me less b!tchy.",
+			"^red;Okay. It's showtime for you."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutForcedFiendly": {
+		"dialogueRandom": [
+			"^red;Ow. Alright, you can get out.",
+			"^red;Geez, take it easy. One quick squeeze coming up.",
+			"^red;Damn, forgot my piercing.",
+			"^red;You're free to go."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutForcedHealFiendly": {
+		"dialogueRandom": [
+			"^red;Don't like milk? Fine.",
+			"^red;More milk for me, then.",
+			"^red;It tastes like cinnamon. It's not bad.",
+			"^red;Slip on out, then."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutForcedDigestFiendly": {
+		"dialogueRandom": [
+			"^red;It's burning? Sorry.",
+			"^red;Too much heat? Okay.",
+			"^red;Don't want to be milk? Okay.",
+			"^red;I always reform. It's okay, though."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutForcedDigestedFiendly": {
+		"dialogueRandom": [
+			"^red;Done hanging around?",
+			"^red;One fresh squeeze, then.",
+			"^red;Aw. I liked the squish.",
+			"^red;Some coffee to go with you?"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutFiendly": {
+		"dialogueRandom": [
+			"^red;Ooh, getting tender. Sorry.",
+			"^red;It was fun. Really!",
+			"^red;Getting tired. Time to squeeze you out.",
+			"^red;You need to stretch."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutHealFiendly": {
+		"dialogueRandom": [
+			"^red;I think you're healed now.",
+			"^red;Gotta save some milk for others.",
+			"^red;You feel stronger. Let's go.",
+			"^red;I'm almost out of milk. Sorry."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutDigestFiendly": {
+		"dialogueRandom": [
+			"^red;Damn, nearly melted you.",
+			"^red;I got too excited.",
+			"^red;Okay, time's up.",
+			"^red;Too creamy. You have to go."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"breastVoreLetoutDigestedFiendly": {
+		"dialogueRandom": [
+			"^red;You're slipping. I'm reforming you.",
+			"^red;Time to face the world again.",
+			"^red;Looks like time is up.",
+			"^red;I can't resist. I found a coffee cup."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"struggleNoEscapeBelly": {
+		"dialogueRandom": [
+			"Mmm, did you forget I'm wearing a collar?",
+			"A clench or two is all I need to keep you.",
+			"I'd tell you to give up, but your squirming feels great.",
+			"Hmhm, you almost got me to burp."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeCountdownBelly": {
+		"dialogue": [
+			"Getting more and more tempting to keep you.",
+			"Don't mind me. I'm just tightening my collar a bit.",
+			"Mm, just a few more notches to go...",
+			"Get comfy. The exits are sealed~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeReleaseBelly": {
+		"dialogue": [
+			"I think I've had enough fun.",
+			"Next time, though...",
+			"Just have to loosen my collar a bit...",
+			"And there. You're free to leave whenever you like, dear~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeBellyHungry": {
+		"dialogueRandom": [
+			"Keep it up. My stomach hasn't gurgled like this in a long time.",
+			"Too warm for you? I am hungry, after all.",
+			"It doesn't matter how hard you push. My stomach isn't going to let you go.",
+			"Settle down in there. I even might decide to let you out."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleNoEscapeCountdownBellyHungry": {
+		"dialogue": [
+			"Gotta say, my gut's getting rather restless with all your squirming.",
+			"Keep that up, and I'm letting you get front row seats to my hunger.",
+			"Alright, you asked for it.",
+			"Done. There's no escape."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleNoEscapeReleaseBellyHungry": {
+		"dialogue": [
+			"I think you've spent enough time in there.",
+			"Just play nice, alright?",
+			"I just need to unclench a little bit and...",
+			"There. You're free now."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleNoEscapeBellyHorny": {
+		"dialogueRandom": [
+			"Don't stop~ I haven't had a good prey squirm about in years~.",
+			"Knowing you'll never escape right now~? Mmnf~",
+			"Oooh~ so close~ You just missed the exit.",
+			"If you keep it up, I might even let you out early~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleNoEscapeCountdownBellyHorny": [
+		"Uu~ That's starting to really feel good.",
+		"Don't mind me if I... mm... throw away the key for a bit..",
+		"Just checking my phone and...",
+		" ...and now our fun has just started~"
+	],
+	"struggleNoEscapeReleaseBellyHorny": {
+		"dialogue": [
+			"That was amazing~",
+			"I think you deserve a nice break~",
+			"I just need to uncheck this little box...",
+			"There. Escape anytime you like."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleNoEscapeWomb": {
+		"dialogueRandom": [
+			"Mmm, did you forget about my spell? There is no exit.",
+			"I admire the fact you're still struggling. Oooh~",
+			"Fff~ I bet it's getting real ^pink;steamy^reset; without a proper escape~",
+			"When will it reappear? Might be tomorrow, might be in a decade~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeCountdownWomb": {
+		"dialogue": [
+			"It's not super effective, dear.",
+			"Just a little bit of magic and a dash of your fear, and your exit will suddenly disappear~",
+			"With a flick of my claw and a twirl of my tail, my womb is now your private jail~",
+			"Get comfy. You're in for the long haul~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeReleaseWomb": {
+		"dialogue": [
+			"Damn, my spell's fading.",
+			"Next time, I'll make it last even longer. Maybe.",
+			"My spell is nearly done.",
+			"Hmhm, you're free to leave whenever you like, dear~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeWombHungry": {
+		"dialogueRandom": [
+			"I gotta say, knowing you can't get out, mmng, makes this even better~",
+			"Keep squirming, my delightful bump~",
+			"How long will I keep you? A-ah, much, much longer if you keep squirming like that~",
+			"How long does my spell last? Hmhm, the duration is random~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleNoEscapeCountdownWombHungry": {
+		"dialogue": [
+			"Your free time is running out, dear~",
+			"Just a dash of magic and some of my fire, and your exit will suit my desire~",
+			"With a flick of my claw and a twirl of my tail, my womb is now your private jail~",
+			"Get comfy. You're in for the long haul~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleNoEscapeReleaseWombHungry": {
+		"dialogue": [
+			"Ah, my spell's fading.",
+			"Next time, I'll... Mmm~",
+			"Oh~ My spell is nearly done~",
+			"Hmhm, you're free to leave whenever you like, dear~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleNoEscapeBreasts": {
+		"dialogueRandom": [
+			"Mmm, defeated by such a small piece of metal.",
+			"Jiggle as much as you like, it's fun to watch.",
+			"I really should go find that Avali. I wonder if he'd enjoy your squirms?",
+			"When will I take the piercing out? Might take a few years."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeCountdownBreasts": {
+		"dialogue": [
+			"Getting a little eager, are you?",
+			"Just a small piercing of hellhound-forged steel should keep you in.",
+			"Almost done... There. Now hold still for just a moment...",
+			"*click* And with that, your room is now locked."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeReleaseBreasts": {
+		"dialogue": [
+			"You're the best at squirming in tight places.",
+			"I think my piercing is coming loose.",
+			"I see it starting to melt. Just a little bit more..",
+			"Mmm, now you can finally escape."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleNoEscapeBreastsHorny": {
+		"dialogueRandom": [
+			"Mmm, defeated by such a small piece of metal~",
+			"Jiggle as much as you like, dear~",
+			"I really should go find that Avali. I wonder if he'd enjoy your squirms?",
+			"When will I take the piercing out? Might take a few years~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleNoEscapeCountdownBreastsHorny": {
+		"dialogue": [
+			"Getting a little eager, dear~?",
+			"Just a small piercing of hellhound-forged steel should keep you in.",
+			"Almost done... There. Now hold still for just a moment...",
+			"*click* And with that, your room is now locked~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleNoEscapeReleaseBreastsHorny": {
+		"dialogue": [
+			"Not bad! You're a pro at hitting all the right spots~",
+			"Aah~ I think my piercing is melting from all the heat~",
+			"Ooh~ Not much longer~",
+			"Mmm, now you can finally escape~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglingBellyFiendly": {
+		"dialogueRandom": [
+			[
+				"^red;I like this.",
+				"^red;Keep me longer, please.",
+				"^red;Mmm...",
+				"^red;Thanks. I was tired.",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"^red;Gurgles are good.",
+						"^red;So soothing...",
+						"^red;Nice one.",
+						"^red;I love this."
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"^red;So much goo...",
+					"^red;Nice and wet...",
+					"^red;I'm not a Houndoom. Thanks, though.",
+					"^red;Hmhm, goo..."
+				]
+			}
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingHealBellyFiendly": {
+		"dialogueRandom": [
+			[
+				"^red;Thanks.",
+				"^red;I'll rub from within.",
+				"^red;So pleasant...",
+				"^red;You're kind.",
+				{
+					"check": {
+						"bellySounds": true
+					},
+					"add": [
+						"^red;So calming...",
+						"^red;Perfect...",
+						"^red;I'll never get tired of listening.",
+						"^red;Mmm... bork..."
+					]
+				}
+			],
+			{
+				"check": {
+					"predator": "sbqVaporeon"
+				},
+				"add": [
+					"^red;Healing goo? It's nice.",
+					"^red;Getting a little steamy.",
+					"^red;Heh, compatibility.",
+					"^red;No"
+				]
+			}
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingDigestImmuneBellyFiendly": {
+		"dialogueRandom": [
+			"^red;No digestion.",
+			"^red;I'm not melting.",
+			"^red;Not happening.",
+			"^red;Doesn't feel any different."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingDigestBellyFiendly": {
+		"dialogueRandom": [
+			"^red;Ooh, getting soft.",
+			"^red;Mm, take me for now.",
+			"^red;Almost gone.",
+			"^red;So steamy..."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingTransformedBellyFiendly": {
+		"dialogueRandom": [
+			"^red;Mm, sorry."
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"strugglingTransformingBellyFiendly": {
+		"dialogueRandom": [
+			"^red;Mm, no?"
+		],
+		"imagePortrait": [
+			"HConfused.png"
+		]
+	},
+	"strugglingTransformingImmuneBellyFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingFiendly": {
+		"dialogueRandom": [
+			[
+				"^red;New to me. This feels good.",
+				"^red;I haven't felt this before. It's good.",
+				"^red;Where... am I exactly? It's nice.",
+				"^red;No complaints here."
+			]
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingSlimeFiendly": {
+		"dialogueRandom": [
+			"^red;Wet and sticky. Nice.",
+			"^red;Oddly warm. Good.",
+			"^red;Heh. Slime-covered hot dog.",
+			"^red;So squishy!"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingSlimeHealFiendly": [
+		"^red;Not bad. Keep it going, please.",
+		"^red;That feels good.",
+		"^red;I feel much better.",
+		"^red;Delightful..."
+	],
+	"strugglingSlimeDigestFiendly": {
+		"dialogueRandom": [
+			"^red;Try not to absorb my angy.",
+			"^red;Slowly fading away for now.",
+			"^red;Heh. B!tch-flavored slime.",
+			"^red;"
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingBreastsFiendly": ":strugglingWombFiendly", // duplicated lines
+	"strugglingDigestBreastsFiendly": {
+		"dialogueRandom": [
+			"^red;Aw, making me into milk?",
+			"^red;I wanted to stay solid longer...",
+			"^red;Fine, but I'll be back.",
+			"^red;I'm getting soft..."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingTransformedBreastsFiendly": ":strugglingTransformedBelly", // duplicated lines
+	"strugglingTransformingBreastsFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingTransformingImmuneBreastsFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingEggifyBreastsFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingEggifyImmuneBreastsFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingWombFiendly": {
+		"dialogueRandom": [
+			"^red;This is so calming...",
+			"^red;I don't want to leave...",
+			"^red;Mmm... Home...",
+			"^red;I love this..."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingFemcumDigestFiendly": {
+		"dialogueRandom": [
+			"^red;Aw, melting me down?",
+			"^red;I wanted to stay solid longer...",
+			"^red;Fine, but I'll be back.",
+			"^red;I'm getting soft..."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	},
+	"strugglingTransformedWombFiendly": ":strugglingTransformedBelly", // duplicated lines
+	"strugglingTransformingWombFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingTransformingImmuneWombFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"strugglingEggifyWombFiendly": ":strugglingTransformingWomb", // duplicated lines
+	"strugglingEggifyImmuneWombFiendly": ":strugglingTransformingImmuneBelly", // duplicated lines
+	"voredFiendly": {
+		"dialogueRandom": [
+			"^red;Oh.",
+			"^red;Nice catch.",
+			"^red;Can you handle me?",
+			"^red;That's new."
+		],
+		"imagePortrait": [
+			"HMad.png"
+		]
+	}
+}

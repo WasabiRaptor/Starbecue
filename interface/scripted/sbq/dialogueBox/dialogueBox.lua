@@ -32,6 +32,7 @@ function init()
 	if sbq.dialogue then
 		dialogue = sbq.dialogue
 		dialogue.position = dialogue.position - 1
+		dialogue.finished = false
 		dialogueBox.refresh()
 	else
 		dialogueBox.refresh(sbq.dialogueTreeStart or ".greeting", sbq.dialogueTree, sbq.dialogueTree)

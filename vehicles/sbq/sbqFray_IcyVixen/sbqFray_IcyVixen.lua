@@ -13,7 +13,7 @@ function sbq.init()
 		end
 		sbq.settings.firstLoadDone = true
 
-		world.sendEntityMessage(sbq.spawner, "sbqSaveSettings", sbq.settings, "sbqFray_IcyVixen")
+		world.sendEntityMessage(sbq.spawner, "sbqSaveSettings", sbq.settings, "sbq/IcyVixen/Fray")
 	end
 
 	checkPartsEnabled()

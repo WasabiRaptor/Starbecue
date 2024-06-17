@@ -1,0 +1,19 @@
+{
+	"type" : "sbqHubBlue_Blueninja",
+
+	// this should be your base NPC's type
+	"baseType" : "sbq/Blueninja/Blue",
+
+	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}

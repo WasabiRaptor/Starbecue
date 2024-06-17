@@ -1,0 +1,17 @@
+{
+	"type" : "sbq/Zygahedron/Zevi-Hub",
+	"baseType" : "sbq/Zygahedron/Zevi",
+
+	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}

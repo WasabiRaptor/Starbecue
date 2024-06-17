@@ -1,0 +1,22 @@
+{
+	"sbq/AkariKaen/Akari_Basic" : [
+		[0, {
+			"fill" : [
+				{"pool" : "money"},
+				{"pool" : "sbq/AkariKaen/Akari_Cheese"}
+			]
+		}]
+	],
+	"sbq/AkariKaen/Akari_Cheese" : [
+		[0, {
+			"pool" : [
+				{"weight":0.5, "item" : "cheese"},
+				{"weight":0.3, "item" : ["cheese", 5]},
+				{"weight":0.3, "item" : "cheeseburger"},
+				{"weight":0.3, "item" : "pineapplepizzaslice"},
+				{"weight":0.3, "item" : "pizzaslice"}
+			]
+		}]
+	]
+
+}

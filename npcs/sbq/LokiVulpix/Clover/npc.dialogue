@@ -1,0 +1,846 @@
+{
+	"greetingRewards": [
+		"You were an excellent part of my perfomance, so have this~",
+		{
+			"check": {
+				"introduced": true
+			},
+			"add": [
+				[
+					"You were a great assistant <entityname>!\nEnjoy~"
+				]
+			]
+		}
+	],
+	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
+	"greeting": "/npcs/sbq/dialogue/default.dialogue:greeting", // external lines
+	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
+	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
+	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
+	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
+	"oralVoreRequested": [
+		"Hehe, time for our little dissapearing act then~",
+		"Here, just lean in and give me a kiss..~",
+		"A volunteer for my show~?"
+	],
+	"oralVoreRequestedAfter": [
+		[
+			"And now we see if they can manage to escape~",
+			"And as you all can see, they have dissapeared~"
+		],
+		{
+			"check": {
+				"introduced": true
+			},
+			"add": [
+				"And now we see if <entityname> can manage to escape~",
+				"And as you all can see, <entityname> has dissapeared~"
+			]
+		}
+	],
+	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
+	"oralVoreNo": ":defaultNo", // duplicated lines
+	"defaultNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
+	"oralVoreTooBig": ":tooBig", // duplicated lines
+	"tooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig", // external lines
+	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall", // external lines
+	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots", // external lines
+	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull", // external lines
+	"oralVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"defaultNeedsInfusion": "Missing: defaultNeedsInfusion <dialoguePath>",
+	"oralVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"defaultAlreadyInfused": "Missing: defaultAlreadyInfused <dialoguePath>",
+	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"targetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:targetPreySettingsMismatch", // external lines
+	"tailVoreRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequested", // external lines
+	"tailVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestedAfter", // external lines
+	"tailVoreInvalid": "Whoops! tailVore is invalid <dialoguePath>",
+	"tailVoreNo": ":defaultNo", // duplicated lines
+	"tailVoreTooBig": ":tooBig", // duplicated lines
+	"tailVoreTooSmall": ":tooSmall", // duplicated lines
+	"tailVoreNoSlots": ":noSlots", // duplicated lines
+	"tailVoreFull": ":defaultFull", // duplicated lines
+	"defaultFull": "Missing: defaultFull <dialoguePath>",
+	"tailVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"tailVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"unbirthVoreRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequested", // external lines
+	"unbirthVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestedAfter", // external lines
+	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
+	"unbirthVoreNo": ":defaultNo", // duplicated lines
+	"unbirthVoreTooBig": ":tooBig", // duplicated lines
+	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
+	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
+	"unbirthVoreFull": ":defaultFull", // duplicated lines
+	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastVoreRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequested", // external lines
+	"breastVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestedAfter", // external lines
+	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
+	"breastVoreNo": ":defaultNo", // duplicated lines
+	"breastVoreTooBig": ":tooBig", // duplicated lines
+	"breastVoreTooSmall": ":tooSmall", // duplicated lines
+	"breastVoreNoSlots": ":noSlots", // duplicated lines
+	"breastVoreFull": ":defaultFull", // duplicated lines
+	"breastVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockVoreRequested": [
+		"Ah, a special performance for you~",
+		"Now this is a dissapearing act not many come away from~",
+		"Thats going to be a real tight fit, which I happen to specialize in~."
+	],
+	"cockVoreRequestedAfter": [
+		[
+			"Ahh~\nAnd now we see if they can manage to escape~",
+			"Ahh~\nAnd as you all can see, they have dissapeared~"
+		],
+		{
+			"check": {
+				"introduced": true
+			},
+			"add": [
+				"Ahh~\nAnd now we see if <entityname> can manage to escape~",
+				"Ahh~\nAnd as you all can see, <entityname> has dissapeared~"
+			]
+		},
+		[
+			"Aahh~ ooooh thats really good~",
+			"Mmmm~ You're getting me all excited~",
+			"Ffff~ Now I'm all hard~",
+			"A-ahh~ Don't stop squirming~"
+		]
+	],
+	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
+	"cockVoreNo": ":defaultNo", // duplicated lines
+	"cockVoreTooBig": ":tooBig", // duplicated lines
+	"cockVoreTooSmall": ":tooSmall", // duplicated lines
+	"cockVoreNoSlots": ":noSlots", // duplicated lines
+	"cockVoreFull": "/npcs/sbq/dialogue/default.dialogue:cockVoreFull", // external lines
+	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"bellyInfuseRequested": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseRequested", // external lines
+	"bellyInfuseRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseRequestedAfter", // external lines
+	"bellyInfuseInvalid": "Whoops! bellyInfuse is invalid <dialoguePath>",
+	"bellyInfuseNo": ":defaultNo", // duplicated lines
+	"bellyInfuseTooBig": ":tooBig", // duplicated lines
+	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
+	"bellyInfuseFull": ":defaultFull", // duplicated lines
+	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastInfuseRequested": "/npcs/sbq/dialogue/default.dialogue:breastInfuseRequested", // external lines
+	"breastInfuseRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:breastInfuseRequestedAfter", // external lines
+	"breastInfuseInvalid": "Whoops! breastInfuse is invalid <dialoguePath>",
+	"breastInfuseNo": ":defaultNo", // duplicated lines
+	"breastInfuseTooBig": ":tooBig", // duplicated lines
+	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
+	"breastInfuseNoSlots": ":noSlots", // duplicated lines
+	"breastInfuseFull": ":defaultFull", // duplicated lines
+	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"pussyInfuseRequested": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseRequested", // external lines
+	"pussyInfuseRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseRequestedAfter", // external lines
+	"pussyInfuseInvalid": "Whoops! pussyInfuse is invalid <dialoguePath>",
+	"pussyInfuseNo": ":defaultNo", // duplicated lines
+	"pussyInfuseTooBig": ":tooBig", // duplicated lines
+	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
+	"pussyInfuseFull": ":defaultFull", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockInfuseRequested": [
+		"You want to be my cock?",
+		"Mm, can't wait to be throbbing down there can you?",
+		"You really want to give yourself entirely to me?"
+	],
+	"cockInfuseRequestedAfter": [
+		"Hehe, I can feel you twitching with excitment already~",
+		"Hehe, excited to be part of me~?",
+		"Ah, you're already throbbing with excitment~"
+	],
+	"cockInfuseInvalid": "Whoops! cockInfuse is invalid <dialoguePath>",
+	"cockInfuseNo": ":defaultNo", // duplicated lines
+	"cockInfuseTooBig": ":tooBig", // duplicated lines
+	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
+	"cockInfuseNoSlots": ":noSlots", // duplicated lines
+	"cockInfuseFull": ":defaultFull", // duplicated lines
+	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
+	"tailVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutRequested", // external lines
+	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested", // external lines
+	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested", // external lines
+	"cockVoreLetoutRequested": [
+		"Hhhhhh I'm gonna cum...",
+		"C-can't hold back much longer~",
+		"Gonna blast you out with a load~",
+		"Ahhhh feeels soooo goood~"
+	],
+	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt", // external lines
+	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes", // external lines
+	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter", // external lines
+	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo", // external lines
+	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes", // external lines
+	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter", // external lines
+	"tailVorePrompt": "/npcs/sbq/dialogue/default.dialogue:tailVorePrompt", // external lines
+	"tailVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYes", // external lines
+	"tailVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYesAfter", // external lines
+	"tailVorePromptNo": ":defaultNo", // duplicated lines
+	"tailVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYes", // external lines
+	"tailVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYesAfter", // external lines
+	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt", // external lines
+	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes", // external lines
+	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter", // external lines
+	"unbirthVorePromptNo": ":defaultNo", // duplicated lines
+	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes", // external lines
+	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter", // external lines
+	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt", // external lines
+	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes", // external lines
+	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter", // external lines
+	"breastVorePromptNo": ":defaultNo", // duplicated lines
+	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes", // external lines
+	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter", // external lines
+	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt", // external lines
+	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes", // external lines
+	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter", // external lines
+	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo", // external lines
+	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes", // external lines
+	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter", // external lines
+	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting", // external lines
+	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes", // external lines
+	"oralVoreRequestingNo": ":defaultNo", // duplicated lines
+	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes", // external lines
+	"tailVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequesting", // external lines
+	"tailVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingYes", // external lines
+	"tailVoreRequestingNo": ":defaultNo", // duplicated lines
+	"tailVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNoYes", // external lines
+	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting", // external lines
+	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes", // external lines
+	"unbirthVoreRequestingNo": ":defaultNo", // duplicated lines
+	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes", // external lines
+	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting", // external lines
+	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes", // external lines
+	"breastVoreRequestingNo": ":defaultNo", // duplicated lines
+	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes", // external lines
+	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting", // external lines
+	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes", // external lines
+	"cockVoreRequestingNo": ":defaultNo", // duplicated lines
+	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes", // external lines
+	"oralVoreNoPrompt": [
+		"Congratulations! You're going to be part of my magic show! It's The dissapearing act~"
+	],
+	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter", // duplicated lines
+	"tailVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPrompt", // external lines
+	"tailVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPromptAfter", // external lines
+	"unbirthVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreNoPrompt", // external lines
+	"unbirthVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreNoPromptAfter", // external lines
+	"breastVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPrompt", // external lines
+	"breastVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPromptAfter", // external lines
+	"cockVoreNoPrompt": [
+		"Gonna stick you somewhere things aren't supposed to go~",
+		"Mmm~ hey, want to try something?",
+		"I got a bit excited thinking about this, so now I have to do it~",
+		"I'm gonna need you to pleasure me, but not the normal way~"
+	],
+	"cockVoreNoPromptAfter": [
+		"Aahh~ ooooh thats really good~",
+		"Mmmm~ You're getting me even more excited~",
+		"Ffff~ Now I'm all hard~",
+		"A-ahh~ Don't stop squirming~"
+	],
+	"bellyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPrompt", // external lines
+	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter", // external lines
+	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt", // external lines
+	"breastInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPromptAfter", // external lines
+	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt", // external lines
+	"pussyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPromptAfter", // external lines
+	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt", // external lines
+	"cockInfuseNoPromptAfter": [
+		"Ahh~ finally got you where you belong~",
+		"You belong right where you are, throbbing between my legs~",
+		"Mmm~ feels right to have you there~"
+	],
+	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
+	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
+	"oralVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnprompted", // external lines
+	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted", // external lines
+	"unbirthVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnprompted", // external lines
+	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted", // external lines
+	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
+	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter", // external lines
+	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter", // external lines
+	"unbirthVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutUnpromptedAfter", // external lines
+	"breastVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutUnpromptedAfter", // external lines
+	"cockVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutUnpromptedAfter", // external lines
+	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing", // external lines
+	"tailVoreForcing": "/npcs/sbq/dialogue/default.dialogue:tailVoreForcing", // external lines
+	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing", // external lines
+	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing", // external lines
+	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing", // external lines
+	"oralVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutForcingAfter", // external lines
+	"tailVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForcingAfter", // external lines
+	"unbirthVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutForcingAfter", // external lines
+	"breastVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForcingAfter", // external lines
+	"cockVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForcingAfter", // external lines
+	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced", // external lines
+	"tailVoreForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreForced", // external lines
+	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced", // external lines
+	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced", // external lines
+	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced", // external lines
+	"oralVoreLetoutForced": [
+		"Ahh... ok you want out.",
+		"Why leave?",
+		"Mmm... fine you can come out.",
+		"I actually liked having you in there..."
+	],
+	"tailVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForced", // external lines
+	"unbirthVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutForced", // external lines
+	"breastVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForced", // external lines
+	"cockVoreLetoutForced": [
+		"Ahh~ ahh that felt so good~",
+		"Could you get back in and squirm some more?",
+		"Mmm~ I thought you were pretty comfortable.",
+		"I thought you liked it in there.",
+		"Oh... alright."
+	],
+	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly", // external lines
+	"struggleWomb": "/npcs/sbq/dialogue/default.dialogue:struggleWomb", // external lines
+	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail", // external lines
+	"struggleBreasts": "/npcs/sbq/dialogue/default.dialogue:struggleBreasts", // external lines
+	"struggleBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleBreastsShirt", // external lines
+	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy", // external lines
+	"struggleCock": [
+		[
+			"Having a good time in there?",
+			"Hope its comfortable."
+		],
+		{
+			"infuseType": true,
+			"default": "struggle.ctfLines",
+			"sbq/LokiVulpix/Cherry": "struggle.cherryCtfLines",
+			"sbq/LokiVulpix/Loki": "struggle.lokiCtfLines",
+			"sbq/LokiVulpix/Astira": "struggle.astiraCtfLines"
+		}
+	],
+	"struggleBalls": [
+		[
+			"Having a good time in there?",
+			"Keep squirming.",
+			"It feels so good having you in there~",
+			"Friends are stored in the balls~"
+		],
+		{
+			"infuseType": true,
+			"default": "struggle.ctfLines",
+			"sbq/LokiVulpix/Cherry": "struggle.cherryCtfLines",
+			"sbq/LokiVulpix/Loki": "struggle.lokiCtfLines",
+			"sbq/LokiVulpix/Astira": "struggle.astiraCtfLines"
+		}
+	],
+	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss", // external lines
+	"struggleAcidHeal": "/npcs/sbq/dialogue/default.dialogue:struggleAcidHeal", // external lines
+	"struggleFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumHeal", // external lines
+	"struggleCumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleCumHeal", // external lines
+	"struggleMilkHeal": "/npcs/sbq/dialogue/default.dialogue:struggleMilkHeal", // external lines
+	"struggleMiscHeal": ":struggleAcidHeal", // duplicated lines
+	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression", // external lines
+	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest", // external lines
+	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune", // external lines
+	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest", // external lines
+	"struggleCumDigestBalls": [
+		[
+			"You're getting so soft~",
+			"Melting right on down~",
+			"I'll get you pumped out into a condom soon enough~",
+			"Hehe, I can feel you starting to slosh around in there~"
+		],
+		{
+			"infuseType": true,
+			"default": "struggle.ctfLines",
+			"sbq/LokiVulpix/Cherry": "struggle.cherryCtfLines",
+			"sbq/LokiVulpix/Loki": "struggle.lokiCtfLines",
+			"sbq/LokiVulpix/Astira": "struggle.astiraCtfLines"
+		}
+	],
+	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune", // external lines
+	"struggleFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigest", // external lines
+	"struggleFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigestImmune", // external lines
+	"struggleMilkDigest": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigest", // external lines
+	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt", // external lines
+	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune", // external lines
+	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
+	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
+	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming", // external lines
+	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
+	"struggleEggify": [
+		[
+			"Can you feel that egg forming around you?",
+			"Soon, your squirming won't do a thing."
+		]
+	],
+	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant", // external lines
+	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant", // external lines
+	"bellyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:bellyInfusedOccupant", // external lines
+	"breastInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:breastInfusedOccupant", // external lines
+	"pussyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pussyInfusedOccupant", // external lines
+	"cockInfusedOccupant": [
+		[
+			"<love>Heh, I can feel you twitching down there~",
+			"<love>Heh, I can feel you twitching down there <entityName>~"
+		],
+		[
+			"<love>Are you enjoying your new purpose?~",
+			"<love>Are you enjoying your new purpose <entityName>?~"
+		],
+		[
+			"<slowlove>Just twitch and throb away, you're right where you belong~",
+			"<slowlove>Just twitch and throb away <entityName> you're right where you belong~"
+		],
+		[
+			"<love>Heh, you belong right there, twitching and throbbing between my legs~",
+			"<love>Heh, you belong right there <entityName>, twitching and throbbing between my legs~"
+		],
+		{
+			"check": {
+				"cockInfusedSize": true
+			},
+			"add": [
+				[
+					"<love>I love how much bigger you make my cock~",
+					"<love>I love how much bigger you make my cock <entityName>~"
+				],
+				[
+					"<love>You're better as extra size for me~",
+					"<love>You're better as extra size for me <entityName>~"
+				]
+			]
+		},
+		[
+			"<love>You're far more useful like this~",
+			"<love>You're far more useful like this <entityName>"
+		]
+	],
+	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant", // external lines
+	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant", // external lines
+	"strugglingBelly": "/npcs/sbq/dialogue/default.dialogue:strugglingBelly", // external lines
+	"strugglingWomb": "/npcs/sbq/dialogue/default.dialogue:strugglingWomb", // external lines
+	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail", // external lines
+	"strugglingBreasts": "/npcs/sbq/dialogue/default.dialogue:strugglingBreasts", // external lines
+	"strugglingBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingBreastsShirt", // external lines
+	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy", // external lines
+	"strugglingCock": "/npcs/sbq/dialogue/default.dialogue:strugglingCock", // external lines
+	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls", // external lines
+	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss", // external lines
+	"strugglingAcidHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingAcidHeal", // external lines
+	"strugglingFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingFemcumHeal", // external lines
+	"strugglingCumHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingCumHeal", // external lines
+	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal", // external lines
+	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingCompression": "/npcs/sbq/dialogue/default.dialogue:strugglingCompression", // external lines
+	"strugglingAcidDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingAcidDigest", // external lines
+	"strugglingAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingAcidDigestImmune", // external lines
+	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest", // external lines
+	"strugglingCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestBalls", // external lines
+	"strugglingCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestImmune", // external lines
+	"strugglingFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingFemcumDigest", // external lines
+	"strugglingFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingFemcumDigestImmune", // external lines
+	"strugglingMilkDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigest", // external lines
+	"strugglingMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestBreastsShirt", // external lines
+	"strugglingMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestImmune", // external lines
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
+	"strugglingDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:strugglingDrainEnergy", // external lines
+	"strugglingEggify": "/npcs/sbq/dialogue/default.dialogue:strugglingEggify", // external lines
+	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
+	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused", // external lines
+	"bellyInfused": "/npcs/sbq/dialogue/default.dialogue:bellyInfused", // external lines
+	"breastInfused": "/npcs/sbq/dialogue/default.dialogue:breastInfused", // external lines
+	"pussyInfused": "/npcs/sbq/dialogue/default.dialogue:pussyInfused", // external lines
+	"cockInfused": "/npcs/sbq/dialogue/default.dialogue:cockInfused", // external lines
+	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused", // external lines
+	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused", // external lines
+	"climax": "/npcs/sbq/dialogue/default.dialogue:climax", // external lines
+	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb", // external lines
+	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts", // external lines
+	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock", // external lines
+	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls", // external lines
+	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
+		"tagCriteria": {
+			"default": {
+				"default": [
+					"Something in my place has changed, I don't like it!"
+				]
+			}
+		},
+		"enclosedArea": {
+			"default": {
+				"default": [
+					"My home could use some repairs!"
+				]
+			}
+		},
+		"otherDeed": {
+			"default": {
+				"default": [
+					"I thought this place was for me!"
+				]
+			}
+		},
+		"severe": {
+			"default": {
+				"default": [
+					"I can't live in these conditions!"
+				]
+			}
+		},
+		"final": {
+			"default": {
+				"default": [
+					"I've had enough of this!"
+				]
+			}
+		},
+		"beacon": {
+			"default": {
+				"default": [
+					"I'm home!"
+				]
+			}
+		},
+		"rent": {
+			"default": {
+				"default": [
+					"Here's a gift for all your help!"
+				]
+			}
+		},
+		"helpme": {
+			"default": {
+				"default": [
+					"Oh no! Help me!",
+					"Help!",
+					"Uh-oh.",
+					"I'm unarmed! Help!",
+					"I need help! I can't defend myself!",
+					"Ah! Stop it!",
+					"What!? What did I do!?"
+				]
+			}
+		},
+		"safe": {
+			"default": {
+				"default": [
+					"Phew, I think I got away.",
+					"Thank goodness that's over.",
+					"Is it over?",
+					"Is it safe now?",
+					"I made it!"
+				]
+			}
+		},
+		"accuse": {
+			"default": {
+				"default": [
+					"Hey, that doesn't belong to you!"
+				]
+			}
+		},
+		"alert": {
+			"default": {
+				"default": [
+					"Guards! There is a criminal here!"
+				]
+			}
+		},
+		"offer": {
+			"default": {
+				"default": [
+					"Hello adventurer, mind if I join you?",
+					"I'm <selfname>, and I really want to join a ship. Do you want to employ me?",
+					"You are JUST the kind of person I should work with! Fancy employing me?",
+					"I'm looking for a ship's crew to join. Are you interested?",
+					"I'm looking for a place among a crew. Can I join yours?"
+				]
+			}
+		},
+		"roleDescription": {
+			"default": {
+				"default": [
+					"I'll be here for you if you need someone to help you fight bad guys!",
+					"If you need protection, you know where to find me!",
+					"If you need me in battle, I'll be here!"
+				]
+			}
+		},
+		"respawned": {
+			"default": {
+				"default": [
+					"Heh... Dying tickles.",
+					"What just happened?",
+					"I'm back! And alive!",
+					"I'm back and in one piece!",
+					"I'm alive again! That's good.",
+					"I don't think I respawned properly...",
+					"My head hurts.",
+					"What was I doing just before I died?"
+				]
+			}
+		},
+		"crewcantreach": {
+			"default": {
+				"default": [
+					"I can't reach you!",
+					"You're too far!",
+					"Hey, wait up!",
+					"Don't go too far!",
+					"Let me catch up!"
+				]
+			}
+		},
+		"reattack": {
+			"default": {
+				"default": [
+					"You again!",
+					"You returned!",
+					"Aha!",
+					"You came back?",
+					"So you came back."
+				]
+			}
+		},
+		"attack": {
+			"default": {
+				"default": [
+					"Attack!"
+				]
+			}
+		},
+		"killedTarget": {
+			"default": {
+				"default": [
+					"Never mess with me!",
+					"Victory!",
+					"Phew!",
+					"Another victory!",
+					"I didn't even break a sweat!",
+					"Heh.",
+					"Of course I won!",
+					"I'm pretty good at this!",
+					"That was stressful...",
+					"Another easy win!",
+					"Yes!",
+					"That's what you get!"
+				]
+			}
+		},
+		"lostTarget": {
+			"default": {
+				"default": [
+					"I will get you one day!",
+					"It's not over!",
+					"Don't come back!",
+					"Where are you...",
+					"What a hassle.",
+					"Just you wait!"
+				]
+			}
+		},
+		"outOfSight": {
+			"default": {
+				"default": [
+					"Sneaky! This is sneaky! How did you disappear?",
+					"They're getting away!",
+					"Where'd you go?",
+					"Get back here!",
+					"How did this happen?"
+				]
+			}
+		},
+		"cantReachEnemy": {
+			"default": {
+				"default": [
+					"Get over here!",
+					"Come here!",
+					"Get back here!",
+					"How did you get over there?",
+					"I can't reach!"
+				]
+			}
+		},
+		"cheerOn": {
+			"default": {
+				"default": [
+					"I have a plan!",
+					"Get them!",
+					"Everybody is in my way.",
+					"Why aren't they already dead?",
+					"Come on!"
+				]
+			}
+		}
+	},
+	// Unused Dialogue
+	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
+	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney", // external lines
+	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards", // external lines
+	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards", // external lines
+	"rewardNotifyHighValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyHighValueQuestRewards", // external lines
+	"full": [
+		"I'm a bit too full...",
+		"My body can't stretch any further...",
+		"I've been filled too much already...",
+		"I would... but I'm too full..."
+	],
+	"needsInfusion": [
+		"I'd want someone merged in there"
+	],
+	"struggle": "/npcs/sbq/dialogue/default.dialogue:struggleBelly", // external lines
+	"struggleHeal": "/npcs/sbq/dialogue/default.dialogue:struggleHeal", // external lines
+	"struggleDigestCock": [
+		[
+			"You're getting so soft~",
+			"Melting right on down~",
+			"I'll get you pumped out into a condom soon enough~"
+		],
+		{
+			"infuseType": true,
+			"default": "struggle.ctfLines",
+			"sbq/LokiVulpix/Cherry": "struggle.cherryCtfLines",
+			"sbq/LokiVulpix/Loki": "struggle.lokiCtfLines",
+			"sbq/LokiVulpix/Astira": "struggle.astiraCtfLines"
+		}
+	],
+	"shrinking": "/npcs/sbq/dialogue/default.dialogue:shrinking", // external lines
+	"growing": "/npcs/sbq/dialogue/default.dialogue:growing", // external lines
+	"didSteppy": [
+		"hehe, whoops!",
+		"Oh did I step on something?",
+		"You tinies need to pay attention more!"
+	],
+	"gotStepped": [
+		[
+			"Ahhh!",
+			"AH!",
+			"oof!",
+			"eep!"
+		],
+		[
+			"You stepped on me!",
+			"Watch your step!"
+		],
+		[
+			"Be careful where you're <steppyType>!",
+			"Watch where you're <steppyType>!"
+		],
+		[
+			"Look out!",
+			"Careful!"
+		]
+	],
+	"gotStomped": [
+		[
+			"Ahhh!",
+			"AH!",
+			"oof!",
+			"eep!"
+		],
+		[
+			"You're stomping on me!",
+			"I'm getting smushed!",
+			"*wheeze*"
+		]
+	],
+	// Unused Dialogue
+	"converse.options.0.1": [
+		"Its nice to meet you <entityname>~",
+		"Perhaps I can include you in one of my performances later`"
+	],
+	"converse.options.2.1.default": [
+		"I should have plenty of space for you to vanish into~"
+	],
+	"converse.options.2.1.heal": [
+		"Should be a relaxing stay with you all hidden and tucked away~"
+	],
+	"converse.options.2.1.softDigest": [
+		"Once you're all tucked in, you might just find yourself lining my belly~"
+	],
+	"converse.options.3.1.default": [
+		"Should be nice and comfy in there, curtousey of <entityName>~"
+	],
+	"converse.options.3.1.heal": [
+		"You'll feel so comfy and rested in there, I've heard its very nice~"
+	],
+	"converse.options.4.1.default": [
+		"Nice and soft, borrowed from <entityName>~"
+	],
+	"converse.options.4.1.heal": [
+		"I always hear a milk bath is really relaxing~"
+	],
+	"converse.options.4.1.softDigest": [
+		"Might mix you up into my next batch of milk~"
+	],
+	"converse.options.5.1.default": [
+		"huff, I'll probably get pretty hard if you squirm your way in there~"
+	],
+	"converse.options.5.1.default.continue.defaultInfused": [
+		"Or it might be more apt to say <entityName> would get pretty hard hehe~"
+	],
+	"converse.options.6.1.default": [
+		"Might be a bit messy to stew and slosh around in all that cum~"
+	],
+	"converse.options.6.1.softDigest": [
+		"Hehe, you might end up being the next load I pump out into someone if you stay in there too long~"
+	],
+	"talkAboutSelf": [
+		"So what is it?",
+		"What did you want to ask?",
+		"Ask away."
+	],
+	"talkAboutSelf.options.0.1": [
+		"I'm a Meowscarada, my colors take after autumn! I'm somewhat named after the clubs card suit."
+	],
+	"talkAboutSelf.options.1.1": [
+		"That sure is a question to ask~ Almost like an invitation for me to do a demonstration as I explain~"
+	],
+	"talkAboutKinks": [
+		"So what kinky stuff did you want to know?",
+		"What're today's horny questions?"
+	],
+	"talkAboutKinks.options.0.1": [
+		"Mmm~ always a popular performance, gathering the audience around... picking someone who seems far too large...",
+		"And then swiftly making them dissapear down my throat without a trace, my belly squishing and compacting them right away~",
+		"I'll try and fit anything inside, and after a few moments they'll barely make a dent on my smooth belly~"
+	],
+	"talkAboutKinks.options.0.1.continue": [
+		"Would you like being prey like that?"
+	],
+	"talkAboutKinks.options.0.1.continue.options.0.1": [
+		"Nice! We can have some fun sometime then."
+	],
+	"talkAboutKinks.options.0.1.continue.options.1.1": [
+		"Alright then."
+	],
+	"talkAboutKinks.options.1.1": [
+		"Curious about Cherry eh~? Or did I just let her secret slip, whoops~",
+		"When I take claim of someone, I make sure to get plenty of use out of them, especially if they become an assistant~",
+		"And she surely does assist in ways that matter, all that size she adds to me? She's belongs throbbing down between my legs~",
+		"And she knows it, she basically lives there, spends more time as a part of me than not at this point~",
+		"Which is just how I like it~ When people can't help but enjoy themselves, wanting nothing more than to be a part of me~"
+	],
+	"talkAboutKinks.options.1.1.continue": [
+		"<slowlove>Would you like being my cock at some point~?"
+	],
+	"talkAboutKinks.options.1.1.continue.options.0.1": [
+		"<slowlove>Nice! We can have some fun sometime then~"
+	]
+}

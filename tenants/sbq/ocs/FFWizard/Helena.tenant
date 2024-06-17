@@ -1,0 +1,35 @@
+{
+	"name": "sbq/FFWizard/Helena",
+	"priority": 60,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"door": 1,
+		"sbqVore" : 1,
+		"doom" : 8
+	},
+
+
+	"orderFurniture" : [
+		{"name":"doombed", "count":1},
+		{"name":"doomchair", "count":1},
+		{"name":"doomdoor", "count":1},
+		{"name":"doomlight", "count":1},
+		{"name":"doomswitch", "count":1},
+		{"name":"doomtable", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"species": ["sbq/FFWizard/Helena"],
+			"type": "sbq/FFWizard/Helena",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

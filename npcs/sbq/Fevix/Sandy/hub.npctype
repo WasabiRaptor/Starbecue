@@ -1,0 +1,17 @@
+{
+	"type" : "sbq/Fevix/Sandy-Hub",
+	"baseType" : "sbq/Fevix/Sandy",
+
+	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}

@@ -1,0 +1,202 @@
+{
+	"type" : "sbq/Blueninja/Blue",
+	"baseType" : "villager",
+
+	"scripts" : [
+		"/npcs/bmain.lua",
+		"/scripts/npc/SBQ_npc_bmain.lua",
+		"/scripts/npc/SBQ_vore_npc.lua"
+	],
+
+	// you really should make sure to define the npcname so the OC actually has the OC's name
+	"npcname" : "Blue",
+	// identity is quite important if you don't want things to be randomly generated
+	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
+	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
+	// if one knows how to make a directives string too, they can just define it here for the specific parts
+	"identity" : {
+
+	 "facialHairType" : "1",
+			"facialHairGroup" : "hair",
+			"personalityArmOffset" : [0, 0],
+			"hairType" : "male3",
+			"bodyDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;767162=4ca4d6;1e1400=133c53;9e9b94=acd3ec;f32200=59c3ff;3f3c2e=216891?replace;dc1f00=00d6fe;be1b00=00befe;951500=0095fe",
+			"personalityArmIdle" : "idle.2",
+			"gender" : "male",
+			"color" : [51, 117, 237],
+			"personalityHeadOffset" : [-1, 0],
+			"hairGroup" : "hair",
+			"facialMaskDirectives" : "",
+			"species" : "synth",
+			"personalityIdle" : "idle.2",
+			"facialMaskGroup" : "",
+			"name" : "Blue",
+			"facialHairDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665",
+			"emoteDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665?replace;767162=4ca4d6;1e1400=133c53;9e9b94=acd3ec;f32200=59c3ff;3f3c2e=216891?replace;dc1f00=00d6fe;be1b00=00befe;951500=0095fe",
+			"hairDirectives" : "?replace;ffca8a=b5c2fa;ffc181=758bf8;d39c6c=4a5ba5;c7815b=272665",
+			"facialMaskType" : ""
+
+	},
+	"scriptConfig" : {
+		"sbqNPC" : true,
+		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
+		"behavior" : "sbqvorevillager",
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
+			"graduation" : {
+				"nextNpcType" : [] // this prevents the NPC from graduating into crew
+			},
+			"enableParticipation" : true,
+
+			"timeLimit" : 30,
+			"nearbyQuestLimit" : 2,
+			"nearbyQuestRange" : 50,
+			"chance" : 0.04
+		},
+		"sbqConvertType" : false,
+
+
+		"uniqueId" : "sbq/Blueninja/Blue", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+
+		//"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		"dialogueTree" : "/npcs/sbq/Blueninja/Blue/npc.dialogueTree",
+
+		"sbqPredRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
+
+			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "money" },
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+		"sbqPreyRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "money" },
+
+			"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "money"},
+			"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "lowValueQuestRewards"},
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+
+		"voreConfig" : [
+			"/humanoid/any/disableAllInfusePred.config",
+			"/humanoid/any/disableAllInfusePrey.config",
+			{
+				// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+				"defaultSettings" : {
+					"locations" : {
+						"belly" : {
+							"gurgleSounds" : true
+						}
+					}
+
+				},
+				// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+				"overrideSettings" : {
+					"vorePrefs" : {
+						"navelVore" : {
+							"pred" : false
+						},
+						"tailVore" : {
+							"pred" : false
+						},
+						"absorbVore" : {
+							"pred" : false
+						},
+						"unbirthVore" : {
+							"pred" : false
+						},
+						"breastVore" : {
+							"pred" : false,
+							"prey" : false
+						}
+					},
+					"acidDigestDrops" : false,
+					"acidDigestDropsAllow" : false,
+
+					"milkDigestFatalImmune" : true,
+					"milkDigestResistance" : 0,
+
+					"speciesTF" : false,
+					"genderTF" : false
+				}
+			}
+		]
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"maxEnergy" : {
+				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"sbqLustScriptMax" : {
+				"baseValue" : 0.33
+			},
+			"sbqLustScriptDelta" : {
+				"baseValue" : 0.0583
+			},
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
+				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
+			}
+		},
+		"resources" : {
+			"food" : {
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
+			}
+		},
+		"statusProperties" : {
+			"sbqDidVornyConvertCheck" : true
+		}
+	}
+}

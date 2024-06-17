@@ -11,7 +11,7 @@
 	],
 	"sbqSecretSlimePotion" : [
 		[0, { "fill" : [
-			{"item" : {"name":"sbqMysteriousPotion", "parameters":{ "identity":{"species" : "sbqSlime"}, "rarity" : "rare" }}},
+			{"item" : {"name":"sbqMysteriousPotion", "parameters":{ "identity":{"species" : "sbq/slime"}, "rarity" : "rare" }}},
 			{"item" : "slimebed-recipe"}
 		]}]
 	],
@@ -62,19 +62,19 @@
 	],
 	"sbqPascalKaoriCum" : [
 		[0, { "fill" : [
-			{"item" : {"name":"sbqFilledCondom", "count":64, "parameters":{"pred":"Pascal", "predUUID":"sbqPascal_LokiVulpix", "prey":"Kaori", "preyUUID":"sbqKaori_Fevix",
+			{"item" : {"name":"sbqFilledCondom", "count":64, "parameters":{"pred":"Pascal", "predUUID":"sbq/LokiVulpix/Pascal", "prey":"Kaori", "preyUUID":"sbq/Fevix/Kaori",
 				"preyDirectives" : "",
 				"preyColorMap" : {
 					"primary" : ["0b0b0b","101010","1b1b1b"],
 					"secondary" : ["3890cf","1ac2e7","01e9fa"]
 				},
 				"npcArgs" : {
-					"npcSpecies" : "sbqKaori_Fevix",
-					"npcType" : "sbqKaori_Fevix",
+					"npcSpecies" : "sbq/Fevix/Kaori",
+					"npcType" : "sbq/Fevix/Kaori",
 					"npcParam" : {
 						"identity" : {},
 						"scriptConfig" : {
-							"uniqueId" : "sbqKaori_Fevix"
+							"uniqueId" : "sbq/Fevix/Kaori"
 						},
 						"statusControllerSettings" : {
 							"statusProperties" : {
@@ -135,7 +135,7 @@
 	],
 	"sbqXeroniousMilk" : [
 		[0, { "fill" : [
-			{"item" : {"name":"sbqMilkCarton", "count":64, "parameters":{"pred":"Xeronious", "predUUID":"sbqXeronious_Xeronious",
+			{"item" : {"name":"sbqMilkCarton", "count":64, "parameters":{"pred":"Xeronious", "predUUID":"sbq/Xeronious/Xeronious",
 				"predDirectives" : "",
 				"predColorMap" : {
 					"primary" : ["0e0e0e", "292929", "3f3f3f", "575757"],
@@ -159,10 +159,10 @@
 	"sbqOCPotion" : [
 		[0, {
 			"pool" : [
-				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbqKaiju_Xeronious"}} }},
-				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbqFray_IcyVixen"}} }},
-				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbqHelena_FFWizard"}} }},
-				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbqSandy_Fevix"}} }}
+				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/Xeronious/Kaiju"}} }},
+				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/IcyVixen/Fray"}} }},
+				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/FFWizard/Helena"}} }},
+				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/Fevix/Sandy"}} }}
 			]
 		}]
 	],
@@ -170,12 +170,12 @@
 		[0, {
 			"pool" : [
 				{"weight":0.3, "item" : "sbqMysteriousPotion"},
-				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbqSlime"}} }},
-				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbqGiantVaporeon"}} }},
-				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "vaporeon"}} }},
-				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "flareon"}} }},
-				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "meowscarada"}} }},
-				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "hellhound"}} }}
+				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/slime"}} }},
+				{"weight":0.3, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/vaporeonGiant"}} }},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/vaporeon"}} }},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/flareon"}} }},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/meowscarada"}} }},
+				{"weight":0.6, "item" : {"name":"sbqMysteriousPotion", "parameters" : {"identity":{"species" : "sbq/FFWizard/hellhound"}} }}
 			]
 		}]
 	],
