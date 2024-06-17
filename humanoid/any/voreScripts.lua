@@ -368,6 +368,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 	occupant.size = action.size or location.digestedSize or 0
 	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
 	location:markSizeDirty()
+	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
 	return true, function()
 		local position = occupant:position()
 		occupant:refreshLocation()
@@ -591,6 +592,7 @@ function default:infused(name, action, target)
 	occupant.flags.infuseType = infuseType
 	occupant.locationSettings[infuseType.."Digested"] = false
 	occupant.locationSettings[infuseType] = false
+	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
 	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, occupant.flags.digestType), sbq.recieveOccupants)
 	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 		sbq.settings.infuseSlots[infuseType].item = card
@@ -623,11 +625,14 @@ end
 
 function default:lockDown()
 	if sbq.statPositive("sbqLockDown") then
-		sbq.clearStatModifiers("sbqLockDown")
+		SpeciesScript:tryAction("lockDownClear")
 	else
 		sbq.setStatModifiers("sbqLockDown", {
 			{ stat = "sbqLockDown", amount = 1 },
 			{ stat = "energyRegenPercentageRate", baseMultiplier = 0}
 		})
 	end
+end
+function default:lockDownClear()
+	sbq.clearStatModifiers("sbqLockDown")
 end
