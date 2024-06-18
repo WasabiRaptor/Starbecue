@@ -628,6 +628,7 @@ function default:lockDown()
 		SpeciesScript:tryAction("lockDownClear")
 	else
 		sbq.setStatModifiers("sbqLockDown", {
+			"sbqLockDown",
 			{ stat = "sbqLockDown", amount = 1 },
 			{ stat = "energyRegenPercentageRate", baseMultiplier = 0}
 		})

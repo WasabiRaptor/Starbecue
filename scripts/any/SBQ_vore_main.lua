@@ -47,6 +47,7 @@ function controlReleased(seat, control, time)
 end
 
 function sbq.init(config)
+	sbq.clearStatModifiers("sbqLockDown")
 	sbq.defaultAnimatorTags = animator.getTags()
 	sbq.settingsInit()
 	sbq.lists = {}
