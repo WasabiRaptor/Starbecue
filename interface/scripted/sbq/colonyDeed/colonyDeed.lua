@@ -217,15 +217,10 @@ function sbq.refreshDeedPage()
 
 	for i, tenant in ipairs(sbq.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
-		local canvasSize = {43,43}
+		local canvasSize = {60,60}
 		local portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 		local id = world.getUniqueEntityId(tenant.uniqueId)
 		if id then portrait = world.entityPortrait(id, "full") end
-
-		for k,v in ipairs(portrait) do
-			local size = root.imageSize(v.image)
-			canvasSize = {math.max(size[1],canvasSize[1]),math.max(size[2],canvasSize[2])}
-		end
 		local panel = { type = "panel", expandMode = { 0, 2 }, style = "flat", children = {
 			{ mode = "vertical" },
 			{ type = "canvas", id = "tenant" .. i .. "Canvas", size = canvasSize },
@@ -245,7 +240,7 @@ function sbq.refreshDeedPage()
 			table.remove(_ENV.metagui.inputData.occupier.tenants, i)
 			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
 			sbq.refreshDeedPage()
-        end
+		end
 		canvas:clear()
 		canvas:drawDrawables(portrait, vec2.div(canvasWidget.size, 2))
 		function settings:onClick()
