@@ -4,6 +4,9 @@ sbq_transform = {}
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
+	if not status.statusProperty("sbqSpeciesIdentities") then
+		status.setStatusProperty("sbqSpeciesIdentities", {[humanoid.species()] = humanoid.getIdentity()})
+	end
 
 	message.setHandler("sbqTransformTechRadialMenuScript", function(_, _, script, ...)
 		if not script then return end
@@ -98,7 +101,7 @@ function TopMenu:init()
 			description = sbq.getString(":assignSpeciesDesc")
 		}
 	}
-	speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
+	speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {[humanoid.species()] = humanoid.getIdentity()}
 	favoriteSpecies = player.getProperty("sbqFavoriteSpecies") or {}
 	sortedSpecies = {}
 	for k, v in pairs(speciesIdentites) do

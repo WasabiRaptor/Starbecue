@@ -1,0 +1,24 @@
+{
+	"frameGrid" : {
+		"size" : [152, 64],
+		"dimensions" : [8, 2],
+		"names" : [
+			[ "idle.1" ],
+			[ "eat.1", "eat.2", "eat.3", "eat.4", "eat.5", "eat.6", "eat.7", "look.1"]
+		]
+	},
+	"aliases" : {
+		"eat.8" : "eat.6",
+
+		"breath.1" : "eat.2",
+
+		"escape.1" : "look.1",
+		"escape.2" : "look.1",
+		"escape.3" : "look.1",
+		"escape.4" : "eat.4",
+		"escape.5" : "eat.3",
+		"escape.6" : "eat.2",
+		"escape.7" : "eat.2",
+		"escape.8" : "eat.1"
+	}
+}
