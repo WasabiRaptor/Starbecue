@@ -929,8 +929,8 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<headArmor>:<headStateAnim>" } },
-						"idle": { "properties": { "image": "<headArmor>:<headStateAnim>.<headStateFrame>" } },
+						"normal": { "properties": { "image": "<headArmor>:normal" } },
+						"idle": "normal",
 						"none": { "properties": {} }
 					},
 					"hiddenState" : {

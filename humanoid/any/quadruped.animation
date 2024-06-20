@@ -1079,8 +1079,8 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<headArmor>:<headStateAnim>" } },
-						"idle": { "properties": { "image": "<headArmor>:<headStateAnim>.<headStateFrame>" } },
+						"normal": { "properties": { "image": "<headArmor>:normal" } },
+						"idle": "normal",
 						"none": { "properties": {} }
 					},
 					"hiddenState" : {
@@ -1101,7 +1101,7 @@
 					"anchorPart" : "body",
 					"transformationGroups" : ["tailOffset"],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<bodyDirectives>",
+					"processingDirectives" : "<tailColorRemap><bodyDirectives>",
 					"offset" : [-1.875,-0.5]
 				},
 				"partStates" : {
