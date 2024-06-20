@@ -77,7 +77,7 @@ function dialogueProcessor.processDialogueResults(i)
 	results.portrait = results.portrait or sbq.defaultPortrait
 	results.dialogue = dialogueProcessor.generateKeysmashes(results.dialogue)
 	results.buttonText = results.buttonText or "[...]"
-	local targetName = results.target and (sbq.entityName(results.target) .. "^reset;")
+	local targetName = results.target and world.entityExists(results.target) and (sbq.entityName(results.target) .. "^reset;")
 	results.tags = sb.jsonMerge(
 		{
 			dialoguePath = dialogue.path or "",
