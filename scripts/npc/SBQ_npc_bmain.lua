@@ -61,6 +61,7 @@ function init()
 		end
 		self.behavior = behavior
 	end
+	require("/scripts/actor/SBQ_behavior.lua")
 
 	if not status.statusProperty("sbqDidVornyConvertCheck") then
 		status.setStatusProperty("sbqDidVornyConvertCheck", true)
