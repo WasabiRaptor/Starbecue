@@ -6,7 +6,7 @@
 			[ "0-idle.1", "0-run.2", "0-run.3"],
 			[ "1-eat.1", "1-eat.2", "1-eat.3", "1-eat.4", "1-eat.5", "1-eat.6", "1-eat.7", "1-eat.8"],
 			[ "1-idle.1", "1-run.2", "1-run.3"],
-			[ "0-shrink.1", "0-shrink.2", "0-shrink.3", "0-shrink.4", "0-shrink.5", "0-shrink.6", "0-shrink.7", "0-shrink.8"],
+			[ "1-expand", "0.875-expand", "0.75-expand", "0.625-expand", "0.5-expand", "0.375-expand", "0.25-expand", "0.125-expand"],
 			[ "1-s_up_press.1", "1-s_up_press.2", "1-s_up_hold.1", "1-s_up_release.1", "1-s_down_press.1", "1-s_down_press.2", "1-s_down_hold.1", "1-s_down_release.1"],
 			[ "1-s_back_press.1", "1-s_back_press.2", "1-s_back_hold.1", "1-s_back_release.1", "1-s_front_press.1", "1-s_front_press.2", "1-s_front_hold.1", "1-s_front_release.1"]
 		]
@@ -21,24 +21,6 @@
 		"1-run.1" : "1-idle.1",
 		"1-run.4" : "1-run.2",
 		"1-run.5" : "1-run.1",
-
-		"1-expand.1" : "0-shrink.8",
-		"1-expand.2" : "0-shrink.7",
-		"1-expand.3" : "0-shrink.6",
-		"1-expand.4" : "0-shrink.4",
-		"1-expand.5" : "0-shrink.3",
-		"1-expand.6" : "0-shrink.2",
-		"1-expand.7" : "0-shrink.2",
-		"1-expand.8" : "0-shrink.1",
-
-		"0-escape.1" : "1-eat.8",
-		"0-escape.2" : "1-eat.7",
-		"0-escape.3" : "1-eat.6",
-		"0-escape.4" : "1-eat.4",
-		"0-escape.5" : "1-eat.3",
-		"0-escape.6" : "1-eat.2",
-		"0-escape.7" : "1-eat.2",
-		"0-escape.8" : "1-eat.1",
 
 		"1-s_up_release.2" : "1-idle.1",
 		"1-s_down_release.2" : "1-idle.1",

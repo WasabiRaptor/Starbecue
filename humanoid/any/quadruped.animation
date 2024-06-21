@@ -162,10 +162,9 @@
 				}
 			},
 			"headState": {
-				"priority" : 0,
-				"default": "normal",
+				"priority" : 1,
+				"default": "idle",
 				"states": {
-					"normal": { "frames": 1, "cycle": 1, "mode": "end" },
 					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
 					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
@@ -850,8 +849,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<bodyImagePath><facialHairGroup>/<facialHairType>.png:<headStateAnim>" } },
-						"idle": { "properties": { "image": "<bodyImagePath><facialHairGroup>/<facialHairType>.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><facialHairGroup>/<facialHairType>.png:normal" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -879,8 +877,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<bodyImagePath><facialMaskGroup>/<facialMaskType>.png:<headStateAnim>" } },
-						"idle": { "properties": { "image": "<bodyImagePath><facialMaskGroup>/<facialMaskType>.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><facialMaskGroup>/<facialMaskType>.png:normal" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -908,8 +905,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<bodyImagePath><hairGroup>/<hairType>.png:<headStateAnim>" } },
-						"idle": { "properties": { "image": "<bodyImagePath><hairGroup>/<hairType>.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><hairGroup>/<hairType>.png:normal" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -939,8 +935,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>" } },
-						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath>head.png:normal" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -1079,8 +1074,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<headArmor>:normal" } },
-						"idle": "normal",
+						"idle": { "properties": { "image": "<headArmor>:normal" } },
 						"none": { "properties": {} }
 					},
 					"hiddenState" : {

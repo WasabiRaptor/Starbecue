@@ -181,10 +181,9 @@
 				}
 			},
 			"headState": {
-				"priority" : 0,
-				"default": "normal",
+				"priority" : 1,
+				"default": "idle",
 				"states": {
-					"normal": { "frames": 1, "cycle": 1, "mode": "end" },
 					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
 					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
@@ -751,7 +750,6 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<bodyImagePath>head.png:idle.1" } },
 						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>.<headStateFrame>" } },
 						"eat" : "idle",
 						"none": { "properties": {} }
@@ -779,8 +777,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"normal": { "properties": { "image": "<headArmor>:normal" } },
-						"idle": "normal",
+						"idle": { "properties": { "image": "<headArmor>:normal" } },
 						"none": { "properties": {} }
 					},
 					"hiddenState" : {

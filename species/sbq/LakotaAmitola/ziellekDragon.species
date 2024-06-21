@@ -237,18 +237,13 @@
 	},
 	"potionImagePath" : "/humanoid/sbq/LakotaAmitola/ziellekDragon/potion/",
 	"animationConfig" : "/humanoid/sbq/LakotaAmitola/ziellekDragon/ziellekDragon.animation",
+	"identityAnimationCustom" :{},
 	"animationCustom" : [
-		{}
+		"/humanoid/sbq/LakotaAmitola/ziellekDragon/ziellekDragonPred.animation"
 	],
 	"potionRarity" : "essential",
 	"voreConfig" : [
-		"/humanoid/any/vore_quadruped.config",
-		{
-			"scripts" : ["/humanoid/any/voreScripts.lua", "/humanoid/sbq/LakotaAmitola/ziellekDragon/voreScripts.lua"],
-			"species" : "ZiellekDragon",
-			"defaultSettings" : {
-			}
-		}
+		"/humanoid/sbq/LakotaAmitola/ziellekDragon/vore.config"
 	],
 
 
