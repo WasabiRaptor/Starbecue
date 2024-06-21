@@ -460,6 +460,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.5,
+					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "bellyOffset"],
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
@@ -508,6 +509,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": -0.5,
+					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "tailOffset"],
 					"bodyFullbright" : true,
 					"processingDirectives" : "<tailColorRemap><bodyDirectives>"
@@ -553,6 +555,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.2,
+					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0.5, -1.5],
 					"bodyFullbright" : true,
@@ -698,6 +701,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.1,
+					"anchorPart":"body",
 					"transformationGroups": ["movementOffset", "chestOffset"],
 					"interact" : [0.375,-0.375],
 					"bodyFullbright" : true,
@@ -824,6 +828,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.01,
+					"anchorPart" :"body",
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0, -2],
 					"bodyFullbright" : true,
