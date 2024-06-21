@@ -478,7 +478,7 @@ function default:chooseLocation(name, action, target, predSelect, ...)
 	if not occupant then return false end
 	for _, locationName in ipairs(action.locationOrder or sbq.voreConfig.locationOrder or root.assetJson("/sbqGui.config:locationOrder")) do
 		local location = SpeciesScript:getLocation(locationName)
-		if sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+		if location and sbq.tableMatches(location.activeSettings, sbq.settings, true) then
 			local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 			table.insert(locations, {
 				name = location.name,
