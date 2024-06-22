@@ -1402,7 +1402,7 @@ function _Occupant:update(dt)
 	local location = self:getLocation()
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
-		if self:animProperty("release") then return self:remove() end
+		if not self.flags.newOccupant and self:animProperty("release") then return self:remove() end
 		self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
 		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))

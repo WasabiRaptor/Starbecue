@@ -981,7 +981,7 @@
 					"interact" : [7,0],
 
 					"centered": true,
-					"zLevel": 4,
+					"zLevel": -2,
 					"transformationGroups": ["headOffset"],
 					"anchorPart": "body",
 					"bodyFullbright" : true,
@@ -1001,10 +1001,34 @@
 					}
 				}
 			},
+			"head_fg": {
+				"properties": {
+					"interact" : [7,0],
+					"centered": true,
+					"zLevel": 4,
+					"anchorPart": "head",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives><hairType><shirt><pants><shirtColor><pantsColor>"
+				},
+				"partStates": {
+					"headState": {
+						"idle": { "properties": { "image": "<bodyImagePath>head/head.png:<headStateAnim>.<headStateFrame>?addmask=/humanoid/sbq/LakotaAmitola/ziellekDragon/head/fg_mask.png:<headStateAnim>.<headStateFrame>" } },
+						"eat": "idle",
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+
 			"emote_bg": {
 				"properties": {
 					"centered": true,
-					"zLevel": -2,
+					"zLevel": -3,
 					"anchorPart": "head",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<emoteDirectives>"

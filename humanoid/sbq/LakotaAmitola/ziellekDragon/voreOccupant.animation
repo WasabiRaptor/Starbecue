@@ -126,6 +126,7 @@
 					"<occupant>State" : {
 						"oralVore" : {
 							"frameProperties" : {
+								"release" : [true],
 								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, false, false, true, true, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
@@ -165,12 +166,12 @@
 							},
 							"properties" : {
 								"anchorPart" :"head",
-								"zLevel" : 5.9
+								"zLevel" : -1
 							}
-
 						},
 						"analVore": {
 							"frameProperties" : {
+								"release" : [true],
 								"emote" : ["oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand"],
@@ -199,6 +200,7 @@
 						},
 						"unbirthVore" : {
 							"frameProperties" : {
+								"release" : [true],
 								"emote" : ["oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand"],
@@ -227,6 +229,7 @@
 						},
 						"cockVore" : {
 							"frameProperties" : {
+								"release" : [true],
 								"emote" : ["oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand"],
