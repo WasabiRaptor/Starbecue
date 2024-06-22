@@ -136,7 +136,7 @@
 		"voreTypes" : {
 			"oralVore" : "belly",
 			"unbirth" : "womb",
-			"cockVore" : "shaft",
+			"cockVore" : "cock",
 			"analVore" : "belly",
 			"breastVore" : "breasts"
 		},
@@ -251,19 +251,19 @@
 		"listLocations" : [
 			"belly",
 			"womb",
-			"shaft",
+			"cock",
 			"balls"
 		],
 		"locations" :{
 			"belly" : { "max": 1, "transformGroups" : ["bodybob"] },
 			"hug" : { "name" : "Held", "max": 1, "maxNested": -1, "transformGroups" : ["armsbob"] },
 
-			"shaft" : { "max": 1, "maxNested" : -1 },
+			"cock" : { "max": 1, "maxNested" : -1 },
 			"balls" : { "max": 1 },
 			"ballsL" : {},
 			"ballsR" : {},
 
-			"bulge" : { "copy" : ["shaft", "ballsL", "ballsR"] },
+			"bulge" : { "copy" : ["cock", "ballsL", "ballsR"] },
 
 			"breasts" : { "max": 1 },
 			"breastsL" : {},
@@ -312,7 +312,7 @@
 				"cockVore": { // 1 occupant
 					"voreType" : "cockVore",
 					"settings" : { "cockVorePred" : true },
-					"location" : "shaft",
+					"location" : "cock",
 					"failOnFull" : true,
 					"lock" : true,
 					"script": "cockVore",
@@ -325,7 +325,7 @@
 				"cockEscape": { // 1 occupant
 					"voreType" : "cockVore",
 					"settings" : { "cockVorePred" : true },
-					"location" : "shaft",
+					"location" : "cock",
 					"lock" : true,
 					"script": "cockEscape",
 					"victimAnimation": "cockEscape",
@@ -336,7 +336,7 @@
 				},
 
 				"ballsToShaft": { // 1 occupant
-					"location" : "shaft",
+					"location" : "cock",
 					"script": "moveToLocation"
 				},
 				"shaftToBalls": { // 1 occupant
@@ -385,7 +385,7 @@
 					//"animation": { "head": "look" },
 					//"animationWhenMoving": { "head": "idle" }
 				},
-				"shaft" : {
+				"cock" : {
 					"parts" : ["cock"],
 					"sound" : false,
 					"directions":{
@@ -442,7 +442,7 @@
 				"cock": {
 					"pos": [3, -4], "aim": [0.5, -3.5],
 					"transition": "cockVore", "chance": 100,
-					"location": "shaft", "failOnFull": true
+					"location": "cock", "failOnFull": true
 				}
 
 			},
@@ -457,7 +457,7 @@
 			},
 			"locationCenters" : {
 				"belly" : [0, -3],
-				"shaft" : [0.5, -3.5],
+				"cock" : [0.5, -3.5],
 				"ballsR": [0, -4],
 				"ballsL": [0, -4]
 			},
@@ -575,7 +575,7 @@
 			"defaultActions" : ["unassigned", "unassigned"],
 			"locationCenters" : {
 				"belly" : [0, -1.5],
-				"shaft" : [0.25, -1.75],
+				"cock" : [0.25, -1.75],
 				"ballsR": [0, -2],
 				"ballsL": [0, -2]
 			},

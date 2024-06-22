@@ -37,11 +37,11 @@ function sbq.letout(id)
 		else
 			return sbq.doTransition("oralEscape", {id = id})
 		end
-	elseif location == "shaft" then
+	elseif location == "cock" then
 		return sbq.doTransition("cockEscape", {id = id})
 
 	elseif location == "ballsL" or location == "ballsR" or location == "balls" then
-		return sbq.moveToLocation({id = id}, {location = "shaft"})
+		return sbq.moveToLocation({id = id}, {location = "cock"})
 	elseif location == "womb" then
 		return sbq.doTransition("unbirthEscape", {id = id})
 	end
@@ -110,15 +110,15 @@ end
 
 function cockVore(args, tconfig)
 	if not mcontroller.onGround() or sbq.movement.falling then return false end
-	return sbq.doVore(args, "shaft", {}, "swallow", tconfig.voreType)
+	return sbq.doVore(args, "cock", {}, "swallow", tconfig.voreType)
 end
 
 function checkCockVore()
-	local shaftOccupant = sbq.findFirstOccupantIdForLocation("shaft")
+	local shaftOccupant = sbq.findFirstOccupantIdForLocation("cock")
 	if shaftOccupant then
 		return sbq.moveToLocation({id = shaftOccupant}, {location = "balls"})
 	end
-	return sbq.checkEatPosition(sbq.localToGlobal( sbq.stateconfig[sbq.state].actions.cockVore.position ), 5, "shaft", "cockVore")
+	return sbq.checkEatPosition(sbq.localToGlobal( sbq.stateconfig[sbq.state].actions.cockVore.position ), 5, "cock", "cockVore")
 end
 
 function cockEscape(args, tconfig)

@@ -145,6 +145,7 @@
 	],
 
 	"humanoidOverrides" : {
+		"mouthOffset" : [20, 3],
 		"feetOffset" : [0,-32],
 
 		"runFallOffset" : 0,
@@ -194,7 +195,7 @@
 	"animationConfig" : "/humanoid/sbq/IcyVixen/Fray/fray.animation",
 	"identityAnimationCustom" :{},
 	"animationCustom" : [
-		{}
+		"/humanoid/sbq/IcyVixen/Fray/voreOccupants.animation"
 	],
 	"potionRarity" : "essential",
 	"voreConfig" : [

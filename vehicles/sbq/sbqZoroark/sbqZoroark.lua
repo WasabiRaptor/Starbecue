@@ -182,7 +182,7 @@ function sbq.letout(id)
 	elseif location == "hug" then
 		sbq.grabbing = nil
 		return sbq.uneat(id)
-	elseif location == "shaft" then
+	elseif location == "cock" then
 		return sbq.doTransition("cockEscape", {id = id})
 	end
 end
@@ -192,7 +192,7 @@ function grab()
 end
 
 function cockVore(args, tconfig)
-	return sbq.doVore(args, "shaft", {}, "swallow", tconfig.voreType)
+	return sbq.doVore(args, "cock", {}, "swallow", tconfig.voreType)
 end
 
 function cockEscape(args, tconfig)
@@ -218,11 +218,11 @@ function checkOralVore()
 end
 
 function checkCockVore()
-	local shaftOccupant = sbq.findFirstOccupantIdForLocation("shaft")
+	local shaftOccupant = sbq.findFirstOccupantIdForLocation("cock")
 	if shaftOccupant then
 		return sbq.moveToLocation({id = shaftOccupant}, {location = "balls"})
 	end
-	return sbq.checkEatPosition(sbq.localToGlobal( sbq.stateconfig[sbq.state].actions.cockVore.position ), 5, "shaft", "cockVore")
+	return sbq.checkEatPosition(sbq.localToGlobal( sbq.stateconfig[sbq.state].actions.cockVore.position ), 5, "cock", "cockVore")
 end
 
 -------------------------------------------------------------------------------

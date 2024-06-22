@@ -141,18 +141,18 @@
 		},
 		"listLocations" : [
 			"belly",
-			"shaft",
+			"cock",
 			"balls"
 		],
 		"voreTypes" : {
 			"oralVore" : "belly",
-			"cockVore" : "shaft",
+			"cockVore" : "cock",
 			"analVore" : "butt"
 		},
 		"locations" :{
 			"belly" : { "max": 1, "transformGroups" : ["bellybob", "bodybob"] },
 			"butt" : { "name" : "Butt", "max": 1, "maxNested" : -1, "transformGroups" : ["bellybob", "bodybob"] },
-			"shaft" : { "max": 1, "maxNested" : -1, "transformGroups" : ["bellybob", "bodybob"]},
+			"cock" : { "max": 1, "maxNested" : -1, "transformGroups" : ["bellybob", "bodybob"]},
 			"balls" : { "max": 1, "transformGroups" : ["bellybob", "bodybob"] },
 			"ballsL" : {},
 			"ballsR" : {}
@@ -252,7 +252,7 @@
 					"settings" : { "cockVorePred" : true },
 					"voreType" : "cockVore",
 					"lock": true,
-					"location": "shaft",
+					"location": "cock",
 					"failOnFull" : true,
 					"timing": "cock",
 					"animation": {
@@ -266,7 +266,7 @@
 					"settings" : { "cockVorePred" : true },
 					"voreType" : "cockVore",
 					"lock": true,
-					"location": "shaft",
+					"location": "cock",
 					"timing": "cock",
 					"animation": {
 						"cock": "escape",
@@ -277,7 +277,7 @@
 				},
 				"ballsToShaft": {
 					"settings" : { "penis" : true},
-					"location" : "shaft",
+					"location" : "cock",
 					"script": "moveToLocation"
 				},
 				"shaftToBalls": {
@@ -388,12 +388,12 @@
 			],
 			"shrinkAnims" : {
 				"belly" : { "belly": "shrink" },
-				"shaft" : { "cock": "shrink" },
+				"cock" : { "cock": "shrink" },
 				"balls" : { "ballsFront": "shrink", "ballsBack": "shrink" }
 			},
 			"expandAnims" : {
 				"belly" : { "belly": "expand" },
-				"shaft" : { "cock": "expand" },
+				"cock" : { "cock": "expand" },
 				"balls" : { "ballsFront": "expand", "ballsBack": "expand" }
 			},
 			"struggle": {
@@ -418,7 +418,7 @@
 					"chances": { "min": 5, "max": 10 }
 				},
 
-				"shaft" : {
+				"cock" : {
 					"parts" : ["cock"],
 					"directions":{
 						"down": { "transition": "cockEscape", "indicate": "red", "drivingEnabled": true },
@@ -458,7 +458,7 @@
 			},
 			"locationCenters" : {
 				"belly" : [0, -1.75],
-				"shaft" : [-1, -1.75],
+				"cock" : [-1, -1.75],
 				"ballsL" : [-1.5, -2],
 				"ballsR" : [-1.5, -2]
 			},
@@ -471,7 +471,7 @@
 				"cockVore": {
 					"pos": [-1, -1.5], "aim": [-1, -0.5],
 					"transition": "cockVore", "chance": 100,
-					"location":"shaft", "failOnFull":true
+					"location":"cock", "failOnFull":true
 				},
 				"analVore": {
 					"pos": [-3.5, -1.5], "aim": [-3, 0],

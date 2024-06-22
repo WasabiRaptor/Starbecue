@@ -1,42 +1,58 @@
 function sbq.convertVictimAnims(path)
+	sbq.logInfo(path)
 	local victimAnims = root.assetJson(path)
-    local newAnims = {}
+	local newAnims = {}
 	for k, anim in pairs(victimAnims) do
-        local newAnim = {
-            properties = {},
-            frameProperties = {
-				transforms = {}
+		local newAnim = {
+			properties = {},
+			frameProperties = {
+				transforms = {},
+				hidden = {},
+				orientation = {},
+				emote = {}
 			}
 		}
 
-		local translate = {}
-		local scale = {}
-        local rotate
-
+		local translate = {0,0}
+		local scale = {1,1}
+		local rotate = 0
+		local hidden = 1
+		local orientation
+		local emote
 		for i = 1, math.max(#(anim.xs or {}), #(anim.ys or {}), #(anim.x or {}), #(anim.y or {}), #(anim.r or {}), #(anim.visible or {}) ) do
-            scale = { ((anim.xs or {})[i] or scale[1] or 1) * ((anim.visible or {})[i] or 1),
-                ((anim.ys or {})[i] or scale[2] or 1) * ((anim.visible or {})[i] or 1) }
-            translate = {(anim.x or {})[i] or translate[1], (anim.y or {})[i] or translate[2] }
-            rotate = (anim.r or {})[i] or rotate or 0
-            newAnim.frameProperties.transforms[i] = {
-                scale = scale,
-                translate = translate,
+			hidden = ((anim.visible or {})[i] or hidden)
+			orientation = ((anim.sitpos or {})[i] or orientation)
+			emote = ((anim.emote or {})[i] or emote)
+			scale = {
+				((anim.xs or {})[i] or scale[1]) * hidden,
+				((anim.ys or {})[i] or scale[2]) * hidden,
+			}
+			translate = {
+				(anim.x or {})[i] or translate[1],
+				(anim.y or {})[i] or translate[2],
+			}
+			rotate = (anim.r or {})[i] or rotate
+			newAnim.frameProperties.transforms[i] = {
+				scale = scale,
+				translate = translate,
 				rotate = rotate
-            }
-        end
+			}
+			newAnim.frameProperties.hidden[i] = hidden == 0
+			newAnim.frameProperties.orientation[i] = orientation
+			newAnim.frameProperties.emote[i] = emote
+		end
 		newAnims[k] = newAnim
-    end
-    return newAnims
+	end
+	sbq.logInfo(newAnims, 4)
+	return newAnims
 end
 
-function sbq.createOccupantAnims()
-    local anims = {}
-    for i = 0, sbq.config.seatCount -1 do
-        local occupantAnim = sbq.replaceConfigTags(
-            root.fetchConfigArray(sbq.voreConfig.occupantAnimationConfig or "/humanoid/any/voreOccupant.animation"),
-            {occupant = "occupant"..i}
-        )
-        anims = sb.jsonMerge(anims, occupantAnim)
-    end
-    sbq.logInfo(sb.printJson(anims, 2, true))
+function sbq.createOccupantAnims(path)
+	sbq.logInfo(path)
+	local anims = {}
+	for i = 0, sbq.config.seatCount -1 do
+		local occupantAnim = sbq.replaceConfigTags(root.assetJson(path),{occupant = "occupant"..i})
+		anims = sb.jsonMerge(anims, occupantAnim)
+	end
+	sbq.logInfo(anims, 2)
 end

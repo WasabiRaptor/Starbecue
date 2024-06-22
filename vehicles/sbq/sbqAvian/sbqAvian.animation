@@ -26,7 +26,7 @@
 					"run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 3 },
 
 					"smol.idle": { "frames": 1, "cycle": 3, "mode": "end", "priority": 0 },
 					"smol.run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
@@ -56,7 +56,7 @@
 				"default": "none",
 				"states": {
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 3, "baseAnim" : "eat" },
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "none", "priority": 3, "baseAnim" : "eat" },
 
 					"none": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 }
 				}
@@ -68,7 +68,7 @@
 					"run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 3 },
 
 					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1 },
 					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1 },
@@ -88,7 +88,7 @@
 					"run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 3 },
 
 					"s_back": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1 },
 					"s_front": { "frames": 5, "cycle": 1, "mode": "end", "priority": 1 },
@@ -132,7 +132,7 @@
 					"run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 3 },
 
 					"s_back": { "frames": 2, "cycle": 0.5, "mode": "end", "priority": 1 },
 					"s_front": { "frames": 2, "cycle": 0.5, "mode": "end", "priority": 1 },
@@ -152,7 +152,7 @@
 					"run": { "frames": 1, "cycle": 0.01, "mode": "end", "priority": 0 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 3 },
 
 					"s_back": { "frames": 2, "cycle": 0.5, "mode": "end", "priority": 1 },
 					"s_front": { "frames": 2, "cycle": 0.5, "mode": "end", "priority": 1 },
@@ -238,7 +238,7 @@
 					"blink": { "frames": 2, "cycle": 3, "mode": "end", "priority": 1 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 3 },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 3 },
 
 					"smol.idle": { "frames": 1, "cycle": 3, "mode": "end", "priority": 0 },
 					"smol.blink": { "frames": 2, "cycle": 3, "mode": "end", "priority": 1 },

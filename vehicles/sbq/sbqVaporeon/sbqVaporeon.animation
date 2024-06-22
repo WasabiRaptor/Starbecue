@@ -59,7 +59,7 @@
 				"default": "none",
 				"states": {
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 4 },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "none", "priority": 4, "baseAnim" : "eat" },
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "none", "priority": 4, "baseAnim" : "eat" },
 
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 }
 				}
@@ -175,7 +175,7 @@
 					"dummy": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 2 },
 
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 4, "baseAnim" : "idle" },
-					"escape": { "frames": 8, "cycle": 1.5, "mode": "end", "priority": 4, "baseAnim" : "idle" },
+					"escape": { "frames": 8, "cycle": 1, "mode": "end", "priority": 4, "baseAnim" : "idle" },
 
 					"rollover": { "frames": 5, "cycle": 1, "mode": "end", "priority": 3 },
 

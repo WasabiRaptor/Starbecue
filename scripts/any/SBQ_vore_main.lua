@@ -80,9 +80,6 @@ function sbq.init(config)
 	end)
 
 	sbq.reloadVoreConfig(config)
-
-	-- require "/scripts/misc/SBQ_convert_scripts.lua"
-	-- sbq.createOccupantAnims()
 end
 
 function sbq.update(dt)
@@ -1406,7 +1403,8 @@ function _Occupant:update(dt)
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
 		if self:animProperty("release") then return self:remove() end
-		self:setHidden(self:animProperty("hidden"))
+		self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
+		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))
 		self:setLoungeEmote(self:animProperty("emote"))
 	end
@@ -1459,7 +1457,8 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
 	if self:animProperty("release") then return self:remove() end
-	self:setHidden(self:animProperty("hidden"))
+	self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
+	self:setLoungeOrientation(self:animProperty("orientation"))
 	self:setLoungeDance(self:animProperty("dance"))
 	self:setLoungeEmote(self:animProperty("emote"))
 

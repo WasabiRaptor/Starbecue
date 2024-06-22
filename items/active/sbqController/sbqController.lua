@@ -41,7 +41,7 @@ function dontDoRadialMenu(arg)
 	dontDoMenu = arg
 end
 
-local shiftHeldTime
+local shiftHeldTime = 0
 function update(dt, fireMode, shiftHeld, controls)
 	if shiftHeld then
 		shiftHeldTime = shiftHeldTime + dt
@@ -95,9 +95,10 @@ function sbq.clickAction()
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
+	local bounds = rect.pad(mcontroller.collisionBoundBox(), sbq.config.actionRange * mcontroller.scale())
 	local result
 	for i, targetId in ipairs(entityaimed) do
-		if entity.entityInSight(targetId) and ((sbq.config.actionRange * mcontroller.scale()) >= vec2.mag(entity.distanceToEntity(targetId))) then
+		if entity.entityInSight(targetId) and (rect.intersects(bounds, world.entityCollisionBoundBox(targetId))) then
 			if sbq.isLoungeDismountable(targetId) then
 				result = {sbq.attemptAction(targetId)}
 				break

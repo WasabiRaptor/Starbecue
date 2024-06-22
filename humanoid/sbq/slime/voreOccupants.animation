@@ -1,0 +1,3962 @@
+{
+	"animatedParts": {
+		"stateTypes": {
+			"occupant0Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant0State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant0": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant0": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant0": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant0": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant1Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant1State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant1": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant1": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant1": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant1": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant2Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant2State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant2": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant2": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant2": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant2": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant3Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant3State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant3": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant3": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant3": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant3": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant4Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant4State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant4": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant4": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant4": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant4": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant5Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant5State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant5": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant5": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant5": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant5": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant6Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant6State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant6": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant6": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant6": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant6": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant7Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant7State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant7": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant7": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant7": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant7": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant8Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant8State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant8": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant8": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant8": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant8": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant9Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant9State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant9": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant9": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant9": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant9": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant10Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant10State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant10": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant10": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant10": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant10": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant11Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant11State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant11": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant11": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant11": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant11": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant12Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant12State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant12": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant12": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant12": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant12": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant13Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant13State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant13": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant13": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant13": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant13": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant14Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant14State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant14": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant14": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant14": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant14": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			},
+			"occupant15Location": {
+				"default": "none",
+				"priority": 1,
+				"states": {
+					"slime": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					}
+				}
+			},
+			"occupant15State": {
+				"default": "idle",
+				"priority": 2,
+				"states": {
+					"idle": {
+						"frames": 1,
+						"cycle": 0,
+						"mode": "end"
+					},
+					"absorbVore": {
+						"frames": 2,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"s_front": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant15": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_back": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant15": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										-0.25,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_up": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant15": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					},
+					"s_down": {
+						"frames": 3,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "idle",
+						"frameProperties": {
+							"occupant15": [
+								{
+									"translate": [
+										0,
+										0
+									]
+								},
+								{
+									"translate": [
+										0,
+										-0.25
+									]
+								},
+								{
+									"translate": [
+										0,
+										0
+									]
+								}
+							]
+						}
+					}
+				}
+			}
+		},
+		"parts": {
+			"occupant0": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant0"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant0Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant0State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant1": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant1"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant1Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant1State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant2": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant2"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant2Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant2State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant3": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant3"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant3Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant3State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant4": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant4"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant4Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant4State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant5": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant5"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant5Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant5State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant6": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant6"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant6Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant6State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant7": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant7"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant7Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant7State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant8": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant8"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant8Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant8State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant9": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant9"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant9Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant9State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant10": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant10"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant10Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant10State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant11": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant11"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant11Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant11State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant12": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant12"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant12Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant12State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant13": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant13"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant13Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant13State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant14": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant14"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant14Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant14State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			},
+			"occupant15": {
+				"properties": {
+					"centered": true,
+					"loungeOffset": [
+						0,
+						0
+					],
+					"interpolated": true,
+					"transformationGroups": [
+						"occupant15"
+					],
+					"zLevel": -1,
+					"hidden": false,
+					"dance": "sbqIdle",
+					"orientation": "stand",
+					"emote": "idle"
+				},
+				"partStates": {
+					"occupant15Location": {
+						"slime": {
+							"properties": {
+								"anchorPart": "belly",
+								"zLevel": -1,
+								"offset": [
+									0,
+									0
+								]
+							}
+						}
+					},
+					"occupant15State": {
+						"absorbVore": {
+							"frameProperties": {
+								"emote": [
+									"oooh",
+									"oooh"
+								],
+								"hidden": [
+									false,
+									false
+								],
+								"orientation": [
+									"stand",
+									"stand"
+								],
+								"transforms": [
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											2
+										]
+									},
+									{
+										"rotate": 0,
+										"scale": [
+											1,
+											1
+										],
+										"translate": [
+											0,
+											0
+										]
+									}
+								]
+							},
+							"properties": {
+								"anchorPart": "body",
+								"zLevel": -1
+							}
+						}
+					},
+					"bodyHiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					},
+					"hiddenState": {
+						"none": {
+							"properties": {
+								"transforms": {
+									"scale": [
+										0,
+										0
+									]
+								},
+								"hidden": true
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups": {
+		"occupant0": {
+			"interpolated": true
+		},
+		"occupant1": {
+			"interpolated": true
+		},
+		"occupant2": {
+			"interpolated": true
+		},
+		"occupant3": {
+			"interpolated": true
+		},
+		"occupant4": {
+			"interpolated": true
+		},
+		"occupant5": {
+			"interpolated": true
+		},
+		"occupant6": {
+			"interpolated": true
+		},
+		"occupant7": {
+			"interpolated": true
+		},
+		"occupant8": {
+			"interpolated": true
+		},
+		"occupant9": {
+			"interpolated": true
+		},
+		"occupant10": {
+			"interpolated": true
+		},
+		"occupant11": {
+			"interpolated": true
+		},
+		"occupant12": {
+			"interpolated": true
+		},
+		"occupant13": {
+			"interpolated": true
+		},
+		"occupant14": {
+			"interpolated": true
+		},
+		"occupant15": {
+			"interpolated": true
+		}
+	}
+}

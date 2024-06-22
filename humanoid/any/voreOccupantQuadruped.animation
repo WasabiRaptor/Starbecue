@@ -168,27 +168,43 @@
 
 						},
 						"analVore": {
-							"frameProperties": {
-								"transforms": [
-									{"scale": [1,1],"translate": [-1.5,0],"rotate": 0},
-									{"scale": [0.75,0.75],"translate": [-1,-0.75],"rotate": -15},
-									{"scale": [0.5,0.5],"translate": [-0.75,-1.5],"rotate": -45},
-									{"scale": [0.25,0.25],"translate": [-0.5,-1.5],"rotate": -90},
-									{"scale": [0.1,0.1],"translate": [0,-1.5],"rotate": -90},
-									{"scale": [0.1,0.1],"translate": [0,-1.5],"rotate": -90},
-									{"scale": [0,0],"translate": [0,-1.25],"rotate": -45},
-									{"scale": [0,0],"translate": [0,-1],"rotate": 0}
-								],
-								"hidden":[
-									false,
-									false,
-									false,
-									false,
-									false,
-									true,
-									true,
-									true
-								]
+							"frameProperties" : {
+								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, false, false, false, true, true],
+								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
+								"transforms" : [{
+									"rotate" : 0,
+									"scale" : [1, 1],
+									"translate" : [-2, 0]
+								}, {
+									"rotate" : -15,
+									"scale" : [0.75, 0.75],
+									"translate" : [-2, -0.5]
+								}, {
+									"rotate" : -45,
+									"scale" : [0.5, 0.5],
+									"translate" : [-1.75, -1]
+								}, {
+									"rotate" : -90,
+									"scale" : [0.25, 0.25],
+									"translate" : [-1.5, -1]
+								}, {
+									"rotate" : -90,
+									"scale" : [0.1, 0.1],
+									"translate" : [-1, -1]
+								}, {
+									"rotate" : -90,
+									"scale" : [0.1, 0.1],
+									"translate" : [-1, -1]
+								}, {
+									"rotate" : -90,
+									"scale" : [0, 0],
+									"translate" : [-1, -1]
+								}, {
+									"rotate" : -90,
+									"scale" : [0, 0],
+									"translate" : [-1, -1]
+								}]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -225,30 +241,22 @@
 						},
 						"unbirthVore" : {
 							"frameProperties" : {
+								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, false, false, false, true, true],
+								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
 								"transforms" : [
-									{"scale" : [-1, 1],"translate" : [1.5, 0],"rotate" : 0},
-									{"scale" : [-0.75, 0.75],"translate" : [1, -0.5],"rotate" : 15},
-									{"scale" : [-0.5, 0.5],"translate" : [0.75, -1],"rotate" : 45},
-									{"scale" : [-0.25, 0.25],"translate" : [0.5, -1.5],"rotate" : 45},
-									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
-									{"scale" : [-0.1, 0.1],"translate" : [0, -1.5],"rotate" : 45},
-									{"scale" : [0, 0],"translate" : [0, 1.25],"rotate" : 45},
-									{"scale" : [0, 0],"translate" : [0, -1.25],"rotate" : 0}
-								],
-								"hidden":[
-									false,
-									false,
-									false,
-									false,
-									false,
-									true,
-									true,
-									true
-								]
+									{"rotate" : 0,"scale" : [1, 1],"translate" : [-2, 0]},
+									{"rotate" : -15,"scale" : [0.75, 0.75],"translate" : [-2, -0.5]},
+									{"rotate" : -45,"scale" : [0.5, 0.5],"translate" : [-1.75, -1]},
+									{"rotate" : -90,"scale" : [0.25, 0.25],"translate" : [-1.5, -1]},
+									{"rotate" : -90,"scale" : [0.1, 0.1],"translate" : [-1, -1]},
+									{"rotate" : -90,"scale" : [0.1, 0.1],"translate" : [-1, -1]},
+									{"rotate" : -90,"scale" : [0, 0],"translate" : [-1, -1]},
+									{"rotate" : -90,"scale" : [0, 0],"translate" : [-1, -1]}]
 							},
 							"properties" : {
 								"anchorPart" : "pussy",
-								"zLevel" : 5.9
+								"zLevel" : -3.9
 							}
 						},
 						"cockVore" : {
