@@ -57,7 +57,7 @@ end
 function sbq.doTransformation(newIdentity, duration, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	if sbq.config.transformationBlacklist[humanoid.species()] then
-		if player then player.radioMessage("sbqTransformFromBlacklist") end
+		if player then sbq.logWarn("Attempted to transform as blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformFromBlacklist") end
 		return false
 	end
 
@@ -105,14 +105,27 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	else
 		newIdentity.species = currentIdentity.species
 	end
-	if sbq.config.transformationBlacklist[newIdentity.species] then
-		if player then player.radioMessage("sbqTransformIntoBlacklist") end
-		return false
-	end
 	local oldSpeciesFile = root.speciesConfig(currentIdentity.species)
 	local speciesFile = root.speciesConfig(newIdentity.species)
 	if not speciesFile then return false end
 	newIdentity.species = speciesFile.kind
+	if sbq.config.transformationBlacklist[newIdentity.species] then
+		if player then sbq.logWarn("Attempted to transform into blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformIntoBlacklist") end
+		return false
+	end
+	if player and not (
+		root.assetExists(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "casual"}))
+		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "survival"}))
+		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:warpCinematic"), {species = newIdentity.species}))
+		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:deployCinematic"), {species = newIdentity.species}))
+		and root.assetJson("/universe_server.config:speciesShips")[newIdentity.species]
+		and root.assetJson("/ai/ai.config:species")[newIdentity.species]
+		and root.assetJson("/quests/quests.config:initialquests")[newIdentity.species]
+	) then
+		player.radioMessage("sbqTransformNPCOnly")
+		sbq.logWarn("Attempted to transform into NPC only species: "..newIdentity.species)
+		return false
+	end
 	local preserveColors = {
 
 	}
