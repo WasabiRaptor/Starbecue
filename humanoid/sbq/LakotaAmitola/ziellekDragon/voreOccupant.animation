@@ -37,9 +37,9 @@
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"unbirthVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"cockVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"analVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"unbirthVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"cockVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"<occupant>" : [
@@ -224,7 +224,7 @@
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : 5.9
+								"zLevel" : -1
 							}
 						},
 						"cockVore" : {
@@ -253,7 +253,7 @@
 							},
 							"properties" : {
 								"anchorPart" : "cock",
-								"zLevel" : 5.9
+								"zLevel" : 0.19
 							}
 						}
 					},

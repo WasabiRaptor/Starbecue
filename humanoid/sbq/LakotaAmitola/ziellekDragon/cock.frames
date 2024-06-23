@@ -3,7 +3,7 @@
 		"size" : [152, 64],
 		"dimensions" : [8, 6],
 		"names" : [
-			[ "0-idle.1", "0-run.2", "0-run.3"],
+			[ "0-idle.1", "0-run.2", null],
 			[ "1-eat.1", "1-eat.2", "1-eat.3", "1-eat.4", "1-eat.5", "1-eat.6", "1-eat.7", "1-eat.8"],
 			[ "1-idle.1", "1-run.2", "1-run.3"],
 			[ "1-expand", "0.875-expand", "0.75-expand", "0.625-expand", "0.5-expand", "0.375-expand", "0.25-expand", "0.125-expand"],
@@ -15,12 +15,22 @@
 		"idle.default" : "0-idle.1",
 
 		"0-run.1" : "0-idle.1",
+		//2
+		"0-run.3" : "0-run.2",
 		"0-run.4" : "0-run.2",
 		"0-run.5" : "0-run.1",
+		"0-run.6" : "0-run.2",
+		"0-run.7" : "0-run.3",
+		"0-run.8" : "0-run.2",
 
 		"1-run.1" : "1-idle.1",
+		//2
+		//3
 		"1-run.4" : "1-run.2",
 		"1-run.5" : "1-run.1",
+		"1-run.6" : "1-run.2",
+		"1-run.7" : "1-run.3",
+		"1-run.8" : "1-run.2",
 
 		"1-s_up_release.2" : "1-idle.1",
 		"1-s_down_release.2" : "1-idle.1",
