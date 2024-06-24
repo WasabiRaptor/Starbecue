@@ -78,7 +78,7 @@
 			"next" : "openNewDialogueBox",
 			"new" : {
 				"ui" : "starbecue:shop",
-				"inputData" : { "shopRecipes" : "/recipes/sbqShop/lokiShopRecipes.config", "dialogueTreeStart" : "converse" }
+				"inputData" : { "sbq":{"shopRecipes" : "/recipes/sbqShop/lokiShopRecipes.config", "dialogueTreeStart" : "converse"} }
 			}
 		},
 		"introduce" : {"new" : { "dialogue" : ":introduce"}},

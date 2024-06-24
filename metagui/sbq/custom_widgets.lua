@@ -765,8 +765,12 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 			hooks[itemId] = function() mg.startEvent(f) end
 		end
 	end
-	height = (math.max((h or 0), table.unpack(rowHeights)) + (s or 0)) * #rowHeights
-	width = (math.max((w or 0), table.unpack(colWidths)) + (s or 0)) * #colWidths
+	for _, v in ipairs(rowHeights) do
+		height = height + v
+	end
+	for _, v in ipairs(colWidths) do
+		width = width + v
+	end
 
 	local bm = theme.metrics.borderMargins.contextMenu
 	cfg.size = {width, height}

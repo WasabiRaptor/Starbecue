@@ -60,7 +60,7 @@
 		"new" : {
 			"dialogueRandom" :[":converse"],
 			"options" : [
-				["Can you help me make something?", ".converse.shop"],
+				[":openShopOption", ".converse.shop"],
 				["Tell me about yourself", ".talkAboutSelf"],
 				["Tell me about your kinks", ".talkAboutKinks"],
 				["Tell me about your body", ".talkAboutBody"]
@@ -76,7 +76,7 @@
 			"next" : "openNewDialogueBox",
 			"new" : {
 				"ui" : "starbecue:shop",
-				"inputData" : { "shopRecipes" : "/recipes/sbqShop/auriShopRecipes.config", "dialogueTreeStart" : ".converseShop" }
+				"inputData" : {"sbq":{"shopRecipes" : "/recipes/sbqShop/auriShopRecipes.config", "dialogueTreeStart" : ".converseShop"}}
 			}
 		},
 		"introduce" : {"new" : { "dialogue" : ":introduce"}}
