@@ -14,7 +14,8 @@ local old = {
 	equipped_primary = equipped.primary,
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
-	sbq_getSettingsPageData = sbq.getSettingsPageData
+	sbq_getSettingsPageData = sbq.getSettingsPageData,
+	setNpcItemSlot = _ENV.setNpcItemSlot
 }
 
 function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
@@ -31,6 +32,11 @@ function sbq.getSettingsPageData()
 end
 function _ENV.recruitable.setUniform()
 	-- we don't want them overriding the cosmetics we give them
+end
+function setNpcItemSlot(...)
+	old.setNpcItemSlot(...)
+	self.sheathedPrimary2 = nil
+	self.sheathedAlt2 = nil
 end
 
 function init()
@@ -98,7 +104,7 @@ function init()
 		sbq_hunting.promptResponse({...})
 	end)
 	message.setHandler("sbqUpdateCosmeticSlot", function(_, _, slot, item)
-		_ENV.setNpcItemSlot(slot, item)
+		setNpcItemSlot(slot, item)
 		tenant.backup()
 	end)
 

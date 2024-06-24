@@ -50,7 +50,6 @@ end
 function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local result = false
 	local owner, slot, following = sbq.parentEntity()
-	sbq.logInfo(eid)
 	if owner then
 		result = (world.entityUniqueId(eid) == owner) and following or false
 	end

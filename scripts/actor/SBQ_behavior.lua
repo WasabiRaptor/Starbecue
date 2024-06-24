@@ -1,6 +1,7 @@
 local old = {
 	entityInSight = entityInSight,
-	isValidTarget = isValidTarget
+	isValidTarget = isValidTarget,
+	sayToEntity = sayToEntity
 }
 function entityInSight(args, ...)
 	local res = old.entityInSight(args, ...)
@@ -15,4 +16,11 @@ function isValidTarget(args, ...)
 		return not world.entityStatPositive(args.entity, "sbqIsPrey")
 	end
 	return res
+end
+
+function sayToEntity(args, ...)
+	if args.dialogType == "dialog.lostTarget" and world.entityStatPositive(args.entity, "sbqIsPrey") then
+		return false
+	end
+	old.sayToEntity(args, ...)
 end

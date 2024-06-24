@@ -2,10 +2,12 @@
 	"name": "sbqvorevillageguard",
 	"description": "",
 	"scripts": [
+		"/scripts/actions/entity.lua",
+		"/scripts/actions/dialog.lua",
 		"/scripts/actions/npc.lua",
 		"/scripts/actions/quests.lua",
 		"/scripts/questgen/SBQ_relations.lua",
-		"/behaviors/npc/sbqHunting.lua"
+		"/scripts/actor/SBQ_behavior.lua"
 	],
 	"parameters": {
 		"play": true

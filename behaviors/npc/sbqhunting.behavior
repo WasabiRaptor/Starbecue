@@ -2,12 +2,15 @@
 	"name": "sbqhunting",
 	"description": "",
 	"scripts": [
+		"/scripts/actions/entity.lua",
+		"/scripts/actions/crew.lua",
+		"/scripts/actions/dialog.lua",
 		"/scripts/actions/world.lua",
 		"/scripts/actions/movement.lua",
 		"/scripts/actions/time.lua",
 		"/scripts/actions/position.lua",
 		"/scripts/actions/npc.lua",
-		"/behaviors/npc/sbqHunting.lua"
+		"/scripts/npc/SBQ_hunting_behavior.lua"
 	],
 	"parameters": {
 	},

@@ -2,13 +2,15 @@
 	"name": "sbqvorecrewmember",
 	"description": "",
 	"scripts": [
+		"/scripts/actions/entity.lua",
+		"/scripts/actions/dialog.lua",
 		"/scripts/behavior.lua",
 		"/scripts/actions/crew.lua",
 		"/scripts/actions/world.lua",
 		"/scripts/actions/npc.lua",
 		"/scripts/actions/quests.lua",
 		"/scripts/questgen/SBQ_relations.lua",
-		"/behaviors/npc/sbqHunting.lua"
+		"/scripts/actor/SBQ_behavior.lua"
 	],
 	"parameters": {
 		"inspectCooldown": [60, 180],

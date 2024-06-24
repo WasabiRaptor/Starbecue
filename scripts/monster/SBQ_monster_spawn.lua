@@ -43,7 +43,6 @@ function init()
 		end
 		self.behavior = behavior
 	end
-	require("/scripts/actor/SBQ_behavior.lua")
 end
 
 function update(dt)

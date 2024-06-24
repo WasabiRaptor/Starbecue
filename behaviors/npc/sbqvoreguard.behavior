@@ -2,10 +2,12 @@
 	"name": "sbqvoreguard",
 	"description": null,
 	"scripts": [
+		"/scripts/actions/entity.lua",
+		"/scripts/actions/dialog.lua",
 		"/scripts/actions/npc.lua",
-		"/behaviors/npc/sbqHunting.lua",
 		"/scripts/actions/quests.lua",
-		"/scripts/questgen/SBQ_relations.lua"
+		"/scripts/questgen/SBQ_relations.lua",
+		"/scripts/actor/SBQ_behavior.lua"
 	],
 	"parameters": {
 		"play": true,

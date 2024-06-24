@@ -1,4 +1,3 @@
-
 function doSBQTargetAction(args, board)
 	if (args.entity == nil) or (not world.entityExists(args.entity)) then return false end
 	sbq_hunting.attemptAction(args.entity)
@@ -25,4 +24,23 @@ function swapItemSlots(args, board)
 	self.sheathedAlt = self.sheathedAlt2
 	self.sheathedAlt2 = alt
 	return true
+end
+
+function hasMeleeSheathed(args, board)
+	if self.sheathedPrimary == nil then return false end
+	return root.itemHasTag(self.sheathedPrimary.name, "melee") or root.itemHasTag(self.sheathedPrimary2.name, "melee")
+end
+
+function hasRangedSheathed(args, board)
+	if self.sheathedPrimary == nil then return false end
+	return root.itemHasTag(self.sheathedPrimary.name, "ranged") or root.itemHasTag(self.sheathedPrimary2.name, "ranged")
+end
+
+function hasShieldSheathed(args, board)
+	if self.sheathedAlt== nil then return false end
+	return root.itemHasTag(self.sheathedAlt.name, "shield") or root.itemHasTag(self.sheathedAlt2.name, "shield")
+end
+
+function isFollowingRecruiter(args, board)
+	return not Occupants.entityId[_ENV.recruitable.ownerUuid()] and _ENV.recruitable.isFollowing()
 end
