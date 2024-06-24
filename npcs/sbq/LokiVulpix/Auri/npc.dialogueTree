@@ -100,7 +100,35 @@
 		"new" : {
 			"dialogueRandom" :[":talkAboutSelf"],
 			"options" : [
+				[":madeThisMod", ".modDevelopment"]
 			]
+		},
+		"modDevelopment" : {
+			"new" :{
+				"dismissTime" : 2,
+				"dialogue" : ":modDevelopment1",
+				"jump" : ".continue"
+			},
+			"continue" : {
+				"new" : {
+					"imagePortrait" : "AJoyful.png"
+				},
+				"randomNext" : true,
+				"next" : ["funny", "normal", "normal", "normal"],
+				"funny" : {"replace":{
+					"dialogue":":modDevelopment2Cutoff",
+					"dismissTime":0,
+					"jump":".lol"
+				}},
+				"normal" : {"replace":{
+					"dialogue":":modDevelopment2",
+					"dismissTime" : 2
+				}},
+				"lol" : {
+					"next" : "funnyError",
+					"funnyError" : ":ohGodDamnIt"
+				}
+			}
 		}
 	},
 	"talkAboutKinks" : {

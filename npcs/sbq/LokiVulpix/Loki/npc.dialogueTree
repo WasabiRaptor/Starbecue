@@ -96,7 +96,29 @@
 		"new" : {
 			"dialogueRandom" :[":talkAboutSelf"],
 			"options" : [
+				[":madeThisMod", ".modDevelopment"]
 			]
+		},
+		"modDevelopment" : {
+			"new" : {
+				"dialogue" : ":longPause",
+				"textSpeed" : 10,
+				"textSound": ["/sfx/undertale/SND_TXT1.ogg"],
+				"jump" : ".continue",
+				"dismissTime" : 3
+			},
+			"continue" : {
+				"new" : {
+					"imagePortrait" : "LBlep.png",
+					"dialogue" : ":perish",
+					"dismissTime" : 0.5,
+					"jump" :".lol"
+				},
+				"lol" : {
+					"next" : "funnyError",
+					"funnyError" : ":questionmarks"
+				}
+			}
 		}
 	},
 	"talkAboutKinks" : {

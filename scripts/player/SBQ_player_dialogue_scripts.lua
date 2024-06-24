@@ -86,3 +86,7 @@ function dialogueStepScripts.canGainFollowers()
 	end
 	return tostring(canGainFollowers)
 end
+
+function dialogueStepScripts.funnyError(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	player.funnyError(dialogueProcessor.getRedirectedDialogue(dialogueTree.funnyError, true, settings, dialogueTree, dialogueTreeTop))
+end
