@@ -39,11 +39,9 @@
 				"Chief of Prey Storage and <field>",
 				"Chief of Friend Storage and <field>",
 				"Wild <role>",
-				"<role> Prey Wrangler",
-				"<role> Pred Wrangler",
-				"<role> Gut Inspector",
-				"<role> Womb Inspector",
-				"<role> Balls Inspector"
+				"<field> Prey Wrangler",
+				"<field> Pred Wrangler",
+				"<field> Internal Inspector"
 			]
 		},
 
@@ -104,5 +102,23 @@
 		"statusProperties" : {
 			"sbqDidVornyConvertCheck" : true
 		}
+	},
+	"items" : {
+		"default" : [
+		  [0, [
+			  {
+				"chest" : [ { "name" : "protectoratechest", "parameters" : {"colorIndex":8} } ],
+				"legs" : [ { "name" : "protectoratepants", "parameters" : {"colorIndex":8} } ],
+				"primary" : [ "npcassaultrifle" ],
+				"sheathedprimary" : [ "npcbroadsword" ]
+			  },
+			  {
+				"chest" : [ { "name" : "protectoratechest", "parameters" : {"colorIndex":8} } ],
+				"legs" : [ { "name" : "protectoratepants", "parameters" : {"colorIndex":8} } ],
+				"primary" : [ "npcbroadsword" ],
+				"sheathedprimary" : [ "npcassaultrifle" ]
+			  }
+			] ]
+		]
 	}
 }
