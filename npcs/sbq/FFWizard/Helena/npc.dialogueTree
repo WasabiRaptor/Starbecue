@@ -20,9 +20,10 @@
 			}
 		},
 		"default" : {
-			"next" : ["percentage", "playerRace","isOwner"],
+			"next" : ["checkOwner","percentage","playerRace"],
 			"replace" : {
-				"dialogueRandom" : [":greeting"]
+				"dialogueRandom" : [":greeting"],
+				"jump" : ".converse"
 			},
 			"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 			"sbqLust" : {"replace" : {"dialogueRandom" : [":greetingHorny"]}},
@@ -42,29 +43,36 @@
 					}
 				}
 			},
-			"true" : {
-				"next" : ["isFollowing", "addConverse"],
-				"replace" : {
-					"dialogueRandom" : [":greetingCrew"],
-					"buttonText" : ":optionsPrompt"
-				},
-				"true" : { "replace" : {
-					"options" : [[":stay", ".stay"]]
-				}},
-				"false" : {"replace" : {
-					"options" : [[":follow", ".follow"]]
-				}},
-				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
+			"checkOwner" : {
+				"finished" : true,
+				"settings" : "target",
+				"next" : ["isOwner"],
+				"true" : {
+					"next" : ["isFollowing", "addConverse"],
+					"replace" : {
+						"dialogueRandom" : [":greetingCrew"],
+						"buttonText" : ":optionsPrompt"
+					},
+					"true" : { "replace" : {
+						"options" : [[":stay", ".stay"]]
+					}},
+					"false" : {"replace" : {
+						"options" : [[":follow", ".follow"]]
+					}},
+					"addConverse" : {"add" : {"options" : [[":conversePrompt", ".converse"]]}}
+				}
 			}
 		}
 	},
 	"stay" : {
+		"settings" : "target",
 		"next" : ["requestUnfollow"],
 		"new" : {
 			"dialogueRandom" : [":crewStay"]
 		}
 	},
 	"follow" : {
+		"settings" : "target",
 		"next" : ["canGainFollowers"],
 		"false" : {
 			"new" : {"dialogueRandom" : [":fullCrew"]}

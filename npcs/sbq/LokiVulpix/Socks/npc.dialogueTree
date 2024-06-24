@@ -23,6 +23,7 @@
 			}
 		},
 		"default" : {
+			"settings" : "target",
 			"next" : ["isOwner"],
 			"replace" : {
 				"dialogueRandom" : [":greeting"]
@@ -44,12 +45,14 @@
 		}
 	},
 	"stay" : {
+		"settings" : "target",
 		"next" : ["requestUnfollow"],
 		"new" : {
 			"dialogueRandom" : [":crewStay"]
 		}
 	},
 	"follow" : {
+		"settings" : "target",
 		"next" : ["canGainFollowers"],
 		"false" : {
 			"new" : {"dialogueRandom" : [":fullCrew"]}

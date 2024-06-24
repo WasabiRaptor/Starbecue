@@ -40,18 +40,19 @@ end
 
 function dialogueStepScripts.isOwner(dialogueTree, dialogueTreeTop, settings, branch, eid, ...)
 	local result = false
-	local parentEntityData = sbq.parentEntity()
-	if parentEntityData and parentEntityData[1] then
-		result = world.entityUniqueId(eid) == parentEntityData[1]
+	local owner, slot, following = sbq.parentEntity()
+	if owner then
+		result = world.entityUniqueId(eid) == owner
 	end
 	return tostring(result)
 end
 
 function dialogueStepScripts.isFollowing(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local result = false
-	local parentEntityData = sbq.parentEntity()
-	if parentEntityData and parentEntityData[1] then
-		result = (world.entityUniqueId(eid) == parentEntityData[1]) and parentEntityData[3]
+	local owner, slot, following = sbq.parentEntity()
+	sbq.logInfo(eid)
+	if owner then
+		result = (world.entityUniqueId(eid) == owner) and following or false
 	end
 
 	return tostring(result)

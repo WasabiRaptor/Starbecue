@@ -313,7 +313,7 @@ function sbq.logOutput(input, pretty)
 	if pretty then
 		input = sb.printJson(input, pretty, true)
 	end
-	return "[SBQ][%s]%s", (world.entityName(sbq.entityId()) or sbq.entityId()), input
+	return "[SBQ][%s:%s]%s", sbq.entityId(), (world.entityName(sbq.entityId()) or "-"), input
 end
 function sbq.logInfo(input, pretty)
 	sb.logInfo(sbq.logOutput(input,pretty))

@@ -22,26 +22,31 @@
 			}
 		},
 		"default" : {
-			"next" : ["percentage","isOwner"],
+			"next" : ["checkOwner","percentage"],
 			"replace" : {
 				"dialogueRandom" : [":greeting"]
 			},
 			"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 			"sbqLust" : {"replace" : {"dialogueRandom" : [":greetingHorny"]}},
 			"food" : {"replace" : {"dialogueRandom" : [":greetingHungry"]}},
-			"true" : {
-				"next" : ["isFollowing", "addConverse"],
-				"replace" : {
-					"dialogueRandom" : [":greetingCrew"],
-					"buttonText" : ":optionsPrompt"
-				},
-				"true" : { "replace" : {
-					"options" : [[":stay", ".stay"]]
-				}},
-				"false" : {"replace" : {
-					"options" : [[":follow", ".follow"]]
-				}},
-				"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
+			"checkOwner" : {
+				"finished" : true,
+				"settings" : "target",
+				"next" : ["isOwner"],
+				"true" : {
+					"next" : ["isFollowing", "addConverse"],
+					"replace" : {
+						"dialogueRandom" : [":greetingCrew"],
+						"buttonText" : ":optionsPrompt"
+					},
+					"true" : { "replace" : {
+						"options" : [[":stay", ".stay"]]
+					}},
+					"false" : {"replace" : {
+						"options" : [[":follow", ".follow"]]
+					}},
+					"addConverse" : {"add" : {"options" : [[":converse", ".converse"]]}}
+				}
 			}
 		}
 	},
