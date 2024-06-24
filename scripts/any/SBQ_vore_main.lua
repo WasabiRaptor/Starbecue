@@ -1320,6 +1320,7 @@ function Occupants.finishOccupantSetup(occupant)
 end
 
 function _Occupant:remove()
+	sbq.forceTimer("huntingActionAttemptCooldown", 10)
 	self:setLoungeEnabled(false)
 	local location = SpeciesScript:getLocation(self.location)
 

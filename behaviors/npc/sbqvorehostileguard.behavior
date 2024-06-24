@@ -2,12 +2,15 @@
   "name": "sbqvorehostileguard",
   "description": "",
   "scripts": [
+    "/scripts/actions/world.lua",
+		"/scripts/actions/entity.lua",
+		"/scripts/actions/dialog.lua",
+
     "/scripts/behavior.lua",
     "/scripts/actions/math.lua",
-    "/scripts/actions/world.lua",
-    "/scripts/actions/dialog.lua",
     "/scripts/actions/quests.lua",
-    "/scripts/questgen/SBQ_relations.lua"
+    "/scripts/questgen/SBQ_relations.lua",
+    "/scripts/actor/SBQ_behavior.lua"
   ],
   "parameters": {
     "play": false
