@@ -648,13 +648,15 @@ function _State:doAnimations(animations, tags, target)
 		end
 		anim = animator.applyTags(sb.replaceTags(anim, tags))
 		if animator.hasState(state, anim) then
-			if not waitForEnd or animator.animationEnded(state) then
+			if (not waitForEnd) or animator.animationEnded(state) then
 				animator.setAnimationState(state, anim, force, reversed)
 				local timer = animator.animationTimer(state)
 				longest = math.max(longest, timer[2] - timer[1])
+			else
+				-- sbq.logError(string.format("Animation hasn't ended '%s' '%s'", state, anim))
 			end
-		elseif sbq.config.debug or sbq.voreConfig.debug then
-			sbq.logError(string.format("No animation state '%s' '%s'", state, anim))
+		else
+			-- sbq.logError(string.format("No animation state '%s' '%s'", state, anim))
 		end
 	end
 	return longest
@@ -1003,6 +1005,7 @@ function _Location:updateOccupancy(dt)
 		end
 	end
 	local prevVisualSize = self.occupancy.visualSize
+	local prevCount = self.occupancy.count
 	if self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale()) then
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
 		self.occupancy.sizeDirty = false
@@ -1016,7 +1019,7 @@ function _Location:updateOccupancy(dt)
 					total = subLocation.occupancy.size + total
 					amount = amount + 1
 				end
-				self.occupancy.size = (total / amount)
+				self.occupancy.size = (total / math.max(1,amount))
 			elseif self.subLocationBehavior == "largest" then
 				local best = 0
 				for _, subLocation in pairs(self.subLocations) do
@@ -1061,7 +1064,9 @@ function _Location:updateOccupancy(dt)
 			self.struggleSizes or { 0 }
 		)
 
-		if ((prevVisualSize ~= self.occupancy.visualSize) or self.countBasedOccupancy) and not (self.occupancy.sided and self.occupancy.symmetry) then
+		if ((prevVisualSize ~= self.occupancy.visualSize) or (self.countBasedOccupancy and (prevCount ~= self.occupancy.count)))
+			and not (self.occupancy.sided and self.occupancy.symmetry)
+		then
 			self:doSizeChangeAnims(prevVisualSize)
 			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
@@ -1099,8 +1104,8 @@ function _Location:updateOccupancy(dt)
 			),
 			self.interpolateSizes or self.struggleSizes or {0}
 		)
-		if self.occupancy.interpolateSize == self.occupancy.visualSize then self.occupancy.interpolating = false end
-		animator.setGlobalTag(animator.applyTags(self.tag).."InterpolateSize", tostring(self.occupancy.interpolateSize))
+		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or {0}) then self.occupancy.interpolating = false end
+		animator.setGlobalTag(animator.applyTags(self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
 	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
 	if (fade == "fe") then -- so theres no accidental glowy
@@ -1136,8 +1141,8 @@ function _Location:doSizeChangeAnims(prevVisualSize)
 	end
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
 	if sizeChangeAnims then
+		self.occupancy.interpolateFrom = (self.occupancy.interpolating and self.occupancy.interpolateSize) or prevVisualSize
 		self.occupancy.interpolating = true
-		self.occupancy.interpolateFrom = self.occupancy.interpolateSize or prevVisualSize
 		self.interpolateTime = SpeciesScript:doAnimations(sizeChangeAnims, {
 			prevSize = tostring(prevVisualSize),
 			newSize = tostring(self.occupancy.visualSize)
