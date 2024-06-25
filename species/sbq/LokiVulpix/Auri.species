@@ -130,60 +130,57 @@
 		"secondary" : ["332665","3f3173","493a81"],
 		"tertiary" : ["a295b0","bdb2c9","fdfbff"],
 		"hair" : ["332665","3f3173","493a81"],
-		"flesh" : ["451ea9", "5227c2", "5f2fdc"]
+		"flesh" : ["187D68", "2BA38B", "48CFB4"]
 	},
 
 	"headOptionAsFacialhair" : true,
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
-		{
-			"451ea9" : "451ea9FE", "5227c2" : "5227c2FE", "5f2fdc" : "5f2fdcFE", // make flesh fullbright
-			"1f1735" : "1f1735FE", "48cfb4" : "48cfb4FE" // make eyes fullbright
-		}
+		"?replace;187D68=187D68FE;2BA38B=2BA38BFE;48CFB4=48CFB4FE;"
 	],
 	"undyColor" : [
-		{ "dc1f00" : "4d76ad" }
+		""
 	],
 	"hairColor" : [
-		{ "d9c189" : "E86D46" }
+		""
 	],
 
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"d39c6c", "check" : {"navelVisible":true}},
-				{"a94783":"ffc181", "check" : {"navelVisible":false}},
-				["primary","primary"]
-			],
+			{"a94783":"d39c6c", "check" : {"navelVisible":true}},
+			{"a94783":"ffc181", "check" : {"navelVisible":false}},
+			["primary","primary"]
+		],
 		"cockColorRemap" : [
-				["primary","flesh"]
-			],
+			["primary","flesh"]
+		],
 		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
+			["flesh","flesh"]
+		],
 		"ballsColorRemap" : [
-				["primary","primary"]
-			],
+			["primary","primary"]
+		],
 		"breastsColorRemap" : [
-				["primary","primary"],
-				["flesh","flesh", {"nipplesVisible":true}],
-				["flesh","primary", {"nipplesVisible":false}]
-			]
+			["primary","primary"],
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","primary", {"nipplesVisible":false}]
+		]
 	},
 	"infusedParts" :{
 		"cockColorRemap" : [
-				["primary","flesh"]
-			],
+			["primary","flesh"]
+		],
 		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
+			["flesh","flesh"]
+		],
 		"ballsColorRemap" : [
-				["primary","primary"]
-			],
+			["primary","primary"]
+		],
 		"breastsColorRemap" : [
-				["primary","primary"],
-				["flesh","flesh", {"nipplesVisible":true}],
-				["flesh","primary", {"nipplesVisible":false}]
-			]
+			["primary","primary"],
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","primary", {"nipplesVisible":false}]
+		]
 	},
 	"humanoidOverrides" : {
 		"mouthOffset" : [4, -8],
@@ -193,7 +190,7 @@
 		"layOffset" : 0,
 		"runFallOffset" : 0,
 		"jumpBob" : 0, // jump bob is handled by my animation file
-		"globalOffset" : [0.0, 0.0],
+		"globalOffset" : [-0.375, 0.0],
 
 		"walkBob" : [-1, -1, 0, 0, -1, -1, 0, 0],
 		"runBob" : [-1, 0, -1, -2, -1, 0, -1, -2],
@@ -209,20 +206,20 @@
 
 		"movementParameters" : {
 			"standingPoly" : [
-				[-1,-3],[1.75,-3],// bottom edge
-				[2.25,-2.5],[2.25,0.5], // right edge
-				[1.75,1],[1.25,1], // top of head
-				[0.75,0.5],[0.75,0], // back of head
-				[0.25,-0.5],[-1,-0.5], // top of back
-				[-1.5,-1],[-1.5,-2.5] // back edge
+				[-1.375,-3],[1.375,-3],// bottom edge
+				[1.875,-2.5],[1.875,0.5], // right edge
+				[1.375,1],[0.875,1], // top of head
+				[0.375,0.5],[0.375,0], // back of head
+				[-0.125,-0.5],[-1.375,-0.5], // top of back
+				[-1.875,-1],[-1.875,-2.5] // back edge
 			],
 			"crouchingPoly" : [
-				[-1.5,-3],[1.5,-3],// bottom edge
-				[2,-2.5],[2,0.5], // right edge
-				[1.5,1],[1,1], // top of head
-				[0.5,0.5],[0.5,0], // back of head
-				[0,-0.5],[-1,-0.5], // top of back
-				[-1.5,-1],[-1.5,-2.5] // back edge
+				[-1.375,-3],[1.375,-3],// bottom edge
+				[1.875,-2.5],[1.875,-0.5], // right edge
+				[1.375,0],[0.875,0], // top of head
+				[0.375,-0.5],[0.375,-1], // back of head
+				[-0.125,-1.5],[-1.375,-1.5], // top of back
+				[-1.875,-2],[-1.875,-2.5] // back edge
 			]
 		},
 		"personalities" : [
@@ -251,7 +248,7 @@
 	},
 	"potionRarity" : "essential",
 	"voreConfig" : [
-		"/humanoid/any/vore.config",
+		"/humanoid/any/vore_quadruped.config",
 		{
 			"scripts" : ["/humanoid/any/voreScripts.lua", "/humanoid/sbq/LokiVulpix/Auri/voreScripts.lua", "/humanoid/any/eyeTracking.lua"],
 			"species" : "Auri",
@@ -260,13 +257,37 @@
 				"navelVisible" : true,
 				"nipplesVisible" : true
 			},
-			"transformResult" : {"species":"any"}
+			"transformResult" : {"species":"any"},
+			"locations" : {
+				"breasts" : {
+					"struggleSizes" : [1]
+				},
+				"cock" : {
+					"struggleSizes" : [1]
+				}
+			},
+			"availableVoreTypes" : {
+				"oralVore":true,
+				"tailVore":false,
+				"absorbVore":false,
+				"navelVore":false,
+				"analVore":true,
+				"unbirthVore":true,
+				"breastVore":true,
+				"cockVore":true
+			},
+			"availableInfuseTypes" : {
+				"cockInfuse":true,
+				"bellyInfuse":true,
+				"breastInfuse":true,
+				"pussyInfuse":true
+			}
 		}
 	],
 	"animationConfig" : "/humanoid/sbq/LokiVulpix/Auri/auri.animation",
 	"identityAnimationCustom" :{},
 	"animationCustom" : [
-		{}
+		"/humanoid/sbq/LokiVulpix/Auri/voreOccupants.animation"
 	],
 
 	"animationCustomAnthro" : [

@@ -177,6 +177,18 @@ function sbq.reloadVoreConfig(config)
 	for _, occupant in ipairs(Occupants.list) do
 		occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	end
+	for locationName, _ in pairs(SpeciesScript.locations) do
+		local location = SpeciesScript:getLocation(locationName)
+		if location then
+			location:doSizeChangeAnims(location.occupancy.visualSize)
+			if location.subLocations then
+				for k, _ in pairs(location.subLocations) do
+					local location = SpeciesScript:getLocation(locationName, k)
+					location:doSizeChangeAnims(location.occupancy.visualSize)
+				end
+			end
+		end
+	end
 	sbq.refreshSettings()
 end
 
@@ -813,7 +825,7 @@ function _SpeciesScript:addLocation(name, config)
 		list = {},
 		size = 0,
 		count = 0,
-		visualSize = -1, -- this forces it to refresh the size
+		visualSize = (location.struggleSizes or {})[1] or 0,
 		interpolating = false,
 		struggleVec = {0,0},
 		interpolateFrom = 0,
@@ -829,7 +841,7 @@ function _SpeciesScript:addLocation(name, config)
 			list = {},
 			size = 0,
 			count = 0,
-			visualSize = -1, -- forces size refresh
+			visualSize = (location.struggleSizes or {})[1] or 0,
 			interpolating = false,
 			interpolateFrom = 0,
 			interpolateTime = 0,

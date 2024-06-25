@@ -10,7 +10,8 @@ let paths = [
 	"./humanoid/sbq/vaporeonGiant/voreOccupant.animation",
 	"./humanoid/sbq/Xeronious/Kaiju/voreOccupant.animation",
 	"./humanoid/sbq/LakotaAmitola/ziellekDragon/voreOccupant.animation",
-	"./humanoid/sbq/IcyVixen/Fray/voreOccupant.animation"
+	"./humanoid/sbq/IcyVixen/Fray/voreOccupant.animation",
+	"./humanoid/sbq/LokiVulpix/Auri/voreOccupant.animation"
 ]
 let occupantSlots = 16
 

@@ -459,7 +459,8 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.1,
-					"transformationGroups": ["movementOffset", "bellyOffset"],
+					"transformationGroups": ["bellyOffset"],
+					"anchorPart" : "body",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
 					"bodyFullbright" : true,
