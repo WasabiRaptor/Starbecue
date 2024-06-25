@@ -37,8 +37,8 @@
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"cockVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"analVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"cockVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"<occupant>" : [
@@ -96,17 +96,17 @@
 						"belly" : {"properties":{
 							"anchorPart":"belly",
 							"zLevel":-1,
-							"offset" : [0,-1]
+							"offset" : [0, -1]
 						}},
 						"cock" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.75]
+							"offset" : [-1, -1.75]
 						}},
 						"balls" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.5]
+							"offset" : [-1.5, -2]
 						}},
 						"grabbed" : {"properties":{
 							"anchorPart":"backarm",
@@ -124,7 +124,7 @@
 							"frameProperties" : {
 								"release" : [true],
 								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
-								"hidden" : [false, false, false, false, false, true, true, true],
+								"hidden" : [false, false, false, false, false, false, true, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
 								"transforms" : [{
 									"rotate" : 0,
@@ -162,7 +162,7 @@
 							},
 							"properties" : {
 								"anchorPart" :"head",
-								"zLevel" : 5.9
+								"zLevel" : -1
 							}
 
 						},
@@ -170,7 +170,7 @@
 							"frameProperties" : {
 								"release" : [true],
 								"emote" : ["oooh", "oooh", "oooh", "oooh"],
-								"hidden" : [false, false, false, false],
+								"hidden" : [false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand"],
 								"transforms" : [{
 									"rotate" : 0,
@@ -186,13 +186,13 @@
 									"translate" : [-1, -1.25]
 								}, {
 									"rotate" : -90,
-									"scale" : [1, 1],
+									"scale" : [0, 0],
 									"translate" : [-1, -1.25]
 								}]
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
+								"zLevel" : -1
 							}
 						},
 						"analVoreSendDeeper": {
@@ -216,7 +216,7 @@
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
+								"zLevel" : -1
 							}
 						},
 						"analVoreStruggleDeeper": {
@@ -240,7 +240,7 @@
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
+								"zLevel" : -1
 							}
 						},
 

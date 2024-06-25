@@ -199,14 +199,7 @@
 	],
 	"potionRarity" : "essential",
 	"voreConfig" : [
-		"/humanoid/any/vore_quadruped.config",
-		{
-			"scripts" : ["/humanoid/any/voreScripts.lua", "/humanoid/sbq/IcyVixen/Fray/voreScripts.lua", "/humanoid/any/eyeTracking.lua"],
-			"species" : "Fray",
-			"eyeTrackingDeadzone" : [3,3],
-			"defaultSettings" : {
-			}
-		}
+		"/humanoid/sbq/IcyVixen/Fray/vore.config"
 	],
 
 

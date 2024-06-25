@@ -147,6 +147,7 @@
 				"default": "idle",
 				"states": {
 					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
 					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
@@ -186,6 +187,40 @@
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
+			},
+			// vore anim states
+			"bellyState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"bellyExpandState" : {
+				"priority" : 2,
+				"default": "ignore",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
+					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
 			}
 		},
 		"parts": {
@@ -219,11 +254,16 @@
 						"lay" : "duck",
 						"walk" : { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<pose>.idle.1" } },
 						"run" : "walk",
-						"jump" : { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
-						"fall" : "jump",
 						"swim" : "walk",
 						"swimIdle" : "walk",
 						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"expand" : { "properties": { "image": "<bodyImagePath>body.png:<bellyInterpolateSize>-<pose>.<bellyExpandStateAnim>" } }
+					},
+					"bodyStateHighPriority" : {
+						"jump" : { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"fall" : "jump"
 					},
 					"bodyDanceState" : {
 						"dance": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyDanceFrame>" } },
@@ -704,7 +744,7 @@
 			"head": {
 				"properties": {
 					"centered": true,
-					"zLevel": 4,
+					"zLevel": -2,
 					"transformationGroups": ["headOffset"],
 					"anchorPart": "body",
 					"bodyFullbright" : true,
@@ -713,6 +753,29 @@
 				"partStates": {
 					"headState": {
 						"idle": { "properties": { "image": "<bodyImagePath>head/head.png:<headStateAnim>.<headStateFrame>" } },
+						"eat": "idle",
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					}
+				}
+			},
+			"head_fg": {
+				"properties": {
+					"centered": true,
+					"zLevel": 4,
+					"anchorPart": "head",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives><shirt><shirtColor><pants><pantsColor>"
+				},
+				"partStates": {
+					"headState": {
+						"idle": { "properties": { "image": "<bodyImagePath>head/head.png:<headStateAnim>.<headStateFrame>?addmask=/humanoid/sbq/vaporeonGiant/head/fg_mask.png:<headStateAnim>.<headStateFrame>" } },
+						"eat": "idle",
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
