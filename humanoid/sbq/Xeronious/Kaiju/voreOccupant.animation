@@ -36,6 +36,7 @@
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"tailVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"<occupant>" : [
@@ -91,9 +92,14 @@
 						// but it is good to do so to have their camera focused in the right spot
 						// so anchor to the relevant part and set offsets as necessary
 						"belly" : {"properties":{
-							"anchorPart":"belly",
+							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1]
+							"offset" : [1.25, 1]
+						}},
+						"tail" : {"properties":{
+							"anchorPart":"tail",
+							"zLevel":-1,
+							"offset" : [-4, -2]
 						}},
 						"grabbed" : {"properties":{
 							"anchorPart":"backarm",
@@ -143,24 +149,20 @@
 									"rotate" : 145,
 									"scale" : [0, 0],
 									"translate" : [1.25, 1]
-								}, {
-									"rotate" : 145,
-									"scale" : [0, 0],
-									"translate" : [1.25, 1]
 								}]
 							},
 							"properties" : {
 								"anchorPart" :"head",
-								"zLevel" : 5.9
+								"zLevel" : -1
 							}
 
 						},
 						"analVore": {
 							"frameProperties" : {
 								"release" : [true],
-								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
-								"hidden" : [false, false, false, false, false, false, false, true, true],
-								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
+								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, false, false, false, false, true],
+								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
 								"transforms" : [
 									{"rotate" : 0,"scale" : [-1, 1],"translate" : [-1.75, -5]},
 									{"rotate" : -5,"scale" : [-1, 1],"translate" : [-1.5, -4.5]},
@@ -168,13 +170,12 @@
 									{"rotate" : -15,"scale" : [-1, 1],"translate" : [-1, -3.5]},
 									{"rotate" : -15,"scale" : [-1, 1],"translate" : [-0.75, -3]},
 									{"rotate" : -15,"scale" : [-1, 1],"translate" : [-0.5, -2.5]},
-									{"rotate" : -15,"scale" : [-1, 1],"translate" : [-0.25, -2]},
-									{"rotate" : -15,"scale" : [0, 0],"translate" : [0, -1]},
-									{"rotate" : -15,"scale" : [0, 0],"translate" : [0, -1]}]
+									{"rotate" : -15,"scale" : [0, 0],"translate" : [-0.25, -2]},
+									{"rotate" : -15,"scale" : [0, 0],"translate" : [1.25, 1]}]
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
+								"zLevel" : -1
 							}
 						},
 						"tailVore" : {
@@ -194,8 +195,8 @@
 									{"rotate" : 90,"scale" : [0, 0],"translate" : [-4, -2]}]
 							},
 							"properties" : {
-								"anchorPart" :"head",
-								"zLevel" : 5.9
+								"anchorPart" :"tail",
+								"zLevel" : -1
 							}
 						},
 						"sit_pinned" : {

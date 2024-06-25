@@ -43,6 +43,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -194,6 +200,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -355,6 +367,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -506,6 +524,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -667,6 +691,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -818,6 +848,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -979,6 +1015,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -1130,6 +1172,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -1291,6 +1339,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -1442,6 +1496,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -1603,6 +1663,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -1754,6 +1820,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -1915,6 +1987,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -2066,6 +2144,12 @@
 						"transition": "idle"
 					},
 					"analVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
+					"tailVore": {
 						"frames": 8,
 						"cycle": 1.5,
 						"mode": "transition",
@@ -2227,6 +2311,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -2383,6 +2473,12 @@
 						"mode": "transition",
 						"transition": "idle"
 					},
+					"tailVore": {
+						"frames": 8,
+						"cycle": 1.5,
+						"mode": "transition",
+						"transition": "idle"
+					},
 					"s_front": {
 						"frames": 3,
 						"cycle": 0.5,
@@ -2520,11 +2616,21 @@
 					"occupant0Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -2671,23 +2777,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -2696,7 +2791,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -2714,11 +2808,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -2798,8 +2890,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -2813,26 +2905,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -2962,8 +3043,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -3069,11 +3150,21 @@
 					"occupant1Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -3220,23 +3311,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -3245,7 +3325,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -3263,11 +3342,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -3347,8 +3424,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -3362,26 +3439,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -3511,8 +3577,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -3618,11 +3684,21 @@
 					"occupant2Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -3769,23 +3845,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -3794,7 +3859,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -3812,11 +3876,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -3896,8 +3958,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -3911,26 +3973,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -4060,8 +4111,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -4167,11 +4218,21 @@
 					"occupant3Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -4318,23 +4379,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -4343,7 +4393,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -4361,11 +4410,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -4445,8 +4492,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -4460,26 +4507,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -4609,8 +4645,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -4716,11 +4752,21 @@
 					"occupant4Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -4867,23 +4913,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -4892,7 +4927,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -4910,11 +4944,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -4994,8 +5026,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -5009,26 +5041,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -5158,8 +5179,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -5265,11 +5286,21 @@
 					"occupant5Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -5416,23 +5447,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -5441,7 +5461,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -5459,11 +5478,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -5543,8 +5560,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -5558,26 +5575,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -5707,8 +5713,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -5814,11 +5820,21 @@
 					"occupant6Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -5965,23 +5981,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -5990,7 +5995,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -6008,11 +6012,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -6092,8 +6094,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -6107,26 +6109,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -6256,8 +6247,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -6363,11 +6354,21 @@
 					"occupant7Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -6514,23 +6515,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -6539,7 +6529,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -6557,11 +6546,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -6641,8 +6628,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -6656,26 +6643,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -6805,8 +6781,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -6912,11 +6888,21 @@
 					"occupant8Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -7063,23 +7049,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -7088,7 +7063,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -7106,11 +7080,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -7190,8 +7162,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -7205,26 +7177,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -7354,8 +7315,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -7461,11 +7422,21 @@
 					"occupant9Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -7612,23 +7583,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -7637,7 +7597,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -7655,11 +7614,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -7739,8 +7696,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -7754,26 +7711,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -7903,8 +7849,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -8010,11 +7956,21 @@
 					"occupant10Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -8161,23 +8117,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -8186,7 +8131,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -8204,11 +8148,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -8288,8 +8230,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -8303,26 +8245,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -8452,8 +8383,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -8559,11 +8490,21 @@
 					"occupant11Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -8710,23 +8651,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -8735,7 +8665,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -8753,11 +8682,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -8837,8 +8764,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -8852,26 +8779,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -9001,8 +8917,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -9108,11 +9024,21 @@
 					"occupant12Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -9259,23 +9185,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -9284,7 +9199,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -9302,11 +9216,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -9386,8 +9298,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -9401,26 +9313,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -9550,8 +9451,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -9657,11 +9558,21 @@
 					"occupant13Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -9808,23 +9719,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -9833,7 +9733,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -9851,11 +9750,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -9935,8 +9832,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -9950,26 +9847,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -10099,8 +9985,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -10206,11 +10092,21 @@
 					"occupant14Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -10357,23 +10253,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -10382,7 +10267,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -10400,11 +10284,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -10484,8 +10366,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -10499,26 +10381,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -10648,8 +10519,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
@@ -10755,11 +10626,21 @@
 					"occupant15Location": {
 						"belly": {
 							"properties": {
-								"anchorPart": "belly",
+								"anchorPart": "body",
 								"zLevel": -1,
 								"offset": [
-									0,
-									-1
+									1.25,
+									1
+								]
+							}
+						},
+						"tail": {
+							"properties": {
+								"anchorPart": "tail",
+								"zLevel": -1,
+								"offset": [
+									-4,
+									-2
 								]
 							}
 						},
@@ -10906,23 +10787,12 @@
 											1.25,
 											1
 										]
-									},
-									{
-										"rotate": 145,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											1.25,
-											1
-										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "head",
-								"zLevel": 5.9
+								"zLevel": -1
 							}
 						},
 						"analVore": {
@@ -10931,7 +10801,6 @@
 									true
 								],
 								"emote": [
-									"oooh",
 									"oooh",
 									"oooh",
 									"oooh",
@@ -10949,11 +10818,9 @@
 									false,
 									false,
 									false,
-									true,
 									true
 								],
 								"orientation": [
-									"stand",
 									"stand",
 									"stand",
 									"stand",
@@ -11033,8 +10900,8 @@
 									{
 										"rotate": -15,
 										"scale": [
-											-1,
-											1
+											0,
+											0
 										],
 										"translate": [
 											-0.25,
@@ -11048,26 +10915,15 @@
 											0
 										],
 										"translate": [
-											0,
-											-1
-										]
-									},
-									{
-										"rotate": -15,
-										"scale": [
-											0,
-											0
-										],
-										"translate": [
-											0,
-											-1
+											1.25,
+											1
 										]
 									}
 								]
 							},
 							"properties": {
 								"anchorPart": "body",
-								"zLevel": -3.9
+								"zLevel": -1
 							}
 						},
 						"tailVore": {
@@ -11197,8 +11053,8 @@
 								]
 							},
 							"properties": {
-								"anchorPart": "head",
-								"zLevel": 5.9
+								"anchorPart": "tail",
+								"zLevel": -1
 							}
 						},
 						"sit_pinned": {
