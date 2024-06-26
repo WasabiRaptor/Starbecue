@@ -1,63 +1,59 @@
 {
-	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards", // external lines
-	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
+	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards",
+	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced",
 	"greeting": [
 		"Hi.",
 		"Hey there.",
 		"Mrow."
 	],
-	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
-	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
-	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
-	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
+	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew",
+	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay",
+	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew",
+	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow",
 	"converse": [
 		"So what did you want to talk about?"
 	],
 	"normalPet": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:normalPet",
 	"problemPet": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:problemPet",
-	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney", // external lines
-	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards", // external lines
-	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards", // external lines
-	"rewardNotifyHighValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyHighValueQuestRewards", // external lines
-	"oralVoreRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequested", // external lines
-	"oralVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter", // external lines
+	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney",
+	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards",
+	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards",
+	"rewardNotifyHighValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyHighValueQuestRewards",
+	"oralVoreRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequested",
+	"oralVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter",
 	"oralVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreInvalid",
-	"oralVoreNo": ":defaultNo", // duplicated lines
-	"defaultNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
-	"oralVoreTooBig": ":tooBig", // duplicated lines
-	"tooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig", // external lines
-	"oralVoreTooSmall": ":tooSmall", // duplicated lines
-	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall", // external lines
-	"oralVoreNoSlots": ":noSlots", // duplicated lines
-	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots", // external lines
-	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull", // external lines
-	"oralVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"oralVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"targetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:targetPreySettingsMismatch", // external lines
-	"tailVoreRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequested", // external lines
-	"tailVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestedAfter", // external lines
+	"oralVoreNo": ":defaultNo",
+	"oralVoreTooBig": ":tooBig",
+	"tooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"oralVoreTooSmall": ":tooSmall",
+	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
+	"oralVoreNoSlots": ":noSlots",
+	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots",
+	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull",
+	"oralVoreNeedsInfusion": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreNeedsInfusion",
+	"oralVoreTargetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:oralVoreTargetPreySettingsMismatch",
+	"targetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"tailVoreRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequested",
+	"tailVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestedAfter",
 	"tailVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:tailVoreInvalid",
-	"tailVoreNo": ":defaultNo", // duplicated lines
-	"tailVoreTooBig": ":tooBig", // duplicated lines
-	"tailVoreTooSmall": ":tooSmall", // duplicated lines
-	"tailVoreNoSlots": ":noSlots", // duplicated lines
-	"tailVoreFull": "/npcs/sbq/dialogue/default.dialogue:tailVoreFull", // external lines
-	"tailVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"tailVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"absorbVoreRequested": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequested", // external lines
-	"absorbVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestedAfter", // external lines
+	"tailVoreNo": ":defaultNo",
+	"tailVoreTooBig": ":tooBig",
+	"tailVoreTooSmall": ":tooSmall",
+	"tailVoreNoSlots": ":noSlots",
+	"tailVoreFull": "/npcs/sbq/dialogue/default.dialogue:tailVoreFull",
+	"tailVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"tailVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"absorbVoreRequested": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequested",
+	"absorbVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestedAfter",
 	"absorbVoreInvalid": "Whoops! absorbVore is invalid <dialoguePath>",
-	"absorbVoreNo": ":defaultNo", // duplicated lines
-	"absorbVoreTooBig": ":tooBig", // duplicated lines
-	"absorbVoreTooSmall": ":tooSmall", // duplicated lines
-	"absorbVoreNoSlots": ":noSlots", // duplicated lines
-	"absorbVoreFull": "/npcs/sbq/dialogue/default.dialogue:absorbVoreFull", // external lines
-	"absorbVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"absorbVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"absorbVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"analVoreRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreRequested", // external lines
+	"absorbVoreNo": ":defaultNo",
+	"absorbVoreTooBig": ":tooBig",
+	"absorbVoreTooSmall": ":tooSmall",
+	"absorbVoreNoSlots": ":noSlots",
+	"absorbVoreFull": "/npcs/sbq/dialogue/default.dialogue:absorbVoreFull",
+	"absorbVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"absorbVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"analVoreRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreRequested",
 	"analVoreRequestedAfter": [
 		"Ahhh~ Hope I'm not squeezing too much.",
 		"Mmm~ This actually feels pretty good.",
@@ -65,174 +61,166 @@
 		"Oooh~ That squirming is rather nice."
 	],
 	"analVoreInvalid": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:analVoreInvalid",
-	"analVoreNo": ":defaultNo", // duplicated lines
-	"analVoreTooBig": ":tooBig", // duplicated lines
-	"analVoreTooSmall": ":tooSmall", // duplicated lines
-	"analVoreNoSlots": ":noSlots", // duplicated lines
-	"analVoreFull": "/npcs/sbq/dialogue/default.dialogue:analVoreFull", // external lines
-	"analVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"analVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"analVoreNo": ":defaultNo",
+	"analVoreTooBig": ":tooBig",
+	"analVoreTooSmall": ":tooSmall",
+	"analVoreNoSlots": ":noSlots",
+	"analVoreFull": "/npcs/sbq/dialogue/default.dialogue:analVoreFull",
+	"analVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"analVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"unbirthVoreRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreRequested",
 	"unbirthVoreRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreRequestedAfter",
 	"unbirthVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreInvalid",
-	"unbirthVoreNo": ":defaultNo", // duplicated lines
-	"unbirthVoreTooBig": ":tooBig", // duplicated lines
-	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
-	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
+	"unbirthVoreNo": ":defaultNo",
+	"unbirthVoreTooBig": ":tooBig",
+	"unbirthVoreTooSmall": ":tooSmall",
+	"unbirthVoreNoSlots": ":noSlots",
 	"unbirthVoreFull": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreFull",
-	"unbirthVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"unbirthVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"breastVoreRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequested", // external lines
-	"breastVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestedAfter", // external lines
+	"unbirthVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"unbirthVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"breastVoreRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequested",
+	"breastVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestedAfter",
 	"breastVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastVoreInvalid",
-	"breastVoreNo": ":defaultNo", // duplicated lines
-	"breastVoreTooBig": ":tooBig", // duplicated lines
-	"breastVoreTooSmall": ":tooSmall", // duplicated lines
-	"breastVoreNoSlots": ":noSlots", // duplicated lines
-	"breastVoreFull": ":full", // duplicated lines
-	"breastVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"breastVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastVoreNo": ":defaultNo",
+	"breastVoreTooBig": ":tooBig",
+	"breastVoreTooSmall": ":tooSmall",
+	"breastVoreNoSlots": ":noSlots",
+	"breastVoreFull": ":breastInfuseFull",
+	"breastVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"breastVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"cockVoreRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreRequested",
 	"cockVoreRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreRequestedAfter",
 	"cockVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreInvalid",
-	"cockVoreNo": ":defaultNo", // duplicated lines
-	"cockVoreTooBig": ":tooBig", // duplicated lines
-	"cockVoreTooSmall": ":tooSmall", // duplicated lines
-	"cockVoreNoSlots": ":noSlots", // duplicated lines
-	"cockVoreFull": "/npcs/sbq/dialogue/default.dialogue:cockVoreFull", // external lines
-	"cockVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"cockVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockVoreNo": ":defaultNo",
+	"cockVoreTooBig": ":tooBig",
+	"cockVoreTooSmall": ":tooSmall",
+	"cockVoreNoSlots": ":noSlots",
+	"cockVoreFull": "/npcs/sbq/dialogue/default.dialogue:cockVoreFull",
+	"cockVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"cockVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"bellyInfuseRequested": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequested",
 	"bellyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequestedAfter",
 	"bellyInfuseInvalid": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseInvalid",
-	"bellyInfuseNo": ":defaultNo", // duplicated lines
-	"bellyInfuseTooBig": ":tooBig", // duplicated lines
-	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
-	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
-	"bellyInfuseFull": ":full", // duplicated lines
-	"bellyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"bellyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"bellyInfuseNo": ":defaultNo",
+	"bellyInfuseTooBig": ":tooBig",
+	"bellyInfuseTooSmall": ":tooSmall",
+	"bellyInfuseNoSlots": ":noSlots",
+	"bellyInfuseFull": ":breastInfuseFull",
+	"bellyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"bellyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"breastInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequested",
 	"breastInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequestedAfter",
 	"breastInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseInvalid",
-	"breastInfuseNo": ":defaultNo", // duplicated lines
-	"breastInfuseTooBig": ":tooBig", // duplicated lines
-	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
-	"breastInfuseNoSlots": ":noSlots", // duplicated lines
-	"breastInfuseFull": ":full", // duplicated lines
-	"breastInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"breastInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastInfuseNo": ":defaultNo",
+	"breastInfuseTooBig": ":tooBig",
+	"breastInfuseTooSmall": ":tooSmall",
+	"breastInfuseNoSlots": ":noSlots",
+	"breastInfuseFull": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseFull",
+	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"pussyInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequested",
 	"pussyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequestedAfter",
 	"pussyInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseInvalid",
-	"pussyInfuseNo": ":defaultNo", // duplicated lines
-	"pussyInfuseTooBig": ":tooBig", // duplicated lines
-	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
-	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
-	"pussyInfuseFull": ":full", // duplicated lines
-	"pussyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"pussyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"pussyInfuseNo": ":defaultNo",
+	"pussyInfuseTooBig": ":tooBig",
+	"pussyInfuseTooSmall": ":tooSmall",
+	"pussyInfuseNoSlots": ":noSlots",
+	"pussyInfuseFull": ":breastInfuseFull",
+	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"pussyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"cockInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequested",
 	"cockInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequestedAfter",
 	"cockInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseInvalid",
-	"cockInfuseNo": ":defaultNo", // duplicated lines
-	"cockInfuseTooBig": ":tooBig", // duplicated lines
-	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
-	"cockInfuseNoSlots": ":noSlots", // duplicated lines
-	"cockInfuseFull": ":full", // duplicated lines
-	"cockInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"cockInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
-	"tailVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutRequested", // external lines
-	"absorbVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutRequested", // external lines
-	"analVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutRequested", // external lines
-	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested", // external lines
-	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested", // external lines
-	"cockVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutRequested", // external lines
-	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt", // external lines
-	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes", // external lines
-	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter", // external lines
-	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo", // external lines
-	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes", // external lines
-	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter", // external lines
-	"tailVorePrompt": "/npcs/sbq/dialogue/default.dialogue:tailVorePrompt", // external lines
-	"tailVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYes", // external lines
-	"tailVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYesAfter", // external lines
-	"tailVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNo", // external lines
-	"tailVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYes", // external lines
-	"tailVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYesAfter", // external lines
-	"absorbVorePrompt": "/npcs/sbq/dialogue/default.dialogue:absorbVorePrompt", // external lines
-	"absorbVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptYes", // external lines
-	"absorbVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptYesAfter", // external lines
-	"absorbVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNo", // external lines
-	"absorbVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNoYes", // external lines
-	"absorbVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNoYesAfter", // external lines
-	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt", // external lines
-	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes", // external lines
-	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter", // external lines
-	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo", // external lines
-	"analVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYes", // external lines
-	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter", // external lines
-	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt", // external lines
-	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes", // external lines
-	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter", // external lines
-	"unbirthVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNo", // external lines
-	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes", // external lines
-	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter", // external lines
-	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt", // external lines
-	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes", // external lines
-	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter", // external lines
-	"breastVorePromptNo": ":defaultNo", // duplicated lines
-	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes", // external lines
-	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter", // external lines
-	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt", // external lines
-	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes", // external lines
-	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter", // external lines
-	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo", // external lines
-	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes", // external lines
-	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter", // external lines
-	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting", // external lines
-	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes", // external lines
-	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo", // external lines
-	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes", // external lines
-	"tailVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequesting", // external lines
-	"tailVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingYes", // external lines
-	"tailVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNo", // external lines
-	"tailVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNoYes", // external lines
-	"absorbVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequesting", // external lines
-	"absorbVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingYes", // external lines
-	"absorbVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingNo", // external lines
-	"absorbVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingNoYes", // external lines
-	"analVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:analVoreRequesting", // external lines
-	"analVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingYes", // external lines
-	"analVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNo", // external lines
-	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNoYes", // external lines
-	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting", // external lines
-	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes", // external lines
-	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo", // external lines
-	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes", // external lines
-	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting", // external lines
-	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes", // external lines
-	"breastVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNo", // external lines
-	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes", // external lines
-	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting", // external lines
-	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes", // external lines
-	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo", // external lines
-	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes", // external lines
+	"cockInfuseNo": ":defaultNo",
+	"cockInfuseTooBig": ":tooBig",
+	"cockInfuseTooSmall": ":tooSmall",
+	"cockInfuseNoSlots": ":noSlots",
+	"cockInfuseFull": ":breastInfuseFull",
+	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"cockInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested",
+	"tailVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutRequested",
+	"absorbVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutRequested",
+	"analVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutRequested",
+	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested",
+	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested",
+	"cockVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutRequested",
+	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt",
+	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes",
+	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter",
+	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo",
+	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes",
+	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter",
+	"tailVorePrompt": "/npcs/sbq/dialogue/default.dialogue:tailVorePrompt",
+	"tailVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYes",
+	"tailVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptYesAfter",
+	"tailVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNo",
+	"tailVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYes",
+	"tailVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYesAfter",
+	"absorbVorePrompt": "/npcs/sbq/dialogue/default.dialogue:absorbVorePrompt",
+	"absorbVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptYes",
+	"absorbVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptYesAfter",
+	"absorbVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNo",
+	"absorbVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNoYes",
+	"absorbVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVorePromptNoYesAfter",
+	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt",
+	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes",
+	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter",
+	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo",
+	"analVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYes",
+	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter",
+	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt",
+	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes",
+	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter",
+	"unbirthVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNo",
+	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes",
+	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter",
+	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt",
+	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes",
+	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter",
+	"breastVorePromptNo": ":defaultNo",
+	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes",
+	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter",
+	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt",
+	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes",
+	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter",
+	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo",
+	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes",
+	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter",
+	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting",
+	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes",
+	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo",
+	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes",
+	"tailVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequesting",
+	"tailVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingYes",
+	"tailVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNo",
+	"tailVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestingNoYes",
+	"absorbVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequesting",
+	"absorbVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingYes",
+	"absorbVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingNo",
+	"absorbVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:absorbVoreRequestingNoYes",
+	"analVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:analVoreRequesting",
+	"analVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingYes",
+	"analVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNo",
+	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNoYes",
+	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting",
+	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes",
+	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo",
+	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes",
+	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting",
+	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes",
+	"breastVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNo",
+	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes",
+	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting",
+	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes",
+	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo",
+	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes",
 	"oralVoreNoPrompt": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreNoPrompt",
-	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter", // duplicated lines
-	"tailVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPrompt", // external lines
-	"tailVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPromptAfter", // external lines
-	"absorbVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:absorbVoreNoPrompt", // external lines
-	"absorbVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreNoPromptAfter", // external lines
+	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter",
+	"tailVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPrompt",
+	"tailVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPromptAfter",
+	"absorbVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:absorbVoreNoPrompt",
+	"absorbVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreNoPromptAfter",
 	"analVoreNoPrompt": [
 		"Hey, I want to try something.",
 		"Hey... what if I shoved you up my ass?",
@@ -245,80 +233,80 @@
 		"Heh~ it's almost like you're a living dildo.",
 		"Oooh~ That squirming is rather nice."
 	],
-	"unbirthVoreNoPrompt": ":cockVoreNoPrompt", // duplicated lines
-	"cockVoreNoPrompt": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreNoPrompt",
+	"unbirthVoreNoPrompt": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreNoPrompt",
+	"cockVoreNoPrompt": ":unbirthVoreNoPrompt",
 	"unbirthVoreNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreNoPromptAfter",
-	"breastVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPrompt", // external lines
-	"breastVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPromptAfter", // external lines
+	"breastVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPrompt",
+	"breastVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreNoPromptAfter",
 	"cockVoreNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreNoPromptAfter",
 	"bellyInfuseNoPrompt": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseNoPrompt",
-	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter", // external lines
-	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt", // external lines
+	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter",
+	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt",
 	"breastInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseNoPromptAfter",
-	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt", // external lines
+	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt",
 	"pussyInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseNoPromptAfter",
-	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt", // external lines
+	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt",
 	"cockInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseNoPromptAfter",
-	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
-	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
-	"oralVoreUnprompted": ":defaultUnprompted", // duplicated lines
-	"defaultUnprompted": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:defaultUnprompted",
-	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted", // external lines
-	"absorbVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:absorbVoreUnprompted", // external lines
-	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted", // external lines
-	"unbirthVoreUnprompted": ":cockVoreUnprompted", // duplicated lines
+	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt",
+	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter",
+	"oralVoreUnprompted": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreUnprompted",
+	"defaultUnprompted": ":oralVoreUnprompted",
+	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted",
+	"absorbVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:absorbVoreUnprompted",
+	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted",
+	"unbirthVoreUnprompted": ":cockVoreUnprompted",
 	"cockVoreUnprompted": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:cockVoreUnprompted",
-	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted", // external lines
-	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter", // external lines
-	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter", // external lines
-	"absorbVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutUnpromptedAfter", // external lines
-	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter", // external lines
-	"unbirthVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutUnpromptedAfter", // external lines
-	"breastVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutUnpromptedAfter", // external lines
-	"cockVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutUnpromptedAfter", // external lines
-	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing", // external lines
-	"tailVoreForcing": "/npcs/sbq/dialogue/default.dialogue:tailVoreForcing", // external lines
-	"absorbVoreForcing": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForcing", // external lines
-	"analVoreForcing": "/npcs/sbq/dialogue/default.dialogue:analVoreForcing", // external lines
-	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing", // external lines
-	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing", // external lines
-	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing", // external lines
-	"oralVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutForcingAfter", // external lines
-	"tailVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForcingAfter", // external lines
-	"absorbVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForcingAfter", // external lines
-	"analVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForcingAfter", // external lines
-	"unbirthVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutForcingAfter", // external lines
-	"breastVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForcingAfter", // external lines
-	"cockVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForcingAfter", // external lines
-	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced", // external lines
-	"tailVoreForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreForced", // external lines
-	"absorbVoreForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForced", // external lines
-	"analVoreForced": "/npcs/sbq/dialogue/default.dialogue:analVoreForced", // external lines
-	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced", // external lines
-	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced", // external lines
-	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced", // external lines
+	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted",
+	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter",
+	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter",
+	"absorbVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutUnpromptedAfter",
+	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter",
+	"unbirthVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutUnpromptedAfter",
+	"breastVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutUnpromptedAfter",
+	"cockVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutUnpromptedAfter",
+	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing",
+	"tailVoreForcing": "/npcs/sbq/dialogue/default.dialogue:tailVoreForcing",
+	"absorbVoreForcing": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForcing",
+	"analVoreForcing": "/npcs/sbq/dialogue/default.dialogue:analVoreForcing",
+	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing",
+	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing",
+	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing",
+	"oralVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutForcingAfter",
+	"tailVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForcingAfter",
+	"absorbVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForcingAfter",
+	"analVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForcingAfter",
+	"unbirthVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutForcingAfter",
+	"breastVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForcingAfter",
+	"cockVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForcingAfter",
+	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced",
+	"tailVoreForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreForced",
+	"absorbVoreForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForced",
+	"analVoreForced": "/npcs/sbq/dialogue/default.dialogue:analVoreForced",
+	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced",
+	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced",
+	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced",
 	"oralVoreLetoutForced": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreLetoutForced",
-	"tailVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForced", // external lines
-	"absorbVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForced", // external lines
-	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced", // external lines
+	"tailVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForced",
+	"absorbVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForced",
+	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced",
 	"unbirthVoreLetoutForced": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreLetoutForced",
-	"breastVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForced", // external lines
+	"breastVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForced",
 	"cockVoreLetoutForced": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreLetoutForced",
 	"struggleBelly": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:struggleBelly",
-	"struggleWomb": ":struggleHeal", // duplicated lines
-	"struggleAcidHeal": ":struggleHeal", // external lines
-	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail", // external lines
-	"struggleBreasts": "/npcs/sbq/dialogue/default.dialogue:struggleBreasts", // external lines
-	"struggleBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleBreastsShirt", // external lines
-	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy", // external lines
-	"struggleCock": ":struggleBelly", // duplicated lines
-	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls", // external lines
-	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss", // external lines
-	"struggleFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumHeal", // external lines
-	"struggleCumHeal": ":struggleHeal", // external lines
-	"struggleMilkHeal": "/npcs/sbq/dialogue/default.dialogue:struggleMilkHeal", // external lines
-	"struggleMiscHeal": ":struggleHeal", // duplicated lines
-	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression", // external lines
+	"struggleWomb": ":struggleAcidHeal",
+	"struggleAcidHeal": "/npcs/sbq/dialogue/default.dialogue:struggleAcidHeal",
+	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail",
+	"struggleBreasts": "/npcs/sbq/dialogue/default.dialogue:struggleBreasts",
+	"struggleBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleBreastsShirt",
+	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy",
+	"struggleCock": ":struggleBelly",
+	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls",
+	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss",
+	"struggleFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumHeal",
+	"struggleCumHeal": ":struggleAcidHeal",
+	"struggleMilkHeal": "/npcs/sbq/dialogue/default.dialogue:struggleMilkHeal",
+	"struggleMiscHeal": ":struggleAcidHeal",
+	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression",
 	"struggleAcidDigest": [
 		"Time to melt you down into pudge.",
 		"Just be a good meal and melt."
@@ -327,30 +315,30 @@
 		"Why aren't you melting down?",
 		"Doesn't feel like you're melting."
 	],
-	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest", // external lines
+	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest",
 	"struggleCumDigestBalls": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:struggleCumDigestBalls",
-	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune", // external lines
-	"struggleFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigest", // external lines
-	"struggleFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigestImmune", // external lines
-	"struggleMilkDigest": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigest", // external lines
-	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt", // external lines
-	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune", // external lines
-	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
-	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
-	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming", // external lines
-	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
+	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune",
+	"struggleFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigest",
+	"struggleFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigestImmune",
+	"struggleMilkDigest": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigest",
+	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt",
+	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune",
+	"struggleMiscDigest": ":struggleAcidDigest",
+	"struggleMiscDigestImmune": ":struggleAcidDigestImmune",
+	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming",
+	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy",
 	"struggleEggify": [
 		"Can you feel that egg forming around you?",
 		"Soon, your squirming won't do a thing."
 	],
-	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant", // external lines
-	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant", // external lines
+	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant",
+	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant",
 	"bellyInfusedOccupant": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfusedOccupant",
 	"breastInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfusedOccupant",
 	"pussyInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfusedOccupant",
 	"cockInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfusedOccupant",
-	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant", // external lines
-	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant", // external lines
+	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant",
+	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant",
 	"strugglingBelly": [
 		[
 			"Mmmm pretty comfortable.",
@@ -379,13 +367,13 @@
 		}
 	],
 	"strugglingWomb": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingWomb",
-	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail", // external lines
-	"strugglingBreasts": "/npcs/sbq/dialogue/default.dialogue:strugglingBreasts", // external lines
-	"strugglingBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingBreastsShirt", // external lines
-	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy", // external lines
+	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail",
+	"strugglingBreasts": "/npcs/sbq/dialogue/default.dialogue:strugglingBreasts",
+	"strugglingBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingBreastsShirt",
+	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy",
 	"strugglingCock": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCock",
-	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls", // external lines
-	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss", // external lines
+	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls",
+	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss",
 	"strugglingAcidHeal": [
 		[
 			"Ahh... its so soothing.",
@@ -415,8 +403,8 @@
 	],
 	"strugglingFemcumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingFemcumHeal",
 	"strugglingCumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCumHeal",
-	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal", // external lines
-	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal",
+	"strugglingMiscHeal": ":strugglingAcidHeal",
 	"strugglingCompression": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCompression",
 	"strugglingAcidDigest": [
 		[
@@ -445,49 +433,49 @@
 		}
 	],
 	"strugglingAcidDigestImmune": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingAcidDigestImmune",
-	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest", // external lines
+	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest",
 	"strugglingCumDigestBalls": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCumDigestBalls",
-	"strugglingCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestImmune", // external lines
+	"strugglingCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestImmune",
 	"strugglingFemcumDigest": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingFemcumDigest",
 	"strugglingFemcumDigestImmune": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:strugglingFemcumDigestImmune",
-	"strugglingMilkDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigest", // external lines
-	"strugglingMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestBreastsShirt", // external lines
-	"strugglingMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestImmune", // external lines
-	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
-	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
+	"strugglingMilkDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigest",
+	"strugglingMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestBreastsShirt",
+	"strugglingMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestImmune",
+	"strugglingMiscDigest": ":strugglingAcidDigest",
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
+	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming",
 	"strugglingDrainEnergy": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingDrainEnergy",
 	"strugglingEggify": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingEggify",
-	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
-	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused", // external lines
+	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused",
+	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused",
 	"bellyInfused": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfused",
 	"breastInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfused",
 	"pussyInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfused",
 	"cockInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfused",
-	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused", // external lines
-	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused", // external lines
-	"climax": "/npcs/sbq/dialogue/default.dialogue:climax", // external lines
-	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb", // external lines
-	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts", // external lines
-	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock", // external lines
-	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls", // external lines
-	"shrinking": "/npcs/sbq/dialogue/default.dialogue:shrinking", // external lines
-	"growing": "/npcs/sbq/dialogue/default.dialogue:growing", // external lines
+	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused",
+	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused",
+	"climax": "/npcs/sbq/dialogue/default.dialogue:climax",
+	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb",
+	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts",
+	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock",
+	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls",
+	"shrinking": "/npcs/sbq/dialogue/default.dialogue:shrinking",
+	"growing": "/npcs/sbq/dialogue/default.dialogue:growing",
 	"didSteppy": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:didSteppy",
 	"gotStepped": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:gotStepped",
 	"gotStomped": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:gotStomped",
 	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
 	// Unused Dialogue
-	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed", // external lines
+	"struggleTransformed": "/npcs/sbq/dialogue/default.dialogue:struggleTransformed",
 	// Unused Dialogue
-	"full": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:full",
-	"needsInfusion": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:needsInfusion",
-	"struggle": ":struggleBelly", // external lines
-	"struggleHeal": "/npcs/sbq/dialogue/default.dialogue:struggleHeal", // external lines
+	"full": ":breastInfuseFull",
+	"needsInfusion": ":oralVoreNeedsInfusion",
+	"struggle": ":struggleBelly",
+	"struggleHeal": ":struggleAcidHeal",
 	"struggleDigestCock": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:struggleDigestCock",
 	"oralVoreLetoutRequestedDigested": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreLetoutRequestedDigested",
-	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
-	"tailVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
+	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
+	"tailVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
 	"strugglingSlime": [
 		"This slime is so sticky.",
 		"Stuck suspended in slime...",
@@ -556,32 +544,29 @@
 			"Soon your squirming won't do a thing."
 		]
 	],
-	"struggleEggifyImmuneBelly": ":struggleTransformingImmuneBelly", // duplicated lines
-	"struggleTransformedWomb": ":struggleTransformedBelly", // duplicated lines
-	"struggleTransformingWomb": ":struggleTransformingBelly", // duplicated lines
+	"struggleEggifyImmuneBelly": "Missing: struggleTransformingImmuneBelly <dialoguePath>",
+	"struggleTransformedWomb": ":struggleTransformedBelly",
+	"struggleTransformingWomb": ":struggleTransformingBelly",
 	"struggleTransformingImmuneWomb": [
 		[
 			"You don't want to change?",
 			"Come on, don't you want to be different?"
 		]
 	],
-	"struggleEggedWomb": ":struggleEggedBelly", // duplicated lines
-	"struggleEggifyImmuneWomb": ":struggleTransformingImmuneBelly", // duplicated lines
-	"struggleTransformedCock": ":struggleDigestCock", // duplicated lines
+	"struggleEggedWomb": ":struggleEggedBelly",
+	"struggleEggifyImmuneWomb": ":struggleEggifyImmuneBelly",
+	"struggleTransformedCock": ":struggleDigestCock",
 	"struggleTransformingCock": [
 		[
 			"I can feel you getting goopy in there.",
 			"I can feel you tarting to turn~"
 		]
 	],
-	"struggleTransformingImmuneCock": ":struggleTransformingImmuneBelly", // duplicated lines
-	"struggleTransformedBalls": ":struggleShaftTransformed", // duplicated lines
-	"struggleTransformingBalls": ":struggleShaftTransforming", // duplicated lines
-	"struggleTransformingImmuneBalls": ":struggleTransformingImmuneBelly", // duplicated lines
-	"oralVoreLetoutForcedTransforming": ":struggleTransformingImmuneBelly", // duplicated lines
-	"struggling.default.default.default.default.default.default": ":struggling", // duplicated lines
+	"struggleTransformingImmuneCock": ":struggleEggifyImmuneBelly",
+	"struggleTransformingImmuneBalls": ":struggleEggifyImmuneBelly",
+	"oralVoreLetoutForcedTransforming": ":struggleEggifyImmuneBelly",
 	"struggling.default.default.default.shy.default.default": "/npcs/sbq/dialogue/shy.dialogue:struggling",
-	"strugglingTransformingImmuneBelly": ":struggleTransformingImmuneBelly", // duplicated lines
+	"strugglingTransformingImmuneBelly": ":struggleEggifyImmuneBelly",
 	"strugglingSlimeDigest": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:strugglingSlimeDigest",
 	"strugglingTransformedWomb": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:strugglingTransformedWomb",
 	"escape.default.default.true.default.default.default": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:escape.default.default.true.default.default.default",

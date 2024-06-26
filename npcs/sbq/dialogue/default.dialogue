@@ -61,53 +61,53 @@
 		"Not too bad."
 	],
 	"oralVoreInvalid": "There must be an error, oralVore is invalid",
-	"oralVoreNo": ":defaultNo", // duplicated lines
 	"defaultNo": [
 		"Don't really feel like that right now.",
 		"Not right now.",
 		"I'm not in the mood.",
 		"Eh, maybe later."
 	],
-	"oralVoreTooBig": ":tooBig", // duplicated lines
+	"oralVoreNo": ":defaultNo",
 	"tooBig": [
 		"I think you're a bit too big to fit in there...",
 		"I don't think I'd be able to get you in...",
 		"If only you were a bit smaller...",
 		"Thats a bit too much to ask of me..."
 	],
-	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"oralVoreTooBig": ":tooBig",
 	"tooSmall": [
 		"Sorry but I need something a bit bigger then you",
 		"I don't think I'd really feel you at that size",
 		"You're too short for this ride buddy",
 		"Maybe if you where just a little bigger..."
 	],
-	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"oralVoreTooSmall": ":tooSmall",
 	"noSlots": [
 		"I think I'm at maximum capacity..."
 	],
+	"oralVoreNoSlots": ":noSlots",
 	"oralVoreFull": [
 		"I'm a bit too full...",
 		"My belly can't stretch any further...",
 		"I've eaten too much already...",
 		"I would... but I'm too full..."
 	],
-	"oralVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"needsInfusion": [
+	"oralVoreNeedsInfusion": [
 		"I'd want someone infused in there."
 	],
-	"oralVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"alreadyInfused": [
+	"needsInfusion": ":oralVoreNeedsInfusion",
+	"oralVoreAlreadyInfused": [
 		"I don't think I can handle two of you at once...",
 		"I already got someone there.",
 		"That spot's taken already."
 	],
-	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"targetPreySettingsMismatch": [
+	"alreadyInfused": ":oralVoreAlreadyInfused",
+	"oralVoreTargetPreySettingsMismatch": [
 		"I would... but I don't think your occupants would like it...",
 		"I'm not sure your other friends would like that...",
 		"I think someone you've got with you would object to that..."
 	],
+	"targetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"tailVoreRequested": {
 		"percentage": "food",
 		"pools": [
@@ -143,17 +143,17 @@
 		]
 	},
 	"tailVoreInvalid": "There must be an error, tailVore is invalid",
-	"tailVoreNo": ":defaultNo", // duplicated lines
-	"tailVoreTooBig": ":tooBig", // duplicated lines
-	"tailVoreTooSmall": ":tooSmall", // duplicated lines
-	"tailVoreNoSlots": ":noSlots", // duplicated lines
+	"tailVoreNo": ":defaultNo",
+	"tailVoreTooBig": ":tooBig",
+	"tailVoreTooSmall": ":tooSmall",
+	"tailVoreNoSlots": ":noSlots",
 	"tailVoreFull": [
 		"Sorry but my tail is already filled up.",
 		"My tail can't fit any more prey, sorry!"
 	],
-	"tailVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"tailVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"tailVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"tailVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"tailVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"absorbVoreRequested": [ // these lines should be proofread and or redone when Absorb is actually implemented for NPCs/players
 		"You want to be entirely engulfed within me? why not! come here.",
 		"Heh, now to give you a hug, and pull you into a full body hug."
@@ -163,17 +163,17 @@
 		"You fit like a glove in me, might as well got comfortable."
 	],
 	"absorbVoreInvalid": "There must be an error, absorbVore is invalid",
-	"absorbVoreNo": ":defaultNo", // duplicated lines
-	"absorbVoreTooBig": ":tooBig", // duplicated lines
-	"absorbVoreTooSmall": ":tooSmall", // duplicated lines
-	"absorbVoreNoSlots": ":noSlots", // duplicated lines
+	"absorbVoreNo": ":defaultNo",
+	"absorbVoreTooBig": ":tooBig",
+	"absorbVoreTooSmall": ":tooSmall",
+	"absorbVoreNoSlots": ":noSlots",
 	"absorbVoreFull": [
 		"I'd push you in, but my form is stretched out enough as is!",
 		"No room in my body for you bud."
 	],
-	"absorbVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"absorbVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"absorbVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"absorbVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"absorbVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"absorbVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"navelVoreRequested": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"You want to go in through my navel?",
 		"That isn't the usual way to do things.",
@@ -187,17 +187,17 @@
 		"Oooh~ Thats a stretch."
 	],
 	"navelVoreInvalid": "There must be an error, navelVore is invalid",
-	"navelVoreNo": ":defaultNo", // duplicated lines
-	"navelVoreTooBig": ":tooBig", // duplicated lines
-	"navelVoreTooSmall": ":tooSmall", // duplicated lines
-	"navelVoreNoSlots": ":noSlots", // duplicated lines
+	"navelVoreNo": ":defaultNo",
+	"navelVoreTooBig": ":tooBig",
+	"navelVoreTooSmall": ":tooSmall",
+	"navelVoreNoSlots": ":noSlots",
 	"navelVoreFull": [
 		"Sorry, but my belly doesn't have room, maybe get in my navel later?",
 		"I would squeeze you though my button, but I'm too full to take you."
 	],
-	"navelVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"navelVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"navelVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"navelVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"navelVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"navelVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"analVoreRequested": [
 		"You want to go up my butt?",
 		"You know thats the wrong way right?",
@@ -211,17 +211,17 @@
 		"Oooh~ That squirming is rather nice."
 	],
 	"analVoreInvalid": "There must be an error, analVore is invalid",
-	"analVoreNo": ":defaultNo", // duplicated lines
-	"analVoreTooBig": ":tooBig", // duplicated lines
-	"analVoreTooSmall": ":tooSmall", // duplicated lines
-	"analVoreNoSlots": ":noSlots", // duplicated lines
+	"analVoreNo": ":defaultNo",
+	"analVoreTooBig": ":tooBig",
+	"analVoreTooSmall": ":tooSmall",
+	"analVoreNoSlots": ":noSlots",
 	"analVoreFull": [
 		"Sorry, all full back here!",
 		"Afraid I can't fit another in me!"
 	],
-	"analVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"analVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"analVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"analVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"analVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"unbirthVoreRequested": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -260,14 +260,14 @@
 		]
 	},
 	"unbirthVoreInvalid": "There must be an error, unbirthVore is invalid",
-	"unbirthVoreNo": ":defaultNo", // duplicated lines
+	"unbirthVoreNo": ":defaultNo",
 	"unbirthVoreTooBig": [
 		"I think you're a bit too big for me to carry around."
 	],
 	"unbirthVoreTooSmall": [
 		"You're a bit too small... I'd probably not even feel you in there..."
 	],
-	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
+	"unbirthVoreNoSlots": ":noSlots",
 	"unbirthVoreFull": [
 		"My womb is already occupied~",
 		"Maybe after I'm done carrying my current occupants around~",
@@ -279,8 +279,8 @@
 		"Someone would need to be my pussy...",
 		"I'd have to turn someone into my pussy first..."
 	],
-	"unbirthVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"unbirthVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"breastVoreRequested": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -319,9 +319,9 @@
 	"breastVoreNo": [
 		"Not really feeling that right now..."
 	],
-	"breastVoreTooBig": ":tooBig", // duplicated lines
-	"breastVoreTooSmall": ":tooSmall", // duplicated lines
-	"breastVoreNoSlots": ":noSlots", // duplicated lines
+	"breastVoreTooBig": ":tooBig",
+	"breastVoreTooSmall": ":tooSmall",
+	"breastVoreNoSlots": ":noSlots",
 	"breastVoreFull": [
 		"My boobs are already occupied~",
 		"Maybe after I'm done carrying my current occupants around~",
@@ -332,8 +332,8 @@
 		"Someone would need to be my boobs...",
 		"I'd have to turn someone into my boobs first..."
 	],
-	"breastVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"breastVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"cockVoreRequested": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -386,10 +386,10 @@
 		]
 	},
 	"cockVoreInvalid": "There must be an error, cockVore is invalid",
-	"cockVoreNo": ":defaultNo", // duplicated lines
-	"cockVoreTooBig": ":tooBig", // duplicated lines
-	"cockVoreTooSmall": ":tooSmall", // duplicated lines
-	"cockVoreNoSlots": ":noSlots", // duplicated lines
+	"cockVoreNo": ":defaultNo",
+	"cockVoreTooBig": ":tooBig",
+	"cockVoreTooSmall": ":tooSmall",
+	"cockVoreNoSlots": ":noSlots",
 	"cockVoreFull": [
 		"Already got someone plugging my shaft~",
 		"Mmm maybe if someone squirmed a little further in, I might have space for you.",
@@ -401,8 +401,8 @@
 		"Someone would need to be my cock...",
 		"I'd have to turn someone into my penis first..."
 	],
-	"cockVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockVoreAlreadyInfused": ":oralVoreAlreadyInfused",
+	"cockVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"bellyInfuseRequested": [
 		"Youre gonna love it down there, I guarantee it!",
 		"Let's be honest, you look a lot cuter this way.",
@@ -421,18 +421,18 @@
 		"Try not to make me too hungry..."
 	],
 	"bellyInfuseInvalid": "There must be an error, bellyInfuse is invalid",
-	"bellyInfuseNo": ":defaultNo", // duplicated lines
-	"bellyInfuseTooBig": ":tooBig", // duplicated lines
-	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
-	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
-	"bellyInfuseFull": ":infuseFull", // duplicated lines
-	"infuseFull": [
+	"bellyInfuseNo": ":defaultNo",
+	"bellyInfuseTooBig": ":tooBig",
+	"bellyInfuseTooSmall": ":tooSmall",
+	"bellyInfuseNoSlots": ":noSlots",
+	"bellyInfuseFull": [
 		"I can't even fit you in there to get started.",
 		"I'm too full to get started on you."
 	],
-	"bellyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"bellyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"infuseFull": ":bellyInfuseFull",
+	"bellyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"bellyInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"bellyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"breastInfuseRequested": [
 		"You want to be my boobs?",
 		"Mm, can't wait to be jiggling on my chest, can you?",
@@ -444,14 +444,14 @@
 		"Ah, you're already leaking milk~"
 	],
 	"breastInfuseInvalid": "There must be an error, breastInfuse is invalid",
-	"breastInfuseNo": ":defaultNo", // duplicated lines
-	"breastInfuseTooBig": ":tooBig", // duplicated lines
-	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
-	"breastInfuseNoSlots": ":noSlots", // duplicated lines
-	"breastInfuseFull": ":infuseFull", // duplicated lines
-	"breastInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"breastInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"breastInfuseNo": ":defaultNo",
+	"breastInfuseTooBig": ":tooBig",
+	"breastInfuseTooSmall": ":tooSmall",
+	"breastInfuseNoSlots": ":noSlots",
+	"breastInfuseFull": ":bellyInfuseFull",
+	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"breastInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"pussyInfuseRequested": [
 		"You're going to look good as my pussy.",
 		"Mm, can't wait to feel you soaking me down there.",
@@ -470,14 +470,14 @@
 		"Ah, you're already sopping wet with excitement~"
 	],
 	"pussyInfuseInvalid": "There must be an error, pussyInfuse is invalid",
-	"pussyInfuseNo": ":defaultNo", // duplicated lines
-	"pussyInfuseTooBig": ":tooBig", // duplicated lines
-	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
-	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
-	"pussyInfuseFull": ":infuseFull", // duplicated lines
-	"pussyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"pussyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"pussyInfuseNo": ":defaultNo",
+	"pussyInfuseTooBig": ":tooBig",
+	"pussyInfuseTooSmall": ":tooSmall",
+	"pussyInfuseNoSlots": ":noSlots",
+	"pussyInfuseFull": ":bellyInfuseFull",
+	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"pussyInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"pussyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"cockInfuseRequested": [
 		"You want to be my cock?",
 		"Mm, can't wait to be throbbing down there, can you?",
@@ -489,14 +489,14 @@
 		"Ah, you're already throbbing with excitement~"
 	],
 	"cockInfuseInvalid": "There must be an error, cockInfuse is invalid",
-	"cockInfuseNo": ":defaultNo", // duplicated lines
-	"cockInfuseTooBig": ":tooBig", // duplicated lines
-	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
-	"cockInfuseNoSlots": ":noSlots", // duplicated lines
-	"cockInfuseFull": ":infuseFull", // duplicated lines
-	"cockInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"cockInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"cockInfuseNo": ":defaultNo",
+	"cockInfuseTooBig": ":tooBig",
+	"cockInfuseTooSmall": ":tooSmall",
+	"cockInfuseNoSlots": ":noSlots",
+	"cockInfuseFull": ":bellyInfuseFull",
+	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"cockInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"cockInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"oralVoreLetoutRequested": [
 		"You can come out now.",
 		"Time to come out.",
@@ -2600,24 +2600,24 @@
 	"struggleAss": [
 		"Mmm~ you feel great back there~"
 	],
-	"struggleAcidHeal": ":struggleHeal", // duplicated lines
-	"struggleHeal": [
+	"struggleAcidHeal": [
 		"Now you're nice and safe.",
 		"Hope you like how it feels in there."
 	],
+	"struggleHeal": ":struggleAcidHeal",
 	"struggleFemcumHeal": [
 		"Hey now, just let my soft womb walls mend and sooth you.",
 		"With all that struggling, you must already be feeling better!",
 		"Don't panic. Inside my womb, you're being taking good care of."
 	],
-	"struggleCumHeal": ":struggleHeal", // duplicated lines
+	"struggleCumHeal": ":struggleAcidHeal",
 	"struggleMilkHeal": [
 		"Now you're nice and safe.",
 		"Hope you like how it feels in there.",
 		"Just snuggle into the walls~",
 		"Get yourself nice and soaked in my milk~"
 	],
-	"struggleMiscHeal": ":struggleHeal", // duplicated lines
+	"struggleMiscHeal": ":struggleAcidHeal",
 	"struggleCompression": [
 		"I can feel you getting so neatly packed in there.",
 		"You're gonna find it hard to move as it gets sooo much tighter.",
@@ -2669,8 +2669,8 @@
 	"struggleMilkDigestImmune": [
 		"Hmm... doesn't seem like you're getting churned up."
 	],
-	"struggleMiscDigest": ":struggleAcidDigest", // duplicated lines
-	"struggleMiscDigestImmune": ":struggleAcidDigestImmune", // duplicated lines
+	"struggleMiscDigest": ":struggleAcidDigest",
+	"struggleMiscDigestImmune": ":struggleAcidDigestImmune",
 	"struggleTransforming": {
 		"percentage": "transforming",
 		"pools": [
@@ -2822,20 +2822,20 @@
 		"Ah! so tight!",
 		"Mmmph!"
 	],
-	"strugglingAcidHeal": ":strugglingHeal", // duplicated lines
-	"strugglingHeal": [
+	"strugglingAcidHeal": [
 		"Ahh... It's so soothing.",
 		"I can feel all my troubles melting away...",
 		"It's so comfortable in here."
 	],
-	"strugglingFemcumHeal": ":strugglingHeal", // duplicated lines
-	"strugglingCumHeal": ":strugglingHeal", // duplicated lines
+	"strugglingHeal": ":strugglingAcidHeal",
+	"strugglingFemcumHeal": ":strugglingAcidHeal",
+	"strugglingCumHeal": ":strugglingAcidHeal",
 	"strugglingMilkHeal": [
 		"Heh, a very good milk bath...",
 		"Ahh, feeling better now...",
 		"Comfy and soothing..."
 	],
-	"strugglingMiscHeal": ":strugglingHeal", // duplicated lines
+	"strugglingMiscHeal": ":strugglingAcidHeal",
 	"strugglingCompression": [
 		"Ahh.. it just keeps getting tighter in here!",
 		"Sooo... snug...",
@@ -2888,8 +2888,8 @@
 	"strugglingMilkDigestImmune": [
 		"Huh, kinda squeezy..."
 	],
-	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingMiscDigest": ":strugglingAcidDigest",
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
 	"strugglingTransforming": [
 		"It feels kinda weird in here?",
 		"It feels like... I'm changing?"
@@ -3371,49 +3371,49 @@
 	"bellyInfusePrompt": "Missing: bellyInfusePrompt",
 	"bellyInfusePromptYes": "Missing: bellyInfusePromptYes",
 	"bellyInfusePromptYesAfter": "Missing: bellyInfusePromptYesAfter",
-	"bellyInfusePromptNo": ":defaultNo", // duplicated lines
+	"bellyInfusePromptNo": ":defaultNo",
 	"bellyInfusePromptNoYes": "Missing: bellyInfusePromptNoYes",
 	"bellyInfusePromptNoYesAfter": "Missing: bellyInfusePromptNoYesAfter",
 	"breastInfusePrompt": "Missing: breastInfusePrompt",
 	"breastInfusePromptYes": "Missing: breastInfusePromptYes",
 	"breastInfusePromptYesAfter": "Missing: breastInfusePromptYesAfter",
-	"breastInfusePromptNo": ":defaultNo", // duplicated lines
+	"breastInfusePromptNo": ":defaultNo",
 	"breastInfusePromptNoYes": "Missing: breastInfusePromptNoYes",
 	"breastInfusePromptNoYesAfter": "Missing: breastInfusePromptNoYesAfter",
 	"pussyInfusePrompt": "Missing: pussyInfusePrompt",
 	"pussyInfusePromptYes": "Missing: pussyInfusePromptYes",
 	"pussyInfusePromptYesAfter": "Missing: pussyInfusePromptYesAfter",
-	"pussyInfusePromptNo": ":defaultNo", // duplicated lines
+	"pussyInfusePromptNo": ":defaultNo",
 	"pussyInfusePromptNoYes": "Missing: pussyInfusePromptNoYes",
 	"pussyInfusePromptNoYesAfter": "Missing: pussyInfusePromptNoYesAfter",
 	"cockInfusePrompt": "Missing: cockInfusePrompt",
 	"cockInfusePromptYes": "Missing: cockInfusePromptYes",
 	"cockInfusePromptYesAfter": "Missing: cockInfusePromptYesAfter",
-	"cockInfusePromptNo": ":defaultNo", // duplicated lines
+	"cockInfusePromptNo": ":defaultNo",
 	"cockInfusePromptNoYes": "Missing: cockInfusePromptNoYes",
 	"cockInfusePromptNoYesAfter": "Missing: cockInfusePromptNoYesAfter",
 	"thighsInfuseRequested": "Missing: thighsInfuseRequested",
 	"thighsInfuseRequestedAfter": "Missing: thighsInfuseRequestedAfter",
 	"thighsInfuseInvalid": "There must be an error, thighsInfuse is invalid",
-	"thighsInfuseNo": ":defaultNo", // duplicated lines
-	"thighsInfuseTooBig": ":tooBig", // duplicated lines
-	"thighsInfuseTooSmall": ":tooSmall", // duplicated lines
-	"thighsInfuseNoSlots": ":noSlots", // duplicated lines
-	"thighsInfuseFull": ":infuseFull", // duplicated lines
-	"thighsInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"thighsInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"thighsInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"thighsInfuseNo": ":defaultNo",
+	"thighsInfuseTooBig": ":tooBig",
+	"thighsInfuseTooSmall": ":tooSmall",
+	"thighsInfuseNoSlots": ":noSlots",
+	"thighsInfuseFull": ":bellyInfuseFull",
+	"thighsInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"thighsInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"thighsInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"pawInfuseRequested": "Missing: pawInfuseRequested",
 	"pawInfuseRequestedAfter": "Missing: pawInfuseRequestedAfter",
 	"pawInfuseInvalid": "There must be an error, pawInfuse is invalid",
-	"pawInfuseNo": ":defaultNo", // duplicated lines
-	"pawInfuseTooBig": ":tooBig", // duplicated lines
-	"pawInfuseTooSmall": ":tooSmall", // duplicated lines
-	"pawInfuseNoSlots": ":noSlots", // duplicated lines
-	"pawInfuseFull": ":infuseFull", // duplicated lines
-	"pawInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"pawInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"pawInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"pawInfuseNo": ":defaultNo",
+	"pawInfuseTooBig": ":tooBig",
+	"pawInfuseTooSmall": ":tooSmall",
+	"pawInfuseNoSlots": ":noSlots",
+	"pawInfuseFull": ":bellyInfuseFull",
+	"pawInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"pawInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"pawInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"tailInfuseRequested": [
 		"Looking to be a part of my tail, huh? Can't say I blame you!",
 		"You're gonna make a nice bit of extra length!",
@@ -3424,24 +3424,24 @@
 		"All a part of me, now!"
 	],
 	"tailInfuseInvalid": "There must be an error, tailInfuse is invalid",
-	"tailInfuseNo": ":defaultNo", // duplicated lines
-	"tailInfuseTooBig": ":tooBig", // duplicated lines
-	"tailInfuseTooSmall": ":tooSmall", // duplicated lines
-	"tailInfuseNoSlots": ":noSlots", // duplicated lines
-	"tailInfuseFull": ":infuseFull", // duplicated lines
-	"tailInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
-	"tailInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
-	"tailInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
+	"tailInfuseNo": ":defaultNo",
+	"tailInfuseTooBig": ":tooBig",
+	"tailInfuseTooSmall": ":tooSmall",
+	"tailInfuseNoSlots": ":noSlots",
+	"tailInfuseFull": ":bellyInfuseFull",
+	"tailInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"tailInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
+	"tailInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"thighsInfusePrompt": "Missing: thighsInfusePrompt",
 	"thighsInfusePromptYes": "Missing: thighsInfusePromptYes",
 	"thighsInfusePromptYesAfter": "Missing: thighsInfusePromptYesAfter",
-	"thighsInfusePromptNo": ":defaultNo", // duplicated lines
+	"thighsInfusePromptNo": ":defaultNo",
 	"thighsInfusePromptNoYes": "Missing: thighsInfusePromptNoYes",
 	"thighsInfusePromptNoYesAfter": "Missing: thighsInfusePromptNoYesAfter",
 	"pawInfusePrompt": "Missing: pawInfusePrompt",
 	"pawInfusePromptYes": "Missing: pawInfusePromptYes",
 	"pawInfusePromptYesAfter": "Missing: pawInfusePromptYesAfter",
-	"pawInfusePromptNo": ":defaultNo", // duplicated lines
+	"pawInfusePromptNo": ":defaultNo",
 	"pawInfusePromptNoYes": "Missing: pawInfusePromptNoYes",
 	"pawInfusePromptNoYesAfter": "Missing: pawInfusePromptNoYesAfter",
 	"tailInfusePrompt": "Missing: tailInfusePrompt",
@@ -3451,7 +3451,7 @@
 		"All a part of me, now! Hope you enjoy the stay!",
 		"Got you all to myself, now!"
 	],
-	"tailInfusePromptNo": ":defaultNo", // duplicated lines
+	"tailInfusePromptNo": ":defaultNo",
 	"tailInfusePromptNoYes": "Missing: tailInfusePromptNoYes",
 	"tailInfusePromptNoYesAfter": "Missing: tailInfusePromptNoYesAfter",
 	"thighsInfuseNoPrompt": "Missing: thighsInfuseNoPrompt",
@@ -3459,43 +3459,43 @@
 	"thighsInfuseRequesting": "Missing: thighsInfuseRequesting",
 	"thighsInfuseRequestingYes": "Missing: thighsInfuseRequestingYes",
 	"thighsInfuseRequestingYesAfter": "Missing: thighsInfuseRequestingYesAfter",
-	"thighsInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"thighsInfuseRequestingNo": ":defaultNo",
 	"thighsInfuseRequestingNoYes": "Missing: thighsInfuseRequestingNoYes",
 	"thighsInfuseRequestingNoYesAfter": "Missing: thighsInfuseRequestingNoYesAfter",
 	"bellyInfuseRequesting": "Missing: bellyInfuseRequesting",
 	"bellyInfuseRequestingYes": "Missing: bellyInfuseRequestingYes",
 	"bellyInfuseRequestingYesAfter": "Missing: bellyInfuseRequestingYesAfter",
-	"bellyInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"bellyInfuseRequestingNo": ":defaultNo",
 	"bellyInfuseRequestingNoYes": "Missing: bellyInfuseRequestingNoYes",
 	"bellyInfuseRequestingNoYesAfter": "Missing: bellyInfuseRequestingNoYesAfter",
 	"breastInfuseRequesting": "Missing: breastInfuseRequesting",
 	"breastInfuseRequestingYes": "Missing: breastInfuseRequestingYes",
 	"breastInfuseRequestingYesAfter": "Missing: breastInfuseRequestingYesAfter",
-	"breastInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"breastInfuseRequestingNo": ":defaultNo",
 	"breastInfuseRequestingNoYes": "Missing: breastInfuseRequestingNoYes",
 	"breastInfuseRequestingNoYesAfter": "Missing: breastInfuseRequestingNoYesAfter",
 	"pussyInfuseRequesting": "Missing: pussyInfuseRequesting",
 	"pussyInfuseRequestingYes": "Missing: pussyInfuseRequestingYes",
 	"pussyInfuseRequestingYesAfter": "Missing: pussyInfuseRequestingYesAfter",
-	"pussyInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"pussyInfuseRequestingNo": ":defaultNo",
 	"pussyInfuseRequestingNoYes": "Missing: pussyInfuseRequestingNoYes",
 	"pussyInfuseRequestingNoYesAfter": "Missing: pussyInfuseRequestingNoYesAfter",
 	"cockInfuseRequesting": "Missing: cockInfuseRequesting",
 	"cockInfuseRequestingYes": "Missing: cockInfuseRequestingYes",
 	"cockInfuseRequestingYesAfter": "Missing: cockInfuseRequestingYesAfter",
-	"cockInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"cockInfuseRequestingNo": ":defaultNo",
 	"cockInfuseRequestingNoYes": "Missing: cockInfuseRequestingNoYes",
 	"cockInfuseRequestingNoYesAfter": "Missing: cockInfuseRequestingNoYesAfter",
 	"pawInfuseRequesting": "Missing: pawInfuseRequesting",
 	"pawInfuseRequestingYes": "Missing: pawInfuseRequestingYes",
 	"pawInfuseRequestingYesAfter": "Missing: pawInfuseRequestingYesAfter",
-	"pawInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"pawInfuseRequestingNo": ":defaultNo",
 	"pawInfuseRequestingNoYes": "Missing: pawInfuseRequestingNoYes",
 	"pawInfuseRequestingNoYesAfter": "Missing: pawInfuseRequestingNoYesAfter",
 	"tailInfuseRequesting": "Missing: tailInfuseRequesting",
 	"tailInfuseRequestingYes": "Missing: tailInfuseRequestingYes",
 	"tailInfuseRequestingYesAfter": "Missing: tailInfuseRequestingYesAfter",
-	"tailInfuseRequestingNo": ":defaultNo", // duplicated lines
+	"tailInfuseRequestingNo": ":defaultNo",
 	"tailInfuseRequestingNoYes": "Missing: tailInfuseRequestingNoYes",
 	"tailInfuseRequestingNoYesAfter": "Missing: tailInfuseRequestingNoYesAfter",
 	"cockVoreRequestingYesAfter": "Missing: cockVoreRequestingYesAfter",
