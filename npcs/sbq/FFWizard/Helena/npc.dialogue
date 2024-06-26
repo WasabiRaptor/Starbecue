@@ -95,7 +95,7 @@
 	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
 	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
 	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
-	"conversePrompt" : "Let's talk!",
+	"conversePrompt": "Let's talk!",
 	"converse": {
 		"dialogueRandom": [
 			"So, what's up?",
@@ -560,7 +560,7 @@
 			"HBlep.png"
 		]
 	},
-	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
+	"oralVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreInvalid",
 	"oralVoreNo": ":defaultNo", // duplicated lines
 	"defaultNo": {
 		"dialogueRandom": [
@@ -656,12 +656,10 @@
 			"HDetermined.png"
 		]
 	},
-	"oralVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"defaultNeedsInfusion": [
-		"I'd want someone merged in there"
-	],
-	"oralVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
-	"defaultAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:alreadyInfused", // external lines
+	"oralVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"needsInfusion": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:needsInfusion",
+	"oralVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"alreadyInfused": "/npcs/sbq/dialogue/default.dialogue:alreadyInfused", // external lines
 	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"targetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:targetPreySettingsMismatch", // external lines
 	"analVoreRequested": [
@@ -705,7 +703,7 @@
 			"HBlep.png"
 		]
 	},
-	"analVoreInvalid": "Whoops! analVore is invalid <dialoguePath>",
+	"analVoreInvalid": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:analVoreInvalid",
 	"analVoreNo": {
 		"dialogueRandom": [
 			"Sorry, you'll have to wait. It shouldn't be too long.",
@@ -731,7 +729,7 @@
 			"HShocked.png"
 		]
 	},
-	"analVoreTooBigHorny": ":analVoreTooBig", // duplicated lines
+	"analVoreTooBigHorny": ":tooBig", // duplicated lines
 	"analVoreTooSmall": ":tooSmall", // duplicated lines
 	"analVoreNoSlots": ":noSlots", // duplicated lines
 	"analVoreFull": [
@@ -742,8 +740,8 @@
 	],
 	"analVoreFullHungry": ":analVoreFull", // duplicated lines
 	"analVoreFullHorny": ":analVoreFull", // duplicated lines
-	"analVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"analVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"analVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"analVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"analVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"unbirthVoreRequested": [
 		"It's going to get ^pink;hot^reset;. Oh! You're into that.",
@@ -806,10 +804,10 @@
 			"HOwO.png"
 		]
 	},
-	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
-	"unbirthVoreNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreNo", // external lines
-	"unbirthVoreNoHungry": ":unbirthVoreNo", // duplicated lines
-	"unbirthVoreNoHorny": ":unbirthVoreNo", // duplicated lines
+	"unbirthVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreInvalid",
+	"unbirthVoreNo": ":defaultNo", // external lines
+	"unbirthVoreNoHungry": ":defaultNo", // duplicated lines
+	"unbirthVoreNoHorny": ":defaultNo", // duplicated lines
 	"unbirthVoreTooBig": {
 		"dialogueRandom": [
 			"T-tempting, but even I'm not that stretchy~",
@@ -858,8 +856,8 @@
 			"HOwO.png"
 		]
 	},
-	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"unbirthVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"breastVoreRequested": [
 		"I see where your gaze is. How about you get a closer look?",
@@ -922,7 +920,7 @@
 			"HOwO.png"
 		]
 	},
-	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
+	"breastVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastVoreInvalid",
 	"breastVoreNo": [
 		"Tempting! But no.",
 		"No room for you, dear.",
@@ -1014,8 +1012,8 @@
 			"HOwO.png"
 		]
 	},
-	"breastVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"breastVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockVoreRequested": {
 		"dialogueRandom": [
@@ -1069,7 +1067,7 @@
 	},
 	"cockVoreRequestedAfterHungry": ":cockVoreRequestedAfter", // duplicated lines
 	"cockVoreRequestedAfterHorny": ":cockVoreRequestedAfter", // duplicated lines
-	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
+	"cockVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreInvalid",
 	"cockVoreNo": {
 		"dialogueRandom": [
 			"Sorry, I'm giving my goods a much deserved break. Next time, dear.",
@@ -1111,90 +1109,58 @@
 	},
 	"cockVoreFullHungry": ":cockVoreFull", // duplicated lines
 	"cockVoreFullHorny": ":cockVoreFull", // duplicated lines
-	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"bellyInfuseRequested": [
-		"Mm, you love my belly so much... you want to be a part of it?",
-		"You want to become my belly?",
-		"You want to become a part of me...?"
-	],
-	"bellyInfuseRequestedAfter": [
-		"Ahh... there you are... just my belly now",
-		"Just a part of me now",
-		"Try not to make me too hungry..."
-	],
-	"bellyInfuseInvalid": "Whoops! bellyInfuse is invalid <dialoguePath>",
+	"bellyInfuseRequested": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequested",
+	"bellyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequestedAfter",
+	"bellyInfuseInvalid": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseInvalid",
 	"bellyInfuseNo": ":defaultNo", // duplicated lines
 	"bellyInfuseTooBig": ":tooBig", // duplicated lines
 	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
 	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
-	"bellyInfuseFull": ":defaultFull", // duplicated lines
-	"defaultFull": [
+	"bellyInfuseFull": ":full", // duplicated lines
+	"full": [
 		"While I have space where you want to go, it'd get way too cramped...",
 		" ..'mmph!'.. I don't know who said that, but that means I'm out of room...",
 		"I do indulging myself, but even this is too much...",
 		" ...Not right now, my thiccness has its limits..."
 	],
-	"bellyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"bellyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"bellyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"bellyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"bellyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"breastInfuseRequested": [
-		"You want to be my boobs?",
-		"Mm, can't wait to be jiggling on my chest can you?",
-		"You really want to give yourself entirely to me?"
-	],
-	"breastInfuseRequestedAfter": [
-		"Hehe, I can feel you leaking with excitment already~",
-		"Hehe, excited to be part of me~?",
-		"Ah, you're already leaking milk~"
-	],
-	"breastInfuseInvalid": "Whoops! breastInfuse is invalid <dialoguePath>",
+	"breastInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequested",
+	"breastInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequestedAfter",
+	"breastInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseInvalid",
 	"breastInfuseNo": ":defaultNo", // duplicated lines
 	"breastInfuseTooBig": ":tooBig", // duplicated lines
 	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
 	"breastInfuseNoSlots": ":noSlots", // duplicated lines
-	"breastInfuseFull": ":defaultFull", // duplicated lines
-	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastInfuseFull": ":full", // duplicated lines
+	"breastInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"pussyInfuseRequested": [
-		"You want to be my pussy?",
-		"Mm, can't wait to be soaking wet down there can you?",
-		"You really want to give yourself entirely to me?"
-	],
-	"pussyInfuseRequestedAfter": [
-		"Hehe, I can feel you leaking with excitment already~",
-		"Hehe, excited to be part of me~?",
-		"Ah, you're already sopping wet with excitment~"
-	],
-	"pussyInfuseInvalid": "Whoops! pussyInfuse is invalid <dialoguePath>",
+	"pussyInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequested",
+	"pussyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequestedAfter",
+	"pussyInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseInvalid",
 	"pussyInfuseNo": ":defaultNo", // duplicated lines
 	"pussyInfuseTooBig": ":tooBig", // duplicated lines
 	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
 	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
-	"pussyInfuseFull": ":defaultFull", // duplicated lines
-	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"pussyInfuseFull": ":full", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
-	"cockInfuseRequested": [
-		"You want to be my cock?",
-		"Mm, can't wait to be throbbing down there can you?",
-		"You really want to give yourself entirely to me?"
-	],
-	"cockInfuseRequestedAfter": [
-		"Hehe, I can feel you twitching with excitment already~",
-		"Hehe, excited to be part of me~?",
-		"Ah, you're already throbbing with excitment~"
-	],
-	"cockInfuseInvalid": "Whoops! cockInfuse is invalid <dialoguePath>",
+	"cockInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequested",
+	"cockInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequestedAfter",
+	"cockInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseInvalid",
 	"cockInfuseNo": ":defaultNo", // duplicated lines
 	"cockInfuseTooBig": ":tooBig", // duplicated lines
 	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
 	"cockInfuseNoSlots": ":noSlots", // duplicated lines
-	"cockInfuseFull": ":defaultFull", // duplicated lines
-	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockInfuseFull": ":full", // duplicated lines
+	"cockInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
 	"oralVoreLetoutRequestedHungry": {
@@ -1602,28 +1568,14 @@
 	},
 	"cockVoreNoPromptAfterHungry": ":cockVoreNoPromptAfter", // duplicated lines
 	"cockVoreNoPromptAfterHorny": ":cockVoreNoPromptAfter", // duplicated lines
-	"bellyInfuseNoPrompt": [
-		"I think... I need you in my belly... or... as my belly"
-	],
+	"bellyInfuseNoPrompt": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseNoPrompt",
 	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter", // external lines
 	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt", // external lines
-	"breastInfuseNoPromptAfter": [
-		"Ahh~ finally got you where you belong~",
-		"You belong right where you are, jiggling on my chest~",
-		"Mmm~ feels right to have you there~"
-	],
+	"breastInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseNoPromptAfter",
 	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt", // external lines
-	"pussyInfuseNoPromptAfter": [
-		"Ahh~ finally got you where you belong~",
-		"You belong right where you are, soaking between my legs~",
-		"Mmm~ feels right to have you there~"
-	],
+	"pussyInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseNoPromptAfter",
 	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt", // external lines
-	"cockInfuseNoPromptAfter": [
-		"Ahh~ finally got you where you belong~",
-		"You belong right where you are, throbbing between my legs~",
-		"Mmm~ feels right to have you there~"
-	],
+	"cockInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseNoPromptAfter",
 	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
 	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
 	"oralVoreUnprompted": {
@@ -2260,15 +2212,8 @@
 			"HOwO.png"
 		]
 	},
-	"struggleCumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleCumHeal", // external lines
-	"struggleMilkHeal": [
-		[
-			"Now you're nice and safe.",
-			"Hope you like how it feels in there.",
-			"Just snuggle into the walls~",
-			"Get yourself nice and soaked in my milk~"
-		]
-	],
+	"struggleCumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleHeal", // external lines
+	"struggleMilkHeal": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:struggleMilkHeal",
 	"struggleMiscHeal": ":struggleAcidHeal", // duplicated lines
 	"struggleCompression": {
 		"dialogueRandom": [
@@ -2607,107 +2552,10 @@
 	},
 	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant", // external lines
 	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant", // external lines
-	"bellyInfusedOccupant": [
-		{
-			"check": {
-				"bellySounds": true
-			},
-			"add": [
-				"Hehe, grumbling <entityName>?",
-				"Does my noisy belly want something~?"
-			]
-		},
-		"Hehe, does my belly want something?",
-		"Hehe, do you want something <entityName>?"
-	],
-	"breastInfusedOccupant": [
-		[
-			"<slowlove>Mmm, you make them so much more sensitive~",
-			"<slowlove>Mmm, <entityName> you make them so much more sensitive~"
-		],
-		[
-			"<slowlove>Ahh I can just feel you making even more milk~",
-			"<slowlove>Ahh I can just feel you making even more milk <entityName>~"
-		],
-		[
-			"<slowlove>Jiggling on my chest, right where you belong~",
-			"<slowlove>Jiggling on my chest, right where you belong <entityName>~"
-		],
-		{
-			"check": {
-				"breastInfusedSize": true
-			},
-			"add": [
-				[
-					"<love>I love how much bigger you make my boobs~",
-					"<love>I love how much bigger you make my boobs <entityName>~"
-				],
-				[
-					"<love>You're better as extra size for me~",
-					"<love>You're better as extra size for me <entityName>~"
-				]
-			]
-		},
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <entityName>"
-		]
-	],
-	"pussyInfusedOccupant": [
-		[
-			"<slowlove>Ahh, I'm so much more sensitive with you down there~",
-			"<slowlove>Ahh, <entityName>~ I'm so much more sensitive with you down there~"
-		],
-		[
-			"<slowlove>Fff, ahh... I keep getting wet thinking about you down there~",
-			"<slowlove>Fff, ahh... <entityName> I keep getting wet thinking about you down there~"
-		],
-		[
-			"<slowlove>Hehe... dripping wet, right where you belong~",
-			"Hehe... dripping wet, right where you belong <entityName>~"
-		],
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <entityName>"
-		]
-	],
-	"cockInfusedOccupant": [
-		[
-			"<love>Heh, I can feel you twitching down there~",
-			"<love>Heh, I can feel you twitching down there <entityName>~"
-		],
-		[
-			"<love>Are you enjoying your new purpose?~",
-			"<love>Are you enjoying your new purpose <entityName>?~"
-		],
-		[
-			"<slowlove>Just twitch and throb away, you're right where you belong~",
-			"<slowlove>Just twitch and throb away <entityName> you're right where you belong~"
-		],
-		[
-			"<love>Heh, you belong right there, twitching and throbbing between my legs~",
-			"<love>Heh, you belong right there <entityName>, twitching and throbbing between my legs~"
-		],
-		{
-			"check": {
-				"cockInfusedSize": true
-			},
-			"add": [
-				[
-					"<love>I love how much bigger you make my cock~",
-					"<love>I love how much bigger you make my cock <entityName>~"
-				],
-				[
-					"<love>You're better as extra size for me~",
-					"<love>You're better as extra size for me <entityName>~"
-				]
-			]
-		},
-		[
-			"<love>You're far more useful like this~",
-			"<love>You're far more useful like this <entityName>"
-		]
-	],
+	"bellyInfusedOccupant": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfusedOccupant",
+	"breastInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfusedOccupant",
+	"pussyInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfusedOccupant",
+	"cockInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfusedOccupant",
 	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant", // external lines
 	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant", // external lines
 	"strugglingBelly": {
@@ -2957,23 +2805,11 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingFemcumHeal": [
-		"Your womb is soothing me so well!",
-		"I can feel my pain vanishing within your womb.",
-		"Is your womb making me feel better? Strange..."
-	],
-	"strugglingCumHeal": [
-		"Who would have thought your cock could heal so well.",
-		"Your shaft is rather soothing it seems. Weird.",
-		"Your cock is making my pain go away. It's so relaxing in here!"
-	],
+	"strugglingFemcumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingFemcumHeal",
+	"strugglingCumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCumHeal",
 	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal", // external lines
 	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
-	"strugglingCompression": [
-		"It's getting so tight in here!",
-		"I can barely move in here...",
-		"I can't keep it... from compacting me."
-	],
+	"strugglingCompression": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCompression",
 	"strugglingAcidDigest": {
 		"dialogueRandom": [
 			"Ah, now the fun's really getting started.",
@@ -3093,14 +2929,9 @@
 	},
 	"strugglingMilkDigestImmune": ":strugglingDigestImmune", // duplicated lines
 	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingDigestImmune", // duplicated lines
 	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
-	"strugglingDrainEnergy": [
-		"I... I'm feeling so tired...",
-		"It's getting harder to move...",
-		"I'm losing the energy to struggle...",
-		"I can barely even squirm..."
-	],
+	"strugglingDrainEnergy": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingDrainEnergy",
 	"strugglingEggify": ":strugglingTransformingWomb", // duplicated lines
 	"strugglingTransformingWomb": {
 		"dialogueRandom": [
@@ -3114,79 +2945,10 @@
 	},
 	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
 	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused", // external lines
-	"bellyInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			{
-				"check": {
-					"bellySounds": true
-				},
-				"add": [
-					"(Just a grumbling belly~)",
-					"(Just your grumbling belly~)",
-					"(Just <entityname>'s grumbling belly~)",
-					"(Just a noisy belly~)",
-					"(Just your noisy belly~)",
-					"(Just <entityname>'s noisy belly~)"
-				]
-			},
-			{
-				"check": {
-					"mood": "hungry"
-				},
-				"add": [
-					"<slowlove>(Feeed meee~)",
-					"(Hungry...)"
-				]
-			},
-			[
-				"(Just a belly~)",
-				"(Just your belly~)",
-				"(Just <entityname>'s belly~)"
-			],
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
-	"breastInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>(Ahh... I just feel so good...~)",
-			"<slowlove>(I belong here don't I...~)",
-			"<slowlove>(Producing milk...~)",
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
-	"pussyInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>(Ahh... I just feel so good...~)",
-			"<slowlove>(I belong here don't I...~)",
-			"<slowlove>(I'm getting so wet ahh~)",
-			"<slowlove>(Mmm put something inside me~)",
-			"<slowlove>(<entityname>'s pussy~)",
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
-	"cockInfused": [
-		"<slowlove>",
-		"<love>",
-		[
-			"<slowlove>(Ahh... I just feel so good...~)",
-			"<slowlove>(I belong here don't I...~)",
-			"<slowlove>(I'm just a cock~)",
-			"<slowlove>(I can't wait to be used~)",
-			"<slowlove>(Ahh~ I'm throbbing with excitment~)",
-			"<slowlove>(I'm just <entityname>'s cock~)",
-			"<slowlove>(I belong here... just a part of <entityname>~)",
-			"<love>(<keysmash>)"
-		]
-	],
+	"bellyInfused": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfused",
+	"breastInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfused",
+	"pussyInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfused",
+	"cockInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfused",
 	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused", // external lines
 	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused", // external lines
 	"climax": "/npcs/sbq/dialogue/default.dialogue:climax", // external lines
@@ -3310,221 +3072,7 @@
 		"Bork!",
 		" ...bork."
 	],
-	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
-		"tagCriteria": {
-			"default": {
-				"default": [
-					"Something in my place has changed, I don't like it!"
-				]
-			}
-		},
-		"enclosedArea": {
-			"default": {
-				"default": [
-					"My home could use some repairs!"
-				]
-			}
-		},
-		"otherDeed": {
-			"default": {
-				"default": [
-					"I thought this place was for me!"
-				]
-			}
-		},
-		"severe": {
-			"default": {
-				"default": [
-					"I can't live in these conditions!"
-				]
-			}
-		},
-		"final": {
-			"default": {
-				"default": [
-					"I've had enough of this!"
-				]
-			}
-		},
-		"beacon": {
-			"default": {
-				"default": [
-					"I'm home!"
-				]
-			}
-		},
-		"rent": {
-			"default": {
-				"default": [
-					"Here's a gift for all your help!"
-				]
-			}
-		},
-		"helpme": {
-			"default": {
-				"default": [
-					"Oh no! Help me!",
-					"Help!",
-					"Uh-oh.",
-					"I'm unarmed! Help!",
-					"I need help! I can't defend myself!",
-					"Ah! Stop it!",
-					"What!? What did I do!?"
-				]
-			}
-		},
-		"safe": {
-			"default": {
-				"default": [
-					"Phew, I think I got away.",
-					"Thank goodness that's over.",
-					"Is it over?",
-					"Is it safe now?",
-					"I made it!"
-				]
-			}
-		},
-		"accuse": {
-			"default": {
-				"default": [
-					"Hey, that doesn't belong to you!"
-				]
-			}
-		},
-		"alert": {
-			"default": {
-				"default": [
-					"Guards! There is a criminal here!"
-				]
-			}
-		},
-		"offer": {
-			"default": {
-				"default": [
-					"Hello adventurer, mind if I join you?",
-					"I'm <selfname>, and I really want to join a ship. Do you want to employ me?",
-					"You are JUST the kind of person I should work with! Fancy employing me?",
-					"I'm looking for a ship's crew to join. Are you interested?",
-					"I'm looking for a place among a crew. Can I join yours?"
-				]
-			}
-		},
-		"roleDescription": {
-			"default": {
-				"default": [
-					"I'll be here for you if you need someone to help you fight bad guys!",
-					"If you need protection, you know where to find me!",
-					"If you need me in battle, I'll be here!"
-				]
-			}
-		},
-		"respawned": {
-			"default": {
-				"default": [
-					"Heh... Dying tickles.",
-					"What just happened?",
-					"I'm back! And alive!",
-					"I'm back and in one piece!",
-					"I'm alive again! That's good.",
-					"I don't think I respawned properly...",
-					"My head hurts.",
-					"What was I doing just before I died?"
-				]
-			}
-		},
-		"crewcantreach": {
-			"default": {
-				"default": [
-					"I can't reach you!",
-					"You're too far!",
-					"Hey, wait up!",
-					"Don't go too far!",
-					"Let me catch up!"
-				]
-			}
-		},
-		"reattack": {
-			"default": {
-				"default": [
-					"You again!",
-					"You returned!",
-					"Aha!",
-					"You came back?",
-					"So you came back."
-				]
-			}
-		},
-		"attack": {
-			"default": {
-				"default": [
-					"Attack!"
-				]
-			}
-		},
-		"killedTarget": {
-			"default": {
-				"default": [
-					"Never mess with me!",
-					"Victory!",
-					"Phew!",
-					"Another victory!",
-					"I didn't even break a sweat!",
-					"Heh.",
-					"Of course I won!",
-					"I'm pretty good at this!",
-					"That was stressful...",
-					"Another easy win!",
-					"Yes!",
-					"That's what you get!"
-				]
-			}
-		},
-		"lostTarget": {
-			"default": {
-				"default": [
-					"I will get you one day!",
-					"It's not over!",
-					"Don't come back!",
-					"Where are you...",
-					"What a hassle.",
-					"Just you wait!"
-				]
-			}
-		},
-		"outOfSight": {
-			"default": {
-				"default": [
-					"Sneaky! This is sneaky! How did you disappear?",
-					"They're getting away!",
-					"Where'd you go?",
-					"Get back here!",
-					"How did this happen?"
-				]
-			}
-		},
-		"cantReachEnemy": {
-			"default": {
-				"default": [
-					"Get over here!",
-					"Come here!",
-					"Get back here!",
-					"How did you get over there?",
-					"I can't reach!"
-				]
-			}
-		},
-		"cheerOn": {
-			"default": {
-				"default": [
-					"I have a plan!",
-					"Get them!",
-					"Everybody is in my way.",
-					"Why aren't they already dead?",
-					"Come on!"
-				]
-			}
-		}
-	},
+	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
 	// Unused Dialogue
 	"curiousBelly": [
 		"It's nice and quiet. Perfect if you want to take a nap."
@@ -3584,7 +3132,7 @@
 			"HSleepy.png"
 		]
 	},
-	"defaultFullHorny": {
+	"fullHorny": {
 		"dialogueRandom": [
 			"That's incredibly hot that you want to try, but I'd explode...",
 			"I'm way past full...",
@@ -3595,7 +3143,7 @@
 			"HRelieved.png"
 		]
 	},
-	"defaultFullHungry": [
+	"fullHungry": [
 		"While my body really wants you inside it, it'd get way too cramped...",
 		"Trust me, I want to. My body wants to. You want to. But I can't.",
 		"I could probably give you a lick, but that's it...",
@@ -4064,12 +3612,7 @@
 			"HHappy.png"
 		]
 	},
-	"oralVoreLetoutRequestedDigested": [
-		"Here, let me reform you real quick.",
-		"You got digested, so I gotta reform you.",
-		"Ah, guess it's time to reform you.",
-		"Time to reform you, I guess."
-	],
+	"oralVoreLetoutRequestedDigested": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreLetoutRequestedDigested",
 	"oralVoreLetoutRequestedDigestedHorny": {
 		"dialogueRandom": [
 			"It's been fun, but these love handles are getting to be a bit much~",
@@ -4092,7 +3635,6 @@
 			"HTired.png"
 		]
 	},
-	"oralVoreLetoutRequestedDigest": ":oralVoreLetoutRequestedDigest", // duplicated lines
 	"oralVoreLetoutRequestedDigestImmuneHorny": ":oralVoreLetoutRequestedDigestImmuneHungry", // duplicated lines
 	"oralVoreLetoutRequestedDigestImmuneHungry": {
 		"dialogueRandom": [
@@ -4171,7 +3713,6 @@
 			"All better! Time to come out from the safety of my rear."
 		]
 	},
-	"cockVoreLetoutRequestedDigest": ":cockVoreLetoutRequestedDigest", // duplicated lines
 	"cockVoreLetoutRequestedHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -4183,7 +3724,6 @@
 			"Ah, looks like you're all patched up! Seems soaking in my cum was rather helpful after all~"
 		]
 	},
-	"unbirthVoreLetoutRequestedDigest": ":unbirthVoreLetoutRequestedDigest", // duplicated lines
 	"unbirthVoreLetoutRequestedHeal": {
 		"percentage": "targetHealth",
 		"pools": [
@@ -4650,7 +4190,7 @@
 			"HOwO.png"
 		]
 	},
-	"infusePreyNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
+	"infusePreyNo": ":defaultNo", // external lines
 	"sizeChangedShrinkFiendly": {
 		"dialogueRandom": [
 			"^red;Going to throw me at someone?",

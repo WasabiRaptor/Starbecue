@@ -51,7 +51,7 @@
 	"rewardNotifyHighValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyHighValueQuestRewards", // external lines
 	"oralVoreRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequested", // external lines
 	"oralVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter", // external lines
-	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
+	"oralVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreInvalid",
 	"oralVoreNo": ":defaultNo", // duplicated lines
 	"defaultNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
 	"oralVoreTooBig": ":tooBig", // duplicated lines
@@ -62,9 +62,7 @@
 	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots", // external lines
 	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull", // external lines
 	"oralVoreNeedsInfusion": ":needsInfusion", // duplicated lines
-	"needsInfusion": [
-		"I'd want someone merged in there"
-	],
+	"needsInfusion": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:needsInfusion",
 	"oralVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"alreadyInfused": [
 		"I think I'm already occupied there."
@@ -85,7 +83,7 @@
 		"great...im hard..hope no one notices...",
 		"m..merp merp~"
 	],
-	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
+	"cockVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreInvalid",
 	"cockVoreNo": [
 		"Not in the mood pal",
 		"I'm busy",
@@ -148,12 +146,7 @@
 	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes", // external lines
 	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo", // external lines
 	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes", // external lines
-	"oralVoreNoPrompt": [
-		"I think you'll fill me up.",
-		"I just need a bite to eat.",
-		"You seem like you'd make a good meal.",
-		"My belly's been grumbling..."
-	],
+	"oralVoreNoPrompt": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreNoPrompt",
 	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter", // duplicated lines
 	"cockVoreNoPrompt": [
 		"Surpised!",
@@ -161,12 +154,7 @@
 		"sorry but I have to do this~",
 		"I'm horny so come here~"
 	],
-	"cockVoreNoPromptAfter": [
-		"Aahh~ ooooh thats really good~",
-		"Mmmm~ You're getting me even more excited~",
-		"Ffff~ Now I'm all hard~",
-		"A-ahh~ Don't stop squirming~"
-	],
+	"cockVoreNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreNoPromptAfter",
 	"oralVoreUnprompted": [
 		"euugh so slimey",
 		"happy to fill you up^^",
@@ -302,23 +290,15 @@
 		"its like a healing bath",
 		"this feels wonderful"
 	],
-	"strugglingCumHeal": ":strugglingCumHeal", // duplicated lines
-	"strugglingCumHealCock": [
-		"Who would have thought your cock could heal so well.",
-		"Your shaft is rather soothing it seems. Weird.",
-		"Your cock is making my pain go away. It's so relaxing in here!"
-	],
+	"strugglingCumHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingHeal", // duplicated lines
+	"strugglingCumHealCock": ":strugglingCumHeal",
 	"strugglingCumHealBalls": [
 		"Your healing seed is washing over me, I feel my pain going away!",
 		"Seems your balls make for a great therapeutic sauna and spa.",
 		"The soothing properties of your spunk is crazy. How novel."
 	],
 	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
-	"strugglingCompression": [
-		"It's getting so tight in here!",
-		"I can barely move in here...",
-		"I can't keep it... from compacting me."
-	],
+	"strugglingCompression": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCompression",
 	"strugglingAcidDigest": [
 		"man this hurts...",
 		"hmmph..nothing but pudge"
@@ -337,11 +317,7 @@
 		"I think your cum is softening me up!",
 		"I'm feeling goopy inside here..."
 	],
-	"strugglingCumDigestBalls": [
-		"It's so hot in your nuts, I feel like I'm melting.",
-		"The seed in your balls is all over me. I think I'm melting into it.",
-		"I'm unsure how long I'll stay solid in your sack at this rate."
-	],
+	"strugglingCumDigestBalls": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCumDigestBalls",
 	"strugglingCumDigestImmune": [
 		"I don't think your cum can melt me.",
 		"You should know that I won't soften up in your seed.",
@@ -383,11 +359,7 @@
 		"*bumps head* ow....",
 		"heh...my kind were always looked at as big"
 	],
-	"didSteppy": [
-		"hehe, whoops!",
-		"Oh did I step on something?",
-		"You tinies need to pay attention more!"
-	],
+	"didSteppy": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:didSteppy",
 	"gotStepped": [
 		"oomph...",
 		"* squish ",
@@ -406,221 +378,7 @@
 		"Woah...watch where you step",
 		"woah..falls on butt*...ow"
 	],
-	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
-		"tagCriteria": {
-			"default": {
-				"default": [
-					"Something in my place has changed, I don't like it!"
-				]
-			}
-		},
-		"enclosedArea": {
-			"default": {
-				"default": [
-					"My home could use some repairs!"
-				]
-			}
-		},
-		"otherDeed": {
-			"default": {
-				"default": [
-					"I thought this place was for me!"
-				]
-			}
-		},
-		"severe": {
-			"default": {
-				"default": [
-					"I can't live in these conditions!"
-				]
-			}
-		},
-		"final": {
-			"default": {
-				"default": [
-					"I've had enough of this!"
-				]
-			}
-		},
-		"beacon": {
-			"default": {
-				"default": [
-					"I'm home!"
-				]
-			}
-		},
-		"rent": {
-			"default": {
-				"default": [
-					"Here's a gift for all your help!"
-				]
-			}
-		},
-		"helpme": {
-			"default": {
-				"default": [
-					"Oh no! Help me!",
-					"Help!",
-					"Uh-oh.",
-					"I'm unarmed! Help!",
-					"I need help! I can't defend myself!",
-					"Ah! Stop it!",
-					"What!? What did I do!?"
-				]
-			}
-		},
-		"safe": {
-			"default": {
-				"default": [
-					"Phew, I think I got away.",
-					"Thank goodness that's over.",
-					"Is it over?",
-					"Is it safe now?",
-					"I made it!"
-				]
-			}
-		},
-		"accuse": {
-			"default": {
-				"default": [
-					"Hey, that doesn't belong to you!"
-				]
-			}
-		},
-		"alert": {
-			"default": {
-				"default": [
-					"Guards! There is a criminal here!"
-				]
-			}
-		},
-		"offer": {
-			"default": {
-				"default": [
-					"Hello adventurer, mind if I join you?",
-					"I'm <selfname>, and I really want to join a ship. Do you want to employ me?",
-					"You are JUST the kind of person I should work with! Fancy employing me?",
-					"I'm looking for a ship's crew to join. Are you interested?",
-					"I'm looking for a place among a crew. Can I join yours?"
-				]
-			}
-		},
-		"roleDescription": {
-			"default": {
-				"default": [
-					"I'll be here for you if you need someone to help you fight bad guys!",
-					"If you need protection, you know where to find me!",
-					"If you need me in battle, I'll be here!"
-				]
-			}
-		},
-		"respawned": {
-			"default": {
-				"default": [
-					"Heh... Dying tickles.",
-					"What just happened?",
-					"I'm back! And alive!",
-					"I'm back and in one piece!",
-					"I'm alive again! That's good.",
-					"I don't think I respawned properly...",
-					"My head hurts.",
-					"What was I doing just before I died?"
-				]
-			}
-		},
-		"crewcantreach": {
-			"default": {
-				"default": [
-					"I can't reach you!",
-					"You're too far!",
-					"Hey, wait up!",
-					"Don't go too far!",
-					"Let me catch up!"
-				]
-			}
-		},
-		"reattack": {
-			"default": {
-				"default": [
-					"You again!",
-					"You returned!",
-					"Aha!",
-					"You came back?",
-					"So you came back."
-				]
-			}
-		},
-		"attack": {
-			"default": {
-				"default": [
-					"Attack!"
-				]
-			}
-		},
-		"killedTarget": {
-			"default": {
-				"default": [
-					"Never mess with me!",
-					"Victory!",
-					"Phew!",
-					"Another victory!",
-					"I didn't even break a sweat!",
-					"Heh.",
-					"Of course I won!",
-					"I'm pretty good at this!",
-					"That was stressful...",
-					"Another easy win!",
-					"Yes!",
-					"That's what you get!"
-				]
-			}
-		},
-		"lostTarget": {
-			"default": {
-				"default": [
-					"I will get you one day!",
-					"It's not over!",
-					"Don't come back!",
-					"Where are you...",
-					"What a hassle.",
-					"Just you wait!"
-				]
-			}
-		},
-		"outOfSight": {
-			"default": {
-				"default": [
-					"Sneaky! This is sneaky! How did you disappear?",
-					"They're getting away!",
-					"Where'd you go?",
-					"Get back here!",
-					"How did this happen?"
-				]
-			}
-		},
-		"cantReachEnemy": {
-			"default": {
-				"default": [
-					"Get over here!",
-					"Come here!",
-					"Get back here!",
-					"How did you get over there?",
-					"I can't reach!"
-				]
-			}
-		},
-		"cheerOn": {
-			"default": {
-				"default": [
-					"I have a plan!",
-					"Get them!",
-					"Everybody is in my way.",
-					"Why aren't they already dead?",
-					"Come on!"
-				]
-			}
-		}
-	},
+	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
 	// Unused Dialogue
 	"strugglingGurgleSoundsDigest": [
 		"so much...noise",
@@ -630,12 +388,7 @@
 		"I really like the sounds your belly makes... very calming.",
 		"I could just drift off to sleep listening to the sounds of your body..."
 	],
-	"defaultFull": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
-	],
+	"full": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:full",
 	"struggleCockInfused": [
 		"Ahhh~ <entityName> feels so great down there~",
 		"<keysmash>, you're gonna make <entityName> cum~"

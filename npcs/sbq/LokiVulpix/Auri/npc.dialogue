@@ -1,18 +1,18 @@
 {
-	"madeThisMod" : "So you made this mod?",
-	"ohGodDamnIt" : "\n \nGod damn it!\n \nI knew this would happen, this game loves breaking the moment you breathe on it.",
-	"modDevelopment1" : [
+	"madeThisMod": "So you made this mod?",
+	"ohGodDamnIt": "\n \nGod damn it!\n \nI knew this would happen, this game loves breaking the moment you breathe on it.",
+	"modDevelopment1": [
 		"Yeah I made this mod, used to be an addon but it became it's own standalone mod back in 2021",
 		"Ever since then I've been mostly working on it by myself with a bit of help from my partner Zygan here and there.",
 		"In the summer of 2023 the source code for starbound got leaked, which was really fucking cool for us."
 	],
-	"modDevelopment2" : [
+	"modDevelopment2": [
 		"As you can imagine, with the full source code available one can get to do some crazy stuff you couldn't before."
 	],
-	"modDevelopment2Cutoff" : [
+	"modDevelopment2Cutoff": [
 		"As you can imagine, with the full source code available one can get to do some crazy"
 	],
-	"openShopOption" : "I'd like to buy something.",
+	"openShopOption": "I'd like to buy something.",
 	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards", // external lines
 	"greetingRewardsIntroduced": [
 		"<entityName> right?\nI have some things for you."
@@ -197,8 +197,8 @@
 	"oralVoreRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequested", // external lines
 	"oralVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter", // external lines
 	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
-	"oralVoreNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo", // external lines
-	"oralVoreTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig", // external lines
+	"oralVoreNo": ":defaultNo", // external lines
+	"oralVoreTooBig": ":tooBig", // external lines
 	"oralVoreTooSmall": ":tooSmall", // duplicated lines
 	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall", // external lines
 	"oralVoreNoSlots": ":noSlots", // duplicated lines
@@ -206,12 +206,12 @@
 		"I don't think I can take any more."
 	],
 	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull", // external lines
-	"oralVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"defaultNeedsInfusion": [
+	"oralVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"needsInfusion": [
 		"I need to turn someone into that first heh~"
 	],
-	"oralVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
-	"defaultAlreadyInfused": [
+	"oralVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
+	"alreadyInfused": [
 		"That spots already taken for now!"
 	],
 	"oralVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
@@ -228,8 +228,8 @@
 	"tailVoreTooSmall": ":tooSmall", // duplicated lines
 	"tailVoreNoSlots": ":noSlots", // duplicated lines
 	"tailVoreFull": "/npcs/sbq/dialogue/default.dialogue:tailVoreFull", // external lines
-	"tailVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"tailVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"tailVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"tailVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"tailVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"unbirthVoreRequested": [
 		"Hah, you're horny.",
@@ -244,8 +244,8 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
-	"unbirthVoreNo": ":oralVoreNo", // duplicated lines
-	"unbirthVoreTooBig": ":oralVoreTooBig", // duplicated lines
+	"unbirthVoreNo": ":defaultNo", // duplicated lines
+	"unbirthVoreTooBig": ":tooBig", // duplicated lines
 	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
 	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
 	"unbirthVoreFull": [
@@ -254,8 +254,8 @@
 		"Hehe, I would if I wasn't already full down there~",
 		"Maybe after I climax heh~"
 	],
-	"unbirthVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"unbirthVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"unbirthVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"breastVoreRequested": [
 		"Hah, you're horny.",
@@ -271,13 +271,13 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
-	"breastVoreNo": ":oralVoreNo", // duplicated lines
-	"breastVoreTooBig": ":oralVoreTooBig", // duplicated lines
+	"breastVoreNo": ":defaultNo", // duplicated lines
+	"breastVoreTooBig": ":tooBig", // duplicated lines
 	"breastVoreTooSmall": ":tooSmall", // duplicated lines
 	"breastVoreNoSlots": ":noSlots", // duplicated lines
 	"breastVoreFull": "/npcs/sbq/dialogue/default.dialogue:breastVoreFull", // external lines
-	"breastVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"breastVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"breastVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockVoreRequested": [
 		"Hah, you're horny.",
@@ -291,13 +291,13 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
-	"cockVoreNo": ":oralVoreNo", // duplicated lines
-	"cockVoreTooBig": ":oralVoreTooBig", // duplicated lines
+	"cockVoreNo": ":defaultNo", // duplicated lines
+	"cockVoreTooBig": ":tooBig", // duplicated lines
 	"cockVoreTooSmall": ":tooSmall", // duplicated lines
 	"cockVoreNoSlots": ":noSlots", // duplicated lines
 	"cockVoreFull": "/npcs/sbq/dialogue/default.dialogue:cockVoreFull", // external lines
-	"cockVoreNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"cockVoreAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockVoreNeedsInfusion": ":needsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"cockVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"breastInfuseRequested": [
 		"You want to be my boobs?",
@@ -314,15 +314,15 @@
 	"breastInfuseTooBig": ":tooBig", // duplicated lines
 	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
 	"breastInfuseNoSlots": ":noSlots", // duplicated lines
-	"breastInfuseFull": ":defaultFull", // duplicated lines
-	"defaultFull": [
+	"breastInfuseFull": ":full", // duplicated lines
+	"full": [
 		"I'm a bit too full...",
 		"My body can't stretch any further...",
 		"I've been filled too much already...",
 		"I would... but I'm too full..."
 	],
-	"breastInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"breastInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"breastInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"breastInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"pussyInfuseRequested": [
 		"You want to be my pussy?",
@@ -339,9 +339,9 @@
 	"pussyInfuseTooBig": ":tooBig", // duplicated lines
 	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
 	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
-	"pussyInfuseFull": ":defaultFull", // duplicated lines
-	"pussyInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"pussyInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"pussyInfuseFull": ":full", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"pussyInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"cockInfuseRequested": [
 		"You want to be my cock?",
@@ -358,9 +358,9 @@
 	"cockInfuseTooBig": ":tooBig", // duplicated lines
 	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
 	"cockInfuseNoSlots": ":noSlots", // duplicated lines
-	"cockInfuseFull": ":defaultFull", // duplicated lines
-	"cockInfuseNeedsInfusion": ":defaultNeedsInfusion", // duplicated lines
-	"cockInfuseAlreadyInfused": ":defaultAlreadyInfused", // duplicated lines
+	"cockInfuseFull": ":full", // duplicated lines
+	"cockInfuseNeedsInfusion": ":needsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":alreadyInfused", // duplicated lines
 	"cockInfuseTargetPreySettingsMismatch": ":targetPreySettingsMismatch", // duplicated lines
 	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
 	"tailVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutRequested", // external lines
@@ -967,221 +967,7 @@
 			"*wheeze*"
 		]
 	],
-	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
-		"tagCriteria": {
-			"default": {
-				"default": [
-					"Something in my place has changed, I don't like it!"
-				]
-			}
-		},
-		"enclosedArea": {
-			"default": {
-				"default": [
-					"My home could use some repairs!"
-				]
-			}
-		},
-		"otherDeed": {
-			"default": {
-				"default": [
-					"I thought this place was for me!"
-				]
-			}
-		},
-		"severe": {
-			"default": {
-				"default": [
-					"I can't live in these conditions!"
-				]
-			}
-		},
-		"final": {
-			"default": {
-				"default": [
-					"I've had enough of this!"
-				]
-			}
-		},
-		"beacon": {
-			"default": {
-				"default": [
-					"I'm home!"
-				]
-			}
-		},
-		"rent": {
-			"default": {
-				"default": [
-					"Here's a gift for all your help!"
-				]
-			}
-		},
-		"helpme": {
-			"default": {
-				"default": [
-					"Oh no! Help me!",
-					"Help!",
-					"Uh-oh.",
-					"I'm unarmed! Help!",
-					"I need help! I can't defend myself!",
-					"Ah! Stop it!",
-					"What!? What did I do!?"
-				]
-			}
-		},
-		"safe": {
-			"default": {
-				"default": [
-					"Phew, I think I got away.",
-					"Thank goodness that's over.",
-					"Is it over?",
-					"Is it safe now?",
-					"I made it!"
-				]
-			}
-		},
-		"accuse": {
-			"default": {
-				"default": [
-					"Hey, that doesn't belong to you!"
-				]
-			}
-		},
-		"alert": {
-			"default": {
-				"default": [
-					"Guards! There is a criminal here!"
-				]
-			}
-		},
-		"offer": {
-			"default": {
-				"default": [
-					"Hello adventurer, mind if I join you?",
-					"I'm <selfname>, and I really want to join a ship. Do you want to employ me?",
-					"You are JUST the kind of person I should work with! Fancy employing me?",
-					"I'm looking for a ship's crew to join. Are you interested?",
-					"I'm looking for a place among a crew. Can I join yours?"
-				]
-			}
-		},
-		"roleDescription": {
-			"default": {
-				"default": [
-					"I'll be here for you if you need someone to help you fight bad guys!",
-					"If you need protection, you know where to find me!",
-					"If you need me in battle, I'll be here!"
-				]
-			}
-		},
-		"respawned": {
-			"default": {
-				"default": [
-					"Heh... Dying tickles.",
-					"What just happened?",
-					"I'm back! And alive!",
-					"I'm back and in one piece!",
-					"I'm alive again! That's good.",
-					"I don't think I respawned properly...",
-					"My head hurts.",
-					"What was I doing just before I died?"
-				]
-			}
-		},
-		"crewcantreach": {
-			"default": {
-				"default": [
-					"I can't reach you!",
-					"You're too far!",
-					"Hey, wait up!",
-					"Don't go too far!",
-					"Let me catch up!"
-				]
-			}
-		},
-		"reattack": {
-			"default": {
-				"default": [
-					"You again!",
-					"You returned!",
-					"Aha!",
-					"You came back?",
-					"So you came back."
-				]
-			}
-		},
-		"attack": {
-			"default": {
-				"default": [
-					"Attack!"
-				]
-			}
-		},
-		"killedTarget": {
-			"default": {
-				"default": [
-					"Never mess with me!",
-					"Victory!",
-					"Phew!",
-					"Another victory!",
-					"I didn't even break a sweat!",
-					"Heh.",
-					"Of course I won!",
-					"I'm pretty good at this!",
-					"That was stressful...",
-					"Another easy win!",
-					"Yes!",
-					"That's what you get!"
-				]
-			}
-		},
-		"lostTarget": {
-			"default": {
-				"default": [
-					"I will get you one day!",
-					"It's not over!",
-					"Don't come back!",
-					"Where are you...",
-					"What a hassle.",
-					"Just you wait!"
-				]
-			}
-		},
-		"outOfSight": {
-			"default": {
-				"default": [
-					"Sneaky! This is sneaky! How did you disappear?",
-					"They're getting away!",
-					"Where'd you go?",
-					"Get back here!",
-					"How did this happen?"
-				]
-			}
-		},
-		"cantReachEnemy": {
-			"default": {
-				"default": [
-					"Get over here!",
-					"Come here!",
-					"Get back here!",
-					"How did you get over there?",
-					"I can't reach!"
-				]
-			}
-		},
-		"cheerOn": {
-			"default": {
-				"default": [
-					"I have a plan!",
-					"Get them!",
-					"Everybody is in my way.",
-					"Why aren't they already dead?",
-					"Come on!"
-				]
-			}
-		}
-	},
+	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
 	// Unused Dialogue
 	// Unused Dialogue
 	"greetingIntroduced": [
@@ -1400,12 +1186,7 @@
 	"talkAboutKinks.options.1.1.continue.options.0.1": ":talkAboutKinks.options.0.1.continue.options.0.1", // duplicated lines
 	"talkAboutKinks.options.1.1.continue.options.1.1": ":talkAboutKinks.options.0.1.continue.options.1.1", // duplicated lines
 	"oralVoreSoftDigestFull": ":oralVoreDigestFull", // duplicated lines
-	"oralVoreOtherFull": [
-		"I'm a bit too full...",
-		"My body can't stretch any further...",
-		"I've been filled too much already...",
-		"I would... but I'm too full..."
-	],
+	"oralVoreOtherFull": ":full",
 	"errorOrBad": [
 		"I don't like this.",
 		"This might be an error.",
