@@ -1319,6 +1319,69 @@
 		"tailInfuse" : {
 			"new" : {"dialogueRandom" : [":tailInfuseNoPrompt"],"dismissTime" : 2, "jump" : false},
 			"after" : {"new" : {"dialogueRandom" : [":tailInfuseNoPromptAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+
+		"lockDown" : {
+			"new" : {"dismissTime":2, "jump":false},
+			"settings" : "target",
+			"next" : ["location"],
+			"location" : {
+				"belly" : {
+					"replace" : { "dialogueRandom" : [":lockDownNoPromptBelly"]},
+					"next" : ["percentage"],
+					"settings" : "self",
+					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+					"food" : {"replace" : {"dialogueRandom" : [":lockDownNoPromptBellyHungry"]}},
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":lockDownNoPromptBellyHorny"]}}
+				},
+				"breasts" : {
+					"replace" : { "dialogueRandom" : [":lockDownNoPromptBreasts"]},
+					"next" : ["percentage"],
+					"settings" : "self",
+					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+					"food" : {"replace" : {"dialogueRandom" : [":lockDownNoPromptBreastsHungry"]}},
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":lockDownNoPromptBreastsHorny"]}}
+				},
+				"womb" : {
+					"replace" : { "dialogueRandom" : [":lockDownNoPromptWomb"]},
+					"next" : ["percentage"],
+					"settings" : "self",
+					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+					"food" : {"replace" : {"dialogueRandom" : [":lockDownNoPromptWombHungry"]}},
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":lockDownNoPromptWombHorny"]}}
+				}
+			}
+		},
+		"lockDownClear" : {
+			"new" : {"dismissTime":2, "jump":false},
+			"settings" : "target",
+			"next" : ["location"],
+			"location" : {
+				"belly" : {
+					"replace" : { "dialogueRandom" : [":lockDownClearNoPromptBelly"]},
+					"next" : ["percentage"],
+					"settings" : "self",
+					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+					"food" : {"replace" : {"dialogueRandom" : [":lockDownClearNoPromptBellyHungry"]}},
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":lockDownClearNoPromptBellyHorny"]}}
+				},
+				"breasts" : {
+					"replace" : { "dialogueRandom" : [":lockDownClearNoPromptBreasts"]},
+					"next" : ["percentage"],
+					"settings" : "self",
+					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+					"food" : {"replace" : {"dialogueRandom" : [":lockDownClearNoPromptBreastsHungry"]}},
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":lockDownClearNoPromptBreastsHorny"]}}
+				},
+				"womb" : {
+					"replace" : { "dialogueRandom" : [":lockDownClearNoPromptWomb"]},
+					"next" : ["percentage"],
+					"settings" : "self",
+					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
+					"food" : {"replace" : {"dialogueRandom" : [":lockDownClearNoPromptWombHungry"]}},
+					"sbqLust" : {"replace" : {"dialogueRandom" : [":lockDownClearNoPromptWombHorny"]}}
+				}
+			}
 		}
 	},
 	// responding to an action happening to them unprompted
@@ -1723,10 +1786,16 @@
 					"dialogueRandom" : [":struggleBelly"]
 				},
 				"settings" : "self",
-				"next" : ["percentage"],
+				"next" : ["percentage", "sbqLockDown"],
 				"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 				"food" : {"queueReplace" : {"dialogueRandom" : [":struggleBellyHungry"]}},
-				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleBellyHorny"]}}
+				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleBellyHorny"]}},
+				"sbqLockDown" : {
+					"queueReplace" : {"dialogueRandom" : [":struggleBellyLockDown"]},
+					"next" : ["percentage"],
+					"food" : {"queueReplace" : {"dialogueRandom" : [":struggleBellyLockDownHungry"]}},
+					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleBellyLockDownHorny"]}}
+				}
 			},
 			"womb" : {
 				"addQueued" : true,
@@ -1738,7 +1807,12 @@
 				"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 				"food" : {"queueReplace" : {"dialogueRandom" : [":struggleWombHungry"]}},
 				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleWombHorny"]}},
-
+				"sbqLockDown" : {
+					"queueReplace" : {"dialogueRandom" : [":struggleWombLockDown"]},
+					"next" : ["percentage"],
+					"food" : {"queueReplace" : {"dialogueRandom" : [":struggleWombLockDownHungry"]}},
+					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleWombLockDownHorny"]}}
+				}
 			},
 			"tail" : {
 				"addQueued" : true,
@@ -1755,7 +1829,13 @@
 				"next" : ["percentage"],
 				"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 				"food" : {"queueReplace" : {"dialogueRandom" : [":struggleBreastsHungry"]}},
-				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleBreastsHorny"]}}
+				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleBreastsHorny"]}},
+				"sbqLockDown" : {
+					"queueReplace" : {"dialogueRandom" : [":struggleBreastsLockDown"]},
+					"next" : ["percentage"],
+					"food" : {"queueReplace" : {"dialogueRandom" : [":struggleBreastsLockDownHungry"]}},
+					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleBreastsLockDownHorny"]}}
+				}
 			},
 			"pussy" : {
 				"addQueued" : true,

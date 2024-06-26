@@ -93,7 +93,7 @@ function sbq.refreshOccupants()
 						_ENV.metagui.formatText(action.name or (":"..action.action)),
 						function()
 							player.setScriptContext("starbecue")
-							player.callScript("sbq.tryAction", action.action, occupant.entityId, table.unpack(action.args or {}))
+							player.callScript("sbq.queueAction", action.action, occupant.entityId, table.unpack(action.args or {}))
 						end,
 						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
 					})
@@ -250,7 +250,11 @@ function _ENV.nextLocation:onClick()
 end
 function _ENV.lockDown:onClick()
 	player.setScriptContext("starbecue")
-	player.callScript("sbq.tryAction", "lockDown")
+	if status.statPositive("sbqLockDown") then
+		player.callScript("sbq.queueAction", "lockDownClear")
+	else
+		player.callScript("sbq.queueAction", "lockDown")
+	end
 end
 
 

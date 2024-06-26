@@ -647,7 +647,7 @@ function widgets.sbqCheckBox:draw()
 		theme.drawCheckBox(self)
 	end
 	if self.locked then
-		c:drawImage("/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", pos, 1, nil, true )
+		c:drawImage(self.checked and "/interface/scripted/sbq/lockedEnabled.png?multiply=FFFFFFBD" or "/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", pos, 1, nil, true )
 	end
 end
 
@@ -659,6 +659,7 @@ end
 
 function widgets.sbqCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 	if btn == 0 then -- left button
+		if self.locked then return end
 		if down then
 			self.state = "press"
 			self:captureMouse(btn)
@@ -666,7 +667,6 @@ function widgets.sbqCheckBox:onMouseButtonEvent(btn, down, shift, cntrl, alt)
 			theme.onCheckBoxClick(self)
 		elseif self.state == "press" then
 			self.state = "hover"
-			if self.locked then return true end
 			if self.radioGroup then
 				if not self.checked then
 					self.checked = true

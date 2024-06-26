@@ -108,14 +108,34 @@ function init()
 		tenant.backup()
 	end)
 
-	sbq.randomTimer("huntingCycle", 60, 5*60) -- to just, start the timer randomly so every NPC isn't hunting immediately
+	sbq.randomTimer("huntingCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
+	sbq.randomTimer("lockDownCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 end
 
 function update(dt)
 	old.update(dt)
 	sbq.update(dt)
-	if sbq.randomTimer("huntingCycle", 5*60, 10*60) then
+	if sbq.randomTimer(
+		"huntingCycle",
+		(sbq.voreConfig.huntingCycleMin or sbq.config.huntingCycleMin) * 60,
+		(sbq.voreConfig.huntingCycleMax or sbq.config.huntingCycleMax) * 60
+	) then
 		sbq_hunting.start()
+	end
+	if sbq.settings.lockDownEnable and sbq.randomTimer(
+		"lockDownCycle",
+		(sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
+		(sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
+	) then
+		if Occupants.checkActiveOccupants() then
+			if status.statPositive("sbqLockDown") then
+				if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
+					sbq.queueAction("lockDownClear", Occupants.randomActiveOccupant())
+				end
+			elseif (math.random() < (sbq.voreConfig.lockDownEnableChance or sbq.config.lockDownEnableChance)) then
+				sbq.queueAction("lockDown", Occupants.randomActiveOccupant())
+			end
+		end
 	end
 end
 

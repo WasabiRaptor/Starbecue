@@ -1376,7 +1376,7 @@ function _Occupant:remove()
 	Occupants.refreshOccupantModifiers = true
 	self:sendEntityMessage("sbqReleased")
 	world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
-	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
+	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear", self.entityId) end
 end
 
 function Occupants.update(dt)
@@ -1414,6 +1414,17 @@ function Occupants.checkActiveOccupants()
 	end
 	return false
 end
+function Occupants.randomActiveOccupant()
+	if not Occupants.list[1] then return end
+	local i = math.random(#Occupants.list)
+	for j = 1, #Occupants.list do
+		local occupant = Occupants.list[i]
+		if not (occupant.flags.digested or occupant.flags.infused) then return occupant.entityId end
+		i = i + 1
+		if i > #Occupants.list then i = 1 end
+	end
+end
+
 
 function _Occupant:update(dt)
 	if not world.entityExists(self.entityId) then return self:remove() end
@@ -1697,7 +1708,7 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 		or self:controlHeld("Shift") or self:resourceLocked("energy")
 		or (sbq.statPositive("sbqLockDown") and (sbq.resource("energy") > 0))
 	then return false end
-	SpeciesScript:queueAction("lockDownClear")
+	if sbq.statPositive("sbqLockDown") then SpeciesScript:queueAction("lockDownClear", self.entityId) end
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})

@@ -1,6 +1,6 @@
 {
-	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards",
-	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced",
+	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards", // external lines
+	"greetingRewardsIntroduced": "/npcs/sbq/dialogue/default.dialogue:greetingRewardsIntroduced", // external lines
 	"greeting": {
 		"dialogueRandom": [
 			"Hello there.",
@@ -91,11 +91,10 @@
 			"Hello there."
 		]
 	},
-	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew",
-	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay",
-	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew",
-	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow",
-	"conversePrompt": "Let's talk!",
+	"greetingCrew": "/npcs/sbq/dialogue/default.dialogue:greetingCrew", // external lines
+	"crewStay": "/npcs/sbq/dialogue/default.dialogue:crewStay", // external lines
+	"fullCrew": "/npcs/sbq/dialogue/default.dialogue:fullCrew", // external lines
+	"crewFollow": "/npcs/sbq/dialogue/default.dialogue:crewFollow", // external lines
 	"converse": {
 		"dialogueRandom": [
 			"So, what's up?",
@@ -138,7 +137,7 @@
 			"Um..."
 		]
 	},
-	"converseHellhound": ":converse",
+	"converseHellhound": ":converse", // duplicated lines
 	"converseHellhoundHorny": {
 		"dialogueRandom": [
 			"You're looking like fire today.",
@@ -154,7 +153,7 @@
 			"Thanks!"
 		]
 	},
-	"converseHellhoundHungry": ":converseHungry",
+	"converseHellhoundHungry": ":converseHungry", // duplicated lines
 	"curious": {
 		"dialogueRandom": [
 			"So, what are you curious about?",
@@ -182,8 +181,8 @@
 			"HSleepy.png"
 		]
 	},
-	"curiousHellhound": ":curious",
-	"curiousHellhoundHorny": ":curiousHorny",
+	"curiousHellhound": ":curious", // duplicated lines
+	"curiousHellhoundHorny": ":curiousHorny", // duplicated lines
 	"curiousHellhoundHungry": {
 		"dialogueRandom": [
 			"Sorry in advance if you hear me grumble. That's just my belly talking.",
@@ -490,9 +489,9 @@
 			"HSleepy.png"
 		]
 	},
-	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney",
-	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards",
-	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards",
+	"rewardNotifyMoney": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMoney", // external lines
+	"rewardNotifyLowValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyLowValueQuestRewards", // external lines
+	"rewardNotifyMediumValueQuestRewards": "/npcs/sbq/dialogue/default.dialogue:rewardNotifyMediumValueQuestRewards", // external lines
 	"rewardNotifyHighValueQuestRewards": [
 		"You always manage to surprise me. I'll give you something from my personal wardrobe, then.",
 		"I cherish these moments dearly. I'll get you a token of my appreciation.",
@@ -560,8 +559,9 @@
 			"HBlep.png"
 		]
 	},
-	"oralVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreInvalid",
-	"oralVoreNo": ":defaultNo",
+	"oralVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:oralVoreInvalid", // external lines
+	"oralVoreNo": ":defaultNo", // duplicated lines
+	"defaultNo": "Missing: defaultNo <dialoguePath>",
 	"oralVoreNoHungry": {
 		"dialogueRandom": [
 			"While I am positively ^red;ravenous^reset;, I can't guarantee your safety. Ask me again once I have things under control.",
@@ -584,13 +584,13 @@
 			"HRelieved.png"
 		]
 	},
+	"oralVoreTooBig": ":tooBig", // duplicated lines
 	"tooBig": [
 		"Wow! You're far too big for even me to handle.",
 		"I really want to, but even I know my limits.",
 		"I can't. I'm pretty sure my gut would pop instantly.",
 		"No way. Not after the last time I tried with someone as big as you."
 	],
-	"oralVoreTooBig": ":tooBig",
 	"oralVoreTooBigHungry": {
 		"dialogueRandom": [
 			"Wow! You're far too big for even me to handle with how hungry I am.",
@@ -613,10 +613,10 @@
 			"Hawe.png"
 		]
 	},
-	"oralVoreTooSmall": ":tooSmall",
-	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
-	"oralVoreNoSlots": ":noSlots",
-	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots",
+	"oralVoreTooSmall": ":tooSmall", // duplicated lines
+	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall", // external lines
+	"oralVoreNoSlots": ":noSlots", // duplicated lines
+	"noSlots": "/npcs/sbq/dialogue/default.dialogue:noSlots", // external lines
 	"oralVoreFull": [
 		"As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.",
 		"I haven't been this full in a long time. Sorry, maybe next time.",
@@ -645,20 +645,17 @@
 			"HDetermined.png"
 		]
 	},
-	"oralVoreNeedsInfusion": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreNeedsInfusion",
-	"needsInfusion": ":oralVoreNeedsInfusion",
-	"oralVoreAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:oralVoreAlreadyInfused",
-	"alreadyInfused": ":oralVoreAlreadyInfused",
-	"oralVoreTargetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:oralVoreTargetPreySettingsMismatch",
-	"targetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"oralVoreNeedsInfusion": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreNeedsInfusion", // external lines
+	"oralVoreAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:oralVoreAlreadyInfused", // external lines
+	"oralVoreTargetPreySettingsMismatch": "/npcs/sbq/dialogue/default.dialogue:oralVoreTargetPreySettingsMismatch", // external lines
 	"analVoreRequested": [
 		"Ah, yes. Time for you to slip right on up.",
 		"Your body told me all that I need to know. Get in.",
 		"Can't resist, can you? Neither can I.",
 		"My demonic allure too much for you? Come right on inside~"
 	],
-	"analVoreRequestedHungry": ":analVoreRequested",
-	"analVoreRequestedHorny": ":analVoreRequested",
+	"analVoreRequestedHungry": ":analVoreRequested", // duplicated lines
+	"analVoreRequestedHorny": ":analVoreRequested", // duplicated lines
 	"analVoreRequestedAfter": {
 		"dialogueRandom": [
 			"Goodness, you're quite the meal. Felt great going in, too!",
@@ -692,7 +689,7 @@
 			"HBlep.png"
 		]
 	},
-	"analVoreInvalid": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:analVoreInvalid",
+	"analVoreInvalid": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:analVoreInvalid", // external lines
 	"analVoreNo": {
 		"dialogueRandom": [
 			"Sorry, you'll have to wait. It shouldn't be too long.",
@@ -704,9 +701,9 @@
 			"HConfused.png"
 		]
 	},
-	"analVoreNoHungry": ":analVoreNo",
-	"analVoreNoHorny": ":analVoreNo",
-	"analVoreTooBig": ":tooBig",
+	"analVoreNoHungry": ":analVoreNo", // duplicated lines
+	"analVoreNoHorny": ":analVoreNo", // duplicated lines
+	"analVoreTooBig": ":tooBig", // duplicated lines
 	"analVoreTooBigHungry": {
 		"dialogueRandom": [
 			"Wow! You're far too big for even me to handle with how hungry I am.",
@@ -718,20 +715,20 @@
 			"HShocked.png"
 		]
 	},
-	"analVoreTooBigHorny": ":tooBig",
-	"analVoreTooSmall": ":tooSmall",
-	"analVoreNoSlots": ":noSlots",
+	"analVoreTooBigHorny": ":tooBig", // duplicated lines
+	"analVoreTooSmall": ":tooSmall", // duplicated lines
+	"analVoreNoSlots": ":noSlots", // duplicated lines
 	"analVoreFull": [
 		"As much as I'd like to, you'll just have to wait. \nIf I ever let them out, that is.",
 		"I haven't been this full in a long time. Sorry, maybe next time.",
 		"You look like a fun time, but I can't right now...",
 		"Mmm, no can do... I might have other options available, however..."
 	],
-	"analVoreFullHungry": ":analVoreFull",
-	"analVoreFullHorny": ":analVoreFull",
-	"analVoreNeedsInfusion": ":oralVoreNeedsInfusion",
-	"analVoreAlreadyInfused": ":oralVoreAlreadyInfused",
-	"analVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"analVoreFullHungry": ":analVoreFull", // duplicated lines
+	"analVoreFullHorny": ":analVoreFull", // duplicated lines
+	"analVoreNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"analVoreAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"analVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
 	"unbirthVoreRequested": [
 		"It's going to get ^pink;hot^reset;. Oh! You're into that.",
 		"I figured you were never going to ask. I'm ready~",
@@ -793,10 +790,10 @@
 			"HOwO.png"
 		]
 	},
-	"unbirthVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreInvalid",
-	"unbirthVoreNo": ":defaultNo",
-	"unbirthVoreNoHungry": ":defaultNo",
-	"unbirthVoreNoHorny": ":defaultNo",
+	"unbirthVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:unbirthVoreInvalid", // external lines
+	"unbirthVoreNo": ":defaultNo", // duplicated lines
+	"unbirthVoreNoHungry": ":defaultNo", // duplicated lines
+	"unbirthVoreNoHorny": ":defaultNo", // duplicated lines
 	"unbirthVoreTooBig": {
 		"dialogueRandom": [
 			"T-tempting, but even I'm not that stretchy~",
@@ -808,10 +805,10 @@
 			"HConfused.png"
 		]
 	},
-	"unbirthVoreTooBigHungry": ":unbirthVoreTooBig",
-	"unbirthVoreTooBigHorny": ":unbirthVoreTooBig",
-	"unbirthVoreTooSmall": ":tooSmall",
-	"unbirthVoreNoSlots": ":noSlots",
+	"unbirthVoreTooBigHungry": ":unbirthVoreTooBig", // duplicated lines
+	"unbirthVoreTooBigHorny": ":unbirthVoreTooBig", // duplicated lines
+	"unbirthVoreTooSmall": ":tooSmall", // duplicated lines
+	"unbirthVoreNoSlots": ":noSlots", // duplicated lines
 	"unbirthVoreFull": {
 		"dialogueRandom": [
 			"It's our time right now. Yours will come soon enough~",
@@ -845,9 +842,9 @@
 			"HOwO.png"
 		]
 	},
-	"unbirthVoreNeedsInfusion": ":oralVoreNeedsInfusion",
-	"unbirthVoreAlreadyInfused": ":oralVoreAlreadyInfused",
-	"unbirthVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"unbirthVoreNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"unbirthVoreAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"unbirthVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
 	"breastVoreRequested": [
 		"I see where your gaze is. How about you get a closer look?",
 		"Interested? Go on, give them a touch~",
@@ -909,7 +906,7 @@
 			"HOwO.png"
 		]
 	},
-	"breastVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastVoreInvalid",
+	"breastVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastVoreInvalid", // external lines
 	"breastVoreNo": [
 		"Tempting! But no.",
 		"No room for you, dear.",
@@ -966,8 +963,8 @@
 			"HOwO.png"
 		]
 	},
-	"breastVoreTooSmall": ":tooSmall",
-	"breastVoreNoSlots": ":noSlots",
+	"breastVoreTooSmall": ":tooSmall", // duplicated lines
+	"breastVoreNoSlots": ":noSlots", // duplicated lines
 	"breastVoreFull": {
 		"dialogueRandom": [
 			"Sorry, they're occupied. Your milky adventure will have to wait.",
@@ -1001,9 +998,9 @@
 			"HOwO.png"
 		]
 	},
-	"breastVoreNeedsInfusion": ":oralVoreNeedsInfusion",
-	"breastVoreAlreadyInfused": ":oralVoreAlreadyInfused",
-	"breastVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"breastVoreNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"breastVoreAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"breastVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
 	"cockVoreRequested": {
 		"dialogueRandom": [
 			[
@@ -1028,8 +1025,8 @@
 			"HDetermined.png"
 		]
 	},
-	"cockVoreRequestedHungry": ":cockVoreRequested",
-	"cockVoreRequestedHorny": ":cockVoreRequested",
+	"cockVoreRequestedHungry": ":cockVoreRequested", // duplicated lines
+	"cockVoreRequestedHorny": ":cockVoreRequested", // duplicated lines
 	"cockVoreRequestedAfter": {
 		"dialogueRandom": [
 			[
@@ -1054,9 +1051,9 @@
 			"HOwO.png"
 		]
 	},
-	"cockVoreRequestedAfterHungry": ":cockVoreRequestedAfter",
-	"cockVoreRequestedAfterHorny": ":cockVoreRequestedAfter",
-	"cockVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreInvalid",
+	"cockVoreRequestedAfterHungry": ":cockVoreRequestedAfter", // duplicated lines
+	"cockVoreRequestedAfterHorny": ":cockVoreRequestedAfter", // duplicated lines
+	"cockVoreInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockVoreInvalid", // external lines
 	"cockVoreNo": {
 		"dialogueRandom": [
 			"Sorry, I'm giving my goods a much deserved break. Next time, dear.",
@@ -1068,8 +1065,8 @@
 			"HDetermined.png"
 		]
 	},
-	"cockVoreNoHungry": ":cockVoreNo",
-	"cockVoreNoHorny": ":cockVoreNo",
+	"cockVoreNoHungry": ":cockVoreNo", // duplicated lines
+	"cockVoreNoHorny": ":cockVoreNo", // duplicated lines
 	"cockVoreTooBig": {
 		"dialogueRandom": [
 			"If it was anywhere else, I'd probably agree, but I have to take good care of <entityName>~",
@@ -1081,10 +1078,10 @@
 			"HBlep.png"
 		]
 	},
-	"cockVoreTooBigHungry": ":cockVoreTooBig",
-	"cockVoreTooBigHorny": ":cockVoreTooBig",
-	"cockVoreTooSmall": ":tooSmall",
-	"cockVoreNoSlots": ":noSlots",
+	"cockVoreTooBigHungry": ":cockVoreTooBig", // duplicated lines
+	"cockVoreTooBigHorny": ":cockVoreTooBig", // duplicated lines
+	"cockVoreTooSmall": ":tooSmall", // duplicated lines
+	"cockVoreNoSlots": ":noSlots", // duplicated lines
 	"cockVoreFull": {
 		"dialogueRandom": [
 			"Someone else is having their fun with <entityName> right now~",
@@ -1096,62 +1093,61 @@
 			"HDetermined.png"
 		]
 	},
-	"cockVoreFullHungry": ":cockVoreFull",
-	"cockVoreFullHorny": ":cockVoreFull",
-	"cockVoreNeedsInfusion": ":oralVoreNeedsInfusion",
-	"cockVoreAlreadyInfused": ":oralVoreAlreadyInfused",
-	"cockVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
-	"bellyInfuseRequested": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequested",
-	"bellyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequestedAfter",
-	"bellyInfuseInvalid": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseInvalid",
-	"bellyInfuseNo": ":defaultNo",
-	"bellyInfuseTooBig": ":tooBig",
-	"bellyInfuseTooSmall": ":tooSmall",
-	"bellyInfuseNoSlots": ":noSlots",
+	"cockVoreFullHungry": ":cockVoreFull", // duplicated lines
+	"cockVoreFullHorny": ":cockVoreFull", // duplicated lines
+	"cockVoreNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"cockVoreAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"cockVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
+	"bellyInfuseRequested": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequested", // external lines
+	"bellyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Socks/npc.dialogue:bellyInfuseRequestedAfter", // external lines
+	"bellyInfuseInvalid": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseInvalid", // external lines
+	"bellyInfuseNo": ":defaultNo", // duplicated lines
+	"bellyInfuseTooBig": ":tooBig", // duplicated lines
+	"bellyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"bellyInfuseNoSlots": ":noSlots", // duplicated lines
 	"bellyInfuseFull": [
 		"While I have space where you want to go, it'd get way too cramped...",
 		" ..'mmph!'.. I don't know who said that, but that means I'm out of room...",
 		"I do indulging myself, but even this is too much...",
 		" ...Not right now, my thiccness has its limits..."
 	],
-	"full": ":bellyInfuseFull",
-	"bellyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
-	"bellyInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
-	"bellyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
-	"breastInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequested",
-	"breastInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequestedAfter",
-	"breastInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseInvalid",
-	"breastInfuseNo": ":defaultNo",
-	"breastInfuseTooBig": ":tooBig",
-	"breastInfuseTooSmall": ":tooSmall",
-	"breastInfuseNoSlots": ":noSlots",
-	"breastInfuseFull": ":bellyInfuseFull",
-	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
-	"breastInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
-	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
-	"pussyInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequested",
-	"pussyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequestedAfter",
-	"pussyInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseInvalid",
-	"pussyInfuseNo": ":defaultNo",
-	"pussyInfuseTooBig": ":tooBig",
-	"pussyInfuseTooSmall": ":tooSmall",
-	"pussyInfuseNoSlots": ":noSlots",
-	"pussyInfuseFull": ":bellyInfuseFull",
-	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
-	"pussyInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
-	"pussyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
-	"cockInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequested",
-	"cockInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequestedAfter",
-	"cockInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseInvalid",
-	"cockInfuseNo": ":defaultNo",
-	"cockInfuseTooBig": ":tooBig",
-	"cockInfuseTooSmall": ":tooSmall",
-	"cockInfuseNoSlots": ":noSlots",
-	"cockInfuseFull": ":bellyInfuseFull",
-	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
-	"cockInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
-	"cockInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
-	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested",
+	"bellyInfuseNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"bellyInfuseAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"bellyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
+	"breastInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequested", // external lines
+	"breastInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseRequestedAfter", // external lines
+	"breastInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseInvalid", // external lines
+	"breastInfuseNo": ":defaultNo", // duplicated lines
+	"breastInfuseTooBig": ":tooBig", // duplicated lines
+	"breastInfuseTooSmall": ":tooSmall", // duplicated lines
+	"breastInfuseNoSlots": ":noSlots", // duplicated lines
+	"breastInfuseFull": ":bellyInfuseFull", // duplicated lines
+	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"breastInfuseAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
+	"pussyInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequested", // external lines
+	"pussyInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseRequestedAfter", // external lines
+	"pussyInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseInvalid", // external lines
+	"pussyInfuseNo": ":defaultNo", // duplicated lines
+	"pussyInfuseTooBig": ":tooBig", // duplicated lines
+	"pussyInfuseTooSmall": ":tooSmall", // duplicated lines
+	"pussyInfuseNoSlots": ":noSlots", // duplicated lines
+	"pussyInfuseFull": ":bellyInfuseFull", // duplicated lines
+	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"pussyInfuseAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"pussyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
+	"cockInfuseRequested": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequested", // external lines
+	"cockInfuseRequestedAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseRequestedAfter", // external lines
+	"cockInfuseInvalid": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseInvalid", // external lines
+	"cockInfuseNo": ":defaultNo", // duplicated lines
+	"cockInfuseTooBig": ":tooBig", // duplicated lines
+	"cockInfuseTooSmall": ":tooSmall", // duplicated lines
+	"cockInfuseNoSlots": ":noSlots", // duplicated lines
+	"cockInfuseFull": ":bellyInfuseFull", // duplicated lines
+	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"cockInfuseAlreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"cockInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
+	"oralVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutRequested", // external lines
 	"oralVoreLetoutRequestedHungry": {
 		"dialogueRandom": [
 			"I'm getting way too hungry, you gotta bounce.",
@@ -1174,10 +1170,10 @@
 			"HOwO.png"
 		]
 	},
-	"analVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutRequested",
-	"analVoreLetoutRequestedHungry": ":analVoreLetoutRequested",
-	"analVoreLetoutRequestedHorny": ":analVoreLetoutRequested",
-	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested",
+	"analVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutRequested", // external lines
+	"analVoreLetoutRequestedHungry": ":analVoreLetoutRequested", // duplicated lines
+	"analVoreLetoutRequestedHorny": ":analVoreLetoutRequested", // duplicated lines
+	"unbirthVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutRequested", // external lines
 	"unbirthVoreLetoutRequestedHungry": {
 		"dialogueRandom": [
 			"Sorry for the sudden eviction, but I'm famished.",
@@ -1200,7 +1196,7 @@
 			"HOwO.png"
 		]
 	},
-	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested",
+	"breastVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutRequested", // external lines
 	"breastVoreLetoutRequestedHungry": {
 		"dialogueRandom": [
 			"Sorry, I'm starting to get sore. Gotta let you out.",
@@ -1223,59 +1219,59 @@
 			"HOwO.png"
 		]
 	},
-	"cockVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutRequested",
-	"cockVoreLetoutRequestedHungry": ":cockVoreLetoutRequested",
-	"cockVoreLetoutRequestedHorny": ":cockVoreLetoutRequested",
-	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt",
-	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes",
-	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter",
-	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo",
-	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes",
-	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter",
-	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt",
-	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes",
-	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter",
-	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo",
-	"analVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYes",
-	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter",
-	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt",
-	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes",
-	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter",
-	"unbirthVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNo",
-	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes",
-	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter",
-	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt",
-	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes",
-	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter",
-	"breastVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNo",
-	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes",
-	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter",
-	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt",
-	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes",
-	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter",
-	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo",
-	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes",
-	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter",
-	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting",
-	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes",
-	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo",
-	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes",
-	"analVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:analVoreRequesting",
-	"analVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingYes",
-	"analVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNo",
-	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNoYes",
-	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting",
-	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes",
-	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo",
-	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes",
-	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting",
-	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes",
-	"breastVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNo",
-	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes",
-	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting",
-	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes",
-	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo",
-	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes",
+	"cockVoreLetoutRequested": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutRequested", // external lines
+	"cockVoreLetoutRequestedHungry": ":cockVoreLetoutRequested", // duplicated lines
+	"cockVoreLetoutRequestedHorny": ":cockVoreLetoutRequested", // duplicated lines
+	"oralVorePrompt": "/npcs/sbq/dialogue/default.dialogue:oralVorePrompt", // external lines
+	"oralVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYes", // external lines
+	"oralVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptYesAfter", // external lines
+	"oralVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNo", // external lines
+	"oralVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYes", // external lines
+	"oralVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:oralVorePromptNoYesAfter", // external lines
+	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt", // external lines
+	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes", // external lines
+	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter", // external lines
+	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo", // external lines
+	"analVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYes", // external lines
+	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter", // external lines
+	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt", // external lines
+	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes", // external lines
+	"unbirthVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYesAfter", // external lines
+	"unbirthVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNo", // external lines
+	"unbirthVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYes", // external lines
+	"unbirthVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptNoYesAfter", // external lines
+	"breastVorePrompt": "/npcs/sbq/dialogue/default.dialogue:breastVorePrompt", // external lines
+	"breastVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYes", // external lines
+	"breastVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptYesAfter", // external lines
+	"breastVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNo", // external lines
+	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes", // external lines
+	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter", // external lines
+	"cockVorePrompt": "/npcs/sbq/dialogue/default.dialogue:cockVorePrompt", // external lines
+	"cockVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYes", // external lines
+	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptYesAfter", // external lines
+	"cockVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNo", // external lines
+	"cockVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYes", // external lines
+	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter", // external lines
+	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting", // external lines
+	"oralVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingYes", // external lines
+	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo", // external lines
+	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes", // external lines
+	"analVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:analVoreRequesting", // external lines
+	"analVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingYes", // external lines
+	"analVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNo", // external lines
+	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:analVoreRequestingNoYes", // external lines
+	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting", // external lines
+	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes", // external lines
+	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo", // external lines
+	"unbirthVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNoYes", // external lines
+	"breastVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequesting", // external lines
+	"breastVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingYes", // external lines
+	"breastVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNo", // external lines
+	"breastVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVoreRequestingNoYes", // external lines
+	"cockVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequesting", // external lines
+	"cockVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingYes", // external lines
+	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo", // external lines
+	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes", // external lines
 	"oralVoreNoPrompt": [
 		"Heh, you look too good to pass up. Sorry about this. \nJust kidding, I'm not sorry.",
 		"Oh no, a poor, defenseless <entityname>! Let me give you some shelter.",
@@ -1337,7 +1333,7 @@
 			"HBlep.png"
 		]
 	},
-	"analVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:analVoreNoPrompt",
+	"analVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:analVoreNoPrompt", // external lines
 	"analVoreNoPromptHungry": {
 		"dialogueRandom": [
 			"My stomach won't stop grumbling. You should do nicely.",
@@ -1371,7 +1367,7 @@
 			"HHappy.png"
 		]
 	},
-	"analVoreNoPromptAfterHungry": ":analVoreNoPromptAfter",
+	"analVoreNoPromptAfterHungry": ":analVoreNoPromptAfter", // duplicated lines
 	"analVoreNoPromptAfterHorny": {
 		"dialogueRandom": [
 			"I gotta say, you squirm like a champ~",
@@ -1529,8 +1525,8 @@
 			"HDetermined.png"
 		]
 	},
-	"cockVoreNoPromptHungry": ":cockVoreNoPrompt",
-	"cockVoreNoPromptHorny": ":cockVoreNoPrompt",
+	"cockVoreNoPromptHungry": ":cockVoreNoPrompt", // duplicated lines
+	"cockVoreNoPromptHorny": ":cockVoreNoPrompt", // duplicated lines
 	"cockVoreNoPromptAfter": {
 		"dialogueRandom": [
 			[
@@ -1555,18 +1551,171 @@
 			"HOwO.png"
 		]
 	},
-	"cockVoreNoPromptAfterHungry": ":cockVoreNoPromptAfter",
-	"cockVoreNoPromptAfterHorny": ":cockVoreNoPromptAfter",
-	"bellyInfuseNoPrompt": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseNoPrompt",
-	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter",
-	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt",
-	"breastInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseNoPromptAfter",
-	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt",
-	"pussyInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseNoPromptAfter",
-	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt",
-	"cockInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseNoPromptAfter",
-	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt",
-	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter",
+	"cockVoreNoPromptAfterHungry": ":cockVoreNoPromptAfter", // duplicated lines
+	"cockVoreNoPromptAfterHorny": ":cockVoreNoPromptAfter", // duplicated lines
+	"bellyInfuseNoPrompt": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfuseNoPrompt", // external lines
+	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter", // external lines
+	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt", // external lines
+	"breastInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfuseNoPromptAfter", // external lines
+	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt", // external lines
+	"pussyInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfuseNoPromptAfter", // external lines
+	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt", // external lines
+	"cockInfuseNoPromptAfter": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfuseNoPromptAfter", // external lines
+	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt", // external lines
+	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter", // external lines
+	"lockDownNoPromptBelly": {
+		"dialogue": [
+			"Getting more and more tempting to keep you.",
+			"Don't mind me. I'm just tightening my collar a bit.",
+			"Mm, just a few more notches to go...",
+			"Get comfy. The exits are sealed~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"lockDownNoPromptBellyHungry": {
+		"dialogue": [
+			"Gotta say, my gut's getting rather restless with all your squirming.",
+			"Keep that up, and I'm letting you get front row seats to my hunger.",
+			"Alright, you asked for it.",
+			"Done. There's no escape."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"lockDownNoPromptBellyHorny": [
+		"Uu~ That's starting to really feel good.",
+		"Don't mind me if I... mm... throw away the key for a bit..",
+		"Just checking my phone and...",
+		" ...and now our fun has just started~"
+	],
+	"lockDownNoPromptBreasts": {
+		"dialogue": [
+			"Getting a little eager, are you?",
+			"Just a small piercing of hellhound-forged steel should keep you in.",
+			"Almost done... There. Now hold still for just a moment...",
+			"*click* And with that, your room is now locked."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"lockDownNoPromptBreastsHungry": ":lockDownNoPromptBreasts", // duplicated lines
+	"lockDownNoPromptBreastsHorny": {
+		"dialogue": [
+			"Getting a little eager, dear~?",
+			"Just a small piercing of hellhound-forged steel should keep you in.",
+			"Almost done... There. Now hold still for just a moment...",
+			"*click* And with that, your room is now locked~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"lockDownNoPromptWomb": {
+		"dialogue": [
+			"It's not super effective, dear.",
+			"Just a little bit of magic and a dash of your fear, and your exit will suddenly disappear~",
+			"With a flick of my claw and a twirl of my tail, my womb is now your private jail~",
+			"Get comfy. You're in for the long haul~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"lockDownNoPromptWombHungry": {
+		"dialogue": [
+			"Your free time is running out, dear~",
+			"Just a dash of magic and some of my fire, and your exit will suit my desire~",
+			"With a flick of my claw and a twirl of my tail, my womb is now your private jail~",
+			"Get comfy. You're in for the long haul~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"lockDownNoPromptWombHorny": ":lockDownNoPromptWomb", // duplicated lines
+	"lockDownClearNoPromptBelly": {
+		"dialogue": [
+			"I think I've had enough fun.",
+			"Next time, though...",
+			"Just have to loosen my collar a bit...",
+			"And there. You're free to leave whenever you like, dear~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"lockDownClearNoPromptBellyHungry": {
+		"dialogue": [
+			"I think you've spent enough time in there.",
+			"Just play nice, alright?",
+			"I just need to unclench a little bit and...",
+			"There. You're free now."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"lockDownClearNoPromptBellyHorny": {
+		"dialogue": [
+			"That was amazing~",
+			"I think you deserve a nice break~",
+			"I just need to uncheck this little box...",
+			"There. Escape anytime you like."
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"lockDownClearNoPromptBreasts": {
+		"dialogue": [
+			"You're the best at squirming in tight places.",
+			"I think my piercing is coming loose.",
+			"I see it starting to melt. Just a little bit more..",
+			"Mmm, now you can finally escape."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"lockDownClearNoPromptBreastsHungry": "Missing: lockDownClearNoPromptBreastsHungry <dialoguePath>",
+	"lockDownClearNoPromptBreastsHorny": {
+		"dialogue": [
+			"Not bad! You're a pro at hitting all the right spots~",
+			"Aah~ I think my piercing is melting from all the heat~",
+			"Ooh~ Not much longer~",
+			"Mmm, now you can finally escape~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"lockDownClearNoPromptWomb": {
+		"dialogue": [
+			"Damn, my spell's fading.",
+			"Next time, I'll make it last even longer. Maybe.",
+			"My spell is nearly done.",
+			"Hmhm, you're free to leave whenever you like, dear~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"lockDownClearNoPromptWombHungry": {
+		"dialogue": [
+			"Ah, my spell's fading.",
+			"Next time, I'll... Mmm~",
+			"Oh~ My spell is nearly done~",
+			"Hmhm, you're free to leave whenever you like, dear~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"lockDownClearNoPromptWombHorny": "Missing: lockDownClearNoPromptWombHorny <dialoguePath>",
 	"oralVoreUnprompted": {
 		"dialogueRandom": [
 			"Oh!",
@@ -1600,9 +1749,9 @@
 			"HOwO.png"
 		]
 	},
-	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted",
-	"analVoreUnpromptedHungry": ":analVoreUnprompted",
-	"analVoreUnpromptedHorny": ":analVoreUnprompted",
+	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted", // external lines
+	"analVoreUnpromptedHungry": ":analVoreUnprompted", // duplicated lines
+	"analVoreUnpromptedHorny": ":analVoreUnprompted", // duplicated lines
 	"unbirthVoreUnprompted": {
 		"dialogueRandom": [
 			"Oh!",
@@ -1669,9 +1818,9 @@
 			"HOwO.png"
 		]
 	},
-	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted",
-	"cockVoreUnpromptedHungry": ":cockVoreUnprompted",
-	"cockVoreUnpromptedHorny": ":cockVoreUnprompted",
+	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted", // external lines
+	"cockVoreUnpromptedHungry": ":cockVoreUnprompted", // duplicated lines
+	"cockVoreUnpromptedHorny": ":cockVoreUnprompted", // duplicated lines
 	"oralVoreLetoutUnpromptedAfter": {
 		"dialogueRandom": [
 			"Aw, already?",
@@ -1705,9 +1854,9 @@
 			"HOwO.png"
 		]
 	},
-	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter",
-	"analVoreLetoutUnpromptedAfterHungry": ":analVoreLetoutUnpromptedAfter",
-	"analVoreLetoutUnpromptedAfterHorny": ":analVoreLetoutUnpromptedAfter",
+	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter", // external lines
+	"analVoreLetoutUnpromptedAfterHungry": ":analVoreLetoutUnpromptedAfter", // duplicated lines
+	"analVoreLetoutUnpromptedAfterHorny": ":analVoreLetoutUnpromptedAfter", // duplicated lines
 	"unbirthVoreLetoutUnpromptedAfter": {
 		"dialogueRandom": [
 			"Aw, already?",
@@ -1807,11 +1956,11 @@
 			"HUwU.png"
 		]
 	},
-	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing",
-	"analVoreForcing": "/npcs/sbq/dialogue/default.dialogue:analVoreForcing",
-	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing",
-	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing",
-	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing",
+	"oralVoreForcing": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcing", // external lines
+	"analVoreForcing": "/npcs/sbq/dialogue/default.dialogue:analVoreForcing", // external lines
+	"unbirthVoreForcing": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcing", // external lines
+	"breastVoreForcing": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcing", // external lines
+	"cockVoreForcing": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcing", // external lines
 	"oralVoreLetoutForcingAfter": {
 		"dialogueRandom": [
 			"Oops! I must've upset your stomach.",
@@ -1845,9 +1994,9 @@
 			"HOwO.png"
 		]
 	},
-	"analVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForcingAfter",
-	"analVoreLetoutForcingAfterHungry": ":analVoreLetoutForcingAfter",
-	"analVoreLetoutForcingAfterHorny": ":analVoreLetoutForcingAfter",
+	"analVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForcingAfter", // external lines
+	"analVoreLetoutForcingAfterHungry": ":analVoreLetoutForcingAfter", // duplicated lines
+	"analVoreLetoutForcingAfterHorny": ":analVoreLetoutForcingAfter", // duplicated lines
 	"unbirthVoreLetoutForcingAfter": {
 		"dialogueRandom": [
 			"Oops! I slipped out. You were a little too wet~",
@@ -1947,11 +2096,11 @@
 			"HUwU.png"
 		]
 	},
-	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced",
-	"analVoreForced": "/npcs/sbq/dialogue/default.dialogue:analVoreForced",
-	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced",
-	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced",
-	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced",
+	"oralVoreForced": "/npcs/sbq/dialogue/default.dialogue:oralVoreForced", // external lines
+	"analVoreForced": "/npcs/sbq/dialogue/default.dialogue:analVoreForced", // external lines
+	"unbirthVoreForced": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForced", // external lines
+	"breastVoreForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreForced", // external lines
+	"cockVoreForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreForced", // external lines
 	"oralVoreLetoutForced": {
 		"dialogueRandom": [
 			"Have enough fun, dear?",
@@ -1985,9 +2134,9 @@
 			"HOwO.png"
 		]
 	},
-	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced",
-	"analVoreLetoutForcedHungry": ":analVoreLetoutForced",
-	"analVoreLetoutForcedHorny": ":analVoreLetoutForced",
+	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced", // external lines
+	"analVoreLetoutForcedHungry": ":analVoreLetoutForced", // duplicated lines
+	"analVoreLetoutForcedHorny": ":analVoreLetoutForced", // duplicated lines
 	"unbirthVoreLetoutForced": {
 		"dialogueRandom": [
 			"Getting restless, hm? I'll let you out.",
@@ -2032,7 +2181,7 @@
 			"HHappy.png"
 		]
 	},
-	"breastVoreLetoutForcedHungry": ":breastVoreLetoutForced",
+	"breastVoreLetoutForcedHungry": ":breastVoreLetoutForced", // duplicated lines
 	"breastVoreLetoutForcedHorny": {
 		"dialogueRandom": [
 			"Ah, a little too intimate for you? I won't tell~",
@@ -2044,10 +2193,10 @@
 			"HOwO.png"
 		]
 	},
-	"cockVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForced",
-	"cockVoreLetoutForcedHungry": ":cockVoreLetoutForced",
-	"cockVoreLetoutForcedHorny": ":cockVoreLetoutForced",
-	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly",
+	"cockVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForced", // external lines
+	"cockVoreLetoutForcedHungry": ":cockVoreLetoutForced", // duplicated lines
+	"cockVoreLetoutForcedHorny": ":cockVoreLetoutForced", // duplicated lines
+	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly", // external lines
 	"struggleBellyHungry": {
 		"dialogueRandom": [
 			"Careful, dear. You might reawaken my hunger.",
@@ -2065,6 +2214,39 @@
 			"That's good~ You're checking all of my boxes~",
 			"Gah~ I knew I should've stuffed you elsewhere~",
 			"Delightful. Let's keep going~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"struggleBellyLockDown": {
+		"dialogueRandom": [
+			"Mmm, did you forget I'm wearing a collar?",
+			"A clench or two is all I need to keep you.",
+			"I'd tell you to give up, but your squirming feels great.",
+			"Hmhm, you almost got me to burp."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleBellyLockDownHungry": {
+		"dialogueRandom": [
+			"Keep it up. My stomach hasn't gurgled like this in a long time.",
+			"Too warm for you? I am hungry, after all.",
+			"It doesn't matter how hard you push. My stomach isn't going to let you go.",
+			"Settle down in there. I even might decide to let you out."
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleBellyLockDownHorny": {
+		"dialogueRandom": [
+			"Don't stop~ I haven't had a good prey squirm about in years~.",
+			"Knowing you'll never escape right now~? Mmnf~",
+			"Oooh~ so close~ You just missed the exit.",
+			"If you keep it up, I might even let you out early~"
 		],
 		"imagePortrait": [
 			"HOwO.png"
@@ -2103,7 +2285,30 @@
 			"HOwO.png"
 		]
 	},
-	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail",
+	"struggleWombLockDown": {
+		"dialogueRandom": [
+			"Mmm, did you forget about my spell? There is no exit.",
+			"I admire the fact you're still struggling. Oooh~",
+			"Fff~ I bet it's getting real ^pink;steamy^reset; without a proper escape~",
+			"When will it reappear? Might be tomorrow, might be in a decade~"
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleWombLockDownHungry": {
+		"dialogueRandom": [
+			"I gotta say, knowing you can't get out, mmng, makes this even better~",
+			"Keep squirming, my delightful bump~",
+			"How long will I keep you? A-ah, much, much longer if you keep squirming like that~",
+			"How long does my spell last? Hmhm, the duration is random~"
+		],
+		"imagePortrait": [
+			"HTired.png"
+		]
+	},
+	"struggleWombLockDownHorny": ":struggleWombLockDown", // duplicated lines
+	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail", // external lines
 	"struggleBreasts": {
 		"dialogueRandom": [
 			"Nice and secure inside my treasure chest...",
@@ -2115,7 +2320,7 @@
 			"HHappy.png"
 		]
 	},
-	"struggleBreastsHungry": ":struggleBreasts",
+	"struggleBreastsHungry": ":struggleBreasts", // duplicated lines
 	"struggleBreastsHorny": {
 		"dialogueRandom": [
 			"Fwah, this always feels so good~",
@@ -2127,14 +2332,37 @@
 			"HOwO.png"
 		]
 	},
-	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy",
+	"struggleBreastsLockDown": {
+		"dialogueRandom": [
+			"Mmm, defeated by such a small piece of metal.",
+			"Jiggle as much as you like, it's fun to watch.",
+			"I really should go find that Avali. I wonder if he'd enjoy your squirms?",
+			"When will I take the piercing out? Might take a few years."
+		],
+		"imagePortrait": [
+			"HHappy.png"
+		]
+	},
+	"struggleBreastsLockDownHungry": ":struggleBreastsLockDown", // duplicated lines
+	"struggleBreastsLockDownHorny": {
+		"dialogueRandom": [
+			"Mmm, defeated by such a small piece of metal~",
+			"Jiggle as much as you like, dear~",
+			"I really should go find that Avali. I wonder if he'd enjoy your squirms?",
+			"When will I take the piercing out? Might take a few years~"
+		],
+		"imagePortrait": [
+			"HOwO.png"
+		]
+	},
+	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy", // external lines
 	"struggleCock": [
 		"Is being stuck in my shaft a little too lewd for you?",
 		"You're so squirmy in there! Be careful you don't squirm into my balls, or you might slip down deeper.",
 		"You're moving a lot in there. Are you embarrassed about being inside my shaft?"
 	],
-	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls",
-	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss",
+	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls", // external lines
+	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss", // external lines
 	"struggleAcidHeal": {
 		"dialogueRandom": [
 			"That's right. Let that steam really work its way into you.",
@@ -2201,9 +2429,9 @@
 			"HOwO.png"
 		]
 	},
-	"struggleCumHeal": ":struggleAcidHeal",
-	"struggleMilkHeal": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:struggleMilkHeal",
-	"struggleMiscHeal": ":struggleAcidHeal",
+	"struggleCumHeal": ":struggleAcidHeal", // duplicated lines
+	"struggleMilkHeal": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:struggleMilkHeal", // external lines
+	"struggleMiscHeal": ":struggleAcidHeal", // duplicated lines
 	"struggleCompression": {
 		"dialogueRandom": [
 			"Heh, going to store you away for later.",
@@ -2281,7 +2509,7 @@
 			"HHappy.png"
 		]
 	},
-	"struggleCompressionBreastsHungry": ":struggleCompressionBreasts",
+	"struggleCompressionBreastsHungry": ":struggleCompressionBreasts", // duplicated lines
 	"struggleCompressionBreastsHorny": {
 		"dialogueRandom": [
 			"Mmm, you think anyone will check for you in there~?",
@@ -2293,7 +2521,7 @@
 			"HOwO.png"
 		]
 	},
-	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest",
+	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest", // external lines
 	"struggleAcidDigestHungry": {
 		"dialogueRandom": [
 			"Yes, I'm digesting you. \nYes, I'm going to reform you.",
@@ -2316,10 +2544,10 @@
 			"HOwO.png"
 		]
 	},
-	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune",
-	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest",
-	"struggleCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestBalls",
-	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune",
+	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune", // external lines
+	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest", // external lines
+	"struggleCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestBalls", // external lines
+	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune", // external lines
 	"struggleFemcumDigest": {
 		"dialogueRandom": [
 			"Just think of it as a temporary weight loss program for both of us.",
@@ -2397,7 +2625,7 @@
 			"HHappy.png"
 		]
 	},
-	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt",
+	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt", // external lines
 	"struggleMilkDigestImmune": {
 		"dialogueRandom": [
 			"Nice. <entityname>-controlled jiggle physics.",
@@ -2420,8 +2648,8 @@
 			"HHappy.png"
 		]
 	},
-	"struggleMiscDigestHungry": ":struggleMiscDigest",
-	"struggleMiscDigestHorny": ":struggleMiscDigest",
+	"struggleMiscDigestHungry": ":struggleMiscDigest", // duplicated lines
+	"struggleMiscDigestHorny": ":struggleMiscDigest", // duplicated lines
 	"struggleMiscDigestImmune": {
 		"dialogueRandom": [
 			"Not into melting? I can respect that.",
@@ -2485,7 +2713,7 @@
 			"HHappy.png"
 		]
 	},
-	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy",
+	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy", // external lines
 	"struggleEggify": {
 		"percentage": "Eggify",
 		"pools": [
@@ -2539,14 +2767,14 @@
 			"HOwO.png"
 		]
 	},
-	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant",
-	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant",
-	"bellyInfusedOccupant": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfusedOccupant",
-	"breastInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfusedOccupant",
-	"pussyInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfusedOccupant",
-	"cockInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfusedOccupant",
-	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant",
-	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant",
+	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant", // external lines
+	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant", // external lines
+	"bellyInfusedOccupant": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfusedOccupant", // external lines
+	"breastInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfusedOccupant", // external lines
+	"pussyInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfusedOccupant", // external lines
+	"cockInfusedOccupant": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfusedOccupant", // external lines
+	"pawInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:pawInfusedOccupant", // external lines
+	"tailInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:tailInfusedOccupant", // external lines
 	"strugglingBelly": {
 		"dialogueRandom": [
 			[
@@ -2685,7 +2913,7 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail",
+	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail", // external lines
 	"strugglingBreasts": {
 		"dialogueRandom": [
 			"It's so snug and secure in here. I could easily drift off.",
@@ -2719,10 +2947,10 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy",
-	"strugglingCock": "/npcs/sbq/dialogue/default.dialogue:strugglingCock",
-	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls",
-	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss",
+	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy", // external lines
+	"strugglingCock": "/npcs/sbq/dialogue/default.dialogue:strugglingCock", // external lines
+	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls", // external lines
+	"strugglingAss": "/npcs/sbq/dialogue/default.dialogue:strugglingAss", // external lines
 	"strugglingAcidHeal": {
 		"dialogueRandom": [
 			[
@@ -2758,7 +2986,7 @@
 			"HHappy.png"
 		]
 	},
-	"strugglingAcidHealHungry": ":strugglingAcidHeal",
+	"strugglingAcidHealHungry": ":strugglingAcidHeal", // duplicated lines
 	"strugglingAcidHealHorny": {
 		"dialogueRandom": [
 			[
@@ -2794,11 +3022,11 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingFemcumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingFemcumHeal",
-	"strugglingCumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCumHeal",
-	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal",
-	"strugglingMiscHeal": ":strugglingAcidHeal",
-	"strugglingCompression": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCompression",
+	"strugglingFemcumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingFemcumHeal", // external lines
+	"strugglingCumHeal": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCumHeal", // external lines
+	"strugglingMilkHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkHeal", // external lines
+	"strugglingMiscHeal": ":strugglingAcidHeal", // duplicated lines
+	"strugglingCompression": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingCompression", // external lines
 	"strugglingAcidDigest": {
 		"dialogueRandom": [
 			"Ah, now the fun's really getting started.",
@@ -2821,7 +3049,7 @@
 			"HTired.png"
 		]
 	},
-	"strugglingAcidDigestHorny": ":strugglingAcidDigest",
+	"strugglingAcidDigestHorny": ":strugglingAcidDigest", // duplicated lines
 	"strugglingAcidDigestImmune": {
 		"dialogueRandom": [
 			"I appreciate the effort, but you can't claim me like that.",
@@ -2833,8 +3061,7 @@
 			"HHappy.png"
 		]
 	},
-	"strugglingDigestImmune": ":strugglingAcidDigestImmune",
-	"strugglingAcidDigestImmuneHungry": ":strugglingAcidDigestImmune",
+	"strugglingAcidDigestImmuneHungry": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingAcidDigestImmuneHorny": {
 		"dialogueRandom": [
 			"I appreciate the effort, but I'm off limits~",
@@ -2846,9 +3073,9 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest",
-	"strugglingCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestBalls",
-	"strugglingCumDigestImmune": ":strugglingAcidDigestImmune",
+	"strugglingCumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigest", // external lines
+	"strugglingCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestBalls", // external lines
+	"strugglingCumDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingFemcumDigest": {
 		"dialogueRandom": [
 			"Ooh, melting me down? How naughty.",
@@ -2882,7 +3109,7 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingFemcumDigestImmune": ":strugglingAcidDigestImmune",
+	"strugglingFemcumDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingMilkDigest": {
 		"dialogueRandom": [
 			"Ooh, turning me into a fresh glass? How naughty.",
@@ -2916,11 +3143,11 @@
 			"HOwO.png"
 		]
 	},
-	"strugglingMilkDigestImmune": ":strugglingAcidDigestImmune",
-	"strugglingMiscDigest": ":strugglingAcidDigest",
-	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune",
-	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming",
-	"strugglingDrainEnergy": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingDrainEnergy",
+	"strugglingMilkDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingMiscDigest": ":strugglingAcidDigest", // duplicated lines
+	"strugglingMiscDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingTransforming": "/npcs/sbq/dialogue/default.dialogue:strugglingTransforming", // external lines
+	"strugglingDrainEnergy": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:strugglingDrainEnergy", // external lines
 	"strugglingEggify": {
 		"dialogueRandom": [
 			[
@@ -2931,20 +3158,19 @@
 			"HConfused.png"
 		]
 	},
-	"strugglingTransformingWomb": ":strugglingEggify",
-	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused",
-	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused",
-	"bellyInfused": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfused",
-	"breastInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfused",
-	"pussyInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfused",
-	"cockInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfused",
-	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused",
-	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused",
-	"climax": "/npcs/sbq/dialogue/default.dialogue:climax",
-	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb",
-	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts",
-	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock",
-	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls",
+	"anyInfused": "/npcs/sbq/dialogue/default.dialogue:anyInfused", // external lines
+	"thighsInfused": "/npcs/sbq/dialogue/default.dialogue:thighsInfused", // external lines
+	"bellyInfused": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:bellyInfused", // external lines
+	"breastInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:breastInfused", // external lines
+	"pussyInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:pussyInfused", // external lines
+	"cockInfused": "/npcs/sbq/LokiVulpix/Auri/npc.dialogue:cockInfused", // external lines
+	"pawInfused": "/npcs/sbq/dialogue/default.dialogue:pawInfused", // external lines
+	"tailInfused": "/npcs/sbq/dialogue/default.dialogue:tailInfused", // external lines
+	"climax": "/npcs/sbq/dialogue/default.dialogue:climax", // external lines
+	"climaxWomb": "/npcs/sbq/dialogue/default.dialogue:climaxWomb", // external lines
+	"climaxBreasts": "/npcs/sbq/dialogue/default.dialogue:climaxBreasts", // external lines
+	"climaxCock": "/npcs/sbq/dialogue/default.dialogue:climaxCock", // external lines
+	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls", // external lines
 	"shrinking": {
 		"dialogueRandom": [
 			"Mm, looking to make me more manageable?",
@@ -3062,6 +3288,16 @@
 		" ...bork."
 	],
 	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
+	// Unused Dialogue 
+	// Unused Dialogue
+	// Unused Dialogue
+	"conversePrompt": "Let's talk!",
+	"needsInfusion": ":oralVoreNeedsInfusion", // duplicated lines
+	"alreadyInfused": ":oralVoreAlreadyInfused", // duplicated lines
+	"targetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch", // duplicated lines
+	"full": ":bellyInfuseFull", // duplicated lines
+	"strugglingDigestImmune": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingTransformingWomb": ":strugglingEggify", // duplicated lines
 	// Unused Dialogue
 	"curiousBelly": [
 		"It's nice and quiet. Perfect if you want to take a nap."
@@ -3601,7 +3837,7 @@
 			"HHappy.png"
 		]
 	},
-	"oralVoreLetoutRequestedDigested": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreLetoutRequestedDigested",
+	"oralVoreLetoutRequestedDigested": "/npcs/sbq/LokiVulpix/Loki/npc.dialogue:oralVoreLetoutRequestedDigested", // external lines
 	"oralVoreLetoutRequestedDigestedHorny": {
 		"dialogueRandom": [
 			"It's been fun, but these love handles are getting to be a bit much~",
@@ -3635,7 +3871,7 @@
 			"HTired.png"
 		]
 	},
-	"oralVoreLetoutRequestedDigestImmuneHungry": ":oralVoreLetoutRequestedDigestImmuneHorny",
+	"oralVoreLetoutRequestedDigestImmuneHungry": ":oralVoreLetoutRequestedDigestImmuneHorny", // duplicated lines
 	"oralVoreLetoutRequestedDigestHorny": {
 		"dialogueRandom": [
 			"Ooh, don't want you to melt. That would end our fun too early~",
@@ -3686,7 +3922,7 @@
 			"HTired.png"
 		]
 	},
-	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested",
+	"analVoreLetoutRequestedDigested": ":oralVoreLetoutRequestedDigested", // duplicated lines
 	"analVoreLetoutRequestedDigest": [
 		"I think you won't be adding to my rear today, butt buddy!",
 		"I'll let you go this time, but next time my rear will catch you!"
@@ -3804,8 +4040,8 @@
 			"HBork.png"
 		]
 	},
-	"strugglingDigestImmuneHungry": ":strugglingAcidDigestImmune",
-	"strugglingDigestImmuneHorny": ":strugglingAcidDigestImmune",
+	"strugglingDigestImmuneHungry": ":strugglingAcidDigestImmune", // duplicated lines
+	"strugglingDigestImmuneHorny": ":strugglingAcidDigestImmune", // duplicated lines
 	"strugglingSlime": {
 		"dialogueRandom": [
 			"Nice, I can see out of you slightly.",
@@ -3924,8 +4160,8 @@
 			"HConfused.png"
 		]
 	},
-	"strugglingTransformingBelly": ":strugglingSlimeTransforming",
-	"strugglingCumDigestImmuneBalls": ":strugglingAcidDigestImmune",
+	"strugglingTransformingBelly": ":strugglingSlimeTransforming", // duplicated lines
+	"strugglingCumDigestImmuneBalls": ":strugglingAcidDigestImmune", // duplicated lines
 	"oralVoreLetoutForcingAfterDigest": [
 		"Whew... I got you to spit me out before I was done for!"
 	],
@@ -4178,7 +4414,7 @@
 			"HOwO.png"
 		]
 	},
-	"infusePreyNo": ":defaultNo",
+	"infusePreyNo": ":defaultNo", // duplicated lines
 	"sizeChangedShrinkFiendly": {
 		"dialogueRandom": [
 			"^red;Going to throw me at someone?",
@@ -4905,7 +5141,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeBellyFiendly": {
+	"struggleBellyLockDownFiendly": {
 		"dialogueRandom": [
 			"^red;I told you to settle down.",
 			"^red;I don't joke. It's futile.",
@@ -4916,7 +5152,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeCountdownBellyFiendly": {
+	"lockDownNoPromptBellyFiendly": {
 		"dialogue": [
 			"^red;Keep it up and I'll keep you.",
 			"^red;Not going to give up?",
@@ -4927,7 +5163,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeReleaseBellyFiendly": {
+	"lockDownClearNoPromptBellyFiendly": {
 		"dialogue": [
 			"^red;I think it's safe now.",
 			"^red;You put up a good effort.",
@@ -5045,7 +5281,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeWombFiendly": {
+	"struggleWombLockDownFiendly": {
 		"dialogueRandom": [
 			"^red;This contract is unbreakable.",
 			"^red;Struggle. Relax. You're fine both ways.",
@@ -5056,7 +5292,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeCountdownWombFiendly": {
+	"lockDownNoPromptWombFiendly": {
 		"dialogue": [
 			"^red;Don't want you to slip out.",
 			"^red;A little fire. \nMixed with my desire.",
@@ -5067,7 +5303,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeReleaseWombFiendly": {
+	"lockDownClearNoPromptWombFiendly": {
 		"dialogue": [
 			"^red;Spell is wearing off.",
 			"^red;Mmm, starting to quiver.",
@@ -5122,7 +5358,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeBreastsFiendly": {
+	"struggleBreastsLockDownFiendly": {
 		"dialogueRandom": [
 			"^red;This metal is older than you are. It won't break.",
 			"^red;Hmhm, shake shake...",
@@ -5133,7 +5369,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeCountdownBreastsFiendly": {
+	"lockDownNoPromptBreastsFiendly": {
 		"dialogue": [
 			"^red;Hmph, you almost slipped out.",
 			"^red;I don't want you to leave just yet.",
@@ -5144,7 +5380,7 @@
 			"HMad.png"
 		]
 	},
-	"struggleNoEscapeReleaseBreastsFiendly": {
+	"lockDownClearNoPromptBreastsFiendly": {
 		"dialogue": [
 			"^red;Looks like it's coming loose.",
 			"^red;Heh. It only cost ten Pixels.",
@@ -5364,7 +5600,7 @@
 			"HMad.png"
 		]
 	},
-	"unbirthVoreLetoutTransformedFiendly": ":unbirthVoreLetoutForcedTransformedFiendly",
+	"unbirthVoreLetoutTransformedFiendly": ":unbirthVoreLetoutForcedTransformedFiendly", // duplicated lines
 	"unbirthVoreLetoutDigestedFiendly": {
 		"dialogueRandom": [
 			"^red;Fun and sloshy. Time to return, though.",
@@ -5462,232 +5698,6 @@
 		],
 		"imagePortrait": [
 			"HMad.png"
-		]
-	},
-	"struggleNoEscapeBelly": {
-		"dialogueRandom": [
-			"Mmm, did you forget I'm wearing a collar?",
-			"A clench or two is all I need to keep you.",
-			"I'd tell you to give up, but your squirming feels great.",
-			"Hmhm, you almost got me to burp."
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeCountdownBelly": {
-		"dialogue": [
-			"Getting more and more tempting to keep you.",
-			"Don't mind me. I'm just tightening my collar a bit.",
-			"Mm, just a few more notches to go...",
-			"Get comfy. The exits are sealed~"
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeReleaseBelly": {
-		"dialogue": [
-			"I think I've had enough fun.",
-			"Next time, though...",
-			"Just have to loosen my collar a bit...",
-			"And there. You're free to leave whenever you like, dear~"
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeBellyHungry": {
-		"dialogueRandom": [
-			"Keep it up. My stomach hasn't gurgled like this in a long time.",
-			"Too warm for you? I am hungry, after all.",
-			"It doesn't matter how hard you push. My stomach isn't going to let you go.",
-			"Settle down in there. I even might decide to let you out."
-		],
-		"imagePortrait": [
-			"HTired.png"
-		]
-	},
-	"struggleNoEscapeCountdownBellyHungry": {
-		"dialogue": [
-			"Gotta say, my gut's getting rather restless with all your squirming.",
-			"Keep that up, and I'm letting you get front row seats to my hunger.",
-			"Alright, you asked for it.",
-			"Done. There's no escape."
-		],
-		"imagePortrait": [
-			"HTired.png"
-		]
-	},
-	"struggleNoEscapeReleaseBellyHungry": {
-		"dialogue": [
-			"I think you've spent enough time in there.",
-			"Just play nice, alright?",
-			"I just need to unclench a little bit and...",
-			"There. You're free now."
-		],
-		"imagePortrait": [
-			"HTired.png"
-		]
-	},
-	"struggleNoEscapeBellyHorny": {
-		"dialogueRandom": [
-			"Don't stop~ I haven't had a good prey squirm about in years~.",
-			"Knowing you'll never escape right now~? Mmnf~",
-			"Oooh~ so close~ You just missed the exit.",
-			"If you keep it up, I might even let you out early~"
-		],
-		"imagePortrait": [
-			"HOwO.png"
-		]
-	},
-	"struggleNoEscapeCountdownBellyHorny": [
-		"Uu~ That's starting to really feel good.",
-		"Don't mind me if I... mm... throw away the key for a bit..",
-		"Just checking my phone and...",
-		" ...and now our fun has just started~"
-	],
-	"struggleNoEscapeReleaseBellyHorny": {
-		"dialogue": [
-			"That was amazing~",
-			"I think you deserve a nice break~",
-			"I just need to uncheck this little box...",
-			"There. Escape anytime you like."
-		],
-		"imagePortrait": [
-			"HOwO.png"
-		]
-	},
-	"struggleNoEscapeWomb": {
-		"dialogueRandom": [
-			"Mmm, did you forget about my spell? There is no exit.",
-			"I admire the fact you're still struggling. Oooh~",
-			"Fff~ I bet it's getting real ^pink;steamy^reset; without a proper escape~",
-			"When will it reappear? Might be tomorrow, might be in a decade~"
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeCountdownWomb": {
-		"dialogue": [
-			"It's not super effective, dear.",
-			"Just a little bit of magic and a dash of your fear, and your exit will suddenly disappear~",
-			"With a flick of my claw and a twirl of my tail, my womb is now your private jail~",
-			"Get comfy. You're in for the long haul~"
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeReleaseWomb": {
-		"dialogue": [
-			"Damn, my spell's fading.",
-			"Next time, I'll make it last even longer. Maybe.",
-			"My spell is nearly done.",
-			"Hmhm, you're free to leave whenever you like, dear~"
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeWombHungry": {
-		"dialogueRandom": [
-			"I gotta say, knowing you can't get out, mmng, makes this even better~",
-			"Keep squirming, my delightful bump~",
-			"How long will I keep you? A-ah, much, much longer if you keep squirming like that~",
-			"How long does my spell last? Hmhm, the duration is random~"
-		],
-		"imagePortrait": [
-			"HTired.png"
-		]
-	},
-	"struggleNoEscapeCountdownWombHungry": {
-		"dialogue": [
-			"Your free time is running out, dear~",
-			"Just a dash of magic and some of my fire, and your exit will suit my desire~",
-			"With a flick of my claw and a twirl of my tail, my womb is now your private jail~",
-			"Get comfy. You're in for the long haul~"
-		],
-		"imagePortrait": [
-			"HTired.png"
-		]
-	},
-	"struggleNoEscapeReleaseWombHungry": {
-		"dialogue": [
-			"Ah, my spell's fading.",
-			"Next time, I'll... Mmm~",
-			"Oh~ My spell is nearly done~",
-			"Hmhm, you're free to leave whenever you like, dear~"
-		],
-		"imagePortrait": [
-			"HTired.png"
-		]
-	},
-	"struggleNoEscapeBreasts": {
-		"dialogueRandom": [
-			"Mmm, defeated by such a small piece of metal.",
-			"Jiggle as much as you like, it's fun to watch.",
-			"I really should go find that Avali. I wonder if he'd enjoy your squirms?",
-			"When will I take the piercing out? Might take a few years."
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeCountdownBreasts": {
-		"dialogue": [
-			"Getting a little eager, are you?",
-			"Just a small piercing of hellhound-forged steel should keep you in.",
-			"Almost done... There. Now hold still for just a moment...",
-			"*click* And with that, your room is now locked."
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeReleaseBreasts": {
-		"dialogue": [
-			"You're the best at squirming in tight places.",
-			"I think my piercing is coming loose.",
-			"I see it starting to melt. Just a little bit more..",
-			"Mmm, now you can finally escape."
-		],
-		"imagePortrait": [
-			"HHappy.png"
-		]
-	},
-	"struggleNoEscapeBreastsHorny": {
-		"dialogueRandom": [
-			"Mmm, defeated by such a small piece of metal~",
-			"Jiggle as much as you like, dear~",
-			"I really should go find that Avali. I wonder if he'd enjoy your squirms?",
-			"When will I take the piercing out? Might take a few years~"
-		],
-		"imagePortrait": [
-			"HOwO.png"
-		]
-	},
-	"struggleNoEscapeCountdownBreastsHorny": {
-		"dialogue": [
-			"Getting a little eager, dear~?",
-			"Just a small piercing of hellhound-forged steel should keep you in.",
-			"Almost done... There. Now hold still for just a moment...",
-			"*click* And with that, your room is now locked~"
-		],
-		"imagePortrait": [
-			"HOwO.png"
-		]
-	},
-	"struggleNoEscapeReleaseBreastsHorny": {
-		"dialogue": [
-			"Not bad! You're a pro at hitting all the right spots~",
-			"Aah~ I think my piercing is melting from all the heat~",
-			"Ooh~ Not much longer~",
-			"Mmm, now you can finally escape~"
-		],
-		"imagePortrait": [
-			"HOwO.png"
 		]
 	},
 	"strugglingBellyFiendly": {
@@ -5861,9 +5871,9 @@
 			"HMad.png"
 		]
 	},
-	"strugglingTransformingBreastsFiendly": ":strugglingEggify",
-	"strugglingEggifyBreastsFiendly": ":strugglingEggify",
-	"strugglingWombFiendly": ":strugglingBreastsFiendly",
+	"strugglingTransformingBreastsFiendly": ":strugglingEggify", // duplicated lines
+	"strugglingEggifyBreastsFiendly": ":strugglingEggify", // duplicated lines
+	"strugglingWombFiendly": ":strugglingBreastsFiendly", // duplicated lines
 	"strugglingFemcumDigestFiendly": {
 		"dialogueRandom": [
 			"^red;Aw, melting me down?",
@@ -5875,8 +5885,8 @@
 			"HMad.png"
 		]
 	},
-	"strugglingTransformingWombFiendly": ":strugglingEggify",
-	"strugglingEggifyWombFiendly": ":strugglingEggify",
+	"strugglingTransformingWombFiendly": ":strugglingEggify", // duplicated lines
+	"strugglingEggifyWombFiendly": ":strugglingEggify", // duplicated lines
 	"voredFiendly": {
 		"dialogueRandom": [
 			"^red;Oh.",

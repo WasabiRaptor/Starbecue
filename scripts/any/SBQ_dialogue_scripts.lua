@@ -103,6 +103,7 @@ dialogueStepScripts.sbq_femcumDigestResistance = dialogueStepScripts.statPositiv
 dialogueStepScripts.sbq_milkDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_miscDigestResistance = dialogueStepScripts.statPositive
 
+dialogueStepScripts.sbqLockDown = dialogueStepScripts.statPositive
 
 function dialogueStepScripts.occupantFlag(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
 	local flags = sbq.getPublicProperty(eid, "sbqOccupantData") or {}

@@ -623,17 +623,21 @@ function default:eggify(name, action, target, ...)
 	occupant:sendEntityMessage("applyStatusEffect", action.eggStatus or location.eggStatus or sbq.voreConfig.eggStatus or "sbqEgg" )
 end
 
-function default:lockDown()
-	if sbq.statPositive("sbqLockDown") then
-		SpeciesScript:tryAction("lockDownClear")
-	else
-		sbq.setStatModifiers("sbqLockDown", {
-			"sbqLockDown",
-			{ stat = "sbqLockDown", amount = 1 },
-			{ stat = "energyRegenPercentageRate", baseMultiplier = 0}
-		})
+function default:lockDown(name, action, target, ...)
+	if Occupants.checkActiveOccupants() and sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+		dialogueProcessor.sendPlayerDialogueBox(false)
+		dialogueProcessor.speakDialogue()
 	end
+	sbq.setStatModifiers("sbqLockDown", {
+		"sbqLockDown",
+		{ stat = "sbqLockDown", amount = 1 },
+		{ stat = "energyRegenPercentageRate", baseMultiplier = 0}
+	})
 end
-function default:lockDownClear()
+function default:lockDownClear(name, action, target)
+	if Occupants.checkActiveOccupants() and sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+		dialogueProcessor.sendPlayerDialogueBox(false)
+		dialogueProcessor.speakDialogue()
+	end
 	sbq.clearStatModifiers("sbqLockDown")
 end
