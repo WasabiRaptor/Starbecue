@@ -122,7 +122,7 @@ function update(dt)
 	) then
 		sbq_hunting.start()
 	end
-	if sbq.settings.lockDownEnable and sbq.randomTimer(
+	if sbq.randomTimer(
 		"lockDownCycle",
 		(sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
 		(sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
@@ -132,7 +132,7 @@ function update(dt)
 				if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
 					sbq.queueAction("lockDownClear", Occupants.randomActiveOccupant())
 				end
-			elseif (math.random() < (sbq.voreConfig.lockDownEnableChance or sbq.config.lockDownEnableChance)) then
+			elseif (math.random() < (sbq.settings.lockDownChance)) then
 				sbq.queueAction("lockDown", Occupants.randomActiveOccupant())
 			end
 		end

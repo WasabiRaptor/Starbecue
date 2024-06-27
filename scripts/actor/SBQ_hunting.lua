@@ -257,7 +257,7 @@ function sbq_hunting.domNoPrompt(target)
 	local function callback()
 		local success, reason, cooldown = SpeciesScript:tryAction(sbq_hunting.action, target)
 		if success then
-			if not sbq.statPositive("sbqLockDown") and (math.random() < (sbq.voreConfig.lockDownEnableChance or sbq.config.lockDownEnableChance)) then
+			if not sbq.statPositive("sbqLockDown") and (math.random() < (sbq.settings.lockDownChance)) then
 				sbq.queueAction("lockDown", target)
 			end
 			if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
