@@ -53,6 +53,23 @@ function sbq.directory()
 	return "/humanoid/" .. humanoid.species() .. "/"
 end
 
+-- function sbq.findIdentityColor(identity, color)
+-- 	for k, v in pairs(identity) do
+-- 		if type(v) == "string" and v:find("replace;") then
+-- 			local newString = v:lower()
+-- 			if not newString:sub(-1) == ";" then
+-- 				newString = newString .. ";"
+-- 			end
+-- 			local _, last = newString:find(color:lower() .. "=")
+-- 			if last then
+-- 				local _, found = newString:find(";", last)
+-- 				if found then
+-- 					return newString:sub(last+1, found-1)
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
 
 function sbq.doTransformation(newIdentity, duration, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
@@ -129,36 +146,20 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	local preserveColors = {
 
 	}
-	if oldSpeciesFile.baseColorMap and speciesFile.baseColorMap then
-		for _, oldColors in pairs(oldSpeciesFile.baseColorMap) do
-			for _, newColors in pairs(speciesFile.baseColorMap) do
-				if #oldColors == #newColors then
-					local same = true
-					for k, v in ipairs(oldColors) do
-						if not v == newColors[k] then same = false break end
-					end
-					if same then
-						for _, v in ipairs(oldColors) do
-							preserveColors[v] = true
-						end
-					end
-				end
-			end
-		end
+	if not speciesIdentites[newIdentity.species] then
+		-- if oldSpeciesFile.baseColorMap and speciesFile.baseColorMap then
+		-- 	for k, oldColors in pairs(oldSpeciesFile.baseColorMap) do
+		-- 		for k2, newColors in pairs(speciesFile.baseColorMap) do
+		-- 			if (#oldColors >= #newColors) and (k == k2) then
+		-- 				for i, color in ipairs(newColors) do
+		-- 					preserveColors[color:lower()] = sbq.findIdentityColor(currentIdentity, oldColors[i])
+		-- 				end
+		-- 			end
+		-- 		end
+		-- 	end
+		-- end
 	end
-	for color, _ in pairs(preserveColors) do
-		for k, v in pairs(currentIdentity) do
-			if type(v) == "string" then
-				local _, last = string.find(v, color .. "=")
-				if last then
-					local _, found = string.find(v, ";", last)
-					if found then
-						preserveColors[color] = string.sub(v, last+1, found-1)
-					end
-				end
-			end
-		end
-	end
+
 	if not force then
 		newIdentity.name = currentName
 	end
@@ -171,16 +172,19 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		newIdentity,
 		((not force) and speciesIdentites[newIdentity.species]) or {}
 	)
-	if not force then
-		for k, v in pairs(newIdentity) do
-			if type(v) == "string" then
-				for color, replace in pairs(preserveColors) do
-					if type(replace) == "string" then
-						newIdentity[k] = string.gsub(v, color.."%b=;", color.."="..replace..";")
-					end
-				end
-			end
-		end
+	if not (force or speciesIdentites[newIdentity.species]) then
+		-- for k, v in pairs(newIdentity) do
+		-- 	if type(v) == "string" and v:find("replace;") then
+		-- 		local newString = v:lower()
+		-- 		if not newString:sub(-1) == ";" then
+		-- 			newString = newString..";"
+		-- 		end
+		-- 		for color, replace in pairs(preserveColors) do
+		-- 			newString = newString:gsub(color .. "%b=;", color .. "=" .. replace .. ";")
+		-- 		end
+		-- 		newIdentity[k] = newString
+		-- 	end
+		-- end
 	end
 
 	if (not speciesIdentites[newIdentity.species]) and not speciesFile.noUnlock then
