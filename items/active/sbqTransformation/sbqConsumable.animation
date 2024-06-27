@@ -1,34 +1,8 @@
 {
-	"globalTagDefaults" : {
-		"consumable" : "sbqConsumable.png"
-	},
-	"animatedParts": {
-		"parts": {
-			"consumable": {
-				"properties": {
-					"centered": true,
-					"offset": [
-						-0.125,
-						0.125
-					],
-					"transformationGroups": [
-						"consumable"
-					],
-					"image": "<consumable>"
-				}
-			}
-		}
-	},
-	"transformationGroups": {
-		"consumable": {}
-	},
+
 	"sounds": {
 		"swallow": [
 			"/sfx/objects/gulp.ogg"
-		],
-		"activate": [
-			"/sfx/tech/mech_activate4.ogg"
-		],
-		"error" : ["/sfx/interface/clickon_error.ogg"]
+		]
 	}
 }

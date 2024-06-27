@@ -20,6 +20,7 @@ function build(directory, config, parameters, level, seed)
 				config.shortdescription = strings.mysteryPotionName
 				config.description = strings.mysteryPotionDesc
 			elseif sbq.config.transformationBlacklist[config.identity.species] then
+				speciesFile = root.speciesConfig(config.identity.species)
 				config.shortdescription = sb.replaceTags(strings.invalidPotionName, { species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration) })
 				config.description = sb.replaceTags(strings.invalidPotionDesc, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
 				config.inventoryIcon = "/interface/xhover.png"
@@ -29,8 +30,8 @@ function build(directory, config, parameters, level, seed)
 			else
 				speciesFile = root.speciesConfig(config.identity.species)
 				if speciesFile then
-					config.shortdescription = sb.replaceTags(strings.speciesPotionName, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
-					config.description = sb.replaceTags(strings.speciesPotionDesc, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
+					config.shortdescription = sb.replaceTags(speciesFile.potionShortDesc or strings.speciesPotionName, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
+					config.description = sb.replaceTags(speciesFile.potionDesc or strings.speciesPotionDesc, {species = speciesFile.charCreationTooltip.title, duration = tostring(config.duration)})
 					config.inventoryIcon = (speciesFile.potionImagePath or "") .. "potion.png"
 					config.largeImage = (speciesFile.potionImagePath or "") .. "potionLarge.png"
 					if speciesFile.baseColorMap then
