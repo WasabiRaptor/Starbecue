@@ -201,6 +201,8 @@ function sbq.doTransformation(newIdentity, duration, ...)
 
 	if duration and (not sbq.settings.indefiniteTF) then
 		status.addEphemeralEffect("sbqTransformed", (duration or sbq.config.defaultTFDuration) * 60)
+	else
+		world.sendEntityMessage(entity.id(), "sbqClearTransformed")
 	end
 	if sbq.settings.permanentTF then
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
