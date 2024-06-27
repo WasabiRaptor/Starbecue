@@ -290,8 +290,8 @@
 					"bodyState": {
 						"idle": { "properties": { "image": "<bodyImagePath>legs/legs_fg.png:<personalityIdle>", "zLevel":1 } },
 						"duck": { "properties": { "image": "<bodyImagePath>legs/legs_fg.png:<bodyStateAnim>.<bodyStateFrame>" } },
-						"sit" : "duck",
-						"lay" : "duck",
+						"sit" : "idle",
+						"lay" : "idle",
 						"walk" : "duck",
 						"run" : "duck",
 						"jump" : "duck",
