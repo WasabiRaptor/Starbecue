@@ -1,8 +1,6 @@
 if not _ENV.metagui.inputData.sbq then sb.logInfo("failed to get settings data") return pane.dismiss() end
 
 local prefTemplate = root.assetJson("/interface/scripted/sbq/settings/prefTemplate.config")
-local collapseLocationsOpen = player.getProperty("sbqCollapseLocationsOpen") or {}
-
 function init()
 	if _ENV.mainSettingsPanel then
 		_ENV.mainSettingsPanel:clearChildren()
@@ -20,8 +18,7 @@ function init()
 		end
 		_ENV.mainSettingsPanel:addChild({type = "layout", mode = "vertical", children = mainSettings})
 	end
-	if _ENV.locationSettingsPanel then
-		_ENV.locationSettingsPanel:clearChildren()
+	if _ENV.locationTabField then
 		local locationSettings = {}
 		for _, name in ipairs(sbq.voreConfig.locationOrder or sbq.gui.locationOrder) do
 			sbq.setupLocation(name, locationSettings)
@@ -32,16 +29,8 @@ function init()
 				sbq.setupLocation(name, locationSettings)
 			end
 		end
-		_ENV.locationSettingsPanel:addChild({ type = "layout", mode = "vertical", children = locationSettings })
-		for name, location in pairs(sbq.locations) do
-			local collapseButton = _ENV[name .. "CollapseButton"]
-			local collapseLayout = _ENV[name .. "CollapseLayout"]
-			if collapseButton and collapseLayout then
-				function collapseButton:onClick()
-					collapseLayout:setVisible(self.checked)
-					collapseLocationsOpen[name] = self.checked
-				end
-			end
+		for _, v in ipairs(locationSettings) do
+			_ENV.locationTabField:newTab(v)
 		end
 	end
 
@@ -89,48 +78,34 @@ function sbq.setupLocation(name, list)
 	local location = sbq.locations[name]
 	if (not location) or locationSetup[name] then return end
 	locationSetup[name] = true
-
-	local locationPanel = {
-		id = name.."LocationPanel",
-		type = "panel",
-		style = "convex",
+	local tabContents = {
+		{ mode = "v" },
+		{ align = "center",type = "label",text = location.name or (":"..name) }
+	}
+	local locationTab = {
+		id = name,
+		title = location.name or (":"..name),
 		visible = sbq.tableMatches(location.activeSettings, sbq.settings, true),
-		expandMode = { 1, 0 },
-		children = {
-			{
-				{
-					type = "sbqCheckBox",
-					id = name .. "CollapseButton",
-					icon = {
-						"/interface/scripted/sbq/collapseButton.png",
-						"/interface/scripted/sbq/collapseButtonOpen.png"
-					},
-					checked = collapseLocationsOpen[name]
-				},
-				{
-					align = "center",
-					type = "label",
-					text = location.name or (":"..name)
-				}
-			},
-			{ type = "panel", style = "flat", children = {
-				{ type = "layout", id = name .. "CollapseLayout", mode = "vertical", visible = collapseLocationsOpen[name] or false, children = {
-				}}
-			}}
+		color = "ff00ff",
+		contents = {
+            { type = "scrollArea", scrollDirections = { 0, 1 }, children = {
+                { type = "panel", style = "convex", expandMode = { 2, 2 }, children = tabContents },
+            }}
 		}
 	}
+
 	for _, k in ipairs(location.settingsOrder or sbq.voreConfig.locationSettingsOrder or sbq.gui.locationSettingsOrder) do
 		if type(k) == "string" then
-			sbq.setupSetting(locationPanel.children[2].children[1].children, k, "locations", name)
+			sbq.setupSetting(tabContents, k, "locations", name)
 		end
 	end
 	if player.isAdmin() and sbq.debug then
-		table.insert(locationPanel.children[2].children[1].children, {type = "label", text = ":unordered", inline = true})
+		table.insert(tabContents, {type = "label", text = ":unordered", inline = true})
 		for k, v in pairs(sbq.config.groupedSettings.locations.defaultSettings) do
-			sbq.setupSetting(locationPanel.children[2].children[1].children, k, "locations", name)
+			sbq.setupSetting(tabContents, k, "locations", name)
 		end
 	end
-	table.insert(list, locationPanel)
+	table.insert(list, locationTab)
 end
 
 function sbq.setupSetting(parent, setting, group, name)
@@ -186,7 +161,7 @@ function sbq.refreshSettingVisibility()
 		end
 	end
 	for name, location in pairs(sbq.locations) do
-		local widget = _ENV[name .. "LocationPanel"]
+		local widget = ((_ENV.locationTabField or {}).tabs or {})[name]
 		if widget then
 			widget:setVisible(sbq.tableMatches(location.activeSettings, sbq.settings, true))
 		end

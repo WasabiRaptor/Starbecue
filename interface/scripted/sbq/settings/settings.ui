@@ -13,14 +13,11 @@
 				{"mode":"horizontal"},
 				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
 					{"type":"panel","style":"convex", "id":"mainSettingsPanel" ,"children":[
-						{"mode":"vertical"},
+						{"mode":"vertical"}
 					]}
 				]},
-				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
-					{"type":"panel","style":"flat", "id":"locationSettingsPanel" ,"children":[
-						{"mode":"vertical"},
-					]}
-				]}
+				{ "type" : "tabField", "id" : "locationTabField", "layout" : "horizontal", "tabs" : []}
+
 			]}
 		], "bottomBar" : []}
 	]
