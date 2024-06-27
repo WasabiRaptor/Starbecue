@@ -227,7 +227,7 @@ One can also create their own OC for the mod using this template [here](https://
 # Being a Pred
 
 To be a pred, one must have opted in to being pred for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
-Eg: If you select Oral Vore pred, but don't require consent, you're allowing prey characters to attempt to force their way inside you. If consent is enabled, then you will recieve a prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
+Eg: If you select **Oral Vore** pred, but don't require consent, you're allowing prey characters to attempt to force their way inside you. If consent is enabled, then you will recieve a prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
 
 To perform predator actions, one requires a **SBQ Controller** these can be crafted for a single pixel. Open the action wheel and assign an action, available actions are determined by what settings you have enabled, as well as what species you are.
 
@@ -235,10 +235,12 @@ The action wheel will also let you release any prey you have eaten, or select a 
 
 In the bottom right you will have a HUD to show you the health of your current occupants, as well as the progress bar for any extra effects they are currently being subject to. This HUD will also allow you to quickly change the current digest effect for the selected location, as well as select prey to perform actions on them.
 
+The big red "Lock Down" button will put you into "Lock Down" mode, which nullifies your base passive energy regen, but will prevent any prey from escaping until you run out. If you're in this mode you'll have it indicated with your status effects.
+
 # Being Prey
 
 To be prey, one must have opted in to being prey for the relevant vore type. One can also choose whether other characters must ask consent for the relevant actions.
-Eg: if you select Oral Vore prey, but don't require consent, you're allowing pred characters to attempt to eat you without asking. If consent is enabled, you will recieve a prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
+Eg: if you select **Oral Vore** prey, but don't require consent, you're allowing pred characters to attempt to eat you without asking. If consent is enabled, you will recieve a prompt to confirm or deny requests, but you will still be able to attempt the action yourself freely.
 
 When you've been eaten a HUD will open up in the bottom right, indicating the directions one can press to cause a struggle animation. The color of the indicator arrow hints at what struggling in that direction might do for you.
 
@@ -254,6 +256,22 @@ Holding **Shift** will prevent any actions from occuring from your struggles, on
 > Might let you move to another location within the predator's body.
 - Yellow
 > Might get the pred to perform some sort of action on you.
+- (Locked)
+> Pred is in "Lock Down" mode, you won't be able to escape until they've exhausted too much energy from your struggling.
+
+If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, there is an Instant Escape Combo. To perform it, hold **Left**+**Right** then press **Jump**.
+
+# Transformation
+
+After being transformed into enough different species, you will unlock the **Shapeshifter** tech, which can then be used to freely transform into any species you have been before. A quick way to unlock this would be to buy several mysterious potions from the shop, or spawn in Predator Tenants of various species and get them to transform you.
+
+If the settings aren't enabled for it, most potions are temporary and you will usually return to your original species within 5-10 minutes depending on the transformation method, if even then you haven't turned back, simply get a **Reversion Potion** from the shop.\nDo note that if you have permanent TF enabled, any transformation will set in 'permanently' and cause it to be the new species you 'revert' back to.
+
+Transformations via the **Shapeshifter** tech are always treated as indefinite, even without the setting enabled.\nThe tech can also be used to customize your appearance as each individual species, you can even change which name you use as that species! This is quite useful for RP purposes to 'change character' without having to have seperate character saves to play as.
+
+TF as a result of clone potions overrides your specific customization and changes your name, this is only temporary! If it happens to be the first time you TF into that species, it will end up being saved, otherwise it will never replace your saved customization so don't worry about playing around with them!
+
+In any case where your name is changed while in active gameplay, while it is saved in character data, one cannot change the client connection name on a server without disconnecting and re-connecting, so instead we simply have it pretend you used the '/nick' command to change your server nickname.
 
 # Support Us!
 
