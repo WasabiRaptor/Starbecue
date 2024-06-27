@@ -320,7 +320,10 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"itemHidden": false,
+							"transformationGroups": ["frontarmrotation"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
@@ -354,7 +357,10 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"itemHidden": false,
+							"transformationGroups": ["backarmrotation"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }

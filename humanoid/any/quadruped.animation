@@ -680,7 +680,6 @@
 						"rotation": { "properties": {
 							"zLevel" : 6,
 							"itemHidden": false,
-							"anchorPart": "head",
 							"transformationGroups": ["frontarmrotation"],
 							"image": "<bodyImagePath>legs/frontarm.png:<frontarmRotationFrame>"
 						} },
@@ -691,7 +690,11 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"zLevel" : 6,
+							"itemHidden": false,
+							"transformationGroups": ["frontarmrotation"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
@@ -729,7 +732,6 @@
 					"backarmRotationState" : {
 						"rotation": { "properties": {
 							"itemHidden": false,
-							"anchorPart": "head",
 							"transformationGroups": ["backarmrotation"],
 							"image": "<bodyImagePath>legs/backarm.png:<backarmRotationFrame>"
 						} },
@@ -740,7 +742,10 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"itemHidden": false,
+							"transformationGroups": ["backarmrotation"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }

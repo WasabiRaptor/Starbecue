@@ -527,7 +527,12 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"zLevel" : 6,
+							"itemHidden": false,
+							"anchorPart": "anchor",
+							"transformationGroups": ["frontarmrotation","movementOffset"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
@@ -573,7 +578,11 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"itemHidden": false,
+							"anchorPart": "anchor",
+							"transformationGroups": ["backarmrotation","movementOffset"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }

@@ -1045,7 +1045,12 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"zLevel" : 6,
+							"itemHidden": false,
+							"anchorPart": "body",
+							"transformationGroups": ["frontarmrotation"]
+						}}
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
@@ -1094,7 +1099,11 @@
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
-						"none": { "properties": {} }
+						"none": { "properties": {
+							"itemHidden": false,
+							"anchorPart": "body",
+							"transformationGroups": ["backarmrotation"]
+						} }
 					},
 					"hiddenState" : {
 						"none": { "properties": {} }
