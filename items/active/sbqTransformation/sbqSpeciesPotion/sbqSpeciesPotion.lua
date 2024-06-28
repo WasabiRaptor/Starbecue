@@ -1,4 +1,6 @@
+sbq = {}
 function init()
+	sbq.config = root.assetJson("/sbq.config")
 	activeItem.setArmAngle(-math.pi/4)
 	animator.rotateTransformationGroup("potion", math.pi/4)
 end
