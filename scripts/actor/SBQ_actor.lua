@@ -81,7 +81,7 @@ function sbq.actorMessages()
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
-			sbq.timer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
+			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..action..".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
@@ -92,7 +92,7 @@ function sbq.actorMessages()
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
-			sbq.timer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
+			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
 				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action..".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
@@ -141,7 +141,7 @@ end
 
 local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
-	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) then
+	if sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and not sbq.timerRunning("dialogueAfter") then
 		if dialogueProcessor.getDialogue(".struggling", sbq.loungingIn()) then
 			dialogueProcessor.speakDialogue()
 		end

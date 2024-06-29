@@ -1619,7 +1619,7 @@ function _Occupant:attemptStruggle(control)
 	if locationDirection == direction then
 		bonusTime = bonusTime + maybeBonus
 	end
-	if dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and sbq.randomTimer("occupantStruggleDialogue", sbq.voreConfig.occupantStruggleDialogueMin or sbq.config.occupantStruggleDialogueMin, sbq.voreConfig.occupantStruggleDialogueMax or sbq.config.occupantStruggleDialogueMax) then
+	if sbq.randomTimer("occupantStruggleDialogue", sbq.voreConfig.occupantStruggleDialogueMin or sbq.config.occupantStruggleDialogueMin, sbq.voreConfig.occupantStruggleDialogueMax or sbq.config.occupantStruggleDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and not sbq.timerRunning("dialogueAfter") then
 		if dialogueProcessor.getDialogue(".occupantStruggle", self.entityId) then
 			dialogueProcessor.speakDialogue()
 		end
