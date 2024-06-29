@@ -140,7 +140,8 @@ function sbq.tenant_setNpcType(npcType)
 				initialStorage = preservedStorage(),
 				uniqueId = uuid,
 				sbqOverrideUniqueId = uuid
-			}
+			},
+			scale = mcontroller.scale()
 		},
 		storage = storage
 	}
