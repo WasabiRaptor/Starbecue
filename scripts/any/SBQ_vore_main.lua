@@ -1464,17 +1464,19 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	local location = self:getLocation()
 
 	if force or (name and (self.location ~= name)) or (subLocation and (self.subLocation ~= subLocation)) then
-		location:markSizeDirty()
-		for i, occupant in ipairs(location.occupancy.list) do
-			if occupant.entityId == self.entityId then
-				table.remove(location.occupancy.list, i)
-				break
+		if location then
+			location:markSizeDirty()
+			for i, occupant in ipairs(location.occupancy.list) do
+				if occupant.entityId == self.entityId then
+					table.remove(location.occupancy.list, i)
+					break
+				end
 			end
 		end
 		self.location = name
 		self.subLocation = subLocation
 		location = self:getLocation()
-
+		if not location then self:remove() end
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
 	end
