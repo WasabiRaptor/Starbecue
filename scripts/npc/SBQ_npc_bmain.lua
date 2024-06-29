@@ -16,6 +16,7 @@ require"/scripts/humanoid/SBQ_humanoid.lua"
 require"/scripts/any/SBQ_RPC_handling.lua"
 
 local convertBackType
+local convert
 function init()
 	old.init()
 
@@ -24,7 +25,6 @@ function init()
 	sbq.actorInit()
 	sbq.humanoidInit()
 	sbq.actorMessages()
-	sbq.setupPublicSettings()
 
 	sbq.say = npc.say
 	sbq.sayPortrait = npc.sayPortrait
@@ -71,15 +71,19 @@ function init()
 			return
 		end
 		if tenant then
+			convert = (math.random(8) == 8)
 			sbq.timer("maybeConvert", 0.1, function()
 				if sbq.parentEntity() or entity.uniqueId() then return end
 				convertBackType = npc.npcType()
 				local convertType = config.getParameter("sbqConvertType")
-				if convertType and (math.random(8) == 8) then
+				if convertType and convert then
 					sbq.tenant_setNpcType(convertType)
 				end
 			end)
 		end
+	end
+	if not convert then
+		sbq.setupPublicSettings()
 	end
 end
 

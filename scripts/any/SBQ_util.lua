@@ -79,6 +79,9 @@ function sbq.setupSettingMetatables(entityType)
 	for _, overrides in pairs(sbq.infuseOverrideSettings or {}) do
 		sbq.settings = sb.jsonMerge(sbq.settings, overrides or {})
 	end
+	if entityType == "player" then
+		sbq.settings.speciesTF = nil
+	end
 
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(
