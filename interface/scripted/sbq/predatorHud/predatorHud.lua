@@ -13,6 +13,10 @@ function init()
 	end)
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
 		Occupants.list = occupants
+		Occupants.entityId = {}
+		for _, occupant in ipairs(Occupants.list) do
+			Occupants.entityId[occupant.entityId] = occupant
+		end
 		for k, v in pairs(settingsData) do
 			sbq[k] = v
 		end
@@ -32,6 +36,7 @@ function init()
 	end)
 	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
 		if not world.entityExists(entityId) then return end
+		if not Occupants.entityId[entityId] then return end
 		local portrait = _ENV[entityId .. "PortraitCanvas"]
 		if portrait then
 			local pos = { 0, 0 }
@@ -51,6 +56,10 @@ function init()
 	end)
 
 	Occupants.list = _ENV.metagui.inputData.occupants
+	Occupants.entityId = {}
+	for _, occupant in ipairs(Occupants.list) do
+		Occupants.entityId[occupant.entityId] = occupant
+	end
 	sbq.refreshOccupants()
 	sbq.changeLocation(1)
 end
