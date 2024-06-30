@@ -1341,6 +1341,8 @@ function _Occupant:remove()
 	if self.flags.infused then
 		location.infusedEntity = nil
 		sbq.settings.infuseSlots[self.flags.infuseType].item = nil
+		sbq.infuseOverrideSettings[self.flags.infuseType] = nil
+		SpeciesScript:refreshInfusion(self.flags.infuseType)
 	end
 
 	if self.subLocation then
