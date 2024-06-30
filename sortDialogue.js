@@ -8,8 +8,9 @@ let dupes = {}
 let dialogueTreeFile = fs.readFileSync(argv[2], { encoding: "utf-8" });
 let dialogueFile = fs.readFileSync(argv[3], { encoding: "utf-8" });
 let secondaryDialogue = {}
+let secondaryDialogueFile = "/"
 if (argv[4]) {
-	let secondaryDialogueFile = fs.readFileSync(argv[4], { encoding: "utf-8" });
+	secondaryDialogueFile = fs.readFileSync(argv[4], { encoding: "utf-8" });
 	secondaryDialogue = JSONC.parse(secondaryDialogueFile);
 }
 
@@ -67,7 +68,7 @@ function checkRepoint(input) {
 					}
 				}
 				console.log("found duplicates! " + key2)
-				JSONC.assign(input, JSONC.parse(`{\n "${key2}": ":${key}" // duplicated lines\n }`));
+				JSONC.assign(input, {[key2]:":"+key});
 			}
 		}
 		for (let [key2, child2] of Object.entries(secondaryDialogue)) {
@@ -77,16 +78,12 @@ function checkRepoint(input) {
 						continue;
 					}
 				}
-				JSONC.assign(input, JSONC.parse(`{\n "${key}": "/npcs/sbq/dialogue/default.dialogue:${key2}" // external lines\n }`));
+				JSONC.assign(input, {[key]: secondaryDialogueFile+":"+key2})
 				break;
 			}
 		}
 		if (typeof child == "string") {
-			if ((child.substring(0, 1) == ":")) {
-				JSONC.assign(input, JSONC.parse(`{\n "${key}": "${child}" // duplicated lines\n }`));
-			} else if ((child.substring(0, 1) == "/")) {
-				JSONC.assign(input, JSONC.parse(`{\n "${key}": "${child}" // external lines\n }`));
-			}
+			JSONC.assign(input, {[key]:child});
 		}
 	}
 }
@@ -106,13 +103,13 @@ function checkDialogue(input) {
 					if ((typeof dialogue[key] == "undefined") | (dialogue[key] == "Missing: " + key + " " + "<dialoguePath>")) {
 						delete dialogue[key]
 						if (argv[4] && secondaryDialogue[key]) {
-							JSONC.assign(out, JSONC.parse(`{\n "${key}": "/npcs/sbq/dialogue/default.dialogue:${key}" // external lines\n }`));
+							JSONC.assign(input, {[key]: secondaryDialogueFile+":"+key})
 						} else JSONC.assign(out, { [key]: "Missing: " + key + " " + "<dialoguePath>" });
 					} else {
 						let data = dialogue[key]
 						delete dialogue[key]
-						JSONC.assign(out, { [key]: data })
 						JSONC.assign(out, checkDialogue(data));
+						JSONC.assign(out, { [key]: data })
 					}
 				}
 			}
