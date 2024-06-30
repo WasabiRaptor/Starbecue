@@ -88,9 +88,9 @@ function sbq.setupLocation(name, list)
 		visible = sbq.tableMatches(location.activeSettings, sbq.settings, true),
 		color = "ff00ff",
 		contents = {
-            { type = "scrollArea", scrollDirections = { 0, 1 }, children = {
-                { type = "panel", style = "convex", expandMode = { 2, 2 }, children = tabContents },
-            }}
+			{ type = "scrollArea", scrollDirections = { 0, 1 }, children = {
+				{ type = "panel", style = "convex", expandMode = { 2, 2 }, children = tabContents },
+			}}
 		}
 	}
 
@@ -360,7 +360,8 @@ function sbq.widgetScripts.makeInfuseSlots(param)
 				setting = "item",
 				groupName = param.setting,
 				groupKey = infuseType,
-				script = "changeSetting"
+				script = "changeSetting",
+				acceptScript = "infuseSlotAccepts"
 			}
 			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(slot)] = { slot.setting, slot.groupName, slot.groupKey }
 			table.insert(infuseSlots, slot)
@@ -373,8 +374,12 @@ end
 
 function sbq.widgetScripts.infuseSlotAccepts(w, item)
 	if w.locked then return false end
-	if not item then return true end
-	return sb.jsonQuery(item, string.format("parameters.npcArgs.npcParam.scriptConfig.sbqSettings.%s.%s.prey", w.groupName, w.groupKey)) or false
+    if not item then return true end
+	local path = ("parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infusePrefs.%s.prey"):format(w.groupKey)
+	if sb.jsonQuery(item, path) then return true end
+	pane.playSound("/sfx/interface/clickon_error.ogg")
+	player.queueUIMessage(sbq.getString(":action_targetSettingsMismatch"))
+	return false
 end
 
 function sbq.widgetScripts.changeScale(value)
@@ -410,7 +415,7 @@ function sbq.widgetScripts.infusedVisible(setting, group, name)
 end
 
 function sbq.widgetScripts.makeRecentlyDigested(param)
-	if not sbq.settings.recentlyDigested[1] then return false end
+	if not storage.sbqSettings.recentlyDigested[1] then return false end
 	local slots = {}
 	local layout = {
 		type = "panel",
@@ -419,15 +424,11 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, { type = "sbqItemGrid", autoInteract = true, slots = slots} },
 		makeLabel = false
 	}
-	for _, item in ipairs(sbq.settings.recentlyDigested) do
+	for _, item in ipairs(storage.sbqSettings.recentlyDigested) do
 		local slot = {
 			item = item.name and item,
 		}
 		table.insert(slots, slot)
 	end
 	return sb.jsonMerge(param, layout)
-end
-
-function uninit()
-	player.setProperty("sbqCollapseLocationsOpen", collapseLocationsOpen)
 end

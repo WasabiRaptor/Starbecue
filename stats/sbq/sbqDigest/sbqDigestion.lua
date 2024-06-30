@@ -7,7 +7,6 @@ function init()
 
 	self.cdamage = 0
 	self.digested = false
-	self.dropItem = false
 	self.turboDigest = 0
 	self.send = config.getParameter("send")
 	self.sendMultiplier = config.getParameter("sendMultiplier")
@@ -18,12 +17,6 @@ function init()
 
 	message.setHandler("sbqTurboDigest", function(_,_, amount)
 		self.turboDigest = amount
-	end)
-
-	message.setHandler("sbqDigestResponse", function(_,_, time)
-		effect.modifyDuration((time or self.targetTime)+1)
-		self.targetTime = time or self.targetTime
-		self.dropItem = true
 	end)
 end
 

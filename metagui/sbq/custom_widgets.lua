@@ -768,9 +768,7 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	for _, v in ipairs(rowHeights) do
 		height = height + v
 	end
-	for _, v in ipairs(colWidths) do
-		width = width + v
-	end
+	width = math.max(table.unpack(colWidths)) * #colWidths
 
 	local bm = theme.metrics.borderMargins.contextMenu
 	cfg.size = {width, height}
@@ -1189,6 +1187,7 @@ function widgets.sbqItemSlot:init(base, param)
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 	self.script = param.script
+	self.acceptScript = param.acceptScript
 	if self.setting then
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
 		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
@@ -1201,7 +1200,7 @@ function widgets.sbqItemSlot:init(base, param)
 	end
 	if self.acceptScript then
 		function self:acceptsItem(item)
-			sbq.widgetScripts[self.acceptScript](self, item)
+			return sbq.widgetScripts[self.acceptScript](self, item)
 		end
 	end
 
