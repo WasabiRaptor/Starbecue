@@ -170,7 +170,7 @@ function update( dt )
 	indicator:drawText(
 		sbq.getString(location or ""),
 		{position = {16, 29}, horizontalAnchor = "mid", wrapWidth = 25},
-		8, {127, 127, 127}
+		6, {127, 127, 127}
 	)
 	if world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", {45.5,16}, 1)
