@@ -106,7 +106,7 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	if not location then return false, "invalidLocation" end
 	local size = (occupant.size * occupant.sizeMultiplier)
 	throughput = throughput or action.throughput
-	if throughput or action.throughput then
+	if throughput and not location.settings.hammerspace then
 		if size > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	local space, subLocation = location:hasSpace(size)
@@ -143,9 +143,6 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 		local loungeAnchor = world.entityCurrentLounge(target)
 		if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 		size = sbq.getEntitySize(target)
-		if throughput or action.throughput then
-			if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
-		end
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
@@ -161,6 +158,10 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 		end
 	end
 	if not target then return true end
+	throughput = throughput or action.throughput
+	if throughput and not location.settings.hammerspace then
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
+	end
 
 	local space, subLocation = location:hasSpace(size)
 	if space then
@@ -180,9 +181,6 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 	local loungeAnchor = world.entityCurrentLounge(target)
 	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
-	if throughput or action.throughput then
-		if (size) >= ( throughput or action.throughput * sbq.scale()) then return false, "tooBig" end
-	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
@@ -196,6 +194,11 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 			end
 		end
 	end
+	throughput = throughput or action.throughput
+	if throughput and not location.settings.hammerspace then
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
+	end
+
 	self:trySendDeeper(name, action, nil, nil, locationName, subLocationName)
 
 	local space, subLocation = location:hasSpace(size)
@@ -229,8 +232,9 @@ function default:tryLetout(name, action, target, throughput, ...)
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false end
-	if throughput or action.throughput then
-		if (occupant.size * occupant.sizeMultiplier) >= ((throughput or action.throughput) * sbq.scale()) then return false end
+	throughput = throughput or action.throughput
+	if throughput and not occupant.locationSettings.hammerspace then
+		if (occupant.size * occupant.sizeMultiplier) > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	if occupant.flags.digested or occupant.flags.infused then return false end
 	occupant.flags.releasing = true
