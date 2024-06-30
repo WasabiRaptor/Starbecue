@@ -113,6 +113,7 @@ function sbq.clickAction()
 	end
 	if (not result[1]) and (result[2] ~= "targetMissing") then
 		animator.playSound("error")
+		player.queueUIMessage(sbq.getString(":action_"..tostring(result[2])))
 	end
 	return table.unpack(result)
 end
@@ -272,13 +273,11 @@ function SelectedOccupantMenu:init(entityId)
 	local options = {}
 	player.setScriptContext("starbecue")
 	for _, action in ipairs(player.callScript("sbq.actionList", "predRadialMenuSelect", entityId) or {}) do
-		local icon, shortdescription, description = sbq.getActionData(action.action, action.available, storage.iconDirectory, true)
 		table.insert(options, {
-			name = shortdescription,
+			name = sbq.getString(action.name or (":" .. action.action)),
 			args = { action.action, entityId, table.unpack(action.args or {}) },
 			locked = not action.available,
-			icon = icon,
-			description = description,
+			description = sbq.getString(action.description or (":" .. action.action.."Desc")),
 			script = "sbq.tryAction"
 		})
 	end

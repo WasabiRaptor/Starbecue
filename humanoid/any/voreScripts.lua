@@ -645,3 +645,16 @@ function default:lockDownClear(name, action, target)
 	end
 	sbq.clearStatModifiers("sbqLockDown")
 end
+
+function default:releaseOccupantAvailable(name, action, target)
+	if Occupants.list[1] then return true end
+end
+
+function default:releaseOccupant(name, action, target)
+	local occupant = Occupants.list[1]
+	if not occupant then return false end
+	if occupant.flags.digested or occupant.flags.infused then
+		return SpeciesScript:queueAction("reform", occupant.entityId)
+	end
+	return SpeciesScript:tryAction("letout", occupant.entityId)
+end
