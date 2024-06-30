@@ -95,10 +95,12 @@ function sbq.clickAction()
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
-	local bounds = rect.pad(mcontroller.collisionBoundBox(), sbq.config.actionRange * mcontroller.scale())
+	local bounds = mcontroller.collisionBoundBox()
+	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
 	local result
 	for i, targetId in ipairs(entityaimed) do
-		if entity.entityInSight(targetId) and (rect.intersects(bounds, world.entityCollisionBoundBox(targetId))) then
+		local targetBounds = world.entityCollisionBoundBox(targetId)
+		if rect.intersects(bounds, targetBounds) or ((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds))) then
 			if sbq.isLoungeDismountable(targetId) then
 				result = {sbq.attemptAction(targetId)}
 				break
