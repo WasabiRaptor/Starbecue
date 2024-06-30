@@ -164,7 +164,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	end
 
 	local space, subLocation = location:hasSpace(size)
-	if space then
+	if space or (action.flags and action.flags.infusing) then
 		if (#Occupants.list + 1) <= sbq.config.seatCount then
 			return true
 		else
