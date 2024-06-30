@@ -185,7 +185,10 @@ function sbq.refreshPortrait(entityId)
 	if not canvasWidget then return end
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 	canvas:clear()
-	canvas:drawDrawables(world.entityPortrait(entityId, "bust"), vec2.sub(vec2.div(canvasWidget.size, 2), {0,6}))
+	local portrait = world.entityPortrait(entityId, "bust")
+	if portrait then
+		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), {0,6}))
+	end
 end
 
 sbq.locationIndex = 0
