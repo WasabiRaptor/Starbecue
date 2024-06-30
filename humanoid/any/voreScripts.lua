@@ -231,12 +231,12 @@ end
 function default:tryLetout(name, action, target, throughput, ...)
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	throughput = throughput or action.throughput
 	if throughput and not occupant.locationSettings.hammerspace then
 		if (occupant.size * occupant.sizeMultiplier) > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
-	if occupant.flags.digested or occupant.flags.infused then return false end
+	if occupant.flags.digested or occupant.flags.infused then return false, "invalidAction" end
 	occupant.flags.releasing = true
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
@@ -296,7 +296,7 @@ end
 
 function default:grab(name, action, target, ...)
 	local location = SpeciesScript:getLocation(action.location)
-	if not location then return false end
+	if not location then return false, "invalidLocation" end
 	local occupant = location.occupancy.list[1]
 	if occupant then
 		return SpeciesScript:tryAction("grabRelease", occupant.entityId)
@@ -316,7 +316,7 @@ function default:grabRelease(name, action, target, ...)
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then
 		local location = SpeciesScript:getLocation(action.location)
-		if not location then return false end
+		if not location then return false, "invalidLocation" end
 		occupant = location.occupancy.list[1]
 	end
 	if occupant then
@@ -325,13 +325,13 @@ function default:grabRelease(name, action, target, ...)
 		world.sendEntityMessage(entity.id(), "sbqControllerRotation", false)
 		return true
 	else
-		return false
+		return false, "missingOccupant"
 	end
 end
 
 function default:turboDigestAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.digest) and (not location.mainEffect.softDigest)) then return false, "invalidAction" end
@@ -339,7 +339,7 @@ function default:turboDigestAvailable(name, action, target, ...)
 	return true
 end
 function default:turboDigest(name, action, target, ...)
-	if not self:turboDigestAvailable(name, action, target, ...) then return false end
+	if not self:turboDigestAvailable(name, action, target, ...) then return false, "invalidAction" end
 	local occupant = Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboDigest", sbq.resource("energy"))
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
@@ -355,7 +355,7 @@ function default:turboHealAvailable(name, action, target, ...)
 	return true
 end
 function default:turboHeal(name, action, target, ...)
-	if not self:turboHealAvailable(name, action, target, ...) then return false end
+	if not self:turboHealAvailable(name, action, target, ...) then return false, "invalidAction" end
 	local occupant = Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboHeal", sbq.resource("energy"))
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
@@ -363,7 +363,7 @@ end
 
 function default:digested(name, action, target, item, digestType, drop, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	occupant.flags.digested = true
 	occupant.flags.digestedLocation = occupant.location
@@ -397,7 +397,7 @@ end
 
 function default:fatalAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
 	if occupant:statPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
@@ -405,7 +405,7 @@ function default:fatalAvailable(name, action, target, ...)
 end
 function default:fatal(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
 	if occupant:statPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
@@ -425,14 +425,14 @@ function default:mainEffectAvailable(name, action, target)
 end
 function default:setMainEffect(name, action, target)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	occupant.locationSettings.mainEffect = action.mainEffect or name
 	occupant:refreshLocation()
 end
 
 function default:reform(name, action, target,...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	if occupant:resourcePercentage("health") < 1 then
 		occupant.locationSettings.reformDigested = true
 		occupant:refreshLocation()
@@ -443,7 +443,7 @@ function default:reform(name, action, target,...)
 end
 function default:reformed(name, action, target,...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
 		location.infusedEntity = nil
@@ -464,12 +464,12 @@ end
 
 function default:turboReformAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	if not (occupant.locationSettings.reformDigested or occupant.flags.infused) then return false, "invalidAction" end
 	return true
 end
 function default:turboReform(name, action, target, ...)
-	if not self:turboReformAvailable(name, action, target, ...) then return false end
+	if not self:turboReformAvailable(name, action, target, ...) then return false, "invalidAction" end
 	local occupant = Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboHeal", sbq.resource("energy"))
 	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
@@ -479,7 +479,7 @@ end
 function default:chooseLocation(name, action, target, predSelect, ...)
 	local locations = {}
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	for _, locationName in ipairs(action.locationOrder or sbq.voreConfig.locationOrder or root.assetJson("/sbqGui.config:locationOrder")) do
 		local location = SpeciesScript:getLocation(locationName)
 		if location and sbq.tableMatches(location.activeSettings, sbq.settings, true) then
@@ -497,7 +497,7 @@ end
 
 function default:transformAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local transformResult = sb.jsonMerge({species = humanoid.species()}, action.transformResult or {}, location.transformResult or {}, sbq.voreConfig.transformResult or {})
 	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or sbq.config.defaultVoreTFDuration
@@ -511,7 +511,7 @@ function default:transformAvailable(name, action, target, ...)
 end
 function default:transform(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local transformResult = sb.jsonMerge({species = humanoid.species()}, action.transformResult or {}, location.transformResult or {}, sbq.voreConfig.transformResult or {})
 	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
@@ -531,7 +531,7 @@ function default:transform(name, action, target, ...)
 end
 function default:transformed(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local transformResult = sb.jsonMerge({species = humanoid.species()}, action.transformResult or {}, location.transformResult or {}, sbq.voreConfig.transformResult or {})
 	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
@@ -613,7 +613,7 @@ end
 
 function default:eggify(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false end
+	if not occupant then return false, "missingOccupant" end
 	if not occupant.locationSettings.eggify then
 		occupant.locationSettings.eggify = true
 		occupant:refreshLocation()
@@ -648,11 +648,12 @@ end
 
 function default:releaseOccupantAvailable(name, action, target)
 	if Occupants.list[1] then return true end
+	return false, "invalidAction"
 end
 
 function default:releaseOccupant(name, action, target)
 	local occupant = Occupants.list[1]
-	if not occupant then return false end
+	if not occupant then return false, "invalidAction" end
 	if occupant.flags.digested or occupant.flags.infused then
 		return SpeciesScript:queueAction("reform", occupant.entityId)
 	end
