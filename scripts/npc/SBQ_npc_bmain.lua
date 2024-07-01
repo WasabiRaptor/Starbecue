@@ -73,7 +73,10 @@ function init()
 		if tenant then
 			convert = (math.random(8) == 8)
 			sbq.timer("maybeConvert", 0.1, function()
-				if sbq.parentEntity() or entity.uniqueId() then return end
+				if sbq.parentEntity() or entity.uniqueId() then
+					sbq.setupPublicSettings()
+					return
+				end
 				convertBackType = npc.npcType()
 				local convertType = config.getParameter("sbqConvertType")
 				if convertType and convert then
