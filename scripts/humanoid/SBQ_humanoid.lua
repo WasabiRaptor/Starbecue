@@ -27,6 +27,7 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcLevel = npc.level()
 			item.parameters.npcArgs.npcSeed = npc.seed()
 			item.parameters.tooltipFields.subtitle = npc.npcType()
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage = preservedStorage()
 		elseif entityType == "player" then
 			item.parameters.rarity = "legendary"
 			item.parameters.npcArgs.npcType = "generictenant"
@@ -39,7 +40,8 @@ function sbq.humanoidInit()
 		item.parameters.npcArgs.npcSpecies = humanoid.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
 		item.parameters.npcArgs.npcParam.identity = identity
-		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.getSettingsOf.all()
+		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sb.jsonMerge(storage.sbqSettings, sbq.getSettingsOf.prefs())
+		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
 		item.parameters.tooltipFields.collarNameLabel = sbq.createdDate()
 		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")
 		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
