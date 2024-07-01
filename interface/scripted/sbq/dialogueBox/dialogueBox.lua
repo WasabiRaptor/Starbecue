@@ -182,7 +182,10 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		_ENV.nameLabel.width = _ENV.entityPortraitPanel.size[1]
 		local canvas = widget.bindCanvas(_ENV.entityPortraitCanvas.backingWidget)
 		canvas:clear()
-		canvas:drawDrawables(world.entityPortrait(results.source, results.entityPortrait), vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), {0,6*4}), {4,4})
+		local portrait = world.entityPortrait(results.source, results.entityPortrait)
+		if portrait then
+			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), {0,6*4}), {4,4})
+		end
 	else
 		_ENV.imagePortrait:setVisible(false)
 		_ENV.entityPortraitPanel:setVisible(false)
