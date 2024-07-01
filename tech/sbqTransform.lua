@@ -102,7 +102,11 @@ function TopMenu:init()
 		}
 	}
 	speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {[humanoid.species()] = humanoid.getIdentity()}
-	favoriteSpecies = player.getProperty("sbqFavoriteSpecies") or {}
+	favoriteSpecies = _ENV.jarray()
+	for k, v in pairs(player.getProperty("sbqFavoriteSpecies") or {}) do
+		favoriteSpecies[tonumber(k)] = v
+	end
+
 	sortedSpecies = {}
 	for k, v in pairs(speciesIdentites) do
 		if root.speciesConfig(v.species) then
@@ -123,6 +127,9 @@ function TopMenu:init()
 				message = "sbqDoTransformation"
 			})
 		else
+			if species then
+				sb.logWarn(species.." is missing.")
+			end
 			table.insert(options, {
 				locked = true
 			})
