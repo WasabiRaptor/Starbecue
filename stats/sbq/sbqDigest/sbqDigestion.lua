@@ -86,6 +86,6 @@ function onExpire()
 		if entityType == "npc" or entityType == "monster" then
 			world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
 		end
-		status.setResourcePercentage("health", -2)
+		status.modifyResourcePercentage("health", -2)
 	end
 end
