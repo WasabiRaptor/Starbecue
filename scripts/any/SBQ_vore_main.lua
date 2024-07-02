@@ -1442,6 +1442,15 @@ function _Occupant:update(dt)
 
 	if self.flags.infused then
 	elseif self.flags.digested then
+		local oldMultiplier = self.sizeMultiplier
+		local compression = self.locationSettings.compression
+		local compressionMin = location.digestedSize or 0
+		if (compression == "health") then
+			self.sizeMultiplier = math.max( compressionMin, self:resourcePercentage("health"))
+		end
+		if oldMultiplier ~= self.sizeMultiplier then
+			location:markSizeDirty()
+		end
 	elseif not (self.flags.newOccupant or self.flags.releasing) then
 		local oldMultiplier = self.sizeMultiplier
 		local compression = self.locationSettings.compression
