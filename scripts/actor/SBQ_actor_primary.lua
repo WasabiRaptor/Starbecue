@@ -121,8 +121,11 @@ function update(dt)
 		elseif destScale < oldScale then
 			currentScale = math.max(destScale, currentScale)
 		end
+		local bounds = mcontroller.boundBox()
 		mcontroller.setScale(currentScale)
-		if scaleTime >= scaleDuration then
+		local newBounds = mcontroller.boundBox()
+		mcontroller.translate({0,bounds[2]-newBounds[2]})
+		if (scaleTime >= scaleDuration) or (currentScale == destScale) then
 			scaling = false
 		end
 	end
