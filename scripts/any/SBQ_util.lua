@@ -44,9 +44,11 @@ function sbq.refreshUpgrades(upgraded)
 	storage.sbqUpgrades = storage.sbqUpgrades or {}
 	sbq.upgradeScores = {}
 	for k, v in pairs(storage.sbqUpgrades) do
-		sbq.upgradeScores[k] = 0
-		for _, value in pairs(v) do
-			sbq.upgradeScores[k] = sbq.upgradeScores[k] + value
+		if type(v) == "table" then
+			sbq.upgradeScores[k] = 0
+			for _, value in pairs(v) do
+				sbq.upgradeScores[k] = sbq.upgradeScores[k] + value
+			end
 		end
 	end
 	local oldMaxDigest = storage.sbqSettings.maxDigestPower

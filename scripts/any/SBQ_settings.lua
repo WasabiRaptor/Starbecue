@@ -45,6 +45,8 @@ function sbq.getUpgrade(upgradeName, tier, bonus)
 	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
 	storage.sbqUpgrades[upgradeName][tier] = math.max(storage.sbqUpgrades[upgradeName][tier] or 0, bonus)
 	sbq.refreshUpgrades(true)
+	sbq.refreshSettings()
+	sbq.refreshPublicSettings()
 end
 
 function sbq.setGroupedSetting(group, name, k, v)
