@@ -68,6 +68,7 @@ function init()
 		if id ~= pane.sourceEntity() then pane.dismiss() end
 		player.setScriptContext("starbecue")
 		player.callScript("sbq.setCurrentLocationData", locationData, occupantData)
+		processLocationData(locationData, occupantData)
 	end)
 
 	update(0)
