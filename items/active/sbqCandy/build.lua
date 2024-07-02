@@ -9,13 +9,15 @@ function build(directory, config, parameters, level, seed)
 	if not root.assetExists(directory..config.inventoryIcon) then
 		config.inventoryIcon = "sbqCandyT"..math.random(1,6)..".png"
 	end
+	local max = math.ceil(parameters.level/2)
 	if (not parameters.bonus) and (seed and (seed ~= 0)) then
-        parameters.bonus = 1
-		local max = math.ceil(parameters.level/2)
+		parameters.bonus = 1
 		for i = 1, max do
 			if math.random() > 0.5 then parameters.bonus = parameters.bonus + 1 end
 		end
-		parameters.inventoryIcon = config.inventoryIcon..((parameters.bonus == (max + 1)) and "?border=1;00FF00FF;00FF0088;" or "").."?hueshift="..math.random(0,360)..";"
+		config.inventoryIcon = config.inventoryIcon..((parameters.bonus == (max + 1)) and "?border=1;00FF00FF;00FF0088;" or "").."?hueshift="..math.random(0,360)..";"
+	elseif parameters.bonus and parameters.bonus > 1 then
+		config.inventoryIcon = config.inventoryIcon..((parameters.bonus == (max + 1)) and "?border=1;00FF00FF;00FF0088;" or "").."?hueshift="..math.random(0,360)..";"
 	end
 	config.shortdescription = strings.candyName[config.level] or (strings.mysteryCandyName.." (T"..math.floor(parameters.level)..")")
 	config.description = strings.candyDesc[config.level] or strings.mysteryCandyDesc

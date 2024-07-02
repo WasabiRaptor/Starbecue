@@ -8,7 +8,7 @@ function init()
 		return a[1] < b[1]
 	end)
 	for _, v in ipairs(candies) do
-		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2]}})
+		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2], seed = math.random()}})
 	end
 	if world.entityType(pane.sourceEntity()) == "npc" then
 		convertible = world.getNpcScriptParameter(pane.sourceEntity(), "sbqConvertType")
@@ -28,6 +28,35 @@ function uninit()
 	local item = _ENV.importSettingsSlot:item()
 	if item then player.giveItem(item) end
 end
+
+function _ENV.upgradeInput:acceptsItem(item)
+	if not item then return false end
+	local itemConfig = root.itemConfig(item)
+	if itemConfig and itemConfig.config.sbqTieredUpgrade then
+		return true
+	else
+		pane.playSound("/sfx/interface/clickon_error.ogg")
+		return false
+	end
+end
+
+function _ENV.upgradeInput:onItemModified()
+	local item = self:item()
+	if item then
+		local itemConfig = root.itemConfig(item)
+		if itemConfig.config.sbqTieredUpgrade then
+			world.sendEntityMessage(
+				pane.sourceEntity(),
+				"sbqGetUpgrade",
+				itemConfig.config.sbqTieredUpgrade,
+				itemConfig.config.level or itemConfig.parameters.level or 1,
+				itemConfig.config.bonus or itemConfig.parameters.bonus or 1
+			)
+			self:setItem(nil, true)
+		end
+	end
+end
+
 
 function _ENV.importSettingsSlot:acceptsItem(item)
 	if (item.parameters or {}).sbqSettings then
