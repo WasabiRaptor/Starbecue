@@ -1429,7 +1429,7 @@ end
 
 
 function _Occupant:update(dt)
-	if not world.entityExists(self.entityId) then return self:remove() end
+	if (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove() end
 	local location = self:getLocation()
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
