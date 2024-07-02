@@ -51,7 +51,13 @@ function init()
 			sbq.refreshPortrait(entityId)
 		end
 	end)
-	message.setHandler("sbqHudRefreshPortrait",function (_,_,entityId)
+	message.setHandler("sbqHudRefreshPortrait", function(_, _, entityId, locationName)
+		if not world.entityExists(entityId) then return end
+		if not Occupants.entityId[entityId] then return end
+		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
+		if ActionButton and locationName then
+			ActionButton.toolTip = locationName
+		end
 		sbq.refreshPortrait(entityId)
 	end)
 
@@ -92,7 +98,8 @@ function sbq.refreshOccupants()
 		Occupants.entityId[tostring(occupant.entityId)] = occupant
 		_ENV.occupantSlots:addChild(layout)
 		sbq.refreshPortrait(occupant.entityId)
-		local ActionButton = _ENV[occupant.entityId.."ActionButton"]
+		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
+		ActionButton.toolTip = occupant.locationName
 		function ActionButton:onClick()
 			local actions = {}
 			player.setScriptContext("starbecue")

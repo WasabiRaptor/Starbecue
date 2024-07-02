@@ -1479,6 +1479,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		self.subLocation = subLocation
 		location = self:getLocation()
 		if not location then self:remove() end
+		self.locationName = location.name
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
 	end
@@ -1577,7 +1578,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.newOccupant then
 		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
 	else
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId)
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, self.locationName)
 	end
 end
 
