@@ -76,21 +76,11 @@ function init()
 
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, additionalData)
 		sbq.setCurrentLocationData(locationData)
-		local struggleActions = locationData.struggleActions or {}
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
-			gui = predHudOpen and {panefeature = {offset = {-96,0}}} or {},
-			time = additionalData.time,
-			location = locationData.name,
-			directions = {
-				up = (struggleActions.up and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
-				down = (struggleActions.down and (struggleActions.down.indicate or struggleActions.any.indicate or "default")),
-				left = (struggleActions.left and (struggleActions.left.indicate or struggleActions.any.indicate or "default")),
-				right = (struggleActions.right and (struggleActions.right.indicate or struggleActions.any.indicate or "default")),
-				front = (struggleActions.front and (struggleActions.front.indicate or struggleActions.any.indicate or "default")),
-				back = (struggleActions.back and (struggleActions.back.indicate or struggleActions.any.indicate or "default")),
-				interact = world.isEntityInteractive(id) and "default"
-			}
+			gui = predHudOpen and { panefeature = { offset = { -96, 0 } } } or {},
+			locationData = locationData,
+			occupantData = additionalData
 		}, id)
 	end)
 

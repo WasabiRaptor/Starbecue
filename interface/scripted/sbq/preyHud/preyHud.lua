@@ -4,6 +4,8 @@ require("/scripts/any/SBQ_util.lua")
 local buttons
 local indicator
 local time = 0
+local digested = false
+local infused = false
 
 local colors = {
 	-- color = {dark, light}
@@ -59,33 +61,33 @@ end
 
 function init()
 	sbq.strings = root.assetJson("/sbqStrings.config")
-	buttons = config.getParameter( "directions" )
-	time = config.getParameter( "time" )
-	location = config.getParameter( "location" )
-	icon = config.getParameter("icon")
-
+	processLocationData(config.getParameter("locationData"), config.getParameter("occupantData"))
 	indicator = widget.bindCanvas("indicator")
 
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, occupantData)
 		if id ~= pane.sourceEntity() then pane.dismiss() end
 		player.setScriptContext("starbecue")
 		player.callScript("sbq.setCurrentLocationData", locationData, occupantData)
-		local struggleActions = locationData.struggleActions or {}
-		local canStruggle = not (occupantData.digested or occupantData.infused)
-		buttons = {
-			up = (struggleActions.up and canStruggle and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
-			down = (struggleActions.down and canStruggle and (struggleActions.down.indicate or struggleActions.any.indicate or "default")),
-			left = (struggleActions.left and canStruggle and (struggleActions.left.indicate or struggleActions.any.indicate or "default")),
-			right = (struggleActions.right and canStruggle and (struggleActions.right.indicate or struggleActions.any.indicate or "default")),
-			front = (struggleActions.front and canStruggle and (struggleActions.front.indicate or struggleActions.any.indicate or "default")),
-			back = (struggleActions.back and canStruggle and (struggleActions.back.indicate or struggleActions.any.indicate or "default"))
-		}
-		time = occupantData.time
-		location = locationData.name
 	end)
 
-
 	update(0)
+end
+
+function processLocationData(locationData, occupantData)
+	local struggleActions = locationData.struggleActions or {}
+	local canStruggle = not (occupantData.digested or occupantData.infused)
+	infused = occupantData.infused
+	digested = occupantData.digested
+	buttons = {
+		up = (struggleActions.up and canStruggle and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
+		down = (struggleActions.down and canStruggle and (struggleActions.down.indicate or struggleActions.any.indicate or "default")),
+		left = (struggleActions.left and canStruggle and (struggleActions.left.indicate or struggleActions.any.indicate or "default")),
+		right = (struggleActions.right and canStruggle and (struggleActions.right.indicate or struggleActions.any.indicate or "default")),
+		front = (struggleActions.front and canStruggle and (struggleActions.front.indicate or struggleActions.any.indicate or "default")),
+		back = (struggleActions.back and canStruggle and (struggleActions.back.indicate or struggleActions.any.indicate or "default"))
+	}
+	time = occupantData.time
+	location = locationData.name
 end
 function indicateButton(dir, color)
 	if not color then return end
@@ -106,16 +108,17 @@ function update( dt )
 	-- drawing
 	indicator:clear()
 
-	-- buttons
+    -- buttons
+	local lockDown = world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black"
 	indicateButton("interact", world.isEntityInteractive(pane.sourceEntity()) and "default" )
-	indicateButton("up", buttons.up and world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black" or buttons.up )
-	indicateButton("down", buttons.down and world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black" or buttons.down )
+	indicateButton("up", buttons.up and lockDown or buttons.up )
+	indicateButton("down", buttons.down and lockDown or buttons.down )
 
 	local facingRight = player.callScript("mcontroller.facingDirection") == 1
 	local left = (buttons.left or (facingRight and buttons.back) or buttons.front)
-	indicateButton("left", left and world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black" or left)
+	indicateButton("left", left and lockDown or left)
 	local right = (buttons.right or (facingRight and buttons.front) or buttons.back)
-	indicateButton("right", right and world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black" or right )
+	indicateButton("right", right and lockDown or right )
 
 	-- bar
 	local s = (status.statusProperty("sbqProgressBar") or 0) * bar.w
@@ -172,11 +175,12 @@ function update( dt )
 		{position = {16, 29}, horizontalAnchor = "mid", wrapWidth = 25},
 		6, {127, 127, 127}
 	)
-	if world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
+	if infused then
+		indicator:drawImageDrawable("/interface/scripted/sbq/transform.png", {45.5,16}, 1)
+	elseif digested then
+		indicator:drawImageDrawable("/interface/scripted/sbq/softDigest.png", {45.5,16}, 1)
+	elseif world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", {45.5,16}, 1)
-	end
-	if icon then
-		indicator:drawImageDrawable(icon, {46,16}, 1)
 	end
 end
 
