@@ -113,7 +113,8 @@ function init()
 			default = {
 				messageTarget = id,
 				message = "sbqRequestAction",
-				close = true
+				close = true,
+				description = sbq.getString((entity.id() == target) and ":chooseLocationPreyPrompt" or ":chooseLocationDesc")
 			},
 			cancel = {
 				args = false,
