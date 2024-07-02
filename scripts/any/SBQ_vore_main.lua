@@ -250,16 +250,6 @@ function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	return SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 end
 
-function sbq.getOccupantData(entityId)
-	local occupant = Occupants.entityId[tostring(entityId)]
-	if not occupant then return false end
-	location = occupant:getLocation()
-	return {
-		occupant,
-		location:outputData(entityId)
-	}
-end
-
 function sbq.getSettingsPageData()
 	local settingsPageData = {
 		settingsPageName = sbq.entityName(entity.id()),
