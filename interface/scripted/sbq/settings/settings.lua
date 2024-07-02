@@ -73,6 +73,11 @@ function init()
 	sbq.assignSettingValues()
 	sbq.refreshSettingVisibility()
 end
+function uninit()
+	if world.entityExists(pane.sourceEntity()) then
+		world.sendEntityMessage(pane.sourceEntity(), "sbqRefreshSettings")
+	end
+end
 local locationSetup = {}
 function sbq.setupLocation(name, list)
 	local location = sbq.locations[name]

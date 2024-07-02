@@ -11,6 +11,10 @@ function sbq.settingsInit()
 	message.setHandler("sbqImportSettings", function (_,_, ...)
 		return sbq.importSettings(...)
 	end)
+	message.setHandler("sbqRefreshSettings", function (_,_, ...)
+		sbq.refreshPublicSettings()
+		sbq.refreshSettings()
+	end)
 end
 
 function sbq.setSetting(k, v)
@@ -96,14 +100,14 @@ end
 
 function sbq.refreshPublicSettings()
 	for setting, v in pairs(sbq.config.publicSettings) do
-		if v == true then sbq.publicSettings[setting] = sbq.settings[setting] end
+		if v then sbq.publicSettings[setting] = sbq.settings[setting] end
 	end
 	for k, v in pairs(sbq.config.groupedSettings) do
 		sbq.publicSettings[k] = sbq.publicSettings[k] or {}
 		for name, settings in pairs(sbq.defaultSettings[k]) do
 			sbq.publicSettings[k][name] = sbq.publicSettings[k][name] or {}
 			for setting, _ in pairs(settings) do
-				if sbq.config.publicSettings[setting] == true then
+				if sbq.config.publicSettings[setting] then
 					sbq.publicSettings[k][name][setting] = ((sbq.settings[k] or {})[name] or {})[setting]
 				end
 			end

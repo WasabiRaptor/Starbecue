@@ -189,6 +189,7 @@ function sbq.reloadVoreConfig(config)
 			end
 		end
 	end
+	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 end
 
