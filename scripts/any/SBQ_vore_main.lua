@@ -1378,7 +1378,7 @@ function _Occupant:remove()
 	end
 	Occupants.refreshOccupantModifiers = true
 	self:sendEntityMessage("sbqReleased")
-	world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
+	Occupants.queueHudRefresh = true
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear", self.entityId) end
 end
 
@@ -1401,6 +1401,10 @@ function Occupants.update(dt)
 	end
 	Occupants.lastScale = sbq.scale()
 
+	if Occupants.queueHudRefresh then
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
+		Occupants.queueHudRefresh = false
+	end
 	if Occupants.refreshOccupantModifiers then
 		Occupants.refreshOccupantModifiers = false
 		local modifiers = {}
@@ -1577,7 +1581,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		})
 	)
 	if self.flags.newOccupant then
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
+		Occupants.queueHudRefresh = true
 	else
 		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, self.locationName)
 	end
