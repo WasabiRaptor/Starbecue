@@ -68,11 +68,14 @@ end
 local function actionSequence(funcName, action, target, actionList, ...)
 	local results
 	for _, actionData in ipairs(actionList or action.actionList) do
-		results = { SpeciesScript[funcName](SpeciesScript, actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
-		if action.untilFirstSuccess then
-			if results[1] then break end
+		if (target and action.untilFirstSuccess) and not SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
 		else
-			if not results[1] then break end
+			results = { SpeciesScript[funcName](SpeciesScript, actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
+			if action.untilFirstSuccess then
+				if results[1] then break end
+			else
+				if not results[1] then break end
+			end
 		end
 	end
 	return table.unpack(results)

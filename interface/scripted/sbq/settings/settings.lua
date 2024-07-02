@@ -374,7 +374,7 @@ end
 
 function sbq.widgetScripts.infuseSlotAccepts(w, item)
 	if w.locked then return false end
-    if not item then return true end
+	if not item then return true end
 	local path = ("parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infusePrefs.%s.prey"):format(w.groupKey)
 	if sb.jsonQuery(item, path) then return true end
 	pane.playSound("/sfx/interface/clickon_error.ogg")
