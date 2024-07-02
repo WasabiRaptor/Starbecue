@@ -212,6 +212,18 @@
 			"overrideSettings" : {
 				"breasts" : false
 			},
+			"states" : {
+				"default" : {
+					"actions" : {
+						"breastInfuse" : false,
+						"breastInfused" : false,
+						"breastInfuseExternal" : false
+					}
+				}
+			},
+			"availableInfuseTypes" : {
+				"breastInfuse" : false
+			},
 			"transformResult" : {"species":"sbq/vaporeon"}
 		},
 		"/npcs/sbq/Fevix/Sandy/tenant.npctype:scriptConfig.voreConfig"
