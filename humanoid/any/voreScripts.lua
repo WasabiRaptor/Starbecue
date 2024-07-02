@@ -124,6 +124,23 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	return false, "noSpace"
 end
 
+function default:canSendOccupantDeeper(name, action, target, reason, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false, "missingOccupant" end
+	local location = occupant:getLocation()
+	if not location then return false, "invalidLocation" end
+	if not location.sendDeeperAction then return false, "invalidAction" end
+	return SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
+end
+function default:sendOccupantDeeper(name, action, target, reason, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false, "missingOccupant" end
+	local location = occupant:getLocation()
+	if not location then return false, "invalidLocation" end
+	if not location.sendDeeperAction then return false, "invalidAction" end
+	return SpeciesScript:tryAction(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
+end
+
 function default:trySendDeeper(name, action, target, reason, locationName, subLocationName,...)
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end

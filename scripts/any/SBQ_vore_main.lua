@@ -1667,7 +1667,7 @@ function _Occupant:releaseStruggle(control, time)
 end
 
 function _Occupant:getLocation()
-	return SpeciesScript:getLocation(self.location, self.subLocation)
+	return SpeciesScript:getLocation(self.location, (not self.flags.infused) and self.subLocation)
 end
 
 function _Occupant:checkStruggleDirection(dt)
