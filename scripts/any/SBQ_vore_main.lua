@@ -1339,7 +1339,7 @@ function _Occupant:remove()
 	Occupants.seat[self.seat] = nil
 
 	if self.flags.infused then
-		location.infusedEntity = nil
+		if location then location.infusedEntity = nil end
 		sbq.settings.infuseSlots[self.flags.infuseType].item = nil
 		sbq.infuseOverrideSettings[self.flags.infuseType] = nil
 		SpeciesScript:refreshInfusion(self.flags.infuseType)
@@ -1347,23 +1347,24 @@ function _Occupant:remove()
 
 	if self.subLocation then
 		local subLocation = SpeciesScript:getLocation(self.location, self.subLocation)
-		for i, occupant in ipairs(subLocation.occupancy.list) do
+		if subLocation then for i, occupant in ipairs(subLocation.occupancy.list) do
 			if occupant.entityId == self.entityId then
 				subLocation:markSizeDirty()
 				table.remove(subLocation.occupancy.list, i)
 				subLocation:refreshStruggleDirection()
 				break
 			end
-		end
+		end end
 	end
-	for i, occupant in ipairs(location.occupancy.list) do
+	if location then for i, occupant in ipairs(location.occupancy.list) do
 		if occupant.entityId == self.entityId then
 			location:markSizeDirty()
 			table.remove(location.occupancy.list, i)
 			location:refreshStruggleDirection()
 			break
 		end
-	end
+	end end
+
 	for i, occupant in ipairs(Occupants.list) do
 		if occupant.entityId == self.entityId then
 			table.remove(Occupants.list, i)
