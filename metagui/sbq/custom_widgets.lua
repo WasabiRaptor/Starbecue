@@ -638,10 +638,10 @@ function widgets.sbqCheckBox:draw()
 		if type(self.icon) == "table" then
 			c:drawImageDrawable(((self.checked and self.icon[2]) or self.icon[1])..directives, pos, 1)
 		else
-			c:drawImageDrawable(self.icon..directives, pos, 1)
 			if self.checked then
-				c:drawImageDrawable(self.icon.."?outline=1;FFFFFFFF;FFFFFFFF"..directives, pos, 1)
+				directives = directives .. "?border=1;FFFFFFFF;FFFFFF88"
 			end
+			c:drawImageDrawable(self.icon..directives, pos, 1)
 		end
 	else
 		theme.drawCheckBox(self)
@@ -796,7 +796,7 @@ function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 		lifetime = math.max(lifetime, sbq.config.preyDialogueDismissTime),
 		text = text,
 		textSound = sound,
-        speed = speed,
+		speed = speed,
 		volume = volume
 	}
 
