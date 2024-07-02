@@ -443,13 +443,13 @@ function _State:dumpOccupants(location, subLocation, digestType)
 		output.locationStore = {}
 		output.locationSettings = {}
 		if occupant.flags.infused then
-			occupant.flags.infused = false
-			occupant.flags.infuseType = nil
-			occupant.flags.digested = true
+			output.flags.infused = false
+			output.flags.infuseType = nil
+			output.flags.digested = true
 		end
 		if occupant.flags.digested and digestType then
-			occupant.flags.digestedLocation = location
-			occupant.flags.digestType = digestType
+			output.flags.digestedLocation = location
+			output.flags.digestType = digestType
 		end
 		table.insert(dump, output)
 		occupant:remove()
