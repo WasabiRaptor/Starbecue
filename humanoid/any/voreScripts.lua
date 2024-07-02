@@ -24,10 +24,9 @@ end
 function Default:uninit()
 end
 
-function Default:settingAnimations(hideSlots)
-	hideSlots = hideSlots or {}
+function Default:settingAnimations()
 	local legs = sbq.getItemSlot("legsCosmetic") or sbq.getItemSlot("legs")
-	if (not hideSlots.legs) and legs and (not root.itemConfig(legs).config.showVoreAnims) and (sbq.voreConfig.legsVoreWhitelist and not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
+	if (not (sbq.statPositive("legsNude") or sbq.statPositive("nude"))) and legs and (not root.itemConfig(legs).config.showVoreAnims) and (sbq.voreConfig.legsVoreWhitelist and not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
 		self:doAnimations(sbq.voreConfig.legsHide)
 	else
 		self:doAnimations((sbq.settings.cock and sbq.voreConfig.cockShow) or sbq.voreConfig.cockHide)
@@ -35,26 +34,35 @@ function Default:settingAnimations(hideSlots)
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 	end
 	local chest = sbq.getItemSlot("chestCosmetic") or sbq.getItemSlot("chest")
-	if (not hideSlots.chest) and chest and (not root.itemConfig(chest).config.showVoreAnims) and (sbq.voreConfig.chestVoreWhitelist and not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
+	if (not (sbq.statPositive("chestNude") or sbq.statPositive("nude"))) and chest and (not root.itemConfig(chest).config.showVoreAnims) and (sbq.voreConfig.chestVoreWhitelist and not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
 		self:doAnimations(sbq.voreConfig.chestHide)
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
 	end
 end
 
-function Default:getHideSlotAnims(hideSlots)
-	local hide, show = {}, {}
+function Default:hideSlots(hideSlots)
+	local modifiers = {}
 	for k, v in pairs(hideSlots) do
-		if v then
-			local item = sbq.getItemSlot(k.."Cosmetic") or sbq.getItemSlot(k)
-			if item and not ((sbq.voreConfig[k.."VoreWhitelist"] or {})[item.name])then
-				hide[k.."CosmeticHiddenState"] = "none"
-				show[k.."CosmeticHiddenState"] = "ignore"
-			end
+		if v then table.insert(modifiers, {stat = k.."Nude", amount = 1})end
+	end
+	sbq.setStatModifiers("sbqHideSlots", modifiers)
+end
+function Default:showSlots()
+	sbq.clearStatModifiers("sbqHideSlots")
+end
+function Default:refreshStripping()
+	if not sbq.isResource("sbqLust") then return end
+	local modifiers = {}
+	for _, k in ipairs({"head","chest","legs","back"}) do
+		if sbq.resourcePercentage("sbqLust") > sbq.settings[k.."Strip"] then
+			table.insert(modifiers, {stat = k.."Nude", amount = 1})
 		end
 	end
-	return hide, show
+	sbq.setStatModifiers("sbqStripping", modifiers)
+	SpeciesScript:settingAnimations()
 end
+
 
 -- default state scripts
 local default = Default.states.default
@@ -102,7 +110,6 @@ function default:scriptSequence(name, action, target, scriptList, ...)
 end
 
 function default:moveToLocation(name, action, target, locationName, subLocationName, throughput, ...)
-	if not target or not (locationName or action.location) then return false, "missingTarget" end
 	occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
@@ -114,15 +121,30 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	end
 	local space, subLocation = location:hasSpace(size)
 	if space then
-		occupant.flags.newOccupant = true
 		occupant:refreshLocation(locationName, subLocation)
 		return true, function ()
 			occupant = Occupants.entityId[tostring(target)]
 			if occupant then
-				occupant.flags.newOccupant = false
 				occupant:refreshLocation()
+				location:refreshStruggleDirection()
 			end
 		end
+	end
+	return false, "noSpace"
+end
+function default:moveToLocationAvailable(name, action, target, locationName, subLocationName, throughput, ...)
+	occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false, "missingOccupant" end
+	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	if not location then return false, "invalidLocation" end
+	local size = (occupant.size * occupant.sizeMultiplier)
+	throughput = throughput or action.throughput
+	if throughput and not location.settings.hammerspace then
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
+	end
+	local space, subLocation = location:hasSpace(size)
+	if space then
+		return true
 	end
 	return false, "noSpace"
 end
@@ -226,12 +248,11 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 		if Occupants.newOccupant(target, size, locationName or action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
-			local hide, show = SpeciesScript:getHideSlotAnims(action.hideSlots or {})
-			SpeciesScript:doAnimations(hide)
-			SpeciesScript:settingAnimations(action.hideSlots)
+			SpeciesScript:hideSlots(action.hideSlots or {})
+			SpeciesScript:settingAnimations()
 			return true, function()
 				sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
-					SpeciesScript:doAnimations(show)
+					SpeciesScript:showSlots()
 					SpeciesScript:settingAnimations()
 				end)
 				local occupant = Occupants.entityId[tostring(target)]
@@ -261,13 +282,12 @@ function default:tryLetout(name, action, target, throughput, ...)
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
 	occupant:getLocation().occupancy.sizeDirty = true
 	SpeciesScript.lockActions = true
-	local hide, show = SpeciesScript:getHideSlotAnims(action.hideSlots or {})
-	SpeciesScript:doAnimations(hide)
-	SpeciesScript:settingAnimations(action.hideSlots)
+	SpeciesScript:hideSlots(action.hideSlots or {})
+	SpeciesScript:settingAnimations()
 	sbq.forceTimer("huntTargetSwitchCooldown", 30)
 	return true, function()
 		sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
-			SpeciesScript:doAnimations(show)
+			SpeciesScript:showSlots()
 			SpeciesScript:settingAnimations()
 		end)
 		sbq.forceTimer("huntTargetSwitchCooldown", 30)

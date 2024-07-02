@@ -48,6 +48,8 @@ end
 
 function sbq.init(config)
 	sbq.clearStatModifiers("sbqLockDown")
+	sbq.clearStatModifiers("sbqHideSlots")
+	sbq.clearStatModifiers("sbqStripping")
 	sbq.defaultAnimatorTags = animator.getTags()
 	sbq.settingsInit()
 	sbq.lists = {}
@@ -91,6 +93,7 @@ function sbq.update(dt)
 		Occupants.update(dt)
 		SpeciesScript:update(dt)
 		SpeciesScript.state:update(dt)
+		if sbq.timer("stripping", 30) then SpeciesScript:refreshStripping() end
 	end
 	sbq.passiveStatChanges(dt)
 end
@@ -1095,6 +1098,7 @@ function _Location:updateOccupancy(dt)
 				SpeciesScript:doAnimations(self.occpantAnims, {}, occupant.entityId)
 			end
 		end
+		self.occupancy.struggleDirection = nil
 		self:refreshStruggleDirection()
 	end
 	if self.occupancy.interpolating then
@@ -1673,7 +1677,7 @@ end
 function _Occupant:checkStruggleDirection(dt)
 	local dx = 0
 	local dy = 0
-	local effectiveness = self.sizeMultiplier * self.size / sbq.scale()
+	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.scale())
 	local staleTime = 5
 	if self:controlHeld("Up") then
 		dy = dy + 1
