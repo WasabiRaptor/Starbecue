@@ -1581,13 +1581,20 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		location:outputData(self.entityId),
 		sb.jsonMerge(self.flags, {
 			time = self.time,
-			location = self.location
+			location = self.location,
+			subLocation = self.subLocation,
+			locationName = self.locationName
 		})
 	)
 	if self.flags.newOccupant then
 		Occupants.queueHudRefresh = true
 	else
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, self.locationName)
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, sb.jsonMerge(self.flags, {
+			time = self.time,
+			location = self.location,
+			subLocation = self.subLocation,
+			locationName = self.locationName
+		}))
 	end
 end
 

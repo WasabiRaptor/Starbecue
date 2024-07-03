@@ -2,6 +2,10 @@
 function _ENV.metagui.theme.drawFrame() -- maybe this could stop the background from drawing
 end
 
+Occupants = {
+	list = {},
+	entityId = {}
+}
 function init()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
 	backingCanvas:clear()
@@ -15,7 +19,7 @@ function init()
 		Occupants.list = occupants
 		Occupants.entityId = {}
 		for _, occupant in ipairs(Occupants.list) do
-			Occupants.entityId[occupant.entityId] = occupant
+			Occupants.entityId[tostring(occupant.entityId)] = occupant
 		end
 		for k, v in pairs(settingsData) do
 			sbq[k] = v
@@ -36,7 +40,7 @@ function init()
 	end)
 	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
 		if not world.entityExists(entityId) then return end
-		if not Occupants.entityId[entityId] then return end
+		if not Occupants.entityId[tostring(entityId)] then return end
 		local portrait = _ENV[entityId .. "PortraitCanvas"]
 		if portrait then
 			local pos = { 0, 0 }
@@ -46,34 +50,43 @@ function init()
 				w = w.parent
 			end
 			if (pos[2] < 205) and (pos[2] > 19) then
-				_ENV.metagui.preyDialogueText({6, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, sound, speed, volume, entityId.."HudDialogue", lifetime)
+				_ENV.metagui.preyDialogueText({1, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, sound, speed, volume, entityId.."HudDialogue", lifetime)
 			end
 			sbq.refreshPortrait(entityId)
 		end
 	end)
-	message.setHandler("sbqHudRefreshPortrait", function(_, _, entityId, locationName)
+	message.setHandler("sbqHudRefreshPortrait", function(_, _, entityId, flags)
 		if not world.entityExists(entityId) then return end
-		if not Occupants.entityId[entityId] then return end
-		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
-		if ActionButton and locationName then
-			ActionButton.toolTip = locationName
-		end
+		local occupant = Occupants.entityId[tostring(entityId)]
+		if not occupant then return end
 		sbq.refreshPortrait(entityId)
+		if not flags then return end
+		occupant.flags = flags
+		occupant.location = flags.location
+		occupant.subLocation = flags.subLocation
+		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
+		local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
+		if ActionButton then
+			ActionButton.toolTip = occupant.flags.locationName
+		end
+		if LocationIcon then
+			if occupant.flags.infused and occupant.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
+				LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
+			elseif root.assetExists("/interface/scripted/sbq/"..occupant.location..".png") then
+				LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
+			end
+			LocationIcon:draw()
+		end
 	end)
 
 	Occupants.list = _ENV.metagui.inputData.occupants
 	Occupants.entityId = {}
 	for _, occupant in ipairs(Occupants.list) do
-		Occupants.entityId[occupant.entityId] = occupant
+		Occupants.entityId[tostring(occupant.entityId)] = occupant
 	end
 	sbq.refreshOccupants()
 	sbq.changeLocation(1)
 end
-
-Occupants = {
-	list = {},
-	entityId = {}
-}
 
 function update()
 	local dt = script.updateDt()
@@ -99,6 +112,12 @@ function sbq.refreshOccupants()
 		_ENV.occupantSlots:addChild(layout)
 		sbq.refreshPortrait(occupant.entityId)
 		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
+		local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
+		if occupant.flags.infused and occupant.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
+			LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
+		elseif root.assetExists("/interface/scripted/sbq/"..occupant.location..".png") then
+			LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
+		end
 		ActionButton.toolTip = occupant.locationName
 		function ActionButton:onClick()
 			local actions = {}
@@ -134,6 +153,7 @@ function sbq.refreshOccupants()
 			_ENV.metagui.dropDownMenu(actions,2)
 		end
 	end
+
 	_ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (occupants + 1) })
 	_ENV.predHudTop:setVisible((occupants >= 8))
 	sbq.updateBars(0)
