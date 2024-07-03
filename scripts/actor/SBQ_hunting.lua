@@ -208,7 +208,7 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 					sbq_hunting.clearTarget()
 				end
 				sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-					if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".after", target) then
+					if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
 					end
@@ -220,7 +220,7 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 			sbq_hunting.nextTarget()
 		end
 	end
-	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".before", target) then
+	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".before", target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		dialogueProcessor.speakDialogue(callback)
 	else
@@ -230,7 +230,7 @@ end
 
 function sbq_hunting.domSendPrompt(target)
 	local interactData
-	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action, target) then
+	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action, target) then
 		interactData = dialogueProcessor.sendPlayerDialogueBox()
 		if interactData then
 			dialogueProcessor.speakDialogue()
@@ -266,7 +266,7 @@ function sbq_hunting.domNoPrompt(target)
 				sbq_hunting.clearTarget()
 			end
 			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target) then
+				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
@@ -274,7 +274,7 @@ function sbq_hunting.domNoPrompt(target)
 			sbq_hunting.nextTarget()
 		end
 	end
-	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action, target) then
+	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action, target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		if entity.isValidTarget(target) then -- if we're not getting consent, and the target is hostile, we're not gonna stand there and wait for dialogue to finish before eating!
 			dialogueProcessor.speakDialogue()
@@ -302,7 +302,7 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 				end)
 				sbq_hunting.clearTarget()
 				sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-					if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".after", target) then
+					if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".after", target) then
 						dialogueProcessor.speakDialogue()
 					end
 				end, sbq_hunting.nextTarget)
@@ -311,7 +311,7 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 			sbq_hunting.nextTarget()
 		end
 	end
-	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".before", target) then
+	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".before", target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		dialogueProcessor.speakDialogue(callback)
 	else
@@ -322,7 +322,7 @@ end
 
 function sbq_hunting.subSendPrompt(target)
 	local interactData
-	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action, target) then
+	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action, target) then
 		interactData = dialogueProcessor.sendPlayerDialogueBox()
 		if interactData then
 			dialogueProcessor.speakDialogue()
@@ -357,14 +357,14 @@ function sbq_hunting.subNoPrompt(target)
 				sbq.releaseLoungeControl("Shift")
 			end)
 			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-				if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then
+				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
 			sbq_hunting.clearTarget()
 		end, sbq_hunting.nextTarget)
 	end
-	if sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action, target) then
+	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action, target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		dialogueProcessor.speakDialogue(callback)
 	else

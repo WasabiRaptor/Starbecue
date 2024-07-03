@@ -347,6 +347,7 @@ function dialogueProcessor.getRandomDialogueTreeValue(settings, eid, rollNo, ran
 end
 
 function dialogueProcessor.sendPlayerDialogueBox(actions)
+	if not sbq.settings.interactDialogue then return end
 	if world.entityType(dialogue.target) == "player" then
 		local interact = dialogueProcessor.getPlayerDialogueBox(actions)
 		world.sendEntityMessage(dialogue.target, "sbqOpenMetagui", "starbecue:dialogueBox", entity.id(), interact[2].data)

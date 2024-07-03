@@ -668,7 +668,7 @@ function default:eggify(name, action, target, ...)
 end
 
 function default:lockDown(name, action, target, ...)
-	if Occupants.checkActiveOccupants() and sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+	if Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
@@ -679,7 +679,7 @@ function default:lockDown(name, action, target, ...)
 	})
 end
 function default:lockDownClear(name, action, target)
-	if Occupants.checkActiveOccupants() and sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+	if Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end

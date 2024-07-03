@@ -77,23 +77,23 @@ function sbq.actorMessages()
 			return
 		end
 		if (action == sbq.struggleAction) and not sbq.isLoungeControlHeld("Shift") then
-			if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..action, id) then
+			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..action, id) then
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
 			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".forcingAction."..action..".after", id) then
+				if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..action..".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
 			return
 		else
-			if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action, id) then
+			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action, id) then
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
 			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-				if dialogueProcessor and sbq.settings.interactDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action..".after", id) then
+				if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action..".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
@@ -141,7 +141,7 @@ end
 
 local struggleDirections = {false,"Left","Right","Up","Down"}
 function sbq.struggleBehavior(dt)
-	if sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.interactDialogue and not sbq.timerRunning("dialogueAfter") then
+	if sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.actionDialogue and not sbq.timerRunning("dialogueAfter") then
 		if dialogueProcessor.getDialogue(".struggling", sbq.loungingIn()) then
 			dialogueProcessor.speakDialogue()
 		end
