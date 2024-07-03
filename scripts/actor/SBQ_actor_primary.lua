@@ -26,6 +26,7 @@ function init()
 	message.setHandler("sbqReleased", function(_, _, data)
 		sbq.resetLounging()
 		status.setStatusProperty("sbqProgressBar", 0)
+		status.setStatusProperty("sbqProgressBarColor", {})
 		seatToForce = nil
 		sbq.checkStuck()
 		sbq.timer("stuckCheck", 0.5, sbq.checkStuck)
