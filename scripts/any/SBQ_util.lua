@@ -84,6 +84,7 @@ function sbq.setupSettingMetatables(entityType)
 	if entityType == "player" then
 		sbq.settings.speciesTF = nil
 	end
+	sbq.settings.recentlyDigested = nil
 
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(

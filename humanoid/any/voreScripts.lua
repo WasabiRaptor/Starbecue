@@ -430,6 +430,9 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 				world.spawnItem(item, position)
 			end
 			item.name = "sbqNPCEssenceJar"
+			if not storage.sbqSettings.recentlyDigested[1] then
+				storage.sbqSettings.recentlyDigested = {}
+			end
 			table.insert(storage.sbqSettings.recentlyDigested, 1, item)
 			while #storage.sbqSettings.recentlyDigested > sbq.config.recentlyDigestedCount do
 				table.remove(storage.sbqSettings.recentlyDigested, #storage.sbqSettings.recentlyDigested)
