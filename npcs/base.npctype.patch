@@ -9,9 +9,9 @@
 		"path": "/scripts/-",
 		"value": "/scripts/npc/SBQ_npc_bmain.lua"
 	},
-	{
-		"op": "add",
-		"path": "/scriptConfig/sbqNPC",
-		"value": false
-	}
+	{"op":"merge","path":"","value":{
+		"scriptConfig":{
+			"sbqNPC" : false
+		}
+	}}
 ]

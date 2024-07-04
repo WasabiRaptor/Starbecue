@@ -239,17 +239,12 @@ function setTenantsData(occupier)
 		if type(tenant.species) == "table" then
 			tenant.species = tenant.species[math.random(#tenant.species)]
 		end
-
 		local npcConfig = root.npcConfig(tenant.type)
+		local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides or {})
+		tenant.uniqueId = sb.jsonQuery(overrideConfig, "scriptConfig.uniqueId") or sb.makeUuid()
 		tenant.overrides = tenant.overrides or {}
 		tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
-
-		tenant.uniqueId = npcConfig.scriptConfig.uniqueId or sb.makeUuid()
 		tenant.overrides.scriptConfig.uniqueId = tenant.uniqueId
-		tenant.overrides.scriptConfig.sbqSettings = npcConfig.scriptConfig.sbqDefaultSettings
-		tenant.overrides.statusControllerSettings = npcConfig.statusControllerSettings or {}
-		tenant.overrides.statusControllerSettings.statusProperties = tenant.overrides.statusControllerSettings.statusProperties or {}
-
 		tenant.seed = tenant.seed or sb.makeRandomSource():randu64()
 	end
 	storage.occupier = occupier

@@ -200,12 +200,22 @@ function sbq.insertTenant(slot)
 		type = item.parameters.npcArgs.npcType,
 		level = item.parameters.npcArgs.npcLevel,
 		overrides = item.parameters.npcArgs.npcParam or {},
-		uniqueId = ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId or sb.makeUuid(),
 		spawn = item.parameters.npcArgs.npcSpawn or "npc"
 	}
-	tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
-	tenant.overrides.scriptConfig.uniqueId = tenant.uniqueId
+	local npcConfig = root.npcConfig(tenant.type)
+	if not npcConfig then return pane.playSound("/sfx/interface/clickon_error.ogg") end
+	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
+	if overrideConfig.scriptConfig.sbqDeedConvertType then
+		tenant.type = overrideConfig.scriptConfig.sbqDeedConvertType
+		npcConfig = root.npcConfig(tenant.type)
+		overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
+	end
+	tenant.overrides.scriptConfig.uniqueId = sb.jsonQuery(overrideConfig, "scriptConfig.uniqueId") or sb.makeUuid()
+	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
 	if world.getUniqueEntityId(tenant.uniqueId) then return pane.playSound("/sfx/interface/clickon_error.ogg") end
+	for _, v in pairs(sbq.occupier.tenants) do
+		if v.uniqueId == tenant.uniqueId then return pane.playSound("/sfx/interface/clickon_error.ogg") end
+	end
 	slot:setItem(nil, true)
 	table.insert(sbq.occupier.tenants, tenant)
 	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", sbq.occupier.tenants)
@@ -217,16 +227,20 @@ function sbq.refreshDeedPage()
 
 	for i, tenant in ipairs(sbq.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
-		local canvasSize = {60,60}
 		local portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 		local id = world.getUniqueEntityId(tenant.uniqueId)
 		if id then portrait = world.entityPortrait(id, "full") end
-		local panel = { type = "panel", expandMode = { 0, 2 }, style = "flat", children = {
-			{ mode = "vertical" },
-			{ type = "canvas", id = "tenant" .. i .. "Canvas", size = canvasSize },
+		local canvasSize = {43,60}
+		if portrait then
+			local bounds = rect.size(sb.drawableBoundBox(portrait,true))
+			canvasSize = {math.max(canvasSize[1], bounds[1]), math.max(canvasSize[2], bounds[2])}
+		end
+		local panel = { type = "panel", expandMode = { 0, 0 }, style = "flat", children = {
+			{ mode = "vertical", expandMode = { 0, 0 } },
+			{ type = "canvas", id = "tenant" .. i .. "Canvas", size = canvasSize, expandMode = { 0, 0 } },
 			{ type = "label", text = name, align = "center" },
-			{ type = "button", caption = ":settings", id = "tenant" .. i .. "Settings", size = canvasSize[1]},
-			{ type = "button", caption = ":remove", color = "FF0000", id = "tenant" .. i .. "Remove", size = canvasSize[1] }
+			{ type = "button", caption = ":settings", id = "tenant" .. i .. "Settings", size = canvasSize[1], expandMode = { 0, 0 }},
+			{ type = "button", caption = ":remove", color = "FF0000", id = "tenant" .. i .. "Remove", size = canvasSize[1], expandMode = { 0, 0 } }
 		} }
 		_ENV.tenantListScrollArea:addChild(panel)
 		local canvasWidget = _ENV["tenant" .. i .. "Canvas"]
@@ -241,7 +255,7 @@ function sbq.refreshDeedPage()
 			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
 			sbq.refreshDeedPage()
 		end
-        canvas:clear()
+		canvas:clear()
 		if portrait then
 			canvas:drawDrawables(portrait, vec2.div(canvasWidget.size, 2))
 		end

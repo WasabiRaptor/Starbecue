@@ -6,22 +6,22 @@
 	"uniqueBy" : "path",
 	"scripts" : [ "colonyDeed.lua" ],
 	"children" : [
-		{"type" : "layout", "id": "deedSettingsLayout", "expandMode" : [1,0], "mode": "horizontal", "children" : [
-			{"type" : "layout", "mode" : "vertical", "expandMode" : [1,0], "children" : [
+		{"type" : "layout", "id": "deedSettingsLayout","size":[256,134], "expandMode" : [0,0], "mode": "horizontal", "children" : [
+			{"type" : "layout", "mode" : "v", "expandMode" : [2,2], "children" : [
+				{"mode" : "v", "expandMode" : [2, 0]},
 				{ "type" : "button", "id" : "callTenants", "caption" : ":callTenants", "expandMode" : [2, 0] },
-				{ "type" : "panel", "style" : "convex", "id" : "tenantScrollAreaPanel", "expandMode" : [1,0], "children" : [
-					{ "type" : "scrollArea", "id" : "tenantListScrollArea", "expandMode" : [1, 0], "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [1, 0], "children" : [ {"mode" : "horizontal"}]}
-				]},
-				{ "type" : "layout", "mode" : "vertical", "expandMode" : [2,2], "children" : []}
-			]},
-			[
-				{"size" : 90},
-				{ "id" : "requiredTagsPanel", "type" : "panel", "expandMode" : [1,2], "style" : "convex", "children" : [
-					{ "type" : "label", "text" : "Colony Tags",  "align" : "center"},
-					[{"type":"button", "id":"orderFurniture", "caption":":orderFurniture", "visible":false, "expandMode" : [2,0]}],
-					{ "type" : "scrollArea", "id" : "requiredTagsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [1, 1], "children" : []}
+				{ "type" : "panel", "style" : "convex", "id" : "tenantScrollAreaPanel", "expandMode" : [2,2], "children" : [
+					{"mode" : "horizontal", "expandMode" : [2, 0]},
+					{ "type" : "scrollArea", "id" : "tenantListScrollArea", "expandMode" : [2, 2], "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [1, 0], "children" : [
+						{"mode" : "horizontal", "expandMode" : [0, 0]}
+					]}
 				]}
-			]
+			]},
+			{ "id" : "requiredTagsPanel", "type" : "panel", "size":[90,10], "expandMode" : [0,2], "style" : "convex", "children" : [
+				{ "type" : "label", "text" : "Colony Tags",  "align" : "center"},
+				[{"type":"button", "id":"orderFurniture", "caption":":orderFurniture", "visible":false, "expandMode" : [2,0]}],
+				{ "type" : "scrollArea", "id" : "requiredTagsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [1, 1], "children" : []}
+			]}
 		]},
 		{ "type" : "panel", "id" : "tenantPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
 			{ "mode" : "h" },

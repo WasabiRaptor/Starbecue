@@ -1,3 +1,9 @@
+
 [
-	{"op": "add","path": "/scriptConfig/sbqConvertType","value": "sbqVoreVillageGuardCaptain"}
+	{"op":"merge","path":"","value":{
+		"scriptConfig":{
+			"sbqConvertType" : "sbqVoreVillageGuardCaptain",
+			"sbqDeedConvertType" : "friendlyguardtenant"
+		}
+	}}
 ]

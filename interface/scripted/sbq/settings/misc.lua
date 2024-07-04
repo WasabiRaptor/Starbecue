@@ -8,7 +8,7 @@ function init()
 		return a[1] < b[1]
 	end)
 	for _, v in ipairs(candies) do
-		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2], seed = math.random(65535)}})
+		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2], seed = sb.makeRandomSource():randu64()}})
 	end
 	if world.entityType(pane.sourceEntity()) == "npc" then
 		convertible = world.getNpcScriptParameter(pane.sourceEntity(), "sbqConvertType")

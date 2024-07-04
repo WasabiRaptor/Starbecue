@@ -1,6 +1,8 @@
 [
-	[{"op": "add","path": "/statusControllerSettings","value": {}}],
-	[{"op": "add","path": "/statusControllerSettings/statusProperties","value": {}}],
-	[{"op": "add","path": "/statusControllerSettings/statusProperties/sbqDidVornyConvertCheck","value": true}],
-	{"op": "add","path": "/scriptConfig/sbqConvertType","value": "sbqVoreFriendlyGuardTenant"}
+	{"op":"merge","path":"","value":{
+		"scriptConfig":{
+			"sbqConvertType" : "sbqVoreFriendlyGuardTenant"
+		},
+		"statusControllerSettings":{"statusProperties":{"sbqDidVornyConvertCheck":true}}
+	}}
 ]
