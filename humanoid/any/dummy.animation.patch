@@ -116,6 +116,14 @@
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
+				"underwearHide" : {
+					"priority" : 90,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
+				"braHide" : {
+					"priority" : 90,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
 
 				"occupant0State" : {
 					"priority" : 2,
@@ -296,6 +304,10 @@
 
 				"wings_fg" : {},
 				"wings_bg" : {},
+
+				"underwearCover" : {},
+				"underwearCover_fg" : {},
+				"braCover" : {},
 
 				"tail_1" : {},
 				"tail_2" : {},

@@ -39,6 +39,9 @@ function Default:settingAnimations()
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
 	end
+	self:doAnimations((sbq.settings.breasts and sbq.voreConfig.braHide) or sbq.voreConfig.braShow)
+	self:doAnimations(((sbq.settings.cock or sbq.settings.pussy or sbq.settings.balls) and sbq.voreConfig.underwearHide) or sbq.voreConfig.underwearShow)
+
 end
 
 function Default:hideSlots(hideSlots)

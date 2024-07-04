@@ -1,5 +1,7 @@
 {
 	"globalTagDefaults" : {
+		"nudePath" : "nude/",
+
 		"colorRemap" : "",
 		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png",
 
@@ -453,7 +455,26 @@
 					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
+			},
+			"braHide" : {
+				"default": "false",
+				"priority" : 90,
+				"states" : {
+					"false": { "frames": 1, "cycle": 0, "mode": "end" },
+					"true": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"underwearHide" : {
+				"default": "false",
+				"priority" : 90,
+				"states" : {
+					"false": { "frames": 1, "cycle": 0, "mode": "end" },
+					"true": { "frames": 1, "cycle": 0, "mode": "end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
 			}
+
 		},
 		"parts": {
 			"belly" : {
@@ -1295,12 +1316,13 @@
 					"centered": true,
 					"zLevel": 2,
 					"anchorPart": "body",
-					"bodyFullbright" : true
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle><bodyDirectives>" } },
-						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame><bodyDirectives>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>" } },
+						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>" } },
 						"sit" : "duck",
 						"lay" : "duck",
 						"walk" : "duck",
@@ -1312,7 +1334,7 @@
 						"none": { "properties": {} }
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame><bodyDirectives>" } },
+						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -1367,6 +1389,132 @@
 					}
 				}
 			},
+
+			"underwearCover_fg" : {
+				"properties" : {
+					"centered": true,
+					"zLevel": 2.01,
+					"anchorPart" : "body",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>" } },
+						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"bust" : "head"
+					},
+					"underwearHide" : {
+						"false" : { "properties": {} }
+					}
+				}
+			},
+			"underwearCover" : {
+				"properties" : {
+					"centered": true,
+					"zLevel": 0.01,
+					"anchorPart" : "body",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>" } },
+						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyDanceFrame>" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"bust" : "head"
+					},
+					"underwearHide" : {
+						"false" : { "properties": {} }
+					}
+				}
+			},
+			"braCover": {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.01,
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>",
+					"transformationGroups": ["movementOffset"],
+					"anchorPart" : "body"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<personalityIdle>" } },
+						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<bodyStateAnim>", "transformationGroups" : [] } },
+						"sit": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:chest.1" } },
+						"lay" : "sit",
+						"walk" : "sit",
+						"run": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<bodyStateAnim>" } },
+						"jump" : "sit",
+						"fall" : "sit",
+						"swim" : { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:swim" } },
+						"swimIdle" : "swim",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<bodyDanceFrame>" } },
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"clothesHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } }
+					},
+					"braHide" : {
+						"false" : { "properties": {} }
+					}
+				}
+			},
+
 
 			"body" : {"properties" : {
 				"analInteract" : [-0.5,-2],
