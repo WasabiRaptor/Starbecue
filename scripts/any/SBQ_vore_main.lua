@@ -519,9 +519,9 @@ function _State:tryAction(name, target, ...)
 	end
 
 	if type(result2) ~= "function" then
-		return result1, result2 or false, longest
+		return result1, result2 or result1 or false, longest
 	end
-	return result1, false, longest
+	return result1, result1 or false, longest
 end
 
 function _State:requestAction(forcing, name, target, ...)
@@ -542,7 +542,7 @@ function _State:requestAction(forcing, name, target, ...)
 				end
 			end)
 		end
-		return success or false, reason or false, (cooldown or 0) + wait
+		return success or false, reason or success or false, (cooldown or 0) + wait
 	end
 	if success then
 		local args = { ... }
@@ -573,7 +573,7 @@ function _State:requestAction(forcing, name, target, ...)
 			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
 		end
 	end
-	return success or false, reason or false, (cooldown or 0) + wait
+	return success or false, reason or success or false, (cooldown or 0) + wait
 end
 
 function _State:actionFailed(name, action, target, reason, ...)
@@ -590,9 +590,9 @@ function _State:actionFailed(name, action, target, reason, ...)
 		end
 	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
-		return result1, reason or false, cooldown or 0, result2 or false, ...
+		return result1, reason or result1 or false, cooldown or 0, result2 or false, ...
 	end
-	return result1, reason or false, cooldown or 0, ...
+	return result1, reason or result1 or false, cooldown or 0, ...
 end
 
 function _State:actionAvailable(name, target, ...)
@@ -621,7 +621,7 @@ function _State:actionAvailable(name, target, ...)
 		end
 	end
 	local longest = SpeciesScript:checkAnimations(false, action.animations, action.tags, target)
-	return result1 or false, result2 or false, longest or 0
+	return result1 or false, result2 or result1 or false, longest or 0
 end
 
 function _State:animationTags(tags, target)
