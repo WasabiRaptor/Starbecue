@@ -1738,8 +1738,8 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 	self.struggleCount = (self.struggleCount or 0) + inc
 	locationStore = (locationStore.struggleCount or 0) + inc
 	if self.struggleAction.action then
-		local timeSucceeded = self.struggleTime >= math.random(table.unpack(self.struggleAction.time or { 0, 0 }))
-		local countSucceeded = self.struggleCount >= math.random(table.unpack(self.struggleAction.count or { 0, 0 }))
+		local timeSucceeded = self.struggleTime >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.time or { 0, 0 })))
+		local countSucceeded = self.struggleCount >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.count or { 0, 0 })))
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then
