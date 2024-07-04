@@ -566,7 +566,7 @@ function _State:requestAction(forcing, name, target, ...)
 			callback()
 		end
 	else
-		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..reason, target) then
+		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(reason), target) then
 			dialogueProcessor.sendPlayerDialogueBox()
 			dialogueProcessor.speakDialogue()
 		else

@@ -86,7 +86,7 @@ local function actionSequence(funcName, action, target, actionList, ...)
 			end
 		end
 	end
-	return table.unpack(results)
+	return table.unpack(results or {})
 end
 
 function default:actionSequence(name, ...)
