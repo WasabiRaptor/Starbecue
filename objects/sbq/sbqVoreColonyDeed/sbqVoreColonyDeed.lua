@@ -62,8 +62,8 @@ function init()
 		local i = findTenant(uuid)
 		if not i then return end
 		sbqTenant.importSettings(storage.occupier.tenants[i], ...)
-    end)
-    message.setHandler("sbqParentUpdateType", function(_, _, recruitUuid, uuid, ...)
+	end)
+	message.setHandler("sbqParentUpdateType", function(_, _, recruitUuid, uuid, ...)
 		_ENV.replaceTenant(uuid, ...)
 	end)
 
@@ -78,7 +78,7 @@ function init()
 		for _, tenant in ipairs(storage.occupier.tenants) do
 			if tenant.uniqueId and not uniqueTenants[tenant.uniqueId] then
 				local entityId = world.loadUniqueEntity(tenant.uniqueId)
-				world.callScriptedEntity(entityId, "tenant.evictTenant")
+				if entityId then world.callScriptedEntity(entityId, "tenant.evictTenant") end
 			end
 		end
 		storage.occupier.tenants = tenants
