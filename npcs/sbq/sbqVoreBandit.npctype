@@ -16,6 +16,7 @@
 		"voreConfig" : [
 			{
 				"defaultSettings" : {
+					"personality" : "meanbean",
 					"vorePrefs" : {"oralVore":{"pred":true}},
 					"domBehavior" : {"oralVore":{"getConsentChance":0}},
 					"leanSubDom" : 1,
@@ -24,7 +25,7 @@
 				"groupedDefaultSettings" : {
 					"vorePrefs" : {"pred":true},
 					"locations" : {"mainEffect":"digest", "reformDigested": false},
-					"domBehavior" : {"targetFriendly":false}
+					"domBehavior" : {"targetFriendly":false, "getConsentChance":0}
 				}
 			}
 		],
@@ -32,7 +33,80 @@
 		// "sbqPredRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
 		// "sbqPreyRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",
 		"sbqRandomizeSettings" : {
-			"personality" : ["default", "shy", "flirty"]
+			"cock" : [true,false],
+			"balls" : "cock", // strings in randomize settings makes them copy the value of that setting
+			"breasts" : [true,false],
+			"pussy" : [true,false],
+			"vorePrefs" : {
+				// "oralVore" : {"pred":[true,false]}, // OV for bandits is always true
+				"tailVore" : {"pred":[true,false]},
+				"absorbVore" : {"pred":[true,false]},
+				"navelVore" : {"pred":[true,false]},
+				"analVore" : {"pred":[true,false]},
+				"unbirthVore" : {"pred":[true,false]},
+				"breastVore" : {"pred":[true,false]},
+				"cockVore" : {"pred":[true,false]}
+			},
+			"infusePrefs" : {
+				"thighsInfuse" : {"pred":[true,false]},
+				"bellyInfuse" : {"pred":[true,false]},
+				"breastInfuse" : {"pred":[true,false]},
+				"pussyInfuse" : {"pred":[true,false]},
+				"cockInfuse" : {"pred":[true,false]},
+				"pawInfuse" : {"pred":[true,false]},
+				"tailInfuse" : {"pred":[true,false]}
+			},
+			"locations" : {
+				"belly" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"ass" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"womb" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"pussy" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"tail" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"cock" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"balls" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				},
+				"breasts" : {
+					"energyDrain" : [true,false],
+					"compression" : ["none","time","health"],
+					"transform" : [true,false],
+					"transformDigested" : "transform"
+				}
+			}
+
 		}
 	},
 	"statusControllerSettings" : {

@@ -47,8 +47,8 @@ function init()
 	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings")
 	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
 	local randomizeSettings = config.getParameter("sbqRandomizeSettings")
+	math.randomseed(npc.seed())
 	if randomizeSettings and not storage.sbqSettings then
-		math.randomseed(npc.seed())
 		randomizeSettings = root.fetchConfigArray(randomizeSettings)
 		storage.sbqSettings = {}
 		for k, v in pairs(randomizeSettings) do
@@ -57,14 +57,39 @@ function init()
 				for g, settings in pairs(v) do
 					storage.sbqSettings[k][g] = {}
 					for setting, v in pairs(settings) do
-						storage.sbqSettings[k][g][setting] = v[math.random(#v)]
+						if type(v) == "table" then storage.sbqSettings[k][g][setting] = v[math.random(#v)] end
 					end
 				end
 			else
-				storage.sbqSettings[k] = v[math.random(#v)]
+				if type(v) == "table" then storage.sbqSettings[k] = v[math.random(#v)] end
+			end
+		end
+		-- copy values from other randomized settings
+		for k, v in pairs(randomizeSettings) do
+			if sbq.config.groupedSettings[k] then
+				for g, settings in pairs(v) do
+					for setting, v in pairs(settings) do
+						if type(v) == "string" then
+							if v:sub(1,1) == "." then
+								storage.sbqSettings[k][g][setting] = sb.jsonQuery(storage.sbqSettings, v:sub(2,-1))
+							else
+								storage.sbqSettings[k][g][setting] = storage.sbqSettings[k][g][v]
+							end
+						end
+					end
+				end
+			else
+				if type(v) == "string" then
+					if v:sub(1, 1) == "." then
+						storage.sbqSettings[k] = sb.jsonQuery(storage.sbqSettings, v:sub(2,-1))
+					else
+						storage.sbqSettings[k] = storage.sbqSettings[v]
+					end
+				end
 			end
 		end
 	end
+	math.randomseed(npc.seed())
 
 	if not storage.sbqUpgrades.candiesEaten then
 		storage.sbqUpgrades.candiesEaten = {}
