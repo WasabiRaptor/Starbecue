@@ -7,6 +7,9 @@ local button
 local pressed
 local activeSegment
 
+require "/scripts/vec2.lua"
+require "/scripts/rect.lua"
+
 function init()
 	options = config.getParameter("options")
 	default = config.getParameter("default") or {}
@@ -141,15 +144,22 @@ function update( dt )
 		local iconPos = radialPoint(segmentSize * (i - 1) + 180, ri);
 		if options[i].icon then
 			if type(options[i].icon) == "table" then
-				canvas:drawDrawables(options[i].icon, iconPos)
+				local bounds = sb.drawableBoundBox(options[i].icon, true)
+				local center = rect.center(bounds)
+				canvas:drawDrawables(options[i].icon, vec2.sub(iconPos, center))
+				if iconPos[2] < 100 then
+					textOffset = bounds[2] - center[2] - 3
+				else
+					textOffset = bounds[4] - center[2] + 3
+				end
 			else
 				canvas:drawImage(options[i].icon, iconPos, nil, nil, true)
 				local size = root.imageSize(options[i].icon)
-				textOffset = (size[2] / 2) +3
+				textOffset = (size[2] / 2) + 3
+				if iconPos[2] < 100 then
+					textOffset = textOffset * -1
+				end
 			end
-		end
-		if iconPos[2] < 100 then
-			textOffset = textOffset * -1
 		end
 		if options[i].name then
 			drawShadowText(options[i].name, {iconPos[1], iconPos[2] + textOffset}, options[i].nameColor or options[i].textColor or {255,255,255}, 50, options[i].locked)
