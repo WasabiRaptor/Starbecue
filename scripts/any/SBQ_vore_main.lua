@@ -1439,6 +1439,7 @@ function _Occupant:update(dt)
 		self:setLoungeDance(self:animProperty("dance"))
 		self:setLoungeEmote(self:animProperty("emote"))
 	end
+	if not self.locationStore[self.location] then self.locationStore[self.location] = {time = 0, struggleTime = 0} end
 	local locationStore = self.locationStore[self.location]
 
 	locationStore.time = locationStore.time + dt
@@ -1736,7 +1737,7 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 	end
 	self.struggleTime = (self.struggleTime or 0) + bonusTime
 	self.struggleCount = (self.struggleCount or 0) + inc
-	locationStore = (locationStore.struggleCount or 0) + inc
+	locationStore.struggleCount = (locationStore.struggleCount or 0) + inc
 	if self.struggleAction.action then
 		local timeSucceeded = self.struggleTime >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.time or { 0, 0 })))
 		local countSucceeded = self.struggleCount >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.count or { 0, 0 })))
