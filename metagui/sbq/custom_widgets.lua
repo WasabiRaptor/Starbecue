@@ -622,7 +622,14 @@ function widgets.sbqCheckBox:init(base, param)
 	end)
 end
 
-function widgets.sbqCheckBox:preferredSize() return { 12, 12 } end
+function widgets.sbqCheckBox:preferredSize()
+	if self.icon then
+		local size = rect.size(root.nonEmptyRegion(self.icon))
+		return {size[1]+2, 12}
+	else
+		return { 12, 12 }
+	end
+end
 
 function widgets.sbqCheckBox:draw()
 	local c = widget.bindCanvas(self.backingWidget)
