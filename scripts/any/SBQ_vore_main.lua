@@ -38,11 +38,27 @@ Occupants = {
 }
 
 function controlPressed(seat, control, time)
-	if SpeciesScript.active and Occupants.seat[seat] then Occupants.seat[seat]:controlPressed(control, time) end
+	if SpeciesScript.active and Occupants.seat[seat] then
+		Occupants.seat[seat]:controlPressed(control, time)
+	else
+		local eid = loungeable.entityLoungingIn(seat)
+		if eid and world.entityExists(eid) then
+			world.sendEntityMessage(eid, "sbqReleased")
+		end
+		loungeable.setLoungeEnabled(seat, false)
+	end
 	-- sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
 function controlReleased(seat, control, time)
-	if SpeciesScript.active and Occupants.seat[seat] then Occupants.seat[seat]:controlReleased(control, time) end
+	if SpeciesScript.active and Occupants.seat[seat] then
+		Occupants.seat[seat]:controlReleased(control, time)
+	else
+		local eid = loungeable.entityLoungingIn(seat)
+		if eid and world.entityExists(eid) then
+			world.sendEntityMessage(eid, "sbqReleased")
+		end
+		loungeable.setLoungeEnabled(seat, false)
+	end
 	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
 
@@ -1429,7 +1445,8 @@ end
 
 
 function _Occupant:update(dt)
-	if (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove() end
+	local eid = self:entityLoungingIn()
+	if (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) or ((eid ~= nil) and (eid ~= self.entityId)) then return self:remove() end
 	local location = self:getLocation()
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
