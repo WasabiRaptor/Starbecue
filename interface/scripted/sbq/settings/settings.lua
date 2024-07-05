@@ -74,8 +74,8 @@ function init()
 	sbq.refreshSettingVisibility()
 end
 function uninit()
-	if world.entityExists(pane.sourceEntity()) then
-		world.sendEntityMessage(pane.sourceEntity(), "sbqRefreshSettings")
+	if world.entityExists(sbq.entityId()) then
+		world.sendEntityMessage(sbq.entityId(), "sbqRefreshSettings")
 	end
 end
 local locationSetup = {}

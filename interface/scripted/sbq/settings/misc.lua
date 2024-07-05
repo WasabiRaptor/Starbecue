@@ -23,7 +23,29 @@ function init()
 			end
 		end
 	end
+	local source = sbq.entityId()
+	_ENV.healthBar.parent:setVisible(world.entityIsResource(source, "health") or false)
+	_ENV.hungerBar.parent:setVisible(world.entityIsResource(source, "food") or false)
+	_ENV.lustBar.parent:setVisible(world.entityIsResource(source, "sbqLust") or false)
+	_ENV.restBar.parent:setVisible(world.entityIsResource(source, "sbqRest") or false)
 end
+
+function update()
+	local source = sbq.entityId()
+	if world.entityIsResource(source, "health") then
+		_ENV.healthBar:setValue(world.entityResourcePercentage(source, "health"))
+	end
+	if world.entityIsResource(source, "food") then
+		_ENV.hungerBar:setValue(world.entityResourcePercentage(source,"food"))
+	end
+	if world.entityIsResource(source, "sbqLust") then
+		_ENV.lustBar:setValue(world.entityResourcePercentage(source,"sbqLust"))
+	end
+	if world.entityIsResource(source, "sbqRest") then
+		_ENV.restBar:setValue(world.entityResourcePercentage(source,"sbqRest"))
+	end
+end
+
 function uninit()
 	local item = _ENV.importSettingsSlot:item()
 	if item then player.giveItem(item) end
