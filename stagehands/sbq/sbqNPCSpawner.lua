@@ -15,7 +15,11 @@ function update()
 		local didBias = false
 		while not gotData do
 			local i = math.random(#data)
-			if (data[i].spawnOnce and world.getProperty(data[i].npc..data[i].npcTypeName.."Spawned")) or (not checkRequirements(data[i].checkRequirements or {})) or (not root.speciesConfig(data[i].npc)) then
+			local npcConfig = root.speciesConfig(data[i].npc)
+			local uuid = sb.jsonQuery(npcConfig, "scriptConfig.uniqueId")
+			if (data[i].spawnOnce and world.getProperty(data[i].npc..data[i].npcTypeName.."Spawned"))
+			or (uuid and world.loadUniqueEntity(uuid))
+			or (not checkRequirements(data[i].checkRequirements or {})) or (not npcConfig) then
 				table.remove(data,i)
 			else
 				if data[i].bias or didBias then
@@ -32,7 +36,7 @@ function update()
 		local npc = data.npc or config.getParameter("npc")
 		if type(npc) == "string" then
 			if root.speciesConfig(npc) then
-				world.spawnNpc(position, npc, data.npcTypeName or config.getParameter("npcTypeName"), data.npcLevel or config.getParameter("npcLevel") or world.threatLevel(), data.npcSeed or config.getParameter("npcSeed"), data.npcParameters or config.getParameter("npcParameters"))
+				world.spawnNpc(position, npc, data.npcTypeName or config.getParameter("npcTypeName"), data.npcLevel or config.getParameter("npcLevel") or world.threatLevel(), data.npcSeed or config.getParameter("npcSeed"), sb.jsonMerge(config.getParameter("npcParameters") or {}, data.npcParameters or {}) )
 				world.setProperty( npc..(data.npcTypeName or config.getParameter("npcTypeName")).."Spawned", true)
 			end
 		end
@@ -45,12 +49,12 @@ function checkRequirements(data)
 		for i, item in ipairs(data.checkItems) do
 			if not root.itemConfig(item) then return end
 		end
-    end
+	end
 	if data.checkMods then
 		for i, mod in ipairs(data.checkMods) do
 			if not root.modMetadata(mod) then return end
 		end
-    end
+	end
 	if data.checkAssets then
 		for i, path in ipairs(data.checkAssets) do
 			if not root.assetExists(path) then return end

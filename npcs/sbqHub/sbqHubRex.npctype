@@ -40,48 +40,34 @@
 		"isOC" : true,
 		"behavior" : "sbqvorevillager",
 		"uniqueId" : "sbqHubRex",
-		"sbqOverrideSettings" : {
-			"oralVorePred" : true,
-
-			"analVorePred" : false,
-			"cockVorePred" : false,
-			"breastVorePred" : false,
-			"unbirthPred" : false,
-
-			"bellyInfusion" : false,
-			"cockInfusion" : false,
-			"pussyInfusion" : false,
-			"breastsInfusion" : false
-
-		},
-		"sbqOverridePreyEnabled" : {
-			"digestAllow": false,
-			"cumDigestAllow": false,
-			"femcumDigestAllow": false,
-			"milkDigestAllow": false,
-			"transformAllow": false,
-			"cumTransformAllow": false,
-			"genderswapAllow": false,
-
-			"preyEnabled": false,
-
-			"eggAllow": true,
-			"held": false,
-			"oralVore": true,
-			"tailVore": true,
-			"absorbVore": false,
-
-			"navelVore": false,
-			"analVore": true,
-			"unbirth": true,
-			"cockVore": true,
-			"breastVore": false,
-
-			"bellyInfusion" : false,
-			"cockInfusion" : false,
-			"pussyInfusion" : false,
-			"breastsInfusion" : false
-		},
+		"voreConfig" : [
+			"/humanoid/any/disableAllTF.config",
+			"/humanoid/any/disableAllInfusePred.config",
+			"/humanoid/any/disableAllInfusePrey.config",
+			"/humanoid/any/disableAllVorePrey.config",
+			{
+				"cock" : false,
+				"balls" : false,
+				"breasts" : false,
+				"pussy" : false,
+				"defaultSettings" : {
+					"vorePrefs" : {
+						"oralVore" : {"pred":true}
+					}
+				},
+				"overrideSettings" : {
+					"vorePrefs" : {
+						"analVore" : {"pred":false},
+						"cockVore" : {"pred":false},
+						"unbirthVore" : {"pred":false},
+						"breastVore" : {"pred":false},
+						"absorbVore" : {"pred":false},
+						"navelVore" : {"pred":false},
+						"tailVore" : {"pred":false}
+					}
+				}
+			}
+		],
 
 		"dialogueTree" : {
 			"greeting": {

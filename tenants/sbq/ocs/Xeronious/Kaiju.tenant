@@ -1,5 +1,5 @@
 {
-	"name": "sbq/Xeronious/Batty",
+	"name": "sbq/Xeronious/Kaiju",
 	"priority": 60,
 
 	"colonyTagCriteria": {
@@ -7,19 +7,19 @@
 		"door": 1,
 		"sbqVore" : 1,
 		"hoard" : 8,
-		"avian" : 2
+		"kaiju" : 2
 	},
 
 	"orderFurniture" : [
 		{"name":"barrelgoldfilled", "count":1},
-		{"name":"birdbed", "count":1}
+		{"name":"sbqSpawnerKaijuNest", "count":1}
 	],
 
 	"tenants": [
 		{
 			"spawn": "npc",
-			"species": ["sbq/Xeronious/Batty"],
-			"type": "sbq/Xeronious/Batty",
+			"species": ["sbq/Xeronious/Kaiju"],
+			"type": "sbq/Xeronious/Kaiju",
 			"overrides": {
 			}
 		}

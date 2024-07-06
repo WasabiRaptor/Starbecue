@@ -39,49 +39,13 @@
 		"isOC" : true,
 		"behavior" : "sbqvorevillager",
 		"uniqueId" : "sbqHubCosmic",
-		"sbqOverrideSettings" : {
-			"mood" : "default",
-			"personality" : "default",
-
-			"analVorePred" : false,
-			"cockVorePred" : false,
-			"breastVorePred" : false,
-			"unbirthPred" : false,
-
-			"bellyInfusion" : false,
-			"cockInfusion" : false,
-			"pussyInfusion" : false,
-			"breastsInfusion" : false
-
-		},
-		"sbqOverridePreyEnabled" : {
-			"preyEnabled": false,
-
-			"digestAllow": false,
-			"cumDigestAllow": false,
-			"femcumDigestAllow": false,
-			"milkDigestAllow": false,
-			"transformAllow": false,
-			"cumTransformAllow": false,
-			"genderswapAllow": false,
-
-			"bellyInfusion" : false,
-			"cockInfusion" : false,
-			"pussyInfusion" : false,
-			"breastsInfusion" : false,
-
-			"eggAllow": true,
-			"held": false,
-			"oralVore": true,
-			"tailVore": true,
-			"absorbVore": false,
-
-			"navelVore": false,
-			"analVore": true,
-			"unbirth": true,
-			"cockVore": true,
-			"breastVore": false
-		},
+		"voreConfig" : [
+			"/humanoid/any/disableAllTF.config",
+			"/humanoid/any/disableAllInfusePred.config",
+			"/humanoid/any/disableAllInfusePrey.config",
+			"/humanoid/any/disableAllVorePrey.config",
+			"/humanoid/any/disableAllVorePred.config"
+		],
 
 		"dialogueTree" : {
 			"greeting" : {

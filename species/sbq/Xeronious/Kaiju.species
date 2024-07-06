@@ -1,6 +1,7 @@
 {
 	"kind" : "sbq/Xeronious/Kaiju",
 
+	"forceName" : "Kaiju",
 	"charCreationTooltip" : {
 		"title" : "Kaiju",
 		"subTitle" : "-",
@@ -188,6 +189,10 @@
 	],
 	"potionRarity" : "essential",
 	"voreConfig" : [
+		"/humanoid/any/disableTFActions.config",
+		"/humanoid/any/disableAllVorePrey.config",
+		"/humanoid/any/disableAllInfusePrey.config",
+		"/humanoid/any/disableAllInfusePred.config",
 		"/humanoid/sbq/Xeronious/Kaiju/vore.config"
 	],
 

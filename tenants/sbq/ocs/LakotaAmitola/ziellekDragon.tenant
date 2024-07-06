@@ -1,25 +1,23 @@
 {
-	"name": "sbq/Xeronious/Batty",
-	"priority": 60,
+	"name": "sbq/LakotaAmitola/ziellekDragon",
+	"priority": 51,
 
 	"colonyTagCriteria": {
 		"light": 1,
 		"door": 1,
 		"sbqVore" : 1,
-		"hoard" : 8,
-		"avian" : 2
+		"hoard" : 8
 	},
 
 	"orderFurniture" : [
-		{"name":"barrelgoldfilled", "count":1},
-		{"name":"birdbed", "count":1}
+		{"name":"barrelgoldfilled", "count":1}
 	],
 
 	"tenants": [
 		{
 			"spawn": "npc",
-			"species": ["sbq/Xeronious/Batty"],
-			"type": "sbq/Xeronious/Batty",
+			"species": ["sbq/LakotaAmitola/ziellekDragon"],
+			"type": "sbqVoreVillager",
 			"overrides": {
 			}
 		}
