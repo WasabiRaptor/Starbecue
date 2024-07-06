@@ -132,6 +132,12 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		if player then sbq.logWarn("Attempted to transform into blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformIntoBlacklist") end
 		return false
 	end
+	if npc and speciesFile.voreConfig then
+		if sb.jsonQuery(root.fetchConfigArray(speciesFile.voreConfig), "overrideSettings.speciesTF") == false then
+			sbq.logWarn("NPC cannot be transformed into TF locked species: " .. newIdentity.species)
+			return false
+		end
+	end
 	if player and not (
 		root.assetExists(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "casual"}))
 		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "survival"}))
