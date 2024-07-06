@@ -156,7 +156,7 @@ function sbq_hunting.checkResources(settings)
 end
 
 function sbq_hunting.attemptAction(target)
-	if not sbq.timer("huntingActionAttemptCooldown", 10) then return end
+	if not sbq.timer("huntingActionAttemptCooldown", sbq.config.huntTargetActionCooldown) then return end
 	if sbq_hunting.prompted[target] ~= nil then sbq_hunting.nextTarget() return end
 	if sbq_hunting.isDom then
 		if SpeciesScript:actionAvailable(sbq_hunting.action, target) then
