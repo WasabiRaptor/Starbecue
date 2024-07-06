@@ -3,6 +3,17 @@ function doSBQTargetAction(args, board)
 	sbq_hunting.attemptAction(args.entity)
 	return true
 end
+function entityInSBQActionRange(args, board)
+	if (args.entity == nil) or (not world.entityExists(args.entity)) then return false end
+	local bounds = mcontroller.collisionBoundBox()
+	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
+	local targetBounds = world.entityCollisionBoundBox(args.entity)
+	if rect.intersects(bounds, targetBounds) or ((entity.entityInSight(args.entity)) and (rect.intersects(paddedbounds, targetBounds))) then
+		return true
+	end
+	return false
+end
+
 
 function sbqSetHostileTarget(args, board)
 	if (args.entity ~= nil) and world.entityExists(args.entity) and (args.entity ~= args.hunting) and sbq.timer("huntTargetSwitchCooldown", sbq.config.huntTargetSwitchCooldown) then

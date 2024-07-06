@@ -75,18 +75,12 @@
 								"parameters": {},
 								"children": [
 									{
-										"title": "entityInRange",
+										"title": "entityInSBQActionRange",
 										"type": "action",
-										"name": "entityInRange",
+										"name": "entityInSBQActionRange",
 										"parameters": {
 											"entity": {
 												"key": "sbqHuntingTarget"
-											},
-											"position": {
-												"key": "self"
-											},
-											"range": {
-												"value": 4
 											}
 										}
 									},
@@ -187,18 +181,12 @@
 												"output": {}
 											},
 											{
-												"title": "entityInRange",
+												"title": "entityInSBQActionRange",
 												"type": "action",
-												"name": "entityInRange",
+												"name": "entityInSBQActionRange",
 												"parameters": {
 													"entity": {
 														"key": "sbqHuntingTarget"
-													},
-													"position": {
-														"key": "self"
-													},
-													"range": {
-														"value": 2
 													}
 												}
 											}
