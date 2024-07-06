@@ -284,24 +284,24 @@ function scanHouseIntegrity()
 	local house = findHouseBoundary(self.position, self.maxPerimeter)
 
 	if not house.poly then
-		grumbles[#grumbles + 1] = { "enclosedArea" }
+		table.insert(grumbles, { "enclosedArea" })
 		possibleTortureRoom = true
 	else
 		storage.house.floorPosition = house.floor
 		storage.house.boundary = house.poly
 
 		if liquidInHouseBounds(house.poly) then
-			grumbles[#grumbles + 1] = { "tagCriteria" }
+			table.insert(grumbles, { "enclosedArea" })
 			possibleTortureRoom = true
 		end
 	end
 
 	local scanResults = scanHouseContents(storage.house.boundary)
 	if scanResults.otherDeed then
-		grumbles[#grumbles + 1] = { "otherDeed" }
+		table.insert(grumbles, { "otherDeed" })
 	end
 	if scanResults.bannedObject then
-		grumbles[#grumbles + 1] = { "tagCriteria" }
+		table.insert(grumbles, { "enclosedArea" })
 		possibleTortureRoom = true
 	end
 
@@ -326,7 +326,7 @@ function scanHouseIntegrity()
 	for tag, requiredAmount in pairs(getTagCriteria()) do
 		local currentAmount = tags[tag] or 0
 		if currentAmount < requiredAmount then
-			grumbles[#grumbles + 1] = { "tagCriteria", tag, requiredAmount - currentAmount }
+			table.insert(grumbles, { "tagCriteria", tag, requiredAmount - currentAmount })
 		end
 	end
 
