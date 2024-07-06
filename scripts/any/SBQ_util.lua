@@ -354,9 +354,21 @@ function sbq.getSettingsOf.locations()
 		locations = sbq.exportSettingGroup("locations"),
 	}
 end
+function sbq.getSettingsOf.current()
+	local output = sb.jsonMerge(storage.sbqSettings, {})
+	output.recentlyDigested = {}
+	output.infuseSlots = {}
+	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
+	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
+	output.locations = sbq.exportSettingGroup("locations")
+	output.domBehavior = sbq.exportSettingGroup("domBehavior")
+	output.subBehavior = sbq.exportSettingGroup("subBehavior")
+	return output
+end
 function sbq.getSettingsOf.all()
 	local output = sbq.exportBaseSettings()
 	output.recentlyDigested = {}
+	output.infuseSlots = {}
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
 	output.locations = sbq.exportSettingGroup("locations")

@@ -40,7 +40,7 @@ function sbq.humanoidInit()
 		item.parameters.npcArgs.npcSpecies = humanoid.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
 		item.parameters.npcArgs.npcParam.identity = identity
-		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sb.jsonMerge(storage.sbqSettings, sbq.getSettingsOf.prefs())
+		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.getSettingsOf.current()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
 		item.parameters.tooltipFields.collarNameLabel = sbq.createdDate()
 		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")

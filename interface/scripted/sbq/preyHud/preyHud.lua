@@ -106,12 +106,13 @@ function update( dt )
 	-- drawing
 	indicator:clear()
 
-    -- buttons
+	-- buttons
 	local lockDown = world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black"
 	indicateButton("interact", world.isEntityInteractive(pane.sourceEntity()) and "default" )
 	indicateButton("up", buttons.up and lockDown or buttons.up )
 	indicateButton("down", buttons.down and lockDown or buttons.down )
 
+	player.setScriptContext("starbecue")
 	local facingRight = player.callScript("mcontroller.facingDirection") == 1
 	local left = (buttons.left or (facingRight and buttons.back) or buttons.front)
 	indicateButton("left", left and lockDown or left)
