@@ -1251,13 +1251,16 @@ function _Location:getStruggleAction(direction)
 end
 
 function _Location:outputData(entityId)
-	local output = {}
+	local output = {struggleActions = {}}
 	for _, k in ipairs(sbq.voreConfig.preyHudLocationOutput or sbq.config.preyHudLocationOutput) do
 		output[k] = self[k]
 	end
-	for _, struggleAction in pairs(output.struggleActions or {}) do
+	for k, struggleAction in pairs(self.struggleActions or {}) do
+		output.struggleActions[k] = {}
 		if not SpeciesScript:actionAvailable(struggleAction.action, entityId, table.unpack(struggleAction.args or {})) then
-			struggleAction.indicate = "default"
+			output.struggleActions[k].indicate = "default"
+		else
+			output.struggleActions[k].indicate = struggleAction.indicate
 		end
 	end
 	return output

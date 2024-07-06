@@ -109,15 +109,15 @@ function update( dt )
 	-- buttons
 	local lockDown = world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black"
 	indicateButton("interact", world.isEntityInteractive(pane.sourceEntity()) and "default" )
-	indicateButton("up", buttons.up and lockDown or buttons.up )
-	indicateButton("down", buttons.down and lockDown or buttons.down )
+	indicateButton("up", (buttons.up and lockDown) or buttons.up )
+	indicateButton("down", (buttons.down and lockDown) or buttons.down )
 
 	player.setScriptContext("starbecue")
 	local facingRight = player.callScript("mcontroller.facingDirection") == 1
 	local left = (buttons.left or (facingRight and buttons.back) or buttons.front)
-	indicateButton("left", left and lockDown or left)
+	indicateButton("left", (left and lockDown) or left)
 	local right = (buttons.right or (facingRight and buttons.front) or buttons.back)
-	indicateButton("right", right and lockDown or right )
+	indicateButton("right", (right and lockDown) or right )
 
 	-- bar
 	local s = (status.statusProperty("sbqProgressBar") or 0) * bar.w
