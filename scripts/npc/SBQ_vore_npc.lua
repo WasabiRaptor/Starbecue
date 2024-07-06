@@ -105,7 +105,7 @@ function init()
 
 	sbq.init({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config.getParameter("voreConfig")})
 	sbq.dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree"))
-	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
+	for _, script in ipairs((sbq.dialogueTree or {}).dialogueStepScripts or {}) do
 		require(script)
 	end
 	message.setHandler("sbqSetInteracted", function (_,_, id)

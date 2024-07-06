@@ -18,7 +18,7 @@ function dialogueProcessor.getDialogue(path, eid, dialogueTree, dialogueTreeTop)
 	if path ~= nil then
 		dialogue.path = path
 		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, sbq.settings, sbq.entityId(), dialogueTree or dialogue.prev or sbq.dialogueTree, dialogueTreeTop or dialogue.prevTop or sbq.dialogueTree)
-		if (not dialogueTree) or (not dialogueTreeTop) then dialogue.finished = true return false end
+		if not (dialogueTree or dialogueTreeTop) then dialogue.finished = true return false end
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
@@ -114,6 +114,7 @@ end
 
 
 function dialogueProcessor.handleRandomDialogue(settings, eid, dialogueTree, dialogueTreeTop, rollno)
+	if not (dialogueTree or dialogueTreeTop) then return false end
 	for _, key in ipairs(dialogueProcessor.resultKeys) do
 		local randomKey = key.."Random"
 		if dialogue.result[randomKey] and not dialogue.result[key] then
@@ -146,6 +147,7 @@ function dialogueProcessor.generateKeysmashes(input, lengthMin, lengthMax)
 end
 
 function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, dialogueTreeTop)
+	if not (dialogueTree or dialogueTreeTop) then return false end
 	dialogueTreeTop = dialogueProcessor.getRedirectedDialogue(dialogueTreeTop or dialogueTree, false, settings, dialogueTreeTop or dialogueTree, dialogueTreeTop or dialogueTree)
 	dialogueTree = dialogueProcessor.getRedirectedDialogue(path, false, settings, dialogueTree or dialogueTreeTop, dialogueTreeTop)
 	if not dialogueTree then return false end
