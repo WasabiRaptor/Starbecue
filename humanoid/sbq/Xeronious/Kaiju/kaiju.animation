@@ -230,6 +230,9 @@
 			},
 			"body": {
 				"properties": {
+					"front" : [3, 0],
+					"back" : [-3, 0],
+					"analInteract" : [-1,-2],
 					"centered": true,
 					"zLevel": 0,
 					"transformationGroups": ["movementOffset"],
@@ -676,6 +679,7 @@
 			},
 			"head": {
 				"properties": {
+					"interact" : [2,2],
 					"centered": true,
 					"zLevel": -2,
 					"transformationGroups": ["headOffset"],
@@ -751,6 +755,7 @@
 			},
 			"tail": {
 				"properties" : {
+					"interact" : [-4,-2],
 					"zLevel":-1,
 					"anchorPart" : "body",
 					"transformationGroups" : ["tailOffset"],
