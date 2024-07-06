@@ -110,7 +110,7 @@ function init()
 				args = false,
 				message = false
 			}
-		}, player.id())
+		}, id)
 	end)
 
 	message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
@@ -142,7 +142,7 @@ function init()
 				args = false,
 				message = false
 			}
-		}, player.id())
+		}, id)
 	end)
 	message.setHandler("sbqPromptResponse", function (_,_,tryAction, isDom, line, action, target)
 		if tryAction then
