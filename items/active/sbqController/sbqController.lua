@@ -111,7 +111,7 @@ function sbq.clickAction()
 	if result == nil then
 		result = player.callScript("sbq.tryAction", storage.action) or {}
 	end
-	if (not result[1]) and (result[2] ~= "targetMissing") then
+	if (not result[1]) and (result[2] and (result[2] ~= "targetMissing")) then
 		animator.playSound("error")
 		player.queueUIMessage(sbq.getString(":action_"..tostring(result[2])))
 	end
