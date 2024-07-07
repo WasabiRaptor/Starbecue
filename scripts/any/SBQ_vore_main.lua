@@ -1061,7 +1061,7 @@ function _Location:updateOccupancy(dt)
 					self.occupancy.count = self.occupancy.count + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing) then
-					self.occupancy.size = self.occupancy.size + (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale())
+					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
 				end
 			end
 		end
@@ -1277,7 +1277,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	end
 	local seat
 	-- check for unoccupied occupant seat
-	for i = 0, sbq.config.seatCount - 1 do
+	for i = 0, (sbq.voreConfig.seatCount or sbq.config.seatCount) - 1 do
 		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break

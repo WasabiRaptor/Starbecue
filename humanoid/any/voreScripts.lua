@@ -463,6 +463,10 @@ function default:mainEffectAvailable(name, action, target)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
 	if occupant.locationSettings.mainEffect == (action.mainEffect or name) then return false, "invalidAction" end
+
+	if sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.mainEffect.%s", (action.mainEffect or name)))
+	or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.locations.%s.mainEffect.%s", occupant.location, (action.mainEffect or name)))
+	then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if location.mainEffect[action.mainEffect or name] then
 		return true

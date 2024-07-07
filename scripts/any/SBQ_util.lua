@@ -104,12 +104,12 @@ function sbq.setupSettingMetatables(entityType)
 			end
 		end
 		if not sbq.config.groupedSettings[setting] then
-			local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(v)]
+			local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, v))
 			if result then
 				storage.sbqSettings[setting] = result
 				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nInvalid with current species config.", setting, v, result))
 			end
-			local result2 = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(override)]
+			local result2 = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, override))
 			if result2 then
 				sbq.settings[setting] = result2
 			end
@@ -168,12 +168,12 @@ function sbq.setupSettingMetatables(entityType)
 						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting, v, sbq.defaultSettings[setting], defaultType))
 					end
 				end
-				local result = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(v)] or ((((sbq.voreConfig.invalidSettings or {})[k] or {})[name] or {})[setting] or {})[tostring(v)]
+				local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, v)) or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", k, name, setting, v))
 				if result then
 					storage.sbqSettings[k][name][setting] = result
 					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, result))
 				end
-				local result2 = ((sbq.voreConfig.invalidSettings or {})[setting] or {})[tostring(override)] or ((((sbq.voreConfig.invalidSettings or {})[k] or {})[name] or {})[setting] or {})[tostring(override)]
+				local result2 = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, override)) or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", k, name, setting, override))
 				if result2 then
 					sbq.settings[k][name][setting] = result2
 				end

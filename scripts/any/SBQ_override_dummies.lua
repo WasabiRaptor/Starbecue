@@ -133,10 +133,10 @@ function sbq.overConsumeResource(name, value)
 	return true
 end
 function sbq.resourceLocked(name)
-	return sbq.resourcesLocked[name] or false
+	return storage.resourcesLocked[name] or false
 end
 function sbq.setResourceLocked(name,locked)
-	sbq.resourcesLocked[name] = locked
+	storage.resourcesLocked[name] = locked
 end
 function sbq.resetResource(name)
 	storage.resources[name] = storage.resourceData[name].initialValue or (storage.resourceData[name].initalPercentage and (storage.resourceData[name].initalPercentage * sbq.resourceMax(name))) or 0
@@ -162,6 +162,14 @@ function sbq.modifyResourcePercentage(name, value)
 	sbq.modifyResource(name, value * sbq.resourceMax(name))
 end
 
+function sbq.initStats(config)
+	local output = {}
+	for k, v in pairs(config) do
+		output[k] = v.baseValue
+	end
+	return output
+end
+
 function sbq.setStatModifiers(category, modifiers)
 	storage.effectCategories[category] = modifiers
 	sbq.calculateStats()
@@ -177,7 +185,7 @@ function sbq.calculateStats()
 		for _, modifier in ipairs(modifiers) do
 			if modifier.stat then
 				storage.baseStats[modifier.stat] = storage.baseStats[modifier.stat] or 0
-				stats[modifier.stat] = stats[modifier.stat] or {baseModified = storage.baseStats[modifier.stat], effectiveMultiplier = 1}
+				stats[modifier.stat] = stats[modifier.stat] or {baseModified = 0, effectiveMultiplier = 1}
 				if modifier.baseMultiplier then
 					stats[modifier.stat].baseModified = stats[modifier.stat].baseModified + (storage.baseStats[modifier.stat] * (modifier.baseMultiplier - 1))
 				elseif modifier.amount then
@@ -188,8 +196,13 @@ function sbq.calculateStats()
 			end
 		end
 	end
-	for stat, modifiers in pairs(stats) do
-		storage.stats[stat] = modifiers.baseModified * modifiers.effectiveMultiplier
+	for stat, base in pairs(storage.baseStats) do
+		local modifiers = stats[stat]
+		if modifiers then
+			storage.stats[stat] = (base + modifiers.baseModified) * modifiers.effectiveMultiplier
+		else
+			storage.stats[stat] = base
+		end
 	end
 end
 function sbq.getDefaultResources()
@@ -210,9 +223,7 @@ function sbq.resourceDeltas(dt)
 end
 
 function sbq.notifyResourceConsumed(resource, amount)
-	function notifyResourceConsumed(resourceName, amount)
-		if resourceName == "energy" and amount > 0 then
-			sbq.setResourcePercentage("energyRegenBlock", 1.0)
-		end
+	if resource == "energy" and amount > 0 then
+		sbq.setResourcePercentage("energyRegenBlock", 1.0)
 	end
 end
