@@ -1,0 +1,157 @@
+{
+	"useModifiedAnimator" : true, // simple boolean to mark that this should be using the expanded featureset of the animator from my engine modifications
+	"globalTagDefaults" : {},
+	"animatedParts": {
+		"stateTypes": {
+			"eatState" : {
+				"priority" : 4, // animation states each have a priority, ones with higher values override ones with lesser values if they can
+				"default" : "ignore",
+				"states" : {
+					"ignore" : {"frames":0,"cycle":0,"mode":"end"},
+					// we use the ignore state in the higher priority states to let the lower priority states play
+					// if we don't define data for the "ignore" state in the anim parts, it will take the next valid anim
+					// from a lower priority state when ignore is the active state
+					"eat": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"}
+				}
+			},
+			"bellyExpandState" : {
+				"priority" : 3,
+				"default" : "ignore",
+				"states" : {
+					"ignore" : {"frames":0,"cycle":0,"mode":"end"},
+					"1-to-0": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"},
+					"0-to-1": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"}
+				}
+			},
+			"bodyState": {
+				"priority" : 1,
+				"default": "0-idle",
+				"states": {
+					"0-idle": {"frames": 1,"cycle": 1,"mode": "end"},
+					"1-idle": {"frames": 4,"cycle": 0.75,"mode": "loop"}
+				}
+			},
+			"occupant0Location" : {
+				"priority" : 1,
+				"default" : "idle",
+				"states" : {
+					"idle": {"frames": 0,"cycle": 0,"mode": "end"},
+					"belly": {"frames": 1,"cycle": 0,"mode": "end"},
+					"balls": {"frames": 1,"cycle": 0,"mode": "end"}
+				}
+			},
+			"occupant0State" : {
+				"priority" : 2,
+				"default" : "idle",
+				"states" : {
+					"idle": {"frames": 0,"cycle": 0,"mode": "end"},
+					"oralVore": {"frames": 2,"cycle": 1.5,"mode": "end"},
+					"cockVore": {"frames": 2,"cycle": 1.5,"mode": "end"},
+					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant0" : [
+							{"translate":[0,0]},
+							{"translate":[0.125,0]},
+							{"translate":[0,0]}
+						]}
+					},
+					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant0" : [
+							{"translate":[0,0]},
+							{"translate":[-0.125,0]},
+							{"translate":[0,0]}
+						]}
+					},
+					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant0" : [
+							{"translate":[0,0]},
+							{"translate":[0,0.125]},
+							{"translate":[0,0]}
+						]}
+					},
+					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant0" : [
+							{"translate":[0,0]},
+							{"translate":[0,-0.125]},
+							{"translate":[0,0]}
+						]}
+					}
+				}
+			}
+		},
+		"parts": {
+			"occupant0" : {
+				"properties" : {
+					"centered":true,
+					"zLevel":0,
+					"loungeOffset" : [0,0],
+					"interpolated" : true,
+					"transformationGroups" : ["occupant0"],
+					"hidden":true,
+					"dance" : "sbqIdle",
+					"orientation" : "stand",
+					"emote" : "idle",
+					"transforms": {"scale":[0,0]}
+				},
+				"partStates" : {
+					"occupant0Location" :{
+						"belly" : {"properties":{"offset" : [0,-1.5]}},
+						"balls" : {"properties":{"offset" : [-0.5,-1.5]}}
+					},
+					"occupant0State":{
+						"oralVore" : {"frameProperties":{
+							"transforms":[
+								{"translate":[1.5,0], "scale":[1,1]},
+								{"translate":[0,-1.5], "scale":[0,0]}
+							]
+						}},
+						"cockVore" : {"frameProperties":{
+							"transforms":[
+								{"translate":[0.5,-1], "scale":[1,1]},
+								{"translate":[-0.5,-1.5], "scale":[0,0]}
+							]
+						}}
+					}
+				}
+			},
+			"body": {
+				"properties": {
+					"centered": true,
+					"zLevel": -1,
+					"front" : [2, 0], // this is the possition the player should be near when interacting
+					"oralVore" : [1.5, 0] // this is the position the cursor should be near when interacting to trigger OV
+				},
+				"partStates": {
+					// eatState has a higher priority than other states, so when one of eatState's anims is active
+					// it will do that anim but leave the other anim states alone, so if it changes to an anim
+					// in eatState that doesn't have a definition down here, it will check the next highest priority anim
+					// state to see if it's anim is valid for this part, and then the next etc.
+					// this is a vanilla feature, but it isn't explained anywhere.
+					"eatState" : {
+						// being able to tell it to use the anim and that specific anim's frames as a tag is
+						// one of my engine modifications, you would still have to define it like before in vanilla
+						// I just made some shorthand stuff to make things easier on people
+						"eat": {"properties": {"image": "<bodyImage>:<eatStateAnim>.<eatStateFrame>"}}
+					},
+					"bellyExpandState" : {
+						"1-to-0": {"properties": {"image": "<bodyImage>:<bellyExpandStateAnim>-<bellyExpandStateFrame>"}},
+						"0-to-1": "1-to-0"
+					},
+					"bodyState": {
+						"0-idle": {"properties": {"image": "<bodyImage>:<bodyStateAnim>.<bodyStateFrame>"}},
+						"1-idle": "0-idle"
+					}
+				}
+			}
+		}
+	},
+	"sounds" : {
+		"swallow": ["/sfx/objects/gulp.ogg"],
+		"gurgle": [ "/sfx/vore/digest/digest (17).ogg", "/sfx/vore/digest/digest (18).ogg", "/sfx/vore/digest/digest (25).ogg", "/sfx/vore/digest/digest (11).ogg", "/sfx/vore/digest/digest (13).ogg", "/sfx/vore/digest/digest (15).ogg", "/sfx/vore/digest/digest (16).ogg", "/sfx/vore/digest/digest (19).ogg", "/sfx/vore/digest/digest (20).ogg", "/sfx/vore/digest/digest (3).ogg", "/sfx/vore/digest/digest (31).ogg", "/sfx/vore/digest/digest (36).ogg", "/sfx/vore/digest/digest (37).ogg", "/sfx/vore/digest/digest (9).ogg" ],
+		"lay": ["/sfx/objects/eggLay.ogg"],
+		"struggle": ["/sfx/vore/struggle/burbslosh.ogg","/sfx/vore/struggle/blurbsquish2.ogg","/sfx/vore/struggle/blorbsquish.ogg","/sfx/vore/swallow/swallow (11).ogg"],
+		"slurp" : [ "/sfx/vore/common/slurp.ogg" ]
+	},
+	"transformationGroups" :{
+		"occupant0" : {"interpolated" : true}
+	}
+}

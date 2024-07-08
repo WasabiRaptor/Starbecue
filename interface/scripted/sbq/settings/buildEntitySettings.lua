@@ -18,7 +18,7 @@ if sbq.voreConfig.hidePredSettings then
 end
 if not sbq.voreConfig.hideBehaviorSettings then
 	if (entityType == "object") or (entityType == "vehicle") then
-		table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/objectBehavior.config"))
+		-- table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/objectBehavior.config"))
 	else
 		table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/behavior.config"))
 		table.insert(cfg.scripts, 1, "behaviorSettings.lua")
