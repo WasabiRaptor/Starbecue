@@ -128,7 +128,7 @@
 				"Normally I'd question someone like you offerin' themselves to my tail like that, but whatever."
 			],
 			[ // 50% - 75%
-				"I was going to slip my tail into your pocket to steal your wallet, but this is even better."
+				"I was goin' to slip my tail into your pocket to steal your wallet, but this is even better."
 			],
 			[ // 75% - 100%
 				"Sure, let's flip a coin. Heads, you go down my throat. Tails, well, use your imagination."
@@ -148,7 +148,7 @@
 				"Damn, I should've made you pay me for the tail ride."
 			],
 			[ // 75% - 100%
-				"Heh, I always love a rigged coin flip."
+				"Tails. Heh, I always love a rigged coin flip."
 			]
 		]
 	},
@@ -266,7 +266,7 @@
 	],
 	"unbirthVoreNoSlots": ":oralVoreNoSlots",
 	"unbirthVoreFull": [
-		"A putz like you is way too late to the party, but you can rub my belly if you pay me."
+		"A nerd like you is way too late to the party, but you can rub my belly if you pay me."
 	],
 	"unbirthVoreNeedsInfusion": [
 		"I'm lackin' down there. You want some fun, you gotta work for it.",
@@ -992,73 +992,131 @@
 	"cockVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNo",
 	"cockVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:cockVoreRequestingNoYes",
 	"oralVoreNoPrompt": [
-		"Mmmm~ you look like a lovely and tasty meal~",
-		"You're going to get in my belly, and you're gonna like it~",
-		"I wonder how you'd look stretching out my gut~",
-		"Hehe, looks like I'm about to have lunch... and you're on the menu cutie~"
+		"That last ration sucked. Good thing there's a snack right in front of me.",
+		"Hey, what's that behind you?",
+		"Do me a favor, will ya? Take a peek in my mouth and see what's botherin' me.",
+		"<entityname>? I've got an important job for ya."
 	],
 	"oralVoreNoPromptAfter": [
-		"Mmm~ get comfortable in there sweetie~",
-		"You better enjoy yourself pet~",
-		"Hehe, its like you wanted me to eat you~",
-		"Maybe I'll keep you as a cute little belly pet~"
+		"I love it when they don't see it comin'.",
+		"Not bad. You could use a little pepper, though.",
+		"There goes another tasty sucker down the hatch.",
+		"*urp* That takes care of that."
 	],
-	"tailVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPrompt",
-	"tailVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPromptAfter",
+	"tailVoreNoPrompt": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"My tail's liable to snap you up if you ain't careful."
+			],
+			[ // 25% - 50%
+				"Do you want to hear a story?"
+			],
+			[ // 50% - 75%
+				"Hey, what's that behind you?"
+			],
+			[ // 75% - 100%
+				"I'm gonna flip a coin. Heads or tails?"
+			]
+		]
+	},
+	"tailVoreNoPromptAfter": {
+		"percentage": "food",
+		"pools": [
+			[ // 0% - 25%
+				"And looks like it did. Not my fault."
+			],
+			[ // 25% - 50%
+				"Figures you'd want to hear the tail end of it first."
+			],
+			[ // 50% - 75%
+				"You should've looked. Was a breeze for my tail to getcha."
+			],
+			[ // 75% - 100%
+				"Looks like it was tails. Enjoy the slide."
+			]
+		]
+	},
 	"absorbVoreNoPrompt": [
-		"Hey you, I want you all in me, so you don't do anything, and just let me walk into you~",
-		"My body is a bit interesting, and I'm going to show you exactly what that means~",
-		"Come here, I wanna merge you into me~ trust me, it will be very pleasant~"
+		"You look like you could use an unsolicited hug for no particular reason.",
+		"Are you feelin' a bit down? Let a good ol' bandit hug cheer you up.",
+		"Nobody ever mentions it, but I'm a *real* good hugger. Let me show you."
 	],
 	"absorbVoreNoPromptAfter": [
-		"Oh yes! I felt every inch of you as you felt every, inch, of me~ so wonderful~",
-		"Mmmhmhm... I've got you all wrapped up in my body... engulfed by it... immersed in it~",
-		"It's only natural a plaything like you sooo easily passed into my body like that, you belong here anyway~"
+		"See? Don't you feel better already?",
+		"A good hug can fix lots of things. Like my hunger, for example.",
+		"Hush, this hug lasts as long as I want."
 	],
 	"navelVoreNoPrompt": [
-		"I got a lovely little belly button that needs some attention, come here and give it some~",
-		"You got a lovely looking face, It's begging to be shove into my navel~",
-		"I need a plaything to push into my warm navel, and you happen to be around~"
+		"I'd normally gobble you down, but that takes precious time.",
+		"Let's see, hide this in my navel, hide that, oh hey, let's hide you too.",
+		"<entityname>? You weren't supposed to see me here. Time to make you disappear.",
+		"Lookin' to explore? I know just the cave, it's right nearby."
 	],
 	"navelVoreNoPromptAfter": [
-		"You went right in so smoothly! you where made to be pushed into navels my toy~",
-		"Such a direct route to my stomach, and it felt sooo pleasant the whole way though~",
-		"You must be so flustered to get utterly stuffed into my belly button, good, I like my prey all blushy~"
+		"Nice and quick.",
+		"A shame I couldn't taste ya, but this works.",
+		"You're pretty filling, you know that?",
+		"Have fun in there~"
 	],
 	"analVoreNoPrompt": [
-		"Hehe, there's my toy~",
-		"You look like you can fit into tight places~",
-		"You're exactly what I want right now~",
-		"I'm gonna shove you up my ass, and you're gonna like it~",
-		"Hey toy~ come here so I can put you to good use filling my ass~",
-		"I see you staring, let me help you get at better look at my booty~",
-		"Hehe, I think it's time for you to get nice and comfortable in my lovely rear~"
+		"Ever since I became a bandit, people have always been tellin' me to 'shove it up my ass'.",
+		"I've heard some of the others callin' me an asshole the other day. You know what?",
+		"One of my drinkin' buddies bet me six thousand pixels that I 'love it up the butt'."
 	],
 	"analVoreNoPromptAfter": [
-		"Ahh~ Right where you belong~",
-		"Mmm~ My perfect squirmy toy~",
-		"Hehe~ You really do make an excellent toy~",
-		"Oohh~ You're squirming so much~",
-		"Oooh yeah~ you fit just right! seems like you where made to be a toy for me~",
-		"Uuunf~ now squirm for me plaything, I wanna feel your every movement in my ass~",
-		"Ahh~ feels so good putting people where they belong, I'm going to enjoy you my toy~"
-	],
-	"unbirthVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreNoPrompt",
-	"unbirthVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreNoPromptAfter",
+		"I figured I'd try shovin' you up in there. Works pretty well, I'd say.",
+		"They were kind of right. I do enjoy seein' who I can push in there.",
+		"So up you go where the stars don't shine."
+	],	
+	"unbirthVoreNoPrompt": {
+		"percentage": "sbqLust",
+		"pools": [
+			[ // 0% - 25%
+				"I need to con a few places into giving me a pregnancy discount. So... yeah."
+			],
+			[ // 25% - 50%
+				"I'm feelin' a little bit needy, and a whole lot of greedy."
+			],
+			[ // 50% - 75%
+				"You know, have you ever had anyone tell you that you're the perfect shape?"
+			],
+			[ // 75% - 100%
+				"Fff... I need you to service me right *now*. Get on your knees and I'll do the rest."
+			]
+		]
+	},
+	"unbirthVoreNoPromptAfter": {
+		"percentage": "sbqLust",
+		"pools": [
+			[ // 0% - 25%
+				"Hush, now 'momma' is gonna make a small fortune in savings. Make sure to kick a lot~"
+			],
+			[ // 25% - 50%
+				"Shh, let me smuggle you away for a long, long time..."
+			],
+			[ // 50% - 75%
+				"Perfect for my pussy, that is. Keep me satisfied and maybe I won't make you a keepsake. Maybe."
+			],
+			[ // 75% - 100%
+				"Ah-hah~ You thought I just needed your mouth? No, now get to squirmin'!"
+			]
+		]
+	},
 	"breastVoreNoPrompt": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
-				"I think you'll look better padding out my chest~"
+				"I'm gonna flip a coin. Heads or tails?"
 			],
 			[ // 25% - 50%
-				"You're such a cutie, I gotta have you massaging my tits... from the inside~"
+				"The other bandits said my boobs were too small, so you're goin' to fix that."
 			],
 			[ // 50% - 75%
-				"Hey, I need to \"borrow\" you for a bit, I've got a date tonight and they love looking at my tits~"
+				"Have you ever wondered what a bandit keeps in their treasure chest? Let me show you."
 			],
 			[ // 75% - 100%
-				"A cutie like you should be worshiping my tits from inside and out. Now, get to work~"
+				"Hey, have you met my 'girls'? Come on, I'll introduce you to them."
 			]
 		]
 	},
@@ -1066,16 +1124,16 @@
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
-				"I have to say, you make my boobs look even more amazing~"
+				"Heh, it landed right in my cleavage. As did you~"
 			],
 			[ // 25% - 50%
-				"Now there's more boob for me to squish with a cutie like you stuffed in there~"
+				"Perfect. I'll snap a picture later to show them, as well as to tease you with if you come back."
 			],
 			[ // 50% - 75%
-				"Mmm~ I quite like the extra heft with you in there, cutie~"
+				"Nothing but you and a bunch of milk, nerd. Thanks for the 'upgrade'."
 			],
 			[ // 75% - 100%
-				"Mmm... the best kind of \"implants\"~"
+				"Hhh~ This might've backfired on me a bit. No big deal, I enjoy luggin' heavy things around~"
 			]
 		]
 	},
@@ -1083,16 +1141,16 @@
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
-				"Mmm, you look cute, cute enough for me to want to see you all cum stained~"
+				"I'm gonna flip a coin. Heads or tails?"
 			],
 			[ // 25% - 50%
-				"Dicks are meant for shoving into other people... but I like to do the opposite~"
+				"While I was out and about, I caught this rare creature called a 'Trouser Snake'. Want to see it?"
 			],
 			[ // 50% - 75%
-				"Getting a bit of a hard on looking at you cutie~ Ready for you to get shoved right into it!"
+				"Not exactly a position I like to be in, but my dick's needin' some attention and I volunteer you to help."
 			],
 			[ // 75% - 100%
-				"Huff~ Look at how hard I am~! And you cutie, you're gonna get in there and help me cum~"
+				"Not gonna lie, I'm kinda at the edge of a good climax here. And you're gonna be a part of the big finish~"
 			]
 		]
 	},
@@ -1100,59 +1158,144 @@
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
-				"Keep squirming around in there~ get yourself nice and soaked in cum~"
+				"Heads. Lucky for you, my lower 'head' is eager to oblige."
 			],
 			[ // 25% - 50%
-				"Hehe, and now that you're in my dick, I'd say a cutie like you belongs in there~"
+				"Ha, sucker. You need to brush up on your slang."
 			],
 			[ // 50% - 75%
-				"Ahhh~ yessss thats so good~! Squirm around for me toy! Try and make me cum!"
+				"A-ahh~ See? Everyone gets what they want when we work together."
 			],
 			[ // 75% - 100%
-				"Hufff~ I'm getting close! Come on toy! I wanna feel how goood it is to cum with a cutie like you in there~!"
+				"Hhhh~ And now the payoff will be well worth it..."
 			]
 		]
 	},
-	"bellyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPrompt",
-	"bellyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseNoPromptAfter",
-	"breastInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPrompt",
-	"breastInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:breastInfuseNoPromptAfter",
-	"pussyInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPrompt",
-	"pussyInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseNoPromptAfter",
-	"cockInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPrompt",
-	"cockInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:cockInfuseNoPromptAfter",
-	"tailInfuseNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPrompt",
-	"tailInfuseNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseNoPromptAfter",
-	"oralVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnprompted",
-	"tailVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnprompted",
-	"absorbVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:absorbVoreUnprompted",
-	"navelVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:navelVoreUnprompted",
-	"analVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:analVoreUnprompted",
-	"unbirthVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnprompted",
-	"breastVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnprompted",
-	"cockVoreUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockVoreUnprompted",
-	"oralVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutUnpromptedAfter",
-	"tailVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutUnpromptedAfter",
-	"absorbVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutUnpromptedAfter",
-	"navelVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:navelVoreLetoutUnpromptedAfter",
-	"analVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutUnpromptedAfter",
-	"unbirthVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutUnpromptedAfter",
-	"breastVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutUnpromptedAfter",
-	"cockVoreLetoutUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutUnpromptedAfter",
+	"bellyInfuseNoPrompt": [
+		"You look like you could use some work. Being a bandit's belly should do the trick."
+	],
+	"bellyInfuseNoPromptAfter": [
+		"Just so you know, 9 out of 10 doctors find this process perfectly safe. I ate the 10th one.",
+		"Not bad. I feel like I could actually eat a small moon. Or try, at least.",
+		"My diet usually ain't the best, but I'll pick some choice meals just for you."
+	],
+	"breastInfuseNoPrompt": [
+		"My 'girls' have been a little lackin'. Good thing I found you.",
+		"I've got a slot in the monthly bandit pinup calendar. This year's theme is 'hot heisters'.",
+		"I don't know who, but someone wanted to draw a picture of me. Since I'm so nice, I'm including you in it."
+	],
+	"breastInfuseNoPromptAfter": [
+		"Perfect, just what I needed.",
+		"Now I'm feelin' picture-perfect.",
+		"Oof, you certainly have some good heft to you."
+	],
+	"pussyInfuseNoPrompt": [
+		"<entityname>? I heard you have a pretty good mouth on you. I wanna test that out.",
+		"One of the others told me that you got loose lips. I think you're tight-lipped. Time to find out the truth.",
+		"Not to pry, but word on the street is that you know how to have a good time. Is that true?"
+	],
+	"pussyInfuseNoPromptAfter": [
+		"Fff~ Finally, you can put your talents to proper use.",
+		"Mmf~ Now I know which rumors are true.",
+		"Heh, it's like you were meant to do this all along."
+	],
+	"cockInfuseNoPrompt": [
+		"Just the dick I was lookin' for.",
+		"Another bandit told me that you're a real dick. Let's make that true.",
+		"Someone put a bounty on your head. Lucky for me, they didn't say which kind.",
+		"All your jumpin' to and fro and bouncin' around reminds me of somethin': a cock."
+	],
+	"cockInfuseNoPromptAfter": [
+		"Just a word of caution: I ain't lettin' you go that easy. You're mine now.",
+		"Heh, you fit the description perfectly now.",
+		"Ahh, you feel like you were made to be danglin' between my legs, you know that?"
+	],
+	"tailInfuseNoPrompt": [
+		"Damn, I think I got a thorn in my tail. Take a closer look, would ya?",
+		"Hey, do you like stories? I call this one, 'A Bandit's Tail'."
+	],
+	"tailInfuseNoPromptAfter": [
+		"Heh, gets them every time.",
+		"Not bad. You ride on my butt pretty good."
+	],
+	"oralVoreUnprompted": [
+		"I don't like the look in your eye. Or the fact you're lickin' your lips. Or that my head is halfway down your gullet--!",
+		"You sure you want to eat me? Do you even know where I've been--okay guess not--!",
+		"Honestly, fair. I was *just* about to eat you, but I was too--!"
+	],
+	"tailVoreUnprompted": [
+		"Nice tail, but I ain't afraid--nevermind, I've made a terrible--!",
+		"Your tail's, uh, lookin' at me funny. Did it just--hey, stop--!",
+		"Cute, your tail can open up. What's not cute is that it's just about to--!"
+	],
+	"absorbVoreUnprompted": [
+		"This hug is decent, but you left your pixels wide-open--hey, wait--hlp!",
+		"I, uh, tolerate you too, but I ain't much for hugs--and this is why--mmph!",
+		"Alright, you've had your little hug. Now let go before others start--what the--ahh!"
+	],
+	"navelVoreUnprompted": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
+		"You've got a nice navel, sure, but I don't see why you needed me to appraise--!",
+		"The deed to your ship is in there? Let me just make sure it's safe and--!",
+		"You expect me to believe that a full set of T10 gear is inside there? Because I do and--!"
+	],
+	"analVoreUnprompted": [
+		"Pretty nice piece of ass, but I'm more of a--hey, don't--!",
+		"I'm not the butt of a bad joke, am I? Shit, I am--!",
+		"Not a bad show, but I can't help but feel like I've seen this--!"
+	],
+	"unbirthVoreUnprompted": [
+		"Is that an invitation? Sure, let me just take off my gear and--!",
+		"Yes, I can see you're wet, but I don't know what that has to do with--!",
+		"That's, uh, very flattering, but mind covering--not again--!"
+	],
+	"breastVoreUnprompted": [
+		"If this is a booby trap, I'm not going to lie: I'm impressed. Wait, it is--!",
+		"Nice tits. You just showin' them off, or did ya want me to--h-hey--!",
+		"Pretty good lookin' pair of breasts, if I do say so myself. Mind if I feel--w-wait--!"
+	],
+	"cockVoreUnprompted": [
+		"What would I say before I became a bandit? Ah, that's right. UwU",
+		"I definitely noticed your bulge, but this wasn't what I was expectin'--!",
+		"Do you always walk around flauntin' your package like that? Wait, I was just teasin'--!"
+	],
+	"oralVoreLetoutUnpromptedAfter": [
+		"You let me out, huh? Thanks. I might remember that later."
+	],
+	"tailVoreLetoutUnpromptedAfter": [
+		"Nice trick with your tail. Being on the outside is better, though."
+	],
+	"absorbVoreLetoutUnpromptedAfter": [
+		"I wasn't expectin' that tight a hug, but thanks for lettin' go."
+	],
+	"navelVoreLetoutUnpromptedAfter": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
+		"Damn, I figured you would be hidin' somethin' in your navel. Nope, spotless."
+	],
+	"analVoreLetoutUnpromptedAfter": [
+		"Not the most graceful exit I've made, but I've had worse."
+	],
+	"unbirthVoreLetoutUnpromptedAfter": [
+		"Gotta admit, I was gettin' pretty comfy. But thanks for squeezin' me out."
+	],
+	"breastVoreLetoutUnpromptedAfter": [
+		"The free drinks were nice, but everything I have is soakin' wet now."
+	],
+	"cockVoreLetoutUnpromptedAfter": [
+		"Geez, I'm going to smell like you for weeks. Fun trip, though."
+	],
 	"oralVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
 			[ // 0% - 25%
-				"I'm really needy right now. I need a lovely maw to jump down, and your cute lips are in range~"
+				"I'm all tuckered out and I need a spot to rest. You'll do nicely."
 			],
 			[ // 25% - 50%
-				"I'm coming over to you, hot stuff, and I'm going to have you eat, me, whole~"
+				"That last job was somethin' else. Gotta lay low for a bit, so open up."
 			],
 			[ // 50% - 75%
-				"I have a burning need to be inside you, so open up those jaws and let me stuff my sexy body in them~"
+				"Don't tell anyone, but I've been lookin' at your gut and curiosity got the better of me."
 			],
 			[ // 75% - 100%
-				"Hey~ I'm looking at you there! With such an alluring maw, you wouldn't mind it if I... drop in?~"
+				"I'm gonna flip a coin. Heads or tails?"
 			]
 		]
 	},
@@ -1628,7 +1771,221 @@
 	"didSteppy": "/npcs/sbq/dialogue/default.dialogue:didSteppy",
 	"gotStepped": "/npcs/sbq/dialogue/default.dialogue:gotStepped",
 	"gotStomped": "/npcs/sbq/dialogue/default.dialogue:gotStomped",
-	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
+	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
+		"tagCriteria": {
+			"default": {
+				"default": [
+					"What happened to my home? Somethin's not right."
+				]
+			}
+		},
+		"enclosedArea": {
+			"default": {
+				"default": [
+					"Some walls would be nice."
+				]
+			}
+		},
+		"otherDeed": {
+			"default": {
+				"default": [
+					"I ain't sharin' space with someone else. Not unless you want them to disappear."
+				]
+			}
+		},
+		"severe": {
+			"default": {
+				"default": [
+					"Really? Did you not hear me the first couple of times?"
+				]
+			}
+		},
+		"final": {
+			"default": {
+				"default": [
+					"Yeah, no. I'm gonna keep complainin' until you fix this."
+				]
+			}
+		},
+		"beacon": {
+			"default": {
+				"default": [
+					"I'm back."
+				]
+			}
+		},
+		"rent": {
+			"default": {
+				"default": [
+					"Here's somethin' I stole. Don't worry, it's not yours. Probably."
+				]
+			}
+		},
+		"helpme": {
+			"default": {
+				"default": [
+					"Shit, I left my gun in my other boot and my knife in my other other boot.",
+					"I'm outta here.",
+					"Ouch, dammit.",
+					"Being unarmed sucks.",
+					"I need a hand.",
+					"That one actually hurt.",
+					"Not funny."
+				]
+			}
+		},
+		"safe": {
+			"default": {
+				"default": [
+					"Got away for now.",
+					"That should be far enough to run, right?",
+					"They better not hit me again. If they do... I'll just run further away!",
+					"Hmm, seems clear for now.",
+					"Not sure what the hell that was, but it looks like it's over."
+				]
+			}
+		},
+		"accuse": {
+			"default": {
+				"default": [
+					"Hey, I'm the one that does the stealin' here!"
+				]
+			}
+		},
+		"alert": {
+			"default": {
+				"default": [
+					"Guards! There is a criminal here! One that isn't me!"
+				]
+			}
+		},
+		"offer": {
+			"default": {
+				"default": [
+					"Color me impressed, I think it'd be interestin' to join your crew.",
+					"I'm <selfname>. Need someone who ain't afraid of dirty jobs?",
+					"Not to brag, but I'm not like the other bandits. Want to hire me?",
+					"You aren't a complete loser, so I'd be willin' to join your crew.",
+					"I may have pissed off my fellow bandits. Got a place for me to crash?"
+				]
+			}
+		},
+		"roleDescription": {
+			"default": {
+				"default": [
+					"If you need a someone badder to take on bad guys, come find me.",
+					"If you get too banged up, you know where to find a warm, tight shelter.",
+					"I love a good fight. Usually pretty easy to find a snack afterward."
+				]
+			}
+		},
+		"respawned": {
+			"default": {
+				"default": [
+					"Hah, not my first time.",
+					"That was unpleasant. Oh well.",
+					"Rumors of my demise were grossly exaggerated.",
+					"Damn, not here.",
+					"Fine, I won't rig the bet next time.",
+					"Respawnin' always leave me with a slight tickle afterward.",
+					"Dyin' ain't so bad, but it always leaves me feelin' so empty on the inside.",
+					"Oops, looks like I got caught."
+				]
+			}
+		},
+		"crewcantreach": {
+			"default": {
+				"default": [
+					"Hey, speedy, I can't move that quick.",
+					"Damn, you're fast. Give me a second.",
+					"That last guy I nabbed is slowin' me down. Wait up.",
+					"*tsk* Show off...",
+					"Hey, don't go grabbin' all the loot before me!"
+				]
+			}
+		},
+		"reattack": {
+			"default": {
+				"default": [
+					"Good, it's you again.",
+					"Now I can properly repay you.",
+					"Heh.",
+					"Back for more, eh?",
+					"This time, I'll finish the job."
+				]
+			}
+		},
+		"attack": {
+			"default": {
+				"default": [
+					"Hmph."
+				]
+			}
+		},
+		"killedTarget": {
+			"default": {
+				"default": [
+					"The job is done.",
+					"It was all thanks to me, of course.",
+					"Another notch on my belt.",
+					"I always win. Even when I don't.",
+					"Too easy.",
+					"Heh.",
+					"Was there ever any doubt?",
+					"<selfname> always gets their prey.",
+					"Is that all you got?",
+					"Now to see what they dropped.",
+					"All mine, now.",
+					"Huh. Figured they'd be tougher."
+				]
+			}
+		},
+		"lostTarget": {
+			"default": {
+				"default": [
+					"What a waste of my time.",
+					"Mark my words, one of us will get you some day.",
+					"And scram!",
+					"Gah, lost em'.",
+					"Just when my blood was really pumpin', too.",
+					"Whatever."
+				]
+			}
+		},
+		"outOfSight": {
+			"default": {
+				"default": [
+					"Dammit, I know that's not just the wind.",
+					"I can't see you, but I know you're out there.",
+					"Not a bad vanishing act, honestly.",
+					"Don't be afraid, I was only going to put you somewhere warm and wet.",
+					"Come on out. I'd be glad to show you my goods, if you know what I mean."
+				]
+			}
+		},
+		"cantReachEnemy": {
+			"default": {
+				"default": [
+					"Come back so I can stab ya. Or shoot ya. Maybe eat ya. Your pick.",
+					"Damn, I can't quite make it over there.",
+					"What? You afraid I'll won't let you out once I get my hands on ya? You're right.",
+					"I knew I should've stolen that Size Ray when I had the chance...",
+					"That last job left me a little too heavy to get over there..."
+				]
+			}
+		},
+		"cheerOn": {
+			"default": {
+				"default": [
+					"You get them, I'm gonna watch from a safe distance.",
+					"Don't stop now.",
+					"That might do the trick.",
+					"Why aren't they already dead? I would've killed them by now!",
+					"Keep going."
+				]
+			}
+		}
+	},
 	// Unused Dialogue
 	"digestFull": [
 		"Just let me add the last prey to my hips first~",
