@@ -446,7 +446,10 @@ function default:fatalAvailable(name, action, target, ...)
 	if not occupant then return false, "missingOccupant" end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
-	if occupant:statPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
+	if occupant:statPositive("sbq_" .. (occupant.flags.digestType) .. "FatalImmune") then return false, "invalidAction" end
+	if sb.jsonQuery(sbq.voreConfig, "invalidSettings.mainEffect.digest")
+	or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.locations.%s.mainEffect.digest", occupant.location ))
+	then return false, "invalidAction" end
 	return true
 end
 function default:fatal(name, action, target, ...)
@@ -454,7 +457,10 @@ function default:fatal(name, action, target, ...)
 	if not occupant then return false, "missingOccupant" end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
-	if occupant:statPositive("sbq_"..(occupant.flags.digestType).."FatalImmune") then return false, "invalidAction" end
+	if occupant:statPositive("sbq_" .. (occupant.flags.digestType) .. "FatalImmune") then return false, "invalidAction" end
+	if sb.jsonQuery(sbq.voreConfig, "invalidSettings.mainEffect.digest")
+	or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.locations.%s.mainEffect.digest", occupant.location ))
+	then return false, "invalidAction" end
 	occupant:modifyResourcePercentage("health", -2)
 	return true
 end
@@ -660,10 +666,25 @@ function default:infused(name, action, target)
 	return true
 end
 
-
+function default:eggifyAvailable(name, action, target, ...)
+	local occupant = Occupants.entityId[tostring(target)]
+	if not occupant then return false, "missingOccupant" end
+	if sb.jsonQuery(sbq.voreConfig, "invalidSettings.eggify.true")
+	or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.locations.%s.eggify.true", occupant.location))
+	then return false, "invalidAction" end
+	local location = occupant:getLocation()
+	if not location.secondaryEffects.eggify then return false, "invalidAction" end
+	return true
+end
 function default:eggify(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
+	if sb.jsonQuery(sbq.voreConfig, "invalidSettings.eggify.true")
+	or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.locations.%s.eggify.true", occupant.location))
+	then return false, "invalidAction" end
+	local location = occupant:getLocation()
+	if not location.secondaryEffects.eggify then return false, "invalidAction" end
+
 	if not occupant.locationSettings.eggify then
 		occupant.locationSettings.eggify = true
 		occupant:refreshLocation()
@@ -672,7 +693,6 @@ function default:eggify(name, action, target, ...)
 		((occupant:getPublicProperty("sbqEggifyProgress") or 0) < 1) then
 		return true
 	end
-	local location = occupant:getLocation()
 	occupant.locationSettings.eggify = false
 	occupant:sendEntityMessage("applyStatusEffect", action.eggStatus or location.eggStatus or sbq.voreConfig.eggStatus or "sbqEgg" )
 end

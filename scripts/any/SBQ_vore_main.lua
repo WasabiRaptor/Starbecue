@@ -199,11 +199,11 @@ function sbq.reloadVoreConfig(config)
 	for locationName, _ in pairs(SpeciesScript.locations) do
 		local location = SpeciesScript:getLocation(locationName)
 		if location then
-			location:doSizeChangeAnims(location.occupancy.visualSize)
+			location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.count)
 			if location.subLocations then
 				for k, _ in pairs(location.subLocations) do
 					local location = SpeciesScript:getLocation(locationName, k)
-					location:doSizeChangeAnims(location.occupancy.visualSize)
+					location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.count)
 				end
 			end
 		end
@@ -1089,13 +1089,13 @@ function _Location:updateOccupancy(dt)
 		if ((prevVisualSize ~= self.occupancy.visualSize) or (self.countBasedOccupancy and (prevCount ~= self.occupancy.count)))
 			and not (self.occupancy.sided and self.occupancy.symmetry)
 		then
-			self:doSizeChangeAnims(prevVisualSize)
+			self:doSizeChangeAnims(prevVisualSize, prevCount)
 			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
 					subLocation = SpeciesScript:getLocation(self.key, k)
 					if subLocation.occupancy.sided then
 						subLocation.occupancy.visualSize = self.occupancy.visualSize
-						subLocation:doSizeChangeAnims(prevVisualSize)
+						subLocation:doSizeChangeAnims(prevVisualSize, prevCount)
 					end
 				end
 			end
@@ -1151,7 +1151,7 @@ function _Location:update(dt)
 	end
 end
 
-function _Location:doSizeChangeAnims(prevVisualSize)
+function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 	if self.idleAnims then
@@ -1168,7 +1168,9 @@ function _Location:doSizeChangeAnims(prevVisualSize)
 		self.occupancy.interpolating = true
 		self.interpolateTime = SpeciesScript:doAnimations(sizeChangeAnims, {
 			prevSize = tostring(prevVisualSize),
-			newSize = tostring(self.occupancy.visualSize)
+			newSize = tostring(self.occupancy.visualSize),
+			prevCount = tostring(prevCount),
+			newCount = tostring(self.occupancy.count)
 		})
 		self.interpolateCurTime = 0
 	end
