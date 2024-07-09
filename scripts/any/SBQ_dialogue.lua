@@ -286,7 +286,7 @@ function dialogueProcessor.getRedirectedDialogue(path, returnStrings, settings, 
 			end
 		elseif firstChar == "." then
 			local trim = returnVal:sub(2, -1)
-			returnVal = sb.jsonQuery(dialogueTree or {}, trim) or sb.jsonQuery(dialogueTreeTop or {}, trim)
+			returnVal = sbq.queryPath(dialogueTree or {}, trim) or sbq.queryPath(dialogueTreeTop or {}, trim)
 		else break end
 	end
 	if (type(returnVal) == "string" and returnStrings) or type(returnVal) == "table" then

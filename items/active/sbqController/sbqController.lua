@@ -133,7 +133,7 @@ function sbq.attemptAction(targetId)
 		return result, reason
 	else
 		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
-		if sb.jsonQuery(targetSettings, "subBehavior."..storage.action..".consentRequired") then return false, "consentRequired" end
+		if sbq.query(targetSettings, {"subBehavior", storage.action, "consentRequired"}) then return false, "consentRequired" end
 		return table.unpack(player.callScript("sbq.tryAction", storage.action, targetId) or {})
 	end
 end

@@ -71,7 +71,7 @@ function init()
 					for setting, v in pairs(settings) do
 						if type(v) == "string" then
 							if v:sub(1,1) == "." then
-								storage.sbqSettings[k][g][setting] = sb.jsonQuery(storage.sbqSettings, v:sub(2,-1))
+								storage.sbqSettings[k][g][setting] = sbq.queryPath(storage.sbqSettings, v:sub(2,-1))
 							else
 								storage.sbqSettings[k][g][setting] = storage.sbqSettings[k][g][v]
 							end
@@ -81,7 +81,7 @@ function init()
 			else
 				if type(v) == "string" then
 					if v:sub(1, 1) == "." then
-						storage.sbqSettings[k] = sb.jsonQuery(storage.sbqSettings, v:sub(2,-1))
+						storage.sbqSettings[k] = sbq.queryPath(storage.sbqSettings, v:sub(2,-1))
 					else
 						storage.sbqSettings[k] = storage.sbqSettings[v]
 					end

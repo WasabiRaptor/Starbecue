@@ -175,11 +175,12 @@ end
 
 function sbq.isValidTenantCard(item)
 	if (item.parameters or {}).npcArgs ~= nil then
-		if not root.speciesConfig(item.parameters.npcArgs.npcSpecies) then return false end
-		if item.parameters.npcArgs.npcParam.wasPlayer then return false end
-		if ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId then
+		if not root.speciesConfig(sbq.query(item, {"parameters", "npcArgs", "npcSpecies"})) then return false end
+		if sbq.query(item, {"parameters", "npcArgs", "npcParam", "wasPlayer"}) then return false end
+		local uuid = sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "uniqueId"})
+		if uuid then
 			for i, tenant in ipairs((_ENV.metagui.inputData.occupier or {}).tenants or {}) do
-				if tenant.uniqueId == ((item.parameters.npcArgs.npcParam or {}).scriptConfig or {}).uniqueId then return false end
+				if tenant.uniqueId == uuid then return false end
 			end
 		end
 		return true
@@ -210,7 +211,7 @@ function sbq.insertTenant(slot)
 		npcConfig = root.npcConfig(tenant.type)
 		overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
 	end
-	tenant.overrides.scriptConfig.uniqueId = sb.jsonQuery(overrideConfig, "scriptConfig.uniqueId") or sb.makeUuid()
+	tenant.overrides.scriptConfig.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
 	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
 	if world.getUniqueEntityId(tenant.uniqueId) then return pane.playSound("/sfx/interface/clickon_error.ogg") end
 	for _, v in pairs(sbq.occupier.tenants) do

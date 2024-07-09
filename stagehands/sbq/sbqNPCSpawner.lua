@@ -16,7 +16,7 @@ function update()
 		while not gotData do
 			local i = math.random(#data)
 			local npcConfig = root.speciesConfig(data[i].npc)
-			local uuid = sb.jsonQuery(npcConfig, "scriptConfig.uniqueId")
+			local uuid = sbq.query(npcConfig, {"scriptConfig", "uniqueId"})
 			if (data[i].spawnOnce and world.getProperty(data[i].npc..data[i].npcTypeName.."Spawned"))
 			or (uuid and world.loadUniqueEntity(uuid))
 			or (not checkRequirements(data[i].checkRequirements or {})) or (not npcConfig) then

@@ -225,8 +225,9 @@ end
 function checkExistingUniqueIds(occupier)
 	for _, tenant in ipairs(occupier.tenants) do
 		local npcConfig = root.npcConfig(tenant.type)
-		if (npcConfig.scriptConfig or {}).uniqueId then
-			local id = world.loadUniqueEntity((npcConfig.scriptConfig or {}).uniqueId)
+		local uuid = sbq.query(npcConfig, {"scriptConfig", "uniqueId"})
+		if uuid then
+			local id = world.loadUniqueEntity(uuid)
 			if id and world.entityExists(id) then return true end
 		end
 	end
@@ -241,7 +242,7 @@ function setTenantsData(occupier)
 		end
 		local npcConfig = root.npcConfig(tenant.type)
 		local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides or {})
-		tenant.uniqueId = sb.jsonQuery(overrideConfig, "scriptConfig.uniqueId") or sb.makeUuid()
+		tenant.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
 		tenant.overrides = tenant.overrides or {}
 		tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
 		tenant.overrides.scriptConfig.uniqueId = tenant.uniqueId

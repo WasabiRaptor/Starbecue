@@ -3,8 +3,8 @@ require("/scripts/any/SBQ_util.lua")
 function build(directory, config, parameters, level, seed)
 	if not parameters.generated then
 		parameters.generated = true
-		local preyIdentity = sb.jsonQuery(parameters, "npcArgs.npcParam.identity")
-		local preyName = sb.jsonQuery(parameters, "npcArgs.npcParam.identity.name")
+		local preyIdentity = sbq.query(parameters, {"npcArgs", "npcParam", "identity"})
+		local preyName = (preyIdentity or {}).name
 
 		setupReplaceColors(config, parameters, parameters.predIdentity)
 		setupReplaceColors(config, parameters, preyIdentity)
@@ -41,7 +41,8 @@ function build(directory, config, parameters, level, seed)
 		})
 		parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
 	else
-		local preyName = sb.jsonQuery(parameters, "npcArgs.npcParam.identity.name")
+		local preyIdentity = sbq.query(parameters, {"npcArgs", "npcParam", "identity"})
+		local preyName = (preyIdentity or {}).name
 		local tags = {
 			preyName = preyName,
 			predName = parameters.predName,

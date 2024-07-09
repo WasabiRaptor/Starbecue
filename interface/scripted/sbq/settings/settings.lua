@@ -220,7 +220,7 @@ function sbq.assignSettingValue(setting, group, name)
 end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
-	local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, value)) or ((group and name) and sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", group, name, setting, value)))
+	local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
 	if result then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
 	if group and name then
@@ -234,7 +234,7 @@ function sbq.widgetScripts.changeSetting(value, setting, group, name)
 end
 
 function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
-	local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, value)) or ((group and name) and sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", group, name, setting, value)))
+	local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
 	if result then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
 	local table = sb.parseJson(value)
@@ -276,7 +276,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", param.setting, k)) or ((param.groupName and param.groupKey) and sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", param.groupName, param.groupKey, param.setting, k)))
+			local result = sbq.query(sbq.voreConfig.invalidSettings, {param.setting, k}) or ((param.groupName and param.groupKey) and sbq.query(sbq.voreConfig.invalidSettings, {param.groupName, param.groupKey, param.setting, k}))
 			if not result then
 				local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 				local icon
@@ -320,7 +320,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	local effects = location[param.setting]
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
-		local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.true", k)) or ((param.groupName and param.groupKey) and sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.true", param.groupName, param.groupKey, k)))
+		local result = sbq.query(sbq.voreConfig.invalidSettings, {param.setting, "true"}) or ((param.groupName and param.groupKey) and sbq.query(sbq.voreConfig.invalidSettings, {param.groupName, param.groupKey, param.setting, "true"}))
 		if (effects or {})[k] and not result then
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
@@ -382,8 +382,7 @@ end
 function sbq.widgetScripts.infuseSlotAccepts(w, item)
 	if w.locked then return false end
 	if not item then return true end
-	local path = ("parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infusePrefs.%s.prey"):format(w.groupKey)
-	if sb.jsonQuery(item, path) then return true end
+	if sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infusePrefs", w.groupKey, "prey"}) then return true end
 	pane.playSound("/sfx/interface/clickon_error.ogg")
 	player.queueUIMessage(sbq.getString(":action_targetSettingsMismatch"))
 	return false

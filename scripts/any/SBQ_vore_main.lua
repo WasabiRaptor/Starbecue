@@ -900,17 +900,15 @@ function _Location:setInfusionData()
 		end
 	end
 	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-	local infuseSpeciesConfig = root.speciesConfig(sb.jsonQuery(infusedItem, "parameters.npcArgs.npcSpecies") or "") or sb.jsonQuery(infusedItem, "parameters.speciesConfig") or {}
-	local infuseIdentity = sb.jsonQuery(infusedItem, "parameters.npcArgs.npcParam.identity") or {}
+	local infuseSpeciesConfig = root.speciesConfig(sbq.query(infusedItem, {"parameters", "npcArgs", "npcSpecies"}) or "") or (sbq.query(infusedItem, {"parameters", "speciesConfig"}) or {})
+	local infuseIdentity = sbq.query(infusedItem, {"parameters", "npcArgs", "npcParam", "identity"}) or {}
 	local infuseData = {}
 	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
 		infusedItem.name = self.infusedItemType
 	end
-	if infuseSpeciesConfig then
-		infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-		infuseData = sb.jsonMerge(root.fetchConfigArray(infuseSpeciesConfig.infuseData.default or {}), root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or {}))
-		infuseData = sb.jsonMerge(infuseData, sb.jsonQuery(infuseData, "locations."..self.tag) or {})
-	end
+	infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
+	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseSpeciesConfig.infuseData.default or {}), root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or {}))
+	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
 	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
 
 	local tagsSet = {
@@ -919,7 +917,7 @@ function _Location:setInfusionData()
 	}
 	local defaultColorMap = root.speciesConfig("human").baseColorMap
 	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
-		local sourceColorMap = sb.jsonQuery(infuseData, "infuseColorRemapSources." .. tag)
+		local sourceColorMap = (infuseData.infuseColorRemapSources or {})[tag]
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
 		animator.setGlobalTag(tag, directives)
@@ -928,7 +926,7 @@ function _Location:setInfusionData()
 	for part, tags in pairs(infuseData.colorRemapPartTags or {}) do
 		tagsSet.partTags[part] = {}
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sb.jsonQuery(infuseData, "infuseColorRemapSources." .. part ..".".. tag) or sb.jsonQuery(infuseSpeciesConfig, "colorRemapSources." .. tag)
+			local sourceColorMap = ((infuseData.infuseColorRemapSources or {})[part] or {})[tag] or (infuseData.infuseColorRemapSources or {})[tag]
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
 			animator.setPartTag(part, tag, directives)
@@ -1073,7 +1071,7 @@ function _Location:updateOccupancy(dt)
 		end
 		if self.infuseType then
 			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-			addVisual = addVisual + ((sb.jsonQuery(infusedItem, "parameters.preySize") or 0) * self.settings.infusedSize)
+			addVisual = addVisual + ((((infusedItem or {}).parameters or {}).preySize or 0) * self.settings.infusedSize)
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(
 			math.min(

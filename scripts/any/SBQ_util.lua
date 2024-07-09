@@ -1,3 +1,31 @@
+function sbq.query(input, query)
+	if not input then return input end
+	local out = input
+	for _, v in ipairs(query) do
+		out = out[v]
+		if not out then return out end
+	end
+	return out
+end
+function sbq.splitKeys(path)
+	local query = {}
+	local path = path
+	while path ~= "" do
+		local found = path:find("%.")
+		if found then
+			table.insert(query, path:sub(1, found - 1))
+			path = path:sub(found + 1, -1)
+		else
+			table.insert(query, path:sub(1, -1))
+			break
+		end
+	end
+	return query
+end
+function sbq.queryPath(input, path)
+	return sbq.query(input, sbq.splitKeys(path))
+end
+
 function sbq.getClosestValue(x, list)
 	local closest
 	local closestKey
@@ -104,12 +132,12 @@ function sbq.setupSettingMetatables(entityType)
 			end
 		end
 		if not sbq.config.groupedSettings[setting] then
-			local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, v))
+			local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, v})
 			if result then
 				storage.sbqSettings[setting] = result
 				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nInvalid with current species config.", setting, v, result))
 			end
-			local result2 = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, override))
+			local result2 = sbq.query(sbq.voreConfig.invalidSettings, {setting, override})
 			if result2 then
 				sbq.settings[setting] = result2
 			end
@@ -168,12 +196,12 @@ function sbq.setupSettingMetatables(entityType)
 						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting, v, sbq.defaultSettings[setting], defaultType))
 					end
 				end
-				local result = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, v)) or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", k, name, setting, v))
+				local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, v}) or sbq.query(sbq.voreConfig.invalidSettings, {k, name, setting, v})
 				if result then
 					storage.sbqSettings[k][name][setting] = result
 					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, result))
 				end
-				local result2 = sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s", setting, override)) or sb.jsonQuery(sbq.voreConfig, string.format("invalidSettings.%s.%s.%s.%s", k, name, setting, override))
+				local result2 = sbq.query(sbq.voreConfig.invalidSettings, {setting, v}) or sbq.query(sbq.voreConfig.invalidSettings, {k, name, setting, override})
 				if result2 then
 					sbq.settings[k][name][setting] = result2
 				end

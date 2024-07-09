@@ -32,7 +32,7 @@ function sbq.refreshRemapTags()
 	local defaultColorMap = root.speciesConfig("human").baseColorMap
 	local speciesConfig = root.speciesConfig(humanoid.species())
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
-		local sourceColorMap = sb.jsonQuery(speciesConfig, "colorRemapSources." .. tag)
+		local sourceColorMap = sbq.query(speciesConfig, {"colorRemapSources", tag})
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
 		--sb.logInfo(tag.." "..directives)
@@ -40,7 +40,7 @@ function sbq.refreshRemapTags()
 	end
 	for part, tags in pairs(speciesConfig.colorRemapPartTags or {}) do
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sb.jsonQuery(speciesConfig, "colorRemapSources." .. part ..".".. tag) or sb.jsonQuery(speciesConfig, "colorRemapSources." .. tag)
+			local sourceColorMap = sbq.query(speciesConfig, {"colorRemapSources", part, tag}) or sbq.query(speciesConfig, {"colorRemapSources", tag})
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
 			--sb.logInfo(tag.." "..directives)

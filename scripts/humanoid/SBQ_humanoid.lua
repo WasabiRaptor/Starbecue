@@ -133,7 +133,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		return false
 	end
 	if npc and speciesFile.voreConfig then
-		if sb.jsonQuery(root.fetchConfigArray(speciesFile.voreConfig), "overrideSettings.speciesTF") == false then
+		if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 			sbq.logWarn("NPC cannot be transformed into TF locked species: " .. newIdentity.species)
 			return false
 		end
