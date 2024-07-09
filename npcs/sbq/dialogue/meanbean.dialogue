@@ -152,7 +152,7 @@
 			]
 		]
 	},
-	"tailVoreInvalid": "There must be an error, tailVore is invalid",
+	"tailVoreInvalid": "/npcs/sbq/dialogue/default.dialogue:tailVoreInvalid",
 	"tailVoreNo": ":defaultNo",
 	"tailVoreTooBig": ":tooBig",
 	"tailVoreTooSmall": ":tooSmall",
@@ -176,7 +176,7 @@
 	"absorbVoreNo": ":defaultNo",
 	"absorbVoreTooBig": ":tooBig",
 	"absorbVoreTooSmall": ":tooSmall",
-	"absorbVoreNoSlots": ":oralVoreNoSlots",
+	"absorbVoreNoSlots": ":noSlots",
 	"absorbVoreFull": ":tailVoreFull",
 	"absorbVoreNeedsInfusion": ":oralVoreNeedsInfusion",
 	"absorbVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -196,7 +196,7 @@
 	"navelVoreNo": ":defaultNo",
 	"navelVoreTooBig": ":tooBig",
 	"navelVoreTooSmall": ":tooSmall",
-	"navelVoreNoSlots": ":oralVoreNoSlots",
+	"navelVoreNoSlots": ":noSlots",
 	"navelVoreFull": ":tailVoreFull",
 	"navelVoreNeedsInfusion": ":oralVoreNeedsInfusion",
 	"navelVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -216,7 +216,7 @@
 	"analVoreNo": ":defaultNo",
 	"analVoreTooBig": ":tooBig",
 	"analVoreTooSmall": ":tooSmall",
-	"analVoreNoSlots": ":oralVoreNoSlots",
+	"analVoreNoSlots": ":noSlots",
 	"analVoreFull": ":tailVoreFull",
 	"analVoreNeedsInfusion": ":oralVoreNeedsInfusion",
 	"analVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -264,7 +264,7 @@
 	"unbirthVoreTooSmall": [
 		"Not interested. You're too small to stimulate me."
 	],
-	"unbirthVoreNoSlots": ":oralVoreNoSlots",
+	"unbirthVoreNoSlots": ":noSlots",
 	"unbirthVoreFull": [
 		"A nerd like you is way too late to the party, but you can rub my belly if you pay me."
 	],
@@ -313,7 +313,7 @@
 	],
 	"breastVoreTooBig": ":tooBig",
 	"breastVoreTooSmall": ":tooSmall",
-	"breastVoreNoSlots": ":oralVoreNoSlots",
+	"breastVoreNoSlots": ":noSlots",
 	"breastVoreFull": [
 		"Jealous that they're in there and you're not? Too bad, I'm all outta room.",
 		"No can do, but if you pay me, I'll let you take a drink. Maybe you'll get one of them.",
@@ -379,7 +379,7 @@
 		"I'm greedy and my dick is even greedier, and we both know you're too big."
 	],
 	"cockVoreTooSmall": ":tooSmall",
-	"cockVoreNoSlots": ":oralVoreNoSlots",
+	"cockVoreNoSlots": ":noSlots",
 	"cockVoreFull": [
 		"Already got someone workin' my shaft.",
 		"My cock's full. You can try suckin' them out if you think you can.",
@@ -397,7 +397,7 @@
 	"bellyInfuseNo": ":defaultNo",
 	"bellyInfuseTooBig": ":tooBig",
 	"bellyInfuseTooSmall": ":tooSmall",
-	"bellyInfuseNoSlots": ":oralVoreNoSlots",
+	"bellyInfuseNoSlots": ":noSlots",
 	"bellyInfuseFull": ":tailVoreFull",
 	"bellyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
 	"bellyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -407,7 +407,7 @@
 	"breastInfuseNo": ":defaultNo",
 	"breastInfuseTooBig": ":tooBig",
 	"breastInfuseTooSmall": ":tooSmall",
-	"breastInfuseNoSlots": ":oralVoreNoSlots",
+	"breastInfuseNoSlots": ":noSlots",
 	"breastInfuseFull": ":tailVoreFull",
 	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
 	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -417,7 +417,7 @@
 	"pussyInfuseNo": ":defaultNo",
 	"pussyInfuseTooBig": ":tooBig",
 	"pussyInfuseTooSmall": ":tooSmall",
-	"pussyInfuseNoSlots": ":oralVoreNoSlots",
+	"pussyInfuseNoSlots": ":noSlots",
 	"pussyInfuseFull": ":tailVoreFull",
 	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
 	"pussyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -427,7 +427,7 @@
 	"cockInfuseNo": ":defaultNo",
 	"cockInfuseTooBig": ":tooBig",
 	"cockInfuseTooSmall": ":tooSmall",
-	"cockInfuseNoSlots": ":oralVoreNoSlots",
+	"cockInfuseNoSlots": ":noSlots",
 	"cockInfuseFull": ":tailVoreFull",
 	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
 	"cockInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -584,231 +584,23 @@
 	"tailVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNo",
 	"tailVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYes",
 	"tailVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:tailVorePromptNoYesAfter",
-	"absorbVorePrompt": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I'm sooo empty! won't you fill me up you cute thing?"
-			],
-			[ // 25% - 50%
-				"I could use a snack, want to get engulfed by my form and help me out?~"
-			],
-			[ // 50% - 75%
-				"Hey cutie, want me to wrap you up in my wonderful form?~"
-			],
-			[ // 75% - 100%
-				"Hello you, want to embrace my body covering you up completely?~"
-			]
-		]
-	},
-	"absorbVorePromptYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"What I want to hear, now let me just take control and push you into me~"
-			],
-			[ // 25% - 50%
-				"I thought you might agree, come here and let me roll over you~"
-			],
-			[ // 50% - 75%
-				"Well then it's time for you to get real close to me cutie~"
-			],
-			[ // 75% - 100%
-				"Great, then just let me hug you really tightly and get you in~"
-			]
-		]
-	},
-	"absorbVorePromptYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"There you are, my emptiness is gone, and you're all mine~"
-			],
-			[ // 25% - 50%
-				"Such a kind little cute snack, all cozy inside my form now~"
-			],
-			[ // 50% - 75%
-				"You slid in so nicely, you must have been so eager to get in me~"
-			],
-			[ // 75% - 100%
-				"Oh so good! I feel you're entire being in mine, and it's lovely~"
-			]
-		]
-	},
-	"absorbVorePromptNo": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Leaving me feeling empty huh? better buy me dinner later then~"
-			],
-			[ // 25% - 50%
-				"Darn, I would've preferred a cuter snack to eat~"
-			],
-			[ // 50% - 75%
-				"That's disappointing, but oh well, I'll make you mine later~"
-			],
-			[ // 75% - 100%
-				"Impressive you can resist the urge to throw yourself into me~"
-			]
-		]
-	},
-	"absorbVorePromptNoYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"There is a you shaped void in me, you have to be the one to fill it~"
-			],
-			[ // 25% - 50%
-				"My body desires you to be inside it, I'm not going to deny it cutie~"
-			],
-			[ // 50% - 75%
-				"I think you're just timid, let me help you get over that cutie~"
-			],
-			[ // 75% - 100%
-				"It seems you didn't understand me, you're going inside my body~"
-			]
-		]
-	},
-	"absorbVorePromptNoYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"You're filling my form up just right, Don't you agree with that at least?~"
-			],
-			[ // 25% - 50%
-				"Looks like you couldn't stop me from getting you for lunch cutie~"
-			],
-			[ // 50% - 75%
-				"I will always get what I want, now squirm for me in my lovely form~"
-			],
-			[ // 75% - 100%
-				"You're right where you should be, regardless of weather you think so~"
-			]
-		]
-	},
-	"navelVorePrompt": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I'm just starving out here, wouldn't you like to help me cutie and go in my button?~"
-			],
-			[ // 25% - 50%
-				"Be a sweaty and hop into my navel would ya? I need a snack~"
-			],
-			[ // 50% - 75%
-				"You seem like the perfect thing to be shoved into my navel~"
-			],
-			[ // 75% - 100%
-				"Hey you, want to take a trip into my navel cutie?~"
-			]
-		]
-	},
-	"navelVorePromptYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Ain't you such a sweaty, well head in my navel then, make me fill~"
-			],
-			[ // 25% - 50%
-				"Oh how nice of you! let's get you into my navel already cutie!~"
-			],
-			[ // 50% - 75%
-				"Good, just relax and let me take it from here, in my button you go~"
-			],
-			[ // 75% - 100%
-				"I thought you would say yes, what cutie wouldn't want in my belly?~"
-			]
-		]
-	},
-	"navelVorePromptYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I wish I could always be stuffing your cute butt into my hungry navel~"
-			],
-			[ // 25% - 50%
-				"You really hit the spot for me cutie, get used to your new home~"
-			],
-			[ // 50% - 75%
-				"What a lovely little trip right into my belly you took~"
-			],
-			[ // 75% - 100%
-				"Ah, right where you belong, hope you found my navel pleasant~"
-			]
-		]
-	},
-	"navelVorePromptNo": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"You'll leave me starving like this? you owe me one cutie~"
-			],
-			[ // 25% - 50%
-				"I could've used you in my button, but alas it's not to be, yet~"
-			],
-			[ // 50% - 75%
-				"I'm in shock that you denied me! though I'm sure you'll come around later~"
-			],
-			[ // 75% - 100%
-				"Really? well your loss then cutie~"
-			]
-		]
-	},
-	"navelVorePromptNoYes": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I'm far too hungry for you not be mine, get in my button plaything~"
-			],
-			[ // 25% - 50%
-				"Snacks don't get to say no, they just get in belly buttons~"
-			],
-			[ // 50% - 75%
-				"Too bad, my navel is calling for you, and you're gonna answer it~"
-			],
-			[ // 75% - 100%
-				"So you think you got a choice here? cute, I'm just gonna shove you in~"
-			]
-		]
-	},
-	"navelVorePromptNoYesAfter": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Nice little express route to my belly for you, be good and keep me filled cutie~"
-			],
-			[ // 25% - 50%
-				"You where the only snack I wanted in my button today, you should be honored~"
-			],
-			[ // 50% - 75%
-				"You where meant to be stuffed though my navel, no denying that cutie~"
-			],
-			[ // 75% - 100%
-				"Glad you've settled in toy, hope my navel wasn't too rough on you~"
-			]
-		]
-	},
+	"absorbVorePrompt": "/npcs/sbq/dialogue/flirty.dialogue:absorbVorePrompt",
+	"absorbVorePromptYes": "/npcs/sbq/dialogue/flirty.dialogue:absorbVorePromptYes",
+	"absorbVorePromptYesAfter": "/npcs/sbq/dialogue/flirty.dialogue:absorbVorePromptYesAfter",
+	"absorbVorePromptNo": "/npcs/sbq/dialogue/flirty.dialogue:absorbVorePromptNo",
+	"absorbVorePromptNoYes": "/npcs/sbq/dialogue/flirty.dialogue:absorbVorePromptNoYes",
+	"absorbVorePromptNoYesAfter": "/npcs/sbq/dialogue/flirty.dialogue:absorbVorePromptNoYesAfter",
+	"navelVorePrompt": "/npcs/sbq/dialogue/flirty.dialogue:navelVorePrompt",
+	"navelVorePromptYes": "/npcs/sbq/dialogue/flirty.dialogue:navelVorePromptYes",
+	"navelVorePromptYesAfter": "/npcs/sbq/dialogue/flirty.dialogue:navelVorePromptYesAfter",
+	"navelVorePromptNo": "/npcs/sbq/dialogue/flirty.dialogue:navelVorePromptNo",
+	"navelVorePromptNoYes": "/npcs/sbq/dialogue/flirty.dialogue:navelVorePromptNoYes",
+	"navelVorePromptNoYesAfter": "/npcs/sbq/dialogue/flirty.dialogue:navelVorePromptNoYesAfter",
 	"analVorePrompt": "/npcs/sbq/dialogue/default.dialogue:analVorePrompt",
 	"analVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYes",
 	"analVorePromptYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptYesAfter",
 	"analVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNo",
-	"analVorePromptNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Here's the funny thing about that cutie, you're going in anyway~"
-			],
-			[ // 25% - 50%
-				"You don't wanna go up my rear? too bad! toys don't get a choice~"
-			],
-			[ // 50% - 75%
-				"Sorry cutie, but I'm looking for something to go up in my butt and it's you~"
-			],
-			[ // 75% - 100%
-				"You said no? let me put you in your place then, right up my ass~"
-			]
-		]
-	},
+	"analVorePromptNoYes": "/npcs/sbq/dialogue/flirty.dialogue:analVorePromptNoYes",
 	"analVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:analVorePromptNoYesAfter",
 	"unbirthVorePrompt": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePrompt",
 	"unbirthVorePromptYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVorePromptYes",
@@ -822,133 +614,14 @@
 	"breastVorePromptNo": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNo",
 	"breastVorePromptNoYes": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYes",
 	"breastVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:breastVorePromptNoYesAfter",
-	"cockVorePrompt": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Hmm, I'd like to take a cutie like you along with me, how about a ride in my sack~?",
-				"Hehe, hey cutie, want to go on a little adventure down my cock~?",
-				"You're so cute... how about I stick you down my pants, maybe into my cock~"
-			],
-			[ // 25% - 50%
-				"Hey there~ I think I'm gonna shove you down my cock, just because I feel like it~",
-				"Hey you~ Do you want to get a real close look at my dick~?",
-				"Mmm I think my dick is firming up a bit, probably from looking at you~ want to see~?"
-			],
-			[ // 50% - 75%
-				"MMMmm can't help having this boner when I'm imagining a cutie like you squirming around in my sack~",
-				"You! you're just the thing I need~ Could you see yourself squirming around in my cock? Because I can~",
-				"Gosh I just keep looking at you and thinking of shoving you down my cock~ I just want you that badly~"
-			],
-			[ // 75% - 100%
-				"Oh you're so cute, so so cute... I want you, I want you in my dick, I want to feel you squirming in my balls!",
-				"You. I want you~ I want to grab you and shove you right down into my throbbing cock~\nWhere you belong~"
-			]
-		]
-	},
-	"cockVorePromptYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Of course you'd say yes cutie, you'd do anything to get near my dick, or in it~",
-				"I'm so glad you said yes~ Now to put you where you belong~"
-			],
-			[ // 25% - 50%
-				"Hehe, thank you cutie~ now lets get you squirming down my shaft~",
-				"And thats exactly what I needed to hear~ In you go~"
-			],
-			[ // 50% - 75%
-				"You know *exactly* where you belong don't you sweetie, now get in~",
-				"Good, you're going to feel excellent down there~"
-			],
-			[ // 75% - 100%
-				"Good~ I'm glad you know your place toy~",
-				"Hehehe oh I'm soooo glad you said yes~ I just NEED to play with my toy~"
-			]
-		]
-	},
-	"cockVorePromptYesAfter": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Ahh~ you feel wonderful cutie~ I hope my cock isn't squeezing to hard~",
-				"MM~ you keep squirming little one~ and you might get me to pop a boner~"
-			],
-			[ // 25% - 50%
-				"Fff~ ooh~ That's certainly going to get me more excited~",
-				"Ahhh~ keep squirming around for me, I want to feel everything~"
-			],
-			[ // 50% - 75%
-				"Yessss~! This is EXACTLY what I needed, squrim even more for me~!",
-				"Push me closer! keep squirming! I want to feel even more!"
-			],
-			[ // 75% - 100%
-				"AhhhH~ ffff I might just cum with all this squirming! don't stop!",
-				"Keep going! Yes! YES~! Try to make me cum! I want it so much!"
-			]
-		]
-	},
-	"cockVorePromptNo": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I'll get you next time!"
-			],
-			[ // 25% - 50%
-				"A real bummer, though I'll get you next time~"
-			],
-			[ // 50% - 75%
-				"Huff! I thought I had you wrapped around my finger!"
-			],
-			[ // 75% - 100%
-				"Really? When I'm like this?! You should be worshipping me!"
-			]
-		]
-	},
-	"cockVorePromptNoYes": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Are you sure~? How about I start you going in, you wouldn't want to miss out on a chance to get nice and close to my cock now would you~"
-			],
-			[ // 25% - 50%
-				"No~? playing hard to get, how cute~ You're going to look even cuter squirming around in my balls~"
-			],
-			[ // 50% - 75%
-				"I only asked as a pleasantry~ I already know you want to be squirming around in my sack~"
-			],
-			[ // 75% - 100%
-				"Heh, wrong choice cutie~ Huff~ You should have known I wasn't going to accept a no when I'm this close~"
-			]
-		]
-	},
+	"cockVorePrompt": "/npcs/sbq/dialogue/flirty.dialogue:cockVorePrompt",
+	"cockVorePromptYes": "/npcs/sbq/dialogue/flirty.dialogue:cockVorePromptYes",
+	"cockVorePromptYesAfter": "/npcs/sbq/dialogue/flirty.dialogue:cockVorePromptYesAfter",
+	"cockVorePromptNo": "/npcs/sbq/dialogue/flirty.dialogue:cockVorePromptNo",
+	"cockVorePromptNoYes": "/npcs/sbq/dialogue/flirty.dialogue:cockVorePromptNoYes",
 	"cockVorePromptNoYesAfter": "/npcs/sbq/dialogue/default.dialogue:cockVorePromptNoYesAfter",
 	"oralVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequesting",
-	"oralVoreRequestingYes": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"And to think I was starting to get desperate~! Open wide, sweetie!",
-				"I'm going to make you feel so good from the inside~",
-				"You have no idea how much I've needed this~!"
-			],
-			[ // 25% - 50%
-				"You and I are going to get along swimmingly~ Enjoy the meal~!",
-				"Enjoy your meal, sweetheart~",
-				"Time for me and your belly to get acquainted~"
-			],
-			[ // 50% - 75%
-				"Just what I was hoping to hear~ Open wide!",
-				"Just what I needed to hear~",
-				"A good snack always knows its place~"
-			],
-			[ // 75% - 100%
-				"Good. Take a break while I do the hard work~",
-				"Mhm, I figured you were interested~",
-				"Relax... We're both going to enjoy this~"
-			]
-		]
-	},
+	"oralVoreRequestingYes": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreRequestingYes",
 	"oralVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNo",
 	"oralVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestingNoYes",
 	"tailVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequesting",
@@ -963,22 +636,10 @@
 	"navelVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:navelVoreRequestingYes",
 	"navelVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:navelVoreRequestingNo",
 	"navelVoreRequestingNoYes": "/npcs/sbq/dialogue/default.dialogue:navelVoreRequestingNoYes",
-	"analVoreRequesting": [
-		"What a lovely ass you have, cutie! May I come in?",
-		"I can't help but stare at that lovely rear you've got, would you let me in?"
-	],
-	"analVoreRequestingYes": [
-		"I thought you'd agree with me! Now, just let me slide on into that rear~",
-		"Couldn't resist my request? Good, since I can't resist that butt~"
-	],
-	"analVoreRequestingNo": [
-		"Huh, I wouldn't think you'd say no, guess I'll get inside that cute booty another day~",
-		"Well then, I'll accept a 'no' for now, but you'd better let me at that butt next time~"
-	],
-	"analVoreRequestingNoYes": [
-		"I gave you a chance to let me inside that butt the easy way, but it seems you like the hard way~",
-		"You think you can say no to me, sugar? Sorry, but I'm getting in that booty~"
-	],
+	"analVoreRequesting": "/npcs/sbq/dialogue/flirty.dialogue:analVoreRequesting",
+	"analVoreRequestingYes": "/npcs/sbq/dialogue/flirty.dialogue:analVoreRequestingYes",
+	"analVoreRequestingNo": "/npcs/sbq/dialogue/flirty.dialogue:analVoreRequestingNo",
+	"analVoreRequestingNoYes": "/npcs/sbq/dialogue/flirty.dialogue:analVoreRequestingNoYes",
 	"unbirthVoreRequesting": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequesting",
 	"unbirthVoreRequestingYes": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingYes",
 	"unbirthVoreRequestingNo": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreRequestingNo",
@@ -1068,7 +729,7 @@
 		"I figured I'd try shovin' you up in there. Works pretty well, I'd say.",
 		"They were kind of right. I do enjoy seein' who I can push in there.",
 		"So up you go where the stars don't shine."
-	],	
+	],
 	"unbirthVoreNoPrompt": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1299,125 +960,13 @@
 			]
 		]
 	},
-	"tailVoreForcing": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"Better make way for me sugar. I see how hungry your tail is, and I want to be the one it claims~"
-			],
-			[ // 25% - 50%
-				"Your tail is drooling. I think it needs a delectable snack like myself to help it out~"
-			],
-			[ // 50% - 75%
-				"I caught your tail giving me glances. A cute little thing like that should be cuddled, and fed~"
-			],
-			[ // 75% - 100%
-				"Hey~ I see you have quite a lovely looking tail maw there. Hope you don't mind if I fill it up~"
-			]
-		]
-	},
-	"absorbVoreForcing": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I'm about to dive fully into the lovely embrace of your body. I must be surrounded by it~"
-			],
-			[ // 25% - 50%
-				"I'm going to make you splash your being all over me. Get ready~"
-			],
-			[ // 50% - 75%
-				"Better not move!~ I'm about to fall into you and let your body consume me~"
-			],
-			[ // 75% - 100%
-				"Hey, I'm feeling like being utterly engulfed by your body, so let me give you a hug~"
-			]
-		]
-	},
-	"navelVoreForcing": {
-		"percentage": "sbqRest",
-		"pools": [
-			[ // 0% - 25%
-				"I must plunge into that lovable belly button you got. Cuties like us belong together~!"
-			],
-			[ // 25% - 50%
-				"I can't keep my eyes off that precious little navel you got. I just gotta shove myself in there~"
-			],
-			[ // 50% - 75%
-				"Come here you, don't think I don't see your adorable belly button there. I want in~"
-			],
-			[ // 75% - 100%
-				"You won't mind if I play with your navel a little bit, right? Then push myself in when you least expect it~?"
-			]
-		]
-	},
-	"analVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Don't be shy now, let me see that little cute little butt hole you got~ I'll slip in real quick~"
-			],
-			[ // 25% - 50%
-				"Show me those cheeks! I wanna throw myself right between them, and then further in~"
-			],
-			[ // 50% - 75%
-				"Get over here now. I see that cute bottom you have, and I want in~"
-			],
-			[ // 75% - 100%
-				"Better get ready to feel me slipping my way in your hot posterior, cause I'm going to get in there~"
-			]
-		]
-	},
-	"unbirthVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"I got a deal for you sweetie: spread those legs and I enter your hot womb. These terms are non-negotiable~"
-			],
-			[ // 25% - 50%
-				"You can't show off that cute snatch without someone taking the bait and going in, like me~"
-			],
-			[ // 50% - 75%
-				"I'm feeling quite moody for a lovely, warm womb to rest in. I think a cutie like you will do nicely for that~"
-			],
-			[ // 75% - 100%
-				"I'm going to make those lovely lewd lips claim me. You better be ready cause I'm coming though!~"
-			]
-		]
-	},
-	"breastVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"You got a nice pair of cute jugs. I think I'm going to spend some time in those~"
-			],
-			[ // 25% - 50%
-				"Hey cutie, I noticed your bouncy pillows from here, so I'll be making my stay in those babies~"
-			],
-			[ // 50% - 75%
-				"I can't pry my eyes off those lovely boobs you're sporting. I gotta get in those cute things~"
-			],
-			[ // 75% - 100%
-				"Just the way your rack is bouncing around. Oh! I have make my way in those cute things!~"
-			]
-		]
-	},
-	"cockVoreForcing": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"A mood just struck me, and I'd like to slip in that lovely cock you got. Hm? I'm not asking cutie~"
-			],
-			[ // 25% - 50%
-				"Yeah, I'm looking at your lovely looking dick, and you know, I'm also about to be in it, too~"
-			],
-			[ // 50% - 75%
-				"Just seeing your member... I can't help but want inside it, so I'm gonna indulge and snuggle right on in~"
-			],
-			[ // 75% - 100%
-				"I can't stop thinking about that adorable shaft. I want in and you ain't stopping me, cutie~"
-			]
-		]
-	},
+	"tailVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:tailVoreForcing",
+	"absorbVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:absorbVoreForcing",
+	"navelVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:navelVoreForcing",
+	"analVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:analVoreForcing",
+	"unbirthVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:unbirthVoreForcing",
+	"breastVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:breastVoreForcing",
+	"cockVoreForcing": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreForcing",
 	"oralVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreLetoutForcingAfter",
 	"tailVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForcingAfter",
 	"absorbVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForcingAfter",
@@ -1426,242 +975,27 @@
 	"unbirthVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreLetoutForcingAfter",
 	"breastVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForcingAfter",
 	"cockVoreLetoutForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreLetoutForcingAfter",
-	"oralVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"Mmph... I wanted to invite you over for dinner, not *as* dinner...",
-				"Oof... This works, but I had somewhere else in mind for you to fill...",
-				"*glk~*, well, I did say to send their sexiest delivery person..."
-			],
-			[ // 25% - 50%
-				"*urp~*, someone always seems to meet my tummy's siren song for some reason...",
-				"Mm, your methods are a little forceful, but your flavor is unmatched~",
-				"Fwah, now I have to think about getting some bigger clothes~"
-			],
-			[ // 50% - 75%
-				"Oohh~, as you just found out, I don't have a gag reflex~",
-				"Mmf, you could've just told me that I look good with a nice, round tum~",
-				"Fff, there goes my figure again~"
-			],
-			[ // 75% - 100%
-				"*gulp~* When I said you were looking like a snack, I wasn't being literal~!",
-				"Not what I-*urp~*-meant what I told you to get inside me~",
-				"Mmpf, is this your idea of a lunch date~?"
-			]
-		]
-	},
-	"tailVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I can't tell if you forced your way into my tail, or if it grabbed you. Both of you were so eager~!",
-				"While unexpected, your shoving into my tail fills me up in just the right way, my cute snack~",
-				"I was just about to order something! But since you were so eager, you get to be my tail's snack~"
-			],
-			[ // 25% - 50%
-				"Was the allure of my tail really too much for you? Well then, I won't be needing lunch~",
-				"Hey now, I need to teach my tail some manners about letting anyone in. Even a cute snack like you~",
-				"A pleasant surprise you fed yourself to my tail, but not an unwelcome one. I was needing a snack~"
-			],
-			[ // 50% - 75%
-				"If cuties like you keep feeding my tail, it'll get spoiled rotten~!",
-				"Another toy has put itself in the jaws of my lovely tail, how quaint~",
-				"Hah! Prey like you seem to always seem so drawn to my tail maw. Must be for a good reason~"
-			],
-			[ // 75% - 100%
-				"Seems you just couldn't get enough of a look at my wondrous tail... but can I blame you~?",
-				"I know my tail is gorgeous, but try to control yourself. My tail might make this a habit~",
-				"Oh hello, sweetie, seems like you're getting acquainted with my tail pretty closely~"
-			]
-		]
-	},
-	"absorbVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"I was starving there for a moment. Is that why you just jumped into me like that, precious~?",
-				"You must have heard my lovely stomach grumbling, and then you went and dived into me. How cute~",
-				"You've got good timing snack. As sudden as your intrusion was, you're filling me nicely~"
-			],
-			[ // 25% - 50%
-				"Did you have a plan for after you willingly crashed into me, snack? I suppose not~",
-				"Well, be glad you literally ran into me, cutie. I was just thinking about lunch~",
-				"Is this a surprise gift to me? If so, I won't turn down a snack like you~"
-			],
-			[ // 50% - 75%
-				"How funny we 'bumped' into each other. Though it seems like you planned for this, didn't you~?",
-				"Aww, you were so happy to see me, you dived right into me! I'll let your abruptness slide, cutie~",
-				"Do you love to get others to absorb your cute butt? I might have let you in if only you asked~"
-			],
-			[ // 75% - 100%
-				"I thought that was an accident, but you seemed rather eager to bump into my lovely body~",
-				"Didn't even say hello before smashing into me. Oh well, we got plenty of time to spend together now~",
-				"I didn't even ask you to walk into me, yet you did it with a smile. What a silly plaything~"
-			]
-		]
-	},
-	"navelVoreForced": {
-		"percentage": "food",
-		"pools": [
-			[ // 0% - 25%
-				"You must've heard my belly grumble, and headed right for my navel as soon as you did, you prey-thing~",
-				"A little forward of you to just slide into my navel, but I like the initiative, my filling snack~",
-				"Ain't you eager to relieve me of hunger, going right into my navel without permission. Such a cutie~"
-			],
-			[ // 25% - 50%
-				"You must have known it was getting close to lunch, since you forced your way into my navel~",
-				"Even though you didn't ask to enter my navel, I'll let you stay since I'm peckish, you cute snack~",
-				"I didn't see you coming for my navel, though I should've with a plaything like you wanting to fill me up~"
-			],
-			[ // 50% - 75%
-				"I should have expected that a cutie like you would stuff themselves in my navel~",
-				"You must think my navel is quite adorable to trespass into it like that~",
-				"Most people I know don't greet you by jumping into their belly buttons, you silly cutie~"
-			],
-			[ // 75% - 100%
-				"Hehe, while I understand your eagerness, ask before you stuff your cute self in my navel next time~",
-				"This isn't the first time I had someone force their way in my belly button, you cute thing~",
-				"What a brave thing you are! So willing to enter my navel that you didn't even ask~"
-			]
-		]
-	},
-	"analVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"O-oh my! I knew my booty was positively gorgeous, but your adorable eagerness to get in it is unsurpassed~",
-				"I thought you were checking out my behind. Just couldn't help shoving yourself inside me, heheh~",
-				"Very few people would jump into my ass like that. You must be quite a special cutie~"
-			],
-			[ // 25% - 50%
-				"Couldn't get my bottom off your mind? I understand... but now you've trespassed and should stay a while~",
-				"What a clingy butt buddy you are, sticking yourself up there like you belong there. I don't mind though~",
-				"I bet you waited for me to turn around, just so you can get in my rear. Aren't you an opportunist~"
-			],
-			[ // 50% - 75%
-				"Ah! Well you caught me in a good mood. I'll forgive your ass invasion if you wiggle for me, toy~",
-				"I didn't realize I needed this til you forced your cute self in my bottom. I'm glad you did, my little toy~",
-				"This is both sudden... and pleasing! You wanted to dive into my butt? Well you did, and now you're mine~"
-			],
-			[ // 75% - 100%
-				"Oh, I needed this! Good job on fulling my desire without even asking me, my butt toy~",
-				"You must have noticed how aroused I was, shoving yourself up my ass without hesitation~",
-				"How wonderful you feel in there, you booty fiend! You didn't even warn me before crawling in~"
-			]
-		]
-	},
-	"unbirthVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Aww, how cute! You just had to slip into my folds. Not even a warning before you did~",
-				"You didn't need to be so forceful getting into my lovely womb, you know~",
-				"This is unexpected, but since you are that desperate to get in my vag, you can stay, cutie~"
-			],
-			[ // 25% - 50%
-				"Toys really do know know their place in my womb. A little too well in this case, hehehe~",
-				"So, you plunged right into my lower lips. Did you have a plan? Playthings like you usually don't~",
-				"Couldn't stand just watching huh? You wanted to go deep into my folds, like the toy you are~"
-			],
-			[ // 50% - 75%
-				"Seems like you eagerly filled my needy snatch! Without even warning me, how adorable~",
-				"I was just looking for something to play with, then you dive into my lewd lips so suddenly~",
-				"I was a bit shocked when you shot up my vag, but the feeling of a toy like you relaxes me~"
-			],
-			[ // 75% - 100%
-				"You must have found it easy to slide in my wet snatch, you sneaky little gremlin~",
-				"Did you sense my growing lust? Throwing yourself in my womb to quell it like a good toy~?",
-				"I was looking around for something to stick up my folds, but you dove in and got settled without even asking~"
-			]
-		]
-	},
-	"breastVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"So, a toy like you just decided to insert themselves into my nipple like that? How adorable~",
-				"Seems like you stared at my rack for too long, and couldn't resist the urge to throw yourself in. I guess you're mine~",
-				"I can't be mad at a cutie like you for invading my breast. You are just too cute in there~!"
-			],
-			[ // 25% - 50%
-				"Do you regularly shove yourself into other people's boobs? Or are mine special to you~?",
-				"One look at my honkers and you just had to get in them, hmm? What a complete cutie~",
-				"Didn't even ask before you up and went right into my nipple. Toys like you are too much~"
-			],
-			[ // 50% - 75%
-				"Seems you're wanting to please me inside my breast. You should have asked first, but oh well~",
-				"Were my jugs getting you hot under the collar? I am feeling a bit frisky too, so I'll forgive your intrusion~",
-				"While I had no plans of having someone in my boobs today, you thought otherwise, cute thing~"
-			],
-			[ // 75% - 100%
-				"You sneaky toy you, waiting till I'm all hot and bothered before slipping in my rack, heh~",
-				"Maybe it's your cute face or how lustful I am, but I'm not mad that you forced your way into my tits~",
-				"Look at you, you went and plunged into my breast without a word at the height of my arousal. Guess you're mine now~"
-			]
-		]
-	},
-	"cockVoreForced": {
-		"percentage": "sbqLust",
-		"pools": [
-			[ // 0% - 25%
-				"Seems toys will be toys, just squirming into my cock any opportunity they get~",
-				"Well, ain't you cute? You saw my dick and just couldn't help yourself, huh~?",
-				"Hmm~ Seems I've got an admirer for my cock~ Maybe ask first next time, cutie~"
-			],
-			[ // 25% - 50%
-				"Another day, another cute prey sliding themselves down my shaft. Not sure if I'm cursed or blessed~",
-				"How lewd of you! Forcing your way into my cock like that. Aw well, cuties be cute~",
-				"You hiding in my rod for a reason? Or were you that desperate to be inside my lewd bits~?"
-			],
-			[ // 50% - 75%
-				"I thought I saw you staring there, eyeing my shaft to jump in it. I'm a bit needy right now, so welcome inside, toy~",
-				"I'm surprised you inserted yourself in my dick, but also that I'm enjoying it! Such an eager toy~",
-				"Seems your intrusive thoughts won, and you went dick diving! But mine has too, and I'm prey keeping~"
-			],
-			[ // 75% - 100%
-				"Ohhh~ Even though I'd liked a warning, the feeling of a cutie like you in my cock is worth it~",
-				"You got some balls to jump down my shaft like that, and I do too! You'll be going to right to them if you wiggle for me~",
-				"You saw me rock hard and thought to wordlessly help me out huh? By entering my dick? So cute~"
-			]
-		]
-	},
-	"oralVoreLetoutForced": [
-		"I'd much rather you stay~",
-		"Come back whenever you like~",
-		"Afraid you'll want to stay forever~?",
-		"You know, you don't have to leave~"
-	],
+	"oralVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreForced",
+	"tailVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:tailVoreForced",
+	"absorbVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:absorbVoreForced",
+	"navelVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:navelVoreForced",
+	"analVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:analVoreForced",
+	"unbirthVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:unbirthVoreForced",
+	"breastVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:breastVoreForced",
+	"cockVoreForced": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreForced",
+	"oralVoreLetoutForced": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutForced",
 	"tailVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:tailVoreLetoutForced",
 	"absorbVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:absorbVoreLetoutForced",
 	"navelVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:navelVoreLetoutForced",
 	"analVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:analVoreLetoutForced",
-	"unbirthVoreLetoutForced": [
-		"Happy birthday hehe~",
-		" Ahh~ Why'd you come out silly, its much softer back inside~",
-		"Mmm~ I thought you said you were comfortable~?",
-		"Are you coming out just to squirm back in~?"
-	],
+	"unbirthVoreLetoutForced": "/npcs/sbq/dialogue/flirty.dialogue:unbirthVoreLetoutForced",
 	"breastVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForced",
-	"cockVoreLetoutForced": [
-		"Don't you know friends are supposed to be stored in the balls~",
-		" Ahh~ Why'd you come out silly, it feels muuuch better to have you squirming in there~",
-		"Mmm~ I thought you said you were comfortable~?",
-		"Are you coming out just to squirm back in~?"
-	],
+	"cockVoreLetoutForced": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreLetoutForced",
 	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly",
 	"struggleWomb": "/npcs/sbq/dialogue/default.dialogue:struggleWomb",
 	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail",
-	"struggleBreasts": [
-		"I hope you're having a good time in there~",
-		"Nice and soft, isn't it~?",
-		"Hffff, feels so good with you in there~",
-		"I love being busty, and it's all thanks to you, dear~"
-	],
-	"struggleBreastsShirt": [
-		"Ooh, ya wanna be shown off~?",
-		"Tight, isn't it~?"
-	],
+	"struggleBreasts": "/npcs/sbq/dialogue/flirty.dialogue:struggleBreasts",
+	"struggleBreastsShirt": "/npcs/sbq/dialogue/flirty.dialogue:struggleBreastsShirt",
 	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy",
 	"struggleCock": "/npcs/sbq/dialogue/default.dialogue:struggleCock",
 	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls",
@@ -1669,14 +1003,7 @@
 	"struggleAcidHeal": "/npcs/sbq/dialogue/default.dialogue:struggleAcidHeal",
 	"struggleFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumHeal",
 	"struggleCumHeal": ":struggleAcidHeal",
-	"struggleMilkHeal": [
-		[
-			"All nice and safe~",
-			"Feels nice and soothing, right~?",
-			"Settle on in, it's nice and safe~",
-			"Enjoy your therapeutic milk bath~"
-		]
-	],
+	"struggleMilkHeal": "/npcs/sbq/dialogue/flirty.dialogue:struggleMilkHeal",
 	"struggleMiscHeal": ":struggleAcidHeal",
 	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression",
 	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest",
@@ -1686,11 +1013,7 @@
 	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune",
 	"struggleFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigest",
 	"struggleFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigestImmune",
-	"struggleMilkDigest": [
-		"You're gonna make a lovely batch of milk, dear~",
-		"Starting to slosh, eh~?",
-		"You're gonna be delicious~"
-	],
+	"struggleMilkDigest": "/npcs/sbq/dialogue/flirty.dialogue:struggleMilkDigest",
 	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt",
 	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune",
 	"struggleMiscDigest": ":struggleAcidDigest",
@@ -1709,16 +1032,8 @@
 	"strugglingBelly": "/npcs/sbq/dialogue/default.dialogue:strugglingBelly",
 	"strugglingWomb": "/npcs/sbq/dialogue/default.dialogue:strugglingWomb",
 	"strugglingTail": "/npcs/sbq/dialogue/default.dialogue:strugglingTail",
-	"strugglingBreasts": [
-		"It's so soft in here~",
-		"Mmm, it's so warm~",
-		"Hee, bouncy bouncy~",
-		"You could say I'm close to your heart~"
-	],
-	"strugglingBreastsShirt": [
-		"Hnnn~ So tight~",
-		"So snug~"
-	],
+	"strugglingBreasts": "/npcs/sbq/dialogue/flirty.dialogue:strugglingBreasts",
+	"strugglingBreastsShirt": "/npcs/sbq/dialogue/flirty.dialogue:strugglingBreastsShirt",
 	"strugglingPussy": "/npcs/sbq/dialogue/default.dialogue:strugglingPussy",
 	"strugglingCock": "/npcs/sbq/dialogue/default.dialogue:strugglingCock",
 	"strugglingBalls": "/npcs/sbq/dialogue/default.dialogue:strugglingBalls",
@@ -1726,11 +1041,7 @@
 	"strugglingAcidHeal": "/npcs/sbq/dialogue/default.dialogue:strugglingAcidHeal",
 	"strugglingFemcumHeal": ":strugglingAcidHeal",
 	"strugglingCumHeal": ":strugglingAcidHeal",
-	"strugglingMilkHeal": [
-		"A wonderful milk bath~",
-		"Mmm, I feel wonderful~",
-		"So soothing and comfy in here~"
-	],
+	"strugglingMilkHeal": "/npcs/sbq/dialogue/flirty.dialogue:strugglingMilkHeal",
 	"strugglingMiscHeal": ":strugglingAcidHeal",
 	"strugglingCompression": "/npcs/sbq/dialogue/default.dialogue:strugglingCompression",
 	"strugglingAcidDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingAcidDigest",
@@ -1740,12 +1051,7 @@
 	"strugglingCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingCumDigestImmune",
 	"strugglingFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:strugglingFemcumDigest",
 	"strugglingFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingFemcumDigestImmune",
-	"strugglingMilkDigest": [
-		"Gosh, I can feel myself sloshing~",
-		"Hee, wondering what I taste like~?",
-		"Heh, I taste good~",
-		"I hope I make a good batch of milk for you~"
-	],
+	"strugglingMilkDigest": "/npcs/sbq/dialogue/flirty.dialogue:strugglingMilkDigest",
 	"strugglingMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestBreastsShirt",
 	"strugglingMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:strugglingMilkDigestImmune",
 	"strugglingMiscDigest": ":strugglingAcidDigest",
@@ -1987,138 +1293,32 @@
 		}
 	},
 	// Unused Dialogue
-	"digestFull": [
-		"Just let me add the last prey to my hips first~",
-		"Hehe, eagerly waiting to be pudge, aren't you~?",
-		"Gotta gurgle up some space first~",
-		"Heh, you can't wait to be melting down inside me~"
-	],
-	"oralVoreCompressionFull": [
-		"You want me to eat ya? maybe after my plaything here is a more cuter size~",
-		"I'm working my toy here into my toy chest, don't have room for more toys yet~",
-		"My snack is still getting squished down, give me some time and I'll squish you too cutie~",
-		"I'm making my prey travel sized right now, once I'm done I'll see to you cutie~"
-	],
-	"tailVoreCompressionFull": [
-		"Sorry honey, my tail is making it's playthings fit in better right now, come back soon~",
-		"Let my tail work it's snacks into something more manageable, then I'll see to you cutie~"
-	],
-	"navelVoreCompressionFull": [
-		"I'd love to shove you in my navel, but until I make more room, you'll have to wait~",
-		"You really want in my button? I'd say yes but my prey isn't compact enough cutie~"
-	],
-	"absorbVoreCompressionFull": [
-		"Sorry honey, but I'm stuffed! however I'm making my snacks travel sized so ask later~",
-		"Currently putting on some real pressure to down size my full body, ask me later~"
-	],
-	"cockVoreDigestFull": [
-		"Give me moment or two to melt one of these cuties down~ Then you can take their place~"
-	],
-	"cockVoreCompressionFull": [
-		"Maybe give me a handjob while you wait for you turn~? It'll certainly help my other toys get squished harder~"
-	],
-	"unbirthVoreDigestFull": [
-		"Can't fit you in yet, but you're free to lick up my juices once they're finished melting~"
-	],
-	"unbirthVoreCompressionFull": [
-		"Maybe you can help me squeeze em all down, give my belly a rub...~ Maybe you'll feel a kick~"
-	],
-	"breastVoreDigestFull": [
-		"Hmm~ Maybe if you help milk me~ My current cuties are going to be a nice batch of milk soon~"
-	],
-	"breastVoreCompressionFull": [
-		"Heh, maybe if you help me squish em in my tits a bit, there will be some space for you~"
-	],
-	"struggleLetoutTransforming": {
-		"percentage": "transforming",
-		"pools": [
-			[
-				"Didn't want to become something like me?~",
-				"Didn't like the changes I was making?~"
-			]
-		],
-		"full": [
-			":struggleLetoutTransformed"
-		]
-	},
-	"struggleLetoutTransformed": [
-		"Now you can see the new you~",
-		"You might look a bit different now~"
-	],
-	"struggleLetoutDigested": [
-		"Ah... you want out... just a moment to reform~",
-		"Oh alright, you can stop being my fat for a little bit~",
-		"I'll reform you if that's what you want, but just know I can always eat you again later~",
-		"Alright, I'll reform you~"
-	],
-	"oralVoreLetoutForcedDigestImmune": [
-		"You've escaped... for now~",
-		"What, don't want to be pudge~?",
-		"I think you'd really enjoy it if you just let yourself melt away~",
-		"Awww~, you just need to let yourself melt down for me~"
-	],
-	"oralVoreLetoutForcedDigest": [
-		"You've escaped... for now~",
-		"What, don't want to be pudge~?",
-		"I think you'd really enjoy it if you just let yourself melt away~",
-		"Awww~, you were so close to becoming a part of me~"
-	],
-	"oralVoreLetoutForcedHeal": [
-		"You do know it's safer inside me right?~",
-		"Are you sure? I think you need some more time~",
-		"I think you should get back in, you tooootally need more healing~",
-		"You really should get back in and let me finish~"
-	],
-	"strugglingMilkDigestShirt": [
-		"Gonna get your top soaked with me at this rate~"
-	],
-	"analVoreUnpromptedWilling": [
-		"It's so warm and pleasant in here, just as a cute butt should be~",
-		"How tight it is inside your ass! makes me feel all bundled up~"
-	],
-	"struggleLetoutTransformingImmune": [
-		"Didn't want to become something like me?~",
-		"Didn't like the changes I was trying to make?~"
-	],
-	"struggleLetoutEggify": [
-		"Don't want to be trapped in an egg?~",
-		"You don't like eggs?~"
-	],
-	"oralVoreLetoutRequestedHeal": [
-		"You're probably patched up enough~",
-		"I think you've spent enough time healing~",
-		"I think you should be feeling much better now~",
-		"My stomach does wonders for healing doesn't it?~"
-	],
-	"oralVoreLetoutRequestedDigest": [
-		"Mmm, I don't want to turn you into pudge... yet~",
-		"My hunger is satiated... for now~",
-		"Probably best to get you out of there...",
-		"Hmm, I don't feel like melting you entirely... yet~"
-	],
-	"oralVoreLetoutRequestedDigestImmune": [
-		"Mmm, seems like I can't turn you into pudge~",
-		"Maybe next time you'll let yourself become a part of me~",
-		"Probably best to get you out of there...",
-		"Hmm, seems like I can't melt you down."
-	],
-	"oralVoreLetoutRequestedEgged": [
-		"Mmm time to get this egg out~"
-	],
-	"oralVoreLetoutRequestedDigested": [
-		"Here, let me reform you real quick~",
-		"I can't let you spend tooooo long on my hips~",
-		"Hey silly, its time for you to be more than pudge again~",
-		"Welcome back to not being simply a part of me~"
-	],
-	"cockVoreLetoutForcedTransforming": [
-		"If only you stayed a bit longer~",
-		"Ahh~ you didn't stay in long enough~",
-		"Maybe you should stay in a little longer~"
-	],
-	"cockVoreLetoutForcedTransformingImmune": [
-		"Hmmm why aren't you turning?",
-		"Come on, don't you want to see what happens?",
-		"Don't you want to see what its like to be my cum?~"
-	]
+	"digestFull": "/npcs/sbq/dialogue/flirty.dialogue:digestFull",
+	"oralVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreCompressionFull",
+	"tailVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:tailVoreCompressionFull",
+	"navelVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:navelVoreCompressionFull",
+	"absorbVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:absorbVoreCompressionFull",
+	"cockVoreDigestFull": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreDigestFull",
+	"cockVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreCompressionFull",
+	"unbirthVoreDigestFull": "/npcs/sbq/dialogue/flirty.dialogue:unbirthVoreDigestFull",
+	"unbirthVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:unbirthVoreCompressionFull",
+	"breastVoreDigestFull": "/npcs/sbq/dialogue/flirty.dialogue:breastVoreDigestFull",
+	"breastVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:breastVoreCompressionFull",
+	"struggleLetoutTransforming": "/npcs/sbq/dialogue/flirty.dialogue:struggleLetoutTransforming",
+	"struggleLetoutTransformed": "/npcs/sbq/dialogue/flirty.dialogue:struggleLetoutTransformed",
+	"struggleLetoutDigested": "/npcs/sbq/dialogue/flirty.dialogue:struggleLetoutDigested",
+	"oralVoreLetoutForcedDigestImmune": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutForcedDigestImmune",
+	"oralVoreLetoutForcedDigest": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutForcedDigest",
+	"oralVoreLetoutForcedHeal": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutForcedHeal",
+	"strugglingMilkDigestShirt": "/npcs/sbq/dialogue/flirty.dialogue:strugglingMilkDigestShirt",
+	"analVoreUnpromptedWilling": "/npcs/sbq/dialogue/flirty.dialogue:analVoreUnpromptedWilling",
+	"struggleLetoutTransformingImmune": "/npcs/sbq/dialogue/flirty.dialogue:struggleLetoutTransformingImmune",
+	"struggleLetoutEggify": "/npcs/sbq/dialogue/flirty.dialogue:struggleLetoutEggify",
+	"oralVoreLetoutRequestedHeal": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutRequestedHeal",
+	"oralVoreLetoutRequestedDigest": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutRequestedDigest",
+	"oralVoreLetoutRequestedDigestImmune": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutRequestedDigestImmune",
+	"oralVoreLetoutRequestedEgged": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutRequestedEgged",
+	"oralVoreLetoutRequestedDigested": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreLetoutRequestedDigested",
+	"cockVoreLetoutForcedTransforming": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreLetoutForcedTransforming",
+	"cockVoreLetoutForcedTransformingImmune": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreLetoutForcedTransformingImmune"
 }
