@@ -14,6 +14,7 @@ require "/scripts/any/SBQ_public_settings.lua"
 require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
 require"/scripts/humanoid/SBQ_humanoid.lua"
 require"/scripts/any/SBQ_RPC_handling.lua"
+require"/scripts/any/SBQ_util.lua"
 
 local convertBackType
 local convert

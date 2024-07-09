@@ -7,6 +7,7 @@ require "/scripts/poly.lua"
 require "/scripts/interp.lua"
 require "/scripts/any/SBQ_RPC_handling.lua"
 require "/items/active/sbqController/sbqControllerSetup.lua"
+require "/scripts/any/SBQ_util.lua"
 
 
 function init()

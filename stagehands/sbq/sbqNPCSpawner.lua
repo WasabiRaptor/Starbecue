@@ -1,4 +1,6 @@
 ---@diagnostic disable: undefined-field
+sbq = {}
+require"/scripts/any/SBQ_util.lua"
 
 function update()
 	local position = stagehand.position()

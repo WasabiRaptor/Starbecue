@@ -5,8 +5,9 @@ require"/scripts/rect.lua"
 require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/humanoid/SBQ_humanoid.lua"
-require "/scripts/actor/SBQ_actor.lua"
-require "/scripts/player/SBQ_player_notifs.lua"
+require"/scripts/actor/SBQ_actor.lua"
+require"/scripts/player/SBQ_player_notifs.lua"
+require"/scripts/any/SBQ_util.lua"
 local predHudOpen = false
 function init()
 	storage = storage or {}

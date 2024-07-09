@@ -10,6 +10,7 @@ local old = {
 sbq = {}
 
 require("/scripts/any/SBQ_RPC_handling.lua")
+require"/scripts/any/SBQ_util.lua"
 
 sbqTenant = {}
 function sbqTenant:setSetting(k, v)
