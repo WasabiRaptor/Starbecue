@@ -218,6 +218,17 @@ function sbq.setupSettingMetatables(entityType)
 		end
 	end
 
+	for _, k in ipairs(sbq.lists.voreTypes) do
+		if not (sbq.voreConfig.availableVoreTypes or {})[k] then
+			sbq.settings.vorePrefs[k].pred = false
+		end
+	end
+	for _, k in ipairs(sbq.lists.infuseTypes) do
+		if not (sbq.voreConfig.availableInfuseTypes or {})[k] then
+			sbq.settings.infusePrefs[k].pred = false
+		end
+	end
+
 	setmetatable(storage.sbqSettings, {__index = sbq.defaultSettings})
 	setmetatable(sbq.settings, {__index= storage.sbqSettings})
 
