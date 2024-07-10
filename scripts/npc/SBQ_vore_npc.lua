@@ -40,64 +40,24 @@ function setNpcItemSlot(...)
 end
 
 function init()
+	old.init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-	storage = storage or {}
 	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings")
 	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
-	local randomizeSettings = config.getParameter("sbqRandomizeSettings")
 	math.randomseed(npc.seed())
-	if randomizeSettings and not storage.sbqSettings then
-		randomizeSettings = root.fetchConfigArray(randomizeSettings)
-		storage.sbqSettings = {}
-		for k, v in pairs(randomizeSettings) do
-			if sbq.config.groupedSettings[k] then
-				storage.sbqSettings[k] = {}
-				for g, settings in pairs(v) do
-					storage.sbqSettings[k][g] = {}
-					for setting, v in pairs(settings) do
-						if type(v) == "table" then storage.sbqSettings[k][g][setting] = v[math.random(#v)] end
-					end
-				end
-			else
-				if type(v) == "table" then storage.sbqSettings[k] = v[math.random(#v)] end
-			end
-		end
-		-- copy values from other randomized settings
-		for k, v in pairs(randomizeSettings) do
-			if sbq.config.groupedSettings[k] then
-				for g, settings in pairs(v) do
-					for setting, v in pairs(settings) do
-						if type(v) == "string" then
-							if v:sub(1,1) == "." then
-								storage.sbqSettings[k][g][setting] = sbq.queryPath(storage.sbqSettings, v:sub(2,-1))
-							else
-								storage.sbqSettings[k][g][setting] = storage.sbqSettings[k][g][v]
-							end
-						end
-					end
-				end
-			else
-				if type(v) == "string" then
-					if v:sub(1, 1) == "." then
-						storage.sbqSettings[k] = sbq.queryPath(storage.sbqSettings, v:sub(2,-1))
-					else
-						storage.sbqSettings[k] = storage.sbqSettings[v]
-					end
-				end
-			end
-		end
-	end
-	math.randomseed(npc.seed())
+	sbq.randomizeSettings()
 
 	if not storage.sbqUpgrades.candiesEaten then
 		storage.sbqUpgrades.candiesEaten = {}
-		for i = 1, math.max(npc.level(), 1) do
+		local candiesEaten = math.max(npc.level(), 1)
+		for i = 1, candiesEaten do
 			storage.sbqUpgrades.candiesEaten[i] = 1
 		end
+		storage.sbqSettings.maxDigestPower = math.max(1, (candiesEaten + 1) / 2)
+		storage.sbqSettings.maxPossibleScale = math.min(2 + candiesEaten, sbq.config.scaleCap)
 	end
-	old.init()
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()
 		_ENV.updateUniqueId()

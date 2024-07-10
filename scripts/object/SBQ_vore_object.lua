@@ -7,6 +7,9 @@ require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
 
 function init()
+	for k, v in pairs(config.getParameter("scriptStorage")) do
+		if storage[k] == nil then storage[k] = v end
+	end
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.facingDirection = object.direction
 
@@ -24,6 +27,16 @@ function init()
 	storage.resourceData = config.getParameter("resources") or {}
 	storage.resources = sb.jsonMerge(sbq.getDefaultResources(), storage.resources or {})
 	storage.resourcesLocked = storage.resourcesLocked or {}
+
+	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings") or {}
+	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
+	if not storage.sbqUpgrades.candiesEaten then
+		storage.sbqUpgrades.candiesEaten = {}
+		for i = 1, math.max(object.level(), 1) do
+			storage.sbqUpgrades.candiesEaten[i] = 1
+	end
+		storage.sbqSettings.maxDigestPower = math.max(1, (object.level()+1)/2)
+	end
 
 	sbq.init(config.getParameter("voreConfig"))
 end

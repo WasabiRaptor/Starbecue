@@ -10,7 +10,8 @@ function init()
 	for _, v in ipairs(candies) do
 		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2], seed = sb.makeRandomSource():randu64()}})
 	end
-	if world.entityType(pane.sourceEntity()) == "npc" then
+	local entityType = world.entityType(pane.sourceEntity())
+	if entityType == "npc" then
 		convertible = world.getNpcScriptParameter(pane.sourceEntity(), "sbqConvertType")
 		if convertible then
 			_ENV.resultTypeLabel:setText(tostring(convertible))
@@ -22,6 +23,9 @@ function init()
 				_ENV[k]:setItem(v)
 			end
 		end
+	elseif entityType == "object" then
+		_ENV.stripping:setVisible(world.getObjectParameter(pane.sourceEntity(), "hasCosmeticSlots") or false)
+		_ENV.statBars:setVisible(false)
 	end
 	local source = sbq.entityId()
 	_ENV.healthBar.parent:setVisible(world.entityIsResource(source, "health") or false)

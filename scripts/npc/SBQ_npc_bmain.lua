@@ -73,7 +73,7 @@ function init()
 		end
 		if tenant then
 			convert = (math.random(8) == 8)
-			sbq.timer("maybeConvert", 0.1, function()
+			if convert then sbq.timer("maybeConvert", 0.1, function()
 				if sbq.parentEntity() or entity.uniqueId() then
 					sbq.setupPublicSettings()
 					return
@@ -83,7 +83,7 @@ function init()
 				if convertType and convert then
 					sbq.tenant_setNpcType(convertType)
 				end
-			end)
+			end) end
 		end
 	end
 	if not convert then
