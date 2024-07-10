@@ -1513,6 +1513,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
 	end
+	if not location then return self:remove() end
 	if (not self.flags.infusing) and (not sbq.tableMatches(location.activeSettings, sbq.settings, true)) then return self:remove() end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
