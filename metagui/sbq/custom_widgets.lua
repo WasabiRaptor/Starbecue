@@ -171,10 +171,12 @@ end
 
 function widgets.tabField:doUpdate(dt)
 	self:update(dt)
-	for i, subTab in ipairs(self.currentTab.subTabFields or {}) do
+	for i, subTab in ipairs((self.currentTab or {}).subTabFields or {}) do
 		subTab:doUpdate(dt)
 	end
-	self.currentTab:update(dt)
+	if self.currentTab then
+		self.currentTab:update(dt)
+	end
 end
 
 local tabProto = {}
@@ -208,8 +210,6 @@ function tabProto:update(dt)
 end
 
 function widgets.tabField:newTab(param)
-	local first = not self.tabScroll.children[1].children[1] -- check if first tab added
-
 	local tab = setmetatable({ parent = self, id = param.id or sb.makeUuid() }, tabMt)
 	self.tabs[tab.id] = tab
 
@@ -235,7 +235,7 @@ function widgets.tabField:newTab(param)
 	tab.contents.tab = tab
 	tab.contents:subscribeEvent("tabChanged", evContentsTabChanged)
 
-	if first and not self.noFocusFirstTab then tab:select() end
+	if (not self.currentTab) and (not self.noFocusFirstTab) and (param.visible ~= false) then tab:select() end
 	return tab
 end
 

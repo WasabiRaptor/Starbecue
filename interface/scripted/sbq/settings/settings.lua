@@ -87,8 +87,13 @@ function sbq.setupLocation(name, list)
 		{ mode = "v" },
 		{ align = "center",type = "label",text = location.name or (":"..name) }
 	}
+	local icon
+	if root.assetExists("/interface/scripted/sbq/"..name..".png") then
+		icon = "/interface/scripted/sbq/"..name..".png"
+	end
 	local locationTab = {
 		id = name,
+		icon = icon,
 		title = location.name or (":"..name),
 		visible = sbq.tableMatches(location.activeSettings, sbq.settings, true),
 		color = "ff00ff",
