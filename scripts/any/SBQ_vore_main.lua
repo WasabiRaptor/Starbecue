@@ -471,7 +471,9 @@ function _State:dumpOccupants(location, subLocation, digestType)
 			output.flags.digestType = digestType
 		end
 		table.insert(dump, output)
-		occupant:remove()
+	end
+	while Occupants.list[1] do
+		Occupants.list[1]:remove()
 	end
 	return dump
 end

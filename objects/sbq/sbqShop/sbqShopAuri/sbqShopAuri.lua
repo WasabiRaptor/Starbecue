@@ -150,12 +150,7 @@ function checkTimers(dt)
 			if timer.callback ~= nil then
 				timer.callback()
 			end
-			if type(name) == "number" then
-				---@diagnostic disable-next-line: param-type-mismatch
-				table.remove(self.timerList, name)
-			else
-				self.timerList[name] = nil
-			end
+			self.timerList[name] = nil
 		end
 	end
 end

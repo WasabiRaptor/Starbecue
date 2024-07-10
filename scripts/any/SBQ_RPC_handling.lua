@@ -1,13 +1,17 @@
 function sbq.checkRPCsFinished(dt)
-	for i, list in ipairs(sbq.rpcList) do
-		list.dt = list.dt + dt -- I think this is good to have, incase the time passed since the RPC was put into play is important
-		if sbq.checkRPCFinished(list.rpc, list.callback, list.failCallback, list.dt) then
-			table.remove(sbq.rpcList, i)
+	local finished = {}
+	for i, entry in ipairs(sbq.rpcList) do
+		entry.dt = entry.dt + dt -- I think this is good to have, incase the time passed since the RPC was put into play is important
+		if sbq.checkRPCFinished(entry.rpc, entry.callback, entry.failCallback, entry.dt) then
+			table.insert(finished, 1, i)
 		end
 	end
-	for name, list in pairs(sbq.namedRPCList) do
-		list.dt = list.dt + dt -- I think this is good to have, incase the time passed since the RPC was put into play is important
-		if sbq.checkRPCFinished(list.rpc, list.callback, list.failCallback, list.dt) then
+	for _, i in ipairs(finished) do
+		table.remove(sbq.rpcList, i)
+	end
+	for name, entry in pairs(sbq.namedRPCList) do
+		entry.dt = entry.dt + dt -- I think this is good to have, incase the time passed since the RPC was put into play is important
+		if sbq.checkRPCFinished(entry.rpc, entry.callback, entry.failCallback, entry.dt) then
 			sbq.namedRPCList[name] = nil
 		end
 	end
@@ -80,11 +84,7 @@ function sbq.randomTimer(name, min, max, callback, ...)
 			callback = callback,
 			args = {...}
 		}
-		if name ~= nil then
-			sbq.timerList[name] = timer
-		else
-			table.insert(sbq.timerList, timer)
-		end
+		sbq.timerList[name or sb.makeUuid()] = timer
 		return true
 	end
 end
@@ -97,11 +97,7 @@ function sbq.timer(name, time, callback, ...)
 			callback = callback,
 			args = {...}
 		}
-		if name ~= nil then
-			sbq.timerList[name] = timer
-		else
-			table.insert(sbq.timerList, timer)
-		end
+		sbq.timerList[name or sb.makeUuid()] = timer
 		return true
 	end
 end
@@ -113,11 +109,7 @@ function sbq.forceTimer(name, time, callback, ...)
 		callback = callback,
 		args = {...}
 	}
-	if name ~= nil then
-		sbq.timerList[name] = timer
-	else
-		table.insert(sbq.timerList, timer)
-	end
+	sbq.timerList[name or sb.makeUuid()] = timer
 	return true
 end
 
@@ -129,11 +121,7 @@ function sbq.checkTimers(dt)
 			if timer.callback ~= nil then
 				timer.callback(table.unpack(timer.args or {}))
 			end
-			if type(name) == "number" then
-				table.remove(sbq.timerList, name)
-			else
-				sbq.timerList[name] = nil
-			end
+			sbq.timerList[name] = nil
 		end
 	end
 end
