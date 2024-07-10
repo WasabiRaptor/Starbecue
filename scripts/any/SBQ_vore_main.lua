@@ -1508,7 +1508,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		self.location = name
 		self.subLocation = subLocation
 		location = self:getLocation()
-		if not location then self:remove() end
+		if not location then return self:remove() end
 		self.locationName = location.name
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
