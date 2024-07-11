@@ -166,4 +166,5 @@ function sbq.randomizeSettings()
 			end
 		end
 	end
+	storage.sbqSettings = storage.sbqSettings or {}
 end
