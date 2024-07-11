@@ -101,7 +101,6 @@ function sbq.init(config)
 end
 
 function sbq.update(dt)
-	sbq.facingRight = (sbq.facingDirection() == 1)
 	if SpeciesScript.active then
 		if (not SpeciesScript.lockActions) and SpeciesScript.actionQueue[1]  then
 			SpeciesScript:tryAction(table.unpack(table.remove(SpeciesScript.actionQueue, 1)))
@@ -860,7 +859,7 @@ function _SpeciesScript:addLocation(name, config)
 		}
 		if (k == "<left>") or (k == "<right>") then
 			subLocation.occupancy.sided = true
-			subLocation.occupancy.facingRight = sbq.facingRight
+			subLocation.occupancy.flipped = animator.flipped()
 		end
 		subLocation.tag = name .. "_".. k
 		subLocation.subKey = k
@@ -1102,16 +1101,16 @@ function _Location:updateOccupancy(dt)
 		end
 		-- sbq.logInfo(("[%s]:%s"):format(self.tag, sb.printJson(self.occupancy, 2, true)))
 	end
-	if self.occupancy.sided and (self.occupancy.facingRight ~= sbq.facingRight) then
-		self.occupancy.facingRight = sbq.facingRight
+	if self.occupancy.sided and (self.occupancy.flipped ~= animator.flipped()) then
+		self.occupancy.flipped = animator.flipped()
 		animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
 		animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 		if self.idleAnims then
 			SpeciesScript:doAnimations(self.idleAnims)
 		end
-		if self.occpantAnims then
+		if self.occupantAnims then
 			for _, occupant in ipairs(self.occupancy.list) do
-				SpeciesScript:doAnimations(self.occpantAnims, {}, occupant.entityId)
+				SpeciesScript:doAnimations(self.occupantAnims, {}, occupant.entityId)
 			end
 		end
 		self.occupancy.struggleDirection = nil
@@ -1157,9 +1156,9 @@ function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	if self.idleAnims then
 		SpeciesScript:doAnimations(self.idleAnims)
 	end
-	if self.occpantAnims then
+	if self.occupantAnims then
 		for _, occupant in ipairs(self.occupancy.list) do
-			SpeciesScript:doAnimations(self.occpantAnims, {}, occupant.entityId)
+			SpeciesScript:doAnimations(self.occupantAnims, {}, occupant.entityId)
 		end
 	end
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
@@ -1242,9 +1241,9 @@ function _Location:getStruggleAction(direction)
 	direction = string.lower(direction)
 	local newDirection = direction
 	if direction == "left" then
-		newDirection = sbq.facingRight and "back" or "front"
+		newDirection = animator.flipped() and "back" or "front"
 	elseif direction == "right" then
-		newDirection = sbq.facingRight and "front" or "back"
+		newDirection = animator.flipped() and "front" or "back"
 	end
 	if self.struggleActions[direction] then
 		return self.struggleActions[direction], newDirection
