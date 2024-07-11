@@ -3,11 +3,11 @@ sbq_hunting = {
 	prompted = {}
 }
 
-function sbq_hunting.start()
+function sbq_hunting.start(action)
 	if math.random() < sbq.settings.leanSubDom then
-		return sbq_hunting.dom()
+		return sbq_hunting.dom(action)
 	else
-		return sbq_hunting.sub()
+		return sbq_hunting.sub(action)
 	end
 end
 
@@ -21,19 +21,21 @@ function sbq_hunting.log()
 	return string.format("%s for %s\npotential targets:\n%s", sbq_hunting.isDom and "Hunting" or "Baiting", sbq_hunting.action, targets)
 end
 
-function sbq_hunting.dom()
+function sbq_hunting.dom(action)
 	sbq_hunting.clearTarget()
 	local actions = {}
-	for action, check in pairs(sbq.config.seekActionsSettings.dom) do
-		local settings = sbq.settings.domBehavior[action]
-		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and SpeciesScript:actionAvailable(action) and sbq.tableMatches(check, sbq.settings, true) then
-			for i = 1, settings.favored do
-				table.insert(actions, action)
+	if not action then
+		for action, check in pairs(sbq.config.seekActionsSettings.dom) do
+			local settings = sbq.settings.domBehavior[action]
+			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and SpeciesScript:actionAvailable(action) and sbq.tableMatches(check, sbq.settings, true) then
+				for i = 1, settings.favored do
+					table.insert(actions, action)
+				end
 			end
 		end
+		if not actions[1] then return false end
+		action = actions[math.random(#actions)]
 	end
-	if not actions[1] then return false end
-	local action = actions[math.random(#actions)]
 	local settings = sbq.settings.domBehavior[action]
 	local targets = {}
 	local consent = math.random() < settings.getConsentChance
@@ -44,7 +46,7 @@ function sbq_hunting.dom()
 		if sbq_hunting.checkTarget(action, true, target, consent) and SpeciesScript:actionAvailable(action, target) then
 			table.insert(targets, target)
 		end
-    end
+	end
 	sbq_hunting.targets = targets
 	sbq_hunting.action = action
 	sbq_hunting.isDom = true
@@ -53,7 +55,7 @@ function sbq_hunting.dom()
 	return sbq_hunting.log()
 end
 
-function sbq_hunting.huntTarget(target)
+function sbq_hunting.huntTarget(target, action)
 	sbq_hunting.clearTarget()
 	local actions = {}
 	for action, check in pairs(sbq.config.seekActionsSettings.dom) do
@@ -81,19 +83,21 @@ function sbq_hunting.clearTarget()
 	sbq_hunting.prompted = {}
 end
 
-function sbq_hunting.sub()
+function sbq_hunting.sub(action)
 	sbq_hunting.clearTarget()
 	local actions = {}
-	for action, check in pairs(sbq.config.seekActionsSettings.sub) do
-		local settings = sbq.settings.subBehavior[action]
-		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.tableMatches(check, sbq.settings, true) then
-			for i = 1, settings.favored do
-				table.insert(actions, action)
+	if not action then
+		for action, check in pairs(sbq.config.seekActionsSettings.sub) do
+			local settings = sbq.settings.subBehavior[action]
+			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.tableMatches(check, sbq.settings, true) then
+				for i = 1, settings.favored do
+					table.insert(actions, action)
+				end
 			end
 		end
+		if not actions[1] then return false end
+		action = actions[math.random(#actions)]
 	end
-	if not actions[1] then return false end
-	local action = actions[math.random(#actions)]
 	local settings = sbq.settings.subBehavior[action]
 	local targets = {}
 	local consent = math.random() < settings.getConsentChance
