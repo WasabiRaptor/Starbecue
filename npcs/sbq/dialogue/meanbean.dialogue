@@ -13,7 +13,7 @@
 	],
 	"greetingCrew": [
 		"Captain.",
-		"*nod*",
+		"<dontSpeak>*nod*",
 		"Sup, Captain."
 	],
 	"greetingIntroduced": [
@@ -241,10 +241,10 @@
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
-				"Mm~ pretty good. Don't complain if I keep you until I'm satisfied."
+				"Mm~ Pretty good. Don't complain if I keep you until I'm satisfied."
 			],
 			[ // 25% - 50%
-				"H-hah~ turns out it was all of you. Finders keepers~"
+				"H-hah~ Turns out it was all of you. Finders keepers~"
 			],
 			[ // 50% - 75%
 				"Ohhh~ Yes... You know your role well. It was always goin' to be this way."
@@ -383,7 +383,7 @@
 	"cockVoreFull": [
 		"Already got someone workin' my shaft.",
 		"My cock's full. You can try suckin' them out if you think you can.",
-		"Someone else already has my *full* attention.",
+		"Someone else already has my dick at *full* attention.",
 		"No room, but I'll let you lick it if you pay me."
 	],
 	"cockVoreNeedsInfusion": [
@@ -505,7 +505,7 @@
 				"Get as close as you like. In fact, I'll give you a front row seat."
 			],
 			[ // 75% - 100%
-				"I was actually joking, but alright.",
+				"I was actually jokin', but alright.",
 				"You're actually into the idea, aren't you? Whatever."
 			]
 		]
@@ -837,7 +837,7 @@
 	],
 	"bellyInfuseNoPromptAfter": [
 		"Just so you know, 9 out of 10 doctors find this process perfectly safe. I ate the 10th one.",
-		"Not bad. I feel like I could actually eat a small moon. Or try, at least.",
+		"Not bad. I feel like I could actually eat a small moon.",
 		"My diet usually ain't the best, but I'll pick some choice meals just for you."
 	],
 	"breastInfuseNoPrompt": [
@@ -869,7 +869,7 @@
 	"cockInfuseNoPromptAfter": [
 		"Just a word of caution: I ain't lettin' you go that easy. You're mine now.",
 		"Heh, you fit the description perfectly now.",
-		"Ahh, you feel like you were made to be danglin' between my legs, you know that?"
+		"Ahh, you feel like you were meant to be danglin' between my legs, you know that?"
 	],
 	"tailInfuseNoPrompt": [
 		"Damn, I think I got a thorn in my tail. Take a closer look, would ya?",
@@ -991,36 +991,180 @@
 	"unbirthVoreLetoutForced": "/npcs/sbq/dialogue/flirty.dialogue:unbirthVoreLetoutForced",
 	"breastVoreLetoutForced": "/npcs/sbq/dialogue/default.dialogue:breastVoreLetoutForced",
 	"cockVoreLetoutForced": "/npcs/sbq/dialogue/flirty.dialogue:cockVoreLetoutForced",
-	"struggleBelly": "/npcs/sbq/dialogue/default.dialogue:struggleBelly",
-	"struggleWomb": "/npcs/sbq/dialogue/default.dialogue:struggleWomb",
-	"struggleTail": "/npcs/sbq/dialogue/default.dialogue:struggleTail",
-	"struggleBreasts": "/npcs/sbq/dialogue/flirty.dialogue:struggleBreasts",
-	"struggleBreastsShirt": "/npcs/sbq/dialogue/flirty.dialogue:struggleBreastsShirt",
-	"strugglePussy": "/npcs/sbq/dialogue/default.dialogue:strugglePussy",
-	"struggleCock": "/npcs/sbq/dialogue/default.dialogue:struggleCock",
-	"struggleBalls": "/npcs/sbq/dialogue/default.dialogue:struggleBalls",
-	"struggleAss": "/npcs/sbq/dialogue/default.dialogue:struggleAss",
-	"struggleAcidHeal": "/npcs/sbq/dialogue/default.dialogue:struggleAcidHeal",
-	"struggleFemcumHeal": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumHeal",
+	"struggleBelly": [
+		"Wiggle and squirm as much as ya like, I love the feelin'.",
+		"Gettin' uncomfortable in there? Not my problem.",
+		"Come on, <entityname>. We both know you enjoy this.",
+		"Heh, got yourself trapped in a warm, tight gut, didn't ya?"
+	],
+	"struggleWomb": [
+		"Feisty, aren't ya? Lucky for you, I love gettin' rowdy.",
+		"If you're trying to get out, it ain't workin'. Gettin' me pretty wet, though!",
+		"Not gonna lie, you're kickin' in all the right spots~",
+		"Oof, if I didn't know better, I'd almost think you want out."
+	],
+	"struggleTail": [
+		"If you're tryin' to throw off my balance, you're gonna have to work way harder than that.",
+		"You doing good back there? Not you, I'm talking to my tail."
+	],
+	"struggleBreasts": [
+		"My 'girls' haven't jiggled this much in a long while. Keep it up~",
+		"If there's too much milk in there, drink up. 100 pixels a sip.",
+		"Not gonna lie, it's almost hypnotic watchin' you squirm in my boobs.",
+		"Thanks to you, I'm easily the sexiest bandit in this galaxy~"
+	],
+	"struggleBreastsShirt": [
+		"What, my tight-fit clothin' too much for you?",
+		"I usually wear dark outfits, so good luck gettin' anyone to see your squirmin'",
+		"If you stain my clothes, you're payin' for dry cleanin'.",
+		"I should show you off to the world, but I like to keep my prizes well-hidden~"
+	],
+	"strugglePussy": [
+		"Oh hush, prey like you should know where you belong: tucked away deep inside me~",
+		"What, embarrassed about where you're at? Too bad~"
+	],
+	"struggleCock": [
+		"Every time you resist, my cock gets harder for me and tighter for you~",
+		"Looking for the way out? I suggest tryin' to move ^#00BEBE;up^reset;.",
+		"Even if I cum, you ain't comin' out. One finger is all I need to keep you down~",
+		"Heh, gettin' hard to tell the difference between your squirms and my throbs~"
+	],
+	"struggleBalls": [
+		"Look at you, trapped in a bandit's sack. Too bad there isn't any loot~",
+		"I won't lie, I really enjoy watchin' you slosh around in my nuts.",
+		"What? Don't like my 'family jewels'? Oh well.",
+		"Even if you get out, you're gonna smell like a bandit for a long time~"
+	],
+	"struggleAss": [
+		"Rare for me to keep anything up my ass, but you belong in there."
+	],
+	"struggleAcidHeal": [
+		"I felt like keepin' ya around, so don't tell anyone.",
+		"Good, show me that your strength is comin' back.",
+		"Not normally my thing, but you seem fun enough.",
+		"Now you have to wonder, am I healin' ya just to melt you down later? Maybe~"
+	],
+	"struggleFemcumHeal": [
+		"You caught me in a good mood, so enjoy.",
+		"That's a good, strong kick.",
+		"Shhh, you'll alert the others. Then I might have to change my mind.",
+		"Tryin' to get out or just showin' your appreciation? Better not be the first."
+	],
 	"struggleCumHeal": ":struggleAcidHeal",
-	"struggleMilkHeal": "/npcs/sbq/dialogue/flirty.dialogue:struggleMilkHeal",
+	"struggleMilkHeal": [
+		"You should relax and recover. Otherwise, you might be joinin' that milk.",
+		"I like your enthusiasm but you gotta drink the milk, not spill it all over me.",
+		"Drink as much as you need. I need you nice and plump for later~",
+		"You spill the beans that I'm healin' ya and I'll turn you into spilled milk."
+	],
 	"struggleMiscHeal": ":struggleAcidHeal",
 	"struggleCompression": "/npcs/sbq/dialogue/default.dialogue:struggleCompression",
-	"struggleAcidDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest",
-	"struggleAcidDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune",
-	"struggleCumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigest",
-	"struggleCumDigestBalls": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestBalls",
-	"struggleCumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleCumDigestImmune",
-	"struggleFemcumDigest": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigest",
-	"struggleFemcumDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleFemcumDigestImmune",
-	"struggleMilkDigest": "/npcs/sbq/dialogue/flirty.dialogue:struggleMilkDigest",
-	"struggleMilkDigestBreastsShirt": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestBreastsShirt",
-	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune",
+	"struggleAcidDigest": [
+		"Wiggle and squirm all ya want, I love the feelin' of a live meal.",
+		"*urp* Heh, can still taste ya.",
+		"Come now, bein' bandit fat ain't so bad. I'll even add ya to somewhere intimate~",
+		"You should give up. Or don't. My stomach always wins in the end.",
+		"I always feel such a rush turnin' nerds into a soft layer of pudge.",
+		"Melted down by a measly bandit, how embarrassing~",
+		"I should find a quiet spot to rest and digest ya."
+	],
+	"struggleAcidDigestImmune": [
+		"Hm, you're stronger than I thought.",
+		"Immune to acids, huh? At least your strugglin' feels good.",
+		"Indigestible, are you? Whatever, that means you're along for the ride.",
+		"*urp* Tasty. And since you ain't meltin', I get to taste ya as much as I like~"
+	],
+	"struggleCumDigest": [
+		"What's the matter? My dick too strong for you? Too bad.",
+		"Keep it up, both literally and figuratively. Your squirms are perfect~",
+		"I'd be lying if I said I wasn't going to miss your wigglin'. Ah well.",
+		"That's the spot. Keep pushin' there until you melt~",
+		"Heh, with each and every throb, I can feel you gettin' softer.",
+		"Won't be long before you become a nice load of bandit spunk for later~",
+		"Forcin' you down into my balls sounds temptin' but my shaft feels soo goood~"
+	],
+	"struggleCumDigestBalls": [
+		"Ooh, that felt good~ Push there again as long as you're still solid.",
+		"No need to be so testy, my balls will be done with you soon.",
+		"Wow, that almost set me off. Too bad you're still stuck in there~",
+		"Hmm, should I keep you to myself or share once you're nothing but cum?",
+		"Enjoying your cum bath? Just relax and let everything melt away~",
+		"Betcha never thought you'd vanish into a bandit's sack~",
+		"Mmm, won't be long before you're just another load of hot bandit cum~"
+	],
+	"struggleCumDigestImmune": [
+		"Alright, so you can't melt into cum. More fun for me~",
+		"I'm glad you can't turn into cum. I've been needin' a lot of attention.",
+		"Immune or not, you're going to help me make plenty of cum~"
+	],
+	"struggleFemcumDigest": [
+		"What's the matter? My womb too strong for you? Too bad.",
+		"Keep it up. Your squirms are perfect~",
+		"I'd be lying if I said I wasn't going to miss your wigglin'. Ah well.",
+		"That's the spot. Keep pushin' there until you melt~",
+		"Heh, with each and every beat of my heart, I can feel you gettin' softer."
+	],
+	"struggleFemcumDigestImmune": [
+		"That was quite the kick. Guess you can't be melted.",
+		"I'll be honest, I prefer keepin' you trapped for much, *much* longer~",
+		"Not getting softer, I see. Means we can have all the fun I want~"
+	],
+	"struggleMilkDigest": [
+		"If you're that embarrassed to be in my boobs, it'd be easier for you to melt.",
+		"Don't worry, I'll make sure to sell any milk you make for a premium price.",
+		"Heh, can't wait to have a sample once you're finished.",
+		"Hmm, I wonder if I should try makin' some ice cream from ya.",
+		"I can tell you're gonna be a real rich and creamy batch.",
+		"Meltin' away in a bandit's boobs. How lucky~",
+		"Drink as much as you like, I'll have plenty more once you're done."
+	],
+	"struggleMilkDigestBreastsShirt": [
+		"What a shame that others can't see just how hard your squirmin'.",
+		"A calm ocean on the outside; a stormy sea on the inside~",
+		"No one can't see it, but I can feel you getting softer and softer.",
+		"You should settle down. No one else has a clue where you are.",
+		"Tryin' to pop my top off? Gonna have to work harder than that~",
+		"I almost want to get caught so I can give you some company~",
+		"Hmhm, vanished without a trace. Well, until you're done, that is~"
+	],
+	"struggleMilkDigestImmune": [
+		"Mm, still jigglin' away, are you? Guess you're immune.",
+		"I don't mind that you can't melt. My boobs needed to upgrade a tier, anyway~",
+		"Can't be turned into milk, huh? Oh well, you're still putting on a good show~"
+	],
 	"struggleMiscDigest": ":struggleAcidDigest",
 	"struggleMiscDigestImmune": ":struggleAcidDigestImmune",
-	"struggleTransforming": "/npcs/sbq/dialogue/default.dialogue:struggleTransforming",
-	"struggleDrainEnergy": "/npcs/sbq/dialogue/default.dialogue:struggleDrainEnergy",
-	"struggleEggify": "/npcs/sbq/dialogue/default.dialogue:struggleEggify",
+	"struggleTransformed": [
+		[
+			"Congrats, you're a partial outlaw now.",
+			"That should do the trick.",
+			"You've changed. I can feel it.",
+			"Do you feel different, now?"
+		]
+	],
+	"struggleTransforming": {
+		"percentage": "transforming",
+		"pools": [
+			[
+				"I ain't gonna make you a full-fledged bandit, but this'll put you one step closer.",
+				"You should relax, being an outlaw is more fun than you think.",
+				"Loosen up and see how it feels to be in my world."
+			]
+		],
+		"full": [
+			":struggleTransformed"
+		]
+	},
+	"struggleDrainEnergy": [
+		"Mmm, I'd tell you that you're wastin' your time, but I want you to give me more of your energy.",
+		"Not only do I get to steal you, but I also get your energy? Must be my lucky day~",
+		"Keep it up. The more energy you give me, the more I can have my way with you."
+	],
+	"struggleEggify": [
+		"Better hurry, your struggles will become pointless once you're stuck in an egg.",
+		"Don't worry about the egg, I'm just makin' you far easier to handle.",
+		"Heh, I'm only addin' another layer between you and your freedom~"
+	],
 	"anyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:anyInfusedOccupant",
 	"thighsInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:thighsInfusedOccupant",
 	"bellyInfusedOccupant": "/npcs/sbq/dialogue/default.dialogue:bellyInfusedOccupant",
@@ -1074,9 +1218,45 @@
 	"climaxBalls": "/npcs/sbq/dialogue/default.dialogue:climaxBalls",
 	"shrinking": "/npcs/sbq/dialogue/default.dialogue:shrinking",
 	"growing": "/npcs/sbq/dialogue/default.dialogue:growing",
-	"didSteppy": "/npcs/sbq/dialogue/default.dialogue:didSteppy",
-	"gotStepped": "/npcs/sbq/dialogue/default.dialogue:gotStepped",
-	"gotStomped": "/npcs/sbq/dialogue/default.dialogue:gotStomped",
+	"didSteppy": [
+		"Heh, not sorry for <steppyType> on ya.",
+		"Did I squish you good? No? I'll use more pressure next time.",
+		"At that size, I could easily punt ya into the next galaxy or stash you somewhere. What to do...",
+		"You need to dodge my feet better. Or not, I'm not gonna judge."
+	],
+	"gotStepped": [
+		[
+			"Damn!",
+			"Woah!",
+			"Hey!",
+			"Ack!"
+		],
+		[
+			"Do that again and I'll poke your toes!",
+			"*chk*, figures..."
+		],
+		[
+			"What kind of <steppyType> was that? My folks <steppyType> harder than that!",
+			"<steppyType> on me like that again and I'll... complain again!"
+		],
+		[
+			"Watch it!",
+			"Come on!"
+		]
+	],
+	"gotStomped": [
+		[
+			"*splat*",
+			"G-hghhg!",
+			"He-MMMPH!",
+			"W-wha-*splort*"
+		],
+		[
+			"Hey! I'm not a piece of chewing gum!",
+			"H-heh, got a crush on me? Because you're literally *crushing* me!",
+			"I... If you want to know how many bones you broke, the answer is yes."
+		]
+	],
 	"vanilla": { // this part of the dialogue is triggered by vanilla scripts for things such as combat or deeds and etc
 		"tagCriteria": {
 			"default": {
@@ -1169,7 +1349,7 @@
 			"default": {
 				"default": [
 					"Color me impressed, I think it'd be interestin' to join your crew.",
-					"I'm <selfname>. Need someone who ain't afraid of dirty jobs?",
+					"Hey, need someone who ain't afraid of dirty jobs?",
 					"Not to brag, but I'm not like the other bandits. Want to hire me?",
 					"You aren't a complete loser, so I'd be willin' to join your crew.",
 					"I may have pissed off my fellow bandits. Got a place for me to crash?"
@@ -1179,7 +1359,7 @@
 		"roleDescription": {
 			"default": {
 				"default": [
-					"If you need a someone badder to take on bad guys, come find me.",
+					"If you need someone badder to take on bad guys, come find me.",
 					"If you get too banged up, you know where to find a warm, tight shelter.",
 					"I love a good fight. Usually pretty easy to find a snack afterward."
 				]
