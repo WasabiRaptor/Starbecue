@@ -259,7 +259,7 @@ Holding **Shift** will prevent any actions from occuring from your struggles, on
 - (Locked)
 > Pred is in "Lock Down" mode, you won't be able to escape until they've exhausted too much energy from your struggling.
 
-If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, there is an Instant Escape Combo. To perform it, hold **Left**+**Right** then press **Jump**.
+If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, there is an Instant Escape Combo. To perform it, hold **Shift**+**Down** then press **Jump**.
 
 # Transformation
 

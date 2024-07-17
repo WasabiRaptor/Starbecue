@@ -1775,7 +1775,7 @@ end
 
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
-		if self:controlHeld("Left") and self:controlHeld("Right") then
+		if self:controlHeld("Shift") and self:controlHeld("Down") then
 			SpeciesScript:emergencyEscape(self)
 			return
 		end
