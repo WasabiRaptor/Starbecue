@@ -557,7 +557,7 @@ function default:transformAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
-	local transformResult = sb.jsonMerge({species = humanoid.species()}, action.transformResult or {}, location.transformResult or {}, sbq.voreConfig.transformResult or {})
+	local transformResult = sb.jsonMerge({species = humanoid.species()}, sbq.voreConfig.transformResult or {}, action.transformResult or {}, location.transformResult or {})
 	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or sbq.config.defaultVoreTFDuration
 	if not transformResult then return false, "invalidAction" end
 	local checkSettings = {
@@ -571,7 +571,7 @@ function default:transform(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
-	local transformResult = sb.jsonMerge({species = humanoid.species()}, action.transformResult or {}, location.transformResult or {}, sbq.voreConfig.transformResult or {})
+	local transformResult = sb.jsonMerge({species = humanoid.species()}, sbq.voreConfig.transformResult or {}, action.transformResult or {}, location.transformResult or {})
 	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
 	if not transformResult then return false, "invalidAction" end
 	local checkSettings = {
@@ -591,7 +591,7 @@ function default:transformed(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
-	local transformResult = sb.jsonMerge({species = humanoid.species()}, action.transformResult or {}, location.transformResult or {}, sbq.voreConfig.transformResult or {})
+	local transformResult = sb.jsonMerge({species = humanoid.species()}, sbq.voreConfig.transformResult or {}, action.transformResult or {}, location.transformResult or {})
 	local transformDuration = action.transformDuration or location.transformDuration or sbq.voreConfig.transformDuration or 10
 	if not transformResult then return false, "invalidAction" end
 	local checkSettings = {

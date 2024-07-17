@@ -903,12 +903,11 @@ function _Location:setInfusionData()
 	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
 	local infuseSpeciesConfig = root.speciesConfig(sbq.query(infusedItem, {"parameters", "npcArgs", "npcSpecies"}) or "") or (sbq.query(infusedItem, {"parameters", "speciesConfig"}) or {})
 	local infuseIdentity = sbq.query(infusedItem, {"parameters", "npcArgs", "npcParam", "identity"}) or {}
-	local infuseData = {}
 	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
 		infusedItem.name = self.infusedItemType
 	end
-	infuseSpeciesConfig.infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseSpeciesConfig.infuseData.default or {}), root.fetchConfigArray(infuseSpeciesConfig.infuseData[sbq.species()] or {}))
+	local infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
+	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}), root.fetchConfigArray(infuseData[sbq.species()] or {}))
 	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
 	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
 
@@ -938,7 +937,7 @@ function _Location:setInfusionData()
 	animator.setGlobalTag(self.tag.."InfusedDirectives", (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or ""))
 	tagsSet.globalTags[self.tag.."InfusedDirectives"] = directives
 
-	local locationData = sb.jsonMerge(infuseData.locationOverrides, {
+	local locationData = sb.jsonMerge(infuseIdentity and {transformResult = {species = infuseIdentity.species}} or {}, infuseData.locationOverrides, {
 		infuseTagsSet = tagsSet
 	})
 	for k, _ in pairs(SpeciesScript.locations[self.key]) do
