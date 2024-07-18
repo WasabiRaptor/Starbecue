@@ -1239,9 +1239,9 @@ function _Location:getStruggleAction(direction)
 	if not direction then return end
 	direction = string.lower(direction)
 	local newDirection = direction
-	if direction == "left" then
+	if direction == "right" then
 		newDirection = animator.flipped() and "back" or "front"
-	elseif direction == "right" then
+	elseif direction == "left" then
 		newDirection = animator.flipped() and "front" or "back"
 	end
 	if self.struggleActions[direction] then
