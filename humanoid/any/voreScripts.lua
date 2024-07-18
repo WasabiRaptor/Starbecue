@@ -654,8 +654,9 @@ function default:infused(name, action, target)
 	occupant.flags.infuseType = infuseType
 	occupant.locationSettings[infuseType.."Digested"] = false
 	occupant.locationSettings[infuseType] = false
+	local locationName = occupant.location
+	local subLocationName = occupant.subLocation
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
-	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, occupant.flags.digestType), sbq.recieveOccupants)
 	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 		sbq.settings.infuseSlots[infuseType].item = card
 		sbq.infuseOverrideSettings[infuseType] = {
@@ -664,6 +665,7 @@ function default:infused(name, action, target)
 		SpeciesScript:refreshInfusion(infuseType)
 		occupant:refreshLocation(action.location)
 		location:markSizeDirty()
+		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.recieveOccupants)
 	end)
 	return true
 end

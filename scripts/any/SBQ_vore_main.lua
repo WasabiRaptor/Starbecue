@@ -440,7 +440,9 @@ end
 
 function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
-		if not Occupants.insertOccupant(newOccupant) then
+		if Occupants.insertOccupant(newOccupant) then
+			Occupants.queueHudRefresh = true
+		else
 			sbq.logInfo(("Could not recieve Occupant: %s %s"):format(newOccupant.entityId, sbq.entityName(newOccupant.entityId)))
 		end
 	end
@@ -460,12 +462,12 @@ function _State:dumpOccupants(location, subLocation, digestType)
 		output.struggleCount = 0
 		output.locationStore = {}
 		output.locationSettings = {}
-		if occupant.flags.infused then
+		if output.flags.infused then
 			output.flags.infused = false
 			output.flags.infuseType = nil
 			output.flags.digested = true
 		end
-		if occupant.flags.digested and digestType then
+		if output.flags.digested and digestType then
 			output.flags.digestedLocation = location
 			output.flags.digestType = digestType
 		end
@@ -1321,8 +1323,13 @@ function Occupants.insertOccupant(newOccupant)
 		end
 	end
 	if not seat then return false end
+	local location = SpeciesScript:getLocation(newOccupant.location, newOccupant.subLocation)
+	if not location then return false end
+	local space, subLocation = location:hasSpace(newOccupant.size * newOccupant.sizeMultiplier)
+	if (not space) and (not newOccupant.flags.digested) then return false end
 	local occupant = sb.jsonMerge(newOccupant, {
-		seat = seat
+		seat = seat,
+		subLocation = subLocation,
 	})
 	return Occupants.finishOccupantSetup(occupant)
 end
