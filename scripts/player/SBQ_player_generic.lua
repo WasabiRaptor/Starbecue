@@ -31,6 +31,7 @@ function init()
 		sbq.init(root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.actorMessages()
 	else
+		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 		status.setStatusProperty("sbqPublicSettings", nil)
 		sbq.lists = {}
 		sbq.voreConfig = root.fetchConfigArray(root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
