@@ -3,20 +3,14 @@
 	"colonyTags": ["vore"],
 	"rarity": "Uncommon",
 	"race": "generic",
-	"category": "Pred Spawner",
+	"category": "furniture",
 	"price": 100,
 	"health" : 5,
-	"itemTags": ["sbqSpawner"],
 
-	"tooltipKind" : "sbqSpawner",
 
 	"inventoryIcon": "sbqSpawnerVappyBedIcon.png",
 	"shortdescription": "Water bed",
 	"description": "A special waterbed favored by a certain kind of fishcat.",
-
-	"tooltipFields" : {
-		"statusLabel": "A special waterbed favored by a certain kind of fishcat."
-	},
 
 	"orientations": [
 		{
@@ -51,7 +45,5 @@
 	"inspectable" : false,
 	"allowScanning" : false,
 	"isContainer" : false,
-	"scripts": [
-		// "/objects/sbq/sbqSpawners/sbqSpawner.lua"
-	]
+	"scripts": []
 }
