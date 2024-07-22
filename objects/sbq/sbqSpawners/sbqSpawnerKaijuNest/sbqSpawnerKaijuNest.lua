@@ -1,9 +1,5 @@
-local oldupdate = update
-local olddie = die
-
 local inited
 function update()
-	oldupdate()
 	if inited then return end
 	local nestFGPos = object.toAbsolutePosition({-1, 0})
 	if world.entityName(world.objectAt(nestFGPos) or 0) ~= "sbqSpawnerKaijuNestFG" then
@@ -17,6 +13,4 @@ function die()
 	if world.entityName(nestFGId or 0) == "sbqSpawnerKaijuNestFG" then
 		world.breakObject(nestFGId, true)
 	end
-
-	olddie()
 end
