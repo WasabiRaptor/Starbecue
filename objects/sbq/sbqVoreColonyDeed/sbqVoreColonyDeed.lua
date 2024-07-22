@@ -448,6 +448,9 @@ function spawn(tenant, i)
 	end
 
 	local entityId = nil
+	if tenant.uniqueId and world.findUniqueEntity(tenant.uniqueId):result() then
+		return world.loadUniqueEntity(tenant.uniqueId)
+	end
 	if tenant.spawn == "npc" then
 		entityId = world.spawnNpc(position, tenant.species, tenant.type, level, tenant.seed, overrides)
 		if tenant.personality then
