@@ -8,15 +8,9 @@
 	"health" : 5,
 	"itemTags": ["sbqSpawner"],
 
-	"tooltipKind" : "sbqSpawner",
-
 	"inventoryIcon": "/objects/sbq/sbqSpawners/sbqSpawnerInvisible/sbqSpawnerInvisible.png",
 	"shortdescription": "Invisible Spawner",
-	"description": "For a more discrete predator spawn location.",
-
-	"tooltipFields" : {
-		"statusLabel": "For a more discrete predator spawn location."
-	},
+	"description": "Deprecated please remove",
 
 	"orientations": [
 		{
@@ -46,7 +40,5 @@
 	"inspectable" : false,
 	"allowScanning" : false,
 	"isContainer" : false,
-	"scripts": [
-		// "/objects/sbq/sbqSpawners/sbqSpawner.lua"
-	]
+	"scripts": []
 }
