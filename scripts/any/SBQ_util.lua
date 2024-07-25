@@ -264,7 +264,7 @@ function sbq.getPublicProperty(entityId, property)
 	if world.entityType(entityId) == "object" then
 		return world.getObjectParameter(entityId, property)
 	end
-	return world.getStatusProperty(entityId, property)
+	return world.entityStatusProperty(entityId, property)
 end
 function sbq.getScriptParameter(entityId, property)
 	local entityType = world.entityType(entityId)

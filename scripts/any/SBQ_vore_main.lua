@@ -1870,7 +1870,7 @@ function _Occupant:animProperty(property)
 	return animator.partProperty(self.seat, property)
 end
 function _Occupant:getPublicProperty(property)
-	return world.getStatusProperty(self.entityId, property)
+	return world.entityStatusProperty(self.entityId, property)
 end
 function _Occupant:position()
 	return sbq.globalPartPoint(self.seat, "loungeOffset")
