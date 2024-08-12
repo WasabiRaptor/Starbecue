@@ -113,7 +113,6 @@ function uninit()
 end
 
 function onExpire()
-	effect.setToolUsageSuppressed(false)
 	status.setStatusProperty(effect.name(), nil)
 	broken = true
 
