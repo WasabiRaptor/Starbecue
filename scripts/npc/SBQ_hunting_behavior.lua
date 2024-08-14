@@ -8,7 +8,7 @@ function entityInSBQActionRange(args, board)
 	local bounds = mcontroller.collisionBoundBox()
 	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
 	local targetBounds = world.entityCollisionBoundBox(args.entity)
-	if rect.intersects(bounds, targetBounds) or ((entity.entityInSight(args.entity)) and (rect.intersects(paddedbounds, targetBounds))) then
+	if bounds and targetBounds and (rect.intersects(bounds, targetBounds) or ((entity.entityInSight(args.entity)) and (rect.intersects(paddedbounds, targetBounds)))) then
 		return true
 	end
 	return false

@@ -101,7 +101,7 @@ function sbq.clickAction()
 	local result
 	for i, targetId in ipairs(entityaimed) do
 		local targetBounds = world.entityCollisionBoundBox(targetId)
-		if rect.intersects(bounds, targetBounds) or ((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds))) then
+		if bounds and targetBounds and (rect.intersects(bounds, targetBounds) or ((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds)))) then
 			if sbq.isLoungeDismountable(targetId) then
 				result = {sbq.attemptAction(targetId)}
 				break
