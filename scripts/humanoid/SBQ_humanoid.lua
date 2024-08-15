@@ -196,16 +196,22 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	end
 
 	if (not speciesIdentites[newIdentity.species]) and not speciesFile.noUnlock then
+		speciesIdentites[newIdentity.species] = newIdentity
 		local speciesCount = 0
 		for _, _ in pairs(speciesIdentites) do
 			speciesCount = speciesCount + 1
 		end
-		speciesIdentites[newIdentity.species] = newIdentity
+
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
-		if (speciesCount >= sbq.config.transformMenuUnlock) and player then
-			player.makeTechAvailable("sbqTransform")
-			player.enableTech("sbqTransform")
-			player.radioMessage("sbqTransformUnlocked")
+		if player then
+			if (speciesCount >= sbq.config.transformMenuUnlock) then
+				player.makeTechAvailable("sbqTransform")
+				player.enableTech("sbqTransform")
+				player.radioMessage("sbqTransformUnlocked")
+			elseif speciesCount >= 2 then
+				player.radioMessage("sbqTransformedFirst")
+				player.radioMessage("sbqTransformedHint")
+			end
 		end
 	end
 
