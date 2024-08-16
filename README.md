@@ -202,7 +202,7 @@ One can also create their own OC for the mod using this template [here](https://
 - [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes)
 - [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX)
 - [Felin](https://steamcommunity.com/sharedfiles/filedetails/?id=729429063)
-- [Draconis](https://steamcommunity.com/sharedfiles/filedetails/?id=1370154570)
+- [Draconis](https://steamcommunity.com/workshop/filedetails/?id=868165595)
 - [Draconis](https://steamcommunity.com/sharedfiles/filedetails/?id=1226150792) (Full Dragon Reskin)
 - [Gnolls](https://steamcommunity.com/sharedfiles/filedetails/?id=1655860448)
 - [Argonians](https://steamcommunity.com/sharedfiles/filedetails/?id=740694177)

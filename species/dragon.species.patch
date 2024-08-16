@@ -1,65 +1,144 @@
-[{"op":"merge", "path":"", "value": {
-	"colorRemapGlobalTags" : {
-		"bellyColorRemap" : [
-			{"a94783":"d39c6c", "check" : {"navelVisible":true}},
-			{"a94783":"ffc181", "check" : {"navelVisible":false}},
-			["primary","primary"]
-		],
-		"cockColorRemap" : [
-			["primary","primary"]
-		],
-		"pussyColorRemap" : [
-			["flesh","flesh"]
-		],
-		"ballsColorRemap" : [
-			["primary","primary"]
-		],
-		"breastsColorRemap" : [
-			["primary","primary"],
-			["flesh","flesh", {"nipplesVisible":true}],
-			["flesh","primary", {"nipplesVisible":false}]
-		]
-	},
-	"infusedParts" : {
-		"cockColorRemap" : [
-			["primary","secondary"]
-		],
-		"pussyColorRemap" : [
-			["flesh","secondary"]
-		],
-		"ballsColorRemap" : [
-			["primary","secondary"]
-		],
-		"breastsColorRemap" : [
-			["primary","secondary"],
-			["flesh","flesh", {"nipplesVisible":true}],
-			["flesh","secondary", {"nipplesVisible":false}]
-		]
-	},
-	"baseColorMap" : {
-		"primary" : ["c7815b", "d39c6c", "ffc181", "ffe2c5"],
-		"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
-		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
-		"flesh" : ["702c55", "8b3c6c", "a94783"]
-	},
-	"voreConfig" : [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings" : {
-				"navelVisible" : true
-			}
-		}
-	],
-	"animationCustom" : [
-		"/humanoid/any/humanoidPred.animation",
-		"/humanoid/any/voreOccupants.animation",
-	],
-
-	"infuseData" : [
-		"/humanoid/any/basicInfuseData.config"
-	]
-}},
+[
 	[
-		{}
+		{"op":"merge", "path":"", "value": {
+			"colorRemapGlobalTags" : {
+				"bellyColorRemap" : [
+					{"a94783":"d39c6c", "check" : {"navelVisible":true}},
+					{"a94783":"ffc181", "check" : {"navelVisible":false}},
+					["primary","primary"]
+				],
+				"cockColorRemap" : [
+					["primary","primary"]
+				],
+				"pussyColorRemap" : [
+					["flesh","flesh"]
+				],
+				"ballsColorRemap" : [
+					["primary","primary"]
+				],
+				"breastsColorRemap" : [
+					["primary","primary"],
+					["flesh","flesh", {"nipplesVisible":true}],
+					["flesh","primary", {"nipplesVisible":false}]
+				]
+			},
+			"infusedParts" : {
+				"cockColorRemap" : [
+					["primary","secondary"]
+				],
+				"pussyColorRemap" : [
+					["flesh","secondary"]
+				],
+				"ballsColorRemap" : [
+					["primary","secondary"]
+				],
+				"breastsColorRemap" : [
+					["primary","secondary"],
+					["flesh","flesh", {"nipplesVisible":true}],
+					["flesh","secondary", {"nipplesVisible":false}]
+				]
+			},
+			"baseColorMap" : {
+				"primary" : ["c7815b", "d39c6c", "ffc181", "ffe2c5"],
+				"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
+				"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
+				"flesh" : ["702c55", "8b3c6c", "a94783"]
+			},
+			"voreConfig" : [
+				"/humanoid/any/vore.config",
+				{
+					"defaultSettings" : {
+						"navelVisible" : true
+					}
+				}
+			],
+			"animationCustom" : [
+				"/humanoid/any/humanoidPred.animation",
+				"/humanoid/any/voreOccupants.animation",
+			],
+
+			"infuseData" : [
+				"/humanoid/any/basicInfuseData.config"
+			]
+		}}
+	],
+	[
+		// the following is specifically for the draconis dragons specific data
+		{"op":"test", "path":"/charGenTextLabels/0", "value":"Eye colour"}, // testing for a value in the file that's set by the full dragon reskin
+		{"op":"test", "path":"/charGenTextLabels/5", "value":"Detail colour"}, // testing for a value in the file that's set by the full dragon reskin
+		{"op":"merge", "path":"", "value": {
+			"colorRemapGlobalTags" : {
+				"bellyColorRemap" : [
+					{"a94783":"d39c6c", "check" : {"navelVisible":true}},
+					{"a94783":"ffc181", "check" : {"navelVisible":false}},
+					["hair","hair"]
+				],
+				"cockColorRemap" : [
+					["primary","flesh"]
+				],
+				"pussyColorRemap" : [
+					["flesh","flesh"]
+				],
+				"ballsColorRemap" : [
+					["primary","hair"]
+				],
+				"breastsColorRemap" : [
+					["primary","hair"],
+					["flesh","flesh", {"nipplesVisible":true}],
+					["flesh","hair", {"nipplesVisible":false}]
+				]
+			},
+			"infusedParts" : {
+				"cockColorRemap" : [
+					["primary","secondary"]
+				],
+				"pussyColorRemap" : [
+					["flesh","secondary"]
+				],
+				"ballsColorRemap" : [
+					["primary","secondary"]
+				],
+				"breastsColorRemap" : [
+					["primary","secondary"],
+					["flesh","flesh", {"nipplesVisible":true}],
+					["flesh","secondary", {"nipplesVisible":false}]
+				]
+			},
+			"baseColorMap" : {
+				"primary" : ["c7815b", "d39c6c", "ffc181", "ffe2c5"],
+				"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
+				"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
+				"flesh" : ["702c55", "8b3c6c", "a94783"]
+			},
+			"voreConfig" : [
+				"/humanoid/any/vore.config",
+				{
+					"defaultSettings" : {
+						"navelVisible" : false
+					}
+				}
+			],
+			"animationCustom" : [
+				"/humanoid/any/humanoidPred.animation",
+				"/humanoid/any/voreOccupants.animation",
+				{"globalTagDefaults":{ // example overrides for relevant image parts but commented out
+					// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
+
+					// self explainitory
+					"bellyImage" : "/humanoid/any/sbqVoreParts/scaly/belly.png",
+					// "cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
+					// "balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+					// "balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+					// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+					// "breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+					// "breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+					// "pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
+				}}
+			],
+
+			"infuseData" : [
+				"/humanoid/any/basicInfuseData.config"
+			]
+		}}
 	]
 ]
