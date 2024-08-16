@@ -673,7 +673,8 @@ end
 function default:eggifyAvailable(name, action, target, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if sbq.query(sbq.voreConfig.invalidSettings, {"eggify", "true"})
+	if occupant.flags.egged
+	or sbq.query(sbq.voreConfig.invalidSettings, {"eggify", "true"})
 	or sbq.query(sbq.voreConfig.invalidSettings, {"locations", occupant.location, "eggify", "true"})
 	then return false, "invalidAction" end
 	local location = occupant:getLocation()
@@ -698,7 +699,9 @@ function default:eggify(name, action, target, ...)
 		return true
 	end
 	occupant.locationSettings.eggify = false
-	occupant:sendEntityMessage("applyStatusEffect", action.eggStatus or location.eggStatus or sbq.voreConfig.eggStatus or "sbqEgg" )
+	occupant.flags.egged = true
+	occupant:sendEntityMessage("applyStatusEffect", action.eggStatus or location.eggStatus or sbq.voreConfig.eggStatus or "sbqEgg")
+	occupant:refreshLocation()
 end
 
 function default:lockDown(name, action, target, ...)
