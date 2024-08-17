@@ -258,6 +258,25 @@
 						"swimIdle" : "walk",
 						"none": { "properties": {} }
 					},
+					"bellyState": {
+						"s_front" : { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front_press" : "s_front",
+						"s_front_hold" : "s_front",
+						"s_front_release" : "s_front",
+						"s_back" : "s_front",
+						"s_back_press" : "s_front",
+						"s_back_hold" : "s_front",
+						"s_back_release" : "s_front",
+						"s_up" : "s_front",
+						"s_up_press" : "s_front",
+						"s_up_hold" : "s_front",
+						"s_up_release" : "s_front",
+						"s_down" : "s_front",
+						"s_down_press" : "s_front",
+						"s_down_hold" : "s_front",
+						"s_down_release" : "s_front",
+						"none": { "properties": {} }
+					},
 					"bellyExpandState" : {
 						"expand" : { "properties": { "image": "<bodyImagePath>body.png:<bellyInterpolateSize>-<pose>.<bellyExpandStateAnim>" } }
 					},
