@@ -7,6 +7,7 @@ let paths = [
 	"./npcs/sbq/dialogue/default.dialogue",
 	"./npcs/sbq/dialogue/shy.dialogue",
 	"./npcs/sbq/dialogue/flirty.dialogue",
+	"./npcs/sbq/dialogue/meanbean.dialogue",
 	"./npcs/sbq/LokiVulpix/Auri/npc.dialogue",
 	"./npcs/sbq/LokiVulpix/Loki/npc.dialogue",
 	"./npcs/sbq/LokiVulpix/Socks/npc.dialogue",
