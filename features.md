@@ -29,15 +29,40 @@ An exhaustive list of features in the mod in no particular order
 ## Consent system
 The mod features a consent system which requires players to explicitly opt-in to having all the various types of actions and fetishes apply to their character or not. This also applies to NPCs which are configureable, certain OC NPCs may have certain settings locked by their owner. Other mods might sometimes interfere with the script setting the values on non SBQ NPCs to enable actions on them, I cannot avoid this whether those other mods intended to do this or not. Certain NPCs from vanilla, such as merchants and other special NPCs, intentionally have fetishes disabled on them.
 
-## Vore NPCs
+## Vore NPC Overview
 SBQ features multi-purpose vore NPCs which can be summoned with special deeds added by SBQ or when an NPC of a compatible race and type spawns, they have a 1/8 chance of replacing basic villager, guard, or bandit NPCs when they first spawn in. These NPCs have **Hunger**, **Lust**, and **Rest** resources which may impact their behavior depending on how they are configured, and will either try to hunt down the player or other NPCs to eat them, or get eaten by them, with whatever vore preferences the NPC rolled when they first spawned in.
 
 Most randomly generated NPCs will always roll every prey action as valid, and will have a 50% chance for each pred action to be enabled on them, as well as various other rolls for what their favorite type is, what effects their belly and other locations have active, etc.
 
-Vore NPCs depending on their settings may generate some vore related quests depending on their behavior setting.
+Vore NPCs upon generation will be treated as if they have eaten the basic **Rock Candy** up to their tier, they can be fed further upgrades in their misc tab.
 
+### Quests
+Vore NPCs depending on their settings may generate some vore related quests depending on their behavior setting.
+- Belly Fetch: The NPC has eaten something they can't digest, you have to go in and fetch it!
+- Vore Escort: You have to find and retrieve an NPC, but the target just stands around... you'll have to bring them back some other way...
+- Transform: The NPC wants to try out being a different species, you'll have to transform them somehow...
+
+### Dialogue
 Vore NPCs, depending on their behavior settings may have different contextual dialogue relating to the actions a player is taking with them, ranging from reactions to struggling and different status effects. OC NPCs tend to have unique dialogue for cases their Owner favored and wrote unique dialogue for. If dialogue is disabled, interacting with an NPC will simply bring up a radial menu for their available actions. NPCs will only list what actions they can do that are available, ones that are greyed out are ones they can technically perform, but are either too full, missing something they need to do it, or some other condition is preventing them from doing so, attempting to pick it should have them inform you why they can't.
 
+NPCs have a few different personality types to choose between
+- default
+- flirty
+- shy
+- meanbean (bandit)
+
+Default NPCs will have unique dialogue depending on
+- Struggles/Struggling
+ - Body location
+ - Status effects
+ - Being infused
+ - Prey escaping/Trying to escape
+ - Letting prey out/Being let out
+- Requesting Actions with/without consent
+- Perfomring Actions with/without consent
+- Per location climax (When lust bar fills from struggling)
+
+### Hunting
 Vore NPCs can have their favorite vore types configured for pred and prey seperately, whether they reserve hunting for each type for friendly or hostile NPCs, and if they only hunt for a specific type when a resource is within a certain threshold.
 > Eg: An NPC can be configured to only go hunting OV on hostile characters when hungry, and to seek getting UBed by friendly characters when they're tired.
 
@@ -46,8 +71,12 @@ NPCs will periodically go hunting, roll whether they're hunting as a pred, or se
 NPCs can be forced to begin hunting with a simple command while your cursor is hovering over them `/entityeval sbq_hunting.start()` which rolls everything as normal. `/entityeval sbq_hunting.dom()` or `/entityeval sbq_hunting.sub()` would cause them to specifically go for pred or prey respectively. In any case, one can input a string to make them seek a specific action such as `/entityeval sbq_hunting.sub("oralVore")`
 
 ### Vore Bandits
-Vore Bandits will **always** spawn with Oral Vore Pred enabled, and will **always** spawn with the main effect of their body locations set to Fatal Digest, and they will not hunt 'friendly' characters (other enemies on the same team as themselves).
+Vore Bandits will **always** spawn with Oral Vore Pred enabled, and will **always** spawn with the main effect of their body locations set to Fatal Digest, and they will not hunt 'friendly' characters (other enemies on the same team as themselves). So watch out, they'll see you as a meal the moment they set their sights on you.
 
+### Vore Crew
+Randomly generated NPC Tenants can graduate to being a crew member if applicable! The Nominomicon can also be used to convert vanilla crew variants into a vore capable version of themselves! Only the owner of the crewmember can access their menu with the nominomicon to configure settings/convert them.
+
+Do note that many mods that edit how crew loads or spawns in may not be friendly to the scripts I inserted that are required for the crew's settings and conversion to save properly, I tried my best to implement it in a way thats friendly to other modifications in parrallel, however other mods may not have done so.
 
 ## Vore System
 Using the **SBQ Controller**, a player can asign it to perform a specific action to used when they click on a target within range, only if that target has allowed that action of course. If you hold shift when clicking, this is treated as asking for consent, it sends a simple Yes/No prompt to the targeted player, NPCs will just automatically respond. Certain Settings require this consent prompt to be used to perform the action on the character. If an action fails, it will notify the player of why it failed by a message at the bottom of the screen.
@@ -55,8 +84,22 @@ Using the **SBQ Controller**, a player can asign it to perform a specific action
 ### Pred
 After eating another character, you will then have the pred HUD in the bottom right, this can be used to select additional actions which may be unique to the location the occupant is inside, these actions can also be accessed via selecting an occupant in the controller's radial menus.
 
+Vore Actions available on default NPCs/Players
+- Oral Vore
+- Absorb Vore
+- Navel Vore
+- Anal Vore
+- Unbirth
+- Breast Vore
+- Cock Vore
+
+Some species may have additional types if available!
+- Tail Vore
+
+#### Lockdown
 The big red "Lock Down" button in the HUD will put you into "Lock Down" mode, which nullifies your base passive energy regen, but will prevent any prey from triggering struggle actions until you run out of energy. If you're in this mode you'll have it indicated with your status effects. NPCs will often enable this from time to time based on their behavior settings.
 
+#### Body Locations
 Eating Prey will apply status effects to them, cause the relevant body part to expand in size, some locations have multiple states of expansion depending on how large the prey inside are. Prey will be able to struggle, and potentially cause animations or other actions to occur, such as moving to another location in the body or escaping.
 
 Main status effects are mutually exclusive due to how they impact HP therefore only one can be chosen per location.
@@ -79,13 +122,15 @@ Other settings.
 - Hammerspace: Treats the location as if it has no upper limit to the amount of prey that can fit inside, there is no visual expansion past the set expansion limit.
 - Fill modifiers: Numbers inputs to configure how prey contributes to that locations fill level.
 
-The power of status effects are configured per the relevant fluid for the location, your maximum overall power can be increased by eating the **Rock Candy** for each tier.
-
+#### Digestion
 When prey are digested or infused, if they had any prey within themselves, then their own prey is dumped into the location in the pred they were digested. If there are no available slots they'll simply be released.
 
 Upon being digested, if both pred and prey have item drops for that digest type enabled, then a relevant item will be dropped which contains data pretaining to that character, which can then be used in the infuse slot, or inserted into a deed to re-summon that NPC if applicable.
 
 Digested prey may be able to be shifted to other locations to infuse them there or reform them there, for example, digesting someone in belly, and then say, shifting them to the womb to reform and transform them.
+
+#### Upgrades
+The power of status effects are configured per the relevant fluid for the location, your maximum overall power can be increased by eating the **Rock Candy** for each tier.
 
 ### Prey
 When you've been eaten a prey HUD will open up in the bottom right, indicating the directions one can press to cause a struggle animation. The color of the indicator arrow hints at what struggling in that direction might do for you.
@@ -111,6 +156,12 @@ You can find sliders per location determining the level of fade for the colors o
 
 NPCs will have special dialogue for both being infused and infusing someone else.
 
+Infuse Actions available on default NPCs/Players
+- Belly TF
+- Breast TF
+- Pussy TF
+- Cock TF
+
 ## Scaling System
 Players, NPCs, and Monsters can be scaled!
 
@@ -132,6 +183,14 @@ The duration of TF effects can be configured per character.
 After a player as transformed into a total of 7 different species they will unlock the **Shapeshifter** tech, which will allow them to freely TF into any species they have been before as well as customize their appearance as each species. TF via the tech is always treated as indefinite.
 
 In any case where your name is changed while in active gameplay, while it is saved in character data, one cannot change the client connection name on a server without disconnecting and re-connecting, so instead we simply have it pretend you used the `/nick` command to change your server nickname.
+
+## Miscellaneous
+Using the Nominomicon, one can give NPCs certain clothes to wear in the misc tab.
+
+Players also have the **Lust**, and **Rest** resources, despite them serving no true gameplay purpose for players.
+
+### Stripping
+On the misc tab, NPCs and Players can be configured to have each piece of clothing be auto hidden upon reaching a certain level of Lust, this is simply cosmetic in nature. Players by default will never strip. NPCs by default strip everything aside from their hat at 50% lust.
 
 ## Compatible Species
 Species which are supported are listed down below, unsupported races will still be able to use the controllers for the default available actions, but will not have any special animations when perfomring most of them.
