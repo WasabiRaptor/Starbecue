@@ -59,7 +59,7 @@ Default NPCs will have unique dialogue depending on
  - Prey escaping/Trying to escape
  - Letting prey out/Being let out
 - Requesting Actions with/without consent
-- Perfomring Actions with/without consent
+- Performing Actions with/without consent
 - Per location climax (When lust bar fills from struggling)
 
 ### Hunting
@@ -125,6 +125,14 @@ Other settings.
 - Fill modifiers: Numbers inputs to configure how prey contributes to that locations fill level.
 
 #### Digestion
+Prey can adjust resistance and immunity to fatal for each digestion type, just as preds can adust their digest power for each type. At 100% Resistance prey become immune to that digest type entirely, if fatal immunity is enabled then fatal digest is treated the same as soft digest.
+
+Digest types and the locations they usually apply to
+- Acid: Belly
+- Milk: Breasts
+- Femcum: Womb
+- Cum: Cock, Balls
+
 When prey are digested or infused, if they had any prey within themselves, then their own prey is dumped into the location in the pred they were digested. If there are no available slots they'll simply be released.
 
 Upon being digested, if both pred and prey have item drops for that digest type enabled, then a relevant item will be dropped which contains data pretaining to that character, which can then be used in the infuse slot, or inserted into a deed to re-summon that NPC if applicable.
@@ -195,7 +203,7 @@ Players also have the **Lust**, and **Rest** resources, despite them serving no 
 On the misc tab, NPCs and Players can be configured to have each piece of clothing be auto hidden upon reaching a certain level of Lust, this is simply cosmetic in nature. Players by default will never strip. NPCs by default strip everything aside from their hat at 50% lust.
 
 ## Compatible Species
-Species which are supported are listed down below, unsupported races will still be able to use the controllers for the default available actions, but will not have any special animations when perfomring most of them.
+Species which are supported are listed down below, unsupported races will still be able to use the controllers for the default available actions, but will not have any special animations when performing most of them.
 
 Most species will only need a simple patch to be made compatible, as well as added to the valid tenant list, a template can be found [here](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate)
 
@@ -296,7 +304,7 @@ This mod includes patches for the species below to add compatibility, it does no
 ## Techs
 
 ### Shapeshifter : sbqTransform
-The tech is used to freely transform into a and customize your appearance as each individual species, you can even change which name you use as that species! This is quite useful for RP purposes to 'change character' without having to have a seperate character save to play as. TF via this tech is always treated as indefinite, regardless of other settings.
+The tech is used to freely transform into and customize your appearance as each individual species, you can even change which name you use as that species! This is quite useful for RP purposes to 'change character' without having to have a seperate character save to play as. TF via this tech is always treated as indefinite, regardless of other settings.
 
 
 ## Items
@@ -348,7 +356,7 @@ Spawns SBQ's special vore NPCs, has a menu to select which NPC you want to summo
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.
 - Remains: Acid Digest
-- Condom: Cum Digest, Femcum Digest (needs something better for fem probably)
+- Condom: Cum Digest, Femcum Digest (needs something better for fem in future probably)
 - Milk Carton: Milk Digest
 
 # Support Us!
