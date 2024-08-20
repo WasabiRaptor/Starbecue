@@ -70,6 +70,8 @@ NPCs will periodically go hunting, roll whether they're hunting as a pred, or se
 
 NPCs can be forced to begin hunting with a simple command while your cursor is hovering over them `/entityeval sbq_hunting.start()` which rolls everything as normal. `/entityeval sbq_hunting.dom()` or `/entityeval sbq_hunting.sub()` would cause them to specifically go for pred or prey respectively. In any case, one can input a string to make them seek a specific action such as `/entityeval sbq_hunting.sub("oralVore")`
 
+NPCs which willingly request to be eaten or gave consent to be eaten will be treated as if they are holding **Shift** for 5 minutes while struggling, therefore they will not be attempting to escape during that time period. However this also means that they will not struggle into other locations in the body during that period.
+
 ### Vore Bandits
 Vore Bandits will **always** spawn with Oral Vore Pred enabled, and will **always** spawn with the main effect of their body locations set to Fatal Digest, and they will not hunt 'friendly' characters (other enemies on the same team as themselves). So watch out, they'll see you as a meal the moment they set their sights on you.
 
