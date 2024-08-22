@@ -19,7 +19,9 @@
 		"cracks" : 3,
 		"directives" : "?crop=0;0;0;0", //"?addmask=/stats/sbq/sbqEgg/mask.png",
 		"statModifiers" : [
-			{"stat":"breathprotection", "amount":1}
+			{"stat":"itemPickupSuppressed", "amount":1},
+			{"stat":"breathprotection", "amount":1},
+			{"stat":"protection", "amount":50}
 		],
 		"ballRadius": 1.5,
 		"controlParameters" : {
@@ -29,11 +31,16 @@
 			"walkSpeed" : 0.01,
 			"runSpeed" : 4,
 			"flySpeed" : 0,
+			"liquidBuoyancy" : 1.5,
 			"airJumpProfile" : {
-				"jumpSpeed" : 5
+				"jumpSpeed" : 5,
+				"jumpInitialPercentage" : 1.0,
+				"jumpHoldTime" : 0.0
 			},
 			"liquidJumpProfile" : {
-				"jumpSpeed" : 5
+				"jumpSpeed" : 5,
+				"jumpInitialPercentage" : 1.0,
+				"jumpHoldTime" : 0.0
 			}
 		},
 		"colorOrder" : ["secondary", "primary"],

@@ -176,9 +176,13 @@
 			"runSpeed": 5,
 			"airJumpProfile" : {
 				"jumpSpeed" : 40
-			},
-			"liquidJumpProfile" : {
-				"jumpSpeed" : 30
+			}
+		},
+		"playerMovementParameters":{
+			"airJumpProfile" : {
+				"jumpSpeed" : 10,
+				"jumpInitialPercentage" : 0.75,
+				"jumpHoldTime" : 0.2
 			}
 		},
 		"personalities" : [

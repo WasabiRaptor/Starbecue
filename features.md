@@ -110,7 +110,7 @@ Main status effects are mutually exclusive due to how they impact HP therefore o
 - Soft Digest (brings prey to 1 HP and then treats them as "digested")
 - Fatal Digest
 
-Secondary Status effects can all be toggled individually and have no impact on eachother aside from some applying successively in a certain order, or not being available in certain locations.
+Secondary Status effects can all be toggled individually and have no impact on eachother aside from some applying in sequence, or not being available in certain locations.
 - Energy Drain: Slows prey's energy regen and speeds up pred's
 - Transform: Transform's prey into pred's species, or species infused in that location.
 - Infuse: Passively infuse the character into the relevant type
