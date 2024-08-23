@@ -34,6 +34,7 @@
 	Akari Kaen
 	Xodious
 	Zovoroth
+	tank8673
 
 # Playtesters / Bug Hunters
 	xeronious
