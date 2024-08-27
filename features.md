@@ -72,13 +72,55 @@ NPCs can be forced to begin hunting with a simple command while your cursor is h
 
 NPCs which willingly request to be eaten or gave consent to be eaten will be treated as if they are holding **Shift** for 5 minutes while struggling, therefore they will not be attempting to escape during that time period. However this also means that they will not struggle into other locations in the body during that period.
 
-### Vore Bandits
+### Vore Bandits : sbqVoreBandit
 Vore Bandits will **always** spawn with Oral Vore Pred enabled, and will **always** spawn with the main effect of their body locations set to Fatal Digest, and they will not hunt 'friendly' characters (other enemies on the same team as themselves). So watch out, they'll see you as a meal the moment they set their sights on you.
+
+### Vore Tenants
+Vore tenants are summoned via the vore colony deed purchaseable in Auri's shop.
+- Tenant : sbqVoreTenant
+- Guard : sbqVoreFriendlyGuardTenant
 
 ### Vore Crew
 Randomly generated NPC Tenants can graduate to being a crew member if applicable! The Nominomicon can also be used to convert vanilla crew variants into a vore capable version of themselves! Only the owner of the crewmember can access their menu with the nominomicon to configure settings/convert them.
 
 Do note that many mods that edit how crew loads or spawns in may not be friendly to the scripts I inserted that are required for the crew's settings and conversion to save properly, I tried my best to implement it in a way thats friendly to other modifications in parrallel, however other mods may not have done so.
+
+Only the crew member variants that exist in vanilla that join your party are available.
+- Soldier : sbqVoreCrewmember
+- Chemist Blue : sbqVoreCrewmemberChemistBlue
+- Chemist Green : sbqVoreCrewmemberChemistGreen
+- Chemist Orange : sbqVoreCrewmemberChemistOrange
+- Chemist Yellow : sbqVoreCrewmemberChemistYellow
+- Engineer : sbqVoreCrewmemberEngineer
+- Janitor : sbqVoreCrewmemberJanitor
+- Mechanic : sbqVoreCrewmemberMechanic
+- Medic : sbqVoreCrewmemberMedic
+- Outlaw : sbqVoreCrewmemberOutlaw
+
+### Vore Villagers
+Basic vanilla villagers have 1/8 chance to turn into a vore version when they are initially generated
+- Villager : sbqVoreVillager
+- Village Guard : sbqVoreVillageGuard
+- Village Guard Captain : sbqVoreVillageGuardCaptain
+- Friendly Guard : sbqVoreFriendlyGuard
+
+Spawning NPCs manually can be done with a simple command `/spawnnpc human sbqVoreVillager`
+I have listed the IDs alongside their type, IDs for compatible species are listed as well down below.
+
+### OC NPCs
+Most of these characters cannot be played as, however can be spawned in via the **SBQ Colony Deed** which can be purchased in Auri's shop.
+- Loki Deerfox (Pred/Prey) LokiVulpix
+- Auri Drimyr (Pred/Prey) LokiVulpix
+- Socks Flareon (Pred/Prey) LokiVulpix
+- Clover Meowscarada (Pred/Prey) LokiVulpix
+- Zevi Goocat (Pred/Prey) Zygahedron
+- Helena Hellhound (Pred/Prey) FFWizard
+- Sandy Floatporeon (Pred/Prey) Fevix
+- Batty (Pred/Prey) Xeronious
+- Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706))
+- Akari Kaen (Pred/Prey)
+- Ferri Catfox (Pred/Prey) Ferrilata_
+- Xeronious (Pred)
 
 ## Vore System
 Using the **SBQ Controller**, a player can asign it to perform a specific action to used when they click on a target within range, only if that target has allowed that action of course. If you hold shift when clicking, this is treated as asking for consent, it sends a simple Yes/No prompt to the targeted player, NPCs will just automatically respond. Certain Settings require this consent prompt to be used to perform the action on the character. If an action fails, it will notify the player of why it failed by a message at the bottom of the screen.
@@ -211,94 +253,76 @@ One can also create their own OC for the mod using this template [here](https://
 
 ### SBQ Special Species
 These species are special species and may possess more abilities or play differently than one's standard state
-- Giant Vaporeon
-- Kaiju (Xeronious)
-- Giant Avian
-- Slime
-- Ziellek Dragon
-- Fray the Vulpix
+- Giant Vaporeon : sbq/vaporeonGiant
+- Slime : sbq/Slime
+- Ziellek Dragon : sbq/LakotaAmitola/ziellekDragon
 
 ### SBQ Species
-> Races included within SBQ by default
-- Vaporeon (Feral)
-- Flareon (Feral)
-- Meowscarada
-- Hellhound
-
-### OC NPCs
-These characters cannot be played as, however can be spawned in via the **SBQ Colony Deed** which can be purchased in Auri's shop
-- Loki Deerfox (Pred/Prey) LokiVulpix
-- Auri Drimyr (Pred/Prey) LokiVulpix
-- Socks Flareon (Pred/Prey) LokiVulpix
-- Clover Meowscarada (Pred/Prey) LokiVulpix
-- Zevi Goocat (Pred/Prey) Zygahedron
-- Helena Hellhound (Pred/Prey) FFWizard
-- Sandy Floatporeon (Pred/Prey) Fevix
-- Batty (Pred/Prey) Xeronious
-- Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706))
-- Akari Kaen
-- Ferri Catfox (Pred/Prey) Ferrilata_
-- Xeronious (Kaiju)
+Races included within SBQ by default
+- Vaporeon (Feral) : sbq/vaporeon
+- Flareon (Feral) : sbq/flareon
+- Meowscarada : sbq/meowscarada
+- Hellhound : sbq/FFWizard/hellhound
 
 ### External Compatible Species
 This mod includes patches for the species below to add compatibility, it does not include any of their respective assets.
-- Human
-- Hylotl
-- Floran
-- Avian
-- Apex
-- Glitch
-- Novakid
-- Fenerox
-- [Avali](https://steamcommunity.com/sharedfiles/filedetails/?id=729558042)
-- [Novali](https://steamcommunity.com/sharedfiles/filedetails/?id=1386730092)
-- [Lucario](https://steamcommunity.com/sharedfiles/filedetails/?id=1356955138)
-- [Lycanroc](https://steamcommunity.com/sharedfiles/filedetails/?id=1800401078)
-- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes)
-- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX)
-- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1266991719) (Remade)
-- [Jolteon](https://steamcommunity.com/sharedfiles/filedetails/?id=2075613227)
-- [Espeon](https://steamcommunity.com/sharedfiles/filedetails/?id=1144430324)
-- [Umbreon](https://steamcommunity.com/sharedfiles/filedetails/?id=730345787)
-- [Glaceon](https://steamcommunity.com/sharedfiles/filedetails/?id=2012704863)
-- [Sylveonoid](https://steamcommunity.com/sharedfiles/filedetails/?id=2843385916)
-- [Braixen](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148)
-- [Delphox](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148)
-- [Zoroark](https://steamcommunity.com/sharedfiles/filedetails/?id=2811625141)
-- [Hisui Zoroark](https://steamcommunity.com/workshop/filedetails/?id=2813977483)
-- [Crylan](https://steamcommunity.com/sharedfiles/filedetails/?id=1197335162)
-- [Rodent](https://github.com/Zygahedron/StarboundSimpleVoreMod) (Sheights' version of SSVM is broken, this is a fixed fork)
-- [Lyceen](https://steamcommunity.com/sharedfiles/filedetails/?id=1360547769)
-- [Latex](https://steamcommunity.com/sharedfiles/filedetails/?id=1818502101)
-- [Elysian](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes)
-- [Elysian](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX)
-- [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes)
-- [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX)
-- [Felin](https://steamcommunity.com/sharedfiles/filedetails/?id=729429063)
-- [Draconis](https://steamcommunity.com/workshop/filedetails/?id=868165595)
-- [Draconis](https://steamcommunity.com/sharedfiles/filedetails/?id=1226150792) (Full Dragon Reskin)
-- [Gnolls](https://steamcommunity.com/sharedfiles/filedetails/?id=1655860448)
-- [Argonians](https://steamcommunity.com/sharedfiles/filedetails/?id=740694177)
-- [Sergals](https://steamcommunity.com/sharedfiles/filedetails/?id=1420856270) (Most reskins should work too)
-- [Familiars](https://steamcommunity.com/sharedfiles/filedetails/?id=729597107)
-- [Vulpes](https://steamcommunity.com/sharedfiles/filedetails/?id=1307942879)
-- [Kazdra](https://steamcommunity.com/sharedfiles/filedetails/?id=767787220)
-- [Elduukhar](https://steamcommunity.com/sharedfiles/filedetails/?id=729480149)
-- [Attarran](https://steamcommunity.com/sharedfiles/filedetails/?id=797166006)
-- [Neki](https://steamcommunity.com/sharedfiles/filedetails/?id=2611501999)
-- [Mechineki](https://steamcommunity.com/sharedfiles/filedetails/?id=2740063170)
-- [Lastree](https://steamcommunity.com/sharedfiles/filedetails/?id=1380941596)
-- [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706)
-- [Bunnykin](https://steamcommunity.com/sharedfiles/filedetails/?id=732452461)
-- [Yharian](https://www.furaffinity.net/view/47517002/)
-- [Spacekidds](https://steamcommunity.com/sharedfiles/filedetails/?id=2790390697)
-- [Viera](https://steamcommunity.com/sharedfiles/filedetails/?id=732276079)
-- [Everis](https://steamcommunity.com/sharedfiles/filedetails/?id=1117006719)
-- [Bossmonster](https://steamcommunity.com/sharedfiles/filedetails/?id=1563090801)
-- [Twilit Wolves](https://steamcommunity.com/sharedfiles/filedetails/?id=1818480557)
-- [Mons](https://steamcommunity.com/sharedfiles/filedetails/?id=2310314462)
-- [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942)
-- [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956)
+- Human : human
+- Hylotl : hylotl
+- Floran : floran
+- Avian : avian
+- Apex : apex
+- Glitch : glitch
+- Novakid : novakid
+- Fenerox : fenerox
+- [Avali](https://steamcommunity.com/sharedfiles/filedetails/?id=729558042) : avali
+- [Novali](https://steamcommunity.com/sharedfiles/filedetails/?id=1386730092) : novali
+- [Lucario](https://steamcommunity.com/sharedfiles/filedetails/?id=1356955138) : lucario
+- [Lycanroc](https://steamcommunity.com/sharedfiles/filedetails/?id=1800401078) : lycanroc
+- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes) : eevee
+- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX) : eevee
+- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1266991719) (Remade) : eeveetwo
+- [Jolteon](https://steamcommunity.com/sharedfiles/filedetails/?id=2075613227) : jolte
+- [Espeon](https://steamcommunity.com/sharedfiles/filedetails/?id=1144430324) : espeon
+- [Umbreon](https://steamcommunity.com/sharedfiles/filedetails/?id=730345787) : Umbreon
+- [Glaceon](https://steamcommunity.com/sharedfiles/filedetails/?id=2012704863) : glaceonfox
+- [Sylveonoid](https://steamcommunity.com/sharedfiles/filedetails/?id=2843385916) : sylveonoid
+- [Braixen](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148) : braixen
+- [Delphox](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148) : delphox
+- [Zoroark](https://steamcommunity.com/sharedfiles/filedetails/?id=2811625141) : zoroark
+- [Hisui Zoroark](https://steamcommunity.com/workshop/filedetails/?id=2813977483) : hisuzor
+- [Crylan](https://steamcommunity.com/sharedfiles/filedetails/?id=1197335162) : crylan
+- [Rodent](https://github.com/Zygahedron/StarboundSimpleVoreMod) (Sheights' version of SSVM is broken, this is a fixed fork) : rodent
+- [Lyceen](https://steamcommunity.com/sharedfiles/filedetails/?id=1360547769) : lyceen
+- [Latex](https://steamcommunity.com/sharedfiles/filedetails/?id=1818502101) : myfirsttest
+- [Elysian](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes) : elysian
+- [Elysian](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX) : elysian
+- [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes) : fennix
+- [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX) : fennix
+- [Felin](https://steamcommunity.com/sharedfiles/filedetails/?id=729429063) : felin
+- [Draconis](https://steamcommunity.com/workshop/filedetails/?id=868165595) : dragon
+- [Draconis](https://steamcommunity.com/sharedfiles/filedetails/?id=1226150792) (Full Dragon Reskin) : dragon
+- [Gnolls](https://steamcommunity.com/sharedfiles/filedetails/?id=1655860448) : gnolls
+- [Argonians](https://steamcommunity.com/sharedfiles/filedetails/?id=740694177) : argonian
+- [Sergals](https://steamcommunity.com/sharedfiles/filedetails/?id=1420856270) : sergal
+- [Familiars](https://steamcommunity.com/sharedfiles/filedetails/?id=729597107) : familiar
+- [Vulpes](https://steamcommunity.com/sharedfiles/filedetails/?id=1307942879) : vulpes
+- [Kazdra](https://steamcommunity.com/sharedfiles/filedetails/?id=767787220) : kazdra
+- [Elduukhar](https://steamcommunity.com/sharedfiles/filedetails/?id=729480149) : elduukhar
+- [Attarran](https://steamcommunity.com/sharedfiles/filedetails/?id=797166006) : Attarran
+- [Neki](https://steamcommunity.com/sharedfiles/filedetails/?id=2611501999) : neki
+- [Mechineki](https://steamcommunity.com/sharedfiles/filedetails/?id=2740063170) : mechineki
+- [Lastree](https://steamcommunity.com/sharedfiles/filedetails/?id=1380941596) : lastree
+- [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706) : synth
+- [Bunnykin](https://steamcommunity.com/sharedfiles/filedetails/?id=732452461) : bunnykin
+- [Yharian](https://www.furaffinity.net/view/47517002/) : yharian
+- [Spacekidds](https://steamcommunity.com/sharedfiles/filedetails/?id=2790390697) : spacekidds
+- [Viera](https://steamcommunity.com/sharedfiles/filedetails/?id=732276079) : viera
+- [Everis](https://steamcommunity.com/sharedfiles/filedetails/?id=1117006719) : everis
+- [Bossmonster](https://steamcommunity.com/sharedfiles/filedetails/?id=1563090801) : dreemurrers
+- [Twilit Wolves](https://steamcommunity.com/sharedfiles/filedetails/?id=1818480557) : twilitwolves
+- [Mons](https://steamcommunity.com/sharedfiles/filedetails/?id=2310314462) : mons
+- [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942) : spirittree
+- [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956) : squamaeft
 
 
 ## Techs
@@ -306,6 +330,7 @@ This mod includes patches for the species below to add compatibility, it does no
 ### Shapeshifter : sbqTransform
 The tech is used to freely transform into and customize your appearance as each individual species, you can even change which name you use as that species! This is quite useful for RP purposes to 'change character' without having to have a seperate character save to play as. TF via this tech is always treated as indefinite, regardless of other settings.
 
+To get it immediately just do `/enabletech sbqTransform` (you will still have to equip it)
 
 ## Items
 
@@ -313,6 +338,8 @@ The tech is used to freely transform into and customize your appearance as each 
 Used to access the settings of any SBQ compatible NPC, this includes vanilla NPCs as long as other mods have not interfered with SBQ scripts loading on them.
 
 NPCs can be converted To/From Vanilla and Vore versions if applicable by a convert button in the misc tab. If the button does not show, then the NPC does not have an equivalent type.
+
+This item is not intended as a debug or godmode item, it is intended for use to configure your NPCs as desired as many might not roll their settings in a way you like initally.
 
 ### SBQ Controller : sbqController
 Used to do any of SBQ's special actions, ranging from simply grabbing other characters to eating them. It can be crafted at any time for a single pixel.
