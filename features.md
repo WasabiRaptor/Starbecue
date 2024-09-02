@@ -1,6 +1,6 @@
 
 # Getting Started
-On creation of a new character, a popup menu will open up to allow one to quickly assign vore preferences, as well as an agreement to enable yourself to use the mod's content. To change those settings and access further settings, then open the toobar and select **Starbecue Settings** to open the settings menu.
+On creation of a new character, a popup menu will open up to allow one to quickly assign vore preferences, as well as an agreement to enable yourself to use the mod's content. To change those settings and access further settings, then open the toolbar and select **Starbecue Settings** to open the settings menu.
 
 To get started with the mod, all you need to do is open your crafting interface, and craft the **SBQ Controller** this is the main item used to perform actions, and can be re-assigned via it's action wheel.
 
@@ -22,12 +22,15 @@ Depending on your species, you may also find an additional tab with a manual to 
 
 You can also use the **Nominomicon** to open the settings page for any SBQ Compatible NPC, Monster, or Object to edit their settings and read their manual in the same manner as you would for yourself, however OC NPCs may have certain settings locked to a specific value by their owner.
 
+---
 
 # Features
 An exhaustive list of features in the mod in no particular order
 
 ## Consent system
 The mod features a consent system which requires players to explicitly opt-in to having all the various types of actions and fetishes apply to their character or not. This also applies to NPCs which are configureable, certain OC NPCs may have certain settings locked by their owner. Other mods might sometimes interfere with the script setting the values on non SBQ NPCs to enable actions on them, I cannot avoid this whether those other mods intended to do this or not. Certain NPCs from vanilla, such as merchants and other special NPCs, intentionally have fetishes disabled on them.
+
+---
 
 ## Vore NPC Overview
 SBQ features multi-purpose vore NPCs which can be summoned with special deeds added by SBQ or when an NPC of a compatible race and type spawns, they have a 1/8 chance of replacing basic villager, guard, or bandit NPCs when they first spawn in. These NPCs have **Hunger**, **Lust**, and **Rest** resources which may impact their behavior depending on how they are configured, and will either try to hunt down the player or other NPCs to eat them, or get eaten by them, with whatever vore preferences the NPC rolled when they first spawned in.
@@ -122,6 +125,8 @@ Most of these characters cannot be played as, however can be spawned in via the 
 - Ferri Catfox (Pred/Prey) Ferrilata_
 - Xeronious (Pred)
 
+---
+
 ## Vore System
 Using the **SBQ Controller**, a player can asign it to perform a specific action to used when they click on a target within range, only if that target has allowed that action of course. If you hold shift when clicking, this is treated as asking for consent, it sends a simple Yes/No prompt to the targeted player, NPCs will just automatically respond. Certain Settings require this consent prompt to be used to perform the action on the character. If an action fails, it will notify the player of why it failed by a message at the bottom of the screen.
 
@@ -201,6 +206,8 @@ Holding **Shift** will prevent any actions from occuring from your struggles, on
 ### Emergency Escape
 If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, there is an Instant Escape Combo. To perform it, hold **Shift**+**Down** then press **Jump**.
 
+---
+
 ## Infuse System
 Either by doing it directly, or after vore. Characters can be 'Infused' into other characters, this is the umbrella term I am using to describe things such as Sentient Fat, Cock TF, etc. This can add size to the host's relevant parts, apply the character's colors.
 
@@ -214,6 +221,8 @@ Infuse Actions available on default NPCs/Players
 - Pussy TF
 - Cock TF
 
+---
+
 ## Scaling System
 Players, NPCs, and Monsters can be scaled!
 
@@ -224,6 +233,8 @@ Players will have the camera zoom in and out automatically as they shrink and gr
 Players will also have their mining tool's break power and size multiplied by their scale as well!
 
 Your maximum allowed scale can be increased by eating the **Rock Candy** for each tier. However, your scale is capped at 10x For the sake of your computer not melting.
+
+---
 
 ## Transformation System
 Characters can be transformed by various means within SBQ, this is actual real engine approved transformation as far as the game is concerned. Certain races may not play with this well because they were not designed with it in mind and sometimes their scripts do not remove persistent status effects that were applied.
@@ -236,6 +247,8 @@ After a player as transformed into a total of 7 different species they will unlo
 
 In any case where your name is changed while in active gameplay, while it is saved in character data, one cannot change the client connection name on a server without disconnecting and re-connecting, so instead we simply have it pretend you used the `/nick` command to change your server nickname.
 
+---
+
 ## Miscellaneous
 Using the Nominomicon, one can give NPCs certain clothes to wear in the misc tab.
 
@@ -243,6 +256,8 @@ Players also have the **Lust**, and **Rest** resources, despite them serving no 
 
 ### Stripping
 On the misc tab, NPCs and Players can be configured to have each piece of clothing be auto hidden upon reaching a certain level of Lust, this is simply cosmetic in nature. Players by default will never strip. NPCs by default strip everything aside from their hat at 50% lust.
+
+---
 
 ## Compatible Species
 Species which are supported are listed down below, unsupported races will still be able to use the controllers for the default available actions, but will not have any special animations when performing most of them.
@@ -324,6 +339,7 @@ This mod includes patches for the species below to add compatibility, it does no
 - [Spirit Tree](https://steamcommunity.com/sharedfiles/filedetails/?id=2191906942) : spirittree
 - [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956) : squamaeft
 
+---
 
 ## Techs
 
@@ -331,6 +347,8 @@ This mod includes patches for the species below to add compatibility, it does no
 The tech is used to freely transform into and customize your appearance as each individual species, you can even change which name you use as that species! This is quite useful for RP purposes to 'change character' without having to have a seperate character save to play as. TF via this tech is always treated as indefinite, regardless of other settings.
 
 To get it immediately just do `/enabletech sbqTransform` (you will still have to equip it)
+
+---
 
 ## Items
 
@@ -352,7 +370,7 @@ Used for transforming into different species, different ones can be made for sli
 - Species Potion: Used to make a potion for your current species : sbqSpeciesPotion
 - Genderswap Potion: Switches your gender : sbqGenderSwapPotion
 - Clone Potion: Used to make a potion to TF someone into your species and look exactly like you, nickname and all : sbqDuplicatePotion
-- Reversion Potion: Reverts you to your original species (keep in mind if you have perma TF on, every TF becomes your new 'original') :sbqReversionPotion
+- Reversion Potion: Reverts you to your original species (keep in mind if you have perma TF on, every TF becomes your new 'original') : sbqReversionPotion
 
 Example command to spawn in a potion preloaded with the parameters to TF someone into a specific species
 `/spawnitem sbqMysteriousPotion 1 {"identity":{"species":"human"}}`
@@ -375,6 +393,8 @@ A silly re-usable plastic egg, behaves exactly like the egg status except it dro
 ### Egg Wand : sbqEggWand
 A silly magic wand that traps people in eggs.
 
+---
+
 ## Objects
 
 ### Vore Colony Deed : sbqVoreColonyDeed
@@ -385,6 +405,8 @@ Objects which get dropped when players/NPCs are digested, requires a setting ena
 - Remains: Acid Digest
 - Condom: Cum Digest, Femcum Digest (needs something better for fem in future probably)
 - Milk Carton: Milk Digest
+
+---
 
 # Support Us!
 
