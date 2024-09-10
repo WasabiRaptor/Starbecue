@@ -54,7 +54,7 @@ function sbq.actorMessages()
 		local willingnessTable = sbq.actionWillingness[(isDom and "sub") or "dom"]
 		if willingnessTable[action] == nil then
 			local settings = sbq.settings[(isDom and "subBehavior") or "domBehavior"][action] or {}
-			if math.random() < (settings.willingness) or 0 then
+			if math.random() < (settings.willingness or 0) then
 				willingnessTable[action] = "yes"
 				sbq.setLoungeControlHeld("Shift")
 				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
