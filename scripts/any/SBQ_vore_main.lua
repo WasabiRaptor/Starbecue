@@ -1623,6 +1623,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		entity.id(),
 		location:outputData(self.entityId),
 		{
+			playerPred = entity.entityType() == "player",
 			predUUID = entity.uniqueId(),
 
 			time = self.time,

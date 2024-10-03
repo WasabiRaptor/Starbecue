@@ -213,6 +213,8 @@ function update(dt)
 			if not sbq.namedRPCList.missingPredFound then
 				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
 			end
+		elseif occupantData.playerPred and sbq.timer("missingPredWarp", 5) then
+			pcall(player.warp("player:"..occupantData.predUUID))
 		elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 60) then
 			sbq.addNamedRPC("missingPredCheck", player.confirm({
 				paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
