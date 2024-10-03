@@ -28,12 +28,14 @@ function init()
 		status.setStatusProperty("sbqProgressBar", 0)
 		status.setStatusProperty("sbqProgressBarColor", {})
 		seatToForce = nil
+		status.setStatusProperty("sbqOccupantData", nil)
 		sbq.checkStuck()
 		sbq.timer("stuckCheck", 0.5, sbq.checkStuck)
 	end)
 
 	message.setHandler("sbqForceSit", function(_, _, data)
 		sbq.resetLounging()
+		mcontroller.setPosition(world.entityPosition(data.source))
 		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
 			seatToForce = data
 		end
@@ -138,6 +140,7 @@ function update(dt)
 
 	if seatToForce then
 		if world.entityExists(seatToForce.source) then
+			mcontroller.setPosition(world.entityPosition(seatToForce.source))
 			local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
 			if success then seatToForce = nil else
 				-- sb.logError(error)

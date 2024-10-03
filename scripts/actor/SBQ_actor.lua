@@ -48,7 +48,7 @@ function sbq.actorMessages()
 	}
 	sbq.expectedActions = {}
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, occupantData)
-		sbq.setCurrentLocationData(locationData, occupantData)
+		sbq.setCurrentLocationData(id, locationData, occupantData)
 	end)
 	message.setHandler("sbqPromptAction", function(_, _, id, action, isDom)
 		local willingnessTable = sbq.actionWillingness[(isDom and "sub") or "dom"]
@@ -105,7 +105,7 @@ function sbq.actorMessages()
 	end)
 end
 
-function sbq.setCurrentLocationData(locationData, occupantData)
+function sbq.setCurrentLocationData(id, locationData, occupantData)
 	status.setStatusProperty("sbqOccupantData", occupantData)
 	sbq.currentLocationData = locationData
 	sbq.forceTimer("strugglingDialogue", 5)

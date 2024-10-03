@@ -1327,7 +1327,18 @@ function Occupants.insertOccupant(newOccupant)
 	if not location then return false end
 	local space, subLocation = location:hasSpace(newOccupant.size * newOccupant.sizeMultiplier)
 	if (not space) and (not newOccupant.flags.digested) then return false end
-	local occupant = sb.jsonMerge(newOccupant, {
+	local occupant = sb.jsonMerge({
+		flags = {},
+		locationSettings = {},
+		size = 1,
+		sizeMultiplier = 1,
+		struggleGracePeriod = 0,
+		time = 0,
+		struggleTime = 0,
+		struggleCount = 0,
+		struggleVec = {0,0},
+		locationStore = {},
+	}, newOccupant, {
 		seat = seat,
 		subLocation = subLocation,
 	})
@@ -1349,6 +1360,10 @@ function Occupants.finishOccupantSetup(occupant)
 	occupant:setLoungeEnabled(true)
 	occupant:setDismountable(false)
 	world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
+
+	sbq.timer(occupant.seat.."Timeout", 1, function ()
+		if occupant:entityLoungingIn() ~= occupant.entityId then occupant:remove() end
+	end)
 	return true
 end
 
@@ -1455,9 +1470,8 @@ end
 
 
 function _Occupant:update(dt)
-	local eid = self:entityLoungingIn()
 	local location = self:getLocation()
-	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) or ((self.time > 1) and (eid ~= self.entityId)) then return self:remove() end
+	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove() end
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
 		if not self.flags.newOccupant and self:animProperty("release") then return self:remove() end
@@ -1608,12 +1622,24 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		"sbqRefreshLocationData",
 		entity.id(),
 		location:outputData(self.entityId),
-		sb.jsonMerge(self.flags, {
+		{
+			predUUID = entity.uniqueId(),
+
 			time = self.time,
+			struggleTime = self.struggleTime,
+			struggleCount = self.struggleCount,
+
+			locationName = self.locationName,
 			location = self.location,
 			subLocation = self.subLocation,
-			locationName = self.locationName
-		})
+
+			size = self.size,
+			sizeMultiplier = self.sizeMultiplier,
+
+			flags = self.flags,
+			locationStore = self.locationStore,
+			locationSettings = self.locationSettings
+		}
 	)
 	if self.flags.newOccupant then
 		Occupants.queueHudRefresh = true

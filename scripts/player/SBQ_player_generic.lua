@@ -76,13 +76,14 @@ function init()
 		player.setProperty("sbqCumulativeData", cumulativeDataTable)
 	end)
 
-	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, additionalData)
-		sbq.setCurrentLocationData(locationData)
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, newOccupantData)
+		sbq.setCurrentLocationData(id, locationData, newOccupantData)
+		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
 			gui = predHudOpen and { panefeature = { offset = { -96, 0 } } } or {},
 			locationData = locationData,
-			occupantData = additionalData
+			occupantData = newOccupantData
 		}, id)
 	end)
 
@@ -203,6 +204,28 @@ function update(dt)
 	sbq.checkTimers(dt)
 
 	sbq.update(dt)
+
+	local occupantData = status.statusProperty("sbqOccupantData")
+	if sbq.timer("missingPredCheck", 5) and occupantData and occupantData.predUUID and not sbq.loungingIn() then
+		local eid = world.getUniqueEntityId(occupantData.predUUID)
+		if eid then
+			if not sbq.namedRPCList.missingPredFound then
+				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
+			end
+		elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 60) then
+			sbq.addNamedRPC("missingPredCheck", player.confirm({
+				paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
+				icon = "/interface/confirmation/confirmationicon.png",
+				title = sbq.getString(":missingPred"),
+				message = sbq.getString(":missingPredPrompt"),
+				okCaption = sbq.getString(":missingPredEscape"),
+				cancelCaption = sbq.getString(":missingPredWait"),
+				images = {portrait = player.getProperty("sbqPredPortrait") or jarray()}
+			}), function(escape)
+				if escape then status.setStatusProperty("sbqOccupantData", nil) end
+			end)
+		end
+	end
 end
 
 function uninit()

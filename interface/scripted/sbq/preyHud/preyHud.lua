@@ -3,8 +3,7 @@ sbq = {}
 require("/scripts/any/SBQ_util.lua")
 local buttons = {}
 local indicator
-local occupantFlags = {}
-local time = 0
+local occupantData = {}
 local colors = {
 	-- color = {dark, light}
 	default = {"404040", "6a6a6a"},
@@ -62,21 +61,21 @@ function init()
 	processLocationData(config.getParameter("locationData"), config.getParameter("occupantData"))
 	indicator = widget.bindCanvas("indicator")
 
-	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, occupantData)
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, newOccupantData)
 		if id ~= pane.sourceEntity() then pane.dismiss() end
 		player.setScriptContext("starbecue")
-		player.callScript("sbq.setCurrentLocationData", locationData, occupantData)
-		processLocationData(locationData, occupantData)
+		player.callScript("sbq.setCurrentLocationData", id, locationData, newOccupantData)
+		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
+		processLocationData(locationData, newOccupantData)
 	end)
 
 	update(0)
 end
 
-function processLocationData(locationData, occupantData)
+function processLocationData(locationData, newOccupantData)
+	occupantData = newOccupantData
 	local struggleActions = locationData.struggleActions or {}
-	local canStruggle = not (occupantData.digested or occupantData.infused)
-	occupantFlags = occupantData
-	time = occupantData.time
+	local canStruggle = not (occupantData.flags.digested or occupantData.flags.infused)
 	buttons = {
 		up = (struggleActions.up and canStruggle and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
 		down = (struggleActions.down and canStruggle and (struggleActions.down.indicate or struggleActions.any.indicate or "default")),
@@ -85,7 +84,6 @@ function processLocationData(locationData, occupantData)
 		front = (struggleActions.front and canStruggle and (struggleActions.front.indicate or struggleActions.any.indicate or "default")),
 		back = (struggleActions.back and canStruggle and (struggleActions.back.indicate or struggleActions.any.indicate or "default"))
 	}
-	time = occupantData.time
 end
 function indicateButton(dir, color)
 	if not color then return end
@@ -137,9 +135,9 @@ function update( dt )
 
 	-- time
 	local hours = 1 -- if >1h, show hh:mm instead of mm:ss (not enough space for hh:mm:ss)
-	if time / 60 > 60 then hours = 60 end
-	local first = tostring(math.floor(time/60/hours/10))
-	local second = tostring(math.floor(time / 60 / hours % 10))
+	if occupantData.time / 60 > 60 then hours = 60 end
+	local first = tostring(math.floor(occupantData.time/60/hours/10))
+	local second = tostring(math.floor(occupantData.time / 60 / hours % 10))
 	indicator:drawText(
 		first,
 		{position = {10, 9}, horizontalAnchor = "right"},
@@ -150,7 +148,7 @@ function update( dt )
 		{position = {15, 9}, horizontalAnchor = "right"},
 		8, {127, 127, 127}
 	)
-	if time%2 < 1 then -- flash : for seconds
+	if occupantData.time%2 < 1 then -- flash : for seconds
 		indicator:drawText(
 			":",
 			{position = {17, 9}, horizontalAnchor = "right"},
@@ -158,24 +156,24 @@ function update( dt )
 		)
 	end
 	indicator:drawText(
-		tostring(math.floor(time/hours/10%6)),
+		tostring(math.floor(occupantData.time/hours/10%6)),
 		{position = {22, 9}, horizontalAnchor = "right"},
 		8, {127, 127, 127}
 	)
 	indicator:drawText(
-		tostring(math.floor(time/hours%10)),
+		tostring(math.floor(occupantData.time/hours%10)),
 		{position = {27, 9}, horizontalAnchor = "right"},
 		8, {127, 127, 127}
 	)
-	time = time + dt
+	occupantData.time = occupantData.time + dt
 
 	-- location icon
-	if root.assetExists("/interface/scripted/sbq/"..occupantFlags.location..".png") then
-		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantFlags.location..".png", {15.5,15}, 1)
+	if root.assetExists("/interface/scripted/sbq/"..occupantData.location..".png") then
+		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantData.location..".png", {15.5,15}, 1)
 	end
 
 	-- location
-	local locationString = sbq.getString(occupantFlags.locationName or "")
+	local locationString = sbq.getString(occupantData.locationName or "")
 	indicator:drawText(
 		locationString,
 		{position = {16.5, 29}, horizontalAnchor = "mid", wrapWidth = 25},
@@ -203,9 +201,9 @@ function update( dt )
 		6, {127, 127, 127}
 	)
 
-	if occupantFlags.infused and occupantFlags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupantFlags.infuseType..".png") then
-		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantFlags.infuseType..".png", {45.5,16}, 1)
-	elseif occupantFlags.digested then
+	if occupantData.flags.infused and occupantData.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png") then
+		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png", {45.5,16}, 1)
+	elseif occupantData.flags.digested then
 		indicator:drawImageDrawable("/interface/scripted/sbq/softDigest.png", {45.5,16}, 1)
 	elseif world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", {45.5,16}, 1)

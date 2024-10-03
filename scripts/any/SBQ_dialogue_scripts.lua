@@ -106,14 +106,18 @@ dialogueStepScripts.sbq_miscDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqLockDown = dialogueStepScripts.statPositive
 
 function dialogueStepScripts.occupantFlag(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local flags = sbq.getPublicProperty(eid, "sbqOccupantData") or {}
+	local flags = (sbq.getPublicProperty(eid, "sbqOccupantData") or {}).flags or {}
 	return step.."."..(tostring(flags[step]))
+end
+function dialogueStepScripts.occupantValue(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
+	local data = sbq.getPublicProperty(eid, "sbqOccupantData") or {}
+	return step.."."..(tostring(data[step]))
 end
 
 dialogueStepScripts.digested = dialogueStepScripts.occupantFlag
 dialogueStepScripts.infused = dialogueStepScripts.occupantFlag
-dialogueStepScripts.location = dialogueStepScripts.occupantFlag
-dialogueStepScripts.subLocation = dialogueStepScripts.occupantFlag
+dialogueStepScripts.location = dialogueStepScripts.occupantValue
+dialogueStepScripts.subLocation = dialogueStepScripts.occupantValue
 dialogueStepScripts.infuseType = dialogueStepScripts.occupantFlag
 
 function dialogueStepScripts.species(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
