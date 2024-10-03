@@ -196,6 +196,7 @@ function init()
 		}, entity.id())
 	end)
 
+	sbq.timer("preyMissingWaitPrompt", 60)
 end
 
 function update(dt)
@@ -206,7 +207,7 @@ function update(dt)
 	sbq.update(dt)
 
 	local occupantData = status.statusProperty("sbqOccupantData")
-	if sbq.timer("missingPredCheck", 5) and occupantData and occupantData.predUUID and not sbq.loungingIn() then
+	if sbq.timer("missingPredCheck", 1) and occupantData and occupantData.predUUID and not sbq.loungingIn() then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
