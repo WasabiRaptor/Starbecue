@@ -107,6 +107,7 @@ end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)
 	status.setStatusProperty("sbqOccupantData", occupantData)
+	status.clearPersistentEffects("sbqMissingPred")
 	sbq.currentLocationData = locationData
 	sbq.forceTimer("strugglingDialogue", 5)
 	sbq.checkComfortLevel()

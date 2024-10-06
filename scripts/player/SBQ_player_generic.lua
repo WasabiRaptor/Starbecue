@@ -79,6 +79,7 @@ function init()
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, newOccupantData)
 		sbq.setCurrentLocationData(id, locationData, newOccupantData)
 		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
+		player.setProperty("sbqPredWarpAttempted", 0)
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
 			gui = predHudOpen and { panefeature = { offset = { -96, 0 } } } or {},
@@ -207,15 +208,17 @@ function update(dt)
 	sbq.update(dt)
 
 	local occupantData = status.statusProperty("sbqOccupantData")
-	if sbq.timer("missingPredCheck", 1) and occupantData and occupantData.predUUID and not sbq.loungingIn() then
+	if occupantData and sbq.timer("missingPredCheck", 1) and occupantData.predUUID and not sbq.loungingIn() then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
+		status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
 				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
 			end
-		elseif occupantData.playerPred and sbq.timer("missingPredWarp", 15) then
-			pcall(player.warp("player:"..occupantData.predUUID, "beam"))
-		elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 60) then
+		elseif not ((player.getProperty("sbqPredWarpAttempted") or 0) >= 4) and occupantData.playerPred and sbq.timer("missingPredWarp", 15) then
+			pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
+			player.setProperty("sbqPredWarpAttempted", (player.getProperty("sbqPredWarpAttempted") or 0) + 1)
+		elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 30) then
 			sbq.addNamedRPC("missingPredCheck", player.confirm({
 				paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
 				icon = "/interface/confirmation/confirmationicon.png",
@@ -225,7 +228,12 @@ function update(dt)
 				cancelCaption = sbq.getString(":missingPredWait"),
 				images = {portrait = player.getProperty("sbqPredPortrait") or jarray()}
 			}), function(escape)
-				if escape then status.setStatusProperty("sbqOccupantData", nil) end
+				if escape then
+					status.setStatusProperty("sbqOccupantData", nil)
+					status.clearPersistentEffects("sbqMissingPred")
+				else
+					player.setProperty("sbqPredWarpAttempted", 0)
+				end
 			end)
 		end
 	end

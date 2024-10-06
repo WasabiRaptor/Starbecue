@@ -66,6 +66,7 @@ function init()
 		player.setScriptContext("starbecue")
 		player.callScript("sbq.setCurrentLocationData", id, locationData, newOccupantData)
 		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
+		player.setProperty("sbqPredWarpAttempted", 0)
 		processLocationData(locationData, newOccupantData)
 	end)
 

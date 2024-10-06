@@ -115,6 +115,7 @@ function init()
 		if key == "mouthPosition" then return humanoid.mouthPosition() end
 		return old.status_statusProperty(key,...)
 	end
+	status.clearPersistentEffects("sbqMissingPred")
 end
 
 function update(dt)
