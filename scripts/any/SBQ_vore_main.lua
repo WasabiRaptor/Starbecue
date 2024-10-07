@@ -1643,6 +1643,14 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	self:setItemTypeWhitelist(location.itemTypeWhitelist or sbq.voreConfig.prey.itemTypeWhitelist or sbq.config.prey.itemTypeWhitelist)
 	self:setToolUsageSuppressed(location.toolUsageSuppressed or sbq.voreConfig.prey.toolUsageSuppressed or sbq.config.prey.toolUsageSuppressed)
 
+	local parent, recruitUUID, following = sbq.parentEntity()
+	local crewPred
+	if parent then
+		local eid = world.getUniqueEntityId(parent)
+		if eid then
+			crewPred = following and (world.entityType(eid) == "player")
+		end
+	end
 	self:sendEntityMessage(
 		"scriptPaneMessage",
 		"sbqRefreshLocationData",
@@ -1651,6 +1659,8 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		{
 			playerPred = entity.entityType() == "player",
 			predUUID = entity.uniqueId(),
+			crewPred = crewPred,
+			parentUUID = parent,
 
 			time = self.time,
 			struggleTime = self.struggleTime,

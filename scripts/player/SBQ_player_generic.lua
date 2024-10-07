@@ -216,8 +216,12 @@ function update(dt)
 			end
 		else
 			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
-			if not ((player.getProperty("sbqPredWarpAttempted") or 0) >= 4) and occupantData.playerPred and sbq.timer("missingPredWarp", 15) then
-				pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
+			if not ((player.getProperty("sbqPredWarpAttempted") or 0) >= 4) and (occupantData.playerPred or occupantData.crewPred) and sbq.timer("missingPredWarp", 15) then
+				if occupantData.playerPred then
+					pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
+				elseif occupantData.crewPred and (occupantData.parentUUID ~= player.uniqueId()) then
+					pcall(player.warp("player:" .. occupantData.parentUUID, "beam"))
+				end
 				player.setProperty("sbqPredWarpAttempted", (player.getProperty("sbqPredWarpAttempted") or 0) + 1)
 			elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 30) then
 				sbq.addNamedRPC("missingPredCheck", player.confirm({
