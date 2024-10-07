@@ -210,31 +210,33 @@ function update(dt)
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData and sbq.timer("missingPredCheck", 1) and occupantData.predUUID and not sbq.loungingIn() then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
-		status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
 				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
 			end
-		elseif not ((player.getProperty("sbqPredWarpAttempted") or 0) >= 4) and occupantData.playerPred and sbq.timer("missingPredWarp", 15) then
-			pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
-			player.setProperty("sbqPredWarpAttempted", (player.getProperty("sbqPredWarpAttempted") or 0) + 1)
-		elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 30) then
-			sbq.addNamedRPC("missingPredCheck", player.confirm({
-				paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
-				icon = "/interface/confirmation/confirmationicon.png",
-				title = sbq.getString(":missingPred"),
-				message = sbq.getString(":missingPredPrompt"),
-				okCaption = sbq.getString(":missingPredEscape"),
-				cancelCaption = sbq.getString(":missingPredWait"),
-				images = {portrait = player.getProperty("sbqPredPortrait") or jarray()}
-			}), function(escape)
-				if escape then
-					status.setStatusProperty("sbqOccupantData", nil)
-					status.clearPersistentEffects("sbqMissingPred")
-				else
-					player.setProperty("sbqPredWarpAttempted", 0)
-				end
-			end)
+		else
+			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
+			if not ((player.getProperty("sbqPredWarpAttempted") or 0) >= 4) and occupantData.playerPred and sbq.timer("missingPredWarp", 15) then
+				pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
+				player.setProperty("sbqPredWarpAttempted", (player.getProperty("sbqPredWarpAttempted") or 0) + 1)
+			elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 30) then
+				sbq.addNamedRPC("missingPredCheck", player.confirm({
+					paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
+					icon = "/interface/confirmation/confirmationicon.png",
+					title = sbq.getString(":missingPred"),
+					message = sbq.getString(":missingPredPrompt"),
+					okCaption = sbq.getString(":missingPredEscape"),
+					cancelCaption = sbq.getString(":missingPredWait"),
+					images = {portrait = player.getProperty("sbqPredPortrait") or jarray()}
+				}), function(escape)
+					if escape then
+						status.setStatusProperty("sbqOccupantData", nil)
+						status.clearPersistentEffects("sbqMissingPred")
+					else
+						player.setProperty("sbqPredWarpAttempted", 0)
+					end
+				end)
+			end
 		end
 	end
 end

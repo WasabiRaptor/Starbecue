@@ -100,12 +100,12 @@ function update(dt)
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData and sbq.timer("missingPredCheck", 1) and occupantData.predUUID and not sbq.loungingIn() then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
-		status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
 				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
 			end
 		else
+			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
 			sbq.timer("missingPredEscape", 60, function()
 				local occupantData = status.statusProperty("sbqOccupantData")
 				if occupantData then
