@@ -30,7 +30,7 @@ end
 function teleportOut()
 	old.teleportOut()
 	local occupantData = status.statusProperty("sbqOccupantData")
-	if not (occupantData.playerPred or occupantData.crewPred) then
+	if occupantData and not (occupantData.playerPred or occupantData.crewPred) then
 		status.setStatusProperty("sbqOccupantData", nil)
 		status.clearPersistentEffects("sbqMissingPred")
 	end
