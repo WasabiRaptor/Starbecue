@@ -72,7 +72,7 @@ function init()
 			return
 		end
 		if tenant then
-			convert = (math.random(8) == 8)
+			convert = (math.random() <= (config.getParameter("sbqConvertChance") or sbq.config.convertChance))
 			if convert then sbq.timer("maybeConvert", 0.1, function()
 				if sbq.parentEntity() or entity.uniqueId() then
 					sbq.setupPublicSettings()
