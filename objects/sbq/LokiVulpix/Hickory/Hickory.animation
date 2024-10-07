@@ -1,0 +1,35 @@
+{
+	"useModifiedAnimator" : true, // simple boolean to mark that this should be using the expanded featureset of the animator from my engine modifications
+	"globalTagDefaults" : {},
+	"animatedParts": {
+		"parts": {
+			"body": {
+				"properties": {
+					"centered": true,
+					"zLevel": -1,
+					"front" : [2, 0], // this is the possition the player should be near when interacting
+					"oralVore" : [1.5, 0], // this is the position the cursor should be near when interacting to trigger OV,
+					"image" : "Hickory.png"
+				},
+				"partStates": {}
+			},
+			"occupant0" : {
+				"properties" : {
+					"centered":true,
+					"zLevel":0,
+					"loungeOffset" : [0,0],
+					"interpolated" : true,
+					"transformationGroups" : [],
+					"hidden":true,
+					"dance" : "sbqIdle",
+					"orientation" : "stand",
+					"emote" : "idle",
+					"transforms": {"scale":[0,0]}
+				},
+				"partStates" : {
+
+				}
+			}
+		}
+	}
+}

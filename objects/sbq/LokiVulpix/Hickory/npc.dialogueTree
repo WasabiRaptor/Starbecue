@@ -1,0 +1,529 @@
+{
+	"dialogueFile" : "/objects/sbq/LokiVulpix/Hickory/npc.dialogue",
+	// after following a path, next steps will automatically advance down the tree building the result dialogue
+
+	// overall default values for a "new" dialogue
+	"defaultResults" : {
+		"fill" : {
+			"textSound": ["/sfx/undertale/SND_TXT1.ogg"],
+			"textVolume" : [1]
+		}
+	},
+	// greeting is the default start of the tree
+	// settings come from itself
+	"greeting" : {
+		"new" : {"jump" : ".converse"},
+		"next" : "giveRewards",
+		"rewards" : {
+			"replace" : {"dialogueRandom" : [":greetingRewards"]},
+			"next" : ["introduced"],
+			"true" : {
+				"replace" : {"dialogueRandom" : [":greetingRewardsIntroduced"]}
+			}
+		},
+		"default" : {
+			"replace" : {"dialogueRandom" : [":greeting"]}
+		}
+	},
+	// lines triggered when a player may recieve a certain reward
+	"rewardNotify" :{
+		"money" : {
+			"new" : {"dialogueRandom":[":rewardNotifyMoney"]}
+		},
+		"lowValueQuestRewards" : {
+			"new" : {"dialogueRandom":[":rewardNotifyLowValueQuestRewards"]}
+		},
+		"mediumValueQuestRewards" : {
+			"new" : {"dialogueRandom":[":rewardNotifyMediumValueQuestRewards"]}
+		},
+		"highValueQuestRewards" : {
+			"new" : {"dialogueRandom":[":rewardNotifyHighValueQuestRewards"]}
+		}
+	},
+
+	// responses when another character requests an action from them
+	"actionRequested" : {
+		"oralVore" : {
+			// is the action available or not?
+			"true" : {
+				// dialogue said before the action
+				"new" : {"dialogueRandom" : [":oralVoreRequested"], "dismissTime" : 2, "jump" : false},
+				// dialogue said after the action finishes
+				"after" : {"new" : {"dialogueRandom" : [":oralVoreRequestedAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"false" : {
+				"invalidAction" : {"new":{"dialogueRandom":[":oralVoreInvalid"],"dismissTime" : 2, "jump" : false}},
+				"no" : {"new" : {"dialogueRandom" : [":oralVoreNo"],"dismissTime" : 2, "jump" : false}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":oralVoreTooBig"],"dismissTime" : 2, "jump" : false}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":oralVoreTooSmall"],"dismissTime" : 2, "jump" : false}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":oralVoreNoSlots"],"dismissTime" : 2, "jump" : false}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":oralVoreFull"],"dismissTime" : 2, "jump" : false}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":oralVoreNeedsInfusion"],"dismissTime" : 2, "jump" : false}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":oralVoreAlreadyInfused"],"dismissTime" : 2, "jump" : false}},
+				"invalidLocation" : ".invalidAction",
+				"settingsMismatch" : ".invalidAction",
+				"targetSettingsMismatch" : ".invalidAction",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":oralVoreTargetPreySettingsMismatch"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+		"breastVore" : {
+			// is the action available or not?
+			"true" : {
+				// dialogue said before the action
+				"new" : {"dialogueRandom" : [":breastVoreRequested"],"dismissTime" : 2, "jump" : false},
+				// dialogue said after the action finishes
+				"after" : {"new" : {"dialogueRandom" : [":breastVoreRequestedAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"false" : {
+				"invalidAction" : {"new":{"dialogueRandom":[":breastVoreInvalid"],"dismissTime" : 2, "jump" : false}},
+				"no" : {"new" : {"dialogueRandom" : [":breastVoreNo"],"dismissTime" : 2, "jump" : false}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":breastVoreTooBig"],"dismissTime" : 2, "jump" : false}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":breastVoreTooSmall"],"dismissTime" : 2, "jump" : false}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":breastVoreNoSlots"],"dismissTime" : 2, "jump" : false}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":breastVoreFull"],"dismissTime" : 2, "jump" : false}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":breastVoreNeedsInfusion"],"dismissTime" : 2, "jump" : false}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":breastVoreAlreadyInfused"],"dismissTime" : 2, "jump" : false}},
+				"invalidLocation" : ".invalidAction",
+				"settingsMismatch" : ".invalidAction",
+				"targetSettingsMismatch" : ".invalidAction",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":breastVoreTargetPreySettingsMismatch"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+
+		"bellyInfuse" : {
+			// is the action available or not?
+			"true" : {
+				// dialogue said before the action
+				"new" : {"dialogueRandom" : [":bellyInfuseRequested"],"dismissTime" : 2, "jump" : false},
+				// dialogue said after the action finishes
+				"after" : {"new" : {"dialogueRandom" : [":bellyInfuseRequestedAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"false" : {
+				"invalidAction" : {"new":{"dialogueRandom":[":bellyInfuseInvalid"],"dismissTime" : 2, "jump" : false}},
+				"no" : {"new" : {"dialogueRandom" : [":bellyInfuseNo"],"dismissTime" : 2, "jump" : false}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":bellyInfuseTooBig"],"dismissTime" : 2, "jump" : false}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":bellyInfuseTooSmall"],"dismissTime" : 2, "jump" : false}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":bellyInfuseNoSlots"],"dismissTime" : 2, "jump" : false}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":bellyInfuseFull"],"dismissTime" : 2, "jump" : false}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":bellyInfuseNeedsInfusion"],"dismissTime" : 2, "jump" : false}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":bellyInfuseAlreadyInfused"],"dismissTime" : 2, "jump" : false}},
+				"invalidLocation" : ".invalidAction",
+				"settingsMismatch" : ".invalidAction",
+				"targetSettingsMismatch" : ".invalidAction",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":bellyInfuseTargetPreySettingsMismatch"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+		"breastInfuse" : {
+			// is the action available or not?
+			"true" : {
+				// dialogue said before the action
+				"new" : {"dialogueRandom" : [":breastInfuseRequested"],"dismissTime" : 2, "jump" : false},
+				// dialogue said after the action finishes
+				"after" : {"new" : {"dialogueRandom" : [":breastInfuseRequestedAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"false" : {
+				"invalidAction" : {"new":{"dialogueRandom":[":breastInfuseInvalid"],"dismissTime" : 2, "jump" : false}},
+				"no" : {"new" : {"dialogueRandom" : [":breastInfuseNo"],"dismissTime" : 2, "jump" : false}},
+				"tooBig" : {"new" : {"dialogueRandom" : [":breastInfuseTooBig"],"dismissTime" : 2, "jump" : false}},
+				"tooSmall" : {"new" : {"dialogueRandom" : [":breastInfuseTooSmall"],"dismissTime" : 2, "jump" : false}},
+				"noSlots" : {"new" : {"dialogueRandom" : [":breastInfuseNoSlots"],"dismissTime" : 2, "jump" : false}},
+				"noSpace" : {"new" : {"dialogueRandom" : [":breastInfuseFull"],"dismissTime" : 2, "jump" : false}},
+				"needsInfusion" : {"new" : {"dialogueRandom" : [":breastInfuseNeedsInfusion"],"dismissTime" : 2, "jump" : false}},
+				"alreadyInfused" : {"new" : {"dialogueRandom" : [":breastInfuseAlreadyInfused"],"dismissTime" : 2, "jump" : false}},
+				"invalidLocation" : ".invalidAction",
+				"settingsMismatch" : ".invalidAction",
+				"targetSettingsMismatch" : ".invalidAction",
+				"targetPreySettingsMismatch" : {"new":{"dialogueRandom":[":breastInfuseTargetPreySettingsMismatch"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+
+		"oralVoreLetout" : {
+			"new" : { "dialogueRandom" : [":oralVoreLetoutRequested"],"dismissTime" : 2, "jump" : false},
+			// "after":{"new" : { "dialogueRandom" : [":oralVoreLetoutRequestedAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+		"breastVoreLetout" : {
+			"new" : { "dialogueRandom" : [":breastVoreLetoutRequested"],"dismissTime" : 2, "jump" : false},
+			// "after":{"new" : { "dialogueRandom" : [":breastVoreLetoutRequestedAfter"],"dismissTime" : 2, "jump" : false}}
+		}
+	},
+	// when they prompt doing an action to another character
+	"promptAction" : {
+		"oralVore" : {
+			"settings" : "target",
+			"new" : {
+				"dialogueRandom" : [":oralVorePrompt"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			// responses based on their response to the prompt
+			"yes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "yes", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVorePromptYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"no" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, true, "no", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVorePromptNo"],"dismissTime" : 2, "jump" : false}}
+
+			},
+			"noYes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "noYes", "oralVore"],
+				"before":{"new" : {"dialogueRandom" : [":oralVorePromptNoYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":oralVorePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+		"breastVore" : {
+			"new" : {
+				"settings" : "target",
+				"dialogueRandom" : [":breastVorePrompt"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			// responses based on their response to the prompt
+			"yes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "yes", "breastVore"],
+				"before":{"new" : {"dialogueRandom" : [":breastVorePromptYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":breastVorePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"no" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, true, "no", "breastVore"],
+				"before":{"new" : {"dialogueRandom" : [":breastVorePromptNo"],"dismissTime" : 2, "jump" : false}}
+
+			},
+			"noYes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "noYes", "breastVore"],
+				"before":{"new" : {"dialogueRandom" : [":breastVorePromptNoYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":breastVorePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+
+		"bellyInfuse" : {
+			"new" : {
+				"settings" : "target",
+				"dialogueRandom" : [":bellyInfusePrompt"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			// responses based on their response to the prompt
+			"yes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "yes", "bellyInfuse"],
+				"before":{"new" : {"dialogueRandom" : [":bellyInfusePromptYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":bellyInfusePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"no" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, true, "no", "bellyInfuse"],
+				"before":{"new" : {"dialogueRandom" : [":bellyInfusePromptNo"],"dismissTime" : 2, "jump" : false}}
+
+			},
+			"noYes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "noYes", "bellyInfuse"],
+				"before":{"new" : {"dialogueRandom" : [":bellyInfusePromptNoYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":bellyInfusePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
+			}
+		},
+		"breastInfuse" : {
+			"new" : {
+				"settings" : "target",
+				"dialogueRandom" : [":breastInfusePrompt"],
+				"buttonText" : [":ynPrompt"],
+				"options" : [
+					[":optionYes", ".yes" ],
+					[":optionNo", ".no" ],
+					[":optionNoYes", ".noYes" ]
+				]
+			},
+			// responses based on their response to the prompt
+			"yes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "yes", "breastInfuse"],
+				"before":{"new" : {"dialogueRandom" : [":breastInfusePromptYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":breastInfusePromptYesAfter"],"dismissTime" : 2, "jump" : false}}
+			},
+			"no" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [false, true, "no", "breastInfuse"],
+				"before":{"new" : {"dialogueRandom" : [":breastInfusePromptNo"],"dismissTime" : 2, "jump" : false}}
+
+			},
+			"noYes" : {
+				"settings" : "target",
+				"next" : ["promptResponse","dismiss"],
+				"promptResponse" : [true, true, "noYes", "breastInfuse"],
+				"before":{"new" : {"dialogueRandom" : [":breastInfusePromptNoYes"],"dismissTime" : 2, "jump" : false}},
+				// what they say after doing the action (optional)
+				"after" : {"new" : {"dialogueRandom" : [":breastInfusePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
+			}
+		}
+	},
+
+	// when they notify that they're about to do an action without asking first
+	"noPromptAction" : {
+		"oralVore" : {
+			"new" : {"dialogueRandom" : [":oralVoreNoPrompt"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":oralVoreNoPromptAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+		"breastVore" : {
+			"new" : {"dialogueRandom" : [":breastVoreNoPrompt"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":breastVoreNoPromptAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+
+		"bellyInfuse" : {
+			"new" : {"dialogueRandom" : [":bellyInfuseNoPrompt"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":bellyInfuseNoPromptAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+		"breastInfuse" : {
+			"new" : {"dialogueRandom" : [":breastInfuseNoPrompt"],"dismissTime" : 2, "jump" : false},
+			"after" : {"new" : {"dialogueRandom" : [":breastInfuseNoPromptAfter"],"dismissTime" : 2, "jump" : false}}
+		}
+	},
+
+	// response to when another NPC forces them to do an action
+	"forcedAction" : {
+		"oralVore" : {
+			"new" : { "dialogueRandom" : [":oralVoreForced"],"dismissTime" : 2, "jump" : false},
+			// "after":{"new" : { "dialogueRandom" : [":oralVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+		"breastVore" : {
+			"new" : { "dialogueRandom" : [":breastVoreForced"],"dismissTime" : 2, "jump" : false},
+			// "after":{"new" : { "dialogueRandom" : [":breastVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+
+		"bellyInfuse" : {
+			"new" : { "dialogueRandom" : [":bellyInfuseForced"],"dismissTime" : 2, "jump" : false},
+			"after":{"new" : { "dialogueRandom" : [":bellyInfuseForcedAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+		"breastInfuse" : {
+			"new" : { "dialogueRandom" : [":breastInfuseForced"],"dismissTime" : 2, "jump" : false},
+			"after":{"new" : { "dialogueRandom" : [":breastInfuseForcedAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+
+		"oralVoreLetout" : {
+			"new" : { "dialogueRandom" : [":oralVoreLetoutForced"],"dismissTime" : 2, "jump" : false},
+			// "after":{"new" : { "dialogueRandom" : [":oralVoreLetoutForcedAfter"],"dismissTime" : 2, "jump" : false}}
+		},
+		"breastVoreLetout" : {
+			"new" : { "dialogueRandom" : [":breastVoreLetoutForced"],"dismissTime" : 2, "jump" : false},
+			// "after":{"new" : { "dialogueRandom" : [":breastVoreLetoutForcedAfter"],"dismissTime" : 2, "jump" : false}}
+		}
+	},
+
+	// dialogue for when an occupant interacts with them
+	"occupantInteract" : ".occupantStruggle", // just points to struggle for now, could be it's own dialogue
+	// chance of saying one of these lines when one of their occupants struggles inside them
+	"occupantStruggle" : {
+		"settings" : "target",
+		"new" : {"jump":false},
+		"next" : [
+			"infused",
+			"digested",
+
+			"adjectives",
+			"location",
+
+			"sbq_acidHeal",
+			"sbq_milkHeal",
+
+			"sbq_acidSoftDigest",
+			"sbq_milkSoftDigest",
+
+			"sbq_acidDigest",
+			"sbq_milkDigest",
+
+			"sbq_compression_time",
+
+			"sbqTransformation",
+			"sbqDrainEnergy",
+			"sbqEggify",
+
+			"sbq_bellyInfuse",
+			"sbq_breastInfuse",
+		],
+		"infused" : {"true":".occupantInfused"},
+		"digested" : {"true":".occupantDigested"},
+
+		"adjectives" : {
+		},
+		"location" : {
+			"belly" : {
+				"addQueued" : true,
+				"queueReplace" : {
+					"dialogueRandom" : [":struggleBelly"]
+				}
+			},
+			"breasts" : {
+				"addQueued" : true,
+				"queueReplace" : {
+					"dialogueRandom" : [":struggleBreasts"]
+				},
+				"settings" : "self",
+				"next" : ["shirt"],
+				"shirt" : {"queueAdd": {"dialogueRandom" : [":struggleBreastsShirt"]}}
+			}
+		},
+		"sbq_acidHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleAcidHeal"]
+			}
+		},
+		"sbq_femcumHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleFemcumHeal"]
+			}
+		},
+		"sbq_milkHeal" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleMilkHeal"]
+			}
+		},
+
+		"sbq_compression_time" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleCompression"]
+			}
+		},
+
+		"sbq_acidDigest" : {
+			"next" : ["sbq_acidDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleAcidDigest"]
+			},
+			"sbq_acidDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : [":struggleAcidDigestImmune"]
+				}
+			}
+		},
+		"sbq_milkDigest" : {
+			"next" : ["location","sbq_milkDigestResistance"],
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleMilkDigest"]
+			},
+			"location" : {
+				"breasts" : {
+					"queueAdd" : {
+						// "dialogueRandom" : [":struggleMilkDigestBreasts"]
+					},
+					"settings" : "target",
+					"next" : ["shirt"],
+					"shirt" : {"queueAdd": {"dialogueRandom" : [":struggleMilkDigestBreastsShirt"]}}
+				}
+			},
+			"sbq_milkDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
+				"queueReplace" : {
+					"dialogueRandom" : [":struggleMilkDigestImmune"]
+				}
+			}
+		},
+		"sbq_acidSoftDigest" : ".sbq_acidDigest",
+		"sbq_milkSoftDigest" : ".sbq_milkDigest",
+
+		"sbqTransformation" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleTransforming"]
+			}
+		},
+		"sbqDrainEnergy" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleDrainEnergy"]
+			}
+		},
+
+		"sbq_bellyInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleBellyInfuse"]
+			}
+		},
+		"sbq_breastInfuse" : {
+			"addQueued" : true,
+			"queueReplace" : {
+				"dialogueRandom" : [":struggleBreastInfuse"]
+			}
+		}
+	},
+	"occupantInfused" : {
+		"finished" : true,
+		"settings" : "target",
+		"new" : {"dialogueRandom" : [":anyInfusedOccupant"], "jump":false},
+		"next" : [
+			"infuseType"
+		],
+		"infuseType" : {
+			"bellyInfuse":{
+				"add" : {"dialogueRandom" : [":bellyInfusedOccupant"]}
+			},
+			"breastInfuse":{
+				"add" : {"dialogueRandom" : [":breastInfusedOccupant"]}
+			}
+		}
+	},
+	"occupantDigested" : {
+		"finished" : true,
+		"settings" : "target",
+		"new" : {"jump":false}
+	},
+
+	"climax" : {
+		"settings" : "target",
+		"new" : {
+			"dialogueRandom":[":climax"],
+			"dismissTime" : 2,
+			"jump" : false
+		},
+		"next" : ["location"],
+		"location" : {
+			"breasts" : {
+				"replace" : {
+					"dialogueRandom":[":climaxBreasts"]
+				}
+			}
+		}
+	}
+}

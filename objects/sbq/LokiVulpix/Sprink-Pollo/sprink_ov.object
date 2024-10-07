@@ -60,7 +60,9 @@
 				"acidDigestDrops" : false,
 				"vorePrefs":{"oralVore":{"pred":true}}, // because why would it ever *not* be an OV pred
 				"interactDialogue" : false,
-				"actionDialogue" : false
+				"actionDialogue" : false,
+				"questParticipation" : false,
+				"offerQuests" : false
 			},
 			"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
 				"mainEffect" : {"digest":"softDigest"}

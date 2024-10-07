@@ -12,6 +12,7 @@ let paths = [
 	"./npcs/sbq/LokiVulpix/Loki/npc.dialogue",
 	"./npcs/sbq/LokiVulpix/Socks/npc.dialogue",
 	"./npcs/sbq/LokiVulpix/Clover/npc.dialogue",
+	"./objects/sbq/LokiVulpix/Hickory/npc.dialogue",
 	"./npcs/sbq/Zygahedron/Zevi/npc.dialogue",
 	"./npcs/sbq/FFWizard/Helena/npc.dialogue",
 	"./npcs/sbq/Fevix/Sandy/npc.dialogue",

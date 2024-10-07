@@ -1,0 +1,342 @@
+{
+	"objectName" : "sbq/LokiVulpix/Hickory",
+	"colonyTags" : ["breastVore", "oralVore", "sbq", "sbq/LokiVulpix", "sbq/LokiVulpix/Hickory"],
+	"rarity" : "Rare",
+	"description" : "Hickory",
+	"shortdescription" : "Hickory",
+	"inventoryIcon" : "/interface/title/female.png",
+	"race" : "generic",
+	"category" : "furniture",
+	"printable" : false,
+	"price" : 1000,
+	"retainObjectParametersInItem" : true,
+	"entityName" : "Hickory",
+	"orientations" : [
+		{
+			"animation": "Hickory.animation",
+			"dualImage" : "Hickory.png",
+			"renderLayer" : "Object+2",
+			"spaces" :[
+				[-1,-4],[0,-4],
+				[-1,-3],[0,-3],
+				[-1,-2],[0,-2],
+				[-1,-1],[0,-1]
+			],
+			"imagePosition" : [-48, -48],
+			"animationPosition" : [0,0],
+			"mouthPosition" : [-0.5, 1],
+			"anchors" : [ "bottom" ]
+		}
+	],
+	// "animationCustom" : {
+	// 	"globalTagDefaults" : {
+	// 		"bodyImage" : "Hickory.png"
+	// 	}
+	// },
+	"scripts" : ["Hickory.lua"],
+	"dialogueTree" : "/objects/sbq/LokiVulpix/Hickory/npc.dialogueTree",
+	"voreConfig" : [
+		"/humanoid/any/basicActions.config",
+		"/humanoid/any/disableAllInfusePred.config",
+		"/humanoid/any/disableAllInfusePrey.config",
+		"/humanoid/any/disableAllVorePrey.config",
+		"/humanoid/any/disableAllTF.config",
+		{
+			"seatCount" : 16,
+			"species" : "Hickory",
+			"pred" : {},
+			"prey" : {},
+			"actionList" : [
+			],
+			"availableVoreTypes" : {
+				"oralVore":true,
+				"breastVore":true
+			},
+			"defaultSettings" : {
+				"locations" : {
+					"belly":{
+						"mainEffect" : "softDigest"
+					},
+					"breasts":{
+						"mainEffect" : "softDigest"
+					}
+				}
+			},
+			"settingsOrder" : [
+				"displayEffect",
+				"escapeDifficulty",
+				"acidDigestPower",
+				"milkDigestPower",
+				"recentlyDigested"
+			],
+			"overrideSettings" : {
+				"acidDigestDrops" : false
+			},
+			"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
+				"mainEffect" : {"digest":"softDigest"}
+			},
+			"locations" : {
+				"belly" : {
+					"activeSettings" : {"vorePrefs":{"oralVore":{"pred":true}}},
+					"struggleSizes" : [0,1],
+					"maxFill":1.5,
+					"sizeChangeAnims" : {
+						"bellyExpandState":"<prevSize>-to-<newSize>"
+					},
+					"secondaryEffects" : {
+						"eggify" : false
+					},
+					"idleAnims" : {
+						"bodyState" : "<bellySize>-idle"
+					}
+				},
+				"breasts" : {
+					"activeSettings" : {"vorePrefs":{"breastVore":{"pred":true}}},
+					"struggleSizes" : [0,1],
+					"maxFill":1.5,
+					"subLocations" :{
+						"<left>" :{},
+						"<right>" :{}
+					}
+				}
+			},
+			"states" : {
+				"default" : {
+					"actions" : {
+						"oralVore" : {
+							"targetSettings" : {"vorePrefs":{"oralVore":{"prey":true}}},
+							"settings" : {"vorePrefs":{"oralVore":{"pred":true}}},
+							"script" : "tryVore",
+							"animations" : {
+								"<occupant>State" : "oralVore",
+								"eatState" : "eat"
+							},
+							"location" : "belly",
+							"throughput" : 1.5
+						},
+						"oralVoreLetout" : {
+							"targetSettings" : {"vorePrefs":{"oralVore":{"prey":true}}},
+							"settings" : {"vorePrefs":{"oralVore":{"pred":true}}},
+							"script" : "tryLetout",
+							"animations" : {
+								"<occupant>State" : ["oralVore", true, true],
+								"eatState" : ["eat", true, true]
+							},
+							"location" : "belly",
+							"throughput" : 1.5
+						}
+					},
+					"locations" : {
+						"belly":{
+							"entryTypes" : ["oralVore"],
+							"struggleActions" : {
+								"any" : {
+									"pressAnimations":{"<occupant>State":["s_<s_direction>",false,false,true]},
+									// minimum, maximum
+									"time" : [10,15], // hold time for struggles to trigger action, checked once for every second held
+									"count" : [10,30] // count of struggles to trigger action
+								},
+								"front" : {"indicate":"red", "action":"oralVoreLetout"},
+								"down" : {},
+								"up" : {},
+								"back" : {}
+							}
+						},
+						"breasts" : {
+							"subLocations" :{
+								"<left>" :{},
+								"<right>" :{}
+							}
+						}
+					},
+					"interactActions" : {
+						"oralVore" : {
+							"aimPart":"body","aim":"oralVore", "aimRadius" : 3,
+							"posPart":"body","pos":"front"
+						}
+					}
+				}
+			}
+		}
+	],
+	"slaveControlTimeout" : 2.0,
+	"slaveControlHeartbeat" : 1.0,
+
+	"stats" : {
+		"maxEnergy" : {
+			"baseValue" : 100.0
+		},
+		"energyRegenPercentageRate" : {
+			"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+			// "baseValue" : 0.5    // 2 second recharge time
+			// "baseValue" : 0.45      // 2.25 second recharge time
+			// "baseValue" : 0.4     // 2.5 second recharge time
+		},
+		"foodDelta" : {
+			"baseValue" : -0.0583 // -70 food over 20 minutes
+		}
+	},
+	"resources" : {
+		"energy" : {
+			"maxStat" : "maxEnergy",
+			"defaultPercentage" : 1.0
+		},
+		"energyRegenBlock" : {
+			"maxValue" : 1.0,
+			"deltaValue" : -1.0,
+			"initialPercentage" : 0.0
+		},
+		"food" : {
+			"deltaStat" : "foodDelta",
+			"initialPercentage" : 1.0,
+			"maxValue" : 70
+		}
+	},
+	"loungePositions" : {
+		"occupant0" : {
+			"part" : "occupant0",
+			"partAnchor" : "loungeOffset",
+			"orientation" : "stand",
+			"statusEffects" : [],
+			"dance": "sbqIdle",
+			"enabled" : false,
+			"handlesDrawables" : true
+		},
+		// "occupant1" : {
+		// 	"part" : "occupant1",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant2" : {
+		// 	"part" : "occupant2",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant3" : {
+		// 	"part" : "occupant3",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant4" : {
+		// 	"part" : "occupant4",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant5" : {
+		// 	"part" : "occupant5",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant6" : {
+		// 	"part" : "occupant6",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant7" : {
+		// 	"part" : "occupant7",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant8" : {
+		// 	"part" : "occupant8",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant9" : {
+		// 	"part" : "occupant9",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant10" : {
+		// 	"part" : "occupant10",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant11" : {
+		// 	"part" : "occupant11",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant12" : {
+		// 	"part" : "occupant12",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant13" : {
+		// 	"part" : "occupant13",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant14" : {
+		// 	"part" : "occupant14",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// },
+		// "occupant15" : {
+		// 	"part" : "occupant15",
+		// 	"partAnchor" : "loungeOffset",
+		// 	"orientation" : "stand",
+		// 	"statusEffects" : [],
+		// 	"dance": "sbqIdle",
+		// 	"enabled" : false,
+		// 	"handlesDrawables" : true
+		// }
+	},
+	"objectType" : "loungeable"
+}
