@@ -442,6 +442,19 @@ function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
 		if Occupants.insertOccupant(newOccupant) then
 			Occupants.queueHudRefresh = true
+			local occupant = Occupants.entityId[tostring(newOccupant.entityId)]
+			if occupant.flags.infuseType and occupant.flags.infused then
+				local infuseType = newOccupant.flags.infuseType
+				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+					sbq.settings.infuseSlots[infuseType].item = card
+					sbq.infuseOverrideSettings[infuseType] = {
+						infuseSlots = { [infuseType] = { item = card}}
+					}
+					SpeciesScript:refreshInfusion(infuseType)
+					occupant:refreshLocation()
+					occupant:getLocation():markSizeDirty()
+				end)
+			end
 		else
 			sbq.logInfo(("Could not recieve Occupant: %s %s"):format(newOccupant.entityId, sbq.entityName(newOccupant.entityId)))
 		end
@@ -1332,7 +1345,14 @@ function Occupants.insertOccupant(newOccupant)
 	local location = SpeciesScript:getLocation(newOccupant.location, newOccupant.subLocation)
 	if not location then return false end
 	local space, subLocation = location:hasSpace(newOccupant.size * newOccupant.sizeMultiplier)
-	if (not space) and (not newOccupant.flags.digested) then return false end
+	if (not space) and not (newOccupant.flags.digested or newOccupant.flags.infused) then return false, "noSpace" end
+	-- if we recieve data for an occupant that is infused somewhere we already have someone infused, then treat them as digested instead
+	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then
+		newOccupant.flags.infused = false
+		newOccupant.flags.infuseType = nil
+		newOccupant.flags.digested = true
+	end
+
 	local occupant = sb.jsonMerge({
 		flags = {},
 		locationSettings = {},
