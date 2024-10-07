@@ -1314,6 +1314,12 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 end
 
 function Occupants.insertOccupant(newOccupant)
+	-- check if we already have them
+	if Occupants.entityId[tostring(newOccupant.entityId)] then
+		-- assume data being recieved is out of date and just use current
+		return true
+	end
+
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
