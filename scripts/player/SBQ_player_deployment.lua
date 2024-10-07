@@ -1,7 +1,8 @@
 ---@diagnostic disable: undefined-global
 local old = {
 	init = init,
-	update = update
+	update = update,
+	teleportOut = teleportOut
 }
 sbq = {}
 require("/scripts/any/SBQ_RPC_handling.lua")
@@ -23,5 +24,14 @@ function update(dt)
 	if light ~= nil then
 		localAnimator.clearLightSources()
 		localAnimator.addLightSource(light)
+	end
+end
+
+function teleportOut()
+	old.teleportOut()
+	local occupantData = status.statusProperty("sbqOccupantData")
+	if not (occupantData.playerPred or occupantData.crewPred) then
+		status.setStatusProperty("sbqOccupantData", nil)
+		status.clearPersistentEffects("sbqMissingPred")
 	end
 end
