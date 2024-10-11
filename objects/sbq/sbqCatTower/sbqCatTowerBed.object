@@ -22,15 +22,21 @@
       "image" : "sbqCatTowerBed.png:default",
       "sitCoverImage" : "/objects/sbq/sbqCatTower/sbqCatTowerBed.png:cover",
       "imagePosition" : [-12, 0],
-      "animationPosition" : [-12, 0],
+      "sitPositions" : [ [5, 16] ],
       "direction" : "right",
-
-
+      "spaceScan" : 0.2
+    },
+    {
+      "image" : "sbqCatTowerBed.png:default?flipx;",
+      "sitCoverImage" : "/objects/sbq/sbqCatTower/sbqCatTowerBed.png:cover?flipx;",
+      "imagePosition" : [-12, 0],
+      "sitPositions" : [ [-3, 16] ],
+      "direction" : "left",
       "spaceScan" : 0.2
     }
   ],
 
+
   "objectType" : "loungeable",
-  "sitFlipDirection" : false,
-  "sitPositions" : [ [5, 16] ]
+  "sitFlipDirection" : false
 }

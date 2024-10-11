@@ -22,18 +22,24 @@
       "image" : "sbqCatTowerBox.png:default",
       "sitCoverImage" : "/objects/sbq/sbqCatTower/sbqCatTowerBox.png:cover",
       "imagePosition" : [-12, 0],
-      "animationPosition" : [-12, 0],
+      "sitPositions" : [ [5, 14] ],
       "direction" : "right",
-
       "collision" : "platform",
-
+      "spaceScan" : 0.3
+    },
+    {
+      "image" : "sbqCatTowerBox.png:default?flipx;",
+      "sitCoverImage" : "/objects/sbq/sbqCatTower/sbqCatTowerBox.png:cover?flipx;",
+      "imagePosition" : [-12, 0],
+      "sitPositions" : [ [-3, 14] ],
+      "direction" : "left",
+      "collision" : "platform",
       "spaceScan" : 0.3
     }
   ],
 
   "objectType" : "loungeable",
   "sitFlipDirection" : false,
-  "sitPositions" : [ [5, 14] ],
   "sitStatusEffects" : [ ],
   "sitDirectives" : "?addmask=/objects/sbq/sbqCatTower/sbqCatTowerBox.png:default;<x>;<y>"
 }

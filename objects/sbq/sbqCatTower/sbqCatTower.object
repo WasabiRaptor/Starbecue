@@ -17,7 +17,7 @@
   "novakidDescription" : "Some sorta climbing thimgamajig.",
 
   "objectType" : "physics",
-  "scripts" : ["sbqCatTower.lua"],
+  "scripts" : ["/scripts/object/SBQ_multi_object.lua"],
   "animation" : "sbqCatTower.animation",
 
   "inventoryIcon" : "sbqCatTowerIcon.png",
@@ -27,7 +27,6 @@
       "imagePosition" : [-24, 0],
       "animationPosition" : [-24, 0],
       "direction" : "right",
-
       "spaces" : [
                                           [2, 9],
         /* sbqCatTowerBed here */         [2, 8],
@@ -45,19 +44,59 @@
       "collisionSpaces" : [ [-2, 3], [-1, 3], [0, 3], [1, 3] ],
 
       "anchors" : [ "bottom" ]
+    },
+    {
+      "image" : "sbqCatTowerFull.png?flipx;",
+      "imagePosition" : [-24, 0],
+      "animationPosition" : [-24, 0],
+      "direction" : "left",
+      "spaces" : [
+                                          [-2, 9],
+        /* sbqCatTowerBed here */         [-2, 8],
+        /* | */           [0, 7],         [-2, 7],
+        /*toy*/  /*  _-_  |      __----__      *\
+                 |* |   | |    ,'        ',    *|
+                 \* |   | |   sbqCatTowerBox   */
+        [2, 3], [1, 3], [0, 3], [-1, 3], /* | */
+        [2, 2],                 [-1, 2], /*toy*/
+        [2, 1],                 [-1, 1],
+        [2, 0], [1, 0], [0, 0], [-1, 0], [-2, 0]
+      ],
+
+      "collision" : "platform",
+      "collisionSpaces" : [ [2, 3], [1, 3], [0, 3], [-1, 3] ],
+
+      "anchors" : [ "bottom" ]
     }
   ],
+  // "physicsCollisions" : {
+  //   "right" : {
+  //     "collisionKind" : "platform",
+  //     "position" : [0, 0],
+  //     "collision" : [
+  //       [-2.25, 8],
+  //       [1.25, 8],
+  //       [1.25, 8.875],
+  //       [-2.25, 8.875]
+  //     ]
+  //   },
+  //   "left" : {
+  //     "collisionKind" : "platform",
+  //     "position" : [0, 0],
+  //     "collision" : [
+  //       [-2.25, 8],
+  //       [1.25, 8],
+  //       [1.25, 8.875],
+  //       [-2.25, 8.875]
+  //     ]
+  //   }
+  // },
 
-  "physicsCollisions" : {
-    "top" : {
-      "collisionKind" : "platform",
-      "position" : [0, 0],
-      "collision" : [
-        [-2.25, 8],
-        [1.25, 8],
-        [1.25, 8.875],
-        [-2.25, 8.875]
-      ]
-    }
-  }
+  "placeObjects" : [
+    ["sbqCatTowerBox", [1,4], 1, {}],
+    ["sbqCatTowerBed", [-1,8], 1, {}],
+    ["sbqCatTowerToy", [2,2], 1, {}],
+    ["sbqCatTowerToy", [-2,6], -1, {}]
+  ]
+
 }
