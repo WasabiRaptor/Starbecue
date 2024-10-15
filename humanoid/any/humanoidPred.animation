@@ -76,6 +76,14 @@
 	},
 	"animatedParts": {
 		"stateTypes": {
+			"rpActionState" : {
+				"states" : {
+					"jackoff": { "frames": 2, "cycle": 0.25, "mode": "loop"},
+					"fingerPussy": { "frames": 2, "cycle": 0.25, "mode": "loop"},
+					"squishBreasts": { "frames": 4, "cycle": 1, "mode": "loop"}
+				}
+			},
+
 			"bodyState" : {
 				"states" : {
 					"idle" : {"properties" : {
@@ -575,7 +583,7 @@
 			"cock" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.2,
+					"zLevel": 0.3,
 					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0.5, -1.5],
@@ -605,6 +613,9 @@
 					"cockExpandState" : {
 						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
+					},
+					"rpActionState": {
+						"jackoff" : { "properties": { "image": "<cockImage>:<cockSize>-jackoff.1" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -781,6 +792,9 @@
 						"expand": { "properties": { "image": "<breasts_frontImage>:<breasts_frontInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
+					"rpActionState" : {
+						"squishBreasts" : { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
+					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
 					},
@@ -799,7 +813,7 @@
 			"breasts_back" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.4,
+					"zLevel": 0.2,
 					"anchorPart": "breasts",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives>"
@@ -828,6 +842,9 @@
 					"breasts_backExpandState" : {
 						"expand": { "properties": { "image": "<breasts_backImage>:<breasts_backInterpolateSize>-expand" } },
 						"eat" : "expand"
+					},
+					"rpActionState" : {
+						"squishBreasts" : { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -992,7 +1009,7 @@
 			"cock_infused" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.201,
+					"zLevel": 0.301,
 					"anchorPart": "cock",
 					"interact" : [0.5, -1.5],
 					"bodyFullbright" : true,
@@ -1021,6 +1038,9 @@
 					"cockExpandState" : {
 						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
+					},
+					"rpActionState": {
+						"jackoff" : { "properties": { "image": "<cockImage>:<cockSize>-jackoff.1" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -1196,6 +1216,9 @@
 						"expand": { "properties": { "image": "<breasts_frontImage>:<breasts_frontInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
+					"rpActionState" : {
+						"squishBreasts" : { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
+					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
 					},
@@ -1214,7 +1237,7 @@
 			"breasts_back_infused" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.401,
+					"zLevel": 0.201,
 					"anchorPart": "breasts_back",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsColorRemap><bodyDirectives><breastsInfusedFade>"
@@ -1243,6 +1266,9 @@
 					"breasts_backExpandState" : {
 						"expand": { "properties": { "image": "<breasts_backImage>:<breasts_backInterpolateSize>-expand" } },
 						"eat" : "expand"
+					},
+					"rpActionState" : {
+						"squishBreasts" : { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -1523,7 +1549,75 @@
 			}},
 			"head" : {"properties" : {
 				"interact" : [0.5,0.375]
-			}}
+			}},
+			"frontarm" : {
+				"partStates" : {
+					"rpActionState" : {
+						"jackoff" : {
+							"properties" : {
+								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"image": "<bodyImagePath>frontarm.png:rotation",
+								"interpolated" : true
+							},
+							"frameProperties" : {
+								"transforms" : [
+									{"rotate":-50},
+									{"rotate":-35}
+								]
+							}
+						},
+						"fingerPussy" : {
+							"properties" : {
+								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"image": "<bodyImagePath>frontarm.png:rotation"
+
+							},
+							"frameProperties" : {
+								"transforms" : [
+									{"rotate":-50, "translate":[0,0]},
+									{"rotate":-50, "translate":[0,0.125]}
+								]
+							}
+						},
+						"squishBreasts" : {
+							"properties" : {
+								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"image": "<bodyImagePath>frontarm.png:swimIdle.1",
+								"interpolated" : false
+							},
+							"frameProperties" : {
+								"transforms" : [
+									{"translate":[0,0]},
+									{"translate":[0,-0.125]},
+									{"translate":[0.125,-0.125]},
+									{"translate":[0.125,0]}
+								]
+							}
+						}
+					}
+				}
+			},
+			"backarm" : {
+				"partStates" : {
+					"rpActionState" : {
+						"squishBreasts" : {
+							"properties" : {
+								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"image": "<bodyImagePath>backarm.png:swim.2",
+								"interpolated" : false
+							},
+							"frameProperties" : {
+								"transforms" : [
+									{"translate":[0,0]},
+									{"translate":[0,-0.125]},
+									{"translate":[-0.125,-0.125]},
+									{"translate":[-0.125,0]}
+								]
+							}
+						}
+					}
+				}
+			}
 
 		}
 	},

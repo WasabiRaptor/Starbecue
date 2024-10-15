@@ -2,255 +2,321 @@
 	{"op":"merge", "path":"", "value": {
 		"animatedParts": {
 			"stateTypes": {
+				"rpActionState" : {
+					"default":"none",
+					"priority" : 25,
+					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
+				},
 				"mainState" : {
+					"default":"none",
 					"priority" : 5,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"transitionState" : {
+					"default":"none",
 					"priority" : 10,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"hugTransitionState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"hugState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"attackState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"bellyState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"bellyExpandState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"tailState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"tailExpandState" : {
+					"default":"none",
 					"priority" : 3,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"tailHiddenState" : {
+					"default":"none",
 					"priority" : 4,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"cockState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"cockExpandState" : {
+					"default":"none",
 					"priority" : 3,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"cockHiddenState" : {
+					"default":"none",
 					"priority" : 4,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"balls_frontState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"balls_frontExpandState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"balls_backState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"balls_backExpandState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"ballsHiddenState" : {
+					"default":"none",
 					"priority" : 4,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"breastsState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"breasts_frontState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"breasts_frontExpandState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"breasts_backState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"breasts_backExpandState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"breastsHiddenState" : {
+					"default":"none",
 					"priority" : 4,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"pussyState" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"pussyExpandState" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"pussyHiddenState" : {
+					"default":"none",
 					"priority" : 4,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"underwearHide" : {
+					"default":"none",
 					"priority" : 90,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"braHide" : {
+					"default":"none",
 					"priority" : 90,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"occupant0State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant1State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant2State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant3State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant4State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant5State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant6State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant7State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant8State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant9State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant10State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant11State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant12State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant13State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant14State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant15State" : {
+					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 
 				"occupant0Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant1Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant2Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant3Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant4Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant5Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant6Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant7Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant8Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant9Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant10Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant11Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant12Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant13Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant14Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
 				"occupant15Location" : {
+					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				}

@@ -214,7 +214,9 @@ end
 function sbq.actionList(type, target)
 	local list = {}
 	local actions = sb.jsonMerge({}, sbq.voreConfig.actionList)
-	if target then
+	if type == "rp" then
+		actions = sb.jsonMerge({}, sbq.voreConfig.rpActionList)
+	elseif target then
 		local occupant = Occupants.entityId[tostring(target)]
 		if occupant then
 			local location = occupant:getLocation()

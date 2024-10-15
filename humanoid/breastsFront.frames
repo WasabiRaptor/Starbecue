@@ -3,11 +3,11 @@
 		"size" : [43, 43],
 		"dimensions" : [8, 9],
 		"names" : [
-			[ "0.1-expand", "0.2-expand", "0.3-expand", "0.4-expand", "0.5-expand"],
+			[ "0.1-expand", "0.2-expand", "0.3-expand", "0.4-expand", "0.5-expand", null, "0.5-squishBreasts.1", "0.5-squishBreasts.3"],
 			[ "0.5-s_up_press.1", "0.5-s_up_press.2", "0.5-s_up_hold.1", "0.5-s_up_release.1", "0.5-s_down_press.1", "0.5-s_down_press.2", "0.5-s_down_hold.1", "0.5-s_down_release.1"],
 			[ "0.5-s_back_press.1", "0.5-s_back_press.2", "0.5-s_back_hold.1", "0.5-s_back_release.1", "0.5-s_front_press.1", "0.5-s_front_press.2", "0.5-s_front_hold.1", "0.5-s_front_release.1"],
 
-			[ "0.6-expand", "0.7-expand", "0.8-expand", "0.9-expand", "1-expand"],
+			[ "0.6-expand", "0.7-expand", "0.8-expand", "0.9-expand", "1-expand",  null, "1-squishBreasts.1", "1-squishBreasts.3"],
 			[ "1-s_up_press.1", "1-s_up_press.2", "1-s_up_hold.1", "1-s_up_release.1", "1-s_down_press.1", "1-s_down_press.2", "1-s_down_hold.1", "1-s_down_release.1"],
 			[ "1-s_back_press.1", "1-s_back_press.2", "1-s_back_hold.1", "1-s_back_release.1", "1-s_front_press.1", "1-s_front_press.2", "1-s_front_hold.1", "1-s_front_release.1"],
 
@@ -24,6 +24,17 @@
 		"0.5-idle.1" : "0.5-expand",
 		"1-idle.1" : "1-expand",
 		"2-idle.1" : "2-expand",
+
+		"0-squishBreasts.1" : "0-idle.1",
+		"0-squishBreasts.2" : "0-idle.1",
+		"0-squishBreasts.3" : "0-idle.1",
+		"0-squishBreasts.4" : "0-idle.1",
+
+		"0.5-squishBreasts.2" : "0.5-squishBreasts.1",
+		"0.5-squishBreasts.4" : "0.5-squishBreasts.3",
+
+		"1-squishBreasts.2" : "1-squishBreasts.1",
+		"1-squishBreasts.4" : "1-squishBreasts.3",
 
 		"0-s_up_press.1" : "0-idle.1",
 		"0-s_up_press.2" : "0-idle.1",

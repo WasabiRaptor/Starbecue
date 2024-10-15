@@ -76,7 +76,8 @@ end
 
 function uninit()
 	player.setScriptContext("starbecue")
-	return player.callScript("sbq.tryAction", "grabRelease")
+	player.callScript("sbq.queueAction", "grabRelease")
+	player.callScript("sbq.queueAction", "rpActionReset")
 end
 
 function sbq.setAction(action)
@@ -96,6 +97,7 @@ function sbq.clickAction()
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
+	player.callScript("sbq.tryAction", "rpActionReset")
 	local bounds = mcontroller.collisionBoundBox()
 	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
 	local result
@@ -203,9 +205,8 @@ function TopMenu:init()
 			script = "sbq.tryAction"
 		},
 		{
-			args = { "open", "OccupantsMenu" },
+			args = { "open", "RoleplayMenu" },
 			name = sbq.strings.controllerRPMenu,
-			locked = true,
 			description = sbq.strings.controllerRPMenuDesc
 		},
 		{
@@ -293,5 +294,25 @@ function SelectedOccupantMenu:init(entityId)
 
 	self:openRadialMenu({ options = options, cancel = {
 		args = {"open","OccupantsMenu"}
+	}})
+end
+
+local RoleplayMenu = {}
+RadialMenu.RoleplayMenu = RoleplayMenu
+setmetatable(RoleplayMenu, _RadialMenu)
+function RoleplayMenu:init()
+	local options = {}
+	player.setScriptContext("starbecue")
+	for _, action in ipairs(player.callScript("sbq.actionList", "rp") or {}) do
+		table.insert(options, {
+			name = sbq.getString(action.name or (":" .. action.action)),
+			args = { action.action, nil, table.unpack(action.args or {}) },
+			locked = not action.available,
+			description = sbq.getString(action.description or (":" .. action.action.."Desc")),
+			script = "sbq.tryAction"
+		})
+	end
+	self:openRadialMenu({ options = options, cancel = {
+		args = {"open","TopMenu"}
 	}})
 end
