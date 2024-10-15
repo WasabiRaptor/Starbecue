@@ -1625,7 +1625,12 @@
 		"chestOffset": {"interpolated": false},
 		"bellyOffset": {"interpolated": false},
 		"crotchOffset": {"interpolated": false},
-		"tailOffset": {"interpolated": false}
+		"tailOffset": {"interpolated": false},
+
+		"breasts_front_particles": {"interpolated": false},
+		"breasts_back_particles": {"interpolated": false},
+		"cock_particles": {"interpolated": false},
+		"pussy_particles": {"interpolated": false}
 	},
 	"sounds": {
 		"swallow": ["/sfx/objects/gulp.ogg"],
@@ -1635,6 +1640,124 @@
 		"slurp" : [ "/sfx/vore/common/slurp.ogg" ]
 	},
 	"particleEmitters": {
+		"breasts_front_leak" : {
+			"emissionRate":1,
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "breasts_front",
+			"transformationGroups" : ["breasts_front_particles"],
+			"particles" : [
+				{
+					"offset" : [0.125,-0.5],
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+		"breasts_back_leak" : {
+			"emissionRate":1,
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "breasts_back",
+			"transformationGroups" : ["breasts_back_particles"],
+			"particles" : [
+				{
+					"offset" : [0.5,-0.5],
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+		"pussy_leak" : {
+			"emissionRate":1,
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "pussy",
+			"transformationGroups" : ["pussy_particles"],
+			"particles" : [
+				{
+					"offset" : [0.125,-1.375],
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 150],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+		"cock_leak" : {
+			"emissionRate":1,
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "cock",
+			"transformationGroups" : ["cock_particles"],
+			"particles" : [
+				{
+					"offset" : [0.625,-1.875],
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 150],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		}
 	}
 
 }
