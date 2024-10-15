@@ -108,7 +108,7 @@ function sbq.update(dt)
 		Occupants.update(dt)
 		SpeciesScript:update(dt)
 		SpeciesScript.state:update(dt)
-		if sbq.timer("stripping", 30) then SpeciesScript:refreshStripping() end
+		if sbq.timer("stripping", 5) then SpeciesScript:refreshStripping() end
 	end
 	sbq.passiveStatChanges(dt)
 end

@@ -1642,6 +1642,8 @@
 	"particleEmitters": {
 		"breasts_front_leak" : {
 			"emissionRate":1,
+			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
+			// so if they have the same value, they'll all be perfectly synced
 			"emissionRateVariance":0.25,
 			"active" : false,
 			"anchorPart" : "breasts_front",
@@ -1657,7 +1659,7 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0, -5.0],
+						"initialVelocity" : [0.25, -5.0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 0.6,
@@ -1671,7 +1673,7 @@
 		},
 		"breasts_back_leak" : {
 			"emissionRate":1,
-			"emissionRateVariance":0.25,
+			"emissionRateVariance":0.255,
 			"active" : false,
 			"anchorPart" : "breasts_back",
 			"transformationGroups" : ["breasts_back_particles"],
@@ -1686,7 +1688,7 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0, -5.0],
+						"initialVelocity" : [0.25, -5.0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 0.6,
@@ -1701,7 +1703,7 @@
 
 		"pussy_leak" : {
 			"emissionRate":1,
-			"emissionRateVariance":0.25,
+			"emissionRateVariance":0.15,
 			"active" : false,
 			"anchorPart" : "pussy",
 			"transformationGroups" : ["pussy_particles"],
@@ -1731,7 +1733,7 @@
 
 		"cock_leak" : {
 			"emissionRate":1,
-			"emissionRateVariance":0.25,
+			"emissionRateVariance":0.3,
 			"active" : false,
 			"anchorPart" : "cock",
 			"transformationGroups" : ["cock_particles"],
@@ -1746,7 +1748,7 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0, -5.0],
+						"initialVelocity" : [1, -5.0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 0.6,

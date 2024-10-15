@@ -25,19 +25,64 @@ function Default:uninit()
 end
 
 function Default:settingAnimations()
+	local lust = 0
+	if sbq.isResource("sbqLust") then
+		lust = sbq.resourcePercentage("sbqLust")
+	end
 	local legs = sbq.getItemSlot("legsCosmetic") or sbq.getItemSlot("legs")
 	if (not (sbq.statPositive("legsNude") or sbq.statPositive("nude"))) and legs and (not root.itemConfig(legs).config.showVoreAnims) and (sbq.voreConfig.legsVoreWhitelist and not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
 		self:doAnimations(sbq.voreConfig.legsHide)
+		for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
+			animator.setParticleEmitterActive(v, false)
+		end
+		for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
+			animator.setParticleEmitterActive(v, false)
+		end
 	else
 		self:doAnimations((sbq.settings.cock and sbq.voreConfig.cockShow) or sbq.voreConfig.cockHide)
 		self:doAnimations((sbq.settings.pussy and sbq.voreConfig.pussyShow) or sbq.voreConfig.pussyHide)
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
+
+		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock then
+			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, true)
+				animator.setParticleEmitterEmissionRate(v, ((sbq.settings.cockLeakiness^2 * lust)^2)*10)
+			end
+		else
+			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, false)
+			end
+		end
+
+		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy then
+			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, true)
+				animator.setParticleEmitterEmissionRate(v, ((sbq.settings.pussyLeakiness^2 * lust)^2)*10)
+			end
+		else
+			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, false)
+			end
+		end
 	end
 	local chest = sbq.getItemSlot("chestCosmetic") or sbq.getItemSlot("chest")
 	if (not (sbq.statPositive("chestNude") or sbq.statPositive("nude"))) and chest and (not root.itemConfig(chest).config.showVoreAnims) and (sbq.voreConfig.chestVoreWhitelist and not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
 		self:doAnimations(sbq.voreConfig.chestHide)
+		for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
+			animator.setParticleEmitterActive(v, false)
+		end
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
+		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts then
+			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, true)
+				animator.setParticleEmitterEmissionRate(v, ((sbq.settings.breastsLeakiness^2 * lust)^2)*10)
+			end
+		else
+			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, false)
+			end
+		end
 	end
 	self:doAnimations((sbq.settings.breasts and sbq.voreConfig.braHide) or sbq.voreConfig.braShow)
 	self:doAnimations(((sbq.settings.cock or sbq.settings.pussy or sbq.settings.balls) and sbq.voreConfig.underwearHide) or sbq.voreConfig.underwearShow)
