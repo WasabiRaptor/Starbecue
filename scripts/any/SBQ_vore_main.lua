@@ -6,6 +6,7 @@ require "/scripts/interp.lua"
 require "/scripts/any/SBQ_util.lua"
 require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/any/SBQ_settings.lua"
+require "/scripts/any/SBQ_anim_util.lua"
 
 _SpeciesScript = {scripted = true}
 _SpeciesScript.__index = _SpeciesScript
@@ -109,6 +110,19 @@ function sbq.update(dt)
 		SpeciesScript:update(dt)
 		SpeciesScript.state:update(dt)
 		if sbq.timer("stripping", 5) then SpeciesScript:refreshStripping() end
+		for k, v in pairs(sbq.voreConfig.transformGroupAnimProperties or {}) do
+			local transformGroup = animator.applyTags(k)
+			local part = animator.applyTags(v.part)
+			if v.translate then
+				sbq_animator.setTranslation(transformGroup, animator.partProperty(part, animator.applyTags(v.translate)))
+			end
+			if v.rotate then
+				sbq_animator.setRotation(transformGroup, animator.partProperty(part, animator.applyTags(v.rotate)), animator.partProperty("rotationCenter"))
+			end
+			if v.scale then
+				sbq_animator.setScale(transformGroup, animator.partProperty(part, animator.applyTags(v.scale)), animator.partProperty("scaleCenter"))
+			end
+		end
 	end
 	sbq.passiveStatChanges(dt)
 end
@@ -1285,6 +1299,9 @@ end
 
 -- Occupant Handling
 function Occupants.newOccupant(entityId, size, location, subLocation, flags)
+	-- sanity check
+	if not entityId then return false end
+
 	-- check if we already have them
 	local occupant = Occupants.entityId[tostring(entityId)]
 	if occupant then
@@ -1329,6 +1346,8 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 end
 
 function Occupants.insertOccupant(newOccupant)
+	-- sanity check
+	if not newOccupant.entityId then return false end
 	-- check if we already have them
 	if Occupants.entityId[tostring(newOccupant.entityId)] then
 		-- assume data being recieved is out of date and just use current
