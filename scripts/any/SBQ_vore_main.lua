@@ -840,8 +840,27 @@ function _State:emergencyEscape(occupant)
 	occupant:remove()
 end
 
+local function climaxBurst(emitter, burstChance)
+	animator.setParticleEmitterBurstCount(emitter, burstChance * 10)
+	animator.burstParticleEmitter(emitter)
+	if math.random() < burstChance then
+		sbq.timer(nil, math.random(), climaxBurst, emitter, burstChance * 0.75)
+	end
+end
 function _State:climax(entityId)
 	SpeciesScript:doAnimations(self.climaxAnimations, {}, entityId)
+
+	local occupant = Occupants.entityId[tostring(entityId)]
+	if occupant then
+		local location = occupant:getLocation()
+		if location then
+			local leakiness = sbq.settings[location.emitterSetting] or 0
+			if leakiness > 0 then for _, emitter in ipairs(location.climaxEmitters or {}) do
+				climaxBurst(emitter, leakiness)
+			end end
+		end
+	end
+
 	if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".climax", entityId) then
 		dialogueProcessor.speakDialogue(function ()
 			sbq.resetResource("sbqLust")
