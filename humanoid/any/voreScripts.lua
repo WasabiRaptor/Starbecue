@@ -44,9 +44,10 @@ function Default:settingAnimations()
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 
 		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock then
+			local leakiness = ((sbq.settings.cockLeakiness^2 * lust)^2)*10*math.max(0.25, Occupants.locations.cock.count + Occupants.locations.balls.count)
 			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
-				animator.setParticleEmitterEmissionRate(v, ((sbq.settings.cockLeakiness^2 * lust)^2)*10)
+				animator.setParticleEmitterEmissionRate(v, leakiness)
 			end
 		else
 			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
@@ -55,9 +56,10 @@ function Default:settingAnimations()
 		end
 
 		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy then
+			local leakiness = ((sbq.settings.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, Occupants.locations.womb.count)
 			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
-				animator.setParticleEmitterEmissionRate(v, ((sbq.settings.pussyLeakiness^2 * lust)^2)*10)
+				animator.setParticleEmitterEmissionRate(v, leakiness)
 			end
 		else
 			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
@@ -74,9 +76,10 @@ function Default:settingAnimations()
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
 		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts then
+			local leakiness = ((sbq.settings.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, Occupants.locations.breasts.count)
 			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
-				animator.setParticleEmitterEmissionRate(v, ((sbq.settings.breastsLeakiness^2 * lust)^2)*10)
+				animator.setParticleEmitterEmissionRate(v, leakiness)
 			end
 		else
 			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
