@@ -1,0 +1,81 @@
+{
+	"objectName" : "sbq/boat",
+	"colonyTags" : ["generic"],
+	"rarity" : "Common",
+	"category" : "decorative",
+	"price" : 60,
+
+	"description" : "Boat",
+	"shortdescription" : "Boat",
+	"race" : "generic",
+
+	"debug" : true,
+
+	"inventoryIcon" : "boatT1.png",
+	"orientations" : [
+		{
+			"image" : "boatT1.png",
+			"imagePosition" : [-432, -80],
+			"spaces" : [[-45,7],[-41,0],[-4,68],[0,0],[34,14],[49,15]],
+			"renderLayer" : "BackgroundTile-10",
+			"anchors" : [ ],
+			"direction" : "right",
+			"collision" : "platform"
+		}
+	],
+	"scripts" : ["/scripts/object/SBQ_multi_object.lua"],
+	"placeObjects" : [
+		["sbq/boat_col",[0,1],1,{"unbreakable":true}],
+		["sbq/boat_fg",[-1,0],1,{"unbreakable":true}],
+		["sbq/boat_boosterflame",[-51,11],1,{"unbreakable":true}],
+		["sbq/boat_boosterflame",[-50,4],1,{"unbreakable":true}]
+		// ["sbq/boat_shipdoor",[-19,3],1,{}],
+		// ["sbq/boat_shipdoor",[-29,3],1,{}],
+		// ["sbq/boat_shipdoor",[-19,15],1,{}],
+		// ["sbq/boat_shipdoor",[-41,15],1,{}]
+	],
+
+	"objectType" : "physics",
+	"physicsCollisions" :{
+		"bow1" : {
+			"collisionKind" : "platform",
+			"position" : [46, 14.875],
+			"collision" : [[0, 0],[2, 0],[2, 1],[0, 1]]
+		},
+		"bow2" : {
+			"collisionKind" : "platform",
+			"position" : [44, 14.75],
+			"collision" : [[0, 0],[2, 0],[2, 1],[0, 1]]
+		},
+		"bow3" : {
+			"collisionKind" : "platform",
+			"position" : [42, 14.625],
+			"collision" : [[0, 0],[2, 0],[2, 1],[0, 1]]
+		},
+		"bow4" : {
+			"collisionKind" : "platform",
+			"position" : [40, 14.5],
+			"collision" : [[0, 0],[2, 0],[2, 1],[0, 1]]
+		},
+		"bow5" : {
+			"collisionKind" : "platform",
+			"position" : [38, 14.375],
+			"collision" : [[0, 0],[2, 0],[2, 1],[0, 1]]
+		},
+		"bow6" : {
+			"collisionKind" : "platform",
+			"position" : [36, 14.25],
+			"collision" : [[0, 0],[2, 0],[2, 1],[0, 1]]
+		},
+		"bow7" : {
+			"collisionKind" : "platform",
+			"position" : [34, 14.125],
+			"collision" : [[0.25, 0],[2, 0],[2, 1],[0.25, 1]]
+		},
+		"mast" : {
+			"collisionKind" : "platform",
+			"position" : [-46, 27],
+			"collision" : [[0, 0],[41.25, 0],[41.25, 0.5],[0, 0.5]]
+		}
+	}
+}

@@ -1,0 +1,33 @@
+{
+  "objectName" : "sbq/boat_captainschair",
+  "colonyTags" : ["nickit"],
+  "itemTags" : ["captainschair"],
+  "printable" : false,
+  "rarity" : "Common",
+  "objectType" : "loungeable",
+
+  "description" : "The Captain uses this to fly the ship.",
+  "shortdescription" : "Space Sloop Helm",
+  "race" : "glitch",
+  "category" : "furniture",
+
+  "inventoryIcon" : "captainschairicon.png",
+  "orientations" : [
+    {
+      "image" : "captainschair.png:<color>",
+      "imagePosition" : [-12, 0],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ],
+      "direction" : "right",
+      "sitPosition" : [1.6, 22.5]
+    }
+  ],
+
+  "interactAction" : "ScriptPane",
+  "interactData" : "/interface/cockpit/cockpit.config",
+
+  "sitFlipDirection" : false
+}

@@ -93,10 +93,10 @@
   // },
 
   "placeObjects" : [
-    ["sbqCatTowerBox", [1,4], 1, {}],
-    ["sbqCatTowerBed", [-1,8], 1, {}],
-    ["sbqCatTowerToy", [2,2], 1, {}],
-    ["sbqCatTowerToy", [-2,6], -1, {}]
+    ["sbqCatTowerBox", [1,4], 1, {"unbreakable":true}],
+    ["sbqCatTowerBed", [-1,8], 1, {"unbreakable":true}],
+    ["sbqCatTowerToy", [2,2], 1, {"unbreakable":true}],
+    ["sbqCatTowerToy", [-2,6], -1, {"unbreakable":true}]
   ]
 
 }
