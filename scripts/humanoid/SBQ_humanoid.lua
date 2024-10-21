@@ -178,7 +178,8 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	newIdentity = sb.jsonMerge(
 		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
 		newIdentity,
-		((not force) and speciesIdentites[newIdentity.species]) or {}
+		((not force) and speciesIdentites[newIdentity.species]) or {},
+		{gender = newIdentity.gender} -- preserve new gender if applicable
 	)
 	if not (force or speciesIdentites[newIdentity.species]) then
 		-- for k, v in pairs(newIdentity) do
