@@ -63,6 +63,12 @@ function uninit()
 	sbq.uninit()
 end
 
+function die()
+	for i, occupant in ipairs(Occupants.list) do
+		occupant:remove()
+	end
+end
+
 function onInteraction(args)
 	return SpeciesScript:interact(args)
 end

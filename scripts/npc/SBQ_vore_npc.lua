@@ -10,6 +10,7 @@ local old = {
 	init = init,
 	update = update,
 	uninit = uninit,
+	die = die,
 	tenant_setHome = tenant.setHome,
 	equipped_primary = equipped.primary,
 	tenant_graduate = tenant.graduate,
@@ -163,4 +164,11 @@ end
 
 function participateInNewQuests()
 	return sbq.settings.questParticipation and old.participateInNewQuests()
+end
+
+function die()
+	for i, occupant in ipairs(Occupants.list) do
+		occupant:remove()
+	end
+	old.die()
 end

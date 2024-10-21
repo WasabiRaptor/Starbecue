@@ -268,3 +268,22 @@ end
 function sbq.predHudOpen(open)
 	predHudOpen = open
 end
+
+function teleportOut()
+	local occupantData = status.statusProperty("sbqOccupantData")
+	if occupantData and not (occupantData.playerPred or occupantData.crewPred) then
+		status.setStatusProperty("sbqOccupantData", nil)
+		status.clearPersistentEffects("sbqMissingPred")
+	end
+	for i, occupant in ipairs(Occupants.list) do
+		if world.entityType(occupant.entityId) ~= "player" then
+			occupant:remove()
+		end
+	end
+
+end
+function die()
+	for i, occupant in ipairs(Occupants.list) do
+		occupant:remove()
+	end
+end
