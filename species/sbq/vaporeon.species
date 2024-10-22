@@ -134,7 +134,7 @@
 	"baseColorMap" : {
 		"primary" : ["0d4f6a", "1b80a7", "42b2dd", "6dc4e5"], // main body
 		"secondary" : ["0b2e67", "194893", "2d66c3"], // dorsal fins
-		"underbelly" : ["545454", "8a8a8a", "b3b3b3", "e0e0e0", "fefefe"],
+		"underbelly" : ["8a8a8a", "b3b3b3", "e0e0e0", "fefefe"],
 		"earFins" : ["786c31", "b1a14e", "dcca6b", "f2eab4", "fdf9e3"],
 		"neckFins" : ["a34c9a", "cc72c3", "ef99e7", "ffcfe9", "fae2ef"],
 		"flesh" : ["7a235a", "99457a", "a2668c"]
@@ -157,16 +157,16 @@
 		"0"
 	],
 	"shirt" : [ // underbelly
-		"?replace;545454=a34c99;8a8a8a=cc72c2;b3b3b3=ef99e6;e0e0e0=ffcfe8;fefefe=fae2ee", // light pink
-		"?replace;545454=785131;8a8a8a=986943;b3b3b3=dca76a;e0e0e0=f2d4b5;fefefe=fae9d8", // orange cream
-		"?replace;545454=786c32;8a8a8a=b1a14f;b3b3b3=dcca6c;e0e0e0=f2eab5;fefefe=fdf9e4", // light yellow
-		"?replace;545454=3c802c;8a8a8a=4ca636;b3b3b3=6fd158;e0e0e0=92ef7b;fefefe=b6f7a6", // light lime
-		"?replace;545454=3e836c;8a8a8a=41b69d;b3b3b3=73b9a6;e0e0e0=91d7c0;fefefe=b6edda", // light teal
-		"?replace;545454=3e6d83;8a8a8a=4190b6;b3b3b3=73a2b9;e0e0e0=91c0d7;fefefe=bbdced", // light blue
-		"?replace;545454=573f83;8a8a8a=7955bc;b3b3b3=8973b9;e0e0e0=a591d7;fefefe=cabdea", // light purple
-		"?replace;545454=6a2974;8a8a8a=b45acb;b3b3b3=e0a2e2;e0e0e0=f9d3f9;fefefe=ffecfe", // light magenta
-		"?replace;545454=545455;8a8a8a=8a8a8b;b3b3b3=b3b3b4;e0e0e0=e0e0e1;fefefe=fefeff", // white
-		"?replace;545454=2a2a2a;8a8a8a=393939;b3b3b3=555555;e0e0e0=777777;fefefe=8f8f8f" // grey
+		"?replace;8a8a8a=cc72c2;b3b3b3=ef99e6;e0e0e0=ffcfe8;fefefe=fae2ee", // light pink
+		"?replace;8a8a8a=986943;b3b3b3=dca76a;e0e0e0=f2d4b5;fefefe=fae9d8", // orange cream
+		"?replace;8a8a8a=b1a14f;b3b3b3=dcca6c;e0e0e0=f2eab5;fefefe=fdf9e4", // light yellow
+		"?replace;8a8a8a=4ca636;b3b3b3=6fd158;e0e0e0=92ef7b;fefefe=b6f7a6", // light lime
+		"?replace;8a8a8a=41b69d;b3b3b3=73b9a6;e0e0e0=91d7c0;fefefe=b6edda", // light teal
+		"?replace;8a8a8a=4190b6;b3b3b3=73a2b9;e0e0e0=91c0d7;fefefe=bbdced", // light blue
+		"?replace;8a8a8a=7955bc;b3b3b3=8973b9;e0e0e0=a591d7;fefefe=cabdea", // light purple
+		"?replace;8a8a8a=b45acb;b3b3b3=e0a2e2;e0e0e0=f9d3f9;fefefe=ffecfe", // light magenta
+		"?replace;8a8a8a=8a8a8b;b3b3b3=b3b3b4;e0e0e0=e0e0e1;fefefe=fefeff", // white
+		"?replace;8a8a8a=393939;b3b3b3=555555;e0e0e0=777777;fefefe=8f8f8f" // grey
 	],
 	"pants" : [ // ear fins
 		"?replace;786c31=a34c99;b1a14e=cc72c2;dcca6b=ef99e6;f2eab4=ffcfe8;fdf9e3=fae2ee", // light pink
@@ -196,7 +196,7 @@
 	"shirtColor" : [ // flesh color
 		"?replace;7a235a=7a235b;99457a=99457b;a2668c=a2668d;"
 	],
-	"pantsColor" : [
+	"pantsColor" : [ // neck finns
 		"?replace;a34c9a=a34c99;cc72c3=cc72c2;ef99e7=ef99e6;ffcfe9=ffcfe8;fae2ef=fae2ee", // light pink
 		"?replace;a34c9a=785131;cc72c3=986943;ef99e7=dca76a;ffcfe9=f2d4b5;fae2ef=fae9d8", // orange cream
 		"?replace;a34c9a=786c32;cc72c3=b1a14f;ef99e7=dcca6c;ffcfe9=f2eab5;fae2ef=fdf9e4", // light yellow
@@ -272,6 +272,11 @@
 		],
 		"ballsColorRemap" : [
 			["primary","underbelly"]
+		],
+		"breastsColorRemap" : [
+			["primary","underbelly"],
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","underbelly", {"nipplesVisible":false}]
 		]
 	},
 	"potionImagePath" : "/humanoid/sbq/vaporeon/potion/",
@@ -281,6 +286,13 @@
 		"/humanoid/any/quadrupedPred.animation",
 		"/humanoid/any/voreOccupantsQuadruped.animation",
 		"/humanoid/any/moreColors.animation"
+	],
+	"voreConfig" : [
+		"/humanoid/any/vore_quadruped.config",
+		{
+			"defaultSettings" : {
+			}
+		}
 	],
 
 	"infuseData" : [
