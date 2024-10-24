@@ -10,10 +10,6 @@ function build(directory, config, parameters, level, seed)
 				ownership = "'"
 			end
 			config.shortdescription = name..ownership.." Deed"
-			parameters.shortdescription = name..ownership.." Deed"
-		else
-			config.shortdescription = "SBQ Colony Deed"
-			parameters.shortdescription = "SBQ Colony Deed"
 		end
 	end
 

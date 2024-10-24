@@ -488,16 +488,16 @@ end
 
 function die()
 	-- Spawn NPC essence for all tenants
-	for _, tenant in pairs(((storage or {}).occupier or {}).tenants or {}) do
-		local item = sbq.generateNPCItemCard(tenant)
-		if item then
-			world.spawnItem(item, object.position())
-		end
-	end
+	-- for _, tenant in pairs(((storage or {}).occupier or {}).tenants or {}) do
+	-- 	local item = sbq.generateNPCItemCard(tenant)
+	-- 	if item then
+	-- 		world.spawnItem(item, object.position())
+	-- 	end
+	-- end
 	-- Original function will fail quests and evict tenants
 	old.die()
 	-- Dropped deed is empty
-	storage = {}
+	-- storage = {}
 end
 
 require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"
