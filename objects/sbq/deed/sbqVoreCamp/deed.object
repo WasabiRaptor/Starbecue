@@ -1,10 +1,10 @@
 {
-  "objectName" : "sbqVoreColonyDeed",
+  "objectName" : "sbqVoreCamp",
   "colonyTags" : [],
-  "sbqTags" : ["sbqVore","sbqHouse","sbqFriendly"],
+  "sbqTags" : ["sbqVore","sbqCamp","sbqFriendly"],
   "rarity" : "Common",
-  "description" : ":deedDesc",
-  "shortdescription" : ":deedName",
+  "description" : ":campDesc",
+  "shortdescription" : ":campName",
   "race" : "generic",
   "printable" : false,
   "category" : "spawner",
@@ -17,11 +17,11 @@
     {
       "image" : "deed.png:vacated.1",
       "direction": "right",
-      "imagePosition" : [-8, -8],
-      "animationPosition" : [-8, -8],
+      "imagePosition" : [-1, -1],
+      "animationPosition" : [-1, -1],
 
-      "spaceScan" : 0.1,
-      "anchors" : [ "background" ]
+      "spaceScan" : 1,
+      "anchors" : [ ]
     }
   ],
   "deedBannedObjects" : "/objects/sbq/deed/bannedObjects.config",
@@ -32,7 +32,8 @@
     "/objects/spawner/colonydeed/timer.lua",
     "/scripts/util.lua",
     "/objects/sbq/deed/other_deed_detection.lua",
-    "/objects/sbq/deed/vore_deed.lua"
+    "/objects/sbq/deed/vore_deed.lua",
+    "/objects/sbq/deed/camp.lua"
   ],
   "scriptDelta" : 10,
 
@@ -45,10 +46,12 @@
   "retainObjectParametersInItem" : true,
 	"builder" : "/objects/sbq/deed/deed_builder.lua",
 
+  "campRadius" : 15,
+
   "deed" : {
     "debug" : false,
     "interactive" : true, //whether interaction (to trigger a scan / call home the NPC) is possible
-    "requireFilledBackground" : true, //whether tenants require the background to be filled,
+    "requireFilledBackground" : false, //whether tenants require the background to be filled,
     "hashHouseAsSeed" : false, //whether the seed for tenants should be based on the precise layout of the house
     "npcsDeliverRent" : true, //whether NPC tenants or the colonydeed should deliver the rent
     "position" : [0, 1], //relative position to spawn at

@@ -36,7 +36,8 @@ function getEntitySettingsMenu(entities, i)
 	end
 	sbq.addRPC(world.sendEntityMessage( entities[i], "sbqSettingsPageData", entity.uniqueId() ), function (data)
 		if data then
-			if (not player.isAdmin()) and data.parentEntityData[2] and (entity.uniqueId() ~= data.parentEntityData[1]) then
+			if (not player.isAdmin()) and data.parentEntityData[2] and not ((entity.uniqueId() == data.parentEntityData[1]) or (entity.uniqueId() == data.parentEntityData[2])) then
+				player.queueUIMessage(":targetOwned")
 				return animator.playSound("error")
 			end
 			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  (data.ui or "starbecue:entitySettings") }, entities[i])

@@ -1,9 +1,17 @@
+
+storage = _ENV.metagui.inputData or {}
+if storage.locked and (storage.lockOwner ~= player.uniqueId()) and not player.isAdmin() then
+	sbq.playErrorSound()
+	player.queueUIMessage(sbq.getString(":targetOwned"))
+	pane.dismiss()
+end
+
+require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"
+
 sbq.tenantCatalogue = root.assetJson("/npcs/sbq/sbqTenantCatalogue.json")
-sbq.occupier = _ENV.metagui.inputData.occupier or {}
 sbq.validTenantCatalogueList = {}
 sbq.tenantIndex = 0
 
-require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"
 function init()
 	sbq.refreshDeedPage()
 	for name, tenantName in pairs(sbq.tenantCatalogue) do
@@ -11,11 +19,13 @@ function init()
 	end
 	table.sort(sbq.validTenantCatalogueList)
 	for i, v in ipairs(sbq.validTenantCatalogueList) do
-		if v == sbq.occupier.name then
+		if v == storage.occupier.name then
 			sbq.tenantIndex = i
 		end
 	end
-	_ENV.tenantText:setText(sbq.occupier.name or "")
+	_ENV.tenantText:setText(storage.occupier.name or "")
+	_ENV.lockedDeed:setChecked(storage.locked or false)
+	_ENV.hiddenDeed:setChecked(storage.hidden or false)
 end
 
 function update()
@@ -84,7 +94,7 @@ local applyCount = 0
 function _ENV.summonTenant:onClick()
 	applyCount = applyCount + 1
 
-	if applyCount > 3 or _ENV.metagui.inputData.occupier == nil then
+	if applyCount > 3 or storage.occupier == nil then
 		world.sendEntityMessage(pane.sourceEntity(), "sbqSummonNewTenant", sbq.getGuardTier() or _ENV.tenantText.text)
 		pane.dismiss()
 	end
@@ -94,7 +104,7 @@ end
 function sbq.getGuardTier()
 	local remap = (sbq.tenantCatalogue[_ENV.tenantText.text])
 	if type(remap) == "table" then
-		local tags = _ENV.metagui.inputData.house.contents
+		local tags = storage.house.contents
 		local index = 1
 		if type(tags.tier2) == "number" and tags.tier2 >= 12 then
 			index = 2
@@ -114,7 +124,7 @@ end
 --------------------------------------------------------------------------------------------------
 
 function _ENV.orderFurniture:onClick()
-	local occupier = _ENV.metagui.inputData.occupier
+	local occupier = storage.occupier
 	local contextMenu = {}
 
 	if occupier.name then
@@ -179,7 +189,7 @@ function sbq.isValidTenantCard(item)
 		if sbq.query(item, {"parameters", "npcArgs", "npcParam", "wasPlayer"}) then return false end
 		local uuid = sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "uniqueId"})
 		if uuid then
-			for i, tenant in ipairs((_ENV.metagui.inputData.occupier or {}).tenants or {}) do
+			for i, tenant in ipairs((storage.occupier or {}).tenants or {}) do
 				if tenant.uniqueId == uuid then return false end
 			end
 		end
@@ -214,19 +224,26 @@ function sbq.insertTenant(slot)
 	tenant.overrides.scriptConfig.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
 	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
 	if world.getUniqueEntityId(tenant.uniqueId) then return pane.playSound("/sfx/interface/clickon_error.ogg") end
-	for _, v in pairs(sbq.occupier.tenants) do
+	for _, v in pairs(storage.occupier.tenants) do
 		if v.uniqueId == tenant.uniqueId then return pane.playSound("/sfx/interface/clickon_error.ogg") end
 	end
 	slot:setItem(nil, true)
-	table.insert(sbq.occupier.tenants, tenant)
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", sbq.occupier.tenants)
+	table.insert(storage.occupier.tenants, tenant)
+	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", storage.occupier.tenants)
 	sbq.refreshDeedPage()
 end
 
+local specialDeedTags = {
+	sbqVore = true,
+	sbqHouse = true,
+	sbqCamp = true,
+	sbqFriendly = true,
+	sbqEvil = true,
+}
 function sbq.refreshDeedPage()
 	_ENV.tenantListScrollArea:clearChildren()
 
-	for i, tenant in ipairs(sbq.occupier.tenants or {}) do
+	for i, tenant in ipairs(storage.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
 		local portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
 		local id = world.getUniqueEntityId(tenant.uniqueId)
@@ -252,8 +269,8 @@ function sbq.refreshDeedPage()
 			local item = sbq.generateNPCItemCard(tenant)
 			sb.logInfo("Removed Tenant:"..sb.printJson(tenant,2))
 			player.giveItem(item)
-			table.remove(_ENV.metagui.inputData.occupier.tenants, i)
-			world.sendEntityMessage(_ENV.metagui.inputData.respawner or pane.sourceEntity(), "sbqSaveTenants", _ENV.metagui.inputData.occupier.tenants)
+			table.remove(storage.occupier.tenants, i)
+			world.sendEntityMessage(storage.respawner or pane.sourceEntity(), "sbqSaveTenants", storage.occupier.tenants)
 			sbq.refreshDeedPage()
 		end
 		canvas:clear()
@@ -286,28 +303,52 @@ function sbq.refreshDeedPage()
 		else return true end
 	end
 
-	_ENV.orderFurniture:setVisible(sbq.occupier.orderFurniture ~= nil)
+	_ENV.orderFurniture:setVisible(storage.occupier.orderFurniture ~= nil)
 
-	_ENV.tenantText:setText(sbq.occupier.name or "")
-	local tags = _ENV.metagui.inputData.house.contents
+	_ENV.tenantText:setText(storage.occupier.name or "")
+	local tags = storage.house.contents
 	local listed = { sbqVore = true }
 	_ENV.requiredTagsScrollArea:clearChildren()
 	local colonyTagLabels = {}
-	for tag, value in pairs(sbq.occupier.tagCriteria or {}) do
-		if tag ~= "sbqVore" then
+	for tag, value in pairs(storage.occupier.tagCriteria or {}) do
+		local amount = tags[tag] or 0
+		if tag == "sbqHouse" then
+			table.insert(colonyTagLabels, { type = "label", text = (
+				((amount < value) and ("^red;") or ("^green;")).. sbq.getString(":requiresHouse")
+			) })
+		elseif tag == "sbqCamp" then
+			table.insert(colonyTagLabels, { type = "label", text = (
+				((amount < value) and ("^red;") or ("^green;")).. sbq.getString(":requiresCamp")
+			) })
+		elseif tag == "sbqFriendly" then
+			table.insert(colonyTagLabels, { type = "label", text = (
+				((amount < value) and ("^red;") or ("^green;")).. sbq.getString(":requiresFriendly")
+			) })
+		elseif tag == "sbqEvil" then
+			table.insert(colonyTagLabels, { type = "label", text = (
+				((amount < value) and ("^red;") or ("^green;")).. sbq.getString(":requiresEvil")
+			) })
+		elseif tag ~= "sbqVore" then
 			listed[tag] = true
-			local amount = tags[tag] or 0
-			local string = "^green;" .. tag .. ": " .. amount
-			if amount < value then
-				string = "^red;" .. tag .. ": " .. amount .. " ^yellow;"..sbq.strings.tagsNeeds..": " .. value
-			end
-			table.insert(colonyTagLabels, { type = "label", text = string })
+			table.insert(colonyTagLabels, { type = "label", text = (
+				(amount < value) and ("^red;" .. tag .. ": " .. amount .. " ^yellow;" .. (sbq.getString(":tagsNeeds")) .. ": " .. value)
+				or ("^green;" .. tag .. ": " .. amount)
+			) })
 		end
 	end
 	for tag, value in pairs(tags or {}) do
-		if not listed[tag] then
+		if not listed[tag] and not specialDeedTags[tag] then
 			table.insert(colonyTagLabels, { type = "label", text = tag .. ": " .. value })
 		end
 	end
 	_ENV.requiredTagsScrollArea:addChild({ type = "panel", style = "flat", children = colonyTagLabels })
+end
+
+--------------------------------------------------------------------------------------------------
+
+function _ENV.lockedDeed:onClick()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqLockDeed", self.checked, player.uniqueId())
+end
+function _ENV.hiddenDeed:onClick()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqHideDeed", self.checked)
 end

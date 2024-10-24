@@ -149,6 +149,30 @@ function init()
 			return
 		end
 	end)
+	message.setHandler("sbqHideDeed", function (_,_,hidden)
+		storage.hidden = hidden
+		animator.setGlobalTag("directives", storage.hidden and "?multiply=FFFFFF20" or "")
+	end)
+	message.setHandler("sbqLockDeed", function(_, _, locked, uuid)
+		local wasLocked = storage.locked
+		if storage.locked or storage.lockOwner then
+			if storage.lockOwner == uuid then
+				storage.locked = locked
+			end
+		else
+			storage.locked = locked
+			storage.lockOwner = uuid
+		end
+		if not storage.locked then
+			storage.lockOwner = nil
+		end
+		if wasLocked ~= storage.locked then
+			evictTenants()
+			respawnTenants()
+		end
+	end)
+
+	animator.setGlobalTag("directives", storage.hidden and "?multiply=FFFFFF20" or "")
 end
 
 function update(dt)
@@ -159,7 +183,9 @@ end
 
 function countTags(...)
 	local tags = old.countTags(...)
-	tags["sbqVore"] = 1
+	for _, v in ipairs(config.getParameter("sbqTags")) do
+		tags[v] = (tags[v] or 0) + 1
+	end
 	return tags
 end
 
@@ -430,15 +456,16 @@ function spawn(tenant, i)
 	local overrides = tenant.overrides
 
 	if not overrides.damageTeamType then
-		overrides.damageTeamType = "friendly"
+		overrides.damageTeamType = storage.damageTeamType or "friendly"
 	end
 	if not overrides.damageTeam then
-		overrides.damageTeam = 0
+		overrides.damageTeam = storage.damageTeam or 0
 	end
 	overrides.persistent = true
 
 	overrides.scriptConfig = overrides.scriptConfig or {}
 	overrides.scriptConfig.tenantIndex = i
+	overrides.podUuid = storage.lockOwner
 
 	local position = { self.position[1], self.position[2] }
 	for i, val in ipairs(self.positionVariance) do

@@ -1,6 +1,6 @@
 { //  -*- grammar-ext: json -*-
 	"style" : "window", // window (has titlebar), panel (just a frame) etc.
-	"size" : [256, 156], // *internal* size (not including chrome)
+	"size" : [256, 174], // *internal* size (not including chrome)
 	"title" : "SBQ Colony Deed",
 	"icon" : "/objects/sbq/sbqVoreColonyDeed/sbqVoreColonyDeedIcon.png",
 	"uniqueBy" : "path",
@@ -29,6 +29,21 @@
 			{ "type" : "textBox", "id" : "tenantText", "expandMode" : [1, 0] },
 			{ "type" : "iconButton", "id" : "incTenant", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" },
 			{ "type" : "button", "id" : "summonTenant", "caption" : ":summonTenant", "expandMode" : [0, 0], "toolTip" : ":summonTenantTip" }
-		]}
+		]},
+		[
+			{ "mode" : "h","expandMode" : [1, 0] },
+			{ "type" : "panel", "id" : "extra", "expandMode" : [0, 0], "style" : "convex", "children" : [
+				{ "mode" : "h","expandMode" : [0, 0] },
+				{"type":"checkBox", "id": "lockedDeed", "toolTip":":lockedDeedTip"},
+				{"type":"label", "text": ":lockedDeed", "inline":true}
+
+			]},
+			{ "type" : "panel", "id" : "extra", "expandMode" : [0, 0], "style" : "convex", "children" : [
+				{ "mode" : "h","expandMode" : [0, 0] },
+				{"type":"checkBox", "id": "hiddenDeed", "toolTip":":hiddenDeedTip"},
+				{"type":"label", "text": ":hiddenDeed", "inline":true}
+			]}
+		]
+
 	]
 }

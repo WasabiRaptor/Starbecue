@@ -20,7 +20,7 @@ function init()
 	npcSeed = config.getParameter("npcSeed")
 	scriptConfig = npcParameters.scriptConfig or {}
 	ownerUuid = scriptConfig.ownerUuid
-	recruitUuid = scriptConfig.recruitUuid
+	recruitUuid = scriptConfig.podUuid
 	uuid = scriptConfig.uniqueId
 	storage = config.getParameter("storage") or {}
 end

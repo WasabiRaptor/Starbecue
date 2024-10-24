@@ -1,7 +1,12 @@
+sbq = {}
+require("/scripts/any/SBQ_util.lua")
 
 function build(directory, config, parameters, level, seed)
-	parameters.saveTenants = nil -- clear the duplicate data saves in older versions
 
+	parameters.shortdescription = sbq.getString(config.shortdescription)
+	parameters.description = sbq.getString(config.description)
+
+	parameters.saveTenants = nil -- clear the duplicate data saves in older versions
 	if parameters.scriptStorage ~= nil then
 		local name = ((parameters.scriptStorage or {}).occupier or {}).partyName or (((((parameters.scriptStorage.occupier or {}).tenants or {})[1] or {}).overrides or {}).identity or {}).name
 		if name then
@@ -9,7 +14,7 @@ function build(directory, config, parameters, level, seed)
 			if name:sub(-1,-1) == "s" then
 				ownership = "'"
 			end
-			config.shortdescription = name..ownership.." Deed"
+			parameters.shortdescription = name..ownership..parameters.shortdescription
 		end
 	end
 

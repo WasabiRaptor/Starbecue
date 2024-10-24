@@ -400,6 +400,14 @@ A silly magic wand that traps people in eggs.
 ### Vore Colony Deed : sbqVoreColonyDeed
 Spawns SBQ's special vore NPCs, has a menu to select which NPC you want to summon, as well as inform you what colony tags they desire, often lets you order furniture with the relevant colony tags. NPCs can be inserted and removed from deeds as cards, Deeds will also accept items containing NPC data, such as the items NPCs might drop when digested.
 
+Can be locked so no other players (other than admins) can edit the NPCs it contains, as well a toggle to be nearly invisible.
+
+### Mini Vore Deed : sbqMiniVoreDeed
+Same as the Vore Colony Deed except it only occupies one tile.
+
+### Vore Campsite : sbqVoreCamp
+Similar to the Mini Vore Deed except it requires no background anchor, and doesn't require an enclosed space, however will only get tags from objects in a 15 block radius. Empty tiles along its region's border will contribute `door` and `open_air` tags.
+
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.
 - Remains: Acid Digest

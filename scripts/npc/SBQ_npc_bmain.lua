@@ -165,7 +165,7 @@ function sbq.tenant_setNpcType(npcType)
 				sbqUpgrades = storage.sbqUpgrades,
 				crew = config.getParameter("crew"),
 				ownerUuid = recruitable.ownerUuid(),
-				recruitUuid = recruitable.recruitUuid(),
+				podUuid = recruitable.recruitUuid(),
 				sbqConvertType = convertBackType,
 				personality = personality(),
 				initialStorage = preservedStorage(),

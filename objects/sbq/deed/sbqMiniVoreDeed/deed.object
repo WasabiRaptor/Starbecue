@@ -1,10 +1,10 @@
 {
-  "objectName" : "sbqVoreColonyDeed",
+  "objectName" : "sbqMiniVoreDeed",
   "colonyTags" : [],
   "sbqTags" : ["sbqVore","sbqHouse","sbqFriendly"],
   "rarity" : "Common",
-  "description" : ":deedDesc",
-  "shortdescription" : ":deedName",
+  "description" : ":miniDeedDesc",
+  "shortdescription" : ":miniDeedName",
   "race" : "generic",
   "printable" : false,
   "category" : "spawner",
@@ -17,10 +17,10 @@
     {
       "image" : "deed.png:vacated.1",
       "direction": "right",
-      "imagePosition" : [-8, -8],
-      "animationPosition" : [-8, -8],
+      "imagePosition" : [-1, -1],
+      "animationPosition" : [-1, -1],
 
-      "spaceScan" : 0.1,
+      "spaceScan" : 1,
       "anchors" : [ "background" ]
     }
   ],
