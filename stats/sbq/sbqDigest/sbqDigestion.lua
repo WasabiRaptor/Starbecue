@@ -23,27 +23,7 @@ end
 function update(dt)
 	sbq.checkRPCsFinished(dt)
 	if self.digested then
-		if not self.digestSent then
-			local item = config.getParameter("itemDrop")
-			sbq.addRPC(world.sendEntityMessage(entity.id(), "sbqGetCard"), function(card)
-				card.name = item
-				item = card
-			end)
-			self.digestSent = true
-			sbq.addRPC(world.sendEntityMessage(
-				effect.sourceEntity(),
-				"sbqQueueAction",
-				config.getParameter("digestedAction") or "digested",
-				entity.id(),
-				(item ~= nil) and (((type(item) == "table") and item) or {name = item, parameters = {}}),
-				config.getParameter("digestType"),
-				status.statPositive("sbq_"..config.getParameter("digestType").."DropsAllow")
-			), function (recieved)
-				if not recieved then self.digestSent = false end
-			end, function ()
-				self.digestSent = false
-			end)
-		end
+		sendDigest()
 	else
 		local health = status.resource("health")
 		local digestAmount = (self.digestRate * dt * status.stat(self.resistance) * status.stat("sbqDigestingPower"))
@@ -57,6 +37,12 @@ function update(dt)
 			self.digested = true
 			digestAmount = health - 1
 			if digestAmount <= 0 then return end
+			sendDigest()
+			effect.addStatModifierGroup({
+				{ stat = "healingStatusImmunity", amount = 999 },
+				{ stat = "healthRegen", effectiveMultiplier = 0},
+				{ stat = "energyRegenPercentageRate", effectiveMultiplier = 0}
+			})
 		end
 		if digestAmount >= math.max(1, status.stat("sbqDigestTick")) then
 			self.turboDigest = self.turboDigest - digestAmount
@@ -81,11 +67,36 @@ function update(dt)
 end
 
 function onExpire()
+	if self.digested then sendDigest() end
 	if (config.getParameter("fatal") and self.digested) and not status.statPositive("sbq_"..(config.getParameter("digestType") or "acidDigest").."FatalImmune") then
 		local entityType = world.entityType(entity.id())
 		if entityType == "npc" or entityType == "monster" then
 			world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
 		end
 		status.modifyResourcePercentage("health", -2)
+	end
+end
+
+function sendDigest()
+	if not self.digestSent then
+		local item = config.getParameter("itemDrop")
+		sbq.addRPC(world.sendEntityMessage(entity.id(), "sbqGetCard"), function(card)
+			card.name = item
+			item = card
+		end)
+		self.digestSent = true
+		sbq.addRPC(world.sendEntityMessage(
+			effect.sourceEntity(),
+			"sbqQueueAction",
+			config.getParameter("digestedAction") or "digested",
+			entity.id(),
+			(item ~= nil) and (((type(item) == "table") and item) or {name = item, parameters = {}}),
+			config.getParameter("digestType"),
+			status.statPositive("sbq_"..config.getParameter("digestType").."DropsAllow")
+		), function (recieved)
+			if not recieved then self.digestSent = false end
+		end, function ()
+			self.digestSent = false
+		end)
 	end
 end

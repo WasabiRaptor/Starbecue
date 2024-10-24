@@ -454,15 +454,16 @@ end
 
 function default:digested(name, action, target, item, digestType, drop, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false, "missingOccupant" end
-	local location = occupant:getLocation()
-	occupant.flags.digested = true
-	occupant.flags.digestedLocation = occupant.location
-	occupant.flags.digestType = digestType
-	occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
-	occupant.size = action.size or location.digestedSize or 0
-	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
-	location:markSizeDirty()
+	if occupant then
+		local location = occupant:getLocation()
+		occupant.flags.digested = true
+		occupant.flags.digestedLocation = occupant.location
+		occupant.flags.digestType = digestType
+		occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
+		occupant.size = action.size or location.digestedSize or 0
+		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
+		location:markSizeDirty()
+	end
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
 	return true, function()
 		local position = occupant:position()
@@ -477,6 +478,8 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 			if item.name and sbq.settings[digestType.."Drops"] and drop then
 				world.spawnItem(item, position)
 			end
+			-- we can drop condoms and milk for monsters, but if we don't have NPC data theres no reason to preserve it
+			if not item.parameters.npcArgs then return end
 			item.name = "sbqNPCEssenceJar"
 			if not storage.sbqSettings.recentlyDigested[1] then
 				storage.sbqSettings.recentlyDigested = _ENV.jarray()
