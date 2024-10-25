@@ -564,9 +564,10 @@ function setDeedDamageTeam(source, type, team)
 		end
 	end
 end
-function isSBQDeed()
-	return true
+function isLinkedSBQDeed()
+	return storage.linkTeams
 end
+
 function setOutput()
 	local tenantsAlive = false
 	for _, tenant in ipairs(storage.occupier.tenants) do
@@ -592,7 +593,7 @@ function onInputNodeChange(args)
 	local newConnection = object.getInputNodeIds(0)[1]
 	if newConnection ~= storage.connection then
 		storage.connection = newConnection
-		storage.isTeamBoss = newConnection and world.entityExists(newConnection) and (not world.callScriptedEntity(newConnection, isSBQDeed()))
+		storage.isTeamBoss = newConnection and world.entityExists(newConnection) and (not world.callScriptedEntity(newConnection, "isLinkedSBQDeed"))
 		if storage.linkTeams and ((not object.isInputNodeConnected(0)) or storage.isTeamBoss) then
 			setDeedDamageTeam(newConnection, storage.damageTeam, sb.randu32())
 		end
