@@ -42,7 +42,14 @@ function init()
 		end)
 	end
 
+	storage.linkTeams = config.getParameter("linkTeams")
+    storage.damageTeamType = storage.damageTeamType or config.getParameter("damageTeamType")
+	if storage.linkTeams then
+		storage.damageTeam = storage.damageTeam or sb.randu32()
+	end
+
 	old.init()
+	onInputNodeChange()
 
 	message.setHandler("sbqParentSetSetting", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
@@ -185,6 +192,9 @@ function countTags(...)
 	local tags = old.countTags(...)
 	for _, v in ipairs(config.getParameter("sbqTags")) do
 		tags[v] = (tags[v] or 0) + 1
+	end
+	if storage.linkTeams and storage.isTeamBoss then
+		tags.sbqBoss = 1
 	end
 	return tags
 end
@@ -423,9 +433,10 @@ function scanVacantArea()
 end
 
 function respawnTenants()
-	if not storage.occupier then
-		return
-	end
+	if not storage.occupier then return end
+	-- if wired, don't respawn tenants when not powered
+	if object.isInputNodeConnected(0) and not object.getInputNodeLevel(0) then return end
+
 	for i, tenant in ipairs(storage.occupier.tenants) do
 		local doSpawn = false
 		if tenant.uniqueId then
@@ -525,6 +536,67 @@ function die()
 	old.die()
 	-- Dropped deed is empty
 	-- storage = {}
+end
+
+function setDeedDamageTeam(source, type, team)
+	storage.damageTeamType = type
+	storage.damageTeam = team
+
+	for _, tenant in ipairs(storage.occupier.tenants) do
+		if tenant.uniqueId then
+			local entityId = world.loadUniqueEntity(tenant.uniqueId)
+			if entityId then
+				world.callScriptedEntity(entityId, world.entityType(entityId) .. ".setDamageTeam", {
+					type = storage.damageTeamType,
+					team = storage.damageTeam,
+				})
+			end
+		end
+	end
+	for _, v in ipairs(object.getOutputNodeIds(0)) do
+		if v ~= source then
+			world.callScriptedEntity(v, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
+        end
+	end
+	for _, v in ipairs(object.getInputNodeIds(0)) do
+		if v ~= source then
+			world.callScriptedEntity(v, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
+		end
+	end
+end
+function isSBQDeed()
+	return true
+end
+function setOutput()
+	local tenantsAlive = false
+	for _, tenant in ipairs(storage.occupier.tenants) do
+		if tenant.uniqueId then
+			if world.loadUniqueEntity(tenant.uniqueId) then
+				tenantsAlive = true
+				break
+			end
+		end
+	end
+	object.setOutputNodeLevel(0, ((not object.isInputNodeConnected(0)) or object.getInputNodeLevel(0)) and tenantsAlive)
+end
+
+function onNodeConnectionChange()
+	if storage.linkTeams then
+		for _, v in ipairs(object.getOutputNodeIds(0)) do
+			world.callScriptedEntity(v, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
+		end
+	end
+end
+function onInputNodeChange(args)
+	setOutput()
+	local newConnection = object.getInputNodeIds(0)[1]
+	if newConnection ~= storage.connection then
+		storage.connection = newConnection
+		storage.isTeamBoss = newConnection and world.entityExists(newConnection) and (not world.callScriptedEntity(newConnection, isSBQDeed()))
+		if storage.linkTeams and ((not object.isInputNodeConnected(0)) or storage.isTeamBoss) then
+			setDeedDamageTeam(newConnection, storage.damageTeam, sb.randu32())
+		end
+	end
 end
 
 require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"

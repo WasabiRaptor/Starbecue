@@ -99,9 +99,13 @@ Open the `Starbound` directory by viewing its properties on steam, and clicking 
 
 delete `starbecue.pak` in the `mods` folder
 
-IF you are playing with other players who have the same modified executable, but simply do not wish to have SBQ content, you can stop here
+If you are playing with other players who have the same SBQ executable, but simply do not wish to have SBQ content, you can stop here, following steps are for true full uninstall.
 
-return to the `Installed Files` tab and select `Verify integrity of game files`
+delete `SBQ_engine_assets.pak` in the `mods` folder
+
+return to the `Installed Files` tab in steam and select `Verify integrity of game files`
+
+
 
 Steam will then re-download the unmodified versions of the game executable
 

@@ -239,6 +239,7 @@ local specialDeedTags = {
 	sbqCamp = true,
 	sbqFriendly = true,
 	sbqEvil = true,
+	sbqBoss = true
 }
 function sbq.refreshDeedPage()
 	_ENV.tenantListScrollArea:clearChildren()
@@ -327,6 +328,10 @@ function sbq.refreshDeedPage()
 		elseif tag == "sbqEvil" then
 			table.insert(colonyTagLabels, { type = "label", text = (
 				((amount < value) and ("^red;") or ("^green;")).. sbq.getString(":requiresEvil")
+			) })
+		elseif tag == "sbqBoss" then
+			table.insert(colonyTagLabels, { type = "label", text = (
+				((amount < value) and ("^red;") or ("^green;")).. sbq.getString(":requiresBoss")
 			) })
 		elseif tag ~= "sbqVore" then
 			listed[tag] = true
