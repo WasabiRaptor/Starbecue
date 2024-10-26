@@ -63,6 +63,11 @@ function sbq.populateCatalogueList(name, tenantName)
 			if not root.assetExists(path) then return end
 		end
 	end
+	if storage.evil and (tenantConfig.colonyTagCriteria.sbqFriendly) then
+		return
+	elseif (not storage.evil) and (tenantConfig.colonyTagCriteria.sbqEvil) then
+		return
+	end
 
 	table.insert(sbq.validTenantCatalogueList, name)
 end
@@ -214,18 +219,39 @@ function sbq.insertTenant(slot)
 		spawn = item.parameters.npcArgs.npcSpawn or "npc"
 	}
 	local npcConfig = root.npcConfig(tenant.type)
-	if not npcConfig then return pane.playSound("/sfx/interface/clickon_error.ogg") end
-	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
-	if overrideConfig.scriptConfig[storage.deedConvertKey] then
-		tenant.type = overrideConfig.scriptConfig[storage.deedConvertKey]
-		npcConfig = root.npcConfig(tenant.type)
-		overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
+	if not npcConfig then
+		sbq.playErrorSound()
+		player.queueUIMessage(sbq.getString(":invalidNPC"))
+		return
 	end
+	local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"
+	if npcConfig.scriptConfig[deedConvertKey] then
+		tenant.type = npcConfig.scriptConfig[deedConvertKey]
+		npcConfig = root.npcConfig(tenant.type)
+	end
+	if storage.evil and npcConfig.scriptConfig.requiresFriendly then
+		sbq.playErrorSound()
+		player.queueUIMessage(sbq.getString(":requiresFriendly"))
+		return
+	elseif (not storage.evil) and npcConfig.scriptConfig.requiresEvil then
+		sbq.playErrorSound()
+		player.queueUIMessage(sbq.getString(":requiresEvil"))
+		return
+	end
+	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
 	tenant.overrides.scriptConfig.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
 	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
-	if world.getUniqueEntityId(tenant.uniqueId) then return pane.playSound("/sfx/interface/clickon_error.ogg") end
+	if world.getUniqueEntityId(tenant.uniqueId) then
+		sbq.playErrorSound()
+		player.queueUIMessage(sbq.getString(":npcAlreadyExists"))
+		return
+	end
 	for _, v in pairs(storage.occupier.tenants) do
-		if v.uniqueId == tenant.uniqueId then return pane.playSound("/sfx/interface/clickon_error.ogg") end
+		if v.uniqueId == tenant.uniqueId then
+			sbq.playErrorSound()
+			player.queueUIMessage(sbq.getString(":npcAlreadyExists"))
+			return
+		end
 	end
 	slot:setItem(nil, true)
 	table.insert(storage.occupier.tenants, tenant)

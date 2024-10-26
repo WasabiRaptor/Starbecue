@@ -42,7 +42,7 @@ function init()
 		end)
 	end
 
-	storage.deedConvertKey = config.getParameter("deedConvertKey")
+	storage.evil = config.getParameter("evil")
 	storage.linkTeams = config.getParameter("linkTeams")
 	storage.damageTeamType = storage.damageTeamType or config.getParameter("damageTeamType")
 	if storage.linkTeams then
@@ -108,6 +108,12 @@ function init()
 		if not newTenant then return animator.playSound("error") end
 		local success, occupier = pcall(root.tenantConfig,(newTenant))
 		if not success then return animator.playSound("error") end
+
+		if storage.evil and (occupier.colonyTagCriteria.sbqFriendly) then
+			return animator.playSound("error")
+		elseif (not storage.evil) and (occupier.colonyTagCriteria.sbqEvil) then
+			return animator.playSound("error")
+		end
 
 		if checkExistingUniqueIds(occupier) then return animator.playSound("error") end
 		evictTenants()
@@ -279,8 +285,9 @@ function setTenantsData(occupier)
 			tenant.species = tenant.species[math.random(#tenant.species)]
 		end
 		local npcConfig = root.npcConfig(tenant.type)
-		if npcConfig.scriptConfig[storage.deedConvertKey] then
-			tenant.type = npcConfig.scriptConfig[storage.deedConvertKey]
+		local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"
+		if npcConfig.scriptConfig[deedConvertKey] then
+			tenant.type = npcConfig.scriptConfig[deedConvertKey]
 			npcConfig = root.npcConfig(tenant.type)
 		end
 		local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides or {})
