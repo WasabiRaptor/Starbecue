@@ -42,8 +42,9 @@ function init()
 		end)
 	end
 
+	storage.deedConvertKey = config.getParameter("deedConvertKey")
 	storage.linkTeams = config.getParameter("linkTeams")
-    storage.damageTeamType = storage.damageTeamType or config.getParameter("damageTeamType")
+	storage.damageTeamType = storage.damageTeamType or config.getParameter("damageTeamType")
 	if storage.linkTeams then
 		storage.damageTeam = storage.damageTeam or sb.randu32()
 	end
@@ -278,6 +279,10 @@ function setTenantsData(occupier)
 			tenant.species = tenant.species[math.random(#tenant.species)]
 		end
 		local npcConfig = root.npcConfig(tenant.type)
+		if npcConfig.scriptConfig[storage.deedConvertKey] then
+			tenant.type = npcConfig.scriptConfig[storage.deedConvertKey]
+			npcConfig = root.npcConfig(tenant.type)
+		end
 		local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides or {})
 		tenant.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
 		tenant.overrides = tenant.overrides or {}

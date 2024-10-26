@@ -216,8 +216,8 @@ function sbq.insertTenant(slot)
 	local npcConfig = root.npcConfig(tenant.type)
 	if not npcConfig then return pane.playSound("/sfx/interface/clickon_error.ogg") end
 	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
-	if overrideConfig.scriptConfig.sbqDeedConvertType then
-		tenant.type = overrideConfig.scriptConfig.sbqDeedConvertType
+	if overrideConfig.scriptConfig[storage.deedConvertKey] then
+		tenant.type = overrideConfig.scriptConfig[storage.deedConvertKey]
 		npcConfig = root.npcConfig(tenant.type)
 		overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
 	end
