@@ -46,11 +46,11 @@ function init()
 	storage.linkTeams = config.getParameter("linkTeams")
 	storage.damageTeamType = storage.damageTeamType or config.getParameter("damageTeamType")
 	if storage.linkTeams then
-		storage.damageTeam = storage.damageTeam or sb.randu32()
+		storage.damageTeam = storage.damageTeam or math.random(10,65535)
 	end
 
 	old.init()
-	onInputNodeChange()
+	onNodeConnectionChange()
 
 	message.setHandler("sbqParentSetSetting", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
@@ -87,7 +87,9 @@ function init()
 		for _, tenant in ipairs(storage.occupier.tenants) do
 			if tenant.uniqueId and not uniqueTenants[tenant.uniqueId] then
 				local entityId = world.loadUniqueEntity(tenant.uniqueId)
-				if entityId then world.callScriptedEntity(entityId, "tenant.evictTenant") end
+				if entityId and world.entityExists(entityId) then
+					world.callScriptedEntity(entityId, "tenant.evictTenant")
+				end
 			end
 		end
 		storage.occupier.tenants = tenants
@@ -193,6 +195,10 @@ function update(dt)
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
 	old.update(dt)
+
+	if sbq.timer("checkOutput", 1) then
+		setOutput()
+	end
 end
 
 function countTags(...)
@@ -478,12 +484,9 @@ function spawn(tenant, i)
 	tenant.overrides = tenant.overrides or {}
 	local overrides = tenant.overrides
 
-	if not overrides.damageTeamType then
-		overrides.damageTeamType = storage.damageTeamType or "friendly"
-	end
-	if not overrides.damageTeam then
-		overrides.damageTeam = storage.damageTeam or 0
-	end
+	overrides.damageTeamType = storage.damageTeamType or "friendly"
+	overrides.damageTeam = storage.damageTeam or 0
+
 	overrides.persistent = true
 
 	overrides.scriptConfig = overrides.scriptConfig or {}
@@ -551,28 +554,32 @@ function die()
 end
 
 function setDeedDamageTeam(source, type, team)
-	storage.damageTeamType = type
-	storage.damageTeam = team
-
-	for _, tenant in ipairs(storage.occupier.tenants) do
-		if tenant.uniqueId then
-			local entityId = world.loadUniqueEntity(tenant.uniqueId)
-			if entityId then
-				world.callScriptedEntity(entityId, world.entityType(entityId) .. ".setDamageTeam", {
-					type = storage.damageTeamType,
-					team = storage.damageTeam,
-				})
+	if storage.linkTeams then
+		sb.logInfo(("%s %s %s"):format(source, type, team))
+		storage.damageTeamType = type
+		storage.damageTeam = team
+		for _, tenant in ipairs((storage.occupier or {}).tenants or {}) do
+			if tenant.uniqueId then
+				local entityId = world.loadUniqueEntity(tenant.uniqueId)
+				if entityId and world.entityExists(entityId) then
+					world.callScriptedEntity(entityId, world.entityType(entityId) .. ".setDamageTeam", {
+						type = storage.damageTeamType,
+						team = storage.damageTeam,
+					})
+				end
 			end
 		end
-	end
-	for _, v in ipairs(object.getOutputNodeIds(0)) do
-		if v ~= source then
-			world.callScriptedEntity(v, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
-        end
-	end
-	for _, v in ipairs(object.getInputNodeIds(0)) do
-		if v ~= source then
-			world.callScriptedEntity(v, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
+		for _, v in ipairs(object.getOutputNodeConnections(0)) do
+			local id, connection = table.unpack(v)
+			if id ~= source then
+				world.callScriptedEntity(id, "setDeedDamageTeam", entity.id(), type, team)
+			end
+		end
+		for _, v in ipairs(object.getInputNodeConnections(0)) do
+			local id, connection = table.unpack(v)
+			if id ~= source then
+				world.callScriptedEntity(id, "setDeedDamageTeam", entity.id(), type, team)
+			end
 		end
 	end
 end
@@ -582,7 +589,7 @@ end
 
 function setOutput()
 	local tenantsAlive = false
-	for _, tenant in ipairs(storage.occupier.tenants) do
+	for _, tenant in ipairs((storage.occupier or {}).tenants or {}) do
 		if tenant.uniqueId then
 			if world.loadUniqueEntity(tenant.uniqueId) then
 				tenantsAlive = true
@@ -594,22 +601,31 @@ function setOutput()
 end
 
 function onNodeConnectionChange()
-	if storage.linkTeams then
-		for _, v in ipairs(object.getOutputNodeIds(0)) do
-			world.callScriptedEntity(v, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
+	local inputIds = object.getInputNodeConnections(0)
+	if #inputIds ~= storage.inputCount then
+		storage.inputCount = #inputIds
+		storage.isTeamBoss = true
+		for k, v in ipairs(inputIds) do
+			local id, connection = table.unpack(v)
+			storage.isTeamBoss = storage.isTeamBoss and not world.callScriptedEntity(id, "isLinkedSBQDeed")
+			if not storage.isTeamBoss then break end
+		end
+		if storage.isTeamBoss and storage.linkTeams then
+			setDeedDamageTeam(newConnection, storage.damageTeamType, math.random(10,65535))
 		end
 	end
+	local outputIds = object.getOutputNodeConnections(0)
+	if #outputIds ~= storage.outputCount then
+		storage.outputCount = #outputIds
+		for _, v in ipairs(outputIds) do
+			local id, connection = table.unpack(v)
+			world.callScriptedEntity(id, "setDeedDamageTeam", entity.id(), storage.damageTeamType, storage.damageTeam)
+		end
+	end
+	setOutput()
 end
 function onInputNodeChange(args)
 	setOutput()
-	local newConnection = object.getInputNodeIds(0)[1]
-	if newConnection ~= storage.connection then
-		storage.connection = newConnection
-		storage.isTeamBoss = newConnection and world.entityExists(newConnection) and (not world.callScriptedEntity(newConnection, "isLinkedSBQDeed"))
-		if storage.linkTeams and ((not object.isInputNodeConnected(0)) or storage.isTeamBoss) then
-			setDeedDamageTeam(newConnection, storage.damageTeam, sb.randu32())
-		end
-	end
 end
 
 require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"

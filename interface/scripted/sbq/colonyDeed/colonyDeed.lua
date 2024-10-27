@@ -19,11 +19,11 @@ function init()
 	end
 	table.sort(sbq.validTenantCatalogueList)
 	for i, v in ipairs(sbq.validTenantCatalogueList) do
-		if v == storage.occupier.name then
+		if v == (storage.occupier or {}).name then
 			sbq.tenantIndex = i
 		end
 	end
-	_ENV.tenantText:setText(storage.occupier.name or "")
+	_ENV.tenantText:setText((storage.occupier or {}).name or "")
 	_ENV.lockedDeed:setChecked(storage.locked or false)
 	_ENV.hiddenDeed:setChecked(storage.hidden or false)
 end
@@ -269,7 +269,7 @@ local specialDeedTags = {
 }
 function sbq.refreshDeedPage()
 	_ENV.tenantListScrollArea:clearChildren()
-
+	if not storage.occupier then return end
 	for i, tenant in ipairs(storage.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
 		local portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
