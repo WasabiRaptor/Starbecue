@@ -456,7 +456,7 @@ end
 
 function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
-		if Occupants.insertOccupant(newOccupant) then
+		if newOccupant.entityId and Occupants.insertOccupant(newOccupant) then
 			Occupants.queueHudRefresh = true
 			local occupant = Occupants.entityId[tostring(newOccupant.entityId)]
 			if occupant.flags.infuseType and occupant.flags.infused then
@@ -1370,7 +1370,7 @@ function Occupants.insertOccupant(newOccupant)
 	-- check if we already have them
 	if Occupants.entityId[tostring(newOccupant.entityId)] then
 		-- assume data being recieved is out of date and just use current
-		return true
+		return false
 	end
 
 	local seat
