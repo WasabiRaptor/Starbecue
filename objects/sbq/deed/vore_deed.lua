@@ -45,12 +45,8 @@ function init()
 	storage.evil = config.getParameter("evil")
 	storage.linkTeams = config.getParameter("linkTeams")
 	storage.damageTeamType = storage.damageTeamType or config.getParameter("damageTeamType")
-	if storage.linkTeams then
-		storage.damageTeam = storage.damageTeam or math.random(10,65535)
-	end
-
+	storage.damageTeam = storage.damageTeam or math.random(10,255)
 	old.init()
-	onNodeConnectionChange()
 
 	message.setHandler("sbqParentSetSetting", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
@@ -195,8 +191,7 @@ function update(dt)
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
 	old.update(dt)
-
-	if sbq.timer("checkOutput", 1) then
+	if sbq.timer("output", 1) then
 		setOutput()
 	end
 end
@@ -555,7 +550,6 @@ end
 
 function setDeedDamageTeam(source, type, team)
 	if storage.linkTeams then
-		sb.logInfo(("%s %s %s"):format(source, type, team))
 		storage.damageTeamType = type
 		storage.damageTeam = team
 		for _, tenant in ipairs((storage.occupier or {}).tenants or {}) do
@@ -590,11 +584,8 @@ end
 function setOutput()
 	local tenantsAlive = false
 	for _, tenant in ipairs((storage.occupier or {}).tenants or {}) do
-		if tenant.uniqueId then
-			if world.loadUniqueEntity(tenant.uniqueId) then
-				tenantsAlive = true
-				break
-			end
+		if tenant.uniqueId and world.findUniqueEntity(tenant.uniqueId):result() then
+			tenantsAlive = true
 		end
 	end
 	object.setOutputNodeLevel(0, ((not object.isInputNodeConnected(0)) or object.getInputNodeLevel(0)) and tenantsAlive)
@@ -605,13 +596,17 @@ function onNodeConnectionChange()
 	if #inputIds ~= storage.inputCount then
 		storage.inputCount = #inputIds
 		storage.isTeamBoss = true
+		storage.linkedDeed = nil
 		for k, v in ipairs(inputIds) do
 			local id, connection = table.unpack(v)
-			storage.isTeamBoss = storage.isTeamBoss and not world.callScriptedEntity(id, "isLinkedSBQDeed")
-			if not storage.isTeamBoss then break end
+			if world.callScriptedEntity(id, "isLinkedSBQDeed") then
+				storage.linkedDeed = id
+				storage.isTeamBoss = false
+				break
+			end
 		end
 		if storage.isTeamBoss and storage.linkTeams then
-			setDeedDamageTeam(newConnection, storage.damageTeamType, math.random(10,65535))
+			setDeedDamageTeam(storage.linkedDeed or entity.id(), storage.damageTeamType, math.random(10,255))
 		end
 	end
 	local outputIds = object.getOutputNodeConnections(0)
