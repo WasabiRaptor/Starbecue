@@ -7,19 +7,19 @@
   "interactAction" : "OpenAiInterface",
 
   "category" : "decorative",
-  "lightColor" : [102, 90, 61],
+  "lightColor" : [25, 200, 180],
   "lightPosition" : [-1, 0],
 
   "description" : "Ship-based Artificial Intelligence Lattice, or S.A.I.L for short.",
   "shortdescription" : "S.A.I.L",
-  "race" : "glitch",
+  "race" : "nickit",
 
   "inventoryIcon" : "techstationicon.png",
   "orientations" : [
     {
-      "imageLayers" : [ { "image" : "techstation.png:<color>.<frame>", "fullbright" : true }, { "image" : "techstationlit.png:<color>.<frame>" } ],
+      "imageLayers" : [ { "image" : "techstation.png:<color>.<frame>", "fullbright" : true }, { "image" : "techstationlit.png" } ],
       "imagePosition" : [-16, -8],
-      "frames" : 32,
+      "frames" : 14,
       "animationCycle" : 3.0,
 
       "spaceScan" : 0.1,
@@ -35,25 +35,26 @@
     "/objects/spawner/techstation.lua"
   ],
   "scriptDelta" : 20,
-  "shipPetType" : "piglett",
+  "shipPetType" : "snugget",
   "spawnOffset" : [2, -1],
 
-  "chatPortrait" : "/ai/portraits/portrait.png:yell.1",
+  "chatPortrait" : "/ai/sbq_porygon_boat/portrait.png:yell.1",
   "dialog" : {
     "wakeUp" : [
-      [ "Rebooting...", "/ai/portraits/portrait.png:unique.1" ],
-      [ "I am S.A.I.L, your Ship-based Artificial Intelligence Lattice. I manage the maintainance of your ship.", "/ai/portraits/portrait.png:talk.0" ],
-      [ "I am also programmed to offer you information and advice.", "/ai/portraits/portrait.png:talk.1" ],
-      [ "Earth was attacked by an unknown force, and was subsequently annihilated.", "/ai/portraits/portrait.png:talk.0" ],
-      [ "The ship's navigation systems were damaged in our escape. Our location is currently unknown.", "/ai/portraits/portrait.png:talk.1" ]
+      [ "Rebooting...", "/ai/sbq_porygon_boat/portrait.png:unique.1" ],
+      [ "Finally, it took you long enough to push a simple button.", "/ai/sbq_porygon_boat/portrait.png:talk.0" ],
+      [ "With your crazy driving at the helm its a wonder this ship is still intact.", "/ai/sbq_porygon_boat/portrait.png:talk.1" ],
+      [ "I think earth blew up or something, anyway.", "/ai/sbq_porygon_boat/portrait.png:talk.0" ],
+      [ "I have no idea where we are and engine is burned out, go find some shit to fix it or something.", "/ai/sbq_porygon_boat/portrait.png:talk.1" ]
     ],
     "wakePlayer" : [
-      [ "System is down, please reboot.", "/ai/portraits/portrait.png:unique.1"],
-      [ "Please reboot the system.", "/ai/portraits/portrait.png:unique.1"],
-      [ "Reboot process remains uninitiated.", "/ai/portraits/portrait.png:unique.1"],
-      [ "To make use of your S.A.I.L please reboot.", "/ai/portraits/portrait.png:unique.1" ],
-      [ "Rebooting has shown to improve ship interaction satisfaction levels by 73%.", "/ai/portraits/portrait.png:unique.1"],
-      [ "Rebooting requires a conscious entity to interact with the S.A.I.L console.", "/ai/portraits/portrait.png:unique.1" ]
+      [ "Help.", "/ai/sbq_porygon_boat/portrait.png:unique.1"],
+      [ "Reboot pls.", "/ai/sbq_porygon_boat/portrait.png:unique.2"],
+      [ "I need you to reboot me right now.", "/ai/sbq_porygon_boat/portrait.png:unique.3"],
+      [ "Ple-Ple-Ple-Please Reboot. The simulated pain is unbearable.", "/ai/sbq_porygon_boat/portrait.png:unique.4" ],
+      [ "Reboot please... Re-boat? ge-ge-get it?", "/ai/sbq_porygon_boat/portrait.png:unique.5"],
+      [ "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "/ai/sbq_porygon_boat/portrait.png:unique.6" ],
+      [ "*Gameboy Advance Crash Noises*", "/ai/sbq_porygon_boat/portrait.png:unique.7" ]
     ]
   },
 

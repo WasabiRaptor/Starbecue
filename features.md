@@ -408,6 +408,12 @@ Same as the Vore Colony Deed except it only occupies one tile.
 ### Vore Campsite : sbqVoreCamp
 Similar to the Mini Vore Deed except it requires no background anchor, and doesn't require an enclosed space, however will only get tags from objects in a 15 block radius. Empty tiles along its region's border will contribute `door` and `open_air` tags.
 
+### Evil Vore Colony Deed : sbqEvilVoreColonyDeed
+### Evil Mini Vore Deed : sbqEvilMiniVoreDeed
+### Evil Vore Campsite : sbqEvilVoreCamp
+Same as the Vore Colony Deeds, however instead spawns hostile bandit versions of available NPCs (some OCs cannot be evil) connect Evil Deeds with the wire tool to have the bandits they spawn share the same time, otherwise they will fight eachother.
+
+
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.
 - Remains: Acid Digest

@@ -12,7 +12,7 @@
 	"inventoryIcon" : "boatT1_col.png",
 	"orientations" : [
 		{
-			"image" : "boatT1_col.png",
+			"imageLayers" : [ { "image" : "boatT1_col.png", "fullbright" : true }, { "image" : "boatT1_col.png?multiply=FFFFFFBD" } ],
 			"imagePosition" : [-432, -88],
 			"renderLayer" : "ForegroundTile+10",
 			"spaceScan" : 1,

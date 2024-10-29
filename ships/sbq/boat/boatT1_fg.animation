@@ -6,8 +6,17 @@
 		"parts": {
 			"boat": {
 				"properties": {
+					"zLevel": 0,
 					"centered": false,
+					"fullbright" : true,
 					"image" : "boatT1_fg.png<fg_fade>"
+				}
+			},
+			"boat_layer": {
+				"properties": {
+					"zLevel": 1,
+					"centered": false,
+					"image" : "boatT1_fg.png?multiply=FFFFFFBD;<fg_fade>"
 				}
 			}
 		}
