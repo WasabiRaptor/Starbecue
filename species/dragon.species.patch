@@ -3,8 +3,8 @@
 		{"op":"merge", "path":"", "value": {
 			"colorRemapGlobalTags" : {
 				"bellyColorRemap" : [
-					{"a94783":"d39c6c", "check" : {"navelVisible":true}},
-					{"a94783":"ffc181", "check" : {"navelVisible":false}},
+					{"00adba":"bc1002", "check" : {"navelVisible":true}},
+					{"00adba":"eb3629", "check" : {"navelVisible":false}},
 					["primary","primary"]
 				],
 				"cockColorRemap" : [
@@ -18,6 +18,7 @@
 				],
 				"breastsColorRemap" : [
 					["primary","primary"],
+					["primary_180","primary"],
 					["flesh","flesh", {"nipplesVisible":true}],
 					["flesh","primary", {"nipplesVisible":false}]
 				]
@@ -54,7 +55,7 @@
 			],
 			"animationCustom" : [
 				"/humanoid/any/humanoidPred.animation",
-				"/humanoid/any/voreOccupants.animation",
+				"/humanoid/any/voreOccupants.animation"
 			],
 
 			"infuseData" : [
@@ -69,9 +70,9 @@
 		{"op":"merge", "path":"", "value": {
 			"colorRemapGlobalTags" : {
 				"bellyColorRemap" : [
-					{"a94783":"d39c6c", "check" : {"navelVisible":true}},
-					{"a94783":"ffc181", "check" : {"navelVisible":false}},
-					["hair","hair"]
+					{"00adba":"7d0a01", "check" : {"navelVisible":true}},
+					{"00adba":"eb3629", "check" : {"navelVisible":false}},
+					["primary","hair"]
 				],
 				"cockColorRemap" : [
 					["primary","flesh"]
@@ -84,6 +85,7 @@
 				],
 				"breastsColorRemap" : [
 					["primary","hair"],
+					["primary_180","hair"],
 					["flesh","flesh", {"nipplesVisible":true}],
 					["flesh","hair", {"nipplesVisible":false}]
 				]
@@ -104,12 +106,6 @@
 					["flesh","secondary", {"nipplesVisible":false}]
 				]
 			},
-			"baseColorMap" : {
-				"primary" : ["c7815b", "d39c6c", "ffc181", "ffe2c5"],
-				"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
-				"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
-				"flesh" : ["702c55", "8b3c6c", "a94783"]
-			},
 			"voreConfig" : [
 				"/humanoid/any/vore.config",
 				{
@@ -125,7 +121,7 @@
 					// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
 
 					// self explainitory
-					"bellyImage" : "/humanoid/any/sbqVoreParts/scaly/belly.png",
+					"bellyImage" : "/humanoid/any/sbqVoreParts/scaly/belly.png"
 					// "cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
 					// "balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
 					// "balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
@@ -134,10 +130,6 @@
 					// "breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
 					// "pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
 				}}
-			],
-
-			"infuseData" : [
-				"/humanoid/any/basicInfuseData.config"
 			]
 		}}
 	]

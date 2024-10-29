@@ -1,8 +1,8 @@
 [{"op":"merge", "path":"", "value": {
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"d39c6c", "check" : {"navelVisible":true}},
-				{"a94783":"ffc181", "check" : {"navelVisible":false}},
+				{"00adba":"bc1002", "check" : {"navelVisible":true}},
+				{"00adba":"eb3629", "check" : {"navelVisible":false}},
 				["primary","secondary"]
 			],
 		"cockColorRemap" : [
@@ -15,7 +15,8 @@
 				["primary","tertiary"]
 			],
 		"breastsColorRemap" : [
-				["primary","secondary"],
+				["primary","primary"],
+				["primary_180","primary"],
 				["flesh","flesh", {"nipplesVisible":true}],
 				["flesh","secondary", {"nipplesVisible":false}]
 			]
@@ -37,7 +38,7 @@
 	],
 	"animationCustom" : [
 		"/humanoid/any/humanoidPred.animation",
-		"/humanoid/any/voreOccupants.animation",
+		"/humanoid/any/voreOccupants.animation"
 	],
 
 	"infuseData" : [

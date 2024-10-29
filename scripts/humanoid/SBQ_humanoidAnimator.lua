@@ -29,7 +29,7 @@ function initAnimator()
 end
 
 function sbq.refreshRemapTags()
-	local defaultColorMap = root.speciesConfig("human").baseColorMap
+	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
 	local speciesConfig = root.speciesConfig(humanoid.species())
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
 		local sourceColorMap = sbq.query(speciesConfig, {"colorRemapSources", tag})
@@ -121,7 +121,7 @@ end
 function sbq.remapColor(remaps, fromMap, toMap)
 	local directives = "?replace"
 	for _, remap in ipairs(remaps or {}) do
-		if remap[1] then
+		if remap[1] and remap[2] and toMap then
 			local from = fromMap[remap[1]]
 			local to = toMap[remap[2]]
 			local check = remap[3]
@@ -131,6 +131,13 @@ function sbq.remapColor(remaps, fromMap, toMap)
 					if (fromColor ~= toColor) then
 						directives = directives..";"..fromColor.."="..toColor
 					end
+				end
+			end
+		elseif remap[1] then
+			local from = fromMap[remap[1]]
+			if from then
+				for i, fromColor in ipairs(from) do
+					directives = directives..";"..fromColor.."=00000000" -- so colors can be removed
 				end
 			end
 		elseif sbq.tableMatches(remap.check, sbq.settings, true) then

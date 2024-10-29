@@ -1,32 +1,25 @@
 [{"op":"merge", "path":"", "value": {
-
-
-	// This is for the remap parts, if you do have a unique part, you can remove that part's entry in the table here
-	// if you are using a remap part, this is what detemines what color it uses, they are remapping from the human base colors to the base colors of your species
-	// the remap works like this a table like this {"a94783":"d39c6c"} recolors the hex codes directly defines in its table as from:to
-	// if a remap table is like this ["primary","primary"] it defers to the base colors names in the species file
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"ADEAED"}, // this one makes the navel match the belly shading color
-				// you are mainly going to only change the second entries in these tables to what the color should be on your character
-				// example, if in your character, when you were defining your base color map in the species file, your belly would be the "secondary" color then you would make this be ["primary","secondary"]
-				["primary","primary"]
-			],
+			{"00adba":"bc1002", "check" : {"navelVisible":true}},
+			{"00adba":"eb3629", "check" : {"navelVisible":false}},
+			["primary","primary"]
+		],
 		"cockColorRemap" : [
-				["primary","primary"]
-			],
+			["primary","primary"]
+		],
 		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
+			["flesh","flesh"]
+		],
 		"ballsColorRemap" : [
-				["primary","primary"]
-			],
-		// the nipples in the breasts are the "flesh" color in the human base map, if your character shouldn't have
-		// nipples visible, just change the second entry in the remap to something else such as ["flesh","primary"]
+			["primary","primary"]
+		],
 		"breastsColorRemap" : [
-				["primary","primary"],
-				["flesh","flesh"]
-			]
+			["primary","primary"],
+			["primary_180","primary"],
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","secondary", {"nipplesVisible":false}]
+		]
 	},
 	"voreConfig" : [
 		"/humanoid/any/vore.config",
@@ -38,7 +31,7 @@
 	],
 	"animationCustom" : [
 		"/humanoid/any/humanoidPred.animation",
-		"/humanoid/any/voreOccupants.animation",
+		"/humanoid/any/voreOccupants.animation"
 	],
 
 	"infuseData" : [

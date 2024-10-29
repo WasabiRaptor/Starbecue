@@ -965,11 +965,11 @@ function _Location:setInfusionData()
 		globalTags = {},
 		partTags = {}
 	}
-	local defaultColorMap = root.speciesConfig("human").baseColorMap
+	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
 	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
 		local sourceColorMap = (infuseData.infuseColorRemapSources or {})[tag]
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
+		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 		animator.setGlobalTag(tag, directives)
 		tagsSet.globalTags[tag] = directives
 	end
@@ -978,7 +978,7 @@ function _Location:setInfusionData()
 		for tag, remaps in pairs(tags or {}) do
 			local sourceColorMap = ((infuseData.infuseColorRemapSources or {})[part] or {})[tag] or (infuseData.infuseColorRemapSources or {})[tag]
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap or defaultColorMap)
+			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 			animator.setPartTag(part, tag, directives)
 			tagsSet.partTags[part][tag] = directives
 		end

@@ -49,20 +49,20 @@
 
 		"bellyImage" : "belly.png",
 		"bellyColorRemap" : "",
-		"bellyInfusedColorRemap" : "",
+		"bellyInfusedColorRemap" : "?crop;0;0;0;0",
 		"bellyInfusedFade" : "",
 		"bellyInfusedDirectives" : "",
 
 		"cockImage" : "cock.png",
 		"cockColorRemap" : "",
-		"cockInfusedColorRemap" : "",
+		"cockInfusedColorRemap" : "?crop;0;0;0;0",
 		"cockInfusedFade" : "",
 		"cockInfusedDirectives" : "",
 
 		"balls_frontImage" : "balls/front.png",
 		"balls_backImage" : "balls/back.png",
 		"ballsColorRemap" : "",
-		"ballsInfusedColorRemap" : "",
+		"ballsInfusedColorRemap" : "?crop;0;0;0;0",
 		"ballsInfusedFade" : "",
 		"ballsInfusedDirectives" : "",
 
@@ -1530,7 +1530,7 @@
 			// 		"navelInteract" : [0.25,-1.25],
 			// 		"absorbInteract" : [-0.25,-1.25],
 			// 		"bodyFullbright" : true,
-			// 		"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyColorRemap><bodyDirectives><bellyInfusedFade>"
+			// 		"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyInfusedFade>"
 			// 	},
 			// 	"partStates": {
 			// 		"bellyState": {
@@ -1577,7 +1577,7 @@
 			// 		"anchorPart": "cock",
 			// 		"interact" : [0.5, -1.5],
 			// 		"bodyFullbright" : true,
-			// 		"processingDirectives" : "<cockInfusedColorRemap><cockInfusedDirectives><cockColorRemap><bodyDirectives><cockInfusedFade>"
+			// 		"processingDirectives" : "<cockInfusedColorRemap><cockInfusedDirectives><cockInfusedFade>"
 			// 	},
 			// 	"partStates": {
 			// 		"bodyState": {
@@ -1624,7 +1624,7 @@
 			// 		"zLevel": 0.111,
 			// 		"anchorPart": "balls_front",
 			// 		"bodyFullbright" : true,
-			// 		"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
+			// 		"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsInfusedFade>"
 			// 	},
 			// 	"partStates": {
 			// 		"balls_frontState": {
@@ -1672,7 +1672,7 @@
 			// 		"zLevel": 0.101,
 			// 		"anchorPart": "balls_back",
 			// 		"bodyFullbright" : true,
-			// 		"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsColorRemap><bodyDirectives><ballsInfusedFade>"
+			// 		"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsInfusedFade>"
 			// 	},
 			// 	"partStates": {
 			// 		"balls_backState": {

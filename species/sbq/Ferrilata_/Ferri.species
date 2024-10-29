@@ -169,12 +169,12 @@
 
 	// This is for the remap parts, if you do have a unique part, you can remove that part's entry in the table here
 	// if you are using a remap part, this is what detemines what color it uses, they are remapping from the human base colors to the base colors of your species
-	// the remap works like this a table like this {"a94783":"d39c6c"} recolors the hex codes directly defines in its table as from:to
+	// the remap works like this a table like this {"00adba":"bc1002"} recolors the hex codes directly defines in its table as from:to
 	// if a remap table is like this ["primary","primary"] it defers to the base colors names in the species file
 	"colorRemapGlobalTags" : {
 		"bellyColorRemap" : [
-				{"a94783":"d39c6c"}, // this one makes the navel match the belly shading color
-				//{"a94783":"ffc181"}, // this one makes the navel match the belly main color, therefore, no navel
+				{"00adba":"bc1002"}, // this one makes the navel match the belly shading color
+				//{"00adba":"eb3629"}, // this one makes the navel match the belly main color, therefore, no navel
 
 				// you are mainly going to only change the second entries in these tables to what the color should be on your character
 				// example, if in your character, when you were defining your base color map in the species file, your belly would be the "secondary" color then you would make this be ["primary","secondary"]
@@ -190,6 +190,7 @@
 		// nipples visible, just change the second entry in the remap to something else such as ["flesh","primary"]
 		"breastsColorRemap" : [
 				["primary","secondary"],
+				["primary_180","secondary"],
 				["flesh","flesh", {"nipplesVisible":true}],
 				["flesh","secondary", {"nipplesVisible":false}]
 			]
