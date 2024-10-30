@@ -6,40 +6,8 @@
 			"value" : [ 1.0, "sbqGardenFireplace" ]
 		}
 	],
-	[ // because patches are wonky this is all to ensure that if something else adds a dungeon to gardens it sill spawns
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [8, 8] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [9, 9] }
-	],
 	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [7, 7] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [8, 8] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [6, 6] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [7, 7] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [5, 5] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [6, 6] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [4, 4] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [5, 5] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [3, 3] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [4, 4] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [2, 2] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [3, 3] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [1, 1] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [2, 2] }
-	],
-	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [0, 0] },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange", "value" : [1, 1] }
+		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange/0", "value" : 1 },
+		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange/1", "value" : 1 }
 	]
 ]
