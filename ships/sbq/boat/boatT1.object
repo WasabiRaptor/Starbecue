@@ -22,11 +22,12 @@
 			"frames" : 28,
 			"animationCycle" : 2,
 			"imagePosition" : [-432, -80],
-			"spaces" : [[-45,7],[-41,0],[-4,68],[0,0],[34,14],[49,15]],
+			"spaces" : [[-45,7],[-41,0],[-4,68],[0,0],[34,14], [48,15], [49,15]],
 			"renderLayer" : "BackgroundTile-10",
 			"anchors" : [ ],
 			"direction" : "right",
-			"collision" : "platform"
+			"collision" : "platform",
+			"collisionSpaces" : [ [-4,68], [48,15], [49,15] ]
 		}
 	],
 	"scripts" : ["/scripts/object/SBQ_multi_object.lua"],
