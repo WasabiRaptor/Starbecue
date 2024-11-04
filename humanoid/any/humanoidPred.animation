@@ -24,16 +24,14 @@
 		"cockInfusedFade" : "",
 		"cockInfusedDirectives" : "",
 
-		"balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
-		"balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+		"ballsImagePath" : "/humanoid/any/sbqVoreParts/balls",
 		"ballsColorRemap" : "",
 		"ballsInfusedColorRemap" : "?crop;0;0;0;0",
 		"ballsInfusedFade" : "",
 		"ballsInfusedDirectives" : "",
 
 		"breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
-		"breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
-		"breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+		"breastsImagePath" : "/humanoid/any/sbqVoreParts/breasts",
 		"breastsColorRemap" : "",
 		"breastsInfusedColorRemap" : "?crop;0;0;0;0",
 		"breastsInfusedFade" : "",
@@ -57,19 +55,19 @@
 		"cockInterpolateSize" : "0",
 		"ballsSize" : "0",
 		"ballsInterpolateSize" : "0",
-		"balls_frontSize" : "0",
-		"balls_frontInterpolateSize" : "0",
-		"balls_backSize" : "0",
-		"balls_backInterpolateSize" : "0",
+		"balls_rightSize" : "0",
+		"balls_rightInterpolateSize" : "0",
+		"balls_leftSize" : "0",
+		"balls_leftInterpolateSize" : "0",
 		"bulgeSize" : "0",
 		"bulgeInterpolateSize" : "0",
 
 		"breastsSize" : "0",
 		"breastsInterpolateSize" : "0",
-		"breasts_frontSize" : "0",
-		"breasts_frontInterpolateSize" : "0",
-		"breasts_backSize" : "0",
-		"breasts_backInterpolateSize" : "0",
+		"breasts_rightSize" : "0",
+		"breasts_rightInterpolateSize" : "0",
+		"breasts_leftSize" : "0",
+		"breasts_leftInterpolateSize" : "0",
 
 		"tailSize" : "0",
 		"tailInterpolateSize" : "0"
@@ -90,61 +88,91 @@
 						"bellyOffset" : {},
 						"chestOffset" : {},
 						"tailOffset" : {},
-						"crotchOffset" : {}
+						"crotchOffset" : {},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"duck" : {"properties" : {
 						"bellyOffset" : {"translate" : [-0.25, 0.125]},
 						"chestOffset" : {"translate" : [0, 0.125]},
 						"tailOffset" : {"translate" : [-0.25, 0.25]},
-						"crotchOffset" : {"translate" : [-0.25, 0.25]}
+						"crotchOffset" : {"translate" : [-0.25, 0.25]},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"sit" : {"properties" : {
 						"bellyOffset" : {"translate" : [-0.125, 0]},
 						"chestOffset" : {"translate" : [-0.125, 0]},
 						"tailOffset" : {"translate" : [-0.125, 0]},
-						"crotchOffset" : {"translate" : [-0.125, 0]}
+						"crotchOffset" : {"translate" : [-0.125, 0]},
+						"globalTags" : {
+							"pose" : "sit"
+						}
 					}},
 					"lay" : {"properties" : {
 						"bellyOffset" : {},
 						"chestOffset" : {},
 						"tailOffset" : {},
-						"crotchOffset" : {}
+						"crotchOffset" : {},
+						"globalTags" : {
+							"pose" : "lay"
+						}
 					}},
 					"walk" : {"properties" : {
 						"bellyOffset" : {},
 						"chestOffset" : {},
 						"tailOffset" : {},
-						"crotchOffset" : {}
+						"crotchOffset" : {},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"run" : {"properties" : {
 						"bellyOffset" : {},
 						"chestOffset" : {},
 						"tailOffset" : {},
-						"crotchOffset" : {}
+						"crotchOffset" : {},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"jump" : {"properties" : {
 						"bellyOffset" : {},
 						"chestOffset" : {},
 						"tailOffset" : {},
-						"crotchOffset" : {}
+						"crotchOffset" : {},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"fall" : {"properties" : {
 						"bellyOffset" : {},
 						"chestOffset" : {},
 						"tailOffset" : {},
-						"crotchOffset" : {}
+						"crotchOffset" : {},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"swim" : {"properties" : {
 						"bellyOffset" : {"translate" : [-0.125, 0]},
 						"chestOffset" : {},
 						"tailOffset" : {"translate" : [-0.125, 0.125]},
-						"crotchOffset" : {"translate" : [-0.125, 0.125]}
+						"crotchOffset" : {"translate" : [-0.125, 0.125]},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}},
 					"swimIdle" : {"properties" : {
 						"bellyOffset" : {"translate" : [-0.125, 0]},
 						"chestOffset" : {},
 						"tailOffset" : {"translate" : [-0.125, 0.125]},
-						"crotchOffset" : {"translate" : [-0.125, 0.125]}
+						"crotchOffset" : {"translate" : [-0.125, 0.125]},
+						"globalTags" : {
+							"pose" : "stand"
+						}
 					}}
 				}
 			},
@@ -265,7 +293,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"balls_frontState" : {
+			"balls_rightState" : {
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
@@ -287,7 +315,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"balls_frontExpandState" : {
+			"balls_rightExpandState" : {
 				"priority" : 2,
 				"default": "ignore",
 				"states" : {
@@ -298,7 +326,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"balls_backState" : {
+			"balls_leftState" : {
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
@@ -320,7 +348,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"balls_backExpandState" : {
+			"balls_leftExpandState" : {
 				"priority" : 2,
 				"default": "ignore",
 				"states" : {
@@ -348,7 +376,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"breasts_frontState" : {
+			"breasts_rightState" : {
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
@@ -370,7 +398,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"breasts_frontExpandState" : {
+			"breasts_rightExpandState" : {
 				"priority" : 2,
 				"default": "ignore",
 				"states" : {
@@ -381,7 +409,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"breasts_backState" : {
+			"breasts_leftState" : {
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
@@ -403,7 +431,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"breasts_backExpandState" : {
+			"breasts_leftExpandState" : {
 				"priority" : 2,
 				"default": "ignore",
 				"states" : {
@@ -541,11 +569,12 @@
 					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "tailOffset"],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<tailColorRemap><bodyDirectives>"
+					"processingDirectives" : "<tailColorRemap><bodyDirectives>",
+					"offset" : [-1.3125,-1.0625]
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<pose>.<bodyStateFrame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
 						"run": "walk",
 						"jump": "walk",
@@ -557,15 +586,15 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-expand" } },
-						"eat" : "expand"
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailStateAnim>.<pose>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<pose>.<tailExpandStateFrame>" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -645,17 +674,18 @@
 					}
 				}
 			},
-			"balls_front" : {
+			"balls_right" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.11,
+					"flippedZLevel": 0.10,
 					"anchorPart": "cock",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsColorRemap><bodyDirectives>"
 				},
 				"partStates": {
-					"balls_frontState": {
-						"idle": { "properties": { "image": "<balls_frontImage>:<balls_frontSize>-<balls_frontStateAnim>.<balls_frontStateFrame>" } },
+					"balls_rightState": {
+						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightStateAnim>.<balls_rightStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -674,8 +704,8 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"balls_frontExpandState" : {
-						"expand": { "properties": { "image": "<balls_frontImage>:<balls_frontInterpolateSize>-expand" } },
+					"balls_rightExpandState" : {
+						"expand": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"bodyHiddenState" : {
@@ -693,17 +723,18 @@
 					}
 				}
 			},
-			"balls_back" : {
+			"balls_left" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.1,
+					"zLevel": 0.10,
+					"flippedZLevel": 0.11,
 					"anchorPart": "cock",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsColorRemap><bodyDirectives>"
 				},
 				"partStates": {
-					"balls_backState": {
-						"idle": { "properties": { "image": "<balls_backImage>:<balls_backSize>-<balls_backStateAnim>.<balls_backStateFrame>" } },
+					"balls_leftState": {
+						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftStateAnim>.<balls_leftStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -722,8 +753,8 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"balls_backExpandState" : {
-						"expand": { "properties": { "image": "<balls_backImage>:<balls_backInterpolateSize>-expand" } },
+					"balls_leftExpandState" : {
+						"expand": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"bodyHiddenState" : {
@@ -772,20 +803,27 @@
 					}
 				}
 			},
-			"breasts_front" : {
+			"breasts_right" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.6,
+					"flippedZLevel": 0.2,
 					"anchorPart": "breasts",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives>",
-					"0-particles" : [0.125,-0.5],
-					"0.5-particles" : [0,-0.5],
-					"1-particles" : [0.125,-0.625]
+
+					"0-particles_front" : [0.125,-0.5],
+					"0.5-particles_front" : [0,-0.5],
+					"1-particles_front" : [0.125,-0.625],
+
+					"0-particles_back" : [0.5,-0.5],
+					"0.5-particles_back" : [0.5,-0.5],
+					"1-particles_back" : [0.875,-0.625]
+
 				},
 				"partStates": {
-					"breasts_frontState": {
-						"idle": { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<breasts_frontStateAnim>.<breasts_frontStateFrame>" } },
+					"breasts_rightState": {
+						"idle": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<breasts_rightStateAnim>.<breasts_rightStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -804,17 +842,19 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"breasts_frontExpandState" : {
-						"expand": { "properties": { "image": "<breasts_frontImage>:<breasts_frontInterpolateSize>-expand" } },
+					"breasts_rightExpandState" : {
+						"expand": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
 						"squishBreasts" : {
-							"properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<rpActionStateAnim>.<rpActionStateFrame>" },
+							"properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<rpActionStateAnim>.<rpActionStateFrame>" },
 							"frameProperties" : {
-								"0.5-particles" : [[0.125,-0.375],[0.125,-0.375],[0.25,-0.375],[0.25,-0.375]],
-								"1-particles" : [[0.25,-0.5],[0.25,-0.5],[0.375,-0.5],[0.375,-0.5]]
+								"0.5-particles_front" : [[0.125,-0.375],[0.125,-0.375],[0.25,-0.375],[0.25,-0.375]],
+								"1-particles_front" : [[0.25,-0.5],[0.25,-0.5],[0.375,-0.5],[0.375,-0.5]],
 
+								"0.5-particles_back" : [[0.5,-0.375],[0.5,-0.375],[0.375,-0.375],[0.375,-0.375]],
+								"1-particles_back" : [[0.75,-0.5],[0.75,-0.5],[0.625,-0.5],[0.625,-0.5]]
 							}
 						}
 					},
@@ -833,20 +873,26 @@
 					}
 				}
 			},
-			"breasts_back" : {
+			"breasts_left" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.2,
+					"flippedZLevel": 0.6,
 					"anchorPart": "breasts",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives>",
-					"0-particles" : [0.5,-0.5],
-					"0.5-particles" : [0.5,-0.5],
-					"1-particles" : [0.875,-0.625]
+
+					"0-particles_front" : [0.125,-0.5],
+					"0.5-particles_front" : [0,-0.5],
+					"1-particles_front" : [0.125,-0.625],
+
+					"0-particles_back" : [0.5,-0.5],
+					"0.5-particles_back" : [0.5,-0.5],
+					"1-particles_back" : [0.875,-0.625]
 				},
 				"partStates": {
-					"breasts_backState": {
-						"idle": { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<breasts_backStateAnim>.<breasts_backStateFrame>" } },
+					"breasts_leftState": {
+						"idle": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<breasts_leftStateAnim>.<breasts_leftStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -865,16 +911,19 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"breasts_backExpandState" : {
-						"expand": { "properties": { "image": "<breasts_backImage>:<breasts_backInterpolateSize>-expand" } },
+					"breasts_leftExpandState" : {
+						"expand": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
 						"squishBreasts" : {
-							"properties": { "image": "<breasts_backImage>:<breasts_backSize>-<rpActionStateAnim>.<rpActionStateFrame>" },
+							"properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<rpActionStateAnim>.<rpActionStateFrame>" },
 							"frameProperties" : {
-								"0.5-particles" : [[0.5,-0.375],[0.5,-0.375],[0.375,-0.375],[0.375,-0.375]],
-								"1-particles" : [[0.75,-0.5],[0.75,-0.5],[0.625,-0.5],[0.625,-0.5]]
+								"0.5-particles_front" : [[0.125,-0.375],[0.125,-0.375],[0.25,-0.375],[0.25,-0.375]],
+								"1-particles_front" : [[0.25,-0.5],[0.25,-0.5],[0.375,-0.5],[0.375,-0.5]],
+
+								"0.5-particles_back" : [[0.5,-0.375],[0.5,-0.375],[0.375,-0.375],[0.375,-0.375]],
+								"1-particles_back" : [[0.75,-0.5],[0.75,-0.5],[0.625,-0.5],[0.625,-0.5]]
 							}
 						}
 					},
@@ -1003,7 +1052,7 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<pose>.<bodyStateFrame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
 						"run": "walk",
 						"jump": "walk",
@@ -1015,15 +1064,15 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-expand" } },
-						"eat" : "expand"
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailStateAnim>.<pose>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<pose>.<tailExpandStateFrame>" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -1089,17 +1138,18 @@
 					}
 				}
 			},
-			"balls_front_infused" : {
+			"balls_right_infused" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.111,
-					"anchorPart": "balls_front",
+					"flippedZLevel": 0.101,
+					"anchorPart": "balls_right",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsInfusedFade>"
 				},
 				"partStates": {
-					"balls_frontState": {
-						"idle": { "properties": { "image": "<balls_frontImage>:<balls_frontSize>-<balls_frontStateAnim>.<balls_frontStateFrame>" } },
+					"balls_rightState": {
+						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightStateAnim>.<balls_rightStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -1118,8 +1168,8 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"balls_frontExpandState" : {
-						"expand": { "properties": { "image": "<balls_frontImage>:<balls_frontInterpolateSize>-expand" } },
+					"balls_rightExpandState" : {
+						"expand": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"bodyHiddenState" : {
@@ -1137,17 +1187,18 @@
 					}
 				}
 			},
-			"balls_back_infused" : {
+			"balls_left_infused" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.101,
-					"anchorPart": "balls_back",
+					"flippedZLevel": 0.111,
+					"anchorPart": "balls_left",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsInfusedFade>"
 				},
 				"partStates": {
-					"balls_backState": {
-						"idle": { "properties": { "image": "<balls_backImage>:<balls_backSize>-<balls_backStateAnim>.<balls_backStateFrame>" } },
+					"balls_leftState": {
+						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftStateAnim>.<balls_leftStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -1166,8 +1217,8 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"balls_backExpandState" : {
-						"expand": { "properties": { "image": "<balls_backImage>:<balls_backInterpolateSize>-expand" } },
+					"balls_leftExpandState" : {
+						"expand": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"bodyHiddenState" : {
@@ -1215,17 +1266,18 @@
 					}
 				}
 			},
-			"breasts_front_infused" : {
+			"breasts_right_infused" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.601,
-					"anchorPart": "breasts_front",
+					"flippedZLevel": 0.201,
+					"anchorPart": "breasts_right",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsInfusedFade>"
 				},
 				"partStates": {
-					"breasts_frontState": {
-						"idle": { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<breasts_frontStateAnim>.<breasts_frontStateFrame>" } },
+					"breasts_rightState": {
+						"idle": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<breasts_rightStateAnim>.<breasts_rightStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -1244,12 +1296,12 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"breasts_frontExpandState" : {
-						"expand": { "properties": { "image": "<breasts_frontImage>:<breasts_frontInterpolateSize>-expand" } },
+					"breasts_rightExpandState" : {
+						"expand": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
-						"squishBreasts" : { "properties": { "image": "<breasts_frontImage>:<breasts_frontSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
+						"squishBreasts" : { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -1266,17 +1318,18 @@
 					}
 				}
 			},
-			"breasts_back_infused" : {
+			"breasts_left_infused" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 0.201,
-					"anchorPart": "breasts_back",
+					"flippedZLevel": 0.601,
+					"anchorPart": "breasts_left",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsInfusedFade>"
 				},
 				"partStates": {
-					"breasts_backState": {
-						"idle": { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<breasts_backStateAnim>.<breasts_backStateFrame>" } },
+					"breasts_leftState": {
+						"idle": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<breasts_leftStateAnim>.<breasts_leftStateFrame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -1295,12 +1348,12 @@
 						"s_down_release" : "idle",
 						"none": { "properties": {} }
 					},
-					"breasts_backExpandState" : {
-						"expand": { "properties": { "image": "<breasts_backImage>:<breasts_backInterpolateSize>-expand" } },
+					"breasts_leftExpandState" : {
+						"expand": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
-						"squishBreasts" : { "properties": { "image": "<breasts_backImage>:<breasts_backSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
+						"squishBreasts" : { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<rpActionStateAnim>.<rpActionStateFrame>" } }
 					},
 					"bodyHiddenState" : {
 						"none": { "properties": {} }
@@ -1674,8 +1727,8 @@
 		"crotchOffset": {"interpolated": false},
 		"tailOffset": {"interpolated": false},
 
-		"breasts_front_particles": {"interpolated": false},
-		"breasts_back_particles": {"interpolated": false},
+		"breasts_right_particles": {"interpolated": false},
+		"breasts_left_particles": {"interpolated": false},
 		"cock_particles": {"interpolated": false},
 		"pussy_particles": {"interpolated": false}
 	},
@@ -1687,14 +1740,14 @@
 		"slurp" : [ "/sfx/vore/common/slurp.ogg" ]
 	},
 	"particleEmitters": {
-		"breasts_front_leak" : {
+		"breasts_right_leak_1" : {
 			"emissionRate":1,
 			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
 			// so if they have the same value, they'll all be perfectly synced
 			"emissionRateVariance":0.25,
 			"active" : false,
-			"anchorPart" : "breasts_front",
-			"transformationGroups" : ["breasts_front_particles"],
+			"anchorPart" : "breasts_right",
+			"transformationGroups" : ["breasts_right_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -1717,12 +1770,12 @@
 				}
 			]
 		},
-		"breasts_back_leak" : {
+		"breasts_left_leak_1" : {
 			"emissionRate":1,
 			"emissionRateVariance":0.255,
 			"active" : false,
-			"anchorPart" : "breasts_back",
-			"transformationGroups" : ["breasts_back_particles"],
+			"anchorPart" : "breasts_left",
+			"transformationGroups" : ["breasts_left_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -1746,7 +1799,7 @@
 			]
 		},
 
-		"pussy_leak" : {
+		"pussy_leak_1" : {
 			"emissionRate":1,
 			"emissionRateVariance":0.15,
 			"active" : false,
@@ -1776,7 +1829,7 @@
 			]
 		},
 
-		"cock_leak" : {
+		"cock_leak_1" : {
 			"emissionRate":1,
 			"emissionRateVariance":0.3,
 			"active" : false,
@@ -1805,14 +1858,133 @@
 			]
 		},
 
-		"breasts_front_climax" : {
+		"breasts_right_leak_2" : {
+			"emissionRate":1.5,
+			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
+			// so if they have the same value, they'll all be perfectly synced
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "breasts_right",
+			"transformationGroups" : ["breasts_right_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0.25, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+		"breasts_left_leak_2" : {
+			"emissionRate":1.5,
+			"emissionRateVariance":0.255,
+			"active" : false,
+			"anchorPart" : "breasts_left",
+			"transformationGroups" : ["breasts_left_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0.25, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+		"pussy_leak_2" : {
+			"emissionRate":1.5,
+			"emissionRateVariance":0.15,
+			"active" : false,
+			"anchorPart" : "pussy",
+			"transformationGroups" : ["pussy_particles"],
+			"particles" : [
+				{
+					"offset" : [0.125,-1.375],
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 150],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+		"cock_leak_2" : {
+			"emissionRate":1.5,
+			"emissionRateVariance":0.3,
+			"active" : false,
+			"anchorPart" : "cock",
+			"transformationGroups" : ["cock_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 150],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [1, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+
+		"breasts_right_climax" : {
 			"emissionRate":1,
 			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
 			// so if they have the same value, they'll all be perfectly synced
 			"emissionRateVariance":0.25,
 			"active" : false,
-			"anchorPart" : "breasts_front",
-			"transformationGroups" : ["breasts_front_particles"],
+			"anchorPart" : "breasts_right",
+			"transformationGroups" : ["breasts_right_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -1876,12 +2048,12 @@
 				}
 			]
 		},
-		"breasts_back_climax" : {
+		"breasts_left_climax" : {
 			"emissionRate":1,
 			"emissionRateVariance":0.255,
 			"active" : false,
-			"anchorPart" : "breasts_back",
-			"transformationGroups" : ["breasts_back_particles"],
+			"anchorPart" : "breasts_left",
+			"transformationGroups" : ["breasts_left_particles"],
 			"particles" : [
 				{
 					"particle" : {

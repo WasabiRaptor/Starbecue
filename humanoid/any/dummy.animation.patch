@@ -75,22 +75,22 @@
 					"priority" : 4,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"balls_frontState" : {
+				"balls_rightState" : {
 					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"balls_frontExpandState" : {
+				"balls_rightExpandState" : {
 					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"balls_backState" : {
+				"balls_leftState" : {
 					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"balls_backExpandState" : {
+				"balls_leftExpandState" : {
 					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
@@ -106,22 +106,22 @@
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"breasts_frontState" : {
+				"breasts_rightState" : {
 					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"breasts_frontExpandState" : {
+				"breasts_rightExpandState" : {
 					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"breasts_backState" : {
+				"breasts_leftState" : {
 					"default":"none",
 					"priority" : 1,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
 				},
-				"breasts_backExpandState" : {
+				"breasts_leftExpandState" : {
 					"default":"none",
 					"priority" : 2,
 					"states" : {"none": { "frames": 0, "cycle": 0, "mode": "end" }}
@@ -329,12 +329,12 @@
 				"neck" : {},
 
 				"cock" : {},
-				"balls_front" : {},
-				"balls_back" : {},
+				"balls_right" : {},
+				"balls_left" : {},
 				"breasts" : {},
 
-				"breasts_front" : {},
-				"breasts_back" : {},
+				"breasts_right" : {},
+				"breasts_left" : {},
 
 				"pussy" : {},
 
@@ -342,12 +342,12 @@
 				"tail_infused" : {},
 
 				"cock_infused" : {},
-				"balls_front_infused" : {},
-				"balls_back_infused" : {},
+				"balls_right_infused" : {},
+				"balls_left_infused" : {},
 				"breasts_infused" : {},
 
-				"breasts_front_infused" : {},
-				"breasts_back_infused" : {},
+				"breasts_right_infused" : {},
+				"breasts_left_infused" : {},
 
 				"pussy_infused" : {},
 
@@ -405,8 +405,8 @@
 			"crotchOffset": {},
 			"tailOffset": {},
 
-			"breasts_front_particles": {},
-			"breasts_back_particles": {},
+			"breasts_right_particles": {},
+			"breasts_left_particles": {},
 			"cock_particles": {},
 			"pussy_particles": {},
 
@@ -443,13 +443,17 @@
 			"slurp" : []
 		},
 		"particleEmitters": {
-			"breasts_front_leak" : {},
-			"breasts_back_leak" : {},
-			"pussy_leak" : {},
-			"cock_leak" : {},
+			"breasts_right_leak_1" : {},
+			"breasts_left_leak_1" : {},
+			"pussy_leak_1" : {},
+			"cock_leak_1" : {},
+			"breasts_right_leak_2" : {},
+			"breasts_left_leak_2" : {},
+			"pussy_leak_2" : {},
+			"cock_leak_2" : {},
 
-			"breasts_front_climax" : {},
-			"breasts_back_climax" : {},
+			"breasts_right_climax" : {},
+			"breasts_left_climax" : {},
 			"pussy_climax" : {},
 			"cock_climax" : {}
 		}

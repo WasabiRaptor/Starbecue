@@ -1,0 +1,120 @@
+{
+	"animatedParts" : {
+		"parts" : {
+			"emote": {
+				"properties": {
+					"centered": true,
+					"zLevel": -1.1,
+					"anchorPart": "head",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<emoteDirectives>"
+				},
+				"partStates": {
+					"emoteState": {
+						"idle": { "properties": { "image": "<bodyImagePath>emote/emote.png:<emoteStateAnim>.<emoteStateFrame>" } },
+						"blabber": "idle",
+						"shout": "idle",
+						"happy": "idle",
+						"sad": "idle",
+						"neutral": "idle",
+						"laugh": "idle",
+						"annoyed": "idle",
+						"oh": "idle",
+						"oooh": "idle",
+						"blink": "idle",
+						"wink": "idle",
+						"eat": "idle",
+						"sleep": "idle",
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": { "image": "<bodyImagePath>emote/emote.png:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"bust" : "head"
+					}
+				}
+			},
+			"emote_bg": {
+				"properties": {
+					"centered": true,
+					"zLevel": -1.3,
+					"anchorPart": "head",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<emoteDirectives>"
+				},
+				"partStates": {
+					"emoteState": {
+						"idle": { "properties": { "image": "<bodyImagePath>emote/emote_bg.png:<emoteStateAnim>.<emoteStateFrame>" } },
+						"blabber": "idle",
+						"shout": "idle",
+						"happy": "idle",
+						"sad": "idle",
+						"neutral": "idle",
+						"laugh": "idle",
+						"annoyed": "idle",
+						"oh": "idle",
+						"oooh": "idle",
+						"blink": "idle",
+						"wink": "idle",
+						"eat": "idle",
+						"sleep": "idle",
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": { "image": "<bodyImagePath>emote/emote_bg.png:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"bust" : "head"
+					}
+				}
+			},
+			"emote_fg": {
+				"properties": {
+					"centered": true,
+					"zLevel": 2.8,
+					"anchorPart": "head",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<emoteDirectives>"
+				},
+				"partStates": {
+					"emoteState": {
+						"idle": { "properties": { "image": "<bodyImagePath>emote/emote_fg.png:<emoteStateAnim>.<emoteStateFrame>" } },
+						"blabber": "idle",
+						"shout": "idle",
+						"happy": "idle",
+						"sad": "idle",
+						"neutral": "idle",
+						"laugh": "idle",
+						"annoyed": "idle",
+						"oh": "idle",
+						"oooh": "idle",
+						"blink": "idle",
+						"wink": "idle",
+						"eat": "idle",
+						"sleep": "idle",
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": { "image": "<bodyImagePath>emote/emote_fg.png:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"bust" : "head"
+					}
+				}
+			}
+		}
+	}
+}

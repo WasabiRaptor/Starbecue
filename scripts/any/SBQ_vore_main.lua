@@ -907,10 +907,6 @@ function _SpeciesScript:addLocation(name, config)
 			interpolateFrom = 0,
 			interpolateTime = 0,
 		}
-		if (k == "<left>") or (k == "<right>") then
-			subLocation.occupancy.sided = true
-			subLocation.occupancy.flipped = animator.flipped()
-		end
 		subLocation.tag = name .. "_".. k
 		subLocation.subKey = k
 		location.occupancy.subLocations[k] = subLocation.occupancy
@@ -1135,35 +1131,18 @@ function _Location:updateOccupancy(dt)
 		)
 
 		if ((prevVisualSize ~= self.occupancy.visualSize) or (self.countBasedOccupancy and (prevCount ~= self.occupancy.count)))
-			and not (self.occupancy.sided and self.occupancy.symmetry)
+			and not (self.subKey and self.occupancy.symmetry)
 		then
 			self:doSizeChangeAnims(prevVisualSize, prevCount)
-			if (not self.subKey) and self.subLocations and self.occupancy.symmetry then
+			if self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
 					subLocation = SpeciesScript:getLocation(self.key, k)
-					if subLocation.occupancy.sided then
-						subLocation.occupancy.visualSize = self.occupancy.visualSize
-						subLocation:doSizeChangeAnims(prevVisualSize, prevCount)
-					end
+					subLocation.occupancy.visualSize = self.occupancy.visualSize
+					subLocation:doSizeChangeAnims(prevVisualSize, prevCount)
 				end
 			end
 		end
 		-- sbq.logInfo(("[%s]:%s"):format(self.tag, sb.printJson(self.occupancy, 2, true)))
-	end
-	if self.occupancy.sided and (self.occupancy.flipped ~= animator.flipped()) then
-		self.occupancy.flipped = animator.flipped()
-		animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
-		animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
-		if self.idleAnims then
-			SpeciesScript:doAnimations(self.idleAnims)
-		end
-		if self.occupantAnims then
-			for _, occupant in ipairs(self.occupancy.list) do
-				SpeciesScript:doAnimations(self.occupantAnims, {}, occupant.entityId)
-			end
-		end
-		self.occupancy.struggleDirection = nil
-		self:refreshStruggleDirection()
 	end
 	if self.occupancy.interpolating then
 		self.interpolateCurTime = self.interpolateCurTime + dt
