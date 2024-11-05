@@ -176,12 +176,12 @@
 	"potionRarity" : "rare",
 
 	"animationCustom" : [
-		"/humanoid/any/removeTail.animation",
 		"/humanoid/any/humanoidPred.animation",
 		"/humanoid/any/voreOccupants.animation",
 		{
 			"globalTagDefaults":{
-				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png"
+				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
+				"tailImage" : "tail.png"
 			}
 		}
 	],
