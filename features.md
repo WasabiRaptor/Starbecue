@@ -277,6 +277,7 @@ Races included within SBQ by default
 - Vaporeon (Feral) : sbq/vaporeon
 - Flareon (Feral) : sbq/flareon
 - Meowscarada : sbq/meowscarada
+- Nickit (Anthro) : sbq/nickit_anthro
 - Hellhound : sbq/FFWizard/hellhound
 
 ### External Compatible Species

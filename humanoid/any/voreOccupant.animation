@@ -44,9 +44,11 @@
 					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"navelVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"absorbVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"unbirthVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"cockVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"breastVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"tailVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"<occupant>" : [
@@ -103,6 +105,11 @@
 						// so anchor to the relevant part and set offsets as necessary
 						"belly" : {"properties":{
 							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [0,-1]
+						}},
+						"tail" : {"properties":{
+							"anchorPart":"tail",
 							"zLevel":-1,
 							"offset" : [0,-1]
 						}},
@@ -168,6 +175,39 @@
 							}
 
 						},
+						"tailVore" : {
+							// frame properties can be used for transformations with the modified
+							// engine's new animator features
+							"frameProperties" :{
+								"release" : [true],
+								"transforms" : [
+									{"scale":[1, 1],		"translate":[-2,0],			"rotate":0	},
+									{"scale":[1, 1],		"translate":[-2,-0.5],		"rotate":45	},
+									{"scale":[0.75, 0.75],	"translate":[-1.5,-0.5],	"rotate":90	},
+									{"scale":[0.75, 0.75],	"translate":[-1,-0.5],		"rotate":90	},
+									{"scale":[0.25, 0.25],	"translate":[-0.5,-0.5],	"rotate":90	},
+									{"scale":[0.25, 0.25],	"translate":[-0.25,-0.5],	"rotate":90},
+									{"scale":[0.1, 0.1],	"translate":[0,-0.5],		"rotate":90},
+									{"scale":[0, 0],		"translate":[0,-0.5],		"rotate":0	}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" :"tail",
+								"zLevel" : -5
+							}
+
+						},
+
 						"analVore": {
 							"frameProperties": {
 								"release" : [true],
@@ -198,6 +238,35 @@
 							}
 						},
 						"navelVore" : {
+							"frameProperties" : {
+								"release" : [true],
+								"transforms" : [
+									{"scale" : [-1, 1],"translate" : [1.5, 0],"rotate" : 0},
+									{"scale" : [-0.75, 0.75],"translate" : [1, -0.5],"rotate" : 15},
+									{"scale" : [-0.5, 0.5],"translate" : [0.75, -0.75],"rotate" : 45},
+									{"scale" : [-0.25, 0.25],"translate" : [0.5, -1],"rotate" : 90},
+									{"scale" : [-0.1, 0.1],"translate" : [0.25, -1.25],"rotate" : 90},
+									{"scale" : [-0.1, 0.1],"translate" : [0, -1.25],"rotate" : 90},
+									{"scale" : [0, 0],"translate" : [0, -1.25],"rotate" : 45},
+									{"scale" : [0, 0],"translate" : [0, -1],"rotate" : 0}
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" : "belly",
+								"zLevel" : 5.9
+							}
+						},
+						"absorbVore" : {
 							"frameProperties" : {
 								"release" : [true],
 								"transforms" : [

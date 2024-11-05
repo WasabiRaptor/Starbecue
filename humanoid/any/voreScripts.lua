@@ -250,6 +250,15 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 			end
 		end
 	end
+	if location.disabled then
+		if location.infuseType then
+			if not (action.flags and action.flags.infusing) then
+				return false, "needsInfusion"
+			end
+		else
+			return false, "invalidLocation"
+		end
+	end
 	if not target then return true end
 	throughput = throughput or action.throughput
 	if throughput and not location.settings.hammerspace then
@@ -287,6 +296,15 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 			end
 		end
 	end
+	if location.disabled then
+		if location.infuseType then
+			if not (action.flags and action.flags.infusing) then
+				return false, "needsInfusion"
+			end
+		else
+			return false, "invalidLocation"
+		end
+	end
 	throughput = throughput or action.throughput
 	if throughput and not location.settings.hammerspace then
 		if size > (throughput * sbq.scale()) then return false, "tooBig" end
@@ -296,6 +314,7 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 
 	local space, subLocation = location:hasSpace(size)
 	if space or (action.flags and action.flags.infusing) then
+		location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
 		if Occupants.newOccupant(target, size, locationName or action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
@@ -310,13 +329,23 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 				if occupant then
 					occupant.flags.newOccupant = false
 					occupant:refreshLocation()
+					if action.lockSize then
+						location.occupancy.lockSize = false
+						location:markSizeDirty()
+					end
 				end
 				SpeciesScript.lockActions = false
 			end
 		else
+			if action.lockSize then
+				location.occupancy.lockSize = false
+			end
 			return false, "noSlots"
 		end
 	else
+		if action.lockSize then
+			location.occupancy.lockSize = false
+		end
 		return false, "noSpace"
 	end
 end
@@ -329,14 +358,23 @@ function default:tryLetout(name, action, target, throughput, ...)
 		if (occupant.size * occupant.sizeMultiplier) > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	if occupant.flags.digested or occupant.flags.infused then return false, "invalidAction" end
+	local location = occupant:getLocation()
+	if not location then return false, "invalidAction" end
+	location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
+	if not action.lockSize then
+		location:markSizeDirty()
+	end
 	occupant.flags.releasing = true
 	occupant.sizeMultiplier = 0 -- so belly expand anims start going down right away
-	occupant:getLocation().occupancy.sizeDirty = true
 	SpeciesScript.lockActions = true
 	SpeciesScript:hideSlots(action.hideSlots or {})
 	SpeciesScript:settingAnimations()
 	sbq.forceTimer("huntTargetSwitchCooldown", 30)
 	return true, function()
+		if action.lockSize then
+			location.occupancy.lockSize = false
+			location:markSizeDirty()
+		end
 		sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
 			SpeciesScript:showSlots()
 			SpeciesScript:settingAnimations()
@@ -465,6 +503,8 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 		occupant.size = action.size or location.digestedSize or 0
 		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
 		location:markSizeDirty()
+	else
+
 	end
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
 	return true, function()

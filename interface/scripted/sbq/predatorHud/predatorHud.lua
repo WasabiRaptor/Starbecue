@@ -273,7 +273,7 @@ function sbq.nextValidLocationIndex(dir)
 		end
 		location = locationOrder[i]
 		locationData = sbq.locations[location]
-		if locationData and sbq.tableMatches(locationData.activeSettings, sbq.settings, true) then
+		if locationData and sbq.tableMatches(locationData.activeSettings, sbq.settings, true) and not locationData.disabled then
 			return i, location, locationData
 		end
 	end

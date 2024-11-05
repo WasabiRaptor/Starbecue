@@ -124,10 +124,22 @@ function widgets.sbqSetting:init(base, param)
 	param.settingType = type(defaultSetting)
 
 	if sbq.gui.settingWidgets[param.setting] then
-		if type(sbq.gui.settingWidgets[param.setting]) == "string" then
-			param = sbq.widgetScripts[sbq.gui.settingWidgets[param.setting]](param)
-		else
-			param = sb.jsonMerge(param, sbq.replaceConfigTags(sbq.gui.settingWidgets[param.setting], {groupKey = param.groupKey, groupName = param.groupName, setting = param.setting}))
+		local tried = {}
+		local key = param.setting
+		while not tried[key] do
+			tried[key] = true
+			if type(sbq.gui.settingWidgets[key]) == "string" then
+				if sbq.widgetScripts[sbq.gui.settingWidgets[key]] then
+					param = sbq.widgetScripts[sbq.gui.settingWidgets[key]](param)
+				else
+					key = sbq.gui.settingWidgets[key]
+				end
+			else
+				param = sb.jsonMerge(param, sbq.replaceConfigTags(sbq.gui.settingWidgets[key], sb.jsonMerge({groupKey = param.groupKey, groupName = param.groupName, setting = param.setting}, param.configTags)))
+			end
+			if not param then break end
+			key = param.nextSettingKey or key
+			if not key then break end
 		end
 	else
 		if errorString then sbq.logError(errorString) end
@@ -751,6 +763,8 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 			if type(mi[1]) == "string" then
 				size = vec2.add(mg.measureString(mi[1], w or 100), 4)
 				mi[1] = { type = "label", text = mi[1], align = align or "center" }
+			else
+				size = mi[1].size or size
 			end
 
 			local insertRow = math.floor((i-0.1) / columns) + 1
@@ -1108,6 +1122,7 @@ function widgets.sbqTextBox:onEscape() end
 
 for id, t in pairs(widgets) do t.widgetType = id end
 
+-- item grid ----------------------------------------------------------------------------------------------------------------------------------
 
 widgets.sbqItemGrid = mg.proto(widgets.itemGrid, {
 })
@@ -1177,6 +1192,8 @@ function widgets.sbqItemGrid:updateGeometry()
 	self:applyGeometry()
 end
 
+-- item slot ----------------------------------------------------------------------------------------------------------------------------------
+
 widgets.sbqItemSlot = mg.proto(widgets.itemSlot, {
 })
 
@@ -1225,6 +1242,30 @@ function widgets.sbqItemSlot:init(base, param)
 	end
 end
 
+-- button ----------------------------------------------------------------------------------------------------------------------------------
+
+widgets.sbqIconButton = mg.proto(widgets.iconButton, {
+})
+
+function widgets.sbqIconButton:init(base, param)
+	widgets.iconButton.init(self, base, param)
+	self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
+	self.value = param.value
+	self.script = param.script
+
+	if self.setting then
+		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
+	end
+	if self.script then
+		function self:onClick()
+			sbq.widgetScripts[self.script](self.value, self.setting, self.groupName, self.groupKey)
+		end
+	end
+end
 
 -- the version of stardust from steam is out of date and this makes the width actually function
 do -- label -------------------------------------------------------------------------------------------------------------------------------------
@@ -1282,54 +1323,55 @@ do -- label --------------------------------------------------------------------
 		if self.parent then self.parent:queueGeometryUpdate() end
 	  end
 	end
-  end do -- image -------------------------------------------------------------------------------------------------------------------------------------
-	widgets.image = mg.proto(mg.widgetBase, {
-	  file = "/assetmissing.png", -- fallback file
-	  imgSize = {0, 0},
-	  scale = 1
-	})
+end
+do -- image -------------------------------------------------------------------------------------------------------------------------------------
+widgets.image = mg.proto(mg.widgetBase, {
+	file = "/assetmissing.png", -- fallback file
+	imgSize = {0, 0},
+	scale = 1
+})
 
-	function widgets.image:init(base, param)
-	  self.size = nil -- force recalculate
-	  self.noAutoCrop = param.noAutoCrop
-	  self.file = mg.path(param.file)
-	  if self.noAutoCrop then
-		self.imgSize = root.imageSize(self.file)
-	  else
-		local r = root.nonEmptyRegion(self.file) or {0, 0, 0, 0}
-		self.imgSize = rect.size(r)
-	  end
-	  self.scale = param.scale
-	  if type(self.scale) == "number" then self.scale = {self.scale, self.scale} end
+function widgets.image:init(base, param)
+	self.size = nil -- force recalculate
+	self.noAutoCrop = param.noAutoCrop
+	self.file = mg.path(param.file)
+	if self.noAutoCrop then
+	self.imgSize = root.imageSize(self.file)
+	else
+	local r = root.nonEmptyRegion(self.file) or {0, 0, 0, 0}
+	self.imgSize = rect.size(r)
+	end
+	self.scale = param.scale
+	if type(self.scale) == "number" then self.scale = {self.scale, self.scale} end
 
-	  self.backingWidget = mkwidget(base, { type = "canvas" })
+	self.backingWidget = mkwidget(base, { type = "canvas" })
+end
+function widgets.image:preferredSize()
+	if self.explicitSize then return self.explicitSize end
+	return {math.ceil(self.imgSize[1] * self.scale[1]), math.ceil(self.imgSize[2] * self.scale[2])}
+end
+function widgets.image:draw()
+	local c = widget.bindCanvas(self.backingWidget)
+	c:clear()
+	if self.noAutoCrop then
+	c:drawImageDrawable(self.file, vec2.mul(c:size(), 0.5), self.scale)
+	else
+	c:drawImageRect(self.file, root.nonEmptyRegion(self.file) or {0, 0, 0, 0}, rect.withCenter(vec2.mul(self.size, 0.5), vec2.mul(self.imgSize, self.scale)))
 	end
-	function widgets.image:preferredSize()
-	  if self.explicitSize then return self.explicitSize end
-	  return {math.ceil(self.imgSize[1] * self.scale[1]), math.ceil(self.imgSize[2] * self.scale[2])}
+end
+function widgets.image:setFile(f, noAutoCrop)
+	self.file = mg.path(f)
+	if noAutoCrop ~= nil then self.noAutoCrop = noAutoCrop end
+	if self.noAutoCrop then
+	self.imgSize = root.imageSize(self.file)
+	else
+	local r = root.nonEmptyRegion(self.file) or {0, 0, 0, 0}
+	self.imgSize = rect.size(r)
 	end
-	function widgets.image:draw()
-	  local c = widget.bindCanvas(self.backingWidget)
-	  c:clear()
-	  if self.noAutoCrop then
-		c:drawImageDrawable(self.file, vec2.mul(c:size(), 0.5), self.scale)
-	  else
-		c:drawImageRect(self.file, root.nonEmptyRegion(self.file) or {0, 0, 0, 0}, rect.withCenter(vec2.mul(self.size, 0.5), vec2.mul(self.imgSize, self.scale)))
-	  end
-	end
-	function widgets.image:setFile(f, noAutoCrop)
-	  self.file = mg.path(f)
-	  if noAutoCrop ~= nil then self.noAutoCrop = noAutoCrop end
-	  if self.noAutoCrop then
-		self.imgSize = root.imageSize(self.file)
-	  else
-		local r = root.nonEmptyRegion(self.file) or {0, 0, 0, 0}
-		self.imgSize = rect.size(r)
-	  end
-	  if parent then parent:queueGeometryUpdate() end
-	end
-	function widgets.image:setScale(v)
-	  self.scale = v
-	  if parent then parent:queueGeometryUpdate() end
-	end
-  end
+	if parent then parent:queueGeometryUpdate() end
+end
+function widgets.image:setScale(v)
+	self.scale = v
+	if parent then parent:queueGeometryUpdate() end
+end
+end

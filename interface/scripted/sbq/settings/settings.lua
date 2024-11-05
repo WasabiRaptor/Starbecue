@@ -1,6 +1,5 @@
 if not _ENV.metagui.inputData.sbq then sb.logInfo("failed to get settings data") return pane.dismiss() end
 
-local prefTemplate = root.assetJson("/interface/scripted/sbq/settings/prefTemplate.config")
 function init()
 	if _ENV.mainSettingsPanel then
 		_ENV.mainSettingsPanel:clearChildren()
@@ -55,18 +54,19 @@ function init()
 		_ENV.infusePredPrefsPanel:setVisible((sbq.voreConfig.availableInfuseTypes or false) and infusePredVisible)
 
 		for _, voreType in pairs(sbq.gui.voreTypeOrder) do
-			_ENV.vorePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "pred", domOrSub = "dom"}))
-			_ENV.vorePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = voreType, groupName = "vorePrefs", setting = "prey", domOrSub = "sub"}))
+			_ENV.vorePredPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = voreType, groupName = "vorePrefs", setting = voreType.."PredPrefs"})
+			_ENV.vorePreyPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = voreType, groupName = "vorePrefs", setting = voreType.."PreyPrefs"})
 			local widget = _ENV[voreType.."predPrefLayout"]
 			if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
 		end
 		for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
-			_ENV.infusePredPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "pred", domOrSub = "dom"}))
-			_ENV.infusePreyPrefsPanel.children[1]:addChild(sbq.replaceConfigTags(prefTemplate, {groupKey = infuseType, groupName = "infusePrefs", setting = "prey", domOrSub = "sub"}))
+			_ENV.infusePredPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = infuseType, groupName = "infusePrefs", setting = infuseType.."PredPrefs"})
+			_ENV.infusePreyPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = infuseType, groupName = "infusePrefs", setting = infuseType.."PreyPrefs"})
 
 			local widget = _ENV[infuseType.."predPrefLayout"]
 			if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
 		end
+		local cockInfusepreyPrefLayout = _ENV.cockInfusepreyPrefLayout
 		_ENV.currentScale:setText(tostring(sbq.currentScale))
 	end
 
@@ -95,7 +95,7 @@ function sbq.setupLocation(name, list)
 		id = name,
 		icon = icon,
 		title = location.name or (":"..name),
-		visible = sbq.tableMatches(location.activeSettings, sbq.settings, true),
+		visible = sbq.tableMatches(location.activeSettings, sbq.settings, true) and not location.disabled,
 		color = "ff00ff",
 		contents = {
 			{ type = "scrollArea", scrollDirections = { 0, 1 }, children = {
@@ -173,7 +173,7 @@ function sbq.refreshSettingVisibility()
 	for name, location in pairs(sbq.locations) do
 		local widget = ((_ENV.locationTabField or {}).tabs or {})[name]
 		if widget then
-			widget:setVisible(sbq.tableMatches(location.activeSettings, sbq.settings, true))
+			widget:setVisible(sbq.tableMatches(location.activeSettings, sbq.settings, true) and not location.disabled)
 		end
 	end
 	if sbq.refreshBehaviorTabVisibility then
@@ -442,4 +442,43 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 		table.insert(slots, slot)
 	end
 	return sb.jsonMerge(param, layout)
+end
+
+function sbq.widgetScripts.dropDownSetting(value, setting, group, name)
+	local value = sbq.settings[setting]
+	local locked = sbq.overrideSettings[setting]
+	if group and name then
+		value = sbq.settings[group][name][setting]
+		locked = ((sbq.overrideSettings[group] or {})[name] or {})[setting]
+	end
+	local options = {}
+	if not sbq.voreConfig.selectValues[setting] then
+		sbq.playErrorSound()
+	end
+	for _, v in ipairs(sbq.voreConfig.selectValues[setting]) do
+		local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
+
+		if not result then
+			if sbq.gui.dropDownOptions[v] then
+				table.insert(options, {
+					sbq.replaceConfigTags(sbq.gui.dropDownOptions[v], {selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or ""}),
+					function()
+						if not locked then
+							sbq.widgetScripts.changeSetting(v, setting, group, name)
+						end
+					end
+				})
+			else
+				table.insert(options, {
+					((value == v and "^green;") or "") .. (sbq.getString(":" .. v)),
+					function()
+						if not locked then
+							sbq.widgetScripts.changeSetting(v, setting, group, name)
+						end
+					end
+				})
+			end
+		end
+	end
+	_ENV.metagui.dropDownMenu(options, 3)
 end

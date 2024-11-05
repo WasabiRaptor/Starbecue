@@ -994,7 +994,7 @@ function _Location:setInfusionData()
 	self:markSizeDirty()
 end
 function _Location:hasSpace(size)
-	if not sbq.tableMatches(self.activeSettings, sbq.settings, true) then return false end
+	if (not sbq.tableMatches(self.activeSettings, sbq.settings, true)) or self.disabled then return false end
 	if self.maxCount and (self.occupancy.count >= self.maxCount) then return false end
 	local shared = 0
 	for _, name in ipairs(self.sharedWith or {}) do
@@ -1072,7 +1072,7 @@ function _Location:updateOccupancy(dt)
 	end
 	local prevVisualSize = self.occupancy.visualSize
 	local prevCount = self.occupancy.count
-	if self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale()) then
+	if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale())) and not self.occupancy.lockSize then
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
 		self.occupancy.sizeDirty = false
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
@@ -1580,7 +1580,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		location:markSizeDirty()
 	end
 	if not location then return self:remove() end
-	if (not self.flags.infusing) and (not sbq.tableMatches(location.activeSettings, sbq.settings, true)) then return self:remove() end
+	if (not self.flags.infusing) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove() end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims

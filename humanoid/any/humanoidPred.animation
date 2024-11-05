@@ -70,7 +70,9 @@
 		"breasts_leftInterpolateSize" : "0",
 
 		"tailSize" : "0",
-		"tailInterpolateSize" : "0"
+		"tailInterpolateSize" : "0",
+
+		"pose" : "stand"
 	},
 	"animatedParts": {
 		"stateTypes": {
@@ -214,7 +216,7 @@
 				"default": "idle",
 				"priority" : 2,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 8, "cycle": 2, "mode": "loop" },
 					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
 					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
 					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
@@ -574,7 +576,7 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<pose>.<bodyStateFrame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
 						"run": "walk",
 						"jump": "walk",
@@ -593,7 +595,7 @@
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailStateAnim>.<pose>" } },
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandStateAnim>.<pose>" } },
 						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<pose>.<tailExpandStateFrame>" } }
 					},
 					"bodyHiddenState" : {
@@ -1052,7 +1054,7 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<pose>.<bodyStateFrame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
 						"run": "walk",
 						"jump": "walk",
@@ -1071,7 +1073,7 @@
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailStateAnim>.<pose>" } },
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandStateAnim>.<pose>" } },
 						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<pose>.<tailExpandStateFrame>" } }
 					},
 					"bodyHiddenState" : {

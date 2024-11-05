@@ -1,0 +1,231 @@
+{
+	"kind" : "sbq/nickit_anthro",
+
+	"potionRarity" : "rare",
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"navelVisible" : true
+			},
+			"locations" : {
+				"tail" : {
+					"disabled" : false
+				}
+			}
+		}
+	],
+	"charCreationTooltip" : {
+			"title" : "Nickit",
+			"subTitle" : "Au",
+			"description" : "You better watch your wallet..."
+	},
+
+	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
+
+	"humanoidOverrides" : {
+		"particleEmitters": {
+			"deathPoof" : {
+				"particles" : [
+					{
+						"particle" : {
+							"type" : "animated",
+							"animation" : "/animations/playerdeath-Wasabi_Raptor_PokemonDeath/playerdeath.animation",
+							"size" : 1,
+							"angularVelocity" : 0,
+							"fade" : 1,
+							"destructionTime" : 1,
+							"position" : [0, 0],
+							"initialVelocity" : [0, 0],
+							"finalVelocity" : [0, 0],
+							"approach" : [1, 1],
+							"timeToLive" : 1.0,
+							"layer" : "middle"
+						}
+					}
+				]
+			}
+		}
+	},
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
+
+
+	"skull" : "/humanoid/human/dead.png",
+	"effectDirectives" : "?replace;FEFFFFFF=000000FF;9bd4ffFF=5c0955FF;31a6ffFF=900a85FF",
+	"defaultBlueprints" : {
+		"tier1" : [
+
+// Empty Hands
+			{ "item" : "flaghuman" },
+
+// Anvil
+			{ "item" : "humantier1head" },
+			{ "item" : "humantier1chest" },
+			{ "item" : "humantier1pants" },
+			{ "item" : "humantier2head" },
+			{ "item" : "humantier2chest" },
+			{ "item" : "humantier2pants" },
+
+			{ "item" : "ironshortsword" },
+			{ "item" : "ironbroadsword" },
+			{ "item" : "tungstenaxe" },
+			{ "item" : "tungstenhammer" },
+
+// Anvil2
+			{ "item" : "humantier3head" },
+			{ "item" : "humantier3chest" },
+			{ "item" : "humantier3pants" },
+			{ "item" : "humantier4head" },
+			{ "item" : "humantier4chest" },
+			{ "item" : "humantier4pants" },
+
+			{ "item" : "titaniumdagger" },
+			{ "item" : "titaniumspear" },
+			{ "item" : "durasteelbroadsword" },
+			{ "item" : "durasteelshortsword" },
+
+// Anvil3
+			{ "item" : "humantier5ahead" },
+			{ "item" : "humantier5achest" },
+			{ "item" : "humantier5apants" },
+			{ "item" : "humantier6ahead" },
+			{ "item" : "humantier6achest" },
+			{ "item" : "humantier6apants" },
+
+			{ "item" : "humantier5mhead" },
+			{ "item" : "humantier5mchest" },
+			{ "item" : "humantier5mpants" },
+			{ "item" : "humantier6mhead" },
+			{ "item" : "humantier6mchest" },
+			{ "item" : "humantier6mpants" },
+
+			{ "item" : "humantier5shead" },
+			{ "item" : "humantier5schest" },
+			{ "item" : "humantier5spants" },
+			{ "item" : "humantier6shead" },
+			{ "item" : "humantier6schest" },
+			{ "item" : "humantier6spants" },
+
+			{ "item" : "aegisaltpistol" },
+			{ "item" : "aegisaltbow" },
+			{ "item" : "feroziumwand" },
+			{ "item" : "feroziumstaff" },
+			{ "item" : "violiumshortsword" },
+			{ "item" : "violiumbroadsword" },
+
+// Furniture Table 2
+			{ "item" : "humanstoragelocker" },
+			{ "item" : "sbq/boat_shipdoor" },
+			{ "item" : "sbq/boat_shiphatch" },
+
+// Spinning Wheel
+			{ "item" : "conceptchest" },
+			{ "item" : "conceptlegs" },
+			{ "item" : "coolchest" },
+			{ "item" : "coollegs" },
+			{ "item" : "sweatervestchest" },
+			{ "item" : "sweatervestlegs" },
+			{ "item" : "workoutchest" },
+			{ "item" : "workoutlegs" }
+		]
+	},
+
+	"baseColorMap" : {
+		"primary" : ["853b21","9b482a","b25938"], // red fur
+		"secondary" : ["1c1a17","2e2a27","423e3a"], // black fur
+		"tertiary" : ["a49ba8","d6cfda","efedf0","f9f6fb"], // white fur
+		"flesh" : ["8e4359","b55571","dc6f8f"], // beans
+		"eyes" : ["c09b11","e5b916","f7c91c"]
+	},
+
+	"altOptionAsUndyColor" : true,
+	"headOptionAsHairColor" : true,
+	"hairColorAsBodySubColor" : true,
+
+	"genders" : [
+		{
+			"name" : "male",
+			"image" : "/interface/title/male.png",
+			"characterImage" : "/humanoid/sbq/nickit_anthro/icon.png"
+		},
+		{
+			"name" : "female",
+			"image" : "/interface/title/female.png",
+			"characterImage" : "/humanoid/sbq/nickit_anthro/icon.png"
+		}
+	],
+	"charGenTextLabels" : [
+		"Body Color", // body color
+		"Hairstyle", // hair type
+		"-", // shirt
+		"-", // pants
+		"Paws Color", // alt option - undy color - facial mask
+		"Belly Color", // head option - hair color - facial hair
+		"-", // shirt color
+		"-", // pants color
+		"Nickit", // species
+		"Personality" // personality
+	],
+
+
+	"hair" : ["0"],
+	"facialHair" : [ ],
+	"facialMask" : [ ],
+	"shirt" : [ "sbq_nude_chest" ],
+	"pants" : [ "sbq_nude_legs" ],
+
+	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"bodyColor" : [ // primary
+		"?replace;853b21=853b22;9b482a=9b482b;b25938=b25939;", // default Red
+		"?replace;853b21=968d81;9b482a=a39a8f;b25938=b4aba0;" // shiny sandy grey
+	],
+	"undyColor" : [
+		"?replace;1c1a17=1c1a18;2e2a27=2e2a28;423e3a=423e3b;", // default reddish black
+		"?replace;1c1a17=0e253f;2e2a27=143053;423e3a=1a3c65;" // shiny bluish black
+	],
+	"hairColor" : [
+		"?replace;a49ba8=a49ba9;d6cfda=d6cfdb;efedf0=efedfe;f9f6fb=f9f6fc;", // default white
+		"?replace;a49ba8=cfcebd;d6cfda=deddca;efedf0=fbfae2;f9f6fb=fbfae2;" // shiny eggshell off white
+	],
+
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+			{"00adba":"bc1002", "check" : {"navelVisible":true}},
+			{"00adba":"eb3629", "check" : {"navelVisible":false}},
+			["primary","tertiary"]
+		],
+		"pussyColorRemap" : [
+			["flesh","flesh"]
+		],
+		"breastsColorRemap" : [
+			["primary","tertiary"],
+			["primary_180","tertiary"],
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","primary", {"nipplesVisible":false}]
+		],
+		"cockColorRemap" : [
+			["primary","flesh"]
+		],
+		"ballsColorRemap" : [
+			["primary","tertiary"]
+		]
+	},
+	"animationCustom" : [
+		"/humanoid/any/layered_emote.animation",
+		"/humanoid/any/humanoidPred.animation",
+		"/humanoid/any/voreOccupants.animation",
+		{
+			"globalTagDefaults":{
+				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
+				"tailImage" : "tail.png"
+			}
+		}
+	],
+
+	"infuseData" : [
+		"/humanoid/any/basicInfuseData.config"
+	]
+
+
+}
