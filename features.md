@@ -341,6 +341,7 @@ This mod includes patches for the species below to add compatibility, it does no
 - [Squamaeft](https://steamcommunity.com/sharedfiles/filedetails/?id=2462459956) : squamaeft
 - [Orcana](https://steamcommunity.com/sharedfiles/filedetails/?id=729432341) : orcana
 - [Vesperian](https://steamcommunity.com/sharedfiles/filedetails/?id=3334911053) : vesperian
+- [Saurian](https://steamcommunity.com/sharedfiles/filedetails/?id=2185577907) : saurian
 
 ---
 

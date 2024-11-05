@@ -1,0 +1,42 @@
+{
+	"globalTagDefaults" : {
+		"bodyMaskPath" : "/humanoid/any/defaultMask/"
+	},
+	"animatedParts" : {
+		"parts" : {
+			"body": {
+				"properties": {
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>;0;0" } },
+						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<bodyMaskPath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<bodyMaskPath><gender>body.png:<bodyDanceFrame>;0;0" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"bust" : "head"
+					}
+				}
+			}
+		}
+	}
+}
