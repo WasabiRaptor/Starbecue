@@ -311,6 +311,10 @@ function sbq.groupedSettingChanged.infuseSlots(name, k, v)
 	SpeciesScript:refreshInfusion(name)
 end
 
+function sbq.refreshInfusion()
+	SpeciesScript:refreshInfusion()
+end
+
 -- transformation handling
 function _SpeciesScript:getLocation(...)
 	if not self.state then return false end
@@ -955,24 +959,59 @@ function _Location:setInfusionData()
 	local infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
 	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}), root.fetchConfigArray(infuseData[sbq.species()] or {}))
 	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
+
+	for k, v in pairs(self.settingInfusion or {}) do
+		infuseData = sb.jsonMerge(infuseData, v[sbq.settings[k]] or {})
+	end
+
 	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
 
 	local tagsSet = {
 		globalTags = {},
 		partTags = {}
 	}
+	for k, v in pairs(infuseData.globalTags or {}) do
+		animator.setGlobalTag(k, v)
+		tagsSet.globalTags[k] = v
+	end
+	for part, tags in pairs(infuseData.partTags or {}) do
+		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
+		for k, v in pairs(tags) do
+			animator.setPartTag(part,k,v)
+			tagsSet.partTags[part][k] = v
+		end
+	end
+
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
+	local speciesConfig = root.speciesConfig(humanoid.species())
 	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
-		local sourceColorMap = (infuseData.infuseColorRemapSources or {})[tag]
+		local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", tag})
+		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
+		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
+		animator.setGlobalTag(tag, directives)
+		tagsSet.globalTags[tag] = directives
+	end
+	for part, tags in pairs(infuseData.colorRemapPartTags or {}) do
+		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
+		for tag, remaps in pairs(tags or {}) do
+			local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", part, tag}) or sbq.query(infuseData, {"colorRemapSources", tag})
+			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
+			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
+			animator.setPartTag(part, tag, directives)
+			tagsSet.partTags[part][tag] = directives
+		end
+	end
+	for tag, remaps in pairs(infuseData.infuseColorRemapGlobalTags or {}) do
+		local sourceColorMap = sbq.query(infuseData, {"infuseColorRemapSources", tag})
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 		animator.setGlobalTag(tag, directives)
 		tagsSet.globalTags[tag] = directives
 	end
-	for part, tags in pairs(infuseData.colorRemapPartTags or {}) do
-		tagsSet.partTags[part] = {}
+	for part, tags in pairs(infuseData.infuseColorRemapPartTags or {}) do
+		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = ((infuseData.infuseColorRemapSources or {})[part] or {})[tag] or (infuseData.infuseColorRemapSources or {})[tag]
+			local sourceColorMap = sbq.query(infuseData, {"infuseColorRemapSources", part, tag}) or sbq.query(infuseData, {"infuseColorRemapSources", tag})
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 			animator.setPartTag(part, tag, directives)
@@ -980,7 +1019,7 @@ function _Location:setInfusionData()
 		end
 	end
 	local directives = (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or "")
-	animator.setGlobalTag(self.tag.."InfusedDirectives", (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or ""))
+	animator.setGlobalTag(self.tag.."InfusedDirectives", directives)
 	tagsSet.globalTags[self.tag.."InfusedDirectives"] = directives
 
 	local locationData = sb.jsonMerge(infuseIdentity and {transformResult = {species = infuseIdentity.species}} or {}, infuseData.locationOverrides, {

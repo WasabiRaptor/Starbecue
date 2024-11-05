@@ -36,6 +36,7 @@ function sbq.setSetting(k, v)
 		end
 	end
 end
+sbq.settingChanged = {}
 
 function sbq.getUpgrade(upgradeName, tier, bonus)
 	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
