@@ -104,51 +104,48 @@
 	},
 	"altOptionAsUndyColor" : true,
 	"headOptionAsHairColor" : true,
-	"altOptionAsHairColor" : true,
+
 	"genders" : [
 		{
 			"name" : "male",
 			"image" : "/interface/title/male.png",
-			"characterImage" : "/humanoid/sbq/FFWizard/hellhound/icon.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair" : [ "0" ],
-			"shirt" : [ "sbq_nude_chest" ],
-			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
-			"facialMaskGroup" : "",
-			"facialMask" : [ ]
+			"characterImage" : "/humanoid/sbq/FFWizard/hellhound/icon.png"
 		},
 		{
 			"name" : "female",
 			"image" : "/interface/title/female.png",
-			"characterImage" : "/humanoid/sbq/FFWizard/hellhound/icon.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair" : [ "0" ],
-			"shirt" : [ "sbq_nude_chest" ],
-			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
-			"facialMaskGroup" : "",
-			"facialMask" : [ ]
+			"characterImage" : "/humanoid/sbq/FFWizard/hellhound/icon.png"
 		}
 	],
 	"baseColorMap" : {
 		"primary" :	 ["1c1614","261f1d","2e2725","372f2d"],
 		"secondary" : ["753e23","884c2c","9b5b38","ab6743"],
-		"hair" : ["1c1614","261f1d","2e2725","372f2d"],
+		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
 		"flesh" : ["a0533f","c05e41","fc8d72","fcab9c"]
 	},
 
+	"hair" : [
+		"0",
+		"male1", "male2", "male3", "male4", "male5", "male6", "male7", "male8", "male9", "male10", "male11", "male12", "male13", "male14", "male15", "male16", "male17", "male18", "male19", "male21", "male22", "male23", "male24", "male25", "male26", "male27", "male28", "male29", "male30", "male31", "male32", "male33", "male34", "male35", "male36", "male37", "male38", "male39", "male40", "male41", "male42", "male43", "male44", "male45", "male46", "male47", "male48", "male49", "male50", "male51", "male52", "male53", "male58", "male59", "male60", "male61", "male62", "male63", "male64",
+		"fem1", "fem2", "fem3", "fem4", "fem5", "fem6", "fem7", "fem8", "fem9", "fem10", "fem11", "fem12", "fem13", "fem14", "fem15", "fem16", "fem17", "fem18", "fem19", "fem20", "fem21", "fem22", "fem23", "fem24", "fem25", "fem26", "fem27", "fem28", "fem29", "fem30", "fem31", "fem32", "fem33", "fem34", "fem35", "fem36", "fem37", "fem38", "fem39", "fem40", "fem41", "fem42", "fem43", "fem44", "fem45", "fem46", "fem47", "fem48", "fem49", "fem50", "fem51", "fem52", "fem53", "fem54", "fem56", "fem57", "fem58", "fem59", "fem60", "fem61", "fem62", "fem63", "fem64"
+	],
+	"shirt" : [ "sbq_nude_chest" ],
+	"pants" : [ "sbq_nude_legs" ],
+	"facialHairGroup" : "",
+	"facialHair" : [ ],
+	"facialMaskGroup" : "",
+	"facialMask" : [ ],
+
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [
-		{ "ffe2c5" : "ab8c77" }
+		""
 	],
 	"undyColor" : [
-		{ "dc1f00" : "4d76ad" }
+		""
 	],
 	"hairColor" : [
-		{ "d9c189" : "E86D46" }
+		"?replace;735e3a=1c1615;a38d59=261f1e;d9c189=2e2726;f7e7b2=372f2e;", // primary
+		"?replace;735e3a=753e24;a38d59=884c2d;d9c189=9b5b39;f7e7b2=ab6744;" // secondary
 	],
 
 	"colorRemapGlobalTags" : {
@@ -176,6 +173,7 @@
 	"potionRarity" : "rare",
 
 	"animationCustom" : [
+		"/humanoid/any/layered_emote.animation",
 		"/humanoid/any/humanoidPred.animation",
 		"/humanoid/any/voreOccupants.animation",
 		{

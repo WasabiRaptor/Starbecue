@@ -150,12 +150,16 @@
 		"secondary" : ["1c1a17","2e2a27","423e3a"], // black fur
 		"tertiary" : ["a49ba8","d6cfda","efedf0","f9f6fb"], // white fur
 		"flesh" : ["8e4359","b55571","dc6f8f"], // beans
-		"eyes" : ["c09b11","e5b916","f7c91c"]
+		"eyes" : ["c09b11","e5b916","f7c91c"],
+		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
+		"accessories" : ["951500", "be1b00", "dc1f00", "f32200"]
 	},
 
 	"altOptionAsUndyColor" : true,
 	"headOptionAsHairColor" : true,
 	"hairColorAsBodySubColor" : true,
+	"shirtOptionAsIdentityString" : true,
+	"pantsOptionAsIdentityString" : true,
 
 	"genders" : [
 		{
@@ -172,33 +176,51 @@
 	"charGenTextLabels" : [
 		"Body Color", // body color
 		"Hairstyle", // hair type
-		"-", // shirt
+		"Eye Color", // shirt
 		"-", // pants
 		"Paws Color", // alt option - undy color - facial mask
 		"Belly Color", // head option - hair color - facial hair
-		"-", // shirt color
+		"Hair Color", // shirt color
 		"-", // pants color
 		"Nickit", // species
 		"Personality" // personality
 	],
 
 
-	"hair" : ["0"],
+	"hair" : [
+		"0",
+		"male1", "male2", "male3", "male4", "male5", "male6", "male7", "male8", "male9", "male10", "male11", "male12", "male13", "male14", "male15", "male16", "male17", "male18", "male19", "male21", "male22", "male23", "male24", "male25", "male26", "male27", "male28", "male29", "male30", "male31", "male32", "male33", "male34", "male35", "male36", "male37", "male38", "male39", "male40", "male41", "male42", "male43", "male44", "male45", "male46", "male47", "male48", "male49", "male50", "male51", "male52", "male53", "male58", "male59", "male60", "male61", "male62", "male63", "male64",
+		"fem1", "fem2", "fem3", "fem4", "fem5", "fem6", "fem7", "fem8", "fem9", "fem10", "fem11", "fem12", "fem13", "fem14", "fem15", "fem16", "fem17", "fem18", "fem19", "fem20", "fem21", "fem22", "fem23", "fem24", "fem25", "fem26", "fem27", "fem28", "fem29", "fem30", "fem31", "fem32", "fem33", "fem34", "fem35", "fem36", "fem37", "fem38", "fem39", "fem40", "fem41", "fem42", "fem43", "fem44", "fem45", "fem46", "fem47", "fem48", "fem49", "fem50", "fem51", "fem52", "fem53", "fem54", "fem56", "fem57", "fem58", "fem59", "fem60", "fem61", "fem62", "fem63", "fem64"
+	],
 	"facialHair" : [ ],
 	"facialMask" : [ ],
-	"shirt" : [ "sbq_nude_chest" ],
-	"pants" : [ "sbq_nude_legs" ],
-
+	"shirt" : [  // eyes
+		"?replace;c09b11=c09b11FE;e5b916=e5b916FE;f7c91c=f7c91cFE;?replace;951500=c09b12;be1b00=e5b917;dc1f00=f7c91d;f32200=f7c91d;"
+	],
+	"shirtColor" : [ // hair color
+		"?replace;735e3a=853b22;a38d59=9b482b;d9c189=b25939;f7e7b2=b25939;", // default red
+		"?replace;735e3a=968d81;a38d59=a39a8f;d9c189=b4aba0;f7e7b2=b4aba0;", // shiny sandy grey
+		"?replace;735e3a=1c1a18;a38d59=2e2a28;d9c189=423e3b;f7e7b2=423e3b;", // default reddish black
+		"?replace;735e3a=0e253f;a38d59=143053;d9c189=1a3c65;f7e7b2=1a3c65;", // shiny bluish black
+		"?replace;735e3a=a49ba9;a38d59=d6cfdb;d9c189=efedfe;f7e7b2=f9f6fc;", // default white
+		"?replace;735e3a=cfcebd;a38d59=deddca;d9c189=fbfae2;f7e7b2=fbfae2;" // shiny eggshell off white
+	],
+	"pants" : [
+		""
+	],
+	"pantsColor" : [
+		""
+	],
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
 	"bodyColor" : [ // primary
 		"?replace;853b21=853b22;9b482a=9b482b;b25938=b25939;", // default Red
 		"?replace;853b21=968d81;9b482a=a39a8f;b25938=b4aba0;" // shiny sandy grey
 	],
-	"undyColor" : [
+	"undyColor" : [ // secondary
 		"?replace;1c1a17=1c1a18;2e2a27=2e2a28;423e3a=423e3b;", // default reddish black
 		"?replace;1c1a17=0e253f;2e2a27=143053;423e3a=1a3c65;" // shiny bluish black
 	],
-	"hairColor" : [
+	"hairColor" : [ // tertiary
 		"?replace;a49ba8=a49ba9;d6cfda=d6cfdb;efedf0=efedfe;f9f6fb=f9f6fc;", // default white
 		"?replace;a49ba8=cfcebd;d6cfda=deddca;efedf0=fbfae2;f9f6fb=fbfae2;" // shiny eggshell off white
 	],
@@ -229,6 +251,7 @@
 		"/humanoid/any/layered_emote.animation",
 		"/humanoid/any/humanoidPred.animation",
 		"/humanoid/any/voreOccupants.animation",
+		"/humanoid/any/moreColors.animation",
 		{
 			"globalTagDefaults":{
 				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
