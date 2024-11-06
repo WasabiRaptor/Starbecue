@@ -68,7 +68,11 @@ function init()
 		if entity.uniqueId() then return end
 		if not root.speciesConfig(npc.species()).voreConfig then return end
 
-		if config.getParameter("sbqNPC") or config.getParameter("uniqueId") or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true) then
+		if config.getParameter("sbqNPC")
+			or config.getParameter("uniqueId")
+			or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true)
+			or humanoid.getIdentity().imagePath ~= nil
+		then
 			return
 		end
 		if tenant then
@@ -178,11 +182,11 @@ function sbq.tenant_setNpcType(npcType)
 	}
 	world.spawnStagehand(entity.position(), "sbqReplaceNPC", parameters)
 
-	if storage.respawner then
-		local spawnerId = world.loadUniqueEntity(storage.respawner)
-		assert(spawnerId and world.entityExists(spawnerId))
-		world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {replacing = true})
-	end
+	-- if storage.respawner then
+	-- 	local spawnerId = world.loadUniqueEntity(storage.respawner)
+	-- 	assert(spawnerId and world.entityExists(spawnerId))
+	-- 	world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {replacing = true})
+	-- end
 
 	function die()
 	end
