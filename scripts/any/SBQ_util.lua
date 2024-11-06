@@ -394,7 +394,7 @@ function sbq.getSettingsOf.locations()
 	}
 end
 function sbq.getSettingsOf.current()
-	local output = sb.jsonMerge(storage.sbqSettings, {})
+	local output = sb.jsonMerge(storage.sbqSettings, sbq.publicSettings or {})
 	output.recentlyDigested = {}
 	output.infuseSlots = {}
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")

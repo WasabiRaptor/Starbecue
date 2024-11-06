@@ -288,7 +288,12 @@
 	"potionImagePath" : "/humanoid/sbq/vaporeon/potion/",
 	"potionRarity" : "legendary",
 	"voreConfig" : [
-		"/humanoid/sbq/vaporeonGiant/vore.config"
+		"/humanoid/sbq/vaporeonGiant/vore.config",
+		{
+			"defaultSettings" : {
+				"tailInfuseSelect" : "vaporeon_tail"
+			}
+		}
 	],
 	"animationConfig" : "/humanoid/sbq/vaporeonGiant/vaporeonGiant.animation",
 	"identityAnimationCustom" :{},

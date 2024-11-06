@@ -135,6 +135,7 @@ After eating another character, you will then have the pred HUD in the bottom ri
 
 Vore Actions available on default NPCs/Players
 - Oral Vore
+- Tail Vore
 - Absorb Vore
 - Navel Vore
 - Anal Vore
@@ -220,6 +221,7 @@ Infuse Actions available on default NPCs/Players
 - Breast TF
 - Pussy TF
 - Cock TF
+- Tail TF
 
 ---
 
