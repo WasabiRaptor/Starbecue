@@ -961,7 +961,12 @@ function _Location:setInfusionData()
 	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
 
 	for k, v in pairs(self.settingInfusion or {}) do
-		infuseData = sb.jsonMerge(infuseData, v[sbq.settings[k]] or {})
+		local value = sbq.settings[k]
+		if sbq.config.settingInfusionPreyMap[k] and sbq.settings[k .. "Override"] then
+			local preyVal = sbq.query(infusedItem, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap[k]})
+			value = ((preyVal ~= "default") and preyVal) or value
+		end
+		infuseData = sb.jsonMerge(infuseData, v[value] or {})
 	end
 
 	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
@@ -1619,7 +1624,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		location:markSizeDirty()
 	end
 	if not location then return self:remove() end
-	if (not self.flags.infusing) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove() end
+	if (not (self.flags.infusing or self.flag.infused)) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove() end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims
