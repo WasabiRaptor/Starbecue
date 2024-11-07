@@ -1624,7 +1624,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		location:markSizeDirty()
 	end
 	if not location then return self:remove() end
-	if (not (self.flags.infusing or self.flag.infused)) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove() end
+	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove() end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims
