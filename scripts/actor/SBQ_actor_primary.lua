@@ -34,6 +34,8 @@ function init()
 	end)
 
 	message.setHandler("sbqForceSit", function(_, _, data)
+		local source, index = mcontroller.anchorState()
+		if (source == data.source) and (index == data.index) then return end
 		sbq.resetLounging()
 		mcontroller.setPosition(world.entityPosition(data.source))
 		if not pcall(mcontroller.setAnchorState, data.source, data.index) then

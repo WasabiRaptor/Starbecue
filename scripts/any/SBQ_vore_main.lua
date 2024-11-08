@@ -460,11 +460,12 @@ end
 
 function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
-		if newOccupant.entityId and Occupants.insertOccupant(newOccupant) then
+		local eid = newOccupant.entityId
+		if eid and Occupants.insertOccupant(eid) then
 			Occupants.queueHudRefresh = true
-			local occupant = Occupants.entityId[tostring(newOccupant.entityId)]
+			local occupant = Occupants.entityId[tostring(eid)]
 			if occupant.flags.infuseType and occupant.flags.infused then
-				local infuseType = newOccupant.flags.infuseType
+				local infuseType = occupant.flags.infuseType
 				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 					sbq.settings.infuseSlots[infuseType].item = card
 					sbq.infuseOverrideSettings[infuseType] = {
@@ -476,7 +477,7 @@ function _State:recieveOccupants(newOccupants)
 				end)
 			end
 		else
-			sbq.logInfo(("Could not recieve Occupant: %s %s"):format(newOccupant.entityId, sbq.entityName(newOccupant.entityId)))
+			sbq.logInfo(("Could not recieve Occupant: %s %s"):format(eid, sbq.entityName(eid)))
 		end
 	end
 	return true
@@ -1391,9 +1392,12 @@ function Occupants.insertOccupant(newOccupant)
 	-- sanity check
 	if not newOccupant.entityId then return false end
 	-- check if we already have them
-	if Occupants.entityId[tostring(newOccupant.entityId)] then
+	local occupant = Occupants.entityId[tostring(newOccupant.entityId)]
+	if occupant then
+		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
+		occupant:refreshLocation()
 		-- assume data being recieved is out of date and just use current
-		return false
+		return true
 	end
 
 	local seat
