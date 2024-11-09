@@ -32,7 +32,6 @@
 	],
 
 	"animation" : "/objects/sbq/sbqShop/sbqShopCauldron/sbqShopCauldron.animation",
-	"animationPosition" : [0, 32],
 
 	"particleEmitters" : [
 		// Occasional Big bubble
@@ -230,18 +229,20 @@
 	"orientations" : [
 		{
 			"image" : "sbqShopCauldron.png",
-			"imagePosition" : [-32, 0],
+			"imagePosition" : [-24, 0],
+			"animationPosition" : [-24, 0],
 			"direction" : "left",
 			"flipImages" : true,
-			"renderLayer" : "Object+1",
+			"renderLayer" : "Object+3",
 			"spaceScan" : 0.1,
 			"anchors" : [ "bottom" ]
 		},
 		{
 			"image" : "sbqShopCauldron.png",
-			"imagePosition" : [-32, 0],
+			"imagePosition" : [-24, 0],
+			"animationPosition" : [-24, 0],
 			"direction" : "right",
-			"renderLayer" : "Object+1",
+			"renderLayer" : "Object+3",
 			"spaceScan" : 0.1,
 			"anchors" : [ "bottom" ]
 		}
