@@ -14,7 +14,12 @@
 					"disabled" : false,
 					"settingInfusion" :{
 						"tailSelect" :{
-							"nickit_tail" : false, // it already has this tail so it doesn't need overrides
+							"auto" : "nickit_tail",
+							"nickit_tail" : {  // it already has this tail so it doesn't need the remap
+								"colorRemapGlobalTags" : {
+									"tailColorRemap" : []
+								}
+							},
 							"vaporeon_tail" : {
 								"colorRemapGlobalTags" : { // nickit does have a tertiary color so lets use it here
 									"tailColorRemap" : [
@@ -262,7 +267,24 @@
 	],
 
 	"infuseData" : [
-		"/humanoid/any/basicInfuseData.config"
+		"/humanoid/any/basicInfuseData.config",
+		{
+			"default" : { // default infuse data used for any species
+				"overrideSettings" : {}, // override settings applied when infused anywhere
+				"locations" : {
+					"tail" : {
+						"overrideSettings" : {},
+						"infuseColorRemapGlobalTags" : {
+							"tailInfusedColorRemap" : [
+								["primary","primary"],
+								["secondary","secondary"],
+								["tertiary","tertiary"]
+							]
+						}
+					}
+				}
+			}
+		}
 	]
 
 

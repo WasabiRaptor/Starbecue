@@ -461,7 +461,7 @@ end
 function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
 		local eid = newOccupant.entityId
-		if eid and Occupants.insertOccupant(eid) then
+		if eid and Occupants.insertOccupant(newOccupant) then
 			Occupants.queueHudRefresh = true
 			local occupant = Occupants.entityId[tostring(eid)]
 			if occupant.flags.infuseType and occupant.flags.infused then
@@ -962,12 +962,17 @@ function _Location:setInfusionData()
 	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
 
 	for k, v in pairs(self.settingInfusion or {}) do
+		local v2 = (infuseData.settingInfusion or {})[k] or {}
 		local value = sbq.settings[k]
 		if sbq.config.settingInfusionPreyMap[k] and sbq.settings[k .. "Override"] then
 			local preyVal = sbq.query(infusedItem, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap[k]})
-			value = ((preyVal ~= "default") and preyVal) or value
+			value = ((preyVal ~= "auto") and preyVal) or value
 		end
-		infuseData = sb.jsonMerge(infuseData, v[value] or {})
+		infuseData = sb.jsonMerge(
+			infuseData,
+			(type(v2[value]) == "string") and v2[v2[value]] or v2[value] or {},
+			(type(v[value]) == "string") and v[v[value]] or v[value] or {}
+		)
 	end
 
 	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
@@ -1008,7 +1013,7 @@ function _Location:setInfusionData()
 		end
 	end
 	for tag, remaps in pairs(infuseData.infuseColorRemapGlobalTags or {}) do
-		local sourceColorMap = sbq.query(infuseData, {"infuseColorRemapSources", tag})
+		local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", tag})
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 		animator.setGlobalTag(tag, directives)
@@ -1017,7 +1022,7 @@ function _Location:setInfusionData()
 	for part, tags in pairs(infuseData.infuseColorRemapPartTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sbq.query(infuseData, {"infuseColorRemapSources", part, tag}) or sbq.query(infuseData, {"infuseColorRemapSources", tag})
+			local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", part, tag}) or sbq.query(infuseData, {"colorRemapSources", tag})
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 			animator.setPartTag(part, tag, directives)

@@ -216,7 +216,29 @@
 				"nipplesVisible" : false,
 				"tailInfuseSelect" : "flareon_tail"
 			},
-			"transformResult" : {"species":"sbq/flareon"}
+			"transformResult" : {"species":"sbq/flareon"},
+			"locations" : {
+				"tail" : {
+					"disabled" : false,
+					"settingInfusion" :{
+						"tailSelect" :{
+							"auto" : "flareon_tail",
+							"flareon_tail" : {
+								"globalTags" : {
+									"tailImage" : "/humanoid/sbq/LokiVulpix/Socks/tail.png"
+								},
+								"colorRemapSources" : {
+									"tailColorRemap" : "sbq/LokiVulpix/Socks",
+									"tailInfusedColorRemap" : "sbq/LokiVulpix/Socks"
+								},
+								"colorRemapGlobalTags" : {
+									"tailColorRemap" : []
+								}
+							}
+						}
+					}
+				}
+			}
 		},
 		"/npcs/sbq/LokiVulpix/Socks/tenant.npctype:scriptConfig.voreConfig"
 	],

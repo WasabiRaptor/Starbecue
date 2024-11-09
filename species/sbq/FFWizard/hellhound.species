@@ -7,6 +7,21 @@
 			"defaultSettings" : {
 				"navelVisible" : true,
 				"tailInfuseSelect" : "hellhound_tail"
+			},
+			"locations" : {
+				"tail" : {
+					"disabled" : false,
+					"settingInfusion" :{
+						"tailSelect" :{
+							"auto" : "hellhound_tail",
+							"hellhound_tail" : {
+								"colorRemapGlobalTags" : {
+									"tailColorRemap" : []
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	],

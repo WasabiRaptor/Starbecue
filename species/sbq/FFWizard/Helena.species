@@ -11,7 +11,29 @@
 				"nipplesVisible" : true,
 				"tailInfuseSelect" : "hellhound_tail"
 			},
-			"transformResult" : {"species":"sbq/FFWizard/hellhound"}
+			"transformResult" : {"species":"sbq/FFWizard/hellhound"},
+			"locations" : {
+				"tail" : {
+					"disabled" : false,
+					"settingInfusion" :{
+						"tailSelect" :{
+							"auto" : "hellhound_tail",
+							"hellhound_tail" : {
+								"globalTags" : {
+									"tailImage" : "/humanoid/sbq/FFWizard/Helena/tail.png"
+								},
+								"colorRemapSources" : {
+									"tailColorRemap" : "sbq/FFWizard/Helena",
+									"tailInfusedColorRemap" : "sbq/FFWizard/Helena"
+								},
+								"colorRemapGlobalTags" : {
+									"tailColorRemap" : []
+								}
+							}
+						}
+					}
+				}
+			}
 		},
 		"/npcs/sbq/FFWizard/Helena/tenant.npctype:scriptConfig.voreConfig"
 	],
