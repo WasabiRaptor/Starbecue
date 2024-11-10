@@ -461,6 +461,7 @@ end
 function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
 		local eid = newOccupant.entityId
+		sbq.logInfo(eid)
 		if eid and Occupants.insertOccupant(newOccupant) then
 			Occupants.queueHudRefresh = true
 			local occupant = Occupants.entityId[tostring(eid)]
@@ -1417,7 +1418,7 @@ function Occupants.insertOccupant(newOccupant)
 	local location = SpeciesScript:getLocation(newOccupant.location, newOccupant.subLocation)
 	if not location then return false end
 	local space, subLocation = location:hasSpace(newOccupant.size * newOccupant.sizeMultiplier)
-	if (not space) and not (newOccupant.flags.digested or newOccupant.flags.infused) then return false, "noSpace" end
+	if (not space) and not (newOccupant.flags.digested or newOccupant.flags.infused) then return false end
 	-- if we recieve data for an occupant that is infused somewhere we already have someone infused, then treat them as digested instead
 	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then
 		newOccupant.flags.infused = false
