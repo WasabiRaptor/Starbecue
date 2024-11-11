@@ -58,7 +58,7 @@
     "requireFilledBackground" : true, //whether tenants require the background to be filled,
     "hashHouseAsSeed" : false, //whether the seed for tenants should be based on the precise layout of the house
     "npcsDeliverRent" : true, //whether NPC tenants or the colonydeed should deliver the rent
-    "position" : [0, 1], //relative position to spawn at
+    "position" : [0, 0], //relative position to spawn at
     "positionVariance" : [1, 0], //[x,y] size of randomized spawn area, centered on position
     "firstScan" : [1.0, 2.0], //delay before the first scan occurs
     "scanFrequency" : [5.0, 15.0], //cooldown time between scans (random within range)
