@@ -64,10 +64,17 @@ function init()
 		self.behavior = behavior
 	end
 
-	if not status.statusProperty("sbqDidVornyConvertCheck") then
+	sbq.rollConvert()
+	if not convert then
+		sbq.setupPublicSettings()
+	end
+end
+function sbq.rollConvert()
+	if config.getParameter("sbqConvertType") and not status.statusProperty("sbqDidVornyConvertCheck") then
 		status.setStatusProperty("sbqDidVornyConvertCheck", true)
 		if entity.uniqueId() then return end
-		if not root.speciesConfig(npc.species()).voreConfig then return end
+		local speciesConfig = root.speciesConfig(npc.species())
+		if not speciesConfig.voreConfig then return end
 
 		if config.getParameter("sbqNPC")
 			or config.getParameter("uniqueId")
@@ -77,22 +84,46 @@ function init()
 			return
 		end
 		if tenant then
-			convert = (math.random() <= (config.getParameter("sbqConvertChance") or sbq.config.convertChance))
-			if convert then sbq.timer("maybeConvert", 0.1, function()
-				if sbq.parentEntity() or entity.uniqueId() then
-					sbq.setupPublicSettings()
-					return
-				end
-				convertBackType = npc.npcType()
-				local convertType = config.getParameter("sbqConvertType")
-				if convertType and convert then
-					sbq.tenant_setNpcType(convertType)
-				end
-			end) end
+			convert = (math.random() <= math.max(config.getParameter("sbqConvertChance") or 0, speciesConfig.sbqConvertChance or 0, sbq.config.convertChance))
+			if convert then sbq.timer("maybeConvert", 0.1,
+				function()
+					if sbq.parentEntity() or entity.uniqueId() then
+						sbq.setupPublicSettings()
+						return
+					end
+					if npc.species() == config.getParameter("sbqConvertSpecies") then
+						local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
+						local badSpecies = true
+						local newSpecies
+						while badSpecies do
+							local i = math.random(#speciesList)
+							newSpecies = speciesList[i]
+							badSpecies = sbq.config.transformationBlacklist[newSpecies] or false
+							if not badSpecies then
+								local speciesFile = root.speciesConfig(newSpecies)
+								if speciesFile.voreConfig then
+									if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+										badSpecies = true
+									end
+								else
+									badSpecies = true
+								end
+							end
+							if badSpecies then
+								table.remove(speciesList,i)
+							end
+						end
+						humanoid.setIdentity(humanoid.randomIdentity(newSpecies, humanoid.getIdentity().personalityIndex, npc.seed()))
+
+					end
+					convertBackType = npc.npcType()
+					local convertType = config.getParameter("sbqConvertType")
+					if convertType and convert then
+						sbq.tenant_setNpcType(convertType)
+					end
+				end)
+			end
 		end
-	end
-	if not convert then
-		sbq.setupPublicSettings()
 	end
 end
 

@@ -113,8 +113,22 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	if sbq.settings.speciesTF then
 		if newIdentity.species == "any" then
 			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
-			while ((newIdentity.species == "any") or sbq.config.transformationBlacklist[newIdentity.species]) do
-				newIdentity.species = speciesList[math.random(#speciesList)]
+			local badSpecies = true
+			while badSpecies do
+				local i = math.random(#speciesList)
+				newIdentity.species = speciesList[i]
+				badSpecies = sbq.config.transformationBlacklist[newIdentity.species] or false
+				if not badSpecies then
+					local speciesFile = root.speciesConfig(newIdentity.species)
+					if speciesFile.voreConfig then
+						if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+							badSpecies = true
+						end
+					end
+				end
+				if badSpecies then
+					table.remove(speciesList,i)
+				end
 			end
 		elseif newIdentity.species == "originalSpecies" then
 			newIdentity.species = originalSpecies
