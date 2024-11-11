@@ -120,7 +120,7 @@ function init()
 		for i, tenant in ipairs(occupier.tenants) do
 			if tenant.spawn == "npc" then
 				for _, species in ipairs(tenant.species) do
-					if not root.speciesConfig(species) then return end
+					if (species ~= "any") and not root.speciesConfig(species) then return end
 				end
 			end
 		end
@@ -226,7 +226,7 @@ function chooseTenants(seed, tags)
 		for i, tenant in ipairs(match.tenants) do
 			if tenant.spawn == "npc" then
 				for _, species in ipairs(tenant.species) do
-					if not root.speciesConfig(species) then return end
+					if (species ~= "any") and not root.speciesConfig(species) then return end
 				end
 			end
 		end
@@ -284,6 +284,28 @@ function setTenantsData(occupier)
 	for _, tenant in ipairs(occupier.tenants) do
 		if type(tenant.species) == "table" then
 			tenant.species = tenant.species[math.random(#tenant.species)]
+		end
+		if tenant.species == "any" then
+			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
+			local badSpecies = true
+			while badSpecies do
+				local i = math.random(#speciesList)
+				tenant.species = speciesList[i]
+				badSpecies = sbq.config.transformationBlacklist[tenant.species] or false
+				if not badSpecies then
+					local speciesFile = root.speciesConfig(tenant.species)
+					if speciesFile.forceName then
+						badSpecies = true
+					elseif speciesFile.voreConfig then
+						if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+							badSpecies = true
+						end
+					end
+				end
+				if badSpecies then
+					table.remove(speciesList,i)
+				end
+			end
 		end
 		local npcConfig = root.npcConfig(tenant.type)
 		local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"

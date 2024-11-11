@@ -120,7 +120,9 @@ function sbq.doTransformation(newIdentity, duration, ...)
 				badSpecies = sbq.config.transformationBlacklist[newIdentity.species] or false
 				if not badSpecies then
 					local speciesFile = root.speciesConfig(newIdentity.species)
-					if speciesFile.voreConfig then
+					if speciesFile.forceName then
+						badSpecies = true
+					elseif speciesFile.voreConfig then
 						if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 							badSpecies = true
 						end
