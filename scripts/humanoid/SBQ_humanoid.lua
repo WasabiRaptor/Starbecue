@@ -103,7 +103,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 			newIdentity.gender = ({"male", "female"})[math.random(2)]
 		elseif newIdentity.gender == "swap" then
 			newIdentity.gender = ({ male = "female", female = "male" })[currentIdentity.gender]
-		elseif not newIdentity.gender then
+		elseif (newIdentity.gender ~= "male") and (newIdentity.gender ~= "female") then
 			newIdentity.gender = currentIdentity.gender
 		end
 	else

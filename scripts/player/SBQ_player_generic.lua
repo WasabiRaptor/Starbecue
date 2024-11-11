@@ -17,6 +17,7 @@ function init()
 	sbq.targetPosition = player.aimPosition
 	sbq.loungingIn = player.loungingIn
 	sbq.resetLounging = player.stopLounging
+	sbq.gender = humanoid.gender
 
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")

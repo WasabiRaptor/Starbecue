@@ -696,6 +696,8 @@ function default:transformed(name, action, target, ...)
 	}
 	if not sbq.tableMatches(checkSettings, sbq.getPublicProperty(target, "sbqPublicSettings")) then return false, "targetSettingsMismatch" end
 
+	transformResult.gender = transformResult.gender or occupant.locationSettings.transgender
+
 	occupant.flags.transformed = true
 	occupant.locationSettings.transform = false
 	occupant.locationSettings.transformDigested = false

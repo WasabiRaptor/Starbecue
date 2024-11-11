@@ -106,8 +106,8 @@ function sbq.setupSettingMetatables(entityType)
 		sbq.config.entityTypeOverrideSettings[entityType] or {},
 		sbq.voreConfig.overrideSettings or {}
 	)
-	for _, overrides in pairs(sbq.infuseOverrideSettings or {}) do
-		sbq.settings = sb.jsonMerge(sbq.settings, overrides or {})
+	for _, v in ipairs(sbq.config.infuseOverrideOrder or {}) do
+		sbq.settings = sb.jsonMerge(sbq.settings, (sbq.infuseOverrideSettings or {})[v] or {})
 	end
 	if entityType == "player" then
 		sbq.settings.speciesTF = nil

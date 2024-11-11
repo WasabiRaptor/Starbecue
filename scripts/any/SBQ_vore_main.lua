@@ -930,6 +930,11 @@ end
 
 sbq.infuseOverrideSettings = {}
 function _SpeciesScript:refreshInfusion(slot)
+	sbq.infuseOverrideSettings.cockMatchGender = sbq.settings.cockMatchGender and (sbq.gender() == "male") and sbq.voreConfig.cockMatchGenderOverrides or {}
+	sbq.infuseOverrideSettings.ballsMatchGender = sbq.settings.ballsMatchGender and (sbq.gender() == "male") and sbq.voreConfig.ballsMatchGenderOverrides or {}
+	sbq.infuseOverrideSettings.pussyMatchGender = sbq.settings.pussyMatchGender and (sbq.gender() == "female") and sbq.voreConfig.pussyMatchGenderOverrides or {}
+	sbq.infuseOverrideSettings.breastsMatchGender = sbq.settings.breastsMatchGender and (sbq.gender() == "female") and sbq.voreConfig.breastsMatchGenderOverrides or {}
+
 	for k, v in pairs(self.locations) do
 		local location = self:getLocation(k)
 		if location and location.infuseType and ((not slot) or (slot == location.infuseType)) then

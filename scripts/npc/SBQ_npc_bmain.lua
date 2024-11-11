@@ -34,6 +34,7 @@ function init()
 	sbq.releaseLoungeControl = npc.releaseLoungeControl
 	sbq.loungingIn = npc.loungingIn
 	sbq.resetLounging = npc.resetLounging
+	sbq.gender = humanoid.gender
 
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()

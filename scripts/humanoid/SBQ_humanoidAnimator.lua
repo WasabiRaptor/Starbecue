@@ -11,6 +11,7 @@ function equipmentSlotUpdated(slot, itemDescriptor)
 end
 
 local prevAnimSpecies
+local prevAnimGender
 function initAnimator()
 	old.initAnimator()
 	sbq.refreshRemapTags()
@@ -24,7 +25,12 @@ function initAnimator()
 		if sbq.reloadVoreConfig then
 			sbq.reloadVoreConfig({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
 		end
+	elseif prevAnimGender and (prevAnimGender ~= humanoid.gender()) then
+		if SpeciesScript then
+			SpeciesScript:refreshInfusion()
+		end
 	end
+	prevAnimGender = humanoid.gender()
 	prevAnimSpecies = humanoid.species()
 end
 

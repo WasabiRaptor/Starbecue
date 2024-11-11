@@ -329,10 +329,10 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 		if (effects or {})[k] and not result then
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
-
-			for _, status in ipairs(effects[k]) do
-				if type(status) == "string" then
-
+			local status
+			for _, v in ipairs(effects[k]) do
+				if type(v) == "string" then
+					status = v
 					local effectConfig = (root.effectConfig(status) or {}).effectConfig or {}
 					if effectConfig.description then
 						toolTip = toolTip.."\n"..(sbq.strings[effectConfig.description] or effectConfig.description)
@@ -343,7 +343,11 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 
 				end
 			end
-			table.insert(effectButtons, sb.jsonMerge(param,{type = "sbqCheckBox", script = "changeSetting", setting = k, icon = icon, toolTip = toolTip }))
+			table.insert(effectButtons, sb.jsonMerge(
+				param,
+				sbq.gui.secondaryEffectButton[k] and sbq.replaceConfigTags(sbq.gui.secondaryEffectButton[k], {groupKey = param.groupKey, groupName = param.groupName, setting = param.setting, icon = icon, toolTip = toolTip} )
+				or { type = "sbqCheckBox", script = "changeSetting", setting = k, icon = icon, toolTip = toolTip }
+			))
 		end
 	end
 	return sb.jsonMerge(param, layout)
@@ -480,5 +484,5 @@ function sbq.widgetScripts.dropDownSetting(value, setting, group, name)
 			end
 		end
 	end
-	_ENV.metagui.dropDownMenu(options, 3)
+	_ENV.metagui.dropDownMenu(options, table.unpack(sbq.gui.dropDownArgs[setting] or {}))
 end

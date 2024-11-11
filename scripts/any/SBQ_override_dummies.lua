@@ -20,6 +20,9 @@ end
 function sbq.species()
 	return sbq.voreConfig.entitySpecies or sbq.voreConfig.species or "sbq_dummy"
 end
+function sbq.gender()
+	return sbq.voreConfig.entityGender or "none"
+end
 
 function sbq.directory()
 	return "/humanoid/any/"
