@@ -465,7 +465,7 @@ function _State:recieveOccupants(newOccupants)
 		if eid and Occupants.insertOccupant(newOccupant) then
 			Occupants.queueHudRefresh = true
 			local occupant = Occupants.entityId[tostring(eid)]
-			if occupant.flags.infuseType and occupant.flags.infused then
+			if occupant and occupant.flags.infuseType and occupant.flags.infused then
 				local infuseType = occupant.flags.infuseType
 				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 					sbq.settings.infuseSlots[infuseType].item = card
@@ -1403,7 +1403,7 @@ function Occupants.insertOccupant(newOccupant)
 		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 		occupant:refreshLocation()
 		-- assume data being recieved is out of date and just use current
-		return true
+		return false
 	end
 
 	local seat
@@ -1449,7 +1449,8 @@ function Occupants.finishOccupantSetup(occupant)
 	-- add occupant to tables for easily referencing it
 	table.insert(Occupants.list, occupant)
 	Occupants.seat[occupant.seat] = occupant
-	Occupants.entityId[tostring(occupant.entityId)] = occupant
+	local eid = occupant.entityId
+	Occupants.entityId[tostring(eid)] = occupant
 	local uuid = world.entityUniqueId(occupant.entityId)
 	if uuid then
 		Occupants.entityId[uuid] = occupant
@@ -1460,8 +1461,9 @@ function Occupants.finishOccupantSetup(occupant)
 	occupant:setDismountable(false)
 	world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 
-	sbq.timer(occupant.seat.."Timeout", 1, function ()
-		if occupant:entityLoungingIn() ~= occupant.entityId then occupant:remove() end
+	sbq.forceTimer(occupant.seat .. "Timeout", 1, function()
+		local occupant = Occupants.entityId[tostring(eid)]
+		if occupant and occupant:entityLoungingIn() ~= occupant.entityId then occupant:remove() end
 	end)
 	return true
 end
@@ -1573,7 +1575,7 @@ function _Occupant:update(dt)
 	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove() end
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
-		if not self.flags.newOccupant and self:animProperty("release") then return self:remove() end
+		if self.flags.releasing and self:animProperty("release") then return self:remove() end
 		self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
 		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))
@@ -1641,7 +1643,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	if occupantAnims then
 		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
-	if self:animProperty("release") then return self:remove() end
+	if self.flags.releasing and self:animProperty("release") then return self:remove() end
 	self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
 	self:setLoungeOrientation(self:animProperty("orientation"))
 	self:setLoungeDance(self:animProperty("dance"))

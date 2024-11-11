@@ -102,7 +102,11 @@ function update(dt)
 	old.update(dt)
 
 	local occupantData = status.statusProperty("sbqOccupantData")
-	if occupantData and sbq.timer("missingPredCheck", 1) and occupantData.predUUID and not sbq.loungingIn() then
+	if occupantData
+		and not (occupantData.flags.newOccupant or occupantData.flags.releasing)
+		and sbq.timer("missingPredCheck", 1) and occupantData.predUUID
+		and not sbq.loungingIn()
+	then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
