@@ -126,6 +126,8 @@ function sbq.doTransformation(newIdentity, duration, ...)
 						if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 							badSpecies = true
 						end
+					elseif sbq.config.anyTFSupportedOnly then
+						badSpecies = true
 					end
 				end
 				if badSpecies then

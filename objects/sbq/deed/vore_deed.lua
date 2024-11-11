@@ -300,6 +300,8 @@ function setTenantsData(occupier)
 						if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 							badSpecies = true
 						end
+					else
+						badSpecies = true
 					end
 				end
 				if badSpecies then
