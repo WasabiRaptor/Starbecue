@@ -465,12 +465,13 @@ function sbq.widgetScripts.dropDownSetting(value, setting, group, name)
 		if not result then
 			if sbq.gui.dropDownOptions[v] then
 				table.insert(options, {
-					sbq.replaceConfigTags(sbq.gui.dropDownOptions[v], {selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or ""}),
+					sbq.replaceConfigTags(sbq.gui.dropDownOptions[v][1], {selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or ""}),
 					function()
 						if not locked then
 							sbq.widgetScripts.changeSetting(v, setting, group, name)
 						end
-					end
+					end,
+					sbq.gui.dropDownOptions[v][2]
 				})
 			else
 				table.insert(options, {
