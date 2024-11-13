@@ -9,6 +9,7 @@ dialogueBox = {
 }
 local inital = true
 function init()
+	_ENV.metagui.inputData.sbq.dialogue = nil
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()), function(actions)
 		if actions and actions[1] then
 			_ENV.actionButton:setVisible(not sbq.noActions)

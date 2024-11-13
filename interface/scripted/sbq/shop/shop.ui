@@ -13,28 +13,29 @@
 			{ "type" : "tabField", "id" : "shopTabField", "layout" : "horizontal", "tabs" : [
 			]},
 			{ "type" : "layout", "mode" : "vertical", "size" : [ 116, 176 ], "expandMode":[0,2], "children" : [
-				{ "type" : "panel", "id" : "itemInfoPanel", "expandMode" : [1,1], "style" : "flat", "children" : [ { "mode" : "vertical" },
-					[{ "type" : "panel", "id" : "itemTitlePanel", "style" : "convex", "size" : [ 116, 24 ], "children" : [ { "mode" : "horizontal" },
-						{ "type" : "itemSlot", "id" : "itemInfoPanelSlot", "autoInteract" : false },
-						[
-							{ "type" : "label", "id" : "itemNameLabel", "text" : "" },
-							{ "type" : "label", "id" : "itemCategoryLabel", "text" : "" }
-						]
-					]}],
-					{ "type" : "layout", "id" : "itemContentsLayout", "mode" : "vertical", "expandMode" : [2,2], "children" : [
-						{"expandMode" : [2,2]},
-						{ "type" : "canvas", "id" : "itemCanvas" }
-					]},
-					[{ "type" : "panel", "id" : "itemBottomPanel", "expandMode" : [1,0], "style" : "convex", "children" : [
-						{ "type" : "label", "id" : "itemDescriptionLabel", "text" : " " }
+				{ "mode" : "vertical" },
+				{ "type" : "panel", "id" : "itemTitlePanel", "expandMode" : [1,0], "style" : "convex", "children" : [
+					{ "mode" : "horizontal", "expandMode" : [1,0] },
+					{ "type" : "itemSlot", "id" : "itemInfoPanelSlot", "autoInteract" : false },
+					[
+						{ "type" : "label", "id" : "itemNameLabel", "text" : "" },
+						{ "type" : "label", "id" : "itemCategoryLabel", "text" : "" }
+					]
+				]},
+				{ "type" : "panel", "id" : "itemBottomPanel", "expandMode" : [1,0], "style" : "convex", "children" : [
+					{ "mode" : "vertical", "expandMode" : [1,0] },
+					{ "type" : "label", "id" : "itemDescriptionLabel", "text" : " " }
+				]},
+				{ "type" : "panel", "id" : "itemRecipePanel", "expandMode" : [1,0], "style" : "convex", "children" : [
 
-					]}]
+				]},
+				{ "type" : "layout", "mode" : "vertical", "expandMode" : [1,2], "children" : [
 				]},
 				{ "type" : "panel", "id" : "itemBuyPanel", "expandMode" : [1,0], "style" : "convex", "children" : [ { "mode" : "horizontal" },
 					{ "type" : "iconButton", "id" : "decAmount", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-					{ "type" : "label", "id" : "buyAmountLabel", "text" : "1", "inline": true },
+					{ "type" : "sbqTextBox", "id" : "buyAmountLabel", "text" : "1", "settingType" : "number", "min" : 1 },
 					{ "type" : "iconButton", "id" : "incAmount", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" },
-					{ "type" : "button", "id" : "buy", "caption" : "Buy", "expandMode" : [1, 0]}
+					{ "type" : "button", "id" : "buy", "caption" : ":buy", "expandMode" : [1, 0]}
 				]}
 			]}
 		]}]}

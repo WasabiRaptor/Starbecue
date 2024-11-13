@@ -382,7 +382,7 @@ function dialogueProcessor.speakDialogue(callback)
 		self.board:setEntity("interactionSource", dialogue.target)
 	end
 	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * string.len(results.dialogue))
-	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
+	if sbq.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
 			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
 	else

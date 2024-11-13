@@ -121,9 +121,14 @@ function misc.generateSettingsCard(type)
 	sbq.logInfo("Exported"..type.."settings")
 	sbq.logInfo(settings,2)
 	return { name = "secretnote", count = 1, parameters = {
-		shortdescription = sbq.strings[type.."SettingsCard"] or type.."SettingsCard",
-		description = sbq.createdDate(),
-		sbqSettings = settings
+		shortdescription = sbq.entityName(sbq.entityId()).." "..(sbq.strings[type.."SettingsCard"] or type.."SettingsCard"),
+		description = "",
+		sbqSettings = settings,
+		tooltipKind = "filledcapturepod",
+		tooltipFields = {
+			collarNameLabel = sbq.createdDate(),
+			objectImage = world.entityPortrait(entity.id(), "full")
+		}
 	}, }
 end
 

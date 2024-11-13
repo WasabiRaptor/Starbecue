@@ -12,7 +12,12 @@
 	// greeting is the default start of the tree
 	// settings come from itself
 	"greeting" : {
-		"new" : {"jump" : ".converse"},
+		"new" : {
+			"options" : [
+				[":openShopOption", ".shop"],
+				[":talkOption", ".converse"]
+			]
+		},
 		"next" : "giveRewards",
 		"rewards" : {
 			"replace" : {"dialogueRandom" : [":greetingRewards"]},
@@ -24,6 +29,23 @@
 		"default" : {
 			"replace" : {"dialogueRandom" : [":greeting"]}
 		}
+	},
+	"shop" : {
+		"next" : "openNewDialogueBox",
+		"new" : {
+			"ui" : "starbecue:shop",
+			"inputData" : {"sbq":{"shopRecipes" : "/recipes/sbqShop/auriShopRecipes.config", "dialogueTreeStart" : ".converseShop"}}
+		}
+	},
+	"converseShop" : {
+		"new" : {
+			"dialogueRandom" :[":converseShop"],
+			"options" : [
+			]
+		}
+	},
+	"itemSelection" : {
+
 	},
 	// lines triggered when a player may recieve a certain reward
 	"rewardNotify" :{

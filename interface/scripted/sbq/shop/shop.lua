@@ -66,17 +66,23 @@ function init()
 					_ENV.itemCategoryLabel:setText("^gray;"..(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category))
 					_ENV.itemDescriptionLabel:setText(resultItemConfig.parameters.description or resultItemConfig.config.description)
 
-					if not dialogueBox.refresh((".itemSelection."..( recipe.dialogue or recipe.result)), dialogue.prev, sbq.dialogueTree) then
-						if dialogue.path ~= ".converse" then
-							dialogueBox.refresh( ".converse", dialogue.prev, sbq.dialogueTree)
-						end
+
+					if not dialogueProcessor.getDialogue(".itemSelection."..(recipe.dialogue or recipe.result)) then
+						dialogueProcessor.getDialogue(".converseShop" )
 					end
+					dialogueBox.refresh()
 				end
 			end
 		end
 	end
 end
 
+function _ENV.buyAmountLabel:onTextChanged()
+	local v = tonumber(self.text)
+	if type(v) == "number" then
+		buyAmount = math.floor(v)
+	end
+end
 
 function _ENV.decAmount:onClick()
 	buyAmount = math.max(1, buyAmount - 1)

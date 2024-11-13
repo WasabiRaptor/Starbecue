@@ -11,6 +11,8 @@ function init()
 		if storage[k] == nil then storage[k] = v end
 	end
 	sbq.config = root.assetJson("/sbq.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+
 	sbq.facingDirection = object.direction
 
 	sbq.entityId = entity.id
@@ -19,6 +21,8 @@ function init()
 	sbq.sayPortrait = object.sayPortrait
 
 	sbq.setProperty = object.setConfigParameter
+
+	sbq.dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree"))
 
 	storage.baseStats = sbq.initStats(config.getParameter("stats") or {})
 	storage.effectCategories = sb.jsonMerge(config.getParameter("effectCategories") or {}, storage.effectCategories or {})

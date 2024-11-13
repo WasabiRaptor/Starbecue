@@ -61,12 +61,21 @@
 			"new" : {"dialogueRandom" : [":crewFollow"]}
 		}
 	},
-
+	"converseShop" : {
+		"new" : {
+			"dialogueRandom" :[":converse"],
+			"options" : [
+				["Tell me about yourself", ".converse.talkAboutSelf"],
+				["Tell me about your kinks", ".converse.talkAboutKinks"],
+				["Tell me about your body", ".converse.talkAboutBody"]
+			]
+		}
+	},
 	"converse" : {
 		"new" : {
 			"dialogueRandom" :[":converse"],
 			"options" : [
-				["Can you help me make something?", ".converse.lokiShop"],
+				["Can you help me make something?", ".lokiShop"],
 				["Tell me about yourself", ".talkAboutSelf"],
 				["Tell me about your kinks", ".talkAboutKinks"],
 				["Tell me about your body", ".talkAboutBody"]
@@ -81,7 +90,7 @@
 			"next" : "openNewDialogueBox",
 			"new" : {
 				"ui" : "starbecue:shop",
-				"inputData" : { "sbq":{"shopRecipes" : "/recipes/sbqShop/lokiShopRecipes.config", "dialogueTreeStart" : "converse"} }
+				"inputData" : { "sbq":{"shopRecipes" : "/recipes/sbqShop/lokiShopRecipes.config", "dialogueTreeStart" : ".converseShop"} }
 			}
 		},
 		"introduce" : {"new" : { "dialogue" : ":introduce"}},
