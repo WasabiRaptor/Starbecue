@@ -1,0 +1,57 @@
+{
+	"name": "sbq_guardT3_crewkin",
+	"priority": 54,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"tier3": 12,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"pretty" : 8,
+		"odd" : 1,
+		"science" : 8
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"apexbloodbank", "count":1},
+		{"name":"apexpod2", "count":1},
+		{"name":"hazardmicroscope", "count":1},
+		{"name":"plasmadisc", "count":1},
+		{"name":"symbiotesample", "count":1},
+		{"name":"biohazardsign", "count":1},
+		{"name":"crewkinbannerlarge", "count":1},
+		{"name":"crewkinbannersmall", "count":1},
+		{"name":"crewkinposter1", "count":1},
+		{"name":"crewkinposter2", "count":1},
+		{"name":"crewkinvending", "count":1},
+		{"name":"crewkinplush1", "count":1},
+		{"name":"crewkinplush2", "count":1},
+		{"name":"crewkinplush3", "count":1},
+		{"name":"crewkinplush4", "count":1},
+		{"name":"crewkinplush5", "count":1},
+		{"name":"crewkinplush6", "count":1},
+		{"name":"crewkinplush7", "count":1},
+		{"name":"crewkinplush8", "count":1},
+		{"name":"crewkinplush9", "count":1},
+		{"name":"crewkinplush10", "count":1},
+		{"name":"crewkinplush11", "count":1},
+		{"name":"crewkinplush12", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 3,
+			"species": ["crewkin"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

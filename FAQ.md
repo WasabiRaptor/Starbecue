@@ -16,8 +16,8 @@
 ### Q: Why can't I eat more prey even though I have hammerspace?
 > Lounge positions in starbound must be pre-defined in the entity data, therefore they cannot be added to on the fly, I decided that 16 slots is a reasonable amount to be the limit.
 
-### Q: If I get transformed and upgrade my shipe while a different species will it break?
-> A: It should stay as the original ship species
+### Q: If I get transformed and upgrade my ship while a different species will it break?
+> A: Thats a bug in retail and fixed in SBQ-Engine, It should stay as the original ship species
 
 ### SSVM
 > Hasn't been a dependency for years

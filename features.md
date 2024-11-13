@@ -344,6 +344,8 @@ This mod includes patches for the species below to add compatibility, it does no
 - [Orcana](https://steamcommunity.com/sharedfiles/filedetails/?id=729432341) : orcana
 - [Vesperian](https://steamcommunity.com/sharedfiles/filedetails/?id=3334911053) : vesperian
 - [Saurian](https://steamcommunity.com/sharedfiles/filedetails/?id=2185577907) : saurian
+- [Crewkin](https://steamcommunity.com/sharedfiles/filedetails/?id=2256524616) : crewkin
+- [Crewmate](https://steamcommunity.com/sharedfiles/filedetails/?id=2245871063) : crewmate
 
 ---
 
