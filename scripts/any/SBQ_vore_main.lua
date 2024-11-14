@@ -67,7 +67,6 @@ function sbq.init(config)
 	sbq.clearStatModifiers("sbqLockDown")
 	sbq.clearStatModifiers("sbqHideSlots")
 	sbq.clearStatModifiers("sbqStripping")
-	sbq.defaultAnimatorTags = animator.getTags()
 	sbq.settingsInit()
 	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
@@ -1092,20 +1091,24 @@ function _Location:getRemainingSpace(maxFill, occupancy, size)
 	return remainingSpace
 end
 
-function _Location:markSizeDirty()
+function _Location:markSizeDirty(force)
 	self.occupancy.sizeDirty = true
+	self.occupancy.forceSizeRefresh = force
 	if self.subKey then
 		local parentLocation = SpeciesScript:getLocation(self.key)
 		parentLocation.occupancy.sizeDirty = true
+		parentLocation.occupancy.forceSizeRefresh = force
 	else
 		for k, v in pairs(self.subLocations or {}) do
 			local subLocation = SpeciesScript:getLocation(self.key, k)
 			subLocation.occupancy.sizeDirty = true
+			subLocation.occupancy.forceSizeRefresh = force
 		end
 	end
 	for _, sharedName in ipairs(self.sharedWith or {}) do
 		local shared = SpeciesScript:getLocation(sharedName)
 		shared.occupancy.sizeDirty = true
+		shared.occupancy.forceSizeRefresh = force
 	end
 end
 function _Location:markSettingsDirty()
@@ -1185,7 +1188,7 @@ function _Location:updateOccupancy(dt)
 			self.struggleSizes or { 0 }
 		)
 
-		if ((prevVisualSize ~= self.occupancy.visualSize) or (self.countBasedOccupancy and (prevCount ~= self.occupancy.count)))
+		if self.occupancy.forceSizeRefresh or ((prevVisualSize ~= self.occupancy.visualSize) or (self.countBasedOccupancy and (prevCount ~= self.occupancy.count)))
 			and not (self.subKey and self.occupancy.symmetry)
 		then
 			self:doSizeChangeAnims(prevVisualSize, prevCount)
@@ -1234,6 +1237,7 @@ function _Location:update(dt)
 end
 
 function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
+	self.occupancy.forceSizeRefresh = false
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 	if self.idleAnims then

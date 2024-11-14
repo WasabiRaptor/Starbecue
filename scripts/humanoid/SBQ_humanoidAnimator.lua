@@ -22,12 +22,18 @@ function initAnimator()
 	-- equipped.primary(humanoid.getItemSlot("primary"))
 	-- equipped.alt(humanoid.getItemSlot("alt"))
 	if prevAnimSpecies and (prevAnimSpecies ~= humanoid.species()) then
+		sbq.defaultAnimatorTags = animator.getTags()
 		if sbq.reloadVoreConfig then
 			sbq.reloadVoreConfig({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
 		end
 	elseif prevAnimGender and (prevAnimGender ~= humanoid.gender()) then
 		if SpeciesScript then
 			SpeciesScript:refreshInfusion()
+		end
+	end
+	if SpeciesScript and SpeciesScript.active then
+		for _, occupant in ipairs(Occupants.list) do
+			occupant:getLocation():markSizeDirty(true)
 		end
 	end
 	prevAnimGender = humanoid.gender()
