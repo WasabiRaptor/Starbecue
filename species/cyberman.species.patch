@@ -1,0 +1,70 @@
+[{"op":"merge", "path":"", "value": {
+
+	"baseColorMap" : {
+		"primary" : ["c7815b", "d39c6c", "ffc181", "ffe2c5"],
+		"secondary" : ["434343", "6d6d6d", "9b9b9b"],
+		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
+		"flesh" : ["702c55", "8b3c6c", "a94783"]
+	},
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+			{"00adba":"bc1002", "check" : {"navelVisible":true}}, // replaces the single pixel of the navel with a color in the primary palette to have it visible or not
+			{"00adba":"eb3629", "check" : {"navelVisible":false}},
+			["primary","primary"]
+		],
+		"cockColorRemap" : [
+			["primary","primary"]
+		],
+		"pussyColorRemap" : [
+			["flesh","flesh"]
+		],
+		"ballsColorRemap" : [
+			["primary","primary"]
+		],
+		"breastsColorRemap" : [
+			["primary","primary"],
+			["primary_180","primary"], // this is for a few pixels near the top of the breasts where they attach to the chest in expand animations, usually the same as the main breast color
+			// but some sprites you may want to switch it out if the color immediately above the breasts is different
+			["flesh","flesh", {"nipplesVisible":true}], // replaces the nipple colors based on whether they're visible or not
+			["flesh","primary", {"nipplesVisible":false}]
+		]
+	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config", // path to the base vore config most humanoid races should share.
+		{
+			// setting values to lock to a specific value when playing as this species
+			"overrideSettings" : {
+			},
+			// default setting values for this species
+			"defaultSettings" : {
+				"nipplesVisble" : false,
+				"navelVisible" : true
+			}
+		}
+	],
+
+	// custom animation parameters for this species
+	"animationCustom" : [
+		"/humanoid/any/humanoidPred.animation", // the parts that get added to the pred
+		"/humanoid/any/voreOccupants.animation", // the seats and animations for the prey getting eaten
+		{"globalTagDefaults":{ // example overrides for relevant image parts but commented out
+			// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
+
+			// self explainitory
+			// "bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
+			// "cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
+			// "balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+			// "balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+			// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+			// "breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+			// "breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+			// "pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png",
+		}}
+	],
+
+	// data to used when this species is infused (Sentient Fat, Belly TF, CTF etc.)
+	"infuseData" : [
+		"/humanoid/any/basicInfuseData.config" // a path to base values all species should share
+	]
+
+}}]

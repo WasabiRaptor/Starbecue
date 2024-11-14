@@ -346,6 +346,8 @@ This mod includes patches for the species below to add compatibility, it does no
 - [Saurian](https://steamcommunity.com/sharedfiles/filedetails/?id=2185577907) : saurian
 - [Crewkin](https://steamcommunity.com/sharedfiles/filedetails/?id=2256524616) : crewkin
 - [Crewmate](https://steamcommunity.com/sharedfiles/filedetails/?id=2245871063) : crewmate
+- [Gallifreyan](https://steamcommunity.com/sharedfiles/filedetails/?id=953528708) : gallifreyan
+- [Cyberman](https://steamcommunity.com/sharedfiles/filedetails/?id=953528708) : cyberman
 
 ---
 
