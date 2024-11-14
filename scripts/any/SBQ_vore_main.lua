@@ -64,6 +64,7 @@ function controlReleased(seat, control, time)
 end
 
 function sbq.init(config)
+	sbq.defaultAnimatorTags = animator.getTags()
 	sbq.clearStatModifiers("sbqLockDown")
 	sbq.clearStatModifiers("sbqHideSlots")
 	sbq.clearStatModifiers("sbqStripping")

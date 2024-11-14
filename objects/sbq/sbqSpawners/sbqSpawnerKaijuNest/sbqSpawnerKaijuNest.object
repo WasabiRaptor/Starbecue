@@ -19,7 +19,8 @@
 			"flipImages": true,
 			"anchors": ["bottom"],
 			"spaces" : [ [-4,0], [-3,0], [-2,0], [0,0], [1,0], [2,0], [3,0], [4,0] ],
-			"collision" : "solid"
+			"collision" : "solid",
+			"collisionSpaces" : [ [-4,0],  [4,0] ]
 		},
 		{
 			"imageLayers" : [ { "image" : "sbqSpawnerKaijuNest.png" } ],
@@ -27,7 +28,8 @@
 			"direction": "right",
 			"anchors": ["bottom"],
 			"spaces" : [ [-4,0], [-3,0], [-2,0], [0,0], [1,0], [2,0], [3,0], [4,0] ],
-			"collision" : "solid"
+			"collision" : "solid",
+			"collisionSpaces" : [ [-4,0],  [4,0] ]
 		}
 	],
 	"spawnOffset" : [0, 1],
