@@ -283,7 +283,11 @@ function sbq.refreshDeedPage()
 		local panel = { type = "panel", expandMode = { 0, 0 }, style = "flat", children = {
 			{ mode = "vertical", expandMode = { 0, 0 } },
 			{ type = "canvas", id = "tenant" .. i .. "Canvas", size = canvasSize, expandMode = { 0, 0 } },
-			{ type = "label", text = name, align = "center" },
+			{
+				{ expandMode = { 0, 0 }},
+				{ type = "label", text = name, align = "center", inline = true },
+				{ type = "iconButton", id = "tenant" .. i.. "Customize", image = "/interface/scripted/sbq/customize.png", toolTip = ":customize", visible = world.getNpcScriptParameter(id, "sbqIsCustomizable") or false }
+			},
 			{ type = "button", caption = ":settings", id = "tenant" .. i .. "Settings", size = canvasSize[1], expandMode = { 0, 0 }},
 			{ type = "button", caption = ":remove", color = "FF0000", id = "tenant" .. i .. "Remove", size = canvasSize[1], expandMode = { 0, 0 } }
 		} }
@@ -292,6 +296,7 @@ function sbq.refreshDeedPage()
 		local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 		local remove = _ENV["tenant" .. i .. "Remove"]
 		local settings = _ENV["tenant" .. i .. "Settings"]
+		local customize = _ENV["tenant" .. i .. "Customize"]
 		function remove:onClick()
 			local item = sbq.generateNPCItemCard(tenant)
 			sb.logInfo("Removed Tenant:"..sb.printJson(tenant,2))
@@ -316,6 +321,13 @@ function sbq.refreshDeedPage()
 				pane.playSound("/sfx/interface/clickon_error.ogg")
 			end)
 		end
+		function customize:onClick()
+			local id = world.getUniqueEntityId(tenant.uniqueId)
+			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end
+			player.setScriptContext("starbecue")
+			player.callScript("sbq.customizeEntity", id)
+		end
+
 	end
 	_ENV.tenantListScrollArea:addChild({ type="panel", style="flat", id="insertTenantPanel", expandMode={0,0}, children={
 		{ type="itemSlot", id="insertTenantItemSlot", autoInteract=true },

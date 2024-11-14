@@ -461,7 +461,6 @@ end
 function _State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
 		local eid = newOccupant.entityId
-		sbq.logInfo(eid)
 		if eid and Occupants.insertOccupant(newOccupant) then
 			Occupants.queueHudRefresh = true
 			local occupant = Occupants.entityId[tostring(eid)]

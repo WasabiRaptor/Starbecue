@@ -31,6 +31,12 @@ function sbqTenant:getUpgrade(upgradeName, tier, bonus)
 	self.overrides.scriptConfig.sbqUpgrades[upgradeName] = self.overrides.scriptConfig.sbqUpgrades[upgradeName] or {}
 	self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] = math.max(self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] or 0, bonus)
 end
+function sbqTenant:updateIdentities(response)
+	self.overrides.identity = response.currentIdentity
+	self.overrides.statusControllerSettings = self.overrides.statusControllerSettings or {}
+	self.overrides.statusControllerSettings.statusProperties = self.overrides.statusControllerSettings.statusProperties or {}
+	self.overrides.statusControllerSettings.statusProperties.sbqSpeciesIdentities = response.speciesIdentites
+end
 
 function init()
 	sbq.config = root.assetJson("/sbq.config")
@@ -70,6 +76,11 @@ function init()
 	end)
 	message.setHandler("sbqParentUpdateType", function(_, _, recruitUuid, uuid, ...)
 		_ENV.replaceTenant(uuid, ...)
+	end)
+	message.setHandler("sbqParentUpdateIdentities", function(_, _, recruitUuid, uuid, ...)
+		local i = findTenant(uuid)
+		if not i then return end
+		sbqTenant.updateIdentities(storage.occupier.tenants[i], ...)
 	end)
 
 

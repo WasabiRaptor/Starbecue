@@ -214,7 +214,12 @@ function sbq.tenant_setNpcType(npcType)
 				uniqueId = uuid,
 				sbqOverrideUniqueId = uuid
 			},
-			scale = mcontroller.scale()
+			scale = mcontroller.scale(),
+			statusControllerSettings = {
+				statusProperties = {
+					sbqSpeciesIdentities = status.statusProperty("sbqSpeciesIdentities")
+				}
+			}
 		},
 		storage = storage
 	}

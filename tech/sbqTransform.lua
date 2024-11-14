@@ -1,5 +1,7 @@
 sbq = {}
-require"/scripts/any/SBQ_util.lua"
+require "/scripts/any/SBQ_util.lua"
+require "/scripts/any/SBQ_RPC_handling.lua"
+
 sbq_transform = {}
 function init()
 	sbq.config = root.assetJson("/sbq.config")
@@ -21,6 +23,7 @@ end
 local specialHeldTime
 local specialHeld
 function update(args)
+	sbq.checkRPCsFinished(args.dt)
 	if args.moves["special1"] then
 		specialHeld = true
 		specialHeldTime = specialHeldTime + args.dt
@@ -217,8 +220,10 @@ function _RadialMenu:assignFavorite(slot, species)
 	self:open("TopMenu")
 end
 function _RadialMenu:openCharCreation()
-	player.interact("OpenCharCreation",
-		{ speciesIdentites = speciesIdentites, currentSpecies = player.species()})
+	sbq.addRPC(player.characterCreation({ speciesIdentites = speciesIdentites, currentSpecies = player.species()}), function (response)
+			status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
+			humanoid.setIdentity(response.currentIdentity)
+	end)
 end
 
 function sbq_transform.getPortrait(portrait, species)

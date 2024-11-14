@@ -22,6 +22,7 @@ function init()
 			for k, v in pairs(sbq.cosmeticSlots) do
 				_ENV[k]:setItem(v)
 			end
+			_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(pane.sourceEntity(), "sbqIsCustomizable") or false)
 		end
 	elseif entityType == "object" then
 		_ENV.stripping:setVisible(world.getObjectParameter(pane.sourceEntity(), "hasCosmeticSlots") or false)
@@ -156,3 +157,8 @@ _ENV.headCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.chestCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.legsCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.backCosmetic.onItemModified = misc.cosmeticUpdated
+
+function _ENV.customizeNPC:onClick()
+	player.setScriptContext("starbecue")
+	player.callScript("sbq.customizeEntity", pane.sourceEntity())
+end

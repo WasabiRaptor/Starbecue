@@ -51,6 +51,15 @@ function init()
 		if not recruit then return end
 		recruit:sbqUpdateType(...)
 	end)
+	message.setHandler("sbqParentUpdateIdentities", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.recruitSpawner:getRecruit(recruitUuid)
+		if not recruit then
+			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
+		end
+		if not recruit then return end
+		recruit:sbqUpdateIdentities(...)
+	end)
+
 	message.setHandler("sbqCanGainFollower", function (_,_, recruitUuid)
 		return _ENV.checkCrewLimits(recruitUuid) or false
 	end)

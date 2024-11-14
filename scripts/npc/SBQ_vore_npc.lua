@@ -94,6 +94,19 @@ function init()
 		tenant.backup()
 	end)
 
+	message.setHandler("sbqUpdateIdentities", function (_,_, response)
+		status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
+		humanoid.setIdentity(response.currentIdentity)
+		local parent, recruitUuid = sbq.parentEntity()
+		if parent then
+			world.sendEntityMessage(parent, "sbqParentUpdateIdentities", recruitUuid, entity.uniqueId(), response)
+		end
+	end)
+
+	if not status.statusProperty("sbqSpeciesIdentities") then
+		status.setStatusProperty("sbqSpeciesIdentities", {[humanoid.species()] = humanoid.getIdentity()})
+	end
+
 	sbq.randomTimer("huntingCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 	sbq.randomTimer("lockDownCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 end

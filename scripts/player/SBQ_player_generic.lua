@@ -273,6 +273,11 @@ end
 function sbq.predHudOpen(open)
 	predHudOpen = open
 end
+function sbq.customizeEntity(eid)
+	sbq.addRPC(player.characterCreation({ speciesIdentites = world.entityStatusProperty(eid, "sbqSpeciesIdentities"), currentSpecies = world.entitySpecies(eid) }), function(response)
+		world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
+	end)
+end
 
 function teleportOut()
 	local occupantData = status.statusProperty("sbqOccupantData")

@@ -33,6 +33,11 @@ function init()
 		if not recruit then return end
 		recruit:sbqUpdateType(...)
 	end)
+    message.setHandler("sbqParentUpdateIdentities", function(_, _, recruitUuid, uuid, ...)
+		local recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
+		if not recruit then return end
+		recruit:sbqUpdateIdentities(...)
+	end)
 
 end
 
@@ -81,5 +86,13 @@ end
 
 function _ENV.Pet:sbqUpdateType(newConfig)
 	util.mergeTable(self.spawnConfig, newConfig)
+	self.spawner:markDirty()
+end
+
+function _ENV.Pet:sbqUpdateIdentities(response)
+	self.spawnConfig.parameters.identity = response.currentIdentity
+	self.spawnConfig.parameters.statusControllerSettings = self.spawnConfig.parameters.statusControllerSettings or {}
+	self.spawnConfig.parameters.statusControllerSettings.statusProperties = self.spawnConfig.parameters.statusControllerSettings.statusProperties or {}
+	self.spawnConfig.parameters.statusControllerSettings.statusProperties.sbqSpeciesIdentities = response.speciesIdentites
 	self.spawner:markDirty()
 end
