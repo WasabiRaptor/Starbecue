@@ -349,6 +349,7 @@ This mod includes patches for the species below to add compatibility, it does no
 - [Crewmate](https://steamcommunity.com/sharedfiles/filedetails/?id=2245871063) : crewmate
 - [Gallifreyan](https://steamcommunity.com/sharedfiles/filedetails/?id=953528708) : gallifreyan
 - [Cyberman](https://steamcommunity.com/sharedfiles/filedetails/?id=953528708) : cyberman
+- [Galactic Goblins](https://steamcommunity.com/sharedfiles/filedetails/?id=2925162796) : duragoblin
 
 ---
 
