@@ -308,6 +308,7 @@ This mod includes patches for the species below to add compatibility, it does no
 - [Delphox](https://steamcommunity.com/sharedfiles/filedetails/?id=2260578148) : delphox
 - [Zoroark](https://steamcommunity.com/sharedfiles/filedetails/?id=2811625141) : zoroark
 - [Hisui Zoroark](https://steamcommunity.com/workshop/filedetails/?id=2813977483) : hisuzor
+- [Gardevan](https://steamcommunity.com/workshop/filedetails/?id=780188370) : gardevan
 - [Crylan](https://steamcommunity.com/sharedfiles/filedetails/?id=1197335162) : crylan
 - [Rodent](https://github.com/Zygahedron/StarboundSimpleVoreMod) (Sheights' version of SSVM is broken, this is a fixed fork) : rodent
 - [Lyceen](https://steamcommunity.com/sharedfiles/filedetails/?id=1360547769) : lyceen
