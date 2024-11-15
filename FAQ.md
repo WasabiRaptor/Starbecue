@@ -2,10 +2,15 @@
 
 ### Q: It's crashing when I try to start the game!
 > A: Manually verify each file is installed correctly, the script puts things in the expected default location, your computer may have installed starbound somewhere else.
+> A: If you're hosting a server, make sure you downloaded and are using the provided server executable.
 > A: Make sure to remove old versions.
+
+### Q: How do I get to the shop?
+> A: If you can't find the fireplace on a lush planet, you can access it via the outpost teleporter.
 
 ### Q: I can't do X vore action!
 > A: Check your pred settings, make sure it's enabled, if it is, check the target's settings using the Nominomicon, they might be disabled or locked, if you can't check their settings they're incompatible.
+> A: If its Tail Vore, make sure your tail is compatible with it.
 
 ### Q: NPC/Monster/Object won't do X vore action!
 > A: Check your prey settings, if they're enabled, then check the NPC's settings, they might be disabled or locked.
@@ -18,6 +23,10 @@
 
 ### Q: If I get transformed and upgrade my ship while a different species will it break?
 > A: Thats a bug in retail and fixed in SBQ-Engine, It should stay as the original ship species
+
+### Q: Can X species be supported?
+> A: It might! and I'm gonna need yooooour help! Use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) which will work with most species, and then send me the files afterwards.
+> A: I take requests from patrons for species compat from time to time, it will probably be faster if you do it yourself, its not very hard.
 
 ### SSVM
 > Hasn't been a dependency for years

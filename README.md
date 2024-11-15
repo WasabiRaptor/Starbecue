@@ -1,3 +1,7 @@
+# Support Us!
+This is my primary income, and with the current political climate in the USA a person such as myself is going to need all the savings she can get incase shit hits the fan.
+https://www.patreon.com/LokiVulpix
+
 # Starbecue
 
 Starbecue is an 18+ fetish mod created for starbound that focuses mainly on Vore, Macro/Micro, and Transformation fetish content as well as many adjacent kinks.

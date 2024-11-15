@@ -1,4 +1,8 @@
 
+# Support Us!
+This is my primary income, and with the current political climate in the USA a person such as myself is going to need all the savings she can get incase shit hits the fan.
+https://www.patreon.com/LokiVulpix
+
 # Getting Started
 On creation of a new character, a popup menu will open up to allow one to quickly assign vore preferences, as well as an agreement to enable yourself to use the mod's content. To change those settings and access further settings, then open the toolbar and select **Starbecue Settings** to open the settings menu.
 
@@ -75,13 +79,15 @@ NPCs can be forced to begin hunting with a simple command while your cursor is h
 
 NPCs which willingly request to be eaten or gave consent to be eaten will be treated as if they are holding **Shift** for 5 minutes while struggling, therefore they will not be attempting to escape during that time period. However this also means that they will not struggle into other locations in the body during that period.
 
-### Vore Bandits : sbqVoreBandit
-Vore Bandits will **always** spawn with Oral Vore Pred enabled, and will **always** spawn with the main effect of their body locations set to Fatal Digest, and they will not hunt 'friendly' characters (other enemies on the same team as themselves). So watch out, they'll see you as a meal the moment they set their sights on you.
-
 ### Vore Tenants
 Vore tenants are summoned via the vore colony deed purchaseable in Auri's shop.
 - Tenant : sbqVoreTenant
 - Guard : sbqVoreFriendlyGuardTenant
+
+### Vore Bandits : sbqVoreBandit
+Vore Bandits will **always** spawn with Oral Vore Pred enabled, and will **always** spawn with the main effect of their body locations set to Fatal Digest, and they will not hunt 'friendly' characters (other enemies on the same team as themselves). So watch out, they'll see you as a meal the moment they set their sights on you.
+
+Vore bandits can intentionally be summoned via 'Evil' Colony deeds which are also purchasable at the shop.
 
 ### Vore Crew
 Randomly generated NPC Tenants can graduate to being a crew member if applicable! The Nominomicon can also be used to convert vanilla crew variants into a vore capable version of themselves! Only the owner of the crewmember can access their menu with the nominomicon to configure settings/convert them.
@@ -143,8 +149,7 @@ Vore Actions available on default NPCs/Players
 - Breast Vore
 - Cock Vore
 
-Some species may have additional types if available!
-- Tail Vore
+Tail Vore reqires the species' default tail being compatible, or having a compatible tail selected or infused.
 
 #### Lockdown
 The big red "Lock Down" button in the HUD will put you into "Lock Down" mode, which nullifies your base passive energy regen, but will prevent any prey from triggering struggle actions until you run out of energy. If you're in this mode you'll have it indicated with your status effects. NPCs will often enable this from time to time based on their behavior settings.
@@ -207,6 +212,13 @@ Holding **Shift** will prevent any actions from occuring from your struggles, on
 ### Emergency Escape
 If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, there is an Instant Escape Combo. To perform it, hold **Shift**+**Down** then press **Jump**.
 
+### Preserves Vore State
+Your state will be preserved when you logout anf re-join the game as long as the pred entity is still present.
+
+You will come with a player pred when they warp to another planet.
+
+If the pred entity can't be found, such as if the player logged out or an NPC died or was unloaded you will recieve a prompt to wait or escape.
+
 ---
 
 ## Infuse System
@@ -222,6 +234,8 @@ Infuse Actions available on default NPCs/Players
 - Pussy TF
 - Cock TF
 - Tail TF
+
+The tail you turn into via Tail TF is selectable.
 
 ---
 
@@ -259,6 +273,15 @@ Players also have the **Lust**, and **Rest** resources, despite them serving no 
 ### Stripping
 On the misc tab, NPCs and Players can be configured to have each piece of clothing be auto hidden upon reaching a certain level of Lust, this is simply cosmetic in nature. Players by default will never strip. NPCs by default strip everything aside from their hat at 50% lust.
 
+### Dripping
+When boobs, cock, or pussy are enabled, they will have drip particles that increase in amount the more the lust meter fills and the more occupants in the relevant locations, the amoutn can be changed in settings.
+
+### Roleplay actions
+Actions that don't do anything effectively, but play some fun animations for the sake of roleplay, they're available from the left side of the SBQ controller, actions are only listed if they're available.
+- Jack Off
+- Boob Squish
+- Finger Pussy
+
 ---
 
 ## Compatible Species
@@ -284,6 +307,7 @@ Races included within SBQ by default
 
 ### External Compatible Species
 This mod includes patches for the species below to add compatibility, it does not include any of their respective assets.
+It is relatively simple to use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) if a species you like isn't supported yet! Do try and send me the files afterwards if you do this!
 - Human : human
 - Hylotl : hylotl
 - Floran : floran
@@ -423,7 +447,7 @@ Similar to the Mini Vore Deed except it requires no background anchor, and doesn
 ### Evil Vore Colony Deed : sbqEvilVoreColonyDeed
 ### Evil Mini Vore Deed : sbqEvilMiniVoreDeed
 ### Evil Vore Campsite : sbqEvilVoreCamp
-Same as the Vore Colony Deeds, however instead spawns hostile bandit versions of available NPCs (some OCs cannot be evil) connect Evil Deeds with the wire tool to have the bandits they spawn share the same time, otherwise they will fight eachother.
+Same as the Vore Colony Deeds, however instead spawns hostile bandit versions of available NPCs (some OCs cannot be evil) connect Evil Deeds with the wire tool to have the bandits they spawn share the same team, otherwise they will fight eachother.
 
 
 ### Digestion Drops
