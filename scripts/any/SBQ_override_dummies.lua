@@ -58,11 +58,11 @@ function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
 		end
 		if string:find("<dontSpeak>") then return end
 
-		string = sb.replaceTags(string, tags)
+		string = sb.replaceTags(string, tags or {})
 		if string == "" then return end
 
 		if appendName then
-			string = world.entityName(entity.id())..":\n"..string
+			string = sbq.entityName(entity.id())..":\n"..string
 		end
 		if type(imagePortrait) == "string" then
 			sbq.sayPortrait(string, imagePortrait, nil, {})
