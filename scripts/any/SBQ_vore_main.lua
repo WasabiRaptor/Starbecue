@@ -1399,6 +1399,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 		struggleCount = 0,
 		struggleVec = {0,0},
 		locationStore = {},
+		persistentStatusEffects = jarray()
 	}
 	return Occupants.finishOccupantSetup(occupant)
 end
@@ -1446,6 +1447,7 @@ function Occupants.insertOccupant(newOccupant)
 		struggleCount = 0,
 		struggleVec = {0,0},
 		locationStore = {},
+		persistentStatusEffects = jarray()
 	}, newOccupant, {
 		seat = seat,
 		subLocation = subLocation,
@@ -1666,6 +1668,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	end
 
 	local persistentStatusEffects = {
+		{ stat = "sbqDigestTick", amount = math.floor(sbq.stat(location.powerMultiplier or "powerMultiplier")) },
 		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
 		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
 	}
@@ -1715,6 +1718,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		end
 	end
 	util.appendLists(persistentStatusEffects, preyModifiers)
+	util.appendLists(persistentStatusEffects, self.persistentStatusEffects)
 	self:setLoungeStatusEffects(persistentStatusEffects)
 	self.predModifiers = predModifiers
 	Occupants.refreshOccupantModifiers = true

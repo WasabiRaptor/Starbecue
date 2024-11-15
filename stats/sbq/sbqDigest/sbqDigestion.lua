@@ -34,32 +34,12 @@ function update(dt)
 		self.cdamage = digestAmount % 1
 		digestAmount = math.floor(digestAmount)
 		if digestAmount >= health then
-			self.digested = true
 			digestAmount = health - 1
-			if digestAmount <= 0 then return end
-			sendDigest()
-			effect.addStatModifierGroup({
-				{ stat = "healingStatusImmunity", amount = 999 },
-				{ stat = "healthRegen", effectiveMultiplier = 0},
-				{ stat = "energyRegenPercentageRate", effectiveMultiplier = 0}
-			})
+			if digestAmount <= 0 then return setDigested() end
+			return tickDigest(digestAmount)
 		end
-		if digestAmount >= math.max(1, status.stat("sbqDigestTick")) then
-			self.turboDigest = self.turboDigest - digestAmount
-			if self.send then
-				world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", digestAmount, self.send, self.sendMultiplier )
-			end
-			if status.statPositive("sbqDisplayEffect") then
-				status.applySelfDamageRequest({
-					hitType = (self.turboDigest > 0) and "strongHit" or "hit",
-					damageType = "IgnoresDef",
-					damage = digestAmount,
-					damageSourceKind = self.digestKind,
-					sourceEntityId = entity.id()
-				})
-			else
-				status.modifyResource("health", -digestAmount)
-			end
+		if (digestAmount >= math.max(1, status.stat("sbqDigestTick"))) then
+			tickDigest(digestAmount)
 		else
 			self.cdamage = self.cdamage + digestAmount
 		end
@@ -74,6 +54,38 @@ function onExpire()
 			world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
 		end
 		status.modifyResourcePercentage("health", -2)
+	end
+end
+
+function setDigested()
+	self.digested = true
+	sendDigest()
+	effect.addStatModifierGroup({
+		{ stat = "healingBonus", amount = -10 },
+		{ stat = "healingStatusImmunity", amount = 999 },
+		{ stat = "healthRegen", effectiveMultiplier = 0 },
+		{ stat = "energyRegenPercentageRate", effectiveMultiplier = 0 }
+	})
+end
+
+function tickDigest(digestAmount)
+	self.turboDigest = self.turboDigest - digestAmount
+	if self.send then
+		world.sendEntityMessage(effect.sourceEntity(), "sbqAddToResources", digestAmount, self.send, self.sendMultiplier )
+	end
+	if status.statPositive("sbqDisplayEffect") then
+		status.applySelfDamageRequest({
+			hitType = (self.turboDigest > 0) and "strongHit" or "hit",
+			damageType = "IgnoresDef",
+			damage = digestAmount,
+			damageSourceKind = self.digestKind,
+			sourceEntityId = entity.id()
+		})
+	else
+		status.modifyResource("health", -digestAmount)
+	end
+	if status.resource("health") <= 1 then
+		setDigested()
 	end
 end
 

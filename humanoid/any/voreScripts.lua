@@ -557,6 +557,13 @@ function default:fatal(name, action, target, ...)
 	if sbq.query(sbq.voreConfig.invalidSettings, {"mainEffect", "digest"})
 	or sbq.query(sbq.voreConfig.invalidSettings, {"locations", occupant.location, "mainEffect", "digest"})
 	then return false, "invalidAction" end
+	occupant.persistentStatusEffects = {
+		{ stat = "healingBonus", amount = -10 },
+		{ stat = "healingStatusImmunity", amount = 999 },
+		{ stat = "healthRegen", effectiveMultiplier = 0 },
+		{ stat = "energyRegenPercentageRate", effectiveMultiplier = 0 }
+	}
+	occupant:refreshLocation()
 	occupant:modifyResourcePercentage("health", -2)
 	return true
 end
