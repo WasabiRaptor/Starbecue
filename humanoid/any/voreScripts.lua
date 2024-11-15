@@ -747,6 +747,7 @@ function default:infused(name, action, target)
 		return false, "alreadyInfused"
 	end
 	location.infusedEntity = target
+	occupant.flags.digested = false
 	occupant.flags.infused = true
 	occupant.flags.infusing = false
 	occupant.flags.infuseType = infuseType
