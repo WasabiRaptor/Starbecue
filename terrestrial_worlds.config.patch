@@ -7,7 +7,7 @@
 		}
 	],
 	[
-		{ "op" : "test", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange/0", "value" : 1 },
-		{ "op" : "replace", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange/1", "value" : 1 }
+		{ "op" : "inc", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange/0", "value" : 1 },
+		{ "op" : "inc", "path" : "/planetTypes/garden/layers/surface/dungeonCountRange/1", "value" : 1 }
 	]
 ]
