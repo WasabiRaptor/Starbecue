@@ -534,6 +534,8 @@ function _State:tryAction(name, target, ...)
 	if not action then return self:actionFailed(name, action, target, "missingAction", ...) end
 	if SpeciesScript.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
 	if action.onCooldown then return self:actionFailed(name, action, target, "onCooldown", ...) end
+	if target and not world.entityStatPositive(target, "sbqStatusPrimaryScript") then return self:actionFailed(name, action, target, "targetMissingStatusPrimaryScript", ...) end
+	if target and not world.entityStatPositive(target, "sbqActorScript") then return self:actionFailed(name, action, target, "targetMissingActorScript", ...) end
 	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return self:actionFailed(name, action, target, "settingsMismatch", ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end

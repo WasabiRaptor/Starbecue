@@ -103,6 +103,10 @@ function sbq.actorMessages()
 			end)
 		end
 	end)
+
+	status.setPersistentEffects("sbqActorScript", {
+		{stat = "sbqActorScript", amount = 1} -- set this stat to mark that status primary has initialized
+	})
 end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)

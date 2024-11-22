@@ -117,7 +117,12 @@ function init()
 		if key == "mouthPosition" then return humanoid.mouthPosition() end
 		return old.status_statusProperty(key,...)
 	end
+
+	-- status effects
 	status.clearPersistentEffects("sbqMissingPred")
+	status.setPersistentEffects("sbqStatusPrimaryScript", {
+		{stat = "sbqStatusPrimaryScript", amount = 1} -- set this stat to mark that status primary has initialized
+	})
 end
 
 function update(dt)
