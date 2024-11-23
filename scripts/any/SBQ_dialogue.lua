@@ -82,7 +82,7 @@ function dialogueProcessor.processDialogueResults(i)
 		{
 			dialoguePath = dialogue.path or "",
 			dialogueRedirect = dialogue.redirect or "",
-			sourceName = results.name .. "^reset;",
+			sourceName = (results.name or "") .. "^reset;",
 			targetName = targetName,
 			entityName = targetName,
 			entityname = targetName,
