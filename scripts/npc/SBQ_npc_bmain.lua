@@ -137,8 +137,8 @@ function update(dt)
 
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData
-		and not (occupantData.flags.newOccupant or occupantData.flags.releasing)
-		and sbq.timer("missingPredCheck", 1) and occupantData.predUUID
+		and not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing)
+		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 		and not sbq.loungingIn()
 	then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
@@ -148,7 +148,7 @@ function update(dt)
 			end
 		else
 			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
-			sbq.timer("missingPredEscape", 60, function()
+			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
 				local occupantData = status.statusProperty("sbqOccupantData")
 				if occupantData then
 					local eid = world.getUniqueEntityId(occupantData.predUUID)

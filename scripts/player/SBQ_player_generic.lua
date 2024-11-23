@@ -210,8 +210,8 @@ function update(dt)
 
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData
-		and not (occupantData.flags.newOccupant or occupantData.flags.releasing)
-		and sbq.timer("missingPredCheck", 1) and occupantData.predUUID
+		and not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing)
+		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 		and not sbq.loungingIn()
 	then
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
@@ -221,14 +221,14 @@ function update(dt)
 			end
 		else
 			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
-			if not ((player.getProperty("sbqPredWarpAttempted") or 0) >= 4) and (occupantData.playerPred or occupantData.crewPred) and sbq.timer("missingPredWarp", 15) then
+			if not ((player.getProperty("sbqPredWarpAttempted") or 0) >= sbq.config.missingPredWarpAttempts) and (occupantData.playerPred or occupantData.crewPred) and sbq.timer("missingPredWarp", sbq.config.missingPredWarpDelay) then
 				if occupantData.playerPred then
 					pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
 				elseif occupantData.crewPred and (occupantData.parentUUID ~= player.uniqueId()) then
 					pcall(player.warp("player:" .. occupantData.parentUUID, "beam"))
 				end
 				player.setProperty("sbqPredWarpAttempted", (player.getProperty("sbqPredWarpAttempted") or 0) + 1)
-			elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", 30) then
+			elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", sbq.config.missingPredTimeout) then
 				sbq.addNamedRPC("missingPredCheck", player.confirm({
 					paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
 					icon = "/interface/confirmation/confirmationicon.png",
@@ -293,6 +293,7 @@ function teleportOut()
 
 end
 function die()
+	status.setStatusProperty("sbqOccupantData", nil)
 	for i, occupant in ipairs(Occupants.list) do
 		occupant:remove()
 	end

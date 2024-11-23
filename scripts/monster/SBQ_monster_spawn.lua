@@ -43,6 +43,32 @@ function init()
 		end
 		self.behavior = behavior
 	end
+
+	local occupantData = status.statusProperty("sbqOccupantData")
+	if occupantData
+		and not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing)
+		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
+		and not sbq.loungingIn()
+	then
+		local eid = world.getUniqueEntityId(occupantData.predUUID)
+		if eid then
+			if not sbq.namedRPCList.missingPredFound then
+				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
+			end
+		else
+			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
+			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
+				local occupantData = status.statusProperty("sbqOccupantData")
+				if occupantData then
+					local eid = world.getUniqueEntityId(occupantData.predUUID)
+					if not eid then
+						status.setStatusProperty("sbqOccupantData", nil)
+						status.clearPersistentEffects("sbqMissingPred")
+					end
+				end
+			end)
+		end
+	end
 end
 
 function update(dt)
