@@ -357,7 +357,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	if throughput and not occupant.locationSettings.hammerspace then
 		if (occupant.size * occupant.sizeMultiplier) > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
-	if occupant.flags.digested or occupant.flags.infused then return false, "invalidAction" end
+	if occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if not location then return false, "invalidAction" end
 	location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
@@ -493,24 +493,32 @@ end
 function default:digested(name, action, target, item, digestType, drop, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	local position = entity.position()
+	local location
+	local delay = 0
 	if occupant then
-		local location = occupant:getLocation()
+		location = occupant:getLocation()
 		position = occupant:position()
-		occupant.flags.digested = true
+		occupant.flags.digesting = true
 		occupant.flags.digestedLocation = occupant.location
 		occupant.flags.digestType = digestType
 		occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 		occupant.size = action.size or location.digestedSize or 0
+		occupant:refreshLocation()
 		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
+	end
+	if location then
 		location:markSizeDirty()
-	else
-
+		local sizeChangeAnims = location.occupancy.queuedSizeChangeAnims or location.sizeChangeAnims
+		if sizeChangeAnims then
+			delay = SpeciesScript:checkAnimations(false, sizeChangeAnims, {}, target)
+		end
 	end
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
-	return true, function()
+	sbq.timer(target .. "Digesting", delay, function()
 		local occupant = Occupants.entityId[tostring(target)]
 		if occupant then
-			position = occupant:position()
+			occupant.flags.digesting = false
+			occupant.flags.digested = true
 			occupant:refreshLocation()
 		end
 		if item then
@@ -534,7 +542,8 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 				table.remove(storage.sbqSettings.recentlyDigested, #storage.sbqSettings.recentlyDigested)
 			end
 		end
-	end
+	end)
+	return true
 end
 
 function default:fatalAvailable(name, action, target, ...)
@@ -614,6 +623,7 @@ function default:reformed(name, action, target,...)
 	end
 	occupant.flags.infuseType = nil
 	occupant.flags.infused = false
+	occupant.flags.digesting = false
 	occupant.flags.digested = false
 	occupant.sizeMultiplier = action.sizeMultiplier or location.reformSizeMultiplier or ((occupant.locationSettings.compression ~= "none") and occupant.locationSettings.compressionMin) or 1
 	occupant.size = sbq.getEntitySize(occupant.entityId)
@@ -755,6 +765,7 @@ function default:infused(name, action, target)
 	end
 	location.infusedEntity = target
 	occupant.flags.digested = false
+	occupant.flags.digesting = false
 	occupant.flags.infused = true
 	occupant.flags.infusing = false
 	occupant.flags.infuseType = infuseType

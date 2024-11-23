@@ -76,7 +76,7 @@ end
 function processLocationData(locationData, newOccupantData)
 	occupantData = newOccupantData
 	local struggleActions = locationData.struggleActions or {}
-	local canStruggle = not (occupantData.flags.digested or occupantData.flags.infused)
+	local canStruggle = not (occupantData.flags.digested or occupantData.flags.infused or occupantData.flags.digesting)
 	buttons = {
 		up = (struggleActions.up and canStruggle and (struggleActions.up.indicate or struggleActions.any.indicate or "default")),
 		down = (struggleActions.down and canStruggle and (struggleActions.down.indicate or struggleActions.any.indicate or "default")),
@@ -204,7 +204,7 @@ function update( dt )
 
 	if occupantData.flags.infused and occupantData.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png", {45.5,16}, 1)
-	elseif occupantData.flags.digested then
+	elseif occupantData.flags.digested or occupantData.flags.digesting then
 		indicator:drawImageDrawable("/interface/scripted/sbq/softDigest.png", {45.5,16}, 1)
 	elseif world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", {45.5,16}, 1)

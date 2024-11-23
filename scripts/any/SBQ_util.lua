@@ -395,8 +395,8 @@ function sbq.getSettingsOf.locations()
 end
 function sbq.getSettingsOf.current()
 	local output = sb.jsonMerge(storage.sbqSettings, {})
-	output.recentlyDigested = {}
-	output.infuseSlots = {}
+	output.recentlyDigested = nil
+	output.infuseSlots = nil
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
 	output.locations = sbq.exportSettingGroup("locations")
@@ -406,8 +406,8 @@ function sbq.getSettingsOf.current()
 end
 function sbq.getSettingsOf.all()
 	local output = sbq.exportBaseSettings()
-	output.recentlyDigested = {}
-	output.infuseSlots = {}
+	output.recentlyDigested = nil
+	output.infuseSlots = nil
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
 	output.locations = sbq.exportSettingGroup("locations")

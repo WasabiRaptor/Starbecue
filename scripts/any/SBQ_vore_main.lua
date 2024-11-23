@@ -238,6 +238,8 @@ function sbq.actionList(type, target)
 				actions = sb.jsonMerge({}, location.infusedActions)
 			elseif occupant.flags.digested then
 				actions = sb.jsonMerge({}, location.digestedActions)
+			elseif occupant.flags.digesting then
+				actions = {}
 			else
 				actions = sb.jsonMerge({}, location.actions)
 			end
@@ -496,6 +498,10 @@ function _State:dumpOccupants(location, subLocation, digestType)
 		output.struggleCount = 0
 		output.locationStore = {}
 		output.locationSettings = {}
+		if output.flags.digesting then
+			output.flags.digesting = false
+			output.flags.digested = true
+		end
 		if output.flags.infused then
 			output.flags.infused = false
 			output.flags.infuseType = nil
@@ -1162,7 +1168,7 @@ function _Location:updateOccupancy(dt)
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
-				if not (occupant.flags.digested or occupant.flags.infused) then
+				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting) then
 					self.occupancy.count = self.occupancy.count + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing) then
@@ -1429,7 +1435,12 @@ function Occupants.insertOccupant(newOccupant)
 	if not seat then return false end
 	local location = SpeciesScript:getLocation(newOccupant.location, newOccupant.subLocation)
 	if not location then return false end
+	if newOccupant.flags.digesting then
+		newOccupant.flags.digesting = false
+		newOccupant.flags.digested = true
+	end
 	local space, subLocation = location:hasSpace(newOccupant.size * newOccupant.sizeMultiplier)
+
 	if (not space) and not (newOccupant.flags.digested or newOccupant.flags.infused) then return false end
 	-- if we recieve data for an occupant that is infused somewhere we already have someone infused, then treat them as digested instead
 	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then
@@ -1567,7 +1578,7 @@ end
 
 function Occupants.checkActiveOccupants()
 	for _, occupant in ipairs(Occupants.list) do
-		if not (occupant.flags.digested or occupant.flags.infused) then return true end
+		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting) then return true end
 	end
 	return false
 end
@@ -1576,7 +1587,7 @@ function Occupants.randomActiveOccupant()
 	local i = math.random(#Occupants.list)
 	for j = 1, #Occupants.list do
 		local occupant = Occupants.list[i]
-		if not (occupant.flags.digested or occupant.flags.infused) then return occupant.entityId end
+		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting) then return occupant.entityId end
 		i = i + 1
 		if i > #Occupants.list then i = 1 end
 	end
@@ -1589,7 +1600,7 @@ function _Occupant:update(dt)
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not animator.animationEnded(self.seat .. "State") then
 		if self.flags.releasing and self:animProperty("release") then return self:remove() end
-		self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
+		self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
 		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))
 		self:setLoungeEmote(self:animProperty("emote"))
@@ -1611,7 +1622,7 @@ function _Occupant:update(dt)
 		if oldMultiplier ~= self.sizeMultiplier then
 			location:markSizeDirty()
 		end
-	elseif not (self.flags.newOccupant or self.flags.releasing) then
+	elseif not (self.flags.newOccupant or self.flags.releasing or self.flags.digesting) then
 		local oldMultiplier = self.sizeMultiplier
 		local compression = self.locationSettings.compression
 		local compressionMin = self.locationSettings.compressionMin
@@ -1657,7 +1668,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
 	if self.flags.releasing and self:animProperty("release") then return self:remove() end
-	self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused)
+	self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
 	self:setLoungeOrientation(self:animProperty("orientation"))
 	self:setLoungeDance(self:animProperty("dance"))
 	self:setLoungeEmote(self:animProperty("emote"))
@@ -1907,7 +1918,7 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if (not self.struggleAction) or self.flags.newOccupant or self.flags.infused or self.flags.digested
+	if (not self.struggleAction) or self.flags.newOccupant or self.flags.releasing or self.flags.infused or self.flags.digested or self.flags.digesting
 		or self:controlHeld("Shift") or self:resourceLocked("energy")
 		or (sbq.statPositive("sbqLockDown") and (sbq.resource("energy") > 0))
 	then return false end
