@@ -1604,6 +1604,8 @@ function _Occupant:update(dt)
 		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))
 		self:setLoungeEmote(self:animProperty("emote"))
+	else
+		if self.flags.releasing then return self:remove() end
 	end
 	if not self.locationStore[self.location] then self.locationStore[self.location] = {time = 0, struggleTime = 0} end
 	local locationStore = self.locationStore[self.location]
