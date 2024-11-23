@@ -436,7 +436,15 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 		type = "panel",
 		id = sbq.widgetSettingIdentifier(param).."Panel",
 		expandMode = { 1, 0 },
-		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, { type = "sbqItemGrid", autoInteract = true, slots = slots} },
+		children = {
+			{ mode = "v", expandMode = { 1, 0 } },
+			{ type = "label", text = ":" .. param.setting },
+			{
+				{ mode = "h", expandMode = { 0, 0 } },
+				{ type = "sbqItemGrid", id = "recentlyDigestedItemGrid", autoInteract = true, slots = slots },
+				{ type = "sbqIconButton", id = "clearRecentlyDigested", toolTip = ":clearRecentlyDigestedTip", script = "clearRecentlyDigested", image = "/interface/x.png", hoverImage = "/interface/xhover.png", pressImage = "/interface/xpress.png"}
+			}
+		},
 		makeLabel = false
 	}
 	for _, item in ipairs(storage.sbqSettings.recentlyDigested) do
@@ -446,6 +454,9 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 		table.insert(slots, slot)
 	end
 	return sb.jsonMerge(param, layout)
+end
+function sbq.widgetScripts.clearRecentlyDigested()
+	sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
 end
 
 function sbq.widgetScripts.dropDownSetting(value, setting, group, name)
