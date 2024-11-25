@@ -1,0 +1,39 @@
+{
+	"name": "sbq_guard_pengukin",
+	"priority": 52,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"pengukin" : 8
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"pengukinbannersmall", "count":1},
+		{"name":"pengukindoor", "count":1},
+		{"name":"pengukinbed", "count":1},
+		{"name":"pengukinchair", "count":1},
+		{"name":"pengukintable", "count":1},
+		{"name":"pengukinchest", "count":1},
+		{"name":"pengukinicemachine", "count":1},
+		{"name":"pengukinposter1", "count":1},
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["pengukin"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}
