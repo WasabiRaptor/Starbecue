@@ -452,6 +452,15 @@ Similar to the Mini Vore Deed except it requires no background anchor, and doesn
 ### Evil Vore Campsite : sbqEvilVoreCamp
 Same as the Vore Colony Deeds, however instead spawns hostile bandit versions of available NPCs (some OCs cannot be evil) connect Evil Deeds with the wire tool to have the bandits they spawn share the same team, otherwise they will fight eachother.
 
+### Locked Settings Enforcer : sbqOverrideEnforcer
+Is intended to be an administration tool to disable certain settings server wide or on certain worlds. It will receive an update later to configure this in a gui, but until then it must be configured via spawnitem parameters for per world configuration or patching `sbq.config:serverOverrideSettings` for server wide configuration.
+
+Example command to spawn in one that will disable the bone drops from digestion for the world.
+`/spawnitem sbqOverrideEnforcer 1 {"overrideSettings":{"acidDigestDrops":false}}`
+
+Unpack the mod and reference `sbq.config:defaultSettings` to view the data structure and learn internal setting names and types.
+
+Additional note, patching `sbq.config:serverOverrideSettings` will apply to all server entities regardless of if a `sbqOverrideEnforcer` is placed within the world, however it is required for said overrides to apply to players.
 
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.

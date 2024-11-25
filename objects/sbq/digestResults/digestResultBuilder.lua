@@ -65,13 +65,13 @@ function build(directory, config, parameters, level, seed)
 		end
 	end
 
-	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) or {} then
+	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
 		parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
 	end
-	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) or {} then
+	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
 		parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
 	end
-	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) or {} then
+	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
 		parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
 	end
 
