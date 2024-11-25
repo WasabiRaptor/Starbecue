@@ -1,0 +1,13 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [256, 200], // *internal* size (not including chrome)
+	"title" : "Locked Settings Enforcer",
+	"icon" : "/interface/scripted/sbq/lockedDisabled.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "overrideEnforcer.lua" ],
+	"children" : [
+		{"type":"label","text":"TODO - Make a menu here that players can use to configure things per world.\nUntil that is made you can spawn in the ^yellow;sbqOverrideEnforcer^reset; with custom parameters like so:\n \n/spawnitem sbqOverrideEnforcer 1 '{\"overrideSettings\":{}}'\n \nYou can also patch ^yellow;sbq.config:serverOverrideSettings^reset; which will automatically apply to any enforcer that is placed regardless of world.\n \nYou'd need to look at ^yellow;sbq.config^reset; anyway to know the internal names and structure of the settings.\n \nThe object is unbreakable through normal means, only the object's owner or admins can access this UI."},
+		{"type":"button", "id":"breakObject", "caption":"Break Object"}
+
+	]
+}
