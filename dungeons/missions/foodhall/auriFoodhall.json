@@ -1,10 +1,13 @@
-{ "height":12,
+{ "compressionlevel":-1,
+ "height":12,
+ "infinite":false,
  "layers":[
         {
          "compression":"zlib",
          "data":"eJybwcDA4E0DPAOJ9kfCyOIgnEIDPAOJRrc7ZdTuUbtH7R61e5jaDQBC75hO",
          "encoding":"base64",
          "height":12,
+         "id":1,
          "name":"back",
          "opacity":0.579999983310699,
          "type":"tilelayer",
@@ -12,12 +15,13 @@
          "width":31,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "compression":"zlib",
          "data":"eJxjYBgFo2AUjIJRMBwAAAXQAAE=",
          "encoding":"base64",
          "height":12,
+         "id":2,
          "name":"front",
          "opacity":1,
          "type":"tilelayer",
@@ -25,10 +29,10 @@
          "width":31,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
-         "height":12,
+         "id":3,
          "name":"objects",
          "objects":[
                 {
@@ -36,183 +40,186 @@
                  "height":72,
                  "id":1,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"teleporterConfig\":\"\/interface\/warping\/auriFireplace.config\", \"uniqueId\" : \"auriShop\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"teleporterConfig\":\"\/interface\/warping\/auriFireplace.config\", \"uniqueId\" : \"auriShop\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":184,
                  "y":96
-                },
+                }, 
                 {
                  "gid":521,
                  "height":88,
                  "id":2,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":104,
                  "x":64,
                  "y":96
-                },
+                }, 
                 {
                  "gid":520,
                  "height":88,
                  "id":3,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"inFoodhall\" : true}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"inFoodhall\" : true}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":104,
                  "x":64,
                  "y":96
-                },
+                }, 
                 {
                  "gid":522,
                  "height":88,
                  "id":4,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":104,
                  "x":64,
                  "y":96
-                },
+                }, 
                 {
                  "gid":515,
                  "height":88,
                  "id":8,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":12,
                  "y":96
-                },
+                }, 
                 {
                  "gid":526,
                  "height":24,
                  "id":10,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":32,
                  "y":64
-                },
+                }, 
                 {
                  "gid":525,
                  "height":8,
                  "id":12,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":16,
                  "y":32
-                },
+                }, 
                 {
                  "gid":2147484175,
                  "height":16,
                  "id":13,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":20,
                  "y":48
-                },
+                }, 
                 {
                  "gid":527,
                  "height":16,
                  "id":14,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":52,
                  "y":80
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":18,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":136,
                  "y":64
+                }, 
+                {
+                 "height":8,
+                 "id":20,
+                 "name":"setting enforcer",
+                 "properties":[
+                        {
+                         "name":"object",
+                         "type":"string",
+                         "value":"sbqOverrideEnforcer"
+                        }, 
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"overrideSettings\":{\"acidDigestDrops\":false,\"cumDigestDrops\":false,\"femcumDigestDrops\":false,\"milkDigestDrops\":false,},\"ownerUUID\":\"sbq\/Lokivulpix\/Auri\"}"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":208,
+                 "y":8
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":31,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
-         "height":12,
+         "id":4,
          "name":"monsters & npcs",
          "objects":[
                 {
                  "height":8,
                  "id":19,
                  "name":"Zevi",
-                 "properties":
-                    {
-                     "npc":"sbq/Zygahedron/Zevi",
-                     "parameters":"{}",
-                     "typeName":"sbq/Zygahedron/Zevi-Hub"
-                    },
+                 "properties":[
+                        {
+                         "name":"npc",
+                         "type":"string",
+                         "value":"sbq\/Zygahedron\/Zevi"
+                        }, 
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{}"
+                        }, 
+                        {
+                         "name":"typeName",
+                         "type":"string",
+                         "value":"sbq\/Zygahedron\/Zevi-Hub"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -223,44 +230,42 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":31,
          "x":0,
          "y":0
         }],
- "nextobjectid":20,
+ "nextlayerid":5,
+ "nextobjectid":21,
  "orientation":"orthogonal",
- "properties":
-    {
-
-    },
  "renderorder":"right-down",
+ "tiledversion":"1.10.2",
  "tileheight":8,
  "tilesets":[
         {
          "firstgid":1,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/liquids.json"
-        },
+        }, 
         {
          "firstgid":29,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/materials.json"
-        },
+        }, 
         {
          "firstgid":226,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/miscellaneous.json"
-        },
+        }, 
         {
          "firstgid":250,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/supports.json"
-        },
+        }, 
         {
          "firstgid":287,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-race\/glitch.json"
-        },
+        }, 
         {
          "firstgid":513,
          "source":"..\/..\/..\/tilesets\/auriShop\/auriShop.json"
         }],
  "tilewidth":8,
- "version":1,
+ "type":"map",
+ "version":"1.10",
  "width":31
 }

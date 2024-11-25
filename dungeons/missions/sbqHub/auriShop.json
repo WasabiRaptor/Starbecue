@@ -1,10 +1,13 @@
-{ "height":55,
+{ "compressionlevel":-1,
+ "height":55,
+ "infinite":false,
  "layers":[
         {
          "compression":"zlib",
          "data":"eJzt2EEOgjAQheFuvBRXcOHCK7jxCp7DBccz8SIuhIQ0hU5bypTOP8lbGAmZfgwFda69Ghahjq2bc5852r1YK+z\/dSfZKa03yU5JaffeQ3JKu+eegnvb\/trPJguJ1TjlSkSZvR4rGQXmvv3auUoT63P5fl+zjz3XU9M+9T6I9YJ9mv0rIdhj34s9ew5z31qw79uePYe5n7N23bGvbx\/6TuM+sbjnWLJP7Qf7fHvt\/6jOktpzf+QM8Z7Ttr1\/X8bWLj0We5n91ufcY7HHvnV79hw9e+ksM\/f72+f+lsO+3F7qyZ6jay89Fnueta3bS2eZucfer28gg7Esr\/VWYucJWaZG2wJ7O8Eee+yxx56kBHvsLQZ77C0G+z7snxf99ZwpzD32FoM99haDPfYWg\/157H8agIJs",
          "encoding":"base64",
          "height":55,
+         "id":1,
          "name":"back",
          "opacity":0.560000002384186,
          "type":"tilelayer",
@@ -12,12 +15,13 @@
          "width":95,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "compression":"zlib",
          "data":"eJztmEFugzAQRckiy256iOxzji6y6Bmo1Pt00WvlBln3FDESI1lpgAFm8m3Pf9IXQSIj+xlsQ9cRQkg5fDKz8eSHmY0X6H7VEmvQ\/aktVqD7UWv2gF63Wskefsd8MKqILwssa03Vbwm6x0H3OGpy3xp0j4PucdA9DrrHEdH9++F5Xk1E96VA9zjoHoeHe\/Q3qldkas3QpMZvaaWxd32O6H7N3mbp2j3+I7q3Zqv\/qL6sQbwf1IjlnPN4LcFB\/\/N4f0egfxu2jhP9Y6H\/\/3ittVP\/JzjoH4u3\/0vX3SLFystfumYudI9zr\/GPdkH3cUL3dE\/3ZbjXtmktW\/vuzdvheZagexty1xrvA1r3a2qpGxwcusdB9zg83J\/S7\/7o0tym0LhfW+s7eT+n82vKaczZuN0l4bnP0SK1Bs\/iWzKMR8tj4LXP0fLoXnx\/Zcd8PKKz5H5LrT67x6\/jMT\/Pn4nIeLiXOUac589AlDlIw5z7rbXk3hb\/Mtfk5zIm\/TGufw\/3zLrs9U73Nu413AGOG6hc",
          "encoding":"base64",
          "height":55,
+         "id":2,
          "name":"front",
          "opacity":1,
          "type":"tilelayer",
@@ -25,10 +29,10 @@
          "width":95,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
-         "height":0,
+         "id":3,
          "name":"objects",
          "objects":[
                 {
@@ -36,1233 +40,1065 @@
                  "height":72,
                  "id":16,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"teleporterConfig\":\"\/interface\/warping\/auriFireplace.config\", \"uniqueId\" : \"auriShop\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"teleporterConfig\":\"\/interface\/warping\/auriFireplace.config\", \"uniqueId\" : \"auriShop\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":280,
                  "y":280
-                },
+                }, 
                 {
                  "gid":524,
                  "height":16,
                  "id":17,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":88,
                  "x":88,
                  "y":160
-                },
+                }, 
                 {
                  "gid":524,
                  "height":16,
                  "id":18,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":88,
                  "x":88,
                  "y":136
-                },
+                }, 
                 {
                  "gid":524,
                  "height":16,
                  "id":19,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":88,
                  "x":88,
                  "y":112
-                },
+                }, 
                 {
                  "gid":515,
                  "height":88,
                  "id":20,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":96,
                  "y":280
-                },
+                }, 
                 {
                  "gid":526,
                  "height":24,
                  "id":21,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":120,
                  "y":248
-                },
+                }, 
                 {
                  "gid":525,
                  "height":8,
                  "id":22,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":104,
                  "y":216
-                },
+                }, 
                 {
                  "gid":2147484175,
                  "height":16,
                  "id":23,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":104,
                  "y":232
-                },
+                }, 
                 {
                  "gid":527,
                  "height":16,
                  "id":24,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":136,
                  "y":264
-                },
+                }, 
                 {
                  "gid":2147484171,
                  "height":64,
                  "id":29,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
                  "x":400,
                  "y":280
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":30,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":80,
                  "y":136
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":31,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":304,
                  "y":136
-                },
+                }, 
                 {
                  "gid":517,
                  "height":72,
                  "id":32,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":12,
                  "x":232,
                  "y":176
-                },
+                }, 
                 {
                  "gid":517,
                  "height":72,
                  "id":33,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":12,
                  "x":48,
                  "y":280
-                },
+                }, 
                 {
                  "gid":517,
                  "height":72,
                  "id":34,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":12,
                  "x":648,
                  "y":280
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":36,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":24,
                  "y":208
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":37,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":64,
                  "y":352
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":38,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":272,
                  "y":352
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":39,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":208,
                  "y":352
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":40,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":480,
                  "y":352
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":41,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":624,
                  "y":352
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":42,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":176,
                  "y":136
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":43,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":664,
                  "y":208
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":44,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":264,
                  "y":240
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":45,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":344,
                  "y":240
-                },
+                }, 
                 {
                  "gid":508,
                  "height":24,
                  "id":46,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":384,
                  "y":144
-                },
+                }, 
                 {
                  "gid":463,
                  "height":24,
                  "id":47,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":400,
                  "y":144
-                },
+                }, 
                 {
                  "gid":516,
                  "height":40,
                  "id":48,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":328,
                  "y":176
-                },
+                }, 
                 {
                  "gid":2147484164,
                  "height":40,
                  "id":49,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":424,
                  "y":176
-                },
+                }, 
                 {
                  "gid":402,
                  "height":40,
                  "id":50,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":56,
                  "y":176
-                },
+                }, 
                 {
                  "gid":2147484050,
                  "height":40,
                  "id":51,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":184,
                  "y":176
-                },
+                }, 
                 {
                  "gid":2147484050,
                  "height":40,
                  "id":52,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":184,
                  "y":136
-                },
+                }, 
                 {
                  "gid":426,
                  "height":40,
                  "id":53,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":56,
                  "y":136
-                },
+                }, 
                 {
                  "gid":454,
                  "height":24,
                  "id":54,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":72,
                  "y":376
-                },
+                }, 
                 {
                  "gid":423,
                  "height":16,
                  "id":55,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":104,
                  "y":384
-                },
+                }, 
                 {
                  "gid":394,
                  "height":32,
                  "id":56,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":160,
                  "y":424
-                },
+                }, 
                 {
                  "gid":359,
                  "height":16,
                  "id":57,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":192,
                  "y":424
-                },
+                }, 
                 {
                  "gid":359,
                  "height":16,
                  "id":58,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":416,
                  "y":424
-                },
+                }, 
                 {
                  "gid":397,
                  "height":24,
                  "id":59,
                  "name":"",
-                 "properties":
-                    {
-                     "xeronious":"{\"treasurePools\":[\"sbqXeroniousMilkCrate\"]}"
-                    },
+                 "properties":[
+                        {
+                         "name":"xeronious",
+                         "type":"string",
+                         "value":"{\"treasurePools\":[\"sbqXeroniousMilkCrate\"]}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
                  "x":432,
                  "y":424
-                },
+                }, 
                 {
                  "gid":450,
                  "height":16,
                  "id":60,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"treasurePools\":[\"sbqXeroniousMilkCrate\"]}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"treasurePools\":[\"sbqXeroniousMilkCrate\"]}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":440,
                  "y":400
-                },
+                }, 
                 {
                  "gid":450,
                  "height":16,
                  "id":61,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":264,
                  "y":176
-                },
+                }, 
                 {
                  "gid":450,
                  "height":16,
                  "id":62,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":72,
                  "y":280
-                },
+                }, 
                 {
                  "gid":355,
                  "height":24,
                  "id":63,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":464,
                  "y":424
-                },
+                }, 
                 {
                  "gid":521,
                  "height":88,
                  "id":65,
                  "name":"auri's chair",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":104,
                  "x":152,
                  "y":280
-                },
+                }, 
                 {
                  "gid":520,
                  "height":88,
                  "id":66,
                  "name":"auri",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":104,
                  "x":152,
                  "y":280
-                },
+                }, 
                 {
                  "gid":522,
                  "height":88,
                  "id":67,
                  "name":"auri's desk",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":104,
                  "x":152,
                  "y":280
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":69,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":80,
                  "y":240
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":70,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":624,
                  "y":240
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":71,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":624,
                  "y":136
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":72,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":512,
                  "y":240
-                },
+                }, 
                 {
                  "gid":921,
                  "height":80,
                  "id":74,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":224,
                  "y":424
-                },
+                }, 
                 {
                  "gid":1012,
                  "height":16,
                  "id":75,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":520,
                  "y":296
-                },
+                }, 
                 {
                  "gid":1012,
                  "height":16,
                  "id":76,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":560,
                  "y":296
-                },
+                }, 
                 {
                  "gid":1012,
                  "height":16,
                  "id":77,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":560,
                  "y":312
-                },
+                }, 
                 {
                  "gid":1012,
                  "height":16,
                  "id":78,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":560,
                  "y":328
-                },
+                }, 
                 {
                  "gid":1012,
                  "height":16,
                  "id":79,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":520,
                  "y":312
-                },
+                }, 
                 {
                  "gid":1012,
                  "height":16,
                  "id":80,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":40,
                  "x":520,
                  "y":328
-                },
+                }, 
                 {
                  "gid":733,
                  "height":16,
                  "id":97,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"smashable\" : false, \"unbreakable\" : true }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"smashable\" : false, \"unbreakable\" : true }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":216,
                  "y":248
-                },
+                }, 
                 {
                  "gid":706,
                  "height":16,
                  "id":98,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"smashable\" : false, \"unbreakable\" : true }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"smashable\" : false, \"unbreakable\" : true }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":384,
                  "y":256
-                },
+                }, 
                 {
                  "gid":717,
                  "height":8,
                  "id":99,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":376,
                  "y":256
-                },
+                }, 
                 {
                  "gid":600,
                  "height":16,
                  "id":100,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"smashable\" : false, \"unbreakable\" : true }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"smashable\" : false, \"unbreakable\" : true }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":120,
                  "y":392
-                },
+                }, 
                 {
                  "gid":775,
                  "height":16,
                  "id":102,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"smashable\" : false, \"unbreakable\" : true }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"smashable\" : false, \"unbreakable\" : true }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":464,
                  "y":216
-                },
+                }, 
                 {
                  "gid":668,
                  "height":8,
                  "id":103,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":464,
                  "y":256
-                },
+                }, 
                 {
                  "gid":717,
                  "height":8,
                  "id":104,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":472,
                  "y":256
-                },
+                }, 
                 {
                  "gid":722,
                  "height":8,
                  "id":105,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":480,
                  "y":256
-                },
+                }, 
                 {
                  "gid":722,
                  "height":8,
                  "id":106,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":472,
                  "y":256
-                },
+                }, 
                 {
                  "gid":717,
                  "height":8,
                  "id":107,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":464,
                  "y":256
-                },
+                }, 
                 {
                  "gid":668,
                  "height":8,
                  "id":108,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":480,
                  "y":256
-                },
+                }, 
                 {
                  "gid":1143,
                  "height":14,
                  "id":109,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":376,
                  "y":216
-                },
+                }, 
                 {
                  "gid":1167,
                  "height":14,
                  "id":110,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":456,
                  "y":240
-                },
+                }, 
                 {
                  "gid":1349,
                  "height":9,
                  "id":111,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":376,
                  "y":232
-                },
+                }, 
                 {
                  "gid":313,
                  "height":24,
                  "id":113,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":336,
                  "y":280
-                },
+                }, 
                 {
                  "height":8,
                  "id":137,
                  "name":"Rex",
-                 "properties":
-                    {
-                     "parameters":"{ \"npc\" : \"crylan\", \"npcTypeName\" : \"sbqHubRex\" }",
-                     "stagehand":"sbqNPCSpawner"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"npc\" : \"crylan\", \"npcTypeName\" : \"sbqHubRex\" }"
+                        }, 
+                        {
+                         "name":"stagehand",
+                         "type":"string",
+                         "value":"sbqNPCSpawner"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":272,
                  "y":152
-                },
+                }, 
                 {
                  "height":8,
                  "id":139,
                  "name":"crystalShrinePlacer",
-                 "properties":
-                    {
-                     "parameters":"{ \"dungeon\" : \"sbqHub_crystalShrine\", \"dungeonId\" : 8, \"protect\" : true, \"placeOffset\" : [ -95, 20 ] }",
-                     "stagehand":"sbqDungeonPlacer"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"dungeon\" : \"sbqHub_crystalShrine\", \"dungeonId\" : 8, \"protect\" : true, \"placeOffset\" : [ -95, 20 ] }"
+                        }, 
+                        {
+                         "name":"stagehand",
+                         "type":"string",
+                         "value":"sbqDungeonPlacer"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":32,
                  "y":272
-                },
+                }, 
                 {
                  "gid":519,
                  "height":16,
                  "id":171,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":512,
                  "y":136
-                },
+                }, 
                 {
                  "gid":518,
                  "height":24,
                  "id":172,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{ \"interactive\" : false }"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"interactive\" : false }"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":392,
                  "y":104
-                },
+                }, 
                 {
                  "gid":1670,
                  "height":16,
                  "id":189,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":552,
                  "y":424
-                },
+                }, 
                 {
                  "height":0,
                  "id":190,
@@ -1271,240 +1107,241 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-8,
                          "y":-64
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":416
-                },
+                }, 
                 {
                  "gid":231,
                  "height":8,
                  "id":196,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":32,
                  "y":288
-                },
+                }, 
                 {
                  "gid":230,
                  "height":8,
                  "id":198,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":32,
                  "y":280
-                },
+                }, 
                 {
                  "gid":230,
                  "height":8,
                  "id":199,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":664,
                  "y":280
-                },
+                }, 
                 {
                  "gid":231,
                  "height":8,
                  "id":200,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":664,
                  "y":288
-                },
+                }, 
                 {
                  "gid":530,
                  "height":56,
                  "id":201,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":552,
                  "y":152
-                },
+                }, 
                 {
                  "gid":531,
                  "height":56,
                  "id":203,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":352,
                  "y":400
-                },
+                }, 
                 {
                  "gid":2147484180,
                  "height":16,
                  "id":204,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"preyDirectives\":\"\",\"colonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\",\"sbq/Fevix/FilledCondomPreysbqKaori\",\"sbq/LokiVulpix/FilledCondomPredsbqPascal\"],\"preyUUID\":\"sbq/Fevix/Kaori\",\"description\":\"A large condom with a label:\\n... Forgot your name, sorry!\",\"prey\":\"Kaori\",\"originalColonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\"],\"animationParts\":{\"object\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"direction\":\"right\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"direction\":\"left\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]}],\"pred\":\"Pascal\",\"preyColorMap\":{\"primary\":[\"0b0b0b\",\"101010\",\"1b1b1b\"],\"secondary\":[\"3890cf\",\"1ac2e7\",\"01e9fa\"]},\"inventoryIcon\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"shortdescription\":\"Pascal's Forgetful Condom\",\"directives\":\"?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"predUUID\":\"sbq/LokiVulpix/Pascal\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"preyDirectives\":\"\",\"colonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\",\"sbq\/Fevix\/FilledCondomPreysbqKaori\",\"sbq\/LokiVulpix\/FilledCondomPredsbqPascal\"],\"preyUUID\":\"sbq\/Fevix\/Kaori\",\"description\":\"A large condom with a label:\\n... Forgot your name, sorry!\",\"prey\":\"Kaori\",\"originalColonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\"],\"animationParts\":{\"object\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"direction\":\"right\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"direction\":\"left\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]}],\"pred\":\"Pascal\",\"preyColorMap\":{\"primary\":[\"0b0b0b\",\"101010\",\"1b1b1b\"],\"secondary\":[\"3890cf\",\"1ac2e7\",\"01e9fa\"]},\"inventoryIcon\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"shortdescription\":\"Pascal's Forgetful Condom\",\"directives\":\"?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"predUUID\":\"sbq\/LokiVulpix\/Pascal\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":344,
                  "y":424
-                },
+                }, 
                 {
                  "gid":533,
                  "height":16,
                  "id":207,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"colonyTags\":[\"bvore\",\"horny\",\"milk\"],\"description\":\"A Xeronious branded milk carton.\",\"originalColonyTags\":[\"bvore\",\"horny\",\"milk\"],\"animationParts\":{\"object\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"right\",\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"left\",\"anchors\":[\"bottom\"]}],\"pred\":\"Xeronious\",\"inventoryIcon\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\",\"shortdescription\":\"Xeronious' Milk\",\"predDirectives\":\"\",\"scriptStorage\":{},\"predColorMap\":{\"secondary\":[\"656565\",\"838383\",\"909090\",\"a6a6a6\"],\"primary\":[\"0e0e0e\",\"292929\",\"3f3f3f\",\"575757\"]},\"predUUID\":\"sbq/Xeronious/Xeronious\",\"directives\":\"?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"colonyTags\":[\"bvore\",\"horny\",\"milk\"],\"description\":\"A Xeronious branded milk carton.\",\"originalColonyTags\":[\"bvore\",\"horny\",\"milk\"],\"animationParts\":{\"object\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"right\",\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"left\",\"anchors\":[\"bottom\"]}],\"pred\":\"Xeronious\",\"inventoryIcon\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\",\"shortdescription\":\"Xeronious' Milk\",\"predDirectives\":\"\",\"scriptStorage\":{},\"predColorMap\":{\"secondary\":[\"656565\",\"838383\",\"909090\",\"a6a6a6\"],\"primary\":[\"0e0e0e\",\"292929\",\"3f3f3f\",\"575757\"]},\"predUUID\":\"sbq\/Xeronious\/Xeronious\",\"directives\":\"?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":464,
                  "y":400
-                },
+                }, 
                 {
                  "gid":1690,
                  "height":16,
                  "id":208,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":552,
                  "y":360
-                },
+                }, 
                 {
                  "gid":2147484180,
                  "height":16,
                  "id":211,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"preyDirectives\":\"\",\"colonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\",\"sbq/Fevix/FilledCondomPreysbqKaori\",\"sbq/LokiVulpix/FilledCondomPredsbqPascal\"],\"preyUUID\":\"sbq/Fevix/Kaori\",\"description\":\"A large condom with a label:\\nKaori is just a load of Pascal's cum~\",\"prey\":\"Kaori\",\"originalColonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\"],\"animationParts\":{\"object\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"direction\":\"right\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"direction\":\"left\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]}],\"pred\":\"Pascal\",\"preyColorMap\":{\"primary\":[\"0b0b0b\",\"101010\",\"1b1b1b\"],\"secondary\":[\"3890cf\",\"1ac2e7\",\"01e9fa\"]},\"inventoryIcon\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"shortdescription\":\"Kaori Filled Condom\",\"directives\":\"?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"predUUID\":\"sbq/LokiVulpix/Pascal\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"preyDirectives\":\"\",\"colonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\",\"sbq\/Fevix\/FilledCondomPreysbqKaori\",\"sbq\/LokiVulpix\/FilledCondomPredsbqPascal\"],\"preyUUID\":\"sbq\/Fevix\/Kaori\",\"description\":\"A large condom with a label:\\nKaori is just a load of Pascal's cum~\",\"prey\":\"Kaori\",\"originalColonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\"],\"animationParts\":{\"object\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"direction\":\"right\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"direction\":\"left\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]}],\"pred\":\"Pascal\",\"preyColorMap\":{\"primary\":[\"0b0b0b\",\"101010\",\"1b1b1b\"],\"secondary\":[\"3890cf\",\"1ac2e7\",\"01e9fa\"]},\"inventoryIcon\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"shortdescription\":\"Kaori Filled Condom\",\"directives\":\"?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"predUUID\":\"sbq\/LokiVulpix\/Pascal\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":320,
                  "y":400
-                },
+                }, 
                 {
                  "gid":532,
                  "height":16,
                  "id":212,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"preyDirectives\":\"\",\"colonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\",\"sbq/Fevix/FilledCondomPreysbqKaori\",\"sbq/LokiVulpix/FilledCondomPredsbqPascal\"],\"preyUUID\":\"sbq/Fevix/Kaori\",\"description\":\"A large condom with a label:\\nKaori churned in Pascal's nuts and all they got was this lousy condom~\",\"prey\":\"Kaori\",\"originalColonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\"],\"animationParts\":{\"object\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"direction\":\"right\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"direction\":\"left\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]}],\"pred\":\"Pascal\",\"preyColorMap\":{\"primary\":[\"0b0b0b\",\"101010\",\"1b1b1b\"],\"secondary\":[\"3890cf\",\"1ac2e7\",\"01e9fa\"]},\"inventoryIcon\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"shortdescription\":\"Kaori Filled Condom\",\"directives\":\"?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"predUUID\":\"sbq/LokiVulpix/Pascal\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"preyDirectives\":\"\",\"colonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\",\"sbq\/Fevix\/FilledCondomPreysbqKaori\",\"sbq\/LokiVulpix\/FilledCondomPredsbqPascal\"],\"preyUUID\":\"sbq\/Fevix\/Kaori\",\"description\":\"A large condom with a label:\\nKaori churned in Pascal's nuts and all they got was this lousy condom~\",\"prey\":\"Kaori\",\"originalColonyTags\":[\"cvore\",\"horny\",\"cum\",\"condom\"],\"animationParts\":{\"object\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"direction\":\"right\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"direction\":\"left\",\"spaceScan\":0.1,\"anchors\":[\"bottom\"]}],\"pred\":\"Pascal\",\"preyColorMap\":{\"primary\":[\"0b0b0b\",\"101010\",\"1b1b1b\"],\"secondary\":[\"3890cf\",\"1ac2e7\",\"01e9fa\"]},\"inventoryIcon\":\"object.png?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"shortdescription\":\"Kaori Filled Condom\",\"directives\":\"?replace;b48520=0b0b0b;dfa831=101010;ffc341=1b1b1b;000000=3890cf;523e13=1ac2e7;725927=01e9fa\",\"predUUID\":\"sbq\/LokiVulpix\/Pascal\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":304,
                  "y":424
-                },
+                }, 
                 {
                  "gid":355,
                  "height":24,
                  "id":215,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"treasurePools\":[\"sbqPascalKaoriCumBarrel\"]}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"treasurePools\":[\"sbqPascalKaoriCumBarrel\"]}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":24,
                  "x":320,
                  "y":424
-                },
+                }, 
                 {
                  "gid":2147484181,
                  "height":16,
                  "id":216,
                  "name":"",
-                 "properties":
-                    {
-                     "parameters":"{\"colonyTags\":[\"bvore\",\"horny\",\"milk\"],\"description\":\"A Xeronious branded milk carton.\",\"originalColonyTags\":[\"bvore\",\"horny\",\"milk\"],\"animationParts\":{\"object\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"right\",\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"left\",\"anchors\":[\"bottom\"]}],\"pred\":\"Xeronious\",\"inventoryIcon\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\",\"shortdescription\":\"Xeronious' Milk\",\"predDirectives\":\"\",\"scriptStorage\":{},\"predColorMap\":{\"secondary\":[\"656565\",\"838383\",\"909090\",\"a6a6a6\"],\"primary\":[\"0e0e0e\",\"292929\",\"3f3f3f\",\"575757\"]},\"predUUID\":\"sbq/Xeronious/Xeronious\",\"directives\":\"?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"}"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"colonyTags\":[\"bvore\",\"horny\",\"milk\"],\"description\":\"A Xeronious branded milk carton.\",\"originalColonyTags\":[\"bvore\",\"horny\",\"milk\"],\"animationParts\":{\"object\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"},\"orientations\":[{\"imagePosition\":[-8,0],\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"right\",\"anchors\":[\"bottom\"]},{\"imagePosition\":[-8,0],\"flipImages\":true,\"image\":\"object.png\",\"spaceScan\":0.1,\"direction\":\"left\",\"anchors\":[\"bottom\"]}],\"pred\":\"Xeronious\",\"inventoryIcon\":\"object.png?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\",\"shortdescription\":\"Xeronious' Milk\",\"predDirectives\":\"\",\"scriptStorage\":{},\"predColorMap\":{\"secondary\":[\"656565\",\"838383\",\"909090\",\"a6a6a6\"],\"primary\":[\"0e0e0e\",\"292929\",\"3f3f3f\",\"575757\"]},\"predUUID\":\"sbq\/Xeronious\/Xeronious\",\"directives\":\"?replace;336c93=656565;4080a9=838383;4f9fd1=909090;34739b=0e0e0e;4183ac=292929;4792c1=3f3f3f\"}"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":440,
                  "y":384
+                }, 
+                {
+                 "height":8,
+                 "id":217,
+                 "name":"setting enforcer",
+                 "properties":[
+                        {
+                         "name":"object",
+                         "type":"string",
+                         "value":"sbqOverrideEnforcer"
+                        }, 
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{\"overrideSettings\":{\"acidDigestDrops\":false,\"cumDigestDrops\":false,\"femcumDigestDrops\":false,\"milkDigestDrops\":false,},\"ownerUUID\":\"sbq\/Lokivulpix\/Auri\"}"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":144,
+                 "y":336
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":0,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
-         "height":55,
+         "id":4,
          "name":"wiring",
          "objects":[
                 {
@@ -1515,22 +1352,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":120,
                          "y":-32
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":112,
                  "y":376
-                },
+                }, 
                 {
                  "height":0,
                  "id":175,
@@ -1539,22 +1372,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":72,
                          "y":-8
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":177,
@@ -1563,22 +1392,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-72,
                          "y":-8
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":178,
@@ -1587,22 +1412,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-280,
                          "y":-8
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":179,
@@ -1611,22 +1432,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-344,
                          "y":-8
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":180,
@@ -1635,22 +1452,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-488,
                          "y":-8
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":181,
@@ -1659,22 +1472,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":0,
                          "y":-40
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":182,
@@ -1683,22 +1492,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":0,
                          "y":-56
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":183,
@@ -1707,22 +1512,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":0,
                          "y":-72
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":184,
@@ -1731,22 +1532,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-40,
                          "y":-40
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":185,
@@ -1755,22 +1552,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-40,
                          "y":-56
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":186,
@@ -1779,22 +1572,18 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":-40,
                          "y":-72
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
                  "x":560,
                  "y":352
-                },
+                }, 
                 {
                  "height":0,
                  "id":187,
@@ -1803,15 +1592,11 @@
                         {
                          "x":0,
                          "y":0
-                        },
+                        }, 
                         {
                          "x":488,
                          "y":216
                         }],
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1822,322 +1607,475 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":95,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
-         "height":55,
+         "id":5,
          "name":"mods",
          "objects":[
                 {
                  "height":8,
                  "id":116,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornatetiles",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornatetiles"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":576,
                  "x":64,
                  "y":24
-                },
+                }, 
                 {
                  "height":8,
                  "id":117,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornatetiles",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornatetiles"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":656,
                  "x":24,
                  "y":64
-                },
+                }, 
                 {
                  "height":8,
                  "id":118,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":56,
                  "y":40
-                },
+                }, 
                 {
                  "height":8,
                  "id":120,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":48,
                  "y":48
-                },
+                }, 
                 {
                  "height":8,
                  "id":122,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":640,
                  "y":40
-                },
+                }, 
                 {
                  "height":8,
                  "id":123,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":648,
                  "y":48
-                },
+                }, 
                 {
                  "height":8,
                  "id":150,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornateroofing",
-                     "colorVariant":"2"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":640,
                  "y":32
-                },
+                }, 
                 {
                  "height":8,
                  "id":155,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornatetiles",
-                     "colorVariant":"2",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornatetiles"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":680,
                  "y":64
-                },
+                }, 
                 {
                  "height":8,
                  "id":156,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornatetiles",
-                     "colorVariant":"2",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornatetiles"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":640,
                  "y":24
-                },
+                }, 
                 {
                  "height":32,
                  "id":157,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":576,
                  "x":64,
                  "y":32
-                },
+                }, 
                 {
                  "height":8,
                  "id":161,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornateroofing",
-                     "colorVariant":"2"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":648,
                  "y":40
-                },
+                }, 
                 {
                  "height":8,
                  "id":162,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornateroofing",
-                     "colorVariant":"2"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
                  "x":656,
                  "y":48
-                },
+                }, 
                 {
                  "height":8,
                  "id":163,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornateroofing",
-                     "colorVariant":"2"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":56,
                  "x":664,
                  "y":56
-                },
+                }, 
                 {
                  "height":8,
                  "id":164,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornateroofing",
-                     "colorVariant":"2",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":696,
                  "y":40
-                },
+                }, 
                 {
                  "height":8,
                  "id":165,
                  "name":"",
-                 "properties":
-                    {
-                     "back":"ornateroofing",
-                     "colorVariant":"2",
-                     "mod":"snow"
-                    },
+                 "properties":[
+                        {
+                         "name":"back",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }, 
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"mod",
+                         "type":"string",
+                         "value":"snow"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":704,
                  "y":48
-                },
+                }, 
                 {
                  "height":16,
                  "id":167,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":640,
                  "y":48
-                },
+                }, 
                 {
                  "height":16,
                  "id":168,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":56,
                  "y":48
-                },
+                }, 
                 {
                  "height":8,
                  "id":169,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":40,
                  "y":56
-                },
+                }, 
                 {
                  "height":8,
                  "id":170,
                  "name":"",
-                 "properties":
-                    {
-                     "colorVariant":"2",
-                     "material":"ornateroofing"
-                    },
+                 "properties":[
+                        {
+                         "name":"colorVariant",
+                         "type":"string",
+                         "value":"2"
+                        }, 
+                        {
+                         "name":"material",
+                         "type":"string",
+                         "value":"ornateroofing"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2148,89 +2086,122 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":95,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "draworder":"topdown",
-         "height":55,
+         "id":6,
          "name":"monsters & npcs",
          "objects":[
                 {
                  "height":8,
                  "id":125,
                  "name":"Zevi",
-                 "properties":
-                    {
-                     "npc":"sbq/Zygahedron/Zevi",
-                     "parameters":"{}",
-                     "typeName":"sbq/Zygahedron/Zevi-Hub"
-                    },
+                 "properties":[
+                        {
+                         "name":"npc",
+                         "type":"string",
+                         "value":"sbq\/Zygahedron\/Zevi"
+                        }, 
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{}"
+                        }, 
+                        {
+                         "name":"typeName",
+                         "type":"string",
+                         "value":"sbq\/Zygahedron\/Zevi-Hub"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":160,
                  "y":224
-                },
+                }, 
                 {
                  "height":8,
                  "id":191,
                  "name":"random Vore NPC",
-                 "properties":
-                    {
-                     "parameters":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }",
-                     "stagehand":"sbqNPCSpawner"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }"
+                        }, 
+                        {
+                         "name":"stagehand",
+                         "type":"string",
+                         "value":"sbqNPCSpawner"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":128,
                  "y":152
-                },
+                }, 
                 {
                  "height":8,
                  "id":192,
                  "name":"random Vore NPC",
-                 "properties":
-                    {
-                     "parameters":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }",
-                     "stagehand":"sbqNPCSpawner"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }"
+                        }, 
+                        {
+                         "name":"stagehand",
+                         "type":"string",
+                         "value":"sbqNPCSpawner"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":184,
                  "y":400
-                },
+                }, 
                 {
                  "height":8,
                  "id":193,
                  "name":"random Vore NPC",
-                 "properties":
-                    {
-                     "parameters":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }",
-                     "stagehand":"sbqNPCSpawner"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }"
+                        }, 
+                        {
+                         "name":"stagehand",
+                         "type":"string",
+                         "value":"sbqNPCSpawner"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":8,
                  "x":472,
                  "y":152
-                },
+                }, 
                 {
                  "height":8,
                  "id":194,
                  "name":"random Vore NPC",
-                 "properties":
-                    {
-                     "parameters":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }",
-                     "stagehand":"sbqNPCSpawner"
-                    },
+                 "properties":[
+                        {
+                         "name":"parameters",
+                         "type":"string",
+                         "value":"{ \"randomSelection\":\"\/npcs\/sbqHub\/sbqHubRandomNpcList.config\" }"
+                        }, 
+                        {
+                         "name":"stagehand",
+                         "type":"string",
+                         "value":"sbqNPCSpawner"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2241,68 +2212,66 @@
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":95,
          "x":0,
          "y":0
         }],
- "nextobjectid":217,
+ "nextlayerid":7,
+ "nextobjectid":218,
  "orientation":"orthogonal",
- "properties":
-    {
-
-    },
  "renderorder":"right-down",
+ "tiledversion":"1.10.2",
  "tileheight":8,
  "tilesets":[
         {
          "firstgid":1,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/liquids.json"
-        },
+        }, 
         {
          "firstgid":29,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/materials.json"
-        },
+        }, 
         {
          "firstgid":226,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/miscellaneous.json"
-        },
+        }, 
         {
          "firstgid":250,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/supports.json"
-        },
+        }, 
         {
          "firstgid":287,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-race\/glitch.json"
-        },
+        }, 
         {
          "firstgid":513,
          "source":"..\/..\/..\/tilesets\/auriShop\/auriShop.json"
-        },
+        }, 
         {
          "firstgid":534,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-race\/apex.json"
-        },
+        }, 
         {
          "firstgid":905,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-category\/door.json"
-        },
+        }, 
         {
          "firstgid":1037,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-category\/other.json"
-        },
+        }, 
         {
          "firstgid":1349,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-category\/generic.json"
-        },
+        }, 
         {
          "firstgid":1351,
          "source":"..\/..\/..\/tilesets\/wasabiRaptor\/paintedBlocks\/paintedBlocks.json"
-        },
+        }, 
         {
          "firstgid":1488,
          "source":"..\/..\/..\/..\/..\/assets\/packed\/tilesets\/packed\/objects-by-category\/wire.json"
         }],
  "tilewidth":8,
- "version":1,
+ "type":"map",
+ "version":"1.10",
  "width":95
 }
