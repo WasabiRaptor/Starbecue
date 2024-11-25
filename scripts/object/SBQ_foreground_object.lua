@@ -10,7 +10,6 @@ function init()
 	for _, v in ipairs(config.getParameter("checkRects")) do
 		table.insert(checkRects, rect.translate(v, object.position()))
 	end
-	sb.logInfo(sb.printJson(checkRects))
 end
 function update(dt)
 	sbq.checkTimers(dt)
