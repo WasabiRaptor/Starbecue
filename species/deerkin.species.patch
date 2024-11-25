@@ -1,0 +1,49 @@
+[{"op":"merge", "path":"", "value": {
+
+	"baseColorMap" : {
+		"primary" : ["e0975c", "a85636", "6f2919", "ffca8a"],
+		"secondary" : ["9a0098", "d300d1", "ff00fd"],
+		"hair" : ["e0975c", "a85636", "6f2919", "ffca8a"],
+		"flesh" : ["702c55", "8b3c6c", "a94783"]
+	},
+	"colorRemapGlobalTags" : {
+		"bellyColorRemap" : [
+			{"00adba":"bc1002", "check" : {"navelVisible":true}},
+			{"00adba":"eb3629", "check" : {"navelVisible":false}},
+			["primary","secondary"]
+		],
+		"cockColorRemap" : [
+			["primary","flesh"]
+		],
+		"pussyColorRemap" : [
+			["flesh","flesh"]
+		],
+		"ballsColorRemap" : [
+			["primary","secondary"]
+		],
+		"breastsColorRemap" : [
+			["primary","secondary"],
+			["primary_180","primary"],
+			["flesh","flesh", {"nipplesVisible":true}],
+			["flesh","secondary", {"nipplesVisible":false}]
+		]
+	},
+	"voreConfig" : [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings" : {
+				"navelVisible" : false
+			}
+		}
+	],
+	"animationCustom" : [
+		"/humanoid/any/removeTail.animation",
+		"/humanoid/any/humanoidPred.animation",
+		"/humanoid/any/voreOccupants.animation",
+	],
+	
+	"infuseData" : [
+		"/humanoid/any/basicInfuseData.config"
+	]
+
+}}]

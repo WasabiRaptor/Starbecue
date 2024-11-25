@@ -32,6 +32,9 @@
 	Helena NPC dialogue
 	General NPC dialogue proofreading and editing
 
+# Fluffe9911
+	Deerkin compatibility
+
 # HornySe7en
 	Latex race tail vore animations
 
