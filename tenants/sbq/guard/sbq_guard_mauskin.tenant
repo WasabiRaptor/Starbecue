@@ -1,0 +1,36 @@
+{
+	"name": "sbq_guard_mauskin",
+	"priority": 52,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"mauskin" : 8
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"mauskinbannersmall", "count":1},
+		{"name":"mauskinwooddoor", "count":1},
+		{"name":"mauskinwoodenbed", "count":1},
+		{"name":"mauskinwoodchair", "count":1},
+		{"name":"mauskinwoodendesk", "count":1},
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["mauskin"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

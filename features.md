@@ -375,6 +375,7 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Cyberman](https://steamcommunity.com/sharedfiles/filedetails/?id=953528708) : cyberman
 - [Galactic Goblins](https://steamcommunity.com/sharedfiles/filedetails/?id=2925162796) : duragoblin
 - [Deerkin](https://steamcommunity.com/sharedfiles/filedetails/?id=1597901084) : deerkin
+- [Mauskin](https://github.com/DrPvtSkittles/Mauskin) : mauskin
 
 ---
 

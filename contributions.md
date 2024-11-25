@@ -34,6 +34,7 @@
 
 # Fluffe9911
 	Deerkin compatibility
+	Mauskin compatibility
 
 # HornySe7en
 	Latex race tail vore animations
