@@ -94,7 +94,28 @@ function sbq.refreshUpgrades(upgraded)
 			storage.sbqSettings.maximumScale = storage.sbqSettings.maxPossibleScale
 		end
 	end
+end
 
+function sbq.validateExportSettings(settings)
+	local validated = sb.jsonMerge(settings,{})
+	validated.recentlyDigested = nil
+	validated.infuseSlots = nil
+	return sbq.removeEmptyTables(validated)
+end
+function sbq.removeEmptyTables(input)
+	local empty = true
+	for k, v in pairs(input) do
+		if type(v) == "table" then
+			input[k] = sbq.removeEmptyTables(v)
+			if input[k] then
+				empty = false
+			end
+		else
+			empty = false
+		end
+	end
+	if empty then return nil end
+	return input
 end
 
 function sbq.setupSettingMetatables(entityType)
@@ -102,6 +123,33 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.refreshUpgrades()
 	sbq.voreConfig = sbq.voreConfig or {}
 	storage.sbqSettings = storage.sbqSettings or {}
+
+	-- sanity to remove potential data leak
+	for k, v in ipairs(storage.sbqSettings.recentlyDigested or {}) do
+		if sbq.query(v, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
+			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
+		end
+		if sbq.query(v, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
+			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
+		end
+		if sbq.query(v, {"parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
+			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
+		end
+	end
+	for k, v in pairs(storage.sbqSettings.infuseSlots or {}) do
+		if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
+			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
+		end
+		if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
+			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
+		end
+		if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
+			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
+		end
+
+	end
+
+
 	sbq.settings = sb.jsonMerge(
 		sbq.config.entityTypeOverrideSettings[entityType] or {},
 		sbq.voreConfig.overrideSettings or {}
@@ -381,39 +429,35 @@ end
 
 sbq.getSettingsOf = {}
 function sbq.getSettingsOf.prefs()
-	return {
+	return sbq.validateExportSettings({
 		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
 		infusePrefs = sbq.exportSettingGroup("infusePrefs"),
 		domBehavior = sbq.exportSettingGroup("domBehavior"),
 		subBehavior = sbq.exportSettingGroup("subBehavior")
-	}
+	})
 end
 function sbq.getSettingsOf.locations()
-	return {
+	return sbq.validateExportSettings({
 		locations = sbq.exportSettingGroup("locations"),
-	}
+	})
 end
 function sbq.getSettingsOf.current()
-	local output = sb.jsonMerge(storage.sbqSettings, {})
-	output.recentlyDigested = nil
-	output.infuseSlots = nil
-	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
-	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
-	output.locations = sbq.exportSettingGroup("locations")
-	output.domBehavior = sbq.exportSettingGroup("domBehavior")
-	output.subBehavior = sbq.exportSettingGroup("subBehavior")
-	return output
+	return sbq.validateExportSettings(sb.jsonMerge(storage.sbqSettings, {
+		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
+		infusePrefs = sbq.exportSettingGroup("infusePrefs"),
+		locations = sbq.exportSettingGroup("locations"),
+		domBehavior = sbq.exportSettingGroup("domBehavior"),
+		subBehavior = sbq.exportSettingGroup("subBehavior"),
+	}))
 end
 function sbq.getSettingsOf.all()
 	local output = sbq.exportBaseSettings()
-	output.recentlyDigested = nil
-	output.infuseSlots = nil
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
 	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
 	output.locations = sbq.exportSettingGroup("locations")
 	output.domBehavior = sbq.exportSettingGroup("domBehavior")
 	output.subBehavior = sbq.exportSettingGroup("subBehavior")
-	return output
+	return sbq.validateExportSettings(output)
 end
 
 function sbq.exportBaseSettings()

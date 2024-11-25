@@ -251,6 +251,7 @@ function update(dt)
 end
 
 function uninit()
+	storage.sbqSettings = sbq.removeEmptyTables(storage.sbqSettings)
 	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
 end

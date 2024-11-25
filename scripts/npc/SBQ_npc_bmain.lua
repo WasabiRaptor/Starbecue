@@ -4,7 +4,6 @@ local old = {
 	update = update,
 	tenant_setNpcType = tenant.setNpcType,
 	recruitable_generateRecruitInfo = recruitable.generateRecruitInfo,
-	preservedStorage = preservedStorage,
 }
 sbq = {}
 require "/scripts/any/SBQ_override_dummies.lua"
@@ -161,13 +160,6 @@ function update(dt)
 		end
 	end
 
-end
-
-function preservedStorage()
-	return sb.jsonMerge(old.preservedStorage(), {
-		sbqSettings = storage.sbqSettings,
-		sbqUpgrades = storage.sbqUpgrades,
-	})
 end
 
 
