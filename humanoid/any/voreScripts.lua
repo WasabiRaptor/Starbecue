@@ -829,7 +829,7 @@ function default:lockDown(name, action, target, ...)
 	sbq.setStatModifiers("sbqLockDown", {
 		"sbqLockDown",
 		{ stat = "sbqLockDown", amount = 1 },
-		{ stat = "energyRegenPercentageRate", baseMultiplier = 0}
+		{ stat = "energyRegenPercentageRate", effectiveMultiplier = 0}
 	})
 end
 function default:lockDownClear(name, action, target)
