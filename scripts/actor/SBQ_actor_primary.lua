@@ -24,6 +24,7 @@ function init()
 	status.setStatusProperty("sbqProgressBar", 0)
 
 	message.setHandler("sbqReleased", function(_, _, data)
+		mcontroller.resetAnchorState()
 		sbq.resetLounging()
 		status.setStatusProperty("sbqProgressBar", 0)
 		status.setStatusProperty("sbqProgressBarColor", {})
