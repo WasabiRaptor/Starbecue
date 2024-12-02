@@ -17,9 +17,9 @@ function init() pane.dismiss()
 		function player.interact(type, config, source)
 			if type == "ScriptPane" then
 				local configRoot = config.___
-				config.paneLayer = configRoot.paneLayer
-				config.dismissable = configRoot.dismissable
-				config.sourceRadius = configRoot.sourceRadius
+				config.paneLayer = configRoot.paneLayer or config.paneLayer
+				config.dismissable = configRoot.dismissable or config.dismissable
+				config.sourceRadius = configRoot.sourceRadius or config.sourceRadius
 				table.insert(config.scripts, "/metagui/sbq/custom_widgets.lua")
 			end
 			player_interact(type, config, source)

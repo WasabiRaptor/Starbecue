@@ -357,14 +357,14 @@ function dialogueProcessor.sendPlayerDialogueBox(actions)
 	end
 end
 
-function dialogueProcessor.getPlayerDialogueBox(actions)
+function dialogueProcessor.getPlayerDialogueBox(actions, sourceRadius)
 	local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
 		dialogueTree = sbq.dialogueTree,
 		dialogueTreeStart = dialogue.path,
 		noActions = not actions,
 		dialogue = dialogue
 	})
-	return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
+	return {"ScriptPane", { sourceRadius = sourceRadius, data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:dialogueBox" }, entity.id()}
 end
 
 function dialogueProcessor.speakDialogue(callback)

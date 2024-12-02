@@ -754,15 +754,18 @@ function _State:interact(args)
 	local start = ".greeting"
 	local actions = true
 	local occupant = Occupants.entityId[tostring(args.sourceId)]
+	local sourceRadius
 	if sbq.loungingIn() == args.sourceId then
+		sourceRadius = -1
 		start = ".loungingInteract"
 		actions = false
 	elseif occupant then
 		start = ".occupantInteract"
+		sourceRadius = -1
 	end
 	if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(start, args.sourceId) then
 		dialogueProcessor.speakDialogue()
-		return dialogueProcessor.getPlayerDialogueBox(actions)
+		return dialogueProcessor.getPlayerDialogueBox(actions, sourceRadius)
 	elseif occupant then
 		return {"Message", {messageType = "sbqRequestActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId)}}}
 	else
