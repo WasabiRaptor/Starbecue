@@ -1434,8 +1434,8 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
+						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
 						"sit" : "duck",
 						"lay" : "duck",
 						"walk" : "duck",
@@ -1447,7 +1447,7 @@
 						"none": { "properties": {} }
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>" } },
+						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -1471,8 +1471,8 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<legsArmor>:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<legsArmor>:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"idle": { "properties": { "image": "<legsArmor>:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
+						"duck": { "properties": { "image": "<legsArmor>:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
 						"sit" : "duck",
 						"lay" : "duck",
 						"walk" : "duck",
@@ -1484,7 +1484,7 @@
 						"none": { "properties": {} }
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<legsArmor>:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>" } },
+						"dance": { "properties": { "image": "<legsArmor>:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
 						"none": { "properties": {} }
 					},
 					"hiddenState" : {
@@ -1513,8 +1513,8 @@
 				},
 				"partStates": {
 					"bodyState": {
-						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
+						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
 						"sit" : "duck",
 						"lay" : "duck",
 						"walk" : "duck",
@@ -1526,7 +1526,7 @@
 						"none": { "properties": {} }
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>" } },
+						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
 						"none": { "properties": {} }
 					},
 					"bodyHiddenState" : {
@@ -1536,7 +1536,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					},
 					"underwearHide" : {
