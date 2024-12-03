@@ -45,6 +45,12 @@ local bar = {
 	color = {"9e9e9e", "c4c4c4", "e4e4e4", "ffffff"}, -- defaults in barfull.png
 }
 
+local predEnergyBar = {
+	empty = "/interface/scripted/sbq/preyHud/energybar_empty.png",
+	full = "/interface/scripted/sbq/preyHud/energybar.png",
+	x = 30.5, y = 6, h = 4, w = 31,
+}
+
 function replace(from, to)
 	if not to then return "" end
 	local directive = "?replace;"
@@ -207,7 +213,23 @@ function update( dt )
 	elseif occupantData.flags.digested or occupantData.flags.digesting then
 		indicator:drawImageDrawable("/interface/scripted/sbq/softDigest.png", {45.5,16}, 1)
 	elseif world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
-		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", {45.5,16}, 1)
+		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", { 45.5, 16 }, 1)
+
+		local s = world.entityResourcePercentage(pane.sourceEntity(), "energy") * predEnergyBar.w
+		if s < predEnergyBar.w then
+			indicator:drawImageRect(
+				predEnergyBar.empty,
+				{s, 0, predEnergyBar.w, predEnergyBar.h},
+				{predEnergyBar.x + s, predEnergyBar.y, predEnergyBar.x + predEnergyBar.w, predEnergyBar.y + predEnergyBar.h}
+			)
+		end
+		if s > 0 then
+			indicator:drawImageRect(
+				predEnergyBar.full,
+				{0, 0, s, predEnergyBar.h},
+				{predEnergyBar.x, predEnergyBar.y, predEnergyBar.x + s, predEnergyBar.y + predEnergyBar.h}
+			)
+		end
 	end
 end
 
