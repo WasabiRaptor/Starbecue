@@ -190,12 +190,8 @@ end
 function sbq.assignSettingValue(setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
 	local widget = _ENV[settingIdentifier] or sbq.settingWidgets[settingIdentifier]
-	local value = sbq.settings[setting]
-	local locked = sbq.overrideSettings[setting]
-	if group and name then
-		value = sbq.settings[group][name][setting]
-		locked = ((sbq.overrideSettings[group] or {})[name] or {})[setting]
-	end
+	local value = ((group and name) and sbq.settings[group][name][setting]) or sbq.settings[setting]
+	local locked = sbq.checkLockedSetting(setting, group, name)
 	local valueType = type(value)
 	if not widget then
 		return
@@ -225,8 +221,8 @@ function sbq.assignSettingValue(setting, group, name)
 end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
-	local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
-	if result then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
+	local result = sbq.checkInvalidSetting(value, setting, group, name)
+	if result ~= nil then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
 	if group and name then
 		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, value)
@@ -239,8 +235,8 @@ function sbq.widgetScripts.changeSetting(value, setting, group, name)
 end
 
 function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
-	local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
-	if result then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
+	local result = sbq.checkInvalidSetting(value, setting, group, name)
+	if result ~= nil then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
 	local table = sb.parseJson(value)
 	if not table then pane.playSound("/sfx/interface/clickon_error.ogg") return false end
@@ -281,8 +277,8 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = sbq.query(sbq.voreConfig.invalidSettings, {param.setting, k}) or ((param.groupName and param.groupKey) and sbq.query(sbq.voreConfig.invalidSettings, {param.groupName, param.groupKey, param.setting, k}))
-			if not result then
+			local result = sbq.checkInvalidSetting(k, param.setting, param.groupName, param.groupKey)
+			if result == nil then
 				local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 				local icon
 				for _, status in ipairs(location[param.setting][k]) do
@@ -325,8 +321,8 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	local effects = location[param.setting]
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
-		local result = sbq.query(sbq.voreConfig.invalidSettings, {param.setting, "true"}) or ((param.groupName and param.groupKey) and sbq.query(sbq.voreConfig.invalidSettings, {param.groupName, param.groupKey, param.setting, "true"}))
-		if (effects or {})[k] and not result then
+		local result = sbq.checkInvalidSetting("true", param.setting, param.groupName, param.groupKey)
+		if (effects or {})[k] and (result == nil) then
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
 			local status
@@ -459,21 +455,16 @@ function sbq.widgetScripts.clearRecentlyDigested()
 	sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
 end
 
-function sbq.widgetScripts.dropDownSetting(value, setting, group, name)
-	local value = sbq.settings[setting]
-	local locked = sbq.overrideSettings[setting]
-	if group and name then
-		value = sbq.settings[group][name][setting]
-		locked = ((sbq.overrideSettings[group] or {})[name] or {})[setting]
-	end
+function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
+	local value = ((group and name) and sbq.settings[group][name][setting]) or sbq.settings[setting]
+	local locked = sbq.checkLockedSetting(setting, group, name)
 	local options = {}
 	if not sbq.voreConfig.selectValues[setting] then
 		sbq.playErrorSound()
 	end
 	for _, v in ipairs(sbq.voreConfig.selectValues[setting]) do
-		local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
-
-		if not result then
+		local result = sbq.checkInvalidSetting(value, setting, group, name)
+		if result == nil then
 			if sbq.gui.dropDownOptions[v] then
 				table.insert(options, {
 					sbq.replaceConfigTags(sbq.gui.dropDownOptions[v][1], {selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or ""}),

@@ -13,6 +13,12 @@ function init()
 	world.setProperty("sbqOverrideSettings_player", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.player, config.getParameter("overrideSettings_player")))
 	world.setProperty("sbqOverrideSettings_npc", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.npc, config.getParameter("overrideSettings_npc")))
 	world.setProperty("sbqOverrideSettings_object", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.object, config.getParameter("overrideSettings_object")))
+
+	world.setProperty("sbqInvalidSettings", sb.jsonMerge(sbq.config.serverInvalidSettings, config.getParameter("invalidSettings")))
+	world.setProperty("sbqInvalidSettings_player", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.player, config.getParameter("invalidSettings_player")))
+	world.setProperty("sbqInvalidSettings_npc", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.npc, config.getParameter("invalidSettings_npc")))
+	world.setProperty("sbqInvalidSettings_object", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.object, config.getParameter("invalidSettings_object")))
+
 	storage.ownerUUID = config.getParameter("ownerUUID") or storage.ownerUUID
 
 	object.setInteractive(true)
@@ -35,6 +41,11 @@ function init()
 		world.setProperty("sbqOverrideSettings_player", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.player, player))
 		world.setProperty("sbqOverrideSettings_npc", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.npc, npc))
 		world.setProperty("sbqOverrideSettings_object", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.object, object))
+
+		world.setProperty("sbqInvalidSettings", sb.jsonMerge(sbq.config.serverInvalidSettings, global))
+		world.setProperty("sbqInvalidSettings_player", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.player, player))
+		world.setProperty("sbqInvalidSettings_npc", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.npc, npc))
+		world.setProperty("sbqInvalidSettings_object", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.object, object))
 	end)
 end
 

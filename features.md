@@ -412,7 +412,7 @@ Used for transforming into different species, different ones can be made for sli
 - Reversion Potion: Reverts you to your original species (keep in mind if you have perma TF on, every TF becomes your new 'original') : sbqReversionPotion
 
 Example command to spawn in a potion preloaded with the parameters to TF someone into a specific species
-`/spawnitem sbqMysteriousPotion 1 {"identity":{"species":"human"}}`
+`/spawnitem sbqMysteriousPotion 1 '{"identity":{"species":"human"}}'`
 
 ### Potion Dart Gun : sbqPotionDartGun
 A 'weapon' used to apply potion effects to other targets, it will consume potions held in the other hand when it is fired to shoot a dart, if you miss the dart might drop the potion on the ground to be reused.
@@ -424,7 +424,7 @@ Chage up shots to shrink or grow the target it hits!
 Eat these to increase your maximum potential digest power, as well as your maximum scale. Theres one of these for each tier craftable at the anvil, however finding them as loot has potential to give even even better results, if you find one that's glowing, thats the best you can find for the tier. Check your Misc tab to see which ones you've eaten.
 
 Example command to spawn in a tiered candy, crafted candies will never have a bonus higher than 1, loot candies' bonus will never go higher than its level
-`/spawnitem sbqCandy 1 {"level":1, "bonus":1}`
+`/spawnitem sbqCandy 1 '{"level":1, "bonus":1}'`
 
 ### Plastic Egg : sbqPlasticEgg
 A silly re-usable plastic egg, behaves exactly like the egg status except it drops an item and can be re-used.
@@ -453,14 +453,17 @@ Similar to the Mini Vore Deed except it requires no background anchor, and doesn
 Same as the Vore Colony Deeds, however instead spawns hostile bandit versions of available NPCs (some OCs cannot be evil) connect Evil Deeds with the wire tool to have the bandits they spawn share the same team, otherwise they will fight eachother.
 
 ### Locked Settings Enforcer : sbqOverrideEnforcer
-Is intended to be an administration tool to disable certain settings server wide or on certain worlds. It will receive an update later to configure this in a gui, but until then it must be configured via spawnitem parameters for per world configuration or patching `sbq.config:serverOverrideSettings` for server wide configuration.
+Is intended to be an administration tool to disable certain settings server wide or on certain worlds. It will receive an update later to configure this in a gui, but until then it must be configured via spawnitem parameters for per world configuration or patching `sbq.config`'s `serverOverrideSettings` and `serverInvalidSettings` values for server wide configuration.
 
 Example command to spawn in one that will disable the bone drops from digestion for the world.
-`/spawnitem sbqOverrideEnforcer 1 {"overrideSettings":{"acidDigestDrops":false}}`
+`/spawnitem sbqOverrideEnforcer 1 '{"overrideSettings":{"acidDigestDrops":false}}'`
+
+Example command to spawn in one that will disable the use of fatal digest by making it default back to soft digest while on that world.
+`/spawnitem sbqOverrideEnforcer 1 '{"invalidSettings":{"mainEffect":{"digest":"softDigest"}}}'`
 
 Unpack the mod and reference `sbq.config:defaultSettings` to view the data structure and learn internal setting names and types.
 
-Additional note, patching `sbq.config:serverOverrideSettings` will apply to all server entities regardless of if a `sbqOverrideEnforcer` is placed within the world, however it is required for said overrides to apply to players.
+Additional note, patching `sbq.config`'s `serverOverrideSettings` and `serverInvalidSettings` values will apply to all server entities such as Objects, NPCs, and Monsters regardless of if a `sbqOverrideEnforcer` is placed within the world, however it is required for said overrides to apply to non host players.
 
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.

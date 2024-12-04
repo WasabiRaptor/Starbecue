@@ -17,22 +17,25 @@ function sbq.settingsInit()
 	end)
 end
 
-function sbq.setSetting(k, v)
+function sbq.setSetting(setting, value)
+	if sbq.checkInvalidSetting(value, setting) ~= nil then return end
+
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), k, v)
+		world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), setting, value)
 	end
-	local old = sbq.settings[k]
-	storage.sbqSettings[k] = v
-	if old == sbq.settings[k] then return end
+	local old = sbq.settings[setting]
+	storage.sbqSettings[setting] = value
+	sbq.settings[setting] = nil
+	if old == sbq.settings[setting] then return end
 	sbq.refreshSettings()
-	if sbq.config.publicSettings[k] then
-		sbq.publicSettings[k] = sbq.settings[k]
+	if sbq.config.publicSettings[setting] then
+		sbq.publicSettings[setting] = sbq.settings[setting]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 	end
-	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
-		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
-			sbq[script](k,v)
+	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
+		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
+			sbq[script](setting,value)
 		end
 	end
 end
@@ -55,23 +58,26 @@ function sbq.getUpgrade(upgradeName, tier, bonus)
 	sbq.refreshPublicSettings()
 end
 
-function sbq.setGroupedSetting(group, name, k, v)
+function sbq.setGroupedSetting(group, name, setting, value)
+	if sbq.checkInvalidSetting(value, setting, group, name) ~= nil then return end
+
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name, k, v)
+		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name, setting, value)
 	end
-	local old = sbq.settings[group][name][k]
-	storage.sbqSettings[group][name][k] = v
-	if type(v) ~= "table" and old == sbq.settings[group][name][k] then return end
-	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, k, v) end
-	if (sbq.voreConfig.settingUpdateScripts or {})[k] then
-		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[k]) do
-			sbq[script](k,v, group, name)
+	local old = sbq.settings[group][name][setting]
+	storage.sbqSettings[group][name][setting] = value
+	sbq.settings[group][name][setting] = nil
+	if type(value) ~= "table" and old == sbq.settings[group][name][setting] then return end
+	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, setting, value) end
+	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
+		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
+			sbq[script](setting,value, group, name)
 		end
 	end
 	sbq.refreshSettings()
-	if sbq.config.publicSettings[k] then
-		sbq.publicSettings[group][name][k] = sbq.settings[group][name][k]
+	if sbq.config.publicSettings[setting] then
+		sbq.publicSettings[group][name][setting] = sbq.settings[group][name][setting]
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 	end
 end

@@ -118,10 +118,20 @@ function sbq.removeEmptyTables(input)
 	return input
 end
 
+function sbq.checkInvalidSetting(value, setting, group, name)
+	local value = tostring(value)
+	local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
+	return sbq.query(sbq.worldInvalidSettings, {setting, result or value}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, result or value})) or result
+end
+function sbq.checkLockedSetting(setting, group, name)
+	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, {group, name, setting}))
+end
+
 function sbq.setupSettingMetatables(entityType)
 	storage = storage or {}
 	sbq.refreshUpgrades()
 	sbq.voreConfig = sbq.voreConfig or {}
+	sbq.worldInvalidSettings = sb.jsonMerge(world.getProperty("sbqInvalidSettings") or sbq.config.serverInvalidSettings or {}, world.getProperty("sbqInvalidSettings_"..entityType) or sbq.config.serverEntityTypeInvalidSettings[entityType] or {})
 	storage.sbqSettings = storage.sbqSettings or {}
 
 	-- sanity to remove potential data leak
@@ -159,15 +169,29 @@ function sbq.setupSettingMetatables(entityType)
 	end
 	sbq.settings = sb.jsonMerge(
 		sbq.settings,
-		sbq.config.serverOverrideSettings,
-		sbq.config.serverEntityTypeOverrideSettings[entityType] or {},
-		world.getProperty("sbqOverrideSettings") or {},
-		world.getProperty("sbqOverrideSettings_"..entityType) or {}
+		world.getProperty("sbqOverrideSettings") or sbq.config.serverOverrideSettings or {},
+		world.getProperty("sbqOverrideSettings_"..entityType) or sbq.config.serverEntityTypeOverrideSettings[entityType] or {}
 	)
 	if entityType == "player" then
 		sbq.settings.speciesTF = nil
 	end
 	sbq.settings.recentlyDigested = nil
+
+	sbq.lockedSettings = {}
+	for setting, v in pairs(sbq.settings) do
+		if not sbq.config.groupedSettings[setting] then
+			sbq.lockedSettings[setting] = true
+		end
+	end
+	for k, v in pairs(sbq.config.groupedSettings) do
+		sbq.lockedSettings[k] = {}
+		for name, settings in pairs(sbq.settings[k] or {}) do
+			sbq.lockedSettings[k][name] = {}
+			for setting, _ in pairs(settings or {}) do
+				sbq.lockedSettings[k][name][setting] = true
+			end
+		end
+	end
 
 	sbq.publicSettings = sbq.publicSettings or {}
 	sbq.defaultSettings = sb.jsonMerge(
@@ -176,7 +200,6 @@ function sbq.setupSettingMetatables(entityType)
 		sbq.voreConfig.defaultSettings or {}
 	)
 	for setting, v in pairs(storage.sbqSettings) do
-		local override = sbq.settings[setting]
 		local defaultType = type(sbq.defaultSettings[setting])
 		if (type(v) ~= defaultType) then
 			storage.sbqSettings[setting] = nil
@@ -186,21 +209,18 @@ function sbq.setupSettingMetatables(entityType)
 				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nShould be type '%s'", setting, v, defaultType))
 			end
 		end
-		if not sbq.config.groupedSettings[setting] then
-			local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, v})
-			if result then
-				storage.sbqSettings[setting] = result
-				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nInvalid with current species config.", setting, v, result))
-			end
-			local result2 = sbq.query(sbq.voreConfig.invalidSettings, {setting, override})
-			if result2 then
-				sbq.settings[setting] = result2
-			end
-		end
 	end
 	for setting, v in pairs(sbq.defaultSettings) do
+		local override = sbq.settings[setting]
+		local value = storage.sbqSettings[setting]
 		if (type(v) == "table") and (storage.sbqSettings[setting] == nil) then
 			storage.sbqSettings[setting] = {}
+		end
+		if not sbq.config.groupedSettings[setting] then
+			local result = sbq.checkInvalidSetting(override or value or v, setting)
+			if result ~= nil then
+				sbq.settings[setting] = result
+			end
 		end
 	end
 	sbq.lists.locations = {}
@@ -239,9 +259,7 @@ function sbq.setupSettingMetatables(entityType)
 			sbq.publicSettings[k][name] = {}
 			storage.sbqSettings[k][name] = storage.sbqSettings[k][name] or {}
 			sbq.settings[k][name] = sbq.settings[k][name] or {}
-
 			for setting, v in pairs(storage.sbqSettings[k][name]) do
-				local override = sbq.settings[k][name][setting]
 				local defaultType = type(sbq.defaultSettings[k][name][setting])
 				if (type(v) ~= defaultType) then
 					storage.sbqSettings[k][name][setting] = nil
@@ -251,22 +269,19 @@ function sbq.setupSettingMetatables(entityType)
 						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting, v, sbq.defaultSettings[setting], defaultType))
 					end
 				end
-				local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, v}) or sbq.query(sbq.voreConfig.invalidSettings, {k, name, setting, v})
-				if result then
-					storage.sbqSettings[k][name][setting] = result
-					sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nInvalid with current species config.", k, name, setting, v, result))
-				end
-				local result2 = sbq.query(sbq.voreConfig.invalidSettings, {setting, v}) or sbq.query(sbq.voreConfig.invalidSettings, {k, name, setting, override})
-				if result2 then
-					sbq.settings[k][name][setting] = result2
-				end
 			end
 			for setting, v in pairs(sbq.defaultSettings[k][name]) do
+				sbq.settings[k][name][setting] = sbq.settings[k][name][setting] or sbq.settings[setting]
+				local override = sbq.settings[k][name][setting]
+				local value = storage.sbqSettings[k][name][setting]
 				if (type(v) == "table") and (storage.sbqSettings[k][name][setting] == nil) then
 					storage.sbqSettings[k][name][setting] = {}
 				end
+				local result = sbq.checkInvalidSetting(override or value or v, setting, k, name)
+				if result ~= nil then
+					sbq.settings[k][name][setting] = result
+				end
 			end
-
 
 			setmetatable(storage.sbqSettings[k][name], {__index = sbq.defaultSettings[k][name]})
 			setmetatable(sbq.settings[k][name], {__index= storage.sbqSettings[k][name]})
@@ -286,27 +301,8 @@ function sbq.setupSettingMetatables(entityType)
 
 	setmetatable(storage.sbqSettings, {__index = sbq.defaultSettings})
 	setmetatable(sbq.settings, {__index= storage.sbqSettings})
-
-	sbq.refreshOverrides()
 end
 
-function sbq.refreshOverrides()
-	sbq.overrideSettings = {}
-	for setting, v in pairs(sbq.settings) do
-		if not sbq.config.groupedSettings[setting] then
-			sbq.overrideSettings[setting] = true
-		end
-	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		sbq.overrideSettings[k] = {}
-		for name, settings in pairs(sbq.settings[k]) do
-			sbq.overrideSettings[k][name] = {}
-			for setting, _ in pairs(settings) do
-				sbq.overrideSettings[k][name][setting] = true
-			end
-		end
-	end
-end
 
 function sbq.getEntitySize(entityId)
 	if world.entityType(entityId) == "object" then
