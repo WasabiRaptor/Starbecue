@@ -626,6 +626,12 @@ function widgets.sbqCheckBox:init(base, param)
 			self:queueRedraw()
 		end
 	end)
+	self:subscribeEvent("radioButtonLocked", function(self, btn, locked)
+		if btn ~= self and btn.radioGroup == self.radioGroup then
+			self.locked = locked
+			self:queueRedraw()
+		end
+	end)
 	self:subscribeEvent(hRadioFind, function(self, group)
 		if self.radioGroup == group and self.checked then return self end
 	end)
@@ -665,7 +671,7 @@ function widgets.sbqCheckBox:draw()
 	else
 		theme.drawCheckBox(self)
 	end
-	if self.locked then
+	if self.locked and not (self.icon and self.checked) then
 		c:drawImage(self.checked and "/interface/scripted/sbq/lockedEnabled.png?multiply=FFFFFFBD" or "/interface/scripted/sbq/lockedDisabled.png?multiply=FFFFFFBD", pos, 1, nil, true )
 	end
 end
@@ -708,6 +714,15 @@ function widgets.sbqCheckBox:setChecked(b)
 		self:wideBroadcast(broadcastLevel, "radioButtonChecked", self)
 	end
 	self.checked = b
+	self:queueRedraw()
+end
+
+function widgets.sbqCheckBox:setLocked(locked)
+	if self.radioGroup and locked ~= self.locked then
+		self.locked = locked -- set before event
+		self:wideBroadcast(broadcastLevel, "radioButtonLocked", self, locked)
+	end
+	self.locked = locked
 	self:queueRedraw()
 end
 

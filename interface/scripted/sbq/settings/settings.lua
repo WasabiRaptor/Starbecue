@@ -202,7 +202,7 @@ function sbq.assignSettingValue(setting, group, name)
 		else
 			widget:selectValue(value)
 		end
-		widget.locked = locked
+		widget:setLocked(locked)
 	elseif widget.widgetType == "sbqTextBox" then
 		if valueType == "table" then
 			widget:setText(sb.printJson(value))
@@ -222,7 +222,7 @@ end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
 	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if result ~= nil then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
+	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
 	if group and name then
 		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, value)
@@ -236,7 +236,7 @@ end
 
 function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
 	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if result ~= nil then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
+	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
 
 	local table = sb.parseJson(value)
 	if not table then pane.playSound("/sfx/interface/clickon_error.ogg") return false end

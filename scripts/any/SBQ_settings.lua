@@ -19,6 +19,7 @@ end
 
 function sbq.setSetting(setting, value)
 	if sbq.checkInvalidSetting(value, setting) ~= nil then return end
+	if sbq.checkLockedSetting(setting) then return end
 
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
@@ -60,6 +61,7 @@ end
 
 function sbq.setGroupedSetting(group, name, setting, value)
 	if sbq.checkInvalidSetting(value, setting, group, name) ~= nil then return end
+	if sbq.checkLockedSetting(setting, group, name) then return end
 
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
