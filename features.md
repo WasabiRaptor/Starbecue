@@ -463,7 +463,7 @@ Example command to spawn in one that will disable the use of fatal digest by mak
 
 Unpack the mod and reference `sbq.config:defaultSettings` to view the data structure and learn internal setting names and types.
 
-Additional note, patching `sbq.config`'s `serverOverrideSettings` and `serverInvalidSettings` values will apply to all server entities such as Objects, NPCs, and Monsters regardless of if a `sbqOverrideEnforcer` is placed within the world, however it is required for said overrides to apply to non host players.
+Additional note, patching `sbq.config`'s `serverOverrideSettings` and `serverInvalidSettings` values will apply to all server entities such as Objects, NPCs, and Monsters regardless of if a `sbqOverrideEnforcer` is placed within the world, however it is required for said overrides to apply to non host players. This does apply to any override enforcers placed on the ships of connected clients!
 
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.
