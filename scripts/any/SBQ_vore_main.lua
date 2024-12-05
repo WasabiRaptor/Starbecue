@@ -576,6 +576,12 @@ function _State:tryAction(name, target, ...)
 	end, name, action, target, result2, ..., longest)
 
 	if target then
+		for _, effectData in ipairs(action.applyStatusEffects or {}) do
+			local effect, duration = table.unpack(effectData)
+			local effectConfig = root.effectConfig(effect)
+			world.sendEntityMessage(target, "applyStatusEffect", effect, (duration or effectConfig.defaultDuration or 1) + longest, entity.id())
+		end
+
 		world.sendEntityMessage(target, "sbqActionOccuring", entity.id(), name, longest)
 	end
 

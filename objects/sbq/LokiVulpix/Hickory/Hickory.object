@@ -123,7 +123,10 @@
 								"eatState" : ["eat", true, true]
 							},
 							"location" : "belly",
-							"throughput" : 1.5
+							"throughput" : 1.5,
+							"applyStatusEffects" : [
+								["sbqWetDrool"]
+							]
 						}
 					},
 					"locations" : {
@@ -201,7 +204,7 @@
 			"dance": "sbqIdle",
 			"enabled" : false,
 			"handlesDrawables" : true
-		},
+		}
 		// "occupant1" : {
 		// 	"part" : "occupant1",
 		// 	"partAnchor" : "loungeOffset",
