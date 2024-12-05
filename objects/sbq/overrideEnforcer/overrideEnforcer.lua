@@ -55,6 +55,9 @@ function update()
 end
 
 function onInteraction(args)
+	-- local uuid = world.entityUniqueId(args.sourceEntity)
+	-- if storage.ownerUUID and (uuid~= storage.ownerUUID) then return {} end
+	-- until we can determine if a player is admin server side we just have to let the ui open for a single frame...
 	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:overrideEnforcer" }}
 end
 
