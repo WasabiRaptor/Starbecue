@@ -228,7 +228,7 @@ function update(dt)
 					pcall(player.warp("player:" .. occupantData.parentUUID, "beam"))
 				end
 				player.setProperty("sbqPredWarpAttempted", (player.getProperty("sbqPredWarpAttempted") or 0) + 1)
-			elseif not sbq.namedRPCList.missingPredCheck and sbq.timer("preyMissingWaitPrompt", sbq.config.missingPredTimeout) then
+			elseif not sbq.namedRPCList.missingPredCheck then
 				sbq.addNamedRPC("missingPredCheck", player.confirm({
 					paneLayout = "/interface/windowconfig/portraitconfirmation.config:paneLayout",
 					icon = "/interface/confirmation/confirmationicon.png",
