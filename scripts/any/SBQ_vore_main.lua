@@ -777,9 +777,12 @@ function _State:interact(args)
 	else
 		if sbq.loungingIn() == args.sourceId then return end
 
+		local actionList = sbq.actionList("request", args.sourceId)
 		local parent, recruitUuid, following = sbq.parentEntity()
 		if world.entityUniqueId(args.sourceId) == parent then
-			return {"Message", {messageType = "sbqRequestRecruitActions", messageArgs = {entity.id(), sbq.actionList("request", args.sourceId), following, recruitUuid}}}
+			return {"Message", {messageType = "sbqRequestRecruitActions", messageArgs = {entity.id(), actionList, following, recruitUuid}}}
+		elseif not sbq.voreConfig.alwaysUseInteractPositions and (#actionList > 1) then
+			return {"Message", {messageType = "sbqRequestActions", messageArgs = {entity.id(), actionList}}}
 		end
 
 		local results = { SpeciesScript:interactAction(args) }
