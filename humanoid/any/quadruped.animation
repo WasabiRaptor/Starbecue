@@ -1,7 +1,6 @@
 {
 	"useModifiedAnimator" : true,
 	"globalTagDefaults" : {
-		"tailImage" : "tail.png",
 
 		"partImage" : "",
 		"personality" : "1",
@@ -43,8 +42,7 @@
 		"frontSleeveQuad" : "",
 		"backSleeveQuad" : "",
 
-		"pose" : "stand",
-		"tailSize" : "0"
+		"pose" : "stand"
 
 	},
 	"animatedParts": {
@@ -197,13 +195,6 @@
 
 					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"tailState" : {
-				"default": "idle",
-				"priority" : 2,
-				"states" : {
-					"idle": { "frames": 8, "cycle": 2, "mode": "loop" }
 				}
 			}
 		},
@@ -1093,46 +1084,10 @@
 						"bust" : "head"
 					}
 				}
-			},
-			"tail": {
-				"properties" : {
-					"zLevel":-1,
-					"anchorPart" : "body",
-					"transformationGroups" : ["tailOffset"],
-					"bodyFullbright" : true,
-					"processingDirectives" : "<tailColorRemap><bodyDirectives>",
-					"offset" : [-1.875,-0.5]
-				},
-				"partStates" : {
-					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
-						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
-						"run": "walk",
-						"jump": "walk",
-						"fall": "walk",
-						"duck": "idle",
-						"swim": "idle",
-						"swimIdle" : "idle",
-						"sit" : "idle",
-						"lay" : "idle"
-					},
-					"tailState" : {},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust" : "head"
-					}
-				}
 			}
 		}
 	},
 	"transformationGroups": {
-		"tailOffset": {"interpolated": false},
 		"headOffset": {"interpolated": false},
 		"movementOffset": {"interpolated": false},
 		"armOffset": {"interpolated": false},

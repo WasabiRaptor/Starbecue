@@ -1,0 +1,124 @@
+{
+	"globalTagDefaults" : {
+		"bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
+		"bellyColorRemap" : "",
+		"bellyInfusedColorRemap" : "?crop;0;0;0;0",
+		"bellyInfusedFade" : "",
+		"bellyInfusedDirectives" : "",
+		"bellySize" : "0",
+		"bellyInterpolateSize" : "0"
+
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+
+		},
+		"parts" : {
+			"belly" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.5,
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "bellyOffset"],
+					"navelInteract" : [0.25,-1.25],
+					"absorbInteract" : [-0.25,-1.25],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bellyColorRemap><bodyDirectives>"
+				},
+				"partStates": {
+					"bellyState": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": {},
+						"bust" : "head"
+					}
+				}
+			},
+			"belly_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 0.51,
+					"anchorPart": "belly",
+					"navelInteract" : [0.25,-1.25],
+					"absorbInteract" : [-0.25,-1.25],
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyInfusedFade>"
+				},
+				"partStates": {
+					"bellyState": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle",
+						"none": { "properties": {} }
+					},
+					"bellyExpandState" : {
+						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			}
+
+		}
+	},
+	"transformationGroups" : {
+		"bellyOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}
