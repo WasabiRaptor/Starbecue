@@ -104,6 +104,7 @@ function init()
 		end
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			sourceRadius = -1,
 			options = options,
 			default = {
 				messageTarget = id,
@@ -134,8 +135,13 @@ function init()
 			}
 		}
 		local description = sb.replaceTags(sbq.getString((isDom and ":genericDomPrompt") or ":genericSubPrompt"), {actionName = sbq.getString(":"..action), entityName = sbq.entityName(id)})
+		local sourceRadius
+		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
+			sourceRadius = -1
+		end
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			sourceRadius = sourceRadius,
 			options = options,
 			default = {
 				messageTarget = id,
@@ -159,9 +165,14 @@ function init()
 		end
 	end)
 
-	message.setHandler("sbqRequestActions", function (_,_, id, actionList)
+	message.setHandler("sbqRequestActions", function(_, _, id, actionList)
+		local sourceRadius
+		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
+			sourceRadius = -1
+		end
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			sourceRadius = sourceRadius,
 			options = sbq.buildActionRequestOptions(id, actionList),
 			cancel = {
 				args = false,
@@ -187,7 +198,12 @@ function init()
 				close = true
 			})
 		end
+		local sourceRadius
+		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
+			sourceRadius = -1
+		end
 		player.interact("ScriptPane", {
+			sourceRadius = sourceRadius,
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			options = options,
 			cancel = {
