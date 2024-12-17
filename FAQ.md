@@ -1,32 +1,40 @@
 # FAQ
 
 ### Q: It's crashing when I try to start the game!
-> A: Manually verify each file is installed correctly, the script puts things in the expected default location, your computer may have installed starbound somewhere else.
-> A: If you're hosting a server, make sure you downloaded and are using the provided server executable.
-> A: Make sure to remove old versions.
+> Manually verify each file is installed correctly, the script does its best to find where you have starbound installed to copy the files but it might not always work.
+> If you're hosting a server, make sure you downloaded and are using the provided server executable.
+> Make sure to remove old versions.
 
 ### Q: How do I get to the shop?
-> A: If you can't find the fireplace on a lush planet, you can access it via the outpost teleporter.
-
-### Q: I can't do X vore action!
-> A: Check your pred settings, make sure it's enabled, if it is, check the target's settings using the Nominomicon, they might be disabled or locked, if you can't check their settings they're incompatible.
-> A: If its Tail Vore, make sure your tail is compatible with it.
+> If you can't find the fireplace on a lush planet, you can access it via the outpost teleporter.
+> command `/warp instanceworld:sbqHub`
 
 ### Q: NPC/Monster/Object won't do X vore action!
-> A: Check your prey settings, if they're enabled, then check the NPC's settings, they might be disabled or locked.
+### Q: I can't do X vore action!
+> Check the pred's settings, make sure it's enabled, if it is, check the target's settings, they might be disabled or locked.
+> Player settings can be opened from the HUD or from the toolbar, NPC/Object/Monster settings can be opened by clicking on them with the Nominomicon. if you can't check their settings they're incompatible.
+> Certain species or NPCs may have certain settings locked.
+> Admins can configure to disable/lock certain actions on a server wide or per world basis using a special object.
+> If its Tail Vore, make sure your tail is compatible with it.
+
+### Q: I'm a server admin and I would like to disable certain things.
+> Read about the Locked Settings Enforcer in `features.md`
 
 ### Q: I can't click the teleport button for some reason?
-> A: Due to how starbound handles UI, the pred HUD has an invisible area above it that it extends into when it expands for the prey slots, this area is tecnically always part of the UI and therefore can 'cover' the teleport button if your screen size is too small, Starbound has no GUI scale option that could alleviate this and that's outside the scope of my engine modifications.
+> Due to how starbound handles UI, the pred HUD has an invisible area above it that it extends into when it expands for the prey slots, this area is tecnically always part of the UI and therefore can 'cover' the teleport button if your screen size is too small, Starbound has no GUI scale option that could alleviate this and that's outside the scope of my engine modifications.
 
 ### Q: Why can't I eat more prey even though I have hammerspace?
 > Lounge positions in starbound must be pre-defined in the entity data, therefore they cannot be added to on the fly, I decided that 16 slots is a reasonable amount to be the limit.
 
 ### Q: If I get transformed and upgrade my ship while a different species will it break?
-> A: Thats a bug in retail and fixed in SBQ-Engine, It should stay as the original ship species
+> Thats a 'bug' in retail from modifying player data, and fixed in SBQ-Engine by having the ship's species as a seperate value in the data.
+
+### Q: What species are supported?
+> Theres a list of the species supported in `features.md`
 
 ### Q: Can X species be supported?
-> A: It might! and I'm gonna need yooooour help! Use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) which will work with most species, and then send me the files afterwards.
-> A: I take requests from patrons for species compat from time to time, it will probably be faster if you do it yourself, its not very hard.
+> It might! and I'm gonna need yooooour help! Use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) which will work with most species, and then send me the files afterwards.
+> I take requests from patrons for species compat from time to time, it will probably be faster if you do it yourself, its not very hard.
 
 ### SSVM
 > Hasn't been a dependency for years
