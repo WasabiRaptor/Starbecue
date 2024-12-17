@@ -124,27 +124,64 @@ end
 function default:uninit()
 end
 
-local function actionSequence(funcName, action, target, actionList, ...)
+function default:actionSequence(name, action, target, actionList, ...)
+	local successCount = 0
 	local results
-	for _, actionData in ipairs(actionList or action.actionList) do
+	local actions = actionList or action.actionList
+	if action.randomizeOrder then
+		actions = {}
+		for _, v in ipairs(actionList or action.actionList) do
+			table.insert(actions, math.random(#actions + 1), v)
+		end
+	end
+	for _, actionData in ipairs(actions) do
 		if (target and action.untilFirstSuccess) and not SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
 		else
-			results = { SpeciesScript[funcName](SpeciesScript, actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
-			if action.untilFirstSuccess then
-				if results[1] then break end
-			else
-				if not results[1] then break end
+			results = { SpeciesScript:tryAction(actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
+			if results[1] then
+				successCount = successCount + 1
+				if (action.successCount) then
+					if (successCount >= (action.successCount)) then
+						break
+					else
+						results = {false, "invalidAction"}
+					end
+				elseif action.untilFirstSuccess then
+					break
+				end
+			elseif not action.untilFirstSuccess then
+				break
 			end
 		end
 	end
 	return table.unpack(results or {})
 end
 
-function default:actionSequence(name, ...)
-	return actionSequence("tryAction", ... )
-end
-function default:actionSequenceAvailable(name, ...)
-	return actionSequence("actionAvailable", ... )
+function default:actionSequenceAvailable(name, action, target, actionList, ...)
+	local successCount = 0
+	local results
+	local actions = actionList or action.actionList
+	for _, actionData in ipairs(actions) do
+		if (target and action.untilFirstSuccess) and not SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
+		else
+			results = {SpeciesScript:actionAvailable(actionData[1], target, table.unpack(actionData[2] or action.args or {}))}
+			if results[1] then
+				successCount = successCount + 1
+				if (action.availableSuccessCount or action.successCount) then
+					if (successCount >= (action.availableSuccessCount or action.successCount)) then
+						break
+					else
+						results = {false, "invalidAction"}
+					end
+				elseif action.untilFirstSuccess then
+					break
+				end
+			elseif not action.untilFirstSuccess then
+				break
+			end
+		end
+	end
+	return table.unpack(results or {})
 end
 
 function default:scriptSequence(name, action, target, scriptList, ...)
