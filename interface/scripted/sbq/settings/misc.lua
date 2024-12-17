@@ -12,9 +12,9 @@ function init()
 	end
 	local entityType = world.entityType(pane.sourceEntity())
 	if entityType == "npc" then
-		convertible = world.getNpcScriptParameter(pane.sourceEntity(), "sbqConvertType")
-		if convertible then
-			_ENV.resultTypeLabel:setText(tostring(convertible))
+		convertType = world.getNpcScriptParameter(pane.sourceEntity(), "sbqConvertType")
+		if convertType and (world.npcType(pane.sourceEntity()) ~= convertType) then
+			_ENV.resultTypeLabel:setText(convertType)
 			_ENV.convertNPCPanel:setVisible(true)
 		end
 		if sbq.cosmeticSlots and world.getNpcScriptParameter(pane.sourceEntity(), "sbqNPC") then
