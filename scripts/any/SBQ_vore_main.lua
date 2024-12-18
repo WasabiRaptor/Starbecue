@@ -1881,7 +1881,7 @@ function _Occupant:attemptStruggle(control)
 				SpeciesScript:climax(self.entityId)
 			end
 		end
-		self:tryStruggleAction((bonusTime > 0) and 1 or 0, bonusTime * powerMultiplier)
+		self:tryStruggleAction(((bonusTime > 0) and 1 or 0) * powerMultiplier, bonusTime * powerMultiplier)
 	end
 end
 function _Occupant:releaseStruggle(control, time)
