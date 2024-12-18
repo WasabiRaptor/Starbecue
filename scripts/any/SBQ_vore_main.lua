@@ -1846,6 +1846,7 @@ function _Occupant:attemptStruggle(control)
 	local bonusTime = 0
 	local maybeBonus, locationDirection = location:refreshStruggleDirection(self.entityId)
 	local struggleAction, direction = location:getStruggleAction(control)
+	local powerMultiplier = self:stat("powerMultiplier")
 	if locationDirection == direction then
 		bonusTime = bonusTime + maybeBonus
 	end
@@ -1866,9 +1867,9 @@ function _Occupant:attemptStruggle(control)
 		end
 		if (bonusTime > 0) then
 			if not self:controlHeld("Shift") then
-				sbq.modifyResource("energy", -(struggleAction.predCost or (sbq.config.predStruggleCost * bonusTime)))
+				sbq.modifyResource("energy", -(struggleAction.predCost or (sbq.config.predStruggleCost * bonusTime)) * powerMultiplier)
 			end
-			if not self:overConsumeResource("energy", (struggleAction.preyCost or (sbq.config.preyStruggleCost * bonusTime))) then return end
+			if not self:overConsumeResource("energy", (struggleAction.preyCost or (sbq.config.preyStruggleCost * bonusTime)) * powerMultiplier ) then return end
 
 			for k, v in pairs(struggleAction.givePreyResource or {}) do
 				self:giveResource(k,v)
@@ -1880,7 +1881,7 @@ function _Occupant:attemptStruggle(control)
 				SpeciesScript:climax(self.entityId)
 			end
 		end
-		self:tryStruggleAction((bonusTime > 0) and 1 or 0, bonusTime)
+		self:tryStruggleAction((bonusTime > 0) and 1 or 0, bonusTime * powerMultiplier)
 	end
 end
 function _Occupant:releaseStruggle(control, time)
@@ -1895,7 +1896,8 @@ end
 function _Occupant:checkStruggleDirection(dt)
 	local dx = 0
 	local dy = 0
-	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.scale())
+	local powerMultiplier = self:stat("powerMultiplier")
+	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.scale()) * powerMultiplier
 	local staleTime = 5
 	if self:controlHeld("Up") then
 		dy = dy + 1
@@ -1917,7 +1919,7 @@ function _Occupant:checkStruggleDirection(dt)
 	if (dx ~= 0 or dy ~= 0) then
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
-		if not self:consumeResource("energy", ((self.struggleAction or {}).preyCost or sbq.config.preyStruggleCost) * dt, true) then return end
+		if not self:consumeResource("energy", ((self.struggleAction or {}).preyCost or sbq.config.preyStruggleCost) * powerMultiplier * dt, true) then return end
 		self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
 		if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
 			self:tryStruggleAction(0,0)
