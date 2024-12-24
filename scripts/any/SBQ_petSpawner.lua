@@ -17,10 +17,10 @@ function init()
 		if not recruit then return end
 		recruit:sbqSetGroupedSetting(...)
 	end)
-	message.setHandler("sbqParentGetUpgrade", function(_, _, recruitUuid, uuid, ...)
+	message.setHandler("sbqParentGetTieredUpgrade", function(_, _, recruitUuid, uuid, ...)
 		local recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
 		if not recruit then return end
-		recruit:sbqGetUpgrade(...)
+		recruit:sbqGetTieredUpgrade(...)
 
 	end)
 	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)
@@ -76,7 +76,7 @@ function _ENV.Pet:sbqImportSettings(newSettings)
 	scriptConfig.sbqSettings = newSettings
 	self.spawner:markDirty()
 end
-function _ENV.Pet:sbqGetUpgrade(upgradeName, tier, bonus)
+function _ENV.Pet:sbqGetTieredUpgrade(upgradeName, tier, bonus)
 	local scriptConfig = self:_scriptConfig(self.spawnConfig.parameters)
 	scriptConfig.sbqUpgrades = scriptConfig.sbqUpgrades or {}
 	scriptConfig.sbqUpgrades[upgradeName] = scriptConfig.sbqUpgrades[upgradeName] or {}

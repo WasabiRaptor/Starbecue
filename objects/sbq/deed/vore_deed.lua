@@ -26,7 +26,7 @@ end
 function sbqTenant:importSettings(newSettings)
 	self.overrides.scriptConfig.sbqSettings = newSettings
 end
-function sbqTenant:getUpgrade(upgradeName, tier, bonus)
+function sbqTenant:getTieredUpgrade(upgradeName, tier, bonus)
 	self.overrides.scriptConfig.sbqUpgrades = self.overrides.scriptConfig.sbqUpgrades or {}
 	self.overrides.scriptConfig.sbqUpgrades[upgradeName] = self.overrides.scriptConfig.sbqUpgrades[upgradeName] or {}
 	self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] = math.max(self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] or 0, bonus)
@@ -64,10 +64,10 @@ function init()
 		if not i then return end
 		sbqTenant.setGroupedSetting(storage.occupier.tenants[i], ...)
 	end)
-	message.setHandler("sbqParentGetUpgrade", function(_, _, recruitUuid, uuid, ...)
+	message.setHandler("sbqParentGetTieredUpgrade", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)
 		if not i then return end
-		sbqTenant.getUpgrade(storage.occupier.tenants[i], ...)
+		sbqTenant.getTieredUpgrade(storage.occupier.tenants[i], ...)
 	end)
 	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)
 		local i = findTenant(uuid)

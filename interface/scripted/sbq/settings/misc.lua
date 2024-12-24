@@ -74,7 +74,7 @@ function _ENV.upgradeInput:onItemModified()
 		if itemConfig.config.sbqTieredUpgrade then
 			world.sendEntityMessage(
 				pane.sourceEntity(),
-				"sbqGetUpgrade",
+				"sbqGetTieredUpgrade",
 				itemConfig.config.sbqTieredUpgrade,
 				itemConfig.config.level or itemConfig.parameters.level or 1,
 				itemConfig.config.bonus or itemConfig.parameters.bonus or 1

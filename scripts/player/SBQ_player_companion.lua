@@ -26,13 +26,13 @@ function init()
 		if not recruit then return end
 		recruit:sbqSetGroupedSetting(...)
 	end)
-	message.setHandler("sbqParentGetUpgrade", function(_, _, recruitUuid, uuid, ...)
+	message.setHandler("sbqParentGetTieredUpgrade", function(_, _, recruitUuid, uuid, ...)
 		local recruit = _ENV.recruitSpawner:getRecruit(recruitUuid)
 		if not recruit then
 			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
 		end
 		if not recruit then return end
-		recruit:sbqGetUpgrade(...)
+		recruit:sbqGetTieredUpgrade(...)
 
 	end)
 	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)

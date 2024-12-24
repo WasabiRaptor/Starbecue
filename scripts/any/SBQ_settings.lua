@@ -5,8 +5,8 @@ function sbq.settingsInit()
 	message.setHandler("sbqSetSetting", function (_,_, ...)
 		return sbq.setSetting(...)
 	end)
-	message.setHandler("sbqGetUpgrade", function (_,_, ...)
-		return sbq.getUpgrade(...)
+	message.setHandler("sbqGetTieredUpgrade", function (_,_, ...)
+		return sbq.getTieredUpgrade(...)
 	end)
 	message.setHandler("sbqImportSettings", function (_,_, ...)
 		return sbq.importSettings(...)
@@ -42,13 +42,13 @@ function sbq.setSetting(setting, value)
 end
 sbq.settingChanged = {}
 
-function sbq.getUpgrade(upgradeName, tier, bonus)
+function sbq.getTieredUpgrade(upgradeName, tier, bonus)
 	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
 	local oldScore = storage.sbqUpgrades[upgradeName][tier] or 0
 	if bonus <= oldScore then return end
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentGetUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier, bonus)
+		world.sendEntityMessage(parent, "sbqParentGetTieredUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier, bonus)
 	end
 	if player then
 		player.queueUIMessage(sbq.getString(":"..upgradeName.."Increased"))
