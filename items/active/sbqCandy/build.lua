@@ -1,6 +1,6 @@
 function build(directory, config, parameters, level, seed)
 	local strings = root.assetJson("/sbqStrings.config")
-	parameters.level = math.max(parameters.level or 0, level or 0, 1)
+	parameters.level = math.floor(math.max(parameters.level or 0, level or 0, 1))
 	parameters.seed = parameters.seed or seed or 0
 	config = sb.jsonMerge(config, parameters)
 	math.randomseed(parameters.seed);

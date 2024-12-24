@@ -36,10 +36,15 @@ function init()
 	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
 	if not storage.sbqUpgrades.candiesEaten then
 		storage.sbqUpgrades.candiesEaten = {}
-		for i = 1, math.max(object.level(), 1) do
+		for i = 1, math.floor(math.max(object.level(), 1)) do
 			storage.sbqUpgrades.candiesEaten[i] = 1
-	end
-		storage.sbqSettings.maxDigestPower = math.max(1, (object.level()+1)/2)
+		end
+		local digestPower = math.max(1, (object.level()+1)/2)
+		storage.sbqSettings.acidDigestPower = storage.sbqSettings.acidDigestPower or digestPower
+		storage.sbqSettings.cumDigestPower = storage.sbqSettings.cumDigestPower or digestPower
+		storage.sbqSettings.femcumDigestPower = storage.sbqSettings.femcumDigestPower or digestPower
+		storage.sbqSettings.milkDigestPower = storage.sbqSettings.milkDigestPower or digestPower
+		storage.sbqSettings.escapeDifficulty = storage.sbqSettings.escapeDifficulty or digestPower
 	end
 
 	sbq.init(config.getParameter("voreConfig"))

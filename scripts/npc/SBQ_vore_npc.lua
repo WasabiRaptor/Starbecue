@@ -52,12 +52,16 @@ function init()
 
 	if not storage.sbqUpgrades.candiesEaten then
 		storage.sbqUpgrades.candiesEaten = {}
-		local candiesEaten = math.max(npc.level(), 1)
-		for i = 1, candiesEaten do
+		for i = 1, math.floor(math.max(npc.level(), 1)) do
 			storage.sbqUpgrades.candiesEaten[i] = 1
 		end
-		storage.sbqSettings.maxDigestPower = math.max(1, (candiesEaten + 1) / 2)
-		storage.sbqSettings.maxPossibleScale = math.min(2 + candiesEaten, sbq.config.scaleCap)
+		local digestPower = math.max(1, (npc.level() + 1) / 2)
+		storage.sbqSettings.acidDigestPower = storage.sbqSettings.acidDigestPower or digestPower
+		storage.sbqSettings.cumDigestPower = storage.sbqSettings.cumDigestPower or digestPower
+		storage.sbqSettings.femcumDigestPower = storage.sbqSettings.femcumDigestPower or digestPower
+		storage.sbqSettings.milkDigestPower = storage.sbqSettings.milkDigestPower or digestPower
+		storage.sbqSettings.escapeDifficulty = storage.sbqSettings.escapeDifficulty or digestPower
+
 	end
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()

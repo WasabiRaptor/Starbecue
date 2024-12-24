@@ -398,7 +398,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	local location = occupant:getLocation()
 	if not location then return false, "invalidAction" end
 	location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
-	if not action.lockSize or (action.location and (location.key ~= action.location)) then
+	if (not action.lockSize) or (action.location and (location.key ~= action.location)) then
 		location:markSizeDirty()
 	end
 	occupant.flags.releasing = true
