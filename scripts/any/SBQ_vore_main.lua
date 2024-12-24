@@ -856,7 +856,7 @@ function _State:interactAction(args)
 		end
 	end
 	if closest then
-		SpeciesScript:tryAction(closest.action, args.sourceId, table.unpack(closest.args or {}))
+		SpeciesScript:requestAction(false, closest.action, args.sourceId, table.unpack(closest.args or {}))
 	end
 end
 
