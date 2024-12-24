@@ -240,6 +240,8 @@ function sbq.actionList(type, target)
 				actions = sb.jsonMerge({}, location.digestedActions)
 			elseif occupant.flags.digesting then
 				actions = {}
+			elseif occupant.flags.releasing then
+				actions = {}
 			else
 				actions = sb.jsonMerge({}, location.actions)
 			end
@@ -1194,10 +1196,10 @@ function _Location:updateOccupancy(dt)
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
-				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting) then
+				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.releasing) then
 					self.occupancy.count = self.occupancy.count + 1
 				end
-				if not (occupant.flags.infused or occupant.flags.infusing) then
+				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
 					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
 				end
 			end
@@ -1622,7 +1624,7 @@ end
 
 function Occupants.checkActiveOccupants()
 	for _, occupant in ipairs(Occupants.list) do
-		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting) then return true end
+		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.releasing) then return true end
 	end
 	return false
 end
@@ -1631,7 +1633,7 @@ function Occupants.randomActiveOccupant()
 	local i = math.random(#Occupants.list)
 	for j = 1, #Occupants.list do
 		local occupant = Occupants.list[i]
-		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting) then return occupant.entityId end
+		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.releasing) then return occupant.entityId end
 		i = i + 1
 		if i > #Occupants.list then i = 1 end
 	end
@@ -1966,7 +1968,7 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if (not self.struggleAction) or self.flags.newOccupant or self.flags.releasing or self.flags.infused or self.flags.digested or self.flags.digesting
+	if (not self.struggleAction) or self.flags.newOccupant or self.flags.releasing or self.flags.infused or self.flags.digested or self.flags.digesting or self.flags.releasing
 		or self:controlHeld("Shift") or self:resourceLocked("energy")
 		or (sbq.statPositive("sbqLockDown") and (sbq.resource("energy") > 0))
 	then return false end
