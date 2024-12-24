@@ -202,10 +202,13 @@ function dialogueProcessor.doNextStep(step, settings, eid, dialogueTree, dialogu
 	if not useStepPath then
 		if dialogueStepScripts[step] then
 			return dialogueProcessor.getDialogueBranch("."..tostring((dialogueStepScripts[step](dialogueTree, dialogueTreeTop, settings, step, eid))), settings, eid, dialogueTree, dialogueTreeTop)
-		elseif settings[step] ~= nil then
-			return dialogueProcessor.getDialogueBranch("."..tostring(settings[step]), settings, eid, dialogueTree, dialogueTreeTop)
 		else
-			return dialogueProcessor.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
+			local result = sbq.queryPath(settings, step)
+			if result ~= nil then
+				return dialogueProcessor.getDialogueBranch("."..tostring(result), settings, eid, dialogueTree, dialogueTreeTop)
+			else
+				return dialogueProcessor.getDialogueBranch("."..step, settings, eid, dialogueTree, dialogueTreeTop)
+			end
 		end
 	elseif useStepPath and dialogueTree[step] then
 		dialogueTree = dialogueProcessor.getRedirectedDialogue("."..step, false, settings, dialogueTree, dialogueTreeTop)

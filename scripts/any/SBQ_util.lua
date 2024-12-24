@@ -7,11 +7,11 @@ function sbq.query(input, query)
 	end
 	return out
 end
-function sbq.splitKeys(path)
+function sbq.splitKeys(path, pattern)
 	local query = {}
 	local path = path
 	while path ~= "" do
-		local found = path:find("%.")
+		local found = path:find(pattern or "%.")
 		if found then
 			table.insert(query, path:sub(1, found - 1))
 			path = path:sub(found + 1, -1)
