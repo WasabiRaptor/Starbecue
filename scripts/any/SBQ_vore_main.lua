@@ -928,6 +928,7 @@ function _SpeciesScript:addLocation(name, config)
 			size = 0,
 			count = 0,
 			visualSize = (location.struggleSizes or {})[1] or 0,
+			visualCount = (location.struggleSizes or {})[1] or 0,
 			interpolating = false,
 			interpolateFrom = 0,
 			interpolateTime = 0,
@@ -1154,7 +1155,7 @@ function _Location:updateOccupancy(dt)
 		end
 	end
 	local prevVisualSize = self.occupancy.visualSize
-	local prevCount = self.occupancy.count
+	local prevVisualCount = self.occupancy.visualCount
 	if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale())) and not self.occupancy.lockSize then
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
 		self.occupancy.sizeDirty = false
@@ -1162,25 +1163,34 @@ function _Location:updateOccupancy(dt)
 		self.occupancy.count = 0
 		if self.subLocationBehavior and not self.subKey then
 			if self.subLocationBehavior == "average" then
-				local total = 0
+				local size = 0
+				local count = 0
 				local amount = 0
 				for _, subLocation in pairs(self.subLocations) do
-					total = subLocation.occupancy.size + total
+					size = subLocation.occupancy.size + size
+					count = subLocation.occupancy.count + count
 					amount = amount + 1
 				end
-				self.occupancy.size = (total / math.max(1,amount))
+				self.occupancy.size = (size / math.max(1, amount))
+				self.occupancy.count = (count / math.max(1, amount))
 			elseif self.subLocationBehavior == "largest" then
-				local best = 0
+				local bestSize = 0
+				local bestCount = 0
 				for _, subLocation in pairs(self.subLocations) do
-					best = math.max(best, subLocation.occupancy.size)
+					bestSize = math.max(bestSize, subLocation.occupancy.size)
+					bestCount = math.max(bestCount, subLocation.occupancy.count)
 				end
-				self.occupancy.size = self.occupancy.size + best
+				self.occupancy.size = self.occupancy.size + bestSize
+				self.occupancy.count = self.occupancy.count + bestCount
 			elseif self.subLocationBehavior == "smallest" then
-				local best = self.maxFill
+				local bestSize = self.maxFill
+				local bestCount = self.maxFill
 				for _, subLocation in pairs(self.subLocations) do
-					best = math.min(best, subLocation.occupancy.size)
+					bestSize = math.min(bestSize, subLocation.occupancy.size)
+					bestCount = math.min(bestCount, subLocation.occupancy.count)
 				end
-				self.occupancy.size = self.occupancy.size + best
+				self.occupancy.size = self.occupancy.size + bestSize
+				self.occupancy.count = self.occupancy.count + bestCount
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
@@ -1193,14 +1203,17 @@ function _Location:updateOccupancy(dt)
 			end
 		end
 		local addVisual = 0
+		local addCount = 0
 		for _, name in ipairs(self.addFill or {}) do
 			local location = SpeciesScript:getLocation(name)
 			location:updateOccupancy(0, name)
 			addVisual = addVisual + location.occupancy.size
+			addCount = addCount + location.occupancy.count
 		end
 		if self.infuseType then
 			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
 			addVisual = addVisual + ((((infusedItem or {}).parameters or {}).preySize or 0) * self.settings.infusedSize)
+			addCount = addCount + (self.settings.infusedSize)
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(
 			math.min(
@@ -1212,16 +1225,31 @@ function _Location:updateOccupancy(dt)
 			),
 			self.struggleSizes or { 0 }
 		)
+		self.occupancy.visualCount = sbq.getClosestValue(
+			math.min(
+				self.settings.visualMax,
+				math.max(
+					self.settings.visualMin,
+					(self.occupancy.count + addCount)
+				)
+			),
+			self.struggleSizes or { 0 }
+		)
+		local refreshSize = false
+		if self.countBasedOccupancy then
+			refreshSize = (prevVisualCount ~= self.occupancy.visualCount)
+		else
+			refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
+		end
 
-		if self.occupancy.forceSizeRefresh or ((prevVisualSize ~= self.occupancy.visualSize) or (self.countBasedOccupancy and (prevCount ~= self.occupancy.count)))
-			and not (self.subKey and self.occupancy.symmetry)
-		then
-			self:doSizeChangeAnims(prevVisualSize, prevCount)
+		if self.occupancy.forceSizeRefresh or refreshSize and not (self.subKey and self.occupancy.symmetry) then
+			self:doSizeChangeAnims(prevVisualSize, prevVisualCount)
 			if self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
 					subLocation = SpeciesScript:getLocation(self.key, k)
 					subLocation.occupancy.visualSize = self.occupancy.visualSize
-					subLocation:doSizeChangeAnims(prevVisualSize, prevCount)
+					subLocation.occupancy.visualCount = self.occupancy.visualCount
+					subLocation:doSizeChangeAnims(prevVisualSize, prevVisualCount)
 				end
 			end
 		end
@@ -1263,7 +1291,7 @@ end
 
 function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	self.occupancy.forceSizeRefresh = false
-	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.count))
+	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.visualCount))
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
 	if self.idleAnims then
 		SpeciesScript:doAnimations(self.idleAnims)
