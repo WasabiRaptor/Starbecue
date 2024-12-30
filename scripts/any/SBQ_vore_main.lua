@@ -212,11 +212,11 @@ function sbq.reloadVoreConfig(config)
 	for locationName, _ in pairs(SpeciesScript.locations) do
 		local location = SpeciesScript:getLocation(locationName)
 		if location then
-			location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.count)
+			location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
 			if location.subLocations then
 				for k, _ in pairs(location.subLocations) do
 					local location = SpeciesScript:getLocation(locationName, k)
-					location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.count)
+					location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
 				end
 			end
 		end
@@ -1227,22 +1227,25 @@ function _Location:updateOccupancy(dt)
 			),
 			self.struggleSizes or { 0 }
 		)
-		self.occupancy.visualCount = sbq.getClosestValue(
-			math.min(
-				self.settings.visualMax,
-				math.max(
-					self.settings.visualMin,
-					(self.occupancy.count + addCount)
-				)
-			),
-			self.struggleSizes or { 0 }
-		)
+
 		local refreshSize = false
 		if self.countBasedOccupancy then
+			self.occupancy.visualCount = sbq.getClosestValue(
+				math.min(
+					self.settings.visualMax,
+					math.max(
+						self.settings.visualMin,
+						(self.occupancy.count + addCount)
+					)
+				),
+				self.struggleSizes or { 0 }
+			)
 			refreshSize = (prevVisualCount ~= self.occupancy.visualCount)
 		else
+			self.occupancy.visualCount = math.ceil(self.occupancy.count + addCount)
 			refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
 		end
+		self.occupancy.count = math.ceil(self.occupancy.count)
 
 		if self.occupancy.forceSizeRefresh or refreshSize and not (self.subKey and self.occupancy.symmetry) then
 			self:doSizeChangeAnims(prevVisualSize, prevVisualCount)
@@ -1279,8 +1282,8 @@ end
 
 function _Location:update(dt)
 	if sbq.randomTimer(self.tag.."_gurgle", 3, 15) then
-		if (self.occupancy.count > 0) and self.settings.gurgleSounds then
-			local occupant = self.occupancy.list[math.random(self.occupancy.count)]
+		if (self.occupancy.count > 0) and self.settings.gurgleSounds and self.occupancy.list[1] then
+			local occupant = self.occupancy.list[#self.occupancy.list]
 			animator.setSoundPosition(self.gurgleSound or "gurgle", occupant:localPosition())
 			if sbq.isResource(self.gurgleResource or "food") then
 				local res = sbq.resourcePercentage(self.gurgleResource or "food")
@@ -1311,7 +1314,7 @@ function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
 			prevSize = tostring(prevVisualSize),
 			newSize = tostring(self.occupancy.visualSize),
 			prevCount = tostring(prevCount),
-			newCount = tostring(self.occupancy.count)
+			newCount = tostring(self.occupancy.visualCount)
 		})
 		self.interpolateCurTime = 0
 	end
