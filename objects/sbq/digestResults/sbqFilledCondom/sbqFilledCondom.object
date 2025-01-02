@@ -20,39 +20,15 @@
 		"variant" : "1",
 		"species" : "any"
 	},
-
-	"replaceDescPredPrey" : [
-		"A large condom with a label:\n<preyName> is just a load of <predName>'s cum~",
-		"A large condom with a label:\n<preyName> is just a load of cum~",
-		"A large condom with a label:\nA load of <predName>'s cum~", "<predName>'s Filled Condom",
-		"A large condom with a label:\n<preyName> churned in <predName>'s nuts and all they got was this lousy condom~",
-		"A large condom with a label:\nThis used to be <preyName>. And then they met <predName>. The rest, like <preyName>, is history~",
-		"A large condom with a label:\n<predName> and <preyName> sitting in a tree, C-U-M-M-I-N-G~"
-	],
-	"replaceDescPrey" : [
-		"A large condom with a label:\n<preyName> is just a load of cum~",
-		"A large condom with a label:\n<preyName> churned in someone's nuts and all they got was this lousy condom~",
-		"A large condom with a label:\nThis used to be <preyName>. And then they met someone. The rest, like <preyName>, is history~"
-	],
-	"replaceDescPred" : [
-		"A large condom with a label:\nA load of <predName>'s cum~",
-		"A large condom with a label:\n<predName> churned someone in their nuts and all they got was this lousy condom~"
-	],
-	"replaceDescForgetful" : [
-		"A large condom with a label:\n... Forgot your name, sorry!"
-	],
-	"replaceShortDescForgetful" : "<predName>'s Forgetful Condom",
-	"replaceShortDescPredPrey" : "<preyName> Filled Condom",
-	"replaceShortDescPrey" : "<preyName> Filled Condom",
-	"replaceShortDescPred" : "<predName>'s Filled Condom",
-
+	"spriteVariants" : 1,
+	"descType" : "condomDrop",
 	"builder" : "/objects/sbq/digestResults/digestResultBuilder.lua",
 	"retainObjectParametersInItem" : true,
 
-	"inventoryIcon" : "object.png<replaceMap><replaceColors>",
+	"inventoryIcon" : "variants/<species><variant>.png<replaceMap><replaceColors>",
 	"orientations" : [
 		{
-			"image" : "object.png<replaceMap><replaceColors>",
+			"image" : "variants/<species><variant>.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "right",
@@ -61,7 +37,7 @@
 			"anchors" : [ "bottom" ]
 		},
 		{
-			"image" : "object.png<replaceMap><replaceColors>",
+			"image" : "variants/<species><variant>.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "left",

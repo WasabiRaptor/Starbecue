@@ -1,39 +1,57 @@
 sbq = {}
 require("/scripts/any/SBQ_util.lua")
 function build(directory, config, parameters, level, seed)
+	sbq.strings = root.assetJson("/sbqStrings.config")
+	local preyIdentity = sbq.query(parameters, {"npcArgs", "npcParam", "identity"})
+	if config.speciesVariants and preyIdentity then
+		config = sb.jsonMerge(config, config.speciesVariants[preyIdentity.species] or {})
+	end
 	if not parameters.generated then
 		parameters.generated = true
-		local preyIdentity = sbq.query(parameters, {"npcArgs", "npcParam", "identity"})
 		local preyName = (preyIdentity or {}).name
 
 		setupReplaceColors(config, parameters, parameters.predIdentity)
 		setupReplaceColors(config, parameters, preyIdentity)
 
-		parameters.forgetful = math.random() < 0.25
-		if parameters.forgetful and parameters.predName and config.replaceDescForgetful then
-			parameters.descIndex = math.random(#config.replaceDescForgetful)
-		elseif preyName and parameters.predName and config.replaceDescPredPrey then
-			parameters.descIndex = math.random(#config.replaceDescPredPrey)
-		elseif preyName and config.replaceDescPrey then
-			parameters.descIndex = math.random(#config.replaceDescPrey)
-		elseif parameters.predName and config.replaceDescPred then
-			parameters.descIndex = math.random(#config.replaceDescPred)
+
+		if sbq.strings[config.descType] then
+			if sbq.strings[config.descType].forgetful then
+				parameters.forgetful = math.random() < 0.25
+			end
+			if parameters.forgetful and parameters.predName and sbq.strings[config.descType].forgetful then
+				parameters.descIndex = math.random(#sbq.strings[config.descType].forgetful.desc)
+			elseif preyName and parameters.predName and sbq.strings[config.descType].both then
+				parameters.descIndex = math.random(#sbq.strings[config.descType].both.desc)
+			elseif preyName and sbq.strings[config.descType].prey then
+				parameters.descIndex = math.random(#sbq.strings[config.descType].prey.desc)
+			elseif parameters.predName and sbq.strings[config.descType].pred then
+				parameters.descIndex = math.random(#sbq.strings[config.descType].pred.desc)
+			else
+				parameters.descIndex = math.random(#sbq.strings[config.descType].default.desc)
+			end
 		end
 
-		if config.variants and preyIdentity then
-			local species = "any"
-			if preyIdentity.species and config.variants and config.variants[preyIdentity.species] then
-				species = preyIdentity.species
+		local imagePath = config.orientations[1].image
+		local replaceTags = sb.jsonMerge(config.imageKeys, parameters.imageKeys or {}, {
+			variant = tostring(math.random(config.spriteVariants))
+		})
+		for k, v in pairs(preyIdentity or {}) do
+			if type(v) == "string" then
+				replaceTags[k] = v
 			end
-			local replaceTags = {
-				species = species,
-				variant = tostring(math.random(config.variants[species]))
-			}
-			parameters.imageKeys = sb.jsonMerge(parameters.imageKeys or {}, replaceTags)
-			parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
-			parameters.animationCustom = parameters.animationCustom or {}
-			parameters.animationCustom.globalTagDefaults = sb.jsonMerge(parameters.animationCustom.globalTagDefaults or {}, replaceTags)
 		end
+
+		if not root.assetExists(sb.replaceTags(imagePath, replaceTags), directory) then
+			replaceTags.species = "any"
+		end
+		if not root.assetExists(sb.replaceTags(imagePath, replaceTags), directory) then
+			replaceTags.variant = "1"
+		end
+		parameters.imageKeys = replaceTags
+		parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
+		parameters.animationCustom = parameters.animationCustom or {}
+		parameters.animationCustom.globalTagDefaults = sb.jsonMerge(parameters.animationCustom.globalTagDefaults or {}, replaceTags)
+
 	end
 	if parameters.directives then -- because of the old ones
 		parameters.imageKeys = sb.jsonMerge(config.imageKeys, {
@@ -47,32 +65,36 @@ function build(directory, config, parameters, level, seed)
 			preyName = preyName,
 			predName = parameters.predName,
 		}
-		if parameters.forgetful and parameters.predName and config.replaceDescForgetful then
-			parameters.shortdescription = sb.replaceTags(sbq.getString(config.replaceShortDescForgetful), tags)
-			parameters.description = sb.replaceTags(sbq.getString(config.replaceDescForgetful[parameters.descIndex or 1]), tags)
-		elseif preyName and parameters.predName and config.replaceDescPredPrey then
-			parameters.shortdescription = sb.replaceTags(sbq.getString(config.replaceShortDescPredPrey), tags)
-			parameters.description = sb.replaceTags(sbq.getString(config.replaceDescPredPrey[parameters.descIndex or 1]), tags)
-		elseif preyName and config.replaceDescPrey then
-			parameters.shortdescription = sb.replaceTags(sbq.getString(config.replaceShortDescPrey), tags)
-			parameters.description = sb.replaceTags(sbq.getString(config.replaceDescPrey[parameters.descIndex or 1]), tags)
-		elseif parameters.predName and config.replaceDescPred then
-			parameters.shortdescription = sb.replaceTags(sbq.getString(config.replaceShortDescPred), tags)
-			parameters.description = sb.replaceTags(sbq.getString(config.replaceDescPred[parameters.descIndex or 1]), tags)
+		if sbq.strings[config.descType] then
+			local i = parameters.descIndex
+			local name = {}
+			local desc = {}
+			local descVariant = "default"
+			if parameters.forgetful and parameters.predName and sbq.strings[config.descType].forgetful then
+				name = sbq.strings[config.descType].forgetful.name or {}
+				desc = sbq.strings[config.descType].forgetful.desc or {}
+				descVariant = "forgetful"
+			elseif preyName and parameters.predName and sbq.strings[config.descType].both then
+				name = sbq.strings[config.descType].both.name or {}
+				desc = sbq.strings[config.descType].both.desc or {}
+				descVariant = "both"
+			elseif preyName and sbq.strings[config.descType].prey then
+				name = sbq.strings[config.descType].prey.name or {}
+				desc = sbq.strings[config.descType].prey.desc or {}
+				descVariant = "prey"
+			elseif parameters.predName and sbq.strings[config.descType].pred then
+				name = sbq.strings[config.descType].pred.name or {}
+				desc = sbq.strings[config.descType].pred.desc or {}
+			else
+				name = sbq.strings[config.descType].default.name or {}
+				desc = sbq.strings[config.descType].default.desc or {}
+			end
+			parameters.shortdescription = sb.replaceTags(name[i] or name[1] or (":"..config.descType.."."..descVariant..".name"), tags)
+			parameters.description = sb.replaceTags(desc[i] or desc[1] or (":"..config.descType.."."..descVariant..".desc"), tags)
 		else
-			parameters.shortdescription = sbq.getString(config.shortdescription)
-			parameters.description = sbq.getString(config.description)
+			parameters.shortdescription = sbq.getString(":"..config.descType.."Name")
+			parameters.description = sbq.getString(":"..config.descType.."Desc")
 		end
-	end
-
-	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
-		parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
-	end
-	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
-		parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
-	end
-	if sbq.query(parameters, {"npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
-		parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
 	end
 
 	return config, parameters
@@ -83,9 +105,18 @@ function setupReplaceColors(config, parameters, identity)
 	local speciesFile = root.speciesConfig(identity.species or "")
 	if not speciesFile then return end
 	if not speciesFile.baseColorMap then return end
+	local identityTags = {
+
+	}
+	for k, v in pairs(identity) do
+		if type(v) == "string" then
+			identityTags[k] = v
+		end
+	end
+
 	local replaceTags = {
 		replaceMap = "",
-		replaceColors = (identity.bodyColor or identity.bodyDirectives)..(identity.altColor or "")..(identity.hairColor or identity.hairDirectives)
+		replaceColors = (speciesFile.dropColorString and sb.replaceTags(speciesFile.dropColorString, identityTags)) or (identity.bodyColor or identity.bodyDirectives)..(identity.altColor or "")..(identity.hairColor or identity.hairDirectives)
 	}
 	for k, v in pairs(config.baseColorMap) do
 		replaceTags.replaceMap = replaceTags.replaceMap..sbq.replace(v, speciesFile.baseColorMap[k])

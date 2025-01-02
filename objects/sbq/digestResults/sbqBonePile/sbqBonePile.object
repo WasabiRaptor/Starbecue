@@ -20,27 +20,8 @@
 		"variant" : "1",
 		"species" : "any"
 	},
-	"variants" : {
-		"any" : 3
-	},
-
-	"replaceDescPredPrey" : [
-		"All that remains of <preyName> after they met <predName>."
-	],
-	"replaceDescPrey" : [
-		"<preyName>'s remains."
-	],
-	"replaceDescPred" : [
-		"The remains of <predName>'s meal."
-	],
-	"replaceDescForgetful" : [
-		"The remains of <predName>'s meal... whoever they were."
-	],
-	"replaceShortDescForgetful" : "Remains of <predName>'s Meal",
-	"replaceShortDescPredPrey" : "<preyName>'s Remains",
-	"replaceShortDescPrey" : "<preyName>'s Remains",
-	"replaceShortDescPred" : "Remains of <predName>'s Meal",
-
+	"spriteVariants" : 3,
+	"descType" : "boneDrop",
 	"builder" : "/objects/sbq/digestResults/digestResultBuilder.lua",
 	"retainObjectParametersInItem" : true,
 

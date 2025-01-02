@@ -21,21 +21,15 @@
 		"species" : "any"
 	},
 
-	"replaceDescPredPrey" : ["A <predName> branded milk carton.\n<preyName>'s face is printed on the side of it."],
-	"replaceDescPrey" : ["A large milk carton.\n<preyName>'s face is printed on the side of it."],
-	"replaceDescPred" : ["A <predName> branded milk carton."],
-
-	"replaceShortDescPredPrey" : "<preyName> Flavored Milk",
-	"replaceShortDescPrey" : "<preyName> Flavored Milk",
-	"replaceShortDescPred" : "<predName>'s Milk",
-
+	"spriteVariants" : 1,
+	"descType" : "milkCartonDrop",
 	"builder" : "/objects/sbq/digestResults/digestResultBuilder.lua",
 	"retainObjectParametersInItem" : true,
 
-	"inventoryIcon" : "object.png<replaceMap><replaceColors>",
+	"inventoryIcon" : "variants/<species><variant>.png<replaceMap><replaceColors>",
 	"orientations" : [
 		{
-			"image" : "object.png<replaceMap><replaceColors>",
+			"image" : "variants/<species><variant>.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "right",
@@ -44,7 +38,7 @@
 			"anchors" : [ "bottom" ]
 		},
 		{
-			"image" : "object.png<replaceMap><replaceColors>",
+			"image" : "variants/<species><variant>.png<replaceMap><replaceColors>",
 			"imagePosition" : [-8, 0],
 
 			"direction" : "left",
