@@ -1,12 +1,12 @@
+require("/items/buildscripts/buildunrandweapon.lua")
+local old = {
+	build = build
+}
 sbq = {}
 require("/scripts/any/SBQ_util.lua")
 
 function build(directory, config, parameters, level, seed)
 	config.shortdescription = sbq.getString(config.shortdescription)
 	config.description = sbq.getString(config.description)
-	if config.objectName then
-		parameters.shortdescription = config.shortdescription
-		parameters.description = config.description
-	end
-	return config, parameters
+	return old.build(directory, config, parameters, level, seed)
 end

@@ -1,7 +1,7 @@
 {
 	"itemName" : "sbqNominomicon",
-	"shortdescription" : "Nominomicon",
-	"description" : "A magic tome with power over predators, and contains information on them.\nClick on an object pred to edit them or learn about them.",
+	"shortdescription" : ":nominomiconName",
+	"description" : ":nominomiconDesc",
 	"price" : 1,
 	"maxStack" : 1,
 	"rarity" : "common",
@@ -15,5 +15,7 @@
 	"retainScriptStorageInItem": true,
 	"scripts" : [
 		"sbqNominomicon.lua"
-	]
+	],
+	"builder" : "/scripts/item/SBQ_build_desc.lua"
+
 }

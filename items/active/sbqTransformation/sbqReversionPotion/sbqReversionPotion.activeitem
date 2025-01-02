@@ -4,8 +4,8 @@
 	"price" : 10,
 	"maxStack" : 999,
 	"rarity" : "common",
-	"description" : "A potion to regain your previous form...\nIs this just a bottle of milk?",
-	"shortdescription" : "Reversion Potion",
+	"description" : ":reversionPotionDesc",
+	"shortdescription" : ":reversionPotionName",
 	"tooltipKind" : "tool",
 	"category" : "Potion",
 	"twoHanded" : false,
@@ -22,5 +22,7 @@
 
 	"scripts" : [
 		"/items/active/sbqTransformation/sbqReversionPotion/sbqReversionPotion.lua"
-	]
+	],
+	"builder" : "/scripts/item/SBQ_build_desc.lua"
+
 }

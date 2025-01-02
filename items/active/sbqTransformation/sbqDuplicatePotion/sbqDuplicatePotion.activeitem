@@ -4,8 +4,8 @@
 	"price" : 600,
 	"maxStack" : 64,
 	"rarity" : "uncommon",
-	"description" : "A potion that can transform someone into your perfect copy, all it needs is one more ingredient... a bit of you.",
-	"shortdescription" : "Clone Potion",
+	"description" : ":clonePotionDesc",
+	"shortdescription" : ":clonePotionName",
 	"tooltipKind" : "tool",
 	"category" : "Potion",
 	"twoHanded" : false,
@@ -22,5 +22,7 @@
 
 	"scripts" : [
 		"/items/active/sbqTransformation/sbqDuplicatePotion/sbqDuplicatePotion.lua"
-	]
+	],
+	"builder" : "/scripts/item/SBQ_build_desc.lua"
+
 }

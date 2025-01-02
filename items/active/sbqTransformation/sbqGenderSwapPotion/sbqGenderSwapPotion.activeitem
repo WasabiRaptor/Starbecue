@@ -4,8 +4,8 @@
 	"price" : 100,
 	"maxStack" : 64,
 	"rarity" : "uncommon",
-	"description" : "A potion that can swap your gender.",
-	"shortdescription" : "Gender Swap Potion",
+	"description" : ":genderSwapPotionDesc",
+	"shortdescription" : ":genderSwapPotionName",
 	"tooltipKind" : "tool",
 	"category" : "Potion",
 	"twoHanded" : false,
@@ -27,5 +27,7 @@
 
 	"scripts" : [
 		"/items/active/sbqTransformation/sbqMysteriousPotion/sbqTransformPotion.lua"
-	]
+	],
+	"builder" : "/scripts/item/SBQ_build_desc.lua"
+
 }
