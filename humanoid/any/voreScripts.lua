@@ -546,7 +546,10 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 		location:markSizeDirty()
 		local sizeChangeAnims = location.occupancy.queuedSizeChangeAnims or location.sizeChangeAnims
 		if sizeChangeAnims then
-			delay = SpeciesScript:checkAnimations(false, sizeChangeAnims, {}, target)
+			delay = SpeciesScript:checkAnimations(false, sizeChangeAnims, {})
+		end
+		if location.digestedAnims then
+			delay = math.max(delay, SpeciesScript:checkAnimations(false, location.digestedAnims, {}, target))
 		end
 	end
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
