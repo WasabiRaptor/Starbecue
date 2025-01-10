@@ -728,10 +728,10 @@ function _State:doAnimations(animations, tags, target)
 				local timer = animator.animationTimer(state)
 				longest = math.max(longest, timer[2] - timer[1])
 			else
-				-- sbq.logError(string.format("Animation hasn't ended '%s' '%s'", state, anim))
+				sbq.debugLogError(string.format("Animation hasn't ended '%s' '%s'", state, anim))
 			end
 		else
-			-- sbq.logError(string.format("No animation state '%s' '%s'", state, anim))
+			sbq.debugLogError(string.format("No animation state '%s' '%s'", state, anim))
 		end
 	end
 	return longest
@@ -783,7 +783,7 @@ function _State:interact(args)
 		local parent, recruitUuid, following = sbq.parentEntity()
 		if world.entityUniqueId(args.sourceId) == parent then
 			return {"Message", {messageType = "sbqRequestRecruitActions", messageArgs = {entity.id(), actionList, following, recruitUuid}}}
-		elseif not sbq.voreConfig.alwaysUseInteractPositions and (#actionList > 1) then
+		elseif not (SpeciesScript.state.useInteractActions) and (#actionList > 1) then
 			return {"Message", {messageType = "sbqRequestActions", messageArgs = {entity.id(), actionList}}}
 		end
 

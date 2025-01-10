@@ -420,6 +420,18 @@ end
 function sbq.logError(input, pretty)
 	sb.logError(sbq.logOutput(input,pretty))
 end
+function sbq.debugLogInfo(input, pretty)
+	if not sbq.voreConfig.debug then return end
+	sb.logInfo(sbq.logOutput(input,pretty))
+end
+function sbq.debugLogWarn(input, pretty)
+	if not sbq.voreConfig.debug then return end
+	sb.logWarn(sbq.logOutput(input,pretty))
+end
+function sbq.debugLogError(input, pretty)
+	if not sbq.voreConfig.debug then return end
+	sb.logError(sbq.logOutput(input,pretty))
+end
 
 function sbq.getString(str)
 	if not str then return "" end
