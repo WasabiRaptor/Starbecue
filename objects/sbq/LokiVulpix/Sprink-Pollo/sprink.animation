@@ -45,8 +45,8 @@
 				"default" : "idle",
 				"states" : {
 					"idle": {"frames": 0,"cycle": 0,"mode": "end"},
-					"oralVore": {"frames": 2,"cycle": 1.5,"mode": "end"},
-					"cockVore": {"frames": 2,"cycle": 1.5,"mode": "end"},
+					"oralVore": {"frames": 2,"cycle": 1.5,"mode": "transition", "transition": "idle"},
+					"cockVore": {"frames": 2,"cycle": 1.5,"mode": "transition", "transition": "idle"},
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"occupant0" : [
 							{"translate":[0,0]},
