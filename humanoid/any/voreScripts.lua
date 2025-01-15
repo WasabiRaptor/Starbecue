@@ -43,7 +43,7 @@ function Default:settingAnimations()
 		self:doAnimations((sbq.settings.pussy and sbq.voreConfig.pussyShow) or sbq.voreConfig.pussyHide)
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 
-		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock then
+		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock and SpeciesScript.locations.cock then
 			local leakiness = ((sbq.settings.cockLeakiness^2 * lust)^2)*10*math.max(0.25, Occupants.locations.cock.count + Occupants.locations.balls.count)
 			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
@@ -55,7 +55,7 @@ function Default:settingAnimations()
 			end
 		end
 
-		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy then
+		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy and SpeciesScript.locations.womb then
 			local leakiness = ((sbq.settings.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, Occupants.locations.womb.count)
 			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
@@ -75,7 +75,7 @@ function Default:settingAnimations()
 		end
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
-		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts then
+		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts and SpeciesScript.locations.breasts then
 			local leakiness = ((sbq.settings.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, Occupants.locations.breasts.count)
 			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
@@ -238,15 +238,6 @@ function default:moveToLocationAvailable(name, action, target, locationName, sub
 	return false, "noSpace"
 end
 
-function default:canSendOccupantDeeper(name, action, target, failureReason, ...)
-	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false, "missingOccupant" end
-	local location = occupant:getLocation()
-	if not location then return false, "invalidLocation" end
-	if not location.sendDeeperAction then return false, "invalidAction" end
-	if not occupant:active() then return false, "invalidAction" end
-	return SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
-end
 
 function default:trySendDeeper(name, action, target, failureReason, size, ...)
 	sbq.logInfo({name, action, target, failureReason, size})
