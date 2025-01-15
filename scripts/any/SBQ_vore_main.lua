@@ -250,12 +250,12 @@ function sbq.actionList(type, target)
 			return {}
 		end
 	end
-    for _, action in ipairs(actions or {}) do
-        local success, failReason, time = SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
-        if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or {})[type] then
-            table.insert(list, sb.jsonMerge(action, { available = success }))
-        end
-    end
+	for _, action in ipairs(actions or {}) do
+		local success, failReason, time = SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
+		if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or {})[type] then
+			table.insert(list, sb.jsonMerge(action, { available = success }))
+		end
+	end
 	sbq.logInfo(list, 2)
 	return list
 end
@@ -589,9 +589,9 @@ function _State:tryAction(name, target, ...)
 	end
 
 	if type(result2) ~= "function" then
-		return success or false, result2 or success or false, action.cooldown, false, false, ...
+		return success or false, result2 or success or false, cooldown or 0, false, false, ...
 	end
-	return success or false, success or false, action.cooldown, false, false, ...
+	return success or false, success or false, cooldown or 0, false, false, ...
 end
 
 function _State:requestAction(forcing, name, target, ...)
@@ -625,6 +625,14 @@ function _State:requestAction(forcing, name, target, ...)
 						dialogueProcessor.speakDialogue()
 					end
 				end)
+			else
+				-- to give the fail dialogue in the rare case they thought they could but can't actually
+				if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(failReason), target) then
+					dialogueProcessor.sendPlayerDialogueBox()
+					dialogueProcessor.speakDialogue()
+				else
+					world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+				end
 			end
 		end
 		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target) then
@@ -690,8 +698,8 @@ function _State:actionAvailable(name, target, ...)
 			return false, "missingScript", action.failureCooldown or 0, false, false
 		end
 	end
-    local longest = (success and SpeciesScript:checkAnimations(false, action.animations, action.tags, target)) or
-    action.failureCooldown or 0
+	local longest = (success and SpeciesScript:checkAnimations(false, action.animations, action.tags, target)) or
+	action.failureCooldown or 0
 	return success or false, failReason or success or false, longest or 0, false, false
 end
 
@@ -907,7 +915,9 @@ function _SpeciesScript:addLocation(name, config)
 	location.key = name
 	location.name = location.name or (":"..name)
 	-- easier to make it default to math.huge than have it check if it's defined or not
-	location.maxFill = location.maxFill or math.huge
+	location.maxSize = location.maxSize or location.maxFill or math.huge -- account for values named when I wasn't being consistent
+	location.addSize = location.addSize or location.addFill -- account for values named when I wasn't being consistent
+	location.addCount = location.addCount or location.addFill -- account for values named when I wasn't being consistent
 	-- setup occupancy values
 	location.occupancy = {
 		sizeDirty = true,
@@ -915,6 +925,8 @@ function _SpeciesScript:addLocation(name, config)
 		list = {},
 		size = 0,
 		count = 0,
+		addedSize = 0,
+		addedCount = 0,
 		visualSize = (location.struggleSizes or {})[1] or 0,
 		interpolating = false,
 		struggleVec = {0,0},
@@ -931,6 +943,8 @@ function _SpeciesScript:addLocation(name, config)
 			list = {},
 			size = 0,
 			count = 0,
+			addedSize = 0,
+			addedCount = 0,
 			visualSize = (location.struggleSizes or {})[1] or 0,
 			visualCount = (location.struggleSizes or {})[1] or 0,
 			interpolating = false,
@@ -982,20 +996,24 @@ function _Location:setInfusionData()
 		end
 	end
 	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-	local infuseSpeciesConfig = root.speciesConfig(sbq.query(infusedItem, {"parameters", "npcArgs", "npcSpecies"}) or "") or (sbq.query(infusedItem, {"parameters", "speciesConfig"}) or {})
-	local infuseIdentity = sbq.query(infusedItem, {"parameters", "npcArgs", "npcParam", "identity"}) or {}
+	local infuseSpeciesConfig = root.speciesConfig(sbq.query(infusedItem, { "parameters", "npcArgs", "npcSpecies" }) or
+		"") or (sbq.query(infusedItem, { "parameters", "speciesConfig" }) or {})
+	local infuseIdentity = sbq.query(infusedItem, { "parameters", "npcArgs", "npcParam", "identity" }) or {}
 	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
 		infusedItem.name = self.infusedItemType
 	end
 	local infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}), root.fetchConfigArray(infuseData[sbq.species()] or {}))
+	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}),
+		root.fetchConfigArray(infuseData[sbq.species()] or {}))
 	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
 
 	for k, v in pairs(self.settingInfusion or {}) do
 		local v2 = (infuseData.settingInfusion or {})[k] or {}
 		local value = sbq.settings[k]
 		if sbq.config.settingInfusionPreyMap[k] and sbq.settings[k .. "Override"] then
-			local preyVal = sbq.query(infusedItem, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap[k]})
+			local preyVal = sbq.query(infusedItem,
+				{ "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap
+					[k] })
 			value = ((preyVal ~= "auto") and preyVal) or value
 		end
 		if value ~= "auto" then
@@ -1022,7 +1040,7 @@ function _Location:setInfusionData()
 	for part, tags in pairs(infuseData.partTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
 		for k, v in pairs(tags) do
-			animator.setPartTag(part,k,v)
+			animator.setPartTag(part, k, v)
 			tagsSet.partTags[part][k] = v
 		end
 	end
@@ -1030,24 +1048,27 @@ function _Location:setInfusionData()
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
 	local speciesConfig = root.speciesConfig(humanoid.species())
 	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
-		local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", tag})
+		local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", tag })
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
+		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
+			speciesConfig.baseColorMap or defaultColorMap)
 		animator.setGlobalTag(tag, directives)
 		tagsSet.globalTags[tag] = directives
 	end
 	for part, tags in pairs(infuseData.colorRemapPartTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", part, tag}) or sbq.query(infuseData, {"colorRemapSources", tag})
+			local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", part, tag }) or
+				sbq.query(infuseData, { "colorRemapSources", tag })
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, speciesConfig.baseColorMap or defaultColorMap)
+			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
+				speciesConfig.baseColorMap or defaultColorMap)
 			animator.setPartTag(part, tag, directives)
 			tagsSet.partTags[part][tag] = directives
 		end
 	end
 	for tag, remaps in pairs(infuseData.infuseColorRemapGlobalTags or {}) do
-		local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", tag})
+		local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", tag })
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
 		animator.setGlobalTag(tag, directives)
@@ -1056,20 +1077,24 @@ function _Location:setInfusionData()
 	for part, tags in pairs(infuseData.infuseColorRemapPartTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
 		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sbq.query(infuseData, {"colorRemapSources", part, tag}) or sbq.query(infuseData, {"colorRemapSources", tag})
+			local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", part, tag }) or
+				sbq.query(infuseData, { "colorRemapSources", tag })
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
+			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig
+				.baseColorMap)
 			animator.setPartTag(part, tag, directives)
 			tagsSet.partTags[part][tag] = directives
 		end
 	end
 	local directives = (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or "")
-	animator.setGlobalTag(self.tag.."InfusedDirectives", directives)
-	tagsSet.globalTags[self.tag.."InfusedDirectives"] = directives
+	animator.setGlobalTag(self.tag .. "InfusedDirectives", directives)
+	tagsSet.globalTags[self.tag .. "InfusedDirectives"] = directives
 
-	local locationData = sb.jsonMerge(infuseIdentity and {transformResult = {species = infuseIdentity.species}} or {}, infuseData.locationOverrides, {
-		infuseTagsSet = tagsSet
-	})
+	local locationData = sb.jsonMerge(
+		infuseIdentity and { transformResult = { species = infuseIdentity.species } } or {},
+		infuseData.locationOverrides, {
+			infuseTagsSet = tagsSet
+		})
 	for k, _ in pairs(SpeciesScript.locations[self.key]) do
 		SpeciesScript.locations[self.key][k] = nil
 	end
@@ -1077,28 +1102,24 @@ function _Location:setInfusionData()
 	self:markSettingsDirty()
 	self:markSizeDirty()
 end
+
 function _Location:hasSpace(size)
 	if (not sbq.tableMatches(self.activeSettings, sbq.settings, true)) or self.disabled then return false end
 	if self.maxCount and (self.occupancy.count >= self.maxCount) then return false end
-	local shared = 0
-	for _, name in ipairs(self.sharedWith or {}) do
-		local location = SpeciesScript:getLocation(name)
-		shared = shared + location.occupancy.size
-	end
 	if (not self.subLocations) or self.subKey then
 		if self.settings.hammerspace then return math.huge, self.subKey end
-		return self:getRemainingSpace(self.maxFill, self.occupancy.size + shared, (size or 0) * self.settings.multiplyFill), self.subKey
+		return self:getRemainingSpace(size), self.subKey
 	elseif self.subLocations[1] then
 		if self.subLocations[1].maxCount and (self.occupancy.count >= self.subLocations[1].maxCount) then return false end
 		-- if an array, assuming locations are ordered, only check if theres space in the first
-		return self:getRemainingSpace(self.subLocations[1].maxFill, self.occupancy.subLocations[1].size + shared, (size or 0) * self.settings.multiplyFill), 1
+		return self.subLocations[1]:getRemainingSpace(size), 1
 	else
 		-- if an object assume any is valid and choose one with the most space available
 		local best = { 0 }
 		local least = {math.huge}
 		for k, v in pairs(self.subLocations) do
 			if not (v.maxCount and (v.occupancy.count >= v.maxCount)) then
-				local space = self:getRemainingSpace(v.maxFill, v.occupancy.size, size)
+				local space = v:getRemainingSpace(size)
 				if space and space >= best[1] then
 					best = {space, k}
 				end
@@ -1107,16 +1128,16 @@ function _Location:hasSpace(size)
 				end
 			end
 		end
-		if best[2] then
+		if self.settings.hammerspace and least[2] then
+            return math.huge, least[2]
+		elseif best[2] then
 			return best[1], best[2]
-		elseif self.settings.hammerspace and least[2] then
-			return math.huge, least[2]
 		end
 	end
 	return false
 end
-function _Location:getRemainingSpace(maxFill, occupancy, size)
-	local remainingSpace = maxFill - (occupancy + (size or 0))
+function _Location:getRemainingSpace(size)
+	local remainingSpace = self.maxSize - (self.occupancy.size + self.occupancy.addedSize + ((size or 0) * self.settings.multiplyFill  / sbq.scale()))
 	if remainingSpace < 0 then return false end
 	return remainingSpace
 end
@@ -1135,11 +1156,16 @@ function _Location:markSizeDirty(force)
 			subLocation.occupancy.forceSizeRefresh = force
 		end
 	end
-    for _, sharedName in ipairs(self.sharedWith or {}) do
-        local shared = SpeciesScript:getLocation(sharedName)
-        shared.occupancy.sizeDirty = true
-        shared.occupancy.forceSizeRefresh = force
-    end
+	for _, sharedName in ipairs(self.addSize or {}) do
+		local shared = SpeciesScript:getLocation(sharedName)
+		shared.occupancy.sizeDirty = true
+		shared.occupancy.forceSizeRefresh = force
+	end
+	for _, sharedName in ipairs(self.addCount or {}) do
+		local shared = SpeciesScript:getLocation(sharedName)
+		shared.occupancy.sizeDirty = true
+		shared.occupancy.forceSizeRefresh = force
+	end
 end
 function _Location:markSettingsDirty()
 	self:markSizeDirty()
@@ -1152,6 +1178,7 @@ function _Location:markSettingsDirty()
 end
 
 function _Location:updateOccupancy(dt)
+	if self.occupancy.working then return end -- prevents stack overflow from potential dependency loops
 	if not self.subKey then
 		for k, v in pairs(self.subLocations or {}) do
 			local subLocation = SpeciesScript:getLocation(self.key, k)
@@ -1160,11 +1187,20 @@ function _Location:updateOccupancy(dt)
 	end
 	local prevVisualSize = self.occupancy.visualSize
 	local prevVisualCount = self.occupancy.visualCount
-	if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale())) and not self.occupancy.lockSize then
+    if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale())) and not self.occupancy.lockSize then
+		self.occupancy.working = true -- prevents stack overflow from potential dependency loops
+
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
-		self.occupancy.sizeDirty = false
+        self.occupancy.sizeDirty = false
+
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
 		self.occupancy.count = 0
+
+		self.occupancy.digestedCount = 0
+
+		self.occupancy.addedSize = 0
+		self.occupancy.addedCount = 0
+
 		if self.subLocationBehavior and not self.subKey then
 			if self.subLocationBehavior == "average" then
 				local size = 0
@@ -1176,7 +1212,7 @@ function _Location:updateOccupancy(dt)
 					amount = amount + 1
 				end
 				self.occupancy.size = (size / math.max(1, amount))
-				self.occupancy.count = (count / math.max(1, amount))
+				self.occupancy.count = math.ceil(count / math.max(1, amount))
 			elseif self.subLocationBehavior == "largest" then
 				local bestSize = 0
 				local bestCount = 0
@@ -1187,8 +1223,8 @@ function _Location:updateOccupancy(dt)
 				self.occupancy.size = self.occupancy.size + bestSize
 				self.occupancy.count = self.occupancy.count + bestCount
 			elseif self.subLocationBehavior == "smallest" then
-				local bestSize = self.maxFill
-				local bestCount = self.maxFill
+				local bestSize = self.maxSize
+				local bestCount = self.maxSize
 				for _, subLocation in pairs(self.subLocations) do
 					bestSize = math.min(bestSize, subLocation.occupancy.size)
 					bestCount = math.min(bestCount, subLocation.occupancy.count)
@@ -1200,53 +1236,62 @@ function _Location:updateOccupancy(dt)
 			for _, occupant in ipairs(self.occupancy.list) do
 				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.infusing or occupant.flags.releasing) then
 					self.occupancy.count = self.occupancy.count + 1
+				elseif occupant.flags.digested then
+					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
 					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
 				end
 			end
 		end
-		local addVisual = 0
-		local addCount = 0
-		for _, name in ipairs(self.addFill or {}) do
+
+		for _, name in ipairs(self.addSize or {}) do
 			local location = SpeciesScript:getLocation(name)
-			location:updateOccupancy(0, name)
-			addVisual = addVisual + location.occupancy.size
-			addCount = addCount + location.occupancy.count
+			location:updateOccupancy(0)
+			self.occupancy.addedSize = self.occupancy.addedSize + location.occupancy.size
 		end
+		for _, name in ipairs(self.addCount or {}) do
+			local location = SpeciesScript:getLocation(name)
+			location:updateOccupancy(0)
+			self.occupancy.addedCount = self.occupancy.addedCount + location.occupancy.count
+		end
+
+		local infuseSize = 0
+		local infuseCount = 0
 		if self.infuseType then
 			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-			addVisual = addVisual + ((((infusedItem or {}).parameters or {}).preySize or 0) * self.settings.infusedSize)
-			addCount = addCount + (self.settings.infusedSize)
+			addVisual = ((((infusedItem or {}).parameters or {}).preySize or 0) * self.settings.infusedSize)
+			infuseCount = self.settings.infusedSize
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(
 			math.min(
 				self.settings.visualMax,
 				math.max(
 					self.settings.visualMin,
-					(self.occupancy.size + addVisual)
+					(self.occupancy.size + self.occupancy.addedSize + infuseSize)
 				)
 			),
 			self.struggleSizes or { 0 }
 		)
 
 		local refreshSize = false
-		if self.countBasedOccupancy then
-			self.occupancy.visualCount = sbq.getClosestValue(
-				math.min(
-					self.settings.visualMax,
-					math.max(
-						self.settings.visualMin,
-						(self.occupancy.count + addCount)
-					)
-				),
-				self.struggleSizes or { 0 }
-			)
-			refreshSize = (prevVisualCount ~= self.occupancy.visualCount)
-		else
-			self.occupancy.visualCount = math.ceil(self.occupancy.count + addCount)
-			refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
-		end
+        if self.countBasedOccupancy then
+            self.occupancy.visualCount = sbq.getClosestValue(
+                math.min(
+                    self.settings.visualMax,
+                    math.max(
+                        self.settings.visualMin,
+                        (self.occupancy.count + self.occupancy.addedCount)
+                    )
+                ),
+                self.struggleSizes or { 0 }
+            )
+            refreshSize = (prevVisualCount ~= self.occupancy.visualCount + infuseCount)
+        else
+            self.occupancy.visualCount = self.occupancy.count + self.occupancy.addedCount + infuseCount
+            refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
+        end
+		self.occupancy.visualCount = math.ceil(self.occupancy.visualCount)
 		self.occupancy.count = math.ceil(self.occupancy.count)
 
 		if self.occupancy.forceSizeRefresh or refreshSize and not (self.subKey and self.occupancy.symmetry) then
@@ -1260,7 +1305,7 @@ function _Location:updateOccupancy(dt)
 				end
 			end
 		end
-		-- sbq.logInfo(("[%s]:%s"):format(self.tag, sb.printJson(self.occupancy, 2, true)))
+		self.occupancy.working = false -- no longer working, clear this so it can be updated again
 	end
 	if self.occupancy.interpolating then
 		self.interpolateCurTime = self.interpolateCurTime + dt
@@ -1657,10 +1702,10 @@ function Occupants.update(dt)
 end
 
 function Occupants.checkActiveOccupants()
-    for _, occupant in ipairs(Occupants.list) do
-        if occupant and occupant:active() then return true end
-    end
-    return false
+	for _, occupant in ipairs(Occupants.list) do
+		if occupant and occupant:active() then return true end
+	end
+	return false
 end
 function Occupants.checkValidOccupants()
 	for _, occupant in ipairs(Occupants.list) do
@@ -1890,17 +1935,17 @@ function _Occupant:refreshLocation(name, subLocation, force)
 end
 
 function _Occupant:checkValidEffects(setting, effects)
-    if not (effects and self.locationSettings[setting]) then return false end
-    for _, effect in ipairs(effects) do
-        if type(effect) == "string" then
-            local effectConfig = root.effectConfig(effect).effectConfig or {}
-            if effectConfig.finishAction then
-                local success, failReason = SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
-                if not success then return false end
-            end
-        end
-    end
-    return true
+	if not (effects and self.locationSettings[setting]) then return false end
+	for _, effect in ipairs(effects) do
+		if type(effect) == "string" then
+			local effectConfig = root.effectConfig(effect).effectConfig or {}
+			if effectConfig.finishAction then
+				local success, failReason = SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
+				if not success then return false end
+			end
+		end
+	end
+	return true
 end
 
 function _Occupant:active()

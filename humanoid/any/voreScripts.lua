@@ -238,6 +238,35 @@ function default:moveToLocationAvailable(name, action, target, locationName, sub
 	return false, "noSpace"
 end
 
+function default:trySendDeeperAvailable(name, action, target, failureReason, size, ...)
+	if target then
+		local occupant = Occupants.entityId[tostring(target)]
+		if not occupant then return false, "missingOccupant" end
+		local location = occupant:getLocation()
+		if not location then return false, "invalidLocation" end
+		if not location.sendDeeperAction then return false, "invalidAction" end
+		if not occupant:active() then return false, "invalidAction" end
+        return SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
+    else
+		local location = SpeciesScript:getLocation(action.location, action.subLocation)
+		if not location then return false, "invalidLocation" end
+        if not location.sendDeeperAction then return false, "invalidAction" end
+        local spaceNeeded = (size * location.settings.multiplyFill / sbq.scale()) - location:getRemainingSpace()
+        local success, newFailureReason
+		for _, occupant in ipairs(location.occupancy.list) do
+			success, newFailureReason = self:trySendDeeperAvailable(name, action, occupant.entityId)
+			if success then
+				local occupantSize = occupant.size * occupant.sizeMultiplier * location.settings.multiplyFill / sbq.scale()
+				if (failureReason == "noSpace") and (type(size) == "number") then
+					if spaceNeeded <= occupantSize then break end
+				else
+					break
+				end
+			end
+		end
+		return success, newFailureReason
+	end
+end
 
 function default:trySendDeeper(name, action, target, failureReason, size, ...)
 	sbq.logInfo({name, action, target, failureReason, size})
@@ -308,6 +337,13 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	end
 
 	local space, subLocation = location:hasSpace(size)
+
+	if not space and location.sendDeeperAction then
+        if self:trySendDeeperAvailable(name, action, nil, "noSpace", size) then
+			space = size
+		end
+	end
+
 	if space or (action.flags and action.flags.infusing) then
 		if (#Occupants.list + 1) <= sbq.config.seatCount then
 			return true

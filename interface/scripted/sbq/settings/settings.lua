@@ -401,17 +401,17 @@ function sbq.widgetScripts.visualMinMax(param)
 	param.type = "sbqTextBox"
 	param.min = 0
 	local location = sbq.locations[param.groupKey]
-	param.max = location.maxFill
+	param.max = location.maxSize
 	param.settingType = "number"
-	if storage.sbqSettings.locations[param.groupKey][param.setting] >= location.maxFill then
-		storage.sbqSettings.locations[param.groupKey][param.setting] = location.maxFill
+	if storage.sbqSettings.locations[param.groupKey][param.setting] >= location.maxSize then
+		storage.sbqSettings.locations[param.groupKey][param.setting] = location.maxSize
 	end
 	return param
 end
 
 function sbq.widgetScripts.fillControlVisible(setting, group, name)
 	local location = sbq.locations[name]
-	if (not location.maxFill) or (location.maxFill == math.huge) then
+	if (not location.maxSize) or (location.maxSize == math.huge) then
 		return false
 	end
 	return true
