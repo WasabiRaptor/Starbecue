@@ -209,7 +209,8 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	end
 	local space, subLocation = location:hasSpace(size)
 	if space then
-		occupant:refreshLocation(locationName, subLocation)
+        occupant:refreshLocation(locationName or action.location, subLocation)
+		location:refreshStruggleDirection()
 		return true, function ()
 			occupant = Occupants.entityId[tostring(target)]
 			if occupant then
@@ -237,31 +238,44 @@ function default:moveToLocationAvailable(name, action, target, locationName, sub
 	return false, "noSpace"
 end
 
-function default:canSendOccupantDeeper(name, action, target, reason, ...)
+function default:canSendOccupantDeeper(name, action, target, failureReason, ...)
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	if not location then return false, "invalidLocation" end
 	if not location.sendDeeperAction then return false, "invalidAction" end
+	if not occupant:active() then return false, "invalidAction" end
 	return SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
 end
-function default:sendOccupantDeeper(name, action, target, reason, ...)
-	local occupant = Occupants.entityId[tostring(target)]
-	if not occupant then return false, "missingOccupant" end
-	local location = occupant:getLocation()
-	if not location then return false, "invalidLocation" end
-	if not location.sendDeeperAction then return false, "invalidAction" end
-	return SpeciesScript:tryAction(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
-end
 
-function default:trySendDeeper(name, action, target, reason, locationName, subLocationName,...)
-	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
-	if not location then return false, "invalidLocation" end
-	if not location.sendDeeperAction then return false, "invalidAction" end
-	for i, occupant in ipairs(location.occupancy.list) do
-		if not (occupant.flags.infused or occupant.flags.digested) then
-			return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
-		end
+function default:trySendDeeper(name, action, target, failureReason, size, ...)
+	sbq.logInfo({name, action, target, failureReason, size})
+    if target then
+        local occupant = Occupants.entityId[tostring(target)]
+		if not occupant then return false, "missingOccupant" end
+		local location = occupant:getLocation()
+		if not location then return false, "invalidLocation" end
+		if not location.sendDeeperAction then return false, "invalidAction" end
+		if not occupant:active() then return false, "invalidAction" end
+		return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
+    else
+		local location = SpeciesScript:getLocation(action.location, action.subLocation)
+		if not location then return false, "invalidLocation" end
+        if not location.sendDeeperAction then return false, "invalidAction" end
+        local success, newFailureReason
+		location:safeIterateOccupants(function (occupant)
+            success, newFailureReason = self:trySendDeeper(name, action, occupant.entityId)
+			location:updateOccupancy(0) -- we need to refresh the size immediately for space calculations
+			if success then
+				if (failureReason == "noSpace") and (type(size) == "number") then
+					local space, subLocation = location:hasSpace(size)
+					if space then return true end
+				else
+					return true
+				end
+			end
+		end)
+		return success, newFailureReason
 	end
 end
 
@@ -314,13 +328,13 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	end
 end
 
-function default:tryVore(name, action, target, locationName, subLocationName, throughput, ...)
+function default:tryVore(name, action, target, ...)
 	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
 	if target == sbq.loungingIn() then return false, "invalidAction" end
 	local loungeAnchor = world.entityCurrentLounge(target)
 	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
-	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	local location = SpeciesScript:getLocation(action.location, action.subLocation)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
 		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
@@ -347,12 +361,17 @@ function default:tryVore(name, action, target, locationName, subLocationName, th
 		if size > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 
-	self:trySendDeeper(name, action, nil, nil, locationName, subLocationName)
 
 	local space, subLocation = location:hasSpace(size)
+
+	if not space and location.sendDeeperAction then
+        self:trySendDeeper(name, action, nil, "noSpace", size)
+		space, subLocation = location:hasSpace(size)
+	end
+
 	if space or (action.flags and action.flags.infusing) then
 		location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
-		if Occupants.newOccupant(target, size, locationName or action.location, subLocation, action.flags) then
+		if Occupants.newOccupant(target, size, action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			SpeciesScript.lockActions = true
 			SpeciesScript:hideSlots(action.hideSlots or {})

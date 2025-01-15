@@ -175,7 +175,7 @@ function sbq_hunting.attemptAction(target)
 	else -- being prey
 		sbq.addRPC(world.sendEntityMessage(target, "sbqActionAvailable", sbq_hunting.action, entity.id()), function (results)
 			if not results then sbq_hunting.nextTarget() return end
-			local success, reason = table.unpack(results)
+			local success, failReason, time = table.unpack(results)
 			if not success then sbq_hunting.nextTarget() return end
 			if sbq_hunting.getConsent then
 				sbq_hunting.subSendPrompt(target)
@@ -204,14 +204,14 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 	local function callback()
 		sbq_hunting.prompted[target] = nil
 		if try then
-			local success, reason, cooldown = SpeciesScript:tryAction(action, target)
+			local success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(action, target)
 			if success then
 				if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
 					sbq_hunting.nextTarget()
 				else
 					sbq_hunting.clearTarget()
 				end
-				sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
+				sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
 					if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
@@ -259,7 +259,7 @@ end
 
 function sbq_hunting.domNoPrompt(target)
 	local function callback()
-		local success, reason, cooldown = SpeciesScript:tryAction(sbq_hunting.action, target)
+		local success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(sbq_hunting.action, target)
 		if success then
 			if not sbq.statPositive("sbqLockDown") and (math.random() < (sbq.settings.lockDownChance)) then
 				sbq.queueAction("lockDown", target)
@@ -269,7 +269,7 @@ function sbq_hunting.domNoPrompt(target)
 			else
 				sbq_hunting.clearTarget()
 			end
-			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
+			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
 				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end
@@ -298,14 +298,14 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 			sbq.expectedActions[action] = true
 			sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id()), function(results)
 				if not results then sbq_hunting.nextTarget() return end
-				local success, reason, cooldown = table.unpack(results)
+				local success, failReason, time, successfulFail, failReason2 =  table.unpack(results)
 				if not success then sbq_hunting.nextTarget() return end
 				sbq.setLoungeControlHeld("Shift")
 				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
 					sbq.releaseLoungeControl("Shift")
 				end)
 				sbq_hunting.clearTarget()
-				sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
+				sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
 					if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".after", target) then
 						dialogueProcessor.speakDialogue()
 					end
@@ -354,13 +354,13 @@ function sbq_hunting.subNoPrompt(target)
 	local function callback()
 		sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", true, sbq_hunting.action, entity.id()), function (results)
 			if not results then sbq_hunting.nextTarget() return end
-			local success, reason, cooldown = table.unpack(results)
+			local success, failReason, time, successfulFail, failReason2 =  table.unpack(results)
 			if not success then sbq_hunting.nextTarget() return end
 			sbq.setLoungeControlHeld("Shift")
 			sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
 				sbq.releaseLoungeControl("Shift")
 			end)
-			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
+			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
 				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end

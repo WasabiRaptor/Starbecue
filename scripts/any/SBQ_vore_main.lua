@@ -250,12 +250,13 @@ function sbq.actionList(type, target)
 			return {}
 		end
 	end
-	for _, action in ipairs(actions or {}) do
-		local available, reason = SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
-		if (not sbq.config.dontDisplayAction[tostring(reason)]) and not (action.noDisplay or {})[type] then
-			table.insert(list, sb.jsonMerge(action, {available = available}))
-		end
-	end
+    for _, action in ipairs(actions or {}) do
+        local success, failReason, time = SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
+        if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or {})[type] then
+            table.insert(list, sb.jsonMerge(action, { available = success }))
+        end
+    end
+	sbq.logInfo(list, 2)
 	return list
 end
 
@@ -557,15 +558,15 @@ function _State:tryAction(name, target, ...)
 			end
 		end
 	end
-	local result1, result2 = true, false
+	local success, result2 = true, false
 	if action.script then
 		if self[action.script] then
-			result1, result2 = self[action.script](self, name, action, target, ...)
+			success, result2 = self[action.script](self, name, action, target, ...)
 		else
 			return self:actionFailed(name, action, target, "missingScript", ...)
 		end
 	end
-	if not result1 then return self:actionFailed(name, action, target, result2, ...) end
+	if not success then return self:actionFailed(name, action, target, result2, ...) end
 
 	local longest = SpeciesScript:doAnimations(action.animations, action.tags, target)
 	local cooldown = action.cooldown or longest
@@ -588,37 +589,37 @@ function _State:tryAction(name, target, ...)
 	end
 
 	if type(result2) ~= "function" then
-		return result1, result2 or result1 or false, longest
+		return success or false, result2 or success or false, action.cooldown, false, false, ...
 	end
-	return result1, result1 or false, longest
+	return success or false, success or false, action.cooldown, false, false, ...
 end
 
 function _State:requestAction(forcing, name, target, ...)
-	local success, reason, cooldown = SpeciesScript:actionAvailable(name, target, ...)
+	local success, failReason, time, successfulFail, failReason2 = SpeciesScript:actionAvailable(name, target, ...)
 	local wait = 0
 	if forcing then
-		success, reason, cooldown = SpeciesScript:tryAction(name, target, ...)
+		success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(name, target, ...)
 		if success then
 			if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target) then
 				dialogueProcessor.sendPlayerDialogueBox()
 				dialogueProcessor.speakDialogue()
 				wait = dialogueProcessor.predictTime()
 			end
-			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function ()
+			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function ()
 				if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target) then
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
 				end
 			end)
 		end
-		return success or false, reason or success or false, (cooldown or 0) + wait
+		return success or false, failReason or success or false, (time or 0) + wait
 	end
 	if success then
 		local args = { ... }
 		local callback = function()
-			local success, reason, cooldown = SpeciesScript:tryAction(name, target, table.unpack(args))
+			success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(name, target, table.unpack(args))
 			if success then
-				sbq.forceTimer("dialogueAfter", cooldown + wait + sbq.config.afterDialogueDelay, function ()
+				sbq.forceTimer("dialogueAfter", time + wait + sbq.config.afterDialogueDelay, function ()
 					if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
@@ -635,23 +636,23 @@ function _State:requestAction(forcing, name, target, ...)
 			callback()
 		end
 	else
-		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(reason), target) then
+		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(failReason), target) then
 			dialogueProcessor.sendPlayerDialogueBox()
 			dialogueProcessor.speakDialogue()
 		else
 			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
 		end
 	end
-	return success or false, reason or success or false, (cooldown or 0) + wait
+	return success or false, failReason or success or false, (time or 0) + wait, successfulFail, failReason2
 end
 
-function _State:actionFailed(name, action, target, reason, ...)
+function _State:actionFailed(name, action, target, failReason, ...)
 	-- sbq.logInfo({name, target, reason},2)
-	if not action then return false, reason or false, 0, ... end
+	if not action then return false, failReason or false, 0, ... end
 	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
-	local result1, result2  = false, false
-	if action.failureScript and self[action.failureScript] then result1, result2 = self[action.failureScript](self, name, action, target, reason, ...) end
+	local successfulFail, result2  = false, false
+	if action.failureScript and self[action.failureScript] then successfulFail, result2 = self[action.failureScript](self, name, action, target, failReason, ...) end
 	sbq.timer(name.."Cooldown", cooldown, function (...)
 		action.onCooldown = false
 		if type(result2) == "function" then
@@ -659,38 +660,39 @@ function _State:actionFailed(name, action, target, reason, ...)
 		end
 	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
-		return result1, reason or result1 or false, cooldown or 0, result2 or false, ...
+		return false, failReason or false, cooldown or 0, successfulFail or false, result2 or false, ...
 	end
-	return result1, reason or result1 or false, cooldown or 0, ...
+	return false, failReason or false, cooldown or 0, successfulFail or false, false, ...
 end
 
 function _State:actionAvailable(name, target, ...)
 	if not name then return false end
 	local action = self.actions[name]
 	if not action then return false, "missingAction" end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return false, "settingsMismatch" end
+	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return false, "settingsMismatch", action.failureCooldown or 0, false, false end
 	if target and action.targetSettings then
 		if not world.entityExists(target) then return false, "targetMissing" end
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
-		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch" end
+		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch", action.failureCooldown or 0, false, false end
 		if not action.ignoreTargetOccupants then
 			local targetOccupants = world.entitiesLounging(target)
 			for _, occupant in ipairs(targetOccupants or {}) do
 				local occupantSettings = sbq.getPublicProperty(occupant, "sbqPublicSettings")
-				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return false, "targetPreySettingsMismatch" end
+				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return false, "targetPreySettingsMismatch", action.failureCooldown or 0, false, false end
 			end
 		end
 	end
-	local result1, result2 = true, false
+	local success, failReason = true, false
 	if action.availableScript then
 		if self[action.availableScript] then
-			result1, result2 = self[action.availableScript](self, name, action, target, ...)
+			success, failReason = self[action.availableScript](self, name, action, target, ...)
 		else
-			return false, "missingScript", 0
+			return false, "missingScript", action.failureCooldown or 0, false, false
 		end
 	end
-	local longest = SpeciesScript:checkAnimations(false, action.animations, action.tags, target)
-	return result1 or false, result2 or result1 or false, longest or 0
+    local longest = (success and SpeciesScript:checkAnimations(false, action.animations, action.tags, target)) or
+    action.failureCooldown or 0
+	return success or false, failReason or success or false, longest or 0, false, false
 end
 
 function _State:animationTags(tags, target)
@@ -1133,11 +1135,11 @@ function _Location:markSizeDirty(force)
 			subLocation.occupancy.forceSizeRefresh = force
 		end
 	end
-	for _, sharedName in ipairs(self.sharedWith or {}) do
-		local shared = SpeciesScript:getLocation(sharedName)
-		shared.occupancy.sizeDirty = true
-		shared.occupancy.forceSizeRefresh = force
-	end
+    for _, sharedName in ipairs(self.sharedWith or {}) do
+        local shared = SpeciesScript:getLocation(sharedName)
+        shared.occupancy.sizeDirty = true
+        shared.occupancy.forceSizeRefresh = force
+    end
 end
 function _Location:markSettingsDirty()
 	self:markSizeDirty()
@@ -1196,7 +1198,7 @@ function _Location:updateOccupancy(dt)
 			end
 		else
 			for _, occupant in ipairs(self.occupancy.list) do
-				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.releasing) then
+				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.infusing or occupant.flags.releasing) then
 					self.occupancy.count = self.occupancy.count + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
@@ -1294,28 +1296,57 @@ function _Location:update(dt)
 	end
 end
 
+-- safe iterate over occupants when they might be removing themselves from the location while iterating
+function _Location:safeIterateOccupants(func)
+	local list = {}
+	for _, v in ipairs(self.occupancy.list) do
+		table.insert(list, v)
+	end
+	for _, v in ipairs(list) do
+		if v and (v.location == self.key) then if func(v) then break end end
+	end
+end
+
+function _Location:randomActiveOccupant()
+	local i = math.random(#self.occupancy.list)
+	for j = 1, #self.occupancy.list do
+		local occupant = self.occupancy.list[i]
+		if occupant and occupant:active() then return occupant.entityId end
+		i = i + 1
+		if i > #self.occupancy.list then i = 1 end
+	end
+end
+function _Location:randomOccupant()
+	local i = math.random(#self.occupancy.list)
+	for j = 1, #self.occupancy.list do
+		local occupant = self.occupancy.list[i]
+		if occupant and occupant:valid() then return occupant.entityId end
+		i = i + 1
+		if i > #self.occupancy.list then i = 1 end
+	end
+end
+
+
 function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	self.occupancy.forceSizeRefresh = false
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.visualCount))
 	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
-	if self.idleAnims then
-		SpeciesScript:doAnimations(self.idleAnims)
-	end
+	local sizeTags = {
+		prevSize = tostring(prevVisualSize),
+		newSize = tostring(self.occupancy.visualSize),
+		prevCount = tostring(prevCount),
+		newCount = tostring(self.occupancy.visualCount)
+	}
 	if self.occupantAnims then
 		for _, occupant in ipairs(self.occupancy.list) do
-			SpeciesScript:doAnimations(self.occupantAnims, {}, occupant.entityId)
+			SpeciesScript:doAnimations(self.occupantAnims, sizeTags, occupant.entityId)
 		end
 	end
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
 	if sizeChangeAnims then
 		self.occupancy.interpolateFrom = (self.occupancy.interpolating and self.occupancy.interpolateSize) or prevVisualSize
 		self.occupancy.interpolating = true
-		self.interpolateTime = SpeciesScript:doAnimations(sizeChangeAnims, {
-			prevSize = tostring(prevVisualSize),
-			newSize = tostring(self.occupancy.visualSize),
-			prevCount = tostring(prevCount),
-			newCount = tostring(self.occupancy.visualCount)
-		})
+		self.interpolateTime = SpeciesScript:doAnimations(sizeChangeAnims, sizeTags)
 		self.interpolateCurTime = 0
 	end
 	self.occupancy.queuedSizeChangeAnims = nil
@@ -1626,8 +1657,14 @@ function Occupants.update(dt)
 end
 
 function Occupants.checkActiveOccupants()
+    for _, occupant in ipairs(Occupants.list) do
+        if occupant and occupant:active() then return true end
+    end
+    return false
+end
+function Occupants.checkValidOccupants()
 	for _, occupant in ipairs(Occupants.list) do
-		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.releasing) then return true end
+		if occupant and occupant:valid() then return true end
 	end
 	return false
 end
@@ -1636,7 +1673,17 @@ function Occupants.randomActiveOccupant()
 	local i = math.random(#Occupants.list)
 	for j = 1, #Occupants.list do
 		local occupant = Occupants.list[i]
-		if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.releasing) then return occupant.entityId end
+		if occupant and occupant:active() then return occupant.entityId end
+		i = i + 1
+		if i > #Occupants.list then i = 1 end
+	end
+end
+function Occupants.randomOccupant()
+	if not Occupants.list[1] then return end
+	local i = math.random(#Occupants.list)
+	for j = 1, #Occupants.list do
+		local occupant = Occupants.list[i]
+		if occupant and occupant:valid() then return occupant.entityId end
 		i = i + 1
 		if i > #Occupants.list then i = 1 end
 	end
@@ -1673,7 +1720,7 @@ function _Occupant:update(dt)
 		if oldMultiplier ~= self.sizeMultiplier then
 			location:markSizeDirty()
 		end
-	elseif not (self.flags.newOccupant or self.flags.releasing or self.flags.digesting) then
+	elseif self:active() then
 		local oldMultiplier = self.sizeMultiplier
 		local compression = self.locationSettings.compression
 		local compressionMin = self.locationSettings.compressionMin
@@ -1751,7 +1798,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 				util.appendLists(persistentStatusEffects, effects or {})
 			end
 		end
-	elseif not (self.flags.newOccupant or self.flags.releasing) then
+	elseif self:valid() then
 		table.insert(persistentStatusEffects, {stat = "sbq_compression_"..self.locationSettings.compression, amount = 1})
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
@@ -1843,17 +1890,24 @@ function _Occupant:refreshLocation(name, subLocation, force)
 end
 
 function _Occupant:checkValidEffects(setting, effects)
-	if not (effects and self.locationSettings[setting]) then return false end
-	for _, effect in ipairs(effects) do
-		if type(effect) == "string" then
-			local effectConfig = root.effectConfig(effect).effectConfig or {}
-			if effectConfig.finishAction then
-				local success, reason = SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
-				if not success then return false end
-			end
-		end
-	end
-	return true
+    if not (effects and self.locationSettings[setting]) then return false end
+    for _, effect in ipairs(effects) do
+        if type(effect) == "string" then
+            local effectConfig = root.effectConfig(effect).effectConfig or {}
+            if effectConfig.finishAction then
+                local success, failReason = SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
+                if not success then return false end
+            end
+        end
+    end
+    return true
+end
+
+function _Occupant:active()
+	return self:valid() and not (self.flags.digested or self.flags.infused or self.flags.infusing or self.flags.digesting)
+end
+function _Occupant:valid()
+	return not (self.flags.newOccupant or self.flags.releasing)
 end
 
 function sbq.getModifiers(modifiers, power)
@@ -1971,7 +2025,7 @@ function _Occupant:checkStruggleDirection(dt)
 end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
-	if (not self.struggleAction) or self.flags.newOccupant or self.flags.releasing or self.flags.infused or self.flags.digested or self.flags.digesting or self.flags.releasing
+	if (not self.struggleAction) or (not self:active())
 		or self:controlHeld("Shift") or self:resourceLocked("energy")
 		or (sbq.statPositive("sbqLockDown") and (sbq.resource("energy") > 0))
 	then return false end

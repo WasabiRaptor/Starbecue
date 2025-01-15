@@ -81,13 +81,11 @@
 					"struggleSizes" : [0,1],
 					"maxFill":1.5,
 					"sizeChangeAnims" : {
-						"bellyExpandState":"<prevSize>-to-<newSize>"
+						"bellyExpandState":"<prevSize>-to-<newSize>",
+						"bodyState" : "<bellySize>-idle"
 					},
 					"secondaryEffects" : {
 						"eggify" : false
-					},
-					"idleAnims" : {
-						"bodyState" : "<bellySize>-idle"
 					}
 				},
 				"breasts" : {

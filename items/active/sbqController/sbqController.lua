@@ -111,20 +111,22 @@ function sbq.clickAction()
 		end
 	end
 
-	if result == nil then
-		result = player.callScript("sbq.tryAction", storage.action) or {}
-	end
-	if (not result[1]) and (result[2] and (result[2] ~= "targetMissing")) then
+    if result == nil then
+        result = player.callScript("sbq.tryAction", storage.action) or {}
+    end
+    local success, failReason, time, successfulFail, failReason2 = table.unpack(result)
+
+	if (not success) and (failReason ~= "targetMissing") then
 		animator.playSound("error")
-		player.queueUIMessage(sbq.getString(":action_"..tostring(result[2])))
+		player.queueUIMessage(sbq.getString(":action_"..tostring(failReason)))
 	end
 	return table.unpack(result)
 end
 
 function sbq.attemptAction(targetId)
 	if shiftHeldTime > 0 then
-		local result, reason = table.unpack(player.callScript("sbq.actionAvailable", storage.action, targetId) or {})
-		if result then
+		local success, failReason = table.unpack(player.callScript("sbq.actionAvailable", storage.action, targetId) or {})
+		if success then
 			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true), function(response)
 				if not response then return end
 				local tryAction, isDom, line, action, target = table.unpack(response)
@@ -133,7 +135,7 @@ function sbq.attemptAction(targetId)
 				end
 			end)
 		end
-		return result, reason
+		return success, failReason
 	else
 		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
 		if sbq.query(targetSettings, {"subBehavior", storage.action, "consentRequired"}) then return false, "consentRequired" end

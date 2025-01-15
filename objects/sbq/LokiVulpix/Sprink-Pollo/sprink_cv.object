@@ -76,13 +76,11 @@
 					"maxCount":1,
 					"subLocations" : false,
 					"sizeChangeAnims" : {
-						"bellyExpandState":"<prevSize>-to-<newSize>"
+						"bellyExpandState":"<prevSize>-to-<newSize>",
+						"bodyState" : "<ballsSize>-idle"
 					},
 					"secondaryEffects" : {
 						"eggify" : false
-					},
-					"idleAnims" : {
-						"bodyState" : "<ballsSize>-idle"
 					}
 				}
 			},

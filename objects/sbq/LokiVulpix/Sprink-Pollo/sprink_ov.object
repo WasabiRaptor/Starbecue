@@ -74,13 +74,11 @@
 					"maxFill":1.5,
 					"maxCount":1,
 					"sizeChangeAnims" : {
-						"bellyExpandState":"<prevSize>-to-<newSize>"
+						"bellyExpandState":"<prevSize>-to-<newSize>",
+						"bodyState" : "<bellySize>-idle"
 					},
 					"secondaryEffects" : {
 						"eggify" : false
-					},
-					"idleAnims" : {
-						"bodyState" : "<bellySize>-idle"
 					}
 				}
 			},
