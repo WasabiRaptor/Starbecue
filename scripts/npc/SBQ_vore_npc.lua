@@ -125,21 +125,29 @@ function update(dt)
 	) then
 		sbq_hunting.start()
 	end
+    if sbq.randomTimer(
+            "lockDownCycle",
+            (sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
+            (sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
+        ) then
+        if Occupants.checkActiveOccupants() then
+            if status.statPositive("sbqLockDown") then
+                if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
+                    sbq.queueAction("lockDownClear", Occupants.randomActiveOccupant())
+                end
+            elseif (math.random() < (sbq.settings.lockDownChance)) then
+                sbq.queueAction("lockDown", Occupants.randomActiveOccupant())
+            end
+        end
+    end
 	if sbq.randomTimer(
-		"lockDownCycle",
-		(sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
-		(sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
+		"sendDeeperCycle",
+		(sbq.voreConfig.sendDeeperCycleMin or sbq.config.sendDeeperCycleMin) * 60,
+		(sbq.voreConfig.sendDeeperCycleMax or sbq.config.sendDeeperCycleMax) * 60
 	) then
-		if Occupants.checkActiveOccupants() then
-			if status.statPositive("sbqLockDown") then
-				if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
-					sbq.queueAction("lockDownClear", Occupants.randomActiveOccupant())
-				end
-			elseif (math.random() < (sbq.settings.lockDownChance)) then
-				sbq.queueAction("lockDown", Occupants.randomActiveOccupant())
-			end
-		end
+		sbq.queueAction("sendDeeper", Occupants.randomActiveOccupant())
 	end
+
 end
 
 function uninit()
