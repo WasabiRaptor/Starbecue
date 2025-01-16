@@ -13,7 +13,6 @@ let paths = [
 	"./humanoid/sbq/IcyVixen/Fray/voreOccupant.animation",
 	"./humanoid/sbq/LokiVulpix/Auri/voreOccupant.animation"
 ]
-let occupantSlots = 16
 
 function isObject(item) {
   return (item && typeof item === 'object' && !Array.isArray(item));
@@ -38,11 +37,18 @@ function mergeDeep(target, ...sources) {
 }
 
 for (let [_, path] of paths.entries()) {
+	console.log("setting up occupants for: " + path)
+
 	let fileString = fs.readFileSync(path, { encoding: "utf-8" });
+	let original = JSONC.parse(fileString)
+	let occupantSlots = original.occupantSlots || 16
+
 	let output = {};
 	for (let i = 0; i < (occupantSlots); i++) {
 		let occupantSlot = fileString.replaceAll("<occupant>", "occupant" + i);
 		mergeDeep(output, JSONC.parse(occupantSlot));
 	}
-	fs.writeFileSync(path.replace("Occupant", "Occupants"), JSONC.stringify(output, null, "\t"), { encoding: "utf-8" });
+	let newPath = path.replace("Occupant", "Occupants")
+	fs.writeFileSync(newPath, JSONC.stringify(output, null, "\t"), { encoding: "utf-8" });
+	console.log("output file: " + newPath)
 }

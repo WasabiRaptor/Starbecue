@@ -974,7 +974,7 @@ function _SpeciesScript:refreshInfusion(slot)
 
 	for k, v in pairs(self.locations) do
 		local location = self:getLocation(k)
-		if location and location.infuseType and ((not slot) or (slot == location.infuseType)) then
+		if location and ((not slot) or (slot == location.infuseType)) then
 			location:setInfusionData()
 		end
 	end
@@ -984,6 +984,9 @@ end
 
 
 function _Location:setInfusionData()
+	if not self.infuseType then return end
+	if not sbq.voreConfig.availableInfuseTypes[self.infuseType] then return end
+
 	if self.infuseTagsSet then
 		for k, _ in pairs(self.infuseTagsSet.globalTags) do
 			animator.setGlobalTag(k, sbq.defaultAnimatorTags.globalTags[k] or "default")
@@ -1994,13 +1997,14 @@ function _Occupant:attemptStruggle(control)
 		end
 
 		if struggleAction.pressAnimations and not struggleAction.holdAnimations then
-			bonusTime = bonusTime + SpeciesScript:doAnimations(struggleAction.pressAnimations, {s_direction = direction}, self.entityId)
+			bonusTime = bonusTime +
+				SpeciesScript:doAnimations(struggleAction.pressAnimations, { s_direction = direction }, self.entityId)
 		end
 		if (bonusTime > 0) then
 			if not self:controlHeld("Shift") then
-				sbq.modifyResource("energy", -(struggleAction.predCost or (sbq.config.predStruggleCost * bonusTime)) * powerMultiplier)
+				sbq.modifyResource("energy", -(struggleAction.predCost or sbq.config.predStruggleCost) * powerMultiplier)
 			end
-			if not self:overConsumeResource("energy", (struggleAction.preyCost or (sbq.config.preyStruggleCost * bonusTime)) * powerMultiplier ) then return end
+			if not self:overConsumeResource("energy", (struggleAction.preyCost or sbq.config.preyStruggleCost) * powerMultiplier ) then return end
 
 			for k, v in pairs(struggleAction.givePreyResource or {}) do
 				self:giveResource(k,v)
@@ -2012,7 +2016,7 @@ function _Occupant:attemptStruggle(control)
 				SpeciesScript:climax(self.entityId)
 			end
 		end
-		self:tryStruggleAction(((bonusTime > 0) and 1 or 0) * powerMultiplier, bonusTime * powerMultiplier)
+		self:tryStruggleAction(1, bonusTime)
 	end
 end
 function _Occupant:releaseStruggle(control, time)
@@ -2078,12 +2082,13 @@ function _Occupant:tryStruggleAction(inc, bonusTime)
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
 	end
+	local powerMultiplier = self:stat("powerMultiplier")
 	self.struggleTime = (self.struggleTime or 0) + bonusTime
 	self.struggleCount = (self.struggleCount or 0) + inc
 	locationStore.struggleCount = (locationStore.struggleCount or 0) + inc
 	if self.struggleAction.action then
-		local timeSucceeded = self.struggleTime >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.time or { 0, 0 })))
-		local countSucceeded = self.struggleCount >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.count or { 0, 0 })))
+		local timeSucceeded = (self.struggleTime * powerMultiplier) >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.time or { 0, 0 })))
+		local countSucceeded = (self.struggleCount * powerMultiplier) >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.count or { 0, 0 })))
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then

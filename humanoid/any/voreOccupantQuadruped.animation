@@ -108,25 +108,35 @@
 							"zLevel":-1,
 							"offset" : [0,-1]
 						}},
+						"ass" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [-0.75,-1]
+						}},
 						"tail" : {"properties":{
 							"anchorPart":"tail",
 							"zLevel":-1,
 							"offset" : [0,-1]
 						}},
 						"womb" : {"properties":{
+							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [-0.25,-1.25]
+						}},
+						"pussy" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.25]
+							"offset" : [-0.625,-1.25]
 						}},
 						"cock" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.75]
+							"offset" : [0.25,-1.75]
 						}},
 						"balls" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,-1.5]
+							"offset" : [0,-1.75]
 						}},
 						"breasts" : {"properties":{
 							"anchorPart":"body",
@@ -236,15 +246,15 @@
 								}, {
 									"rotate" : -90,
 									"scale" : [0.1, 0.1],
-									"translate" : [-1, -1]
+									"translate" : [-0.75, -1]
 								}, {
 									"rotate" : -90,
 									"scale" : [0, 0],
-									"translate" : [-1, -1]
+									"translate" : [-0.75, -1]
 								}, {
 									"rotate" : -90,
 									"scale" : [0, 0],
-									"translate" : [-1, -1]
+									"translate" : [-0.75, -1]
 								}]
 							},
 							"properties" : {
@@ -320,11 +330,11 @@
 									{"rotate" : 0,"scale" : [1, 1],"translate" : [-2, 0]},
 									{"rotate" : -15,"scale" : [0.75, 0.75],"translate" : [-2, -0.5]},
 									{"rotate" : -45,"scale" : [0.5, 0.5],"translate" : [-1.75, -1]},
-									{"rotate" : -90,"scale" : [0.25, 0.25],"translate" : [-1.5, -1]},
-									{"rotate" : -90,"scale" : [0.1, 0.1],"translate" : [-1, -1]},
-									{"rotate" : -90,"scale" : [0.1, 0.1],"translate" : [-1, -1]},
-									{"rotate" : -90,"scale" : [0, 0],"translate" : [-1, -1]},
-									{"rotate" : -90,"scale" : [0, 0],"translate" : [-1, -1]}]
+									{"rotate" : -90,"scale" : [0.25, 0.25],"translate" : [-1.5, -1.25]},
+									{"rotate" : -90,"scale" : [0.1, 0.1],"translate" : [-1, -1.25]},
+									{"rotate" : -90,"scale" : [0.1, 0.1],"translate" : [-0.75, -1.25]},
+									{"rotate" : -90,"scale" : [0, 0],"translate" : [-0.625, -1.25]},
+									{"rotate" : -90,"scale" : [0, 0],"translate" : [-0.625,-1.25]}]
 							},
 							"properties" : {
 								"anchorPart" : "pussy",
@@ -386,7 +396,7 @@
 							},
 							"properties" : {
 								"anchorPart" : "breasts",
-								"zLevel" : 1.15
+								"zLevel" : 0.59
 							}
 						}
 					},
