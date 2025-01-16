@@ -269,7 +269,6 @@ function default:trySendDeeperAvailable(name, action, target, failureReason, siz
 end
 
 function default:trySendDeeper(name, action, target, failureReason, size, ...)
-	sbq.logInfo({name, action, target, failureReason, size})
     if target then
         local occupant = Occupants.entityId[tostring(target)]
 		if not occupant then return false, "missingOccupant" end

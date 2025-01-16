@@ -256,7 +256,6 @@ function sbq.actionList(type, target)
 			table.insert(list, sb.jsonMerge(action, { available = success }))
 		end
 	end
-	sbq.logInfo(list, 2)
 	return list
 end
 
