@@ -411,15 +411,21 @@ end
 
 function sbq.widgetScripts.fillControlVisible(setting, group, name)
 	local location = sbq.locations[name]
-	if (not location.maxSize) or (location.maxSize == math.huge) then
+	if (not location.maxSize) or (location.maxSize == math.huge) or (not location.struggleSizes) or (#location.struggleSizes < 2) then
 		return false
 	end
 	return true
 end
-
+function sbq.widgetScripts.infusedSizeVisible(setting, group, name)
+	return sbq.widgetScripts.fillControlVisible(setting, group, name) and sbq.locations[name].infuseSize
+end
+function sbq.widgetScripts.infusedFadeVisible(setting, group, name)
+	local location = sbq.locations[name]
+	return location.infuseColor
+end
 function sbq.widgetScripts.infusedVisible(setting, group, name)
 	local location = sbq.locations[name]
-	if (not location.infuseType) or (not sbq.settings.infusePrefs[location.infuseType].pred) then
+	if (not location.infuseType) or (not sbq.settings.infusePrefs[location.infuseType].pred) or (not sbq.query(sbq.settings.infuseSlots[location], {"item", "name"})) then
 		return false
 	end
 	return true
