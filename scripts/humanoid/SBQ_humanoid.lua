@@ -42,7 +42,9 @@ function sbq.humanoidInit()
 		item.parameters.npcArgs.npcParam.identity = identity
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.getSettingsOf.current()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
-		item.parameters.tooltipFields.collarNameLabel = sbq.createdDate()
+		item.parameters.npcArgs.npcParam.scriptConfig.uniqueId = entity.uniqueId()
+		item.parameters.tooltipFields.collarNameLabel = sbq.createdDateString()
+		item.parameters.createdDate = sbq.createdDate()
 		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")
 		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
 		item.parameters.preySize = sbq.size()

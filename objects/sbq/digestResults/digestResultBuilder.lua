@@ -33,7 +33,7 @@ function build(directory, config, parameters, level, seed)
 
 		local imagePath = config.orientations[1].image
 		local replaceTags = sb.jsonMerge(config.imageKeys, parameters.imageKeys or {}, {
-			variant = tostring(math.random(config.spriteVariants))
+			variant = tostring(math.random(1, config.spriteVariants or 1))
 		})
 		for k, v in pairs(preyIdentity or {}) do
 			if type(v) == "string" then

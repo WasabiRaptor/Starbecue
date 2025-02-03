@@ -296,6 +296,50 @@ function sbq.customizeEntity(eid)
 	end)
 end
 
+function sbq.collapseEssenceStacks()
+	local count = 0
+	local output = {}
+	for _, item in ipairs(player.itemsWithTag("sbqEssence") or {}) do
+		count = count + item.count
+		local uuid = sbq.query(item.parameters, { "npcArgs", "npcParam", "scriptConfig", "uniqueId" }) or sbq.query(item.parameters, { "npcArgs", "npcParam", "identity", "name" }) or "unknown"
+		local predUUID = item.parameters.predUuid or "noPred"
+		output[predUUID] = output[predUUID] or {}
+		output[predUUID][uuid] = output[predUUID][uuid] or {}
+        local current = output[predUUID][uuid][item.name]
+
+		local createdDate = 0
+		local createdDateType = type(sbq.query(item.parameters, { "createdDate" }))
+		if createdDateType == "number" then
+			createdDate = item.parameters.createdDate
+		elseif createdDateType == "table" then
+			createdDate = os.time(item.parameters.createdDate)
+		end
+
+		local curCreatedDate = 0
+		local curCreatedDateType = type(sbq.query(current, { "parameters", "createdDate" }))
+		if curCreatedDateType == "number" then
+			curCreatedDate = current.parameters.createdDate
+		elseif curCreatedDateType == "table" then
+			curCreatedDate = os.time(current.parameters.createdDate)
+		end
+
+		if createdDate >= curCreatedDate then
+			output[predUUID][uuid][item.name] = item
+			output[predUUID][uuid][item.name].count = output[predUUID][uuid][item.name].count + ((current or {}).count or 0)
+		end
+	end
+	player.consumeTaggedItem("sbqEssence", count)
+	player.cleanupItems()
+
+	for pred, prey in pairs(output) do
+		for _, items in pairs(prey) do
+			for _, item in pairs(items) do
+				player.giveItem(item)
+			end
+		end
+	end
+end
+
 function teleportOut()
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData and not (occupantData.playerPred or occupantData.crewPred) then

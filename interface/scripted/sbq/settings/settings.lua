@@ -445,7 +445,8 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 				{ mode = "h", expandMode = { 0, 0 } },
 				{ type = "sbqItemGrid", id = "recentlyDigestedItemGrid", autoInteract = true, slots = slots },
 				{ type = "sbqIconButton", id = "clearRecentlyDigested", toolTip = ":clearRecentlyDigestedTip", script = "clearRecentlyDigested", image = "/interface/x.png", hoverImage = "/interface/xhover.png", pressImage = "/interface/xpress.png"}
-			}
+            },
+            { type = "sbqButton", id = "collapseEssenceStacksDigested", caption = ":collapseEssenceStacks", toolTip = ":collapseEssenceStacksTip", script = "collapseEssenceStacks" }
 		},
 		makeLabel = false
 	}
@@ -458,7 +459,11 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 	return sb.jsonMerge(param, layout)
 end
 function sbq.widgetScripts.clearRecentlyDigested()
-	sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
+    sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
+end
+function sbq.widgetScripts.collapseEssenceStacks()
+	player.setScriptContext("starbecue")
+	player.callScript("sbq.collapseEssenceStacks")
 end
 
 function sbq.widgetScripts.dropDownSetting(_, setting, group, name)

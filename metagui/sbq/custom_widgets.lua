@@ -1259,6 +1259,29 @@ end
 
 -- button ----------------------------------------------------------------------------------------------------------------------------------
 
+widgets.sbqButton = mg.proto(widgets.button, {
+})
+
+function widgets.sbqButton:init(base, param)
+	widgets.button.init(self, base, param)
+	self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
+	self.value = param.value
+	self.script = param.script
+
+	if self.setting then
+		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
+	end
+	if self.script then
+		function self:onClick()
+			sbq.widgetScripts[self.script](self.value, self.setting, self.groupName, self.groupKey)
+		end
+	end
+end
+
 widgets.sbqIconButton = mg.proto(widgets.iconButton, {
 })
 

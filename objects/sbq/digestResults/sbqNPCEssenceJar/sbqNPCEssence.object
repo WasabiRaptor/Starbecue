@@ -1,11 +1,14 @@
 {
 	"objectName" : "sbqNPCEssenceJar",
 	"colonyTags" : [],
+	"itemTags" : ["sbqEssence"],
 	"rarity" : "Common",
 	"category" : "decorative",
 	"price" : 100,
 	"maxStack" : 64,
 
+	"spriteVariants" : 1,
+	"descType" : "essenceDrop",
 	"description" : "A jar containing a colored flame.",
 	"shortdescription" : "Essence Jar",
 	"race" : "generic",
@@ -14,9 +17,6 @@
 	"retainObjectParametersInItem" : true,
 
 	"animation" : "/objects/sbq/digestResults/sbqNPCEssenceJar/sbqNPCEssenceJar.animation",
-
-	"replaceDescPrey" : ["A flickering flame representing the essence of <preyName>."],
-	"replaceShortDescPrey" : "<preyName>'s Essence",
 
 	"baseColorMap" : {
 		"primary" : [ "6f2919", "a85636", "e0975c", "ffca8a" ],

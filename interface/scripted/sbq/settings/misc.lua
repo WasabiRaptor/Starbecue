@@ -128,7 +128,7 @@ function misc.generateSettingsCard(type)
 		tooltipKind = "filledcapturepod",
 		tooltipFields = {
 			noCollarLabel = "",
-			collarNameLabel = sbq.createdDate(),
+			collarNameLabel = sbq.createdDateString(),
 			objectImage = world.entityPortrait(sbq.entityId(), "full")
 		}
 	}, }

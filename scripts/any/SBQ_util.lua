@@ -502,8 +502,17 @@ function sbq.exportSettingGroup(group)
 	return output
 end
 
-function sbq.createdDate()
-	return os.date(sbq.getString(":createdOnDate"), os.time()).." v"..root.modMetadata("Starbecue").version
+function sbq.createdDateString(time)
+	return os.date(sbq.getString(":createdOnDate"), time or os.time()) .. " v" .. root.modMetadata("Starbecue").version
+end
+
+function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stacking easier without using the collapse
+	local table = os.date("*t", time or os.time())
+	table.hour = 0
+	table.min = 0
+	table.sec = 0
+	table.isdst = false
+	return table
 end
 
 function sbq.isLoungeDismountable(eid)
