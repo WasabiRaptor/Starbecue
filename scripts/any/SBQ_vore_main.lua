@@ -1016,15 +1016,18 @@ function _Location:setInfusionData()
 			local preyVal = sbq.query(infusedItem,
 				{ "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap
 					[k] })
-			value = ((preyVal ~= "auto") and preyVal) or value
+			value = ((preyVal ~= "default") and preyVal) or value
 		end
-		if value ~= "auto" then
+		if type(v[value]) == "string" then
+			value = v[value]
+		end
+		if value ~= "default" then
 			infuseData = sb.jsonMerge(
 				infuseData,
 				v.any or {},
 				((type(v[value]) == "string") and v[v[value]] or v[value] or {}),
 				v2.any or {},
-				(type(v2[value]) == "string") and v2[v2[value]] or v2[value] or {}
+				((type(v2[value]) == "string") and v2[v2[value]] or v2[value] or {})
 			)
 		end
 	end
