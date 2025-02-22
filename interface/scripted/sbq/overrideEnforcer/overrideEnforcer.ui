@@ -1,13 +1,29 @@
 { //  -*- grammar-ext: json -*-
 	"style" : "window", // window (has titlebar), panel (just a frame) etc.
-	"size" : [256, 200], // *internal* size (not including chrome)
+	"size" : [400, 300], // *internal* size (not including chrome)
 	"title" : "Locked Settings Enforcer",
 	"icon" : "/interface/scripted/sbq/lockedDisabled.png",
 	"uniqueBy" : "path",
 	"scripts" : [ "overrideEnforcer.lua" ],
 	"children" : [
-		{"type":"label","text":"TODO - Make a menu here that players can use to configure things per world.\nUntil that is made you can spawn in the ^yellow;sbqOverrideEnforcer^reset; with custom parameters like so:\n \n/spawnitem sbqOverrideEnforcer 1 '{\"overrideSettings\":{}}'\n \nYou can also patch ^yellow;sbq.config:serverOverrideSettings^reset; which will automatically apply to any enforcer that is placed regardless of world.\n \nYou'd need to look at ^yellow;sbq.config^reset; anyway to know the internal names and structure of the settings.\n \nThe object is unbreakable through normal means, only the object's owner or admins can access this UI."},
-		{"type":"button", "id":"breakObject", "caption":"Break Object"}
+		{"type":"label","text":":overrideEnforcerGUI"},
+		{"type":"panel","expandMode":[1,0],"children":[
+			{"mode":"v"},
+			{"type":"label","text":":overrideSettings","align":"center"},
+			[{"type":"label","text":":general", "width" : 50},{ "type" : "sbqTextBox", "id" : "overrideSettings", "toolTip":":overrideSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+			[{"type":"label","text":":player", "width" : 50},{ "type" : "sbqTextBox", "id" : "overrideSettings_player", "toolTip":":overrideSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+			[{"type":"label","text":":npc", "width" : 50},{ "type" : "sbqTextBox", "id" : "overrideSettings_npc", "toolTip":":overrideSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+			[{"type":"label","text":":object", "width" : 50},{ "type" : "sbqTextBox", "id" : "overrideSettings_object", "toolTip":":overrideSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+		]},
+		{"type":"panel","expandMode":[1,0],"children":[
+			{"mode":"v"},
+			{"type":"label","text":":invalidSettings","align":"center"},
+			[{"type":"label","text":":general", "width" : 50},{ "type" : "sbqTextBox", "id" : "invalidSettings", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+			[{"type":"label","text":":player", "width" : 50},{ "type" : "sbqTextBox", "id" : "invalidSettings_player", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+			[{"type":"label","text":":npc", "width" : 50},{ "type" : "sbqTextBox", "id" : "invalidSettings_npc", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+			[{"type":"label","text":":object", "width" : 50},{ "type" : "sbqTextBox", "id" : "invalidSettings_object", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+		]},
+		{"type":"button", "id":"breakObject", "caption":":breakObject"}
 
 	]
 }

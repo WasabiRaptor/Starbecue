@@ -1012,37 +1012,43 @@ end
 function widgets.sbqTextBox:blur() self:releaseFocus() end
 
 function widgets.sbqTextBox:setText(t)
-	if self.settingType == "number" then
-		local value = tonumber(t)
-		local color = "FFFFFF"
-		local max = self.max
-		local min = self.min
-		if type(max) == "string" then
-			max = sbq.settings[max]
+    if self.settingType == "number" then
+        local value = tonumber(t)
+        local color = "FFFFFF"
+        local max = self.max
+        local min = self.min
+        if type(max) == "string" then
+            max = sbq.settings[max]
+        end
+        if type(min) == "string" then
+            min = sbq.settings[min]
+        end
+        if type(value) == "number" then
+            if ((type(max) == "number") and (value == max))
+                or ((type(min) == "number") and (value == min))
+            then
+                color = "FFFF00"
+            elseif (type(max) == "number") and (type(min) == "number") then
+                if (value > min) and (value < max) then
+                    color = "00FF00"
+                end
+            end
+            if ((type(max) == "number") and (value > max))
+                or ((type(min) == "number") and (value < min))
+            then
+                color = "FF0000"
+            end
+        else
+            color = "FF0000"
+        end
+        self.color = color
+    elseif self.settingType == "table" then
+		if type(sb.parseJson(t or "")) == "table" then
+            self.color = "00FF00"
+        else
+			self.color = "FF0000"
 		end
-		if type(min) == "string" then
-			min = sbq.settings[min]
-		end
-		if type(value) == "number" then
-			if ((type(max) == "number") and (value == max))
-			or ((type(min) == "number") and (value == min))
-			then
-				color = "FFFF00"
-			elseif(type(max) == "number") and (type(min) == "number") then
-				if (value > min) and (value < max) then
-					color = "00FF00"
-				end
-			end
-			if ((type(max) == "number") and (value > max))
-			or ((type(min) == "number") and (value < min))
-			then
-				color = "FF0000"
-			end
-		else
-			color = "FF0000"
-		end
-		self.color = color
-	end
+    end
 	local c = self.text
 	self.text = type(t) == "string" and t or ""
 	if self.text ~= c then
@@ -1134,8 +1140,6 @@ function widgets.sbqTextBox:onTextChanged() end
 function widgets.sbqTextBox:onEnter() end
 function widgets.sbqTextBox:onEscape() end
 
-
-for id, t in pairs(widgets) do t.widgetType = id end
 
 -- item grid ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -1413,3 +1417,6 @@ function widgets.image:setScale(v)
 	if parent then parent:queueGeometryUpdate() end
 end
 end
+
+
+for id, t in pairs(widgets) do t.widgetType = id end
