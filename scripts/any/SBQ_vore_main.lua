@@ -2177,10 +2177,10 @@ function _Occupant:giveResource(resource, amount)
 end
 
 function _Occupant:stat(stat)
-	return world.entityStat(self.entityId, stat)
+	return world.entityStat(self.entityId, stat) or 0
 end
 function _Occupant:statPositive(stat)
-	return world.entityStatPositive(self.entityId, stat)
+	return world.entityStatPositive(self.entityId, stat) or false
 end
 
 function _Occupant:sendEntityMessage(...)
