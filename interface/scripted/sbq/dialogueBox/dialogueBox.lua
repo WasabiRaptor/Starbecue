@@ -69,11 +69,11 @@ end
 function _ENV.settings:onClick()
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqSettingsPageData", player.id()), function(data)
 		if (not data) or ((not player.isAdmin()) and data.parentEntityData[2] and (player.uniqueId() ~= data.parentEntityData[1])) then
-			pane.playSound("/sfx/interface/clickon_error.ogg")
+			sbq.playErrorSound()
 		end
 		player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  ("starbecue:entitySettings") }, pane.sourceEntity())
 	end, function ()
-		pane.playSound("/sfx/interface/clickon_error.ogg")
+		sbq.playErrorSound()
 	end)
 end
 

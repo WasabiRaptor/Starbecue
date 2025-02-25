@@ -182,7 +182,7 @@ function sbq.orderItem(item, price)
 	if player.isAdmin() or player.consumeCurrency( "money", price ) then
 		player.giveItem(item)
 	else
-		pane.playSound("/sfx/interface/clickon_error.ogg")
+		sbq.playErrorSound()
 	end
 end
 
@@ -311,19 +311,19 @@ function sbq.refreshDeedPage()
 		end
 		function settings:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
-			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end
+			if not id then sbq.playErrorSound() return end
 			sbq.addRPC(world.sendEntityMessage(id, "sbqSettingsPageData", player.id()), function(data)
 				if (not data) or ((not player.isAdmin()) and data.parentEntityData[2] and (entity.uniqueId() ~= data.parentEntityData[1])) then
-					pane.playSound("/sfx/interface/clickon_error.ogg")
+					sbq.playErrorSound()
 				end
 				player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  ("starbecue:entitySettings") }, id)
 			end, function ()
-				pane.playSound("/sfx/interface/clickon_error.ogg")
+				sbq.playErrorSound()
 			end)
 		end
 		function customize:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
-			if not id then pane.playSound("/sfx/interface/clickon_error.ogg") return end
+			if not id then sbq.playErrorSound() return end
 			player.setScriptContext("starbecue")
 			player.callScript("sbq.customizeEntity", id)
 		end
@@ -338,7 +338,7 @@ function sbq.refreshDeedPage()
 		sbq.insertTenant(_ENV.insertTenantItemSlot)
 	end
 	function _ENV.insertTenantItemSlot:acceptsItem(item)
-		if not sbq.isValidTenantCard(item) then pane.playSound("/sfx/interface/clickon_error.ogg") return false
+		if not sbq.isValidTenantCard(item) then sbq.playErrorSound() return false
 		else return true end
 	end
 

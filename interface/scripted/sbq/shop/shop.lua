@@ -109,7 +109,7 @@ function _ENV.buy:onClick()
 		dialogueBox.refresh( ".buy", dialogue.prev, sbq.dialogueTree)
 	else
 		dialogueBox.refresh( ".buyFail", dialogue.prev, sbq.dialogueTree)
-		pane.playSound("/sfx/interface/clickon_error.ogg")
+		sbq.playErrorSound()
 	end
 end
 

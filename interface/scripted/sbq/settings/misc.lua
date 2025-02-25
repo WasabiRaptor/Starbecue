@@ -62,7 +62,7 @@ function _ENV.upgradeInput:acceptsItem(item)
 	if itemConfig and itemConfig.config.sbqTieredUpgrade then
 		return true
 	else
-		pane.playSound("/sfx/interface/clickon_error.ogg")
+		sbq.playErrorSound()
 		return false
 	end
 end
@@ -89,7 +89,7 @@ function _ENV.importSettingsSlot:acceptsItem(item)
 	if (item.parameters or {}).sbqSettings then
 		return true
 	else
-		pane.playSound("/sfx/interface/clickon_error.ogg")
+		sbq.playErrorSound()
 		return false
 	end
 end

@@ -130,7 +130,7 @@ function sbq.refreshOccupants()
 							player.setScriptContext("starbecue")
 							local result = player.callScript("sbq.queueAction", action.action, occupant.entityId, table.unpack(action.args or {}))
 							if (not result[1]) and (result[2] ~= "targetMissing") then
-								pane.playSound("/sfx/interface/clickon_error.ogg")
+								sbq.playErrorSound()
 								player.queueUIMessage(sbq.getString(":action_"..tostring(result[2])))
 							end
 						end,
