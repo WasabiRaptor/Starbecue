@@ -1005,9 +1005,8 @@ function _Location:setInfusionData()
 		infusedItem.name = self.infusedItemType
 	end
 	local infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}),
-		root.fetchConfigArray(infuseData[sbq.species()] or {}))
-	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.tag]) or {})
+	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}), root.fetchConfigArray(infuseData[sbq.species()] or {}))
+	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.key]) or {})
 
 	for k, v in pairs(self.settingInfusion or {}) do
 		local v2 = (infuseData.settingInfusion or {})[k] or {}
@@ -1032,7 +1031,7 @@ function _Location:setInfusionData()
 		end
 	end
 
-	sbq.infuseOverrideSettings[self.tag] = infuseData.overrideSettings
+	sbq.infuseOverrideSettings[self.key] = infuseData.overrideSettings
 
 	local tagsSet = {
 		globalTags = {},

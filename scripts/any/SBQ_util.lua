@@ -167,6 +167,10 @@ function sbq.setupSettingMetatables(entityType)
 	for _, v in ipairs(sbq.config.infuseOverrideOrder or {}) do
 		sbq.settings = sb.jsonMerge(sbq.settings, (sbq.infuseOverrideSettings or {})[v] or {})
 	end
+	for k, v in pairs(sbq.voreConfig.locations or {}) do
+		sbq.settings = sb.jsonMerge(sbq.settings, (sbq.infuseOverrideSettings or {})[k] or {})
+	end
+
 	sbq.settings = sb.jsonMerge(
 		sbq.settings,
 		world.getProperty("sbqOverrideSettings") or sbq.config.serverOverrideSettings or {},
