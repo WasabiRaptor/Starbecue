@@ -1270,9 +1270,10 @@ function widgets.sbqItemSlot:draw()
 
     widget.setText(self.subWidgets.count, self:prettyCount(self.storedCount))
     theme.drawItemSlot(self)
-	local c = widget.bindCanvas(self.backingWidget)
-	c:drawImage("/interface/scripted/sbq/lockedDisabled.png", {5,5}, 1, nil, true )
-
+    local c = widget.bindCanvas(self.backingWidget)
+	if self.locked then
+		c:drawImage("/interface/scripted/sbq/lockedDisabled.png", {5,5}, 1, nil, true )
+	end
 end
 
 
