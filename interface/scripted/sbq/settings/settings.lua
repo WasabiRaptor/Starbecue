@@ -149,7 +149,7 @@ function sbq.refreshSettingVisibility()
 	end
 	for settingIdentifier, identifier in pairs(sbq.settingIdentifiers) do
 		local setting, group, name = table.unpack(identifier)
-		local widget = _ENV[settingIdentifier] or sbq.settingWidgets[settingIdentifier]
+		local widget = sbq.settingWidgets[settingIdentifier] or _ENV[settingIdentifier]
 		local label = _ENV[settingIdentifier .. "Label"]
 		local layout = _ENV[settingIdentifier .. "Layout"]
 		local panel = _ENV[settingIdentifier .. "Panel"]
@@ -189,10 +189,10 @@ end
 
 function sbq.assignSettingValue(setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
-	local widget = _ENV[settingIdentifier] or sbq.settingWidgets[settingIdentifier]
+	local widget = sbq.settingWidgets[settingIdentifier] or _ENV[settingIdentifier]
 	local value = ((group and name) and sbq.settings[group][name][setting]) or sbq.settings[setting]
 	local locked = sbq.checkLockedSetting(setting, group, name)
-	local valueType = type(value)
+	local valueType = type(((group and name) and sbq.defaultSettings[group][name][setting]) or sbq.defaultSettings[setting])
 	if not widget then
 		return
 	end
