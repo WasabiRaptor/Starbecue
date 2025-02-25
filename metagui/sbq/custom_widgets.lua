@@ -1217,49 +1217,64 @@ widgets.sbqItemSlot = mg.proto(widgets.itemSlot, {
 })
 
 function widgets.sbqItemSlot:init(base, param)
-	self.size = nil -- force recalculate
-	self.hideRarity = param.hideRarity
-	self.glyph = mg.path(param.glyph or param.colorGlyph)
-	self.colorGlyph = not not param.colorGlyph -- some themes may want to render non-color glyphs as monochrome in their own colors
-	self.color = param.color -- might as well let themes have at this
-	self.autoInteract = param.autoInteract or param.auto
-	self.containerSlot = param.containerSlot
-	if self.containerSlot then self.autoInteract = "container" end
+    self.size = nil -- force recalculate
+    self.hideRarity = param.hideRarity
+    self.glyph = mg.path(param.glyph or param.colorGlyph)
+    self.colorGlyph = not not param
+    .colorGlyph                             -- some themes may want to render non-color glyphs as monochrome in their own colors
+    self.color = param.color                -- might as well let themes have at this
+    self.autoInteract = param.autoInteract or param.auto
+    self.containerSlot = param.containerSlot
+    if self.containerSlot then self.autoInteract = "container" end
 
-	self.setting = param.setting or self.parent.setting
-	self.groupName = param.groupName or self.parent.groupName
-	self.groupKey = param.groupKey or self.parent.groupKey
-	self.script = param.script
-	self.acceptScript = param.acceptScript
-	if self.setting then
-		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
-		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
-	end
+    self.setting = param.setting or self.parent.setting
+    self.groupName = param.groupName or self.parent.groupName
+    self.groupKey = param.groupKey or self.parent.groupKey
+    self.script = param.script
+    self.acceptScript = param.acceptScript
+    if self.setting then
+        sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+        if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
+    end
 
-	if self.script then
-		function self:onItemModified()
-			sbq.widgetScripts[self.script](self:item() or {}, self.setting, self.groupName, self.groupKey)
-		end
-	end
-	if self.acceptScript then
-		function self:acceptsItem(item)
-			return sbq.widgetScripts[self.acceptScript](self, item)
-		end
-	end
+    if self.script then
+        function self:onItemModified()
+			if self.locked then return sbq.assignSettingValue(self.setting, self.groupName, self.groupKey) end
+            sbq.widgetScripts[self.script](self:item() or {}, self.setting, self.groupName, self.groupKey)
+        end
+    end
+    if self.acceptScript then
+        function self:acceptsItem(item)
+            if root.itemDescriptorsMatch(item, self.itemCache, true) then return true end
+			if self.locked then return false end
+            return sbq.widgetScripts[self.acceptScript](self, item)
+        end
+    end
 
-	self.directCache = param.directCache
-	--
-	self.backingWidget = mkwidget(base, { type = "canvas" })
-	self.subWidgets = {
-		slot = mkwidget(base, { type = "itemslot", callback = "_clickLeft", rightClickCallback = "_clickRight", showRarity = false, showCount = false }),
-		count = mkwidget(base, { type = "label", mouseTransparent = true, hAnchor = "right" })
-	}
-	if param.item then self:setItem(param.item) end
-	if self.autoInteract == "container" then -- start polling loop
-		if not containerSlots then mg.startEvent(containerLoop) end
-		table.insert(containerSlots, self)
-	end
+    self.directCache = param.directCache
+    --
+    self.backingWidget = mkwidget(base, { type = "canvas" })
+    self.subWidgets = {
+        slot = mkwidget(base,
+            { type = "itemslot", callback = "_clickLeft", rightClickCallback = "_clickRight", showRarity = false, showCount = false }),
+        count = mkwidget(base, { type = "label", mouseTransparent = true, hAnchor = "right" })
+    }
+    if param.item then self:setItem(param.item) end
+    if self.autoInteract == "container" then -- start polling loop
+        if not containerSlots then mg.startEvent(containerLoop) end
+        table.insert(containerSlots, self)
+    end
 end
+
+function widgets.sbqItemSlot:draw()
+
+    widget.setText(self.subWidgets.count, self:prettyCount(self.storedCount))
+    theme.drawItemSlot(self)
+	local c = widget.bindCanvas(self.backingWidget)
+	c:drawImage("/interface/scripted/sbq/lockedDisabled.png", {5,5}, 1, nil, true )
+
+end
+
 
 -- button ----------------------------------------------------------------------------------------------------------------------------------
 

@@ -217,12 +217,15 @@ function sbq.assignSettingValue(setting, group, name)
 				handle.locked = locked
 			end
 		end
+	elseif widget.widgetType == "sbqItemSlot" then
+        widget:setItem(value.name and value)
+		widget.locked = locked
 	end
 end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
 	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
+	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then sbq.playErrorSound() sbq.assignSettingValue(setting, group, name) return false end
 
 	if group and name then
 		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, value)
@@ -236,10 +239,10 @@ end
 
 function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
 	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then pane.playSound("/sfx/interface/clickon_error.ogg") sbq.assignSettingValue(setting, group, name) return false end
+	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then sbq.playErrorSound() sbq.assignSettingValue(setting, group, name) return false end
 
 	local table = sb.parseJson(value)
-	if not table then pane.playSound("/sfx/interface/clickon_error.ogg") return false end
+	if not table then sbq.playErrorSound() return false end
 	if group and name then
 		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, table)
 		storage.sbqSettings[group][name][setting] = table
@@ -388,7 +391,7 @@ function sbq.widgetScripts.infuseSlotAccepts(w, item)
 	if w.locked then return false end
 	if not item then return true end
 	if sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infusePrefs", w.groupKey, "prey"}) then return true end
-	pane.playSound("/sfx/interface/clickon_error.ogg")
+	sbq.playErrorSound()
 	player.queueUIMessage(sbq.getString(":action_targetSettingsMismatch"))
 	return false
 end
