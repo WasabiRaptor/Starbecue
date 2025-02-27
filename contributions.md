@@ -66,3 +66,4 @@
 
 # Alias
 	Mindflayer Compatibility
+	Shoggoth Compatibility
