@@ -68,3 +68,4 @@
 	Mindflayer Compatibility
 	Shoggoth Compatibility
 	Plasmoid Compatibility
+	Majin Compatibility
