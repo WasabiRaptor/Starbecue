@@ -67,3 +67,4 @@
 # Alias
 	Mindflayer Compatibility
 	Shoggoth Compatibility
+	Plasmoid Compatibility
