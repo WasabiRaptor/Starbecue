@@ -69,3 +69,4 @@
 	Shoggoth Compatibility
 	Plasmoid Compatibility
 	Majin Compatibility
+	Inkling Compatibility
