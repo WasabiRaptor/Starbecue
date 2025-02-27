@@ -71,3 +71,4 @@
 	Majin Compatibility
 	Inkling Compatibility
 	Octoling Compatibility
+	Saiyan Compatibility
