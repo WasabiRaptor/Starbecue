@@ -377,6 +377,12 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Deerkin](https://steamcommunity.com/sharedfiles/filedetails/?id=1597901084) : deerkin
 - [Mauskin](https://github.com/DrPvtSkittles/Mauskin) : mauskin
 - [Pengukin](https://steamcommunity.com/sharedfiles/filedetails/?id=1718120917) : pengukin
+- [Shoggoth](https://steamcommunity.com/sharedfiles/filedetails/?id=2066322624) : shoggoth
+- [Mindflayer](https://steamcommunity.com/sharedfiles/filedetails/?id=2066322624) : mindflayer
+- [Plasmoid](https://steamcommunity.com/sharedfiles/filedetails/?id=3127674279) : plasmoid
+- [Inkling](https://steamcommunity.com/sharedfiles/filedetails/?id=73485588) : inkling
+- [Octoling](https://steamcommunity.com/sharedfiles/filedetails/?id=73485588) : octoling
+- [Lamia](https://steamcommunity.com/sharedfiles/filedetails/?id=779096734) : lamia
 
 ---
 
