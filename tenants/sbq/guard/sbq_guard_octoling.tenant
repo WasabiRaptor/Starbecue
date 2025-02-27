@@ -1,0 +1,37 @@
+{
+	"name": "sbq_guard_octoling",
+	"priority": 52,
+
+	"colonyTagCriteria": {
+		"light": 1,
+		"combat" : 8,
+		"door": 1,
+		"sbqVore" : 1,
+		"octoling" : 8
+	},
+
+	"checkRequirements" : {},
+	"orderFurniture" : [
+		{"name":"incuteoctariandoll", "count":1},
+		{"name":"incooloctariandoll", "count":1},
+		{"name":"inoctariandoll", "count":1},
+		{"name":"octograffiti4", "count":1},
+		{"name":"octobotchair", "count":1},
+		{"name":"intinyoctarian", "count":1}
+	],
+	"tenants": [
+		{
+			"spawn": "npc",
+			"level" : 1,
+			"species": ["octoling"],
+			"type": "sbqVoreFriendlyGuardTenant",
+			"overrides": {
+			}
+		}
+	],
+
+	"rent": {
+		"periodRange": [1200.0, 1800.0],
+		"pool": "villagerGift"
+	}
+}

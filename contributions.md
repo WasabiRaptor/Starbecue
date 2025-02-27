@@ -70,3 +70,4 @@
 	Plasmoid Compatibility
 	Majin Compatibility
 	Inkling Compatibility
+	Octoling Compatibility
