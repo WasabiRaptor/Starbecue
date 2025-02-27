@@ -72,3 +72,4 @@
 	Inkling Compatibility
 	Octoling Compatibility
 	Saiyan Compatibility
+	Lamia Compatibility
