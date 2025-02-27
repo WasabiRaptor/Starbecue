@@ -63,3 +63,6 @@
 
 # tank8673
 	Additional Shy Dialogue
+
+# Alias
+	Mindflayer Compatibility
