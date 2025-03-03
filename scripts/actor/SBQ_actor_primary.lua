@@ -89,17 +89,13 @@ function init()
 	end)
 
 	message.setHandler("sbqScale", function(_, _, scale, duration)
-		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
-		destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
-		oldScale = mcontroller.scale()
-		scaleTime = 0
-		scaleDuration = duration or 1
-		scaling = true
-		leftoverScale = 0
+		sbq.applyScale(scale,duration)
 	end)
 	destScale = mcontroller.scale()
 	oldScale = mcontroller.scale()
-
+	sbq.timer("initScale", 0.25, function ()
+		sbq.applyScale(mcontroller.scale())
+	end)
 
 
 	-- captures
@@ -165,13 +161,13 @@ function applyDamageRequest(damageRequest)
 		status.addEphemeralEffects(damageRequest.statusEffects, damageRequest.sourceEntityId)
 		return {}
 	elseif (damageRequest.damageSourceKind == "sbq_digest")
-	or (damageRequest.damageSourceKind == "sbq_cumdigest")
-	or (damageRequest.damageSourceKind == "sbq_femcumdigest")
-	or (damageRequest.damageSourceKind == "sbq_milkdigest")
+		or (damageRequest.damageSourceKind == "sbq_cumdigest")
+		or (damageRequest.damageSourceKind == "sbq_femcumdigest")
+		or (damageRequest.damageSourceKind == "sbq_milkdigest")
 	then
 		local healthLost = math.min(damageRequest.damage, status.resource("health"))
 		status.modifyResource("health", -damageRequest.damage)
-		return {{
+		return { {
 			sourceEntityId = damageRequest.sourceEntityId,
 			targetEntityId = entity.id(),
 			position = mcontroller.position(),
@@ -180,9 +176,9 @@ function applyDamageRequest(damageRequest)
 			hitType = damageRequest.hitType,
 			damageSourceKind = damageRequest.damageSourceKind,
 			targetMaterialKind = ""
-		}}
+		} }
 	elseif damageRequest.damageSourceKind == "sbq_heal" then
-		return {{
+		return { {
 			sourceEntityId = damageRequest.sourceEntityId,
 			targetEntityId = entity.id(),
 			position = mcontroller.position(),
@@ -191,24 +187,29 @@ function applyDamageRequest(damageRequest)
 			hitType = damageRequest.hitType,
 			damageSourceKind = damageRequest.damageSourceKind,
 			targetMaterialKind = ""
-		}}
+		} }
 	elseif damageRequest.damageSourceKind == "sbq_size" then
 		local scaleAmount = damageRequest.damage + leftoverScale
-		leftoverScale = (scaleAmount % sbq.config.scaleSnap)
-		scaleAmount  = scaleAmount - leftoverScale
+		leftoverScale     = (scaleAmount % sbq.config.scaleSnap)
+		scaleAmount       = scaleAmount - leftoverScale
 		if (math.abs(scaleAmount)) < sbq.config.scaleSnap then
 			leftoverScale = leftoverScale + scaleAmount
 			return {}
 		end
-		scaling = true
-		oldScale = mcontroller.scale()
-		local publicSettings = status.statusProperty("sbqPublicSettings") or {}
-		destScale = math.min(publicSettings.maximumScale or 1, math.max(destScale + scaleAmount, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
-		scaleDuration = math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2))
-		scaleTime = 0
+		sbq.applyScale(destScale + scaleAmount,
+			math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2)))
 		return {}
 	end
 	return old.applyDamageRequest(damageRequest)
+end
+
+function sbq.applyScale(scale, duration)
+	local publicSettings = status.statusProperty("sbqPublicSettings") or {}
+	destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
+	oldScale = mcontroller.scale()
+	scaleTime = 0
+	scaleDuration = duration or 1
+	scaling = true
 end
 
 function sbq.checkStuck()
