@@ -119,9 +119,26 @@ function sbq.removeEmptyTables(input)
 end
 
 function sbq.checkInvalidSetting(value, setting, group, name)
-	local value = tostring(value)
-	local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
-	return sbq.query(sbq.worldInvalidSettings, {setting, result or value}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, result or value})) or result
+	if type(value) == "number" then
+		local result
+		local min_1 = sbq.query(sbq.voreConfig.invalidSettings, {setting, "min"}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, "min"}))
+		if min_1 and ((result or value) < min_1) then result = min_1 end
+
+		local max_1 = sbq.query(sbq.voreConfig.invalidSettings, {setting, "max"}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, "max"}))
+		if max_1 and ((result or value) > max_1) then result = max_1 end
+
+		local min_2 = sbq.query(sbq.worldInvalidSettings, {setting, "min"}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, "min"}))
+		if min_2 and ((result or value) < min_2) then result = min_2 end
+
+		local max_2 = sbq.query(sbq.worldInvalidSettings, {setting, "max"}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, "max"}))
+		if max_2 and ((result or value) > max_2) then result = max_2 end
+
+		return result
+    else
+		local value = tostring(value)
+		local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
+		return sbq.query(sbq.worldInvalidSettings, {setting, result or value}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, result or value})) or result
+	end
 end
 function sbq.checkLockedSetting(setting, group, name)
 	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, {group, name, setting}))
@@ -223,6 +240,7 @@ function sbq.setupSettingMetatables(entityType)
 		if not sbq.config.groupedSettings[setting] then
 			local result = sbq.checkInvalidSetting(override or value or v, setting)
 			if result ~= nil then
+				sbq.debugLogInfo(string.format("Invalid setting '%s' value '%s' was set to temporary value '%s'", setting, v, result))
 				sbq.settings[setting] = result
 			end
 		end
@@ -282,7 +300,8 @@ function sbq.setupSettingMetatables(entityType)
 					storage.sbqSettings[k][name][setting] = {}
 				end
 				local result = sbq.checkInvalidSetting(override or value or v, setting, k, name)
-				if result ~= nil then
+                if result ~= nil then
+					sbq.debugLogInfo(string.format("Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'", k, name, setting, v, result))
 					sbq.settings[k][name][setting] = result
 				end
 			end
