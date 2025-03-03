@@ -187,12 +187,21 @@ function sbq.assignSettingValues()
 	end
 end
 
+function sbq.fetchSettingValueAndType(setting, group, name)
+	if group and name then
+		return sbq.settings[group][name][setting], type(sbq.defaultSettings[group][name][setting])
+	else
+		return sbq.settings[setting], type(sbq.defaultSettings[setting])
+	end
+end
+
 function sbq.assignSettingValue(setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
 	local widget = sbq.settingWidgets[settingIdentifier] or _ENV[settingIdentifier]
-	local value = ((group and name) and sbq.settings[group][name][setting]) or sbq.settings[setting]
 	local locked = sbq.checkLockedSetting(setting, group, name)
-	local valueType = type(((group and name) and sbq.defaultSettings[group][name][setting]) or sbq.defaultSettings[setting])
+	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
+
+	sbq.logInfo({ settingIdentifier, valueType, value }, 2)
 	if not widget then
 		return
 	end
@@ -424,11 +433,11 @@ function sbq.widgetScripts.infusedSizeVisible(setting, group, name)
 end
 function sbq.widgetScripts.infusedFadeVisible(setting, group, name)
 	local location = sbq.locations[name]
-	return location.infuseColor
+	return location.infuseColors
 end
 function sbq.widgetScripts.infusedVisible(setting, group, name)
 	local location = sbq.locations[name]
-	if (not location.infuseType) or (not sbq.settings.infusePrefs[location.infuseType].pred) or (not sbq.query(sbq.settings.infuseSlots[location], {"item", "name"})) then
+	if (not location.infuseType) or (not sbq.settings.infusePrefs[location.infuseType].pred) or (not sbq.query(sbq.settings.infuseSlots[location.infuseType], {"item", "name"})) then
 		return false
 	end
 	return true
@@ -470,7 +479,7 @@ function sbq.widgetScripts.collapseEssenceStacks()
 end
 
 function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
-	local value = ((group and name) and sbq.settings[group][name][setting]) or sbq.settings[setting]
+	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
 	local locked = sbq.checkLockedSetting(setting, group, name)
 	local options = {}
 	if not sbq.voreConfig.selectValues[setting] then
