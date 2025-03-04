@@ -9,5 +9,11 @@ function init()
 	sbq.resetLounging = player.stopLounging
 	sbq.gender = humanoid.gender
 
+	message.setHandler("sbqResetOuchNoise", function ()
+		local ouchNoise = status.statusProperty("ouchNoise")
+		if ouchNoise then
+		  animator.setSoundPool("ouch", {ouchNoise})
+		end
+	end)
 	old.init()
 end
