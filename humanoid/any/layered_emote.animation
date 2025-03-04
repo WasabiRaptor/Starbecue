@@ -1,5 +1,10 @@
 {
 	"animatedParts" : {
+		"globalTagDefaults" : {
+			"emotePath" : "emote.png",
+			"emote_fgPath" : "",
+			"emote_bgPath" : ""
+		},
 		"parts" : {
 			"emote": {
 				"properties": {
@@ -11,7 +16,7 @@
 				},
 				"partStates": {
 					"emoteState": {
-						"idle": { "properties": { "image": "<bodyImagePath>emote/emote.png:<emoteStateAnim>.<emoteStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><emotePath>:<emoteStateAnim>.<emoteStateFrame>" } },
 						"blabber": "idle",
 						"shout": "idle",
 						"happy": "idle",
@@ -34,7 +39,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath>emote/emote.png:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<bodyImagePath><emotePath>:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					}
 				}
@@ -49,7 +54,7 @@
 				},
 				"partStates": {
 					"emoteState": {
-						"idle": { "properties": { "image": "<bodyImagePath>emote/emote_bg.png:<emoteStateAnim>.<emoteStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><emote_bgPath>:<emoteStateAnim>.<emoteStateFrame>" } },
 						"blabber": "idle",
 						"shout": "idle",
 						"happy": "idle",
@@ -72,7 +77,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath>emote/emote_bg.png:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<bodyImagePath><emote_bgPath>:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					}
 				}
@@ -87,7 +92,7 @@
 				},
 				"partStates": {
 					"emoteState": {
-						"idle": { "properties": { "image": "<bodyImagePath>emote/emote_fg.png:<emoteStateAnim>.<emoteStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath><emote_fgPath>:<emoteStateAnim>.<emoteStateFrame>" } },
 						"blabber": "idle",
 						"shout": "idle",
 						"happy": "idle",
@@ -110,7 +115,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath>emote/emote_fg.png:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<bodyImagePath><emote_fgPath>:<emoteStateAnim>.<emoteStateFrame>?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					}
 				}
