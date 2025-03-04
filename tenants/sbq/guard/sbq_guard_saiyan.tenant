@@ -1,5 +1,5 @@
 {
-	"name": "sbq_guard_speciesName",
+	"name": "sbq_guard_saiyan",
 	"priority": 52,
 
 	"colonyTagCriteria": {
@@ -7,7 +7,7 @@
 		"combat" : 8,
 		"door": 1,
 		"sbqVore" : 1,
-		"speciesName" : 8
+		"saiyan" : 8
 	},
 
 	"checkRequirements" : {},
@@ -23,7 +23,7 @@
 		{
 			"spawn": "npc",
 			"level" : 1,
-			"species": ["speciesName"],
+			"species": ["saiyan"],
 			"type": "sbqVoreFriendlyGuardTenant",
 			"overrides": {
 			}

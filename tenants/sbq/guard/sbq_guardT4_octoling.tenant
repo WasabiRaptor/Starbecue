@@ -1,5 +1,5 @@
 {
-	"name": "sbq_guardT4_speciesName",
+	"name": "sbq_guardT4_octoling",
 	"priority": 55,
 
 	"colonyTagCriteria": {
@@ -8,7 +8,7 @@
 		"combat" : 8,
 		"door": 1,
 		"sbqVore" : 1,
-		"speciesName" : 8
+		"octoling" : 8
 	},
 
 	"checkRequirements" : {},
@@ -24,7 +24,7 @@
 		{
 			"spawn": "npc",
 			"level" : 4,
-			"species": ["speciesName"],
+			"species": ["octoling"],
 			"type": "sbqVoreFriendlyGuardTenant",
 			"overrides": {
 			}
