@@ -5,6 +5,9 @@ function sbq.humanoidInit()
 
 	message.setHandler("sbqDoTransformation", function (_,_, ...)
 		sbq.doTransformation(...)
+    end)
+	message.setHandler("sbqHybridTransformation", function (_,_, ...)
+		sbq.hybridTransformation(...)
 	end)
 	message.setHandler("sbqRevertTF", function (_,_)
 		sbq.revertTF()
@@ -75,14 +78,33 @@ end
 -- 	end
 -- end
 
-function sbq.doTransformation(newIdentity, duration, ...)
+function sbq.hybridTransformation(newSpecies, duration, ...)
+	local newSpeciesConfig = root.speciesConfig(newSpecies)
+    local curIdentity = humanoid.getIdentity()
+	local newIdentity = {species = newSpecies}
+	if newSpecies ~= curIdentity.species then
+		local curSpeciesConfig = root.speciesConfig(curIdentity.species)
+		for _, v in ipairs(curSpeciesConfig.hybridAppendIdentity or {}) do
+			curIdentity[v[1]] = curIdentity[v[1]]..curIdentity[v[2]]
+		end
+
+		for k, v in pairs(curIdentity) do
+			if not newSpeciesConfig.hybridCopyIdentityBlacklist[k] then newIdentity[k] = v end
+		end
+		newIdentity.imagePath = curIdentity.species
+		sbq.doTransformation(newIdentity, duration, false, true, ...)
+	else
+		sbq.doTransformation(newIdentity, duration, true, true, ...) -- forces customization data to be cleared and regenerated
+	end
+end
+
+function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomization, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	if sbq.config.transformationBlacklist[humanoid.species()] then
 		if player then sbq.logWarn("Attempted to transform as blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformFromBlacklist") end
 		return false
 	end
 
-	local force = newIdentity.force
 	local currentIdentity =	humanoid.getIdentity()
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
@@ -188,7 +210,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		-- end
 	end
 
-	if not force then
+	if not forceIdentity then
 		newIdentity.name = currentName
 	end
 	if speciesFile.forceName then
@@ -198,10 +220,10 @@ function sbq.doTransformation(newIdentity, duration, ...)
 	newIdentity = sb.jsonMerge(
 		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
 		newIdentity,
-		((not force) and speciesIdentites[newIdentity.species]) or {},
+		((not forceIdentity) and speciesIdentites[newIdentity.species]) or {},
 		{gender = newIdentity.gender} -- preserve new gender if applicable
 	)
-	if not (force or speciesIdentites[newIdentity.species]) then
+	if not (forceIdentity or speciesIdentites[newIdentity.species]) then
 		-- for k, v in pairs(newIdentity) do
 		-- 	if type(v) == "string" and v:find("replace;") then
 		-- 		local newString = v:lower()
@@ -216,7 +238,7 @@ function sbq.doTransformation(newIdentity, duration, ...)
 		-- end
 	end
 
-	if (not speciesIdentites[newIdentity.species]) and not speciesFile.noUnlock then
+	if ((not speciesIdentites[newIdentity.species]) or forceCustomization) and not speciesFile.noUnlock then
 		speciesIdentites[newIdentity.species] = newIdentity
 		local speciesCount = 0
 		for _, _ in pairs(speciesIdentites) do
