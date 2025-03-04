@@ -23,12 +23,12 @@ function update(dt, fireMode, shiftHeld)
 			activeItem.setArmAngle(-math.pi / 4)
 			player.setScriptContext("starbecue")
 			player.callScript("sbq.revertTF")
-			item.consume(1)
+			if not player.isAdmin() then item.consume(1) end
 			init()
 		end
 	end
 end
 
 function transformationItemArgs(useType)
-	return { message = "sbqRevertTF", itemName = item.name(), consume = true }
+	return { message = "sbqRevertTF", itemName = item.name(), consume = not player.isAdmin() }
 end

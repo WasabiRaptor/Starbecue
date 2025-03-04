@@ -40,5 +40,5 @@ function transformationItemArgs(useType)
 		player.radioMessage("sbqTransformBindBlacklist")
 		return
 	end
-	return { message = "sbqDoTransformation", itemName = item.name(), args = config.getParameter("args"), consume = true }
+	return { message = "sbqDoTransformation", itemName = item.name(), args = config.getParameter("args"), consume = not player.isAdmin() }
 end

@@ -15,9 +15,9 @@ function update(dt, fireMode, shiftHeld)
 		end
 
 		player.giveItem({ name = "sbqMysteriousPotion", parameters = {
-			args = { sb.jsonMerge(humanoid.getIdentity(), { force = true }), 5 },
+			args = {humanoid.getIdentity(), config.getParameter("duration") or sbq.config.defaultTFDuration, true},
 		}})
-		item.consume(1)
+		if not player.isAdmin() then item.consume(1) end
 	end
 end
 
@@ -27,5 +27,5 @@ function transformationItemArgs(useType)
 		player.radioMessage("sbqTransformBindBlacklist")
 		return
 	end
-	return { message = "sbqDoTransformation", itemName = "sbqMysteriousPotion", consume = true, args = {sb.jsonMerge(humanoid.getIdentity(), {force = true}), 5} }
+	return { message = "sbqDoTransformation", itemName = "sbqMysteriousPotion", consume = not player.isAdmin(), args = {humanoid.getIdentity(), config.getParameter("duration") or sbq.config.defaultTFDuration, true} }
 end
