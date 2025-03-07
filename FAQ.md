@@ -27,14 +27,14 @@
 > Lounge positions in starbound must be pre-defined in the entity data, therefore they cannot be added to on the fly, I decided that 16 slots is a reasonable amount to be the limit.
 
 ### Q: If I get transformed and upgrade my ship while a different species will it break?
-> Thats a 'bug' in retail from modifying player data, and fixed in SBQ-Engine by having the ship's species as a seperate value in the data.
+> Thats a 'bug' in retail from modifying player data, and fixed in SBQ-Engine by having the ship's species as a seperate value in the player/ship data.
 
 ### Q: What species are supported?
 > Theres a list of the species supported in `features.md`
 
 ### Q: Can X species be supported?
 > It might! and I'm gonna need yooooour help! Use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) which will work with most species, and then send me the files afterwards.
-> I take requests from patrons for species compat from time to time, it will probably be faster if you do it yourself, its not very hard.
+> I take requests from patrons for species compat from time to time, it will probably be faster if you do it yourself, its not very hard, and a fan has provided a video tutorial that will cover how to do most custom races.
 
 ### SSVM
 > Hasn't been a dependency for years
