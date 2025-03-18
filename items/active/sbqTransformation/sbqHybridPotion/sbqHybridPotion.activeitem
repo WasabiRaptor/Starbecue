@@ -4,27 +4,25 @@
 	"price" : 600,
 	"maxStack" : 64,
 	"rarity" : "uncommon",
-	"description" : ":hybridPotionDesc",
-	"shortdescription" : ":hybridPotionName",
+	"description" : ":invalidPotionDesc",
+	"shortdescription" : ":invalidPotionName",
 	"tooltipKind" : "tool",
 	"category" : "Potion",
 	"twoHanded" : false,
 	"itemTags" : ["sbqTransformation"],
 
-	"inventoryIcon" : "sbqPotion.png",
-	"largeImage" : "sbqPotionLarge.png",
+	"inventoryIcon" : "potion.png",
+	"largeImage" : "potionLarge.png",
 
 	"animationParts" : {
-		"potion" : "sbqPotion.png"
+		"potion" : "potion.png"
 	},
 
 	"animation" : "/items/active/sbqTransformation/sbqPotion.animation",
 
-	"species" : "sbq/naga",
-
 	"scripts" : [
 		"/items/active/sbqTransformation/sbqHybridPotion/sbqHybridPotion.lua"
 	],
-	"builder" : "/scripts/item/SBQ_build_desc.lua"
+	"builder" : "/items/active/sbqTransformation/sbqHybridPotion/sbqHybridPotionBuilder.lua"
 
 }

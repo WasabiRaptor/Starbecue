@@ -43,6 +43,9 @@ end
 function sbq.refreshRemapTags()
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
 	local speciesConfig = root.speciesConfig(humanoid.species())
+	if speciesConfig.useImagePathSpecies then
+		speciesConfig = root.speciesConfig(humanoid.getIdentity().imagePath or humanoid.species())
+	end
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
 		local sourceColorMap = sbq.query(speciesConfig, {"colorRemapSources", tag})
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end

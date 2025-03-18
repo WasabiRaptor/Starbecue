@@ -17,15 +17,18 @@ Species.Naga = Naga
 Naga.__index = Naga
 
 function Naga:init()
-	local identity = humanoid.getIdentity()
-    local speciesConfig = root.speciesConfig(identity.imagePath)
-    if speciesConfig then
-		local path = "/humanoid/"..identity.imagePath.."/"
-		status.setStatusProperty("ouchNoise", (identity.gender == "male" and speciesConfig.ouchNoises[1]) or speciesConfig.ouchNoises[2])
-		world.sendEntityMessage(entity.id(), "sbqResetOuchNoise")
-		local speciesAnimation = sb.jsonMerge(root.assetJson(speciesConfig.animationConfig or "/humanoid/any/humanoid.animation"), root.fetchConfigArray(speciesConfig.animationCustom, path))
-		for k, v in pairs(speciesAnimation.globalTagDefaults) do
-			if not identity[k] then animator.setGlobalTag(k, v) end
+    local identity = humanoid.getIdentity()
+	local hybridConfig = root.speciesConfig(identity.species)
+	if identity.imagePath then
+		local speciesConfig = root.speciesConfig(identity.imagePath)
+		if speciesConfig then
+			local path = "/humanoid/"..identity.imagePath.."/"
+			status.setStatusProperty("ouchNoise", (identity.gender == "male" and speciesConfig.ouchNoises[1]) or speciesConfig.ouchNoises[2])
+			world.sendEntityMessage(entity.id(), "sbqResetOuchNoise")
+			local speciesAnimation = sb.jsonMerge(root.assetJson(speciesConfig.animationConfig or "/humanoid/any/humanoid.animation"), root.fetchConfigArray(speciesConfig.animationCustom, path))
+            for k, v in pairs(speciesAnimation.globalTagDefaults) do
+                if (not identity[k]) and (not speciesConfig.colorRemapGlobalTags[k]) then animator.setGlobalTag(k, v) end
+            end
 		end
 	end
 end

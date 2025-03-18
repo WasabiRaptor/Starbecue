@@ -102,7 +102,10 @@ end
 
 function setupReplaceColors(config, parameters, identity)
 	if not identity then return end
-	local speciesFile = root.speciesConfig(identity.species or "")
+    local speciesFile = root.speciesConfig(identity.species or "")
+	if speciesFile and speciesFile.useImagePathSpecies then
+		speciesFile = root.speciesConfig(identity.imagePath or identity.species or "")
+	end
 	if not speciesFile then return end
 	if not speciesFile.baseColorMap then return end
 	local identityTags = {

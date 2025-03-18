@@ -8,10 +8,8 @@ end
 
 function update(dt, fireMode, shiftHeld)
 	if not self.useTimer and fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-		if sbq.tableMatches(config.getParameter("args")[1], humanoid.getIdentity()) then return end
-		if config.getParameter("invalidPotion") then
+		if not config.getParameter("species") then
 			animator.playSound("error")
-			player.radioMessage("sbqTransformIntoBlacklist")
 			return
 		end
 		self.useTimer = 0
@@ -35,9 +33,8 @@ function update(dt, fireMode, shiftHeld)
 end
 
 function transformationItemArgs(useType)
-	if config.getParameter("invalidPotion") then
+	if not config.getParameter("species") then
 		animator.playSound("error")
-		player.radioMessage("sbqTransformBindBlacklist")
 		return
 	end
 	return { message = "sbqHybridTransformation", itemName = item.name(), args = {config.getParameter("species"), config.getParameter("duration") or sbq.config.defaultTFDuration}, consume = not player.isAdmin() }

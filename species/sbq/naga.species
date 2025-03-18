@@ -103,7 +103,34 @@
 			"characterImage" : "/interface/title/humanfemale.png"
 		}
 	],
-	"identityCopyBlacklist" : { // values that don't get copied when making a hybrid with another species
+	"hybridSpeciesBlacklist" : {
+		"sbq/LokiVulpix/Auri" : true,
+		// "sbq/LokiVulpix/Loki" : true,
+		// "sbq/Auroria/Auroria" : true,
+		// "sbq/ambi_sykhar/Ambi" : true,
+		"sbq/Zygahedron/Zevi" : true,
+		"sbq/Fevix/Sandy" : true,
+		"sbq/vaporeon" : true,
+		"sbq/vaporeonGiant" : true,
+		"sbq/LokiVulpix/Socks" : true,
+		"sbq/flareon" : true,
+		// "sbq/FFWizard/Helena" : true,
+		// "sbq/FFWizard/hellhound" : true,
+		// "sbq/LokiVulpix/Clover" : true,
+		// "sbq/meowscarada" : true,
+		// "sbq/nickit_anthro" : true,
+		// "sbq/Xeronious/Batty" : true,
+		// "sbq/Ferrilata_/Ferri" : true,
+		// "sbq/AkariKaen/Akari" : true,
+		"sbq/slime" : true,
+		"sbq/Xeronious/Kaiju" : true,
+		"sbq/IcyVixen/Fray" : true,
+		"sbq/LakotaAmitola/ziellekDragon" : true,
+		"sbq/LakotaAmitola/Lakota" : true,
+		"sbq/Bestethan/Dex" : true,
+		"sbq/naga" : true
+	},
+	"hybridCopyIdentityBlacklist" : { // values that don't get copied when making a hybrid with another species
 		"pants" : true,
 		"shirt" : true,
 		"pantsColor" : true,
@@ -220,19 +247,16 @@
 		{ "d9c189" : "eaeaea", "a38d59" : "b8b8b8", "735e3a" : "828282" }
 	],
 
+	"useImagePathSpecies" : true,
 	"animationCustom" : [
 		"/humanoid/any/layered_emote.animation",
-		"/humanoid/any/sbqVoreParts/humanoidPredTop.animation",
+		"/humanoid/any/humanoidPredTop.animation",
 		"/humanoid/any/sbqVoreParts/cock.animation",
 		"/humanoid/any/sbqVoreParts/pussy.animation",
 		"/humanoid/any/voreOccupants.animation",
 		{
 			"globalTagDefaults":{
-				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
-				"tailImage" : "tail.png",
-				"emotePath" : "emote/emote.png",
-				"emote_fgPath" : "emote/emote_fg.png",
-				"emote_bgPath" : "emote/emote_bg.png"
+				"nagaMaskPath" : "/humanoid/sbq/naga/naga_mask/"
 			},
 			"animatedParts" : {
 				"parts" : {

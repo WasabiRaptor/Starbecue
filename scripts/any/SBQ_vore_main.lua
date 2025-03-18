@@ -998,9 +998,12 @@ function _Location:setInfusionData()
 		end
 	end
 	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-	local infuseSpeciesConfig = root.speciesConfig(sbq.query(infusedItem, { "parameters", "npcArgs", "npcSpecies" }) or
-		"") or (sbq.query(infusedItem, { "parameters", "speciesConfig" }) or {})
 	local infuseIdentity = sbq.query(infusedItem, { "parameters", "npcArgs", "npcParam", "identity" }) or {}
+	local infuseSpeciesConfig = root.speciesConfig(infuseIdentity.species or sbq.query(infusedItem, { "parameters", "npcArgs", "npcSpecies" }) or "") or (sbq.query(infusedItem, { "parameters", "speciesConfig" }) or {}) or {}
+	if infuseSpeciesConfig.useImagePathSpecies then
+		infuseSpeciesConfig = root.speciesConfig(infuseIdentity.imagePath or infuseIdentity.species) or {}
+	end
+
 	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
 		infusedItem.name = self.infusedItemType
 	end
@@ -1050,7 +1053,10 @@ function _Location:setInfusionData()
 	end
 
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
-	local speciesConfig = root.speciesConfig(humanoid.species())
+    local speciesConfig = root.speciesConfig(humanoid.species())
+	if speciesConfig.useImagePathSpecies then
+		speciesConfig = root.speciesConfig(humanoid.getIdentity().imagePath or humanoid.species())
+	end
 	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
 		local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", tag })
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end

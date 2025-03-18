@@ -271,7 +271,11 @@
 		["bodyDirectives", "shirt"],
 		["bodyDirectives", "shirtColor"],
 		["bodyDirectives", "pants"],
-		["bodyDirectives", "pantsColor"]
+		["bodyDirectives", "pantsColor"],
+		["hairDirectives", "bodyDirectives", true], // copy instead of append
+		["facialHairDirectives", "bodyDirectives", true],
+		["facialMaskDirectives", "bodyDirectives", true],
+		["emoteDirectives", "bodyDirectives", true]
 	],
 
 	"infuseData" : [

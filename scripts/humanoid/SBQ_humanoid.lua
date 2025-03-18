@@ -80,20 +80,35 @@ end
 
 function sbq.hybridTransformation(newSpecies, duration, ...)
 	local newSpeciesConfig = root.speciesConfig(newSpecies)
-    local curIdentity = humanoid.getIdentity()
+	local curIdentity = humanoid.getIdentity()
 	local newIdentity = {species = newSpecies}
 	if newSpecies ~= curIdentity.species then
 		local curSpeciesConfig = root.speciesConfig(curIdentity.species)
+        if (newSpeciesConfig.hybridSpeciesBlacklist or {})[curIdentity.species] then
+            player.radioMessage("sbqHybridBlacklisted")
+            sbq.logWarn("Attempted to hybridize blacklisted species for " .. newSpecies .. ": " .. newIdentity.species)
+            return
+        end
+		if not curSpeciesConfig.voreConfig then
+			player.radioMessage("sbqHybridUnsupported")
+		end
+
 		for _, v in ipairs(curSpeciesConfig.hybridAppendIdentity or {}) do
-			curIdentity[v[1]] = curIdentity[v[1]]..curIdentity[v[2]]
+			if v[3] then
+				curIdentity[v[1]] = curIdentity[v[2]]
+			else
+				curIdentity[v[1]] = curIdentity[v[1]]..curIdentity[v[2]]
+			end
 		end
 
 		for k, v in pairs(curIdentity) do
-			if not newSpeciesConfig.hybridCopyIdentityBlacklist[k] then newIdentity[k] = v end
+			if not (newSpeciesConfig.hybridCopyIdentityBlacklist or {})[k] then newIdentity[k] = v end
 		end
 		newIdentity.imagePath = curIdentity.species
-		sbq.doTransformation(newIdentity, duration, false, true, ...)
-	else
+		newIdentity.species = newSpecies
+		sbq.doTransformation(newIdentity, duration, true, true, ...)
+    else
+		newIdentity.imagePath = newSpecies
 		sbq.doTransformation(newIdentity, duration, true, true, ...) -- forces customization data to be cleared and regenerated
 	end
 end
@@ -188,6 +203,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		and root.assetJson("/universe_server.config:speciesShips")[newIdentity.species]
 		and root.assetJson("/ai/ai.config:species")[newIdentity.species]
 		and root.assetJson("/quests/quests.config:initialquests")[newIdentity.species]
+		and root.assetJson("/player.config:defaultCodexes")[newIdentity.species]
 	) then
 		player.radioMessage("sbqTransformNPCOnly")
 		sbq.logWarn("Attempted to transform into NPC only species: "..newIdentity.species)
