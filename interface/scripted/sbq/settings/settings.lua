@@ -201,7 +201,6 @@ function sbq.assignSettingValue(setting, group, name)
 	local locked = sbq.checkLockedSetting(setting, group, name)
 	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
 
-	sbq.logInfo({ settingIdentifier, valueType, value }, 2)
 	if not widget then
 		return
 	end
