@@ -3,5 +3,106 @@
 	"/humanoid/any/sbqVoreParts/tail.animation",
 	"/humanoid/any/sbqVoreParts/cock.animation",
 	"/humanoid/any/sbqVoreParts/balls.animation",
-	"/humanoid/any/sbqVoreParts/pussy.animation"
-]
+	"/humanoid/any/sbqVoreParts/pussy.animation",
+{
+	"globalTagDefaults" : {
+		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png"
+	},
+	"animatedParts": {
+		"stateTypes": {
+		},
+		"parts": {
+			"legs_fg": {
+				"properties": {
+					"centered": true,
+					"zLevel": 2,
+					"anchorPart": "body",
+					"bodyFullbright" : true,
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
+						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
+						"none": { "properties": {} }
+					},
+					"bodyHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"starpounds" : {
+						"true" : { "properties":{}}
+					}
+				}
+			},
+			"legs_fg_cosmetic": {
+				"properties": {
+					"centered": true,
+					"zLevel": 2.1,
+					"anchorPart": "body",
+					"processingDirectives" : "<legsArmorDirectives>"
+				},
+				"partStates": {
+					"bodyState": {
+						"idle": { "properties": { "image": "<legsArmor>:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
+						"duck": { "properties": { "image": "<legsArmor>:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : "duck",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck",
+						"none": { "properties": {} }
+					},
+					"bodyDanceState" : {
+						"dance": { "properties": { "image": "<legsArmor>:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
+						"none": { "properties": {} }
+					},
+					"hiddenState" : {
+						"none": { "properties": {} }
+					},
+					"clothesHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"legsCosmeticHiddenState" : {
+						"none": { "properties": {} }
+					},
+					"starpounds" : {
+						"true" : { "properties":{}}
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups": {
+	},
+	"sounds": {
+	},
+	"particleEmitters": {
+	}
+
+}]
