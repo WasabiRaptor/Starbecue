@@ -43,7 +43,7 @@ function Default:settingAnimations()
 		self:doAnimations((sbq.settings.pussy and sbq.voreConfig.pussyShow) or sbq.voreConfig.pussyHide)
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 
-		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock then
+		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock and not sbq.checkStarpounds("legs") then
 			local leakiness = ((sbq.settings.cockLeakiness^2 * lust)^2)*10*math.max(0.25, ((Occupants.locations.cock or {}).count or 0) + ((Occupants.locations.balls or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
@@ -55,7 +55,7 @@ function Default:settingAnimations()
 			end
 		end
 
-		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy then
+		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy and not sbq.checkStarpounds("legs") then
 			local leakiness = ((sbq.settings.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, ((Occupants.locations.womb or {}).count or 0) + ((Occupants.locations.pussy or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
@@ -75,7 +75,7 @@ function Default:settingAnimations()
 		end
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
-		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts then
+		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts and not sbq.checkStarpounds("chest") then
 			local leakiness = ((sbq.settings.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, ((Occupants.locations.breasts or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)

@@ -877,6 +877,7 @@ function _State:emergencyEscape(occupant)
 end
 
 local function climaxBurst(emitter, burstChance)
+	if sbq.checkStarpounds("legs") then return end
 	animator.setParticleEmitterBurstCount(emitter, burstChance * 10)
 	animator.burstParticleEmitter(emitter)
 	if math.random() < burstChance then
