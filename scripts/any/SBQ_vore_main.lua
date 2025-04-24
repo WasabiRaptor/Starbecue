@@ -1264,7 +1264,7 @@ function _Location:updateOccupancy(dt)
 		local infuseCount = 0
 		if self.infuseType and self.infuseSize then
 			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-			addVisual = ((((infusedItem or {}).parameters or {}).preySize or 0) * self.settings.infusedSize)
+			infuseSize = ((sbq.query(infusedItem, { "parameters", "preySize"}) or 0 ) * self.settings.infusedSize)
 			infuseCount = self.settings.infusedSize
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(
