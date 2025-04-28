@@ -8,6 +8,7 @@ dialogueBox = {
 	textSound = nil,
 }
 local inital = true
+local doScrollText = true
 function init()
 	_ENV.metagui.inputData.sbq.dialogue = nil
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()), function(actions)
@@ -21,7 +22,9 @@ function init()
 	end)
 	message.setHandler("sbqCloseDialogueBox", function ()
 		pane.dismiss()
-	end)
+    end)
+    player.setScriptContext("starbecue")
+	doScrollText = player.callScript("sbq.checkSetting", "scrollText")
 
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
@@ -203,11 +206,15 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	dialogueBox.textSound = results.textSound
 	dialogueBox.textSpeed = results.textSpeed
 	dialogueBox.textVolume = results.textVolume or 1
-	dialogueBox.textPosition = 1
-	if inital then
-		sbq.timer(nil, 0.25, dialogueBox.scrollText)
-	else
-		dialogueBox.scrollText()
+    dialogueBox.textPosition = 1
+	if doScrollText then
+		if inital then
+			sbq.timer(nil, 0.25, dialogueBox.scrollText)
+		else
+			dialogueBox.scrollText()
+		end
+    else
+		_ENV.dialogueLabel:setText(dialogueBox.text)
 	end
 	dismissTime = results.dismissTime
 	if dismissTime and not dialogue.result.jump then

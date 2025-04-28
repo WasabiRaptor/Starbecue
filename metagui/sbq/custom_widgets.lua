@@ -147,7 +147,7 @@ function widgets.sbqSetting:init(base, param)
 	end
 	if param then
 		if param.makeLabel then
-			param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", mode = "horizontal", children = {
+			param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", expandMode = {1,0}, mode = "horizontal", children = {
 				param,
 				{ type = "label", id = sbq.widgetSettingIdentifier(param).."Label", text = ":"..param.setting, width = param.labelWidth}
 			} }

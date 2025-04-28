@@ -5,8 +5,14 @@ local textSpeed = _ENV.metagui.cfg.speed
 local textPosition = 1
 local textVolume = _ENV.metagui.cfg.volume or 1
 function init()
-	scrollText()
+	player.setScriptContext("starbecue")
+	if player.callScript("sbq.checkSetting", "scrollText") then
+		scrollText()
+	else
+		_ENV.dialogueLabel:setText(dialogueBox.text)
+	end
 end
+
 function update()
 	sbq.checkTimers(script.updateDt())
 end
@@ -27,6 +33,7 @@ function scrollText()
 	textPosition = textPosition + 1
 	sbq.timer(nil, (textSpeed or 1) * sbq.config.textSpeedMul, scrollText)
 end
+
 function findNextRealCharacter()
 	local char = string.sub(text, textPosition, textPosition)
 	if char == "\\" then
