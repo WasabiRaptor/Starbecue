@@ -50,11 +50,11 @@ function findNextRealCharacter()
 	end
     local char = string.sub(text, pos1, pos2)
 
-    local semicolon = string.find(text, ";", textPosition, true)
-	local space = string.find(text, " ", textPosition, true)
+    local semicolon = string.find(text, ";", pos2+1, true)
+	local space = string.find(text, " ", pos2+1, true)
 
 	if char == "^" and semicolon and ((not space) or (space > semicolon)) then
-		textPosition = utf8.len(text, semicolon + 1) or math.huge
+		textPosition = utf8.len(text, 1, semicolon + 1) or utf8.len(text) or math.huge
 	else
 		return true
 	end

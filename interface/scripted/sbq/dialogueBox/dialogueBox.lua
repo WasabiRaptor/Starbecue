@@ -236,7 +236,7 @@ function dialogueBox.scrollText()
 	if dialogueBox.textPosition > utf8.len(dialogueBox.text) then
 		return
 	end
-	while not findNextRealCharacter() do
+	while not dialogueBox.findNextRealCharacter() do
 	end
 	local pos1 = utf8.offset(dialogueBox.text, dialogueBox.textPosition)
 	local pos2 = utf8.offset(dialogueBox.text, dialogueBox.textPosition + 1) - 1
@@ -258,7 +258,7 @@ function dialogueBox.scrollText()
 end
 
 
-function findNextRealCharacter()
+function dialogueBox.findNextRealCharacter()
 	local pos1 = utf8.offset(dialogueBox.text, dialogueBox.textPosition)
     local pos2 = utf8.offset(dialogueBox.text, dialogueBox.textPosition + 1) - 1
 	if dialogueBox.textPosition == utf8.len(dialogueBox.text) then
@@ -266,11 +266,11 @@ function findNextRealCharacter()
 	end
 	local char = string.sub(dialogueBox.text, pos1, pos2)
 
-	local semicolon = string.find(dialogueBox.text, ";", dialogueBox.textPosition, true)
-	local space = string.find(dialogueBox.text, " ", dialogueBox.textPosition, true)
+	local semicolon = string.find(dialogueBox.text, ";", pos2+1, true)
+	local space = string.find(dialogueBox.text, " ", pos2+1, true)
 
 	if char == "^" and semicolon and ((not space) or (space > semicolon)) then
-		dialogueBox.textPosition = utf8.len(dialogueBox.text, semicolon + 1) or math.huge
+		dialogueBox.textPosition = utf8.len(dialogueBox.text, 1, semicolon + 1) or utf8.len(dialogueBox.text) or math.huge
 	else
 		return true
 	end
