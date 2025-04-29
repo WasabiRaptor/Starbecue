@@ -22,8 +22,8 @@ function init()
 	end)
 	message.setHandler("sbqCloseDialogueBox", function ()
 		pane.dismiss()
-    end)
-    player.setScriptContext("starbecue")
+	end)
+	player.setScriptContext("starbecue")
 	doScrollText = player.callScript("sbq.checkSetting", "scrollText")
 
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
@@ -162,8 +162,12 @@ end
 local dismissTime
 function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	if path then
-		if not dialogueProcessor.getDialogue(path, player.id(), dialogueTree, dialogueTreeTop) then dialogue.finished = true return false end
-	elseif dialogue.finished then return true
+		if not dialogueProcessor.getDialogue(path, player.id(), dialogueTree, dialogueTreeTop) then
+			dialogue.finished = true
+			return false
+		end
+	elseif dialogue.finished then
+		return true
 	else
 		dialogue.position = dialogue.position + 1
 	end
@@ -188,7 +192,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		canvas:clear()
 		local portrait = world.entityPortrait(results.source, results.entityPortrait)
 		if portrait then
-			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), {0,6*4}), {4,4})
+			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), { 0, 6 * 4 }), { 4, 4 })
 		end
 	else
 		_ENV.imagePortrait:setVisible(false)
@@ -206,32 +210,42 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	dialogueBox.textSound = results.textSound
 	dialogueBox.textSpeed = results.textSpeed
 	dialogueBox.textVolume = results.textVolume or 1
-    dialogueBox.textPosition = 1
+	dialogueBox.textPosition = 1
+
+	dismissTime = results.dismissTime
+	if dismissTime and not dialogue.result.jump then
+		_ENV.dialogueCont:setVisible(false)
+	end
+	sbq.timerList.dismissAfterTime = nil
+
 	if doScrollText then
 		if inital then
 			sbq.timer(nil, 0.25, dialogueBox.scrollText)
 		else
 			dialogueBox.scrollText()
 		end
-    else
+	else
 		_ENV.dialogueLabel:setText(dialogueBox.text)
+		dialogueBox.textPosition = utf8.len(dialogueBox.text) + 1
+		dialogueBox.dismissAfterTimer(dismissTime)
 	end
-	dismissTime = results.dismissTime
-	if dismissTime and not dialogue.result.jump then
-		_ENV.dialogueCont:setVisible(false)
-	end
-	sbq.timerList.dismissAfterTime = nil
 	return true
 end
+
 function dialogueBox.scrollText()
-	if dialogueBox.textPosition > string.len(dialogueBox.text) then
-		dialogueBox.dismissAfterTimer(dismissTime)
+	if dialogueBox.textPosition > utf8.len(dialogueBox.text) then
 		return
 	end
-	while not dialogueBox.findNextRealCharacter() do
+	while not findNextRealCharacter() do
 	end
-	_ENV.dialogueLabel:setText(string.sub(dialogueBox.text, 1, dialogueBox.textPosition))
-	if dialogueBox.textSound and string.sub(dialogueBox.text, dialogueBox.textPosition) ~= " " then
+	local pos1 = utf8.offset(dialogueBox.text, dialogueBox.textPosition)
+	local pos2 = utf8.offset(dialogueBox.text, dialogueBox.textPosition + 1) - 1
+	if dialogueBox.textPosition == utf8.len(dialogueBox.text) then
+		pos2 = string.len(dialogueBox.text)
+	end
+	_ENV.dialogueLabel:setText(string.sub(dialogueBox.text, 1, pos2))
+
+	if dialogueBox.textSound and string.sub(dialogueBox.text, pos1, pos2) ~= " " then
 		local sound = dialogueBox.textSound
 		while type(sound) == "table" do
 			sound = sound[math.random(#sound)]
@@ -242,12 +256,21 @@ function dialogueBox.scrollText()
 	dialogueBox.textPosition = dialogueBox.textPosition + 1
 	sbq.timer(nil, (dialogueBox.textSpeed or 1) * sbq.config.textSpeedMul, dialogueBox.scrollText)
 end
-function dialogueBox.findNextRealCharacter()
-	local char = string.sub(dialogueBox.text, dialogueBox.textPosition, dialogueBox.textPosition)
-	if char == "\\" then
-		dialogueBox.textPosition = dialogueBox.textPosition + 2
-	elseif char == "^" then
-		dialogueBox.textPosition = string.find(dialogueBox.text, ";", dialogueBox.textPosition, true) + 1
+
+
+function findNextRealCharacter()
+	local pos1 = utf8.offset(dialogueBox.text, dialogueBox.textPosition)
+    local pos2 = utf8.offset(dialogueBox.text, dialogueBox.textPosition + 1) - 1
+	if dialogueBox.textPosition == utf8.len(dialogueBox.text) then
+		pos2 = string.len(dialogueBox.text)
+	end
+	local char = string.sub(dialogueBox.text, pos1, pos2)
+
+	local semicolon = string.find(dialogueBox.text, ";", dialogueBox.textPosition, true)
+	local space = string.find(dialogueBox.text, " ", dialogueBox.textPosition, true)
+
+	if char == "^" and semicolon and ((not space) or (space > semicolon)) then
+		dialogueBox.textPosition = utf8.len(dialogueBox.text, semicolon + 1) or math.huge
 	else
 		return true
 	end

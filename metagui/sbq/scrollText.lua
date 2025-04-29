@@ -18,28 +18,43 @@ function update()
 end
 
 function scrollText()
-	if textPosition > string.len(text) then return end
-	while not findNextRealCharacter() do
+    if textPosition > utf8.len(text) then
+        return
+    end
+    while not findNextRealCharacter() do
+    end
+    local pos1 = utf8.offset(text, textPosition)
+    local pos2 = utf8.offset(text, textPosition + 1) - 1
+	if textPosition == utf8.len(text) then
+		pos2 = string.len(text)
 	end
-	_ENV.dialogueLabel:setText(string.sub(text, 1, textPosition))
-	if textSound and string.sub(text, textPosition) ~= " " then
-		local sound = textSound
-		while type(sound) == "table" do
-			sound = sound[math.random(#sound)]
-		end
-		pane.playSound(sound, nil, textVolume)
-	end
+    _ENV.dialogueLabel:setText(string.sub(text, 1, pos2))
 
-	textPosition = textPosition + 1
-	sbq.timer(nil, (textSpeed or 1) * sbq.config.textSpeedMul, scrollText)
+    if textSound and string.sub(text, pos1, pos2) ~= " " then
+        local sound = textSound
+        while type(sound) == "table" do
+            sound = sound[math.random(#sound)]
+        end
+        pane.playSound(sound, nil, textVolume)
+    end
+
+    textPosition = textPosition + 1
+    sbq.timer(nil, (textSpeed or 1) * sbq.config.textSpeedMul, scrollText)
 end
 
 function findNextRealCharacter()
-	local char = string.sub(text, textPosition, textPosition)
-	if char == "\\" then
-		textPosition = textPosition + 2
-	elseif char == "^" then
-		textPosition = string.find(text, ";", textPosition, true) + 1
+    local pos1 = utf8.offset(text, textPosition)
+    local pos2 = utf8.offset(text, textPosition + 1) - 1
+	if textPosition == utf8.len(text) then
+		pos2 = string.len(text)
+	end
+    local char = string.sub(text, pos1, pos2)
+
+    local semicolon = string.find(text, ";", textPosition, true)
+	local space = string.find(text, " ", textPosition, true)
+
+	if char == "^" and semicolon and ((not space) or (space > semicolon)) then
+		textPosition = utf8.len(text, semicolon + 1) or math.huge
 	else
 		return true
 	end
