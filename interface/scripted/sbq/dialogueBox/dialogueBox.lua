@@ -218,6 +218,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	end
 	sbq.timerList.dismissAfterTime = nil
 
+	sbq.debugLogInfo(dialogueBox.text, 1)
 	if doScrollText then
 		if inital then
 			sbq.timer(nil, 0.25, dialogueBox.scrollText)

@@ -5,11 +5,12 @@ local textSpeed = _ENV.metagui.cfg.speed
 local textPosition = 1
 local textVolume = _ENV.metagui.cfg.volume or 1
 function init()
-	player.setScriptContext("starbecue")
-	if player.callScript("sbq.checkSetting", "scrollText") then
+    player.setScriptContext("starbecue")
+	sbq.debugLogInfo(text, 1)
+    if player.callScript("sbq.checkSetting", "scrollText") then
 		scrollText()
 	else
-		_ENV.dialogueLabel:setText(dialogueBox.text)
+		_ENV.dialogueLabel:setText(text)
 	end
 end
 
