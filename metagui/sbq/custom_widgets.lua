@@ -820,7 +820,7 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	lastMenu = hooks
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
 end
-function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
+function mg.preyDialogueText(eid, pos, text, sound, speed, volume, id, lifetime)
 	if not pos or not text or text == "" then return nil end -- invalid argument passed
 	local menuId = "preyDialogueText:" .. (id or sb.makeRandomSource():randu64())
 	local cfg = {
@@ -833,7 +833,9 @@ function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 		text = text,
 		textSound = sound,
 		speed = speed,
-		volume = volume
+        volume = volume,
+        sourceRadius = -1,
+		dismissPrev = false,
 	}
 
 	local bm = theme.metrics.borderMargins.contextMenu
@@ -847,7 +849,7 @@ function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 	}
 	theme.modifyContextMenu(cfg) -- give theme a chance to edit whatever it likes
 
-	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, eid or 0)
 end
 
 mg.registerUninit(function() -- close any paired menus when this pane closes
