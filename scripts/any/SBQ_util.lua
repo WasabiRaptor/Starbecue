@@ -444,15 +444,15 @@ function sbq.logError(input, pretty)
 	sb.logError(sbq.logOutput(input,pretty))
 end
 function sbq.debugLogInfo(input, pretty)
-	if not sbq.config.debug then return end
+	if not (sbq.voreConfig or sbq.config or {}).debug then return end
 	sb.logInfo(sbq.logOutput(input,pretty))
 end
 function sbq.debugLogWarn(input, pretty)
-	if not sbq.config.debug then return end
+	if not (sbq.voreConfig or sbq.config or {}).debug then return end
 	sb.logWarn(sbq.logOutput(input,pretty))
 end
 function sbq.debugLogError(input, pretty)
-	if not sbq.config.debug then return end
+	if not (sbq.voreConfig or sbq.config or {}).debug then return end
 	sb.logError(sbq.logOutput(input,pretty))
 end
 
