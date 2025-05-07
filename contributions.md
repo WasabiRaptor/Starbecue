@@ -73,3 +73,6 @@
 	Octoling Compatibility
 	Saiyan Compatibility
 	Lamia Compatibility
+
+# Seyvrii
+	Space Skunks Compatibility
