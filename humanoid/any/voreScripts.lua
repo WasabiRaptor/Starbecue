@@ -573,12 +573,10 @@ end
 
 function default:digested(name, action, target, item, digestType, drop, ...)
 	local occupant = Occupants.entityId[tostring(target)]
-	local position = entity.position()
 	local location
 	local delay = 0
 	if occupant then
 		location = occupant:getLocation()
-		position = occupant:position()
 		occupant.flags.digesting = true
 		occupant.flags.digestedLocation = occupant.location
 		occupant.flags.digestType = digestType
@@ -600,7 +598,9 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
 	sbq.timer(target .. "Digesting", delay, function()
 		local occupant = Occupants.entityId[tostring(target)]
+		local position = entity.position()
 		if occupant then
+			position = occupant:position()
 			occupant.flags.digesting = false
 			occupant.flags.digested = true
 			occupant:refreshLocation()
