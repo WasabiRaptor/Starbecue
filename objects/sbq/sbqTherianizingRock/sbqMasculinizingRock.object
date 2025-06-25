@@ -1,10 +1,10 @@
 {
-  "objectName" : "sbqTherianizingRock",
-  "colonyTags" : ["therian"],
+  "objectName" : "sbqMasculinizingRock",
+  "colonyTags" : ["gender"],
   "rarity" : "Common",
 
-  "description" : ":therianizingRockDesc",
-  "shortdescription" : ":therianizingRockShortDesc",
+  "description" : ":masculinizingRockDesc",
+  "shortdescription" : ":masculinizingRockShortDesc",
   "race" : "generic",
 
   "particleEmitter" : {
@@ -30,10 +30,10 @@
     }
   },
 
-  "inventoryIcon" : "sbqTherianizingRock.png?border=1;000000FF;00000000;",
+  "inventoryIcon" : "sbqMasculinizingRock.png?border=1;000000FF;00000000;",
   "orientations" : [
     {
-      "imageLayers" : [{"image" : "sbqTherianizingRock.png", "fullbright":true},{"image" : "sbqTherianizingRockLit.png", "fullbright":false}],
+      "imageLayers" : [{"image" : "sbqMasculinizingRock.png", "fullbright":true},{"image" : "sbqTherianizingRockLit.png", "fullbright":false}],
       "imagePosition" : [0, 0],
       "frames" : 1,
       "animationCycle" : 0.5,
@@ -51,7 +51,6 @@
   "scripts" : ["sbqTherianizingRock.lua"],
   "builder" : "/scripts/item/SBQ_build_desc.lua",
   "identities" : [
-    {"species":"sbq/flareon"},
-    {"species":"sbq/vaporeon"}
+    {"gender":"male"}
   ]
 }

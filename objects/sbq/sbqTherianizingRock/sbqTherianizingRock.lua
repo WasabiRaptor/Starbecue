@@ -1,6 +1,14 @@
-local identities
+local identities = {}
 function init()
-    identities = config.getParameter("identities")
+    for _, v in ipairs(config.getParameter("identities")) do
+        if v.species then
+            if root.speciesConfig(v.species) then
+                table.insert(identities,v)
+            end
+        else
+            table.insert(identities,v)
+        end
+    end
 end
 function update(dt)
     local pos = entity.position()
