@@ -1,0 +1,18 @@
+{
+  "projectileName" : "sbqMessageOnHit",
+  "physics" : "laser",
+  "image":"/empty_image.png",
+  "actionOnCollide" : [],
+  "damagePoly" : [ [-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5] ],
+  "timeToLive" : 10,
+  "pointLight" : false,
+  "speed" : 100,
+  "damageType" : "NoDamage",
+  "damageKind" : "default",
+  "power" : 0,
+  "damageTeam" : {
+    "type" : "any"
+  },
+  "scripts" : ["/projectiles/sbqMessageOnHit.lua"]
+
+}
