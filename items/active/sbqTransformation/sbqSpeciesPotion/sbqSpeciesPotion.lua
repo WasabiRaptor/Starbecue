@@ -13,7 +13,7 @@ function update(dt, fireMode, shiftHeld)
 			return
 		end
 		player.giveItem({ name = "sbqMysteriousPotion", parameters = {
-			args = {{species = humanoid.species()},5},
+			args = {{species = humanoid.species()}, sbq.config.defaultTFDuration},
 		}})
 		item.consume(1)
 	end
@@ -25,5 +25,5 @@ function transformationItemArgs(useType)
 		player.radioMessage("sbqTransformBindBlacklist")
 		return
 	end
-	return { message = "sbqDoTransformation", itemName = "sbqMysteriousPotion", args = {{species= humanoid.species()},5}, consume = true}
+	return { message = "sbqDoTransformation", itemName = "sbqMysteriousPotion", args = {{species= humanoid.species()}, sbq.config.defaultTFDuration}, consume = true}
 end
