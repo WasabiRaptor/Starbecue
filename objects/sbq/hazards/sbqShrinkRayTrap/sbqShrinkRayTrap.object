@@ -1,0 +1,242 @@
+{
+  "objectName" : "sbqShrinkRayTrap",
+  "colonyTags" : ["avian","aviantemple","evil"],
+  "printable" : true,
+  "rarity" : "Common",
+  "description" : ":shrinkRayTrapDesc",
+  "shortdescription" : ":shrinkRayTrapShortDesc",
+  "race" : "avian",
+
+  "category" : "trap",
+  "price" : 200,
+
+  "inventoryIcon" : "crystaltrapicon.png",
+  "orientations" : [
+    {
+      "image" : "crystaltrapground.png:<color>.<frame>",
+      "imagePosition" : [-8, 0],
+      "direction" : "left",
+      "flipImages" : true,
+
+      "animationPosition" : [-8, 0],
+      "animationParts" : {
+        "bg" : "crystaltrapground.png",
+        "fg" : "crystaltrapground.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [0, 1],
+
+      "beamDirection" : [0, 1],
+      "beamStartOffset" : [0, 1.5],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-4, -4, 4, 54],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom", "left", "right" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrapground.png:<color>.<frame>",
+      "imagePosition" : [0, 0],
+      "direction" : "right",
+
+      "animationPosition" : [0, 0],
+      "animationParts" : {
+        "bg" : "crystaltrapground.png",
+        "fg" : "crystaltrapground.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [0, 1],
+
+      "beamDirection" : [0, 1],
+      "beamStartOffset" : [1, 1.5],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-4, -4, 4, 54],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom", "left", "right" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrap.png:<color>.<frame>",
+      "imagePosition" : [-8, 0],
+      "direction" : "left",
+      "flipImages" : true,
+
+      "animationPosition" : [-8, 0],
+      "animationParts" : {
+        "bg" : "crystaltrap.png",
+        "fg" : "crystaltrap.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [-1, 0],
+
+      "beamDirection" : [-1, 0],
+      "beamStartOffset" : [-0.5, 1],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-54, -4, 4, 4],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "right" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrap.png:<color>.<frame>",
+      "imagePosition" : [0, 0],
+      "direction" : "right",
+
+      "animationPosition" : [0, 0],
+      "animationParts" : {
+        "bg" : "crystaltrap.png",
+        "fg" : "crystaltrap.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [1, 0],
+
+      "beamDirection" : [1, 0],
+      "beamStartOffset" : [1.5, 1],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-54, -4, 4, 4],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "left" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrapceiling.png:<color>.<frame>",
+      "imagePosition" : [-8, -8],
+      "direction" : "left",
+      "flipImages" : true,
+
+      "animationPosition" : [-8, -8],
+      "animationParts" : {
+        "bg" : "crystaltrapceiling.png",
+        "fg" : "crystaltrapceiling.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [0, -1],
+
+      "beamDirection" : [0, -1],
+      "beamStartOffset" : [0, -0.5],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-4, -54, 4, 4],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "top" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrapceiling.png:<color>.<frame>",
+      "imagePosition" : [0, -8],
+      "direction" : "right",
+
+      "animationPosition" : [0, -8],
+      "animationParts" : {
+        "bg" : "crystaltrapceiling.png",
+        "fg" : "crystaltrapceiling.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [0, -1],
+
+      "beamDirection" : [0, -1],
+      "beamStartOffset" : [1, -0.5],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-4, -54, 4, 4],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "top" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrapground.png:<color>.<frame>",
+      "imagePosition" : [-8, 0],
+      "direction" : "left",
+      "flipImages" : true,
+
+      "animationPosition" : [-8, 0],
+      "animationParts" : {
+        "bg" : "crystaltrapground.png",
+        "fg" : "crystaltrapground.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [0, 1],
+
+      "beamDirection" : [0, 1],
+      "beamStartOffset" : [0, 1.5],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-4, -4, 4, 54],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ],
+      "collision" : "solid"
+    },
+    {
+      "image" : "crystaltrapground.png:<color>.<frame>",
+      "imagePosition" : [0, 0],
+      "direction" : "right",
+
+      "animationPosition" : [0, 0],
+      "animationParts" : {
+        "bg" : "crystaltrapground.png",
+        "fg" : "crystaltrapground.png"
+      },
+
+      "renderLayer" : "Object+50",
+      "lightPosition" : [0, 1],
+
+      "beamDirection" : [0, 1],
+      "beamStartOffset" : [1, 1.5],
+      "maxBeamLength" : 50,
+      "metaBoundBox" : [-4, -4, 4, 54],
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ],
+      "collision" : "solid"
+    }
+  ],
+
+  "animation" : "/objects/wired/projectiletrap/projectiletrap.animation",
+  "animationCustom" : {
+    "sounds" : {
+      "shoot" : [ ],
+      "on" : [ "/sfx/objects/crystaltrap_on1.ogg" ],
+      "off" : [ "/sfx/objects/crystaltrap_off.ogg" ]
+    }
+  },
+  "animationScripts" : [ "/objects/wired/projectiletrap/beamtraprendering.lua" ],
+
+  "scripts" : [ "/objects/wired/projectiletrap/beamtrap.lua" ],
+  "scriptDelta" : 5,
+  "builder" : "/scripts/item/SBQ_build_desc.lua",
+
+  "soundEffect" : "/sfx/objects/crystaltrap_loop.ogg",
+
+  "inputNodes" : [ [0, 0] ],
+
+  "inactiveLightColor" : [0, 0, 0],
+  "activeLightColor" : [0, 162, 255],
+
+  "beamLight" : [0, 162, 255],
+  "beamImages" : {
+    "first" : "/objects/sbq/hazards/sbqShrinkRayTrap/beamstart.png",
+    "body" : "/objects/sbq/hazards/sbqShrinkRayTrap/beambody.png",
+    "last" : "/objects/sbq/hazards/sbqShrinkRayTrap/beamend.png"
+  },
+
+  "beamDamage" : {
+    "damage" : -0.125,
+
+    "teamType" : "any",
+    "damageSourceKind" : "sbq_size",
+    "damageType" : "Environment",
+    "knockback" : 0,
+    "damageRepeatTimeout" : 0.25
+  }
+}
