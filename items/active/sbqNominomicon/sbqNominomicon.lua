@@ -2,6 +2,7 @@
 sbq = {}
 
 require("/scripts/any/SBQ_RPC_handling.lua")
+require("/scripts/any/SBQ_util.lua")
 
 function init()
 	activeItem.setTwoHandedGrip(true)
@@ -32,7 +33,11 @@ function getEntitySettingsMenu(entities, i)
     if (not entities) or (not i) or (not entities[i]) or (not world.entityExists(entities[i])) then return end
     local entityType = world.entityType(entities[i])
 	if entityType == "object" then
-		if world.getObjectParameter(entities[i], "sbqConfigGui") then
+        if world.getObjectParameter(entities[i], "sbqConfigGui") then
+			if world.getObjectParameter(entities[i], "sbqConfigOwnerOnly") and (world.getObjectParameter(entities[i], "owner") ~= player.uniqueId()) and not player.isAdmin() then
+				player.queueUIMessage(sbq.getString(":targetOwned"))
+				return animator.playSound("error")
+			end
             player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = world.getObjectParameter(entities[i],"sbqConfigData"), ui = world.getObjectParameter(entities[i], "sbqConfigGui") }, entities[i])
 			return
 		end
@@ -44,7 +49,7 @@ function getEntitySettingsMenu(entities, i)
 	sbq.addRPC(world.sendEntityMessage( entities[i], "sbqSettingsPageData", entity.uniqueId() ), function (data)
 		if data then
 			if (not player.isAdmin()) and data.parentEntityData[2] and not ((entity.uniqueId() == data.parentEntityData[1]) or (entity.uniqueId() == data.parentEntityData[2])) then
-				player.queueUIMessage(":targetOwned")
+				player.queueUIMessage(sbq.getString(":targetOwned"))
 				return animator.playSound("error")
 			end
 			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = {sbq = data}, ui =  (data.ui or "starbecue:entitySettings") }, entities[i])

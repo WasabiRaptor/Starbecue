@@ -6,7 +6,7 @@
   "shortdescription" : ":overrideEnforcerName",
   "race" : "generic",
   "printable" : false,
-  "category" : "admin",
+  "category" : "other",
   "price" : 100,
 
   "inventoryIcon" : "/interface/scripted/sbq/lockedDisabled.png",
@@ -23,6 +23,9 @@
   "unbreakable" : true,
   "retainObjectParametersInItem" : true,
   "scripts" : ["overrideEnforcer.lua"],
-  "builder" : "/scripts/item/SBQ_build_desc.lua"
+  "builder" : "/scripts/item/SBQ_build_desc.lua",
+
+  "sbqConfigGui" : "starbecue:overrideEnforcer",
+  "sbqConfigOwnerOnly" : true
 
 }
