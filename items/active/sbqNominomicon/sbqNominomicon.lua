@@ -14,11 +14,11 @@ function update(dt, fireMode, shiftHeld, controls)
 	if (fireMode == "primary" or fireMode == "alt") and not clicked then
 		clicked = true
 		if sbq.timer("menu", 1) then
-			local predators = world.entityQuery( activeItem.ownerAimPosition(), 2, {
+			local entities = world.entityQuery( activeItem.ownerAimPosition(), 2, {
 				withoutEntityId = entity.id(), includedTypes = { "vehicle", "npc", "object", "monster" }
 			})
-			if predators[1] ~= nil then
-				getEntitySettingsMenu(predators, 1)
+			if entities[1] ~= nil then
+				getEntitySettingsMenu(entities, 1)
 			end
 		end
 	elseif fireMode == "none" then
@@ -29,7 +29,14 @@ function update(dt, fireMode, shiftHeld, controls)
 end
 
 function getEntitySettingsMenu(entities, i)
-	if (not entities) or (not i) or (not entities[i]) or (not world.entityExists(entities[i])) then return end
+    if (not entities) or (not i) or (not entities[i]) or (not world.entityExists(entities[i])) then return end
+    local entityType = world.entityType(entities[i])
+	if entityType == "object" then
+		if world.getObjectParameter(entities[i], "sbqConfigGui") then
+            player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = world.getObjectParameter(entities[i],"sbqConfigData"), ui = world.getObjectParameter(entities[i], "sbqConfigGui") }, entities[i])
+			return
+		end
+	end
 	if world.entityStatPositive(entities[i], "sbqIsPrey") then
 		getEntitySettingsMenu(entities, i+1)
 		return

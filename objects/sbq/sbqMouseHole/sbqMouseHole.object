@@ -6,8 +6,8 @@
 
 	"category" : "door",
 	"price" : 1,
-	"description" : "A small mousehole... tiny people might fit through it.",
-	"shortdescription" : "Mousehole",
+	"description" : ":mouseHoleDesc",
+	"shortdescription" : ":mouseHoleShortDesc",
 	"race" : "generic",
 
 	"inventoryIcon" : "/objects/sbq/sbqMouseHole/sbqMouseHoleIcon.png",
@@ -26,6 +26,7 @@
 		}
 	],
 
+	"sbqConfigGui" : "starbecue:mouseHoleTool",
 	"coverSpaces" : [
 		[ 0, 0 ]
 	],
@@ -34,5 +35,6 @@
 	"animation" : "/objects/sbq/sbqMouseHole/sbqMouseHole.animation",
 	"scripts" : ["/objects/sbq/sbqMouseHole/sbqMouseHole.lua"],
 	"animationScripts" : ["/objects/sbq/sbqMouseHole/sbqMouseHoleAnimation.lua"],
+	"builder" : "/scripts/item/SBQ_build_desc.lua",
 	"animationPosition" : [0, 0]
 }

@@ -6,8 +6,8 @@
 
 	"category" : "door",
 	"price" : 1,
-	"description" : "A small covered room... tiny people might fit inside.",
-	"shortdescription" : "Mouseroom",
+	"description" : ":mouseRoomDesc",
+	"shortdescription" : ":mouseRoomShortDesc",
 	"race" : "generic",
 
 	"inventoryIcon" : "/objects/sbq/sbqMouseHole/sbqMouseRoomIcon.png",
@@ -25,7 +25,8 @@
 			"anchors" : [ "background" ]
 		}
 	],
-	"savedData" : {
+	"sbqConfigGui" : "starbecue:mouseRoomTool",
+	"sbqConfigData" : {
 		"size" : [5,3],
 		"offset" : [0,-2]
 	},
@@ -40,5 +41,6 @@
 	"animation" : "/objects/sbq/sbqMouseHole/sbqMouseHole.animation",
 	"scripts" : ["/objects/sbq/sbqMouseHole/sbqMouseRoom.lua"],
 	"animationScripts" : ["/objects/sbq/sbqMouseHole/sbqMouseHoleAnimation.lua"],
+	"builder" : "/scripts/item/SBQ_build_desc.lua",
 	"animationPosition" : [0, 0]
 }
