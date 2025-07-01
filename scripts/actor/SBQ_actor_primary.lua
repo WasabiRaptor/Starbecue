@@ -192,7 +192,10 @@ function applyDamageRequest(damageRequest)
 		local scaleAmount = damageRequest.damage + leftoverScale
 		leftoverScale     = (scaleAmount % sbq.config.scaleSnap)
 		scaleAmount       = scaleAmount - leftoverScale
-		local min, max = table.unpack(damageRequest.knockbackMomentum)
+        local min, max    = table.unpack(damageRequest.knockbackMomentum)
+		if (min == 0) and (max == 0) then
+			min, max = nil, nil
+		end
 		if (math.abs(scaleAmount)) < sbq.config.scaleSnap then
 			leftoverScale = leftoverScale + scaleAmount
 			return {}
