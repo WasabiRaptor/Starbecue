@@ -8,6 +8,10 @@ local baseParameters = {}
 for _, v in ipairs(world.getObjectParameter(pane.sourceEntity(), "sbqGenericConfigParameters")) do
     baseParameters[v.path[1]] = world.getObjectParameter(pane.sourceEntity(), v.path[1])
     local base = sbq.query(baseParameters, v.path)
+    local text = tostring(base)
+    if type(base) == "table" then
+        text = sb.printJson(base)
+    end
     local widget = { type = "layout", id = v.id.."Layout", expandMode = {1,0}, mode = "horizontal", children = {
         {
             settingType = type(base),
@@ -15,7 +19,9 @@ for _, v in ipairs(world.getObjectParameter(pane.sourceEntity(), "sbqGenericConf
             type = "sbqTextBox",
             toolTip = v.toolTip,
             script = "setParameter",
-            text = tostring(base)
+            text = text,
+            min = v.min,
+            max = v.max
         },
         { type = "label", id = v.id.."Label", text = v.label, width = v.labelWidth}
     }}

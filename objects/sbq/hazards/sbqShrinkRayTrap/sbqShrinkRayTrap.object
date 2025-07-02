@@ -234,9 +234,9 @@
   "sbqSetConfigReinit" : true,
   "sbqGenericConfigSize" : [80, 50],
   "sbqGenericConfigParameters" : [
-    {"id":"min", "label":":min", "path":["beamDamage","knockback",1]},
-    {"id":"max", "label":":max", "path":["beamDamage","knockback",2]},
-    {"id":"length", "label":":length", "path":["maxBeamLength"]}
+    {"id":"min", "label":":min", "min":0.125,"max":10, "path":["beamDamage","knockback",1]},
+    {"id":"max", "label":":max", "min":0.125,"max":10, "path":["beamDamage","knockback",2]},
+    {"id":"length", "label":":length", "min":1, "path":["maxBeamLength"]}
   ],
 
   "maxBeamLength" : 50,
@@ -246,7 +246,7 @@
     "teamType" : "any",
     "damageSourceKind" : "sbq_size",
     "damageType" : "Environment",
-    "knockback" : [0,10], // these are actually min/max size the ray can do
+    "knockback" : [0.125,10], // these are actually min/max size the ray can do
     "damageRepeatTimeout" : 0.25
   }
 }

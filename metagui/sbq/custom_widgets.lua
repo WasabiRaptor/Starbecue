@@ -936,7 +936,14 @@ function widgets.sbqTextBox:init(base, param)
 					end
 					number = math.min(max, math.max(number, min))
 					self:setText(tostring(number))
-					sbq.widgetScripts[self.script](number, self.setting or self.id, self.groupName,self.groupKey)
+					sbq.widgetScripts[self.script](number, self.setting or self.id, self.groupName, self.groupKey)
+				else
+					sbq.playErrorSound()
+				end
+			elseif self.settingType == "table" then
+				local parsed = sb.parseJson(self.text)
+				if parsed then
+					sbq.widgetScripts[self.script](parsed, self.setting or self.id, self.groupName, self.groupKey)
 				else
 					sbq.playErrorSound()
 				end

@@ -245,22 +245,6 @@ function sbq.widgetScripts.changeSetting(value, setting, group, name)
 	sbq.refreshSettingVisibility()
 end
 
-function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
-	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then sbq.playErrorSound() sbq.assignSettingValue(setting, group, name) return false end
-
-	local table = sb.parseJson(value)
-	if not table then sbq.playErrorSound() return false end
-	if group and name then
-		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, table)
-		storage.sbqSettings[group][name][setting] = table
-	else
-		world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", setting, table)
-		storage.sbqSettings[setting] = table
-	end
-	sbq.refreshSettingVisibility()
-end
-
 function sbq.importSettings(newSettings)
 	storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
 	sbq.sbqSettings = storage.sbqSettings
