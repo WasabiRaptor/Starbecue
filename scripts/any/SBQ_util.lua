@@ -25,7 +25,20 @@ end
 function sbq.queryPath(input, path)
 	return sbq.query(input, sbq.splitKeys(path))
 end
-
+function sbq.setPath(input, path, value)
+	local i = input
+	for j, v in ipairs(path) do
+		if j == #path then
+			i[v] = value
+			return true
+		elseif type(i[v]) == "nil" then
+			i[v] = {}
+		elseif type(i[v]) ~= "table" then
+			return false
+		end
+		i = i[v]
+	end
+end
 function sbq.getClosestValue(x, list)
 	local closest
 	local closestKey

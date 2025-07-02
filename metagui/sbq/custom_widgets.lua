@@ -617,7 +617,7 @@ function widgets.sbqCheckBox:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value or self.checked,self.setting, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value or self.checked,self.setting or self.id, self.groupName, self.groupKey)
 		end
 	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
@@ -936,12 +936,12 @@ function widgets.sbqTextBox:init(base, param)
 					end
 					number = math.min(max, math.max(number, min))
 					self:setText(tostring(number))
-					sbq.widgetScripts[self.script](number, self.setting, self.groupName,self.groupKey)
+					sbq.widgetScripts[self.script](number, self.setting or self.id, self.groupName,self.groupKey)
 				else
 					sbq.playErrorSound()
 				end
 			else
-				sbq.widgetScripts[self.script](tostring(self.text),self.setting,self.groupName,self.groupKey)
+				sbq.widgetScripts[self.script](tostring(self.text),self.setting or self.id,self.groupName,self.groupKey)
 			end
 		end
 	end
@@ -1242,7 +1242,7 @@ function widgets.sbqItemSlot:init(base, param)
     if self.script then
         function self:onItemModified()
 			if self.locked then return sbq.assignSettingValue(self.setting, self.groupName, self.groupKey) end
-            sbq.widgetScripts[self.script](self:item() or {}, self.setting, self.groupName, self.groupKey)
+            sbq.widgetScripts[self.script](self:item() or {}, self.setting or self.id, self.groupName, self.groupKey)
         end
     end
     if self.acceptScript then
@@ -1299,7 +1299,7 @@ function widgets.sbqButton:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value, self.setting, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value, self.setting or self.id, self.groupName, self.groupKey)
 		end
 	end
 end
@@ -1322,7 +1322,7 @@ function widgets.sbqIconButton:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value, self.setting, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value, self.setting or self.id, self.groupName, self.groupKey)
 		end
 	end
 end

@@ -1,0 +1,13 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [80, 80], // *internal* size (not including chrome)
+	"title" : ":config",
+	"icon" : "/items/active/sbqNominomicon/indicator.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "genericConfig.lua" ],
+	"sourceRadius": -1,
+	"dismissPrev":false,
+	"children" : [
+		{"mode":"v"}
+	]
+}
