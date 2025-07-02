@@ -38,15 +38,33 @@ function update()
                 localAnimator.addDrawable({
                     image = "/items/active/sbqNominomicon/indicator.png",
                     centered = true,
-                    position = world.entityPosition(eid)
+                    position = objectCenter(eid)
                 }, "ForegroundOverlay+2")
             elseif world.getObjectParameter(eid, "sbqConfigGui") then
                 localAnimator.addDrawable({
                     image = "/items/active/sbqNominomicon/indicator.png?hueshift=64",
                     centered = true,
-                    position = world.entityPosition(eid)
+                    position = objectCenter(eid)
                 }, "ForegroundOverlay+2")
             end
         end
     end
+end
+
+function objectCenter(eid)
+    local pos = world.entityPosition(eid)
+    local bounds = {9999, 9999, 0, 0}
+    local spaces = world.objectSpaces(eid)
+    for _, space in pairs(spaces) do
+        bounds = {
+            math.min(space[1], bounds[1]),
+            math.min(space[2], bounds[2]),
+            math.max(space[1] + 1, bounds[3]),
+            math.max(space[2] + 1, bounds[4])
+        }
+    end
+    return {
+        pos[1] + bounds[1] + (bounds[3] - bounds[1]) * 0.5,
+        pos[2] + bounds[2] + (bounds[4] - bounds[2]) * 0.5
+    }
 end
