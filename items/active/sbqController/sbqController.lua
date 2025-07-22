@@ -99,7 +99,7 @@ function sbq.clickAction()
 	player.setScriptContext("starbecue")
 	player.callScript("sbq.tryAction", "rpActionReset")
 	local bounds = mcontroller.collisionBoundBox()
-	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
+	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
 	local result
 	for i, targetId in ipairs(entityaimed) do
 		local targetBounds = world.entityCollisionBoundBox(targetId)

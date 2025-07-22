@@ -91,10 +91,10 @@ function init()
 	message.setHandler("sbqScale", function(_, _, scale, duration)
 		sbq.applyScale(scale,duration)
 	end)
-	destScale = mcontroller.scale()
-	oldScale = mcontroller.scale()
+	destScale = mcontroller.getScale()
+	oldScale = mcontroller.getScale()
 	sbq.timer("initScale", 0.25, function ()
-		sbq.applyScale(mcontroller.scale())
+		sbq.applyScale(mcontroller.getScale())
 	end)
 
 
@@ -102,7 +102,7 @@ function init()
 	old.status_applySelfDamageRequest = status.applySelfDamageRequest
 	function status.applySelfDamageRequest(damageRequest)
 		if damageRequest.damageSourceKind == "falling" then
-			if self.fallDistance > (sbq.config.minimumFallDistance * mcontroller.scale()) then
+			if self.fallDistance > (sbq.config.minimumFallDistance * mcontroller.getScale()) then
 				old.status_applySelfDamageRequest(damageRequest)
 			end
 		else
@@ -131,7 +131,7 @@ function update(dt)
 			currentScale = math.max(destScale, currentScale)
 		end
 		local bounds = mcontroller.boundBox()
-		mcontroller.setScale(currentScale)
+		mcontroller.scale(currentScale)
 		local newBounds = mcontroller.boundBox()
 		mcontroller.translate({0,bounds[2]-newBounds[2]})
 		if (scaleTime >= scaleDuration) or (currentScale == destScale) then
@@ -206,7 +206,7 @@ end
 function sbq.applyScale(scale, duration, min, max)
 	local publicSettings = status.statusProperty("sbqPublicSettings") or {}
 	destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1, min or -math.huge), max or math.huge)
-	oldScale = mcontroller.scale()
+	oldScale = mcontroller.getScale()
 	scaleTime = 0
 	scaleDuration = duration or 1
 	scaling = true
