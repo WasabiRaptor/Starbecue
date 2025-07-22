@@ -88,7 +88,7 @@ function sbq.setupLocation(name, list)
 		{ align = "center",type = "label",text = location.name or (":"..name) }
 	}
 	local icon
-	if root.assetExists("/interface/scripted/sbq/"..name..".png") then
+	if root.assetOrigin("/interface/scripted/sbq/"..name..".png") then
 		icon = "/interface/scripted/sbq/"..name..".png"
 	end
 	local locationTab = {
@@ -362,7 +362,7 @@ function sbq.widgetScripts.makeInfuseSlots(param)
 			local item = sbq.settings[param.setting][infuseType].item
 			local slot = {
 				item = item.name and item,
-				glyph = root.assetExists(glyph) and glyph,
+				glyph = root.assetOrigin(glyph) and glyph,
 				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot),
 				setting = "item",
 				groupName = param.setting,

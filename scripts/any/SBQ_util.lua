@@ -5,7 +5,6 @@ function _sbq.__index(table, key)
 	if monster and monster[key] then return monster[key] end
 	if object and object[key] then return object[key] end
 	if loungeable and loungeable[key] then return loungeable[key] end
-	return table[key]
 end
 setmetatable(sbq, _sbq)
 
@@ -408,11 +407,11 @@ function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)
 		preferDirectories = {preferDirectories}
 	end
 	for _, v in ipairs(preferDirectories) do
-		if v and root.assetExists(action..".png", v) then
+		if v and root.assetOrigin(action..".png", v) then
 			return v .. action .. ".png"
 		end
 	end
-	if root.assetExists(action..".png", directory) then
+	if root.assetOrigin(action..".png", directory) then
 		return directory .. action .. ".png"
 	end
 	if not ignoreMissingIcon then

@@ -193,10 +193,10 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		end
 	end
 	if player and not (
-		root.assetExists(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "casual"}))
-		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "survival"}))
-		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:warpCinematic"), {species = newIdentity.species}))
-		and root.assetExists(sb.replaceTags(root.assetJson("/client.config:deployCinematic"), {species = newIdentity.species}))
+		root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "casual"}))
+		and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "survival"}))
+		and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:warpCinematic"), {species = newIdentity.species}))
+		and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:deployCinematic"), {species = newIdentity.species}))
 		and root.assetJson("/universe_server.config:speciesShips")[newIdentity.species]
 		and root.assetJson("/ai/ai.config:species")[newIdentity.species]
 		and root.assetJson("/quests/quests.config:initialquests")[newIdentity.species]

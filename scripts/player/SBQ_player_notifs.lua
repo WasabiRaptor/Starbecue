@@ -8,7 +8,7 @@ function sbq.notifyPlayer()
             message = "Stardust Core or Stardust Lite missing.\n \nMake sure to read install information."
         })
     end
-	-- if (not root.assetExists("/stats/monster_compat_list.config")) and not player.getProperty("sbqMonsterCoreLoaderWarned") then
+	-- if (not root.assetOrigin("/stats/monster_compat_list.config")) and not player.getProperty("sbqMonsterCoreLoaderWarned") then
 	-- 	player.setProperty("sbqMonsterCoreLoaderWarned", true)
 	-- 	player.confirm({
 	-- 		paneLayout = "/interface/windowconfig/popup.config:paneLayout",

@@ -70,9 +70,9 @@ function init()
 			ActionButton.toolTip = occupant.flags.locationName
 		end
 		if LocationIcon then
-			if occupant.flags.infused and occupant.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
+			if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
 				LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
-			elseif root.assetExists("/interface/scripted/sbq/"..occupant.location..".png") then
+			elseif root.assetOrigin("/interface/scripted/sbq/"..occupant.location..".png") then
 				LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
 			end
 			LocationIcon:draw()
@@ -113,9 +113,9 @@ function sbq.refreshOccupants()
 		sbq.refreshPortrait(occupant.entityId)
 		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
 		local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
-		if occupant.flags.infused and occupant.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
+		if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
 			LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
-		elseif root.assetExists("/interface/scripted/sbq/"..occupant.location..".png") then
+		elseif root.assetOrigin("/interface/scripted/sbq/"..occupant.location..".png") then
 			LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
 		end
 		ActionButton.toolTip = occupant.locationName

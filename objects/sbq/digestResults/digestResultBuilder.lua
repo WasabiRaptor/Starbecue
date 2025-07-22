@@ -41,10 +41,10 @@ function build(directory, config, parameters, level, seed)
 			end
 		end
 
-		if not root.assetExists(sb.replaceTags(imagePath, replaceTags), directory) then
+		if not root.assetOrigin(sb.replaceTags(imagePath, replaceTags), directory) then
 			replaceTags.species = "any"
 		end
-		if not root.assetExists(sb.replaceTags(imagePath, replaceTags), directory) then
+		if not root.assetOrigin(sb.replaceTags(imagePath, replaceTags), directory) then
 			replaceTags.variant = "1"
 		end
 		parameters.imageKeys = replaceTags

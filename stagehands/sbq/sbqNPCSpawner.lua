@@ -69,7 +69,7 @@ function checkRequirements(data)
 	end
 	if data.checkAssets then
 		for i, path in ipairs(data.checkAssets) do
-			if not root.assetExists(path) then return end
+			if not root.assetOrigin(path) then return end
 		end
 	end
 	return true

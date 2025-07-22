@@ -62,7 +62,7 @@ function sbq.populateCatalogueList(name, tenantName)
 	end
 	if data.checkAssets then
 		for i, path in ipairs(data.checkAssets) do
-			if not root.assetExists(path) then return end
+			if not root.assetOrigin(path) then return end
 		end
 	end
 	if storage.evil and (tenantConfig.colonyTagCriteria.sbqFriendly) then

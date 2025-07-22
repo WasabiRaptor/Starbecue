@@ -175,7 +175,7 @@ function update( dt )
 	occupantData.time = occupantData.time + dt
 
 	-- location icon
-	if root.assetExists("/interface/scripted/sbq/"..occupantData.location..".png") then
+	if root.assetOrigin("/interface/scripted/sbq/"..occupantData.location..".png") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantData.location..".png", {15.5,15}, 1)
 	end
 
@@ -208,7 +208,7 @@ function update( dt )
 		6, {127, 127, 127}
 	)
 
-	if occupantData.flags.infused and occupantData.flags.infuseType and root.assetExists("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png") then
+	if occupantData.flags.infused and occupantData.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png", {45.5,16}, 1)
 	elseif occupantData.flags.digested or occupantData.flags.digesting then
 		indicator:drawImageDrawable("/interface/scripted/sbq/softDigest.png", {45.5,16}, 1)

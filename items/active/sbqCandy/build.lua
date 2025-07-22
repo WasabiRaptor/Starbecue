@@ -6,7 +6,7 @@ function build(directory, config, parameters, level, seed)
 	math.randomseed(parameters.seed);
 
 	config.inventoryIcon = "sbqCandyT" .. math.floor(parameters.level) .. ".png"
-	if not root.assetExists(directory..config.inventoryIcon) then
+	if not root.assetOrigin(directory..config.inventoryIcon) then
 		config.inventoryIcon = "sbqCandyT"..math.random(1,6)..".png"
 	end
 	local max = math.ceil(parameters.level/2)
