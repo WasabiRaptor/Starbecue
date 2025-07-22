@@ -1054,7 +1054,7 @@
 				// what they say after doing the action (optional)
 				"after" : {"new" : {"dialogueRandom" : [":cockVorePromptNoYesAfter"],"dismissTime" : 2, "jump" : false}}
 			}
-		},
+		}
 
 
 	},
@@ -1544,23 +1544,23 @@
 		// 	"after":{"new" : { "dialogueRandom" : [":<action>ForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		// },
 		"oralVore" : {
-			"new" : { "dialogueRandom" : [":oralVoreForcing"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":oralVoreForcing"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":oralVoreForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"analVore" : {
-			"new" : { "dialogueRandom" : [":analVoreForcing"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":analVoreForcing"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":analVoreForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"unbirthVore" : {
-			"new" : { "dialogueRandom" : [":unbirthVoreForcing"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":unbirthVoreForcing"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":unbirthVoreForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"breastVore" : {
-			"new" : { "dialogueRandom" : [":breastVoreForcing"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":breastVoreForcing"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":breastVoreForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"cockVore" : {
-			"new" : { "dialogueRandom" : [":cockVoreForcing"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":cockVoreForcing"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":cockVoreForcingAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 
@@ -1656,23 +1656,23 @@
 		// 	"after":{"new" : { "dialogueRandom" : [":<action>ForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		// },
 		"oralVore" : {
-			"new" : { "dialogueRandom" : [":oralVoreForced"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":oralVoreForced"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":oralVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"analVore" : {
-			"new" : { "dialogueRandom" : [":analVoreForced"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":analVoreForced"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":analVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"unbirthVore" : {
-			"new" : { "dialogueRandom" : [":unbirthVoreForced"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":unbirthVoreForced"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":unbirthVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"breastVore" : {
-			"new" : { "dialogueRandom" : [":breastVoreForced"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":breastVoreForced"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":breastVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 		"cockVore" : {
-			"new" : { "dialogueRandom" : [":cockVoreForced"],"dismissTime" : 2, "jump" : false},
+			"new" : { "dialogueRandom" : [":cockVoreForced"],"dismissTime" : 2, "jump" : false}
 			// "after":{"new" : { "dialogueRandom" : [":cockVoreForcedAfter"],"dismissTime" : 2, "jump" : false}}
 		},
 
@@ -1889,7 +1889,7 @@
 			"next" : ["percentage"],
 			"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 			"food" : {"queueReplace" : {"dialogueRandom" : [":struggleAcidHealHungry"]}},
-			"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleAcidHealHorny"]}},
+			"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleAcidHealHorny"]}}
 		},
 		"sbq_femcumHeal" : {
 			"addQueued" : true,
@@ -1934,7 +1934,7 @@
 					"next" : ["percentage"],
 					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 					"food" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionBellyHungry"]}},
-					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionBellyHorny"]}},
+					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionBellyHorny"]}}
 				},
 				"womb" : {
 					"queueReplace" : {"dialogueRandom" : [":struggleCompressionWomb"]},
@@ -1942,7 +1942,7 @@
 					"next" : ["percentage"],
 					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 					"food" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionWombHungry"]}},
-					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionWombHorny"]}},
+					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionWombHorny"]}}
 				},
 				"breasts" : {
 					"queueReplace" : {"dialogueRandom" : [":struggleCompressionBreasts"]},
@@ -1950,7 +1950,7 @@
 					"next" : ["percentage"],
 					"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 					"food" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionBreastsHungry"]}},
-					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionBreastsHorny"]}},
+					"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleCompressionBreastsHorny"]}}
 				}
 			}
 		},
@@ -2052,7 +2052,7 @@
 				"next" : ["percentage"],
 				"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 				"food" : {"queueReplace" : {"dialogueRandom" : [":struggleMiscDigestHungry"]}},
-				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleMiscDigestHorny"]}},
+				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleMiscDigestHorny"]}}
 			},
 			"sbq_miscDigestResistance_notPositive" : { // it's a multiplier, so it not being positive means it must be 0 or less, and therefore immune
 				"queueReplace" : {
@@ -2093,7 +2093,7 @@
 			"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 			"food" : {"queueReplace" : {"dialogueRandom" : [":struggleEggifyHungry"]}},
 			"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":struggleEggifyHorny"]}}
-		},
+		}
 
 		// "sbq_tailInfuse" : {
 		// 	"addQueued" : true,
@@ -2237,7 +2237,7 @@
 				"next" : ["percentage"],
 				"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 				"food" : {"queueReplace" : {"dialogueRandom" : [":strugglingBellyHungry"]}},
-				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":strugglingBellyHorny"]}},
+				"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":strugglingBellyHorny"]}}
 			},
 			"womb" : {
 				"addQueued" : true,
@@ -2298,7 +2298,7 @@
 			"next" : ["percentage"],
 			"percentage" : { "sbqLust" : 0.33, "food" : -0.33 },
 			"food" : {"queueReplace" : {"dialogueRandom" : [":strugglingAcidHealHungry"]}},
-			"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":strugglingAcidHealHorny"]}},
+			"sbqLust" : {"queueReplace" : {"dialogueRandom" : [":strugglingAcidHealHorny"]}}
 
 		},
 		"sbq_femcumHeal" : {
@@ -2439,7 +2439,7 @@
 			"queueReplace" : {
 				"dialogueRandom" : [":strugglingEggify"]
 			}
-		},
+		}
 
 		// "sbq_tailInfuse" : {
 		// 	"addQueued" : true,
