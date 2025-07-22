@@ -153,7 +153,7 @@ end
 function sbq.randomizeSettings()
 	local randomizeSettings = config.getParameter("sbqRandomizeSettings")
 	if randomizeSettings and not storage.sbqSettings then
-		randomizeSettings = root.fetchConfigArray(randomizeSettings)
+		randomizeSettings = sbq.fetchConfigArray(randomizeSettings)
 		storage.sbqSettings = {}
 		for k, v in pairs(randomizeSettings) do
 			if sbq.config.groupedSettings[k] then

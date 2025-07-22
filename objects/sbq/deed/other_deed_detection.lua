@@ -8,7 +8,7 @@ function scanHouseContents(boundary)
 		otherDeeds = root.assetJson("/objects/sbq/deed/otherDeeds.config")
 	end
 	if not bannedObjects then
-		bannedObjects = root.fetchConfigArray(config.getParameter("deedBannedObjects") or {})
+		bannedObjects = sbq.fetchConfigArray(config.getParameter("deedBannedObjects") or {})
 	end
 
 	for object, _ in pairs(returnValues.objects) do

@@ -164,7 +164,7 @@ function sbq.reloadVoreConfig(config)
 	sbq.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-	sbq.voreConfig = root.fetchConfigArray(config, sbq.directory())
+	sbq.voreConfig = sbq.fetchConfigArray(config, sbq.directory())
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 
@@ -910,7 +910,7 @@ end
 -- Location handling
 function _SpeciesScript:addLocation(name, config)
 	local infuseLocation = {}
-	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, root.fetchConfigArray(config, sbq.directory()), sbq.voreConfig.locationOverrides or {})
+	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, sbq.fetchConfigArray(config, sbq.directory()), sbq.voreConfig.locationOverrides or {})
 	location.tag = name
 	location.key = name
 	location.name = location.name or (":"..name)
@@ -1008,8 +1008,8 @@ function _Location:setInfusionData()
 	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
 		infusedItem.name = self.infusedItemType
 	end
-	local infuseData = root.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-	infuseData = sb.jsonMerge(root.fetchConfigArray(infuseData.default or {}), root.fetchConfigArray(infuseData[sbq.species()] or {}))
+	local infuseData = sbq.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
+	infuseData = sb.jsonMerge(sbq.fetchConfigArray(infuseData.default or {}), sbq.fetchConfigArray(infuseData[sbq.species()] or {}))
 	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.key]) or {})
 
 	for k, v in pairs(self.settingInfusion or {}) do
@@ -1521,7 +1521,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	end
 	-- -- if in the future we ever can have dynamic animation parts and seats
 	-- local occupantAnim = sbq.replaceConfigTags(
-	-- 	root.fetchConfigArray(sbq.voreConfig.occupantAnimationConfig or "/humanoid/any/voreOccupant.animation"),
+	-- 	sbq.fetchConfigArray(sbq.voreConfig.occupantAnimationConfig or "/humanoid/any/voreOccupant.animation"),
 	-- 	{occupant = seat}
 	-- )
 

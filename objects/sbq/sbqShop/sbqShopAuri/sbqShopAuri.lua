@@ -28,7 +28,7 @@ end
 function onInteraction(args)
 	local dialogueBoxData = {
 		dialogueTreeStart = config.getParameter("dialogueTreeStart"),
-		dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree")),
+		dialogueTree = sbq.fetchConfigArray(config.getParameter("dialogueTree")),
 		shopRecipes = config.getParameter("shopRecipes")
 	}
 	return {"ScriptPane", { data = {sbq = dialogueBoxData}, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:shop" }}

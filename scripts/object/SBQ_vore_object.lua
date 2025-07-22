@@ -22,7 +22,7 @@ function init()
 
 	sbq.setProperty = object.setConfigParameter
 
-	sbq.dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree"))
+	sbq.dialogueTree = sbq.fetchConfigArray(config.getParameter("dialogueTree"))
 
 	storage.baseStats = sbq.initStats(config.getParameter("stats") or {})
 	storage.effectCategories = sb.jsonMerge(config.getParameter("effectCategories") or {}, storage.effectCategories or {})

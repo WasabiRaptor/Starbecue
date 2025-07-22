@@ -98,7 +98,7 @@ function sbq.rollConvert()
 								if speciesFile.forceName then
 									badSpecies = true
 								elseif speciesFile.voreConfig then
-									if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+									if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 										badSpecies = true
 									end
 								else

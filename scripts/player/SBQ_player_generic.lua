@@ -33,7 +33,7 @@ function init()
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 		status.setStatusProperty("sbqPublicSettings", nil)
 		sbq.lists = {}
-		sbq.voreConfig = root.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
+		sbq.voreConfig = sbq.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.setupSettingMetatables("player")
 	end
 	sbq.notifyPlayer()

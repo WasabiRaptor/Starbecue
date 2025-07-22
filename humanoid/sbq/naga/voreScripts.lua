@@ -25,7 +25,7 @@ function Naga:init()
 			local path = "/humanoid/"..identity.imagePath.."/"
 			status.setStatusProperty("ouchNoise", (identity.gender == "male" and speciesConfig.ouchNoises[1]) or speciesConfig.ouchNoises[2])
 			world.sendEntityMessage(entity.id(), "sbqResetOuchNoise")
-			local speciesAnimation = sb.jsonMerge(root.assetJson(speciesConfig.animationConfig or "/humanoid/any/humanoid.animation"), root.fetchConfigArray(speciesConfig.animationCustom, path))
+			local speciesAnimation = sb.jsonMerge(root.assetJson(speciesConfig.animationConfig or "/humanoid/any/humanoid.animation"), sbq.fetchConfigArray(speciesConfig.animationCustom, path))
             for k, v in pairs(speciesAnimation.globalTagDefaults) do
                 if (not identity[k]) and (not speciesConfig.colorRemapGlobalTags[k]) then animator.setGlobalTag(k, v) end
             end

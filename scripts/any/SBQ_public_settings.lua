@@ -20,7 +20,7 @@ function sbq.setupPublicSettings()
 	storage = storage or {}
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.lists = {}
-	sbq.voreConfig = root.fetchConfigArray(config.getParameter("voreConfig") or {
+	sbq.voreConfig = sbq.fetchConfigArray(config.getParameter("voreConfig") or {
 		hideBehaviorSettings = true,
 		hidePredSettings = true
 	})

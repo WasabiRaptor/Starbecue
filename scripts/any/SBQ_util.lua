@@ -8,6 +8,23 @@ function _sbq.__index(table, key)
 end
 setmetatable(sbq, _sbq)
 
+function sbq.fetchConfigArray(input, path)
+    if type(input) == "table" and input[1] then
+        local out = {}
+        for _, v in ipairs(input) do
+            out = sb.jsonMerge(out, sbq.fetchConfigArray(v, path))
+        end
+        return out
+    elseif type(input) == "string" then
+        if input:sub(1, 1) == "/" then
+            return sbq.fetchConfigArray(root.assetJson(input), path)
+        else
+            return sbq.fetchConfigArray(root.assetJson(path .. input), path)
+        end
+    end
+	return input
+end
+
 function sbq.query(input, query)
 	if not input then return input end
 	local out = input

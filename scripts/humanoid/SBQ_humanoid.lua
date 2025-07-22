@@ -159,7 +159,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 					if speciesFile.forceName then
 						badSpecies = true
 					elseif speciesFile.voreConfig then
-						if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+						if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 							badSpecies = true
 						end
 					elseif sbq.config.anyTFSupportedOnly then
@@ -187,7 +187,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		return false
 	end
 	if npc and speciesFile.voreConfig then
-		if sbq.query(root.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+		if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
 			sbq.logWarn("NPC cannot be transformed into TF locked species: " .. newIdentity.species)
 			return false
 		end
