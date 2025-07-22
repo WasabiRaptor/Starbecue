@@ -15,9 +15,7 @@ function init()
 	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
 	sbq.targetPosition = player.aimPosition
-	sbq.loungingIn = player.loungingIn
 	sbq.resetLounging = player.stopLounging
-	sbq.gender = humanoid.gender
 
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
@@ -29,13 +27,13 @@ function init()
 		if player.getProperty("sbqAgreedTerms") then status.setStatusProperty(...) end
 	end
 	if player.getProperty("sbqAgreedTerms") then
-		sbq.init(root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+		sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.actorMessages()
 	else
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 		status.setStatusProperty("sbqPublicSettings", nil)
 		sbq.lists = {}
-		sbq.voreConfig = root.fetchConfigArray(root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config")
+		sbq.voreConfig = root.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.setupSettingMetatables("player")
 	end
 	sbq.notifyPlayer()

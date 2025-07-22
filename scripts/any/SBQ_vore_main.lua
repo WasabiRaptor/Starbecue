@@ -1054,9 +1054,9 @@ function _Location:setInfusionData()
 	end
 
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
-    local speciesConfig = root.speciesConfig(humanoid.species())
+    local speciesConfig = root.speciesConfig(sbq.species())
 	if speciesConfig.useImagePathSpecies then
-		speciesConfig = root.speciesConfig(humanoid.getIdentity().imagePath or humanoid.species())
+		speciesConfig = root.speciesConfig(sbq.humanoidIdentity().imagePath or sbq.species())
 	end
 	for tag, remaps in pairs(infuseData.colorRemapGlobalTags or {}) do
 		local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", tag })

@@ -5,9 +5,7 @@ local old = {
 }
 function init()
 	sbq.targetPosition = player.aimPosition
-	sbq.loungingIn = player.loungingIn
 	sbq.resetLounging = player.stopLounging
-	sbq.gender = humanoid.gender
 
 	message.setHandler("sbqResetOuchNoise", function ()
 		local ouchNoise = status.statusProperty("ouchNoise")

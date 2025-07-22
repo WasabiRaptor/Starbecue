@@ -1,8 +1,5 @@
 
 function sbq.humanoidInit()
-	sbq.species = humanoid.species
-	sbq.getItemSlot = humanoid.getItemSlot
-
 	message.setHandler("sbqDoTransformation", function (_,_, ...)
 		sbq.doTransformation(...)
     end)
@@ -13,7 +10,7 @@ function sbq.humanoidInit()
 		sbq.revertTF()
 	end)
 	message.setHandler("sbqGetIdentity", function (_,_)
-		return humanoid.getIdentity()
+		return sbq.humanoidIdentity()
 	end)
 
 	message.setHandler("sbqGetCard", function()
@@ -39,8 +36,8 @@ function sbq.humanoidInit()
 			item.parameters.tooltipFields.subtitle = "player"
 			item.parameters.npcArgs.npcParam.wasPlayer = true
 		end
-		local identity = humanoid.getIdentity()
-		item.parameters.npcArgs.npcSpecies = humanoid.species()
+		local identity = sbq.humanoidIdentity()
+		item.parameters.npcArgs.npcSpecies = sbq.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
 		item.parameters.npcArgs.npcParam.identity = identity
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.getSettingsOf.current()
@@ -57,7 +54,7 @@ function sbq.humanoidInit()
 end
 
 function sbq.directory()
-	return "/humanoid/" .. humanoid.species() .. "/"
+	return "/humanoid/" .. sbq.species() .. "/"
 end
 
 -- function sbq.findIdentityColor(identity, color)
@@ -80,7 +77,7 @@ end
 
 function sbq.hybridTransformation(newSpecies, duration, ...)
 	local newSpeciesConfig = root.speciesConfig(newSpecies)
-	local curIdentity = humanoid.getIdentity()
+	local curIdentity = sbq.humanoidIdentity()
 	local newIdentity = {species = newSpecies}
 	if newSpecies ~= curIdentity.species then
 		local curSpeciesConfig = root.speciesConfig(curIdentity.species)
@@ -115,25 +112,25 @@ end
 
 function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomization, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
-	if sbq.config.transformationBlacklist[humanoid.species()] then
+	if sbq.config.transformationBlacklist[sbq.species()] then
 		if player then sbq.logWarn("Attempted to transform as blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformFromBlacklist") end
 		return false
 	end
 
-	local currentIdentity =	humanoid.getIdentity()
+	local currentIdentity =	sbq.humanoidIdentity()
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
 	local originalGender = status.statusProperty("sbqOriginalGender")
 	local currentName = currentIdentity.name
 
 	if not originalSpecies then
-		originalSpecies = humanoid.species()
+		originalSpecies = sbq.species()
 		status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
 		speciesIdentites[originalSpecies] = currentIdentity
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
 	end
 	if not originalGender then
-		originalGender = humanoid.gender()
+		originalGender = sbq.gender()
 		status.setStatusProperty("sbqOriginalGender", originalGender)
 	end
 
@@ -234,7 +231,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	end
 
 	newIdentity = sb.jsonMerge(
-		humanoid.randomIdentity(newIdentity.species, newIdentity.personalityIndex, newIdentity.seed),
+		root.generateHumanoidIdentity(newIdentity.species, newIdentity.seed, newIdentity.gender),
 		newIdentity,
 		((not forceIdentity) and speciesIdentites[newIdentity.species]) or {},
 		{gender = newIdentity.gender} -- preserve new gender if applicable
@@ -274,7 +271,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		end
 	end
 
-	humanoid.setIdentity(newIdentity)
+	sbq.setHumanoidIdentity(newIdentity)
 
 	if duration and (not sbq.settings.indefiniteTF) then
 		status.addEphemeralEffect("sbqTransformed", (duration or sbq.config.defaultTFDuration) * 60)
@@ -289,13 +286,13 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 end
 
 function sbq.revertTF()
-	local currentData = humanoid.getIdentity()
-	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or humanoid.species()
-	local originalGender = status.statusProperty("sbqOriginalGender") or humanoid.gender()
+	local currentData = sbq.humanoidIdentity()
+	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or sbq.species()
+	local originalGender = status.statusProperty("sbqOriginalGender") or sbq.gender()
 	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
-	local customData = speciesIdentities[originalSpecies] or humanoid.randomIdentity(originalSpecies, currentData.personalityIndex)
+	local customData = speciesIdentities[originalSpecies] or root.generateHumanoidIdentity(originalSpecies, math.randomseed(), originalGender)
 	customData.gender = originalGender
-	humanoid.setIdentity(customData)
+	sbq.setHumanoidIdentity(customData)
 	sbq.refreshPredHudPortrait()
 end
 

@@ -1,3 +1,14 @@
+local _sbq = {}
+function _sbq.__index(table, key)
+	if npc and npc[key] then return npc[key] end
+	if player and player[key] then return player[key] end
+	if monster and monster[key] then return monster[key] end
+	if object and object[key] then return object[key] end
+	if loungeable and loungeable[key] then return loungeable[key] end
+	return table[key]
+end
+setmetatable(sbq, _sbq)
+
 function sbq.query(input, query)
 	if not input then return input end
 	local out = input
@@ -539,7 +550,7 @@ function sbq.exportSettingGroup(group)
 end
 
 function sbq.createdDateString(time)
-	return os.date(sbq.getString(":createdOnDate"), time or os.time()) .. " v" .. root.modMetadata("Starbecue").version
+	return os.date(sbq.getString(":createdOnDate"), time or os.time()) .. " v" .. root.assetSourceMetadata("Starbecue").version
 end
 
 function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stacking easier without using the collapse

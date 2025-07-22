@@ -24,11 +24,15 @@ end
 function sbq.getSettingsPageData()
 	local settingsPageData = old.sbq_getSettingsPageData()
 	settingsPageData.cosmeticSlots = {
-		headCosmetic = humanoid.getItemSlot("headCosmetic"),
-		chestCosmetic = humanoid.getItemSlot("chestCosmetic"),
-		legsCosmetic = humanoid.getItemSlot("legsCosmetic"),
-		backCosmetic = humanoid.getItemSlot("backCosmetic"),
-	}
+		headCosmetic = sbq.getItemSlot("headCosmetic"),
+		chestCosmetic = sbq.getItemSlot("chestCosmetic"),
+		legsCosmetic = sbq.getItemSlot("legsCosmetic"),
+        backCosmetic = sbq.getItemSlot("backCosmetic"),
+    }
+	for i = 1, 12 do
+		local slotName = "cosmetic"..tostring(i)
+		settingsPageData.cosmeticSlots[slotName] = sbq.getItemSlot(slotName)
+	end
 	return settingsPageData
 end
 function _ENV.recruitable.setUniform()
@@ -68,7 +72,7 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
-	sbq.init({root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config", config.getParameter("voreConfig")})
+	sbq.init({root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config", config.getParameter("voreConfig")})
 	sbq.dialogueTree = root.fetchConfigArray(config.getParameter("dialogueTree"))
 	for _, script in ipairs((sbq.dialogueTree or {}).dialogueStepScripts or {}) do
 		require(script)
@@ -100,7 +104,7 @@ function init()
 
 	message.setHandler("sbqUpdateIdentities", function (_,_, response)
 		status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
-		humanoid.setIdentity(response.currentIdentity)
+		sbq.setHumanoidIdentity(response.currentIdentity)
 		local parent, recruitUuid = sbq.parentEntity()
 		if parent then
 			world.sendEntityMessage(parent, "sbqParentUpdateIdentities", recruitUuid, entity.uniqueId(), response)
@@ -108,7 +112,7 @@ function init()
 	end)
 
 	if not status.statusProperty("sbqSpeciesIdentities") then
-		status.setStatusProperty("sbqSpeciesIdentities", {[humanoid.species()] = humanoid.getIdentity()})
+		status.setStatusProperty("sbqSpeciesIdentities", {[sbq.species()] = sbq.humanoidIdentity()})
 	end
 
 	sbq.randomTimer("huntingCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately

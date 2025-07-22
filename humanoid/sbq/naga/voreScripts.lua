@@ -17,7 +17,7 @@ Species.Naga = Naga
 Naga.__index = Naga
 
 function Naga:init()
-    local identity = humanoid.getIdentity()
+    local identity = sbq.humanoidIdentity()
 	local hybridConfig = root.speciesConfig(identity.species)
 	if identity.imagePath then
 		local speciesConfig = root.speciesConfig(identity.imagePath)

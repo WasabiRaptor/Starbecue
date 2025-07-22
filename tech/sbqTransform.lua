@@ -7,7 +7,7 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	if not status.statusProperty("sbqSpeciesIdentities") then
-		status.setStatusProperty("sbqSpeciesIdentities", {[humanoid.species()] = humanoid.getIdentity()})
+		status.setStatusProperty("sbqSpeciesIdentities", {[sbq.species()] = sbq.humanoidIdentity()})
 	end
 
 	message.setHandler("sbqTransformTechRadialMenuScript", function(_, _, script, ...)
@@ -104,7 +104,7 @@ function TopMenu:init()
 			description = sbq.getString(":assignSpeciesDesc")
 		}
 	}
-	speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {[humanoid.species()] = humanoid.getIdentity()}
+	speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {[sbq.species()] = sbq.humanoidIdentity()}
 	favoriteSpecies = _ENV.jarray()
 	for k, v in pairs(player.getProperty("sbqFavoriteSpecies") or {}) do
 		favoriteSpecies[tonumber(k)] = v
@@ -222,7 +222,7 @@ end
 function _RadialMenu:openCharCreation()
 	sbq.addRPC(player.characterCreation({ speciesIdentites = speciesIdentites, currentSpecies = player.species()}), function (response)
 			status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
-			humanoid.setIdentity(response.currentIdentity)
+			sbq.setHumanoidIdentity(response.currentIdentity)
 	end)
 end
 

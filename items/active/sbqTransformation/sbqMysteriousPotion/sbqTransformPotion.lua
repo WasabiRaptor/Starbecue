@@ -8,7 +8,7 @@ end
 
 function update(dt, fireMode, shiftHeld)
 	if not self.useTimer and fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-		if sbq.tableMatches(config.getParameter("args")[1], humanoid.getIdentity()) then return end
+		if sbq.tableMatches(config.getParameter("args")[1], sbq.humanoidIdentity()) then return end
 		if config.getParameter("invalidPotion") then
 			animator.playSound("error")
 			player.radioMessage("sbqTransformIntoBlacklist")

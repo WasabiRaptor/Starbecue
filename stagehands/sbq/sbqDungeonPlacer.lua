@@ -47,7 +47,7 @@ function checkRequirements(data)
     end
 	if data.checkMods then
 		for i, mod in ipairs(data.checkMods) do
-			if not root.modMetadata(mod) then return end
+			if not root.assetSourceMetadata(mod) then return end
 		end
     end
 	if data.checkAssets then

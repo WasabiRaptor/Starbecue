@@ -26,14 +26,9 @@ function init()
 	sbq.humanoidInit()
 	sbq.actorMessages()
 
-	sbq.say = npc.say
-	sbq.sayPortrait = npc.sayPortrait
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
 	sbq.releaseLoungeControl = npc.releaseLoungeControl
-	sbq.loungingIn = npc.loungingIn
-	sbq.resetLounging = npc.resetLounging
-	sbq.gender = humanoid.gender
 
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()
@@ -78,7 +73,7 @@ function sbq.rollConvert()
 		if config.getParameter("sbqNPC")
 			or config.getParameter("uniqueId")
 			or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true)
-			or humanoid.getIdentity().imagePath ~= nil
+			or sbq.humanoidIdentity().imagePath ~= nil
 		then
 			return
 		end
@@ -114,7 +109,7 @@ function sbq.rollConvert()
 								table.remove(speciesList,i)
 							end
 						end
-						humanoid.setIdentity(humanoid.randomIdentity(newSpecies, humanoid.getIdentity().personalityIndex, npc.seed()))
+						sbq.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
 
 					end
 					convertBackType = npc.npcType()

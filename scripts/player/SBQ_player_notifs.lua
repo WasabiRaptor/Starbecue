@@ -1,22 +1,22 @@
 function sbq.notifyPlayer()
 	player.setUniverseFlag("foodhall_auriShop")
-	if not (root.modMetadata("Stardust Core") or root.modMetadata("StardustLib") or root.modMetadata("QuickbarMini") or root.modMetadata("Stardust Core Lite")) then
-		player.confirm({
-			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
-			icon = "/interface/errorpopup/erroricon.png",
-			title = "Starbecue Mod Requirement Warning",
-			message = "Stardust Core or Stardust Lite missing.\n \nMake sure to read install information."
-		})
-	end
-	if (not root.assetExists("/stats/monster_compat_list.config")) and not player.getProperty("sbqMonsterCoreLoaderWarned") then
-		player.setProperty("sbqMonsterCoreLoaderWarned", true)
-		player.confirm({
-			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
-			icon = "/interface/errorpopup/erroricon.png",
-			title = "Starbecue Mod Requirement Warning",
-			message = "Monster Core Loader missing.\n \nThis is not required, but without it you may find some mod incompatibilities, especially with FU.\n \nMake sure to read install information."
-		})
-	end
+    if not (root.assetSourceMetadata("Stardust Core") or root.assetSourceMetadata("StardustLib") or root.assetSourceMetadata("QuickbarMini") or root.assetSourceMetadata("Stardust Core Lite")) then
+        player.confirm({
+            paneLayout = "/interface/windowconfig/popup.config:paneLayout",
+            icon = "/interface/errorpopup/erroricon.png",
+            title = "Starbecue Mod Requirement Warning",
+            message = "Stardust Core or Stardust Lite missing.\n \nMake sure to read install information."
+        })
+    end
+	-- if (not root.assetExists("/stats/monster_compat_list.config")) and not player.getProperty("sbqMonsterCoreLoaderWarned") then
+	-- 	player.setProperty("sbqMonsterCoreLoaderWarned", true)
+	-- 	player.confirm({
+	-- 		paneLayout = "/interface/windowconfig/popup.config:paneLayout",
+	-- 		icon = "/interface/errorpopup/erroricon.png",
+	-- 		title = "Starbecue Mod Requirement Warning",
+	-- 		message = "Monster Core Loader missing.\n \nThis is not required, but without it you may find some mod incompatibilities, especially with FU.\n \nMake sure to read install information."
+	-- 	})
+	-- end
 	if root.itemConfig("spovpilldonut") ~= nil then
 		player.confirm({
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",
@@ -34,7 +34,7 @@ function sbq.notifyPlayer()
 	if root.version then
 		version = root.version()
 	end
-	local metadata = root.modMetadata("Starbecue")
+	local metadata = root.assetSourceMetadata("Starbecue")
 	if (version.sbq ~= metadata.intendedVersion) then
 		player.confirm({
 			paneLayout = "/interface/windowconfig/popup.config:paneLayout",

@@ -1,33 +1,34 @@
 local old = {
-	initAnimator = initAnimator or (function() end),
-	equipmentSlotUpdated = equipmentSlotUpdated or (function() end)
+	refreshHumanoidSpecies = refreshHumanoidSpecies or (function() end),
+	-- equipmentSlotUpdated = equipmentSlotUpdated or (function() end)
 }
 require("/scripts/any/SBQ_util.lua")
 
-function equipmentSlotUpdated(slot, itemDescriptor)
-	old.equipmentSlotUpdated(slot, itemDescriptor)
-	local slotFunc = equipped[slot .. "Slot"] or function(_) end
-	slotFunc(itemDescriptor)
-end
+-- function equipmentSlotUpdated(slot, itemDescriptor)
+-- 	old.equipmentSlotUpdated(slot, itemDescriptor)
+-- 	local slotFunc = equipped[slot .. "Slot"] or function(_) end
+-- 	slotFunc(itemDescriptor)
+-- end
 
 local prevAnimSpecies
 local prevAnimGender
-function initAnimator()
-	old.initAnimator()
+function refreshHumanoidSpecies()
+    old.refreshHumanoidSpecies()
+
 	sbq.refreshRemapTags()
-	equipped.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
-	equipped.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
-	equipped.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
-	equipped.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
+	-- equipped.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
+	-- equipped.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
+	-- equipped.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
+	-- equipped.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
 	-- equipped.primary(humanoid.getItemSlot("primary"))
 	-- equipped.alt(humanoid.getItemSlot("alt"))
-	if prevAnimSpecies and (prevAnimSpecies ~= humanoid.species()) then
+	if prevAnimSpecies and (prevAnimSpecies ~= sbq.species()) then
 		sbq.defaultAnimatorTags = animator.getTags()
 		if sbq.reloadVoreConfig then
-			sbq.reloadVoreConfig({ root.speciesConfig(humanoid.species()).voreConfig or "/humanoid/any/vore.config",
+			sbq.reloadVoreConfig({ root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config",
 				config and config.getParameter("voreConfig") })
 		end
-	elseif prevAnimGender and (prevAnimGender ~= humanoid.gender()) then
+	elseif prevAnimGender and (prevAnimGender ~= sbq.gender()) then
 		if SpeciesScript then
 			SpeciesScript:refreshInfusion()
 		end
@@ -37,15 +38,15 @@ function initAnimator()
 			occupant:getLocation():markSizeDirty(true)
 		end
 	end
-	prevAnimGender = humanoid.gender()
-	prevAnimSpecies = humanoid.species()
+	prevAnimGender = sbq.gender()
+	prevAnimSpecies = sbq.species()
 end
 
 function sbq.refreshRemapTags()
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
-	local speciesConfig = root.speciesConfig(humanoid.species())
+	local speciesConfig = root.speciesConfig(sbq.species())
 	if speciesConfig.useImagePathSpecies then
-		speciesConfig = root.speciesConfig(humanoid.getIdentity().imagePath or humanoid.species())
+		speciesConfig = root.speciesConfig(sbq.humanoidIdentity().imagePath or sbq.species())
 	end
 	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
 		local sourceColorMap = sbq.query(speciesConfig, { "colorRemapSources", tag })
