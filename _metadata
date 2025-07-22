@@ -33,7 +33,9 @@
 		"FrackinUniverse", "Frackin' Universe", // have to include FU to make sure it loads after so it doesn't kill our goddam fireplace as its terrestrial worlds patch doesn't give a shit about other mods adding shit to garden planets
 		"NPC Controller" // we don't want people changing OC's damage teams and controlling them
 	],
-	"incompatible" : [
-		"bk3k_shipDamage"
-	]
+	"scripts" : {
+		//"onLoad" : ["/scripts/assets/SBQ_onload.lua"],
+		"postLoad" : ["/scripts/assets/SBQ_postload.lua"]
+	}
+
 }
