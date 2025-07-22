@@ -230,3 +230,7 @@ function sbq.notifyResourceConsumed(resource, amount)
 		sbq.setResourcePercentage("energyRegenBlock", 1.0)
 	end
 end
+
+function sbq.checkStarpounds(slot)
+	return false
+end

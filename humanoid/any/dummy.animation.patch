@@ -2,6 +2,14 @@
 	{"op":"merge", "path":"", "value": {
 		"animatedParts": {
 			"stateTypes": {
+				"starpounds" : {
+					"default":"false",
+					"priority" : 1000,
+					"states" : {
+						"true": { "frames": 0, "cycle": 0, "mode": "end" },
+						"false": { "frames": 0, "cycle": 0, "mode": "end" }
+					}
+				},
 				"rpActionState" : {
 					"default":"none",
 					"priority" : 25,

@@ -39,7 +39,9 @@ function sbq.populateCatalogueList(name, tenantName)
 	if type(tenantName) == "table" then
 		tenantName = tenantName[1]
 	end
-	local tenantConfig = root.tenantConfig(tenantName)
+	local success, tenantConfig = pcall(root.tenantConfig, tenantName)
+	if not success then sbq.logError(("Invalid tenant entry in SBQ deed catalogue: %s, %s"):format(name, tenantName)) return end
+
 	local data = tenantConfig.checkRequirements or {}
 	for i, tenant in ipairs(tenantConfig.tenants) do
 		if tenant.spawn == "npc" then
@@ -133,8 +135,10 @@ function _ENV.orderFurniture:onClick()
 	local contextMenu = {}
 
 	if occupier.name then
-		local config = root.tenantConfig(occupier.name)
-		occupier.orderFurniture = config.orderFurniture or occupier.orderFurniture
+		local success, config = pcall(root.tenantConfig, (occupier.name))
+		if success then
+			occupier.orderFurniture = config.orderFurniture or occupier.orderFurniture
+		end
 	end
 
 

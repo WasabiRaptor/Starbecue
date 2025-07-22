@@ -32,7 +32,7 @@ end
 table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/preferences.config"))
 
 table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/misc.config"))
-table.insert(cfg.scripts, "misc.lua")
+table.insert(cfg.scripts, 1, "misc.lua")
 
 if sbq.helpTab then
 	table.insert(cfg.children[1].tabs, root.assetJson(sbq.helpTab))

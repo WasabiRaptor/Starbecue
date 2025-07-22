@@ -16,7 +16,7 @@ function init()
 		local recipes = tabData.recipes
 
 		_ENV.shopTabField:newTab({
-			type = "tab", id = tab.."ShopTab", title = tabData.title or "", toolTip = tabData.toolTip, icon = tabData.icon, color = tabData.color or "ff00ff",
+			type = "tab", id = tab.."ShopTab", title = sbq.getString(tabData.title), toolTip = sbq.getString(tabData.toolTip), icon = tabData.icon, color = tabData.color or "ff00ff",
 			contents = { type = "panel", style = "flat", children = {{align = 0, expandMode = {2,2}},{{ type = "scrollArea", scrollDirections = {0, 1}, scrollBars = true, thumbScrolling = true, children = {
 				{ type = "layout", id = tab.."ScrollArea", mode = "vertical", spacing = -3, align = 0, children = {}}
 			}}}}}
@@ -53,7 +53,7 @@ function init()
 					{
 						{ type = "label", text = resultItemConfig.config.shortdescription},
 						{
-							{ type = "label", text = "^gray;"..(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category), expandMode = {2,1}},
+							{ type = "label", text = "^gray;"..tostring(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category), expandMode = {2,1}},
 							bottom
 						}
 					}
@@ -63,7 +63,7 @@ function init()
 					buyRecipe = recipe
 					_ENV.itemInfoPanelSlot:setItem({ name = recipe.result, parameters = recipe.parameters })
 					_ENV.itemNameLabel:setText(resultItemConfig.parameters.shortdescription or resultItemConfig.config.shortdescription)
-					_ENV.itemCategoryLabel:setText("^gray;"..(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category))
+					_ENV.itemCategoryLabel:setText("^gray;"..tostring(catagoryLabels[resultItemConfig.config.category] or resultItemConfig.config.category))
 					_ENV.itemDescriptionLabel:setText(resultItemConfig.parameters.description or resultItemConfig.config.description)
 
 

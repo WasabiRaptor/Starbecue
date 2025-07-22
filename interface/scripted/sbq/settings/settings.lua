@@ -201,7 +201,6 @@ function sbq.assignSettingValue(setting, group, name)
 	local locked = sbq.checkLockedSetting(setting, group, name)
 	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
 
-	sbq.logInfo({ settingIdentifier, valueType, value }, 2)
 	if not widget then
 		return
 	end
@@ -242,22 +241,6 @@ function sbq.widgetScripts.changeSetting(value, setting, group, name)
 	else
 		world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", setting, value)
 		storage.sbqSettings[setting] = value
-	end
-	sbq.refreshSettingVisibility()
-end
-
-function sbq.widgetScripts.changeTableSetting(value, setting, group, name)
-	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then sbq.playErrorSound() sbq.assignSettingValue(setting, group, name) return false end
-
-	local table = sb.parseJson(value)
-	if not table then sbq.playErrorSound() return false end
-	if group and name then
-		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, table)
-		storage.sbqSettings[group][name][setting] = table
-	else
-		world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", setting, table)
-		storage.sbqSettings[setting] = table
 	end
 	sbq.refreshSettingVisibility()
 end

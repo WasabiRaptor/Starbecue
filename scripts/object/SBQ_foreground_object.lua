@@ -12,6 +12,8 @@ function init()
 	end
 end
 function update(dt)
+	if world.pointTileCollision(entity.position(), { "Null" }) then return end
+
 	sbq.checkTimers(dt)
 	if sbq.timer("check",1) then
 		fading = false

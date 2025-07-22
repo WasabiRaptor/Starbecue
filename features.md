@@ -383,7 +383,7 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Inkling](https://steamcommunity.com/sharedfiles/filedetails/?id=73485588) : inkling
 - [Octoling](https://steamcommunity.com/sharedfiles/filedetails/?id=73485588) : octoling
 - [Lamia](https://steamcommunity.com/sharedfiles/filedetails/?id=779096734) : lamia
-
+- [Space Skunks](https://steamcommunity.com/sharedfiles/filedetails/?id=3423728930) : skumks
 ---
 
 ## Techs

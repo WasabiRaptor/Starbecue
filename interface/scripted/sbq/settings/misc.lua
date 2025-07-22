@@ -10,23 +10,27 @@ function init()
 	for _, v in ipairs(candies) do
 		_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2], seed = sb.makeRandomSource():randu64()}})
 	end
-	local entityType = world.entityType(pane.sourceEntity())
+    local entityType = world.entityType(sbq.entityId())
 	if entityType == "npc" then
-		convertType = world.getNpcScriptParameter(pane.sourceEntity(), "sbqConvertType")
-		if convertType and (world.npcType(pane.sourceEntity()) ~= convertType) then
+		convertType = world.getNpcScriptParameter(sbq.entityId(), "sbqConvertType")
+		if convertType and (world.npcType(sbq.entityId()) ~= convertType) then
 			_ENV.resultTypeLabel:setText(convertType)
 			_ENV.convertNPCPanel:setVisible(true)
 		end
-		if sbq.cosmeticSlots and world.getNpcScriptParameter(pane.sourceEntity(), "sbqNPC") then
+		if sbq.cosmeticSlots and world.getNpcScriptParameter(sbq.entityId(), "sbqNPC") then
 			_ENV.npcCosmeticSlots:setVisible(true)
 			for k, v in pairs(sbq.cosmeticSlots) do
 				_ENV[k]:setItem(v)
 			end
-			_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(pane.sourceEntity(), "sbqIsCustomizable") or false)
+			_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(sbq.entityId(), "sbqIsCustomizable") or false)
 		end
 	elseif entityType == "object" then
-		_ENV.stripping:setVisible(world.getObjectParameter(pane.sourceEntity(), "hasCosmeticSlots") or false)
+		_ENV.stripping:setVisible(world.getObjectParameter(sbq.entityId(), "hasCosmeticSlots") or false)
 		_ENV.statBars:setVisible(false)
+    elseif entityType == "player" then
+		_ENV.upgradeInputPanel:setVisible(false)
+		_ENV.miscOtherPlayerLayout:clearChildren()
+        _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "scrollText", makeLabel = true })
 	end
 	local source = sbq.entityId()
 	_ENV.healthBar.parent:setVisible(world.entityIsResource(source, "health") or false)

@@ -2,19 +2,33 @@ function sbq.settingsInit()
 	message.setHandler("sbqSetGroupedSetting", function(_, _, ...)
 		return sbq.setGroupedSetting(...)
 	end)
-	message.setHandler("sbqSetSetting", function (_,_, ...)
+	message.setHandler("sbqSetSetting", function(_, _, ...)
 		return sbq.setSetting(...)
+    end)
+	message.setHandler("sbqCheckGroupedSetting", function(_, _, ...)
+		return sbq.checkGroupedSetting(...)
 	end)
-	message.setHandler("sbqGetTieredUpgrade", function (_,_, ...)
+	message.setHandler("sbqCheckSetting", function(_, _, ...)
+		return sbq.checkSetting(...)
+	end)
+	message.setHandler("sbqGetTieredUpgrade", function(_, _, ...)
 		return sbq.getTieredUpgrade(...)
 	end)
-	message.setHandler("sbqImportSettings", function (_,_, ...)
+	message.setHandler("sbqImportSettings", function(_, _, ...)
 		return sbq.importSettings(...)
 	end)
-	message.setHandler("sbqRefreshSettings", function (_,_, ...)
+	message.setHandler("sbqRefreshSettings", function(_, _, ...)
 		sbq.refreshPublicSettings()
 		sbq.refreshSettings()
 	end)
+end
+
+function sbq.checkSetting(setting)
+	return sbq.settings[setting]
+end
+
+function sbq.checkGroupedSetting(group, name, setting)
+	return sbq.settings[group][name][setting]
 end
 
 function sbq.setSetting(setting, value)
@@ -36,10 +50,11 @@ function sbq.setSetting(setting, value)
 	end
 	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
-			sbq[script](setting,value)
+			sbq[script](setting, value)
 		end
 	end
 end
+
 sbq.settingChanged = {}
 
 function sbq.getTieredUpgrade(upgradeName, tier, bonus)
@@ -48,10 +63,11 @@ function sbq.getTieredUpgrade(upgradeName, tier, bonus)
 	if bonus <= oldScore then return end
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentGetTieredUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier, bonus)
+		world.sendEntityMessage(parent, "sbqParentGetTieredUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier,
+			bonus)
 	end
 	if player then
-		player.queueUIMessage(sbq.getString(":"..upgradeName.."Increased"))
+		player.queueUIMessage(sbq.getString(":" .. upgradeName .. "Increased"))
 	end
 	storage.sbqUpgrades[upgradeName][tier] = bonus
 	sbq.refreshUpgrades(true)
@@ -65,7 +81,8 @@ function sbq.setGroupedSetting(group, name, setting, value)
 
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name, setting, value)
+		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name,
+			setting, value)
 	end
 	local old = sbq.settings[group][name][setting]
 	storage.sbqSettings[group][name][setting] = value
@@ -74,7 +91,7 @@ function sbq.setGroupedSetting(group, name, setting, value)
 	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, setting, value) end
 	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
-			sbq[script](setting,value, group, name)
+			sbq[script](setting, value, group, name)
 		end
 	end
 	sbq.refreshSettings()
@@ -83,6 +100,7 @@ function sbq.setGroupedSetting(group, name, setting, value)
 		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
 	end
 end
+
 sbq.groupedSettingChanged = {}
 
 function sbq.importSettings(newSettings)
@@ -106,7 +124,7 @@ function sbq.refreshSettings()
 		if type(amount) == "boolean" then
 			amount = (amount and 1) or 0
 		end
-		table.insert(modifiers, {stat = v, amount = tonumber(amount) or 0})
+		table.insert(modifiers, { stat = v, amount = tonumber(amount) or 0 })
 	end
 	sbq.setStatModifiers("sbqStats", modifiers)
 	if SpeciesScript then
@@ -156,8 +174,8 @@ function sbq.randomizeSettings()
 				for g, settings in pairs(v) do
 					for setting, v in pairs(settings) do
 						if type(v) == "string" then
-							if v:sub(1,1) == "." then
-								storage.sbqSettings[k][g][setting] = sbq.queryPath(storage.sbqSettings, v:sub(2,-1))
+							if v:sub(1, 1) == "." then
+								storage.sbqSettings[k][g][setting] = sbq.queryPath(storage.sbqSettings, v:sub(2, -1))
 							else
 								storage.sbqSettings[k][g][setting] = storage.sbqSettings[k][g][v]
 							end
@@ -167,7 +185,7 @@ function sbq.randomizeSettings()
 			else
 				if type(v) == "string" then
 					if v:sub(1, 1) == "." then
-						storage.sbqSettings[k] = sbq.queryPath(storage.sbqSettings, v:sub(2,-1))
+						storage.sbqSettings[k] = sbq.queryPath(storage.sbqSettings, v:sub(2, -1))
 					else
 						storage.sbqSettings[k] = storage.sbqSettings[v]
 					end

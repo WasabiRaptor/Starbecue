@@ -1,8 +1,16 @@
-local data = _ENV.metagui.inputData
-if not data.owner then
-	data.owner = player.uniqueId()
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSetOwner", player.uniqueId())
-elseif (data.owner ~= player.uniqueId()) and not player.isAdmin() then
+local data = {
+		owner = world.getObjectParameter(pane.sourceEntity(), "owner"),
+		overrideSettings = world.getObjectParameter(pane.sourceEntity(), "overrideSettings"),
+		overrideSettings_player = world.getObjectParameter(pane.sourceEntity(), "overrideSettings_player"),
+		overrideSettings_npc = world.getObjectParameter(pane.sourceEntity(), "overrideSettings_npc"),
+		overrideSettings_object = world.getObjectParameter(pane.sourceEntity(), "overrideSettings_object"),
+
+		invalidSettings = world.getObjectParameter(pane.sourceEntity(), "invalidSettings"),
+		invalidSettings_player = world.getObjectParameter(pane.sourceEntity(), "invalidSettings_player"),
+		invalidSettings_npc = world.getObjectParameter(pane.sourceEntity(), "invalidSettings_npc"),
+		invalidSettings_object = world.getObjectParameter(pane.sourceEntity(), "invalidSettings_object"),
+	}
+if (data.owner ~= player.uniqueId()) and not player.isAdmin() then
 	sbq.playErrorSound()
 	pane.dismiss()
 	return

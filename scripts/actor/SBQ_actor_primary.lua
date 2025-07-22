@@ -192,20 +192,24 @@ function applyDamageRequest(damageRequest)
 		local scaleAmount = damageRequest.damage + leftoverScale
 		leftoverScale     = (scaleAmount % sbq.config.scaleSnap)
 		scaleAmount       = scaleAmount - leftoverScale
+        local min, max    = math.abs(damageRequest.knockbackMomentum[1]), math.abs(damageRequest.knockbackMomentum[2])
+		if (min == 0) and (max == 0) then
+			min, max = nil, nil
+		end
 		if (math.abs(scaleAmount)) < sbq.config.scaleSnap then
 			leftoverScale = leftoverScale + scaleAmount
 			return {}
 		end
 		sbq.applyScale(destScale + scaleAmount,
-			math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2)))
+			math.max(0.25, scaleDuration - scaleTime, math.abs(damageRequest.damage / 2)), min, max)
 		return {}
 	end
 	return old.applyDamageRequest(damageRequest)
 end
 
-function sbq.applyScale(scale, duration)
+function sbq.applyScale(scale, duration, min, max)
 	local publicSettings = status.statusProperty("sbqPublicSettings") or {}
-	destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1))
+	destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1, min or -math.huge), max or math.huge)
 	oldScale = mcontroller.scale()
 	scaleTime = 0
 	scaleDuration = duration or 1

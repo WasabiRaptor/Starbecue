@@ -1,0 +1,68 @@
+{
+  "objectName" : "sbqMasculinizingRock",
+  "colonyTags" : ["gender"],
+  "rarity" : "Common",
+
+  "description" : ":masculinizingRockDesc",
+  "shortdescription" : ":masculinizingRockShortDesc",
+  "race" : "generic",
+  "category" : "other",
+
+  "particleEmitter" : {
+    "emissionRate" : 0.4,
+    "emissionVariance" : 0.2,
+    "pixelOrigin" : [8, 8],
+
+    "particle" : {
+      "type" : "animated",
+      "animation" : "/animations/sparkles/sparkle1.animation",
+      "size" : 1.0,
+      "fade" : 0,
+      "destructionAction" : "shrink",
+      "destructionTime" : 3,
+      "initialVelocity" : [0, 0],
+      "finalVelocity" : [0, 0],
+      "timeToLive" : 1,
+      "layer" : "front"
+    },
+
+    "particleVariance" : {
+      "position" : [0.5, 0.5]
+    }
+  },
+
+  "inventoryIcon" : "sbqMasculinizingRock.png?border=1;000000FF;00000000;",
+  "orientations" : [
+    {
+      "imageLayers" : [{"image" : "sbqMasculinizingRock.png", "fullbright":true},{"image" : "sbqTherianizingRockLit.png", "fullbright":false}],
+      "imagePosition" : [0, 0],
+      "frames" : 1,
+      "animationCycle" : 0.5,
+
+      "spaceScan" : 0.1,
+      "anchors" : [ "bottom" ]
+
+    }
+  ],
+
+  "smashSounds" : [ "/sfx/objects/rock_break1.ogg", "/sfx/objects/rock_break2.ogg", "/sfx/objects/rock_break3.ogg", "/sfx/objects/rock_break4.ogg", "/sfx/objects/rock_break5.ogg", "/sfx/objects/rock_crumble1.ogg", "/sfx/objects/rock_crumble2.ogg", "/sfx/objects/rock_crumble3.ogg", "/sfx/objects/rock_crumble4.ogg", "/sfx/objects/rock_crumble5.ogg" ],
+  "smashParticles" : [ { "count" : 4, "particle" : "rockshard" } ],
+
+  "sbqConfigGui" : "starbecue:genericConfig",
+  "sbqSetConfigReinit" : true,
+  "sbqGenericConfigSize" : [150, 50],
+  "sbqGenericConfigParameters" : [
+    {"id":"amount", "label":":amount", "toolTip" :":rockAmountTip", "min":1, "path":["projectileAmount"]},
+    {"id":"lifetime", "label":":lifetime", "toolTip" :":rockLifetimeTip", "min":1, "path":["projectileLifetime"]},
+    {"id":"identities", "label":":identities", "toolTip" :":rockIdentitiesTip", "path":["identities"]}
+  ],
+  "projectileAmount" : 3,
+  "projectileLifetime" : 3,
+
+  "scriptDelta":15,
+  "scripts" : ["sbqTherianizingRock.lua", "/scripts/object/SBQ_generic_config.lua"],
+  "builder" : "/scripts/item/SBQ_build_desc.lua",
+  "identities" : [
+    {"gender":"male"}
+  ]
+}

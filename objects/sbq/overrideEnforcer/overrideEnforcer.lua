@@ -11,11 +11,6 @@ function init()
 
 	storage.owner = config.getParameter("owner") or storage.owner
 
-	object.setInteractive(true)
-
-	message.setHandler("sbqSetOwner", function(_, _, owner)
-		storage.owner = config.getParameter("owner") or storage.owner or owner
-	end)
 	message.setHandler("sbqSmash", function(_, _)
 		object.smash()
 	end)
@@ -33,28 +28,28 @@ function update()
 	script.setUpdateDelta(0)
 end
 
-function onInteraction(args)
-	-- local uuid = world.entityUniqueId(args.sourceEntity)
-	-- if storage.ownerUUID and (uuid~= storage.ownerUUID) then return {} end
-	-- until we can determine if a player is admin server side we just have to let the ui open for a single frame...
-	return { "ScriptPane", {
-		data = {
-			owner = storage.owner,
-			overrideSettings = config.getParameter("overrideSettings"),
-			overrideSettings_player = config.getParameter("overrideSettings_player"),
-			overrideSettings_npc = config.getParameter("overrideSettings_npc"),
-			overrideSettings_object = config.getParameter("overrideSettings_object"),
+-- function onInteraction(args)
+-- 	-- local uuid = world.entityUniqueId(args.sourceEntity)
+-- 	-- if storage.ownerUUID and (uuid~= storage.ownerUUID) then return {} end
+-- 	-- until we can determine if a player is admin server side we just have to let the ui open for a single frame...
+-- 	return { "ScriptPane", {
+-- 		data = {
+-- 			owner = storage.owner,
+-- 			overrideSettings = config.getParameter("overrideSettings"),
+-- 			overrideSettings_player = config.getParameter("overrideSettings_player"),
+-- 			overrideSettings_npc = config.getParameter("overrideSettings_npc"),
+-- 			overrideSettings_object = config.getParameter("overrideSettings_object"),
 
-			invalidSettings = config.getParameter("invalidSettings"),
-			invalidSettings_player = config.getParameter("invalidSettings_player"),
-			invalidSettings_npc = config.getParameter("invalidSettings_npc"),
-			invalidSettings_object = config.getParameter("invalidSettings_object"),
-		},
-		gui = {},
-		scripts = { "/metagui/sbq/build.lua" },
-		ui = "starbecue:overrideEnforcer"
-	} }
-end
+-- 			invalidSettings = config.getParameter("invalidSettings"),
+-- 			invalidSettings_player = config.getParameter("invalidSettings_player"),
+-- 			invalidSettings_npc = config.getParameter("invalidSettings_npc"),
+-- 			invalidSettings_object = config.getParameter("invalidSettings_object"),
+-- 		},
+-- 		gui = {},
+-- 		scripts = { "/metagui/sbq/build.lua" },
+-- 		ui = "starbecue:overrideEnforcer"
+-- 	} }
+-- end
 
 function refresh()
 	world.setProperty("sbqOverrideEnforcerUUID", entity.uniqueId())

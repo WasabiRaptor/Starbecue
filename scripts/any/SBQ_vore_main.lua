@@ -877,6 +877,7 @@ function _State:emergencyEscape(occupant)
 end
 
 local function climaxBurst(emitter, burstChance)
+	if sbq.checkStarpounds("legs") then return end
 	animator.setParticleEmitterBurstCount(emitter, burstChance * 10)
 	animator.burstParticleEmitter(emitter)
 	if math.random() < burstChance then
@@ -1270,7 +1271,7 @@ function _Location:updateOccupancy(dt)
 		local infuseCount = 0
 		if self.infuseType and self.infuseSize then
 			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
-			addVisual = ((((infusedItem or {}).parameters or {}).preySize or 0) * self.settings.infusedSize)
+			infuseSize = ((sbq.query(infusedItem, { "parameters", "preySize"}) or 0 ) * self.settings.infusedSize)
 			infuseCount = self.settings.infusedSize
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(

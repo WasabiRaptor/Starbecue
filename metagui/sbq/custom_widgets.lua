@@ -147,7 +147,7 @@ function widgets.sbqSetting:init(base, param)
 	end
 	if param then
 		if param.makeLabel then
-			param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", mode = "horizontal", children = {
+			param = { type = "layout", id = sbq.widgetSettingIdentifier(param).."Layout", expandMode = {1,0}, mode = "horizontal", children = {
 				param,
 				{ type = "label", id = sbq.widgetSettingIdentifier(param).."Label", text = ":"..param.setting, width = param.labelWidth}
 			} }
@@ -617,7 +617,7 @@ function widgets.sbqCheckBox:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value or self.checked,self.setting, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value or self.checked,self.setting or self.id, self.groupName, self.groupKey)
 		end
 	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
@@ -820,7 +820,7 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	lastMenu = hooks
 	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
 end
-function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
+function mg.preyDialogueText(eid, pos, text, sound, speed, volume, id, lifetime)
 	if not pos or not text or text == "" then return nil end -- invalid argument passed
 	local menuId = "preyDialogueText:" .. (id or sb.makeRandomSource():randu64())
 	local cfg = {
@@ -833,7 +833,9 @@ function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 		text = text,
 		textSound = sound,
 		speed = speed,
-		volume = volume
+        volume = volume,
+        sourceRadius = -1,
+		dismissPrev = false,
 	}
 
 	local bm = theme.metrics.borderMargins.contextMenu
@@ -847,7 +849,7 @@ function mg.preyDialogueText(pos, text, sound, speed, volume, id, lifetime)
 	}
 	theme.modifyContextMenu(cfg) -- give theme a chance to edit whatever it likes
 
-	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, 0)
+	player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, config = cfg }, eid or 0)
 end
 
 mg.registerUninit(function() -- close any paired menus when this pane closes
@@ -934,12 +936,19 @@ function widgets.sbqTextBox:init(base, param)
 					end
 					number = math.min(max, math.max(number, min))
 					self:setText(tostring(number))
-					sbq.widgetScripts[self.script](number, self.setting, self.groupName,self.groupKey)
+					sbq.widgetScripts[self.script](number, self.setting or self.id, self.groupName, self.groupKey)
+				else
+					sbq.playErrorSound()
+				end
+			elseif self.settingType == "table" then
+				local parsed = sb.parseJson(self.text)
+				if parsed then
+					sbq.widgetScripts[self.script](parsed, self.setting or self.id, self.groupName, self.groupKey)
 				else
 					sbq.playErrorSound()
 				end
 			else
-				sbq.widgetScripts[self.script](tostring(self.text),self.setting,self.groupName,self.groupKey)
+				sbq.widgetScripts[self.script](tostring(self.text),self.setting or self.id,self.groupName,self.groupKey)
 			end
 		end
 	end
@@ -1240,7 +1249,7 @@ function widgets.sbqItemSlot:init(base, param)
     if self.script then
         function self:onItemModified()
 			if self.locked then return sbq.assignSettingValue(self.setting, self.groupName, self.groupKey) end
-            sbq.widgetScripts[self.script](self:item() or {}, self.setting, self.groupName, self.groupKey)
+            sbq.widgetScripts[self.script](self:item() or {}, self.setting or self.id, self.groupName, self.groupKey)
         end
     end
     if self.acceptScript then
@@ -1297,7 +1306,7 @@ function widgets.sbqButton:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value, self.setting, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value, self.setting or self.id, self.groupName, self.groupKey)
 		end
 	end
 end
@@ -1320,7 +1329,7 @@ function widgets.sbqIconButton:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value, self.setting, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value, self.setting or self.id, self.groupName, self.groupKey)
 		end
 	end
 end
