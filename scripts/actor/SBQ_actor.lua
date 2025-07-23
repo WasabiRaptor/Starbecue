@@ -3,13 +3,16 @@ local old = {
 }
 
 function sbq.actorInit()
-	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+    sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-	sbq.facingDirection = mcontroller.facingDirection
-	sbq.scale = mcontroller.scale
-	sbq.area = mcontroller.area
+    sbq.facingDirection = mcontroller.facingDirection
+    sbq.getScale = mcontroller.getScale
+    sbq.area = mcontroller.area
 
-	sbq.entityId = entity.id
+    sbq.entityId = entity.id
+end
+function sbq.actorUpdate(dt)
+
 end
 local responseMap = {
 	yes = true,

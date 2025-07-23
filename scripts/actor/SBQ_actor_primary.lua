@@ -131,7 +131,7 @@ function update(dt)
 			currentScale = math.max(destScale, currentScale)
 		end
 		local bounds = mcontroller.boundBox()
-		mcontroller.scale(currentScale)
+		mcontroller.getScale(currentScale)
 		local newBounds = mcontroller.boundBox()
 		mcontroller.translate({0,bounds[2]-newBounds[2]})
 		if (scaleTime >= scaleDuration) or (currentScale == destScale) then

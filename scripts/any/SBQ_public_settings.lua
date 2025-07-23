@@ -11,7 +11,7 @@ function sbq.setupPublicSettings()
 			settings = sbq.settings or {},
 			voreConfig = sbq.voreConfig or {},
 			locations = {},
-			currentScale = sbq.scale(),
+			currentScale = sbq.getScale(),
 			parentEntityData = { sbq.parentEntity() },
 		}
 	end)

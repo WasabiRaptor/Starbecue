@@ -508,7 +508,7 @@ function widgets.sbqSlider:getToolTip()
 			value = math.floor(value * 100)
 		end
 		if self.integer then
-			math.floor(value)
+			value = math.floor(value)
 		end
 		return mg.formatText(self.handles[self.current].toolTip) .. "\n"..sbq.strings.value..": " .. value .. (self.percent and "%" or "")
 	else

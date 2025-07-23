@@ -1,6 +1,10 @@
+local function sbqVersion()
+	return root.assetSourceMetadata(root.assetOrigin("/sbq.config")).version
+end
+
 function _ENV.titleCanvas:draw()
 	local c = widget.bindCanvas(self.backingWidget) c:clear()
-	c:drawText("Starbecue "..root.assetSourceMetadata("Starbecue").version, {
+	c:drawText("Starbecue "..sbqVersion(), {
 		position = {_ENV.titleCanvas.size[1]/2, _ENV.titleCanvas.size[2]},
 		horizontalAnchor = "mid",
 		verticalAnchor = "top",
@@ -9,7 +13,7 @@ end
 
 local _dismiss
 function init()
-	player.setProperty("sbqSettingsVersion", root.assetSourceMetadata("Starbecue").version)
+	player.setProperty("sbqSettingsVersion", sbqVersion())
 	_dismiss = pane.dismiss
 	pane.dismiss = function ()
 

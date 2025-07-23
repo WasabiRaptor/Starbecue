@@ -428,7 +428,7 @@ end
 
 function sbq.globalToLocal(pos, offset)
 	local facingDirection = sbq.facingDirection()
-	local scale = sbq.scale()
+	local scale = sbq.getScale()
 	pos = world.distance(pos, vec2.add(entity.position(), offset or {0,0}))
 	pos[1] = pos[1] * facingDirection / scale
 	pos[2] = pos[2] / scale
@@ -437,13 +437,13 @@ end
 
 function sbq.localToGlobal(pos)
 	local facingDirection = sbq.facingDirection()
-	local scale = sbq.scale()
+	local scale = sbq.getScale()
 	return {world.xwrap(pos[1] * facingDirection * scale), pos[2] * scale}
 end
 
-function sbq.scaleLocal(pos)
+function sbq.getScaleLocal(pos)
 	local facingDirection = sbq.facingDirection()
-	local scale = sbq.scale()
+	local scale = sbq.getScale()
 	return { pos[1] * facingDirection * scale, pos[2] * scale }
 end
 

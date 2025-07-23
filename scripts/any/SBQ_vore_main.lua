@@ -83,7 +83,7 @@ function sbq.init(config)
 		return sbq.queueAction(...)
 	end)
 	message.setHandler("sbqSettingsPageData", function ()
-		return sbq.getSettingsPageData()
+		return sbq.settingsPageData()
 	end)
 	message.setHandler("sbqActionList", function (_,_, ...)
 		return sbq.actionList(...)
@@ -288,7 +288,7 @@ function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	return SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 end
 
-function sbq.getSettingsPageData()
+function sbq.settingsPageData()
 	local settingsPageData = {
 		settingsPageName = sbq.entityName(entity.id()),
 		storageSettings = storage.sbqSettings or {},
@@ -297,7 +297,7 @@ function sbq.getSettingsPageData()
 		voreConfig = sbq.voreConfig or {},
 		locations = SpeciesScript.locations or {},
 		baseLocations = SpeciesScript.baseLocations or {},
-		currentScale = sbq.scale(),
+		currentScale = sbq.getScale(),
 		parentEntityData = { sbq.parentEntity() },
 		infuseOverrideSettings = sbq.infuseOverrideSettings or {}
 	}
@@ -1148,7 +1148,7 @@ function _Location:hasSpace(size)
 	return false
 end
 function _Location:getRemainingSpace(size)
-	local remainingSpace = self.maxSize - (self.occupancy.size + self.occupancy.addedSize + ((size or 0) * self.settings.multiplyFill  / sbq.scale()))
+	local remainingSpace = self.maxSize - (self.occupancy.size + self.occupancy.addedSize + ((size or 0) * self.settings.multiplyFill  / sbq.getScale()))
 	if remainingSpace < 0 then return false end
 	return remainingSpace
 end
@@ -1198,7 +1198,7 @@ function _Location:updateOccupancy(dt)
 	end
 	local prevVisualSize = self.occupancy.visualSize
 	local prevVisualCount = self.occupancy.visualCount
-    if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.scale())) and not self.occupancy.lockSize then
+    if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.getScale())) and not self.occupancy.lockSize then
 		self.occupancy.working = true -- prevents stack overflow from potential dependency loops
 
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
@@ -1251,7 +1251,7 @@ function _Location:updateOccupancy(dt)
 					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
-					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
+					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.getScale()))
 				end
 			end
 		end
@@ -1696,10 +1696,10 @@ function Occupants.update(dt)
 		end
 		location.occupancy.settingsDirty = false
 	end
-	Occupants.lastScale = sbq.scale()
+	Occupants.lastScale = sbq.getScale()
 
 	if Occupants.queueHudRefresh then
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.getSettingsPageData())
+		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.settingsPageData())
 		Occupants.queueHudRefresh = false
 	end
 	if Occupants.refreshOccupantModifiers then
@@ -2041,7 +2041,7 @@ function _Occupant:checkStruggleDirection(dt)
 	local dx = 0
 	local dy = 0
 	local powerMultiplier = self:stat("powerMultiplier")
-	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.scale()) * powerMultiplier
+	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.getScale()) * powerMultiplier
 	local staleTime = 5
 	if self:controlHeld("Up") then
 		dy = dy + 1

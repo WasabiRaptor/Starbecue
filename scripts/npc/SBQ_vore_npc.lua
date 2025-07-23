@@ -15,14 +15,14 @@ local old = {
 	equipped_primary = equipped.primary,
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
-	sbq_getSettingsPageData = sbq.getSettingsPageData,
+	sbq_settingsPageData = sbq.settingsPageData,
 	setNpcItemSlot = _ENV.setNpcItemSlot
 }
 
 function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
 end
-function sbq.getSettingsPageData()
-	local settingsPageData = old.sbq_getSettingsPageData()
+function sbq.settingsPageData()
+	local settingsPageData = old.sbq_settingsPageData()
 	settingsPageData.cosmeticSlots = {
 		headCosmetic = sbq.getItemSlot("headCosmetic"),
 		chestCosmetic = sbq.getItemSlot("chestCosmetic"),

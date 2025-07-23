@@ -36,6 +36,9 @@ function init()
 		sbq.lists = {}
 		sbq.voreConfig = sbq.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.setupSettingMetatables("player")
+		message.setHandler("sbqSettingsPageData", function ()
+			return sbq.settingsPageData()
+		end)
 	end
 	sbq.notifyPlayer()
 

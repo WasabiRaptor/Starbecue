@@ -361,7 +361,7 @@ function dialogueProcessor.sendPlayerDialogueBox(actions)
 end
 
 function dialogueProcessor.getPlayerDialogueBox(actions, sourceRadius)
-	local dialogueBoxData = sb.jsonMerge(sbq.getSettingsPageData(), {
+	local dialogueBoxData = sb.jsonMerge(sbq.settingsPageData(), {
 		dialogueTree = sbq.dialogueTree,
 		dialogueTreeStart = dialogue.path,
 		noActions = not actions,
