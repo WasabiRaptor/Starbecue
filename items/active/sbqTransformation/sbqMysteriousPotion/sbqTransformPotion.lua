@@ -27,8 +27,8 @@ function update(dt, fireMode, shiftHeld)
 		else
 			self.useTimer = nil
 			activeItem.setArmAngle(-math.pi / 4)
-			player.setScriptContext("starbecue")
-			player.callScript("sbq.doTransformation", table.unpack(config.getParameter("args") or {}))
+
+			world.sendEntityMessage(player.id(), "sbqDoTransformation", table.unpack(config.getParameter("args") or {}))
 			if not player.isAdmin() then item.consume(1) end
 		end
 	end

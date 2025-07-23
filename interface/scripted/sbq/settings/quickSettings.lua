@@ -20,8 +20,10 @@ function _ENV.agree:onClick()
 	local first = not player.getProperty("sbqAgreedTerms")
 	player.setProperty("sbqAgreedTerms", true)
 	if first then
-		player.setScriptContext("starbecue")
-		player.callScript("sbq.init", root.speciesConfig(player.species()).voreConfig or "/humanoid/any/vore.config")
+		local params = player.getHumanoidParameters()
+		params.sbqEnabled = true
+		player.setHumanoidParameters(params)
+		player.refreshHumanoidParameters()
 	end
 	_dismiss()
 end

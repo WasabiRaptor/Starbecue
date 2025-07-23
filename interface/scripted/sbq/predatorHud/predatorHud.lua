@@ -9,8 +9,7 @@ Occupants = {
 function init()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
 	backingCanvas:clear()
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.predHudOpen", true)
+	player.setProperty("sbqPredHudOpen", true)
 
 	message.setHandler("sbqDismissPredHud", function(_, _)
 		pane.dismiss()
@@ -96,8 +95,7 @@ function update()
 end
 
 function uninit()
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.predHudOpen", false)
+	player.setProperty("sbqPredHudOpen", false)
 end
 
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantLayout.config")
@@ -121,14 +119,12 @@ function sbq.refreshOccupants()
 		ActionButton.toolTip = occupant.locationName
 		function ActionButton:onClick()
 			local actions = {}
-			player.setScriptContext("starbecue")
-			for _, action in ipairs(player.callScript("sbq.actionList", "predHudSelect", occupant.entityId) or {}) do
+			for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predHudSelect", occupant.entityId):result() or {}) do
 				if action.available then
 					table.insert(actions, {
 						_ENV.metagui.formatText(action.name or (":"..action.action)),
 						function()
-							player.setScriptContext("starbecue")
-							local result = player.callScript("sbq.queueAction", action.action, occupant.entityId, table.unpack(action.args or {}))
+							local result = world.sendEntityMessage(player.id(), "sbqQueueAction", action.action, occupant.entityId, table.unpack(action.args or {})):result()
 							if (not result[1]) and (result[2] ~= "targetMissing") then
 								sbq.playErrorSound()
 								player.queueUIMessage(sbq.getString(":action_"..tostring(result[2])))
@@ -292,11 +288,10 @@ function _ENV.nextLocation:onClick()
 	sbq.changeLocation(1)
 end
 function _ENV.lockDown:onClick()
-	player.setScriptContext("starbecue")
 	if status.statPositive("sbqLockDown") then
-		player.callScript("sbq.queueAction", "lockDownClear")
+		world.sendEntityMessage(player.id(), "sbqQueueAction", "lockDownClear")
 	else
-		player.callScript("sbq.queueAction", "lockDown")
+		world.sendEntityMessage(player.id(), "sbqQueueAction", "lockDown")
 	end
 end
 

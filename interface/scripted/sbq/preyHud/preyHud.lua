@@ -69,8 +69,7 @@ function init()
 
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, newOccupantData)
 		if id ~= pane.sourceEntity() then pane.dismiss() end
-		player.setScriptContext("starbecue")
-		player.callScript("sbq.setCurrentLocationData", id, locationData, newOccupantData)
+		world.sendEntityMessage(player.id(), "sbqSetCurrentLocationData", id, locationData, newOccupantData)
 		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
 		player.setProperty("sbqPredWarpAttempted", 0)
 		processLocationData(locationData, newOccupantData)

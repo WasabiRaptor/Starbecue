@@ -164,6 +164,5 @@ _ENV.legsCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.backCosmetic.onItemModified = misc.cosmeticUpdated
 
 function _ENV.customizeNPC:onClick()
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.customizeEntity", pane.sourceEntity())
+	world.sendEntityMessage(player.id(), "sbqCustomizeEntity", pane.sourceEntity())
 end

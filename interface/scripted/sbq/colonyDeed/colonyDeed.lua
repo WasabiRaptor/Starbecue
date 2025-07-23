@@ -328,8 +328,7 @@ function sbq.refreshDeedPage()
 		function customize:onClick()
 			local id = world.getUniqueEntityId(tenant.uniqueId)
 			if not id then sbq.playErrorSound() return end
-			player.setScriptContext("starbecue")
-			player.callScript("sbq.customizeEntity", id)
+			world.sendEntityMessage(player.id(), "sbqCustomizeEntity", id)
 		end
 
 	end

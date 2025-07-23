@@ -21,8 +21,8 @@ function update(dt, fireMode, shiftHeld)
 		else
 			self.useTimer = nil
 			activeItem.setArmAngle(-math.pi / 4)
-			player.setScriptContext("starbecue")
-			player.callScript("sbq.revertTF")
+
+			world.sendEntityMessage(player.id(), "sbqRevertTF")
 			if not player.isAdmin() then item.consume(1) end
 			init()
 		end

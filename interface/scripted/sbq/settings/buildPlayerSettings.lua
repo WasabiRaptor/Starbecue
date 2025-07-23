@@ -1,7 +1,6 @@
 cfg = root.assetJson("/interface/scripted/sbq/settings/settings.ui")
 
-player.setScriptContext("starbecue")
-local sbq = player.callScript("sbq.getSettingsPageData") or {}
+local sbq = world.sendEntityMessage(player.id(), "sbqGetSettingsPageData"):result() or {}
 cfg.inputData = {
 	sbq = sbq
 }

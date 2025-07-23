@@ -5,9 +5,8 @@ local textSpeed = _ENV.metagui.cfg.speed
 local textPosition = 1
 local textVolume = _ENV.metagui.cfg.volume or 1
 function init()
-    player.setScriptContext("starbecue")
 	sbq.debugLogInfo(text, 1)
-    if player.callScript("sbq.checkSetting", "scrollText") then
+	if world.sendEntityMessage(player.id(), "sbqCheckSetting", "scrollText"):result() then
 		scrollText()
 	else
 		_ENV.dialogueLabel:setText(text)
@@ -19,39 +18,39 @@ function update()
 end
 
 function scrollText()
-    if textPosition > utf8.len(text) then
-        return
-    end
-    while not findNextRealCharacter() do
-    end
-    local pos1 = utf8.offset(text, textPosition)
-    local pos2 = utf8.offset(text, textPosition + 1) - 1
+	if textPosition > utf8.len(text) then
+		return
+	end
+	while not findNextRealCharacter() do
+	end
+	local pos1 = utf8.offset(text, textPosition)
+	local pos2 = utf8.offset(text, textPosition + 1) - 1
 	if textPosition == utf8.len(text) then
 		pos2 = string.len(text)
 	end
-    _ENV.dialogueLabel:setText(string.sub(text, 1, pos2))
+	_ENV.dialogueLabel:setText(string.sub(text, 1, pos2))
 
-    if textSound and string.sub(text, pos1, pos2) ~= " " then
-        local sound = textSound
-        while type(sound) == "table" do
-            sound = sound[math.random(#sound)]
-        end
-        pane.playSound(sound, nil, textVolume)
-    end
+	if textSound and string.sub(text, pos1, pos2) ~= " " then
+		local sound = textSound
+		while type(sound) == "table" do
+			sound = sound[math.random(#sound)]
+		end
+		pane.playSound(sound, nil, textVolume)
+	end
 
-    textPosition = textPosition + 1
-    sbq.timer(nil, (textSpeed or 1) * sbq.config.textSpeedMul, scrollText)
+	textPosition = textPosition + 1
+	sbq.timer(nil, (textSpeed or 1) * sbq.config.textSpeedMul, scrollText)
 end
 
 function findNextRealCharacter()
-    local pos1 = utf8.offset(text, textPosition)
-    local pos2 = utf8.offset(text, textPosition + 1) - 1
+	local pos1 = utf8.offset(text, textPosition)
+	local pos2 = utf8.offset(text, textPosition + 1) - 1
 	if textPosition == utf8.len(text) then
 		pos2 = string.len(text)
 	end
-    local char = string.sub(text, pos1, pos2)
+	local char = string.sub(text, pos1, pos2)
 
-    local semicolon = string.find(text, ";", pos2+1, true)
+	local semicolon = string.find(text, ";", pos2+1, true)
 	local space = string.find(text, " ", pos2+1, true)
 
 	if char == "^" and semicolon and ((not space) or (space > semicolon)) then

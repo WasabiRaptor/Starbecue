@@ -241,10 +241,7 @@ function selectAction(...)
 	for i, v in ipairs(option.args or {}) do
 		table.insert(args, i,  v)
 	end
-	if option.context and option.script then
-		player.setScriptContext(option.context)
-		player.callScript(option.script, table.unpack(args))
-	elseif option.message and world.entityExists(messageTarget) then
+	if option.message and world.entityExists(messageTarget) then
 		world.sendEntityMessage(messageTarget, option.message, table.unpack(args))
 	end
 	if option.close then pane.dismiss() end

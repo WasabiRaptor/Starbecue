@@ -7,19 +7,19 @@ require"/scripts/humanoid/SBQ_humanoid.lua"
 require"/scripts/actor/SBQ_actor.lua"
 require"/scripts/player/SBQ_player_notifs.lua"
 require"/scripts/any/SBQ_util.lua"
-local predHudOpen = false
 function init()
+	player.setProperty("predHudOpen", false)
 	storage = storage or {}
 	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
 	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
 	sbq.targetPosition = player.aimPosition
-    sbq.resetLounging = player.stopLounging
-    sbq.species = player.species
+	sbq.resetLounging = player.stopLounging
+	sbq.species = player.species
 	sbq.gender = player.gender
 
 	sbq.config = root.assetJson("/sbq.config")
-    sbq.pronouns = root.assetJson("/sbqPronouns.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	sbq.actorInit()
 	sbq.settingsInit()
@@ -82,7 +82,7 @@ function init()
 		player.setProperty("sbqPredWarpAttempted", 0)
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
-			gui = predHudOpen and { panefeature = { offset = { -96, 0 } } } or {},
+			gui = player.getProperty("predHudOpen") and { panefeature = { offset = { -96, 0 } } } or {},
 			locationData = locationData,
 			occupantData = newOccupantData
 		}, id)
@@ -212,6 +212,9 @@ function init()
 			}
 		}, entity.id())
 	end)
+	message.setHandler("sbqCustomizeEntity", function (_,_, id)
+		sbq.customizeEntity(id)
+	end)
 
 	sbq.timer("preyMissingWaitPrompt", 60)
 end
@@ -286,9 +289,7 @@ function sbq.buildActionRequestOptions(id, actionList)
 	end
 	return options
 end
-function sbq.predHudOpen(open)
-	predHudOpen = open
-end
+
 function sbq.customizeEntity(eid)
 	sbq.addRPC(player.characterCreation({ speciesIdentites = world.entityStatusProperty(eid, "sbqSpeciesIdentities"), currentSpecies = world.entitySpecies(eid) }), function(response)
 		world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
@@ -304,7 +305,7 @@ function sbq.collapseEssenceStacks()
 		local predUUID = item.parameters.predUuid or "noPred"
 		output[predUUID] = output[predUUID] or {}
 		output[predUUID][uuid] = output[predUUID][uuid] or {}
-        local current = output[predUUID][uuid][item.name]
+		local current = output[predUUID][uuid][item.name]
 
 		local createdDate = 0
 		local createdDateType = type(sbq.query(item.parameters, { "createdDate" }))

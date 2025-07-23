@@ -75,15 +75,14 @@ function update(dt, fireMode, shiftHeld, controls)
 end
 
 function uninit()
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.queueAction", "grabRelease")
-	player.callScript("sbq.queueAction", "rpActionReset")
+	world.sendEntityMessage(player.id(), "sbqQueueAction", "grabRelease")
+	world.sendEntityMessage(player.id(), "sbqQueueAction", "rpActionReset")
 end
 
 function sbq.setAction(action)
 	storage.action = action
-	player.setScriptContext("starbecue")
-	local icon, shortdescription, description = sbq.getActionData(action, (player.callScript("sbq.actionAvailable", storage.action) or {})[1], storage.iconDirectory)
+
+	local icon, shortdescription, description = sbq.getActionData(action, (world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1], storage.iconDirectory)
 	activeItem.setInventoryIcon(icon)
 	activeItem.setFriendlyName(shortdescription)
 	activeItem.setDescription(description.."\n"..sbq.strings.controllerDescAppend)
@@ -96,8 +95,8 @@ function sbq.clickAction()
 		withoutEntityIds = loungeable.entitiesLounging(),
 		includedTypes = {"creature"}
 	})
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.tryAction", "rpActionReset")
+
+	world.sendEntityMessage(player.id(), "sbqTryAction", "rpActionReset")
 	local bounds = mcontroller.collisionBoundBox()
 	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
 	local result
@@ -112,7 +111,7 @@ function sbq.clickAction()
 	end
 
     if result == nil then
-        result = player.callScript("sbq.tryAction", storage.action) or {}
+        result = world.sendEntityMessage(player.id(), "sbqTryAction", storage.action):result() or {}
     end
     local success, failReason, time, successfulFail, failReason2 = table.unpack(result)
 
@@ -125,13 +124,13 @@ end
 
 function sbq.attemptAction(targetId)
 	if shiftHeldTime > 0 then
-		local success, failReason = table.unpack(player.callScript("sbq.actionAvailable", storage.action, targetId) or {})
+		local success, failReason = table.unpack(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action, targetId):result() or {})
 		if success then
 			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true), function(response)
 				if not response then return end
 				local tryAction, isDom, line, action, target = table.unpack(response)
 				if tryAction then
-					player.callScript("sbq.tryAction", storage.action, targetId)
+					world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId)
 				end
 			end)
 		end
@@ -139,7 +138,7 @@ function sbq.attemptAction(targetId)
 	else
 		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
 		if sbq.query(targetSettings, {"subBehavior", storage.action, "consentRequired"}) then return false, "consentRequired" end
-		return table.unpack(player.callScript("sbq.tryAction", storage.action, targetId) or {})
+		return table.unpack(world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId):result() or {})
 	end
 end
 
@@ -235,8 +234,8 @@ RadialMenu.AssignMenu = AssignMenu
 setmetatable(AssignMenu, _RadialMenu)
 function AssignMenu:init()
 	local options = {}
-	player.setScriptContext("starbecue")
-	for _, action in ipairs(player.callScript("sbq.actionList", "assign") or {}) do
+
+	for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "assign"):result() or {}) do
 		local icon, shortdescription, description = sbq.getActionData(action.action, true, storage.iconDirectory)
 		table.insert(options, {
 			args = {"controllerAssign", action.action},
@@ -275,8 +274,8 @@ RadialMenu.SelectedOccupantMenu = SelectedOccupantMenu
 setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
 	local options = {}
-	player.setScriptContext("starbecue")
-	for _, action in ipairs(player.callScript("sbq.actionList", "predRadialMenuSelect", entityId) or {}) do
+
+	for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predRadialMenuSelect", entityId):result() or {}) do
 		table.insert(options, {
 			name = sbq.getString(action.name or (":" .. action.action)),
 			args = { action.action, entityId, table.unpack(action.args or {}) },
@@ -304,8 +303,8 @@ RadialMenu.RoleplayMenu = RoleplayMenu
 setmetatable(RoleplayMenu, _RadialMenu)
 function RoleplayMenu:init()
 	local options = {}
-	player.setScriptContext("starbecue")
-	for _, action in ipairs(player.callScript("sbq.actionList", "rp") or {}) do
+
+	for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "rp"):result() or {}) do
 		table.insert(options, {
 			name = sbq.getString(action.name or (":" .. action.action)),
 			args = { action.action, nil, table.unpack(action.args or {}) },

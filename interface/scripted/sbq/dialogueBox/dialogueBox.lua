@@ -23,8 +23,7 @@ function init()
 	message.setHandler("sbqCloseDialogueBox", function ()
 		pane.dismiss()
 	end)
-	player.setScriptContext("starbecue")
-	doScrollText = player.callScript("sbq.checkSetting", "scrollText")
+	doScrollText = world.sendEntityMessage(player.id(), "sbqCheckSetting", "scrollText"):result()
 
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
@@ -106,8 +105,7 @@ function _ENV.dialogueCont:onClick()
 		dialogueBox.refresh()
 	end
 	if dialogue.result.callScript then
-		player.setScriptContext(dialogue.result.scriptContext or "starbecue")
-		local path = player.callScript(dialogue.result.callScript, pane.sourceEntity(), table.unpack(dialogue.result.callScriptArgs or {}))
+		local path = world.sendEntityMessage(player.id(), dialogue.result.callScript, pane.sourceEntity(), table.unpack(dialogue.result.callScriptArgs or {})):result()
 		if type(path) == "string" then
 			dialogueBox.refresh(path)
 			return

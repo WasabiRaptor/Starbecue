@@ -457,8 +457,7 @@ function sbq.widgetScripts.clearRecentlyDigested()
     sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
 end
 function sbq.widgetScripts.collapseEssenceStacks()
-	player.setScriptContext("starbecue")
-	player.callScript("sbq.collapseEssenceStacks")
+	world.sendEntityMessage(player.id(), "sbqCollapseEssenceStacks")
 end
 
 function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
