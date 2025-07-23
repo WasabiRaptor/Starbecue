@@ -26,11 +26,11 @@ end
 
 function Default:settingAnimations()
 	local lust = 0
-	if sbq.isResource("sbqLust") then
-		lust = sbq.resourcePercentage("sbqLust")
+	if status.isResource("sbqLust") then
+		lust = status.resourcePercentage("sbqLust")
 	end
 	local legs = sbq.getItemSlot("legsCosmetic") or sbq.getItemSlot("legs")
-	if (not (sbq.statPositive("legsNude") or sbq.statPositive("nude"))) and legs and (not root.itemConfig(legs).config.showVoreAnims) and (sbq.voreConfig.legsVoreWhitelist and not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
+	if (not (status.statPositive("legsNude") or status.statPositive("nude"))) and legs and (not root.itemConfig(legs).config.showVoreAnims) and (sbq.voreConfig.legsVoreWhitelist and not sbq.voreConfig.legsVoreWhitelist[legs.name]) then
 		self:doAnimations(sbq.voreConfig.legsHide)
 		for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
 			animator.setParticleEmitterActive(v, false)
@@ -68,7 +68,7 @@ function Default:settingAnimations()
 		end
 	end
 	local chest = sbq.getItemSlot("chestCosmetic") or sbq.getItemSlot("chest")
-	if (not (sbq.statPositive("chestNude") or sbq.statPositive("nude"))) and chest and (not root.itemConfig(chest).config.showVoreAnims) and (sbq.voreConfig.chestVoreWhitelist and not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
+	if (not (status.statPositive("chestNude") or status.statPositive("nude"))) and chest and (not root.itemConfig(chest).config.showVoreAnims) and (sbq.voreConfig.chestVoreWhitelist and not sbq.voreConfig.chestVoreWhitelist[chest.name]) then
 		self:doAnimations(sbq.voreConfig.chestHide)
 		for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
 			animator.setParticleEmitterActive(v, false)
@@ -97,20 +97,20 @@ function Default:hideSlots(hideSlots)
 	for k, v in pairs(hideSlots) do
 		if v then table.insert(modifiers, {stat = k.."Nude", amount = 1})end
 	end
-	sbq.setStatModifiers("sbqHideSlots", modifiers)
+	status.setPersistentEffects("sbqHideSlots", modifiers)
 end
 function Default:showSlots()
-	sbq.clearStatModifiers("sbqHideSlots")
+	status.clearPersistentEffects("sbqHideSlots")
 end
 function Default:refreshStripping()
-	if not sbq.isResource("sbqLust") then return end
+	if not status.isResource("sbqLust") then return end
 	local modifiers = {}
 	for _, k in ipairs({"head","chest","legs","back"}) do
-		if sbq.resourcePercentage("sbqLust") > sbq.settings[k.."Strip"] then
+		if status.resourcePercentage("sbqLust") > sbq.settings[k.."Strip"] then
 			table.insert(modifiers, {stat = k.."Nude", amount = 1})
 		end
 	end
-	sbq.setStatModifiers("sbqStripping", modifiers)
+	status.setPersistentEffects("sbqStripping", modifiers)
 	SpeciesScript:settingAnimations()
 end
 
@@ -299,7 +299,7 @@ function default:trySendDeeper(name, action, target, failureReason, size, ...)
 end
 
 function default:voreAvailable(name, action, target, locationName, subLocationName, throughput, ...)
-	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
+	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	local size
 	if target then
 		if (target == sbq.loungingIn()) then return false, "invalidAction" end
@@ -355,7 +355,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 end
 
 function default:tryVore(name, action, target, ...)
-	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
+	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	if target == sbq.loungingIn() then return false, "invalidAction" end
 	local loungeAnchor = world.entityCurrentLounge(target)
 	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
@@ -432,7 +432,7 @@ function default:tryVore(name, action, target, ...)
 	end
 end
 function default:tryLetout(name, action, target, throughput, ...)
-	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
+	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	local occupant = Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	throughput = throughput or action.throughput
@@ -467,7 +467,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	end
 end
 local function letout(funcName, action, target, preferredAction, ...)
-	if sbq.statPositive("sbqIsPrey") or sbq.statPositive("sbqEntrapped") then return false, "nested" end
+	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	if target then
 		occupant = Occupants.entityId[tostring(target)]
 		if not occupant then return end
@@ -551,8 +551,8 @@ end
 function default:turboDigest(name, action, target, ...)
 	if not self:turboDigestAvailable(name, action, target, ...) then return false, "invalidAction" end
 	local occupant = Occupants.entityId[tostring(target)]
-	occupant:sendEntityMessage("sbqTurboDigest", sbq.resource("energy"))
-	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+	occupant:sendEntityMessage("sbqTurboDigest", status.resource("energy"))
+	status.overConsumeResource("energy", status.resourceMax("energy"))
 end
 
 function default:turboHealAvailable(name, action, target, ...)
@@ -567,8 +567,8 @@ end
 function default:turboHeal(name, action, target, ...)
 	if not self:turboHealAvailable(name, action, target, ...) then return false, "invalidAction" end
 	local occupant = Occupants.entityId[tostring(target)]
-	occupant:sendEntityMessage("sbqTurboHeal", sbq.resource("energy"))
-	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+	occupant:sendEntityMessage("sbqTurboHeal", status.resource("energy"))
+	status.overConsumeResource("energy", status.resourceMax("energy"))
 end
 
 function default:digested(name, action, target, item, digestType, drop, ...)
@@ -718,8 +718,8 @@ end
 function default:turboReform(name, action, target, ...)
 	if not self:turboReformAvailable(name, action, target, ...) then return false, "invalidAction" end
 	local occupant = Occupants.entityId[tostring(target)]
-	occupant:sendEntityMessage("sbqTurboHeal", sbq.resource("energy"))
-	sbq.overConsumeResource("energy", sbq.resourceMax("energy"))
+	occupant:sendEntityMessage("sbqTurboHeal", status.resource("energy"))
+	status.overConsumeResource("energy", status.resourceMax("energy"))
 end
 
 
@@ -897,7 +897,7 @@ function default:lockDown(name, action, target, ...)
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
-	sbq.setStatModifiers("sbqLockDown", {
+	status.setPersistentEffects("sbqLockDown", {
 		"sbqLockDown",
 		{ stat = "sbqLockDown", amount = 1 },
 		{ stat = "energyRegenPercentageRate", effectiveMultiplier = 0}
@@ -908,7 +908,7 @@ function default:lockDownClear(name, action, target)
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
-	sbq.clearStatModifiers("sbqLockDown")
+	status.clearPersistentEffects("sbqLockDown")
 end
 
 function default:releaseOccupantAvailable(name, action, target)

@@ -46,7 +46,7 @@ function sbq.setSetting(setting, value)
 	sbq.refreshSettings()
 	if sbq.config.publicSettings[setting] then
 		sbq.publicSettings[setting] = sbq.settings[setting]
-		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
 	end
 	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
 		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
@@ -97,7 +97,7 @@ function sbq.setGroupedSetting(group, name, setting, value)
 	sbq.refreshSettings()
 	if sbq.config.publicSettings[setting] then
 		sbq.publicSettings[group][name][setting] = sbq.settings[group][name][setting]
-		sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
 	end
 end
 
@@ -126,7 +126,7 @@ function sbq.refreshSettings()
 		end
 		table.insert(modifiers, { stat = v, amount = tonumber(amount) or 0 })
 	end
-	sbq.setStatModifiers("sbqStats", modifiers)
+	status.setPersistentEffects("sbqStats", modifiers)
 	if SpeciesScript then
 		SpeciesScript:settingAnimations()
 	end
@@ -147,7 +147,7 @@ function sbq.refreshPublicSettings()
 			end
 		end
 	end
-	sbq.setProperty("sbqPublicSettings", sbq.publicSettings)
+	status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
 end
 
 function sbq.randomizeSettings()

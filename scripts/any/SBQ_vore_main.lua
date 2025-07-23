@@ -42,11 +42,11 @@ function controlPressed(seat, control, time)
 	if SpeciesScript.active and Occupants.seat[seat] then
 		Occupants.seat[seat]:controlPressed(control, time)
 	else
-		local eid = loungeable.entityLoungingIn(seat)
+		local eid = sbq.loungeable.entityLoungingIn(seat)
 		if eid and world.entityExists(eid) then
 			world.sendEntityMessage(eid, "sbqReleased")
 		end
-		loungeable.setLoungeEnabled(seat, false)
+		sbq.loungeable.setLoungeEnabled(seat, false)
 	end
 	-- sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
@@ -54,20 +54,20 @@ function controlReleased(seat, control, time)
 	if SpeciesScript.active and Occupants.seat[seat] then
 		Occupants.seat[seat]:controlReleased(control, time)
 	else
-		local eid = loungeable.entityLoungingIn(seat)
+		local eid = sbq.loungeable.entityLoungingIn(seat)
 		if eid and world.entityExists(eid) then
 			world.sendEntityMessage(eid, "sbqReleased")
 		end
-		loungeable.setLoungeEnabled(seat, false)
+		sbq.loungeable.setLoungeEnabled(seat, false)
 	end
 	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
 
 function sbq.init(config)
 	sbq.defaultAnimatorTags = animator.getTags()
-	sbq.clearStatModifiers("sbqLockDown")
-	sbq.clearStatModifiers("sbqHideSlots")
-	sbq.clearStatModifiers("sbqStripping")
+	status.clearPersistentEffects("sbqLockDown")
+	status.clearPersistentEffects("sbqHideSlots")
+	status.clearPersistentEffects("sbqStripping")
 	sbq.settingsInit()
 	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
@@ -136,23 +136,23 @@ function sbq.uninit()
 end
 
 function sbq.passiveStatChanges(dt)
-	if sbq.isResource("sbqLust") then
-		local hornyPercent = sbq.resourcePercentage("sbqLust")
-		if hornyPercent < sbq.stat("sbqLustScriptMax") then
-			sbq.modifyResource("sbqLust", sbq.stat("sbqLustScriptDelta") * dt * sbq.resourcePercentage("food"))
+	if status.isResource("sbqLust") then
+		local hornyPercent = status.resourcePercentage("sbqLust")
+		if hornyPercent < status.stat("sbqLustScriptMax") then
+			status.modifyResource("sbqLust", status.stat("sbqLustScriptDelta") * dt * status.resourcePercentage("food"))
 		end
 	end
-	if sbq.isResource("sbqRest") then
+	if status.isResource("sbqRest") then
 		if sbq.loungingIn() then
-			sbq.modifyResource("sbqRest", sbq.stat("sbqRestScriptDelta") * dt * (sbq.resourcePercentage("health")))
+			status.modifyResource("sbqRest", status.stat("sbqRestScriptDelta") * dt * (status.resourcePercentage("health")))
 		else
-			sbq.modifyResource("sbqRest", sbq.stat("sbqRestScriptDelta") * dt * (1 - math.min(sbq.resourcePercentage("health"), 0.8)))
+			status.modifyResource("sbqRest", status.stat("sbqRestScriptDelta") * dt * (1 - math.min(status.resourcePercentage("health"), 0.8)))
 		end
 	end
 end
 
 function sbq.reloadVoreConfig(config)
-	sbq.clearStatModifiers("occupantModifiers")
+	status.clearPersistentEffects("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true
 	-- if reloading while another transformation is already active, uninitialize it first
 	if SpeciesScript.active then
@@ -459,7 +459,7 @@ function _State:refreshActions()
 			}
 		end
 	end
-	sbq.setProperty("sbqActionData", publicActionData)
+	status.setStatusProperty("sbqActionData", publicActionData)
 end
 
 function _State:recieveOccupants(newOccupants)
@@ -900,10 +900,10 @@ function _State:climax(entityId)
 
 	if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".climax", entityId) then
 		dialogueProcessor.speakDialogue(function ()
-			sbq.resetResource("sbqLust")
+			status.resetResource("sbqLust")
 		end)
 	else
-		sbq.resetResource("sbqLust")
+		status.resetResource("sbqLust")
 	end
 end
 
@@ -1343,8 +1343,8 @@ function _Location:update(dt)
 		if (self.occupancy.count > 0) and self.settings.gurgleSounds and self.occupancy.list[1] then
 			local occupant = self.occupancy.list[#self.occupancy.list]
 			animator.setSoundPosition(self.gurgleSound or "gurgle", occupant:localPosition())
-			if sbq.isResource(self.gurgleResource or "food") then
-				local res = sbq.resourcePercentage(self.gurgleResource or "food")
+			if status.isResource(self.gurgleResource or "food") then
+				local res = status.resourcePercentage(self.gurgleResource or "food")
 				animator.setSoundVolume(self.gurgleSound or "gurgle", 0.5 + ((self.gurgleResourceInvert and (1 - res)) or res), 0.25)
 			end
 			animator.playSound(self.gurgleSound or "gurgle")
@@ -1514,7 +1514,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, (sbq.voreConfig.seatCount or sbq.config.seatCount) - 1 do
-		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
+		if not (Occupants.seat["occupant"..i] or sbq.loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
 		end
@@ -1563,7 +1563,7 @@ function Occupants.insertOccupant(newOccupant)
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
-		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
+		if not (Occupants.seat["occupant"..i] or sbq.loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
 		end
@@ -1708,7 +1708,7 @@ function Occupants.update(dt)
 		for _, occupant in ipairs(Occupants.list) do
 			util.appendLists(modifiers, occupant.predModifiers or {})
 		end
-		sbq.setStatModifiers("occupantModifiers", modifiers)
+		status.setPersistentEffects("occupantModifiers", modifiers)
 	end
 end
 
@@ -1781,7 +1781,7 @@ function _Occupant:update(dt)
 		local compression = self.locationSettings.compression
 		local compressionMin = self.locationSettings.compressionMin
 		if compression == "time" then
-			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (sbq.stat(location.powerMultiplier) * dt * sbq.config.compressionRate))
+			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (status.stat(location.powerMultiplier) * dt * sbq.config.compressionRate))
 		elseif compression == "health" then
 			self.sizeMultiplier = math.max( compressionMin, self:resourcePercentage("health"))
 		end
@@ -1835,8 +1835,8 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	end
 
 	local persistentStatusEffects = {
-		{ stat = "sbqDigestTick", amount = math.floor(sbq.stat(location.powerMultiplier or "powerMultiplier")) },
-		{ stat = "sbqDigestingPower", amount = sbq.stat(location.powerMultiplier or "powerMultiplier") },
+		{ stat = "sbqDigestTick", amount = math.floor(status.stat(location.powerMultiplier or "powerMultiplier")) },
+		{ stat = "sbqDigestingPower", amount = status.stat(location.powerMultiplier or "powerMultiplier") },
 		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
@@ -1877,10 +1877,10 @@ function _Occupant:refreshLocation(name, subLocation, force)
 				util.appendLists(preyModifiers, effectConfig.preyModifiers)
 			end
 			if effectConfig.predStatModifiers then
-				util.appendLists(predModifiers, sbq.getModifiers(effectConfig.predStatModifiers, sbq.stat(location.powerMultiplier or "powerMultiplier")))
+				util.appendLists(predModifiers, sbq.getModifiers(effectConfig.predStatModifiers, status.stat(location.powerMultiplier or "powerMultiplier")))
 			end
 			if effectConfig.preyStatModifiers then
-				util.appendLists(preyModifiers, sbq.getModifiers(effectConfig.preyStatModifiers, sbq.stat(location.powerMultiplier or "powerMultiplier")))
+				util.appendLists(preyModifiers, sbq.getModifiers(effectConfig.preyStatModifiers, status.stat(location.powerMultiplier or "powerMultiplier")))
 			end
 		end
 	end
@@ -2011,7 +2011,7 @@ function _Occupant:attemptStruggle(control)
 		end
 		if (bonusTime > 0) then
 			if not self:controlHeld("Shift") then
-				sbq.modifyResource("energy", -(struggleAction.predCost or sbq.config.predStruggleCost) * powerMultiplier)
+				status.modifyResource("energy", -(struggleAction.predCost or sbq.config.predStruggleCost) * powerMultiplier)
 			end
 			if not self:overConsumeResource("energy", (struggleAction.preyCost or sbq.config.preyStruggleCost) * powerMultiplier ) then return end
 
@@ -2019,9 +2019,9 @@ function _Occupant:attemptStruggle(control)
 				self:giveResource(k,v)
 			end
 			for k, v in pairs(struggleAction.givePredResource or {}) do
-				sbq.giveResource(k,v)
+				status.giveResource(k,v)
 			end
-			if sbq.isResource("sbqLust") and sbq.resourcePercentage("sbqLust") >= 1 then
+			if status.isResource("sbqLust") and status.resourcePercentage("sbqLust") >= 1 then
 				SpeciesScript:climax(self.entityId)
 			end
 		end
@@ -2084,9 +2084,9 @@ end
 function _Occupant:tryStruggleAction(inc, bonusTime)
 	if (not self.struggleAction) or (not self:active())
 		or self:controlHeld("Shift") or self:resourceLocked("energy")
-		or (sbq.statPositive("sbqLockDown") and (sbq.resource("energy") > 0))
+		or (status.statPositive("sbqLockDown") and (status.resource("energy") > 0))
 	then return false end
-	if sbq.statPositive("sbqLockDown") then SpeciesScript:queueAction("lockDownClear", self.entityId) end
+	if status.statPositive("sbqLockDown") then SpeciesScript:queueAction("lockDownClear", self.entityId) end
 	locationStore = self.locationStore[self.location]
 	if self.struggleAction.holdAnimations and not self.struggleAction.pressAnimations then
 		SpeciesScript:doAnimations(self.struggleAction.holdAnimations or {}, {s_direction = self.struggleDirection})
@@ -2208,64 +2208,64 @@ function _Occupant:localPosition()
 	return sbq.localPartPoint(self.seat, "loungeOffset")
 end
 function _Occupant:controlHeld(...)
-	return loungeable.controlHeld(self.seat, ...)
+	return sbq.loungeable.controlHeld(self.seat, ...)
 end
 function _Occupant:controlHeldTime(...)
-	return loungeable.controlHeldTime(self.seat, ...)
+	return sbq.loungeable.controlHeldTime(self.seat, ...)
 end
 function _Occupant:aimPosition(...)
-	return loungeable.aimPosition(self.seat, ...)
+	return sbq.loungeable.aimPosition(self.seat, ...)
 end
 function _Occupant:entityLoungingIn(...)
-	return loungeable.entityLoungingIn(self.seat, ...)
+	return sbq.loungeable.entityLoungingIn(self.seat, ...)
 end
 function _Occupant:setLoungeEnabled(...)
-	return loungeable.setLoungeEnabled(self.seat, ...)
+	return sbq.loungeable.setLoungeEnabled(self.seat, ...)
 end
 function _Occupant:setLoungeOrientation(...)
-	return loungeable.setLoungeOrientation(self.seat, ...)
+	return sbq.loungeable.setLoungeOrientation(self.seat, ...)
 end
 function _Occupant:setLoungeEmote(...)
-	return loungeable.setLoungeEmote(self.seat, ...)
+	return sbq.loungeable.setLoungeEmote(self.seat, ...)
 end
 function _Occupant:setLoungeDance(...)
-	return loungeable.setLoungeDance(self.seat, ...)
+	return sbq.loungeable.setLoungeDance(self.seat, ...)
 end
 function _Occupant:setLoungeDirectives(...)
-	return loungeable.setLoungeDirectives(self.seat, ...)
+	return sbq.loungeable.setLoungeDirectives(self.seat, ...)
 end
 function _Occupant:setLoungeStatusEffects(...)
-	return loungeable.setLoungeStatusEffects(self.seat, ...)
+	return sbq.loungeable.setLoungeStatusEffects(self.seat, ...)
 end
 function _Occupant:setToolUsageSuppressed(...)
-	return loungeable.setToolUsageSuppressed(self.seat, ...)
+	return sbq.loungeable.setToolUsageSuppressed(self.seat, ...)
 end
 function _Occupant:setDismountable(...)
-	return loungeable.setDismountable(self.seat, ...)
+	return sbq.loungeable.setDismountable(self.seat, ...)
 end
 function _Occupant:setHidden(...)
-	return loungeable.setHidden(self.seat, ...)
+	return sbq.loungeable.setHidden(self.seat, ...)
 end
 function _Occupant:setItemBlacklist(...)
-	return loungeable.setItemBlacklist(self.seat, ...)
+	return sbq.loungeable.setItemBlacklist(self.seat, ...)
 end
 function _Occupant:setItemWhitelist(...)
-	return loungeable.setItemWhitelist(self.seat, ...)
+	return sbq.loungeable.setItemWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTagBlacklist(...)
-	return loungeable.setItemTagBlacklist(self.seat, ...)
+	return sbq.loungeable.setItemTagBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTagWhitelist(...)
-	return loungeable.setItemTagWhitelist(self.seat, ...)
+	return sbq.loungeable.setItemTagWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTypeBlacklist(...)
-	return loungeable.setItemTypeBlacklist(self.seat, ...)
+	return sbq.loungeable.setItemTypeBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTypeWhitelist(...)
-	return loungeable.setItemTypeWhitelist(self.seat, ...)
+	return sbq.loungeable.setItemTypeWhitelist(self.seat, ...)
 end
 function _Occupant:getLoungeIndex()
-	return loungeable.getIndexFromName(self.seat)
+	return sbq.loungeable.getIndexFromName(self.seat)
 end
 
 function _Occupant:logInfo(json)

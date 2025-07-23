@@ -41,7 +41,7 @@ function sbq_hunting.dom(action)
 	local consent = math.random() < settings.getConsentChance
 	for _, target in ipairs(world.entityQuery(mcontroller.position(), 50, {
 		withoutEntityId = entity.id(), includedTypes = { "creature" },
-		withoutEntityIds = loungeable.entitiesLounging(),
+		withoutEntityIds = sbq.loungeable.entitiesLounging(),
 	}) or {}) do
 		if sbq_hunting.checkTarget(action, true, target, consent) and SpeciesScript:actionAvailable(action, target) then
 			table.insert(targets, target)
@@ -103,7 +103,7 @@ function sbq_hunting.sub(action)
 	local consent = math.random() < settings.getConsentChance
 	for _, target in ipairs(world.entityQuery(mcontroller.position(), 50, {
 		withoutEntityId = entity.id(), includedTypes = { "creature" },
-		withoutEntityIds = loungeable.entitiesLounging(),
+		withoutEntityIds = sbq.loungeable.entitiesLounging(),
 	}) or {}) do
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings") or {}
 		local targetAction = (sbq.getPublicProperty(target, "sbqActionData") or {})[action]
@@ -261,7 +261,7 @@ function sbq_hunting.domNoPrompt(target)
 	local function callback()
 		local success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(sbq_hunting.action, target)
 		if success then
-			if not sbq.statPositive("sbqLockDown") and (math.random() < (sbq.settings.lockDownChance)) then
+			if not status.statPositive("sbqLockDown") and (math.random() < (sbq.settings.lockDownChance)) then
 				sbq.queueAction("lockDown", target)
 			end
 			if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree

@@ -2,7 +2,6 @@
 sbq = {}
 require"/scripts/any/SBQ_RPC_handling.lua"
 require"/scripts/rect.lua"
-require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/humanoid/SBQ_humanoid.lua"
 require"/scripts/actor/SBQ_actor.lua"
@@ -15,15 +14,18 @@ function init()
 	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
 	sbq.targetPosition = player.aimPosition
-	sbq.resetLounging = player.stopLounging
+    sbq.resetLounging = player.stopLounging
+    sbq.species = player.species
+	sbq.gender = player.gender
+	sbq.loungeable = player
 
 	sbq.config = root.assetJson("/sbq.config")
-	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+    sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	sbq.actorInit()
 	sbq.settingsInit()
 	sbq.humanoidInit()
-	function sbq.setProperty(...)
+	function status.setStatusProperty(...)
 		if player.getProperty("sbqAgreedTerms") then status.setStatusProperty(...) end
 	end
 	if player.getProperty("sbqAgreedTerms") then

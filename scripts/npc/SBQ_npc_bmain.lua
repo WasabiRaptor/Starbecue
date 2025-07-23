@@ -10,7 +10,6 @@ require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/any/SBQ_public_settings.lua"
 
-require"/scripts/humanoid/SBQ_humanoidAnimator.lua"
 require"/scripts/humanoid/SBQ_humanoid.lua"
 require"/scripts/any/SBQ_RPC_handling.lua"
 require"/scripts/any/SBQ_util.lua"
@@ -21,7 +20,13 @@ function init()
 	old.init()
 
 	sbq.config = root.assetJson("/sbq.config")
+
 	sbq.targetPosition = npc.aimPosition
+    sbq.resetLounging = npc.resetLounging
+    sbq.species = npc.species
+	sbq.gender = npc.gender
+	sbq.loungeable = npc
+
 	sbq.actorInit()
 	sbq.humanoidInit()
 	sbq.actorMessages()

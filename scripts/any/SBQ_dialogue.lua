@@ -385,7 +385,7 @@ function dialogueProcessor.speakDialogue(callback)
 		self.board:setEntity("interactionSource", dialogue.target)
 	end
 	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * utf8.len(results.dialogue))
-	if sbq.statPositive("sbqIsPrey") and sbq.loungingIn() then
+	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
 			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
 	else
@@ -405,6 +405,42 @@ function dialogueProcessor.predictTime()
 		time = time + (dismissTime or 0) + (utf8.len(v) * ((textSpeed or 1) * sbq.config.textSpeedMul))
 	end
 	return time
+end
+
+function sbq.sayDialogue(string, tags, imagePortrait, emote, appendName)
+	if type(string) == "string" and string ~= "" then
+		if string:find("<love>") then
+			status.addEphemeralEffect("love")
+		end
+		if string:find("<slowlove>") then
+			status.addEphemeralEffect("slowlove")
+		end
+		if string:find("<confused>") then
+			status.addEphemeralEffect("sbqConfused")
+		end
+		if string:find("<sleepy>") then
+			status.addEphemeralEffect("sbqSleepy")
+		end
+		if string:find("<sad>") then
+			status.addEphemeralEffect("sbqSad")
+		end
+		if string:find("<dontSpeak>") then return end
+
+		string = sb.replaceTags(string, tags or {})
+		if string == "" then return end
+
+		if appendName then
+			string = sbq.entityName(entity.id())..":\n"..string
+		end
+		if type(imagePortrait) == "string" then
+			sbq.sayPortrait(string, imagePortrait, nil, {})
+		else
+			sbq.say(string, nil, {})
+		end
+		if type(emote) == "string" then
+			sbq.emote(emote)
+		end
+	end
 end
 
 

@@ -93,7 +93,7 @@ function sbq.clickAction()
 	if not storage.action then return false end
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {
 		withoutEntityId = entity.id(),
-		withoutEntityIds = loungeable.entitiesLounging(),
+		withoutEntityIds = sbq.loungeable.entitiesLounging(),
 		includedTypes = {"creature"}
 	})
 	player.setScriptContext("starbecue")
@@ -197,7 +197,7 @@ local TopMenu = {}
 RadialMenu.TopMenu = TopMenu
 setmetatable(TopMenu, _RadialMenu)
 function TopMenu:init()
-	local occupants = loungeable.entitiesLounging()
+	local occupants = sbq.loungeable.entitiesLounging()
 	local options = {
 		{
 			args = {"letout", false, storage.action},
@@ -256,7 +256,7 @@ RadialMenu.OccupantsMenu = OccupantsMenu
 setmetatable(OccupantsMenu, _RadialMenu)
 function OccupantsMenu:init()
 	local options = {}
-	local occupants = loungeable.entitiesLounging()
+	local occupants = sbq.loungeable.entitiesLounging()
 
 	for _, entityId in ipairs(occupants) do
 		table.insert(options, {

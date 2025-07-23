@@ -1,6 +1,7 @@
 sbq = {}
 require"/scripts/any/SBQ_RPC_handling.lua"
 require"/scripts/any/SBQ_override_dummies.lua"
+require"/scripts/any/SBQ_status.lua"
 require"/scripts/any/SBQ_vore_main.lua"
 require"/scripts/any/SBQ_rewards.lua"
 require"/scripts/any/SBQ_dialogue.lua"
@@ -20,16 +21,16 @@ function init()
 	sbq.say = object.say
 	sbq.sayPortrait = object.sayPortrait
 
-	sbq.setProperty = object.setConfigParameter
+	status.setStatusProperty = object.setConfigParameter
 
 	sbq.dialogueTree = sbq.fetchConfigArray(config.getParameter("dialogueTree"))
 
 	storage.baseStats = sbq.initStats(config.getParameter("stats") or {})
 	storage.effectCategories = sb.jsonMerge(config.getParameter("effectCategories") or {}, storage.effectCategories or {})
 	storage.stats = storage.stats or {}
-	sbq.calculateStats()
+	status.calculateStats()
 	storage.resourceData = config.getParameter("resources") or {}
-	storage.resources = sb.jsonMerge(sbq.getDefaultResources(), storage.resources or {})
+	storage.resources = sb.jsonMerge(status.getDefaultResources(), storage.resources or {})
 	storage.resourcesLocked = storage.resourcesLocked or {}
 
 	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings") or {}
@@ -53,16 +54,16 @@ end
 function update(dt)
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
-	sbq.resourceDeltas(dt)
+	status.update(dt)
 
-	if sbq.resource("energy") == 0 then
-		sbq.setResourceLocked("energy", true)
-	elseif sbq.resourcePercentage("energy") == 1 then
-		sbq.setResourceLocked("energy", false)
+	if status.resource("energy") == 0 then
+		status.setResourceLocked("energy", true)
+	elseif status.resourcePercentage("energy") == 1 then
+		status.setResourceLocked("energy", false)
 	end
 
-	if not sbq.resourcePositive("energyRegenBlock") then
-		sbq.modifyResourcePercentage("energy", sbq.stat("energyRegenPercentageRate") * dt)
+	if not status.resourcePositive("energyRegenBlock") then
+		status.modifyResourcePercentage("energy", status.stat("energyRegenPercentageRate") * dt)
 	end
 
 	sbq.update(dt)

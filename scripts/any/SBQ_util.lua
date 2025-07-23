@@ -1,13 +1,3 @@
-local _sbq = {}
-function _sbq.__index(table, key)
-	if npc and npc[key] then return npc[key] end
-	if player and player[key] then return player[key] end
-	if monster and monster[key] then return monster[key] end
-	if object and object[key] then return object[key] end
-	if loungeable and loungeable[key] then return loungeable[key] end
-end
-setmetatable(sbq, _sbq)
-
 function sbq.fetchConfigArray(input, path)
     if type(input) == "table" and input[1] then
         local out = {}
