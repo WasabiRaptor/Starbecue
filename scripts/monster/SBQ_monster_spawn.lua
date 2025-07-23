@@ -34,13 +34,11 @@ function init()
 				sbq.struggleBehavior(...)
 			end
 		end
-		-- the metatable __index on this table seems to not get this so I have to define it
-		function behavior:blackboard(...)
-			return _behavior:blackboard(...)
-		end
-		function behavior:clear(...)
-			return _behavior:clear(...)
-		end
+		setmetatable(behavior, {
+			__index = function (t, k)
+				return _behavior[k]
+			end
+		})
 		self.behavior = behavior
 	end
 
