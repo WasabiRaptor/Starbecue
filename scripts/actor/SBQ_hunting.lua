@@ -41,7 +41,7 @@ function sbq_hunting.dom(action)
 	local consent = math.random() < settings.getConsentChance
 	for _, target in ipairs(world.entityQuery(mcontroller.position(), 50, {
 		withoutEntityId = entity.id(), includedTypes = { "creature" },
-		withoutEntityIds = sbq.loungeable.entitiesLounging(),
+		withoutEntityIds = loungeable.entitiesLounging(),
 	}) or {}) do
 		if sbq_hunting.checkTarget(action, true, target, consent) and SpeciesScript:actionAvailable(action, target) then
 			table.insert(targets, target)
@@ -103,7 +103,7 @@ function sbq_hunting.sub(action)
 	local consent = math.random() < settings.getConsentChance
 	for _, target in ipairs(world.entityQuery(mcontroller.position(), 50, {
 		withoutEntityId = entity.id(), includedTypes = { "creature" },
-		withoutEntityIds = sbq.loungeable.entitiesLounging(),
+		withoutEntityIds = loungeable.entitiesLounging(),
 	}) or {}) do
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings") or {}
 		local targetAction = (sbq.getPublicProperty(target, "sbqActionData") or {})[action]

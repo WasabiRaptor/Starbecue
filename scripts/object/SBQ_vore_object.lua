@@ -8,6 +8,7 @@ require"/scripts/any/SBQ_dialogue.lua"
 require"/scripts/any/SBQ_dialogue_scripts.lua"
 
 function init()
+	loungeable = object
 	for k, v in pairs(config.getParameter("scriptStorage") or {}) do
 		if storage[k] == nil then storage[k] = v end
 	end

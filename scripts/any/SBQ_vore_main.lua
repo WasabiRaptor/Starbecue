@@ -42,11 +42,11 @@ function controlPressed(seat, control, time)
 	if SpeciesScript.active and Occupants.seat[seat] then
 		Occupants.seat[seat]:controlPressed(control, time)
 	else
-		local eid = sbq.loungeable.entityLoungingIn(seat)
+		local eid = loungeable.entityLoungingIn(seat)
 		if eid and world.entityExists(eid) then
 			world.sendEntityMessage(eid, "sbqReleased")
 		end
-		sbq.loungeable.setLoungeEnabled(seat, false)
+		loungeable.setLoungeEnabled(seat, false)
 	end
 	-- sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
 end
@@ -54,11 +54,11 @@ function controlReleased(seat, control, time)
 	if SpeciesScript.active and Occupants.seat[seat] then
 		Occupants.seat[seat]:controlReleased(control, time)
 	else
-		local eid = sbq.loungeable.entityLoungingIn(seat)
+		local eid = loungeable.entityLoungingIn(seat)
 		if eid and world.entityExists(eid) then
 			world.sendEntityMessage(eid, "sbqReleased")
 		end
-		sbq.loungeable.setLoungeEnabled(seat, false)
+		loungeable.setLoungeEnabled(seat, false)
 	end
 	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
 end
@@ -1514,7 +1514,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, (sbq.voreConfig.seatCount or sbq.config.seatCount) - 1 do
-		if not (Occupants.seat["occupant"..i] or sbq.loungeable.entityLoungingIn("occupant"..i)) then
+		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
 		end
@@ -1563,7 +1563,7 @@ function Occupants.insertOccupant(newOccupant)
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 0, sbq.config.seatCount - 1 do
-		if not (Occupants.seat["occupant"..i] or sbq.loungeable.entityLoungingIn("occupant"..i)) then
+		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
 		end
@@ -2208,64 +2208,64 @@ function _Occupant:localPosition()
 	return sbq.localPartPoint(self.seat, "loungeOffset")
 end
 function _Occupant:controlHeld(...)
-	return sbq.loungeable.controlHeld(self.seat, ...)
+	return loungeable.controlHeld(self.seat, ...)
 end
 function _Occupant:controlHeldTime(...)
-	return sbq.loungeable.controlHeldTime(self.seat, ...)
+	return loungeable.controlHeldTime(self.seat, ...)
 end
 function _Occupant:aimPosition(...)
-	return sbq.loungeable.aimPosition(self.seat, ...)
+	return loungeable.aimPosition(self.seat, ...)
 end
 function _Occupant:entityLoungingIn(...)
-	return sbq.loungeable.entityLoungingIn(self.seat, ...)
+	return loungeable.entityLoungingIn(self.seat, ...)
 end
 function _Occupant:setLoungeEnabled(...)
-	return sbq.loungeable.setLoungeEnabled(self.seat, ...)
+	return loungeable.setLoungeEnabled(self.seat, ...)
 end
 function _Occupant:setLoungeOrientation(...)
-	return sbq.loungeable.setLoungeOrientation(self.seat, ...)
+	return loungeable.setLoungeOrientation(self.seat, ...)
 end
 function _Occupant:setLoungeEmote(...)
-	return sbq.loungeable.setLoungeEmote(self.seat, ...)
+	return loungeable.setLoungeEmote(self.seat, ...)
 end
 function _Occupant:setLoungeDance(...)
-	return sbq.loungeable.setLoungeDance(self.seat, ...)
+	return loungeable.setLoungeDance(self.seat, ...)
 end
 function _Occupant:setLoungeDirectives(...)
-	return sbq.loungeable.setLoungeDirectives(self.seat, ...)
+	return loungeable.setLoungeDirectives(self.seat, ...)
 end
 function _Occupant:setLoungeStatusEffects(...)
-	return sbq.loungeable.setLoungeStatusEffects(self.seat, ...)
+	return loungeable.setLoungeStatusEffects(self.seat, ...)
 end
 function _Occupant:setToolUsageSuppressed(...)
-	return sbq.loungeable.setToolUsageSuppressed(self.seat, ...)
+	return loungeable.setToolUsageSuppressed(self.seat, ...)
 end
 function _Occupant:setDismountable(...)
-	return sbq.loungeable.setDismountable(self.seat, ...)
+	return loungeable.setDismountable(self.seat, ...)
 end
 function _Occupant:setHidden(...)
-	return sbq.loungeable.setHidden(self.seat, ...)
+	return loungeable.setHidden(self.seat, ...)
 end
 function _Occupant:setItemBlacklist(...)
-	return sbq.loungeable.setItemBlacklist(self.seat, ...)
+	return loungeable.setItemBlacklist(self.seat, ...)
 end
 function _Occupant:setItemWhitelist(...)
-	return sbq.loungeable.setItemWhitelist(self.seat, ...)
+	return loungeable.setItemWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTagBlacklist(...)
-	return sbq.loungeable.setItemTagBlacklist(self.seat, ...)
+	return loungeable.setItemTagBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTagWhitelist(...)
-	return sbq.loungeable.setItemTagWhitelist(self.seat, ...)
+	return loungeable.setItemTagWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTypeBlacklist(...)
-	return sbq.loungeable.setItemTypeBlacklist(self.seat, ...)
+	return loungeable.setItemTypeBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTypeWhitelist(...)
-	return sbq.loungeable.setItemTypeWhitelist(self.seat, ...)
+	return loungeable.setItemTypeWhitelist(self.seat, ...)
 end
 function _Occupant:getLoungeIndex()
-	return sbq.loungeable.getIndexFromName(self.seat)
+	return loungeable.getIndexFromName(self.seat)
 end
 
 function _Occupant:logInfo(json)

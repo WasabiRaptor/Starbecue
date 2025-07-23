@@ -25,7 +25,6 @@ function init()
     sbq.resetLounging = npc.resetLounging
     sbq.species = npc.species
 	sbq.gender = npc.gender
-	sbq.loungeable = npc
 
 	sbq.actorInit()
 	sbq.humanoidInit()

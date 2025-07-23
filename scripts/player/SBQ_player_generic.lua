@@ -17,7 +17,6 @@ function init()
     sbq.resetLounging = player.stopLounging
     sbq.species = player.species
 	sbq.gender = player.gender
-	sbq.loungeable = player
 
 	sbq.config = root.assetJson("/sbq.config")
     sbq.pronouns = root.assetJson("/sbqPronouns.config")
