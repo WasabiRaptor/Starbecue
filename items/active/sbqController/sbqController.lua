@@ -33,10 +33,13 @@ function init()
 		if RadialMenu[script] then
 			RadialMenu[script](RadialMenu, ...)
 		else
-			sb.logInfo(string.format("[%s] Attmpted invalid radial menu script: %s(%s)", entity.id(), script, sb.printJson({...})))
+			sbq.logInfo(string.format("Attmpted invalid radial menu script: %s(%s)", script, sb.printJson({...})))
 		end
-	end)
+    end)
+
+	interface.queueMessage("blorbo")
 end
+
 
 function dontDoRadialMenu(arg)
 	dontDoMenu = arg
@@ -117,7 +120,7 @@ function sbq.clickAction()
 
 	if (not success) and (failReason ~= "targetMissing") then
 		animator.playSound("error")
-		player.queueUIMessage(sbq.getString(":action_"..tostring(failReason)))
+		interface.queueMessage(sbq.getString(":action_"..tostring(failReason)))
 	end
 	return table.unpack(result)
 end
@@ -179,7 +182,7 @@ function _RadialMenu:openRadialMenu(overrides)
 		{
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			default = {
-				context = "starbecue",
+				messageTarget = player.id(),
 				message = "sbqControllerRadialMenuScript"
 			},
 			cancel = {}
@@ -203,7 +206,7 @@ function TopMenu:init()
 			name = sbq.strings.letout,
 			locked = (not occupants) or (not occupants[1]),
 			description = sbq.strings.controllerLetOutAnyDesc,
-			script = "sbq.tryAction"
+			message = "sbqTryAction"
 		},
 		{
 			args = { "open", "RoleplayMenu" },
@@ -224,7 +227,6 @@ function TopMenu:init()
 		}
 	}
 	self:openRadialMenu({ options = options, cancel = {
-		script = false,
 		message = false
 	}})
 end
@@ -281,14 +283,14 @@ function SelectedOccupantMenu:init(entityId)
 			args = { action.action, entityId, table.unpack(action.args or {}) },
 			locked = not action.available,
 			description = sbq.getString(action.description or (":" .. action.action.."Desc")),
-			script = "sbq.tryAction"
+			message = "sbqTryAction"
 		})
 	end
 	if world.isMonster(entityId) or world.isNpc(entityId) then
 		table.insert(options, ((#options >= 1) and 2) or 1, {
 			name = sbq.strings.interact,
 			args = {entityId},
-			script = "player.interactWithEntity",
+			message = "sbqInteractWithEntity",
 			description = sbq.strings.interactDesc
 		})
 	end
@@ -310,7 +312,7 @@ function RoleplayMenu:init()
 			args = { action.action, nil, table.unpack(action.args or {}) },
 			locked = not action.available,
 			description = sbq.getString(action.description or (":" .. action.action.."Desc")),
-			script = "sbq.tryAction"
+			message = "sbqTryAction"
 		})
 	end
 	self:openRadialMenu({ options = options, cancel = {

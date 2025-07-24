@@ -2,7 +2,7 @@
 storage = _ENV.metagui.inputData or {}
 if storage.locked and (storage.lockOwner ~= player.uniqueId()) and not player.isAdmin() then
 	sbq.playErrorSound()
-	player.queueUIMessage(sbq.getString(":targetOwned"))
+	interface.queueMessage(sbq.getString(":targetOwned"))
 	pane.dismiss()
 end
 
@@ -225,7 +225,7 @@ function sbq.insertTenant(slot)
 	local npcConfig = root.npcConfig(tenant.type)
 	if not npcConfig then
 		sbq.playErrorSound()
-		player.queueUIMessage(sbq.getString(":invalidNPC"))
+		interface.queueMessage(sbq.getString(":invalidNPC"))
 		return
 	end
 	local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"
@@ -235,11 +235,11 @@ function sbq.insertTenant(slot)
 	end
 	if storage.evil and npcConfig.scriptConfig.requiresFriendly then
 		sbq.playErrorSound()
-		player.queueUIMessage(sbq.getString(":requiresFriendly"))
+		interface.queueMessage(sbq.getString(":requiresFriendly"))
 		return
 	elseif (not storage.evil) and npcConfig.scriptConfig.requiresEvil then
 		sbq.playErrorSound()
-		player.queueUIMessage(sbq.getString(":requiresEvil"))
+		interface.queueMessage(sbq.getString(":requiresEvil"))
 		return
 	end
 	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
@@ -247,13 +247,13 @@ function sbq.insertTenant(slot)
 	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
 	if world.getUniqueEntityId(tenant.uniqueId) then
 		sbq.playErrorSound()
-		player.queueUIMessage(sbq.getString(":npcAlreadyExists"))
+		interface.queueMessage(sbq.getString(":npcAlreadyExists"))
 		return
 	end
 	for _, v in pairs(storage.occupier.tenants) do
 		if v.uniqueId == tenant.uniqueId then
 			sbq.playErrorSound()
-			player.queueUIMessage(sbq.getString(":npcAlreadyExists"))
+			interface.queueMessage(sbq.getString(":npcAlreadyExists"))
 			return
 		end
 	end

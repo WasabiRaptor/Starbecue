@@ -67,7 +67,7 @@ function sbq.getTieredUpgrade(upgradeName, tier, bonus)
 			bonus)
 	end
 	if player then
-		player.queueUIMessage(sbq.getString(":" .. upgradeName .. "Increased"))
+		interface.queueMessage(sbq.getString(":" .. upgradeName .. "Increased"))
 	end
 	storage.sbqUpgrades[upgradeName][tier] = bonus
 	sbq.refreshUpgrades(true)

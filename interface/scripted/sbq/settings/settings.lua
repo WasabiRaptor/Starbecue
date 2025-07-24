@@ -384,7 +384,7 @@ function sbq.widgetScripts.infuseSlotAccepts(w, item)
 	if not item then return true end
 	if sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infusePrefs", w.groupKey, "prey"}) then return true end
 	sbq.playErrorSound()
-	player.queueUIMessage(sbq.getString(":action_targetSettingsMismatch"))
+	interface.queueMessage(sbq.getString(":action_targetSettingsMismatch"))
 	return false
 end
 
