@@ -568,7 +568,7 @@
 				"properties" : {},
 				"partStates" : {
 					"bodyState" : {
-						"lay" : {"properties":{"offset":[-1, 1.375], "transforms":{"rotate":-90, "scale":[-1,1]}}}, // quadrupeds are in a differient orientation than the game expects for lay, so we un-rotate the expected 90 degress rotation
+						"lay" : {"properties":{"offset":[-1, 1.375], "transforms":[["reset"],	["scale",[-1,1],	["rotateDegrees",-90]]]}}, // quadrupeds are in a differient orientation than the game expects for lay, so we un-rotate the expected 90 degress rotation
 						"sit" : {"properties":{"offset":[-1, 1.375]}}
 					},
 					"portraitMode" : {
