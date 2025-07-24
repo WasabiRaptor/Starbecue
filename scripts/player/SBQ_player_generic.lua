@@ -24,15 +24,11 @@ function init()
 	sbq.actorInit()
 	sbq.settingsInit()
 	sbq.humanoidInit()
-	function status.setStatusProperty(...)
-		if player.getProperty("sbqAgreedTerms") then status.setStatusProperty(...) end
-	end
 	if player.getProperty("sbqAgreedTerms") then
 		sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.actorMessages()
 	else
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
-		status.setStatusProperty("sbqPublicSettings", nil)
 		sbq.lists = {}
 		sbq.voreConfig = sbq.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.setupSettingMetatables("player")
