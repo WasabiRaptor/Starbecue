@@ -3,71 +3,69 @@
 		"stateTypes": {
 			"bodyState" : {
 				"states" : {
-					"walk" : { 
+					"walk" : {
 						"frameProperties" : {
 							"chestOffset" : [
-								{"translate":[0,0.125]},
-								{"translate":[0,0]},
-								{"translate":[0,0]},
-								{"translate":[0,0]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0]},
-								{"translate":[0,0]},
-								{"translate":[0,0]}
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0]]]
 							]
 						}
 					},
-					"run" : { 
+					"run" : {
 						"frameProperties" : {
 							"chestOffset" : [
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.25]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0]}
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.25]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0]]]
 							]
 						}
 					},
-					"jump" : { 
+					"jump" : {
 						"frameProperties" : {
 							"chestOffset" : [
-								{"translate":[0,-0.125]},
-								{"translate":[0,-0.125]},
-								{"translate":[0,-0.125]},
-								{"translate":[0,0]}
+								[["reset"],	["translate",[0,-0.125]]],
+								[["reset"],	["translate",[0,-0.125]]],
+								[["reset"],	["translate",[0,-0.125]]],
+								[["reset"],	["translate",[0,0]]]
 							]
 						}
 					},
-					"fall" : { 
+					"fall" : {
 						"frameProperties" : {
 							"chestOffset" : [
-								{"translate":[0,0]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]}
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]]
 							]
 						}
 					},
 					"swimIdle" : {
 						"properties" : {
-							"chestOffset" : {
-								"translate":[0,0.125]
-							}
+							"chestOffset" : [["reset"],	["translate",[0,0.125]]]
 						}
 					},
 					"swim" : {
 						"frameProperties" : {
 							"chestOffset" : [
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0]},
-								{"translate":[0,0]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]},
-								{"translate":[0,0.125]}
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]],
+								[["reset"],	["translate",[0,0.125]]]
 							]
 						}
 					}

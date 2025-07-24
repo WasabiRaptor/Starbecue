@@ -27,57 +27,57 @@
 					"idle" : {"properties" : {
 					}},
 					"duck" : {"properties" : {
-						"crotchOffset" : {"translate":[0,0.375]}
+						"crotchOffset" : [["reset"],	["translate",[0,0.375]]]
 					}},
 					"sit" : {"properties" : {
 					}},
 					"lay" : {"properties" : {
-						"crotchOffset" : {"translate":[0,0.5]}
+						"crotchOffset" : [["reset"],	["translate",[0,0.5]]]
 					}},
 					"walk" : {"properties" : {
 					}, "frameProperties":{
 						"tailOffset" : [
-							{"translate":[0.125,0]},
-							{"translate":[0.125,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]}
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]
 					}},
 					"run" : {"properties" : {
 					}, "frameProperties":{
 						"tailOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0,0]},
-							{"translate":[0.125,0]},
-							{"translate":[0.125,0]},
-							{"translate":[0.25,0]},
-							{"translate":[0.125,0]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0.25,0]]],
+							[["reset"],	["translate",[0.125,0]]]
 						]
 					}},
 					"jump" : {"properties" : {
-						"chestOffset" : {"translate":[0,0.375]}
+						"chestOffset" : [["reset"],	["translate",[0,0.375]]]
 					}, "frameProperties":{
 						"crotchOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,0]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0.125]}
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.125]]]
 						]
 					}},
 					"fall" : {"properties" : {
-						"chestOffset" : {"translate":[0,0.375]}
+						"chestOffset" : [["reset"],	["translate",[0,0.375]]]
 					}, "frameProperties":{
 						"crotchOffset" : [
-							{"translate":[0,0.125]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0.25]}
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.25]]]
 						]
 					}},
 					"swim" : {"properties" : {

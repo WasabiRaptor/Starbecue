@@ -2,13 +2,13 @@
 	// this is not meant to be used as a standalone animation!
 
 	// this is used as the default for an occupant's animation states and parts
-	// all <occupant> tags are replaced with the occupant's seatname when this is loaded
+	// all occupant<slot> tags are replaced with the occupant's seatname when this is loaded
 	// via the Occupants.newOccupant() function in the main vore script
 	"animatedParts" : {
 		"stateTypes" : {
 			// used for the idle when no special anim is happening
 			// a state does not need to be created for every location
-			"<occupant>Location" : {
+			"occupant<slot>Location" : {
 				"default": "none",
 				"priority" : 1,
 				"states" : {
@@ -31,7 +31,7 @@
 			},
 			// this animation state has a higher priority than the locations and will override it when it
 			// is active, when idle the occupant will do the animation from the above state
-			"<occupant>State" : {
+			"occupant<slot>State" : {
 				"default": "idle",
 				"priority" : 2,
 				"states" : {
@@ -41,31 +41,31 @@
 					"cockVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0.125,0]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[-0.125,0]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[-0.125,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					}
 				}
@@ -73,12 +73,12 @@
 			}
 		},
 		"parts" : {
-			"<occupant>" : {
+			"occupant<slot>" : {
 				"properties": {
 					"centered": true,
 					"loungeOffset" : [0,0],
 					"interpolated" : true,
-					"transformationGroups" : ["<occupant>"],
+					"transformationGroups" : ["occupant<slot>"],
 					// the below is so by default an occupant is scaled so small to be invisible
 					// as well as be layered behind the main sprite
 					"zLevel":-1,
@@ -89,7 +89,7 @@
 					"emote" : "idle"
 				},
 				"partStates" : {
-					"<occupant>Location" : {
+					"occupant<slot>Location" : {
 						// one doesn't explicitly need to make a state for each location
 						// but it is good to do so to have their camera focused in the right spot
 						// so anchor to the relevant part and set offsets as necessary
@@ -117,7 +117,7 @@
 							"dance" : "sbqIgnore"
 						}}
 					},
-					"<occupant>State" : {
+					"occupant<slot>State" : {
 						"oralVore" : {
 							// frame properties can be used for transformations with the modified
 							// engine's new animator features
@@ -126,39 +126,15 @@
 								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, false, false, false, true, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
-								"transforms" : [{
-									"rotate" : 0,
-									"scale" : [-1, 1],
-									"translate" : [5, -1.5]
-								}, {
-									"rotate" : 45,
-									"scale" : [-1, 1],
-									"translate" : [5, -1]
-								}, {
-									"rotate" : 90,
-									"scale" : [-1, 1],
-									"translate" : [4.5, -0.5]
-								}, {
-									"rotate" : 90,
-									"scale" : [-1, 1],
-									"translate" : [4, -0.5]
-								}, {
-									"rotate" : 100,
-									"scale" : [-1, 1],
-									"translate" : [3, -0.5]
-								}, {
-									"rotate" : 110,
-									"scale" : [0, 0],
-									"translate" : [2, -1]
-								}, {
-									"rotate" : 110,
-									"scale" : [0, 0],
-									"translate" : [1, -2]
-								}, {
-									"rotate" : 110,
-									"scale" : [0, 0],
-									"translate" : [0, -1]
-								}]
+								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[5, -1.5]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",45],	["translate",[5, -1]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",90],	["translate",[4.5, -0.5]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",90],	["translate",[4, -0.5]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",100],	["translate",[3, -0.5]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",110],	["translate",[2, -1]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",110],	["translate",[1, -2]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",110],	["translate",[0, -1]]]
+]
 							},
 							"properties" : {
 								"anchorPart" :"head",
@@ -172,23 +148,11 @@
 								"emote" : ["oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand"],
-								"transforms" : [{
-									"rotate" : 0,
-									"scale" : [1, 1],
-									"translate" : [-3.5, -1.5]
-								}, {
-									"rotate" : -80,
-									"scale" : [1, 1],
-									"translate" : [-2.5, -1.35]
-								}, {
-									"rotate" : -90,
-									"scale" : [1, 1],
-									"translate" : [-1, -1.25]
-								}, {
-									"rotate" : -90,
-									"scale" : [0, 0],
-									"translate" : [-1, -1.25]
-								}]
+								"transforms" : [[["reset"],	["scale",[1, 1]],	["rotateDegrees",0],	["translate",[-3.5, -1.5]]],
+ [["reset"],	["scale",[1, 1]],	["rotateDegrees",-80],	["translate",[-2.5, -1.35]]],
+ [["reset"],	["scale",[1, 1]],	["rotateDegrees",-90],	["translate",[-1, -1.25]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[-1, -1.25]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -200,19 +164,10 @@
 								"emote" : ["oooh", "oooh", "oooh"],
 								"hidden" : [false, false, true],
 								"orientation" : ["stand", "stand", "stand"],
-								"transforms" : [{
-									"rotate" : -90,
-									"scale" : [1, 1],
-									"translate" : [-1, -1.25]
-								}, {
-									"rotate" : -110,
-									"scale" : [1, 1],
-									"translate" : [-0.5, -2.25]
-								}, {
-									"rotate" : -110,
-									"scale" : [0, 0],
-									"translate" : [0, -2.25]
-								}]
+								"transforms" : [[["reset"],	["scale",[1, 1]],	["rotateDegrees",-90],	["translate",[-1, -1.25]]],
+ [["reset"],	["scale",[1, 1]],	["rotateDegrees",-110],	["translate",[-0.5, -2.25]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",-110],	["translate",[0, -2.25]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -224,19 +179,10 @@
 								"emote" : ["oooh", "oooh", "oooh"],
 								"hidden" : [false, false, true],
 								"orientation" : ["stand", "stand", "stand"],
-								"transforms" : [{
-									"rotate" : -90,
-									"scale" : [1, 1],
-									"translate" : [-1, -1.25]
-								}, {
-									"rotate" : -90,
-									"scale" : [1, 1],
-									"translate" : [-0.5, -1.25]
-								}, {
-									"rotate" : -90,
-									"scale" : [0, 0],
-									"translate" : [0, -1.25]
-								}]
+								"transforms" : [[["reset"],	["scale",[1, 1]],	["rotateDegrees",-90],	["translate",[-1, -1.25]]],
+ [["reset"],	["scale",[1, 1]],	["rotateDegrees",-90],	["translate",[-0.5, -1.25]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[0, -1.25]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -250,23 +196,11 @@
 								"emote" : ["oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand"],
-								"transforms" : [{
-									"rotate" : 0,
-									"scale" : [-1, 1],
-									"translate" : [0, -1.5]
-								}, {
-									"rotate" : 45,
-									"scale" : [-1, 1],
-									"translate" : [0, -3.75]
-								}, {
-									"rotate" : 45,
-									"scale" : [-0.6, 0.6],
-									"translate" : [-1, -1.75]
-								}, {
-									"rotate" : 45,
-									"scale" : [0, 0],
-									"translate" : [-1, -1.75]
-								}]
+								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[0, -1.5]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",45],	["translate",[0, -3.75]]],
+ [["reset"],	["scale",[-0.6, 0.6]],	["rotateDegrees",45],	["translate",[-1, -1.75]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",45],	["translate",[-1, -1.75]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "cock",
@@ -275,16 +209,16 @@
 						}
 					},
 					"hiddenState" : {
-						"none": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
+						"none": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
+						"head": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					}
 				}
 			}
 		}
 	},
 	"transformationGroups" : {
-		"<occupant>" : {"interpolated" : true}
+		"occupant<slot>" : {"interpolated" : true}
 	}
 }

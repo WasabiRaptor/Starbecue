@@ -32,19 +32,19 @@
 						}
 					}},
 					"duck" : {"properties" : {
-						"bellyOffset" : {"translate" : [-0.25, 0.125]},
-						"chestOffset" : {"translate" : [0, 0.125]},
-						"tailOffset" : {"translate" : [-0.25, 0.25]},
-						"crotchOffset" : {"translate" : [-0.25, 0.25]},
+						"bellyOffset" : [["reset"],	["translate",[-0.25, 0.125]]],
+						"chestOffset" : [["reset"],	["translate",[0, 0.125]]],
+						"tailOffset" : [["reset"],	["translate",[-0.25, 0.25]]],
+						"crotchOffset" : [["reset"],	["translate",[-0.25, 0.25]]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
 					}},
 					"sit" : {"properties" : {
-						"bellyOffset" : {"translate" : [-0.125, 0]},
-						"chestOffset" : {"translate" : [-0.125, 0]},
-						"tailOffset" : {"translate" : [-0.125, 0]},
-						"crotchOffset" : {"translate" : [-0.125, 0]},
+						"bellyOffset" : [["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset" : [["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset" : [["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset" : [["reset"],	["translate",[-0.125, 0]]],
 						"globalTags" : {
 							"pose" : "sit"
 						}
@@ -95,19 +95,19 @@
 						}
 					}},
 					"swim" : {"properties" : {
-						"bellyOffset" : {"translate" : [-0.125, 0]},
+						"bellyOffset" : [["reset"],	["translate",[-0.125, 0]]],
 						"chestOffset" : {},
-						"tailOffset" : {"translate" : [-0.125, 0.125]},
-						"crotchOffset" : {"translate" : [-0.125, 0.125]},
+						"tailOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
+						"crotchOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
 					}},
 					"swimIdle" : {"properties" : {
-						"bellyOffset" : {"translate" : [-0.125, 0]},
+						"bellyOffset" : [["reset"],	["translate",[-0.125, 0]]],
 						"chestOffset" : {},
-						"tailOffset" : {"translate" : [-0.125, 0.125]},
-						"crotchOffset" : {"translate" : [-0.125, 0.125]},
+						"tailOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
+						"crotchOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
@@ -390,8 +390,8 @@
 							},
 							"frameProperties" : {
 								"transforms" : [
-									{"rotate":-50},
-									{"rotate":-35}
+									[["reset"],["rotateDegrees",-50]],
+									[["reset"],["rotateDegrees",-35]]
 								]
 							}
 						},
@@ -403,8 +403,8 @@
 							},
 							"frameProperties" : {
 								"transforms" : [
-									{"rotate":-50, "translate":[0,0]},
-									{"rotate":-50, "translate":[0,0.125]}
+									[["reset"],	["rotateDegrees",-50],	["translate",[0,0]]],
+									[["reset"],	["rotateDegrees",-50],	["translate",[0,0.125]]]
 								]
 							}
 						},
@@ -416,10 +416,10 @@
 							},
 							"frameProperties" : {
 								"transforms" : [
-									{"translate":[0,0]},
-									{"translate":[0,-0.125]},
-									{"translate":[0.125,-0.125]},
-									{"translate":[0.125,0]}
+									[["reset"],	["translate",[0,0]]],
+									[["reset"],	["translate",[0,-0.125]]],
+									[["reset"],	["translate",[0.125,-0.125]]],
+									[["reset"],	["translate",[0.125,0]]]
 								]
 							}
 						}
@@ -446,10 +446,10 @@
 							},
 							"frameProperties" : {
 								"transforms" : [
-									{"translate":[0,0]},
-									{"translate":[0,-0.125]},
-									{"translate":[-0.125,-0.125]},
-									{"translate":[-0.125,0]}
+									[["reset"],	["translate",[0,0]]],
+									[["reset"],	["translate",[0,-0.125]]],
+									[["reset"],	["translate",[-0.125,-0.125]]],
+									[["reset"],	["translate",[-0.125,0]]]
 								]
 							}
 						}

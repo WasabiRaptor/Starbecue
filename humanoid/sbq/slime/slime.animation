@@ -42,92 +42,92 @@
 					"idle": { "frames": 4, "cycle": 3, "mode": "loop", "properties" :{
 					},"frameProperties":{
 						"headOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.125]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.125]]]
 						]
 					}},
 					"duck": { "frames": 4, "cycle": 3, "mode": "end", "properties" :{
 					},"frameProperties":{
 						"headOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.125]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.125]]]
 						]
 					}},
 					"sit": { "frames": 4, "cycle": 3, "mode": "end", "properties" :{
 						"scaleDifference" : [0, -13]
 					},"frameProperties":{
 						"headOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.125]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.125]]]
 						]
 					}},
 					"lay": { "frames": 4, "cycle": 6, "mode": "end", "properties" :{
 					},"frameProperties":{
 						"headOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.125]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.125]]]
 						]
 					}},
 					"walk": { "frames": 6, "cycle": 2, "mode": "loop", "properties" :{
 					}, "frameProperties":{
 						"headOffset" : [
-							{"translate":[0.125,0]},
-							{"translate":[0.25,0]},
-							{"translate":[0.375,0]},
-							{"translate":[0.5,0]},
-							{"translate":[0.375,0]},
-							{"translate":[0.25,0]}
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0.25,0]]],
+							[["reset"],	["translate",[0.375,0]]],
+							[["reset"],	["translate",[0.5,0]]],
+							[["reset"],	["translate",[0.375,0]]],
+							[["reset"],	["translate",[0.25,0]]]
 						]
 					}},
 					"run": { "frames": 6, "cycle": 1.5, "mode": "loop", "properties" :{
 					}, "frameProperties":{
 						"headOffset" : [
-							{"translate":[0.125,0]},
-							{"translate":[0.25,0]},
-							{"translate":[0.375,0]},
-							{"translate":[0.5,0]},
-							{"translate":[0.375,0]},
-							{"translate":[0.25,0]}
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0.25,0]]],
+							[["reset"],	["translate",[0.375,0]]],
+							[["reset"],	["translate",[0.5,0]]],
+							[["reset"],	["translate",[0.375,0]]],
+							[["reset"],	["translate",[0.25,0]]]
 						]
 					}},
 					"jump": { "frames": 1, "cycle": 0.25, "mode": "end", "properties" :{
 					}, "frameProperties":{
 						"headOffset" : [
-							{"translate":[0,1.5]}
+							[["reset"],	["translate",[0,1.5]]]
 						]
 					}},
 					"fall": { "frames": 1, "cycle": 0.25, "mode": "end", "properties" :{
 					}, "frameProperties":{
 						"headOffset" : [
-							{"translate":[0,1.5]}
+							[["reset"],	["translate",[0,1.5]]]
 						]
 					}},
 					"swim": { "frames": 6, "cycle": 2, "mode": "loop", "properties" :{
 					}, "frameProperties":{
 						"headOffset" : [
-							{"translate":[0.125,0]},
-							{"translate":[0.25,0]},
-							{"translate":[0.375,0]},
-							{"translate":[0.5,0]},
-							{"translate":[0.375,0]},
-							{"translate":[0.25,0]}
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0.25,0]]],
+							[["reset"],	["translate",[0.375,0]]],
+							[["reset"],	["translate",[0.5,0]]],
+							[["reset"],	["translate",[0.375,0]]],
+							[["reset"],	["translate",[0.25,0]]]
 						]
 					}},
 					"swimIdle": { "frames": 4, "cycle": 3, "mode": "end", "properties" :{
 					},"frameProperties":{
 						"headOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.125]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.125]]]
 						]
 					}},
 					"ignore": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
@@ -204,15 +204,15 @@
 				"states" : {
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore", "frameProperties" : {
 						"headOffset" : [
-							{"translate":[0,0]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0.25]},
-							{"translate":[0,0.375]},
-							{"translate":[0,0.625]},
-							{"translate":[0,1]},
-							{"translate":[0,1.25]},
-							{"translate":[0,1.5]},
-							{"translate":[0,2]}
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.25]]],
+							[["reset"],	["translate",[0,0.375]]],
+							[["reset"],	["translate",[0,0.625]]],
+							[["reset"],	["translate",[0,1]]],
+							[["reset"],	["translate",[0,1.25]]],
+							[["reset"],	["translate",[0,1.5]]],
+							[["reset"],	["translate",[0,2]]]
 						]
 					}},
 					"ignore": { "frames": 1, "cycle": 0, "mode":"end" },

@@ -2,13 +2,13 @@
 	// this is not meant to be used as a standalone animation!
 
 	// this is used as the default for an occupant's animation states and parts
-	// all <occupant> tags are replaced with the occupant's seatname when this is loaded
+	// all occupant<slot> tags are replaced with the occupant's seatname when this is loaded
 	// via the Occupants.newOccupant() function in the main vore script
 	"animatedParts" : {
 		"stateTypes" : {
 			// used for the idle when no special anim is happening
 			// a state does not need to be created for every location
-			"<occupant>Location" : {
+			"occupant<slot>Location" : {
 				"default": "none",
 				"priority" : 1,
 				"states" : {
@@ -27,38 +27,38 @@
 			},
 			// this animation state has a higher priority than the locations and will override it when it
 			// is active, when idle the occupant will do the animation from the above state
-			"<occupant>State" : {
+			"occupant<slot>State" : {
 				"default": "idle",
 				"priority" : 2,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"absorbVore": { "frames": 2, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0.25,0]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0.25,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[-0.25,0]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[-0.25,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0,0.25]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.25]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					}
 				}
@@ -66,12 +66,12 @@
 			}
 		},
 		"parts" : {
-			"<occupant>" : {
+			"occupant<slot>" : {
 				"properties": {
 					"centered": true,
 					"loungeOffset" : [0,0],
 					"interpolated" : true,
-					"transformationGroups" : ["<occupant>"],
+					"transformationGroups" : ["occupant<slot>"],
 					// the below is so by default an occupant is scaled so small to be invisible
 					// as well as be layered behind the main sprite
 					"zLevel":-1,
@@ -82,7 +82,7 @@
 					"emote" : "idle"
 				},
 				"partStates" : {
-					"<occupant>Location" : {
+					"occupant<slot>Location" : {
 						// one doesn't explicitly need to make a state for each location
 						// but it is good to do so to have their camera focused in the right spot
 						// so anchor to the relevant part and set offsets as necessary
@@ -92,7 +92,7 @@
 							"offset" : [0,0]
 						}}
 					},
-					"<occupant>State" : {
+					"occupant<slot>State" : {
 						"absorbVore" : {
 							"frameProperties" : {
 								"release" : [true],
@@ -100,8 +100,9 @@
 								"hidden" : [false, false],
 								"orientation" : ["stand", "stand"],
 								"transforms" : [
-									{"rotate" : 0,"scale" : [1, 1],"translate" : [0, 2]},
-									{"rotate" : 0,"scale" : [1, 1],"translate" : [0, 0]}]
+									[["reset"],	["scale",[1, 1]],	["rotateDegrees",0],	["translate",[0, 2]]],
+									[["reset"],	["scale",[1, 1]],	["rotateDegrees",0],	["translate",[0, 0]]]
+]
 							},
 							"properties" : {
 								"anchorPart" :"body",
@@ -110,13 +111,13 @@
 						}
 					},
 					"hiddenState" : {
-						"none": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
+						"none": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					}
 				}
 			}
 		}
 	},
 	"transformationGroups" : {
-		"<occupant>" : {"interpolated" : true}
+		"occupant<slot>" : {"interpolated" : true}
 	}
 }

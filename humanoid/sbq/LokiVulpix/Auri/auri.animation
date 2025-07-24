@@ -128,23 +128,23 @@
 						"globalTags" : {
 							"pose" : "stand"
 						},
-						"tailOffset" : {"translate":[-0.345,0]},
-						"headOffset" : {"translate":[0.25,-0.375]}
+						"tailOffset" : [["reset"],	["translate",[-0.345,0]]],
+						"headOffset" : [["reset"],	["translate",[0.25,-0.375]]]
 					}},
 					"sit": { "frames": 1, "cycle": 1, "mode": "end", "properties" :{
 						"scaleDifference" : [0, -13],
 						"globalTags" : {
 							"pose" : "sit"
 						},
-						"tailOffset" : {"translate":[0.75,-1.375]},
-						"headOffset" : {"translate":[-0.25,0.125]}
+						"tailOffset" : [["reset"],	["translate",[0.75,-1.375]]],
+						"headOffset" : [["reset"],	["translate",[-0.25,0.125]]]
 					}},
 					"lay": { "frames": 1, "cycle": 1, "mode": "end", "properties" :{
 						"globalTags" : {
 							"pose" : "lay"
 						},
-						"tailOffset" : {"translate":[0,0]},
-						"headOffset" : {"translate":[0.25,-0.5]}
+						"tailOffset" : [["reset"],	["translate",[0,0]]],
+						"headOffset" : [["reset"],	["translate",[0.25,-0.5]]]
 					} },
 
 					"walk": { "frames": 8, "cycle": 0.75, "mode": "loop", "properties" :{
@@ -165,56 +165,56 @@
 						"globalTags" : {
 							"pose" : "stand"
 						},
-						"headOffset" : {"translate":[0,0.125]}
+						"headOffset" : [["reset"],	["translate",[0,0.125]]]
 					}, "frameProperties":{
 						"movementOffset" : [
-							{"translate":[0,0.125]},
-							{"translate":[0,0.25]},
-							{"translate":[0,0.375]},
-							{"translate":[0,0.375]}
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.25]]],
+							[["reset"],	["translate",[0,0.375]]],
+							[["reset"],	["translate",[0,0.375]]]
 						],
 						"crotchOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.375]},
-							{"translate":[0,-0.375]}
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.375]]],
+							[["reset"],	["translate",[0,-0.375]]]
 						],
 						"bellyOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.375]},
-							{"translate":[0,-0.375]}
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.375]]],
+							[["reset"],	["translate",[0,-0.375]]]
 						],
 						"tailOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,-0.25]},
-							{"translate":[0,-0.375]},
-							{"translate":[0,-0.375]}
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.375]]],
+							[["reset"],	["translate",[0,-0.375]]]
 						]
 					}},
 					"fall": { "frames": 4, "cycle": 0.25, "mode": "end", "properties" :{
 						"globalTags" : {
 							"pose" : "stand"
 						},
-						"headOffset" : {"translate":[0,0.0]}
+						"headOffset" : [["reset"],	["translate",[0,0.0]]]
 					}, "frameProperties":{
 						"movementOffset" : [
-							{"translate":[0,0.25]},
-							{"translate":[0,0.0]},
-							{"translate":[0,0.0]},
-							{"translate":[0,0.0]}
+							[["reset"],	["translate",[0,0.25]]],
+							[["reset"],	["translate",[0,0.0]]],
+							[["reset"],	["translate",[0,0.0]]],
+							[["reset"],	["translate",[0,0.0]]]
 						],
 						"crotchOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,0]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0.25]}
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.25]]]
 						],
 						"tailOffset" : [
-							{"translate":[0,-0.125]},
-							{"translate":[0,0]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0.25]}
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.25]]]
 						]
 					} },
 					"swim": { "frames": 7, "cycle": 0.50, "mode": "loop", "properties" :{
@@ -572,7 +572,7 @@
 						"sit" : {"properties":{"offset":[-1, 1.375]}}
 					},
 					"portraitMode" : {
-						"head": { "properties": {"offset":[-1.75,0.5], "transforms":{"scale":[0.75,0.75]}} },
+						"head": { "properties": {"offset":[-1.75,0.5], "transforms":[["reset"],	["scale",[0.75,0.75]]]} },
 						"bust":"head"
 					}
 				}

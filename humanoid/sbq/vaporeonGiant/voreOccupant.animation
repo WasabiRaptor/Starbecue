@@ -2,13 +2,13 @@
 	// this is not meant to be used as a standalone animation!
 
 	// this is used as the default for an occupant's animation states and parts
-	// all <occupant> tags are replaced with the occupant's seatname when this is loaded
+	// all occupant<slot> tags are replaced with the occupant's seatname when this is loaded
 	// via the Occupants.newOccupant() function in the main vore script
 	"animatedParts" : {
 		"stateTypes" : {
 			// used for the idle when no special anim is happening
 			// a state does not need to be created for every location
-			"<occupant>Location" : {
+			"occupant<slot>Location" : {
 				"default": "none",
 				"priority" : 1,
 				"states" : {
@@ -28,7 +28,7 @@
 			},
 			// this animation state has a higher priority than the locations and will override it when it
 			// is active, when idle the occupant will do the animation from the above state
-			"<occupant>State" : {
+			"occupant<slot>State" : {
 				"default": "idle",
 				"priority" : 2,
 				"states" : {
@@ -37,31 +37,31 @@
 					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0.125,0]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0.125,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[-0.125,0]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[-0.125,0]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0,0.125]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"<occupant>" : [
-							{"translate":[0,0]},
-							{"translate":[0,-0.125]},
-							{"translate":[0,0]}
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,0]]]
 						]}
 					}
 				}
@@ -69,12 +69,12 @@
 			}
 		},
 		"parts" : {
-			"<occupant>" : {
+			"occupant<slot>" : {
 				"properties": {
 					"centered": true,
 					"loungeOffset" : [0,0],
 					"interpolated" : true,
-					"transformationGroups" : ["<occupant>"],
+					"transformationGroups" : ["occupant<slot>"],
 					// the below is so by default an occupant is scaled so small to be invisible
 					// as well as be layered behind the main sprite
 					"zLevel":-1,
@@ -85,7 +85,7 @@
 					"emote" : "idle"
 				},
 				"partStates" : {
-					"<occupant>Location" : {
+					"occupant<slot>Location" : {
 						// one doesn't explicitly need to make a state for each location
 						// but it is good to do so to have their camera focused in the right spot
 						// so anchor to the relevant part and set offsets as necessary
@@ -103,7 +103,7 @@
 							"dance" : "sbqIgnore"
 						}}
 					},
-					"<occupant>State" : {
+					"occupant<slot>State" : {
 						"oralVore" : {
 							"frameProperties" : {
 								"release" : [true],
@@ -111,14 +111,15 @@
 								"hidden" : [false, false, false, false, false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
 								"transforms" : [
-									{"rotate" : 0,"scale" : [-1, 1],"translate" : [4, -1.5]},
-									{"rotate" : 0,"scale" : [-1, 1],"translate" : [4, -1.5]},
-									{"rotate" : 10,"scale" : [-1, 1],"translate" : [4, -1.5]},
-									{"rotate" : 60,"scale" : [-1, 1],"translate" : [3.75, -1.5]},
-									{"rotate" : 135,"scale" : [-1, 1],"translate" : [3.75, -1.24]},
-									{"rotate" : 130,"scale" : [-1, 1],"translate" : [3.5, 0.75]},
-									{"rotate" : 135,"scale" : [-1, 1],"translate" : [2.25, -0.375]},
-									{"rotate" : 125,"scale" : [0, 0],"translate" : [1.25, -1.25]}]
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[4, -1.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[4, -1.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",10],	["translate",[4, -1.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",60],	["translate",[3.75, -1.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",135],	["translate",[3.75, -1.24]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",130],	["translate",[3.5, 0.75]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",135],	["translate",[2.25, -0.375]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",125],	["translate",[1.25, -1.25]]]
+]
 							},
 							"properties" : {
 								"anchorPart" :"head",
@@ -131,14 +132,15 @@
 								"hidden" : [false, false, false, false, false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
 								"transforms" : [
-									{"rotate" : 0,"scale" : [-1, 1],"translate" : [-3, -2.5]},
-									{"rotate" : -45,"scale" : [-1, 1],"translate" : [-2.5, -2.5]},
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [-2, -2.75]},
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [-1.5, -2.75]},
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [-1, -2.75]},
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [-0.5, -2.75]},
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [0, -2.75]},
-									{"rotate" : -90,"scale" : [0, 0],"translate" : [0.5, -2.75]}]
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[-3, -2.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-45],	["translate",[-2.5, -2.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[-2, -2.75]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[-1.5, -2.75]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[-1, -2.75]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[-0.5, -2.75]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[0, -2.75]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[0.5, -2.75]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -151,10 +153,11 @@
 								"hidden" : [false, false, true, true],
 								"orientation" : ["lay", "lay", "lay", "lay"],
 								"transforms" : [
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [1.8175, -2]},
-									{"rotate" : -90,"scale" : [-1, 1],"translate" : [1.8175, -2.5]},
-									{"rotate" : -90,"scale" : [0, 0],"translate" : [1.8175, -3]},
-									{"rotate" : -90,"scale" : [0, 0],"translate" : [1.8175, -3]}]
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[1.8175, -2]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[1.8175, -2.5]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -166,23 +169,11 @@
 								"emote" : ["sleep", "sleep", "sleep", "sleep"],
 								"hidden" : [false, false, true, true],
 								"orientation" : ["lay", "lay", "lay", "lay"],
-								"transforms" : [{
-									"rotate" : -90,
-									"scale" : [-1, 1],
-									"translate" : [3.8175, -3.5]
-								}, {
-									"rotate" : -90,
-									"scale" : [-1, 1],
-									"translate" : [2.8175, -3.4]
-								}, {
-									"rotate" : -90,
-									"scale" : [0, 0],
-									"translate" : [1.8175, -3.2]
-								}, {
-									"rotate" : -90,
-									"scale" : [0, 0],
-									"translate" : [1.8175, -3.2]
-								}]
+								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[2.8175, -3.4]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3.2]]],
+ [["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3.2]]]
+]
 							},
 							"properties" : {
 								"anchorPart" : "body",
@@ -194,19 +185,10 @@
 								"emote" : ["sleep", "sleep", "sleep"],
 								"hidden" : [false, false, false],
 								"orientation" : ["lay", "lay", "lay"],
-								"transforms" : [{
-									"rotate" : -90,
-									"scale" : [-1, 1],
-									"translate" : [3.8175, -3.5]
-								}, {
-									"rotate" : -90,
-									"scale" : [-1, 1],
-									"translate" : [2, -3.125]
-								}, {
-									"rotate" : -90,
-									"scale" : [-1, 1],
-									"translate" : [1.3125, -2]
-								}]
+								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[2, -3.125]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[1.3125, -2]]]
+]
 							}
 						},
 						"grabbed_laydown" : {
@@ -214,29 +196,23 @@
 								"emote" : ["idle", "idle"],
 								"hidden" : [false, false],
 								"orientation" : ["stand", "lay"],
-								"transforms" : [{
-									"rotate" : 0,
-									"scale" : [-1, 1],
-									"translate" : [3.5, -1.75]
-								}, {
-									"rotate" : -90,
-									"scale" : [-1, 1],
-									"translate" : [3.8175, -3.5]
-								}]
+								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[3.5, -1.75]]],
+ [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]]
+]
 							}
 						}
 					},
 					"hiddenState" : {
-						"none": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
+						"none": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					},
 					"portraitMode" : {
-						"head": { "properties": {"transforms":{"scale":[0,0]},"hidden":true} }
+						"head": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					}
 				}
 			}
 		}
 	},
 	"transformationGroups" : {
-		"<occupant>" : {"interpolated" : true}
+		"occupant<slot>" : {"interpolated" : true}
 	}
 }
