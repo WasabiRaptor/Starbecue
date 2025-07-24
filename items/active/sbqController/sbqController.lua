@@ -36,8 +36,6 @@ function init()
 			sbq.logInfo(string.format("Attmpted invalid radial menu script: %s(%s)", script, sb.printJson({...})))
 		end
     end)
-
-	interface.queueMessage("blorbo")
 end
 
 

@@ -9,7 +9,7 @@
 			// used for the idle when no special anim is happening
 			// a state does not need to be created for every location
 			"occupant<slot>Location" : {
-				"default": "none",
+				"default": "default",
 				"priority" : 1,
 				"states" : {
 					// one doesn't explicitly need to make a state for each location
@@ -21,7 +21,7 @@
 
 					// example of a transformation state unique state
 					// "stateName_belly": { "frames": 1, "cycle": 0, "mode": "end" },
-
+					"default": { "frames": 1, "cycle": 0, "mode": "end" },
 					"belly": { "frames": 1, "cycle": 0, "mode": "end" },
 					"ass": { "frames": 1, "cycle": 0, "mode": "end" },
 					"tail": { "frames": 1, "cycle": 0, "mode": "end" },
@@ -393,9 +393,6 @@
 								"zLevel" : 0.59
 							}
 						}
-					},
-					"hiddenState" : {
-						"none": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
