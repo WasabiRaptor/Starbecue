@@ -572,3 +572,15 @@ function sbq.isLoungeDismountable(eid)
 	local loungeAnchor = world.entityCurrentLounge(eid or entity.id())
 	return (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable)
 end
+
+function sbq.entitiesLounging(id)
+	local entities = {}
+    local count = world.loungeableAnchorCount(id)
+	if not count or (count < 1) then return entities end
+    for i = 0, count - 1 do
+        for _, v in ipairs(world.loungingEntities(id, i) or {}) do
+            table.insert(entities, v)
+        end
+    end
+	return entities
+end

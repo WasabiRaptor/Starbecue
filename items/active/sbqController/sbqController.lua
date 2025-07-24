@@ -84,7 +84,7 @@ function sbq.setAction(action)
 
 	local icon, shortdescription, description = sbq.getActionData(action, (world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1], storage.iconDirectory)
 	activeItem.setInventoryIcon(icon)
-	activeItem.setFriendlyName(shortdescription)
+	activeItem.setShortDescription(shortdescription)
 	activeItem.setDescription(description.."\n"..sbq.strings.controllerDescAppend)
 end
 
@@ -92,7 +92,7 @@ function sbq.clickAction()
 	if not storage.action then return false end
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {
 		withoutEntityId = entity.id(),
-		withoutEntityIds = loungeable.entitiesLounging(),
+		withoutEntityIds = sbq.entitiesLounging(player.id()),
 		includedTypes = {"creature"}
 	})
 
@@ -196,7 +196,7 @@ local TopMenu = {}
 RadialMenu.TopMenu = TopMenu
 setmetatable(TopMenu, _RadialMenu)
 function TopMenu:init()
-	local occupants = loungeable.entitiesLounging()
+	local occupants = sbq.entitiesLounging(player.id())
 	local options = {
 		{
 			args = {"letout", false, storage.action},
@@ -255,7 +255,7 @@ RadialMenu.OccupantsMenu = OccupantsMenu
 setmetatable(OccupantsMenu, _RadialMenu)
 function OccupantsMenu:init()
 	local options = {}
-	local occupants = loungeable.entitiesLounging()
+	local occupants = sbq.entitiesLounging(player.id())
 
 	for _, entityId in ipairs(occupants) do
 		table.insert(options, {
