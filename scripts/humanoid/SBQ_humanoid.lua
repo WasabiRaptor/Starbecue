@@ -24,7 +24,6 @@ function refreshHumanoidSpecies()
 	-- equipped.primary(humanoid.getItemSlot("primary"))
 	-- equipped.alt(humanoid.getItemSlot("alt"))
 	if prevAnimSpecies and (prevAnimSpecies ~= sbq.species()) then
-		sbq.defaultAnimatorTags = animator.getTags()
 		if sbq.reloadVoreConfig then
 			sbq.reloadVoreConfig({ root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config",
 				config and config.getParameter("voreConfig") })

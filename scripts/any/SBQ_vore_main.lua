@@ -64,7 +64,6 @@ function controlReleased(seat, control, time)
 end
 
 function sbq.init(config)
-	sbq.defaultAnimatorTags = animator.getTags()
 	status.clearPersistentEffects("sbqLockDown")
 	status.clearPersistentEffects("sbqHideSlots")
 	status.clearPersistentEffects("sbqStripping")
@@ -111,16 +110,16 @@ function sbq.update(dt)
 		SpeciesScript.state:update(dt)
 		if sbq.timer("stripping", 5) then SpeciesScript:refreshStripping() end
 		for k, v in pairs(sbq.voreConfig.transformGroupAnimProperties or {}) do
-			local transformGroup = animator.applyTags(k)
-			local part = animator.applyTags(v.part)
+			local transformGroup = animator.applyPartTags("body",k)
+			local part = animator.applyPartTags("body",v.part)
 			if v.translate then
-				sbq_animator.setTranslation(transformGroup, animator.partProperty(part, animator.applyTags(v.translate)))
+				sbq_animator.setTranslation(transformGroup, animator.partProperty(part, animator.applyPartTags("body",v.translate)))
 			end
 			if v.rotate then
-				sbq_animator.setRotation(transformGroup, animator.partProperty(part, animator.applyTags(v.rotate)), animator.partProperty("rotationCenter"))
+				sbq_animator.setRotation(transformGroup, animator.partProperty(part, animator.applyPartTags("body",v.rotate)), animator.partProperty("rotationCenter"))
 			end
 			if v.scale then
-				sbq_animator.setScale(transformGroup, animator.partProperty(part, animator.applyTags(v.scale)), animator.partProperty("scaleCenter"))
+				sbq_animator.setScale(transformGroup, animator.partProperty(part, animator.applyPartTags("body",v.scale)), animator.partProperty("scaleCenter"))
 			end
 		end
 	end
@@ -722,7 +721,7 @@ function _State:doAnimations(animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = animator.applyTags(sb.replaceTags(k, tags))
+		local state = animator.applyPartTags("body",sb.replaceTags(k, tags))
 		local anim = v
 		local force = false
 		local reversed = false
@@ -730,7 +729,7 @@ function _State:doAnimations(animations, tags, target)
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = animator.applyTags(sb.replaceTags(anim, tags))
+		anim = animator.applyPartTags("body",sb.replaceTags(anim, tags))
 		if animator.hasState(state, anim) then
 			if (not waitForEnd) or animator.animationEnded(state) then
 				animator.setAnimationState(state, anim, force, reversed)
@@ -750,12 +749,12 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = animator.applyTags(sb.replaceTags(k, tags))
+		local state = animator.applyPartTags("body",sb.replaceTags(k, tags))
 		local anim = v
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = animator.applyTags(sb.replaceTags(anim, tags))
+		anim = animator.applyPartTags("body",sb.replaceTags(anim, tags))
 		if (animator.hasState(state, anim) and not activeOnly)
 		or (animator.hasState(state) and animator.animationState(state) == "anim")
 		then
@@ -989,12 +988,12 @@ function _Location:setInfusionData()
 	if not sbq.voreConfig.availableInfuseTypes[self.infuseType] then return end
 
 	if self.infuseTagsSet then
-		for k, _ in pairs(self.infuseTagsSet.globalTags) do
-			animator.setGlobalTag(k, sbq.defaultAnimatorTags.globalTags[k] or "default")
+		for k, tag in pairs(self.infuseTagsSet.globalTags) do
+			animator.setGlobalTag(k, tag)
 		end
 		for part, v in pairs(self.infuseTagsSet.partTags) do
-			for k, _ in pairs(v) do
-				animator.setPartTag(part, k, sbq.defaultAnimatorTags.partTags[part][k])
+			for k, tag in pairs(v) do
+				animator.setPartTag(part, k, tag)
 			end
 		end
 	end
@@ -1042,19 +1041,19 @@ function _Location:setInfusionData()
 		partTags = {}
 	}
 	for k, v in pairs(infuseData.globalTags or {}) do
+		tagsSet.globalTags[k] = animator.applyPartTags("body","<"..k..">")
 		animator.setGlobalTag(k, v)
-		tagsSet.globalTags[k] = v
 	end
 	for part, tags in pairs(infuseData.partTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
 		for k, v in pairs(tags) do
+			tagsSet.partTags[part][k] = animator.applyPartTags(part,"<"..k..">")
 			animator.setPartTag(part, k, v)
-			tagsSet.partTags[part][k] = v
 		end
 	end
 
 	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
-    local speciesConfig = root.speciesConfig(sbq.species())
+	local speciesConfig = root.speciesConfig(sbq.species())
 	if speciesConfig.useImagePathSpecies then
 		speciesConfig = root.speciesConfig(sbq.humanoidIdentity().imagePath or sbq.species())
 	end
@@ -1063,8 +1062,8 @@ function _Location:setInfusionData()
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
 			speciesConfig.baseColorMap or defaultColorMap)
+		tagsSet.globalTags[tag] = animator.applyPartTags("body","<"..tag..">")
 		animator.setGlobalTag(tag, directives)
-		tagsSet.globalTags[tag] = directives
 	end
 	for part, tags in pairs(infuseData.colorRemapPartTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
@@ -1074,16 +1073,16 @@ function _Location:setInfusionData()
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
 				speciesConfig.baseColorMap or defaultColorMap)
+			tagsSet.partTags[part][tag] = animator.applyPartTags(part,"<"..tag..">")
 			animator.setPartTag(part, tag, directives)
-			tagsSet.partTags[part][tag] = directives
 		end
 	end
 	for tag, remaps in pairs(infuseData.infuseColorRemapGlobalTags or {}) do
 		local sourceColorMap = sbq.query(infuseData, { "colorRemapSources", tag })
 		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig.baseColorMap)
+		tagsSet.globalTags[tag] = animator.applyPartTags("body","<"..tag..">")
 		animator.setGlobalTag(tag, directives)
-		tagsSet.globalTags[tag] = directives
 	end
 	for part, tags in pairs(infuseData.infuseColorRemapPartTags or {}) do
 		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
@@ -1093,8 +1092,8 @@ function _Location:setInfusionData()
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap, infuseSpeciesConfig
 				.baseColorMap)
+			tagsSet.partTags[part][tag] = animator.applyPartTags(part,"<"..tag..">")
 			animator.setPartTag(part, tag, directives)
-			tagsSet.partTags[part][tag] = directives
 		end
 	end
 	local directives = (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or "")
@@ -1140,7 +1139,7 @@ function _Location:hasSpace(size)
 			end
 		end
 		if self.settings.hammerspace and least[2] then
-            return math.huge, least[2]
+			return math.huge, least[2]
 		elseif best[2] then
 			return best[1], best[2]
 		end
@@ -1198,11 +1197,11 @@ function _Location:updateOccupancy(dt)
 	end
 	local prevVisualSize = self.occupancy.visualSize
 	local prevVisualCount = self.occupancy.visualCount
-    if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.getScale())) and not self.occupancy.lockSize then
+	if (self.occupancy.sizeDirty or (Occupants.lastScale ~= sbq.getScale())) and not self.occupancy.lockSize then
 		self.occupancy.working = true -- prevents stack overflow from potential dependency loops
 
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
-        self.occupancy.sizeDirty = false
+		self.occupancy.sizeDirty = false
 
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
 		self.occupancy.count = 0
@@ -1286,22 +1285,22 @@ function _Location:updateOccupancy(dt)
 		)
 
 		local refreshSize = false
-        if self.countBasedOccupancy then
-            self.occupancy.visualCount = sbq.getClosestValue(
-                math.min(
-                    self.settings.visualMax,
-                    math.max(
-                        self.settings.visualMin,
-                        (self.occupancy.count + self.occupancy.addedCount)
-                    )
-                ),
-                self.struggleSizes or { 0 }
-            )
-            refreshSize = (prevVisualCount ~= self.occupancy.visualCount + infuseCount)
-        else
-            self.occupancy.visualCount = self.occupancy.count + self.occupancy.addedCount + infuseCount
-            refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
-        end
+		if self.countBasedOccupancy then
+			self.occupancy.visualCount = sbq.getClosestValue(
+				math.min(
+					self.settings.visualMax,
+					math.max(
+						self.settings.visualMin,
+						(self.occupancy.count + self.occupancy.addedCount)
+					)
+				),
+				self.struggleSizes or { 0 }
+			)
+			refreshSize = (prevVisualCount ~= self.occupancy.visualCount + infuseCount)
+		else
+			self.occupancy.visualCount = self.occupancy.count + self.occupancy.addedCount + infuseCount
+			refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
+		end
 		self.occupancy.visualCount = math.ceil(self.occupancy.visualCount)
 		self.occupancy.count = math.ceil(self.occupancy.count)
 
@@ -1329,7 +1328,7 @@ function _Location:updateOccupancy(dt)
 			self.interpolateSizes or self.struggleSizes or {0}
 		)
 		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or {0}) then self.occupancy.interpolating = false end
-		animator.setGlobalTag(animator.applyTags(self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
+		animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
 	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
 	if (fade == "fe") then -- so theres no accidental glowy
@@ -1385,8 +1384,8 @@ end
 
 function _Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	self.occupancy.forceSizeRefresh = false
-	animator.setGlobalTag(animator.applyTags(self.tag) .. "Count", tostring(self.occupancy.visualCount))
-	animator.setGlobalTag(animator.applyTags(self.tag) .. "Size", tostring(self.occupancy.visualSize))
+	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "Count", tostring(self.occupancy.visualCount))
+	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "Size", tostring(self.occupancy.visualSize))
 	local sizeTags = {
 		prevSize = tostring(prevVisualSize),
 		newSize = tostring(self.occupancy.visualSize),
