@@ -731,10 +731,9 @@ function _State:doAnimations(animations, tags, target)
 		end
 		anim = animator.applyPartTags("body",sb.replaceTags(anim, tags))
 		if animator.hasState(state, anim) then
-			if (not waitForEnd) or animator.animationEnded(state) then
+			if (not waitForEnd) or (animator.animationStateTimer(state) >= animator.stateCycle(state)) then
 				animator.setAnimationState(state, anim, force, reversed)
-				local timer = animator.animationTimer(state)
-				longest = math.max(longest, timer[2] - timer[1])
+				longest = math.max(longest, animator.stateCycle(state) - animator.animationStateTimer(state))
 			else
 				sbq.debugLogError(string.format("Animation hasn't ended '%s' '%s'", state, anim))
 			end
@@ -754,12 +753,16 @@ function _State:checkAnimations(activeOnly, animations, tags, target)
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = animator.applyPartTags("body",sb.replaceTags(anim, tags))
-		if (animator.hasState(state, anim) and not activeOnly)
-		or (animator.hasState(state) and animator.animationState(state) == "anim")
-		then
-			local timer = animator.animationTimer(state, anim)
-			longest = math.max(longest, timer[2] - timer[1])
+		anim = animator.applyPartTags("body", sb.replaceTags(anim, tags))
+		if animator.hasState(state, anim) then
+			if (animator.animationState(state) == "anim") then
+				longest = math.max(longest,
+					animator.stateCycle(state) - (force and 0 or animator.animationStateTimer(state)))
+			elseif (not activeOnly) then
+				longest = math.max(longest, animator.stateCycle(state, anim))
+			end
+		else
+			sbq.debugLogError(string.format("No animation state '%s' '%s'", state, anim))
 		end
 	end
 	return longest

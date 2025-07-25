@@ -569,8 +569,12 @@ function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stac
 end
 
 function sbq.isLoungeDismountable(eid)
-	local loungeAnchor = world.entityCurrentLounge(eid or entity.id())
-	return (not loungeAnchor) or (loungeAnchor and loungeAnchor.dismountable)
+    local loungeId, anchorIndex = world.entityAnchorState(eid or entity.id())
+    if loungeId then
+		return world.entityLoungeAnchor(loungeId, anchorIndex).dismountable
+    else
+		return false
+	end
 end
 
 function sbq.entitiesLounging(id)

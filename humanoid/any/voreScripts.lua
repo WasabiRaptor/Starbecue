@@ -303,8 +303,8 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	local size
 	if target then
 		if (target == sbq.loungingIn()) then return false, "invalidAction" end
-		local loungeAnchor = world.entityCurrentLounge(target)
-		if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
+		local loungeId, anchorIndex = world.entityAnchorState(target)
+		if loungeId and (loungeId ~= entity.id()) and (not world.entityLoungeAnchor(loungeId, anchorIndex).dismountable) then return false, "invalidAction" end
 		size = sbq.getEntitySize(target)
 	end
 	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
@@ -357,8 +357,8 @@ end
 function default:tryVore(name, action, target, ...)
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	if target == sbq.loungingIn() then return false, "invalidAction" end
-	local loungeAnchor = world.entityCurrentLounge(target)
-	if loungeAnchor and (loungeAnchor.entityId ~= entity.id()) and (not loungeAnchor.dismountable) then return false, "invalidAction" end
+	local loungeId, anchorIndex = world.entityAnchorState(target)
+	if loungeId and (loungeId ~= entity.id()) and (not world.entityLoungeAnchor(loungeId, anchorIndex).dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
 	local location = SpeciesScript:getLocation(action.location, action.subLocation)
 	if not location then return false, "invalidLocation" end

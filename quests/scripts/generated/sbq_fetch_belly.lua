@@ -26,13 +26,9 @@ function onUpdate(dt)
 end
 
 function isPlayerInsideQuestGiver(questGiverEntityId)
-  -- Find out what the player is lounging in, if anything
-  local loungeAnchor = world.entityCurrentLounge(player.id())
-  if not loungeAnchor then return false end
-
   -- Return if Player is inside the quest giver
   --TODO Check specifically for the belly location
-  return loungeAnchor.entityId == questGiverEntityId
+  return player.loungingIn() == questGiverEntityId
 end
 
 function onEnter()
