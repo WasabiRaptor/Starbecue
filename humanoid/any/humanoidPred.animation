@@ -1,10 +1,12 @@
-[
-	"/humanoid/any/humanoidPredTop.animation",
-	"/humanoid/any/sbqVoreParts/tail.animation",
-	"/humanoid/any/sbqVoreParts/cock.animation",
-	"/humanoid/any/sbqVoreParts/balls.animation",
-	"/humanoid/any/sbqVoreParts/pussy.animation",
+
 {
+	"includes" : [
+		"/humanoid/any/humanoidPredTop.animation",
+		"/humanoid/any/sbqVoreParts/tail.animation",
+		"/humanoid/any/sbqVoreParts/cock.animation",
+		"/humanoid/any/sbqVoreParts/balls.animation",
+		"/humanoid/any/sbqVoreParts/pussy.animation"
+	],
 	"globalTagDefaults" : {
 		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png"
 	},
@@ -105,4 +107,4 @@
 	"particleEmitters": {
 	}
 
-}]
+}

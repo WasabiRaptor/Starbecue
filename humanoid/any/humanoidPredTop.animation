@@ -1,7 +1,9 @@
-[
-	"/humanoid/any/sbqVoreParts/belly.animation",
-	"/humanoid/any/sbqVoreParts/breasts.animation",
+
 {
+	"includes" : [
+		"/humanoid/any/sbqVoreParts/belly.animation",
+		"/humanoid/any/sbqVoreParts/breasts.animation"
+	],
 	"globalTagDefaults" : {
 		"nudePath" : "nude/",
 
@@ -13,7 +15,9 @@
 	"animatedParts": {
 		"stateTypes": {
 			"rpActionState" : {
+				"default" : "idle",
 				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end"},
 					"jackoff": { "frames": 2, "cycle": 0.25, "mode": "loop"},
 					"fingerPussy": { "frames": 2, "cycle": 0.25, "mode": "loop"},
 					"squishBreasts": { "frames": 4, "cycle": 1, "mode": "loop"}
@@ -384,7 +388,7 @@
 					"rpActionState" : {
 						"jackoff" : {
 							"properties" : {
-								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"transformationGroups": ["frontArmRotation", "movementOffset"],
 								"image": "<bodyImagePath>frontarm.png:rotation",
 								"interpolated" : true
 							},
@@ -397,7 +401,7 @@
 						},
 						"fingerPussy" : {
 							"properties" : {
-								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"transformationGroups": ["frontArmRotation", "movementOffset"],
 								"image": "<bodyImagePath>frontarm.png:rotation"
 
 							},
@@ -410,7 +414,7 @@
 						},
 						"squishBreasts" : {
 							"properties" : {
-								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"transformationGroups": ["frontArmRotation", "movementOffset"],
 								"image": "<bodyImagePath>frontarm.png:swimIdle.1",
 								"interpolated" : false
 							},
@@ -440,7 +444,7 @@
 					"rpActionState" : {
 						"squishBreasts" : {
 							"properties" : {
-								"transformationGroups": ["frontarmrotation", "movementOffset"],
+								"transformationGroups": ["frontArmRotation", "movementOffset"],
 								"image": "<bodyImagePath>backarm.png:swim.2",
 								"interpolated" : false
 							},
@@ -477,4 +481,4 @@
 	"particleEmitters": {
 	}
 
-}]
+}
