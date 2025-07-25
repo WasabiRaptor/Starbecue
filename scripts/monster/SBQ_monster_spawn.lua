@@ -24,23 +24,23 @@ function init()
 	sbq.loungingIn = monster.loungingIn
 	sbq.resetLounging = monster.resetLounging
 
-	if self.behavior then
-		local behavior = {}
-		local _behavior = self.behavior
-		function behavior:run(...)
-			if not status.statPositive("sbqIsPrey") then
-				return _behavior:run(...)
-			else
-				sbq.struggleBehavior(...)
-			end
-		end
-		setmetatable(behavior, {
-			__index = function (t, k)
-				return _behavior[k]
-			end
-		})
-		self.behavior = behavior
-	end
+	-- if self.behavior then
+	-- 	local behavior = {}
+	-- 	local _behavior = self.behavior
+	-- 	function behavior:run(...)
+	-- 		if not status.statPositive("sbqIsPrey") then
+	-- 			return _behavior:run(...)
+	-- 		else
+	-- 			sbq.struggleBehavior(...)
+	-- 		end
+	-- 	end
+	-- 	setmetatable(behavior, {
+	-- 		__index = function (t, k)
+	-- 			return _behavior[k]
+	-- 		end
+	-- 	})
+	-- 	self.behavior = behavior
+	-- end
 
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData

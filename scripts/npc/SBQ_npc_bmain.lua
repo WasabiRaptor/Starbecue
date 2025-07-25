@@ -42,23 +42,23 @@ function init()
 		end
 	end)
 
-	if self.behavior then
-		local behavior = {}
-		local _behavior = self.behavior
-		function behavior:run(...)
-			if not status.statPositive("sbqIsPrey") then
-				_behavior:run(...)
-			else
-				sbq.struggleBehavior(...)
-			end
-		end
-		setmetatable(behavior, {
-			__index = function (t, k)
-				return _behavior[k]
-			end
-		})
-		self.behavior = behavior
-	end
+	-- if self.behavior then
+	-- 	local behavior = {}
+	-- 	local _behavior = self.behavior
+	-- 	function behavior:run(...)
+	-- 		if not status.statPositive("sbqIsPrey") then
+	-- 			_behavior:run(...)
+	-- 		else
+	-- 			sbq.struggleBehavior(...)
+	-- 		end
+	-- 	end
+	-- 	setmetatable(behavior, {
+	-- 		__index = function (t, k)
+	-- 			return _behavior[k]
+	-- 		end
+	-- 	})
+	-- 	self.behavior = behavior
+	-- end
 
 	sbq.rollConvert()
 	if not convert then
