@@ -1,6 +1,6 @@
 
 local old = {
-	refreshHumanoidSpecies = refreshHumanoidSpecies or (function() end),
+	refreshHumanoidParameters = refreshHumanoidParameters or (function() end),
 	-- equipmentSlotUpdated = equipmentSlotUpdated or (function() end)
 }
 require("/scripts/any/SBQ_util.lua")
@@ -11,35 +11,16 @@ require("/scripts/any/SBQ_util.lua")
 -- 	slotFunc(itemDescriptor)
 -- end
 
-local prevAnimSpecies
-local prevAnimGender
-function refreshHumanoidSpecies()
-    old.refreshHumanoidSpecies()
+function refreshHumanoidParameters()
+    old.refreshHumanoidParameters()
+	local humanoidConfig = player.humanoidConfig()
 
-	sbq.refreshRemapTags()
-	-- equipped.chestCosmeticSlot(humanoid.getItemSlot("chestCosmetic"))
-	-- equipped.legsCosmeticSlot(humanoid.getItemSlot("legsCosmetic"))
-	-- equipped.headCosmeticSlot(humanoid.getItemSlot("headCosmetic"))
-	-- equipped.backCosmeticSlot(humanoid.getItemSlot("backCosmetic"))
-	-- equipped.primary(humanoid.getItemSlot("primary"))
-	-- equipped.alt(humanoid.getItemSlot("alt"))
-	if prevAnimSpecies and (prevAnimSpecies ~= sbq.species()) then
-		if sbq.reloadVoreConfig then
-			sbq.reloadVoreConfig({ root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config",
-				config and config.getParameter("voreConfig") })
-		end
-	elseif prevAnimGender and (prevAnimGender ~= sbq.gender()) then
-		if SpeciesScript then
-			SpeciesScript:refreshInfusion()
-		end
+    sbq.refreshRemapTags()
+
+	if sbq.reloadVoreConfig then
+		sbq.reloadVoreConfig({ root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config",
+			config and config.getParameter("voreConfig") })
 	end
-	if SpeciesScript and SpeciesScript.active then
-		for _, occupant in ipairs(Occupants.list) do
-			occupant:getLocation():markSizeDirty(true)
-		end
-	end
-	prevAnimGender = sbq.gender()
-	prevAnimSpecies = sbq.species()
 end
 
 function sbq.refreshRemapTags()

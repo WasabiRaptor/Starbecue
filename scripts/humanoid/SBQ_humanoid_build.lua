@@ -49,7 +49,16 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 	if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
 		return humanoidConfig
 	end
-	humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
+    humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
+    local speciesConfig = root.speciesConfig(identity.species)
+
+    for _, v in ipairs(speciesConfig.animationCustom or {}) do -- temporary, will have to rethink this
+        if type(v) == "string" then
+            table.insert(humanoidConfig.animation.includes, v)
+        else
+            humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, v)
+        end
+    end
 
     for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
         humanoidConfig.loungePositions["occupant" .. tostring(i)] = {

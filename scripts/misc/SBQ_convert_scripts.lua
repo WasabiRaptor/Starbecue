@@ -46,13 +46,3 @@ function sbq.convertVictimAnims(path)
 	sbq.logInfo(newAnims, 4)
 	return newAnims
 end
-
-function sbq.createOccupantAnims(path)
-	sbq.logInfo(path)
-	local anims = {}
-	for i = 0, sbq.config.seatCount -1 do
-		local occupantAnim = sbq.replaceConfigTags(root.assetJson(path),{occupant = "occupant"..i})
-		anims = sb.jsonMerge(anims, occupantAnim)
-	end
-	sbq.logInfo(anims, 2)
-end
