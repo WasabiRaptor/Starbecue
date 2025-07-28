@@ -1,12 +1,12 @@
 ---@diagnostic disable: undefined-global
 sbq = {}
-require"/scripts/any/SBQ_RPC_handling.lua"
-require"/scripts/rect.lua"
-require"/scripts/any/SBQ_vore_main.lua"
-require"/scripts/humanoid/SBQ_humanoid.lua"
-require"/scripts/actor/SBQ_actor.lua"
-require"/scripts/player/SBQ_player_notifs.lua"
-require"/scripts/any/SBQ_util.lua"
+require "/scripts/any/SBQ_RPC_handling.lua"
+require "/scripts/rect.lua"
+require "/scripts/any/SBQ_vore_main.lua"
+require "/scripts/humanoid/SBQ_humanoid.lua"
+require "/scripts/actor/SBQ_actor.lua"
+require "/scripts/player/SBQ_player_notifs.lua"
+require "/scripts/any/SBQ_util.lua"
 function init()
 	player.setProperty("predHudOpen", false)
 	storage = storage or {}
@@ -24,26 +24,34 @@ function init()
 	sbq.actorInit()
 	sbq.settingsInit()
 	sbq.humanoidInit()
+	sbq.actorMessages()
 	if player.getProperty("sbqAgreedTerms") then
-		sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
-		sbq.actorMessages()
+		if player.getHumanoidParameters().sbqEnabled then
+			sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
+		else
+			local params = player.getHumanoidParameters()
+			params.sbqEnabled = true
+			player.setHumanoidParameters(params)
+			player.refreshHumanoidParameters()
+		end
 	else
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 		sbq.lists = {}
 		sbq.voreConfig = sbq.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 		sbq.setupSettingMetatables("player")
-		message.setHandler("sbqSettingsPageData", function ()
+		message.setHandler("sbqSettingsPageData", function()
 			return sbq.settingsPageData()
 		end)
 	end
 	sbq.notifyPlayer()
 
-	message.setHandler("sbqInteractWith", function (_,_,entityId)
+	message.setHandler("sbqInteractWith", function(_, _, entityId)
 		player.interactWithEntity(entityId)
 	end)
 
 	message.setHandler("sbqOpenMetagui", function(_, _, name, sourceEntity, data)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = name, data = data }, sourceEntity )
+		player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = name, data = data },
+			sourceEntity)
 	end)
 
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
@@ -58,7 +66,8 @@ function init()
 		for rewardName, reward in pairs(newRewards) do
 			if reward.cumulative then
 				cumulativeDataTable[uniqueId].flags[rewardName] = true
-				cumulativeDataTable[uniqueId].flags[rewardName.."CountRecieved"] = (cumulativeDataTable[uniqueId].flags[rewardName.."CountRecieved"] or 0) + reward.count
+				cumulativeDataTable[uniqueId].flags[rewardName .. "CountRecieved"] = (cumulativeDataTable[uniqueId].flags[rewardName .. "CountRecieved"] or 0) +
+					reward.count
 			end
 			for i = 1, reward.count do
 				local loot = root.createTreasure(reward.pool, reward.level or 0)
@@ -88,7 +97,14 @@ function init()
 	end)
 
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
-		player.interact("ScriptPane", { gui = { }, scripts = {"/metagui/sbq/build.lua"}, data = { occupants = occupants, sbq = settingsData }, ui = "starbecue:predHud" })
+		player.interact("ScriptPane",
+			{
+				gui = {},
+				scripts = { "/metagui/sbq/build.lua" },
+				data = { occupants = occupants, sbq = settingsData },
+				ui =
+				"starbecue:predHud"
+			})
 	end)
 
 	message.setHandler("sbqChooseLocation", function(_, _, id, target, locations)
@@ -108,7 +124,8 @@ function init()
 				messageTarget = id,
 				message = "sbqRequestAction",
 				close = true,
-				description = sbq.getString((entity.id() == target) and ":chooseLocationPreyPrompt" or ":chooseLocationDesc")
+				description = sbq.getString((entity.id() == target) and ":chooseLocationPreyPrompt" or
+					":chooseLocationDesc")
 			},
 			cancel = {
 				args = false,
@@ -121,18 +138,19 @@ function init()
 		local options = {
 			{
 				name = sbq.getString(":no"),
-				args = {false, isDom, "no", action, entity.id()}
+				args = { false, isDom, "no", action, entity.id() }
 			},
 			{
 				name = sbq.getString(":yes"),
-				args = {true, isDom, "yes", action, entity.id()}
+				args = { true, isDom, "yes", action, entity.id() }
 			},
 			{
 				name = sbq.getString(":noYes"),
-				args = {true, isDom, "noYes", action, entity.id()}
+				args = { true, isDom, "noYes", action, entity.id() }
 			}
 		}
-		local description = sb.replaceTags(sbq.getString((isDom and ":genericDomPrompt") or ":genericSubPrompt"), {actionName = sbq.getString(":"..action), entityName = sbq.entityName(id)})
+		local description = sb.replaceTags(sbq.getString((isDom and ":genericDomPrompt") or ":genericSubPrompt"),
+			{ actionName = sbq.getString(":" .. action), entityName = sbq.entityName(id) })
 		local sourceRadius
 		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
 			sourceRadius = -1
@@ -153,7 +171,7 @@ function init()
 			}
 		}, id)
 	end)
-	message.setHandler("sbqPromptResponse", function (_,_,tryAction, isDom, line, action, target)
+	message.setHandler("sbqPromptResponse", function(_, _, tryAction, isDom, line, action, target)
 		if tryAction then
 			if isDom then
 				SpeciesScript:requestAction(false, action, target)
@@ -211,7 +229,7 @@ function init()
 			}
 		}, entity.id())
 	end)
-	message.setHandler("sbqCustomizeEntity", function (_,_, id)
+	message.setHandler("sbqCustomizeEntity", function(_, _, id)
 		sbq.customizeEntity(id)
 	end)
 
@@ -234,10 +252,12 @@ function update(dt)
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
-				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
+				sbq.addNamedRPC("missingPredFound",
+					world.sendEntityMessage(eid, "sbqRecieveOccupants",
+						{ sb.jsonMerge(occupantData, { entityId = entity.id() }) }))
 			end
 		else
-			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
+			status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })
 			if not ((player.getProperty("sbqPredWarpAttempted") or 0) >= sbq.config.missingPredWarpAttempts) and (occupantData.playerPred or occupantData.crewPred) and sbq.timer("missingPredWarp", sbq.config.missingPredWarpDelay) then
 				if occupantData.playerPred then
 					pcall(player.warp("player:" .. occupantData.predUUID, "beam"))
@@ -253,7 +273,7 @@ function update(dt)
 					message = sbq.getString(":missingPredPrompt"),
 					okCaption = sbq.getString(":missingPredEscape"),
 					cancelCaption = sbq.getString(":missingPredWait"),
-					images = {portrait = player.getProperty("sbqPredPortrait") or jarray()}
+					images = { portrait = player.getProperty("sbqPredPortrait") or jarray() }
 				}), function(escape)
 					if escape then
 						status.setStatusProperty("sbqOccupantData", nil)
@@ -290,9 +310,14 @@ function sbq.buildActionRequestOptions(id, actionList)
 end
 
 function sbq.customizeEntity(eid)
-	sbq.addRPC(player.characterCreation({ speciesIdentites = world.entityStatusProperty(eid, "sbqSpeciesIdentities"), currentSpecies = world.entitySpecies(eid) }), function(response)
-		world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
-	end)
+	sbq.addRPC(
+		player.characterCreation({
+			speciesIdentites = world.entityStatusProperty(eid, "sbqSpeciesIdentities"),
+			currentSpecies =
+				world.entitySpecies(eid)
+		}), function(response)
+			world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
+		end)
 end
 
 function sbq.collapseEssenceStacks()
@@ -300,7 +325,8 @@ function sbq.collapseEssenceStacks()
 	local output = {}
 	for _, item in ipairs(player.itemsWithTag("sbqEssence") or {}) do
 		count = count + item.count
-		local uuid = sbq.query(item.parameters, { "npcArgs", "npcParam", "scriptConfig", "uniqueId" }) or sbq.query(item.parameters, { "npcArgs", "npcParam", "identity", "name" }) or "unknown"
+		local uuid = sbq.query(item.parameters, { "npcArgs", "npcParam", "scriptConfig", "uniqueId" }) or
+			sbq.query(item.parameters, { "npcArgs", "npcParam", "identity", "name" }) or "unknown"
 		local predUUID = item.parameters.predUuid or "noPred"
 		output[predUUID] = output[predUUID] or {}
 		output[predUUID][uuid] = output[predUUID][uuid] or {}
@@ -324,7 +350,8 @@ function sbq.collapseEssenceStacks()
 
 		if createdDate >= curCreatedDate then
 			output[predUUID][uuid][item.name] = item
-			output[predUUID][uuid][item.name].count = output[predUUID][uuid][item.name].count + ((current or {}).count or 0)
+			output[predUUID][uuid][item.name].count = output[predUUID][uuid][item.name].count +
+				((current or {}).count or 0)
 		end
 	end
 	player.consumeTaggedItem("sbqEssence", count)
@@ -350,8 +377,8 @@ function teleportOut()
 			occupant:remove()
 		end
 	end
-
 end
+
 function die()
 	status.setStatusProperty("sbqOccupantData", nil)
 	for i, occupant in ipairs(Occupants.list) do

@@ -377,7 +377,7 @@ function sbq.getEntitySize(entityId)
 	if world.entityType(entityId) == "object" then
 		return math.sqrt(#world.objectSpaces()) / sbq.config.sizeConstant
 	end
-	return math.sqrt(world.entityArea(entityId)) / sbq.config.sizeConstant
+	return math.sqrt(world.entityCollisionArea(entityId)) / sbq.config.sizeConstant
 end
 
 function sbq.getPublicProperty(entityId, property)
@@ -602,7 +602,7 @@ function sbq.isLoungeDismountable(eid)
 	if loungeId then
 		return world.entityLoungeAnchor(loungeId, anchorIndex).dismountable
 	else
-		return false
+		return true
 	end
 end
 

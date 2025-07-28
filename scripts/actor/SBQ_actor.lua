@@ -7,7 +7,7 @@ function sbq.actorInit()
 
     sbq.facingDirection = mcontroller.facingDirection
     sbq.getScale = mcontroller.getScale
-    sbq.area = mcontroller.area
+    sbq.area = mcontroller.collisionArea
 
     sbq.entityId = entity.id
 end
@@ -82,6 +82,27 @@ function sbq.actorMessages()
 		end
 	end)
 
+	message.setHandler("sbqReleased", function(_, _, data)
+		mcontroller.resetAnchorState()
+		sbq.resetLounging()
+		status.setStatusProperty("sbqProgressBar", 0)
+		status.setStatusProperty("sbqProgressBarColor", {})
+		seatToForce = nil
+		status.setStatusProperty("sbqOccupantData", nil)
+		sbq.checkStuck()
+		sbq.timer("stuckCheck", 0.5, sbq.checkStuck)
+	end)
+
+	message.setHandler("sbqForceSit", function(_, _, data)
+		local source, index = mcontroller.anchorState()
+		if (source == data.source) and (index == data.index) then return end
+		sbq.resetLounging()
+		mcontroller.setPosition(world.entityPosition(data.source))
+		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
+			seatToForce = data
+		end
+	end)
+
 	status.setPersistentEffects("sbqActorScript", {
 		{stat = "sbqActorScript", amount = 1} -- set this stat to mark that status primary has initialized
 	})
@@ -151,4 +172,20 @@ function faceEntity(args, board)
 	local loungeId = world.entityAnchorState(args.entity)
 	if loungeId == entity.id() then return false end
 	return old.faceEntity(args, board)
+end
+
+function sbq.checkStuck()
+	if mcontroller.isCollisionStuck() then -- copy of vanilla's "checkStuck" but without the lounge check
+		-- sloppy catch-all correction for various cases of getting stuck in things
+		-- due to bad spawn position, failure to exit loungeable (on ships), etc.
+		local poly = mcontroller.collisionPoly()
+		local pos = mcontroller.position()
+		for maxDist = 2, 5 do
+			local resolvePos = world.resolvePolyCollision(poly, pos, maxDist)
+			if resolvePos then
+				mcontroller.setPosition(resolvePos)
+				break
+			end
+		end
+	end
 end

@@ -721,7 +721,7 @@ function _State:doAnimations(animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = animator.applyPartTags("body",sb.replaceTags(k, tags))
+		local state = animator.applyPartTags("body", sb.replaceTags(k, tags))
 		local anim = v
 		local force = false
 		local reversed = false
@@ -1515,7 +1515,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	end
 	local seat
 	-- check for unoccupied occupant seat
-	for i = 0, (sbq.voreConfig.seatCount or sbq.config.seatCount) - 1 do
+	for i = 1, (sbq.voreConfig.seatCount or sbq.config.seatCount) do
 		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
@@ -1564,7 +1564,7 @@ function Occupants.insertOccupant(newOccupant)
 
 	local seat
 	-- check for unoccupied occupant seat
-	for i = 0, sbq.config.seatCount - 1 do
+	for i = 1, sbq.config.seatCount do
 		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
@@ -1620,7 +1620,7 @@ function Occupants.finishOccupantSetup(occupant)
 	-- refresh the location data for this occupant
 	occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	occupant:setLoungeEnabled(true)
-	occupant:setDismountable(false)
+	occupant:setLoungeDismountable(false)
 	world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 
 	sbq.forceTimer(occupant.seat .. "Timeout", 1, function()
@@ -1752,9 +1752,9 @@ function _Occupant:update(dt)
 	local location = self:getLocation()
 	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove() end
 	if location.occupancy.settingsDirty then self:refreshLocation() end
-	if not animator.animationEnded(self.seat .. "State") then
+	if not (animator.animationStateTimer(self.seat .. "State") >= animator.stateCycle(self.seat .. "State")) then
 		if self.flags.releasing and self:animProperty("release") then return self:remove() end
-		self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
+		self:setLoungeHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
 		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))
 		self:setLoungeEmote(self:animProperty("emote"))
@@ -1824,7 +1824,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
 	if self.flags.releasing and self:animProperty("release") then return self:remove() end
-	self:setHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
+	self:setLoungeHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
 	self:setLoungeOrientation(self:animProperty("orientation"))
 	self:setLoungeDance(self:animProperty("dance"))
 	self:setLoungeEmote(self:animProperty("emote"))
@@ -2240,34 +2240,34 @@ function _Occupant:setLoungeStatusEffects(...)
 	return loungeable.setLoungeStatusEffects(self.seat, ...)
 end
 function _Occupant:setToolUsageSuppressed(...)
-	return loungeable.setToolUsageSuppressed(self.seat, ...)
+	-- return loungeable.setToolUsageSuppressed(self.seat, ...)
 end
-function _Occupant:setDismountable(...)
-	return loungeable.setDismountable(self.seat, ...)
+function _Occupant:setLoungeDismountable(...)
+	return loungeable.setLoungeDismountable(self.seat, ...)
 end
-function _Occupant:setHidden(...)
-	return loungeable.setHidden(self.seat, ...)
+function _Occupant:setLoungeHidden(...)
+	return loungeable.setLoungeHidden(self.seat, ...)
 end
 function _Occupant:setItemBlacklist(...)
-	return loungeable.setItemBlacklist(self.seat, ...)
+	-- return loungeable.setItemBlacklist(self.seat, ...)
 end
 function _Occupant:setItemWhitelist(...)
-	return loungeable.setItemWhitelist(self.seat, ...)
+	-- return loungeable.setItemWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTagBlacklist(...)
-	return loungeable.setItemTagBlacklist(self.seat, ...)
+	-- return loungeable.setItemTagBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTagWhitelist(...)
-	return loungeable.setItemTagWhitelist(self.seat, ...)
+	-- return loungeable.setItemTagWhitelist(self.seat, ...)
 end
 function _Occupant:setItemTypeBlacklist(...)
-	return loungeable.setItemTypeBlacklist(self.seat, ...)
+	-- return loungeable.setItemTypeBlacklist(self.seat, ...)
 end
 function _Occupant:setItemTypeWhitelist(...)
-	return loungeable.setItemTypeWhitelist(self.seat, ...)
+	-- return loungeable.setItemTypeWhitelist(self.seat, ...)
 end
 function _Occupant:getLoungeIndex()
-	return loungeable.getIndexFromName(self.seat)
+	return loungeable.getLoungeIndex(self.seat)
 end
 
 function _Occupant:logInfo(json)

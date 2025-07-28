@@ -65,14 +65,14 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
             part = "occupant" .. tostring(i),
             partAnchor = "loungeOffset",
             orientation = "stand",
-            statusEffects = {},
+            statusEffects = jarray(),
             dance = "sbqIdle",
             enabled = false,
             usePartZLevel = true
         }
         -- TODO make these more modular later
         local occupantAnimation = sb.parseJson(sb.printJson(root.assetJson(humanoidConfig.sbqOccupantAnimation or
-            "/humanoid/any/voreOccupant.animation")):gsub("%<slot%>",tostring(i)))
+            "/humanoid/any/voreOccupant.animation")):gsub("%<slot%>", tostring(i)))
 
 
         for stateTypeName, stateType in pairs(occupantAnimation.animatedParts.stateTypes or {}) do
@@ -98,5 +98,6 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 
         humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, occupantAnimation)
     end
+
 	return humanoidConfig
 end

@@ -23,27 +23,6 @@ function init()
 	sbq.actorInit()
 	status.setStatusProperty("sbqProgressBar", 0)
 
-	message.setHandler("sbqReleased", function(_, _, data)
-		mcontroller.resetAnchorState()
-		sbq.resetLounging()
-		status.setStatusProperty("sbqProgressBar", 0)
-		status.setStatusProperty("sbqProgressBarColor", {})
-		seatToForce = nil
-		status.setStatusProperty("sbqOccupantData", nil)
-		sbq.checkStuck()
-		sbq.timer("stuckCheck", 0.5, sbq.checkStuck)
-	end)
-
-	message.setHandler("sbqForceSit", function(_, _, data)
-		local source, index = mcontroller.anchorState()
-		if (source == data.source) and (index == data.index) then return end
-		sbq.resetLounging()
-		mcontroller.setPosition(world.entityPosition(data.source))
-		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
-			seatToForce = data
-		end
-	end)
-
 	message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
 		local res = status.overConsumeResource(resource, amount)
 		if not res and ignoreBlock then status.modifyResource(resource, -amount) end
@@ -210,20 +189,4 @@ function sbq.applyScale(scale, duration, min, max)
 	scaleTime = 0
 	scaleDuration = duration or 1
 	scaling = true
-end
-
-function sbq.checkStuck()
-	if mcontroller.isCollisionStuck() then -- copy of vanilla's "checkStuck" but without the lounge check
-		-- sloppy catch-all correction for various cases of getting stuck in things
-		-- due to bad spawn position, failure to exit loungeable (on ships), etc.
-		local poly = mcontroller.collisionPoly()
-		local pos = mcontroller.position()
-		for maxDist = 2, 5 do
-			local resolvePos = world.resolvePolyCollision(poly, pos, maxDist)
-			if resolvePos then
-				mcontroller.setPosition(resolvePos)
-				break
-			end
-		end
-	end
 end

@@ -1,4 +1,3 @@
-
 local old = {
 	refreshHumanoidParameters = refreshHumanoidParameters or (function() end),
 	-- equipmentSlotUpdated = equipmentSlotUpdated or (function() end)
@@ -12,14 +11,13 @@ require("/scripts/any/SBQ_util.lua")
 -- end
 
 function refreshHumanoidParameters()
-    old.refreshHumanoidParameters()
+	old.refreshHumanoidParameters()
 	local humanoidConfig = player.humanoidConfig()
 
-    sbq.refreshRemapTags()
+	sbq.refreshRemapTags()
 
-	if sbq.reloadVoreConfig then
-		sbq.reloadVoreConfig({ root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config",
-			config and config.getParameter("voreConfig") })
+	if player.getHumanoidParameters().sbqEnabled and sbq.init then
+		sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
 	end
 end
 
@@ -40,7 +38,7 @@ function sbq.refreshRemapTags()
 	for part, tags in pairs(speciesConfig.colorRemapPartTags or {}) do
 		for tag, remaps in pairs(tags or {}) do
 			local sourceColorMap = sbq.query(speciesConfig, { "colorRemapSources", part, tag }) or
-			sbq.query(speciesConfig, { "colorRemapSources", tag })
+				sbq.query(speciesConfig, { "colorRemapSources", tag })
 			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
 			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
 				speciesConfig.baseColorMap or defaultColorMap)
@@ -206,24 +204,25 @@ function sbq.addDirectives()
 			A = color:sub(7, 8)
 		end
 		local newReplaceColors = "?replace;00c77d=" ..
-		string.format("%02x", math.floor(R * multiplyAmount)) ..
-		string.format("%02x", math.floor(G * multiplyAmount)) .. string.format("%02x", math.floor(B * multiplyAmount)) ..
-		A
+			string.format("%02x", math.floor(R * multiplyAmount)) ..
+			string.format("%02x", math.floor(G * multiplyAmount)) ..
+			string.format("%02x", math.floor(B * multiplyAmount)) ..
+			A
 		self.identity.bodyDirectives = self.identity.bodyDirectives .. newReplaceColors
 	end
 end
 
 function sbq.humanoidInit()
-	message.setHandler("sbqDoTransformation", function (_,_, ...)
+	message.setHandler("sbqDoTransformation", function(_, _, ...)
 		sbq.doTransformation(...)
-    end)
-	message.setHandler("sbqHybridTransformation", function (_,_, ...)
+	end)
+	message.setHandler("sbqHybridTransformation", function(_, _, ...)
 		sbq.hybridTransformation(...)
 	end)
-	message.setHandler("sbqRevertTF", function (_,_)
+	message.setHandler("sbqRevertTF", function(_, _)
 		sbq.revertTF()
 	end)
-	message.setHandler("sbqGetIdentity", function (_,_)
+	message.setHandler("sbqGetIdentity", function(_, _)
 		return sbq.humanoidIdentity()
 	end)
 
@@ -262,7 +261,8 @@ function sbq.humanoidInit()
 		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")
 		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
 		item.parameters.preySize = sbq.size()
-		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty("sbqPronouns")
+		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty(
+		"sbqPronouns")
 		return item
 	end)
 end
@@ -292,14 +292,14 @@ end
 function sbq.hybridTransformation(newSpecies, duration, ...)
 	local newSpeciesConfig = root.speciesConfig(newSpecies)
 	local curIdentity = sbq.humanoidIdentity()
-	local newIdentity = {species = newSpecies}
+	local newIdentity = { species = newSpecies }
 	if newSpecies ~= curIdentity.species then
 		local curSpeciesConfig = root.speciesConfig(curIdentity.species)
-        if (newSpeciesConfig.hybridSpeciesBlacklist or {})[curIdentity.species] then
-            player.radioMessage("sbqHybridBlacklisted")
-            sbq.logWarn("Attempted to hybridize blacklisted species for " .. newSpecies .. ": " .. newIdentity.species)
-            return
-        end
+		if (newSpeciesConfig.hybridSpeciesBlacklist or {})[curIdentity.species] then
+			player.radioMessage("sbqHybridBlacklisted")
+			sbq.logWarn("Attempted to hybridize blacklisted species for " .. newSpecies .. ": " .. newIdentity.species)
+			return
+		end
 		if not curSpeciesConfig.voreConfig then
 			player.radioMessage("sbqHybridUnsupported")
 		end
@@ -308,7 +308,7 @@ function sbq.hybridTransformation(newSpecies, duration, ...)
 			if v[3] then
 				curIdentity[v[1]] = curIdentity[v[2]]
 			else
-				curIdentity[v[1]] = curIdentity[v[1]]..curIdentity[v[2]]
+				curIdentity[v[1]] = curIdentity[v[1]] .. curIdentity[v[2]]
 			end
 		end
 
@@ -318,7 +318,7 @@ function sbq.hybridTransformation(newSpecies, duration, ...)
 		newIdentity.imagePath = curIdentity.species
 		newIdentity.species = newSpecies
 		sbq.doTransformation(newIdentity, duration, true, true, ...)
-    else
+	else
 		newIdentity.imagePath = newSpecies
 		sbq.doTransformation(newIdentity, duration, true, true, ...) -- forces customization data to be cleared and regenerated
 	end
@@ -327,11 +327,14 @@ end
 function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomization, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	if sbq.config.transformationBlacklist[sbq.species()] then
-		if player then sbq.logWarn("Attempted to transform as blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformFromBlacklist") end
+		if player then
+			sbq.logWarn("Attempted to transform as blacklisted species: " .. newIdentity.species)
+			player.radioMessage("sbqTransformFromBlacklist")
+		end
 		return false
 	end
 
-	local currentIdentity =	sbq.humanoidIdentity()
+	local currentIdentity = sbq.humanoidIdentity()
 	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
 	local originalGender = status.statusProperty("sbqOriginalGender")
@@ -350,7 +353,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 
 	if sbq.settings.genderTF then
 		if newIdentity.gender == "random" then
-			newIdentity.gender = ({"male", "female"})[math.random(2)]
+			newIdentity.gender = ({ "male", "female" })[math.random(2)]
 		elseif newIdentity.gender == "swap" then
 			newIdentity.gender = ({ male = "female", female = "male" })[currentIdentity.gender]
 		elseif (newIdentity.gender ~= "male") and (newIdentity.gender ~= "female") then
@@ -373,7 +376,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 					if speciesFile.forceName then
 						badSpecies = true
 					elseif speciesFile.voreConfig then
-						if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+						if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
 							badSpecies = true
 						end
 					elseif sbq.config.anyTFSupportedOnly then
@@ -381,7 +384,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 					end
 				end
 				if badSpecies then
-					table.remove(speciesList,i)
+					table.remove(speciesList, i)
 				end
 			end
 		elseif newIdentity.species == "originalSpecies" then
@@ -397,27 +400,30 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	if not speciesFile then return false end
 	newIdentity.species = speciesFile.kind
 	if sbq.config.transformationBlacklist[newIdentity.species] then
-		if player then sbq.logWarn("Attempted to transform into blacklisted species: ".. newIdentity.species) player.radioMessage("sbqTransformIntoBlacklist") end
+		if player then
+			sbq.logWarn("Attempted to transform into blacklisted species: " .. newIdentity.species)
+			player.radioMessage("sbqTransformIntoBlacklist")
+		end
 		return false
 	end
 	if npc and speciesFile.voreConfig then
-		if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+		if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
 			sbq.logWarn("NPC cannot be transformed into TF locked species: " .. newIdentity.species)
 			return false
 		end
 	end
 	if player and not (
-		root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "casual"}))
-		and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), {species = newIdentity.species, mode = "survival"}))
-		and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:warpCinematic"), {species = newIdentity.species}))
-		and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:deployCinematic"), {species = newIdentity.species}))
-		and root.assetJson("/universe_server.config:speciesShips")[newIdentity.species]
-		and root.assetJson("/ai/ai.config:species")[newIdentity.species]
-		and root.assetJson("/quests/quests.config:initialquests")[newIdentity.species]
-		and root.assetJson("/player.config:defaultCodexes")[newIdentity.species]
-	) then
+			root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), { species = newIdentity.species, mode = "casual" }))
+			and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:respawnCinematic"), { species = newIdentity.species, mode = "survival" }))
+			and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:warpCinematic"), { species = newIdentity.species }))
+			and root.assetOrigin(sb.replaceTags(root.assetJson("/client.config:deployCinematic"), { species = newIdentity.species }))
+			and root.assetJson("/universe_server.config:speciesShips")[newIdentity.species]
+			and root.assetJson("/ai/ai.config:species")[newIdentity.species]
+			and root.assetJson("/quests/quests.config:initialquests")[newIdentity.species]
+			and root.assetJson("/player.config:defaultCodexes")[newIdentity.species]
+		) then
 		player.radioMessage("sbqTransformNPCOnly")
-		sbq.logWarn("Attempted to transform into NPC only species: "..newIdentity.species)
+		sbq.logWarn("Attempted to transform into NPC only species: " .. newIdentity.species)
 		return false
 	end
 	local preserveColors = {
@@ -448,7 +454,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		root.generateHumanoidIdentity(newIdentity.species, newIdentity.seed, newIdentity.gender),
 		newIdentity,
 		((not forceIdentity) and speciesIdentites[newIdentity.species]) or {},
-		{gender = newIdentity.gender} -- preserve new gender if applicable
+		{ gender = newIdentity.gender } -- preserve new gender if applicable
 	)
 	if not (forceIdentity or speciesIdentites[newIdentity.species]) then
 		-- for k, v in pairs(newIdentity) do
@@ -504,14 +510,15 @@ function sbq.revertTF()
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or sbq.species()
 	local originalGender = status.statusProperty("sbqOriginalGender") or sbq.gender()
 	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
-	local customData = speciesIdentities[originalSpecies] or root.generateHumanoidIdentity(originalSpecies, math.randomseed(), originalGender)
+	local customData = speciesIdentities[originalSpecies] or
+	root.generateHumanoidIdentity(originalSpecies, math.randomseed(), originalGender)
 	customData.gender = originalGender
 	sbq.setHumanoidIdentity(customData)
 	sbq.refreshPredHudPortrait()
 end
 
 function sbq.refreshPredHudPortrait()
-	sbq.timer("predHudPortrait", 1, function ()
+	sbq.timer("predHudPortrait", 1, function()
 		local loungeId = world.entityAnchorState(entity.id())
 		if loungeId then
 			world.sendEntityMessage(loungeId, "scriptPaneMessage", "sbqHudRefreshPortrait", entity.id())
