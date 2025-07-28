@@ -1,5 +1,5 @@
 -- dummies to override with entity specific ones
-function sbq.area()
+function sbq.collisionArea()
 	return 1
 end
 function sbq.facingDirection()

@@ -1,19 +1,16 @@
-local old = {
-	init = init,
-	update = update
-}
 sbq = {}
-
 require"/scripts/any/SBQ_RPC_handling.lua"
 require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/any/SBQ_public_settings.lua"
+local old = {
+	init = init,
+	update = update
+}
 
 function init()
 	old.init()
 	sbq.config = root.assetJson("/sbq.config")
-	sbq.actorInit()
-	sbq.actorMessages()
 	sbq.setupPublicSettings()
 
 	sbq.say = monster.say

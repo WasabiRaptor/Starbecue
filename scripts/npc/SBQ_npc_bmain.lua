@@ -1,18 +1,19 @@
 ---@diagnostic disable: undefined-global
+sbq = {}
+require "/scripts/any/SBQ_override_dummies.lua"
+require "/scripts/actor/SBQ_actor.lua"
+require "/scripts/any/SBQ_public_settings.lua"
+
+require "/scripts/humanoid/SBQ_humanoid.lua"
+require "/scripts/any/SBQ_RPC_handling.lua"
+require "/scripts/any/SBQ_util.lua"
+
 local old = {
 	init = init,
 	update = update,
 	tenant_setNpcType = tenant.setNpcType,
 	recruitable_generateRecruitInfo = recruitable.generateRecruitInfo,
 }
-sbq = {}
-require "/scripts/any/SBQ_override_dummies.lua"
-require "/scripts/actor/SBQ_actor.lua"
-require "/scripts/any/SBQ_public_settings.lua"
-
-require"/scripts/humanoid/SBQ_humanoid.lua"
-require"/scripts/any/SBQ_RPC_handling.lua"
-require"/scripts/any/SBQ_util.lua"
 
 local convertBackType
 local convert
@@ -22,13 +23,12 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 
 	sbq.targetPosition = npc.aimPosition
-    sbq.resetLounging = npc.resetLounging
-    sbq.species = npc.species
+	sbq.resetLounging = npc.resetLounging
+	sbq.species = npc.species
 	sbq.gender = npc.gender
-
-	sbq.actorInit()
+	sbq.humanoidIdentity = npc.humanoidIdentity
+	sbq.setHumanoidIdentity = npc.setHumanoidIdentity
 	sbq.humanoidInit()
-	sbq.actorMessages()
 
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
@@ -65,6 +65,7 @@ function init()
 		sbq.setupPublicSettings()
 	end
 end
+
 function sbq.rollConvert()
 	if config.getParameter("sbqConvertType") and not status.statusProperty("sbqDidConvertCheck") then
 		status.setStatusProperty("sbqDidConvertCheck", true)
@@ -81,45 +82,46 @@ function sbq.rollConvert()
 		end
 		if tenant then
 			convert = (math.random() <= math.max(config.getParameter("sbqConvertChance") or 0, speciesConfig.sbqConvertChance or 0, sbq.config.convertChance))
-			if convert then sbq.timer("maybeConvert", 0.1,
-				function()
-					if sbq.parentEntity() or entity.uniqueId() then
-						sbq.setupPublicSettings()
-						return
-					end
-					if npc.species() == config.getParameter("sbqConvertSpecies") then
-						local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
-						local badSpecies = true
-						local newSpecies
-						while badSpecies do
-							local i = math.random(#speciesList)
-							newSpecies = speciesList[i]
-							badSpecies = sbq.config.transformationBlacklist[newSpecies] or false
-							if not badSpecies then
-								local speciesFile = root.speciesConfig(newSpecies)
-								if speciesFile.forceName then
-									badSpecies = true
-								elseif speciesFile.voreConfig then
-									if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
+			if convert then
+				sbq.timer("maybeConvert", 0.1,
+					function()
+						if sbq.parentEntity() or entity.uniqueId() then
+							sbq.setupPublicSettings()
+							return
+						end
+						if npc.species() == config.getParameter("sbqConvertSpecies") then
+							local speciesList = root.assetJson("/interface/windowconfig/charcreation.config")
+							.speciesOrdering
+							local badSpecies = true
+							local newSpecies
+							while badSpecies do
+								local i = math.random(#speciesList)
+								newSpecies = speciesList[i]
+								badSpecies = sbq.config.transformationBlacklist[newSpecies] or false
+								if not badSpecies then
+									local speciesFile = root.speciesConfig(newSpecies)
+									if speciesFile.forceName then
+										badSpecies = true
+									elseif speciesFile.voreConfig then
+										if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
+											badSpecies = true
+										end
+									else
 										badSpecies = true
 									end
-								else
-									badSpecies = true
+								end
+								if badSpecies then
+									table.remove(speciesList, i)
 								end
 							end
-							if badSpecies then
-								table.remove(speciesList,i)
-							end
+							npc.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
 						end
-						npc.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
-
-					end
-					convertBackType = npc.npcType()
-					local convertType = config.getParameter("sbqConvertType")
-					if convertType and convert then
-						sbq.tenant_setNpcType(convertType)
-					end
-				end)
+						convertBackType = npc.npcType()
+						local convertType = config.getParameter("sbqConvertType")
+						if convertType and convert then
+							sbq.tenant_setNpcType(convertType)
+						end
+					end)
 			end
 		end
 	end
@@ -140,10 +142,12 @@ function update(dt)
 		local eid = world.getUniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
-				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
+				sbq.addNamedRPC("missingPredFound",
+					world.sendEntityMessage(eid, "sbqRecieveOccupants",
+						{ sb.jsonMerge(occupantData, { entityId = entity.id() }) }))
 			end
 		else
-			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
+			status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })
 			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
 				local occupantData = status.statusProperty("sbqOccupantData")
 				if occupantData then
@@ -156,9 +160,7 @@ function update(dt)
 			end)
 		end
 	end
-
 end
-
 
 function sbq.tenant_setNpcType(npcType)
 	if npc.npcType() == npcType then return end
@@ -175,10 +177,10 @@ function sbq.tenant_setNpcType(npcType)
 	-- Preserve head item slots, even if they haven't changed from the default:
 	storage.itemSlots = storage.itemSlots or {}
 	if not storage.itemSlots.headCosmetic and not storage.itemSlots.headCosmetic then
-	  storage.itemSlots.headCosmetic = npc.getItemSlot("headCosmetic")
+		storage.itemSlots.headCosmetic = npc.getItemSlot("headCosmetic")
 	end
 	if not storage.itemSlots.head then
-	  storage.itemSlots.head = npc.getItemSlot("head")
+		storage.itemSlots.head = npc.getItemSlot("head")
 	end
 	storage.itemSlots.primary = nil
 	storage.itemSlots.alt = nil
@@ -225,6 +227,7 @@ function sbq.tenant_setNpcType(npcType)
 
 	tenant.despawn(false)
 end
+
 tenant.setNpcType = sbq.tenant_setNpcType
 
 function recruitable.generateRecruitInfo()
@@ -236,5 +239,6 @@ function recruitable.generateRecruitInfo()
 end
 
 function sbq.parentEntity()
-	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid(), _ENV.recruitable.isFollowing()
+	return _ENV.recruitable.ownerUuid() or storage.respawner, _ENV.recruitable.recruitUuid(),
+		_ENV.recruitable.isFollowing()
 end

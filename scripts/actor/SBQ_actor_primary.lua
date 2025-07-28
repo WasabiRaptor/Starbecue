@@ -7,7 +7,6 @@ sbq = {}
 
 require"/scripts/rect.lua"
 require"/scripts/any/SBQ_RPC_handling.lua"
-require"/scripts/actor/SBQ_actor.lua"
 
 local destScale = 1
 local scaleTime = 0
@@ -16,12 +15,15 @@ local oldScale = 1
 local scaling = false
 local leftoverScale = 0
 
-local seatToForce
 function init()
 	old.init()
 	sbq.config = root.assetJson("/sbq.config")
-	sbq.actorInit()
 	status.setStatusProperty("sbqProgressBar", 0)
+
+	sbq.facingDirection = mcontroller.facingDirection
+	sbq.getScale = mcontroller.getScale
+	sbq.collisionArea = mcontroller.collisionArea
+	sbq.entityId = entity.id
 
 	message.setHandler("sbqOverConsumeResource", function(_, _, resource, amount, ignoreBlock)
 		local res = status.overConsumeResource(resource, amount)
@@ -115,18 +117,6 @@ function update(dt)
 		mcontroller.translate({0,bounds[2]-newBounds[2]})
 		if (scaleTime >= scaleDuration) or (currentScale == destScale) then
 			scaling = false
-		end
-	end
-
-	if seatToForce then
-		if world.entityExists(seatToForce.source) then
-			mcontroller.setPosition(world.entityPosition(seatToForce.source))
-			local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
-			if success then seatToForce = nil else
-				-- sb.logError(error)
-			end
-		else
-			seatToForce = nil
 		end
 	end
 end

@@ -1,25 +1,24 @@
 local old = {
+	init = init or function () end,
+	update = update or function () end,
 	faceEntity = faceEntity
 }
-
-function sbq.actorInit()
-    sbq.pronouns = root.assetJson("/sbqPronouns.config")
-
-    sbq.facingDirection = mcontroller.facingDirection
-    sbq.getScale = mcontroller.getScale
-    sbq.area = mcontroller.collisionArea
-
-    sbq.entityId = entity.id
-end
-function sbq.actorUpdate(dt)
-
-end
 local responseMap = {
 	yes = true,
 	noYes = true,
 	no = false
 }
-function sbq.actorMessages()
+local seatToForce
+
+function init()
+	old.init()
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+
+	sbq.facingDirection = mcontroller.facingDirection
+	sbq.getScale = mcontroller.getScale
+	sbq.collisionArea = mcontroller.collisionArea
+	sbq.entityId = entity.id
+
 	sbq.actionWillingness = {
 		dom = {},
 		sub = {}
@@ -35,47 +34,48 @@ function sbq.actorMessages()
 			if math.random() < (settings.willingness or 0) then
 				willingnessTable[action] = "yes"
 				sbq.setLoungeControlHeld("Shift")
-				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
+				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function()
 					sbq.releaseLoungeControl("Shift")
 				end)
 			else
 				willingnessTable[action] = "no"
 			end
-			sbq.timer(action.."ClearWillingness", 60, function ()
+			sbq.timer(action .. "ClearWillingness", 60, function()
 				willingnessTable[action] = nil
 			end)
 		end
 		if isDom and responseMap[willingnessTable[action] or "no"] then
 			sbq.expectedActions[action] = true
 		end
-		return {responseMap[willingnessTable[action] or "no"] or false, isDom, willingnessTable[action] or "no", action, entity.id()}
+		return { responseMap[willingnessTable[action] or "no"] or false, isDom, willingnessTable[action] or "no", action,
+			entity.id() }
 	end)
-	message.setHandler("sbqStruggleAction", function (_,_, id, action)
+	message.setHandler("sbqStruggleAction", function(_, _, id, action)
 		sbq.struggleAction = action
 	end)
-	message.setHandler("sbqActionOccuring", function (_,_, id, action, cooldown)
+	message.setHandler("sbqActionOccuring", function(_, _, id, action, cooldown)
 		if sbq.expectedActions[action] then
 			sbq.expectedActions[action] = nil
 			return
 		end
 		if (action == sbq.struggleAction) and not sbq.isLoungeControlHeld("Shift") then
-			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..action, id) then
+			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction." .. action, id) then
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
 			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-				if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..action..".after", id) then
+				if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction." .. action .. ".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
 			return
 		else
-			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action, id) then
+			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".unpromptedAction." .. action, id) then
 				dialogueProcessor.speakDialogue()
 			end
 			if not cooldown then return end
 			sbq.forceTimer("dialogueAfter", cooldown + sbq.config.afterDialogueDelay, function()
-				if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".unpromptedAction."..action..".after", id) then
+				if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".unpromptedAction." .. action .. ".after", id) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
@@ -97,15 +97,36 @@ function sbq.actorMessages()
 		local source, index = mcontroller.anchorState()
 		if (source == data.source) and (index == data.index) then return end
 		sbq.resetLounging()
-		mcontroller.setPosition(world.entityPosition(data.source))
-		if not pcall(mcontroller.setAnchorState, data.source, data.index) then
+        mcontroller.setPosition(world.entityPosition(data.source))
+		local success, error = pcall(mcontroller.setAnchorState, data.source, data.index)
+		if success then
+			seatToForce = nil
+        else
 			seatToForce = data
+			sb.logError(error)
 		end
 	end)
 
 	status.setPersistentEffects("sbqActorScript", {
-		{stat = "sbqActorScript", amount = 1} -- set this stat to mark that status primary has initialized
+		{ stat = "sbqActorScript", amount = 1 } -- set this stat to mark that status primary has initialized
 	})
+end
+
+function update(dt)
+	old.update(dt)
+	if seatToForce then
+		if world.entityExists(seatToForce.source) then
+			mcontroller.setPosition(world.entityPosition(seatToForce.source))
+			local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
+			if success then
+				seatToForce = nil
+			else
+				sb.logError(error)
+			end
+		else
+			seatToForce = nil
+		end
+	end
 end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)
@@ -144,10 +165,10 @@ function sbq.checkComfortLevel()
 end
 
 function sbq.size()
-	return math.sqrt(sbq.area()) / sbq.config.sizeConstant
+	return math.sqrt(sbq.collisionArea()) / sbq.config.sizeConstant
 end
 
-local struggleDirections = {false,"Left","Right","Up","Down"}
+local struggleDirections = { false, "Left", "Right", "Up", "Down" }
 function sbq.struggleBehavior(dt)
 	if sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.actionDialogue and not sbq.timerRunning("dialogueAfter") then
 		if dialogueProcessor.getDialogue(".struggling", sbq.loungingIn()) then
@@ -159,14 +180,15 @@ function sbq.struggleBehavior(dt)
 			local dir = struggleDirections[math.random(#struggleDirections)]
 			if dir then
 				if sbq.randomTimer(dir .. "Press", 0, 2, function()
-					sbq.releaseLoungeControl(dir)
-				end) then
+						sbq.releaseLoungeControl(dir)
+					end) then
 					sbq.setLoungeControlHeld(dir)
 				end
 			end
 		end
 	end
 end
+
 function faceEntity(args, board)
 	if args.entity == nil or not world.entityExists(args.entity) then return false end
 	local loungeId = world.entityAnchorState(args.entity)

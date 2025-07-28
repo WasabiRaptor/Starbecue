@@ -7,7 +7,14 @@ require "/scripts/humanoid/SBQ_humanoid.lua"
 require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/player/SBQ_player_notifs.lua"
 require "/scripts/any/SBQ_util.lua"
+local old = {
+	init = init or function () end,
+    update = update or function() end,
+	uninit = uninit or function () end
+}
+
 function init()
+	old.init()
 	player.setProperty("predHudOpen", false)
 	storage = storage or {}
 	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
@@ -23,10 +30,8 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-	sbq.actorInit()
 	sbq.settingsInit()
 	sbq.humanoidInit()
-	sbq.actorMessages()
 	if player.getProperty("sbqAgreedTerms") then
 		if player.getHumanoidParameters().sbqEnabled then
 			sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
@@ -239,6 +244,7 @@ function init()
 end
 
 function update(dt)
+	old.update(dt)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
 	sbq.checkRPCsFinished(dt)
 	sbq.checkTimers(dt)
@@ -290,6 +296,7 @@ function update(dt)
 end
 
 function uninit()
+	old.uninit()
 	storage.sbqSettings = sbq.removeEmptyTables(storage.sbqSettings)
 	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)

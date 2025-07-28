@@ -84,6 +84,6 @@ function onInteraction(args)
 	return SpeciesScript:interact(args)
 end
 
-function sbq.area()
+function sbq.collisionArea()
 	return #object.spaces()
 end
