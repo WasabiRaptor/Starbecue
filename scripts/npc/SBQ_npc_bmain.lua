@@ -66,8 +66,8 @@ function init()
 	end
 end
 function sbq.rollConvert()
-	if config.getParameter("sbqConvertType") and not status.statusProperty("sbqDidVornyConvertCheck") then
-		status.setStatusProperty("sbqDidVornyConvertCheck", true)
+	if config.getParameter("sbqConvertType") and not status.statusProperty("sbqDidConvertCheck") then
+		status.setStatusProperty("sbqDidConvertCheck", true)
 		if entity.uniqueId() then return end
 		local speciesConfig = root.speciesConfig(npc.species())
 		if not speciesConfig.voreConfig then return end
@@ -75,7 +75,7 @@ function sbq.rollConvert()
 		if config.getParameter("sbqNPC")
 			or config.getParameter("uniqueId")
 			or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true)
-			or sbq.humanoidIdentity().imagePath ~= nil
+			or npc.humanoidIdentity().imagePath ~= nil
 		then
 			return
 		end
@@ -111,7 +111,7 @@ function sbq.rollConvert()
 								table.remove(speciesList,i)
 							end
 						end
-						sbq.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
+						npc.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
 
 					end
 					convertBackType = npc.npcType()

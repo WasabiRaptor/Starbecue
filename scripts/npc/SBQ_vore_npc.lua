@@ -104,7 +104,7 @@ function init()
 
 	message.setHandler("sbqUpdateIdentities", function (_,_, response)
 		status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
-		sbq.setHumanoidIdentity(response.currentIdentity)
+		npc.setHumanoidIdentity(response.currentIdentity)
 		local parent, recruitUuid = sbq.parentEntity()
 		if parent then
 			world.sendEntityMessage(parent, "sbqParentUpdateIdentities", recruitUuid, entity.uniqueId(), response)
@@ -112,7 +112,7 @@ function init()
 	end)
 
 	if not status.statusProperty("sbqSpeciesIdentities") then
-		status.setStatusProperty("sbqSpeciesIdentities", {[sbq.species()] = sbq.humanoidIdentity()})
+		status.setStatusProperty("sbqSpeciesIdentities", {[npc.species()] = npc.humanoidIdentity()})
 	end
 
 	sbq.randomTimer("huntingCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
