@@ -408,21 +408,31 @@ function sbq.replace(from, to)
 	return directive
 end
 
+function sbq.assetPath(path, directory)
+    if string.sub(path, 1, 1) == "/" then
+		return path
+    else
+		return (directory or "/")..path
+	end
+end
+
 function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)
 	local directory = "/humanoid/any/sbqActionIcons/"
 	if type(preferDirectories) ~= "table" then
 		preferDirectories = {preferDirectories}
 	end
-	for _, v in ipairs(preferDirectories) do
-		if v and root.assetOrigin(action..".png", v) then
-			return v .. action .. ".png"
+    for _, v in ipairs(preferDirectories) do
+		local path = sbq.assetPath(action..".png", v)
+		if v and root.assetOrigin(path) then
+			return path
 		end
-	end
-	if root.assetOrigin(action..".png", directory) then
-		return directory .. action .. ".png"
+    end
+	local path = sbq.assetPath(action..".png", directory)
+	if root.assetOrigin(path) then
+		return path
 	end
 	if not ignoreMissingIcon then
-		return directory .. "unassigned.png"
+		return sbq.assetPath("unassigned.png", directory)
 	end
 end
 
