@@ -10,7 +10,7 @@ function build(directory, config, parameters, level, seed)
 	config.inventoryIcon, config.shortdescription, config.description = sbq.getActionData(
 		parameters.scriptStorage.action,
 		true,
-		parameters.scriptStorage.iconDirectory
+		parameters.scriptStorage.iconDirectories or {"/humanoid/any/sbqActionIcons/"}
 	)
 	config.description = config.description.."\n"..sbq.strings.controllerDescAppend
 

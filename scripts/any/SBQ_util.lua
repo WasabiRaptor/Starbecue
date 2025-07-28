@@ -1,17 +1,17 @@
 function sbq.fetchConfigArray(input, path)
-    if type(input) == "table" and input[1] then
-        local out = {}
-        for _, v in ipairs(input) do
-            out = sb.jsonMerge(out, sbq.fetchConfigArray(v, path))
-        end
-        return out
-    elseif type(input) == "string" then
-        if input:sub(1, 1) == "/" then
-            return sbq.fetchConfigArray(root.assetJson(input), path)
-        else
-            return sbq.fetchConfigArray(root.assetJson(path .. input), path)
-        end
-    end
+	if type(input) == "table" and input[1] then
+		local out = {}
+		for _, v in ipairs(input) do
+			out = sb.jsonMerge(out, sbq.fetchConfigArray(v, path))
+		end
+		return out
+	elseif type(input) == "string" then
+		if input:sub(1, 1) == "/" then
+			return sbq.fetchConfigArray(root.assetJson(input), path)
+		else
+			return sbq.fetchConfigArray(root.assetJson(path .. input), path)
+		end
+	end
 	return input
 end
 
@@ -24,6 +24,7 @@ function sbq.query(input, query)
 	end
 	return out
 end
+
 function sbq.splitKeys(path, pattern)
 	local query = {}
 	local path = path
@@ -39,9 +40,11 @@ function sbq.splitKeys(path, pattern)
 	end
 	return query
 end
+
 function sbq.queryPath(input, path)
 	return sbq.query(input, sbq.splitKeys(path))
 end
+
 function sbq.setPath(input, path, value)
 	local i = input
 	for j, v in ipairs(path) do
@@ -56,6 +59,7 @@ function sbq.setPath(input, path, value)
 		i = i[v]
 	end
 end
+
 function sbq.getClosestValue(x, list)
 	local closest
 	local closestKey
@@ -76,7 +80,7 @@ function sbq.tableMatches(a, b, maybeArrays)
 	local b = b or {}
 	if maybeArrays and a[1] then
 		for _, v in ipairs(a) do
-			if sbq.tableMatches(v,b) then return true end
+			if sbq.tableMatches(v, b) then return true end
 		end
 		return false
 	end
@@ -92,7 +96,7 @@ end
 
 function sbq.metatableLayers(...)
 	for _, table in ipairs({ ... }) do
-		setmetatable(table, {__index = prevTable})
+		setmetatable(table, { __index = prevTable })
 		prevTable = table
 	end
 end
@@ -115,7 +119,7 @@ function sbq.refreshUpgrades(upgraded)
 	storage.sbqSettings.maxDigestPower = 1 + candiesEaten
 	storage.sbqSettings.maxPossibleScale = math.min(2 + candiesEaten, sbq.config.scaleCap)
 	if upgraded then
-		for _, k in ipairs({"acidDigestPower", "cumDigestPower", "femcumDigestPower", "milkDigestPower"}) do
+		for _, k in ipairs({ "acidDigestPower", "cumDigestPower", "femcumDigestPower", "milkDigestPower" }) do
 			if storage.sbqSettings[k] == oldMaxDigest then
 				storage.sbqSettings[k] = storage.sbqSettings.maxDigestPower
 			end
@@ -127,11 +131,12 @@ function sbq.refreshUpgrades(upgraded)
 end
 
 function sbq.validateExportSettings(settings)
-	local validated = sb.jsonMerge(settings,{})
+	local validated = sb.jsonMerge(settings, {})
 	validated.recentlyDigested = nil
 	validated.infuseSlots = nil
 	return sbq.removeEmptyTables(validated)
 end
+
 function sbq.removeEmptyTables(input)
 	local empty = true
 	for k, v in pairs(input) do
@@ -151,56 +156,65 @@ end
 function sbq.checkInvalidSetting(value, setting, group, name)
 	if type(value) == "number" then
 		local result
-		local min_1 = sbq.query(sbq.voreConfig.invalidSettings, {setting, "min"}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, "min"}))
+		local min_1 = sbq.query(sbq.voreConfig.invalidSettings, { setting, "min" }) or
+			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, "min" }))
 		if min_1 and ((result or value) < min_1) then result = min_1 end
 
-		local max_1 = sbq.query(sbq.voreConfig.invalidSettings, {setting, "max"}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, "max"}))
+		local max_1 = sbq.query(sbq.voreConfig.invalidSettings, { setting, "max" }) or
+			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, "max" }))
 		if max_1 and ((result or value) > max_1) then result = max_1 end
 
-		local min_2 = sbq.query(sbq.worldInvalidSettings, {setting, "min"}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, "min"}))
+		local min_2 = sbq.query(sbq.worldInvalidSettings, { setting, "min" }) or
+			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, "min" }))
 		if min_2 and ((result or value) < min_2) then result = min_2 end
 
-		local max_2 = sbq.query(sbq.worldInvalidSettings, {setting, "max"}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, "max"}))
+		local max_2 = sbq.query(sbq.worldInvalidSettings, { setting, "max" }) or
+			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, "max" }))
 		if max_2 and ((result or value) > max_2) then result = max_2 end
 
 		return result
-    else
+	else
 		local value = tostring(value)
-		local result = sbq.query(sbq.voreConfig.invalidSettings, {setting, value}) or ((group and name) and sbq.query(sbq.voreConfig.invalidSettings, {group, name, setting, value}))
-		return sbq.query(sbq.worldInvalidSettings, {setting, result or value}) or ((group and name) and sbq.query(sbq.worldInvalidSettings, {group, name, setting, result or value})) or result
+		local result = sbq.query(sbq.voreConfig.invalidSettings, { setting, value }) or
+			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, value }))
+		return sbq.query(sbq.worldInvalidSettings, { setting, result or value }) or
+			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, result or value })) or result
 	end
 end
+
 function sbq.checkLockedSetting(setting, group, name)
-	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, {group, name, setting}))
+	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, { group, name, setting }))
 end
 
 function sbq.setupSettingMetatables(entityType)
 	storage = storage or {}
 	sbq.refreshUpgrades()
 	sbq.voreConfig = sbq.voreConfig or {}
-	sbq.worldInvalidSettings = sb.jsonMerge(world.getProperty("sbqInvalidSettings") or sbq.config.serverInvalidSettings or {}, world.getProperty("sbqInvalidSettings_"..entityType) or sbq.config.serverEntityTypeInvalidSettings[entityType] or {})
+	sbq.worldInvalidSettings = sb.jsonMerge(world.getProperty("sbqInvalidSettings") or sbq.config.serverInvalidSettings or
+		{},
+		world.getProperty("sbqInvalidSettings_" .. entityType) or sbq.config.serverEntityTypeInvalidSettings[entityType] or {})
 	storage.sbqSettings = storage.sbqSettings or {}
 
 	-- sanity to remove potential data leak
 	for k, v in ipairs(storage.sbqSettings.recentlyDigested or {}) do
-		if sbq.query(v, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
+		if sbq.query(v, { "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested" }) then
 			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
 		end
-		if sbq.query(v, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
+		if sbq.query(v, { "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots" }) then
 			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
 		end
-		if sbq.query(v, {"parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
+		if sbq.query(v, { "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings" }) then
 			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
 		end
 	end
 	for k, v in pairs(storage.sbqSettings.infuseSlots or {}) do
-		if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
+		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested" }) then
 			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
 		end
-		if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
+		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots" }) then
 			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
 		end
-		if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
+		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings" }) then
 			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
 		end
 
@@ -221,7 +235,8 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.settings = sb.jsonMerge(
 		sbq.settings,
 		world.getProperty("sbqOverrideSettings") or sbq.config.serverOverrideSettings or {},
-		world.getProperty("sbqOverrideSettings_"..entityType) or sbq.config.serverEntityTypeOverrideSettings[entityType] or {}
+		world.getProperty("sbqOverrideSettings_" .. entityType) or sbq.config.serverEntityTypeOverrideSettings[entityType] or
+		{}
 	)
 	if entityType == "player" then
 		sbq.settings.speciesTF = nil
@@ -280,13 +295,13 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.lists.infuseTypes = {}
 	sbq.lists.seekActions = {}
 	for k, v in pairs(sbq.voreConfig.locations or {}) do
-		table.insert(sbq.lists.locations,k)
+		table.insert(sbq.lists.locations, k)
 	end
 	for k, v in pairs(sbq.config.voreTypeData or {}) do
-		table.insert(sbq.lists.voreTypes,k)
+		table.insert(sbq.lists.voreTypes, k)
 	end
 	for k, v in pairs(sbq.config.infuseTypeData or {}) do
-		table.insert(sbq.lists.infuseTypes,k)
+		table.insert(sbq.lists.infuseTypes, k)
 	end
 	for k, v in pairs(sbq.config.seekActionsSettings.dom) do
 		table.insert(sbq.lists.seekActions, k)
@@ -318,7 +333,8 @@ function sbq.setupSettingMetatables(entityType)
 					if (sbq.defaultSettings[k][name][setting] == nil) then
 						sbq.logWarn(string.format("Removed setting '%s.%s.%s'\nNo defined default value.", k, name, setting))
 					else
-						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting, v, sbq.defaultSettings[setting], defaultType))
+						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting
+							, v, sbq.defaultSettings[setting], defaultType))
 					end
 				end
 			end
@@ -330,14 +346,15 @@ function sbq.setupSettingMetatables(entityType)
 					storage.sbqSettings[k][name][setting] = {}
 				end
 				local result = sbq.checkInvalidSetting(override or value or v, setting, k, name)
-                if result ~= nil then
-					sbq.debugLogInfo(string.format("Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'", k, name, setting, v, result))
+				if result ~= nil then
+					sbq.debugLogInfo(string.format("Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'", k, name,
+						setting, v, result))
 					sbq.settings[k][name][setting] = result
 				end
 			end
 
-			setmetatable(storage.sbqSettings[k][name], {__index = sbq.defaultSettings[k][name]})
-			setmetatable(sbq.settings[k][name], {__index= storage.sbqSettings[k][name]})
+			setmetatable(storage.sbqSettings[k][name], { __index = sbq.defaultSettings[k][name] })
+			setmetatable(sbq.settings[k][name], { __index = storage.sbqSettings[k][name] })
 		end
 	end
 
@@ -352,10 +369,9 @@ function sbq.setupSettingMetatables(entityType)
 		end
 	end
 
-	setmetatable(storage.sbqSettings, {__index = sbq.defaultSettings})
-	setmetatable(sbq.settings, {__index= storage.sbqSettings})
+	setmetatable(storage.sbqSettings, { __index = sbq.defaultSettings })
+	setmetatable(sbq.settings, { __index = storage.sbqSettings })
 end
-
 
 function sbq.getEntitySize(entityId)
 	if world.entityType(entityId) == "object" then
@@ -370,6 +386,7 @@ function sbq.getPublicProperty(entityId, property)
 	end
 	return world.entityStatusProperty(entityId, property)
 end
+
 function sbq.getScriptParameter(entityId, property)
 	local entityType = world.entityType(entityId)
 	if entityType == "object" then
@@ -385,13 +402,13 @@ function sbq.entityName(entityId)
 	end
 	return world.entityName(entityId)
 end
+
 function sbq.entitySpecies(entityId)
 	if world.entityType(entityId) == "object" then
 		return world.getObjectParameter(entityId, "entitySpecies")
 	end
 	return world.entitySpecies(entityId)
 end
-
 
 function sbq.replaceConfigTags(config, tags)
 	return sb.parseJson(sb.replaceTags(sb.printJson(config), tags))
@@ -402,44 +419,33 @@ function sbq.replace(from, to)
 	local directive = "?replace;"
 	for i, f in ipairs(from) do
 		if to[i] then
-			directive = directive .. f .. "=" .. to[i]:sub(1,6) .. ";"
+			directive = directive .. f .. "=" .. to[i]:sub(1, 6) .. ";"
 		end
 	end
 	return directive
 end
 
 function sbq.assetPath(path, directory)
-    if string.sub(path, 1, 1) == "/" then
+	if string.sub(path, 1, 1) == "/" then
 		return path
-    else
-		return (directory or "/")..path
+	else
+		return (directory or "/") .. path
 	end
 end
 
 function sbq.getActionIcon(action, preferDirectories, ignoreMissingIcon)
-	local directory = "/humanoid/any/sbqActionIcons/"
-	if type(preferDirectories) ~= "table" then
-		preferDirectories = {preferDirectories}
-	end
-    for _, v in ipairs(preferDirectories) do
-		local path = sbq.assetPath(action..".png", v)
+	for _, v in ipairs(preferDirectories) do
+		local path = sbq.assetPath(action .. ".png", v)
 		if v and root.assetOrigin(path) then
 			return path
 		end
-    end
-	local path = sbq.assetPath(action..".png", directory)
-	if root.assetOrigin(path) then
-		return path
-	end
-	if not ignoreMissingIcon then
-		return sbq.assetPath("unassigned.png", directory)
 	end
 end
 
 function sbq.globalToLocal(pos, offset)
 	local facingDirection = sbq.facingDirection()
 	local scale = sbq.getScale()
-	pos = world.distance(pos, vec2.add(entity.position(), offset or {0,0}))
+	pos = world.distance(pos, vec2.add(entity.position(), offset or { 0, 0 }))
 	pos[1] = pos[1] * facingDirection / scale
 	pos[2] = pos[2] / scale
 	return pos
@@ -448,7 +454,7 @@ end
 function sbq.localToGlobal(pos)
 	local facingDirection = sbq.facingDirection()
 	local scale = sbq.getScale()
-	return {world.xwrap(pos[1] * facingDirection * scale), pos[2] * scale}
+	return { world.xwrap(pos[1] * facingDirection * scale), pos[2] * scale }
 end
 
 function sbq.getScaleLocal(pos)
@@ -462,10 +468,12 @@ function sbq.globalPartPoint(part, property)
 end
 
 function sbq.localPartPoint(part, property)
-	return animator.transformPoint(animator.partProperty(part, property) or {0,0}, part)
+	return animator.transformPoint(animator.partProperty(part, property) or { 0, 0 }, part)
 end
+
 function sbq.localPartPoly(part, property)
-	return animator.transformPoly(animator.partProperty(part, property) or {{0.5,-0.5},{0.5,0.5},{-0.5,0.5},{-0.5,-0.5}}, part)
+	return animator.transformPoly(animator.partProperty(part, property) or { { 0.5, -0.5 }, { 0.5, 0.5 }, { -0.5, 0.5 },
+		{ -0.5, -0.5 } }, part)
 end
 
 function sbq.logOutput(input, pretty)
@@ -474,26 +482,32 @@ function sbq.logOutput(input, pretty)
 	end
 	return "[SBQ][%s:%s]%s", sbq.entityId(), (world.entityName(sbq.entityId()) or "-"), input
 end
+
 function sbq.logInfo(input, pretty)
-	sb.logInfo(sbq.logOutput(input,pretty))
+	sb.logInfo(sbq.logOutput(input, pretty))
 end
+
 function sbq.logWarn(input, pretty)
-	sb.logWarn(sbq.logOutput(input,pretty))
+	sb.logWarn(sbq.logOutput(input, pretty))
 end
+
 function sbq.logError(input, pretty)
-	sb.logError(sbq.logOutput(input,pretty))
+	sb.logError(sbq.logOutput(input, pretty))
 end
+
 function sbq.debugLogInfo(input, pretty)
 	if not (sbq.voreConfig or sbq.config or {}).debug then return end
-	sb.logInfo(sbq.logOutput(input,pretty))
+	sb.logInfo(sbq.logOutput(input, pretty))
 end
+
 function sbq.debugLogWarn(input, pretty)
 	if not (sbq.voreConfig or sbq.config or {}).debug then return end
-	sb.logWarn(sbq.logOutput(input,pretty))
+	sb.logWarn(sbq.logOutput(input, pretty))
 end
+
 function sbq.debugLogError(input, pretty)
 	if not (sbq.voreConfig or sbq.config or {}).debug then return end
-	sb.logError(sbq.logOutput(input,pretty))
+	sb.logError(sbq.logOutput(input, pretty))
 end
 
 function sbq.getString(str)
@@ -514,11 +528,13 @@ function sbq.getSettingsOf.prefs()
 		subBehavior = sbq.exportSettingGroup("subBehavior")
 	})
 end
+
 function sbq.getSettingsOf.locations()
 	return sbq.validateExportSettings({
 		locations = sbq.exportSettingGroup("locations"),
 	})
 end
+
 function sbq.getSettingsOf.current()
 	return sbq.validateExportSettings(sb.jsonMerge(storage.sbqSettings, {
 		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
@@ -528,6 +544,7 @@ function sbq.getSettingsOf.current()
 		subBehavior = sbq.exportSettingGroup("subBehavior"),
 	}))
 end
+
 function sbq.getSettingsOf.all()
 	local output = sbq.exportBaseSettings()
 	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
@@ -547,6 +564,7 @@ function sbq.exportBaseSettings()
 	end
 	return output
 end
+
 function sbq.exportSettingGroup(group)
 	local output = {}
 	local list = {}
@@ -566,7 +584,8 @@ function sbq.exportSettingGroup(group)
 end
 
 function sbq.createdDateString(time)
-	return os.date(sbq.getString(":createdOnDate"), time or os.time()) .. " v" .. root.assetSourceMetadata("Starbecue").version
+	return os.date(sbq.getString(":createdOnDate"), time or os.time()) ..
+		" v" .. root.assetSourceMetadata("Starbecue").version
 end
 
 function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stacking easier without using the collapse
@@ -579,22 +598,22 @@ function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stac
 end
 
 function sbq.isLoungeDismountable(eid)
-    local loungeId, anchorIndex = world.entityAnchorState(eid or entity.id())
-    if loungeId then
+	local loungeId, anchorIndex = world.entityAnchorState(eid or entity.id())
+	if loungeId then
 		return world.entityLoungeAnchor(loungeId, anchorIndex).dismountable
-    else
+	else
 		return false
 	end
 end
 
 function sbq.entitiesLounging(id)
 	local entities = {}
-    local count = world.loungeableAnchorCount(id)
+	local count = world.loungeableAnchorCount(id)
 	if not count or (count < 1) then return entities end
-    for i = 0, count - 1 do
-        for _, v in ipairs(world.loungingEntities(id, i) or {}) do
-            table.insert(entities, v)
-        end
-    end
+	for i = 0, count - 1 do
+		for _, v in ipairs(world.loungingEntities(id, i) or {}) do
+			table.insert(entities, v)
+		end
+	end
 	return entities
 end

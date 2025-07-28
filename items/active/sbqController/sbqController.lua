@@ -1,4 +1,3 @@
-
 sbq = {}
 require "/scripts/util.lua"
 require "/scripts/vec2.lua"
@@ -15,6 +14,16 @@ function init()
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	sbq.gui = root.assetJson("/sbqGui.config")
 	sbq.entityId = player.id
+
+	local imagePath = player.humanoidIdentity().imagePath
+
+	storage.iconDirectories = {
+		"/humanoid/" .. player.species() .. "/",
+		"/humanoid/any/sbqActionIcons/"
+	}
+	if imagePath and (imagePath ~= "") then
+		table.insert(storage.iconDirectories, 1, "/humanoid/" .. imagePath .. "/")
+	end
 
 	activeItem.setHoldingItem(false)
 	storage = storage or {}
@@ -33,11 +42,10 @@ function init()
 		if RadialMenu[script] then
 			RadialMenu[script](RadialMenu, ...)
 		else
-			sbq.logInfo(string.format("Attmpted invalid radial menu script: %s(%s)", script, sb.printJson({...})))
+			sbq.logInfo(string.format("Attmpted invalid radial menu script: %s(%s)", script, sb.printJson({ ... })))
 		end
-    end)
+	end)
 end
-
 
 function dontDoRadialMenu(arg)
 	dontDoMenu = arg
@@ -83,10 +91,11 @@ end
 function sbq.setAction(action)
 	storage.action = action
 
-	local icon, shortdescription, description = sbq.getActionData(action, (world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1], storage.iconDirectory)
+	local icon, shortdescription, description = sbq.getActionData(action,
+		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1], storage.iconDirectories)
 	activeItem.setInventoryIcon(icon)
 	activeItem.setShortDescription(shortdescription)
-	activeItem.setDescription(description.."\n"..sbq.strings.controllerDescAppend)
+	activeItem.setDescription(description .. "\n" .. sbq.strings.controllerDescAppend)
 end
 
 function sbq.clickAction()
@@ -94,7 +103,7 @@ function sbq.clickAction()
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {
 		withoutEntityId = entity.id(),
 		withoutEntityIds = sbq.entitiesLounging(player.id()),
-		includedTypes = {"creature"}
+		includedTypes = { "creature" }
 	})
 
 	world.sendEntityMessage(player.id(), "sbqTryAction", "rpActionReset")
@@ -103,42 +112,47 @@ function sbq.clickAction()
 	local result
 	for i, targetId in ipairs(entityaimed) do
 		local targetBounds = world.entityCollisionBoundBox(targetId)
-		if bounds and targetBounds and (rect.intersects(bounds, targetBounds) or ((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds)))) then
+		if bounds and targetBounds and
+			(
+			rect.intersects(bounds, targetBounds) or
+				((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds)))) then
 			if sbq.isLoungeDismountable(targetId) then
-				result = {sbq.attemptAction(targetId)}
+				result = { sbq.attemptAction(targetId) }
 				break
 			end
 		end
 	end
 
-    if result == nil then
-        result = world.sendEntityMessage(player.id(), "sbqTryAction", storage.action):result() or {}
-    end
-    local success, failReason, time, successfulFail, failReason2 = table.unpack(result)
+	if result == nil then
+		result = world.sendEntityMessage(player.id(), "sbqTryAction", storage.action):result() or {}
+	end
+	local success, failReason, time, successfulFail, failReason2 = table.unpack(result)
 
 	if (not success) and (failReason ~= "targetMissing") then
 		animator.playSound("error")
-		interface.queueMessage(sbq.getString(":action_"..tostring(failReason)))
+		interface.queueMessage(sbq.getString(":action_" .. tostring(failReason)))
 	end
 	return table.unpack(result)
 end
 
 function sbq.attemptAction(targetId)
 	if shiftHeldTime > 0 then
-		local success, failReason = table.unpack(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action, targetId):result() or {})
+		local success, failReason = table.unpack(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action,
+			targetId):result() or {})
 		if success then
-			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true), function(response)
-				if not response then return end
-				local tryAction, isDom, line, action, target = table.unpack(response)
-				if tryAction then
-					world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId)
-				end
-			end)
+			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true),
+				function(response)
+					if not response then return end
+					local tryAction, isDom, line, action, target = table.unpack(response)
+					if tryAction then
+						world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId)
+					end
+				end)
 		end
 		return success, failReason
 	else
 		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
-		if sbq.query(targetSettings, {"subBehavior", storage.action, "consentRequired"}) then return false, "consentRequired" end
+		if sbq.query(targetSettings, { "subBehavior", storage.action, "consentRequired" }) then return false, "consentRequired" end
 		return table.unpack(world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId):result() or {})
 	end
 end
@@ -158,23 +172,27 @@ function RadialMenu:open(menuName, ...)
 		sb.logInfo(string.format("[%s] no radial menu named: %s", entity.id(), menuName))
 	end
 end
+
 function RadialMenu:close()
 	if self.activeMenu then
 		self.activeMenu:uninit()
 	end
 	self.activeMenuName = nil
 	self.activeMenu = nil
-	player.interact("ScriptPane", {baseConfig = "/interface/scripted/sbq/close/sbqClose.config"}, player.id())
+	player.interact("ScriptPane", { baseConfig = "/interface/scripted/sbq/close/sbqClose.config" }, player.id())
 end
 
-_RadialMenu = {isMenu = true}
+_RadialMenu = { isMenu = true }
 _RadialMenu.__index = _RadialMenu
 function _RadialMenu:init()
 end
+
 function _RadialMenu:update()
 end
+
 function _RadialMenu:uninit()
 end
+
 function _RadialMenu:openRadialMenu(overrides)
 	player.interact("ScriptPane", sb.jsonMerge(
 		{
@@ -200,7 +218,7 @@ function TopMenu:init()
 	local occupants = sbq.entitiesLounging(player.id())
 	local options = {
 		{
-			args = {"letout", false, storage.action},
+			args = { "letout", false, storage.action },
 			name = sbq.strings.letout,
 			locked = (not occupants) or (not occupants[1]),
 			description = sbq.strings.controllerLetOutAnyDesc,
@@ -212,21 +230,21 @@ function TopMenu:init()
 			description = sbq.strings.controllerRPMenuDesc
 		},
 		{
-			args = {"open","OccupantsMenu"},
+			args = { "open", "OccupantsMenu" },
 			name = sbq.strings.occupants,
 			locked = (not occupants) or (not occupants[1]),
 			description = sbq.strings.controllerOccupantsDesc
 
 		},
 		{
-			args = {"open","AssignMenu"},
+			args = { "open", "AssignMenu" },
 			name = sbq.strings.controllerAssign,
 			description = sbq.strings.controllerAssignDesc
 		}
 	}
 	self:openRadialMenu({ options = options, cancel = {
 		message = false
-	}})
+	} })
 end
 
 local AssignMenu = {}
@@ -236,9 +254,9 @@ function AssignMenu:init()
 	local options = {}
 
 	for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "assign"):result() or {}) do
-		local icon, shortdescription, description = sbq.getActionData(action.action, true, storage.iconDirectory)
+		local icon, shortdescription, description = sbq.getActionData(action.action, true, storage.iconDirectories)
 		table.insert(options, {
-			args = {"controllerAssign", action.action},
+			args = { "controllerAssign", action.action },
 			name = shortdescription,
 			icon = icon,
 			locked = not action.available,
@@ -246,8 +264,8 @@ function AssignMenu:init()
 		})
 	end
 	self:openRadialMenu({ options = options, cancel = {
-		args = {"open","TopMenu"}
-	}})
+		args = { "open", "TopMenu" }
+	} })
 end
 
 local OccupantsMenu = {}
@@ -259,14 +277,14 @@ function OccupantsMenu:init()
 
 	for _, entityId in ipairs(occupants) do
 		table.insert(options, {
-			args = {"open", "SelectedOccupantMenu", entityId},
+			args = { "open", "SelectedOccupantMenu", entityId },
 			name = world.entityName(entityId),
 			icon = world.entityPortrait(entityId, "bust")
 		})
 	end
 	self:openRadialMenu({ options = options, cancel = {
-		args = {"open","TopMenu"},
-	}})
+		args = { "open", "TopMenu" },
+	} })
 end
 
 local SelectedOccupantMenu = {}
@@ -275,27 +293,28 @@ setmetatable(SelectedOccupantMenu, _RadialMenu)
 function SelectedOccupantMenu:init(entityId)
 	local options = {}
 
-	for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predRadialMenuSelect", entityId):result() or {}) do
+	for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predRadialMenuSelect", entityId):result()
+		or {}) do
 		table.insert(options, {
 			name = sbq.getString(action.name or (":" .. action.action)),
 			args = { action.action, entityId, table.unpack(action.args or {}) },
 			locked = not action.available,
-			description = sbq.getString(action.description or (":" .. action.action.."Desc")),
+			description = sbq.getString(action.description or (":" .. action.action .. "Desc")),
 			message = "sbqTryAction"
 		})
 	end
 	if world.isMonster(entityId) or world.isNpc(entityId) then
 		table.insert(options, ((#options >= 1) and 2) or 1, {
 			name = sbq.strings.interact,
-			args = {entityId},
+			args = { entityId },
 			message = "sbqInteractWithEntity",
 			description = sbq.strings.interactDesc
 		})
 	end
 
 	self:openRadialMenu({ options = options, cancel = {
-		args = {"open","OccupantsMenu"}
-	}})
+		args = { "open", "OccupantsMenu" }
+	} })
 end
 
 local RoleplayMenu = {}
@@ -309,11 +328,11 @@ function RoleplayMenu:init()
 			name = sbq.getString(action.name or (":" .. action.action)),
 			args = { action.action, nil, table.unpack(action.args or {}) },
 			locked = not action.available,
-			description = sbq.getString(action.description or (":" .. action.action.."Desc")),
+			description = sbq.getString(action.description or (":" .. action.action .. "Desc")),
 			message = "sbqTryAction"
 		})
 	end
 	self:openRadialMenu({ options = options, cancel = {
-		args = {"open","TopMenu"}
-	}})
+		args = { "open", "TopMenu" }
+	} })
 end
