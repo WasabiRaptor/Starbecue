@@ -92,14 +92,19 @@ function sbq.setAction(action)
 	storage.action = action
 
 	local icon, shortdescription, description = sbq.getActionData(action,
-		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1], storage.iconDirectories)
+		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1],
+		storage.iconDirectories)
 	activeItem.setInventoryIcon(icon)
 	activeItem.setShortDescription(shortdescription)
 	activeItem.setDescription(description .. "\n" .. sbq.strings.controllerDescAppend)
 end
 
 function sbq.clickAction()
-	if not storage.action then return false end
+	if (not storage.action) or (storage.action == "unassigned") then
+		animator.playSound("error")
+		interface.queueMessage(sbq.getString(":action_unassigned"))
+		return false
+	end
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {
 		withoutEntityId = entity.id(),
 		withoutEntityIds = sbq.entitiesLounging(player.id()),
@@ -107,14 +112,14 @@ function sbq.clickAction()
 	})
 
 	world.sendEntityMessage(player.id(), "sbqTryAction", "rpActionReset")
-	local bounds = world.entityCollisionBoundBox(player.id())
+	local bounds = mcontroller.collisionBoundBox()
 	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
 	local result
 	for i, targetId in ipairs(entityaimed) do
 		local targetBounds = world.entityCollisionBoundBox(targetId)
 		if bounds and targetBounds and
 			(
-			rect.intersects(bounds, targetBounds) or
+				rect.intersects(bounds, targetBounds) or
 				((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds)))) then
 			if sbq.isLoungeDismountable(targetId) then
 				result = { sbq.attemptAction(targetId) }
@@ -124,9 +129,9 @@ function sbq.clickAction()
 	end
 
 	if result == nil then
-		result = world.sendEntityMessage(player.id(), "sbqTryAction", storage.action):result() or {}
+		result = world.sendEntityMessage(player.id(), "sbqTryAction", storage.action):result()
 	end
-	local success, failReason, time, successfulFail, failReason2 = table.unpack(result)
+	local success, failReason, time, successfulFail, failReason2 = table.unpack(result or { false, "messageNotHandled" })
 
 	if (not success) and (failReason ~= "targetMissing") then
 		animator.playSound("error")
@@ -137,7 +142,8 @@ end
 
 function sbq.attemptAction(targetId)
 	if shiftHeldTime > 0 then
-		local success, failReason = table.unpack(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action,
+		local success, failReason = table.unpack(world.sendEntityMessage(player.id(), "sbqActionAvailable",
+			storage.action,
 			targetId):result() or {})
 		if success then
 			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true),
@@ -152,7 +158,10 @@ function sbq.attemptAction(targetId)
 		return success, failReason
 	else
 		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
-		if sbq.query(targetSettings, { "subBehavior", storage.action, "consentRequired" }) then return false, "consentRequired" end
+		if sbq.query(targetSettings, { "subBehavior", storage.action, "consentRequired" }) then
+			return false,
+				"consentRequired"
+		end
 		return table.unpack(world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId):result() or {})
 	end
 end
@@ -242,9 +251,12 @@ function TopMenu:init()
 			description = sbq.strings.controllerAssignDesc
 		}
 	}
-	self:openRadialMenu({ options = options, cancel = {
-		message = false
-	} })
+	self:openRadialMenu({
+		options = options,
+		cancel = {
+			message = false
+		}
+	})
 end
 
 local AssignMenu = {}
@@ -263,9 +275,12 @@ function AssignMenu:init()
 			description = description
 		})
 	end
-	self:openRadialMenu({ options = options, cancel = {
-		args = { "open", "TopMenu" }
-	} })
+	self:openRadialMenu({
+		options = options,
+		cancel = {
+			args = { "open", "TopMenu" }
+		}
+	})
 end
 
 local OccupantsMenu = {}
@@ -282,9 +297,12 @@ function OccupantsMenu:init()
 			icon = world.entityPortrait(entityId, "bust")
 		})
 	end
-	self:openRadialMenu({ options = options, cancel = {
-		args = { "open", "TopMenu" },
-	} })
+	self:openRadialMenu({
+		options = options,
+		cancel = {
+			args = { "open", "TopMenu" },
+		}
+	})
 end
 
 local SelectedOccupantMenu = {}
@@ -312,9 +330,12 @@ function SelectedOccupantMenu:init(entityId)
 		})
 	end
 
-	self:openRadialMenu({ options = options, cancel = {
-		args = { "open", "OccupantsMenu" }
-	} })
+	self:openRadialMenu({
+		options = options,
+		cancel = {
+			args = { "open", "OccupantsMenu" }
+		}
+	})
 end
 
 local RoleplayMenu = {}
@@ -332,7 +353,10 @@ function RoleplayMenu:init()
 			message = "sbqTryAction"
 		})
 	end
-	self:openRadialMenu({ options = options, cancel = {
-		args = { "open", "TopMenu" }
-	} })
+	self:openRadialMenu({
+		options = options,
+		cancel = {
+			args = { "open", "TopMenu" }
+		}
+	})
 end
