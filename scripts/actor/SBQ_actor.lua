@@ -1,6 +1,6 @@
 local old = {
-	init = init or function () end,
-	update = update or function () end,
+	init = init or function() end,
+	update = update or function() end,
 	faceEntity = faceEntity
 }
 local responseMap = {
@@ -9,6 +9,25 @@ local responseMap = {
 	no = false
 }
 local seatToForce
+local function forceSeat()
+	if seatToForce then
+		if world.entityExists(seatToForce.source) then
+			mcontroller.setPosition(world.entityPosition(seatToForce.source))
+			local loungeAnchor = world.entityLoungeAnchor(seatToForce.source, seatToForce.index)
+
+			if loungeAnchor then
+				local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
+				if success then
+					seatToForce = nil
+				end
+			else
+
+			end
+		else
+			seatToForce = nil
+		end
+	end
+end
 
 function init()
 	old.init()
@@ -97,14 +116,8 @@ function init()
 		local source, index = mcontroller.anchorState()
 		if (source == data.source) and (index == data.index) then return end
 		sbq.resetLounging()
-        mcontroller.setPosition(world.entityPosition(data.source))
-		local success, error = pcall(mcontroller.setAnchorState, data.source, data.index)
-		if success then
-			seatToForce = nil
-        else
-			seatToForce = data
-			sb.logError(error)
-		end
+		seatToForce = data
+		forceSeat()
 	end)
 
 	status.setPersistentEffects("sbqActorScript", {
@@ -114,19 +127,7 @@ end
 
 function update(dt)
 	old.update(dt)
-	if seatToForce then
-		if world.entityExists(seatToForce.source) then
-			mcontroller.setPosition(world.entityPosition(seatToForce.source))
-			local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
-			if success then
-				seatToForce = nil
-			else
-				sb.logError(error)
-			end
-		else
-			seatToForce = nil
-		end
-	end
+	forceSeat()
 end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)

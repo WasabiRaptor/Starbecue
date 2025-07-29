@@ -515,7 +515,7 @@ function _State:dumpOccupants(location, subLocation, digestType)
 		table.insert(dump, output)
 	end
 	while Occupants.list[1] do
-		Occupants.list[1]:remove()
+		Occupants.list[1]:remove("occupantDump")
 	end
 	return dump
 end
@@ -875,7 +875,7 @@ end
 
 function _State:emergencyEscape(occupant)
 	world.spawnProjectile("sbqMemeExplosion", occupant:position())
-	occupant:remove()
+	occupant:remove("emergencyEscape")
 end
 
 local function climaxBurst(emitter, burstChance)
@@ -1621,15 +1621,17 @@ function Occupants.finishOccupantSetup(occupant)
 	world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 
 	sbq.forceTimer(occupant.seat .. "Timeout", 1, function()
-		local occupant = Occupants.entityId[tostring(eid)]
-		if occupant and occupant:entityLoungingIn() ~= occupant.entityId then occupant:remove() end
+        local occupant = Occupants.entityId[tostring(eid)]
+
+		if occupant and (occupant:entityLoungingIn() ~= occupant.entityId) then occupant:remove("failedToLounge") end
 	end)
 	return true
 end
 
-function _Occupant:remove()
-	sbq.forceTimer("huntingActionAttemptCooldown", 10)
-	self:setLoungeEnabled(false)
+function _Occupant:remove(reason)
+    sbq.forceTimer("huntingActionAttemptCooldown", 10)
+	self:logInfo("removed: "..tostring(reason))
+	-- self:setLoungeEnabled(false)
 	local location = SpeciesScript:getLocation(self.location)
 
 	Occupants.seat[self.seat] = nil
@@ -1746,17 +1748,18 @@ end
 
 
 function _Occupant:update(dt)
-	local location = self:getLocation()
-	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove() end
+    local location = self:getLocation()
+	-- sbq.logInfo(world.entityLoungeAnchor(sbq.entityId(), self:getLoungeIndex()))
+	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove("noLongerLounging") end
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not (animator.animationStateTimer(self.seat .. "State") >= animator.stateCycle(self.seat .. "State")) then
-		if self.flags.releasing and self:animProperty("release") then return self:remove() end
+		if self.flags.releasing and self:animProperty("release") then return self:remove("releasing") end
 		self:setLoungeHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
 		self:setLoungeOrientation(self:animProperty("orientation"))
 		self:setLoungeDance(self:animProperty("dance"))
 		self:setLoungeEmote(self:animProperty("emote"))
 	else
-		if self.flags.releasing then return self:remove() end
+		if self.flags.releasing then return self:remove("releasing") end
 	end
 	if not self.locationStore[self.location] then self.locationStore[self.location] = {time = 0, struggleTime = 0} end
 	local locationStore = self.locationStore[self.location]
@@ -1807,20 +1810,20 @@ function _Occupant:refreshLocation(name, subLocation, force)
 		self.location = name
 		self.subLocation = subLocation
 		location = self:getLocation()
-		if not location then return self:remove() end
+		if not location then return self:remove("invalidLocation") end
 		self.locationName = location.name
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
 	end
-	if not location then return self:remove() end
-	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove() end
+	if not location then return self:remove("invalidLocation") end
+	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove("disabledLocation") end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims
 	if occupantAnims then
 		SpeciesScript:doAnimations(occupantAnims, {}, self.entityId)
 	end
-	if self.flags.releasing and self:animProperty("release") then return self:remove() end
+	if self.flags.releasing and self:animProperty("release") then return self:remove("releasing") end
 	self:setLoungeHidden(self:animProperty("hidden") or self.flags.digested or self.flags.infused or self.flags.digesting)
 	self:setLoungeOrientation(self:animProperty("orientation"))
 	self:setLoungeDance(self:animProperty("dance"))

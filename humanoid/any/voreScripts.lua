@@ -463,7 +463,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 		sbq.forceTimer("huntTargetSwitchCooldown", 30)
 		local occupant = Occupants.entityId[tostring(target)]
 		SpeciesScript.lockActions = false
-		if occupant then occupant:remove() end
+		if occupant then occupant:remove("releasing") end
 	end
 end
 local function letout(funcName, action, target, preferredAction, ...)
@@ -531,7 +531,7 @@ function default:grabRelease(name, action, target, ...)
 	end
 	if occupant then
 		animator.playSound("release")
-		occupant:remove()
+		occupant:remove("releasing")
 		world.sendEntityMessage(entity.id(), "sbqControllerRotation", false)
 		return true
 	else

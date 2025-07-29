@@ -383,7 +383,7 @@ function teleportOut()
 	end
 	for i, occupant in ipairs(Occupants.list) do
 		if world.entityType(occupant.entityId) ~= "player" then
-			occupant:remove()
+			occupant:remove("teleportOut")
 		end
 	end
 end
@@ -391,6 +391,6 @@ end
 function die()
 	status.setStatusProperty("sbqOccupantData", nil)
 	for i, occupant in ipairs(Occupants.list) do
-		occupant:remove()
+		occupant:remove("died")
 	end
 end

@@ -76,7 +76,7 @@ end
 
 function die()
 	for i, occupant in ipairs(Occupants.list) do
-		occupant:remove()
+		occupant:remove("died")
 	end
 end
 
