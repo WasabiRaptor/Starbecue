@@ -27,10 +27,10 @@
 			"body" : {
 				"states" : {
 					"idle" : {"properties" : {
-						"bellyOffset" : {},
-						"chestOffset" : {},
-						"tailOffset" : {},
-						"crotchOffset" : {},
+						"bellyOffset" : [["reset"]],
+						"chestOffset" : [["reset"]],
+						"tailOffset" : [["reset"]],
+						"crotchOffset" : [["reset"]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
@@ -54,53 +54,53 @@
 						}
 					}},
 					"lay" : {"properties" : {
-						"bellyOffset" : {},
-						"chestOffset" : {},
-						"tailOffset" : {},
-						"crotchOffset" : {},
+						"bellyOffset" : [["reset"]],
+						"chestOffset" : [["reset"]],
+						"tailOffset" : [["reset"]],
+						"crotchOffset" : [["reset"]],
 						"globalTags" : {
 							"pose" : "lay"
 						}
 					}},
 					"walk" : {"properties" : {
-						"bellyOffset" : {},
-						"chestOffset" : {},
-						"tailOffset" : {},
-						"crotchOffset" : {},
+						"bellyOffset" : [["reset"]],
+						"chestOffset" : [["reset"]],
+						"tailOffset" : [["reset"]],
+						"crotchOffset" : [["reset"]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
 					}},
 					"run" : {"properties" : {
-						"bellyOffset" : {},
-						"chestOffset" : {},
-						"tailOffset" : {},
-						"crotchOffset" : {},
+						"bellyOffset" : [["reset"]],
+						"chestOffset" : [["reset"]],
+						"tailOffset" : [["reset"]],
+						"crotchOffset" : [["reset"]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
 					}},
 					"jump" : {"properties" : {
-						"bellyOffset" : {},
-						"chestOffset" : {},
-						"tailOffset" : {},
-						"crotchOffset" : {},
+						"bellyOffset" : [["reset"]],
+						"chestOffset" : [["reset"]],
+						"tailOffset" : [["reset"]],
+						"crotchOffset" : [["reset"]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
 					}},
 					"fall" : {"properties" : {
-						"bellyOffset" : {},
-						"chestOffset" : {},
-						"tailOffset" : {},
-						"crotchOffset" : {},
+						"bellyOffset" : [["reset"]],
+						"chestOffset" : [["reset"]],
+						"tailOffset" : [["reset"]],
+						"crotchOffset" : [["reset"]],
 						"globalTags" : {
 							"pose" : "stand"
 						}
 					}},
 					"swim" : {"properties" : {
 						"bellyOffset" : [["reset"],	["translate",[-0.125, 0]]],
-						"chestOffset" : {},
+						"chestOffset" : [["reset"]],
 						"tailOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
 						"crotchOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
 						"globalTags" : {
@@ -109,7 +109,7 @@
 					}},
 					"swimIdle" : {"properties" : {
 						"bellyOffset" : [["reset"],	["translate",[-0.125, 0]]],
-						"chestOffset" : {},
+						"chestOffset" : [["reset"]],
 						"tailOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
 						"crotchOffset" : [["reset"],	["translate",[-0.125, 0.125]]],
 						"globalTags" : {
