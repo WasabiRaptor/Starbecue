@@ -117,242 +117,110 @@
 						}
 					}}
 				}
-			},
-			"braHide" : {
-				"default": "false",
-				"priority" : 90,
-				"states" : {
-					"false": { "frames": 1, "cycle": 0, "mode": "end" },
-					"true": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"underwearHide" : {
-				"default": "false",
-				"priority" : 90,
-				"states" : {
-					"false": { "frames": 1, "cycle": 0, "mode": "end" },
-					"true": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
 			}
-
 		},
 		"parts": {
 			"belly" : {
 				"properties": {
-					"zLevel": 0.5
+					"zLevel": 11.7
+				}
+			},
+			"belly_infused" : {
+				"properties": {
+					"zLevel": 11.71
 				}
 			},
 
 			"tail" : {
 				"properties" : {
-					"zLevel": -0.5,
+					"zLevel": 8.1,
 					"offset" : [-1.3125,-1.0625]
 				}
 			},
 			"tail_infused" : {
 				"properties" : {
-					"zLevel": -0.49
+					"zLevel": 8.11
 				}
 			},
 
 			"cock" : {
 				"properties": {
-					"zLevel": 0.3
+					"zLevel": 11.4
+				}
+			},
+			"cock_infused" : {
+				"properties": {
+					"zLevel": 11.41
 				}
 			},
 			"balls_right" : {
 				"properties": {
-					"zLevel": 0.11,
-					"flippedZLevel": 0.10
+					"zLevel": 11.3,
+					"flippedZLevel": 11.2
 				}
 			},
 			"balls_left" : {
 				"properties": {
-					"zLevel": 0.10,
-					"flippedZLevel": 0.11
+					"zLevel": 11.2,
+					"flippedZLevel": 11.3
+				}
+			},
+			"balls_right_infused" : {
+				"properties": {
+					"zLevel": 11.31,
+					"flippedZLevel": 11.21
+				}
+			},
+			"balls_left_infused" : {
+				"properties": {
+					"zLevel": 11.21,
+					"flippedZLevel": 11.31
 				}
 			},
 
 			"breasts" : {
 				"properties": {
-					"zLevel": 0.1
+					"zLevel": 11.5
+				}
+			},
+			"breasts_infused" : {
+				"properties": {
+					"zLevel": 11.51
 				}
 			},
 			"breasts_right" : {
 				"properties": {
-					"zLevel": 0.6,
-					"flippedZLevel": 0.2
+					"zLevel": 11.8,
+					"flippedZLevel": 11.6
 				}
 			},
 			"breasts_left" : {
 				"properties": {
-					"zLevel": 0.2,
-					"flippedZLevel": 0.6
+					"zLevel": 11.5,
+					"flippedZLevel": 11.7
+				}
+			},
+			"breasts_right_infused" : {
+				"properties": {
+					"zLevel": 11.81,
+					"flippedZLevel": 11.61
+				}
+			},
+			"breasts_left_infused" : {
+				"properties": {
+					"zLevel": 11.51,
+					"flippedZLevel": 11.71
 				}
 			},
 
 			"pussy" : {
 				"properties": {
-					"zLevel": 0.01
+					"zLevel": 11.1
 				}
 			},
-
-			"belly_infused" : {
-				"properties": {
-					"zLevel": 0.51
-				}
-			},
-
-
-			"cock_infused" : {
-				"properties": {
-					"zLevel": 0.301
-				}
-			},
-			"balls_right_infused" : {
-				"properties": {
-					"zLevel": 0.111,
-					"flippedZLevel": 0.101
-				}
-			},
-			"balls_left_infused" : {
-				"properties": {
-					"zLevel": 0.101,
-					"flippedZLevel": 0.111
-				}
-			},
-
-			"breasts_infused" : {
-				"properties": {
-					"zLevel": 0.101
-				}
-			},
-			"breasts_right_infused" : {
-				"properties": {
-					"zLevel": 0.601,
-					"flippedZLevel": 0.201
-				}
-			},
-			"breasts_left_infused" : {
-				"properties": {
-					"zLevel": 0.201,
-					"flippedZLevel": 0.601
-				}
-			},
-
 			"pussy_infused" : {
 				"properties": {
-					"zLevel": 0.011
-				}
-			},
-
-
-			"underwearCover_fg" : {
-				"properties" : {
-					"centered": true,
-					"zLevel": 2.01,
-					"anchorPart" : "body",
-					"bodyFullbright" : true,
-					"processingDirectives" : "<bodyDirectives>"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
-						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<body_state>.<body_frame>?addmask=<legs_fg_mask>:<body_state>.<body_frame>;0;0" } },
-						"sit" : "duck",
-						"lay" : "duck",
-						"walk" : "duck",
-						"run" : "duck",
-						"jump" : "duck",
-						"fall" : "duck",
-						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
-					},
-					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0?addmask=/humanoid/portraitMask.png;0;0" } },
-						"bust" : "head"
-					},
-					"underwearHide" : {
-						"false" : { "properties": {} }
-					}
-				}
-			},
-			"underwearCover" : {
-				"properties" : {
-					"centered": true,
-					"zLevel": 0.008,
-					"anchorPart" : "body",
-					"bodyFullbright" : true,
-					"processingDirectives" : "<bodyDirectives>"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<body_state>.<body_frame>" } },
-						"sit" : "duck",
-						"lay" : "duck",
-						"walk" : "duck",
-						"run" : "duck",
-						"jump" : "duck",
-						"fall" : "duck",
-						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
-					},
-					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><nudePath><gender>body.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
-						"bust" : "head"
-					},
-					"underwearHide" : {
-						"false" : { "properties": {} }
-					}
-				}
-			},
-			"braCover": {
-				"properties": {
-					"centered": true,
-					"zLevel": 0.01,
-					"bodyFullbright" : true,
-					"processingDirectives" : "<bodyDirectives>",
-					"transformationGroups": ["movementOffset"],
-					"anchorPart" : "body"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<body_state>", "transformationGroups" : [] } },
-						"sit": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:chest.1" } },
-						"lay" : "sit",
-						"walk" : "sit",
-						"run": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<body_state>" } },
-						"jump" : "sit",
-						"fall" : "sit",
-						"swim" : { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:swim" } },
-						"swimIdle" : "swim",
-						"none": { "properties": {} }
-					},
-					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust": { "properties": { "image": "<bodyImagePath><nudePath><gender>BreastsCover.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } }
-					},
-					"braHide" : {
-						"false" : { "properties": {} }
-					}
+					"zLevel": 11.11
 				}
 			},
 
@@ -365,7 +233,7 @@
 			"head" : {"properties" : {
 				"interact" : [0.5,0.375]
 			}},
-			"frontarm" : {
+			"frontArm" : {
 				"partStates" : {
 					"rpActionState" : {
 						"jackoff" : {
@@ -412,7 +280,7 @@
 					}
 				}
 			},
-			"frontarm_cosmetic" : {
+			"frontArm_cosmetic" : {
 				"partStates" : {
 					"rpActionState" : {
 						"jackoff" : {"properties" : {"image": "<frontSleeve>:rotation"}},
@@ -421,7 +289,7 @@
 					}
 				}
 			},
-			"backarm" : {
+			"backSrm" : {
 				"partStates" : {
 					"rpActionState" : {
 						"squishBreasts" : {
@@ -442,7 +310,7 @@
 					}
 				}
 			},
-			"backarm_cosmetic" : {
+			"backArm_cosmetic" : {
 				"partStates" : {
 					"rpActionState" : {
 						"squishBreasts" : {"properties" : {"image": "<backSleeve>:swim.2"}}
