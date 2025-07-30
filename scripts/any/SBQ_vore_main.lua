@@ -1629,9 +1629,9 @@ function Occupants.finishOccupantSetup(occupant)
 end
 
 function _Occupant:remove(reason)
-    sbq.forceTimer("huntingActionAttemptCooldown", 10)
-	self:logInfo("removed: "..tostring(reason))
-	-- self:setLoungeEnabled(false)
+	sbq.forceTimer("huntingActionAttemptCooldown", 10)
+	self:debugLogInfo("removed: "..tostring(reason))
+	self:setLoungeEnabled(false)
 	local location = SpeciesScript:getLocation(self.location)
 
 	Occupants.seat[self.seat] = nil
@@ -2275,4 +2275,10 @@ function _Occupant:logInfo(json)
 end
 function _Occupant:logError(json)
 	sbq.logError("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+end
+function _Occupant:debugLogInfo(json)
+	sbq.debugLogInfo("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+end
+function _Occupant:debugLogError(json)
+	sbq.debugLogError("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
 end
