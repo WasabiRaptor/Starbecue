@@ -549,7 +549,7 @@ function _State:tryAction(name, target, ...)
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
 		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return self:actionFailed(name, action, target, "targetSettingsMismatch", ...) end
 		if not action.ignoreTargetOccupants then
-			local targetOccupants = world.entitiesLounging(target)
+			local targetOccupants = world.loungingEntities(target)
 			for _, occupant in ipairs(targetOccupants or {}) do
 				local occupantSettings = sbq.getPublicProperty(occupant, "sbqPublicSettings")
 				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return self:actionFailed(name, action, target, "targetPreySettingsMismatch", ...) end
@@ -681,7 +681,7 @@ function _State:actionAvailable(name, target, ...)
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
 		if not sbq.tableMatches(action.targetSettings, targetSettings, true) then return false, "targetSettingsMismatch", action.failureCooldown or 0, false, false end
 		if not action.ignoreTargetOccupants then
-			local targetOccupants = world.entitiesLounging(target)
+			local targetOccupants = world.loungingEntities(target)
 			for _, occupant in ipairs(targetOccupants or {}) do
 				local occupantSettings = sbq.getPublicProperty(occupant, "sbqPublicSettings")
 				if not sbq.tableMatches(action.targetSettings, occupantSettings, true) then return false, "targetPreySettingsMismatch", action.failureCooldown or 0, false, false end

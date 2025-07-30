@@ -107,7 +107,7 @@ function sbq.clickAction()
 	end
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {
 		withoutEntityId = entity.id(),
-		withoutEntityIds = sbq.entitiesLounging(player.id()),
+		withoutEntityIds = world.loungingEntities(player.id()),
 		includedTypes = { "creature" }
 	})
 
@@ -224,7 +224,7 @@ local TopMenu = {}
 RadialMenu.TopMenu = TopMenu
 setmetatable(TopMenu, _RadialMenu)
 function TopMenu:init()
-	local occupants = sbq.entitiesLounging(player.id())
+	local occupants = world.loungingEntities(player.id())
 	local options = {
 		{
 			args = { "letout", false, storage.action },
@@ -288,7 +288,7 @@ RadialMenu.OccupantsMenu = OccupantsMenu
 setmetatable(OccupantsMenu, _RadialMenu)
 function OccupantsMenu:init()
 	local options = {}
-	local occupants = sbq.entitiesLounging(player.id())
+	local occupants = world.loungingEntities(player.id())
 
 	for _, entityId in ipairs(occupants) do
 		table.insert(options, {
