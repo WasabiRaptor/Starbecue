@@ -67,9 +67,9 @@
 					"interact" : [-1,0]
 				},
 				"partStates": {
-					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
-						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
+					"body": {
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -80,21 +80,15 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandStateAnim>.<pose>" } },
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<pose>.<tailExpandStateFrame>" } }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>.<pose>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<pose>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -113,9 +107,9 @@
 					"processingDirectives" : "<tailInfusedColorRemap><tailInfusedDirectives><tailInfusedFade>"
 				},
 				"partStates": {
-					"bodyState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
-						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<bodyStateAnim>.<bodyStateFrame>" } },
+					"body": {
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -126,21 +120,15 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<pose>.<tailStateFrame>" } },
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandStateAnim>.<pose>" } },
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<pose>.<tailExpandStateFrame>" } }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>.<pose>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<pose>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

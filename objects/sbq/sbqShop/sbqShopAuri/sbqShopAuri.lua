@@ -46,7 +46,7 @@ end
 
 
 function doIdleAnims()
-	randomTimer("blink", 10, 15, function() doAnim("emoteState", "blink") end)
+	randomTimer("blink", 10, 15, function() doAnim("emote", "blink") end)
 
 end
 

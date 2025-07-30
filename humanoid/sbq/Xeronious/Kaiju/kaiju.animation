@@ -48,7 +48,7 @@
 	},
 	"animatedParts": {
 		"stateTypes": {
-			"bodyState": {
+			"body": {
 				"priority" : 0,
 				"default": "idle",
 				"states": {
@@ -216,7 +216,7 @@
 			"anchor" : {
 				"properties" : {},
 				"partStates" : {
-					"bodyState" : {
+					"body" : {
 						"lay" : {"properties":{"offset":[0, 0]}}, // quadrupeds are in a differient orientation than the game expects for lay, so we un-rotate the expected 90 degress rotation
 						"sit" : {"properties":{"offset":[0,-0.0625]}}
 					},
@@ -241,7 +241,7 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bellyStateAnim>.<bellyStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -263,15 +263,9 @@
 						"expand": { "properties": { "image": "<bodyImagePath>body.png:<bellyInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"bodyStateHighPriority" : {
-						"duck": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyStateAnim>.<bodyStateFrame>", "transformationGroups": [] } },
-						"crawl": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<bodyStateAnim>.1", "transformationGroups": [] } }
+					"bodyHighPriority" : {
+						"duck": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<body_state>.<body_frame>", "transformationGroups": [] } },
+						"crawl": { "properties": { "image": "<bodyImagePath>body.png:<bellySize>-<body_state>.1", "transformationGroups": [] } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -289,9 +283,9 @@
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<bodyImagePath>legs/legs_fg.png:<personalityIdle>", "zLevel":1 } },
-						"duck": { "properties": { "image": "<bodyImagePath>legs/legs_fg.png:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<bodyImagePath>legs/legs_fg.png:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk" : "duck",
@@ -301,12 +295,6 @@
 						"swim" : "duck",
 						"swimIdle" : "duck",
 						"crawl" : "duck",
-						"none": { "properties": {} }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -325,9 +313,9 @@
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<bodyImagePath>legs/legs_bg.png:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<bodyImagePath>legs/legs_bg.png:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<bodyImagePath>legs/legs_bg.png:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk" : "duck",
@@ -337,12 +325,6 @@
 						"swim" : "duck",
 						"swimIdle" : "duck",
 						"crawl" : "duck",
-						"none": { "properties": {} }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -359,9 +341,9 @@
 					"processingDirectives" : "<legsArmorDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<legsArmorKaijuForelegFG>:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<legsArmorKaijuForelegFG>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<legsArmorKaijuForelegFG>:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk" : "duck",
@@ -371,15 +353,6 @@
 						"swim" : "duck",
 						"swimIdle" : "duck",
 						"crawl" : "duck",
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"legsCosmeticHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -396,9 +369,9 @@
 					"processingDirectives" : "<legsArmorDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<legsArmorKaijuForelegBG>:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<legsArmorKaijuForelegBG>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<legsArmorKaijuForelegBG>:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk" : "duck",
@@ -408,12 +381,6 @@
 						"swim" : "duck",
 						"swimIdle" : "duck",
 						"crawl" : "duck",
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -432,9 +399,9 @@
 					"processingDirectives" : "<chestArmorDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<chestArmorKaiju>:<personalityIdle>" } },
-						"duck" : { "properties": { "image": "<chestArmorKaiju>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck" : { "properties": { "image": "<chestArmorKaiju>:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk" : { "properties": { "image": "<chestArmorKaiju>:idle.1" } },
@@ -444,12 +411,6 @@
 						"swim" : "walk",
 						"swimIdle" : "walk",
 						"crawl" : "duck",
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -467,9 +428,9 @@
 					"processingDirectives" : "<backArmorDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<backArmorKaiju>:<personalityIdle>" } },
-						"duck": { "properties": { "image": "<backArmorKaiju>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<backArmorKaiju>:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk" : { "properties": { "image": "<backArmorKaiju>:idle.1" } },
@@ -479,12 +440,6 @@
 						"swim" : "walk",
 						"swimIdle" : "walk",
 						"crawl" : "duck",
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -504,9 +459,9 @@
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<bodyImagePath>arms/front.png:<personalityArmIdle>", "transformationGroups" : ["armOffset"] } },
-						"duck": { "properties": { "image": "<bodyImagePath>arms/front.png:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<bodyImagePath>arms/front.png:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk": "duck",
@@ -528,17 +483,6 @@
 						} },
 						"none": { "properties": {} }
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {
-							"zLevel" : 6,
-							"itemHidden": false,
-							"anchorPart": "anchor",
-							"transformationGroups": ["frontArmRotation","movementOffset"]
-						} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
 						"bust" : "head"
@@ -556,9 +500,9 @@
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<bodyImagePath>arms/back.png:<personalityArmIdle>", "transformationGroups" : ["armOffset"] } },
-						"duck": { "properties": { "image": "<bodyImagePath>arms/back.png:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<bodyImagePath>arms/back.png:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk": "duck",
@@ -579,16 +523,6 @@
 						} },
 						"none": { "properties": {} }
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {
-							"itemHidden": false,
-							"anchorPart": "anchor",
-							"transformationGroups": ["backArmRotation","movementOffset"]
-						} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
 						"bust" : "head"
@@ -603,9 +537,9 @@
 					"processingDirectives" : "<chestArmorDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<frontSleeveKaiju>:<personalityArmIdle>" } },
-						"duck": { "properties": { "image": "<frontSleeveKaiju>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<frontSleeveKaiju>:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk": "duck",
@@ -624,12 +558,6 @@
 						} },
 						"none": { "properties": {} }
 					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
 						"bust" : "head"
@@ -644,9 +572,9 @@
 					"processingDirectives" : "<chestArmorDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<backSleeveKaiju>:<personalityArmIdle>" } },
-						"duck": { "properties": { "image": "<backSleeveKaiju>:<bodyStateAnim>.<bodyStateFrame>" } },
+						"duck": { "properties": { "image": "<backSleeveKaiju>:<body_state>.<body_frame>" } },
 						"sit" : "idle",
 						"lay" : "idle",
 						"walk": "duck",
@@ -662,12 +590,6 @@
 						"rotation": { "properties": {
 							"image": "<backSleeveKaiju>:<backArmRotationFrame>"
 						} },
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -688,14 +610,8 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>.<headStateFrame>" } },
+						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headState_state>.<headState_frame>" } },
 						"eat" : "idle",
-						"none": { "properties": {} }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -714,14 +630,8 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headStateAnim>.<headStateFrame>?addmask=/humanoid/sbq/Xeronious/Kaiju/masks/head.png:<headStateAnim>.<headStateFrame>;0;0" } },
+						"idle": { "properties": { "image": "<bodyImagePath>head.png:<headState_state>.<headState_frame>?addmask=/humanoid/sbq/Xeronious/Kaiju/masks/head.png:<headState_state>.<headState_frame>;0;0" } },
 						"eat" : "idle",
-						"none": { "properties": {} }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
@@ -744,9 +654,6 @@
 						"idle": { "properties": { "image": "<headArmor>:normal" } },
 						"none": { "properties": {} }
 					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					}
@@ -763,7 +670,7 @@
 				},
 				"partStates" : {
 					"tailState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailStateAnim>.<tailStateFrame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -782,14 +689,8 @@
 						"s_down_release" : "idle"
 					},
 					"tailExpandState" : {
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandStateAnim>.<tailStateFrame>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<tailState_frame>" } },
 						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-expand" } }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },

@@ -34,7 +34,7 @@
 	},
 	"animatedParts": {
 		"stateTypes": {
-			"bodyState": {
+			"body": {
 				"noHumanoidConfigOverride" : true,
 				"priority" : 0,
 				"default": "idle",
@@ -145,7 +145,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"emoteState": {
+			"emote": {
 				"priority" : 0,
 				"default": "idle",
 				"states": {
@@ -225,7 +225,7 @@
 			"anchor" : {
 				"properties" : {},
 				"partStates" : {
-					"bodyState" : {
+					"body" : {
 						"lay" : {"properties":{"offset":[0, 0.0625], "transforms":[["reset"],["rotateDegrees",-90]]}}, // quadrupeds are in a differient orientation than the game expects for lay, so we un-rotate the expected 90 degress rotation
 						"sit" : {"properties":{"offset":[0, 0.0625]}}
 					}
@@ -240,8 +240,8 @@
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
-						"idle" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bodyStateAnim>.<bodyStateFrame>" } },
+					"body": {
+						"idle" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<body_state>.<body_frame>" } },
 						"duck": "idle",
 						"sit": "idle",
 						"lay" : "idle",
@@ -253,20 +253,14 @@
 						"swimIdle" : "idle",
 						"none": { "properties": {} }
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"bodyStateHighPriority" : {
-						"walk" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bodyStateAnim>.<bodyStateFrame>" } },
+					"bodyHighPriority" : {
+						"walk" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<body_state>.<body_frame>" } },
 						"run" : "walk",
 						"jump" : "walk",
 						"fall" : "walk"
 					},
 					"bellyState": {
-						"s_front" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front" : { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<slimeCount>-<bellyState_state>.<bellyState_frame>" } },
 						"s_front_press" : "s_front",
 						"s_front_hold" : "s_front",
 						"s_front_release" : "s_front",
@@ -285,7 +279,7 @@
 						"none": { "properties": {} }
 					},
 					"bellyExpandState" : {
-						"eat": { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<bellyExpandStateAnim>.<bellyExpandStateFrame>" } }
+						"eat": { "properties": { "image": "<bodyImagePath>body/<hairType>.png:<bellyExpandState_state>.<bellyExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {
@@ -319,15 +313,6 @@
 						"dance": { "properties": { } },
 						"none": { "properties": {} }
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {
-							"itemHidden": false,
-							"transformationGroups": ["frontArmRotation"]
-						} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust": "head"
@@ -356,15 +341,6 @@
 						"dance": { "properties": { } },
 						"none": { "properties": {} }
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {
-							"itemHidden": false,
-							"transformationGroups": ["backArmRotation"]
-						} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust": "head"
@@ -384,12 +360,6 @@
 				"partStates": {
 					"headState": {
 						"idle": { "properties": { "image": "<headArmor>:normal" } },
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
-					"clothesHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {

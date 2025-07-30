@@ -417,7 +417,7 @@ function state.hug.begin()
 	local victim = sbq.findFirstOccupantIdForLocation("hug")
 	if victim then
 		sbq.grabbing = nil
-		sbq.doVictimAnim( victim, "hugcenter", "bodyState")
+		sbq.doVictimAnim( victim, "hugcenter", "body")
 	end
 end
 

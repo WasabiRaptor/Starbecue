@@ -5,7 +5,7 @@
 	},
 	"animatedParts": {
 		"stateTypes": {
-			"bodyState" : {
+			"body" : {
 				"default" : "idle",
 				"states" : {
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 },
@@ -45,7 +45,7 @@
 					"idle": { "frames": 1, "cycle": 1, "mode": "end", "priority": 0 }
 				}
 			},
-			"emoteState" : {
+			"emote" : {
 				"default" : "idle",
 				"states" : {
 					"none": { "frames": 1, "cycle": 1, "mode": "end", "priority": -1 },
@@ -82,7 +82,7 @@
 					"transformationGroups": []
 				},
 				"partStates": {
-					"bodyState" : {
+					"body" : {
 						"none": { "properties": {} },
 
 						"idle": { "properties": { "image": "auri/body.png" } }
@@ -154,7 +154,7 @@
 					"transformationGroups": []
 				},
 				"partStates": {
-					"emoteState" : {
+					"emote" : {
 						"none": { "properties": {} },
 
 						"idle": { "properties": { "image": "auri/emote.png:idle.<frame>" } },

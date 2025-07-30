@@ -103,7 +103,7 @@
 				},
 				"partStates": {
 					"balls_rightState": {
-						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightStateAnim>.<balls_rightStateFrame>" } },
+						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -125,12 +125,6 @@
 					"balls_rightExpandState" : {
 						"expand": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -155,7 +149,7 @@
 				},
 				"partStates": {
 					"balls_leftState": {
-						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftStateAnim>.<balls_leftStateFrame>" } },
+						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -177,12 +171,6 @@
 					"balls_leftExpandState" : {
 						"expand": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -207,7 +195,7 @@
 				},
 				"partStates": {
 					"balls_rightState": {
-						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightStateAnim>.<balls_rightStateFrame>" } },
+						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -229,12 +217,6 @@
 					"balls_rightExpandState" : {
 						"expand": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -259,7 +241,7 @@
 				},
 				"partStates": {
 					"balls_leftState": {
-						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftStateAnim>.<balls_leftStateFrame>" } },
+						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -281,12 +263,6 @@
 					"balls_leftExpandState" : {
 						"expand": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

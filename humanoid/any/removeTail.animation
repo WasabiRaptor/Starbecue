@@ -8,9 +8,9 @@
 				"properties": {
 				},
 				"partStates": {
-					"bodyState": {
+					"body": {
 						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>;0;0" } },
-						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<bodyMaskPath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<body_state>.<body_frame>?addmask=<bodyMaskPath><gender>body.png:<body_state>.<body_frame>;0;0" } },
 						"sit" : "duck",
 						"lay" : "duck",
 						"walk" : "duck",
@@ -23,12 +23,6 @@
 					},
 					"bodyDanceState" : {
 						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<bodyMaskPath><gender>body.png:<bodyDanceFrame>;0;0" } },
-						"none": { "properties": {} }
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {

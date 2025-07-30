@@ -24,7 +24,7 @@
 	},
 	"animatedParts": {
 		"stateTypes": {
-			"bodyState" : {
+			"body" : {
 				"states" : {
 					"idle" : {"properties" : {
 					}},
@@ -135,11 +135,11 @@
 					"processingDirectives" : "<bellyColorRemap><bodyDirectives>"
 				},
 				"partStates": {
-					"bodyState": {
-						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+					"body": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"walk": "idle",
 						"run": "idle",
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump",
 						"duck": "idle",
 						"swim": "idle",
@@ -148,7 +148,7 @@
 						"lay" : "idle"
 					},
 					"bellyState": {
-						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"s_front_press" : "s_front",
 						"s_front_hold" : "s_front",
 						"s_front_release" : "s_front",
@@ -170,18 +170,12 @@
 						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
 						"eat" : "expand"
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
 					},
-					"bodyStateHighPriority": {
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+					"bodyHighPriority": {
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump"
 					}
 				}
@@ -284,11 +278,11 @@
 					"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyInfusedFade>"
 				},
 				"partStates": {
-					"bodyState": {
-						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+					"body": {
+						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"walk": "idle",
 						"run": "idle",
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump",
 						"duck": "idle",
 						"swim": "idle",
@@ -297,7 +291,7 @@
 						"lay" : "idle"
 					},
 					"bellyState": {
-						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyStateAnim>.<bellyStateFrame>" } },
+						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"s_front_press" : "s_front",
 						"s_front_hold" : "s_front",
 						"s_front_release" : "s_front",
@@ -319,18 +313,12 @@
 						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
 						"eat" : "expand"
 					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
-					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
 					},
-					"bodyStateHighPriority": {
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<bodyStateAnim>.<bodyStateFrame>" } },
+					"bodyHighPriority": {
+						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump"
 					}
 				}

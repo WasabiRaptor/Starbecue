@@ -264,9 +264,9 @@
 						"properties": {
 						},
 						"partStates": {
-							"bodyState": {
+							"body": {
 								"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<nagaMaskPath><gender>body.png:<personalityIdle>;0;0" } },
-								"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<nagaMaskPath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+								"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<body_state>.<body_frame>?addmask=<nagaMaskPath><gender>body.png:<body_state>.<body_frame>;0;0" } },
 								"sit" : "duck",
 								"lay" : "duck",
 								"walk" : "duck",
@@ -279,12 +279,6 @@
 							},
 							"bodyDanceState" : {
 								"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<nagaMaskPath><gender>body.png:<bodyDanceFrame>;0;0" } },
-								"none": { "properties": {} }
-							},
-							"bodyHiddenState" : {
-								"none": { "properties": {} }
-							},
-							"hiddenState" : {
 								"none": { "properties": {} }
 							},
 							"portraitMode" : {
@@ -303,9 +297,9 @@
 							"image" : "/humanoid/sbq/naga/naga_tail.png"
 						}
 						// "partStates": {
-						//   "bodyState": {
+						//   "body": {
 						//     "idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<legs_fg_mask>:<personalityIdle>;0;0" } },
-						//     "duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyStateAnim>.<bodyStateFrame>?addmask=<legs_fg_mask>:<bodyStateAnim>.<bodyStateFrame>;0;0" } },
+						//     "duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<body_state>.<body_frame>?addmask=<legs_fg_mask>:<body_state>.<body_frame>;0;0" } },
 						//     "sit" : "duck",
 						//     "lay" : "duck",
 						//     "walk" : "duck",
@@ -318,12 +312,6 @@
 						//   },
 						//   "bodyDanceState" : {
 						//     "dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<legs_fg_mask>:<bodyDanceFrame>;0;0" } },
-						//     "none": { "properties": {} }
-						//   },
-						//   "bodyHiddenState" : {
-						//     "none": { "properties": {} }
-						//   },
-						//   "hiddenState" : {
 						//     "none": { "properties": {} }
 						//   },
 						//   "portraitMode" : {

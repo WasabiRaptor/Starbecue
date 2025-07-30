@@ -225,7 +225,7 @@ function detectEmote()
 					if type((sbq.stateconfig[sbq.state].emoteAnimations or {})[emote]) == "table" then
 						sbq.doAnims((sbq.stateconfig[sbq.state].emoteAnimations or {})[emote])
 					else
-						sbq.doAnim("emoteState", emote)
+						sbq.doAnim("emote", emote)
 					end
 					break
 				end

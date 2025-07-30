@@ -67,7 +67,7 @@
 				},
 				"partStates": {
 					"pussyState": {
-						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyStateAnim>.<pussyStateFrame>" } },
+						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -89,12 +89,6 @@
 					"pussyExpandState" : {
 						"expand": { "properties": { "image": "<pussyImage>:<pussyInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -119,7 +113,7 @@
 				},
 				"partStates": {
 					"pussyState": {
-						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyStateAnim>.<pussyStateFrame>" } },
+						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -141,12 +135,6 @@
 					"pussyExpandState" : {
 						"expand": { "properties": { "image": "<pussyImage>:<pussyInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"bodyHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"hiddenState" : {
-						"none": { "properties": {} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

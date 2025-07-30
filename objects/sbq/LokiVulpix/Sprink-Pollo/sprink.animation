@@ -23,7 +23,7 @@
 					"0-to-1": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"}
 				}
 			},
-			"bodyState": {
+			"body": {
 				"priority" : 1,
 				"default": "0-idle",
 				"states": {
@@ -130,14 +130,14 @@
 						// being able to tell it to use the anim and that specific anim's frames as a tag is
 						// one of my engine modifications, you would still have to define it like before in vanilla
 						// I just made some shorthand stuff to make things easier on people
-						"eat": {"properties": {"image": "<bodyImage>:<eatStateAnim>.<eatStateFrame>"}}
+						"eat": {"properties": {"image": "<bodyImage>:<eatState_state>.<eatState_frame>"}}
 					},
 					"bellyExpandState" : {
-						"1-to-0": {"properties": {"image": "<bodyImage>:<bellyExpandStateAnim>-<bellyExpandStateFrame>"}},
+						"1-to-0": {"properties": {"image": "<bodyImage>:<bellyExpandState_state>-<bellyExpandState_frame>"}},
 						"0-to-1": "1-to-0"
 					},
-					"bodyState": {
-						"0-idle": {"properties": {"image": "<bodyImage>:<bodyStateAnim>.<bodyStateFrame>"}},
+					"body": {
+						"0-idle": {"properties": {"image": "<bodyImage>:<body_state>.<body_frame>"}},
 						"1-idle": "0-idle"
 					}
 				}
