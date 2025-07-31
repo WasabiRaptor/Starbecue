@@ -3,6 +3,7 @@ function patch(config, path)
 
     addScript(config, { "baseParameters", "scripts" }, "/scripts/monster/SBQ_monster_spawn.lua")
     addScript(config, { "baseParameters", "statusSettings", "primaryScriptSources" }, "/scripts/monster/SBQ_monster_primary.lua")
+    addScript(config, { "baseParameters", "statusSettings", "primaryScriptSources" }, "/scripts/monster/SSVM_compatibility_monster.lua")
 
 
     return config
