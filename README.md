@@ -29,8 +29,6 @@ Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix)
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
 
-While not required it is recommended you install the Monster Config Core Loader mods found [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442860690) and [here](https://steamcommunity.com/sharedfiles/filedetails/?id=2442873217), if you're using Stardust Core then you should get [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2690363974) and if you're using FU you'll also need [this](https://steamcommunity.com/sharedfiles/filedetails/?id=2442880727) because it should fix potential compatibility issues.
-
 Further steps are somewhat OS specific!
 
 ## Windows

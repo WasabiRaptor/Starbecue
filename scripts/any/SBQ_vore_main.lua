@@ -2198,7 +2198,10 @@ function _Occupant:sendEntityMessage(...)
 end
 
 function _Occupant:animProperty(property)
-	return animator.partProperty(self.seat, property)
+    return animator.partProperty(self.seat, property)
+end
+function _Occupant:animNextProperty(property)
+	return animator.partNextProperty(self.seat, property)
 end
 function _Occupant:getPublicProperty(property)
 	return world.entityStatusProperty(self.entityId, property)
