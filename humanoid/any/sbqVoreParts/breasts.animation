@@ -145,7 +145,10 @@
 				},
 				"partStates": {
 					"breasts_rightState": {
-						"idle": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>" } },
+						"idle": { "properties": {
+							"image": "<breastsImagePath>front.png:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breastsImagePath>back.png:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -165,12 +168,18 @@
 						"none": { "properties": {} }
 					},
 					"breasts_rightExpandState" : {
-						"expand": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<breastsImagePath>front.png:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breastsImagePath>back.png:<breasts_rightInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
 						"squishBreasts" : {
-							"properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<rpActionState_state>.<rpActionState_frame>" },
+							"properties": {
+								"image": "<breastsImagePath>front.png:<breasts_rightSize>-<rpActionState_state>.<rpActionState_frame>",
+								"flippedImage": "<breastsImagePath>back.png:<breasts_rightSize>-<rpActionState_state>.<rpActionState_frame>"
+							},
 							"frameProperties" : {
 								"0.5-particles_front" : [[0.125,-0.375],[0.125,-0.375],[0.25,-0.375],[0.25,-0.375]],
 								"1-particles_front" : [[0.25,-0.5],[0.25,-0.5],[0.375,-0.5],[0.375,-0.5]],
@@ -209,7 +218,10 @@
 				},
 				"partStates": {
 					"breasts_leftState": {
-						"idle": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>" } },
+						"idle": { "properties": {
+							"image": "<breastsImagePath>back.png:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breastsImagePath>front.png:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -229,12 +241,18 @@
 						"none": { "properties": {} }
 					},
 					"breasts_leftExpandState" : {
-						"expand": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<breastsImagePath>back.png:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breastsImagePath>front.png:<breasts_leftInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
 						"squishBreasts" : {
-							"properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<rpActionState_state>.<rpActionState_frame>" },
+							"properties": {
+								"image": "<breastsImagePath>back.png:<breasts_leftSize>-<rpActionState_state>.<rpActionState_frame>",
+								"flippedImage": "<breastsImagePath>front.png:<breasts_leftSize>-<rpActionState_state>.<rpActionState_frame>"
+							},
 							"frameProperties" : {
 								"0.5-particles_front" : [[0.125,-0.375],[0.125,-0.375],[0.25,-0.375],[0.25,-0.375]],
 								"1-particles_front" : [[0.25,-0.5],[0.25,-0.5],[0.375,-0.5],[0.375,-0.5]],
@@ -291,7 +309,10 @@
 				},
 				"partStates": {
 					"breasts_rightState": {
-						"idle": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>" } },
+						"idle": { "properties": {
+							"image": "<breastsImagePath>front.png:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breastsImagePath>back.png:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -311,11 +332,17 @@
 						"none": { "properties": {} }
 					},
 					"breasts_rightExpandState" : {
-						"expand": { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<breastsImagePath>front.png:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breastsImagePath>back.png:<breasts_rightInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
-						"squishBreasts" : { "properties": { "image": "<breastsImagePath><right>.png:<breasts_rightSize>-<rpActionState_state>.<rpActionState_frame>" } }
+						"squishBreasts" : { "properties": {
+							"image": "<breastsImagePath>front.png:<breasts_rightSize>-<rpActionState_state>.<rpActionState_frame>",
+							"flippedImage": "<breastsImagePath>back.png:<breasts_rightSize>-<rpActionState_state>.<rpActionState_frame>"
+							} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -338,7 +365,10 @@
 				},
 				"partStates": {
 					"breasts_leftState": {
-						"idle": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>" } },
+						"idle": { "properties": {
+							"image": "<breastsImagePath>back.png:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breastsImagePath>front.png:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -358,11 +388,18 @@
 						"none": { "properties": {} }
 					},
 					"breasts_leftExpandState" : {
-						"expand": { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<breastsImagePath>back.png:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breastsImagePath>front.png:<breasts_leftInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"rpActionState" : {
-						"squishBreasts" : { "properties": { "image": "<breastsImagePath><left>.png:<breasts_leftSize>-<rpActionState_state>.<rpActionState_frame>" } }
+						"squishBreasts" : { "properties": {
+							"image": "<breastsImagePath>back.png:<breasts_leftSize>-<rpActionState_state>.<rpActionState_frame>",
+							"flippedImage": "<breastsImagePath>front.png:<breasts_leftSize>-<rpActionState_state>.<rpActionState_frame>"
+
+							} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

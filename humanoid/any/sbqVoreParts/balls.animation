@@ -103,7 +103,10 @@
 				},
 				"partStates": {
 					"balls_rightState": {
-						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>" } },
+						"idle": { "properties": {
+							"image": "<ballsImagePath>front.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
+							"flippedImage": "<ballsImagePath>back.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -123,7 +126,10 @@
 						"none": { "properties": {} }
 					},
 					"balls_rightExpandState" : {
-						"expand": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<ballsImagePath>front.png:<balls_rightInterpolateSize>-expand",
+							"flippedImage": "<ballsImagePath>back.png:<balls_rightInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -149,7 +155,10 @@
 				},
 				"partStates": {
 					"balls_leftState": {
-						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>" } },
+						"idle": { "properties": {
+							"image": "<ballsImagePath>back.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
+							"flippedImage": "<ballsImagePath>front.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
+						} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -169,7 +178,10 @@
 						"none": { "properties": {} }
 					},
 					"balls_leftExpandState" : {
-						"expand": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<ballsImagePath>back.png:<balls_leftInterpolateSize>-expand",
+							"flippedImage": "<ballsImagePath>front.png:<balls_leftInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -195,7 +207,10 @@
 				},
 				"partStates": {
 					"balls_rightState": {
-						"idle": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>" } },
+						"idle": { "properties": {
+							"image": "<ballsImagePath>front.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
+							"flippedImage": "<ballsImagePath>back.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -215,7 +230,10 @@
 						"none": { "properties": {} }
 					},
 					"balls_rightExpandState" : {
-						"expand": { "properties": { "image": "<ballsImagePath><right>.png:<balls_rightInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<ballsImagePath>front.png:<balls_rightInterpolateSize>-expand",
+							"flippedImage": "<ballsImagePath>back.png:<balls_rightInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -241,7 +259,10 @@
 				},
 				"partStates": {
 					"balls_leftState": {
-						"idle": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>" } },
+						"idle": { "properties": {
+							"image": "<ballsImagePath>back.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
+							"flippedImage": "<ballsImagePath>front.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
+							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -261,7 +282,10 @@
 						"none": { "properties": {} }
 					},
 					"balls_leftExpandState" : {
-						"expand": { "properties": { "image": "<ballsImagePath><left>.png:<balls_leftInterpolateSize>-expand" } },
+						"expand": { "properties": {
+							"image": "<ballsImagePath>back.png:<balls_leftInterpolateSize>-expand",
+							"flippedImage": "<ballsImagePath>front.png:<balls_leftInterpolateSize>-expand"
+							} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
