@@ -38,31 +38,6 @@ Occupants = {
 	locations = {}
 }
 
-function controlPressed(seat, control, time)
-	if SpeciesScript.active and Occupants.seat[seat] then
-		Occupants.seat[seat]:controlPressed(control, time)
-	else
-		local eid = loungeable.entityLoungingIn(seat)
-		if eid and world.entityExists(eid) then
-			world.sendEntityMessage(eid, "sbqReleased")
-		end
-		loungeable.setLoungeEnabled(seat, false)
-	end
-	-- sb.logInfo("Pressed:"..sb.printJson({seat,control,time}))
-end
-function controlReleased(seat, control, time)
-	if SpeciesScript.active and Occupants.seat[seat] then
-		Occupants.seat[seat]:controlReleased(control, time)
-	else
-		local eid = loungeable.entityLoungingIn(seat)
-		if eid and world.entityExists(eid) then
-			world.sendEntityMessage(eid, "sbqReleased")
-		end
-		loungeable.setLoungeEnabled(seat, false)
-	end
-	-- sb.logInfo("Released:"..sb.printJson({seat,control,time}))
-end
-
 function sbq.init(config)
 	status.clearPersistentEffects("sbqLockDown")
 	status.clearPersistentEffects("sbqHideSlots")
@@ -1518,11 +1493,6 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 			break
 		end
 	end
-	-- -- if in the future we ever can have dynamic animation parts and seats
-	-- local occupantAnim = sbq.replaceConfigTags(
-	-- 	sbq.fetchConfigArray(sbq.voreConfig.occupantAnimationConfig or "/humanoid/any/voreOccupant.animation"),
-	-- 	{occupant = seat}
-	-- )
 
 	-- if there is no available seat we cannot add the occupant
 	if not seat then return false end
@@ -1542,7 +1512,20 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 		struggleCount = 0,
 		struggleVec = {0,0},
 		locationStore = {},
-		persistentStatusEffects = jarray()
+		persistentStatusEffects = jarray(),
+		controls = {
+			Left = { last = false, time = 0 },
+			Right = { last = false, time = 0 },
+			Up = { last = false, time = 0 },
+			Down = { last = false, time = 0 },
+			PrimaryFire = { last = false, time = 0 },
+			AltFire = { last = false, time = 0 },
+			Special1 = { last = false, time = 0 },
+			Special2 = { last = false, time = 0 },
+			Special3 = { last = false, time = 0 },
+			Walk = { last = false, time = 0 }, -- shift
+			-- Interact = { last = false, time = 0 }
+		}
 	}
 	return Occupants.finishOccupantSetup(occupant)
 end
@@ -1621,7 +1604,7 @@ function Occupants.finishOccupantSetup(occupant)
 	world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 
 	sbq.forceTimer(occupant.seat .. "Timeout", 1, function()
-        local occupant = Occupants.entityId[tostring(eid)]
+		local occupant = Occupants.entityId[tostring(eid)]
 
 		if occupant and (occupant:entityLoungingIn() ~= occupant.entityId) then occupant:remove("failedToLounge") end
 	end)
@@ -1748,7 +1731,7 @@ end
 
 
 function _Occupant:update(dt)
-    local location = self:getLocation()
+	local location = self:getLocation()
 	-- sbq.logInfo(world.entityLoungeAnchor(sbq.entityId(), self:getLoungeIndex()))
 	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove("noLongerLounging") end
 	if location.occupancy.settingsDirty then self:refreshLocation() end
@@ -1789,6 +1772,20 @@ function _Occupant:update(dt)
 		end
 		if oldMultiplier ~= self.sizeMultiplier then
 			location:markSizeDirty()
+		end
+	end
+	for k, v in pairs(self.controls) do
+		local held = self:controlHeld(k)
+		if v.last == held then
+			v.time = v.time + dt
+		else
+			if held then
+				self:controlPressed(k, v.time)
+			else
+				self:controlReleased(k, v.time)
+			end
+			v.time = 0
+			v.last = held
 		end
 	end
 	self:checkStruggleDirection(dt)
@@ -2012,7 +2009,7 @@ function _Occupant:attemptStruggle(control)
 				SpeciesScript:doAnimations(struggleAction.pressAnimations, { s_direction = direction }, self.entityId)
 		end
 		if (bonusTime > 0) then
-			if not self:controlHeld("Shift") then
+			if not self:controlHeld("Walk") then
 				status.modifyResource("energy", -(struggleAction.predCost or sbq.config.predStruggleCost) * powerMultiplier)
 			end
 			if not self:overConsumeResource("energy", (struggleAction.preyCost or sbq.config.preyStruggleCost) * powerMultiplier ) then return end
@@ -2085,7 +2082,7 @@ end
 
 function _Occupant:tryStruggleAction(inc, bonusTime)
 	if (not self.struggleAction) or (not self:active())
-		or self:controlHeld("Shift") or self:resourceLocked("energy")
+		or self:controlHeld("Walk") or self:resourceLocked("energy")
 		or (status.statPositive("sbqLockDown") and (status.resource("energy") > 0))
 	then return false end
 	if status.statPositive("sbqLockDown") then SpeciesScript:queueAction("lockDownClear", self.entityId) end
@@ -2113,7 +2110,7 @@ end
 
 function _Occupant:controlPressed(control, time)
 	if control == "Jump" then
-		if self:controlHeld("Shift") and self:controlHeld("Down") then
+		if self:controlHeld("Walk") and self:controlHeld("Down") then
 			SpeciesScript:emergencyEscape(self)
 			return
 		end
@@ -2198,7 +2195,7 @@ function _Occupant:sendEntityMessage(...)
 end
 
 function _Occupant:animProperty(property)
-    return animator.partProperty(self.seat, property)
+	return animator.partProperty(self.seat, property)
 end
 function _Occupant:animNextProperty(property)
 	return animator.partNextProperty(self.seat, property)
@@ -2215,8 +2212,8 @@ end
 function _Occupant:controlHeld(...)
 	return loungeable.controlHeld(self.seat, ...)
 end
-function _Occupant:controlHeldTime(...)
-	return loungeable.controlHeldTime(self.seat, ...)
+function _Occupant:controlHeldTime(control)
+	return self.controls[control].time
 end
 function _Occupant:aimPosition(...)
 	return loungeable.aimPosition(self.seat, ...)

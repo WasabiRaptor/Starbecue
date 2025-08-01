@@ -72,7 +72,9 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
+	
 	sbq.init({root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config", config.getParameter("voreConfig")})
+	
 	sbq.dialogueTree = sbq.fetchConfigArray(config.getParameter("dialogueTree"))
 	for _, script in ipairs((sbq.dialogueTree or {}).dialogueStepScripts or {}) do
 		require(script)

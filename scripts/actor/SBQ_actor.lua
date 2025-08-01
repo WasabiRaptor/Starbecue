@@ -52,9 +52,9 @@ function init()
 			local settings = sbq.settings[(isDom and "subBehavior") or "domBehavior"][action] or {}
 			if math.random() < (settings.willingness or 0) then
 				willingnessTable[action] = "yes"
-				sbq.setLoungeControlHeld("Shift")
+				sbq.setLoungeControlHeld("Walk")
 				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function()
-					sbq.releaseLoungeControl("Shift")
+					sbq.releaseLoungeControl("Walk")
 				end)
 			else
 				willingnessTable[action] = "no"
@@ -77,7 +77,7 @@ function init()
 			sbq.expectedActions[action] = nil
 			return
 		end
-		if (action == sbq.struggleAction) and not sbq.isLoungeControlHeld("Shift") then
+		if (action == sbq.struggleAction) and not sbq.isLoungeControlHeld("Walk") then
 			if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction." .. action, id) then
 				dialogueProcessor.speakDialogue()
 			end
