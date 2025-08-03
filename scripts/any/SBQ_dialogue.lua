@@ -53,7 +53,11 @@ dialogueProcessor.resultKeys = {
 	"emote",
 	"buttonText",
 	"tags",
-	"dismissTime"
+	"dismissTime",
+	"textDirectives",
+	"nameDirectives",
+	"font",
+	"nameFont"
 }
 
 function dialogueProcessor.processDialogueResults(i)

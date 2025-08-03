@@ -177,34 +177,44 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		dialogue.finished = true
 	end
 	local results = dialogueProcessor.processDialogueResults()
-	if results.imagePortrait then
-		_ENV.imagePortrait:setVisible(true)
-		_ENV.entityPortraitPanel:setVisible(false)
-		_ENV.imagePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
-		_ENV.nameLabel.width = _ENV.imagePortrait.imgSize[1]
-	elseif results.entityPortrait then
-		_ENV.imagePortrait:setVisible(false)
-		_ENV.entityPortraitPanel:setVisible(true)
-		_ENV.nameLabel.width = _ENV.entityPortraitPanel.size[1]
-		local canvas = widget.bindCanvas(_ENV.entityPortraitCanvas.backingWidget)
-		canvas:clear()
-		local portrait = world.entityPortrait(results.source, results.entityPortrait)
-		if portrait then
-			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), { 0, 6 * 4 }), { 4, 4 })
-		end
-	else
-		_ENV.imagePortrait:setVisible(false)
-		_ENV.entityPortraitPanel:setVisible(false)
-		_ENV.nameLabel.width = nil
+    if results.imagePortrait then
+        _ENV.imagePortrait:setVisible(true)
+        _ENV.entityPortraitPanel:setVisible(false)
+        _ENV.imagePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
+        _ENV.nameLabel.width = _ENV.imagePortrait.imgSize[1]
+    elseif results.entityPortrait then
+        _ENV.imagePortrait:setVisible(false)
+        _ENV.entityPortraitPanel:setVisible(true)
+        _ENV.nameLabel.width = _ENV.entityPortraitPanel.size[1]
+        local canvas = widget.bindCanvas(_ENV.entityPortraitCanvas.backingWidget)
+        canvas:clear()
+        local portrait = world.entityPortrait(results.source, results.entityPortrait)
+        if portrait then
+            canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), { 0, 6 * 4 }), { 4, 4 })
+        end
+    else
+        _ENV.imagePortrait:setVisible(false)
+        _ENV.entityPortraitPanel:setVisible(false)
+        _ENV.nameLabel.width = nil
+    end
+    local nameFont = results.nameFont or results.font
+    local nameTextDirectives = (results.nameDirectives or results.textDirectives or "").."^set;"
+	if nameFont then
+		nameTextDirectives = "^font="..nameFont..";"..nameTextDirectives
 	end
 	if results.name then
-		_ENV.nameLabel:setText(results.name)
+		_ENV.nameLabel:setText(nameTextDirectives..results.name)
 	else
 		_ENV.nameLabel:setText("")
 	end
 	_ENV.dialogueCont:setText(results.buttonText)
 
-	dialogueBox.text = sb.replaceTags(results.dialogue, results.tags)
+	local textDirectives = (results.textDirectives or "").."^set;"
+	if results.font then
+		textDirectives = "^font="..results.font..";"..textDirectives
+	end
+
+	dialogueBox.text = sb.replaceTags(textDirectives..results.dialogue, results.tags)
 	dialogueBox.textSound = results.textSound
 	dialogueBox.textSpeed = results.textSpeed
 	dialogueBox.textVolume = results.textVolume or 1
