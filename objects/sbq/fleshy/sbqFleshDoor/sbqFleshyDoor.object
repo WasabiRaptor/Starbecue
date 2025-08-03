@@ -9,7 +9,7 @@
 	"shortdescription" : "Sphincter Door",
 	"race" : "generic",
 
-	"learnBlueprintsOnPickup" : [ "sbqFleshyDoorCollission" ],
+	"learnBlueprintsOnPickup" : [ "sbqFleshyDoor" ],
 
 	//"apexDescription" : "A shielded door.",
 	//"avianDescription" : "A shielded door.",
@@ -26,10 +26,6 @@
 			"doorClose" : [ "/sfx/objects/fleshdoor_close.ogg" ]
 		}
 	},
-
-	"collissionObject" : "sbqFleshyDoorCollission",
-	"leftCollissionOffset" : [0,-4],
-	"rightCollissionOffset" : [-4,0],
 
 	"inventoryIcon" : "doorIcon.png",
 	"orientations" : [
