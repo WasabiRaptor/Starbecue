@@ -9,6 +9,7 @@ dialogueBox = {
 }
 local inital = true
 local doScrollText = true
+local doCustomFont = true
 function init()
 	_ENV.metagui.inputData.sbq.dialogue = nil
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()), function(actions)
@@ -19,11 +20,14 @@ function init()
 		end
 	end, function ()
 		_ENV.actionButton:setVisible(false)
-	end)
-	message.setHandler("sbqCloseDialogueBox", function ()
-		pane.dismiss()
-	end)
+    end)
+
+	-- message.setHandler("sbqCloseDialogueBox", function ()
+	-- 	pane.dismiss()
+    -- end)
+
 	doScrollText = world.sendEntityMessage(player.id(), "sbqCheckSetting", "scrollText"):result()
+	doCustomFont = world.sendEntityMessage(player.id(), "sbqCheckSetting", "customFont"):result()
 
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)
@@ -180,7 +184,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
     if results.imagePortrait then
         _ENV.imagePortrait:setVisible(true)
         _ENV.entityPortraitPanel:setVisible(false)
-        _ENV.imagePortrait:setFile(sb.assetPath(results.imagePortrait, results.imagePath or "/"))
+        _ENV.imagePortrait:setFile(sbq.assetPath(results.imagePortrait, results.imagePath or "/"))
         _ENV.nameLabel.width = _ENV.imagePortrait.imgSize[1]
     elseif results.entityPortrait then
         _ENV.imagePortrait:setVisible(false)
@@ -210,7 +214,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 	_ENV.dialogueCont:setText(results.buttonText)
 
 	local textDirectives = (results.textDirectives or "").."^set;"
-	if results.font then
+	if results.font and doCustomFont then
 		textDirectives = "^font="..results.font..";"..textDirectives
 	end
 

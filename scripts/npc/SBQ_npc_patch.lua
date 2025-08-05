@@ -7,6 +7,10 @@ function patch(config, path)
     addScript(config, { "scripts" }, "/scripts/npc/SBQ_npc_bmain.lua")
     addScript(config, { "statusControllerSettings", "primaryScriptSources" }, "/scripts/npc/SBQ_npc_primary.lua")
 
+    config.humanoidParameters = config.humanoidParameters or {}
+    if config.sbqNPC then
+        config.humanoidParameters.sbqEnabled = true
+    end
 
     return config
 end

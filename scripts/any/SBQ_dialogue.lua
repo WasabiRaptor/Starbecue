@@ -384,16 +384,21 @@ function dialogueProcessor.speakDialogue(callback)
 		end
 		return
 	end
-	if self.board then
-		self.interacted = true
-		self.board:setEntity("interactionSource", dialogue.target)
+    if self.board then
+        self.interacted = true
+        self.board:setEntity("interactionSource", dialogue.target)
+    end
+	local textDirectives = (results.textDirectives or "").."^set;"
+	if results.font then
+		textDirectives = "^font="..results.font..";"..textDirectives
 	end
+
 	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * utf8.len(results.dialogue))
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
 		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
-			sb.replaceTags(results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
+			sb.replaceTags(textDirectives..results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
 	else
-		sbq.sayDialogue(results.dialogue, results.tags, results.speechPortrait, results.emote)
+		sbq.sayDialogue(textDirectives..results.dialogue, results.tags, results.speechPortrait, results.emote)
 	end
 	dialogue.position = dialogue.position + 1
 	if dialogue.position > #(dialogue.result.dialogue or {}) then

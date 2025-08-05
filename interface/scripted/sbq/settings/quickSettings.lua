@@ -24,9 +24,7 @@ function _ENV.agree:onClick()
 	local first = not player.getProperty("sbqAgreedTerms")
 	player.setProperty("sbqAgreedTerms", true)
 	if first then
-		local params = player.getHumanoidParameters()
-		params.sbqEnabled = true
-		player.setHumanoidParameters(params)
+		player.setHumanoidParameter("sbqEnabled", true)
 		player.refreshHumanoidParameters()
 	end
 	_dismiss()

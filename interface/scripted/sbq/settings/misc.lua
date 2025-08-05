@@ -31,6 +31,7 @@ function init()
 		_ENV.upgradeInputPanel:setVisible(false)
 		_ENV.miscOtherPlayerLayout:clearChildren()
         _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "scrollText", makeLabel = true })
+        _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "customFont", makeLabel = true })
 	end
 	local source = sbq.entityId()
 	_ENV.healthBar.parent:setVisible(world.entityIsResource(source, "health") or false)

@@ -2,7 +2,7 @@ cfg = root.assetJson("/interface/scripted/sbq/shop/shop.ui")
 
 local dialogueBoxUi = root.assetJson("/interface/scripted/sbq/dialogueBox/dialogueBox.ui")
 for _, v in ipairs(dialogueBoxUi.scripts) do
-	table.insert(cfg.scripts, sb.assetPath(v, "/interface/scripted/sbq/dialogueBox/"))
+	table.insert(cfg.scripts, sbq.assetPath(v, "/interface/scripted/sbq/dialogueBox/"))
 end
 
 table.insert(cfg.children, {

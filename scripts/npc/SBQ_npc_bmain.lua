@@ -63,6 +63,10 @@ function init()
 	sbq.rollConvert()
 	if not convert then
 		sbq.setupPublicSettings()
+		if npc.getHumanoidParameter("sbqEnabled") and not config.getParameter("sbqNPC") then
+			npc.setHumanoidParameter("sbqEnabled")
+			npc.refreshHumanoidParameters()
+		end
 	end
 end
 
@@ -91,7 +95,7 @@ function sbq.rollConvert()
 						end
 						if npc.species() == config.getParameter("sbqConvertSpecies") then
 							local speciesList = root.assetJson("/interface/windowconfig/charcreation.config")
-							.speciesOrdering
+								.speciesOrdering
 							local badSpecies = true
 							local newSpecies
 							while badSpecies do

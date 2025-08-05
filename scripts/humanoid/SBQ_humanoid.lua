@@ -11,13 +11,14 @@ require("/scripts/any/SBQ_util.lua")
 -- end
 
 function refreshHumanoidParameters()
+	local humanoid = (player or npc)
 	old.refreshHumanoidParameters()
-	local humanoidConfig = player.humanoidConfig()
+	local humanoidConfig = humanoid.humanoidConfig()
 
 	sbq.refreshRemapTags()
 
-	if player.getHumanoidParameters().sbqEnabled and sbq.init then
-		sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
+	if humanoid.getHumanoidParameter("sbqEnabled") and sbq.init then
+		sbq.init({root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
 	end
 end
 
