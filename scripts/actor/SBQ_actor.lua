@@ -12,9 +12,7 @@ local seatToForce
 local function forceSeat()
 	if seatToForce then
 		if world.entityExists(seatToForce.source) then
-			mcontroller.setPosition(world.entityPosition(seatToForce.source))
 			local loungeAnchor = world.entityLoungeAnchor(seatToForce.source, seatToForce.index)
-
 			if loungeAnchor then
 				local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
 				if success then
