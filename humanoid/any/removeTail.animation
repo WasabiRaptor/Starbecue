@@ -4,33 +4,33 @@
 	},
 	"animatedParts" : {
 		"parts" : {
-			"body": {
-				"properties": {
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>;0;0" } },
-						"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<body_state>.<body_frame>?addmask=<bodyMaskPath><gender>body.png:<body_state>.<body_frame>;0;0" } },
-						"sit" : "duck",
-						"lay" : "duck",
-						"walk" : "duck",
-						"run" : "duck",
-						"jump" : "duck",
-						"fall" : "duck",
-						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
-					},
-					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<bodyMaskPath><gender>body.png:<bodyDanceFrame>;0;0" } },
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
-						"bust" : "head"
-					}
-				}
-			}
+			// "body": {
+			// 	"properties": {
+			// 	},
+			// 	"partStates": {
+			// 		"body": {
+			// 			"idle": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>;0;0" } },
+			// 			"duck": { "properties": { "image": "<bodyImagePath><gender>body.png:<body_state>.<body_frame>?addmask=<bodyMaskPath><gender>body.png:<body_state>.<body_frame>;0;0" } },
+			// 			"sit" : "duck",
+			// 			"lay" : "duck",
+			// 			"walk" : "duck",
+			// 			"run" : "duck",
+			// 			"jump" : "duck",
+			// 			"fall" : "duck",
+			// 			"swim" : "duck",
+			// 			"swimIdle" : "duck",
+			// 			"none": { "properties": {} }
+			// 		},
+			// 		"bodyDanceState" : {
+			// 			"dance": { "properties": { "image": "<bodyImagePath><gender>body.png:<bodyDanceFrame>?addmask=<bodyMaskPath><gender>body.png:<bodyDanceFrame>;0;0" } },
+			// 			"none": { "properties": {} }
+			// 		},
+			// 		"portraitMode" : {
+			// 			"head": { "properties": { "image": "<bodyImagePath><gender>body.png:<personalityIdle>?addmask=<bodyMaskPath><gender>body.png:<personalityIdle>?addmask=/humanoid/portraitMask.png;0;0" } },
+			// 			"bust" : "head"
+			// 		}
+			// 	}
+			// }
 		}
 	}
 }
