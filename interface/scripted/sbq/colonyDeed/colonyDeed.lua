@@ -12,7 +12,10 @@ sbq.tenantCatalogue = root.assetJson("/npcs/sbq/sbqTenantCatalogue.json")
 sbq.validTenantCatalogueList = {}
 sbq.tenantIndex = 0
 
+local drawable
 function init()
+    drawable = pane.drawable()
+
 	sbq.refreshDeedPage()
 	for name, tenantName in pairs(sbq.tenantCatalogue) do
 		sbq.populateCatalogueList(name, tenantName)
@@ -245,7 +248,7 @@ function sbq.insertTenant(slot)
 	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
 	tenant.overrides.scriptConfig.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
 	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
-	if world.getUniqueEntityId(tenant.uniqueId) then
+	if world.uniqueEntityId(tenant.uniqueId) then
 		sbq.playErrorSound()
 		interface.queueMessage(sbq.getString(":npcAlreadyExists"))
 		return
@@ -277,11 +280,11 @@ function sbq.refreshDeedPage()
 	for i, tenant in ipairs(storage.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
 		local portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
-		local id = world.getUniqueEntityId(tenant.uniqueId)
+		local id = world.uniqueEntityId(tenant.uniqueId)
 		if id then portrait = world.entityPortrait(id, "full") end
 		local canvasSize = {43,60}
 		if portrait then
-			local bounds = rect.size(sb.drawableBoundBox(portrait,true))
+			local bounds = rect.size(drawable.boundBoxAll(portrait,true))
 			canvasSize = {math.max(canvasSize[1], bounds[1]), math.max(canvasSize[2], bounds[2])}
 		end
 		local panel = { type = "panel", expandMode = { 0, 0 }, style = "flat", children = {
@@ -311,10 +314,12 @@ function sbq.refreshDeedPage()
 		end
 		canvas:clear()
 		if portrait then
-			canvas:drawDrawables(portrait, vec2.div(canvasWidget.size, 2))
+			local bounds = drawable.boundBoxAll(portrait, true)
+			local center = rect.center(bounds)
+			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 		end
 		function settings:onClick()
-			local id = world.getUniqueEntityId(tenant.uniqueId)
+			local id = world.uniqueEntityId(tenant.uniqueId)
 			if not id then sbq.playErrorSound() return end
 			sbq.addRPC(world.sendEntityMessage(id, "sbqSettingsPageData", player.id()), function(data)
 				if (not data) or ((not player.isAdmin()) and data.parentEntityData[2] and (entity.uniqueId() ~= data.parentEntityData[1])) then
@@ -326,7 +331,7 @@ function sbq.refreshDeedPage()
 			end)
 		end
 		function customize:onClick()
-			local id = world.getUniqueEntityId(tenant.uniqueId)
+			local id = world.uniqueEntityId(tenant.uniqueId)
 			if not id then sbq.playErrorSound() return end
 			world.sendEntityMessage(player.id(), "sbqCustomizeEntity", id)
 		end

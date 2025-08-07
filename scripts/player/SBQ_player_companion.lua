@@ -71,6 +71,6 @@ function _ENV.Recruit:_spawn(position, parameters)
 		self.uniqueId = scriptConfig.sbqOverrideUniqueId
 		scriptConfig.uniqueId = scriptConfig.sbqOverrideUniqueId
 	end
-	if world.getUniqueEntityId(self.uniqueId) then return end
+	if world.uniqueEntityId(self.uniqueId) then return end
 	old.recruit_spawn(self, position, parameters)
 end

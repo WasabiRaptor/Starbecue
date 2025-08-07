@@ -45,7 +45,7 @@ function init()
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 		and not sbq.loungingIn()
 	then
-		local eid = world.getUniqueEntityId(occupantData.predUUID)
+		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
 				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqRecieveOccupants", {sb.jsonMerge(occupantData,{entityId = entity.id()})}))
@@ -55,7 +55,7 @@ function init()
 			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
 				local occupantData = status.statusProperty("sbqOccupantData")
 				if occupantData then
-					local eid = world.getUniqueEntityId(occupantData.predUUID)
+					local eid = world.uniqueEntityId(occupantData.predUUID)
 					if not eid then
 						status.setStatusProperty("sbqOccupantData", nil)
 						status.clearPersistentEffects("sbqMissingPred")

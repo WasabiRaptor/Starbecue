@@ -1,16 +1,12 @@
 function sbq.fetchConfigArray(input, path)
-	if type(input) == "table" and input[1] then
-		local out = {}
+	if (type(input) == "table") and input[1] then
+		local out = input
 		for _, v in ipairs(input) do
-			out = sb.jsonMerge(out, sbq.fetchConfigArray(v, path))
+			out = sbq.fetchConfigArray(sb.jsonMerge(out, sbq.fetchConfigArray(v, path)), path)
 		end
 		return out
-	elseif type(input) == "string" then
-		if input:sub(1, 1) == "/" then
-			return sbq.fetchConfigArray(root.assetJson(input), path)
-		else
-			return sbq.fetchConfigArray(root.assetJson(path .. input), path)
-		end
+    elseif type(input) == "string" then
+		return sbq.fetchConfigArray(root.assetJson(sbq.assetPath(input, path)), path)
 	end
 	return input
 end
@@ -178,7 +174,8 @@ function sbq.checkInvalidSetting(value, setting, group, name)
 		local result = sbq.query(sbq.voreConfig.invalidSettings, { setting, value }) or
 			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, value }))
 		return sbq.query(sbq.worldInvalidSettings, { setting, result or value }) or
-			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, result or value })) or result
+			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, result or value })) or
+			result
 	end
 end
 
@@ -190,9 +187,11 @@ function sbq.setupSettingMetatables(entityType)
 	storage = storage or {}
 	sbq.refreshUpgrades()
 	sbq.voreConfig = sbq.voreConfig or {}
-	sbq.worldInvalidSettings = sb.jsonMerge(world.getProperty("sbqInvalidSettings") or sbq.config.serverInvalidSettings or
+	sbq.worldInvalidSettings = sb.jsonMerge(
+		world.getProperty("sbqInvalidSettings") or sbq.config.serverInvalidSettings or
 		{},
-		world.getProperty("sbqInvalidSettings_" .. entityType) or sbq.config.serverEntityTypeInvalidSettings[entityType] or {})
+		world.getProperty("sbqInvalidSettings_" .. entityType) or sbq.config.serverEntityTypeInvalidSettings[entityType] or
+		{})
 	storage.sbqSettings = storage.sbqSettings or {}
 
 	-- sanity to remove potential data leak
@@ -217,7 +216,6 @@ function sbq.setupSettingMetatables(entityType)
 		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings" }) then
 			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
 		end
-
 	end
 
 
@@ -235,7 +233,8 @@ function sbq.setupSettingMetatables(entityType)
 	sbq.settings = sb.jsonMerge(
 		sbq.settings,
 		world.getProperty("sbqOverrideSettings") or sbq.config.serverOverrideSettings or {},
-		world.getProperty("sbqOverrideSettings_" .. entityType) or sbq.config.serverEntityTypeOverrideSettings[entityType] or
+		world.getProperty("sbqOverrideSettings_" .. entityType) or
+		sbq.config.serverEntityTypeOverrideSettings[entityType] or
 		{}
 	)
 	if entityType == "player" then
@@ -272,7 +271,8 @@ function sbq.setupSettingMetatables(entityType)
 			if (sbq.defaultSettings[setting] == nil) then
 				sbq.logWarn(string.format("Removed setting '%s' no defined default value.", setting))
 			else
-				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nShould be type '%s'", setting, v, defaultType))
+				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nShould be type '%s'", setting, v,
+					defaultType))
 			end
 		end
 	end
@@ -285,7 +285,8 @@ function sbq.setupSettingMetatables(entityType)
 		if not sbq.config.groupedSettings[setting] then
 			local result = sbq.checkInvalidSetting(override or value or v, setting)
 			if result ~= nil then
-				sbq.debugLogInfo(string.format("Invalid setting '%s' value '%s' was set to temporary value '%s'", setting, v, result))
+				sbq.debugLogInfo(string.format("Invalid setting '%s' value '%s' was set to temporary value '%s'", setting,
+					v, result))
 				sbq.settings[setting] = result
 			end
 		end
@@ -331,9 +332,11 @@ function sbq.setupSettingMetatables(entityType)
 				if (type(v) ~= defaultType) then
 					storage.sbqSettings[k][name][setting] = nil
 					if (sbq.defaultSettings[k][name][setting] == nil) then
-						sbq.logWarn(string.format("Removed setting '%s.%s.%s'\nNo defined default value.", k, name, setting))
+						sbq.logWarn(string.format("Removed setting '%s.%s.%s'\nNo defined default value.", k, name,
+							setting))
 					else
-						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'", k, name, setting
+						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'",
+							k, name, setting
 							, v, sbq.defaultSettings[setting], defaultType))
 					end
 				end
@@ -347,7 +350,8 @@ function sbq.setupSettingMetatables(entityType)
 				end
 				local result = sbq.checkInvalidSetting(override or value or v, setting, k, name)
 				if result ~= nil then
-					sbq.debugLogInfo(string.format("Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'", k, name,
+					sbq.debugLogInfo(string.format(
+						"Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'", k, name,
 						setting, v, result))
 					sbq.settings[k][name][setting] = result
 				end

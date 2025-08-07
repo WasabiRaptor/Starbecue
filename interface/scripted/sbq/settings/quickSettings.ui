@@ -1,6 +1,9 @@
 { //  -*- grammar-ext: json -*-
 	"style" : "panel", // window (has titlebar), panel (just a frame) etc.
 	"size" : [320, 340], // *internal* size (not including chrome)
+	"resizable" : true,
+	"minSize" : [320, 340],
+
 	"uniqueBy" : "path",
 	"scripts" : [ "quickSettings.lua", "playerSettings.lua", "settings.lua" ],
 	"children" : [

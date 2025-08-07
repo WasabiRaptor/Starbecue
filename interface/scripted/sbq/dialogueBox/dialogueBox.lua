@@ -10,7 +10,9 @@ dialogueBox = {
 local inital = true
 local doScrollText = true
 local doCustomFont = true
+local drawable
 function init()
+	drawable = pane.drawable()
 	_ENV.metagui.inputData.sbq.dialogue = nil
 	sbq.addRPC(world.sendEntityMessage(pane.sourceEntity(), "sbqActionList", "request", player.id()), function(actions)
 		if actions and actions[1] then
@@ -194,7 +196,10 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
         canvas:clear()
         local portrait = world.entityPortrait(results.source, results.entityPortrait)
         if portrait then
-            canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), { 0, 6 * 4 }), { 4, 4 })
+			portrait = drawable.scaleAll(portrait, {4,4})
+			local bounds = drawable.boundBoxAll(portrait, true)
+			local center = rect.center(bounds)
+			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), center))
         end
     else
         _ENV.imagePortrait:setVisible(false)

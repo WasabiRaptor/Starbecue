@@ -604,7 +604,7 @@ function _State:requestAction(forcing, name, target, ...)
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
 				else
-					world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+					world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
 				end
 			end
 		end
@@ -613,7 +613,7 @@ function _State:requestAction(forcing, name, target, ...)
 			wait = dialogueProcessor.predictTime()
 			dialogueProcessor.speakDialogue(callback)
 		else
-			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+			world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
 			callback()
 		end
 	else
@@ -621,7 +621,7 @@ function _State:requestAction(forcing, name, target, ...)
 			dialogueProcessor.sendPlayerDialogueBox()
 			dialogueProcessor.speakDialogue()
 		else
-			world.sendEntityMessage(target, "scriptPaneMessage", "sbqCloseDialogueBox")
+			world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
 		end
 	end
 	return success or false, failReason or success or false, (time or 0) + wait, successfulFail, failReason2
@@ -1578,7 +1578,20 @@ function Occupants.insertOccupant(newOccupant)
 		struggleCount = 0,
 		struggleVec = {0,0},
 		locationStore = {},
-		persistentStatusEffects = jarray()
+        persistentStatusEffects = jarray(),
+		controls = {
+			Left = { last = false, time = 0 },
+			Right = { last = false, time = 0 },
+			Up = { last = false, time = 0 },
+			Down = { last = false, time = 0 },
+			PrimaryFire = { last = false, time = 0 },
+			AltFire = { last = false, time = 0 },
+			Special1 = { last = false, time = 0 },
+			Special2 = { last = false, time = 0 },
+			Special3 = { last = false, time = 0 },
+            Walk = { last = false, time = 0 }, -- shift
+			-- Interact = { last = false, time = 0 }
+		}
 	}, newOccupant, {
 		seat = seat,
 		subLocation = subLocation,
@@ -1683,7 +1696,7 @@ function Occupants.update(dt)
 	Occupants.lastScale = sbq.getScale()
 
 	if Occupants.queueHudRefresh then
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.settingsPageData())
+		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqRefreshHudOccupants", Occupants.list, sbq.settingsPageData())
 		Occupants.queueHudRefresh = false
 	end
 	if Occupants.refreshOccupantModifiers then
@@ -1900,13 +1913,13 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	local parent, recruitUUID, following = sbq.parentEntity()
 	local crewPred
 	if parent then
-		local eid = world.getUniqueEntityId(parent)
+		local eid = world.uniqueEntityId(parent)
 		if eid then
 			crewPred = following and (world.entityType(eid) == "player")
 		end
 	end
 	self:sendEntityMessage(
-		"scriptPaneMessage",
+		"sbqScriptPaneMessage",
 		"sbqRefreshLocationData",
 		entity.id(),
 		location:outputData(self.entityId),
@@ -1935,7 +1948,7 @@ function _Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.newOccupant then
 		Occupants.queueHudRefresh = true
 	else
-		world.sendEntityMessage(entity.id(), "scriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, sb.jsonMerge(self.flags, {
+		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, sb.jsonMerge(self.flags, {
 			time = self.time,
 			location = self.location,
 			subLocation = self.subLocation,

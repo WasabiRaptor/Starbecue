@@ -4,6 +4,9 @@
 	"title" : "Locked Settings Enforcer",
 	"icon" : "/interface/scripted/sbq/lockedDisabled.png",
 	"uniqueBy" : "path",
+	"resizable" : true,
+	"minSize" : [256, 256],
+
 	"scripts" : [ "overrideEnforcer.lua" ],
 	"sourceRadius": -1,
 	"children" : [

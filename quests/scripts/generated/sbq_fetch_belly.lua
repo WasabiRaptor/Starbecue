@@ -8,7 +8,7 @@ end
 
 function onUpdate(dt)
   -- Get quest giver's (pred's) entity id from their unique id
-  local questGiverEntityId = world.getUniqueEntityId(quest.parameters().questGiver.uniqueId)
+  local questGiverEntityId = world.uniqueEntityId(quest.parameters().questGiver.uniqueId)
   -- If quest giver can't be found, don't progress the quest
   if not questGiverEntityId then return end
 

@@ -8,7 +8,7 @@ function sbq.generateNPCItemCard(tenant)
 	elseif npcConfig.scriptConfig.sbqNPC then
 		item.parameters.rarity = "uncommon"
 	end
-	local eid = world.getUniqueEntityId(tenant.uniqueId)
+	local eid = world.uniqueEntityId(tenant.uniqueId)
 	if eid then
 		item.parameters.preySize = sbq.getEntitySize(eid)
 	end

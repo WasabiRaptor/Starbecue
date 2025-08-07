@@ -1,38 +1,36 @@
 { //  -*- grammar-ext: json -*-
 	"style" : "panel", // window (has titlebar), panel (just a frame) etc.
-	"size" : [96, 256], // *internal* size (not including chrome)
+	"size" : [104, 128], // *internal* size (not including chrome)
 	"title" : "",
 	"uniqueBy" : "path",
 	"anchor" : ["bottomRight", [3,3]],
 	"scripts" : ["/interface/scripted/sbq/settings/settings.lua", "predatorHud.lua"],
 	"forceTheme" : "starbound",
+	"resizable" : true,
+	"minSize" : [104, 64],
 	"dismissable" : false,
 	"dismissPrev" : false,
 	"paneLayer" : "Hud",
 	"children" : [
-		{ "type" : "layout", "mode" : "manual", "size" : [96,256], "children" : [
-			{ "type" : "image", "file" : "/humanoid/sbq/meowscarada/mask/3.png", "noAutoCrop" : true },
+		{"spacing": 0},
+		{ "type" : "image", "id" : "predHudTop", "file" : "predHudTop.png", "zLevel":999, "noAutoCrop" : true },
+		{ "type":"spacer", "size" :-7 },
+		{ "type" : "scrollArea", "id" : "occupantSlots", "scrollDirections":[0,1], "expandMode":[1,2], "children" : [
+			{"align":1, "spacing":0, "expandMode":[0,0]}
+		]},
 
 
-			{ "type" : "scrollArea", "id" : "occupantSlots", "scrollDirections":[0,1], "position" : [0, 19], "size" : [96,205], "children" : [
-				{"align":1, "spacing":-50, "expandMode":[0,0]}
+		{ "type" : "layout", "id" : "predHudBottom", "mode" : "manual", "size" : [104,32], "children" : [
+			{ "type" : "image", "file" : "predHudBottom.png", "noAutoCrop" : true },
+			{ "type" : "panel", "id" : "effectsPanel", "style" : "flat", "size" : [58,35], "position" : [8,1], "children" : [
+				{"mode":"vertical", "spacing":-3}
 			]},
-			{ "type" : "image", "id" : "predHudTop", "file" : "predHudTop.png", "zLevel":999, "position":[0,19], "noAutoCrop" : true },
+			{ "type" : "iconButton", "id" : "prevLocation", "position" : [1, 4], "image" : "pickup.png", "hoverImage" : "pickupover.png" },
+			{ "type" : "iconButton", "id" : "nextLocation", "position" : [1, 13], "image" : "pickup.png?flipy", "hoverImage" : "pickupover.png?flipy" },
 
-			{ "type" : "layout", "id" : "predHudBottom", "mode" : "manual", "position" : [0, 224], "size" : [96,32], "children" : [
+			{ "type" : "button", "id" : "lockDown", "caption" : ":lockDown", "toolTip" : ":lockDownDesc", "color":"880000", "size" : [28,28], "position" : [67, 3] },
 
-
-				{ "type" : "image", "file" : "predHudBottom.png", "noAutoCrop" : true },
-				{ "type" : "panel", "id" : "effectsPanel", "style" : "flat", "size" : [58,35], "position" : [8,1], "children" : [
-					{"mode":"vertical", "spacing":-3}
-				]},
-				{ "type" : "iconButton", "id" : "prevLocation", "position" : [1, 4], "image" : "pickup.png", "hoverImage" : "pickupover.png" },
-				{ "type" : "iconButton", "id" : "nextLocation", "position" : [1, 13], "image" : "pickup.png?flipy", "hoverImage" : "pickupover.png?flipy" },
-
-				{ "type" : "button", "id" : "lockDown", "caption" : ":lockDown", "toolTip" : ":lockDownDesc", "color":"880000", "size" : [28,28], "position" : [67, 3] },
-
-				{ "type" : "iconButton", "id" : "settings", "position" : [1, 22], "toolTip":":settings", "image" : "settings.png", "hoverImage" : "settingshover.png", "pressImage" : "settingspress.png" }
-			]}
+			{ "type" : "iconButton", "id" : "settings", "position" : [1, 22], "toolTip":":settings", "image" : "settings.png", "hoverImage" : "settingshover.png", "pressImage" : "settingspress.png" }
 		]}
 	]
 }

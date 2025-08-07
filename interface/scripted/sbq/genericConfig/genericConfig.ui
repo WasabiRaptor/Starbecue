@@ -2,6 +2,9 @@
 	"style" : "window", // window (has titlebar), panel (just a frame) etc.
 	"size" : [80, 80], // *internal* size (not including chrome)
 	"title" : ":config",
+	"resizable" : true,
+	"minSize" : [80, 80],
+
 	"icon" : "/items/active/sbqNominomicon/indicator.png",
 	"uniqueBy" : "path",
 	"scripts" : [ "genericConfig.lua" ],

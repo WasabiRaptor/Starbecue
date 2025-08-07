@@ -69,13 +69,13 @@ function dialogueProcessor.processDialogueResults(i)
 
 	results.source = results.source or sbq.entityId()
 	if type(results.source) == "string" then
-		results.source = world.getUniqueEntityId(results.source)
+		results.source = world.uniqueEntityId(results.source)
 	end
 	results.name = results.name or sbq.entityName(results.source)
 
 	results.target = results.target or dialogue.target
 	if type(results.target) == "string" then
-		results.target = world.getUniqueEntityId(results.target)
+		results.target = world.uniqueEntityId(results.target)
 	end
 
 	results.portrait = results.portrait or sbq.defaultPortrait
@@ -168,7 +168,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 				eid = sbq.entityId()
 				settings = sbq.settings
 			else
-				eid = world.getUniqueEntityId(dialogueTree.settings)
+				eid = world.uniqueEntityId(dialogueTree.settings)
 				if eid and world.entityExists(eid) then
 					settings = sbq.getPublicProperty(eid, "sbqPublicSettings")
 				end
@@ -395,7 +395,7 @@ function dialogueProcessor.speakDialogue(callback)
 
 	local lifetime = (results.dismissTime or 0) + (((results.textSpeed or 1) * sbq.config.textSpeedMul) * utf8.len(results.dialogue))
 	if status.statPositive("sbqIsPrey") and sbq.loungingIn() then
-		world.sendEntityMessage(sbq.loungingIn(), "scriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
+		world.sendEntityMessage(sbq.loungingIn(), "sbqScriptPaneMessage", "sbqPredHudPreyDialogue", entity.id(),
 			sb.replaceTags(textDirectives..results.dialogue, results.tags), results.textSound, results.textSpeed, results.textVolume or 1, lifetime)
 	else
 		sbq.sayDialogue(textDirectives..results.dialogue, results.tags, results.speechPortrait, results.emote)

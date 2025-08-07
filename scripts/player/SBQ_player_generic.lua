@@ -59,6 +59,10 @@ function init()
 			sourceEntity)
 	end)
 
+	message.setHandler("sbqScriptPaneMessage", function(_, _, messageType, ...)
+		player.interact("message", {messageType = messageType, messageArgs = {...}})
+	end)
+
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
 		if not uniqueId then return end
 		local tenantRewardsTable = player.getProperty("sbqTenantRewards") or {}
@@ -255,7 +259,7 @@ function update(dt)
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 		and not sbq.loungingIn()
 	then
-		local eid = world.getUniqueEntityId(occupantData.predUUID)
+		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
 				sbq.addNamedRPC("missingPredFound",

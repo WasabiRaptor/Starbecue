@@ -6,7 +6,9 @@ Occupants = {
 	list = {},
 	entityId = {}
 }
+local drawable
 function init()
+	drawable = pane.drawable()
 	local backingCanvas = widget.bindCanvas(_ENV.frame.backingWidget .. ".canvas")
 	backingCanvas:clear()
 	player.setProperty("sbqPredHudOpen", true)
@@ -98,61 +100,73 @@ function uninit()
 	player.setProperty("sbqPredHudOpen", false)
 end
 
-local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantLayout.config")
+local emptyTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/emptySlot.config")
+local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantSlot.config")
 function sbq.refreshOccupants()
 	Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
-	local occupants = #Occupants.list
-	_ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (math.max(occupants, sbq.gui.predHudMaxOccupants) + 1) + 5 })
-	for _, occupant in ipairs(Occupants.list) do
-		local layout = sbq.replaceConfigTags(occupantTemplate, { entityId = occupant.entityId, entityName = world.entityName(occupant.entityId) })
-		Occupants.entityId[tostring(occupant.entityId)] = occupant
-		_ENV.occupantSlots:addChild(layout)
-		sbq.refreshPortrait(occupant.entityId)
-		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
-		local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
-		if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
-			LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
-		elseif root.assetOrigin("/interface/scripted/sbq/"..occupant.location..".png") then
-			LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
-		end
-		ActionButton.toolTip = occupant.locationName
-		function ActionButton:onClick()
-			local actions = {}
-			for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predHudSelect", occupant.entityId):result() or {}) do
-				if action.available then
-					table.insert(actions, {
-						_ENV.metagui.formatText(action.name or (":"..action.action)),
-						function()
-							local result = world.sendEntityMessage(player.id(), "sbqQueueAction", action.action, occupant.entityId, table.unpack(action.args or {})):result()
-							if (not result[1]) and (result[2] ~= "targetMissing") then
-								sbq.playErrorSound()
-								interface.queueMessage(sbq.getString(":action_"..tostring(result[2])))
-							end
-						end,
-						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
-					})
-				else
-					table.insert(actions, {
-						"^#555;^set;" .. _ENV.metagui.formatText(action.name or (":" .. action.action)),
-						function() end,
-						_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
-					})
-				end
-			end
-			if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
-				table.insert(actions, ((#actions >= 1) and 2) or 1, { sbq.strings.interact, function()
-					player.interactWithEntity(occupant.entityId)
-				end, sbq.strings.interactDesc})
-			end
-
-			_ENV.metagui.dropDownMenu(actions,2)
+    local seatCount = player.getHumanoidParameter("sbqOccupantSlots") or 8
+	for i = 1, seatCount do
+        local occupant = Occupants.list[i]
+        if occupant then
+			addOccupantPortraitSlot(occupant)
+        else
+			addEmptySlot(i)
 		end
 	end
 
-	_ENV.occupantSlots:addChild({ type = "spacer", size = 25 * (occupants + 1) })
-	_ENV.predHudTop:setVisible((occupants >= 8))
 	sbq.updateBars(0)
+end
+
+function addOccupantPortraitSlot(occupant)
+	local layout = sbq.replaceConfigTags(occupantTemplate, { entityId = occupant.entityId, entityName = world.entityName(occupant.entityId) })
+	Occupants.entityId[tostring(occupant.entityId)] = occupant
+	_ENV.occupantSlots:addChild(layout)
+	sbq.refreshPortrait(occupant.entityId)
+	local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
+	local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
+	if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
+		LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
+	elseif root.assetOrigin("/interface/scripted/sbq/"..occupant.location..".png") then
+		LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
+	end
+	ActionButton.toolTip = occupant.locationName
+	function ActionButton:onClick()
+		local actions = {}
+		for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predHudSelect", occupant.entityId):result() or {}) do
+			if action.available then
+				table.insert(actions, {
+					_ENV.metagui.formatText(action.name or (":"..action.action)),
+					function()
+						local result = world.sendEntityMessage(player.id(), "sbqQueueAction", action.action, occupant.entityId, table.unpack(action.args or {})):result()
+						if (not result[1]) and (result[2] ~= "targetMissing") then
+							sbq.playErrorSound()
+							interface.queueMessage(sbq.getString(":action_"..tostring(result[2])))
+						end
+					end,
+					_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
+				})
+			else
+				table.insert(actions, {
+					"^#555;^set;" .. _ENV.metagui.formatText(action.name or (":" .. action.action)),
+					function() end,
+					_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))
+				})
+			end
+		end
+		if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
+			table.insert(actions, ((#actions >= 1) and 2) or 1, { sbq.strings.interact, function()
+				player.interactWithEntity(occupant.entityId)
+			end, sbq.strings.interactDesc})
+		end
+
+		_ENV.metagui.dropDownMenu(actions,2)
+	end
+end
+
+function addEmptySlot(slot)
+	local layout = sbq.replaceConfigTags(emptyTemplate, { slot = tostring(slot) })
+	_ENV.occupantSlots:addChild(layout)
 end
 
 local HPPal = {"751900", "c61000", "f72929", "ffa5a5"}
@@ -208,9 +222,11 @@ function sbq.refreshPortrait(entityId)
 	if not canvasWidget then return end
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 	canvas:clear()
-	local portrait = world.entityPortrait(entityId, "bust")
-	if portrait then
-		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), {0,6}))
+    local portrait = world.entityPortrait(entityId, "bust")
+    if portrait then
+		local bounds = drawable.boundBoxAll(portrait, true)
+        local center = rect.center(bounds)
+		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 	end
 end
 
