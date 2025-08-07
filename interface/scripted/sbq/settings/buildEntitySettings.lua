@@ -1,9 +1,9 @@
 cfg = root.assetJson("/interface/scripted/sbq/settings/settings.ui")
-sbq = config.getParameter("data").sbq or {}
+sbq = config.getParameter("data").sbq or {voreConfig = {}}
 
 local entityType = world.entityType(pane.sourceEntity())
 cfg.title = sbq.settingsPageName .. " " .. root.assetJson("/sbqStrings.config:settings")
-cfg.inputData = {sbq = {voreConfig = {}}}
+cfg.inputData = {sbq = sbq}
 if (entityType == "object") or (entityType == "vehicle") then
 	cfg.inputData.sbq.voreConfig.hideOtherSettings = true
 	cfg.inputData.sbq.voreConfig.hidePreySettings = true

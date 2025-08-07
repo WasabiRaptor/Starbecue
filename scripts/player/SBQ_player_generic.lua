@@ -27,6 +27,8 @@ function init()
 	sbq.humanoid = player
     sbq.humanoidIdentity = player.humanoidIdentity
 	sbq.setHumanoidIdentity = player.setHumanoidIdentity
+	sbq.getItemSlot = player.equippedItem
+	sbq.setItemSlot = player.setEquippedItem
 
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")

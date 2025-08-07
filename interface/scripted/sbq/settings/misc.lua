@@ -13,21 +13,21 @@ function init()
     local entityType = world.entityType(sbq.entityId())
 	if entityType == "npc" then
 		convertType = world.getNpcScriptParameter(sbq.entityId(), "sbqConvertType")
-		if convertType and (world.npcType(sbq.entityId()) ~= convertType) then
-			_ENV.resultTypeLabel:setText(convertType)
-			_ENV.convertNPCPanel:setVisible(true)
+        if convertType and (world.npcType(sbq.entityId()) ~= convertType) then
+            _ENV.resultTypeLabel:setText(convertType)
+            _ENV.convertNPCPanel:setVisible(true)
+        end
+		for k, v in pairs(sbq.cosmeticSlots) do
+			_ENV[k]:setItem(v)
 		end
-		if sbq.cosmeticSlots and world.getNpcScriptParameter(sbq.entityId(), "sbqNPC") then
-			_ENV.npcCosmeticSlots:setVisible(true)
-			for k, v in pairs(sbq.cosmeticSlots) do
-				_ENV[k]:setItem(v)
-			end
-			_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(sbq.entityId(), "sbqIsCustomizable") or false)
-		end
-	elseif entityType == "object" then
+		_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(sbq.entityId(), "sbqIsCustomizable") or false)
+    elseif entityType == "object" then
+		_ENV.npcCosmeticSlots:setVisible(false)
+
 		_ENV.stripping:setVisible(world.getObjectParameter(sbq.entityId(), "hasCosmeticSlots") or false)
 		_ENV.statBars:setVisible(false)
     elseif entityType == "player" then
+		_ENV.npcCosmeticSlots:setVisible(false)
 		_ENV.upgradeInputPanel:setVisible(false)
 		_ENV.miscOtherPlayerLayout:clearChildren()
         _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "scrollText", makeLabel = true })
@@ -153,6 +153,11 @@ end
 function misc.cosmeticUpdated(slot)
 	world.sendEntityMessage(pane.sourceEntity(), "sbqUpdateCosmeticSlot", slot.id, slot:item())
 end
+function misc.acceptAnyCosmetic(slot, item)
+    if not item then return true end
+	local itemType = root.itemType(item.name)
+	return (itemType == "headarmor") or (itemType == "chestarmor") or (itemType == "legsarmor") or (itemType == "backarmor")
+end
 
 _ENV.headCosmetic.acceptsItem = misc.cosmeticAcceptsItem
 _ENV.chestCosmetic.acceptsItem = misc.cosmeticAcceptsItem
@@ -163,6 +168,32 @@ _ENV.headCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.chestCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.legsCosmetic.onItemModified = misc.cosmeticUpdated
 _ENV.backCosmetic.onItemModified = misc.cosmeticUpdated
+
+_ENV.cosmetic1.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic2.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic3.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic4.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic5.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic6.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic7.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic8.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic9.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic10.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic11.onItemModified = misc.cosmeticUpdated
+_ENV.cosmetic12.onItemModified = misc.cosmeticUpdated
+
+_ENV.cosmetic1.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic2.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic3.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic4.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic5.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic6.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic7.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic8.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic9.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic10.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic11.acceptsItem = misc.acceptAnyCosmetic
+_ENV.cosmetic12.acceptsItem = misc.acceptAnyCosmetic
 
 function _ENV.customizeNPC:onClick()
 	world.sendEntityMessage(player.id(), "sbqCustomizeEntity", pane.sourceEntity())

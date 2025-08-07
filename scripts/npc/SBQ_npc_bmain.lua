@@ -29,7 +29,9 @@ function init()
 	sbq.humanoidIdentity = npc.humanoidIdentity
     sbq.setHumanoidIdentity = npc.setHumanoidIdentity
 	sbq.humanoid = npc
-	sbq.humanoidInit()
+    sbq.humanoidInit()
+	sbq.getItemSlot = npc.getItemSlot
+	sbq.setItemSlot = npc.setItemSlot
 
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
@@ -41,6 +43,10 @@ function init()
 		if convertType then
 			sbq.tenant_setNpcType(convertType)
 		end
+	end)
+	message.setHandler("sbqUpdateCosmeticSlot", function(_, _, slot, item)
+		setNpcItemSlot(slot, item)
+		tenant.backup()
 	end)
 
 	-- if self.behavior then

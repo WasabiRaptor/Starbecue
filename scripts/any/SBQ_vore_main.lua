@@ -276,8 +276,27 @@ function sbq.settingsPageData()
 		baseLocations = SpeciesScript.baseLocations or {},
 		currentScale = sbq.getScale(),
 		parentEntityData = { sbq.parentEntity() },
-		infuseOverrideSettings = sbq.infuseOverrideSettings or {}
+		infuseOverrideSettings = sbq.infuseOverrideSettings or {},
+		cosmeticSlots = {
+			headCosmetic = sbq.getItemSlot("headCosmetic"),
+			chestCosmetic = sbq.getItemSlot("chestCosmetic"),
+			legsCosmetic = sbq.getItemSlot("legsCosmetic"),
+			backCosmetic = sbq.getItemSlot("backCosmetic"),
+			cosmetic1 = sbq.getItemSlot("cosmetic1"),
+			cosmetic2 = sbq.getItemSlot("cosmetic2"),
+			cosmetic3 = sbq.getItemSlot("cosmetic3"),
+			cosmetic4 = sbq.getItemSlot("cosmetic4"),
+			cosmetic5 = sbq.getItemSlot("cosmetic5"),
+			cosmetic6 = sbq.getItemSlot("cosmetic6"),
+			cosmetic7 = sbq.getItemSlot("cosmetic7"),
+			cosmetic8 = sbq.getItemSlot("cosmetic8"),
+			cosmetic9 = sbq.getItemSlot("cosmetic9"),
+			cosmetic10 = sbq.getItemSlot("cosmetic10"),
+			cosmetic11 = sbq.getItemSlot("cosmetic11"),
+			cosmetic12 = sbq.getItemSlot("cosmetic12"),
+		}
 	}
+
 	return settingsPageData
 end
 

@@ -15,25 +15,10 @@ local old = {
 	equipped_primary = equipped.primary,
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
-	sbq_settingsPageData = sbq.settingsPageData,
 	setNpcItemSlot = _ENV.setNpcItemSlot
 }
 
 function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
-end
-function sbq.settingsPageData()
-	local settingsPageData = old.sbq_settingsPageData()
-	settingsPageData.cosmeticSlots = {
-		headCosmetic = sbq.getItemSlot("headCosmetic"),
-		chestCosmetic = sbq.getItemSlot("chestCosmetic"),
-		legsCosmetic = sbq.getItemSlot("legsCosmetic"),
-        backCosmetic = sbq.getItemSlot("backCosmetic"),
-    }
-	for i = 1, 12 do
-		local slotName = "cosmetic"..tostring(i)
-		settingsPageData.cosmeticSlots[slotName] = sbq.getItemSlot(slotName)
-	end
-	return settingsPageData
 end
 function _ENV.recruitable.setUniform()
 	-- we don't want them overriding the cosmetics we give them
@@ -102,10 +87,6 @@ function init()
 
 	message.setHandler("sbqPromptResponse", function (_,_,...)
 		sbq_hunting.promptResponse({...})
-	end)
-	message.setHandler("sbqUpdateCosmeticSlot", function(_, _, slot, item)
-		setNpcItemSlot(slot, item)
-		tenant.backup()
 	end)
 
 	message.setHandler("sbqUpdateIdentities", function (_,_, response)
