@@ -88,6 +88,7 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
     -- TODO make these more modular later
     -- vore occupant slots
     local occupantSlot = root.assetJson(humanoidConfig.sbqOccupantAnimation or "/humanoid/any/voreOccupant.animation")
+    humanoidConfig.sbqOccupantSlots = humanoidConfig.sbqOccupantSlots or root.assetJson("/sbq.config:seatCount") or 0
     for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
         humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
             part = "occupant" .. tostring(i),

@@ -27,7 +27,8 @@ function init()
 	sbq.species = npc.species
 	sbq.gender = npc.gender
 	sbq.humanoidIdentity = npc.humanoidIdentity
-	sbq.setHumanoidIdentity = npc.setHumanoidIdentity
+    sbq.setHumanoidIdentity = npc.setHumanoidIdentity
+	sbq.humanoid = npc
 	sbq.humanoidInit()
 
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld

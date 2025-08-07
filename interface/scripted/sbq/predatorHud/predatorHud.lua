@@ -105,7 +105,7 @@ local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occ
 function sbq.refreshOccupants()
 	Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
-    local seatCount = player.getHumanoidParameter("sbqOccupantSlots") or 8
+    local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
 	for i = 1, seatCount do
         local occupant = Occupants.list[i]
         if occupant then

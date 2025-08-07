@@ -341,7 +341,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	end
 
 	if space or (action.flags and action.flags.infusing) then
-		if (#Occupants.list + 1) <= sbq.config.seatCount then
+		if (#Occupants.list + 1) <= sbq.voreConfig.seatCount then
 			return true
 		else
 			return false, "noSlots"

@@ -138,7 +138,10 @@ function sbq.reloadVoreConfig(config)
 	sbq.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-	sbq.voreConfig = sbq.fetchConfigArray(config, sbq.directory())
+    sbq.voreConfig = sbq.fetchConfigArray(config, sbq.directory())
+	if sbq.humanoid then
+		sbq.voreConfig.seatCount = sbq.humanoid.humanoidConfig().sbqOccupantSlots
+	end
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 
@@ -1487,7 +1490,7 @@ function Occupants.newOccupant(entityId, size, location, subLocation, flags)
 	end
 	local seat
 	-- check for unoccupied occupant seat
-	for i = 1, (sbq.voreConfig.seatCount or sbq.config.seatCount) do
+	for i = 1, sbq.voreConfig.seatCount do
 		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break
@@ -1544,7 +1547,7 @@ function Occupants.insertOccupant(newOccupant)
 
 	local seat
 	-- check for unoccupied occupant seat
-	for i = 1, sbq.config.seatCount do
+	for i = 1, sbq.voreConfig.seatCount do
 		if not (Occupants.seat["occupant"..i] or loungeable.entityLoungingIn("occupant"..i)) then
 			seat = "occupant"..i
 			break

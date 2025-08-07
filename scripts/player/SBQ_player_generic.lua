@@ -23,7 +23,8 @@ function init()
 	sbq.targetPosition = player.aimPosition
 	sbq.resetLounging = player.stopLounging
 	sbq.species = player.species
-	sbq.gender = player.gender
+    sbq.gender = player.gender
+	sbq.humanoid = player
     sbq.humanoidIdentity = player.humanoidIdentity
 	sbq.setHumanoidIdentity = player.setHumanoidIdentity
 
