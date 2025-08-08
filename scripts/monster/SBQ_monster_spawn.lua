@@ -17,27 +17,8 @@ function init()
 	sbq.sayPortrait = monster.sayPortrait
 	sbq.setLoungeControlHeld = monster.setLoungeControlHeld
 	sbq.isLoungeControlHeld = monster.isLoungeControlHeld
-	sbq.releaseLoungeControl = monster.releaseLoungeControl
 	sbq.loungingIn = monster.loungingIn
 	sbq.resetLounging = monster.resetLounging
-
-	-- if self.behavior then
-	-- 	local behavior = {}
-	-- 	local _behavior = self.behavior
-	-- 	function behavior:run(...)
-	-- 		if not status.statPositive("sbqIsPrey") then
-	-- 			return _behavior:run(...)
-	-- 		else
-	-- 			sbq.struggleBehavior(...)
-	-- 		end
-	-- 	end
-	-- 	setmetatable(behavior, {
-	-- 		__index = function (t, k)
-	-- 			return _behavior[k]
-	-- 		end
-	-- 	})
-	-- 	self.behavior = behavior
-	-- end
 
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData
@@ -68,7 +49,11 @@ end
 
 function update(dt)
 	sbq.checkRPCsFinished(dt)
-	sbq.checkTimers(dt)
+    sbq.checkTimers(dt)
+	if status.statPositive("sbqIsPrey") then
+		sbq.struggleBehavior(dt)
+	end
+
 	old.update(dt)
 end
 

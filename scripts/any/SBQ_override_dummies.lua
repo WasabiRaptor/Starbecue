@@ -39,9 +39,7 @@ end
 function sbq.getItemSlot(slot)
 end
 
-function sbq.setLoungeControlHeld(control)
-end
-function sbq.releaseLoungeControl(control)
+function sbq.setLoungeControlHeld(control, held)
 end
 function sbq.isLoungeControlHeld(control)
 end

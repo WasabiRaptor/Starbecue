@@ -300,9 +300,9 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 				if not results then sbq_hunting.nextTarget() return end
 				local success, failReason, time, successfulFail, failReason2 =  table.unpack(results)
 				if not success then sbq_hunting.nextTarget() return end
-				sbq.setLoungeControlHeld("Walk")
+				sbq.setLoungeControlHeld("Walk", true)
 				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
-					sbq.releaseLoungeControl("Walk")
+					sbq.setLoungeControlHeld("Walk", false)
 				end)
 				sbq_hunting.clearTarget()
 				sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
@@ -356,9 +356,9 @@ function sbq_hunting.subNoPrompt(target)
 			if not results then sbq_hunting.nextTarget() return end
 			local success, failReason, time, successfulFail, failReason2 =  table.unpack(results)
 			if not success then sbq_hunting.nextTarget() return end
-			sbq.setLoungeControlHeld("Walk")
+			sbq.setLoungeControlHeld("Walk", true)
 			sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function ()
-				sbq.releaseLoungeControl("Walk")
+				sbq.setLoungeControlHeld("Walk", false)
 			end)
 			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
 				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then

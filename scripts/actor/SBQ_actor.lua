@@ -54,9 +54,9 @@ function init()
 			local settings = sbq.settings[(isDom and "subBehavior") or "domBehavior"][action] or {}
 			if math.random() < (settings.willingness or 0) then
 				willingnessTable[action] = "yes"
-				sbq.setLoungeControlHeld("Walk")
+				sbq.setLoungeControlHeld("Walk", true)
 				sbq.forceTimer("willingPreyTime", sbq.config.willingPreyTime * 60, function()
-					sbq.releaseLoungeControl("Walk")
+					sbq.setLoungeControlHeld("Walk", false)
 				end)
 			else
 				willingnessTable[action] = "no"
@@ -112,6 +112,7 @@ function init()
 		status.setStatusProperty("sbqOccupantData", nil)
 		sbq.checkStuck()
 		sbq.timer("stuckCheck", 0.5, sbq.checkStuck)
+		-- self.behavior = old.behavior
 	end)
 
 	message.setHandler("sbqForceSit", function(_, _, data)
@@ -120,6 +121,10 @@ function init()
 		sbq.resetLounging()
 		seatToForce = data
 		forceSeat()
+		-- if self.behavior then
+		-- 	old.behavior = self.behavior
+		-- 	self.behavior = nil
+		-- end
 	end)
 
 	status.setPersistentEffects("sbqActorScript", {
@@ -129,7 +134,7 @@ end
 
 function update(dt)
 	old.update(dt)
-	forceSeat()
+    forceSeat()
 end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)
@@ -183,9 +188,9 @@ function sbq.struggleBehavior(dt)
 			local dir = struggleDirections[math.random(#struggleDirections)]
 			if dir then
 				if sbq.randomTimer(dir .. "Press", 0, 2, function()
-						sbq.releaseLoungeControl(dir)
+						sbq.setLoungeControlHeld(dir, false)
 					end) then
-					sbq.setLoungeControlHeld(dir)
+					sbq.setLoungeControlHeld(dir, true)
 				end
 			end
 		end

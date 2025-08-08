@@ -35,7 +35,6 @@ function init()
 
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
-	sbq.releaseLoungeControl = npc.releaseLoungeControl
 
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()
@@ -48,24 +47,6 @@ function init()
 		setNpcItemSlot(slot, item)
 		tenant.backup()
 	end)
-
-	-- if self.behavior then
-	-- 	local behavior = {}
-	-- 	local _behavior = self.behavior
-	-- 	function behavior:run(...)
-	-- 		if not status.statPositive("sbqIsPrey") then
-	-- 			_behavior:run(...)
-	-- 		else
-	-- 			sbq.struggleBehavior(...)
-	-- 		end
-	-- 	end
-	-- 	setmetatable(behavior, {
-	-- 		__index = function (t, k)
-	-- 			return _behavior[k]
-	-- 		end
-	-- 	})
-	-- 	self.behavior = behavior
-	-- end
 
 	sbq.rollConvert()
 	if not convert then
@@ -140,7 +121,10 @@ end
 
 function update(dt)
 	sbq.checkRPCsFinished(dt)
-	sbq.checkTimers(dt)
+    sbq.checkTimers(dt)
+	if status.statPositive("sbqIsPrey") then
+		sbq.struggleBehavior(dt)
+	end
 
 	old.update(dt)
 
