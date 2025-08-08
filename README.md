@@ -12,88 +12,23 @@ Check out `features.md` for a comprehensive list and explaination of every featu
 
 `FAQ.md` has a number of frequently asked questions, make sure to check it to see if theres an answer for you before poking any of the developers about it.
 
-`documentation.md` documents the changes made to the starbound executable that were made to be able to do the things I do in this mod.
-
 # Install
 
-Starbecue requires a modified executable that both improves and expands features of the game for modders to take advantage of, most feature changes were to be in service of achieving the intended fetish content in an easier manner, however the changes to the engine itself do not include any fetish specific content, and are not exlusively in service of such content, most overall were meant to improve the game experience for players and modders.
-
-If one wishes to use the modified engine without the fetish content, simply remove `starbecue.pak` from the mods folder, but keep `SBQ_engine_assets.pak` as the modified engine needs it to function.
-
-Make sure to delete any previously installed versions of starbecue within the `Starbound/mods/`
-This includes any version of `starbecue.pak` and `starboundSpeciesAnimOverrides.pak` or `SBQ_engine_assets.pak`
-
-**Starextensions is incompatible with any modified executable, remove it if it is installed!**
-
-Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix)
+Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix) or from [github](https://github.com/WasabiRaptor/Starbecue/releases)
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
 
-Further steps are somewhat OS specific!
+Starbecue as of version 4.0 uses [OpenSB-SBQ](https://github.com/WasabiRaptor/OpenStarbound/tree/SBQ) which is a specialized version of [OpenSB](https://github.com/OpenStarbound/OpenStarbound) and should be compatible with any mods that require it. In the future base OpenSB may be all that is required if my features get merged, as I am contributing to it's development.
 
-## Windows
+You will have downloaded a zip containing a portable installation of OpenSB-SBQ for your relevant OS, extract it and place it anywhere you want, but for the game to function you will need to retrieve `packed.pak` from your purchased copy of Starbound.
 
-### Setup Script
-Double dlick the provided `setup.bat` file to execute it
+On Steam, click on Starbound -> Properties -> Installed Files -> Browse. Then open the `assets` folder within that directory, you will find a `packed.pak` file, copy it into the `assets` folder of the OpenSB install. If you want to move your saves, copy the `storage` folder too. Or you can simply overwrite/merge the files in the steam Starbound folder with the provided ones to replace the steam install.
 
-The script has will have copied the files into the default steam starbound install, you can now play starbound with the mod!
+After that you're done! You can simply open the game executable which will be within the folder named after your relevant OS.
 
-if this didn't work, try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located.
+Unlike SBQ-Engine, OpenSB has no issues connecting to retail SB servers, just some of the expanded features will not function while doing so.
 
-### Manual Setup
-Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
-
-Place `starbecue.pak` and `SBQ_engine_assets.pak` files within `Starbound\mods\`
-
-if you downloaded the win64 version, you're going to open the `Starbound\win64\` folder
-
-Replace the `starbound.exe` file with the provided version
-if you are running a server, also replace `starbound_server.exe` provided seperately
-
-## linux
-
-### Setup Script
-
-Open the diretory containing these files within terminal, this can be done by left clicking the folder and selecting "New Terminal At Folder" or opening terminal and using `cd` to open the directory by typing the path (you can simply drag the folder into terminal rather than typing the path manually)
-
-Input the following commands
-`chmod +x ./install.sh`
-`./install.sh`
-
-The script should have copied the files into their correct place, you can now play starbound with the mod!
-
-if this didn't work try manual setup, or open the script in a text editor and change the starbound directory path to where yours is located.
-
-### Manual Setup
-
-Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
-
-Place `starbecue.pak` and `SBQ_engine_assets.pak` files within `Starbound/mods/`
-
-Replace the `starbound` file within `Starbound/linux/` with the provided version
-
-Replace the `starbound_server` file within `Starbound/linux/` with the provided version if you are running a server
-
-View the file properties on each executable and enable them as executables
-
-## macOS
-Sadly macos can not be supported due to Apple being Apple. Even if I did figure out how to make my machine properly include the libraries in the executable when I compile it, Apple simply would not allow the executable to run on other computers, without me purchasing a license for $99 USD or however much it is now.
-
-## Uninstall
-
-Open the `Starbound` directory by viewing its properties on steam, and clicking `Browse` on the `Installed Files` tab
-
-delete `starbecue.pak` in the `mods` folder
-
-If you are playing with other players who have the same SBQ executable, but simply do not wish to have SBQ content, you can stop here, following steps are for true full uninstall.
-
-delete `SBQ_engine_assets.pak` in the `mods` folder
-
-return to the `Installed Files` tab in steam and select `Verify integrity of game files`
-
-
-
-Steam will then re-download the unmodified versions of the game executable
+`starbecue.pak` is already placed within the mods folder of this portable install, it is also safe to remove it if one doesn't want to play with it.
 
 
 # Support Us!

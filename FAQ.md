@@ -1,7 +1,7 @@
 # FAQ
 
 ### Q: It's crashing when I try to start the game!
-> Manually verify each file is installed correctly, the script does its best to find where you have starbound installed to copy the files but it might not always work.
+> Make sure to have retrieved the base game `assets.pak`, look at the readme for instructions
 > If you're hosting a server, make sure you downloaded and are using the provided server executable.
 > Make sure to remove old versions.
 
@@ -24,7 +24,7 @@
 > Due to how starbound handles UI, the pred HUD has an invisible area above it that it extends into when it expands for the prey slots, this area is tecnically always part of the UI and therefore can 'cover' the teleport button if your screen size is too small, Starbound has no GUI scale option that could alleviate this and that's outside the scope of my engine modifications.
 
 ### Q: Why can't I eat more prey even though I have hammerspace?
-> Lounge positions in starbound must be pre-defined in the entity data, therefore they cannot be added to on the fly, I decided that 16 slots is a reasonable amount to be the limit.
+> As of current, you are limited to 8 slots, I am currently working on a feature to be able to decide how many slots you get, but it isn't ready yet.
 
 ### Q: If I get transformed and upgrade my ship while a different species will it break?
 > Thats a 'bug' in retail from modifying player data, and fixed in SBQ-Engine by having the ship's species as a seperate value in the player/ship data.
