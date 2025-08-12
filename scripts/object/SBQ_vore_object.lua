@@ -49,7 +49,7 @@ function init()
 		storage.sbqSettings.escapeDifficulty = storage.sbqSettings.escapeDifficulty or digestPower
 	end
 
-	sbq.init(config.getParameter("voreConfig"))
+	sbq.init(config.getParameter("sbqConfig"))
 end
 
 function update(dt)

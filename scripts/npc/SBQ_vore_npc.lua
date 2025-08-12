@@ -57,8 +57,13 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
-	if npc.getHumanoidParameter("sbqEnabled") then
-		sbq.init({root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config", config.getParameter("voreConfig")})
+	local humanoidConfig = npc.humanoidConfig()
+    if npc.getHumanoidParameter("sbqEnabled") then
+		if humanoidConfig.sbqConfig then
+            sbq.init(humanoidConfig.sbqConfig)
+        else
+			sbq.uninit()
+		end
 	else
 		npc.setHumanoidParameter("sbqEnabled", true)
 		npc.refreshHumanoidParameters()

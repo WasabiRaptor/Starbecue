@@ -36,8 +36,13 @@ function init()
 	sbq.settingsInit()
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then
-		if player.getHumanoidParameter("sbqEnabled") then
-			sbq.init(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
+        if player.getHumanoidParameter("sbqEnabled") then
+			local humanoidConfig = player.humanoidConfig()
+			if humanoidConfig.sbqConfig then
+				sbq.init(humanoidConfig.sbqConfig)
+			else
+				sbq.uninit()
+			end
 		else
 			player.setHumanoidParameter("sbqEnabled", true)
 			player.refreshHumanoidParameters()

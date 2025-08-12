@@ -16,8 +16,14 @@ function refreshHumanoidParameters()
 
 	sbq.refreshRemapTags()
 
-	if sbq.humanoid.getHumanoidParameter("sbqEnabled") and sbq.init then
-		sbq.init({root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config", config and config.getParameter("voreConfig")})
+    if sbq.humanoid.getHumanoidParameter("sbqEnabled") and sbq.init then
+        if humanoidConfig.sbqConfig then
+            sbq.init(humanoidConfig.sbqConfig)
+        else
+            sbq.uninit()
+        end
+    elseif sbq.uninit then
+		sbq.uninit()
 	end
 end
 

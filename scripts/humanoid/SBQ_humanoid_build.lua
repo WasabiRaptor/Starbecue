@@ -1,6 +1,7 @@
 local old = {
     build = build or function() end
 }
+
 local function fixSlotProperties(properties, slot)
     if not properties then return end
     if properties.zLevel then
