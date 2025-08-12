@@ -67,6 +67,29 @@ local function fixSlotAnimation(animation, slot)
     return animation
 end
 
+local function loadSBQModule(humanoidConfig, module)
+    if module.animation then
+        table.insert(humanoidConfig.animation.includes, module.animation)
+    end
+    if module.cosmeticAnimation then
+        local cosmeticAnimation = root.assetJson(module.cosmeticAnimation)
+        for i = 1, 20 do
+            humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(cosmeticAnimation, i))
+        end
+    end
+    if module.occupantAnimation then
+        local occupantSlot = root.assetJson(module.occupantAnimation)
+        for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
+            humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(occupantSlot, i))
+        end
+    end
+    if module.sbqConfig then
+        table.insert(humanoidConfig.sbqConfig.modules, module.sbqConfig)
+    end
+
+    return humanoidConfig
+end
+
 function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
     if humanoidParameters.sbqEnabled then
         humanoidConfig.useAnimation = true
@@ -78,19 +101,11 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
     humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
     local speciesConfig = root.speciesConfig(identity.species)
 
-    for _, v in ipairs(speciesConfig.animationCustom or {}) do -- temporary, will have to rethink this
-        if type(v) == "string" then
-            table.insert(humanoidConfig.animation.includes, v)
-        else
-            humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, v)
-        end
-    end
-
-    -- TODO make these more modular later
-    -- vore occupant slots
-    local occupantSlot = root.assetJson(humanoidConfig.sbqOccupantAnimation or "/humanoid/any/voreOccupant.animation")
     humanoidConfig.sbqOccupantSlots = humanoidConfig.sbqOccupantSlots or root.assetJson("/sbq.config:seatCount") or 0
-    for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
+    humanoidConfig.sbqConfig = humanoidConfig.sbqConfig or {
+        includes = jarray()
+    }
+    for i = 1, (humanoidConfig.sbqOccupantSlots) do
         humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
             part = "occupant" .. tostring(i),
             partAnchor = "loungeOffset",
@@ -101,14 +116,18 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
             usePartZLevel = true,
             dismountable = false,
         }
-        humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(occupantSlot, i))
     end
 
-    -- cosmetic slots
-    -- local cosmeticSlot = root.assetJson(humanoidConfig.sbqCosmeticAnimation or "/humanoid/any/voreOccupant.animation")
-    -- for i = 1, 20 do
-    --     humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(cosmeticSlot, i))
-    -- end
+    for slot, modules in pairs(speciesConfig.sbqModules) do
+        local selectedModule = humanoidParameters["sbqModule_" .. slot]
+        if selectedModule then
+            if modules[selectedModule] then
+                humanoidConfig = loadSBQModule(humanoidConfig, root.assetJson(modules[selectedModule]))
+            else
+                humanoidConfig = loadSBQModule(humanoidConfig, root.assetJson(modules.default))
+            end
+        end
+    end
 
     return humanoidConfig
 end
