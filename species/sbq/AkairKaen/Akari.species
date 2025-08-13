@@ -133,7 +133,7 @@
 	// if a color doesn't exist in the sprite, just use a duplicate entry, first is usually outline, second is usually shading, third is usually the main color, fourth is highlight
 	// you should *always* have a primary, secondary, you can define any others you want but they'll only be relevant if you use them later down the line
 	// flesh is probably safe to make up if it isn't defined in the sprite, it isn't required but I'd reccommend making a map for it
-	"baseColorMap" : {
+	"baseColorPalette" : {
 		"primary" : ["2a241f", "3a332c", "4d453d"],
 		"secondary" : ["bbac92", "e0d1b6", "fff0d5"],
 		"hair" : ["9e9369", "b9ae82", "e0d8b5"],

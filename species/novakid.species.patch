@@ -1,5 +1,193 @@
 [{"op":"merge", "path":"", "value": {
 
+	"baseColorPalette" : {
+		"primary" : ["f6b919", "fde03f", "fff8b5", "ffffff"],
+		"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
+		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"]
+	},
+
+	"sbqPartImages" : { // paths local to the species' folder used to generate images with replaced colors to match the species
+		// these same files can be manually created at the respective paths in the species' folder and have their entries removed here
+		// however then the sprites will not be automatically updated if the base sprites are, only manually cra
+		"sbq/belly.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives":[
+				"?replace;00adba=bc1002", // replaces the navel pixel color with one of the shading colors
+				["primary","primary"]
+			]
+		},
+		"sbq/belly_noNavel.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives":[
+				"?replace;00adba=eb3629", // replaces the navel pixel's color with the main body color, effectively getting rid of it.
+				["primary","primary"]
+			]
+		},
+		"sbq/infused/belly.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives":[
+				"?replace;00adba=bc1002", // replaces the navel pixel color with one of the shading colors
+				["primary","primary"]
+			]
+		},
+		"sbq/infused/belly_noNavel.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives":[
+				"?replace;00adba=eb3629", // replaces the navel pixel's color with the main body color, effectively getting rid of it.
+				["primary","primary"]
+			]
+		},
+
+		"sbq/cock.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives":[
+				["primary","primary"]
+			]
+		},
+		"sbq/ballsFront.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives":[
+				["primary","primary"]
+			]
+		},
+		"sbq/ballsBack.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives":[
+				["primary","primary"]
+			]
+		},
+
+		"sbq/infused/cock.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives":[
+				["primary","primary"]
+			]
+		},
+		"sbq/infused/ballsFront.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives":[
+				["primary","primary"]
+			]
+		},
+		"sbq/infused/ballsBack.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives":[
+				["primary","primary"]
+			]
+		},
+
+		"sbq/pussy.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives":[
+				["flesh","primary"]
+			]
+		},
+		"sbq/infused/pussy.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives":[
+				["flesh","primary"]
+			]
+		},
+
+		"sbq/breasts.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180","primary"], // this is the part of the breasts sprite that covers the shoulder
+				["flesh","flesh"] // we want the nipples to be the flesh color
+			]
+		},
+		"sbq/breastsFront.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180","primary"], // this is the part of the breasts sprite that covers the shoulder
+				["flesh","flesh"] // we want the nipples to be the flesh color
+			]
+		},
+		"sbq/breastsBack.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180","primary"], // this is the part of the breasts sprite that covers the shoulder
+				["flesh","flesh"] // we want the nipples to be the flesh color
+			]
+		},
+		"sbq/infused/breasts.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180"], // this is the part of the breasts sprite that covers the shoulder, we want to remove this color for infusion layer
+				["flesh","flesh"] // we want the nipples to be the flesh color
+			]
+		},
+		"sbq/infused/breastsFront.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180"], // this is the part of the breasts sprite that covers the shoulder, we want to remove this color for infusion layer
+				["flesh","flesh"] // we want the nipples to be the flesh color
+			]
+		},
+		"sbq/infused/breastsBack.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180"], // this is the part of the breasts sprite that covers the shoulder, we want to remove this color for infusion layer
+				["flesh","flesh"] // we want the nipples to be the flesh color
+			]
+		},
+
+		"sbq/breasts_noNipples.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180","primary"], // this is the part of the breasts sprite that covers the shoulder
+				["flesh","flesh"] // we want the nipples to be the base color to remove them
+			]
+		},
+		"sbq/breastsFront_noNipples.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180","primary"], // this is the part of the breasts sprite that covers the shoulder
+				["flesh","flesh"] // we want the nipples to be the base color  to remove them
+			]
+		},
+		"sbq/breastsBack_noNipples.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180","primary"], // this is the part of the breasts sprite that covers the shoulder
+				["flesh","flesh"] // we want the nipples to be the base color  to remove them
+			]
+		},
+		"sbq/infused/breasts_noNipples.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180"], // this is the part of the breasts sprite that covers the shoulder, we want to remove this color for infusion layer
+				["flesh","flesh"] // we want the nipples to be the base color to remove them
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180"], // this is the part of the breasts sprite that covers the shoulder, we want to remove this color for infusion layer
+				["flesh","flesh"] // we want the nipples to be the base color  to remove them
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png" : {
+			"sourceImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives":[
+				["primary","primary"],
+				["primary_180"], // this is the part of the breasts sprite that covers the shoulder, we want to remove this color for infusion layer
+				["flesh","flesh"] // we want the nipples to be the base color  to remove them
+			]
+		}
+	},
+
 	"sbqModules" : {
 		"belly" : {
 			"default" : "/path/to/config.config",
@@ -35,28 +223,6 @@
 			}
 		}
 	],
-	"colorRemapGlobalTags" : {
-		"cockColorRemap" : [
-				["primary","primary"]
-			],
-		"pussyColorRemap" : [
-				["flesh","primary"]
-			],
-		"ballsColorRemap" : [
-				["primary","primary"]
-			],
-		"breastsColorRemap" : [
-				["primary","primary"],
-				["primary_180","primary"],
-				["flesh","flesh", {"nipplesVisible":true}],
-				["flesh","primary", {"nipplesVisible":false}]
-			]
-	},
-	"baseColorMap" : {
-		"primary" : ["f6b919", "fde03f", "fff8b5", "ffffff"],
-		"secondary" : ["951500", "be1b00", "dc1f00", "f32200"],
-		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"]
-	},
 	"sbqConfig" : [
 		"/humanoid/any/vore.config",
 		{
