@@ -1146,8 +1146,8 @@
 				"partStates": {
 					"balls_rightState": {
 						"idle": { "properties": {
-							"image": "<ballsImagePath>front.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
-							"flippedImage": "<ballsImagePath>back.png:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
+							"image": "<ballsFrontImage>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
+							"flippedImage": "<ballsBackImage>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -1169,8 +1169,8 @@
 					},
 					"balls_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<ballsImagePath>front.png:<balls_rightInterpolateSize>-expand",
-							"flippedImage": "<ballsImagePath>back.png:<balls_rightInterpolateSize>-expand"
+							"image": "<ballsFrontImage>:<balls_rightInterpolateSize>-expand",
+							"flippedImage": "<ballsBackImage>:<balls_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -1195,8 +1195,8 @@
 				"partStates": {
 					"balls_leftState": {
 						"idle": { "properties": {
-							"image": "<ballsImagePath>back.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
-							"flippedImage": "<ballsImagePath>front.png:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
+							"image": "<ballsBackImage>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
+							"flippedImage": "<ballsFrontImage>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -1218,8 +1218,8 @@
 					},
 					"balls_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<ballsImagePath>back.png:<balls_leftInterpolateSize>-expand",
-							"flippedImage": "<ballsImagePath>front.png:<balls_leftInterpolateSize>-expand"
+							"image": "<ballsBackImage>:<balls_leftInterpolateSize>-expand",
+							"flippedImage": "<ballsFrontImage>:<balls_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
