@@ -107,7 +107,7 @@ function setupReplaceColors(config, parameters, identity)
 		speciesFile = root.speciesConfig(identity.imagePath or identity.species or "")
 	end
 	if not speciesFile then return end
-	if not speciesFile.baseColorMap then return end
+	if not speciesFile.baseColorPalette then return end
 	local identityTags = {
 
 	}
@@ -121,8 +121,8 @@ function setupReplaceColors(config, parameters, identity)
 		replaceMap = "",
 		replaceColors = (speciesFile.dropColorString and sb.replaceTags(speciesFile.dropColorString, identityTags)) or (identity.bodyColor or identity.bodyDirectives)..(identity.altColor or "")..(identity.hairColor or identity.hairDirectives)
 	}
-	for k, v in pairs(config.baseColorMap) do
-		replaceTags.replaceMap = replaceTags.replaceMap..sbq.replace(v, speciesFile.baseColorMap[k])
+	for k, v in pairs(config.baseColorPalette) do
+		replaceTags.replaceMap = replaceTags.replaceMap..sbq.replace(v, speciesFile.baseColorPalette[k])
 	end
 	parameters.imageKeys = sb.jsonMerge(config.imageKeys, replaceTags)
 	parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)

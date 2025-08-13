@@ -373,9 +373,9 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 
 	}
 	if not speciesIdentites[newIdentity.species] then
-		-- if oldSpeciesFile.baseColorMap and speciesFile.baseColorMap then
-		-- 	for k, oldColors in pairs(oldSpeciesFile.baseColorMap) do
-		-- 		for k2, newColors in pairs(speciesFile.baseColorMap) do
+		-- if oldSpeciesFile.baseColorPalette and speciesFile.baseColorPalette then
+		-- 	for k, oldColors in pairs(oldSpeciesFile.baseColorPalette) do
+		-- 		for k2, newColors in pairs(speciesFile.baseColorPalette) do
 		-- 			if (#oldColors >= #newColors) and (k == k2) then
 		-- 				for i, color in ipairs(newColors) do
 		-- 					preserveColors[color:lower()] = sbq.findIdentityColor(currentIdentity, oldColors[i])
