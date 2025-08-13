@@ -14,9 +14,7 @@ function refreshHumanoidParameters()
 	old.refreshHumanoidParameters()
 	local humanoidConfig = sbq.humanoid.humanoidConfig()
 
-	sbq.refreshRemapTags()
-
-    if sbq.humanoid.getHumanoidParameter("sbqEnabled") and sbq.init then
+    if humanoidConfig.sbqEnabled and sbq.init then
         if humanoidConfig.sbqConfig then
             sbq.init(humanoidConfig.sbqConfig)
         else
@@ -24,33 +22,6 @@ function refreshHumanoidParameters()
         end
     elseif sbq.uninit then
 		sbq.uninit()
-	end
-end
-
-function sbq.refreshRemapTags()
-	local defaultColorMap = root.assetJson("/humanoid/any/sbqVoreParts/palette.config")
-	local speciesConfig = root.speciesConfig(sbq.species())
-	if speciesConfig.useImagePathSpecies then
-		speciesConfig = root.speciesConfig(sbq.humanoidIdentity().imagePath or sbq.species())
-	end
-	for tag, remaps in pairs(speciesConfig.colorRemapGlobalTags or {}) do
-		local sourceColorMap = sbq.query(speciesConfig, { "colorRemapSources", tag })
-		if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-		local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
-			speciesConfig.baseColorMap or defaultColorMap)
-		--sb.logInfo(tag.." "..directives)
-		animator.setGlobalTag(tag, directives)
-	end
-	for part, tags in pairs(speciesConfig.colorRemapPartTags or {}) do
-		for tag, remaps in pairs(tags or {}) do
-			local sourceColorMap = sbq.query(speciesConfig, { "colorRemapSources", part, tag }) or
-				sbq.query(speciesConfig, { "colorRemapSources", tag })
-			if sourceColorMap then sourceColorMap = root.speciesConfig(sourceColorMap).baseColorMap end
-			local directives = sbq.remapColor(remaps, sourceColorMap or defaultColorMap,
-				speciesConfig.baseColorMap or defaultColorMap)
-			--sb.logInfo(tag.." "..directives)
-			animator.setPartTag(part, tag, directives)
-		end
 	end
 end
 
@@ -146,40 +117,6 @@ end
 
 function sbq.checkStarpounds(slot)
 	return starpoundsSlot.chest or starpoundsSlot.legs
-end
-
-function sbq.remapColor(remaps, fromMap, toMap)
-	local directives = "?replace"
-	for _, remap in ipairs(remaps or {}) do
-		if remap[1] and remap[2] and toMap then
-			local from = fromMap[remap[1]]
-			local to = toMap[remap[2]]
-			local check = remap[3]
-			if from and to and sbq.tableMatches(check, sbq.settings, true) then
-				for i, fromColor in ipairs(from) do
-					local toColor = to[i] or to[#to]
-					if (fromColor ~= toColor) then
-						directives = directives .. ";" .. fromColor .. "=" .. toColor
-					end
-				end
-			end
-		elseif remap[1] then
-			local from = fromMap[remap[1]]
-			if from then
-				for i, fromColor in ipairs(from) do
-					directives = directives .. ";" .. fromColor .. "=00000000" -- so colors can be removed
-				end
-			end
-		elseif sbq.tableMatches(remap.check, sbq.settings, true) then
-			for color, replace in pairs(remap or {}) do
-				if type(replace) == "string" then
-					directives = directives .. ";" .. color .. "=" .. replace
-				end
-			end
-			directives = directives .. "?replace"
-		end
-	end
-	return ((directives ~= "?replace") and directives) or ""
 end
 
 -- this function in it's current state was made explicitly to add a missing color to familar's palettes
