@@ -45,11 +45,11 @@ function checkRequirements(data)
 			if not root.itemConfig(item) then return end
 		end
     end
-	if data.checkMods then
-		for i, mod in ipairs(data.checkMods) do
-			if not root.assetSourceMetadata(mod) then return end
+	if data.checkSpecies then
+		for i, species in ipairs(data.checkSpecies) do
+			if not root.speciesConfig(species) then return end
 		end
-    end
+	end
 	if data.checkAssets then
 		for i, path in ipairs(data.checkAssets) do
 			if not root.assetOrigin(path) then return end
