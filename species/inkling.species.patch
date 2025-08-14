@@ -7,14 +7,14 @@
 			"globalTagDefaults": { // example overrides for relevant image parts but commented out
 				// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
 				// self explainitory
-				// "bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
-				// "cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
-				// "balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
-				// "balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+				// "bellyImage" : "/humanoid/any/sbqModules/belly/default.png",
+				// "cockImage" : "/humanoid/any/sbqModules/cock/default.png",
+				// "balls_frontImage" : "/humanoid/any/sbqModules/balls/default/front.png",
+				// "balls_backImage" : "/humanoid/any/sbqModules/balls/default/back.png",
 				// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
-				// "breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
-				// "breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
-				// "pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png"
+				// "breasts_frontImage" : "/humanoid/any/sbqModules/breasts/default/front.png",
+				// "breasts_backImage" : "/humanoid/any/sbqModules/breasts/default/back.png",
+				// "pussyImage" : "/humanoid/any/sbqModules/pussy/default.png"
 			}
 		}
 	],
@@ -62,7 +62,7 @@
 	],
 	"sbqPartImages": {
 		"sbq/belly.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=bc1002",
 
@@ -73,7 +73,7 @@
 			]
 		},
 		"sbq/belly_noNavel.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",
 
@@ -84,7 +84,7 @@
 			]
 		},
 		"sbq/infused/belly.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=bc1002",
 
@@ -95,7 +95,7 @@
 			]
 		},
 		"sbq/infused/belly_noNavel.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",
 
@@ -106,7 +106,7 @@
 			]
 		},
 		"sbq/cock.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -115,7 +115,7 @@
 			]
 		},
 		"sbq/infused/cock.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -124,7 +124,7 @@
 			]
 		},
 		"sbq/ballsFront.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -133,7 +133,7 @@
 			]
 		},
 		"sbq/infused/ballsFront.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -142,7 +142,7 @@
 			]
 		},
 		"sbq/ballsBack.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -151,7 +151,7 @@
 			]
 		},
 		"sbq/infused/ballsBack.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -160,7 +160,7 @@
 			]
 		},
 		"sbq/pussy.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"sourceImage": "/humanoid/any/sbqModules/pussy/default.png",
 			"remapDirectives": [
 				[
 					"flesh",
@@ -169,7 +169,7 @@
 			]
 		},
 		"sbq/infused/pussy.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"sourceImage": "/humanoid/any/sbqModules/pussy/default.png",
 			"remapDirectives": [
 				[
 					"flesh",
@@ -177,41 +177,8 @@
 				]
 			]
 		},
-		"sbq/breasts.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
-			"remapDirectives": [
-				[
-					"primary",
-					"primary"
-				],
-				[
-					"primary_180",
-					"primary"
-				],
-				[
-					"flesh",
-					"secondary"
-				]
-			]
-		},
-		"sbq/infused/breasts.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
-			"remapDirectives": [
-				[
-					"primary_180"
-				],
-				[
-					"primary",
-					"primary"
-				],
-				[
-					"flesh",
-					"secondary"
-				]
-			]
-		},
 		"sbq/breastsFront.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -228,7 +195,7 @@
 			]
 		},
 		"sbq/breastsBack.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -245,7 +212,7 @@
 			]
 		},
 		"sbq/infused/breastsFront.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
 			"remapDirectives": [
 				[
 					"primary_180"
@@ -261,7 +228,7 @@
 			]
 		},
 		"sbq/infused/breastsBack.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
 			"remapDirectives": [
 				[
 					"primary_180"
@@ -276,41 +243,8 @@
 				]
 			]
 		},
-		"sbq/breasts_noNipples.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
-			"remapDirectives": [
-				[
-					"primary",
-					"primary"
-				],
-				[
-					"primary_180",
-					"primary"
-				],
-				[
-					"flesh",
-					"primary"
-				]
-			]
-		},
-		"sbq/infused/breasts_noNipples.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
-			"remapDirectives": [
-				[
-					"primary_180"
-				],
-				[
-					"primary",
-					"primary"
-				],
-				[
-					"flesh",
-					"primary"
-				]
-			]
-		},
 		"sbq/breastsFront_noNipples.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -327,7 +261,7 @@
 			]
 		},
 		"sbq/breastsBack_noNipples.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
 			"remapDirectives": [
 				[
 					"primary",
@@ -344,7 +278,7 @@
 			]
 		},
 		"sbq/infused/breastsFront_noNipples.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
 			"remapDirectives": [
 				[
 					"primary_180"
@@ -360,7 +294,7 @@
 			]
 		},
 		"sbq/infused/breastsBack_noNipples.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
 			"remapDirectives": [
 				[
 					"primary_180"
