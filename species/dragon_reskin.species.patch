@@ -1,35 +1,8 @@
 {
 	"animationCustom": [
 		"/humanoid/any/removeTail.animation",
-		"/humanoid/any/humanoidPred.animation"
-	],
-	"baseColorPalette": {
-		"primary": [
-			"6f2919",
-			"a85636",
-			"e0975c",
-			"ffca8a"
-		],
-		"secondary": [
-			"735e3a",
-			"a38d59",
-			"d9c189"
-		],
-		"hair": [
-			"6f2919",
-			"a85636",
-			"e0975c",
-			"ffca8a"
-		],
-		"flesh": [
-			"702c55",
-			"8b3c6c",
-			"a94783"
-		]
-	},
-	"colorRemapGlobalTags": null,
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config"
+		"/humanoid/any/humanoidPred.animation",
+		{}
 	],
 	"sbqConfig": [
 		"/humanoid/any/vore.config",
@@ -41,10 +14,15 @@
 	],
 	"sbqPartImages": {
 		"sbq/belly.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqVoreParts/scaly/belly.png",
 			"remapDirectives": [
 				"?replace;00adba=bc1002",
-
+				{
+					"00adba": "7d0a01",
+					"check": {
+						"navelVisible": true
+					}
+				},
 				[
 					"primary",
 					"secondary"
@@ -52,10 +30,15 @@
 			]
 		},
 		"sbq/belly_noNavel.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqVoreParts/scaly/belly.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",
-
+				{
+					"00adba": "7d0a01",
+					"check": {
+						"navelVisible": true
+					}
+				},
 				[
 					"primary",
 					"secondary"
@@ -63,10 +46,15 @@
 			]
 		},
 		"sbq/infused/belly.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqVoreParts/scaly/belly.png",
 			"remapDirectives": [
 				"?replace;00adba=bc1002",
-
+				{
+					"00adba": "7d0a01",
+					"check": {
+						"navelVisible": true
+					}
+				},
 				[
 					"primary",
 					"secondary"
@@ -74,10 +62,15 @@
 			]
 		},
 		"sbq/infused/belly_noNavel.png": {
-			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"sourceImage": "/humanoid/any/sbqVoreParts/scaly/belly.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",
-
+				{
+					"00adba": "7d0a01",
+					"check": {
+						"navelVisible": true
+					}
+				},
 				[
 					"primary",
 					"secondary"
@@ -98,7 +91,7 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"flesh"
+					"primary"
 				]
 			]
 		},
@@ -114,10 +107,10 @@
 		"sbq/infused/ballsFront.png": {
 			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
 			"remapDirectives": [
-				[
-					"primary",
-					"flesh"
-				]
+                [
+                    "primary",
+                    "primary"
+                ]
 			]
 		},
 		"sbq/ballsBack.png": {
@@ -132,10 +125,10 @@
 		"sbq/infused/ballsBack.png": {
 			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
 			"remapDirectives": [
-				[
-					"primary",
-					"flesh"
-				]
+                [
+                    "primary",
+                    "primary"
+                ]
 			]
 		},
 		"sbq/pussy.png": {
@@ -152,7 +145,7 @@
 			"remapDirectives": [
 				[
 					"flesh",
-					"flesh"
+					"primary"
 				]
 			]
 		},
@@ -161,11 +154,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"primary_180",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -194,11 +187,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"primary_180",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -211,11 +204,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"primary_180",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -260,11 +253,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"primary_180",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -280,7 +273,7 @@
 				],
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -293,11 +286,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"primary_180",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -310,11 +303,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"primary_180",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -330,7 +323,7 @@
 				],
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",
@@ -346,7 +339,7 @@
 				],
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"flesh",

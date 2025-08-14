@@ -1,70 +1,379 @@
-[{"op":"merge", "path":"", "value": {
-
-	"baseColorPalette" : {
-		"primary" : ["242952", "323660", "41446f", "515384"],
-		"secondary" : ["45244a", "4f2e5d", "5f3770", "503d6f"],
-		"hair" : ["242952", "323660", "41446f", "515384"],
-		"flesh" : ["75759c", "8686aa", "acacd2"]
-	},
-	"colorRemapGlobalTags" : {
-		"bellyColorRemap" : [
-			{"00adba":"bc1002", "check" : {"navelVisible":true}}, // replaces the single pixel of the navel with a color in the primary palette to have it visible or not
-			{"00adba":"eb3629", "check" : {"navelVisible":false}},
-			["primary","primary"]
-		],
-		"cockColorRemap" : [
-			["primary","flesh"]
-		],
-		"pussyColorRemap" : [
-			["flesh","flesh"]
-		],
-		"ballsColorRemap" : [
-			["primary","primary"]
-		],
-		"breastsColorRemap" : [
-			["primary","primary"],
-			["primary_180","primary"], // this is for a few pixels near the top of the breasts where they attach to the chest in expand animations, usually the same as the main breast color
-			// but some sprites you may want to switch it out if the color immediately above the breasts is different
-			["flesh","flesh", {"nipplesVisible":true}], // replaces the nipple colors based on whether they're visible or not
-			["flesh","primary", {"nipplesVisible":false}]
-		]
-	},
-	"sbqConfig" : [
-		"/humanoid/any/vore.config", // path to the base vore config most humanoid races should share.
+{
+	// custom animation parameters for this species
+	"animationCustom": [
+		"/humanoid/any/humanoidPred.animation", // the parts that get added to the pred
+		// the seats and animations for the prey getting eaten
 		{
-			// setting values to lock to a specific value when playing as this species
-			"overrideSettings" : {
-			},
-			// default setting values for this species
-			"defaultSettings" : {
-				"nipplesVisble" : false,
-				"navelVisible" : true
+			"globalTagDefaults": { // example overrides for relevant image parts but commented out
+				// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
+				// self explainitory
+				// "bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
+				// "cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
+				// "balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
+				// "balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
+				// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
+				// "breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
+				// "breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
+				// "pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png"
 			}
 		}
 	],
-
-	// custom animation parameters for this species
-	"animationCustom" : [
-		"/humanoid/any/humanoidPred.animation", // the parts that get added to the pred
-		 // the seats and animations for the prey getting eaten
-		{"globalTagDefaults":{ // example overrides for relevant image parts but commented out
-			// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
-
-			// self explainitory
-			// "bellyImage" : "/humanoid/any/sbqVoreParts/belly.png",
-			// "cockImage" : "/humanoid/any/sbqVoreParts/cock.png",
-			// "balls_frontImage" : "/humanoid/any/sbqVoreParts/ballsFront.png",
-			// "balls_backImage" : "/humanoid/any/sbqVoreParts/ballsBack.png",
-			// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
-			// "breasts_frontImage" : "/humanoid/any/sbqVoreParts/breastsFront.png",
-			// "breasts_backImage" : "/humanoid/any/sbqVoreParts/breastsBack.png",
-			// "pussyImage" : "/humanoid/any/sbqVoreParts/pussy.png"
-		}}
-	],
-
+	"baseColorPalette": {
+		"primary": [
+			"242952",
+			"323660",
+			"41446f",
+			"515384"
+		],
+		"secondary": [
+			"45244a",
+			"4f2e5d",
+			"5f3770",
+			"503d6f"
+		],
+		"hair": [
+			"242952",
+			"323660",
+			"41446f",
+			"515384"
+		],
+		"flesh": [
+			"75759c",
+			"8686aa",
+			"acacd2"
+		]
+	},
+	"colorRemapGlobalTags": null,
 	// data to used when this species is infused (Sentient Fat, Belly TF, CTF etc.)
-	"infuseData" : [
+	"infuseData": [
 		"/humanoid/any/basicInfuseData.config" // a path to base values all species should share
-	]
+	],
+	"sbqConfig": [
+		"/humanoid/any/vore.config", // path to the base vore config most humanoid races should share.
+		{
+			// setting values to lock to a specific value when playing as this species
+			"overrideSettings": {},
+			// default setting values for this species
+			"defaultSettings": {
+				"nipplesVisble": false,
+				"navelVisible": true
+			}
+		}
+	],
+	"sbqPartImages": {
+		"sbq/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
 
-}}]
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		}
+	}
+}

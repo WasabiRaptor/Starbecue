@@ -118,7 +118,7 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
         }
     end
 
-    for slot, modules in pairs(speciesConfig.sbqModules) do
+    for slot, modules in pairs(humanoidConfig.sbqModules or {}) do
         local selectedModule = humanoidParameters["sbqModule_" .. slot]
         if selectedModule then
             if modules[selectedModule] then

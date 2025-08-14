@@ -1,841 +1,358 @@
-[{"op":"merge", "path":"", "value": {
-	"colorRemapGlobalTags" : {
-		"bellyColorRemap" : [
-				{"00adba":"bc1002", "check" : {"navelVisible":true}},
-				{"00adba":"eb3629", "check" : {"navelVisible":false}},
-				["primary","primary"]
-			],
-		"cockColorRemap" : [
-				["primary","flesh"]
-			],
-		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
-		"ballsColorRemap" : [
-				["primary","primary"]
-			],
-		"breastsColorRemap" : [
-				["primary","primary"],
-				["primary_180","primary"],
-				["flesh","flesh", {"nipplesVisible":true}],
-				["flesh","primary", {"nipplesVisible":false}]
-			]
-	},
-	"baseColorPalette" : {
-		"primary" : ["151515", "2a2a2a", "3f3f3f"],
-		"secondary" : ["151515", "2a2a2a", "3f3f3f"],
-		"hair" : ["735e3a", "a38d59", "d9c189", "f7e7b2"],
-		"flesh" : ["cc8309", "ffca2b", "ffca2b"]
-	},
-	"sbqConfig" : [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings" : {
-				"navelVisible" : false
-			}
-		}
-	],
-	"animationCustom" : [
+{
+	"animationCustom": [
 		"/humanoid/any/removeTail.animation",
 		"/humanoid/any/humanoidPred.animation"
 	],
-
-	"infuseData" : [
+	"baseColorPalette": {
+		"primary": [
+			"151515",
+			"2a2a2a",
+			"3f3f3f"
+		],
+		"secondary": [
+			"151515",
+			"2a2a2a",
+			"3f3f3f"
+		],
+		"hair": [
+			"735e3a",
+			"a38d59",
+			"d9c189",
+			"f7e7b2"
+		],
+		"flesh": [
+			"cc8309",
+			"ffca2b",
+			"ffca2b"
+		]
+	},
+	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
-	]
-}},
-	[
-		{
-			"op": "replace",
-			"path": "/bodyColor/0/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/0/ea1515",
-			"value": "ea1515fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/0/470e15",
-			"value": "470e15fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/1/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/1/ea1515",
-			"value": "CC5209fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/1/470e15",
-			"value": "963B07fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/2/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/2/ea1515",
-			"value": "58B123fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/2/470e15",
-			"value": "387016fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/3/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/3/ea1515",
-			"value": "DCB778fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/3/470e15",
-			"value": "967C52fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/4/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/4/ea1515",
-			"value": "63CEF1fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/4/470e15",
-			"value": "408499fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/5/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/5/ea1515",
-			"value": "F16398fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/5/470e15",
-			"value": "994062fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/6/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/6/ea1515",
-			"value": "C9C9C9fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/6/470e15",
-			"value": "898989fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/7/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/7/ea1515",
-			"value": "A426FFfe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/7/470e15",
-			"value": "5B1591fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/8/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/8/ea1515",
-			"value": "ffd760fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/8/470e15",
-			"value": "7f6b30fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/9/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/9/ea1515",
-			"value": "CC5209fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/9/470e15",
-			"value": "963B07fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/10/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/10/ea1515",
-			"value": "58B123fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/10/470e15",
-			"value": "387016fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/11/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/11/ea1515",
-			"value": "DCB778fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/11/470e15",
-			"value": "967C52fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/12/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/12/ea1515",
-			"value": "63CEF1fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/12/470e15",
-			"value": "408499fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/13/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/13/ea1515",
-			"value": "F16398fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/13/470e15",
-			"value": "994062fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/14/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/14/ea1515",
-			"value": "C9C9C9fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/14/470e15",
-			"value": "898989fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/15/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/15/ea1515",
-			"value": "A426FFfe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/15/470e15",
-			"value": "5B1591fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/16/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/16/ea1515",
-			"value": "ea1515fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/16/470e15",
-			"value": "470e15fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/17/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/17/ea1515",
-			"value": "CC5209fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/17/470e15",
-			"value": "963B07fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/18/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/18/ea1515",
-			"value": "58B123fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/18/470e15",
-			"value": "387016fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/19/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/19/ea1515",
-			"value": "DCB778fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/19/470e15",
-			"value": "967C52fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/20/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/20/ea1515",
-			"value": "63CEF1fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/20/470e15",
-			"value": "408499fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/21/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/21/ea1515",
-			"value": "F16398fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/21/470e15",
-			"value": "994062fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/22/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/22/ea1515",
-			"value": "C9C9C9fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/22/470e15",
-			"value": "898989fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/23/ffedea",
-			"value": "ffedeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/23/ea1515",
-			"value": "A426FFfe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/23/470e15",
-			"value": "5B1591fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/24/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/24/ea1515",
-			"value": "159aeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/24/470e15",
-			"value": "0e2b47fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/25/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/25/ea1515",
-			"value": "CC5209fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/25/470e15",
-			"value": "963B07fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/26/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/26/ea1515",
-			"value": "58B123fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/26/470e15",
-			"value": "387016fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/27/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/27/ea1515",
-			"value": "DCB778fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/27/470e15",
-			"value": "967C52fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/28/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/28/ea1515",
-			"value": "63CEF1fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/28/470e15",
-			"value": "408499fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/29/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/29/ea1515",
-			"value": "F16398fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/29/470e15",
-			"value": "994062fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/30/ffedea",
-			"value": "eafafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/30/ea1515",
-			"value": "A426FFfe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/30/470e15",
-			"value": "5B1591fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/31/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/31/ea1515",
-			"value": "a83d2dfe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/31/470e15",
-			"value": "3d1818fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/32/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/32/ea1515",
-			"value": "CC5209fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/32/470e15",
-			"value": "963B07fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/33/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/33/ea1515",
-			"value": "58B123fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/33/470e15",
-			"value": "387016fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/34/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/34/ea1515",
-			"value": "DCB778fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/34/470e15",
-			"value": "967C52fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/35/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/35/ea1515",
-			"value": "63CEF1fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/35/470e15",
-			"value": "408499fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/36/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/36/ea1515",
-			"value": "F16398fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/36/470e15",
-			"value": "994062fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/37/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/37/ea1515",
-			"value": "C9C9C9fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/37/470e15",
-			"value": "898989fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/38/ffedea",
-			"value": "ffefeafe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/38/ea1515",
-			"value": "A426FFfe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/38/470e15",
-			"value": "5B1591fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/39/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/39/ea1515",
-			"value": "8657d2fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/39/470e15",
-			"value": "302060fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/40/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/40/ea1515",
-			"value": "CC5209fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/40/470e15",
-			"value": "963B07fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/41/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/41/ea1515",
-			"value": "58B123fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/41/470e15",
-			"value": "387016fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/42/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/42/ea1515",
-			"value": "DCB778fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/42/470e15",
-			"value": "967C52fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/43/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/43/ea1515",
-			"value": "63CEF1fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/43/470e15",
-			"value": "408499fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/44/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/44/ea1515",
-			"value": "F16398fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/44/470e15",
-			"value": "994062fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/45/ffedea",
-			"value": "f8eafffe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/45/ea1515",
-			"value": "C9C9C9fe"
-		},
-		{
-			"op": "replace",
-			"path": "/bodyColor/45/470e15",
-			"value": "898989fe"
+	],
+	"sbqConfig": [
+		"/humanoid/any/vore.config",
+		{
+			"defaultSettings": {
+				"navelVisible": false
+			}
 		}
 	],
-	[
-		{
-			"op": "replace",
-			"path": "/undyColor/0/ffca2b",
-			"value": "ffca2bfe"
+	"sbqPartImages": {
+		"sbq/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/0/cc8309",
-			"value": "cc8309fe"
+		"sbq/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/1/ffca2b",
-			"value": "2bcafffe"
+		"sbq/infused/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/1/cc8309",
-			"value": "0983ccfe"
+		"sbq/infused/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/2/ffca2b",
-			"value": "ff8a15fe"
+		"sbq/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/2/cc8309",
-			"value": "cc5209fe"
+		"sbq/infused/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/3/ffca2b",
-			"value": "80ea15fe"
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/3/cc8309",
-			"value": "58b123fe"
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/4/ffca2b",
-			"value": "f1e3b8fe"
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/4/cc8309",
-			"value": "dcb778fe"
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+
+				[
+					"primary",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/5/ffca2b",
-			"value": "adf2fcfe"
+		"sbq/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/5/cc8309",
-			"value": "63cef1fe"
+		"sbq/infused/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/6/ffca2b",
-			"value": "fcadc1fe"
+		"sbq/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/6/cc8309",
-			"value": "f16398fe"
+		"sbq/infused/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/7/ffca2b",
-			"value": "f4f4f4fe"
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/7/cc8309",
-			"value": "c9c9c9fe"
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/8/ffca2b",
-			"value": "b959fffe"
+		"sbq/infused/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/8/cc8309",
-			"value": "a426fffe"
+		"sbq/infused/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/9/ffca2b",
-			"value": "262626fe"
+		"sbq/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
 		},
-		{
-			"op": "replace",
-			"path": "/undyColor/9/cc8309",
-			"value": "000000fe"
+		"sbq/infused/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
 		}
-	]
-]
+	}
+}

@@ -1,119 +1,64 @@
 {
-	"kind" : "sbq/vaporeonGiant",
-
-
-	"charCreationTooltip" : {
-		"title" : "Giant Vaporeon",
-		"subTitle" : "Dihydrogen Monoxide",
-		"description" : "Everyone's favorite fishcat, but bigger!"
-	},
-
-	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
-
-	"statusEffects" : [ { "stat":"breathProtection", "amount":1} ],
-	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
-
-	"skull" : "/humanoid/human/dead.png",
-	"effectDirectives" : "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=80b3ffFF;31a6ffFF=5476f0FF",
-	"defaultBlueprints" : {
-		"tier1" : [
-
-// Empty Hands
-			{ "item" : "flaghuman" },
-
-// Anvil
-			{ "item" : "humantier1head" },
-			{ "item" : "humantier1chest" },
-			{ "item" : "humantier1pants" },
-			{ "item" : "humantier2head" },
-			{ "item" : "humantier2chest" },
-			{ "item" : "humantier2pants" },
-
-			{ "item" : "ironshortsword" },
-			{ "item" : "ironbroadsword" },
-			{ "item" : "tungstenaxe" },
-			{ "item" : "tungstenhammer" },
-
-// Anvil2
-			{ "item" : "humantier3head" },
-			{ "item" : "humantier3chest" },
-			{ "item" : "humantier3pants" },
-			{ "item" : "humantier4head" },
-			{ "item" : "humantier4chest" },
-			{ "item" : "humantier4pants" },
-
-			{ "item" : "titaniumdagger" },
-			{ "item" : "titaniumspear" },
-			{ "item" : "durasteelbroadsword" },
-			{ "item" : "durasteelshortsword" },
-
-// Anvil3
-			{ "item" : "humantier5ahead" },
-			{ "item" : "humantier5achest" },
-			{ "item" : "humantier5apants" },
-			{ "item" : "humantier6ahead" },
-			{ "item" : "humantier6achest" },
-			{ "item" : "humantier6apants" },
-
-			{ "item" : "humantier5mhead" },
-			{ "item" : "humantier5mchest" },
-			{ "item" : "humantier5mpants" },
-			{ "item" : "humantier6mhead" },
-			{ "item" : "humantier6mchest" },
-			{ "item" : "humantier6mpants" },
-
-			{ "item" : "humantier5shead" },
-			{ "item" : "humantier5schest" },
-			{ "item" : "humantier5spants" },
-			{ "item" : "humantier6shead" },
-			{ "item" : "humantier6schest" },
-			{ "item" : "humantier6spants" },
-
-			{ "item" : "aegisaltpistol" },
-			{ "item" : "aegisaltbow" },
-			{ "item" : "feroziumwand" },
-			{ "item" : "feroziumstaff" },
-			{ "item" : "violiumshortsword" },
-			{ "item" : "violiumbroadsword" },
-
-// Furniture Table 2
-			{ "item" : "humanstoragelocker" },
-			{ "item" : "humanshipdoor" },
-			{ "item" : "humanshiphatch" },
-
-// Spinning Wheel
-			{ "item" : "conceptchest" },
-			{ "item" : "conceptlegs" },
-			{ "item" : "coolchest" },
-			{ "item" : "coollegs" },
-			{ "item" : "sweatervestchest" },
-			{ "item" : "sweatervestlegs" },
-			{ "item" : "workoutchest" },
-			{ "item" : "workoutlegs" }
+	"altOptionAsUndyColor": true,
+	"animationConfig": "/humanoid/sbq/vaporeonGiant/vaporeonGiant.animation",
+	"animationCustom": [],
+	"baseColorPalette": {
+		"primary": [
+			"0d4f6a",
+			"1b80a7",
+			"42b2dd",
+			"6dc4e5"
+		], // main body
+		"secondary": [
+			"0b2e67",
+			"194893",
+			"2d66c3"
+		], // dorsal fins
+		"underbelly": [
+			"545454",
+			"8a8a8a",
+			"b3b3b3",
+			"e0e0e0",
+			"fefefe"
+		],
+		"earFins": [
+			"786c31",
+			"b1a14e",
+			"dcca6b",
+			"f2eab4",
+			"fdf9e3"
+		],
+		"neckFins": [
+			"a34c9a",
+			"cc72c3",
+			"ef99e7",
+			"ffcfe9",
+			"fae2ef"
+		],
+		"flesh": [
+			"7a235a",
+			"99457a",
+			"a2668c"
 		]
 	},
-	"genders" : [
-		{
-			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png"
-		},
-		{
-			"name" : "female",
-			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/female.png"
-		}
+	"bodyColor": [
+		"?replace;0d4f6a=7d1217;1b80a7=b52335;42b2dd=dc3c4f;6dc4e5=ed576f;", // red
+		"?replace;0d4f6a=7f5716;1b80a7=b97625;42b2dd=e39542;6dc4e5=fbb163;", // orange
+		"?replace;0d4f6a=ab6a13;1b80a7=eac116;42b2dd=fee528;6dc4e5=ffed6c;", // yellow
+		"?replace;0d4f6a=37681c;1b80a7=6fc13b;42b2dd=91e73d;6dc4e5=b1fa69;", // lime
+		"?replace;0d4f6a=0d6a41;1b80a7=1ba674;42b2dd=43dcb0;6dc4e5=7bf5d1;", // teal
+		"?replace;0d4f6a=0d4f6b;1b80a7=1b80a8;42b2dd=42b2de;6dc4e5=6dc4e6;", // default blue
+		"?replace;0d4f6a=501393;1b80a7=7341c1;42b2dd=916ee4;6dc4e5=aa8cf2;", // purble
+		"?replace;0d4f6a=760596;1b80a7=bd62d5;42b2dd=df77de;6dc4e5=ffbdff;", // shiny (dark magenta)
+		"?replace;0d4f6a=606060;1b80a7=bdbdbd;42b2dd=efefef;6dc4e5=fefeff;", // white
+		"?replace;0d4f6a=202020;1b80a7=333333;42b2dd=434343;6dc4e5=565656;" // dark gray
 	],
-	"baseColorPalette" : {
-		"primary" : ["0d4f6a", "1b80a7", "42b2dd", "6dc4e5"], // main body
-		"secondary" : ["0b2e67", "194893", "2d66c3"], // dorsal fins
-		"underbelly" : ["545454", "8a8a8a", "b3b3b3", "e0e0e0", "fefefe"],
-		"earFins" : ["786c31", "b1a14e", "dcca6b", "f2eab4", "fdf9e3"],
-		"neckFins" : ["a34c9a", "cc72c3", "ef99e7", "ffcfe9", "fae2ef"],
-		"flesh" : ["7a235a", "99457a", "a2668c"]
+	"charCreationTooltip": {
+		"title": "Giant Vaporeon",
+		"subTitle": "Dihydrogen Monoxide",
+		"description": "Everyone's favorite fishcat, but bigger!"
 	},
-	"charGenTextLabels" : [
+	"charGenTextLabels": [
 		"Primary Color", // body color
 		"-", // hair type
 		"Underbelly Color", // shirt
@@ -125,24 +70,427 @@
 		"Vaporeon", // species
 		"Personality" // personality
 	],
-
+	"defaultBlueprints": {
+		"tier1": [
+			// Empty Hands
+			{
+				"item": "flaghuman"
+			},
+			// Anvil
+			{
+				"item": "humantier1head"
+			},
+			{
+				"item": "humantier1chest"
+			},
+			{
+				"item": "humantier1pants"
+			},
+			{
+				"item": "humantier2head"
+			},
+			{
+				"item": "humantier2chest"
+			},
+			{
+				"item": "humantier2pants"
+			},
+			{
+				"item": "ironshortsword"
+			},
+			{
+				"item": "ironbroadsword"
+			},
+			{
+				"item": "tungstenaxe"
+			},
+			{
+				"item": "tungstenhammer"
+			},
+			// Anvil2
+			{
+				"item": "humantier3head"
+			},
+			{
+				"item": "humantier3chest"
+			},
+			{
+				"item": "humantier3pants"
+			},
+			{
+				"item": "humantier4head"
+			},
+			{
+				"item": "humantier4chest"
+			},
+			{
+				"item": "humantier4pants"
+			},
+			{
+				"item": "titaniumdagger"
+			},
+			{
+				"item": "titaniumspear"
+			},
+			{
+				"item": "durasteelbroadsword"
+			},
+			{
+				"item": "durasteelshortsword"
+			},
+			// Anvil3
+			{
+				"item": "humantier5ahead"
+			},
+			{
+				"item": "humantier5achest"
+			},
+			{
+				"item": "humantier5apants"
+			},
+			{
+				"item": "humantier6ahead"
+			},
+			{
+				"item": "humantier6achest"
+			},
+			{
+				"item": "humantier6apants"
+			},
+			{
+				"item": "humantier5mhead"
+			},
+			{
+				"item": "humantier5mchest"
+			},
+			{
+				"item": "humantier5mpants"
+			},
+			{
+				"item": "humantier6mhead"
+			},
+			{
+				"item": "humantier6mchest"
+			},
+			{
+				"item": "humantier6mpants"
+			},
+			{
+				"item": "humantier5shead"
+			},
+			{
+				"item": "humantier5schest"
+			},
+			{
+				"item": "humantier5spants"
+			},
+			{
+				"item": "humantier6shead"
+			},
+			{
+				"item": "humantier6schest"
+			},
+			{
+				"item": "humantier6spants"
+			},
+			{
+				"item": "aegisaltpistol"
+			},
+			{
+				"item": "aegisaltbow"
+			},
+			{
+				"item": "feroziumwand"
+			},
+			{
+				"item": "feroziumstaff"
+			},
+			{
+				"item": "violiumshortsword"
+			},
+			{
+				"item": "violiumbroadsword"
+			},
+			// Furniture Table 2
+			{
+				"item": "humanstoragelocker"
+			},
+			{
+				"item": "humanshipdoor"
+			},
+			{
+				"item": "humanshiphatch"
+			},
+			// Spinning Wheel
+			{
+				"item": "conceptchest"
+			},
+			{
+				"item": "conceptlegs"
+			},
+			{
+				"item": "coolchest"
+			},
+			{
+				"item": "coollegs"
+			},
+			{
+				"item": "sweatervestchest"
+			},
+			{
+				"item": "sweatervestlegs"
+			},
+			{
+				"item": "workoutchest"
+			},
+			{
+				"item": "workoutlegs"
+			}
+		]
+	},
+	"effectDirectives": "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=80b3ffFF;31a6ffFF=5476f0FF",
+	"facialHair": [
+		"0",
+		"blank"
+	],
+	"facialMask": [
+		""
+	],
+	"genders": [
+		{
+			"name": "male",
+			"image": "/interface/title/male.png",
+			"characterImage": "/interface/title/male.png"
+		},
+		{
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/female.png"
+		}
+	],
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"hair" : [
+	"hair": [
 		"0"
 	],
-	"shirt" : [ // underbelly
-		"?replace;545454=a34c99;8a8a8a=cc72c2;b3b3b3=ef99e6;e0e0e0=ffcfe8;fefefe=fae2ee", // light pink
-		"?replace;545454=785131;8a8a8a=986943;b3b3b3=dca76a;e0e0e0=f2d4b5;fefefe=fae9d8", // orange cream
-		"?replace;545454=786c32;8a8a8a=b1a14f;b3b3b3=dcca6c;e0e0e0=f2eab5;fefefe=fdf9e4", // light yellow
-		"?replace;545454=3c802c;8a8a8a=4ca636;b3b3b3=6fd158;e0e0e0=92ef7b;fefefe=b6f7a6", // light lime
-		"?replace;545454=3e836c;8a8a8a=41b69d;b3b3b3=73b9a6;e0e0e0=91d7c0;fefefe=b6edda", // light teal
-		"?replace;545454=3e6d83;8a8a8a=4190b6;b3b3b3=73a2b9;e0e0e0=91c0d7;fefefe=bbdced", // light blue
-		"?replace;545454=573f83;8a8a8a=7955bc;b3b3b3=8973b9;e0e0e0=a591d7;fefefe=cabdea", // light purple
-		"?replace;545454=6a2974;8a8a8a=b45acb;b3b3b3=e0a2e2;e0e0e0=f9d3f9;fefefe=ffecfe", // light magenta
-		"?replace;545454=545455;8a8a8a=8a8a8b;b3b3b3=b3b3b4;e0e0e0=e0e0e1;fefefe=fefeff", // white
-		"?replace;545454=2a2a2a;8a8a8a=393939;b3b3b3=555555;e0e0e0=777777;fefefe=8f8f8f" // grey
+	"hairColor": [
+		""
 	],
-	"pants" : [ // ear fins
+	"hairColorAsBodySubColor": true,
+	"headOptionAsFacialHair": true,
+	"humanoidOverrides": {
+		"globalOffset": [
+			0,
+			0
+		],
+		"mouthOffset": [
+			20,
+			3
+		],
+		"feetOffset": [
+			0,
+			-32
+		],
+		"runFallOffset": 0,
+		"duckOffset": 0,
+		"walkBob": [
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0
+		],
+		"runBob": [
+			0,
+			0,
+			1,
+			1,
+			0,
+			0,
+			-1,
+			-1
+		],
+		"frontArmRotationCenter": [
+			20,
+			-3
+		],
+		"backArmRotationCenter": [
+			20,
+			-3
+		],
+		"frontHandPosition": [
+			20,
+			-3
+		],
+		"backArmOffset": [
+			4,
+			0
+		],
+		"movementParameters": {
+			"standingPoly": [
+				[
+					-2.5,
+					1
+				],
+				[
+					-3,
+					0.5
+				],
+				[
+					-3,
+					-3.5
+				],
+				[
+					-2.5,
+					-4
+				],
+				[
+					2.5,
+					-4
+				],
+				[
+					3,
+					-3.5
+				],
+				[
+					3,
+					0.5
+				],
+				[
+					2.5,
+					1
+				]
+			],
+			"crouchingPoly": [
+				[
+					-2.5,
+					1
+				],
+				[
+					-3,
+					0.5
+				],
+				[
+					-3,
+					-3.5
+				],
+				[
+					-2.5,
+					-4
+				],
+				[
+					2.5,
+					-4
+				],
+				[
+					3,
+					-3.5
+				],
+				[
+					3,
+					0.5
+				],
+				[
+					2.5,
+					1
+				]
+			],
+			"mass": 1.6,
+			"walkSpeed": 10,
+			"runSpeed": 20
+		},
+		"personalities": [
+			[
+				"idle.1",
+				"idle.1",
+				[
+					0,
+					0
+				],
+				[
+					0,
+					0
+				]
+			] //standard
+		],
+		"particleEmitters": {
+			"deathPoof": {
+				"particles": [
+					{
+						"particle": {
+							"type": "animated",
+							"animation": "/animations/playerdeath-Wasabi_Raptor_PokemonDeath/quadruped/playerdeath.animation",
+							"size": 1,
+							"angularVelocity": 0,
+							"fade": 1,
+							"destructionTime": 1,
+							"position": [
+								0,
+								0
+							],
+							"initialVelocity": [
+								0,
+								0
+							],
+							"finalVelocity": [
+								0,
+								0
+							],
+							"approach": [
+								1,
+								1
+							],
+							"timeToLive": 1,
+							"layer": "middle"
+						}
+					}
+				]
+			}
+		}
+	},
+	"identityAnimationCustom": {},
+	"infuseData": [
+		"/humanoid/any/basicInfuseData.config",
+		{
+			"default": { // default infuse data used for any species
+				"overrideSettings": {}, // override settings applied when infused anywhere
+				"locations": {
+					"tail": {
+						"overrideSettings": {},
+						"infuseColorRemapGlobalTags": {
+							"tailInfusedColorRemap": [
+								[
+									"primary",
+									"primary"
+								],
+								[
+									"secondary",
+									"secondary"
+								],
+								[
+									"tertiary",
+									"tertiary"
+								]
+							]
+						}
+					}
+				}
+			}
+		}
+	],
+	"kind": "sbq/vaporeonGiant",
+	"nameGen": [
+		"/species/humanmalenamegen.config:names",
+		"/species/humanfemalenamegen.config:names"
+	],
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises": [
+		"/sfx/humanoid/humanhurt_male1.ogg",
+		"/sfx/humanoid/humanhurt_female1.ogg"
+	],
+	"pants": [ // ear fins
 		"?replace;786c31=a34c99;b1a14e=cc72c2;dcca6b=ef99e6;f2eab4=ffcfe8;fdf9e3=fae2ee", // light pink
 		"?replace;786c31=785131;b1a14e=986943;dcca6b=dca76a;f2eab4=f2d4b5;fdf9e3=fae9d8", // orange cream
 		"?replace;786c31=786c32;b1a14e=b1a14f;dcca6b=dcca6c;f2eab4=f2eab5;fdf9e3=fdf9e4", // light yellow
@@ -153,7 +501,6 @@
 		"?replace;786c31=6a2974;b1a14e=b45acb;dcca6b=e0a2e2;f2eab4=f9d3f9;fdf9e3=ffecfe", // light magenta
 		"?replace;786c31=545455;b1a14e=8a8a8b;dcca6b=b3b3b4;f2eab4=e0e0e1;fdf9e3=fefeff", // white
 		"?replace;786c31=2a2a2a;b1a14e=393939;dcca6b=555555;f2eab4=777777;fdf9e3=8f8f8f", // gray
-
 		//fullbright
 		"?replace;786c31=a34c99FE;b1a14e=cc72c2FE;dcca6b=ef99e6FE;f2eab4=ffcfe8FE;fdf9e3=fae2eeFE", // light pink
 		"?replace;786c31=785131FE;b1a14e=986943FE;dcca6b=dca76aFE;f2eab4=f2d4b5FE;fdf9e3=fae9d8FE", // orange cream
@@ -165,12 +512,8 @@
 		"?replace;786c31=6a2974FE;b1a14e=b45acbFE;dcca6b=e0a2e2FE;f2eab4=f9d3f9FE;fdf9e3=ffecfeFE", // light magenta
 		"?replace;786c31=545455FE;b1a14e=8a8a8bFE;dcca6b=b3b3b4FE;f2eab4=e0e0e1FE;fdf9e3=fefeffFE", // white
 		"?replace;786c31=2a2a2aFE;b1a14e=393939FE;dcca6b=555555FE;f2eab4=777777FE;fdf9e3=8f8f8fFE" // gray
-
 	],
-	"shirtColor" : [ // flesh color
-		"?replace;7a235a=7a235b;99457a=99457b;a2668c=a2668d;"
-	],
-	"pantsColor" : [
+	"pantsColor": [
 		"?replace;a34c9a=a34c99;cc72c3=cc72c2;ef99e7=ef99e6;ffcfe9=ffcfe8;fae2ef=fae2ee", // light pink
 		"?replace;a34c9a=785131;cc72c3=986943;ef99e7=dca76a;ffcfe9=f2d4b5;fae2ef=fae9d8", // orange cream
 		"?replace;a34c9a=786c32;cc72c3=b1a14f;ef99e7=dcca6c;ffcfe9=f2eab5;fae2ef=fdf9e4", // light yellow
@@ -181,7 +524,6 @@
 		"?replace;a34c9a=6a2974;cc72c3=b45acb;ef99e7=e0a2e2;ffcfe9=f9d3f9;fae2ef=ffecfe", // lignt magenta
 		"?replace;a34c9a=545455;cc72c3=8a8a8b;ef99e7=b3b3b4;ffcfe9=e0e0e1;fae2ef=fefeff", // default white
 		"?replace;a34c9a=2a2a2a;cc72c3=393939;ef99e7=555555;ffcfe9=777777;fae2ef=8f8f8f", // gray
-
 		// fullbright
 		"?replace;a34c9a=a34c99FE;cc72c3=cc72c2FE;ef99e7=ef99e6FE;ffcfe9=ffcfe8FE;fae2ef=fae2eeFE", // light pink
 		"?replace;a34c9a=785131FE;cc72c3=986943FE;ef99e7=dca76aFE;ffcfe9=f2d4b5FE;fae2ef=fae9d8FE", // orange cream
@@ -194,23 +536,41 @@
 		"?replace;a34c9a=545455FE;cc72c3=8a8a8bFE;ef99e7=b3b3b4FE;ffcfe9=e0e0e1FE;fae2ef=fefeffFE", // default white
 		"?replace;a34c9a=2a2a2aFE;cc72c3=393939FE;ef99e7=555555FE;ffcfe9=777777FE;fae2ef=8f8f8fFE" // gray
 	],
-	"facialHair" : [
-		"0", "blank"
+	"pantsOptionAsIdentityString": true,
+	"potionImagePath": "/humanoid/sbq/vaporeon/potion/",
+	"potionRarity": "legendary",
+	"sbqConfig": [
+		"/humanoid/sbq/vaporeonGiant/vore.config",
+		{
+			"defaultSettings": {
+				"tailInfuseSelect": "vaporeon_tail"
+			}
+		}
 	],
-	"facialMask" : [ "" ],
-	"bodyColor" : [
-		"?replace;0d4f6a=7d1217;1b80a7=b52335;42b2dd=dc3c4f;6dc4e5=ed576f;", // red
-		"?replace;0d4f6a=7f5716;1b80a7=b97625;42b2dd=e39542;6dc4e5=fbb163;", // orange
-		"?replace;0d4f6a=ab6a13;1b80a7=eac116;42b2dd=fee528;6dc4e5=ffed6c;", // yellow
-		"?replace;0d4f6a=37681c;1b80a7=6fc13b;42b2dd=91e73d;6dc4e5=b1fa69;", // lime
-		"?replace;0d4f6a=0d6a41;1b80a7=1ba674;42b2dd=43dcb0;6dc4e5=7bf5d1;", // teal
-		"?replace;0d4f6a=0d4f6b;1b80a7=1b80a8;42b2dd=42b2de;6dc4e5=6dc4e6;", // default blue
-		"?replace;0d4f6a=501393;1b80a7=7341c1;42b2dd=916ee4;6dc4e5=aa8cf2;", // purble
-		"?replace;0d4f6a=760596;1b80a7=bd62d5;42b2dd=df77de;6dc4e5=ffbdff;", // shiny (dark magenta)
-		"?replace;0d4f6a=606060;1b80a7=bdbdbd;42b2dd=efefef;6dc4e5=fefeff;", // white
-		"?replace;0d4f6a=202020;1b80a7=333333;42b2dd=434343;6dc4e5=565656;" // dark gray
+	"shirt": [ // underbelly
+		"?replace;545454=a34c99;8a8a8a=cc72c2;b3b3b3=ef99e6;e0e0e0=ffcfe8;fefefe=fae2ee", // light pink
+		"?replace;545454=785131;8a8a8a=986943;b3b3b3=dca76a;e0e0e0=f2d4b5;fefefe=fae9d8", // orange cream
+		"?replace;545454=786c32;8a8a8a=b1a14f;b3b3b3=dcca6c;e0e0e0=f2eab5;fefefe=fdf9e4", // light yellow
+		"?replace;545454=3c802c;8a8a8a=4ca636;b3b3b3=6fd158;e0e0e0=92ef7b;fefefe=b6f7a6", // light lime
+		"?replace;545454=3e836c;8a8a8a=41b69d;b3b3b3=73b9a6;e0e0e0=91d7c0;fefefe=b6edda", // light teal
+		"?replace;545454=3e6d83;8a8a8a=4190b6;b3b3b3=73a2b9;e0e0e0=91c0d7;fefefe=bbdced", // light blue
+		"?replace;545454=573f83;8a8a8a=7955bc;b3b3b3=8973b9;e0e0e0=a591d7;fefefe=cabdea", // light purple
+		"?replace;545454=6a2974;8a8a8a=b45acb;b3b3b3=e0a2e2;e0e0e0=f9d3f9;fefefe=ffecfe", // light magenta
+		"?replace;545454=545455;8a8a8a=8a8a8b;b3b3b3=b3b3b4;e0e0e0=e0e0e1;fefefe=fefeff", // white
+		"?replace;545454=2a2a2a;8a8a8a=393939;b3b3b3=555555;e0e0e0=777777;fefefe=8f8f8f" // grey
 	],
-	"undyColor" : [
+	"shirtColor": [ // flesh color
+		"?replace;7a235a=7a235b;99457a=99457b;a2668c=a2668d;"
+	],
+	"shirtOptionAsIdentityString": true,
+	"skull": "/humanoid/human/dead.png",
+	"statusEffects": [
+		{
+			"stat": "breathProtection",
+			"amount": 1
+		}
+	],
+	"undyColor": [
 		"?replace;0b2e67=550708;194893=751810;2d66c3=92221d", // red
 		"?replace;0b2e67=683c0c;194893=9f531f;2d66c3=c0632b", // orange
 		"?replace;0b2e67=75510d;194893=927312;2d66c3=b68e15", // yellow
@@ -221,103 +581,5 @@
 		"?replace;0b2e67=4a042e;194893=621041;2d66c3=83395a", // shiny (magenta)
 		"?replace;0b2e67=4d4d4d;194893=757575;2d66c3=a0a0a0", // gray
 		"?replace;0b2e67=0c0c0c;194893=131313;2d66c3=1f1f1f" // black
-	],
-	"hairColor" : [
-		""
-	],
-
-	"headOptionAsFacialHair" : true,
-	"hairColorAsBodySubColor" : true,
-	"altOptionAsUndyColor" : true,
-	"shirtOptionAsIdentityString" : true,
-	"pantsOptionAsIdentityString" : true,
-
-	"humanoidOverrides" : {
-		"globalOffset" : [0, 0],
-
-		"mouthOffset" : [20, 3],
-		"feetOffset" : [0,-32],
-
-		"runFallOffset" : 0,
-		"duckOffset" : 0,
-
-		"walkBob" : [0, 0, 0, 0, 0, 0, 0, 0],
-		"runBob" : [0, 0, 1, 1, 0, 0, -1, -1],
-
-		"frontArmRotationCenter" : [20,-3],
-		"backArmRotationCenter" : [20,-3],
-		"frontHandPosition" : [20,-3],
-		"backArmOffset" : [4,0],
-
-		"movementParameters" : {
-			"standingPoly" : [
-				[-2.5, 1], [-3, 0.5],
-				[-3, -3.5], [-2.5, -4],
-				[2.5, -4], [3, -3.5],
-				[3, 0.5], [2.5, 1]
-			],
-			"crouchingPoly" : [
-				[-2.5, 1], [-3, 0.5],
-				[-3, -3.5], [-2.5, -4],
-				[2.5, -4], [3, -3.5],
-				[3, 0.5], [2.5, 1]
-			],
-			"mass" : 1.6,
-			"walkSpeed": 10,
-			"runSpeed": 20
-		},
-		"personalities" : [
-			[ "idle.1", "idle.1", [0, 0], [0, 0] ] //standard
-		],
-		"particleEmitters": {"deathPoof" : {"particles" : [{"particle" : {
-			"type" : "animated",
-			"animation" : "/animations/playerdeath-Wasabi_Raptor_PokemonDeath/quadruped/playerdeath.animation",
-			"size" : 1,
-			"angularVelocity" : 0,
-			"fade" : 1,
-			"destructionTime" : 1,
-			"position" : [0, 0],
-			"initialVelocity" : [0, 0],
-			"finalVelocity" : [0, 0],
-			"approach" : [1, 1],
-			"timeToLive" : 1.0,
-			"layer" : "middle"
-		}}]}}
-	},
-
-	"potionImagePath" : "/humanoid/sbq/vaporeon/potion/",
-	"potionRarity" : "legendary",
-	"sbqConfig" : [
-		"/humanoid/sbq/vaporeonGiant/vore.config",
-		{
-			"defaultSettings" : {
-				"tailInfuseSelect" : "vaporeon_tail"
-			}
-		}
-	],
-	"animationConfig" : "/humanoid/sbq/vaporeonGiant/vaporeonGiant.animation",
-	"identityAnimationCustom" :{},
-	"animationCustom" : [
-	],
-
-	"infuseData" : [
-		"/humanoid/any/basicInfuseData.config",
-		{
-			"default" : { // default infuse data used for any species
-				"overrideSettings" : {}, // override settings applied when infused anywhere
-				"locations" : {
-					"tail" : {
-						"overrideSettings" : {},
-						"infuseColorRemapGlobalTags" : {
-							"tailInfusedColorRemap" : [
-								["primary","primary"],
-								["secondary","secondary"],
-								["tertiary","tertiary"]
-							]
-						}
-					}
-				}
-			}
-		}
 	]
 }

@@ -1,199 +1,670 @@
 {
-	"kind" : "sbq/Zygahedron/Zevi",
-
-	"forceName" : "Zevi",
-	"charCreationTooltip" : {
-			"title" : "Zevi",
-			"subTitle" : "Goocat",
-			"description" : "Hey you shouldn't be able to see this."
-	},
-
-	"statusEffects" : [ "novakidglow" ],
-
-	"humanoidConfig" : "/species/sbq/quadruped.config",
-
-	"nameGen" : [ "/species/novakidnamegen.config:names", "/species/novakidnamegen.config:names" ],
-	"ouchNoises" : [ "/sfx/sbq/Zygahedron/Zevi/zeviHurt.ogg", "/sfx/sbq/Zygahedron/Zevi/zeviHurt.ogg" ],
-	"charGenTextLabels" : [ "Gas colour", "Hair style", "Shirt", "Legwear", "", "Brand", "Shirt colour", "Legwear colour", "NOVAKID", "Personality" ],
-	"skull" : "/humanoid/sbq/Zygahedron/Zevi/dead.png",
-	"effectDirectives" : "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ff99e6FF?replace=31a6ffFF=e359b9FF",
-	"defaultBlueprints" : {
-		"tier1" : [
-
-// Empty Hands
-			{ "item" : "flagnovakid" },
-
-// Anvil
-			{ "item" : "novatier1head" },
-			{ "item" : "novatier1chest" },
-			{ "item" : "novatier1pants" },
-			{ "item" : "novatier2head" },
-			{ "item" : "novatier2chest" },
-			{ "item" : "novatier2pants" },
-			{ "item" : "ironrevolver" },
-			{ "item" : "ironassaultrifle" },
-			{ "item" : "tungstenmagnum" },
-			{ "item" : "tungstenshotgun" },
-
-
-// Anvil2
-			{ "item" : "novatier3head" },
-			{ "item" : "novatier3chest" },
-			{ "item" : "novatier3pants" },
-			{ "item" : "novatier4head" },
-			{ "item" : "novatier4chest" },
-			{ "item" : "novatier4pants" },
-			{ "item" : "titaniummachinepistol" },
-			{ "item" : "titaniumsniperrifle" },
-			{ "item" : "durasteelrevolver" },
-			{ "item" : "durasteelassaultrifle" },
-
-// Anvil3
-			{ "item" : "novatier5ahead" },
-			{ "item" : "novatier5achest" },
-			{ "item" : "novatier5apants" },
-			{ "item" : "novatier6ahead" },
-			{ "item" : "novatier6achest" },
-			{ "item" : "novatier6apants" },
-
-			{ "item" : "novatier5mhead" },
-			{ "item" : "novatier5mchest" },
-			{ "item" : "novatier5mpants" },
-			{ "item" : "novatier6mhead" },
-			{ "item" : "novatier6mchest" },
-			{ "item" : "novatier6mpants" },
-
-			{ "item" : "novatier5shead" },
-			{ "item" : "novatier5schest" },
-			{ "item" : "novatier5spants" },
-			{ "item" : "novatier6shead" },
-			{ "item" : "novatier6schest" },
-			{ "item" : "novatier6spants" },
-
-			{ "item" : "aegisaltpistol" },
-			{ "item" : "aegisaltbow" },
-			{ "item" : "feroziumwand" },
-			{ "item" : "feroziumstaff" },
-			{ "item" : "violiumshortsword" },
-			{ "item" : "violiumbroadsword" },
-
-// Furniture Table 2
-			{ "item" : "novakidstoragelocker" },
-			{ "item" : "novakidshipdoor" },
-			{ "item" : "novakidshiphatch" },
-
-// Spinning Wheel
-			{ "item" : "novakidfancychest" },
-			{ "item" : "novakidfancypants" },
-			{ "item" : "novakidjacket" },
-			{ "item" : "novakidjacketpants" },
-			{ "item" : "novakidsuspenders" },
-			{ "item" : "novakidsuspenderspants" },
-			{ "item" : "novakidwaistcoat" },
-			{ "item" : "novakidblackpants" }
-		]
-	},
-	"altOptionAsUndyColor" : false,
-	"headOptionAsHairColor" : false,
-	"genders" : [
-		{
-			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/novakidmale.png",
-			"hair" : [ "0" ],
-			"shirt" : [ "sbq_nude_chest" ],
-			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
-			"facialMaskGroup" : "",
-			"facialMask" : [ ]
-		},
-		{
-			"name" : "female",
-			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/novakidfemale.png",
-			"hair" : [ "0" ],
-			"shirt" : [ "sbq_nude_chest" ],
-			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "",
-			"facialHair" : [ ],
-			"facialMaskGroup" : "",
-			"facialMask" : [ ]
-		}
-	],
-	"baseColorPalette" : {
-		"primary" : ["a696be","bba9d5","d8cef7"], // purble
-		"tertiary" : ["b1bfd0","cbdee6","f3fcff"], // white
-		"secondary" : ["5b97cf", "6ab9d9", "7ddfff"], //blue
-		"flesh" : ["5b97cf", "6ab9d9", "7ddfff"]
-	},
-	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"bodyColor" : [
-		{ "5b97cf":"5b97cfFE","6ab9d9":"6ab9d9FE","7ddfff":"7ddfffFE" }
-	],
-	"undyColor" : [
-		""
-	],
-	"hairColor" : [
-		""
-	],
-
-	"colorRemapGlobalTags" : {
-		"bellyColorRemap" : [
-			["primary","primary"]
-		],
-		"pussyColorRemap" : [
-			["flesh","flesh"]
-		],
-		"cockColorRemap" : [
-			["primary","flesh"]
-		],
-		"ballsColorRemap" : [
-			["primary","primary"]
-		],
-		"breastsColorRemap" : [
-			["primary","primary"],
-			["primary_180","tertiary"],
-			["flesh","flesh", {"nipplesVisible":true}],
-			["flesh","primary", {"nipplesVisible":false}]
-		]
-	},
-	"infusedParts" :{
-		"cockColorRemap" : [
-				["primary","flesh"]
-			],
-		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
-		"ballsColorRemap" : [
-				["primary","primary"]
-			],
-		"breastsColorRemap" : [
-			["primary","primary"],
-			["flesh","flesh", {"nipplesVisible":true}],
-			["flesh","primary", {"nipplesVisible":false}]
-		]
-	},
-	"animationConfig" : "/humanoid/any/quadruped.animation",
-	"identityAnimationCustom" :{},
-	"animationCustom" : [
+	"altOptionAsUndyColor": false,
+	"animationConfig": "/humanoid/any/quadruped.animation",
+	"animationCustom": [
 		"/humanoid/any/quadrupedPred.animation"
 	],
-	"potionRarity" : "essential",
-	"sbqConfig" : [
+	"baseColorPalette": {
+		"primary": [
+			"a696be",
+			"bba9d5",
+			"d8cef7"
+		], // purble
+		"tertiary": [
+			"b1bfd0",
+			"cbdee6",
+			"f3fcff"
+		], // white
+		"secondary": [
+			"5b97cf",
+			"6ab9d9",
+			"7ddfff"
+		], //blue
+		"flesh": [
+			"5b97cf",
+			"6ab9d9",
+			"7ddfff"
+		]
+	},
+	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"bodyColor": [
+		{
+			"5b97cf": "5b97cfFE",
+			"6ab9d9": "6ab9d9FE",
+			"7ddfff": "7ddfffFE"
+		}
+	],
+	"charCreationTooltip": {
+		"title": "Zevi",
+		"subTitle": "Goocat",
+		"description": "Hey you shouldn't be able to see this."
+	},
+	"charGenTextLabels": [
+		"Gas colour",
+		"Hair style",
+		"Shirt",
+		"Legwear",
+		"",
+		"Brand",
+		"Shirt colour",
+		"Legwear colour",
+		"NOVAKID",
+		"Personality"
+	],
+	"colorRemapGlobalTags": null,
+	"defaultBlueprints": {
+		"tier1": [
+			// Empty Hands
+			{
+				"item": "flagnovakid"
+			},
+			// Anvil
+			{
+				"item": "novatier1head"
+			},
+			{
+				"item": "novatier1chest"
+			},
+			{
+				"item": "novatier1pants"
+			},
+			{
+				"item": "novatier2head"
+			},
+			{
+				"item": "novatier2chest"
+			},
+			{
+				"item": "novatier2pants"
+			},
+			{
+				"item": "ironrevolver"
+			},
+			{
+				"item": "ironassaultrifle"
+			},
+			{
+				"item": "tungstenmagnum"
+			},
+			{
+				"item": "tungstenshotgun"
+			},
+			// Anvil2
+			{
+				"item": "novatier3head"
+			},
+			{
+				"item": "novatier3chest"
+			},
+			{
+				"item": "novatier3pants"
+			},
+			{
+				"item": "novatier4head"
+			},
+			{
+				"item": "novatier4chest"
+			},
+			{
+				"item": "novatier4pants"
+			},
+			{
+				"item": "titaniummachinepistol"
+			},
+			{
+				"item": "titaniumsniperrifle"
+			},
+			{
+				"item": "durasteelrevolver"
+			},
+			{
+				"item": "durasteelassaultrifle"
+			},
+			// Anvil3
+			{
+				"item": "novatier5ahead"
+			},
+			{
+				"item": "novatier5achest"
+			},
+			{
+				"item": "novatier5apants"
+			},
+			{
+				"item": "novatier6ahead"
+			},
+			{
+				"item": "novatier6achest"
+			},
+			{
+				"item": "novatier6apants"
+			},
+			{
+				"item": "novatier5mhead"
+			},
+			{
+				"item": "novatier5mchest"
+			},
+			{
+				"item": "novatier5mpants"
+			},
+			{
+				"item": "novatier6mhead"
+			},
+			{
+				"item": "novatier6mchest"
+			},
+			{
+				"item": "novatier6mpants"
+			},
+			{
+				"item": "novatier5shead"
+			},
+			{
+				"item": "novatier5schest"
+			},
+			{
+				"item": "novatier5spants"
+			},
+			{
+				"item": "novatier6shead"
+			},
+			{
+				"item": "novatier6schest"
+			},
+			{
+				"item": "novatier6spants"
+			},
+			{
+				"item": "aegisaltpistol"
+			},
+			{
+				"item": "aegisaltbow"
+			},
+			{
+				"item": "feroziumwand"
+			},
+			{
+				"item": "feroziumstaff"
+			},
+			{
+				"item": "violiumshortsword"
+			},
+			{
+				"item": "violiumbroadsword"
+			},
+			// Furniture Table 2
+			{
+				"item": "novakidstoragelocker"
+			},
+			{
+				"item": "novakidshipdoor"
+			},
+			{
+				"item": "novakidshiphatch"
+			},
+			// Spinning Wheel
+			{
+				"item": "novakidfancychest"
+			},
+			{
+				"item": "novakidfancypants"
+			},
+			{
+				"item": "novakidjacket"
+			},
+			{
+				"item": "novakidjacketpants"
+			},
+			{
+				"item": "novakidsuspenders"
+			},
+			{
+				"item": "novakidsuspenderspants"
+			},
+			{
+				"item": "novakidwaistcoat"
+			},
+			{
+				"item": "novakidblackpants"
+			}
+		]
+	},
+	"effectDirectives": "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ff99e6FF?replace=31a6ffFF=e359b9FF",
+	"forceName": "Zevi",
+	"genders": [
+		{
+			"name": "male",
+			"image": "/interface/title/male.png",
+			"characterImage": "/interface/title/novakidmale.png",
+			"hair": [
+				"0"
+			],
+			"shirt": [
+				"sbq_nude_chest"
+			],
+			"pants": [
+				"sbq_nude_legs"
+			],
+			"facialHairGroup": "",
+			"facialHair": [],
+			"facialMaskGroup": "",
+			"facialMask": []
+		},
+		{
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/novakidfemale.png",
+			"hair": [
+				"0"
+			],
+			"shirt": [
+				"sbq_nude_chest"
+			],
+			"pants": [
+				"sbq_nude_legs"
+			],
+			"facialHairGroup": "",
+			"facialHair": [],
+			"facialMaskGroup": "",
+			"facialMask": []
+		}
+	],
+	"hairColor": [
+		""
+	],
+	"headOptionAsHairColor": false,
+	"humanoidConfig": "/species/sbq/quadruped.config",
+	"identityAnimationCustom": {},
+	"infuseData": [
+		"/humanoid/any/basicInfuseData.config",
+		{
+			"locationOverrides": {
+				"transformResult": {
+					"species": "any"
+				}
+			}
+		}
+	],
+	"infusedParts": {
+		"cockColorRemap": [
+			[
+				"primary",
+				"flesh"
+			]
+		],
+		"pussyColorRemap": [
+			[
+				"flesh",
+				"flesh"
+			]
+		],
+		"ballsColorRemap": [
+			[
+				"primary",
+				"primary"
+			]
+		],
+		"breastsColorRemap": [
+			[
+				"primary",
+				"primary"
+			],
+			[
+				"flesh",
+				"flesh",
+				{
+					"nipplesVisible": true
+				}
+			],
+			[
+				"flesh",
+				"primary",
+				{
+					"nipplesVisible": false
+				}
+			]
+		]
+	},
+	"kind": "sbq/Zygahedron/Zevi",
+	"nameGen": [
+		"/species/novakidnamegen.config:names",
+		"/species/novakidnamegen.config:names"
+	],
+	"ouchNoises": [
+		"/sfx/sbq/Zygahedron/Zevi/zeviHurt.ogg",
+		"/sfx/sbq/Zygahedron/Zevi/zeviHurt.ogg"
+	],
+	"potionRarity": "essential",
+	"sbqConfig": [
 		"/humanoid/any/vore.config",
 		{
-			"defaultSettings" : {
-				"navelVisible" : true
+			"defaultSettings": {
+				"navelVisible": true
 			},
-			"transformResult" : {"species":"any"}
+			"transformResult": {
+				"species": "any"
+			}
 		},
 		"/npcs/sbq/Zygahedron/Zevi/tenant.npctype:scriptConfig.voreConfig"
 	],
-
-	"infuseData" : [
-		"/humanoid/any/basicInfuseData.config",
-		{"locationOverrides":{"transformResult" : {"species":"any"}}}
+	"sbqPartImages": {
+		"sbq/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		}
+	},
+	"skull": "/humanoid/sbq/Zygahedron/Zevi/dead.png",
+	"statusEffects": [
+		"novakidglow"
+	],
+	"undyColor": [
+		""
 	]
-
 }

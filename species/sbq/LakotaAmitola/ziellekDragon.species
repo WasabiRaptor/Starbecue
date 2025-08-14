@@ -1,118 +1,60 @@
 {
-	"kind" : "sbq/LakotaAmitola/ziellekDragon",
-
-	"charCreationTooltip" : {
-			"title" : "Ziellek Dragon",
-			"subTitle" : "-",
-			"description" : "Long noodle."
-	},
-
-	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
-
-	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-	"ouchNoises" : [ "/sfx/humanoid/humanhurt_male1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
-
-	"skull" : "/humanoid/human/dead.png",
-	"effectDirectives" : "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=ff99e6FF;31a6ffFF=e359b9FF",
-	"defaultBlueprints" : {
-		"tier1" : [
-
-// Empty Hands
-			{ "item" : "flaghuman" },
-
-// Anvil
-			{ "item" : "humantier1head" },
-			{ "item" : "humantier1chest" },
-			{ "item" : "humantier1pants" },
-			{ "item" : "humantier2head" },
-			{ "item" : "humantier2chest" },
-			{ "item" : "humantier2pants" },
-
-			{ "item" : "ironshortsword" },
-			{ "item" : "ironbroadsword" },
-			{ "item" : "tungstenaxe" },
-			{ "item" : "tungstenhammer" },
-
-// Anvil2
-			{ "item" : "humantier3head" },
-			{ "item" : "humantier3chest" },
-			{ "item" : "humantier3pants" },
-			{ "item" : "humantier4head" },
-			{ "item" : "humantier4chest" },
-			{ "item" : "humantier4pants" },
-
-			{ "item" : "titaniumdagger" },
-			{ "item" : "titaniumspear" },
-			{ "item" : "durasteelbroadsword" },
-			{ "item" : "durasteelshortsword" },
-
-// Anvil3
-			{ "item" : "humantier5ahead" },
-			{ "item" : "humantier5achest" },
-			{ "item" : "humantier5apants" },
-			{ "item" : "humantier6ahead" },
-			{ "item" : "humantier6achest" },
-			{ "item" : "humantier6apants" },
-
-			{ "item" : "humantier5mhead" },
-			{ "item" : "humantier5mchest" },
-			{ "item" : "humantier5mpants" },
-			{ "item" : "humantier6mhead" },
-			{ "item" : "humantier6mchest" },
-			{ "item" : "humantier6mpants" },
-
-			{ "item" : "humantier5shead" },
-			{ "item" : "humantier5schest" },
-			{ "item" : "humantier5spants" },
-			{ "item" : "humantier6shead" },
-			{ "item" : "humantier6schest" },
-			{ "item" : "humantier6spants" },
-
-			{ "item" : "aegisaltpistol" },
-			{ "item" : "aegisaltbow" },
-			{ "item" : "feroziumwand" },
-			{ "item" : "feroziumstaff" },
-			{ "item" : "violiumshortsword" },
-			{ "item" : "violiumbroadsword" },
-
-// Furniture Table 2
-			{ "item" : "humanstoragelocker" },
-			{ "item" : "humanshipdoor" },
-			{ "item" : "humanshiphatch" },
-
-// Spinning Wheel
-			{ "item" : "conceptchest" },
-			{ "item" : "conceptlegs" },
-			{ "item" : "coolchest" },
-			{ "item" : "coollegs" },
-			{ "item" : "sweatervestchest" },
-			{ "item" : "sweatervestlegs" },
-			{ "item" : "workoutchest" },
-			{ "item" : "workoutlegs" }
+	"altOptionAsUndyColor": true,
+	"animationConfig": "/humanoid/sbq/LakotaAmitola/ziellekDragon/ziellekDragon.animation",
+	"animationCustom": [],
+	"baseColorPalette": {
+		"primary": [
+			"191919",
+			"292929",
+			"3c3c3c",
+			"4a4a4a"
+		], // main color
+		"secondary": [
+			"005062",
+			"10778e",
+			"15839b",
+			"23b5d4"
+		], // back accent
+		"underbelly": [
+			"7d7d7d",
+			"a3a3a3",
+			"b1b1b1"
+		],
+		"fluff": [
+			"6c0c90",
+			"8217ab",
+			"8f1fb9"
+		],
+		"horns": [
+			"b16900",
+			"d48b22",
+			"ea9d2c"
+		],
+		"eyes": [
+			"34851a",
+			"45b91f",
+			"80ff56"
+		],
+		"flesh": [
+			"702c55",
+			"8b3c6c",
+			"a94783"
 		]
 	},
-	"genders" : [
-		{
-			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png"
-		},
-		{
-			"name" : "female",
-			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/female.png"
-		}
+	"bodyColor": [
+		"?replace;191919=7b7977;292929=c9c8c7;3c3c3c=d7d4d2;4a4a4a=e4e0dc;", // Lakota's white
+		"?replace;191919=96a6a0;292929=b8c7c1;3c3c3c=cadad4;4a4a4a=ffffff;", // Mint's white
+		"?replace;191919=c3b5d1;292929=dcd1e7;3c3c3c=eee8f5;4a4a4a=fdfbff;", // Auri's white
+		"?replace;191919=2b2c2b;292929=3a3c3b;3c3c3c=474a49;4a4a4a=515554;", // Dex's grey
+		"?replace;191919=020202;292929=121212;3c3c3c=222222;4a4a4a=323232;", // Ambi's black
+		"?replace;191919=beab7e;292929=cfbc90;3c3c3c=dcc899;4a4a4a=ead6a7;" // Jaych's cream
 	],
-	"baseColorPalette" : {
-		"primary" : ["191919","292929","3c3c3c","4a4a4a"], // main color
-		"secondary" : ["005062","10778e","15839b","23b5d4"], // back accent
-		"underbelly" : ["7d7d7d","a3a3a3","b1b1b1"],
-		"fluff" : ["6c0c90","8217ab","8f1fb9"],
-		"horns" : ["b16900","d48b22","ea9d2c"],
-		"eyes" : ["34851a","45b91f","80ff56"],
-		"flesh" : ["702c55","8b3c6c","a94783"]
+	"charCreationTooltip": {
+		"title": "Ziellek Dragon",
+		"subTitle": "-",
+		"description": "Long noodle."
 	},
-	"charGenTextLabels" : [
+	"charGenTextLabels": [
 		"Primary Color", // body color
 		"Horns Color", // hair type
 		"Underbelly Color", // shirt
@@ -124,8 +66,201 @@
 		"Ziellek Dragon", // species
 		"Personality" // personality
 	],
+	"defaultBlueprints": {
+		"tier1": [
+			// Empty Hands
+			{
+				"item": "flaghuman"
+			},
+			// Anvil
+			{
+				"item": "humantier1head"
+			},
+			{
+				"item": "humantier1chest"
+			},
+			{
+				"item": "humantier1pants"
+			},
+			{
+				"item": "humantier2head"
+			},
+			{
+				"item": "humantier2chest"
+			},
+			{
+				"item": "humantier2pants"
+			},
+			{
+				"item": "ironshortsword"
+			},
+			{
+				"item": "ironbroadsword"
+			},
+			{
+				"item": "tungstenaxe"
+			},
+			{
+				"item": "tungstenhammer"
+			},
+			// Anvil2
+			{
+				"item": "humantier3head"
+			},
+			{
+				"item": "humantier3chest"
+			},
+			{
+				"item": "humantier3pants"
+			},
+			{
+				"item": "humantier4head"
+			},
+			{
+				"item": "humantier4chest"
+			},
+			{
+				"item": "humantier4pants"
+			},
+			{
+				"item": "titaniumdagger"
+			},
+			{
+				"item": "titaniumspear"
+			},
+			{
+				"item": "durasteelbroadsword"
+			},
+			{
+				"item": "durasteelshortsword"
+			},
+			// Anvil3
+			{
+				"item": "humantier5ahead"
+			},
+			{
+				"item": "humantier5achest"
+			},
+			{
+				"item": "humantier5apants"
+			},
+			{
+				"item": "humantier6ahead"
+			},
+			{
+				"item": "humantier6achest"
+			},
+			{
+				"item": "humantier6apants"
+			},
+			{
+				"item": "humantier5mhead"
+			},
+			{
+				"item": "humantier5mchest"
+			},
+			{
+				"item": "humantier5mpants"
+			},
+			{
+				"item": "humantier6mhead"
+			},
+			{
+				"item": "humantier6mchest"
+			},
+			{
+				"item": "humantier6mpants"
+			},
+			{
+				"item": "humantier5shead"
+			},
+			{
+				"item": "humantier5schest"
+			},
+			{
+				"item": "humantier5spants"
+			},
+			{
+				"item": "humantier6shead"
+			},
+			{
+				"item": "humantier6schest"
+			},
+			{
+				"item": "humantier6spants"
+			},
+			{
+				"item": "aegisaltpistol"
+			},
+			{
+				"item": "aegisaltbow"
+			},
+			{
+				"item": "feroziumwand"
+			},
+			{
+				"item": "feroziumstaff"
+			},
+			{
+				"item": "violiumshortsword"
+			},
+			{
+				"item": "violiumbroadsword"
+			},
+			// Furniture Table 2
+			{
+				"item": "humanstoragelocker"
+			},
+			{
+				"item": "humanshipdoor"
+			},
+			{
+				"item": "humanshiphatch"
+			},
+			// Spinning Wheel
+			{
+				"item": "conceptchest"
+			},
+			{
+				"item": "conceptlegs"
+			},
+			{
+				"item": "coolchest"
+			},
+			{
+				"item": "coollegs"
+			},
+			{
+				"item": "sweatervestchest"
+			},
+			{
+				"item": "sweatervestlegs"
+			},
+			{
+				"item": "workoutchest"
+			},
+			{
+				"item": "workoutlegs"
+			}
+		]
+	},
+	"effectDirectives": "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=ff99e6FF;31a6ffFF=e359b9FF",
+	"facialHair": [],
+	"facialMask": [],
+	"genders": [
+		{
+			"name": "male",
+			"image": "/interface/title/male.png",
+			"characterImage": "/interface/title/male.png"
+		},
+		{
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/female.png"
+		}
+	],
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"hair" : [ // horns
+	"hair": [ // horns
 		"?replace;b16900=201d24;d48b22=2b2831;ea9d2c=38343e;", // Lakota's black
 		"?replace;b16900=176D55;d48b22=178566;ea9d2c=179975;", // Dex's turquoise
 		"?replace;b16900=202020;d48b22=303030;ea9d2c=404040;", // Mint's grey
@@ -133,53 +268,7 @@
 		"?replace;b16900=292929;d48b22=494949;ea9d2c=696969;", // Ambi's grey
 		"?replace;b16900=beab7e;d48b22=dcc899;ea9d2c=ead6a7;" // Jaych's cream
 	],
-	"shirt" : [ // underbelly
-		"?replace;7d7d7d=201d24;a3a3a3=2b2831;b1b1b1=38343e;", // Lakota's black
-		"?replace;7d7d7d=831d17;a3a3a3=96211b;b1b1b1=9f241c;", // Dex's red
-		"?replace;7d7d7d=5da8c1;a3a3a3=6fccea;b1b1b1=7ddfff;", // Mints's blue
-		"?replace;7d7d7d=5a477b;a3a3a3=725b98;b1b1b1=806aa6;", // Auri's purple
-		"?replace;7d7d7d=292929;a3a3a3=494949;b1b1b1=696969;", // Ambi's grey
-		"?replace;7d7d7d=beab7e;a3a3a3=dcc899;b1b1b1=ead6a7;" // Ambi's grey
-
-	],
-	"pants" : [ // eye color
-		"?replace;34851a=13260bFE;45b91f=8af555FE;80ff56=f5ffedFE;", // Lakota
-		"?replace;34851a=086e7dFE;45b91f=17cbfeFE;80ff56=232029FE;", // Dex
-		"?replace;34851a=073114FE;45b91f=14993dFE;80ff56=ffffffFE;", // Mint
-		"?replace;34851a=297b6bFE;45b91f=48cfb4FE;80ff56=1f1735FE;", // Auri
-		"?replace;34851a=b9a100FE;45b91f=ffdf00FE;80ff56=ffffffFE;", // Ambi
-		"?replace;34851a=40c400FE;45b91f=75ff33FE;80ff56=efffe7FE;" // Jaych
-	],
-	"shirtColor" : [ // flesh color
-		"?replace;702c55=645a6e;8b3c6c=877996;a94783=a69cb0;", // Lakota's grey
-		"?replace;702c55=55bc96;8b3c6c=5ccca4;a94783=62ddb1;", // Mint's mint
-		"?replace;702c55=702c56;8b3c6c=8b3c6d;a94783=a94784;", // default pink
-		"?replace;702c55=3e7ea3FE;8b3c6c=52b0c9FE;a94783=64cbe5FE;", // Dex's light blue
-		"?replace;702c55=b9a100FE;8b3c6c=e7ca00FE;a94783=ffdf00FE;", // Ambi's gold
-		"?replace;702c55=187D68FE;8b3c6c=30B79BFE;a94783=48CFB4FE;" // Auri's teal
-	],
-	"pantsColor" : [
-		""
-	],
-	"facialHair" : [ ],
-	"facialMask" : [ ],
-	"bodyColor" : [
-		"?replace;191919=7b7977;292929=c9c8c7;3c3c3c=d7d4d2;4a4a4a=e4e0dc;", // Lakota's white
-		"?replace;191919=96a6a0;292929=b8c7c1;3c3c3c=cadad4;4a4a4a=ffffff;", // Mint's white
-		"?replace;191919=c3b5d1;292929=dcd1e7;3c3c3c=eee8f5;4a4a4a=fdfbff;", // Auri's white
-		"?replace;191919=2b2c2b;292929=3a3c3b;3c3c3c=474a49;4a4a4a=515554;", // Dex's grey
-		"?replace;191919=020202;292929=121212;3c3c3c=222222;4a4a4a=323232;", // Ambi's black
-		"?replace;191919=beab7e;292929=cfbc90;3c3c3c=dcc899;4a4a4a=ead6a7;" // Jaych's cream
-	],
-	"undyColor" : [
-		"?replace;005062=7b777a;10778e=938d92;15839b=a19aa0;23b5d4=ada6ad;", // Lakota's grey accent
-		"?replace;005062=141912;10778e=1b2118;15839b=22291e;23b5d4=2b3326;", // Dex's dark green accent
-		"?replace;005062=5da8c1;10778e=68c0dc;15839b=6fccea;23b5d4=7ddfff;", // Mint's blue accent
-		"?replace;005062=5a477b;10778e=655088;15839b=725b98;23b5d4=806aa6;", // Auri's purple accent
-		"?replace;005062=b9a100;10778e=d1b600;15839b=e7ca00;23b5d4=ffdf00;", // Ambi's gold accent
-		"?replace;005062=004a01;10778e=005f01;15839b=006801;23b5d4=007703;" // Jaych's green accent
-	],
-	"hairColor" : [
+	"hairColor": [
 		"?replace;6c0c90=201d24;8217ab=2b2831;8f1fb9=38343e;", // Lakota's black
 		"?replace;6c0c90=6a6d60;8217ab=9a9b96;8f1fb9=f7f7f7;", // Dex's green-white
 		"?replace;6c0c90=55bc96;8217ab=5ccca4;8f1fb9=62ddb1;", // Mint's mint
@@ -187,71 +276,236 @@
 		"?replace;6c0c90=312757;8217ab=3e316d;8f1fb9=493a81;", // Auri's dark purple
 		"?replace;6c0c90=b66081;8217ab=c46d8f;8f1fb9=D77b9f;" // Jaych's pink
 	],
-	"headOptionAsHairColor" : true,
-	"hairColorAsBodySubColor" : true,
-	"altOptionAsUndyColor" : true,
-	"shirtOptionAsIdentityString" : true,
-	"pantsOptionAsIdentityString" : true,
-
-	"humanoidOverrides" : {
-		"globalOffset" : [-8, 0],
-
-		"mouthOffset" : [52, 3],
-		"feetOffset" : [0,-32],
-
-		"runFallOffset" : 0,
-		"duckOffset" : 0,
-
-		"walkBob" : [0, 0, 0, 0, 0, 0, 0, 0],
-		"runBob" : [0, 0, 1, 1, 0, 0, -1, -1],
-
-		"frontArmRotationCenter" : [57,-5],
-		"backArmRotationCenter" : [57,-5],
-		"frontHandPosition" : [57,-5],
-		"backArmOffset" : [4,0],
-
-		"movementParameters" : {
-			"standingPoly" : [
-				[-2.5,-4], [-3.5,-4],
-				[-4.5,-3], [-4.5,-0.5],
-				[-2.5, 0.5], [3.5,0.5],
-				[4.5,-0.5], [4.5, -3],
-				[3.5,-4], [2.5,-4],
-				[0.5,-2], [-0.5,-2]
+	"hairColorAsBodySubColor": true,
+	"headOptionAsHairColor": true,
+	"humanoidOverrides": {
+		"globalOffset": [
+			-8,
+			0
+		],
+		"mouthOffset": [
+			52,
+			3
+		],
+		"feetOffset": [
+			0,
+			-32
+		],
+		"runFallOffset": 0,
+		"duckOffset": 0,
+		"walkBob": [
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0
+		],
+		"runBob": [
+			0,
+			0,
+			1,
+			1,
+			0,
+			0,
+			-1,
+			-1
+		],
+		"frontArmRotationCenter": [
+			57,
+			-5
+		],
+		"backArmRotationCenter": [
+			57,
+			-5
+		],
+		"frontHandPosition": [
+			57,
+			-5
+		],
+		"backArmOffset": [
+			4,
+			0
+		],
+		"movementParameters": {
+			"standingPoly": [
+				[
+					-2.5,
+					-4
+				],
+				[
+					-3.5,
+					-4
+				],
+				[
+					-4.5,
+					-3
+				],
+				[
+					-4.5,
+					-0.5
+				],
+				[
+					-2.5,
+					0.5
+				],
+				[
+					3.5,
+					0.5
+				],
+				[
+					4.5,
+					-0.5
+				],
+				[
+					4.5,
+					-3
+				],
+				[
+					3.5,
+					-4
+				],
+				[
+					2.5,
+					-4
+				],
+				[
+					0.5,
+					-2
+				],
+				[
+					-0.5,
+					-2
+				]
 			],
-			"crouchingPoly" : [
-				[-2.5,-4], [-3.5,-4],
-				[-4.5,-3], [-4.5,0],
-				[-2.5, 1], [3.5,1],
-				[4.5,0], [4.5, -3],
-				[3.5,-4], [2.5,-4],
-				[0.5,-2], [-0.5,-2]
+			"crouchingPoly": [
+				[
+					-2.5,
+					-4
+				],
+				[
+					-3.5,
+					-4
+				],
+				[
+					-4.5,
+					-3
+				],
+				[
+					-4.5,
+					0
+				],
+				[
+					-2.5,
+					1
+				],
+				[
+					3.5,
+					1
+				],
+				[
+					4.5,
+					0
+				],
+				[
+					4.5,
+					-3
+				],
+				[
+					3.5,
+					-4
+				],
+				[
+					2.5,
+					-4
+				],
+				[
+					0.5,
+					-2
+				],
+				[
+					-0.5,
+					-2
+				]
 			],
-			"mass" : 1.6,
+			"mass": 1.6,
 			"walkSpeed": 10,
 			"runSpeed": 20
 		},
-		"personalities" : [
-			[ "idle.1", "idle.1", [0, 0], [0, 0] ] //standard
+		"personalities": [
+			[
+				"idle.1",
+				"idle.1",
+				[
+					0,
+					0
+				],
+				[
+					0,
+					0
+				]
+			] //standard
 		]
-
 	},
-
-	"potionDesc" : "The pearl of a Ziellek Dragon...\nFor some reason you feel the urge to swallow it.",
-	"potionShortDesc" : "Ziellek Pearl",
-	"potionImagePath" : "/humanoid/sbq/LakotaAmitola/ziellekDragon/potion/",
-	"animationConfig" : "/humanoid/sbq/LakotaAmitola/ziellekDragon/ziellekDragon.animation",
-	"identityAnimationCustom" :{},
-	"animationCustom" : [
+	"identityAnimationCustom": {},
+	"infuseData": [
+		"/humanoid/any/basicInfuseData.config"
 	],
-	"potionRarity" : "legendary",
-	"sbqConfig" : [
+	"kind": "sbq/LakotaAmitola/ziellekDragon",
+	"nameGen": [
+		"/species/humanmalenamegen.config:names",
+		"/species/humanfemalenamegen.config:names"
+	],
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises": [
+		"/sfx/humanoid/humanhurt_male1.ogg",
+		"/sfx/humanoid/humanhurt_female1.ogg"
+	],
+	"pants": [ // eye color
+		"?replace;34851a=13260bFE;45b91f=8af555FE;80ff56=f5ffedFE;", // Lakota
+		"?replace;34851a=086e7dFE;45b91f=17cbfeFE;80ff56=232029FE;", // Dex
+		"?replace;34851a=073114FE;45b91f=14993dFE;80ff56=ffffffFE;", // Mint
+		"?replace;34851a=297b6bFE;45b91f=48cfb4FE;80ff56=1f1735FE;", // Auri
+		"?replace;34851a=b9a100FE;45b91f=ffdf00FE;80ff56=ffffffFE;", // Ambi
+		"?replace;34851a=40c400FE;45b91f=75ff33FE;80ff56=efffe7FE;" // Jaych
+	],
+	"pantsColor": [
+		""
+	],
+	"pantsOptionAsIdentityString": true,
+	"potionDesc": "The pearl of a Ziellek Dragon...\nFor some reason you feel the urge to swallow it.",
+	"potionImagePath": "/humanoid/sbq/LakotaAmitola/ziellekDragon/potion/",
+	"potionRarity": "legendary",
+	"potionShortDesc": "Ziellek Pearl",
+	"sbqConfig": [
 		"/humanoid/sbq/LakotaAmitola/ziellekDragon/vore.config"
 	],
-
-
-	"infuseData" : [
-		"/humanoid/any/basicInfuseData.config"
+	"shirt": [ // underbelly
+		"?replace;7d7d7d=201d24;a3a3a3=2b2831;b1b1b1=38343e;", // Lakota's black
+		"?replace;7d7d7d=831d17;a3a3a3=96211b;b1b1b1=9f241c;", // Dex's red
+		"?replace;7d7d7d=5da8c1;a3a3a3=6fccea;b1b1b1=7ddfff;", // Mints's blue
+		"?replace;7d7d7d=5a477b;a3a3a3=725b98;b1b1b1=806aa6;", // Auri's purple
+		"?replace;7d7d7d=292929;a3a3a3=494949;b1b1b1=696969;", // Ambi's grey
+		"?replace;7d7d7d=beab7e;a3a3a3=dcc899;b1b1b1=ead6a7;" // Ambi's grey
+	],
+	"shirtColor": [ // flesh color
+		"?replace;702c55=645a6e;8b3c6c=877996;a94783=a69cb0;", // Lakota's grey
+		"?replace;702c55=55bc96;8b3c6c=5ccca4;a94783=62ddb1;", // Mint's mint
+		"?replace;702c55=702c56;8b3c6c=8b3c6d;a94783=a94784;", // default pink
+		"?replace;702c55=3e7ea3FE;8b3c6c=52b0c9FE;a94783=64cbe5FE;", // Dex's light blue
+		"?replace;702c55=b9a100FE;8b3c6c=e7ca00FE;a94783=ffdf00FE;", // Ambi's gold
+		"?replace;702c55=187D68FE;8b3c6c=30B79BFE;a94783=48CFB4FE;" // Auri's teal
+	],
+	"shirtOptionAsIdentityString": true,
+	"skull": "/humanoid/human/dead.png",
+	"undyColor": [
+		"?replace;005062=7b777a;10778e=938d92;15839b=a19aa0;23b5d4=ada6ad;", // Lakota's grey accent
+		"?replace;005062=141912;10778e=1b2118;15839b=22291e;23b5d4=2b3326;", // Dex's dark green accent
+		"?replace;005062=5da8c1;10778e=68c0dc;15839b=6fccea;23b5d4=7ddfff;", // Mint's blue accent
+		"?replace;005062=5a477b;10778e=655088;15839b=725b98;23b5d4=806aa6;", // Auri's purple accent
+		"?replace;005062=b9a100;10778e=d1b600;15839b=e7ca00;23b5d4=ffdf00;", // Ambi's gold accent
+		"?replace;005062=004a01;10778e=005f01;15839b=006801;23b5d4=007703;" // Jaych's green accent
 	]
-
 }

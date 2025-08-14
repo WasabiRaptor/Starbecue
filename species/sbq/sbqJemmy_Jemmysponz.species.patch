@@ -1,28 +1,54 @@
-[{"op":"merge", "path":"", "value": {
-	"colorRemapGlobalTags" : {
-	},
-	"infusedParts" :{
-		"cockColorRemap" : [
-				["primary","flesh"]
-			],
-		"pussyColorRemap" : [
-				["flesh","flesh"]
-			],
-		"ballsColorRemap" : [
-				["primary","primary"]
-			],
-		"breastsColorRemap" : [
-				["primary","primary"],
-				["primary_180","primary"],
-				["flesh","flesh", {"nipplesVisible":true}],
-				["flesh","primary", {"nipplesVisible":false}]
-			]
-	},
-	"animationCustom" : [
+{
+	"animationCustom": [
 		"/humanoid/any/humanoidPred.animation"
 	],
-
-	"infuseData" : [
+	"colorRemapGlobalTags": null,
+	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
-	]
-}}]
+	],
+	"infusedParts": {
+		"cockColorRemap": [
+			[
+				"primary",
+				"flesh"
+			]
+		],
+		"pussyColorRemap": [
+			[
+				"flesh",
+				"flesh"
+			]
+		],
+		"ballsColorRemap": [
+			[
+				"primary",
+				"primary"
+			]
+		],
+		"breastsColorRemap": [
+			[
+				"primary",
+				"primary"
+			],
+			[
+				"primary_180",
+				"primary"
+			],
+			[
+				"flesh",
+				"flesh",
+				{
+					"nipplesVisible": true
+				}
+			],
+			[
+				"flesh",
+				"primary",
+				{
+					"nipplesVisible": false
+				}
+			]
+		]
+	},
+	"sbqPartImages": {}
+}

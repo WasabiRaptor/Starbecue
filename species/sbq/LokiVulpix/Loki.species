@@ -1,219 +1,702 @@
 {
-	"kind" : "sbq/LokiVulpix/Loki",
-
-	"forceName" : "Loki",
-	"charCreationTooltip" : {
-		"title" : "Loki",
-		"subTitle" : "(C9H8O)C6H5CH=CHCHO",
-		"description" : "Are you sure you're supposed to be able to read this?"
-	},
-
-	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
-
-
-	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-	"ouchNoises" : [ "/sfx/humanoid/humanhurt_female1.ogg", "/sfx/humanoid/humanhurt_female1.ogg" ],
-
-
-	"charGenTextLabels" : [ "Skin colour", "Hair style", "Shirt", "Legwear", "Underwear", "Hair colour", "Shirt colour", "Legwear colour", "Deerfox", "Personality" ],
-	"skull" : "/humanoid/human/dead.png",
-	"effectDirectives" : "?replace=FEFFFFFF=cfffa7FF?replace=9bd4ffFF=b4ff74FF?replace=31a6ffFF=92e64aFF",
-	"defaultBlueprints" : {
-		"tier1" : [
-
-// Empty Hands
-			{ "item" : "flaghuman" },
-
-// Anvil
-			{ "item" : "humantier1head" },
-			{ "item" : "humantier1chest" },
-			{ "item" : "humantier1pants" },
-			{ "item" : "humantier2head" },
-			{ "item" : "humantier2chest" },
-			{ "item" : "humantier2pants" },
-
-			{ "item" : "ironshortsword" },
-			{ "item" : "ironbroadsword" },
-			{ "item" : "tungstenaxe" },
-			{ "item" : "tungstenhammer" },
-
-// Anvil2
-			{ "item" : "humantier3head" },
-			{ "item" : "humantier3chest" },
-			{ "item" : "humantier3pants" },
-			{ "item" : "humantier4head" },
-			{ "item" : "humantier4chest" },
-			{ "item" : "humantier4pants" },
-
-			{ "item" : "titaniumdagger" },
-			{ "item" : "titaniumspear" },
-			{ "item" : "durasteelbroadsword" },
-			{ "item" : "durasteelshortsword" },
-
-// Anvil3
-			{ "item" : "humantier5ahead" },
-			{ "item" : "humantier5achest" },
-			{ "item" : "humantier5apants" },
-			{ "item" : "humantier6ahead" },
-			{ "item" : "humantier6achest" },
-			{ "item" : "humantier6apants" },
-
-			{ "item" : "humantier5mhead" },
-			{ "item" : "humantier5mchest" },
-			{ "item" : "humantier5mpants" },
-			{ "item" : "humantier6mhead" },
-			{ "item" : "humantier6mchest" },
-			{ "item" : "humantier6mpants" },
-
-			{ "item" : "humantier5shead" },
-			{ "item" : "humantier5schest" },
-			{ "item" : "humantier5spants" },
-			{ "item" : "humantier6shead" },
-			{ "item" : "humantier6schest" },
-			{ "item" : "humantier6spants" },
-
-			{ "item" : "aegisaltpistol" },
-			{ "item" : "aegisaltbow" },
-			{ "item" : "feroziumwand" },
-			{ "item" : "feroziumstaff" },
-			{ "item" : "violiumshortsword" },
-			{ "item" : "violiumbroadsword" },
-
-// Furniture Table 2
-			{ "item" : "humanstoragelocker" },
-			{ "item" : "humanshipdoor" },
-			{ "item" : "humanshiphatch" },
-
-// Spinning Wheel
-			{ "item" : "conceptchest" },
-			{ "item" : "conceptlegs" },
-			{ "item" : "coolchest" },
-			{ "item" : "coollegs" },
-			{ "item" : "sweatervestchest" },
-			{ "item" : "sweatervestlegs" },
-			{ "item" : "workoutchest" },
-			{ "item" : "workoutlegs" }
-		]
-	},
-	"altOptionAsFacialMask" : true,
-	"headOptionAsHairColor" : true,
-	"headOptionAsFacialhair" : true,
-	"altOptionAsHairColor" : true,
-	"genders" : [
-		{
-			"name" : "male",
-			"image" : "/interface/title/male.png",
-			"characterImage" : "/interface/title/male.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair" : [ "0" ],
-			"shirt" : [ "sbq_nude_chest" ],
-			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "antlers",
-			"facialHair" : [ "0" ],
-			"facialMaskGroup" : "ears",
-			"facialMask" : [ "0" ]
-		},
-		{
-			"name" : "female",
-			"image" : "/interface/title/female.png",
-			"characterImage" : "/interface/title/female.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair" : [ "0" ],
-			"shirt" : [ "sbq_nude_chest" ],
-			"pants" : [ "sbq_nude_legs" ],
-			"facialHairGroup" : "antlers",
-			"facialHair" : [ "0" ],
-			"facialMaskGroup" : "ears",
-			"facialMask" : [ "0" ]
-		}
-	],
-	"baseColorPalette" : {
-		"primary" : ["bd7025","d3802f","ea9440"],
-		"secondary" : ["301e0a","3d270f","462d13"],
-		"tertiary" : ["dbab7a","e9bc8d","fed2a5","ffd9b2"],
-		"hair" : ["a35003","bc610a","d4700e"],
-		"flesh" : ["876bb6", "9577c5", "a689d5"]
-	},
-
-	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"bodyColor" : [
-		{
-			"533487" : "533487fe", "876bb6" : "876bb6fe", "9577c5" : "9577c5fe", "a689d5" : "a689d5fe", // make flesh fullbright
-			"589e1c" : "589e1cfe", "73c42f" : "73c42ffe", "92e64a" : "92e64afe" // make eyes fullbright
-		}
-	],
-	"undyColor" : [
-		{ "dc1f00" : "4d76ad" }
-	],
-	"hairColor" : [
-		{ "d9c189" : "E86D46" }
-	],
-
-	"colorRemapGlobalTags" : {
-		"bellyColorRemap" : [
-			{"00adba":"bc1002", "check" : {"navelVisible":true}},
-			{"00adba":"eb3629", "check" : {"navelVisible":false}},
-			["primary","tertiary"]
-		],
-		"cockColorRemap" : [
-			["primary","flesh"]
-		],
-		"pussyColorRemap" : [
-			["flesh","flesh"]
-		],
-		"ballsColorRemap" : [
-			["primary","tertiary"]
-		],
-		"breastsColorRemap" : [
-			["primary","tertiary"],
-			["primary_180","tertiary"],
-			["flesh","flesh", {"nipplesVisible":true}],
-			["flesh","tertiary", {"nipplesVisible":false}]
-		]
-	},
-	"infusedParts" :{
-		"cockColorRemap" : [
-				["primary","primary"]
-			],
-		"pussyColorRemap" : [
-				["flesh","primary"]
-			],
-		"ballsColorRemap" : [
-				["primary","secondary"]
-			],
-		"breastsColorRemap" : [
-				["primary","primary"],
-				["flesh","flesh", {"nipplesVisible":true}],
-				["flesh","primary", {"nipplesVisible":false}]
-			]
-	},
-	"animationCustom" : [
+	"altOptionAsFacialMask": true,
+	"altOptionAsHairColor": true,
+	"animationCustom": [
 		"/humanoid/any/humanoidPred.animation",
-
 		{
-			"globalTagDefaults":{
-				"legs_fg_mask" : "/humanoid/gnolls/frontLegMask/malebody.png",
-				"tailImage" : "tail.png"
+			"globalTagDefaults": {
+				"legs_fg_mask": "/humanoid/gnolls/frontLegMask/malebody.png",
+				"tailImage": "tail.png"
 			}
 		}
 	],
-	"potionRarity" : "essential",
-	"sbqConfig" : [
+	"baseColorPalette": {
+		"primary": [
+			"bd7025",
+			"d3802f",
+			"ea9440"
+		],
+		"secondary": [
+			"301e0a",
+			"3d270f",
+			"462d13"
+		],
+		"tertiary": [
+			"dbab7a",
+			"e9bc8d",
+			"fed2a5",
+			"ffd9b2"
+		],
+		"hair": [
+			"a35003",
+			"bc610a",
+			"d4700e"
+		],
+		"flesh": [
+			"876bb6",
+			"9577c5",
+			"a689d5"
+		]
+	},
+	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"bodyColor": [
+		{
+			"533487": "533487fe",
+			"876bb6": "876bb6fe",
+			"9577c5": "9577c5fe",
+			"a689d5": "a689d5fe", // make flesh fullbright
+			"589e1c": "589e1cfe",
+			"73c42f": "73c42ffe",
+			"92e64a": "92e64afe" // make eyes fullbright
+		}
+	],
+	"charCreationTooltip": {
+		"title": "Loki",
+		"subTitle": "(C9H8O)C6H5CH=CHCHO",
+		"description": "Are you sure you're supposed to be able to read this?"
+	},
+	"charGenTextLabels": [
+		"Skin colour",
+		"Hair style",
+		"Shirt",
+		"Legwear",
+		"Underwear",
+		"Hair colour",
+		"Shirt colour",
+		"Legwear colour",
+		"Deerfox",
+		"Personality"
+	],
+	"colorRemapGlobalTags": null,
+	"defaultBlueprints": {
+		"tier1": [
+			// Empty Hands
+			{
+				"item": "flaghuman"
+			},
+			// Anvil
+			{
+				"item": "humantier1head"
+			},
+			{
+				"item": "humantier1chest"
+			},
+			{
+				"item": "humantier1pants"
+			},
+			{
+				"item": "humantier2head"
+			},
+			{
+				"item": "humantier2chest"
+			},
+			{
+				"item": "humantier2pants"
+			},
+			{
+				"item": "ironshortsword"
+			},
+			{
+				"item": "ironbroadsword"
+			},
+			{
+				"item": "tungstenaxe"
+			},
+			{
+				"item": "tungstenhammer"
+			},
+			// Anvil2
+			{
+				"item": "humantier3head"
+			},
+			{
+				"item": "humantier3chest"
+			},
+			{
+				"item": "humantier3pants"
+			},
+			{
+				"item": "humantier4head"
+			},
+			{
+				"item": "humantier4chest"
+			},
+			{
+				"item": "humantier4pants"
+			},
+			{
+				"item": "titaniumdagger"
+			},
+			{
+				"item": "titaniumspear"
+			},
+			{
+				"item": "durasteelbroadsword"
+			},
+			{
+				"item": "durasteelshortsword"
+			},
+			// Anvil3
+			{
+				"item": "humantier5ahead"
+			},
+			{
+				"item": "humantier5achest"
+			},
+			{
+				"item": "humantier5apants"
+			},
+			{
+				"item": "humantier6ahead"
+			},
+			{
+				"item": "humantier6achest"
+			},
+			{
+				"item": "humantier6apants"
+			},
+			{
+				"item": "humantier5mhead"
+			},
+			{
+				"item": "humantier5mchest"
+			},
+			{
+				"item": "humantier5mpants"
+			},
+			{
+				"item": "humantier6mhead"
+			},
+			{
+				"item": "humantier6mchest"
+			},
+			{
+				"item": "humantier6mpants"
+			},
+			{
+				"item": "humantier5shead"
+			},
+			{
+				"item": "humantier5schest"
+			},
+			{
+				"item": "humantier5spants"
+			},
+			{
+				"item": "humantier6shead"
+			},
+			{
+				"item": "humantier6schest"
+			},
+			{
+				"item": "humantier6spants"
+			},
+			{
+				"item": "aegisaltpistol"
+			},
+			{
+				"item": "aegisaltbow"
+			},
+			{
+				"item": "feroziumwand"
+			},
+			{
+				"item": "feroziumstaff"
+			},
+			{
+				"item": "violiumshortsword"
+			},
+			{
+				"item": "violiumbroadsword"
+			},
+			// Furniture Table 2
+			{
+				"item": "humanstoragelocker"
+			},
+			{
+				"item": "humanshipdoor"
+			},
+			{
+				"item": "humanshiphatch"
+			},
+			// Spinning Wheel
+			{
+				"item": "conceptchest"
+			},
+			{
+				"item": "conceptlegs"
+			},
+			{
+				"item": "coolchest"
+			},
+			{
+				"item": "coollegs"
+			},
+			{
+				"item": "sweatervestchest"
+			},
+			{
+				"item": "sweatervestlegs"
+			},
+			{
+				"item": "workoutchest"
+			},
+			{
+				"item": "workoutlegs"
+			}
+		]
+	},
+	"effectDirectives": "?replace=FEFFFFFF=cfffa7FF?replace=9bd4ffFF=b4ff74FF?replace=31a6ffFF=92e64aFF",
+	"forceName": "Loki",
+	"genders": [
+		{
+			"name": "male",
+			"image": "/interface/title/male.png",
+			"characterImage": "/interface/title/male.png",
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+			"hair": [
+				"0"
+			],
+			"shirt": [
+				"sbq_nude_chest"
+			],
+			"pants": [
+				"sbq_nude_legs"
+			],
+			"facialHairGroup": "antlers",
+			"facialHair": [
+				"0"
+			],
+			"facialMaskGroup": "ears",
+			"facialMask": [
+				"0"
+			]
+		},
+		{
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/female.png",
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+			"hair": [
+				"0"
+			],
+			"shirt": [
+				"sbq_nude_chest"
+			],
+			"pants": [
+				"sbq_nude_legs"
+			],
+			"facialHairGroup": "antlers",
+			"facialHair": [
+				"0"
+			],
+			"facialMaskGroup": "ears",
+			"facialMask": [
+				"0"
+			]
+		}
+	],
+	"hairColor": [
+		{
+			"d9c189": "E86D46"
+		}
+	],
+	"headOptionAsFacialhair": true,
+	"headOptionAsHairColor": true,
+	"infuseData": [
+		"/humanoid/any/basicInfuseData.config",
+		{
+			"locationOverrides": {
+				"transformResult": {
+					"species": "any"
+				}
+			}
+		}
+	],
+	"infusedParts": {
+		"cockColorRemap": [
+			[
+				"primary",
+				"primary"
+			]
+		],
+		"pussyColorRemap": [
+			[
+				"flesh",
+				"primary"
+			]
+		],
+		"ballsColorRemap": [
+			[
+				"primary",
+				"secondary"
+			]
+		],
+		"breastsColorRemap": [
+			[
+				"primary",
+				"primary"
+			],
+			[
+				"flesh",
+				"flesh",
+				{
+					"nipplesVisible": true
+				}
+			],
+			[
+				"flesh",
+				"primary",
+				{
+					"nipplesVisible": false
+				}
+			]
+		]
+	},
+	"kind": "sbq/LokiVulpix/Loki",
+	"nameGen": [
+		"/species/humanmalenamegen.config:names",
+		"/species/humanfemalenamegen.config:names"
+	],
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises": [
+		"/sfx/humanoid/humanhurt_female1.ogg",
+		"/sfx/humanoid/humanhurt_female1.ogg"
+	],
+	"potionRarity": "essential",
+	"sbqConfig": [
 		"/humanoid/any/vore.config",
 		{
-			"defaultSettings" : {
-				"navelVisible" : true,
-				"nipplesVisible" : true
+			"defaultSettings": {
+				"navelVisible": true,
+				"nipplesVisible": true
 			},
-			"transformResult" : {"species":"any"}
+			"transformResult": {
+				"species": "any"
+			}
 		},
 		"/npcs/sbq/LokiVulpix/Loki/tenant.npctype:scriptConfig.voreConfig"
 	],
+	"sbqPartImages": {
+		"sbq/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
 
-	"infuseData" : [
-		"/humanoid/any/basicInfuseData.config",
-		{"locationOverrides":{"transformResult" : {"species":"any"}}}
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/belly.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/belly.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/cock.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/cock.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/ballsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/pussy.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breasts.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/breasts_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breasts.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsFront.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqVoreParts/breastsBack.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		}
+	},
+	"skull": "/humanoid/human/dead.png",
+	"undyColor": [
+		{
+			"dc1f00": "4d76ad"
+		}
 	]
-
-
 }
