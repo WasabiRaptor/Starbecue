@@ -98,14 +98,21 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
         humanoidConfig.useAnimation = true
     end
     humanoidConfig = old.build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
-    if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table") and humanoidConfig.sbqConfig) then
+    if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
         return humanoidConfig
     end
     local sbqConfig = root.assetJson("/sbq.config")
+    if not humanoidConfig.sbqModules then
+        humanoidConfig.sbqModules = assets.json("/humanoid.config:sbqModules")
+    end
+    if not humanoidConfig.sbqConfig then
+        humanoidConfig.sbqConfig = assets.json("/humanoid.config:sbqConfig")
+    end
+
     humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
 
-    humanoidConfig.sbqOccupantSlots = humanoidConfig.sbqOccupantSlots or sbqConfig.seatCount or 0
-    for i = 1, (humanoidConfig.sbqOccupantSlots) do
+    humanoidConfig.sbqConfig.seatCount = humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or sbqConfig.seatCount or 0
+    for i = 1, (humanoidConfig.sbqConfig.seatCount) do
         humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
             part = "occupant" .. tostring(i),
             partAnchor = "loungeOffset",
@@ -117,12 +124,13 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
             dismountable = false,
         }
     end
+
     local baseModule = humanoidConfig.sbqConfig
-    humanoidConfig.sbqConfig = {
+    humanoidConfig.sbqConfig = sb.jsonMerge(baseModule, {
         includes = jarray(),
         scripts = jarray()
-    }
-    prepSBQModule(baseModule)
+    })
+    humanoidConfig = prepSBQModule(humanoidConfig, baseModule)
     for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
         local modules = humanoidConfig.sbqModules[slot]
         local selectedModule = humanoidParameters["sbqModule_" .. slot]

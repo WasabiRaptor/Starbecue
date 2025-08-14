@@ -1,5 +1,5 @@
 require("/scripts/object/SBQ_vore_object.lua")
-require("/humanoid/any/voreScripts.lua")
+require("/humanoid/any/sbqModules/base/voreScripts.lua")
 local Hickory = {
 	states = {
 		default = {},

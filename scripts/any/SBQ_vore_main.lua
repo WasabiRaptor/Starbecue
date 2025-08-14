@@ -125,7 +125,7 @@ function sbq.passiveStatChanges(dt)
 	end
 end
 
-function sbq.reloadVoreConfig(config)
+function sbq.reloadVoreConfig(sbqConfig)
 	status.clearPersistentEffects("occupantModifiers")
 	Occupants.refreshOccupantModifiers = true
 	-- if reloading while another transformation is already active, uninitialize it first
@@ -134,14 +134,14 @@ function sbq.reloadVoreConfig(config)
 		SpeciesScript:uninit()
 		SpeciesScript.active = false
 	end
-	-- store the last input so it's used again on the next initiaization
-	sbq.lastVoreConfig = config
 
 	-- load config from species or config input, such as from a tech transformation
-    sbq.voreConfig = sbq.fetchConfigArray(config, sbq.directory())
-	if sbq.humanoid then
-		sbq.voreConfig.seatCount = sbq.humanoid.humanoidConfig().sbqOccupantSlots
-	end
+    sbq.voreConfig = {}
+    for _, v in ipairs(sbqConfig.includes) do
+        sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
+    end
+	sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
+
 	-- reset setting tables on reload
 	sbq.setupSettingMetatables(entity.entityType())
 

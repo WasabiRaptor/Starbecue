@@ -24,7 +24,7 @@ function patch(config, path)
     local sbqPartImages = {}
     for imagePath, data in pairs(config.sbqPartImages or {}) do
         if type(data) == "table" then
-            local sourcePalettePath = (data.sourcePalette or "/humanoid/any/sbqVoreParts/palette.config")
+            local sourcePalettePath = (data.sourcePalette or "/humanoid/any/sbqModules/palette.config")
             if assets.exists(sourcePalettePath) then
                 local sourcePalette = assets.json(sourcePalettePath)
                 local result = data.sourceImage
@@ -69,16 +69,6 @@ function patch(config, path)
                 -- nothing to do if it don't exist
             end
         end
-    end
-
-    if not config.humanoidOverrides then
-        config.humanoidOverrides = {}
-    end
-    local humanoidConfig = sb.jsonMerge(assets.json(config.humanoidConfig or "/humanoid.config"), config.humanoidOverrides)
-    if not humanoidConfig.sbqModules then
-        humanoidConfig.sbqModules = assets.json()
-    elseif type(humanoidConfig.sbqModules) == "string" then
-        humanoidConfig.sbqModules = assets.json(humanoidConfig.sbqModules)
     end
 
     config.sbqPartImages = sbqPartImages
