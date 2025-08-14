@@ -14,7 +14,6 @@
 
 		"bellyImage" : "/humanoid/any/sbqVoreParts/quadruped/belly.png",
 		"bellyColorRemap" : "",
-		"bellyInfusedColorRemap" : "?crop;0;0;0;0",
 		"bellyInfusedFade" : "",
 		"bellyInfusedDirectives" : "",
 
@@ -275,7 +274,7 @@
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<bellyInfusedColorRemap><bellyInfusedDirectives><bellyInfusedFade>"
+					"processingDirectives" : "<bellyInfusedDirectives><bellyInfusedFade>"
 				},
 				"partStates": {
 					"body": {

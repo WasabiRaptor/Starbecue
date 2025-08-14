@@ -1,10 +1,8 @@
 {
 	"globalTagDefaults" : {
-		"breastsImage" : "sbq/breasts.png",
 		"breastsFrontImage" : "sbq/breastsFront.png",
 		"breastsBackImage" : "sbq/breastsBack.png",
 		"breastsColorRemap" : "",
-		"breastsInfusedColorRemap" : "?crop;0;0;0;0",
 		"breastsInfusedFade" : "",
 		"breastsInfusedDirectives" : "",
 
@@ -18,14 +16,6 @@
 	},
 	"animatedParts" : {
 		"stateTypes" : {
-			"breastsState" : {
-				"default": "idle",
-				"priority" : 1,
-				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
 			"breasts_rightState" : {
 				"default": "idle",
 				"priority" : 1,
@@ -107,25 +97,7 @@
 					"centered": true,
 					"anchorPart":"body",
 					"transformationGroups": ["movementOffset", "chestOffset"],
-					"interact" : [0.375,-0.375],
-					"bodyFullbright" : true,
-					"processingDirectives" : "<breastsColorRemap><bodyDirectives>"
-				},
-				"partStates": {
-					"breastsState": {
-						"idle": { "properties": { "image": "<breastsImage>" } },
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust" : "head"
-					},
-					"breastsHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"starpounds" : {
-						"true" : { "properties":{}}
-					}
+					"interact" : [0.375,-0.375]
 				}
 			},
 			"breasts_right" : {
@@ -280,25 +252,7 @@
 				"properties": {
 					"centered": true,
 					"anchorPart": "breasts",
-					"interact" : [0.375,-0.375],
-					"bodyFullbright" : true,
-					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsInfusedFade>"
-				},
-				"partStates": {
-					"breastsState": {
-						"idle": { "properties": { "image": "<breastsImage>" } },
-						"none": { "properties": {} }
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust" : "head"
-					},
-					"breastsHiddenState" : {
-						"none": { "properties": {} }
-					},
-					"starpounds" : {
-						"true" : { "properties":{}}
-					}
+					"interact" : [0.375,-0.375]
 				}
 			},
 			"breasts_right_infused" : {
@@ -306,7 +260,7 @@
 					"centered": true,
 					"anchorPart": "breasts_right",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsInfusedFade>"
+					"processingDirectives" : "<breastsInfusedDirectives><breastsInfusedFade>"
 				},
 				"partStates": {
 					"breasts_rightState": {
@@ -362,7 +316,7 @@
 					"centered": true,
 					"anchorPart": "breasts_left",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<breastsInfusedColorRemap><breastsInfusedDirectives><breastsInfusedFade>"
+					"processingDirectives" : "<breastsInfusedDirectives><breastsInfusedFade>"
 				},
 				"partStates": {
 					"breasts_leftState": {

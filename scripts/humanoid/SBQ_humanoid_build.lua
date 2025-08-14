@@ -67,7 +67,14 @@ local function fixSlotAnimation(animation, slot)
     return animation
 end
 
-local function loadSBQModule(humanoidConfig, module)
+function prepSBQModule(humanoidConfig, module)
+    for _, v in ipairs(module.includes or {}) do
+        humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(v))
+        table.insert(humanoidConfig.sbqConfig.includes, v)
+    end
+    for _, v in ipairs(module.scripts or {}) do
+        table.insert(humanoidConfig.sbqConfig.scripts, v)
+    end
     if module.animation then
         table.insert(humanoidConfig.animation.includes, module.animation)
     end
@@ -83,10 +90,6 @@ local function loadSBQModule(humanoidConfig, module)
             humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(occupantSlot, i))
         end
     end
-    if module.sbqConfig then
-        table.insert(humanoidConfig.sbqConfig.modules, module.sbqConfig)
-    end
-
     return humanoidConfig
 end
 
@@ -95,16 +98,13 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
         humanoidConfig.useAnimation = true
     end
     humanoidConfig = old.build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
-    if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
+    if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table") and humanoidConfig.sbqConfig) then
         return humanoidConfig
     end
+    local sbqConfig = root.assetJson("/sbq.config")
     humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
-    local speciesConfig = root.speciesConfig(identity.species)
 
-    humanoidConfig.sbqOccupantSlots = humanoidConfig.sbqOccupantSlots or root.assetJson("/sbq.config:seatCount") or 0
-    humanoidConfig.sbqConfig = humanoidConfig.sbqConfig or {
-        includes = jarray()
-    }
+    humanoidConfig.sbqOccupantSlots = humanoidConfig.sbqOccupantSlots or sbqConfig.seatCount or 0
     for i = 1, (humanoidConfig.sbqOccupantSlots) do
         humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
             part = "occupant" .. tostring(i),
@@ -117,14 +117,20 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
             dismountable = false,
         }
     end
-
-    for slot, modules in pairs(humanoidConfig.sbqModules or {}) do
+    local baseModule = humanoidConfig.sbqConfig
+    humanoidConfig.sbqConfig = {
+        includes = jarray(),
+        scripts = jarray()
+    }
+    prepSBQModule(baseModule)
+    for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
+        local modules = humanoidConfig.sbqModules[slot]
         local selectedModule = humanoidParameters["sbqModule_" .. slot]
         if selectedModule then
             if modules[selectedModule] then
-                humanoidConfig = loadSBQModule(humanoidConfig, root.assetJson(modules[selectedModule]))
+                humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(modules[selectedModule]))
             else
-                humanoidConfig = loadSBQModule(humanoidConfig, root.assetJson(modules.default))
+                humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(modules.default))
             end
         end
     end

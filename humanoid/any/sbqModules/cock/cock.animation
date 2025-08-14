@@ -1,20 +1,18 @@
 {
 	"globalTagDefaults" : {
-		"pussyImage" : "sbq/pussy.png",
-		"pussyColorRemap" : "",
-		"pussyInfusedColorRemap" : "?crop;0;0;0;0",
-		"pussyInfusedFade" : "",
-		"pussyInfusedDirectives" : "",
-
-		"pussySize" : "0",
-		"pussyInterpolateSize" : "0"
+		"cockImage" : "sbq/cock.png",
+		"cockColorRemap" : "",
+		"cockInfusedFade" : "",
+		"cockInfusedDirectives" : "",
+		"cockSize" : "0",
+		"cockInterpolateSize" : "0"
 
 	},
 	"animatedParts" : {
 		"stateTypes" : {
-			"pussyState" : {
+			"cockState" : {
 				"default": "idle",
-				"priority" : 1,
+				"priority" : 2,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
@@ -34,8 +32,8 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"pussyExpandState" : {
-				"priority" : 2,
+			"cockExpandState" : {
+				"priority" : 3,
 				"default": "ignore",
 				"states" : {
 					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
@@ -45,7 +43,7 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"pussyHiddenState" : {
+			"cockHiddenState" : {
 				"priority" : 4,
 				"default": "none",
 				"states" : {
@@ -55,46 +53,61 @@
 			}
 		},
 		"parts" : {
-			"pussy" : {
+			"cock" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.01,
-					"anchorPart" :"body",
+					"zLevel": 0.3,
+					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "crotchOffset"],
-					"interact" : [0, -2],
+					"interact" : [0.5, -1.5],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<pussyColorRemap><bodyDirectives>"
+					"processingDirectives" : "<cockColorRemap><bodyDirectives>",
+
+					"0-particles" : [0.625,-1.875],
+					"0.5-particles" : [1,-2.125],
+					"1-particles" : [1.5,-2.25]
 				},
 				"partStates": {
-					"pussyState": {
-						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
-						"s_front" : "idle",
-						"s_front_press" : "idle",
-						"s_front_hold" : "idle",
-						"s_front_release" : "idle",
-						"s_back" : "idle",
-						"s_back_press" : "idle",
-						"s_back_hold" : "idle",
-						"s_back_release" : "idle",
-						"s_up" : "idle",
-						"s_up_press" : "idle",
-						"s_up_hold" : "idle",
-						"s_up_release" : "idle",
-						"s_down" : "idle",
-						"s_down_press" : "idle",
-						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
+					"body": {
+						"idle": { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"walk": { "properties": { "image": "<cockImage>:<cockSize>-<body_state>.<body_frame>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"cockState": {
+						"s_front" : { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
-					"pussyExpandState" : {
-						"expand": { "properties": { "image": "<pussyImage>:<pussyInterpolateSize>-expand" } },
+					"cockExpandState" : {
+						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
+					},
+					"rpActionState": {
+						"jackoff" : {
+							"properties": {
+								"image": "<cockImage>:<cockSize>-jackoff.1",
+								"0-particles" : [0.75,-1.125],
+								"0.5-particles" : [1.125,-1.125],
+								"1-particles" : [1.25,-0.875]
+							},
+							"frameProperties" : {
+							}
+						}
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
 					},
-					"pussyHiddenState" : {
+					"cockHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"starpounds" : {
@@ -102,45 +115,47 @@
 					}
 				}
 			},
-			"pussy_infused" : {
+
+			"cock_infused" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.011,
-					"anchorPart": "pussy",
-					"interact" : [0, -2],
+					"zLevel": 0.301,
+					"anchorPart": "cock",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<pussyInfusedColorRemap><pussyInfusedDirectives><pussyInfusedFade>"
+					"processingDirectives" : "<cockInfusedDirectives><cockInfusedFade>"
 				},
 				"partStates": {
-					"pussyState": {
-						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
-						"s_front" : "idle",
-						"s_front_press" : "idle",
-						"s_front_hold" : "idle",
-						"s_front_release" : "idle",
-						"s_back" : "idle",
-						"s_back_press" : "idle",
-						"s_back_hold" : "idle",
-						"s_back_release" : "idle",
-						"s_up" : "idle",
-						"s_up_press" : "idle",
-						"s_up_hold" : "idle",
-						"s_up_release" : "idle",
-						"s_down" : "idle",
-						"s_down_press" : "idle",
-						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
+					"body": {
+						"idle": { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"walk": { "properties": { "image": "<cockImage>:<cockSize>-<body_state>.<body_frame>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"cockState": {
+						"s_front" : { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_back" : "s_front",
+						"s_up" : "s_front",
+						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
-					"pussyExpandState" : {
-						"expand": { "properties": { "image": "<pussyImage>:<pussyInterpolateSize>-expand" } },
+					"cockExpandState" : {
+						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
+					},
+					"rpActionState": {
+						"jackoff" : { "properties": { "image": "<cockImage>:<cockSize>-jackoff.1" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
 					},
-					"pussyHiddenState" : {
+					"cockHiddenState" : {
 						"none": { "properties": {} }
 					},
 					"starpounds" : {
@@ -148,26 +163,24 @@
 					}
 				}
 			}
-
 		}
 	},
 	"transformationGroups" : {
 		"crotchOffset": {"interpolated": false},
-		"pussy_particles": {"interpolated": false}
+		"cock_particles": {"interpolated": false}
 	},
 	"sounds" : {
 
 	},
 	"particleEmitters" : {
-		"pussy_leak_1" : {
+		"cock_leak_1" : {
 			"emissionRate":1,
-			"emissionRateVariance":0.15,
+			"emissionRateVariance":0.3,
 			"active" : false,
-			"anchorPart" : "pussy",
-			"transformationGroups" : ["pussy_particles"],
+			"anchorPart" : "cock",
+			"transformationGroups" : ["cock_particles"],
 			"particles" : [
 				{
-					"offset" : [0.125,-1.375],
 					"particle" : {
 						"type" : "ember",
 						"size" : 1,
@@ -176,7 +189,7 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0, -5.0],
+						"initialVelocity" : [1, -5.0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 0.6,
@@ -188,15 +201,14 @@
 				}
 			]
 		},
-		"pussy_leak_2" : {
+		"cock_leak_2" : {
 			"emissionRate":1.5,
-			"emissionRateVariance":0.15,
+			"emissionRateVariance":0.3,
 			"active" : false,
-			"anchorPart" : "pussy",
-			"transformationGroups" : ["pussy_particles"],
+			"anchorPart" : "cock",
+			"transformationGroups" : ["cock_particles"],
 			"particles" : [
 				{
-					"offset" : [0.125,-1.375],
 					"particle" : {
 						"type" : "ember",
 						"size" : 1,
@@ -205,7 +217,7 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0, -5.0],
+						"initialVelocity" : [1, -5.0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 0.6,
@@ -217,15 +229,15 @@
 				}
 			]
 		},
-		"pussy_climax" : {
+
+		"cock_climax" : {
 			"emissionRate":1,
-			"emissionRateVariance":0.15,
+			"emissionRateVariance":0.3,
 			"active" : false,
-			"anchorPart" : "pussy",
-			"transformationGroups" : ["pussy_particles"],
+			"anchorPart" : "cock",
+			"transformationGroups" : ["cock_particles"],
 			"particles" : [
 				{
-					"offset" : [0.125,-1.375],
 					"particle" : {
 						"type" : "ember",
 						"size" : 1.5,
@@ -234,19 +246,18 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0, -4.0],
+						"initialVelocity" : [2, 0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 30,
 						"variance" : {
-							"initialVelocity" : [0.5, 0],
+							"initialVelocity" : [0.5, 0.5],
 							"size" : 0.25,
 							"timeToLive" : 10
 						}
 					}
 				},
 				{
-					"offset" : [0.125,-1.375],
 					"particle" : {
 						"type" : "ember",
 						"size" : 1.5,
@@ -255,19 +266,18 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [-0.25, -4.0],
+						"initialVelocity" : [3, 0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 30,
 						"variance" : {
-							"initialVelocity" : [0.5, 0],
+							"initialVelocity" : [0.5, 0.5],
 							"size" : 0.25,
 							"timeToLive" : 10
 						}
 					}
 				},
 				{
-					"offset" : [0.125,-1.375],
 					"particle" : {
 						"type" : "ember",
 						"size" : 1.5,
@@ -276,12 +286,12 @@
 						"destructionAction" : "shrink",
 						"destructionTime" : 0.8,
 						"position" : [0.0, 0.0],
-						"initialVelocity" : [0.25, -4.0],
+						"initialVelocity" : [1, 0],
 						"finalVelocity" : [0, -10],
 						"approach" : [0, 10],
 						"timeToLive" : 30,
 						"variance" : {
-							"initialVelocity" : [0.5, 0],
+							"initialVelocity" : [0.5, 0.5],
 							"size" : 0.25,
 							"timeToLive" : 10
 						}
@@ -289,6 +299,5 @@
 				}
 			]
 		}
-
 	}
 }

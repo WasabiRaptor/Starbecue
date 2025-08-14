@@ -58,17 +58,29 @@ function patch(config, path)
                         end
                     else
                         sb.logInfo(
-                        "[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
+                            "[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
                             config.kind, imagePath, i)
                     end
                 end
                 sbqPartImages[imagePath] = result
             else
-                sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist", config.kind, imagePath, sourcePalettePath)
+                sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
+                    config.kind, imagePath, sourcePalettePath)
                 -- nothing to do if it don't exist
             end
         end
     end
+
+    if not config.humanoidOverrides then
+        config.humanoidOverrides = {}
+    end
+    local humanoidConfig = sb.jsonMerge(assets.json(config.humanoidConfig or "/humanoid.config"), config.humanoidOverrides)
+    if not humanoidConfig.sbqModules then
+        humanoidConfig.sbqModules = assets.json()
+    elseif type(humanoidConfig.sbqModules) == "string" then
+        humanoidConfig.sbqModules = assets.json(humanoidConfig.sbqModules)
+    end
+
     config.sbqPartImages = sbqPartImages
     return config
 end

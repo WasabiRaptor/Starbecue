@@ -3,7 +3,6 @@
 		"ballsFrontImage" : "sbq/ballsFront.png",
 		"ballsBackImage" : "sbq/ballsBack.png",
 		"ballsColorRemap" : "",
-		"ballsInfusedColorRemap" : "?crop;0;0;0;0",
 		"ballsInfusedFade" : "",
 		"ballsInfusedDirectives" : "",
 
@@ -204,7 +203,7 @@
 					"flippedZLevel": 0.101,
 					"anchorPart": "balls_right",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsInfusedFade>"
+					"processingDirectives" : "<ballsInfusedDirectives><ballsInfusedFade>"
 				},
 				"partStates": {
 					"balls_rightState": {
@@ -256,7 +255,7 @@
 					"flippedZLevel": 0.111,
 					"anchorPart": "balls_left",
 					"bodyFullbright" : true,
-					"processingDirectives" : "<ballsInfusedColorRemap><ballsInfusedDirectives><ballsInfusedFade>"
+					"processingDirectives" : "<ballsInfusedDirectives><ballsInfusedFade>"
 				},
 				"partStates": {
 					"balls_leftState": {

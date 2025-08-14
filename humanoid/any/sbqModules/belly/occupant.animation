@@ -1,0 +1,160 @@
+{
+    "animatedParts" : {
+        "stateTypes":{
+            "occupant<slot>Location" : {
+                "states" :{
+					"belly": { "frames": 1, "cycle": 0, "mode": "end" },
+					"ass": { "frames": 1, "cycle": 0, "mode": "end" }
+
+                }
+            },
+            "occupant<slot>State":{
+                "states" : {
+					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"navelVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"absorbVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" }
+                }
+            }
+        },
+        "parts" : {
+            "occupant<slot>":{
+                "partStates" : {
+                    "occupant<slot>Location" :{
+						"belly" : {"properties":{
+							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [0,-1]
+						}},
+						"ass" : {"properties":{
+							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [-0.25,-1.375]
+						}}
+                    },
+                    "occupant<slot>State":{
+                        "oralVore" : {
+							// frame properties can be used for transformations with the modified
+							// engine's new animator features
+							"frameProperties" :{
+								"release" : [true],
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],			["rotateDegrees",0],	["translate",[1.5,0]]],
+									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1,0.25]]],
+									[["reset"],	["scale",[-0.5, 0.5]],		["rotateDegrees",45],	["translate",[0.75,0.25]]],
+									[["reset"],	["scale",[-0.25, 0.25]],	["rotateDegrees",90],	["translate",[0.5,0.25]]],
+									[["reset"],	["scale",[-0.1, 0.1]],		["rotateDegrees",100],	["translate",[0.25,0.25]]],
+									[["reset"],	["scale",[-0.1, 0.1]],		["rotateDegrees",180],	["translate",[0,0.25]]],
+									[["reset"],	["scale",[0, 0]],			["rotateDegrees",90],	["translate",[0,-0.5]]],
+									[["reset"],	["scale",[0, 0]],			["rotateDegrees",0],	["translate",[0,-1]]]
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" :"head",
+								"zLevel" : 15
+							}
+
+						},
+						"analVore": {
+							"frameProperties": {
+								"release" : [true],
+								"transforms": [
+									[["reset"],	["scale",[1,1]],	["rotateDegrees",0],	["translate",[-1.5,0]]],
+									[["reset"],	["scale",[0.75,0.75]],	["rotateDegrees",-15],	["translate",[-1,-0.75]]],
+									[["reset"],	["scale",[0.5,0.5]],	["rotateDegrees",-45],	["translate",[-0.75,-1]]],
+									[["reset"],	["scale",[0.25,0.25]],	["rotateDegrees",-90],	["translate",[-0.5,-1.125]]],
+									[["reset"],	["scale",[0.1,0.1]],	["rotateDegrees",-90],	["translate",[-0.375,-1.25]]],
+									[["reset"],	["scale",[0.1,0.1]],	["rotateDegrees",-90],	["translate",[-0.25,-1.375]]],
+									[["reset"],	["scale",[0,0]],	["rotateDegrees",-45],	["translate",[-0.25,-1.375]]],
+									[["reset"],	["scale",[0,0]],	["rotateDegrees",0],	["translate",[-0.25,-1.375]]]
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" : "body",
+								"zLevel" : 5
+							}
+						},
+						"navelVore" : {
+							"frameProperties" : {
+								"release" : [true],
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
+									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.5]]],
+									[["reset"],	["scale",[-0.5, 0.5]],	["rotateDegrees",45],	["translate",[0.75, -0.75]]],
+									[["reset"],	["scale",[-0.25, 0.25]],	["rotateDegrees",90],	["translate",[0.5, -1]]],
+									[["reset"],	["scale",[-0.1, 0.1]],	["rotateDegrees",90],	["translate",[0.25, -1.25]]],
+									[["reset"],	["scale",[-0.1, 0.1]],	["rotateDegrees",90],	["translate",[0, -1.25]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",45],	["translate",[0, -1.25]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",0],	["translate",[0, -1]]]
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" : "belly",
+								"zLevel" : 10
+							}
+						},
+						"absorbVore" : {
+							"frameProperties" : {
+								"release" : [true],
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
+									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.5]]],
+									[["reset"],	["scale",[-0.5, 0.5]],	["rotateDegrees",45],	["translate",[0.75, -0.75]]],
+									[["reset"],	["scale",[-0.25, 0.25]],	["rotateDegrees",90],	["translate",[0.5, -1]]],
+									[["reset"],	["scale",[-0.1, 0.1]],	["rotateDegrees",90],	["translate",[0.25, -1.25]]],
+									[["reset"],	["scale",[-0.1, 0.1]],	["rotateDegrees",90],	["translate",[0, -1.25]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",45],	["translate",[0, -1.25]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",0],	["translate",[0, -1]]]
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" : "belly",
+								"zLevel" : 10
+							}
+						}
+                    }
+                }
+            }
+        }
+    }
+}
