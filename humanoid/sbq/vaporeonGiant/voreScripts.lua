@@ -5,15 +5,15 @@ local VaporeonGiant = {
 	},
 	locations = {}
 }
-setmetatable(VaporeonGiant, Species.default)
+setmetatable(VaporeonGiant, sbq.SpeciesScripts.default)
 for k, v in pairs(VaporeonGiant.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(VaporeonGiant.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.VaporeonGiant = VaporeonGiant
+sbq.SpeciesScripts.VaporeonGiant = VaporeonGiant
 VaporeonGiant.__index = VaporeonGiant
 
 function VaporeonGiant:init()

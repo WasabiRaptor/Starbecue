@@ -1,3 +1,6 @@
+local _Settings = {}
+_Settings.__index = _Settings
+
 function sbq.settingsInit()
 	message.setHandler("sbqSetGroupedSetting", function(_, _, ...)
 		return sbq.setGroupedSetting(...)
@@ -112,7 +115,7 @@ function sbq.importSettings(newSettings)
 	sbq.setupSettingMetatables(entity.entityType())
 	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
-	for k, location in pairs(SpeciesScript.locations) do
+	for k, location in pairs(sbq.SpeciesScript.locations) do
 		location:markSettingsDirty()
 	end
 end
@@ -127,8 +130,8 @@ function sbq.refreshSettings()
 		table.insert(modifiers, { stat = v, amount = tonumber(amount) or 0 })
 	end
 	status.setPersistentEffects("sbqStats", modifiers)
-	if SpeciesScript then
-		SpeciesScript:settingAnimations()
+	if sbq.SpeciesScript then
+		sbq.SpeciesScript:settingAnimations()
 	end
 end
 

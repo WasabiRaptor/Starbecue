@@ -108,6 +108,12 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
     if not humanoidConfig.sbqConfig then
         humanoidConfig.sbqConfig = assets.json("/humanoid.config:sbqConfig")
     end
+    if type(humanoidConfig.sbqConfig) == "string" then
+        humanoidConfig.sbqConfig = assets.json(humanoidConfig.sbqConfig)
+    end
+    if type(humanoidConfig.sbqModules) == "string" then
+        humanoidConfig.sbqModules = assets.json(humanoidConfig.sbqModules)
+    end
 
     humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
 

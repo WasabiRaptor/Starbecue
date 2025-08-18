@@ -6,15 +6,15 @@ local Sprink = {
 	},
 	locations = {}
 }
-setmetatable(Sprink, Species.default)
+setmetatable(Sprink, sbq.SpeciesScripts.default)
 for k, v in pairs(Sprink.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(Sprink.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.Sprink = Sprink
+sbq.SpeciesScripts.Sprink = Sprink
 Sprink.__index = Sprink
 
 function Sprink:init()

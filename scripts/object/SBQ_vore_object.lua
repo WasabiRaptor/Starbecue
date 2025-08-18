@@ -75,13 +75,13 @@ function uninit()
 end
 
 function die()
-	for i, occupant in ipairs(Occupants.list) do
+	for i, occupant in ipairs(sbq.Occupants.list) do
 		occupant:remove("died")
 	end
 end
 
 function onInteraction(args)
-	return SpeciesScript:interact(args)
+	return sbq.SpeciesScript:interact(args)
 end
 
 function sbq.collisionArea()

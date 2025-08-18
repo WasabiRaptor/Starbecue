@@ -5,15 +5,15 @@ local Fray = {
 	},
 	locations = {}
 }
-setmetatable(Fray, Species.default)
+setmetatable(Fray, sbq.SpeciesScripts.default)
 for k, v in pairs(Fray.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(Fray.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.Fray = Fray
+sbq.SpeciesScripts.Fray = Fray
 Fray.__index = Fray
 
 function Fray:init()

@@ -169,7 +169,7 @@ function init()
 		local description = sb.replaceTags(sbq.getString((isDom and ":genericDomPrompt") or ":genericSubPrompt"),
 			{ actionName = sbq.getString(":" .. action), entityName = sbq.entityName(id) })
 		local sourceRadius
-		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
+		if (player.loungingIn() == id) or sbq.Occupants.entityId[tostring(id)] then
 			sourceRadius = -1
 		end
 		player.interact("ScriptPane", {
@@ -191,7 +191,7 @@ function init()
 	message.setHandler("sbqPromptResponse", function(_, _, tryAction, isDom, line, action, target)
 		if tryAction then
 			if isDom then
-				SpeciesScript:requestAction(false, action, target)
+				sbq.SpeciesScript:requestAction(false, action, target)
 			else
 				world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id())
 			end
@@ -200,7 +200,7 @@ function init()
 
 	message.setHandler("sbqRequestActions", function(_, _, id, actionList)
 		local sourceRadius
-		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
+		if (player.loungingIn() == id) or sbq.Occupants.entityId[tostring(id)] then
 			sourceRadius = -1
 		end
 		player.interact("ScriptPane", {
@@ -232,7 +232,7 @@ function init()
 			})
 		end
 		local sourceRadius
-		if (player.loungingIn() == id) or Occupants.entityId[tostring(id)] then
+		if (player.loungingIn() == id) or sbq.Occupants.entityId[tostring(id)] then
 			sourceRadius = -1
 		end
 		player.interact("ScriptPane", {
@@ -391,7 +391,7 @@ function teleportOut()
 		status.setStatusProperty("sbqOccupantData", nil)
 		status.clearPersistentEffects("sbqMissingPred")
 	end
-	for i, occupant in ipairs(Occupants.list) do
+	for i, occupant in ipairs(sbq.Occupants.list) do
 		if world.entityType(occupant.entityId) ~= "player" then
 			occupant:remove("teleportOut")
 		end
@@ -400,7 +400,7 @@ end
 
 function die()
 	status.setStatusProperty("sbqOccupantData", nil)
-	for i, occupant in ipairs(Occupants.list) do
+	for i, occupant in ipairs(sbq.Occupants.list) do
 		occupant:remove("died")
 	end
 end

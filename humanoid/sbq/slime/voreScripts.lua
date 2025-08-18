@@ -5,15 +5,15 @@ local Slime = {
 	},
 	locations = {}
 }
-setmetatable(Slime, Species.default)
+setmetatable(Slime, sbq.SpeciesScripts.default)
 for k, v in pairs(Slime.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(Slime.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.Slime = Slime
+sbq.SpeciesScripts.Slime = Slime
 Slime.__index = Slime
 
 function Slime:init()

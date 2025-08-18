@@ -2,7 +2,7 @@
 function _ENV.metagui.theme.drawFrame() -- maybe this could stop the background from drawing
 end
 
-Occupants = {
+sbq.Occupants = {
 	list = {},
 	entityId = {}
 }
@@ -17,10 +17,10 @@ function init()
 		pane.dismiss()
 	end)
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
-		Occupants.list = occupants
-		Occupants.entityId = {}
-		for _, occupant in ipairs(Occupants.list) do
-			Occupants.entityId[tostring(occupant.entityId)] = occupant
+		sbq.Occupants.list = occupants
+		sbq.Occupants.entityId = {}
+		for _, occupant in ipairs(sbq.Occupants.list) do
+			sbq.Occupants.entityId[tostring(occupant.entityId)] = occupant
 		end
 		for k, v in pairs(settingsData) do
 			sbq[k] = v
@@ -41,7 +41,7 @@ function init()
 	end)
 	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
 		if not world.entityExists(entityId) then return end
-		if not Occupants.entityId[tostring(entityId)] then return end
+		if not sbq.Occupants.entityId[tostring(entityId)] then return end
 		local portrait = _ENV[entityId .. "PortraitCanvas"]
 		if portrait then
 			local pos = { 0, 0 }
@@ -58,7 +58,7 @@ function init()
 	end)
 	message.setHandler("sbqHudRefreshPortrait", function(_, _, entityId, flags)
 		if not world.entityExists(entityId) then return end
-		local occupant = Occupants.entityId[tostring(entityId)]
+		local occupant = sbq.Occupants.entityId[tostring(entityId)]
 		if not occupant then return end
 		sbq.refreshPortrait(entityId)
 		if not flags then return end
@@ -80,10 +80,10 @@ function init()
 		end
 	end)
 
-	Occupants.list = _ENV.metagui.inputData.occupants
-	Occupants.entityId = {}
-	for _, occupant in ipairs(Occupants.list) do
-		Occupants.entityId[tostring(occupant.entityId)] = occupant
+	sbq.Occupants.list = _ENV.metagui.inputData.occupants
+	sbq.Occupants.entityId = {}
+	for _, occupant in ipairs(sbq.Occupants.list) do
+		sbq.Occupants.entityId[tostring(occupant.entityId)] = occupant
 	end
 	sbq.refreshOccupants()
 	sbq.changeLocation(1)
@@ -103,11 +103,11 @@ end
 local emptyTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/emptySlot.config")
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantSlot.config")
 function sbq.refreshOccupants()
-	Occupants.entityId = {}
+	sbq.Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
     local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
 	for i = 1, seatCount do
-        local occupant = Occupants.list[i]
+        local occupant = sbq.Occupants.list[i]
         if occupant then
 			addOccupantPortraitSlot(occupant)
         else
@@ -120,7 +120,7 @@ end
 
 function addOccupantPortraitSlot(occupant)
 	local layout = sbq.replaceConfigTags(occupantTemplate, { entityId = occupant.entityId, entityName = world.entityName(occupant.entityId) })
-	Occupants.entityId[tostring(occupant.entityId)] = occupant
+	sbq.Occupants.entityId[tostring(occupant.entityId)] = occupant
 	_ENV.occupantSlots:addChild(layout)
 	sbq.refreshPortrait(occupant.entityId)
 	local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
@@ -186,7 +186,7 @@ sbq.bottomBar = {
 }
 
 function sbq.updateBars(dt)
-	for _, occupant in ipairs(Occupants.list) do
+	for _, occupant in ipairs(sbq.Occupants.list) do
 		if world.entityExists(occupant.entityId) then
 			sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
 			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressBarColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") or 0 )

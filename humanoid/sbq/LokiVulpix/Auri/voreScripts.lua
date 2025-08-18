@@ -5,15 +5,15 @@ local Auri = {
 	},
 	locations = {}
 }
-setmetatable(Auri, Species.default)
+setmetatable(Auri, sbq.SpeciesScripts.default)
 for k, v in pairs(Auri.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(Auri.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.Auri = Auri
+sbq.SpeciesScripts.Auri = Auri
 Auri.__index = Auri
 
 function Auri:init()

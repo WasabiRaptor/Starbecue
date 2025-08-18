@@ -53,5 +53,5 @@ function hasShieldSheathed(args, board)
 end
 
 function isFollowingRecruiter(args, board)
-	return not Occupants.entityId[_ENV.recruitable.ownerUuid()] and _ENV.recruitable.isFollowing()
+	return not sbq.Occupants.entityId[_ENV.recruitable.ownerUuid()] and _ENV.recruitable.isFollowing()
 end

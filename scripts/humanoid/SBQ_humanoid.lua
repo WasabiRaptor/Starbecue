@@ -59,8 +59,8 @@ function equipped.chestCosmeticSlot(itemDescriptor)
 		end
 	else
 	end
-	if SpeciesScript then
-		SpeciesScript:settingAnimations()
+	if sbq.SpeciesScript then
+		sbq.SpeciesScript:settingAnimations()
 	end
 end
 
@@ -73,8 +73,8 @@ function equipped.legsCosmeticSlot(itemDescriptor)
 		end
 	else
 	end
-	if SpeciesScript then
-		SpeciesScript:settingAnimations()
+	if sbq.SpeciesScript then
+		sbq.SpeciesScript:settingAnimations()
 	end
 end
 
@@ -84,8 +84,8 @@ function equipped.headCosmeticSlot(itemDescriptor)
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
-	if SpeciesScript then
-		SpeciesScript:settingAnimations()
+	if sbq.SpeciesScript then
+		sbq.SpeciesScript:settingAnimations()
 	end
 end
 
@@ -95,8 +95,8 @@ function equipped.backCosmeticSlot(itemDescriptor)
 		local item = root.itemConfig(itemDescriptor)
 	else
 	end
-	if SpeciesScript then
-		SpeciesScript:settingAnimations()
+	if sbq.SpeciesScript then
+		sbq.SpeciesScript:settingAnimations()
 	end
 end
 

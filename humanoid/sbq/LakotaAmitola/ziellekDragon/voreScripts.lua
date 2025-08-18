@@ -5,15 +5,15 @@ local ZiellekDragon = {
 	},
 	locations = {}
 }
-setmetatable(ZiellekDragon, Species.default)
+setmetatable(ZiellekDragon, sbq.SpeciesScripts.default)
 for k, v in pairs(ZiellekDragon.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(ZiellekDragon.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.ZiellekDragon = ZiellekDragon
+sbq.SpeciesScripts.ZiellekDragon = ZiellekDragon
 ZiellekDragon.__index = ZiellekDragon
 
 function ZiellekDragon:init()

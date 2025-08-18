@@ -25,7 +25,7 @@ function patch(config, path)
     for imagePath, data in pairs(config.sbqPartImages or {}) do
         if type(data) == "table" then
             local sourcePalettePath = (data.sourcePalette or "/humanoid/any/sbqModules/palette.config")
-            if assets.exists(sourcePalettePath) then
+            if assets.exists(sourcePalettePath) and assets.exists(data.sourceImage) then
                 local sourcePalette = assets.json(sourcePalettePath)
                 local result = data.sourceImage
                 if result:sub(1, 1) ~= "/" then
@@ -64,8 +64,14 @@ function patch(config, path)
                 end
                 sbqPartImages[imagePath] = result
             else
-                sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
-                    config.kind, imagePath, sourcePalettePath)
+                if not assets.exists(sourcePalettePath) then
+                    sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
+                        config.kind, imagePath, sourcePalettePath)
+                end
+                if not assets.exists(data.sourceImage) then
+                    sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
+                        config.kind, imagePath, sourcePalettePath)
+                end
                 -- nothing to do if it don't exist
             end
         end

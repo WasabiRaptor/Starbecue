@@ -5,15 +5,15 @@ local Kaiju = {
 	},
 	locations = {}
 }
-setmetatable(Kaiju, Species.default)
+setmetatable(Kaiju, sbq.SpeciesScripts.default)
 for k, v in pairs(Kaiju.states) do
-	setmetatable(v, Species.default.states[k] or _State)
+	setmetatable(v, sbq.SpeciesScripts.default.states[k] or sbq._State)
 end
 for k, v in pairs(Kaiju.locations) do
-	setmetatable(v, Species.default.locations[k] or _Location)
+	setmetatable(v, sbq.SpeciesScripts.default.locations[k] or sbq._Location)
 end
 
-Species.Kaiju = Kaiju
+sbq.SpeciesScripts.Kaiju = Kaiju
 Kaiju.__index = Kaiju
 
 function Kaiju:init()

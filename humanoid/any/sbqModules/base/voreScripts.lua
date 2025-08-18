@@ -5,16 +5,16 @@ local Default = {
 	},
 	locations = {}
 }
-setmetatable(Default, _SpeciesScript)
+setmetatable(Default, sbq._SpeciesScript)
 for k, v in pairs(Default.states) do
 	v.__index = v
-	setmetatable(v, _State)
+	setmetatable(v, sbq._State)
 end
 for k, v in pairs(Default.locations) do
 	v.__index = v
-	setmetatable(v, _Location)
+	setmetatable(v, sbq._Location)
 end
-Species.default = Default
+sbq.SpeciesScripts.default = Default
 Default.__index = Default
 
 function Default:init()
@@ -44,7 +44,7 @@ function Default:settingAnimations()
 		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 
 		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock and not sbq.checkStarpounds("legs") then
-			local leakiness = ((sbq.settings.cockLeakiness^2 * lust)^2)*10*math.max(0.25, ((Occupants.locations.cock or {}).count or 0) + ((Occupants.locations.balls or {}).count or 0))
+			local leakiness = ((sbq.settings.cockLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.cock or {}).count or 0) + ((sbq.Occupants.locations.balls or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
 				animator.setParticleEmitterEmissionRate(v, leakiness)
@@ -56,7 +56,7 @@ function Default:settingAnimations()
 		end
 
 		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy and not sbq.checkStarpounds("legs") then
-			local leakiness = ((sbq.settings.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, ((Occupants.locations.womb or {}).count or 0) + ((Occupants.locations.pussy or {}).count or 0))
+			local leakiness = ((sbq.settings.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.womb or {}).count or 0) + ((sbq.Occupants.locations.pussy or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
 				animator.setParticleEmitterEmissionRate(v, leakiness)
@@ -76,7 +76,7 @@ function Default:settingAnimations()
 	else
 		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
 		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts and not sbq.checkStarpounds("chest") then
-			local leakiness = ((sbq.settings.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, ((Occupants.locations.breasts or {}).count or 0))
+			local leakiness = ((sbq.settings.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.breasts or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
 				animator.setParticleEmitterEmissionRate(v, leakiness)
@@ -108,7 +108,7 @@ function Default:refreshStripping()
 		end
 	end
 	status.setPersistentEffects("sbqStripping", modifiers)
-	SpeciesScript:settingAnimations()
+	sbq.SpeciesScript:settingAnimations()
 end
 
 
@@ -132,9 +132,9 @@ function default:actionSequence(name, action, target, actionList, ...)
 		end
 	end
 	for _, actionData in ipairs(actions) do
-		if (target and action.untilFirstSuccess) and not SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
+		if (target and action.untilFirstSuccess) and not sbq.SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
 		else
-			results = { SpeciesScript:tryAction(actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
+			results = { sbq.SpeciesScript:tryAction(actionData[1], target, table.unpack(actionData[2] or action.args or {})) }
 			if results[1] then
 				successCount = successCount + 1
 				if (action.successCount) then
@@ -159,9 +159,9 @@ function default:actionSequenceAvailable(name, action, target, actionList, ...)
 	local results
 	local actions = actionList or action.actionList
 	for _, actionData in ipairs(actions) do
-		if (target and action.untilFirstSuccess) and not SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
+		if (target and action.untilFirstSuccess) and not sbq.SpeciesScript:actionAvailable(actionData[1], nil, table.unpack(actionData[2] or action.args or {}) ) then
 		else
-			results = {SpeciesScript:actionAvailable(actionData[1], target, table.unpack(actionData[2] or action.args or {}))}
+			results = {sbq.SpeciesScript:actionAvailable(actionData[1], target, table.unpack(actionData[2] or action.args or {}))}
 			if results[1] then
 				successCount = successCount + 1
 				if (action.availableSuccessCount or action.successCount) then
@@ -195,9 +195,9 @@ function default:scriptSequence(name, action, target, scriptList, ...)
 end
 
 function default:moveToLocation(name, action, target, locationName, subLocationName, throughput, ...)
-	occupant = Occupants.entityId[tostring(target)]
+	occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	local location = sbq.SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
 	local size = (occupant.size * occupant.sizeMultiplier)
 	throughput = throughput or action.throughput
@@ -209,7 +209,7 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
         occupant:refreshLocation(locationName or action.location, subLocation)
 		location:refreshStruggleDirection()
 		return true, function ()
-			occupant = Occupants.entityId[tostring(target)]
+			occupant = sbq.Occupants.entityId[tostring(target)]
 			if occupant then
 				occupant:refreshLocation()
 				location:refreshStruggleDirection()
@@ -219,9 +219,9 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	return false, "noSpace"
 end
 function default:moveToLocationAvailable(name, action, target, locationName, subLocationName, throughput, ...)
-	occupant = Occupants.entityId[tostring(target)]
+	occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	local location = sbq.SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
 	local size = (occupant.size * occupant.sizeMultiplier)
 	throughput = throughput or action.throughput
@@ -237,15 +237,15 @@ end
 
 function default:trySendDeeperAvailable(name, action, target, failureReason, size, ...)
 	if target then
-		local occupant = Occupants.entityId[tostring(target)]
+		local occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return false, "missingOccupant" end
 		local location = occupant:getLocation()
 		if not location then return false, "invalidLocation" end
 		if not location.sendDeeperAction then return false, "invalidAction" end
 		if not occupant:active() then return false, "invalidAction" end
-        return SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
+        return sbq.SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
     else
-		local location = SpeciesScript:getLocation(action.location, action.subLocation)
+		local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 		if not location then return false, "invalidLocation" end
         if not location.sendDeeperAction then return false, "invalidAction" end
         local spaceNeeded = (size * location.settings.multiplyFill / sbq.getScale()) - location:getRemainingSpace()
@@ -267,15 +267,15 @@ end
 
 function default:trySendDeeper(name, action, target, failureReason, size, ...)
     if target then
-        local occupant = Occupants.entityId[tostring(target)]
+        local occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return false, "missingOccupant" end
 		local location = occupant:getLocation()
 		if not location then return false, "invalidLocation" end
 		if not location.sendDeeperAction then return false, "invalidAction" end
 		if not occupant:active() then return false, "invalidAction" end
-		return SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
+		return sbq.SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
     else
-		local location = SpeciesScript:getLocation(action.location, action.subLocation)
+		local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 		if not location then return false, "invalidLocation" end
         if not location.sendDeeperAction then return false, "invalidAction" end
         local success, newFailureReason
@@ -304,7 +304,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 		if loungeId and (loungeId ~= entity.id()) and (not world.entityLoungeAnchor(loungeId, anchorIndex).dismountable) then return false, "invalidAction" end
 		size = sbq.getEntitySize(target)
 	end
-	local location = SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
+	local location = sbq.SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
 		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
@@ -341,7 +341,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	end
 
 	if space or (action.flags and action.flags.infusing) then
-		if (#Occupants.list + 1) <= sbq.voreConfig.seatCount then
+		if (#sbq.Occupants.list + 1) <= sbq.voreConfig.seatCount then
 			return true
 		else
 			return false, "noSlots"
@@ -357,7 +357,7 @@ function default:tryVore(name, action, target, ...)
 	local loungeId, anchorIndex = world.entityAnchorState(target)
 	if loungeId and (loungeId ~= entity.id()) and (not world.entityLoungeAnchor(loungeId, anchorIndex).dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
-	local location = SpeciesScript:getLocation(action.location, action.subLocation)
+	local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
 		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
@@ -394,17 +394,17 @@ function default:tryVore(name, action, target, ...)
 
 	if space or (action.flags and action.flags.infusing) then
 		location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
-		if Occupants.newOccupant(target, size, action.location, subLocation, action.flags) then
+		if sbq.Occupants.newOccupant(target, size, action.location, subLocation, action.flags) then
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
-			SpeciesScript.lockActions = true
-			SpeciesScript:hideSlots(action.hideSlots or {})
-			SpeciesScript:settingAnimations()
+			sbq.SpeciesScript.lockActions = true
+			sbq.SpeciesScript:hideSlots(action.hideSlots or {})
+			sbq.SpeciesScript:settingAnimations()
 			return true, function()
 				sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
-					SpeciesScript:showSlots()
-					SpeciesScript:settingAnimations()
+					sbq.SpeciesScript:showSlots()
+					sbq.SpeciesScript:settingAnimations()
 				end)
-				local occupant = Occupants.entityId[tostring(target)]
+				local occupant = sbq.Occupants.entityId[tostring(target)]
 				if occupant then
 					occupant.flags.newOccupant = false
 					occupant:refreshLocation()
@@ -413,7 +413,7 @@ function default:tryVore(name, action, target, ...)
 						location:markSizeDirty()
 					end
 				end
-				SpeciesScript.lockActions = false
+				sbq.SpeciesScript.lockActions = false
 			end
 		else
 			if action.lockSize then
@@ -430,7 +430,7 @@ function default:tryVore(name, action, target, ...)
 end
 function default:tryLetout(name, action, target, throughput, ...)
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	throughput = throughput or action.throughput
 	if throughput and not occupant.locationSettings.hammerspace then
@@ -444,9 +444,9 @@ function default:tryLetout(name, action, target, throughput, ...)
 		location:markSizeDirty()
 	end
 	occupant.flags.releasing = true
-	SpeciesScript.lockActions = true
-	SpeciesScript:hideSlots(action.hideSlots or {})
-	SpeciesScript:settingAnimations()
+	sbq.SpeciesScript.lockActions = true
+	sbq.SpeciesScript:hideSlots(action.hideSlots or {})
+	sbq.SpeciesScript:settingAnimations()
 	sbq.forceTimer("huntTargetSwitchCooldown", 30)
 	return true, function()
 		if action.lockSize and ((not action.location) or (action.location == location.key)) then
@@ -454,40 +454,40 @@ function default:tryLetout(name, action, target, throughput, ...)
 			location:markSizeDirty()
 		end
 		sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
-			SpeciesScript:showSlots()
-			SpeciesScript:settingAnimations()
+			sbq.SpeciesScript:showSlots()
+			sbq.SpeciesScript:settingAnimations()
 		end)
 		sbq.forceTimer("huntTargetSwitchCooldown", 30)
-		local occupant = Occupants.entityId[tostring(target)]
-		SpeciesScript.lockActions = false
+		local occupant = sbq.Occupants.entityId[tostring(target)]
+		sbq.SpeciesScript.lockActions = false
 		if occupant then occupant:remove("releasing") end
 	end
 end
 local function letout(funcName, action, target, preferredAction, ...)
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	if target then
-		occupant = Occupants.entityId[tostring(target)]
+		occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return end
-		location = SpeciesScript:getLocation(occupant.location, occupant.subLocation)
+		location = sbq.SpeciesScript:getLocation(occupant.location, occupant.subLocation)
 		local exitTypes = location.exitTypes or location.entryTypes
 
 		for _, exitType in ipairs(exitTypes or {}) do
 			if (exitType == preferredAction) or (preferredAction == "vore") or (not preferredAction) then
-				if SpeciesScript[funcName](SpeciesScript, exitType.."Letout", target) then
+				if sbq.SpeciesScript[funcName](sbq.SpeciesScript, exitType.."Letout", target) then
 					return true
 				end
 			end
 		end
 	else
-		for i = #Occupants.list, 1, -1 do
-			local occupant = Occupants.list[i]
-			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId, preferredAction) then
+		for i = #sbq.Occupants.list, 1, -1 do
+			local occupant = sbq.Occupants.list[i]
+			if sbq.SpeciesScript[funcName](sbq.SpeciesScript, "letout", occupant.entityId, preferredAction) then
 				return true
 			end
 		end
-		for i = #Occupants.list, 1, -1 do
-			local occupant = Occupants.list[i]
-			if SpeciesScript[funcName](SpeciesScript, "letout", occupant.entityId) then
+		for i = #sbq.Occupants.list, 1, -1 do
+			local occupant = sbq.Occupants.list[i]
+			if sbq.SpeciesScript[funcName](sbq.SpeciesScript, "letout", occupant.entityId) then
 				return true
 			end
 		end
@@ -502,13 +502,13 @@ function default:letoutAvailable(name, ...)
 end
 
 function default:grab(name, action, target, ...)
-	local location = SpeciesScript:getLocation(action.location)
+	local location = sbq.SpeciesScript:getLocation(action.location)
 	if not location then return false, "invalidLocation" end
 	local occupant = location.occupancy.list[1]
 	if occupant then
-		return SpeciesScript:tryAction("grabRelease", occupant.entityId)
+		return sbq.SpeciesScript:tryAction("grabRelease", occupant.entityId)
 	else
-		return SpeciesScript:tryAction("grabTarget", target)
+		return sbq.SpeciesScript:tryAction("grabTarget", target)
 	end
 end
 function default:grabTarget(name, action, target, ...)
@@ -520,9 +520,9 @@ function default:grabTarget(name, action, target, ...)
 	return success, result2
 end
 function default:grabRelease(name, action, target, ...)
-	occupant = Occupants.entityId[tostring(target)]
+	occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then
-		local location = SpeciesScript:getLocation(action.location)
+		local location = sbq.SpeciesScript:getLocation(action.location)
 		if not location then return false, "invalidLocation" end
 		occupant = location.occupancy.list[1]
 	end
@@ -537,7 +537,7 @@ function default:grabRelease(name, action, target, ...)
 end
 
 function default:turboDigestAvailable(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
@@ -547,13 +547,13 @@ function default:turboDigestAvailable(name, action, target, ...)
 end
 function default:turboDigest(name, action, target, ...)
 	if not self:turboDigestAvailable(name, action, target, ...) then return false, "invalidAction" end
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboDigest", status.resource("energy"))
 	status.overConsumeResource("energy", status.resourceMax("energy"))
 end
 
 function default:turboHealAvailable(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
@@ -563,13 +563,13 @@ function default:turboHealAvailable(name, action, target, ...)
 end
 function default:turboHeal(name, action, target, ...)
 	if not self:turboHealAvailable(name, action, target, ...) then return false, "invalidAction" end
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboHeal", status.resource("energy"))
 	status.overConsumeResource("energy", status.resourceMax("energy"))
 end
 
 function default:digested(name, action, target, item, digestType, drop, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	local location
 	local delay = 0
 	if occupant then
@@ -586,15 +586,15 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 		location:markSizeDirty()
 		local sizeChangeAnims = location.occupancy.queuedSizeChangeAnims or location.sizeChangeAnims
 		if sizeChangeAnims then
-			delay = SpeciesScript:checkAnimations(false, sizeChangeAnims, {})
+			delay = sbq.SpeciesScript:checkAnimations(false, sizeChangeAnims, {})
 		end
 		if location.digestedAnims then
-			delay = math.max(delay, SpeciesScript:checkAnimations(false, location.digestedAnims, {}, target))
+			delay = math.max(delay, sbq.SpeciesScript:checkAnimations(false, location.digestedAnims, {}, target))
 		end
 	end
-	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
+	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
 	sbq.timer(target .. "Digesting", delay, function()
-		local occupant = Occupants.entityId[tostring(target)]
+		local occupant = sbq.Occupants.entityId[tostring(target)]
 		local position = entity.position()
 		if occupant then
 			position = occupant:position()
@@ -628,7 +628,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 end
 
 function default:fatalAvailable(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
@@ -637,7 +637,7 @@ function default:fatalAvailable(name, action, target, ...)
 	return true
 end
 function default:fatal(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
@@ -655,7 +655,7 @@ function default:fatal(name, action, target, ...)
 end
 
 function default:mainEffectAvailable(name, action, target)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
 	if occupant.locationSettings.mainEffect == (action.mainEffect or name) then return false, "invalidAction" end
 	if sbq.checkInvalidSetting(action.mainEffect or name, "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
@@ -666,7 +666,7 @@ function default:mainEffectAvailable(name, action, target)
 	return false, "invalidAction"
 end
 function default:setMainEffect(name, action, target)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if sbq.checkInvalidSetting(action.mainEffect or name, "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
 	occupant.locationSettings.mainEffect = action.mainEffect or name
@@ -674,25 +674,25 @@ function default:setMainEffect(name, action, target)
 end
 
 function default:reform(name, action, target,...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if occupant:resourcePercentage("health") < 1 then
 		occupant.locationSettings.reformDigested = true
 		occupant:refreshLocation()
 		return true
 	else
-		return SpeciesScript:tryAction("reformed", target)
+		return sbq.SpeciesScript:tryAction("reformed", target)
 	end
 end
 function default:reformed(name, action, target,...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
 		location.infusedEntity = nil
 		sbq.settings.infuseSlots[occupant.flags.infuseType].item = nil
 		sbq.infuseOverrideSettings[occupant.flags.infuseType] = nil
-		SpeciesScript:refreshInfusion(occupant.flags.infuseType)
+		sbq.SpeciesScript:refreshInfusion(occupant.flags.infuseType)
 	end
 	occupant.flags.infuseType = nil
 	occupant.flags.infused = false
@@ -707,14 +707,14 @@ function default:reformed(name, action, target,...)
 end
 
 function default:turboReformAvailable(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if not (occupant.locationSettings.reformDigested or occupant.flags.infused) then return false, "invalidAction" end
 	return true
 end
 function default:turboReform(name, action, target, ...)
 	if not self:turboReformAvailable(name, action, target, ...) then return false, "invalidAction" end
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	occupant:sendEntityMessage("sbqTurboHeal", status.resource("energy"))
 	status.overConsumeResource("energy", status.resourceMax("energy"))
 end
@@ -722,10 +722,10 @@ end
 
 function default:chooseLocation(name, action, target, predSelect, ...)
 	local locations = {}
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	for _, locationName in ipairs(action.locationOrder or sbq.voreConfig.locationOrder or root.assetJson("/sbqGui.config:locationOrder")) do
-		local location = SpeciesScript:getLocation(locationName)
+		local location = sbq.SpeciesScript:getLocation(locationName)
 		if location and sbq.tableMatches(location.activeSettings, sbq.settings, true) then
 			local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 			table.insert(locations, {
@@ -740,7 +740,7 @@ function default:chooseLocation(name, action, target, predSelect, ...)
 end
 
 function default:transformAvailable(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local transformResult = sb.jsonMerge({species = sbq.species()}, sbq.voreConfig.transformResult or {}, action.transformResult or {}, location.transformResult or {})
@@ -754,7 +754,7 @@ function default:transformAvailable(name, action, target, ...)
 	return true
 end
 function default:transform(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local transformResult = sb.jsonMerge({species = sbq.species()}, sbq.voreConfig.transformResult or {}, action.transformResult or {}, location.transformResult or {})
@@ -774,7 +774,7 @@ function default:transform(name, action, target, ...)
 	end
 end
 function default:transformed(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	local transformResult = sb.jsonMerge({species = sbq.species()}, sbq.voreConfig.transformResult or {}, action.transformResult or {}, location.transformResult or {})
@@ -796,41 +796,41 @@ function default:transformed(name, action, target, ...)
 end
 
 function default:infuseAvailable(name, action, target, ...)
-	local location = SpeciesScript:getLocation(action.location)
+	local location = sbq.SpeciesScript:getLocation(action.location)
 	if not location then return false, "invalidLocation" end
-	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)]then return false, "alreadyInfused" end
+	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)]then return false, "alreadyInfused" end
 
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if occupant then
 		return true
 	else
-		return SpeciesScript:actionAvailable(action.voreAction, target)
+		return sbq.SpeciesScript:actionAvailable(action.voreAction, target)
 	end
 end
 function default:tryInfuse(name, action, target, ...)
-	local location = SpeciesScript:getLocation(action.location)
+	local location = sbq.SpeciesScript:getLocation(action.location)
 	local infuseType = action.infuseType or location.infuseType or name
-	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)] then return false, "alreadyInfused" end
-	local occupant = Occupants.entityId[tostring(target)]
+	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)] then return false, "alreadyInfused" end
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if occupant then
 		occupant.locationSettings[infuseType.."Digested"] = true
 		occupant.locationSettings[infuseType] = true
 		occupant:refreshLocation()
 		return true
 	else
-		local res = { SpeciesScript:tryAction(action.voreAction, target) }
+		local res = { sbq.SpeciesScript:tryAction(action.voreAction, target) }
 		if res[1] then
-			SpeciesScript:queueAction(action.finishAction or name, target)
+			sbq.SpeciesScript:queueAction(action.finishAction or name, target)
 		end
 		return table.unpack(res)
 	end
 end
 function default:infused(name, action, target)
-	local location = SpeciesScript:getLocation(action.location)
+	local location = sbq.SpeciesScript:getLocation(action.location)
 	local infuseType = action.infuseType or location.infuseType or name
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if location.infusedEntity and Occupants.entityId[tostring(location.infusedEntity)] then
+	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)] then
 		occupant.locationSettings[infuseType.."Digested"] = false
 		occupant.locationSettings[infuseType] = false
 		occupant:refreshLocation()
@@ -846,13 +846,13 @@ function default:infused(name, action, target)
 	occupant.locationSettings[infuseType] = false
 	local locationName = occupant.location
 	local subLocationName = occupant.subLocation
-	if not Occupants.checkActiveOccupants() then SpeciesScript:queueAction("lockDownClear") end
+	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
 	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 		sbq.settings.infuseSlots[infuseType].item = card
 		sbq.infuseOverrideSettings[infuseType] = {
 			infuseSlots = { [infuseType] = { item = card}}
 		}
-		SpeciesScript:refreshInfusion(infuseType)
+		sbq.SpeciesScript:refreshInfusion(infuseType)
 		occupant:refreshLocation(action.location)
 		location:markSizeDirty()
 		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.recieveOccupants)
@@ -861,7 +861,7 @@ function default:infused(name, action, target)
 end
 
 function default:eggifyAvailable(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if occupant.flags.egged or (sbq.checkInvalidSetting("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
 	local location = occupant:getLocation()
@@ -869,7 +869,7 @@ function default:eggifyAvailable(name, action, target, ...)
 	return true
 end
 function default:eggify(name, action, target, ...)
-	local occupant = Occupants.entityId[tostring(target)]
+	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if occupant.flags.egged or (sbq.checkInvalidSetting("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
 	local location = occupant:getLocation()
@@ -890,7 +890,7 @@ function default:eggify(name, action, target, ...)
 end
 
 function default:lockDown(name, action, target, ...)
-	if Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+	if sbq.Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
@@ -901,7 +901,7 @@ function default:lockDown(name, action, target, ...)
 	})
 end
 function default:lockDownClear(name, action, target)
-	if Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+	if sbq.Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
@@ -909,15 +909,15 @@ function default:lockDownClear(name, action, target)
 end
 
 function default:releaseOccupantAvailable(name, action, target)
-	if Occupants.list[1] then return true end
+	if sbq.Occupants.list[1] then return true end
 	return false, "invalidAction"
 end
 
 function default:releaseOccupant(name, action, target)
-	local occupant = Occupants.list[1]
+	local occupant = sbq.Occupants.list[1]
 	if not occupant then return false, "invalidAction" end
 	if occupant.flags.digested or occupant.flags.infused then
-		return SpeciesScript:queueAction("reform", occupant.entityId)
+		return sbq.SpeciesScript:queueAction("reform", occupant.entityId)
 	end
-	return SpeciesScript:tryAction("letout", occupant.entityId)
+	return sbq.SpeciesScript:tryAction("letout", occupant.entityId)
 end

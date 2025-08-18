@@ -27,7 +27,7 @@ function sbq_hunting.dom(action)
 	if not action then
 		for action, check in pairs(sbq.config.seekActionsSettings.dom) do
 			local settings = sbq.settings.domBehavior[action]
-			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and SpeciesScript:actionAvailable(action) and sbq.tableMatches(check, sbq.settings, true) then
+			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.SpeciesScript:actionAvailable(action) and sbq.tableMatches(check, sbq.settings, true) then
 				for i = 1, settings.favored do
 					table.insert(actions, action)
 				end
@@ -43,7 +43,7 @@ function sbq_hunting.dom(action)
 		withoutEntityId = entity.id(), includedTypes = { "creature" },
 		withoutEntityIds = world.loungingEntities(entity.id()),
 	}) or {}) do
-		if sbq_hunting.checkTarget(action, true, target, consent) and SpeciesScript:actionAvailable(action, target) then
+		if sbq_hunting.checkTarget(action, true, target, consent) and sbq.SpeciesScript:actionAvailable(action, target) then
 			table.insert(targets, target)
 		end
 	end
@@ -60,7 +60,7 @@ function sbq_hunting.huntTarget(target, action)
 	local actions = {}
 	for action, check in pairs(sbq.config.seekActionsSettings.dom) do
 		local settings = sbq.settings.domBehavior[action]
-		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq_hunting.checkTarget(action, true, target, false) and SpeciesScript:actionAvailable(action, target) and sbq.tableMatches(check, sbq.settings, true) then
+		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq_hunting.checkTarget(action, true, target, false) and sbq.SpeciesScript:actionAvailable(action, target) and sbq.tableMatches(check, sbq.settings, true) then
 			for i = 1, settings.favored do
 				table.insert(actions, action)
 			end
@@ -163,7 +163,7 @@ function sbq_hunting.attemptAction(target)
 	if not sbq.timer("huntingActionAttemptCooldown", sbq.config.huntTargetActionCooldown) then return end
 	if sbq_hunting.prompted[target] ~= nil then sbq_hunting.nextTarget() return end
 	if sbq_hunting.isDom then
-		if SpeciesScript:actionAvailable(sbq_hunting.action, target) then
+		if sbq.SpeciesScript:actionAvailable(sbq_hunting.action, target) then
 			if sbq_hunting.getConsent then
 				sbq_hunting.domSendPrompt(target)
 			else
@@ -204,7 +204,7 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 	local function callback()
 		sbq_hunting.prompted[target] = nil
 		if try then
-			local success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(action, target)
+			local success, failReason, time, successfulFail, failReason2 =  sbq.SpeciesScript:tryAction(action, target)
 			if success then
 				if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
 					sbq_hunting.nextTarget()
@@ -259,7 +259,7 @@ end
 
 function sbq_hunting.domNoPrompt(target)
 	local function callback()
-		local success, failReason, time, successfulFail, failReason2 =  SpeciesScript:tryAction(sbq_hunting.action, target)
+		local success, failReason, time, successfulFail, failReason2 =  sbq.SpeciesScript:tryAction(sbq_hunting.action, target)
 		if success then
 			if not status.statPositive("sbqLockDown") and (math.random() < (sbq.settings.lockDownChance)) then
 				sbq.queueAction("lockDown", target)

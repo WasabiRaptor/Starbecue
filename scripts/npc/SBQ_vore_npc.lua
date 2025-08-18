@@ -126,13 +126,13 @@ function update(dt)
             (sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
             (sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
         ) then
-        if Occupants.checkActiveOccupants() then
+        if sbq.Occupants.checkActiveOccupants() then
             if status.statPositive("sbqLockDown") then
                 if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
-                    sbq.queueAction("lockDownClear", Occupants.randomActiveOccupant())
+                    sbq.queueAction("lockDownClear", sbq.Occupants.randomActiveOccupant())
                 end
             elseif (math.random() < (sbq.settings.lockDownChance)) then
-                sbq.queueAction("lockDown", Occupants.randomActiveOccupant())
+                sbq.queueAction("lockDown", sbq.Occupants.randomActiveOccupant())
             end
         end
     end
@@ -141,7 +141,7 @@ function update(dt)
 		(sbq.voreConfig.sendDeeperCycleMin or sbq.config.sendDeeperCycleMin) * 60,
 		(sbq.voreConfig.sendDeeperCycleMax or sbq.config.sendDeeperCycleMax) * 60
 	) then
-		sbq.queueAction("sendDeeper", Occupants.randomActiveOccupant())
+		sbq.queueAction("sendDeeper", sbq.Occupants.randomActiveOccupant())
 	end
 
 end
@@ -159,7 +159,7 @@ function interact(args)
 	if prompted then
 		return prompted
 	end
-	return SpeciesScript:interact(args)
+	return sbq.SpeciesScript:interact(args)
 end
 
 function equipped.primary(itemDescriptor)
@@ -188,7 +188,7 @@ function participateInNewQuests()
 end
 
 function die()
-	for i, occupant in ipairs(Occupants.list) do
+	for i, occupant in ipairs(sbq.Occupants.list) do
 		occupant:remove("died")
 	end
 	old.die()
