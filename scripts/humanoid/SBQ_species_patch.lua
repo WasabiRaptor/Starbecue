@@ -23,57 +23,55 @@ function patch(config, path)
 
     local sbqPartImages = {}
     for imagePath, data in pairs(config.sbqPartImages or {}) do
-        if type(data) == "table" then
-            local sourcePalettePath = (data.sourcePalette or "/humanoid/any/sbqModules/palette.config")
-            if assets.exists(sourcePalettePath) and assets.exists(data.sourceImage) then
-                local sourcePalette = assets.json(sourcePalettePath)
-                local result = data.sourceImage
-                if result:sub(1, 1) ~= "/" then
-                    result = "/humanoid/" .. config.kind .. "/" .. result
-                end
-                for i, remap in ipairs(data.remapDirectives or {}) do
-                    if type(remap) == "string" then
-                        result = result .. remap
-                    elseif type(remap) == "table" and remap[1] then
-                        local from = sourcePalette[remap[1]]
-                        if not from then
-                            sb.logInfo(
-                                "[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], missing palette in source named '%s'",
-                                config.kind, imagePath, i, remap[1])
-                        elseif remap[2] then
-                            local to = config.baseColorPalette[remap[2]]
-                            if to then
-                                for j, v in ipairs(from) do
-                                    result = result .. "?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
-                                end
-                            else
-                                sb.logInfo(
-                                    "[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], species is missing palette named '%s' in 'baseColorPalette'",
-                                    config.kind, imagePath, i, remap[2])
-                            end
-                        else -- if theres no color to remap to, remove the color by replacing with transparent pixels
-                            for j, v in ipairs(from) do
-                                result = result .. "?replace;" .. v .. "=00000000;"
-                            end
-                        end
-                    else
+        if data.sourceImage:sub(1, 1) ~= "/" then
+            data.sourceImage = "/humanoid/" .. config.kind .. "/" .. data.sourceImage
+        end
+        local sourcePalettePath = (data.sourcePalette or "/humanoid/any/sbqModules/palette.config")
+        data.processingDirectives = data.processingDirectives or ""
+        if assets.exists(sourcePalettePath) and assets.exists(data.sourceImage) then
+            local sourcePalette = assets.json(sourcePalettePath)
+            for i, remap in ipairs(data.remapDirectives or {}) do
+                if type(remap) == "string" then
+                    data.processingDirectives = data.processingDirectives .. remap
+                elseif type(remap) == "table" and remap[1] then
+                    local from = sourcePalette[remap[1]]
+                    if not from then
                         sb.logInfo(
-                            "[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
-                            config.kind, imagePath, i)
+                            "[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], missing palette in source named '%s'",
+                            config.kind, imagePath, i, remap[1])
+                    elseif remap[2] then
+                        local to = config.baseColorPalette[remap[2]]
+                        if to then
+                            for j, v in ipairs(from) do
+                                data.processingDirectives = data.processingDirectives .. "?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
+                            end
+                        else
+                            sb.logInfo(
+                                "[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], species is missing palette named '%s' in 'baseColorPalette'",
+                                config.kind, imagePath, i, remap[2])
+                        end
+                    else -- if theres no color to remap to, remove the color by replacing with transparent pixels
+                        for j, v in ipairs(from) do
+                            data.processingDirectives = data.processingDirectives .. "?replace;" .. v .. "=00000000;"
+                        end
                     end
+                else
+                    sb.logInfo(
+                        "[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
+                        config.kind, imagePath, i)
                 end
-                sbqPartImages[imagePath] = result
-            else
-                if not assets.exists(sourcePalettePath) then
-                    sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
-                        config.kind, imagePath, sourcePalettePath)
-                end
-                if not assets.exists(data.sourceImage) then
-                    sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
-                        config.kind, imagePath, sourcePalettePath)
-                end
-                -- nothing to do if it don't exist
             end
+            sbqPartImages[imagePath] = data
+        else
+            if not assets.exists(sourcePalettePath) then
+                sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
+                    config.kind, imagePath, sourcePalettePath)
+            end
+            if not assets.exists(data.sourceImage) then
+                sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
+                    config.kind, imagePath, sourcePalettePath)
+            end
+            -- nothing to do if it don't exist
         end
     end
 

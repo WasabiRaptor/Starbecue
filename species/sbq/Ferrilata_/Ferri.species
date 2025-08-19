@@ -328,9 +328,6 @@
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=bc1002",
-				{
-					"00adba": "bc1002"
-				},
 				[
 					"primary",
 					"secondary"
@@ -341,9 +338,6 @@
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",
-				{
-					"00adba": "bc1002"
-				},
 				[
 					"primary",
 					"secondary"
@@ -354,9 +348,6 @@
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=bc1002",
-				{
-					"00adba": "bc1002"
-				},
 				[
 					"primary",
 					"secondary"
@@ -367,9 +358,6 @@
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",
-				{
-					"00adba": "bc1002"
-				},
 				[
 					"primary",
 					"secondary"
@@ -388,7 +376,10 @@
 		"sbq/infused/ballsFront.png": {
 			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
 			"remapDirectives": [
-				null
+				[
+					"primary",
+					"secondary"
+				]
 			]
 		},
 		"sbq/ballsBack.png": {
@@ -403,7 +394,11 @@
 		"sbq/infused/ballsBack.png": {
 			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
 			"remapDirectives": [
-				null
+				[
+					"primary",
+					"secondary"
+				]
+
 			]
 		},
 		"sbq/pussy.png": {

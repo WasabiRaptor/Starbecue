@@ -50,7 +50,7 @@ function init()
 	if player.getProperty("sbqAgreedTerms") then
         if player.getHumanoidParameter("sbqEnabled") then
 			local humanoidConfig = player.humanoidConfig()
-			if humanoidConfig.sbqConfig then
+			if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
 				sbq.init(humanoidConfig.sbqConfig)
 			else
 				sbq.uninit()

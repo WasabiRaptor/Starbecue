@@ -56,7 +56,7 @@ function init()
 
 	local humanoidConfig = npc.humanoidConfig()
     if npc.getHumanoidParameter("sbqEnabled") then
-		if humanoidConfig.sbqConfig then
+		if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
             sbq.init(humanoidConfig.sbqConfig)
         else
 			sbq.uninit()
