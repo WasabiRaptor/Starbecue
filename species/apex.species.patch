@@ -37,14 +37,12 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			}
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"navelVisible": true
 		}
-	],
+	},
+
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

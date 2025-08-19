@@ -46,15 +46,12 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config" // a path to base values all species should share
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config", // path to the base vore config most humanoid races should share.
-		{
-			// setting values to lock to a specific value when playing as this species
-			"overrideSettings": {},
-			// default setting values for this species
-			"defaultSettings": {}
-		}
-	],
+	"sbqSettingsConfig": {
+		// setting values to lock to a specific value when playing as this species
+		"overrideSettings": {},
+		// default setting values for this species
+		"defaultSettings": {}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

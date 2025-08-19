@@ -15,22 +15,20 @@
 		"sbqIsCustomizable" : true,
 		"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree",
 
-		"sbqConfig" : [
-			{
-				"defaultSettings" : {
-					"personality" : "meanbean",
-					"vorePrefs" : {"oralVore":{"pred":true}},
-					"domBehavior" : {"oralVore":{"getConsentChance":0}},
-					"leanSubDom" : 1,
-					"interactDialogue" : false
-				},
-				"groupedDefaultSettings" : {
-					"vorePrefs" : {"pred":true},
-					"locations" : {"mainEffect":"digest", "reformDigested": false},
-					"domBehavior" : {"targetFriendly":false, "getConsentChance":0}
-				}
+		"sbqSettingsConfig" : {
+			"defaultSettings" : {
+				"personality" : "meanbean",
+				"vorePrefs" : {"oralVore":{"pred":true}},
+				"domBehavior" : {"oralVore":{"getConsentChance":0}},
+				"leanSubDom" : 1,
+				"interactDialogue" : false
+			},
+			"groupedDefaultSettings" : {
+				"vorePrefs" : {"pred":true},
+				"locations" : {"mainEffect":"digest", "reformDigested": false},
+				"domBehavior" : {"targetFriendly":false, "getConsentChance":0}
 			}
-		],
+		},
 
 		// "sbqPredRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
 		// "sbqPreyRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",

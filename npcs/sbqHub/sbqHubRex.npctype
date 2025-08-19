@@ -1,75 +1,95 @@
 {
-	"type" : "sbqHubRex",
-	"baseType" : "villager",
-
-	"keepAlive" : true,
-
-	"npcname" : "Rex",
-	"identity" : {
-		"facialHairType" : "",
-		"facialHairGroup" : "",
-		"personalityArmOffset" : [0, 0],
-		"hairType" : "3",
-		"bodyDirectives" : "?replace;d0a1ff=c9ff99;790de5=51be3d;c7815b=988bbe;dd15bd=4e0574;ff76e9=9814dc;ff3ee0=6a079d;ffe2c5=d4caff;ffc181=ccbcff;ffa9f1=cd36ff;af60ff=aeff7b;962dff=78d851;d39c6c=ab9ed6?replace;ff9133=6952e9;ac4f00=3c2e85;d36200=4c3ba9;ff7600=5e49d1?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100",
-		"personalityArmIdle" : "idle.2",
-		"gender" : "male",
-		"color" : [51, 117, 237],
-		"personalityHeadOffset" : [-1, 0],
-		"hairGroup" : "hair",
-		"facialMaskDirectives" : "",
-		"species" : "crylan",
-		"personalityIdle" : "idle.2",
-		"facialMaskGroup" : "",
-		"name" : "Rex",
-		"facialHairDirectives" : "",
-		"emoteDirectives" : "?replace;d0a1ff=c9ff99;790de5=51be3d;c7815b=988bbe;dd15bd=4e0574;ff76e9=9814dc;ff3ee0=6a079d;ffe2c5=d4caff;ffc181=ccbcff;ffa9f1=cd36ff;af60ff=aeff7b;962dff=78d851;d39c6c=ab9ed6?replace;ff9133=6952e9;ac4f00=3c2e85;d36200=4c3ba9;ff7600=5e49d1?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100",
-		"hairDirectives" : "?replace;ff9133=6952e9;ac4f00=3c2e85;d36200=4c3ba9;ff7600=5e49d1?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100",
-		"facialMaskType" : ""
+	"type": "sbqHubRex",
+	"baseType": "villager",
+	"keepAlive": true,
+	"npcname": "Rex",
+	"identity": {
+		"facialHairType": "",
+		"facialHairGroup": "",
+		"personalityArmOffset": [
+			0,
+			0
+		],
+		"hairType": "3",
+		"bodyDirectives": "?replace;d0a1ff=c9ff99;790de5=51be3d;c7815b=988bbe;dd15bd=4e0574;ff76e9=9814dc;ff3ee0=6a079d;ffe2c5=d4caff;ffc181=ccbcff;ffa9f1=cd36ff;af60ff=aeff7b;962dff=78d851;d39c6c=ab9ed6?replace;ff9133=6952e9;ac4f00=3c2e85;d36200=4c3ba9;ff7600=5e49d1?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100",
+		"personalityArmIdle": "idle.2",
+		"gender": "male",
+		"color": [
+			51,
+			117,
+			237
+		],
+		"personalityHeadOffset": [
+			-1,
+			0
+		],
+		"hairGroup": "hair",
+		"facialMaskDirectives": "",
+		"species": "crylan",
+		"personalityIdle": "idle.2",
+		"facialMaskGroup": "",
+		"name": "Rex",
+		"facialHairDirectives": "",
+		"emoteDirectives": "?replace;d0a1ff=c9ff99;790de5=51be3d;c7815b=988bbe;dd15bd=4e0574;ff76e9=9814dc;ff3ee0=6a079d;ffe2c5=d4caff;ffc181=ccbcff;ffa9f1=cd36ff;af60ff=aeff7b;962dff=78d851;d39c6c=ab9ed6?replace;ff9133=6952e9;ac4f00=3c2e85;d36200=4c3ba9;ff7600=5e49d1?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100",
+		"hairDirectives": "?replace;ff9133=6952e9;ac4f00=3c2e85;d36200=4c3ba9;ff7600=5e49d1?replace;dc1f00=e4d200;951500=bfbf00;be1b00=c0b100",
+		"facialMaskType": ""
 	},
-
-	"persistent" : true,
-
-	"dropPools" : [],
-
-	"scripts" : [
+	"persistent": true,
+	"dropPools": [],
+	"scripts": [
 		"/npcs/bmain.lua",
 		"/scripts/npc/SBQ_npc_bmain.lua",
 		"/scripts/npc/SBQ_vore_npc.lua"
 	],
-	"scriptConfig" : {
-		"isOC" : true,
-		"behavior" : "sbqvorevillager",
-		"uniqueId" : "sbqHubRex",
-		"sbqConfig" : [
-			"/humanoid/any/disableAllTF.config",
-			"/humanoid/any/disableAllInfusePred.config",
-			"/humanoid/any/disableAllInfusePrey.config",
-			"/humanoid/any/disableAllVorePrey.config",
-			{
-				"cock" : false,
-				"balls" : false,
-				"breasts" : false,
-				"pussy" : false,
-				"defaultSettings" : {
-					"vorePrefs" : {
-						"oralVore" : {"pred":true}
+	"scriptConfig": {
+		"isOC": true,
+		"behavior": "sbqvorevillager",
+		"uniqueId": "sbqHubRex",
+		"sbqSettingsConfig": {
+			"includes": [
+				"/humanoid/any/disableAllTF.config",
+				"/humanoid/any/disableAllInfusePred.config",
+				"/humanoid/any/disableAllInfusePrey.config",
+				"/humanoid/any/disableAllVorePrey.config"
+			],
+			"defaultSettings": {
+				"vorePrefs": {
+					"oralVore": {
+						"pred": true
 					}
-				},
-				"overrideSettings" : {
-					"vorePrefs" : {
-						"analVore" : {"pred":false},
-						"cockVore" : {"pred":false},
-						"unbirthVore" : {"pred":false},
-						"breastVore" : {"pred":false},
-						"absorbVore" : {"pred":false},
-						"navelVore" : {"pred":false},
-						"tailVore" : {"pred":false}
+				}
+			},
+			"overrideSettings": {
+				"cock": false,
+				"balls": false,
+				"breasts": false,
+				"pussy": false,
+				"vorePrefs": {
+					"analVore": {
+						"pred": false
+					},
+					"cockVore": {
+						"pred": false
+					},
+					"unbirthVore": {
+						"pred": false
+					},
+					"breastVore": {
+						"pred": false
+					},
+					"absorbVore": {
+						"pred": false
+					},
+					"navelVore": {
+						"pred": false
+					},
+					"tailVore": {
+						"pred": false
 					}
 				}
 			}
-		],
-
-		"dialogueTree" : {
+		},
+		"dialogueTree": {
 			"greeting": {
 				"next": "personality",
 				"default": {
@@ -80,8 +100,12 @@
 							"Hey there.",
 							"Greetings!"
 						],
-						"buttonTextRandom": ["Hi."],
-						"jump": ["converse"]
+						"buttonTextRandom": [
+							"Hi."
+						],
+						"jump": [
+							"converse"
+						]
 					},
 					"hungry": {
 						"randomDialogue": [
@@ -89,166 +113,292 @@
 							"Hey <entityname>, I'm looking for some food, have any?",
 							"Oh huh, I probably need to find something to eat."
 						],
-						"jump": ["converse"]
+						"jump": [
+							"converse"
+						]
 					}
 				}
 			},
-			"converse" : {
-				"randomDialogue" : [
+			"converse": {
+				"randomDialogue": [
 					"What can I do for you?",
 					"What's on your mind?",
 					"What can I do for you?"
+				],
+				"buttonTextRandom": ":optionsPrompt",
+				"options": [
+					[
+						"Can we talk about you?",
+						{
+							"buttonTextRandom": ":optionsPrompt",
+							"randomDialogue": [
+								"What about me?"
+							],
+							"options": [
+								[
+									"Who are you?",
+									{
+										"randomDialogue": [
+											"I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper."
+										],
+										"buttonTextRandom": [
+											"Okay."
+										],
+										"jump": [
+											"converse",
+											"options",
+											1,
+											2
+										]
+									}
+								],
+								[
+									"Tell me more about these minigames.",
+									{
+										"buttonText": [
+											"Okay.",
+											"Got it.",
+											"Cool.",
+											"What minigames are there?",
+											"Sounds interesting, what else?",
+											"Ooh!",
+											"Alright.",
+											"I will!"
+										],
+										"dialogue": [
+											"These so called minigames are disturbances in various locations of the universe forged by myself and other celestials.",
+											"In essence, the minigames are created to encourage use of the transformations and other items in various ways to provide additional entertainment above what can already be done.",
+											"However, the locations of these minigames are only available to a particular group on Discord, which you may join!",
+											"The games require an individual to host them (in other words load the map once downloaded) and arrange the tasks and challenges.",
+											"The minigames currently consist of a single location of an abandoned facility, where experiments were held regarding Vaporeon.",
+											"I myself am currently brainstoming the next location, which may or may not feature an experiment relating to myself~",
+											"Unfortunately it might take some time until I can reveal anything more.",
+											"In the mean time, please enjoy anything else this shopkeeper can provide~"
+										],
+										"jump": [
+											"converse",
+											"options",
+											1,
+											2
+										]
+									}
+								],
+								[
+									"What else do you do other than minigames?",
+									{
+										"buttonText": [
+											"Interesting.",
+											"I will!"
+										],
+										"dialogue": [
+											"I have served at one of many kingdoms within Cryladan. Even met a silly fellow who's looking to build his own kingdom, I belive he called himself Prince Stratos.",
+											"I have also been traveling across various worlds to expand my horizons for inspiration"
+										],
+										"jump": [
+											"converse",
+											"options",
+											1,
+											2
+										]
+									}
+								],
+								[
+									"Thats all I wanted to know about you.",
+									{
+										"jump": [
+											"converse"
+										]
+									}
+								]
+							]
+						}
 					],
-				"buttonTextRandom" : ":optionsPrompt",
-				"options" : [
-					["Can we talk about you?", {
-						"buttonTextRandom" : ":optionsPrompt",
-						"randomDialogue" : [ "What about me?" ],
-						"options" : [
-							[ "Who are you?", { "randomDialogue" : [ "I am Rex Anivius, crylan celestial of Cryladan. I am responsible for development of minigames that rely on this lovely shopkeeper." ], "buttonTextRandom" : ["Okay."], "jump" : [ "converse", "options", 1, 2 ] }],
-							[ "Tell me more about these minigames.", {
-								"buttonText" : [
-									"Okay.",
-									"Got it.",
-									"Cool.",
-									"What minigames are there?",
-									"Sounds interesting, what else?",
-									"Ooh!",
-									"Alright.",
-									"I will!"
-								],
-								"dialogue" : [
-									"These so called minigames are disturbances in various locations of the universe forged by myself and other celestials.",
-									"In essence, the minigames are created to encourage use of the transformations and other items in various ways to provide additional entertainment above what can already be done.",
-									"However, the locations of these minigames are only available to a particular group on Discord, which you may join!",
-									"The games require an individual to host them (in other words load the map once downloaded) and arrange the tasks and challenges.",
-									"The minigames currently consist of a single location of an abandoned facility, where experiments were held regarding Vaporeon.",
-									"I myself am currently brainstoming the next location, which may or may not feature an experiment relating to myself~",
-									"Unfortunately it might take some time until I can reveal anything more.",
-									"In the mean time, please enjoy anything else this shopkeeper can provide~"
-								],
-								"jump" : [ "converse", "options", 1, 2 ]
-							}],
-							[ "What else do you do other than minigames?", {
-								"buttonText" : [
-									"Interesting.",
-									"I will!"
-								],
-								"dialogue" : [
-									"I have served at one of many kingdoms within Cryladan. Even met a silly fellow who's looking to build his own kingdom, I belive he called himself Prince Stratos.",
-									"I have also been traveling across various worlds to expand my horizons for inspiration"
-								],
-								"jump" : [ "converse", "options", 1, 2 ]
-							}],
-							[ "Thats all I wanted to know about you.", { "jump" : [ "converse" ] }]
-						]
-					}],
-					[ "What is this place?", { "buttonTextRandom" : ["Mhm."], "randomDialogue" : [ "A shop I came across after traversing the stars, lovely and warm place! Good enough I might set a little workshop for my projects."], "jump" : [ "converse" ]}],
-					[ "Do you have any wares?", { "buttonTextRandom" : ["Darn."], "randomDialogue" : [ "I too have potions, but they are too strong for you, traveler *wink*"], "jump" : [ "converse" ]}]
+					[
+						"What is this place?",
+						{
+							"buttonTextRandom": [
+								"Mhm."
+							],
+							"randomDialogue": [
+								"A shop I came across after traversing the stars, lovely and warm place! Good enough I might set a little workshop for my projects."
+							],
+							"jump": [
+								"converse"
+							]
+						}
+					],
+					[
+						"Do you have any wares?",
+						{
+							"buttonTextRandom": [
+								"Darn."
+							],
+							"randomDialogue": [
+								"I too have potions, but they are too strong for you, traveler *wink*"
+							],
+							"jump": [
+								"converse"
+							]
+						}
+					]
 				]
 			},
-
 			//vore buttons
-			"vore" : {
-				"next" : "voreType",
-				"oralVore" : {
-					"next" : "personality",
-					"default" : {
-						"next" : "mood",
+			"vore": {
+				"next": "voreType",
+				"oralVore": {
+					"next": "personality",
+					"default": {
+						"next": "mood",
 						"default": {
-							"next" : "voreResponse",
-							"request" : {
-								"next" : "doingVore",
-								"before" : { "randomDialogue" : [ "With pleasure~" ] },
-								"after" : { "randomDialogue" : [ "Mmm~ get comfortable in there~" ], "dismissTime" : 10 }
+							"next": "voreResponse",
+							"request": {
+								"next": "doingVore",
+								"before": {
+									"randomDialogue": [
+										"With pleasure~"
+									]
+								},
+								"after": {
+									"randomDialogue": [
+										"Mmm~ get comfortable in there~"
+									],
+									"dismissTime": 10
+								}
 							},
-							"unprompted" : {
-								"next" : "doingVore",
-								"before" : { "randomDialogue" : [ "Mmmm~ you look like a tasty meal~" ] },
-								"after" : { "randomDialogue" : [ "Mmm~ get comfortable in there~" ], "dismissTime" : 10 }
+							"unprompted": {
+								"next": "doingVore",
+								"before": {
+									"randomDialogue": [
+										"Mmmm~ you look like a tasty meal~"
+									]
+								},
+								"after": {
+									"randomDialogue": [
+										"Mmm~ get comfortable in there~"
+									],
+									"dismissTime": 10
+								}
 							},
-							"defaultNo" : { "randomDialogue" : [ "Don't really feel like that right now." ] },
-							"full" : { "randomDialogue" : [ "I'm a bit too full..." ] },
-							"tooBig" : { "randomDialogue" : [ "I think you're a bit too big to fit in there..." ] }
+							"defaultNo": {
+								"randomDialogue": [
+									"Don't really feel like that right now."
+								]
+							},
+							"full": {
+								"randomDialogue": [
+									"I'm a bit too full..."
+								]
+							},
+							"tooBig": {
+								"randomDialogue": [
+									"I think you're a bit too big to fit in there..."
+								]
+							}
 						}
 					}
 				}
 			},
 			//talking to prey
-			"struggle" : {
-				"next" : "location",
-				"belly" : {
-					"next" : "personality",
-					"default" : {
-						"next" : "mood",
-						"default" : {
-							"next" : "getLocationEffect",
-							"default" : { "randomDialogue" : [ "Heh, having fun in there?~","I do enjoy it when you wiggle around~","Mmh, quite filling!~","That hit the spot nicely!~" ]},
-							"sbq_acidHeal" : { "randomDialogue" : [ "I will make you feel all better~","Not many know this, but I do also have dreamy liquids that heal~","Arhh, you feel so warm in there~" ]},
-							"sbq_acidSoftDigest" : { "randomDialogue" : [ "Heh, having fun melting down in there?~","I can feel you getting weaker in there~","I wonder how many feathers you will grow on me~","I got a place for you among the stars~" ] },
-							"sbq_acidDigest" : { "randomDialogue" : [ "Heh, having fun melting down in there?~","I'm sure you will look even better on my feathers once you're gone~","Going to be part of this crylan very soon!~","Enjoy your last squirms before you're gone~" ] }
+			"struggle": {
+				"next": "location",
+				"belly": {
+					"next": "personality",
+					"default": {
+						"next": "mood",
+						"default": {
+							"next": "getLocationEffect",
+							"default": {
+								"randomDialogue": [
+									"Heh, having fun in there?~",
+									"I do enjoy it when you wiggle around~",
+									"Mmh, quite filling!~",
+									"That hit the spot nicely!~"
+								]
+							},
+							"sbq_acidHeal": {
+								"randomDialogue": [
+									"I will make you feel all better~",
+									"Not many know this, but I do also have dreamy liquids that heal~",
+									"Arhh, you feel so warm in there~"
+								]
+							},
+							"sbq_acidSoftDigest": {
+								"randomDialogue": [
+									"Heh, having fun melting down in there?~",
+									"I can feel you getting weaker in there~",
+									"I wonder how many feathers you will grow on me~",
+									"I got a place for you among the stars~"
+								]
+							},
+							"sbq_acidDigest": {
+								"randomDialogue": [
+									"Heh, having fun melting down in there?~",
+									"I'm sure you will look even better on my feathers once you're gone~",
+									"Going to be part of this crylan very soon!~",
+									"Enjoy your last squirms before you're gone~"
+								]
+							}
 						}
 					}
 				}
 			}
 		}
 	},
-
-	"statusControllerSettings" : {
-		"stats" : {
-			"maxEnergy" : {
-				"baseValue" : 100.0
+	"statusControllerSettings": {
+		"stats": {
+			"maxEnergy": {
+				"baseValue": 100.0
 			},
-			"energyRegenPercentageRate" : {
-				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+			"energyRegenPercentageRate": {
+				"baseValue": 0.585 // 1.75 second recharge time (STABLE)
 				// "baseValue" : 0.5    // 2 second recharge time
 				// "baseValue" : 0.45      // 2.25 second recharge time
 				// "baseValue" : 0.4     // 2.5 second recharge time
 			},
-			"foodDelta" : {
-				"baseValue" : -0.0583 // -70 food over 20 minutes
+			"foodDelta": {
+				"baseValue": -0.0583 // -70 food over 20 minutes
 			},
-			"sbqLustScriptMax" : {
-				"baseValue" : 0.33
+			"sbqLustScriptMax": {
+				"baseValue": 0.33
 			},
-			"sbqLustScriptDelta" : {
-				"baseValue" : 0.0583
+			"sbqLustScriptDelta": {
+				"baseValue": 0.0583
 			},
-			"sbqLustDelta" : {
-				"baseValue" : 0
+			"sbqLustDelta": {
+				"baseValue": 0
 			},
-			"sbqRestScriptDelta" : {
-				"baseValue" : -0.0583
+			"sbqRestScriptDelta": {
+				"baseValue": -0.0583
 			},
-			"sbqRestDelta" : {
-				"baseValue" : 0
+			"sbqRestDelta": {
+				"baseValue": 0
 			}
 		},
-		"resources" : {
-			"food" : {
-				"deltaStat" : "foodDelta",
-				"initialPercentage" : 1.0,
-				"maxValue" : 70
+		"resources": {
+			"food": {
+				"deltaStat": "foodDelta",
+				"initialPercentage": 1.0,
+				"maxValue": 70
 			},
-			"sbqLust" : {
-				"deltaStat" : "sbqLustDelta",
-				"initialPercentage" : 0.0,
-				"maxValue" : 100
+			"sbqLust": {
+				"deltaStat": "sbqLustDelta",
+				"initialPercentage": 0.0,
+				"maxValue": 100
 			},
-			"sbqRest" : {
-				"deltaStat" : "sbqRestDelta",
-				"initialPercentage" : 1.0,
-				"maxValue" : 100
+			"sbqRest": {
+				"deltaStat": "sbqRestDelta",
+				"initialPercentage": 1.0,
+				"maxValue": 100
 			}
-
 		}
 	},
-	"items" : {
-		"override" : [
-			[0,
+	"items": {
+		"override": [
+			[
+				0,
 				[
-					{
-					}
+					{}
 				]
 			]
 		]

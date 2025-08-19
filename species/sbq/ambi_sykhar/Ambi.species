@@ -329,18 +329,17 @@
 		"breastVorePrey": false
 	},
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			},
-			"transformResult": {
-				"species": "any"
-			}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/ambi_sykhar/Ambi/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"defaultSettings": {
+			"navelVisible": true
 		},
-		"/npcs/sbq/ambi_sykhar/Ambi/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"transformResult": {
+			"species": "any"
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

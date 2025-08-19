@@ -36,15 +36,12 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"eggStatus": "sbqGlassEgg",
-			"defaultSettings": {
-				"navelVisible": false
-			}
+	"sbqSettingsConfig":{
+		"eggStatus": "sbqGlassEgg",
+		"defaultSettings": {
+			"navelVisible": false
 		}
-	],
+	},
 	"sbqModules": {
 		"belly": {
 			"default": "/path/to/config.config"

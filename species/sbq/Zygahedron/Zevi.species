@@ -336,18 +336,17 @@
 		"/sfx/sbq/Zygahedron/Zevi/zeviHurt.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			},
-			"transformResult": {
-				"species": "any"
-			}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/Zygahedron/Zevi/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"defaultSettings": {
+			"navelVisible": true
 		},
-		"/npcs/sbq/Zygahedron/Zevi/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"transformResult": {
+			"species": "any"
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

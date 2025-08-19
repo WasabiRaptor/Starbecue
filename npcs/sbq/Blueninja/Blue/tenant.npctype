@@ -108,50 +108,51 @@
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		},
 
-		"sbqConfig" : [
-			"/humanoid/any/disableAllInfusePred.config",
-			"/humanoid/any/disableAllInfusePrey.config",
-			{
-				// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
-				"defaultSettings" : {
-					"locations" : {
-						"belly" : {
-							"gurgleSounds" : true
-						}
+		"sbqSettingsConfig" : {
+			"includes" : [
+				"/humanoid/any/disableAllInfusePred.config",
+				"/humanoid/any/disableAllInfusePrey.config"
+			],
+			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
+			"defaultSettings" : {
+				"locations" : {
+					"belly" : {
+						"gurgleSounds" : true
 					}
-
-				},
-				// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
-				"overrideSettings" : {
-					"vorePrefs" : {
-						"navelVore" : {
-							"pred" : false
-						},
-						"tailVore" : {
-							"pred" : false
-						},
-						"absorbVore" : {
-							"pred" : false
-						},
-						"unbirthVore" : {
-							"pred" : false
-						},
-						"breastVore" : {
-							"pred" : false,
-							"prey" : false
-						}
-					},
-					"acidDigestDrops" : false,
-					"acidDigestDropsAllow" : false,
-
-					"milkDigestFatalImmune" : true,
-					"milkDigestResistance" : 0,
-
-					"speciesTF" : false,
-					"genderTF" : false
 				}
+
+			},
+			// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
+			"overrideSettings" : {
+				"vorePrefs" : {
+					"navelVore" : {
+						"pred" : false
+					},
+					"tailVore" : {
+						"pred" : false
+					},
+					"absorbVore" : {
+						"pred" : false
+					},
+					"unbirthVore" : {
+						"pred" : false
+					},
+					"breastVore" : {
+						"pred" : false,
+						"prey" : false
+					}
+				},
+				"acidDigestDrops" : false,
+				"acidDigestDropsAllow" : false,
+
+				"milkDigestFatalImmune" : true,
+				"milkDigestResistance" : 0,
+
+				"speciesTF" : false,
+				"genderTF" : false
 			}
-		]
+		}
+
 	},
 	"statusControllerSettings" : {
 		"stats" : {

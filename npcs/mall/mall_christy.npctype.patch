@@ -1,17 +1,14 @@
-[
-	[
-		{"op": "test","path": "/scripts/0","value": "/npcs/bmain.lua"},
-		{"op": "add","path": "/scripts/-","value": "/scripts/npc/SBQ_npc_bmain.lua"}
-	],
-
-	[
-		{ "op": "merge", "path": "", "value": {"scriptConfig":{"sbqConfig":[
-			"/humanoid/any/disableAllVorePred.config",
-			"/humanoid/any/disableAllVorePrey.config",
-			"/humanoid/any/disableAllInfusePred.config",
-			"/humanoid/any/disableAllInfusePrey.config",
-			"/humanoid/any/disableAllTF.config",
-			"/humanoid/any/disableAllSize.config"
-		]}}}
-	]
-]
+{
+	"scriptConfig" : {
+		"sbqSettingsConfig" : {
+			"includes" : [
+				"/humanoid/any/disableAllVorePred.config",
+				"/humanoid/any/disableAllVorePrey.config",
+				"/humanoid/any/disableAllInfusePred.config",
+				"/humanoid/any/disableAllInfusePrey.config",
+				"/humanoid/any/disableAllTF.config",
+				"/humanoid/any/disableAllSize.config"
+			]
+		}
+	}
+}

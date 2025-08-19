@@ -364,19 +364,18 @@
 		"/sfx/humanoid/humanhurt_female1.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true,
-				"nipplesVisible": true
-			},
-			"transformResult": {
-				"species": "any"
-			}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/LokiVulpix/Loki/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"defaultSettings": {
+			"navelVisible": true,
+			"nipplesVisible": true
 		},
-		"/npcs/sbq/LokiVulpix/Loki/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"transformResult": {
+			"species": "any"
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

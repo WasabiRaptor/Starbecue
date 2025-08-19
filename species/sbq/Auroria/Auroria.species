@@ -303,16 +303,16 @@
 		"/sfx/humanoid/humanhurt_male1.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			},
-			"transformResult": false
+	"sbqSettingsConfig":{
+		"includes" : [
+			"/npcs/sbq/Auroria/Auroria/tenant.npctype:scriptConfig.sbqSettingsConfig"
+
+		],
+		"defaultSettings": {
+			"navelVisible": true
 		},
-		"/npcs/sbq/Auroria/Auroria/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"transformResult": false
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

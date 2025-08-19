@@ -403,30 +403,28 @@
 		"sbq_nude_legs"
 	],
 	"potionRarity": "rare",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true,
-				"tailInfuseSelect": "hellhound_tail"
-			},
-			"locations": {
-				"tail": {
-					"disabled": false,
-					"settingInfusion": {
-						"tailSelect": {
-							"default": "hellhound_tail",
-							"hellhound_tail": {
-								"colorRemapGlobalTags": {
-									"tailColorRemap": []
-								}
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"navelVisible": true,
+			"tailInfuseSelect": "hellhound_tail"
+		},
+		// TODO
+		"locations": {
+			"tail": {
+				"disabled": false,
+				"settingInfusion": {
+					"tailSelect": {
+						"default": "hellhound_tail",
+						"hellhound_tail": {
+							"colorRemapGlobalTags": {
+								"tailColorRemap": []
 							}
 						}
 					}
 				}
 			}
 		}
-	],
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

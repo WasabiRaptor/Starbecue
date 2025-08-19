@@ -10,7 +10,7 @@
 				"legs_fg_mask": "/humanoid/gnolls/frontLegMask/malebody.png"
 			}
 		},
-		"/npcs/sbq/LokiVulpix/Clover/tenant.npctype:scriptConfig.voreConfig"
+		"/npcs/sbq/LokiVulpix/Clover/tenant.npctype:scriptConfig.sbqSettingsConfig"
 	],
 	"baseColorPalette": {
 		"primary": [
@@ -398,18 +398,17 @@
 		"/sfx/humanoid/humanhurt_female1.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			},
-			"transformResult": {
-				"species": "sbq/meowscarada"
-			}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/LokiVulpix/Clover/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"defaultSettings": {
+			"navelVisible": true
 		},
-		"/npcs/sbq/LokiVulpix/Clover/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"transformResult": {
+			"species": "sbq/meowscarada"
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

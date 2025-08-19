@@ -292,17 +292,14 @@
 		"/sfx/humanoid/humanhurt_female1.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			},
-			"transformResult": {
-				"species": "any"
-			}
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"navelVisible": true
+		},
+		"transformResult": {
+			"species": "any"
 		}
-	],
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

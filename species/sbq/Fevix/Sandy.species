@@ -353,31 +353,31 @@
 	],
 	"potionImagePath": "/humanoid/sbq/Fevix/Sandy/potion/",
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"overrideSettings": {
-				"breasts": false
-			},
-			"breastsMatchGenderOverrides": false,
-			"states": {
-				"default": {
-					"actions": {
-						"breastInfuse": false,
-						"breastInfused": false,
-						"breastInfuseExternal": false
-					}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/Fevix/Sandy/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"overrideSettings": {
+			"breasts": false
+		},
+		"breastsMatchGenderOverrides": false,
+		// TODO
+		"states": {
+			"default": {
+				"actions": {
+					"breastInfuse": false,
+					"breastInfused": false,
+					"breastInfuseExternal": false
 				}
-			},
-			"availableInfuseTypes": {
-				"breastInfuse": false
-			},
-			"transformResult": {
-				"species": "wr/vaporeon"
 			}
 		},
-		"/npcs/sbq/Fevix/Sandy/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"availableInfuseTypes": {
+			"breastInfuse": false
+		},
+		"transformResult": {
+			"species": "wr/vaporeon"
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

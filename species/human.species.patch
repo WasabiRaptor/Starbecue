@@ -31,14 +31,11 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config", // this is the general vore config for the actions most humanoids can perform
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			}
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"navelVisible": true
 		}
-	],
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

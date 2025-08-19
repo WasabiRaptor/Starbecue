@@ -35,28 +35,26 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": false
-			},
-			"locations": {
-				"tail": {
-					"disabled": true,
-					"settingInfusion": {
-						"tailSelect": {
-							"any": {
-								"globalTags": {
-									"bodyMaskPath": "/humanoid/delphox/removeTailMask/"
-								}
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"navelVisible": false
+		},
+		// todo move this later
+		"locations": {
+			"tail": {
+				"disabled": true,
+				"settingInfusion": {
+					"tailSelect": {
+						"any": {
+							"globalTags": {
+								"bodyMaskPath": "/humanoid/delphox/removeTailMask/"
 							}
 						}
 					}
 				}
 			}
 		}
-	],
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

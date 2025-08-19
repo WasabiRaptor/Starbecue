@@ -311,18 +311,17 @@
 		"/sfx/humanoid/humanhurt_female1.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": true
-			},
-			"transformResult": {
-				"species": "catfox"
-			}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/Ferrilata_/Ferri/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"defaultSettings": {
+			"navelVisible": true
 		},
-		"/npcs/sbq/Ferrilata_/Ferri/tenant.npctype:scriptConfig.voreConfig"
-	],
+		"transformResult": {
+			"species": "catfox"
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

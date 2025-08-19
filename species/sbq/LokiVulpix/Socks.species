@@ -376,42 +376,42 @@
 		"/sfx/humanoid/humanhurt_female1.ogg"
 	],
 	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": false,
-				"nipplesVisible": false,
-				"tailInfuseSelect": "flareon_tail"
-			},
-			"transformResult": {
-				"species": "wr/flareon"
-			},
-			"locations": {
-				"tail": {
-					"disabled": false,
-					"settingInfusion": {
-						"tailSelect": {
-							"default": "flareon_tail",
-							"flareon_tail": {
-								"globalTags": {
-									"tailImage": "/humanoid/sbq/LokiVulpix/Socks/tail.png"
-								},
-								"colorRemapSources": {
-									"tailColorRemap": "sbq/LokiVulpix/Socks",
-									"tailInfusedColorRemap": "sbq/LokiVulpix/Socks"
-								},
-								"colorRemapGlobalTags": {
-									"tailColorRemap": []
-								}
+	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/LokiVulpix/Socks/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
+		"defaultSettings": {
+			"navelVisible": false,
+			"nipplesVisible": false,
+			"tailInfuseSelect": "flareon_tail"
+		},
+		"transformResult": {
+			"species": "wr/flareon"
+		},
+		// TODO
+		"locations": {
+			"tail": {
+				"disabled": false,
+				"settingInfusion": {
+					"tailSelect": {
+						"default": "flareon_tail",
+						"flareon_tail": {
+							"globalTags": {
+								"tailImage": "/humanoid/sbq/LokiVulpix/Socks/tail.png"
+							},
+							"colorRemapSources": {
+								"tailColorRemap": "sbq/LokiVulpix/Socks",
+								"tailInfusedColorRemap": "sbq/LokiVulpix/Socks"
+							},
+							"colorRemapGlobalTags": {
+								"tailColorRemap": []
 							}
 						}
 					}
 				}
 			}
-		},
-		"/npcs/sbq/LokiVulpix/Socks/tenant.npctype:scriptConfig.voreConfig"
-	],
+		}
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

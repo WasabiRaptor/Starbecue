@@ -30,28 +30,26 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"defaultSettings": {
-				"navelVisible": false
-			},
-			"locations": {
-				"tail": {
-					"disabled": true,
-					"settingInfusion": {
-						"tailSelect": {
-							"any": {
-								"globalTags": {
-									"bodyMaskPath": "/humanoid/kazdra/removeTailMask/"
-								}
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"navelVisible": false
+		},
+		// TODO
+		"locations": {
+			"tail": {
+				"disabled": true,
+				"settingInfusion": {
+					"tailSelect": {
+						"any": {
+							"globalTags": {
+								"bodyMaskPath": "/humanoid/kazdra/removeTailMask/"
 							}
 						}
 					}
 				}
 			}
 		}
-	],
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",

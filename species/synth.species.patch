@@ -45,15 +45,12 @@
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
-	"sbqConfig": [
-		"/humanoid/any/vore.config",
-		{
-			"eggStatus": "sbqPlasticEgg",
-			"defaultSettings": {
-				"navelVisible": false
-			}
+	"sbqSettingsConfig":{
+		"eggStatus": "sbqPlasticEgg",
+		"defaultSettings": {
+			"navelVisible": false
 		}
-	],
+	},
 	"sbqPartImages": {
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
