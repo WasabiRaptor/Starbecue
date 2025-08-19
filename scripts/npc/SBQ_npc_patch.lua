@@ -1,18 +1,45 @@
 function patch(config, path)
     if config.scriptConfig then
         config.scriptConfig.sbqNPC = config.scriptConfig.sbqNPC or false
+    else
+        config.scriptConfig = { sbqNPC = false }
     end
     if config.disableSBQ then return config end
+
+    if config.scriptConfig.uniqueId and not (config.scriptConfig.sbqSettingsConfig) then
+        config.scriptConfig.sbqSettingsConfig = {
+            includes = {
+                "/humanoid/any/disableAllVorePred.config",
+                "/humanoid/any/disableAllVorePrey.config",
+                "/humanoid/any/disableAllInfusePred.config",
+                "/humanoid/any/disableAllInfusePrey.config",
+                "/humanoid/any/disableAllTF.config",
+                "/humanoid/any/disableAllSize.config"
+            }
+        }
+    end
 
     addScript(config, { "scripts" }, "/scripts/npc/SBQ_npc_bmain.lua")
     addScript(config, { "statusControllerSettings", "primaryScriptSources" }, "/scripts/npc/SBQ_npc_primary.lua")
 
     config.humanoidParameters = config.humanoidParameters or {}
-    if config.sbqNPC then
+    if config.scriptConfig.sbqNPC then
         config.humanoidParameters.sbqEnabled = true
     end
 
+    config.scriptConfig.sbqSettingsConfig = mergeIncludes(config.scriptConfig.sbqSettingsConfig or {})
+
     return config
+end
+
+function mergeIncludes(settingConfig)
+    local out = {}
+    for _, path in ipairs(settingConfig.includes or {}) do
+        out = sb.jsonMerge(out, mergeIncludes(assets.json(path)))
+    end
+    out.includes = nil
+    settingConfig.includes = nil
+    return sb.jsonMerge(out, settingConfig)
 end
 
 function query(input, query)

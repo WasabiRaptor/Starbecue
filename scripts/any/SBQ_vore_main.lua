@@ -852,8 +852,11 @@ end
 
 -- Location handling
 function sbq._SpeciesScript:addLocation(name, config)
-	local infuseLocation = {}
-	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name] or {}, sbq.fetchConfigArray(config, sbq.directory()), sbq.voreConfig.locationOverrides or {})
+    local infuseLocation = {}
+	if not sbq.config.locations[name] then
+		sbq.logError("Location '%s' must be defined in '/sbq.config:locations' as well.")
+	end
+	local location = sb.jsonMerge(sbq.config.defaultLocationData, sbq.config.locations[name], config, sbq.voreConfig.locationOverrides or {})
 	location.tag = name
 	location.key = name
 	location.name = location.name or (":"..name)

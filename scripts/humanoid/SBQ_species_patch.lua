@@ -21,6 +21,13 @@ function patch(config, path)
     config.buildScripts = config.buildScripts or { "/humanoid/opensb/build.lua" }
     addScript(config, { "buildScripts" }, "/scripts/humanoid/SBQ_humanoid_build.lua")
 
+    config.sbqSettingsConfig = mergeIncludes(config.sbqSettingsConfig or {})
+
+    if (not config.sbqPartImages) and (assets.json("/player.config:defaultCodexes")[config.kind]) then
+        sb.logInfo("[SBQ] playable species '%s' has no part images defined, generating blank images.", config.kind)
+        config.sbqPartImages = assets.json("/species/sbq/blankPartImages.config")
+    end
+
     local sbqPartImages = {}
     for imagePath, data in pairs(config.sbqPartImages or {}) do
         if data.sourceImage:sub(1, 1) ~= "/" then
@@ -77,4 +84,14 @@ function patch(config, path)
 
     config.sbqPartImages = sbqPartImages
     return config
+end
+
+function mergeIncludes(settingConfig)
+    local out = {}
+    for _, path in ipairs(settingConfig.includes or {}) do
+        out = sb.jsonMerge(out, mergeIncludes(assets.json(path)))
+    end
+    out.includes = nil
+    settingConfig.includes = nil
+    return sb.jsonMerge(out, settingConfig)
 end
