@@ -140,7 +140,7 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
     for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
         local modules = humanoidConfig.sbqModules[slot]
         local selectedModule = humanoidParameters["sbqModule_" .. slot]
-        if selectedModule then
+        if selectedModule and (selectedModule ~= "disable") then
             if modules[selectedModule] then
                 humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(modules[selectedModule]))
             else

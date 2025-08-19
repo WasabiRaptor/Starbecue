@@ -44,6 +44,7 @@ function _Settings.new(settingsConfig, storedSettings, entityType)
         (settingsConfig.defaultSettings or {}).any or {},
         (settingsConfig.defaultSettings or {})[entityType] or {}
     )
+
 	self.read = {}
 	self:import(storedSettings)
     return self
@@ -259,23 +260,34 @@ function _Settings:randomize(randomizeSettings, seed)
 end
 
 function _Settings:setPublicSettings()
-	self.publicSettings = {}
-	for setting, v in pairs(sbq.config.publicSettings) do
-		if v then self.publicSettings[setting] = self.read[setting] end
-	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		self.publicSettings[k] = self.publicSettings[k] or {}
-		for name, settings in pairs(self.defaultSettings[k]) do
-			self.publicSettings[k][name] = self.publicSettings[k][name] or {}
-			for setting, _ in pairs(settings) do
-				if sbq.config.publicSettings[setting] then
-					self.publicSettings[k][name][setting] = ((self.read[k] or {})[name] or {})[setting]
-				end
-			end
-		end
-	end
-	status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
+    self.publicSettings = {}
+    for setting, v in pairs(sbq.config.publicSettings) do
+        if v then self.publicSettings[setting] = self.read[setting] end
+    end
+    for k, v in pairs(sbq.config.groupedSettings) do
+        self.publicSettings[k] = self.publicSettings[k] or {}
+        for name, settings in pairs(self.defaultSettings[k]) do
+            self.publicSettings[k][name] = self.publicSettings[k][name] or {}
+            for setting, _ in pairs(settings) do
+                if sbq.config.publicSettings[setting] then
+                    self.publicSettings[k][name][setting] = ((self.read[k] or {})[name] or {})[setting]
+                end
+            end
+        end
+    end
+    status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
+end
 
+function _Settings:setModuleSettings()
+    local refresh = false
+    for setting, v in pairs(sbq.config.moduleSettings) do
+        local value = sbq.query(self.read, v)
+        if sbq.humanoid.getHumanoidParameter("sbqModule_" .. setting) ~= value then
+            sbq.humanoid.setHumanoidParameter("sbqModule_" .. setting, value)
+            refresh = true
+        end
+    end
+    if refresh then sbq.humanoid.refreshHumanoidParameters() end
 end
 
 function _Settings:setMessageHandlers(localOnly)

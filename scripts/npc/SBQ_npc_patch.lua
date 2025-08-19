@@ -9,12 +9,12 @@ function patch(config, path)
     if config.scriptConfig.uniqueId and not (config.scriptConfig.sbqSettingsConfig) then
         config.scriptConfig.sbqSettingsConfig = {
             includes = {
-                "/humanoid/any/disableAllVorePred.config",
-                "/humanoid/any/disableAllVorePrey.config",
-                "/humanoid/any/disableAllInfusePred.config",
-                "/humanoid/any/disableAllInfusePrey.config",
-                "/humanoid/any/disableAllTF.config",
-                "/humanoid/any/disableAllSize.config"
+                "/species/sbq/disableAllVorePred.config",
+                "/species/sbq/disableAllVorePrey.config",
+                "/species/sbq/disableAllInfusePred.config",
+                "/species/sbq/disableAllInfusePrey.config",
+                "/species/sbq/disableAllTF.config",
+                "/species/sbq/disableAllSize.config"
             }
         }
     end
