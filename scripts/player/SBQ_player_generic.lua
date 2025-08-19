@@ -31,17 +31,20 @@ function init()
 	sbq.setItemSlot = player.setEquippedItem
 
 	sbq.config = root.assetJson("/sbq.config")
-	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+    sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
+	local speciesConfig = root.speciesConfig(player.species())
+	local humanoidConfig = player.humanoidConfig()
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
             speciesConfig.sbqSettingsConfig or {},
 			humanoidConfig.sbqSettingsConfig or {}
 		),
 		storage.sbqSettings,
-		entity.entityType()
+        entity.entityType()
     )
-	sbq.settings:setMessageHandlers()
+	sbq.settings:setMessageHandlers(true)
+	sbq.settings:setPublicSettings()
 
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then

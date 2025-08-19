@@ -36,7 +36,7 @@ function init()
 		entity.entityType()
     )
 	sbq.settings:setMessageHandlers()
-
+	sbq.settings:setPublicSettings()
 
 	sbq.targetPosition = npc.aimPosition
 	sbq.resetLounging = npc.resetLounging

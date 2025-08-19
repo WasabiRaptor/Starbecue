@@ -149,8 +149,6 @@ function sbq.removeEmptyTables(input)
 	return input
 end
 
-function sbq.settings:checkInvalid(value, setting, groupName, groupId)
-end
 
 function sbq.checkLockedSetting(setting, group, name)
 	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, { group, name, setting }))

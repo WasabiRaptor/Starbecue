@@ -5,7 +5,6 @@ function init()
     old.init()
     sbq.rollConvert()
 	if not convert then
-		sbq.setupPublicSettings()
 		if npc.getHumanoidParameter("sbqEnabled") and not config.getParameter("sbqNPC") then
 			npc.setHumanoidParameter("sbqEnabled")
 			npc.refreshHumanoidParameters()

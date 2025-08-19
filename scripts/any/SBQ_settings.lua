@@ -7,8 +7,8 @@ function _Settings.new(settingsConfig, storedSettings, entityType)
     setmetatable(self, _Settings)
     self.settingsConfig = settingsConfig
     self.overrideSettings = sb.jsonMerge(
-        settingsConfig.overrideSettings.any or {},
-        settingsConfig.overrideSettings[entityType] or {},
+        (settingsConfig.overrideSettings or {}).any or {},
+        (settingsConfig.overrideSettings or {})[entityType] or {},
         world.getProperty("sbqOverrideSettings_" .. entityType) or world.getProperty("sbqOverrideSettings_any") or {}
     )
     self.lockedSettings = {}
@@ -28,8 +28,8 @@ function _Settings.new(settingsConfig, storedSettings, entityType)
     end
 
     self.invalidSettings = sb.jsonMerge(
-        settingsConfig.invalidSettings.any or {},
-        settingsConfig.invalidSettings[entityType] or {},
+        (settingsConfig.invalidSettings or {}).any or {},
+        (settingsConfig.invalidSettings or {})[entityType] or {},
         world.getProperty("sbqInvalidSettings_" .. entityType) or world.getProperty("sbqInvalidSettings_any") or {}
     )
     if entityType == "player" then
@@ -39,18 +39,20 @@ function _Settings.new(settingsConfig, storedSettings, entityType)
     end
 
     self.defaultSettings = sb.jsonMerge(
-        sbq.config.defaultSettings.any or {},
-        sbq.config.defaultSettings[entityType] or {},
-        settingsConfig.defaultSettings.any or {},
-        settingsConfig.defaultSettings[entityType] or {}
+        (sbq.config.defaultSettings or {}).any or {},
+        (sbq.config.defaultSettings or {})[entityType] or {},
+        (settingsConfig.defaultSettings or {}).any or {},
+        (settingsConfig.defaultSettings or {})[entityType] or {}
     )
-	self.settings = {}
-	self:importSettings(storedSettings)
+	self.read = {}
+	self:import(storedSettings)
     return self
 end
 
 function _Settings:import(newSettings)
-    if not (newSettings.id and newSettings.version and newSettings.content) then
+    if not newSettings then
+		newSettings = root.makeCurrentVersionedJson("sbqSettings", {})
+    elseif not (newSettings.id and newSettings.version and newSettings.content) then
         newSettings = {
             id = "sbqSettings",
             version = 0,
@@ -256,27 +258,55 @@ function _Settings:randomize(randomizeSettings, seed)
     self:import(root.makeCurrentVersionedJson(newSettings))
 end
 
-function _Settings:setMessageHandlers()
-	message.setHandler("sbqSetSetting", function(_, _, ...)
+function _Settings:setPublicSettings()
+	self.publicSettings = {}
+	for setting, v in pairs(sbq.config.publicSettings) do
+		if v then self.publicSettings[setting] = self.read[setting] end
+	end
+	for k, v in pairs(sbq.config.groupedSettings) do
+		self.publicSettings[k] = self.publicSettings[k] or {}
+		for name, settings in pairs(self.defaultSettings[k]) do
+			self.publicSettings[k][name] = self.publicSettings[k][name] or {}
+			for setting, _ in pairs(settings) do
+				if sbq.config.publicSettings[setting] then
+					self.publicSettings[k][name][setting] = ((self.read[k] or {})[name] or {})[setting]
+				end
+			end
+		end
+	end
+	status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
+
+end
+
+function _Settings:setMessageHandlers(localOnly)
+	message.setHandler({name = "sbqSetSetting", localOnly = localOnly}, function(_, ...)
 		return self:set(...)
 	end)
-	message.setHandler("sbqCheckSetting", function(_, _, ...)
+	message.setHandler({name = "sbqCheckSetting"}, function(_, ...)
 		return self:check(...)
 	end)
-	message.setHandler("sbqGetTieredUpgrade", function(_, _, ...)
+	message.setHandler({name = "sbqGetTieredUpgrade"}, function(_, ...)
 		return sbq.getTieredUpgrade(...)
 	end)
-	message.setHandler("sbqImportSettings", function(_, _, ...)
+	message.setHandler({name = "sbqImportSettings", localOnly = localOnly}, function( _, ...)
 		return self:import(...)
 	end)
-	message.setHandler("sbqRefreshSettings", function(_, _, ...)
-		sbq.refreshPublicSettings()
+	message.setHandler({name ="sbqRefreshSettings", localOnly = localOnly}, function( _, ...)
+		self:setPublicSettings()
 		sbq.refreshSettings()
     end)
-	message.setHandler("sbqSettingsPageData", function ()
+	message.setHandler({name = "sbqSettingsPageData"}, function ()
 		return sbq.settingsPageData()
 	end)
 
+	-- shortcut to open the settings for the player
+	if player then
+		message.setHandler({ name = "/sbqSettings", localOnly = true }, function()
+            player.interact("ScriptPane",
+                { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
+			return "Opened Starbecue Settings"
+		end)
+	end
 end
 
 function sbq.settingsInit()
@@ -358,49 +388,9 @@ function sbq.getTieredUpgrade(upgradeName, tier, bonus)
 	storage.sbqUpgrades[upgradeName][tier] = bonus
 	sbq.refreshUpgrades(true)
 	sbq.refreshSettings()
-	sbq.refreshPublicSettings()
+	sbq.settings:setPublicSettings()
 end
 
-function sbq.setGroupedSetting(group, name, setting, value)
-	if sbq.settings:checkInvalid(value, setting, group, name) ~= nil then return end
-	if sbq.checkLockedSetting(setting, group, name) then return end
-
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetGroupedSetting", recruitUuid, entity.uniqueId(), group, name,
-			setting, value)
-	end
-	local old = sbq.settings.read[group][name][setting]
-	storage.sbqSettings[group][name][setting] = value
-	sbq.settings.read[group][name][setting] = nil
-	if type(value) ~= "table" and old == sbq.settings.read[group][name][setting] then return end
-	if sbq.groupedSettingChanged[group] then sbq.groupedSettingChanged[group](name, setting, value) end
-	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
-		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
-			sbq[script](setting, value, group, name)
-		end
-	end
-	sbq.refreshSettings()
-	if sbq.config.publicSettings[setting] then
-		sbq.publicSettings[group][name][setting] = sbq.settings.read[group][name][setting]
-		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
-	end
-end
-
-sbq.groupedSettingChanged = {}
-
-function sbq.importSettings(newSettings)
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), newSettings)
-	end
-	sbq.settings = sbq._Settings.new(sbq.settings.read.settingsConfig, newSettings, world.entityType(sbq.entityId()))
-	sbq.refreshPublicSettings()
-	sbq.refreshSettings()
-	for k, location in pairs(sbq.SpeciesScript.locations) do
-		location:markSettingsDirty()
-	end
-end
 
 function sbq.refreshSettings()
 	local modifiers = {}
@@ -415,22 +405,4 @@ function sbq.refreshSettings()
 	if sbq.SpeciesScript then
 		sbq.SpeciesScript:settingAnimations()
 	end
-end
-
-function sbq.refreshPublicSettings()
-	for setting, v in pairs(sbq.config.publicSettings) do
-		if v then sbq.publicSettings[setting] = sbq.settings.read[setting] end
-	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		sbq.publicSettings[k] = sbq.publicSettings[k] or {}
-		for name, settings in pairs(sbq.defaultSettings[k]) do
-			sbq.publicSettings[k][name] = sbq.publicSettings[k][name] or {}
-			for setting, _ in pairs(settings) do
-				if sbq.config.publicSettings[setting] then
-					sbq.publicSettings[k][name][setting] = ((sbq.settings.read[k] or {})[name] or {})[setting]
-				end
-			end
-		end
-	end
-	status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
 end

@@ -1,5 +1,6 @@
 sbq = {}
-require"/scripts/any/SBQ_RPC_handling.lua"
+require "/scripts/any/SBQ_RPC_handling.lua"
+require "/scripts/any/SBQ_util.lua"
 require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/any/SBQ_settings.lua"
@@ -11,7 +12,18 @@ local old = {
 function init()
 	old.init()
 	sbq.config = root.assetJson("/sbq.config")
-	sbq.setupPublicSettings()
+	sbq.settings = sbq._Settings.new(
+		sb.jsonMerge(
+			config.getParameter("sbqSettingsConfig") or {
+				hideBehaviorSettings = true,
+				hidePredSettings = true,
+			}
+		),
+		storage.sbqSettings,
+		entity.entityType()
+    )
+	sbq.settings:setMessageHandlers()
+	sbq.settings:setPublicSettings()
 
 	sbq.say = monster.say
 	sbq.sayPortrait = monster.sayPortrait

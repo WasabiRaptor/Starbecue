@@ -168,7 +168,6 @@ function sbq.reloadVoreConfig(sbqConfig)
 		sbq.SpeciesScript:addState(name, stateConfig)
 	end
 	-- put settings meant to be public and accessible by other entities in a status property
-	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 	sbq.SpeciesScript:init()
 	sbq.SpeciesScript:changeState((sbq.SpeciesScript.states[storage.lastState or "default"] and storage.lastState) or "default")
@@ -190,7 +189,6 @@ function sbq.reloadVoreConfig(sbqConfig)
 			end
 		end
 	end
-	sbq.refreshPublicSettings()
 	sbq.refreshSettings()
 end
 
@@ -255,17 +253,6 @@ end
 function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not sbq.SpeciesScript.active then return false end
 	return sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
-end
-
-function sbq.groupedSettingChanged.locations(name,k,v)
-	local location = sbq.SpeciesScript:getLocation(name)
-	if location then
-		location:markSettingsDirty()
-	end
-end
-
-function sbq.groupedSettingChanged.infuseSlots(name, k, v)
-	sbq.SpeciesScript:refreshInfusion(name)
 end
 
 function sbq.refreshInfusion()
