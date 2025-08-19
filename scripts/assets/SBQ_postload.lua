@@ -1,7 +1,5 @@
 
-
-
-
+assets.patch("/sbq.config", "/sbq_config_patch.lua")
 
 for _, config in ipairs(assets.byExtension("monstertype")) do
     assets.patch(config, "/scripts/monster/SBQ_monster_patch.lua")

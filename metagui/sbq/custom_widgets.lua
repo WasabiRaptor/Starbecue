@@ -52,10 +52,8 @@ function init()
 	for k, v in pairs((mg.inputData or {}).sbq or {}) do
 		sbq[k] = v
 	end
-	if sbq.storageSettings then
-		storage.sbqSettings = sbq.storageSettings or {}
-		storage.sbqUpgrades = sbq.storageUpgrades or {}
-		sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+	if sbq.settingsConfig then
+		sbq.settings = sbq._Settings.new(sbq.settingsConfig, sbq.storedSettings, world.entityType(sbq.entityId()))
 	end
 	if sbq.locations and sbq.baseLocations then
 		for name, location in pairs(sbq.locations) do
@@ -286,10 +284,10 @@ function widgets.sbqSlider:init(base, param)
 	local min = param.min
 	local max = param.max
 	if type(param.max) == "string" then
-		max = sbq.settings[param.max] or sbq.defaultSettings[param.max] or 1
+		max = sbq.settings.read[param.max] or sbq.defaultSettings[param.max] or 1
 	end
 	if type(param.min) == "string" then
-		min = sbq.settings[param.min] or sbq.defaultSettings[param.min] or 0
+		min = sbq.settings.read[param.min] or sbq.defaultSettings[param.min] or 0
 	end
 
 	if not param.notches and min and max then
@@ -929,10 +927,10 @@ function widgets.sbqTextBox:init(base, param)
 					local max = self.max or math.huge
 					local min = self.min or -math.huge
 					if type(max) == "string" then
-						max = sbq.settings[max]
+						max = sbq.settings.read[max]
 					end
 					if type(min) == "string" then
-						min = sbq.settings[min]
+						min = sbq.settings.read[min]
 					end
 					number = math.min(max, math.max(number, min))
 					self:setText(tostring(number))
@@ -1027,10 +1025,10 @@ function widgets.sbqTextBox:setText(t)
         local max = self.max
         local min = self.min
         if type(max) == "string" then
-            max = sbq.settings[max]
+            max = sbq.settings.read[max]
         end
         if type(min) == "string" then
-            min = sbq.settings[min]
+            min = sbq.settings.read[min]
         end
         if type(value) == "number" then
             if ((type(max) == "number") and (value == max))

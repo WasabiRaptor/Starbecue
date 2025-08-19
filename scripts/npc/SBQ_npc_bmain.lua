@@ -2,7 +2,7 @@
 sbq = {}
 require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/actor/SBQ_actor.lua"
-require "/scripts/any/SBQ_public_settings.lua"
+require "/scripts/any/SBQ_settings.lua"
 
 require "/scripts/humanoid/SBQ_humanoid.lua"
 require "/scripts/any/SBQ_RPC_handling.lua"
@@ -21,15 +21,32 @@ function init()
 	old.init()
 
 	sbq.config = root.assetJson("/sbq.config")
+	local speciesConfig = root.speciesConfig(npc.species())
+	local humanoidConfig = npc.humanoidConfig()
+	sbq.settings = sbq._Settings.new(
+		sb.jsonMerge(
+			config.getParameter("sbqSettingsConfig") or {
+				hideBehaviorSettings = true,
+				hidePredSettings = true,
+			},
+            speciesConfig.sbqSettingsConfig or {},
+			humanoidConfig.sbqSettingsConfig or {}
+		),
+		storage.sbqSettings,
+		entity.entityType()
+    )
+	sbq.settings:setMessageHandlers()
+
 
 	sbq.targetPosition = npc.aimPosition
 	sbq.resetLounging = npc.resetLounging
 	sbq.species = npc.species
 	sbq.gender = npc.gender
 	sbq.humanoidIdentity = npc.humanoidIdentity
-    sbq.setHumanoidIdentity = npc.setHumanoidIdentity
+	sbq.setHumanoidIdentity = npc.setHumanoidIdentity
 	sbq.humanoid = npc
-    sbq.humanoidInit()
+	sbq.humanoidInit()
+
 	sbq.getItemSlot = npc.getItemSlot
 	sbq.setItemSlot = npc.setItemSlot
 
@@ -47,81 +64,11 @@ function init()
 		setNpcItemSlot(slot, item)
 		tenant.backup()
 	end)
-
-	sbq.rollConvert()
-	if not convert then
-		sbq.setupPublicSettings()
-		if npc.getHumanoidParameter("sbqEnabled") and not config.getParameter("sbqNPC") then
-			npc.setHumanoidParameter("sbqEnabled")
-			npc.refreshHumanoidParameters()
-		end
-	end
-end
-
-function sbq.rollConvert()
-	if config.getParameter("sbqConvertType") and not status.statusProperty("sbqDidConvertCheck") then
-		status.setStatusProperty("sbqDidConvertCheck", true)
-		if entity.uniqueId() then return end
-		local speciesConfig = root.speciesConfig(npc.species())
-		if not speciesConfig.voreConfig then return end
-
-		if config.getParameter("sbqNPC")
-			or config.getParameter("uniqueId")
-			or ((config.getParameter("behaviorConfig") or {}).beamOutWhenNotInUse == true)
-			or npc.humanoidIdentity().imagePath ~= nil
-		then
-			return
-		end
-		if tenant then
-			convert = (math.random() <= math.max(config.getParameter("sbqConvertChance") or 0, speciesConfig.sbqConvertChance or 0, sbq.config.convertChance))
-			if convert then
-				sbq.timer("maybeConvert", 0.1,
-					function()
-						if sbq.parentEntity() or entity.uniqueId() then
-							sbq.setupPublicSettings()
-							return
-						end
-						if npc.species() == config.getParameter("sbqConvertSpecies") then
-							local speciesList = root.assetJson("/interface/windowconfig/charcreation.config")
-								.speciesOrdering
-							local badSpecies = true
-							local newSpecies
-							while badSpecies do
-								local i = math.random(#speciesList)
-								newSpecies = speciesList[i]
-								badSpecies = sbq.config.transformationBlacklist[newSpecies] or false
-								if not badSpecies then
-									local speciesFile = root.speciesConfig(newSpecies)
-									if speciesFile.forceName then
-										badSpecies = true
-									elseif speciesFile.voreConfig then
-										if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
-											badSpecies = true
-										end
-									else
-										badSpecies = true
-									end
-								end
-								if badSpecies then
-									table.remove(speciesList, i)
-								end
-							end
-							npc.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
-						end
-						convertBackType = npc.npcType()
-						local convertType = config.getParameter("sbqConvertType")
-						if convertType and convert then
-							sbq.tenant_setNpcType(convertType)
-						end
-					end)
-			end
-		end
-	end
 end
 
 function update(dt)
 	sbq.checkRPCsFinished(dt)
-    sbq.checkTimers(dt)
+	sbq.checkTimers(dt)
 	if status.statPositive("sbqIsPrey") then
 		sbq.struggleBehavior(dt)
 	end

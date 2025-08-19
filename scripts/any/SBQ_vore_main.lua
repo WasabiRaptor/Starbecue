@@ -42,8 +42,6 @@ function sbq.init(sbqConfig)
 	status.clearPersistentEffects("sbqLockDown")
 	status.clearPersistentEffects("sbqHideSlots")
 	status.clearPersistentEffects("sbqStripping")
-	sbq.settingsInit()
-	sbq.lists = {}
 	message.setHandler("sbqAddOccupant", function (_,_, ...)
 		return sbq.Occupants.newOccupant(...)
 	end)
@@ -55,9 +53,6 @@ function sbq.init(sbqConfig)
 	end)
 	message.setHandler("sbqQueueAction", function(_, _, ...)
 		return sbq.queueAction(...)
-	end)
-	message.setHandler("sbqSettingsPageData", function ()
-		return sbq.settingsPageData()
 	end)
 	message.setHandler("sbqActionList", function (_,_, ...)
 		return sbq.actionList(...)
@@ -141,9 +136,6 @@ function sbq.reloadVoreConfig(sbqConfig)
         sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
     end
 	sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
-
-	-- reset setting tables on reload
-	sbq.setupSettingMetatables(entity.entityType())
 
 	-- load scripts
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
@@ -263,41 +255,6 @@ end
 function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not sbq.SpeciesScript.active then return false end
 	return sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
-end
-
-function sbq.settingsPageData()
-	local settingsPageData = {
-		settingsPageName = sbq.entityName(entity.id()),
-		storageSettings = storage.sbqSettings or {},
-		storageUpgrades = storage.sbqUpgrades or {},
-		settings = sbq.settings or {},
-		voreConfig = sbq.voreConfig or {},
-		locations = sbq.SpeciesScript.locations or {},
-		baseLocations = sbq.SpeciesScript.baseLocations or {},
-		currentScale = sbq.getScale(),
-		parentEntityData = { sbq.parentEntity() },
-		infuseOverrideSettings = sbq.infuseOverrideSettings or {},
-		cosmeticSlots = {
-			headCosmetic = sbq.getItemSlot("headCosmetic"),
-			chestCosmetic = sbq.getItemSlot("chestCosmetic"),
-			legsCosmetic = sbq.getItemSlot("legsCosmetic"),
-			backCosmetic = sbq.getItemSlot("backCosmetic"),
-			cosmetic1 = sbq.getItemSlot("cosmetic1"),
-			cosmetic2 = sbq.getItemSlot("cosmetic2"),
-			cosmetic3 = sbq.getItemSlot("cosmetic3"),
-			cosmetic4 = sbq.getItemSlot("cosmetic4"),
-			cosmetic5 = sbq.getItemSlot("cosmetic5"),
-			cosmetic6 = sbq.getItemSlot("cosmetic6"),
-			cosmetic7 = sbq.getItemSlot("cosmetic7"),
-			cosmetic8 = sbq.getItemSlot("cosmetic8"),
-			cosmetic9 = sbq.getItemSlot("cosmetic9"),
-			cosmetic10 = sbq.getItemSlot("cosmetic10"),
-			cosmetic11 = sbq.getItemSlot("cosmetic11"),
-			cosmetic12 = sbq.getItemSlot("cosmetic12"),
-		}
-	}
-
-	return settingsPageData
 end
 
 function sbq.groupedSettingChanged.locations(name,k,v)
@@ -467,7 +424,7 @@ function sbq._State:recieveOccupants(newOccupants)
 			if occupant and occupant.flags.infuseType and occupant.flags.infused then
 				local infuseType = occupant.flags.infuseType
 				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
-					sbq.settings.infuseSlots[infuseType].item = card
+					sbq.settings.read.infuseSlots[infuseType].item = card
 					sbq.infuseOverrideSettings[infuseType] = {
 						infuseSlots = { [infuseType] = { item = card}}
 					}
@@ -595,13 +552,13 @@ function sbq._State:requestAction(forcing, name, target, ...)
 	if forcing then
 		success, failReason, time, successfulFail, failReason2 =  sbq.SpeciesScript:tryAction(name, target, ...)
 		if success then
-			if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target) then
+			if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name, target) then
 				dialogueProcessor.sendPlayerDialogueBox()
 				dialogueProcessor.speakDialogue()
 				wait = dialogueProcessor.predictTime()
 			end
 			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function ()
-				if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target) then
+				if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target) then
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
 				end
@@ -615,14 +572,14 @@ function sbq._State:requestAction(forcing, name, target, ...)
 			success, failReason, time, successfulFail, failReason2 =  sbq.SpeciesScript:tryAction(name, target, table.unpack(args))
 			if success then
 				sbq.forceTimer("dialogueAfter", time + wait + sbq.config.afterDialogueDelay, function ()
-					if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target) then
+					if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true.after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
 					end
 				end)
 			else
 				-- to give the fail dialogue in the rare case they thought they could but can't actually
-				if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(failReason), target) then
+				if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(failReason), target) then
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
 				else
@@ -630,7 +587,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 				end
 			end
 		end
-		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target) then
+		if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".true", target) then
 			dialogueProcessor.sendPlayerDialogueBox()
 			wait = dialogueProcessor.predictTime()
 			dialogueProcessor.speakDialogue(callback)
@@ -639,7 +596,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 			callback()
 		end
 	else
-		if sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(failReason), target) then
+		if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".actionRequested."..name..".false."..tostring(failReason), target) then
 			dialogueProcessor.sendPlayerDialogueBox()
 			dialogueProcessor.speakDialogue()
 		else
@@ -779,7 +736,7 @@ function sbq._State:interact(args)
 		start = ".occupantInteract"
 		sourceRadius = -1
 	end
-	if sbq.settings.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(start, args.sourceId) then
+	if sbq.settings.read.interactDialogue and dialogueProcessor and dialogueProcessor.getDialogue(start, args.sourceId) then
 		dialogueProcessor.speakDialogue()
 		return dialogueProcessor.getPlayerDialogueBox(actions, sourceRadius)
 	elseif occupant then
@@ -890,14 +847,14 @@ function sbq._State:climax(entityId)
 	if occupant then
 		local location = occupant:getLocation()
 		if location then
-			local leakiness = sbq.settings[location.emitterSetting] or 0
+			local leakiness = sbq.settings.read[location.emitterSetting] or 0
 			if leakiness > 0 then for _, emitter in ipairs(location.climaxEmitters or {}) do
 				climaxBurst(emitter, leakiness)
 			end end
 		end
 	end
 
-	if dialogueProcessor and sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".climax", entityId) then
+	if dialogueProcessor and sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".climax", entityId) then
 		dialogueProcessor.speakDialogue(function ()
 			status.resetResource("sbqLust")
 		end)
@@ -958,7 +915,7 @@ function sbq._SpeciesScript:addLocation(name, config)
 
 	sbq.Occupants.locations[name] = location.occupancy
 	location.settings = {}
-	setmetatable(location.settings, {__index = sbq.settings.locations[location.settingsTable or name]})
+	setmetatable(location.settings, {__index = sbq.settings.read.locations[location.settingsTable or name]})
 	setmetatable(location, { __index = self.species.locations[name] or sbq._Location })
 	self.baseLocations[name] = location
 	setmetatable(infuseLocation, {__index = location})
@@ -967,19 +924,20 @@ end
 
 sbq.infuseOverrideSettings = {}
 function sbq._SpeciesScript:refreshInfusion(slot)
-	sbq.infuseOverrideSettings.cockMatchGender = sbq.settings.cockMatchGender and (sbq.gender() == "male") and sbq.voreConfig.cockMatchGenderOverrides or {}
-	sbq.infuseOverrideSettings.ballsMatchGender = sbq.settings.ballsMatchGender and (sbq.gender() == "male") and sbq.voreConfig.ballsMatchGenderOverrides or {}
-	sbq.infuseOverrideSettings.pussyMatchGender = sbq.settings.pussyMatchGender and (sbq.gender() == "female") and sbq.voreConfig.pussyMatchGenderOverrides or {}
-	sbq.infuseOverrideSettings.breastsMatchGender = sbq.settings.breastsMatchGender and (sbq.gender() == "female") and sbq.voreConfig.breastsMatchGenderOverrides or {}
+	-- TODO will need heavy reworks with new system
 
-	for k, v in pairs(self.locations) do
-		local location = self:getLocation(k)
-		if location and ((not slot) or (slot == location.infuseType)) then
-			location:setInfusionData()
-		end
-	end
-	sbq.setupSettingMetatables(entity.entityType())
-	sbq.refreshSettings()
+	-- sbq.infuseOverrideSettings.cockMatchGender = sbq.settings.read.cockMatchGender and (sbq.gender() == "male") and sbq.voreConfig.cockMatchGenderOverrides or {}
+	-- sbq.infuseOverrideSettings.ballsMatchGender = sbq.settings.read.ballsMatchGender and (sbq.gender() == "male") and sbq.voreConfig.ballsMatchGenderOverrides or {}
+	-- sbq.infuseOverrideSettings.pussyMatchGender = sbq.settings.read.pussyMatchGender and (sbq.gender() == "female") and sbq.voreConfig.pussyMatchGenderOverrides or {}
+	-- sbq.infuseOverrideSettings.breastsMatchGender = sbq.settings.read.breastsMatchGender and (sbq.gender() == "female") and sbq.voreConfig.breastsMatchGenderOverrides or {}
+
+	-- for k, v in pairs(self.locations) do
+	-- 	local location = self:getLocation(k)
+	-- 	if location and ((not slot) or (slot == location.infuseType)) then
+	-- 		location:setInfusionData()
+	-- 	end
+	-- end
+	-- sbq.refreshSettings()
 end
 
 
@@ -997,7 +955,7 @@ function sbq._Location:setInfusionData()
 			end
 		end
 	end
-	local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
+	local infusedItem = sbq.settings.read.infuseSlots[self.infuseType].item
 	local infuseIdentity = sbq.query(infusedItem, { "parameters", "npcArgs", "npcParam", "identity" }) or {}
 	local infuseSpeciesConfig = root.speciesConfig(infuseIdentity.species or sbq.query(infusedItem, { "parameters", "npcArgs", "npcSpecies" }) or "") or (sbq.query(infusedItem, { "parameters", "speciesConfig" }) or {}) or {}
 	if infuseSpeciesConfig.useImagePathSpecies then
@@ -1013,8 +971,8 @@ function sbq._Location:setInfusionData()
 
 	for k, v in pairs(self.settingInfusion or {}) do
 		local v2 = (infuseData.settingInfusion or {})[k] or {}
-		local value = sbq.settings[k]
-		if sbq.config.settingInfusionPreyMap[k] and sbq.settings[k .. "Override"] then
+		local value = sbq.settings.read[k]
+		if sbq.config.settingInfusionPreyMap[k] and sbq.settings.read[k .. "Override"] then
 			local preyVal = sbq.query(infusedItem,
 				{ "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap
 					[k] })
@@ -1225,7 +1183,7 @@ function sbq._Location:updateOccupancy(dt)
 		local infuseSize = 0
 		local infuseCount = 0
 		if self.infuseType and self.infuseSize then
-			local infusedItem = sbq.settings.infuseSlots[self.infuseType].item
+			local infusedItem = sbq.settings.read.infuseSlots[self.infuseType].item
 			infuseSize = ((sbq.query(infusedItem, { "parameters", "preySize"}) or 0 ) * self.settings.infusedSize)
 			infuseCount = self.settings.infusedSize
 		end
@@ -1615,7 +1573,7 @@ function sbq._Occupant:remove(reason)
 
 	if self.flags.infused then
 		if location then location.infusedEntity = nil end
-		sbq.settings.infuseSlots[self.flags.infuseType].item = nil
+		sbq.settings.read.infuseSlots[self.flags.infuseType].item = nil
 		sbq.infuseOverrideSettings[self.flags.infuseType] = nil
 		sbq.SpeciesScript:refreshInfusion(self.flags.infuseType)
 	end
@@ -1830,7 +1788,7 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestTick", amount = math.floor(status.stat(location.powerMultiplier or "powerMultiplier")) },
 		{ stat = "sbqDigestingPower", amount = status.stat(location.powerMultiplier or "powerMultiplier") },
-		{ stat = "sbqDisplayEffect", amount = sbq.settings.displayEffect and 1 or 0 },
+		{ stat = "sbqDisplayEffect", amount = sbq.settings.read.displayEffect and 1 or 0 },
 	}
 	util.appendLists(persistentStatusEffects, sbq.voreConfig.prey.statusEffects or sbq.config.prey.statusEffects)
 	if self.flags.infused then
@@ -1986,7 +1944,7 @@ function sbq._Occupant:attemptStruggle(control)
 	if locationDirection == direction then
 		bonusTime = bonusTime + maybeBonus
 	end
-	if sbq.randomTimer("occupantStruggleDialogue", sbq.voreConfig.occupantStruggleDialogueMin or sbq.config.occupantStruggleDialogueMin, sbq.voreConfig.occupantStruggleDialogueMax or sbq.config.occupantStruggleDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.actionDialogue and not sbq.timerRunning("dialogueAfter") then
+	if sbq.randomTimer("occupantStruggleDialogue", sbq.voreConfig.occupantStruggleDialogueMin or sbq.config.occupantStruggleDialogueMin, sbq.voreConfig.occupantStruggleDialogueMax or sbq.config.occupantStruggleDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.read.actionDialogue and not sbq.timerRunning("dialogueAfter") then
 		if dialogueProcessor.getDialogue(".occupantStruggle", self.entityId) then
 			dialogueProcessor.speakDialogue()
 		end
@@ -2089,8 +2047,8 @@ function sbq._Occupant:tryStruggleAction(inc, bonusTime)
 	self.struggleCount = (self.struggleCount or 0) + inc
 	locationStore.struggleCount = (locationStore.struggleCount or 0) + inc
 	if self.struggleAction.action then
-		local timeSucceeded = (self.struggleTime * powerMultiplier) >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.time or { 0, 0 })))
-		local countSucceeded = (self.struggleCount * powerMultiplier) >= (sbq.settings.escapeDifficulty + math.random(table.unpack(self.struggleAction.count or { 0, 0 })))
+		local timeSucceeded = (self.struggleTime * powerMultiplier) >= (sbq.settings.read.escapeDifficulty + math.random(table.unpack(self.struggleAction.time or { 0, 0 })))
+		local countSucceeded = (self.struggleCount * powerMultiplier) >= (sbq.settings.read.escapeDifficulty + math.random(table.unpack(self.struggleAction.count or { 0, 0 })))
 		if (self.struggleAction.both and (timeSucceeded and countSucceeded))
 		or (not self.struggleAction.both and (timeSucceeded or countSucceeded))
 		then

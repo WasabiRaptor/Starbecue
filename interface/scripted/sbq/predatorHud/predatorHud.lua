@@ -25,10 +25,8 @@ function init()
 		for k, v in pairs(settingsData) do
 			sbq[k] = v
 		end
-		if sbq.storageSettings then
-			storage.sbqSettings = sbq.storageSettings or {}
-			storage.sbqUpgrades = sbq.storageUpgrades or {}
-			sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+        if sbq.settingsConfig then
+			sbq.settings = sbq._Settings.new(sbq.settingsConfig, sbq.storedSettings, world.entityType(sbq.entityId()))
 		end
 		if sbq.locations and sbq.baseLocations then
 			for name, location in pairs(sbq.locations) do

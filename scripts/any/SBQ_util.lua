@@ -149,232 +149,11 @@ function sbq.removeEmptyTables(input)
 	return input
 end
 
-function sbq.checkInvalidSetting(value, setting, group, name)
-	if type(value) == "number" then
-		local result
-		local min_1 = sbq.query(sbq.voreConfig.invalidSettings, { setting, "min" }) or
-			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, "min" }))
-		if min_1 and ((result or value) < min_1) then result = min_1 end
-
-		local max_1 = sbq.query(sbq.voreConfig.invalidSettings, { setting, "max" }) or
-			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, "max" }))
-		if max_1 and ((result or value) > max_1) then result = max_1 end
-
-		local min_2 = sbq.query(sbq.worldInvalidSettings, { setting, "min" }) or
-			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, "min" }))
-		if min_2 and ((result or value) < min_2) then result = min_2 end
-
-		local max_2 = sbq.query(sbq.worldInvalidSettings, { setting, "max" }) or
-			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, "max" }))
-		if max_2 and ((result or value) > max_2) then result = max_2 end
-
-		return result
-	else
-		local value = tostring(value)
-		local result = sbq.query(sbq.voreConfig.invalidSettings, { setting, value }) or
-			((group and name) and sbq.query(sbq.voreConfig.invalidSettings, { group, name, setting, value }))
-		return sbq.query(sbq.worldInvalidSettings, { setting, result or value }) or
-			((group and name) and sbq.query(sbq.worldInvalidSettings, { group, name, setting, result or value })) or
-			result
-	end
+function sbq.settings:checkInvalid(value, setting, groupName, groupId)
 end
 
 function sbq.checkLockedSetting(setting, group, name)
 	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, { group, name, setting }))
-end
-
-function sbq.setupSettingMetatables(entityType)
-	storage = storage or {}
-	sbq.refreshUpgrades()
-	sbq.voreConfig = sbq.voreConfig or {}
-	sbq.worldInvalidSettings = sb.jsonMerge(
-		world.getProperty("sbqInvalidSettings") or sbq.config.serverInvalidSettings or
-		{},
-		world.getProperty("sbqInvalidSettings_" .. entityType) or sbq.config.serverEntityTypeInvalidSettings[entityType] or
-		{})
-	storage.sbqSettings = storage.sbqSettings or {}
-
-	-- sanity to remove potential data leak
-	for k, v in ipairs(storage.sbqSettings.recentlyDigested or {}) do
-		if sbq.query(v, { "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested" }) then
-			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
-		end
-		if sbq.query(v, { "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots" }) then
-			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
-		end
-		if sbq.query(v, { "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings" }) then
-			storage.sbqSettings.recentlyDigested[k].parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
-		end
-	end
-	for k, v in pairs(storage.sbqSettings.infuseSlots or {}) do
-		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested" }) then
-			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
-		end
-		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots" }) then
-			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
-		end
-		if sbq.query(v, { "item", "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings" }) then
-			storage.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
-		end
-	end
-
-
-	sbq.settings = sb.jsonMerge(
-		sbq.config.entityTypeOverrideSettings[entityType] or {},
-		sbq.voreConfig.overrideSettings or {}
-	)
-	for _, v in ipairs(sbq.config.infuseOverrideOrder or {}) do
-		sbq.settings = sb.jsonMerge(sbq.settings, (sbq.infuseOverrideSettings or {})[v] or {})
-	end
-	for k, v in pairs(sbq.voreConfig.locations or {}) do
-		sbq.settings = sb.jsonMerge(sbq.settings, (sbq.infuseOverrideSettings or {})[k] or {})
-	end
-
-	sbq.settings = sb.jsonMerge(
-		sbq.settings,
-		world.getProperty("sbqOverrideSettings") or sbq.config.serverOverrideSettings or {},
-		world.getProperty("sbqOverrideSettings_" .. entityType) or
-		sbq.config.serverEntityTypeOverrideSettings[entityType] or
-		{}
-	)
-	if entityType == "player" then
-		sbq.settings.speciesTF = nil
-	end
-	sbq.settings.recentlyDigested = nil
-
-	sbq.lockedSettings = {}
-	for setting, v in pairs(sbq.settings) do
-		if not sbq.config.groupedSettings[setting] then
-			sbq.lockedSettings[setting] = true
-		end
-	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		sbq.lockedSettings[k] = {}
-		for name, settings in pairs(sbq.settings[k] or {}) do
-			sbq.lockedSettings[k][name] = {}
-			for setting, _ in pairs(settings or {}) do
-				sbq.lockedSettings[k][name][setting] = true
-			end
-		end
-	end
-
-	sbq.publicSettings = sbq.publicSettings or {}
-	sbq.defaultSettings = sb.jsonMerge(
-		sbq.config.defaultSettings,
-		sbq.config.entityTypeDefaultSettings[entityType] or {},
-		sbq.voreConfig.defaultSettings or {}
-	)
-	for setting, v in pairs(storage.sbqSettings) do
-		local defaultType = type(sbq.defaultSettings[setting])
-		if (type(v) ~= defaultType) then
-			storage.sbqSettings[setting] = nil
-			if (sbq.defaultSettings[setting] == nil) then
-				sbq.logWarn(string.format("Removed setting '%s' no defined default value.", setting))
-			else
-				sbq.logWarn(string.format("Defaulted setting '%s' value '%s'\nShould be type '%s'", setting, v,
-					defaultType))
-			end
-		end
-	end
-	for setting, v in pairs(sbq.defaultSettings) do
-		local override = sbq.settings[setting]
-		local value = storage.sbqSettings[setting]
-		if (type(v) == "table") and (storage.sbqSettings[setting] == nil) then
-			storage.sbqSettings[setting] = {}
-		end
-		if not sbq.config.groupedSettings[setting] then
-			local result = sbq.checkInvalidSetting(override or value or v, setting)
-			if result ~= nil then
-				sbq.debugLogInfo(string.format("Invalid setting '%s' value '%s' was set to temporary value '%s'", setting,
-					v, result))
-				sbq.settings[setting] = result
-			end
-		end
-	end
-	sbq.lists.locations = {}
-	sbq.lists.voreTypes = {}
-	sbq.lists.infuseTypes = {}
-	sbq.lists.seekActions = {}
-	for k, v in pairs(sbq.voreConfig.locations or {}) do
-		table.insert(sbq.lists.locations, k)
-	end
-	for k, v in pairs(sbq.config.voreTypeData or {}) do
-		table.insert(sbq.lists.voreTypes, k)
-	end
-	for k, v in pairs(sbq.config.infuseTypeData or {}) do
-		table.insert(sbq.lists.infuseTypes, k)
-	end
-	for k, v in pairs(sbq.config.seekActionsSettings.dom) do
-		table.insert(sbq.lists.seekActions, k)
-	end
-	for k, v in pairs(sbq.config.groupedSettings) do
-		local list = {}
-		if type(v.list) == "string" then
-			list = sbq.lists[v.list] or {}
-		elseif type(v.list) == "table" then
-			list = v.list
-		end
-		sbq.defaultSettings[k] = sbq.defaultSettings[k] or {}
-		sbq.publicSettings[k] = {}
-		storage.sbqSettings[k] = storage.sbqSettings[k] or {}
-		sbq.settings[k] = sbq.settings[k] or {}
-		for _, name in ipairs(list) do
-			sbq.defaultSettings[k][name] = sb.jsonMerge(
-				v.defaultSettings or {},
-				(sbq.voreConfig.groupedDefaultSettings or {})[k] or {},
-				sbq.defaultSettings[k][name] or {}
-			)
-			sbq.publicSettings[k][name] = {}
-			storage.sbqSettings[k][name] = storage.sbqSettings[k][name] or {}
-			sbq.settings[k][name] = sbq.settings[k][name] or {}
-			for setting, v in pairs(storage.sbqSettings[k][name]) do
-				local defaultType = type(sbq.defaultSettings[k][name][setting])
-				if (type(v) ~= defaultType) then
-					storage.sbqSettings[k][name][setting] = nil
-					if (sbq.defaultSettings[k][name][setting] == nil) then
-						sbq.logWarn(string.format("Removed setting '%s.%s.%s'\nNo defined default value.", k, name,
-							setting))
-					else
-						sbq.logWarn(string.format("Defaulted setting '%s.%s.%s' value '%s' to '%s'\nShould be type '%s'",
-							k, name, setting
-							, v, sbq.defaultSettings[setting], defaultType))
-					end
-				end
-			end
-			for setting, v in pairs(sbq.defaultSettings[k][name]) do
-				sbq.settings[k][name][setting] = sbq.settings[k][name][setting] or sbq.settings[setting]
-				local override = sbq.settings[k][name][setting]
-				local value = storage.sbqSettings[k][name][setting]
-				if (type(v) == "table") and (storage.sbqSettings[k][name][setting] == nil) then
-					storage.sbqSettings[k][name][setting] = {}
-				end
-				local result = sbq.checkInvalidSetting(override or value or v, setting, k, name)
-				if result ~= nil then
-					sbq.debugLogInfo(string.format(
-						"Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'", k, name,
-						setting, v, result))
-					sbq.settings[k][name][setting] = result
-				end
-			end
-
-			setmetatable(storage.sbqSettings[k][name], { __index = sbq.defaultSettings[k][name] })
-			setmetatable(sbq.settings[k][name], { __index = storage.sbqSettings[k][name] })
-		end
-	end
-
-	for _, k in ipairs(sbq.lists.voreTypes) do
-		if not (sbq.voreConfig.availableVoreTypes or {})[k] then
-			sbq.settings.vorePrefs[k].pred = false
-		end
-	end
-	for _, k in ipairs(sbq.lists.infuseTypes) do
-		if not (sbq.voreConfig.availableInfuseTypes or {})[k] then
-			sbq.settings.infusePrefs[k].pred = false
-		end
-	end
-
-	setmetatable(storage.sbqSettings, { __index = sbq.defaultSettings })
-	setmetatable(sbq.settings, { __index = storage.sbqSettings })
 end
 
 function sbq.getEntitySize(entityId)
@@ -563,7 +342,7 @@ function sbq.exportBaseSettings()
 	local output = {}
 	for k, _ in pairs(sbq.defaultSettings) do
 		if not sbq.config.groupedSettings[k] then
-			output[k] = sbq.settings[k]
+			output[k] = sbq.settings.read[k]
 		end
 	end
 	return output
@@ -581,7 +360,7 @@ function sbq.exportSettingGroup(group)
 	for _, name in ipairs(list) do
 		output[name] = {}
 		for k, _ in pairs(groupData.defaultSettings) do
-			output[name][k] = sbq.settings[group][name][k]
+			output[name][k] = sbq.settings.read[group][name][k]
 		end
 	end
 	return output

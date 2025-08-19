@@ -189,9 +189,9 @@ end
 
 function sbq.fetchSettingValueAndType(setting, group, name)
 	if group and name then
-		return sbq.settings[group][name][setting], type(sbq.defaultSettings[group][name][setting])
+		return sbq.settings.read[group][name][setting], type(sbq.defaultSettings[group][name][setting])
 	else
-		return sbq.settings[setting], type(sbq.defaultSettings[setting])
+		return sbq.settings.read[setting], type(sbq.defaultSettings[setting])
 	end
 end
 
@@ -232,24 +232,21 @@ function sbq.assignSettingValue(setting, group, name)
 end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
-	local result = sbq.checkInvalidSetting(value, setting, group, name)
-	if (result ~= nil) or sbq.checkLockedSetting(setting,group,name) then sbq.playErrorSound() sbq.assignSettingValue(setting, group, name) return false end
+	local result = sbq.settings:checkInvalid(value, setting, group, name)
+    if (result ~= nil) or sbq.checkLockedSetting(setting, group, name) then
+        sbq.playErrorSound()
+        sbq.assignSettingValue(setting, group, name)
+        return false
+    end
 
-	if group and name then
-		world.sendEntityMessage(sbq.entityId(), "sbqSetGroupedSetting", group, name, setting, value)
-		storage.sbqSettings[group][name][setting] = value
-	else
-		world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", setting, value)
-		storage.sbqSettings[setting] = value
-	end
-	sbq.refreshSettingVisibility()
+	world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", value, setting, group, name)
+	sbq.settings:set(value, setting, group, name)
+    sbq.refreshSettingVisibility()
 end
 
 function sbq.importSettings(newSettings)
-	storage.sbqSettings = sb.jsonMerge(storage.sbqSettings, newSettings)
-	sbq.sbqSettings = storage.sbqSettings
 	world.sendEntityMessage(sbq.entityId(), "sbqImportSettings", newSettings)
-	sbq.setupSettingMetatables(world.entityType(sbq.entityId()))
+	sbq.settings:import(newSettings)
 	sbq.assignSettingValues()
 	sbq.refreshSettingVisibility()
 end
@@ -272,7 +269,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = sbq.checkInvalidSetting(k, param.setting, param.groupName, param.groupKey)
+			local result = sbq.settings:checkInvalid(k, param.setting, param.groupName, param.groupKey)
 			if result == nil then
 				local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 				local icon
@@ -316,7 +313,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	local effects = location[param.setting]
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
-		local result = sbq.checkInvalidSetting("true", param.setting, param.groupName, param.groupKey)
+		local result = sbq.settings:checkInvalid("true", param.setting, param.groupName, param.groupKey)
 		if (effects or {})[k] and (result == nil) then
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
@@ -359,7 +356,7 @@ function sbq.widgetScripts.makeInfuseSlots(param)
 		if (sbq.voreConfig.availableInfuseTypes or {})[infuseType] then
 			canInfuse = true
 			local glyph = "/interface/scripted/sbq/" .. infuseType .. "Slot.png"
-			local item = sbq.settings[param.setting][infuseType].item
+			local item = sbq.settings.read[param.setting][infuseType].item
 			local slot = {
 				item = item.name and item,
 				glyph = root.assetOrigin(glyph) and glyph,
@@ -420,7 +417,7 @@ function sbq.widgetScripts.infusedFadeVisible(setting, group, name)
 end
 function sbq.widgetScripts.infusedVisible(setting, group, name)
 	local location = sbq.locations[name]
-	if (not location.infuseType) or (not sbq.settings.infusePrefs[location.infuseType].pred) or (not sbq.query(sbq.settings.infuseSlots[location.infuseType], {"item", "name"})) then
+	if (not location.infuseType) or (not sbq.settings.read.infusePrefs[location.infuseType].pred) or (not sbq.query(sbq.settings.read.infuseSlots[location.infuseType], {"item", "name"})) then
 		return false
 	end
 	return true
@@ -468,7 +465,7 @@ function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 		sbq.playErrorSound()
 	end
 	for _, v in ipairs(sbq.voreConfig.selectValues[setting]) do
-		local result = sbq.checkInvalidSetting(value, setting, group, name)
+		local result = sbq.settings:checkInvalid(value, setting, group, name)
 		if result == nil then
 			if sbq.gui.dropDownOptions[v] then
 				table.insert(options, {

@@ -18,8 +18,6 @@ local old = {
 	setNpcItemSlot = _ENV.setNpcItemSlot
 }
 
-function sbq.setupPublicSettings() -- this is just to make it not setup the settings twice
-end
 function _ENV.recruitable.setUniform()
 	-- we don't want them overriding the cosmetics we give them
 end
@@ -37,7 +35,6 @@ function init()
 	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings")
 	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
 	math.randomseed(npc.seed())
-	sbq.randomizeSettings()
 
 	if not storage.sbqUpgrades.candiesEaten then
 		storage.sbqUpgrades.candiesEaten = {}
@@ -131,7 +128,7 @@ function update(dt)
                 if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
                     sbq.queueAction("lockDownClear", sbq.Occupants.randomActiveOccupant())
                 end
-            elseif (math.random() < (sbq.settings.lockDownChance)) then
+            elseif (math.random() < (sbq.settings.read.lockDownChance)) then
                 sbq.queueAction("lockDown", sbq.Occupants.randomActiveOccupant())
             end
         end
@@ -179,12 +176,12 @@ function tenant.setHome(...)
 end
 
 function tenant.graduate()
-	if not sbq.settings.npcGraduation then return end
+	if not sbq.settings.read.npcGraduation then return end
 	old.tenant_graduate()
 end
 
 function participateInNewQuests()
-	return sbq.settings.questParticipation and old.participateInNewQuests()
+	return sbq.settings.read.questParticipation and old.participateInNewQuests()
 end
 
 function die()

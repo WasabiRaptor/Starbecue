@@ -33,7 +33,16 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
-	sbq.settingsInit()
+	sbq.settings = sbq._Settings.new(
+		sb.jsonMerge(
+            speciesConfig.sbqSettingsConfig or {},
+			humanoidConfig.sbqSettingsConfig or {}
+		),
+		storage.sbqSettings,
+		entity.entityType()
+    )
+	sbq.settings:setMessageHandlers()
+
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then
         if player.getHumanoidParameter("sbqEnabled") then
@@ -49,12 +58,6 @@ function init()
 		end
 	else
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
-		sbq.lists = {}
-		sbq.voreConfig = sbq.fetchConfigArray(root.speciesConfig(sbq.species()).voreConfig or "/humanoid/any/vore.config")
-		sbq.setupSettingMetatables("player")
-		message.setHandler("sbqSettingsPageData", function()
-			return sbq.settingsPageData()
-		end)
 	end
 	sbq.notifyPlayer()
 

@@ -82,7 +82,6 @@ function _RadialMenu:openRadialMenu(overrides)
 		{
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			default = {
-				context = "starbecue",
 				message = "sbqTransformTechRadialMenuScript"
 			},
 			cancel = {}

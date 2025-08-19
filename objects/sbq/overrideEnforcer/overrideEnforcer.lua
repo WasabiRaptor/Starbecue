@@ -54,9 +54,6 @@ end
 function refresh()
 	world.setProperty("sbqOverrideEnforcerUUID", entity.uniqueId())
 	world.setProperty("sbqOverrideSettings", sb.jsonMerge(sbq.config.serverOverrideSettings, config.getParameter("overrideSettings")))
-	world.setProperty("sbqOverrideSettings_player", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.player, config.getParameter("overrideSettings_player")))
-	world.setProperty("sbqOverrideSettings_npc", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.npc, config.getParameter("overrideSettings_npc")))
-	world.setProperty("sbqOverrideSettings_object", sb.jsonMerge(sbq.config.serverEntityTypeOverrideSettings.object, config.getParameter("overrideSettings_object")))
 
 	world.setProperty("sbqInvalidSettings", sb.jsonMerge(sbq.config.serverInvalidSettings, config.getParameter("invalidSettings")))
 	world.setProperty("sbqInvalidSettings_player", sb.jsonMerge(sbq.config.serverEntityTypeInvalidSettings.player, config.getParameter("invalidSettings_player")))

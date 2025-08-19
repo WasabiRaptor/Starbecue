@@ -4,7 +4,7 @@ sbq_hunting = {
 }
 
 function sbq_hunting.start(action)
-	if math.random() < sbq.settings.leanSubDom then
+	if math.random() < sbq.settings.read.leanSubDom then
 		return sbq_hunting.dom(action)
 	else
 		return sbq_hunting.sub(action)
@@ -26,7 +26,7 @@ function sbq_hunting.dom(action)
 	local actions = {}
 	if not action then
 		for action, check in pairs(sbq.config.seekActionsSettings.dom) do
-			local settings = sbq.settings.domBehavior[action]
+			local settings = sbq.settings.read.domBehavior[action]
 			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.SpeciesScript:actionAvailable(action) and sbq.tableMatches(check, sbq.settings, true) then
 				for i = 1, settings.favored do
 					table.insert(actions, action)
@@ -36,7 +36,7 @@ function sbq_hunting.dom(action)
 		if not actions[1] then return false end
 		action = actions[math.random(#actions)]
 	end
-	local settings = sbq.settings.domBehavior[action]
+	local settings = sbq.settings.read.domBehavior[action]
 	local targets = {}
 	local consent = math.random() < settings.getConsentChance
 	for _, target in ipairs(world.entityQuery(mcontroller.position(), 50, {
@@ -59,7 +59,7 @@ function sbq_hunting.huntTarget(target, action)
 	sbq_hunting.clearTarget()
 	local actions = {}
 	for action, check in pairs(sbq.config.seekActionsSettings.dom) do
-		local settings = sbq.settings.domBehavior[action]
+		local settings = sbq.settings.read.domBehavior[action]
 		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq_hunting.checkTarget(action, true, target, false) and sbq.SpeciesScript:actionAvailable(action, target) and sbq.tableMatches(check, sbq.settings, true) then
 			for i = 1, settings.favored do
 				table.insert(actions, action)
@@ -88,7 +88,7 @@ function sbq_hunting.sub(action)
 	local actions = {}
 	if not action then
 		for action, check in pairs(sbq.config.seekActionsSettings.sub) do
-			local settings = sbq.settings.subBehavior[action]
+			local settings = sbq.settings.read.subBehavior[action]
 			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.tableMatches(check, sbq.settings, true) then
 				for i = 1, settings.favored do
 					table.insert(actions, action)
@@ -98,7 +98,7 @@ function sbq_hunting.sub(action)
 		if not actions[1] then return false end
 		action = actions[math.random(#actions)]
 	end
-	local settings = sbq.settings.subBehavior[action]
+	local settings = sbq.settings.read.subBehavior[action]
 	local targets = {}
 	local consent = math.random() < settings.getConsentChance
 	for _, target in ipairs(world.entityQuery(mcontroller.position(), 50, {
@@ -125,7 +125,7 @@ end
 
 function sbq_hunting.checkTarget(action, isDom, target, consent)
 	if world.entityStatPositive(target, "sbqIsPrey") or world.entityStatPositive(target, "sbqEntrapped") then return false end
-	local settings = ((isDom and sbq.settings.domBehavior) or sbq.settings.subBehavior or {})[action]
+	local settings = ((isDom and sbq.settings.read.domBehavior) or sbq.settings.read.subBehavior or {})[action]
 	local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings") or {}
 	local targetBehaviorSettings = ((isDom and targetSettings.subBehavior) or targetSettings.domBehavior or {})[action] or {}
 	if (not consent) and targetBehaviorSettings.consentRequired then return false end
@@ -206,13 +206,13 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 		if try then
 			local success, failReason, time, successfulFail, failReason2 =  sbq.SpeciesScript:tryAction(action, target)
 			if success then
-				if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
+				if math.random() < sbq.settings.read.huntingSpreeChance then -- a chance to continue the hunting spree
 					sbq_hunting.nextTarget()
 				else
 					sbq_hunting.clearTarget()
 				end
 				sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
-					if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".after", target) then
+					if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".after", target) then
 						dialogueProcessor.sendPlayerDialogueBox()
 						dialogueProcessor.speakDialogue()
 					end
@@ -224,7 +224,7 @@ function sbq_hunting.domPromptResponse(try, line, action, target)
 			sbq_hunting.nextTarget()
 		end
 	end
-	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".before", target) then
+	if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..action.."."..line..".before", target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		dialogueProcessor.speakDialogue(callback)
 	else
@@ -234,7 +234,7 @@ end
 
 function sbq_hunting.domSendPrompt(target)
 	local interactData
-	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action, target) then
+	if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".promptAction."..sbq_hunting.action, target) then
 		interactData = dialogueProcessor.sendPlayerDialogueBox()
 		if interactData then
 			dialogueProcessor.speakDialogue()
@@ -261,16 +261,16 @@ function sbq_hunting.domNoPrompt(target)
 	local function callback()
 		local success, failReason, time, successfulFail, failReason2 =  sbq.SpeciesScript:tryAction(sbq_hunting.action, target)
 		if success then
-			if not status.statPositive("sbqLockDown") and (math.random() < (sbq.settings.lockDownChance)) then
+			if not status.statPositive("sbqLockDown") and (math.random() < (sbq.settings.read.lockDownChance)) then
 				sbq.queueAction("lockDown", target)
 			end
-			if math.random() < sbq.settings.huntingSpreeChance then -- a chance to continue the hunting spree
+			if math.random() < sbq.settings.read.huntingSpreeChance then -- a chance to continue the hunting spree
 				sbq_hunting.nextTarget()
 			else
 				sbq_hunting.clearTarget()
 			end
 			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
-				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target) then
+				if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
@@ -278,7 +278,7 @@ function sbq_hunting.domNoPrompt(target)
 			sbq_hunting.nextTarget()
 		end
 	end
-	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action, target) then
+	if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".noPromptAction."..sbq_hunting.action, target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		if entity.isValidTarget(target) then -- if we're not getting consent, and the target is hostile, we're not gonna stand there and wait for dialogue to finish before eating!
 			dialogueProcessor.speakDialogue()
@@ -306,7 +306,7 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 				end)
 				sbq_hunting.clearTarget()
 				sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
-					if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".after", target) then
+					if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".after", target) then
 						dialogueProcessor.speakDialogue()
 					end
 				end, sbq_hunting.nextTarget)
@@ -315,7 +315,7 @@ function sbq_hunting.subPromptResponse(try, line, action, target)
 			sbq_hunting.nextTarget()
 		end
 	end
-	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".before", target) then
+	if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..action.."."..line..".before", target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		dialogueProcessor.speakDialogue(callback)
 	else
@@ -326,7 +326,7 @@ end
 
 function sbq_hunting.subSendPrompt(target)
 	local interactData
-	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action, target) then
+	if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".requestAction."..sbq_hunting.action, target) then
 		interactData = dialogueProcessor.sendPlayerDialogueBox()
 		if interactData then
 			dialogueProcessor.speakDialogue()
@@ -361,14 +361,14 @@ function sbq_hunting.subNoPrompt(target)
 				sbq.setLoungeControlHeld("Walk", false)
 			end)
 			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function()
-				if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then
+				if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action..".after", target) then
 					dialogueProcessor.speakDialogue()
 				end
 			end)
 			sbq_hunting.clearTarget()
 		end, sbq_hunting.nextTarget)
 	end
-	if sbq.settings.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action, target) then
+	if sbq.settings.read.actionDialogue and dialogueProcessor.getDialogue(".forcingAction."..sbq_hunting.action, target) then
 		dialogueProcessor.sendPlayerDialogueBox()
 		dialogueProcessor.speakDialogue(callback)
 	else

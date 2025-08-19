@@ -233,7 +233,7 @@ QuestRelations.sbq_canTransformSpecies = defineQueryRelation("sbq_canTransformSp
 
 local _maybeGenerateQuest = maybeGenerateQuest
 function maybeGenerateQuest(...)
-	if sbq.settings.offerQuests then
+	if sbq.settings.read.offerQuests then
 		return _maybeGenerateQuest(...)
 	end
 	return false

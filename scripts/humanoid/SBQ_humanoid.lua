@@ -294,7 +294,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		status.setStatusProperty("sbqOriginalGender", originalGender)
 	end
 
-	if sbq.settings.genderTF then
+	if sbq.settings.read.genderTF then
 		if newIdentity.gender == "random" then
 			newIdentity.gender = ({ "male", "female" })[math.random(2)]
 		elseif newIdentity.gender == "swap" then
@@ -306,7 +306,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		newIdentity.gender = currentIdentity.gender
 	end
 
-	if sbq.settings.speciesTF then
+	if sbq.settings.read.speciesTF then
 		if newIdentity.species == "any" then
 			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
 			local badSpecies = true
@@ -436,12 +436,12 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 
 	sbq.setHumanoidIdentity(newIdentity)
 
-	if duration and (not sbq.settings.indefiniteTF) then
+	if duration and (not sbq.settings.read.indefiniteTF) then
 		status.addEphemeralEffect("sbqTransformed", (duration or sbq.config.defaultTFDuration) * 60)
 	else
 		world.sendEntityMessage(entity.id(), "sbqClearTransformed")
 	end
-	if sbq.settings.permanentTF then
+	if sbq.settings.read.permanentTF then
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end

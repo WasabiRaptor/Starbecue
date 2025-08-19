@@ -39,12 +39,12 @@ function Default:settingAnimations()
 			animator.setParticleEmitterActive(v, false)
 		end
 	else
-		self:doAnimations((sbq.settings.cock and sbq.voreConfig.cockShow) or sbq.voreConfig.cockHide)
-		self:doAnimations((sbq.settings.pussy and sbq.voreConfig.pussyShow) or sbq.voreConfig.pussyHide)
-		self:doAnimations((sbq.settings.balls and (not sbq.settings.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
+		self:doAnimations((sbq.settings.read.cock and sbq.voreConfig.cockShow) or sbq.voreConfig.cockHide)
+		self:doAnimations((sbq.settings.read.pussy and sbq.voreConfig.pussyShow) or sbq.voreConfig.pussyHide)
+		self:doAnimations((sbq.settings.read.balls and (not sbq.settings.read.ballsInternal) and sbq.voreConfig.ballsShow) or sbq.voreConfig.ballsHide)
 
-		if (sbq.settings.cockLeakiness > (1 - lust)) and sbq.settings.cock and not sbq.checkStarpounds("legs") then
-			local leakiness = ((sbq.settings.cockLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.cock or {}).count or 0) + ((sbq.Occupants.locations.balls or {}).count or 0))
+		if (sbq.settings.read.cockLeakiness > (1 - lust)) and sbq.settings.read.cock and not sbq.checkStarpounds("legs") then
+			local leakiness = ((sbq.settings.read.cockLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.cock or {}).count or 0) + ((sbq.Occupants.locations.balls or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
 				animator.setParticleEmitterEmissionRate(v, leakiness)
@@ -55,8 +55,8 @@ function Default:settingAnimations()
 			end
 		end
 
-		if (sbq.settings.pussyLeakiness > (1 - lust)) and sbq.settings.pussy and not sbq.checkStarpounds("legs") then
-			local leakiness = ((sbq.settings.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.womb or {}).count or 0) + ((sbq.Occupants.locations.pussy or {}).count or 0))
+		if (sbq.settings.read.pussyLeakiness > (1 - lust)) and sbq.settings.read.pussy and not sbq.checkStarpounds("legs") then
+			local leakiness = ((sbq.settings.read.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.womb or {}).count or 0) + ((sbq.Occupants.locations.pussy or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
 				animator.setParticleEmitterEmissionRate(v, leakiness)
@@ -74,9 +74,9 @@ function Default:settingAnimations()
 			animator.setParticleEmitterActive(v, false)
 		end
 	else
-		self:doAnimations((sbq.settings.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
-		if (sbq.settings.breastsLeakiness > (1 - lust)) and sbq.settings.breasts and not sbq.checkStarpounds("chest") then
-			local leakiness = ((sbq.settings.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.breasts or {}).count or 0))
+		self:doAnimations((sbq.settings.read.breasts and sbq.voreConfig.breastsShow) or sbq.voreConfig.breastsHide)
+		if (sbq.settings.read.breastsLeakiness > (1 - lust)) and sbq.settings.read.breasts and not sbq.checkStarpounds("chest") then
+			local leakiness = ((sbq.settings.read.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, ((sbq.Occupants.locations.breasts or {}).count or 0))
 			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
 				animator.setParticleEmitterActive(v, true)
 				animator.setParticleEmitterEmissionRate(v, leakiness)
@@ -103,7 +103,7 @@ function Default:refreshStripping()
 	if not status.isResource("sbqLust") then return end
 	local modifiers = {}
 	for _, k in ipairs({"head","chest","legs","back"}) do
-		if status.resourcePercentage("sbqLust") > sbq.settings[k.."Strip"] then
+		if status.resourcePercentage("sbqLust") > sbq.settings.read[k.."Strip"] then
 			table.insert(modifiers, {stat = k.."Nude", amount = 1})
 		end
 	end
@@ -609,7 +609,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 			if humanoid then
 				item.parameters.predIdentity = sbq.humanoidIdentity()
 			end
-			if item.name and sbq.settings[digestType.."Drops"] and drop then
+			if item.name and sbq.settings.read[digestType.."Drops"] and drop then
 				world.spawnItem(item, position)
 			end
 			-- we can drop condoms and milk for monsters, but if we don't have NPC data theres no reason to preserve it
@@ -633,7 +633,7 @@ function default:fatalAvailable(name, action, target, ...)
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
 	if occupant:statPositive("sbq_" .. (occupant.flags.digestType) .. "FatalImmune") then return false, "invalidAction" end
-	if sbq.checkInvalidSetting("digest", "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid("digest", "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
 	return true
 end
 function default:fatal(name, action, target, ...)
@@ -642,7 +642,7 @@ function default:fatal(name, action, target, ...)
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
 	if occupant:statPositive("sbq_" .. (occupant.flags.digestType) .. "FatalImmune") then return false, "invalidAction" end
-	if sbq.checkInvalidSetting("digest", "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid("digest", "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
 	occupant.persistentStatusEffects = {
 		{ stat = "healingBonus", amount = -10 },
 		{ stat = "healingStatusImmunity", amount = 999 },
@@ -658,7 +658,7 @@ function default:mainEffectAvailable(name, action, target)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
 	if occupant.locationSettings.mainEffect == (action.mainEffect or name) then return false, "invalidAction" end
-	if sbq.checkInvalidSetting(action.mainEffect or name, "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid(action.mainEffect or name, "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if location.mainEffect[action.mainEffect or name] then
 		return true
@@ -668,7 +668,7 @@ end
 function default:setMainEffect(name, action, target)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if sbq.checkInvalidSetting(action.mainEffect or name, "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid(action.mainEffect or name, "mainEffect", "locations", occupant.location) ~= nil then return false, "invalidAction" end
 	occupant.locationSettings.mainEffect = action.mainEffect or name
 	occupant:refreshLocation()
 end
@@ -690,7 +690,7 @@ function default:reformed(name, action, target,...)
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
 		location.infusedEntity = nil
-		sbq.settings.infuseSlots[occupant.flags.infuseType].item = nil
+		sbq.settings.read.infuseSlots[occupant.flags.infuseType].item = nil
 		sbq.infuseOverrideSettings[occupant.flags.infuseType] = nil
 		sbq.SpeciesScript:refreshInfusion(occupant.flags.infuseType)
 	end
@@ -848,7 +848,7 @@ function default:infused(name, action, target)
 	local subLocationName = occupant.subLocation
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
 	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
-		sbq.settings.infuseSlots[infuseType].item = card
+		sbq.settings.read.infuseSlots[infuseType].item = card
 		sbq.infuseOverrideSettings[infuseType] = {
 			infuseSlots = { [infuseType] = { item = card}}
 		}
@@ -863,7 +863,7 @@ end
 function default:eggifyAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if occupant.flags.egged or (sbq.checkInvalidSetting("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
+	if occupant.flags.egged or (sbq.settings:checkInvalid("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end
 	return true
@@ -871,7 +871,7 @@ end
 function default:eggify(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if occupant.flags.egged or (sbq.checkInvalidSetting("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
+	if occupant.flags.egged or (sbq.settings:checkInvalid("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end
 
@@ -890,7 +890,7 @@ function default:eggify(name, action, target, ...)
 end
 
 function default:lockDown(name, action, target, ...)
-	if sbq.Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+	if sbq.Occupants.checkActiveOccupants() and sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
@@ -901,7 +901,7 @@ function default:lockDown(name, action, target, ...)
 	})
 end
 function default:lockDownClear(name, action, target)
-	if sbq.Occupants.checkActiveOccupants() and sbq.settings.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
+	if sbq.Occupants.checkActiveOccupants() and sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".noPromptAction." .. name, target) then
 		dialogueProcessor.sendPlayerDialogueBox(false)
 		dialogueProcessor.speakDialogue()
 	end
