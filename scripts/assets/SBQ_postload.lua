@@ -15,8 +15,8 @@ for _, config in ipairs(assets.byExtension("species")) do
     local humanoidPath = "/humanoid/" .. speciesConfig.kind .. "/"
     for image, newImage in pairs(speciesConfig.sbqPartImages or {}) do
         -- sb.logInfo("[SBQ] generating '%s' from '%s'", humanoidPath..image, newImage..newImage.processingDirectives)
-        assets.add(humanoidPath .. image, assets.image(newImage.sourceImage..newImage.processingDirectives))
-        assets.add(humanoidPath .. (image:gsub("%.png", ".frames")), assets.frames(newImage.sourceImage))
+        assets.add(humanoidPath .. image, assets.image(newImage.sourceImage .. newImage.processingDirectives))
+        assets.add(humanoidPath .. (image:gsub("%.png", ".frames")), assets.bytes(assets.frames(newImage.sourceImage).file))
     end
 
 end
