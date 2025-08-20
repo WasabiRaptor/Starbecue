@@ -95,7 +95,7 @@ function sbq.setupLocation(name, list)
 		id = name,
 		icon = icon,
 		title = location.name or (":"..name),
-		visible = sbq.tableMatches(location.activeSettings, sbq.settings, true) and not location.disabled,
+		visible = sbq.settings:matches(location.activeSettings, true) and not location.disabled,
 		color = "ff00ff",
 		contents = {
 			{ type = "scrollArea", scrollDirections = { 0, 1 }, children = {
@@ -136,7 +136,7 @@ end
 function sbq.settingVisibility(input, setting, group, name)
 	if not input then return true end
 	if type(input) == "table" then
-		return sbq.tableMatches(sbq.replaceConfigTags(input, {groupKey = name, groupName = group, setting = setting}), sbq.settings, true)
+		return sbq.settings:matches(sbq.replaceConfigTags(input, {groupKey = name, groupName = group, setting = setting}), true)
 	elseif type(input) == "string" then
 		return sbq.widgetScripts[input](setting,group,name)
 	end
@@ -173,7 +173,7 @@ function sbq.refreshSettingVisibility()
 	for name, location in pairs(sbq.locations) do
 		local widget = ((_ENV.locationTabField or {}).tabs or {})[name]
 		if widget then
-			widget:setVisible(sbq.tableMatches(location.activeSettings, sbq.settings, true) and not location.disabled)
+			widget:setVisible(sbq.settings:matches(location.activeSettings, true) and not location.disabled)
 		end
 	end
 	if sbq.refreshBehaviorTabVisibility then
@@ -395,8 +395,8 @@ function sbq.widgetScripts.visualMinMax(param)
 	local location = sbq.locations[param.groupKey]
 	param.max = location.maxSize
 	param.settingType = "number"
-	if storage.sbqSettings.locations[param.groupKey][param.setting] >= location.maxSize then
-		storage.sbqSettings.locations[param.groupKey][param.setting] = location.maxSize
+	if sbq.settings.read.locations[param.groupKey][param.setting] >= location.maxSize then
+		sbq.settings.read.locations[param.groupKey][param.setting] = location.maxSize
 	end
 	return param
 end

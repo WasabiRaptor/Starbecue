@@ -27,7 +27,7 @@ function sbq_hunting.dom(action)
 	if not action then
 		for action, check in pairs(sbq.config.seekActionsSettings.dom) do
 			local settings = sbq.settings.read.domBehavior[action]
-			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.SpeciesScript:actionAvailable(action) and sbq.tableMatches(check, sbq.settings, true) then
+			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.SpeciesScript:actionAvailable(action) and sbq.settings:matches(check, true) then
 				for i = 1, settings.favored do
 					table.insert(actions, action)
 				end
@@ -60,7 +60,7 @@ function sbq_hunting.huntTarget(target, action)
 	local actions = {}
 	for action, check in pairs(sbq.config.seekActionsSettings.dom) do
 		local settings = sbq.settings.read.domBehavior[action]
-		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq_hunting.checkTarget(action, true, target, false) and sbq.SpeciesScript:actionAvailable(action, target) and sbq.tableMatches(check, sbq.settings, true) then
+		if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq_hunting.checkTarget(action, true, target, false) and sbq.SpeciesScript:actionAvailable(action, target) and sbq.settings:matches(check, true) then
 			for i = 1, settings.favored do
 				table.insert(actions, action)
 			end
@@ -89,7 +89,7 @@ function sbq_hunting.sub(action)
 	if not action then
 		for action, check in pairs(sbq.config.seekActionsSettings.sub) do
 			local settings = sbq.settings.read.subBehavior[action]
-			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.tableMatches(check, sbq.settings, true) then
+			if (settings.favored > 0) and sbq_hunting.checkResources(settings) and sbq.settings:matches(check, true) then
 				for i = 1, settings.favored do
 					table.insert(actions, action)
 				end
@@ -109,7 +109,7 @@ function sbq_hunting.sub(action)
 		local targetAction = (sbq.getPublicProperty(target, "sbqActionData") or {})[action]
 		if action and targetAction
 			and sbq_hunting.checkTarget(action, false, target, consent)
-			and sbq.tableMatches(targetAction.targetSettings, sbq.settings, true)
+			and sbq.settings:matches(targetAction.targetSettings, true)
 			and sbq.tableMatches(targetAction.settings, targetSettings, true)
 		then
 			table.insert(targets, target)

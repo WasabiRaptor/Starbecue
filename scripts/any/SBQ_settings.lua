@@ -247,7 +247,10 @@ end
 
 function _Settings.updated:locationSetting(oldValue, setting, groupName, groupId)
     if sbq.SpeciesScript then
-        sbq.SpeciesScript:getLocation(groupId):markSettingsDirty()
+        local location = sbq.SpeciesScript:getLocation(groupId)
+        if location then
+            location:markSettingsDirty()
+        end
     end
 end
 
@@ -351,31 +354,47 @@ function _Settings:setStatSettings()
 end
 
 function _Settings:setMessageHandlers(localOnly)
-    message.setHandler({ name = "sbqSetSetting", localOnly = localOnly }, function(_, ...)
-        return self:set(...)
-    end)
-    message.setHandler({ name = "sbqGetSetting" }, function(_, ...)
+    if localOnly then
+        message.setHandler({ name = "sbqSetSetting", localOnly = true }, function(...)
+            return self:set(...)
+        end)
+        message.setHandler({ name = "sbqImportSettings", localOnly = true }, function(...)
+            return self:import(...)
+        end)
+        message.setHandler({ name = "sbqRefreshSettings", localOnly = true }, function(...)
+            self:setPublicSettings()
+            sbq.refreshSettings()
+        end)
+        -- shortcut to open the settings for the player
+        if player then
+            message.setHandler({ name = "/sbqSettings", localOnly = true }, function()
+                player.interact("ScriptPane",
+                    { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
+                return "Opened Starbecue Settings"
+            end)
+        end
+    else
+        message.setHandler({ name = "sbqSetSetting" }, function(_, ...)
+            return self:set(...)
+        end)
+        message.setHandler({ name = "sbqImportSettings" }, function(_, ...)
+            return self:import(...)
+        end)
+        message.setHandler({ name = "sbqRefreshSettings" }, function(_, ...)
+            self:setPublicSettings()
+            sbq.refreshSettings()
+        end)
+    end
+    message.setHandler({ name = "sbqGetSetting" }, function(...)
         return self:get(...)
-    end)
-    message.setHandler({ name = "sbqImportSettings", localOnly = localOnly }, function(_, ...)
-        return self:import(...)
-    end)
-    message.setHandler({ name = "sbqRefreshSettings", localOnly = localOnly }, function(_, ...)
-        self:setPublicSettings()
-        sbq.refreshSettings()
     end)
     message.setHandler({ name = "sbqSettingsPageData" }, function()
         return sbq.settingsPageData()
     end)
+end
 
-    -- shortcut to open the settings for the player
-    if player then
-        message.setHandler({ name = "/sbqSettings", localOnly = true }, function()
-            player.interact("ScriptPane",
-                { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
-            return "Opened Starbecue Settings"
-        end)
-    end
+function _Settings:matches(input, isAny)
+    return sbq.tableMatches(input, self.read, isAny)
 end
 
 local _Upgrades = {
@@ -486,12 +505,21 @@ function _Upgrades:apply(settings)
 end
 
 function _Upgrades:setMessageHandlers(localOnly)
-    message.setHandler({ name = "sbqSetTieredUpgrade", localOnly = localOnly }, function(_, ...)
-        return self:setTiered(...)
-    end)
-    message.setHandler({ name = "sbqSetUpgrade", localOnly = localOnly }, function(_, ...)
-        return self:set(...)
-    end)
+    if localOnly then
+        message.setHandler({ name = "sbqSetTieredUpgrade", localOnly = true }, function(...)
+            return self:setTiered(...)
+        end)
+        message.setHandler({ name = "sbqSetUpgrade", localOnly = true }, function(...)
+            return self:set(...)
+        end)
+    else
+        message.setHandler({ name = "sbqSetTieredUpgrade" }, function(_, ...)
+            return self:setTiered(...)
+        end)
+        message.setHandler({ name = "sbqSetUpgrade" }, function(_, ...)
+            return self:set(...)
+        end)
+    end
     message.setHandler({ name = "sbqGetUpgrade" }, function(_, ...)
         return self:get(...)
     end)

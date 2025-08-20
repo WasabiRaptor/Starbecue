@@ -20,8 +20,8 @@ end
 
 function sbq.refreshBehaviorTabVisibility()
 	for action, tab in pairs(_ENV.behaviorTabField.tabs) do
-		local domVisible = sbq.tableMatches(sbq.config.seekActionsSettings.dom[action], sbq.settings)
-		local subVisible = sbq.tableMatches(sbq.config.seekActionsSettings.sub[action], sbq.settings)
+		local domVisible = sbq.settings:matches(sbq.config.seekActionsSettings.dom[action])
+		local subVisible = sbq.settings:matches(sbq.config.seekActionsSettings.sub[action])
 		tab:setVisible(subVisible or domVisible)
 		_ENV[action.."SubBehaviorPanel"]:setVisible(subVisible)
 		_ENV[action.."DomBehaviorPanel"]:setVisible(domVisible)

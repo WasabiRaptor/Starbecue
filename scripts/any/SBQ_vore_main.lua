@@ -135,7 +135,7 @@ function sbq.reloadVoreConfig(sbqConfig)
     for _, v in ipairs(sbqConfig.includes) do
         sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
     end
-	sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
+    sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
 
 	-- load scripts
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
@@ -183,8 +183,10 @@ function sbq.reloadVoreConfig(sbqConfig)
 			location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
 			if location.subLocations then
 				for k, _ in pairs(location.subLocations) do
-					local location = sbq.SpeciesScript:getLocation(locationName, k)
-					location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
+                    local location = sbq.SpeciesScript:getLocation(locationName, k)
+					if location then
+						location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
+					end
 				end
 			end
 		end
@@ -217,12 +219,16 @@ function sbq.actionList(type, target)
 			return {}
 		end
 	end
+	sbq.logInfo(actions,2)
 	for _, action in ipairs(actions or {}) do
 		local success, failReason, time = sbq.SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
+		sbq.logInfo({action, success, failReason}, 2)
 		if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or {})[type] then
 			table.insert(list, sb.jsonMerge(action, { available = success }))
 		end
 	end
+
+	sbq.logInfo(list,2)
 	return list
 end
 
@@ -484,7 +490,7 @@ function sbq._State:tryAction(name, target, ...)
 	if action.onCooldown then return self:actionFailed(name, action, target, "onCooldown", ...) end
 	if target and not world.entityStatPositive(target, "sbqStatusPrimaryScript") then return self:actionFailed(name, action, target, "targetMissingStatusPrimaryScript", ...) end
 	if target and not world.entityStatPositive(target, "sbqActorScript") then return self:actionFailed(name, action, target, "targetMissingActorScript", ...) end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return self:actionFailed(name, action, target, "settingsMismatch", ...) end
+	if action.settings and not sbq.settings:matches(action.settings, true) then return self:actionFailed(name, action, target, "settingsMismatch", ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
@@ -616,7 +622,7 @@ function sbq._State:actionAvailable(name, target, ...)
 	if not name then return false end
 	local action = self.actions[name]
 	if not action then return false, "missingAction" end
-	if action.settings and not sbq.tableMatches(action.settings, sbq.settings, true) then return false, "settingsMismatch", action.failureCooldown or 0, false, false end
+	if action.settings and not sbq.settings:matches(action.settings, true) then return false, "settingsMismatch", action.failureCooldown or 0, false, false end
 	if target and action.targetSettings then
 		if not world.entityExists(target) then return false, "targetMissing" end
 		local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings")
@@ -1018,7 +1024,7 @@ function sbq._Location:setInfusionData()
 end
 
 function sbq._Location:hasSpace(size)
-	if (not sbq.tableMatches(self.activeSettings, sbq.settings, true)) or self.disabled then return false end
+	if (not sbq.settings:matches(self.activeSettings, true)) or self.disabled then return false end
 	if self.maxCount and (self.occupancy.count >= self.maxCount) then return false end
 	if (not self.subLocations) or self.subKey then
 		if self.settings.hammerspace then return math.huge, self.subKey end
@@ -1060,34 +1066,44 @@ function sbq._Location:markSizeDirty(force)
 	self.occupancy.sizeDirty = true
 	self.occupancy.forceSizeRefresh = force
 	if self.subKey then
-		local parentLocation = sbq.SpeciesScript:getLocation(self.key)
-		parentLocation.occupancy.sizeDirty = true
-		parentLocation.occupancy.forceSizeRefresh = force
+        local parentLocation = sbq.SpeciesScript:getLocation(self.key)
+		if parentLocation then
+			parentLocation.occupancy.sizeDirty = true
+			parentLocation.occupancy.forceSizeRefresh = force
+		end
 	else
 		for k, v in pairs(self.subLocations or {}) do
-			local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
-			subLocation.occupancy.sizeDirty = true
-			subLocation.occupancy.forceSizeRefresh = force
+            local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+			if subLocation then
+				subLocation.occupancy.sizeDirty = true
+				subLocation.occupancy.forceSizeRefresh = force
+			end
 		end
 	end
 	for _, sharedName in ipairs(self.addSize or {}) do
-		local shared = sbq.SpeciesScript:getLocation(sharedName)
-		shared.occupancy.sizeDirty = true
-		shared.occupancy.forceSizeRefresh = force
+        local location = sbq.SpeciesScript:getLocation(sharedName)
+		if location then
+			location.occupancy.sizeDirty = true
+			location.occupancy.forceSizeRefresh = force
+		end
 	end
 	for _, sharedName in ipairs(self.addCount or {}) do
-		local shared = sbq.SpeciesScript:getLocation(sharedName)
-		shared.occupancy.sizeDirty = true
-		shared.occupancy.forceSizeRefresh = force
+        local location = sbq.SpeciesScript:getLocation(sharedName)
+		if location then
+			location.occupancy.sizeDirty = true
+			location.occupancy.forceSizeRefresh = force
+		end
 	end
 end
 function sbq._Location:markSettingsDirty()
 	self:markSizeDirty()
-	local parentLocation = sbq.SpeciesScript:getLocation(self.key)
-	parentLocation.occupancy.settingsDirty = true
-	for k, v in pairs(self.subLocations or {}) do
-		local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
-		subLocation.occupancy.settingsDirty = true
+    local parentLocation = sbq.SpeciesScript:getLocation(self.key)
+	if parentLocation then
+		parentLocation.occupancy.settingsDirty = true
+		for k, v in pairs(self.subLocations or {}) do
+			local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+			subLocation.occupancy.settingsDirty = true
+		end
 	end
 end
 
@@ -1095,8 +1111,10 @@ function sbq._Location:updateOccupancy(dt)
 	if self.occupancy.working then return end -- prevents stack overflow from potential dependency loops
 	if not self.subKey then
 		for k, v in pairs(self.subLocations or {}) do
-			local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
-			subLocation:updateOccupancy(dt)
+            local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+			if subLocation then
+				subLocation:updateOccupancy(dt)
+			end
 		end
 	end
 	local prevVisualSize = self.occupancy.visualSize
@@ -1104,7 +1122,7 @@ function sbq._Location:updateOccupancy(dt)
 	if (self.occupancy.sizeDirty or (sbq.Occupants.lastScale ~= sbq.getScale())) and not self.occupancy.lockSize then
 		self.occupancy.working = true -- prevents stack overflow from potential dependency loops
 
-		self.occupancy.symmetry = (self.symmetrySettings and sbq.tableMatches(self.symmetrySettings, sbq.settings, true))
+		self.occupancy.symmetry = (self.symmetrySettings and sbq.settings:matches(self.symmetrySettings, true))
 		self.occupancy.sizeDirty = false
 
 		self.occupancy.size = (self.settings.visualMinAdd and self.settings.visualMin) or 0
@@ -1160,14 +1178,22 @@ function sbq._Location:updateOccupancy(dt)
 		end
 
 		for _, name in ipairs(self.addSize or {}) do
-			local location = sbq.SpeciesScript:getLocation(name)
-			location:updateOccupancy(0)
-			self.occupancy.addedSize = self.occupancy.addedSize + location.occupancy.size
+            local location = sbq.SpeciesScript:getLocation(name)
+			if location then
+				location:updateOccupancy(0)
+				self.occupancy.addedSize = self.occupancy.addedSize + location.occupancy.size
+            else
+				sbq.debugLogWarn(("'%s' Attempting to add size from '%s' which does not exist."):format(self.key, name))
+			end
 		end
 		for _, name in ipairs(self.addCount or {}) do
-			local location = sbq.SpeciesScript:getLocation(name)
-			location:updateOccupancy(0)
-			self.occupancy.addedCount = self.occupancy.addedCount + location.occupancy.count
+            local location = sbq.SpeciesScript:getLocation(name)
+			if location then
+				location:updateOccupancy(0)
+                self.occupancy.addedCount = self.occupancy.addedCount + location.occupancy.count
+            else
+				sbq.debugLogWarn(("'%s' Attempting to add count from '%s' which does not exist."):format(self.key, name))
+			end
 		end
 
 		local infuseSize = 0
@@ -1212,10 +1238,12 @@ function sbq._Location:updateOccupancy(dt)
 			self:doSizeChangeAnims(prevVisualSize, prevVisualCount)
 			if self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
-					subLocation = sbq.SpeciesScript:getLocation(self.key, k)
-					subLocation.occupancy.visualSize = self.occupancy.visualSize
-					subLocation.occupancy.visualCount = self.occupancy.visualCount
-					subLocation:doSizeChangeAnims(prevVisualSize, prevVisualCount)
+                    subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+					if subLocation then
+						subLocation.occupancy.visualSize = self.occupancy.visualSize
+						subLocation.occupancy.visualCount = self.occupancy.visualCount
+						subLocation:doSizeChangeAnims(prevVisualSize, prevVisualCount)
+					end
 				end
 			end
 		end
@@ -1318,10 +1346,12 @@ function sbq._Location:refreshStruggleDirection(id)
 		self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
 	end
 	for _, locationName in ipairs(self.sharedWith or {}) do
-		local location = sbq.SpeciesScript:getLocation(locationName)
-		for _, occupant in ipairs(location.occupancy.list) do
-			occupant:checkStruggleDirection(0)
-			self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
+        local location = sbq.SpeciesScript:getLocation(locationName)
+		if location then
+			for _, occupant in ipairs(location.occupancy.list) do
+				occupant:checkStruggleDirection(0)
+				self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
+			end
 		end
 	end
 	local occupant = sbq.Occupants.entityId[tostring(id)]
@@ -1607,20 +1637,26 @@ end
 
 function sbq.Occupants.update(dt)
 	for name, _ in pairs(sbq.SpeciesScript.locations) do
-		local location = sbq.SpeciesScript:getLocation(name)
-		location:updateOccupancy(dt)
-		location:update(dt)
+        local location = sbq.SpeciesScript:getLocation(name)
+		if location then
+			location:updateOccupancy(dt)
+			location:update(dt)
+		end
 	end
 	for _, occupant in ipairs(sbq.Occupants.list) do
 		occupant:update(dt)
 	end
 	for name, _ in pairs(sbq.SpeciesScript.locations) do
-		local location = sbq.SpeciesScript:getLocation(name)
-		for k, _ in pairs(location.subLocations or {}) do
-			local subLocation = sbq.SpeciesScript:getLocation(name, k)
-			subLocation.occupancy.settingsDirty = false
+        local location = sbq.SpeciesScript:getLocation(name)
+		if location then
+			for k, _ in pairs(location.subLocations or {}) do
+                local subLocation = sbq.SpeciesScript:getLocation(name, k)
+				if subLocation then
+					subLocation.occupancy.settingsDirty = false
+				end
+			end
+			location.occupancy.settingsDirty = false
 		end
-		location.occupancy.settingsDirty = false
 	end
 	sbq.Occupants.lastScale = sbq.getScale()
 
@@ -1755,7 +1791,7 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 		location:markSizeDirty()
 	end
 	if not location then return self:remove("invalidLocation") end
-	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.tableMatches(location.activeSettings, sbq.settings, true)) or location.disabled) then return self:remove("disabledLocation") end
+	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.settings:matches(location.activeSettings, true)) or location.disabled) then return self:remove("disabledLocation") end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims

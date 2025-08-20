@@ -5,8 +5,9 @@ require "/scripts/any/SBQ_override_dummies.lua"
 require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/any/SBQ_settings.lua"
 local old = {
-	init = init,
-	update = update
+	init = init or (function ()end),
+    update = update or (function ()end),
+	uninit = uninit or (function ()end)
 }
 
 function init()
@@ -66,13 +67,20 @@ function init()
 end
 
 function update(dt)
-	sbq.checkRPCsFinished(dt)
+    sbq.checkRPCsFinished(dt)
     sbq.checkTimers(dt)
-	if status.statPositive("sbqIsPrey") then
-		sbq.struggleBehavior(dt)
-	end
+    if status.statPositive("sbqIsPrey") then
+        sbq.struggleBehavior(dt)
+    end
 
-	old.update(dt)
+    old.update(dt)
+end
+
+function uninit()
+    old.uninit()
+	storage = storage or {}
+	storage.sbqSettings = sbq.settings:save()
+    storage.sbqUpgrades = sbq.upgrades:save()
 end
 
 function sbq.parentEntity()

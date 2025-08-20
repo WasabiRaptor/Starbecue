@@ -67,9 +67,13 @@ local function fixSlotAnimation(animation, slot)
     return animation
 end
 
-function prepSBQModule(humanoidConfig, module)
+function includeSBQModule(humanoidConfig, module)
+    if type(module) == "string" then
+        table.insert(humanoidConfig.sbqConfig.includes, module)
+        module = root.assetJson(module)
+    end
     for _, v in ipairs(module.includes or {}) do
-        humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(v))
+        humanoidConfig = includeSBQModule(humanoidConfig, root.assetJson(v))
         table.insert(humanoidConfig.sbqConfig.includes, v)
     end
     for _, v in ipairs(module.scripts or {}) do
@@ -136,15 +140,15 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
         includes = jarray(),
         scripts = jarray()
     })
-    humanoidConfig = prepSBQModule(humanoidConfig, baseModule)
+    humanoidConfig = includeSBQModule(humanoidConfig, baseModule)
     for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
         local modules = humanoidConfig.sbqModules[slot]
         local selectedModule = humanoidParameters["sbqModule_" .. slot]
         if selectedModule and (selectedModule ~= "disable") then
             if modules[selectedModule] then
-                humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(modules[selectedModule]))
+                humanoidConfig = includeSBQModule(humanoidConfig, modules[selectedModule])
             else
-                humanoidConfig = prepSBQModule(humanoidConfig, root.assetJson(modules.default))
+                humanoidConfig = includeSBQModule(humanoidConfig, modules.default)
             end
         end
     end

@@ -43,8 +43,8 @@ function init()
 		storage.sbqSettings,
         entity.entityType()
     )
-	sbq.settings:setParameterSettings(true)
-	sbq.settings:setMessageHandlers()
+	sbq.settings:setParameterSettings()
+	sbq.settings:setMessageHandlers(true)
 
 	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades)
 	sbq.upgrades:setMessageHandlers(true)
@@ -58,8 +58,7 @@ function init()
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then
         if player.getHumanoidParameter("sbqEnabled") then
-			local humanoidConfig = player.humanoidConfig()
-			if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
+            if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
 				sbq.init(humanoidConfig.sbqConfig)
 			else
 				sbq.uninit()
@@ -322,7 +321,9 @@ end
 
 function uninit()
 	old.uninit()
-	storage.sbqSettings = sbq.removeEmptyTables(storage.sbqSettings)
+	storage = storage or {}
+	storage.sbqSettings = sbq.settings:save()
+    storage.sbqUpgrades = sbq.upgrades:save()
 	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
 end

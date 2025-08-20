@@ -54,7 +54,8 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
-	local humanoidConfig = npc.humanoidConfig()
+    local humanoidConfig = npc.humanoidConfig()
+	sbq.humanoidInit()
     if npc.getHumanoidParameter("sbqEnabled") then
 		if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
             sbq.init(humanoidConfig.sbqConfig)

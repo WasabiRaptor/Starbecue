@@ -10,10 +10,13 @@ require("/scripts/any/SBQ_util.lua")
 -- 	slotFunc(itemDescriptor)
 -- end
 
+local initialized = false
 function refreshHumanoidParameters()
-	old.refreshHumanoidParameters()
+    old.refreshHumanoidParameters()
+	if not initialized then return end
 	local speciesConfig = root.speciesConfig(sbq.humanoid.species())
-	local humanoidConfig = sbq.humanoid.humanoidConfig()
+    local humanoidConfig = sbq.humanoid.humanoidConfig()
+
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
 			npc and (config.getParameter("sbqSettingsConfig") or {
@@ -23,7 +26,7 @@ function refreshHumanoidParameters()
             speciesConfig.sbqSettingsConfig or {},
 			humanoidConfig.sbqSettingsConfig or {}
 		),
-		storage.sbqSettings,
+		sbq.settings:save(),
 		entity.entityType()
     )
     if sbq.settings:setParameterSettings() then return end
@@ -228,7 +231,8 @@ function sbq.humanoidInit()
 		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty(
 		"sbqPronouns")
 		return item
-	end)
+    end)
+	initialized = true
 end
 
 function sbq.directory()

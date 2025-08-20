@@ -240,7 +240,6 @@ function default:trySendDeeperAvailable(name, action, target, failureReason, siz
 		local occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return false, "missingOccupant" end
 		local location = occupant:getLocation()
-		if not location then return false, "invalidLocation" end
 		if not location.sendDeeperAction then return false, "invalidAction" end
 		if not occupant:active() then return false, "invalidAction" end
         return sbq.SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
@@ -270,7 +269,6 @@ function default:trySendDeeper(name, action, target, failureReason, size, ...)
         local occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return false, "missingOccupant" end
 		local location = occupant:getLocation()
-		if not location then return false, "invalidLocation" end
 		if not location.sendDeeperAction then return false, "invalidAction" end
 		if not occupant:active() then return false, "invalidAction" end
 		return sbq.SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
@@ -307,7 +305,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	local location = sbq.SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
-		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+		if not sbq.settings:matches(location.activeSettings, true) then
 			if location.infuseType then
 				if not (action.flags and action.flags.infusing) then
 					return false, "needsInfusion"
@@ -360,7 +358,7 @@ function default:tryVore(name, action, target, ...)
 	local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
-		if not sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+		if not sbq.settings:matches(location.activeSettings, true) then
 			if location.infuseType then
 				if not (action.flags and action.flags.infusing) then
 					return false, "needsInfusion"
@@ -438,7 +436,6 @@ function default:tryLetout(name, action, target, throughput, ...)
 	end
 	if occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting then return false, "invalidAction" end
 	local location = occupant:getLocation()
-	if not location then return false, "invalidAction" end
 	location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
 	if (not action.lockSize) or (action.location and (location.key ~= action.location)) then
 		location:markSizeDirty()
@@ -468,7 +465,7 @@ local function letout(funcName, action, target, preferredAction, ...)
 	if target then
 		occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return end
-		location = sbq.SpeciesScript:getLocation(occupant.location, occupant.subLocation)
+        location = occupant:getLocation()
 		local exitTypes = location.exitTypes or location.entryTypes
 
 		for _, exitType in ipairs(exitTypes or {}) do
@@ -539,7 +536,7 @@ end
 function default:turboDigestAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	local location = occupant:getLocation()
+    local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.digest) and (not location.mainEffect.softDigest)) then return false, "invalidAction" end
 	if not ((mainEffect == "digest") or (mainEffect == "softDigest")) then return false, "invalidAction" end
@@ -555,7 +552,7 @@ end
 function default:turboHealAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
-	local location = occupant:getLocation()
+    local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.heal)) then return false, "invalidAction" end
 	if not (mainEffect == "heal") then return false, "invalidAction" end
@@ -726,7 +723,7 @@ function default:chooseLocation(name, action, target, predSelect, ...)
 	if not occupant then return false, "missingOccupant" end
 	for _, locationName in ipairs(action.locationOrder or sbq.voreConfig.locationOrder or root.assetJson("/sbqGui.config:locationOrder")) do
 		local location = sbq.SpeciesScript:getLocation(locationName)
-		if location and sbq.tableMatches(location.activeSettings, sbq.settings, true) then
+		if location and sbq.settings:matches(location.activeSettings, true) then
 			local space, subLocation = location:hasSpace(occupant.size * occupant.sizeMultiplier)
 			table.insert(locations, {
 				name = location.name,
@@ -808,7 +805,8 @@ function default:infuseAvailable(name, action, target, ...)
 	end
 end
 function default:tryInfuse(name, action, target, ...)
-	local location = sbq.SpeciesScript:getLocation(action.location)
+    local location = sbq.SpeciesScript:getLocation(action.location)
+	if not location then return false, "invalidLocation" end
 	local infuseType = action.infuseType or location.infuseType or name
 	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)] then return false, "alreadyInfused" end
 	local occupant = sbq.Occupants.entityId[tostring(target)]
@@ -826,7 +824,8 @@ function default:tryInfuse(name, action, target, ...)
 	end
 end
 function default:infused(name, action, target)
-	local location = sbq.SpeciesScript:getLocation(action.location)
+    local location = sbq.SpeciesScript:getLocation(action.location)
+	if not location then return false, "invalidLocation" end
 	local infuseType = action.infuseType or location.infuseType or name
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
@@ -864,7 +863,7 @@ function default:eggifyAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if occupant.flags.egged or (sbq.settings:checkInvalid("true", "eggify", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
-	local location = occupant:getLocation()
+    local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end
 	return true
 end
