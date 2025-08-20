@@ -1,9 +1,9 @@
 {
 	"globalTagDefaults" : {
 		"bellyImage" : "sbq/belly.png",
-		"bellyColorRemap" : "",
-		"bellyInfusedFade" : "",
+		"bellyInfusedFade" : "?multiply=00000000;",
 		"bellyInfusedDirectives" : "",
+		"bellyInfusedPath" : "",
 		"bellySize" : "0",
 		"bellyInterpolateSize" : "0"
 
@@ -42,19 +42,25 @@
 					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
+			},
+			"rpActionState" : {
+				"states" : {
+
+				}
 			}
+
 		},
 		"parts" : {
 			"belly" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.5,
+					"zLevel": 11.7,
 					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "bellyOffset"],
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<bellyColorRemap><bodyDirectives>"
+					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
 					"bellyState": {
@@ -93,7 +99,7 @@
 			"belly_infused" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.51,
+					"zLevel": 11.71,
 					"anchorPart": "belly",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
@@ -102,7 +108,7 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
+						"idle": { "properties": { "image": "<bellyInfusedPath><bellyImage>:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -122,7 +128,7 @@
 						"none": { "properties": {} }
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<bellyInfusedPath><bellyImage>:<bellyInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

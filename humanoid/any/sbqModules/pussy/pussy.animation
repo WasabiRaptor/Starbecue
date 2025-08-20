@@ -1,9 +1,9 @@
 {
 	"globalTagDefaults" : {
 		"pussyImage" : "sbq/pussy.png",
-		"pussyColorRemap" : "",
-		"pussyInfusedFade" : "",
+		"pussyInfusedFade" : "?multiply=00000000;",
 		"pussyInfusedDirectives" : "",
+		"pussyInfusedPath" : "",
 
 		"pussySize" : "0",
 		"pussyInterpolateSize" : "0"
@@ -46,10 +46,15 @@
 			},
 			"pussyHiddenState" : {
 				"priority" : 4,
-				"default": "none",
+				"default": "true",
 				"states" : {
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"rpActionState" : {
+				"states" : {
+					"fingerPussy": { "frames": 2, "cycle": 0.25, "mode": "loop"}
 				}
 			}
 		},
@@ -57,12 +62,12 @@
 			"pussy" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.01,
+					"zLevel": 11.1,
 					"anchorPart" :"body",
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0, -2],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<pussyColorRemap><bodyDirectives>"
+					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
 					"pussyState": {
@@ -94,7 +99,7 @@
 						"bust" : "head"
 					},
 					"pussyHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					},
 					"starpounds" : {
 						"true" : { "properties":{}}
@@ -104,7 +109,7 @@
 			"pussy_infused" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.011,
+					"zLevel": 11.11,
 					"anchorPart": "pussy",
 					"interact" : [0, -2],
 					"bodyFullbright" : true,
@@ -112,7 +117,7 @@
 				},
 				"partStates": {
 					"pussyState": {
-						"idle": { "properties": { "image": "<pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
+						"idle": { "properties": { "image": "<pussyInfusedPath><pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -132,7 +137,7 @@
 						"none": { "properties": {} }
 					},
 					"pussyExpandState" : {
-						"expand": { "properties": { "image": "<pussyImage>:<pussyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<pussyInfusedPath><pussyImage>:<pussyInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -140,7 +145,7 @@
 						"bust" : "head"
 					},
 					"pussyHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					},
 					"starpounds" : {
 						"true" : { "properties":{}}

@@ -67,34 +67,48 @@ local function fixSlotAnimation(animation, slot)
     return animation
 end
 
-function includeSBQModule(humanoidConfig, module)
+local function includeSBQModule(humanoidConfig, module)
     if type(module) == "string" then
         table.insert(humanoidConfig.sbqConfig.includes, module)
         module = root.assetJson(module)
     end
     for _, v in ipairs(module.includes or {}) do
-        humanoidConfig = includeSBQModule(humanoidConfig, root.assetJson(v))
+        includeSBQModule(humanoidConfig, root.assetJson(v))
         table.insert(humanoidConfig.sbqConfig.includes, v)
     end
     for _, v in ipairs(module.scripts or {}) do
         table.insert(humanoidConfig.sbqConfig.scripts, v)
     end
-    if module.animation then
-        table.insert(humanoidConfig.animation.includes, module.animation)
+    for _, v in ipairs(module.animations or {}) do
+        table.insert(humanoidConfig.animation.includes, v)
     end
-    if module.cosmeticAnimation then
-        local cosmeticAnimation = root.assetJson(module.cosmeticAnimation)
+    for _, v in ipairs(module.cosmeticAnimations or {}) do
+        local cosmeticAnimation = root.assetJson(v)
         for i = 1, 20 do
             humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(cosmeticAnimation, i))
         end
     end
-    if module.occupantAnimation then
-        local occupantSlot = root.assetJson(module.occupantAnimation)
+    for _, v in ipairs(module.occupantAnimations or {}) do
+        local occupantSlot = root.assetJson(v)
         for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
             humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(occupantSlot, i))
         end
     end
-    return humanoidConfig
+end
+
+local function getSBQBuildArguments(humanoidConfig)
+    for _, v in ipairs({
+        "sbqModules",
+        "sbqConfig",
+        "sbqIdentityAnimationCustom"
+    }) do
+        if not humanoidConfig[v] then
+            humanoidConfig[v] = root.assetJson("/humanoid.config:" .. v)
+        end
+        if type(humanoidConfig[v]) == "string"then
+            humanoidConfig[v] = root.assetJson(v)
+        end
+    end
 end
 
 function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
@@ -106,17 +120,13 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
         return humanoidConfig
     end
     local sbqConfig = root.assetJson("/sbq.config")
-    if not humanoidConfig.sbqModules then
-        humanoidConfig.sbqModules = assets.json("/humanoid.config:sbqModules")
-    end
-    if not humanoidConfig.sbqConfig then
-        humanoidConfig.sbqConfig = assets.json("/humanoid.config:sbqConfig")
-    end
-    if type(humanoidConfig.sbqConfig) == "string" then
-        humanoidConfig.sbqConfig = assets.json(humanoidConfig.sbqConfig)
-    end
-    if type(humanoidConfig.sbqModules) == "string" then
-        humanoidConfig.sbqModules = assets.json(humanoidConfig.sbqModules)
+    getSBQBuildArguments(humanoidConfig)
+    for k, v in pairs(identity) do
+        -- if type(v) == "string" then
+        --     if humanoidConfig.sbqIdentityAnimationCustom[k] then
+        --         humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, humanoidConfig.sbqIdentityAnimationCustom[k][v] or {})
+        --     end
+        -- end
     end
 
     humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
@@ -140,15 +150,15 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
         includes = jarray(),
         scripts = jarray()
     })
-    humanoidConfig = includeSBQModule(humanoidConfig, baseModule)
+    includeSBQModule(humanoidConfig, baseModule)
     for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
         local modules = humanoidConfig.sbqModules[slot]
         local selectedModule = humanoidParameters["sbqModule_" .. slot]
         if selectedModule and (selectedModule ~= "disable") then
             if modules[selectedModule] then
-                humanoidConfig = includeSBQModule(humanoidConfig, modules[selectedModule])
+                includeSBQModule(humanoidConfig, modules[selectedModule])
             else
-                humanoidConfig = includeSBQModule(humanoidConfig, modules.default)
+                includeSBQModule(humanoidConfig, modules.default)
             end
         end
     end

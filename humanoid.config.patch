@@ -23,6 +23,35 @@
         "includes" : [
             "/humanoid/any/sbqModules/base/sbqModule.config",
             "/humanoid/any/sbqModules/grab/sbqModule.config"
+        ],
+        "animations" : [
+            "/humanoid/any/sbqModules/humanoidBase.animation"
         ]
+    },
+    "sbqIdentityAnimationCustom" : {
+        "personalityIdle" : {
+            "idle.2" : {
+                "animatedParts":{"stateTypes":{"body":{"states":{"idle":{"properties":{
+                    "bellyOffset":[["reset"],	["translate",[0.125, 0]]],
+                    "crotchOffset":[["reset"],	["translate",[0.125, 0]]],
+                    "tailOffset":[["reset"],	["translate",[0.125, 0]]],
+                    "chestOffset":[["reset"],	["translate",[0, 0.125]]]
+                }}}}}}
+            },
+            "idle.3" : {
+                "animatedParts":{"stateTypes":{"body":{"states":{"idle":{"properties":{
+                    "bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+                    "chestOffset":[["reset"],	["translate",[-0.125, 0]]]
+                }}}}}}
+            },
+            "idle.4" : {
+                "animatedParts":{"stateTypes":{"body":{"states":{"idle":{"properties":{
+                    "bellyOffset":[["reset"],	["translate",[0.125, 0]]],
+                    "crotchOffset":[["reset"],	["translate",[0.125, 0]]],
+                    "tailOffset":[["reset"],	["translate",[0.125, 0]]],
+                    "chestOffset":[["reset"],	["translate",[0, 0.125]]]
+                }}}}}}
+            }
+        }
     }
 }

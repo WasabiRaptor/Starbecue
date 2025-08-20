@@ -328,10 +328,10 @@
 			},
 			"cockHiddenState" : {
 				"priority" : 4,
-				"default": "none",
+				"default": "true",
 				"states" : {
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
 			"balls_rightState" : {
@@ -402,10 +402,10 @@
 			},
 			"ballsHiddenState" : {
 				"priority" : 4,
-				"default": "none",
+				"default": "true",
 				"states" : {
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			}
 
@@ -1254,7 +1254,7 @@
 						"bust" : "head"
 					},
 					"cockHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					}
 				}
 			},
@@ -1303,7 +1303,7 @@
 						"bust" : "head"
 					},
 					"ballsHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					}
 				}
 			},
@@ -1352,7 +1352,7 @@
 						"bust" : "head"
 					},
 					"ballsHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					}
 				}
 			}

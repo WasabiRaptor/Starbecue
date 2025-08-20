@@ -48,16 +48,18 @@
 				"priority" : 4,
 				"default": "ignore",
 				"states" : {
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			}
-
 		},
 		"parts" : {
 			"tail" : {
 				"properties": {
 					"centered": true,
+					"zLevel": 8.1,
+					"offset" : [-1.3125,-1.0625],
+
 					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "tailOffset"],
 					"bodyFullbright" : true,
@@ -100,6 +102,8 @@
 			"tail_infused" : {
 				"properties": {
 					"centered": true,
+					"zLevel": 8.11,
+
 					"anchorPart": "tail",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<tailInfusedDirectives><tailInfusedFade>"

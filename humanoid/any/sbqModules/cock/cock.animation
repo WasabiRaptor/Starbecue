@@ -1,9 +1,10 @@
 {
 	"globalTagDefaults" : {
 		"cockImage" : "sbq/cock.png",
-		"cockColorRemap" : "",
-		"cockInfusedFade" : "",
+		"cockInfusedFade" : "?multiply=00000000;",
 		"cockInfusedDirectives" : "",
+		"cockInfusedPath" : "",
+
 		"cockSize" : "0",
 		"cockInterpolateSize" : "0"
 
@@ -45,23 +46,29 @@
 			},
 			"cockHiddenState" : {
 				"priority" : 4,
-				"default": "none",
+				"default": "true",
 				"states" : {
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"rpActionState" : {
+				"states" : {
+					"jackoff": { "frames": 2, "cycle": 0.25, "mode": "loop"}
 				}
 			}
+
 		},
 		"parts" : {
 			"cock" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.3,
+					"zLevel": 11.4,
 					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "crotchOffset"],
 					"interact" : [0.5, -1.5],
 					"bodyFullbright" : true,
-					"processingDirectives" : "<cockColorRemap><bodyDirectives>",
+					"processingDirectives" : "<bodyDirectives>",
 
 					"0-particles" : [0.625,-1.875],
 					"0.5-particles" : [1,-2.125],
@@ -108,7 +115,7 @@
 						"bust" : "head"
 					},
 					"cockHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					},
 					"starpounds" : {
 						"true" : { "properties":{}}
@@ -119,15 +126,15 @@
 			"cock_infused" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 0.301,
+					"zLevel": 11.41,
 					"anchorPart": "cock",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<cockInfusedDirectives><cockInfusedFade>"
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
-						"walk": { "properties": { "image": "<cockImage>:<cockSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<cockInfusedPath><cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"walk": { "properties": { "image": "<cockInfusedPath><cockImage>:<cockSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -138,25 +145,25 @@
 						"lay" : "idle"
 					},
 					"cockState": {
-						"s_front" : { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_front" : { "properties": { "image": "<cockInfusedPath><cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"cockExpandState" : {
-						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<cockInfusedPath><cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"rpActionState": {
-						"jackoff" : { "properties": { "image": "<cockImage>:<cockSize>-jackoff.1" } }
+						"jackoff" : { "properties": { "image": "<cockInfusedPath><cockImage>:<cockSize>-jackoff.1" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
 					},
 					"cockHiddenState" : {
-						"none": { "properties": {} }
+						"true": { "properties": {} }
 					},
 					"starpounds" : {
 						"true" : { "properties":{}}
