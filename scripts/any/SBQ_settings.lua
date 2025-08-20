@@ -207,9 +207,9 @@ end
 
 function _Settings:get(setting, groupName, groupId)
 	if groupName and groupId then
-        return self.settings[groupName][groupId][setting]
+        return self.read[groupName][groupId][setting]
     else
-		return self.settings[setting]
+		return self.read[setting]
 	end
 end
 function _Settings:set(value, setting, groupName, groupId)
@@ -386,6 +386,7 @@ _Upgrades.__index = _Upgrades
 
 function _Upgrades.new(storedUpgrades)
     local self = {}
+    setmetatable(self, {__index = _Upgrades})
     if not storedUpgrades then
         storedUpgrades = root.makeCurrentVersionedJson("sbqUpgrades", {})
     elseif not (storedUpgrades.id and storedUpgrades.version and storedUpgrades.content) then
@@ -395,12 +396,12 @@ function _Upgrades.new(storedUpgrades)
             content = storedUpgrades
         }
     end
-    self.storedUpgrades = root.loadVersionedJson("sbqUpgrades", storedUpgrades)
+    self.storedUpgrades = root.loadVersionedJson(storedUpgrades, "sbqUpgrades")
     self.values = {}
     setmetatable(self.values, { __index = self.storedUpgrades })
     for _, name in ipairs(sbq.config.tieredUpgrades) do
         local value = 0
-        for _, v in ipairs(self.storedUpgrades[name]) do
+        for _, v in ipairs(self.storedUpgrades[name] or {}) do
             value = value + v
         end
         rawset(self.values, name, value)
@@ -432,10 +433,18 @@ function _Upgrades:setTiered(name, tier, bonus)
     end
 end
 function _Upgrades:set(name, value)
+    local oldValue = self:get(name)
     self.storedUpgrades[name] = value
+    if self:get(name) ~= oldValue then
+        if self.updated[name] then
+            self.updated[name](self, name, oldValue)
+        else
+            self.updated.any(self, name, oldValue)
+        end
+    end
 end
-function _Upgrades:get(name, value)
-    self.values[name] = value
+function _Upgrades:get(name)
+    return self.values[name]
 end
 function _Upgrades.updated:any(name, oldValue)
     if not self.applyTo then return end
