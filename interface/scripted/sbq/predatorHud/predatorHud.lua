@@ -99,21 +99,26 @@ function uninit()
 	player.setProperty("sbqPredHudOpen", false)
 end
 
+local blankTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/blankSlot.config")
 local emptyTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/emptySlot.config")
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantSlot.config")
 function sbq.refreshOccupants()
 	sbq.Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
     local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
-	for i = 1, seatCount do
+    local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16-7)) / occupantTemplate.size[2]) - seatCount
+    for i = 1, seatCount do
         local occupant = sbq.Occupants.list[i]
         if occupant then
-			addOccupantPortraitSlot(occupant)
+            addOccupantPortraitSlot(occupant)
         else
-			addEmptySlot(i)
-		end
+            addEmptySlot(i, emptyTemplate)
+        end
+    end
+	for i = 1, blankSlotCount do
+		addEmptySlot(i, blankTemplate)
 	end
-
+	_ENV.occupantSlots:addChild({type = "spacer", size = -1})
 	sbq.updateBars(0)
 end
 
@@ -163,8 +168,8 @@ function addOccupantPortraitSlot(occupant)
 	end
 end
 
-function addEmptySlot(slot)
-	local layout = sbq.replaceConfigTags(emptyTemplate, { slot = tostring(slot) })
+function addEmptySlot(slot, template)
+	local layout = sbq.replaceConfigTags(template, { slot = tostring(slot) })
 	_ENV.occupantSlots:addChild(layout)
 end
 
