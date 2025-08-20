@@ -1,22 +1,22 @@
 cfg = root.assetJson("/interface/scripted/sbq/settings/settings.ui")
-sbq = config.getParameter("data").sbq or {voreConfig = {}}
+sbq = config.getParameter("data").sbq or {voreConfig = {}, settingsConfig = {}}
 
 local entityType = world.entityType(pane.sourceEntity())
 cfg.title = sbq.settingsPageName .. " " .. root.assetJson("/sbqStrings.config:settings")
 cfg.inputData = {sbq = sbq}
 if (entityType == "object") or (entityType == "vehicle") then
-	cfg.inputData.sbq.voreConfig.hideOtherSettings = true
-	cfg.inputData.sbq.voreConfig.hidePreySettings = true
-	cfg.inputData.sbq.voreConfig.hideTFsettings = true
-	cfg.inputData.sbq.voreConfig.hideSizeSettings = true
+	sbq.settingsConfig.hideOtherSettings = true
+	sbq.settingsConfig.hidePreySettings = true
+	sbq.settingsConfig.hideTFsettings = true
+	sbq.settingsConfig.hideSizeSettings = true
 elseif entityType == "monster" then
-	cfg.inputData.sbq.voreConfig.hideTFsettings = true
+	sbq.settingsConfig.hideTFsettings = true
 end
 
-if sbq.voreConfig.hidePredSettings then
+if sbq.settingsConfig.hidePredSettings then
 	table.remove(cfg.children[1].tabs, 1)
 end
-if not sbq.voreConfig.hideBehaviorSettings then
+if not sbq.settingsConfig.hideBehaviorSettings then
 	if (entityType == "object") or (entityType == "vehicle") then
 		-- table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/objectBehavior.config"))
 	else

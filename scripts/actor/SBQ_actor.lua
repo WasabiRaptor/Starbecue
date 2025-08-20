@@ -178,7 +178,7 @@ end
 
 local struggleDirections = { false, "Left", "Right", "Up", "Down" }
 function sbq.struggleBehavior(dt)
-	if sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.read.actionDialogue and not sbq.timerRunning("dialogueAfter") then
+	if sbq.voreConfig and sbq.randomTimer("strugglingDialogue", sbq.voreConfig.strugglingDialogueMin or sbq.config.strugglingDialogueMin, sbq.voreConfig.strugglingDialogueMax or sbq.config.strugglingDialogueMax) and dialogueProcessor and dialogue.finished and sbq.settings.read.actionDialogue and not sbq.timerRunning("dialogueAfter") then
 		if dialogueProcessor.getDialogue(".struggling", sbq.loungingIn()) then
 			dialogueProcessor.speakDialogue()
 		end

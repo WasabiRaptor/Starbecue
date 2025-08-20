@@ -34,13 +34,13 @@ function init()
 	end
 
 	if _ENV.mainPrefsPanel then
-		local otherVisible = not (sbq.voreConfig.hideOtherSettings or false)
-		local preyVisible = not (sbq.voreConfig.hidePreySettings or false)
-		local predVisible = not (sbq.voreConfig.hidePredSettings or false)
-		local infusePredVisible = not (sbq.voreConfig.hideInfusePredSettings or false)
-		local infusePreyVisible = not (sbq.voreConfig.hideInfusePreySettings or false)
-		local TFVisible = not (sbq.voreConfig.hideTFsettings or false)
-		local sizeVisible = not (sbq.voreConfig.hideSizeSettings or false)
+		local otherVisible = not (sbq.settingsConfig.hideOtherSettings or false)
+		local preyVisible = not (sbq.settingsConfig.hidePreySettings or false)
+		local predVisible = not (sbq.settingsConfig.hidePredSettings or false)
+		local infusePredVisible = not (sbq.settingsConfig.hideInfusePredSettings or false)
+		local infusePreyVisible = not (sbq.settingsConfig.hideInfusePreySettings or false)
+		local TFVisible = not (sbq.settingsConfig.hideTFsettings or false)
+		local sizeVisible = not (sbq.settingsConfig.hideSizeSettings or false)
 
 		_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
 		_ENV.infusePreyPrefsPanel:setVisible(infusePreyVisible)

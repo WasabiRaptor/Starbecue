@@ -321,7 +321,7 @@ function _Settings:setPublicSettings()
             end
         end
     end
-    status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
+    status.setStatusProperty("sbqPublicSettings", self.publicSettings)
 end
 
 function _Settings:setParameterSettings()
@@ -507,8 +507,8 @@ function sbq.settingsPageData()
         storedUpgrades = sbq.upgrades:save(),
 
 		voreConfig = sbq.voreConfig or {},
-		locations = sbq.SpeciesScript.locations or {},
-		baseLocations = sbq.SpeciesScript.baseLocations or {},
+		locations = (sbq.SpeciesScript or {}).locations or {},
+		baseLocations = (sbq.SpeciesScript or {}).baseLocations or {},
 		currentScale = sbq.getScale(),
 		parentEntityData = { sbq.parentEntity() },
 		cosmeticSlots = {
