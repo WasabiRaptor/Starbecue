@@ -6,7 +6,7 @@ local textPosition = 1
 local textVolume = _ENV.metagui.cfg.volume or 1
 function init()
 	sbq.debugLogInfo(text, 1)
-	if world.sendEntityMessage(player.id(), "sbqCheckSetting", "scrollText"):result() then
+	if world.sendEntityMessage(player.id(), "sbqGetSetting", "scrollText"):result() then
 		scrollText()
 	else
 		_ENV.dialogueLabel:setText(text)

@@ -23,7 +23,13 @@ function init()
 		entity.entityType()
     )
 	sbq.settings:setMessageHandlers()
-	sbq.settings:setPublicSettings()
+
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades)
+    sbq.upgrades:setMessageHandlers()
+
+	sbq.upgrades:apply(sbq.settings)
+    sbq.settings:setPublicSettings()
+    sbq.settings:setStatSettings()
 
 	sbq.say = monster.say
 	sbq.sayPortrait = monster.sayPortrait

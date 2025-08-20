@@ -25,9 +25,10 @@ function init()
 		for k, v in pairs(settingsData) do
 			sbq[k] = v
 		end
-        if sbq.settingsConfig then
-			sbq.settings = sbq._Settings.new(sbq.settingsConfig, sbq.storedSettings, world.entityType(sbq.entityId()))
-		end
+        sbq.settings = sbq._Settings.new(sbq.settingsConfig or {}, sbq.storedSettings, world.entityType(sbq.entityId()))
+        sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
+		sbq.upgrades:apply(sbq.settings)
+
 		if sbq.locations and sbq.baseLocations then
 			for name, location in pairs(sbq.locations) do
 				setmetatable(location, {__index = sbq.baseLocations[name]})

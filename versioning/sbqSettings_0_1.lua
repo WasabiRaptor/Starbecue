@@ -5,5 +5,24 @@ function update(storedSettings)
     storedSettings.recentlyDigested = jarray()
     storedSettings.infuseSlots = {}
 
+    -- convert parts being enabled to having selected the default
+    if storedSettings.cock then
+        storedSettings.cockSelect = "default"
+    end
+    if storedSettings.breasts then
+        storedSettings.breastsSelect = "default"
+    end
+    if storedSettings.pussy then
+        storedSettings.pussySelect = "default"
+    end
+    storedSettings.cock = nil
+    storedSettings.breasts = nil
+    storedSettings.pussy = nil
+
+    storedSettings.maxScale = storedSettings.maximumScale
+    storedSettings.minScale = storedSettings.minimumScale
+    storedSettings.maximumScale = nil
+    storedSettings.minimumScale = nil
+
     return storedSettings
 end

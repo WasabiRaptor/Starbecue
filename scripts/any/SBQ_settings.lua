@@ -1,4 +1,6 @@
-local _Settings = {}
+local _Settings = {
+    updated = {}
+}
 sbq._Settings = _Settings
 _Settings.__index = _Settings
 
@@ -195,8 +197,15 @@ function _Settings:checkInvalid(value, setting, groupName, groupId)
             ((groupName and groupId) and sbq.query(self.invalidSettings, { groupName, groupId, setting, value }))
     end
 end
+function _Settings:checkLocked(setting, groupName, groupId)
+	if groupName and groupId then
+        return self.lockedSettings[groupName][groupId][setting]
+    else
+		return self.lockedSettings[setting]
+	end
+end
 
-function _Settings:check(setting, groupName, groupId)
+function _Settings:get(setting, groupName, groupId)
 	if groupName and groupId then
         return self.settings[groupName][groupId][setting]
     else
@@ -204,17 +213,54 @@ function _Settings:check(setting, groupName, groupId)
 	end
 end
 function _Settings:set(value, setting, groupName, groupId)
-    if self:checkInvalid(value, setting, groupName, groupId) then return end
+    local oldValue = self:get(setting, groupName, groupId)
+    local value = self:checkInvalid(value, setting, groupName, groupId) or value
     if groupName and groupId then
         if not self.lockedSettings[groupName][groupId][setting] then
-            self.settings[groupName][groupId][setting] = value
+            rawset(self.storedSettings[groupName][groupId], setting, value)
         end
     else
         if not self.lockedSettings[setting] then
-            self.settings[setting] = value
+            rawset(self.storedSettings, setting, value)
+        end
+    end
+    if oldValue ~= self:get(setting, groupName, groupId) then
+        if self.updated[setting] then
+            self.updated[setting](self, oldValue, setting, groupName, groupId)
+        else
+            self.updated.any(self, oldValue, setting, groupName, groupId)
         end
     end
 end
+function _Settings.updated:any(oldValue, setting, groupName, groupId)
+
+    -- local parent, recruitUuid = sbq.parentEntity()
+	-- if parent then
+	-- 	world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), setting, value)
+    -- end
+
+
+    if groupName == "locations" then
+        _Settings.updated.locationSetting(self, oldValue, setting, groupName, groupId)
+    end
+end
+
+function _Settings.updated:locationSetting(oldValue, setting, groupName, groupId)
+    if sbq.SpeciesScript then
+        sbq.SpeciesScript:getLocation(groupId):markSettingsDirty()
+    end
+end
+
+function _Settings.updated:parameterSetting(oldValue, setting, ...)
+    self:setParameterSettings()
+    self.updated.any(self, oldValue, setting, ...)
+end
+_Settings.updated.occupantSlots = _Settings.updated.parameterSetting
+_Settings.updated.bellySelect = _Settings.updated.parameterSetting
+_Settings.updated.cockSelect = _Settings.updated.parameterSetting
+_Settings.updated.ballsSelect = _Settings.updated.parameterSetting
+_Settings.updated.pussySelect = _Settings.updated.parameterSetting
+_Settings.updated.breastsSelect = _Settings.updated.parameterSetting
 
 function _Settings:randomize(randomizeSettings, seed)
     math.randomseed(seed)
@@ -278,58 +324,178 @@ function _Settings:setPublicSettings()
     status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
 end
 
-function _Settings:setModuleSettings()
+function _Settings:setParameterSettings()
+    if not sbq.humanoid then return end
     local refresh = false
-    for setting, v in pairs(sbq.config.moduleSettings) do
+    for parameter, v in pairs(sbq.config.parameterSettings) do
         local value = sbq.query(self.read, v)
-        if sbq.humanoid.getHumanoidParameter("sbqModule_" .. setting) ~= value then
-            sbq.humanoid.setHumanoidParameter("sbqModule_" .. setting, value)
+        if sbq.humanoid.getHumanoidParameter(parameter) ~= value then
+            sbq.humanoid.setHumanoidParameter(parameter, value)
             refresh = true
         end
     end
     if refresh then sbq.humanoid.refreshHumanoidParameters() end
+    return refresh
+end
+
+function _Settings:setStatSettings()
+    local modifiers = {}
+    for k, v in pairs(sbq.config.statSettings or {}) do
+        local amount = self.read[k]
+        if type(amount) == "boolean" then
+            amount = (amount and 1) or 0
+        end
+        table.insert(modifiers, { stat = v, amount = tonumber(amount) or 0 })
+    end
+    status.setPersistentEffects("sbqStats", modifiers)
 end
 
 function _Settings:setMessageHandlers(localOnly)
-	message.setHandler({name = "sbqSetSetting", localOnly = localOnly}, function(_, ...)
-		return self:set(...)
-	end)
-	message.setHandler({name = "sbqCheckSetting"}, function(_, ...)
-		return self:check(...)
-	end)
-	message.setHandler({name = "sbqGetTieredUpgrade"}, function(_, ...)
-		return sbq.getTieredUpgrade(...)
-	end)
-	message.setHandler({name = "sbqImportSettings", localOnly = localOnly}, function( _, ...)
-		return self:import(...)
-	end)
-	message.setHandler({name ="sbqRefreshSettings", localOnly = localOnly}, function( _, ...)
-		self:setPublicSettings()
-		sbq.refreshSettings()
+    message.setHandler({ name = "sbqSetSetting", localOnly = localOnly }, function(_, ...)
+        return self:set(...)
     end)
-	message.setHandler({name = "sbqSettingsPageData"}, function ()
-		return sbq.settingsPageData()
-	end)
+    message.setHandler({ name = "sbqGetSetting" }, function(_, ...)
+        return self:get(...)
+    end)
+    message.setHandler({ name = "sbqImportSettings", localOnly = localOnly }, function(_, ...)
+        return self:import(...)
+    end)
+    message.setHandler({ name = "sbqRefreshSettings", localOnly = localOnly }, function(_, ...)
+        self:setPublicSettings()
+        sbq.refreshSettings()
+    end)
+    message.setHandler({ name = "sbqSettingsPageData" }, function()
+        return sbq.settingsPageData()
+    end)
 
-	-- shortcut to open the settings for the player
-	if player then
-		message.setHandler({ name = "/sbqSettings", localOnly = true }, function()
+    -- shortcut to open the settings for the player
+    if player then
+        message.setHandler({ name = "/sbqSettings", localOnly = true }, function()
             player.interact("ScriptPane",
                 { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
-			return "Opened Starbecue Settings"
-		end)
-	end
+            return "Opened Starbecue Settings"
+        end)
+    end
 end
 
-function sbq.settingsInit()
+local _Upgrades = {
+    updated = {}
+}
+sbq._Upgrades = _Upgrades
+_Upgrades.__index = _Upgrades
+
+function _Upgrades.new(storedUpgrades)
+    local self = {}
+    if not storedUpgrades then
+        storedUpgrades = root.makeCurrentVersionedJson("sbqUpgrades", {})
+    elseif not (storedUpgrades.id and storedUpgrades.version and storedUpgrades.content) then
+        storedUpgrades = {
+            id = "sbqUpgrades",
+            version = 0,
+            content = storedUpgrades
+        }
+    end
+    self.storedUpgrades = root.loadVersionedJson("sbqUpgrades", storedUpgrades)
+    self.values = {}
+    setmetatable(self.values, { __index = self.storedUpgrades })
+    for _, name in ipairs(sbq.config.tieredUpgrades) do
+        local value = 0
+        for _, v in ipairs(self.storedUpgrades[name]) do
+            value = value + v
+        end
+        rawset(self.values, name, value)
+    end
+    return self
+end
+function _Upgrades:save()
+    return root.makeCurrentVersionedJson("sbqUpgrades", self.storedUpgrades)
+end
+
+function _Upgrades:setTiered(name, tier, bonus)
+    self.storedUpgrades[name] = self.storedUpgrades[name] or jarray()
+    for i = 1, tier do
+        self.storedUpgrades[name][i] = self.storedUpgrades[name][i] or 0
+    end
+    self.storedUpgrades[name][tier] = math.max(self.storedUpgrades[name][tier], bonus)
+    local oldValue = self:get(name)
+    local value = 0
+    for _, v in ipairs(self.storedUpgrades[name]) do
+        value = value + v
+    end
+    rawset(self.values, name, value)
+    if value ~= oldValue then
+        if self.updated[name] then
+            self.updated[name](self, name, oldValue)
+        else
+            self.updated.any(self, name, oldValue)
+        end
+    end
+end
+function _Upgrades:set(name, value)
+    self.storedUpgrades[name] = value
+end
+function _Upgrades:get(name, value)
+    self.values[name] = value
+end
+function _Upgrades.updated:any(name, oldValue)
+    if not self.applyTo then return end
+    -- do things here
+end
+function _Upgrades.updated:candyBonus(name, oldValue)
+    if not self.applyTo then return end
+    local oldMaxDigest = self.applyTo:get("maxDigestPower")
+    local oldMaxScale = self.applyTo:get("maxPossibleScale")
+    local oldMaxOcccupants = self.applyTo:get("maxOccupantSlots")
+
+    local candyBonus = self:get("candyBonus")
+    self.applyTo:set( 1 + (candyBonus / 2), "maxDigestPower")
+    self.applyTo:set( math.min(2 + (candyBonus), sbq.config.scaleCap), "maxPossibleScale")
+    self.applyTo:set( 4 + (candyBonus * 2), "maxOccupantSlots")
+
+    for _, k in ipairs(sbq.config.digestPowerSettings) do
+        if self.applyTo:get(k) == oldMaxDigest then
+            self.applyTo:set(self.applyTo:get("maxDigestPower"), k)
+        end
+    end
+    if self.applyTo:get("maxScale") == oldMaxScale then
+        self.applyTo:set(self.applyTo:get("maxPossibleScale"), "maxScale")
+    end
+    if self.applyTo:get("occupantSlots") == oldMaxOcccupants then
+        self.applyTo:set(self.applyTo:get("maxOccupantSlots"), "occupantSlots")
+    end
+
+    self.upgrades.any(self, name, oldValue)
+end
+
+function _Upgrades:apply(settings)
+    self.applyTo = settings or self.applyTo
+    if not self.applyTo then return end
+    local candyBonus = self:get("candyBonus")
+    self.applyTo:set( 1 + (candyBonus / 2), "maxDigestPower")
+    self.applyTo:set( math.min(2 + (candyBonus), sbq.config.scaleCap), "maxPossibleScale")
+    self.applyTo:set( 4 + (candyBonus * 2), "maxOccupantSlots")
+end
+
+function _Upgrades:setMessageHandlers(localOnly)
+    message.setHandler({ name = "sbqSetTieredUpgrade", localOnly = localOnly }, function(_, ...)
+        return self:setTiered(...)
+    end)
+    message.setHandler({ name = "sbqSetUpgrade", localOnly = localOnly }, function(_, ...)
+        return self:set(...)
+    end)
+    message.setHandler({ name = "sbqGetUpgrade" }, function(_, ...)
+        return self:get(...)
+    end)
+
 end
 
 function sbq.settingsPageData()
 	local settingsPageData = {
         settingsPageName = sbq.entityName(entity.id()),
 
-        settingsConfig = sbq.settings.read.settingsConfig,
+        settingsConfig = sbq.settings.settingsConfig,
         storedSettings = sbq.settings:save(),
+        storedUpgrades = sbq.upgrades:save(),
 
 		voreConfig = sbq.voreConfig or {},
 		locations = sbq.SpeciesScript.locations or {},
@@ -359,61 +525,10 @@ function sbq.settingsPageData()
 	return settingsPageData
 end
 
-function sbq.setSetting(setting, value)
-	if sbq.settings:checkInvalid(value, setting) ~= nil then return end
-	if sbq.checkLockedSetting(setting) then return end
-
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), setting, value)
-	end
-	local old = sbq.settings.read[setting]
-	storage.sbqSettings[setting] = value
-	sbq.settings.read[setting] = nil
-	if old == sbq.settings.read[setting] then return end
-	sbq.refreshSettings()
-	if sbq.config.publicSettings[setting] then
-		sbq.publicSettings[setting] = sbq.settings.read[setting]
-		status.setStatusProperty("sbqPublicSettings", sbq.publicSettings)
-	end
-	if (sbq.voreConfig.settingUpdateScripts or {})[setting] then
-		for _, script in ipairs(sbq.voreConfig.settingUpdateScripts[setting]) do
-			sbq[script](setting, value)
-		end
-	end
-end
-
 sbq.settingChanged = {}
-
-function sbq.getTieredUpgrade(upgradeName, tier, bonus)
-	storage.sbqUpgrades[upgradeName] = storage.sbqUpgrades[upgradeName] or {}
-	local oldScore = storage.sbqUpgrades[upgradeName][tier] or 0
-	if bonus <= oldScore then return end
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentGetTieredUpgrade", recruitUuid, entity.uniqueId(), upgradeName, tier,
-			bonus)
-	end
-	if player then
-		interface.queueMessage(sbq.getString(":" .. upgradeName .. "Increased"))
-	end
-	storage.sbqUpgrades[upgradeName][tier] = bonus
-	sbq.refreshUpgrades(true)
-	sbq.refreshSettings()
-	sbq.settings:setPublicSettings()
-end
 
 
 function sbq.refreshSettings()
-	local modifiers = {}
-	for k, v in pairs(sbq.config.statSettings or {}) do
-		local amount = sbq.settings.read[k]
-		if type(amount) == "boolean" then
-			amount = (amount and 1) or 0
-		end
-		table.insert(modifiers, { stat = v, amount = tonumber(amount) or 0 })
-	end
-	status.setPersistentEffects("sbqStats", modifiers)
 	if sbq.SpeciesScript then
 		sbq.SpeciesScript:settingAnimations()
 	end

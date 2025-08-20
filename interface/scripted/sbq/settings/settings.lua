@@ -189,16 +189,16 @@ end
 
 function sbq.fetchSettingValueAndType(setting, group, name)
 	if group and name then
-		return sbq.settings.read[group][name][setting], type(sbq.defaultSettings[group][name][setting])
+		return sbq.settings.read[group][name][setting], type(sbq.settings.defaultSettings[group][name][setting])
 	else
-		return sbq.settings.read[setting], type(sbq.defaultSettings[setting])
+		return sbq.settings.read[setting], type(sbq.settings.defaultSettings[setting])
 	end
 end
 
 function sbq.assignSettingValue(setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
 	local widget = sbq.settingWidgets[settingIdentifier] or _ENV[settingIdentifier]
-	local locked = sbq.checkLockedSetting(setting, group, name)
+	local locked = sbq.settings:checkLocked(setting, group, name)
 	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
 
 	if not widget then
@@ -233,7 +233,7 @@ end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
 	local result = sbq.settings:checkInvalid(value, setting, group, name)
-    if (result ~= nil) or sbq.checkLockedSetting(setting, group, name) then
+    if (result ~= nil) or sbq.settings:checkLocked(setting, group, name) then
         sbq.playErrorSound()
         sbq.assignSettingValue(setting, group, name)
         return false
@@ -424,7 +424,7 @@ function sbq.widgetScripts.infusedVisible(setting, group, name)
 end
 
 function sbq.widgetScripts.makeRecentlyDigested(param)
-	if not storage.sbqSettings.recentlyDigested[1] then return false end
+	if not sbq.settings.read.recentlyDigested[1] then return false end
 	local slots = {}
 	local layout = {
 		type = "panel",
@@ -442,7 +442,7 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 		},
 		makeLabel = false
 	}
-	for _, item in ipairs(storage.sbqSettings.recentlyDigested) do
+	for _, item in ipairs(sbq.settings.read.recentlyDigested) do
 		local slot = {
 			item = item.name and item,
 		}
@@ -459,7 +459,7 @@ end
 
 function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
-	local locked = sbq.checkLockedSetting(setting, group, name)
+	local locked = sbq.settings:checkLocked(setting, group, name)
 	local options = {}
 	if not sbq.voreConfig.selectValues[setting] then
 		sbq.playErrorSound()

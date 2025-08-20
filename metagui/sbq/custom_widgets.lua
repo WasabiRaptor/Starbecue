@@ -14,6 +14,7 @@ storage = {}
 
 require("/scripts/any/SBQ_RPC_handling.lua")
 require("/scripts/any/SBQ_util.lua")
+require("/scripts/any/SBQ_settings.lua")
 
 function sbq.playErrorSound()
 	pane.playSound("/sfx/interface/clickon_error.ogg")
@@ -52,9 +53,10 @@ function init()
 	for k, v in pairs((mg.inputData or {}).sbq or {}) do
 		sbq[k] = v
 	end
-	if sbq.settingsConfig then
-		sbq.settings = sbq._Settings.new(sbq.settingsConfig, sbq.storedSettings, world.entityType(sbq.entityId()))
-	end
+	sbq.settings = sbq._Settings.new(sbq.settingsConfig or {}, sbq.storedSettings, world.entityType(sbq.entityId()))
+    sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
+	sbq.upgrades:apply(sbq.settings)
+
 	if sbq.locations and sbq.baseLocations then
 		for name, location in pairs(sbq.locations) do
 			setmetatable(location, {__index = sbq.baseLocations[name]})
@@ -104,16 +106,16 @@ function widgets.sbqSetting:init(base, param)
 	param.groupName = param.groupName or self.parent.groupName
 	param.groupKey = param.groupKey or self.parent.groupKey
 
-	local defaultSetting = sbq.defaultSettings[param.setting]
+	local defaultSetting = sbq.settings.defaultSettings[param.setting]
 	local errorString
 	if param.groupName and param.groupKey then
-		if not sbq.defaultSettings[param.groupName] then
+		if not sbq.settings.defaultSettings[param.groupName] then
 			return sbq.logError("undefined setting group: ".. param.groupName)
 		end
-		if not sbq.defaultSettings[param.groupName][param.groupKey] then
+		if not sbq.settings.defaultSettings[param.groupName][param.groupKey] then
 			return sbq.logError("undefined setting group entry: ".. param.groupName.."."..param.groupKey)
 		end
-		defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+		defaultSetting = sbq.settings.defaultSettings[param.groupName][param.groupKey][param.setting]
 		if defaultSetting == nil then errorString = (string.format("Setting '%s.%s.%s' has no defined default", param.groupName, param.groupKey, param.setting)) end
 	else
 		if defaultSetting == nil then errorString = (string.format("Setting '%s' has no defined default", param.setting)) end
@@ -284,10 +286,10 @@ function widgets.sbqSlider:init(base, param)
 	local min = param.min
 	local max = param.max
 	if type(param.max) == "string" then
-		max = sbq.settings.read[param.max] or sbq.defaultSettings[param.max] or 1
+		max = sbq.settings.read[param.max] or sbq.settings.defaultSettings[param.max] or 1
 	end
 	if type(param.min) == "string" then
-		min = sbq.settings.read[param.min] or sbq.defaultSettings[param.min] or 0
+		min = sbq.settings.read[param.min] or sbq.settings.defaultSettings[param.min] or 0
 	end
 
 	if not param.notches and min and max then
@@ -306,13 +308,13 @@ function widgets.sbqSlider:init(base, param)
 	for i, h in ipairs(self.handles) do
 		h.setting = h.setting or self.setting
 		if h.setting then
-			local defaultSetting = sbq.defaultSettings[h.setting]
+			local defaultSetting = sbq.settings.defaultSettings[h.setting]
 			if (h.groupName and h.groupKey) then
-				defaultSetting = sbq.defaultSettings[h.groupName][h.groupKey][h.setting]
+				defaultSetting = sbq.settings.defaultSettings[h.groupName][h.groupKey][h.setting]
 			elseif (self.groupKey and self.groupName) and not (h.groupName or h.groupKey) then
 				h.groupName = self.groupName
 				h.groupKey = self.groupKey
-				defaultSetting = sbq.defaultSettings[self.groupName][self.groupKey][h.setting]
+				defaultSetting = sbq.settings.defaultSettings[self.groupName][self.groupKey][h.setting]
 			end
 			h.value = defaultSetting
 			sbq.settingWidgets[sbq.widgetSettingIdentifier(h)] = self
@@ -605,9 +607,9 @@ function widgets.sbqCheckBox:init(base, param)
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
 		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
-		local defaultSetting = sbq.defaultSettings[param.setting]
+		local defaultSetting = sbq.settings.defaultSettings[param.setting]
 		if param.groupName and param.groupKey then
-			defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+			defaultSetting = sbq.settings.defaultSettings[param.groupName][param.groupKey][param.setting]
 		end
 		if type(defaultSetting) == "boolean" then
 			self.checked = defaultSetting
@@ -908,9 +910,9 @@ function widgets.sbqTextBox:init(base, param)
 		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
 		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
-		local defaultSetting = sbq.defaultSettings[param.setting]
+		local defaultSetting = sbq.settings.defaultSettings[param.setting]
 		if param.groupName and param.groupKey then
-			defaultSetting = sbq.defaultSettings[param.groupName][param.groupKey][param.setting]
+			defaultSetting = sbq.settings.defaultSettings[param.groupName][param.groupKey][param.setting]
 		end
 		param.text = tostring(defaultSetting)
 		self.settingType = type(defaultSetting)

@@ -43,8 +43,17 @@ function init()
 		storage.sbqSettings,
         entity.entityType()
     )
-	sbq.settings:setMessageHandlers(true)
+	sbq.settings:setParameterSettings(true)
+	sbq.settings:setMessageHandlers()
+
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades)
+	sbq.upgrades:setMessageHandlers(true)
+
+	sbq.upgrades:apply(sbq.settings)
 	sbq.settings:setPublicSettings()
+    sbq.settings:setStatSettings()
+
+    humanoidConfig = player.humanoidConfig()
 
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then

@@ -28,8 +28,8 @@ function init()
 	-- 	pane.dismiss()
     -- end)
 
-	doScrollText = world.sendEntityMessage(player.id(), "sbqCheckSetting", "scrollText"):result()
-	doCustomFont = world.sendEntityMessage(player.id(), "sbqCheckSetting", "customFont"):result()
+	doScrollText = world.sendEntityMessage(player.id(), "sbqGetSetting", "scrollText"):result()
+	doCustomFont = world.sendEntityMessage(player.id(), "sbqGetSetting", "customFont"):result()
 
 	for _, script in ipairs(sbq.dialogueTree.dialogueStepScripts or {}) do
 		require(script)

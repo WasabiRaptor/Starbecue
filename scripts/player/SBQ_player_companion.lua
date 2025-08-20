@@ -32,7 +32,7 @@ function init()
 			recruit = _ENV.petSpawner:sbqGetPet(recruitUuid, uuid)
 		end
 		if not recruit then return end
-		recruit:sbqGetTieredUpgrade(...)
+		recruit:sbqSetTieredUpgrade(...)
 
 	end)
 	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)

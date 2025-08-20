@@ -10,39 +10,39 @@ function uninit()
 end
 
 function sbqWorldRefreshOverrideSettings()
-    local worldOverrideSettings = world.getProperty("sbqOverrideSettingsettings") or {}
-    local serverOverrideSettings = root.getConfigurationPath("sbq.overrideSettingsettings") or {}
-    world.setProperty("sbqOverrideSettingsettings_player", sb.jsonMerge(
+    local worldOverrideSettings = world.getProperty("sbqOverrideSettings") or {}
+    local serverOverrideSettings = root.getConfigurationPath("sbq.overrideSettings") or {}
+    world.setProperty("sbqOverrideSettings_player", sb.jsonMerge(
         worldOverrideSettings.any or {},
         worldOverrideSettings.player or {},
         serverOverrideSettings.any or {},
         serverOverrideSettings.player or {}
     ))
-    world.setProperty("sbqOverrideSettingsettings_npc", sb.jsonMerge(
+    world.setProperty("sbqOverrideSettings_npc", sb.jsonMerge(
         worldOverrideSettings.any or {},
         worldOverrideSettings.npc or {},
         serverOverrideSettings.any or {},
         serverOverrideSettings.npc or {}
     ))
-    world.setProperty("sbqOverrideSettingsettings_monster", sb.jsonMerge(
+    world.setProperty("sbqOverrideSettings_monster", sb.jsonMerge(
         worldOverrideSettings.any or {},
         worldOverrideSettings.monster or {},
         serverOverrideSettings.any or {},
         serverOverrideSettings.monster or {}
     ))
-    world.setProperty("sbqOverrideSettingsettings_object", sb.jsonMerge(
+    world.setProperty("sbqOverrideSettings_object", sb.jsonMerge(
         worldOverrideSettings.any or {},
         worldOverrideSettings.object or {},
         serverOverrideSettings.any or {},
         serverOverrideSettings.object or {}
     ))
-    world.setProperty("sbqOverrideSettingsettings_vehicle", sb.jsonMerge(
+    world.setProperty("sbqOverrideSettings_vehicle", sb.jsonMerge(
         worldOverrideSettings.any or {},
         worldOverrideSettings.vehicle or {},
         serverOverrideSettings.any or {},
         serverOverrideSettings.vehicle or {}
     ))
-    world.setProperty("sbqOverrideSettingsettings_any", sb.jsonMerge(
+    world.setProperty("sbqOverrideSettings_any", sb.jsonMerge(
         worldOverrideSettings.any or {},
         serverOverrideSettings.any or {}
     ))

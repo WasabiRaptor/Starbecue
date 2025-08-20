@@ -174,7 +174,7 @@ end
 
 function sbq.applyScale(scale, duration, min, max)
 	local publicSettings = status.statusProperty("sbqPublicSettings") or {}
-	destScale = math.min(publicSettings.maximumScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minimumScale or 1, min or -math.huge), max or math.huge)
+	destScale = math.min(publicSettings.maxScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minScale or 1, min or -math.huge), max or math.huge)
 	oldScale = mcontroller.getScale()
 	scaleTime = 0
 	scaleDuration = duration or 1

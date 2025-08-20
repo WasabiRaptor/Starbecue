@@ -97,35 +97,6 @@ function sbq.metatableLayers(...)
 	end
 end
 
-function sbq.refreshUpgrades(upgraded)
-	storage.sbqSettings = storage.sbqSettings or {}
-	storage.sbqUpgrades = storage.sbqUpgrades or {}
-	sbq.upgradeScores = {}
-	for k, v in pairs(storage.sbqUpgrades) do
-		if type(v) == "table" then
-			sbq.upgradeScores[k] = 0
-			for _, value in pairs(v) do
-				sbq.upgradeScores[k] = sbq.upgradeScores[k] + value
-			end
-		end
-	end
-	local oldMaxDigest = storage.sbqSettings.maxDigestPower
-	local oldMaxScale = storage.sbqSettings.maxPossibleScale
-	local candiesEaten = (sbq.upgradeScores.candiesEaten or 0)
-	storage.sbqSettings.maxDigestPower = 1 + candiesEaten
-	storage.sbqSettings.maxPossibleScale = math.min(2 + candiesEaten, sbq.config.scaleCap)
-	if upgraded then
-		for _, k in ipairs({ "acidDigestPower", "cumDigestPower", "femcumDigestPower", "milkDigestPower" }) do
-			if storage.sbqSettings[k] == oldMaxDigest then
-				storage.sbqSettings[k] = storage.sbqSettings.maxDigestPower
-			end
-		end
-		if storage.sbqSettings.maximumScale == oldMaxScale then
-			storage.sbqSettings.maximumScale = storage.sbqSettings.maxPossibleScale
-		end
-	end
-end
-
 function sbq.validateExportSettings(settings)
 	local validated = sb.jsonMerge(settings, {})
 	validated.recentlyDigested = nil
@@ -147,11 +118,6 @@ function sbq.removeEmptyTables(input)
 	end
 	if empty then return nil end
 	return input
-end
-
-
-function sbq.checkLockedSetting(setting, group, name)
-	return sbq.lockedSettings[setting] or ((group and name) and sbq.query(sbq.lockedSettings, { group, name, setting }))
 end
 
 function sbq.getEntitySize(entityId)

@@ -36,10 +36,10 @@ function init()
 
 	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings") or {}
 	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
-	if not storage.sbqUpgrades.candiesEaten then
-		storage.sbqUpgrades.candiesEaten = {}
+	if not storage.sbqUpgrades.candyBonus then
+		storage.sbqUpgrades.candyBonus = {}
 		for i = 1, math.floor(math.max(object.level(), 1)) do
-			storage.sbqUpgrades.candiesEaten[i] = 1
+			storage.sbqUpgrades.candyBonus[i] = 1
 		end
 		local digestPower = math.max(1, (object.level()+1)/2)
 		storage.sbqSettings.acidDigestPower = storage.sbqSettings.acidDigestPower or digestPower

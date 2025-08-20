@@ -615,12 +615,12 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 			-- we can drop condoms and milk for monsters, but if we don't have NPC data theres no reason to preserve it
 			if not item.parameters.npcArgs then return end
 			item.name = "sbqNPCEssenceJar"
-			if not storage.sbqSettings.recentlyDigested[1] then
-				storage.sbqSettings.recentlyDigested = _ENV.jarray()
+            if not sbq.settings.read.recentlyDigested[1] then
+				rawset(sbq.settings.storedSettings, "recentlyDigested", _ENV.jarray())
 			end
-			table.insert(storage.sbqSettings.recentlyDigested, 1, item)
-			while #storage.sbqSettings.recentlyDigested > sbq.config.recentlyDigestedCount do
-				table.remove(storage.sbqSettings.recentlyDigested, #storage.sbqSettings.recentlyDigested)
+			table.insert(sbq.settings.storedSettings.recentlyDigested, 1, item)
+			while #sbq.settings.storedSettings.recentlyDigested > sbq.config.recentlyDigestedCount do
+				table.remove(sbq.settings.storedSettings.recentlyDigested, #sbq.settings.storedSettings.recentlyDigested)
 			end
 		end
 	end)

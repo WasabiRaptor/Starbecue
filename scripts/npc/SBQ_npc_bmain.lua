@@ -20,6 +20,21 @@ local convert
 function init()
 	old.init()
 
+	sbq.targetPosition = npc.aimPosition
+	sbq.resetLounging = npc.resetLounging
+	sbq.species = npc.species
+	sbq.gender = npc.gender
+	sbq.humanoidIdentity = npc.humanoidIdentity
+	sbq.setHumanoidIdentity = npc.setHumanoidIdentity
+	sbq.humanoid = npc
+	sbq.humanoidInit()
+
+	sbq.getItemSlot = npc.getItemSlot
+	sbq.setItemSlot = npc.setItemSlot
+
+	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
+	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
+
 	sbq.config = root.assetJson("/sbq.config")
 	local speciesConfig = root.speciesConfig(npc.species())
 	local humanoidConfig = npc.humanoidConfig()
@@ -35,23 +50,15 @@ function init()
 		storage.sbqSettings,
 		entity.entityType()
     )
+	sbq.settings:setParameterSettings()
 	sbq.settings:setMessageHandlers()
+
+    sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades)
+    sbq.upgrades:setMessageHandlers()
+
+	sbq.upgrades:apply(sbq.settings)
 	sbq.settings:setPublicSettings()
-
-	sbq.targetPosition = npc.aimPosition
-	sbq.resetLounging = npc.resetLounging
-	sbq.species = npc.species
-	sbq.gender = npc.gender
-	sbq.humanoidIdentity = npc.humanoidIdentity
-	sbq.setHumanoidIdentity = npc.setHumanoidIdentity
-	sbq.humanoid = npc
-	sbq.humanoidInit()
-
-	sbq.getItemSlot = npc.getItemSlot
-	sbq.setItemSlot = npc.setItemSlot
-
-	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
-	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
+    sbq.settings:setStatSettings()
 
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()

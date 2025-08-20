@@ -12,7 +12,28 @@ require("/scripts/any/SBQ_util.lua")
 
 function refreshHumanoidParameters()
 	old.refreshHumanoidParameters()
+	local speciesConfig = root.speciesConfig(sbq.humanoid.species())
 	local humanoidConfig = sbq.humanoid.humanoidConfig()
+	sbq.settings = sbq._Settings.new(
+		sb.jsonMerge(
+			npc and (config.getParameter("sbqSettingsConfig") or {
+				hideBehaviorSettings = true,
+				hidePredSettings = true,
+			}) or {},
+            speciesConfig.sbqSettingsConfig or {},
+			humanoidConfig.sbqSettingsConfig or {}
+		),
+		storage.sbqSettings,
+		entity.entityType()
+    )
+    if sbq.settings:setParameterSettings() then return end
+    sbq.settings:setMessageHandlers(player and true)
+
+	sbq.upgrades:apply(sbq.settings)
+	sbq.settings:setPublicSettings()
+    sbq.settings:setStatSettings()
+
+    humanoidConfig = sbq.humanoid.humanoidConfig()
 
     if humanoidConfig.sbqEnabled and sbq.init then
         if humanoidConfig.sbqConfig then
