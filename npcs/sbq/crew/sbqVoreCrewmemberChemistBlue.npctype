@@ -16,6 +16,12 @@
 		"sbqDeedConvertType" : "sbqVoreTenant",
 		"sbqEvilDeedConvertType" : "sbqVoreBandit",
 
+		"sbqSettingsConfig" : {
+			"includes" : [
+				"/npcs/sbq/crew/sbqVoreCrewmember.npctype:scriptConfig.sbqSettingsConfig"
+			]
+		},
+
 		"behaviorConfig": {
 			"emptyHands": true
 		},

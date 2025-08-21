@@ -108,6 +108,11 @@
 			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
 		},
 		"sbqSettingsConfig" : {
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
+			},
 			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
 			"defaultSettings" : {
 				"cockSelect" : "default",

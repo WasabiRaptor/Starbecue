@@ -16,6 +16,10 @@
 		"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree",
 
 		"sbqSettingsConfig" : {
+			"includes" : [
+				"/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqSettingsConfig"
+			],
+
 			"defaultSettings" : {
 				"personality" : "meanbean",
 				"vorePrefs" : {"oralVore":{"pred":true}},

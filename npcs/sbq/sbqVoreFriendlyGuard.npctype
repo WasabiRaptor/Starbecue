@@ -24,6 +24,12 @@
 		"sbqConvertType" : "friendlyguard",
 		"sbqEvilDeedConvertType" : "sbqVoreBandit",
 
+		"sbqSettingsConfig" : {
+			"includes" : [
+				"/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqSettingsConfig"
+			]
+		},
+
 		"entityPortrait" : true,
 		"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree",
 

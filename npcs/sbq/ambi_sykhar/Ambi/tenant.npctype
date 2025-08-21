@@ -61,6 +61,11 @@
 		// set each one to the value you want, if there are any that are unset, they'll just go to the default values
 
 		"sbqSettingsConfig" : {
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
+			},
 			"includes" : [
 				"/species/sbq/disableAllVorePred.config",
 				"/species/sbq/disableAllVorePrey.config",

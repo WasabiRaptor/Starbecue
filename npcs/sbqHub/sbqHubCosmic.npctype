@@ -39,13 +39,20 @@
 		"isOC" : true,
 		"behavior" : "sbqvorevillager",
 		"uniqueId" : "sbqHubCosmic",
-		"sbqSettingsConfig" : {"includes":[
-			"/species/sbq/disableAllTF.config",
-			"/species/sbq/disableAllInfusePred.config",
-			"/species/sbq/disableAllInfusePrey.config",
-			"/species/sbq/disableAllVorePrey.config",
-			"/species/sbq/disableAllVorePred.config"
-		]},
+		"sbqSettingsConfig" : {
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
+			},
+			"includes":[
+				"/species/sbq/disableAllTF.config",
+				"/species/sbq/disableAllInfusePred.config",
+				"/species/sbq/disableAllInfusePrey.config",
+				"/species/sbq/disableAllVorePrey.config",
+				"/species/sbq/disableAllVorePred.config"
+			]
+		},
 
 		"dialogueTree" : {
 			"greeting" : {

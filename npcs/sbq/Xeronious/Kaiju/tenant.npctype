@@ -38,6 +38,11 @@
 		"uniqueId" : "sbq/Xeronious/Kaiju", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
 		"sbqSettingsConfig" : {
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
+			},
 			"includes" : [
 				"/species/sbq/disableAllTF.config",
 				"/species/sbq/disableAllVorePrey.config",
