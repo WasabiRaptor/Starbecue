@@ -40,12 +40,12 @@ function init()
 	local humanoidConfig = npc.humanoidConfig()
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
+            speciesConfig.sbqSettingsConfig or {},
+            humanoidConfig.sbqSettingsConfig or {},
 			config.getParameter("sbqSettingsConfig") or {
 				hideBehaviorSettings = true,
 				hidePredSettings = true,
-			},
-            speciesConfig.sbqSettingsConfig or {},
-			humanoidConfig.sbqSettingsConfig or {}
+			}
 		),
 		storage.sbqSettings,
 		entity.entityType()

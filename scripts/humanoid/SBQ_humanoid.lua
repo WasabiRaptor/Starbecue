@@ -19,12 +19,12 @@ function refreshHumanoidParameters()
 
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
+            speciesConfig.sbqSettingsConfig or {},
+            humanoidConfig.sbqSettingsConfig or {},
 			npc and (config.getParameter("sbqSettingsConfig") or {
 				hideBehaviorSettings = true,
 				hidePredSettings = true,
-			}) or {},
-            speciesConfig.sbqSettingsConfig or {},
-			humanoidConfig.sbqSettingsConfig or {}
+			}) or {}
 		),
 		sbq.settings:save(),
 		entity.entityType()

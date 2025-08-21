@@ -28,6 +28,20 @@ function patch(config, path)
     end
 
     config.scriptConfig.sbqSettingsConfig = mergeIncludes(config.scriptConfig.sbqSettingsConfig or {})
+    if config.scriptConfig.sbqSettingsConfig.groupedDefaultSettings then
+        local sbqSettingsConfig = config.scriptConfig.sbqSettingsConfig
+        local defaultSettings = assets.json("/sbq.config:defaultSettings.any")
+        for groupName, groupDefaultSettings in pairs(sbqSettingsConfig.groupedDefaultSettings) do
+            sbqSettingsConfig.defaultSettings[groupName] = sbqSettingsConfig.defaultSettings[groupName] or {}
+            for groupId, _ in pairs(defaultSettings[groupName]) do
+                sbqSettingsConfig.defaultSettings[groupName][groupId] = sb.jsonMerge(
+                    groupDefaultSettings,
+                    sbqSettingsConfig.defaultSettings[groupName][groupId] or {}
+                )
+            end
+        end
+        sbqSettingsConfig.groupedDefaultSettings = nil
+    end
 
     return config
 end
