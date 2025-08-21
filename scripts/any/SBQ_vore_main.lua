@@ -1262,11 +1262,15 @@ function sbq._Location:updateOccupancy(dt)
 		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or {0}) then self.occupancy.interpolating = false end
 		animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
-	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
-	if (fade == "fe") then -- so theres no accidental glowy
-		fade = "ff"
+    if self.occupancy.infuseData then
+		local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
+		if (fade == "fe") then -- so theres no accidental glowy
+			fade = "ff"
+		end
+		animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
+    else
+		animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=00000000")
 	end
-	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
 end
 
 function sbq._Location:update(dt)

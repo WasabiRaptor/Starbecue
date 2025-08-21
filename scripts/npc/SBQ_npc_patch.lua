@@ -31,6 +31,7 @@ function patch(config, path)
     if config.scriptConfig.sbqSettingsConfig.groupedDefaultSettings then
         local sbqSettingsConfig = config.scriptConfig.sbqSettingsConfig
         local defaultSettings = assets.json("/sbq.config:defaultSettings.any")
+        sbqSettingsConfig.defaultSettings = sbqSettingsConfig.defaultSettings or {}
         for groupName, groupDefaultSettings in pairs(sbqSettingsConfig.groupedDefaultSettings) do
             sbqSettingsConfig.defaultSettings[groupName] = sbqSettingsConfig.defaultSettings[groupName] or {}
             for groupId, _ in pairs(defaultSettings[groupName]) do

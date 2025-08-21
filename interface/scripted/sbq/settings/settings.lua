@@ -34,13 +34,13 @@ function init()
 	end
 
 	if _ENV.mainPrefsPanel then
-		local otherVisible = not (sbq.settingsConfig.hideOtherSettings or false)
-		local preyVisible = not (sbq.settingsConfig.hidePreySettings or false)
-		local predVisible = not (sbq.settingsConfig.hidePredSettings or false)
-		local infusePredVisible = not (sbq.settingsConfig.hideInfusePredSettings or false)
-		local infusePreyVisible = not (sbq.settingsConfig.hideInfusePreySettings or false)
-		local TFVisible = not (sbq.settingsConfig.hideTFsettings or false)
-		local sizeVisible = not (sbq.settingsConfig.hideSizeSettings or false)
+		local otherVisible = not (sbq.settings.settingsConfig.hideOtherSettings or false)
+		local preyVisible = not (sbq.settings.settingsConfig.hidePreySettings or false)
+		local predVisible = not (sbq.settings.settingsConfig.hidePredSettings or false)
+		local infusePredVisible = not (sbq.settings.settingsConfig.hideInfusePredSettings or false)
+		local infusePreyVisible = not (sbq.settings.settingsConfig.hideInfusePreySettings or false)
+		local TFVisible = not (sbq.settings.settingsConfig.hideTFsettings or false)
+		local sizeVisible = not (sbq.settings.settingsConfig.hideSizeSettings or false)
 
 		_ENV.vorePreyPrefsPanel:setVisible(preyVisible)
 		_ENV.infusePreyPrefsPanel:setVisible(infusePreyVisible)
@@ -461,10 +461,10 @@ function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
 	local locked = sbq.settings:checkLocked(setting, group, name)
 	local options = {}
-	if not sbq.voreConfig.selectValues[setting] then
+	if not sbq.settings.settingsConfig.selectValues[setting] then
 		sbq.playErrorSound()
 	end
-	for _, v in ipairs(sbq.voreConfig.selectValues[setting]) do
+	for _, v in ipairs(sbq.settings.settingsConfig.selectValues[setting]) do
 		local result = sbq.settings:checkInvalid(value, setting, group, name)
 		if result == nil then
 			if sbq.gui.dropDownOptions[v] then

@@ -78,124 +78,37 @@
 		]
 	},
 	"colorRemapGlobalTags": null,
-	"identityAnimationCustom": {
-		"personalityIdle": {
-			"idle.2": {
-				"animatedParts": {
-					"stateTypes": {
-						"body": {
-							"states": {
-								"idle": {
-									"properties": {
-										"bellyOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"crotchOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"chestOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"tailOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			"idle.3": {
-				"animatedParts": {
-					"stateTypes": {
-						"body": {
-							"states": {
-								"idle": {
-									"properties": {
-										"bellyOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"crotchOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"chestOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"tailOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			},
-			"idle.4": {
-				"animatedParts": {
-					"stateTypes": {
-						"body": {
-							"states": {
-								"idle": {
-									"properties": {
-										"bellyOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"crotchOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"chestOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										},
-										"tailOffset": {
-											"translate": [
-												-0.125,
-												0
-											]
-										}
-									}
-								}
-							}
-						}
-					}
+	"humanoidOverrides" : {
+		"sbqIdentityAnimationCustom" : {
+			"personalityIdle" : {
+				"idle.2" : {
+					"animatedParts":{"stateTypes":{"body":{"states":{"idle":{"properties":{
+						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
+					}}}}}}
+				},
+				"idle.3" : {
+					"animatedParts":{"stateTypes":{"body":{"states":{"idle":{"properties":{
+						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
+					}}}}}}
+				},
+				"idle.4" : {
+					"animatedParts":{"stateTypes":{"body":{"states":{"idle":{"properties":{
+						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
+					}}}}}}
 				}
 			}
 		}
 	},
+
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config"
 	],
