@@ -13,6 +13,7 @@ local old = {
 	uninit = uninit or function () end
 }
 
+local sbqCommands = {}
 function init()
 	old.init()
 	player.setProperty("predHudOpen", false)
@@ -70,7 +71,17 @@ function init()
 	else
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 	end
-	sbq.notifyPlayer()
+    sbq.notifyPlayer()
+
+    message.setHandler({ name = "/sbq", localOnly = true }, function(args)
+		local parsed = {chat.parseArguments(args)}
+        local command = table.remove(parsed, 1)
+        if type(sbqCommands[command]) == "function" then
+			return sbqCommands[command](table.unpack(parsed))
+        else
+			return sbq.getString(":sbqCommands")
+		end
+	end)
 
 	message.setHandler("sbqInteractWith", function(_, _, entityId)
 		player.interactWithEntity(entityId)
@@ -419,4 +430,23 @@ function die()
 	for i, occupant in ipairs(sbq.Occupants.list) do
 		occupant:remove("died")
 	end
+end
+
+function sbqCommands.help(name)
+	if not name then name = "help" end
+	if type(sbqCommands[name]) == "function" then
+        return sbq.getString(":help_" .. name)
+    else
+		return sbq.getString(":help_invalid")
+	end
+end
+function sbqCommands.settings()
+	player.interact("ScriptPane",
+		{ gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
+	return "Opened Starbecue Settings"
+end
+function sbqCommands.config()
+	player.interact("ScriptPane",
+		{ gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:globalConfig" })
+	return "Opened Starbecue Global Config"
 end

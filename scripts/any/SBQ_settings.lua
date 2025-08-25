@@ -373,14 +373,6 @@ function _Settings:setMessageHandlers(localOnly)
             self:setPublicSettings()
             sbq.refreshSettings()
         end)
-        -- shortcut to open the settings for the player
-        if player then
-            message.setHandler({ name = "/sbqSettings", localOnly = true }, function()
-                player.interact("ScriptPane",
-                    { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
-                return "Opened Starbecue Settings"
-            end)
-        end
     else
         message.setHandler({ name = "sbqSetSetting" }, function(_, ...)
             return self:set(...)
@@ -500,7 +492,7 @@ function _Upgrades.updated:candyBonus(name, oldValue)
         self.applyTo:set(self.applyTo:get("maxOccupantSlots"), "occupantSlots")
     end
 
-    self.upgrades.any(self, name, oldValue)
+    self.updated.any(self, name, oldValue)
 end
 
 function _Upgrades:apply(settings)

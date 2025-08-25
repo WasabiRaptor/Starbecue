@@ -12,10 +12,10 @@
 	"children" : [
 		{"type":"label","text":":globalConfigGui"},
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
-			{ "type" : "tab", "id" : "globalOverrides", "title" : ":globalOverrides", "visible" : true, "color" : "ff00ff", "contents" : [
+			{ "type" : "tab", "id" : "globalOverrides", "title" : ":global", "visible" : true, "color" : "ff00ff", "contents" : [
 				{"type":"panel","expandMode":[1,0], "style" : "flat", "children":[
 					{"mode":"v"},
-					{"type":"label","text":":global","align":"center"},
+					{"type":"label","text":":globalOverrides","align":"center"},
 					{"type":"panel","expandMode":[1,0],"children":[
 						{"mode":"v"},
 						{"type":"label","text":":overrideSettings","align":"center"},
@@ -28,19 +28,19 @@
 					{"type":"panel","expandMode":[1,0],"children":[
 						{"mode":"v"},
 						{"type":"label","text":":invalidSettings","align":"center"},
-						[{"type":"label","text":":any", "width" : 50},{ "type" : "sbqTextBox", "id" : "world_invalidSettings_any", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
-						[{"type":"label","text":":player", "width" : 50},{ "type" : "sbqTextBox", "id" : "world_invalidSettings_player", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
-						[{"type":"label","text":":npc", "width" : 50},{ "type" : "sbqTextBox", "id" : "world_invalidSettings_npc", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
-						[{"type":"label","text":":monster", "width" : 50},{ "type" : "sbqTextBox", "id" : "world_invalidSettings_monster", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
-						[{"type":"label","text":":object", "width" : 50},{ "type" : "sbqTextBox", "id" : "world_invalidSettings_object", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}]
+						[{"type":"label","text":":any", "width" : 50},{ "type" : "sbqTextBox", "id" : "global_invalidSettings_any", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+						[{"type":"label","text":":player", "width" : 50},{ "type" : "sbqTextBox", "id" : "global_invalidSettings_player", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+						[{"type":"label","text":":npc", "width" : 50},{ "type" : "sbqTextBox", "id" : "global_invalidSettings_npc", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+						[{"type":"label","text":":monster", "width" : 50},{ "type" : "sbqTextBox", "id" : "global_invalidSettings_monster", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}],
+						[{"type":"label","text":":object", "width" : 50},{ "type" : "sbqTextBox", "id" : "global_invalidSettings_object", "toolTip":":invalidSettingsTip", "settingType":"table", "expandMode" : [1, 0]}]
 					]}
 
 				]}
 			]},
-			{ "type" : "tab", "id" : "worldOverrides", "title" : ":worldOverrides", "visible" : true, "color" : "ff00ff", "contents" : [
+			{ "type" : "tab", "id" : "worldOverrides", "title" : ":world", "visible" : true, "color" : "ff00ff", "contents" : [
 				{"type":"panel","expandMode":[1,0], "style" : "flat", "children":[
 					{"mode":"v"},
-					{"type":"label","text":":world","align":"center"},
+					{"type":"label","text":":worldOverrides","align":"center"},
 					{"type":"panel","expandMode":[1,0],"children":[
 						{"mode":"v"},
 						{"type":"label","text":":overrideSettings","align":"center"},

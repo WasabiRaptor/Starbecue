@@ -941,8 +941,8 @@ function widgets.sbqTextBox:init(base, param)
 					sbq.playErrorSound()
 				end
 			elseif self.settingType == "table" then
-				local parsed = sb.parseJson(self.text)
-				if parsed then
+				local success, parsed = pcall(sb.parseJson, self.text)
+				if success and parsed then
 					sbq.widgetScripts[self.script](parsed, self.setting or self.id, self.groupName, self.groupKey)
 				else
 					sbq.playErrorSound()
@@ -1052,7 +1052,11 @@ function widgets.sbqTextBox:setText(t)
         end
         self.color = color
     elseif self.settingType == "table" then
-		if type(sb.parseJson(t or "")) == "table" then
+		if not t or (t == "") then
+			t = "{}"
+		end
+		local success, parsed = pcall(sb.parseJson, t)
+		if success and type(parsed) == "table" then
             self.color = "00FF00"
         else
 			self.color = "FF0000"
