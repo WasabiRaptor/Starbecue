@@ -79,10 +79,12 @@ function init()
 		sb.logInfo(sb.printJson(args))
 
 		local command = table.remove(parsed, 1)
-        if type(sbqCommands[command]) == "function" then
+		if not command then
+			return "[SBQ]" .. sbq.getString(":sbqCommands")
+		elseif type(sbqCommands[command]) == "function" then
 			return sbqCommands[command](table.unpack(parsed))
-        else
-			return "[SBQ]".. sbq.getString(":sbqCommands")
+		else
+			return "[SBQ]" .. sbq.getString(":invalidCommand"):format(command)
 		end
 	end)
 
