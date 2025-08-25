@@ -440,7 +440,7 @@ end
 function sbqCommands.help(name)
 	if not name then name = "help" end
 	if type(sbqCommands[name]) == "function" then
-        return sbq.getString(":help_" .. name)
+        return sbq.strings.help[name] or (":help."..name)
     else
 		return sbq.getString(":help_invalid")
 	end
