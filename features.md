@@ -458,25 +458,6 @@ Similar to the Mini Vore Deed except it requires no background anchor, and doesn
 ### Evil Vore Campsite : sbqEvilVoreCamp
 Same as the Vore Colony Deeds, however instead spawns hostile bandit versions of available NPCs (some OCs cannot be evil) connect Evil Deeds with the wire tool to have the bandits they spawn share the same team, otherwise they will fight eachother.
 
-### Locked Settings Enforcer : sbqOverrideEnforcer
-Is intended to be an administration tool to disable certain settings server wide or on certain worlds. It will receive an update later to configure this in a gui, but until then it must be configured via spawnitem parameters for per world configuration or patching `sbq.config`'s `serverOverrideSettings` and `serverInvalidSettings` values for server wide configuration.
-
-Example command to spawn in one that will disable Oral Vore for that world.
-`/spawnitem sbqOverrideEnforcer 1 '{"overrideSettings":{"vorePrefs":{"oralVore":{"pred":false,"prey":false}}}}'`
-
-Example command to spawn in one that will disable the bone drops from digestion for the world.
-`/spawnitem sbqOverrideEnforcer 1 '{"overrideSettings":{"acidDigestDrops":false}}'`
-
-Example command to spawn in one that will disable the use of fatal digest by making it default back to soft digest while on that world.
-`/spawnitem sbqOverrideEnforcer 1 '{"invalidSettings":{"mainEffect":{"digest":"softDigest"}}}'`
-
-Example command to spawn in one that will do the same as the above two.
-`/spawnitem sbqOverrideEnforcer 1 '{"overrideSettings":{"acidDigestDrops":false},"invalidSettings":{"mainEffect":{"digest":"softDigest"}}}'`
-
-Unpack the mod and reference `sbq.config:defaultSettings` to view the data structure and learn internal setting names and types, technically this same system can be used to force enable certain settings, but I would suggest being very mindful of doing so! I implemented the opt-in consent system for a reason.
-
-Additional note, patching `sbq.config`'s `serverOverrideSettings` and `serverInvalidSettings` values will apply to all server entities such as Objects, NPCs, and Monsters regardless of if a `sbqOverrideEnforcer` is placed within the world, however it is required for said overrides to apply to non host players. This does apply to any override enforcers placed on the ships of connected clients!
-
 ### Digestion Drops
 Objects which get dropped when players/NPCs are digested, requires a setting enabled on both the pred and the prey per digest type to drop. Some of these may apply the colors of the digested prey if they were of a compatible species.
 - Remains: Acid Digest
