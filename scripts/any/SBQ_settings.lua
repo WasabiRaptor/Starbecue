@@ -134,7 +134,7 @@ function _Settings:import(newSettings)
 
                 for setting, v in pairs(groupSettings) do
                     local value = self.read[groupName][groupId][setting]
-                    local result = self:checkInvalid(value, setting, groupName, groupId)
+                    local result = self:checkInvalid(setting, value, groupName, groupId)
                     if result ~= nil then
                         sbq.debugLogInfo(string.format(
                             "Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'",
@@ -145,7 +145,7 @@ function _Settings:import(newSettings)
                 end
             end
         else
-            local result = self:checkInvalid(value, setting)
+            local result = self:checkInvalid(setting, value)
             if result ~= nil then
                 sbq.debugLogInfo(string.format("Invalid setting '%s' value '%s' was set to temporary value '%s'", setting,
                     v, result))
@@ -179,7 +179,7 @@ function _Settings:export(exportSettings)
 	root.makeCurrentVersionedJson("sbqSettings", filter(squashed, exportSettings))
 end
 
-function _Settings:checkInvalid(value, setting, groupName, groupId)
+function _Settings:checkInvalid(setting, value, groupName, groupId)
     if type(value) == "number" then
         local result
         local min = sbq.query(self.invalidSettings, { setting, "min" }) or
@@ -220,9 +220,9 @@ function _Settings:getStored(setting, groupName, groupId)
 	end
 end
 
-function _Settings:set(value, setting, groupName, groupId)
+function _Settings:set(setting, value, groupName, groupId)
     local oldValue = self:get(setting, groupName, groupId)
-    local value = self:checkInvalid(value, setting, groupName, groupId) or value
+    local value = self:checkInvalid(setting, value, groupName, groupId) or value
     if groupName and groupId then
         if not self.lockedSettings[groupName][groupId][setting] then
             rawset(self.storedSettings[groupName][groupId], setting, value)
@@ -476,20 +476,20 @@ function _Upgrades.updated:candyBonus(name, oldValue)
     local oldMaxOcccupants = self.applyTo:get("maxOccupantSlots")
 
     local candyBonus = self:get("candyBonus")
-    self.applyTo:set( 1 + (candyBonus / 2), "maxDigestPower")
-    self.applyTo:set( math.min(2 + (candyBonus), sbq.config.scaleCap), "maxPossibleScale")
-    self.applyTo:set( 4 + (candyBonus * 2), "maxOccupantSlots")
+    self.applyTo:set("maxDigestPower", 1 + (candyBonus / 2))
+    self.applyTo:set("maxPossibleScale", math.min(2 + (candyBonus), sbq.config.scaleCap))
+    self.applyTo:set("maxOccupantSlots", 4 + (candyBonus * 2))
 
     for _, k in ipairs(sbq.config.digestPowerSettings) do
         if self.applyTo:get(k) == oldMaxDigest then
-            self.applyTo:set(self.applyTo:get("maxDigestPower"), k)
+            self.applyTo:set(k, self.applyTo:get("maxDigestPower"))
         end
     end
     if self.applyTo:get("maxScale") == oldMaxScale then
-        self.applyTo:set(self.applyTo:get("maxPossibleScale"), "maxScale")
+        self.applyTo:set("maxScale", self.applyTo:get("maxPossibleScale"))
     end
     if self.applyTo:get("occupantSlots") == oldMaxOcccupants then
-        self.applyTo:set(self.applyTo:get("maxOccupantSlots"), "occupantSlots")
+        self.applyTo:set("occupantSlots", self.applyTo:get("maxOccupantSlots"))
     end
 
     self.updated.any(self, name, oldValue)

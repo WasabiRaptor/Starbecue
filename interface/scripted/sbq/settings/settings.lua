@@ -232,15 +232,15 @@ function sbq.assignSettingValue(setting, group, name)
 end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
-	local result = sbq.settings:checkInvalid(value, setting, group, name)
+	local result = sbq.settings:checkInvalid(setting, value, group, name)
     if (result ~= nil) or sbq.settings:checkLocked(setting, group, name) then
         sbq.playErrorSound()
         sbq.assignSettingValue(setting, group, name)
         return false
     end
 
-	world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", value, setting, group, name)
-	sbq.settings:set(value, setting, group, name)
+	world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", setting, value, group, name)
+	sbq.settings:set(setting, value, group, name)
     sbq.refreshSettingVisibility()
 end
 
@@ -269,7 +269,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = sbq.settings:checkInvalid(k, param.setting, param.groupName, param.groupKey)
+			local result = sbq.settings:checkInvalid(param.setting, k, param.groupName, param.groupKey)
 			if result == nil then
 				local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 				local icon
@@ -313,7 +313,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	local effects = location[param.setting]
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
-		local result = sbq.settings:checkInvalid("true", param.setting, param.groupName, param.groupKey)
+		local result = sbq.settings:checkInvalid(param.setting, "true", param.groupName, param.groupKey)
 		if (effects or {})[k] and (result == nil) then
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
@@ -466,7 +466,7 @@ function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 		sbq.playErrorSound()
 	end
 	for _, v in ipairs(sbq.settings.settingsConfig.selectValues[setting]) do
-		local result = sbq.settings:checkInvalid(value, setting, group, name)
+		local result = sbq.settings:checkInvalid(setting, value, group, name)
 		if result == nil then
 			if sbq.gui.dropDownOptions[v] then
 				table.insert(options, {

@@ -1,7 +1,7 @@
 function init()
-    for _, v in ipairs(sbq.upgrades.storedUpgrades.candyBonus or {}) do
+    for i, v in ipairs(sbq.upgrades.storedUpgrades.candyBonus or {}) do
 		if v > 0 then
-			_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = v[1], bonus = v[2], seed = sb.makeRandomSource():randu64()}})
+			_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = i, bonus = v, seed = sb.makeRandomSource():randu64()}})
 		end
 	end
     local entityType = world.entityType(sbq.entityId())

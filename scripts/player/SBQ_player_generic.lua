@@ -75,11 +75,14 @@ function init()
 
     message.setHandler({ name = "/sbq", localOnly = true }, function(args)
 		local parsed = {chat.parseArguments(args)}
-        local command = table.remove(parsed, 1)
+		sb.logInfo(sb.printJson(parsed))
+		sb.logInfo(sb.printJson(args))
+
+		local command = table.remove(parsed, 1)
         if type(sbqCommands[command]) == "function" then
 			return sbqCommands[command](table.unpack(parsed))
         else
-			return sbq.getString(":sbqCommands")
+			return "[SBQ]".. sbq.getString(":sbqCommands")
 		end
 	end)
 
@@ -443,10 +446,38 @@ end
 function sbqCommands.settings()
 	player.interact("ScriptPane",
 		{ gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:playerSettings" })
-	return "Opened Starbecue Settings"
+	return "[SBQ] ".. sbq.getString(":openedSettings")
 end
 function sbqCommands.config()
 	player.interact("ScriptPane",
 		{ gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:globalConfig" })
-	return "Opened Starbecue Global Config"
+	return "[SBQ] ".. sbq.getString(":openedConfig")
+end
+function sbqCommands.escape()
+	world.sendEntityMessage(player.id(), "sbqReleased")
+end
+function sbqCommands.setTieredUpgrade(...)
+    sbq.upgrades:setTiered(...)
+	return "[SBQ] ".. sbq.getString(":appliedTieredUpgrade"):format(...)
+end
+function sbqCommands.setUpgrade(...)
+    sbq.upgrades:set(...)
+	return "[SBQ] ".. sbq.getString(":appliedUpgrade"):format(...)
+end
+function sbqCommands.setSetting(setting, value, groupName, groupId, ...)
+    sbq.settings:set(setting, value, groupName, groupId, ...)
+	if groupName and groupId then
+        return "[SBQ] ".. sbq.getString(":appliedGroupSetting"):format(setting, value, groupName, groupId)
+	else
+		return "[SBQ] ".. sbq.getString(":appliedSetting"):format(setting, value)
+	end
+end
+function sbqCommands.skipToTier(tier)
+	local result = ""
+    for i = 1, tier do
+        for _, v in ipairs(chat.command(("/sbq setTieredUpgrade candyBonus %s 1"):format(i))) do
+            result = result..v.."\n"
+        end
+    end
+	return result
 end
