@@ -20,15 +20,21 @@ function init()
 				hidePredSettings = true,
 			}
 		),
-		storage.sbqSettings,
+		storage.sbqSettings or config.getParameter("sbqSettings"),
 		entity.entityType()
     )
 	sbq.settings:setMessageHandlers()
 
-	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades)
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"))
     sbq.upgrades:setMessageHandlers()
 
-	sbq.upgrades:apply(sbq.settings)
+    sbq.upgrades:apply(sbq.settings)
+	if not sbq.upgrades.storedUpgrades.candyBonus then
+		for i = 1, math.floor(math.max(monster.level(), 1)) do
+			sbq.upgrades:setTiered("candyBonus", i, 1)
+		end
+	end
+
     sbq.settings:setPublicSettings()
     sbq.settings:setStatSettings()
 

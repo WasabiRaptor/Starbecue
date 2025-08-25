@@ -212,6 +212,14 @@ function _Settings:get(setting, groupName, groupId)
 		return self.read[setting]
 	end
 end
+function _Settings:getStored(setting, groupName, groupId)
+	if groupName and groupId then
+        return rawget(self.storedSettings[groupName][groupId], setting)
+    else
+		return rawget(self.storedSettings, setting)
+	end
+end
+
 function _Settings:set(value, setting, groupName, groupId)
     local oldValue = self:get(setting, groupName, groupId)
     local value = self:checkInvalid(value, setting, groupName, groupId) or value
