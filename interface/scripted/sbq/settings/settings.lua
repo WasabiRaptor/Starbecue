@@ -394,10 +394,11 @@ function sbq.widgetScripts.visualMinMax(param)
 	param.min = 0
 	local location = sbq.locations[param.groupKey]
 	param.max = location.maxSize
-	param.settingType = "number"
-	if sbq.settings.read.locations[param.groupKey][param.setting] >= location.maxSize then
-		sbq.settings.read.locations[param.groupKey][param.setting] = location.maxSize
-	end
+    param.settingType = "number"
+	-- TODO this probably shouldn't be happening really, I do need to set up species/body type specific settings storage
+	-- if sbq.settings.read.locations[param.groupKey][param.setting] >= location.maxSize then
+	-- 	sbq.settings.read.locations[param.groupKey][param.setting] = location.maxSize
+	-- end
 	return param
 end
 
