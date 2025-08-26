@@ -1,0 +1,56 @@
+{
+	"animatedParts" :{
+		"stateTypes" : {
+			"rpActionState" : {
+				"states" : {
+					"jackoff": { "frames": 2, "cycle": 0.25, "mode": "loop"}
+				}
+			}
+		},
+		"parts" : {
+			"cock" : {
+				"partStates" : {
+					"rpActionState": {
+						"jackoff" : {
+							"properties": {
+								"image": "<cockImage>:<cockSize>-jackoff.1",
+								"0-particles" : [0.75,-1.125],
+								"0.5-particles" : [1.125,-1.125],
+								"1-particles" : [1.25,-0.875]
+							},
+							"frameProperties" : {
+							}
+						}
+					}
+				}
+			},
+			"cock_infused" : {
+				"partStates" : {
+					"rpActionState": {
+						"jackoff" : { "properties": { "image": "<cockInfusedPath><cockImage>:<cockSize>-jackoff.1" } }
+					}
+				}
+			},
+
+			"frontArm" : {
+				"partStates" :{
+					"rpActionState": {
+						"jackoff" : {
+							"properties" : {
+								"transformationGroups": ["movementOffset"],
+								"image": "<humanoidPath><frontArmFrameset>:rotation",
+								"interpolated" : true
+							},
+							"frameProperties" : {
+								"transforms" : [
+									[["reset"],["rotateDegrees",-50]],
+									[["reset"],["rotateDegrees",-35]]
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -111,7 +111,7 @@ function sbq.clickAction()
 		includedTypes = { "creature" }
 	})
 
-	world.sendEntityMessage(player.id(), "sbqTryAction", "rpActionReset")
+	world.sendEntityMessage(player.id(), "sbqQueueAction", "rpActionReset")
 	local bounds = mcontroller.collisionBoundBox()
 	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
 	local result

@@ -51,11 +51,6 @@
 					"true": { "frames": 1, "cycle":0, "mode":"end" },
 					"false": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
-			},
-			"rpActionState" : {
-				"states" : {
-					"jackoff": { "frames": 2, "cycle": 0.25, "mode": "loop"}
-				}
 			}
 
 		},
@@ -97,18 +92,6 @@
 					"cockExpandState" : {
 						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"rpActionState": {
-						"jackoff" : {
-							"properties": {
-								"image": "<cockImage>:<cockSize>-jackoff.1",
-								"0-particles" : [0.75,-1.125],
-								"0.5-particles" : [1.125,-1.125],
-								"1-particles" : [1.25,-0.875]
-							},
-							"frameProperties" : {
-							}
-						}
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -154,9 +137,6 @@
 					"cockExpandState" : {
 						"expand": { "properties": { "image": "<cockInfusedPath><cockImage>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
-					},
-					"rpActionState": {
-						"jackoff" : { "properties": { "image": "<cockInfusedPath><cockImage>:<cockSize>-jackoff.1" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
