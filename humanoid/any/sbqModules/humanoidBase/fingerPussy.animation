@@ -1,0 +1,32 @@
+{
+	"animatedParts" : {
+		"stateTypes" : {
+			"rpActionState" : {
+				"states" : {
+					"fingerPussy": { "frames": 2, "cycle": 0.25, "mode": "loop"}
+				}
+			}
+		},
+		"parts" : {
+			"frontArm" : {
+				"partStates" : {
+					"rpActionState" : {
+						"fingerPussy" : {
+							"properties" : {
+								"transformationGroups": ["movementOffset"],
+								"image": "<humanoidPath><frontArmFrameset>:rotation"
+
+							},
+							"frameProperties" : {
+								"transforms" : [
+									[["reset"],	["rotateDegrees",-50],	["translate",[0,0]]],
+									[["reset"],	["rotateDegrees",-50],	["translate",[0,0.125]]]
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

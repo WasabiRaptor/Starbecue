@@ -18,7 +18,12 @@
 			"default": "/humanoid/any/sbqModules/breasts/sbqModule.config"
 		},
 		"pussy" : {
-			"default": "/humanoid/any/sbqModules/pussy/sbqModule.config"
+			"default": {
+				"includes" : [
+					"/humanoid/any/sbqModules/pussy/sbqModule.config",
+					"/humanoid/any/sbqModules/humanoidBase/fingerPussy.sbqModule.config"
+				]
+			}
 		},
 		"tail" : {
 			"nickit": "/humanoid/any/sbqModules/nickit_tail/sbqModule.config"
