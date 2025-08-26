@@ -499,9 +499,9 @@ function _Upgrades:apply(settings)
     self.applyTo = settings or self.applyTo
     if not self.applyTo then return end
     local candyBonus = self:get("candyBonus")
-    self.applyTo:set( 1 + (candyBonus / 2), "maxDigestPower")
-    self.applyTo:set( math.min(2 + (candyBonus), sbq.config.scaleCap), "maxPossibleScale")
-    self.applyTo:set( 4 + (candyBonus * 2), "maxOccupantSlots")
+    self.applyTo:set("maxDigestPower", 1 + (candyBonus / 2))
+    self.applyTo:set("maxPossibleScale", math.min(2 + (candyBonus), sbq.config.scaleCap))
+    self.applyTo:set("maxOccupantSlots", 4 + (candyBonus * 2))
 end
 
 function _Upgrades:setMessageHandlers(localOnly)
