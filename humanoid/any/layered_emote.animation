@@ -16,7 +16,7 @@
 				},
 				"partStates": {
 					"emote": {
-						"idle": { "properties": { "image": "<bodyImagePath><emotePath>:<emote_state>.<emote_frame>" } },
+						"idle": { "properties": { "image": "<humanoidPath><emotePath>:<emote_state>.<emote_frame>" } },
 						"blabber": "idle",
 						"shout": "idle",
 						"happy": "idle",
@@ -33,7 +33,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><emotePath>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<humanoidPath><emotePath>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					}
 				}
@@ -48,7 +48,7 @@
 				},
 				"partStates": {
 					"emote": {
-						"idle": { "properties": { "image": "<bodyImagePath><emote_bgPath>:<emote_state>.<emote_frame>" } },
+						"idle": { "properties": { "image": "<humanoidPath><emote_bgPath>:<emote_state>.<emote_frame>" } },
 						"blabber": "idle",
 						"shout": "idle",
 						"happy": "idle",
@@ -65,7 +65,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><emote_bgPath>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<humanoidPath><emote_bgPath>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					}
 				}
@@ -80,7 +80,7 @@
 				},
 				"partStates": {
 					"emote": {
-						"idle": { "properties": { "image": "<bodyImagePath><emote_fgPath>:<emote_state>.<emote_frame>" } },
+						"idle": { "properties": { "image": "<humanoidPath><emote_fgPath>:<emote_state>.<emote_frame>" } },
 						"blabber": "idle",
 						"shout": "idle",
 						"happy": "idle",
@@ -97,7 +97,7 @@
 						"none": { "properties": {} }
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<bodyImagePath><emote_fgPath>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<humanoidPath><emote_fgPath>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
 						"bust" : "head"
 					}
 				}
