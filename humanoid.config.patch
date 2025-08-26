@@ -15,7 +15,12 @@
 			"default": "/humanoid/any/sbqModules/balls/sbqModule.config"
 		},
 		"breasts" : {
-			"default": "/humanoid/any/sbqModules/breasts/sbqModule.config"
+			"default": {
+				"includes" : [
+					"/humanoid/any/sbqModules/breasts/sbqModule.config",
+					"/humanoid/any/sbqModules/humanoidBase/squishBreasts.sbqModule.config"
+				]
+			}
 		},
 		"pussy" : {
 			"default": {
