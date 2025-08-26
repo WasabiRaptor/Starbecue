@@ -68,75 +68,17 @@ for _, path in ipairs(assets.byExtension("species")) do
 end
 
 
-local function fixSlotProperties(properties, slot)
-    if not properties then return end
-    if properties.zLevel then
-        properties.zLevel = properties.zLevel + slot / 1000
-    end
-    if properties.flippedZLevel then
-        properties.flippedZLevel = properties.flippedZLevel + slot / 1000
-    end
-    if properties.zLevelSlot then
-        properties.zLevel = properties.zLevelSlot[slot]
-    end
-    if properties.flippedZLevelSlot then
-        properties.flippedZLevel = properties.flippedZLevelSlot[slot]
-    end
-end
-
-local function fixSlotFrameProperties(frameProperties, slot)
-    if not frameProperties then return end
-    if frameProperties.zLevel then
-        for i, v in ipairs(frameProperties.zLevel) do
-            frameProperties.zLevel[i] = v + slot / 1000
-        end
-    end
-    if frameProperties.flippedZLevel then
-        for i, v in ipairs(frameProperties.flippedZLevel) do
-            frameProperties.flippedZLevel[i] = v + slot / 1000
-        end
-    end
-    if frameProperties.zLevelSlot then
-        for i, v in ipairs(frameProperties.zLevelSlot) do
-            frameProperties.zLevel[i] = v[slot]
-        end
-    end
-    if frameProperties.flippedZLevelSlot then
-        for i, v in ipairs(frameProperties.flippedZLevelSlot) do
-            frameProperties.flippedZLevel[i] = v[slot]
-        end
-    end
-end
-
-local function fixSlotAnimation(animation, slot)
-    local animation = sb.parseJson(sb.printJson(animation):gsub("%<slot%>", tostring(slot)))
-    for stateTypeName, stateType in pairs(animation.animatedParts.stateTypes or {}) do
-        fixSlotProperties(stateType.properties, slot)
-        fixSlotFrameProperties(stateType.frameProperties, slot)
-        for stateName, state in pairs(stateType.states) do
-            fixSlotProperties(state.properties, slot)
-            fixSlotFrameProperties(state.frameProperties, slot)
-        end
-    end
-    for partName, part in pairs(animation.animatedParts.parts or {}) do
-        fixSlotProperties(part.properties, slot)
-        fixSlotFrameProperties(part.frameProperties, slot)
-        for stateTypeName, stateType in pairs(part.partStates or {}) do
-            for stateName, state in pairs(stateType) do
-                if type(state) == "table" then
-                    fixSlotProperties(state.properties, slot)
-                    fixSlotFrameProperties(state.frameProperties, slot)
-                end
-            end
-        end
-    end
-    return animation
-end
 
 local occupantSlotCap = assets.json("/sbq.config:occpantSlotCap")
 for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do
-    local animation = assets.json(path)
-    for i = 1, (animation.slots or occupantSlotCap) do
-        assets.add(path.."."..i, sb.printJson(fixSlotAnimation(animation, i)))
+    local cap = assets.json(path).sbqOccupantSlots or occupantSlotCap
+    for i = 1, cap do
+        assets.add(path .. "." .. i, assets.bytes(path):gsub(
+            "%<slot%>", tostring(i)
+        ):gsub(
+            "%.1234", string.format(".%04d", i)
+        ):gsub(
+            "%.4321", string.format(".%04d", cap - i)
+        ))
     end
 end

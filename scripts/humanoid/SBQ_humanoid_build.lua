@@ -1,166 +1,123 @@
 local old = {
-    build = build or function() end
+	build = build or function() end
 }
 
-local function fixSlotProperties(properties, slot)
-    if not properties then return end
-    if properties.zLevel then
-        properties.zLevel = properties.zLevel + slot / 1000
-    end
-    if properties.flippedZLevel then
-        properties.flippedZLevel = properties.flippedZLevel + slot / 1000
-    end
-    if properties.zLevelSlot then
-        properties.zLevel = properties.zLevelSlot[slot]
-    end
-    if properties.flippedZLevelSlot then
-        properties.flippedZLevel = properties.flippedZLevelSlot[slot]
-    end
-end
-
-local function fixSlotFrameProperties(frameProperties, slot)
-    if not frameProperties then return end
-    if frameProperties.zLevel then
-        for i, v in ipairs(frameProperties.zLevel) do
-            frameProperties.zLevel[i] = v + slot / 1000
-        end
-    end
-    if frameProperties.flippedZLevel then
-        for i, v in ipairs(frameProperties.flippedZLevel) do
-            frameProperties.flippedZLevel[i] = v + slot / 1000
-        end
-    end
-    if frameProperties.zLevelSlot then
-        for i, v in ipairs(frameProperties.zLevelSlot) do
-            frameProperties.zLevel[i] = v[slot]
-        end
-    end
-    if frameProperties.flippedZLevelSlot then
-        for i, v in ipairs(frameProperties.flippedZLevelSlot) do
-            frameProperties.flippedZLevel[i] = v[slot]
-        end
-    end
-end
-
-local function fixSlotAnimation(animation, slot)
-    local animation = sb.parseJson(sb.printJson(animation):gsub("%<slot%>", tostring(slot)))
-    for stateTypeName, stateType in pairs(animation.animatedParts.stateTypes or {}) do
-        fixSlotProperties(stateType.properties, slot)
-        fixSlotFrameProperties(stateType.frameProperties, slot)
-        for stateName, state in pairs(stateType.states) do
-            fixSlotProperties(state.properties, slot)
-            fixSlotFrameProperties(state.frameProperties, slot)
-        end
-    end
-    for partName, part in pairs(animation.animatedParts.parts or {}) do
-        fixSlotProperties(part.properties, slot)
-        fixSlotFrameProperties(part.frameProperties, slot)
-        for stateTypeName, stateType in pairs(part.partStates or {}) do
-            for stateName, state in pairs(stateType) do
-                if type(state) == "table" then
-                    fixSlotProperties(state.properties, slot)
-                    fixSlotFrameProperties(state.frameProperties, slot)
-                end
-            end
-        end
-    end
-    return animation
+local function setPath(input, path, value)
+	local i = input
+	for j, v in ipairs(path) do
+		if type(i[v]) == "nil" then
+			if j == #path then
+				i[v] = value
+				return true
+			else
+				i[v] = {}
+			end
+		elseif type(i[v]) ~= "table" then
+			return false
+		end
+		i = i[v]
+	end
 end
 
 local function includeSBQModule(humanoidConfig, module)
-    if type(module) == "string" then
-        table.insert(humanoidConfig.sbqConfig.includes, module)
-        module = root.assetJson(module)
-    end
-    for _, v in ipairs(module.includes or {}) do
-        includeSBQModule(humanoidConfig, root.assetJson(v))
-        table.insert(humanoidConfig.sbqConfig.includes, v)
-    end
-    for _, v in ipairs(module.scripts or {}) do
-        table.insert(humanoidConfig.sbqConfig.scripts, v)
-    end
-    for _, v in ipairs(module.animations or {}) do
-        table.insert(humanoidConfig.animation.includes, v)
-    end
-    for _, v in ipairs(module.cosmeticAnimations or {}) do
-        local cosmeticAnimation = root.assetJson(v)
-        for i = 1, 20 do
-            humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(cosmeticAnimation, i))
-        end
-    end
-    for _, v in ipairs(module.occupantAnimations or {}) do
-        for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
-            table.insert(humanoidConfig.animation.includes, v.."."..i)
-        end
-    end
+	if type(module) == "string" then
+		table.insert(humanoidConfig.sbqConfig.includes, module)
+		module = root.assetJson(module)
+	end
+	for _, v in ipairs(module.includes or {}) do
+		includeSBQModule(humanoidConfig, root.assetJson(v))
+		table.insert(humanoidConfig.sbqConfig.includes, v)
+	end
+	for _, v in ipairs(module.scripts or {}) do
+		table.insert(humanoidConfig.sbqConfig.scripts, v)
+	end
+	for _, v in ipairs(module.animations or {}) do
+		table.insert(humanoidConfig.animation.includes, v)
+	end
+	for _, v in ipairs(module.cosmeticAnimations or {}) do
+		for i = 1, 20 do
+			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
+		end
+	end
+	if humanoidConfig.bodyFullbright then
+		for _, v in ipairs(module.bodyFullbrightParts or {}) do
+			setPath(humanoidConfig.animation, { "animatedParts", "parts", v, "properties", "fullbright" }, true)
+		end
+	end
+	for _, v in ipairs(module.occupantAnimations or {}) do
+		for i = 1, (humanoidConfig.sbqOccupantSlots or 0) do
+			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
+		end
+	end
 end
 
 local function getSBQBuildArguments(humanoidConfig)
-    for _, v in ipairs({
-        "sbqModules",
-        "sbqConfig",
-        "sbqIdentityAnimationCustom"
-    }) do
-        if not humanoidConfig[v] then
-            humanoidConfig[v] = root.assetJson("/humanoid.config:" .. v)
-        end
-        if type(humanoidConfig[v]) == "string"then
-            humanoidConfig[v] = root.assetJson(v)
-        end
-    end
+	for _, v in ipairs({
+		"sbqModules",
+		"sbqConfig",
+		"sbqIdentityAnimationCustom"
+	}) do
+		if not humanoidConfig[v] then
+			humanoidConfig[v] = root.assetJson("/humanoid.config:" .. v)
+		end
+		if type(humanoidConfig[v]) == "string" then
+			humanoidConfig[v] = root.assetJson(v)
+		end
+	end
 end
 
 function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
-    if humanoidParameters.sbqEnabled then
-        humanoidConfig.useAnimation = true
-    end
-    humanoidConfig = old.build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
-    if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
-        return humanoidConfig
-    end
-    local sbqConfig = root.assetJson("/sbq.config")
-    getSBQBuildArguments(humanoidConfig)
-    for k, v in pairs(identity) do
-        -- if type(v) == "string" then
-        --     if humanoidConfig.sbqIdentityAnimationCustom[k] then
-        --         humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, humanoidConfig.sbqIdentityAnimationCustom[k][v] or {})
-        --     end
-        -- end
-    end
+	if humanoidParameters.sbqEnabled then
+		humanoidConfig.useAnimation = true
+	end
+	humanoidConfig = old.build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
+	if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
+		return humanoidConfig
+	end
+	local sbqConfig = root.assetJson("/sbq.config")
+	getSBQBuildArguments(humanoidConfig)
+	for k, v in pairs(identity) do
+		if type(v) == "string" then
+			if humanoidConfig.sbqIdentityAnimationCustom[k] then
+				humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation,
+					humanoidConfig.sbqIdentityAnimationCustom[k][v] or {})
+			end
+		end
+	end
 
-    humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
+	humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
 
-    humanoidConfig.sbqConfig.seatCount = humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or 0
-    for i = 1, (humanoidConfig.sbqConfig.seatCount) do
-        humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
-            part = "occupant" .. tostring(i),
-            partAnchor = "loungeOffset",
-            orientation = "stand",
-            statusEffects = jarray(),
-            dance = "sbqIdle",
-            enabled = false,
-            usePartZLevel = true,
-            dismountable = false,
-        }
-    end
+	humanoidConfig.sbqConfig.seatCount = humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or 0
+	for i = 1, (humanoidConfig.sbqConfig.seatCount) do
+		humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
+			part = "occupant" .. tostring(i),
+			partAnchor = "loungeOffset",
+			orientation = "stand",
+			statusEffects = jarray(),
+			dance = "sbqIdle",
+			enabled = false,
+			usePartZLevel = true,
+			dismountable = false,
+		}
+	end
 
-    local baseModule = humanoidConfig.sbqConfig
-    humanoidConfig.sbqConfig = sb.jsonMerge(baseModule, {
-        includes = jarray(),
-        scripts = jarray()
-    })
-    includeSBQModule(humanoidConfig, baseModule)
-    for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
-        local modules = humanoidConfig.sbqModules[slot]
-        local selectedModule = humanoidParameters["sbqModule_" .. slot]
-        if selectedModule and (selectedModule ~= "disable") then
-            if modules[selectedModule] then
-                includeSBQModule(humanoidConfig, modules[selectedModule])
-            else
-                includeSBQModule(humanoidConfig, modules.default)
-            end
-        end
-    end
+	local baseModule = humanoidConfig.sbqConfig
+	humanoidConfig.sbqConfig = sb.jsonMerge(baseModule, {
+		includes = jarray(),
+		scripts = jarray()
+	})
+	includeSBQModule(humanoidConfig, baseModule)
+	for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
+		local modules = humanoidConfig.sbqModules[slot]
+		local selectedModule = humanoidParameters["sbqModule_" .. slot]
+		if selectedModule and (selectedModule ~= "disable") then
+			if modules[selectedModule] then
+				includeSBQModule(humanoidConfig, modules[selectedModule])
+			else
+				includeSBQModule(humanoidConfig, modules.default)
+			end
+		end
+	end
 
-    return humanoidConfig
+	return humanoidConfig
 end

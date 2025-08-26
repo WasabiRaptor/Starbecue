@@ -103,90 +103,90 @@
 						}
 					}}
 				}
+			},
+
+			"bodyDance" : {
+				"states" : {
+					"idle" : {"properties":{}},
+					"dance" : {"properties":{}},
+
+					"idle.1": {"properties":{}},
+					"idle.2": {"properties":{
+						"bellyOffset":[["reset"],	["translate",[0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[0, 0.125]]]
+					}},
+					"idle.3": {"properties":{
+						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
+					}},
+					"idle.4": {"properties":{
+						"bellyOffset":[["reset"],	["translate",[0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[0, 0.125]]]
+					}},
+					"idle.5": {"properties":{}},
+
+					"walk.1": {"properties":{}},
+					"walk.2": {"properties":{}},
+					"walk.3": {"properties":{}},
+					"walk.4": {"properties":{}},
+					"walk.5": {"properties":{}},
+					"walk.6": {"properties":{}},
+					"walk.7": {"properties":{}},
+					"walk.8": {"properties":{}},
+
+					"run.1": {"properties":{}},
+					"run.2": {"properties":{}},
+					"run.3": {"properties":{}},
+					"run.4": {"properties":{}},
+					"run.5": {"properties":{}},
+					"run.6": {"properties":{}},
+					"run.7": {"properties":{}},
+					"run.8": {"properties":{}},
+
+					"hidden.1": {"properties":{}},
+
+					"jump.1": {"properties":{}},
+					"jump.2": {"properties":{}},
+					"jump.3": {"properties":{}},
+					"jump.4": {"properties":{}},
+
+					"fall.1": {"properties":{}},
+					"fall.2": {"properties":{}},
+					"fall.3": {"properties":{}},
+					"fall.4": {"properties":{}},
+
+					"swimIdle.1": {"properties":{}},
+					"swimIdle.2": {"properties":{}},
+
+					"swim.1": {"properties":{}},
+					"swim.2": {"properties":{}},
+					"swim.3": {"properties":{}},
+					"swim.4": {"properties":{}},
+					"swim.5": {"properties":{}},
+					"swim.6": {"properties":{}},
+					"swim.7": {"properties":{}},
+
+					"sit.1": {"properties":{}},
+					"lay.1": {"properties":{}},
+
+					"idleMelee": {"properties":{}},
+					"duckMelee": {"properties":{}},
+
+					// doubt they'll see use but you never know
+					"climb.1": {"properties":{}},
+					"climb.2": {"properties":{}},
+					"climb.3": {"properties":{}},
+					"climb.4": {"properties":{}},
+					"climb.5": {"properties":{}},
+					"climb.6": {"properties":{}},
+					"climb.7": {"properties":{}},
+					"climb.8": {"properties":{}}
+				}
 			}
-
-			// "bodyDance" : {
-			// 	"states" : {
-			// 		"idle" : {"properties":{}},
-			// 		"dance" : {"properties":{}},
-
-			// 		"idle.1": {"properties":{}},
-			// 		"idle.2": {"properties":{
-			// 			"bellyOffset":[["reset"],	["translate",[0.125, 0]]],
-			// 			"crotchOffset":[["reset"],	["translate",[0.125, 0]]],
-			// 			"tailOffset":[["reset"],	["translate",[0.125, 0]]],
-			// 			"chestOffset":[["reset"],	["translate",[0, 0.125]]]
-			// 		}},
-			// 		"idle.3": {"properties":{
-			// 			"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
-			// 			"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
-			// 		}},
-			// 		"idle.4": {"properties":{
-			// 			"bellyOffset":[["reset"],	["translate",[0.125, 0]]],
-			// 			"crotchOffset":[["reset"],	["translate",[0.125, 0]]],
-			// 			"tailOffset":[["reset"],	["translate",[0.125, 0]]],
-			// 			"chestOffset":[["reset"],	["translate",[0, 0.125]]]
-			// 		}},
-			// 		"idle.5": {"properties":{}},
-
-			// 		"walk.1": {"properties":{}},
-			// 		"walk.2": {"properties":{}},
-			// 		"walk.3": {"properties":{}},
-			// 		"walk.4": {"properties":{}},
-			// 		"walk.5": {"properties":{}},
-			// 		"walk.6": {"properties":{}},
-			// 		"walk.7": {"properties":{}},
-			// 		"walk.8": {"properties":{}},
-
-			// 		"run.1": {"properties":{}},
-			// 		"run.2": {"properties":{}},
-			// 		"run.3": {"properties":{}},
-			// 		"run.4": {"properties":{}},
-			// 		"run.5": {"properties":{}},
-			// 		"run.6": {"properties":{}},
-			// 		"run.7": {"properties":{}},
-			// 		"run.8": {"properties":{}},
-
-			// 		"hidden.1": {"properties":{}},
-
-			// 		"jump.1": {"properties":{}},
-			// 		"jump.2": {"properties":{}},
-			// 		"jump.3": {"properties":{}},
-			// 		"jump.4": {"properties":{}},
-
-			// 		"fall.1": {"properties":{}},
-			// 		"fall.2": {"properties":{}},
-			// 		"fall.3": {"properties":{}},
-			// 		"fall.4": {"properties":{}},
-
-			// 		"swimIdle.1": {"properties":{}},
-			// 		"swimIdle.2": {"properties":{}},
-
-			// 		"swim.1": {"properties":{}},
-			// 		"swim.2": {"properties":{}},
-			// 		"swim.3": {"properties":{}},
-			// 		"swim.4": {"properties":{}},
-			// 		"swim.5": {"properties":{}},
-			// 		"swim.6": {"properties":{}},
-			// 		"swim.7": {"properties":{}},
-
-			// 		"sit.1": {"properties":{}},
-			// 		"lay.1": {"properties":{}},
-
-			// 		"idleMelee": {"properties":{}},
-			// 		"duckMelee": {"properties":{}},
-
-			// 		// doubt they'll see use but you never know
-			// 		"climb.1": {"properties":{}},
-			// 		"climb.2": {"properties":{}},
-			// 		"climb.3": {"properties":{}},
-			// 		"climb.4": {"properties":{}},
-			// 		"climb.5": {"properties":{}},
-			// 		"climb.6": {"properties":{}},
-			// 		"climb.7": {"properties":{}},
-			// 		"climb.8": {"properties":{}}
-			// 	}
-			// }
 		},
 		"parts" : {
 			"body" : {"properties" : {
