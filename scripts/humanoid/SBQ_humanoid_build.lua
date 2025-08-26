@@ -89,9 +89,8 @@ local function includeSBQModule(humanoidConfig, module)
         end
     end
     for _, v in ipairs(module.occupantAnimations or {}) do
-        local occupantSlot = root.assetJson(v)
         for i = 1, (humanoidConfig.sbqOccupantSlots or 1) do
-            humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, fixSlotAnimation(occupantSlot, i))
+            table.insert(humanoidConfig.animation.includes, v.."."..i)
         end
     end
 end
@@ -131,7 +130,7 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 
     humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
 
-    humanoidConfig.sbqConfig.seatCount = humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or sbqConfig.seatCount or 0
+    humanoidConfig.sbqConfig.seatCount = humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or 0
     for i = 1, (humanoidConfig.sbqConfig.seatCount) do
         humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
             part = "occupant" .. tostring(i),
