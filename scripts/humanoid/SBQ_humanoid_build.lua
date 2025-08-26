@@ -20,9 +20,12 @@ local function setPath(input, path, value)
 end
 
 local function includeSBQModule(humanoidConfig, module)
+	local merge = false
 	if type(module) == "string" then
 		table.insert(humanoidConfig.sbqConfig.includes, module)
 		module = root.assetJson(module)
+	else
+		merge = true
 	end
 	for _, v in ipairs(module.includes or {}) do
 		includeSBQModule(humanoidConfig, root.assetJson(v))
@@ -48,6 +51,12 @@ local function includeSBQModule(humanoidConfig, module)
 		for i = 1, (humanoidConfig.sbqOccupantSlots or 0) do
 			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
 		end
+	end
+	if merge then
+		-- make sure not to overwrite these when we merge
+		module.includes = nil
+		module.scripts = nil
+		humanoidConfig.sbqConfig = sb.jsonMerge(humanoidConfig.sbqConfig, module)
 	end
 end
 
@@ -102,10 +111,10 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 	end
 
 	local baseModule = humanoidConfig.sbqConfig
-	humanoidConfig.sbqConfig = sb.jsonMerge(baseModule, {
+	humanoidConfig.sbqConfig = {
 		includes = jarray(),
 		scripts = jarray()
-	})
+	}
 	includeSBQModule(humanoidConfig, baseModule)
 	for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
 		local modules = humanoidConfig.sbqModules[slot]
