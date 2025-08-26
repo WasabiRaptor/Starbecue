@@ -136,7 +136,7 @@ function sbq.reloadVoreConfig(sbqConfig)
         sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
     end
     sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
-
+	-- sbq.debugLogInfo(sbq.voreConfig, 2)
 	-- load scripts
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
 		require(script)
@@ -219,16 +219,12 @@ function sbq.actionList(type, target)
 			return {}
 		end
 	end
-	sbq.logInfo(actions,2)
 	for _, action in ipairs(actions or {}) do
 		local success, failReason, time = sbq.SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
-		sbq.logInfo({action, success, failReason}, 2)
 		if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or {})[type] then
 			table.insert(list, sb.jsonMerge(action, { available = success }))
 		end
 	end
-
-	sbq.logInfo(list,2)
 	return list
 end
 
@@ -484,6 +480,7 @@ function sbq._State:queueAction(name, target, ...)
 end
 
 function sbq._State:tryAction(name, target, ...)
+	sbq.debugLogInfo(("Trying Action '%s' on target '%s' with arguments '%s'"):format(name, target, sb.printJson({...})))
 	local action = self.actions[name]
 	if not action then return self:actionFailed(name, action, target, "missingAction", ...) end
 	if sbq.SpeciesScript.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
@@ -600,6 +597,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 end
 
 function sbq._State:actionFailed(name, action, target, failReason, ...)
+	sbq.debugLogWarn(("Failed Action '%s' on target '%s' with arguments '%s' with reason '%s'"):format(name, target, sb.printJson({...}), failReason))
 	-- sbq.logInfo({name, target, reason},2)
 	if not action then return false, failReason or false, 0, ... end
 	local cooldown = action.failureCooldown or 0
