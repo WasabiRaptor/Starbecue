@@ -4,8 +4,8 @@ function dialogueStepScripts.percentage(dialogueTree, dialogueTreeTop, settings,
 	local bestScore = 0
 	for key, value in pairs(dialogueTree.percentage or {}) do
 		local checkValue
-		if world.entityIsResource(eid, key) then
-			checkValue = world.entityResourcePercentage(eid, key)
+		if world.entity(eid):isResource(key) then
+			checkValue = world.entity(eid):resourcePercentage(key)
 		elseif type(settings[key]) == "number" then
 			checkValue = settings[key]
 		elseif type(sbq.getPublicProperty(eid, key)) == "number" then
@@ -63,7 +63,7 @@ function dialogueStepScripts.promptResponse(dialogueTree, dialogueTreeTop, setti
 end
 
 function dialogueStepScripts.statPositive(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	return world.entityStatPositive(eid, step) and step or step.."_notPositive"
+	return world.entity(eid):statPositive(step) and step or step.."_notPositive"
 end
 dialogueStepScripts.sbq_acidHeal = dialogueStepScripts.statPositive
 dialogueStepScripts.sbq_femcumHeal = dialogueStepScripts.statPositive

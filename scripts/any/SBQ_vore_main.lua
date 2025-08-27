@@ -485,8 +485,8 @@ function sbq._State:tryAction(name, target, ...)
 	if not action then return self:actionFailed(name, action, target, "missingAction", ...) end
 	if sbq.SpeciesScript.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
 	if action.onCooldown then return self:actionFailed(name, action, target, "onCooldown", ...) end
-	if target and not world.entityStatPositive(target, "sbqStatusPrimaryScript") then return self:actionFailed(name, action, target, "targetMissingStatusPrimaryScript", ...) end
-	if target and not world.entityStatPositive(target, "sbqActorScript") then return self:actionFailed(name, action, target, "targetMissingActorScript", ...) end
+	if target and not world.entity(target):statPositive("sbqStatusPrimaryScript") then return self:actionFailed(name, action, target, "targetMissingStatusPrimaryScript", ...) end
+	if target and not world.entity(target):statPositive("sbqActorScript") then return self:actionFailed(name, action, target, "targetMissingActorScript", ...) end
 	if action.settings and not sbq.settings:matches(action.settings, true) then return self:actionFailed(name, action, target, "settingsMismatch", ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
@@ -1712,7 +1712,7 @@ end
 
 function sbq._Occupant:update(dt)
 	local location = self:getLocation()
-	-- sbq.logInfo(world.entityLoungeAnchor(sbq.entityId(), self:getLoungeIndex()))
+	-- sbq.logInfo(world.entity(sbq.entityId()):loungeAnchor(self:getLoungeIndex()))
 	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove("noLongerLounging") end
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not (animator.animationStateTimer(self.seat .. "State") >= animator.stateCycle(self.seat .. "State")) then
@@ -2106,8 +2106,8 @@ end
 
 function sbq._Occupant:consumeResource(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-	if not world.entityIsResource(self.entityId, resource) then return true end
-	if (world.entityResource(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+	if not world.entity(self.entityId):isResource(resource) then return true end
+	if (world.entity(self.entityId):resource(resource) >= amount) and ignoreBlock or not world.entity(self.entityId):resourceLocked(resource) then
 		world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
 		return true
 	end
@@ -2115,8 +2115,8 @@ function sbq._Occupant:consumeResource(resource, amount, ignoreBlock)
 end
 function sbq._Occupant:consumeResource(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-	if not world.entityIsResource(self.entityId, resource) then return true end
-	if (world.entityResource(self.entityId, resource) >= amount) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+	if not world.entity(self.entityId):isResource(resource) then return true end
+	if (world.entity(self.entityId):resource(resource) >= amount) and ignoreBlock or not world.entity(self.entityId):resourceLocked(resource) then
 		world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
 		return true
 	end
@@ -2124,8 +2124,8 @@ function sbq._Occupant:consumeResource(resource, amount, ignoreBlock)
 end
 function sbq._Occupant:overConsumeResource(resource, amount, ignoreBlock)
 	-- if an entity doesn't have the resource, they get to have it for free
-	if not world.entityIsResource(self.entityId, resource) then return true end
-	if (world.entityResource(self.entityId, resource) > 0) and ignoreBlock or not world.entityResourceLocked(self.entityId, resource) then
+	if not world.entity(self.entityId):isResource(resource) then return true end
+	if (world.entity(self.entityId):resource(resource) > 0) and ignoreBlock or not world.entity(self.entityId):resourceLocked(resource) then
 		world.sendEntityMessage(self.entityId, "sbqOverConsumeResource", resource, amount, ignoreBlock)
 		return true
 	end
@@ -2134,39 +2134,39 @@ end
 
 function sbq._Occupant:resourceLocked(resource)
 	-- if they don't have the resource, it can't be locked
-	if not world.entityIsResource(self.entityId, resource) then return false end
-	return world.entityResourceLocked(self.entityId, resource)
+	if not world.entity(self.entityId):isResource(resource) then return false end
+	return world.entity(self.entityId):resourceLocked(resource)
 end
 
 function sbq._Occupant:resourcePercentage(resource)
 	-- if they don't have the resource, treat it as empty
-	if not world.entityIsResource(self.entityId, resource) then return 0 end
-	return world.entityResourcePercentage(self.entityId, resource)
+	if not world.entity(self.entityId):isResource(resource) then return 0 end
+	return world.entity(self.entityId):resourcePercentage(resource)
 end
 
 function sbq._Occupant:modifyResourcePercentage(resource, amount)
 	-- if they don't have the resource, treat it as empty
-	if not world.entityIsResource(self.entityId, resource) then return 0 end
+	if not world.entity(self.entityId):isResource(resource) then return 0 end
 	return world.sendEntityMessage(self.entityId, "sbqModifyResourcePercentage", resource, amount)
 end
 
 function sbq._Occupant:resource(resource)
 	-- if they don't have the resource, treat it as empty
-	if not world.entityIsResource(self.entityId, resource) then return 0 end
-	return world.entityResource(self.entityId, resource)
+	if not world.entity(self.entityId):isResource(resource) then return 0 end
+	return world.entity(self.entityId):resource(resource)
 end
 
 function sbq._Occupant:giveResource(resource, amount)
 	-- if they don't have the resource, do nothing
-	if not world.entityIsResource(self.entityId, resource) then return end
+	if not world.entity(self.entityId):isResource(resource) then return end
 	return world.sendEntityMessage(self.entityId, "sbqGiveResource", resource, amount)
 end
 
 function sbq._Occupant:stat(stat)
-	return world.entityStat(self.entityId, stat) or 0
+	return world.entity(self.entityId):stat(stat) or 0
 end
 function sbq._Occupant:statPositive(stat)
-	return world.entityStatPositive(self.entityId, stat) or false
+	return world.entity(self.entityId):statPositive(stat) or false
 end
 
 function sbq._Occupant:sendEntityMessage(...)
@@ -2181,7 +2181,7 @@ function sbq._Occupant:animNextProperty(property)
 	return animator.partNextProperty(self.seat, property)
 end
 function sbq._Occupant:getPublicProperty(property)
-	return world.entityStatusProperty(self.entityId, property)
+	return world.entity(self.entityId):statusProperty(property)
 end
 function sbq._Occupant:position()
 	return sbq.globalPartPoint(self.seat, "loungeOffset")

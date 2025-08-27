@@ -124,7 +124,7 @@ function sbq_hunting.sub(action)
 end
 
 function sbq_hunting.checkTarget(action, isDom, target, consent)
-	if world.entityStatPositive(target, "sbqIsPrey") or world.entityStatPositive(target, "sbqEntrapped") then return false end
+	if world.entity(target):statPositive("sbqIsPrey") or world.entity(target):statPositive("sbqEntrapped") then return false end
 	local settings = ((isDom and sbq.settings.read.domBehavior) or sbq.settings.read.subBehavior or {})[action]
 	local targetSettings = sbq.getPublicProperty(target, "sbqPublicSettings") or {}
 	local targetBehaviorSettings = ((isDom and targetSettings.subBehavior) or targetSettings.domBehavior or {})[action] or {}

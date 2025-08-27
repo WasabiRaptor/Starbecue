@@ -111,12 +111,12 @@ function update( dt )
 	indicator:clear()
 
 	-- buttons
-	local lockDown = world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") and "black"
+	local lockDown = world.entity(pane.sourceEntity()):statPositive("sbqLockDown") and "black"
 	indicateButton("interact", world.isEntityInteractive(pane.sourceEntity()) and "default" )
 	indicateButton("up", (buttons.up and lockDown) or buttons.up )
 	indicateButton("down", (buttons.down and lockDown) or buttons.down )
 
-	local facingRight = world.entityFacingDirection(pane.sourceEntity()) == 1
+	local facingRight = world.entity(pane.sourceEntity()):facingDirection() == 1
 	local left = (buttons.left or (facingRight and buttons.back) or buttons.front)
 	indicateButton("left", (left and lockDown) or left)
 	local right = (buttons.right or (facingRight and buttons.front) or buttons.back)
@@ -211,10 +211,10 @@ function update( dt )
 		indicator:drawImageDrawable("/interface/scripted/sbq/"..occupantData.flags.infuseType..".png", {45.5,16}, 1)
 	elseif occupantData.flags.digested or occupantData.flags.digesting then
 		indicator:drawImageDrawable("/interface/scripted/sbq/softDigest.png", {45.5,16}, 1)
-	elseif world.entityStatPositive(pane.sourceEntity(), "sbqLockDown") then
+	elseif world.entity(pane.sourceEntity()):statPositive("sbqLockDown") then
 		indicator:drawImageDrawable("/interface/scripted/sbq/lockedDisabled.png", { 45.5, 16 }, 1)
 
-		local s = world.entityResourcePercentage(pane.sourceEntity(), "energy") * predEnergyBar.w
+		local s = world.entity(pane.sourceEntity()):resourcePercentage("energy") * predEnergyBar.w
 		if s < predEnergyBar.w then
 			indicator:drawImageRect(
 				predEnergyBar.empty,

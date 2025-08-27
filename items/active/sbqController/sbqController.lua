@@ -116,7 +116,7 @@ function sbq.clickAction()
 	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
 	local result
 	for i, targetId in ipairs(entityaimed) do
-		local targetBounds = world.entityCollisionBoundBox(targetId)
+		local targetBounds = world.entity(targetId):collisionBoundBox()
 		if bounds and targetBounds and
 			(
 				rect.intersects(bounds, targetBounds) or

@@ -363,7 +363,7 @@ end
 function sbq.customizeEntity(eid)
 	sbq.addRPC(
 		player.characterCreation({
-			speciesIdentites = world.entityStatusProperty(eid, "sbqSpeciesIdentities"),
+			speciesIdentites = world.entity(eid):statusProperty("sbqSpeciesIdentities"),
 			currentSpecies =
 				world.entitySpecies(eid)
 		}), function(response)

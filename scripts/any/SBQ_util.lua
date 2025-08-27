@@ -124,14 +124,14 @@ function sbq.getEntitySize(entityId)
 	if world.entityType(entityId) == "object" then
 		return math.sqrt(#world.objectSpaces()) / sbq.config.sizeConstant
 	end
-	return math.sqrt(world.entityCollisionArea(entityId)) / sbq.config.sizeConstant
+	return math.sqrt(world.entity(entityId):collisionArea()) / sbq.config.sizeConstant
 end
 
 function sbq.getPublicProperty(entityId, property)
 	if world.entityType(entityId) == "object" then
 		return world.getObjectParameter(entityId, property)
 	end
-	return world.entityStatusProperty(entityId, property)
+	return world.entity(entityId):statusProperty(property)
 end
 
 function sbq.getScriptParameter(entityId, property)
@@ -345,9 +345,9 @@ function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stac
 end
 
 function sbq.isLoungeDismountable(eid)
-	local loungeId, anchorIndex = world.entityAnchorState(eid or entity.id())
+	local loungeId, anchorIndex = world.entity(eid or entity.id()):anchorState()
 	if loungeId then
-		return world.entityLoungeAnchor(loungeId, anchorIndex).dismountable
+		return world.entity(loungeId):loungeAnchor(anchorIndex).dismountable
 	else
 		return true
 	end

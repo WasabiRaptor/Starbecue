@@ -487,7 +487,7 @@ end
 
 function sbq.refreshPredHudPortrait()
 	sbq.timer("predHudPortrait", 1, function()
-		local loungeId = world.entityAnchorState(entity.id())
+		local loungeId = world.entity(entity.id()):anchorState()
 		if loungeId then
 			world.sendEntityMessage(loungeId, "sbqScriptPaneMessage", "sbqHudRefreshPortrait", entity.id())
 		end

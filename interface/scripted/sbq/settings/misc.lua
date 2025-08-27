@@ -28,25 +28,25 @@ function init()
         _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "customFont", makeLabel = true })
 	end
 	local source = sbq.entityId()
-	_ENV.healthBar.parent:setVisible(world.entityIsResource(source, "health") or false)
-	_ENV.hungerBar.parent:setVisible(world.entityIsResource(source, "food") or false)
-	_ENV.lustBar.parent:setVisible(world.entityIsResource(source, "sbqLust") or false)
-	_ENV.restBar.parent:setVisible(world.entityIsResource(source, "sbqRest") or false)
+	_ENV.healthBar.parent:setVisible(world.entity(source):isResource("health") or false)
+	_ENV.hungerBar.parent:setVisible(world.entity(source):isResource("food") or false)
+	_ENV.lustBar.parent:setVisible(world.entity(source):isResource("sbqLust") or false)
+	_ENV.restBar.parent:setVisible(world.entity(source):isResource("sbqRest") or false)
 end
 
 function update()
 	local source = sbq.entityId()
-	if world.entityIsResource(source, "health") then
-		_ENV.healthBar:setValue(world.entityResourcePercentage(source, "health"))
+	if world.entity(source):isResource("health") then
+		_ENV.healthBar:setValue(world.entity(source):resourcePercentage("health"))
 	end
-	if world.entityIsResource(source, "food") then
-		_ENV.hungerBar:setValue(world.entityResourcePercentage(source,"food"))
+	if world.entity(source):isResource("food") then
+		_ENV.hungerBar:setValue(world.entity(source):resourcePercentage("food"))
 	end
-	if world.entityIsResource(source, "sbqLust") then
-		_ENV.lustBar:setValue(world.entityResourcePercentage(source,"sbqLust"))
+	if world.entity(source):isResource("sbqLust") then
+		_ENV.lustBar:setValue(world.entity(source):resourcePercentage("sbqLust"))
 	end
-	if world.entityIsResource(source, "sbqRest") then
-		_ENV.restBar:setValue(world.entityResourcePercentage(source,"sbqRest"))
+	if world.entity(source):isResource("sbqRest") then
+		_ENV.restBar:setValue(world.entity(source):resourcePercentage("sbqRest"))
 	end
 end
 

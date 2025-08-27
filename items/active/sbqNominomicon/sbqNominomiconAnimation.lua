@@ -8,14 +8,14 @@ function update()
     for _, eid in ipairs(entities) do
         local entityType = world.entityType(eid)
         if entityType == "npc" then
-            if world.entityStatPositive(eid, "sbqIsPrey") then
+            if world.entity(eid):statPositive("sbqIsPrey") then
             elseif world.getNpcScriptParameter(eid, "sbqNPC") then
                 localAnimator.addDrawable({
                     image = "/items/active/sbqNominomicon/indicator.png",
                     centered = true,
                     position = world.entityPosition(eid)
                 }, "ForegroundOverlay+2")
-            elseif world.entityStatPositive(eid, "sbqActorScript") then
+            elseif world.entity(eid):statPositive("sbqActorScript") then
                 localAnimator.addDrawable({
                     image = "/items/active/sbqNominomicon/indicator.png?hueshift=-64",
                     centered = true,
@@ -23,8 +23,8 @@ function update()
                 }, "ForegroundOverlay+2")
             end
         elseif entityType == "monster" then
-            if world.entityStatPositive(eid, "sbqIsPrey") then
-            elseif world.entityStatPositive(eid, "sbqActorScript") then
+            if world.entity(eid):statPositive("sbqIsPrey") then
+            elseif world.entity(eid):statPositive("sbqActorScript") then
                 localAnimator.addDrawable({
                     image = "/items/active/sbqNominomicon/indicator.png?hueshift=-64",
                     centered = true,

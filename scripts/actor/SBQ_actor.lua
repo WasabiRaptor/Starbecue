@@ -12,7 +12,7 @@ local seatToForce
 local function forceSeat()
 	if seatToForce then
 		if world.entityExists(seatToForce.source) then
-			local loungeAnchor = world.entityLoungeAnchor(seatToForce.source, seatToForce.index)
+			local loungeAnchor = world.entity(seatToForce.source):loungeAnchor(seatToForce.index)
 			if loungeAnchor then
 				local success, error = pcall(mcontroller.setAnchorState, seatToForce.source, seatToForce.index)
 				if success then
@@ -199,7 +199,7 @@ end
 
 function faceEntity(args, board)
 	if args.entity == nil or not world.entityExists(args.entity) then return false end
-	local loungeId = world.entityAnchorState(args.entity)
+	local loungeId = world.entity(args.entity):anchorState()
 	if loungeId == entity.id() then return false end
 	return old.faceEntity(args, board)
 end

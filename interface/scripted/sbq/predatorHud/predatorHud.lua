@@ -192,7 +192,7 @@ sbq.bottomBar = {
 function sbq.updateBars(dt)
 	for _, occupant in ipairs(sbq.Occupants.list) do
 		if world.entityExists(occupant.entityId) then
-			sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entityResourcePercentage(occupant.entityId, "health"))
+			sbq.progressBar(_ENV[occupant.entityId .. "HealthBar"], HPPal, world.entity(occupant.entityId):resourcePercentage("health"))
 			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressBarColor"), sbq.getPublicProperty(occupant.entityId, "sbqProgressBar") or 0 )
 		end
 	end

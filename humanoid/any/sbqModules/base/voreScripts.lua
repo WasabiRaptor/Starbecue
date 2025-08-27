@@ -300,8 +300,8 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	local size
 	if target then
 		if (target == sbq.loungingIn()) then return false, "invalidAction" end
-		local loungeId, anchorIndex = world.entityAnchorState(target)
-		if loungeId and (loungeId ~= entity.id()) and (not world.entityLoungeAnchor(loungeId, anchorIndex).dismountable) then return false, "invalidAction" end
+		local loungeId, anchorIndex = world.entity(target):anchorState()
+		if loungeId and (loungeId ~= entity.id()) and (not world.entity(loungeId):loungeAnchor(anchorIndex).dismountable) then return false, "invalidAction" end
 		size = sbq.getEntitySize(target)
 	end
 	local location = sbq.SpeciesScript:getLocation(locationName or action.location, subLocationName or action.subLocation)
@@ -354,8 +354,8 @@ end
 function default:tryVore(name, action, target, ...)
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	if target == sbq.loungingIn() then return false, "invalidAction" end
-	local loungeId, anchorIndex = world.entityAnchorState(target)
-	if loungeId and (loungeId ~= entity.id()) and (not world.entityLoungeAnchor(loungeId, anchorIndex).dismountable) then return false, "invalidAction" end
+	local loungeId, anchorIndex = world.entity(target):anchorState()
+	if loungeId and (loungeId ~= entity.id()) and (not world.entity(loungeId):loungeAnchor(anchorIndex).dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
 	local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 	if not location then return false, "invalidLocation" end
@@ -880,7 +880,7 @@ function default:eggify(name, action, target, ...)
 		occupant.locationSettings.eggify = true
 		occupant:refreshLocation()
 		return true
-	elseif (not world.entityStatPositive(target, "sbqEggify")) or
+	elseif (not world.entity(target):statPositive("sbqEggify")) or
 		((occupant:getPublicProperty("sbqEggifyProgress") or 0) < 1) then
 		return true
 	end

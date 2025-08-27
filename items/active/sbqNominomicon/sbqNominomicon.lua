@@ -42,7 +42,7 @@ function getEntitySettingsMenu(entities, i)
 			return
 		end
 	end
-	if world.entityStatPositive(entities[i], "sbqIsPrey") then
+	if world.entity(entities[i]):statPositive("sbqIsPrey") then
 		getEntitySettingsMenu(entities, i+1)
 		return
 	end
