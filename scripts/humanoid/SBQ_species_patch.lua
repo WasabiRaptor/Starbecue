@@ -48,8 +48,13 @@ function patch(config, path)
             data.sourceImage = "/humanoid/" .. config.kind .. "/" .. data.sourceImage
         end
         local sourcePalettePath = (data.sourcePalette or "/humanoid/any/sbqModules/palette.config")
+        local sourcePaletteFile = sourcePalettePath
+        local found = sourcePaletteFile:find("%:")
+        if found then
+            sourcePaletteFile = sourcePaletteFile:sub(1,found-1)
+        end
         data.processingDirectives = data.processingDirectives or ""
-        if assets.exists(sourcePalettePath) and assets.exists(data.sourceImage) then
+        if assets.exists(sourcePaletteFile) and assets.exists(data.sourceImage) then
             local sourcePalette = assets.json(sourcePalettePath)
             for i, remap in ipairs(data.remapDirectives or {}) do
                 if type(remap) == "string" then

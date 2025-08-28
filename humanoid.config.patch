@@ -1,7 +1,11 @@
 {
 	"sbqModules" : {
 		"belly" : {
-			"default": "/humanoid/any/sbqModules/belly/sbqModule.config"
+			"default": {
+				"includes": [
+					"/humanoid/any/sbqModules/belly/sbqModule.config"
+				]
+			}
 		},
 		"cock" : {
 			"default": {
@@ -12,7 +16,11 @@
 			}
 		},
 		"balls" : {
-			"default": "/humanoid/any/sbqModules/balls/sbqModule.config"
+			"default": {
+				"includes": [
+					"/humanoid/any/sbqModules/balls/sbqModule.config"
+				]
+			}
 		},
 		"breasts" : {
 			"default": {
@@ -30,11 +38,27 @@
 				]
 			}
 		},
-		"tail" : {
-			"nickit": "/humanoid/any/sbqModules/nickit_tail/sbqModule.config",
-			"flareon": "/humanoid/any/sbqModules/flareon_tail.sbqModule.config",
-			"vaporeon": "/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config",
-			"luxio": "/humanoid/any/sbqModules/luxio_tail.sbqModule.config"
+		"tail": {
+			"nickit": {
+				"includes": [
+					"/humanoid/any/sbqModules/nickit_tail/sbqModule.config"
+				]
+			},
+			"flareon": {
+				"includes": [
+					"/humanoid/any/sbqModules/flareon_tail.sbqModule.config"
+				]
+			},
+			"vaporeon": {
+				"includes": [
+					"/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config"
+				]
+			},
+			"luxio": {
+				"includes": [
+					"/humanoid/any/sbqModules/luxio_tail.sbqModule.config"
+				]
+			}
 		}
 	},
 	"sbqConfig" : {

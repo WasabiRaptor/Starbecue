@@ -1,7 +1,7 @@
 {
 	"globalTagDefaults" : {
 		"tailImage" : "sbq/nickit_tail.png",
-		"tailColorRemap" : "",
+		"tailInfusedImage" : "",
 		"tailInfusedFade" : "",
 		"tailInfusedDirectives" : "",
 
@@ -98,8 +98,8 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
-						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -110,15 +110,15 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"s_front": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>" } },
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
+						"expand": { "properties": { "image": "<tailInfusedImage>:<tailInterpolateSize>-<tailExpandState_state>" } },
+						"eat": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

@@ -39,32 +39,116 @@
 			"navelVisible": false
 		}
 	},
-	"sbqModules": {
-		"belly": {
-			"default": "/path/to/config.config"
-		},
-		"breasts": {
-			"default": "/path/to/config.config"
-		},
-		"cock": {
-			"default": "/path/to/config.config"
-		},
-		"balls": {
-			"default": "/path/to/config.config"
-		},
-		"tail": {
-			"default": "/path/to/config.config",
-			"flareon": "/path/to/config.config",
-			"vaporeon": "/path/to/config.config",
-			"nickit": "/path/to/config.config",
-			"hellhound": "/path/to/config.config",
-			"fluffy_friend": "/path/to/config.config",
-			"naga": "/path/to/config.config"
-		}
-	},
 	"sbqPartImages": { // paths local to the species' folder used to generate images with replaced colors to match the species
 		// these same files can be manually created at the respective paths in the species' folder and have their entries removed here
 		// however then the sprites will not be automatically updated if the base sprites are, only manually cra
+		"sbq/nickit_tail.png" : {
+			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/nickit_tail.png" : {
+			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+
+		},
+		"sbq/flareon_tail.png" : {
+			"sourcePalette" : "/species/wr/flareon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/flareon_tail.png" : {
+			"sourcePalette" : "/species/wr/flareon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/vaporeon_tail.png" : {
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/vaporeon_tail.png" : {
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+
+		"sbq/luxio_tail.png" : {
+			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/luxio_tail.png" : {
+			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [
