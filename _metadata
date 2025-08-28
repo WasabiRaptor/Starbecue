@@ -36,6 +36,10 @@
 	"scripts" : {
 		//"onLoad" : ["/scripts/assets/SBQ_onload.lua"],
 		"postLoad" : ["/scripts/assets/SBQ_postload.lua"]
+	},
+	"errorHandlers" : {
+		"npc" : ["/scripts/sbq/errorHandlers/npc.lua"],
+		"player" : ["/scripts/sbq/errorHandlers/player.lua"]
 	}
 
 }
