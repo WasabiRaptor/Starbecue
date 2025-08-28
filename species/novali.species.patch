@@ -33,10 +33,6 @@
 			"a94783"
 		]
 	},
-	"colorRemapGlobalTags": null,
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config"
-	],
 	"sbqSettingsConfig": {
 		"eggStatus": "sbqGlassEgg",
 		"defaultSettings": {
@@ -45,6 +41,105 @@
 	},
 	"sbqConvertChance": 0.16,
 	"sbqPartImages": {
+		"sbq/nickit_tail.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/nickit_tail.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+
+		},
+		"sbq/flareon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/flareon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/vaporeon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/vaporeon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+
+		"sbq/luxio_tail.png" : {
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/luxio_tail.png" : {
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [

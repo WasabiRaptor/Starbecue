@@ -61,7 +61,6 @@
 	// if you are using a remap part, this is what detemines what color it uses, they are remapping from the human base colors to the base colors of your species
 	// the remap works like this a table like this {"00adba":"bc1002"} recolors the hex codes directly defines in its table as from:to
 	// if a remap table is like this ["primary","primary"] it defers to the base colors names in the species file
-	"colorRemapGlobalTags": null,
 	"defaultBlueprints": {
 		"tier1": [
 			// Empty Hands
@@ -323,6 +322,105 @@
 		}
 	},
 	"sbqPartImages": {
+		"sbq/nickit_tail.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/nickit_tail.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+
+		},
+		"sbq/flareon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/flareon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/vaporeon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/vaporeon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+
+		"sbq/luxio_tail.png" : {
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/luxio_tail.png" : {
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
 			"remapDirectives": [

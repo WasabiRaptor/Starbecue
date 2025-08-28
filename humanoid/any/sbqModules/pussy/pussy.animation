@@ -1,9 +1,9 @@
 {
 	"globalTagDefaults" : {
 		"pussyImage" : "sbq/pussy.png",
-		"pussyInfusedFade" : "?multiply=00000000;",
+		"pussyInfusedFade" : "",
 		"pussyInfusedDirectives" : "",
-		"pussyInfusedPath" : "",
+		"pussyinfusedImage" : "",
 
 		"pussySize" : "0",
 		"pussyInterpolateSize" : "0"
@@ -112,7 +112,7 @@
 				},
 				"partStates": {
 					"pussyState": {
-						"idle": { "properties": { "image": "<pussyInfusedPath><pussyImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
+						"idle": { "properties": { "image": "<pussyinfusedImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -132,7 +132,7 @@
 						"none": { "properties": {} }
 					},
 					"pussyExpandState" : {
-						"expand": { "properties": { "image": "<pussyInfusedPath><pussyImage>:<pussyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<pussyinfusedImage>:<pussyInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

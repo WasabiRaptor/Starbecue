@@ -35,21 +35,12 @@
 			},
 			"tailExpandState" : {
 				"priority" : 3,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
-			},
-			"tailHiddenState" : {
-				"priority" : 4,
-				"default": "ignore",
-				"states" : {
-					"true": { "frames": 1, "cycle":0, "mode":"end" },
-					"false": { "frames": 1, "cycle": 0, "mode": "end" }
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			}
 		},
@@ -68,7 +59,7 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
@@ -80,22 +71,19 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>.<pose>" } },
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<pose>.<tailExpandState_frame>" } }
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
-					},
-					"starpounds" : {
-						"true" : { "properties":{}}
 					}
 				}
 			},
@@ -110,7 +98,7 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
@@ -122,22 +110,19 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"s_front": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
 						"s_down" : "s_front",
 						"none": { "properties": {} }
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>.<pose>" } },
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<pose>.<tailExpandState_frame>" } }
+						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-<tailExpandState_state>" } },
+						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
 						"bust" : "head"
-					},
-					"starpounds" : {
-						"true" : { "properties":{}}
 					}
 				}
 			}

@@ -31,7 +31,10 @@
 			}
 		},
 		"tail" : {
-			"nickit": "/humanoid/any/sbqModules/nickit_tail/sbqModule.config"
+			"nickit": "/humanoid/any/sbqModules/nickit_tail/sbqModule.config",
+			"flareon": "/humanoid/any/sbqModules/flareon_tail.sbqModule.config",
+			"vaporeon": "/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config",
+			"luxio": "/humanoid/any/sbqModules/luxio_tail.sbqModule.config"
 		}
 	},
 	"sbqConfig" : {
@@ -107,8 +110,8 @@
 				"default"
 			],
 			"tailSelect" : [
-				"disable",
-				"default"
+				"default",
+				"nickit"
 			],
 			"tailInfuseSelect" : [
 				"default"

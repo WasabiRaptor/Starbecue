@@ -90,7 +90,7 @@ function patch(config, path)
             end
             if not assets.exists(data.sourceImage) then
                 sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
-                    config.kind, imagePath, sourcePalettePath)
+                    config.kind, imagePath, data.sourceImage)
             end
             -- nothing to do if it don't exist
         end

@@ -2,15 +2,15 @@
 	"globalTagDefaults" : {
 		"ballsLeftFrontImage" : "sbq/ballsFront.png",
 		"ballsLeftBackImage" : "sbq/ballsBack.png",
-		"ballsLeftInfusedFade" : "?multiply=00000000;",
+		"ballsLeftInfusedFade" : "",
 		"ballsLeftInfusedDirectives" : "",
-		"ballsLeftInfusedPath" : "",
+		"ballsLeftinfusedImage" : "",
 
 		"ballsRightFrontImage" : "sbq/ballsFront.png",
 		"ballsRightBackImage" : "sbq/ballsBack.png",
-		"ballsRightInfusedFade" : "?multiply=00000000;",
+		"ballsRightInfusedFade" : "",
 		"ballsRightInfusedDirectives" : "",
-		"ballsRightInfusedPath" : "",
+		"ballsRightinfusedImage" : "",
 
 		"ballsSize" : "0",
 		"ballsInterpolateSize" : "0",
@@ -219,8 +219,8 @@
 				"partStates": {
 					"balls_rightState": {
 						"idle": { "properties": {
-							"image": "<ballsRightInfusedPath><ballsRightFrontImage>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
-							"flippedImage": "<ballsRightInfusedPath><ballsRightBackImage>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
+							"image": "<ballsRightinfusedImage>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
+							"flippedImage": "<ballsRightinfusedImage>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -242,8 +242,8 @@
 					},
 					"balls_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<ballsRightInfusedPath><ballsRightFrontImage>:<balls_rightInterpolateSize>-expand",
-							"flippedImage": "<ballsRightInfusedPath><ballsRightBackImage>:<balls_rightInterpolateSize>-expand"
+							"image": "<ballsRightinfusedImage>:<balls_rightInterpolateSize>-expand",
+							"flippedImage": "<ballsRightinfusedImage>:<balls_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -271,8 +271,8 @@
 				"partStates": {
 					"balls_leftState": {
 						"idle": { "properties": {
-							"image": "<ballsLeftInfusedPath><ballsLeftBackImage>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
-							"flippedImage": "<ballsLeftInfusedPath><ballsLeftFrontImage>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
+							"image": "<ballsLeftinfusedImage>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
+							"flippedImage": "<ballsLeftinfusedImage>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -294,8 +294,8 @@
 					},
 					"balls_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<ballsLeftInfusedPath><ballsLeftBackImage>:<balls_leftInterpolateSize>-expand",
-							"flippedImage": "<ballsLeftInfusedPath><ballsLeftFrontImage>:<balls_leftInterpolateSize>-expand"
+							"image": "<ballsLeftinfusedImage>:<balls_leftInterpolateSize>-expand",
+							"flippedImage": "<ballsLeftinfusedImage>:<balls_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},

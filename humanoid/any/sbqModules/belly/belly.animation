@@ -1,9 +1,9 @@
 {
 	"globalTagDefaults" : {
 		"bellyImage" : "sbq/belly.png",
-		"bellyInfusedFade" : "?multiply=00000000;",
+		"bellyInfusedFade" : "",
 		"bellyInfusedDirectives" : "",
-		"bellyInfusedPath" : "",
+		"bellyinfusedImage" : "",
 		"bellySize" : "0",
 		"bellyInterpolateSize" : "0"
 
@@ -108,7 +108,7 @@
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "<bellyInfusedPath><bellyImage>:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
+						"idle": { "properties": { "image": "<bellyinfusedImage>:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -128,7 +128,7 @@
 						"none": { "properties": {} }
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyInfusedPath><bellyImage>:<bellyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<bellyinfusedImage>:<bellyInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

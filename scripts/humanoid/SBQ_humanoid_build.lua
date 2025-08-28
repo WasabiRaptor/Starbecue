@@ -21,7 +21,8 @@ end
 
 local function includeSBQModule(humanoidConfig, module)
 	local merge = false
-	if type(module) == "string" then
+    if type(module) == "string" then
+		sb.logInfo(module)
 		table.insert(humanoidConfig.sbqConfig.includes, module)
 		module = root.assetJson(module)
 	else
@@ -34,8 +35,12 @@ local function includeSBQModule(humanoidConfig, module)
 	for _, v in ipairs(module.scripts or {}) do
 		table.insert(humanoidConfig.sbqConfig.scripts, v)
 	end
-	for _, v in ipairs(module.animations or {}) do
-		table.insert(humanoidConfig.animation.includes, v)
+    for _, v in ipairs(module.animations or {}) do
+		if type(v) == "string" then
+            table.insert(humanoidConfig.animation.includes, v)
+        else
+			humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, v)
+		end
 	end
 	for _, v in ipairs(module.cosmeticAnimations or {}) do
 		for i = 1, 20 do
