@@ -15,9 +15,14 @@ function update(storedSettings)
     if storedSettings.pussy then
         storedSettings.pussySelect = "default"
     end
+    if storedSettings.balls then
+        storedSettings.ballsSelect = "default"
+    end
+
     storedSettings.cock = nil
     storedSettings.breasts = nil
     storedSettings.pussy = nil
+    storedSettings.balls = nil
 
     storedSettings.maxScale = storedSettings.maximumScale
     storedSettings.minScale = storedSettings.minimumScale
