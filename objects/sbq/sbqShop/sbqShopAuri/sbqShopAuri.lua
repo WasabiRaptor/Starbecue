@@ -1,3 +1,5 @@
+sbq = {}
+require("/scripts/any/SBQ_util.lua")
 
 function init()
 	object.setInteractive(true)
