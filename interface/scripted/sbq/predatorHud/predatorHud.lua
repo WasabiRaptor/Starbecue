@@ -142,10 +142,10 @@ function addOccupantPortraitSlot(occupant)
 				table.insert(actions, {
 					_ENV.metagui.formatText(action.name or (":"..action.action)),
 					function()
-						local result = world.sendEntityMessage(player.id(), "sbqQueueAction", action.action, occupant.entityId, table.unpack(action.args or {})):result()
+						local result = world.sendEntityMessage(player.id(), "sbqQueueAction", action.action, occupant.entityId, table.unpack(action.args or {})):result() or { false, "messageNotHandled" }
 						if (not result[1]) and (result[2] ~= "targetMissing") then
 							sbq.playErrorSound()
-							interface.queueMessage(sbq.getString(":action_"..tostring(result[2])))
+							interface.queueMessage(sbq.getString(":action_" .. tostring(result[2])))
 						end
 					end,
 					_ENV.metagui.formatText(action.description or (":"..action.action.."Desc"))

@@ -234,7 +234,7 @@ function sbq.tryAction(action, target, ...)
 end
 
 function sbq.queueAction(action, target, ...)
-	if not sbq.SpeciesScript.active then return false end
+	if not sbq.SpeciesScript.active then return {false, "inactive"} end
 	return {sbq.SpeciesScript:queueAction(action, target, ...)}
 end
 
@@ -2251,14 +2251,14 @@ function sbq._Occupant:getLoungeIndex()
 end
 
 function sbq._Occupant:logInfo(json)
-	sbq.logInfo("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+	sbq.logInfo(("[%s][%s]%s"):format(self.seat, world.entityName(self.entityId), json))
 end
 function sbq._Occupant:logError(json)
-	sbq.logError("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+	sbq.logError(("[%s][%s]%s"):format(self.seat, world.entityName(self.entityId), json))
 end
 function sbq._Occupant:debugLogInfo(json)
-	sbq.debugLogInfo("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+	sbq.debugLogInfo(("[%s][%s]%s"):format(self.seat, world.entityName(self.entityId), json))
 end
 function sbq._Occupant:debugLogError(json)
-	sbq.debugLogError("["..self.seat.."]["..world.entityName(self.entityId).."]"..tostring(json))
+	sbq.debugLogError(("[%s][%s]%s"):format(self.seat, world.entityName(self.entityId), json))
 end
