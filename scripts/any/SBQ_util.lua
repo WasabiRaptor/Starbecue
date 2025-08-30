@@ -347,7 +347,7 @@ end
 function sbq.isLoungeDismountable(eid)
 	local loungeId, anchorIndex = world.entity(eid or entity.id()):anchorState()
 	if loungeId then
-		return world.entity(loungeId):loungeAnchor(anchorIndex).dismountable
+		return (world.entity(loungeId):loungeAnchor(anchorIndex) or {dismountable = true}).dismountable
 	else
 		return true
 	end
