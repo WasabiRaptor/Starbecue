@@ -1,6 +1,6 @@
 cfg = root.assetJson("/interface/scripted/sbq/settings/settings.ui")
 
-local sbq = world.sendEntityMessage(player.id(), "sbqSettingsPageData"):result()
+local sbq = world.sendEntityMessage(player.id(), "sbqSettingsPageData"):result() or {}
 cfg.inputData = {
 	sbq = sbq
 }
