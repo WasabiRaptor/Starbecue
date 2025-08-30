@@ -75,16 +75,13 @@ function init()
 
     message.setHandler({ name = "/sbq", localOnly = true }, function(args)
 		local parsed = {chat.parseArguments(args)}
-		sb.logInfo(sb.printJson(parsed))
-		sb.logInfo(sb.printJson(args))
-
 		local command = table.remove(parsed, 1)
 		if not command then
 			return "[SBQ]" .. sbq.getString(":sbqCommands")
-		elseif type(sbqCommands[command]) == "function" then
-			return sbqCommands[command](table.unpack(parsed))
+		elseif type(sbqCommands[command:lower()]) == "function" then
+			return sbqCommands[command:lower()](table.unpack(parsed))
 		else
-			return "[SBQ]" .. sbq.getString(":invalidCommand"):format(command)
+			return "[SBQ]" .. sbq.getString(":invalidCommand"):format(command:lower())
 		end
 	end)
 
@@ -440,9 +437,9 @@ end
 function sbqCommands.help(name)
 	if not name then name = "help" end
 	if type(sbqCommands[name]) == "function" then
-        return sbq.strings.help[name] or (":help."..name)
+        return "[SBQ] ".. (sbq.strings.help[name] or (":help."..name)) .. ((name == "help") and ("\n[SBQ]" .. sbq.getString(":sbqCommands")) or (""))
     else
-		return sbq.getString(":help_invalid")
+		return "[SBQ] ".. sbq.getString(":help_invalid")
 	end
 end
 function sbqCommands.settings()
@@ -458,15 +455,15 @@ end
 function sbqCommands.escape()
 	world.sendEntityMessage(player.id(), "sbqReleased")
 end
-function sbqCommands.setTieredUpgrade(...)
+function sbqCommands.settieredupgrade(...)
     sbq.upgrades:setTiered(...)
 	return "[SBQ] ".. sbq.getString(":appliedTieredUpgrade"):format(...)
 end
-function sbqCommands.setUpgrade(...)
+function sbqCommands.setupgrade(...)
     sbq.upgrades:set(...)
 	return "[SBQ] ".. sbq.getString(":appliedUpgrade"):format(...)
 end
-function sbqCommands.setSetting(setting, value, groupName, groupId, ...)
+function sbqCommands.setsetting(setting, value, groupName, groupId, ...)
     sbq.settings:set(setting, value, groupName, groupId, ...)
 	if groupName and groupId then
         return "[SBQ] ".. sbq.getString(":appliedGroupSetting"):format(setting, value, groupName, groupId)
@@ -474,7 +471,7 @@ function sbqCommands.setSetting(setting, value, groupName, groupId, ...)
 		return "[SBQ] ".. sbq.getString(":appliedSetting"):format(setting, value)
 	end
 end
-function sbqCommands.skipToTier(tier)
+function sbqCommands.skiptotier(tier)
 	local result = ""
     for i = 1, tier do
         for _, v in ipairs(chat.command(("/sbq setTieredUpgrade candyBonus %s 1"):format(i))) do
