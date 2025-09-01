@@ -103,12 +103,21 @@
 			}
 		},
 		"parts" : {
+			"balls" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11,
+					"flippedZLevel": 11,
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "crotchOffset"]
+				}
+			},
 			"balls_right" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.3,
 					"flippedZLevel": 11.2,
-					"anchorPart": "cock",
+					"anchorPart": "balls",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
@@ -160,7 +169,7 @@
 					"centered": true,
 					"zLevel": 11.2,
 					"flippedZLevel": 11.3,
-					"anchorPart": "cock",
+					"anchorPart": "balls",
 					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
