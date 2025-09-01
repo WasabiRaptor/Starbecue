@@ -224,7 +224,6 @@ function _RadialMenu:openRadialMenu(overrides)
 end
 
 function _RadialMenu:controllerAssign(action, position, mouseButton, isButtonDown)
-	sbq.logInfo(mouseButton)
 	if mouseButton == 0 then
 		sbq.setAction("primary", action)
 	elseif mouseButton == 2 then
