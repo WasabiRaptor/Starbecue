@@ -12,7 +12,7 @@ require "/scripts/rect.lua"
 
 local drawable
 function init()
-    drawable = pane.drawable()
+	drawable = pane.drawable()
 
 	options = config.getParameter("options")
 	default = config.getParameter("default") or {}
@@ -38,7 +38,7 @@ end
 
 function uninit()
 	if config.getParameter("selectOnClose") then
-		selectAction()
+		canvasClickEvent({0,0},0,true)
 	end
 end
 
@@ -220,23 +220,16 @@ function drawShadowText(text, position, color, wrapWidth, greyed)
 	}, 8, { color[1] * textBrightness, color[2] * textBrightness, color[3] * textBrightness })
 end
 
-function canvasClickEvent(position, mouseButton, isButtonDown, shift, ctrl, alt)
-	button = mouseButton
-	pressed = isButtonDown
-
-	if isButtonDown then
-		selectAction(mouseButton, activeSegment, shift, ctrl, alt)
-	end
-end
-
-function selectAction(...)
+function canvasClickEvent(position, mouseButton, isButtonDown)
 	local args = {}
 	local option = options[activeSegment] or cancel
 
 	if option.locked then return end
+	if option.onDown and not isButtonDown then return end
+	if option.onUp and isButtonDown then return end
 	local messageTarget = option.messageTarget or (pane.sourceEntity() == 0 and player.id()) or pane.sourceEntity()
 	if option.clickArgs then
-		args = {...}
+		args = {position, mouseButton, isButtonDown}
 	end
 	if option.data then
 		table.insert(args, 1, option.data)

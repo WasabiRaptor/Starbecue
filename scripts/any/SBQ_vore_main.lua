@@ -617,7 +617,7 @@ function sbq._State:actionFailed(name, action, target, failReason, ...)
 end
 
 function sbq._State:actionAvailable(name, target, ...)
-	if not name then return false end
+	if not name then return false, "invalidAction" end
 	local action = self.actions[name]
 	if not action then return false, "missingAction" end
 	if action.settings and not sbq.settings:matches(action.settings, true) then return false, "settingsMismatch", action.failureCooldown or 0, false, false end

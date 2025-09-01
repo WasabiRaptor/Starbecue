@@ -27,7 +27,7 @@ function init()
 
 	activeItem.setHoldingItem(false)
 	storage = storage or {}
-	sbq.setAction(storage.action)
+	sbq.setAction("primary", storage.actions.primary)
 
 	message.setHandler("sbqControllerRotation", function(_, _, enabled)
 		sbq.rotationEnabled = enabled
@@ -70,7 +70,7 @@ function update(dt, fireMode, shiftHeld, controls)
 		if (shiftHeldTime) > 0.2 and controls.up then
 			RadialMenu:open("TopMenu")
 		elseif fireMode ~= "none" and not clicked and not RadialMenu.activeMenu then
-			sbq.clickAction()
+			sbq.clickAction(fireMode)
 			clicked = true
 		elseif fireMode == "none" then
 			if sbq.rotationEnabled then
@@ -88,19 +88,25 @@ function uninit()
 	world.sendEntityMessage(player.id(), "sbqQueueAction", "rpActionReset")
 end
 
-function sbq.setAction(action)
-	storage.action = action
+function sbq.setAction(fireMode, action)
+	storage.actions[fireMode] = action
 
-	local icon, shortdescription, description = sbq.getActionData(action,
-		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.action):result() or {})[1],
+	local icon, shortdescription, description = sbq.getActionData(storage.actions.primary,
+		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.actions.primary):result() or {})[1],
 		storage.iconDirectories)
+	local icon2, shortdescription2, description2 = sbq.getActionData(storage.actions.alt,
+		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.actions.alt):result() or {})[1],
+		storage.iconDirectories)
+
 	activeItem.setInventoryIcon(icon)
+	activeItem.setSecondaryIcon(icon2)
 	activeItem.setShortDescription(shortdescription)
-	activeItem.setDescription(description .. "\n" .. sbq.strings.controllerDescAppend)
+	activeItem.setDescription(sbq.getString(":controllerDescFormat"):format(description, description2))
 end
 
-function sbq.clickAction()
-	if (not storage.action) or (storage.action == "unassigned") then
+function sbq.clickAction(fireMode)
+	local action = storage.actions[fireMode]
+	if (not action) or (action == "unassigned") then
 		animator.playSound("error")
 		interface.queueMessage(sbq.getString(":action_unassigned"))
 		return false
@@ -122,14 +128,14 @@ function sbq.clickAction()
 				rect.intersects(bounds, targetBounds) or
 				((entity.entityInSight(targetId)) and (rect.intersects(paddedbounds, targetBounds)))) then
 			if sbq.isLoungeDismountable(targetId) then
-				result = { sbq.attemptAction(targetId) }
+				result = { sbq.attemptAction(action, targetId) }
 				break
 			end
 		end
 	end
 
 	if result == nil then
-		result = world.sendEntityMessage(player.id(), "sbqTryAction", storage.action):result()
+		result = world.sendEntityMessage(player.id(), "sbqTryAction", action):result()
 	end
 	local success, failReason, time, successfulFail, failReason2 = table.unpack(result or { false, "messageNotHandled" })
 
@@ -140,29 +146,29 @@ function sbq.clickAction()
 	return table.unpack(result)
 end
 
-function sbq.attemptAction(targetId)
+function sbq.attemptAction(action, targetId)
 	if shiftHeldTime > 0 then
 		local success, failReason = table.unpack(world.sendEntityMessage(player.id(), "sbqActionAvailable",
-			storage.action,
+			action,
 			targetId):result() or {})
 		if success then
-			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), storage.action, true),
+			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), action, true),
 				function(response)
 					if not response then return end
 					local tryAction, isDom, line, action, target = table.unpack(response)
 					if tryAction then
-						world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId)
+						world.sendEntityMessage(player.id(), "sbqTryAction", action, targetId)
 					end
 				end)
 		end
 		return success, failReason
 	else
 		local targetSettings = sbq.getPublicProperty(targetId, "sbqPublicSettings") or {}
-		if sbq.query(targetSettings, { "subBehavior", storage.action, "consentRequired" }) then
+		if sbq.query(targetSettings, { "subBehavior", action, "consentRequired" }) then
 			return false,
 				"consentRequired"
 		end
-		return table.unpack(world.sendEntityMessage(player.id(), "sbqTryAction", storage.action, targetId):result() or {})
+		return table.unpack(world.sendEntityMessage(player.id(), "sbqTryAction", action, targetId):result() or {})
 	end
 end
 
@@ -207,6 +213,7 @@ function _RadialMenu:openRadialMenu(overrides)
 		{
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			default = {
+				onDown = true,
 				messageTarget = player.id(),
 				message = "sbqControllerRadialMenuScript"
 			},
@@ -216,8 +223,13 @@ function _RadialMenu:openRadialMenu(overrides)
 	), player.id())
 end
 
-function _RadialMenu:controllerAssign(action)
-	sbq.setAction(action)
+function _RadialMenu:controllerAssign(action, position, mouseButton, isButtonDown)
+	sbq.logInfo(mouseButton)
+	if mouseButton == 0 then
+		sbq.setAction("primary", action)
+	elseif mouseButton == 2 then
+		sbq.setAction("alt", action)
+	end
 end
 
 local TopMenu = {}
@@ -227,7 +239,7 @@ function TopMenu:init()
 	local occupants = world.loungingEntities(player.id())
 	local options = {
 		{
-			args = { "letout", false, storage.action },
+			args = { "letout", false, storage.actions.primary },
 			name = sbq.strings.letout,
 			locked = (not occupants) or (not occupants[1]),
 			description = sbq.strings.controllerLetOutAnyDesc,
@@ -269,6 +281,7 @@ function AssignMenu:init()
 		local icon, shortdescription, description = sbq.getActionData(action.action, true, storage.iconDirectories)
 		table.insert(options, {
 			args = { "controllerAssign", action.action },
+			clickArgs = true,
 			name = shortdescription,
 			icon = icon,
 			locked = not action.available,

@@ -9,7 +9,7 @@ require "/scripts/player/SBQ_player_notifs.lua"
 require "/scripts/any/SBQ_util.lua"
 local old = {
 	init = init or function () end,
-    update = update or function() end,
+	update = update or function() end,
 	uninit = uninit or function () end
 }
 
@@ -24,26 +24,26 @@ function init()
 	sbq.targetPosition = player.aimPosition
 	sbq.resetLounging = player.stopLounging
 	sbq.species = player.species
-    sbq.gender = player.gender
+	sbq.gender = player.gender
 	sbq.humanoid = player
-    sbq.humanoidIdentity = player.humanoidIdentity
+	sbq.humanoidIdentity = player.humanoidIdentity
 	sbq.setHumanoidIdentity = player.setHumanoidIdentity
 	sbq.getItemSlot = player.equippedItem
 	sbq.setItemSlot = player.setEquippedItem
 
 	sbq.config = root.assetJson("/sbq.config")
-    sbq.pronouns = root.assetJson("/sbqPronouns.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	local speciesConfig = root.speciesConfig(player.species())
 	local humanoidConfig = player.humanoidConfig()
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
-            speciesConfig.sbqSettingsConfig or {},
+			speciesConfig.sbqSettingsConfig or {},
 			humanoidConfig.sbqSettingsConfig or {}
 		),
 		storage.sbqSettings,
-        entity.entityType()
-    )
+		entity.entityType()
+	)
 	sbq.settings:setParameterSettings()
 	sbq.settings:setMessageHandlers(true)
 
@@ -52,14 +52,14 @@ function init()
 
 	sbq.upgrades:apply(sbq.settings)
 	sbq.settings:setPublicSettings()
-    sbq.settings:setStatSettings()
+	sbq.settings:setStatSettings()
 
-    humanoidConfig = player.humanoidConfig()
+	humanoidConfig = player.humanoidConfig()
 
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then
-        if player.getHumanoidParameter("sbqEnabled") then
-            if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
+		if player.getHumanoidParameter("sbqEnabled") then
+			if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
 				sbq.init(humanoidConfig.sbqConfig)
 			else
 				sbq.uninit()
@@ -71,9 +71,9 @@ function init()
 	else
 		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 	end
-    sbq.notifyPlayer()
+	sbq.notifyPlayer()
 
-    message.setHandler({ name = "/sbq", localOnly = true }, function(args)
+	message.setHandler({ name = "/sbq", localOnly = true }, function(args)
 		local parsed = {chat.parseArguments(args)}
 		local command = table.remove(parsed, 1)
 		if not command then
@@ -165,6 +165,7 @@ function init()
 			sourceRadius = -1,
 			options = options,
 			default = {
+				onDown = true,
 				messageTarget = id,
 				message = "sbqRequestAction",
 				close = true,
@@ -204,6 +205,7 @@ function init()
 			sourceRadius = sourceRadius,
 			options = options,
 			default = {
+				onDown = true,
 				messageTarget = id,
 				description = description,
 				message = "sbqPromptResponse",
@@ -234,6 +236,9 @@ function init()
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			sourceRadius = sourceRadius,
 			options = sbq.buildActionRequestOptions(id, actionList),
+			default = {
+				onDown = true,
+			},
 			cancel = {
 				args = false,
 				message = false,
@@ -266,6 +271,9 @@ function init()
 			sourceRadius = sourceRadius,
 			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
 			options = options,
+			default = {
+				onDown = true,
+			},
 			cancel = {
 				args = false,
 				message = false,
@@ -336,7 +344,7 @@ function uninit()
 	old.uninit()
 	storage = storage or {}
 	storage.sbqSettings = sbq.settings:save()
-    storage.sbqUpgrades = sbq.upgrades:save()
+	storage.sbqUpgrades = sbq.upgrades:save()
 	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
 	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
 end
@@ -437,8 +445,8 @@ end
 function sbqCommands.help(name)
 	if not name then name = "help" end
 	if type(sbqCommands[name]) == "function" then
-        return "[SBQ] ".. (sbq.strings.help[name] or (":help."..name)) .. ((name == "help") and ("\n[SBQ]" .. sbq.getString(":sbqCommands")) or (""))
-    else
+		return "[SBQ] ".. (sbq.strings.help[name] or (":help."..name)) .. ((name == "help") and ("\n[SBQ]" .. sbq.getString(":sbqCommands")) or (""))
+	else
 		return "[SBQ] ".. sbq.getString(":help_invalid")
 	end
 end
@@ -456,27 +464,27 @@ function sbqCommands.escape()
 	world.sendEntityMessage(player.id(), "sbqReleased")
 end
 function sbqCommands.settieredupgrade(...)
-    sbq.upgrades:setTiered(...)
+	sbq.upgrades:setTiered(...)
 	return "[SBQ] ".. sbq.getString(":appliedTieredUpgrade"):format(...)
 end
 function sbqCommands.setupgrade(...)
-    sbq.upgrades:set(...)
+	sbq.upgrades:set(...)
 	return "[SBQ] ".. sbq.getString(":appliedUpgrade"):format(...)
 end
 function sbqCommands.setsetting(setting, value, groupName, groupId, ...)
-    sbq.settings:set(setting, value, groupName, groupId, ...)
+	sbq.settings:set(setting, value, groupName, groupId, ...)
 	if groupName and groupId then
-        return "[SBQ] ".. sbq.getString(":appliedGroupSetting"):format(setting, value, groupName, groupId)
+		return "[SBQ] ".. sbq.getString(":appliedGroupSetting"):format(setting, value, groupName, groupId)
 	else
 		return "[SBQ] ".. sbq.getString(":appliedSetting"):format(setting, value)
 	end
 end
 function sbqCommands.skiptotier(tier)
 	local result = ""
-    for i = 1, tier do
-        for _, v in ipairs(chat.command(("/sbq setTieredUpgrade candyBonus %s 1"):format(i))) do
-            result = result..v.."\n"
-        end
-    end
+	for i = 1, tier do
+		for _, v in ipairs(chat.command(("/sbq setTieredUpgrade candyBonus %s 1"):format(i))) do
+			result = result..v.."\n"
+		end
+	end
 	return result
 end
