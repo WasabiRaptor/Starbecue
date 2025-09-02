@@ -6,7 +6,7 @@ require "/scripts/actor/SBQ_actor.lua"
 require "/scripts/any/SBQ_settings.lua"
 local old = {
 	init = init or (function ()end),
-    update = update or (function ()end),
+	update = update or (function ()end),
 	uninit = uninit or (function ()end)
 }
 
@@ -21,23 +21,23 @@ function init()
 			}
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),
-        entity.entityType(),
+		entity.entityType(),
 		storage
-    )
+	)
 	sbq.settings:setMessageHandlers()
 
 	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
-    sbq.upgrades:setMessageHandlers()
+	sbq.upgrades:setMessageHandlers()
 
-    sbq.upgrades:apply(sbq.settings)
+	sbq.upgrades:apply(sbq.settings)
 	if not sbq.upgrades.storedUpgrades.candyBonus then
 		for i = 1, math.floor(math.max(monster.level(), 1)) do
 			sbq.upgrades:setTiered("candyBonus", i, 1)
 		end
 	end
 
-    sbq.settings:setPublicSettings()
-    sbq.settings:setStatSettings()
+	sbq.settings:setPublicSettings()
+	sbq.settings:setStatSettings()
 
 	sbq.say = monster.say
 	sbq.sayPortrait = monster.sayPortrait
@@ -46,11 +46,24 @@ function init()
 	sbq.loungingIn = monster.loungingIn
 	sbq.resetLounging = monster.resetLounging
 
+	message.setHandler("sbqHideDeathParticles", function()
+		monster.setDeathParticleBurst()
+	end)
+end
+
+function update(dt)
+	sbq.checkRPCsFinished(dt)
+	sbq.checkTimers(dt)
+	if status.statPositive("sbqIsPrey") then
+		sbq.struggleBehavior(dt)
+	end
+	old.update(dt)
+
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData
-		and not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing)
+		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
-		and not sbq.loungingIn()
+		and (not sbq.loungingIn())
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
@@ -73,21 +86,11 @@ function init()
 	end
 end
 
-function update(dt)
-    sbq.checkRPCsFinished(dt)
-    sbq.checkTimers(dt)
-    if status.statPositive("sbqIsPrey") then
-        sbq.struggleBehavior(dt)
-    end
-
-    old.update(dt)
-end
-
 function uninit()
-    old.uninit()
+	old.uninit()
 	storage = storage or {}
 	storage.sbqSettings = sbq.settings:save()
-    storage.sbqUpgrades = sbq.upgrades:save()
+	storage.sbqUpgrades = sbq.upgrades:save()
 end
 
 function sbq.parentEntity()

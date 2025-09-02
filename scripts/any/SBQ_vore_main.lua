@@ -66,6 +66,9 @@ function sbq.init(sbqConfig)
 	message.setHandler("sbqDumpOccupants", function (_,_, ...)
 		return sbq.dumpOccupants(...)
 	end)
+	message.setHandler("sbqReleaseOccupant", function (_,_, ...)
+		return sbq.releaseOccupant(...)
+	end)
 
 	sbq.reloadVoreConfig(sbqConfig)
 end
@@ -131,11 +134,11 @@ function sbq.reloadVoreConfig(sbqConfig)
 	end
 
 	-- load config from species or config input, such as from a tech transformation
-    sbq.voreConfig = {}
-    for _, v in ipairs(sbqConfig.includes) do
-        sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
-    end
-    sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
+	sbq.voreConfig = {}
+	for _, v in ipairs(sbqConfig.includes) do
+		sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
+	end
+	sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
 	-- sbq.debugLogInfo(sbq.voreConfig, 2)
 	-- load scripts
 	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
@@ -183,7 +186,7 @@ function sbq.reloadVoreConfig(sbqConfig)
 			location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
 			if location.subLocations then
 				for k, _ in pairs(location.subLocations) do
-                    local location = sbq.SpeciesScript:getLocation(locationName, k)
+					local location = sbq.SpeciesScript:getLocation(locationName, k)
 					if location then
 						location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
 					end
@@ -256,6 +259,10 @@ function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not sbq.SpeciesScript.active then return false end
 	return sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 end
+function sbq.releaseOccupant(id, ...)
+	if not sbq.SpeciesScript.active then return false end
+	return sbq.SpeciesScript:releaseOccupant(id, ...)
+end
 
 function sbq.refreshInfusion()
 	sbq.SpeciesScript:refreshInfusion()
@@ -294,6 +301,10 @@ end
 function sbq._SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 	if not self.state then return false end
 	return self.state:dumpOccupants(location, subLocation, digestType, ...)
+end
+function sbq._SpeciesScript:releaseOccupant(id, ...)
+	if not self.state then return false end
+	return self.state:releaseOccupant(id, ...)
 end
 
 function sbq._SpeciesScript:doAnimations(...)
@@ -407,7 +418,8 @@ end
 function sbq._State:recieveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
 		local eid = newOccupant.entityId
-		if eid and sbq.Occupants.insertOccupant(newOccupant) then
+		local success, reason = sbq.Occupants.insertOccupant(newOccupant)
+		if success then
 			sbq.Occupants.queueHudRefresh = true
 			local occupant = sbq.Occupants.entityId[tostring(eid)]
 			if occupant and occupant.flags.infuseType and occupant.flags.infused then
@@ -423,7 +435,7 @@ function sbq._State:recieveOccupants(newOccupants)
 				end)
 			end
 		else
-			sbq.logInfo(("Could not recieve Occupant: %s %s"):format(eid, sbq.entityName(eid)))
+			sbq.logWarn(("Could not recieve Occupant: %s %s %s"):format(eid, sbq.entityName(eid), reason))
 		end
 	end
 	return true
@@ -462,7 +474,13 @@ function sbq._State:dumpOccupants(location, subLocation, digestType)
 	end
 	return dump
 end
-
+function sbq._State:releaseOccupant(id)
+	local occupant = sbq.Occupants.entityId[tostring(id)]
+	if occupant then
+		occupant:remove("released")
+	end
+	return true
+end
 function sbq._State:getLocation(locationName, subLocation)
 	local location = self.locations[locationName]
 	if not location then return end
@@ -856,7 +874,7 @@ end
 
 -- Location handling
 function sbq._SpeciesScript:addLocation(name, config)
-    local infuseLocation = {}
+	local infuseLocation = {}
 	if not sbq.config.locations[name] then
 		sbq.logError("Location '%s' must be defined in '/sbq.config:locations' as well.")
 	end
@@ -1064,14 +1082,14 @@ function sbq._Location:markSizeDirty(force)
 	self.occupancy.sizeDirty = true
 	self.occupancy.forceSizeRefresh = force
 	if self.subKey then
-        local parentLocation = sbq.SpeciesScript:getLocation(self.key)
+		local parentLocation = sbq.SpeciesScript:getLocation(self.key)
 		if parentLocation then
 			parentLocation.occupancy.sizeDirty = true
 			parentLocation.occupancy.forceSizeRefresh = force
 		end
 	else
 		for k, v in pairs(self.subLocations or {}) do
-            local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+			local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
 			if subLocation then
 				subLocation.occupancy.sizeDirty = true
 				subLocation.occupancy.forceSizeRefresh = force
@@ -1079,14 +1097,14 @@ function sbq._Location:markSizeDirty(force)
 		end
 	end
 	for _, sharedName in ipairs(self.addSize or {}) do
-        local location = sbq.SpeciesScript:getLocation(sharedName)
+		local location = sbq.SpeciesScript:getLocation(sharedName)
 		if location then
 			location.occupancy.sizeDirty = true
 			location.occupancy.forceSizeRefresh = force
 		end
 	end
 	for _, sharedName in ipairs(self.addCount or {}) do
-        local location = sbq.SpeciesScript:getLocation(sharedName)
+		local location = sbq.SpeciesScript:getLocation(sharedName)
 		if location then
 			location.occupancy.sizeDirty = true
 			location.occupancy.forceSizeRefresh = force
@@ -1095,7 +1113,7 @@ function sbq._Location:markSizeDirty(force)
 end
 function sbq._Location:markSettingsDirty()
 	self:markSizeDirty()
-    local parentLocation = sbq.SpeciesScript:getLocation(self.key)
+	local parentLocation = sbq.SpeciesScript:getLocation(self.key)
 	if parentLocation then
 		parentLocation.occupancy.settingsDirty = true
 		for k, v in pairs(self.subLocations or {}) do
@@ -1109,7 +1127,7 @@ function sbq._Location:updateOccupancy(dt)
 	if self.occupancy.working then return end -- prevents stack overflow from potential dependency loops
 	if not self.subKey then
 		for k, v in pairs(self.subLocations or {}) do
-            local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+			local subLocation = sbq.SpeciesScript:getLocation(self.key, k)
 			if subLocation then
 				subLocation:updateOccupancy(dt)
 			end
@@ -1176,20 +1194,20 @@ function sbq._Location:updateOccupancy(dt)
 		end
 
 		for _, name in ipairs(self.addSize or {}) do
-            local location = sbq.SpeciesScript:getLocation(name)
+			local location = sbq.SpeciesScript:getLocation(name)
 			if location then
 				location:updateOccupancy(0)
 				self.occupancy.addedSize = self.occupancy.addedSize + location.occupancy.size
-            else
+			else
 				sbq.debugLogWarn(("'%s' Attempting to add size from '%s' which does not exist."):format(self.key, name))
 			end
 		end
 		for _, name in ipairs(self.addCount or {}) do
-            local location = sbq.SpeciesScript:getLocation(name)
+			local location = sbq.SpeciesScript:getLocation(name)
 			if location then
 				location:updateOccupancy(0)
-                self.occupancy.addedCount = self.occupancy.addedCount + location.occupancy.count
-            else
+				self.occupancy.addedCount = self.occupancy.addedCount + location.occupancy.count
+			else
 				sbq.debugLogWarn(("'%s' Attempting to add count from '%s' which does not exist."):format(self.key, name))
 			end
 		end
@@ -1236,7 +1254,7 @@ function sbq._Location:updateOccupancy(dt)
 			self:doSizeChangeAnims(prevVisualSize, prevVisualCount)
 			if self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
-                    subLocation = sbq.SpeciesScript:getLocation(self.key, k)
+					subLocation = sbq.SpeciesScript:getLocation(self.key, k)
 					if subLocation then
 						subLocation.occupancy.visualSize = self.occupancy.visualSize
 						subLocation.occupancy.visualCount = self.occupancy.visualCount
@@ -1260,13 +1278,13 @@ function sbq._Location:updateOccupancy(dt)
 		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or {0}) then self.occupancy.interpolating = false end
 		animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
-    if self.occupancy.infuseData then
+	if self.occupancy.infuseData then
 		local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
 		if (fade == "fe") then -- so theres no accidental glowy
 			fade = "ff"
 		end
 		animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
-    else
+	else
 		animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=00000000")
 	end
 end
@@ -1348,7 +1366,7 @@ function sbq._Location:refreshStruggleDirection(id)
 		self.occupancy.struggleVec = vec2.add(self.occupancy.struggleVec, occupant.struggleVec)
 	end
 	for _, locationName in ipairs(self.sharedWith or {}) do
-        local location = sbq.SpeciesScript:getLocation(locationName)
+		local location = sbq.SpeciesScript:getLocation(locationName)
 		if location then
 			for _, occupant in ipairs(location.occupancy.list) do
 				occupant:checkStruggleDirection(0)
@@ -1493,14 +1511,14 @@ end
 
 function sbq.Occupants.insertOccupant(newOccupant)
 	-- sanity check
-	if not newOccupant.entityId then return false end
+	if not newOccupant.entityId then return false, "invalidEntityId" end
 	-- check if we already have them
 	local occupant = sbq.Occupants.entityId[tostring(newOccupant.entityId)]
 	if occupant then
 		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 		occupant:refreshLocation()
 		-- assume data being recieved is out of date and just use current
-		return false
+		return false, "alreadyThere"
 	end
 
 	local seat
@@ -1511,9 +1529,9 @@ function sbq.Occupants.insertOccupant(newOccupant)
 			break
 		end
 	end
-	if not seat then return false end
+	if not seat then return false, "noSlots" end
 	local location = sbq.SpeciesScript:getLocation(newOccupant.location, newOccupant.subLocation)
-	if not location then return false end
+	if not location then return false, "invalidLocation" end
 	if newOccupant.flags.digesting then
 		newOccupant.flags.digesting = false
 		newOccupant.flags.digested = true
@@ -1539,7 +1557,7 @@ function sbq.Occupants.insertOccupant(newOccupant)
 		struggleCount = 0,
 		struggleVec = {0,0},
 		locationStore = {},
-        persistentStatusEffects = jarray(),
+		persistentStatusEffects = jarray(),
 		controls = {
 			Left = { last = false, time = 0 },
 			Right = { last = false, time = 0 },
@@ -1550,7 +1568,7 @@ function sbq.Occupants.insertOccupant(newOccupant)
 			Special1 = { last = false, time = 0 },
 			Special2 = { last = false, time = 0 },
 			Special3 = { last = false, time = 0 },
-            Walk = { last = false, time = 0 }, -- shift
+			Walk = { last = false, time = 0 }, -- shift
 			-- Interact = { last = false, time = 0 }
 		}
 	}, newOccupant, {
@@ -1639,7 +1657,7 @@ end
 
 function sbq.Occupants.update(dt)
 	for name, _ in pairs(sbq.SpeciesScript.locations) do
-        local location = sbq.SpeciesScript:getLocation(name)
+		local location = sbq.SpeciesScript:getLocation(name)
 		if location then
 			location:updateOccupancy(dt)
 			location:update(dt)
@@ -1649,10 +1667,10 @@ function sbq.Occupants.update(dt)
 		occupant:update(dt)
 	end
 	for name, _ in pairs(sbq.SpeciesScript.locations) do
-        local location = sbq.SpeciesScript:getLocation(name)
+		local location = sbq.SpeciesScript:getLocation(name)
 		if location then
 			for k, _ in pairs(location.subLocations or {}) do
-                local subLocation = sbq.SpeciesScript:getLocation(name, k)
+				local subLocation = sbq.SpeciesScript:getLocation(name, k)
 				if subLocation then
 					subLocation.occupancy.settingsDirty = false
 				end
@@ -1712,8 +1730,11 @@ end
 
 function sbq._Occupant:update(dt)
 	local location = self:getLocation()
-	-- sbq.logInfo(world.entity(sbq.entityId()):loungeAnchor(self:getLoungeIndex()))
-	if (not location) or (not world.entityExists(self.entityId)) or (sbq.loungingIn() == self.entityId) then return self:remove("noLongerLounging") end
+	if not location then return self:remove("invalidLocation") end
+	if not world.entityExists(self.entityId) then return self:remove("entityDoesNotExist") end
+	if sbq.loungingIn() == self.entityId then return self:remove("recursiveLounge") end
+	-- if (loungeable.entityLoungingIn(self.seat) ~= self.entityId) and not self.flags.newOccupant then return self:remove("noLongerLounging") end
+
 	if location.occupancy.settingsDirty then self:refreshLocation() end
 	if not (animator.animationStateTimer(self.seat .. "State") >= animator.stateCycle(self.seat .. "State")) then
 		if self.flags.releasing and self:animProperty("release") then return self:remove("releasing") end

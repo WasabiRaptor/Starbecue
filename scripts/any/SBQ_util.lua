@@ -332,7 +332,7 @@ end
 
 function sbq.createdDateString(time)
 	return os.date(sbq.getString(":createdOnDate"), time or os.time()) ..
-		" v" .. root.assetSourceMetadata("Starbecue").version
+		" v" .. root.assetSourceMetadata(root.assetOrigin("/sbq.config")).version
 end
 
 function sbq.createdDate(time) -- removes hour/min/sec for the sake of item stacking easier without using the collapse

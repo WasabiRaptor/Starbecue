@@ -22,7 +22,8 @@ function init()
 	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
 	sbq.targetPosition = player.aimPosition
-	sbq.resetLounging = player.stopLounging
+	sbq.loungingIn = player.loungingIn
+	sbq.resetLounging = player.resetLounging
 	sbq.species = player.species
 	sbq.gender = player.gender
 	sbq.humanoid = player
@@ -287,6 +288,9 @@ function init()
 	message.setHandler("sbqCustomizeEntity", function(_, _, id)
 		sbq.customizeEntity(id)
 	end)
+    message.setHandler("sbqHideDeathParticles", function()
+		player.setDeathParticleBurst()
+	end)
 
 	sbq.timer("preyMissingWaitPrompt", 60)
 end
@@ -301,9 +305,9 @@ function update(dt)
 
 	local occupantData = status.statusProperty("sbqOccupantData")
 	if occupantData
-		and not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing)
+		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
-		and not sbq.loungingIn()
+		and (not sbq.loungingIn())
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
@@ -464,6 +468,9 @@ function sbqCommands.config()
 	return "[SBQ] ".. sbq.getString(":openedConfig")
 end
 function sbqCommands.escape()
+	if player.loungingIn() then
+		world.sendEntityMessage(player.loungingIn(), "sbqReleaseOccupant", player.id())
+	end
 	world.sendEntityMessage(player.id(), "sbqReleased")
 end
 function sbqCommands.settieredupgrade(...)

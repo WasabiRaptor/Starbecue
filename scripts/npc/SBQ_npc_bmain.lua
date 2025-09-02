@@ -23,6 +23,7 @@ function init()
 	old.init()
 
 	sbq.targetPosition = npc.aimPosition
+	sbq.loungingIn = npc.loungingIn
 	sbq.resetLounging = npc.resetLounging
 	sbq.species = npc.species
 	sbq.gender = npc.gender
@@ -80,7 +81,11 @@ function init()
 	message.setHandler("sbqUpdateCosmeticSlot", function(_, _, slot, item)
 		setNpcItemSlot(slot, item)
 		tenant.backup()
+    end)
+	message.setHandler("sbqHideDeathParticles", function()
+		npc.setDeathParticleBurst()
 	end)
+
 end
 
 function update(dt)
@@ -94,9 +99,9 @@ function update(dt)
 
     local occupantData = status.statusProperty("sbqOccupantData")
     if occupantData
-        and not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing)
+        and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
         and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
-        and not sbq.loungingIn()
+        and (not sbq.loungingIn())
     then
         local eid = world.uniqueEntityId(occupantData.predUUID)
         if eid then

@@ -49,10 +49,7 @@ end
 function onExpire()
 	if self.digested then sendDigest() end
 	if (config.getParameter("fatal") and self.digested) and not status.statPositive("sbq_"..(config.getParameter("digestType") or "acidDigest").."FatalImmune") then
-		local entityType = world.entityType(entity.id())
-		if entityType == "npc" or entityType == "monster" then
-			world.callScriptedEntity(entity.id(), entityType..".setDeathParticleBurst")
-		end
+		world.sendEntityMessage(entity.id(), "sbqHideDeathParticles")
 		status.modifyResourcePercentage("health", -2)
 	end
 end
@@ -91,18 +88,15 @@ end
 
 function sendDigest()
 	if not self.digestSent then
-		local item = config.getParameter("itemDrop")
-		sbq.addRPC(world.sendEntityMessage(entity.id(), "sbqGetCard"), function(card)
-			card.name = item
-			item = card
-		end)
+		local item = sb.jsonMerge(world.sendEntityMessage(entity.id(), "sbqGetCard"):result() or {}, config.getParameter("itemDrop") or false)
+
 		self.digestSent = true
 		sbq.addRPC(world.sendEntityMessage(
 			effect.sourceEntity(),
 			"sbqQueueAction",
 			config.getParameter("digestedAction") or "digested",
 			entity.id(),
-			(item ~= nil) and (((type(item) == "table") and item) or {name = item, parameters = {}}),
+			item,
 			config.getParameter("digestType"),
 			status.statPositive("sbq_"..config.getParameter("digestType").."DropsAllow")
 		), function (recieved)
