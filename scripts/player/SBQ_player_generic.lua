@@ -373,14 +373,15 @@ function sbq.buildActionRequestOptions(id, actionList)
 end
 
 function sbq.customizeEntity(eid)
-	sbq.addRPC(
-		player.characterCreation({
-			speciesIdentites = world.entity(eid):statusProperty("sbqSpeciesIdentities"),
-			currentSpecies =
-				world.entitySpecies(eid)
-		}), function(response)
-			world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
-		end)
+	interface.queueMessage("This will be re-implemented later")
+	-- sbq.addRPC(
+	-- 	player.characterCreation({
+	-- 		speciesIdentites = world.entity(eid):statusProperty("sbqSpeciesIdentities"),
+	-- 		currentSpecies =
+	-- 			world.entitySpecies(eid)
+	-- 	}), function(response)
+	-- 		world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
+	-- 	end)
 end
 
 function sbq.collapseEssenceStacks()
