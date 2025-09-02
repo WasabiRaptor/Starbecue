@@ -4,9 +4,10 @@ local _Settings = {
 sbq._Settings = _Settings
 _Settings.__index = _Settings
 
-function _Settings.new(settingsConfig, storedSettings, entityType)
+function _Settings.new(settingsConfig, storedSettings, entityType, storage)
     local self = {}
     setmetatable(self, _Settings)
+    self.storage = storage
     self.settingsConfig = settingsConfig
     self.overrideSettings = sb.jsonMerge(
         (settingsConfig.overrideSettings or {}).any or {},
@@ -241,16 +242,32 @@ function _Settings:set(setting, value, groupName, groupId)
     end
 end
 function _Settings.updated:any(oldValue, setting, groupName, groupId)
-
+    if self.storage then
+        self.storage.sbqSettings = self:save()
+    end
     -- local parent, recruitUuid = sbq.parentEntity()
 	-- if parent then
 	-- 	world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), setting, value)
     -- end
-
+    if sbq.config.publicSettings[setting] then
+        self.updated.publicSetting(self, oldValue, setting, groupName, groupId)
+    end
+    if sbq.config.statSettings[setting] then
+        self.updated.statSetting(self, oldValue, setting, groupName, groupId)
+    end
+    if sbq.config.parameterSettings[setting] then
+        self.updated.parameterSetting(self, oldValue, setting, groupName, groupId)
+    end
 
     if groupName == "locations" then
-        _Settings.updated.locationSetting(self, oldValue, setting, groupName, groupId)
+        self.updated.locationSetting(self, oldValue, setting, groupName, groupId)
     end
+end
+function _Settings.updated:publicSetting(oldValue, setting, groupName, groupId)
+    self:setPublicSettings()
+end
+function _Settings.updated:statSetting(oldValue, setting, groupName, groupId)
+    self:setStatSettings()
 end
 
 function _Settings.updated:locationSetting(oldValue, setting, groupName, groupId)
@@ -264,14 +281,7 @@ end
 
 function _Settings.updated:parameterSetting(oldValue, setting, ...)
     self:setParameterSettings()
-    self.updated.any(self, oldValue, setting, ...)
 end
-_Settings.updated.occupantSlots = _Settings.updated.parameterSetting
-_Settings.updated.bellySelect = _Settings.updated.parameterSetting
-_Settings.updated.cockSelect = _Settings.updated.parameterSetting
-_Settings.updated.ballsSelect = _Settings.updated.parameterSetting
-_Settings.updated.pussySelect = _Settings.updated.parameterSetting
-_Settings.updated.breastsSelect = _Settings.updated.parameterSetting
 
 function _Settings:randomize(randomizeSettings, seed)
     math.randomseed(seed)
@@ -338,8 +348,8 @@ end
 function _Settings:setParameterSettings()
     if not sbq.humanoid then return end
     local refresh = false
-    for parameter, v in pairs(sbq.config.parameterSettings) do
-        local value = sbq.query(self.read, v)
+    for setting, parameter in pairs(sbq.config.parameterSettings) do
+        local value = self:get(setting)
         if sbq.humanoid.getHumanoidParameter(parameter) ~= value then
             sbq.humanoid.setHumanoidParameter(parameter, value)
             refresh = true
@@ -406,8 +416,9 @@ local _Upgrades = {
 sbq._Upgrades = _Upgrades
 _Upgrades.__index = _Upgrades
 
-function _Upgrades.new(storedUpgrades)
+function _Upgrades.new(storedUpgrades, storage)
     local self = {}
+    self.storage = storage
     setmetatable(self, {__index = _Upgrades})
     if not storedUpgrades then
         storedUpgrades = root.makeCurrentVersionedJson("sbqUpgrades", {})
@@ -469,6 +480,9 @@ function _Upgrades:get(name)
     return self.values[name]
 end
 function _Upgrades.updated:any(name, oldValue)
+    if self.storage then
+        self.storage.sbqUpgrades = self:save()
+    end
     if not self.applyTo then return end
     -- do things here
 end

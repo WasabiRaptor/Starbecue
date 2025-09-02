@@ -27,7 +27,8 @@ function refreshHumanoidParameters()
 			}) or {}
 		),
 		sbq.settings:save(),
-		entity.entityType()
+        entity.entityType(),
+		storage
     )
     if sbq.settings:setParameterSettings() then return end
     sbq.settings:setMessageHandlers(player and true)

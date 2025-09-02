@@ -16,6 +16,15 @@ require("/scripts/any/SBQ_RPC_handling.lua")
 require("/scripts/any/SBQ_util.lua")
 require("/scripts/any/SBQ_settings.lua")
 
+local _Settings = sbq._Settings
+_Settings.updated = {}
+function _Settings.updated.any()
+end
+local _Upgrades = sbq._Upgrades
+_Upgrades.updated = {}
+function _Upgrades.updated.any()
+end
+
 function sbq.playErrorSound()
 	pane.playSound("/sfx/interface/clickon_error.ogg")
 end

@@ -13,7 +13,8 @@ local old = {
     update = update,
 	uninit = uninit,
 	tenant_setNpcType = tenant.setNpcType,
-	recruitable_generateRecruitInfo = recruitable.generateRecruitInfo,
+    recruitable_generateRecruitInfo = recruitable.generateRecruitInfo,
+	preservedStorage = preservedStorage or function () return {} end
 }
 
 local convertBackType
@@ -48,12 +49,13 @@ function init()
 			}
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),
-		entity.entityType()
+        entity.entityType(),
+		storage
     )
 	sbq.settings:setParameterSettings()
 	sbq.settings:setMessageHandlers()
 
-    sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"))
+    sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
     sbq.upgrades:setMessageHandlers()
 
     sbq.upgrades:apply(sbq.settings)
@@ -120,9 +122,15 @@ function update(dt)
 end
 function uninit()
     old.uninit()
-	storage = storage or {}
-	storage.sbqSettings = sbq.settings:save()
+    storage.sbqSettings = sbq.settings:save()
     storage.sbqUpgrades = sbq.upgrades:save()
+end
+
+function preservedStorage()
+    local ps = old.preservedStorage()
+    ps.sbqSettings = sbq.settings:save()
+    ps.sbqUpgrades = sbq.upgrades:save()
+	return ps
 end
 
 function sbq.tenant_setNpcType(npcType)
