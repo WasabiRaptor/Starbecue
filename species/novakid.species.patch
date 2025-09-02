@@ -1,12 +1,4 @@
 {
-	"animationCustom": [
-		"/humanoid/any/humanoidPred.animation",
-		{
-			"globalTagDefaults": {
-				"bellyImage": "belly.png"
-			}
-		}
-	],
 	"baseColorPalette": {
 		"primary": [
 			"f6b919",
@@ -39,7 +31,26 @@
 			"navelVisible": false
 		}
 	},
-	"sbqPartImages": { // paths local to the species' folder used to generate images with replaced colors to match the species
+	"sbqPartImages": {
+		"sbq/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+
+
+		// paths local to the species' folder used to generate images with replaced colors to match the species
 		// these same files can be manually created at the respective paths in the species' folder and have their entries removed here
 		// however then the sprites will not be automatically updated if the base sprites are, only manually cra
 		"sbq/nickit_tail.png" : {
@@ -149,45 +160,15 @@
 			]
 		},
 
-		"sbq/belly.png": {
-			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
-			"remapDirectives": [
-				"?replace;00adba=bc1002", // replaces the navel pixel color with one of the shading colors
-				[
-					"primary",
-					"primary"
-				]
-			]
-		},
+		// "sbq/belly.png": {},
 		"sbq/belly_noNavel.png": {
-			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
-			"remapDirectives": [
-				"?replace;00adba=eb3629", // replaces the navel pixel's color with the main body color, effectively getting rid of it.
-				[
-					"primary",
-					"primary"
-				]
-			]
+			"sourceImage": "sbq/belly.png"
 		},
 		"sbq/infused/belly.png": {
-			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
-			"remapDirectives": [
-				"?replace;00adba=bc1002", // replaces the navel pixel color with one of the shading colors
-				[
-					"primary",
-					"primary"
-				]
-			]
+			"sourceImage": "sbq/belly.png"
 		},
 		"sbq/infused/belly_noNavel.png": {
-			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
-			"remapDirectives": [
-				"?replace;00adba=eb3629", // replaces the navel pixel's color with the main body color, effectively getting rid of it.
-				[
-					"primary",
-					"primary"
-				]
-			]
+			"sourceImage": "sbq/belly.png"
 		},
 		"sbq/cock.png": {
 			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",

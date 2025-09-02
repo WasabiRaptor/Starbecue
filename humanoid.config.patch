@@ -42,33 +42,31 @@
 			"nickit": {
 				"includes": [
 					"/humanoid/any/sbqModules/nickit_tail/sbqModule.config"
-				]
+				],
+				"animations" : [{"partTagDefaults" : {"body" : {"humanoidPath" : "sbq/"}}}]
 			},
 			"flareon": {
 				"includes": [
 					"/humanoid/any/sbqModules/flareon_tail.sbqModule.config"
-				]
+				],
+				"animations" : [{"partTagDefaults" : {"body" : {"humanoidPath" : "sbq/"}}}]
 			},
 			"vaporeon": {
 				"includes": [
 					"/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config"
-				]
+				],
+				"animations" : [{"partTagDefaults" : {"body" : {"humanoidPath" : "sbq/"}}}]
 			},
 			"luxio": {
 				"includes": [
 					"/humanoid/any/sbqModules/luxio_tail.sbqModule.config"
-				]
+				],
+				"animations" : [{"partTagDefaults" : {"body" : {"humanoidPath" : "sbq/"}}}]
 			}
 		}
 	},
 	"sbqConfig" : {
-		"includes" : [
-			"/humanoid/any/sbqModules/base/sbqModule.config",
-			"/humanoid/any/sbqModules/grab/sbqModule.config"
-		],
-		"animations" : [
-			"/humanoid/any/sbqModules/humanoidBase/humanoidBase.animation"
-		]
+		"includes" : ["/humanoid/any/sbqModules/humanoidBase/sbqModule.config"]
 	},
 	"sbqIdentityAnimationCustom" : {
 		"personalityIdle" : {

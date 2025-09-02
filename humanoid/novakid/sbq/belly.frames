@@ -1,0 +1,91 @@
+{
+	"frameGrid" : {
+		"size" : [43, 43],
+		"dimensions" : [8, 13],
+		"names" : [
+			[ "0.0625-expand", "0.125-expand", "0.1875-expand", "0.25-expand", "0.3125-expand", "0.375-expand", "0.4375-expand", "0.5-expand"],
+
+			[ "0.25-s_up_press.1", "0.25-s_up_press.2", "0.25-s_up_hold.1", "0.25-s_up_release.1", "0.25-s_down_press.1", "0.25-s_down_press.2", "0.25-s_down_hold.1", "0.25-s_down_release.1"],
+			[ "0.25-s_back_press.1", "0.25-s_back_press.2", "0.25-s_back_hold.1", "0.25-s_back_release.1", "0.25-s_front_press.1", "0.25-s_front_press.2", "0.25-s_front_hold.1", "0.25-s_front_release.1"],
+
+			[ "0.5-s_up_press.1", "0.5-s_up_press.2", "0.5-s_up_hold.1", "0.5-s_up_release.1", "0.5-s_down_press.1", "0.5-s_down_press.2", "0.5-s_down_hold.1", "0.5-s_down_release.1"],
+			[ "0.5-s_back_press.1", "0.5-s_back_press.2", "0.5-s_back_hold.1", "0.5-s_back_release.1", "0.5-s_front_press.1", "0.5-s_front_press.2", "0.5-s_front_hold.1", "0.5-s_front_release.1"],
+
+			[ "0.5625-expand", "0.625-expand", "0.6875-expand", "0.75-expand", "0.8125-expand", "0.875-expand", "0.9375-expand", "1-expand"],
+
+			[ "0.75-s_up_press.1", "0.75-s_up_press.2", "0.75-s_up_hold.1", "0.75-s_up_release.1", "0.75-s_down_press.1", "0.75-s_down_press.2", "0.75-s_down_hold.1", "0.75-s_down_release.1"],
+			[ "0.75-s_back_press.1", "0.75-s_back_press.2", "0.75-s_back_hold.1", "0.75-s_back_release.1", "0.75-s_front_press.1", "0.75-s_front_press.2", "0.75-s_front_hold.1", "0.75-s_front_release.1"],
+
+			[ "1-s_up_press.1", "1-s_up_press.2", "1-s_up_hold.1", "1-s_up_release.1", "1-s_down_press.1", "1-s_down_press.2", "1-s_down_hold.1", "1-s_down_release.1"],
+			[ "1-s_back_press.1", "1-s_back_press.2", "1-s_back_hold.1", "1-s_back_release.1", "1-s_front_press.1", "1-s_front_press.2", "1-s_front_hold.1", "1-s_front_release.1"],
+
+			[ "1.125-expand", "1.25-expand", "1.375-expand", "1.5-expand", "1.625-expand", "1.75-expand", "1.875-expand", "2-expand"],
+
+			[ "2-s_up_press.1", "2-s_up_press.2", "2-s_up_hold.1", "2-s_up_release.1", "2-s_down_press.1", "2-s_down_press.2", "2-s_down_hold.1", "2-s_down_release.1"],
+			[ "2-s_back_press.1", "2-s_back_press.2", "2-s_back_hold.1", "2-s_back_release.1", "2-s_front_press.1", "2-s_front_press.2", "2-s_front_hold.1", "2-s_front_release.1"]
+
+		]
+	},
+	"aliases" : {
+		"empty" : "0.0625-expand",
+
+		"0-expand" : "0.0625-expand",
+
+		"0-idle.1" : "0-expand",
+
+		"0-s_up_press.1" : "0-idle.1",
+		"0-s_up_press.2" : "0-idle.1",
+		"0-s_up_hold.1" : "0-idle.1",
+		"0-s_up_release.1" : "0-idle.1",
+		"0-s_up_release.2" : "0-idle.1",
+
+		"0-s_down_press.1" : "0-idle.1",
+		"0-s_down_press.2" : "0-idle.1",
+		"0-s_down_hold.1" : "0-idle.1",
+		"0-s_down_release.1" : "0-idle.1",
+		"0-s_down_release.2" : "0-idle.1",
+
+		"0-s_front_press.1" : "0-idle.1",
+		"0-s_front_press.2" : "0-idle.1",
+		"0-s_front_hold.1" : "0-idle.1",
+		"0-s_front_release.1" : "0-idle.1",
+		"0-s_front_release.2" : "0-idle.1",
+
+		"0-s_back_press.1" : "0-idle.1",
+		"0-s_back_press.2" : "0-idle.1",
+		"0-s_back_hold.1" : "0-idle.1",
+		"0-s_back_release.1" : "0-idle.1",
+		"0-s_back_release.2" : "0-idle.1",
+
+		"0.25-idle.1" : "0.25-expand",
+
+		"0.25-s_up_release.2" : "0.25-idle.1",
+		"0.25-s_down_release.2" : "0.25-idle.1",
+		"0.25-s_front_release.2" : "0.25-idle.1",
+		"0.25-s_back_release.2" : "0.25-idle.1",
+
+		"0.5-idle.1" : "0.5-expand",
+		"0.5-s_up_release.2" : "0.5-idle.1",
+		"0.5-s_down_release.2" : "0.5-idle.1",
+		"0.5-s_front_release.2" : "0.5-idle.1",
+		"0.5-s_back_release.2" : "0.5-idle.1",
+
+		"0.75-idle.1" : "0.75-expand",
+		"0.75-s_up_release.2" : "0.75-idle.1",
+		"0.75-s_down_release.2" : "0.75-idle.1",
+		"0.75-s_front_release.2" : "0.75-idle.1",
+		"0.75-s_back_release.2" : "0.75-idle.1",
+
+		"1-idle.1" : "1-expand",
+		"1-s_up_release.2" : "1-idle.1",
+		"1-s_down_release.2" : "1-idle.1",
+		"1-s_front_release.2" : "1-idle.1",
+		"1-s_back_release.2" : "1-idle.1",
+
+		"2-idle.1" : "2-expand",
+		"2-s_up_release.2" : "2-idle.1",
+		"2-s_down_release.2" : "2-idle.1",
+		"2-s_front_release.2" : "2-idle.1",
+		"2-s_back_release.2" : "2-idle.1"
+	}
+}

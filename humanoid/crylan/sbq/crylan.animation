@@ -117,20 +117,22 @@
 
 					"idle.1": {"properties":{}},
 					"idle.2": {"properties":{
-						"bellyOffset":[["reset"],	["translate",[0.125, 0]]],
-						"crotchOffset":[["reset"],	["translate",[0.125, 0]]],
-						"tailOffset":[["reset"],	["translate",[0.125, 0]]],
-						"chestOffset":[["reset"],	["translate",[0, 0.125]]]
+						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
 					}},
 					"idle.3": {"properties":{
 						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[-0.125, 0]]],
 						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
 					}},
 					"idle.4": {"properties":{
-						"bellyOffset":[["reset"],	["translate",[0.125, 0]]],
-						"crotchOffset":[["reset"],	["translate",[0.125, 0]]],
-						"tailOffset":[["reset"],	["translate",[0.125, 0]]],
-						"chestOffset":[["reset"],	["translate",[0, 0.125]]]
+						"bellyOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"crotchOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"tailOffset":[["reset"],	["translate",[-0.125, 0]]],
+						"chestOffset":[["reset"],	["translate",[-0.125, 0]]]
 					}},
 					"idle.5": {"properties":{}},
 
@@ -192,7 +194,6 @@
 					"climb.8": {"properties":{}}
 				}
 			},
-
 			"body_fgHiddenState" : {
 				"priority" : 4,
 				"default": "true",
@@ -201,6 +202,7 @@
 					"false": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			}
+
 		},
 		"parts" : {
 			"body" : {"properties" : {

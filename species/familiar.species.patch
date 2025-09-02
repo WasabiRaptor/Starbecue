@@ -1,49 +1,4 @@
 {
-	"animationCustom": [
-		"/humanoid/any/removeTail.animation",
-		"/humanoid/any/humanoidPred.animation",
-		{
-			"globalTagDefaults": {
-				"legs_fg_mask": "/humanoid/familiar/frontLegMask/malebody.png"
-			},
-			"animatedParts": {
-				"parts": {
-					"belly": {
-						"properties": {
-							"offset": [
-								0,
-								-0.125
-							]
-						}
-					},
-					"cock": {
-						"properties": {
-							"offset": [
-								0,
-								-0.125
-							]
-						}
-					},
-					"pussy": {
-						"properties": {
-							"offset": [
-								0,
-								-0.125
-							]
-						}
-					},
-					"tail": {
-						"properties": {
-							"offset": [
-								-1.3125,
-								-1.0625
-							]
-						}
-					}
-				}
-			}
-		}
-	],
 	"baseColorPalette": {
 		"primary": [
 			"606670",
@@ -87,6 +42,24 @@
 		}
 	},
 	"sbqPartImages": {
+		"sbq/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/familiar/sbq/removeTailMask_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/familiar/sbq/removeTailMask_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/familiar/sbq/legMask.png;0;0;?addmask=/humanoid/familiar/sbq/removeTailMask_male.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/familiar/sbq/legMask.png;0;0;?addmask=/humanoid/familiar/sbq/removeTailMask_female.png;0;0;"
+		},
+
+
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",

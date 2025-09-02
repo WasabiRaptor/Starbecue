@@ -1,22 +1,6 @@
 {
 	// custom animation parameters for this species
-	"animationCustom": [
-		"/humanoid/any/removeTail.animation",
-		"/humanoid/any/humanoidPred.animation", // the parts that get added to the pred
-		// the seats and animations for the prey getting eaten
-		{
-			"globalTagDefaults": { // example overrides for relevant image parts but commented out
-				// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
-				// self explainitory
-				// "bellyImage" : "/humanoid/any/sbqModules/belly/default.png",
-				// "cockImage" : "/humanoid/any/sbqModules/cock/default.png",
-				// "ballsImagePath" : "/humanoid/any/sbqVoreParts/balls",
-				// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
-				// "breastsImagePath" : "/humanoid/any/sbqVoreParts/breasts",
-				// "pussyImage" : "/humanoid/any/sbqModules/pussy/default.png"
-			}
-		}
-	],
+
 	"baseColorPalette": {
 		"primary": [
 			"951500",
@@ -54,6 +38,24 @@
 	},
 	"sbqConvertChance": 0.16,
 	"sbqPartImages": {
+		"sbq/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+
+
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",

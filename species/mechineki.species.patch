@@ -1,9 +1,4 @@
 {
-	"animationCustom": [
-		"/humanoid/any/removeTail.animation",
-		"/humanoid/any/humanoidPred.animation",
-		"/humanoid/neki/nekiBounce.animation"
-	],
 	"baseColorPalette": {
 		"primary": [
 			"c7815b",
@@ -30,6 +25,12 @@
 			"f32200"
 		]
 	},
+	"humanoidOverrides" : {
+		"sbqConfig" : {
+			"includes" : ["/humanoid.config:sbqConfig"],
+			"animations" : ["/humanoid/neki/sbq/nekiBounce.animation"]
+		}
+	},
 	"sbqSettingsConfig": {
 		"eggStatus": "sbqPlasticEgg",
 		"defaultSettings": {
@@ -37,6 +38,24 @@
 		}
 	},
 	"sbqPartImages": {
+		"sbq/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+
+
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",

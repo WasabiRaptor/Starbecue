@@ -1,23 +1,5 @@
 {
 	// custom animation parameters for this species
-	"animationCustom": [
-		"/humanoid/any/humanoidPred.animation", // the parts that get added to the pred
-		// the seats and animations for the prey getting eaten
-		{
-			"globalTagDefaults": { // example overrides for relevant image parts but commented out
-				// "legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png", // mask for legs that goes in front of belly/cock/balls
-				// self explainitory
-				// "bellyImage" : "/humanoid/any/sbqModules/belly/default.png",
-				// "cockImage" : "/humanoid/any/sbqModules/cock/default.png",
-				// "balls_frontImage" : "/humanoid/any/sbqModules/balls/default/front.png",
-				// "balls_backImage" : "/humanoid/any/sbqModules/balls/default/back.png",
-				// "breastsImage" : "/humanoid/any/sbqVoreParts/breasts.png",
-				// "breasts_frontImage" : "/humanoid/any/sbqModules/breasts/default/front.png",
-				// "breasts_backImage" : "/humanoid/any/sbqModules/breasts/default/back.png",
-				// "pussyImage" : "/humanoid/any/sbqModules/pussy/default.png"
-			}
-		}
-	],
 	"baseColorPalette": {
 		"primary": [
 			"c7815b",
@@ -57,6 +39,24 @@
 		}
 	},
 	"sbqPartImages": {
+		"sbq/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+
+
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",

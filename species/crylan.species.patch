@@ -1,57 +1,4 @@
 {
-	"animationCustom": [
-		"/humanoid/any/removeTail.animation",
-		"/humanoid/any/humanoidPred.animation",
-		{
-			"globalTagDefaults": {
-				"legs_fg_mask": "/humanoid/crylan/frontLegMask/malebody.png"
-			},
-			"animatedParts": {
-				"parts": {
-					"belly": {
-						"properties": {
-							"offset": [
-								0.125,
-								0.125
-							]
-						}
-					},
-					"breasts": {
-						"properties": {
-							"offset": [
-								0.25,
-								0.125
-							]
-						}
-					},
-					"cock": {
-						"properties": {
-							"offset": [
-								0,
-								0.125
-							]
-						}
-					},
-					"pussy": {
-						"properties": {
-							"offset": [
-								0,
-								0.125
-							]
-						}
-					},
-					"tail": {
-						"properties": {
-							"offset": [
-								-1.1875,
-								-1.0625
-							]
-						}
-					}
-				}
-			}
-		}
-	],
 	"baseColorPalette": {
 		"primary": [
 			"c7815b",
@@ -78,6 +25,25 @@
 		]
 	},
 	"humanoidOverrides" : {
+		"sbqConfig" : {
+			"includes" : [
+				"/humanoid/any/sbqModules/base/sbqModule.config",
+				"/humanoid/any/sbqModules/grab/sbqModule.config"
+			],
+			"animations" : [
+				"/humanoid/crylan/sbq/crylanBase.animation"
+			],
+			"cosmeticAnimations" : [
+				"/humanoid/any/sbqModules/humanoidBase/humanoidBase.cosmetic.animation"
+			],
+
+			"crotchHide" : {
+				"body_fgHiddenState" : ["true"]
+			},
+			"crotchShow" : {
+				"body_fgHiddenState" : ["false"]
+			}
+		},
 		"sbqIdentityAnimationCustom" : {
 			"personalityIdle" : {
 				"idle.2" : {
@@ -129,6 +95,24 @@
 		}
 	},
 	"sbqPartImages": {
+		"sbq/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/crylan/sbq/removeTailMask_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/crylan/sbq/removeTailMask_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {
+			"sourceImage" : "malebody.png",
+			"processingDirectives" : "?addmask=/humanoid/crylan/sbq/legMask.png;0;0;?addmask=/humanoid/crylan/sbq/removeTailMask_male.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {
+			"sourceImage" : "femalebody.png",
+			"processingDirectives" : "?addmask=/humanoid/crylan/sbq/legMask.png;0;0;?addmask=/humanoid/crylan/sbq/removeTailMask_female.png;0;0;"
+		},
+
+
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
