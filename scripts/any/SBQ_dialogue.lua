@@ -411,7 +411,7 @@ function dialogueProcessor.predictTime()
 	for i, v in ipairs(dialogue.result.dialogue or {}) do
 		local dismissTime = dialogueProcessor.maxOfKey(dialogue.result, "dismissTime", i)
 		local textSpeed = dialogueProcessor.maxOfKey(dialogue.result, "textSpeed", i)
-		time = time + (dismissTime or 0) + (utf8.len(sb.stripEscapeCodes(v)) * ((textSpeed or 1) * sbq.config.textSpeedMul))
+		time = time + (dismissTime or 0) + (((textSpeed or 1) * sbq.config.textSpeedMul) * utf8.len(sb.stripEscapeCodes(v)))
 	end
 	return time
 end

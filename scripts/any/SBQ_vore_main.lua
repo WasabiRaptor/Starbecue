@@ -547,7 +547,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 				dialogueProcessor.speakDialogue()
 				wait = dialogueProcessor.predictTime()
 			end
-			sbq.forceTimer("dialogueAfter", time + sbq.config.afterDialogueDelay, function ()
+			sbq.forceTimer("dialogueAfter", time + wait + sbq.config.afterDialogueDelay, function ()
 				if sbq.settings.read.actionDialogue and dialogueProcessor and dialogueProcessor.getDialogue(".forcedAction."..name..".after", target) then
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
