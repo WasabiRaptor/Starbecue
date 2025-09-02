@@ -26,9 +26,10 @@ end
 function _ENV.agree:onClick()
 	local first = not player.getProperty("sbqAgreedTerms")
 	player.setProperty("sbqAgreedTerms", true)
+	if not player.hasItem("sbqController") then player.giveItem("sbqController") end
+	if not player.hasItem("sbqRequester") then player.giveItem("sbqRequester") end
+
 	if first then
-		if not player.hasItem("sbqController") then player.giveItem("sbqController") end
-		if not player.hasItem("sbqRequester") then player.giveItem("sbqRequester") end
 
 		player.setHumanoidParameter("sbqEnabled", true)
 		player.refreshHumanoidParameters()

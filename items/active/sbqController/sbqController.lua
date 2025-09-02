@@ -158,11 +158,7 @@ function sbq.attemptAction(action, targetId)
 		if success then
 			sbq.addRPC(world.sendEntityMessage(targetId, "sbqPromptAction", entity.id(), action, true),
 				function(response)
-					if not response then return end
-					local tryAction, isDom, line, action, target = table.unpack(response)
-					if tryAction then
-						world.sendEntityMessage(player.id(), "sbqTryAction", action, targetId)
-					end
+					if response then sbq.addRPC(world.sendEntityMessage(player.id(), "sbqPromptResponse", table.unpack(response)), sbq.requestResults) end
 				end)
 		end
 		return success, failReason

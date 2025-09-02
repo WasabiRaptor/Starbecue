@@ -141,7 +141,9 @@ function sbq.attemptRequest(action, target)
 	if not world.sendEntityMessage(player.id(), "sbqSettingsMatches", targetAction.targetSettings, true):result() then return false, "targetSettingsMismatch" end
 
     if consent then
-        sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), action, false), sbq.requestResults)
+        sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), action, false), function(response)
+			if response then sbq.addRPC(world.sendEntityMessage(player.id(), "sbqPromptResponse", table.unpack(response)), sbq.requestResults) end
+		end)
     else
         sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", true, action, entity.id()), sbq.requestResults)
     end

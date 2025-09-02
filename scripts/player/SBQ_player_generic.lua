@@ -92,8 +92,12 @@ function init()
 			sourceEntity)
 	end)
 
-	message.setHandler("sbqScriptPaneMessage", function(_, _, messageType, ...)
-		player.interact("message", {messageType = messageType, messageArgs = {...}})
+    message.setHandler("sbqScriptPaneMessage", function(_, _, ...)
+        local rpc = interface.sendMessage(...)
+		if not rpc:succeeded() then
+			rpc = world.sendEntityMessage(player.id(), ...)
+		end
+		return rpc:result()
 	end)
 
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
@@ -216,13 +220,13 @@ function init()
 		}, id)
 	end)
 	message.setHandler("sbqPromptResponse", function(_, _, tryAction, isDom, line, action, target)
-		if tryAction then
-			if isDom then
-				sbq.SpeciesScript:requestAction(false, action, target)
-			else
-				world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id())
-			end
-		end
+        if tryAction then
+            if isDom then
+                sbq.SpeciesScript:requestAction(false, action, target)
+            else
+                world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id())
+            end
+        end
 	end)
 
 	message.setHandler("sbqRequestActions", function(_, _, id, actionList)

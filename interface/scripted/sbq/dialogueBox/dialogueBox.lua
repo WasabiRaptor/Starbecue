@@ -24,9 +24,9 @@ function init()
 		_ENV.actionButton:setVisible(false)
     end)
 
-	-- message.setHandler("sbqCloseDialogueBox", function ()
-	-- 	pane.dismiss()
-    -- end)
+	message.setHandler("sbqCloseDialogueBox", function ()
+		pane.dismiss()
+    end)
 
 	doScrollText = world.sendEntityMessage(player.id(), "sbqGetSetting", "scrollText"):result()
 	doCustomFont = world.sendEntityMessage(player.id(), "sbqGetSetting", "customFont"):result()
