@@ -14,6 +14,9 @@ end
 local _dismiss
 function init()
 	player.setProperty("sbqSettingsVersion", sbqVersion())
+
+	if not (player.isCodexKnown("sbqHelp") or player.hasItem("sbqHelp-codex")) then player.giveItem("sbqHelp-codex") end
+
 	_dismiss = pane.dismiss
 	pane.dismiss = function ()
 
@@ -24,6 +27,9 @@ function _ENV.agree:onClick()
 	local first = not player.getProperty("sbqAgreedTerms")
 	player.setProperty("sbqAgreedTerms", true)
 	if first then
+		if not player.hasItem("sbqController") then player.giveItem("sbqController") end
+		if not player.hasItem("sbqRequester") then player.giveItem("sbqRequester") end
+
 		player.setHumanoidParameter("sbqEnabled", true)
 		player.refreshHumanoidParameters()
 	end

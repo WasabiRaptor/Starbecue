@@ -1,5 +1,7 @@
 cfg = root.assetJson("/interface/scripted/sbq/settings/settings.ui")
-sbq = config.getParameter("data").sbq or {voreConfig = {}, settingsConfig = {}}
+sbq = config.getParameter("data").sbq or {}
+sbq.voreConfig = sbq.voreConfig or {}
+sbq.settingsConfig = sbq.settingsConfig or {}
 
 local entityType = world.entityType(pane.sourceEntity())
 cfg.title = sbq.settingsPageName .. " " .. root.assetJson("/sbqStrings.config:settings")

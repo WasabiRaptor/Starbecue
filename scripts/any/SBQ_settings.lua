@@ -385,11 +385,14 @@ function _Settings:setMessageHandlers(localOnly)
             sbq.refreshSettings()
         end)
     end
-    message.setHandler({ name = "sbqGetSetting" }, function(...)
+    message.setHandler({ name = "sbqGetSetting" }, function(_, ...)
         return self:get(...)
     end)
-    message.setHandler({ name = "sbqSettingsPageData" }, function()
-        return sbq.settingsPageData()
+    message.setHandler({ name = "sbqSettingsMatches" }, function(_, ...)
+        return self:matches(...)
+    end)
+    message.setHandler({ name = "sbqSettingsPageData" }, function(_, ...)
+        return sbq.settingsPageData(...)
     end)
 end
 
@@ -526,7 +529,7 @@ function _Upgrades:setMessageHandlers(localOnly)
 
 end
 
-function sbq.settingsPageData()
+function sbq.settingsPageData(...)
 	local settingsPageData = {
         settingsPageName = sbq.entityName(entity.id()),
 

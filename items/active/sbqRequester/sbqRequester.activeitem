@@ -1,0 +1,20 @@
+{
+	"itemName" : "sbqRequester",
+	"shortdescription" : "SBQ Requester",
+	"description" : "If you see this text, it's a bug.",
+	"price" : 1,
+	"maxStack" : 1,
+	"rarity" : "uncommon",
+	"category" : "tool",
+	"twoHanded" : true,
+	"itemTags" : ["sbqRequester"],
+	"inventoryIcon" : "/humanoid/any/sbqActionIcons/unassigned.png",
+
+	"animation" : "sbqRequester.animation",
+
+	"retainScriptStorageInItem": true,
+	"builder" : "/items/active/sbqRequester/sbqRequesterBuilder.lua",
+	"scripts" : [
+		"sbqRequester.lua"
+	]
+}

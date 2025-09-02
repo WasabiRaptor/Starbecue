@@ -4,6 +4,8 @@ local sbq = world.sendEntityMessage(player.id(), "sbqSettingsPageData"):result()
 cfg.inputData = {
 	sbq = sbq
 }
+sbq.voreConfig = sbq.voreConfig or {}
+sbq.settingsConfig = sbq.settingsConfig or {}
 
 cfg.title = root.assetJson("/sbqStrings.config:settingsTitle")
 table.insert(cfg.children[1].tabs, root.assetJson("/interface/scripted/sbq/settings/tabs/preferences.config"))

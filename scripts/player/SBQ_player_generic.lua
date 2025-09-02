@@ -68,8 +68,6 @@ function init()
 			player.setHumanoidParameter("sbqEnabled", true)
 			player.refreshHumanoidParameters()
 		end
-	else
-		if not player.hasItem("sbqHelp-codex") then player.giveItem("sbqHelp-codex") end
 	end
 	sbq.notifyPlayer()
 

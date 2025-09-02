@@ -57,6 +57,7 @@ function patch(config)
     })
     local blueprints = {
 		{ item= "sbqController" },
+		{ item= "sbqRequester" },
 		{ item= "sbqCandy", parameters={level=1} },
 		{ item= "sbqCandy", parameters={level=2} },
 		{ item= "sbqCandy", parameters={level=3} },

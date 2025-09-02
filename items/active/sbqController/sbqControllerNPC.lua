@@ -2,13 +2,13 @@ sbq = {}
 function init()
 	activeItem.setHoldingItem(false)
 	storage = storage or {}
-    message.setHandler("sbqControllerRotation", function(_, _, enabled)
+	message.setHandler("sbqControllerRotation", function(_, _, enabled)
 		sbq.rotationEnabled = enabled
-        activeItem.setHoldingItem(enabled)
+		activeItem.setHoldingItem(enabled)
 		if not enabled then
 			activeItem.setFacingDirection(0)
 		end
-    end)
+	end)
 end
 
 function update()
