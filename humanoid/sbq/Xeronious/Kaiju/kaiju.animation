@@ -44,7 +44,7 @@
 		"pose" : "stand",
 		"tailSize" : "0",
 		"bellySize" : "0",
-		"tailImage" : "tail.png"
+		"tailFrameset" : "tail.png"
 	},
 	"animatedParts": {
 		"stateTypes": {
@@ -236,7 +236,6 @@
 					"zLevel": 0,
 					"transformationGroups": ["movementOffset"],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -279,7 +278,6 @@
 					"zLevel": 2,
 					"transformationGroups": [],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -309,7 +307,6 @@
 					"zLevel": -2,
 					"transformationGroups": [],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -455,7 +452,6 @@
 					"transformationGroups": [],
 					"anchorPart": "body",
 					"itemHidden": true,
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -496,7 +492,6 @@
 					"transformationGroups": [],
 					"anchorPart": "body",
 					"itemHidden": true,
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -605,7 +600,6 @@
 					"zLevel": -2,
 					"transformationGroups": ["headOffset"],
 					"anchorPart": "body",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -625,7 +619,6 @@
 					"centered": true,
 					"zLevel": 4,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -665,12 +658,11 @@
 					"zLevel":-1,
 					"anchorPart" : "body",
 					"transformationGroups" : ["tailOffset"],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates" : {
 					"tailState": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"idle": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -689,8 +681,8 @@
 						"s_down_release" : "idle"
 					},
 					"tailExpandState" : {
-						"eat": { "properties": { "image": "<tailImage>:<tailSize>-<tailExpandState_state>.<tailState_frame>" } },
-						"expand": { "properties": { "image": "<tailImage>:<tailInterpolateSize>-expand" } }
+						"eat": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailExpandState_state>.<tailState_frame>" } },
+						"expand": { "properties": { "image": "<tailFrameset>:<tailInterpolateSize>-expand" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },

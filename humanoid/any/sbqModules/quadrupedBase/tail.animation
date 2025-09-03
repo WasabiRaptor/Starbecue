@@ -1,0 +1,19 @@
+{
+	"partTagDefaults" : {
+		"body" : {
+			"humanoidPath" : "sbq/"
+		}
+	},
+
+	"animatedParts" : {
+		"parts" : {
+			"tail" : {
+				"properties" : {
+					"anchorPart" : "body",
+					"transformationGroups" : ["tailOffset"],
+					"offset" : [-1.875,-0.5]
+				}
+			}
+		}
+	}
+}

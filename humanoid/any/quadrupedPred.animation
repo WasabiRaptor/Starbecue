@@ -7,7 +7,7 @@
 		"/humanoid/any/sbqVoreParts/balls.animation"
 	],
 	"globalTagDefaults" : {
-		"tailImage" : "tail.png",
+		"tailFrameset" : "tail.png",
 
 		"colorRemap" : "",
 		"legs_fg_mask" : "/humanoid/any/frontLegMask/malebody.png",
@@ -130,7 +130,6 @@
 					"anchorPart" : "body",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bellyColorRemap><bodyDirectives>"
 				},
 				"partStates": {
@@ -183,9 +182,6 @@
 			"tail": {
 				"properties" : {
 					"zLevel":-1,
-					"anchorPart" : "body",
-					"transformationGroups" : ["tailOffset"],
-					"offset" : [-1.875,-0.5]
 				}
 			},
 			"tail_infused" : {
@@ -222,8 +218,7 @@
 					"anchorPart" :"body",
 					"transformationGroups": ["crotchOffset"],
 					"offset" : [-0.75,-0.75],
-					"interact" : [0, 0],
-					"bodyFullbright" : true
+					"interact" : [0, 0]
 				}
 			},
 
@@ -273,7 +268,6 @@
 					"anchorPart": "belly",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bellyInfusedDirectives><bellyInfusedFade>"
 				},
 				"partStates": {
@@ -345,8 +339,7 @@
 				"properties": {
 					"centered": true,
 					"zLevel": 0.011,
-					"anchorPart": "pussy",
-					"bodyFullbright" : true
+					"anchorPart": "pussy"
 				}
 			},
 

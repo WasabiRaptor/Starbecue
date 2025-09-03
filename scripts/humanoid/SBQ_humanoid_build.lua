@@ -122,7 +122,7 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 	}
 	includeSBQModule(humanoidConfig, baseModule)
 	for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
-		local modules = humanoidConfig.sbqModules[slot]
+		local modules = humanoidConfig.sbqModules[slot] or {}
 		local selectedModule = humanoidParameters["sbqModule_" .. slot]
 		if selectedModule and (selectedModule ~= "disable") then
 			if modules[selectedModule] then

@@ -57,7 +57,7 @@
 		"bellyInfusedFade" : "",
 		"bellyInfusedDirectives" : "",
 
-		"tailImage" : "tail.png",
+		"tailFrameset" : "tail.png",
 		"tailColorRemap" : "",
 		"tailInfusedFade" : "",
 		"tailInfusedDirectives" : "",
@@ -383,7 +383,6 @@
 					"zLevel": 0,
 					"transformationGroups": ["movementOffset"],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -416,7 +415,6 @@
 					"zLevel": 2,
 					"transformationGroups": [],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -449,7 +447,6 @@
 					"zLevel": -1,
 					"transformationGroups": [],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -482,7 +479,6 @@
 					"zLevel": 1,
 					"transformationGroups": [],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -515,7 +511,6 @@
 					"zLevel": -2,
 					"transformationGroups": [],
 					"anchorPart": "anchor",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -745,7 +740,6 @@
 					"transformationGroups": [],
 					"anchorPart": "anchor",
 					"itemHidden": true,
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -789,7 +783,6 @@
 					"transformationGroups": [],
 					"anchorPart": "anchor",
 					"itemHidden": true,
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
@@ -905,8 +898,7 @@
 					"centered": true,
 					"zLevel": 2.4,
 					"transformationGroups": [],
-					"anchorPart": "body",
-					"bodyFullbright" : true
+					"anchorPart": "body"
 				},
 				"partStates" : {
 					"body": {
@@ -933,8 +925,7 @@
 					"centered": true,
 					"zLevel": -1,
 					"transformationGroups": [],
-					"anchorPart": "body",
-					"bodyFullbright" : true
+					"anchorPart": "body"
 				},
 				"partStates" : {
 					"body": {
@@ -962,7 +953,6 @@
 					"centered": true,
 					"zLevel": 3,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<facialHairDirectives>",
 					"offset" : [-1.5,-1]
 				},
@@ -981,7 +971,6 @@
 					"centered": true,
 					"zLevel": 3.5,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<facialMaskDirectives>",
 					"offset" : [-1.5,-1]
 				},
@@ -1000,7 +989,6 @@
 					"centered": true,
 					"zLevel": -7,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<hairDirectives>",
 					"offset" : [-1.5,-1]
 				},
@@ -1020,7 +1008,6 @@
 					"zLevel": 4,
 					"transformationGroups": ["headOffset"],
 					"anchorPart": "body",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>",
 					"offset" : [1.5,1]
 				},
@@ -1046,7 +1033,6 @@
 					"centered": true,
 					"zLevel": 4.1,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<emoteDirectives>"
 				},
 				"partStates": {
@@ -1074,7 +1060,6 @@
 					"centered": true,
 					"zLevel": 2,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<emoteDirectives>"
 				},
 				"partStates": {
@@ -1102,7 +1087,6 @@
 					"centered": true,
 					"zLevel": 4.8,
 					"anchorPart": "head",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<emoteDirectives>"
 				},
 				"partStates": {
@@ -1149,13 +1133,12 @@
 					"zLevel":-1,
 					"anchorPart" : "body",
 					"transformationGroups" : ["tailOffset"],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates" : {
 					"body": {
-						"idle": { "properties": { "image": "<tailImage>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
-						"walk": { "properties": { "image": "<tailImage>:<tailSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<pose>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailFrameset>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -1180,7 +1163,6 @@
 					"zLevel": 0.2,
 					"anchorPart": "body",
 					"transformationGroups" : ["crotchOffset"],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<cockColorRemap><bodyDirectives>",
 					"offset" : [-1.1875, 0.1875]
 				}
@@ -1191,7 +1173,6 @@
 					"zLevel": 0.11,
 					"flippedZLevel": 0.10,
 					"anchorPart": "cock",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsColorRemap><bodyDirectives>"
 				}
 			},
@@ -1201,7 +1182,6 @@
 					"zLevel": 0.10,
 					"flippedZLevel": 0.11,
 					"anchorPart": "cock",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsColorRemap><bodyDirectives>"
 				}
 			},
@@ -1213,7 +1193,6 @@
 					"anchorPart" : "body",
 					"transformationGroups": ["chestOffset"],
 					"interact" : [0.375,-0.375],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives>",
 					"offset" : [1.3125,-0.8105]
 
@@ -1225,7 +1204,6 @@
 					"zLevel": 1.2,
 					"flippedZLevel": 1.1,
 					"anchorPart": "breasts",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives>"
 				}
 			},
@@ -1235,7 +1213,6 @@
 					"zLevel": 1.1,
 					"flippedZLevel": 1.2,
 					"anchorPart": "breasts",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsColorRemap><bodyDirectives>"
 				}
 			},
@@ -1247,7 +1224,6 @@
 					"anchorPart": "belly",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<bellyInfusedDirectives><bellyInfusedFade>"
 				},
 				"partStates": {
@@ -1303,7 +1279,6 @@
 					"zLevel": 0.201,
 					"anchorPart": "cock",
 					"interact" : [0.5, -1.5],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<cockInfusedDirectives><cockInfusedFade>"
 				}
 			},
@@ -1313,7 +1288,6 @@
 					"zLevel": 0.111,
 					"flippedZLevel": 0.101,
 					"anchorPart": "balls_right",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsInfusedDirectives><ballsInfusedFade>"
 				}
 			},
@@ -1323,7 +1297,6 @@
 					"zLevel": 0.101,
 					"flippedZLevel": 0.111,
 					"anchorPart": "balls_left",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<ballsInfusedDirectives><ballsInfusedFade>"
 				}
 			},
@@ -1334,7 +1307,6 @@
 					"zLevel": 1.001,
 					"anchorPart": "breasts",
 					"interact" : [0.375,-0.375],
-					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedDirectives><breastsInfusedFade>"
 				}
 			},
@@ -1344,7 +1316,6 @@
 					"zLevel": 1.201,
 					"flippedZLevel": 1.101,
 					"anchorPart": "breasts_right",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedDirectives><breastsInfusedFade>"
 				}
 			},
@@ -1354,7 +1325,6 @@
 					"zLevel": 1.101,
 					"flippedZLevel": 1.201,
 					"anchorPart": "breasts_left",
-					"bodyFullbright" : true,
 					"processingDirectives" : "<breastsInfusedDirectives><breastsInfusedFade>"
 				}
 			}
