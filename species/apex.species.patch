@@ -1,4 +1,74 @@
 {
+	"sbq" : true,
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"light": 1,
+			"door": 1,
+			"sbqVore" : 1,
+			"apex" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{"combat":8},
+			{"combat":8, "tier2":12},
+			{"combat":8, "tier3":12},
+			{"combat":8, "tier4":12},
+			{"combat":8, "tier5":12},
+			{"combat":8, "tier6":12},
+			{"combat":8, "tier7":12},
+			{"combat":8, "tier8":12},
+			{"combat":8, "tier9":12},
+			{"combat":8, "tier10":12}
+		],
+		"orderFurniture" : [
+			{"name":"apexarmchair", "count":1},
+			{"name":"apexcouch", "count":1},
+			{"name":"apexbed", "count":1},
+			{"name":"apexbananasign", "count":1},
+			{"name":"apexbrainjar", "count":1},
+			{"name":"apexcoolbookcase", "count":1},
+			{"name":"apexfridge", "count":1},
+			{"name":"apexoven", "count":1}
+		],
+		"guardOrderFurniture" : [ // appends onto the order list for tier
+			[],
+			[],
+			[],
+			[],
+			[],
+			[],
+			[],
+			[],
+			[],
+			[]
+		],
+		"type" : "sbqVoreTenant",
+		"guardType" : [
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant",
+			"sbqVoreFriendlyGuardTenant"
+		],
+		"overrides" : {},
+		"guardOverrides" : [
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{},
+			{}
+		]
+	},
+
 	"baseColorPalette": {
 		"primary": [
 			"6f2919",

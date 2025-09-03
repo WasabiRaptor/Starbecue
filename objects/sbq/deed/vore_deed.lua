@@ -295,29 +295,8 @@ function setTenantsData(occupier)
 	for _, tenant in ipairs(occupier.tenants) do
 		if type(tenant.species) == "table" then
 			tenant.species = tenant.species[math.random(#tenant.species)]
-		end
-		if tenant.species == "any" then
-			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
-			local badSpecies = true
-			while badSpecies do
-				local i = math.random(#speciesList)
-				tenant.species = speciesList[i]
-				badSpecies = sbq.config.transformationBlacklist[tenant.species] or false
-				if not badSpecies then
-					local speciesFile = root.speciesConfig(tenant.species)
-					if speciesFile.forceName then
-						badSpecies = true
-					elseif speciesFile.voreConfig then
-						if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, {"overrideSettings", "speciesTF"}) == false then
-							badSpecies = true
-						end
-					else
-						badSpecies = true
-					end
-				end
-				if badSpecies then
-					table.remove(speciesList,i)
-				end
+			if tenant.speciesOverrides then
+				tenant.overrides = sb.jsonMerge(tenant.overrides, tenant.speciesOverrides[tenant.species])
 			end
 		end
 		local npcConfig = root.npcConfig(tenant.type)
