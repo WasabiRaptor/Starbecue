@@ -31,7 +31,7 @@
 					"1-idle": {"frames": 4,"cycle": 0.75,"mode": "loop"}
 				}
 			},
-			"occupant0Location" : {
+			"occupant1Location" : {
 				"priority" : 1,
 				"default" : "idle",
 				"states" : {
@@ -40,7 +40,7 @@
 					"balls": {"frames": 1,"cycle": 0,"mode": "end"}
 				}
 			},
-			"occupant0State" : {
+			"occupant1State" : {
 				"priority" : 2,
 				"default" : "idle",
 				"states" : {
@@ -48,28 +48,28 @@
 					"oralVore": {"frames": 2,"cycle": 1.5,"mode": "transition", "transition": "idle"},
 					"cockVore": {"frames": 2,"cycle": 1.5,"mode": "transition", "transition": "idle"},
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant0" : [
+						"frameProperties" : {"occupant1" : [
 							[["reset"],	["translate",[0,0]]],
 							[["reset"],	["translate",[0.125,0]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant0" : [
+						"frameProperties" : {"occupant1" : [
 							[["reset"],	["translate",[0,0]]],
 							[["reset"],	["translate",[-0.125,0]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant0" : [
+						"frameProperties" : {"occupant1" : [
 							[["reset"],	["translate",[0,0]]],
 							[["reset"],	["translate",[0,0.125]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					},
 					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant0" : [
+						"frameProperties" : {"occupant1" : [
 							[["reset"],	["translate",[0,0]]],
 							[["reset"],	["translate",[0,-0.125]]],
 							[["reset"],	["translate",[0,0]]]
@@ -79,13 +79,13 @@
 			}
 		},
 		"parts": {
-			"occupant0" : {
+			"occupant1" : {
 				"properties" : {
 					"centered":true,
 					"zLevel":0,
 					"loungeOffset" : [0,0],
 					"interpolated" : true,
-					"transformationGroups" : ["occupant0"],
+					"transformationGroups" : ["occupant1"],
 					"hidden":true,
 					"dance" : "sbqIdle",
 					"orientation" : "stand",
@@ -93,11 +93,11 @@
 					"transforms": [["reset"],	["scale",[0,0]]]
 				},
 				"partStates" : {
-					"occupant0Location" :{
+					"occupant1Location" :{
 						"belly" : {"properties":{"offset" : [0,-1.5]}},
 						"balls" : {"properties":{"offset" : [-0.5,-1.5]}}
 					},
-					"occupant0State":{
+					"occupant1State":{
 						"oralVore" : {"frameProperties":{
 							"transforms":[
 								[["reset"], ["scale",[1,1]],	["translate",[1.5,0] ]],
@@ -152,6 +152,6 @@
 		"slurp" : [ "/sfx/vore/common/slurp.ogg" ]
 	},
 	"transformationGroups" :{
-		"occupant0" : {"interpolated" : true}
+		"occupant1" : {"interpolated" : true}
 	}
 }

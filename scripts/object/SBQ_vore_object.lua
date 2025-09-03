@@ -36,18 +36,28 @@ function init()
 
 	storage.sbqSettings = storage.sbqSettings or config.getParameter("sbqSettings") or {}
 	storage.sbqUpgrades = storage.sbqUpgrades or config.getParameter("sbqUpgrades") or {}
-	if not storage.sbqUpgrades.candyBonus then
-		storage.sbqUpgrades.candyBonus = {}
-		for i = 1, math.floor(math.max(object.level(), 1)) do
-			storage.sbqUpgrades.candyBonus[i] = 1
+	sbq.settings = sbq._Settings.new(
+		sb.jsonMerge(
+			config.getParameter("sbqSettingsConfig")
+		),
+		storage.sbqSettings or config.getParameter("sbqSettings"),
+		entity.entityType(),
+		storage
+	)
+	sbq.settings:setParameterSettings()
+	sbq.settings:setMessageHandlers()
+
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
+	sbq.upgrades:setMessageHandlers()
+
+	sbq.upgrades:apply(sbq.settings)
+	if not sbq.upgrades.storedUpgrades.candyBonus then
+		for i = 1, math.floor(math.max(npc.level(), 1)) do
+			sbq.upgrades:setTiered("candyBonus", i, 1)
 		end
-		local digestPower = math.max(1, (object.level()+1)/2)
-		storage.sbqSettings.acidDigestPower = storage.sbqSettings.acidDigestPower or digestPower
-		storage.sbqSettings.cumDigestPower = storage.sbqSettings.cumDigestPower or digestPower
-		storage.sbqSettings.femcumDigestPower = storage.sbqSettings.femcumDigestPower or digestPower
-		storage.sbqSettings.milkDigestPower = storage.sbqSettings.milkDigestPower or digestPower
-		storage.sbqSettings.escapeDifficulty = storage.sbqSettings.escapeDifficulty or digestPower
 	end
+	sbq.settings:setPublicSettings()
+    sbq.settings:setStatSettings()
 
 	sbq.init(config.getParameter("sbqConfig"))
 end

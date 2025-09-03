@@ -135,7 +135,7 @@ function sbq.reloadVoreConfig(sbqConfig)
 
 	-- load config from species or config input, such as from a tech transformation
 	sbq.voreConfig = {}
-	for _, v in ipairs(sbqConfig.includes) do
+	for _, v in ipairs(sbqConfig.includes or {}) do
 		sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, root.assetJson(v))
 	end
 	sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)

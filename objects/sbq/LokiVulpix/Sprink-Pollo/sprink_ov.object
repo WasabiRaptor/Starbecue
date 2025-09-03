@@ -30,116 +30,120 @@
 	},
 	"scripts" : ["sprink.lua"],
 	"dialogueTree" : {},
-	"sbqConfig" : [
-		"/humanoid/any/basicActions.config",
-		"/species/sbq/disableAllInfusePred.config",
-		"/species/sbq/disableAllInfusePrey.config",
-		"/species/sbq/disableAllVorePrey.config",
-		"/species/sbq/disableAllTF.config",
-		{
-			"seatCount" : 1,
-			"species" : "Sprink",
-			"pred" : {},
-			"prey" : {},
-			"actionList" : [
-				{"action":"oralVore"}
-			],
-			"availableVoreTypes" : {
-				"oralVore":true
-			},
-			"defaultSettings" : {
-				"locations" : {"belly":{
-					"mainEffect" : "softDigest"
-				}}
-			},
-			"settingsOrder" : [
-				"displayEffect",
-				"escapeDifficulty",
-				"acidDigestPower",
-				"recentlyDigested"
-			],
-			"overrideSettings" : {
-				"acidDigestDrops" : false,
-				"vorePrefs":{"oralVore":{"pred":true}}, // because why would it ever *not* be an OV pred
-				"interactDialogue" : false,
-				"actionDialogue" : false,
-				"questParticipation" : false,
-				"offerQuests" : false
-			},
-			"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
-				"mainEffect" : {"digest":"softDigest"}
-			},
-			"locations" : {
-				"belly" : {
-					"activeSettings" : {"vorePrefs":{"oralVore":{"pred":true}}},
-					"struggleSizes" : [0,1],
-					"maxSize":1.5,
-					"maxCount":1,
-					"sizeChangeAnims" : {
-						"bellyExpandState":"<prevSize>-to-<newSize>",
-						"body" : "<bellySize>-idle"
-					},
-					"secondaryEffects" : {
-						"eggify" : false
-					}
+	"sbqSettingsConfig" : {
+		"includes" : [
+			"/species/sbq/disableAllInfusePred.config",
+			"/species/sbq/disableAllInfusePrey.config",
+			"/species/sbq/disableAllVorePrey.config",
+			"/species/sbq/disableAllTF.config"
+		]
+	},
+	"sbqConfig" : {
+		"includes" : [
+			"/humanoid/any/sbqModules/base/sbqModule.config"
+		],
+		"seatCount" : 1,
+		"species" : "Sprink",
+		"pred" : {},
+		"prey" : {},
+		"actionList" : [
+			{"action":"oralVore"}
+		],
+		"availableVoreTypes" : {
+			"oralVore":true
+		},
+		"defaultSettings" : {
+			"locations" : {"belly":{
+				"mainEffect" : "softDigest"
+			}}
+		},
+		"settingsOrder" : [
+			"displayEffect",
+			"escapeDifficulty",
+			"acidDigestPower",
+			"recentlyDigested"
+		],
+		"overrideSettings" : {
+			"acidDigestDrops" : false,
+			"vorePrefs":{"oralVore":{"pred":true}}, // because why would it ever *not* be an OV pred
+			"interactDialogue" : false,
+			"actionDialogue" : false,
+			"questParticipation" : false,
+			"offerQuests" : false
+		},
+		"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
+			"mainEffect" : {"digest":"softDigest"}
+		},
+		"locations" : {
+			"belly" : {
+				"activeSettings" : {"vorePrefs":{"oralVore":{"pred":true}}},
+				"struggleSizes" : [0,1],
+				"maxSize":1.5,
+				"maxCount":1,
+				"sizeChangeAnims" : {
+					"bellyExpandState":"<prevSize>-to-<newSize>",
+					"body" : "<bellySize>-idle"
+				},
+				"secondaryEffects" : {
+					"eggify" : false
 				}
-			},
-			"states" : {
-				"default" : {
-					"actions" : {
-						"oralVore" : {
-							"targetSettings" : {"vorePrefs":{"oralVore":{"prey":true}}},
-							"settings" : {"vorePrefs":{"oralVore":{"pred":true}}},
-							"script" : "tryVore",
-							"animations" : {
-								"<occupant>State" : "oralVore",
-								"eatState" : "eat"
-							},
-							"location" : "belly",
-							"throughput" : 1.5
+			}
+		},
+		"states" : {
+			"default" : {
+				"actions" : {
+					"oralVore" : {
+						"targetSettings" : {"vorePrefs":{"oralVore":{"prey":true}}},
+						"settings" : {"vorePrefs":{"oralVore":{"pred":true}}},
+						"script" : "tryVore",
+						"animations" : {
+							"<occupant>State" : "oralVore",
+							"eatState" : "eat"
 						},
-						"oralVoreLetout" : {
-							"targetSettings" : {"vorePrefs":{"oralVore":{"prey":true}}},
-							"settings" : {"vorePrefs":{"oralVore":{"pred":true}}},
-							"script" : "tryLetout",
-							"animations" : {
-								"<occupant>State" : ["oralVore", true, true],
-								"eatState" : ["eat", true, true]
+						"location" : "belly",
+						"throughput" : 1.5
+					},
+					"oralVoreLetout" : {
+						"targetSettings" : {"vorePrefs":{"oralVore":{"prey":true}}},
+						"settings" : {"vorePrefs":{"oralVore":{"pred":true}}},
+						"script" : "tryLetout",
+						"animations" : {
+							"<occupant>State" : ["oralVore", true, true],
+							"eatState" : ["eat", true, true]
+						},
+						"location" : "belly",
+						"throughput" : 1.5,
+						"applyStatusEffects" : [
+							["sbqWetDrool"]
+						]
+					}
+				},
+				"locations" : {
+					"belly":{
+						"entryTypes" : ["oralVore"],
+						"struggleActions" : {
+							"any" : {
+								"pressAnimations":{"<occupant>State":["s_<s_direction>",false,false,true]},
+								// minimum, maximum
+								"time" : [10,15], // hold time for struggles to trigger action, checked once for every second held
+								"count" : [10,30] // count of struggles to trigger action
 							},
-							"location" : "belly",
-							"throughput" : 1.5,
-							"applyStatusEffects" : [
-								["sbqWetDrool"]
-							]
+							"front" : {"indicate":"red", "action":"oralVoreLetout"},
+							"down" : {},
+							"up" : {},
+							"back" : {}
 						}
-					},
-					"locations" : {
-						"belly":{
-							"entryTypes" : ["oralVore"],
-							"struggleActions" : {
-								"any" : {
-									"pressAnimations":{"<occupant>State":["s_<s_direction>",false,false,true]},
-									// minimum, maximum
-									"time" : [10,15], // hold time for struggles to trigger action, checked once for every second held
-									"count" : [10,30] // count of struggles to trigger action
-								},
-								"front" : {"indicate":"red", "action":"oralVoreLetout"},
-								"down" : {},
-								"up" : {},
-								"back" : {}
-							}
-						}
-					},
-					"interactActions" : {
-						"oralVore" : {
-							"aimPart":"body","aim":"oralVore", "aimRadius" : 3,
-							"posPart":"body","pos":"front"
-						}
+					}
+				},
+				"interactActions" : {
+					"oralVore" : {
+						"aimPart":"body","aim":"oralVore", "aimRadius" : 3,
+						"posPart":"body","pos":"front"
 					}
 				}
 			}
 		}
-	],
+	},
 	"slaveControlTimeout" : 2.0,
 	"slaveControlHeartbeat" : 1.0,
 
@@ -174,8 +178,8 @@
 		}
 	},
 	"loungePositions" : {
-		"occupant0" : {
-			"part" : "occupant0",
+		"occupant1" : {
+			"part" : "occupant1",
 			"partAnchor" : "loungeOffset",
 			"orientation" : "stand",
 			"statusEffects" : [],

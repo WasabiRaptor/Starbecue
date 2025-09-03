@@ -30,118 +30,123 @@
 	},
 	"scripts" : ["sprink.lua"],
 	"dialogueTree" : {},
-	"sbqConfig" : [
-		"/humanoid/any/basicActions.config",
-		"/species/sbq/disableAllInfusePred.config",
-		"/species/sbq/disableAllInfusePrey.config",
-		"/species/sbq/disableAllVorePrey.config",
-		"/species/sbq/disableAllTF.config",
-		{
-			"seatCount" : 1,
-			"species" : "Sprink",
-			"pred" : {},
-			"prey" : {},
-			"actionList" : [
-				{"action":"cockVore"}
-			],
-			"availableVoreTypes" : {
-				"cockVore":true
-			},
-			"defaultSettings" : {
-				"cumDigestDrops" : true,
-				"locations" : {"balls":{
-					"mainEffect" : "softDigest"
-				}}
-			},
-			"settingsOrder" : [
-				"displayEffect",
-				"escapeDifficulty",
-				"cumDigestPower",
-				"recentlyDigested"
-			],
-			"overrideSettings" : {
-				"acidDigestDrops" : false,
-				"vorePrefs":{"cockVore":{"pred":true}}, // because why would it ever *not* be an OV pred
-				"interactDialogue" : false,
-				"actionDialogue" : false,
-				"questParticipation" : false,
-				"offerQuests" : false
-			},
-			"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
-				"mainEffect" : {"digest":"softDigest"}
-			},
-			"locations" : {
-				"balls" : {
-					"activeSettings" : {"vorePrefs":{"cockVore":{"pred":true}}},
-					"struggleSizes" : [0,1],
-					"maxSize":1.5,
-					"maxCount":1,
-					"subLocations" : false,
-					"sizeChangeAnims" : {
-						"bellyExpandState":"<prevSize>-to-<newSize>",
-						"body" : "<ballsSize>-idle"
-					},
-					"secondaryEffects" : {
-						"eggify" : false
-					}
+	"sbqSettingsConfig" : {
+		"includes" : [
+			"/species/sbq/disableAllInfusePred.config",
+			"/species/sbq/disableAllInfusePrey.config",
+			"/species/sbq/disableAllVorePrey.config",
+			"/species/sbq/disableAllTF.config"
+		]
+	},
+	"sbqConfig" : {
+		"debug" : true,
+		"includes" : [
+			"/humanoid/any/sbqModules/base/sbqModule.config"
+		],
+		"seatCount" : 1,
+		"species" : "Sprink",
+		"pred" : {},
+		"prey" : {},
+		"actionList" : [
+			{"action":"cockVore"}
+		],
+		"availableVoreTypes" : {
+			"cockVore":true
+		},
+		"defaultSettings" : {
+			"cumDigestDrops" : true,
+			"locations" : {"balls":{
+				"mainEffect" : "softDigest"
+			}}
+		},
+		"settingsOrder" : [
+			"displayEffect",
+			"escapeDifficulty",
+			"cumDigestPower",
+			"recentlyDigested"
+		],
+		"overrideSettings" : {
+			"acidDigestDrops" : false,
+			"vorePrefs":{"cockVore":{"pred":true}}, // because why would it ever *not* be an OV pred
+			"interactDialogue" : false,
+			"actionDialogue" : false,
+			"questParticipation" : false,
+			"offerQuests" : false
+		},
+		"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
+			"mainEffect" : {"digest":"softDigest"}
+		},
+		"locations" : {
+			"balls" : {
+				"activeSettings" : {"vorePrefs":{"cockVore":{"pred":true}}},
+				"struggleSizes" : [0,1],
+				"maxSize":1.5,
+				"maxCount":1,
+				"subLocations" : false,
+				"sizeChangeAnims" : {
+					"bellyExpandState":"<prevSize>-to-<newSize>",
+					"body" : "<ballsSize>-idle"
+				},
+				"secondaryEffects" : {
+					"eggify" : false
 				}
-			},
-			"states" : {
-				"default" : {
-					"actions" : {
-						"cockVore" : {
-							"targetSettings" : {"vorePrefs":{"cockVore":{"prey":true}}},
-							"settings" : {"vorePrefs":{"cockVore":{"pred":true}}},
-							"script" : "tryVore",
-							"animations" : {
-								"<occupant>State" : "cockVore",
-								"eatState" : "eat"
-							},
-							"location" : "balls",
-							"throughput" : 1.5
+			}
+		},
+		"states" : {
+			"default" : {
+				"actions" : {
+					"cockVore" : {
+						"targetSettings" : {"vorePrefs":{"cockVore":{"prey":true}}},
+						"settings" : {"vorePrefs":{"cockVore":{"pred":true}}},
+						"script" : "tryVore",
+						"animations" : {
+							"<occupant>State" : "cockVore",
+							"eatState" : "eat"
 						},
-						"cockVoreLetout" : {
-							"targetSettings" : {"vorePrefs":{"cockVore":{"prey":true}}},
-							"settings" : {"vorePrefs":{"cockVore":{"pred":true}}},
-							"script" : "tryLetout",
-							"animations" : {
-								"<occupant>State" : ["cockVore", true, true],
-								"eatState" : ["eat", true, true]
+						"location" : "balls",
+						"throughput" : 1.5
+					},
+					"cockVoreLetout" : {
+						"targetSettings" : {"vorePrefs":{"cockVore":{"prey":true}}},
+						"settings" : {"vorePrefs":{"cockVore":{"pred":true}}},
+						"script" : "tryLetout",
+						"animations" : {
+							"<occupant>State" : ["cockVore", true, true],
+							"eatState" : ["eat", true, true]
+						},
+						"location" : "balls",
+						"throughput" : 1.5,
+						"applyStatusEffects" : [
+							["sbqWetCum"]
+						]
+					}
+				},
+				"locations" : {
+					"balls":{
+						"entryTypes" : ["cockVore"],
+						"struggleActions" : {
+							"any" : {
+								"pressAnimations":{"<occupant>State":["s_<s_direction>",false,false,true]},
+								// minimum, maximum
+								"time" : [10,15], // hold time for struggles to trigger action, checked once for every second held
+								"count" : [10,30] // count of struggles to trigger action
 							},
-							"location" : "balls",
-							"throughput" : 1.5,
-							"applyStatusEffects" : [
-								["sbqWetCum"]
-							]
+							"front" : {"indicate":"red", "action":"cockVoreLetout"},
+							"down" : {},
+							"up" : {},
+							"back" : {}
 						}
-					},
-					"locations" : {
-						"balls":{
-							"entryTypes" : ["cockVore"],
-							"struggleActions" : {
-								"any" : {
-									"pressAnimations":{"<occupant>State":["s_<s_direction>",false,false,true]},
-									// minimum, maximum
-									"time" : [10,15], // hold time for struggles to trigger action, checked once for every second held
-									"count" : [10,30] // count of struggles to trigger action
-								},
-								"front" : {"indicate":"red", "action":"cockVoreLetout"},
-								"down" : {},
-								"up" : {},
-								"back" : {}
-							}
-						}
-					},
-					"interactActions" : {
-						"cockVore" : {
-							"aimPart":"body","aim":"cockVore", "aimRadius" : 3,
-							"posPart":"body","pos":"front"
-						}
+					}
+				},
+				"interactActions" : {
+					"cockVore" : {
+						"aimPart":"body","aim":"cockVore", "aimRadius" : 3,
+						"posPart":"body","pos":"front"
 					}
 				}
 			}
 		}
-	],
+	},
 	"slaveControlTimeout" : 2.0,
 	"slaveControlHeartbeat" : 1.0,
 
@@ -176,8 +181,8 @@
 		}
 	},
 	"loungePositions" : {
-		"occupant0" : {
-			"part" : "occupant0",
+		"occupant1" : {
+			"part" : "occupant1",
 			"partAnchor" : "loungeOffset",
 			"orientation" : "stand",
 			"statusEffects" : [],
