@@ -3,6 +3,7 @@ local oldIdMap = {
     ["sbq/vaporeon"] = "wr/vaporeon",
     ["sbq/meowscarada"] = "wr/meowscarada",
     ["sbq/nickit_anthro"] = "wr/nickit",
+    ["sbq/zygahedron/zevi"] = "sbq/Zygahedron/Zevi",
 }
 function error(diskStore, e)
     if oldIdMap[diskStore.identity.species] then
