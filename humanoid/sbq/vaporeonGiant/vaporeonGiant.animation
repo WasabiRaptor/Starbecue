@@ -254,8 +254,7 @@
 						"walk" : { "properties": { "image": "<humanoidPath>body.png:<bellySize>-<pose>.idle.1" } },
 						"run" : "walk",
 						"swim" : "walk",
-						"swimIdle" : "walk",
-						"none": { "properties": {} }
+						"swimIdle" : "walk"
 					},
 					"bellyState": {
 						"s_front" : { "properties": { "image": "<humanoidPath>body.png:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
@@ -273,8 +272,7 @@
 						"s_down" : "s_front",
 						"s_down_press" : "s_front",
 						"s_down_hold" : "s_front",
-						"s_down_release" : "s_front",
-						"none": { "properties": {} }
+						"s_down_release" : "s_front"
 					},
 					"bellyExpandState" : {
 						"expand" : { "properties": { "image": "<humanoidPath>body.png:<bellyInterpolateSize>-<pose>.<bellyExpandState_state>" } }
@@ -284,8 +282,7 @@
 						"fall" : "jump"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<humanoidPath>body.png:<bellySize>-<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<humanoidPath>body.png:<bellySize>-<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -312,12 +309,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<humanoidPath>legs/foreleg_fg.png:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<humanoidPath>legs/foreleg_fg.png:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -344,12 +339,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<humanoidPath>legs/foreleg_bg.png:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<humanoidPath>legs/foreleg_bg.png:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -376,12 +369,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<humanoidPath>legs/hindleg_fg.png.png:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<humanoidPath>legs/hindleg_fg.png.png:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -408,12 +399,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<humanoidPath>legs/hindleg_bg.png:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<humanoidPath>legs/hindleg_bg.png:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -440,12 +429,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<legsArmorZiellekDragonForelegFG>:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<legsArmorZiellekDragonForelegFG>:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -471,12 +458,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<legsArmorZiellekDragonForelegBG>:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<legsArmorZiellekDragonForelegBG>:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -502,12 +487,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<legsArmorZiellekDragonHindlegFG>:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<legsArmorZiellekDragonHindlegFG>:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -533,12 +516,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "duck",
-						"swimIdle" : "duck",
-						"none": { "properties": {} }
+						"swimIdle" : "duck"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<legsArmorZiellekDragonHindlegBG>:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<legsArmorZiellekDragonHindlegBG>:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -566,12 +547,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "walk",
-						"swimIdle" : "walk",
-						"none": { "properties": {} }
+						"swimIdle" : "walk"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<chestArmorZiellekDragon>:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<chestArmorZiellekDragon>:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -598,12 +577,10 @@
 						"jump" : "duck",
 						"fall" : "duck",
 						"swim" : "walk",
-						"swimIdle" : "walk",
-						"none": { "properties": {} }
+						"swimIdle" : "walk"
 					},
 					"bodyDanceState" : {
-						"dance": { "properties": { "image": "<backArmor>:<bodyDanceFrame>" } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "image": "<backArmor>:<bodyDanceFrame>" } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -626,12 +603,10 @@
 							"zLevel" : 7,
 							"itemHidden": false,
 							"transformationGroups": ["frontArmRotation"]
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"frontarmDanceState" : {
-						"dance": { "properties": { "transformationGroups": ["frontArmRotation"] } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "transformationGroups": ["frontArmRotation"] } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -654,12 +629,10 @@
 							"zLevel": 6,
 							"itemHidden": false,
 							"transformationGroups": ["backArmRotation"]
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"backarmDanceState" : {
-						"dance": { "properties": { "transformationGroups": ["backArmRotation"] } },
-						"none": { "properties": {} }
+						"dance": { "properties": { "transformationGroups": ["backArmRotation"] } }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -678,8 +651,7 @@
 				"partStates": {
 					"headState": {
 						"idle": { "properties": { "image": "<humanoidPath>head/head.png:<headState_state>.<headState_frame>" } },
-						"eat": "idle",
-						"none": { "properties": {} }
+						"eat": "idle"
 					}
 				}
 			},
@@ -693,8 +665,7 @@
 				"partStates": {
 					"headState": {
 						"idle": { "properties": { "image": "<humanoidPath>head/head.png:<headState_state>.<headState_frame>?addmask=/humanoid/sbq/vaporeonGiant/head/fg_mask.png:<headState_state>.<headState_frame>;0;0" } },
-						"eat": "idle",
-						"none": { "properties": {} }
+						"eat": "idle"
 					}
 				}
 			},
@@ -708,8 +679,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "<headArmor>:normal" } },
-						"none": { "properties": {} }
+						"idle": { "properties": { "image": "<headArmor>:normal" } }
 					},
 					"clothesHiddenState" : {
 						"none": { "properties": {} }

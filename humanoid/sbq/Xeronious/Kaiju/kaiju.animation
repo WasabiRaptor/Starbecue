@@ -292,8 +292,7 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -321,8 +320,7 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -349,8 +347,7 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -377,8 +374,7 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -407,8 +403,7 @@
 						"fall" : "duck",
 						"swim" : "walk",
 						"swimIdle" : "walk",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -436,8 +431,7 @@
 						"fall" : "duck",
 						"swim" : "walk",
 						"swimIdle" : "walk",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -466,8 +460,7 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"frontArmRotationState" : {
 						"rotation": { "properties": {
@@ -476,8 +469,7 @@
 							"anchorPart": "anchor",
 							"transformationGroups": ["frontArmRotation","movementOffset"],
 							"image": "<humanoidPath>arms/front.png:<frontArmRotationFrame>"
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -506,8 +498,7 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"backArmRotationState" : {
 						"rotation": { "properties": {
@@ -515,8 +506,7 @@
 							"anchorPart": "anchor",
 							"transformationGroups": ["backArmRotation","movementOffset"],
 							"image": "<humanoidPath>arms/back.png:<backArmRotationFrame>"
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -543,15 +533,13 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"frontArmRotationState" : {
 						"rotation": { "properties": {
 							"zLevel" : 6.01,
 							"image": "<frontSleeveKaiju>:<frontArmRotationFrame>"
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -578,14 +566,12 @@
 						"fall" : "duck",
 						"swim" : "duck",
 						"swimIdle" : "duck",
-						"crawl" : "duck",
-						"none": { "properties": {} }
+						"crawl" : "duck"
 					},
 					"backArmRotationState" : {
 						"rotation": { "properties": {
 							"image": "<backSleeveKaiju>:<backArmRotationFrame>"
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"portraitMode" : {
 						"head" : { "properties": {} },
@@ -605,8 +591,7 @@
 				"partStates": {
 					"headState": {
 						"idle": { "properties": { "image": "<humanoidPath>head.png:<headState_state>.<headState_frame>" } },
-						"eat" : "idle",
-						"none": { "properties": {} }
+						"eat" : "idle"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {"image": "<humanoidPath>head.png:idle.1"} },
@@ -624,8 +609,7 @@
 				"partStates": {
 					"headState": {
 						"idle": { "properties": { "image": "<humanoidPath>head.png:<headState_state>.<headState_frame>?addmask=/humanoid/sbq/Xeronious/Kaiju/masks/head.png:<headState_state>.<headState_frame>;0;0" } },
-						"eat" : "idle",
-						"none": { "properties": {} }
+						"eat" : "idle"
 					},
 					"portraitMode" : {
 						"head" : { "properties": {"image": "<humanoidPath>head.png:idle.1"} },
@@ -644,8 +628,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "<headArmor>:normal" } },
-						"none": { "properties": {} }
+						"idle": { "properties": { "image": "<headArmor>:normal" } }
 					},
 					"clothesHiddenState" : {
 						"none": { "properties": {} }

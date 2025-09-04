@@ -20,7 +20,10 @@
 					"bellyOffset" : [["reset"]],
 					"chestOffset" : [["reset"]],
 					"tailOffset" : [["reset"]],
-					"crotchOffset" : [["reset"]]
+					"crotchOffset" : [["reset"]],
+					"animationTags" : {
+						"pose" : "stand"
+					}
 				},
 				"states" : {
 					"idle" : {"properties" : {
@@ -29,6 +32,9 @@
 						"crotchOffset" : [["reset"],	["translate",[0,0.375]]]
 					}},
 					"sit" : {"properties" : {
+						"animationTags" : {
+							"pose" : "sit"
+						}
 					}},
 					"lay" : {"properties" : {
 						"crotchOffset" : [["reset"],	["translate",[0,0.5]]]

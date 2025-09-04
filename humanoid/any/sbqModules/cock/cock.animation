@@ -1,9 +1,9 @@
 {
 	"globalTagDefaults" : {
-		"cockImage" : "sbq/cock.png",
+		"cockFrameset" : "sbq/cock.png",
 		"cockInfusedFade" : "",
 		"cockInfusedDirectives" : "",
-		"cockinfusedImage" : "",
+		"cockInfusedFrameset" : "",
 
 		"cockSize" : "0",
 		"cockInterpolateSize" : "0"
@@ -70,8 +70,8 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
-						"walk": { "properties": { "image": "<cockImage>:<cockSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<cockFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"walk": { "properties": { "image": "<cockFrameset>:<cockSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -82,14 +82,13 @@
 						"lay" : "idle"
 					},
 					"cockState": {
-						"s_front" : { "properties": { "image": "<cockImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_front" : { "properties": { "image": "<cockFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
-						"s_down" : "s_front",
-						"none": { "properties": {} }
+						"s_down" : "s_front"
 					},
 					"cockExpandState" : {
-						"expand": { "properties": { "image": "<cockImage>:<cockInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<cockFrameset>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -114,8 +113,8 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<cockinfusedImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
-						"walk": { "properties": { "image": "<cockinfusedImage>:<cockSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"walk": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -126,14 +125,13 @@
 						"lay" : "idle"
 					},
 					"cockState": {
-						"s_front" : { "properties": { "image": "<cockinfusedImage>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_front" : { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
-						"s_down" : "s_front",
-						"none": { "properties": {} }
+						"s_down" : "s_front"
 					},
 					"cockExpandState" : {
-						"expand": { "properties": { "image": "<cockinfusedImage>:<cockInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<cockInfusedFrameset>:<cockInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

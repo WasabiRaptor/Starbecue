@@ -61,9 +61,12 @@
 		}
 	},
 	"sbqConfig" : {
+		"animations" : [
+			"/humanoid/wr/quadruped/sbqModules/base.animation"
+		],
 		"includes": [
 			"/humanoid/any/sbqModules/base/sbqModule.config",
-			"/humanoid/any/sbqModules/grab/sbqModule.config"
+			"/humanoid/wr/quadruped/sbqModules/grab/sbqModule.config"
 		]
 	},
 	"sbqIdentityAnimationCustom" : {

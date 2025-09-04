@@ -3,7 +3,8 @@
 		"stateTypes":{
 			"occupant<slot>Location" : {
 				"states" :{
-					"balls": { "frames": 1, "cycle": 0, "mode": "end" }
+					"grabbed": { "frames": 1, "cycle": 0, "mode": "end" }
+
 				}
 			},
 			"occupant<slot>State":{
@@ -16,10 +17,12 @@
 			"occupant<slot>":{
 				"partStates" : {
 					"occupant<slot>Location" :{
-						"balls" : {"properties":{
-							"anchorPart":"body",
-							"zLevel":-1,
-							"offset" : [0,-1.75]
+						"grabbed" : {"properties":{
+							"anchorPart":"backHandItem",
+							"hidden" : false,
+							"zLevel":19,
+							"offset" : [0.25,0.25],
+							"dance" : "sbqIgnore"
 						}}
 					},
 					"occupant<slot>State":{

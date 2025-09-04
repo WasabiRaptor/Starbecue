@@ -1,9 +1,9 @@
 {
 	"globalTagDefaults" : {
-		"bellyImage" : "sbq/belly.png",
+		"bellyFrameset" : "sbq/bellyQuadruped.png",
 		"bellyInfusedFade" : "",
 		"bellyInfusedDirectives" : "",
-		"bellyinfusedImage" : "",
+		"bellyInfusedFrameset" : "",
 		"bellySize" : "0",
 		"bellyInterpolateSize" : "0"
 
@@ -59,14 +59,14 @@
 					"anchorPart" : "body",
 					"navelInteract" : [0.25,-1.25],
 					"absorbInteract" : [-0.25,-1.25],
-					"processingDirectives" : "<bellyColorRemap><bodyDirectives>"
+					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
+						"idle": { "properties": { "image": "<bellyFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"walk": "idle",
 						"run": "idle",
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
+						"jump": { "properties": { "image": "<bellyFrameset>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump",
 						"duck": "idle",
 						"swim": "idle",
@@ -75,7 +75,7 @@
 						"lay" : "idle"
 					},
 					"bellyState": {
-						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
+						"s_front" : { "properties": { "image": "<bellyFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"s_front_press" : "s_front",
 						"s_front_hold" : "s_front",
 						"s_front_release" : "s_front",
@@ -90,11 +90,10 @@
 						"s_down" : "s_front",
 						"s_down_press" : "s_front",
 						"s_down_hold" : "s_front",
-						"s_down_release" : "s_front",
-						"none": { "properties": {} }
+						"s_down_release" : "s_front"
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
+						"expand": { "properties": { "image": "<bellyFrameset>:<bellyInterpolateSize>-<pose>.expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -102,7 +101,7 @@
 						"bust" : "head"
 					},
 					"bodyHighPriority": {
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
+						"jump": { "properties": { "image": "<bellyFrameset>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump"
 					}
 				}
@@ -118,10 +117,10 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
+						"idle": { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"walk": "idle",
 						"run": "idle",
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
+						"jump": { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump",
 						"duck": "idle",
 						"swim": "idle",
@@ -130,7 +129,7 @@
 						"lay" : "idle"
 					},
 					"bellyState": {
-						"s_front" : { "properties": { "image": "<bellyImage>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
+						"s_front" : { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"s_front_press" : "s_front",
 						"s_front_hold" : "s_front",
 						"s_front_release" : "s_front",
@@ -145,11 +144,10 @@
 						"s_down" : "s_front",
 						"s_down_press" : "s_front",
 						"s_down_hold" : "s_front",
-						"s_down_release" : "s_front",
-						"none": { "properties": {} }
+						"s_down_release" : "s_front"
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyImage>:<bellyInterpolateSize>-<pose>.expand" } },
+						"expand": { "properties": { "image": "<bellyInfusedFrameset>:<bellyInterpolateSize>-<pose>.expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -157,7 +155,7 @@
 						"bust" : "head"
 					},
 					"bodyHighPriority": {
-						"jump": { "properties": { "image": "<bellyImage>:<bellySize>-<body_state>.<body_frame>" } },
+						"jump": { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump"
 					}
 				}

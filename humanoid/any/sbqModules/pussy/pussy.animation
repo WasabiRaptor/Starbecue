@@ -3,7 +3,7 @@
 		"pussyImage" : "sbq/pussy.png",
 		"pussyInfusedFade" : "",
 		"pussyInfusedDirectives" : "",
-		"pussyinfusedImage" : "",
+		"pussyInfusedFrameset" : "",
 
 		"pussySize" : "0",
 		"pussyInterpolateSize" : "0"
@@ -81,8 +81,7 @@
 						"s_down" : "idle",
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
-						"none": { "properties": {} }
+						"s_down_release" : "idle"
 					},
 					"pussyExpandState" : {
 						"expand": { "properties": { "image": "<pussyImage>:<pussyInterpolateSize>-expand" } },
@@ -110,7 +109,7 @@
 				},
 				"partStates": {
 					"pussyState": {
-						"idle": { "properties": { "image": "<pussyinfusedImage>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
+						"idle": { "properties": { "image": "<pussyInfusedFrameset>:<pussySize>-<pussyState_state>.<pussyState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -126,11 +125,10 @@
 						"s_down" : "idle",
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
-						"none": { "properties": {} }
+						"s_down_release" : "idle"
 					},
 					"pussyExpandState" : {
-						"expand": { "properties": { "image": "<pussyinfusedImage>:<pussyInterpolateSize>-expand" } },
+						"expand": { "properties": { "image": "<pussyInfusedFrameset>:<pussyInterpolateSize>-expand" } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

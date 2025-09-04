@@ -1,16 +1,18 @@
 {
 	"globalTagDefaults" : {
-		"breastsLeftFrontImage" : "sbq/breastsFront.png",
-		"breastsLeftBackImage" : "sbq/breastsBack.png",
+		"breastsLeftFrontFrameset" : "sbq/breastsFront.png",
+		"breastsLeftBackFrameset" : "sbq/breastsBack.png",
 		"breastsLeftInfusedDirectives" : "",
 		"breastsLeftInfusedFade" : "",
-		"breastsLeftinfusedImage" : "",
+		"breastsLeftFrontInfusedFrameset" : "",
+		"breastsLeftBackInfusedFrameset" : "",
 
-		"breastsRightFrontImage" : "sbq/breastsFront.png",
-		"breastsRightBackImage" : "sbq/breastsBack.png",
+		"breastsRightFrontFrameset" : "sbq/breastsFront.png",
+		"breastsRightBackFrameset" : "sbq/breastsBack.png",
 		"breastsRightInfusedDirectives" : "",
 		"breastsRightInfusedFade" : "",
-		"breastsRightinfusedImage" : "",
+		"breastsRightFrontInfusedFrameset" : "",
+		"breastsRightBackInfusedFrameset" : "",
 
 		"breastsSize" : "0",
 		"breastsInterpolateSize" : "0",
@@ -127,8 +129,8 @@
 				"partStates": {
 					"breasts_rightState": {
 						"idle": { "properties": {
-							"image": "<breastsRightFrontImage>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
-							"flippedImage": "<breastsRightBackImage>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							"image": "<breastsRightFrontFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breastsRightBackFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -145,13 +147,12 @@
 						"s_down" : "idle",
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
-						"none": { "properties": {} }
+						"s_down_release" : "idle"
 					},
 					"breasts_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsRightFrontImage>:<breasts_rightInterpolateSize>-expand",
-							"flippedImage": "<breastsRightBackImage>:<breasts_rightInterpolateSize>-expand"
+							"image": "<breastsRightFrontFrameset>:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breastsRightBackFrameset>:<breasts_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -187,8 +188,8 @@
 				"partStates": {
 					"breasts_leftState": {
 						"idle": { "properties": {
-							"image": "<breastsLeftBackImage>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
-							"flippedImage": "<breastsLeftFrontImage>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							"image": "<breastsLeftBackFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breastsLeftFrontFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -205,13 +206,12 @@
 						"s_down" : "idle",
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
-						"none": { "properties": {} }
+						"s_down_release" : "idle"
 					},
 					"breasts_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsLeftBackImage>:<breasts_leftInterpolateSize>-expand",
-							"flippedImage": "<breastsLeftFrontImage>:<breasts_leftInterpolateSize>-expand"
+							"image": "<breastsLeftBackFrameset>:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breastsLeftFrontFrameset>:<breasts_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -247,8 +247,8 @@
 				"partStates": {
 					"breasts_rightState": {
 						"idle": { "properties": {
-							"image": "<breastsRightinfusedImage>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
-							"flippedImage": "<breastsRightinfusedImage>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							"image": "<breastsRightFrontInfusedFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breastsRightBackInfusedFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -265,13 +265,12 @@
 						"s_down" : "idle",
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
-						"none": { "properties": {} }
+						"s_down_release" : "idle"
 					},
 					"breasts_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsRightinfusedImage>:<breasts_rightInterpolateSize>-expand",
-							"flippedImage": "<breastsRightinfusedImage>:<breasts_rightInterpolateSize>-expand"
+							"image": "<breastsRightFrontInfusedFrameset>:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breastsRightBackInfusedFrameset>:<breasts_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -299,8 +298,8 @@
 				"partStates": {
 					"breasts_leftState": {
 						"idle": { "properties": {
-							"image": "<breastsLeftinfusedImage>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
-							"flippedImage": "<breastsLeftinfusedImage>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							"image": "<breastsLeftBackInfusedFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breastsLeftFrontInfusedFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -317,13 +316,12 @@
 						"s_down" : "idle",
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
-						"s_down_release" : "idle",
-						"none": { "properties": {} }
+						"s_down_release" : "idle"
 					},
 					"breasts_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsLeftinfusedImage>:<breasts_leftInterpolateSize>-expand",
-							"flippedImage": "<breastsLeftinfusedImage>:<breasts_leftInterpolateSize>-expand"
+							"image": "<breastsLeftBackInfusedFrameset>:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breastsLeftFrontInfusedFrameset>:<breasts_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},

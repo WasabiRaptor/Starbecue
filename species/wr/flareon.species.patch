@@ -1,1 +1,345 @@
-{}
+{
+	"sbqPartImages": {
+		"sbq/nickit_tail.png" : {
+			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"secondary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/nickit_tail.png" : {
+			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+
+		},
+		"sbq/flareon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/flareon/tail.png"
+		},
+		"sbq/infused/flareon_tail.png" : {
+			"sourceImage" : "/humanoid/wr/flareon/tail.png"
+		},
+		"sbq/vaporeon_tail.png" : {
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/vaporeon_tail.png" : {
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
+		},
+
+		"sbq/luxio_tail.png" : {
+			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/luxio_tail.png" : {
+			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+
+		"sbq/bellyQuadruped.png": {
+			"sourceImage": "/humanoid/wr/quadruped/sbqModules/belly/default.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/bellyQuadruped_noNavel.png": {
+			"sourceImage": "/humanoid/wr/quadruped/sbqModules/belly/default.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/belly.png": {
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/cock.png": {
+			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/cock.png": {
+			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqModules/pussy/default.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqModules/pussy/default.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"secondary"
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary_180"
+				],
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		}
+	}
+
+}

@@ -1,7 +1,7 @@
 {
 	"globalTagDefaults" : {
 		"tailFrameset" : "sbq/nickit_tail.png",
-		"tailInfusedImage" : "",
+		"tailInfusedFrameset" : "",
 		"tailInfusedFade" : "",
 		"tailInfusedDirectives" : "",
 
@@ -53,7 +53,7 @@
 
 					"anchorPart" : "body",
 					"transformationGroups": ["movementOffset", "tailOffset"],
-					"processingDirectives" : "<tailColorRemap><bodyDirectives>",
+					"processingDirectives" : "<bodyDirectives>",
 					"interact" : [-1,0]
 				},
 				"partStates": {
@@ -74,8 +74,7 @@
 						"s_front": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
-						"s_down" : "s_front",
-						"none": { "properties": {} }
+						"s_down" : "s_front"
 					},
 					"tailExpandState" : {
 						"expand": { "properties": { "image": "<tailFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } },
@@ -97,8 +96,8 @@
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
-						"walk": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<body_state>.<body_frame>" } },
 						"run": "walk",
 						"jump": "walk",
 						"fall": "walk",
@@ -109,15 +108,14 @@
 						"lay" : "idle"
 					},
 					"tailState": {
-						"s_front": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"s_front": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_back" : "s_front",
 						"s_up" : "s_front",
-						"s_down" : "s_front",
-						"none": { "properties": {} }
+						"s_down" : "s_front"
 					},
 					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailInfusedImage>:<tailInterpolateSize>-<tailExpandState_state>" } },
-						"eat": { "properties": { "image": "<tailInfusedImage>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
+						"expand": { "properties": { "image": "<tailInfusedFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } },
+						"eat": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

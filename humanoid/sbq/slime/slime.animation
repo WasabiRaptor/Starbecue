@@ -249,8 +249,7 @@
 						"jump" : "idle",
 						"fall" : "idle",
 						"swim" : "idle",
-						"swimIdle" : "idle",
-						"none": { "properties": {} }
+						"swimIdle" : "idle"
 					},
 					"bodyHighPriority" : {
 						"walk" : { "properties": { "image": "<humanoidPath>body/<hairType>.png:<slimeCount>-<body_state>.<body_frame>" } },
@@ -274,8 +273,7 @@
 						"s_down" : "s_front",
 						"s_down_press" : "s_front",
 						"s_down_hold" : "s_front",
-						"s_down_release" : "s_front",
-						"none": { "properties": {} }
+						"s_down_release" : "s_front"
 					},
 					"bellyExpandState" : {
 						"eat": { "properties": { "image": "<humanoidPath>body/<hairType>.png:<bellyExpandState_state>.<bellyExpandState_frame>" } }
@@ -304,12 +302,10 @@
 						"rotation": { "properties": {
 							"itemHidden": false,
 							"transformationGroups": ["frontArmRotation"]
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"frontarmDanceState" : {
-						"dance": { "properties": { } },
-						"none": { "properties": {} }
+						"dance": { "properties": { } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -331,12 +327,10 @@
 						"rotation": { "properties": {
 							"itemHidden": false,
 							"transformationGroups": ["backArmRotation"]
-						} },
-						"none": { "properties": {} }
+						} }
 					},
 					"backarmDanceState" : {
-						"dance": { "properties": { } },
-						"none": { "properties": {} }
+						"dance": { "properties": { } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
@@ -356,8 +350,7 @@
 				},
 				"partStates": {
 					"headState": {
-						"idle": { "properties": { "image": "<headArmor>:normal" } },
-						"none": { "properties": {} }
+						"idle": { "properties": { "image": "<headArmor>:normal" } }
 					},
 					"portraitMode" : {
 						"head": { "properties":{
