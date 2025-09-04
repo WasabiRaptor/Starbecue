@@ -33,22 +33,22 @@ function Default:update(dt)
 			animator.setParticleEmitterActive(v, false)
 		end
 	else
-        self:doAnimations(sbq.voreConfig.crotchShow)
-        local cock = sbq.SpeciesScript:getLocation("cock")
+		self:doAnimations(sbq.voreConfig.crotchShow)
+		local cock = sbq.SpeciesScript:getLocation("cock")
 		local balls = sbq.SpeciesScript:getLocation("balls")
 
-        if cock and (sbq.settings.read.cockLeakiness > (1 - lust)) then
-            local leakiness = ((sbq.settings.read.cockLeakiness ^ 2 * lust) ^ 2) * 10 *
-            math.max(0.25, (cock.occupancy.count or 0) + (balls and balls.occupancy.count or 0))
-            for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
-                animator.setParticleEmitterActive(v, true)
-                animator.setParticleEmitterEmissionRate(v, leakiness)
-            end
-        else
-            for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
-                animator.setParticleEmitterActive(v, false)
-            end
-        end
+		if cock and (sbq.settings.read.cockLeakiness > (1 - lust)) then
+			local leakiness = ((sbq.settings.read.cockLeakiness ^ 2 * lust) ^ 2) * 10 *
+			math.max(0.25, (cock.occupancy.count or 0) + (balls and balls.occupancy.count or 0))
+			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, true)
+				animator.setParticleEmitterEmissionRate(v, leakiness)
+			end
+		else
+			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
+				animator.setParticleEmitterActive(v, false)
+			end
+		end
 
 		local pussy = sbq.SpeciesScript:getLocation("pussy")
 		local womb = sbq.SpeciesScript:getLocation("womb")
@@ -70,7 +70,7 @@ function Default:update(dt)
 			animator.setParticleEmitterActive(v, false)
 		end
 	else
-        self:doAnimations(sbq.voreConfig.chestShow)
+		self:doAnimations(sbq.voreConfig.chestShow)
 		local breasts = sbq.SpeciesScript:getLocation("breasts")
 		if breasts and (sbq.settings.read.breastsLeakiness > (1 - lust)) then
 			local leakiness = ((sbq.settings.read.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, (breasts.occupancy.count or 0))
@@ -208,7 +208,7 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	end
 	local space, subLocation = location:hasSpace(size)
 	if space then
-        occupant:refreshLocation(locationName or action.location, subLocation)
+		occupant:refreshLocation(locationName or action.location, subLocation)
 		location:refreshStruggleDirection()
 		return true, function ()
 			occupant = sbq.Occupants.entityId[tostring(target)]
@@ -244,13 +244,13 @@ function default:trySendDeeperAvailable(name, action, target, failureReason, siz
 		local location = occupant:getLocation()
 		if not location.sendDeeperAction then return false, "invalidAction" end
 		if not occupant:active() then return false, "invalidAction" end
-        return sbq.SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
-    else
+		return sbq.SpeciesScript:actionAvailable(location.sendDeeperAction.action, target, table.unpack(location.sendDeeperAction.args or {}))
+	else
 		local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 		if not location then return false, "invalidLocation" end
-        if not location.sendDeeperAction then return false, "invalidAction" end
-        local spaceNeeded = (size * location.settings.multiplyFill / sbq.getScale()) - location:getRemainingSpace()
-        local success, newFailureReason
+		if not location.sendDeeperAction then return false, "invalidAction" end
+		local spaceNeeded = (size * location.settings.multiplyFill / sbq.getScale()) - location:getRemainingSpace()
+		local success, newFailureReason
 		for _, occupant in ipairs(location.occupancy.list) do
 			success, newFailureReason = self:trySendDeeperAvailable(name, action, occupant.entityId)
 			if success then
@@ -267,20 +267,20 @@ function default:trySendDeeperAvailable(name, action, target, failureReason, siz
 end
 
 function default:trySendDeeper(name, action, target, failureReason, size, ...)
-    if target then
-        local occupant = sbq.Occupants.entityId[tostring(target)]
+	if target then
+		local occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return false, "missingOccupant" end
 		local location = occupant:getLocation()
 		if not location.sendDeeperAction then return false, "invalidAction" end
 		if not occupant:active() then return false, "invalidAction" end
 		return sbq.SpeciesScript:tryAction(location.sendDeeperAction.action, occupant.entityId, table.unpack(location.sendDeeperAction.args or {}))
-    else
+	else
 		local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 		if not location then return false, "invalidLocation" end
-        if not location.sendDeeperAction then return false, "invalidAction" end
-        local success, newFailureReason
+		if not location.sendDeeperAction then return false, "invalidAction" end
+		local success, newFailureReason
 		location:safeIterateOccupants(function (occupant)
-            success, newFailureReason = self:trySendDeeper(name, action, occupant.entityId)
+			success, newFailureReason = self:trySendDeeper(name, action, occupant.entityId)
 			location:updateOccupancy(0) -- we need to refresh the size immediately for space calculations
 			if success then
 				if (failureReason == "noSpace") and (type(size) == "number") then
@@ -335,7 +335,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	local space, subLocation = location:hasSpace(size)
 
 	if not space and location.sendDeeperAction then
-        if self:trySendDeeperAvailable(name, action, nil, "noSpace", size) then
+		if self:trySendDeeperAvailable(name, action, nil, "noSpace", size) then
 			space = size
 		end
 	end
@@ -388,7 +388,7 @@ function default:tryVore(name, action, target, ...)
 	local space, subLocation = location:hasSpace(size)
 
 	if not space and location.sendDeeperAction then
-        self:trySendDeeper(name, action, nil, "noSpace", size)
+		self:trySendDeeper(name, action, nil, "noSpace", size)
 		space, subLocation = location:hasSpace(size)
 	end
 
@@ -467,7 +467,7 @@ local function letout(funcName, action, target, preferredAction, ...)
 	if target then
 		occupant = sbq.Occupants.entityId[tostring(target)]
 		if not occupant then return end
-        location = occupant:getLocation()
+		location = occupant:getLocation()
 		local exitTypes = location.exitTypes or location.entryTypes
 
 		for _, exitType in ipairs(exitTypes or {}) do
@@ -538,7 +538,7 @@ end
 function default:turboDigestAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-    local location = occupant:getLocation()
+	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.digest) and (not location.mainEffect.softDigest)) then return false, "invalidAction" end
 	if not ((mainEffect == "digest") or (mainEffect == "softDigest")) then return false, "invalidAction" end
@@ -554,7 +554,7 @@ end
 function default:turboHealAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
-    local location = occupant:getLocation()
+	local location = occupant:getLocation()
 	local mainEffect = occupant.locationSettings.mainEffect
 	if (not location.mainEffect) or ((not location.mainEffect.heal)) then return false, "invalidAction" end
 	if not (mainEffect == "heal") then return false, "invalidAction" end
@@ -614,7 +614,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 			-- we can drop condoms and milk for monsters, but if we don't have NPC data theres no reason to preserve it
 			if not item.parameters.npcArgs then return end
 			item.name = "sbqNPCEssenceJar"
-            if not sbq.settings.read.recentlyDigested[1] then
+			if not sbq.settings.read.recentlyDigested[1] then
 				rawset(sbq.settings.storedSettings, "recentlyDigested", _ENV.jarray())
 			end
 			table.insert(sbq.settings.storedSettings.recentlyDigested, 1, item)
@@ -807,7 +807,7 @@ function default:infuseAvailable(name, action, target, ...)
 	end
 end
 function default:tryInfuse(name, action, target, ...)
-    local location = sbq.SpeciesScript:getLocation(action.location)
+	local location = sbq.SpeciesScript:getLocation(action.location)
 	if not location then return false, "invalidLocation" end
 	local infuseType = action.infuseType or location.infuseType or name
 	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)] then return false, "alreadyInfused" end
@@ -826,7 +826,7 @@ function default:tryInfuse(name, action, target, ...)
 	end
 end
 function default:infused(name, action, target)
-    local location = sbq.SpeciesScript:getLocation(action.location)
+	local location = sbq.SpeciesScript:getLocation(action.location)
 	if not location then return false, "invalidLocation" end
 	local infuseType = action.infuseType or location.infuseType or name
 	local occupant = sbq.Occupants.entityId[tostring(target)]
@@ -865,7 +865,7 @@ function default:eggifyAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
 	if occupant.flags.egged or (sbq.settings:checkInvalid("eggify", "true", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
-    local location = occupant:getLocation()
+	local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end
 	return true
 end

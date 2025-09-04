@@ -1,10 +1,10 @@
 {
-    "animatedParts" : {
-        "stateTypes":{
-            "occupant<slot>Location" : {
-                "default": "default",
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"default": "default",
 				"priority" : 1,
-                "states" :{
+				"states" :{
 					// one doesn't explicitly need to make a state for each location
 					// but it is good to do so as explained in the part states
 					// when an occupant location the state with the matching name will be set
@@ -15,13 +15,13 @@
 					// example of a transformation state unique state
 					// "stateName_belly": { "frames": 1, "cycle": 0, "mode": "end" },
 					"default": { "frames": 1, "cycle": 0, "mode": "end" }
-                }
-            },
-            "occupant<slot>State":{
-                "default": "idle",
+				}
+			},
+			"occupant<slot>State":{
+				"default": "idle",
 				"priority" : 2,
-                "states" : {
-                    "idle": { "frames": 1, "cycle": 0, "mode": "end" },
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 
 					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"occupant<slot>" : [
@@ -51,11 +51,11 @@
 							[["reset"],	["translate",[0,0]]]
 						]}
 					}
-                }
-            }
-        },
-        "parts" : {
-            "occupant<slot>":{
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
 				"properties": {
 					"centered": true,
 					"loungeOffset" : [0,0],
@@ -70,19 +70,19 @@
 					"orientation" : "stand",
 					"emote" : "idle"
 				},
-                "partStates" : {
-                    "occupant<slot>Location" :{
+				"partStates" : {
+					"occupant<slot>Location" :{
 
-                    },
-                    "occupant<slot>State":{
-                    },
+					},
+					"occupant<slot>State":{
+					},
 					"portraitMode" : {
 						"head": { "properties": {"transforms":[["reset"],	["scale",[0,0]]],"hidden":true} }
 					}
-                }
-            }
-        }
-    },
+				}
+			}
+		}
+	},
 	"transformationGroups" : {
 		"occupant<slot>" : {"interpolated" : true}
 	}

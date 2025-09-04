@@ -583,7 +583,7 @@ sbq.settingChanged = {}
 
 
 function sbq.refreshSettings()
-	if sbq.SpeciesScript then
+	if sbq.SpeciesScript and sbq.SpeciesScript.active then
 		sbq.SpeciesScript:settingAnimations()
 	end
 end

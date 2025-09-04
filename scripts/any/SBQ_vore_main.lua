@@ -141,7 +141,7 @@ function sbq.reloadVoreConfig(sbqConfig)
 	sbq.voreConfig = sb.jsonMerge(sbq.voreConfig, sbqConfig)
 	-- sbq.debugLogInfo(sbq.voreConfig, 2)
 	-- load scripts
-	for _, script in ipairs(sbq.voreConfig.scripts or {}) do
+	for _, script in ipairs(sbq.voreConfig.scripts or {"/humanoid/any/sbqModules/base/voreScripts.lua"}) do
 		require(script)
 	end
 	sbq.SpeciesScript = { baseLocations = {}, locations = {}, states = {}, actionQueue = {} }
