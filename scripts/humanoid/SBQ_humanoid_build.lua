@@ -29,8 +29,7 @@ local function includeSBQModule(humanoidConfig, module)
 		merge = true
 	end
 	for _, v in ipairs(module.includes or {}) do
-		includeSBQModule(humanoidConfig, root.assetJson(v))
-		table.insert(humanoidConfig.sbqConfig.includes, v)
+		includeSBQModule(humanoidConfig, v)
 	end
 	for _, v in ipairs(module.scripts or {}) do
 		table.insert(humanoidConfig.sbqConfig.scripts, v)

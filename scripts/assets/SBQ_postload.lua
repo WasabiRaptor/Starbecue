@@ -86,7 +86,7 @@ for _, path in ipairs(speciesFiles) do
 							"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], missing palette in source named '%s'",
 							speciesConfig.kind, imagePath, i, remap[1])
 					elseif remap[2] then
-						local to = speciesConfig.baseColorPalette[remap[2]]
+						local to = (speciesConfig.baseColorPalette or {})[remap[2]]
 						if to then
 							for j, v in ipairs(from) do
 								newImage.processingDirectives = newImage.processingDirectives .. "?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
