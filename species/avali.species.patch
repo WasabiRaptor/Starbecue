@@ -1,8 +1,8 @@
 {
 	// avali like body
-	"animationCustom": [
-		"/humanoid/avali/avaliVoreAnimationCustom.config"
-	],
+	"humanoidOverrides" : {
+		"sbqModules" : "/humanoid/avali/sbq/sbqModules.config"
+	},
 	"baseColorPalette": {
 		"primary": [
 			"42331c",
@@ -73,11 +73,11 @@
 		},
 		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
 		},
 		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
 		},
 
 

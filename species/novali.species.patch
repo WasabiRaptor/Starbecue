@@ -1,13 +1,8 @@
 {
 	// avali like body
-	"animationCustom": [
-		"/humanoid/avali/avaliVoreAnimationCustom.config",
-		{
-			"globalTagDefaults": {
-				"bellyFrameset": "/humanoid/novakid/belly.png"
-			}
-		}
-	],
+	"humanoidOverrides" : {
+		"sbqModules" : "/humanoid/avali/sbq/sbqModules.config"
+	},
 	"baseColorPalette": {
 		"primary": [
 			"f6b919",
@@ -43,19 +38,19 @@
 	"sbqPartImages": {
 		"sbq/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;"
 		},
 		"sbq/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_female.png.png;0;0;"
 		},
 		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;"
 		},
 		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/avali/sbq/removeTailMask_female.png;0;0;"
 		},
 
 
