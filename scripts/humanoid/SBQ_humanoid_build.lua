@@ -74,7 +74,7 @@ local function getSBQBuildArguments(humanoidConfig)
 			humanoidConfig[v] = root.assetJson("/humanoid.config:" .. v)
 		end
 		if type(humanoidConfig[v]) == "string" then
-			humanoidConfig[v] = root.assetJson(v)
+			humanoidConfig[v] = root.assetJson(humanoidConfig[v])
 		end
 	end
 end
