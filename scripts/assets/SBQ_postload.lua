@@ -58,12 +58,14 @@ end
 
 local speciesFiles = assets.byExtension("species")
 for _, path in ipairs(speciesFiles) do
-    assets.patch(path, "/scripts/humanoid/SBQ_species_patch.lua")
+	assets.patch(path, "/scripts/humanoid/SBQ_species_patch.lua")
 end
-for _, path in ipairs(speciesFiles) do
+local function setupSpecies(path)
 	local speciesConfig = assets.json(path)
 	local humanoidPath = "/humanoid/" .. speciesConfig.kind .. "/"
-	for imagePath, newImage in pairs(speciesConfig.sbqPartImages or {}) do
+	for relativePath, newImage in pairs(speciesConfig.sbqPartImages or {}) do
+		local imagePath = humanoidPath .. relativePath
+		local framesPath = imagePath:gsub("%.png", ".frames")
 		if newImage.sourceImage:sub(1, 1) ~= "/" then
 			newImage.sourceImage = "/humanoid/" .. speciesConfig.kind .. "/" .. newImage.sourceImage
 		end
@@ -71,7 +73,7 @@ for _, path in ipairs(speciesFiles) do
 		local sourcePaletteFile = sourcePalettePath
 		local found = sourcePaletteFile:find(":")
 		if found then
-			sourcePaletteFile = sourcePaletteFile:sub(1,found-1)
+			sourcePaletteFile = sourcePaletteFile:sub(1, found - 1)
 		end
 		if assets.exists(sourcePaletteFile) and assets.exists(newImage.sourceImage) then
 			newImage.processingDirectives = newImage.processingDirectives or ""
@@ -84,42 +86,57 @@ for _, path in ipairs(speciesFiles) do
 					if not from then
 						sb.logInfo(
 							"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], missing palette in source named '%s'",
-							speciesConfig.kind, imagePath, i, remap[1])
+							speciesConfig.kind, relativePath, i, remap[1])
 					elseif remap[2] then
 						local to = (speciesConfig.baseColorPalette or {})[remap[2]]
 						if to then
 							for j, v in ipairs(from) do
-								newImage.processingDirectives = newImage.processingDirectives .. "?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
+								newImage.processingDirectives = newImage.processingDirectives ..
+								"?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
 							end
 						else
 							sb.logInfo(
 								"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], species is missing palette named '%s' in 'baseColorPalette'",
-								speciesConfig.kind, imagePath, i, remap[2])
+								speciesConfig.kind, relativePath, i, remap[2])
 						end
 					else -- if theres no color to remap to, remove the color by replacing with transparent pixels
 						for j, v in ipairs(from) do
-							newImage.processingDirectives = newImage.processingDirectives .. "?replace;" .. v .. "=00000000;"
+							newImage.processingDirectives = newImage.processingDirectives ..
+							"?replace;" .. v .. "=00000000;"
 						end
 					end
 				else
 					sb.logInfo(
 						"[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
-						speciesConfig.kind, imagePath, i)
+						speciesConfig.kind, relativePath, i)
 				end
 			end
-			assets.add(humanoidPath .. imagePath, assets.image(newImage.sourceImage .. (newImage.processingDirectives or "")))
-			assets.add(humanoidPath .. (imagePath:gsub("%.png", ".frames")), assets.bytes(assets.frames(newImage.sourceImage).file))
+
+			assets.add(imagePath, assets.image(newImage.sourceImage .. (newImage.processingDirectives or "")))
+			assets.add(framesPath, assets.bytes(assets.frames(newImage.sourceImage).file))
+			for _, v in ipairs(newImage.patches or {}) do
+				assets.patch(imagePath, v)
+			end
+			for _, v in ipairs(newImage.framesPatches or {}) do
+				assets.patch(framesPath, v)
+			end
 		else
 			if not (assets.exists(sourcePaletteFile)) then
 				sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
-					speciesConfig.kind, imagePath, sourcePalettePath)
+					speciesConfig.kind, relativePath, sourcePalettePath)
 			end
 			if not assets.exists(newImage.sourceImage) then
 				sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
-					speciesConfig.kind, imagePath, newImage.sourceImage)
+					speciesConfig.kind, relativePath, newImage.sourceImage)
 			end
 			-- nothing to do if it don't exist
 		end
+	end
+end
+for _, path in ipairs(speciesFiles) do
+	local success, error = pcall(setupSpecies, path)
+	if not success then
+		sb.logError("[SBQ] Error while setting up '%s'\n%s", path, error)
 	end
 end
 
