@@ -33,47 +33,19 @@
 	"sbqSettingsConfig": {
 		"defaultSettings": {
 			"navelVisible": false
-		},
-		// TODO move this
-		"locations": {
-			"tail": {
-				"disabled": false,
-				"settingInfusion": {
-					"tailSelect": {
-						"vaporeon_tail": {
-							"colorRemapGlobalTags": { // nickit does have a tertiary color so lets use it here
-								"tailColorRemap": [
-									[
-										"primary",
-										"secondary"
-									],
-									[
-										"secondary",
-										"hair"
-									],
-									[
-										"underbelly",
-										"primary"
-									]
-								]
-							}
-						}
-					}
-				}
-			}
 		}
 	},
 	"sbqConvertChance": 0.16,
 	"sbqPartImages": {
 		"sbq/noLegs/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;?addmask=/humanoid/any/sbqImageMasks/noLegs_male.png;0;0;",
-			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;?addmask=/humanoid/avali/sbq/noLegsMask_male.png;0;0;",
+			"patches" : ["/humanoid/avali/sbq/noLegs_patch.lua"]
 		},
 		"sbq/noLegs/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;?addmask=/humanoid/any/sbqImageMasks/noLegs_female.png;0;0;",
-			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_female.png;0;0;?addmask=/humanoid/avali/sbq/noLegsMask_female.png;0;0;",
+			"patches" : ["/humanoid/avali/sbq/noLegs_patch.lua"]
 		},
 		"sbq/malebody.png" : {
 			"sourceImage" : "malebody.png",
@@ -98,11 +70,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -175,15 +147,15 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
-				],
-				[
-					"secondary",
 					"secondary"
 				],
 				[
+					"secondary",
+					"hair"
+				],
+				[
 					"tertiary",
-					"tertiary"
+					"primary"
 				]
 			]
 		},
