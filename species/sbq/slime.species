@@ -1,6 +1,7 @@
 {
 	"animationConfig": "/humanoid/sbq/slime/slime.animation",
 	"animationCustom": [],
+	"sbqPartImages"  : {},
 	"baseColorPalette": {
 		"primary": [
 			"A1A1A1",
@@ -95,184 +96,6 @@
 		"Slime",
 		"Personality"
 	],
-	"defaultBlueprints": {
-		"tier1": [
-			// Empty Hands
-			{
-				"item": "flaghuman"
-			},
-			// Anvil
-			{
-				"item": "humantier1head"
-			},
-			{
-				"item": "humantier1chest"
-			},
-			{
-				"item": "humantier1pants"
-			},
-			{
-				"item": "humantier2head"
-			},
-			{
-				"item": "humantier2chest"
-			},
-			{
-				"item": "humantier2pants"
-			},
-			{
-				"item": "ironshortsword"
-			},
-			{
-				"item": "ironbroadsword"
-			},
-			{
-				"item": "tungstenaxe"
-			},
-			{
-				"item": "tungstenhammer"
-			},
-			// Anvil2
-			{
-				"item": "humantier3head"
-			},
-			{
-				"item": "humantier3chest"
-			},
-			{
-				"item": "humantier3pants"
-			},
-			{
-				"item": "humantier4head"
-			},
-			{
-				"item": "humantier4chest"
-			},
-			{
-				"item": "humantier4pants"
-			},
-			{
-				"item": "titaniumdagger"
-			},
-			{
-				"item": "titaniumspear"
-			},
-			{
-				"item": "durasteelbroadsword"
-			},
-			{
-				"item": "durasteelshortsword"
-			},
-			// Anvil3
-			{
-				"item": "humantier5ahead"
-			},
-			{
-				"item": "humantier5achest"
-			},
-			{
-				"item": "humantier5apants"
-			},
-			{
-				"item": "humantier6ahead"
-			},
-			{
-				"item": "humantier6achest"
-			},
-			{
-				"item": "humantier6apants"
-			},
-			{
-				"item": "humantier5mhead"
-			},
-			{
-				"item": "humantier5mchest"
-			},
-			{
-				"item": "humantier5mpants"
-			},
-			{
-				"item": "humantier6mhead"
-			},
-			{
-				"item": "humantier6mchest"
-			},
-			{
-				"item": "humantier6mpants"
-			},
-			{
-				"item": "humantier5shead"
-			},
-			{
-				"item": "humantier5schest"
-			},
-			{
-				"item": "humantier5spants"
-			},
-			{
-				"item": "humantier6shead"
-			},
-			{
-				"item": "humantier6schest"
-			},
-			{
-				"item": "humantier6spants"
-			},
-			{
-				"item": "aegisaltpistol"
-			},
-			{
-				"item": "aegisaltbow"
-			},
-			{
-				"item": "feroziumwand"
-			},
-			{
-				"item": "feroziumstaff"
-			},
-			{
-				"item": "violiumshortsword"
-			},
-			{
-				"item": "violiumbroadsword"
-			},
-			// Furniture Table 2
-			{
-				"item": "humanstoragelocker"
-			},
-			{
-				"item": "humanshipdoor"
-			},
-			{
-				"item": "humanshiphatch"
-			},
-			// Spinning Wheel
-			{
-				"item": "conceptchest"
-			},
-			{
-				"item": "conceptlegs"
-			},
-			{
-				"item": "coolchest"
-			},
-			{
-				"item": "coollegs"
-			},
-			{
-				"item": "sweatervestchest"
-			},
-			{
-				"item": "sweatervestlegs"
-			},
-			{
-				"item": "workoutchest"
-			},
-			{
-				"item": "workoutlegs"
-			}
-		]
-	},
 	"effectDirectives": "",
 	"genders": [
 		{
@@ -469,5 +292,183 @@
 	],
 	"undyColor": [
 		{}
-	]
+	],
+	"defaultBlueprints": {
+		"tier1": [
+			// Empty Hands
+			{
+				"item": "flaghuman"
+			},
+			// Anvil
+			{
+				"item": "humantier1head"
+			},
+			{
+				"item": "humantier1chest"
+			},
+			{
+				"item": "humantier1pants"
+			},
+			{
+				"item": "humantier2head"
+			},
+			{
+				"item": "humantier2chest"
+			},
+			{
+				"item": "humantier2pants"
+			},
+			{
+				"item": "ironshortsword"
+			},
+			{
+				"item": "ironbroadsword"
+			},
+			{
+				"item": "tungstenaxe"
+			},
+			{
+				"item": "tungstenhammer"
+			},
+			// Anvil2
+			{
+				"item": "humantier3head"
+			},
+			{
+				"item": "humantier3chest"
+			},
+			{
+				"item": "humantier3pants"
+			},
+			{
+				"item": "humantier4head"
+			},
+			{
+				"item": "humantier4chest"
+			},
+			{
+				"item": "humantier4pants"
+			},
+			{
+				"item": "titaniumdagger"
+			},
+			{
+				"item": "titaniumspear"
+			},
+			{
+				"item": "durasteelbroadsword"
+			},
+			{
+				"item": "durasteelshortsword"
+			},
+			// Anvil3
+			{
+				"item": "humantier5ahead"
+			},
+			{
+				"item": "humantier5achest"
+			},
+			{
+				"item": "humantier5apants"
+			},
+			{
+				"item": "humantier6ahead"
+			},
+			{
+				"item": "humantier6achest"
+			},
+			{
+				"item": "humantier6apants"
+			},
+			{
+				"item": "humantier5mhead"
+			},
+			{
+				"item": "humantier5mchest"
+			},
+			{
+				"item": "humantier5mpants"
+			},
+			{
+				"item": "humantier6mhead"
+			},
+			{
+				"item": "humantier6mchest"
+			},
+			{
+				"item": "humantier6mpants"
+			},
+			{
+				"item": "humantier5shead"
+			},
+			{
+				"item": "humantier5schest"
+			},
+			{
+				"item": "humantier5spants"
+			},
+			{
+				"item": "humantier6shead"
+			},
+			{
+				"item": "humantier6schest"
+			},
+			{
+				"item": "humantier6spants"
+			},
+			{
+				"item": "aegisaltpistol"
+			},
+			{
+				"item": "aegisaltbow"
+			},
+			{
+				"item": "feroziumwand"
+			},
+			{
+				"item": "feroziumstaff"
+			},
+			{
+				"item": "violiumshortsword"
+			},
+			{
+				"item": "violiumbroadsword"
+			},
+			// Furniture Table 2
+			{
+				"item": "humanstoragelocker"
+			},
+			{
+				"item": "humanshipdoor"
+			},
+			{
+				"item": "humanshiphatch"
+			},
+			// Spinning Wheel
+			{
+				"item": "conceptchest"
+			},
+			{
+				"item": "conceptlegs"
+			},
+			{
+				"item": "coolchest"
+			},
+			{
+				"item": "coollegs"
+			},
+			{
+				"item": "sweatervestchest"
+			},
+			{
+				"item": "sweatervestlegs"
+			},
+			{
+				"item": "workoutchest"
+			},
+			{
+				"item": "workoutlegs"
+			}
+		]
+	}
 }
