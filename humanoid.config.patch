@@ -1,64 +1,76 @@
 {
-	"sbqModules" : {
-		"belly" : {
-			"default": {
-				"includes": [
-					"/humanoid/any/sbqModules/belly/sbqModule.config"
-				]
-			}
-		},
-		"cock" : {
-			"default": {
-				"includes" : [
-					"/humanoid/any/sbqModules/cock/sbqModule.config",
-					"/humanoid/any/sbqModules/humanoidBase/jackoff.sbqModule.config"
-				]
-			}
-		},
-		"balls" : {
-			"default": {
-				"includes": [
-					"/humanoid/any/sbqModules/balls/sbqModule.config"
-				]
-			}
-		},
-		"breasts" : {
-			"default": {
-				"includes" : [
-					"/humanoid/any/sbqModules/breasts/sbqModule.config",
-					"/humanoid/any/sbqModules/humanoidBase/squishBreasts.sbqModule.config"
-				]
-			}
-		},
-		"pussy" : {
-			"default": {
-				"includes" : [
-					"/humanoid/any/sbqModules/pussy/sbqModule.config",
-					"/humanoid/any/sbqModules/humanoidBase/fingerPussy.sbqModule.config"
-				]
-			}
-		},
-		"tail": {
-			"nickit": {
-				"includes": ["/humanoid/any/sbqModules/nickit_tail/sbqModule.config"],
-				"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+	"sbqModuleOrder" : [
+		"belly",
+		"pussy",
+		"cock",
+		"balls",
+		"breasts",
+		"tail"
+	],
+
+	"sbqConfig" : {
+		"includes" : ["/humanoid/any/sbqModules/humanoidBase/sbqModule.config"],
+		"modules" : {
+			"belly" : {
+				"default": {
+					"includes": [
+						"/humanoid/any/sbqModules/belly/sbqModule.config"
+					]
+				}
 			},
-			"flareon": {
-				"includes": ["/humanoid/any/sbqModules/flareon_tail.sbqModule.config"],
-				"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+			"cock" : {
+				"default": {
+					"includes" : [
+						"/humanoid/any/sbqModules/cock/sbqModule.config",
+						"/humanoid/any/sbqModules/humanoidBase/jackoff.sbqModule.config"
+					]
+				}
 			},
-			"vaporeon": {
-				"includes": ["/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config"],
-				"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+			"balls" : {
+				"default": {
+					"includes": [
+						"/humanoid/any/sbqModules/balls/sbqModule.config"
+					]
+				}
 			},
-			"luxio": {
-				"includes": ["/humanoid/any/sbqModules/luxio_tail.sbqModule.config"],
-				"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+			"breasts" : {
+				"default": {
+					"includes" : [
+						"/humanoid/any/sbqModules/breasts/sbqModule.config",
+						"/humanoid/any/sbqModules/humanoidBase/squishBreasts.sbqModule.config"
+					]
+				}
+			},
+			"pussy" : {
+				"default": {
+					"includes" : [
+						"/humanoid/any/sbqModules/pussy/sbqModule.config",
+						"/humanoid/any/sbqModules/humanoidBase/fingerPussy.sbqModule.config"
+					]
+				}
+			},
+			"tail": {
+				"naga": {
+					"includes": ["/humanoid/any/sbqModules/naga/sbqModule.config"]
+				},
+				"nickit": {
+					"includes": ["/humanoid/any/sbqModules/nickit_tail/sbqModule.config"],
+					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+				},
+				"flareon": {
+					"includes": ["/humanoid/any/sbqModules/flareon_tail.sbqModule.config"],
+					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+				},
+				"vaporeon": {
+					"includes": ["/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config"],
+					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+				},
+				"luxio": {
+					"includes": ["/humanoid/any/sbqModules/luxio_tail.sbqModule.config"],
+					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+				}
 			}
 		}
-	},
-	"sbqConfig" : {
-		"includes" : ["/humanoid/any/sbqModules/humanoidBase/sbqModule.config"]
 	},
 	"sbqIdentityAnimationCustom" : {
 		"personalityIdle" : {
@@ -125,7 +137,8 @@
 			],
 			"tailSelect" : [
 				"default",
-				"nickit"
+				"nickit",
+				"naga"
 			],
 			"tailInfuseSelect" : [
 				"default"

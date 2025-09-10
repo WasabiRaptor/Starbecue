@@ -56,6 +56,23 @@ local function includeSBQModule(humanoidConfig, module)
 			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
 		end
 	end
+	if module.modules then
+		if type(module.modules) == "string" then
+			module.modules = root.assetJson(module.modules)
+		end
+		for i, slot in ipairs(humanoidConfig.sbqModuleOrder or {}) do
+			local modules = module.modules[slot]
+			local selectedModule = humanoidConfig["sbqModule_" .. slot]
+			if modules and selectedModule and (selectedModule ~= "disable") then
+				if modules[selectedModule] then
+					includeSBQModule(humanoidConfig, modules[selectedModule])
+				else
+					includeSBQModule(humanoidConfig, modules.default)
+				end
+			end
+		end
+	end
+
 	if merge then
 		-- make sure not to overwrite these when we merge
 		module.includes = nil
@@ -66,7 +83,7 @@ end
 
 local function getSBQBuildArguments(humanoidConfig)
 	for _, v in ipairs({
-		"sbqModules",
+		"sbqModuleOrder",
 		"sbqConfig",
 		"sbqIdentityAnimationCustom"
 	}) do
@@ -120,17 +137,6 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 		scripts = jarray()
 	}
 	includeSBQModule(humanoidConfig, baseModule)
-	for i, slot in ipairs(humanoidConfig.sbqModuleOrder or sbqConfig.moduleOrder or {}) do
-		local modules = humanoidConfig.sbqModules[slot] or {}
-		local selectedModule = humanoidParameters["sbqModule_" .. slot]
-		if selectedModule and (selectedModule ~= "disable") then
-			if modules[selectedModule] then
-				includeSBQModule(humanoidConfig, modules[selectedModule])
-			else
-				includeSBQModule(humanoidConfig, modules.default)
-			end
-		end
-	end
 
 	return humanoidConfig
 end

@@ -1,11 +1,13 @@
 {
 	"humanoidOverrides" : {
-		"sbqModules" : {
-			"tail" : {
-				"default": {
-					"includes": [
-						"/humanoid/any/sbqModules/nickit_tail/sbqModule.config"
-					]
+		"sbqConfig" : {
+			"modules" : {
+				"tail" : {
+					"default": {
+						"includes": [
+							"/humanoid/any/sbqModules/nickit_tail/sbqModule.config"
+						]
+					}
 				}
 			}
 		}
@@ -37,6 +39,33 @@
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
 
+
+		"sbq/naga.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/infused/naga.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"tertiary"
+				]
+			]
+		},
 
 		"sbq/nickit_tail.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png"

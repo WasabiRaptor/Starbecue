@@ -63,6 +63,33 @@
 		// paths local to the species' folder used to generate images with replaced colors to match the species
 		// these same files can be manually created at the respective paths in the species' folder and have their entries removed here
 		// however then the sprites will not be automatically updated if the base sprites are, only manually cra
+		"sbq/naga.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/naga.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",

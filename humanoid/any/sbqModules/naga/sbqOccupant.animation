@@ -1,0 +1,45 @@
+{
+	// this is not meant to be used as a standalone animation!
+
+	// this is used as the default for an occupant's animation states and parts
+	// all occupant<slot> tags are replaced with the occupant's seatname when this is loaded
+	// via the Occupants.newOccupant() function in the main vore script
+	"animatedParts" : {
+		"stateTypes" : {
+			// used for the idle when no special anim is happening
+			// a state does not need to be created for every location
+			"occupant<slot>Location" : {
+				"states" : {
+					"tail": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			// this animation state has a higher priority than the locations and will override it when it
+			// is active, when idle the occupant will do the animation from the above state
+			"occupant<slot>State" : {
+				"states" : {
+				}
+
+			}
+		},
+		"parts" : {
+			"occupant<slot>" : {
+				"partStates" : {
+					"occupant<slot>Location" : {
+						// one doesn't explicitly need to make a state for each location
+						// but it is good to do so to have their camera focused in the right spot
+						// so anchor to the relevant part and set offsets as necessary
+						"tail" : {"properties":{
+							"anchorPart":"tail",
+							"zLevel":-1,
+							"offset" : [0,-1]
+						}}
+
+					},
+					"occupant<slot>State" : {
+
+					}
+				}
+			}
+		}
+	}
+}

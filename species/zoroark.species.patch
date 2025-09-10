@@ -1,7 +1,9 @@
 {
 	// avali like body
 	"humanoidOverrides" : {
-		"sbqModules" : "/humanoid/avali/sbq/sbqModules.config"
+		"sbqConfig" : {
+			"modules" : "/humanoid/avali/sbq/sbqModules.config"
+		}
 	},
 	"baseColorPalette": {
 		"primary": [
@@ -65,6 +67,33 @@
 			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/avali/sbq/removeTailMask_female.png;0;0;"
 		},
 
+
+		"sbq/naga.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/naga.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				]
+			]
+		},
 
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
