@@ -1,0 +1,82 @@
+{
+
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"states" :{
+					"belly": { "frames": 1, "cycle": 0, "mode": "end" },
+					"ass": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"occupant<slot>State":{
+				"states" : {
+					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
+					"analVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" }
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
+				"partStates" : {
+					"occupant<slot>Location" :{
+						// one doesn't explicitly need to make a state for each location
+						// but it is good to do so to have their camera focused in the right spot
+						// so anchor to the relevant part and set offsets as necessary
+						"belly" : {"properties":{
+							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [-0.5, -1.75]
+						}},
+						"ass" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [-0.75,-1]
+						}}
+					},
+					"occupant<slot>State":{
+						"oralVore" : {
+							"frameProperties" : {
+								"release" : [true],
+								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, false, false, true, true, true],
+								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[8, -1.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",45],	["translate",[8, -1]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",90],	["translate",[7.5, -0.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",90],	["translate",[7, -0.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",100],	["translate",[6, -0.5]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",110],	["translate",[5, -1]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",110],	["translate",[2, -1.5]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",110],	["translate",[-0.5, -1.75]]]
+								]
+							},
+							"properties" : {
+								"anchorPart" :"head",
+								"zLevel" : -1
+							}
+						},
+						"analVore": {
+							"frameProperties" : {
+								"release" : [true],
+								"emote" : ["oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, true],
+								"orientation" : ["stand", "stand", "stand", "stand"],
+								"transforms" : [
+									[["reset"],	["scale",[1, 1]],	["rotateDegrees",0],	["translate",[-3.5, -1.5]]],
+									[["reset"],	["scale",[1, 1]],	["rotateDegrees",-80],	["translate",[-3.5, -2.25]]],
+									[["reset"],	["scale",[0.6, 0.6]],	["rotateDegrees",-80],	["translate",[-2, -1]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-80],	["translate",[-0.5, -1.75]]]
+								]
+							},
+							"properties" : {
+								"anchorPart" : "body",
+								"zLevel" : -1
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

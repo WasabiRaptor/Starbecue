@@ -62,18 +62,13 @@
 					"idle": { "frames": 1, "cycle": 0, "mode": "end", "properties" : {
 					} },
 					"duck": { "frames": 1, "cycle": 0, "mode": "end", "properties" : {
-						"headOffset" : [["reset"],	["translate",[0.125,0]]],
-						"tailOffset" : [["reset"],	["translate",[0,0.375]]]
 					} },
 					"sit": { "frames": 1, "cycle": 0, "mode": "end", "properties" : {
-						"tailOffset" : [["reset"],	["scale",[-1,1]],	["translate",[-0.125,0]]],
 						"animationTags" : {
 							"pose" : "sit"
 						}
 					} },
 					"lay": { "frames": 1, "cycle": 0, "mode": "end", "properties" : {
-						"movementOffset" :  [["reset"],	["translate",[0, -0.875]]],
-						"tailOffset" : [["reset"],	["translate",[-0.25,0.25]]],
 						"animationTags" : {
 							"pose" : "lay"
 						}
@@ -81,46 +76,15 @@
 
 					"walk": { "frames": 8, "cycle": 0.75, "mode": "loop", "properties" : {
 					}, "frameProperties":{
-						"tailOffset" : [
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]]
-						]
 					} },
 					"run": { "frames": 8, "cycle": 0.75, "mode": "loop", "properties" : {
 					}, "frameProperties":{
-						"tailOffset" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0.25,0]]],
-							[["reset"],	["translate",[0.125,0]]]
-						]
 					} },
 					"runbackwards": { "frames": 8, "cycle": 0.75, "mode": "loop", "properties" : {
 					}, "frameProperties":{
-						"tailOffset" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0.25,0]]],
-							[["reset"],	["translate",[0.125,0]]]
-						]
 					} },
 
 					"jump": { "frames": 4, "cycle": 0.25, "mode": "end", "properties" : {
-						"headOffset" : [["reset"],	["translate",[0,0.375]]]
 					}, "frameProperties":{
 						"headOffset" : [
 							[["reset"],	["translate",[0,0.125]]],
@@ -130,7 +94,6 @@
 						]
 					} },
 					"fall": { "frames": 4, "cycle": 0.25, "mode": "end", "properties" : {
-						"headOffset" : [["reset"],	["translate",[0,0.375]]]
 					}, "frameProperties":{
 						"headOffset" : [
 							[["reset"],	["translate",[0,0.5]]],
