@@ -5,22 +5,22 @@
 		"stateTypes": {
 			"eatState" : {
 				"priority" : 4, // animation states each have a priority, ones with higher values override ones with lesser values if they can
-				"default" : "ignore",
+				"default" : "idle",
 				"states" : {
-					"ignore" : {"frames":0,"cycle":0,"mode":"end"},
+					"idle" : {"frames":0,"cycle":0,"mode":"end"},
 					// we use the ignore state in the higher priority states to let the lower priority states play
-					// if we don't define data for the "ignore" state in the anim parts, it will take the next valid anim
+					// if we don't define data for the "idle" state in the anim parts, it will take the next valid anim
 					// from a lower priority state when ignore is the active state
-					"eat": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"}
+					"eat": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "idle"}
 				}
 			},
 			"bellyExpandState" : {
 				"priority" : 3,
-				"default" : "ignore",
+				"default" : "idle",
 				"states" : {
-					"ignore" : {"frames":0,"cycle":0,"mode":"end"},
-					"1-to-0": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"},
-					"0-to-1": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "ignore"}
+					"idle" : {"frames":0,"cycle":0,"mode":"end"},
+					"1-to-0": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "idle"},
+					"0-to-1": {"frames": 8,"cycle": 1.5,"mode": "transition","transition": "idle"}
 				}
 			},
 			"body": {

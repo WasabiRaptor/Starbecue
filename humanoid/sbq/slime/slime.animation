@@ -130,7 +130,7 @@
 							[["reset"],	["translate",[0,-0.125]]]
 						]
 					}},
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
 					}},
 					"none": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
 					}}
@@ -141,7 +141,7 @@
 				"default": "idle",
 				"states": {
 					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -170,7 +170,7 @@
 					"eat": { "frames": 2, "cycle": 0.3, "mode": "loop" },
 					"sleep": { "frames": 2, "cycle": 1, "mode": "loop" },
 
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -200,9 +200,9 @@
 			},
 			"bellyExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore", "frameProperties" : {
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle", "frameProperties" : {
 						"headOffset" : [
 							[["reset"],	["translate",[0,0]]],
 							[["reset"],	["translate",[0,0.125]]],
@@ -215,7 +215,7 @@
 							[["reset"],	["translate",[0,2]]]
 						]
 					}},
-					"ignore": { "frames": 1, "cycle": 0, "mode":"end" },
+					"idle": { "frames": 1, "cycle": 0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			}

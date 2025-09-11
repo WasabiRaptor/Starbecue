@@ -199,7 +199,7 @@
 						}
 					} },
 
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
 						"globalTags" : {
 							"pose" : "stand"
 						}
@@ -217,7 +217,7 @@
 				"states": {
 					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
 					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -246,7 +246,7 @@
 					"eat": { "frames": 2, "cycle": 0.3, "mode": "loop" },
 					"sleep": { "frames": 2, "cycle": 1, "mode": "loop" },
 
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -283,12 +283,12 @@
 			},
 			"bellyExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -317,12 +317,12 @@
 			},
 			"cockExpandState" : {
 				"priority" : 3,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -358,12 +358,12 @@
 			},
 			"balls_rightExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -391,12 +391,12 @@
 			},
 			"balls_leftExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},

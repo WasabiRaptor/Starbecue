@@ -48,12 +48,12 @@
 			},
 			"balls_rightExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -81,12 +81,12 @@
 			},
 			"balls_leftExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},

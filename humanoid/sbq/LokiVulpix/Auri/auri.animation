@@ -227,7 +227,7 @@
 						}
 					} },
 
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
+					"idle": { "frames": 1, "cycle": 0, "mode": "end", "properties" :{
 						"globalTags" : {
 							"pose" : "stand"
 						}
@@ -244,7 +244,7 @@
 				"default": "idle",
 				"states": {
 					"idle": { "frames": 1, "cycle": 1, "mode": "end" },
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -273,7 +273,7 @@
 					"eat": { "frames": 2, "cycle": 0.3, "mode": "loop" },
 					"sleep": { "frames": 2, "cycle": 1, "mode": "loop" },
 
-					"ignore": { "frames": 1, "cycle": 0, "mode": "end" },
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -310,12 +310,12 @@
 			},
 			"bellyExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -344,12 +344,12 @@
 			},
 			"pussyExpandState" : {
 				"priority" : 2,
-				"default": "ignore",
+				"default": "idle",
 				"states" : {
-					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "ignore"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "ignore"},
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
@@ -357,7 +357,7 @@
 				"priority" : 4,
 				"default": "none",
 				"states" : {
-					"ignore": { "frames": 1, "cycle":0, "mode":"end" },
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			}

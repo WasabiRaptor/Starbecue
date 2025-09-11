@@ -9,8 +9,6 @@
 			// used for the idle when no special anim is happening
 			// a state does not need to be created for every location
 			"occupant<slot>Location" : {
-				"default": "none",
-				"priority" : 1,
 				"states" : {
 					// one doesn't explicitly need to make a state for each location
 					// but it is good to do so as explained in the part states
@@ -22,48 +20,15 @@
 					// example of a transformation state unique state
 					// "stateName_belly": { "frames": 1, "cycle": 0, "mode": "end" },
 
-					"belly": { "frames": 1, "cycle": 0, "mode": "end" },
-					"grabbed": { "frames": 1, "cycle": 0, "mode": "end" }
+					"belly": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
 			// this animation state has a higher priority than the locations and will override it when it
 			// is active, when idle the occupant will do the animation from the above state
 			"occupant<slot>State" : {
-				"default": "idle",
-				"priority" : 2,
 				"states" : {
-					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"oralVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-
-					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0.125,0]]],
-							[["reset"],	["translate",[0,0]]]
-						]}
-					},
-					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[-0.125,0]]],
-							[["reset"],	["translate",[0,0]]]
-						]}
-					},
-					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0.125]]],
-							[["reset"],	["translate",[0,0]]]
-						]}
-					},
-					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
-						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,-0.125]]],
-							[["reset"],	["translate",[0,0]]]
-						]}
-					}
+					"analVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" }
 				}
 
 			}
@@ -91,7 +56,7 @@
 						// so anchor to the relevant part and set offsets as necessary
 						"belly" : {"properties":{
 							"anchorPart":"belly",
-							"zLevel":-1,
+							"zLevel": 0.0,
 							"offset" : [0,-1]
 						}},
 						"grabbed" : {"properties":{
@@ -118,11 +83,11 @@
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",130],	["translate",[3.5, 0.75]]],
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",135],	["translate",[2.25, -0.375]]],
 									[["reset"],	["scale",[0, 0]],	["rotateDegrees",125],	["translate",[1.25, -1.25]]]
-]
+								]
 							},
 							"properties" : {
 								"anchorPart" :"head",
-								"zLevel" : -1
+								"zLevel" : 8.0
 							}
 						},
 						"analVore_back": {
@@ -139,11 +104,11 @@
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[-0.5, -2.75]]],
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[0, -2.75]]],
 									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[0.5, -2.75]]]
-]
+								]
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
+								"zLevel" : 8.0
 							}
 						},
 						"absorbVore_back": {
@@ -156,11 +121,11 @@
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[1.8175, -2.5]]],
 									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3]]],
 									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3]]]
-]
+								]
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
+								"zLevel" : 8.0
 							}
 						},
 						"absorbVore_lay": {
@@ -168,36 +133,16 @@
 								"emote" : ["sleep", "sleep", "sleep", "sleep"],
 								"hidden" : [false, false, true, true],
 								"orientation" : ["lay", "lay", "lay", "lay"],
-								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]],
- [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[2.8175, -3.4]]],
- [["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3.2]]],
- [["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3.2]]]
-]
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[2.8175, -3.4]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3.2]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[1.8175, -3.2]]]
+								]
 							},
 							"properties" : {
 								"anchorPart" : "body",
-								"zLevel" : -3.9
-							}
-						},
-						"grabbed_rollover" : {
-							"frameProperties" : {
-								"emote" : ["sleep", "sleep", "sleep"],
-								"hidden" : [false, false, false],
-								"orientation" : ["lay", "lay", "lay"],
-								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]],
- [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[2, -3.125]]],
- [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[1.3125, -2]]]
-]
-							}
-						},
-						"grabbed_laydown" : {
-							"frameProperties" : {
-								"emote" : ["idle", "idle"],
-								"hidden" : [false, false],
-								"orientation" : ["stand", "lay"],
-								"transforms" : [[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[3.5, -1.75]]],
- [["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]]
-]
+								"zLevel" : 8.0
 							}
 						}
 					},
