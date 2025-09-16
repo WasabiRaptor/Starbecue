@@ -84,8 +84,6 @@
 				"default": "idle",
 				"states" : {
 					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
 					"idle": { "frames": 1, "cycle":0, "mode":"end" },
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
@@ -149,8 +147,7 @@
 						"expand": { "properties": {
 							"image": "<ballsRightFrontFrameset>:<balls_rightInterpolateSize>-expand",
 							"flippedImage": "<ballsRightBackFrameset>:<balls_rightInterpolateSize>-expand"
-							} },
-						"eat" : "expand"
+							} }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },

@@ -9,7 +9,7 @@
 				"priority" : 2,
 				"states" : {
 					"idle": { "frames": 8, "cycle": 2, "mode": "loop" },
-					"raise": { "frames": 8, "cycle": 2, "mode": "end" }
+					"raise": { "frames": 8, "cycle": 2, "mode": "transition", "transition" : "idle" }
 				}
 			}
 		},

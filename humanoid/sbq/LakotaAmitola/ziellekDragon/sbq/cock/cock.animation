@@ -102,49 +102,6 @@
 						"true" : { "properties":{}}
 					}
 				}
-			},
-
-			"cock_infused" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 11.41,
-					"anchorPart": "cock",
-					"processingDirectives" : "<cockInfusedDirectives><cockInfusedFade>"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
-						"walk": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<body_state>.<body_frame>" } },
-						"run": "walk",
-						"jump": "idle",
-						"fall": "idle",
-						"duck": "idle",
-						"swim": "idle",
-						"swimIdle" : "idle",
-						"sit" : "idle",
-						"lay" : "idle"
-					},
-					"cockState": {
-						"s_front" : { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
-						"s_back" : "s_front",
-						"s_up" : "s_front",
-						"s_down" : "s_front"
-					},
-					"cockExpandState" : {
-						"expand": { "properties": { "image": "<cockInfusedFrameset>:<cockInterpolateSize>-expand" } },
-						"eat" : "expand"
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust" : "head"
-					},
-					"cockHiddenState" : {
-						"true": { "properties": {} }
-					},
-					"starpounds" : {
-						"true" : { "properties":{}}
-					}
-				}
 			}
 		}
 	},

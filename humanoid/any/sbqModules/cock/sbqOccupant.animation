@@ -1,28 +1,28 @@
 {
-    "animatedParts" : {
-        "stateTypes":{
-            "occupant<slot>Location" : {
-                "states" :{
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"states" :{
 					"cock": { "frames": 1, "cycle": 0, "mode": "end" }
-                }
-            },
-            "occupant<slot>State":{
-                "states" : {
+				}
+			},
+			"occupant<slot>State":{
+				"states" : {
 					"cockVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" }
-                }
-            }
-        },
-        "parts" : {
-            "occupant<slot>":{
-                "partStates" : {
-                    "occupant<slot>Location" :{
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
+				"partStates" : {
+					"occupant<slot>Location" :{
 						"cock" : {"properties":{
 							"anchorPart":"body",
 							"zLevel":-1,
 							"offset" : [0.25,-1.75]
 						}}
-                    },
-                    "occupant<slot>State":{
+					},
+					"occupant<slot>State":{
 						"cockVore" : {
 							"frameProperties" : {
 								"release" : [true],
@@ -45,17 +45,26 @@
 									true,
 									true,
 									true
+								],
+								"zLevel" : [
+									25,
+									25,
+									25,
+									11,
+									11,
+									11,
+									11,
+									11
 								]
 							},
 							"properties" : {
-								"anchorPart" : "cock",
-								"zLevel" : 11
+								"anchorPart" : "cock"
 							}
 						}
 
-                    }
-                }
-            }
-        }
-    }
+					}
+				}
+			}
+		}
+	}
 }
