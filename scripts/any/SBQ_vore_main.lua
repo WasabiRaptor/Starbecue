@@ -1332,12 +1332,30 @@ function sbq._Location:randomOccupant()
 		if i > #self.occupancy.list then i = 1 end
 	end
 end
-
+function sbq._Location:lockSize(locked)
+    self.occupancy.lockSize = locked or self.occupancy.lockSize
+end
+function sbq._Location:unlockSize()
+    self.occupancy.lockSize = false
+end
+function sbq._Location:queueSizeChangeAnims(anims)
+	if not anims then return end
+	if self.occupancy.queuedSizeChangeAnims then
+		self.occupancy.queuedSizeChangeAnims = sb.jsonMerge(self.occupancy.queuedSizeChangeAnims, anims)
+	else
+		self.occupancy.queuedSizeChangeAnims = anims
+	end
+end
+function sbq._Location:clearQueuedSizeChangeAnims()
+	self.occupancy.queuedSizeChangeAnims = nil
+end
 
 function sbq._Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	self.occupancy.forceSizeRefresh = false
 	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "Count", tostring(self.occupancy.visualCount))
 	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "Size", tostring(self.occupancy.visualSize))
+	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "PrevCount", tostring(prevCount))
+	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "PrevSize", tostring(prevVisualSize))
 	local sizeTags = {
 		prevSize = tostring(prevVisualSize),
 		newSize = tostring(self.occupancy.visualSize),
@@ -1351,6 +1369,7 @@ function sbq._Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	end
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
 	if sizeChangeAnims then
+		sbq.logInfo(sizeChangeAnims, 2)
 		self.occupancy.interpolateFrom = (self.occupancy.interpolating and self.occupancy.interpolateSize) or prevVisualSize
 		self.occupancy.interpolating = true
 		self.interpolateTime = sbq.SpeciesScript:doAnimations(sizeChangeAnims, sizeTags)

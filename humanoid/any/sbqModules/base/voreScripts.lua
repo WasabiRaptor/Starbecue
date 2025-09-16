@@ -208,6 +208,11 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	end
 	local space, subLocation = location:hasSpace(size)
 	if space then
+		location:queueSizeChangeAnims(action.sizeChangeAnims)
+		if action.forceSizeRefresh then
+			location:markSizeDirty(true)
+		end
+
 		occupant:refreshLocation(locationName or action.location, subLocation)
 		location:refreshStruggleDirection()
 		return true, function ()
@@ -215,6 +220,9 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 			if occupant then
 				occupant:refreshLocation()
 				location:refreshStruggleDirection()
+				if action.sizeChangeAnims then
+					location:clearQueuedSizeChangeAnims()
+				end
 			end
 		end
 	end
@@ -393,8 +401,22 @@ function default:tryVore(name, action, target, ...)
 	end
 
 	if space or (action.flags and action.flags.infusing) then
-		location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
+		location:queueSizeChangeAnims(action.sizeChangeAnims)
+		location:lockSize(action.lockSize)
+		local function finished()
+			if action.lockSize then
+				location:unlockSize()
+				location:markSizeDirty()
+			end
+			if action.sizeChangeAnims then
+				location:clearQueuedSizeChangeAnims()
+			end
+			sbq.SpeciesScript.lockActions = false
+		end
 		if sbq.Occupants.newOccupant(target, size, action.location, subLocation, action.flags) then
+			if action.forceSizeRefresh then
+				location:markSizeDirty(true)
+			end
 			world.sendEntityMessage(entity.id(), "sbqControllerRotation", false) -- just to clear hand rotation if one ate from grab
 			sbq.SpeciesScript.lockActions = true
 			sbq.SpeciesScript:hideSlots(action.hideSlots or {})
@@ -408,23 +430,14 @@ function default:tryVore(name, action, target, ...)
 				if occupant then
 					occupant.flags.newOccupant = false
 					occupant:refreshLocation()
-					if action.lockSize then
-						location.occupancy.lockSize = false
-						location:markSizeDirty()
-					end
 				end
-				sbq.SpeciesScript.lockActions = false
+				finished()
 			end
 		else
-			if action.lockSize then
-				location.occupancy.lockSize = false
-			end
+			finished()
 			return false, "noSlots"
 		end
 	else
-		if action.lockSize then
-			location.occupancy.lockSize = false
-		end
 		return false, "noSpace"
 	end
 end
@@ -438,27 +451,34 @@ function default:tryLetout(name, action, target, throughput, ...)
 	end
 	if occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting then return false, "invalidAction" end
 	local location = occupant:getLocation()
-	location.occupancy.lockSize = action.lockSize or location.occupancy.lockSize
-	if (not action.lockSize) or (action.location and (location.key ~= action.location)) then
-		location:markSizeDirty()
+	if action.location then
+		location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 	end
+	if not location then return false, "invalidLocation" end
+	location:queueSizeChangeAnims(action.sizeChangeAnims)
+	location:lockSize(action.lockSize)
+	location:markSizeDirty(action.forceSizeRefresh)
 	occupant.flags.releasing = true
 	sbq.SpeciesScript.lockActions = true
 	sbq.SpeciesScript:hideSlots(action.hideSlots or {})
 	sbq.SpeciesScript:settingAnimations()
 	sbq.forceTimer("huntTargetSwitchCooldown", 30)
 	return true, function()
-		if action.lockSize and ((not action.location) or (action.location == location.key)) then
-			location.occupancy.lockSize = false
+		if action.lockSize then
+			location:unlockSize()
 			location:markSizeDirty()
 		end
+		if action.sizeChangeAnims then
+			location:clearQueuedSizeChangeAnims()
+		end
+		sbq.SpeciesScript.lockActions = false
+
 		sbq.forceTimer(name.."ShowCosmeticAnims", 5, function ()
 			sbq.SpeciesScript:showSlots()
 			sbq.SpeciesScript:settingAnimations()
 		end)
 		sbq.forceTimer("huntTargetSwitchCooldown", 30)
 		local occupant = sbq.Occupants.entityId[tostring(target)]
-		sbq.SpeciesScript.lockActions = false
 		if occupant then occupant:remove("releasing") end
 	end
 end
