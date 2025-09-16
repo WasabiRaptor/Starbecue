@@ -1,18 +1,22 @@
 {
 	"altOptionAsUndyColor": true,
-	"animationCustom": [
-		"/humanoid/any/layered_emote.animation",
-		"/humanoid/any/humanoidPred.animation",
-		{
-			"globalTagDefaults": {
-				"legs_fg_mask": "/humanoid/gnolls/frontLegMask/malebody.png",
-				"tailFrameset": "tail.png",
-				"emotePath": "emote/emote.png",
-				"emote_fgPath": "emote/emote_fg.png",
-				"emote_bgPath": "emote/emote_bg.png"
-			}
+	"humanoidOverrides" : {
+		"useAnimation" : true,
+		"animation" : {
+			"version" : 1,
+			"globalTagDefaults" : {},
+			"includes" : [
+				"/humanoid/opensb/humanoid.animation",
+				"/humanoid/wr/layered_emote.animation",
+				"tail.animation"
+			],
+			"animatedParts" : {
+				"stateTypes" : {},
+				"parts" : {}
+			},
+			"transformationGroups" : {}
 		}
-	],
+	},
 	"baseColorPalette": {
 		"primary": [
 			"1c1614",

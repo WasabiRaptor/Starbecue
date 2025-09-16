@@ -1,15 +1,34 @@
 {
 	"altOptionAsHairColor": true,
 	"altOptionAsUndyColor": true,
-	"animationCustom": [
-		"/humanoid/any/humanoidPred.animation",
-		{
-			"globalTagDefaults": {
-				"legs_fg_mask": "/humanoid/gnolls/frontLegMask/malebody.png",
-				"tailFrameset": "tail.png"
-			}
+	"humanoidOverrides" : {
+		"useAnimation" : true,
+		"animation" : {
+			"version" : 1,
+			"globalTagDefaults" : {},
+			"partTagDefaults" : {
+				"emote" : {
+					"humanoidPath" : "/humanoid/sbq/FFWizard/hellhound"
+				},
+				"emoteFront" : {
+					"humanoidPath" : "/humanoid/sbq/FFWizard/hellhound"
+				},
+				"emoteBack" : {
+					"humanoidPath" : "/humanoid/sbq/FFWizard/hellhound"
+				}
+			},
+			"includes" : [
+				"/humanoid/opensb/humanoid.animation",
+				"/humanoid/wr/layered_emote.animation",
+				"/humanoid/sbq/FFWizard/hellhound/tail.animation"
+			],
+			"animatedParts" : {
+				"stateTypes" : {},
+				"parts" : {}
+			},
+			"transformationGroups" : {}
 		}
-	],
+	},
 	"baseColorPalette": {
 		"primary": [
 			"1c1614",
