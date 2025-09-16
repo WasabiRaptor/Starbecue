@@ -1,66 +1,81 @@
 {
-	"animationConfig": "/humanoid/sbq/IcyVixen/Fray/fray.animation",
-	"animationCustom": [],
-	"sbqPartImages" : {},
-	"baseColorPalette": {
-		"primary": [
-			"3b3b3f",
-			"4a4a4f",
-			"626368",
-			"727377"
-		],
-		"secondary": [
-			"1c1c1c",
-			"262626",
-			"343434",
-			"424242"
-		],
-		"flesh": [
-			"8cb2bb",
-			"c7e1e6",
-			"e8fbff"
-		],
-		"eyeRight": [
-			"4e0233",
-			"ff7ce9",
-			"ffffff"
-		],
-		"eyeLeft": [
-			"230050",
-			"e3b8ff",
-			"ffffff"
-		]
-	},
-	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"bodyColor": [
-		{
-			"230050": "230050FE",
-			"4e0233": "4e0233FE",
-			"ff7ce9": "ff69e5FE",
-			"e3b8ff": "c671ffFE",
-			"ffffff": "ffffffFE", // eyed
-			"8cb2bb": "8cb2bbFE",
-			"c7e1e6": "c7e1e6FE",
-			"e8fbff": "e8fbffFE" // flesh
-		}
-	],
+	"kind": "sbq/IcyVixen/Fray",
 	"charCreationTooltip": {
 		"title": "Fray",
 		"subTitle": "-",
 		"description": "Big Vulpix."
 	},
-	"charGenTextLabels": [
-		"Underbelly",
-		"Hair style",
-		"-",
-		"-",
-		"Fur colour",
-		"Floof colour",
-		"-",
-		"-",
-		"Vulpix",
-		"Personality"
+	"nameGen": [
+		"/species/humanmalenamegen.config:names",
+		"/species/humanfemalenamegen.config:names"
 	],
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises": [
+		"/sfx/humanoid/humanhurt_male1.ogg",
+		"/sfx/humanoid/humanhurt_female1.ogg"
+	],
+	"effectDirectives": "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=ff99e6FF;31a6ffFF=e359b9FF",
+	"forceName": "Fray",
+
+	"genders": [
+		{
+			"name": "male",
+			"image": "/interface/title/male.png",
+			"characterImage": "/interface/title/male.png"
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+		},
+		{
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/female.png"
+			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
+		}
+	],
+	"sbqPartImages" : {},
+	"baseColorPalette": {
+		"primary": ["3b3b3f","4a4a4f","626368","727377"],
+		"secondary": ["1c1c1c","262626","343434","424242"],
+		"flesh": ["8cb2bb","c7e1e6","e8fbff"],
+		"eyeRight": ["4e0233","ff7ce9","ffffff"],
+		"eyeLeft": ["230050","e3b8ff","ffffff"]
+	},
+	"humanoidConfig" : "/humanoid/sbq/IcyVixen/Fray/fray.config",
+	"buildScripts" : ["/humanoid/opensb/build.lua"],
+	"createScripts" : ["/species/sbq/IcyVixen/Fray.lua"],
+
+	"charGenTextLabels" : [
+		"Fur Color", // body color
+		"Eye Color", // hair type
+		"Beans Color", // shirt
+		"-", // pants
+
+		"Hair Color", // alt option - undy color - facial mask
+		"Hair Style", // head option - hair color - facial hair
+		"-", // shirt color
+		"-", // pants color
+
+		"Vulpix", // species
+		"Personality" // personality
+	],
+	"furColor" : [
+		""
+	],
+	"eyeColor" : [
+		"?replace;4e0233=4e0233FE;ff7ce9=ff7ce9FE;230050=230050FE;e3b8ff=e3b8ffFE;ffffff=ffffffFE"
+	],
+	"beansColor" : [
+		"?replace;8cb2bb=8cb2bbFE;c7e1e6=c7e1e6FE;e8fbff=e8fbffFE"
+	],
+	"hairColor" : [
+		""
+	],
+	"hairStyle" : [
+		"0"
+	],
+
+	"potionImagePath": "/humanoid/sbq/IcyVixen/Fray/potion/",
+	"potionRarity": "essential",
+	"skull": "/humanoid/human/dead.png",
 	"defaultBlueprints": {
 		"tier1": [
 			// Empty Hands
@@ -238,266 +253,5 @@
 				"item": "workoutlegs"
 			}
 		]
-	},
-	"effectDirectives": "?replace;FEFFFFFF=FFFFFFFF;9bd4ffFF=ff99e6FF;31a6ffFF=e359b9FF",
-	"forceName": "Fray",
-	"genders": [
-		{
-			"name": "male",
-			"image": "/interface/title/male.png",
-			"characterImage": "/interface/title/male.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair": [
-				"0"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "",
-			"facialHair": [],
-			"facialMaskGroup": "",
-			"facialMask": []
-		},
-		{
-			"name": "female",
-			"image": "/interface/title/female.png",
-			"characterImage": "/interface/title/female.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair": [
-				"0"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "",
-			"facialHair": [],
-			"facialMaskGroup": "",
-			"facialMask": []
-		}
-	],
-	"hairColor": [
-		{}
-	],
-	"humanoidOverrides": {
-		"mouthOffset": [
-			20,
-			3
-		],
-		"feetOffset": [
-			0,
-			-32
-		],
-		"runFallOffset": 0,
-		"duckOffset": 0,
-		"walkBob": [
-			0,
-			0,
-			0,
-			0,
-			0,
-			0,
-			0,
-			0
-		],
-		"runBob": [
-			0,
-			0,
-			1,
-			1,
-			0,
-			0,
-			-1,
-			-1
-		],
-		"frontArmRotationCenter": [
-			24,
-			-5
-		],
-		"backArmRotationCenter": [
-			24,
-			-5
-		],
-		"frontHandPosition": [
-			24,
-			-5
-		],
-		"backArmOffset": [
-			4,
-			0
-		],
-		"movementParameters": {
-			"standingPoly": [
-				[
-					-2.5,
-					1
-				],
-				[
-					-3,
-					0.5
-				],
-				[
-					-3,
-					-3.5
-				],
-				[
-					-2.5,
-					-4
-				],
-				[
-					2.5,
-					-4
-				],
-				[
-					3,
-					-3.5
-				],
-				[
-					3,
-					0.5
-				],
-				[
-					2.5,
-					1
-				]
-			],
-			"crouchingPoly": [
-				[
-					-2.5,
-					1
-				],
-				[
-					-3,
-					0.5
-				],
-				[
-					-3,
-					-3.5
-				],
-				[
-					-2.5,
-					-4
-				],
-				[
-					2.5,
-					-4
-				],
-				[
-					3,
-					-3.5
-				],
-				[
-					3,
-					0.5
-				],
-				[
-					2.5,
-					1
-				]
-			],
-			"mass": 1.6,
-			"walkSpeed": 10,
-			"runSpeed": 20
-		},
-		"personalities": [
-			[
-				"idle.1",
-				"idle.1",
-				[
-					0,
-					0
-				],
-				[
-					0,
-					0
-				]
-			] //standard
-		],
-		"humanoidTiming": {
-			// Idle, Walk, Run, Jump, Fall, Swim, SwimIdle, Duck, Sit, Lay
-			"stateCycle": [
-				1,
-				0.75,
-				0.75,
-				0.25,
-				0.25,
-				0.5,
-				0.5,
-				1,
-				1,
-				1
-			],
-			"stateFrames": [
-				1,
-				8,
-				8,
-				4,
-				4,
-				7,
-				2,
-				1,
-				1,
-				1
-			],
-			// EmoteIdle, Blabbering, Shouting, Happy, Sad, NEUTRAL, Laugh, Annoyed, Oh, OOOH, Blink, Wink Eat Sleep
-			//          , normal    , caps    , :)   , :'(, :|     , :D   ,        , :o, :O  ,      , ;)
-			"emoteCycle": [
-				1,
-				0.3,
-				0.3,
-				0.3,
-				1,
-				0.3,
-				0.5,
-				1,
-				1,
-				1,
-				1,
-				0.5,
-				0.3,
-				1
-			],
-			"emoteFrames": [
-				1,
-				2,
-				2,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1,
-				8,
-				8,
-				2,
-				1
-			]
-		}
-	},
-	"identityAnimationCustom": {},
-	"kind": "sbq/IcyVixen/Fray",
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
-	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-	"ouchNoises": [
-		"/sfx/humanoid/humanhurt_male1.ogg",
-		"/sfx/humanoid/humanhurt_female1.ogg"
-	],
-	"potionImagePath": "/humanoid/sbq/IcyVixen/Fray/potion/",
-	"potionRarity": "essential",
-	"sbqConfig": [
-		"/humanoid/sbq/IcyVixen/Fray/vore.config"
-	],
-	"skull": "/humanoid/human/dead.png",
-	"undyColor": [
-		{}
-	]
+	}
 }

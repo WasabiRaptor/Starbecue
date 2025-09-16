@@ -1,0 +1,54 @@
+{
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"states" :{
+					"cock": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"occupant<slot>State":{
+				"states" : {
+					"cockVore": { "frames": 4, "cycle": 1.5, "mode": "transition", "transition": "idle" }
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
+				"partStates" : {
+					"occupant<slot>Location" :{
+						"cock" : {"properties":{
+							"anchorPart":"cock",
+							"zLevel":-1,
+							"offset" : [-1, -1.75]
+						}}
+					},
+					"occupant<slot>State":{
+						"cockVore" : {
+							"frameProperties" : {
+								"release" : [true],
+								"emote" : ["oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, true],
+								"orientation" : ["stand", "stand", "stand", "stand"],
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[0, -1.5]]],
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",45],	["translate",[0, -3.75]]],
+									[["reset"],	["scale",[-0.6, 0.6]],	["rotateDegrees",45],	["translate",[-1, -1.75]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",45],	["translate",[-1, -1.75]]]
+								],
+								"zLevel" : [
+									25,
+									11,
+									11,
+									11
+								]
+							},
+							"properties" : {
+								"anchorPart" : "cock"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

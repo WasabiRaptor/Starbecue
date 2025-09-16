@@ -1,0 +1,122 @@
+{
+	"globalTagDefaults" : {
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+			"tailState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 8, "cycle": 2, "mode": "loop" }
+				}
+			}
+		},
+		"parts" : {
+			"tail" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 8.1,
+					"anchorPart" : "body",
+					"transformationGroups" : ["tailOffset"],
+					"offset" : [0,0],
+					"processingDirectives" : "<bodyDirectives>",
+					"interact" : [-1,0]
+				}
+			},
+			"tail_5": {
+				"properties" : {
+					"zLevel":8.11,
+					"anchorPart" : "tail",
+					"transformationGroups" : ["tail_5"],
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"tailState": {
+						"idle": { "properties": { "image": "<humanoidPath>tails/5.png" } }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			},
+			"tail_4": {
+				"properties" : {
+					"zLevel":8.12,
+					"anchorPart" : "tail",
+					"transformationGroups" : ["tail_4"],
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"tailState": {
+						"idle": { "properties": { "image": "<humanoidPath>tails/4.png" } }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			},
+			"tail_3": {
+				"properties" : {
+					"zLevel":8.13,
+					"anchorPart" : "tail",
+					"transformationGroups" : ["tail_3"],
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"tailState": {
+						"idle": { "properties": { "image": "<humanoidPath>tails/3.png" } }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			},
+			"tail_2": {
+				"properties" : {
+					"zLevel":8.14,
+					"anchorPart" : "tail",
+					"transformationGroups" : ["tail_2"],
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"tailState": {
+						"idle": { "properties": { "image": "<humanoidPath>tails/2.png" } }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			},
+			"tail_1": {
+				"properties" : {
+					"zLevel":8.15,
+					"anchorPart" : "tail",
+					"transformationGroups" : ["tail_1"],
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"tailState": {
+						"idle": { "properties": { "image": "<humanoidPath>tails/1.png" } }
+					},
+					"portraitMode" : {
+						"head" : { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"tailOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}
