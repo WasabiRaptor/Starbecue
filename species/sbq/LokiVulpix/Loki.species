@@ -1,15 +1,23 @@
 {
 	"altOptionAsFacialMask": true,
 	"altOptionAsHairColor": true,
-	"animationCustom": [
-		"/humanoid/any/humanoidPred.animation",
-		{
-			"globalTagDefaults": {
-				"legs_fg_mask": "/humanoid/gnolls/frontLegMask/malebody.png",
-				"tailFrameset": "tail.png"
-			}
+	"humanoidOverrides" : {
+		"useAnimation" : true,
+		"animation" : {
+			"version" : 1,
+			"globalTagDefaults" : {},
+			"includes" : [
+				"/humanoid/opensb/humanoid.animation",
+				"/humanoid/wr/layered_emote.animation",
+				"tail.animation"
+			],
+			"animatedParts" : {
+				"stateTypes" : {},
+				"parts" : {}
+			},
+			"transformationGroups" : {}
 		}
-	],
+	},
 	"baseColorPalette": {
 		"primary": [
 			"bd7025",
@@ -247,52 +255,24 @@
 	},
 	"effectDirectives": "?replace=FEFFFFFF=cfffa7FF?replace=9bd4ffFF=b4ff74FF?replace=31a6ffFF=92e64aFF",
 	"forceName": "Loki",
+	"hair": [
+		"0"
+	],
+	"facialMaskGroup": "antlers",
+	"facialMask": [
+		"0"
+	],
+
 	"genders": [
 		{
 			"name": "male",
 			"image": "/interface/title/male.png",
-			"characterImage": "/interface/title/male.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair": [
-				"0"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "antlers",
-			"facialHair": [
-				"0"
-			],
-			"facialMaskGroup": "ears",
-			"facialMask": [
-				"0"
-			]
+			"characterImage": "/interface/title/male.png"
 		},
 		{
 			"name": "female",
 			"image": "/interface/title/female.png",
-			"characterImage": "/interface/title/female.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair": [
-				"0"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "antlers",
-			"facialHair": [
-				"0"
-			],
-			"facialMaskGroup": "ears",
-			"facialMask": [
-				"0"
-			]
+			"characterImage": "/interface/title/female.png"
 		}
 	],
 	"hairColor": [
@@ -300,7 +280,6 @@
 			"d9c189": "E86D46"
 		}
 	],
-	"headOptionAsFacialhair": true,
 	"headOptionAsHairColor": true,
 	"infuseData": [
 		"/humanoid/any/basicInfuseData.config",
