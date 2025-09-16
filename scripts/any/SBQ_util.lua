@@ -97,29 +97,6 @@ function sbq.metatableLayers(...)
 	end
 end
 
-function sbq.validateExportSettings(settings)
-	local validated = sb.jsonMerge(settings, {})
-	validated.recentlyDigested = nil
-	validated.infuseSlots = nil
-	return sbq.removeEmptyTables(validated)
-end
-
-function sbq.removeEmptyTables(input)
-	local empty = true
-	for k, v in pairs(input) do
-		if type(v) == "table" then
-			input[k] = sbq.removeEmptyTables(v)
-			if input[k] then
-				empty = false
-			end
-		else
-			empty = false
-		end
-	end
-	if empty then return nil end
-	return input
-end
-
 function sbq.getEntitySize(entityId)
 	if world.entityType(entityId) == "object" then
 		return math.sqrt(#world.objectSpaces()) / sbq.config.sizeConstant
@@ -266,69 +243,6 @@ function sbq.getString(str)
 	return str
 end
 
-sbq.getSettingsOf = {}
-function sbq.getSettingsOf.prefs()
-	return sbq.validateExportSettings({
-		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
-		infusePrefs = sbq.exportSettingGroup("infusePrefs"),
-		domBehavior = sbq.exportSettingGroup("domBehavior"),
-		subBehavior = sbq.exportSettingGroup("subBehavior")
-	})
-end
-
-function sbq.getSettingsOf.locations()
-	return sbq.validateExportSettings({
-		locations = sbq.exportSettingGroup("locations"),
-	})
-end
-
-function sbq.getSettingsOf.current()
-	return sbq.validateExportSettings(sb.jsonMerge(storage.sbqSettings, {
-		vorePrefs = sbq.exportSettingGroup("vorePrefs"),
-		infusePrefs = sbq.exportSettingGroup("infusePrefs"),
-		locations = sbq.exportSettingGroup("locations"),
-		domBehavior = sbq.exportSettingGroup("domBehavior"),
-		subBehavior = sbq.exportSettingGroup("subBehavior"),
-	}))
-end
-
-function sbq.getSettingsOf.all()
-	local output = sbq.exportBaseSettings()
-	output.vorePrefs = sbq.exportSettingGroup("vorePrefs")
-	output.infusePrefs = sbq.exportSettingGroup("infusePrefs")
-	output.locations = sbq.exportSettingGroup("locations")
-	output.domBehavior = sbq.exportSettingGroup("domBehavior")
-	output.subBehavior = sbq.exportSettingGroup("subBehavior")
-	return sbq.validateExportSettings(output)
-end
-
-function sbq.exportBaseSettings()
-	local output = {}
-	for k, _ in pairs(sbq.defaultSettings) do
-		if not sbq.config.groupedSettings[k] then
-			output[k] = sbq.settings.read[k]
-		end
-	end
-	return output
-end
-
-function sbq.exportSettingGroup(group)
-	local output = {}
-	local list = {}
-	local groupData = sbq.config.groupedSettings[group]
-	if type(groupData.list) == "string" then
-		list = sbq.lists[groupData.list] or {}
-	elseif type(groupData.list) == "table" then
-		list = groupData.list
-	end
-	for _, name in ipairs(list) do
-		output[name] = {}
-		for k, _ in pairs(groupData.defaultSettings) do
-			output[name][k] = sbq.settings.read[group][name][k]
-		end
-	end
-	return output
-end
 
 function sbq.createdDateString(time)
 	return os.date(sbq.getString(":createdOnDate"), time or os.time()) ..

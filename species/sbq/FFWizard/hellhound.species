@@ -60,6 +60,47 @@
 		"Hellhound",
 		"Personality"
 	],
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"doom" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "sbq/FFWizard/hellhound", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"doombed", "count":1},
+				{"name":"doomchair", "count":1},
+				{"name":"doomdoor", "count":1},
+				{"name":"doomlight", "count":1},
+				{"name":"doomswitch", "count":1},
+				{"name":"doomtable", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "sbq/FFWizard/hellhound", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
+
 	"defaultBlueprints": {
 		"tier1": [
 			// Empty Hands

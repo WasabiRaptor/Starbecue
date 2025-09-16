@@ -1,4 +1,44 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"squamaeft" : 6
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "squamaeft", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"squamaeftwoodenbed", "count":1},
+				{"name":"squamaeftwoodchair", "count":1},
+				{"name":"squamaeftwoodendesk", "count":1},
+				{"name":"squamaeftlantern", "count":1},
+				{"name":"squamaeftbannersmall", "count":1},
+				{"name":"squamaeftbannerlarge", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "squamaeft", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette": {
 		// here in the base color map you want to define the base color palette for your species
 		"primary": [

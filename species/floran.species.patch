@@ -1,4 +1,47 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"floran" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "floran", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"floranarmchair", "count":1},
+				{"name":"floranbed", "count":1},
+				{"name":"floranbonerack", "count":1},
+				{"name":"floranbookcase", "count":1},
+				{"name":"florancabinet1", "count":1},
+				{"name":"floranpainting1", "count":1},
+				{"name":"florandrum1", "count":1},
+				{"name":"floranstove", "count":1},
+				{"name":"plantcage1", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "floran", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette": {
 		"primary": [
 			"6f2919",

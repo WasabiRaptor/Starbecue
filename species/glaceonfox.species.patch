@@ -1,4 +1,49 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"prism" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "glaceonfox", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"prismbed", "count":1},
+				{"name":"prismchair", "count":1},
+				{"name":"prismdoor", "count":1},
+				{"name":"prismtable", "count":1},
+				{"name":"prismlamp3", "count":1},
+				{"name":"prismrock4", "count":1},
+				{"name":"prismrock5", "count":1},
+				{"name":"prismrock6", "count":1},
+				{"name":"prismrock7", "count":1},
+				{"name":"prismrock8", "count":1},
+				{"name":"prismrockrunes", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "glaceonfox", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette" : {
 		"hair" : ["2A8271", "489485", "5DB7B8", "66C0C1", "71C7C8"],
 		"secondary" : ["317568", "2A8271", "489485"],

@@ -8,7 +8,7 @@
 	"uniqueBy" : "path",
 	"scripts" : [ "colonyDeed.lua" ],
 	"children" : [
-		{"type" : "layout", "id": "deedSettingsLayout","size":[256,134], "expandMode" : [0,0], "mode": "horizontal", "children" : [
+		{"type" : "layout", "id": "deedSettingsLayout","size":[256,144], "expandMode" : [1,2], "mode": "horizontal", "children" : [
 			{"type" : "layout", "mode" : "v", "expandMode" : [2,2], "children" : [
 				{"mode" : "v", "expandMode" : [2, 0]},
 				{ "type" : "button", "id" : "callTenants", "caption" : ":callTenants", "expandMode" : [2, 0] },
@@ -25,13 +25,6 @@
 				{ "type" : "scrollArea", "id" : "requiredTagsScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [1, 1], "children" : []}
 			]}
 		]},
-		{ "type" : "panel", "id" : "tenantPanel", "expandMode" : [1, 0], "style" : "convex", "children" : [
-			{ "mode" : "h" },
-			{ "type" : "iconButton", "id" : "decTenant", "image" : "/interface/pickleft.png", "hoverImage" : "/interface/pickleftover.png" },
-			{ "type" : "textBox", "id" : "tenantText", "expandMode" : [1, 0] },
-			{ "type" : "iconButton", "id" : "incTenant", "image" : "/interface/pickright.png", "hoverImage" : "/interface/pickrightover.png" },
-			{ "type" : "button", "id" : "summonTenant", "caption" : ":summonTenant", "expandMode" : [0, 0], "toolTip" : ":summonTenantTip" }
-		]},
 		[
 			{ "mode" : "h","expandMode" : [1, 0] },
 			{ "type" : "panel", "id" : "extra", "expandMode" : [0, 0], "style" : "convex", "children" : [
@@ -44,7 +37,8 @@
 				{ "mode" : "h","expandMode" : [0, 0] },
 				{"type":"checkBox", "id": "hiddenDeed", "toolTip":":hiddenDeedTip"},
 				{"type":"label", "text": ":hiddenDeed", "inline":true}
-			]}
+			]},
+			{ "type" : "button", "id" : "summonTenant", "caption" : ":summonTenant", "expandMode" : [1, 0], "toolTip" : ":summonTenantTip" }
 		]
 
 	]

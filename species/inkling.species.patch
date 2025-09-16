@@ -1,4 +1,44 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"inkling" : 1
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "inkling", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"inklingsign1", "count":1},
+				{"name":"inklingsign2", "count":1},
+				{"name":"inklingsign3", "count":1},
+				{"name":"inklingsign4", "count":1},
+				{"name":"inlollypopjar", "count":1},
+				{"name":"squidinajar", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "inkling", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	// custom animation parameters for this species
 	"baseColorPalette": {
 		"primary": [

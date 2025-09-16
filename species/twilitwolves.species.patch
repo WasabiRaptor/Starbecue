@@ -1,4 +1,44 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"dark" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "twilitwolves", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"shadowchimes", "count":1},
+				{"name":"shadowchest", "count":1},
+				{"name":"shadowmarker", "count":1},
+				{"name":"shadowshrine", "count":1},
+				{"name":"shadowshrine2", "count":1},
+				{"name":"shadowshrine3", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "twilitwolves", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette": {
 		"primary": [
 			"0a160a",

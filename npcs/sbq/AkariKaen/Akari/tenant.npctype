@@ -56,6 +56,32 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/AkariKaen/Akari",
 		"sbqEvilDeedConvertType" : "sbq/AkariKaen/Akari",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"sandstone" : 4,
+				"combat" : 8
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/AkariKaen/Akari", "type": "sbq/AkariKaen/Akari", "overrides": {},
+				"orderFurniture" : [
+					{"name":"sandstonechest", "count":1},
+					{"name":"sandstonetable", "count":1},
+					{"name":"weaponchest", "count":1},
+					{"name":"sergalbed", "count":1},
+					{"name":"sergalbookcase", "count":1},
+					{"name":"sergalcabinet1", "count":1},
+					{"name":"sergaltable", "count":1},
+					{"name":"sergaltradbed", "count":1},
+					{"name":"sergalwardrobe1", "count":1},
+					{"name":"sergalchair", "count":1},
+					{"name":"sergalchair2", "count":1},
+					{"name":"sergalchest", "count":1},
+					{"name":"sergalglobe", "count":1},
+					{"name":"sergallantern", "count":1}
+				]
+			}
+		},
 
 
 		"uniqueId" : "sbq/AkariKaen/Akari", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet

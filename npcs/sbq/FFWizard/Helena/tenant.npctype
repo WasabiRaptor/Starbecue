@@ -34,6 +34,23 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/FFWizard/Helena",
 		"sbqEvilDeedConvertType" : "sbq/FFWizard/Helena",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"doom" : 8
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/FFWizard/Helena", "type": "sbq/FFWizard/Helena", "overrides": {},
+				"orderFurniture" : [
+					{"name":"doombed", "count":1},
+					{"name":"doomchair", "count":1},
+					{"name":"doomdoor", "count":1},
+					{"name":"doomlight", "count":1},
+					{"name":"doomswitch", "count":1},
+					{"name":"doomtable", "count":1}
+				]
+			}
+		},
 
 
 		"uniqueId" : "sbq/FFWizard/Helena", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet

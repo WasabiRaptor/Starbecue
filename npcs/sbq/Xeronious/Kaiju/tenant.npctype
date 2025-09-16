@@ -33,6 +33,20 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/Xeronious/Kaiju",
 		"sbqEvilDeedConvertType" : "sbq/Xeronious/Kaiju",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"hoard" : 8,
+				"kaiju" : 8
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Xeronious/Kaiju", "type": "sbq/Xeronious/Kaiju", "overrides": {},
+				"orderFurniture" : [
+					{"name":"barrelgoldfilled", "count":1},
+					{"name":"sbqSpawnerKaijuNest", "count":1}
+				]
+			}
+		},
 
 
 		"uniqueId" : "sbq/Xeronious/Kaiju", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet

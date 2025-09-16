@@ -1,4 +1,48 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"gardevan" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "gardevan", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"pokechest", "count":1},
+				{"name":"greatchest", "count":1},
+				{"name":"ultrachest", "count":1},
+				{"name":"masterchest", "count":1},
+				{"name":"carbed", "count":1},
+				{"name":"jukebox", "count":1},
+				{"name":"basictv", "count":1},
+				{"name":"fridge", "count":1},
+				{"name":"oven1", "count":1},
+				{"name":"basicbath", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "gardevan", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	// custom animation parameters for this species
 	"baseColorPalette": {
 		"primary": [

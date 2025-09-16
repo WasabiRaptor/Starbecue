@@ -1,4 +1,47 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"avian" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "avian", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"birdbed", "count":1},
+				{"name":"crystaltorch", "count":1},
+				{"name":"moonemblem", "count":1},
+				{"name":"altarbunny", "count":1},
+				{"name":"altaravian", "count":1},
+				{"name":"goldenducky", "count":1},
+				{"name":"tribalbookcase1", "count":1},
+				{"name":"tribalbed2", "count":1},
+				{"name":"windchicken", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "avian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette": {
 		"primary": [
 			"6f2919",

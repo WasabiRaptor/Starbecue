@@ -1,4 +1,51 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"avian" : 8,
+			"science" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "saurian", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"birdbed", "count":1},
+				{"name":"crystaltorch", "count":1},
+				{"name":"moonemblem", "count":1},
+				{"name":"tribalbookcase1", "count":1},
+				{"name":"tribalbed2", "count":1},
+				{"name":"windchicken", "count":1},
+				{"name":"outpostbed", "count":1},
+				{"name":"outpostairlock", "count":1},
+				{"name":"outpostmonitor", "count":1},
+				{"name":"outpostmicrowave", "count":1},
+				{"name":"outpostfridge", "count":1},
+				{"name":"outpostchair", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "saurian", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette": {
 		"primary": [
 			"6f2919",

@@ -221,7 +221,7 @@ function sbq.humanoidInit()
 		item.parameters.npcArgs.npcSpecies = sbq.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
 		item.parameters.npcArgs.npcParam.identity = identity
-		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.getSettingsOf.current()
+		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.settings:export()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
 		item.parameters.npcArgs.npcParam.scriptConfig.uniqueId = entity.uniqueId()
 		item.parameters.tooltipFields.collarNameLabel = sbq.createdDateString()

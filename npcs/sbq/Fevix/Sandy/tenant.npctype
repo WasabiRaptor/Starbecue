@@ -34,6 +34,28 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/Fevix/Sandy",
 		"sbqEvilDeedConvertType" : "sbq/Fevix/Sandy",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"hoard" : 8,
+				"sea" : 8
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Fevix/Sandy", "type": "sbq/Fevix/Sandy", "overrides": {},
+				"orderFurniture" : [
+					{"name":"treasurechest", "count":1},
+					{"name":"trapchest", "count":1},
+					{"name":"barrelgoldfilled", "count":1},
+					{"name":"woodencrategoldfilled", "count":1},
+					{"name":"brokenanchor", "count":1},
+					{"name":"coralmirror", "count":1},
+					{"name":"seabed", "count":1},
+					{"name":"seachair", "count":1},
+					{"name":"sealamp", "count":1},
+					{"name":"seaweedpot", "count":1}
+				]
+			}
+		},
 
 
 

@@ -1,4 +1,44 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"science" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "plasmoid", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"flagplasmoid", "count":1},
+				{"name":"blueflask", "count":1},
+				{"name":"greenflask", "count":1},
+				{"name":"apexbrainjar", "count":1},
+				{"name":"symbiotesample", "count":1},
+				{"name":"redflask", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "plasmoid", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	// custom animation parameters for this species
 	"baseColorPalette": {
 		"primary": [

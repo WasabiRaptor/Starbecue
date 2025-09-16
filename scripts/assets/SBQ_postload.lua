@@ -1,12 +1,72 @@
 
 assets.patch("/sbq.config", "/sbq_config_patch.lua")
 
+local sbqStrings = assets.json("/sbqStrings.config")
+
 for _, path in ipairs(assets.byExtension("monstertype")) do
 	assets.patch(path, "/scripts/monster/SBQ_monster_patch.lua")
+end
+local baseTenant = assets.json("/tenants/sbq/baseTenant.config")
+local baseGuardTenant = assets.json("/tenants/sbq/baseGuardTenant.config")
+local tenantCatalogue = assets.json("/interface/scripted/sbq/colonyDeed/catalogue.config")
+
+local randomTenant = assets.json("/tenants/sbq/baseTenant.config")
+randomTenant.name = "sbqTenant_random"
+randomTenant.tenants[1].sbqRandomTenant = jarray()
+local randomGuardTenant = jarray()
+
+local function setupTenantCatalogue(tenantData, tenantId, name)
+	local id = "sbqTenant_" .. tenantId
+	table.insert(tenantCatalogue, { name, { id } })
+	table.insert(randomTenant.tenants[1].sbqRandomTenant, tenantData.tenant)
+	assets.add("/tenants/" .. id .. ".tenant", sb.printJson(sb.jsonMerge(baseTenant, {
+		priority = tenantData.priority or (baseTenant.priority + 1),
+		name = id,
+		colonyTagCriteria = tenantData.colonyTagCriteria,
+		tenants = {
+			tenantData.tenant
+		},
+	})))
+	if tenantData.guardTenant then
+		local guardList = jarray()
+		for tier, guardTenant in ipairs(tenantData.guardTenant or {}) do
+			local id = "sbqGuardT" .. tostring(tier) .. "_" .. tenantId
+			table.insert(guardList, id)
+			if not randomGuardTenant[tier] then
+				randomGuardTenant[tier] = assets.json("/tenants/sbq/baseGuardTenant.config")
+				randomGuardTenant[tier].name = "sbqGuardT" .. tostring(tier) .. "_random"
+				randomGuardTenant[tier].priority = randomGuardTenant[tier].priority + tier
+				randomGuardTenant[tier].tenants[1].sbqRandomTenant = jarray()
+				randomGuardTenant[tier].tenants[1].level = tier
+			end
+			local tenant = sb.jsonMerge(tenantData.tenant, guardTenant)
+			table.insert(randomGuardTenant[tier].tenants[1].sbqRandomTenant, tenant)
+			assets.add("/tenants/" .. id .. ".tenant", sb.printJson(sb.jsonMerge(baseGuardTenant, {
+				priority = tenantData.priority or (baseGuardTenant.priority + 1 + tier),
+				name = id,
+				colonyTagCriteria = sb.jsonMerge(tenantData.colonyTagCriteria,
+					tenantData.guardColonyTagCriteria[tier] or {}),
+				tenants = {
+					tenant
+				},
+			})))
+		end
+		table.insert(tenantCatalogue,
+			{ sbqStrings.guardTenantFormat:format(name), guardList })
+	end
 end
 
 for _, path in ipairs(assets.byExtension("npctype")) do
 	assets.patch(path, "/scripts/npc/SBQ_npc_patch.lua")
+	local npcConfig = assets.json(path)
+	if (npcConfig.scriptConfig or {}).sbqTenantData then
+		setupTenantCatalogue(npcConfig.scriptConfig.sbqTenantData, npcConfig.type, npcConfig.npcname)
+	end
+end
+local columns = 4
+local seperators = (columns - math.fmod(#tenantCatalogue, columns)) + columns
+for i = 1, seperators do
+	table.insert(tenantCatalogue, "-")
 end
 
 local armorLists = assets.json("/scripts/assets/SBQ_amor.config")
@@ -56,6 +116,10 @@ for _, path in ipairs(assets.byExtension("back")) do
 	end
 end
 
+local guardTiers = jarray()
+table.insert(tenantCatalogue, { ":random", { "sbqTenant_random" } })
+table.insert(tenantCatalogue, { ":randomGuard", guardTiers })
+
 local speciesFiles = assets.byExtension("species")
 for _, path in ipairs(speciesFiles) do
 	assets.patch(path, "/scripts/humanoid/SBQ_species_patch.lua")
@@ -92,7 +156,7 @@ local function setupSpecies(path)
 						if to then
 							for j, v in ipairs(from) do
 								newImage.processingDirectives = newImage.processingDirectives ..
-								"?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
+									"?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
 							end
 						else
 							sb.logInfo(
@@ -102,7 +166,7 @@ local function setupSpecies(path)
 					else -- if theres no color to remap to, remove the color by replacing with transparent pixels
 						for j, v in ipairs(from) do
 							newImage.processingDirectives = newImage.processingDirectives ..
-							"?replace;" .. v .. "=00000000;"
+								"?replace;" .. v .. "=00000000;"
 						end
 					end
 				else
@@ -132,14 +196,28 @@ local function setupSpecies(path)
 			-- nothing to do if it don't exist
 		end
 	end
+	if speciesConfig.sbqTenantData then
+		setupTenantCatalogue(speciesConfig.sbqTenantData, speciesConfig.kind, speciesConfig.charCreationTooltip.title)
+	end
 end
+
 for _, path in ipairs(speciesFiles) do
 	local success, error = pcall(setupSpecies, path)
 	if not success then
 		sb.logError("[SBQ] Error while setting up '%s'\n%s", path, error)
 	end
 end
+seperators = (columns - math.fmod(#tenantCatalogue, columns))
+for i = 1, seperators do
+	table.insert(tenantCatalogue, "-")
+end
 
+assets.add("/tenants/sbqTenant_random.tenant", sb.printJson(randomTenant))
+for i, v in ipairs(randomGuardTenant) do
+	table.insert(guardTiers, v.name)
+	assets.add("/tenants/"..v.name..".tenant", sb.printJson(v))
+end
+assets.add("/interface/scripted/sbq/colonyDeed/catalogue.config", sb.printJson(tenantCatalogue))
 
 
 local occupantSlotCap = assets.json("/sbq.config:occpantSlotCap")

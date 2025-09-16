@@ -1,4 +1,44 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"sea" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "wr/vaporeon", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"brokenanchor", "count":1},
+				{"name":"coralmirror", "count":1},
+				{"name":"seabed", "count":1},
+				{"name":"seachair", "count":1},
+				{"name":"sealamp", "count":1},
+				{"name":"seaweedpot", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"sbqPartImages": {
 		"sbq/naga.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",

@@ -129,6 +129,41 @@
 		"?replace;005062=b9a100;10778e=d1b600;15839b=e7ca00;23b5d4=ffdf00;", // Ambi's gold accent
 		"?replace;005062=004a01;10778e=005f01;15839b=006801;23b5d4=007703;" // Jaych's green accent
 	],
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"hoard" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"barrelgoldfilled", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "sbq/LakotaAmitola/ziellekDragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"defaultBlueprints": {
 		"tier1": [
 			// Empty Hands

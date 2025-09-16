@@ -1,4 +1,58 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"electronic" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "wr/luxio", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"tesla", "count":1},
+				{"name":"electricdoor", "count":1},
+				{"name":"basictv", "count":1},
+				{"name":"bunkerwires", "count":1},
+				{"name":"arcadegame", "count":1},
+				{"name":"arcadestarbound", "count":1},
+				{"name":"clubceilinglights", "count":1},
+				{"name":"clubceilinglightsgreen", "count":1},
+				{"name":"clubceilinglightsred", "count":1},
+				{"name":"clubceilinglightsyellow", "count":1},
+				{"name":"clubdecks", "count":1},
+				{"name":"clubspeaker", "count":1},
+				{"name":"arcadesign", "count":1},
+				{"name":"arcadeblue", "count":1},
+				{"name":"arcadedance", "count":1},
+				{"name":"arcadegreen", "count":1},
+				{"name":"arcadeorange", "count":1},
+				{"name":"arcadepurple", "count":1},
+				{"name":"arcadered", "count":1},
+				{"name":"arcadeyellow", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "wr/luxio", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"sbqPartImages": {
 		"sbq/naga.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",

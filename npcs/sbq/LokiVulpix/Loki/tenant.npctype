@@ -45,6 +45,30 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/LokiVulpix/Loki",
 		"sbqEvilDeedConvertType" : "sbq/LokiVulpix/Loki",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"magicfire" : 8,
+				"glitch" : 8,
+				"spooky" : 12
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/LokiVulpix/Loki", "type": "sbq/LokiVulpix/Loki", "overrides": {},
+				"orderFurniture" : [
+					{"name":"sbqSpookyPumpkinHead", "count":1},
+					{"name":"spookycauldron", "count":1},
+					{"name":"sbqMedievalCandle", "count":1},
+					{"name":"sbqMedievalChandelier", "count":1},
+					{"name":"medievalbed", "count":1},
+					{"name":"medievalbookcase", "count":1},
+					{"name":"sbqFireplaceTeleporter", "count":1},
+					{"name":"hourglass", "count":1},
+					{"name":"glitchchess", "count":1},
+					{"name":"chessqueenblack", "count":1},
+					{"name":"wantedposter", "count":1}
+				]
+			}
+		},
 
 
 		"uniqueId" : "sbq/LokiVulpix/Loki", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet

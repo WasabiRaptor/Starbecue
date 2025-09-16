@@ -33,6 +33,20 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/Xeronious/Batty",
 		"sbqEvilDeedConvertType" : "sbq/Xeronious/Batty",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"hoard" : 8,
+				"avian" : 2
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Xeronious/Batty", "type": "sbq/Xeronious/Batty", "overrides": {},
+				"orderFurniture" : [
+					{"name":"barrelgoldfilled", "count":1},
+					{"name":"birdbed", "count":1}
+				]
+			}
+		},
 
 
 

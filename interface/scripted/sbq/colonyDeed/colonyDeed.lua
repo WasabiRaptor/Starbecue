@@ -8,25 +8,10 @@ end
 
 require "/interface/scripted/sbq/colonyDeed/generateItemCard.lua"
 
-sbq.tenantCatalogue = root.assetJson("/npcs/sbq/sbqTenantCatalogue.json")
-sbq.validTenantCatalogueList = {}
-sbq.tenantIndex = 0
-
 local drawable
 function init()
-    drawable = pane.drawable()
-
+	drawable = pane.drawable()
 	sbq.refreshDeedPage()
-	for name, tenantName in pairs(sbq.tenantCatalogue) do
-		sbq.populateCatalogueList(name, tenantName)
-	end
-	table.sort(sbq.validTenantCatalogueList)
-	for i, v in ipairs(sbq.validTenantCatalogueList) do
-		if v == (storage.occupier or {}).name then
-			sbq.tenantIndex = i
-		end
-	end
-	_ENV.tenantText:setText((storage.occupier or {}).name or "")
 	_ENV.lockedDeed:setChecked(storage.locked or false)
 	_ENV.hiddenDeed:setChecked(storage.hidden or false)
 end
@@ -37,97 +22,33 @@ function update()
 	sbq.checkTimers(dt)
 end
 
-function sbq.populateCatalogueList(name, tenantName)
-	local tenantName = tenantName
-	if type(tenantName) == "table" then
-		tenantName = tenantName[1]
-	end
-	local success, tenantConfig = pcall(root.tenantConfig, tenantName)
-	if not success then sbq.logError(("Invalid tenant entry in SBQ deed catalogue: %s, %s"):format(name, tenantName)) return end
-
-	local data = tenantConfig.checkRequirements or {}
-	for i, tenant in ipairs(tenantConfig.tenants) do
-		if tenant.spawn == "npc" then
-			for _, species in ipairs(tenant.species) do
-				if not root.speciesConfig(species) then return end
-			end
-		end
-	end
-	if data.checkItems then
-		for i, item in ipairs(data.checkItems) do
-			if not root.itemConfig(item) then return end
-		end
-	end
-	if data.checkSpecies then
-		for i, species in ipairs(data.checkSpecies) do
-			if not root.speciesConfig(species) then return end
-		end
-	end
-	if data.checkAssets then
-		for i, path in ipairs(data.checkAssets) do
-			if not root.assetOrigin(path) then return end
-		end
-	end
-	if storage.evil and (tenantConfig.colonyTagCriteria.sbqFriendly) then
-		return
-	elseif (not storage.evil) and (tenantConfig.colonyTagCriteria.sbqEvil) then
-		return
-	end
-
-	table.insert(sbq.validTenantCatalogueList, name)
-end
-
-function _ENV.incTenant:onClick()
-	sbq.tenantIndex = sbq.wrapNumber(sbq.tenantIndex +1, 1, #sbq.validTenantCatalogueList)
-	_ENV.tenantText:setText(sbq.validTenantCatalogueList[sbq.tenantIndex])
-end
-
-function _ENV.decTenant:onClick()
-	sbq.tenantIndex = sbq.wrapNumber(sbq.tenantIndex -1, 1, #sbq.validTenantCatalogueList)
-	_ENV.tenantText:setText(sbq.validTenantCatalogueList[sbq.tenantIndex])
-end
-function sbq.wrapNumber(input, min, max)
-	if input > max then
-		return min
-	elseif input < min then
-		return max
-	else
-		return input
-	end
-end
-
 function _ENV.callTenants:onClick()
 	world.sendEntityMessage(pane.sourceEntity(), "sbqDeedInteract", {sourceId = player.id(), sourcePosition = world.entityPosition(player.id())})
 end
 
-local applyCount = 0
+local applyCount = 4
 function _ENV.summonTenant:onClick()
-	applyCount = applyCount + 1
 
-	if applyCount > 3 or storage.occupier == nil then
-		world.sendEntityMessage(pane.sourceEntity(), "sbqSummonNewTenant", sbq.getGuardTier() or _ENV.tenantText.text)
-		pane.dismiss()
-	end
-	self:setText(tostring(4 - applyCount))
-end
-
-function sbq.getGuardTier()
-	local remap = (sbq.tenantCatalogue[_ENV.tenantText.text])
-	if type(remap) == "table" then
-		local tags = storage.house.contents
-		local index = 1
-		if type(tags.tier2) == "number" and tags.tier2 >= 12 then
-			index = 2
+	if (applyCount == 1) or (storage.occupier == nil) then
+		self:setText(tostring(0))
+		local menu = {}
+		for _, v in ipairs(root.assetJson("/interface/scripted/sbq/colonyDeed/catalogue.config")) do
+			if type(v) == "table" then
+				table.insert(menu, {
+					v[1],
+					function ()
+						world.sendEntityMessage(pane.sourceEntity(), "sbqSummonNewTenant", v[2])
+						pane.dismiss()
+					end,
+				})
+			else
+				table.insert(menu, v)
+			end
 		end
-		if type(tags.tier3) == "number" and tags.tier3 >= 12 then
-			index = 3
-		end
-		if type(tags.tier4) == "number" and tags.tier4 >= 12 then
-			index = 3
-		end
-		return remap[index]
+		_ENV.metagui.dropDownMenu(menu, 4)
 	else
-		return remap
+		applyCount = applyCount - 1
+		self:setText(tostring(applyCount))
 	end
 end
 
@@ -208,15 +129,9 @@ function sbq.isValidTenantCard(item)
 		return true
 	end
 end
-function uninit()
-	local item = _ENV.insertTenantItemSlot:item()
-	if item then
-		player.giveItem(item)
-	end
-end
 
-function sbq.insertTenant(slot)
-	local item = slot:item()
+function sbq.insertTenant(item)
+	if not item then return end
 	local tenant = {
 		species = item.parameters.npcArgs.npcSpecies,
 		seed = item.parameters.npcArgs.npcSeed,
@@ -225,42 +140,12 @@ function sbq.insertTenant(slot)
 		overrides = item.parameters.npcArgs.npcParam or {},
 		spawn = item.parameters.npcArgs.npcSpawn or "npc"
 	}
-	local npcConfig = root.npcConfig(tenant.type)
-	if not npcConfig then
-		sbq.playErrorSound()
-		interface.queueMessage(sbq.getString(":invalidNPC"))
-		return
-	end
 	local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"
 	if npcConfig.scriptConfig[deedConvertKey] then
 		tenant.type = npcConfig.scriptConfig[deedConvertKey]
 		npcConfig = root.npcConfig(tenant.type)
 	end
-	if storage.evil and npcConfig.scriptConfig.requiresFriendly then
-		sbq.playErrorSound()
-		interface.queueMessage(sbq.getString(":requiresFriendly"))
-		return
-	elseif (not storage.evil) and npcConfig.scriptConfig.requiresEvil then
-		sbq.playErrorSound()
-		interface.queueMessage(sbq.getString(":requiresEvil"))
-		return
-	end
-	local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
-	tenant.overrides.scriptConfig.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
-	tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
-	if world.uniqueEntityId(tenant.uniqueId) then
-		sbq.playErrorSound()
-		interface.queueMessage(sbq.getString(":npcAlreadyExists"))
-		return
-	end
-	for _, v in pairs(storage.occupier.tenants) do
-		if v.uniqueId == tenant.uniqueId then
-			sbq.playErrorSound()
-			interface.queueMessage(sbq.getString(":npcAlreadyExists"))
-			return
-		end
-	end
-	slot:setItem(nil, true)
+
 	table.insert(storage.occupier.tenants, tenant)
 	world.sendEntityMessage(pane.sourceEntity(), "sbqSaveTenants", storage.occupier.tenants)
 	sbq.refreshDeedPage()
@@ -338,21 +223,66 @@ function sbq.refreshDeedPage()
 
 	end
 	_ENV.tenantListScrollArea:addChild({ type="panel", style="flat", id="insertTenantPanel", expandMode={0,0}, children={
-		{ type="itemSlot", id="insertTenantItemSlot", autoInteract=true },
-		{ type="button", id="insertTenant", caption=":insertCard" }
+		{ type = "itemSlot", id = "insertTenantItemSlot", autoInteract = true },
+		 {type = "label", text = ":insertCard" }
 	} })
-
-	function _ENV.insertTenant:onClick()
-		sbq.insertTenant(_ENV.insertTenantItemSlot)
-	end
 	function _ENV.insertTenantItemSlot:acceptsItem(item)
-		if not sbq.isValidTenantCard(item) then sbq.playErrorSound() return false
-		else return true end
+		if not sbq.isValidTenantCard(item) then
+			sbq.playErrorSound()
+			return false
+		else
+			local tenant = {
+				species = item.parameters.npcArgs.npcSpecies,
+				seed = item.parameters.npcArgs.npcSeed,
+				type = item.parameters.npcArgs.npcType,
+				level = item.parameters.npcArgs.npcLevel,
+				overrides = item.parameters.npcArgs.npcParam or {},
+				spawn = item.parameters.npcArgs.npcSpawn or "npc"
+			}
+			local npcConfig = root.npcConfig(tenant.type)
+			if not npcConfig then
+				sbq.playErrorSound()
+				interface.queueMessage(sbq.getString(":invalidNPC"))
+				return false
+			end
+			local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"
+			if npcConfig.scriptConfig[deedConvertKey] then
+				tenant.type = npcConfig.scriptConfig[deedConvertKey]
+				npcConfig = root.npcConfig(tenant.type)
+			end
+			if storage.evil and npcConfig.scriptConfig.requiresFriendly then
+				sbq.playErrorSound()
+				interface.queueMessage(sbq.getString(":requiresFriendly"))
+				return false
+			elseif (not storage.evil) and npcConfig.scriptConfig.requiresEvil then
+				sbq.playErrorSound()
+				interface.queueMessage(sbq.getString(":requiresEvil"))
+				return false
+			end
+			local overrideConfig = sb.jsonMerge(npcConfig, tenant.overrides)
+			tenant.overrides.scriptConfig.uniqueId = sbq.query(overrideConfig, {"scriptConfig", "uniqueId"}) or sb.makeUuid()
+			tenant.uniqueId = tenant.overrides.scriptConfig.uniqueId
+			if world.uniqueEntityId(tenant.uniqueId) then
+				sbq.playErrorSound()
+				interface.queueMessage(sbq.getString(":npcAlreadyExists"))
+				return false
+			end
+			for _, v in pairs(storage.occupier.tenants) do
+				if v.uniqueId == tenant.uniqueId then
+					sbq.playErrorSound()
+					interface.queueMessage(sbq.getString(":npcAlreadyExists"))
+					return false
+				end
+			end
+			return true
+		end
+	end
+	function _ENV.insertTenantItemSlot:onItemModified()
+		sbq.insertTenant(self:item())
 	end
 
 	_ENV.orderFurniture:setVisible(storage.occupier.orderFurniture ~= nil)
 
-	_ENV.tenantText:setText(storage.occupier.name or "")
 	local tags = storage.house.contents
 	local listed = { sbqVore = true }
 	_ENV.requiredTagsScrollArea:clearChildren()

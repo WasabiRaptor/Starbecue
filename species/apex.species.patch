@@ -1,71 +1,44 @@
 {
-	"sbq" : true,
 	"sbqTenantData" : {
 		"colonyTagCriteria" : {
-			"light": 1,
-			"door": 1,
-			"sbqVore" : 1,
 			"apex" : 8
 		},
 		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
-			{"combat":8},
-			{"combat":8, "tier2":12},
-			{"combat":8, "tier3":12},
-			{"combat":8, "tier4":12},
-			{"combat":8, "tier5":12},
-			{"combat":8, "tier6":12},
-			{"combat":8, "tier7":12},
-			{"combat":8, "tier8":12},
-			{"combat":8, "tier9":12},
-			{"combat":8, "tier10":12}
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
 		],
-		"orderFurniture" : [
-			{"name":"apexarmchair", "count":1},
-			{"name":"apexcouch", "count":1},
-			{"name":"apexbed", "count":1},
-			{"name":"apexbananasign", "count":1},
-			{"name":"apexbrainjar", "count":1},
-			{"name":"apexcoolbookcase", "count":1},
-			{"name":"apexfridge", "count":1},
-			{"name":"apexoven", "count":1}
-		],
-		"guardOrderFurniture" : [ // appends onto the order list for tier
-			[],
-			[],
-			[],
-			[],
-			[],
-			[],
-			[],
-			[],
-			[],
-			[]
-		],
-		"type" : "sbqVoreTenant",
-		"guardType" : [
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant",
-			"sbqVoreFriendlyGuardTenant"
-		],
-		"overrides" : {},
-		"guardOverrides" : [
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{}
+		"tenant" : {
+			"spawn": "npc", "species": "apex", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"apexarmchair", "count":1},
+				{"name":"apexcouch", "count":1},
+				{"name":"apexbed", "count":1},
+				{"name":"apexbananasign", "count":1},
+				{"name":"apexbrainjar", "count":1},
+				{"name":"apexcoolbookcase", "count":1},
+				{"name":"apexfridge", "count":1},
+				{"name":"apexoven", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "apex", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
 		]
 	},
 
@@ -101,7 +74,7 @@
 	},
 
 	"sbqPartImages": {
-		"sbq/noLegs/malebody.png" : {
+		"sbq/noLegs/malebody.png": {
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;?addmask=/humanoid/any/sbqImageMasks/noLegs_male.png;0;0;",
 			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]

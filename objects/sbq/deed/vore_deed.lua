@@ -111,59 +111,45 @@ function init()
 		old.onInteraction(args)
 	end)
 
-	message.setHandler("sbqSummonNewTenant", function (_,_, newTenant, seeds)
-		if not storage.house then return animator.playSound("error") end
+	message.setHandler("sbqSummonNewTenant", function(_, _, newTenants, seeds)
+		if not storage.house then sb.logWarn("no house data") return animator.playSound("error") end
+		if not newTenants then sb.logWarn("no new tenants") return animator.playSound("error") end
 
-		if not newTenant then return animator.playSound("error") end
-		local success, occupier = pcall(root.tenantConfig,(newTenant))
-		if not success then return animator.playSound("error") end
+		local newOccupier
+		local best
+		for _, tenantId in ipairs(newTenants) do
+			local success, maybeNewOccupier = pcall(root.tenantConfig, tenantId)
+			if success then
+				local score = 0
+				for k, v in pairs(maybeNewOccupier.colonyTagCriteria) do
+					score = score + math.min(storage.house.contents[k] or 0, v) - v
+				end
+                if best then
+                    if (score >= best) and (maybeNewOccupier.priority >= newOccupier.priority) then
+                        best = score
+                        newOccupier = maybeNewOccupier
+                    end
+                else
+                    best = score
+                    newOccupier = maybeNewOccupier
+                end
+            else
+				sb.logError(maybeNewOccupier)
+			end
+		end
 
-		if storage.evil and (occupier.colonyTagCriteria.sbqFriendly) then
+		if not (newOccupier) then sb.logWarn("no new occupier") return animator.playSound("error") end
+
+		if storage.evil and (newOccupier.colonyTagCriteria.sbqFriendly) then
 			return animator.playSound("error")
-		elseif (not storage.evil) and (occupier.colonyTagCriteria.sbqEvil) then
+		elseif (not storage.evil) and (newOccupier.colonyTagCriteria.sbqEvil) then
 			return animator.playSound("error")
 		end
 
-		if checkExistingUniqueIds(occupier) then return animator.playSound("error") end
+		if checkExistingUniqueIds(newOccupier) then sb.logWarn("already extant unique ids") return animator.playSound("error") end
 		evictTenants()
 
-		local data = occupier.checkRequirements or {}
-		for i, tenant in ipairs(occupier.tenants) do
-			if tenant.spawn == "npc" then
-				for _, species in ipairs(tenant.species) do
-					if (species ~= "any") and not root.speciesConfig(species) then return end
-				end
-			end
-		end
-		if data.checkItems then
-			for i, item in ipairs(data.checkItems) do
-				if not root.itemConfig(item) then return end
-			end
-		end
-		if data.checkSpecies then
-			for i, species in ipairs(data.checkSpecies) do
-				if not root.speciesConfig(species) then return end
-			end
-		end
-		if data.checkAssets then
-			for i, path in ipairs(data.checkAssets) do
-				if not root.assetOrigin(path) then return end
-			end
-		end
-		if not seeds then
-			for _, tenant in ipairs(occupier.tenants) do
-				if type(tenant.species) == "table" then
-					tenant.species = tenant.species[math.random(#tenant.species)]
-				end
-				tenant.seed = tenant.seed or sb.makeRandomSource():randu64()
-			end
-		else
-			for i, tenant in ipairs(occupier.tenants) do
-				tenant.seed = tenant.seed or seed[i]
-			end
-		end
-
-		setTenantsData(occupier)
+		setTenantsData(newOccupier)
 
 		if isOccupied() then
 			respawnTenants()
@@ -234,10 +220,16 @@ function chooseTenants(seed, tags)
 	matches = util.filter(matches, function(match)
 
 		local data = match.checkRequirements or {}
-		for i, tenant in ipairs(match.tenants) do
-			if tenant.spawn == "npc" then
-				for _, species in ipairs(tenant.species) do
-					if (species ~= "any") and not root.speciesConfig(species) then return end
+		for i, tenantConfig in ipairs(match.tenants) do
+			for _, tenant in ipairs(tenantConfig.sbqRandomTenant or {tenantConfig}) do
+				if tenant.spawn == "npc" then
+					if type(tenant.species ) == "table" then
+						for _, species in ipairs(tenant.species) do
+							if not root.speciesConfig(species) then return end
+						end
+					else
+						if not root.speciesConfig(tenant.species) then return end
+					end
 				end
 			end
 		end
@@ -278,13 +270,15 @@ function chooseTenants(seed, tags)
 	end
 end
 
-function checkExistingUniqueIds(occupier)
-	for _, tenant in ipairs(occupier.tenants) do
-		local npcConfig = root.npcConfig(tenant.type)
-		local uuid = sbq.query(npcConfig, {"scriptConfig", "uniqueId"})
-		if uuid then
-			local id = world.loadUniqueEntity(uuid)
-			if id and world.entityExists(id) then return true end
+function checkExistingUniqueIds(newOccupier)
+	for _, tenantConfig in ipairs(newOccupier.tenants) do
+		for _, tenant in ipairs(tenantConfig.sbqRandomTenant or {tenantConfig}) do
+			local npcConfig = root.npcConfig(tenant.type)
+			local uuid = sbq.query(npcConfig, {"scriptConfig", "uniqueId"})
+			if uuid then
+				local id = world.loadUniqueEntity(uuid)
+				if id and world.entityExists(id) then return true end
+			end
 		end
 	end
 end
@@ -292,12 +286,13 @@ end
 
 function setTenantsData(occupier)
 	local occupier = occupier
-	for _, tenant in ipairs(occupier.tenants) do
+	for i, tenant in ipairs(occupier.tenants) do
+		if tenant.sbqRandomTenant then
+			tenant = tenant.sbqRandomTenant[math.random(#tenant.sbqRandomTenant)]
+			occupier.tenants[i] = tenant
+		end
 		if type(tenant.species) == "table" then
 			tenant.species = tenant.species[math.random(#tenant.species)]
-			if tenant.speciesOverrides then
-				tenant.overrides = sb.jsonMerge(tenant.overrides, tenant.speciesOverrides[tenant.species])
-			end
 		end
 		local npcConfig = root.npcConfig(tenant.type)
 		local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"

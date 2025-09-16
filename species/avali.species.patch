@@ -1,4 +1,47 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"avali" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "avali", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"avalicushion1", "count":1},
+				{"name":"avalicushion2", "count":1},
+				{"name":"avalihammock1", "count":1},
+				{"name":"avalichamber1", "count":1},
+				{"name":"avalibottle1", "count":1},
+				{"name":"avalicrystal1", "count":1},
+				{"name":"avalidreamcatcher1", "count":1},
+				{"name":"avaliemblem", "count":1},
+				{"name":"avaliemblembig", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "avali", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	// avali like body
 	"humanoidOverrides" : {
 		"sbqConfig" : {

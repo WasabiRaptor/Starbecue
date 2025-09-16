@@ -1,4 +1,48 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"unscorched" : 8,
+			"human" : 4
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "wr/flareon", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"medievalfireplace", "count":1},
+				{"name":"frontierfurnace", "count":1},
+				{"name":"scorchedcitybed", "count":1},
+				{"name":"scorchedcitychestdrawersmall", "count":1},
+				{"name":"scorchedcitytv", "count":1},
+				{"name":"scorchedcitytable", "count":1},
+				{"name":"lavalamp1", "count":1, "parameters":{"color":"red"}},
+				{"name":"lavalamp1", "count":1, "parameters":{"color":"orange"}},
+				{"name":"lavalamp1", "count":1, "parameters":{"color":"yellow"}}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"sbqPartImages": {
 		"sbq/naga.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",

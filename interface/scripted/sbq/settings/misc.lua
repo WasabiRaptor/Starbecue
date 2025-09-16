@@ -112,17 +112,26 @@ function _ENV.exportLocationsOnly:onClick()
 end
 
 function _ENV.convertNPC:onClick()
-	world.sendEntityMessage(pane.sourceEntity(), "sbqConvertNPC")
-	pane.dismiss()
+    world.sendEntityMessage(pane.sourceEntity(), "sbqConvertNPC")
+    pane.dismiss()
 end
 
-function misc.generateSettingsCard(type)
-	local settings = sbq.getSettingsOf[type]()
-	sbq.logInfo("Exported"..type.."settings")
+local exportFilters = {
+    prefs = {
+        vorePrefs = true,
+        infusePrefs = true,
+        subBehavior = true,
+		domBehavior = true
+    },
+	locations = true
+}
+
+function misc.generateSettingsCard(filter)
+	local settings = sbq.settings:export(exportFilters[filter])
 	sbq.logInfo(settings,2)
 	return { name = "secretnote", count = 1, parameters = {
-		shortdescription = sbq.entityName(sbq.entityId()).." "..(sbq.strings[type.."SettingsCard"] or type.."SettingsCard"),
-		description = sbq.getString(":"..type.."settingsCardDesc"),
+		shortdescription = sbq.entityName(sbq.entityId()).." "..(sbq.strings[filter.."SettingsCard"] or filter.."SettingsCard"),
+		description = sbq.getString(":"..filter.."settingsCardDesc"),
 		sbqSettings = settings,
 		tooltipKind = "filledcapturepod",
 		tooltipFields = {

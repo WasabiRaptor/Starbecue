@@ -58,6 +58,33 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/Blueninja/Blue",
 		"sbqEvilDeedConvertType" : "sbq/Blueninja/Blue",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"ice" : 8,
+				"station" : 8
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Blueninja/Blue", "type": "sbq/Blueninja/Blue", "overrides": {},
+				"orderFurniture" : [
+					{"name":"icebed", "count":1},
+					{"name":"icechair", "count":1},
+					{"name":"icechest", "count":1},
+					{"name":"icedoor", "count":1},
+					{"name":"icemachine", "count":1},
+					{"name":"icetable", "count":1},
+					{"name":"snowglobe1", "count":1},
+					{"name":"snowglobe2", "count":1},
+					{"name":"spaceslideshow", "count":1},
+					{"name":"stationbench", "count":1},
+					{"name":"stationtable", "count":1},
+					{"name":"stationdoor", "count":1},
+					{"name":"stationhatch", "count":1},
+					{"name":"stationvendingmachine", "count":1},
+					{"name":"stationmedscanner", "count":1}
+				]
+			}
+		},
 
 
 

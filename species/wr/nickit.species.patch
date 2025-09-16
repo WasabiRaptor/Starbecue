@@ -1,4 +1,48 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"hoard" : 8,
+			"valuable" : 32
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "wr/nickit", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"carbed", "count":1},
+				{"name":"jukebox", "count":1},
+				{"name":"royalthrone", "count":1},
+				{"name":"diamonddisplay", "count":1},
+				{"name":"goldenegg", "count":1},
+				{"name":"goldenducky", "count":1},
+				{"name":"treasurechest", "count":1},
+				{"name":"barrelgoldfilled", "count":1},
+				{"name":"woodencrategoldfilled", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "wr/nickit", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"humanoidOverrides" : {
 		"sbqConfig" : {
 			"modules" : {

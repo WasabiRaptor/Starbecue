@@ -781,6 +781,15 @@ function mg.dropDownMenu(m, columns, w, h, s, align)
 	-- and build
 	for i, mi in ipairs(m) do
 		if mi == "separator" or mi == "-" then
+			local insertRow = math.floor((i-0.1) / columns) + 1
+			local insertOffset = 1
+			if not cfg.children[insertRow + insertOffset] then
+				cfg.children[insertRow + insertOffset] = {}
+			end
+			rowHeights[insertRow] = math.max((rowHeights[insertRow] or 0), 3)
+			local col = ((i +(columns-1)) % columns) + 1
+			colWidths[col] = math.max(colWidths[col] or 0, 0)
+			table.insert(cfg.children[insertRow + insertOffset], {type = "layout", expandMode = {1,0}, size = {0, 3}})
 		elseif type(mi) == "table" then
 			local itemId = "item:" .. sb.makeRandomSource():randu64()
 			local size = { w or 100, h or 12 }

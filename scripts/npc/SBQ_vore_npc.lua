@@ -155,7 +155,7 @@ function tenant.setHome(...)
 	old.tenant_setHome(...)
 	local parent, recruitUuid = sbq.parentEntity()
 	if parent then
-		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), sbq.getSettingsOf.all())
+		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), sbq.settings:export())
 	end
 end
 

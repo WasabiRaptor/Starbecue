@@ -45,6 +45,27 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/LokiVulpix/Auri",
 		"sbqEvilDeedConvertType" : "sbq/LokiVulpix/Auri",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"hoard" : 8,
+				"drimyr" : 2,
+				"spooky" : 4
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/LokiVulpix/Auri", "type": "sbq/LokiVulpix/Auri", "overrides": {},
+				"orderFurniture" : [
+					{"name":"sbqPurpleCrystalTorch", "count":1},
+					{"name":"sbqPurpleCrystalLantern", "count":1},
+					{"name":"barrelgoldfilled", "count":1},
+					{"name":"spookypumpkinhead", "count":1},
+					{"name":"geodeceilinglight", "count":1},
+					{"name":"geodeplantpot", "count":1},
+					{"name":"steamspringlamp", "count":1},
+					{"name":"steampunklamp", "count":1, "parameters" : { "color" : "pink"}}
+				]
+			}
+		},
 
 		"uniqueId" : "sbq/LokiVulpix/Auri", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 

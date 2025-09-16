@@ -38,6 +38,27 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/Zygahedron/Zevi",
 		"sbqEvilDeedConvertType" : "sbq/Zygahedron/Zevi",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"crystalline" : 8
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Zygahedron/Zevi", "type": "sbq/Zygahedron/Zevi", "overrides": {},
+				"orderFurniture" : [
+					{"name":"crystallamp", "count":1},
+					{"name":"crystaltable", "count":1},
+					{"name":"crystalbed", "count":1},
+					{"name":"geodechair", "count":1},
+					{"name":"geodeplantpot", "count":1},
+					{"name":"geodebnatural", "count":1},
+					{"name":"geodecnatural", "count":1},
+					{"name":"geodednatural", "count":1},
+					{"name":"geodehighanatural", "count":1},
+					{"name":"geodelowanatural", "count":1}
+				]
+			}
+		},
 
 
 		"dialogueTree" : "/npcs/sbq/Zygahedron/Zevi/npc.dialogueTree",

@@ -44,6 +44,25 @@
 		"sbqConvertType" : false,
 		"sbqDeedConvertType" : "sbq/Ferrilata_/Ferri",
 		"sbqEvilDeedConvertType" : "sbq/Ferrilata_/Ferri",
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				"human" : 8,
+				"cardboard" : 4
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Ferrilata_/Ferri", "type": "sbq/Ferrilata_/Ferri", "overrides": {},
+				"orderFurniture" : [
+					{"name":"sbqCardboardBox", "count":1},
+					{"name":"carbed", "count":1},
+					{"name":"jukebox", "count":1},
+					{"name":"basictv", "count":1},
+					{"name":"fridge", "count":1},
+					{"name":"oven1", "count":1},
+					{"name":"basicbath", "count":1}
+				]
+			}
+		},
 
 
 

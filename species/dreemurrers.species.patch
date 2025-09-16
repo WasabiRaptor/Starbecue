@@ -1,4 +1,46 @@
 {
+	"sbqTenantData" : {
+		"colonyTagCriteria" : {
+			"dreemurrers" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
+			{},
+			{"tier2":12},
+			{"tier3":12},
+			{"tier4":12},
+			{"tier5":12},
+			{"tier6":12},
+			{"tier7":12},
+			{"tier8":12},
+			{"tier9":12},
+			{"tier10":12}
+		],
+		"tenant" : {
+			"spawn": "npc", "species": "dreemurrers", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [
+				{"name":"bossmonstergrandpiano", "count":1},
+				{"name":"dreemurrerrsdoor", "count":1},
+				{"name":"dreemurrerslamp1", "count":1},
+				{"name":"dreemurrerstable1", "count":1},
+				{"name":"dreemurrerschair2", "count":1},
+				{"name":"dreemurrersarmchair", "count":1},
+				{"name":"deltarunebanner", "count":1},
+				{"name":"deltarunebannersmall", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"spawn": "npc", "level": 1, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "dreemurrers", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
 	"baseColorPalette": {
 		"primary": [
 			"c7815b",
