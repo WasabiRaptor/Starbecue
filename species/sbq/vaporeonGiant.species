@@ -33,39 +33,12 @@
 	},
 
 	"humanoidConfig" : "/humanoid/sbq/vaporeonGiant/vaporeonGiant.config",
-	"sbqPartImages" : {},
+	"buildScripts" : ["/humanoid/opensb/build.lua"],
+	"potionImagePath": "/humanoid/sbq/vaporeon/potion/",
+	"potionRarity": "legendary",
+	"skull": "/humanoid/human/dead.png",
 
-	"bodyColor": [
-		"?replace;0d4f6a=7d1217;1b80a7=b52335;42b2dd=dc3c4f;6dc4e5=ed576f;", // red
-		"?replace;0d4f6a=7f5716;1b80a7=b97625;42b2dd=e39542;6dc4e5=fbb163;", // orange
-		"?replace;0d4f6a=ab6a13;1b80a7=eac116;42b2dd=fee528;6dc4e5=ffed6c;", // yellow
-		"?replace;0d4f6a=37681c;1b80a7=6fc13b;42b2dd=91e73d;6dc4e5=b1fa69;", // lime
-		"?replace;0d4f6a=0d6a41;1b80a7=1ba674;42b2dd=43dcb0;6dc4e5=7bf5d1;", // teal
-		"?replace;0d4f6a=0d4f6b;1b80a7=1b80a8;42b2dd=42b2de;6dc4e5=6dc4e6;", // default blue
-		"?replace;0d4f6a=501393;1b80a7=7341c1;42b2dd=916ee4;6dc4e5=aa8cf2;", // purble
-		"?replace;0d4f6a=760596;1b80a7=bd62d5;42b2dd=df77de;6dc4e5=ffbdff;", // shiny (dark magenta)
-		"?replace;0d4f6a=606060;1b80a7=bdbdbd;42b2dd=efefef;6dc4e5=fefeff;", // white
-		"?replace;0d4f6a=202020;1b80a7=333333;42b2dd=434343;6dc4e5=565656;" // dark gray
-	],
-	"charGenTextLabels": [
-		"Primary Color", // body color
-		"-", // hair type
-		"Underbelly Color", // shirt
-		"Ear Finn Color", // pants
-		"Dorsal Finn Color", // alt option - undy color - facial mask
-		"-", // head option - hair color - facial hair
-		"Flesh Color", // shirt color
-		"Neck Finn Color", // pants color
-		"Vaporeon", // species
-		"Personality" // personality
-	],
-	"facialHair": [
-		"0",
-		"blank"
-	],
-	"facialMask": [
-		""
-	],
+	"sbqPartImages" : {},
 	"genders": [
 		{
 			"name": "male",
@@ -78,15 +51,35 @@
 			"characterImage": "/interface/title/female.png"
 		}
 	],
-	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"hair": [
+
+	"charGenTextLabels": [
+		"Primary Color", // body color
+		"Belly Color", // hair type
+		"Dorsal Finn Color", // shirt
+		"Ear Finn Color", // pants
+		"Neck Finn Color", // alt option - undy color - facial mask
+		"Beans Color", // head option - hair color - facial hair
+		"Neck Finn Style", // shirt color
+		"-", // pants color
+		"Vaporeon", // species
+		"Personality" // personality
+	],
+	"neckFinnStyle": [
 		"0"
 	],
-	"hairColor": [
-		""
+	"bodyColor": [
+		"?replace;0d4f6a=7d1217;1b80a7=b52335;42b2dd=dc3c4f;6dc4e5=ed576f;", // red
+		"?replace;0d4f6a=7f5716;1b80a7=b97625;42b2dd=e39542;6dc4e5=fbb163;", // orange
+		"?replace;0d4f6a=ab6a13;1b80a7=eac116;42b2dd=fee528;6dc4e5=ffed6c;", // yellow
+		"?replace;0d4f6a=37681c;1b80a7=6fc13b;42b2dd=91e73d;6dc4e5=b1fa69;", // lime
+		"?replace;0d4f6a=0d6a41;1b80a7=1ba674;42b2dd=43dcb0;6dc4e5=7bf5d1;", // teal
+		"?replace;0d4f6a=0d4f6b;1b80a7=1b80a8;42b2dd=42b2de;6dc4e5=6dc4e6;", // default blue
+		"?replace;0d4f6a=501393;1b80a7=7341c1;42b2dd=916ee4;6dc4e5=aa8cf2;", // purble
+		"?replace;0d4f6a=760596;1b80a7=bd62d5;42b2dd=df77de;6dc4e5=ffbdff;", // shiny (dark magenta)
+		"?replace;0d4f6a=606060;1b80a7=bdbdbd;42b2dd=efefef;6dc4e5=fefeff;", // white
+		"?replace;0d4f6a=202020;1b80a7=333333;42b2dd=434343;6dc4e5=565656;" // dark gray
 	],
-
-	"pants": [ // ear fins
+	"earFinnColor": [ // ear fins
 		"?replace;786c31=a34c99;b1a14e=cc72c2;dcca6b=ef99e6;f2eab4=ffcfe8;fdf9e3=fae2ee", // light pink
 		"?replace;786c31=785131;b1a14e=986943;dcca6b=dca76a;f2eab4=f2d4b5;fdf9e3=fae9d8", // orange cream
 		"?replace;786c31=786c32;b1a14e=b1a14f;dcca6b=dcca6c;f2eab4=f2eab5;fdf9e3=fdf9e4", // light yellow
@@ -109,7 +102,7 @@
 		"?replace;786c31=545455FE;b1a14e=8a8a8bFE;dcca6b=b3b3b4FE;f2eab4=e0e0e1FE;fdf9e3=fefeffFE", // white
 		"?replace;786c31=2a2a2aFE;b1a14e=393939FE;dcca6b=555555FE;f2eab4=777777FE;fdf9e3=8f8f8fFE" // gray
 	],
-	"pantsColor": [
+	"neckFinnColor": [
 		"?replace;a34c9a=a34c99;cc72c3=cc72c2;ef99e7=ef99e6;ffcfe9=ffcfe8;fae2ef=fae2ee", // light pink
 		"?replace;a34c9a=785131;cc72c3=986943;ef99e7=dca76a;ffcfe9=f2d4b5;fae2ef=fae9d8", // orange cream
 		"?replace;a34c9a=786c32;cc72c3=b1a14f;ef99e7=dcca6c;ffcfe9=f2eab5;fae2ef=fdf9e4", // light yellow
@@ -132,9 +125,7 @@
 		"?replace;a34c9a=545455FE;cc72c3=8a8a8bFE;ef99e7=b3b3b4FE;ffcfe9=e0e0e1FE;fae2ef=fefeffFE", // default white
 		"?replace;a34c9a=2a2a2aFE;cc72c3=393939FE;ef99e7=555555FE;ffcfe9=777777FE;fae2ef=8f8f8fFE" // gray
 	],
-	"potionImagePath": "/humanoid/sbq/vaporeon/potion/",
-	"potionRarity": "legendary",
-	"shirt": [ // underbelly
+	"bellyColor": [ // underbelly
 		"?replace;545454=a34c99;8a8a8a=cc72c2;b3b3b3=ef99e6;e0e0e0=ffcfe8;fefefe=fae2ee", // light pink
 		"?replace;545454=785131;8a8a8a=986943;b3b3b3=dca76a;e0e0e0=f2d4b5;fefefe=fae9d8", // orange cream
 		"?replace;545454=786c32;8a8a8a=b1a14f;b3b3b3=dcca6c;e0e0e0=f2eab5;fefefe=fdf9e4", // light yellow
@@ -146,11 +137,10 @@
 		"?replace;545454=545455;8a8a8a=8a8a8b;b3b3b3=b3b3b4;e0e0e0=e0e0e1;fefefe=fefeff", // white
 		"?replace;545454=2a2a2a;8a8a8a=393939;b3b3b3=555555;e0e0e0=777777;fefefe=8f8f8f" // grey
 	],
-	"shirtColor": [ // flesh color
+	"beansColor": [ // flesh color
 		"?replace;7a235a=7a235b;99457a=99457b;a2668c=a2668d;"
 	],
-	"skull": "/humanoid/human/dead.png",
-	"undyColor": [
+	"dorsalFinnColor": [
 		"?replace;0b2e67=550708;194893=751810;2d66c3=92221d", // red
 		"?replace;0b2e67=683c0c;194893=9f531f;2d66c3=c0632b", // orange
 		"?replace;0b2e67=75510d;194893=927312;2d66c3=b68e15", // yellow
