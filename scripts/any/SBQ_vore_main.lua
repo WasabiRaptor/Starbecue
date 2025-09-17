@@ -424,7 +424,7 @@ function sbq._State:recieveOccupants(newOccupants)
 			local occupant = sbq.Occupants.entityId[tostring(eid)]
 			if occupant and occupant.flags.infuseType and occupant.flags.infused then
 				local infuseType = occupant.flags.infuseType
-                sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 					sbq.settings.read.infuseSlots[infuseType].item = card
 					sbq.infuseOverrideSettings[infuseType] = {
 						infuseSlots = { [infuseType] = { item = card}}
@@ -1328,10 +1328,10 @@ function sbq._Location:randomOccupant()
 	end
 end
 function sbq._Location:lockSize(locked)
-    self.occupancy.lockSize = locked or self.occupancy.lockSize
+	self.occupancy.lockSize = locked or self.occupancy.lockSize
 end
 function sbq._Location:unlockSize()
-    self.occupancy.lockSize = false
+	self.occupancy.lockSize = false
 end
 function sbq._Location:queueSizeChangeAnims(anims)
 	if not anims then return end

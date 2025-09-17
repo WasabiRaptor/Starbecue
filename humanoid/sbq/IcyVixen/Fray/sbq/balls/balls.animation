@@ -1,18 +1,18 @@
 {
 	"globalTagDefaults" : {
-		"ballsLeftFrontFrameset" : "sbq/balls/default/front.png",
-		"ballsLeftBackFrameset" : "sbq/balls/default/back.png",
-		"ballsLeftInfusedFade" : "",
-		"ballsLeftInfusedDirectives" : "",
-		"ballsLeftBackInfusedFrameset" : "",
-		"ballsLeftFrontInfusedFrameset" : "",
+		"balls_leftFrontFrameset" : "sbq/balls/default/front.png",
+		"balls_leftBackFrameset" : "sbq/balls/default/back.png",
+		"balls_leftInfusedFade" : "",
+		"balls_leftInfusedDirectives" : "",
+		"balls_leftBackInfusedFrameset" : "",
+		"balls_leftFrontInfusedFrameset" : "",
 
-		"ballsRightFrontFrameset" : "sbq/balls/default/front.png",
-		"ballsRightBackFrameset" : "sbq/balls/default/back.png",
-		"ballsRightInfusedFade" : "",
-		"ballsRightInfusedDirectives" : "",
-		"ballsRightFrontInfusedFrameset" : "",
-		"ballsRightBackInfusedFrameset" : "",
+		"balls_rightFrontFrameset" : "sbq/balls/default/front.png",
+		"balls_rightBackFrameset" : "sbq/balls/default/back.png",
+		"balls_rightInfusedFade" : "",
+		"balls_rightInfusedDirectives" : "",
+		"balls_rightFrontInfusedFrameset" : "",
+		"balls_rightBackInfusedFrameset" : "",
 
 		"ballsSize" : "0",
 		"ballsInterpolateSize" : "0",
@@ -125,8 +125,8 @@
 				"partStates": {
 					"balls_rightState": {
 						"idle": { "properties": {
-							"image": "<ballsRightFrontFrameset>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
-							"flippedImage": "<ballsRightBackFrameset>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
+							"image": "<balls_rightFrontFrameset>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
+							"flippedImage": "<balls_rightBackFrameset>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -147,8 +147,8 @@
 					},
 					"balls_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<ballsRightFrontFrameset>:<balls_rightInterpolateSize>-expand",
-							"flippedImage": "<ballsRightBackFrameset>:<balls_rightInterpolateSize>-expand"
+							"image": "<balls_rightFrontFrameset>:<balls_rightInterpolateSize>-expand",
+							"flippedImage": "<balls_rightBackFrameset>:<balls_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -172,8 +172,8 @@
 				"partStates": {
 					"balls_leftState": {
 						"idle": { "properties": {
-							"image": "<ballsLeftBackFrameset>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
-							"flippedImage": "<ballsLeftFrontFrameset>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
+							"image": "<balls_leftBackFrameset>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
+							"flippedImage": "<balls_leftFrontFrameset>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
 						} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -194,8 +194,8 @@
 					},
 					"balls_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<ballsLeftBackFrameset>:<balls_leftInterpolateSize>-expand",
-							"flippedImage": "<ballsLeftFrontFrameset>:<balls_leftInterpolateSize>-expand"
+							"image": "<balls_leftBackFrameset>:<balls_leftInterpolateSize>-expand",
+							"flippedImage": "<balls_leftFrontFrameset>:<balls_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},

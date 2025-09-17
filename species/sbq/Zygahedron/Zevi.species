@@ -201,11 +201,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -215,11 +215,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 
@@ -313,6 +313,26 @@
 			]
 		},
 		"sbq/bellyQuadruped_noNavel.png": {
+			"sourceImage": "/humanoid/wr/quadruped/sbq/belly/default.png",
+			"remapDirectives": [
+				"?replace;00adba=eb3629",
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/bellyQuadruped.png": {
+			"sourceImage": "/humanoid/wr/quadruped/sbq/belly/default.png",
+			"remapDirectives": [
+				"?replace;00adba=bc1002",
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/bellyQuadruped_noNavel.png": {
 			"sourceImage": "/humanoid/wr/quadruped/sbq/belly/default.png",
 			"remapDirectives": [
 				"?replace;00adba=eb3629",

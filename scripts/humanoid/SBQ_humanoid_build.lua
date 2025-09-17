@@ -56,6 +56,10 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 		end
 	end
 	module.bodyFullbrightParts = nil
+	for _, v in ipairs(module.fullbrightParts or {}) do
+		setPath(humanoidConfig.animation, { "animatedParts", "parts", v, "properties", "fullbright" }, true)
+	end
+	module.fullbrightParts = nil
 	for _, v in ipairs(module.occupantAnimations or {}) do
 		for i = 1, (humanoidConfig.sbqOccupantSlots or 0) do
 			table.insert(humanoidConfig.animation.includes, v .. "." .. i)

@@ -1,10 +1,10 @@
 {
 	"globalTagDefaults" : {
-		"breastsLeftFrontFrameset" : "sbq/breastsFront.png",
-		"breastsLeftBackFrameset" : "sbq/breastsBack.png",
+		"breasts_leftFrontFrameset" : "sbq/breastsFront.png",
+		"breasts_leftBackFrameset" : "sbq/breastsBack.png",
 
-		"breastsRightFrontFrameset" : "sbq/breastsFront.png",
-		"breastsRightBackFrameset" : "sbq/breastsBack.png",
+		"breasts_rightFrontFrameset" : "sbq/breastsFront.png",
+		"breasts_rightBackFrameset" : "sbq/breastsBack.png",
 
 		"breastsSize" : "0",
 		"breastsInterpolateSize" : "0",
@@ -121,8 +121,8 @@
 				"partStates": {
 					"breasts_rightState": {
 						"idle": { "properties": {
-							"image": "<breastsRightFrontFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
-							"flippedImage": "<breastsRightBackFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							"image": "<breasts_rightFrontFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breasts_rightBackFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -143,8 +143,8 @@
 					},
 					"breasts_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsRightFrontFrameset>:<breasts_rightInterpolateSize>-expand",
-							"flippedImage": "<breastsRightBackFrameset>:<breasts_rightInterpolateSize>-expand"
+							"image": "<breasts_rightFrontFrameset>:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breasts_rightBackFrameset>:<breasts_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -177,8 +177,8 @@
 				"partStates": {
 					"breasts_leftState": {
 						"idle": { "properties": {
-							"image": "<breastsLeftBackFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
-							"flippedImage": "<breastsLeftFrontFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							"image": "<breasts_leftBackFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breasts_leftFrontFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -199,8 +199,8 @@
 					},
 					"breasts_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsLeftBackFrameset>:<breasts_leftInterpolateSize>-expand",
-							"flippedImage": "<breastsLeftFrontFrameset>:<breasts_leftInterpolateSize>-expand"
+							"image": "<breasts_leftBackFrameset>:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breasts_leftFrontFrameset>:<breasts_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},

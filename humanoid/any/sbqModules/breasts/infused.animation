@@ -1,14 +1,14 @@
 {
 	"globalTagDefaults" : {
-		"breastsLeftInfusedDirectives" : "",
-		"breastsLeftInfusedFade" : "",
-		"breastsLeftFrontInfusedFrameset" : "",
-		"breastsLeftBackInfusedFrameset" : "",
+		"breasts_leftInfusedDirectives" : "",
+		"breasts_leftInfusedFade" : "",
+		"breasts_leftFrontInfusedFrameset" : "",
+		"breasts_leftBackInfusedFrameset" : "",
 
-		"breastsRightInfusedDirectives" : "",
-		"breastsRightInfusedFade" : "",
-		"breastsRightFrontInfusedFrameset" : "",
-		"breastsRightBackInfusedFrameset" : ""
+		"breasts_rightInfusedDirectives" : "",
+		"breasts_rightInfusedFade" : "",
+		"breasts_rightFrontInfusedFrameset" : "",
+		"breasts_rightBackInfusedFrameset" : ""
 	},
 	"animatedParts" : {
 		"stateTypes" : {
@@ -21,13 +21,13 @@
 					"flippedZLevel": 11.61,
 
 					"anchorPart": "breasts_right",
-					"processingDirectives" : "<breastsRightInfusedDirectives><breastsRightInfusedFade>"
+					"processingDirectives" : "<breasts_rightInfusedDirectives><breasts_rightInfusedFade>"
 				},
 				"partStates": {
 					"breasts_rightState": {
 						"idle": { "properties": {
-							"image": "<breastsRightFrontInfusedFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
-							"flippedImage": "<breastsRightBackInfusedFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							"image": "<breasts_rightFrontInfusedFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breasts_rightBackInfusedFrameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -48,8 +48,8 @@
 					},
 					"breasts_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsRightFrontInfusedFrameset>:<breasts_rightInterpolateSize>-expand",
-							"flippedImage": "<breastsRightBackInfusedFrameset>:<breasts_rightInterpolateSize>-expand"
+							"image": "<breasts_rightFrontInfusedFrameset>:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breasts_rightBackInfusedFrameset>:<breasts_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -69,13 +69,13 @@
 					"flippedZLevel": 11.8,
 
 					"anchorPart": "breasts_left",
-					"processingDirectives" : "<breastsLeftInfusedDirectives><breastsLeftInfusedFade>"
+					"processingDirectives" : "<breasts_leftInfusedDirectives><breasts_leftInfusedFade>"
 				},
 				"partStates": {
 					"breasts_leftState": {
 						"idle": { "properties": {
-							"image": "<breastsLeftBackInfusedFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
-							"flippedImage": "<breastsLeftFrontInfusedFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							"image": "<breasts_leftBackInfusedFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breasts_leftFrontInfusedFrameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -96,8 +96,8 @@
 					},
 					"breasts_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<breastsLeftBackInfusedFrameset>:<breasts_leftInterpolateSize>-expand",
-							"flippedImage": "<breastsLeftFrontInfusedFrameset>:<breasts_leftInterpolateSize>-expand"
+							"image": "<breasts_leftBackInfusedFrameset>:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breasts_leftFrontInfusedFrameset>:<breasts_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
