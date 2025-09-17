@@ -177,21 +177,14 @@ function sbq.reloadVoreConfig(sbqConfig)
 	sbq.SpeciesScript.active = true
 
 	for _, occupant in ipairs(sbq.Occupants.list) do
+		occupant:setLoungeEnabled(true)
+		occupant:setLoungeDismountable(false)
+		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 		occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	end
 	for locationName, _ in pairs(sbq.SpeciesScript.locations) do
 		local location = sbq.SpeciesScript:getLocation(locationName)
-		if location then
-			location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
-			if location.subLocations then
-				for k, _ in pairs(location.subLocations) do
-					local location = sbq.SpeciesScript:getLocation(locationName, k)
-					if location then
-						location:doSizeChangeAnims(location.occupancy.visualSize, location.occupancy.visualCount)
-					end
-				end
-			end
-		end
+		location:markSizeDirty(true)
 	end
 	sbq.refreshSettings()
 end
@@ -894,11 +887,6 @@ function sbq._SpeciesScript:addLocation(name, config)
 	}
 	sbq.Occupants.locations[name] = location.occupancy
 
-	for _, occupant in ipairs(location.occupancy.list) do -- make sure we don't eject any inherited occupants
-		occupant:setLoungeEnabled(true)
-		occupant:setLoungeDismountable(false)
-		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
-	end
 	-- sub locations are for things that are different spots techincally, but inherit values and use the settings
 	-- of a single location, such as with the sidedness of breasts, or perhaps a multi chambered stomach
 	for k, subLocation in pairs(location.subLocations or {}) do
@@ -922,19 +910,12 @@ function sbq._SpeciesScript:addLocation(name, config)
 		}
 		location.occupancy.subLocations[k] = subLocation.occupancy
 		setmetatable(subLocation, { __index = location })
-
-		for _, occupant in ipairs(subLocation.occupancy.list) do -- make sure we don't eject any inherited occupants
-			occupant:setLoungeEnabled(true)
-			occupant:setLoungeDismountable(false)
-		end
 	end
 
 	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.read.locations[location.settingsTable or name]})
 	setmetatable(location, { __index = self.species.locations[name] or sbq._Location })
 	self.locations[name] = location
-	location:markSizeDirty(true)
-	location:markSettingsDirty()
 end
 
 function sbq._Location:hasSpace(size)
@@ -1173,7 +1154,10 @@ function sbq._Location:updateOccupancy(dt)
 			),
 			self.interpolateSizes or self.struggleSizes or {0}
 		)
-		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or {0}) then self.occupancy.interpolating = false end
+		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or { 0 }) then
+			self.occupancy.interpolating = false
+			self.occupancy.interpolateFrom = self.occupancy.visualSize
+		end
 		animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
 	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
@@ -1184,16 +1168,20 @@ function sbq._Location:updateOccupancy(dt)
 end
 
 function sbq._Location:update(dt)
-	if sbq.randomTimer(self.tag.."_gurgle", 3, 15) then
+	if sbq.randomTimer(self.tag .. "_gurgle", 3, 15) then
 		if (self.occupancy.count > 0) and self.settings.gurgleSounds and self.occupancy.list[1] then
 			local occupant = self.occupancy.list[#self.occupancy.list]
 			animator.setSoundPosition(self.gurgleSound or "gurgle", occupant:localPosition())
 			if status.isResource(self.gurgleResource or "food") then
 				local res = status.resourcePercentage(self.gurgleResource or "food")
-				animator.setSoundVolume(self.gurgleSound or "gurgle", 0.5 + ((self.gurgleResourceInvert and (1 - res)) or res), 0.25)
+				animator.setSoundVolume(self.gurgleSound or "gurgle",
+					0.5 + ((self.gurgleResourceInvert and (1 - res)) or res), 0.25)
 			end
 			animator.playSound(self.gurgleSound or "gurgle")
 		end
+	end
+	if sbq.timer(self.tag.."_refreshStruggle") then
+		self:refreshStruggleDirection()
 	end
 end
 
@@ -1426,8 +1414,8 @@ function sbq.Occupants.insertOccupant(newOccupant)
 	if not newOccupant.entityId then return false, "invalidEntityId" end
 	-- check if we already have them
 	local occupant = sbq.Occupants.entityId[tostring(newOccupant.entityId)]
-    if occupant then
-        occupant:setLoungeEnabled(true)
+	if occupant then
+		occupant:setLoungeEnabled(true)
 		occupant:setLoungeDismountable(false)
 		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 		occupant:refreshLocation()
