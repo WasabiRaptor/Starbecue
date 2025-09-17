@@ -41,6 +41,9 @@ function patch(config, path)
 		sb.logInfo("[SBQ] playable species '%s' has no part images defined, generating placeholder images.", config.kind)
 		config.sbqPartImages = assets.json("/species/sbq/placeholderImages.config")
 	end
+	if type(sb.jsonQuery(config, "humanoidOverrides.sbqConfig.modules")) == "string" then
+		config.humanoidOverrides.sbqConfig.modules = assets.json(config.humanoidOverrides.sbqConfig.modules)
+	end
 
 	return config
 end

@@ -46,7 +46,3 @@ end
 
 function sbq.loungingIn()
 end
-
-function sbq.checkStarpounds(slot)
-	return false
-end

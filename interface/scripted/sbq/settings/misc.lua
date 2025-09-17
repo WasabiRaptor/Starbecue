@@ -1,31 +1,31 @@
 function init()
-    for i, v in ipairs(sbq.upgrades.storedUpgrades.candyBonus or {}) do
+	for i, v in ipairs(sbq.upgrades.storedUpgrades.candyBonus or {}) do
 		if v > 0 then
 			_ENV.upgradesGrid:addSlot({name = "sbqCandy", count = 1, parameters = {level = i, bonus = v, seed = sb.makeRandomSource():randu64()}})
 		end
 	end
-    local entityType = world.entityType(sbq.entityId())
+	local entityType = world.entityType(sbq.entityId())
 	if entityType == "npc" then
 		convertType = world.getNpcScriptParameter(sbq.entityId(), "sbqConvertType")
-        if convertType and (world.npcType(sbq.entityId()) ~= convertType) then
-            _ENV.resultTypeLabel:setText(convertType)
-            _ENV.convertNPCPanel:setVisible(true)
-        end
+		if convertType and (world.npcType(sbq.entityId()) ~= convertType) then
+			_ENV.resultTypeLabel:setText(convertType)
+			_ENV.convertNPCPanel:setVisible(true)
+		end
 		for k, v in pairs(sbq.cosmeticSlots) do
 			_ENV[k]:setItem(v)
 		end
 		_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(sbq.entityId(), "sbqIsCustomizable") or false)
-    elseif entityType == "object" then
+	elseif entityType == "object" then
 		_ENV.npcCosmeticSlots:setVisible(false)
 
 		_ENV.stripping:setVisible(world.getObjectParameter(sbq.entityId(), "hasCosmeticSlots") or false)
 		_ENV.statBars:setVisible(false)
-    elseif entityType == "player" then
+	elseif entityType == "player" then
 		_ENV.npcCosmeticSlots:setVisible(false)
 		_ENV.upgradeInputPanel:setVisible(false)
 		_ENV.miscOtherPlayerLayout:clearChildren()
-        _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "scrollText", makeLabel = true })
-        _ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "customFont", makeLabel = true })
+		_ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "scrollText", makeLabel = true })
+		_ENV.miscOtherPlayerLayout:addChild({ type = "sbqSetting", setting = "customFont", makeLabel = true })
 	end
 	local source = sbq.entityId()
 	_ENV.healthBar.parent:setVisible(world.entity(source):isResource("health") or false)
@@ -112,18 +112,20 @@ function _ENV.exportLocationsOnly:onClick()
 end
 
 function _ENV.convertNPC:onClick()
-    world.sendEntityMessage(pane.sourceEntity(), "sbqConvertNPC")
-    pane.dismiss()
+	world.sendEntityMessage(pane.sourceEntity(), "sbqConvertNPC")
+	pane.dismiss()
 end
 
 local exportFilters = {
-    prefs = {
-        vorePrefs = true,
-        infusePrefs = true,
-        subBehavior = true,
+	prefs = {
+		vorePrefs = true,
+		infusePrefs = true,
+		subBehavior = true,
 		domBehavior = true
-    },
-	locations = true
+	},
+	locations = {
+		locations = true
+	}
 }
 
 function misc.generateSettingsCard(filter)
@@ -157,7 +159,7 @@ function misc.cosmeticUpdated(slot)
 	world.sendEntityMessage(pane.sourceEntity(), "sbqUpdateCosmeticSlot", slot.id, slot:item())
 end
 function misc.acceptAnyCosmetic(slot, item)
-    if not item then return true end
+	if not item then return true end
 	local itemType = root.itemType(item.name)
 	return (itemType == "headarmor") or (itemType == "chestarmor") or (itemType == "legsarmor") or (itemType == "backarmor")
 end

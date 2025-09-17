@@ -376,13 +376,13 @@ function sbq.widgetScripts.makeInfuseSlots(param)
 	return sb.jsonMerge(param, layout)
 end
 
-function sbq.widgetScripts.infuseSlotAccepts(w, item)
-	if w.locked then return false end
-	if not item then return true end
-	if sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infusePrefs", w.groupKey, "prey"}) then return true end
-	sbq.playErrorSound()
-	interface.queueMessage(sbq.getString(":action_targetSettingsMismatch"))
-	return false
+function sbq.widgetScripts.infuseSlotAccepts(w, item) -- TODO remove this later
+	-- if w.locked then return false end
+	-- if not item then return true end
+	-- if sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infusePrefs", w.groupKey, "prey"}) then return true end
+	-- sbq.playErrorSound()
+	-- interface.queueMessage(sbq.getString(":action_targetSettingsMismatch"))
+	return true
 end
 
 function sbq.widgetScripts.changeScale(value)

@@ -19,7 +19,7 @@ local function setPath(input, path, value)
 	end
 end
 
-local function includeSBQModule(humanoidConfig, module)
+local function includeSBQModule(humanoidConfig, module, infuseData)
 	if not module then return end
 	local merge = false
 	if type(module) == "string" then
@@ -31,9 +31,11 @@ local function includeSBQModule(humanoidConfig, module)
 	for _, v in ipairs(module.includes or {}) do
 		includeSBQModule(humanoidConfig, v)
 	end
+	module.includes = nil
 	for _, v in ipairs(module.scripts or {}) do
 		table.insert(humanoidConfig.sbqConfig.scripts, v)
 	end
+	module.scripts = nil
 	for _, v in ipairs(module.animations or {}) do
 		if type(v) == "string" then
 			table.insert(humanoidConfig.animation.includes, v)
@@ -41,21 +43,25 @@ local function includeSBQModule(humanoidConfig, module)
 			humanoidConfig.animation = sb.jsonMerge(humanoidConfig.animation, v)
 		end
 	end
+	module.animations = nil
 	for _, v in ipairs(module.cosmeticAnimations or {}) do
 		for i = 1, 20 do
 			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
 		end
 	end
+	module.cosmeticAnimations = nil
 	if humanoidConfig.bodyFullbright then
 		for _, v in ipairs(module.bodyFullbrightParts or {}) do
 			setPath(humanoidConfig.animation, { "animatedParts", "parts", v, "properties", "fullbright" }, true)
 		end
 	end
+	module.bodyFullbrightParts = nil
 	for _, v in ipairs(module.occupantAnimations or {}) do
 		for i = 1, (humanoidConfig.sbqOccupantSlots or 0) do
 			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
 		end
 	end
+	module.occupantAnimations = nil
 	if module.modules then
 		if type(module.modules) == "string" then
 			module.modules = root.assetJson(module.modules)
@@ -64,37 +70,52 @@ local function includeSBQModule(humanoidConfig, module)
 			local modules = module.modules[slot]
 			local selectedModule = humanoidConfig["sbqModule_" .. slot]
 			if modules and selectedModule and (selectedModule ~= "disable") then
-				if modules[selectedModule] then
-					includeSBQModule(humanoidConfig, modules[selectedModule])
-				else
-					includeSBQModule(humanoidConfig, modules.default)
-				end
+				includeSBQModule(humanoidConfig, modules[selectedModule] or modules.default, infuseData)
 			end
 		end
 	end
+	module.modules = nil
+
+	if infuseData then
+		for k, v in pairs(module.infuseTags) do
+			humanoidConfig.animation.globalTagDefaults[k] = sb.replaceTags(v, {
+				species = infuseData.species,
+				humanoidPath = "/humanoid/" .. infuseData.species .. "/",
+				gender = infuseData.gender,
+				directives = infuseData.directives
+			})
+		end
+		module.infuseTags = nil
+		if infuseData.bodyFullbright then
+			for _, v in ipairs(module.infusedBodyFullbrightParts or {}) do
+				setPath(humanoidConfig.animation, { "animatedParts", "parts", v, "properties", "fullbright" }, true)
+			end
+		end
+		module.infusedBodyFullbrightParts = nil
+	end
+	if module.infuseModules then
+		if type(module.infuseModules) == "string" then
+			module.infuseModules = root.assetJson(module.infuseModules)
+		end
+		for i, slot in ipairs(humanoidConfig.sbqModuleOrder or {}) do
+			local newInfuseData = humanoidConfig["sbqInfused_" .. slot]
+			sb.logInfo(sb.printJson(newInfuseData))
+			sb.logInfo(slot)
+			if newInfuseData then
+				local modules = module.infuseModules[slot]
+				if modules then
+					includeSBQModule(humanoidConfig, modules[newInfuseData.species] or modules.default, newInfuseData)
+				end
+			end
+		end
+		module.infuseModules = nil
+	end
 
 	if merge then
-		-- make sure not to overwrite these when we merge
-		module.includes = nil
-		module.scripts = nil
 		humanoidConfig.sbqConfig = sb.jsonMerge(humanoidConfig.sbqConfig, module)
 	end
 end
 
-local function getSBQBuildArguments(humanoidConfig)
-	for _, v in ipairs({
-		"sbqModuleOrder",
-		"sbqConfig",
-		"sbqIdentityAnimationCustom"
-	}) do
-		if not humanoidConfig[v] then
-			humanoidConfig[v] = root.assetJson("/humanoid.config:" .. v)
-		end
-		if type(humanoidConfig[v]) == "string" then
-			humanoidConfig[v] = root.assetJson(humanoidConfig[v])
-		end
-	end
-end
 
 function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 	if humanoidParameters.sbqEnabled then
@@ -104,8 +125,6 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 	if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
 		return humanoidConfig
 	end
-	local sbqConfig = root.assetJson("/sbq.config")
-	getSBQBuildArguments(humanoidConfig)
 	for k, v in pairs(identity) do
 		if type(v) == "string" then
 			if humanoidConfig.sbqIdentityAnimationCustom[k] then
@@ -137,6 +156,7 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 		scripts = jarray()
 	}
 	includeSBQModule(humanoidConfig, baseModule)
-
+	sb.logInfo(sb.printJson(humanoidConfig.animation.globalTagDefaults,2))
+	sb.logInfo(sb.printJson(humanoidConfig.animation.includes,2))
 	return humanoidConfig
 end

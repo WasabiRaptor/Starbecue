@@ -124,9 +124,16 @@ local speciesFiles = assets.byExtension("species")
 for _, path in ipairs(speciesFiles) do
 	assets.patch(path, "/scripts/humanoid/SBQ_species_patch.lua")
 end
+local patched = {
+	["/humanoid.config"] = true,
+}
 local function setupSpecies(path)
 	local speciesConfig = assets.json(path)
 	local humanoidPath = "/humanoid/" .. speciesConfig.kind .. "/"
+	if speciesConfig.humanoidConfig and not patched[speciesConfig.humanoidConfig] then
+		patched[speciesConfig.humanoidConfig] = true
+		assets.patch(speciesConfig.humanoidConfig, "/scripts/humanoid/SBQ_humanoidConfig_patch.lua")
+	end
 	for relativePath, newImage in pairs(speciesConfig.sbqPartImages or {}) do
 		local imagePath = humanoidPath .. relativePath
 		local framesPath = imagePath:gsub("%.png", ".frames")

@@ -12,137 +12,44 @@ require("/scripts/any/SBQ_util.lua")
 
 local initialized = false
 function refreshHumanoidParameters()
-    old.refreshHumanoidParameters()
+	old.refreshHumanoidParameters()
 	if not initialized then return end
 	local speciesConfig = root.speciesConfig(sbq.humanoid.species())
-    local humanoidConfig = sbq.humanoid.humanoidConfig()
+	local humanoidConfig = sbq.humanoid.humanoidConfig()
 
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
-            speciesConfig.sbqSettingsConfig or {},
-            humanoidConfig.sbqSettingsConfig or {},
+			speciesConfig.sbqSettingsConfig or {},
+			humanoidConfig.sbqSettingsConfig or {},
 			npc and (config.getParameter("sbqSettingsConfig") or {
 				hideBehaviorSettings = true,
 				hidePredSettings = true,
 			}) or {}
 		),
 		sbq.settings:save(),
-        entity.entityType(),
+		entity.entityType(),
 		storage
-    )
-    if sbq.settings:setParameterSettings() then return end
-    sbq.settings:setMessageHandlers(player and true)
+	)
+	if sbq.settings:setParameterSettings() then return end
+	sbq.settings:setMessageHandlers(player and true)
 
 	sbq.upgrades:apply(sbq.settings)
 	sbq.settings:setPublicSettings()
-    sbq.settings:setStatSettings()
+	sbq.settings:setStatSettings()
 
-    humanoidConfig = sbq.humanoid.humanoidConfig()
+	humanoidConfig = sbq.humanoid.humanoidConfig()
 
-    if humanoidConfig.sbqEnabled and sbq.init then
-        if humanoidConfig.sbqConfig then
-            sbq.init(humanoidConfig.sbqConfig)
-        else
-            sbq.uninit()
-        end
-    elseif sbq.uninit then
+	if humanoidConfig.sbqEnabled and sbq.init then
+		if humanoidConfig.sbqConfig then
+			sbq.init(humanoidConfig.sbqConfig)
+		else
+			sbq.uninit()
+		end
+	elseif sbq.uninit then
 		sbq.uninit()
 	end
 end
 
-equipped = {}
-function equipped.chestSlot(itemDescriptor)
-	if not humanoid.getItemSlot("chestCosmetic") then
-		equipped.chestCosmeticSlot(itemDescriptor)
-	end
-end
-
-function equipped.legsSlot(itemDescriptor)
-	if not humanoid.getItemSlot("legsCosmetic") then
-		equipped.legsCosmeticSlot(itemDescriptor)
-	end
-end
-
-function equipped.headSlot(itemDescriptor)
-	if not humanoid.getItemSlot("headCosmetic") then
-		equipped.headCosmeticSlot(itemDescriptor)
-	end
-end
-
-function equipped.backSlot(itemDescriptor)
-	if not humanoid.getItemSlot("backCosmetic") then
-		equipped.backCosmeticSlot(itemDescriptor)
-	end
-end
-
-function equipped.chestCosmeticSlot(itemDescriptor)
-	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("chest") end
-	if itemDescriptor then
-		local item = root.itemConfig(itemDescriptor)
-		if item then
-			sbq.setStarpoundsSlot(item, "chest")
-		end
-	else
-	end
-	if sbq.SpeciesScript then
-		sbq.SpeciesScript:settingAnimations()
-	end
-end
-
-function equipped.legsCosmeticSlot(itemDescriptor)
-	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("legs") end
-	if itemDescriptor then
-		local item = root.itemConfig(itemDescriptor)
-		if item then
-			sbq.setStarpoundsSlot(item, "legs")
-		end
-	else
-	end
-	if sbq.SpeciesScript then
-		sbq.SpeciesScript:settingAnimations()
-	end
-end
-
-function equipped.headCosmeticSlot(itemDescriptor)
-	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("head") end
-	if itemDescriptor then
-		local item = root.itemConfig(itemDescriptor)
-	else
-	end
-	if sbq.SpeciesScript then
-		sbq.SpeciesScript:settingAnimations()
-	end
-end
-
-function equipped.backCosmeticSlot(itemDescriptor)
-	if not itemDescriptor then itemDescriptor = humanoid.getItemSlot("back") end
-	if itemDescriptor then
-		local item = root.itemConfig(itemDescriptor)
-	else
-	end
-	if sbq.SpeciesScript then
-		sbq.SpeciesScript:settingAnimations()
-	end
-end
-
-function equipped.primary(itemDescriptor)
-end
-
-function equipped.alt(itemDescriptor)
-end
-
-local starpoundsSlot = {
-	chest = false,
-	legs = false
-}
-function sbq.setStarpoundsSlot(item, slot)
-	starpoundsSlot[slot] = (item.config.tooltipKind == "starpoundsarmor")
-	animator.setAnimationState("starpounds", tostring(sbq.checkStarpounds(slot)))
-end
-
-function sbq.checkStarpounds(slot)
-	return starpoundsSlot.chest or starpoundsSlot.legs
-end
 
 -- this function in it's current state was made explicitly to add a missing color to familar's palettes
 -- however, it should probably be repurposed to add a missing color to all palettes
@@ -229,10 +136,11 @@ function sbq.humanoidInit()
 		item.parameters.tooltipFields.objectImage = world.entityPortrait(entity.id(), "full")
 		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
 		item.parameters.preySize = sbq.size()
+		item.parameters.bodyFullbright = sbq.humanoid.humanoidConfig().bodyFullbright
 		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty(
 		"sbqPronouns")
 		return item
-    end)
+	end)
 	initialized = true
 end
 

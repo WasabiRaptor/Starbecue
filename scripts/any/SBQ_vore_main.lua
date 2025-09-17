@@ -424,7 +424,7 @@ function sbq._State:recieveOccupants(newOccupants)
 			local occupant = sbq.Occupants.entityId[tostring(eid)]
 			if occupant and occupant.flags.infuseType and occupant.flags.infused then
 				local infuseType = occupant.flags.infuseType
-				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+                sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 					sbq.settings.read.infuseSlots[infuseType].item = card
 					sbq.infuseOverrideSettings[infuseType] = {
 						infuseSlots = { [infuseType] = { item = card}}
@@ -842,7 +842,6 @@ function sbq._State:emergencyEscape(occupant)
 end
 
 local function climaxBurst(emitter, burstChance)
-	if sbq.checkStarpounds("legs") then return end
 	animator.setParticleEmitterBurstCount(emitter, burstChance * 10)
 	animator.burstParticleEmitter(emitter)
 	if math.random() < burstChance then
@@ -1278,15 +1277,11 @@ function sbq._Location:updateOccupancy(dt)
 		if self.occupancy.interpolateSize == sbq.getClosestValue(self.occupancy.visualSize, self.interpolateSizes or self.struggleSizes or {0}) then self.occupancy.interpolating = false end
 		animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
-	if self.occupancy.infuseData then
-		local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
-		if (fade == "fe") then -- so theres no accidental glowy
-			fade = "ff"
-		end
-		animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
-	else
-		animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=00000000")
+	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
+	if (fade == "fe") then -- so theres no accidental glowy
+		fade = "ff"
 	end
+	animator.setGlobalTag(self.tag.."InfusedFade", "?multiply=FFFFFF"..fade)
 end
 
 function sbq._Location:update(dt)
@@ -1369,7 +1364,6 @@ function sbq._Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	end
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
 	if sizeChangeAnims then
-		sbq.logInfo(sizeChangeAnims, 2)
 		self.occupancy.interpolateFrom = (self.occupancy.interpolating and self.occupancy.interpolateSize) or prevVisualSize
 		self.occupancy.interpolating = true
 		self.interpolateTime = sbq.SpeciesScript:doAnimations(sizeChangeAnims, sizeTags)

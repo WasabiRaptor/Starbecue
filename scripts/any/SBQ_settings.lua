@@ -259,6 +259,10 @@ function _Settings.updated:any(oldValue, setting, groupName, groupId)
 		self.updated.parameterSetting(self, oldValue, setting, groupName, groupId)
 	end
 
+	if groupName == "infuseSlots" then
+		self.updated.parameterSetting(self, oldValue, setting, groupName, groupId)
+	end
+
 	if groupName == "locations" then
 		self.updated.locationSetting(self, oldValue, setting, groupName, groupId)
 	end
@@ -348,6 +352,24 @@ end
 function _Settings:setParameterSettings()
 	if not sbq.humanoid then return end
 	local refresh = false
+	for infuseSlot, infuseSlotData in pairs(self.read.infuseSlots) do
+		local identity = sbq.query(infuseSlotData, { "item", "parameters", "npcArgs", "npcParam", "identity" })
+		local value
+		if identity then
+			value = {
+				directives = identity.bodyDirectives .. identity.hairDirectives,
+				species = identity.species,
+				gender = identity.gender,
+				bodyFullbright = sbq.query(infuseSlotData, { "item", "parameters", "bodyFullbright" }),
+				size = sbq.query(infuseSlotData, { "item", "parameters", "preySize" })
+			}
+		end
+		if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfused_" .. infuseSlot), value) then
+			sbq.humanoid.setHumanoidParameter("sbqInfused_"..infuseSlot, value)
+			refresh = true
+		end
+	end
+
 	for setting, parameter in pairs(sbq.config.parameterSettings) do
 		local value = self:get(setting)
 		if sbq.humanoid.getHumanoidParameter(parameter) ~= value then
