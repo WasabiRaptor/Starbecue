@@ -77,29 +77,29 @@
 	"sbqPartImages": {
 		"sbq/noLegs/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;?addmask=/humanoid/any/sbqImageMasks/noLegs_male.png;0;0;",
-			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]
+			"processingDirectives" : "?addmask=/humanoid/felin/sbq/noLegsMask_male.png;0;0;",
+			"patches" : ["/humanoid/felin/sbq/noLegs_patch.lua"]
 		},
 		"sbq/noLegs/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;?addmask=/humanoid/any/sbqImageMasks/noLegs_female.png;0;0;",
-			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]
+			"processingDirectives" : "?addmask=/humanoid/felin/sbq/noLegsMask_female.png;0;0;",
+			"patches" : ["/humanoid/felin/sbq/noLegs_patch.lua"]
 		},
 		"sbq/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/felin/sbq/removeTailMask_male.png;0;0;"
 		},
 		"sbq/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/felin/sbq/removeTailMask_female.png;0;0;"
 		},
 		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/felin/sbq/legMask.png;0;0;"
 		},
 		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/felin/sbq/legMask.png;0;0;"
 		},
 
 

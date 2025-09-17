@@ -77,12 +77,12 @@
 	"sbqPartImages": {
 		"sbq/noLegs/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;?addmask=/humanoid/avali/sbq/noLegsMask_male.png;0;0;",
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/noLegsMask_male.png;0;0;",
 			"patches" : ["/humanoid/avali/sbq/noLegs_patch.lua"]
 		},
 		"sbq/noLegs/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/avali/sbq/removeTailMask_female.png;0;0;?addmask=/humanoid/avali/sbq/noLegsMask_female.png;0;0;",
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/noLegsMask_female.png;0;0;",
 			"patches" : ["/humanoid/avali/sbq/noLegs_patch.lua"]
 		},
 		"sbq/malebody.png" : {
@@ -95,11 +95,11 @@
 		},
 		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
-			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/avali/sbq/removeTailMask_male.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;"
 		},
 		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
-			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;?addmask=/humanoid/avali/sbq/removeTailMask_female.png;0;0;"
+			"processingDirectives" : "?addmask=/humanoid/avali/sbq/legMask.png;0;0;"
 		},
 
 
