@@ -1,9 +1,6 @@
 {
 	"globalTagDefaults" : {
 		"tailFrameset" : "sbq/nickit_tail.png",
-		"tailInfusedFrameset" : "",
-		"tailInfusedFade" : "",
-		"tailInfusedDirectives" : "",
 
 		"tailSize" : "0",
 		"tailInterpolateSize" : "0"
@@ -79,43 +76,6 @@
 					"tailExpandState" : {
 						"expand": { "properties": { "image": "<tailFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } },
 						"eat": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust" : "head"
-					}
-				}
-			},
-			"tail_infused" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 8.11,
-
-					"anchorPart": "tail",
-					"processingDirectives" : "<tailInfusedDirectives><tailInfusedFade>"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
-						"walk": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<body_state>.<body_frame>" } },
-						"run": "walk",
-						"jump": "walk",
-						"fall": "walk",
-						"duck": "idle",
-						"swim": "idle",
-						"swimIdle" : "idle",
-						"sit" : "idle",
-						"lay" : "idle"
-					},
-					"tailState": {
-						"s_front": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
-						"s_back" : "s_front",
-						"s_up" : "s_front",
-						"s_down" : "s_front"
-					},
-					"tailExpandState" : {
-						"expand": { "properties": { "image": "<tailInfusedFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } },
-						"eat": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": {} },
