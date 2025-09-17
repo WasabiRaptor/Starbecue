@@ -226,22 +226,21 @@ function sbq.assignSettingValue(setting, group, name)
 			end
 		end
 	elseif widget.widgetType == "sbqItemSlot" then
-        widget:setItem(value.name and value)
+		widget:setItem(value.name and value)
 		widget.locked = locked
 	end
 end
 
 function sbq.widgetScripts.changeSetting(value, setting, group, name)
-	local result = sbq.settings:checkInvalid(setting, value, group, name)
-    if (result ~= nil) or sbq.settings:checkLocked(setting, group, name) then
-        sbq.playErrorSound()
-        sbq.assignSettingValue(setting, group, name)
-        return false
-    end
+	if ((sbq.settings:checkInvalid(setting, value, group, name) ~= value) and (type(value) ~= "number")) or sbq.settings:checkLocked(setting, group, name) then
+		sbq.playErrorSound()
+		sbq.assignSettingValue(setting, group, name)
+		return false
+	end
 
 	world.sendEntityMessage(sbq.entityId(), "sbqSetSetting", setting, value, group, name)
 	sbq.settings:set(setting, value, group, name)
-    sbq.refreshSettingVisibility()
+	sbq.refreshSettingVisibility()
 end
 
 function sbq.importSettings(newSettings)
@@ -269,8 +268,7 @@ function sbq.widgetScripts.makeMainEffectButtons(param)
 	for _, k in ipairs(sbq.gui.mainEffectOrder) do
 		if (location[param.setting] or {})[k] then
 			local visible = true
-			local result = sbq.settings:checkInvalid(param.setting, k, param.groupName, param.groupKey)
-			if result == nil then
+			if sbq.settings:checkInvalid(param.setting, k, param.groupName, param.groupKey) == k then
 				local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 				local icon
 				for _, status in ipairs(location[param.setting][k]) do
@@ -313,8 +311,7 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	local effects = location[param.setting]
 	if not effects then return false end
 	for _, k in ipairs(sbq.gui.secondaryEffectOrder) do
-		local result = sbq.settings:checkInvalid(param.setting, "true", param.groupName, param.groupKey)
-		if (effects or {})[k] and (result == nil) then
+		if (effects or {})[k] and (sbq.settings:checkInvalid(param.setting, true, param.groupName, param.groupKey) == true) then
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
 			local status
@@ -394,7 +391,7 @@ function sbq.widgetScripts.visualMinMax(param)
 	param.min = 0
 	local location = sbq.locations[param.groupKey]
 	param.max = location.maxSize
-    param.settingType = "number"
+	param.settingType = "number"
 	-- TODO this probably shouldn't be happening really, I do need to set up species/body type specific settings storage
 	-- if sbq.settings.read.locations[param.groupKey][param.setting] >= location.maxSize then
 	-- 	sbq.settings.read.locations[param.groupKey][param.setting] = location.maxSize
@@ -438,8 +435,8 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 				{ mode = "h", expandMode = { 0, 0 } },
 				{ type = "sbqItemGrid", id = "recentlyDigestedItemGrid", autoInteract = true, slots = slots },
 				{ type = "sbqIconButton", id = "clearRecentlyDigested", toolTip = ":clearRecentlyDigestedTip", script = "clearRecentlyDigested", image = "/interface/x.png", hoverImage = "/interface/xhover.png", pressImage = "/interface/xpress.png"}
-            },
-            { type = "sbqButton", id = "collapseEssenceStacksDigested", caption = ":collapseEssenceStacks", toolTip = ":collapseEssenceStacksTip", script = "collapseEssenceStacks" }
+			},
+			{ type = "sbqButton", id = "collapseEssenceStacksDigested", caption = ":collapseEssenceStacks", toolTip = ":collapseEssenceStacksTip", script = "collapseEssenceStacks" }
 		},
 		makeLabel = false
 	}
@@ -452,7 +449,7 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 	return sb.jsonMerge(param, layout)
 end
 function sbq.widgetScripts.clearRecentlyDigested()
-    sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
+	sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
 end
 function sbq.widgetScripts.collapseEssenceStacks()
 	world.sendEntityMessage(player.id(), "sbqCollapseEssenceStacks")
@@ -466,8 +463,7 @@ function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 		sbq.playErrorSound()
 	end
 	for _, v in ipairs(sbq.settings.settingsConfig.selectValues[setting]) do
-		local result = sbq.settings:checkInvalid(setting, value, group, name)
-		if result == nil then
+		if sbq.settings:checkInvalid(setting, value, group, name) == value then
 			if sbq.gui.dropDownOptions[v] then
 				table.insert(options, {
 					sbq.replaceConfigTags(sbq.gui.dropDownOptions[v][1], {selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or ""}),

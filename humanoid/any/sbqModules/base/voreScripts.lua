@@ -652,7 +652,7 @@ function default:fatalAvailable(name, action, target, ...)
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
 	if occupant:statPositive("sbq_" .. (occupant.flags.digestType) .. "FatalImmune") then return false, "invalidAction" end
-	if sbq.settings:checkInvalid("mainEffect", "digest", "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid("mainEffect", "digest", "locations", occupant.location) ~= ("digest") then return false, "invalidAction" end
 	return true
 end
 function default:fatal(name, action, target, ...)
@@ -661,7 +661,7 @@ function default:fatal(name, action, target, ...)
 	if not occupant.flags.digested then return false, "invalidAction" end
 	if not occupant.flags.digestType then return false, "invalidAction" end
 	if occupant:statPositive("sbq_" .. (occupant.flags.digestType) .. "FatalImmune") then return false, "invalidAction" end
-	if sbq.settings:checkInvalid("mainEffect", "digest", "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid("mainEffect", "digest", "locations", occupant.location) ~= ("digest") then return false, "invalidAction" end
 	occupant.persistentStatusEffects = {
 		{ stat = "healingBonus", amount = -10 },
 		{ stat = "healingStatusImmunity", amount = 999 },
@@ -677,7 +677,7 @@ function default:mainEffectAvailable(name, action, target)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "invalidAction" end
 	if occupant.locationSettings.mainEffect == (action.mainEffect or name) then return false, "invalidAction" end
-	if sbq.settings:checkInvalid("mainEffect", action.mainEffect or name, "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid("mainEffect", action.mainEffect or name, "locations", occupant.location) ~= (action.mainEffect or name) then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if location.mainEffect[action.mainEffect or name] then
 		return true
@@ -687,7 +687,7 @@ end
 function default:setMainEffect(name, action, target)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if sbq.settings:checkInvalid("mainEffect", action.mainEffect or name, "locations", occupant.location) ~= nil then return false, "invalidAction" end
+	if sbq.settings:checkInvalid("mainEffect", action.mainEffect or name, "locations", occupant.location) ~= (action.mainEffect or name) then return false, "invalidAction" end
 	occupant.locationSettings.mainEffect = action.mainEffect or name
 	occupant:refreshLocation()
 end
@@ -711,7 +711,6 @@ function default:reformed(name, action, target,...)
 		location.infusedEntity = nil
 		sbq.settings.read.infuseSlots[occupant.flags.infuseType].item = nil
 		sbq.infuseOverrideSettings[occupant.flags.infuseType] = nil
-		sbq.SpeciesScript:refreshInfusion(occupant.flags.infuseType)
 	end
 	occupant.flags.infuseType = nil
 	occupant.flags.infused = false
@@ -868,12 +867,12 @@ function default:infused(name, action, target)
 	local locationName = occupant.location
 	local subLocationName = occupant.subLocation
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
-	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+    sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+
 		sbq.settings.read.infuseSlots[infuseType].item = card
 		sbq.infuseOverrideSettings[infuseType] = {
 			infuseSlots = { [infuseType] = { item = card}}
 		}
-		sbq.SpeciesScript:refreshInfusion(infuseType)
 		occupant:refreshLocation(action.location)
 		location:markSizeDirty()
 		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.recieveOccupants)
@@ -884,7 +883,7 @@ end
 function default:eggifyAvailable(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if occupant.flags.egged or (sbq.settings:checkInvalid("eggify", "true", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
+	if occupant.flags.egged or (sbq.settings:checkInvalid("eggify", true, "locations", occupant.location) ~= (true)) then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end
 	return true
@@ -892,7 +891,7 @@ end
 function default:eggify(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
 	if not occupant then return false, "missingOccupant" end
-	if occupant.flags.egged or (sbq.settings("eggify", "true", "locations", occupant.location) ~= nil) then return false, "invalidAction" end
+	if occupant.flags.egged or (sbq.settings:checkInvalid("eggify", true, "locations", occupant.location) ~= (true)) then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end
 

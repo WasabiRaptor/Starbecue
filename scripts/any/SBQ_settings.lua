@@ -107,8 +107,6 @@ function _Settings:import(newSettings)
 
 	-- check for invalid setting values that must be added to the overrides
 	for setting, v in pairs(self.defaultSettings) do
-		local value = self.read[setting]
-
 		if sbq.config.groupedSettings[setting] then
 			local groupName = setting
 			rawset(self.read, groupName, rawget(self.read, groupName) or {})
@@ -136,7 +134,7 @@ function _Settings:import(newSettings)
 				for setting, v in pairs(groupSettings) do
 					local value = self.read[groupName][groupId][setting]
 					local result = self:checkInvalid(setting, value, groupName, groupId)
-					if result ~= nil then
+					if result ~= value then
 						sbq.debugLogInfo(string.format(
 							"Invalid setting '%s.%s.%s' value '%s' was set to temporary value '%s'",
 							groupName, groupId, setting,
@@ -146,8 +144,9 @@ function _Settings:import(newSettings)
 				end
 			end
 		else
+			local value = self.read[setting]
 			local result = self:checkInvalid(setting, value)
-			if result ~= nil then
+			if result ~= value then
 				sbq.debugLogInfo(string.format("Invalid setting '%s' value '%s' was set to temporary value '%s'", setting,
 					v, result))
 				self.overrideSettings[setting] = result
@@ -191,12 +190,14 @@ function _Settings:checkInvalid(setting, value, groupName, groupId)
 			((groupName and groupId) and sbq.query(self.invalidSettings, { groupName, groupId, setting, "max" }))
 		if max and ((result or value) > max) then result = max end
 
-		return result
+		return result or value
 	else
-		local value = tostring(value)
-		return sbq.query(self.invalidSettings, { setting, value }) or
-			((groupName and groupId) and sbq.query(self.invalidSettings, { groupName, groupId, setting, value }))
+		local valueString = tostring(value)
+		local result = sbq.query(self.invalidSettings, { setting, valueString }) or
+			((groupName and groupId) and sbq.query(self.invalidSettings, { groupName, groupId, setting, valueString }))
+		if result ~= nil then return result end
 	end
+	return value
 end
 function _Settings:checkLocked(setting, groupName, groupId)
 	if groupName and groupId then
@@ -223,17 +224,16 @@ end
 
 function _Settings:set(setting, value, groupName, groupId)
 	local oldValue = self:get(setting, groupName, groupId)
-	local value = self:checkInvalid(setting, value, groupName, groupId) or value
 	if groupName and groupId then
 		if not self.lockedSettings[groupName][groupId][setting] then
-			rawset(self.storedSettings[groupName][groupId], setting, value)
+			rawset(self.storedSettings[groupName][groupId], setting, self:checkInvalid(setting, value, groupName, groupId))
 		end
 	else
 		if not self.lockedSettings[setting] then
-			rawset(self.storedSettings, setting, value)
+			rawset(self.storedSettings, setting, self:checkInvalid(setting, value, groupName, groupId))
 		end
 	end
-	if oldValue ~= self:get(setting, groupName, groupId) then
+	if not sb.jsonEqual(oldValue, self:get(setting, groupName, groupId)) then
 		if self.updated[setting] then
 			self.updated[setting](self, oldValue, setting, groupName, groupId)
 		else
@@ -241,6 +241,26 @@ function _Settings:set(setting, value, groupName, groupId)
 		end
 	end
 end
+function _Settings:setOverride(setting, value, groupName, groupId)
+	local oldValue = self:get(setting, groupName, groupId)
+	if groupName and groupId then
+		if not self.lockedSettings[groupName][groupId][setting] then
+			rawset(self.overrideSettings[groupName][groupId], setting, self:checkInvalid(setting, value, groupName, groupId))
+		end
+	else
+		if not self.lockedSettings[setting] then
+			rawset(self.overrideSettings, setting, self:checkInvalid(setting, value, groupName, groupId))
+		end
+	end
+	if not sb.jsonEqual(oldValue, self:get(setting, groupName, groupId)) then
+		if self.updated[setting] then
+			self.updated[setting](self, oldValue, setting, groupName, groupId)
+		else
+			self.updated.any(self, oldValue, setting, groupName, groupId)
+		end
+	end
+end
+
 function _Settings.updated:any(oldValue, setting, groupName, groupId)
 	if self.storage then
 		self.storage.sbqSettings = self:save()
@@ -575,7 +595,6 @@ function sbq.settingsPageData(...)
 
 		voreConfig = sbq.voreConfig or {},
 		locations = (sbq.SpeciesScript or {}).locations or {},
-		baseLocations = (sbq.SpeciesScript or {}).baseLocations or {},
 		currentScale = sbq.getScale(),
 		parentEntityData = { sbq.parentEntity() },
 		cosmeticSlots = {

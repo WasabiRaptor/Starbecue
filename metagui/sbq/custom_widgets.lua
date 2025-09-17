@@ -66,12 +66,6 @@ function init()
     sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
 	sbq.upgrades:apply(sbq.settings)
 
-	if sbq.locations and sbq.baseLocations then
-		for name, location in pairs(sbq.locations) do
-			setmetatable(location, {__index = sbq.baseLocations[name]})
-		end
-	end
-
 	old.init()
 end
 

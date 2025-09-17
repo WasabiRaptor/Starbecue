@@ -103,8 +103,6 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 		end
 		for i, slot in ipairs(humanoidConfig.sbqModuleOrder or {}) do
 			local newInfuseData = humanoidConfig["sbqInfused_" .. slot]
-			sb.logInfo(sb.printJson(newInfuseData))
-			sb.logInfo(slot)
 			if newInfuseData then
 				local modules = module.infuseModules[slot]
 				if modules then
@@ -160,7 +158,5 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 		scripts = jarray()
 	}
 	includeSBQModule(humanoidConfig, baseModule)
-	sb.logInfo(sb.printJson(humanoidConfig.animation.globalTagDefaults,2))
-	sb.logInfo(sb.printJson(humanoidConfig.animation.includes,2))
 	return humanoidConfig
 end

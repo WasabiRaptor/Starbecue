@@ -3,8 +3,9 @@ function _ENV.metagui.theme.drawFrame() -- maybe this could stop the background 
 end
 
 sbq.Occupants = {
-	list = {},
-	entityId = {}
+	list = jarray(),
+	entityId = {},
+	captured = jarray()
 }
 local drawable
 function init()
@@ -25,15 +26,10 @@ function init()
 		for k, v in pairs(settingsData) do
 			sbq[k] = v
 		end
-        sbq.settings = sbq._Settings.new(sbq.settingsConfig or {}, sbq.storedSettings, world.entityType(sbq.entityId()))
-        sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
+		sbq.settings = sbq._Settings.new(sbq.settingsConfig or {}, sbq.storedSettings, world.entityType(sbq.entityId()))
+		sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
 		sbq.upgrades:apply(sbq.settings)
 
-		if sbq.locations and sbq.baseLocations then
-			for name, location in pairs(sbq.locations) do
-				setmetatable(location, {__index = sbq.baseLocations[name]})
-			end
-		end
 		sbq.assignSettingValues()
 		sbq.refreshSettingVisibility()
 		sbq.refreshOccupants()
@@ -105,16 +101,16 @@ local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occ
 function sbq.refreshOccupants()
 	sbq.Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
-    local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
-    local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16-7)) / occupantTemplate.size[2]) - seatCount
-    for i = 1, seatCount do
-        local occupant = sbq.Occupants.list[i]
-        if occupant then
-            addOccupantPortraitSlot(occupant)
-        else
-            addEmptySlot(i, emptyTemplate)
-        end
-    end
+	local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
+	local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16-7)) / occupantTemplate.size[2]) - seatCount
+	for i = 1, seatCount do
+		local occupant = sbq.Occupants.list[i]
+		if occupant then
+			addOccupantPortraitSlot(occupant)
+		else
+			addEmptySlot(i, emptyTemplate)
+		end
+	end
 	for i = 1, blankSlotCount do
 		addEmptySlot(i, blankTemplate)
 	end
@@ -226,10 +222,10 @@ function sbq.refreshPortrait(entityId)
 	if not canvasWidget then return end
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 	canvas:clear()
-    local portrait = world.entityPortrait(entityId, "bust")
-    if portrait then
+	local portrait = world.entityPortrait(entityId, "bust")
+	if portrait then
 		local bounds = drawable.boundBoxAll(portrait, true)
-        local center = rect.center(bounds)
+		local center = rect.center(bounds)
 		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 	end
 end

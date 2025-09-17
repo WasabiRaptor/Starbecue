@@ -25,17 +25,17 @@ sbq._Occupant.__index = sbq._Occupant
 
 sbq.SpeciesScripts = {}
 sbq.SpeciesScript = {
-	baseLocations = {},
 	locations = {},
 	states = {}
 }
 setmetatable(sbq.SpeciesScript, sbq._SpeciesScript)
 
 sbq.Occupants = {
-	list = {},
+	list = jarray(),
 	seat = {},
 	entityId = {},
-	locations = {}
+	locations = {},
+	captured = jarray()
 }
 
 function sbq.init(sbqConfig)
@@ -144,7 +144,7 @@ function sbq.reloadVoreConfig(sbqConfig)
 	for _, script in ipairs(sbq.voreConfig.scripts or {"/humanoid/any/sbqModules/base/voreScripts.lua"}) do
 		require(script)
 	end
-	sbq.SpeciesScript = { baseLocations = {}, locations = {}, states = {}, actionQueue = {} }
+	sbq.SpeciesScript = { locations = {}, states = {}, actionQueue = {} }
 	sbq.SpeciesScript.species = sbq.SpeciesScripts[sbq.voreConfig.species or "default"]
 	setmetatable(sbq.SpeciesScript, {__index = sbq.SpeciesScript.species})
 
@@ -176,7 +176,6 @@ function sbq.reloadVoreConfig(sbqConfig)
 	sbq.SpeciesScript:changeState((sbq.SpeciesScript.states[storage.lastState or "default"] and storage.lastState) or "default")
 	sbq.SpeciesScript.active = true
 
-	sbq.SpeciesScript:refreshInfusion()
 	for _, occupant in ipairs(sbq.Occupants.list) do
 		occupant:refreshLocation(occupant.location, occupant.subLocation, true)
 	end
@@ -262,10 +261,6 @@ end
 function sbq.releaseOccupant(id, ...)
 	if not sbq.SpeciesScript.active then return false end
 	return sbq.SpeciesScript:releaseOccupant(id, ...)
-end
-
-function sbq.refreshInfusion()
-	sbq.SpeciesScript:refreshInfusion()
 end
 
 -- transformation handling
@@ -424,17 +419,13 @@ function sbq._State:recieveOccupants(newOccupants)
 			local occupant = sbq.Occupants.entityId[tostring(eid)]
 			if occupant and occupant.flags.infuseType and occupant.flags.infused then
 				local infuseType = occupant.flags.infuseType
-				sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
-					sbq.settings.read.infuseSlots[infuseType].item = card
-					sbq.infuseOverrideSettings[infuseType] = {
-						infuseSlots = { [infuseType] = { item = card}}
-					}
-					sbq.SpeciesScript:refreshInfusion(infuseType)
+					sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+					sbq.settings:setOverride("item", card, "infuseSlots", infuseType)
 					occupant:refreshLocation()
 					occupant:getLocation():markSizeDirty()
 				end)
 			end
-		else
+		elseif reason ~= "alreadyThere" then
 			sbq.logWarn(("Could not recieve Occupant: %s %s %s"):format(eid, sbq.entityName(eid), reason))
 		end
 	end
@@ -873,7 +864,6 @@ end
 
 -- Location handling
 function sbq._SpeciesScript:addLocation(name, config)
-	local infuseLocation = {}
 	if not sbq.config.locations[name] then
 		sbq.logError("Location '%s' must be defined in '/sbq.config:locations' as well.")
 	end
@@ -886,10 +876,11 @@ function sbq._SpeciesScript:addLocation(name, config)
 	location.addSize = location.addSize or location.addFill -- account for values named when I wasn't being consistent
 	location.addCount = location.addCount or location.addFill -- account for values named when I wasn't being consistent
 	-- setup occupancy values
-	location.occupancy = {
+	location.occupancy = sbq.Occupants.locations[name] or { -- inherit occupancy if its already active
 		sizeDirty = true,
 		settingsDirty = true,
-		list = {},
+		list = jarray(),
+		captured = jarray(),
 		size = 0,
 		count = 0,
 		addedSize = 0,
@@ -901,13 +892,24 @@ function sbq._SpeciesScript:addLocation(name, config)
 		interpolateTime = 0,
 		subLocations = {}
 	}
+	sbq.Occupants.locations[name] = location.occupancy
+
+	for _, occupant in ipairs(location.occupancy.list) do -- make sure we don't eject any inherited occupants
+		occupant:setLoungeEnabled(true)
+		occupant:setLoungeDismountable(false)
+		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
+	end
 	-- sub locations are for things that are different spots techincally, but inherit values and use the settings
 	-- of a single location, such as with the sidedness of breasts, or perhaps a multi chambered stomach
 	for k, subLocation in pairs(location.subLocations or {}) do
-		subLocation.occupancy = {
+		subLocation.tag = name .. "_".. k
+		subLocation.subKey = k
+
+		subLocation.occupancy = location.occupancy.subLocations[k] or { -- inherit occupancy if its already active
 			sizeDirty = true,
 			settingsDirty = true,
-			list = {},
+			list = jarray(),
+			captured = jarray(),
 			size = 0,
 			count = 0,
 			addedSize = 0,
@@ -918,124 +920,21 @@ function sbq._SpeciesScript:addLocation(name, config)
 			interpolateFrom = 0,
 			interpolateTime = 0,
 		}
-		subLocation.tag = name .. "_".. k
-		subLocation.subKey = k
 		location.occupancy.subLocations[k] = subLocation.occupancy
-		setmetatable(subLocation, { __index = infuseLocation })
+		setmetatable(subLocation, { __index = location })
+
+		for _, occupant in ipairs(subLocation.occupancy.list) do -- make sure we don't eject any inherited occupants
+			occupant:setLoungeEnabled(true)
+			occupant:setLoungeDismountable(false)
+		end
 	end
 
-	sbq.Occupants.locations[name] = location.occupancy
 	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.read.locations[location.settingsTable or name]})
 	setmetatable(location, { __index = self.species.locations[name] or sbq._Location })
-	self.baseLocations[name] = location
-	setmetatable(infuseLocation, {__index = location})
-	self.locations[name] = infuseLocation
-end
-
-sbq.infuseOverrideSettings = {}
-function sbq._SpeciesScript:refreshInfusion(slot)
-	-- TODO will need heavy reworks with new system
-
-	-- sbq.infuseOverrideSettings.cockMatchGender = sbq.settings.read.cockMatchGender and (sbq.gender() == "male") and sbq.voreConfig.cockMatchGenderOverrides or {}
-	-- sbq.infuseOverrideSettings.ballsMatchGender = sbq.settings.read.ballsMatchGender and (sbq.gender() == "male") and sbq.voreConfig.ballsMatchGenderOverrides or {}
-	-- sbq.infuseOverrideSettings.pussyMatchGender = sbq.settings.read.pussyMatchGender and (sbq.gender() == "female") and sbq.voreConfig.pussyMatchGenderOverrides or {}
-	-- sbq.infuseOverrideSettings.breastsMatchGender = sbq.settings.read.breastsMatchGender and (sbq.gender() == "female") and sbq.voreConfig.breastsMatchGenderOverrides or {}
-
-	-- for k, v in pairs(self.locations) do
-	-- 	local location = self:getLocation(k)
-	-- 	if location and ((not slot) or (slot == location.infuseType)) then
-	-- 		location:setInfusionData()
-	-- 	end
-	-- end
-	-- sbq.refreshSettings()
-end
-
-
-function sbq._Location:setInfusionData()
-	if not self.infuseType then return end
-	if not sbq.voreConfig.availableInfuseTypes[self.infuseType] then return end
-
-	if self.infuseTagsSet then
-		for k, tag in pairs(self.infuseTagsSet.globalTags) do
-			animator.setGlobalTag(k, tag)
-		end
-		for part, v in pairs(self.infuseTagsSet.partTags) do
-			for k, tag in pairs(v) do
-				animator.setPartTag(part, k, tag)
-			end
-		end
-	end
-	local infusedItem = sbq.settings.read.infuseSlots[self.infuseType].item
-	local infuseIdentity = sbq.query(infusedItem, { "parameters", "npcArgs", "npcParam", "identity" }) or {}
-	local infuseSpeciesConfig = root.speciesConfig(infuseIdentity.species or sbq.query(infusedItem, { "parameters", "npcArgs", "npcSpecies" }) or "") or (sbq.query(infusedItem, { "parameters", "speciesConfig" }) or {}) or {}
-	if infuseSpeciesConfig.useImagePathSpecies then
-		infuseSpeciesConfig = root.speciesConfig(infuseIdentity.imagePath or infuseIdentity.species) or {}
-	end
-
-	if infusedItem.name and self.infusedItemType and infusedItem.name ~= self.infusedItemType then
-		infusedItem.name = self.infusedItemType
-	end
-	local infuseData = sbq.fetchConfigArray(infuseSpeciesConfig.infuseData or {})
-	infuseData = sb.jsonMerge(sbq.fetchConfigArray(infuseData.default or {}), sbq.fetchConfigArray(infuseData[sbq.species()] or {}))
-	infuseData = sb.jsonMerge(infuseData, (((infuseData or {}).locations or {})[self.key]) or {})
-
-	for k, v in pairs(self.settingInfusion or {}) do
-		local v2 = (infuseData.settingInfusion or {})[k] or {}
-		local value = sbq.settings.read[k]
-		if sbq.config.settingInfusionPreyMap[k] and sbq.settings.read[k .. "Override"] then
-			local preyVal = sbq.query(infusedItem,
-				{ "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", sbq.config.settingInfusionPreyMap
-					[k] })
-			value = ((preyVal ~= "default") and preyVal) or value
-		end
-		if type(v[value]) == "string" then
-			value = v[value]
-		end
-		if value ~= "default" then
-			infuseData = sb.jsonMerge(
-				infuseData,
-				v.any or {},
-				((type(v[value]) == "string") and v[v[value]] or v[value] or {}),
-				v2.any or {},
-				((type(v2[value]) == "string") and v2[v2[value]] or v2[value] or {})
-			)
-		end
-	end
-
-	sbq.infuseOverrideSettings[self.key] = infuseData.overrideSettings
-
-	local tagsSet = {
-		globalTags = {},
-		partTags = {}
-	}
-	for k, v in pairs(infuseData.globalTags or {}) do
-		tagsSet.globalTags[k] = animator.applyPartTags("body","<"..k..">")
-		animator.setGlobalTag(k, v)
-	end
-	for part, tags in pairs(infuseData.partTags or {}) do
-		tagsSet.partTags[part] = tagsSet.partTags[part] or {}
-		for k, v in pairs(tags) do
-			tagsSet.partTags[part][k] = animator.applyPartTags(part,"<"..k..">")
-			animator.setPartTag(part, k, v)
-		end
-	end
-
-	local directives = (infuseIdentity.bodyDirectives or "") .. (infuseIdentity.hairDirectives or "")
-	animator.setGlobalTag(self.tag .. "InfusedDirectives", directives)
-	tagsSet.globalTags[self.tag .. "InfusedDirectives"] = directives
-
-	local locationData = sb.jsonMerge(
-		infuseIdentity and { transformResult = { species = infuseIdentity.species } } or {},
-		infuseData.locationOverrides, {
-			infuseTagsSet = tagsSet
-		})
-	for k, _ in pairs(sbq.SpeciesScript.locations[self.key]) do
-		sbq.SpeciesScript.locations[self.key][k] = nil
-	end
-	util.mergeTable(sbq.SpeciesScript.locations[self.key], locationData)
-	self:markSettingsDirty()
-	self:markSizeDirty()
+	self.locations[name] = location
+	location:markSizeDirty(true)
+	location:markSettingsDirty()
 end
 
 function sbq._Location:hasSpace(size)
@@ -1527,7 +1426,9 @@ function sbq.Occupants.insertOccupant(newOccupant)
 	if not newOccupant.entityId then return false, "invalidEntityId" end
 	-- check if we already have them
 	local occupant = sbq.Occupants.entityId[tostring(newOccupant.entityId)]
-	if occupant then
+    if occupant then
+        occupant:setLoungeEnabled(true)
+		occupant:setLoungeDismountable(false)
 		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 		occupant:refreshLocation()
 		-- assume data being recieved is out of date and just use current
@@ -1628,7 +1529,6 @@ function sbq._Occupant:remove(reason)
 		if location then location.infusedEntity = nil end
 		sbq.settings.read.infuseSlots[self.flags.infuseType].item = nil
 		sbq.infuseOverrideSettings[self.flags.infuseType] = nil
-		sbq.SpeciesScript:refreshInfusion(self.flags.infuseType)
 	end
 
 	if self.subLocation then
