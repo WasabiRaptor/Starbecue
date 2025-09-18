@@ -115,7 +115,7 @@ end
 
 function sbq.checkTimers(dt)
 	for name, timer in pairs(sbq.timerList) do
-		if not timer.targetTime then sbq.logInfo(name) end
+		if not timer.targetTime then sbq.logError(name) end
 		timer.currTime = timer.currTime + dt
 		if timer.currTime >= timer.targetTime then
 			if timer.callback ~= nil then

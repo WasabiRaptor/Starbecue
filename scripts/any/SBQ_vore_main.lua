@@ -1186,7 +1186,7 @@ function sbq._Location:update(dt)
 			animator.playSound(self.gurgleSound or "gurgle")
 		end
 	end
-	if sbq.timer(self.tag.."_refreshStruggle") then
+	if sbq.timer(self.tag.."_refreshStruggle", 1) then
 		self:refreshStruggleDirection()
 	end
 end
