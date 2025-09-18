@@ -43,7 +43,7 @@ function init()
 			humanoidConfig.sbqSettingsConfig or {}
 		),
 		storage.sbqSettings,
-        entity.entityType(),
+		entity.entityType(),
 		storage
 	)
 	sbq.settings:setParameterSettings()

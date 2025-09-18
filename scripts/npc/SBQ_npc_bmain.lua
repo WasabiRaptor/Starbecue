@@ -10,10 +10,10 @@ require "/scripts/any/SBQ_util.lua"
 
 local old = {
 	init = init,
-    update = update,
+	update = update,
 	uninit = uninit,
 	tenant_setNpcType = tenant.setNpcType,
-    recruitable_generateRecruitInfo = recruitable.generateRecruitInfo,
+	recruitable_generateRecruitInfo = recruitable.generateRecruitInfo,
 	preservedStorage = preservedStorage or function () return {} end
 }
 
@@ -42,34 +42,34 @@ function init()
 	local humanoidConfig = npc.humanoidConfig()
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
-            speciesConfig.sbqSettingsConfig or {},
-            humanoidConfig.sbqSettingsConfig or {},
+			speciesConfig.sbqSettingsConfig or {},
+			humanoidConfig.sbqSettingsConfig or {},
 			config.getParameter("sbqSettingsConfig") or {
 				hideBehaviorSettings = true,
 				hidePredSettings = true,
 			}
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),
-        entity.entityType(),
+		entity.entityType(),
 		storage
-    )
+	)
 	sbq.settings:setParameterSettings()
 	sbq.settings:setMessageHandlers()
 
-    sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
-    sbq.upgrades:setMessageHandlers()
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
+	sbq.upgrades:setMessageHandlers()
 
-    sbq.upgrades:apply(sbq.settings)
+	sbq.upgrades:apply(sbq.settings)
 	if not sbq.upgrades.storedUpgrades.candyBonus then
 		for i = 1, math.floor(math.max(npc.level(), 1)) do
 			sbq.upgrades:setTiered("candyBonus", i, 1)
 		end
 	end
 	sbq.settings:setPublicSettings()
-    sbq.settings:setStatSettings()
+	sbq.settings:setStatSettings()
 
 	if not sbq.init then
-    	sbq.humanoidInit()
+		sbq.humanoidInit()
 	end
 	message.setHandler("sbqConvertNPC", function(_, _)
 		convertBackType = npc.npcType()
@@ -81,7 +81,7 @@ function init()
 	message.setHandler("sbqUpdateCosmeticSlot", function(_, _, slot, item)
 		setNpcItemSlot(slot, item)
 		tenant.backup()
-    end)
+	end)
 	message.setHandler("sbqHideDeathParticles", function()
 		npc.setDeathParticleBurst()
 	end)
@@ -89,52 +89,52 @@ function init()
 end
 
 function update(dt)
-    sbq.checkRPCsFinished(dt)
-    sbq.checkTimers(dt)
-    if status.statPositive("sbqIsPrey") then
-        sbq.struggleBehavior(dt)
-    end
+	sbq.checkRPCsFinished(dt)
+	sbq.checkTimers(dt)
+	if status.statPositive("sbqIsPrey") then
+		sbq.struggleBehavior(dt)
+	end
 
-    old.update(dt)
+	old.update(dt)
 
-    local occupantData = status.statusProperty("sbqOccupantData")
-    if occupantData
-        and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
-        and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
-        and (not sbq.loungingIn())
-    then
-        local eid = world.uniqueEntityId(occupantData.predUUID)
-        if eid then
-            if not sbq.namedRPCList.missingPredFound then
-                sbq.addNamedRPC("missingPredFound",
-                    world.sendEntityMessage(eid, "sbqRecieveOccupants",
-                        { sb.jsonMerge(occupantData, { entityId = entity.id() }) }))
-            end
-        else
-            status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })
-            sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
-                local occupantData = status.statusProperty("sbqOccupantData")
-                if occupantData then
-                    local eid = world.uniqueEntityId(occupantData.predUUID)
-                    if not eid then
-                        status.setStatusProperty("sbqOccupantData", nil)
-                        status.clearPersistentEffects("sbqMissingPred")
-                    end
-                end
-            end)
-        end
-    end
+	local occupantData = status.statusProperty("sbqOccupantData")
+	if occupantData
+		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
+		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
+		and (not sbq.loungingIn())
+	then
+		local eid = world.uniqueEntityId(occupantData.predUUID)
+		if eid then
+			if not sbq.namedRPCList.missingPredFound then
+				sbq.addNamedRPC("missingPredFound",
+					world.sendEntityMessage(eid, "sbqRecieveOccupants",
+						{ sb.jsonMerge(occupantData, { entityId = entity.id() }) }))
+			end
+		else
+			status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })
+			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
+				local occupantData = status.statusProperty("sbqOccupantData")
+				if occupantData then
+					local eid = world.uniqueEntityId(occupantData.predUUID)
+					if not eid then
+						status.setStatusProperty("sbqOccupantData", nil)
+						status.clearPersistentEffects("sbqMissingPred")
+					end
+				end
+			end)
+		end
+	end
 end
 function uninit()
-    old.uninit()
-    storage.sbqSettings = sbq.settings:save()
-    storage.sbqUpgrades = sbq.upgrades:save()
+	old.uninit()
+	storage.sbqSettings = sbq.settings:save()
+	storage.sbqUpgrades = sbq.upgrades:save()
 end
 
 function preservedStorage()
-    local ps = old.preservedStorage()
-    ps.sbqSettings = sbq.settings:save()
-    ps.sbqUpgrades = sbq.upgrades:save()
+	local ps = old.preservedStorage()
+	ps.sbqSettings = sbq.settings:save()
+	ps.sbqUpgrades = sbq.upgrades:save()
 	return ps
 end
 
