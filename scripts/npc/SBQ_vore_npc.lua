@@ -12,7 +12,6 @@ local old = {
 	uninit = uninit,
 	die = die,
 	tenant_setHome = tenant.setHome,
-	equipped_primary = equipped.primary,
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
 	setNpcItemSlot = _ENV.setNpcItemSlot
@@ -37,13 +36,13 @@ function init()
 		_ENV.updateUniqueId()
 	end
 
-    local humanoidConfig = npc.humanoidConfig()
+	local humanoidConfig = npc.humanoidConfig()
 	sbq.humanoidInit()
-    if npc.getHumanoidParameter("sbqEnabled") then
+	if npc.getHumanoidParameter("sbqEnabled") then
 		if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
-            sbq.init(humanoidConfig.sbqConfig)
-        else
-			sbq.uninit()
+			sbq.init(humanoidConfig.sbqConfig)
+		else
+			sbq.uninit("refresh")
 		end
 	else
 		npc.setHumanoidParameter("sbqEnabled", true)
@@ -102,21 +101,21 @@ function update(dt)
 	) then
 		sbq_hunting.start()
 	end
-    if sbq.randomTimer(
-            "lockDownCycle",
-            (sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
-            (sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
-        ) then
-        if sbq.Occupants.checkActiveOccupants() then
-            if status.statPositive("sbqLockDown") then
-                if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
-                    sbq.queueAction("lockDownClear", sbq.Occupants.randomActiveOccupant())
-                end
-            elseif (math.random() < (sbq.settings.read.lockDownChance)) then
-                sbq.queueAction("lockDown", sbq.Occupants.randomActiveOccupant())
-            end
-        end
-    end
+	if sbq.randomTimer(
+			"lockDownCycle",
+			(sbq.voreConfig.lockDownCycleMin or sbq.config.lockDownCycleMin) * 60,
+			(sbq.voreConfig.lockDownCycleMax or sbq.config.lockDownCycleMax) * 60
+		) then
+		if sbq.Occupants.checkActiveOccupants() then
+			if status.statPositive("sbqLockDown") then
+				if (math.random() < (sbq.voreConfig.lockDownClearChance or sbq.config.lockDownClearChance)) then
+					sbq.queueAction("lockDownClear", sbq.Occupants.randomActiveOccupant())
+				end
+			elseif (math.random() < (sbq.settings.read.lockDownChance)) then
+				sbq.queueAction("lockDown", sbq.Occupants.randomActiveOccupant())
+			end
+		end
+	end
 	if sbq.randomTimer(
 		"sendDeeperCycle",
 		(sbq.voreConfig.sendDeeperCycleMin or sbq.config.sendDeeperCycleMin) * 60,
@@ -129,6 +128,7 @@ end
 
 function uninit()
 	old.uninit()
+	sbq.uninit(status.resourcePositive("health") and "uninit" or "died")
 end
 
 function interact(args)
@@ -141,14 +141,6 @@ function interact(args)
 		return prompted
 	end
 	return sbq.SpeciesScript:interact(args)
-end
-
-function equipped.primary(itemDescriptor)
-	if not itemDescriptor then
-		npc.setItemSlot("primary", "sbqControllerNPC")
-	else
-		return old.equipped_primary(itemDescriptor)
-	end
 end
 
 function tenant.setHome(...)
@@ -169,8 +161,5 @@ function participateInNewQuests()
 end
 
 function die()
-	for i, occupant in ipairs(sbq.Occupants.list) do
-		occupant:remove("died")
-	end
 	old.die()
 end

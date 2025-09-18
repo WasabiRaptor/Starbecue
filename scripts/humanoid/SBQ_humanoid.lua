@@ -43,10 +43,10 @@ function refreshHumanoidParameters()
 		if humanoidConfig.sbqConfig then
 			sbq.init(humanoidConfig.sbqConfig)
 		else
-			sbq.uninit()
+			sbq.uninit("refresh")
 		end
 	elseif sbq.uninit then
-		sbq.uninit()
+		sbq.uninit("refresh")
 	end
 end
 

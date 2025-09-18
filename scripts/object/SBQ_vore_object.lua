@@ -81,13 +81,10 @@ function update(dt)
 end
 
 function uninit()
-	sbq.uninit()
+	sbq.uninit((object.health() > 0) and "uninit" or "died")
 end
 
 function die()
-	for i, occupant in ipairs(sbq.Occupants.list) do
-		occupant:remove("died")
-	end
 end
 
 function onInteraction(args)

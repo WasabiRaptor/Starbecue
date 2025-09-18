@@ -99,11 +99,17 @@ function sbq.update(dt)
 	sbq.passiveStatChanges(dt)
 end
 
-function sbq.uninit()
+function sbq.uninit(reason)
 	if sbq.SpeciesScript.active then
-		sbq.SpeciesScript:uninit()
-		sbq.SpeciesScript.state:uninit()
+		sbq.SpeciesScript.state:uninit(reason)
+		sbq.SpeciesScript:uninit(reason)
 		sbq.SpeciesScript.active = false
+	end
+	if reason == "died" then
+		status.setStatusProperty("sbqOccupantData", nil)
+		for i, occupant in ipairs(sbq.Occupants.list) do
+			occupant:remove("died")
+		end
 	end
 end
 
@@ -128,8 +134,8 @@ function sbq.reloadVoreConfig(sbqConfig)
 	sbq.Occupants.refreshOccupantModifiers = true
 	-- if reloading while another transformation is already active, uninitialize it first
 	if sbq.SpeciesScript.active then
-		sbq.SpeciesScript.state:uninit()
-		sbq.SpeciesScript:uninit()
+		sbq.SpeciesScript.state:uninit("refresh")
+		sbq.SpeciesScript:uninit("refresh")
 		sbq.SpeciesScript.active = false
 	end
 

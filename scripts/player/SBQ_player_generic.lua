@@ -64,7 +64,7 @@ function init()
 			if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
 				sbq.init(humanoidConfig.sbqConfig)
 			else
-				sbq.uninit()
+				sbq.uninit("refresh")
 			end
 		else
 			player.setHumanoidParameter("sbqEnabled", true)
@@ -349,6 +349,7 @@ end
 
 function uninit()
 	old.uninit()
+	sbq.uninit(status.resourcePositive("health") and "uninit" or "died")
 	storage = storage or {}
 	storage.sbqSettings = sbq.settings:save()
 	storage.sbqUpgrades = sbq.upgrades:save()
@@ -444,10 +445,6 @@ function teleportOut()
 end
 
 function die()
-	status.setStatusProperty("sbqOccupantData", nil)
-	for i, occupant in ipairs(sbq.Occupants.list) do
-		occupant:remove("died")
-	end
 end
 
 function sbqCommands.help(name)
