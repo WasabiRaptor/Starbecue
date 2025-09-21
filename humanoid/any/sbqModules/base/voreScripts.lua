@@ -708,9 +708,8 @@ function default:reformed(name, action, target,...)
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
-		location.infusedEntity = nil
-		sbq.settings.read.infuseSlots[occupant.flags.infuseType].item = nil
-		sbq.infuseOverrideSettings[occupant.flags.infuseType] = nil
+		-- location.infusedEntity = nil
+		-- sbq.settings.read.infuseSlots[occupant.flags.infuseType].item = nil
 	end
 	occupant.flags.infuseType = nil
 	occupant.flags.infused = false
@@ -869,10 +868,7 @@ function default:infused(name, action, target)
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
     sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 
-		sbq.settings.read.infuseSlots[infuseType].item = card
-		sbq.infuseOverrideSettings[infuseType] = {
-			infuseSlots = { [infuseType] = { item = card}}
-		}
+		-- sbq.settings.read.infuseSlots[infuseType].item = card
 		occupant:refreshLocation(action.location)
 		location:markSizeDirty()
 		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.recieveOccupants)

@@ -1521,8 +1521,7 @@ function sbq._Occupant:remove(reason)
 
 	if self.flags.infused then
 		if location then location.infusedEntity = nil end
-		sbq.settings.read.infuseSlots[self.flags.infuseType].item = nil
-		sbq.infuseOverrideSettings[self.flags.infuseType] = nil
+		-- sbq.settings.read.infuseSlots[self.flags.infuseType].item = nil
 	end
 
 	if self.subLocation then
