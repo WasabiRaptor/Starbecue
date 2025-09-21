@@ -98,9 +98,9 @@ function sbq.setAction(fireMode, action)
 		(world.sendEntityMessage(player.id(), "sbqActionAvailable", storage.actions.alt):result() or {})[1],
 		storage.iconDirectories)
 
-	activeItem.setInventoryIcon(icon)
-	activeItem.setSecondaryIcon(icon2)
-	activeItem.setShortDescription(shortdescription)
+	activeItem.setInventoryIcon(icon or "/humanoid/any/sbqActionIcons/unassigned.png")
+	activeItem.setSecondaryIcon(icon2 or "/humanoid/any/sbqActionIcons/unassigned.png")
+	activeItem.setShortDescription(shortdescription or "SBQ Controller")
 	activeItem.setDescription(sbq.getString(":controllerDescFormat"):format(description, description2))
 end
 

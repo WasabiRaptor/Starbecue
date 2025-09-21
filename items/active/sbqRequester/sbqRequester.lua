@@ -85,8 +85,8 @@ function sbq.setAction(fireMode, action)
 	local icon, shortdescription, description = sbq.getRequestActionData(storage.actions.primary, storage.iconDirectories)
 	local icon2, shortdescription2, description2 = sbq.getRequestActionData(storage.actions.alt, storage.iconDirectories)
 
-	activeItem.setInventoryIcon(icon)
-	activeItem.setSecondaryIcon(icon2)
+	activeItem.setInventoryIcon(icon or "/humanoid/any/sbqActionIcons/unassigned.png")
+	activeItem.setSecondaryIcon(icon2 or "/humanoid/any/sbqActionIcons/unassigned.png")
 	activeItem.setShortDescription(sbq.getString(":requesterShortDescFormat"):format(shortdescription))
 	activeItem.setDescription(sbq.getString(":controllerDescFormat"):format(description, description2))
 end
@@ -140,13 +140,13 @@ function sbq.attemptRequest(action, target)
 	if (not consent) and targetBehaviorSettings.consentRequired then return false, "consentRequired" end
 	if not world.sendEntityMessage(player.id(), "sbqSettingsMatches", targetAction.targetSettings, true):result() then return false, "targetSettingsMismatch" end
 
-    if consent then
-        sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), action, false), function(response)
+	if consent then
+		sbq.addRPC(world.sendEntityMessage(target, "sbqPromptAction", entity.id(), action, false), function(response)
 			if response then sbq.addRPC(world.sendEntityMessage(player.id(), "sbqPromptResponse", table.unpack(response)), sbq.requestResults) end
 		end)
-    else
-        sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", true, action, entity.id()), sbq.requestResults)
-    end
+	else
+		sbq.addRPC(world.sendEntityMessage(target, "sbqRequestAction", true, action, entity.id()), sbq.requestResults)
+	end
 	return true
 end
 function sbq.requestResults(result)
