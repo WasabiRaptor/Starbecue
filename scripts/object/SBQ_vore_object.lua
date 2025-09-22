@@ -41,13 +41,12 @@ function init()
 			config.getParameter("sbqSettingsConfig")
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),
-		entity.entityType(),
-		storage
+		entity.entityType()
 	)
 	sbq.settings:setParameterSettings()
 	sbq.settings:setMessageHandlers()
 
-	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"))
 	sbq.upgrades:setMessageHandlers()
 
 	sbq.upgrades:apply(sbq.settings)
@@ -57,7 +56,7 @@ function init()
 		end
 	end
 	sbq.settings:setPublicSettings()
-    sbq.settings:setStatSettings()
+	sbq.settings:setStatSettings()
 
 	sbq.init(config.getParameter("sbqConfig"))
 end
@@ -82,6 +81,8 @@ end
 
 function uninit()
 	sbq.uninit((object.health() > 0) and "uninit" or "died")
+	storage.sbqSettings = sbq.settings:save()
+	storage.sbqUpgrades = sbq.upgrades:save()
 end
 
 function die()

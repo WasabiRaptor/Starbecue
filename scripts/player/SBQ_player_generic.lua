@@ -43,13 +43,12 @@ function init()
 			humanoidConfig.sbqSettingsConfig or {}
 		),
 		storage.sbqSettings,
-		entity.entityType(),
-		storage
+		entity.entityType()
 	)
 	sbq.settings:setParameterSettings()
 	sbq.settings:setMessageHandlers(true)
 
-	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades, storage)
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades)
 	sbq.upgrades:setMessageHandlers(true)
 
 	sbq.upgrades:apply(sbq.settings)
