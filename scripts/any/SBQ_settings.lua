@@ -4,10 +4,9 @@ local _Settings = {
 sbq._Settings = _Settings
 _Settings.__index = _Settings
 
-function _Settings.new(settingsConfig, storedSettings, entityType, storage)
+function _Settings.new(settingsConfig, storedSettings, entityType)
 	local self = {}
 	setmetatable(self, _Settings)
-	self.storage = storage
 	self.settingsConfig = settingsConfig
 	self.overrideSettings = sb.jsonMerge(
 		(settingsConfig.overrideSettings or {}).any or {},
@@ -262,13 +261,6 @@ function _Settings:setOverride(setting, value, groupName, groupId)
 end
 
 function _Settings.updated:any(oldValue, setting, groupName, groupId)
-	if self.storage then
-		self.storage.sbqSettings = self:save()
-	end
-	-- local parent, recruitUuid = sbq.parentEntity()
-	-- if parent then
-	-- 	world.sendEntityMessage(parent, "sbqParentSetSetting", recruitUuid, entity.uniqueId(), setting, value)
-	-- end
 	if sbq.config.publicSettings[setting] then
 		self.updated.publicSetting(self, oldValue, setting, groupName, groupId)
 	end
@@ -458,9 +450,8 @@ local _Upgrades = {
 sbq._Upgrades = _Upgrades
 _Upgrades.__index = _Upgrades
 
-function _Upgrades.new(storedUpgrades, storage)
+function _Upgrades.new(storedUpgrades)
 	local self = {}
-	self.storage = storage
 	setmetatable(self, {__index = _Upgrades})
 	if not storedUpgrades then
 		storedUpgrades = root.makeCurrentVersionedJson("sbqUpgrades", {})
@@ -522,9 +513,6 @@ function _Upgrades:get(name)
 	return self.values[name]
 end
 function _Upgrades.updated:any(name, oldValue)
-	if self.storage then
-		self.storage.sbqUpgrades = self:save()
-	end
 	if not self.applyTo then return end
 	-- do things here
 end
