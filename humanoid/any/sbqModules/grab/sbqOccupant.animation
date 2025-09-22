@@ -1,22 +1,22 @@
 {
-    "animatedParts" : {
-        "stateTypes":{
-            "occupant<slot>Location" : {
-                "states" :{
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"states" :{
 					"grabbed": { "frames": 1, "cycle": 0, "mode": "end" }
 
-                }
-            },
-            "occupant<slot>State":{
-                "states" : {
+				}
+			},
+			"occupant<slot>State":{
+				"states" : {
 
-                }
-            }
-        },
-        "parts" : {
-            "occupant<slot>":{
-                "partStates" : {
-                    "occupant<slot>Location" :{
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
+				"partStates" : {
+					"occupant<slot>Location" :{
 						"grabbed" : {"properties":{
 							"anchorPart":"backHandItem",
 							"hidden" : false,
@@ -24,11 +24,11 @@
 							"offset" : [0.25,0.25],
 							"dance" : "sbqIgnore"
 						}}
-                    },
-                    "occupant<slot>State":{
-                    }
-                }
-            }
-        }
-    }
+					},
+					"occupant<slot>State":{
+					}
+				}
+			}
+		}
+	}
 }
