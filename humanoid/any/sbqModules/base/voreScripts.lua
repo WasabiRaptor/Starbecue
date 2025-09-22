@@ -599,7 +599,7 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 		occupant.sizeMultiplier = action.sizeMultiplier or location.digestedSizeMultiplier or 1
 		occupant.size = action.size or location.digestedSize or 0
 		occupant:refreshLocation()
-		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.recieveOccupants)
+		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", occupant.location, occupant.subLocation, digestType), sbq.receiveOccupants)
 	end
 	if location then
 		location:markSizeDirty()
@@ -871,7 +871,7 @@ function default:infused(name, action, target)
 		-- sbq.settings.read.infuseSlots[infuseType].item = card
 		occupant:refreshLocation(action.location)
 		location:markSizeDirty()
-		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.recieveOccupants)
+		sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.receiveOccupants)
 	end)
 	return true
 end

@@ -113,7 +113,7 @@ function init()
 		for rewardName, reward in pairs(newRewards) do
 			if reward.cumulative then
 				cumulativeDataTable[uniqueId].flags[rewardName] = true
-				cumulativeDataTable[uniqueId].flags[rewardName .. "CountRecieved"] = (cumulativeDataTable[uniqueId].flags[rewardName .. "CountRecieved"] or 0) +
+				cumulativeDataTable[uniqueId].flags[rewardName .. "CountReceived"] = (cumulativeDataTable[uniqueId].flags[rewardName .. "CountReceived"] or 0) +
 					reward.count
 			end
 			for i = 1, reward.count do
@@ -311,9 +311,17 @@ function update(dt)
 		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
 			if not sbq.namedRPCList.missingPredFound then
-				sbq.addNamedRPC("missingPredFound",
-					world.sendEntityMessage(eid, "sbqRecieveOccupants",
-						{ sb.jsonMerge(occupantData, { entityId = entity.id() }) }))
+				sbq.addNamedRPC("missingPredFound", world.sendEntityMessage(eid, "sbqReceiveOccupant", sb.jsonMerge(occupantData,{entityId = entity.id()})), function (response)
+					if response then
+						local success, reason = table.unpack(response)
+						if not success then
+							if reason ~= "inactive" then
+								status.setStatusProperty("sbqOccupantData", nil)
+								status.clearPersistentEffects("sbqMissingPred")
+							end
+						end
+					end
+				end)
 			end
 		else
 			status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })

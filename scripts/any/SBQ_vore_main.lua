@@ -60,9 +60,13 @@ function sbq.init(sbqConfig)
 	message.setHandler("sbqRequestAction", function (_,_, ...)
 		return sbq.requestAction(...)
 	end)
-	message.setHandler("sbqRecieveOccupants", function (_,_, ...)
-		return sbq.recieveOccupants(...)
+	message.setHandler("sbqReceiveOccupants", function (_,_, ...)
+		return sbq.receiveOccupants(...)
 	end)
+	message.setHandler("sbqReceiveOccupant", function (_,_, ...)
+		return sbq.receiveOccupant(...)
+	end)
+
 	message.setHandler("sbqDumpOccupants", function (_,_, ...)
 		return sbq.dumpOccupants(...)
 	end)
@@ -249,17 +253,21 @@ function sbq.requestAction(forcing, action, target, ...)
 	return {sbq.SpeciesScript:requestAction(forcing, action, target, ...)}
 end
 
-function sbq.recieveOccupants(newOccupants)
-	if not sbq.SpeciesScript.active then return false end
-	return sbq.SpeciesScript:recieveOccupants(newOccupants)
+function sbq.receiveOccupants(newOccupants)
+	if not sbq.SpeciesScript.active then return {false, "inactive"} end
+	return {sbq.SpeciesScript:receiveOccupants(newOccupants)}
+end
+function sbq.receiveOccupant(newOccupant)
+	if not sbq.SpeciesScript.active then return {false, "inactive"} end
+	return {sbq.SpeciesScript:receiveOccupant(newOccupant)}
 end
 function sbq.dumpOccupants(location, subLocation, digestType, ...)
-	if not sbq.SpeciesScript.active then return false end
-	return sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
+	if not sbq.SpeciesScript.active then return jarray() end
+	return {sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)}
 end
 function sbq.releaseOccupant(id, ...)
-	if not sbq.SpeciesScript.active then return false end
-	return sbq.SpeciesScript:releaseOccupant(id, ...)
+	if not sbq.SpeciesScript.active then return {false, "inactive"} end
+	return {sbq.SpeciesScript:releaseOccupant(id, ...)}
 end
 
 -- transformation handling
@@ -288,16 +296,20 @@ function sbq._SpeciesScript:requestAction(forcing, action, target, ...)
 	return self.state:requestAction(forcing, action, target, ...)
 end
 
-function sbq._SpeciesScript:recieveOccupants(newOccupants)
-	if not self.state then return false end
-	return self.state:recieveOccupants(newOccupants)
+function sbq._SpeciesScript:receiveOccupants(newOccupants)
+	if not self.state then return false, "missingState" end
+	return self.state:receiveOccupants(newOccupants)
+end
+function sbq._SpeciesScript:receiveOccupant(newOccupants)
+	if not self.state then return false, "missingState" end
+	return self.state:receiveOccupant(newOccupants)
 end
 function sbq._SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
-	if not self.state then return false end
+	if not self.state then return jarray() end
 	return self.state:dumpOccupants(location, subLocation, digestType, ...)
 end
 function sbq._SpeciesScript:releaseOccupant(id, ...)
-	if not self.state then return false end
+	if not self.state then return false, "missingState" end
 	return self.state:releaseOccupant(id, ...)
 end
 
@@ -409,29 +421,32 @@ function sbq._State:refreshActions()
 	status.setStatusProperty("sbqActionData", publicActionData)
 end
 
-function sbq._State:recieveOccupants(newOccupants)
+function sbq._State:receiveOccupants(newOccupants)
 	for _, newOccupant in ipairs(newOccupants) do
-		local eid = newOccupant.entityId
-		local success, reason = sbq.Occupants.insertOccupant(newOccupant)
-		if success then
-			sbq.Occupants.queueHudRefresh = true
-			local occupant = sbq.Occupants.entityId[tostring(eid)]
-			if occupant and occupant.flags.infuseType and occupant.flags.infused then
-				local infuseType = occupant.flags.infuseType
-					sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
-					sbq.settings:setOverride("item", card, "infuseSlots", infuseType)
-					occupant:refreshLocation()
-					occupant:getLocation():markSizeDirty()
-				end)
-			end
-		elseif reason ~= "alreadyThere" then
-			sbq.logWarn(("Could not recieve Occupant: %s %s %s"):format(eid, sbq.entityName(eid), reason))
-		end
+		self:receiveOccupant(newOccupant)
 	end
 	return true
 end
+function sbq._State:receiveOccupant(newOccupant)
+	local success, reason = sbq.Occupants.insertOccupant(newOccupant)
+	if success then
+		sbq.Occupants.queueHudRefresh = true
+		local occupant = sbq.Occupants.entityId[tostring(newOccupant.entityId)]
+		if occupant and occupant.flags.infuseType and occupant.flags.infused then
+			local infuseType = occupant.flags.infuseType
+			sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+				sbq.settings:setOverride("item", card, "infuseSlots", infuseType)
+				occupant:refreshLocation()
+				occupant:getLocation():markSizeDirty()
+			end)
+		end
+	elseif reason ~= "alreadyThere" then
+		sbq.logWarn(("Could not receive Occupant: %s %s %s"):format(newOccupant.entityId, sbq.entityName(newOccupant.entityId), reason))
+	end
+	return success, reason
+end
 function sbq._State:dumpOccupants(location, subLocation, digestType)
-	local dump = {}
+	local dump = jarray()
 	for _, occupant in ipairs(sbq.Occupants.list) do
 		local output = sb.jsonMerge(occupant, {})
 		output.seat = nil
@@ -1425,7 +1440,7 @@ function sbq.Occupants.insertOccupant(newOccupant)
 		occupant:setLoungeDismountable(false)
 		world.sendEntityMessage(occupant.entityId, "sbqForceSit", { index = occupant:getLoungeIndex(), source = entity.id() })
 		occupant:refreshLocation()
-		-- assume data being recieved is out of date and just use current
+		-- assume data being received is out of date and just use current
 		return false, "alreadyThere"
 	end
 
@@ -1447,7 +1462,7 @@ function sbq.Occupants.insertOccupant(newOccupant)
 	local space, subLocation = location:hasSpace(newOccupant.size * newOccupant.sizeMultiplier)
 
 	if (not space) and not (newOccupant.flags.digested or newOccupant.flags.infused) then return false end
-	-- if we recieve data for an occupant that is infused somewhere we already have someone infused, then treat them as digested instead
+	-- if we receive data for an occupant that is infused somewhere we already have someone infused, then treat them as digested instead
 	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)]then
 		newOccupant.flags.infused = false
 		newOccupant.flags.infuseType = nil

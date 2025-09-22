@@ -27,8 +27,8 @@ function update(dt)
 				"sbqQueueAction",
 				config.getParameter("finishAction"),
 				entity.id()
-			), function (recieved)
-				if not recieved then self.messageSent = false end
+			), function (received)
+				if not received then self.messageSent = false end
 			end, function ()
 				self.messageSent = false
 			end)

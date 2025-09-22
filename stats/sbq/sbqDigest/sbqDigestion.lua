@@ -99,8 +99,8 @@ function sendDigest()
 			item,
 			config.getParameter("digestType"),
 			status.statPositive("sbq_"..config.getParameter("digestType").."DropsAllow")
-		), function (recieved)
-			if not recieved then self.digestSent = false end
+		), function (received)
+			if not received then self.digestSent = false end
 		end, function ()
 			self.digestSent = false
 		end)

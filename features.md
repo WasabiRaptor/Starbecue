@@ -217,7 +217,7 @@ Your state will be preserved when you logout anf re-join the game as long as the
 
 You will come with a player pred when they warp to another planet.
 
-If the pred entity can't be found, such as if the player logged out or an NPC died or was unloaded you will recieve a prompt to wait or escape.
+If the pred entity can't be found, such as if the player logged out or an NPC died or was unloaded you will receive a prompt to wait or escape.
 
 ---
 
