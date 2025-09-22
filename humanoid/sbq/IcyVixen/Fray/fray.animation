@@ -494,7 +494,7 @@
 					"body": {
 						"idle": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<personalityIdle>" } },
 						"duck": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<body_state>.<body_frame>" } },
-						"sit" : { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<body_state>.<body_frame>", "zLevel": 11.78 } },
+						"sit" : { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<body_state>.<body_frame>" } },
 						"lay" : "sit",
 						"walk" : "duck",
 						"run" : { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:run.<body_frame>" } },
@@ -554,8 +554,8 @@
 						"swim.6": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
 						"swim.7": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
 
-						"sit.1": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"lay.1": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
+						"sit.1": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"lay.1": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
 
 						"idleMelee": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
 						"duckMelee": { "properties": { "image": "<humanoidPath><hindlegBackFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
