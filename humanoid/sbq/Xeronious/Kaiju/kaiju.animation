@@ -423,16 +423,16 @@
 				"partStates": {
 					"body": {
 						"idle": { "properties": { "image": "<humanoidPath><backArmFrameset>:<personalityArmIdle>", "transformationGroups" : ["armOffset"] } },
-						"duck": { "properties": { "image": "<humanoidPath><backArmFrameset>:<body_state>.<body_frame>" } },
-						"sit" : "duck",
-						"lay" : "duck",
+						"duck": { "properties": { "image": "<humanoidPath><backArmFrameset>:<body_state>.<body_frame>", "transformationGroups" : [] } },
+						"sit": { "properties": { "image": "<humanoidPath><backArmFrameset>:<body_state>.<body_frame>" } },
+						"lay" : "sit",
 						"walk": { "properties": { "image": "<humanoidPath><backArmFrameset>:<body_state>.<armSequenceFrame>" } },
 						"run": { "properties": { "image": "<humanoidPath><backArmFrameset>:run.<armSequenceFrame>" } },
 						"runbackwards" : "run",
-						"jump" : "duck",
-						"fall" : "duck",
-						"swim" : "duck",
-						"swimIdle" : "duck"
+						"jump" : "sit",
+						"fall" : "sit",
+						"swim" : "sit",
+						"swimIdle" : "sit"
 					},
 					"backArm" : {
 						"rotation": { "properties": {
@@ -947,16 +947,16 @@
 				"partStates": {
 					"body": {
 						"idle": { "properties": { "image": "<humanoidPath><frontArmFrameset>:<personalityArmIdle>", "transformationGroups" : ["armOffset"] } },
-						"duck": { "properties": { "image": "<humanoidPath><frontArmFrameset>:<body_state>.<body_frame>" } },
-						"sit" : "duck",
-						"lay" : "duck",
+						"duck": { "properties": { "image": "<humanoidPath><frontArmFrameset>:<body_state>.<body_frame>", "transformationGroups" : [] } },
+						"sit": { "properties": { "image": "<humanoidPath><frontArmFrameset>:<body_state>.<body_frame>" } },
+						"lay" : "sit",
 						"walk": { "properties": { "image": "<humanoidPath><frontArmFrameset>:<body_state>.<armSequenceFrame>" } },
 						"run": { "properties": { "image": "<humanoidPath><frontArmFrameset>:run.<armSequenceFrame>" } },
 						"runbackwards" : "run",
-						"jump" : "duck",
-						"fall" : "duck",
-						"swim" : "duck",
-						"swimIdle" : "duck"
+						"jump" : "sit",
+						"fall" : "sit",
+						"swim" : "sit",
+						"swimIdle" : "sit"
 					},
 					"frontArm" : {
 						"rotation": { "properties": {
