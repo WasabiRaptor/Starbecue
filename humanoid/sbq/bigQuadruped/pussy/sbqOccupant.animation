@@ -1,0 +1,63 @@
+{
+
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"states" :{
+					"pussy": { "frames": 1, "cycle": 0, "mode": "end" },
+					"womb": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"occupant<slot>State":{
+				"states" : {
+					"unbirthVore": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" }
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
+				"partStates" : {
+					"occupant<slot>Location" :{
+						// one doesn't explicitly need to make a state for each location
+						// but it is good to do so to have their camera focused in the right spot
+						// so anchor to the relevant part and set offsets as necessary
+						"womb" : {"properties":{
+							"anchorPart":"belly",
+							"zLevel":-1,
+							"offset" : [-0.25,-1.25]
+						}},
+						"pussy" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [-0.625,-1.25]
+						}}
+					},
+					"occupant<slot>State":{
+						"unbirthVore" : {
+							"frameProperties" : {
+								"release" : [true],
+								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, false, false, false, true, true],
+								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
+								"transforms" : [
+									[["reset"],	["scale",[1, 1]],	["rotateDegrees",0],	["translate",[-2, 0]]],
+									[["reset"],	["scale",[0.75, 0.75]],	["rotateDegrees",-15],	["translate",[-2, -0.5]]],
+									[["reset"],	["scale",[0.5, 0.5]],	["rotateDegrees",-45],	["translate",[-1.75, -1]]],
+									[["reset"],	["scale",[0.25, 0.25]],	["rotateDegrees",-90],	["translate",[-1.5, -1.25]]],
+									[["reset"],	["scale",[0.1, 0.1]],	["rotateDegrees",-90],	["translate",[-1, -1.25]]],
+									[["reset"],	["scale",[0.1, 0.1]],	["rotateDegrees",-90],	["translate",[-0.75, -1.25]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[-0.625, -1.25]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",-90],	["translate",[-0.625,-1.25]]]
+								]
+							},
+							"properties" : {
+								"anchorPart" : "pussy",
+								"zLevel" : -1
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

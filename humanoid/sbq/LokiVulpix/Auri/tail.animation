@@ -1,0 +1,46 @@
+{
+	"globalTagDefaults" : {
+		"tailFrameset" : "tail.png",
+		"tailSize" : "0"
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+			"tailState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 8, "cycle": 2, "mode": "loop" }
+				}
+			}
+		},
+		"parts" : {
+			"tail": {
+				"properties" : {
+					"zLevel":-1,
+					"anchorPart" : "body",
+					"transformationGroups" : ["tailOffset"],
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates" : {
+					"body": {
+						"idle": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailFrameset>:<tailSize>-<body_state>.<body_frame>" } },
+						"run": "walk",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"tailState" : {},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust":"head"
+					}
+				}
+			}
+		}
+	}
+}

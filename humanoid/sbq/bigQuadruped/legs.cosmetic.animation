@@ -1,0 +1,105 @@
+{
+	"globalTagDefaults" : {
+		"legsCosmetic<slot>QuadrupedFrameset" : "",
+		"legsCosmetic<slot>Directives" : ""
+	},
+
+	"animatedParts" : {
+		"parts" : {
+			// "legsCosmetic<slot>": {
+			// 	"properties": {
+			// 		"centered": true,
+			// 		"zLevel": 10.0,
+			// 		"anchorPart": "legsCosmetic",
+			// 		"processingDirectives" : "<legsCosmetic<slot>Directives>"
+			// 	},
+			// 	"partStates": {
+			// 		"body": {
+			// 			"idle": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<personalityIdle>" } },
+			// 			"duck": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<body_state>.<body_frame>" } },
+			// 			"sit" : "duck",
+			// 			"lay" : "duck",
+			// 			"walk" : "duck",
+			// 			"run": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:run.<body_frame>" } },
+			// 			"runbackwards" : "run",
+			// 			"jump" : "duck",
+			// 			"fall" : "duck",
+			// 			"swim" : "duck",
+			// 			"swimIdle" : "duck"
+			// 		},
+			// 		"bodyDance" : {
+			// 			"dance": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"idle.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"idle.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"idle.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"idle.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"idle.5": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"walk.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.5": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.6": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.7": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"walk.8": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"run.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.5": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.6": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.7": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"run.8": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"hidden.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"jump.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"jump.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"jump.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"jump.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"fall.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"fall.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"fall.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"fall.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"swimIdle.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swimIdle.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"swim.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swim.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swim.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swim.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swim.5": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swim.6": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"swim.7": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"sit.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"lay.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			"idleMelee": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"duckMelee": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+
+			// 			// doubt they'll see use but you never know
+			// 			"climb.1": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.2": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.3": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.4": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.5": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.6": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.7": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } },
+			// 			"climb.8": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<bodyDanceFrame>" } }
+			// 		},
+			// 		"portraitMode" : {
+			// 			"head": { "properties": {} },
+			// 			"bust": { "properties": { "image": "<legsCosmetic<slot>QuadrupedFrameset>:<personalityIdle><portraitMask>" } }
+			// 		}
+			// 	}
+			// }
+		}
+	},
+	"transformationGroups" : {}
+}

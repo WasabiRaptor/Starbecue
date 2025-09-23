@@ -1,0 +1,166 @@
+{
+	"globalTagDefaults" : {
+		"pose" : "stand"
+	},
+	"partTagDefaults" : {
+		"body_fg" : {
+			"humanoidPath" : "sbq/fg/"
+		}
+	},
+	"transformationGroups": {
+		"bellyOffset":{"interpolated":false},
+		"chestOffset":{"interpolated":false},
+		"tailOffset":{"interpolated":false},
+		"crotchOffset":{"interpolated":false}
+	},
+	"animatedParts" : {
+		"stateTypes": {
+			"body" : {
+				"properties" : {
+					"bellyOffset" : [["reset"]],
+					"chestOffset" : [["reset"]],
+					"tailOffset" : [["reset"]],
+					"crotchOffset" : [["reset"]],
+					"animationTags" : {
+						"pose" : "stand"
+					}
+				},
+				"states" : {
+					"idle" : {"properties" : {
+					}},
+					"duck" : {"properties" : {
+						"crotchOffset" : [["reset"],	["translate",[0,0.375]]]
+					}},
+					"sit" : {"properties" : {
+						"animationTags" : {
+							"pose" : "sit"
+						}
+					}},
+					"lay" : {"properties" : {
+						"crotchOffset" : [["reset"],	["translate",[0,0.5]]]
+					}},
+					"walk" : {"properties" : {
+					}},
+					"run" : {"properties" : {
+					}},
+					"jump" : {"properties" : {
+						"chestOffset" : [["reset"],	["translate",[0,0.375]]]
+					}, "frameProperties":{
+						"crotchOffset" : [
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.125]]]
+						]
+					}},
+					"fall" : {"properties" : {
+						"chestOffset" : [["reset"],	["translate",[0,0.375]]]
+					}, "frameProperties":{
+						"crotchOffset" : [
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.125]]],
+							[["reset"],	["translate",[0,0.25]]]
+						]
+					}},
+					"swim" : {"properties" : {
+					}},
+					"swimIdle" : {"properties" : {
+					}}
+				}
+			},
+
+			"bodyDance" : {
+				"states" : {
+					"idle" : {"properties":{}},
+					"dance" : {"properties":{}},
+
+					"idle.1": {"properties":{}},
+					"idle.2": {"properties":{
+					}},
+					"idle.3": {"properties":{
+					}},
+					"idle.4": {"properties":{
+					}},
+					"idle.5": {"properties":{}},
+
+					"walk.1": {"properties":{}},
+					"walk.2": {"properties":{}},
+					"walk.3": {"properties":{}},
+					"walk.4": {"properties":{}},
+					"walk.5": {"properties":{}},
+					"walk.6": {"properties":{}},
+					"walk.7": {"properties":{}},
+					"walk.8": {"properties":{}},
+
+					"run.1": {"properties":{}},
+					"run.2": {"properties":{}},
+					"run.3": {"properties":{}},
+					"run.4": {"properties":{}},
+					"run.5": {"properties":{}},
+					"run.6": {"properties":{}},
+					"run.7": {"properties":{}},
+					"run.8": {"properties":{}},
+
+					"hidden.1": {"properties":{}},
+
+					"jump.1": {"properties":{}},
+					"jump.2": {"properties":{}},
+					"jump.3": {"properties":{}},
+					"jump.4": {"properties":{}},
+
+					"fall.1": {"properties":{}},
+					"fall.2": {"properties":{}},
+					"fall.3": {"properties":{}},
+					"fall.4": {"properties":{}},
+
+					"swimIdle.1": {"properties":{}},
+					"swimIdle.2": {"properties":{}},
+
+					"swim.1": {"properties":{}},
+					"swim.2": {"properties":{}},
+					"swim.3": {"properties":{}},
+					"swim.4": {"properties":{}},
+					"swim.5": {"properties":{}},
+					"swim.6": {"properties":{}},
+					"swim.7": {"properties":{}},
+
+					"sit.1": {"properties":{}},
+					"lay.1": {"properties":{}},
+
+					"idleMelee": {"properties":{}},
+					"duckMelee": {"properties":{}},
+
+					// doubt they'll see use but you never know
+					"climb.1": {"properties":{}},
+					"climb.2": {"properties":{}},
+					"climb.3": {"properties":{}},
+					"climb.4": {"properties":{}},
+					"climb.5": {"properties":{}},
+					"climb.6": {"properties":{}},
+					"climb.7": {"properties":{}},
+					"climb.8": {"properties":{}}
+				}
+			},
+
+			"body_fgHiddenState" : {
+				"priority" : 4,
+				"default": "true",
+				"states" : {
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			}
+		},
+		"parts" : {
+			"body" : {"properties" : {
+				"analInteract" : [-0.5,-2],
+				"front" : [3,0],
+				"back" : [-3,0]
+			}},
+			"head" : {"properties" : {
+				"interact" : [0.5,0.375]
+			}}
+		}
+	}
+}
