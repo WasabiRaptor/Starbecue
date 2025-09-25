@@ -1,6 +1,26 @@
 {
-	"animationConfig": "/humanoid/sbq/slime/slime.animation",
-	"animationCustom": [],
+	"kind": "sbq/slime",
+	"sbqCompatible" : true,
+	"charCreationTooltip": {
+		"title": "Slime",
+		"subTitle": "C31H27NO4",
+		"description": "You look half digested. Have you been chasing slimes again?\n-Nurse"
+	},
+	"nameGen": [
+		"/species/namegen.config:names",
+		"/species/namegen.config:names"
+	],
+	"ouchNoises": [
+		"/sfx/terraria/Player_Hit_0.ogg",
+		"/sfx/terraria/Female_Hit_0.ogg"
+	],
+	"statusEffects": [
+		{
+			"stat": "fallDamageMultiplier",
+			"effectiveMultiplier": 0
+		}
+	],
+	"effectDirectives": "",
 	"sbqPartImages"  : {},
 	"baseColorPalette": {
 		"primary": [
@@ -23,6 +43,34 @@
 		]
 	},
 	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
+	"charGenTextLabels": [
+		"Gel colour",
+		"Gel style",
+		"-",
+		"-",
+		"-",
+		"-",
+		"-",
+		"-",
+		"Slime",
+		"Personality"
+	],
+	"genders": [
+		{
+			"name": "male",
+			"image": "/interface/title/male.png",
+			"characterImage": "/interface/title/male.png"
+		},
+		{
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/female.png"
+		}
+	],
+	"hair": [
+		"blob",
+		"cube"
+	],
 	"bodyColor": [
 		{
 			"A1A1A1": "3A1612Bc",
@@ -79,220 +127,11 @@
 			"FFFFFF": "FFFFFFBc"
 		} // white slime
 	],
-	"charCreationTooltip": {
-		"title": "Slime",
-		"subTitle": "C31H27NO4",
-		"description": "You look half digested. Have you been chasing slimes again?\n-Nurse"
-	},
-	"charGenTextLabels": [
-		"Gel colour",
-		"Gel style",
-		"-",
-		"-",
-		"-",
-		"-",
-		"-",
-		"-",
-		"Slime",
-		"Personality"
-	],
-	"effectDirectives": "",
-	"genders": [
-		{
-			"name": "male",
-			"image": "/interface/title/male.png",
-			"characterImage": "/interface/title/male.png",
-			"hair": [
-				"blob",
-				"cube"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "",
-			"facialHair": [],
-			"facialMaskGroup": "",
-			"facialMask": []
-		},
-		{
-			"name": "female",
-			"image": "/interface/title/female.png",
-			"characterImage": "/interface/title/female.png",
-			"hair": [
-				"blob",
-				"cube"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "",
-			"facialHair": [],
-			"facialMaskGroup": "",
-			"facialMask": []
-		}
-	],
-	"hairColor": [
-		{}
-	],
-	"humanoidOverrides": {
-		"sitOffset": 0,
-		"layOffset": 0,
-		"runFallOffset": 0,
-		"jumpBob": 0, // jump bob is handled by my animation file
-		"globalOffset": [
-			0,
-			0
-		],
-		"feetOffset": [
-			0,
-			-24
-		],
-		"frontArmRotationCenter": [
-			10,
-			0
-		],
-		"backArmRotationCenter": [
-			10,
-			0
-		],
-		"frontHandPosition": [
-			10,
-			0
-		],
-		"backArmOffset": [
-			-20,
-			0
-		],
-		"movementParameters": {
-			"standingPoly": [
-				[
-					-2,
-					-3
-				],
-				[
-					2,
-					-3
-				],
-				[
-					3,
-					-2
-				],
-				[
-					3,
-					-1
-				],
-				[
-					2,
-					0
-				],
-				[
-					-2,
-					0
-				],
-				[
-					-3,
-					-1
-				],
-				[
-					-3,
-					-2
-				]
-			],
-			"crouchingPoly": [
-				[
-					-2,
-					-3
-				],
-				[
-					2,
-					-3
-				],
-				[
-					3,
-					-2
-				],
-				[
-					3,
-					-1
-				],
-				[
-					2,
-					0
-				],
-				[
-					-2,
-					0
-				],
-				[
-					-3,
-					-1
-				],
-				[
-					-3,
-					-2
-				]
-			],
-			"mass": 1.6, // mass from eating people gets added to this
-			"bounceFactor": 0.75,
-			"walkSpeed": 3,
-			"runSpeed": 5,
-			"airJumpProfile": {
-				"jumpSpeed": 40
-			}
-		},
-		"playerMovementParameters": {
-			"airJumpProfile": {
-				"jumpSpeed": 10,
-				"jumpInitialPercentage": 0.75,
-				"jumpHoldTime": 0.2
-			}
-		},
-		"personalities": [
-			[
-				"idle.1",
-				"idle.1",
-				[
-					0,
-					0
-				],
-				[
-					0,
-					0
-				]
-			] //standard
-		]
-	},
-	"identityAnimationCustom": {},
-	"kind": "sbq/slime",
-	"nameGen": [
-		"/species/namegen.config:names",
-		"/species/namegen.config:names"
-	],
-	"ouchNoises": [
-		"/sfx/terraria/Player_Hit_0.ogg",
-		"/sfx/terraria/Female_Hit_0.ogg"
-	],
+	"humanoidConfig" : "/humanoid/sbq/slime/slime.config",
+
 	"potionImagePath": "/humanoid/sbq/slime/potion/",
 	"potionRarity": "legendary",
-	"sbqConfig": [
-		"/humanoid/sbq/slime/vore.config"
-	],
 	"skull": "/humanoid/human/dead.png",
-	"statusEffects": [
-		{
-			"stat": "fallDamageMultiplier",
-			"effectiveMultiplier": 0
-		}
-	],
-	"undyColor": [
-		{}
-	],
 	"defaultBlueprints": {
 		"tier1": [
 			// Empty Hands

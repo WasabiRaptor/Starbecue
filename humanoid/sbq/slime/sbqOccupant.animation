@@ -9,8 +9,6 @@
 			// used for the idle when no special anim is happening
 			// a state does not need to be created for every location
 			"occupant<slot>Location" : {
-				"default": "none",
-				"priority" : 1,
 				"states" : {
 					// one doesn't explicitly need to make a state for each location
 					// but it is good to do so as explained in the part states
@@ -28,36 +26,76 @@
 			// this animation state has a higher priority than the locations and will override it when it
 			// is active, when idle the occupant will do the animation from the above state
 			"occupant<slot>State" : {
-				"default": "idle",
-				"priority" : 2,
 				"states" : {
 					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
 					"absorbVore": { "frames": 2, "cycle": 1.5, "mode": "transition", "transition": "idle" },
-					"s_front": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"occupant<slot>" : [
 							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0.25,0]]]
+						]}
+					},
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[-0.25,0]]]
+						]}
+					},
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,0.5]]]
+						]}
+					},
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0]]],
+							[["reset"],	["translate",[0,-0.125]]]
+						]}
+					},
+
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0.25,0]]]
+						]}
+					},
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[-0.25,0]]]
+						]}
+					},
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,0.5]]]
+						]}
+					},
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
+							[["reset"],	["translate",[0,-0.125]]]
+						]}
+					},
+
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
+						"frameProperties" : {"occupant<slot>" : [
 							[["reset"],	["translate",[0.25,0]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					},
-					"s_back": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
 							[["reset"],	["translate",[-0.25,0]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					},
-					"s_up": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0.25]]],
+							[["reset"],	["translate",[0,0.5]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					},
-					"s_down": { "frames": 3, "cycle": 0.5, "mode": "transition", "transition": "idle",
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition": "idle",
 						"frameProperties" : {"occupant<slot>" : [
-							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.125]]],
 							[["reset"],	["translate",[0,0]]]
 						]}
 					}
@@ -71,7 +109,7 @@
 					"centered": true,
 					"loungeOffset" : [0,0],
 					"interpolated" : true,
-					"transformationGroups" : ["occupant<slot>"],
+					"transformationGroups" : ["occupant<slot>", "occupantOffset"],
 					// the below is so by default an occupant is scaled so small to be invisible
 					// as well as be layered behind the main sprite
 					"zLevel":-1,
@@ -87,9 +125,9 @@
 						// but it is good to do so to have their camera focused in the right spot
 						// so anchor to the relevant part and set offsets as necessary
 						"slime" : {"properties":{
-							"anchorPart":"belly",
+							"anchorPart":"body",
 							"zLevel":-1,
-							"offset" : [0,0]
+							"offset" : [0,-0.375]
 						}}
 					},
 					"occupant<slot>State" : {

@@ -211,7 +211,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	end
 
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
-	currentIdentity.parameters = sbq.humanoid.humanoidParameters()
+	currentIdentity.parameters = sbq.humanoid.getHumanoidParameters()
 	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
 	local originalGender = status.statusProperty("sbqOriginalGender")
@@ -367,7 +367,7 @@ end
 
 function sbq.revertTF()
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
-	local currentParameters = sbq.humanoidParameters()
+	local currentParameters = sbq.humanoid.getHumanoidParameters()
 
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or sbq.species()
 	local originalGender = status.statusProperty("sbqOriginalGender") or sbq.gender()

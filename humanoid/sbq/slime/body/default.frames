@@ -3,7 +3,7 @@
 		"size" : [48, 48],
 		"dimensions" : [8, 5],
 		"names" : [
-			[ "0-idle.1", "0-idle.2", "0-idle.3", "0-fall.1", "0-walk.1", "0-walk.2", "0-walk.3", "0-walk.4" ],
+			[ "0-idle.1", "0-idle.2", "0-idle.3", null, "0-walk.1", "0-walk.2", "0-walk.3", "0-walk.4" ],
 			[ "eat.1", "eat.2", "eat.3", "eat.4", "eat.5", "eat.6", "eat.7", "eat.8"],
 
 			[ "1-idle.1", "1-idle.2", "1-idle.3", "1-fall.1", "1-walk.1", "1-walk.2", "1-walk.3", "1-walk.4" ],
@@ -43,7 +43,12 @@
 		"0-duck.3" : "0-idle.3",
 		"0-duck.4" : "0-idle.4",
 
-		"0-jump.1" : "0-fall.1",
+		"0-jump.1" : "0-idle.2",
+		"0-jump.2" : "0-idle.3",
+		"0-jump.3" : "0-idle.2",
+		"0-jump.4" : "0-idle.1",
+
+		"0-fall.1" : "0-idle.1",
 
 		"1-run.1" : "1-walk.1",
 		"1-run.2" : "1-walk.2",
