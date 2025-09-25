@@ -217,6 +217,7 @@ for _, path in ipairs(speciesFiles) do
 	local success, error = pcall(setupSpecies, path)
 	if not success then
 		sb.logError("[SBQ] Error while setting up '%s'\n%s", path, error)
+		assets.patch(path, "/scripts/humanoid/SBQ_postload_error.patch")
 	end
 end
 seperators = (columns - math.fmod(#tenantCatalogue, columns))

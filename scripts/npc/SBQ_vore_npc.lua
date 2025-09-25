@@ -39,7 +39,7 @@ function init()
 	local humanoidConfig = npc.humanoidConfig()
 	sbq.humanoidInit()
 	if npc.getHumanoidParameter("sbqEnabled") then
-		if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled then
+		if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled and not humanoidConfig.sbqPostloadError then
 			sbq.init(humanoidConfig.sbqConfig)
 		else
 			sbq.uninit("refresh")

@@ -124,11 +124,11 @@ end
 
 
 function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
-	if humanoidParameters.sbqEnabled then
+	if humanoidParameters.sbqEnabled and not humanoidConfig.sbqPostloadError then
 		humanoidConfig.useAnimation = true
 	end
 	humanoidConfig = old.build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
-	if not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
+	if humanoidConfig.sbqPostloadError or not (humanoidConfig.useAnimation and humanoidConfig.sbqEnabled and (type(humanoidConfig.animation) == "table")) then
 		return humanoidConfig
 	end
 	for k, v in pairs(identity) do
