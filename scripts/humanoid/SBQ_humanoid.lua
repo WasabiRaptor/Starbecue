@@ -210,24 +210,24 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		return false
 	end
 
-	local currentIdentity = sbq.humanoidIdentity()
-	local speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {}
+	local currentIdentity = sbq.humanoid.humanoidIdentity()
+	currentIdentity.parameters = sbq.humanoid.humanoidParameters()
+	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
 	local originalGender = status.statusProperty("sbqOriginalGender")
-	local currentName = currentIdentity.name
 
 	if not originalSpecies then
 		originalSpecies = sbq.species()
 		status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
-		speciesIdentites[originalSpecies] = currentIdentity
-		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
+		speciesIdentities[originalSpecies] = currentIdentity
+		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
 	end
 	if not originalGender then
 		originalGender = sbq.gender()
 		status.setStatusProperty("sbqOriginalGender", originalGender)
 	end
 
-	if sbq.settings.read.genderTF then
+	if sbq.settings:get("genderTF") then
 		if newIdentity.gender == "random" then
 			newIdentity.gender = ({ "male", "female" })[math.random(2)]
 		elseif newIdentity.gender == "swap" then
@@ -239,30 +239,10 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		newIdentity.gender = currentIdentity.gender
 	end
 
-	if sbq.settings.read.speciesTF then
+	if sbq.settings:get("speciesTF") then
 		if newIdentity.species == "any" then
-			local speciesList = root.assetJson("/interface/windowconfig/charcreation.config").speciesOrdering
-			local badSpecies = true
-			while badSpecies do
-				local i = math.random(#speciesList)
-				newIdentity.species = speciesList[i]
-				badSpecies = sbq.config.transformationBlacklist[newIdentity.species] or false
-				if not badSpecies then
-					local speciesFile = root.speciesConfig(newIdentity.species)
-					if speciesFile.forceName then
-						badSpecies = true
-					elseif speciesFile.voreConfig then
-						if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
-							badSpecies = true
-						end
-					elseif sbq.config.anyTFSupportedOnly then
-						badSpecies = true
-					end
-				end
-				if badSpecies then
-					table.remove(speciesList, i)
-				end
-			end
+			local speciesList = root.assetJson("/sbqTFAny.config")
+			newIdentity.species = speciesList[math.random(#speciesList)]
 		elseif newIdentity.species == "originalSpecies" then
 			newIdentity.species = originalSpecies
 		elseif not newIdentity.species then
@@ -282,8 +262,8 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		end
 		return false
 	end
-	if npc and speciesFile.voreConfig then
-		if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
+	if npc and speciesFile.sbqSettingsConfig then
+		if sbq.query(sbq.fetchConfigArray(speciesFile.sbqSettingsConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
 			sbq.logWarn("NPC cannot be transformed into TF locked species: " .. newIdentity.species)
 			return false
 		end
@@ -305,7 +285,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	local preserveColors = {
 
 	}
-	if not speciesIdentites[newIdentity.species] then
+	if not speciesIdentities[newIdentity.species] then
 		-- if oldSpeciesFile.baseColorPalette and speciesFile.baseColorPalette then
 		-- 	for k, oldColors in pairs(oldSpeciesFile.baseColorPalette) do
 		-- 		for k2, newColors in pairs(speciesFile.baseColorPalette) do
@@ -319,42 +299,45 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		-- end
 	end
 
-	if not forceIdentity then
-		newIdentity.name = currentName
-	end
-	if speciesFile.forceName then
-		newIdentity.name = speciesFile.forceName
-	end
+	local randomSource = sb.makeRandomSource()
+
+	local choices = sb.jsonMerge({}, (newIdentity.parameters or {}).choices or currentIdentity.parameters.choices or {
+		0, -- will be overwritten immediately
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+		randomSource:randu64(),
+	})
+	choices[1] = ((newIdentity.gender or currentIdentity.gender) == "male") and 0 or 1
+
+	local generatedIdentity, generatedParameters = root.createHumanoid(
+		speciesFile.forceName or newIdentity.name or currentIdentity.name,
+		newIdentity.species,
+		table.unpack(choices)
+	)
+	generatedParameters.sbqEnabled = true
+	generatedIdentity.parameters = generatedParameters
 
 	newIdentity = sb.jsonMerge(
-		root.generateHumanoidIdentity(newIdentity.species, newIdentity.seed, newIdentity.gender),
+		generatedIdentity,
 		newIdentity,
-		((not forceIdentity) and speciesIdentites[newIdentity.species]) or {},
+		forceIdentity and {} or speciesIdentities[newIdentity.species] or {},
 		{ gender = newIdentity.gender } -- preserve new gender if applicable
 	)
-	if not (forceIdentity or speciesIdentites[newIdentity.species]) then
-		-- for k, v in pairs(newIdentity) do
-		-- 	if type(v) == "string" and v:find("replace;") then
-		-- 		local newString = v:lower()
-		-- 		if not newString:sub(-1) == ";" then
-		-- 			newString = newString..";"
-		-- 		end
-		-- 		for color, replace in pairs(preserveColors) do
-		-- 			newString = newString:gsub(color .. "%b=;", color .. "=" .. replace .. ";")
-		-- 		end
-		-- 		newIdentity[k] = newString
-		-- 	end
-		-- end
-	end
 
-	if ((not speciesIdentites[newIdentity.species]) or forceCustomization) and not speciesFile.noUnlock then
-		speciesIdentites[newIdentity.species] = newIdentity
+	if ((not speciesIdentities[newIdentity.species]) or forceCustomization) and not speciesFile.noUnlock then
+		speciesIdentities[newIdentity.species] = newIdentity
 		local speciesCount = 0
-		for _, _ in pairs(speciesIdentites) do
+		for _, _ in pairs(speciesIdentities) do
 			speciesCount = speciesCount + 1
 		end
 
-		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentites)
+		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
 		if player then
 			if (speciesCount >= sbq.config.transformMenuUnlock) then
 				player.makeTechAvailable("sbqTransform")
@@ -367,14 +350,15 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		end
 	end
 
-	sbq.setHumanoidIdentity(newIdentity)
+	sbq.humanoid.setHumanoidParameters(newIdentity.parameters)
+	sbq.humanoid.setHumanoidIdentity(newIdentity)
 
-	if duration and (not sbq.settings.read.indefiniteTF) then
+	if duration and (not sbq.settings:get("indefiniteTF")) then
 		status.addEphemeralEffect("sbqTransformed", (duration or sbq.config.defaultTFDuration) * 60)
 	else
 		world.sendEntityMessage(entity.id(), "sbqClearTransformed")
 	end
-	if sbq.settings.read.permanentTF then
+	if sbq.settings:get("permanentTF") then
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end
@@ -382,14 +366,60 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 end
 
 function sbq.revertTF()
-	local currentData = sbq.humanoidIdentity()
+	local currentIdentity = sbq.humanoid.humanoidIdentity()
+	local currentParameters = sbq.humanoidParameters()
+
 	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or sbq.species()
 	local originalGender = status.statusProperty("sbqOriginalGender") or sbq.gender()
 	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
-	local customData = speciesIdentities[originalSpecies] or
-	root.generateHumanoidIdentity(originalSpecies, math.randomseed(), originalGender)
-	customData.gender = originalGender
-	sbq.setHumanoidIdentity(customData)
+	local newIdentity = speciesIdentities[originalSpecies]
+	if not newIdentity then
+		local randomSource = sb.makeRandomSource()
+		local choices = sb.jsonMerge({}, currentParameters.choices or {
+			0, -- will be overwritten immediately
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+			randomSource:randu64(),
+		})
+		choices[1] = ((originalGender or newIdentity.gender or currentIdentity.gender) == "male") and 0 or 1
+		local generatedIdentity, generatedParameters = root.createHumanoid(
+			currentIdentity.name,
+			newIdentity.species,
+			table.unpack(choices)
+		)
+		newIdentity = generatedIdentity
+		newIdentity.parameters = generatedParameters
+		newIdentity.parameters.sbqEnabled = true
+		local speciesFile = root.speciesConfig(newIdentity.species)
+		if (not speciesIdentities[newIdentity.species]) and not speciesFile.noUnlock then
+			speciesIdentities[newIdentity.species] = newIdentity
+			local speciesCount = 0
+			for _, _ in pairs(speciesIdentities) do
+				speciesCount = speciesCount + 1
+			end
+
+			status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
+			if player then
+				if (speciesCount >= sbq.config.transformMenuUnlock) then
+					player.makeTechAvailable("sbqTransform")
+					player.enableTech("sbqTransform")
+					player.radioMessage("sbqTransformUnlocked")
+				elseif speciesCount >= 2 then
+					player.radioMessage("sbqTransformedFirst")
+					player.radioMessage("sbqTransformedHint")
+				end
+			end
+		end
+	end
+
+	sbq.humanoid.setHumanoidParameters(newIdentity.parameters)
+	sbq.humanoid.setHumanoidIdentity(newIdentity)
 	sbq.refreshPredHudPortrait()
 end
 

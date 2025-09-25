@@ -127,6 +127,7 @@ end
 local patched = {
 	["/humanoid.config"] = true,
 }
+local speciesTFAny = jarray()
 local function setupSpecies(path)
 	local speciesConfig = assets.json(path)
 	local humanoidPath = "/humanoid/" .. speciesConfig.kind .. "/"
@@ -206,7 +207,11 @@ local function setupSpecies(path)
 	if speciesConfig.sbqTenantData then
 		setupTenantCatalogue(speciesConfig.sbqTenantData, speciesConfig.kind, speciesConfig.charCreationTooltip.title)
 	end
+	if speciesConfig.sbqTFAny and assets.exists("/cinematics/teleport/teleport_" .. speciesConfig.kind .. ".cinematic") then
+		table.insert(speciesTFAny, speciesConfig.kind)
+	end
 end
+assets.add("/sbqTFAny.config", sb.printJson(speciesTFAny))
 
 for _, path in ipairs(speciesFiles) do
 	local success, error = pcall(setupSpecies, path)
