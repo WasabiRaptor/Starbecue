@@ -25,7 +25,8 @@
 					"body": {
 						"idle": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"walk": { "properties": { "image": "<tailFrameset>:<tailSize>-<body_state>.<body_frame>" } },
-						"run": "walk",
+						"run": { "properties": { "image": "<tailFrameset>:<tailSize>-run.<body_frame>" } },
+						"runbackwards": "run",
 						"jump": "walk",
 						"fall": "walk",
 						"duck": "idle",

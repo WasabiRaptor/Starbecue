@@ -482,7 +482,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 		if occupant then occupant:remove("releasing") end
 	end
 end
-local function letout(funcName, action, target, preferredAction, ...)
+local function letout(funcName, action, target, preferredActions, ...)
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	if target then
 		occupant = sbq.Occupants.entityId[tostring(target)]
@@ -491,16 +491,24 @@ local function letout(funcName, action, target, preferredAction, ...)
 		local exitTypes = location.exitTypes or location.entryTypes
 
 		for _, exitType in ipairs(exitTypes or {}) do
-			if (exitType == preferredAction) or (preferredAction == "vore") or (not preferredAction) then
+			if not preferredActions then
 				if sbq.SpeciesScript[funcName](sbq.SpeciesScript, exitType.."Letout", target) then
 					return true
+				end
+			else
+				for _, preferredAction in ipairs(preferredActions) do
+					if (exitType == preferredAction) or (preferredAction == "vore") then
+						if sbq.SpeciesScript[funcName](sbq.SpeciesScript, exitType.."Letout", target) then
+							return true
+						end
+					end
 				end
 			end
 		end
 	else
 		for i = #sbq.Occupants.list, 1, -1 do
 			local occupant = sbq.Occupants.list[i]
-			if sbq.SpeciesScript[funcName](sbq.SpeciesScript, "letout", occupant.entityId, preferredAction) then
+			if sbq.SpeciesScript[funcName](sbq.SpeciesScript, "letout", occupant.entityId, preferredActions) then
 				return true
 			end
 		end
@@ -866,7 +874,7 @@ function default:infused(name, action, target)
 	local locationName = occupant.location
 	local subLocationName = occupant.subLocation
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
-    sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
+	sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
 
 		-- sbq.settings.read.infuseSlots[infuseType].item = card
 		occupant:refreshLocation(action.location)

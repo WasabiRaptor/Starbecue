@@ -1,11 +1,15 @@
 {
+	"globalTagDefaults" : {
+		"cockSize" : "0.5",
+		"cockInterpolateSize" : "0.5"
+	},
 	"animatedParts" : {
 		"parts" : {
 			"cock" : {
 				"properties" : {
 					"anchorPart" : "body",
 					"transformationGroups" : ["crotchOffset"],
-					"offset" : [-1.1875, 0.1875]
+					"offset" : [-1.1875, -0.1875]
 				}
 			}
 		}

@@ -1,0 +1,21 @@
+{
+	"globalTagDefaults" : {
+		"ballsSize" : "0.5",
+		"ballsInterpolateSize" : "0.5",
+		"balls_rightSize" : "0.5",
+		"balls_rightInterpolateSize" : "0.5",
+		"balls_leftSize" : "0.5",
+		"balls_leftInterpolateSize" : "0.5"
+	},
+	"animatedParts" : {
+		"parts" : {
+			"balls" : {
+				"properties" : {
+					"anchorPart" : "body",
+					"transformationGroups" : ["crotchOffset"],
+					"offset" : [-1.1875, 0.1875]
+				}
+			}
+		}
+	}
+}

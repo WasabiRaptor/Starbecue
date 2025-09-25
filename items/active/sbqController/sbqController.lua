@@ -238,7 +238,7 @@ function TopMenu:init()
 	local occupants = world.loungingEntities(player.id())
 	local options = {
 		{
-			args = { "letout", false, storage.actions.primary },
+			args = { "letout", false, {storage.actions.primary, storage.actions.alt} },
 			name = sbq.strings.letout,
 			locked = (not occupants) or (not occupants[1]),
 			description = sbq.strings.controllerLetOutAnyDesc,

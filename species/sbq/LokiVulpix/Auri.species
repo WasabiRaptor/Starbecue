@@ -134,6 +134,11 @@
 	"headOptionAsHairColor": true,
 	"humanoidOverrides": {
 		"animation" : {
+			"includes" : [
+				"/humanoid/sbq/bigQuadruped/bigQuadruped.animation",
+				"/humanoid/sbq/LokiVulpix/Auri/wings.animation"
+			],
+
 			"animatedParts" : {
 				"parts" : {
 					"hair" : {
@@ -173,58 +178,6 @@
 	},
 	"potionRarity": "essential",
 	// Big TODO
-	"sbqConfig": [
-		"/humanoid/any/vore_quadruped.config",
-		{
-			"scripts": [
-				"/humanoid/any/sbqModules/base/voreScripts.lua",
-				"/humanoid/sbq/LokiVulpix/Auri/voreScripts.lua",
-				"/humanoid/any/eyeTracking.lua"
-			],
-			"species": "Auri",
-			"eyeTrackingDeadzone": [
-				3,
-				3
-			],
-			"defaultSettings": {
-				"navelVisible": true,
-				"nipplesVisible": true
-			},
-			"transformResult": {
-				"species": "any"
-			},
-			"locations": {
-				"breasts": {
-					"struggleSizes": [
-						1
-					]
-				},
-				"cock": {
-					"struggleSizes": [
-						1
-					]
-				}
-			},
-			"availableVoreTypes": {
-				"oralVore": true,
-				"tailVore": false,
-				"absorbVore": false,
-				"navelVore": false,
-				"analVore": true,
-				"unbirthVore": true,
-				"breastVore": true,
-				"cockVore": true
-			},
-			"availableInfuseTypes": {
-				"cockInfuse": true,
-				"bellyInfuse": true,
-				"breastInfuse": true,
-				"pussyInfuse": true,
-				"tailInfuse": false
-			}
-		},
-		"/npcs/sbq/LokiVulpix/Auri/tenant.npctype:scriptConfig.sbqSettingsConfig"
-	],
 	"sbqPartImages": {
 		"sbq/naga.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/naga/naga.png",

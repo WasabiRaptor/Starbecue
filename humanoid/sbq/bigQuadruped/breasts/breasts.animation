@@ -1,0 +1,21 @@
+{
+	"globalTagDefaults" : {
+		"breastsSize" : "0.5",
+		"breastsInterpolateSize" : "0.5",
+		"breasts_rightSize" : "0.5",
+		"breasts_rightInterpolateSize" : "0.5",
+		"breasts_leftSize" : "0.5",
+		"breasts_leftInterpolateSize" : "0.5"
+	},
+	"animatedParts" : {
+		"parts" : {
+			"breasts" : {
+				"properties" : {
+					"anchorPart" : "body",
+					"transformationGroups": ["chestOffset"],
+					"offset" : [1.3125,-0.8105]
+				}
+			}
+		}
+	}
+}

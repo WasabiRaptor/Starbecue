@@ -1,0 +1,65 @@
+{
+	"globalTagDefaults" : {
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"wingsFront" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 25,
+					"transformationGroups": [],
+					"anchorPart": "body"
+				},
+				"partStates" : {
+					"body": {
+						"idle": { "properties": { "image": "<humanoidPath>wings/front.png" } },
+						"duck": "idle",
+						"sit" : "idle",
+						"lay" : {"properties" : {}},
+						"walk": "idle",
+						"run" : "idle",
+						"runbackwards" : "idle",
+						"jump" : "idle",
+						"fall" : "idle",
+						"swim" : "idle",
+						"swimIdle" : "idle"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust":"head"
+					}
+				}
+			},
+			"wingsBack" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 8,
+					"transformationGroups": [],
+					"anchorPart": "body"
+				},
+				"partStates" : {
+					"body": {
+						"idle": { "properties": { "image": "<humanoidPath>wings/back.png" } },
+						"duck": "idle",
+						"sit" : "idle",
+						"lay" : {"properties" : {}},
+						"walk": "idle",
+						"run" : "idle",
+						"runbackwards" : "idle",
+						"jump" : "idle",
+						"fall" : "idle",
+						"swim" : "idle",
+						"swimIdle" : "idle"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust":"head"
+					}
+				}
+			}
+
+		}
+	}
+}

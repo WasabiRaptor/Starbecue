@@ -29,7 +29,6 @@
 					"idle" : {"properties" : {
 					}},
 					"duck" : {"properties" : {
-						"crotchOffset" : [["reset"],	["translate",[0,0.375]]]
 					}},
 					"sit" : {"properties" : {
 						"animationTags" : {
@@ -37,28 +36,26 @@
 						}
 					}},
 					"lay" : {"properties" : {
-						"crotchOffset" : [["reset"],	["translate",[0,0.5]]]
+						"crotchOffset" : [["reset"],	["translate",[0,0.25]]]
 					}},
 					"walk" : {"properties" : {
 					}},
 					"run" : {"properties" : {
 					}},
 					"jump" : {"properties" : {
-						"chestOffset" : [["reset"],	["translate",[0,0.375]]]
+					}, "frameProperties":{
+						"crotchOffset" : [
+							[["reset"],	["translate",[0,-0.125]]],
+							[["reset"],	["translate",[0,-0.25]]],
+							[["reset"],	["translate",[0,-0.375]]],
+							[["reset"],	["translate",[0,-0.375]]]
+						]
+					}},
+					"fall" : {"properties" : {
 					}, "frameProperties":{
 						"crotchOffset" : [
 							[["reset"],	["translate",[0,-0.125]]],
 							[["reset"],	["translate",[0,0]]],
-							[["reset"],	["translate",[0,0.125]]],
-							[["reset"],	["translate",[0,0.125]]]
-						]
-					}},
-					"fall" : {"properties" : {
-						"chestOffset" : [["reset"],	["translate",[0,0.375]]]
-					}, "frameProperties":{
-						"crotchOffset" : [
-							[["reset"],	["translate",[0,0.125]]],
-							[["reset"],	["translate",[0,0.125]]],
 							[["reset"],	["translate",[0,0.125]]],
 							[["reset"],	["translate",[0,0.25]]]
 						]

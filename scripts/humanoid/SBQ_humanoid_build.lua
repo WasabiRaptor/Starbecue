@@ -22,14 +22,18 @@ end
 local function includeSBQModule(humanoidConfig, module, infuseData)
 	if not module then return end
 	local merge = false
+	local modulePath
 	if type(module) == "string" then
-		table.insert(humanoidConfig.sbqConfig.includes, module)
+		modulePath = module
 		module = root.assetJson(module)
 	else
 		merge = true
 	end
 	for _, v in ipairs(module.includes or {}) do
 		includeSBQModule(humanoidConfig, v)
+	end
+	if modulePath then
+		table.insert(humanoidConfig.sbqConfig.includes, modulePath)
 	end
 	module.includes = nil
 	for _, v in ipairs(module.scripts or {}) do

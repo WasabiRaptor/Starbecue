@@ -800,58 +800,6 @@
 					}
 				}
 			},
-			"wings_fg" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 2.4,
-					"transformationGroups": [],
-					"anchorPart": "body"
-				},
-				"partStates" : {
-					"body": {
-						"idle": { "properties": { "image": "<humanoidPath>wings/front.png" } },
-						"duck": "idle",
-						"sit" : "idle",
-						"lay" : {"properties" : {}},
-						"walk": "idle",
-						"run" : "idle",
-						"jump" : "idle",
-						"fall" : "idle",
-						"swim" : "idle",
-						"swimIdle" : "idle"
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust":"head"
-					}
-				}
-			},
-			"wings_bg" : {
-				"properties": {
-					"centered": true,
-					"zLevel": -1,
-					"transformationGroups": [],
-					"anchorPart": "body"
-				},
-				"partStates" : {
-					"body": {
-						"idle": { "properties": { "image": "<humanoidPath>wings/back.png" } },
-						"duck": "idle",
-						"sit" : "idle",
-						"lay" : {"properties" : {}},
-						"walk": "idle",
-						"run" : "idle",
-						"jump" : "idle",
-						"fall" : "idle",
-						"swim" : "idle",
-						"swimIdle" : "idle"
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust":"head"
-					}
-				}
-			},
 
 			"facialHair": {
 				"properties": {
