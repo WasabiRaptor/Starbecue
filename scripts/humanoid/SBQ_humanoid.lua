@@ -96,9 +96,6 @@ function sbq.humanoidInit()
 	message.setHandler("sbqRevertTF", function(_, _)
 		sbq.revertTF()
 	end)
-	message.setHandler("sbqGetIdentity", function(_, _)
-		return sbq.humanoidIdentity()
-	end)
 
 	message.setHandler("sbqGetCard", function()
 		local item = root.assetJson("/sbqItemTemplates.config:npcCard")
@@ -124,10 +121,11 @@ function sbq.humanoidInit()
 			item.parameters.tooltipFields.subtitle = "player"
 			item.parameters.npcArgs.npcParam.wasPlayer = true
 		end
-		local identity = sbq.humanoidIdentity()
+		local identity = sbq.humanoid.humanoidIdentity()
 		item.parameters.npcArgs.npcSpecies = sbq.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
-		item.parameters.npcArgs.npcParam.identity = identity
+        item.parameters.npcArgs.npcParam.identity = identity
+		item.parameters.npcArgs.npcParam.humanoidParameters = sbq.humanoid.getHumanoidParameters()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.settings:export()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
 		item.parameters.npcArgs.npcParam.scriptConfig.uniqueId = entity.uniqueId()

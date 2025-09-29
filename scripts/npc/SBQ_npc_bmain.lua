@@ -38,6 +38,8 @@ function init()
 	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
 
 	sbq.config = root.assetJson("/sbq.config")
+	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+
 	local speciesConfig = root.speciesConfig(npc.species())
 	local humanoidConfig = npc.humanoidConfig()
 	sbq.settings = sbq._Settings.new(

@@ -338,50 +338,6 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 	return sb.jsonMerge(param, layout)
 end
 
-function sbq.widgetScripts.makeInfuseSlots(param)
-	local infuseSlots = {}
-	sbq.settingIdentifiers[sbq.widgetSettingIdentifier(param)] = {param.setting, param.groupName, param.groupKey}
-	local layout = {
-		type = "panel",
-		id = sbq.widgetSettingIdentifier(param).."Panel",
-		expandMode = { 1, 0 },
-		children = { { mode = "v", expandMode = { 1, 0 } }, { type = "label", text = ":" .. param.setting }, { type = "sbqItemGrid", autoInteract = true, slots = infuseSlots} },
-		makeLabel = false
-	}
-	local canInfuse = false
-	for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
-		if (sbq.voreConfig.availableInfuseTypes or {})[infuseType] then
-			canInfuse = true
-			local glyph = "/interface/scripted/sbq/" .. infuseType .. "Slot.png"
-			local item = sbq.settings.read[param.setting][infuseType].item
-			local slot = {
-				item = item.name and item,
-				glyph = root.assetOrigin(glyph) and glyph,
-				toolTip = string.format("%s %s", sbq.strings[infuseType], sbq.strings.slot),
-				setting = "item",
-				groupName = param.setting,
-				groupKey = infuseType,
-				script = "changeSetting",
-				acceptScript = "infuseSlotAccepts"
-			}
-			sbq.settingIdentifiers[sbq.widgetSettingIdentifier(slot)] = { slot.setting, slot.groupName, slot.groupKey }
-			table.insert(infuseSlots, slot)
-		end
-	end
-	if not canInfuse then return false end
-
-	return sb.jsonMerge(param, layout)
-end
-
-function sbq.widgetScripts.infuseSlotAccepts(w, item) -- TODO remove this later
-	-- if w.locked then return false end
-	-- if not item then return true end
-	-- if sbq.query(item, {"parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infusePrefs", w.groupKey, "prey"}) then return true end
-	-- sbq.playErrorSound()
-	-- interface.queueMessage(sbq.getString(":action_targetSettingsMismatch"))
-	return true
-end
-
 function sbq.widgetScripts.changeScale(value)
 	world.sendEntityMessage(sbq.entityId(), "sbqScale", value)
 end
@@ -415,7 +371,7 @@ function sbq.widgetScripts.infusedFadeVisible(setting, group, name)
 end
 function sbq.widgetScripts.infusedVisible(setting, group, name)
 	local location = sbq.locations[name]
-	if (not location.infuseType) or (not sbq.settings.read.infusePrefs[location.infuseType].pred) or (not sbq.query(sbq.settings.read.infuseSlots[location.infuseType], {"item", "name"})) then
+	if (not location.infuseType) or (not sbq.settings.read.infusePrefs[location.infuseType].pred) then
 		return false
 	end
 	return true

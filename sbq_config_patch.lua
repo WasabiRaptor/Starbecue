@@ -40,13 +40,6 @@ function patch(config)
                 config.defaultSettings[entityType].infusePrefs[name] or {}
             )
         end
-        for entityType, settings in pairs(config.groupedSettings.infuseSlots) do
-            config.defaultSettings[entityType].infuseSlots = config.defaultSettings[entityType].infuseSlots or {}
-            config.defaultSettings[entityType].infuseSlots[name] = sb.jsonMerge(
-                settings,
-                config.defaultSettings[entityType].infuseSlots[name] or {}
-            )
-        end
         for entityType, settings in pairs(config.groupedSettings.domBehavior) do
             config.defaultSettings[entityType].domBehavior = config.defaultSettings[entityType].domBehavior or {}
             config.defaultSettings[entityType].domBehavior[name] = sb.jsonMerge(

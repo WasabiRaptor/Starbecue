@@ -16,19 +16,9 @@ end
 
 function pollSpecies()
   -- Must use a message to get the info we want
-  if self.promise == nil then
-    self.promise = world.sendEntityMessage(quest.parameters().questGiver.uniqueId, "sbqGetIdentity")
-  else
-    if self.promise:finished() then
-      if self.promise:succeeded() then
-        -- Result resembles {species, gender}
-        local result = self.promise:result()
-        if result and type(result) == "table" then
-          storage.currentSpecies = result.species
-        end
-      end
-      self.promise = nil
-    end
+  local eid = world.uniqueEntityId(quest.parameters().questGiver.uniqueId)
+  if eid then
+    storage.currentSpecies = world.entitySpecies(eid)
   end
 end
 

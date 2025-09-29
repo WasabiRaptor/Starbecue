@@ -28,8 +28,9 @@ end
 
 function init()
 	old.init()
-	sbq.config = root.assetJson("/sbq.config")
-	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+	for _, v in ipairs(storage.sbqCapturedOccupants or {}) do
+		table.insert(sbq.Occupants.captured, sbq._CapturedOccupant.new(v))
+	end
 
 	if not self.uniqueId then
 		self.uniqueId = sb.makeUuid()
@@ -129,6 +130,10 @@ end
 function uninit()
 	old.uninit()
 	sbq.uninit(status.resourcePositive("health") and "uninit" or "died")
+	storage.sbqCapturedOccupants = jarray()
+	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+		table.insert(storage.sbqCapturedOccupants, capturedOccupant:save())
+	end
 end
 
 function interact(args)

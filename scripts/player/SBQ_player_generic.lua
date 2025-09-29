@@ -18,8 +18,8 @@ function init()
 	old.init()
 	player.setProperty("predHudOpen", false)
 	storage = storage or {}
-	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
-	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
+	storage.sbqSettings = storage.sbqSettings
+	storage.sbqUpgrades = storage.sbqUpgrades
 
 	sbq.targetPosition = player.aimPosition
 	sbq.loungingIn = player.loungingIn
@@ -34,6 +34,11 @@ function init()
 
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
+
+	for _, v in ipairs(storage.sbqCapturedOccupants or {}) do
+		table.insert(sbq.Occupants.captured, sbq._CapturedOccupant.new(v))
+		sbq.Occupants.queueHudRefresh = true
+	end
 
 	local speciesConfig = root.speciesConfig(player.species())
 	local humanoidConfig = player.humanoidConfig()
@@ -93,8 +98,8 @@ function init()
 			sourceEntity)
 	end)
 
-    message.setHandler("sbqScriptPaneMessage", function(_, _, ...)
-        local rpc = interface.sendMessage(...)
+	message.setHandler("sbqScriptPaneMessage", function(_, _, ...)
+		local rpc = interface.sendMessage(...)
 		if not rpc:succeeded() then
 			rpc = world.sendEntityMessage(player.id(), ...)
 		end
@@ -143,12 +148,12 @@ function init()
 		}, id)
 	end)
 
-	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
+	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, captured, settingsData)
 		player.interact("ScriptPane",
 			{
 				gui = {},
 				scripts = { "/metagui/sbq/build.lua" },
-				data = { occupants = occupants, sbq = settingsData },
+				data = { occupants = occupants, captured = captured, sbq = settingsData },
 				ui =
 				"starbecue:predHud"
 			})
@@ -221,13 +226,13 @@ function init()
 		}, id)
 	end)
 	message.setHandler("sbqPromptResponse", function(_, _, tryAction, isDom, line, action, target)
-        if tryAction then
-            if isDom then
-                sbq.SpeciesScript:requestAction(false, action, target)
-            else
-                world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id())
-            end
-        end
+		if tryAction then
+			if isDom then
+				sbq.SpeciesScript:requestAction(false, action, target)
+			else
+				world.sendEntityMessage(target, "sbqRequestAction", false, action, entity.id())
+			end
+		end
 	end)
 
 	message.setHandler("sbqRequestActions", function(_, _, id, actionList)
@@ -287,7 +292,7 @@ function init()
 	message.setHandler("sbqCustomizeEntity", function(_, _, id)
 		sbq.customizeEntity(id)
 	end)
-    message.setHandler("sbqHideDeathParticles", function()
+	message.setHandler("sbqHideDeathParticles", function()
 		player.setDeathParticleBurst()
 	end)
 
@@ -360,8 +365,10 @@ function uninit()
 	storage = storage or {}
 	storage.sbqSettings = sbq.settings:save()
 	storage.sbqUpgrades = sbq.upgrades:save()
-	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
-	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
+	storage.sbqCapturedOccupants = jarray()
+	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+		table.insert(storage.sbqCapturedOccupants, capturedOccupant:save())
+	end
 end
 
 function sbq.buildActionRequestOptions(id, actionList)

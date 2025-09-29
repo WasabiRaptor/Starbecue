@@ -23,6 +23,10 @@ sbq._Location.__index = sbq._Location
 sbq._Occupant = {scripted = true}
 sbq._Occupant.__index = sbq._Occupant
 
+local _CapturedOccupant = {scripted = true}
+_CapturedOccupant.__index = _CapturedOccupant
+sbq._CapturedOccupant = _CapturedOccupant
+
 sbq.SpeciesScripts = {}
 sbq.SpeciesScript = {
 	locations = {},
@@ -66,7 +70,9 @@ function sbq.init(sbqConfig)
 	message.setHandler("sbqReceiveOccupant", function (_,_, ...)
 		return sbq.receiveOccupant(...)
 	end)
-
+	message.setHandler("sbqCaptureOccupant", function (_,_, ...)
+		return sbq.captureOccupant(...)
+	end)
 	message.setHandler("sbqDumpOccupants", function (_,_, ...)
 		return sbq.dumpOccupants(...)
 	end)
@@ -261,6 +267,10 @@ function sbq.receiveOccupant(newOccupant)
 	if not sbq.SpeciesScript.active then return {false, "inactive"} end
 	return {sbq.SpeciesScript:receiveOccupant(newOccupant)}
 end
+function sbq.captureOccupant(eid)
+	if not sbq.SpeciesScript.active then return {false, "inactive"} end
+	return {sbq.SpeciesScript:captureOccupant(eid)}
+end
 function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not sbq.SpeciesScript.active then return jarray() end
 	return {sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)}
@@ -300,9 +310,13 @@ function sbq._SpeciesScript:receiveOccupants(newOccupants)
 	if not self.state then return false, "missingState" end
 	return self.state:receiveOccupants(newOccupants)
 end
-function sbq._SpeciesScript:receiveOccupant(newOccupants)
+function sbq._SpeciesScript:receiveOccupant(newOccupant)
 	if not self.state then return false, "missingState" end
-	return self.state:receiveOccupant(newOccupants)
+	return self.state:receiveOccupant(newOccupant)
+end
+function sbq._SpeciesScript:captureOccupant(eid)
+	if not self.state then return false, "missingState" end
+	return self.state:captureOccupant(eid)
 end
 function sbq._SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 	if not self.state then return jarray() end
@@ -431,19 +445,15 @@ function sbq._State:receiveOccupant(newOccupant)
 	local success, reason = sbq.Occupants.insertOccupant(newOccupant)
 	if success then
 		sbq.Occupants.queueHudRefresh = true
-		local occupant = sbq.Occupants.entityId[tostring(newOccupant.entityId)]
-		if occupant and occupant.flags.infuseType and occupant.flags.infused then
-			local infuseType = occupant.flags.infuseType
-			sbq.addRPC(occupant:sendEntityMessage("sbqGetCard"), function(card)
-				sbq.settings:setOverride("item", card, "infuseSlots", infuseType)
-				occupant:refreshLocation()
-				occupant:getLocation():markSizeDirty()
-			end)
-		end
 	elseif reason ~= "alreadyThere" then
 		sbq.logWarn(("Could not receive Occupant: %s %s %s"):format(newOccupant.entityId, sbq.entityName(newOccupant.entityId), reason))
 	end
 	return success, reason
+end
+function sbq._State:captureOccupant(id)
+	local occupant = sbq.Occupants.entityId[tostring(id)]
+	if not occupant then return false, "missingOccupant" end
+	return occupant:capture()
 end
 function sbq._State:dumpOccupants(location, subLocation, digestType)
 	local dump = jarray()
@@ -894,7 +904,7 @@ function sbq._SpeciesScript:addLocation(name, config)
 		sizeDirty = true,
 		settingsDirty = true,
 		list = jarray(),
-		captured = jarray(),
+		captured = nil,
 		size = 0,
 		count = 0,
 		addedSize = 0,
@@ -907,7 +917,14 @@ function sbq._SpeciesScript:addLocation(name, config)
 		subLocations = {}
 	}
 	sbq.Occupants.locations[name] = location.occupancy
-
+	if not location.occupancy.captured then
+		location.occupancy.captured = jarray()
+		for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+			if capturedOccupant.location == name then
+				table.insert(location.occupancy.captured, capturedOccupant)
+			end
+		end
+	end
 	-- sub locations are for things that are different spots techincally, but inherit values and use the settings
 	-- of a single location, such as with the sidedness of breasts, or perhaps a multi chambered stomach
 	for k, subLocation in pairs(location.subLocations or {}) do
@@ -918,7 +935,7 @@ function sbq._SpeciesScript:addLocation(name, config)
 			sizeDirty = true,
 			settingsDirty = true,
 			list = jarray(),
-			captured = jarray(),
+			captured = nil,
 			size = 0,
 			count = 0,
 			addedSize = 0,
@@ -930,6 +947,15 @@ function sbq._SpeciesScript:addLocation(name, config)
 			interpolateTime = 0,
 		}
 		location.occupancy.subLocations[k] = subLocation.occupancy
+		if not subLocation.occupancy.captured then
+			subLocation.occupancy.captured = jarray()
+			for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+				if (capturedOccupant.location == name) and (capturedOccupant.subLocation == k) then
+					table.insert(subLocation.occupancy.captured, capturedOccupant)
+				end
+			end
+		end
+
 		setmetatable(subLocation, { __index = location })
 	end
 
@@ -1114,10 +1140,19 @@ function sbq._Location:updateOccupancy(dt)
 
 		local infuseSize = 0
 		local infuseCount = 0
-		if self.infuseType and self.infuseSize then
-			local infusedItem = sbq.settings.read.infuseSlots[self.infuseType].item
-			infuseSize = ((sbq.query(infusedItem, { "parameters", "preySize"}) or 0 ) * self.settings.infusedSize)
-			infuseCount = self.settings.infusedSize
+		if  self.infuseType and self.infuseSize then
+			for _, capturedOccupant in ipairs(self.occupancy.captured) do
+				if capturedOccupant.infused then
+					infuseSize = (capturedOccupant.size * self.settings.infusedSize)
+					infuseCount = self.settings.infusedSize
+				end
+			end
+			for _, occupant in ipairs(self.occupancy.list) do
+				if occupant.infused then
+					infuseSize = (occupant.size * self.settings.infusedSize)
+					infuseCount = self.settings.infusedSize
+				end
+			end
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(
 			math.min(
@@ -1526,6 +1561,13 @@ function sbq.Occupants.finishOccupantSetup(occupant)
 	return true
 end
 
+function sbq.Occupants.saveCaptured()
+	local saveCaptured = jarray()
+	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+		table.insert(saveCaptured, capturedOccupant:save())
+	end
+end
+
 function sbq._Occupant:remove(reason)
 	sbq.forceTimer("huntingActionAttemptCooldown", 10)
 	self:debugLogInfo("removed: "..tostring(reason))
@@ -1536,7 +1578,6 @@ function sbq._Occupant:remove(reason)
 
 	if self.flags.infused then
 		if location then location.infusedEntity = nil end
-		-- sbq.settings.read.infuseSlots[self.flags.infuseType].item = nil
 	end
 
 	if self.subLocation then
@@ -1602,7 +1643,7 @@ function sbq.Occupants.update(dt)
 	sbq.Occupants.lastScale = sbq.getScale()
 
 	if sbq.Occupants.queueHudRefresh then
-		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqRefreshHudOccupants", sbq.Occupants.list, sbq.settingsPageData())
+		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqRefreshHudOccupants", sbq.Occupants.list, sbq.Occupants.captured, sbq.settingsPageData())
 		sbq.Occupants.queueHudRefresh = false
 	end
 	if sbq.Occupants.refreshOccupantModifiers then
@@ -2203,4 +2244,102 @@ function sbq._Occupant:debugLogInfo(json)
 end
 function sbq._Occupant:debugLogError(json)
 	sbq.debugLogError(("[%s][%s]%s"):format(self.seat, world.entityName(self.entityId), json))
+end
+
+function sbq._Occupant:capture()
+	sbq.addRPC(self:sendEntityMessage("sbqGetCard"), function(card)
+		self:logInfo(sb.printJson(card, 2))
+		if card then
+			local newCapturedOccupant = {
+				npcArgs = card.parameters.npcArgs,
+				size = self.size,
+				location = self.location,
+				subLocation = self.subLocation,
+				infuseSlots = self.infuseSlots,
+				flags = self.flags,
+				captureId = sb.makeUuid()
+			}
+			setmetatable(newCapturedOccupant, _CapturedOccupant)
+			table.insert(sbq.Occupants.captured, newCapturedOccupant)
+			table.insert(self:getLocation().occupancy.captured, newCapturedOccupant)
+			self:remove("captured")
+			self:sendEntityMessage("sbqCaptured")
+		end
+	end)
+	return true
+end
+
+function _CapturedOccupant:save()
+	return root.makeCurrentVersionedJson("sbqCapturedOccupant", {
+		npcArgs = self.npcArgs,
+		size = self.size or 0,
+		location = self.location,
+		subLocation = self.subLocation,
+		infuseSlots = self.infuseSlots or jarray(),
+		flags = self.flags or {}
+	})
+end
+function _CapturedOccupant.new(capturedData)
+	newCapturedOccupant = root.loadVersionedJson(capturedData, "sbqCapturedOccupant")
+	newCapturedOccupant.captureId = sb.makeUuid()
+	setmetatable(newCapturedOccupant, _CapturedOccupant)
+	return newCapturedOccupant
+end
+function _CapturedOccupant:release()
+	if not self.npcArgs.npcParam.wasPlayer then
+		local eid = world.spawnNpc(entity.position(), self.npcArgs.npcSpecies, self.npcArgs.npcType, self.npcArgs.npcLevel, self.npcArgs.npcSeed, self.npcArgs.npcParam)
+	else
+
+	end
+	if self.subLocation then
+		local subLocation = sbq.SpeciesScript:getLocation(self.location, self.subLocation)
+		if subLocation then
+			for i, occupant in ipairs(subLocation.occupancy.captured) do
+				if occupant.captureId == self.captureId then
+					subLocation:markSizeDirty()
+					table.remove(subLocation.occupancy.captured, i)
+					subLocation:refreshStruggleDirection()
+					break
+				end
+			end
+		end
+	end
+	local location = sbq.SpeciesScript:getLocation(self.location)
+	if location then for i, occupant in ipairs(location.occupancy.captured) do
+		if occupant.captureId == self.captureId then
+			location:markSizeDirty()
+			table.remove(location.occupancy.captured, i)
+			location:refreshStruggleDirection()
+			break
+		end
+	end end
+
+	for i, occupant in ipairs(sbq.Occupants.captured) do
+		if occupant.captureId == self.captureId then
+			table.remove(sbq.Occupants.captured, i)
+			break
+		end
+	end
+end
+
+
+function _CapturedOccupant:infuseParameters(slot)
+	local identity = self.npcArgs.npcParam.identity
+	local humanoidConfig = self.humanoidConfig
+	return {
+		directives = identity.bodyDirectives .. identity.hairDirectives,
+		species = identity.species,
+		gender = identity.gender,
+		bodyFullbright = humanoidConfig.bodyFullbright
+	}
+end
+function sbq._Occupant:infuseParameters(slot)
+	local identity = world.entity(self.entityId):humanoidIdentity()
+	local humanoidConfig = world.entity(self.entityId):humanoidConfig()
+	return {
+		directives = identity.bodyDirectives .. identity.hairDirectives,
+		species = identity.species,
+		gender = identity.gender,
+		bodyFullbright = humanoidConfig.bodyFullbright
+	}
 end

@@ -17,8 +17,9 @@ function init()
 	message.setHandler("sbqDismissPredHud", function(_, _)
 		pane.dismiss()
 	end)
-	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, settingsData)
-		sbq.Occupants.list = occupants
+	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, captured, settingsData)
+        sbq.Occupants.list = occupants
+		sbq.Occupants.captured = captured
 		sbq.Occupants.entityId = {}
 		for _, occupant in ipairs(sbq.Occupants.list) do
 			sbq.Occupants.entityId[tostring(occupant.entityId)] = occupant
@@ -76,6 +77,7 @@ function init()
 	end)
 
 	sbq.Occupants.list = _ENV.metagui.inputData.occupants
+	sbq.Occupants.captured = _ENV.metagui.inputData.captured
 	sbq.Occupants.entityId = {}
 	for _, occupant in ipairs(sbq.Occupants.list) do
 		sbq.Occupants.entityId[tostring(occupant.entityId)] = occupant
@@ -98,18 +100,24 @@ end
 local blankTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/blankSlot.config")
 local emptyTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/emptySlot.config")
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantSlot.config")
+local capturedTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/capturedSlot.config")
 function sbq.refreshOccupants()
 	sbq.Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
 	local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
-	local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16-7)) / occupantTemplate.size[2]) - seatCount
-	for i = 1, seatCount do
-		local occupant = sbq.Occupants.list[i]
-		if occupant then
-			addOccupantPortraitSlot(occupant)
-		else
-			addEmptySlot(i, emptyTemplate)
-		end
+	local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16 - 7)) / occupantTemplate.size[2]) - seatCount
+	local usedSlots = 0
+	for _, occupant in ipairs(sbq.Occupants.list) do
+		addOccupantPortraitSlot(occupant)
+		usedSlots = usedSlots + 1
+	end
+	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+		addCapturedPortraitSlot(capturedOccupant)
+		usedSlots = usedSlots + 1
+	end
+
+	for i = 1, seatCount - usedSlots do
+		addEmptySlot(i, emptyTemplate)
 	end
 	for i = 1, blankSlotCount do
 		addEmptySlot(i, blankTemplate)
@@ -120,7 +128,6 @@ end
 
 function addOccupantPortraitSlot(occupant)
 	local layout = sbq.replaceConfigTags(occupantTemplate, { entityId = occupant.entityId, entityName = world.entityName(occupant.entityId) })
-	sbq.Occupants.entityId[tostring(occupant.entityId)] = occupant
 	_ENV.occupantSlots:addChild(layout)
 	sbq.refreshPortrait(occupant.entityId)
 	local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
@@ -132,7 +139,19 @@ function addOccupantPortraitSlot(occupant)
 	end
 	ActionButton.toolTip = occupant.locationName
 	function ActionButton:onClick()
+		local entityType = world.entityType(occupant.entityId)
 		local actions = {}
+		if (entityType == "monster") or (entityType == "npc") then
+			table.insert(actions, { sbq.strings.interact, function()
+				player.interactWithEntity(occupant.entityId)
+			end, sbq.strings.interactDesc})
+		end
+		if (entityType == "player") or (entityType == "npc") then
+			table.insert(actions, { sbq.strings.capture, function()
+				world.sendEntityMessage(player.id(), "sbqCaptureOccupant", occupant.entityId)
+			end, sbq.strings.captureDesc})
+		end
+
 		for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predHudSelect", occupant.entityId):result() or {}) do
 			if action.available then
 				table.insert(actions, {
@@ -154,14 +173,30 @@ function addOccupantPortraitSlot(occupant)
 				})
 			end
 		end
-		if world.isMonster(occupant.entityId) or world.isNpc(occupant.entityId) then
-			table.insert(actions, ((#actions >= 1) and 2) or 1, { sbq.strings.interact, function()
-				player.interactWithEntity(occupant.entityId)
-			end, sbq.strings.interactDesc})
-		end
 
 		_ENV.metagui.dropDownMenu(actions,2)
 	end
+end
+function addCapturedPortraitSlot(capturedOccupant)
+	local layout = sbq.replaceConfigTags(capturedTemplate, { entityId = capturedOccupant.captureId, entityName = capturedOccupant.npcArgs.npcParam.identity.name })
+	_ENV.occupantSlots:addChild(layout)
+	local LocationIcon = _ENV[capturedOccupant.captureId .. "LocationIcon"]
+    if capturedOccupant.flags.infused and capturedOccupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/" .. capturedOccupant.flags.infuseType .. ".png") then
+        LocationIcon:setFile("/interface/scripted/sbq/" .. capturedOccupant.flags.infuseType .. ".png")
+    elseif root.assetOrigin("/interface/scripted/sbq/" .. capturedOccupant.location .. ".png") then
+        LocationIcon:setFile("/interface/scripted/sbq/" .. capturedOccupant.location .. ".png")
+    end
+	local canvasWidget = _ENV[capturedOccupant.captureId .. "PortraitCanvas"]
+	if not canvasWidget then return end
+	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
+	canvas:clear()
+	local portrait = root.npcPortrait("bust", capturedOccupant.npcArgs.npcSpecies, capturedOccupant.npcArgs.npcType, capturedOccupant.npcArgs.npcLevel or 1, capturedOccupant.npcArgs.npcSeed, capturedOccupant.npcArgs.npcParam)
+	if portrait then
+		local bounds = drawable.boundBoxAll(portrait, true)
+		local center = rect.center(bounds)
+		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+	end
+
 end
 
 function addEmptySlot(slot, template)

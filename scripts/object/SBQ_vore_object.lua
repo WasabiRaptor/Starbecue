@@ -24,6 +24,10 @@ function init()
 
 	status.setStatusProperty = object.setConfigParameter
 
+	for _, v in ipairs(storage.sbqCapturedOccupants or {}) do
+		table.insert(sbq.Occupants.captured, sbq._CapturedOccupant.new(v))
+	end
+
 	sbq.dialogueTree = sbq.fetchConfigArray(config.getParameter("dialogueTree"))
 
 	storage.baseStats = sbq.initStats(config.getParameter("stats") or {})
@@ -83,6 +87,10 @@ function uninit()
 	sbq.uninit((object.health() > 0) and "uninit" or "died")
 	storage.sbqSettings = sbq.settings:save()
 	storage.sbqUpgrades = sbq.upgrades:save()
+	storage.sbqCapturedOccupants = jarray()
+	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+		table.insert(storage.sbqCapturedOccupants, capturedOccupant:save())
+	end
 end
 
 function die()
