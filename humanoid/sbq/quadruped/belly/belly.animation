@@ -1,9 +1,6 @@
 {
 	"globalTagDefaults" : {
 		"bellyFrameset" : "sbq/bellyQuadruped.png",
-		"bellyInfusedFade" : "",
-		"bellyInfusedDirectives" : "",
-		"bellyInfusedFrameset" : "",
 		"bellySize" : "0",
 		"bellyInterpolateSize" : "0"
 
@@ -66,6 +63,7 @@
 						"idle": { "properties": { "image": "<bellyFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
 						"walk": "idle",
 						"run": "idle",
+						"runbackwards": "idle",
 						"jump": { "properties": { "image": "<bellyFrameset>:<bellySize>-<body_state>.<body_frame>" } },
 						"fall": "jump",
 						"duck": "idle",
@@ -105,62 +103,7 @@
 						"fall": "jump"
 					}
 				}
-			},
-			"belly_infused" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 11.71,
-					"anchorPart": "belly",
-					"navelInteract" : [0.25,-1.25],
-					"absorbInteract" : [-0.25,-1.25],
-					"processingDirectives" : "<bellyInfusedDirectives><bellyInfusedFade>"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
-						"walk": "idle",
-						"run": "idle",
-						"jump": { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<body_state>.<body_frame>" } },
-						"fall": "jump",
-						"duck": "idle",
-						"swim": "idle",
-						"swimIdle" : "idle",
-						"sit" : "idle",
-						"lay" : "idle"
-					},
-					"bellyState": {
-						"s_front" : { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<pose>.<bellyState_state>.<bellyState_frame>" } },
-						"s_front_press" : "s_front",
-						"s_front_hold" : "s_front",
-						"s_front_release" : "s_front",
-						"s_back" : "s_front",
-						"s_back_press" : "s_front",
-						"s_back_hold" : "s_front",
-						"s_back_release" : "s_front",
-						"s_up" : "s_front",
-						"s_up_press" : "s_front",
-						"s_up_hold" : "s_front",
-						"s_up_release" : "s_front",
-						"s_down" : "s_front",
-						"s_down_press" : "s_front",
-						"s_down_hold" : "s_front",
-						"s_down_release" : "s_front"
-					},
-					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyInfusedFrameset>:<bellyInterpolateSize>-<pose>.expand" } },
-						"eat" : "expand"
-					},
-					"portraitMode" : {
-						"head": { "properties": {} },
-						"bust" : "head"
-					},
-					"bodyHighPriority": {
-						"jump": { "properties": { "image": "<bellyInfusedFrameset>:<bellySize>-<body_state>.<body_frame>" } },
-						"fall": "jump"
-					}
-				}
 			}
-
 		}
 	},
 	"transformationGroups" : {

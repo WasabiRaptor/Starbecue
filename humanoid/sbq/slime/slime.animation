@@ -618,7 +618,8 @@
 					},
 					"bodyHighPriority" : {
 						"walk" : { "properties": { "image": "<humanoidPath>body/<hairType>.png:<slimeCount>-<body_state>.<body_frame>" } },
-						"run" : "walk",
+						"run" : { "properties": { "image": "<humanoidPath>body/<hairType>.png:<slimeCount>-run.<body_frame>" } },
+						"runbackwards" : "run",
 						"jump" : "walk",
 						"fall" : "walk"
 					},

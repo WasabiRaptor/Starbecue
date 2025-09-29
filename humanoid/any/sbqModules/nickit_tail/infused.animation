@@ -20,7 +20,8 @@
 					"body": {
 						"idle": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"walk": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<body_state>.<body_frame>" } },
-						"run": "walk",
+						"run": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-run.<body_frame>" } },
+						"runbackwards": "run",
 						"jump": "walk",
 						"fall": "walk",
 						"duck": "idle",

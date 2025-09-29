@@ -20,7 +20,8 @@
 					"body": {
 						"idle": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
 						"walk": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-<body_state>.<body_frame>" } },
-						"run": "walk",
+						"run": { "properties": { "image": "<cockInfusedFrameset>:<cockSize>-run.<body_frame>" } },
+						"runbackwards": "run",
 						"jump": "walk",
 						"fall": "walk",
 						"duck": "idle",
