@@ -16,26 +16,6 @@ function build(directory, config, parameters, level, seed)
 			end
 			parameters.shortdescription = name..ownership..parameters.shortdescription
 		end
-		-- sanity to remove potential data leak
-		for i, tenant in ipairs((parameters.scriptStorage.occupier or {}).tenants or {}) do
-			if sbq.query(tenant, {"overrides", "scriptConfig", "initialStorage", "sbqSettings"}) then
-				parameters.scriptStorage.occupier.tenants[i].overrides.scriptConfig.initialStorage.sbqSettings = nil
-			end
-			if sbq.query(tenant, {"overrides", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
-				parameters.scriptStorage.occupier.tenants[i].overrides.scriptConfig.sbqSettings.recentlyDigested = nil
-			end
-			for k, v in pairs(sbq.query(tenant, {"overrides", "scriptConfig", "sbqSettings", "infuseSlots"}) or {}) do
-				if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "recentlyDigested"}) then
-					parameters.scriptStorage.occupier.tenants[i].overrides.scriptConfig.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.recentlyDigested = nil
-				end
-				if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "sbqSettings", "infuseSlots"}) then
-					parameters.scriptStorage.occupier.tenants[i].overrides.scriptConfig.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings.infuseSlots = nil
-				end
-				if sbq.query(v, {"item", "parameters", "npcArgs", "npcParam", "scriptConfig", "initialStorage", "sbqSettings"}) then
-					parameters.scriptStorage.occupier.tenants[i].overrides.scriptConfig.sbqSettings.infuseSlots[k].item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = nil
-				end
-			end
-		end
 	end
 
 	return config, parameters

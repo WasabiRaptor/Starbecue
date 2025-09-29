@@ -581,6 +581,8 @@ function sbq.settingsPageData(...)
 		storedSettings = sbq.settings:save(),
 		storedUpgrades = sbq.upgrades:save(),
 
+		recentlyDigested = storage.sbqRecentlyDigested,
+
 		voreConfig = sbq.voreConfig or {},
 		locations = (sbq.SpeciesScript or {}).locations or {},
 		currentScale = sbq.getScale(),

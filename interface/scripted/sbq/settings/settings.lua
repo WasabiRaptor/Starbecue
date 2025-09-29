@@ -422,7 +422,7 @@ function sbq.widgetScripts.infusedVisible(setting, group, name)
 end
 
 function sbq.widgetScripts.makeRecentlyDigested(param)
-	if not sbq.settings.read.recentlyDigested[1] then return false end
+	if not (sbq.recentlyDigested and sbq.recentlyDigested[1]) then return false end
 	local slots = {}
 	local layout = {
 		type = "panel",
@@ -434,22 +434,18 @@ function sbq.widgetScripts.makeRecentlyDigested(param)
 			{
 				{ mode = "h", expandMode = { 0, 0 } },
 				{ type = "sbqItemGrid", id = "recentlyDigestedItemGrid", autoInteract = true, slots = slots },
-				{ type = "sbqIconButton", id = "clearRecentlyDigested", toolTip = ":clearRecentlyDigestedTip", script = "clearRecentlyDigested", image = "/interface/x.png", hoverImage = "/interface/xhover.png", pressImage = "/interface/xpress.png"}
 			},
 			{ type = "sbqButton", id = "collapseEssenceStacksDigested", caption = ":collapseEssenceStacks", toolTip = ":collapseEssenceStacksTip", script = "collapseEssenceStacks" }
 		},
 		makeLabel = false
 	}
-	for _, item in ipairs(sbq.settings.read.recentlyDigested) do
+	for _, item in ipairs(sbq.recentlyDigested) do
 		local slot = {
 			item = item.name and item,
 		}
 		table.insert(slots, slot)
 	end
 	return sb.jsonMerge(param, layout)
-end
-function sbq.widgetScripts.clearRecentlyDigested()
-	sbq.widgetScripts.changeSetting(jarray(), "recentlyDigested")
 end
 function sbq.widgetScripts.collapseEssenceStacks()
 	world.sendEntityMessage(player.id(), "sbqCollapseEssenceStacks")
