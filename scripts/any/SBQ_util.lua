@@ -121,6 +121,7 @@ function sbq.getScriptParameter(entityId, property)
 end
 
 function sbq.entityName(entityId)
+	if not entityId then return "nil" end
 	if world.entityType(entityId) == "object" then
 		return world.getObjectParameter(entityId, "entityName")
 	end
