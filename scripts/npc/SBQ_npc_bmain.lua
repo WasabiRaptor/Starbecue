@@ -147,6 +147,7 @@ function preservedStorage()
 	ps.sbqSettings = sbq.settings:save()
 	ps.sbqUpgrades = sbq.upgrades:save()
 	ps.sbqConvertRoll = true
+	ps.sbqRandomizedSettings = storage.sbqRandomizedSettings
 	return ps
 end
 

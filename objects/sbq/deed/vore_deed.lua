@@ -13,32 +13,6 @@ sbq = {}
 require("/scripts/any/SBQ_RPC_handling.lua")
 require"/scripts/any/SBQ_util.lua"
 
-sbqTenant = {}
-function sbqTenant:setSetting(k, v)
-	self.overrides.scriptConfig.sbqSettings = self.overrides.scriptConfig.sbqSettings or {}
-	self.overrides.scriptConfig.sbqSettings[k] = v
-end
-function sbqTenant:setGroupedSetting(group, name, k, v)
-	self.overrides.scriptConfig.sbqSettings = self.overrides.scriptConfig.sbqSettings or {}
-	self.overrides.scriptConfig.sbqSettings[group] = self.overrides.scriptConfig.sbqSettings[group] or {}
-	self.overrides.scriptConfig.sbqSettings[group][name] = self.overrides.scriptConfig.sbqSettings[group][name] or {}
-	self.overrides.scriptConfig.sbqSettings[group][name][k] = v
-end
-function sbqTenant:importSettings(newSettings)
-	self.overrides.scriptConfig.sbqSettings = newSettings
-end
-function sbqTenant:getTieredUpgrade(upgradeName, tier, bonus)
-	self.overrides.scriptConfig.sbqUpgrades = self.overrides.scriptConfig.sbqUpgrades or {}
-	self.overrides.scriptConfig.sbqUpgrades[upgradeName] = self.overrides.scriptConfig.sbqUpgrades[upgradeName] or {}
-	self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] = math.max(self.overrides.scriptConfig.sbqUpgrades[upgradeName][tier] or 0, bonus)
-end
-function sbqTenant:updateIdentities(response)
-	self.overrides.identity = response.currentIdentity
-	self.overrides.statusControllerSettings = self.overrides.statusControllerSettings or {}
-	self.overrides.statusControllerSettings.statusProperties = self.overrides.statusControllerSettings.statusProperties or {}
-	self.overrides.statusControllerSettings.statusProperties.sbqSpeciesIdentities = response.speciesIdentites
-end
-
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 
@@ -283,7 +257,15 @@ end
 
 function onInteraction(args)
 	if not storage.house then return animator.playSound("error") end
+	if storage.occupier then
+		for _,tenant in ipairs(storage.occupier.tenants) do
+			if tenant.uniqueId and world.findUniqueEntity(tenant.uniqueId):result() then
+				local entityId = world.loadUniqueEntity(tenant.uniqueId)
 
+				world.callScriptedEntity(entityId, "tenant.backup")
+			end
+		end
+	end
 	return {"ScriptPane", { data = storage, gui = { }, scripts = {"/metagui/sbq/build.lua"}, ui = "starbecue:colonyDeed" }}
 end
 
