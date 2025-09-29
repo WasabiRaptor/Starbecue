@@ -132,15 +132,11 @@
 
 		"sbqRandomizeSettings" : {
 			"personality" : ["default","shy","flirty"],
-			"cock" : [true,false],
-			"balls" : "cock", // strings in randomize settings makes them copy the value of that setting
-			"breasts" : [true,false],
-			"pussy" : [true,false],
 
-			"cockMatchGender":[true,false],
-			"ballsMatchGender":"cockMatchGender",
-			"breastsMatchGender":[true,false],
-			"pussyMatchGender":[true,false],
+			"cockSelect" : ["disable", "default"],
+			"ballsSelect" : "cockSelect", // strings in randomize settings makes them copy the value of that setting
+			"breastsSelect" : ["disable", "default"],
+			"pussySelect" : ["disable", "default"],
 
 			"vorePrefs" : {
 				"oralVore" : {"pred":[true,false]},
@@ -269,7 +265,6 @@
 			}
 		},
 		"statusProperties" : {
-			"sbqDidConvertCheck" : true
 		}
 	}
 }

@@ -300,46 +300,46 @@ function _Settings.updated:parameterSetting(oldValue, setting, ...)
 end
 
 function _Settings:randomize(randomizeSettings, seed)
+	if type(randomizeSettings) == "string" then
+		randomizeSettings = root.assetJson(randomizeSettings)
+	end
+	if not randomizeSettings then return end
+	_ENV.storage.sbqRandomizedSettings = true
 	math.randomseed(seed)
-	local newSettings = {}
-	for k, v in pairs(randomizeSettings) do
-		if sbq.config.groupedSettings[k] then
-			newSettings[k] = newSettings[k] or {}
-			for g, settings in pairs(v) do
-				newSettings[k][g] = {}
+	for setting, v in pairs(randomizeSettings) do
+		if sbq.config.groupedSettings[setting] then
+			local groupName = setting
+			for groupId, settings in pairs(v) do
 				for setting, v in pairs(settings) do
-					if type(v) == "table" then newSettings[k][g][setting] = v[math.random(#v)] end
+					if type(v) == "table" then
+						self:set(setting, v[math.random(#v)], groupName, groupId)
+					end
 				end
 			end
 		else
-			if type(v) == "table" then newSettings[k] = v[math.random(#v)] end
+			if type(v) == "table" then
+				self:set(setting, v[math.random(#v)])
+			end
 		end
 	end
+
 	-- copy values from other randomized settings
-	for k, v in pairs(randomizeSettings) do
-		if sbq.config.groupedSettings[k] then
-			for g, settings in pairs(v) do
+	for setting, v in pairs(randomizeSettings) do
+		if sbq.config.groupedSettings[setting] then
+			local groupName = setting
+			for groupId, settings in pairs(v) do
 				for setting, v in pairs(settings) do
 					if type(v) == "string" then
-						if v:sub(1, 1) == "." then
-							newSettings[k][g][setting] = sbq.queryPath(newSettings, v:sub(2, -1))
-						else
-							newSettings[k][g][setting] = newSettings[k][g][v]
-						end
+						self:set(setting, self:get(v), groupName, groupId)
 					end
 				end
 			end
 		else
 			if type(v) == "string" then
-				if v:sub(1, 1) == "." then
-					newSettings[k] = sbq.queryPath(newSettings, v:sub(2, -1))
-				else
-					newSettings[k] = newSettings[v]
-				end
+				self:set(setting, self:get(v))
 			end
 		end
 	end
-	self:import(root.makeCurrentVersionedJson(newSettings))
 end
 
 function _Settings:setPublicSettings()

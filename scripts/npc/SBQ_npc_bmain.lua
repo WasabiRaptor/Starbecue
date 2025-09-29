@@ -67,6 +67,10 @@ function init()
 	sbq.settings:setPublicSettings()
 	sbq.settings:setStatSettings()
 
+	if not storage.sbqRandomizedSettings then
+		sbq.settings:randomize(config.getParameter("sbqRandomizeSettings"), npc.seed())
+	end
+
 	if not sbq.init then
 		sbq.humanoidInit()
 	end
@@ -142,6 +146,7 @@ function preservedStorage()
 	local ps = old.preservedStorage()
 	ps.sbqSettings = sbq.settings:save()
 	ps.sbqUpgrades = sbq.upgrades:save()
+	ps.sbqConvertRoll = true
 	return ps
 end
 
@@ -177,8 +182,6 @@ function sbq.tenant_setNpcType(npcType)
 		npcParameters = {
 			identity = npc.humanoidIdentity(),
 			scriptConfig = {
-				sbqSettings = storage.sbqSettings,
-				sbqUpgrades = storage.sbqUpgrades,
 				crew = config.getParameter("crew"),
 				ownerUuid = recruitable.ownerUuid(),
 				podUuid = recruitable.recruitUuid(),

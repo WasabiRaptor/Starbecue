@@ -2,6 +2,7 @@
 local old = {
 	init = init,
 	update = update,
+	uninit = uninit,
 	onInteraction = onInteraction,
 	countTags = countTags,
 	die = die
@@ -54,36 +55,6 @@ function init()
 	storage.damageTeam = storage.damageTeam or math.random(10,255)
 	old.init()
 
-	message.setHandler("sbqParentSetSetting", function(_, _, recruitUuid, uuid, ...)
-		local i = findTenant(uuid)
-		if not i then return end
-		sbqTenant.setSetting(storage.occupier.tenants[i], ...)
-	end)
-	message.setHandler("sbqParentSetGroupedSetting", function(_, _, recruitUuid, uuid, ...)
-		local i = findTenant(uuid)
-		if not i then return end
-		sbqTenant.setGroupedSetting(storage.occupier.tenants[i], ...)
-	end)
-	message.setHandler("sbqParentGetTieredUpgrade", function(_, _, recruitUuid, uuid, ...)
-		local i = findTenant(uuid)
-		if not i then return end
-		sbqTenant.getTieredUpgrade(storage.occupier.tenants[i], ...)
-	end)
-	message.setHandler("sbqParentImportSettings", function(_, _, recruitUuid, uuid, ...)
-		local i = findTenant(uuid)
-		if not i then return end
-		sbqTenant.importSettings(storage.occupier.tenants[i], ...)
-	end)
-	message.setHandler("sbqParentUpdateType", function(_, _, recruitUuid, uuid, ...)
-		_ENV.replaceTenant(uuid, ...)
-	end)
-	message.setHandler("sbqParentUpdateIdentities", function(_, _, recruitUuid, uuid, ...)
-		local i = findTenant(uuid)
-		if not i then return end
-		sbqTenant.updateIdentities(storage.occupier.tenants[i], ...)
-	end)
-
-
 	message.setHandler("sbqSaveTenants", function(_, _, tenants)
 		local uniqueTenants = {}
 		for _, tenant in ipairs(tenants) do
@@ -124,16 +95,16 @@ function init()
 				for k, v in pairs(maybeNewOccupier.colonyTagCriteria) do
 					score = score + math.min(storage.house.contents[k] or 0, v) - v
 				end
-                if best then
-                    if (score >= best) and (maybeNewOccupier.priority >= newOccupier.priority) then
-                        best = score
-                        newOccupier = maybeNewOccupier
-                    end
-                else
-                    best = score
-                    newOccupier = maybeNewOccupier
-                end
-            else
+				if best then
+					if (score >= best) and (maybeNewOccupier.priority >= newOccupier.priority) then
+						best = score
+						newOccupier = maybeNewOccupier
+					end
+				else
+					best = score
+					newOccupier = maybeNewOccupier
+				end
+			else
 				sb.logError(maybeNewOccupier)
 			end
 		end
@@ -519,6 +490,8 @@ function spawn(tenant, i)
 			tenant.overrides.identity = world.callScriptedEntity(entityId, "npc.humanoidIdentity")
 			tenant.storedIdentity = true
 		end
+		overrides.scriptConfig.initialStorage = world.callScriptedEntity(entityId, "preservedStorage")
+		overrides.scriptConfig.initialStorage.sbqRandomizedSettings = true
 	elseif tenant.spawn == "monster" then
 		if not overrides.seed and tenant.seed then
 			overrides.seed = tenant.seed

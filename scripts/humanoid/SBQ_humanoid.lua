@@ -114,7 +114,8 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcLevel = npc.level()
 			item.parameters.npcArgs.npcSeed = npc.seed()
 			item.parameters.tooltipFields.subtitle = npc.npcType()
-			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage = preservedStorage()
+            item.parameters.npcArgs.npcParam.scriptConfig.initialStorage = preservedStorage()
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqRandomizedSettings = true
 		elseif entityType == "player" then
 			item.parameters.rarity = "legendary"
 			item.parameters.npcArgs.npcType = "generictenant"

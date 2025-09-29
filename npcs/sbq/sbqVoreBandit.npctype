@@ -37,15 +37,10 @@
 		// "sbqPredRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
 		// "sbqPreyRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",
 		"sbqRandomizeSettings" : {
-			"cock" : [true,false],
-			"balls" : "cock", // strings in randomize settings makes them copy the value of that setting
-			"breasts" : [true,false],
-			"pussy" : [true,false],
-
-			"cockMatchGender":[true,false],
-			"ballsMatchGender":"cockMatchGender",
-			"breastsMatchGender":[true,false],
-			"pussyMatchGender":[true,false],
+			"cockSelect" : ["disable", "default"],
+			"ballsSelect" : "cockSelect", // strings in randomize settings makes them copy the value of that setting
+			"breastsSelect" : ["disable", "default"],
+			"pussySelect" : ["disable", "default"],
 
 			"vorePrefs" : {
 				// "oralVore" : {"pred":[true,false]}, // OV for bandits is always true
@@ -168,7 +163,6 @@
 		},
 
 		"statusProperties" : {
-			"sbqDidConvertCheck" : true
 		}
 	}
 }

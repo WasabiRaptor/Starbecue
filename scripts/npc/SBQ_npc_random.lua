@@ -13,8 +13,8 @@ function init()
 end
 
 function sbq.rollConvert()
-	if config.getParameter("sbqConvertType") and not status.statusProperty("sbqDidConvertCheck") then
-		status.setStatusProperty("sbqDidConvertCheck", true)
+	if config.getParameter("sbqConvertType") and not storage.sbqConvertRoll then
+		storage.sbqConvertRoll = true
 		if entity.uniqueId() then return end
 		local speciesConfig = root.speciesConfig(npc.species())
 		if not speciesConfig.voreConfig then return end
