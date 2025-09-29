@@ -88,7 +88,7 @@ end
 
 function sendDigest()
 	if not self.digestSent then
-		local item = sb.jsonMerge(world.sendEntityMessage(entity.id(), "sbqGetCard"):result() or {}, config.getParameter("itemDrop") or false)
+		local item = sb.jsonMerge(world.sendEntityMessage(entity.id(), "sbqGetCard"):result() or false, config.getParameter("itemDrop") or false)
 
 		self.digestSent = true
 		sbq.addRPC(world.sendEntityMessage(
