@@ -228,6 +228,19 @@ function checkExistingUniqueIds(newOccupier)
 	end
 end
 
+function tenantStolen(uniqueId, id, name)
+	withTenant(uniqueId, function(tenant)
+		tenant.stolenBy = name
+	end)
+end
+function anyTenantsDead()
+  for _,tenant in ipairs(storage.occupier.tenants) do
+	if (not tenant.uniqueId or not world.findUniqueEntity(tenant.uniqueId):result()) and not tenant.stolenBy then
+	  return true
+	end
+  end
+  return false
+end
 
 function setTenantsData(occupier)
 	local occupier = occupier
@@ -261,7 +274,6 @@ function onInteraction(args)
 		for _,tenant in ipairs(storage.occupier.tenants) do
 			if tenant.uniqueId and world.findUniqueEntity(tenant.uniqueId):result() then
 				local entityId = world.loadUniqueEntity(tenant.uniqueId)
-
 				world.callScriptedEntity(entityId, "tenant.backup")
 			end
 		end
@@ -415,18 +427,13 @@ function respawnTenants()
 	for i, tenant in ipairs(storage.occupier.tenants) do
 		local doSpawn = false
 		if tenant.uniqueId then
-			local eid = world.loadUniqueEntity(tenant.uniqueId)
-			if eid then
-				if not world.entityExists(eid) then
-					doSpawn = true
-				end
-			else
+			if not world.findUniqueEntity(tenant.uniqueId):result() then
 				doSpawn = true
 			end
 		else
 			doSpawn = true
 		end
-		if doSpawn and not tenant.replacing then
+		if doSpawn and (not tenant.replacing) and (not tenant.stolenBy) then
 			local entityId = spawn(tenant, i)
 			tenant.uniqueId = tenant.uniqueId or sb.makeUuid()
 			world.setUniqueId(entityId, tenant.uniqueId)

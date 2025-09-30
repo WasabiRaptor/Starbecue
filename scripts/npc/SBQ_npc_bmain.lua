@@ -90,6 +90,17 @@ function init()
 	message.setHandler("sbqHideDeathParticles", function()
 		npc.setDeathParticleBurst()
 	end)
+	message.setHandler("sbqCaptured", function (_,_, id, name)
+		tenant.backup()
+		if storage.respawner and entity.uniqueId() then
+			local entityId = world.loadUniqueEntity(storage.respawner)
+			if entityId and world.entityExists(entityId) then
+				world.callScriptedEntity(entityId, "tenantStolen", entity.uniqueId(), id, name)
+			end
+		end
+
+		tenant.despawn(false)
+	end)
 
 end
 

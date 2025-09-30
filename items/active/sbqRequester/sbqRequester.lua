@@ -224,14 +224,14 @@ function TopMenu:init()
 		{locked = true},
 		{
 			args = { "open", "RoleplayMenu" },
-			name = sbq.strings.controllerRPMenu,
-			description = sbq.strings.controllerRPMenuDesc
+			name = sbq.getString(":controllerRPMenu"),
+			description = sbq.getString(":controllerRPMenuDesc")
 		},
 		{locked = true},
 		{
 			args = { "open", "AssignMenu" },
-			name = sbq.strings.controllerAssign,
-			description = sbq.strings.controllerAssignDesc
+			name = sbq.getString(":controllerAssign"),
+			description = sbq.getString(":controllerAssignDesc")
 		}
 	}
 	self:openRadialMenu({

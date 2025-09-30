@@ -239,27 +239,27 @@ function TopMenu:init()
 	local options = {
 		{
 			args = { "letout", false, {storage.actions.primary, storage.actions.alt} },
-			name = sbq.strings.letout,
+			name = sbq.getString(":letout"),
 			locked = (not occupants) or (not occupants[1]),
-			description = sbq.strings.controllerLetOutAnyDesc,
+			description = sbq.getString(":controllerLetOutAnyDesc"),
 			message = "sbqTryAction"
 		},
 		{
 			args = { "open", "RoleplayMenu" },
-			name = sbq.strings.controllerRPMenu,
-			description = sbq.strings.controllerRPMenuDesc
+			name = sbq.getString(":controllerRPMenu"),
+			description = sbq.getString(":controllerRPMenuDesc")
 		},
 		{
 			args = { "open", "OccupantsMenu" },
-			name = sbq.strings.occupants,
+			name = sbq.getString(":occupants"),
 			locked = (not occupants) or (not occupants[1]),
-			description = sbq.strings.controllerOccupantsDesc
+			description = sbq.getString(":controllerOccupantsDesc")
 
 		},
 		{
 			args = { "open", "AssignMenu" },
-			name = sbq.strings.controllerAssign,
-			description = sbq.strings.controllerAssignDesc
+			name = sbq.getString(":controllerAssign"),
+			description = sbq.getString(":controllerAssignDesc")
 		}
 	}
 	self:openRadialMenu({
@@ -335,10 +335,10 @@ function SelectedOccupantMenu:init(entityId)
 	end
 	if world.isMonster(entityId) or world.isNpc(entityId) then
 		table.insert(options, ((#options >= 1) and 2) or 1, {
-			name = sbq.strings.interact,
+			name = sbq.getString(":interact"),
 			args = { entityId },
 			message = "sbqInteractWithEntity",
-			description = sbq.strings.interactDesc
+			description = sbq.getString(":interactDesc")
 		})
 	end
 

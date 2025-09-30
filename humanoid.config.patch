@@ -3,7 +3,6 @@
 		"belly",
 		"pussy",
 		"cock",
-		"cockInfuse",
 		"balls",
 		"balls_left",
 		"balls_right",
@@ -22,7 +21,7 @@
 						"/humanoid/any/sbqModules/belly/sbqModule.config"
 					],
 					"infuseModules" : {
-						"bellyInfuse" : { // infuse slot
+						"belly" : { // infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/belly/infused.animation"],
 								"infuseTags" : {
@@ -44,7 +43,7 @@
 						"/humanoid/any/sbqModules/humanoidBase/jackoff.sbqModule.config"
 					],
 					"infuseModules" : {
-						"cockInfuse" : { // infuse slot // TEMP!!!
+						"cock" : { // infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/cock/infused.animation"],
 								"infuseTags" : {
@@ -75,7 +74,7 @@
 						"/humanoid/any/sbqModules/balls/sbqModule.config"
 					],
 					"infuseModules" : {
-						"cockInfuse" : { // infuse slot // TEMP!!!
+						"balls" : { // infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/balls/infused.animation"],
 								"infuseTags" : {
@@ -129,7 +128,7 @@
 						"/humanoid/any/sbqModules/humanoidBase/squishBreasts.sbqModule.config"
 					],
 					"infuseModules" : {
-						"breastInfuse" : {// infuse slot // TEMP!!!
+						"breasts" : {// infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/breasts/infused.animation"],
 								"infuseTags" : {
@@ -183,7 +182,7 @@
 						"/humanoid/any/sbqModules/humanoidBase/fingerPussy.sbqModule.config"
 					],
 					"infuseModules" : {
-						"pussyInfuse" : { // infuse slot // TEMP!!!
+						"pussy" : { // infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/pussy/infused.animation"],
 								"infuseTags" : {
@@ -202,7 +201,7 @@
 				"naga": {
 					"includes": ["/humanoid/any/sbqModules/naga/sbqModule.config"],
 					"infuseModules" : {
-						"tailInfuse" : { // infuse slot
+						"tail" : { // infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/naga/infused.animation"],
 								"infuseTags" : {
@@ -220,7 +219,7 @@
 					"includes": ["/humanoid/any/sbqModules/nickit_tail/sbqModule.config"],
 					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"],
 					"infuseModules" : {
-						"tailInfuse" : { // infuse slot
+						"tail" : { // infuse slot
 							"default" : { // species
 								"animations" : ["/humanoid/any/sbqModules/nickit_tail/infused.animation"],
 								"infuseTags" : {

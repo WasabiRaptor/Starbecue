@@ -717,9 +717,11 @@ function default:reformed(name, action, target,...)
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
 		location.infusedEntity = nil
+		sbq.settings:setParameterSettings()
 	end
 	occupant.flags.infuseType = nil
 	occupant.flags.infused = false
+	occupant.flags.infuseSlots = nil
 	occupant.flags.digesting = false
 	occupant.flags.digested = false
 	occupant.sizeMultiplier = action.sizeMultiplier or location.reformSizeMultiplier or ((occupant.locationSettings.compression ~= "none") and occupant.locationSettings.compressionMin) or 1
@@ -866,6 +868,7 @@ function default:infused(name, action, target)
 	occupant.flags.digested = false
 	occupant.flags.digesting = false
 	occupant.flags.infused = true
+	occupant.flags.infuseSlots = copyArray(action.infuseSlots)
 	occupant.flags.infusing = false
 	occupant.flags.infuseType = infuseType
 	occupant.locationSettings[infuseType.."Digested"] = false
@@ -874,6 +877,8 @@ function default:infused(name, action, target)
 	local subLocationName = occupant.subLocation
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
 	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.receiveOccupants)
+	sbq.settings:setParameterSettings()
+	sbq.Occupants.queueHudRefresh = true
 	return true
 end
 

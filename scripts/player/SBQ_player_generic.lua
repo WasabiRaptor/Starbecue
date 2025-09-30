@@ -18,8 +18,8 @@ function init()
 	old.init()
 	player.setProperty("predHudOpen", false)
 	storage = storage or {}
-	storage.sbqSettings = storage.sbqSettings
-	storage.sbqUpgrades = storage.sbqUpgrades
+	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
+	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
 
 	sbq.targetPosition = player.aimPosition
 	sbq.loungingIn = player.loungingIn
@@ -365,6 +365,8 @@ function uninit()
 	storage = storage or {}
 	storage.sbqSettings = sbq.settings:save()
 	storage.sbqUpgrades = sbq.upgrades:save()
+	player.setProperty("sbqSettingsStorage", storage.sbqSettings)
+	player.setProperty("sbqUpgradesStorage", storage.sbqUpgrades)
 	storage.sbqCapturedOccupants = jarray()
 	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
 		table.insert(storage.sbqCapturedOccupants, capturedOccupant:save())

@@ -362,18 +362,21 @@ function _Settings:setParameterSettings()
 	local refresh = false
 
 	local infuseSlots = {}
-	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
-		for _, slot in ipairs(capturedOccupant.infuseSlots or {}) do
-			infuseSlots[slot] = capturedOccupant
+	if sbq.Occupants then
+		for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+			for _, slot in ipairs(capturedOccupant.flags.infuseSlots or {}) do
+				infuseSlots[slot] = capturedOccupant
+			end
+		end
+		for _, occupant in ipairs(sbq.Occupants.list) do
+			for _, slot in ipairs(occupant.flags.infuseSlots or {}) do
+				infuseSlots[slot] = occupant
+			end
 		end
 	end
-	for _, occupant in ipairs(sbq.Occupants.list) do
-		for _, slot in ipairs(occupant.infuseSlots or {}) do
-			infuseSlots[slot] = occupant
-		end
-	end
-	for infuseSlot, infusedOccupant in pairs(infuseSlots) do
-		local value = infusedOccupant:infuseParameters(infuseSlot)
+	for _, infuseSlot in ipairs(sbq.humanoid.humanoidConfig().sbqModuleOrder or {}) do
+		infusedOccupant = infuseSlots[infuseSlot]
+		local value = infusedOccupant and infusedOccupant:infuseParameters(infuseSlot)
 		if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfused_" .. infuseSlot), value) then
 			sbq.humanoid.setHumanoidParameter("sbqInfused_"..infuseSlot, value)
 			refresh = true

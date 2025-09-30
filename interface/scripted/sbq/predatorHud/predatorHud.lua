@@ -18,7 +18,7 @@ function init()
 		pane.dismiss()
 	end)
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, captured, settingsData)
-        sbq.Occupants.list = occupants
+		sbq.Occupants.list = occupants
 		sbq.Occupants.captured = captured
 		sbq.Occupants.entityId = {}
 		for _, occupant in ipairs(sbq.Occupants.list) do
@@ -142,14 +142,14 @@ function addOccupantPortraitSlot(occupant)
 		local entityType = world.entityType(occupant.entityId)
 		local actions = {}
 		if (entityType == "monster") or (entityType == "npc") then
-			table.insert(actions, { sbq.strings.interact, function()
+			table.insert(actions, { sbq.getString(":interact"), function()
 				player.interactWithEntity(occupant.entityId)
-			end, sbq.strings.interactDesc})
+			end, sbq.getString(":interactDesc")})
 		end
 		if (entityType == "player") or (entityType == "npc") then
-			table.insert(actions, { sbq.strings.capture, function()
+			table.insert(actions, { sbq.getString(":capture"), function()
 				world.sendEntityMessage(player.id(), "sbqCaptureOccupant", occupant.entityId)
-			end, sbq.strings.captureDesc})
+			end, sbq.getString(":captureDesc")})
 		end
 
 		for _, action in ipairs(world.sendEntityMessage(player.id(), "sbqActionList", "predHudSelect", occupant.entityId):result() or {}) do
@@ -177,20 +177,31 @@ function addOccupantPortraitSlot(occupant)
 		_ENV.metagui.dropDownMenu(actions,2)
 	end
 end
-function addCapturedPortraitSlot(capturedOccupant)
-	local layout = sbq.replaceConfigTags(capturedTemplate, { entityId = capturedOccupant.captureId, entityName = capturedOccupant.npcArgs.npcParam.identity.name })
+function addCapturedPortraitSlot(occupant)
+	local layout = sbq.replaceConfigTags(capturedTemplate, { entityId = occupant.captureId, entityName = occupant.npcArgs.npcParam.identity.name })
 	_ENV.occupantSlots:addChild(layout)
-	local LocationIcon = _ENV[capturedOccupant.captureId .. "LocationIcon"]
-    if capturedOccupant.flags.infused and capturedOccupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/" .. capturedOccupant.flags.infuseType .. ".png") then
-        LocationIcon:setFile("/interface/scripted/sbq/" .. capturedOccupant.flags.infuseType .. ".png")
-    elseif root.assetOrigin("/interface/scripted/sbq/" .. capturedOccupant.location .. ".png") then
-        LocationIcon:setFile("/interface/scripted/sbq/" .. capturedOccupant.location .. ".png")
-    end
-	local canvasWidget = _ENV[capturedOccupant.captureId .. "PortraitCanvas"]
-	if not canvasWidget then return end
+	local ActionButton = _ENV[occupant.captureId .. "ActionButton"]
+	local LocationIcon = _ENV[occupant.captureId .. "LocationIcon"]
+	local canvasWidget = _ENV[occupant.captureId .. "PortraitCanvas"]
+	if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/" .. occupant.flags.infuseType .. ".png") then
+		LocationIcon:setFile("/interface/scripted/sbq/" .. occupant.flags.infuseType .. ".png")
+	elseif root.assetOrigin("/interface/scripted/sbq/" .. occupant.location .. ".png") then
+		LocationIcon:setFile("/interface/scripted/sbq/" .. occupant.location .. ".png")
+	end
+	ActionButton.toolTip = occupant.locationName
+	function ActionButton:onClick()
+		local actions = {}
+		table.insert(actions, { sbq.getString(":releaseCaptured"), function()
+			world.sendEntityMessage(player.id(), "sbqReleaseCapturedOccupant", occupant.captureId)
+		end, sbq.getString(":releaseCapturedDesc")})
+
+
+		_ENV.metagui.dropDownMenu(actions,2)
+	end
+
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 	canvas:clear()
-	local portrait = root.npcPortrait("bust", capturedOccupant.npcArgs.npcSpecies, capturedOccupant.npcArgs.npcType, capturedOccupant.npcArgs.npcLevel or 1, capturedOccupant.npcArgs.npcSeed, capturedOccupant.npcArgs.npcParam)
+	local portrait = root.npcPortrait("bust", occupant.npcArgs.npcSpecies, occupant.npcArgs.npcType, occupant.npcArgs.npcLevel or 1, occupant.npcArgs.npcSeed, occupant.npcArgs.npcParam)
 	if portrait then
 		local bounds = drawable.boundBoxAll(portrait, true)
 		local center = rect.center(bounds)

@@ -21,12 +21,11 @@ function init()
 			}
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),
-		entity.entityType(),
-		storage
+		entity.entityType()
 	)
 	sbq.settings:setMessageHandlers()
 
-	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"), storage)
+	sbq.upgrades = sbq._Upgrades.new(storage.sbqUpgrades or config.getParameter("sbqUpgrades"))
 	sbq.upgrades:setMessageHandlers()
 
 	sbq.upgrades:apply(sbq.settings)

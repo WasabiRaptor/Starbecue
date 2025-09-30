@@ -73,6 +73,9 @@ function sbq.init(sbqConfig)
 	message.setHandler("sbqCaptureOccupant", function (_,_, ...)
 		return sbq.captureOccupant(...)
 	end)
+	message.setHandler("sbqReleaseCapturedOccupant", function (_,_, ...)
+		return sbq.releaseCapturedOccupant(...)
+	end)
 	message.setHandler("sbqDumpOccupants", function (_,_, ...)
 		return sbq.dumpOccupants(...)
 	end)
@@ -271,6 +274,10 @@ function sbq.captureOccupant(eid)
 	if not sbq.SpeciesScript.active then return {false, "inactive"} end
 	return {sbq.SpeciesScript:captureOccupant(eid)}
 end
+function sbq.releaseCapturedOccupant(uuid)
+	if not sbq.SpeciesScript.active then return {false, "inactive"} end
+	return {sbq.SpeciesScript:releaseCapturedOccupant(uuid)}
+end
 function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not sbq.SpeciesScript.active then return jarray() end
 	return {sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)}
@@ -317,6 +324,10 @@ end
 function sbq._SpeciesScript:captureOccupant(eid)
 	if not self.state then return false, "missingState" end
 	return self.state:captureOccupant(eid)
+end
+function sbq._SpeciesScript:releaseCapturedOccupant(uuid)
+	if not self.state then return false, "missingState" end
+	return self.state:releaseCapturedOccupant(uuid)
 end
 function sbq._SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 	if not self.state then return jarray() end
@@ -455,6 +466,15 @@ function sbq._State:captureOccupant(id)
 	if not occupant then return false, "missingOccupant" end
 	return occupant:capture()
 end
+function sbq._State:releaseCapturedOccupant(uuid)
+	for i = #sbq.Occupants.captured, 1, -1 do
+		local captured = sbq.Occupants.captured[i]
+		if captured and ((captured.captureId == uuid) or (captured.npcArgs.npcParam.scriptConfig.uniqueId == uuid)) then
+			return captured:release()
+		end
+	end
+	return false, "missingOccupant"
+end
 function sbq._State:dumpOccupants(location, subLocation, digestType)
 	local dump = jarray()
 	for _, occupant in ipairs(sbq.Occupants.list) do
@@ -476,6 +496,7 @@ function sbq._State:dumpOccupants(location, subLocation, digestType)
 		if output.flags.infused then
 			output.flags.infused = false
 			output.flags.infuseType = nil
+			output.flags.infuseSlots = nil
 			output.flags.digested = true
 		end
 		if output.flags.digested and digestType then
@@ -1117,6 +1138,16 @@ function sbq._Location:updateOccupancy(dt)
 					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.getScale()))
 				end
 			end
+			for _, occupant in ipairs(self.occupancy.captured) do
+				if not (occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting or occupant.flags.infusing or occupant.flags.releasing) then
+					self.occupancy.count = self.occupancy.count + 1
+				elseif occupant.flags.digested then
+					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
+				end
+				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
+					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.getScale()))
+				end
+			end
 		end
 
 		for _, name in ipairs(self.addSize or {}) do
@@ -1420,6 +1451,7 @@ function sbq.Occupants.newOccupant(entityId, size, location, subLocation, flags)
 		occupant:refreshLocation(location, subLocation, true)
 		return true
 	end
+	if (#sbq.Occupants.list + #sbq.Occupants.captured) >= sbq.voreConfig.seatCount then return false end
 	local seat
 	-- check for unoccupied occupant seat
 	for i = 1, sbq.voreConfig.seatCount do
@@ -1498,10 +1530,14 @@ function sbq.Occupants.insertOccupant(newOccupant)
 
 	if (not space) and not (newOccupant.flags.digested or newOccupant.flags.infused) then return false end
 	-- if we receive data for an occupant that is infused somewhere we already have someone infused, then treat them as digested instead
-	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)]then
+	if location.infusedEntity and sbq.Occupants.entityId[tostring(location.infusedEntity)] then
 		newOccupant.flags.infused = false
+		newOccupant.flags.infuseSlots = nil
 		newOccupant.flags.infuseType = nil
 		newOccupant.flags.digested = true
+	end
+	if newOccupant.flags.infused then
+		sbq.settings:setParameterSettings()
 	end
 
 	local occupant = sb.jsonMerge({
@@ -1610,6 +1646,9 @@ function sbq._Occupant:remove(reason)
 		if occupant.entityId == self.entityId then
 			sbq.Occupants.entityId[k] = nil
 		end
+	end
+	if self.flags.infused then
+		sbq.settings:setParameterSettings()
 	end
 	sbq.Occupants.refreshOccupantModifiers = true
 	self:sendEntityMessage("sbqReleased")
@@ -2248,22 +2287,37 @@ end
 
 function sbq._Occupant:capture()
 	sbq.addRPC(self:sendEntityMessage("sbqGetCard"), function(card)
-		self:logInfo(sb.printJson(card, 2))
 		if card then
+			local humanoidConfig = world.entity(self.entityId):humanoidConfig()
 			local newCapturedOccupant = {
+				captureId = sb.makeUuid(),
+
 				npcArgs = card.parameters.npcArgs,
-				size = self.size,
+				humanoidConfig = {
+					bodyFullbright = humanoidConfig.bodyFullbright
+				},
+
+				time = self.time,
+				struggleTime = self.struggleTime,
+				struggleCount = self.struggleCount,
+
+				locationName = self.locationName,
 				location = self.location,
 				subLocation = self.subLocation,
-				infuseSlots = self.infuseSlots,
+
+				size = self.size,
+				sizeMultiplier = self.sizeMultiplier,
+
 				flags = self.flags,
-				captureId = sb.makeUuid()
+				locationStore = self.locationStore,
+				locationSettings = self.locationSettings,
+
 			}
 			setmetatable(newCapturedOccupant, _CapturedOccupant)
 			table.insert(sbq.Occupants.captured, newCapturedOccupant)
 			table.insert(self:getLocation().occupancy.captured, newCapturedOccupant)
 			self:remove("captured")
-			self:sendEntityMessage("sbqCaptured")
+			self:sendEntityMessage("sbqCaptured", entity.id(), sbq.entityName(entity.id()))
 		end
 	end)
 	return true
@@ -2272,11 +2326,23 @@ end
 function _CapturedOccupant:save()
 	return root.makeCurrentVersionedJson("sbqCapturedOccupant", {
 		npcArgs = self.npcArgs,
-		size = self.size or 0,
+		humanoidConfig = self.humanoidConfig,
+
+		time = self.time,
+		struggleTime = self.struggleTime,
+		struggleCount = self.struggleCount,
+
+		locationName = self.locationName,
 		location = self.location,
 		subLocation = self.subLocation,
-		infuseSlots = self.infuseSlots or jarray(),
-		flags = self.flags or {}
+
+		size = self.size,
+		sizeMultiplier = self.sizeMultiplier,
+
+		flags = self.flags,
+		locationStore = self.locationStore,
+		locationSettings = self.locationSettings,
+
 	})
 end
 function _CapturedOccupant.new(capturedData)
@@ -2286,39 +2352,101 @@ function _CapturedOccupant.new(capturedData)
 	return newCapturedOccupant
 end
 function _CapturedOccupant:release()
-	if not self.npcArgs.npcParam.wasPlayer then
-		local eid = world.spawnNpc(entity.position(), self.npcArgs.npcSpecies, self.npcArgs.npcType, self.npcArgs.npcLevel, self.npcArgs.npcSeed, self.npcArgs.npcParam)
-	else
-
-	end
-	if self.subLocation then
-		local subLocation = sbq.SpeciesScript:getLocation(self.location, self.subLocation)
-		if subLocation then
-			for i, occupant in ipairs(subLocation.occupancy.captured) do
-				if occupant.captureId == self.captureId then
-					subLocation:markSizeDirty()
-					table.remove(subLocation.occupancy.captured, i)
-					subLocation:refreshStruggleDirection()
-					break
+	local callback = function()
+		if self.subLocation then
+			local subLocation = sbq.SpeciesScript:getLocation(self.location, self.subLocation)
+			if subLocation then
+				for i, occupant in ipairs(subLocation.occupancy.captured) do
+					if occupant.captureId == self.captureId then
+						subLocation:markSizeDirty()
+						table.remove(subLocation.occupancy.captured, i)
+						subLocation:refreshStruggleDirection()
+						break
+					end
 				end
 			end
 		end
-	end
-	local location = sbq.SpeciesScript:getLocation(self.location)
-	if location then for i, occupant in ipairs(location.occupancy.captured) do
-		if occupant.captureId == self.captureId then
-			location:markSizeDirty()
-			table.remove(location.occupancy.captured, i)
-			location:refreshStruggleDirection()
-			break
-		end
-	end end
+		local location = sbq.SpeciesScript:getLocation(self.location)
+		if location then for i, occupant in ipairs(location.occupancy.captured) do
+			if occupant.captureId == self.captureId then
+				location:markSizeDirty()
+				table.remove(location.occupancy.captured, i)
+				location:refreshStruggleDirection()
+				break
+			end
+		end end
 
-	for i, occupant in ipairs(sbq.Occupants.captured) do
-		if occupant.captureId == self.captureId then
-			table.remove(sbq.Occupants.captured, i)
-			break
+		for i, occupant in ipairs(sbq.Occupants.captured) do
+			if occupant.captureId == self.captureId then
+				table.remove(sbq.Occupants.captured, i)
+				break
+			end
 		end
+		if self.flags.infused then
+			sbq.settings:setParameterSettings()
+		end
+		sbq.Occupants.queueHudRefresh = true
+		return true
+	end
+	if not self.npcArgs.npcParam.wasPlayer then
+		if self.npcArgs.npcParam.scriptConfig.uniqueId then
+			sbq.addRPC(world.findUniqueEntity(self.npcArgs.npcParam.scriptConfig.uniqueId), function(found)
+				if self.attemptedRelease then
+					local npcConfig = root.npcConfig(self.npcArgs.npcType)
+					local item = root.assetJson("/sbqItemTemplates.config:npcCard")
+					if npcConfig.scriptConfig.isOC then
+						item.parameters.rarity = "rare"
+					elseif npcConfig.scriptConfig.sbqNPC then
+						item.parameters.rarity = "uncommon"
+					end
+					item.parameters.preySize = self.size
+					item.parameters.shortdescription = ((self.npcArgs.npcParam or {}).identity or {}).name or ""
+					item.parameters.inventoryIcon = root.npcPortrait("bust", self.npcArgs.npcSpecies, self.npcArgs.npcType, self.npcArgs.npcLevel or 1, self.npcArgs.npcSeed, self.npcArgs.npcParam)
+					item.parameters.description = (npcConfig.scriptConfig or {}).cardDesc or ""
+					item.parameters.tooltipFields.collarNameLabel = sbq.createdDateString()
+					item.parameters.createdDate = sbq.createdDate()
+					item.parameters.tooltipFields.objectImage = root.npcPortrait("full", self.npcArgs.npcSpecies, self.npcArgs.npcType, self.npcArgs.npcLevel or 1, self.npcArgs.npcSeed, self.npcArgs.npcParam)
+					item.parameters.tooltipFields.subtitle = self.npcArgs.npcType
+					item.parameters.tooltipFields.collarIconImage = nil
+					item.parameters.npcArgs = self.npcArgs
+					world.spawnItem(item, entity.position())
+					callback()
+				else
+					self.attemptedRelease = true
+					if _ENV.player and _ENV.interface then
+						interface.queueMessage(sbq.getString(":releaseAgain"))
+						interface.queueMessage(sbq.getString(":npcAlreadyExists"))
+					end
+				end
+			end, function ()
+				local eid = world.spawnNpc(entity.position(), self.npcArgs.npcSpecies, self.npcArgs.npcType,
+					self.npcArgs.npcLevel, self.npcArgs.npcSeed, self.npcArgs.npcParam)
+				sbq.receiveOccupant({
+					entityId = eid,
+					time = self.time,
+					struggleTime = self.struggleTime,
+					struggleCount = self.struggleCount,
+
+					locationName = self.locationName,
+					location = self.location,
+					subLocation = self.subLocation,
+
+					size = self.size,
+					sizeMultiplier = self.sizeMultiplier,
+
+					flags = self.flags,
+					locationStore = self.locationStore,
+					locationSettings = self.locationSettings
+
+				})
+				callback()
+			end)
+		else
+			return callback()
+		end
+		return true
+	else
+		return callback()
 	end
 end
 

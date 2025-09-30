@@ -288,7 +288,7 @@ function dialogueBox.findNextRealCharacter()
 	local space = string.find(dialogueBox.text, " ", pos2+1, true)
 
 	if char == "^" and semicolon and ((not space) or (space > semicolon)) then
-		dialogueBox.textPosition = utf8.len(dialogueBox.text, 1, semicolon + 1) or utf8.len(dialogueBox.text) or math.huge
+		dialogueBox.textPosition = utf8.len(dialogueBox.text, 1, math.min(semicolon + 1, string.len(dialogueBox.text))) or utf8.len(dialogueBox.text)
 	else
 		return true
 	end

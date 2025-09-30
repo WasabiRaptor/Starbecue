@@ -1,5 +1,7 @@
 
 storage = _ENV.metagui.inputData or {}
+local mg = metagui ---@diagnostic disable-line: undefined-global
+
 if storage.locked and (storage.lockOwner ~= player.uniqueId()) and not player.isAdmin() then
 	sbq.playErrorSound()
 	interface.queueMessage(sbq.getString(":targetOwned"))
@@ -82,7 +84,7 @@ function _ENV.orderFurniture:onClick()
 			end
 
 			local price = ((item.count or 1)*(item.price or itemConfig.config.price))
-			actionLabel = actionLabel.." ^#555;"..sbq.strings.price..": ^yellow;"..price.."^reset;"
+			actionLabel = actionLabel.." ^#555;"..sbq.getString(":price")..": ^yellow;"..price.."^reset;"
 
 			local comma = ""
 			local gotReqTag = false
@@ -90,7 +92,7 @@ function _ENV.orderFurniture:onClick()
 				for j, tag in ipairs(itemConfig.config.colonyTags or {}) do
 					if tag == reqTag then
 						if not gotReqTag then
-							actionLabel = actionLabel.." ^#555;"..sbq.strings.tags..":"
+							actionLabel = actionLabel.." ^#555;"..sbq.getString(":tags")..":"
 							gotReqTag = true
 						end
 						actionLabel = actionLabel..comma.." ^green;"..tag.."^reset;"
@@ -164,36 +166,57 @@ function sbq.refreshDeedPage()
 	if not storage.occupier then return end
 	for i, tenant in ipairs(storage.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
-		local portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
+		local portrait
 		local id = world.uniqueEntityId(tenant.uniqueId)
-		if id then portrait = world.entityPortrait(id, "full") end
+		if id then
+			portrait = world.entityPortrait(id, "full")
+		else
+			portrait = root.npcPortrait("full", tenant.species, tenant.type, tenant.level or 1, tenant.seed, tenant.overrides)
+		end
 		local canvasSize = {43,60}
 		if portrait then
-			local bounds = rect.size(drawable.boundBoxAll(portrait,true))
-			canvasSize = {math.max(canvasSize[1], bounds[1]), math.max(canvasSize[2], bounds[2])}
+			local bounds = rect.size(drawable.boundBoxAll(portrait, true))
+			canvasSize = { math.max(canvasSize[1], bounds[1]), math.max(canvasSize[2], bounds[2]) }
 		end
-		local panel = { type = "panel", expandMode = { 0, 0 }, style = "flat", children = {
+		canvasSize[1] = math.max(canvasSize[1], mg.measureString(name)[1])
+		if tenant.stolenBy then
+			canvasSize[1] = math.max(canvasSize[1], mg.measureString(tenant.stolenBy)[1])
+		end
+
+		local panel = { type = "panel", expandMode = { 0, 0 }, style = "flat", color = (not id) and "FF0000", children = {
 			{ mode = "vertical", expandMode = { 0, 0 } },
 			{ type = "canvas", id = "tenant" .. i .. "Canvas", size = canvasSize, expandMode = { 0, 0 } },
 			{
 				{ expandMode = { 0, 0 }},
 				{ type = "label", text = name, align = "center", inline = true },
-				{ type = "iconButton", id = "tenant" .. i.. "Customize", image = "/interface/scripted/sbq/customize.png", toolTip = ":customize", visible = world.getNpcScriptParameter(id, "sbqIsCustomizable") or false }
+				{ type = "iconButton", id = "tenant" .. i.. "Customize", image = "/interface/scripted/sbq/customize.png", toolTip = ":customize", visible = id and world.getNpcScriptParameter(id, "sbqIsCustomizable") or false }
 			},
-			{ type = "button", caption = ":settings", id = "tenant" .. i .. "Settings", size = canvasSize[1], expandMode = { 0, 0 }},
-			{ type = "button", caption = ":remove", color = "FF0000", id = "tenant" .. i .. "Remove", size = canvasSize[1], expandMode = { 0, 0 } }
+			{ type = "button", caption = ":settings", id = "tenant" .. i .. "Settings", size = {canvasSize[1],15}, expandMode = { 0, 0 }},
+			{ type = "label", id = "tenant" .. i .. "Stolen", text = sbq.getString(":stolenBy"):format(tenant.stolenBy), align = "center", inline = true, width = canvasSize[1] },
+			{ type = "button", caption = ":restore", color = "00FF00",  id = "tenant" .. i .. "Restore", size = {canvasSize[1],15},  expandMode = { 0, 0 }},
+			{ type = "button", caption = ":remove", color = "FF0000", id = "tenant" .. i .. "Remove", size = {canvasSize[1],15}, expandMode = { 0, 0 } },
 		} }
 		_ENV.tenantListScrollArea:addChild(panel)
 		local canvasWidget = _ENV["tenant" .. i .. "Canvas"]
 		local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 		local remove = _ENV["tenant" .. i .. "Remove"]
+		local restore = _ENV["tenant" .. i .. "Restore"]
+		local stolenLabel = _ENV["tenant" .. i .. "Stolen"]
 		local settings = _ENV["tenant" .. i .. "Settings"]
 		local customize = _ENV["tenant" .. i .. "Customize"]
+		restore:setVisible(tenant.stolenBy and true or false)
+		stolenLabel:setVisible(tenant.stolenBy and true or false)
+		settings:setVisible(not tenant.stolenBy and true or false)
 		function remove:onClick()
 			local item = sbq.generateNPCItemCard(tenant)
 			sb.logInfo("Removed Tenant:"..sb.printJson(tenant,2))
 			player.giveItem(item)
 			table.remove(storage.occupier.tenants, i)
+			world.sendEntityMessage(storage.respawner or pane.sourceEntity(), "sbqSaveTenants", storage.occupier.tenants)
+			sbq.refreshDeedPage()
+		end
+		function restore:onClick()
+			tenant.stolenBy = nil
 			world.sendEntityMessage(storage.respawner or pane.sourceEntity(), "sbqSaveTenants", storage.occupier.tenants)
 			sbq.refreshDeedPage()
 		end

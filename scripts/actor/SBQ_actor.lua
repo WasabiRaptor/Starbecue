@@ -40,7 +40,7 @@ function init()
 		dom = {},
 		sub = {}
 	}
-    sbq.expectedActions = {}
+	sbq.expectedActions = {}
 	message.setHandler("sbqScriptPaneMessage", function(_, _, ...)
 		return world.sendEntityMessage(entity.id(), ...):result()
 	end)
@@ -134,7 +134,7 @@ end
 
 function update(dt)
 	old.update(dt)
-    forceSeat()
+	forceSeat()
 end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)
