@@ -14,15 +14,16 @@ function init() pane.dismiss()
 	else
 		-- inject our own scripts
 		local player_interact = player.interact
-		function player.interact(type, config, source)
+		function player.interact(type, guiConfig, source)
 			if type == "ScriptPane" then
-				local configRoot = config.___
-				config.paneLayer = configRoot.paneLayer or config.paneLayer
-				config.dismissable = configRoot.dismissable or config.dismissable
-				config.sourceRadius = configRoot.sourceRadius or config.sourceRadius
-				table.insert(config.scripts, "/metagui/sbq/custom_widgets.lua")
+				local metaguiConfig = guiConfig.___
+				guiConfig.paneLayer = metaguiConfig.paneLayer
+				guiConfig.dismissable = metaguiConfig.dismissable
+				guiConfig.sourceRadius = metaguiConfig.sourceRadius
+				guiConfig.shareSourceEntity = metaguiConfig.shareSourceEntity
+				table.insert(guiConfig.scripts, "/metagui/sbq/custom_widgets.lua")
 			end
-			player_interact(type, config, source)
+			player_interact(type, guiConfig, source)
 		end
 		require(_mgcfg.providerRoot .. "build.lua")
 	end

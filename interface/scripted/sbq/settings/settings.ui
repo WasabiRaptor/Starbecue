@@ -9,7 +9,7 @@
 	"uniqueBy" : "path",
 	"scripts" : [ "settings.lua" ],
 	"sourceRadius": -1,
-	"dismissPrev":false,
+	"shareSourceEntity":true,
 	"children" : [
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
 			{ "type" : "tab", "id" : "mainSettings", "title" : ":mainSettings", "visible" : true, "color" : "ff00ff", "contents" : [

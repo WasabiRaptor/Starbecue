@@ -16,7 +16,7 @@ local occupantData
 local sbqCommands = {}
 function init()
 	old.init()
-	player.setProperty("predHudOpen", false)
+	player.setProperty("sbqPredHudOpen", false)
 	storage = storage or {}
 	storage.sbqSettings = storage.sbqSettings or player.getProperty("sbqSettingsStorage")
 	storage.sbqUpgrades = storage.sbqUpgrades or player.getProperty("sbqUpgradesStorage")
@@ -142,7 +142,7 @@ function init()
 		player.setProperty("sbqPredWarpAttempted", 0)
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
-			gui = player.getProperty("predHudOpen") and { panefeature = { offset = { -96, 0 } } } or {},
+			gui = player.getProperty("sbqPredHudOpen") and { panefeature = { offset = { -104, 0 } } } or {},
 			locationData = locationData,
 			occupantData = newOccupantData
 		}, id)

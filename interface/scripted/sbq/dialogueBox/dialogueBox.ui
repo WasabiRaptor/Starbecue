@@ -5,7 +5,7 @@
 	"anchor" : ["centerBottom", [0,-64]],
 	"scripts" : [ "dialogueBox.lua" ],
 	"sourceRadius": 10,
-	"dismissPrev":false,
+	"shareSourceEntity":true,
 	"paneLayer" : "Hud",
 	"children" : [
 		{ "type" : "layout", "mode" : "vertical", "expandMode" : [1, 1], "children" : [

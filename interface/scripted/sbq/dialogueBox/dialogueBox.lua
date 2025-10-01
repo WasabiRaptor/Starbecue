@@ -22,11 +22,12 @@ function init()
 		end
 	end, function ()
 		_ENV.actionButton:setVisible(false)
-    end)
+	end)
 
+	interface.sendMessage("sbqCloseDialogueBox") -- close any previous dialouge boxes before we set our handler for the new one
 	message.setHandler("sbqCloseDialogueBox", function ()
 		pane.dismiss()
-    end)
+	end)
 
 	doScrollText = world.sendEntityMessage(player.id(), "sbqGetSetting", "scrollText"):result()
 	doCustomFont = world.sendEntityMessage(player.id(), "sbqGetSetting", "customFont"):result()
@@ -183,31 +184,31 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		dialogue.finished = true
 	end
 	local results = dialogueProcessor.processDialogueResults()
-    if results.imagePortrait then
-        _ENV.imagePortrait:setVisible(true)
-        _ENV.entityPortraitPanel:setVisible(false)
-        _ENV.imagePortrait:setFile(sbq.assetPath(results.imagePortrait, results.imagePath or "/"))
-        _ENV.nameLabel.width = _ENV.imagePortrait.imgSize[1]
-    elseif results.entityPortrait then
-        _ENV.imagePortrait:setVisible(false)
-        _ENV.entityPortraitPanel:setVisible(true)
-        _ENV.nameLabel.width = _ENV.entityPortraitPanel.size[1]
-        local canvas = widget.bindCanvas(_ENV.entityPortraitCanvas.backingWidget)
-        canvas:clear()
-        local portrait = world.entityPortrait(results.source, results.entityPortrait)
-        if portrait then
+	if results.imagePortrait then
+		_ENV.imagePortrait:setVisible(true)
+		_ENV.entityPortraitPanel:setVisible(false)
+		_ENV.imagePortrait:setFile(sbq.assetPath(results.imagePortrait, results.imagePath or "/"))
+		_ENV.nameLabel.width = _ENV.imagePortrait.imgSize[1]
+	elseif results.entityPortrait then
+		_ENV.imagePortrait:setVisible(false)
+		_ENV.entityPortraitPanel:setVisible(true)
+		_ENV.nameLabel.width = _ENV.entityPortraitPanel.size[1]
+		local canvas = widget.bindCanvas(_ENV.entityPortraitCanvas.backingWidget)
+		canvas:clear()
+		local portrait = world.entityPortrait(results.source, results.entityPortrait)
+		if portrait then
 			portrait = drawable.scaleAll(portrait, {4,4})
 			local bounds = drawable.boundBoxAll(portrait, true)
 			local center = rect.center(bounds)
 			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), center))
-        end
-    else
-        _ENV.imagePortrait:setVisible(false)
-        _ENV.entityPortraitPanel:setVisible(false)
-        _ENV.nameLabel.width = nil
-    end
-    local nameFont = results.nameFont or results.font
-    local nameTextDirectives = (results.nameDirectives or results.textDirectives or "").."^set;"
+		end
+	else
+		_ENV.imagePortrait:setVisible(false)
+		_ENV.entityPortraitPanel:setVisible(false)
+		_ENV.nameLabel.width = nil
+	end
+	local nameFont = results.nameFont or results.font
+	local nameTextDirectives = (results.nameDirectives or results.textDirectives or "").."^set;"
 	if nameFont then
 		nameTextDirectives = "^font="..nameFont..";"..nameTextDirectives
 	end
@@ -278,7 +279,7 @@ end
 
 function dialogueBox.findNextRealCharacter()
 	local pos1 = utf8.offset(dialogueBox.text, dialogueBox.textPosition)
-    local pos2 = utf8.offset(dialogueBox.text, dialogueBox.textPosition + 1) - 1
+	local pos2 = utf8.offset(dialogueBox.text, dialogueBox.textPosition + 1) - 1
 	if dialogueBox.textPosition == utf8.len(dialogueBox.text) then
 		pos2 = string.len(dialogueBox.text)
 	end

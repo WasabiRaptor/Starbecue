@@ -6,7 +6,7 @@
 	"uniqueBy" : "path",
 	"scripts" : [ "shop.lua" ],
 	"sourceRadius" : 10,
-	"dismissPrev" : false,
+	"shareSourceEntity" : true,
 	"children" : [
 		{"mode":"vertical"},
 		{ "type" : "layout", "id" : "shopLayout", "mode" : "horizontal", "expandMode" : [1, 1], "children" : [ { "type" : "panel", "id" : "shopPanel", "expandMode" : [1, 1], "style" : "flat", "children" : [ { "mode" : "horizontal" },

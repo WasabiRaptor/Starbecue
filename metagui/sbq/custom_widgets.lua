@@ -63,7 +63,7 @@ function init()
 		sbq[k] = v
 	end
 	sbq.settings = sbq._Settings.new(sbq.settingsConfig or {}, sbq.storedSettings, world.entityType(sbq.entityId()))
-    sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
+	sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
 	sbq.upgrades:apply(sbq.settings)
 
 	old.init()
@@ -845,9 +845,9 @@ function mg.preyDialogueText(eid, pos, text, sound, speed, volume, id, lifetime)
 		text = text,
 		textSound = sound,
 		speed = speed,
-        volume = volume,
-        sourceRadius = -1,
-		dismissPrev = false,
+		volume = volume,
+		sourceRadius = -1,
+		shareSourceEntity = true,
 	}
 
 	local bm = theme.metrics.borderMargins.contextMenu
@@ -1033,47 +1033,47 @@ end
 function widgets.sbqTextBox:blur() self:releaseFocus() end
 
 function widgets.sbqTextBox:setText(t)
-    if self.settingType == "number" then
-        local value = tonumber(t)
-        local color = "FFFFFF"
-        local max = self.max
-        local min = self.min
-        if type(max) == "string" then
-            max = sbq.settings.read[max]
-        end
-        if type(min) == "string" then
-            min = sbq.settings.read[min]
-        end
-        if type(value) == "number" then
-            if ((type(max) == "number") and (value == max))
-                or ((type(min) == "number") and (value == min))
-            then
-                color = "FFFF00"
-            elseif (type(max) == "number") and (type(min) == "number") then
-                if (value > min) and (value < max) then
-                    color = "00FF00"
-                end
-            end
-            if ((type(max) == "number") and (value > max))
-                or ((type(min) == "number") and (value < min))
-            then
-                color = "FF0000"
-            end
-        else
-            color = "FF0000"
-        end
-        self.color = color
-    elseif self.settingType == "table" then
+	if self.settingType == "number" then
+		local value = tonumber(t)
+		local color = "FFFFFF"
+		local max = self.max
+		local min = self.min
+		if type(max) == "string" then
+			max = sbq.settings.read[max]
+		end
+		if type(min) == "string" then
+			min = sbq.settings.read[min]
+		end
+		if type(value) == "number" then
+			if ((type(max) == "number") and (value == max))
+				or ((type(min) == "number") and (value == min))
+			then
+				color = "FFFF00"
+			elseif (type(max) == "number") and (type(min) == "number") then
+				if (value > min) and (value < max) then
+					color = "00FF00"
+				end
+			end
+			if ((type(max) == "number") and (value > max))
+				or ((type(min) == "number") and (value < min))
+			then
+				color = "FF0000"
+			end
+		else
+			color = "FF0000"
+		end
+		self.color = color
+	elseif self.settingType == "table" then
 		if not t or (t == "") then
 			t = "{}"
 		end
 		local success, parsed = pcall(sb.parseJson, t)
 		if success and type(parsed) == "table" then
-            self.color = "00FF00"
-        else
+			self.color = "00FF00"
+		else
 			self.color = "FF0000"
 		end
-    end
+	end
 	local c = self.text
 	self.text = type(t) == "string" and t or ""
 	if self.text ~= c then
@@ -1242,60 +1242,60 @@ widgets.sbqItemSlot = mg.proto(widgets.itemSlot, {
 })
 
 function widgets.sbqItemSlot:init(base, param)
-    self.size = nil -- force recalculate
-    self.hideRarity = param.hideRarity
-    self.glyph = mg.path(param.glyph or param.colorGlyph)
-    self.colorGlyph = not not param
-    .colorGlyph                             -- some themes may want to render non-color glyphs as monochrome in their own colors
-    self.color = param.color                -- might as well let themes have at this
-    self.autoInteract = param.autoInteract or param.auto
-    self.containerSlot = param.containerSlot
-    if self.containerSlot then self.autoInteract = "container" end
+	self.size = nil -- force recalculate
+	self.hideRarity = param.hideRarity
+	self.glyph = mg.path(param.glyph or param.colorGlyph)
+	self.colorGlyph = not not param
+	.colorGlyph                             -- some themes may want to render non-color glyphs as monochrome in their own colors
+	self.color = param.color                -- might as well let themes have at this
+	self.autoInteract = param.autoInteract or param.auto
+	self.containerSlot = param.containerSlot
+	if self.containerSlot then self.autoInteract = "container" end
 
-    self.setting = param.setting or self.parent.setting
-    self.groupName = param.groupName or self.parent.groupName
-    self.groupKey = param.groupKey or self.parent.groupKey
-    self.script = param.script
-    self.acceptScript = param.acceptScript
-    if self.setting then
-        sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
-        if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
-    end
+	self.setting = param.setting or self.parent.setting
+	self.groupName = param.groupName or self.parent.groupName
+	self.groupKey = param.groupKey or self.parent.groupKey
+	self.script = param.script
+	self.acceptScript = param.acceptScript
+	if self.setting then
+		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
+		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
+	end
 
-    if self.script then
-        function self:onItemModified()
+	if self.script then
+		function self:onItemModified()
 			if self.locked then return sbq.assignSettingValue(self.setting, self.groupName, self.groupKey) end
-            sbq.widgetScripts[self.script](self:item() or {}, self.setting or self.id, self.groupName, self.groupKey)
-        end
-    end
-    if self.acceptScript then
-        function self:acceptsItem(item)
-            if root.itemDescriptorsMatch(item, self.itemCache, true) then return true end
+			sbq.widgetScripts[self.script](self:item() or {}, self.setting or self.id, self.groupName, self.groupKey)
+		end
+	end
+	if self.acceptScript then
+		function self:acceptsItem(item)
+			if root.itemDescriptorsMatch(item, self.itemCache, true) then return true end
 			if self.locked then return false end
-            return sbq.widgetScripts[self.acceptScript](self, item)
-        end
-    end
+			return sbq.widgetScripts[self.acceptScript](self, item)
+		end
+	end
 
-    self.directCache = param.directCache
-    --
-    self.backingWidget = mkwidget(base, { type = "canvas" })
-    self.subWidgets = {
-        slot = mkwidget(base,
-            { type = "itemslot", callback = "_clickLeft", rightClickCallback = "_clickRight", showRarity = false, showCount = false }),
-        count = mkwidget(base, { type = "label", mouseTransparent = true, hAnchor = "right" })
-    }
-    if param.item then self:setItem(param.item) end
-    if self.autoInteract == "container" then -- start polling loop
-        if not containerSlots then mg.startEvent(containerLoop) end
-        table.insert(containerSlots, self)
-    end
+	self.directCache = param.directCache
+	--
+	self.backingWidget = mkwidget(base, { type = "canvas" })
+	self.subWidgets = {
+		slot = mkwidget(base,
+			{ type = "itemslot", callback = "_clickLeft", rightClickCallback = "_clickRight", showRarity = false, showCount = false }),
+		count = mkwidget(base, { type = "label", mouseTransparent = true, hAnchor = "right" })
+	}
+	if param.item then self:setItem(param.item) end
+	if self.autoInteract == "container" then -- start polling loop
+		if not containerSlots then mg.startEvent(containerLoop) end
+		table.insert(containerSlots, self)
+	end
 end
 
 function widgets.sbqItemSlot:draw()
 
-    widget.setText(self.subWidgets.count, self:prettyCount(self.storedCount))
-    theme.drawItemSlot(self)
-    local c = widget.bindCanvas(self.backingWidget)
+	widget.setText(self.subWidgets.count, self:prettyCount(self.storedCount))
+	theme.drawItemSlot(self)
+	local c = widget.bindCanvas(self.backingWidget)
 	if self.locked then
 		c:drawImage("/interface/scripted/sbq/lockedDisabled.png", {5,5}, 1, nil, true )
 	end
