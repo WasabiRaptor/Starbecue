@@ -111,7 +111,7 @@
 				},
 				"partStates" : {
 					"tailState": {
-						"idle": { "properties": { "image" : "<tailBellyInfusedFrameset>:<tailSize>-idle.1" } },
+						"idle": { "properties": { "image" : "<tailBellyInfusedFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -128,6 +128,9 @@
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
 						"s_down_release" : "idle"
+					},
+					"tailExpandState" : {
+						"expand": { "properties": { "image": "<tailBellyInfusedFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": { } },

@@ -84,9 +84,21 @@
 					},
 					"cockState": {
 						"s_front" : { "properties": { "image": "<cockFrameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_front_press" : "s_front",
+						"s_front_hold" : "s_front",
+						"s_front_release" : "s_front",
 						"s_back" : "s_front",
+						"s_back_press" : "s_front",
+						"s_back_hold" : "s_front",
+						"s_back_release" : "s_front",
 						"s_up" : "s_front",
-						"s_down" : "s_front"
+						"s_up_press" : "s_front",
+						"s_up_hold" : "s_front",
+						"s_up_release" : "s_front",
+						"s_down" : "s_front",
+						"s_down_press" : "s_front",
+						"s_down_hold" : "s_front",
+						"s_down_release" : "s_front"
 					},
 					"cockExpandState" : {
 						"expand": { "properties": { "image": "<cockFrameset>:<cockInterpolateSize>-expand" } },

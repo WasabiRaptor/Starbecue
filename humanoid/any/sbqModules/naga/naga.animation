@@ -190,7 +190,19 @@
 					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" }
 				}
+			},
+			"tailExpandState" : {
+				"priority" : 3,
+				"default": "idle",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle", "properties" : {
+						"tailSizeOffset" : [["reset"], ["translate", [-0.25,0]]],
+						"tailEndOffset" : [["reset"], ["translate", [0,0]]]
+					} },
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
+				}
 			}
+
 		},
 		"parts": {
 			"body_fg" : false,
@@ -305,7 +317,7 @@
 				},
 				"partStates" : {
 					"tailState": {
-						"idle": { "properties": { "image" : "<tailBellyFrameset>:<tailSize>-idle.1" } },
+						"idle": { "properties": { "image" : "<tailBellyFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -322,6 +334,9 @@
 						"s_down_press" : "idle",
 						"s_down_hold" : "idle",
 						"s_down_release" : "idle"
+					},
+					"tailExpandState" : {
+						"expand": { "properties": { "image": "<tailBellyFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } }
 					},
 					"portraitMode" : {
 						"head": { "properties": { } },
