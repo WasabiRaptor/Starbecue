@@ -233,6 +233,22 @@ function tenantStolen(uniqueId, id, name)
 		tenant.stolenBy = name
 	end)
 end
+function tenantRestored(uniqueId)
+	withTenant(uniqueId, function(tenant)
+		tenant.stolenBy = nil
+		world.callScriptedEntity(world.loadUniqueEntity(tenant.uniqueId), "tenant.setHome", storage.house.floorPosition,
+			storage.house.boundary, deedUniqueId())
+	end)
+end
+function backupTenantStorage(uniqueId, preservedStorage)
+	withTenant(uniqueId, function (tenant)
+		tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
+        tenant.overrides.scriptConfig.initialStorage = preservedStorage
+		tenant.species = tenant.overrides.scriptConfig.initialStorage.sbqOriginalSpecies or tenant.species
+		tenant.overrides.identity.gender = tenant.overrides.identity.gender or tenant.sbqOriginalGender
+	end)
+end
+
 function anyTenantsDead()
   for _,tenant in ipairs(storage.occupier.tenants) do
 	if (not tenant.uniqueId or not world.findUniqueEntity(tenant.uniqueId):result()) and not tenant.stolenBy then

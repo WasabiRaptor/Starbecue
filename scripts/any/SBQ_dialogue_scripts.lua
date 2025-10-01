@@ -106,11 +106,11 @@ dialogueStepScripts.sbq_miscDigestResistance = dialogueStepScripts.statPositive
 dialogueStepScripts.sbqLockDown = dialogueStepScripts.statPositive
 
 function dialogueStepScripts.occupantFlag(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local flags = (sbq.getPublicProperty(eid, "sbqOccupantData") or {}).flags or {}
+	local flags = ((sbq.getPublicProperty(eid, "sbqOccupantStorage") or {}).content or {}).flags or {}
 	return step.."."..(tostring(flags[step]))
 end
 function dialogueStepScripts.occupantValue(dialogueTree, dialogueTreeTop, settings, step, eid, ...)
-	local data = sbq.getPublicProperty(eid, "sbqOccupantData") or {}
+	local data = (sbq.getPublicProperty(eid, "sbqOccupantStorage") or {}).content or {}
 	return step.."."..(tostring(data[step]))
 end
 

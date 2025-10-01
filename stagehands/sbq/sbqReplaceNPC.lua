@@ -47,7 +47,7 @@ function update()
 				world.callScriptedEntity(newEntityId, "tenant.setHome", storage.homePosition, storage.homeBoundary, storage.respawner, true)
 				local spawnerId = world.loadUniqueEntity(storage.respawner)
 				assert(spawnerId and world.entityExists(spawnerId))
-                world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {
+				world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {
 					replacing = false,
 					uniqueId = uuid,
 					type = npcTypeName,

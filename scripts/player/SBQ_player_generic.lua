@@ -307,11 +307,14 @@ function update(dt)
 
 	sbq.update(dt)
 
-	local occupantData = status.statusProperty("sbqOccupantData")
+	if sbq.loungingIn() or sbq.timerList.missingPredCheck then return end
+	local occupantData = status.statusProperty("sbqOccupantStorage")
+	if occupantData then
+		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+	end
 	if occupantData
 		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
-		and (not sbq.loungingIn())
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
@@ -321,7 +324,7 @@ function update(dt)
 						local success, reason = table.unpack(response)
 						if not success then
 							if reason ~= "inactive" then
-								status.setStatusProperty("sbqOccupantData", nil)
+								status.setStatusProperty("sbqOccupantStorage", nil)
 								status.clearPersistentEffects("sbqMissingPred")
 							end
 						end
@@ -348,7 +351,7 @@ function update(dt)
 					images = { portrait = player.getProperty("sbqPredPortrait") or jarray() }
 				}), function(escape)
 					if escape then
-						status.setStatusProperty("sbqOccupantData", nil)
+						status.setStatusProperty("sbqOccupantStorage", nil)
 						status.clearPersistentEffects("sbqMissingPred")
 					else
 						player.setProperty("sbqPredWarpAttempted", 0)
@@ -448,9 +451,9 @@ function sbq.collapseEssenceStacks()
 end
 
 function teleportOut()
-	local occupantData = status.statusProperty("sbqOccupantData")
+	local occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData and not (occupantData.playerPred or occupantData.crewPred) then
-		status.setStatusProperty("sbqOccupantData", nil)
+		status.setStatusProperty("sbqOccupantStorage", nil)
 		status.clearPersistentEffects("sbqMissingPred")
 	end
 	for i, occupant in ipairs(sbq.Occupants.list) do

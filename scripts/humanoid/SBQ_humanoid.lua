@@ -111,8 +111,12 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcLevel = npc.level()
 			item.parameters.npcArgs.npcSeed = npc.seed()
 			item.parameters.tooltipFields.subtitle = npc.npcType()
-            item.parameters.npcArgs.npcParam.scriptConfig.initialStorage = preservedStorage()
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage = preservedStorage()
 			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqRandomizedSettings = true
+			if storage.respawner then
+				item.parameters.npcArgs.npcParam.scriptConfig.originalWorldId = world.id()
+				item.parameters.npcArgs.npcParam.scriptConfig.originalWorldRespawner = storage.respawner
+			end
 		elseif entityType == "player" then
 			item.parameters.rarity = "legendary"
 			item.parameters.npcArgs.npcType = "generictenant"
@@ -124,7 +128,7 @@ function sbq.humanoidInit()
 		local identity = sbq.humanoid.humanoidIdentity()
 		item.parameters.npcArgs.npcSpecies = sbq.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
-        item.parameters.npcArgs.npcParam.identity = identity
+		item.parameters.npcArgs.npcParam.identity = identity
 		item.parameters.npcArgs.npcParam.humanoidParameters = sbq.humanoid.getHumanoidParameters()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.settings:export()
 		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
@@ -211,21 +215,29 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
 	currentIdentity.parameters = sbq.humanoid.getHumanoidParameters()
-	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
-	local originalSpecies = status.statusProperty("sbqOriginalSpecies")
-	local originalGender = status.statusProperty("sbqOriginalGender")
+	local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities")
+	local originalSpecies = storage.sbqOriginalSpecies
+	local originalGender = storage.sbqOriginalGender
 
 	if not originalSpecies then
 		originalSpecies = sbq.species()
-		status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
-		speciesIdentities[originalSpecies] = currentIdentity
+		storage.sbqOriginalSpecies = originalSpecies
+		speciesIdentities = speciesIdentities or {}
+		speciesIdentities[originalSpecies] = speciesIdentities[originalSpecies] or currentIdentity
+		storage.sbqSpeciesIdentities = speciesIdentities
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
 	end
+	status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
+
 	if not originalGender then
 		originalGender = sbq.gender()
-		status.setStatusProperty("sbqOriginalGender", originalGender)
+		storage.sbqOriginalGender = originalGender
 	end
-
+	status.setStatusProperty("sbqOriginalGender", originalGender)
+	if not speciesIdentities then
+		speciesIdentities = {}
+		storage.sbqSpeciesIdentities = speciesIdentities
+	end
 	if sbq.settings:get("genderTF") then
 		if newIdentity.gender == "random" then
 			newIdentity.gender = ({ "male", "female" })[math.random(2)]
@@ -336,6 +348,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 			speciesCount = speciesCount + 1
 		end
 
+		storage.sbqSpeciesIdentities = speciesIdentities
 		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
 		if player then
 			if (speciesCount >= sbq.config.transformMenuUnlock) then
@@ -358,6 +371,8 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		world.sendEntityMessage(entity.id(), "sbqClearTransformed")
 	end
 	if sbq.settings:get("permanentTF") then
+		storage.sbqOriginalSpecies = newIdentity.species
+		storage.sbqOriginalGender = newIdentity.gender
 		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end
@@ -368,8 +383,8 @@ function sbq.revertTF()
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
 	local currentParameters = sbq.humanoid.getHumanoidParameters()
 
-	local originalSpecies = status.statusProperty("sbqOriginalSpecies") or sbq.species()
-	local originalGender = status.statusProperty("sbqOriginalGender") or sbq.gender()
+	local originalSpecies = storage.sbqOriginalSpecies or status.statusProperty("sbqOriginalSpecies") or sbq.species()
+	local originalGender = storage.sbqOriginalGender or status.statusProperty("sbqOriginalGender") or sbq.gender()
 	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
 	local newIdentity = speciesIdentities[originalSpecies]
 	if not newIdentity then

@@ -129,3 +129,6 @@ end
 function sbq.timerRunning(name)
 	return (sbq.timerList[name] or {}).currTime
 end
+function sbq.timerRemaining(name)
+	return ((sbq.timerList[name] or {}).targetTime or 0) - ((sbq.timerList[name] or {}).currTime or 0)
+end

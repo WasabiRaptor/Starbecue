@@ -109,7 +109,7 @@ function init()
 		status.setStatusProperty("sbqProgressBar", 0)
 		status.setStatusProperty("sbqProgressBarColor", {})
 		seatToForce = nil
-		status.setStatusProperty("sbqOccupantData", nil)
+		status.setStatusProperty("sbqOccupantStorage", nil)
 		sbq.checkStuck()
 		sbq.timer("stuckCheck", 0.5, sbq.checkStuck)
 		-- self.behavior = old.behavior
@@ -138,7 +138,7 @@ function update(dt)
 end
 
 function sbq.setCurrentLocationData(id, locationData, occupantData)
-	status.setStatusProperty("sbqOccupantData", occupantData)
+	status.setStatusProperty("sbqOccupantStorage", root.makeCurrentVersionedJson("sbqOccupantStorage",occupantData))
 	status.clearPersistentEffects("sbqMissingPred")
 	sbq.currentLocationData = locationData
 	sbq.forceTimer("strugglingDialogue", 5)

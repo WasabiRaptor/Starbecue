@@ -11,7 +11,6 @@ local old = {
 	update = update,
 	uninit = uninit,
 	die = die,
-	tenant_setHome = tenant.setHome,
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
 	setNpcItemSlot = _ENV.setNpcItemSlot
@@ -146,14 +145,6 @@ function interact(args)
 		return prompted
 	end
 	return sbq.SpeciesScript:interact(args)
-end
-
-function tenant.setHome(...)
-	old.tenant_setHome(...)
-	local parent, recruitUuid = sbq.parentEntity()
-	if parent then
-		world.sendEntityMessage(parent, "sbqParentImportSettings", recruitUuid, entity.uniqueId(), sbq.settings:export())
-	end
 end
 
 function tenant.graduate()

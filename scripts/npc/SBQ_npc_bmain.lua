@@ -101,7 +101,6 @@ function init()
 
 		tenant.despawn(false)
 	end)
-
 end
 
 function update(dt)
@@ -113,11 +112,26 @@ function update(dt)
 
 	old.update(dt)
 
-	local occupantData = status.statusProperty("sbqOccupantData")
+	if sbq.loungingIn() or sbq.timerList.missingPredCheck then return end
+	local occupantData = status.statusProperty("sbqOccupantStorage")
+	if occupantData then
+		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+		if occupantData.wasCaptured then
+			local originalWorldId = config.getParameter("originalWorldId")
+			local originalWorldRespawner = config.getParameter("originalWorldRespawner")
+			if (originalWorldId == world.id()) and (world.findUniqueEntity(originalWorldRespawner):result()) then
+				local entityId = world.loadUniqueEntity(originalWorldRespawner)
+				if entityId and world.entityExists(entityId) then
+					world.callScriptedEntity(entityId, "tenantRestored", entity.uniqueId())
+				end
+			end
+			occupantData.wasCaptured = false
+			status.setStatusProperty("sbqOccupantStorage", root.makeCurrentVersionedJson("sbqOccupantStorage",occupantData))
+		end
+	end
 	if occupantData
 		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
-		and (not sbq.loungingIn())
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)
 		if eid then
@@ -127,7 +141,7 @@ function update(dt)
 						local success, reason = table.unpack(response)
 						if not success then
 							if reason ~= "inactive" then
-								status.setStatusProperty("sbqOccupantData", nil)
+								status.setStatusProperty("sbqOccupantStorage", nil)
 								status.clearPersistentEffects("sbqMissingPred")
 							end
 						end
@@ -137,15 +151,19 @@ function update(dt)
 		else
 			status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })
 			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
-				local occupantData = status.statusProperty("sbqOccupantData")
+				local occupantData = status.statusProperty("sbqOccupantStorage")
+				if occupantData then
+					occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+				end
 				if occupantData then
 					local eid = world.uniqueEntityId(occupantData.predUUID)
 					if not eid then
-						status.setStatusProperty("sbqOccupantData", nil)
+						status.setStatusProperty("sbqOccupantStorage", nil)
 						status.clearPersistentEffects("sbqMissingPred")
 					end
 				end
 			end)
+			sbq.logInfo(("Could not find pred '%s' time remaining: %s"):format(occupantData.predUUID, sbq.timerRemaining("missingPredEscape")))
 		end
 	end
 end
@@ -161,6 +179,9 @@ function preservedStorage()
 	ps.sbqUpgrades = sbq.upgrades:save()
 	ps.sbqConvertRoll = true
 	ps.sbqRandomizedSettings = storage.sbqRandomizedSettings
+	ps.sbqSpeciesIdentities = storage.sbqSpeciesIdentities
+	ps.sbqOriginalSpecies = storage.sbqOriginalSpecies
+	ps.sbqOriginalGender = storage.sbqOriginalGender
 	return ps
 end
 
