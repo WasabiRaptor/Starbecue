@@ -12,7 +12,7 @@ local old = {
 	update = update or function() end,
 	uninit = uninit or function () end
 }
-
+local occupantData
 local sbqCommands = {}
 function init()
 	old.init()
@@ -297,6 +297,11 @@ function init()
 	end)
 
 	sbq.timer("preyMissingWaitPrompt", 60)
+	occupantData = status.statusProperty("sbqOccupantStorage")
+	if occupantData then
+		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+	end
+
 end
 
 function update(dt)
@@ -308,12 +313,8 @@ function update(dt)
 	sbq.update(dt)
 
 	if sbq.loungingIn() or sbq.timerRunning("missingPredCheck") or (not entity.id()) then return end
-	local occupantData = status.statusProperty("sbqOccupantStorage")
-	if occupantData then
-		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
-	end
 	if occupantData
-		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
+		and (not (occupantData.flags.newOccupant or occupantData.flags.releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)

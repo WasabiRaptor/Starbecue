@@ -10,6 +10,7 @@ local old = {
 	uninit = uninit or (function ()end)
 }
 
+local occupantData
 function init()
 	old.init()
 	sbq.config = root.assetJson("/sbq.config")
@@ -48,6 +49,10 @@ function init()
 	message.setHandler("sbqHideDeathParticles", function()
 		monster.setDeathParticleBurst()
 	end)
+	occupantData = status.statusProperty("sbqOccupantStorage")
+	if occupantData then
+		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+	end
 end
 
 function update(dt)
@@ -59,12 +64,8 @@ function update(dt)
 	old.update(dt)
 
 	if sbq.loungingIn() or sbq.timerRunning("missingPredCheck") or (not entity.id()) then return end
-	local occupantData = status.statusProperty("sbqOccupantStorage")
-	if occupantData then
-		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
-	end
 	if occupantData
-		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
+		and (not (occupantData.flags.newOccupant or occupantData.flags.releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)
@@ -85,7 +86,7 @@ function update(dt)
 		else
 			status.setPersistentEffects("sbqMissingPred",{"sbqMissingPred"})
 			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
-				local occupantData = status.statusProperty("sbqOccupantStorage")
+				occupantData = status.statusProperty("sbqOccupantStorage")
 				if occupantData then
 					occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
 				end

@@ -19,6 +19,7 @@ local old = {
 
 local convertBackType
 local convert
+local occupantData
 function init()
 	old.init()
 
@@ -101,6 +102,10 @@ function init()
 
 		tenant.despawn(false)
 	end)
+	occupantData = status.statusProperty("sbqOccupantStorage")
+	if occupantData then
+		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+	end
 end
 
 function update(dt)
@@ -113,24 +118,20 @@ function update(dt)
 	old.update(dt)
 
 	if sbq.loungingIn() or sbq.timerRunning("missingPredCheck") or (not entity.id()) then return end
-	local occupantData = status.statusProperty("sbqOccupantStorage")
-	if occupantData then
-		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
-		if occupantData.wasCaptured then
-			local originalWorldId = config.getParameter("originalWorldId")
-			local originalWorldRespawner = config.getParameter("originalWorldRespawner")
-			if (originalWorldId == world.id()) and (world.findUniqueEntity(originalWorldRespawner):result()) then
-				local entityId = world.loadUniqueEntity(originalWorldRespawner)
-				if entityId and world.entityExists(entityId) then
-					world.callScriptedEntity(entityId, "tenantRestored", entity.uniqueId())
-				end
+	if occupantData and occupantData.wasCaptured then
+		local originalWorldId = config.getParameter("originalWorldId")
+		local originalWorldRespawner = config.getParameter("originalWorldRespawner")
+		if (originalWorldId == world.id()) and (world.findUniqueEntity(originalWorldRespawner):result()) then
+			local entityId = world.loadUniqueEntity(originalWorldRespawner)
+			if entityId and world.entityExists(entityId) then
+				world.callScriptedEntity(entityId, "tenantRestored", entity.uniqueId())
 			end
-			occupantData.wasCaptured = false
-			status.setStatusProperty("sbqOccupantStorage", root.makeCurrentVersionedJson("sbqOccupantStorage",occupantData))
 		end
+		occupantData.wasCaptured = false
+		status.setStatusProperty("sbqOccupantStorage", root.makeCurrentVersionedJson("sbqOccupantStorage",occupantData))
 	end
 	if occupantData
-		and (not ((occupantData.flags or {}).newOccupant or (occupantData.flags or {}).releasing))
+		and (not (occupantData.flags.newOccupant or occupantData.flags.releasing))
 		and sbq.timer("missingPredCheck", sbq.config.missingPredCheck) and occupantData.predUUID
 	then
 		local eid = world.uniqueEntityId(occupantData.predUUID)
@@ -151,7 +152,7 @@ function update(dt)
 		else
 			status.setPersistentEffects("sbqMissingPred", { "sbqMissingPred" })
 			sbq.timer("missingPredEscape", sbq.config.missingPredTimeout, function()
-				local occupantData = status.statusProperty("sbqOccupantStorage")
+				occupantData = status.statusProperty("sbqOccupantStorage")
 				if occupantData then
 					occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
 				end
