@@ -280,7 +280,7 @@ function sbq.releaseCapturedOccupant(uuid)
 end
 function sbq.dumpOccupants(location, subLocation, digestType, ...)
 	if not sbq.SpeciesScript.active then return jarray() end
-	return {sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)}
+	return sbq.SpeciesScript:dumpOccupants(location, subLocation, digestType, ...)
 end
 function sbq.releaseOccupant(id, ...)
 	if not sbq.SpeciesScript.active then return {false, "inactive"} end
@@ -1651,7 +1651,9 @@ function sbq._Occupant:remove(reason)
 		sbq.settings:setParameterSettings()
 	end
 	sbq.Occupants.refreshOccupantModifiers = true
-	self:sendEntityMessage("sbqReleased")
+	if reason ~= "occupantDump" then
+		self:sendEntityMessage("sbqReleased")
+	end
 	sbq.Occupants.queueHudRefresh = true
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear", self.entityId) end
 end
@@ -1813,6 +1815,7 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 		self.locationName = location.name
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
+		sbq.Occupants.queueHudRefresh = true
 	end
 	if not location then return self:remove("invalidLocation") end
 	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.settings:matches(location.activeSettings, true)) or location.disabled) then return self:remove("disabledLocation") end
