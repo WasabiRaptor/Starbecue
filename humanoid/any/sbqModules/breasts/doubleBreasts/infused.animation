@@ -1,0 +1,122 @@
+{
+	"globalTagDefaults" : {
+		"breasts_lower_leftInfusedDirectives" : "",
+		"breasts_lower_leftInfusedFade" : "",
+		"breasts_lower_leftFrontInfusedFrameset" : "",
+		"breasts_lower_leftBackInfusedFrameset" : "",
+
+		"breasts_lower_rightInfusedDirectives" : "",
+		"breasts_lower_rightInfusedFade" : "",
+		"breasts_lower_rightFrontInfusedFrameset" : "",
+		"breasts_lower_rightBackInfusedFrameset" : ""
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"breasts_lower_right_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.791,
+					"flippedZLevel": 11.611,
+
+					"anchorPart": "breasts_lower_right",
+					"processingDirectives" : "<breasts_lower_rightInfusedDirectives><breasts_lower_rightInfusedFade>"
+				},
+				"partStates": {
+					"breasts_lower_rightState": {
+						"idle": { "properties": {
+							"image": "<breasts_lower_rightFrontInfusedFrameset>:<breasts_lower_rightSize>-<breasts_lower_rightState_state>.<breasts_lower_rightState_frame>",
+							"flippedImage": "<breasts_lower_rightBackInfusedFrameset>:<breasts_lower_rightSize>-<breasts_lower_rightState_state>.<breasts_lower_rightState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"breasts_lower_rightExpandState" : {
+						"expand": { "properties": {
+							"image": "<breasts_lower_rightFrontInfusedFrameset>:<breasts_lower_rightInterpolateSize>-expand",
+							"flippedImage": "<breasts_lower_rightBackInfusedFrameset>:<breasts_lower_rightInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"breastsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			},
+			"breasts_lower_left_infused" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.611,
+					"flippedZLevel": 11.791,
+
+					"anchorPart": "breasts_lower_left",
+					"processingDirectives" : "<breasts_lower_leftInfusedDirectives><breasts_lower_leftInfusedFade>"
+				},
+				"partStates": {
+					"breasts_lower_leftState": {
+						"idle": { "properties": {
+							"image": "<breasts_lower_leftBackInfusedFrameset>:<breasts_lower_leftSize>-<breasts_lower_leftState_state>.<breasts_lower_leftState_frame>",
+							"flippedImage": "<breasts_lower_leftFrontInfusedFrameset>:<breasts_lower_leftSize>-<breasts_lower_leftState_state>.<breasts_lower_leftState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"breasts_lower_leftExpandState" : {
+						"expand": { "properties": {
+							"image": "<breasts_lower_leftBackInfusedFrameset>:<breasts_lower_leftInterpolateSize>-expand",
+							"flippedImage": "<breasts_lower_leftFrontInfusedFrameset>:<breasts_lower_leftInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"breastsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+	}
+}

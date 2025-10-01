@@ -935,6 +935,7 @@ function sbq._SpeciesScript:addLocation(name, config)
 		struggleVec = {0,0},
 		interpolateFrom = 0,
 		interpolateTime = 0,
+		interpolateCurTime = 0,
 		subLocations = {}
 	}
 	sbq.Occupants.locations[name] = location.occupancy
@@ -966,6 +967,7 @@ function sbq._SpeciesScript:addLocation(name, config)
 			interpolating = false,
 			interpolateFrom = 0,
 			interpolateTime = 0,
+			interpolateCurTime = 0,
 		}
 		location.occupancy.subLocations[k] = subLocation.occupancy
 		if not subLocation.occupancy.captured then
@@ -1339,9 +1341,9 @@ function sbq._Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
 	if sizeChangeAnims then
 		self.occupancy.interpolateFrom = (self.occupancy.interpolating and self.occupancy.interpolateSize) or prevVisualSize
-		self.occupancy.interpolating = true
 		self.interpolateTime = sbq.SpeciesScript:doAnimations(sizeChangeAnims, sizeTags)
 		self.interpolateCurTime = 0
+		self.occupancy.interpolating = true
 	end
 	self.occupancy.queuedSizeChangeAnims = nil
 end

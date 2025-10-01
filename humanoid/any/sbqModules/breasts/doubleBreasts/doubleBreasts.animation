@@ -1,0 +1,486 @@
+{
+	"globalTagDefaults" : {
+		"breasts_lower_leftFrontFrameset" : "sbq/breastsFront.png",
+		"breasts_lower_leftBackFrameset" : "sbq/breastsBack.png",
+
+		"breasts_lower_rightFrontFrameset" : "sbq/breastsFront.png",
+		"breasts_lower_rightBackFrameset" : "sbq/breastsBack.png",
+
+		"lowerBreastsSize" : "0",
+		"lowerBreastsInterpolateSize" : "0",
+		"breasts_lower_rightSize" : "0",
+		"breasts_lower_rightInterpolateSize" : "0",
+		"breasts_lower_leftSize" : "0",
+		"breasts_lower_leftInterpolateSize" : "0"
+
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+			"breasts_lower_rightState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_lower_rightExpandState" : {
+				"priority" : 2,
+				"default": "idle",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_lower_leftState" : {
+				"default": "idle",
+				"priority" : 1,
+				"states" : {
+					"idle": { "frames": 1, "cycle": 0, "mode": "end" },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"breasts_lower_leftExpandState" : {
+				"priority" : 2,
+				"default": "idle",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" },
+					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"lowerBreastsHiddenState" : {
+				"priority" : 4,
+				"default": "true",
+				"states" : {
+					"true": { "frames": 1, "cycle":0, "mode":"end" },
+					"false": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			}
+		},
+		"parts" : {
+			"breasts_lower" : {
+				"properties": {
+					"centered": true,
+					"anchorPart":"body",
+					"transformationGroups": ["bellyOffset"],
+					"interact" : [0.375,-0.375],
+					"offset" : [0,-0.375]
+				}
+			},
+			"breasts_lower_right" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.79,
+					"flippedZLevel": 11.61,
+
+					"anchorPart": "breasts_lower",
+					"processingDirectives" : "<bodyDirectives>",
+
+					"0-particles_front" : [0.125,-0.5],
+					"0.5-particles_front" : [0,-0.5],
+					"1-particles_front" : [0.125,-0.625],
+
+					"0-particles_back" : [0.5,-0.5],
+					"0.5-particles_back" : [0.5,-0.5],
+					"1-particles_back" : [0.875,-0.625]
+
+				},
+				"partStates": {
+					"breasts_lower_rightState": {
+						"idle": { "properties": {
+							"image": "<breasts_lower_rightFrontFrameset>:<breasts_lower_rightSize>-<breasts_lower_rightState_state>.<breasts_lower_rightState_frame>",
+							"flippedImage": "<breasts_lower_rightBackFrameset>:<breasts_lower_rightSize>-<breasts_lower_rightState_state>.<breasts_lower_rightState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"breasts_lower_rightExpandState" : {
+						"expand": { "properties": {
+							"image": "<breasts_lower_rightFrontFrameset>:<breasts_lower_rightInterpolateSize>-expand",
+							"flippedImage": "<breasts_lower_rightBackFrameset>:<breasts_lower_rightInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"breastsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			},
+			"breasts_lower_left" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.61,
+					"flippedZLevel": 11.79,
+
+					"anchorPart": "breasts_lower",
+					"processingDirectives" : "<bodyDirectives>",
+
+					"0-particles_front" : [0.125,-0.5],
+					"0.5-particles_front" : [0,-0.5],
+					"1-particles_front" : [0.125,-0.625],
+
+					"0-particles_back" : [0.5,-0.5],
+					"0.5-particles_back" : [0.5,-0.5],
+					"1-particles_back" : [0.875,-0.625]
+				},
+				"partStates": {
+					"breasts_lower_leftState": {
+						"idle": { "properties": {
+							"image": "<breasts_lower_leftBackFrameset>:<breasts_lower_leftSize>-<breasts_lower_leftState_state>.<breasts_lower_leftState_frame>",
+							"flippedImage": "<breasts_lower_leftFrontFrameset>:<breasts_lower_leftSize>-<breasts_lower_leftState_state>.<breasts_lower_leftState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"breasts_lower_leftExpandState" : {
+						"expand": { "properties": {
+							"image": "<breasts_lower_leftBackFrameset>:<breasts_lower_leftInterpolateSize>-expand",
+							"flippedImage": "<breasts_lower_leftFrontFrameset>:<breasts_lower_leftInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"breastsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"breasts_lower_right_particles": {"interpolated": false},
+		"breasts_lower_left_particles": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+		"breasts_lower_right_leak_1" : {
+			"emissionRate":1,
+			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
+			// so if they have the same value, they'll all be perfectly synced
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "breasts_lower_right",
+			"transformationGroups" : ["breasts_lower_right_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0.25, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+		"breasts_lower_left_leak_1" : {
+			"emissionRate":1,
+			"emissionRateVariance":0.255,
+			"active" : false,
+			"anchorPart" : "breasts_lower_left",
+			"transformationGroups" : ["breasts_lower_left_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0.25, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+		"breasts_lower_right_leak_2" : {
+			"emissionRate":1.5,
+			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
+			// so if they have the same value, they'll all be perfectly synced
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "breasts_lower_right",
+			"transformationGroups" : ["breasts_lower_right_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0.25, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+		"breasts_lower_left_leak_2" : {
+			"emissionRate":1.5,
+			"emissionRateVariance":0.255,
+			"active" : false,
+			"anchorPart" : "breasts_lower_left",
+			"transformationGroups" : ["breasts_lower_left_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [0.25, -5.0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 0.6,
+						"variance" : {
+							"initialVelocity" : [0.2, 0],
+							"size" : 0.25
+						}
+					}
+				}
+			]
+		},
+
+		"breasts_lower_right_climax" : {
+			"emissionRate":1,
+			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
+			// so if they have the same value, they'll all be perfectly synced
+			"emissionRateVariance":0.25,
+			"active" : false,
+			"anchorPart" : "breasts_lower_right",
+			"transformationGroups" : ["breasts_lower_right_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1.5,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [1, 0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 30,
+						"variance" : {
+							"initialVelocity" : [0.2, 0.5],
+							"size" : 0.25,
+							"timeToLive" : 10
+						}
+					}
+				},
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1.5,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [2, 0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 30,
+						"variance" : {
+							"initialVelocity" : [0.2, 0.5],
+							"size" : 0.25,
+							"timeToLive" : 10
+						}
+					}
+				},
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1.5,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [3, 0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 30,
+						"variance" : {
+							"initialVelocity" : [0.2, 0.5],
+							"size" : 0.25,
+							"timeToLive" : 10
+						}
+					}
+				}
+			]
+		},
+		"breasts_lower_left_climax" : {
+			"emissionRate":1,
+			"emissionRateVariance":0.255,
+			"active" : false,
+			"anchorPart" : "breasts_lower_left",
+			"transformationGroups" : ["breasts_lower_left_particles"],
+			"particles" : [
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1.5,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [1, 0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 30,
+						"variance" : {
+							"initialVelocity" : [0.2, 0.5],
+							"size" : 0.25,
+							"timeToLive" : 10
+						}
+					}
+				},
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1.5,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [2, 0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 30,
+						"variance" : {
+							"initialVelocity" : [0.2, 0.5],
+							"size" : 0.25,
+							"timeToLive" : 10
+						}
+					}
+				},
+				{
+					"particle" : {
+						"type" : "ember",
+						"size" : 1.5,
+						"color" : [255, 255, 255, 230],
+						"fade" : 0.9,
+						"destructionAction" : "shrink",
+						"destructionTime" : 0.8,
+						"position" : [0.0, 0.0],
+						"initialVelocity" : [3, 0],
+						"finalVelocity" : [0, -10],
+						"approach" : [0, 10],
+						"timeToLive" : 30,
+						"variance" : {
+							"initialVelocity" : [0.2, 0.5],
+							"size" : 0.25,
+							"timeToLive" : 10
+						}
+					}
+				}
+			]
+		}
+	}
+}

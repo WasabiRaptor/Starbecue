@@ -1,0 +1,63 @@
+{
+	"animatedParts" : {
+		"stateTypes":{
+			"occupant<slot>Location" : {
+				"states" :{
+					"breasts": { "frames": 1, "cycle": 0, "mode": "end" },
+					"breasts_lower": { "frames": 1, "cycle": 0, "mode": "end" },
+					"cleavage": { "frames": 1, "cycle": 0, "mode": "end" }
+				}
+			},
+			"occupant<slot>State":{
+				"states" : {
+					"breastVore2": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition": "idle" }
+				}
+			}
+		},
+		"parts" : {
+			"occupant<slot>":{
+				"partStates" : {
+					"occupant<slot>Location" :{
+						"breasts" : {"properties":{
+							"anchorPart":"body",
+							"zLevel":-1,
+							"offset" : [0,-0.5]
+						}}
+					},
+					"occupant<slot>State":{
+						"breastVore2" : {
+							"frameProperties" : {
+								"release" : [true],
+								"transforms" : [
+									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
+									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.25]]],
+									[["reset"],	["scale",[-0.5, 0.5]],	["rotateDegrees",45],	["translate",[0.75, -0.5]]],
+									[["reset"],	["scale",[-0.25, 0.25]],	["rotateDegrees",90],	["translate",[0.5, -0.5]]],
+									[["reset"],	["scale",[-0.1, 0.1]],	["rotateDegrees",90],	["translate",[0.25, -0.5]]],
+									[["reset"],	["scale",[-0.1, 0.1]],	["rotateDegrees",90],	["translate",[0, -0.5]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",45],	["translate",[0, -0.5]]],
+									[["reset"],	["scale",[0, 0]],	["rotateDegrees",0],	["translate",[0, -0.5]]]
+								],
+								"hidden":[
+									false,
+									false,
+									false,
+									false,
+									false,
+									true,
+									true,
+									true
+								]
+							},
+							"properties" : {
+								"anchorPart" : "breasts_lower",
+								"zLevel" : 11
+							}
+						}
+
+					}
+				}
+			}
+		}
+	}
+}

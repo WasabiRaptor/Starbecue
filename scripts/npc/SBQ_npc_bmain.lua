@@ -142,9 +142,12 @@ function update(dt)
 						local success, reason = table.unpack(response)
 						if not success then
 							if reason ~= "inactive" then
+								occupantData = nil
 								status.setStatusProperty("sbqOccupantStorage", nil)
 								status.clearPersistentEffects("sbqMissingPred")
 							end
+						else
+							occupantData = nil
 						end
 					end
 				end)

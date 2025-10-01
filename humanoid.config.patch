@@ -173,6 +173,77 @@
 						}
 
 					}
+				},
+				"double": {
+					"includes" : [
+						"/humanoid/any/sbqModules/breasts/doubleBreasts/sbqModule.config",
+						"/humanoid/any/sbqModules/humanoidBase/squishBreasts.sbqModule.config"
+					],
+					"infuseModules" : {
+						"breasts" : {// infuse slot
+							"default" : { // species
+								"animations" : [
+									"/humanoid/any/sbqModules/breasts/infused.animation",
+									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+								],
+								"infuseTags" : {
+									"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_leftInfusedDirectives" : "<directives>",
+									"breasts_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_right_infused",
+									"breasts_left_infused",
+									"breasts_lower_right_infused",
+									"breasts_lower_left_infused"
+								]
+							}
+						},
+						"breasts_right" : { // infuse slot
+							"default" : { // species
+								"animations" : [
+									"/humanoid/any/sbqModules/breasts/infused.animation",
+									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+								],
+								"infuseTags" : {
+									"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_rightInfusedDirectives" : "<directives>",
+									"breasts_lower_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_lower_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_lower_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_right_infused",
+									"breasts_lower_right_infused"
+								]
+							}
+						},
+						"breasts_left" : { // infuse slot
+							"default" : { // species
+								"animations" : [
+									"/humanoid/any/sbqModules/breasts/infused.animation",
+									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+								],
+								"infuseTags" : {
+									"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_leftInfusedDirectives" : "<directives>",
+									"breasts_lower_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_lower_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_lower_leftInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_left_infused",
+									"breasts_lower_left_infused"
+								]
+							}
+						}
+
+					}
 				}
 			},
 			"pussy" : {
@@ -307,10 +378,12 @@
 			],
 			"breastsSelect" : [
 				"disable",
-				"default"
+				"default",
+				"double"
 			],
 			"breastsInfuseSelect" : [
-				"default"
+				"default",
+				"double"
 			],
 			"tailSelect" : [
 				"default",
