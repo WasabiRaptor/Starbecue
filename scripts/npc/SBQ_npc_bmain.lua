@@ -112,7 +112,7 @@ function update(dt)
 
 	old.update(dt)
 
-	if sbq.loungingIn() or sbq.timerList.missingPredCheck then return end
+	if sbq.loungingIn() or sbq.timerRunning("missingPredCheck") or (not entity.id()) then return end
 	local occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData then
 		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")

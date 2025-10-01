@@ -1,11 +1,6 @@
 function patch(config, path)
-	if config.scriptConfig then
-		config.scriptConfig.sbqNPC = config.scriptConfig.sbqNPC or false
-	else
-		config.scriptConfig = { sbqNPC = false }
-	end
 	if config.disableSBQ then return config end
-
+	config.scriptConfig = config.scriptConfig or {}
 	if config.scriptConfig.uniqueId and not (config.scriptConfig.sbqSettingsConfig) then
 		config.scriptConfig.sbqSettingsConfig = {
 			includes = {
