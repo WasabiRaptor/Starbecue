@@ -1,29 +1,28 @@
 {
 	"globalTagDefaults" : {
-		"tailInfusedFrameset" : "",
+		"tailHipsInfusedFrameset" : "",
+		"tailBellyInfusedFrameset" : "",
+		"tailEndInfusedFrameset" : "",
 		"tailInfusedFade" : "",
 		"tailInfusedDirectives" : ""
 	},
 	"animatedParts": {
 		"parts": {
-			"tail_infused": {
+			"tailHips_infused": {
 				"properties": {
 					"centered": true,
 					"zLevel": 9.0011,
-					"anchorPart" : "body",
-					"transformationGroups": [],
-					"processingDirectives" : "<tailInfusedDirectives><tailInfusedFade>",
-					"transforms" : [["reset"]],
-					"offset" : [0,0]
+					"anchorPart" : "tailHips",
+					"processingDirectives" : "<tailInfusedDirectives>"
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<personalityIdle>" } },
-						"duck": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<body_state>.<body_frame>" } },
+						"idle": { "properties": { "image": "<tailHipsInfusedFrameset>:<personalityIdle>" } },
+						"duck": { "properties": { "image": "<tailHipsInfusedFrameset>:<body_state>.<body_frame>" } },
 						"sit" : "duck",
 						"lay" : "duck",
 						"walk" : "duck",
-						"run": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-run.<body_frame>" } },
+						"run": { "properties": { "image": "<tailHipsInfusedFrameset>:run.<body_frame>" } },
 						"runbackwards" : "run",
 						"jump" : "duck",
 						"fall" : "duck",
@@ -31,77 +30,145 @@
 						"swimIdle" : "duck"
 					},
 					"bodyDance" : {
-						"dance": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"dance": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"idle.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"idle.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"idle.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"idle.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"idle.5": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"idle.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"idle.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"idle.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"idle.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"idle.5": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"walk.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.5": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.6": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.7": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"walk.8": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"walk.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.5": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.6": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.7": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"walk.8": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"run.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.5": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.6": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.7": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"run.8": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"run.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.5": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.6": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.7": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"run.8": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"hidden.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"hidden.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"jump.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"jump.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"jump.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"jump.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"jump.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"jump.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"jump.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"jump.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"fall.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"fall.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"fall.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"fall.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"fall.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"fall.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"fall.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"fall.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"swimIdle.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swimIdle.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"swimIdle.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swimIdle.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"swim.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swim.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swim.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swim.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swim.5": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swim.6": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"swim.7": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"swim.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swim.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swim.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swim.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swim.5": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swim.6": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"swim.7": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"sit.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"lay.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"sit.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"lay.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
-						"idleMelee": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"duckMelee": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
+						"idleMelee": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"duckMelee": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
 
 						// doubt they'll see use but you never know
-						"climb.1": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.2": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.3": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.4": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.5": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.6": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.7": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } },
-						"climb.8": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<bodyDanceFrame>" } }
+						"climb.1": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.2": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.3": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.4": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.5": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.6": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.7": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } },
+						"climb.8": { "properties": { "image": "<tailHipsInfusedFrameset>:<bodyDanceFrame>" } }
 
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<tailInfusedFrameset>:<tailSize>-<personalityIdle><portraitMask>" } },
+						"head": { "properties": { "image": "<tailHipsInfusedFrameset>:<personalityIdle><portraitMask>" } },
 						"bust" : "head"
 					}
 				}
+			},
+			"tailBelly_infused" : {
+				"properties" : {
+					"anchorPart" : "tailBelly",
+					"centered": true,
+					"zLevel": 8.01,
+					"processingDirectives" : "<tailInfusedDirectives>"
+				},
+				"partStates" : {
+					"tailState": {
+						"idle": { "properties": { "image" : "<tailBellyInfusedFrameset>:<tailSize>-idle.1" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"portraitMode" : {
+						"head": { "properties": { } },
+						"bust" : "head"
+					}
+				}
+
+			},
+			"tailEnd_infused" : {
+				"properties" : {
+					"anchorPart" : "tailEnd",
+					"centered": true,
+					"zLevel": 7.01,
+					"processingDirectives" : "<tailInfusedDirectives>"
+				},
+				"partStates" : {
+					"tailState": {
+						"idle": { "properties": { "image" : "<tailEndInfusedFrameset>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"portraitMode" : {
+						"head": { "properties": { } },
+						"bust" : "head"
+					}
+				}
+
 			}
 		}
 	},
