@@ -34,8 +34,7 @@
 					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
-					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" }
 				}
 			},
 			"breasts_rightExpandState" : {
@@ -43,10 +42,7 @@
 				"default": "idle",
 				"states" : {
 					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
-					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			},
 			"breasts_leftState" : {
@@ -67,8 +63,7 @@
 					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
 					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
-					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" }
 				}
 			},
 			"breasts_leftExpandState" : {
@@ -76,10 +71,7 @@
 				"default": "idle",
 				"states" : {
 					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
-					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			},
 			"breastsHiddenState" : {

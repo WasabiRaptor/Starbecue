@@ -1,22 +1,22 @@
 {
 	"globalTagDefaults" : {
-		"breasts_lower_leftFrontFrameset" : "sbq/breastsFront.png",
-		"breasts_lower_leftBackFrameset" : "sbq/breastsBack.png",
+		"breasts_secondary_leftFrontFrameset" : "sbq/breastsFront.png",
+		"breasts_secondary_leftBackFrameset" : "sbq/breastsBack.png",
 
-		"breasts_lower_rightFrontFrameset" : "sbq/breastsFront.png",
-		"breasts_lower_rightBackFrameset" : "sbq/breastsBack.png",
+		"breasts_secondary_rightFrontFrameset" : "sbq/breastsFront.png",
+		"breasts_secondary_rightBackFrameset" : "sbq/breastsBack.png",
 
 		"lowerBreastsSize" : "0",
 		"lowerBreastsInterpolateSize" : "0",
-		"breasts_lower_rightSize" : "0",
-		"breasts_lower_rightInterpolateSize" : "0",
-		"breasts_lower_leftSize" : "0",
-		"breasts_lower_leftInterpolateSize" : "0"
+		"breasts_secondary_rightSize" : "0",
+		"breasts_secondary_rightInterpolateSize" : "0",
+		"breasts_secondary_leftSize" : "0",
+		"breasts_secondary_leftInterpolateSize" : "0"
 
 	},
 	"animatedParts" : {
 		"stateTypes" : {
-			"breasts_lower_rightState" : {
+			"breasts_secondary_rightState" : {
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
@@ -38,18 +38,15 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"breasts_lower_rightExpandState" : {
+			"breasts_secondary_rightExpandState" : {
 				"priority" : 2,
 				"default": "idle",
 				"states" : {
 					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
-					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			},
-			"breasts_lower_leftState" : {
+			"breasts_secondary_leftState" : {
 				"default": "idle",
 				"priority" : 1,
 				"states" : {
@@ -71,15 +68,12 @@
 					"none": { "frames": 1, "cycle": 0, "mode": "end" }
 				}
 			},
-			"breasts_lower_leftExpandState" : {
+			"breasts_secondary_leftExpandState" : {
 				"priority" : 2,
 				"default": "idle",
 				"states" : {
 					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
-					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
-					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
-					"idle": { "frames": 1, "cycle":0, "mode":"end" },
-					"none": { "frames": 1, "cycle": 0, "mode": "end" }
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
 				}
 			},
 			"lowerBreastsHiddenState" : {
@@ -92,22 +86,22 @@
 			}
 		},
 		"parts" : {
-			"breasts_lower" : {
+			"breasts_secondary" : {
 				"properties": {
 					"centered": true,
 					"anchorPart":"body",
-					"transformationGroups": ["bellyOffset"],
+					"transformationGroups": ["bellyOffset", "movementOffset"],
 					"interact" : [0.375,-0.375],
 					"offset" : [0,-0.375]
 				}
 			},
-			"breasts_lower_right" : {
+			"breasts_secondary_right" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.79,
-					"flippedZLevel": 11.61,
+					"flippedZLevel": 11.59,
 
-					"anchorPart": "breasts_lower",
+					"anchorPart": "breasts_secondary",
 					"processingDirectives" : "<bodyDirectives>",
 
 					"0-particles_front" : [0.125,-0.5],
@@ -120,10 +114,10 @@
 
 				},
 				"partStates": {
-					"breasts_lower_rightState": {
+					"breasts_secondary_rightState": {
 						"idle": { "properties": {
-							"image": "<breasts_lower_rightFrontFrameset>:<breasts_lower_rightSize>-<breasts_lower_rightState_state>.<breasts_lower_rightState_frame>",
-							"flippedImage": "<breasts_lower_rightBackFrameset>:<breasts_lower_rightSize>-<breasts_lower_rightState_state>.<breasts_lower_rightState_frame>"
+							"image": "<breasts_secondary_rightFrontFrameset>:<breasts_secondary_rightSize>-<breasts_secondary_rightState_state>.<breasts_secondary_rightState_frame>",
+							"flippedImage": "<breasts_secondary_rightBackFrameset>:<breasts_secondary_rightSize>-<breasts_secondary_rightState_state>.<breasts_secondary_rightState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -142,10 +136,10 @@
 						"s_down_hold" : "idle",
 						"s_down_release" : "idle"
 					},
-					"breasts_lower_rightExpandState" : {
+					"breasts_secondary_rightExpandState" : {
 						"expand": { "properties": {
-							"image": "<breasts_lower_rightFrontFrameset>:<breasts_lower_rightInterpolateSize>-expand",
-							"flippedImage": "<breasts_lower_rightBackFrameset>:<breasts_lower_rightInterpolateSize>-expand"
+							"image": "<breasts_secondary_rightFrontFrameset>:<breasts_secondary_rightInterpolateSize>-expand",
+							"flippedImage": "<breasts_secondary_rightBackFrameset>:<breasts_secondary_rightInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -158,13 +152,13 @@
 					}
 				}
 			},
-			"breasts_lower_left" : {
+			"breasts_secondary_left" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 11.61,
+					"zLevel": 11.59,
 					"flippedZLevel": 11.79,
 
-					"anchorPart": "breasts_lower",
+					"anchorPart": "breasts_secondary",
 					"processingDirectives" : "<bodyDirectives>",
 
 					"0-particles_front" : [0.125,-0.5],
@@ -176,10 +170,10 @@
 					"1-particles_back" : [0.875,-0.625]
 				},
 				"partStates": {
-					"breasts_lower_leftState": {
+					"breasts_secondary_leftState": {
 						"idle": { "properties": {
-							"image": "<breasts_lower_leftBackFrameset>:<breasts_lower_leftSize>-<breasts_lower_leftState_state>.<breasts_lower_leftState_frame>",
-							"flippedImage": "<breasts_lower_leftFrontFrameset>:<breasts_lower_leftSize>-<breasts_lower_leftState_state>.<breasts_lower_leftState_frame>"
+							"image": "<breasts_secondary_leftBackFrameset>:<breasts_secondary_leftSize>-<breasts_secondary_leftState_state>.<breasts_secondary_leftState_frame>",
+							"flippedImage": "<breasts_secondary_leftFrontFrameset>:<breasts_secondary_leftSize>-<breasts_secondary_leftState_state>.<breasts_secondary_leftState_frame>"
 							} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
@@ -198,10 +192,10 @@
 						"s_down_hold" : "idle",
 						"s_down_release" : "idle"
 					},
-					"breasts_lower_leftExpandState" : {
+					"breasts_secondary_leftExpandState" : {
 						"expand": { "properties": {
-							"image": "<breasts_lower_leftBackFrameset>:<breasts_lower_leftInterpolateSize>-expand",
-							"flippedImage": "<breasts_lower_leftFrontFrameset>:<breasts_lower_leftInterpolateSize>-expand"
+							"image": "<breasts_secondary_leftBackFrameset>:<breasts_secondary_leftInterpolateSize>-expand",
+							"flippedImage": "<breasts_secondary_leftFrontFrameset>:<breasts_secondary_leftInterpolateSize>-expand"
 							} },
 						"eat" : "expand"
 					},
@@ -217,21 +211,21 @@
 		}
 	},
 	"transformationGroups" : {
-		"breasts_lower_right_particles": {"interpolated": false},
-		"breasts_lower_left_particles": {"interpolated": false}
+		"breasts_secondary_right_particles": {"interpolated": false},
+		"breasts_secondary_left_particles": {"interpolated": false}
 	},
 	"sounds" : {
 
 	},
 	"particleEmitters" : {
-		"breasts_lower_right_leak_1" : {
+		"breasts_secondary_right_leak_1" : {
 			"emissionRate":1,
 			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
 			// so if they have the same value, they'll all be perfectly synced
 			"emissionRateVariance":0.25,
 			"active" : false,
-			"anchorPart" : "breasts_lower_right",
-			"transformationGroups" : ["breasts_lower_right_particles"],
+			"anchorPart" : "breasts_secondary_right",
+			"transformationGroups" : ["breasts_secondary_right_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -254,12 +248,12 @@
 				}
 			]
 		},
-		"breasts_lower_left_leak_1" : {
+		"breasts_secondary_left_leak_1" : {
 			"emissionRate":1,
 			"emissionRateVariance":0.255,
 			"active" : false,
-			"anchorPart" : "breasts_lower_left",
-			"transformationGroups" : ["breasts_lower_left_particles"],
+			"anchorPart" : "breasts_secondary_left",
+			"transformationGroups" : ["breasts_secondary_left_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -283,14 +277,14 @@
 			]
 		},
 
-		"breasts_lower_right_leak_2" : {
+		"breasts_secondary_right_leak_2" : {
 			"emissionRate":1.5,
 			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
 			// so if they have the same value, they'll all be perfectly synced
 			"emissionRateVariance":0.25,
 			"active" : false,
-			"anchorPart" : "breasts_lower_right",
-			"transformationGroups" : ["breasts_lower_right_particles"],
+			"anchorPart" : "breasts_secondary_right",
+			"transformationGroups" : ["breasts_secondary_right_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -313,12 +307,12 @@
 				}
 			]
 		},
-		"breasts_lower_left_leak_2" : {
+		"breasts_secondary_left_leak_2" : {
 			"emissionRate":1.5,
 			"emissionRateVariance":0.255,
 			"active" : false,
-			"anchorPart" : "breasts_lower_left",
-			"transformationGroups" : ["breasts_lower_left_particles"],
+			"anchorPart" : "breasts_secondary_left",
+			"transformationGroups" : ["breasts_secondary_left_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -342,14 +336,14 @@
 			]
 		},
 
-		"breasts_lower_right_climax" : {
+		"breasts_secondary_right_climax" : {
 			"emissionRate":1,
 			// make sure the emission rate variance is different between each particle since it seems the RNG isn't advanced until the next frame proper
 			// so if they have the same value, they'll all be perfectly synced
 			"emissionRateVariance":0.25,
 			"active" : false,
-			"anchorPart" : "breasts_lower_right",
-			"transformationGroups" : ["breasts_lower_right_particles"],
+			"anchorPart" : "breasts_secondary_right",
+			"transformationGroups" : ["breasts_secondary_right_particles"],
 			"particles" : [
 				{
 					"particle" : {
@@ -413,12 +407,12 @@
 				}
 			]
 		},
-		"breasts_lower_left_climax" : {
+		"breasts_secondary_left_climax" : {
 			"emissionRate":1,
 			"emissionRateVariance":0.255,
 			"active" : false,
-			"anchorPart" : "breasts_lower_left",
-			"transformationGroups" : ["breasts_lower_left_particles"],
+			"anchorPart" : "breasts_secondary_left",
+			"transformationGroups" : ["breasts_secondary_left_particles"],
 			"particles" : [
 				{
 					"particle" : {

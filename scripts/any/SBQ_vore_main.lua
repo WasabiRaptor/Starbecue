@@ -654,9 +654,12 @@ function sbq._State:actionFailed(name, action, target, failReason, ...)
 	sbq.debugLogWarn(("Failed Action '%s' on target '%s' with arguments '%s' with reason '%s'"):format(name, target, sb.printJson({...}), failReason))
 	-- sbq.logInfo({name, target, reason},2)
 	if not action then return false, failReason or false, 0, ... end
-	local cooldown = action.failureCooldown or 0
 	action.onCooldown = true
-	local successfulFail, result2  = false, false
+	local successfulFail, result2 = false, false
+	local success, reason, cooldown = false, failReason, action.failureCooldown or 0
+	if action.failureAction then
+		success, reason, cooldown = self:tryAction(action.failureAction, target, ...)
+	end
 	if action.failureScript and self[action.failureScript] then successfulFail, result2 = self[action.failureScript](self, name, action, target, failReason, ...) end
 	sbq.timer(name.."Cooldown", cooldown, function (...)
 		action.onCooldown = false
@@ -665,9 +668,9 @@ function sbq._State:actionFailed(name, action, target, failReason, ...)
 		end
 	end, name, action, target, result2, ...)
 	if type(result2) ~= "function" then
-		return false, failReason or false, cooldown or 0, successfulFail or false, result2 or false, ...
+		return success, reason or false, cooldown or 0, successfulFail or false, result2 or false, ...
 	end
-	return false, failReason or false, cooldown or 0, successfulFail or false, false, ...
+	return success, reason or false, cooldown or 0, successfulFail or false, false, ...
 end
 
 function sbq._State:actionAvailable(name, target, ...)
@@ -1817,7 +1820,6 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 		self.locationName = location.name
 		table.insert(location.occupancy.list, self)
 		location:markSizeDirty()
-		sbq.Occupants.queueHudRefresh = true
 	end
 	if not location then return self:remove("invalidLocation") end
 	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.settings:matches(location.activeSettings, true)) or location.disabled) then return self:remove("disabledLocation") end
@@ -1912,6 +1914,14 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 			crewPred = following and (world.entityType(eid) == "player")
 		end
 	end
+	local icon = location.icon
+	local indicatorIcon
+	if self.flags.infused and self.flags.infuseType and location.infusedIcon then
+		indicatorIcon = location.infusedIcon
+	elseif self.flags.digested or self.flags.digesting then
+		indicatorIcon = location.digestedIcon
+	end
+
 	self:sendEntityMessage(
 		"sbqScriptPaneMessage",
 		"sbqRefreshLocationData",
@@ -1922,6 +1932,9 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 			predUUID = entity.uniqueId(),
 			crewPred = crewPred,
 			parentUUID = parent,
+
+			icon = icon,
+			indicatorIcon = indicatorIcon,
 
 			time = self.time,
 			struggleTime = self.struggleTime,
@@ -1942,12 +1955,22 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.newOccupant then
 		sbq.Occupants.queueHudRefresh = true
 	else
-		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, sb.jsonMerge(self.flags, {
+		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, {
 			time = self.time,
+			struggleTime = self.struggleTime,
+			struggleCount = self.struggleCount,
+
+			locationName = self.locationName,
 			location = self.location,
 			subLocation = self.subLocation,
-			locationName = self.locationName
-		}))
+
+			size = self.size,
+			sizeMultiplier = self.sizeMultiplier,
+
+			flags = self.flags,
+			locationStore = self.locationStore,
+			locationSettings = self.locationSettings
+		})
 	end
 end
 

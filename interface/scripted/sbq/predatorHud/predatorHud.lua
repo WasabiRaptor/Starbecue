@@ -52,25 +52,24 @@ function init()
 			sbq.refreshPortrait(entityId)
 		end
 	end)
-	message.setHandler("sbqHudRefreshPortrait", function(_, _, entityId, flags)
+	message.setHandler("sbqHudRefreshPortrait", function(_, _, entityId, newData)
 		if not world.entityExists(entityId) then return end
 		local occupant = sbq.Occupants.entityId[tostring(entityId)]
 		if not occupant then return end
+		for k, v in pairs(newData) do
+			occupant[k] = v
+		end
 		sbq.refreshPortrait(entityId)
-		if not flags then return end
-		occupant.flags = flags
-		occupant.location = flags.location
-		occupant.subLocation = flags.subLocation
 		local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
 		local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
 		if ActionButton then
 			ActionButton.toolTip = occupant.flags.locationName
 		end
 		if LocationIcon then
-			if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
-				LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
-			elseif root.assetOrigin("/interface/scripted/sbq/"..occupant.location..".png") then
-				LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
+			if occupant.flags.infused and occupant.flags.infuseType and sbq.locations[occupant.location].infusedIcon then
+				LocationIcon:setFile(sbq.locations[occupant.location].infusedIcon)
+			elseif sbq.locations[occupant.location].icon then
+				LocationIcon:setFile(sbq.locations[occupant.location].icon)
 			end
 			LocationIcon:draw()
 		end
@@ -132,11 +131,13 @@ function addOccupantPortraitSlot(occupant)
 	sbq.refreshPortrait(occupant.entityId)
 	local ActionButton = _ENV[occupant.entityId .. "ActionButton"]
 	local LocationIcon = _ENV[occupant.entityId .. "LocationIcon"]
-	if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/"..occupant.flags.infuseType..".png") then
-		LocationIcon:setFile("/interface/scripted/sbq/"..occupant.flags.infuseType..".png")
-	elseif root.assetOrigin("/interface/scripted/sbq/"..occupant.location..".png") then
-		LocationIcon:setFile("/interface/scripted/sbq/"..occupant.location..".png")
+
+	if occupant.flags.infused and occupant.flags.infuseType and sbq.locations[occupant.location].infusedIcon then
+		LocationIcon:setFile(sbq.locations[occupant.location].infusedIcon)
+	elseif sbq.locations[occupant.location].icon then
+		LocationIcon:setFile(sbq.locations[occupant.location].icon)
 	end
+
 	ActionButton.toolTip = occupant.locationName
 	function ActionButton:onClick()
 		local entityType = world.entityType(occupant.entityId)
@@ -183,10 +184,10 @@ function addCapturedPortraitSlot(occupant)
 	local ActionButton = _ENV[occupant.captureId .. "ActionButton"]
 	local LocationIcon = _ENV[occupant.captureId .. "LocationIcon"]
 	local canvasWidget = _ENV[occupant.captureId .. "PortraitCanvas"]
-	if occupant.flags.infused and occupant.flags.infuseType and root.assetOrigin("/interface/scripted/sbq/" .. occupant.flags.infuseType .. ".png") then
-		LocationIcon:setFile("/interface/scripted/sbq/" .. occupant.flags.infuseType .. ".png")
-	elseif root.assetOrigin("/interface/scripted/sbq/" .. occupant.location .. ".png") then
-		LocationIcon:setFile("/interface/scripted/sbq/" .. occupant.location .. ".png")
+	if occupant.flags.infused and occupant.flags.infuseType and sbq.locations[occupant.location].infusedIcon then
+		LocationIcon:setFile(sbq.locations[occupant.location].infusedIcon)
+	elseif sbq.locations[occupant.location].icon then
+		LocationIcon:setFile(sbq.locations[occupant.location].icon)
 	end
 	ActionButton.toolTip = occupant.locationName
 	function ActionButton:onClick()
