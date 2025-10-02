@@ -1,0 +1,59 @@
+{
+	"globalTagDefaults" : {
+		"bellyCosmetic<slot>Frameset" : ""
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"belly_Cosmetic<slot>" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.71,
+					"anchorPart": "belly",
+					"navelInteract" : [0.25,-1.25],
+					"absorbInteract" : [-0.25,-1.25],
+					"processingDirectives" : "<chestCosmetic<slot>Directives>"
+				},
+				"partStates": {
+					"bellyState": {
+						"idle": { "properties": { "image": "<bellyCosmetic<slot>Frameset>:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"bellyExpandState" : {
+						"expand": { "properties": { "image": "<bellyCosmetic<slot>Frameset>:<bellyInterpolateSize>-expand" } },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			}
+
+		}
+	},
+	"transformationGroups" : {
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

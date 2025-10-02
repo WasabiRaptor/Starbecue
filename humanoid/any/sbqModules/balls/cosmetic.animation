@@ -1,0 +1,117 @@
+{
+	"globalTagDefaults" : {
+		"balls_leftBackCosmetic<slot>Frameset" : "",
+		"balls_leftFrontCosmetic<slot>Frameset" : "",
+
+		"balls_rightFrontCosmetic<slot>Frameset" : "",
+		"balls_rightBackCosmetic<slot>Frameset" : ""
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"balls_right_Cosmetic<slot>" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.31,
+					"flippedZLevel": 11.21,
+					"anchorPart": "balls_right",
+					"processingDirectives" : "<legsCosmetic<slot>Directives>"
+				},
+				"partStates": {
+					"balls_rightState": {
+						"idle": { "properties": {
+							"image": "<balls_rightFrontCosmetic<slot>Frameset>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>",
+							"flippedImage": "<balls_rightBackCosmetic<slot>Frameset>:<balls_rightSize>-<balls_rightState_state>.<balls_rightState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"balls_rightExpandState" : {
+						"expand": { "properties": {
+							"image": "<balls_rightFrontCosmetic<slot>Frameset>:<balls_rightInterpolateSize>-expand",
+							"flippedImage": "<balls_rightBackCosmetic<slot>Frameset>:<balls_rightInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"ballsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			},
+			"balls_left_Cosmetic<slot>" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.21,
+					"flippedZLevel": 11.31,
+					"anchorPart": "balls_left",
+					"processingDirectives" : "<legsCosmetic<slot>Directives>"
+				},
+				"partStates": {
+					"balls_leftState": {
+						"idle": { "properties": {
+							"image": "<balls_leftBackCosmetic<slot>Frameset>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>",
+							"flippedImage": "<balls_leftFrontCosmetic<slot>Frameset>:<balls_leftSize>-<balls_leftState_state>.<balls_leftState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"balls_leftExpandState" : {
+						"expand": { "properties": {
+							"image": "<balls_leftBackCosmetic<slot>Frameset>:<balls_leftInterpolateSize>-expand",
+							"flippedImage": "<balls_leftFrontCosmetic<slot>Frameset>:<balls_leftInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"ballsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

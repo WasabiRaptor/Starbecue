@@ -1,0 +1,117 @@
+{
+	"globalTagDefaults" : {
+		"breasts_leftFrontCosmetic<slot>Frameset" : "",
+		"breasts_leftBackCosmetic<slot>Frameset" : "",
+		"breasts_rightFrontCosmetic<slot>Frameset" : "",
+		"breasts_rightBackCosmetic<slot>Frameset" : ""
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"breasts_right_Cosmetic<slot>" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.801,
+					"flippedZLevel": 11.601,
+
+					"anchorPart": "breasts_right",
+					"processingDirectives" : "<chestCosmetic<slot>Directives>"
+				},
+				"partStates": {
+					"breasts_rightState": {
+						"idle": { "properties": {
+							"image": "<breasts_rightFrontCosmetic<slot>Frameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
+							"flippedImage": "<breasts_rightBackCosmetic<slot>Frameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"breasts_rightExpandState" : {
+						"expand": { "properties": {
+							"image": "<breasts_rightFrontCosmetic<slot>Frameset>:<breasts_rightInterpolateSize>-expand",
+							"flippedImage": "<breasts_rightBackCosmetic<slot>Frameset>:<breasts_rightInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"breastsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			},
+			"breasts_left_Cosmetic<slot>" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.601,
+					"flippedZLevel": 11.801,
+
+					"anchorPart": "breasts_left",
+					"processingDirectives" : "<chestCosmetic<slot>Directives>"
+				},
+				"partStates": {
+					"breasts_leftState": {
+						"idle": { "properties": {
+							"image": "<breasts_leftBackCosmetic<slot>Frameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
+							"flippedImage": "<breasts_leftFrontCosmetic<slot>Frameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
+							} },
+						"s_front" : "idle",
+						"s_front_press" : "idle",
+						"s_front_hold" : "idle",
+						"s_front_release" : "idle",
+						"s_back" : "idle",
+						"s_back_press" : "idle",
+						"s_back_hold" : "idle",
+						"s_back_release" : "idle",
+						"s_up" : "idle",
+						"s_up_press" : "idle",
+						"s_up_hold" : "idle",
+						"s_up_release" : "idle",
+						"s_down" : "idle",
+						"s_down_press" : "idle",
+						"s_down_hold" : "idle",
+						"s_down_release" : "idle"
+					},
+					"breasts_leftExpandState" : {
+						"expand": { "properties": {
+							"image": "<breasts_leftBackCosmetic<slot>Frameset>:<breasts_leftInterpolateSize>-expand",
+							"flippedImage": "<breasts_leftFrontCosmetic<slot>Frameset>:<breasts_leftInterpolateSize>-expand"
+							} },
+						"eat" : "expand"
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					},
+					"breastsHiddenState" : {
+						"true": { "properties": {} }
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+	}
+}
