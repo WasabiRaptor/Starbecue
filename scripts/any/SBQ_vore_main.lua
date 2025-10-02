@@ -935,13 +935,37 @@ function sbq._SpeciesScript:addLocation(name, config)
 		addedSize = 0,
 		addedCount = 0,
 		visualSize = (location.struggleSizes or {})[1] or 0,
+		visualCount = (location.struggleSizes or {})[1] or 0,
 		interpolating = false,
 		struggleVec = {0,0},
+		interpolateSize = 0,
 		interpolateFrom = 0,
+		interpolateTo = 0,
 		interpolateTime = 0,
 		interpolateCurTime = 0,
 		subLocations = {}
 	}
+	location.occupancy.interpolateSize = sbq.getClosestValue(
+		location.occupancy.interpolateSize,
+		location.interpolateSizes or location.struggleSizes or {0}
+	)
+	location.occupancy.interpolateFrom = sbq.getClosestValue(
+		location.occupancy.interpolateFrom,
+		location.interpolateSizes or location.struggleSizes or {0}
+	)
+	location.occupancy.interpolateTo = sbq.getClosestValue(
+		location.occupancy.interpolateTo,
+		location.interpolateSizes or location.struggleSizes or {0}
+	)
+	location.occupancy.visualSize = sbq.getClosestValue(
+		location.occupancy.visualSize,
+		location.struggleSizes or {0}
+	)
+	location.occupancy.visualCount = sbq.getClosestValue(
+		location.occupancy.visualCount,
+		location.struggleSizes or {0}
+	)
+
 	sbq.Occupants.locations[name] = location.occupancy
 	if not location.occupancy.captured then
 		location.occupancy.captured = jarray()
@@ -969,7 +993,10 @@ function sbq._SpeciesScript:addLocation(name, config)
 			visualSize = (location.struggleSizes or {})[1] or 0,
 			visualCount = (location.struggleSizes or {})[1] or 0,
 			interpolating = false,
+			struggleVec = {0,0},
+			interpolateSize = 0,
 			interpolateFrom = 0,
+			interpolateTo = 0,
 			interpolateTime = 0,
 			interpolateCurTime = 0,
 		}
@@ -984,6 +1011,27 @@ function sbq._SpeciesScript:addLocation(name, config)
 		end
 
 		setmetatable(subLocation, { __index = location })
+
+		subLocation.occupancy.interpolateSize = sbq.getClosestValue(
+			subLocation.occupancy.interpolateSize,
+			subLocation.interpolateSizes or subLocation.struggleSizes or {0}
+		)
+		subLocation.occupancy.interpolateFrom = sbq.getClosestValue(
+			subLocation.occupancy.interpolateFrom,
+			subLocation.interpolateSizes or subLocation.struggleSizes or {0}
+		)
+		subLocation.occupancy.interpolateTo = sbq.getClosestValue(
+			subLocation.occupancy.interpolateTo,
+			subLocation.interpolateSizes or subLocation.struggleSizes or {0}
+		)
+		subLocation.occupancy.visualSize = sbq.getClosestValue(
+			subLocation.occupancy.visualSize,
+			subLocation.struggleSizes or {0}
+		)
+		subLocation.occupancy.visualCount = sbq.getClosestValue(
+			subLocation.occupancy.visualCount,
+			subLocation.struggleSizes or {0}
+		)
 	end
 
 	location.settings = {}
@@ -1238,10 +1286,10 @@ function sbq._Location:updateOccupancy(dt)
 		self.occupancy.working = false -- no longer working, clear this so it can be updated again
 	end
 	if self.occupancy.interpolating then
-		self.interpolateCurTime = self.interpolateCurTime + dt
+		self.occupancy.interpolateCurTime = self.occupancy.interpolateCurTime + dt
 		self.occupancy.interpolateSize = sbq.getClosestValue(
 			interp.linear(
-				self.interpolateCurTime / self.interpolateTime,
+				self.occupancy.interpolateCurTime / self.occupancy.interpolateTime,
 				self.occupancy.interpolateFrom,
 				self.occupancy.visualSize
 			),
@@ -1345,8 +1393,8 @@ function sbq._Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	local sizeChangeAnims = self.occupancy.queuedSizeChangeAnims or self.sizeChangeAnims
 	if sizeChangeAnims then
 		self.occupancy.interpolateFrom = (self.occupancy.interpolating and self.occupancy.interpolateSize) or prevVisualSize
-		self.interpolateTime = sbq.SpeciesScript:doAnimations(sizeChangeAnims, sizeTags)
-		self.interpolateCurTime = 0
+		self.occupancy.interpolateTime = sbq.SpeciesScript:doAnimations(sizeChangeAnims, sizeTags)
+		self.occupancy.interpolateCurTime = 0
 		self.occupancy.interpolating = true
 	end
 	self.occupancy.queuedSizeChangeAnims = nil
