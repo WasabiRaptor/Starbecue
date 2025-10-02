@@ -629,14 +629,14 @@ function default:digested(name, action, target, item, digestType, drop, ...)
 			occupant.flags.digested = true
 			occupant:refreshLocation()
 		end
-		if item then
+		if item and item.parameters then
 			item.parameters.predName = sbq.entityName(entity.id())
 			item.parameters.predUuid = entity.uniqueId()
 			item.parameters.predPronouns = sbq.getPublicProperty(entity.id(), "sbqPronouns")
 			if humanoid then
 				item.parameters.predIdentity = sbq.humanoidIdentity()
 			end
-			if item.name and sbq.settings.read[digestType.."Drops"] and drop then
+			if item.name and sbq.settings:get(digestType.."Drops") and drop then
 				world.spawnItem(item, position)
 			end
 			-- we can drop condoms and milk for monsters, but if we don't have NPC data theres no reason to preserve it

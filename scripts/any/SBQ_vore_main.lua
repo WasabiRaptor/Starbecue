@@ -95,17 +95,18 @@ function sbq.update(dt)
 		sbq.SpeciesScript:update(dt)
 		sbq.SpeciesScript.state:update(dt)
 		if sbq.timer("stripping", 5) then sbq.SpeciesScript:refreshStripping() end
+		local flip = animator.flipped() and "_flipped" or ""
 		for k, v in pairs(sbq.voreConfig.transformGroupAnimProperties or {}) do
-			local transformGroup = animator.applyPartTags("body",k)
-			local part = animator.applyPartTags("body",v.part)
+			local transformGroup = animator.applyPartTags("anchor",k)
+			local part = animator.applyPartTags("anchor",v.part)
 			if v.translate then
-				sbq_animator.setTranslation(transformGroup, animator.partProperty(part, animator.applyPartTags("body",v.translate)))
+				sbq_animator.setTranslation(transformGroup, animator.partProperty(part, animator.applyPartTags("anchor",v.translate..flip)))
 			end
 			if v.rotate then
-				sbq_animator.setRotation(transformGroup, animator.partProperty(part, animator.applyPartTags("body",v.rotate)), animator.partProperty("rotationCenter"))
+				sbq_animator.setRotation(transformGroup, animator.partProperty(part, animator.applyPartTags("anchor",v.rotate..flip)), animator.partProperty("rotationCenter"))
 			end
 			if v.scale then
-				sbq_animator.setScale(transformGroup, animator.partProperty(part, animator.applyPartTags("body",v.scale)), animator.partProperty("scaleCenter"))
+				sbq_animator.setScale(transformGroup, animator.partProperty(part, animator.applyPartTags("anchor",v.scale..flip)), animator.partProperty("scaleCenter"))
 			end
 		end
 	end
@@ -723,7 +724,7 @@ function sbq._State:doAnimations(animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = animator.applyPartTags("body", sb.replaceTags(k, tags))
+		local state = animator.applyPartTags("anchor", sb.replaceTags(k, tags))
 		local anim = v
 		local force = false
 		local reversed = false
@@ -731,7 +732,7 @@ function sbq._State:doAnimations(animations, tags, target)
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = animator.applyPartTags("body",sb.replaceTags(anim, tags))
+		anim = animator.applyPartTags("anchor",sb.replaceTags(anim, tags))
 		if animator.hasState(state, anim) then
 			if (not waitForEnd) or (animator.animationStateTimer(state) >= animator.stateCycle(state)) then
 				animator.setAnimationState(state, anim, force, reversed)
@@ -750,12 +751,12 @@ function sbq._State:checkAnimations(activeOnly, animations, tags, target)
 	tags = self:animationTags(tags, target)
 	local longest = 0
 	for k, v in pairs(animations or {}) do
-		local state = animator.applyPartTags("body",sb.replaceTags(k, tags))
+		local state = animator.applyPartTags("anchor",sb.replaceTags(k, tags))
 		local anim = v
 		if type(v) == "table" then
 			anim, force, reversed, waitForEnd = table.unpack(v)
 		end
-		anim = animator.applyPartTags("body", sb.replaceTags(anim, tags))
+		anim = animator.applyPartTags("anchor", sb.replaceTags(anim, tags))
 		if animator.hasState(state, anim) then
 			if (animator.animationState(state) == "anim") then
 				longest = math.max(longest,
@@ -1250,7 +1251,7 @@ function sbq._Location:updateOccupancy(dt)
 			self.occupancy.interpolating = false
 			self.occupancy.interpolateFrom = self.occupancy.visualSize
 		end
-		animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
+		animator.setGlobalTag(animator.applyPartTags("anchor",self.tag) .. "InterpolateSize", tostring(self.occupancy.interpolateSize))
 	end
 	local fade = string.format("%02x", math.floor(self.settings.infusedFade * 255))
 	if (fade == "fe") then -- so theres no accidental glowy
@@ -1326,10 +1327,10 @@ end
 
 function sbq._Location:doSizeChangeAnims(prevVisualSize, prevCount)
 	self.occupancy.forceSizeRefresh = false
-	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "Count", tostring(self.occupancy.visualCount))
-	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "Size", tostring(self.occupancy.visualSize))
-	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "PrevCount", tostring(prevCount))
-	animator.setGlobalTag(animator.applyPartTags("body",self.tag) .. "PrevSize", tostring(prevVisualSize))
+	animator.setGlobalTag(animator.applyPartTags("anchor",self.tag) .. "Count", tostring(self.occupancy.visualCount))
+	animator.setGlobalTag(animator.applyPartTags("anchor",self.tag) .. "Size", tostring(self.occupancy.visualSize))
+	animator.setGlobalTag(animator.applyPartTags("anchor",self.tag) .. "PrevCount", tostring(prevCount))
+	animator.setGlobalTag(animator.applyPartTags("anchor",self.tag) .. "PrevSize", tostring(prevVisualSize))
 	local sizeTags = {
 		prevSize = tostring(prevVisualSize),
 		newSize = tostring(self.occupancy.visualSize),
