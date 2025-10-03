@@ -130,6 +130,7 @@ local patched = {
 local speciesTFAny = jarray()
 local function setupSpecies(path)
 	local speciesConfig = assets.json(path)
+	if speciesConfig.sbqCompatible == false then return end
 	local humanoidPath = "/humanoid/" .. speciesConfig.kind .. "/"
 	if speciesConfig.humanoidConfig and not patched[speciesConfig.humanoidConfig] then
 		patched[speciesConfig.humanoidConfig] = true

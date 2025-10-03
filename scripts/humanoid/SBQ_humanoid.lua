@@ -38,7 +38,7 @@ function refreshHumanoidParameters()
 
 	humanoidConfig = sbq.humanoid.humanoidConfig()
 
-	if humanoidConfig.sbqEnabled and sbq.init and not humanoidConfig.sbqPostloadError then
+	if humanoidConfig.sbqEnabled and sbq.init and not (humanoidConfig.sbqPostloadError or (humanoidConfig.sbqCompatible == false)) then
 		if humanoidConfig.sbqConfig then
 			sbq.init(humanoidConfig.sbqConfig)
 		else

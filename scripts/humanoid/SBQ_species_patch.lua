@@ -18,6 +18,15 @@ function addScript(config, path, script)
 end
 
 function patch(config, path)
+	if config.sbqCompatible == false then
+		return sb.jsonMerge(config, {
+			humanoidOverrides = {
+				sbqCompatible = false,
+			},
+			sbqPartImages = {},
+			sbqSettingsConfig = {}
+		})
+	end
 	config.buildScripts = config.buildScripts or { "/humanoid/opensb/build.lua" }
 	addScript(config, { "buildScripts" }, "/scripts/humanoid/SBQ_humanoid_build.lua")
 

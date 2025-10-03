@@ -65,7 +65,7 @@ function init()
 	sbq.humanoidInit()
 	if player.getProperty("sbqAgreedTerms") then
 		if player.getHumanoidParameter("sbqEnabled") then
-			if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled and not humanoidConfig.sbqPostloadError then
+			if humanoidConfig.sbqConfig and humanoidConfig.sbqEnabled and not (humanoidConfig.sbqPostloadError or (humanoidConfig.sbqCompatible == false)) then
 				sbq.init(humanoidConfig.sbqConfig)
 			else
 				sbq.uninit("refresh")
