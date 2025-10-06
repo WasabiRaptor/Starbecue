@@ -2,7 +2,8 @@ function patch(config)
 	for _, v in ipairs({
 		"sbqModuleOrder",
 		"sbqConfig",
-		"sbqIdentityAnimationCustom"
+		"sbqIdentityAnimationCustom",
+		"sbqSettingsConfig"
 	}) do
 		if not config[v] then
 			config[v] = assets.json("/humanoid.config:" .. v)
