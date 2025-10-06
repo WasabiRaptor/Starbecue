@@ -881,13 +881,6 @@ function sbq._State:emergencyEscape(occupant)
 	occupant:remove("emergencyEscape")
 end
 
-local function climaxBurst(emitter, burstChance)
-	animator.setParticleEmitterBurstCount(emitter, burstChance * 10)
-	animator.burstParticleEmitter(emitter)
-	if math.random() < burstChance then
-		sbq.timer(nil, math.random(), climaxBurst, emitter, burstChance * 0.75)
-	end
-end
 function sbq._State:climax(entityId)
 	sbq.SpeciesScript:doAnimations(self.climaxAnimations, {}, entityId)
 
@@ -895,10 +888,7 @@ function sbq._State:climax(entityId)
 	if occupant then
 		local location = occupant:getLocation()
 		if location then
-			local leakiness = sbq.settings.read[location.emitterSetting] or 0
-			if leakiness > 0 then for _, emitter in ipairs(location.climaxEmitters or {}) do
-				climaxBurst(emitter, leakiness)
-			end end
+			location:climax(entityId)
 		end
 	end
 
@@ -1309,20 +1299,78 @@ function sbq._Location:updateOccupancy(dt)
 end
 
 function sbq._Location:update(dt)
+	local percentage = 1
+	if status.isResource(self.resource or "food") then
+		percentage = status.resourcePercentage(self.resource or "food")
+		if self.resourceInvert then
+			percentage = 1 - percentage
+		end
+	end
+
 	if sbq.randomTimer(self.tag .. "_gurgle", 3, 15) then
-		if (self.occupancy.count > 0) and self.settings.gurgleSounds and self.occupancy.list[1] then
-			local occupant = self.occupancy.list[#self.occupancy.list]
+		if self.settings.gurgleSounds and self.occupancy.list[1] then
+			local occupant = self.occupancy.list[math.random(#self.occupancy.list)]
 			animator.setSoundPosition(self.gurgleSound or "gurgle", occupant:localPosition())
-			if status.isResource(self.gurgleResource or "food") then
-				local res = status.resourcePercentage(self.gurgleResource or "food")
-				animator.setSoundVolume(self.gurgleSound or "gurgle",
-					0.5 + ((self.gurgleResourceInvert and (1 - res)) or res), 0.25)
-			end
+			animator.setSoundVolume(self.gurgleSound or "gurgle", 0.5 + (percentage), 0.25)
 			animator.playSound(self.gurgleSound or "gurgle")
 		end
 	end
 	if sbq.timer(self.tag.."_refreshStruggle", 1) then
 		self:refreshStruggleDirection()
+	end
+	for emitter, data in pairs(self.leakEmitters or {}) do
+		local enable = true
+		for _, v in ipairs(data.blockingStats or {}) do
+			if status.statPositive(v) then
+				enable = false
+				break
+			end
+		end
+		animator.setParticleEmitterActive(emitter, enable)
+		if enable then
+			local leakiness = sbq.settings:get(data.setting)
+			if (leakiness > (1 - percentage)) then
+				local count = self.occupancy.count
+				for _, v in ipairs(data.addCount or {}) do
+					local location = sbq.SpeciesScript:getLocation(v)
+					if location then
+						count = count + location.occupancy.count
+					end
+				end
+				animator.setParticleEmitterEmissionRate(emitter, ((leakiness ^ 2 * percentage) ^ 2) * 10 * math.max(0.25, count))
+			end
+		end
+	end
+end
+local function climaxBurst(emitter, burstChance)
+	animator.setParticleEmitterBurstCount(emitter, burstChance * 10)
+	animator.burstParticleEmitter(emitter)
+	if math.random() < burstChance then
+		sbq.timer(nil, math.random(), climaxBurst, emitter, burstChance * 0.75)
+	end
+end
+function sbq._Location:climax(entityId)
+	for emitter, data in pairs(self.climaxEmitters or {}) do
+		local enable = true
+		for _, v in ipairs(data.blockingStats or {}) do
+			if status.statPositive(v) then
+				enable = false
+				break
+			end
+		end
+		if enable then
+			local leakiness = sbq.settings:get(data.setting)
+			if (leakiness > 0) then
+				local count = self.count
+				for _, v in ipairs(data.addCount or {}) do
+					local location = sbq.SpeciesScript:getLocation(v)
+					if location then
+						count = count + location.occupancy.count
+					end
+				end
+				climaxBurst(emitter, leakiness * count)
+			end
+		end
 	end
 end
 

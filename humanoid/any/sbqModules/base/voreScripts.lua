@@ -20,69 +20,15 @@ Default.__index = Default
 function Default:init()
 end
 function Default:update(dt)
-	local lust = 0
-	if status.isResource("sbqLust") then
-		lust = status.resourcePercentage("sbqLust")
-	end
 	if status.statPositive("sbq_hideCrotch") then
-		self:doAnimations(sbq.voreConfig.crotchHide)
-		for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
-			animator.setParticleEmitterActive(v, false)
-		end
-		for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
-			animator.setParticleEmitterActive(v, false)
-		end
+		self:doAnimations(sbq.voreConfig.hideCrotch)
 	else
-		self:doAnimations(sbq.voreConfig.crotchShow)
-		local cock = sbq.SpeciesScript:getLocation("cock")
-		local balls = sbq.SpeciesScript:getLocation("balls")
-
-		if cock and (sbq.settings.read.cockLeakiness > (1 - lust)) then
-			local leakiness = ((sbq.settings.read.cockLeakiness ^ 2 * lust) ^ 2) * 10 *
-			math.max(0.25, (cock.occupancy.count or 0) + (balls and balls.occupancy.count or 0))
-			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
-				animator.setParticleEmitterActive(v, true)
-				animator.setParticleEmitterEmissionRate(v, leakiness)
-			end
-		else
-			for _, v in ipairs(sbq.voreConfig.cockParticleEmitters or {}) do
-				animator.setParticleEmitterActive(v, false)
-			end
-		end
-
-		local pussy = sbq.SpeciesScript:getLocation("pussy")
-		local womb = sbq.SpeciesScript:getLocation("womb")
-		if pussy and (sbq.settings.read.pussyLeakiness > (1 - lust)) then
-			local leakiness = ((sbq.settings.read.pussyLeakiness^2 * lust)^2)*10*math.max(0.25, (pussy.occupancy.count or 0) + (womb and womb.occupancy.count or 0))
-			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
-				animator.setParticleEmitterActive(v, true)
-				animator.setParticleEmitterEmissionRate(v, leakiness)
-			end
-		else
-			for _, v in ipairs(sbq.voreConfig.pussyParticleEmitters or {}) do
-				animator.setParticleEmitterActive(v, false)
-			end
-		end
+		self:doAnimations(sbq.voreConfig.showCrotch)
 	end
 	if status.statPositive("sbq_hideChest") then
-		self:doAnimations(sbq.voreConfig.chestHide)
-		for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
-			animator.setParticleEmitterActive(v, false)
-		end
+		self:doAnimations(sbq.voreConfig.hideChest)
 	else
-		self:doAnimations(sbq.voreConfig.chestShow)
-		local breasts = sbq.SpeciesScript:getLocation("breasts")
-		if breasts and (sbq.settings.read.breastsLeakiness > (1 - lust)) then
-			local leakiness = ((sbq.settings.read.breastsLeakiness^2 * lust)^2)*10*math.max(0.25, (breasts.occupancy.count or 0))
-			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
-				animator.setParticleEmitterActive(v, true)
-				animator.setParticleEmitterEmissionRate(v, leakiness)
-			end
-		else
-			for _, v in ipairs(sbq.voreConfig.breastsParticleEmitters or {}) do
-				animator.setParticleEmitterActive(v, false)
-			end
-		end
+		self:doAnimations(sbq.voreConfig.showChest)
 	end
 end
 function Default:uninit()
