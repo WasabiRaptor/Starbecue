@@ -166,6 +166,6 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 		scripts = jarray()
 	}
 	includeSBQModule(humanoidConfig, baseModule)
-	humanoidConfig.sbqSettingsConfig.overrideSettings = sb.jsonMerge(humanoidConfig.sbqSettingsConfig.overrideSettings or {}, humanoidConfig.sbqInfuseOverrideSettings or {})
+	humanoidConfig.sbqSettingsConfig = sb.jsonMerge(humanoidConfig.sbqSettingsConfig or {}, humanoidConfig.sbqInfuseSettings or {})
 	return humanoidConfig
 end
