@@ -52,28 +52,28 @@
 		"availableVoreTypes" : {
 			"oralVore":true
 		},
-		"defaultSettings" : {
+		"defaultSettings" : {"any":{
 			"locations" : {"belly":{
 				"mainEffect" : "softDigest"
 			}}
-		},
+		}},
 		"settingsOrder" : [
 			"displayEffect",
 			"escapeDifficulty",
 			"acidDigestPower",
 			"recentlyDigested"
 		],
-		"overrideSettings" : {
+		"overrideSettings" : {"any":{
 			"acidDigestDrops" : false,
 			"vorePrefs":{"oralVore":{"pred":true}}, // because why would it ever *not* be an OV pred
 			"interactDialogue" : false,
 			"actionDialogue" : false,
 			"questParticipation" : false,
 			"offerQuests" : false
-		},
-		"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
+		}},
+		"invalidSettings" : {"any":{ // map of settings with invalid values mapped to a replacement value in the case of importing settings
 			"mainEffect" : {"digest":"softDigest"}
-		},
+		}},
 		"locations" : {
 			"belly" : {
 				"activeSettings" : {"vorePrefs":{"oralVore":{"pred":true}}},

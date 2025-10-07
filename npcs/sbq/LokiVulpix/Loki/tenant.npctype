@@ -241,11 +241,18 @@
 				"speciesTF" : false,
 				"genderTF" : false
 			}},
-			"invalidSettings" : {"any":{
-				"mainEffect" : {
-					"digest" : "softDigest"
+			"invalidSettings" : {
+				"npc":{
+					"mainEffect" : {
+						"digest" : "softDigest"
+					}
+				},
+				"object":{
+					"mainEffect" : {
+						"digest" : "softDigest"
+					}
 				}
-			}}
+			}
 		}
 	},
 	"statusControllerSettings" : {

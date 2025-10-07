@@ -53,29 +53,29 @@
 		"availableVoreTypes" : {
 			"cockVore":true
 		},
-		"defaultSettings" : {
+		"defaultSettings" : {"any":{
 			"cumDigestDrops" : true,
 			"locations" : {"balls":{
 				"mainEffect" : "softDigest"
 			}}
-		},
+		}},
 		"settingsOrder" : [
 			"displayEffect",
 			"escapeDifficulty",
 			"cumDigestPower",
 			"recentlyDigested"
 		],
-		"overrideSettings" : {
+		"overrideSettings" : {"any":{
 			"acidDigestDrops" : false,
 			"vorePrefs":{"cockVore":{"pred":true}}, // because why would it ever *not* be an OV pred
 			"interactDialogue" : false,
 			"actionDialogue" : false,
 			"questParticipation" : false,
 			"offerQuests" : false
-		},
-		"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
+		}},
+		"invalidSettings" : {"any":{ // map of settings with invalid values mapped to a replacement value in the case of importing settings
 			"mainEffect" : {"digest":"softDigest"}
-		},
+		}},
 		"locations" : {
 			"balls" : {
 				"activeSettings" : {"vorePrefs":{"cockVore":{"pred":true}}},

@@ -74,8 +74,13 @@
 			"overrideSettings" : {
 				"acidDigestDrops" : false
 			},
-			"invalidSettings" : { // map of settings with invalid values mapped to a replacement value in the case of importing settings
-				"mainEffect" : {"digest":"softDigest"}
+			"invalidSettings" : {
+				"npc":{// map of settings with invalid values mapped to a replacement value in the case of importing settings
+					"mainEffect" : {"digest":"softDigest"}
+				},
+				"object":{// map of settings with invalid values mapped to a replacement value in the case of importing settings
+					"mainEffect" : {"digest":"softDigest"}
+				}
 			},
 			"locations" : {
 				"belly" : {

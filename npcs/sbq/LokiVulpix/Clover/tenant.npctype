@@ -172,11 +172,18 @@
 				"speciesTF" : false,
 				"genderTF" : false
 			}},
-			"invalidSettings" : {"any":{
-				"mainEffect" : {
-					"digest" : "softDigest"
+			"invalidSettings" : {
+				"npc":{
+					"mainEffect" : {
+						"digest" : "softDigest"
+					}
+				},
+				"object":{
+					"mainEffect" : {
+						"digest" : "softDigest"
+					}
 				}
-			}}
+			}
 		},
 
 		// rewards given to the player for doing things for the pred are here! cumulative ones accumulate time between different sessions, otherwise it only counts up per the current session
