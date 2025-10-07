@@ -5,7 +5,7 @@ function sbq.fetchConfigArray(input, path)
 			out = sbq.fetchConfigArray(sb.jsonMerge(out, sbq.fetchConfigArray(v, path)), path)
 		end
 		return out
-    elseif type(input) == "string" then
+	elseif type(input) == "string" then
 		return sbq.fetchConfigArray(root.assetJson(sbq.assetPath(input, path)), path)
 	end
 	return input
@@ -57,9 +57,10 @@ function sbq.setPath(input, path, value)
 end
 
 function sbq.getClosestValue(x, list)
-	local closest
-	local closestKey
+	local closest = list[1]
+	local closestKey = 1
 	local closestDiff = math.huge
+	if not x then return closest, closestKey end
 	for k, v in ipairs(list) do
 		diff = math.abs(v - x)
 		if diff <= closestDiff then
