@@ -1318,7 +1318,8 @@ function sbq._Location:update(dt)
 		self:refreshStruggleDirection()
 	end
 	for emitter, data in pairs(self.leakEmitters or {}) do
-		local enable = true
+		local leakiness = sbq.settings:get(data.setting)
+		local enable = (leakiness ~= 0)
 		for _, v in ipairs(data.blockingStats or {}) do
 			if status.statPositive(v) then
 				enable = false
@@ -1327,8 +1328,7 @@ function sbq._Location:update(dt)
 		end
 		animator.setParticleEmitterActive(emitter, enable)
 		if enable then
-			local leakiness = sbq.settings:get(data.setting)
-			if (leakiness > (1 - percentage)) then
+			if (leakiness > percentage) then
 				local count = self.occupancy.count
 				for _, v in ipairs(data.addCount or {}) do
 					local location = sbq.SpeciesScript:getLocation(v)
@@ -1350,7 +1350,8 @@ local function climaxBurst(emitter, burstChance)
 end
 function sbq._Location:climax(entityId)
 	for emitter, data in pairs(self.climaxEmitters or {}) do
-		local enable = true
+		local leakiness = sbq.settings:get(data.setting)
+		local enable = (leakiness ~= 0)
 		for _, v in ipairs(data.blockingStats or {}) do
 			if status.statPositive(v) then
 				enable = false
@@ -1358,17 +1359,14 @@ function sbq._Location:climax(entityId)
 			end
 		end
 		if enable then
-			local leakiness = sbq.settings:get(data.setting)
-			if (leakiness > 0) then
-				local count = self.occupancy.count
-				for _, v in ipairs(data.addCount or {}) do
-					local location = sbq.SpeciesScript:getLocation(v)
-					if location then
-						count = count + location.occupancy.count
-					end
+			local count = self.occupancy.count
+			for _, v in ipairs(data.addCount or {}) do
+				local location = sbq.SpeciesScript:getLocation(v)
+				if location then
+					count = count + location.occupancy.count
 				end
-				climaxBurst(emitter, leakiness * count)
 			end
+			climaxBurst(emitter, leakiness * count)
 		end
 	end
 end
