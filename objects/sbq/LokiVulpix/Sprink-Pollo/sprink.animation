@@ -33,9 +33,9 @@
 			},
 			"occupant1Location" : {
 				"priority" : 1,
-				"default" : "idle",
+				"default" : "default",
 				"states" : {
-					"idle": {"frames": 0,"cycle": 0,"mode": "end"},
+					"default": {"frames": 0,"cycle": 0,"mode": "end"},
 					"belly": {"frames": 1,"cycle": 0,"mode": "end"},
 					"balls": {"frames": 1,"cycle": 0,"mode": "end"}
 				}
@@ -89,11 +89,11 @@
 					"hidden":true,
 					"dance" : "sbqIdle",
 					"orientation" : "stand",
-					"emote" : "idle",
-					"transforms": [["reset"],	["scale",[0,0]]]
+					"emote" : "idle"
 				},
 				"partStates" : {
 					"occupant1Location" :{
+						"default" : {"properties":{"offset" : [0,0]}},
 						"belly" : {"properties":{"offset" : [0,-1.5]}},
 						"balls" : {"properties":{"offset" : [-0.5,-1.5]}}
 					},
@@ -101,17 +101,20 @@
 						"oralVore" : {"frameProperties":{
 							"transforms":[
 								[["reset"], ["scale",[1,1]],	["translate",[1.5,0] ]],
-								[["reset"], ["scale",[0,0]],	["translate",[0,-1.5]]]
+								[["reset"], ["scale",[0.001,0.001]],	["translate",[0,-1.5]]]
 							]
 						}},
 						"cockVore" : {"frameProperties":{
 							"transforms":[
 								[["reset"], ["scale",[1,1]],	["translate",[0.5,-1]]],
-								[["reset"], ["scale",[0,0]],	["translate",[-0.5,-1.5]]]
+								[["reset"], ["scale",[0.001,0.001]],	["translate",[-0.5,-1.5]]]
 							]
 						}}
 					}
 				}
+			},
+			"anchor" : {
+				"centered": true
 			},
 			"body": {
 				"properties": {

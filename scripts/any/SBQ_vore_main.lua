@@ -772,6 +772,7 @@ function sbq._State:checkAnimations(activeOnly, animations, tags, target)
 end
 
 function sbq._State:interact(args)
+	sbq.logInfo(args,2)
 	if sbq.SpeciesScript.lockActions or sbq.timerRunning("dialogueAfter") then return end
 	local start = ".greeting"
 	local actions = true
@@ -802,8 +803,8 @@ function sbq._State:interact(args)
 		end
 
 		local results = { sbq.SpeciesScript:interactAction(args) }
-		if results[2] == "interactAction" then
-			return results[3]
+		if not results[1] then
+			return {"Message", {messageType = "sbqRequestFailed", messageArgs = results}}
 		end
 	end
 end
@@ -820,6 +821,7 @@ function sbq._State:interactAction(args)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
+	local failReason
 	for action, v in pairs(interactActions or {}) do
 		if not v.action then
 			v.action = action
@@ -833,15 +835,15 @@ function sbq._State:interactAction(args)
 			a = sbq.localPartPoint(v.aimPart or v.part, v.aim)
 		end
 		-- check if we should even consider this action
-		local valid = sbq.SpeciesScript:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
+		local success, reason = sbq.SpeciesScript:actionAvailable(v.action, args.sourceId, table.unpack(v.args or {}))
 		-- check if there either point must be within a radius
-		if valid and p and (v.posRadius or v.radius) then
-			valid = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
+		if success and p and (v.posRadius or v.radius) then
+			success = ((v.posRadius or v.radius) > vec2.mag(vec2.sub(p, pos)))
 		end
-		if valid and a and (v.aimRadius or v.radius) then
-			valid = ((v.aimRadius or v.radius) > vec2.mag(vec2.sub(a, aim)))
+		if success and a and (v.aimRadius or v.radius) then
+			success = ((v.aimRadius or v.radius) > vec2.mag(vec2.sub(a, aim)))
 		end
-		if valid then
+		if success then
 			if not p and not a then
 				-- no pos or aim, just make this one happen
 				p = pos
@@ -869,10 +871,14 @@ function sbq._State:interactAction(args)
 				distance = d
 				closest = v
 			end
+		else
+			failReason = reason
 		end
 	end
 	if closest then
-		sbq.SpeciesScript:requestAction(false, closest.action, args.sourceId, table.unpack(closest.args or {}))
+		return sbq.SpeciesScript:requestAction(false, closest.action, args.sourceId, table.unpack(closest.args or {}))
+	elseif failReason then
+		return false, failReason
 	end
 end
 

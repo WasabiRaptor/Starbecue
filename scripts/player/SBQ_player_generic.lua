@@ -295,7 +295,9 @@ function init()
 	message.setHandler("sbqHideDeathParticles", function()
 		player.setDeathParticleBurst()
 	end)
-
+	message.setHandler("sbqRequestFailed", function (_,_,success,reason)
+		interface.queueMessage(sbq.getString(":request_" .. tostring(reason)))
+	end)
 	sbq.timer("preyMissingWaitPrompt", 60)
 	occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData then

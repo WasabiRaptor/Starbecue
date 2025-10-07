@@ -36,6 +36,29 @@
 			"/species/sbq/disableAllInfusePrey.config",
 			"/species/sbq/disableAllVorePrey.config",
 			"/species/sbq/disableAllTF.config"
+		],
+		"defaultSettings" : {"any":{
+			"cumDigestDrops" : true,
+			"locations" : {"balls":{
+				"mainEffect" : "softDigest"
+			}}
+		}},
+		"overrideSettings" : {"any":{
+			"acidDigestDrops" : false,
+			"vorePrefs":{"cockVore":{"pred":true}}, // because why would it ever *not* be an OV pred
+			"interactDialogue" : false,
+			"actionDialogue" : false,
+			"questParticipation" : false,
+			"offerQuests" : false
+		}},
+		"invalidSettings" : {"any":{ // map of settings with invalid values mapped to a replacement value in the case of importing settings
+			"mainEffect" : {"digest":"softDigest"}
+		}},
+		"settingsOrder" : [
+			"displayEffect",
+			"escapeDifficulty",
+			"cumDigestPower",
+			"recentlyDigested"
 		]
 	},
 	"sbqConfig" : {
@@ -53,29 +76,6 @@
 		"availableVoreTypes" : {
 			"cockVore":true
 		},
-		"defaultSettings" : {"any":{
-			"cumDigestDrops" : true,
-			"locations" : {"balls":{
-				"mainEffect" : "softDigest"
-			}}
-		}},
-		"settingsOrder" : [
-			"displayEffect",
-			"escapeDifficulty",
-			"cumDigestPower",
-			"recentlyDigested"
-		],
-		"overrideSettings" : {"any":{
-			"acidDigestDrops" : false,
-			"vorePrefs":{"cockVore":{"pred":true}}, // because why would it ever *not* be an OV pred
-			"interactDialogue" : false,
-			"actionDialogue" : false,
-			"questParticipation" : false,
-			"offerQuests" : false
-		}},
-		"invalidSettings" : {"any":{ // map of settings with invalid values mapped to a replacement value in the case of importing settings
-			"mainEffect" : {"digest":"softDigest"}
-		}},
 		"locations" : {
 			"balls" : {
 				"activeSettings" : {"vorePrefs":{"cockVore":{"pred":true}}},
