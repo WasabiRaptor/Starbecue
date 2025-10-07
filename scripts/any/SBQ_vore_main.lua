@@ -82,7 +82,7 @@ function sbq.init(sbqConfig)
 	message.setHandler("sbqReleaseOccupant", function (_,_, ...)
 		return sbq.releaseOccupant(...)
 	end)
-
+	sbq_animator.transforms = {}
 	sbq.reloadVoreConfig(sbqConfig)
 end
 
