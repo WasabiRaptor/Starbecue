@@ -1,0 +1,32 @@
+{
+	"globalTagDefaults" : {
+		"pussySize" : "0",
+		"pussyInterpolateSize" : "0"
+
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"pussy" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.1,
+					"anchorPart" :"body",
+					"transformationGroups": ["movementOffset", "crotchOffset"],
+					"interact" : [0, -2],
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"crotchOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

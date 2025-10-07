@@ -1,0 +1,33 @@
+{
+	"globalTagDefaults" : {
+		"bellySize" : "0",
+		"bellyInterpolateSize" : "0"
+
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"belly" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.7,
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "bellyOffset"],
+					"navelInteract" : [0.25,-1.25],
+					"absorbInteract" : [-0.25,-1.25],
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"bellyOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

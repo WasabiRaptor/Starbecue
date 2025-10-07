@@ -34,6 +34,9 @@
 							}
 						}
 					}
+				},
+				"infused": {
+					"includes" : ["/humanoid/any/sbqModules/bellyInfuse/sbqModule.config"]
 				}
 			},
 			"cock" : {
@@ -66,6 +69,9 @@
 							}
 						}
 					}
+				},
+				"infused": {
+					"includes" : ["/humanoid/any/sbqModules/cockInfuse/sbqModule.config"]
 				}
 			},
 			"balls" : {
@@ -119,6 +125,9 @@
 						}
 
 					}
+				},
+				"infused": {
+					"includes" : ["/humanoid/any/sbqModules/ballsInfuse/sbqModule.config"]
 				}
 			},
 			"breasts" : {
@@ -173,6 +182,9 @@
 						}
 
 					}
+				},
+				"infused": {
+					"includes" : ["/humanoid/any/sbqModules/breastsInfuse/sbqModule.config"]
 				},
 				"double": {
 					"includes" : [
@@ -266,9 +278,16 @@
 							}
 						}
 					}
+				},
+				"infused": {
+					"includes" : ["/humanoid/any/sbqModules/pussyInfuse/sbqModule.config"]
 				}
 			},
 			"tail": {
+				"infused": {
+					"includes" : ["/humanoid/any/sbqModules/tailInfuse/sbqModule.config"],
+					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
+				},
 				"naga": {
 					"includes": ["/humanoid/any/sbqModules/naga/sbqModule.config"],
 					"infuseModules" : {
@@ -350,48 +369,70 @@
 	"sbqSettingsConfig" : {
 		"selectValues" : {
 			"bellySelect" : [
-				"default"
+				"-",
+				"default",
+				"infused"
 			],
 			"bellyInfuseSelect" : [
-				"default"
+				"-",
+				"default",
+				"-"
 			],
 			"cockSelect" : [
 				"disable",
-				"default"
+				"default",
+				"infused"
 			],
 			"cockInfuseSelect" : [
-				"default"
+				"-",
+				"default",
+				"-"
 			],
 			"ballsSelect" : [
 				"disable",
-				"default"
+				"default",
+				"infused"
 			],
 			"ballsInfuseSelect" : [
-				"default"
+				"-",
+				"default",
+				"-"
 			],
 			"pussySelect" : [
 				"disable",
-				"default"
+				"default",
+				"infused"
 			],
 			"pussyInfuseSelect" : [
-				"default"
+				"-",
+				"default",
+				"-"
 			],
 			"breastsSelect" : [
 				"disable",
 				"default",
+				"infused",
 				"double"
 			],
 			"breastsInfuseSelect" : [
+				"-",
 				"default",
+				"-",
 				"double"
 			],
 			"tailSelect" : [
+				"-",
 				"default",
+				"infused",
 				"nickit",
 				"naga"
 			],
 			"tailInfuseSelect" : [
-				"default"
+				"-",
+				"default",
+				"-",
+				"nickit",
+				"naga"
 			],
 			"transgender" : [
 				"unchanged",

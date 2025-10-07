@@ -37,10 +37,10 @@
 		// "sbqPredRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
 		// "sbqPreyRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPreyRewards",
 		"sbqRandomizeSettings" : {
-			"cockSelect" : ["disable", "default"],
+			"cockSelect" : ["disable", "default", "infused"],
 			"ballsSelect" : "cockSelect", // strings in randomize settings makes them copy the value of that setting
-			"breastsSelect" : ["disable", "default"],
-			"pussySelect" : ["disable", "default"],
+			"breastsSelect" : ["disable", "default", "infused"],
+			"pussySelect" : ["disable", "default", "infused"],
 
 			"vorePrefs" : {
 				// "oralVore" : {"pred":[true,false]}, // OV for bandits is always true

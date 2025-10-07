@@ -1031,7 +1031,7 @@ function sbq._SpeciesScript:addLocation(name, config)
 end
 
 function sbq._Location:hasSpace(size)
-	if (not sbq.settings:matches(self.activeSettings, true)) or self.disabled then return false end
+	if (not sbq.settings:matches(self.activeSettings, true)) then return false end
 	if self.maxCount and (self.occupancy.count >= self.maxCount) then return false end
 	if (not self.subLocations) or self.subKey then
 		if self.settings.hammerspace then return math.huge, self.subKey end
@@ -1215,18 +1215,11 @@ function sbq._Location:updateOccupancy(dt)
 
 		local infuseSize = 0
 		local infuseCount = 0
-		if  self.infuseType and self.infuseSize then
-			for _, capturedOccupant in ipairs(self.occupancy.captured) do
-				if capturedOccupant.infused then
-					infuseSize = (capturedOccupant.size * self.settings.infusedSize)
-					infuseCount = self.settings.infusedSize
-				end
-			end
-			for _, occupant in ipairs(self.occupancy.list) do
-				if occupant.infused then
-					infuseSize = (occupant.size * self.settings.infusedSize)
-					infuseCount = self.settings.infusedSize
-				end
+		if self.infuseType and self.infuseSize then
+			local infuseSlot = sbq.humanoid.getHumanoidParameter("sbqInfused_" .. self.key)
+			if infuseSlot then
+				infuseSize = infuseSlot.size * self.settings.infusedSize
+				infuseCount = self.settings.infusedSize
 			end
 		end
 		self.occupancy.visualSize = sbq.getClosestValue(
@@ -1361,7 +1354,7 @@ function sbq._Location:climax(entityId)
 		if enable then
 			local leakiness = sbq.settings:get(data.setting)
 			if (leakiness > 0) then
-				local count = self.count
+				local count = self.occupancy.count
 				for _, v in ipairs(data.addCount or {}) do
 					local location = sbq.SpeciesScript:getLocation(v)
 					if location then
@@ -1671,7 +1664,11 @@ function sbq.Occupants.insertOccupant(newOccupant)
 		seat = seat,
 		subLocation = subLocation,
 	})
-	return sbq.Occupants.finishOccupantSetup(occupant)
+	local success, reason = sbq.Occupants.finishOccupantSetup(occupant)
+	if success and newOccupant.flags.infused then
+		sbq.settings:setParameterSettings()
+	end
+	return success, reason
 end
 
 function sbq.Occupants.finishOccupantSetup(occupant)
@@ -1919,7 +1916,7 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 		location:markSizeDirty()
 	end
 	if not location then return self:remove("invalidLocation") end
-	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.settings:matches(location.activeSettings, true)) or location.disabled) then return self:remove("disabledLocation") end
+	if (not (self.flags.infusing or self.flags.infused)) and ((not sbq.settings:matches(location.activeSettings, true)) or (location.maxCount == 0)) then return self:remove("disabledLocation") end
 	setmetatable(self.locationSettings, {__index = location.settings})
 
 	local occupantAnims = location.occupantAnims
@@ -2417,6 +2414,13 @@ function sbq._Occupant:capture()
 			local newCapturedOccupant = {
 				captureId = sb.makeUuid(),
 
+				settings = sbq._Settings.new(
+					{},
+					card.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings,
+					self.npcArgs.npcParam.wasPlayer and "player" or "npc",
+					true
+				),
+
 				npcArgs = card.parameters.npcArgs,
 				humanoidConfig = {
 					bodyFullbright = humanoidConfig.bodyFullbright
@@ -2596,20 +2600,42 @@ end
 function _CapturedOccupant:infuseParameters(slot)
 	local identity = self.npcArgs.npcParam.identity
 	local humanoidConfig = self.humanoidConfig
+	local infuseOverrides = {}
+	for k, v in pairs(sbq.config.infuseOverrideSettings[slot]) do
+		if (not v[2]) or sbq.settings:get(v[2]) then
+			infuseOverrides[k] = self.settings:get(v[1])
+		end
+		if v[2] and sbq.settings:checkLocked(v[2]) then
+			infuseOverrides[v[2]] = sbq.settings:get(v[2])
+		end
+	end
 	return {
 		directives = identity.bodyDirectives .. identity.hairDirectives,
 		species = identity.species,
 		gender = identity.gender,
-		bodyFullbright = humanoidConfig.bodyFullbright
-	}
+		bodyFullbright = humanoidConfig.bodyFullbright,
+		size = self.size
+	}, infuseOverrides
 end
 function sbq._Occupant:infuseParameters(slot)
 	local identity = world.entity(self.entityId):humanoidIdentity()
+	if not identity then return end
 	local humanoidConfig = world.entity(self.entityId):humanoidConfig()
+	local infuseOverrides = {}
+	local publicSettings = self:getPublicProperty("sbqPublicSettings")
+	for k, v in pairs(sbq.config.infuseOverrideSettings[slot]) do
+		if (not v[2]) or sbq.settings:get(v[2]) then
+			infuseOverrides[k] = publicSettings[v[1]]
+		end
+		if v[2] and sbq.settings:checkLocked(v[2]) then
+			infuseOverrides[v[2]] = sbq.settings:get(v[2])
+		end
+	end
 	return {
 		directives = identity.bodyDirectives .. identity.hairDirectives,
 		species = identity.species,
 		gender = identity.gender,
-		bodyFullbright = humanoidConfig.bodyFullbright
-	}
+		bodyFullbright = humanoidConfig.bodyFullbright,
+		size = self.size
+	}, infuseOverrides
 end

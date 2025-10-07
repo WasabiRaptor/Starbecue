@@ -1,0 +1,26 @@
+{
+	"globalTagDefaults" : {
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"cock" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.4,
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "crotchOffset"],
+					"interact" : [0.5, -1.5],
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"crotchOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	}
+}

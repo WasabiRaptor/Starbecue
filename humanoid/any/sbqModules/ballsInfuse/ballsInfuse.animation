@@ -1,0 +1,44 @@
+{
+	"globalTagDefaults" : {
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"balls" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11,
+					"flippedZLevel": 11,
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "crotchOffset"]
+				}
+			},
+			"balls_right" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.3,
+					"flippedZLevel": 11.2,
+					"anchorPart": "balls",
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			},
+			"balls_left" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.2,
+					"flippedZLevel": 11.3,
+					"anchorPart": "balls",
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			}
+
+		}
+	},
+	"transformationGroups" : {
+		"crotchOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	}
+}

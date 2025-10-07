@@ -1,0 +1,33 @@
+{
+	"globalTagDefaults" : {
+		"tailSize" : "0",
+		"tailInterpolateSize" : "0"
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"tail" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 8.1,
+					"offset" : [-1.3125,-1.0625],
+
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "tailOffset"],
+					"processingDirectives" : "<bodyDirectives>",
+					"interact" : [-1,0]
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"tailOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

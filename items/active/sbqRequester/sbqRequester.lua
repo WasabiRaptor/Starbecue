@@ -95,7 +95,7 @@ function sbq.clickAction(fireMode)
 	local action = storage.actions[fireMode]
 	if (not action) or (action == "unassigned") then
 		animator.playSound("error")
-		interface.queueMessage(sbq.getString(":action_unassigned"))
+		interface.queueMessage(sbq.getString(":request_unassigned"))
 		return false
 	end
 	local entityaimed = world.entityQuery(activeItem.ownerAimPosition(), sbq.config.actionRadius, {

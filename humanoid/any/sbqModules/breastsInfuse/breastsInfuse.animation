@@ -1,0 +1,52 @@
+{
+	"globalTagDefaults" : {
+		"breastsSize" : "0",
+		"breastsInterpolateSize" : "0",
+		"breasts_rightSize" : "0",
+		"breasts_rightInterpolateSize" : "0",
+		"breasts_leftSize" : "0",
+		"breasts_leftInterpolateSize" : "0"
+
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+		},
+		"parts" : {
+			"breasts" : {
+				"properties": {
+					"centered": true,
+					"anchorPart":"body",
+					"transformationGroups": ["movementOffset", "chestOffset"],
+					"interact" : [0.375,-0.375]
+				}
+			},
+			"breasts_right" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.8,
+					"flippedZLevel": 11.6,
+
+					"anchorPart": "breasts",
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			},
+			"breasts_left" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 11.6,
+					"flippedZLevel": 11.8,
+
+					"anchorPart": "breasts",
+					"processingDirectives" : "<bodyDirectives>"
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"chestOffset": {"interpolated": false}
+	},
+	"sounds" : {
+	},
+	"particleEmitters" : {
+	}
+}

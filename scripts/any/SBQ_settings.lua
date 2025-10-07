@@ -4,11 +4,14 @@ local _Settings = {
 sbq._Settings = _Settings
 _Settings.__index = _Settings
 
-function _Settings.new(settingsConfig, storedSettings, entityType)
+function _Settings.new(settingsConfig, storedSettings, entityType, readOnly)
 	local self = {}
+	self.readOnly = readOnly
 	setmetatable(self, _Settings)
 	self.settingsConfig = settingsConfig
 	self.overrideSettings = sb.jsonMerge(
+		sbq.config.overrideSettings.any or {},
+		sbq.config.overrideSettings[entityType] or {},
 		(settingsConfig.overrideSettings or {}).any or {},
 		(settingsConfig.overrideSettings or {})[entityType] or {},
 		world.getProperty("sbqOverrideSettings_" .. entityType) or world.getProperty("sbqOverrideSettings_any") or {}
@@ -222,6 +225,7 @@ function _Settings:getStored(setting, groupName, groupId)
 end
 
 function _Settings:set(setting, value, groupName, groupId)
+	if self.readOnly then return sbq.logError(("Attempted to set '%s.%s.%s' to '%s' on read only settings."):format(setting, groupName, groupId, value)) end
 	local oldValue = self:get(setting, groupName, groupId)
 	if groupName and groupId then
 		if not self.lockedSettings[groupName][groupId][setting] then
@@ -241,6 +245,7 @@ function _Settings:set(setting, value, groupName, groupId)
 	end
 end
 function _Settings:setOverride(setting, value, groupName, groupId)
+	if self.readOnly then return sbq.logError(("Attempted to set override '%s.%s.%s' to '%s' on read only settings."):format(setting, groupName, groupId, value)) end
 	local oldValue = self:get(setting, groupName, groupId)
 	if groupName and groupId then
 		if not self.lockedSettings[groupName][groupId][setting] then
@@ -361,6 +366,7 @@ function _Settings:setParameterSettings()
 	if not sbq.humanoid then return end
 	local refresh = false
 
+	local infuseOverrideSettings = {}
 	local infuseSlots = {}
 	if sbq.Occupants then
 		for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
@@ -376,15 +382,23 @@ function _Settings:setParameterSettings()
 	end
 	for _, infuseSlot in ipairs(sbq.humanoid.humanoidConfig().sbqModuleOrder or {}) do
 		infusedOccupant = infuseSlots[infuseSlot]
-		local value = infusedOccupant and infusedOccupant:infuseParameters(infuseSlot)
+		local value, newOverrides
+		if infusedOccupant then
+			value, newOverrides = infusedOccupant:infuseParameters(infuseSlot)
+		end
+		infuseOverrideSettings = sb.jsonMerge(infuseOverrideSettings, newOverrides or {})
 		if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfused_" .. infuseSlot), value) then
 			sbq.humanoid.setHumanoidParameter("sbqInfused_"..infuseSlot, value)
 			refresh = true
 		end
 	end
+	if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfuseOverrideSettings"), infuseOverrideSettings) then
+		refresh = true
+		sbq.humanoid.setHumanoidParameter("sbqInfuseOverrideSettings", infuseOverrideSettings)
+	end
 
 	for setting, parameter in pairs(sbq.config.parameterSettings) do
-		local value = self:get(setting)
+		local value = infuseOverrideSettings[setting] or self:get(setting)
 		if sbq.humanoid.getHumanoidParameter(parameter) ~= value then
 			sbq.humanoid.setHumanoidParameter(parameter, value)
 			refresh = true

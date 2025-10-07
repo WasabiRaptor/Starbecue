@@ -69,6 +69,10 @@ end
 function default:uninit()
 end
 
+function default:simpleReturn(name, action, target, ...)
+	return table.unpack(action.returnValue)
+end
+
 function default:actionSequence(name, action, target, actionList, ...)
 	local successCount = 0
 	local results
@@ -262,21 +266,6 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
 		if not sbq.settings:matches(location.activeSettings, true) then
-			if location.infuseType then
-				if not (action.flags and action.flags.infusing) then
-					return false, "needsInfusion"
-				end
-			else
-				return false, "invalidLocation"
-			end
-		end
-	end
-	if location.disabled then
-		if location.infuseType then
-			if not (action.flags and action.flags.infusing) then
-				return false, "needsInfusion"
-			end
-		else
 			return false, "invalidLocation"
 		end
 	end
@@ -315,21 +304,6 @@ function default:tryVore(name, action, target, ...)
 	if not location then return false, "invalidLocation" end
 	if location.activeSettings then
 		if not sbq.settings:matches(location.activeSettings, true) then
-			if location.infuseType then
-				if not (action.flags and action.flags.infusing) then
-					return false, "needsInfusion"
-				end
-			else
-				return false, "invalidLocation"
-			end
-		end
-	end
-	if location.disabled then
-		if location.infuseType then
-			if not (action.flags and action.flags.infusing) then
-				return false, "needsInfusion"
-			end
-		else
 			return false, "invalidLocation"
 		end
 	end
@@ -662,12 +636,12 @@ function default:reformed(name, action, target,...)
 	if not occupant then return false, "missingOccupant" end
 	local location = occupant:getLocation()
 	if occupant.flags.infused then
+		occupant.flags.infuseType = nil
+		occupant.flags.infused = false
+		occupant.flags.infuseSlots = nil
 		location.infusedEntity = nil
 		sbq.settings:setParameterSettings()
 	end
-	occupant.flags.infuseType = nil
-	occupant.flags.infused = false
-	occupant.flags.infuseSlots = nil
 	occupant.flags.digesting = false
 	occupant.flags.digested = false
 	occupant.sizeMultiplier = action.sizeMultiplier or location.reformSizeMultiplier or ((occupant.locationSettings.compression ~= "none") and occupant.locationSettings.compressionMin) or 1

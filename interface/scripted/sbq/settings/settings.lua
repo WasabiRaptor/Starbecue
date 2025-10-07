@@ -56,17 +56,17 @@ function init()
 		for _, voreType in pairs(sbq.gui.voreTypeOrder) do
 			_ENV.vorePredPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = voreType, groupName = "vorePrefs", setting = voreType.."PredPrefs"})
 			_ENV.vorePreyPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = voreType, groupName = "vorePrefs", setting = voreType.."PreyPrefs"})
-			local widget = _ENV[voreType.."predPrefLayout"]
+			local widget = _ENV[voreType.."PredPrefLayout"]
 			if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
 		end
 		for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
 			_ENV.infusePredPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = infuseType, groupName = "infusePrefs", setting = infuseType.."PredPrefs"})
 			_ENV.infusePreyPrefsPanel.children[1]:addChild({type = "sbqSetting", groupKey = infuseType, groupName = "infusePrefs", setting = infuseType.."PreyPrefs"})
 
-			local widget = _ENV[infuseType.."predPrefLayout"]
+			local widget = _ENV[infuseType.."PredPrefLayout"]
 			if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
 		end
-		local cockInfusepreyPrefLayout = _ENV.cockInfusepreyPrefLayout
+		local cockInfusePreyPrefLayout = _ENV.cockInfusePreyPrefLayout
 		_ENV.currentScale:setText(tostring(sbq.currentScale))
 	end
 
@@ -91,7 +91,7 @@ function sbq.setupLocation(name, list)
 		id = name,
 		icon = location.icon,
 		title = location.name or (":"..name),
-		visible = sbq.settings:matches(location.activeSettings, true) and not location.disabled,
+		visible = sbq.settings:matches(location.activeSettings, true),
 		color = "ff00ff",
 		contents = {
 			{ type = "scrollArea", scrollDirections = { 0, 1 }, children = {
@@ -169,7 +169,7 @@ function sbq.refreshSettingVisibility()
 	for name, location in pairs(sbq.locations) do
 		local widget = ((_ENV.locationTabField or {}).tabs or {})[name]
 		if widget then
-			widget:setVisible(sbq.settings:matches(location.activeSettings, true) and not location.disabled)
+			widget:setVisible(sbq.settings:matches(location.activeSettings, true))
 		end
 	end
 	if sbq.refreshBehaviorTabVisibility then
@@ -406,22 +406,35 @@ end
 function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 	local value, valueType = sbq.fetchSettingValueAndType(setting, group, name)
 	local locked = sbq.settings:checkLocked(setting, group, name)
+	local dropDownConfig = sbq.gui.dropDownConfig[setting]
 	local options = {}
 	if not sbq.settings.settingsConfig.selectValues[setting] then
 		sbq.playErrorSound()
 	end
 	for _, v in ipairs(sbq.settings.settingsConfig.selectValues[setting]) do
-		if sbq.settings:checkInvalid(setting, value, group, name) == value then
-			if sbq.gui.dropDownOptions[v] then
-				table.insert(options, {
-					sbq.replaceConfigTags(sbq.gui.dropDownOptions[v][1], {selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or ""}),
-					function()
-						if not locked then
+		if v == "-" then
+			table.insert(options, v)
+		elseif (sbq.settings:checkInvalid(setting, v, group, name) == v) and not (locked and v ~= value) then
+			if dropDownConfig.options[v] then
+				if type(dropDownConfig.options[v][1]) == "table" then
+					table.insert(options, {
+						sbq.replaceConfigTags(dropDownConfig.options[v][1], {
+							selectedDirectives = ((value == v) and "?border=1;00FF00FF;00FF0088") or "",
+						}),
+						function()
 							sbq.widgetScripts.changeSetting(v, setting, group, name)
-						end
-					end,
-					sbq.gui.dropDownOptions[v][2]
-				})
+						end,
+						dropDownConfig.options[v][2]
+					})
+				else
+					table.insert(options, {
+						((value == v and "^green;") or "") .. (sbq.getString(dropDownConfig.options[v][1])),
+						function()
+							sbq.widgetScripts.changeSetting(v, setting, group, name)
+						end,
+						dropDownConfig.options[v][2]
+					})
+				end
 			else
 				table.insert(options, {
 					((value == v and "^green;") or "") .. (sbq.getString(":" .. v)),
@@ -432,7 +445,14 @@ function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 					end
 				})
 			end
+		else
+			table.insert(options, {
+				"^#555;^set;" .. (sbq.getString(":" .. v)),
+				function()
+					sbq.playErrorSound()
+				end
+			})
 		end
 	end
-	_ENV.metagui.dropDownMenu(options, table.unpack(sbq.gui.dropDownArgs[setting] or {}))
+	_ENV.metagui.dropDownMenu(options, table.unpack(dropDownConfig.args or {}))
 end

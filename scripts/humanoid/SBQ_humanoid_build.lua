@@ -81,8 +81,8 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 				includeSBQModule(humanoidConfig, modules[selectedModule] or modules.default, infuseData)
 			end
 		end
+		module.modules = nil
 	end
-	module.modules = nil
 
 	if infuseData then
 		for k, v in pairs(module.infuseTags) do
@@ -115,6 +115,10 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 			end
 		end
 		module.infuseModules = nil
+	end
+	if module.settingsConfig then
+		humanoidConfig.sbqSettingsConfig = sb.jsonMerge(humanoidConfig.sbqSettingsConfig, module.settingsConfig)
+		module.settingsConfig = nil
 	end
 
 	if merge then
@@ -162,5 +166,6 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 		scripts = jarray()
 	}
 	includeSBQModule(humanoidConfig, baseModule)
+	humanoidConfig.sbqSettingsConfig.overrideSettings = sb.jsonMerge(humanoidConfig.sbqSettingsConfig.overrideSettings or {}, humanoidConfig.sbqInfuseOverrideSettings or {})
 	return humanoidConfig
 end

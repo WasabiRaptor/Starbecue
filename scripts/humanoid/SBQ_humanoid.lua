@@ -112,6 +112,7 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcSeed = npc.seed()
 			item.parameters.tooltipFields.subtitle = npc.npcType()
 			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage = preservedStorage()
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = sbq.settings:export()
 			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqRandomizedSettings = true
 			if storage.respawner then
 				item.parameters.npcArgs.npcParam.scriptConfig.originalWorldId = world.id()
@@ -124,14 +125,16 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcSeed = 1
 			item.parameters.tooltipFields.subtitle = "player"
 			item.parameters.npcArgs.npcParam.wasPlayer = true
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = sbq.settings:export()
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqRandomizedSettings = true
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqUpgrades = sbq.upgrades:save()
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSpeciesIdentities = status.statusProperty("sbqSpeciesIdentities")
 		end
 		local identity = sbq.humanoid.humanoidIdentity()
 		item.parameters.npcArgs.npcSpecies = sbq.species()
 		item.parameters.shortdescription = world.entityName(entity.id())
 		item.parameters.npcArgs.npcParam.identity = identity
 		item.parameters.npcArgs.npcParam.humanoidParameters = sbq.humanoid.getHumanoidParameters()
-		item.parameters.npcArgs.npcParam.scriptConfig.sbqSettings = sbq.settings:export()
-		item.parameters.npcArgs.npcParam.scriptConfig.sbqUpgrades = storage.sbqUpgrades
 		item.parameters.npcArgs.npcParam.scriptConfig.uniqueId = entity.uniqueId()
 		item.parameters.tooltipFields.collarNameLabel = sbq.createdDateString()
 		item.parameters.createdDate = sbq.createdDate()
@@ -139,8 +142,7 @@ function sbq.humanoidInit()
 		item.parameters.inventoryIcon = world.entityPortrait(entity.id(), "bust")
 		item.parameters.preySize = sbq.size()
 		item.parameters.bodyFullbright = sbq.humanoid.humanoidConfig().bodyFullbright
-		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty(
-		"sbqPronouns")
+		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty("sbqPronouns")
 		return item
 	end)
 	initialized = true
