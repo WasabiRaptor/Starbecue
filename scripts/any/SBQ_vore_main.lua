@@ -1328,7 +1328,7 @@ function sbq._Location:update(dt)
 		end
 		animator.setParticleEmitterActive(emitter, enable)
 		if enable then
-			if (leakiness > percentage) then
+			if (leakiness > (1 - percentage)) then
 				local count = self.occupancy.count
 				for _, v in ipairs(data.addCount or {}) do
 					local location = sbq.SpeciesScript:getLocation(v)
@@ -1336,7 +1336,7 @@ function sbq._Location:update(dt)
 						count = count + location.occupancy.count
 					end
 				end
-				animator.setParticleEmitterEmissionRate(emitter, ((leakiness ^ 2 * percentage) ^ 2) * 10 * math.max(0.25, count))
+				animator.setParticleEmitterEmissionRate(emitter, ((leakiness ^ 2 * (1-percentage)) ^ 2) * 10 * math.max(0.25, count))
 			end
 		end
 	end
