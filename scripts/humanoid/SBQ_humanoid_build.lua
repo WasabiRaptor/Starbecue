@@ -77,8 +77,8 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 		for i, slot in ipairs(humanoidConfig.sbqModuleOrder or {}) do
 			local modules = module.modules[slot]
 			local selectedModule = humanoidConfig["sbqModule_" .. slot]
-			if modules and selectedModule and (selectedModule ~= "disable") then
-				includeSBQModule(humanoidConfig, modules[selectedModule] or modules.default, infuseData)
+			if modules and (selectedModule ~= nil) and (selectedModule ~= "disable") then
+				includeSBQModule(humanoidConfig, modules[tostring(selectedModule)] or modules.default, infuseData)
 			end
 		end
 		module.modules = nil

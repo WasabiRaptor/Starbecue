@@ -45,6 +45,12 @@
 			{"spawn": "npc", "level": 10, "species": "wr/flareon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
 		]
 	},
+	"sbqSettingsConfig": {
+		"defaultSettings": {"any":{
+			"navelVisible": true,
+			"nipplesVisible": true
+		}}
+	},
 	"sbqPartImages": {
 		"sbq/naga/hips.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_hips.png",
@@ -230,9 +236,8 @@
 		},
 		"sbq/bellyQuadruped_noNavel.png": {
 			"sourceImage": "/humanoid/sbq/quadruped/belly/default.png",
+			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
 			"remapDirectives": [
-				"?replace;00adba=eb3629",
-
 				[
 					"primary",
 					"tertiary"
@@ -261,9 +266,8 @@
 		},
 		"sbq/infused/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"processingDirectives": "?replace;00adba=bc1002", // this replaces the navel pixel, don't touch this
 			"remapDirectives": [
-				"?replace;00adba=bc1002",
-
 				[
 					"primary",
 					"tertiary"
@@ -272,9 +276,8 @@
 		},
 		"sbq/infused/belly_noNavel.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
 			"remapDirectives": [
-				"?replace;00adba=eb3629",
-
 				[
 					"primary",
 					"tertiary"

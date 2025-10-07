@@ -265,6 +265,16 @@ function _Settings:setOverride(setting, value, groupName, groupId)
 	end
 end
 
+function _Settings.updated:bellySelectOverride(oldValue, setting, groupName, groupId)
+	self.updated.any(self, oldValue, setting, groupName, groupId)
+	self.updated.parameterSetting(self, oldValue, setting, groupName, groupId)
+end
+_Settings.updated.cockSelectOverride = _Settings.updated.bellySelectOverride
+_Settings.updated.ballsSelectOverride = _Settings.updated.bellySelectOverride
+_Settings.updated.pussySelectOverride = _Settings.updated.bellySelectOverride
+_Settings.updated.breastsSelectOverride = _Settings.updated.bellySelectOverride
+_Settings.updated.tailSelectOverride = _Settings.updated.bellySelectOverride
+
 function _Settings.updated:any(oldValue, setting, groupName, groupId)
 	if sbq.config.publicSettings[setting] then
 		self.updated.publicSetting(self, oldValue, setting, groupName, groupId)

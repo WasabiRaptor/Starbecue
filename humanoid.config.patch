@@ -9,7 +9,12 @@
 		"breasts",
 		"breasts_left",
 		"breasts_right",
-		"tail"
+		"breasts_secondary",
+		"breasts_secondary_left",
+		"breasts_secondary_right",
+		"tail",
+		"nipplesVisible",
+		"navelVisible"
 	],
 
 	"sbqConfig" : {
@@ -30,9 +35,21 @@
 								},
 								"infusedBodyFullbrightParts" : [
 									"belly_infused"
-								]
+								],
+								"modules" : {
+									"navelVisible":{"false":{
+										"infuseTags" : {
+											"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/belly_noNavel.png"
+										}
+									}}
+								}
 							}
 						}
+					},
+					"modules" : {
+						"navelVisible":{"false":{
+							"animations":["/humanoid/any/sbqModules/belly/noNavel.animation"]
+						}}
 					}
 				},
 				"infused": {
@@ -151,7 +168,17 @@
 								"infusedBodyFullbrightParts" : [
 									"breasts_right_infused",
 									"breasts_left_infused"
-								]
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png",
+											"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
 							}
 						},
 						"breasts_right" : { // infuse slot
@@ -164,7 +191,15 @@
 								},
 								"infusedBodyFullbrightParts" : [
 									"breasts_right_infused"
-								]
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
 							}
 						},
 						"breasts_left" : { // infuse slot
@@ -177,10 +212,22 @@
 								},
 								"infusedBodyFullbrightParts" : [
 									"breasts_left_infused"
-								]
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
 							}
 						}
-
+					},
+					"modules" : {
+						"nipplesVisible":{"false":{
+							"animations":["/humanoid/any/sbqModules/breasts/noNipples.animation"]
+						}}
 					}
 				},
 				"infused": {
@@ -195,8 +242,7 @@
 						"breasts" : {// infuse slot
 							"default" : { // species
 								"animations" : [
-									"/humanoid/any/sbqModules/breasts/infused.animation",
-									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+									"/humanoid/any/sbqModules/breasts/infused.animation"
 								],
 								"infuseTags" : {
 									"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
@@ -208,54 +254,152 @@
 								},
 								"infusedBodyFullbrightParts" : [
 									"breasts_right_infused",
-									"breasts_left_infused",
+									"breasts_left_infused"
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png",
+											"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
+							}
+						},
+						"breasts_secondary" : {// infuse slot
+							"default" : { // species
+								"animations" : [
+									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+								],
+								"infuseTags" : {
+									"breasts_secondary_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_secondary_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_secondary_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_secondary_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_secondary_leftInfusedDirectives" : "<directives>",
+									"breasts_secondary_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
 									"breasts_secondary_right_infused",
 									"breasts_secondary_left_infused"
-								]
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_secondary_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_secondary_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png",
+											"breasts_secondary_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_secondary_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
 							}
 						},
 						"breasts_right" : { // infuse slot
 							"default" : { // species
 								"animations" : [
-									"/humanoid/any/sbqModules/breasts/infused.animation",
-									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+									"/humanoid/any/sbqModules/breasts/infused.animation"
 								],
 								"infuseTags" : {
 									"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
 									"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
-									"breasts_rightInfusedDirectives" : "<directives>",
-									"breasts_secondary_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
-									"breasts_secondary_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
-									"breasts_secondary_rightInfusedDirectives" : "<directives>"
+									"breasts_rightInfusedDirectives" : "<directives>"
 								},
 								"infusedBodyFullbrightParts" : [
-									"breasts_right_infused",
-									"breasts_secondary_right_infused"
-								]
+									"breasts_right_infused"
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
 							}
 						},
 						"breasts_left" : { // infuse slot
 							"default" : { // species
 								"animations" : [
-									"/humanoid/any/sbqModules/breasts/infused.animation",
-									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+									"/humanoid/any/sbqModules/breasts/infused.animation"
 								],
 								"infuseTags" : {
 									"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
 									"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
-									"breasts_leftInfusedDirectives" : "<directives>",
+									"breasts_leftInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_left_infused"
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
+							}
+						},
+						"breasts_secondary_right" : { // infuse slot
+							"default" : { // species
+								"animations" : [
+									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+								],
+								"infuseTags" : {
+									"breasts_secondary_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_secondary_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_secondary_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_secondary_right_infused"
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_secondary_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_secondary_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
+							}
+						},
+						"breasts_secondary_left" : { // infuse slot
+							"default" : { // species
+								"animations" : [
+									"/humanoid/any/sbqModules/breasts/doubleBreasts/infused.animation"
+								],
+								"infuseTags" : {
 									"breasts_secondary_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
 									"breasts_secondary_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
 									"breasts_secondary_leftInfusedDirectives" : "<directives>"
 								},
 								"infusedBodyFullbrightParts" : [
-									"breasts_left_infused",
 									"breasts_secondary_left_infused"
-								]
+								],
+								"modules" : {
+									"nipplesVisible":{"false":{
+										"infuseTags" : {
+											"breasts_secondary_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront_noNipples.png",
+											"breasts_secondary_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack_noNipples.png"
+										}
+									}}
+								}
 							}
 						}
 
+					},
+					"modules" : {
+						"nipplesVisible":{"false":{
+							"animations":[
+								"/humanoid/any/sbqModules/breasts/noNipples.animation",
+								"/humanoid/any/sbqModules/breasts/doubleBreasts/noNipples.animation"
+							]
+						}}
 					}
+
 				}
 			},
 			"pussy" : {
