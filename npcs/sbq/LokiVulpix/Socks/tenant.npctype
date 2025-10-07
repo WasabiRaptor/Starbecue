@@ -143,7 +143,7 @@
 				]
 			},
 			// the default settings loaded when things have not been configured yet, also used as a fallback if a setting happens to be set to an invalid value
-			"defaultSettings" : {
+			"defaultSettings" : {"any":{
 
 				"locations" : {
 					"breasts" : {
@@ -177,9 +177,9 @@
 						"hammerspace" : true
 					}
 				}
-			},
+			}},
 			// override settings, for settings you don't want the player to be able to configure, such as if you don't like certain kinks, you can disable them on your NPC, or require something to stay enabled
-			"overrideSettings" : {
+			"overrideSettings" : {"any":{
 				"infusePrefs" : {
 					"pawInfuse" : {
 						"prey" : false
@@ -215,13 +215,13 @@
 
 				"speciesTF" : false,
 				"genderTF" : false
-			},
-			"invalidSettings" : {
+			}},
+			"invalidSettings" : {"any":{
 				"mainEffect" : {
 					"digest" : "heal",
 					"softDigest" : "heal"
 				}
-			}
+			}}
 		}
 
 	},

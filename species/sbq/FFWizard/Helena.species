@@ -369,11 +369,11 @@
 		"includes" : [
 			"/npcs/sbq/FFWizard/Helena/tenant.npctype:scriptConfig.sbqSettingsConfig"
 		],
-		"defaultSettings": {
+		"defaultSettings": {"any":{
 			"navelVisible": true,
 			"nipplesVisible": true,
-			"tailInfuseSelect": "hellhound_tail"
-		},
+			"tailInfuseSelect": "hellhound"
+		}},
 		"transformResult": {
 			"species": "sbq/FFWizard/hellhound"
 		}

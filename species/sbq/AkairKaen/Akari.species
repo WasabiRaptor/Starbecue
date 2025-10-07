@@ -363,12 +363,12 @@
 		"includes" : [
 			"/npcs/sbq/AkariKaen/Akari/tenant.npctype:scriptConfig.sbqSettingsConfig"
 		],
-		"defaultSettings": {
+		"defaultSettings": {"any":{
 			"navelVisible": true
-		},
-		"transformResult": {
+		}},
+		"transformResult": {"any":{
 			"species": "sergal"
-		}
+		}}
 	},
 	"sbqPartImages": {
 		"sbq/noLegs/malebody.png" : {

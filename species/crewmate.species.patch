@@ -70,18 +70,14 @@
 			"d39c6c"
 		]
 	},
-	// data to used when this species is infused (Sentient Fat, Belly TF, CTF etc.)
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config" // a path to base values all species should share
-	],
 	"sbqSettingsConfig": {
 		// setting values to lock to a specific value when playing as this species
-		"overrideSettings": {},
+		"overrideSettings": {"any":{}},
 		// default setting values for this species
-		"defaultSettings": {
+		"defaultSettings": {"any":{
 			"nipplesVisble": false,
 			"navelVisible": false
-		}
+		}}
 	},
 	"sbqPartImages": {
 		"sbq/noLegs/malebody.png" : {

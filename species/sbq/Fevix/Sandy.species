@@ -1,5 +1,20 @@
 {
 	"sbqCompatible" : true,
+	"kind": "sbq/Fevix/Sandy",
+	"nameGen": [
+		"/species/humanmalenamegen.config:names",
+		"/species/humanfemalenamegen.config:names"
+	],
+	"charCreationTooltip": {
+		"title": "Sandy",
+		"subTitle": "The Floatporeon.",
+		"description": "Blub."
+	},
+	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
+	"ouchNoises": [
+		"/sfx/humanoid/humanhurt_male1.ogg",
+		"/sfx/humanoid/humanhurt_female1.ogg"
+	],
 	"altOptionAsHairColor": true,
 	"altOptionAsUndyColor": true,
 	"humanoidConfig" : "/humanoid/sbq/quadruped/quadruped.config",
@@ -27,11 +42,6 @@
 			"ffe2c5": "ab8c77"
 		}
 	],
-	"charCreationTooltip": {
-		"title": "Sandy",
-		"subTitle": "The Floatporeon.",
-		"description": "Blub."
-	},
 	"charGenTextLabels": [
 		"Skin colour",
 		"Hair style",
@@ -44,184 +54,6 @@
 		"HUMAN",
 		"Personality"
 	],
-	"defaultBlueprints": {
-		"tier1": [
-			// Empty Hands
-			{
-				"item": "flaghuman"
-			},
-			// Anvil
-			{
-				"item": "humantier1head"
-			},
-			{
-				"item": "humantier1chest"
-			},
-			{
-				"item": "humantier1pants"
-			},
-			{
-				"item": "humantier2head"
-			},
-			{
-				"item": "humantier2chest"
-			},
-			{
-				"item": "humantier2pants"
-			},
-			{
-				"item": "ironshortsword"
-			},
-			{
-				"item": "ironbroadsword"
-			},
-			{
-				"item": "tungstenaxe"
-			},
-			{
-				"item": "tungstenhammer"
-			},
-			// Anvil2
-			{
-				"item": "humantier3head"
-			},
-			{
-				"item": "humantier3chest"
-			},
-			{
-				"item": "humantier3pants"
-			},
-			{
-				"item": "humantier4head"
-			},
-			{
-				"item": "humantier4chest"
-			},
-			{
-				"item": "humantier4pants"
-			},
-			{
-				"item": "titaniumdagger"
-			},
-			{
-				"item": "titaniumspear"
-			},
-			{
-				"item": "durasteelbroadsword"
-			},
-			{
-				"item": "durasteelshortsword"
-			},
-			// Anvil3
-			{
-				"item": "humantier5ahead"
-			},
-			{
-				"item": "humantier5achest"
-			},
-			{
-				"item": "humantier5apants"
-			},
-			{
-				"item": "humantier6ahead"
-			},
-			{
-				"item": "humantier6achest"
-			},
-			{
-				"item": "humantier6apants"
-			},
-			{
-				"item": "humantier5mhead"
-			},
-			{
-				"item": "humantier5mchest"
-			},
-			{
-				"item": "humantier5mpants"
-			},
-			{
-				"item": "humantier6mhead"
-			},
-			{
-				"item": "humantier6mchest"
-			},
-			{
-				"item": "humantier6mpants"
-			},
-			{
-				"item": "humantier5shead"
-			},
-			{
-				"item": "humantier5schest"
-			},
-			{
-				"item": "humantier5spants"
-			},
-			{
-				"item": "humantier6shead"
-			},
-			{
-				"item": "humantier6schest"
-			},
-			{
-				"item": "humantier6spants"
-			},
-			{
-				"item": "aegisaltpistol"
-			},
-			{
-				"item": "aegisaltbow"
-			},
-			{
-				"item": "feroziumwand"
-			},
-			{
-				"item": "feroziumstaff"
-			},
-			{
-				"item": "violiumshortsword"
-			},
-			{
-				"item": "violiumbroadsword"
-			},
-			// Furniture Table 2
-			{
-				"item": "humanstoragelocker"
-			},
-			{
-				"item": "humanshipdoor"
-			},
-			{
-				"item": "humanshiphatch"
-			},
-			// Spinning Wheel
-			{
-				"item": "conceptchest"
-			},
-			{
-				"item": "conceptlegs"
-			},
-			{
-				"item": "coolchest"
-			},
-			{
-				"item": "coollegs"
-			},
-			{
-				"item": "sweatervestchest"
-			},
-			{
-				"item": "sweatervestlegs"
-			},
-			{
-				"item": "workoutchest"
-			},
-			{
-				"item": "workoutlegs"
-			}
-		]
-	},
 	"effectDirectives": "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
 	"forceName": "Sandy",
 	"genders": [
@@ -307,69 +139,16 @@
 		}
 	},
 	"identityAnimationCustom": {},
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config",
-		{
-			"locationOverrides": {
-				"transformResult": {
-					"species": "wr/vaporeon"
-				}
-			}
-		}
-	],
-	"infusedParts": {
-		"cockColorRemap": [
-			[
-				"primary",
-				"primary"
-			]
-		],
-		"pussyColorRemap": [
-			[
-				"flesh",
-				"primary"
-			]
-		],
-		"ballsColorRemap": [
-			[
-				"primary",
-				"secondary"
-			]
-		]
-	},
-	"kind": "sbq/Fevix/Sandy",
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
-	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
-	"ouchNoises": [
-		"/sfx/humanoid/humanhurt_male1.ogg",
-		"/sfx/humanoid/humanhurt_female1.ogg"
-	],
 	"potionImagePath": "/humanoid/sbq/Fevix/Sandy/potion/",
 	"potionRarity": "essential",
 	"sbqSettingsConfig": {
 		"includes" : [
 			"/npcs/sbq/Fevix/Sandy/tenant.npctype:scriptConfig.sbqSettingsConfig"
 		],
-		"overrideSettings": {
-			"breastsSelect" : "disable"
-		},
-		"breastsMatchGenderOverrides": false,
-		// TODO
-		"states": {
-			"default": {
-				"actions": {
-					"breastInfuse": false,
-					"breastInfused": false,
-					"breastInfuseExternal": false
-				}
-			}
-		},
-		"availableInfuseTypes": {
-			"breastInfuse": false
-		},
+		"overrideSettings": {"any":{
+			"breastsSelect" : "disable",
+			"breastsSelectOverride" : false
+		}},
 		"transformResult": {
 			"species": "wr/vaporeon"
 		}
@@ -707,5 +486,183 @@
 		{
 			"dc1f00": "4d76ad"
 		}
-	]
+	],
+	"defaultBlueprints": {
+		"tier1": [
+			// Empty Hands
+			{
+				"item": "flaghuman"
+			},
+			// Anvil
+			{
+				"item": "humantier1head"
+			},
+			{
+				"item": "humantier1chest"
+			},
+			{
+				"item": "humantier1pants"
+			},
+			{
+				"item": "humantier2head"
+			},
+			{
+				"item": "humantier2chest"
+			},
+			{
+				"item": "humantier2pants"
+			},
+			{
+				"item": "ironshortsword"
+			},
+			{
+				"item": "ironbroadsword"
+			},
+			{
+				"item": "tungstenaxe"
+			},
+			{
+				"item": "tungstenhammer"
+			},
+			// Anvil2
+			{
+				"item": "humantier3head"
+			},
+			{
+				"item": "humantier3chest"
+			},
+			{
+				"item": "humantier3pants"
+			},
+			{
+				"item": "humantier4head"
+			},
+			{
+				"item": "humantier4chest"
+			},
+			{
+				"item": "humantier4pants"
+			},
+			{
+				"item": "titaniumdagger"
+			},
+			{
+				"item": "titaniumspear"
+			},
+			{
+				"item": "durasteelbroadsword"
+			},
+			{
+				"item": "durasteelshortsword"
+			},
+			// Anvil3
+			{
+				"item": "humantier5ahead"
+			},
+			{
+				"item": "humantier5achest"
+			},
+			{
+				"item": "humantier5apants"
+			},
+			{
+				"item": "humantier6ahead"
+			},
+			{
+				"item": "humantier6achest"
+			},
+			{
+				"item": "humantier6apants"
+			},
+			{
+				"item": "humantier5mhead"
+			},
+			{
+				"item": "humantier5mchest"
+			},
+			{
+				"item": "humantier5mpants"
+			},
+			{
+				"item": "humantier6mhead"
+			},
+			{
+				"item": "humantier6mchest"
+			},
+			{
+				"item": "humantier6mpants"
+			},
+			{
+				"item": "humantier5shead"
+			},
+			{
+				"item": "humantier5schest"
+			},
+			{
+				"item": "humantier5spants"
+			},
+			{
+				"item": "humantier6shead"
+			},
+			{
+				"item": "humantier6schest"
+			},
+			{
+				"item": "humantier6spants"
+			},
+			{
+				"item": "aegisaltpistol"
+			},
+			{
+				"item": "aegisaltbow"
+			},
+			{
+				"item": "feroziumwand"
+			},
+			{
+				"item": "feroziumstaff"
+			},
+			{
+				"item": "violiumshortsword"
+			},
+			{
+				"item": "violiumbroadsword"
+			},
+			// Furniture Table 2
+			{
+				"item": "humanstoragelocker"
+			},
+			{
+				"item": "humanshipdoor"
+			},
+			{
+				"item": "humanshiphatch"
+			},
+			// Spinning Wheel
+			{
+				"item": "conceptchest"
+			},
+			{
+				"item": "conceptlegs"
+			},
+			{
+				"item": "coolchest"
+			},
+			{
+				"item": "coollegs"
+			},
+			{
+				"item": "sweatervestchest"
+			},
+			{
+				"item": "sweatervestlegs"
+			},
+			{
+				"item": "workoutchest"
+			},
+			{
+				"item": "workoutlegs"
+			}
+		]
+	}
 }

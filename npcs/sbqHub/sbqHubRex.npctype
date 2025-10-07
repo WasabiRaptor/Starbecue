@@ -57,14 +57,14 @@
 				"/species/sbq/disableAllInfusePrey.config",
 				"/species/sbq/disableAllVorePrey.config"
 			],
-			"defaultSettings": {
+			"defaultSettings": {"any":{
 				"vorePrefs": {
 					"oralVore": {
 						"pred": true
 					}
 				}
-			},
-			"overrideSettings": {
+			}},
+			"overrideSettings": {"any":{
 				"cockSelect": "disable",
 				"ballsSelect": "disable",
 				"breastsSelect": "disable",
@@ -92,7 +92,7 @@
 						"pred": false
 					}
 				}
-			}
+			}}
 		},
 		"dialogueTree": {
 			"greeting": {

@@ -20,18 +20,18 @@
 				"/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqSettingsConfig"
 			],
 
-			"defaultSettings" : {
+			"defaultSettings" : { "any" :{
 				"personality" : "meanbean",
 				"vorePrefs" : {"oralVore":{"pred":true}},
 				"domBehavior" : {"oralVore":{"getConsentChance":0}},
 				"leanSubDom" : 1,
 				"interactDialogue" : false
-			},
-			"groupedDefaultSettings" : {
+			}},
+			"groupedDefaultSettings" : { "any" :{
 				"vorePrefs" : {"pred":true},
 				"locations" : {"mainEffect":"digest", "reformDigested": false},
 				"domBehavior" : {"targetFriendly":false, "getConsentChance":0}
-			}
+			}}
 		},
 
 		// "sbqPredRewards" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.sbqPredRewards",
