@@ -2421,7 +2421,7 @@ function sbq._Occupant:capture()
 				settings = sbq._Settings.new(
 					{},
 					card.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings,
-					self.npcArgs.npcParam.wasPlayer and "player" or "npc",
+					card.parameters.npcArgs.npcParam.wasPlayer and "player" or "npc",
 					true
 				),
 
@@ -2481,6 +2481,12 @@ end
 function _CapturedOccupant.new(capturedData)
 	newCapturedOccupant = root.loadVersionedJson(capturedData, "sbqCapturedOccupant")
 	newCapturedOccupant.captureId = sb.makeUuid()
+		newCapturedOccupant.settings = sbq._Settings.new(
+		{},
+		newCapturedOccupant.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings,
+		newCapturedOccupant.npcArgs.npcParam.wasPlayer and "player" or "npc",
+		true
+	)
 	setmetatable(newCapturedOccupant, _CapturedOccupant)
 	return newCapturedOccupant
 end
