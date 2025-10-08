@@ -3,7 +3,8 @@
 	"sbqTFAny" : true,
 	"sbqTenantData" : {
 		"colonyTagCriteria" : {
-			"sea" : 8
+			"unscorched" : 8,
+			"human" : 4
 		},
 		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
 			{},
@@ -18,27 +19,30 @@
 			{"tier10":12}
 		],
 		"tenant" : {
-			"spawn": "npc", "species": "wr/vaporeon", "type": "sbqVoreTenant", "overrides": {},
+			"spawn": "npc", "species": "wr/vulpix", "type": "sbqVoreTenant", "overrides": {},
 			"orderFurniture" : [
-				{"name":"brokenanchor", "count":1},
-				{"name":"coralmirror", "count":1},
-				{"name":"seabed", "count":1},
-				{"name":"seachair", "count":1},
-				{"name":"sealamp", "count":1},
-				{"name":"seaweedpot", "count":1}
+				{"name":"medievalfireplace", "count":1},
+				{"name":"frontierfurnace", "count":1},
+				{"name":"scorchedcitybed", "count":1},
+				{"name":"scorchedcitychestdrawersmall", "count":1},
+				{"name":"scorchedcitytv", "count":1},
+				{"name":"scorchedcitytable", "count":1},
+				{"name":"lavalamp1", "count":1, "parameters":{"color":"red"}},
+				{"name":"lavalamp1", "count":1, "parameters":{"color":"orange"}},
+				{"name":"lavalamp1", "count":1, "parameters":{"color":"yellow"}}
 			]
 		},
 		"guardTenant" : [ // merges on top of the base tenant
-			{"spawn": "npc", "level": 1, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 2, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 3, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 4, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 5, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 6, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 7, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 8, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 9, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 10, "species": "wr/vaporeon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+			{"spawn": "npc", "level": 1, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 2, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 3, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 4, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 5, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 6, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 7, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 8, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 9, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"spawn": "npc", "level": 10, "species": "wr/vulpix", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
 		]
 	},
 	"sbqSettingsConfig": {
@@ -134,11 +138,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"secondary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"paws"
 				]
 			]
 		},
@@ -152,7 +156,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"paws"
 				]
 			]
 
@@ -178,10 +182,40 @@
 			]
 		},
 		"sbq/vaporeon_tail.png" : {
-			"sourceImage" : "/humanoid/wr/vaporeon/tail.png"
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
 		},
 		"sbq/infused/vaporeon_tail.png" : {
-			"sourceImage" : "/humanoid/wr/vaporeon/tail.png"
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				],
+				[
+					"secondary",
+					"secondary"
+				],
+				[
+					"tertiary",
+					"tertiary"
+				]
+			]
 		},
 
 		"sbq/luxio_tail.png" : {
@@ -215,7 +249,6 @@
 				]
 			]
 		},
-
 		"sbq/bellyQuadruped_noNavel.png": {
 			"sourceImage": "/humanoid/sbq/quadruped/belly/default.png",
 			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
