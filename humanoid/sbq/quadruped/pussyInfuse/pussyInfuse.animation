@@ -1,0 +1,18 @@
+{
+	"version" : 1,
+	"includes" : [
+		"/humanoid/any/sbqModules/pussyInfuse/pussyInfuse.animation"
+	],
+	"animatedParts" : {
+		"parts" : {
+			"pussy" : {
+				"properties" : {
+					"anchorPart" : "body",
+					"transformationGroups": ["crotchOffset"],
+					"offset" : [-1.0625, 0.3125],
+					"interact" : [0, 0]
+				}
+			}
+		}
+	}
+}
