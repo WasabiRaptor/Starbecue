@@ -243,7 +243,7 @@ end
 function backupTenantStorage(uniqueId, preservedStorage)
 	withTenant(uniqueId, function (tenant)
 		tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
-        tenant.overrides.scriptConfig.initialStorage = preservedStorage
+		tenant.overrides.scriptConfig.initialStorage = preservedStorage or {}
 		tenant.species = tenant.overrides.scriptConfig.initialStorage.sbqOriginalSpecies or tenant.species
 		tenant.overrides.identity.gender = tenant.overrides.identity.gender or tenant.sbqOriginalGender
 	end)
@@ -495,7 +495,7 @@ function spawn(tenant, i)
 			tenant.overrides.identity = world.callScriptedEntity(entityId, "npc.humanoidIdentity")
 			tenant.storedIdentity = true
 		end
-		overrides.scriptConfig.initialStorage = world.callScriptedEntity(entityId, "preservedStorage")
+		overrides.scriptConfig.initialStorage = world.callScriptedEntity(entityId, "preservedStorage") or {}
 		overrides.scriptConfig.initialStorage.sbqRandomizedSettings = true
 	elseif tenant.spawn == "monster" then
 		if not overrides.seed and tenant.seed then
