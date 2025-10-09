@@ -396,6 +396,9 @@ function sbq._SpeciesScript:addState(stateName, config)
 	state.locations = state.locations or {}
 	for k, location in pairs(self.locations) do
 		state.locations[k] = state.locations[k] or {}
+		if location.subLocations then
+			state.locations[k].subLocations = state.locations[k].subLocations or {}
+		end
 		for k2, subLocation in pairs(location.subLocations or {}) do
 			local subLocationData = sb.jsonMerge(subLocation, state.locations[k].subLocations[k2] or {})
 			subLocationData.struggleActions = subLocationData.struggleActions or {}
