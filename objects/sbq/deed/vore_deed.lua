@@ -244,7 +244,8 @@ function backupTenantStorage(uniqueId, preservedStorage)
 	withTenant(uniqueId, function (tenant)
 		tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
 		tenant.overrides.scriptConfig.initialStorage = preservedStorage or {}
-		tenant.species = tenant.overrides.scriptConfig.initialStorage.sbqOriginalSpecies or tenant.species
+        tenant.species = tenant.overrides.scriptConfig.initialStorage.sbqOriginalSpecies or tenant.species
+		tenant.overrides.identity = tenant.overrides.identity or {}
 		tenant.overrides.identity.gender = tenant.overrides.identity.gender or tenant.sbqOriginalGender
 	end)
 end

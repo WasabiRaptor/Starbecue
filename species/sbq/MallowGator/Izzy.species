@@ -1,7 +1,7 @@
 {
 	"kind" : "sbq/MallowGator/Izzy",
 
-
+	"forceName" : "Izzy",
 	"charCreationTooltip" : {
 		"title" : "Absol",
 		"subTitle" : "Omen",
@@ -140,6 +140,9 @@
 
 	"sbqCompatible" : true,
 	"sbqSettingsConfig": {
+		"includes" : [
+			"/npcs/sbq/MallowGator/Izzy/tenant.npctype:scriptConfig.sbqSettingsConfig"
+		],
 		"defaultSettings": {"any":{
 			"navelVisible": true,
 			"nipplesVisible": true

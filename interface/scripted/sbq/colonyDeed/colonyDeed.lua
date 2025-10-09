@@ -164,6 +164,7 @@ local specialDeedTags = {
 function sbq.refreshDeedPage()
 	_ENV.tenantListScrollArea:clearChildren()
 	if not storage.occupier then return end
+	storage.occupier.orderFurniture = nil
 	for i, tenant in ipairs(storage.occupier.tenants or {}) do
 		local name = ((tenant.overrides or {}).identity or {}).name or ""
 		local portrait
@@ -181,6 +182,12 @@ function sbq.refreshDeedPage()
 		canvasSize[1] = math.max(canvasSize[1], mg.measureString(name)[1])
 		if tenant.stolenBy then
 			canvasSize[1] = math.max(canvasSize[1], mg.measureString(tenant.stolenBy)[1])
+		end
+		if tenant.orderFurniture then
+			storage.occupier.orderFurniture = storage.occupier.orderFurniture or jarray()
+			for _, v in ipairs(tenant.orderFurniture) do
+				table.insert(storage.occupier.orderFurniture,v)
+			end
 		end
 
 		local panel = { type = "panel", expandMode = { 0, 0 }, style = "flat", color = (not id) and "FF0000", children = {
