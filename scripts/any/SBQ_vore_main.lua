@@ -775,7 +775,6 @@ function sbq._State:checkAnimations(activeOnly, animations, tags, target)
 end
 
 function sbq._State:interact(args)
-	sbq.logInfo(args,2)
 	if sbq.SpeciesScript.lockActions or sbq.timerRunning("dialogueAfter") then return end
 	local start = ".greeting"
 	local actions = true
