@@ -2613,12 +2613,16 @@ function _CapturedOccupant:infuseParameters(slot)
 	local identity = self.npcArgs.npcParam.identity
 	local humanoidConfig = self.humanoidConfig
 	local infuseSettings = {}
-	for k, v in pairs(sbq.config.infuseOverrideSettings[slot]) do
-		if (not v[2]) or sbq.settings:get(v[2]) then
-			infuseSettings.overrideSettings.any[k] = self.settings:get(v[1])
-		end
-		if v[2] and sbq.settings:checkLocked(v[2]) then
-			infuseSettings.overrideSettings.any[v[2]] = sbq.settings:get(v[2])
+	for k, v in pairs(sbq.config.infuseOverrideSettings[slot] or {}) do
+		if (type(v) == "table") and v[1] then
+			if (not v[2]) or sbq.settings:get(v[2]) then
+				infuseSettings.overrideSettings.any[k] = self.settings:get(v[1])
+			end
+			if v[2] and sbq.settings:checkLocked(v[2]) then
+				infuseSettings.overrideSettings.any[v[2]] = sbq.settings:get(v[2])
+			end
+		else
+			infuseSettings.overrideSettings.any[k] = v
 		end
 	end
 	return {
@@ -2635,12 +2639,16 @@ function sbq._Occupant:infuseParameters(slot)
 	local humanoidConfig = world.entity(self.entityId):humanoidConfig()
 	local infuseSettings = {overrideSettings={any={}}}
 	local publicSettings = self:getPublicProperty("sbqPublicSettings")
-	for k, v in pairs(sbq.config.infuseOverrideSettings[slot]) do
-		if (not v[2]) or sbq.settings:get(v[2]) then
-			infuseSettings.overrideSettings.any[k] = publicSettings[v[1]]
-		end
-		if v[2] and sbq.settings:checkLocked(v[2]) then
-			infuseSettings.overrideSettings.any[v[2]] = sbq.settings:get(v[2])
+	for k, v in pairs(sbq.config.infuseOverrideSettings[slot] or {}) do
+		if (type(v) == "table") and v[1] then
+			if (not v[2]) or sbq.settings:get(v[2]) then
+				infuseSettings.overrideSettings.any[k] = publicSettings[v[1]]
+			end
+			if v[2] and sbq.settings:checkLocked(v[2]) then
+				infuseSettings.overrideSettings.any[v[2]] = sbq.settings:get(v[2])
+			end
+		else
+			infuseSettings.overrideSettings.any[k] = v
 		end
 	end
 	return {
