@@ -270,10 +270,14 @@ function sbq.refreshPortrait(entityId)
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 	canvas:clear()
 	local portrait = world.entityPortrait(entityId, "bust")
-	if portrait then
-		local bounds = drawable.boundBoxAll(portrait, true)
-		local center = rect.center(bounds)
-		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+    if portrait then
+		if world.entityType(entityId) == "monster" then
+			local bounds = drawable.boundBoxAll(portrait, true)
+			local center = rect.center(bounds)
+			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+        else
+			canvas:drawDrawables(portrait, {30.5, 22.5})
+		end
 	end
 end
 

@@ -197,10 +197,8 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		canvas:clear()
 		local portrait = world.entityPortrait(results.source, results.entityPortrait)
 		if portrait then
-			portrait = drawable.scaleAll(portrait, {4,4})
-			local bounds = drawable.boundBoxAll(portrait, true)
-			local center = rect.center(bounds)
-			canvas:drawDrawables(portrait, vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), center))
+			portrait = drawable.scaleAll(portrait, { 4, 4 })
+			canvas:drawDrawables(portrait, {208,176})
 		end
 	else
 		_ENV.imagePortrait:setVisible(false)
