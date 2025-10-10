@@ -103,7 +103,7 @@ local capturedTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/cap
 function sbq.refreshOccupants()
 	sbq.Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
-	local seatCount = player.humanoidConfig().sbqOccupantSlots or 1
+	local seatCount = player.humanoidConfig().sbqOccupantSlots or 0
 	local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16 - 7)) / occupantTemplate.size[2]) - seatCount
 	local usedSlots = 0
 	for _, occupant in ipairs(sbq.Occupants.list) do
