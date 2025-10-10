@@ -234,7 +234,7 @@ end
 assets.add("/interface/scripted/sbq/colonyDeed/catalogue.config", sb.printJson(tenantCatalogue))
 
 
-local occupantSlotCap = assets.json("/sbq.config:occpantSlotCap")
+local occupantSlotCap = assets.json("/sbq.config:occupantSlotCap")
 for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do
 	local cap = assets.json(path).sbqOccupantSlots or occupantSlotCap
 	for i = 1, cap do

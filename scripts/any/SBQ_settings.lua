@@ -550,7 +550,7 @@ function _Upgrades.updated:candyBonus(name, oldValue)
 	local candyBonus = self:get("candyBonus")
 	self.applyTo:set("maxDigestPower", 1 + (candyBonus / 2))
 	self.applyTo:set("maxPossibleScale", math.min(2 + (candyBonus), sbq.config.scaleCap))
-	self.applyTo:set("maxOccupantSlots", math.min(4 + (candyBonus * 2), sbq.config.occpantSlotCap))
+	self.applyTo:set("maxOccupantSlots", math.min(4 + (candyBonus * 2), sbq.config.occupantSlotCap))
 
 	for _, k in ipairs(sbq.config.digestPowerSettings) do
 		if self.applyTo:get(k) == oldMaxDigest then
@@ -573,7 +573,7 @@ function _Upgrades:apply(settings)
 	local candyBonus = self:get("candyBonus")
 	self.applyTo:set("maxDigestPower", 1 + (candyBonus / 2))
 	self.applyTo:set("maxPossibleScale", math.min(2 + (candyBonus), sbq.config.scaleCap))
-	self.applyTo:set("maxOccupantSlots", math.min(4 + (candyBonus * 2), sbq.config.occpantSlotCap))
+	self.applyTo:set("maxOccupantSlots", math.min(4 + (candyBonus * 2), sbq.config.occupantSlotCap))
 end
 
 function _Upgrades:setMessageHandlers(localOnly)

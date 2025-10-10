@@ -146,7 +146,10 @@ function build(identity, humanoidParameters, humanoidConfig, npcHumanoidConfig)
 
 	humanoidConfig.loungePositions = humanoidConfig.loungePositions or {}
 
-	humanoidConfig.sbqConfig.seatCount = humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or 0
+	humanoidConfig.sbqConfig.seatCount = math.min(
+		humanoidConfig.sbqConfig.seatCount or humanoidConfig.sbqOccupantSlots or 0,
+		root.assetJson("/sbq.config:occupantSlotCap")
+	)
 	for i = 1, (humanoidConfig.sbqConfig.seatCount) do
 		humanoidConfig.loungePositions["occupant" .. tostring(i)] = {
 			part = "occupant" .. tostring(i),
