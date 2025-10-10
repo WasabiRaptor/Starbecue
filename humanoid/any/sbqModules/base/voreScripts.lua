@@ -788,7 +788,7 @@ function default:infused(name, action, target)
 	occupant.flags.digested = false
 	occupant.flags.digesting = false
 	occupant.flags.infused = true
-	occupant.flags.infuseSlots = copyArray(action.infuseSlots)
+	occupant.flags.infuseSlots = copyArray(action.infuseSlots or jarray())
 	occupant.flags.infusing = false
 	occupant.flags.infuseType = infuseType
 	occupant.locationSettings[infuseType.."Digested"] = false
