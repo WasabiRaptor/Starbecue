@@ -2612,7 +2612,7 @@ end
 function _CapturedOccupant:infuseParameters(slot)
 	local identity = self.npcArgs.npcParam.identity
 	local humanoidConfig = self.humanoidConfig
-	local infuseSettings = {}
+	local infuseSettings = {overrideSettings={any={}}}
 	for k, v in pairs(sbq.config.infuseOverrideSettings[slot] or {}) do
 		if (type(v) == "table") and v[1] then
 			if (not v[2]) or sbq.settings:get(v[2]) then
