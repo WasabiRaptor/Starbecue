@@ -386,6 +386,15 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Space Skunks](https://steamcommunity.com/sharedfiles/filedetails/?id=3423728930) : skumks
 ---
 
+## Races that need extra work to update
+- Crylan
+	- Probably need proper no-legs mask for naga and taur compatibility
+- Squamaeft
+	- Need proper masks since their bodies and legs are thicker than normal
+		- no Legs
+		- remove tail
+		- foreground leg
+
 ## Techs
 
 ### Shapeshifter : sbqTransform
