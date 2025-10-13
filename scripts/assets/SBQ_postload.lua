@@ -238,16 +238,16 @@ local occupantSlotCap = assets.json("/sbq.config:occupantSlotCap")
 for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do
 	local cap = assets.json(path).sbqOccupantSlots or occupantSlotCap
 	for i = 1, cap do
-		assets.add(path .. "." .. i, assets.bytes(path):gsub(
+		assets.add(path .. "." .. tostring(i), assets.bytes(path):gsub(
 			'<slot>', tostring(i)
 		):gsub(
-			'"zLevel"%s*:%s*(%d+%.%d+)', '"zLevel":%1'..string.format('%04d', i)
+			'"zLevel"%s*:%s*(%d+%.%d+)', '"zLevel":%1'..string.format('%04i', i)
 		):gsub(
-			'"flippedZLevel"%s*:%s*(%d+%.%d+)', '"flippedZLevel":%1'..string.format('%04d', i)
+			'"flippedZLevel"%s*:%s*(%d+%.%d+)', '"flippedZLevel":%1'..string.format('%04i', i)
 		):gsub(
-			'"zLevel"%s*:%s*(%-%d+%.%d+)', '"zLevel":%1'..string.format('%04d', 20-i)
+			'"zLevel"%s*:%s*(%-%d+%.%d+)', '"zLevel":%1'..string.format('%04i', cap-i)
 		):gsub(
-			'"flippedZLevel"%s*:%s*(%-%d+%.%d+)', '"flippedZLevel":%1'..string.format('%04d', 20-i)
+			'"flippedZLevel"%s*:%s*(%-%d+%.%d+)', '"flippedZLevel":%1'..string.format('%04i', cap-i)
 		))
 	end
 end
