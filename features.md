@@ -394,6 +394,14 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 		- no Legs
 		- remove tail
 		- foreground leg
+- Vulpes
+	- do something in their no-legs patch to better bridge the gap for naga and taur since they're thinner
+- Orcana
+	- fix their color palette to actually have primary color
+- Vesperian
+	- fix their color palette to actually have secondary color
+- Spirit Tree
+	- find out why the tail color remaps are inconsistent for no reason
 
 ## Techs
 
