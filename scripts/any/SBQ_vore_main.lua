@@ -631,7 +631,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 					dialogueProcessor.sendPlayerDialogueBox()
 					dialogueProcessor.speakDialogue()
 				else
-					world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
+					world.sendEntityMessage(target, "sbqCloseDialogueBox")
 				end
 			end
 		end
@@ -640,7 +640,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 			wait = dialogueProcessor.predictTime()
 			dialogueProcessor.speakDialogue(callback)
 		else
-			world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
+			world.sendEntityMessage(target, "sbqCloseDialogueBox")
 			callback()
 		end
 	else
@@ -648,7 +648,7 @@ function sbq._State:requestAction(forcing, name, target, ...)
 			dialogueProcessor.sendPlayerDialogueBox()
 			dialogueProcessor.speakDialogue()
 		else
-			world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
+			world.sendEntityMessage(target, "sbqCloseDialogueBox")
 		end
 	end
 	return success or false, failReason or success or false, (time or 0) + wait, successfulFail, failReason2
@@ -1789,7 +1789,7 @@ function sbq.Occupants.update(dt)
 	sbq.Occupants.lastScale = sbq.getScale()
 
 	if sbq.Occupants.queueHudRefresh then
-		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqRefreshHudOccupants", sbq.Occupants.list, sbq.Occupants.captured, sbq.settingsPageData())
+		world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", sbq.Occupants.list, sbq.Occupants.captured, sbq.settingsPageData())
 		sbq.Occupants.queueHudRefresh = false
 	end
 	if sbq.Occupants.refreshOccupantModifiers then
@@ -2023,7 +2023,6 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 	end
 
 	self:sendEntityMessage(
-		"sbqScriptPaneMessage",
 		"sbqRefreshLocationData",
 		entity.id(),
 		location:outputData(self.entityId),
@@ -2055,7 +2054,7 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.newOccupant then
 		sbq.Occupants.queueHudRefresh = true
 	else
-		world.sendEntityMessage(entity.id(), "sbqScriptPaneMessage", "sbqHudRefreshPortrait", self.entityId, {
+		world.sendEntityMessage(entity.id(), "sbqHudRefreshPortrait", self.entityId, {
 			time = self.time,
 			struggleTime = self.struggleTime,
 			struggleCount = self.struggleCount,

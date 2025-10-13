@@ -192,7 +192,7 @@ function sbq_hunting.promptResponse(response)
 		return
 	end
 	local try, isDom, line, action, target = table.unpack(response)
-	world.sendEntityMessage(target, "sbqScriptPaneMessage", "sbqCloseDialogueBox")
+	world.sendEntityMessage(target, "sbqCloseDialogueBox")
 	if isDom then
 		sbq_hunting.domPromptResponse(try, line, action, target)
 	else

@@ -98,12 +98,14 @@ function init()
 			sourceEntity)
 	end)
 
-	message.setHandler("sbqScriptPaneMessage", function(_, _, ...)
-		local rpc = interface.sendMessage(...)
-		if not rpc:succeeded() then
-			rpc = world.sendEntityMessage(player.id(), ...)
-		end
-		return rpc:result()
+	message.setHandler("sbqCloseDialogueBox", function(_, _, ...)
+		interface.sendMessage("sbqCloseDialogueBox", ...)
+	end)
+	message.setHandler("sbqPredHudPreyDialogue", function(_, _, ...)
+		interface.sendMessage("sbqPredHudPreyDialogue", ...)
+	end)
+	message.setHandler("sbqHudRefreshPortrait", function(_, _, ...)
+		interface.sendMessage("sbqHudRefreshPortrait", ...)
 	end)
 
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
@@ -140,6 +142,7 @@ function init()
 		sbq.setCurrentLocationData(id, locationData, newOccupantData)
 		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
 		player.setProperty("sbqPredWarpAttempted", 0)
+		if interface.sendMessage("sbqRefreshLocationData", id, locationData, newOccupantData):result() then return end
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
 			gui = player.getProperty("sbqPredHudOpen") and { panefeature = { offset = { -104, 0 } } } or {},
@@ -149,13 +152,13 @@ function init()
 	end)
 
 	message.setHandler("sbqRefreshHudOccupants", function(_, _, occupants, captured, settingsData)
+		if interface.sendMessage("sbqRefreshHudOccupants", occupants, captured, settingsData):result() then return end
 		player.interact("ScriptPane",
 			{
 				gui = {},
 				scripts = { "/metagui/sbq/build.lua" },
 				data = { occupants = occupants, captured = captured, sbq = settingsData },
-				ui =
-				"starbecue:predHud"
+				ui = "starbecue:predHud"
 			})
 	end)
 

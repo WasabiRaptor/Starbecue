@@ -367,6 +367,10 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	sbq.humanoid.setHumanoidParameters(newIdentity.parameters)
 	sbq.humanoid.setHumanoidIdentity(newIdentity)
 
+	if player and chat and newIdentity.name and (newIdentity.name ~= currentIdentity.name) then
+		chat.command("/nick "..newIdentity.name)
+	end
+
 	if duration and (not sbq.settings:get("indefiniteTF")) then
 		status.addEphemeralEffect("sbqTransformed", (duration or sbq.config.defaultTFDuration) * 60)
 	else
@@ -443,7 +447,7 @@ function sbq.refreshPredHudPortrait()
 	sbq.timer("predHudPortrait", 1, function()
 		local loungeId = world.entity(entity.id()):anchorState()
 		if loungeId then
-			world.sendEntityMessage(loungeId, "sbqScriptPaneMessage", "sbqHudRefreshPortrait", entity.id())
+			world.sendEntityMessage(loungeId, "sbqHudRefreshPortrait", entity.id())
 		end
 	end)
 end

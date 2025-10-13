@@ -41,10 +41,6 @@ function init()
 		sub = {}
 	}
 	sbq.expectedActions = {}
-	message.setHandler("sbqScriptPaneMessage", function(_, _, ...)
-		return world.sendEntityMessage(entity.id(), ...):result()
-	end)
-
 	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, occupantData)
 		sbq.setCurrentLocationData(id, locationData, occupantData)
 	end)

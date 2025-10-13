@@ -4,7 +4,6 @@ end
 
 sbq.Occupants = {
 	list = jarray(),
-	entityId = {},
 	captured = jarray()
 }
 local drawable
@@ -34,6 +33,7 @@ function init()
 		sbq.assignSettingValues()
 		sbq.refreshSettingVisibility()
 		sbq.refreshOccupants()
+		return true
 	end)
 	message.setHandler("sbqPredHudPreyDialogue", function(_, _, entityId, dialogue, sound, speed, volume, lifetime)
 		if not world.entityExists(entityId) then return end
@@ -101,7 +101,6 @@ local emptyTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/emptyS
 local occupantTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/occupantSlot.config")
 local capturedTemplate = root.assetJson("/interface/scripted/sbq/predatorHud/capturedSlot.config")
 function sbq.refreshOccupants()
-	sbq.Occupants.entityId = {}
 	_ENV.occupantSlots:clearChildren()
 	local seatCount = player.humanoidConfig().sbqOccupantSlots or 0
 	local blankSlotCount = math.ceil((pane.getSize()[2] - 32 - (16 - 7)) / occupantTemplate.size[2]) - seatCount
@@ -270,12 +269,12 @@ function sbq.refreshPortrait(entityId)
 	local canvas = widget.bindCanvas( canvasWidget.backingWidget )
 	canvas:clear()
 	local portrait = world.entityPortrait(entityId, "bust")
-    if portrait then
+	if portrait then
 		if world.entityType(entityId) == "monster" then
 			local bounds = drawable.boundBoxAll(portrait, true)
 			local center = rect.center(bounds)
 			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
-        else
+		else
 			canvas:drawDrawables(portrait, {30.5, 22.5})
 		end
 	end
