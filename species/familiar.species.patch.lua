@@ -7,7 +7,6 @@ function patch(config)
 		local color1 = "008051"
 		local color2 = "00bf79"
 		local color3 = "00ffa1"
-
 		if type(replacements) == "string" then
 			local f1, f2 = replacements:find("00ffa1=")
 			if f1 and f2 then
@@ -15,7 +14,7 @@ function patch(config)
 				color3 = replacements:sub(f2+1,(f3 or 0)-1)
 			end
 		else
-			for k, v in ipairs(replacements) do
+			for k, v in pairs(replacements) do
 				local toReplace = k:lower()
 				if toReplace == "00ffa1" then
 					color3 = v
@@ -23,10 +22,9 @@ function patch(config)
 				end
 			end
 		end
-		local h, s, v = rgb2hsv(color3:sub(1, 2) / 255, color3:sub(3, 4) / 255, color3:sub(5, 6) / 255)
-
-		color2 = ("%2x%2x%2x"):format(hsv2rgb(h,s,v-0.25))
-		color1 = ("%2x%2x%2x"):format(hsv2rgb(h,s,v-0.5))
+		local h, s, v = rgb2hsv(tonumber(color3:sub(1, 2),16) / 255, tonumber(color3:sub(3, 4),16) / 255, tonumber(color3:sub(5, 6),16) / 255)
+		color2 = ("%02x%02x%02x"):format(hsv2rgb(h,s,v * 0.75))
+		color1 = ("%02x%02x%02x"):format(hsv2rgb(h,s,v * 0.5))
 
 		if color3:len() > 6 then
 			local a = color3:sub(7, 8)
