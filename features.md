@@ -320,7 +320,6 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Novali](https://steamcommunity.com/sharedfiles/filedetails/?id=1386730092) : novali
 - [Lucario](https://steamcommunity.com/sharedfiles/filedetails/?id=1356955138) : lucario
 - [Lycanroc](https://steamcommunity.com/sharedfiles/filedetails/?id=1800401078) : lycanroc
-- [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes) : eevee
 - [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX) : eevee
 - [Eevee](https://steamcommunity.com/sharedfiles/filedetails/?id=1266991719) (Remade) : eeveetwo
 - [Jolteon](https://steamcommunity.com/sharedfiles/filedetails/?id=2075613227) : jolte
@@ -337,9 +336,7 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Rodent](https://github.com/Zygahedron/StarboundSimpleVoreMod) (Sheights' version of SSVM is broken, this is a fixed fork) : rodent
 - [Lyceen](https://steamcommunity.com/sharedfiles/filedetails/?id=1360547769) : lyceen
 - [Latex](https://steamcommunity.com/sharedfiles/filedetails/?id=1818502101) : myfirsttest
-- [Elysian](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes) : elysian
 - [Elysian](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX) : elysian
-- [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=1405822108) (GalaxyFoxes) : fennix
 - [Fennix](https://steamcommunity.com/sharedfiles/filedetails/?id=3194891396) (GalaxyFoxesEX) : fennix
 - [Felin](https://steamcommunity.com/sharedfiles/filedetails/?id=729429063) : felin
 - [Draconis](https://steamcommunity.com/workshop/filedetails/?id=868165595) : dragon
