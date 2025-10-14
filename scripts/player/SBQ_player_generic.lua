@@ -362,6 +362,7 @@ function update(dt)
 					if escape then
 						status.setStatusProperty("sbqOccupantStorage", nil)
 						status.clearPersistentEffects("sbqMissingPred")
+						occupantData = nil
 					else
 						player.setProperty("sbqPredWarpAttempted", 0)
 					end

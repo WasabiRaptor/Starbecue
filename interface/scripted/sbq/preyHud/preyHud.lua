@@ -73,6 +73,7 @@ function init()
 		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
 		player.setProperty("sbqPredWarpAttempted", 0)
 		processLocationData(locationData, newOccupantData)
+		return true
 	end)
 
 	update(0)
