@@ -166,7 +166,7 @@ function dialogueProcessor.getDialogueBranch(path, settings, eid, dialogueTree, 
 				end
 			elseif dialogueTree.settings == "self" then
 				eid = sbq.entityId()
-				settings = sbq.settings
+				settings = sbq.settings.read
 			else
 				eid = world.uniqueEntityId(dialogueTree.settings)
 				if eid and world.entityExists(eid) then
@@ -384,10 +384,10 @@ function dialogueProcessor.speakDialogue(callback)
 		end
 		return
 	end
-    if self.board then
-        self.interacted = true
-        self.board:setEntity("interactionSource", dialogue.target)
-    end
+	if self.board then
+		self.interacted = true
+		self.board:setEntity("interactionSource", dialogue.target)
+	end
 	local textDirectives = (results.textDirectives or "").."^set;"
 	if results.font then
 		textDirectives = "^font="..results.font..";"..textDirectives

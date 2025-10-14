@@ -855,9 +855,11 @@ function mg.preyDialogueText(eid, pos, text, sound, speed, volume, id, lifetime)
 	cfg.size = {width,height}
 	local calcSize = {width + bm[1] + bm[3], height + bm[2] + bm[4]}
 	local pushIn = -((bm[1] + bm[2]) / 2 + 2)
-	local position = vec2.add(vec2.mul(vec2.add(pane.position(), pos), {1, -1}), {-bm[1] - pushIn, calcSize[2] - bm[2] - pushIn} )
-	cfg.anchor = { "bottomLeft",
-		{position[1]-(calcSize[1]), math.min(0,position[2])}
+
+	local position = vec2.add(pos, {-bm[1] - pushIn, calcSize[2] - bm[2] - pushIn} )
+	cfg.anchor = {
+		"bottomRight",
+		{position[1], math.min(0,position[2])}
 	}
 	theme.modifyContextMenu(cfg) -- give theme a chance to edit whatever it likes
 

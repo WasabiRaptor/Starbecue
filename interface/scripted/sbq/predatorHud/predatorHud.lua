@@ -46,8 +46,11 @@ function init()
 				pos = vec2.add(pos, w.position)
 				w = w.parent
 			end
-			if (pos[2] < 205) and (pos[2] > 19) then
-				_ENV.metagui.preyDialogueText(entityId, {1, 256 - pos[2] + (portrait.size[2]/2)}, dialogue, sound, speed, volume, entityId.."HudDialogue", lifetime)
+			local size = pane.getSize()
+			local top = 8
+			local bottom = size[2] - 32 - (25/2)
+			if (pos[2] < bottom) and (pos[2] > top) then
+				_ENV.metagui.preyDialogueText(entityId, {-100, pos[2]-size[2]}, dialogue, sound, speed, volume, entityId.."HudDialogue", lifetime)
 			end
 			sbq.refreshPortrait(entityId)
 		end
