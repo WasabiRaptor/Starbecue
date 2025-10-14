@@ -1,0 +1,59 @@
+{
+	"globalTagDefaults" : {
+		"tailFrameset" : "tail.png"
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+			"tailState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 8, "cycle": 2, "mode": "loop" }
+				}
+			}
+		},
+		"parts" : {
+			"tail" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 8.1,
+					"anchorPart" : "body",
+					"transformationGroups" : ["tailOffset"],
+					"offset" : [-1.875,-0.5],
+					"processingDirectives" : "<bodyDirectives>",
+					"interact" : [-1,0]
+				},
+				"partStates": {
+					"body": {
+						"idle": { "properties": { "image": "<tailFrameset>:<tailState_state>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailFrameset>:<body_state>.<body_frame>" } },
+						"run": { "properties": { "image": "<tailFrameset>:run.<body_frame>" } },
+						"runbackwards" : "run",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"tailState": {
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"tailOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

@@ -1,5 +1,5 @@
 {
-	"type" : "sbq/MallowGator/Izzy",
+	"type" : "sbq/DreccanOfPaws/Dreccan",
 	"baseType" : "villager",
 
 	"scripts" : [
@@ -9,7 +9,7 @@
 	],
 
 	// you really should make sure to define the npcname so the OC actually has the OC's name
-	"npcname" : "Izzy",
+	"npcname" : "Charactername",
 	// identity is quite important if you don't want things to be randomly generated
 	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
 	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
@@ -25,14 +25,14 @@
 		// "emoteDirectives" : "",
 		// "bodyDirectives" : "",
 
-		"gender" : "male"
+		// "gender" : "male",
 		// "personalityArmIdle" : "idle.1",
 		// "personalityIdle" : "idle.1",
 	},
 	"scriptConfig" : {
 		"sbqNPC" : true,
 		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
-		"uniqueId" : "sbq/MallowGator/Izzy", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+		"uniqueId" : "sbq/DreccanOfPaws/Dreccan", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
 
 		"behavior" : "sbqvorevillager",
 
@@ -43,7 +43,7 @@
 			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
 			"graduation" : {
 				"nextNpcType" : [  // empty table prevents the NPC from graduating into crew
-					// "sbq/MallowGator/Izzy-crewmember" // this lets the NPC graduate into a recruitable crewmember after doing a few quests for them
+					// "sbq/DreccanOfPaws/Dreccan-crewmember" // this lets the NPC graduate into a recruitable crewmember after doing a few quests for them
 				]
 			},
 			"enableParticipation" : true,
@@ -56,26 +56,22 @@
 
 		// These are intended to be inheritied by variants of the NPC
 		"sbqConvertType" : false, // the npc id for converting it to a non-vorny variant from the settings menu, such as if the oc has a variant that already exists in another mod
-		"sbqDeedConvertType" : "sbq/MallowGator/Izzy", // the npc type id it should convert to when inserted into a vore colony deed
-		"sbqEvilDeedConvertType" : "sbq/MallowGator/Izzy", // the npc type id it should convert to when inserted into an evil colony deed (such as a bandit variant if one is made)
+		"sbqDeedConvertType" : "sbq/DreccanOfPaws/Dreccan", // the npc type id it should convert to when inserted into a vore colony deed
+		"sbqEvilDeedConvertType" : "sbq/DreccanOfPaws/Dreccan", // the npc type id it should convert to when inserted into an evil colony deed (such as a bandit variant if one is made)
 
 		// this is the data that defines this NPC as a tenant available in the SBQ deeds
 		"sbqTenantData" : {
 			"priority" : 60,
 			"colonyTagCriteria" : {
 				// You should make the colony tags below reflect what your OC likes
-				"opulent" : 8
+				"office" : 4
 			},
 			"tenant" : {
-				"spawn": "npc", "species": "sbq/MallowGator/Izzy", "type": "sbq/MallowGator/Izzy", "overrides": {},
+				"spawn": "npc", "species": "sbq/DreccanOfPaws/Dreccan", "type": "sbq/DreccanOfPaws/Dreccan", "overrides": {},
 				"orderFurniture" : [
 					// you should populate this list with objects that have the requisite colonytags
-					{"name":"opulentbed", "count":1},
-					{"name":"opulentchair", "count":1},
-					{"name":"opulentdoor", "count":1},
-					{"name":"opulentlight", "count":1},
-					{"name":"opulentswitch", "count":1},
-					{"name":"opulenttable", "count":1}
+					{"name":"officedesk", "count":1},
+					{"name":"officelamp", "count":1}
 				]
 			}
 		},
@@ -98,6 +94,7 @@
 			// just copy and past here and then possibly edit further as you see fit
 			"defaultSettings" : {
 				"any":{ // the settings config can group things by entity type where the "any" table applies to everything
+
 				},
 				"npc":{
 
@@ -106,42 +103,25 @@
 
 				}
 			},
-			"groupedDefaultSettings" : { "any" :{
-				"vorePrefs" : {"pred":true,"prey":true},
-				"infusePrefs" : {"pred":false,"prey":false}
-			}},
-
 			// settings that are locked to a specific value and cannot be configured by the player, useful for disabling certain actions
 			// or things someone doesn't like, or simply preventing someone from diabling something important to the OC
 			// same structure as default settings above, only what is defined here is locked! only define something here if
 			// you want it to stay locked
 			"overrideSettings" : {
 				"any":{
-					"breastsSelect" : "disable",
-					"tailSelect" : "default",
 					// examples for disabling certain prefs
-					"vorePrefs" : {
-						"absorbVore" : {
-							"pred" : false
-						},
-						"navelVore" : {
-							"pred" : false
-						},
-						"breastVore" : {
-							"pred" : false
-						},
-						"tailVore" : {
-							"pred" : false
-						}
-					},
-					"infusePrefs" : {
-						"breastInfuse" : {
-							"pred" : false
-						},
-						"tailInfuse" : {
-							"pred" : false
-						}
-					}
+					// "vorePrefs" : {
+					// 	"oralVore" : {
+					// 		"pred" : false,
+					// 		"prey" : false
+					// 	}
+					// },
+					// "infusePrefs" : {
+					// 	"bellyInfuse" : {
+					// 		"pred" : false,
+					// 		"prey" : false
+					// 	}
+					// }
 				},
 				"npc":{
 
@@ -187,7 +167,7 @@
 		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
 			{ "mode" : "vertical" },
 			[
-				//{ "type" : "image", "file" : "/humanoid/sbq/MallowGator/Izzy/portraits/neutral.png" },
+				//{ "type" : "image", "file" : "/humanoid/sbq/DreccanOfPaws/Dreccan/portraits/neutral.png" },
 				[
 					[ { "type" : "label", "text" : "Age: ??"}, { "type" : "label", "text" : "Gender: ???"} ],
 					[ { "type" : "label", "text" : "Pronouns: ???"}, { "type" : "label", "text" : "Species: ???"} ],
@@ -200,40 +180,40 @@
 		]},
 
 		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
-		"dialogueTree" : "/npcs/sbq/MallowGator/Izzy/npc.dialogueTree",
+		"dialogueTree" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogueTree",
 		// below is the dialogue triggered by vanilla scripts, it has a rather simple structure, all the dialogue is in the external file
 		"dialog": {
 			"tenant": {
 				"grumbles": {
-					"tagCriteria": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.tagCriteria",
-					"enclosedArea": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.enclosedArea",
-					"otherDeed": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.otherDeed",
-					"severe": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.severe",
-					"final": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.final"
+					"tagCriteria": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.tagCriteria",
+					"enclosedArea": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.enclosedArea",
+					"otherDeed": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.otherDeed",
+					"severe": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.severe",
+					"final": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.final"
 				},
 				"arrivedHome": {
-					"beacon": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.beacon",
-					"rent": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.rent"
+					"beacon": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.beacon",
+					"rent": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.rent"
 				}
 			},
 			"flee": {
-				"helpme": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.helpme",
-				"safe": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.safe"
+				"helpme": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.helpme",
+				"safe": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.safe"
 			},
-			"accuse": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.accuse",
-			"alert": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.alert",
-			"attack" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.attack",
-			"reattack" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.reattack",
-			"killedTarget" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.killedTarget",
-			"lostTarget" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.lostTarget",
-			"outOfSight" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.outOfSight",
-			"cheerOn" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.cheerOn",
-			"cantreach": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.cantReachEnemy",
+			"accuse": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.accuse",
+			"alert": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.alert",
+			"attack" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.attack",
+			"reattack" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.reattack",
+			"killedTarget" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.killedTarget",
+			"lostTarget" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.lostTarget",
+			"outOfSight" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.outOfSight",
+			"cheerOn" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.cheerOn",
+			"cantreach": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.cantReachEnemy",
 			"crewmember": {
-				"offer": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.offer",
-				"roleDescription": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.roleDescription",
-				"respawned": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.respawned",
-				"cantreach": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.crewcantreach"
+				"offer": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.offer",
+				"roleDescription": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.roleDescription",
+				"respawned": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.respawned",
+				"cantreach": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.crewcantreach"
 			}
 		},
 

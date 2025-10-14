@@ -1,0 +1,25 @@
+{
+	"type" : "sbq/DreccanOfPaws/Dreccan-hub",
+
+	// this should be your base NPC's type
+	"baseType" : "sbq/DreccanOfPaws/Dreccan",
+
+	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		},
+		"sbqHubNPCs" : [ // list of NPCs that can spawn in the SBQ hub world
+			{"level": 1, "species": "sbq/DreccanOfPaws/Dreccan", "type": "sbq/DreccanOfPaws/Dreccan-hub", "overrides": {}}
+		],
+		"sbqHubMicroNPCs" : [ // list of NPCs that can spawn in the SBQ hub world's micro dome
+			{"level": 1, "species": "sbq/DreccanOfPaws/Dreccan", "type": "sbq/DreccanOfPaws/Dreccan-hub", "overrides": {}}
+		]
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}
