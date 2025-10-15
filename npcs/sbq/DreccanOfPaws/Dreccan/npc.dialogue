@@ -546,7 +546,24 @@
 			]
 		]
 	},
-		"analVorePromptYes": {
+	"analVorePrompt": {
+		"percentage": "sbqLust",
+		"pools": [
+			[ // 0% - 25%
+				"Hey, I feel like I need something plugging my ass..."
+			],
+			[ // 25% - 50%
+				"Hm... You seem like you'd be a good buttplug."
+			],
+			[ // 50% - 75%
+				"Ahhh I've just been feeling so horny! And you seem like you'd be a good toy"
+			],
+			[ // 75% - 100%
+				"Hufff all these urges! I need something to satisfy me! Hmm you look like you're pretty squirmy~"
+			]
+		]
+	},
+	"analVorePromptYes": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -1278,7 +1295,7 @@
 		"Mmmhm, you are so filling! seems I nabbed a good one.",
 		"bwuurp! Ah~ you make for some nice 'fine dining' heh"
 	],
-		"analVoreNoPrompt": [
+	"analVoreNoPrompt": [
 		"Hey, I want to try something horny.",
 		"Hey... what if I shoved you up my ass?",
 		"Mm... I've been wanting some fun, and you seem like you'd make a good toy~",
@@ -1722,7 +1739,7 @@
 	"oralVoreLetoutForcingAfter": [
 		"Woo! I got you to spit me out."
 	],
-		"analVoreLetoutForcingAfter": [
+	"analVoreLetoutForcingAfter": [
 		"I managed to wiggle out your ass!"
 	],
 	"unbirthVoreLetoutForcingAfter": [
@@ -1751,7 +1768,7 @@
 			]
 		]
 	},
-		"analVoreForced": {
+	"analVoreForced": {
 		"percentage": "sbqLust",
 		"pools": [
 			[ // 0% - 25%
@@ -2056,11 +2073,6 @@
 	],
 	"pawInfusedOccupant": [
 		"How's it feel down there underfoot?"
-	],
-	"tailInfusedOccupant": [
-		"I can still feel you back there~",
-		"I can still feel you back there, <entityname>~",
-		"Looking good back there, <entityname>!"
 	],
 	"strugglingBelly": [
 		"Mmmm, pretty comfortable.",
@@ -2558,7 +2570,6 @@
 			}
 		}
 	},
-	// Unused Dialogue
 	// Unused Dialogue
 	"needsInfusion": ":oralVoreNeedsInfusion",
 	"alreadyInfused": ":oralVoreAlreadyInfused",

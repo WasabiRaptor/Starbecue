@@ -78,10 +78,10 @@
 		}
 	],
 	"baseColorPalette" : {
-		"primary" : ["1c162c","21202e","292b37"], // black fur
-		"secondary" : ["382955","4a3770","5b4783","7761a3"], // face
-		"tertiary" : ["5e5a6b","6d6c7a","7c7e85"], // underbelly
-		"flesh" : ["15131f", "1e1c29", "24222e"]
+		"primary" : ["bdb196","d6cbb1","f3ebd8"], // cream fur
+		"secondary" : ["c79603","ebb30a","ffc412"], // hooves antlers
+		"tertiary" : ["999999","adadad","c2c2c2","e0e0e0"], // underbelly
+		"flesh" : ["c25446", "d1685b", "ee8174"]
 	},
 	"charGenTextLabels" : [
 		"-", // body color
@@ -96,17 +96,6 @@
 
 		"Deer", // species
 		"Personality" // personality
-	],
-
-	// These are the tables for the replace colors, if your sprites neeed to have their colors replaced, you should probably define those colors here
-	"bodyColor" : [
-		""
-	],
-	"undyColor" : [
-		""
-	],
-	"hairColor" : [
-		""
 	],
 
 	"sbqCompatible" : true,
@@ -239,7 +228,7 @@
 				],
 				[
 					"tertiary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -386,6 +375,40 @@
 				]
 			]
 		},
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
 		"sbq/infused/breastsFront.png": {
 			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
 			"remapDirectives": [
@@ -415,6 +438,40 @@
 				[
 					"flesh",
 					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"tertiary"
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"tertiary"
+				],
+				[
+					"primary_180",
+					"primary"
+				],
+				[
+					"flesh",
+					"tertiary"
 				]
 			]
 		},

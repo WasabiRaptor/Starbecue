@@ -9,7 +9,7 @@
 	],
 
 	// you really should make sure to define the npcname so the OC actually has the OC's name
-	"npcname" : "Charactername",
+	"npcname" : "Dreccan",
 	// identity is quite important if you don't want things to be randomly generated
 	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
 	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
@@ -25,7 +25,7 @@
 		// "emoteDirectives" : "",
 		// "bodyDirectives" : "",
 
-		// "gender" : "male",
+		"gender" : "female"
 		// "personalityArmIdle" : "idle.1",
 		// "personalityIdle" : "idle.1",
 	},
@@ -109,19 +109,27 @@
 			// you want it to stay locked
 			"overrideSettings" : {
 				"any":{
-					// examples for disabling certain prefs
-					// "vorePrefs" : {
-					// 	"oralVore" : {
-					// 		"pred" : false,
-					// 		"prey" : false
-					// 	}
-					// },
-					// "infusePrefs" : {
-					// 	"bellyInfuse" : {
-					// 		"pred" : false,
-					// 		"prey" : false
-					// 	}
-					// }
+					"tailSelect" : "default",
+					"vorePrefs" : {
+						"tailVore" : {
+							"pred" : false,
+							"prey" : false
+						},
+						"absorbVore" : {
+							"pred" : false,
+							"prey" : false
+						},
+						"navelVore" : {
+							"pred" : false,
+							"prey" : false
+						}
+					},
+					"infusePrefs" : {
+						"tailInfuse" : {
+							"pred" : false,
+							"prey" : false
+						}
+					}
 				},
 				"npc":{
 
@@ -157,6 +165,12 @@
 				"object":{
 
 				}
+			},
+			// the lists of values available from each dropdown selection
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
 			}
 		},
 
@@ -179,41 +193,41 @@
 			]
 		]},
 
-		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		//"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogueTree",
 		// below is the dialogue triggered by vanilla scripts, it has a rather simple structure, all the dialogue is in the external file
 		"dialog": {
 			"tenant": {
 				"grumbles": {
-					"tagCriteria": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.tagCriteria",
-					"enclosedArea": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.enclosedArea",
-					"otherDeed": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.otherDeed",
-					"severe": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.severe",
-					"final": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.final"
+					"tagCriteria": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.tagCriteria",
+					"enclosedArea": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.enclosedArea",
+					"otherDeed": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.otherDeed",
+					"severe": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.severe",
+					"final": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.final"
 				},
 				"arrivedHome": {
-					"beacon": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.beacon",
-					"rent": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.rent"
+					"beacon": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.beacon",
+					"rent": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.rent"
 				}
 			},
 			"flee": {
-				"helpme": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.helpme",
-				"safe": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.safe"
+				"helpme": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.helpme",
+				"safe": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.safe"
 			},
-			"accuse": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.accuse",
-			"alert": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.alert",
-			"attack" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.attack",
-			"reattack" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.reattack",
-			"killedTarget" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.killedTarget",
-			"lostTarget" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.lostTarget",
-			"outOfSight" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.outOfSight",
-			"cheerOn" : "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.cheerOn",
-			"cantreach": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.cantReachEnemy",
+			"accuse": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.accuse",
+			"alert": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.alert",
+			"attack" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.attack",
+			"reattack" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.reattack",
+			"killedTarget" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.killedTarget",
+			"lostTarget" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.lostTarget",
+			"outOfSight" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.outOfSight",
+			"cheerOn" : "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.cheerOn",
+			"cantreach": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.cantReachEnemy",
 			"crewmember": {
-				"offer": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.offer",
-				"roleDescription": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.roleDescription",
-				"respawned": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.respawned",
-				"cantreach": "/npcs/tenants/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.crewcantreach"
+				"offer": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.offer",
+				"roleDescription": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.roleDescription",
+				"respawned": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.respawned",
+				"cantreach": "/npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue:vanilla.crewcantreach"
 			}
 		},
 
