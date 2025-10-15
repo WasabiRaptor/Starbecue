@@ -21,7 +21,7 @@ function init()
 	status.setStatusProperty("sbqProgressBar", 0)
 
 	sbq.facingDirection = mcontroller.facingDirection
-	sbq.getScale = mcontroller.getScale
+	sbq.scale = mcontroller.scale
 	sbq.collisionArea = mcontroller.collisionArea
 	sbq.entityId = entity.id
 
@@ -72,10 +72,10 @@ function init()
 	message.setHandler("sbqScale", function(_, _, scale, duration)
 		sbq.applyScale(scale,duration)
 	end)
-	destScale = mcontroller.getScale()
-	oldScale = mcontroller.getScale()
+	destScale = mcontroller.scale()
+	oldScale = mcontroller.scale()
 	sbq.timer("initScale", 0.25, function ()
-		sbq.applyScale(mcontroller.getScale())
+		sbq.applyScale(mcontroller.scale())
 	end)
 
 
@@ -83,7 +83,7 @@ function init()
 	old.status_applySelfDamageRequest = status.applySelfDamageRequest
 	function status.applySelfDamageRequest(damageRequest)
 		if damageRequest.damageSourceKind == "falling" then
-			if self.fallDistance > (sbq.config.minimumFallDistance * mcontroller.getScale()) then
+			if self.fallDistance > (sbq.config.minimumFallDistance * mcontroller.scale()) then
 				old.status_applySelfDamageRequest(damageRequest)
 			end
 		else
@@ -112,7 +112,7 @@ function update(dt)
 			currentScale = math.max(destScale, currentScale)
 		end
 		local bounds = mcontroller.boundBox()
-		mcontroller.scale(currentScale)
+		mcontroller.setScale(currentScale)
 		local newBounds = mcontroller.boundBox()
 		mcontroller.translate({0,bounds[2]-newBounds[2]})
 		if (scaleTime >= scaleDuration) or (currentScale == destScale) then
@@ -175,7 +175,7 @@ end
 function sbq.applyScale(scale, duration, min, max)
 	local publicSettings = status.statusProperty("sbqPublicSettings") or {}
 	destScale = math.min(publicSettings.maxScale or 1, math.max(scale or 1, sbq.config.scaleSnap, publicSettings.minScale or 1, min or -math.huge), max or math.huge)
-	oldScale = mcontroller.getScale()
+	oldScale = mcontroller.scale()
 	scaleTime = 0
 	scaleDuration = duration or 1
 	scaling = true

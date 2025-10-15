@@ -154,7 +154,7 @@ function default:moveToLocation(name, action, target, locationName, subLocationN
 	local size = (occupant.size * occupant.sizeMultiplier)
 	throughput = throughput or action.throughput
 	if throughput and not location.settings.hammerspace then
-		if size > (throughput * sbq.getScale()) then return false, "tooBig" end
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	local space, subLocation = location:hasSpace(size)
 	if space then
@@ -186,7 +186,7 @@ function default:moveToLocationAvailable(name, action, target, locationName, sub
 	local size = (occupant.size * occupant.sizeMultiplier)
 	throughput = throughput or action.throughput
 	if throughput and not location.settings.hammerspace then
-		if size > (throughput * sbq.getScale()) then return false, "tooBig" end
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	local space, subLocation = location:hasSpace(size)
 	if space then
@@ -207,12 +207,12 @@ function default:trySendDeeperAvailable(name, action, target, failureReason, siz
 		local location = sbq.SpeciesScript:getLocation(action.location, action.subLocation)
 		if not location then return false, "invalidLocation" end
 		if not location.sendDeeperAction then return false, "invalidAction" end
-		local spaceNeeded = (size * location.settings.multiplyFill / sbq.getScale()) - location:getRemainingSpace()
+		local spaceNeeded = (size * location.settings.multiplyFill / sbq.scale()) - location:getRemainingSpace()
 		local success, newFailureReason
 		for _, occupant in ipairs(location.occupancy.list) do
 			success, newFailureReason = self:trySendDeeperAvailable(name, action, occupant.entityId)
 			if success then
-				local occupantSize = occupant.size * occupant.sizeMultiplier * location.settings.multiplyFill / sbq.getScale()
+				local occupantSize = occupant.size * occupant.sizeMultiplier * location.settings.multiplyFill / sbq.scale()
 				if (failureReason == "noSpace") and (type(size) == "number") then
 					if spaceNeeded <= occupantSize then break end
 				else
@@ -272,7 +272,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	if not target then return true end
 	throughput = throughput or action.throughput
 	if throughput and not location.settings.hammerspace then
-		if size > (throughput * sbq.getScale()) then return false, "tooBig" end
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 
 	local space, subLocation = location:hasSpace(size)
@@ -309,7 +309,7 @@ function default:tryVore(name, action, target, ...)
 	end
 	throughput = throughput or action.throughput
 	if throughput and not location.settings.hammerspace then
-		if size > (throughput * sbq.getScale()) then return false, "tooBig" end
+		if size > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 
 
@@ -367,7 +367,7 @@ function default:tryLetout(name, action, target, throughput, ...)
 	if not occupant then return false, "missingOccupant" end
 	throughput = throughput or action.throughput
 	if throughput and not occupant.locationSettings.hammerspace then
-		if (occupant.size * occupant.sizeMultiplier) > (throughput * sbq.getScale()) then return false, "tooBig" end
+		if (occupant.size * occupant.sizeMultiplier) > (throughput * sbq.scale()) then return false, "tooBig" end
 	end
 	if occupant.flags.digested or occupant.flags.infused or occupant.flags.digesting then return false, "invalidAction" end
 	local location = occupant:getLocation()

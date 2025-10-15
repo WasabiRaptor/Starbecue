@@ -5,7 +5,7 @@ end
 function sbq.facingDirection()
 	return 1
 end
-function sbq.getScale()
+function sbq.scale()
 	return 1
 end
 

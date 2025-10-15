@@ -106,7 +106,7 @@ function sbq.clickAction(fireMode)
 
 	world.sendEntityMessage(player.id(), "sbqQueueAction", "rpActionReset")
 	local bounds = mcontroller.collisionBoundBox()
-	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
+	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
 	local success, failReason
 	for i, targetId in ipairs(entityaimed) do
 		local targetBounds = world.entity(targetId):collisionBoundBox()

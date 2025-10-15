@@ -1072,7 +1072,7 @@ function sbq._Location:hasSpace(size)
 	return false
 end
 function sbq._Location:getRemainingSpace(size)
-	local remainingSpace = self.maxSize - (self.occupancy.size + self.occupancy.addedSize + ((size or 0) * self.settings.multiplyFill  / sbq.getScale()))
+	local remainingSpace = self.maxSize - (self.occupancy.size + self.occupancy.addedSize + ((size or 0) * self.settings.multiplyFill  / sbq.scale()))
 	if remainingSpace < 0 then return false end
 	return remainingSpace
 end
@@ -1134,7 +1134,7 @@ function sbq._Location:updateOccupancy(dt)
 	end
 	local prevVisualSize = self.occupancy.visualSize
 	local prevVisualCount = self.occupancy.visualCount
-	if (self.occupancy.sizeDirty or (sbq.Occupants.lastScale ~= sbq.getScale())) and not self.occupancy.lockSize then
+	if (self.occupancy.sizeDirty or (sbq.Occupants.lastScale ~= sbq.scale())) and not self.occupancy.lockSize then
 		self.occupancy.working = true -- prevents stack overflow from potential dependency loops
 
 		self.occupancy.symmetry = (self.symmetrySettings and sbq.settings:matches(self.symmetrySettings, true))
@@ -1187,7 +1187,7 @@ function sbq._Location:updateOccupancy(dt)
 					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
-					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.getScale()))
+					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
 				end
 			end
 			for _, occupant in ipairs(self.occupancy.captured) do
@@ -1197,7 +1197,7 @@ function sbq._Location:updateOccupancy(dt)
 					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
-					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.getScale()))
+					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
 				end
 			end
 		end
@@ -1786,7 +1786,7 @@ function sbq.Occupants.update(dt)
 			location.occupancy.settingsDirty = false
 		end
 	end
-	sbq.Occupants.lastScale = sbq.getScale()
+	sbq.Occupants.lastScale = sbq.scale()
 
 	if sbq.Occupants.queueHudRefresh then
 		world.sendEntityMessage(entity.id(), "sbqRefreshHudOccupants", sbq.Occupants.list, sbq.Occupants.captured, sbq.settingsPageData())
@@ -2169,7 +2169,7 @@ function sbq._Occupant:checkStruggleDirection(dt)
 	local dx = 0
 	local dy = 0
 	local powerMultiplier = self:stat("powerMultiplier")
-	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.getScale()) * powerMultiplier
+	local effectiveness = (self.flags.digested and 0) or (self.flags.infused and 1) or (self.sizeMultiplier * self.size / sbq.scale()) * powerMultiplier
 	local staleTime = 5
 	if self:controlHeld("Up") then
 		dy = dy + 1

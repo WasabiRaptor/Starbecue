@@ -6,7 +6,7 @@ end
 function entityInSBQActionRange(args, board)
 	if (args.entity == nil) or (not world.entityExists(args.entity)) then return false end
 	local bounds = mcontroller.collisionBoundBox()
-	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.getScale())
+	local paddedbounds = rect.pad(bounds, sbq.config.actionRange * mcontroller.scale())
 	local targetBounds = world.entity(args.entity):collisionBoundBox()
 	if bounds and targetBounds and (rect.intersects(bounds, targetBounds) or ((entity.entityInSight(args.entity)) and (rect.intersects(paddedbounds, targetBounds)))) then
 		return true

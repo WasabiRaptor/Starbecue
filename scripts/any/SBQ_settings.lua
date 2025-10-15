@@ -610,7 +610,7 @@ function sbq.settingsPageData(...)
 
 		voreConfig = sbq.voreConfig or {},
 		locations = (sbq.SpeciesScript or {}).locations or {},
-		currentScale = sbq.getScale(),
+		currentScale = sbq.scale(),
 		parentEntityData = { sbq.parentEntity() },
 		cosmeticSlots = {
 			headCosmetic = sbq.getItemSlot("headCosmetic"),

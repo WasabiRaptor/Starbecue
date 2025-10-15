@@ -32,7 +32,7 @@ function init()
 	sbq.pronouns = root.assetJson("/sbqPronouns.config")
 
 	sbq.facingDirection = mcontroller.facingDirection
-	sbq.getScale = mcontroller.getScale
+	sbq.scale = mcontroller.scale
 	sbq.collisionArea = mcontroller.collisionArea
 	sbq.entityId = entity.id
 
