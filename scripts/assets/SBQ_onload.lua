@@ -1,4 +1,5 @@
 local races = {
+	"sbq/MallowGator/Izzy",
 	"sbq/DreccanOfPaws/Dreccan"
 }
 local charcreation_patch = {}
@@ -8,7 +9,9 @@ local player_patch = {}
 local quests_patch = {}
 for _, species in ipairs(races) do
 	local speciesConfig = assets.json("/species/" .. species .. ".species")
-	table.insert(charcreation_patch, { op = "add", path = "/speciesOrdering/-", value = species })
+	if speciesConfig.charCreationPatch ~= false then
+		table.insert(charcreation_patch, { op = "add", path = "/speciesOrdering/-", value = species })
+	end
 	universe_server_patch = sb.jsonMerge(universe_server_patch, {
 		speciesShips = {
 			[species] = speciesConfig.ships or {
