@@ -177,6 +177,12 @@
 				"object":{
 
 				}
+			},
+			// the lists of values available from each dropdown selection
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
 			}
 		},
 
@@ -199,41 +205,41 @@
 			]
 		]},
 
-		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		//"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : "/npcs/sbq/MallowGator/Izzy/npc.dialogueTree",
 		// below is the dialogue triggered by vanilla scripts, it has a rather simple structure, all the dialogue is in the external file
 		"dialog": {
 			"tenant": {
 				"grumbles": {
-					"tagCriteria": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.tagCriteria",
-					"enclosedArea": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.enclosedArea",
-					"otherDeed": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.otherDeed",
-					"severe": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.severe",
-					"final": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.final"
+					"tagCriteria": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.tagCriteria",
+					"enclosedArea": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.enclosedArea",
+					"otherDeed": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.otherDeed",
+					"severe": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.severe",
+					"final": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.final"
 				},
 				"arrivedHome": {
-					"beacon": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.beacon",
-					"rent": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.rent"
+					"beacon": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.beacon",
+					"rent": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.rent"
 				}
 			},
 			"flee": {
-				"helpme": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.helpme",
-				"safe": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.safe"
+				"helpme": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.helpme",
+				"safe": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.safe"
 			},
-			"accuse": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.accuse",
-			"alert": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.alert",
-			"attack" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.attack",
-			"reattack" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.reattack",
-			"killedTarget" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.killedTarget",
-			"lostTarget" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.lostTarget",
-			"outOfSight" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.outOfSight",
-			"cheerOn" : "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.cheerOn",
-			"cantreach": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.cantReachEnemy",
+			"accuse": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.accuse",
+			"alert": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.alert",
+			"attack" : "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.attack",
+			"reattack" : "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.reattack",
+			"killedTarget" : "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.killedTarget",
+			"lostTarget" : "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.lostTarget",
+			"outOfSight" : "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.outOfSight",
+			"cheerOn" : "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.cheerOn",
+			"cantreach": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.cantReachEnemy",
 			"crewmember": {
-				"offer": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.offer",
-				"roleDescription": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.roleDescription",
-				"respawned": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.respawned",
-				"cantreach": "/npcs/tenants/sbq/MallowGator/Izzy/npc.dialogue:vanilla.crewcantreach"
+				"offer": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.offer",
+				"roleDescription": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.roleDescription",
+				"respawned": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.respawned",
+				"cantreach": "/npcs/sbq/MallowGator/Izzy/npc.dialogue:vanilla.crewcantreach"
 			}
 		},
 

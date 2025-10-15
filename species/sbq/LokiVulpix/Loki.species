@@ -282,56 +282,6 @@
 		}
 	],
 	"headOptionAsHairColor": true,
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config",
-		{
-			"locationOverrides": {
-				"transformResult": {
-					"species": "any"
-				}
-			}
-		}
-	],
-	"infusedParts": {
-		"cockColorRemap": [
-			[
-				"primary",
-				"primary"
-			]
-		],
-		"pussyColorRemap": [
-			[
-				"flesh",
-				"primary"
-			]
-		],
-		"ballsColorRemap": [
-			[
-				"primary",
-				"secondary"
-			]
-		],
-		"breastsColorRemap": [
-			[
-				"primary",
-				"primary"
-			],
-			[
-				"flesh",
-				"flesh",
-				{
-					"nipplesVisible": true
-				}
-			],
-			[
-				"flesh",
-				"primary",
-				{
-					"nipplesVisible": false
-				}
-			]
-		]
-	},
 	"kind": "sbq/LokiVulpix/Loki",
 	"nameGen": [
 		"/species/humanmalenamegen.config:names",
@@ -372,14 +322,15 @@
 		"sbq/femalebody.png" : {
 			"sourceImage" : "femalebody.png"
 		},
-		"sbq/malebody_fg.png" : {
+		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
-		"sbq/femalebody_fg.png" : {
+		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
+
 
 		"sbq/naga/hips.png" : {
 			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_hips.png",
@@ -390,7 +341,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -403,7 +354,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -416,7 +367,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -429,7 +380,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -442,7 +393,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -455,18 +406,17 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
-
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"hair"
 				],
 				[
 					"secondary",
@@ -480,7 +430,7 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"hair"
 				],
 				[
 					"secondary",
@@ -495,7 +445,7 @@
 			"remapDirectives": [
 				[
 					"secondary",
-					"secondary"
+					"hair"
 				]
 			]
 		},
@@ -505,7 +455,7 @@
 			"remapDirectives": [
 				[
 					"secondary",
-					"secondary"
+					"hair"
 				]
 			]
 		},
@@ -545,7 +495,6 @@
 				]
 			]
 		},
-
 		"sbq/luxio_tail.png" : {
 			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
 			"sourceImage" : "/humanoid/wr/luxio/tail.png",
@@ -553,6 +502,10 @@
 				[
 					"secondary",
 					"secondary"
+				],
+				[
+					"eyes",
+					"eyes"
 				]
 			]
 		},
@@ -563,6 +516,10 @@
 				[
 					"secondary",
 					"secondary"
+				],
+				[
+					"eyes",
+					"eyes"
 				]
 			]
 		},
@@ -624,7 +581,7 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"tertiary"
+					"primary"
 				]
 			]
 		},
@@ -660,7 +617,7 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"secondary"
+					"hair"
 				]
 			]
 		},
@@ -678,7 +635,7 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"secondary"
+					"hair"
 				]
 			]
 		},
@@ -709,7 +666,7 @@
 				],
 				[
 					"primary_180",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
@@ -726,7 +683,7 @@
 				],
 				[
 					"primary_180",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
@@ -742,7 +699,7 @@
 				],
 				[
 					"primary",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
@@ -758,7 +715,7 @@
 				],
 				[
 					"primary",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
@@ -775,7 +732,7 @@
 				],
 				[
 					"primary_180",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
@@ -792,7 +749,7 @@
 				],
 				[
 					"primary_180",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
@@ -808,11 +765,11 @@
 				],
 				[
 					"primary",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
-					"tertiary"
+					"primary"
 				]
 			]
 		},
@@ -824,11 +781,11 @@
 				],
 				[
 					"primary",
-					"tertiary"
+					"primary"
 				],
 				[
 					"flesh",
-					"tertiary"
+					"primary"
 				]
 			]
 		}

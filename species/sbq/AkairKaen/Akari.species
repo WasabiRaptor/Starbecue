@@ -298,56 +298,6 @@
 	],
 	"headOptionAsFacialhair": true,
 	"headOptionAsHairColor": true,
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config",
-		{
-			"locationOverrides": {
-				"transformResult": {
-					"species": "sergal"
-				}
-			}
-		}
-	],
-	"infusedParts": {
-		"cockColorRemap": [
-			[
-				"primary",
-				"primary"
-			]
-		],
-		"pussyColorRemap": [
-			[
-				"flesh",
-				"primary"
-			]
-		],
-		"ballsColorRemap": [
-			[
-				"primary",
-				"secondary"
-			]
-		],
-		"breastsColorRemap": [
-			[
-				"primary",
-				"secondary"
-			],
-			[
-				"flesh",
-				"flesh",
-				{
-					"nipplesVisible": true
-				}
-			],
-			[
-				"flesh",
-				"secondary",
-				{
-					"nipplesVisible": false
-				}
-			]
-		]
-	},
 	"kind": "sbq/AkariKaen/Akari",
 	"nameGen": [
 		"/species/humanmalenamegen.config:names",
@@ -395,11 +345,11 @@
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png"
 		},
-		"sbq/malebody_fg.png" : {
+		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
-		"sbq/femalebody_fg.png" : {
+		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},

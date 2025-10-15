@@ -285,16 +285,6 @@
 		}
 	],
 	"headOptionAsHairColor": true,
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config",
-		{
-			"locationOverrides": {
-				"transformResult": {
-					"species": "any"
-				}
-			}
-		}
-	],
 	"kind": "sbq/ambi_sykhar/Ambi",
 	"nameGen": [
 		"/species/humanmalenamegen.config:names",
@@ -357,11 +347,11 @@
 		"sbq/femalebody.png" : {
 			"sourceImage" : "femalebody.png"
 		},
-		"sbq/malebody_fg.png" : {
+		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
-		"sbq/femalebody_fg.png" : {
+		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},

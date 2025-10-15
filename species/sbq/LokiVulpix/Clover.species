@@ -337,56 +337,6 @@
 			}
 		}
 	},
-	"infuseData": [
-		"/humanoid/any/basicInfuseData.config",
-		{
-			"locationOverrides": {
-				"transformResult": {
-					"species": "sbq/meowscarada"
-				}
-			}
-		}
-	],
-	"infusedParts": {
-		"cockColorRemap": [
-			[
-				"primary",
-				"primary"
-			]
-		],
-		"pussyColorRemap": [
-			[
-				"flesh",
-				"primary"
-			]
-		],
-		"ballsColorRemap": [
-			[
-				"primary",
-				"secondary"
-			]
-		],
-		"breastsColorRemap": [
-			[
-				"primary",
-				"secondary"
-			],
-			[
-				"flesh",
-				"flesh",
-				{
-					"nipplesVisible": true
-				}
-			],
-			[
-				"flesh",
-				"secondary",
-				{
-					"nipplesVisible": false
-				}
-			]
-		]
-	},
 	"kind": "sbq/LokiVulpix/Clover",
 	"nameGen": [
 		"/species/humanmalenamegen.config:names",
@@ -426,11 +376,11 @@
 		"sbq/femalebody.png" : {
 			"sourceImage" : "femalebody.png"
 		},
-		"sbq/malebody_fg.png" : {
+		"sbq/fg/malebody.png" : {
 			"sourceImage" : "malebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
-		"sbq/femalebody_fg.png" : {
+		"sbq/fg/femalebody.png" : {
 			"sourceImage" : "femalebody.png",
 			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
 		},
@@ -440,11 +390,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -453,11 +403,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -466,11 +416,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -479,11 +429,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -492,11 +442,11 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -505,15 +455,14 @@
 			"remapDirectives": [
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				],
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
-
 		"sbq/nickit_tail.png" : {
 			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
 			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
@@ -524,7 +473,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 		},
@@ -538,7 +487,7 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				]
 			]
 
@@ -549,7 +498,7 @@
 			"remapDirectives": [
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -559,7 +508,7 @@
 			"remapDirectives": [
 				[
 					"secondary",
-					"secondary"
+					"primary"
 				]
 			]
 		},
@@ -573,11 +522,11 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				],
 				[
 					"tertiary",
-					"tertiary"
+					"secondary"
 				]
 			]
 		},
@@ -591,22 +540,25 @@
 				],
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
 				],
 				[
 					"tertiary",
-					"tertiary"
+					"secondary"
 				]
 			]
 		},
-
 		"sbq/luxio_tail.png" : {
 			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
 			"sourceImage" : "/humanoid/wr/luxio/tail.png",
 			"remapDirectives": [
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
+				],
+				[
+					"eyes",
+					"eyes"
 				]
 			]
 		},
@@ -616,7 +568,11 @@
 			"remapDirectives": [
 				[
 					"secondary",
-					"secondary"
+					"tertiary"
+				],
+				[
+					"eyes",
+					"eyes"
 				]
 			]
 		},
@@ -644,11 +600,11 @@
 
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
-			"processingDirectives": "?replace;00adba=bc1002", // this replaces the navel pixel, don't touch this
 			"remapDirectives": [
+				"?replace;00adba=bc1002",
 				[
 					"primary",
-					"primary"
+					"tertiary"
 				]
 			]
 		},
@@ -693,6 +649,42 @@
 		},
 		"sbq/infused/cock.png": {
 			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
 			"remapDirectives": [
 				[
 					"primary",
