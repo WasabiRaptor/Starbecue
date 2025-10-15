@@ -64,14 +64,25 @@
 			"priority" : 60,
 			"colonyTagCriteria" : {
 				// You should make the colony tags below reflect what your OC likes
-				"office" : 4
+				"nature" : 8,
+				"evil" : 8
 			},
 			"tenant" : {
 				"spawn": "npc", "species": "sbq/DreccanOfPaws/Dreccan", "type": "sbq/DreccanOfPaws/Dreccan", "overrides": {},
 				"orderFurniture" : [
 					// you should populate this list with objects that have the requisite colonytags
-					{"name":"officedesk", "count":1},
-					{"name":"officelamp", "count":1}
+					{"name":"flowerbox", "count":1},
+					{"name":"flowerlamp", "count":1},
+					{"name":"springchest", "count":1},
+					{"name":"toxicchest", "count":1},
+					{"name":"toxiclamp1", "count":1},
+					{"name":"toxiclamp2", "count":1},
+					{"name":"toxictable", "count":1},
+					{"name":"toxicchair", "count":1},
+					{"name":"sacrificialaltar", "count":1},
+					{"name":"medievalstock", "count":1},
+					{"name":"wallshackles", "count":1},
+					{"name":"ballandchain", "count":1}
 				]
 			}
 		},
