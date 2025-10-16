@@ -1,0 +1,45 @@
+{
+	"frameGrid" : {
+		"size" : [48, 48],
+		"dimensions" : [8, 1],
+
+		"names" : [
+			[ "walk.1", "walk.2", "walk.3", "walk.4", "walk.5", "walk.6", "walk.7", "walk.8" ]
+		]
+	},
+	"aliases" : {
+		"default" : "walk.1",
+
+		"idle.1" : "walk.1",
+		"idle.2" : "walk.2",
+		"idle.3" : "walk.3",
+		"idle.4" : "walk.4",
+		"idle.5" : "walk.5",
+		"idle.6" : "walk.6",
+		"idle.7" : "walk.7",
+		"idle.8" : "walk.8",
+
+		"sit.1" : "idle.1",
+
+		"lay.1" : "idle.1",
+
+		"run.1" : "walk.1",
+		"run.2" : "walk.2",
+		"run.3" : "walk.3",
+		"run.4" : "walk.4",
+		"run.5" : "walk.5",
+		"run.6" : "walk.6",
+		"run.7" : "walk.7",
+		"run.8" : "walk.8",
+
+		"jump.1" : "walk.1",
+		"jump.2" : "walk.2",
+		"jump.3" : "walk.3",
+		"jump.4" : "walk.4",
+
+		"fall.1" : "walk.5",
+		"fall.2" : "walk.6",
+		"fall.3" : "walk.7",
+		"fall.4" : "walk.8"
+	}
+}

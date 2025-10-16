@@ -1,0 +1,25 @@
+{
+	"type" : "sbq/Username/Charactername-hub",
+
+	// this should be your base NPC's type
+	"baseType" : "sbq/Username/Charactername",
+
+	"scriptConfig" : {
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
+		},
+		"sbqHubNPCs" : [ // list of NPCs that can spawn in the SBQ hub world
+			{"level": 1, "species": "sbq/Username/Charactername", "type": "sbq/Username/Charactername-hub", "overrides": {}}
+		],
+		"sbqHubMicroNPCs" : [ // list of NPCs that can spawn in the SBQ hub world's micro dome
+			{"level": 1, "species": "sbq/Username/Charactername", "type": "sbq/Username/Charactername-hub", "overrides": {}}
+		]
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"protection" : {
+				"baseValue" : 100.0
+			}
+		}
+	}
+}

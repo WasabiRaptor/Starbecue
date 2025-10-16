@@ -1,0 +1,393 @@
+{
+	"type" : "sbq/Razuel/Razuel",
+	"baseType" : "villager",
+
+	"scripts" : [
+		"/npcs/bmain.lua",
+		"/scripts/npc/SBQ_npc_bmain.lua",
+		"/scripts/npc/SBQ_vore_npc.lua"
+	],
+
+	// you really should make sure to define the npcname so the OC actually has the OC's name
+	"npcname" : "Razuel",
+	// identity is quite important if you don't want things to be randomly generated
+	// great thing here is one can define whatever they want as the name of the hair, facial hair, or facial mask types, even if they're not
+	// available to the player in normal customization it just has to be in the folder with the rest of the hairs for the species
+	// if one knows how to make a directives string too, they can just define it here for the specific parts
+	"identity" : {
+		// "hairType" : "0",
+		// "facialHairType" : "",
+		// "facialMaskType" : "",
+
+		// "hairDirectives" : "",
+		// "facialHairDirectives" : "",
+		// "facialMaskDirectives" : "",
+		// "emoteDirectives" : "",
+		// "bodyDirectives" : "",
+
+		"gender" : "male"
+		// "personalityArmIdle" : "idle.1",
+		// "personalityIdle" : "idle.1",
+	},
+	"scriptConfig" : {
+		"sbqNPC" : true,
+		"isOC" : true, // this is just for scripts to identify this NPC as an OC and for some specific behavior relating to that
+		"uniqueId" : "sbq/Razuel/Razuel", // the unique ID for the NPC, used for other NPCs that may want to detect this specific one, and to prevent multiple instances of the same character appearing on one planet
+
+		"behavior" : "sbqvorevillager",
+
+		"behaviorConfig": {
+			"emptyHands": true
+		},
+		"questGenerator" : {
+			"pools" : ["sbq_common", "sbq_transform", "sbq_vore", "tenant"],
+			"graduation" : {
+				"nextNpcType" : [  // empty table prevents the NPC from graduating into crew
+					// "sbq/Razuel/Razuel-crewmember" // this lets the NPC graduate into a recruitable crewmember after doing a few quests for them
+				]
+			},
+			"enableParticipation" : true,
+
+			"timeLimit" : 30,
+			"nearbyQuestLimit" : 2,
+			"nearbyQuestRange" : 50,
+			"chance" : 0.04
+		},
+
+		// These are intended to be inheritied by variants of the NPC
+		"sbqConvertType" : false, // the npc id for converting it to a non-vorny variant from the settings menu, such as if the oc has a variant that already exists in another mod
+		"sbqDeedConvertType" : "sbq/Razuel/Razuel", // the npc type id it should convert to when inserted into a vore colony deed
+		"sbqEvilDeedConvertType" : "sbq/Razuel/Razuel", // the npc type id it should convert to when inserted into an evil colony deed (such as a bandit variant if one is made)
+
+		// this is the data that defines this NPC as a tenant available in the SBQ deeds
+		"sbqTenantData" : {
+			"priority" : 60,
+			"colonyTagCriteria" : {
+				// You should make the colony tags below reflect what your OC likes
+				"office" : 4
+			},
+			"tenant" : {
+				"spawn": "npc", "species": "sbq/Razuel/Razuel", "type": "sbq/Razuel/Razuel", "overrides": {},
+				"orderFurniture" : [
+					// you should populate this list with objects that have the requisite colonytags
+					{"name":"officedesk", "count":1},
+					{"name":"officelamp", "count":1}
+				]
+			}
+		},
+
+		// everything related to SBQ actions and settings and such is within here! this simply overrides values of the species specific vore config
+		"sbqSettingsConfig" : {
+			"includes" : [
+				// These are shortcuts to add in configuration to disable certain kinks one simply needs to uncomment that line and
+				// everything relevant to that will automatically be disabled!
+				// "/species/sbq/disableAllVorePred.config",
+				// "/species/sbq/disableAllVorePrey.config",
+				// "/species/sbq/disableAllInfusePred.config",
+				// "/species/sbq/disableAllInfusePrey.config",
+				// "/species/sbq/disableAllTF.config",
+				// "/species/sbq/disableAllSize.config"
+			],
+			// the default settings the NPC will have when initialized! things defined here can still be configured by players after spawn
+			// to better understand this, I would suggest heading ingame and then going to the misc tab and click the export settings button
+			// that will not only give an item containing your current settings, it will also print them to starbound.log which you can then
+			// just copy and past here and then possibly edit further as you see fit
+			"defaultSettings" : {
+				"any":{ // the settings config can group things by entity type where the "any" table applies to everything
+
+				},
+				"npc":{
+
+				},
+				"object":{
+
+				}
+			},
+			// settings that are locked to a specific value and cannot be configured by the player, useful for disabling certain actions
+			// or things someone doesn't like, or simply preventing someone from diabling something important to the OC
+			// same structure as default settings above, only what is defined here is locked! only define something here if
+			// you want it to stay locked
+			"overrideSettings" : {
+				"any":{
+					// examples for disabling certain prefs
+					// "vorePrefs" : {
+					// 	"oralVore" : {
+					// 		"pred" : false,
+					// 		"prey" : false
+					// 	}
+					// },
+					// "infusePrefs" : {
+					// 	"bellyInfuse" : {
+					// 		"pred" : false,
+					// 		"prey" : false
+					// 	}
+					// }
+				},
+				"npc":{
+
+				},
+				"object":{
+
+				}
+			},
+			// when you still want to allow configuring certain settings, but want to disable certain values, this is used to mark
+			// those values as invalid, and reset them to a value one does like
+			// invalid setting values will not be displayed in the settings menu
+			"invalidSettings" : {
+				"any":{
+					// for example, blanket disabling fatal digest and resetting it to softDigest if it somehow loaded with that setting
+					// "mainEffect" : {
+					// 	"digest" : "softDigest"
+					// },
+
+					// a second example of instead of a blanket disabling of "mainEffect" being digest to instead only disable a specific location having it
+					// "locations" : {
+					// 	"belly" : {
+					// 		"mainEffect" : {
+					// 			"digest" : "softDigest"
+					// 		}
+					// 	}
+					// }
+
+					// These are simply examples of what I feel would be most common, any setting value can be marked as invalid
+				},
+				"npc":{
+
+				},
+				"object":{
+
+				}
+			},
+			// the lists of values available from each dropdown selection
+			"selectValues" : {
+				"personality" : [
+					"default"
+				]
+			}
+		},
+
+
+
+		// if you understand stardust metagui, you can create the NPC's 'bio' tab here
+		// settingsGuiStrings
+		"tenantBio" : { "type" : "scrollArea", "thumbScrolling" : true, "scrollBars" : true, "scrollDirections" : [0, 1], "children" : [
+			{ "mode" : "vertical" },
+			[
+				//{ "type" : "image", "file" : "/humanoid/sbq/Razuel/Razuel/portraits/neutral.png" },
+				[
+					[ { "type" : "label", "text" : "Age: ??"}, { "type" : "label", "text" : "Gender: ???"} ],
+					[ { "type" : "label", "text" : "Pronouns: ???"}, { "type" : "label", "text" : "Species: ???"} ],
+					{ "type" : "spacer", "size" : 3 },
+					{ "type" : "label", "text" : "A mystery..."},
+					{ "type" : "spacer", "size" : 3 },
+					{ "type" : "label", "text" : "Favorites: being completed."}
+				]
+			]
+		]},
+
+		//"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		"dialogueTree" : "/npcs/sbq/Razuel/Razuel/npc.dialogueTree",
+		// below is the dialogue triggered by vanilla scripts, it has a rather simple structure, all the dialogue is in the external file
+		"dialog": {
+			"tenant": {
+				"grumbles": {
+					"tagCriteria": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.tagCriteria",
+					"enclosedArea": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.enclosedArea",
+					"otherDeed": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.otherDeed",
+					"severe": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.severe",
+					"final": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.final"
+				},
+				"arrivedHome": {
+					"beacon": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.beacon",
+					"rent": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.rent"
+				}
+			},
+			"flee": {
+				"helpme": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.helpme",
+				"safe": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.safe"
+			},
+			"accuse": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.accuse",
+			"alert": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.alert",
+			"attack" : "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.attack",
+			"reattack" : "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.reattack",
+			"killedTarget" : "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.killedTarget",
+			"lostTarget" : "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.lostTarget",
+			"outOfSight" : "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.outOfSight",
+			"cheerOn" : "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.cheerOn",
+			"cantreach": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.cantReachEnemy",
+			"crewmember": {
+				"offer": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.offer",
+				"roleDescription": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.roleDescription",
+				"respawned": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.respawned",
+				"cantreach": "/npcs/sbq/Razuel/Razuel/npc.dialogue:vanilla.crewcantreach"
+			}
+		},
+
+		// sounds your NPC makes when speaking
+		"chatSounds": {
+			"default": {
+				"male": [
+					"/sfx/humanoid/human_chatter_male1.ogg",
+					"/sfx/humanoid/human_chatter_male2.ogg",
+					"/sfx/humanoid/human_chatter_male3.ogg"
+				],
+				"female": [
+					"/sfx/humanoid/human_chatter_female1.ogg",
+					"/sfx/humanoid/human_chatter_female2.ogg",
+					"/sfx/humanoid/human_chatter_female3.ogg"
+				]
+			}
+		},
+
+		// rewards given to the player for doing things for the pred are here! cumulative ones accumulate time between different sessions, otherwise it only counts up per the current session
+		// you can make a reward take both per session time as well as cumulative time!
+		"sbqPredRewards" : {
+			// Time is in minutes here!
+
+			/*
+			"exampleReward" : { // example reward that uses all possible args
+				"repeatable" : true, // whether this reward repeats each time its requirements are met, a 5min reward would repeat at 10min and etc
+				"location" : ["belly", "womb", "shaft", "balls", "breasts", "tail"], // whether the counters for this are for a specific location, it adds the timers and counters for all the locations listed in this arg, otherwise its just the overall count/time
+				"pool" : "richOre", // the treasure pool this reward gives the player, look up how these are defined, make sure they don't conflict in name https://starbounder.org/Data:Assets/treasurepools
+
+				"minStruggleFor" : 1, // the minimum amount of time (seconds) a contininious struggle is needed to trigger this reward
+				"struggleFor" : 5, // the amount of time (seconds) a continious struggle is needed for this reward to trigger for each repeat
+				"maxStruggleFor" : 10, // the maximum amount of time (seconds) of a contininious struggle this reward can be obtained at
+
+				"minSinceStruggle" : 1, // the minimum amount of time (seconds) since last struggle is needed to trigger this reward
+				"sinceStruggle" : 5, // the amount of time (seconds) since last struggle is needed for this reward to trigger for each repeat
+				"maxSinceStruggle" : 10, // the maximum amount of time (seconds) since last struggle this reward can be obtained at
+
+				// per session, resets each time you escape the pred
+
+				"minTime" : 1, // the minimum amount of time (minutes) in this session before this reward can be obtained
+				"time" : 5, // the amount of time (minutes) needed for this reward to trigger and between each repeat
+				"maxTime" : 10, // the maximum amount of time (minutes) in this session this reward can be obtained at
+
+				"minStruggles" : 1, // the minimum amount of struggles (seconds) before this reward can be obtained
+				"struggles" : 10, // the amount of struggles (seconds) for this reward to trigger between each repeat
+				"maxStruggles" : 1, // the maximum amount of struggles (seconds) in this session this reward can be obtained at
+
+				// cumulative, they never reset, and will continue to count up every time you are in this specific pred
+
+				"minTimeCumulative" : 1, // the minimum amount of time (minutes) before this reward can be obtained
+				"timeCumulative" : 5, // the amount of time (minutes) needed for this reward to trigger and between each repeat
+				"maxTimeCumulative" : 1, // the maximum amount of time (minutes) this reward can be obtained at
+
+				"minStrugglesCumulative" : 1, // the minimum amount of struggles (seconds) before this reward can be obtained
+				"strugglesCumulative" : 10, // the amount of struggles (seconds) for this reward to trigger between each repeat
+				"maxStrugglesCumulative" : 20, // the maximum amount of struggles (seconds) this reward can be obtained at
+
+				"minTimesDigested" : 1, // the minimum amount of times you/the npc must be digested before this reward can be obtained
+				"timesDigested" : 1, // the amount of times you/the npc must be digested for this reward to trigger and between each repeat
+				"maxTimesDigested" : 5, // the maximum amount of times you/the npc can be digested and obtain this reward
+
+				"specialArgs" : { // unique special arguments, would only ever be used if your NPC had custom lua scripting to write some special values
+					"specialArg1":{ // the name of the value in the occupant's visited or cumulative data table to check against
+						"cumulative": true, // used to mark the value is saved in the cumulative data table and to check there
+						"min" : 1, // min value for this reward to trigger
+						"value" : 2, // value for each repeat
+						"max" : 3, // max value for this reward to trigger
+						"mul" : 1 // multiplies the above values when checking against the saved values, for ease of handling things like making your time in minutes rather than seconds
+					}
+				}
+			},
+			*/
+
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 0, "pool" : "money" },
+
+			"hour1" : { "time" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3" : { "time" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+			"day" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"struggleReward1" : { "repeatable" : true, "struggles" : 50, "minStruggles" : 0, "pool" : "money" },
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"dayCumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"weekCumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		},
+		// rewards given to the player for doing things for their prey are here! cumulative ones accumulate time between different sessions, otherwise it only counts up per the current session
+		// you can make a reward take both per session time as well as cumulative time!
+		// reward args are the same as for the pred reward table, but are for the prey being inside you
+		"sbqPreyRewards" : {
+			// Time is in minutes here!
+			"timedReward1" : { "repeatable" : true, "time" : 5, "minTime" : 10, "pool" : "money" },
+
+			"hour3" : { "time" : 180, "pool" : "lowValueQuestRewards" }, // three hours
+			"hour6" : { "time" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12" : { "time" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1" : { "repeatable" : true, "time" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+
+			"digestedReward1" : { "repeatable" : true, "timesDigested" : 1, "pool" : "money"},
+			"digestedReward2" : { "repeatable" : true, "timesDigested" : 5, "pool" : "lowValueQuestRewards"},
+
+			"hour1Cumulative" : { "timeCumulative" : 60, "pool" : "lowValueQuestRewards" }, // one hour
+			"hour3Cumulative" : { "timeCumulative" : 180, "pool" : "mediumValueQuestRewards" }, // three hours
+			"hour6Cumulative" : { "timeCumulative" : 360, "pool" : "mediumValueQuestRewards" }, // six hours
+			"hour12Cumulative" : { "timeCumulative" : 720, "pool" : "highValueQuestRewards" }, // twelve hours
+
+			"day1Cumulative" : { "repeatable" : true, "timeCumulative" : 1440, "pool" : "highValueQuestRewards" }, // a full day
+			"week1Cumulative" : { "repeatable" : true, "timeCumulative" : 10080, "pool" : "highValueQuestRewards" } // a full week
+		}
+	},
+	"statusControllerSettings" : {
+		"stats" : {
+			"maxEnergy" : {
+				"baseValue" : 100.0
+			},
+			"energyRegenPercentageRate" : {
+				"baseValue" : 0.585  // 1.75 second recharge time (STABLE)
+				// "baseValue" : 0.5    // 2 second recharge time
+				// "baseValue" : 0.45      // 2.25 second recharge time
+				// "baseValue" : 0.4     // 2.5 second recharge time
+			},
+			"foodDelta" : {
+				"baseValue" : -0.0583 // -70 food over 20 minutes
+			},
+			"sbqLustScriptMax" : {
+				"baseValue" : 0.33
+			},
+			"sbqLustScriptDelta" : {
+				"baseValue" : 0.0583
+			},
+			"sbqLustDelta" : {
+				"baseValue" : 0
+			},
+			"sbqRestScriptDelta" : {
+				"baseValue" : -0.0583
+			},
+			"sbqRestDelta" : {
+				"baseValue" : 0
+			}
+		},
+		"resources" : {
+			// if one doesn't want a certain stat to be displayed in the NPC's behavior pane, such as not wanting to be hungry or lustful, just remove it!
+			// however a number of the default dialogue is based on the percentage of hunger and lust, so it may need to be edited to trigger correctly
+			"food" : { // hunger
+				"deltaStat" : "foodDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 70
+			},
+			"sbqLust" : {
+				"deltaStat" : "sbqLustDelta",
+				"initialPercentage" : 0.0,
+				"maxValue" : 100
+			},
+			"sbqRest" : {
+				"deltaStat" : "sbqRestDelta",
+				"initialPercentage" : 1.0,
+				"maxValue" : 100
+			}
+		},
+		"statusProperties" : {
+			"sbqDidVornyConvertCheck" : true
+		}
+	}
+}
