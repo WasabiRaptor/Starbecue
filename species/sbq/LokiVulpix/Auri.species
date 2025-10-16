@@ -9,10 +9,8 @@
 		"description": "Are you sure you're supposed to be able to read this?"
 	},
 	"effectDirectives": "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
+	"nameGen" : [ "/species/sbq/LokiVulpix/Auri.species:nameGenConfig", "/species/sbq/LokiVulpix/Auri.species:nameGenConfig" ],
+	"nameGenConfig": ["Auri"],
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises": [
 		"/sfx/humanoid/humanhurt_female1.ogg",

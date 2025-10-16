@@ -5,7 +5,7 @@ local function wrap(index, array)
 	if index < #array then return index end
 	return math.fmod(index, #array)
 end
-function create(name, species, genderIndex, hairStyle, _2, antlerStyle, _4, maneStyle, _6, _7, _8, personality, ...)
+function create(name, species, genderIndex, hairStyle, _2, antlerStyle, _4, _5, _6, _7, _8, personality, ...)
 	-- these values are zero indexed!
 
 	local speciesConfig = root.speciesConfig(species)
@@ -44,7 +44,7 @@ function create(name, species, genderIndex, hairStyle, _2, antlerStyle, _4, mane
 		color = {51, 117, 237, 255},
 	}
 	local parameters = {
-		choices = { genderIndex, hairStyle, _2, antlerStyle, _4, maneStyle, _6, _7, _8, personality, ... },
+		choices = { genderIndex, hairStyle, _2, antlerStyle, _4, _5, _6, _7, _8, personality, ... },
 		--this you can do a lot with, see the humanoid build script
 	}
 	local armor = {

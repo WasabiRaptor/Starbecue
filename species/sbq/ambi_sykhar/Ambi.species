@@ -240,6 +240,8 @@
 	},
 	"effectDirectives": "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
 	"forceName": "Ambi",
+	"nameGen" : [ "/species/sbq/ambi_sykhar/Ambi.species:nameGenConfig", "/species/sbq/ambi_sykhar/Ambi.species:nameGenConfig" ],
+	"nameGenConfig": ["Ambi"],
 	"genders": [
 		{
 			"name": "male",
@@ -287,10 +289,6 @@
 	],
 	"headOptionAsHairColor": true,
 	"kind": "sbq/ambi_sykhar/Ambi",
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises": [
 		"/sfx/humanoid/humanhurt_male1.ogg",

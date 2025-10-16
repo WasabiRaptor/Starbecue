@@ -56,10 +56,8 @@
 		"/sfx/humanoid/humanhurt_male1.ogg",
 		"/sfx/humanoid/humanhurt_female1.ogg"
 	],
-	"nameGen": [
-		"/species/namegen.config:names",
-		"/species/namegen.config:names"
-	],
+	"nameGen" : [ "/species/sbq/Xeronious/Kaiju.species:nameGenConfig", "/species/sbq/Xeronious/Kaiju.species:nameGenConfig" ],
+	"nameGenConfig": ["Kaiju"],
 	"genders": [
 		{
 			"name": "male",

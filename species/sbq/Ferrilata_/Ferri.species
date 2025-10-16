@@ -292,10 +292,8 @@
 	],
 	"headOptionAsHairColor": true,
 	"kind": "sbq/Ferrilata_/Ferri",
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
+	"nameGen" : [ "/species/sbq/Ferrilata_/Ferri.species:nameGenConfig", "/species/sbq/Ferrilata_/Ferri.species:nameGenConfig" ],
+	"nameGenConfig": ["Ferri"],
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises": [
 		"/sfx/humanoid/humanhurt_male1.ogg",

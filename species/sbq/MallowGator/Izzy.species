@@ -9,7 +9,8 @@
 		"description" : "The Disaster Pokemon."
 	},
 
-	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
+	"nameGen" : [ "/species/sbq/MallowGator/Izzy.species:nameGenConfig", "/species/sbq/MallowGator/Izzy.species:nameGenConfig" ],
+	"nameGenConfig": ["Izzy"],
 
 	"humanoidConfig" : "/humanoid/sbq/quadruped/quadruped.config",
 	"buildScripts" : ["/humanoid/opensb/build.lua"],

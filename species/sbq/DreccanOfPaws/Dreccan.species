@@ -8,7 +8,8 @@
 		"description" : ""
 	},
 
-	"nameGen" : [ "/species/humanmalenamegen.config:names", "/species/humanfemalenamegen.config:names" ],
+	"nameGen" : [ "/species/sbq/DreccanOfPaws/Dreccan.species:nameGenConfig", "/species/sbq/DreccanOfPaws/Dreccan.species:nameGenConfig" ],
+	"nameGenConfig": ["Dreccan"],
 
 	"humanoidConfig" : "/humanoid/sbq/quadruped/quadruped.config",
 	"buildScripts" : ["/humanoid/opensb/build.lua"],

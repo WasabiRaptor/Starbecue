@@ -237,6 +237,8 @@
 	},
 	"effectDirectives": "?replace=FEFFFFFF=FFFFFFFF?replace=9bd4ffFF=ffea63FF?replace=31a6ffFF=f5bc00FF",
 	"forceName": "Auroria",
+	"nameGen" : [ "/species/sbq/Auroria/Auroria.species:nameGenConfig", "/species/sbq/Auroria/Auroria.species:nameGenConfig" ],
+	"nameGenConfig": ["Auroria"],
 	"genders": [
 		{
 			"name": "male",
@@ -284,10 +286,6 @@
 	],
 	"headOptionAsHairColor": true,
 	"kind": "sbq/Auroria/Auroria",
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises": [
 		"/sfx/humanoid/humanhurt_male1.ogg",

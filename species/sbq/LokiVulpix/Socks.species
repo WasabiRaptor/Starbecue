@@ -142,10 +142,8 @@
 			}
 		}
 	},
-	"nameGen": [
-		"/species/humanmalenamegen.config:names",
-		"/species/humanfemalenamegen.config:names"
-	],
+	"nameGen" : [ "/species/sbq/LokiVulpix/Socks.species:nameGenConfig", "/species/sbq/LokiVulpix/Socks.species:nameGenConfig" ],
+	"nameGenConfig": ["Socks"],
 	// these are the ouch noises! you'll probably want to make them point to the sounds your OC would make when hurt, that being custom, or another species'
 	"ouchNoises": [
 		"/sfx/humanoid/humanhurt_male1.ogg",
