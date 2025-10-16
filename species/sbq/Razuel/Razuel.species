@@ -16,6 +16,12 @@
 	"createScripts" : ["/species/sbq/Razuel/Razuel.lua"],
 	"humanoidOverrides" : {
 		"animation" : {
+			"version" : 1,
+			"includes" : [
+				"/humanoid/sbq/quadruped/quadruped.animation",
+				"/humanoid/sbq/Razuel/Razuel/wings.animation"
+			],
+			"globalTagDefaults" : {},
 			"animatedParts" : {
 				"parts" : {
 					"head": {
@@ -43,7 +49,8 @@
 						}
 					}
 				}
-			}
+			},
+			"transformationGroups" : {}
 		},
 		"identityFramesetTags" : {
 			"hairFrameset" : "<hairGroup>/<hairType>.png",
@@ -53,6 +60,11 @@
 			"hairFlippedFrameset" : "<hairGroup>/<hairType>.png",
 			"facialHairFlippedFrameset" : "<facialMaskGroup>/<facialMaskType>_back.png",
 			"facialMaskFlippedFrameset" : "<facialMaskGroup>/<facialMaskType>_front.png"
+		},
+		"movementParameters" : {
+			"airJumpProfile" : {
+				"multiJump" : true
+			}
 		}
 	},
 
@@ -96,7 +108,14 @@
 		"Personality" // personality
 	],
 	"horns" : [ "0" ],
+	"bodyColor" : [
+		"?replace;a82a22=a82a22FE;c7372e=c7372eFE;e34a40=e34a40FE;" // make gems fullbright
+	],
+	"eyeColor" : [
+		"?replace;a84b20=a84b20FE;b65325=b65325FE;f0e3de=f0e3deFE;fff7f4=fff7f4FE;" // make eyes fullbright
+	],
 
+	"fallbackShip" : "avian",
 	"charCreationPatch" : false,
 	"sbqCompatible" : true,
 	"sbqSettingsConfig": {

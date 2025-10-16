@@ -8,49 +8,53 @@ local universe_server_patch = {}
 local ai_patch = {}
 local player_patch = {}
 local quests_patch = {}
+
+local aiConfig = assets.json("/ai/ai.config")
+local universeServerConfig = assets.json("/universe_server.config")
 for _, species in ipairs(races) do
 	local speciesConfig = assets.json("/species/" .. species .. ".species")
 	if speciesConfig.charCreationPatch ~= false then
 		table.insert(charcreation_patch, { op = "add", path = "/speciesOrdering/-", value = species })
 	end
-	universe_server_patch = sb.jsonMerge(universe_server_patch, {
+	local fallbackShip = speciesConfig.fallbackShip or "novakid"
+	universe_server_patch = sb.jsonMerge(universe_server_patch,  {
 		speciesShips = {
-			[species] = speciesConfig.ships or {
-				"/ships/novakid/novakidt0.structure",
-				"/ships/novakid/novakidt1.structure",
-				"/ships/novakid/novakidt2.structure",
-				"/ships/novakid/novakidt3.structure",
-				"/ships/novakid/novakidt4.structure",
-				"/ships/novakid/novakidt5.structure",
-				"/ships/novakid/novakidt6.structure",
-				"/ships/novakid/novakidt7.structure",
-				"/ships/novakid/novakidt8.structure"
+			[species] = speciesConfig.ships or universeServerConfig.speciesShips[fallbackShip] or {
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t0.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t1.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t2.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t3.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t4.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t5.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t6.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t7.structure",
+				"/ships/"..fallbackShip.."/"..fallbackShip.."t8.structure"
 			}
 		}
 	})
 	if not assets.exists("/objects/protectorate/objects/protectorateship/protectorateship" .. species .. ".png") then
 		assets.add("/objects/protectorate/objects/protectorateship/protectorateship" .. species .. ".png",
-			assets.image("/objects/protectorate/objects/protectorateship/protectorateshipnovakid.png"))
+			assets.image("/objects/protectorate/objects/protectorateship/protectorateship"..fallbackShip..".png"))
 	end
 	if not assets.exists("/cinematics/story/smallship/" .. species .. "ship.png") then
 		assets.add("/cinematics/story/smallship/" .. species .. "ship.png",
-			assets.image("/cinematics/story/smallship/novakidship.png"))
+			assets.image("/cinematics/story/smallship/"..fallbackShip.."ship.png"))
 	end
 	if not assets.exists("/cinematics/story/smallship/" .. species .. "ship4.png") then
 		assets.add("/cinematics/story/smallship/" .. species .. "ship4.png",
-			assets.image("/cinematics/story/smallship/novakidship4.png"))
+			assets.image("/cinematics/story/smallship/"..fallbackShip.."ship4.png"))
 	end
 	if not assets.exists("/cinematics/story/smallship/" .. species .. "ship3.png") then
 		assets.add("/cinematics/story/smallship/" .. species .. "ship3.png",
-			assets.image("/cinematics/story/smallship/novakidship3.png"))
+			assets.image("/cinematics/story/smallship/"..fallbackShip.."ship3.png"))
 	end
 	if not assets.exists("/cinematics/story/smallship/" .. species .. "ship2.png") then
 		assets.add("/cinematics/story/smallship/" .. species .. "ship2.png",
-			assets.image("/cinematics/story/smallship/novakidship2.png"))
+			assets.image("/cinematics/story/smallship/"..fallbackShip.."ship2.png"))
 	end
 
 
-	local ai = speciesConfig.ai or {
+	local ai = speciesConfig.ai or aiConfig.species[fallbackShip] or {
 		aiFrames = "NovakidAI.png",
 		portraitFrames = "portraits/novakidportrait.png",
 		staticFrames = "staticGlitch.png"

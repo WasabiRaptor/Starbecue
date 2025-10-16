@@ -5,7 +5,7 @@ local function wrap(index, array)
 	if index < #array then return index end
 	return math.fmod(index, #array)
 end
-function create(name, species, genderIndex, _1, _2, hornsStyle, _4, _5, _6, _7, _8, personality, ...)
+function create(name, species, genderIndex, bodyColor, eyeColor, hornsStyle, _4, _5, _6, _7, _8, personality, ...)
 	-- these values are zero indexed!
 
 	local speciesConfig = root.speciesConfig(species)
@@ -15,9 +15,13 @@ function create(name, species, genderIndex, _1, _2, hornsStyle, _4, _5, _6, _7, 
 	genderIndex = wrap(genderIndex, speciesConfig.genders)
 	local gender = speciesConfig.genders[genderIndex+1]
 	hornsStyle = wrap(hornsStyle, speciesConfig.horns)
+	bodyColor = wrap(bodyColor, speciesConfig.bodyColor)
+	eyeColor = wrap(eyeColor, speciesConfig.eyeColor)
 	personality = wrap(personality, humanoidConfig.personalities)
 
 	local directives = ""
+	directives = directives..(speciesConfig.bodyColor[bodyColor+1])
+	directives = directives..(speciesConfig.eyeColor[eyeColor+1])
 
 	local personalityIdle, personalityArmIdle, personalityHeadOffset, personalityArmOffset = table.unpack(humanoidConfig.personalities[personality+1])
 
@@ -43,7 +47,7 @@ function create(name, species, genderIndex, _1, _2, hornsStyle, _4, _5, _6, _7, 
 		color = {51, 117, 237, 255},
 	}
 	local parameters = {
-		choices = { genderIndex, _1, _2, hornsStyle, _4, _5, _6, _7, _8, personality, ... },
+		choices = { genderIndex, bodyColor, eyeColor, hornsStyle, _4, _5, _6, _7, _8, personality, ... },
 		--this you can do a lot with, see the humanoid build script
 	}
 	local armor = {
