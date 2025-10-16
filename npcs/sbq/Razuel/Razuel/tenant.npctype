@@ -109,19 +109,27 @@
 			// you want it to stay locked
 			"overrideSettings" : {
 				"any":{
-					// examples for disabling certain prefs
-					// "vorePrefs" : {
-					// 	"oralVore" : {
-					// 		"pred" : false,
-					// 		"prey" : false
-					// 	}
-					// },
-					// "infusePrefs" : {
-					// 	"bellyInfuse" : {
-					// 		"pred" : false,
-					// 		"prey" : false
-					// 	}
-					// }
+					"breastsSelect" : "disable",
+					"vorePrefs" : {
+						"breastVore" : {
+							"pred" : false,
+							"prey" : false
+						},
+						"absorbVore" : {
+							"pred" : false,
+							"prey" : false
+						},
+						"navelVore" : {
+							"pred" : false,
+							"prey" : false
+						}
+					},
+					"infusePrefs" : {
+						"breastInfuse" : {
+							"pred" : false,
+							"prey" : false
+						}
+					}
 				},
 				"npc":{
 
