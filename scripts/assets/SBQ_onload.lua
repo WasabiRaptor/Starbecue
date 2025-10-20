@@ -2,6 +2,7 @@ local races = {
 	"sbq/MallowGator/Izzy",
 	"sbq/DreccanOfPaws/Dreccan",
 	"sbq/Razuel/Razuel",
+	"sbq/SilentBuizel/Stardust",
 }
 local charcreation_patch = {}
 local universe_server_patch = {}
