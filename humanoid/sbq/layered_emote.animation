@@ -35,8 +35,8 @@
 						"sleep": "idle"
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<humanoidPath><emoteFrameset>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0",
-							"flippedImage": "<humanoidPath><emoteFlippedFrameset>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<humanoidPath><emoteFrameset>:<emote_state>.<emote_frame><portraitMask>",
+							"flippedImage": "<humanoidPath><emoteFlippedFrameset>:<emote_state>.<emote_frame><portraitMask>" } },
 						"bust" : "head"
 					}
 				}
@@ -67,8 +67,8 @@
 						"sleep": "idle"
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<humanoidPath><emoteBackFrameset>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0",
-							"flippedImage": "<humanoidPath><emoteBackFlippedFrameset>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<humanoidPath><emoteBackFrameset>:<emote_state>.<emote_frame><portraitMask>",
+							"flippedImage": "<humanoidPath><emoteBackFlippedFrameset>:<emote_state>.<emote_frame><portraitMask>" } },
 						"bust" : "head"
 					}
 				}
@@ -99,8 +99,8 @@
 						"sleep": "idle"
 					},
 					"portraitMode" : {
-						"head": { "properties": { "image": "<humanoidPath><emoteFrontFrameset>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0",
-							"flippedImage": "<humanoidPath><emoteFrontFlippedFrameset>:<emote_state>.<emote_frame>?addmask=/humanoid/portraitMask.png;0;0" } },
+						"head": { "properties": { "image": "<humanoidPath><emoteFrontFrameset>:<emote_state>.<emote_frame><portraitMask>",
+							"flippedImage": "<humanoidPath><emoteFrontFlippedFrameset>:<emote_state>.<emote_frame><portraitMask>" } },
 						"bust" : "head"
 					}
 				}
