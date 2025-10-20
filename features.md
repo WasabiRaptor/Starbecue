@@ -381,6 +381,8 @@ It is relatively simple to use this [template](https://github.com/WasabiRaptor/S
 - [Octoling](https://steamcommunity.com/sharedfiles/filedetails/?id=73485588) : octoling
 - [Lamia](https://steamcommunity.com/sharedfiles/filedetails/?id=779096734) : lamia
 - [Space Skunks](https://steamcommunity.com/sharedfiles/filedetails/?id=3423728930) : skumks
+- [Renamon](https://steamcommunity.com/sharedfiles/filedetails/?id=3358528427) : renamonlk
+
 ---
 
 ## Races that need extra work to update

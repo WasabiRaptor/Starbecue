@@ -73,13 +73,14 @@
 	},
 	"humanoidOverrides" : {
 		"sbqConfig" : {
+			"eggStatus": "sbqPlasticEgg",
 			"includes" : ["/humanoid.config:sbqConfig"],
 			"animations" : ["/humanoid/neki/sbq/nekiBounce.animation"]
 		}
 	},
 	"sbqSettingsConfig": {
-		"eggStatus": "sbqPlasticEgg",
 		"defaultSettings": {"any":{
+			"nipplesVisible":true,
 			"navelVisible": true
 		}}
 	},

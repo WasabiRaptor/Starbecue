@@ -1,0 +1,647 @@
+{
+	"sbqCompatible" : true, // marks this species as compatible with SBQ
+	"sbqTFAny" : true, // maeks this species
+	"sbqHubNPCs" : [ // list of NPCs that can spawn in the SBQ hub world
+		{"level": 1, "species": "renamonlk", "type": "sbqVoreVillager", "overrides": {}}
+	],
+	"sbqHubMicroNPCs" : [ // list of NPCs that can spawn in the SBQ hub world's micro dome
+		{"level": 1, "species": "renamonlk", "type": "sbqVoreVillager", "overrides": {}}
+	],
+	"sbqTenantData" : { // data for NPC tenants
+		"colonyTagCriteria" : {// the colony tags this species wants
+		// these are the "colonyTags" that belong to objects, the number
+		// is the number of tiles occupied by objects with said tag
+			"science" : 4,
+			"electronic" : 8
+		},
+		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier of guard
+		// in vanilla there is only tiers 1-4 of guard, but since many mods extend the tiers
+		// it is good to define them anyway even if they might not be obtainable
+			{"combat":8},
+			{"combat":8,"tier2":12},
+			{"combat":8,"tier3":12},
+			{"combat":8,"tier4":12},
+			{"combat":8,"tier5":12},
+			{"combat":8,"tier6":12},
+			{"combat":8,"tier7":12},
+			{"combat":8,"tier8":12},
+			{"combat":8,"tier9":12},
+			{"combat":8,"tier10":12}
+		],
+		"tenant" : { // the NPC villager tenant you get when summoned by a deed
+			"spawn": "npc", "species": "renamonlk", "type": "sbqVoreTenant", "overrides": {},
+			"orderFurniture" : [ // list of objects you can buy within the SBQ deed
+			// you should replace these with objects that have the requisite colony tags
+			// defined up above, or with objects that are fitting for the species
+				{"name":"tesla", "count":1},
+				{"name":"plasmadisc", "count":1},
+				{"name":"apexcoolserver", "count":1},
+				{"name":"arcademachine", "count":1},
+				{"name":"arcadeblue", "count":1},
+				{"name":"arcadegreen", "count":1},
+				{"name":"arcadedance", "count":1},
+				{"name":"basictv", "count":1},
+				{"name":"screen1", "count":1},
+				{"name":"screen2", "count":1},
+				{"name":"screen3", "count":1},
+				{"name":"screen4", "count":1},
+				{"name":"screen5", "count":1}
+			]
+		},
+		"guardTenant" : [ // merges on top of the base tenant
+			{"level": 1, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 2, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 3, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 4, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 5, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 6, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 7, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 8, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 9, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
+			{"level": 10, "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
+		]
+	},
+	"humanoidOverrides" : {
+		"sbqConfig" : {
+			"includes" : ["/humanoid.config:sbqConfig"],
+			"animations" : ["/humanoid/neki/sbq/nekiBounce.animation"]
+		}
+	},
+	// the settings config for the species, here you can define default values for
+	// settings, as well as if any values should be overrided or are invalid
+	"sbqSettingsConfig": {
+		"defaultSettings": {
+			"any":{
+				"nipplesVisible" : true,
+				"navelVisible" : true
+			},
+			"player" : {},
+			"npc" : {},
+			"object" : {}
+		},
+		"overrideSettings" : {
+			"any":{},
+			"player" : {},
+			"npc" : {},
+			"object" : {}
+		},
+		"invalidSettings" : {
+			"any":{},
+			"player" : {},
+			"npc" : {},
+			"object" : {}
+		}
+	},
+	"baseColorPalette": { // the base color palette that is used to re-color the images needed
+	// for SBQ's vore animations and certain items
+	// colors are hex codes, list them in order of darkest to lightest
+	// you will always need at least three for the colors to work nicely, the fourth is
+	// simply the highlight color and is optional as not every species has a highlight
+		"primary": ["a38d59","d9c189","f7e7b2"],
+		"secondary": ["ff6a00","ff8d42","ffb07c"],
+		// primary and secondary must be defined for how SBQ's digest drops work
+		// any other colors can be named however you wish
+
+		// you cannot make up colors that do not exist within the species' images
+		// if you want them to be properly replaced by customization colors
+		"flesh": ["0084e2","0094ff","60bdff"]
+	},
+	// the vore animation images this species will generate when the mod loads
+	// if one wanted to, one could also create species specific ones and place them within
+	// the `humanoid/renamonlk` folder at the path of the images here, but that would also
+	// mean the images won't be updated whenever the ones in base SBQ are, so that's up to you
+	"sbqPartImages": {
+		"sbq/noLegs/malebody.png" : { // the species' main body with the legs removed
+		// used by naga and taur
+			"sourceImage" : "malebody.png",
+			// if the mask from base SBQ assests doesn't work well, create your own mask
+			// and put its path down below in the processingDirectives
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/noLegs_male.png;0;0;",
+			// SBQ uses this image patch script to copy the crotch into areas that would have
+			// been covered by the legs and therefore got removed when the legs were
+			// this script might not work if the species has modified the frame layout of the image
+			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]
+		},
+		"sbq/noLegs/femalebody.png" : {// the species' main body with the legs removed
+		// used by naga and taur
+			"sourceImage" : "femalebody.png",
+			// if the mask from base SBQ assests doesn't work well, create your own mask
+			// and put its path down below in the processingDirectives
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/noLegs_female.png;0;0;",
+			// SBQ uses this image patch script to copy the crotch into areas that would have
+			// been covered by the legs and therefore got removed when the legs were
+			// this script might not work if the species has modified the frame layout of the image
+			"patches" : ["/humanoid/any/sbqImageMasks/noLegs_patch.lua"]
+		},
+		"sbq/malebody.png" : {// the species' main body with the tail removed
+		// used whenever using SBQ's tail animations
+			"sourceImage" : "malebody.png",
+			// if the mask from base SBQ assests doesn't work well, create your own mask
+			// and put its path down below in the processingDirectives
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_male.png;0;0;"
+		},
+		"sbq/femalebody.png" : {// the species' main body with the tail removed
+		// used whenever using SBQ's tail animations
+			"sourceImage" : "femalebody.png",
+			// if the mask from base SBQ assests doesn't work well, create your own mask
+			// and put its path down below in the processingDirectives
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/removeTail_female.png;0;0;"
+		},
+		"sbq/fg/malebody.png" : {// the foreground leg of the species isolated into its own image
+		// used to layer in front of the cock during walk/run animation
+			"sourceImage" : "malebody.png",
+			// if the mask from base SBQ assests doesn't work well, create your own mask
+			// and put its path down below in the processingDirectives
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
+		},
+		"sbq/fg/femalebody.png" : {// the foreground leg of the species isolated into its own image
+		// used to layer in front of the cock during walk/run animation
+			"sourceImage" : "femalebody.png",
+			// if the mask from base SBQ assests doesn't work well, create your own mask
+			// and put its path down below in the processingDirectives
+			"processingDirectives" : "?addmask=/humanoid/any/sbqImageMasks/legMask.png;0;0;"
+		},
+
+		// the following images are ones that need to have their colors replaced to match the species
+		// this is done by the list of remapDirectives, where the first in each pair is the color in the
+		// source image being replaced, do not modify that, the second entry in the pair is what color
+		// your species uses to replace it with
+		"sbq/naga/hips.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_hips.png",
+			"remapDirectives": [
+				[
+					"primary", // outer scales
+					"primary"
+				],
+				[
+					"secondary", // underside scales
+					"secondary"
+				]
+			]
+		},
+		// images with 'infused' in the path are used when this species is 'infused' as part of
+		// another character, in this case it refers to tail TF, usually you'll set the colors
+		// the same as the non infused version, but in some cases you may want it to be different
+		"sbq/infused/naga/hips.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_hips.png",
+			"remapDirectives": [
+				[
+					"primary", // outer scales
+					"primary"
+				],
+				[
+					"secondary", // underside scales
+					"secondary"
+				]
+			]
+		},
+		"sbq/naga/belly.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_belly.png",
+			"remapDirectives": [
+				[
+					"primary", // outer scales
+					"primary"
+				],
+				[
+					"secondary", // underside scales
+					"secondary"
+				]
+			]
+		},
+
+		"sbq/infused/naga/belly.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_belly.png",
+			"remapDirectives": [
+				[
+					"primary", // outer scales
+					"primary"
+				],
+				[
+					"secondary", // underside scales
+					"secondary"
+				]
+			]
+		},
+		"sbq/naga/end.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_end.png",
+			"remapDirectives": [
+				[
+					"primary", // outer scales
+					"primary"
+				],
+				[
+					"secondary", // underside scales
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/naga/end.png" : {
+			"sourceImage" : "/humanoid/any/sbqModules/naga/tail_end.png",
+			"remapDirectives": [
+				[
+					"primary", // outer scales
+					"primary"
+				],
+				[
+					"secondary", // underside scales
+					"secondary"
+				]
+			]
+		},
+
+		"sbq/nickit_tail.png" : {
+			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary", // red fur
+					"primary"
+				],
+				[
+					"secondary", // black fur
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/nickit_tail.png" : {
+			"sourcePalette" : "/humanoid/any/sbqModules/nickit_tail/palette.config",
+			"sourceImage" : "/humanoid/any/sbqModules/nickit_tail/nickit_tail.png",
+			"remapDirectives": [
+				[
+					"primary", // red fur (main)
+					"primary"
+				],
+				[
+					"secondary", // black fur (end)
+					"secondary"
+				]
+			]
+
+		},
+		"sbq/flareon_tail.png" : {
+			"sourcePalette" : "/species/wr/flareon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary", // yellow fur
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/flareon_tail.png" : {
+			"sourcePalette" : "/species/wr/flareon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/flareon/tail.png",
+			"remapDirectives": [
+				[
+					"secondary", // yellow fur
+					"secondary"
+				]
+			]
+		},
+		"sbq/vaporeon_tail.png" : {
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary", // light blue
+					"primary"
+				],
+				[
+					"secondary", // dark blue back fins
+					"secondary"
+				],
+				[
+					"tertiary", // white underside
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/vaporeon_tail.png" : {
+			"sourcePalette" : "/species/wr/vaporeon.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/vaporeon/tail.png",
+			"remapDirectives": [
+				[
+					"primary", // light blue
+					"primary"
+				],
+				[
+					"secondary", // dark blue back fins
+					"secondary"
+				],
+				[
+					"tertiary", // white underside
+					"secondary"
+				]
+			]
+		},
+
+		"sbq/luxio_tail.png" : {
+			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary", // black fur
+					"secondary"
+				]
+				// [ // uncomment this if the species has a color that glows you can use
+				// 	"eyes", // glowing star
+				// 	"eyes"
+				// ]
+			]
+		},
+		"sbq/infused/luxio_tail.png" : {
+			"sourcePalette" : "/species/wr/luxio.species:baseColorPalette",
+			"sourceImage" : "/humanoid/wr/luxio/tail.png",
+			"remapDirectives": [
+				[
+					"secondary", // black fur
+					"secondary"
+				]
+				// [ // uncomment this if the species has a color that glows you can use
+				// 	"eyes", // glowing star
+				// 	"eyes"
+				// ]
+			]
+		},
+
+		// infuse sprites for the quadruped species' belly
+		"sbq/infused/bellyQuadruped.png": {
+			"sourceImage": "/humanoid/sbq/quadruped/belly/default.png",
+
+			"processingDirectives": "?replace;00adba=bc1002", // this replaces the navel pixel, don't touch this
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/infused/bellyQuadruped_noNavel.png": {
+			"sourceImage": "/humanoid/sbq/quadruped/belly/default.png",
+			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+
+		"sbq/belly.png": {
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"processingDirectives": "?replace;00adba=bc1002", // this replaces the navel pixel, don't touch this
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/belly.png": {
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"processingDirectives": "?replace;00adba=bc1002", // this replaces the navel pixel, don't touch this
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/belly_noNavel.png": {
+			"sourceImage": "/humanoid/any/sbqModules/belly/default.png",
+			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/cock.png": {
+			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/cock.png": {
+			"sourceImage": "/humanoid/any/sbqModules/cock/default.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"primary"
+				]
+			]
+		},
+		"sbq/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/ballsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/infused/ballsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/balls/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				]
+			]
+		},
+		"sbq/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqModules/pussy/default.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/pussy.png": {
+			"sourceImage": "/humanoid/any/sbqModules/pussy/default.png",
+			"remapDirectives": [
+				[
+					"flesh",
+					"primary"
+				]
+			]
+		},
+		"sbq/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"primary_180", // this is a few pixels near the right shoulder when breasts expand
+					// and should be replaced with whatever color is there
+					"primary"
+				],
+				[
+					"flesh", // nipples
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"primary_180", // this is a few pixels near the right shoulder when breasts expand
+					// and should be replaced with whatever color is there
+					"primary"
+				],
+				[
+					"flesh", // nipples
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsFront.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary_180" // when there is no second entry in the pair
+					// the color is simply removed from the image, for the infused
+					// breasts we do want to do this here for these pixels at the shoulder
+				],
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"flesh", // nipples
+					"flesh"
+				]
+			]
+		},
+		"sbq/infused/breastsBack.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary_180" // when there is no second entry in the pair
+					// the color is simply removed from the image, for the infused
+					// breasts we do want to do this here for these pixels at the shoulder
+				],
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"flesh", // nipples
+					"flesh"
+				]
+			]
+		},
+		"sbq/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"primary_180",// this is a few pixels near the right shoulder when breasts expand
+					// and should be replaced with whatever color is there
+					"primary"
+				],
+				[
+					"flesh", // nipples
+					"secondary" // for no nipples this should be the same as what primary was set to
+				]
+			]
+		},
+		"sbq/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"primary_180",// this is a few pixels near the right shoulder when breasts expand
+					// and should be replaced with whatever color is there
+					"primary"
+				],
+				[
+					"flesh", // nipples
+					"secondary" // for no nipples this should be the same as what primary was set to
+				]
+			]
+		},
+		"sbq/infused/breastsFront_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/front.png",
+			"remapDirectives": [
+				[
+					"primary_180" // when there is no second entry in the pair
+					// the color is simply removed from the image, for the infused
+					// breasts we do want to do this here for these pixels at the shoulder
+				],
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"flesh", // nipples
+					"secondary" // for no nipples this should be the same as what primary was set to
+				]
+			]
+		},
+		"sbq/infused/breastsBack_noNipples.png": {
+			"sourceImage": "/humanoid/any/sbqModules/breasts/default/back.png",
+			"remapDirectives": [
+				[
+					"primary_180" // when there is no second entry in the pair
+					// the color is simply removed from the image, for the infused
+					// breasts we do want to do this here for these pixels at the shoulder
+				],
+				[
+					"primary",
+					"secondary"
+				],
+				[
+					"flesh", // nipples
+					"secondary" // for no nipples this should be the same as what primary was set to
+				]
+			]
+		}
+	}
+}
