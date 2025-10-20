@@ -18,17 +18,58 @@ Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix) o
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
 
-Starbecue as of version 4.0 uses [OpenSB-SBQ](https://github.com/WasabiRaptor/OpenStarbound/tree/SBQ) which is a specialized version of [OpenSB](https://github.com/OpenStarbound/OpenStarbound) and should be compatible with any mods that require it. In the future base OpenSB may be all that is required if my features get merged, as I am contributing to it's development.
+Starbecue as of version 4.0 uses [OpenSB-SBQ](https://github.com/WasabiRaptor/OpenStarbound/tree/SBQ) which is a specialized version of [OpenSB](https://github.com/OpenStarbound/OpenStarbound) and should be compatible with any mods that require it. In the future base OpenSB may be all that is required if my features get merged, as I am contributing to it's development. The zip you have been provided with already contains a build of OpenSB-SBQ.
+
+
+## Steam Install
+
+I have included some convenient setup scripts for each OS!
+
+### Windows
+Simply use the `install.bat` (which just is a convenient way to execute the `install.ps1`) which should try to find your starbound installation and then install the files to it!
+
+### Linux
+`cd` into the folder and do
+```
+chmod -x install.sh
+./install.sh
+```
+It will attempt to find your starbound installation to copy the files to it.
+
+### Macos
+Open the terminal and type `cd ` and then drag the unzipped folder into the terminal to copy the path, and then press enter. This will open the folder in the terminal.
+
+Now enter `sh install.sh` to run the install script.
+
+It will attempt to find your starbound installation to copy the files to it.
+
+## Portable Install
 
 You will have downloaded a zip containing a portable installation of OpenSB-SBQ for your relevant OS, extract it and place it anywhere you want, but for the game to function you will need to retrieve `packed.pak` from your purchased copy of Starbound.
 
-On Steam, click on Starbound -> Properties -> Installed Files -> Browse. Then open the `assets` folder within that directory, you will find a `packed.pak` file, copy it into the `assets` folder of the OpenSB install. If you want to move your saves, copy the `storage` folder too. Or you can simply overwrite/merge the files in the steam Starbound folder with the provided ones to replace the steam install.
+On Steam, click on Starbound -> Properties -> Installed Files -> Browse. Then open the `assets` folder within that directory, you will find a `packed.pak` file, copy it into the `assets` folder of the OpenSB install. If you want to move your saves, copy the `storage` folder too.
+
+On Linux and Macos Silicon there is an additional step which is further below.
 
 After that you're done! You can simply open the game executable which will be within the folder named after your relevant OS.
 
 Unlike SBQ-Engine, OpenSB has no issues connecting to retail SB servers, just some of the expanded features will not function while doing so.
 
 `starbecue.pak` is already placed within the mods folder of this portable install, it is also safe to remove it if one doesn't want to play with it.
+
+### Linux
+You just have to mark the executable as execuatble. `cd` into the linux folder and to `chmod -x starbound` and you're done.
+
+### Macos Silicon
+
+If you attempted the open the game on macos after doing the above, you might have seen a message saying something like this:
+`starbound.app is damaged and can’t be opened. You should move it to the trash.`
+
+That is apple lying to you. The equivalent error on a windows system would be that the app is made by an unidentified developer, and you would be given the option to run it anyway. It is fine to protect users from potential malware when a program doesn't have proper id certification, but lying to them about why the program won't open is rather infantilizing don't you agree?
+
+There is a simple fix until apple decides they won't allow it anymore. Copy `xattr -c ` into the terminal, and then drag the `starbound.app` in the `osx` folder into it to copy its path, and then hit enter.
+
+This should remove the quarentine flags and allow the application to run.
 
 
 # Support Us!
