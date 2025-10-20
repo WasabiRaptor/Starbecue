@@ -1,5 +1,18 @@
 local _scanHouseContents = scanHouseContents
 
+local function fetchConfigArray(input, path)
+	if (type(input) == "table") and input[1] then
+		local out = input
+		for _, v in ipairs(input) do
+			out = fetchConfigArray(sb.jsonMerge(out, fetchConfigArray(v, path)), path)
+		end
+		return out
+	elseif type(input) == "string" then
+		return fetchConfigArray(root.assetJson(sbq.assetPath(input, path)), path)
+	end
+	return input
+end
+
 local otherDeeds
 local bannedObjects
 function scanHouseContents(boundary)
@@ -8,7 +21,7 @@ function scanHouseContents(boundary)
 		otherDeeds = root.assetJson("/objects/sbq/deed/otherDeeds.config")
 	end
 	if not bannedObjects then
-		bannedObjects = sbq.fetchConfigArray(config.getParameter("deedBannedObjects") or {})
+		bannedObjects = fetchConfigArray(config.getParameter("deedBannedObjects") or {})
 	end
 
 	for object, _ in pairs(returnValues.objects) do
