@@ -6,6 +6,9 @@ local sbqStrings = assets.json("/sbqStrings.config")
 for _, path in ipairs(assets.byExtension("monstertype")) do
 	assets.patch(path, "/scripts/monster/SBQ_monster_patch.lua")
 end
+local hubNPCList = assets.json("/npcs/sbqHub/sbqHubRandomNpcList.config")
+local hubMicroNPCList = assets.json("/npcs/sbqHub/sbqHubMicroNpcList.config")
+
 local baseTenant = assets.json("/tenants/sbq/baseTenant.config")
 local baseGuardTenant = assets.json("/tenants/sbq/baseGuardTenant.config")
 local tenantCatalogue = assets.json("/interface/scripted/sbq/colonyDeed/catalogue.config")
@@ -61,6 +64,12 @@ for _, path in ipairs(assets.byExtension("npctype")) do
 	local npcConfig = assets.json(path)
 	if (npcConfig.scriptConfig or {}).sbqTenantData then
 		setupTenantCatalogue(npcConfig.scriptConfig.sbqTenantData, npcConfig.type, npcConfig.npcname)
+	end
+	for _, v in ipairs( npcConfig.sbqHubNPCs or {}) do
+		table.insert(hubNPCList, v)
+	end
+	for _, v in ipairs( npcConfig.sbqHubMicroNPCs or {}) do
+		table.insert(hubMicroNPCList, v)
 	end
 end
 local columns = 4
@@ -208,6 +217,13 @@ local function setupSpecies(path)
 	if speciesConfig.sbqTenantData then
 		setupTenantCatalogue(speciesConfig.sbqTenantData, speciesConfig.kind, speciesConfig.charCreationTooltip.title)
 	end
+	for _, v in ipairs( speciesConfig.sbqHubNPCs or {}) do
+		table.insert(hubNPCList, v)
+	end
+	for _, v in ipairs( speciesConfig.sbqHubMicroNPCs or {}) do
+		table.insert(hubMicroNPCList, v)
+	end
+
 	if speciesConfig.sbqTFAny and assets.exists("/cinematics/teleport/teleport_" .. speciesConfig.kind .. ".cinematic") then
 		table.insert(speciesTFAny, speciesConfig.kind)
 	end
@@ -233,6 +249,8 @@ for i, v in ipairs(randomGuardTenant) do
 end
 assets.add("/interface/scripted/sbq/colonyDeed/catalogue.config", sb.printJson(tenantCatalogue))
 
+assets.add("/npcs/sbqHub/sbqHubRandomNpcList.config", sb.printJson(hubNPCList))
+assets.add("/npcs/sbqHub/sbqHubMicroNpcList.config", sb.printJson(hubMicroNPCList))
 
 local occupantSlotCap = assets.json("/sbq.config:occupantSlotCap")
 for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do

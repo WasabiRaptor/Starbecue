@@ -5,7 +5,13 @@
 	"scriptConfig" : {
 		"questGenerator" : {
 			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
-		}
+		},
+		"sbqHubNPCs" : [ // list of NPCs that can spawn in the SBQ hub world
+			{"level": 1, "species": "sbq/Zygahedron/Zevi", "type": "sbq/Zygahedron/Zevi-hub", "overrides": {}, "bias": true}
+		],
+		"sbqHubMicroNPCs" : [ // list of NPCs that can spawn in the SBQ hub world's micro dome
+			{"level": 1, "species": "sbq/Zygahedron/Zevi", "type": "sbq/Zygahedron/Zevi-hub", "overrides": {}, "bias": true}
+		]
 	},
 	"statusControllerSettings" : {
 		"stats" : {

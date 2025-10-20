@@ -1,18 +1,18 @@
 {
-	"type" : "sbq/Username/Charactername-hub",
+	"type" : "sbq/Razuel/Razuel-hub",
 
 	// this should be your base NPC's type
-	"baseType" : "sbq/Username/Charactername",
+	"baseType" : "sbq/Razuel/Razuel",
 
 	"scriptConfig" : {
 		"questGenerator" : {
 			"pools" : ["sbq_common", "sbq_transform", "sbq_vore"]
 		},
 		"sbqHubNPCs" : [ // list of NPCs that can spawn in the SBQ hub world
-			{"level": 1, "species": "sbq/Username/Charactername", "type": "sbq/Username/Charactername-hub", "overrides": {}}
+			{"level": 1, "species": "sbq/Razuel/Razuel", "type": "sbq/Razuel/Razuel-hub", "overrides": {}, "bias": true}
 		],
 		"sbqHubMicroNPCs" : [ // list of NPCs that can spawn in the SBQ hub world's micro dome
-			{"level": 1, "species": "sbq/Username/Charactername", "type": "sbq/Username/Charactername-hub", "overrides": {}}
+			{"level": 1, "species": "sbq/Razuel/Razuel", "type": "sbq/Razuel/Razuel-hub", "overrides": {}, "bias": true}
 		]
 	},
 	"statusControllerSettings" : {
