@@ -64,14 +64,19 @@
 			"priority" : 60,
 			"colonyTagCriteria" : {
 				// You should make the colony tags below reflect what your OC likes
-				"office" : 4
+				"crystalline" : 8,
+				"hoard" : 8
 			},
 			"tenant" : {
 				"spawn": "npc", "species": "sbq/Razuel/Razuel", "type": "sbq/Razuel/Razuel", "overrides": {},
 				"orderFurniture" : [
 					// you should populate this list with objects that have the requisite colonytags
-					{"name":"officedesk", "count":1},
-					{"name":"officelamp", "count":1}
+					{"name":"crystallamp", "count":1},
+					{"name":"crystaltable", "count":1},
+					{"name":"crystalbed", "count":1},
+					{"name":"treasurechest", "count":1},
+					{"name":"trapchest", "count":1},
+					{"name":"barrelgoldfilled", "count":1}
 				]
 			}
 		},
@@ -103,12 +108,18 @@
 
 				}
 			},
+			"groupedDefaultSettings" : { "any" :{
+				"vorePrefs" : {"pred":true,"prey":true},
+				"infusePrefs" : {"pred":true,"prey":true}
+			}},
+
 			// settings that are locked to a specific value and cannot be configured by the player, useful for disabling certain actions
 			// or things someone doesn't like, or simply preventing someone from diabling something important to the OC
 			// same structure as default settings above, only what is defined here is locked! only define something here if
 			// you want it to stay locked
 			"overrideSettings" : {
 				"any":{
+					"speciesTF" : false,
 					"breastsSelect" : "disable",
 					"vorePrefs" : {
 						"breastVore" : {

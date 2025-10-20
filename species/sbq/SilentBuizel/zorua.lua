@@ -14,8 +14,6 @@ function create(name, species, genderIndex, furColor, hairColor, pawsColor, hair
 
 	genderIndex = wrap(genderIndex, speciesConfig.genders)
 	furColor = wrap(furColor, speciesConfig.furColor)
-	pawsColor = wrap(pawsColor, speciesConfig.pawsColor)
-	hairColor = wrap(hairColor, speciesConfig.hairColor)
 	eyeColor = wrap(eyeColor, speciesConfig.eyeColor)
 	hairStyle = wrap(hairStyle, speciesConfig.hairStyle)
 	maneStyle = wrap(maneStyle, speciesConfig.maneStyle)
@@ -24,8 +22,6 @@ function create(name, species, genderIndex, furColor, hairColor, pawsColor, hair
 	local directives = ""
 
 	directives = directives..(speciesConfig.furColor[furColor+1])
-	directives = directives..(speciesConfig.pawsColor[pawsColor+1])
-	directives = directives..(speciesConfig.hairColor[hairColor+1])
 	directives = directives..(speciesConfig.eyeColor[eyeColor+1])
 
 	local personalityIdle, personalityArmIdle, personalityHeadOffset, personalityArmOffset = table.unpack(humanoidConfig.personalities[personality+1])
@@ -52,7 +48,7 @@ function create(name, species, genderIndex, furColor, hairColor, pawsColor, hair
 		color = {51, 117, 237, 255},
 	}
 	local parameters = {
-		choices = { genderIndex, furColor, hairColor, pawsColor, hairStyle, bellyColor, shirtColor, eyeColor, pantsColor, personality, ... },
+		choices = { genderIndex, furColor, hairColor, pawsColor, hairStyle, maneStyle, shirtColor, eyeColor, pantsColor, personality, ... },
 		--this you can do a lot with, see the humanoid build script
 	}
 	local armor = {
