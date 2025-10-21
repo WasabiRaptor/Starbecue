@@ -21,6 +21,14 @@ function uninit()
 
 end
 
+function addClient(clientId, isLocal)
+
+end
+function removeClient(clientId)
+
+end
+
+
 function sbqWorldRefreshOverrideSettings()
 	local worldOverrideSettings = world.getProperty("sbqOverrideSettings") or {}
 	local serverOverrideSettings = root.getConfigurationPath("sbq.overrideSettings") or {}

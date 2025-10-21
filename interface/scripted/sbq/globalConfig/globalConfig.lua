@@ -3,15 +3,6 @@ local globalOverrideSettings = root.getConfigurationPath("sbq.overrideSettings")
 
 local worldInvalidSettings = world.getProperty("sbqInvalidSettings") or {}
 local globalInvalidSettings = root.getConfigurationPath("sbq.invalidSettings") or {}
-if not root.getConfigurationPath("sbq") then
-	root.setConfigurationPath("sbq", {})
-end
-if not root.getConfigurationPath("sbq.overrideSettings") then
-	root.setConfigurationPath("sbq.overrideSettings", {})
-end
-if not root.getConfigurationPath("sbq.invalidSettings") then
-	root.setConfigurationPath("sbq.invalidSettings", {})
-end
 if not (player.isAdmin() or (player.id() == world.mainPlayer())) then
 	_ENV.mainTabField.tabs.worldOverrides:setVisible(false)
 end

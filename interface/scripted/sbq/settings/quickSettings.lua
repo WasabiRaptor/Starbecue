@@ -15,7 +15,7 @@ local _dismiss
 function init()
 	player.setProperty("sbqSettingsVersion", sbqVersion())
 
-	if not (player.isCodexKnown("sbqHelp") or player.hasItem("sbqHelp-codex")) then player.giveItem("sbqHelp-codex") end
+	if not (player.isCodexKnown("sbqHelp") or player.hasItem("sbqHelp-codex") or player.getProperty("sbqAgreedTerms")) then player.giveItem("sbqHelp-codex") end
 
 	_dismiss = pane.dismiss
 	pane.dismiss = function ()
