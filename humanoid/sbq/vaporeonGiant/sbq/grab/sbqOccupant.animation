@@ -40,8 +40,6 @@
 					"loungeOffset" : [0,0],
 					"interpolated" : true,
 					"transformationGroups" : ["occupant<slot>"],
-					// the below is so by default an occupant is scaled so small to be invisible
-					// as well as be layered behind the main sprite
 					"zLevel":-1,
 					// doesn't actually do anything in the animator, script reads these to set values
 					"hidden" : true,
@@ -73,6 +71,10 @@
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[2, -3.125]]],
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[1.3125, -2]]]
 								]
+							},
+							"properties" : {
+								"interpolated" : true,
+								"anchorPart" : "body"
 							}
 						},
 						"grabbed_laydown" : {
@@ -84,6 +86,10 @@
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[3.5, -1.75]]],
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",-90],	["translate",[3.8175, -3.5]]]
 								]
+							},
+							"properties" : {
+								"interpolated" : true,
+								"anchorPart" : "body"
 							}
 						}
 					}
