@@ -195,41 +195,41 @@
 			]
 		]},
 
-		//"dialogueTree" : "/npcs/tenants/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
+		//"dialogueTree" : "/npcs/sbq/sbqVoreVillager.npctype:scriptConfig.dialogueTree", // if one wants to just use the default random gen NPC dialogue tree, one can just delete the table and uncomment this
 		"dialogueTree" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogueTree",
 		// below is the dialogue triggered by vanilla scripts, it has a rather simple structure, all the dialogue is in the external file
 		"dialog": {
 			"tenant": {
 				"grumbles": {
-					"tagCriteria": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.tagCriteria",
-					"enclosedArea": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.enclosedArea",
-					"otherDeed": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.otherDeed",
-					"severe": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.severe",
-					"final": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.final"
+					"tagCriteria": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.tagCriteria",
+					"enclosedArea": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.enclosedArea",
+					"otherDeed": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.otherDeed",
+					"severe": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.severe",
+					"final": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.final"
 				},
 				"arrivedHome": {
-					"beacon": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.beacon",
-					"rent": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.rent"
+					"beacon": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.beacon",
+					"rent": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.rent"
 				}
 			},
 			"flee": {
-				"helpme": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.helpme",
-				"safe": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.safe"
+				"helpme": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.helpme",
+				"safe": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.safe"
 			},
-			"accuse": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.accuse",
-			"alert": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.alert",
-			"attack" : "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.attack",
-			"reattack" : "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.reattack",
-			"killedTarget" : "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.killedTarget",
-			"lostTarget" : "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.lostTarget",
-			"outOfSight" : "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.outOfSight",
-			"cheerOn" : "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.cheerOn",
-			"cantreach": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.cantReachEnemy",
+			"accuse": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.accuse",
+			"alert": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.alert",
+			"attack" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.attack",
+			"reattack" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.reattack",
+			"killedTarget" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.killedTarget",
+			"lostTarget" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.lostTarget",
+			"outOfSight" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.outOfSight",
+			"cheerOn" : "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.cheerOn",
+			"cantreach": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.cantReachEnemy",
 			"crewmember": {
-				"offer": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.offer",
-				"roleDescription": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.roleDescription",
-				"respawned": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.respawned",
-				"cantreach": "/npcs/tenants/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.crewcantreach"
+				"offer": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.offer",
+				"roleDescription": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.roleDescription",
+				"respawned": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.respawned",
+				"cantreach": "/npcs/sbq/SilentBuizel/Stardust/npc.dialogue:vanilla.crewcantreach"
 			}
 		},
 
