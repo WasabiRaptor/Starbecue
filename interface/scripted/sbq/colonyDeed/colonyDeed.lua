@@ -142,6 +142,7 @@ function sbq.insertTenant(item)
 		overrides = item.parameters.npcArgs.npcParam or {},
 		spawn = item.parameters.npcArgs.npcSpawn or "npc"
 	}
+	local npcConfig = root.npcConfig(tenant.type)
 	local deedConvertKey = (storage.evil and "sbqEvilDeedConvertType") or "sbqDeedConvertType"
 	if npcConfig.scriptConfig[deedConvertKey] then
 		tenant.type = npcConfig.scriptConfig[deedConvertKey]
