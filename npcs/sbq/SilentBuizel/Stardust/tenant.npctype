@@ -64,14 +64,29 @@
 			"priority" : 60,
 			"colonyTagCriteria" : {
 				// You should make the colony tags below reflect what your OC likes
-				"office" : 4
+				"space" : 4,
+				"astronaut" : 8
 			},
 			"tenant" : {
 				"spawn": "npc", "species": "sbq/SilentBuizel/Stardust", "type": "sbq/SilentBuizel/Stardust", "overrides": {},
 				"orderFurniture" : [
 					// you should populate this list with objects that have the requisite colonytags
-					{"name":"officedesk", "count":1},
-					{"name":"officelamp", "count":1}
+					{"name":"telescope", "count":1},
+					{"name":"spaceslideshow", "count":1},
+					{"name":"spaceshuttlebed", "count":1},
+					{"name":"satellite", "count":1},
+					{"name":"lunarlander", "count":1},
+					{"name":"solarpanel", "count":1},
+					{"name":"sunmodel", "count":1},
+					{"name":"mercurymodel", "count":1},
+					{"name":"venusmodel", "count":1},
+					{"name":"earthmodel", "count":1},
+					{"name":"marsmodel", "count":1},
+					{"name":"jupitermodel", "count":1},
+					{"name":"saturnmodel", "count":1},
+					{"name":"uranusmodel", "count":1},
+					{"name":"neptunemodel", "count":1},
+					{"name":"plutomodel", "count":1}
 				]
 			}
 		},
