@@ -296,8 +296,14 @@ function widgets.sbqSlider:init(base, param)
 	end
 
 	if not param.notches and min and max then
-		for i = min, max do
+		for i = math.ceil(min), math.floor(max) do
 			table.insert(self.notches, i)
+		end
+		if self.notches[1] ~= min then
+			table.insert(self.notches, 1, min)
+		end
+		if self.notches[#self.notches] ~= max then
+			table.insert(self.notches, max)
 		end
 	end
 	if #self.notches < 2 or self.notches[1] >= self.notches[#self.notches] then
