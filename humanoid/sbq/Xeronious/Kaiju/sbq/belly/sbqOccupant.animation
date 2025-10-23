@@ -36,16 +36,6 @@
 		"parts" : {
 			"occupant<slot>" : {
 				"properties": {
-					"centered": true,
-					"loungeOffset" : [0,0],
-					"interpolated" : true,
-					"transformationGroups" : ["occupant<slot>"],
-					"zLevel":-1,
-					// doesn't actually do anything in the animator, script reads these to set values
-					"hidden" : true,
-					"dance" : "sbqIdle",
-					"orientation" : "stand",
-					"emote" : "idle"
 				},
 				"partStates" : {
 					"occupant<slot>Location" : {

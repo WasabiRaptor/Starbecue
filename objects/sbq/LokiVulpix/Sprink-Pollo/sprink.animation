@@ -84,7 +84,7 @@
 					"centered":true,
 					"zLevel":0,
 					"loungeOffset" : [0,0],
-					"interpolated" : true,
+					"interpolated" : false,
 					"transformationGroups" : ["occupant1"],
 					"hidden":true,
 					"dance" : "sbqIdle",
@@ -103,12 +103,16 @@
 								[["reset"], ["scale",[1,1]],	["translate",[1.5,0] ]],
 								[["reset"], ["scale",[0.001,0.001]],	["translate",[0,-1.5]]]
 							]
+						}, "properties" : {
+							"interpolated" : true
 						}},
 						"cockVore" : {"frameProperties":{
 							"transforms":[
 								[["reset"], ["scale",[1,1]],	["translate",[0.5,-1]]],
 								[["reset"], ["scale",[0.001,0.001]],	["translate",[-0.5,-1.5]]]
 							]
+						}, "properties" : {
+							"interpolated" : true
 						}}
 					}
 				}
