@@ -283,7 +283,13 @@
 	"humanoidConfig" : "/humanoid/sbq/IcyVixen/Fray/fray.config",
 	"buildScripts" : ["/humanoid/opensb/build.lua"],
 	"createScripts" : ["/species/sbq/IcyVixen/Fray.lua"],
-
+	"humanoidOverrides" : {
+		"sbqConfig" : {
+			"transformResult": {
+				"species": "wr/vulpix"
+			}
+		}
+	},
 	"charGenTextLabels" : [
 		"Fur Color", // body color
 		"Eye Color", // hair type

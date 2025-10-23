@@ -36,6 +36,13 @@
 	"humanoidConfig" : "/humanoid/sbq/vaporeonGiant/vaporeonGiant.config",
 	"buildScripts" : ["/humanoid/opensb/build.lua"],
 	"createScripts" : ["/species/sbq/vaporeon.lua"],
+	"humanoidOverrides" : {
+		"sbqConfig" : {
+			"transformResult": {
+				"species": "wr/vaporeon"
+			}
+		}
+	},
 	"potionImagePath": "/humanoid/sbq/vaporeonGiant/potion/",
 	"potionRarity": "legendary",
 	"skull": "/humanoid/human/dead.png",

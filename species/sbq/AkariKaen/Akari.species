@@ -309,15 +309,19 @@
 		"/sfx/humanoid/humanhurt_male1.ogg"
 	],
 	"potionRarity": "essential",
+	"humanoidOverrides" : {
+		"sbqConfig" : {
+			"transformResult": {
+				"species": "sergal"
+			}
+		}
+	},
 	"sbqSettingsConfig":{
 		"includes" : [
 			"/npcs/sbq/AkariKaen/Akari/tenant.npctype:scriptConfig.sbqSettingsConfig"
 		],
 		"defaultSettings": {"any":{
 			"navelVisible": true
-		}},
-		"transformResult": {"any":{
-			"species": "sergal"
 		}}
 	},
 	"sbqPartImages": {
