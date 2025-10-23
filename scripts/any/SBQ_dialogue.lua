@@ -17,14 +17,14 @@ function dialogueProcessor.getDialogue(path, eid, dialogueTree, dialogueTreeTop)
 	dialogue.target = eid
 	if path ~= nil then
 		dialogue.path = path
-		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, sbq.settings, sbq.entityId(), dialogueTree or dialogue.prev or sbq.dialogueTree, dialogueTreeTop or dialogue.prevTop or sbq.dialogueTree)
+		_, dialogueTree, dialogueTreeTop = dialogueProcessor.getDialogueBranch(path, sbq.settings.read, sbq.entityId(), dialogueTree or dialogue.prev or sbq.dialogueTree, dialogueTreeTop or dialogue.prevTop or sbq.dialogueTree)
 		if not (dialogueTree or dialogueTreeTop) then dialogue.finished = true return false end
 		if not dialogue.result.useLastRandom then
 			dialogue.randomRolls = {}
 		end
-		dialogueProcessor.getDialogueBranch(".defaultResults", sbq.settings, sbq.entityId(), dialogueTree, dialogueTreeTop)
+		dialogueProcessor.getDialogueBranch(".defaultResults", sbq.settings.read, sbq.entityId(), dialogueTree, dialogueTreeTop)
 		local startIndex = 1
-		while dialogueProcessor.handleRandomDialogue(sbq.settings, sbq.entityId(), dialogueTree, dialogueTreeTop, startIndex) do
+		while dialogueProcessor.handleRandomDialogue(sbq.settings.read, sbq.entityId(), dialogueTree, dialogueTreeTop, startIndex) do
 			startIndex = #dialogue.randomRolls + 1
 		end
 	end
@@ -65,7 +65,7 @@ function dialogueProcessor.processDialogueResults(i)
 	for _, k in ipairs(dialogueProcessor.resultKeys) do
 		results[k] = dialogueProcessor.maxOfKey(dialogue.result, k, dialogue.position)
 	end
-	results.dialogue = dialogueProcessor.getRedirectedDialogue(results.dialogue, true, sbq.settings, dialogue.prev, dialogue.prevTop)
+	results.dialogue = dialogueProcessor.getRedirectedDialogue(results.dialogue, true, sbq.settings.read, dialogue.prev, dialogue.prevTop)
 
 	results.source = results.source or sbq.entityId()
 	if type(results.source) == "string" then
