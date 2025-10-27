@@ -2413,6 +2413,7 @@ function sbq._Occupant:debugLogError(json)
 end
 
 function sbq._Occupant:capture()
+	if self.flags.releasing or self.flags.digesting or self.flags.newOccupant then return false, "invalidState" end
 	sbq.addRPC(self:sendEntityMessage("sbqGetCard"), function(card)
 		if card then
 			local humanoidConfig = world.entity(self.entityId):humanoidConfig()
@@ -2559,52 +2560,57 @@ function _CapturedOccupant:release()
 					end
 				end
 			end, function()
-				local parent, recruitUUID, following = sbq.parentEntity()
-				local crewPred
-				if parent then
-					local eid = world.uniqueEntityId(parent)
-					if eid then
-						crewPred = following and (world.entityType(eid) == "player")
-					end
-				end
-				-- assume we're a client player and that we won't get the ID immediately, so supply all data needed in the initialization arguments
-				self.npcArgs.npcParam.statusControllerSettings = sb.jsonMerge(self.npcArgs.npcParam.statusControllerSettings or {}, {
-					statusProperties = {
-						sbqOccupantStorage = root.makeCurrentVersionedJson("sbqOccupantStorage",{
-							playerPred = entity.entityType() == "player",
-							predUUID = entity.uniqueId(),
-							crewPred = crewPred,
-							parentUUID = parent,
-
-							time = self.time,
-							struggleTime = self.struggleTime,
-							struggleCount = self.struggleCount,
-
-							locationName = self.locationName,
-							location = self.location,
-							subLocation = self.subLocation,
-
-							size = self.size,
-							sizeMultiplier = self.sizeMultiplier,
-
-							flags = self.flags,
-							locationStore = self.locationStore,
-							locationSettings = self.locationSettings,
-
-							wasCaptured = true,
-						})
-					}
-				})
-				world.spawnNpc(entity.position(), self.npcArgs.npcSpecies, self.npcArgs.npcType, self.npcArgs.npcLevel, self.npcArgs.npcSeed, self.npcArgs.npcParam)
+				self:respawn()
 				return self:remove("released")
 			end)
 		else
+			self:respawn()
 			return self:remove("released")
 		end
 		return true
 	else
 		return self:remove("released")
 	end
+end
+
+function _CapturedOccupant:respawn()
+	local parent, recruitUUID, following = sbq.parentEntity()
+	local crewPred
+	if parent then
+		local eid = world.uniqueEntityId(parent)
+		if eid then
+			crewPred = following and (world.entityType(eid) == "player")
+		end
+	end
+	-- assume we're a client player and that we won't get the ID immediately, so supply all data needed in the initialization arguments
+	self.npcArgs.npcParam.statusControllerSettings = sb.jsonMerge(self.npcArgs.npcParam.statusControllerSettings or {}, {
+		statusProperties = {
+			sbqOccupantStorage = root.makeCurrentVersionedJson("sbqOccupantStorage",{
+				playerPred = entity.entityType() == "player",
+				predUUID = entity.uniqueId(),
+				crewPred = crewPred,
+				parentUUID = parent,
+
+				time = self.time,
+				struggleTime = self.struggleTime,
+				struggleCount = self.struggleCount,
+
+				locationName = self.locationName,
+				location = self.location,
+				subLocation = self.subLocation,
+
+				size = self.size,
+				sizeMultiplier = self.sizeMultiplier,
+
+				flags = self.flags,
+				locationStore = self.locationStore,
+				locationSettings = self.locationSettings,
+
+				wasCaptured = true,
+			})
+		}
+	})
+	world.spawnNpc(entity.position(), self.npcArgs.npcSpecies, self.npcArgs.npcType, self.npcArgs.npcLevel, self.npcArgs.npcSeed, self.npcArgs.npcParam)
 end
 
 
