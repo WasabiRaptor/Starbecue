@@ -75,53 +75,33 @@
 	],
 	"genders": [
 		{
-			"name": "male",
-			"image": "/interface/title/male.png",
-			"characterImage": "/interface/title/male.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair": [
-				"0"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "mane",
-			"facialHair": [
-				"0",
-				"blank"
-			],
-			"facialMaskGroup": "ears",
-			"facialMask": [
-				"0"
-			]
+			"name": "female",
+			"image": "/interface/title/female.png",
+			"characterImage": "/interface/title/female.png"
 		},
 		{
 			"name": "female",
 			"image": "/interface/title/female.png",
 			"characterImage": "/interface/title/female.png",
-			// if you want your OC to have multiple hair types to choose from, you should probably add their names here!
-			"hair": [
-				"0"
-			],
-			"shirt": [
-				"sbq_nude_chest"
-			],
-			"pants": [
-				"sbq_nude_legs"
-			],
-			"facialHairGroup": "mane",
-			"facialHair": [
-				"0",
-				"blank"
-			],
-			"facialMaskGroup": "ears",
-			"facialMask": [
-				"0"
-			]
 		}
+	],
+	"hair": [
+		"0"
+	],
+	"shirt": [
+		"sbq_nude_chest"
+	],
+	"pants": [
+		"sbq_nude_legs"
+	],
+	"facialHairGroup": "mane",
+	"facialHair": [
+		"0",
+		""
+	],
+	"facialMaskGroup": "ears",
+	"facialMask": [
+		"0"
 	],
 	"hairColor": [
 		""
@@ -149,8 +129,9 @@
 						"properties" : {
 							"anchorPart" : "body",
 							"transformationGroups" : ["headOffset"],
-							"offset" : [1.5,1],
-							"zLevel" : 12.9
+							"offset" : [1.5,0],
+							"zLevel" : 12.9,
+							"processingDirectives" : "<facialHairDirectives>"
 						}
 					}
 				}
