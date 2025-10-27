@@ -52,10 +52,10 @@
 					"occupant<slot>State" : {
 						"oralVore" : {
 							"frameProperties" : {
-								"release" : [true],
-								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
-								"hidden" : [false, false, false, false, false, false, false, true, true],
-								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
+								"release" : [true, false, false, false, false, false, false, false],
+								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
+								"hidden" : [false, false, false, false, false, false, true, true],
+								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[5, 1]]],
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",15],	["translate",[4, 2]]],
@@ -75,7 +75,7 @@
 						},
 						"analVore": {
 							"frameProperties" : {
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, false, false, false, false, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],

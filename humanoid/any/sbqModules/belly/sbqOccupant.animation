@@ -37,7 +37,7 @@
 							// frame properties can be used for transformations with the modified
 							// engine's new animator features
 							"frameProperties" :{
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],			["rotateDegrees",0],	["translate",[1.5,0]]],
 									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1,0.25]]],
@@ -68,7 +68,7 @@
 						},
 						"analVore": {
 							"frameProperties": {
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms": [
 									[["reset"],	["scale",[1,1]],	["rotateDegrees",0],	["translate",[-1.5,0]]],
 									[["reset"],	["scale",[0.75,0.75]],	["rotateDegrees",-15],	["translate",[-1,-0.75]]],
@@ -97,8 +97,7 @@
 						},
 						"navelVore" : {
 							"frameProperties" : {
-								"interpolated" : true,
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
 									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.5]]],
@@ -121,13 +120,14 @@
 								]
 							},
 							"properties" : {
+								"interpolated" : true,
 								"anchorPart" : "belly",
 								"zLevel" : 10
 							}
 						},
 						"absorbVore" : {
 							"frameProperties" : {
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
 									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.5]]],

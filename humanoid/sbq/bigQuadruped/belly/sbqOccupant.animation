@@ -40,7 +40,7 @@
 							// frame properties can be used for transformations with the modified
 							// engine's new animator features
 							"frameProperties" :{
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.75,-1.25]]],
 									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1.25,-1]]],
@@ -71,7 +71,7 @@
 						},
 						"analVore": {
 							"frameProperties" : {
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"emote" : ["oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh", "oooh"],
 								"hidden" : [false, false, false, false, false, false, true, true],
 								"orientation" : ["stand", "stand", "stand", "stand", "stand", "stand", "stand", "stand"],
@@ -94,7 +94,7 @@
 						},
 						"navelVore" : {
 							"frameProperties" : {
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
 									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.5]]],
@@ -124,7 +124,7 @@
 						},
 						"absorbVore" : {
 							"frameProperties" : {
-								"release" : [true],
+								"release" : [true, false, false, false, false, false, false, false],
 								"transforms" : [
 									[["reset"],	["scale",[-1, 1]],	["rotateDegrees",0],	["translate",[1.5, 0]]],
 									[["reset"],	["scale",[-0.75, 0.75]],	["rotateDegrees",15],	["translate",[1, -0.5]]],
