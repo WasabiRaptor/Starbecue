@@ -278,7 +278,7 @@ function sbq.refreshPortrait(entityId)
 			local center = rect.center(bounds)
 			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 		else
-			canvas:drawDrawables(portrait, {30.5, 22.5})
+			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), { 0, 6 }))
 		end
 	end
 end
