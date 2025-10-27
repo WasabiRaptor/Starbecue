@@ -54,7 +54,7 @@ function findNextRealCharacter()
 	local space = string.find(text, " ", pos2+1, true)
 
 	if char == "^" and semicolon and ((not space) or (space > semicolon)) then
-		textPosition = utf8.len(text, 1, semicolon + 1) or utf8.len(text) or math.huge
+		textPosition = utf8.len(text, 1, math.min(semicolon + 1, string.len(text))) or utf8.len(text) or #text
 	else
 		return true
 	end
