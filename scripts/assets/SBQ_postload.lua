@@ -228,7 +228,6 @@ local function setupSpecies(path)
 		table.insert(speciesTFAny, speciesConfig.kind)
 	end
 end
-assets.add("/sbqTFAny.config", sb.printJson(speciesTFAny))
 
 for _, path in ipairs(speciesFiles) do
 	local success, error = pcall(setupSpecies, path)
@@ -242,15 +241,16 @@ for i = 1, seperators do
 	table.insert(tenantCatalogue, "-")
 end
 
-assets.add("/tenants/sbqTenant_random.tenant", sb.printJson(randomTenant))
 for i, v in ipairs(randomGuardTenant) do
 	table.insert(guardTiers, v.name)
 	assets.add("/tenants/"..v.name..".tenant", sb.printJson(v))
 end
-assets.add("/interface/scripted/sbq/colonyDeed/catalogue.config", sb.printJson(tenantCatalogue))
 
+assets.add("/tenants/sbqTenant_random.tenant", sb.printJson(randomTenant))
+assets.add("/interface/scripted/sbq/colonyDeed/catalogue.config", sb.printJson(tenantCatalogue))
 assets.add("/npcs/sbqHub/sbqHubRandomNpcList.config", sb.printJson(hubNPCList))
 assets.add("/npcs/sbqHub/sbqHubMicroNpcList.config", sb.printJson(hubMicroNPCList))
+assets.add("/sbqTFAny.config", sb.printJson(speciesTFAny))
 
 local occupantSlotCap = assets.json("/sbq.config:occupantSlotCap")
 for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do
