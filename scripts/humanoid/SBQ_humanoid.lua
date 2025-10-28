@@ -214,7 +214,6 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		end
 		return false
 	end
-
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
 	currentIdentity.parameters = sbq.humanoid.getHumanoidParameters()
 	local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities")
@@ -251,15 +250,18 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	else
 		newIdentity.gender = currentIdentity.gender
 	end
-
-	if sbq.settings:get("speciesTF") then
-		if newIdentity.species == "any" then
-			local speciesList = root.assetJson("/sbqTFAny.config")
-			newIdentity.species = speciesList[math.random(#speciesList)]
-		elseif newIdentity.species == "originalSpecies" then
-			newIdentity.species = originalSpecies
-		elseif not newIdentity.species then
-			newIdentity.species = currentIdentity.species
+	if newIdentity.species and (newIdentity.species ~= currentIdentity.species) then
+		if sbq.settings:get("speciesTF") then
+			if newIdentity.species == "any" then
+				local speciesList = root.assetJson("/sbqTFAny.config")
+				newIdentity.species = speciesList[math.random(#speciesList)]
+			elseif newIdentity.species == "originalSpecies" then
+				newIdentity.species = originalSpecies
+			elseif not newIdentity.species then
+				newIdentity.species = currentIdentity.species
+			end
+		else
+			return false
 		end
 	else
 		newIdentity.species = currentIdentity.species
@@ -391,8 +393,12 @@ function sbq.revertTF()
 
 	local originalSpecies = storage.sbqOriginalSpecies or status.statusProperty("sbqOriginalSpecies") or sbq.species()
 	local originalGender = storage.sbqOriginalGender or status.statusProperty("sbqOriginalGender") or sbq.gender()
-	local speciesIdentities = status.statusProperty("sbqSpeciesIdentities") or {}
+	local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities") or {}
 	local newIdentity = speciesIdentities[originalSpecies]
+	if (originalSpecies == sbq.species()) and (originalGender == sbq.gender()) then
+		return false
+	end
+
 	if not newIdentity then
 		local randomSource = sb.makeRandomSource()
 		local choices = sb.jsonMerge({}, currentParameters.choices or {
@@ -424,6 +430,7 @@ function sbq.revertTF()
 				speciesCount = speciesCount + 1
 			end
 
+			storage.sbqSpeciesIdentities = speciesIdentities
 			status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
 			if player then
 				if (speciesCount >= sbq.config.transformMenuUnlock) then
