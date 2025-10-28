@@ -214,11 +214,11 @@ function sbq.tenant_setNpcType(npcType)
 
 	local uuid = config.getParameter("sbqOverrideUniqueId") or config.getParameter("uniqueId") or entity.uniqueId()
 	local parameters = {
-		npc = npc.species(),
-		npcTypeName = npcType,
-		npcLevel = npc.level(),
-		npcSeed = npc.seed(),
-		npcParameters = {
+		species = npc.species(),
+		type = npcType,
+		level = npc.level(),
+		seed = npc.seed(),
+		overrides = {
 			identity = npc.humanoidIdentity(),
 			scriptConfig = {
 				crew = config.getParameter("crew"),

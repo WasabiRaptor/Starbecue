@@ -19,37 +19,45 @@ function update()
 		end
 		local didBias = false
 		while not gotData do
+			if not data[1] then
+				didBias = true
+				data = config.getParameter("randomSelection") or {}
+				if type(data) == "string" then
+					data = root.assetJson(data)
+				end
+			end
 			local i = math.random(#data)
-			local speciesConfig = root.speciesConfig(data[i].npc)
-			local npcConfig = root.npcConfig(data[i].npcTypeName)
+			local speciesConfig = root.speciesConfig(data[i].species)
+			local npcConfig = root.npcConfig(data[i].type)
 			local uuid = sbq.query(npcConfig, { "scriptConfig", "uniqueId" })
 			if (not speciesConfig)
 				or (not npcConfig)
-				or (data[i].spawnOnce and world.getProperty(data[i].npc .. data[i].npcTypeName .. "Spawned"))
-				or (uuid and world.loadUniqueEntity(uuid))
+				or (data[i].spawnOnce and world.getProperty(data[i].species .. data[i].type .. "Spawned"))
+				or (uuid and world.findUniqueEntity(uuid):result())
 				or (not checkRequirements(data[i].checkRequirements or {}))
 			then
+				if data[i].bias then
+					didBias = true
+				end
 				table.remove(data, i)
 			else
 				if data[i].bias or didBias then
 					data = data[i]
 					gotData = true
-				else
-					didBias = true
 				end
 			end
 		end
 
 		if not checkRequirements(config.getParameter("checkRequirements") or {}) then return stagehand.die() end
 
-		local npc = data.npc or config.getParameter("npc")
-		if type(npc) == "string" then
-			if root.speciesConfig(npc) then
-				world.spawnNpc(position, npc, data.npcTypeName or config.getParameter("npcTypeName"),
-					data.npcLevel or config.getParameter("npcLevel") or world.threatLevel(),
-					data.npcSeed or config.getParameter("npcSeed"),
-					sb.jsonMerge(config.getParameter("npcParameters") or {}, data.npcParameters or {}))
-				world.setProperty(npc .. (data.npcTypeName or config.getParameter("npcTypeName")) .. "Spawned", true)
+		local species = data.species or config.getParameter("species")
+		if type(species) == "string" then
+			if root.speciesConfig(species) then
+				world.spawnNpc(position, species, data.type or config.getParameter("type"),
+					data.level or config.getParameter("level") or world.threatLevel(),
+					data.seed or config.getParameter("seed"),
+					sb.jsonMerge(config.getParameter("overrides") or {}, data.overrides or {}))
+				world.setProperty(species .. (data.type or config.getParameter("type")) .. "Spawned", true)
 			end
 		end
 		stagehand.die()

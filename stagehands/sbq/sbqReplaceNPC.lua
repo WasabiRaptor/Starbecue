@@ -1,11 +1,11 @@
 ---@diagnostic disable: undefined-field
 
 local doSpawn = false
-local npcParameters
+local overrides
 local npc
-local npcTypeName
-local npcLevel
-local npcSeed
+local type
+local level
+local seed
 local scriptConfig
 local ownerUuid
 local recruitUuid
@@ -13,12 +13,12 @@ local uuid
 local storage
 
 function init()
-	npcParameters = config.getParameter("npcParameters")
+	overrides = config.getParameter("overrides")
 	npc = config.getParameter("npc")
-	npcTypeName = config.getParameter("npcTypeName")
-	npcLevel = config.getParameter("npcLevel") or world.threatLevel()
-	npcSeed = config.getParameter("npcSeed")
-	scriptConfig = npcParameters.scriptConfig or {}
+	type = config.getParameter("type")
+	level = config.getParameter("level") or world.threatLevel()
+	seed = config.getParameter("seed")
+	scriptConfig = overrides.scriptConfig or {}
 	ownerUuid = scriptConfig.ownerUuid
 	recruitUuid = scriptConfig.podUuid
 	uuid = scriptConfig.uniqueId
@@ -41,7 +41,7 @@ function update()
 			doSpawn = true
 		end
 		if doSpawn then
-			local newEntityId = world.spawnNpc(position, npc, npcTypeName, npcLevel, npcSeed, npcParameters)
+			local newEntityId = world.spawnNpc(position, npc, type, level, seed, overrides)
 			if storage.respawner then
 				assert(uuid and newEntityId)
 				world.callScriptedEntity(newEntityId, "tenant.setHome", storage.homePosition, storage.homeBoundary, storage.respawner, true)
@@ -50,12 +50,12 @@ function update()
 				world.callScriptedEntity(spawnerId, "replaceTenant", uuid, {
 					replacing = false,
 					uniqueId = uuid,
-					type = npcTypeName,
+					type = type,
 					species = npc,
 				})
 			elseif ownerUuid and recruitUuid then
 					world.sendEntityMessage(ownerUuid, "sbqParentUpdateType", recruitUuid, uuid, {
-					type = npcTypeName,
+					type = type,
 					species = npc,
 					uniqueId = uuid
 				})

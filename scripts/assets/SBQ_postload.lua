@@ -62,13 +62,14 @@ end
 for _, path in ipairs(assets.byExtension("npctype")) do
 	assets.patch(path, "/scripts/npc/SBQ_npc_patch.lua")
 	local npcConfig = assets.json(path)
-	if (npcConfig.scriptConfig or {}).sbqTenantData then
-		setupTenantCatalogue(npcConfig.scriptConfig.sbqTenantData, npcConfig.type, npcConfig.npcname)
+	local scriptConfig = (npcConfig.scriptConfig or {})
+	if scriptConfig.sbqTenantData then
+		setupTenantCatalogue(scriptConfig.sbqTenantData, npcConfig.type, npcConfig.npcname)
 	end
-	for _, v in ipairs( npcConfig.sbqHubNPCs or {}) do
+	for _, v in ipairs( scriptConfig.sbqHubNPCs or {}) do
 		table.insert(hubNPCList, v)
 	end
-	for _, v in ipairs( npcConfig.sbqHubMicroNPCs or {}) do
+	for _, v in ipairs( scriptConfig.sbqHubMicroNPCs or {}) do
 		table.insert(hubMicroNPCList, v)
 	end
 end
