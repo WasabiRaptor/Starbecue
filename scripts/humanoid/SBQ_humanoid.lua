@@ -217,8 +217,8 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
 	currentIdentity.parameters = sbq.humanoid.getHumanoidParameters()
 	local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities")
-	local originalSpecies = storage.sbqOriginalSpecies
-	local originalGender = storage.sbqOriginalGender
+	local originalSpecies = storage.sbqOriginalSpecies or status.statusProperty("sbqOriginalSpecies")
+	local originalGender = storage.sbqOriginalGender or status.statusProperty("sbqOriginalGender")
 
 	if not originalSpecies then
 		originalSpecies = sbq.species()
