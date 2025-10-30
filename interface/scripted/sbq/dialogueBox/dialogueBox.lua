@@ -250,7 +250,7 @@ end
 
 function dialogueBox.scrollText()
 	if dialogueBox.textPosition > utf8.len(dialogueBox.text) then
-		return
+		return dialogueBox.dismissAfterTimer(dismissTime)
 	end
 	while not dialogueBox.findNextRealCharacter() do
 	end
