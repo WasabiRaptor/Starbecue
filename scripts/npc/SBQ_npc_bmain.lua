@@ -35,6 +35,8 @@ function init()
 	sbq.getItemSlot = npc.getItemSlot
 	sbq.setItemSlot = npc.setItemSlot
 
+	sbq.say = npc.say
+	sbq.sayPortrait = npc.sayPortrait
 	sbq.setLoungeControlHeld = npc.setLoungeControlHeld
 	sbq.isLoungeControlHeld = npc.isLoungeControlHeld
 
