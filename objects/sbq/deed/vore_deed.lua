@@ -216,15 +216,25 @@ function chooseTenants(seed, tags)
 end
 
 function checkExistingUniqueIds(newOccupier)
-	for _, tenantConfig in ipairs(newOccupier.tenants) do
-		for _, tenant in ipairs(tenantConfig.sbqRandomTenant or {tenantConfig}) do
-			local npcConfig = root.npcConfig(tenant.type)
-			local uuid = sbq.query(npcConfig, {"scriptConfig", "uniqueId"})
-			if uuid then
-				local id = world.loadUniqueEntity(uuid)
-				if id and world.entityExists(id) then return true end
+	for _, tenant in ipairs(newOccupier.tenants) do
+		if tenant.sbqRandomTenant then
+			for _, tenant in ipairs(tenant.sbqRandomTenant) do
+				if not checkExistingUnqueId(tenant) then
+					return false
+				end
 			end
+			return true
+		else
+			return checkExistingUnqueId(tenant)
 		end
+	end
+end
+function checkExistingUnqueId(tenant)
+	local npcConfig = root.npcConfig(tenant.type)
+	local uuid = sbq.query(npcConfig, {"scriptConfig", "uniqueId"})
+	if uuid then
+		local id = world.loadUniqueEntity(uuid)
+		if id and world.entityExists(id) then return true end
 	end
 end
 
@@ -244,7 +254,7 @@ function backupTenantStorage(uniqueId, preservedStorage)
 	withTenant(uniqueId, function (tenant)
 		tenant.overrides.scriptConfig = tenant.overrides.scriptConfig or {}
 		tenant.overrides.scriptConfig.initialStorage = preservedStorage or {}
-        tenant.species = tenant.overrides.scriptConfig.initialStorage.sbqOriginalSpecies or tenant.species
+		tenant.species = tenant.overrides.scriptConfig.initialStorage.sbqOriginalSpecies or tenant.species
 		tenant.overrides.identity = tenant.overrides.identity or {}
 		tenant.overrides.identity.gender = tenant.overrides.identity.gender or tenant.sbqOriginalGender
 	end)
@@ -263,7 +273,16 @@ function setTenantsData(occupier)
 	local occupier = occupier
 	for i, tenant in ipairs(occupier.tenants) do
 		if tenant.sbqRandomTenant then
-			tenant = tenant.sbqRandomTenant[math.random(#tenant.sbqRandomTenant)]
+			local j = math.random(#tenant.sbqRandomTenant)
+			while tenant.sbqRandomTenant[1] ~= nil do
+				local maybeTenant = table.remove(tenant.sbqRandomTenant, j)
+				if checkExistingUnqueId(maybeTenant) then
+					j = math.random(#tenant.sbqRandomTenant)
+				else
+					tenant = maybeTenant
+					break
+				end
+			end
 			occupier.tenants[i] = tenant
 		end
 		if type(tenant.species) == "table" then
