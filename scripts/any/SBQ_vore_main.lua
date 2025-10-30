@@ -930,6 +930,8 @@ function sbq._SpeciesScript:addLocation(name, config)
 		captured = nil,
 		size = 0,
 		count = 0,
+		digestedCount = 0,
+		infusedCount = 0,
 		addedSize = 0,
 		addedCount = 0,
 		visualSize = (location.struggleSizes or {})[1] or 0,
@@ -988,6 +990,8 @@ function sbq._SpeciesScript:addLocation(name, config)
 			count = 0,
 			addedSize = 0,
 			addedCount = 0,
+			digestedCount = 0,
+			infusedCount = 0,
 			visualSize = (location.struggleSizes or {})[1] or 0,
 			visualCount = (location.struggleSizes or {})[1] or 0,
 			interpolating = false,
@@ -1144,6 +1148,7 @@ function sbq._Location:updateOccupancy(dt)
 		self.occupancy.count = 0
 
 		self.occupancy.digestedCount = 0
+		self.occupancy.infusedCount = 0
 
 		self.occupancy.addedSize = 0
 		self.occupancy.addedCount = 0
@@ -1185,6 +1190,8 @@ function sbq._Location:updateOccupancy(dt)
 					self.occupancy.count = self.occupancy.count + 1
 				elseif occupant.flags.digested then
 					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
+				elseif occupant.flags.infused then
+					self.occupancy.infusedCount = self.occupancy.infusedCount + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
 					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
@@ -1195,6 +1202,8 @@ function sbq._Location:updateOccupancy(dt)
 					self.occupancy.count = self.occupancy.count + 1
 				elseif occupant.flags.digested then
 					self.occupancy.digestedCount = self.occupancy.digestedCount + 1
+				elseif occupant.flags.infused then
+					self.occupancy.infusedCount = self.occupancy.infusedCount + 1
 				end
 				if not (occupant.flags.infused or occupant.flags.infusing or occupant.flags.releasing) then
 					self.occupancy.size = self.occupancy.size + math.max((self.digestedSize or 0), (occupant.size * occupant.sizeMultiplier * self.settings.multiplyFill / sbq.scale()))
@@ -1330,11 +1339,11 @@ function sbq._Location:update(dt)
 		end
 		animator.setParticleEmitterActive(emitter, enable)
 		if enable then
-			local count = self.occupancy.count
+			local count = self.occupancy.count + self.occupancy.digestedCount + self.occupancy.infusedCount
 			for _, v in ipairs(data.addCount or {}) do
 				local location = sbq.SpeciesScript:getLocation(v)
 				if location then
-					count = count + location.occupancy.count
+					count = count + location.occupancy.count + location.occupancy.digestedCount + location.occupancy.infusedCount
 				end
 			end
 			animator.setParticleEmitterEmissionRate(emitter, ((leakiness ^ 2 * (1-percentage)) ^ 2) * 10 * math.max(0.25, count))
@@ -1359,14 +1368,14 @@ function sbq._Location:climax(entityId)
 			end
 		end
 		if enable then
-			local count = self.occupancy.count
+			local count = self.occupancy.count + self.occupancy.digestedCount + self.occupancy.infusedCount
 			for _, v in ipairs(data.addCount or {}) do
 				local location = sbq.SpeciesScript:getLocation(v)
 				if location then
-					count = count + location.occupancy.count
+					count = count + location.occupancy.count + location.occupancy.digestedCount + location.occupancy.infusedCount
 				end
 			end
-			climaxBurst(emitter, leakiness * count)
+			climaxBurst(emitter, leakiness * (count + 1)) -- +1 so it won't ever emit 0 particles
 		end
 	end
 end
