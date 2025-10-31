@@ -95,28 +95,15 @@
 	"oralVoreNeedsInfusion": [
 		"My gut ain't what it used to be. It needs a volunteer to help it out, willin' or not."
 	],
-	"needsInfusion": [
-		"That part of my body ain't what it used to be. It needs a volunteer to help it out, willin' or not."
-	],
 	"oralVoreAlreadyInfused": [
 		"Too slow. Someone's already enjoyin' their time as my gut.",
 		"No. I'm content with my current belly.",
 		"I don't like mixing people up, so no."
 	],
-	"alreadyInfused": [
-		"Too slow. Someone's already taken that job.",
-		"No way. I'm content with who I have in there.",
-		"I'm keepin' this one right where I want them. Better luck next time."
-	],
 	"oralVoreTargetPreySettingsMismatch": [
 		"You might want it, but someone you're with doesn't seem keen on the idea of being in my gut through that route.",
 		"Nope. I may not respect intergalactic law, but I respect other people's wishes. Someone you got don't want to be eaten that way.",
 		"I only eat that way with those who are somewhat willin'. You're carryin' someone who ain't. Fix that."
-	],
-	"targetPreySettingsMismatch": [
-		"No. Someone you're with doesn't like that idea.",
-		"Sure, but only once you dump whoever ain't keen on what you want.",
-		"Not doin' that. I can sense that someone you got ain't into it."
 	],
 	"tailVoreRequested": {
 		"percentage": "food",
@@ -161,8 +148,13 @@
 		"That's a real 'funny' joke. I don't have room.",
 		"I may be greedy, but I ain't riskin' it. No space."
 	],
-	"full": ":tailVoreFull",
 	"tailVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"alreadyInfused": [
+		"Too slow. Someone's already taken that job.",
+		"No way. I'm content with who I have in there.",
+		"I'm keepin' this one right where I want them. Better luck next time."
+	],
+	"tailVoreAlreadyInfused": ":alreadyInfused",
 	"tailVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"absorbVoreRequested": [
 		"Don't even want to bother with my mouth or anythin' else, huh? Fine by me.",
@@ -179,6 +171,7 @@
 	"absorbVoreNoSlots": ":noSlots",
 	"absorbVoreFull": ":tailVoreFull",
 	"absorbVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"absorbVoreAlreadyInfused": ":oralVoreAlreadyInfused",
 	"absorbVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"navelVoreRequested": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"If that's what floats your boat, I'm game.",
@@ -199,6 +192,7 @@
 	"navelVoreNoSlots": ":noSlots",
 	"navelVoreFull": ":tailVoreFull",
 	"navelVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"navelVoreAlreadyInfused": ":oralVoreAlreadyInfused",
 	"navelVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"analVoreRequested": [
 		"Need a place to hide, do you? I know just the place.",
@@ -219,6 +213,7 @@
 	"analVoreNoSlots": ":noSlots",
 	"analVoreFull": ":tailVoreFull",
 	"analVoreNeedsInfusion": ":oralVoreNeedsInfusion",
+	"analVoreAlreadyInfused": ":oralVoreAlreadyInfused",
 	"analVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"unbirthVoreRequested": {
 		"percentage": "sbqLust",
@@ -272,6 +267,12 @@
 		"I'm lackin' down there. You want some fun, you gotta work for it.",
 		"Help me turn someone into my pussy, then we can talk."
 	],
+	"unbirthVoreAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:oralVoreAlreadyInfused",
+	"targetPreySettingsMismatch": [
+		"No. Someone you're with doesn't like that idea.",
+		"Sure, but only once you dump whoever ain't keen on what you want.",
+		"Not doin' that. I can sense that someone you got ain't into it."
+	],
 	"unbirthVoreTargetPreySettingsMismatch": ":targetPreySettingsMismatch",
 	"breastVoreRequested": {
 		"percentage": "sbqLust",
@@ -322,6 +323,7 @@
 	"breastVoreNeedsInfusion": [
 		"In case you haven't noticed, I'm a little lackin' there. Find me a nice pair of boobs and they're all yours."
 	],
+	"breastVoreAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:oralVoreAlreadyInfused",
 	"breastVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"cockVoreRequested": {
 		"percentage": "sbqLust",
@@ -390,6 +392,7 @@
 		"I'll cut you a deal: You get someone to be my cock, you get to go inside it.",
 		"I can't do that. Go find a dick to be *my* dick, then we'll talk."
 	],
+	"cockVoreAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:oralVoreAlreadyInfused",
 	"cockVoreTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"bellyInfuseRequested": [
 		"Let me get this straight. You want to be my belly? Alright, then.",
@@ -414,6 +417,7 @@
 	"bellyInfuseNoSlots": ":noSlots",
 	"bellyInfuseFull": ":tailVoreFull",
 	"bellyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"bellyInfuseAlreadyInfused": "/npcs/sbq/dialogue/default.dialogue:oralVoreAlreadyInfused",
 	"bellyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"breastInfuseRequested": [
 		"You want to pad my boobs out, eh? Come here, then.",
@@ -438,6 +442,7 @@
 	"breastInfuseNoSlots": ":noSlots",
 	"breastInfuseFull": ":tailVoreFull",
 	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"breastInfuseAlreadyInfused": ":alreadyInfused",
 	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"pussyInfuseRequested": [
 		"My pussy, huh? Yeah, I can do that.",
@@ -461,7 +466,11 @@
 	"pussyInfuseTooSmall": ":tooSmall",
 	"pussyInfuseNoSlots": ":noSlots",
 	"pussyInfuseFull": ":tailVoreFull",
-	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"needsInfusion": [
+		"That part of my body ain't what it used to be. It needs a volunteer to help it out, willin' or not."
+	],
+	"pussyInfuseNeedsInfusion": ":needsInfusion",
+	"pussyInfuseAlreadyInfused": ":alreadyInfused",
 	"pussyInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"cockInfuseRequested": [
 		"Tired of explorin' space? Let's find you a *firm* settlement, then~",
@@ -485,7 +494,8 @@
 	"cockInfuseTooSmall": ":tooSmall",
 	"cockInfuseNoSlots": ":noSlots",
 	"cockInfuseFull": ":tailVoreFull",
-	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
+	"cockInfuseNeedsInfusion": ":needsInfusion",
+	"cockInfuseAlreadyInfused": ":alreadyInfused",
 	"cockInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"oralVoreLetoutRequested": [
 		"Alright, I'm gettin' tired of luggin' ya around.",
@@ -1348,97 +1358,6 @@
 			]
 		]
 	},
-	"bellyInfusePrompt": [
-		"Hey. Wanna see what it's like as a bandit's belly?",
-		"Hey, <entityName>. Wanna see what it's like as a bandit's belly?"
-	],
-	"bellyInfusePromptYes": [
-		"Wasn't expectin' you to actually say yes, but I ain't complainin'."
-	],
-	"bellyInfusePromptYesAfter": [
-		"Heh, now to find some nerds to let you melt down~"
-	],
-	"bellyInfusePromptNo": [
-		"No? Even if I'd feed you more than three wigglin' meals a day? Whatever."
-	],
-	"bellyInfusePromptNoYes": [
-		"Not interested? Too bad, an outlaw always trusts their gut instinct."
-	],
-	"bellyInfusePromptNoYesAfter": [
-		"Trust me, you'll like bein' stuffed to the brim once I find a suitable snack."
-	],
-	"breastInfusePrompt": [
-		"Want to steal everyone's attention in one easy go?"
-	],
-	"breastInfusePromptYes": [
-		"I was hopin' you'd say yes. Come give me a hug, then."
-	],
-	"breastInfusePromptYesAfter": [
-		"You look good paddin' out my gals. Try not to blush from all the starin'~"
-	],
-	"breastInfusePromptNo": [
-		"Too good for that, are you? I figured."
-	],
-	"breastInfusePromptNoYes": [
-		"If you aren't interested in stealin', then I'm gonna steal your good looks for myself."
-	],
-	"breastInfusePromptNoYesAfter": [
-		"Heheh, you look great on me. Folks'll be too busy with you to realize I'm pickin' their pockets~"
-	],
-	"pussyInfusePrompt": [
-		"Those are a great pair of lips you've got. Let me put them to better use, hm?"
-	],
-	"pussyInfusePromptYes": [
-		"Lean forward, then. This'll be quick."
-	],
-	"pussyInfusePromptYesAfter": [
-		"Mm, wet already? I've barely even started~"
-	],
-	"pussyInfusePromptNo": [
-		"That's a shame. I had so many toys for us to play with~"
-	],
-	"pussyInfusePromptNoYes": [
-		"Too embarrassed to agree, are ya? This only takes a moment."
-	],
-	"pussyInfusePromptNoYesAfter": [
-		"See? No one is the wiser. You can dribble and drool as much as you like~"
-	],
-	"cockInfusePrompt": [
-		"You look like you're pretty cocky. Want to put that to the test?"
-	],
-	"cockInfusePromptYes": [
-		"Good, I like your type. You always make for the perfect shape~"
-	],
-	"cockInfusePromptYesAfter": [
-		"Heh, now a proper dick is stuck danglin' between my thighs~"
-	],
-	"cockInfusePromptNo": [
-		"Huh, guess I was wrong."
-	],
-	"cockInfusePromptNoYes": [
-		"Nah, I think I'm going to test you out anyway."
-	],
-	"cockInfusePromptNoYesAfter": [
-		"Fff, I'd say you passed with flying ^#F30F0F;c^reset;^#D16D18;o^reset;^#FFF300;l^reset;^#00F902;o^reset;^#0006F9;r^reset;^#AA00F9;s^reset;!"
-	],
-	"tailInfusePrompt": [
-		"I feel like someone's chasin' after me. Can ya watch my back?"
-	],
-	"tailInfusePromptYes": [
-		"I appreciate that. Just relax."
-	],
-	"tailInfusePromptYesAfter": [
-		"Perfect. I needed a good tail to wag around~"
-	],
-	"tailInfusePromptNo": [
-		"Come on, I wouldn't be breaking *too* many laws."
-	],
-	"tailInfusePromptNoYes": [
-		"If you ain't gonna tail me willingly, I'll recruit you in my own way."
-	],
-	"tailInfusePromptNoYesAfter": [
-		"There you go. Nice to see you're finally followin' along~"
-	],
 	"oralVoreRequesting": [
 		"Hey, I need a solid belly to hide in. Mind if I use yours?"
 	],
@@ -1767,41 +1686,56 @@
 		"You sure you want to eat me? Do you even know where I've been--okay guess not--!",
 		"Honestly, fair. I was *just* about to eat you, but I was too--!"
 	],
+	"oralVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreUnpromptedAfter",
 	"tailVoreUnprompted": [
 		"Nice tail, but I ain't afraid--nevermind, I've made a terrible--!",
 		"Your tail's, uh, lookin' at me funny. Did it just--hey, stop--!",
 		"Cute, your tail can open up. What's not cute is that it's just about to--!"
 	],
+	"tailVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreUnpromptedAfter",
 	"absorbVoreUnprompted": [
 		"This hug is decent, but you left your pixels wide-open--hey, wait--hlp!",
 		"I, uh, tolerate you too, but I ain't much for hugs--and this is why--mmph!",
 		"Alright, you've had your little hug. Now let go before others start--what the--ahh!"
 	],
+	"absorbVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreUnpromptedAfter",
 	"navelVoreUnprompted": [ // navel vore, one I don't really get, but its here for those who do, sadly I'm only skimming the proofreading on this kink, someone who's explicitly into it should write the lines for it
 		"You've got a nice navel, sure, but I don't see why you needed me to appraise--!",
 		"The deed to your ship is in there? Let me just make sure it's safe and--!",
 		"You expect me to believe that a full set of T10 gear is inside there? Because I do and--!"
 	],
+	"navelVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:navelVoreUnpromptedAfter",
 	"analVoreUnprompted": [
 		"Pretty nice piece of ass, but I'm more of a--hey, don't--!",
 		"I'm not the butt of a bad joke, am I? Shit, I am--!",
 		"Not a bad show, but I can't help but feel like I've seen this--!"
 	],
+	"analVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreUnpromptedAfter",
 	"unbirthVoreUnprompted": [
 		"Is that an invitation? Sure, let me just take off my gear and--!",
 		"Yes, I can see you're wet, but I don't know what that has to do with--!",
 		"That's, uh, very flattering, but mind covering--not again--!"
 	],
+	"unbirthVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreUnpromptedAfter",
 	"breastVoreUnprompted": [
 		"If this is a booby trap, I'm not going to lie: I'm impressed. Wait, it is--!",
 		"Nice tits. You just showin' them off, or did ya want me to--h-hey--!",
 		"Pretty good lookin' pair of breasts, if I do say so myself. Mind if I feel--w-wait--!"
 	],
+	"breastVoreUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreUnpromptedAfter",
 	"cockVoreUnprompted": [
 		"What would I say before I became a bandit? Ah, that's right. UwU",
 		"I definitely noticed your bulge, but this wasn't what I was expectin'--!",
 		"Do you always walk around flauntin' your package like that? Wait, I was just teasin'--!"
 	],
+	"bellyInfuseUnprompted": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseUnprompted",
+	"bellyInfuseUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseUnpromptedAfter",
+	"breastInfuseUnprompted": "/npcs/sbq/dialogue/default.dialogue:breastInfuseUnprompted",
+	"breastInfuseUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:breastInfuseUnpromptedAfter",
+	"pussyInfuseUnprompted": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseUnprompted",
+	"pussyInfuseUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseUnpromptedAfter",
+	"cockInfuseUnprompted": "/npcs/sbq/dialogue/default.dialogue:cockInfuseUnprompted",
+	"cockInfuseUnpromptedAfter": "/npcs/sbq/dialogue/default.dialogue:cockInfuseUnpromptedAfter",
 	"oralVoreLetoutUnpromptedAfter": [
 		"You let me out, huh? Thanks. I might remember that later."
 	],
@@ -1843,6 +1777,7 @@
 			]
 		]
 	},
+	"oralVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreForcingAfter",
 	"tailVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1860,6 +1795,7 @@
 			]
 		]
 	},
+	"tailVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreForcingAfter",
 	"absorbVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1877,6 +1813,7 @@
 			]
 		]
 	},
+	"absorbVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:absorbVoreForcingAfter",
 	"navelVoreForcing": {
 		"percentage": "sbqRest",
 		"pools": [
@@ -1894,6 +1831,7 @@
 			]
 		]
 	},
+	"navelVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:navelVoreForcingAfter",
 	"analVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1911,6 +1849,7 @@
 			]
 		]
 	},
+	"analVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:analVoreForcingAfter",
 	"unbirthVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1928,6 +1867,7 @@
 			]
 		]
 	},
+	"unbirthVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:unbirthVoreForcingAfter",
 	"breastVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1945,6 +1885,7 @@
 			]
 		]
 	},
+	"breastVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastVoreForcingAfter",
 	"cockVoreForcing": {
 		"percentage": "sbqLust",
 		"pools": [
@@ -1962,6 +1903,19 @@
 			]
 		]
 	},
+	"cockVoreForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockVoreForcingAfter",
+	"bellyInfuseForcing": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseForcing",
+	"bellyInfuseForcingAfter": "/npcs/sbq/dialogue/default.dialogue:bellyInfuseForcingAfter",
+	"breastInfuseForcing": "/npcs/sbq/dialogue/default.dialogue:breastInfuseForcing",
+	"breastInfuseForcingAfter": "/npcs/sbq/dialogue/default.dialogue:breastInfuseForcingAfter",
+	"pussyInfuseForcing": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseForcing",
+	"pussyInfuseForcingAfter": "/npcs/sbq/dialogue/default.dialogue:pussyInfuseForcingAfter",
+	"cockInfuseForcing": "/npcs/sbq/dialogue/default.dialogue:cockInfuseForcing",
+	"cockInfuseForcingAfter": "/npcs/sbq/dialogue/default.dialogue:cockInfuseForcingAfter",
+	"pawInfuseForcing": "/npcs/sbq/dialogue/default.dialogue:pawInfuseForcing",
+	"pawInfuseForcingAfter": "/npcs/sbq/dialogue/default.dialogue:pawInfuseForcingAfter",
+	"tailInfuseForcing": "/npcs/sbq/dialogue/default.dialogue:tailInfuseForcing",
+	"tailInfuseForcingAfter": "/npcs/sbq/dialogue/default.dialogue:tailInfuseForcingAfter",
 	"oralVoreLetoutForcingAfter": [
 		"Heh, you just can't keep a good bandit down~"
 	],
@@ -2938,6 +2892,98 @@
 		}
 	},
 	// Unused Dialogue
+	"full": ":tailVoreFull",
+	"bellyInfusePrompt": [
+		"Hey. Wanna see what it's like as a bandit's belly?",
+		"Hey, <entityName>. Wanna see what it's like as a bandit's belly?"
+	],
+	"bellyInfusePromptYes": [
+		"Wasn't expectin' you to actually say yes, but I ain't complainin'."
+	],
+	"bellyInfusePromptYesAfter": [
+		"Heh, now to find some nerds to let you melt down~"
+	],
+	"bellyInfusePromptNo": [
+		"No? Even if I'd feed you more than three wigglin' meals a day? Whatever."
+	],
+	"bellyInfusePromptNoYes": [
+		"Not interested? Too bad, an outlaw always trusts their gut instinct."
+	],
+	"bellyInfusePromptNoYesAfter": [
+		"Trust me, you'll like bein' stuffed to the brim once I find a suitable snack."
+	],
+	"breastInfusePrompt": [
+		"Want to steal everyone's attention in one easy go?"
+	],
+	"breastInfusePromptYes": [
+		"I was hopin' you'd say yes. Come give me a hug, then."
+	],
+	"breastInfusePromptYesAfter": [
+		"You look good paddin' out my gals. Try not to blush from all the starin'~"
+	],
+	"breastInfusePromptNo": [
+		"Too good for that, are you? I figured."
+	],
+	"breastInfusePromptNoYes": [
+		"If you aren't interested in stealin', then I'm gonna steal your good looks for myself."
+	],
+	"breastInfusePromptNoYesAfter": [
+		"Heheh, you look great on me. Folks'll be too busy with you to realize I'm pickin' their pockets~"
+	],
+	"pussyInfusePrompt": [
+		"Those are a great pair of lips you've got. Let me put them to better use, hm?"
+	],
+	"pussyInfusePromptYes": [
+		"Lean forward, then. This'll be quick."
+	],
+	"pussyInfusePromptYesAfter": [
+		"Mm, wet already? I've barely even started~"
+	],
+	"pussyInfusePromptNo": [
+		"That's a shame. I had so many toys for us to play with~"
+	],
+	"pussyInfusePromptNoYes": [
+		"Too embarrassed to agree, are ya? This only takes a moment."
+	],
+	"pussyInfusePromptNoYesAfter": [
+		"See? No one is the wiser. You can dribble and drool as much as you like~"
+	],
+	"cockInfusePrompt": [
+		"You look like you're pretty cocky. Want to put that to the test?"
+	],
+	"cockInfusePromptYes": [
+		"Good, I like your type. You always make for the perfect shape~"
+	],
+	"cockInfusePromptYesAfter": [
+		"Heh, now a proper dick is stuck danglin' between my thighs~"
+	],
+	"cockInfusePromptNo": [
+		"Huh, guess I was wrong."
+	],
+	"cockInfusePromptNoYes": [
+		"Nah, I think I'm going to test you out anyway."
+	],
+	"cockInfusePromptNoYesAfter": [
+		"Fff, I'd say you passed with flying ^#F30F0F;c^reset;^#D16D18;o^reset;^#FFF300;l^reset;^#00F902;o^reset;^#0006F9;r^reset;^#AA00F9;s^reset;!"
+	],
+	"tailInfusePrompt": [
+		"I feel like someone's chasin' after me. Can ya watch my back?"
+	],
+	"tailInfusePromptYes": [
+		"I appreciate that. Just relax."
+	],
+	"tailInfusePromptYesAfter": [
+		"Perfect. I needed a good tail to wag around~"
+	],
+	"tailInfusePromptNo": [
+		"Come on, I wouldn't be breaking *too* many laws."
+	],
+	"tailInfusePromptNoYes": [
+		"If you ain't gonna tail me willingly, I'll recruit you in my own way."
+	],
+	"tailInfusePromptNoYesAfter": [
+		"There you go. Nice to see you're finally followin' along~"
+	],
 	"digestFull": "/npcs/sbq/dialogue/flirty.dialogue:digestFull",
 	"oralVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:oralVoreCompressionFull",
 	"tailVoreCompressionFull": "/npcs/sbq/dialogue/flirty.dialogue:tailVoreCompressionFull",

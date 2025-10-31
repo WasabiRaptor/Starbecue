@@ -1,18 +1,4 @@
 {
-	"madeThisMod": "So you made this mod?",
-	"ohGodDamnIt": "\n \nGod damn it!\n \nI knew this would happen, this game loves breaking the moment you breathe on it.",
-	"modDevelopment1": [
-		"Yeah I made this mod, used to be an addon but it became it's own standalone mod back in 2021",
-		"Ever since then I've been mostly working on it by myself with a bit of help from my partner Zygan here and there.",
-		"In the summer of 2023 the source code for starbound got leaked, which was really fucking cool for us."
-	],
-	"modDevelopment2": [
-		"As you can imagine, with the full source code available one can get to do some crazy stuff you couldn't before."
-	],
-	"modDevelopment2Cutoff": [
-		"As you can imagine, with the full source code available one can get to do some crazy"
-	],
-	"openShopOption": "I'd like to buy something.",
 	"greetingRewards": "/npcs/sbq/dialogue/default.dialogue:greetingRewards",
 	"greetingRewardsIntroduced": [
 		"<entityName> right?\nI have some things for you."
@@ -40,6 +26,17 @@
 		"So what is it?",
 		"What did you want to ask?",
 		"Ask away."
+	],
+	"modDevelopment1": [
+		"Yeah I made this mod, used to be an addon but it became it's own standalone mod back in 2021",
+		"Ever since then I've been mostly working on it by myself with a bit of help from my partner Zygan here and there.",
+		"In the summer of 2023 the source code for starbound got leaked, which was really fucking cool for us."
+	],
+	"modDevelopment2Cutoff": [
+		"As you can imagine, with the full source code available one can get to do some crazy"
+	],
+	"modDevelopment2": [
+		"As you can imagine, with the full source code available one can get to do some crazy stuff you couldn't before."
 	],
 	"talkAboutKinks": [
 		"So what kinky stuff did you want to know?",
@@ -180,10 +177,10 @@
 			"AMad.png"
 		]
 	},
-	"itemSelectionBoat" : [
+	"itemSelectionBoat": [
 		"Oh I suppose you found this, have fun with it while I still figure it out hah."
 	],
-	"itemSelectionEvilDeed" : [
+	"itemSelectionEvilDeed": [
 		"Made like a dark fucked up evil version of the colony deed, just a glimpse into my twisted psyche."
 	],
 	"rewardNotifyRichOre": [
@@ -206,34 +203,28 @@
 	"oralVoreRequested": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequested",
 	"oralVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter",
 	"oralVoreInvalid": "Whoops! oralVore is invalid <dialoguePath>",
-	"oralVoreNo": ":defaultNo",
-	"oralVoreTooBig": ":tooBig",
-	"oralVoreTooSmall": ":tooSmall",
-	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
+	"oralVoreNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"oralVoreTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"oralVoreTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"oralVoreNoSlots": [
 		"I don't think I can take any more."
 	],
-	"noSlots": ":oralVoreNoSlots",
 	"oralVoreFull": "/npcs/sbq/dialogue/default.dialogue:oralVoreFull",
 	"oralVoreNeedsInfusion": [
 		"I need to turn someone into that first heh~"
 	],
-	"needsInfusion": ":oralVoreNeedsInfusion",
 	"oralVoreAlreadyInfused": [
 		"That spots already taken for now!"
 	],
-	"alreadyInfused": ":oralVoreAlreadyInfused",
 	"oralVoreTargetPreySettingsMismatch": [
 		"I think one of your little friends might not appreciate that."
 	],
-	"targetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
 	"tailVoreRequested": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequested",
 	"tailVoreRequestedAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreRequestedAfter",
 	"tailVoreInvalid": "Whoops! tailVore is invalid <dialoguePath>",
-	"tailVoreNo": ":defaultNo",
-	"tailVoreTooBig": ":tooBig",
-	"tooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
-	"tailVoreTooSmall": ":tooSmall",
+	"tailVoreNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"tailVoreTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"tailVoreTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"tailVoreNoSlots": ":oralVoreNoSlots",
 	"tailVoreFull": "/npcs/sbq/dialogue/default.dialogue:tailVoreFull",
 	"tailVoreNeedsInfusion": ":oralVoreNeedsInfusion",
@@ -252,9 +243,9 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"unbirthVoreInvalid": "Whoops! unbirthVore is invalid <dialoguePath>",
-	"unbirthVoreNo": ":defaultNo",
-	"unbirthVoreTooBig": ":tooBig",
-	"unbirthVoreTooSmall": ":tooSmall",
+	"unbirthVoreNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"unbirthVoreTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"unbirthVoreTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"unbirthVoreNoSlots": ":oralVoreNoSlots",
 	"unbirthVoreFull": [
 		"My womb is already occupied~",
@@ -279,9 +270,9 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"breastVoreInvalid": "Whoops! breastVore is invalid <dialoguePath>",
-	"breastVoreNo": ":defaultNo",
-	"breastVoreTooBig": ":tooBig",
-	"breastVoreTooSmall": ":tooSmall",
+	"breastVoreNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"breastVoreTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"breastVoreTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"breastVoreNoSlots": ":oralVoreNoSlots",
 	"breastVoreFull": "/npcs/sbq/dialogue/default.dialogue:breastVoreFull",
 	"breastVoreNeedsInfusion": ":oralVoreNeedsInfusion",
@@ -299,9 +290,9 @@
 		"A-ahh~ Don't stop squirming~"
 	],
 	"cockVoreInvalid": "Whoops! cockVore is invalid <dialoguePath>",
-	"cockVoreNo": ":defaultNo",
-	"cockVoreTooBig": ":tooBig",
-	"cockVoreTooSmall": ":tooSmall",
+	"cockVoreNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"cockVoreTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"cockVoreTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"cockVoreNoSlots": ":oralVoreNoSlots",
 	"cockVoreFull": "/npcs/sbq/dialogue/default.dialogue:cockVoreFull",
 	"cockVoreNeedsInfusion": ":oralVoreNeedsInfusion",
@@ -318,9 +309,9 @@
 		"Ah, you're already leaking milk~"
 	],
 	"breastInfuseInvalid": "Whoops! breastInfuse is invalid <dialoguePath>",
-	"breastInfuseNo": ":defaultNo",
-	"breastInfuseTooBig": ":tooBig",
-	"breastInfuseTooSmall": ":tooSmall",
+	"breastInfuseNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"breastInfuseTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"breastInfuseTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"breastInfuseNoSlots": ":oralVoreNoSlots",
 	"breastInfuseFull": [
 		"I'm a bit too full...",
@@ -328,7 +319,6 @@
 		"I've been filled too much already...",
 		"I would... but I'm too full..."
 	],
-	"full": ":breastInfuseFull",
 	"breastInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
 	"breastInfuseAlreadyInfused": ":oralVoreAlreadyInfused",
 	"breastInfuseTargetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
@@ -343,9 +333,9 @@
 		"Ah, you're already sopping wet with excitment~"
 	],
 	"pussyInfuseInvalid": "Whoops! pussyInfuse is invalid <dialoguePath>",
-	"pussyInfuseNo": ":defaultNo",
-	"pussyInfuseTooBig": ":tooBig",
-	"pussyInfuseTooSmall": ":tooSmall",
+	"pussyInfuseNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"pussyInfuseTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"pussyInfuseTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"pussyInfuseNoSlots": ":oralVoreNoSlots",
 	"pussyInfuseFull": ":breastInfuseFull",
 	"pussyInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
@@ -362,9 +352,9 @@
 		"Ah, you're already throbbing with excitment~"
 	],
 	"cockInfuseInvalid": "Whoops! cockInfuse is invalid <dialoguePath>",
-	"cockInfuseNo": ":defaultNo",
-	"cockInfuseTooBig": ":tooBig",
-	"cockInfuseTooSmall": ":tooSmall",
+	"cockInfuseNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"cockInfuseTooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"cockInfuseTooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
 	"cockInfuseNoSlots": ":oralVoreNoSlots",
 	"cockInfuseFull": ":breastInfuseFull",
 	"cockInfuseNeedsInfusion": ":oralVoreNeedsInfusion",
@@ -431,7 +421,7 @@
 		"You seem like you'd make a good meal.",
 		"My belly's been grumbling..."
 	],
-	"oralVoreNoPromptAfter": ":oralVoreRequestedAfter",
+	"oralVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:oralVoreRequestedAfter",
 	"tailVoreNoPrompt": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPrompt",
 	"tailVoreNoPromptAfter": "/npcs/sbq/dialogue/default.dialogue:tailVoreNoPromptAfter",
 	"unbirthVoreNoPrompt": [
@@ -440,7 +430,6 @@
 		"I got a bit excited thinking about this, so now I have to do it~",
 		"I'm gonna need you to pleasure me, but not the normal way~"
 	],
-	"cockVoreNoPrompt": ":unbirthVoreNoPrompt",
 	"unbirthVoreNoPromptAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me even more excited~",
@@ -454,6 +443,7 @@
 		"Ffff~ hehe now they look even bigger~",
 		"A-ahh~ Don't stop squirming~"
 	],
+	"cockVoreNoPrompt": ":unbirthVoreNoPrompt",
 	"cockVoreNoPromptAfter": [
 		"Aahh~ ooooh thats really good~",
 		"Mmmm~ You're getting me even more excited~",
@@ -646,8 +636,8 @@
 	"struggleFemcumDigestImmune": ":struggleCumDigestImmune",
 	"struggleMilkDigest": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigest",
 	"struggleMilkDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleMilkDigestImmune",
-	"struggleMiscDigest": ":struggleAcidDigest",
-	"struggleMiscDigestImmune": ":struggleAcidDigestImmune",
+	"struggleMiscDigest": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigest",
+	"struggleMiscDigestImmune": "/npcs/sbq/dialogue/default.dialogue:struggleAcidDigestImmune",
 	"struggleTransforming": [
 		"Hehe... I wonder what you'll turn into.",
 		"You know, I can turn people into anything, I don't even know what they'll become somtimes."
@@ -977,7 +967,17 @@
 	],
 	"vanilla": "/npcs/sbq/dialogue/default.dialogue:vanilla",
 	// Unused Dialogue
-	// Unused Dialogue
+	"defaultNo": "/npcs/sbq/dialogue/default.dialogue:defaultNo",
+	"tooBig": "/npcs/sbq/dialogue/default.dialogue:tooBig",
+	"tooSmall": "/npcs/sbq/dialogue/default.dialogue:tooSmall",
+	"madeThisMod": "So you made this mod?",
+	"ohGodDamnIt": "\n \nGod damn it!\n \nI knew this would happen, this game loves breaking the moment you breathe on it.",
+	"openShopOption": "I'd like to buy something.",
+	"noSlots": ":oralVoreNoSlots",
+	"needsInfusion": ":oralVoreNeedsInfusion",
+	"alreadyInfused": ":oralVoreAlreadyInfused",
+	"targetPreySettingsMismatch": ":oralVoreTargetPreySettingsMismatch",
+	"full": ":breastInfuseFull",
 	"greetingIntroduced": [
 		"Hi <entityname>!"
 	],

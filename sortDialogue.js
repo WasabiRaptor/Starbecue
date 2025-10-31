@@ -7,11 +7,26 @@ let dupes = {}
 
 let dialogueTreeFile = fs.readFileSync(argv[2], { encoding: "utf-8" });
 let dialogueFile = fs.readFileSync(argv[3], { encoding: "utf-8" });
-let secondaryDialogue = {}
-let secondaryDialogueFile = "/"
-if (argv[4]) {
-	secondaryDialogueFile = fs.readFileSync(argv[4], { encoding: "utf-8" });
+let secondaryDialoguePath = argv[4]
+let secondaryDialogueFile
+let secondaryDialogue
+
+if (secondaryDialoguePath) {
+	secondaryDialogueFile = fs.readFileSync(secondaryDialoguePath, { encoding: "utf-8" });
 	secondaryDialogue = JSONC.parse(secondaryDialogueFile);
+
+	let i = 0
+	let npcs = secondaryDialoguePath.search("/npcs")
+	if (npcs) {
+		i = npcs
+	} else {
+		let objects = secondaryDialoguePath.search("/objects")
+		if (objects) {
+			i = objects
+		}
+	}
+
+	secondaryDialoguePath = secondaryDialoguePath.slice(i, secondaryDialoguePath.length)
 }
 
 let dialogueTree = JSONC.parse(dialogueTreeFile);
@@ -30,13 +45,16 @@ checkRepoint(out)
 let vanilla = (dialogue?.vanilla ?? {})
 JSONC.assign(out, { ["vanilla"]: vanilla })
 delete dialogue["vanilla"]
-
-let output = JSONC.stringify(out, null, "\t");
-JSONC.assign(dialogue, JSONC.parse(`{\n// Unused Dialogue \n}`));
+out[Symbol.for("after:vanilla")] = [{
+	type: 'LineComment',
+	value: ' Unused Dialogue',
+	inline: false,
+}]
 checkRepoint(dialogue)
-let unusedDialogue = JSONC.stringify(dialogue, null, "\t")
-
-fs.writeFileSync(argv[3], output.replace(/\n\}$/, ",") + unusedDialogue.replace(/^\{/, ""), { encoding: "utf-8" });
+for (let [key, child] of Object.entries(dialogue)) {
+	JSONC.assign(out, {[key]: child})
+}
+fs.writeFileSync(argv[3], JSONC.stringify(out, null, "\t"), { encoding: "utf-8" });
 
 
 function handle(path, dialogueTree1) {
@@ -71,17 +89,17 @@ function checkRepoint(input) {
 				JSONC.assign(input, {[key2]:":"+key});
 			}
 		}
-		for (let [key2, child2] of Object.entries(secondaryDialogue)) {
+		if (secondaryDialogue){ for (let [key2, child2] of Object.entries(secondaryDialogue)) {
 			if (JSONC.stringify(child) == JSONC.stringify(child2)) {
 				if (typeof child == "string") {
 					if ((child.substring(0, 1) == ":") | (child.substring(0, 1) == "/")) {
 						continue;
 					}
 				}
-				JSONC.assign(input, {[key]: secondaryDialogueFile+":"+key2})
+				JSONC.assign(input, {[key]: secondaryDialoguePath+":"+key2})
 				break;
 			}
-		}
+		}}
 		if (typeof child == "string") {
 			JSONC.assign(input, {[key]:child});
 		}
@@ -100,10 +118,10 @@ function checkDialogue(input) {
 					console.log(key)
 					console.log(dialogue[key])
 					dupes[key] = true
-					if ((typeof dialogue[key] == "undefined") | (dialogue[key] == "Missing: " + key + " " + "<dialoguePath>")) {
+					if ((typeof dialogue[key] == "undefined") | (dialogue[key] == "Missing: " + key + " " + "<dialoguePath>") | ((dialogue[key] == "/npcs/sbq/dialogue/default.dialogue:"+key) && secondaryDialogue)) {
 						delete dialogue[key]
-						if (argv[4] && secondaryDialogue[key]) {
-							JSONC.assign(input, {[key]: secondaryDialogueFile+":"+key})
+						if (secondaryDialogue && secondaryDialogue[key]) {
+							JSONC.assign(out, {[key]: secondaryDialoguePath+":"+key})
 						} else JSONC.assign(out, { [key]: "Missing: " + key + " " + "<dialoguePath>" });
 					} else {
 						let data = dialogue[key]
