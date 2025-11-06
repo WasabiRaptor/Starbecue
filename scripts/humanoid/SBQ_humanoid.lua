@@ -10,6 +10,10 @@ require("/scripts/any/SBQ_util.lua")
 -- 	slotFunc(itemDescriptor)
 -- end
 
+function sbqSettingsConfig()
+	return {}
+end
+
 local initialized = false
 function refreshHumanoidParameters()
 	old.refreshHumanoidParameters()
@@ -21,10 +25,7 @@ function refreshHumanoidParameters()
 		sb.jsonMerge(
 			speciesConfig.sbqSettingsConfig or {},
 			humanoidConfig.sbqSettingsConfig or {},
-			npc and (config.getParameter("sbqSettingsConfig") or {
-				hideBehaviorSettings = true,
-				hidePredSettings = true,
-			}) or {}
+			sbqSettingsConfig()
 		),
 		sbq.settings:save(),
 		entity.entityType()

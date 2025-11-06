@@ -6,14 +6,6 @@ sbq.settingsConfig = sbq.settingsConfig or {}
 local entityType = world.entityType(pane.sourceEntity())
 cfg.title = sbq.settingsPageName .. " " .. root.assetJson("/sbqStrings.config:settings")
 cfg.inputData = {sbq = sbq}
-if (entityType == "object") or (entityType == "vehicle") then
-	sbq.settingsConfig.hideOtherSettings = true
-	sbq.settingsConfig.hidePreySettings = true
-	sbq.settingsConfig.hideTFsettings = true
-	sbq.settingsConfig.hideSizeSettings = true
-elseif entityType == "monster" then
-	sbq.settingsConfig.hideTFsettings = true
-end
 
 if sbq.settingsConfig.hidePredSettings then
 	table.remove(cfg.children[1].tabs, 1)

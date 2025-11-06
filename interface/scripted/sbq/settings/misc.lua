@@ -5,6 +5,10 @@ function init()
 		end
 	end
 	local entityType = world.entityType(sbq.entityId())
+	_ENV.upgradeInputPanel:setVisible(not sbq.settings.settingsConfig.hideUpgrades)
+	_ENV.upgradePanel:setVisible(not sbq.settings.settingsConfig.hideUpgrades)
+	_ENV.stripping:setVisible(not sbq.settings.settingsConfig.hideStripping)
+
 	if entityType == "npc" then
 		convertType = world.getNpcScriptParameter(sbq.entityId(), "sbqConvertType")
 		if convertType and (world.npcType(sbq.entityId()) ~= convertType) then
@@ -17,7 +21,6 @@ function init()
 		_ENV.customizeNPC:setVisible(world.getNpcScriptParameter(sbq.entityId(), "sbqIsCustomizable") or false)
 	elseif entityType == "object" then
 		_ENV.npcCosmeticSlots:setVisible(false)
-
 		_ENV.stripping:setVisible(world.getObjectParameter(sbq.entityId(), "hasCosmeticSlots") or false)
 		_ENV.statBars:setVisible(false)
 	elseif entityType == "player" then

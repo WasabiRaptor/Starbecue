@@ -19,6 +19,10 @@ function init()
 			config.getParameter("sbqSettingsConfig") or {
 				hideBehaviorSettings = true,
 				hidePredSettings = true,
+				hideInfusePreySettings = true,
+				hideTFsettings = true,
+				hideUpgrades = true,
+				hideStripping = true,
 			}
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),

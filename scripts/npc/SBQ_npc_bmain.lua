@@ -17,6 +17,15 @@ local old = {
 	preservedStorage = preservedStorage or function () return {} end
 }
 
+function sbqSettingsConfig()
+	return config.getParameter("sbqSettingsConfig") or {
+		hideBehaviorSettings = true,
+		hidePredSettings = true,
+		hideUpgrades = true,
+		hideStripping = true,
+	}
+end
+
 local convertBackType
 local convert
 local occupantData
@@ -49,10 +58,7 @@ function init()
 		sb.jsonMerge(
 			speciesConfig.sbqSettingsConfig or {},
 			humanoidConfig.sbqSettingsConfig or {},
-			config.getParameter("sbqSettingsConfig") or {
-				hideBehaviorSettings = true,
-				hidePredSettings = true,
-			}
+			sbqSettingsConfig()
 		),
 		storage.sbqSettings or config.getParameter("sbqSettings"),
 		entity.entityType()

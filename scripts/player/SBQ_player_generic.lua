@@ -45,7 +45,8 @@ function init()
 	sbq.settings = sbq._Settings.new(
 		sb.jsonMerge(
 			speciesConfig.sbqSettingsConfig or {},
-			humanoidConfig.sbqSettingsConfig or {}
+			humanoidConfig.sbqSettingsConfig or {},
+			sbqSettingsConfig()
 		),
 		storage.sbqSettings,
 		entity.entityType()

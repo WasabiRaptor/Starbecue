@@ -22,42 +22,44 @@ function patch(config, path)
 		config.humanoidParameters.sbqEnabled = true
 	end
 
-	config.scriptConfig.sbqSettingsConfig = mergeIncludes(config.scriptConfig.sbqSettingsConfig or {})
-	if config.scriptConfig.sbqSettingsConfig.groupedDefaultSettings then
-		local sbqSettingsConfig = config.scriptConfig.sbqSettingsConfig
-		local defaultSettings = assets.json("/sbq.config:defaultSettings.any")
-		sbqSettingsConfig.defaultSettings = sbqSettingsConfig.defaultSettings or {}
-		for entityType, entityTypeSettings in pairs(sbqSettingsConfig.groupedDefaultSettings) do
-			sbqSettingsConfig.defaultSettings[entityType] = sbqSettingsConfig.defaultSettings[entityType] or {}
-			for groupName, groupDefaultSettings in pairs(entityTypeSettings) do
-				sbqSettingsConfig.defaultSettings[entityType][groupName] = sbqSettingsConfig.defaultSettings[entityType][groupName] or {}
-				for groupId, _ in pairs(defaultSettings[groupName]) do
-					sbqSettingsConfig.defaultSettings[entityType][groupName][groupId] = sb.jsonMerge(
-						groupDefaultSettings,
-						sbqSettingsConfig.defaultSettings[entityType][groupName][groupId] or {}
-					)
+	if config.scriptConfig.sbqSettingsConfig then
+		config.scriptConfig.sbqSettingsConfig = mergeIncludes(config.scriptConfig.sbqSettingsConfig or {})
+		if config.scriptConfig.sbqSettingsConfig.groupedDefaultSettings then
+			local sbqSettingsConfig = config.scriptConfig.sbqSettingsConfig
+			local defaultSettings = assets.json("/sbq.config:defaultSettings.any")
+			sbqSettingsConfig.defaultSettings = sbqSettingsConfig.defaultSettings or {}
+			for entityType, entityTypeSettings in pairs(sbqSettingsConfig.groupedDefaultSettings) do
+				sbqSettingsConfig.defaultSettings[entityType] = sbqSettingsConfig.defaultSettings[entityType] or {}
+				for groupName, groupDefaultSettings in pairs(entityTypeSettings) do
+					sbqSettingsConfig.defaultSettings[entityType][groupName] = sbqSettingsConfig.defaultSettings[entityType][groupName] or {}
+					for groupId, _ in pairs(defaultSettings[groupName]) do
+						sbqSettingsConfig.defaultSettings[entityType][groupName][groupId] = sb.jsonMerge(
+							groupDefaultSettings,
+							sbqSettingsConfig.defaultSettings[entityType][groupName][groupId] or {}
+						)
+					end
 				end
 			end
+			sbqSettingsConfig.groupedDefaultSettings = nil
 		end
-		sbqSettingsConfig.groupedDefaultSettings = nil
-	end
-	if config.scriptConfig.sbqSettingsConfig.groupedOverrideSettings then
-		local sbqSettingsConfig = config.scriptConfig.sbqSettingsConfig
-		local defaultSettings = assets.json("/sbq.config:defaultSettings.any")
-		sbqSettingsConfig.overrideSettings = sbqSettingsConfig.overrideSettings or {}
-		for entityType, entityTypeSettings in pairs(sbqSettingsConfig.groupedOverrideSettings) do
-			sbqSettingsConfig.overrideSettings[entityType] = sbqSettingsConfig.overrideSettings[entityType] or {}
-			for groupName, groupOverrideSettings in pairs(entityTypeSettings) do
-				sbqSettingsConfig.overrideSettings[entityType][groupName] = sbqSettingsConfig.overrideSettings[entityType][groupName] or {}
-				for groupId, _ in pairs(defaultSettings[groupName]) do
-					sbqSettingsConfig.overrideSettings[entityType][groupName][groupId] = sb.jsonMerge(
-						groupOverrideSettings,
-						sbqSettingsConfig.overrideSettings[entityType][groupName][groupId] or {}
-					)
+		if config.scriptConfig.sbqSettingsConfig.groupedOverrideSettings then
+			local sbqSettingsConfig = config.scriptConfig.sbqSettingsConfig
+			local defaultSettings = assets.json("/sbq.config:defaultSettings.any")
+			sbqSettingsConfig.overrideSettings = sbqSettingsConfig.overrideSettings or {}
+			for entityType, entityTypeSettings in pairs(sbqSettingsConfig.groupedOverrideSettings) do
+				sbqSettingsConfig.overrideSettings[entityType] = sbqSettingsConfig.overrideSettings[entityType] or {}
+				for groupName, groupOverrideSettings in pairs(entityTypeSettings) do
+					sbqSettingsConfig.overrideSettings[entityType][groupName] = sbqSettingsConfig.overrideSettings[entityType][groupName] or {}
+					for groupId, _ in pairs(defaultSettings[groupName]) do
+						sbqSettingsConfig.overrideSettings[entityType][groupName][groupId] = sb.jsonMerge(
+							groupOverrideSettings,
+							sbqSettingsConfig.overrideSettings[entityType][groupName][groupId] or {}
+						)
+					end
 				end
 			end
+			sbqSettingsConfig.groupedOverrideSettings = nil
 		end
-		sbqSettingsConfig.groupedOverrideSettings = nil
 	end
 
 	return config
