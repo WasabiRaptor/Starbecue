@@ -32,7 +32,7 @@ function build(directory, config, parameters, level, seed)
 		end
 
 		local imagePath = config.orientations[1].image
-		local replaceTags = sb.jsonMerge(config.defaultImageKeys, parameters.defaultImageKeys or {}, {
+		local replaceTags = sb.jsonMerge(config.imageKeys, parameters.imageKeys or {}, {
 			variant = tostring(math.random(1, config.spriteVariants or 1))
 		})
 		for k, v in pairs(preyIdentity or {}) do
@@ -47,19 +47,16 @@ function build(directory, config, parameters, level, seed)
 		if not root.assetOrigin(sb.replaceTags(imagePath, replaceTags), directory) then
 			replaceTags.variant = "1"
 		end
-		parameters.defaultImageKeys = replaceTags
-		parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.defaultImageKeys)
+		parameters.imageKeys = replaceTags
+		parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
 		parameters.animationCustom = parameters.animationCustom or {}
 		parameters.animationCustom.globalTagDefaults = sb.jsonMerge(parameters.animationCustom.globalTagDefaults or {}, replaceTags)
-	elseif parameters.imageKeys then
-		parameters.defaultImageKeys = parameters.imageKeys
-		parameters.imageKeys = nil
 	end
 	if parameters.directives then -- because of the old ones
-		parameters.defaultImageKeys = sb.jsonMerge(config.defaultImageKeys, {
+		parameters.imageKeys = sb.jsonMerge(config.imageKeys, {
 			replaceColors = parameters.directives
 		})
-		parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.defaultImageKeys)
+		parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
 	else
 		local preyIdentity = sbq.query(parameters, {"npcArgs", "npcParam", "identity"})
 		local preyName = (preyIdentity or {}).name
@@ -126,8 +123,8 @@ function setupReplaceColors(config, parameters, identity)
 	for k, v in pairs(config.baseColorPalette) do
 		replaceTags.replaceMap = replaceTags.replaceMap..sbq.replace(v, speciesFile.baseColorPalette[k])
 	end
-	parameters.defaultImageKeys = sb.jsonMerge(config.defaultImageKeys, replaceTags)
-	parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.defaultImageKeys)
+	parameters.imageKeys = sb.jsonMerge(config.imageKeys, replaceTags)
+	parameters.inventoryIcon = sb.replaceTags(config.inventoryIcon, parameters.imageKeys)
 	parameters.animationCustom = parameters.animationCustom or {}
 	parameters.animationCustom.globalTagDefaults = sb.jsonMerge((config.animationCustom or {}).globalTagDefaults or {}, replaceTags)
 
