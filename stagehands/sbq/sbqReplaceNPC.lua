@@ -2,7 +2,7 @@
 
 local doSpawn = false
 local overrides
-local npc
+local species
 local type
 local level
 local seed
@@ -14,7 +14,7 @@ local storage
 
 function init()
 	overrides = config.getParameter("overrides")
-	npc = config.getParameter("npc")
+	species = config.getParameter("species")
 	type = config.getParameter("type")
 	level = config.getParameter("level") or world.threatLevel()
 	seed = config.getParameter("seed")
@@ -41,7 +41,7 @@ function update()
 			doSpawn = true
 		end
 		if doSpawn then
-			local newEntityId = world.spawnNpc(position, npc, type, level, seed, overrides)
+			local newEntityId = world.spawnNpc(position, species, type, level, seed, overrides)
 			if storage.respawner then
 				assert(uuid and newEntityId)
 				world.callScriptedEntity(newEntityId, "tenant.setHome", storage.homePosition, storage.homeBoundary, storage.respawner, true)
@@ -51,13 +51,7 @@ function update()
 					replacing = false,
 					uniqueId = uuid,
 					type = type,
-					species = npc,
-				})
-			elseif ownerUuid and recruitUuid then
-					world.sendEntityMessage(ownerUuid, "sbqParentUpdateType", recruitUuid, uuid, {
-					type = type,
-					species = npc,
-					uniqueId = uuid
+					species = species,
 				})
 			end
 			stagehand.die()
