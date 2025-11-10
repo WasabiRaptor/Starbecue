@@ -1,0 +1,28 @@
+{
+  "id" : "sbqCraftCandy",
+  "title" : "^green;Sweet Tooth",
+  "text" : "Apparently, this candy needs to be forged on an anvil? It'll be strange if this is actually edible...",
+  "completionText" : "This does look rather tasty.",
+  "moneyRange" : [0, 0],
+  "canBeAbandoned" : true,
+
+  "updateDelta" : 10,
+  "script" : "/quests/scripts/main.lua",
+  "scriptConfig" : {
+    "portraits" : {
+      "default" : "player",
+      "objective" : {
+        "portrait" : [ {"image" : "/items/active/sbqCandy/sbqCandyT1.png"} ],
+        "title" : "Rock Candy"
+      }
+    },
+    "conditions" : [
+      {
+        "type" : "gatherItem",
+        "itemName" : "sbqCandy",
+        "count" : 1,
+        "consume" : false
+      }
+    ]
+  }
+}
