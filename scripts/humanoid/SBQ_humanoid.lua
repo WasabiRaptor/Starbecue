@@ -18,6 +18,9 @@ local initialized = false
 function refreshHumanoidParameters()
 	old.refreshHumanoidParameters()
 	if not initialized then return end
+	if sbq.uninit then
+		sbq.uninit("refresh")
+	end
 	local speciesConfig = root.speciesConfig(sbq.humanoid.species())
 	local humanoidConfig = sbq.humanoid.humanoidConfig()
 
@@ -42,11 +45,7 @@ function refreshHumanoidParameters()
 	if humanoidConfig.sbqEnabled and sbq.init and not (humanoidConfig.sbqPostloadError or (humanoidConfig.sbqCompatible == false)) then
 		if humanoidConfig.sbqConfig then
 			sbq.init(humanoidConfig.sbqConfig)
-		else
-			sbq.uninit("refresh")
 		end
-	elseif sbq.uninit then
-		sbq.uninit("refresh")
 	end
 end
 
