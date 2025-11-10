@@ -204,5 +204,16 @@ _ENV.cosmetic11.acceptsItem = misc.acceptAnyCosmetic
 _ENV.cosmetic12.acceptsItem = misc.acceptAnyCosmetic
 
 function _ENV.customizeNPC:onClick()
-	world.sendEntityMessage(player.id(), "sbqCustomizeEntity", pane.sourceEntity())
+	local entityUserData = world.entity(pane.sourceEntity())
+	local entityType = entityUserData:type()
+	if (entityType == "npc") then
+		player.interact("ScriptPane",{
+			gui = {},
+			scripts = { "/metagui/sbq/build.lua" },
+			data = { identity = entityUserData:humanoidIdentity(), parameters = entityUserData:getHumanoidParameters() },
+			ui = "starbecue:customize"
+		}, pane.sourceEntity())
+	else
+		interface.queueMessage("This will be implemented later")
+	end
 end

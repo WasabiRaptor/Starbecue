@@ -46,7 +46,9 @@ local mg = metagui ---@diagnostic disable-line: undefined-global
 local widgets = mg.widgetTypes
 local mkwidget = mg.mkwidget
 
+local drawable
 function init()
+	drawable = pane.drawable()
 	function mg.setTitle(s)
 		mg.cfg.title = mg.formatText(s)
 		mg.queueFrameRedraw()
@@ -612,8 +614,18 @@ function widgets.sbqCheckBox:init(base, param)
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 
+	self.explicitSize = param.size
+
+	self.drawables = param.drawables
+	if not self.drawables and self.icon then
+		self.drawables = {
+			{ image = self.icon }
+		}
+	end
+	self:setIconDrawables(self.drawables, param.checkedDrawables, param.pressedDrawables, param.lockedDrawables)
+
 	if self.setting then
-		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = {self.setting, self.groupName, self.groupKey}
+		sbq.settingIdentifiers[sbq.widgetSettingIdentifier(self)] = { self.setting, self.groupName, self.groupKey }
 		sbq.settingWidgets[sbq.widgetSettingIdentifier(self)] = self
 		if not self.id then self.id = sbq.widgetSettingIdentifier(self) end
 		local defaultSetting = sbq.settings.defaultSettings[param.setting]
@@ -626,7 +638,8 @@ function widgets.sbqCheckBox:init(base, param)
 	end
 	if self.script then
 		function self:onClick()
-			sbq.widgetScripts[self.script](self.value or self.checked,self.setting or self.id, self.groupName, self.groupKey)
+			sbq.widgetScripts[self.script](self.value or self.checked, self.setting or self.id, self.groupName,
+				self.groupKey)
 		end
 	end
 	self:subscribeEvent("radioButtonChecked", function(self, btn)
@@ -649,8 +662,53 @@ function widgets.sbqCheckBox:init(base, param)
 	end)
 end
 
+function widgets.sbqCheckBox:setIconDrawables(drawables, checked, pressed, locked)
+	self.drawables = drawables
+	self.pressedDrawables = pressed
+	if not self.pressedDrawables then
+		self.pressedDrawables = {}
+		for _, v in ipairs(self.drawables or {}) do
+			if v.image then
+				local newDrawable = copy(v)
+				newDrawable.image = newDrawable.image .. "?brightness=-50"
+				table.insert(self.pressedDrawables, newDrawable)
+			else
+				table.insert(self.pressedDrawables, v)
+			end
+		end
+	end
+	self.lockedDrawables = locked
+	if not self.lockedDrawables then
+		self.lockedDrawables = {}
+		for _, v in ipairs(self.drawables or {}) do
+			if v.image then
+				local newDrawable = copy(v)
+				newDrawable.image = newDrawable.image .. "?saturation=-100"
+				table.insert(self.lockedDrawables, newDrawable)
+			else
+				table.insert(self.lockedDrawables, v)
+			end
+		end
+	end
+	self.checkedDrawables = checked
+	if not self.checkedDrawables then
+		self.checkedDrawables = {}
+		for _, v in ipairs(self.drawables or {}) do
+			if v.image then
+				local newDrawable = copy(v)
+				newDrawable.image = newDrawable.image .. "?border=1;FFFFFFFF;FFFFFF88"
+				table.insert(self.checkedDrawables, newDrawable)
+			else
+				table.insert(self.checkedDrawables, v)
+			end
+		end
+	end
+end
+
 function widgets.sbqCheckBox:preferredSize()
-	if self.icon then
+	if self.explicitSize then return
+		self.explicitSize
+	elseif self.icon then
 		local size = rect.size(root.nonEmptyRegion(self.icon))
 		return {size[1]+2, 12}
 	else
@@ -663,20 +721,17 @@ function widgets.sbqCheckBox:draw()
 	local pos = vec2.mul(c:size(), 0.5)
 
 
-	if self.icon then
+	if self.drawables then
 		c:clear()
-		local directives = ""
-		if self.state == "press" then directives = "?brightness=-50" end
-		if self.locked and not self.checked then directives = directives.."?saturation=-100" end
-
-		if type(self.icon) == "table" then
-			c:drawImageDrawable(((self.checked and self.icon[2]) or self.icon[1])..directives, pos, 1)
+		local drawables
+		if self.locked then
+			drawables = (self.checked and self.checkedDrawables or self.lockedDrawables)
+		elseif self.state == "press" then
+			drawables = (self.pressedDrawables)
 		else
-			if self.checked then
-				directives = directives .. "?border=1;FFFFFFFF;FFFFFF88"
-			end
-			c:drawImageDrawable(self.icon..directives, pos, 1)
+			drawables = (self.checked and self.checkedDrawables or self.drawables)
 		end
+		c:drawDrawables(drawables, pos)
 	else
 		theme.drawCheckBox(self)
 	end

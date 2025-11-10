@@ -293,15 +293,24 @@ function init()
 			}
 		}, entity.id())
 	end)
-	message.setHandler("sbqCustomizeEntity", function(_, _, id)
-		sbq.customizeEntity(id)
-	end)
 	message.setHandler("sbqHideDeathParticles", function()
 		player.setDeathParticleBurst()
 	end)
 	message.setHandler("sbqRequestFailed", function (_,_,success,reason)
 		interface.queueMessage(sbq.getString(":request_" .. tostring(reason)))
 	end)
+	message.setHandler({ name = "sbqSetIdentity", localOnly = true }, function (identity, parameters)
+		local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities") or {}
+		identity.parameters = parameters
+
+		speciesIdentities[identity.species] = identity
+		storage.sbqSpeciesIdentities = speciesIdentities
+		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
+
+		player.setHumanoidParameters(parameters)
+		player.setHumanoidIdentity(identity)
+	end)
+
 	sbq.timer("preyMissingWaitPrompt", 60)
 	occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData then
@@ -403,17 +412,6 @@ function sbq.buildActionRequestOptions(id, actionList)
 	return options
 end
 
-function sbq.customizeEntity(eid)
-	interface.queueMessage("This will be re-implemented later")
-	-- sbq.addRPC(
-	-- 	player.characterCreation({
-	-- 		speciesIdentites = world.entity(eid):statusProperty("sbqSpeciesIdentities"),
-	-- 		currentSpecies =
-	-- 			world.entitySpecies(eid)
-	-- 	}), function(response)
-	-- 		world.sendEntityMessage(eid, "sbqUpdateIdentities", response)
-	-- 	end)
-end
 
 function sbq.collapseEssenceStacks()
 	local count = 0
@@ -525,4 +523,14 @@ function sbqCommands.skiptotier(tier)
 		end
 	end
 	return result
+end
+
+function sbqCommands.customize()
+	player.interact("ScriptPane",{
+		gui = {},
+		scripts = { "/metagui/sbq/build.lua" },
+		data = { identity = player.humanoidIdentity(), parameters = player.getHumanoidParameters() },
+		ui = "starbecue:customize"
+	}, player.id())
+	return "[SBQ] ".. sbq.getString(":openedCustomize")
 end

@@ -249,7 +249,18 @@ function sbq.refreshDeedPage()
 		function customize:onClick()
 			local id = world.uniqueEntityId(tenant.uniqueId)
 			if not id then sbq.playErrorSound() return end
-			world.sendEntityMessage(player.id(), "sbqCustomizeEntity", id)
+			local entityUserData = world.entity(id)
+			local entityType = entityUserData:type()
+			if (entityType == "npc") then
+				player.interact("ScriptPane",{
+					gui = {},
+					scripts = { "/metagui/sbq/build.lua" },
+					data = { identity = entityUserData:humanoidIdentity(), parameters = entityUserData:getHumanoidParameters() },
+					ui = "starbecue:customize"
+				}, id)
+			else
+				interface.queueMessage("This will be implemented later")
+			end
 		end
 
 	end

@@ -110,6 +110,18 @@ function init()
 
 		tenant.despawn(false)
 	end)
+	message.setHandler("sbqSetIdentity", function (_,_, identity, parameters)
+		local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities") or {}
+		identity.parameters = parameters
+
+		speciesIdentities[identity.species] = identity
+		storage.sbqSpeciesIdentities = speciesIdentities
+		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
+
+		npc.setHumanoidParameters(parameters)
+		npc.setHumanoidIdentity(identity)
+	end)
+
 	occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData then
 		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")

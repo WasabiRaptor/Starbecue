@@ -220,11 +220,12 @@ function _RadialMenu:assignFavorite(slot, species)
 	self:open("TopMenu")
 end
 function _RadialMenu:openCharCreation()
-	interface.queueMessage("This will be re-implemented later")
-	-- sbq.addRPC(player.characterCreation({ speciesIdentites = speciesIdentites, currentSpecies = player.species()}), function (response)
-	-- 		status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
-	-- 		player.setHumanoidIdentity(response.currentIdentity)
-	-- end)
+	player.interact("ScriptPane",{
+		gui = {},
+		scripts = { "/metagui/sbq/build.lua" },
+		data = { identity = player.humanoidIdentity(), parameters = player.getHumanoidParameters() },
+		ui = "starbecue:customize"
+	}, player.id())
 end
 
 function sbq_transform.getPortrait(portrait, species)

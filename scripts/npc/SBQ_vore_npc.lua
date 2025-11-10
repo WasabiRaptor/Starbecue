@@ -74,15 +74,6 @@ function init()
 		sbq_hunting.promptResponse({...})
 	end)
 
-	message.setHandler("sbqUpdateIdentities", function (_,_, response)
-		status.setStatusProperty("sbqSpeciesIdentities", response.speciesIdentites)
-		npc.setHumanoidIdentity(response.currentIdentity)
-		local parent, recruitUuid = sbq.parentEntity()
-		if parent then
-			world.sendEntityMessage(parent, "sbqParentUpdateIdentities", recruitUuid, entity.uniqueId(), response)
-		end
-	end)
-
 	if not status.statusProperty("sbqSpeciesIdentities") then
 		status.setStatusProperty("sbqSpeciesIdentities", {[npc.species()] = npc.humanoidIdentity()})
 	end

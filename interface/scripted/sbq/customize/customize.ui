@@ -1,0 +1,104 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [224, 114], // *internal* size (not including chrome)
+	"title" : "Customize",
+	"icon" : "/interface/scripted/sbq/customize.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "customize.lua" ],
+	"sourceRadius": -1,
+	"shareSourceEntity":true,
+	"children" : [
+		{"mode":"v"},
+		{"type":"panel","style":"flat","children":[
+			{"mode":"h"},
+			{"type":"iconButton", "id": "randomizeAll", "image":"/interface/title/dice.png"},
+			{"type" : "spacer", "size" : 10},
+			{"type":"sbqCheckBox", "id": "genderMale", "radioGroup":"gender", "value":0, "size" : [25,24], "drawables":[{"image":"/interface/title/button.png"},{"image":"/interface/title/male.png"}], "checkedDrawables":[{"image":"/interface/title/selected.png"},{"image":"/interface/title/male.png"}]},
+			{"type":"sbqCheckBox", "id": "genderFemale", "radioGroup":"gender", "value":1, "size" : [25,24], "drawables":[{"image":"/interface/title/button.png"},{"image":"/interface/title/female.png"}], "checkedDrawables":[{"image":"/interface/title/selected.png"},{"image":"/interface/title/female.png"}]},
+			{"type" : "spacer", "size" : 10},
+
+			{"type":"textBox", "id":"nameBox", "expandMode":[2,0]},
+			{"type":"iconButton", "id": "randomizeName", "image":"/interface/scripted/sbq/dice.png"}
+		]},
+		[
+			[
+				{"mode":"v", "expandMode":[1,2]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"bodyColorLabel", "text":"bodyColor", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"bodyColorRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"bodyColorLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"bodyColorRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"hairChoiceLabel", "text":"hairChoice", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"hairChoiceRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"hairChoiceLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"hairChoiceRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"shirtChoiceLabel", "text":"shirtChoice", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"shirtChoiceRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"shirtChoiceLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"shirtChoiceRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"pantsChoiceLabel", "text":"pantsChoice", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"pantsChoiceRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"pantsChoiceLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"pantsChoiceRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"personalityLabel", "text":"personality", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"personalityRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"personalityLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"personalityRight", "image":"/interface/pickright.png"}
+				]}
+			],
+			[
+				{"mode":"v", "expandMode":[1,2]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"altyLabel", "text":"alty", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"altyRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"altyLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"altyRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"headyLabel", "text":"heady", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"headyRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"headyLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"headyRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"shirtColorLabel", "text":"shirtColor", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"shirtColorRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"shirtColorLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"shirtColorRight", "image":"/interface/pickright.png"}
+				]},
+				{"type":"panel","style":"flat", "expandMode":[1,0],"children":[
+					{"mode":"h", "expandMode":[1,0]},
+					{"type":"label", "id":"pantsColorLabel", "text":"pantsColor", "expandMode":[1,0]},
+					{"type":"iconButton", "id":"pantsColorRandom", "image":"/interface/scripted/sbq/dice.png"},
+					{"type" : "spacer", "size" : 2},
+					{"type":"iconButton", "id":"pantsColorLeft", "image":"/interface/pickleft.png"},
+					{"type":"iconButton", "id":"pantsColorRight", "image":"/interface/pickright.png"}
+				]}
+			]
+		]
+	]
+}
