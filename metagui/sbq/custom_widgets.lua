@@ -78,7 +78,7 @@ function widgets.textBox:preferredSize() return self.explicitSize or { 96, 14 } 
 function mg.formatText(str)
 	if not str then return nil end
 	if str:sub(1, 1) == ":" then
-		if sbq.strings then str = sbq.strings[str:sub(2,-1)] or str end
+		str = sbq.getString(str)
 	end
 	local colorSub = {
 	  ["^accent;"] = string.format("^#%s;", mg.getColor("accent")),

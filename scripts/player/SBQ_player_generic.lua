@@ -476,9 +476,13 @@ function die()
 end
 
 function sbqCommands.help(name)
-	if not name then name = "help" end
+
+	if not name then
+		player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = { helpPage = "commands" }, ui = "starbecue:help" })
+		return "[SBQ] ".. sbq.getString(":openedHelp")
+	end
 	if type(sbqCommands[name]) == "function" then
-		return "[SBQ] ".. (sbq.strings.help[name] or (":help."..name)) .. ((name == "help") and ("\n[SBQ]" .. sbq.getString(":sbqCommands")) or (""))
+		return "[SBQ] ".. (sbq.getString(":helpCommand."..(name):lower())) .. ((name == "help") and ("\n[SBQ]" .. sbq.getString(":sbqCommands")) or (""))
 	else
 		return "[SBQ] ".. sbq.getString(":help_invalid")
 	end

@@ -1,0 +1,131 @@
+{ //  -*- grammar-ext: json -*-
+	"style" : "window", // window (has titlebar), panel (just a frame) etc.
+	"size" : [320, 256], // *internal* size (not including chrome)
+	"resizable" : true,
+	"minSize" : [320, 256],
+	"title" : "Help",
+	"icon" : "helpCodex.png",
+	"uniqueBy" : "path",
+	"scripts" : [ "help.lua" ],
+	"sourceRadius": -1,
+	"shareSourceEntity":true,
+	"children" : [
+		{ "type" : "tabField", "id" : "mainTabField", "layout" : "vertical", "tabs" : [
+			// { "type" : "tab", "id" : "FAQ", "title" : ":helpTabFAQ", "visible" : true, "color" : "ff00ff", "contents" : [
+			// 	{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+			// 		{"type" : "panel", "id":"helpTabFAQPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+			// 			{"mode":"v"},
+			// 			{"type":"label", "text":":helpTabFAQContent", "expandMode":[2,2]}
+			// 		]}
+			// 	]}]}
+			// ]},
+			{ "type" : "tab", "id" : "commands", "title" : ":helpTabCommands", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabCommandsPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label","text":"^cyan;Help"},
+						{"type":"label","text":":helpCommand.help"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Escape"},
+						{"type":"label","text":":helpCommand.escape"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Customize"},
+						{"type":"label","text":":helpCommand.customize"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Settings"},
+						{"type":"label","text":":helpCommand.settings"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Config"},
+						{"type":"label","text":":helpCommand.config"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Skip To Tier"},
+						{"type":"label","text":":helpCommand.skiptotier"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Set Tiered Upgrade"},
+						{"type":"label","text":":helpCommand.settieredupgrade"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Set Upgrade"},
+						{"type":"label","text":":helpCommand.setupgrade"},
+						{"type":"spacer","size":5},
+						{"type":"label","text":"^cyan;Set Setting"},
+						{"type":"label","text":":helpCommand.setsetting"},
+						{"type":"spacer","size":5}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "pred", "title" : ":helpTabPred", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabPredPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabPredContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "prey", "title" : ":helpTabPrey", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabPreyPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabPreyContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "size", "title" : ":helpTabUpgrades", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabUpgradesPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabUpgradesContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "size", "title" : ":helpTabSize", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabSizePanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabSizeContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "transformation", "title" : ":helpTabTransformation", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabTransformationPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabTransformationContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "deed", "title" : ":helpTabDeeds", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabDeedsPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabDeedsContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "NPC", "title" : ":helpTabNPCs", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabNPCsPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabNPCsContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "other", "title" : ":helpTabOther", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabOtherPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabOtherContent", "expandMode":[2,2]}
+					]}
+				]}]}
+			]},
+			{ "type" : "tab", "id" : "other", "title" : ":helpTabCredits", "visible" : true, "color" : "ff00ff", "contents" : [
+				{"type" : "panel", "expandMode":[2,2], "style" : "flat", "children" : [{"expandMode":[2,2]},{"type" : "scrollArea", "expandMode":[2,2], "scrollDirections" : [0,1], "children" : [
+					{"type" : "panel", "id":"helpTabCreditsPanel", "expandMode":[1,2], "style" : "convex", "children" : [
+						{"mode":"v"},
+						{"type":"label", "text":":helpTabCreditsContent"},
+						{"type":"label", "text":"", "id":"supporterCreditsLabel"}
+					]}
+				]}]}
+			]}
+		], "bottomBar" : []}
+	]
+}

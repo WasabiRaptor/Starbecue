@@ -15,11 +15,19 @@ function update(dt, fireMode, shiftHeld, controls)
 	if (fireMode == "primary" or fireMode == "alt") and not clicked then
 		clicked = true
 		if sbq.timer("menu", 1) then
-			local entities = world.entityQuery( activeItem.ownerAimPosition(), 2, {
+			local entities = world.entityQuery( activeItem.ownerAimPosition(), 1, {
 				withoutEntityId = entity.id(), includedTypes = { "vehicle", "npc", "object", "monster" }
 			})
 			if entities[1] ~= nil then
-				getEntitySettingsMenu(entities, 1)
+				if fireMode == "alt" then
+					getEntitySettingsMenu(entities, 1)
+				elseif fireMode == "primary" then
+					getEntityHelpMenu(entities)
+				end
+			else
+				if fireMode == "primary" then
+					player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:help" })
+				end
 			end
 		end
 	elseif fireMode == "none" then
@@ -30,15 +38,15 @@ function update(dt, fireMode, shiftHeld, controls)
 end
 
 function getEntitySettingsMenu(entities, i)
-    if (not entities) or (not i) or (not entities[i]) or (not world.entityExists(entities[i])) then return end
-    local entityType = world.entityType(entities[i])
+	if (not entities) or (not i) or (not entities[i]) or (not world.entityExists(entities[i])) then return end
+	local entityType = world.entityType(entities[i])
 	if entityType == "object" then
-        if world.getObjectParameter(entities[i], "sbqConfigGui") then
+		if world.getObjectParameter(entities[i], "sbqConfigGui") then
 			if world.getObjectParameter(entities[i], "sbqConfigOwnerOnly") and (world.getObjectParameter(entities[i], "owner") ~= player.uniqueId()) and not player.isAdmin() then
 				interface.queueMessage(sbq.getString(":targetOwned"))
 				return animator.playSound("error")
 			end
-            player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = world.getObjectParameter(entities[i],"sbqConfigData"), ui = world.getObjectParameter(entities[i], "sbqConfigGui") }, entities[i])
+			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = world.getObjectParameter(entities[i],"sbqConfigData"), ui = world.getObjectParameter(entities[i], "sbqConfigGui") }, entities[i])
 			return
 		end
 	end
@@ -59,4 +67,17 @@ function getEntitySettingsMenu(entities, i)
 	end, function()
 		getEntitySettingsMenu(entities, i+1)
 	end)
+end
+
+function getEntityHelpMenu(entities)
+	for _, eid in ipairs(entities) do
+		local entityMethods = world.entity(eid)
+		local helpPage = entityMethods:getParameter("sbqHelpPage")
+		if helpPage then
+			player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, data = { helpPage = helpPage }, ui = "starbecue:help" })
+			return
+		end
+	end
+	player.interact("ScriptPane", { gui = {}, scripts = { "/metagui/sbq/build.lua" }, ui = "starbecue:help" })
+
 end

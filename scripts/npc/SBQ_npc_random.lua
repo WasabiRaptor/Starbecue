@@ -36,31 +36,8 @@ function sbq.rollConvert()
 							return
 						end
 						if npc.species() == config.getParameter("sbqConvertSpecies") then
-							local speciesList = root.assetJson("/interface/windowconfig/charcreation.config")
-								.speciesOrdering
-							local badSpecies = true
-							local newSpecies
-							while badSpecies do
-								local i = math.random(#speciesList)
-								newSpecies = speciesList[i]
-								badSpecies = sbq.config.transformationBlacklist[newSpecies] or false
-								if not badSpecies then
-									local speciesFile = root.speciesConfig(newSpecies)
-									if speciesFile.forceName then
-										badSpecies = true
-									elseif speciesFile.voreConfig then
-										if sbq.query(sbq.fetchConfigArray(speciesFile.voreConfig) or {}, { "overrideSettings", "speciesTF" }) == false then
-											badSpecies = true
-										end
-									else
-										badSpecies = true
-									end
-								end
-								if badSpecies then
-									table.remove(speciesList, i)
-								end
-							end
-							npc.setHumanoidIdentity(root.generateHumanoidIdentity(newSpecies, npc.seed(), npc.gender()))
+							local speciesList = root.assetJson("/sbqTFAny.config")
+							npc.setHumanoidIdentity(root.generateHumanoidIdentity(speciesList[math.random(#speciesList)], npc.seed(), npc.gender()))
 						end
 						convertBackType = npc.npcType()
 						local convertType = config.getParameter("sbqConvertType")

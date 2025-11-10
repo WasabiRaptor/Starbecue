@@ -7,51 +7,68 @@ function update()
 	localAnimator.clearDrawables()
 	for _, eid in ipairs(entities) do
 		local entityType = world.entityType(eid)
+		local indicator
+		local entityMethods = world.entity(eid)
 		if entityType == "npc" then
-			if world.entity(eid):statPositive("sbqIsPrey") then
+			if entityMethods:statPositive("sbqIsPrey") then
 			elseif world.getNpcScriptParameter(eid, "sbqNPC") then
-				localAnimator.addDrawable({
+				indicator = {
 					image = "/items/active/sbqNominomicon/indicator.png",
 					centered = true,
 					fullbright = true,
 					position = world.entityPosition(eid)
-				}, "ForegroundOverlay+2")
-			elseif world.entity(eid):statPositive("sbqActorScript") then
-				localAnimator.addDrawable({
+				}
+			elseif entityMethods:statPositive("sbqActorScript") then
+				indicator = {
 					image = "/items/active/sbqNominomicon/indicator.png?hueshift=-64",
 					centered = true,
 					fullbright = true,
 					position = world.entityPosition(eid)
-				}, "ForegroundOverlay+2")
+				}
 			end
 		elseif entityType == "monster" then
-			if world.entity(eid):statPositive("sbqIsPrey") then
-			elseif world.entity(eid):statPositive("sbqActorScript") then
-				localAnimator.addDrawable({
+			if entityMethods:statPositive("sbqIsPrey") then
+			elseif entityMethods:statPositive("sbqActorScript") then
+				indicator = {
 					image = "/items/active/sbqNominomicon/indicator.png?hueshift=-64",
 					centered = true,
 					fullbright = true,
 					position = world.entityPosition(eid)
-				}, "ForegroundOverlay+2")
+				}
 			end
 		elseif entityType == "vehicle" then
 
 		elseif entityType == "object" then
 			if world.getObjectParameter(eid, "sbqObject") then
-				localAnimator.addDrawable({
+				indicator = {
 					image = "/items/active/sbqNominomicon/indicator.png",
 					centered = true,
 					fullbright = true,
 					position = objectCenter(eid)
-				}, "ForegroundOverlay+2")
+				}
 			elseif world.getObjectParameter(eid, "sbqConfigGui") then
-				localAnimator.addDrawable({
+				indicator = {
 					image = "/items/active/sbqNominomicon/indicator.png?hueshift=64",
 					centered = true,
 					fullbright = true,
 					position = objectCenter(eid)
-				}, "ForegroundOverlay+2")
+				}
 			end
+		end
+		if not indicator and entityMethods:getParameter("sbqHelpPage") and not entityMethods:statPositive("sbqIsPrey")  then
+			local pos = world.entityPosition(eid)
+			if entityType == "object" then
+				pos = objectCenter(eid)
+			end
+			indicator = {
+				image = "/items/active/sbqNominomicon/helpIndicator.png",
+				centered = true,
+				fullbright = true,
+				position = pos
+			}
+		end
+		if indicator then
+			localAnimator.addDrawable( indicator, "ForegroundOverlay+2")
 		end
 	end
 end

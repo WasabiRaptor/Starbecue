@@ -239,8 +239,8 @@ end
 function sbq.getString(str)
 	if not str then return "" end
 	if str:sub(1, 1) == ":" then
-		if not sbq.strings then sbq.strings = root.assetJson("/sbqStrings.config") end
-		str = sbq.strings[str:sub(2, -1)] or str
+        if not sbq.strings then sbq.strings = root.assetJson("/sbqStrings.config") end
+		str = sbq.queryPath(sbq.strings, str:sub(2, -1)) or str
 	end
 	return str
 end
