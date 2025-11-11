@@ -373,49 +373,7 @@ function _Settings:setPublicSettings()
 end
 
 function _Settings:setParameterSettings()
-	if not sbq.humanoid then return end
-	local refresh = false
-
-	local infuseSettings = {}
-	local infuseSlots = {}
-	if sbq.Occupants then
-		for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
-			for _, slot in ipairs(capturedOccupant.flags.infuseSlots or {}) do
-				infuseSlots[slot] = capturedOccupant
-			end
-		end
-		for _, occupant in ipairs(sbq.Occupants.list) do
-			for _, slot in ipairs(occupant.flags.infuseSlots or {}) do
-				infuseSlots[slot] = occupant
-			end
-		end
-	end
-	for _, infuseSlot in ipairs(sbq.humanoid.humanoidConfig().sbqModuleOrder or {}) do
-		infusedOccupant = infuseSlots[infuseSlot]
-		local value, newOverrides
-		if infusedOccupant then
-			value, newOverrides = infusedOccupant:infuseParameters(infuseSlot)
-		end
-		infuseSettings = sb.jsonMerge(infuseSettings, newOverrides or {})
-		if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfused_" .. infuseSlot), value) then
-			sbq.humanoid.setHumanoidParameter("sbqInfused_"..infuseSlot, value)
-			refresh = true
-		end
-	end
-	if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfuseSettings"), infuseSettings) then
-		refresh = true
-		sbq.humanoid.setHumanoidParameter("sbqInfuseSettings", infuseSettings)
-	end
-
-	for setting, parameter in pairs(sbq.config.parameterSettings) do
-		local value = sbq.query(infuseSettings, {"overrideSettings",entity.entityType(),setting}) or sbq.query(infuseSettings, {"overrideSettings", "any", setting}) or self:get(setting)
-		if sbq.humanoid.getHumanoidParameter(parameter) ~= value then
-			sbq.humanoid.setHumanoidParameter(parameter, value)
-			refresh = true
-		end
-	end
-	if refresh then sbq.humanoid.refreshHumanoidParameters() end
-	return refresh
+	return false
 end
 
 function _Settings:setStatSettings()

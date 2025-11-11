@@ -49,41 +49,50 @@ function refreshHumanoidParameters()
 	end
 end
 
+function sbq._Settings:setParameterSettings()
+	if not sbq.humanoid then return end
+	local refresh = false
 
--- this function in it's current state was made explicitly to add a missing color to familar's palettes
--- however, it should probably be repurposed to add a missing color to all palettes
-function sbq.addDirectives()
-	local directives = self.identity.bodyDirectives:lower()
-	local found1, found2 = directives:find("00ffa1=")
-	if found1 then
-		local colorStartIndex = found2 + 1
-		local colorEndIndex = #directives
-		local found4 = directives:find(";", colorStartIndex)
-		if found4 then
-			local found5 = directives:find("?", colorStartIndex)
-			if found5 and found4 > found5 then
-				colorEndIndex = found5 - 1
-			else
-				colorEndIndex = found4 - 1
+	local infuseSettings = {}
+	local infuseSlots = {}
+	if sbq.Occupants then
+		for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
+			for _, slot in ipairs(capturedOccupant.flags.infuseSlots or {}) do
+				infuseSlots[slot] = capturedOccupant
 			end
 		end
-
-		local multiplyAmount = 0.75
-		local color = directives:sub(colorStartIndex, colorEndIndex)
-		local R = tonumber(color:sub(1, 2), 16)
-		local G = tonumber(color:sub(3, 4), 16)
-		local B = tonumber(color:sub(5, 6), 16)
-		local A = ""
-		if #color == 8 then
-			A = color:sub(7, 8)
+		for _, occupant in ipairs(sbq.Occupants.list) do
+			for _, slot in ipairs(occupant.flags.infuseSlots or {}) do
+				infuseSlots[slot] = occupant
+			end
 		end
-		local newReplaceColors = "?replace;00c77d=" ..
-			string.format("%02x", math.floor(R * multiplyAmount)) ..
-			string.format("%02x", math.floor(G * multiplyAmount)) ..
-			string.format("%02x", math.floor(B * multiplyAmount)) ..
-			A
-		self.identity.bodyDirectives = self.identity.bodyDirectives .. newReplaceColors
 	end
+	for _, infuseSlot in ipairs(sbq.humanoid.humanoidConfig().sbqModuleOrder or {}) do
+		infusedOccupant = infuseSlots[infuseSlot]
+		local value, newOverrides
+		if infusedOccupant then
+			value, newOverrides = infusedOccupant:infuseParameters(infuseSlot)
+		end
+		infuseSettings = sb.jsonMerge(infuseSettings, newOverrides or {})
+		if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfused_" .. infuseSlot), value) then
+			sbq.humanoid.setHumanoidParameter("sbqInfused_"..infuseSlot, value)
+			refresh = true
+		end
+	end
+	if not sb.jsonEqual(sbq.humanoid.getHumanoidParameter("sbqInfuseSettings"), infuseSettings) then
+		refresh = true
+		sbq.humanoid.setHumanoidParameter("sbqInfuseSettings", infuseSettings)
+	end
+
+	for setting, parameter in pairs(sbq.config.parameterSettings) do
+		local value = sbq.query(infuseSettings, {"overrideSettings",entity.entityType(),setting}) or sbq.query(infuseSettings, {"overrideSettings", "any", setting}) or self:get(setting)
+		if sbq.humanoid.getHumanoidParameter(parameter) ~= value then
+			sbq.humanoid.setHumanoidParameter(parameter, value)
+			refresh = true
+		end
+	end
+	if refresh then sbq.humanoid.refreshHumanoidParameters() end
+	return refresh
 end
 
 function sbq.humanoidInit()

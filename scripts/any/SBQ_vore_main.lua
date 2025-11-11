@@ -823,7 +823,7 @@ function sbq._State:interactAction(args)
 	local aim = sbq.globalToLocal(args.interactPosition)
 	local closest = nil
 	local distance = math.huge
-	local failReason
+	local failReason = "noActions"
 	for action, v in pairs(interactActions or {}) do
 		if not v.action then
 			v.action = action
@@ -1232,7 +1232,8 @@ function sbq._Location:updateOccupancy(dt)
 
 		local infuseSize = 0
 		local infuseCount = 0
-		if self.infuseType and self.infuseSize then
+        if self.infuseType and self.infuseSize then
+			-- TODO this should use a different function so as not to assume humanoid
 			local infuseSlot = sbq.humanoid.getHumanoidParameter("sbqInfused_" .. self.key)
 			if infuseSlot then
 				infuseSize = infuseSlot.size * self.settings.infusedSize

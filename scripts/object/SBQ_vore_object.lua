@@ -62,6 +62,8 @@ function init()
 	sbq.settings:setPublicSettings()
 	sbq.settings:setStatSettings()
 
+	sbq.logInfo(config.getParameter("sbqConfig"), 2)
+
 	sbq.init(config.getParameter("sbqConfig"))
 end
 
@@ -102,4 +104,24 @@ end
 
 function sbq.collisionArea()
 	return #object.spaces()
+end
+
+function sbq._Settings:setParameterSettings()
+	local refresh = false
+	local humanoidParameters = config.getParameter("humanoidParameters")
+
+	for setting, parameter in pairs(sbq.config.parameterSettings) do
+		local value = self:get(setting)
+		if humanoidParameters[parameter] ~= value then
+			humanoidParameters[parameter] = value
+			refresh = true
+		end
+	end
+	if refresh then
+		object.setConfigParameter("humanoidParameters", humanoidParameters)
+		sbq.timer("gonnaSmash", 1, function ()
+			object.smash()
+		end)
+	end
+	return refresh
 end
