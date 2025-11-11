@@ -28,8 +28,11 @@ function update(dt, fireMode, shiftHeld)
 			self.useTimer = nil
 			activeItem.setArmAngle(-math.pi / 4)
 
-			world.sendEntityMessage(player.id(), "sbqDoTransformation", table.unpack(config.getParameter("args") or {}))
-			if not player.isAdmin() then item.consume(1) end
+			if world.sendEntityMessage(player.id(), "sbqDoTransformation", table.unpack(config.getParameter("args") or {})):result() then
+				if not player.isAdmin() then item.consume(1) end
+			else
+				interface.queueMessage(sbq.getString(":action_settingsMismatch"))
+			end
 		end
 	end
 end

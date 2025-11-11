@@ -88,13 +88,10 @@ end
 
 function sbq.humanoidInit()
 	message.setHandler("sbqDoTransformation", function(_, _, ...)
-		sbq.doTransformation(...)
-	end)
-	message.setHandler("sbqHybridTransformation", function(_, _, ...)
-		sbq.hybridTransformation(...)
+		return sbq.doTransformation(...)
 	end)
 	message.setHandler("sbqRevertTF", function(_, _)
-		sbq.revertTF()
+		return sbq.revertTF()
 	end)
 
 	message.setHandler("sbqGetCard", function()
@@ -169,41 +166,6 @@ end
 -- 		end
 -- 	end
 -- end
-
-function sbq.hybridTransformation(newSpecies, duration, ...)
-	local newSpeciesConfig = root.speciesConfig(newSpecies)
-	local curIdentity = sbq.humanoidIdentity()
-	local newIdentity = { species = newSpecies }
-	if newSpecies ~= curIdentity.species then
-		local curSpeciesConfig = root.speciesConfig(curIdentity.species)
-		if (newSpeciesConfig.hybridSpeciesBlacklist or {})[curIdentity.species] then
-			player.radioMessage("sbqHybridBlacklisted")
-			sbq.logWarn("Attempted to hybridize blacklisted species for " .. newSpecies .. ": " .. newIdentity.species)
-			return
-		end
-		if not curSpeciesConfig.voreConfig then
-			player.radioMessage("sbqHybridUnsupported")
-		end
-
-		for _, v in ipairs(curSpeciesConfig.hybridAppendIdentity or {}) do
-			if v[3] then
-				curIdentity[v[1]] = curIdentity[v[2]]
-			else
-				curIdentity[v[1]] = curIdentity[v[1]] .. curIdentity[v[2]]
-			end
-		end
-
-		for k, v in pairs(curIdentity) do
-			if not (newSpeciesConfig.hybridCopyIdentityBlacklist or {})[k] then newIdentity[k] = v end
-		end
-		newIdentity.imagePath = curIdentity.species
-		newIdentity.species = newSpecies
-		sbq.doTransformation(newIdentity, duration, true, true, ...)
-	else
-		newIdentity.imagePath = newSpecies
-		sbq.doTransformation(newIdentity, duration, true, true, ...) -- forces customization data to be cleared and regenerated
-	end
-end
 
 function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomization, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
@@ -385,6 +347,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
 	end
 	sbq.refreshPredHudPortrait()
+	return true
 end
 
 function sbq.revertTF()
