@@ -68,8 +68,8 @@ function patch(config, path)
 		sbqSettingsConfig.groupedOverrideSettings = nil
 	end
 
-	if (not config.sbqPartImages) and (assets.json("/player.config:defaultCodexes")[config.kind]) then
-		sb.logInfo("[SBQ] playable species '%s' has no part images defined, generating placeholder images.", config.kind)
+	if (not config.sbqPartImages) then
+		sb.logInfo("[SBQ] species '%s' has no part images defined, defining placeholder images.", config.kind)
 		config.sbqPartImages = assets.json("/species/sbq/placeholderImages.config")
 	end
 	if type(sb.jsonQuery(config, "humanoidOverrides.sbqConfig.modules")) == "string" then
