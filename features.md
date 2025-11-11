@@ -210,7 +210,7 @@ Holding **Shift** will prevent any actions from occuring from your struggles, on
 - Locked: Pred is in "Lock Down" mode, you won't be able to escape until they've exhausted too much energy suppressing your struggling.
 
 ### Emergency Escape
-If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, there is an Instant Escape Combo. To perform it, hold **Shift**+**Down** then press **Jump**.
+If you ever find yourself in a situation that's over your head, and you want to immediately get out of it, simply enter `/sbq escape` into chat to instantly escape from any pred.
 
 ### Preserves Vore State
 Your state will be preserved when you logout anf re-join the game as long as the pred entity is still present.
@@ -299,15 +299,15 @@ These species are special species and may possess more abilities or play differe
 
 ### SBQ Species
 Races included within SBQ by default
-- Vaporeon (Feral) : sbq/vaporeon
-- Flareon (Feral) : sbq/flareon
-- Meowscarada : sbq/meowscarada
-- Nickit (Anthro) : sbq/nickit_anthro
+- Vaporeon (Feral) : wr/vaporeon
+- Flareon (Feral) : wr/flareon
+- Meowscarada : wr/meowscarada
+- Nickit (Anthro) : wr/nickit
 - Hellhound : sbq/FFWizard/hellhound
 
 ### External Compatible Species
 This mod includes patches for the species below to add compatibility, it does not include any of their respective assets.
-It is relatively simple to use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) if a species you like isn't supported yet! Do try and send me the files afterwards if you do this!
+It is relatively simple to use this [template](https://github.com/WasabiRaptor/SBQ-Race-Compatibility-Tempate) if a species you like isn't supported yet! Do try and send me the files afterwards if you do this! All SBQ compatibility patches can be found [here](https://github.com/WasabiRaptor/SBQ-compatibility) if you might be looking for examples or this list is out of date.
 - Human : human
 - Hylotl : hylotl
 - Floran : floran
