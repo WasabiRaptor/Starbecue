@@ -1,53 +1,6 @@
 {
-	"sbqCompatible" : true,
-	"sbqTFAny" : true,
-	"sbqTenantData" : {
-		"colonyTagCriteria" : {
-			"dragon" : 8
-		},
-		"guardColonyTagCriteria" : [ // merges over colonyTagCriteria for the tier
-			{},
-			{"tier2":12},
-			{"tier3":12},
-			{"tier4":12},
-			{"tier5":12},
-			{"tier6":12},
-			{"tier7":12},
-			{"tier8":12},
-			{"tier9":12},
-			{"tier10":12}
-		],
-		"tenant" : {
-			"spawn": "npc", "species": "dragon", "type": "sbqVoreTenant", "overrides": {},
-			"orderFurniture" : [
-				{"name":"dragonbed", "count":1},
-				{"name":"dragonbeanbag", "count":1},
-				{"name":"dragontapestry", "count":1},
-				{"name":"nomadtable", "count":1},
-				{"name":"dragonceilinglight", "count":1},
-				{"name":"dragonfountain", "count":1},
-				{"name":"dragonvillagedoor", "count":1},
-				{"name":"dragonplushie", "count":1},
-				{"name":"dragondesk", "count":1}
-			]
-		},
-		"guardTenant" : [ // merges on top of the base tenant
-			{"spawn": "npc", "level": 1, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 2, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 3, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 4, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 5, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 6, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 7, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 8, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 9, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}},
-			{"spawn": "npc", "level": 10, "species": "dragon", "type": "sbqVoreFriendlyGuardTenant", "overrides": {}}
-		]
-	},
-	"sbqSettingsConfig": {
-		"defaultSettings": {"any":{
-			"navelVisible": false
-		}}
+	"sbqPatchConditions" : {
+		"name" : ["draconisFullDragons"]
 	},
 	"sbqPartImages": {
 		"sbq/noLegs/malebody.png" : {
@@ -266,8 +219,8 @@
 
 		"sbq/infused/bellyQuadruped.png": {
 			"sourceImage": "/humanoid/sbq/quadruped/belly/default.png",
+			"processingDirectives": "?replace;00adba=bc1002", // this replaces the navel pixel, don't touch this
 			"remapDirectives": [
-				"?replace;00adba=bc1002",
 				[
 					"primary",
 					"primary"
@@ -276,8 +229,8 @@
 		},
 		"sbq/infused/bellyQuadruped_noNavel.png": {
 			"sourceImage": "/humanoid/sbq/quadruped/belly/default.png",
+			"processingDirectives": "?replace;00adba=eb3629", // this replaces the navel pixel, don't touch this
 			"remapDirectives": [
-				"?replace;00adba=eb3629",
 				[
 					"primary",
 					"primary"
@@ -287,14 +240,8 @@
 
 		"sbq/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/scaly.png",
+			"processingDirectives" : "?replace;00adba=7d0a01",
 			"remapDirectives": [
-				"?replace;00adba=bc1002",
-				{
-					"00adba": "7d0a01",
-					"check": {
-						"navelVisible": true
-					}
-				},
 				[
 					"primary",
 					"secondary"
@@ -303,14 +250,8 @@
 		},
 		"sbq/belly_noNavel.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/scaly.png",
+			"processingDirectives" : "?replace;00adba=bc1002",
 			"remapDirectives": [
-				"?replace;00adba=eb3629",
-				{
-					"00adba": "7d0a01",
-					"check": {
-						"navelVisible": true
-					}
-				},
 				[
 					"primary",
 					"secondary"
@@ -319,14 +260,8 @@
 		},
 		"sbq/infused/belly.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/scaly.png",
+			"processingDirectives" : "?replace;00adba=7d0a01",
 			"remapDirectives": [
-				"?replace;00adba=bc1002",
-				{
-					"00adba": "7d0a01",
-					"check": {
-						"navelVisible": true
-					}
-				},
 				[
 					"primary",
 					"secondary"
@@ -335,14 +270,8 @@
 		},
 		"sbq/infused/belly_noNavel.png": {
 			"sourceImage": "/humanoid/any/sbqModules/belly/scaly.png",
+			"processingDirectives" : "?replace;00adba=bc1002",
 			"remapDirectives": [
-				"?replace;00adba=eb3629",
-				{
-					"00adba": "7d0a01",
-					"check": {
-						"navelVisible": true
-					}
-				},
 				[
 					"primary",
 					"secondary"
