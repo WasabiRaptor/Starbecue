@@ -18,7 +18,6 @@ let paths = [
 	"./npcs/sbq/Fevix/Sandy/npc.dialogue",
 	"./npcs/sbq/Ferrilata_/Ferri/npc.dialogue",
 	"./npcs/sbq/AkariKaen/Akari/npc.dialogue",
-	"./npcs/sbq/Blueninja/Blue/npc.dialogue",
 ]
 
 for (let [_, path] of paths.entries()) {

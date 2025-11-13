@@ -1,6 +1,13 @@
 
 assets.patch("/sbq.config", "/sbq_config_patch.lua")
 
+local assetSourcesByName = {}
+for k, v in pairs(assets.sourcePaths(true)) do
+	if v.name then
+		assetSourcesByName[v.name] = v
+	end
+end
+
 local sbqStrings = assets.json("/sbqStrings.config")
 
 for _, path in ipairs(assets.byExtension("monstertype")) do
@@ -129,6 +136,37 @@ end
 local guardTiers = jarray()
 table.insert(tenantCatalogue, { ":random", { "sbqTenant_random" } })
 table.insert(tenantCatalogue, { ":randomGuard", guardTiers })
+
+for _, path in ipairs(assets.scan("", ".sbqConditionalPatch")) do
+	local config = assets.json(path)
+	local conditions = config.sbqPatchConditions
+	if config[1] then
+		conditions = config[1].sbqPatchConditions
+	end
+	local function doPatch()
+		sb.logInfo("[SBQ] Applying conditional patch %s", path)
+		assets.patch(path:gsub("%.sbqConditionalPatch.*", ""), path)
+	end
+	if conditions.mode == "all" then
+		local fail = false
+		for _, v in ipairs(conditions.name) do
+			if not assetSourcesByName[v] then
+				fail = true
+				break
+			end
+		end
+		if not fail then
+			doPatch()
+		end
+	else
+		for _, v in ipairs(conditions.name) do
+			if assetSourcesByName[v] then
+				doPatch()
+				break
+			end
+		end
+	end
+end
 
 local speciesFiles = assets.byExtension("species")
 for _, path in ipairs(speciesFiles) do
