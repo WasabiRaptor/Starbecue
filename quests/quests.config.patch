@@ -1,67 +1,24 @@
-[
-	{"op":"merge","path":"","value":{
-		"pronouns":{
-			"sbqIt":{
-				"subject" : "it",
-				"object" : "it",
-				"possessiveDet" : "its",
-				"possessive" : "its",
-				"reflexive" : "itself",
-				"capitalSubject" : "it",
-				"capitalObject" : "it",
-				"capitalPossessiveDet" : "its",
-				"capitalPossessive" : "its",
-				"capitalReflexive" : "itself",
-				"copulative" : "it's",
-				"copulativePast" : "it has"
-			}
-		},
-		"pronounGenders" : {
-			"sbq/LokiVulpix/Auri": { "male": "female", "female": "female" },
-			"sbq/LokiVulpix/Loki": { "male": "female", "female": "female" },
-			"sbq/Auroria/Auroria": { "male": "neutral", "female": "neutral" },
-			"sbq/ambi_sykhar/Ambi": { "male": "female", "female": "female" },
-			"sbq/Zygahedron/Zevi": { "male": "male", "female": "female" },
-			"sbq/Fevix/Sandy": { "male": "female", "female": "female" },
-			"sbq/LokiVulpix/Socks": { "male": "sbqIt", "female": "female" },
-			"sbq/vaporeonGiant": { "male": "neutral", "female": "neutral" },
-			"sbq/FFWizard/Helena": { "male": "female", "female": "female" },
-			"sbq/FFWizard/hellhound": { "male": "neutral", "female": "neutral" },
-			"sbq/LokiVulpix/Clover": { "male": "neutral", "female": "neutral" },
-			"sbq/Xeronious/Batty": { "male": "neutral", "female": "neutral" },
-			"sbq/Ferrilata_/Ferri": { "male": "male", "female": "male" },
-			"sbq/AkariKaen/Akari": { "male": "male", "female": "male" },
-			"sbq/slime": { "male": "neutral", "female": "neutral" },
-			"sbq/Xeronious/Kaiju": { "male": "neutral", "female": "neutral" },
-			"sbq/IcyVixen/Fray": { "male": "male", "female": "male" },
-			"sbq/LakotaAmitola/ziellekDragon": { "male": "male", "female": "female" },
-			"sbq/LakotaAmitola/Lakota": { "male": "male", "female": "female" },
-			"sbq/Bestethan/Dex": { "male": "male", "female": "female" },
-			"sbq/naga": { "male": "male", "female": "female" }
-		},
-		"initialquests" : {
-			"sbq/LokiVulpix/Auri" : ["protectorate"],
-			"sbq/LokiVulpix/Loki" : ["protectorate"],
-			"sbq/Auroria/Auroria" : ["protectorate"],
-			"sbq/ambi_sykhar/Ambi" : ["protectorate"],
-			"sbq/Zygahedron/Zevi" : ["protectorate"],
-			"sbq/Fevix/Sandy" : ["protectorate"],
-			"sbq/LokiVulpix/Socks" : ["protectorate"],
-			"sbq/vaporeonGiant" : ["protectorate"],
-			"sbq/FFWizard/Helena" : ["protectorate"],
-			"sbq/FFWizard/hellhound" : ["protectorate"],
-			"sbq/LokiVulpix/Clover" : ["protectorate"],
-			"sbq/Xeronious/Batty" : ["protectorate"],
-			"sbq/Ferrilata_/Ferri" : ["protectorate"],
-			"sbq/AkariKaen/Akari" : ["protectorate"],
-			"sbq/slime" : ["protectorate"],
-			"sbq/Xeronious/Kaiju" : ["protectorate"],
-			"sbq/IcyVixen/Fray" : ["protectorate"],
-			"sbq/LakotaAmitola/Lakota" : ["protectorate"],
-			"sbq/LakotaAmitola/ziellekDragon" : ["protectorate"],
-			"sbq/Bestethan/Dex" : ["protectorate"],
-			"sbq/naga" : ["protectorate"]
+{
+	"pronouns":{
+		"sbqIt":{
+			"subject" : "it",
+			"object" : "it",
+			"possessiveDet" : "its",
+			"possessive" : "its",
+			"reflexive" : "itself",
+			"capitalSubject" : "it",
+			"capitalObject" : "it",
+			"capitalPossessiveDet" : "its",
+			"capitalPossessive" : "its",
+			"capitalReflexive" : "itself",
+			"copulative" : "it's",
+			"copulativePast" : "it has"
 		}
-	}}
-
-]
+	},
+	"pronounGenders" : {
+		"sbq/Ferrilata_/Ferri": { "male": "male", "female": "male" }
+	},
+	"initialquests" : {
+		"sbq/Ferrilata_/Ferri" : ["protectorate"]
+	}
+}
