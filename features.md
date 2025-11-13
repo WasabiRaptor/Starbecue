@@ -126,7 +126,6 @@ Most of these characters cannot be played as, however can be spawned in via the 
 - Helena Hellhound (Pred/Prey) FFWizard
 - Sandy Floatporeon (Pred/Prey) Fevix
 - Batty (Pred/Prey) Xeronious
-- Blue the Synth (Pred/Prey) Blueninja (requires [Synth](https://steamcommunity.com/sharedfiles/filedetails/?id=2207290706))
 - Akari Kaen (Pred/Prey)
 - Ferri Catfox (Pred/Prey) Ferrilata_
 - Xeronious (Pred)

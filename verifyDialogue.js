@@ -19,7 +19,6 @@ let paths = [
 	["./npcs/sbq/Fevix/Sandy/npc.dialogueTree", "./npcs/sbq/Fevix/Sandy/npc.dialogue", "./npcs/sbq/dialogue/flirty.dialogue"],
 	["./npcs/sbq/Ferrilata_/Ferri/npc.dialogueTree", "./npcs/sbq/Ferrilata_/Ferri/npc.dialogue", "./npcs/sbq/dialogue/default.dialogue"],
 	["./npcs/sbq/AkariKaen/Akari/npc.dialogueTree", "./npcs/sbq/AkariKaen/Akari/npc.dialogue", "./npcs/sbq/dialogue/default.dialogue"],
-	["./npcs/sbq/Blueninja/Blue/npc.dialogueTree", "./npcs/sbq/Blueninja/Blue/npc.dialogue", "./npcs/sbq/dialogue/default.dialogue"],
 	["./npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogueTree", "./npcs/sbq/DreccanOfPaws/Dreccan/npc.dialogue", "./npcs/sbq/dialogue/default.dialogue"],
 	["./npcs/sbq/MallowGator/Izzy/npc.dialogueTree", "./npcs/sbq/MallowGator/Izzy/npc.dialogue", "./npcs/sbq/dialogue/default.dialogue"],
 	["./npcs/sbq/Razuel/Razuel/npc.dialogueTree", "./npcs/sbq/Razuel/Razuel/npc.dialogue", "./npcs/sbq/dialogue/default.dialogue"],
