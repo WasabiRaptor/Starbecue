@@ -106,6 +106,7 @@ end
 
 
 function uninit()
+	effect.setToolUsageSuppressed(false)
 	if not broken then
 		status.setStatusProperty(effect.name(), egg)
 	end
