@@ -1,9 +1,10 @@
 local old = {
-    init = init
+	init = init
 }
+local convert
 function init()
-    old.init()
-    sbq.rollConvert()
+	old.init()
+	sbq.rollConvert()
 	if not convert then
 		if npc.getHumanoidParameter("sbqEnabled") and not config.getParameter("sbqNPC") then
 			npc.setHumanoidParameter("sbqEnabled")

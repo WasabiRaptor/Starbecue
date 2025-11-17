@@ -20,6 +20,10 @@ function patch(config, path)
 	config.humanoidParameters = config.humanoidParameters or {}
 	if config.scriptConfig.sbqNPC then
 		config.humanoidParameters.sbqEnabled = true
+	else
+		if config.scriptConfig.sbqConvertType then
+			addScript(config, { "scripts" }, "/scripts/npc/SBQ_npc_random.lua")
+		end
 	end
 
 	if config.scriptConfig.sbqSettingsConfig then
