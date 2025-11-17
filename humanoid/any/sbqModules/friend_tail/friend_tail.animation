@@ -1,0 +1,178 @@
+{
+	"globalTagDefaults" : {
+		"tailFrameset" : "/humanoid/any/sbqModules/friend_tail/body/default.png",
+		"tailHeadFrameset" : "/humanoid/any/sbqModules/friend_tail/head/maw.png",
+
+		"tailSize" : "0",
+		"tailInterpolateSize" : "0"
+
+	},
+	"animatedParts" : {
+		"stateTypes" : {
+			"tailState" : {
+				"default": "idle",
+				"priority" : 2,
+				"states" : {
+					"idle": { "frames": 8, "cycle": 2, "mode": "loop", "properties" : {
+
+					}, "frameProperties" : {
+
+					} },
+					"s_back_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_back_hold" },
+					"s_front_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_front_hold" },
+					"s_up_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_up_hold" },
+					"s_down_press": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "s_down_hold" },
+
+					"s_back_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_front_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_up_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+					"s_down_hold": { "frames": 1, "cycle": 0.2, "mode": "loop" },
+
+					"s_back_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_front_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_up_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" },
+					"s_down_release": { "frames": 2, "cycle": 0.4, "mode": "transition", "transition" : "idle" }
+				}
+			},
+			"tailExpandState" : {
+				"priority" : 3,
+				"default": "idle",
+				"states" : {
+					"expand": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle" },
+					"eat": { "frames": 8, "cycle": 1.5, "mode": "transition", "transition" : "idle"},
+					"escape": { "frames": 8, "cycle": 1, "mode": "transition", "transition" : "idle"},
+					"idle": { "frames": 1, "cycle":0, "mode":"end" }
+				}
+			}
+		},
+		"parts" : {
+			"tail" : {
+				"properties": {
+					"centered": true,
+					"zLevel": 8.10,
+					"offset" : [-1.3125,-1.0625],
+
+					"anchorPart" : "body",
+					"transformationGroups": ["movementOffset", "tailOffset"],
+					"processingDirectives" : "<bodyDirectives>",
+					"interact" : [-1,0],
+					"fullbright": false
+				},
+				"partStates": {
+					"body": {
+						"idle": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"walk": { "properties": { "image": "<tailFrameset>:<tailSize>-<body_state>.<body_frame>" } },
+						"run": { "properties": { "image": "<tailFrameset>:<tailSize>-run.<body_frame>" } },
+						"runbackwards" : "run",
+						"jump": "walk",
+						"fall": "walk",
+						"duck": "idle",
+						"swim": "idle",
+						"swimIdle" : "idle",
+						"sit" : "idle",
+						"lay" : "idle"
+					},
+					"tailState": {
+						"s_front": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailState_state>.<tailState_frame>" } },
+						"s_front_press" : "s_front",
+						"s_front_hold" : "s_front",
+						"s_front_release" : "s_front",
+						"s_back" : "s_front",
+						"s_back_press" : "s_front",
+						"s_back_hold" : "s_front",
+						"s_back_release" : "s_front",
+						"s_up" : "s_front",
+						"s_up_press" : "s_front",
+						"s_up_hold" : "s_front",
+						"s_up_release" : "s_front",
+						"s_down" : "s_front",
+						"s_down_press" : "s_front",
+						"s_down_hold" : "s_front",
+						"s_down_release" : "s_front"
+					},
+					"tailExpandState" : {
+						"expand": { "properties": { "image": "<tailFrameset>:<tailInterpolateSize>-<tailExpandState_state>" } },
+						"eat": { "properties": { "image": "<tailFrameset>:<tailSize>-<tailExpandState_state>.<tailExpandState_frame>" } }
+					},
+					"portraitMode" : {
+						"head": { "properties": {} },
+						"bust" : "head"
+					}
+				}
+			},
+			"tailHead" : {
+				"properties" : {
+					"centered": true,
+					"anchorPart" : "tail",
+					"transformationGroups": [],
+
+					"zLevel": 8.11,
+					"offset" : [-0.5,2],
+					"image" : "<tailHeadFrameset>"
+				},
+				"partStates" : {
+					"tailState" : {
+						"idle" : {"properties":{
+						},"frameProperties" : {
+							"transforms" : [
+								[["reset"], ["translate", [0,0]]],
+								[["reset"], ["translate", [-0.125,0]]],
+								[["reset"], ["translate", [-0.25,0.125]]],
+								[["reset"], ["translate", [-0.375,0.125]]],
+								[["reset"], ["translate", [-0.5,0.25]]],
+								[["reset"], ["translate", [-0.375,0.25]]],
+								[["reset"], ["translate", [-0.25,0.125]]],
+								[["reset"], ["translate", [-0.125,0.125]]]
+							]
+						}}
+					},
+					"bodyHighPriority" : {
+						"walk" : {"properties":{
+						},"frameProperties" : {
+							"transforms" : [
+								[["reset"], ["translate", [0,0]]],
+								[["reset"], ["translate", [-0.125,0]]],
+								[["reset"], ["translate", [-0.25,0.125]]],
+								[["reset"], ["translate", [-0.375,0.125]]],
+								[["reset"], ["translate", [-0.5,0.25]]],
+								[["reset"], ["translate", [-0.375,0.25]]],
+								[["reset"], ["translate", [-0.25,0.125]]],
+								[["reset"], ["translate", [-0.125,0.125]]]
+
+							]
+						}},
+						"run" : "walk",
+						"runbackwards" : "walk",
+						"jump" : {"properties":{
+						},"frameProperties" : {
+							"transforms" : [
+								[["reset"], ["translate", [0,0]]],
+								[["reset"], ["translate", [-0.125,0]]],
+								[["reset"], ["translate", [-0.25,0.125]]],
+								[["reset"], ["translate", [-0.375,0.125]]]
+							]
+						}},
+						"fall" : {"properties":{
+						},"frameProperties" : {
+							"transforms" : [
+								[["reset"], ["translate", [-0.5,0.25]]],
+								[["reset"], ["translate", [-0.375,0.25]]],
+								[["reset"], ["translate", [-0.25,0.125]]],
+								[["reset"], ["translate", [-0.125,0.125]]]
+							]
+						}}
+					}
+				}
+			}
+		}
+	},
+	"transformationGroups" : {
+		"tailOffset": {"interpolated": false}
+	},
+	"sounds" : {
+
+	},
+	"particleEmitters" : {
+
+	}
+}

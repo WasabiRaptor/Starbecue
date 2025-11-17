@@ -469,6 +469,26 @@
 						}
 					}
 				},
+				"friend": {
+					"includes": ["/humanoid/any/sbqModules/friend_tail/sbqModule.config"],
+					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"],
+					"infuseModules" : {
+						"tail" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/friend_tail/infused.animation"],
+								"infuseTags" : {
+									"tailInfusedFrameset" : "<humanoidPath>sbq/infused/friend_tail/body.png",
+									"tailHeadInfusedFrameset" : "<humanoidPath>sbq/infused/friend_tail/head.png",
+									"tailInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"tail_infused",
+									"tailHead_infused"
+								]
+							}
+						}
+					}
+				},
 				"flareon": {
 					"includes": ["/humanoid/any/sbqModules/flareon_tail.sbqModule.config"],
 					"animations" : ["/humanoid/any/sbqModules/humanoidBase/tail.animation"]
@@ -569,6 +589,7 @@
 				"default",
 				"infused",
 				"nickit",
+				"friend",
 				"naga"
 			],
 			"tailInfuseSelect" : [
@@ -576,6 +597,7 @@
 				"default",
 				"-",
 				"nickit",
+				"friend",
 				"naga"
 			],
 			"transgender" : [
