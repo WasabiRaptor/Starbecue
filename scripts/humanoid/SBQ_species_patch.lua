@@ -27,7 +27,9 @@ function patch(config, path)
 			sbqSettingsConfig = {}
 		})
 	end
-	config.buildScripts = config.buildScripts or { "/humanoid/opensb/build.lua" }
+	if not config.buildScripts then
+		config.buildScripts = { "/humanoid/opensb/build.lua" }
+	end
 	addScript(config, { "buildScripts" }, "/scripts/humanoid/SBQ_humanoid_build.lua")
 
 	config.sbqSettingsConfig = mergeIncludes(config.sbqSettingsConfig or {})
