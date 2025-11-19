@@ -197,7 +197,7 @@ function dialogueBox.refresh(path, dialogueTree, dialogueTreeTop)
 		canvas:clear()
 		local portrait = world.entityPortrait(results.source, results.entityPortrait)
 		if portrait then
-			canvas:drawDrawables(drawable.scaleAll(portrait, { 4, 4 }), vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), { 0, 6 * 4 }))
+			canvas:drawJsonDrawables(drawable.scaleAll(portrait, { 4, 4 }), vec2.sub(vec2.div(_ENV.entityPortraitCanvas.size, 2), { 0, 6 * 4 }))
 		end
 	else
 		_ENV.imagePortrait:setVisible(false)

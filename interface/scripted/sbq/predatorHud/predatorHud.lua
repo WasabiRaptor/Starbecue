@@ -208,7 +208,7 @@ function addCapturedPortraitSlot(occupant)
 	if portrait then
 		local bounds = drawable.boundBoxAll(portrait, true)
 		local center = rect.center(bounds)
-		canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+		canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 	end
 
 end
@@ -276,9 +276,9 @@ function sbq.refreshPortrait(entityId)
 		if world.entityType(entityId) == "monster" then
 			local bounds = drawable.boundBoxAll(portrait, true)
 			local center = rect.center(bounds)
-			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+			canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 		else
-			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), { 0, 6 }))
+			canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), { 0, 6 }))
 		end
 	end
 end
