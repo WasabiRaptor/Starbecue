@@ -206,11 +206,8 @@ function addCapturedPortraitSlot(occupant)
 	canvas:clear()
 	local portrait = root.npcPortrait("bust", occupant.npcArgs.npcSpecies, occupant.npcArgs.npcType, occupant.npcArgs.npcLevel or 1, occupant.npcArgs.npcSeed, occupant.npcArgs.npcParam)
 	if portrait then
-		local bounds = drawable.boundBoxAll(portrait, true)
-		local center = rect.center(bounds)
-		canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+		canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), { 0, 6 }))
 	end
-
 end
 
 function addEmptySlot(slot, template)
