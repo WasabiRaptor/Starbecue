@@ -232,7 +232,7 @@ function sbq.refreshDeedPage()
 		if portrait then
 			local bounds = drawable.boundBoxAll(portrait, true)
 			local center = rect.center(bounds)
-			canvas:drawDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
+			canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 		end
 		function settings:onClick()
 			local id = world.uniqueEntityId(tenant.uniqueId)

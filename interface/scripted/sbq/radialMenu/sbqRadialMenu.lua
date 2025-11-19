@@ -149,7 +149,7 @@ function update( dt )
 			if type(options[i].icon) == "table" then
 				local bounds = drawable.boundBoxAll(options[i].icon, true)
 				local center = rect.center(bounds)
-				canvas:drawDrawables(options[i].icon, vec2.sub(iconPos, center))
+				canvas:drawJsonDrawables(options[i].icon, vec2.sub(iconPos, center))
 				if iconPos[2] < 100 then
 					textOffset = bounds[2] - center[2] - 3
 				else
@@ -184,7 +184,7 @@ function update( dt )
 		end
 		canvas:drawTriangles(triangles, color)
 		if type(segment.description) == "table" then
-			canvas:drawDrawables(segment.description, {100,100})
+			canvas:drawJsonDrawables(segment.description, {100,100})
 		else
 			drawShadowText(segment.description, {100,100}, segment.descColor or segment.textColor or {255,255,255}, radius*2 )
 		end
