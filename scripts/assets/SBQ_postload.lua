@@ -234,7 +234,10 @@ local function setupSpecies(path)
 			end
 
 			assets.add(imagePath, assets.image(newImage.sourceImage .. (newImage.processingDirectives or "")))
-			assets.add(framesPath, assets.bytes(assets.frames(newImage.sourceImage).file))
+			local frames = assets.frames(newImage.sourceImage)
+			if frames then
+				assets.add(framesPath, assets.bytes(frames.file))
+			end
 			for _, v in ipairs(newImage.patches or {}) do
 				assets.patch(imagePath, v)
 			end
