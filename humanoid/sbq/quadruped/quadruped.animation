@@ -951,10 +951,287 @@
 				}
 			},
 
-			"backArm": {
+			"forelegFront": {
 				"properties": {
 					"centered": true,
 					"zLevel": 11,
+					"transformationGroups": [],
+					"anchorPart": "anchor",
+					"processingDirectives" : "<bodyDirectives>"
+				},
+				"partStates": {
+					"body": {
+						"idle": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<personalityIdle>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<personalityIdle>" } },
+						"duck": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<body_state>.<body_frame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<body_state>.<body_frame>" } },
+						"sit" : "duck",
+						"lay" : "duck",
+						"walk" : "duck",
+						"run" : { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:run.<body_frame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:run.<body_frame>" } },
+						"runbackwards" : "run",
+						"jump" : "duck",
+						"fall" : "duck",
+						"swim" : "duck",
+						"swimIdle" : "duck"
+					},
+					"bodyDance" : {
+						"dance": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"idle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"idle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"idle.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"idle.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"idle.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"walk.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"walk.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"run.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"run.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"hidden.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"jump.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"jump.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"jump.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"jump.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"fall.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"fall.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"fall.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"fall.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"swimIdle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swimIdle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"swim.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swim.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swim.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swim.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swim.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swim.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"swim.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"sit.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"lay.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						"idleMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"duckMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+
+						// doubt they'll see use but you never know
+						"climb.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
+						"climb.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } }
+					},
+					"frontArmDance" : {
+						"dance": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"idle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"idle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"idle.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"idle.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"idle.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"walk.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"walk.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"run.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"run.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"hidden.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"jump.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"jump.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"jump.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"jump.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"fall.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"fall.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"fall.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"fall.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"swimIdle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swimIdle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"swim.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swim.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swim.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swim.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swim.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swim.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"swim.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"sit.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"lay.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						"idleMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"duckMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+
+						// doubt they'll see use but you never know
+						"climb.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
+						"climb.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } }
+					},
+
+					"portraitMode" : {
+						"head": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<personalityIdle><bodyPortraitMask>",
+							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<personalityIdle><bodyPortraitMask>" } },
+						"bust" : "head"
+					}
+				}
+			},
+			"forelegFrontCosmetic" : {
+				"properties" : {
+					"centered": true,
+					"anchorPart" : "forelegFront",
+					"zLevel" : 12
+				}
+			},
+
+			"backArm": {
+				"properties": {
+					"centered": true,
+					"zLevel": 13,
 					"transformationGroups": [],
 					"anchorPart" : "head",
 					"processingDirectives" : "<bodyDirectives>",
@@ -1113,7 +1390,7 @@
 			"backHandItem":{
 				"properties" : {
 					"centered": true,
-					"zLevel": 11,
+					"zLevel": 13,
 					"anchorPart" : "backArm",
 					"transformationGroups": ["backHandItemRotation"]
 				}
@@ -1121,13 +1398,13 @@
 
 			"emoteBack": {
 				"properties": {
-					"zLevel": 12
+					"zLevel": 14
 				}
 			},
 			"head": {
 				"properties": {
 					"centered": true,
-					"zLevel": 13,
+					"zLevel": 15,
 					"transformationGroups": ["headRotation", "headOffset"],
 					"anchorPart" : "body",
 					"processingDirectives" : "<bodyDirectives>",
@@ -1158,13 +1435,13 @@
 			},
 			"emote": {
 				"properties": {
-					"zLevel": 14
+					"zLevel": 16
 				}
 			},
 			"hair": {
 				"properties": {
 					"centered": true,
-					"zLevel": 15,
+					"zLevel": 17,
 					"anchorPart": "head",
 					"processingDirectives" : "<hairDirectives><helmetMaskDirectives>"
 				},
@@ -1193,7 +1470,7 @@
 			"facialHair": {
 				"properties": {
 					"centered": true,
-					"zLevel": 16,
+					"zLevel": 18,
 					"anchorPart": "head",
 					"processingDirectives" : "<facialHairDirectives><helmetMaskDirectives>"
 				},
@@ -1222,7 +1499,7 @@
 			"facialMask": {
 				"properties": {
 					"centered": true,
-					"zLevel": 17,
+					"zLevel": 19,
 					"anchorPart": "head",
 					"processingDirectives" : "<facialMaskDirectives><helmetMaskDirectives>"
 				},
@@ -1250,21 +1527,21 @@
 			},
 			"emoteFront": {
 				"properties": {
-					"zLevel": 18
+					"zLevel": 20
 				}
 			},
 			"headCosmetic" : { // this is merely a part for the generated cosmetic parts to anchor to
 				"properties" : {
 					"centered": true,
 					"anchorPart" : "head",
-					"zLevel" : 19
+					"zLevel" : 21
 				}
 			},
 
 			"frontArm": {
 				"properties": {
 					"centered": true,
-					"zLevel": 20,
+					"zLevel": 22,
 					"transformationGroups": [],
 					"anchorPart" : "head",
 					"processingDirectives" : "<bodyDirectives>",
@@ -1424,286 +1701,9 @@
 			"frontHandItem":{
 				"properties" : {
 					"centered": true,
-					"zLevel": 20,
+					"zLevel": 22,
 					"anchorPart" : "frontArm",
 					"transformationGroups": ["frontHandItemRotation"]
-				}
-			},
-
-			"forelegFront": {
-				"properties": {
-					"centered": true,
-					"zLevel": 21,
-					"transformationGroups": [],
-					"anchorPart": "anchor",
-					"processingDirectives" : "<bodyDirectives>"
-				},
-				"partStates": {
-					"body": {
-						"idle": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<personalityIdle>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<personalityIdle>", "zLevel": 11.78 } },
-						"duck": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<body_state>.<body_frame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<body_state>.<body_frame>" } },
-						"sit" : "duck",
-						"lay" : "duck",
-						"walk" : "duck",
-						"run" : { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:run.<body_frame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:run.<body_frame>" } },
-						"runbackwards" : "run",
-						"jump" : "duck",
-						"fall" : "duck",
-						"swim" : "duck",
-						"swimIdle" : "duck"
-					},
-					"bodyDance" : {
-						"dance": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"idle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-
-						"walk.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"walk.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"run.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"run.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"hidden.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"jump.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"jump.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"jump.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"jump.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"fall.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"fall.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"fall.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"fall.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"swimIdle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swimIdle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"swim.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swim.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swim.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swim.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swim.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swim.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"swim.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						"sit.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"lay.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-
-						"idleMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"duckMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-
-						// doubt they'll see use but you never know
-						"climb.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } },
-						"climb.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<bodyDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<bodyDanceFrame>", "transformationGroups": [] } }
-					},
-					"frontArmDance" : {
-						"dance": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"idle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"idle.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-
-						"walk.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"walk.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"run.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"run.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"hidden.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"jump.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"jump.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"jump.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"jump.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"fall.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"fall.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"fall.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"fall.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"swimIdle.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swimIdle.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"swim.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swim.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swim.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swim.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swim.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swim.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"swim.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						"sit.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-						"lay.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [], "zLevel": 11.78 } },
-
-						"idleMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"duckMelee": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-
-						// doubt they'll see use but you never know
-						"climb.1": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.2": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.3": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.4": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.5": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.6": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.7": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } },
-						"climb.8": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<frontArmDanceFrame>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<frontArmDanceFrame>", "transformationGroups": [] } }
-					},
-
-					"portraitMode" : {
-						"head": { "properties": { "image": "<humanoidPath><forelegFrontFrameset>:<personalityIdle><bodyPortraitMask>",
-							"flippedImage": "<humanoidPath><forelegFrontFlippedFrameset>:<personalityIdle><bodyPortraitMask>", "zLevel": 11.78 } },
-						"bust" : "head"
-					}
-				}
-			},
-			"forelegFrontCosmetic" : {
-				"properties" : {
-					"centered": true,
-					"anchorPart" : "forelegFront",
-					"zLevel" : 22
 				}
 			},
 
