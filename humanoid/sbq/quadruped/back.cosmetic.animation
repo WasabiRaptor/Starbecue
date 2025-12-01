@@ -2,7 +2,7 @@
 	"globalTagDefaults" : {
 		"backCosmetic<slot>QuadrupedFrameset" : "",
 		"backCosmetic<slot>QuadrupedFlippedFrameset" : "",
-		"backCosmetic<slot>Directives" : ""
+		"cosmetic<slot>Directives" : ""
 	},
 	"animatedParts" : {
 		"parts" : {
@@ -12,7 +12,7 @@
 					"zLevel": 5.0,
 					"transformationGroups": ["backCosmetic<slot>Rotation"],
 					"anchorPart" : "backCosmetic",
-					"processingDirectives" : "<backCosmetic<slot>Directives>"
+					"processingDirectives" : "<cosmetic<slot>Directives>"
 				},
 				"partStates": {
 					"body": {
