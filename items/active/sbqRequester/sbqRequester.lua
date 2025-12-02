@@ -196,7 +196,7 @@ end
 function _RadialMenu:openRadialMenu(overrides)
 	player.interact("ScriptPane", sb.jsonMerge(
 		{
-			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			baseConfig = "/interface/wr/radialMenu/radialMenu.config",
 			default = {
 				onDown = true,
 				messageTarget = player.id(),
