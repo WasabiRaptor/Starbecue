@@ -1,22 +1,22 @@
 {
 	"sbqConfig" : {
 		"animations" : [
-			"/humanoid/sbq/quadruped/base.animation"
+			"/humanoid/wr/quadruped/base.animation"
 		],
 		"includes": [
 			"/humanoid/any/sbqModules/base/sbqModule.config",
-			"/humanoid/sbq/quadruped/grab/sbqModule.config"
+			"/humanoid/wr/quadruped/grab/sbqModule.config"
 		],
 		"modules" : {
 			"belly" : {
 				"default": {
 					"includes": [
-						"/humanoid/sbq/quadruped/belly/sbqModule.config"
+						"/humanoid/wr/quadruped/belly/sbqModule.config"
 					],
 					"infuseModules" : {
 						"belly" : { // infuse slot
 							"default" : { // species
-								"animations" : ["/humanoid/sbq/quadruped/belly/infused.animation"],
+								"animations" : ["/humanoid/wr/quadruped/belly/infused.animation"],
 								"infuseTags" : {
 									"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/bellyQuadruped.png",
 									"bellyInfusedDirectives" : "<directives>"
@@ -36,12 +36,12 @@
 					},
 					"modules" : {
 						"navelVisible":{"false":{
-							"animations":["/humanoid/sbq/quadruped/belly/noNavel.animation"]
+							"animations":["/humanoid/wr/quadruped/belly/noNavel.animation"]
 						}}
 					}
 				},
 				"infused" : {
-					"includes" : ["/humanoid/sbq/quadruped/bellyInfuse/sbqModule.config"]
+					"includes" : ["/humanoid/wr/quadruped/bellyInfuse/sbqModule.config"]
 				}
 			},
 			"cock" : {
@@ -50,7 +50,7 @@
 						"/humanoid/any/sbqModules/cock/sbqModule.config"
 						// "/humanoid/any/sbqModules/humanoidBase/jackoff.sbqModule.config"
 					],
-					"animations" : ["/humanoid/sbq/quadruped/cock.animation"],
+					"animations" : ["/humanoid/wr/quadruped/cock.animation"],
 					"infuseModules" : {
 						"cock" : { // infuse slot
 							"default" : { // species
@@ -68,7 +68,7 @@
 				},
 				"infused": {
 					"includes" : ["/humanoid/any/sbqModules/cockInfuse/sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/cock.animation"]
+					"animations" : ["/humanoid/wr/quadruped/cock.animation"]
 				}
 			},
 			"balls" : {
@@ -76,7 +76,7 @@
 					"includes": [
 						"/humanoid/any/sbqModules/balls/sbqModule.config"
 					],
-					"animations" : ["/humanoid/sbq/quadruped/balls.animation"],
+					"animations" : ["/humanoid/wr/quadruped/balls.animation"],
 					"infuseModules" : {
 						"balls" : { // infuse slot
 							"default" : { // species
@@ -126,7 +126,7 @@
 				},
 				"infused": {
 					"includes" : ["/humanoid/any/sbqModules/ballsInfuse/sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/balls.animation"]
+					"animations" : ["/humanoid/wr/quadruped/balls.animation"]
 				}
 			},
 			"breasts" : {
@@ -135,7 +135,7 @@
 						"/humanoid/any/sbqModules/breasts/sbqModule.config"
 						// "/humanoid/any/sbqModules/humanoidBase/squishBreasts.sbqModule.config"
 					],
-					"animations" : ["/humanoid/sbq/quadruped/breasts.animation"],
+					"animations" : ["/humanoid/wr/quadruped/breasts.animation"],
 					"infuseModules" : {
 						"breasts" : {// infuse slot
 							"default" : { // species
@@ -215,13 +215,13 @@
 				},
 				"infused": {
 					"includes" : ["/humanoid/any/sbqModules/breastsInfuse/sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/breasts.animation"]
+					"animations" : ["/humanoid/wr/quadruped/breasts.animation"]
 				}
 			},
 			"pussy" : {
 				"default": {
 					"includes" : [
-						"/humanoid/sbq/quadruped/pussy/sbqModule.config"
+						"/humanoid/wr/quadruped/pussy/sbqModule.config"
 						// "/humanoid/any/sbqModules/humanoidBase/fingerPussy.sbqModule.config"
 					],
 					"infuseModules" : {
@@ -240,17 +240,17 @@
 					}
 				},
 				"infused": {
-					"includes" : ["/humanoid/sbq/quadruped/pussyInfuse/sbqModule.config"]
+					"includes" : ["/humanoid/wr/quadruped/pussyInfuse/sbqModule.config"]
 				}
 			},
 			"tail": {
 				"infused": {
 					"includes" : ["/humanoid/any/sbqModules/tailInfuse/sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/tail.animation"]
+					"animations" : ["/humanoid/wr/quadruped/tail.animation"]
 				},
 				"nickit": {
 					"includes": ["/humanoid/any/sbqModules/nickit_tail/sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/tail.animation"],
+					"animations" : ["/humanoid/wr/quadruped/tail.animation"],
 					"infuseModules" : {
 						"tail" : { // infuse slot
 							"default" : { // species
@@ -268,15 +268,15 @@
 				},
 				"flareon": {
 					"includes": ["/humanoid/any/sbqModules/flareon_tail.sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/tail.animation"]
+					"animations" : ["/humanoid/wr/quadruped/tail.animation"]
 				},
 				"vaporeon": {
 					"includes": ["/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/tail.animation"]
+					"animations" : ["/humanoid/wr/quadruped/tail.animation"]
 				},
 				"luxio": {
 					"includes": ["/humanoid/any/sbqModules/luxio_tail.sbqModule.config"],
-					"animations" : ["/humanoid/sbq/quadruped/tail.animation"]
+					"animations" : ["/humanoid/wr/quadruped/tail.animation"]
 				}
 			}
 		}
