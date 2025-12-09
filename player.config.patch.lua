@@ -1,8 +1,5 @@
 function patch(config)
 	config = sb.jsonMerge(config, {
-		defaultCodexes = {
-			["sbq/Ferrilata_/Ferri"] = { "protectorate1", "protectorate2" }
-		},
 		statusControllerSettings = {
 			stats = {
 				sbqLustScriptMax = {

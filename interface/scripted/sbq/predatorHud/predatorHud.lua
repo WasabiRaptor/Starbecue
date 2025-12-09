@@ -59,7 +59,7 @@ function init()
 		if not world.entityExists(entityId) then return end
 		local occupant = sbq.Occupants.entityId[tostring(entityId)]
 		if not occupant then return end
-		for k, v in pairs(newData) do
+		for k, v in pairs(newData or {}) do
 			occupant[k] = v
 		end
 		sbq.refreshPortrait(entityId)

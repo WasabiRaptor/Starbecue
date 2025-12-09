@@ -173,7 +173,7 @@ function init()
 			})
 		end
 		player.interact("ScriptPane", {
-			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			baseConfig = "/interface/wr/radialMenu/radialMenu.config",
 			sourceRadius = -1,
 			options = options,
 			default = {
@@ -213,7 +213,7 @@ function init()
 			sourceRadius = -1
 		end
 		player.interact("ScriptPane", {
-			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			baseConfig = "/interface/wr/radialMenu/radialMenu.config",
 			sourceRadius = sourceRadius,
 			options = options,
 			default = {
@@ -245,7 +245,7 @@ function init()
 			sourceRadius = -1
 		end
 		player.interact("ScriptPane", {
-			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			baseConfig = "/interface/wr/radialMenu/radialMenu.config",
 			sourceRadius = sourceRadius,
 			options = sbq.buildActionRequestOptions(id, actionList),
 			default = {
@@ -281,7 +281,7 @@ function init()
 		end
 		player.interact("ScriptPane", {
 			sourceRadius = sourceRadius,
-			baseConfig = "/interface/scripted/sbq/radialMenu/sbqRadialMenu.config",
+			baseConfig = "/interface/wr/radialMenu/radialMenu.config",
 			options = options,
 			default = {
 				onDown = true,

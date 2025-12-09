@@ -2,7 +2,7 @@ local oldIdMap = {
 	["sbq/flareon"] = "wr/flareon",
 	["sbq/vaporeon"] = "wr/vaporeon",
 	["sbq/meowscarada"] = "wr/meowscarada",
-	["sbq/nickit_anthro"] = "wr/nickit",
+	["sbq/nickit_anthro"] = "wr/nickit_anthro",
 }
 function error(diskStore, e)
 	if oldIdMap[diskStore.npcVariant.species:lower()] then

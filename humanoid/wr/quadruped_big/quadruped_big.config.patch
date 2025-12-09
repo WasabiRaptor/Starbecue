@@ -1,0 +1,305 @@
+{
+	"sbqConfig" : {
+		"animations" : [
+			"/humanoid/wr/quadruped_big/base.animation"
+		],
+		"includes": [
+			"/humanoid/any/sbqModules/base/sbqModule.config",
+			"/humanoid/wr/quadruped_big/grab/sbqModule.config"
+		],
+		"modules" : {
+			"belly" : {
+				"default": {
+					"includes": [
+						"/humanoid/wr/quadruped_big/belly/sbqModule.config"
+					],
+					"infuseModules" : {
+						"belly" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/belly/infused.animation"],
+								"infuseTags" : {
+									"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/bellyquadruped_big.png",
+									"bellyInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"belly_infused"
+								]
+							}
+						}
+					}
+				},
+				"infused" : {
+				}
+			},
+			"cock" : {
+				"default": {
+					"includes" : [
+						"/humanoid/wr/quadruped_big/cock/sbqModule.config"
+					],
+					"infuseModules" : {
+						"cock" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/cock/infused.animation"],
+								"infuseTags" : {
+									"cockInfusedFrameset" : "<humanoidPath>sbq/infused/cock.png",
+									"cockInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"cock_infused"
+								]
+							}
+						}
+					}
+				},
+				"infused" : {
+
+				}
+			},
+			"balls" : {
+				"default": {
+					"includes" : [
+						"/humanoid/wr/quadruped_big/balls/sbqModule.config"
+					],
+					"infuseModules" : {
+						"balls" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/balls/infused.animation"],
+								"infuseTags" : {
+									"balls_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/ballsFront.png",
+									"balls_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/ballsBack.png",
+									"balls_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/ballsFront.png",
+									"balls_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/ballsBack.png",
+									"balls_leftInfusedDirectives" : "<directives>",
+									"balls_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"balls_right_infused",
+									"balls_left_infused"
+								]
+							}
+						},
+						"balls_right" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/balls/infused.animation"],
+								"infuseTags" : {
+									"balls_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/ballsFront.png",
+									"balls_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/ballsBack.png",
+									"balls_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"balls_right_infused"
+								]
+							}
+						},
+						"balls_left" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/balls/infused.animation"],
+								"infuseTags" : {
+									"balls_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/ballsFront.png",
+									"balls_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/ballsBack.png",
+									"balls_leftInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"balls_left_infused"
+								]
+							}
+						}
+
+					}
+				},
+				"infused" : {
+
+				}
+			},
+			"breasts" : {
+				"default": {
+					"includes" : [
+						"/humanoid/wr/quadruped_big/breasts/sbqModule.config"
+					],
+					"infuseModules" : {
+						"breasts" : {// infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/breasts/infused.animation"],
+								"infuseTags" : {
+									"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_leftInfusedDirectives" : "<directives>",
+									"breasts_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_right_infused",
+									"breasts_left_infused"
+								]
+							}
+						},
+						"breasts_right" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/breasts/infused.animation"],
+								"infuseTags" : {
+									"breasts_rightFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_rightBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_rightInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_right_infused"
+								]
+							}
+						},
+						"breasts_left" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/breasts/infused.animation"],
+								"infuseTags" : {
+									"breasts_leftFrontInfusedFrameset" : "<humanoidPath>sbq/infused/breastsFront.png",
+									"breasts_leftBackInfusedFrameset" : "<humanoidPath>sbq/infused/breastsBack.png",
+									"breasts_leftInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"breasts_left_infused"
+								]
+							}
+						}
+
+					}
+				},
+				"infused" : {
+
+				}
+			},
+			"pussy" : {
+				"default": {
+					"includes" : [
+						"/humanoid/wr/quadruped_big/pussy/sbqModule.config"
+					],
+					"infuseModules" : {
+						"pussy" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/pussy/infused.animation"],
+								"infuseTags" : {
+									"pussyInfusedFrameset" : "<humanoidPath>sbq/infused/pussy.png",
+									"pussyInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"pussy_infused"
+								]
+							}
+						}
+					}
+				},
+				"infused": {
+
+				}
+			}
+			// "tail": {
+			// 	"nickit": {
+			// 		"includes": ["/humanoid/any/sbqModules/nickit_tail/sbqModule.config"],
+			// 		"animations" : ["/humanoid/wr/quadruped_big/tail.animation"],
+			// 		"infuseModules" : {
+			// 			"tail" : { // infuse slot
+			// 				"default" : { // species
+			// 					"animations" : ["/humanoid/any/sbqModules/nickit_tail/infused.animation"],
+			// 					"infuseTags" : {
+			// 						"tailInfusedFrameset" : "<humanoidPath>sbq/infused/nickit_tail.png",
+			// 						"tailInfusedDirectives" : "<directives>"
+			// 					},
+			// 					"infusedBodyFullbrightParts" : [
+			// 						"tail_infused"
+			// 					]
+			// 				}
+			// 			}
+			// 		}
+			// 	},
+			// 	"flareon": {
+			// 		"includes": ["/humanoid/any/sbqModules/flareon_tail.sbqModule.config"],
+			// 		"animations" : ["/humanoid/wr/quadruped_big/tail.animation"]
+			// 	},
+			// 	"vaporeon": {
+			// 		"includes": ["/humanoid/any/sbqModules/vaporeon_tail.sbqModule.config"],
+			// 		"animations" : ["/humanoid/wr/quadruped_big/tail.animation"]
+			// 	},
+			// 	"luxio": {
+			// 		"includes": ["/humanoid/any/sbqModules/luxio_tail.sbqModule.config"],
+			// 		"animations" : ["/humanoid/wr/quadruped_big/tail.animation"]
+			// 	}
+			// }
+		}
+	},
+	"sbqIdentityAnimationCustom" : {
+	},
+	"sbqSettingsConfig" : {
+		"selectValues" : {
+			"bellySelect" : [
+				"-",
+				"default",
+				"infused"
+			],
+			"bellyInfuseSelect" : [
+				"-",
+				"default",
+				"-"
+			],
+			"cockSelect" : [
+				"disable",
+				"default",
+				"infused"
+			],
+			"cockInfuseSelect" : [
+				"-",
+				"default",
+				"-"
+			],
+			"ballsSelect" : [
+				"disable",
+				"default",
+				"infused"
+			],
+			"ballsInfuseSelect" : [
+				"-",
+				"default",
+				"-"
+			],
+			"pussySelect" : [
+				"disable",
+				"default",
+				"infused"
+			],
+			"pussyInfuseSelect" : [
+				"-",
+				"default",
+				"-"
+			],
+			"breastsSelect" : [
+				"disable",
+				"default",
+				"infused"
+			],
+			"breastsInfuseSelect" : [
+				"-",
+				"default",
+				"-",
+				"double"
+			],
+			"tailSelect" : [
+				"-",
+				"default",
+				"-"
+			],
+			"tailInfuseSelect" : [
+				"-",
+				"default",
+				"-",
+				"nickit",
+				"naga"
+			],
+			"transgender" : [
+				"unchanged",
+				"random",
+				"swap",
+				"male",
+				"female"
+			]
+		}
+	}
+
+}

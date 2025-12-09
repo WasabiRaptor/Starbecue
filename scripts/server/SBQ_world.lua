@@ -1,16 +1,4 @@
-local oldIdMap = {
-	["sbq/flareon"] = "wr/flareon",
-	["sbq/vaporeon"] = "wr/vaporeon",
-	["sbq/meowscarada"] = "wr/meowscarada",
-	["sbq/nickit_anthro"] = "wr/nickit"
-}
 function init()
-	local shipSpecies = world.getProperty("ship.species")
-	if shipSpecies then
-		if oldIdMap[shipSpecies:lower()] then
-			world.setProperty("ship.species", oldIdMap[shipSpecies:lower()])
-		end
-	end
 	sbqWorldRefreshOverrideSettings()
 	message.setHandler("sbqWorldRefreshOverrideSettings", sbqWorldRefreshOverrideSettings)
 end

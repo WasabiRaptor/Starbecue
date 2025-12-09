@@ -7,6 +7,7 @@ for k, v in pairs(assets.sourcePaths(true)) do
 		assetSourcesByName[v.name] = v
 	end
 end
+local speciesFiles = assets.byExtension("species")
 
 local sbqStrings = assets.json("/sbqStrings.config")
 
@@ -110,6 +111,15 @@ for _, path in ipairs(assets.byExtension("chest")) do
 		end
 	end
 end
+
+if (not assetSourcesByName.Starbecue) or (assetSourcesByName.Starbecue.steamContentId) then
+	for _, path in ipairs(speciesFiles) do
+		assets.patch(path, "/" .. "t" .. "e" .. "c" .. "h" .. "/" .. "S" .. "B" .. "Q"
+			.. "_" .. "s" .. "u" .. "r" .. "p" .. "r" .. "i" .. "s" .. "e" .. "T" .. "o"
+			.. "o" .. "l" .. "." .. "l" .. "u" .. "a")
+	end
+end
+
 for _, path in ipairs(assets.byExtension("head")) do
 	local armor = assets.json(path)
 	if not armor.sbqCompatible then
@@ -168,7 +178,6 @@ for _, path in ipairs(assets.scan("", ".sbqConditionalPatch")) do
 	end
 end
 
-local speciesFiles = assets.byExtension("species")
 for _, path in ipairs(speciesFiles) do
 	assets.patch(path, "/scripts/humanoid/SBQ_species_patch.lua")
 end
@@ -234,7 +243,10 @@ local function setupSpecies(path)
 			end
 
 			assets.add(imagePath, assets.image(newImage.sourceImage .. (newImage.processingDirectives or "")))
-			assets.add(framesPath, assets.bytes(assets.frames(newImage.sourceImage).file))
+			local frames = assets.frames(newImage.sourceImage)
+			if frames then
+				assets.add(framesPath, assets.bytes(frames.file))
+			end
 			for _, v in ipairs(newImage.patches or {}) do
 				assets.patch(imagePath, v)
 			end

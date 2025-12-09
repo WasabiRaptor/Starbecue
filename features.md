@@ -1,3 +1,4 @@
+<!-- If you want to read this online with proper text formatting, you can do so at https://github.com/WasabiRaptor/Starbecue/blob/master/features.md -->
 
 # Support Us!
 This is my primary income, and with the current political climate in the USA a person such as myself is going to need all the savings she can get incase shit hits the fan.
