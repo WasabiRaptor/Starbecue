@@ -16,5 +16,3 @@ end
 for k, v in pairs(sbqConfig.infuseTypeData) do
 	sbq.voreConfig.availableInfuseTypes[k] = true
 end
-
-table.insert(cfg.children, #cfg.children, root.assetJson("/interface/scripted/sbq/settings/tabs/preferences.config:contents")[1])

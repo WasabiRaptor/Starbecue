@@ -11,35 +11,144 @@
 		{"type":"panel","style":"flat","expandMode":[1,0],"children":[
 			{"type":"canvas", "id":"titleCanvas", "size":[320,25]}
 		]},
-		{"type":"panel","style":"convex","expandMode":[1,0],"children":[
-			{"mode":"v","expandMode":[2,0]},
-			{"type":"label", "text":":modDescription", "align":"center"},
+		{"type" : "panel", "id" : "mainPrefsPanel", "style" : "flat", "children" : [{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
+			{"mode" : "vertical"},
+			{"type":"panel","style":"convex","expandMode":[1,0],"children":[
+				{"mode":"v","expandMode":[2,0]},
+				{"type":"label", "text":":modDescription", "align":"center"},
+				[
+					{"mode":"h","expandMode":[2,0]},
+					{"type":"button", "id":"allFetishes", "color":"008800", "caption":":allFetishes", "toolTip":":allFetishesTip"},
+					{"type":"button", "id":"noFetishes", "color":"880000", "caption":":noFetishes", "toolTip":":noFetishesTip"}
+				],
+				[
+					{"mode":"h","expandMode":[2,0]},
+					{"type":"panel","style":"flat","expandMode":[1,0],"children":[
+						{"type":"button", "id":"allPred", "color":"008800", "caption":":allPred", "toolTip":":allPredTip"},
+						{"type":"button", "id":"noPred", "color":"880000", "caption":":noPred", "toolTip":":noPredTip"}
+					]},
+					{"type":"panel","style":"flat","expandMode":[1,0],"children":[
+						{"type":"button", "id":"allPrey", "color":"008800", "caption":":allPrey", "toolTip":":allPreyTip"},
+						{"type":"button", "id":"noPrey", "color":"880000", "caption":":noPrey", "toolTip":":noPreyTip"}
+					]},
+					{"type":"panel","style":"flat","expandMode":[1,0],"children":[
+						{"type":"button", "id":"allTF", "color":"008800", "caption":":allTF", "toolTip":":allTFTip"},
+						{"type":"button", "id":"noTF", "color":"880000", "caption":":noTF", "toolTip":":noTFTip"}
+					]}
+				],
+				{"type":"label", "text":":rememberSelectBodyParts", "align":"center"}
+
+			]},
 			[
-				{"mode":"h","expandMode":[2,0]},
-				{"type":"button", "id":"allFetishes", "color":"008800", "caption":":allFetishes", "toolTip":":allFetishesTip"},
-				{"type":"button", "id":"noFetishes", "color":"880000", "caption":":noFetishes", "toolTip":":noFetishesTip"}
+				{"mode" : "horizontal","expandMode":[2,0]},
+				[
+					{"expandMode" : [2,2]},
+					{"type":"sbqSetting","setting":"bodyParts"},
+					[
+						{"expandMode" : [2,2]},
+						{"type" : "panel", "id":"vorePredPrefsPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+							{"mode":"vertical", "expandMode" : [2,2]},
+							{"type":"label", "text":":vorePredPrefs","inline":true}
+
+						]},
+						{"type" : "panel", "id":"vorePreyPrefsPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+							{"mode":"vertical", "expandMode" : [2,2]},
+							{"type":"label", "text":":vorePreyPrefs","inline":true}
+
+						]}
+					],
+					[
+						{"expandMode" : [2,1]},
+						{"type" : "panel", "id":"infusePredPrefsPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+							{"mode":"vertical", "expandMode" : [2,2]},
+							{"type":"label", "text":":infusePredPrefs","inline":true}
+						]},
+						{"type" : "panel", "id":"infusePreyPrefsPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+							{"mode":"vertical", "expandMode" : [2,2]},
+							{"type":"label", "text":":infusePreyPrefs","inline":true}
+						]}
+					]
+
+				],
+				[
+					{"expandMode" : [0,2], "size":[110,0]},
+					{"type" : "panel", "id":"sizePrefsPanel", "expandMode" : [1,1], "style" : "convex", "children" : [
+						{"mode":"vertical", "expandMode" : [1,0]},
+						{"type":"label", "text":":sizePrefs","inline":true},
+						[
+							{"type":"sbqSetting","setting":"minScale", "max":"maxScale", "min":0.125},
+							{"type":"sbqTextBox","id":"currentScale", "toolTip":":currentScaleTip", "settingType":"number", "script":"changeScale", "max":"maxScale","min":"minScale"},
+							{"type":"sbqSetting","setting":"maxScale", "min":"minScale", "max":"maxPossibleScale"}
+						]
+					]},
+					{"type" : "panel", "id":"resistancesPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+						{"mode":"vertical", "expandMode" : [2,2]},
+						{"type":"label", "text":":resistances","inline":true},
+
+						{"type":"sbqSetting","setting":"acidDigestResistance"},
+
+						{"type":"sbqSetting","setting":"cumDigestResistance"},
+
+						{"type":"sbqSetting","setting":"femcumDigestResistance"},
+
+						{"type":"sbqSetting","setting":"milkDigestResistance"}
+					]}
+				]
 			],
 			[
-				{"mode":"h","expandMode":[2,0]},
-				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
-					{"type":"button", "id":"allPred", "color":"008800", "caption":":allPred", "toolTip":":allPredTip"},
-					{"type":"button", "id":"noPred", "color":"880000", "caption":":noPred", "toolTip":":noPredTip"}
+				{"mode" : "horizontal","expandMode":[2,0]},
+				{"type" : "panel", "id":"transformationPrefsPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+					{"type":"label", "text":":transformationPrefs","inline":true},
+					[
+						{"type":"sbqSetting","setting":"speciesTF", "toolTip":":speciesTFTip"},
+						{"type":"label", "text":":speciesTF"}
+					],
+					[
+						{"type":"sbqSetting","setting":"genderTF", "toolTip":":genderTFTip"},
+						{"type":"label", "text":":genderTF"}
+					],
+					[
+						{"type":"sbqSetting","setting":"indefiniteTF", "toolTip":":indefiniteTFTip"},
+						{"type":"label", "text":":indefiniteTF"}
+					],
+					[
+						{"type":"sbqSetting","setting":"permanentTF", "toolTip":":permanentTFTip"},
+						{"type":"label", "text":":permanentTF"}
+					]
+					// [
+					// 	{"type":"sbqSetting","setting":"accidentalTF", "toolTip":":accidentalTFTip"},
+					// 	{"type":"label", "text":":accidentalTF"},
+					// ],
+					// [
+					// 	{"spacing":0},
+					// 	{"type":"sbqSetting","setting":"potionTF", "toolTip":":potionTFTip"},
+					// 	{"type":"sbqSetting","setting":"magicTF", "toolTip":":magicTFTip"},
+					// 	{"type":"sbqSetting","setting":"scienceTF", "toolTip":":scienceTFTip"},
+					// ],
+					// [
+					// 	{"spacing":0},
+					// 	{"type":"sbqSetting","setting":"voreTF", "toolTip":":voreTFTip"},
+					// 	{"type":"sbqSetting","setting":"unbirthTF", "toolTip":":unbirthTFTip"},
+					// ]
 				]},
-				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
-					{"type":"button", "id":"allPrey", "color":"008800", "caption":":allPrey", "toolTip":":allPreyTip"},
-					{"type":"button", "id":"noPrey", "color":"880000", "caption":":noPrey", "toolTip":":noPreyTip"}
-				]},
-				{"type":"panel","style":"flat","expandMode":[1,0],"children":[
-					{"type":"button", "id":"allTF", "color":"008800", "caption":":allTF", "toolTip":":allTFTip"},
-					{"type":"button", "id":"noTF", "color":"880000", "caption":":noTF", "toolTip":":noTFTip"}
+				{"type" : "panel", "id":"otherPrefsPanel", "expandMode" : [2,2], "style" : "convex", "children" : [
+					{"type":"label", "text":":otherPrefs","inline":true},
+					[
+						{"type":"sbqSetting","setting":"grabbed", "toolTip":":grabbedTip"},
+						{"type":"label", "text":":grabbed"}
+					],
+					[
+						{"type":"sbqSetting","setting":"pinned", "toolTip":":pinned"},
+						{"type":"label", "text":":pinned"}
+					]
 				]}
-			]
-		]},
-		{ "type" : "panel", "expandMode":[2,0], "style" : "convex", "children" : [
-			{"mode":"v","expandMode":[2,0]},
-			{"type":"label", "text":":terms", "align":"center"},
-			{"type":"button", "id":"agree", "caption":":agree","expandMode":[2,0]}
-		]}
+			],
+			{ "type" : "panel", "expandMode":[2,0], "style" : "convex", "children" : [
+				{"mode":"v","expandMode":[2,0]},
+				{"type":"label", "text":":terms", "align":"center"},
+				{"type":"button", "id":"agree", "caption":":agree","expandMode":[2,0]}
+			]}
+	]}]}
 	],
 	"dismissable" : false
 }
