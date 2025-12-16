@@ -85,6 +85,7 @@ end
 function update(dt)
 	old.update(dt)
 	sbq.update(dt)
+	if not sbq.SpeciesScript.active then return end
 	if sbq.randomTimer(
 		"huntingCycle",
 		(sbq.voreConfig.huntingCycleMin or sbq.config.huntingCycleMin) * 60,
