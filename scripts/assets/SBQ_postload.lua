@@ -26,6 +26,10 @@ randomTenant.name = "sbqTenant_random"
 randomTenant.tenants[1].sbqRandomTenant = jarray()
 local randomGuardTenant = jarray()
 
+local specialPotionRecipes = jarray()
+local speciesPotionRecipes = jarray()
+local unsupportedSpeciesPotionRecipes = jarray()
+
 local function setupTenantCatalogue(tenantData, tenantId, name)
 	local id = "sbqTenant_" .. tenantId
 	table.insert(tenantCatalogue, { name, { id } })
@@ -274,9 +278,30 @@ local function setupSpecies(path)
 	for _, v in ipairs( speciesConfig.sbqHubMicroNPCs or {}) do
 		table.insert(hubMicroNPCList, v)
 	end
+	if assets.exists("/cinematics/teleport/teleport_" .. speciesConfig.kind .. ".cinematic") then
+		if speciesConfig.sbqTFAny then
+			table.insert(speciesTFAny, speciesConfig.kind)
+		end
 
-	if speciesConfig.sbqTFAny and assets.exists("/cinematics/teleport/teleport_" .. speciesConfig.kind .. ".cinematic") then
-		table.insert(speciesTFAny, speciesConfig.kind)
+		if speciesConfig.potionShopRecipe then
+			table.insert(specialPotionRecipes, {
+				result = speciesConfig.potionShopRecipe.result or "sbqMysteriousPotion",
+				parameters = speciesConfig.potionShopRecipe.parameters or { identity = { species = speciesConfig.kind } },
+				materials = speciesConfig.potionShopRecipe.materials or { {item = "money", count = 888}}
+			})
+		elseif speciesConfig.sbqTFAny then
+			table.insert(speciesPotionRecipes, {
+				result = "sbqMysteriousPotion",
+				parameters = { identity = { species = speciesConfig.kind } },
+				materials = { {item = "money", count = 800}}
+			})
+		elseif speciesConfig.sbqCompatible == nil then
+			table.insert(unsupportedSpeciesPotionRecipes, {
+				result = "sbqMysteriousPotion",
+				parameters = { identity = { species = speciesConfig.kind } },
+				materials = { {item = "money", count = 500}}
+			})
+		end
 	end
 end
 
@@ -297,11 +322,43 @@ for i, v in ipairs(randomGuardTenant) do
 	assets.add("/tenants/"..v.name..".tenant", sb.printJson(v))
 end
 
+local charCreationOrdering = {}
+for i, v in ipairs(assets.json("/interface/windowconfig/charcreation.config:speciesOrdering")) do
+	charCreationOrdering[v] = i
+end
+local function sortByCharCreation(a, b)
+	local a_species = a.parameters.identity.species
+	local b_species = b.parameters.identity.species
+	if charCreationOrdering[a_species] and charCreationOrdering[b_species] then
+		return charCreationOrdering[a_species] < charCreationOrdering[b_species]
+	elseif charCreationOrdering[a_species] then
+		return true
+	elseif charCreationOrdering[b_species] then
+		return false
+	else
+		return a_species < b_species
+	end
+end
+table.sort(specialPotionRecipes,sortByCharCreation)
+local potionRecipesPatch = jarray()
+for _, v in ipairs(specialPotionRecipes) do
+	table.insert(potionRecipesPatch, {op="add", path = "/0/recipes/-", value = v})
+end
+table.sort(speciesPotionRecipes,sortByCharCreation)
+for _, v in ipairs(speciesPotionRecipes) do
+	table.insert(potionRecipesPatch, {op="add", path = "/0/recipes/-", value = v})
+end
+table.sort(unsupportedSpeciesPotionRecipes,sortByCharCreation)
+for _, v in ipairs(unsupportedSpeciesPotionRecipes) do
+	table.insert(potionRecipesPatch, {op="add", path = "/0/recipes/-", value = v})
+end
+
 assets.add("/tenants/sbqTenant_random.tenant", sb.printJson(randomTenant))
 assets.add("/interface/scripted/sbq/colonyDeed/catalogue.config", sb.printJson(tenantCatalogue))
 assets.add("/npcs/sbqHub/sbqHubRandomNpcList.config", sb.printJson(hubNPCList))
 assets.add("/npcs/sbqHub/sbqHubMicroNpcList.config", sb.printJson(hubMicroNPCList))
 assets.add("/sbqTFAny.config", sb.printJson(speciesTFAny))
+assets.add("/recipes/sbqShop/auriShopRecipes.config.patch", sb.printJson(potionRecipesPatch))
 
 local occupantSlotCap = assets.json("/sbq.config:occupantSlotCap")
 for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do
