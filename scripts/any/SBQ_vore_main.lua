@@ -1882,7 +1882,9 @@ function sbq._Occupant:update(dt)
 		local compression = self.locationSettings.compression
 		local compressionMin = self.locationSettings.compressionMin
 		if compression == "time" then
-			self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (status.stat(location.powerMultiplier) * dt * sbq.config.compressionRate))
+			if self.struggleGracePeriod <= 0 then
+				self.sizeMultiplier = math.max( compressionMin, self.sizeMultiplier - (status.stat(location.powerMultiplier) * dt * sbq.config.compressionRate))
+			end
 		elseif compression == "health" then
 			self.sizeMultiplier = math.max( compressionMin, self:resourcePercentage("health"))
 		end
@@ -2198,10 +2200,21 @@ function sbq._Occupant:checkStruggleDirection(dt)
 	if (dx ~= 0 or dy ~= 0) then
 		self.struggleTime = self.struggleTime + (dt * effectiveness)
 		self.locationStore[self.location].struggleTime = self.locationStore[self.location].struggleTime + dt
-		if not self:consumeResource("energy", ((self.struggleAction or {}).preyCost or sbq.config.preyStruggleCost) * powerMultiplier * dt, true) then return end
-		self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
-		if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
-			self:tryStruggleAction(0,0)
+		local oldMultiplier = self.sizeMultiplier
+		local compression = self.locationSettings.compression
+
+		if not (self:controlHeld("Walk") or self:resourceLocked("energy")) then
+			if not self:consumeResource("energy", ((self.struggleAction or {}).preyCost or sbq.config.preyStruggleCost) * powerMultiplier * dt, true) then return end
+			if compression == "time" then
+				self.sizeMultiplier = math.min(1, self.sizeMultiplier + (self:stat("powerMultiplier") * dt * sbq.config.compressionRate))
+				if oldMultiplier ~= self.sizeMultiplier then
+					location:markSizeDirty()
+				end
+			end
+			self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
+			if sbq.timer(self.seat.."StruggleActionCooldown", 1) and dt ~= 0 then
+				self:tryStruggleAction(0,0)
+			end
 		end
 	else
 		if self.struggleGracePeriod <= 0 then
