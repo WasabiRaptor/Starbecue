@@ -16,19 +16,32 @@
 					"infuseModules" : {
 						"belly" : { // infuse slot
 							"default" : { // species
-								"animations" : ["/humanoid/any/sbqModules/belly/infused.animation"],
+								"animations" : ["/humanoid/wr/quadruped_big/belly/infused.animation"],
 								"infuseTags" : {
-									"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/bellyquadruped_big.png",
+									"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/quadruped_big/belly.png",
 									"bellyInfusedDirectives" : "<directives>"
 								},
 								"infusedBodyFullbrightParts" : [
 									"belly_infused"
-								]
+								],
+								"modules" : {
+									"navelVisible":{"false":{
+										"infuseTags" : {
+											"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/quadruped_big/belly_noNavel.png"
+										}
+									}}
+								}
 							}
 						}
+					},
+					"modules" : {
+						"navelVisible":{"false":{
+							"animations":["/humanoid/wr/quadruped_big/belly/noNavel.animation"]
+						}}
 					}
 				},
 				"infused" : {
+					"includes" : ["/humanoid/wr/quadruped_big/bellyInfuse/sbqModule.config"]
 				}
 			},
 			"cock" : {
