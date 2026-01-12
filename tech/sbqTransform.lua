@@ -7,7 +7,9 @@ function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
 	if not status.statusProperty("sbqSpeciesIdentities") then
-		status.setStatusProperty("sbqSpeciesIdentities", {[player.species()] = player.humanoidIdentity()})
+		local identity = player.humanoidIdentity()
+		identity.parameters = player.getHumanoidParameters()
+		status.setStatusProperty("sbqSpeciesIdentities", {[player.species()] = identity})
 	end
 
 	message.setHandler("sbqTransformTechRadialMenuScript", function(_, _, script, ...)
@@ -22,6 +24,9 @@ end
 
 local specialHeldTime
 local specialHeld
+local speciesIdentites = {}
+local favoriteSpecies = {}
+local sortedSpecies = {}
 function update(args)
 	sbq.checkRPCsFinished(args.dt)
 	if args.moves["special1"] then
@@ -43,6 +48,15 @@ function update(args)
 			RadialMenu:open("TopMenu")
 		end
 	end
+end
+function sbq_transform.getPortrait(portrait, species)
+	if not species then return end
+	local identity = speciesIdentites[species]
+	if not identity then return end
+	local portrait = root.npcPortrait(portrait, identity.species, "base", 1, 0, { identity = identity, humanoidParameters = identity.parameters, items = {override = {{0,{{}}}}}})
+	sb.logInfo(identity.species)
+	sb.logInfo(sb.printJson(portrait,2))
+	return portrait
 end
 
 RadialMenu = {}
@@ -90,9 +104,6 @@ function _RadialMenu:openRadialMenu(overrides)
 		overrides
 	), player.id())
 end
-local speciesIdentites = {}
-local favoriteSpecies = {}
-local sortedSpecies = {}
 local TopMenu = {}
 RadialMenu.TopMenu = TopMenu
 setmetatable(TopMenu, _RadialMenu)
@@ -172,13 +183,6 @@ function AssignMenu:init()
 	})
 end
 
-function sbq_transform.getPortrait(portrait, species)
-	if not species then return end
-	local identity = speciesIdentites[species]
-	if not identity then return end
-	return root.npcPortrait(portrait, identity.species, "base", 1, 0, { identity = identity, items = {override = {{0,{{}}}}}})
-end
-
 local AssignSlot = {}
 RadialMenu.AssignSlot = AssignSlot
 setmetatable(AssignSlot, _RadialMenu)
@@ -226,11 +230,4 @@ function _RadialMenu:openCharCreation()
 		data = { identity = player.humanoidIdentity(), parameters = player.getHumanoidParameters() },
 		ui = "starbecue:customize"
 	}, player.id())
-end
-
-function sbq_transform.getPortrait(portrait, species)
-	if not species then return end
-	local identity = speciesIdentites[species]
-	if not identity then return end
-	return root.npcPortrait(portrait, identity.species, "base", 1, 0, { identity = identity, items = {override = {{0,{{}}}}}})
 end
