@@ -17,6 +17,8 @@ Check out the [features](https://github.com/WasabiRaptor/Starbecue/blob/master/f
 
 [FAQ](https://github.com/WasabiRaptor/Starbecue/blob/master/FAQ.md) has a number of frequently asked questions, make sure to check it to see if theres an answer for you before poking any of the developers about it.
 
+If you are playing with SSVM, make sure to use [this version](https://github.com/Zygahedron/StarboundSimpleVoreMod) because the latest offical release v9.5 (2019) has many bugs that prevent it from working.
+
 # Install
 
 Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix) or from [github](https://github.com/WasabiRaptor/Starbecue/releases)

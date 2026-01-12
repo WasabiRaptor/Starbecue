@@ -1,12 +1,20 @@
 
 assets.patch("/sbq.config", "/sbq_config_patch.lua")
 
+local titleErrorString = ""
+local sbqStrings = assets.json("/sbqStrings.config")
+
 local assetSourcesByName = {}
 for k, v in pairs(assets.sourcePaths(true)) do
 	if v.name then
 		assetSourcesByName[v.name] = v
 	end
 end
+local ssvmMetadata = assetSourcesByName.ssvm
+if ssvmMetadata and (ssvmMetadata.version == "8.6.1") then
+	titleErrorString = titleErrorString .. sbqStrings.brokenSSVM .. "\n"
+end
+
 local speciesFiles = assets.byExtension("species")
 
 local sbqStrings = assets.json("/sbqStrings.config")
@@ -376,4 +384,9 @@ for _, path in ipairs(assets.scan("", "sbqOccupant.animation")) do
 			'"flippedZLevel"%s*:%s*(%-%d+%.%d+)', '"flippedZLevel":%1'..string.format('%04i', cap-i)
 		))
 	end
+end
+
+assets.add("/sbqStrings.config.patch", sb.printJson({ titleError = titleErrorString }))
+if titleErrorString ~= "" then
+	sb.logError("[SBQ]"..titleErrorString)
 end
