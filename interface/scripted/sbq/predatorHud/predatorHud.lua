@@ -271,7 +271,7 @@ function sbq.refreshPortrait(entityId)
 	local portrait = world.entityPortrait(entityId, "bust")
 	if portrait then
 		if world.entityType(entityId) == "monster" then
-			local bounds = drawable.boundBoxAll(portrait, true)
+			local bounds = drawable.boundBoxAll(portrait, true) or {0,0,0,0}
 			local center = rect.center(bounds)
 			canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 		else

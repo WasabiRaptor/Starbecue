@@ -177,7 +177,7 @@ function sbq.refreshDeedPage()
 		end
 		local canvasSize = {43,60}
 		if portrait then
-			local bounds = rect.size(drawable.boundBoxAll(portrait, true))
+			local bounds = rect.size(drawable.boundBoxAll(portrait, true) or {0,0,0,0})
 			canvasSize = { math.max(canvasSize[1], bounds[1]), math.max(canvasSize[2], bounds[2]) }
 		end
 		canvasSize[1] = math.max(canvasSize[1], mg.measureString(name)[1])
@@ -230,7 +230,7 @@ function sbq.refreshDeedPage()
 		end
 		canvas:clear()
 		if portrait then
-			local bounds = drawable.boundBoxAll(portrait, true)
+			local bounds = drawable.boundBoxAll(portrait, true) or {0,0,0,0}
 			local center = rect.center(bounds)
 			canvas:drawJsonDrawables(portrait, vec2.sub(vec2.div(canvasWidget.size, 2), center))
 		end
