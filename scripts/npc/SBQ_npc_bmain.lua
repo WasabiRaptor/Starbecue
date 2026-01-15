@@ -26,8 +26,6 @@ function sbqSettingsConfig()
 	}
 end
 
-local convertBackType
-local convert
 local occupantData
 function init()
 	old.init()
@@ -86,7 +84,6 @@ function init()
 		sbq.humanoidInit()
 	end
 	message.setHandler("sbqConvertNPC", function(_, _)
-		convertBackType = npc.npcType()
 		local convertType = config.getParameter("sbqConvertType")
 		if convertType then
 			sbq.tenant_setNpcType(convertType)
@@ -244,7 +241,7 @@ function sbq.tenant_setNpcType(npcType)
 				crew = config.getParameter("crew"),
 				ownerUuid = recruitable.ownerUuid(),
 				podUuid = recruitable.recruitUuid(),
-				sbqConvertType = convertBackType,
+				sbqConvertType = npc.npcType(),
 				personality = personality(),
 				initialStorage = preservedStorage(),
 				uniqueId = uuid,
