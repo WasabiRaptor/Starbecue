@@ -78,6 +78,12 @@ function patch(config, path)
 		config.humanoidOverrides.sbqConfig.modules = assets.json(config.humanoidOverrides.sbqConfig.modules)
 	end
 
+	for k, v in pairs(assets.json("/species/sbq/fallbackImages.config")) do
+		if config.sbqPartImages[k] == nil then
+			config.sbqPartImages[k] = v
+		end
+	end
+
 	return config
 end
 

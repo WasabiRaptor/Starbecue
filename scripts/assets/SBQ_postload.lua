@@ -206,75 +206,85 @@ local function setupSpecies(path)
 		assets.patch(speciesConfig.humanoidConfig, "/scripts/humanoid/SBQ_humanoidConfig_patch.lua")
 	end
 	for relativePath, newImage in pairs(speciesConfig.sbqPartImages or {}) do
-		local imagePath = humanoidPath .. relativePath
-		local framesPath = imagePath:gsub("%.png", ".frames")
-		if newImage.sourceImage:sub(1, 1) ~= "/" then
-			newImage.sourceImage = "/humanoid/" .. speciesConfig.kind .. "/" .. newImage.sourceImage
+		local skip = false
+		if newImage.merge then
+			if speciesConfig.sbqPartImages[newImage.merge] then
+				newImage = sb.jsonMerge(speciesConfig.sbqPartImages[newImage.merge], newImage)
+			else
+				skip = true
+			end
 		end
-		local sourcePalettePath = (newImage.sourcePalette or "/humanoid/any/sbqModules/palette.config")
-		local sourcePaletteFile = sourcePalettePath
-		local found = sourcePaletteFile:find(":")
-		if found then
-			sourcePaletteFile = sourcePaletteFile:sub(1, found - 1)
-		end
-		if assets.exists(sourcePaletteFile) and assets.exists(newImage.sourceImage) then
-			newImage.processingDirectives = newImage.processingDirectives or ""
-			local sourcePalette = assets.json(sourcePalettePath)
-			for i, remap in ipairs(newImage.remapDirectives or {}) do
-				if type(remap) == "string" then
-					newImage.processingDirectives = newImage.processingDirectives .. remap
-				elseif type(remap) == "table" and remap[1] then
-					local from = sourcePalette[remap[1]]
-					if not from then
-						sb.logInfo(
-							"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], missing palette in source named '%s'",
-							speciesConfig.kind, relativePath, i, remap[1])
-					elseif remap[2] then
-						local to = (speciesConfig.baseColorPalette or {})[remap[2]]
-						if to then
+		if not skip then
+			local imagePath = humanoidPath .. relativePath
+			local framesPath = imagePath:gsub("%.png", ".frames")
+			if newImage.sourceImage:sub(1, 1) ~= "/" then
+				newImage.sourceImage = "/humanoid/" .. speciesConfig.kind .. "/" .. newImage.sourceImage
+			end
+			local sourcePalettePath = (newImage.sourcePalette or "/humanoid/any/sbqModules/palette.config")
+			local sourcePaletteFile = sourcePalettePath
+			local found = sourcePaletteFile:find(":")
+			if found then
+				sourcePaletteFile = sourcePaletteFile:sub(1, found - 1)
+			end
+			if assets.exists(sourcePaletteFile) and assets.exists(newImage.sourceImage) then
+				newImage.processingDirectives = newImage.processingDirectives or ""
+				local sourcePalette = assets.json(sourcePalettePath)
+				for i, remap in ipairs(newImage.remapDirectives or {}) do
+					if type(remap) == "string" then
+						newImage.processingDirectives = newImage.processingDirectives .. remap
+					elseif type(remap) == "table" and remap[1] then
+						local from = sourcePalette[remap[1]]
+						if not from then
+							sb.logInfo(
+								"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], missing palette in source named '%s'",
+								speciesConfig.kind, relativePath, i, remap[1])
+						elseif remap[2] then
+							local to = (speciesConfig.baseColorPalette or {})[remap[2]]
+							if to then
+								for j, v in ipairs(from) do
+									newImage.processingDirectives = newImage.processingDirectives ..
+										"?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
+								end
+							else
+								sb.logInfo(
+									"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], species is missing palette named '%s' in 'baseColorPalette'",
+									speciesConfig.kind, relativePath, i, remap[2])
+							end
+						else -- if theres no color to remap to, remove the color by replacing with transparent pixels
 							for j, v in ipairs(from) do
 								newImage.processingDirectives = newImage.processingDirectives ..
-									"?replace;" .. v .. "=" .. (to[j] or to[#to]) .. ";"
+									"?replace;" .. v .. "=00000000;"
 							end
-						else
-							sb.logInfo(
-								"[SBQ] '%s' has invalid color remap for '%s' remapDirectives[%s], species is missing palette named '%s' in 'baseColorPalette'",
-								speciesConfig.kind, relativePath, i, remap[2])
 						end
-					else -- if theres no color to remap to, remove the color by replacing with transparent pixels
-						for j, v in ipairs(from) do
-							newImage.processingDirectives = newImage.processingDirectives ..
-								"?replace;" .. v .. "=00000000;"
-						end
+					else
+						sb.logInfo(
+							"[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
+							speciesConfig.kind, relativePath, i)
 					end
-				else
-					sb.logInfo(
-						"[SBQ] '%s' has invalid color remap for '%s' remapDirectives index '%s', should be String or Array",
-						speciesConfig.kind, relativePath, i)
 				end
-			end
 
-			assets.add(imagePath, assets.image(newImage.sourceImage .. (newImage.processingDirectives or "")))
-			local frames = assets.frames(newImage.sourceImage)
-			if frames then
-				assets.add(framesPath, assets.bytes(frames.file))
+				assets.add(imagePath, assets.image(newImage.sourceImage .. (newImage.processingDirectives or "")))
+				local frames = assets.frames(newImage.sourceImage)
+				if frames then
+					assets.add(framesPath, assets.bytes(frames.file))
+				end
+				for _, v in ipairs(newImage.patches or {}) do
+					assets.patch(imagePath, v)
+				end
+				for _, v in ipairs(newImage.framesPatches or {}) do
+					assets.patch(framesPath, v)
+				end
+			else
+				if not (assets.exists(sourcePaletteFile)) then
+					sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
+						speciesConfig.kind, relativePath, sourcePalettePath)
+				end
+				if not assets.exists(newImage.sourceImage) then
+					sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
+						speciesConfig.kind, relativePath, newImage.sourceImage)
+				end
+				-- nothing to do if it don't exist
 			end
-			for _, v in ipairs(newImage.patches or {}) do
-				assets.patch(imagePath, v)
-			end
-			for _, v in ipairs(newImage.framesPatches or {}) do
-				assets.patch(framesPath, v)
-			end
-		else
-			if not (assets.exists(sourcePaletteFile)) then
-				sb.logInfo("[SBQ] '%s' has invalid source color remap for '%s' sourcePalette '%s' does not exist",
-					speciesConfig.kind, relativePath, sourcePalettePath)
-			end
-			if not assets.exists(newImage.sourceImage) then
-				sb.logInfo("[SBQ] '%s' has invalid source image for '%s' sourceImage '%s' does not exist",
-					speciesConfig.kind, relativePath, newImage.sourceImage)
-			end
-			-- nothing to do if it don't exist
 		end
 	end
 	if speciesConfig.sbqTenantData then
