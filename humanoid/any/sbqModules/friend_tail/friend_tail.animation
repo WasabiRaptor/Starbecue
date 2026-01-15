@@ -1,7 +1,7 @@
 {
 	"globalTagDefaults" : {
-		"tailFrameset" : "/humanoid/any/sbqModules/friend_tail/body/default.png",
-		"tailHeadFrameset" : "/humanoid/any/sbqModules/friend_tail/head/maw.png",
+		"tailFrameset" : "sbq/friend_tail/body/default.png",
+		"tailHeadFrameset" : "sbq/friend_tail/head/default.png",
 
 		"tailSize" : "0",
 		"tailInterpolateSize" : "0"
@@ -107,8 +107,9 @@
 					"transformationGroups": [],
 
 					"zLevel": 8.11,
-					"offset" : [-0.5,2],
-					"image" : "<tailHeadFrameset>"
+					"offset" : [-0.5,1.75],
+					"image" : "<tailHeadFrameset>",
+					"processingDirectives" : "<bodyDirectives>"
 				},
 				"partStates" : {
 					"tailState" : {
