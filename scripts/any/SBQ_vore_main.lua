@@ -2208,7 +2208,7 @@ function sbq._Occupant:checkStruggleDirection(dt)
 			if compression == "time" then
 				self.sizeMultiplier = math.min(1, self.sizeMultiplier + (self:stat("powerMultiplier") * dt * sbq.config.compressionRate))
 				if oldMultiplier ~= self.sizeMultiplier then
-					location:markSizeDirty()
+					self:getLocation():markSizeDirty()
 				end
 			end
 			self.struggleGracePeriod = sbq.config.struggleGracePeriod * effectiveness
