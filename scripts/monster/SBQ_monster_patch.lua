@@ -1,5 +1,7 @@
 function patch(config, path)
-    if config.disableSBQ then return config end
+    if config.sbqCompatible == false then return config end
+
+    if (query(config, { "baseParameters", "monsterClass" }) == "boss") and not config.sbqCompatible then return config end
 
     addScript(config, { "baseParameters", "scripts" }, "/scripts/monster/SBQ_monster_spawn.lua")
     addScript(config, { "baseParameters", "statusSettings", "primaryScriptSources" }, "/scripts/monster/SBQ_monster_primary.lua")

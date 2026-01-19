@@ -1,5 +1,5 @@
 function patch(config, path)
-	if config.disableSBQ then return config end
+	if config.sbqCompatible == false then return config end
 	config.scriptConfig = config.scriptConfig or {}
 	if config.scriptConfig.uniqueId and not (config.scriptConfig.sbqSettingsConfig) then
 		config.scriptConfig.sbqSettingsConfig = {
