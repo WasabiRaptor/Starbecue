@@ -7,7 +7,7 @@ local oldIdMap = {
 	["sbq/nickit_anthro"] = "wr/nickit_anthro"
 }
 function update(diskStore)
-	sb.logInfo(sb.printJson(diskStore,2))
+	-- sb.logInfo(sb.printJson(diskStore,2))
 	if diskStore.worldProperties["ship.species"] and oldIdMap[diskStore.worldProperties["ship.species"]] then
 		 diskStore.worldProperties["ship.species"] = oldIdMap[diskStore.worldProperties["ship.species"]]
 	end

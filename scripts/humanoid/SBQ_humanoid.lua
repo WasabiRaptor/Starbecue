@@ -169,7 +169,8 @@ end
 
 function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomization, ...)
 	if world.pointTileCollision(entity.position(), { "Null" }) then return end
-	if sbq.config.transformationBlacklist[sbq.species()] then
+	local oldSpeciesFile = root.speciesConfig(player.species())
+	if oldSpeciesFile.sbqCompatible == false then
 		if player then
 			sbq.logWarn("Attempted to transform as blacklisted species: " .. newIdentity.species)
 			player.radioMessage("sbqTransformFromBlacklist")
@@ -228,11 +229,10 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	else
 		newIdentity.species = currentIdentity.species
 	end
-	local oldSpeciesFile = root.speciesConfig(currentIdentity.species)
 	local speciesFile = root.speciesConfig(newIdentity.species)
 	if not speciesFile then return false end
 	newIdentity.species = speciesFile.kind
-	if sbq.config.transformationBlacklist[newIdentity.species] then
+	if speciesFile.sbqCompatible == false then
 		if player then
 			sbq.logWarn("Attempted to transform into blacklisted species: " .. newIdentity.species)
 			player.radioMessage("sbqTransformIntoBlacklist")

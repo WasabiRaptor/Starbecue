@@ -7,7 +7,7 @@ end
 
 function update(dt, fireMode, shiftHeld)
 	if fireMode == "primary" and not activeItem.callOtherHandScript("isDartGun") then
-		if sbq.config.transformationBlacklist[sbq.species()] then
+		if root.speciesConfig(player.species()).sbqCompatible == false then
 			animator.playSound("error")
 			player.radioMessage("sbqTransformBindBlacklist")
 			return
@@ -20,7 +20,7 @@ function update(dt, fireMode, shiftHeld)
 end
 
 function transformationItemArgs(useType)
-	if sbq.config.transformationBlacklist[sbq.species()] then
+	if root.speciesConfig(player.species()).sbqCompatible == false then
 		animator.playSound("error")
 		player.radioMessage("sbqTransformBindBlacklist")
 		return
