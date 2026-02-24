@@ -42,6 +42,25 @@
 ### Q: What are all these different mods in the zip?
 > They are explained in the readme [here](https://github.com/WasabiRaptor/Starbecue/blob/master/README.md#included-mods)
 
+
+### Futara's Dragon Race
+### Futara's Dragon Engine
+> Futara's Dragon Engine literally breaks the game. No joke, it's 'optimizations' cause the tick rate of the game to become broken. The only reason this effects OSB and not the retail build of starbound, is that the retail build of starbound has a typo which makes these patches not do as much, meanwhile OSB fixed the typo, which meant these patches started to actually effect the game, and break it. Here's a tutorial on how to remove the files from FDE that cause the game to break, which should still let the rest of the mod function.
+> They're also doing something weird with player rendering and they crash their own script on certain species I added because they didn't implement proper error handling for data they expected to be somewhere to not be there. Nothing I can do about that.
+
+Follow this [tutorial](https://steamcommunity.com/sharedfiles/filedetails/?id=745239455) to unpack a starbound workshop mod, and unpack Futara's Dragon Engine, it's steam content ID is 2297133082.
+
+After extracting the mod, you'll want to place it into your mods folder, and then unsubscribe from FDE.
+
+In your unpacked version of FDE, you'll need to delete these files.
+- `client.config.patch`
+- `rendering.config.patch`
+- `universe_server.config.patch`
+- `worldserver.config.patch`
+
+This will remove their 'optimization' patches that change how the game's tick rate behaves, while leaving the rest of the mod intact.
+
+
 ### SSVM
 > Make sure you're using [this version](https://github.com/Zygahedron/StarboundSimpleVoreMod) As the original version of the mod has been broken for years now.
 > Hasn't been a dependency for years

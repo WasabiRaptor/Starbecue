@@ -12,7 +12,12 @@ for k, v in pairs(assets.sourcePaths(true)) do
 end
 local ssvmMetadata = assetSourcesByName.ssvm
 if ssvmMetadata and (ssvmMetadata.version == "8.6.1") then
-	titleErrorString = titleErrorString .. sbqStrings.brokenSSVM .. "\n"
+	titleErrorString = titleErrorString .. sbqStrings.brokenSSVM .. "\n \n"
+end
+
+local FDEmetadata = assetSourcesByName["Futara's Dragon Engine"]
+if FDEmetadata and (assets.json("/client.config:windowTitle") == "Starbound - FDEngine") then
+	titleErrorString = titleErrorString .. sbqStrings.fixFutaraDragonEngine .. "\n \n"
 end
 
 local speciesFiles = assets.byExtension("species")
