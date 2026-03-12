@@ -6,12 +6,6 @@ sbq_transform = {}
 function init()
 	sbq.config = root.assetJson("/sbq.config")
 	sbq.strings = root.assetJson("/sbqStrings.config")
-	if not status.statusProperty("sbqSpeciesIdentities") then
-		local identity = player.humanoidIdentity()
-		identity.parameters = player.getHumanoidParameters()
-		status.setStatusProperty("sbqSpeciesIdentities", {[player.species()] = identity})
-	end
-
 	message.setHandler("sbqTransformTechRadialMenuScript", function(_, _, script, ...)
 		if not script then return end
 		if RadialMenu[script] then
@@ -54,8 +48,6 @@ function sbq_transform.getPortrait(portrait, species)
 	local identity = speciesIdentites[species]
 	if not identity then return end
 	local portrait = root.npcPortrait(portrait, identity.species, "base", 1, 0, { identity = identity, humanoidParameters = identity.parameters, items = {override = {{0,{{}}}}}})
-	sb.logInfo(identity.species)
-	sb.logInfo(sb.printJson(portrait,2))
 	return portrait
 end
 
@@ -115,7 +107,8 @@ function TopMenu:init()
 			description = sbq.getString(":assignSpeciesDesc")
 		}
 	}
-	speciesIdentites = status.statusProperty("sbqSpeciesIdentities") or {[player.species()] = player.humanoidIdentity()}
+	speciesIdentites = status.statusProperty("wr_speciesIdentities")
+	if not speciesIdentites then return end
 	favoriteSpecies = _ENV.jarray()
 	for k, v in pairs(player.getProperty("sbqFavoriteSpecies") or {}) do
 		favoriteSpecies[tonumber(k)] = v
@@ -138,7 +131,7 @@ function TopMenu:init()
 				icon = sbq_transform.getPortrait("bust", species),
 				description = sbq_transform.getPortrait("full", species),
 				args = { speciesIdentites[species] },
-				message = "sbqDoTransformation"
+				message = "wr_setCurrentIdentity"
 			})
 		else
 			if species then

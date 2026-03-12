@@ -299,17 +299,6 @@ function init()
 	message.setHandler("sbqRequestFailed", function (_,_,success,reason)
 		interface.queueMessage(sbq.getString(":request_" .. tostring(reason)))
 	end)
-	message.setHandler({ name = "sbqSetIdentity", localOnly = true }, function (identity, parameters)
-		local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities") or {}
-		identity.parameters = parameters
-
-		speciesIdentities[identity.species] = identity
-		storage.sbqSpeciesIdentities = speciesIdentities
-		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
-
-		player.setHumanoidParameters(parameters)
-		player.setHumanoidIdentity(identity)
-	end)
 
 	sbq.timer("preyMissingWaitPrompt", 60)
 	occupantData = status.statusProperty("sbqOccupantStorage")

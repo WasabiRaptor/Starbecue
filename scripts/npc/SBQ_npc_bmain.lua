@@ -107,17 +107,6 @@ function init()
 
 		tenant.despawn(false)
 	end)
-	message.setHandler("sbqSetIdentity", function (_,_, identity, parameters)
-		local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities") or {}
-		identity.parameters = parameters
-
-		speciesIdentities[identity.species] = identity
-		storage.sbqSpeciesIdentities = speciesIdentities
-		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
-
-		npc.setHumanoidParameters(parameters)
-		npc.setHumanoidIdentity(identity)
-	end)
 
 	occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData then
@@ -200,9 +189,8 @@ function preservedStorage()
 	ps.sbqUpgrades = sbq.upgrades:save()
 	ps.sbqConvertRoll = true
 	ps.sbqRandomizedSettings = storage.sbqRandomizedSettings
-	ps.sbqSpeciesIdentities = storage.sbqSpeciesIdentities
-	ps.sbqOriginalSpecies = storage.sbqOriginalSpecies
-	ps.sbqOriginalGender = storage.sbqOriginalGender
+	ps.wr_speciesIdentities = storage.wr_speciesIdentities
+	ps.wr_originalIdentity = storage.wr_originalIdentity
 	return ps
 end
 
@@ -248,11 +236,6 @@ function sbq.tenant_setNpcType(npcType)
 				sbqOverrideUniqueId = uuid
 			},
 			scale = mcontroller.scale(),
-			statusControllerSettings = {
-				statusProperties = {
-					sbqSpeciesIdentities = status.statusProperty("sbqSpeciesIdentities")
-				}
-			}
 		},
 		storage = storage
 	}

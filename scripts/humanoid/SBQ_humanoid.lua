@@ -39,7 +39,7 @@ function refreshHumanoidParameters()
 	sbq.upgrades:apply(sbq.settings)
 	sbq.settings:setPublicSettings()
 	sbq.settings:setStatSettings()
-
+	sbq.refreshPredHudPortrait()
 	humanoidConfig = sbq.humanoid.humanoidConfig()
 
 	if humanoidConfig.sbqEnabled and sbq.init and not (humanoidConfig.sbqPostloadError or (humanoidConfig.sbqCompatible == false)) then
@@ -125,7 +125,7 @@ function sbq.humanoidInit()
 			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSettings = sbq.settings:export()
 			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqRandomizedSettings = true
 			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqUpgrades = sbq.upgrades:save()
-			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.sbqSpeciesIdentities = status.statusProperty("sbqSpeciesIdentities")
+			item.parameters.npcArgs.npcParam.scriptConfig.initialStorage.wr_speciesIdentities = storage.wr_speciesIdentities
 		end
 		local identity = sbq.humanoid.humanoidIdentity()
 		item.parameters.npcArgs.npcSpecies = sbq.species()
@@ -142,6 +142,48 @@ function sbq.humanoidInit()
 		item.parameters.npcArgs.npcParam.statusControllerSettings.statusProperties.sbqPronouns = status.statusProperty("sbqPronouns")
 		return item
 	end)
+
+	-- make sure these are initialized
+	storage.wr_originalIdentity = storage.wr_originalIdentity or status.statusProperty("wr_originalIdentity")
+	storage.wr_speciesIdentities = storage.wr_speciesIdentities or status.statusProperty("wr_speciesIdentities") or {}
+	if not storage.wr_originalIdentity then
+		storage.wr_originalIdentity = sbq.humanoid.humanoidIdentity()
+		storage.wr_originalIdentity.parameters = sbq.humanoid.getHumanoidParameters()
+	end
+	if not storage.wr_speciesIdentities[storage.wr_originalIdentity.species] then
+		storage.wr_speciesIdentities[storage.wr_originalIdentity.species] = storage.wr_originalIdentity
+	end
+	status.setStatusProperty("wr_originalIdentity", storage.wr_originalIdentity)
+	status.setStatusProperty("wr_speciesIdentities", storage.wr_speciesIdentities)
+
+	message.setHandler("wr_setCurrentIdentity", function(_, localMessage, newIdentity)
+		if player and not localMessage then return end
+		local context = player or npc
+		local currentIdentity = context.humanoidIdentity()
+		context.setHumanoidParameters(newIdentity.parameters)
+		context.setHumanoidIdentity(newIdentity)
+		if player and interface and (currentIdentity.species ~= newIdentity.species) then
+			interface.sendMessage("wr_closeCustomize")
+		end
+		if player and chat and newIdentity.name and (newIdentity.name ~= currentIdentity.name) then
+			chat.command("/nick "..newIdentity.name)
+		end
+	end)
+	message.setHandler("wr_setOriginalIdentity", function(_, localMessage, newIdentity)
+		if player and not localMessage then return end
+		storage.wr_originalIdentity = newIdentity
+		status.setStatusProperty("wr_originalIdentity", storage.wr_originalIdentity)
+	end)
+	message.setHandler("wr_setSpeciesIdentity", function (_, localMessage, newIdentity)
+		if player and not localMessage then return end
+		storage.wr_speciesIdentities[newIdentity.species] = newIdentity
+		status.setStatusProperty("wr_speciesIdentities", storage.wr_speciesIdentities)
+		if storage.wr_originalIdentity.species == newIdentity.species then
+			storage.wr_originalIdentity = newIdentity
+			status.setStatusProperty("wr_originalIdentity", storage.wr_originalIdentity)
+		end
+	end)
+
 	initialized = true
 end
 
@@ -179,29 +221,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	end
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
 	currentIdentity.parameters = sbq.humanoid.getHumanoidParameters()
-	local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities")
-	local originalSpecies = storage.sbqOriginalSpecies or status.statusProperty("sbqOriginalSpecies")
-	local originalGender = storage.sbqOriginalGender or status.statusProperty("sbqOriginalGender")
 
-	if not originalSpecies then
-		originalSpecies = sbq.species()
-		storage.sbqOriginalSpecies = originalSpecies
-		speciesIdentities = speciesIdentities or {}
-		speciesIdentities[originalSpecies] = speciesIdentities[originalSpecies] or currentIdentity
-		storage.sbqSpeciesIdentities = speciesIdentities
-		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
-	end
-	status.setStatusProperty("sbqOriginalSpecies", originalSpecies)
-
-	if not originalGender then
-		originalGender = sbq.gender()
-		storage.sbqOriginalGender = originalGender
-	end
-	status.setStatusProperty("sbqOriginalGender", originalGender)
-	if not speciesIdentities then
-		speciesIdentities = {}
-		storage.sbqSpeciesIdentities = speciesIdentities
-	end
 	if sbq.settings:get("genderTF") then
 		if newIdentity.gender == "random" then
 			newIdentity.gender = ({ "male", "female" })[math.random(2)]
@@ -219,7 +239,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 				local speciesList = root.assetJson("/sbqTFAny.config")
 				newIdentity.species = speciesList[math.random(#speciesList)]
 			elseif newIdentity.species == "originalSpecies" then
-				newIdentity.species = originalSpecies
+				newIdentity.species = storage.wr_originalIdentity.species
 			elseif not newIdentity.species then
 				newIdentity.species = currentIdentity.species
 			end
@@ -262,7 +282,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	local preserveColors = {
 
 	}
-	if not speciesIdentities[newIdentity.species] then
+	if not storage.wr_speciesIdentities[newIdentity.species] then
 		-- if oldSpeciesFile.baseColorPalette and speciesFile.baseColorPalette then
 		-- 	for k, oldColors in pairs(oldSpeciesFile.baseColorPalette) do
 		-- 		for k2, newColors in pairs(speciesFile.baseColorPalette) do
@@ -293,7 +313,7 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	choices[1] = ((newIdentity.gender or currentIdentity.gender) == "male") and 0 or 1
 
 	local generatedIdentity, generatedParameters = root.createHumanoid(
-		speciesFile.forceName or newIdentity.name or currentIdentity.name,
+		speciesFile.forceName or newIdentity.name or (storage.wr_originalIdentity or {}).name or currentIdentity.name,
 		newIdentity.species,
 		table.unpack(choices)
 	)
@@ -303,19 +323,17 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 	newIdentity = sb.jsonMerge(
 		generatedIdentity,
 		newIdentity,
-		forceIdentity and {} or speciesIdentities[newIdentity.species] or {},
+		forceIdentity and {} or storage.wr_speciesIdentities[newIdentity.species] or {},
 		{ gender = newIdentity.gender } -- preserve new gender if applicable
 	)
 
-	if ((not speciesIdentities[newIdentity.species]) or forceCustomization) and not speciesFile.noUnlock then
-		speciesIdentities[newIdentity.species] = newIdentity
+	world.sendEntityMessage(entity.id(), "wr_setCurrentIdentity", newIdentity)
+	if ((not (storage.wr_speciesIdentities[newIdentity.species] or forceIdentity)) or forceCustomization) and not speciesFile.noUnlock then
+		world.sendEntityMessage(entity.id(), "wr_setSpeciesIdentity", newIdentity)
 		local speciesCount = 0
-		for _, _ in pairs(speciesIdentities) do
+		for _, _ in pairs(storage.wr_speciesIdentities) do
 			speciesCount = speciesCount + 1
 		end
-
-		storage.sbqSpeciesIdentities = speciesIdentities
-		status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
 		if player then
 			if (speciesCount >= sbq.config.transformMenuUnlock) then
 				player.makeTechAvailable("sbqTransform")
@@ -325,14 +343,15 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 				player.radioMessage("sbqTransformedFirst")
 				player.radioMessage("sbqTransformedHint")
 			end
+			if not speciesFile.forceName then
+				player.interact("ScriptPane",{
+					gui = {},
+					scripts = { "/metagui/sbq/build.lua" },
+					data = { identity = newIdentity, parameters = player.getHumanoidParameters() },
+					ui = "starbecue:customize"
+				}, player.id())
+			end
 		end
-	end
-
-	sbq.humanoid.setHumanoidParameters(newIdentity.parameters)
-	sbq.humanoid.setHumanoidIdentity(newIdentity)
-
-	if player and chat and newIdentity.name and (newIdentity.name ~= currentIdentity.name) then
-		chat.command("/nick "..newIdentity.name)
 	end
 
 	if duration and (not sbq.settings:get("indefiniteTF")) then
@@ -341,76 +360,20 @@ function sbq.doTransformation(newIdentity, duration, forceIdentity, forceCustomi
 		world.sendEntityMessage(entity.id(), "sbqClearTransformed")
 	end
 	if sbq.settings:get("permanentTF") then
-		storage.sbqOriginalSpecies = newIdentity.species
-		storage.sbqOriginalGender = newIdentity.gender
-		status.setStatusProperty("sbqOriginalSpecies", newIdentity.species)
-		status.setStatusProperty("sbqOriginalGender", newIdentity.gender)
+		world.sendEntityMessage(entity.id(), "wr_setOriginalIdentity", newIdentity)
 	end
-	sbq.refreshPredHudPortrait()
 	return true
 end
 
 function sbq.revertTF()
 	local currentIdentity = sbq.humanoid.humanoidIdentity()
-	local currentParameters = sbq.humanoid.getHumanoidParameters()
+	currentIdentity.parameters = sbq.humanoid.getHumanoidParameters()
 
-	local originalSpecies = storage.sbqOriginalSpecies or status.statusProperty("sbqOriginalSpecies") or sbq.species()
-	local originalGender = storage.sbqOriginalGender or status.statusProperty("sbqOriginalGender") or sbq.gender()
-	local speciesIdentities = storage.sbqSpeciesIdentities or status.statusProperty("sbqSpeciesIdentities") or {}
-	local newIdentity = speciesIdentities[originalSpecies]
-	if (originalSpecies == sbq.species()) and (originalGender == sbq.gender()) then
+	local newIdentity = storage.wr_originalIdentity
+	if sb.jsonEqual(newIdentity, currentIdentity) then
 		return false
 	end
-
-	if not newIdentity then
-		local randomSource = sb.makeRandomSource()
-		local choices = sb.jsonMerge({}, currentParameters.choices or {
-			0, -- will be overwritten immediately
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-			randomSource:randu64(),
-		})
-		choices[1] = ((originalGender or newIdentity.gender or currentIdentity.gender) == "male") and 0 or 1
-		local generatedIdentity, generatedParameters = root.createHumanoid(
-			currentIdentity.name,
-			newIdentity.species,
-			table.unpack(choices)
-		)
-		newIdentity = generatedIdentity
-		newIdentity.parameters = generatedParameters
-		newIdentity.parameters.sbqEnabled = true
-		local speciesFile = root.speciesConfig(newIdentity.species)
-		if (not speciesIdentities[newIdentity.species]) and not speciesFile.noUnlock then
-			speciesIdentities[newIdentity.species] = newIdentity
-			local speciesCount = 0
-			for _, _ in pairs(speciesIdentities) do
-				speciesCount = speciesCount + 1
-			end
-
-			storage.sbqSpeciesIdentities = speciesIdentities
-			status.setStatusProperty("sbqSpeciesIdentities", speciesIdentities)
-			if player then
-				if (speciesCount >= sbq.config.transformMenuUnlock) then
-					player.makeTechAvailable("sbqTransform")
-					player.enableTech("sbqTransform")
-					player.radioMessage("sbqTransformUnlocked")
-				elseif speciesCount >= 2 then
-					player.radioMessage("sbqTransformedFirst")
-					player.radioMessage("sbqTransformedHint")
-				end
-			end
-		end
-	end
-
-	sbq.humanoid.setHumanoidParameters(newIdentity.parameters)
-	sbq.humanoid.setHumanoidIdentity(newIdentity)
-	sbq.refreshPredHudPortrait()
+	world.sendEntityMessage(entity.id(), "wr_setCurrentIdentity", newIdentity)
 end
 
 function sbq.refreshPredHudPortrait()

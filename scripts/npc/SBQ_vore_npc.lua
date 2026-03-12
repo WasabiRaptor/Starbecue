@@ -74,10 +74,6 @@ function init()
 		sbq_hunting.promptResponse({...})
 	end)
 
-	if not status.statusProperty("sbqSpeciesIdentities") then
-		status.setStatusProperty("sbqSpeciesIdentities", {[npc.species()] = npc.humanoidIdentity()})
-	end
-
 	sbq.randomTimer("huntingCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 	sbq.randomTimer("lockDownCycle", 60, 5 * 60) -- to just, start the timer randomly so every NPC isn't hunting immediately
 end

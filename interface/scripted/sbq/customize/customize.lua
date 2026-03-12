@@ -3,6 +3,10 @@ local parameters = _ENV.metagui.inputData.parameters
 local choices = jarray()
 local randomSource = sb.makeRandomSource()
 function init()
+	message.setHandler("wr_closeCustomize", function ()
+		pane.dismiss()
+	end)
+
 	if not parameters.choices then
 		choices[1] = (identity.gender == "male") and 0 or 1
 		for i = 2, 10 do
@@ -53,7 +57,9 @@ end
 
 function applyChoices()
 	identity, parameters = root.createHumanoid(_ENV.nameBox.text, identity.species, table.unpack(choices))
-	world.sendEntityMessage(pane.sourceEntity(), "sbqSetIdentity", identity, parameters)
+	identity.parameters = parameters
+	world.sendEntityMessage(pane.sourceEntity(), "wr_setSpeciesIdentity", identity)
+	world.sendEntityMessage(pane.sourceEntity(), "wr_setCurrentIdentity", identity)
 end
 
 function _ENV.randomizeAll:onClick()

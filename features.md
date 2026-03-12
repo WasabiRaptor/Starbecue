@@ -259,7 +259,7 @@ The duration of TF effects can be configured per character.
 - Indefiniete TF makes TF last until a reversion potion is used.
 - Perma TF causes your 'original' species to be overwritten with each TF, so don't choose it lightly!
 
-After a player as transformed into a total of 7 different species they will unlock the **Shapeshifter** tech, which will allow them to freely TF into any species they have been before as well as customize their appearance as each species. TF via the tech is always treated as indefinite.
+After a player as transformed into a total of 7 different species they will unlock the **Shapeshifter** tech, which will allow them to freely TF into any species they have been before as well as customize their appearance. TF via the tech is always treated as indefinite.
 
 In any case where your name is changed while in active gameplay, while it is saved in character data, one cannot change the client connection name on a server without disconnecting and re-connecting, so instead we simply have it pretend you used the `/nick` command to change your server nickname.
 

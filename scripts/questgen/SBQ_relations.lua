@@ -24,7 +24,7 @@ local NpcType = _ENV.QuestPredicands.NpcType
 QuestRelations.sbq_speciesOriginal = defineQueryRelation("sbq_speciesOriginal", true) {
 	[case(1, Entity, NonNil)] = function(self, entity, species)
 		-- Get the original species value, or default to the usual method if there's not one
-		local originalSpecies = entity:callScript("status.statusProperty", "sbqOriginalSpecies") or entity:entitySpecies()
+		local originalSpecies = (entity:callScript("status.statusProperty", "wr_originalIdentity") or {}).species or entity:entitySpecies()
 		if xor(self.negated, originalSpecies == species) then
 			return { { entity, species } }
 		end
@@ -33,7 +33,7 @@ QuestRelations.sbq_speciesOriginal = defineQueryRelation("sbq_speciesOriginal", 
 
 	[case(2, Entity, Nil)] = function(self, entity)
 		-- Same as above, but we're returning it instead
-		local originalSpecies = entity:callScript("status.statusProperty", "sbqOriginalSpecies") or entity:entitySpecies()
+		local originalSpecies = (entity:callScript("status.statusProperty", "wr_originalIdentity") or {}).species or entity:entitySpecies()
 		if self.negated then return Relation.some end
 		return { { entity, originalSpecies } }
 	end,

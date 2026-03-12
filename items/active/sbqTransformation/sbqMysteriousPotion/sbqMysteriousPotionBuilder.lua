@@ -8,10 +8,14 @@ function build(directory, config, parameters, level, seed)
 
 	config.identity = parameters.identity or (parameters.args or {})[1] or config.identity or config.args[1]
 	config.duration = parameters.duration or (parameters.args or {})[2] or config.duration or config.args[2] or sbq.config.defaultTFDuration
+	config.forceIdentity = parameters.forceIdentity or (parameters.args or {})[3] or config.forceIdentity or config.args[3]
+	config.forceCustomization = parameters.forceCustomization or (parameters.args or {})[4] or config.forceCustomization or config.args[4]
 
 	parameters.args = {
 		config.identity,
-		config.duration
+		config.duration,
+		config.forceIdentity,
+		config.forceCustomization
 	}
 
 	if config.identity then
