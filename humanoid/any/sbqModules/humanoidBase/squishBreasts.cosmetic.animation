@@ -4,17 +4,17 @@
 
         },
         "parts" : {
-			"frontSleeve<slot>" : {
+			"frontSleeve" : {
 				"partStates" : {
 					"rpActionState" : {
-						"squishBreasts" : {"properties" : {"image": "<frontSleeve<slot>Frameset>:swimIdle.1"}}
+						"squishBreasts" : {"properties" : {"imageParts":{"<slot>":{"image":"<frontSleeve<slot>Frameset>:swimIdle.1<cosmetic<slot>Directives>","zLevelSlot":0.0}}}}
 					}
 				}
 			},
-			"backSleeve<slot>" : {
+			"backSleeve" : {
 				"partStates" : {
 					"rpActionState" : {
-						"squishBreasts" : {"properties" : {"image": "<backSleeve<slot>Frameset>:swim.2"}}
+						"squishBreasts" : {"properties" : {"imageParts":{"<slot>":{"image":"<backSleeve<slot>Frameset>:swim.2<cosmetic<slot>Directives>","zLevelSlot":0.0}}}}
 					}
 				}
 			}

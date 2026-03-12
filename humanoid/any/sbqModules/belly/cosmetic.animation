@@ -6,18 +6,15 @@
 		"stateTypes" : {
 		},
 		"parts" : {
-			"belly_Cosmetic<slot>" : {
+			"belly_Cosmetic" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.71,
-					"anchorPart": "belly",
-					"navelInteract" : [0.25,-1.25],
-					"absorbInteract" : [-0.25,-1.25],
-					"processingDirectives" : "<cosmetic<slot>Directives>"
+					"anchorPart": "belly"
 				},
 				"partStates": {
 					"bellyState": {
-						"idle": { "properties": { "image": "<bellyCosmetic<slot>Frameset>:<bellySize>-<bellyState_state>.<bellyState_frame>" } },
+						"idle": { "properties": { "imageParts":{"<slot>":{"image":"<bellyCosmetic<slot>Frameset>:<bellySize>-<bellyState_state>.<bellyState_frame><cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -36,7 +33,7 @@
 						"s_down_release" : "idle"
 					},
 					"bellyExpandState" : {
-						"expand": { "properties": { "image": "<bellyCosmetic<slot>Frameset>:<bellyInterpolateSize>-expand" } },
+						"expand": { "properties": { "imageParts":{"<slot>":{"image":"<bellyCosmetic<slot>Frameset>:<bellyInterpolateSize>-expand<cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

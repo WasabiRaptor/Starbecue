@@ -7,18 +7,17 @@
 		},
 		"parts" : {
 
-			"cock_Cosmetic<slot>" : {
+			"cock_Cosmetic" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.41,
-					"anchorPart": "cock",
-					"processingDirectives" : "<cosmetic<slot>Directives>"
+					"anchorPart": "cock"
 				},
 				"partStates": {
 					"body": {
-						"idle": { "properties": { "image": "<cockCosmetic<slot>Frameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
-						"walk": { "properties": { "image": "<cockCosmetic<slot>Frameset>:<cockSize>-<body_state>.<body_frame>" } },
-						"run": { "properties": { "image": "<cockCosmetic<slot>Frameset>:<cockSize>-run.<body_frame>" } },
+						"idle": { "properties": { "imageParts":{"<slot>":{"image":"<cockCosmetic<slot>Frameset>:<cockSize>-<cockState_state>.<cockState_frame><cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
+						"walk": { "properties": { "imageParts":{"<slot>":{"image":"<cockCosmetic<slot>Frameset>:<cockSize>-<body_state>.<body_frame><cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
+						"run": { "properties": { "imageParts":{"<slot>":{"image":"<cockCosmetic<slot>Frameset>:<cockSize>-run.<body_frame><cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
 						"runbackwards": "run",
 						"jump": "walk",
 						"fall": "walk",
@@ -29,7 +28,7 @@
 						"lay" : "idle"
 					},
 					"cockState": {
-						"s_front" : { "properties": { "image": "<cockCosmetic<slot>Frameset>:<cockSize>-<cockState_state>.<cockState_frame>" } },
+						"s_front" : { "properties": { "imageParts":{"<slot>":{"image":"<cockCosmetic<slot>Frameset>:<cockSize>-<cockState_state>.<cockState_frame><cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
 						"s_front_press" : "s_front",
 						"s_front_hold" : "s_front",
 						"s_front_release" : "s_front",
@@ -47,7 +46,7 @@
 						"s_down_release" : "s_front"
 					},
 					"cockExpandState" : {
-						"expand": { "properties": { "image": "<cockCosmetic<slot>Frameset>:<cockInterpolateSize>-expand" } },
+						"expand": { "properties": { "imageParts":{"<slot>":{"image":"<cockCosmetic<slot>Frameset>:<cockInterpolateSize>-expand<cosmetic<slot>Directives>","zLevelSlot":0.0}} } },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

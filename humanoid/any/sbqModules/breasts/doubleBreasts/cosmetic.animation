@@ -9,21 +9,21 @@
 		"stateTypes" : {
 		},
 		"parts" : {
-			"breasts_secondary_right_Cosmetic<slot>" : {
+			"breasts_secondary_right_Cosmetic" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.801,
 					"flippedZLevel": 11.601,
 
-					"anchorPart": "breasts_secondary_right",
-					"processingDirectives" : "<cosmetic<slot>Directives>"
+					"anchorPart": "breasts_secondary_right"
 				},
 				"partStates": {
 					"breasts_secondary_rightState": {
-						"idle": { "properties": {
-							"image": "<breasts_secondary_rightFrontCosmetic<slot>Frameset>:<breasts_secondary_rightSize>-<breasts_secondary_rightState_state>.<breasts_secondary_rightState_frame>",
-							"flippedImage": "<breasts_secondary_rightBackCosmetic<slot>Frameset>:<breasts_secondary_rightSize>-<breasts_secondary_rightState_state>.<breasts_secondary_rightState_frame>"
-							} },
+						"idle": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_secondary_rightFrontCosmetic<slot>Frameset>:<breasts_secondary_rightSize>-<breasts_secondary_rightState_state>.<breasts_secondary_rightState_frame><cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_secondary_rightBackCosmetic<slot>Frameset>:<breasts_secondary_rightSize>-<breasts_secondary_rightState_state>.<breasts_secondary_rightState_frame>cosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -42,10 +42,11 @@
 						"s_down_release" : "idle"
 					},
 					"breasts_secondary_rightExpandState" : {
-						"expand": { "properties": {
-							"image": "<breasts_secondary_rightFrontCosmetic<slot>Frameset>:<breasts_secondary_rightInterpolateSize>-expand",
-							"flippedImage": "<breasts_secondary_rightBackCosmetic<slot>Frameset>:<breasts_secondary_rightInterpolateSize>-expand"
-							} },
+						"expand": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_secondary_rightFrontCosmetic<slot>Frameset>:<breasts_secondary_rightInterpolateSize>-expand<cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_secondary_rightBackCosmetic<slot>Frameset>:<breasts_secondary_rightInterpolateSize>-expandcosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -54,7 +55,7 @@
 					}
 				}
 			},
-			"breasts_secondary_left_Cosmetic<slot>" : {
+			"breasts_secondary_left_Cosmetic" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.601,
@@ -65,10 +66,11 @@
 				},
 				"partStates": {
 					"breasts_secondary_leftState": {
-						"idle": { "properties": {
-							"image": "<breasts_secondary_leftBackCosmetic<slot>Frameset>:<breasts_secondary_leftSize>-<breasts_secondary_leftState_state>.<breasts_secondary_leftState_frame>",
-							"flippedImage": "<breasts_secondary_leftFrontCosmetic<slot>Frameset>:<breasts_secondary_leftSize>-<breasts_secondary_leftState_state>.<breasts_secondary_leftState_frame>"
-							} },
+						"idle": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_secondary_leftBackCosmetic<slot>Frameset>:<breasts_secondary_leftSize>-<breasts_secondary_leftState_state>.<breasts_secondary_leftState_frame><cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_secondary_leftFrontCosmetic<slot>Frameset>:<breasts_secondary_leftSize>-<breasts_secondary_leftState_state>.<breasts_secondary_leftState_frame>cosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -87,10 +89,11 @@
 						"s_down_release" : "idle"
 					},
 					"breasts_secondary_leftExpandState" : {
-						"expand": { "properties": {
-							"image": "<breasts_secondary_leftBackCosmetic<slot>Frameset>:<breasts_secondary_leftInterpolateSize>-expand",
-							"flippedImage": "<breasts_secondary_leftFrontCosmetic<slot>Frameset>:<breasts_secondary_leftInterpolateSize>-expand"
-							} },
+						"expand": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_secondary_leftBackCosmetic<slot>Frameset>:<breasts_secondary_leftInterpolateSize>-expand<cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_secondary_leftFrontCosmetic<slot>Frameset>:<breasts_secondary_leftInterpolateSize>-expandcosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

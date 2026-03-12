@@ -49,9 +49,7 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 	end
 	module.animations = nil
 	for _, v in ipairs(module.cosmeticAnimations or {}) do
-		for i = 1, 20 do
-			table.insert(humanoidConfig.animation.includes, v .. "." .. i)
-		end
+		table.insert(humanoidConfig.animation.includes, v)
 	end
 	module.cosmeticAnimations = nil
 	if humanoidConfig.bodyFullbright then

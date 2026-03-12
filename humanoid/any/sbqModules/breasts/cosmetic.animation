@@ -9,21 +9,21 @@
 		"stateTypes" : {
 		},
 		"parts" : {
-			"breasts_right_Cosmetic<slot>" : {
+			"breasts_right_Cosmetic" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.801,
 					"flippedZLevel": 11.601,
 
-					"anchorPart": "breasts_right",
-					"processingDirectives" : "<cosmetic<slot>Directives>"
+					"anchorPart": "breasts_right"
 				},
 				"partStates": {
 					"breasts_rightState": {
-						"idle": { "properties": {
-							"image": "<breasts_rightFrontCosmetic<slot>Frameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>",
-							"flippedImage": "<breasts_rightBackCosmetic<slot>Frameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>"
-							} },
+						"idle": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_rightFrontCosmetic<slot>Frameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame><cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_rightBackCosmetic<slot>Frameset>:<breasts_rightSize>-<breasts_rightState_state>.<breasts_rightState_frame>cosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -42,10 +42,11 @@
 						"s_down_release" : "idle"
 					},
 					"breasts_rightExpandState" : {
-						"expand": { "properties": {
-							"image": "<breasts_rightFrontCosmetic<slot>Frameset>:<breasts_rightInterpolateSize>-expand",
-							"flippedImage": "<breasts_rightBackCosmetic<slot>Frameset>:<breasts_rightInterpolateSize>-expand"
-							} },
+						"expand": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_rightFrontCosmetic<slot>Frameset>:<breasts_rightInterpolateSize>-expand<cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_rightBackCosmetic<slot>Frameset>:<breasts_rightInterpolateSize>-expandcosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {
@@ -54,21 +55,21 @@
 					}
 				}
 			},
-			"breasts_left_Cosmetic<slot>" : {
+			"breasts_left_Cosmetic" : {
 				"properties": {
 					"centered": true,
 					"zLevel": 11.601,
 					"flippedZLevel": 11.801,
 
-					"anchorPart": "breasts_left",
-					"processingDirectives" : "<cosmetic<slot>Directives>"
+					"anchorPart": "breasts_left"
 				},
 				"partStates": {
 					"breasts_leftState": {
-						"idle": { "properties": {
-							"image": "<breasts_leftBackCosmetic<slot>Frameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>",
-							"flippedImage": "<breasts_leftFrontCosmetic<slot>Frameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>"
-							} },
+						"idle": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_leftBackCosmetic<slot>Frameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame><cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_leftFrontCosmetic<slot>Frameset>:<breasts_leftSize>-<breasts_leftState_state>.<breasts_leftState_frame>cosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"s_front" : "idle",
 						"s_front_press" : "idle",
 						"s_front_hold" : "idle",
@@ -87,10 +88,11 @@
 						"s_down_release" : "idle"
 					},
 					"breasts_leftExpandState" : {
-						"expand": { "properties": {
-							"image": "<breasts_leftBackCosmetic<slot>Frameset>:<breasts_leftInterpolateSize>-expand",
-							"flippedImage": "<breasts_leftFrontCosmetic<slot>Frameset>:<breasts_leftInterpolateSize>-expand"
-							} },
+						"expand": { "properties": {"imageParts":{"<slot>":{
+							"image":"<breasts_leftBackCosmetic<slot>Frameset>:<breasts_leftInterpolateSize>-expand<cosmetic<slot>Directives>",
+							"flippedImage":"<breasts_leftFrontCosmetic<slot>Frameset>:<breasts_leftInterpolateSize>-expandcosmetic<slot>Directives>",
+							"zLevelSlot":0.0
+						}}} },
 						"eat" : "expand"
 					},
 					"portraitMode" : {

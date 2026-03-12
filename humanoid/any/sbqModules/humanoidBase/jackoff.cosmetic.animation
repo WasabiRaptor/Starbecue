@@ -4,10 +4,10 @@
 
 		},
 		"parts" : {
-			"frontSleeve<slot>" : {
+			"frontSleeve" : {
 				"partStates" : {
 					"rpActionState" : {
-						"jackoff" : {"properties" : {"image": "<frontSleeve<slot>Frameset>:rotation"}}
+						"jackoff" : {"properties" : {"imageParts":{"<slot>":{"image":"<frontSleeve<slot>Frameset>:rotation<cosmetic<slot>Directives>","zLevelSlot":0.0}}}}
 					}
 				}
 			}
