@@ -26,12 +26,16 @@
 					"duck" : {"properties" : {
 					}},
 					"sit" : {"properties" : {
+						"crotchOffset" : [["reset"],	["translate",[1.25,-1.25]]],
 						"animationTags" : {
 							"pose" : "sit"
 						}
 					}},
 					"lay" : {"properties" : {
-						"crotchOffset" : [["reset"],	["translate",[0,0.25]]]
+						"crotchOffset" : [["reset"],	["translate",[0,0.25]]],
+						"animationTags" : {
+							"pose" : "lay"
+						}
 					}},
 					"walk" : {"properties" : {
 					}},
