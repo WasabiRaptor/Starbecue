@@ -13,7 +13,9 @@ Starbecue is an 18+ fetish mod created for starbound that focuses mainly on Vore
 
 The mod has a opt-in based consent system for deciding what sort of actions you are subject to, as well as perform on other characters whether they be player or NPCs. While there is no way to prevent one from viewing other characters performing actions one may not have opted in to, those actions cannot be performed on you by anyone, and NPCs will ignore you when seeking out those actions. NPCs can also be configured ingame in much the same way players can configure themselves, however, certain OCs may have certain settings locked to a specific value by their owner, please respect their wishes.
 
-Check out the [features](https://github.com/WasabiRaptor/Starbecue/blob/master/features.md) for a comprehensive list and explaination of features in the mod, this is also where you'll find the list of compatible modded races in this version.
+Check out the [features](https://github.com/WasabiRaptor/Starbecue/blob/master/features.md) for a comprehensive list and explaination of features in the mod.
+
+All SBQ compatibility patches as well as a list of compatible species can be found [here](https://github.com/WasabiRaptor/SBQ-compatibility). All compatibility patches typically come bundled with the distribution zip, however you may want to check with this if a races' compatibility was updated between major versions.
 
 [FAQ](https://github.com/WasabiRaptor/Starbecue/blob/master/FAQ.md) has a number of frequently asked questions, make sure to check it to see if theres an answer for you before poking any of the developers about it.
 
