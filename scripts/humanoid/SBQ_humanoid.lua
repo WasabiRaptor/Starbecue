@@ -160,7 +160,7 @@ function sbq.humanoidInit()
 		if player and not localMessage then return end
 		local context = player or npc
 		local currentIdentity = context.humanoidIdentity()
-		context.setHumanoidParameters(newIdentity.parameters)
+		context.setHumanoidParameters(newIdentity.parameters or {})
 		context.setHumanoidIdentity(newIdentity)
 		if player and interface and (currentIdentity.species ~= newIdentity.species) then
 			interface.sendMessage("wr_closeCustomize")
