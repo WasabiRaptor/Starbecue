@@ -456,3 +456,21 @@ function sbq.widgetScripts.dropDownSetting(_, setting, group, name)
 	end
 	_ENV.metagui.dropDownMenu(options, table.unpack(dropDownConfig.args or {}))
 end
+function sbq.widgetScripts.pussyOptionsVisible(setting, group, name)
+    return sbq.settings:get("pussySelect") ~= "disable"
+end
+function sbq.widgetScripts.cockOptionsVisible(setting, group, name)
+    return sbq.settings:get("cockSelect") ~= "disable"
+end
+function sbq.widgetScripts.bellyOptionsVisible(setting, group, name)
+    return sbq.settings:get("bellySelect") ~= "disable"
+end
+function sbq.widgetScripts.tailOptionsVisible(setting, group, name)
+    return sbq.settings:get("tailSelect") ~= "disable"
+end
+function sbq.widgetScripts.breastsOptionsVisible(setting, group, name)
+    return sbq.settings:get("breastsSelect") ~= "disable"
+end
+function sbq.widgetScripts.ballsOptionsVisible(setting, group, name)
+    return sbq.settings:get("ballsSelect") ~= "disable"
+end
