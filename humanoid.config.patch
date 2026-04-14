@@ -54,6 +54,38 @@
 				},
 				"infused": {
 					"includes" : ["/humanoid/any/sbqModules/bellyInfuse/sbqModule.config"]
+				},
+				"tight": {
+					"includes": [
+						"/humanoid/any/sbqModules/belly/sbqModule.config"
+					],
+					"animations":["/humanoid/any/sbqModules/belly/modules/tight/tight.animation"],
+					"infuseModules" : {
+						"belly" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/belly/infused.animation"],
+								"infuseTags" : {
+									"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/belly_tight.png",
+									"bellyInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"belly_infused"
+								],
+								"modules" : {
+									"navelVisible":{"false":{
+										"infuseTags" : {
+											"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/belly_tight_noNavel.png"
+										}
+									}}
+								}
+							}
+						}
+					},
+					"modules" : {
+						"navelVisible":{"false":{
+							"animations":["/humanoid/any/sbqModules/belly/modules/tight/noNavel.animation"]
+						}}
+					}
 				}
 			},
 			"cock" : {
@@ -535,7 +567,8 @@
 			"bellySelect" : [
 				"-",
 				"default",
-				"infused"
+				"infused",
+				"tight"
 			],
 			"bellyInfuseSelect" : [
 				"-",
