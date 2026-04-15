@@ -614,6 +614,8 @@ function widgets.sbqCheckBox:init(base, param)
 	self.groupName = param.groupName or self.parent.groupName
 	self.groupKey = param.groupKey or self.parent.groupKey
 
+	self.toolTipChecked = param.toolTipChecked
+
 	self.explicitSize = param.size
 
 	self.drawables = param.drawables
@@ -812,6 +814,10 @@ function widgets.sbqCheckBox:selectValue(val)
 	local c = self:findValue(val)
 	if c then c:setChecked(true) end
 	return c -- might as well
+end
+
+function widgets.sbqCheckBox:getToolTip()
+	return (self.checked and self.toolTipChecked) or self.toolTip
 end
 
 ----- other functions -----
