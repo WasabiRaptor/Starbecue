@@ -86,6 +86,38 @@
 							"animations":["/humanoid/any/sbqModules/belly/modules/tight/noNavel.animation"]
 						}}
 					}
+				},
+				"pregnant": {
+					"includes": [
+						"/humanoid/any/sbqModules/belly/sbqModule.config"
+					],
+					"animations":["/humanoid/any/sbqModules/belly/modules/pregnant/pregnant.animation"],
+					"infuseModules" : {
+						"belly" : { // infuse slot
+							"default" : { // species
+								"animations" : ["/humanoid/any/sbqModules/belly/infused.animation"],
+								"infuseTags" : {
+									"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/belly_pregnant.png",
+									"bellyInfusedDirectives" : "<directives>"
+								},
+								"infusedBodyFullbrightParts" : [
+									"belly_infused"
+								],
+								"modules" : {
+									"navelVisible":{"false":{
+										"infuseTags" : {
+											"bellyInfusedFrameset" : "<humanoidPath>sbq/infused/belly_pregnant_noNavel.png"
+										}
+									}}
+								}
+							}
+						}
+					},
+					"modules" : {
+						"navelVisible":{"false":{
+							"animations":["/humanoid/any/sbqModules/belly/modules/pregnant/noNavel.animation"]
+						}}
+					}
 				}
 			},
 			"cock" : {
@@ -568,7 +600,8 @@
 				"-",
 				"default",
 				"infused",
-				"tight"
+				"tight",
+				"pregnant"
 			],
 			"bellyInfuseSelect" : [
 				"-",
