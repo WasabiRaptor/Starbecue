@@ -7,6 +7,10 @@
 > If you're hosting a server, make sure you downloaded and are using the provided server executable.
 > Make sure to remove old versions of the mod if they are present.
 
+### Q: I can't open any of the menus!
+> This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
+> Remove [Qickbar Mini](https://steamcommunity.com/sharedfiles/filedetails/?id=1088459034) The above dependencies replace it.
+
 ### Q: How do I get to the shop?
 > If you can't find the fireplace on a lush planet, you can access it via the outpost teleporter.
 > command `/warp instanceworld:sbqHub`

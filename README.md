@@ -27,6 +27,8 @@ Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix) o
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
 
+Remove [Qickbar Mini](https://steamcommunity.com/sharedfiles/filedetails/?id=1088459034) The above dependencies replace it.
+
 After that, everything required to run the mod is included in the zip on the [releases](https://github.com/WasabiRaptor/Starbecue/releases) page!
 
 Starbecue as of version 4.0 uses [OpenSB-SBQ](https://github.com/WasabiRaptor/OpenStarbound/tree/SBQ) which is a specialized version of [OpenSB](https://github.com/OpenStarbound/OpenStarbound) and should be compatible with any mods that require it. In the future base OpenSB may be all that is required if my features get merged, as I am contributing to it's development. The zip you have been provided with already contains a build of OpenSB-SBQ.
