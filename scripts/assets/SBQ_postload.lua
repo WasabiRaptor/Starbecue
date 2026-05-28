@@ -20,6 +20,15 @@ if FDEmetadata and (assets.json("/client.config:windowTitle") == "Starbound - FD
 	titleErrorString = titleErrorString .. sbqStrings.fixFutaraDragonEngine .. "\n \n"
 end
 
+local quickBarMiniMetadata = assetSourcesByName["QuickbarMini"]
+if quickBarMiniMetadata and (quickBarMiniMetadata.version == "Alpha v0.36")  then
+	titleErrorString = titleErrorString .. sbqStrings.fixQuickbarMini .. "\n \n"
+end
+local stardustLibMetadata = assetSourcesByName["StardustLib"]
+if not stardustLibMetadata and ((not quickBarMiniMetadata) or (quickBarMiniMetadata and (quickBarMiniMetadata.version == "Alpha v0.36"))) then
+	titleErrorString = titleErrorString .. sbqStrings.fixStardustLib .. "\n \n"
+end
+
 local speciesFiles = assets.byExtension("species")
 
 local sbqStrings = assets.json("/sbqStrings.config")

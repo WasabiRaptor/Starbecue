@@ -27,7 +27,7 @@ Latest versions are available on [patreon](https://www.patreon.com/LokiVulpix) o
 
 This mod Requires [Stardust Core Lite](https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532) or [Stardust Core](https://steamcommunity.com/sharedfiles/filedetails/?id=764887546)
 
-Remove [Qickbar Mini](https://steamcommunity.com/sharedfiles/filedetails/?id=1088459034) The above dependencies replace it.
+Make sure to remove [Qickbar Mini](https://steamcommunity.com/sharedfiles/filedetails/?id=1088459034) if its installed, as the above dependencies replace it.
 
 After that, everything required to run the mod is included in the zip on the [releases](https://github.com/WasabiRaptor/Starbecue/releases) page!
 
