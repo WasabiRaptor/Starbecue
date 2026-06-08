@@ -940,7 +940,6 @@ function sbq._SpeciesScript:addLocation(name, config)
 		struggleVec = {0,0},
 		interpolateSize = 0,
 		interpolateFrom = 0,
-		interpolateTo = 0,
 		interpolateTime = 0,
 		interpolateCurTime = 0,
 		subLocations = {}
@@ -953,10 +952,6 @@ function sbq._SpeciesScript:addLocation(name, config)
 		location.occupancy.interpolateFrom,
 		location.interpolateSizes or location.struggleSizes or {0}
 	)
-	location.occupancy.interpolateTo = sbq.getClosestValue(
-		location.occupancy.interpolateTo,
-		location.interpolateSizes or location.struggleSizes or {0}
-	)
 	location.occupancy.visualSize = sbq.getClosestValue(
 		location.occupancy.visualSize,
 		location.struggleSizes or {0}
@@ -965,7 +960,6 @@ function sbq._SpeciesScript:addLocation(name, config)
 		location.occupancy.visualCount,
 		location.struggleSizes or {0}
 	)
-
 	sbq.Occupants.locations[name] = location.occupancy
 	if not location.occupancy.captured then
 		location.occupancy.captured = jarray()
@@ -992,13 +986,12 @@ function sbq._SpeciesScript:addLocation(name, config)
 			addedCount = 0,
 			digestedCount = 0,
 			infusedCount = 0,
-			visualSize = (location.struggleSizes or {})[1] or 0,
-			visualCount = (location.struggleSizes or {})[1] or 0,
+			visualSize = (subLocation.struggleSizes or location.struggleSizes or {})[1] or 0,
+			visualCount = (subLocation.struggleSizes or location.struggleSizes or {})[1] or 0,
 			interpolating = false,
 			struggleVec = {0,0},
 			interpolateSize = 0,
 			interpolateFrom = 0,
-			interpolateTo = 0,
 			interpolateTime = 0,
 			interpolateCurTime = 0,
 		}
@@ -1022,10 +1015,6 @@ function sbq._SpeciesScript:addLocation(name, config)
 			subLocation.occupancy.interpolateFrom,
 			subLocation.interpolateSizes or subLocation.struggleSizes or {0}
 		)
-		subLocation.occupancy.interpolateTo = sbq.getClosestValue(
-			subLocation.occupancy.interpolateTo,
-			subLocation.interpolateSizes or subLocation.struggleSizes or {0}
-		)
 		subLocation.occupancy.visualSize = sbq.getClosestValue(
 			subLocation.occupancy.visualSize,
 			subLocation.struggleSizes or {0}
@@ -1035,7 +1024,10 @@ function sbq._SpeciesScript:addLocation(name, config)
 			subLocation.struggleSizes or {0}
 		)
 	end
-
+	if name == "breasts" then
+	sb.logInfo("B")
+	sb.logInfo(sb.printJson(location.occupancy,2))
+	end
 	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.read.locations[location.settingsTable or name]})
 	setmetatable(location, { __index = self.species.locations[name] or sbq._Location })
@@ -1239,7 +1231,7 @@ function sbq._Location:updateOccupancy(dt)
 				infuseCount = self.settings.infusedSize
 			end
 		end
-		self.occupancy.visualSize = sbq.getClosestValue(
+		local newSize = sbq.getClosestValue(
 			math.min(
 				self.settings.visualMax,
 				math.max(
@@ -1249,36 +1241,36 @@ function sbq._Location:updateOccupancy(dt)
 			),
 			self.struggleSizes or { 0 }
 		)
-
+		local newCount = sbq.getClosestValue(
+			math.min(
+				self.settings.visualMax,
+				math.max(
+					self.settings.visualMin,
+					(self.occupancy.count + self.occupancy.addedCount + infuseCount)
+				)
+			),
+			self.struggleSizes or { 0 }
+		)
 		local refreshSize = false
 		if self.countBasedOccupancy then
-			self.occupancy.visualCount = sbq.getClosestValue(
-				math.min(
-					self.settings.visualMax,
-					math.max(
-						self.settings.visualMin,
-						(self.occupancy.count + self.occupancy.addedCount)
-					)
-				),
-				self.struggleSizes or { 0 }
-			)
-			refreshSize = (prevVisualCount ~= self.occupancy.visualCount + infuseCount)
+			refreshSize = (prevVisualCount ~= newCount)
 		else
-			self.occupancy.visualCount = self.occupancy.count + self.occupancy.addedCount + infuseCount
-			refreshSize = (prevVisualSize ~= self.occupancy.visualSize)
+			refreshSize = (prevVisualSize ~= newSize)
 		end
-		self.occupancy.visualCount = math.ceil(self.occupancy.visualCount)
-		self.occupancy.count = math.ceil(self.occupancy.count)
 
-		if self.occupancy.forceSizeRefresh or refreshSize and not (self.subKey and self.occupancy.symmetry) then
+		if (self.occupancy.forceSizeRefresh or refreshSize) and not (self.subKey and self.occupancy.symmetry) then
+			self.occupancy.visualSize = newSize
+			self.occupancy.visualCount = newCount
 			self:doSizeChangeAnims(prevVisualSize, prevVisualCount)
 			if self.occupancy.symmetry then
 				for k, v in pairs(self.subLocations or {}) do
 					subLocation = sbq.SpeciesScript:getLocation(self.key, k)
 					if subLocation then
+						local prevSubSize = subLocation.occupancy.visualSize
+						local prevSubCount = subLocation.occupancy.visualCount
 						subLocation.occupancy.visualSize = self.occupancy.visualSize
 						subLocation.occupancy.visualCount = self.occupancy.visualCount
-						subLocation:doSizeChangeAnims(prevVisualSize, prevVisualCount)
+						subLocation:doSizeChangeAnims(prevSubSize, prevSubCount)
 					end
 				end
 			end

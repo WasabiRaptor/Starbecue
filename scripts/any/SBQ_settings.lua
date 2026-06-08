@@ -275,6 +275,17 @@ _Settings.updated.pussySelectOverride = _Settings.updated.bellySelectOverride
 _Settings.updated.breastsSelectOverride = _Settings.updated.bellySelectOverride
 _Settings.updated.tailSelectOverride = _Settings.updated.bellySelectOverride
 
+function _Settings.updated:breastsSymmetric(oldValue, setting, groupName, groupId)
+	self.updated.any(self, oldValue, setting, groupName, groupId)
+	if sbq.SpeciesScript then
+		for locationName, _ in pairs(sbq.SpeciesScript.locations) do
+			local location = sbq.SpeciesScript:getLocation(locationName)
+			location:markSizeDirty(true)
+		end
+	end
+end
+_Settings.updated.ballsSymmetric = _Settings.updated.breastsSymmetric
+
 function _Settings.updated:any(oldValue, setting, groupName, groupId)
 	if sbq.config.publicSettings[setting] then
 		self.updated.publicSetting(self, oldValue, setting, groupName, groupId)
