@@ -68,20 +68,6 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 		end
 	end
 	module.occupantAnimations = nil
-	if module.modules then
-		if type(module.modules) == "string" then
-			module.modules = root.assetJson(module.modules)
-		end
-		for i, slot in ipairs(humanoidConfig.sbqModuleOrder or {}) do
-			local modules = module.modules[slot]
-			local selectedModule = humanoidConfig["sbqModule_" .. slot]
-			if modules and (selectedModule ~= nil) and (selectedModule ~= "disable") then
-				includeSBQModule(humanoidConfig, modules[tostring(selectedModule)] or modules.default, infuseData)
-			end
-		end
-		module.modules = nil
-	end
-
 	if infuseData then
 		for k, v in pairs(module.infuseTags) do
 			humanoidConfig.animation.globalTagDefaults[k] = sb.replaceTags(v, {
@@ -98,6 +84,19 @@ local function includeSBQModule(humanoidConfig, module, infuseData)
 			end
 		end
 		module.infusedBodyFullbrightParts = nil
+	end
+	if module.modules then
+		if type(module.modules) == "string" then
+			module.modules = root.assetJson(module.modules)
+		end
+		for i, slot in ipairs(humanoidConfig.sbqModuleOrder or {}) do
+			local modules = module.modules[slot]
+			local selectedModule = humanoidConfig["sbqModule_" .. slot]
+			if modules and (selectedModule ~= nil) and (selectedModule ~= "disable") then
+				includeSBQModule(humanoidConfig, modules[tostring(selectedModule)] or modules.default, infuseData)
+			end
+		end
+		module.modules = nil
 	end
 	if module.infuseModules then
 		if type(module.infuseModules) == "string" then
