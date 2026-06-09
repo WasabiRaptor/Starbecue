@@ -7,6 +7,10 @@ function init()
 		for k, v in pairs(settingsPageData or {}) do
 			sbq[k] = v
 		end
+		sbq.settings = sbq._Settings.new(sbq.settingsConfig or {}, sbq.storedSettings, world.entityType(sbq.entityId()))
+		sbq.upgrades = sbq._Upgrades.new(sbq.storedUpgrades)
+		sbq.upgrades:apply(sbq.settings)
+
 		refreshMainSettingsPage()
 		sbq.refreshSettingVisibility()
 	end)
