@@ -14,14 +14,13 @@
 		{ "type" : "tabField", "id" : "mainTabField", "layout" : "horizontal", "tabs" : [
 			{ "type" : "tab", "id" : "mainSettings", "title" : ":mainSettings", "visible" : true, "color" : "ff00ff", "contents" : [
 				{"mode":"horizontal"},
-				{"type" : "scrollArea", "scrollDirections" : [0,1], "children" : [
+				{"type" : "scrollArea", "scrollDirections" : [0,1], "expandMode" : [2,2], "children" : [
 					{"type":"panel","style":"convex", "id":"mainSettingsPanel" ,"children":[
 						{"mode":"vertical"}
 					]}
 				]},
-				{ "type" : "tabField", "id" : "locationTabField", "layout" : "horizontal", "tabs" : []}
-
+				{"type":"layout","mode":"vertical", "expandMode" : [2,2], "id":"locationsTabLayout","children":[]}
 			]}
-		], "bottomBar" : []}
+		], "bottomBar" : [{"type":"label","id":"bottomBarLabel","text":""}]}
 	]
 }

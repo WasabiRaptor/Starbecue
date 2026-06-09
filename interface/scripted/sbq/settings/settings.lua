@@ -1,38 +1,15 @@
 if not _ENV.metagui.inputData.sbq then sb.logInfo("failed to get settings data") return pane.dismiss() end
 
 function init()
-	if _ENV.mainSettingsPanel then
-		_ENV.mainSettingsPanel:clearChildren()
-		local mainSettings = { { type = "label", text = ":mainSettings", inline = true } }
-		for _, k in ipairs(sbq.voreConfig.settingsOrder or sbq.gui.settingsOrder) do
-			if type(k) == "string" then
-				sbq.setupSetting(mainSettings, k)
-			end
+	refreshMainSettingsPage()
+	message.setHandler("sbqRefreshMainSettingsPage", function(_,_, id, settingsPageData)
+		if id ~= sbq.entityId() then return end
+		for k, v in pairs(settingsPageData or {}) do
+			sbq[k] = v
 		end
-		if player.isAdmin() and sbq.debug then
-			table.insert(mainSettings, {type = "label", text = ":unordered", inline = true})
-			for k, v in pairs(sbq.config.defaultSettings) do
-				sbq.setupSetting(mainSettings, k)
-			end
-		end
-		_ENV.mainSettingsPanel:addChild({type = "layout", mode = "vertical", children = mainSettings})
-	end
-	if _ENV.locationTabField then
-		local locationSettings = {}
-		for _, name in ipairs(sbq.voreConfig.locationOrder or sbq.gui.locationOrder) do
-			sbq.setupLocation(name, locationSettings)
-		end
-		if player.isAdmin() and sbq.debug then
-			table.insert(locationSettings, {type = "label", text = ":unordered", inline = true})
-			for name, location in pairs(sbq.locations) do
-				sbq.setupLocation(name, locationSettings)
-			end
-		end
-		for _, v in ipairs(locationSettings) do
-			_ENV.locationTabField:newTab(v)
-		end
-	end
-
+		refreshMainSettingsPage()
+		sbq.refreshSettingVisibility()
+	end)
 	if _ENV.mainPrefsPanel then
 		local otherVisible = not (sbq.settings.settingsConfig.hideOtherSettings or false)
 		local preyVisible = not (sbq.settings.settingsConfig.hidePreySettings or false)
@@ -66,23 +43,70 @@ function init()
 			local widget = _ENV[infuseType.."PredPrefLayout"]
 			if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
 		end
-		local cockInfusePreyPrefLayout = _ENV.cockInfusePreyPrefLayout
 		_ENV.currentScale:setText(tostring(sbq.currentScale))
 	end
-
 	sbq.assignSettingValues()
 	sbq.refreshSettingVisibility()
+	world.sendEntityMessage(sbq.entityId(), "sbqHasSettingsOpen", player.id(), true)
 end
+function refreshMainSettingsPage()
+	if _ENV.mainSettingsPanel then
+		_ENV.mainSettingsPanel:clearChildren()
+		local mainSettings = { { type = "label", text = ":mainSettings", inline = true } }
+		local didSetup = {}
+		for _, k in ipairs(sbq.voreConfig.settingsOrder or sbq.gui.settingsOrder) do
+			if type(k) == "string" then
+				sbq.setupSetting(mainSettings, k)
+				didSetup[k] = true
+			end
+		end
+		if player.isAdmin() and sbq.debug then
+			table.insert(mainSettings, {type = "label", text = ":unordered", inline = true})
+			for k, v in pairs(sbq.config.defaultSettings) do
+				if not didSetup[k] then
+					sbq.setupSetting(mainSettings, k)
+				end
+			end
+		end
+		_ENV.mainSettingsPanel:addChild({type = "layout", mode = "vertical", children = mainSettings})
+	end
+	if _ENV.locationsTabLayout then
+		_ENV.locationsTabLayout:clearChildren()
+		local locationSetup = {}
+		local locationSettings = {}
+		for _, name in ipairs(sbq.voreConfig.locationOrder or sbq.gui.locationOrder) do
+			locationSetup[name] = true
+			sbq.setupLocation(name, locationSettings)
+		end
+		if player.isAdmin() and sbq.debug then
+			table.insert(locationSettings, {type = "label", text = ":unordered", inline = true})
+			for name, location in pairs(sbq.locations) do
+				if not locationSetup[name] then
+					sbq.setupLocation(name, locationSettings)
+				end
+			end
+		end
+		_ENV.locationsTabLayout:addChild({ type = "tabField", id= "locationTabField", layout= "horizontal", tabs = locationSettings})
+	end
+	for _, voreType in pairs(sbq.gui.voreTypeOrder) do
+		local widget = _ENV[voreType.."PredPrefLayout"]
+		if widget then widget:setVisible((sbq.voreConfig.availableVoreTypes or {})[voreType] or false) end
+	end
+	for _, infuseType in pairs(sbq.gui.infuseTypeOrder) do
+		local widget = _ENV[infuseType.."PredPrefLayout"]
+		if widget then widget:setVisible((sbq.voreConfig.availableInfuseTypes or {})[infuseType] or false) end
+	end
+end
+
 function uninit()
 	if world.entityExists(sbq.entityId()) then
 		world.sendEntityMessage(sbq.entityId(), "sbqRefreshSettings")
+		world.sendEntityMessage(sbq.entityId(), "sbqHasSettingsOpen", player.id(), nil)
 	end
 end
-local locationSetup = {}
 function sbq.setupLocation(name, list)
 	local location = sbq.locations[name]
-	if (not location) or locationSetup[name] then return end
-	locationSetup[name] = true
+	if (not location) then return end
 	local tabContents = {
 		{ mode = "v" },
 		{ align = "center",type = "label",text = location.name or (":"..name) }
@@ -100,15 +124,19 @@ function sbq.setupLocation(name, list)
 		}
 	}
 
+	local didSetup = {}
 	for _, k in ipairs(location.settingsOrder or sbq.voreConfig.locationSettingsOrder or sbq.gui.locationSettingsOrder) do
 		if type(k) == "string" then
 			sbq.setupSetting(tabContents, k, "locations", name)
+			didSetup[sbq.concatStrings(k,"locations",name)] = true
 		end
 	end
 	if player.isAdmin() and sbq.debug then
 		table.insert(tabContents, {type = "label", text = ":unordered", inline = true})
 		for k, v in pairs(sbq.config.groupedSettings.locations.defaultSettings) do
-			sbq.setupSetting(tabContents, k, "locations", name)
+			if not didSetup[sbq.concatStrings(k,"locations",name)] then
+				sbq.setupSetting(tabContents, k, "locations", name)
+			end
 		end
 	end
 	table.insert(list, locationTab)
@@ -116,17 +144,15 @@ end
 
 function sbq.setupSetting(parent, setting, group, name)
 	local settingIdentifier = sbq.concatStrings(setting, group, name)
-	if (not sbq.settingIdentifiers[settingIdentifier]) then
-		sbq.settingIdentifiers[settingIdentifier] = {setting, group, name }
-		table.insert(parent, {
-			type = "sbqSetting",
-			id = settingIdentifier,
-			setting = setting,
-			groupName = group,
-			groupKey = name,
-			makeLabel = true
-		})
-	end
+	sbq.settingIdentifiers[settingIdentifier] = {setting, group, name }
+	table.insert(parent, {
+		type = "sbqSetting",
+		id = settingIdentifier,
+		setting = setting,
+		groupName = group,
+		groupKey = name,
+		makeLabel = true
+	})
 end
 
 function sbq.settingVisibility(input, setting, group, name)
@@ -353,6 +379,7 @@ end
 
 function sbq.widgetScripts.fillControlVisible(setting, group, name)
 	local location = sbq.locations[name]
+	if not location then return false end
 	if (not location.maxSize) or (location.maxSize == math.huge) or (not location.struggleSizes) or (#location.struggleSizes < 2) then
 		return false
 	end
@@ -363,10 +390,12 @@ function sbq.widgetScripts.infusedSizeVisible(setting, group, name)
 end
 function sbq.widgetScripts.infusedFadeVisible(setting, group, name)
 	local location = sbq.locations[name]
+	if not location then return false end
 	return location.infuseColors
 end
 function sbq.widgetScripts.infusedVisible(setting, group, name)
 	local location = sbq.locations[name]
+	if not location then return false end
 	if (not location.infuseType) or (not sbq.settings.read.infusePrefs[location.infuseType].pred) then
 		return false
 	end

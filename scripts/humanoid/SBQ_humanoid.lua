@@ -47,6 +47,13 @@ function refreshHumanoidParameters()
 			sbq.init(humanoidConfig.sbqConfig)
 		end
 	end
+	if player then
+		interface.sendMessage("sbqRefreshMainSettingsPage", sbq.entityId(), sbq.settingsPageData())
+	else
+		for k, _ in pairs(sbq.settings.hasSettingsOpen) do
+			world.sendEntityMessage(k, "sbqRefreshMainSettingsPage", sbq.entityId(), sbq.settingsPageData())
+		end
+	end
 end
 
 

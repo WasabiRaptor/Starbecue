@@ -1024,10 +1024,6 @@ function sbq._SpeciesScript:addLocation(name, config)
 			subLocation.struggleSizes or {0}
 		)
 	end
-	if name == "breasts" then
-	sb.logInfo("B")
-	sb.logInfo(sb.printJson(location.occupancy,2))
-	end
 	location.settings = {}
 	setmetatable(location.settings, {__index = sbq.settings.read.locations[location.settingsTable or name]})
 	setmetatable(location, { __index = self.species.locations[name] or sbq._Location })

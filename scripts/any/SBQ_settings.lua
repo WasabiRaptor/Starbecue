@@ -441,6 +441,7 @@ function _Settings:setStatSettings()
 	status.setPersistentEffects("sbqStats", modifiers)
 end
 
+_Settings.hasSettingsOpen = {}
 function _Settings:setMessageHandlers(localOnly)
 	if localOnly then
 		message.setHandler({ name = "sbqSetSetting", localOnly = true }, function(...)
@@ -474,6 +475,10 @@ function _Settings:setMessageHandlers(localOnly)
 	message.setHandler({ name = "sbqSettingsPageData" }, function(_, ...)
 		return sbq.settingsPageData(...)
 	end)
+	message.setHandler({ name = "sbqHasSettingsOpen" }, function(_, id, isOpen)
+		_Settings.hasSettingsOpen[id] = isOpen
+	end)
+
 end
 
 function _Settings:matches(input, isAny)

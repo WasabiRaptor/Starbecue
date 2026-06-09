@@ -108,6 +108,9 @@ function init()
 	message.setHandler("sbqHudRefreshPortrait", function(_, _, ...)
 		interface.sendMessage("sbqHudRefreshPortrait", ...)
 	end)
+	message.setHandler("sbqRefreshMainSettingsPage", function(_, _, ...)
+		interface.sendMessage("sbqRefreshMainSettingsPage", ...)
+	end)
 
 	message.setHandler("sbqQueueTenantRewards", function(_, _, uniqueId, newRewards)
 		if not uniqueId then return end
