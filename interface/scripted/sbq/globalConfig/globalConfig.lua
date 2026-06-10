@@ -450,6 +450,16 @@ function setupOverrideLayout(layout, overrideType, entityType, setting, group, g
 				addNewMapping(nil,nil)
 			end
 		end
+		local settingAdminTip = _ENV[settingId.."AdminTipLabel1"]
+		if sbq.strings[setting.."AdminTip"] then
+			settingAdminTip:setVisible(true)
+		end
+		if group and groupKey and not overall then
+			local settingIdAdminTip = _ENV[settingId.."AdminTipLabel2"]
+			if sbq.strings[settingId.."AdminTip"] then
+				settingIdAdminTip:setVisible(true)
+			end
+		end
 		local removeButton = _ENV["remove_"..settingId]
 		function removeButton:onClick()
 			inactiveSetup()
