@@ -13,38 +13,53 @@
 		{"type" :"panel", "style" :"convex", "expandMode" : [1,1], "children" : [
 			{"expandMode" : [1,1], "mode" : "v"},
 			{"type":"label","text":":globalConfigGui"},
-			[{"type":"label","text":":search", "inline":"true"},{ "type" : "textBox", "id" : "overridesSearchTextbox", "expandMode" : [1, 0]}],
-			{"type" :"panel", "style" :"flat", "expandMode" : [1,1], "children" :[
-				{"expandMode" : [1,1], "mode" : "h"},
-				{"type" :"panel", "style" :"concave", "expandMode" : [1,1], "children" :[
-					{ "type" : "tabField", "id" : "mainTabField", "expandMode" : [1,0], "layout" : "horizontal", "tabs" : [
-						{ "type" : "tab", "id" : "global", "title" : ":global", "visible" : true, "color" : "ff00ff", "contents" : [
+			{"type" :"panel", "style" :"concave", "expandMode" : [1,1], "children" :[
+				[
+					{ "type" : "textBox", "id" : "overridesSearchTextbox", "expandMode" : [1, 0]},
+					{ "type" : "itemSlot", "id" : "importOverridesItemSlot", "autoInteract":true},
+					{ "type" : "sbqButton", "id" : "importOverridesButton", "caption":":importOverrides", "expandMode" : [0, 0]},
+					{ "type" : "sbqButton", "id" : "exportOverridesButton", "caption":":exportOverrides", "expandMode" : [0, 0]}
+				],
+				{"expandMode" : [1,1], "mode" : "v"},
+				[
+						{ "type" : "tabField", "id" : "mainTabField", "expandMode" : [1,0], "layout" : "horizontal", "tabs" : [
+							{ "type" : "tab", "id" : "global", "title" : ":global", "visible" : true, "color" : "ff00ff", "contents" : [
+								{ "type" : "tabField", "id" : "global_tabField", "expandMode" : [1,0], "layout" : "horizontal", "tabs" : [
+									{ "type" : "tab", "id" : "any", "title" : ":any", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "player", "title" : ":player", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "npc", "title" : ":npc", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "monster", "title" : ":monster", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "object", "title" : ":object", "visible" : true, "color" : "ff00ff", "contents" : [
+									]}
+								]}
+							]},
+							{ "type" : "tab", "id" : "world", "title" : ":world", "visible" : true, "color" : "ff00ff", "contents" : [
+								{ "type" : "tabField", "id" : "world_tabField", "expandMode" : [1,0], "layout" : "horizontal", "tabs" : [
+									{ "type" : "tab", "id" : "any", "title" : ":any", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "player", "title" : ":player", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "npc", "title" : ":npc", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "monster", "title" : ":monster", "visible" : true, "color" : "ff00ff", "contents" : [
+									]},
+									{ "type" : "tab", "id" : "object", "title" : ":object", "visible" : true, "color" : "ff00ff", "contents" : [
+									]}
+								]}
+							]}
 						]},
-						{ "type" : "tab", "id" : "world", "title" : ":world", "visible" : true, "color" : "ff00ff", "contents" : [
+						{ "type" : "tabField", "id" : "groupsTabField", "layout" : "horizontal", "tabs" : [
 						]}
+				],
+				{"type" :"panel", "style" :"flat", "expandMode" : [1,1], "children" :[
+					{"expandMode" : [1,1], "mode" : "h"},
+					{ "type" : "scrollArea", "id" : "mainScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [0, 1], "children" : [
 					]},
-					{"type":"spacer", "size" : -6},
-					{ "type" : "tabField", "id" : "entityTabField", "expandMode" : [1,0], "layout" : "horizontal", "tabs" : [
-						{ "type" : "tab", "id" : "any", "title" : ":any", "visible" : true, "color" : "ff00ff", "contents" : [
-						]},
-						{ "type" : "tab", "id" : "player", "title" : ":player", "visible" : true, "color" : "ff00ff", "contents" : [
-						]},
-						{ "type" : "tab", "id" : "npc", "title" : ":npc", "visible" : true, "color" : "ff00ff", "contents" : [
-						]},
-						{ "type" : "tab", "id" : "monster", "title" : ":monster", "visible" : true, "color" : "ff00ff", "contents" : [
-						]},
-						{ "type" : "tab", "id" : "object", "title" : ":object", "visible" : true, "color" : "ff00ff", "contents" : [
-						]}
-					]},
-					{"type":"panel", "style" : "flat", "expandMode" : [1,1], "children" : [
-						{ "type" : "scrollArea", "id" : "mainScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [0, 1], "children" : [
-						]}
-					]}
-				]},
-				{"type" :"panel", "style" :"concave", "expandMode" : [1,1], "children" :[
-					{ "type" : "tabField", "id" : "groupsTabField", "layout" : "horizontal", "tabs" : [
-						{ "type" : "tab", "id" : "global", "title" : ":global", "visible" : true, "color" : "ff00ff", "contents" : [
-						]}
+					{ "type" : "scrollArea", "id" : "groupScrollArea", "thumbScrolling" : true, "scrollBars" : true, "expandMode" : [2,2], "scrollDirections" : [0, 1], "children" : [
 					]}
 				]}
 			]}

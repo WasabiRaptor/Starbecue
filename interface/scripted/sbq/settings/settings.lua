@@ -12,6 +12,7 @@ function init()
 		sbq.upgrades:apply(sbq.settings)
 
 		refreshMainSettingsPage()
+		sbq.assignSettingValues()
 		sbq.refreshSettingVisibility()
 	end)
 	if _ENV.mainPrefsPanel then

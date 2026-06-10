@@ -16,10 +16,22 @@ function removeClient(clientId)
 
 end
 
+local function loadVersioned(a, jsonVersion)
+	a = a or {}
+	if not (a.id and a.version and a.content) then
+		a = {
+			id = jsonVersion,
+			version = 0,
+			content = a or {}
+		}
+	end
+	return root.loadVersionedJson(a, jsonVersion)
+end
+
 
 function sbqWorldRefreshOverrideSettings()
-	local worldOverrideSettings = world.getProperty("sbqOverrideSettings") or {}
-	local serverOverrideSettings = root.getConfigurationPath("sbq.overrideSettings") or {}
+	local worldOverrideSettings = loadVersioned(world.getProperty("sbqOverrideSettings"), "sbqOverrideSettings")
+	local serverOverrideSettings = loadVersioned(root.getConfigurationPath("sbq.overrideSettings"), "sbqOverrideSettings")
 	world.setProperty("sbqOverrideSettings_player", sb.jsonMerge(
 		worldOverrideSettings.any or {},
 		worldOverrideSettings.player or {},
@@ -55,8 +67,8 @@ function sbqWorldRefreshOverrideSettings()
 		serverOverrideSettings.any or {}
 	))
 
-	local worldInvalidSettings = world.getProperty("sbqInvalidSettings") or {}
-	local serverInvalidSettings = root.getConfigurationPath("sbq.invalidSettings") or {}
+	local worldInvalidSettings = loadVersioned(world.getProperty("sbqInvalidSettings"), "sbqInvalidSettings")
+	local serverInvalidSettings = loadVersioned(root.getConfigurationPath("sbq.invalidSettings"), "sbqInvalidSettings")
 	world.setProperty("sbqInvalidSettings_player", sb.jsonMerge(
 		worldInvalidSettings.any or {},
 		worldInvalidSettings.player or {},

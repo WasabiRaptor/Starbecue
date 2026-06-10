@@ -135,7 +135,7 @@ function misc.generateSettingsCard(filter)
 	local settings = sbq.settings:export(exportFilters[filter])
 	sbq.logInfo(settings,2)
 	return { name = "secretnote", count = 1, parameters = {
-		shortdescription = sbq.entityName(sbq.entityId()).." "..(sbq.strings[filter.."SettingsCard"] or filter.."SettingsCard"),
+		shortdescription = (sbq.strings[filter.."SettingsCard"] or "%s "..filter.."SettingsCard"):format(sbq.entityName(sbq.entityId())),
 		description = sbq.getString(":"..filter.."settingsCardDesc"),
 		sbqSettings = settings,
 		tooltipKind = "filledcapturepod",
