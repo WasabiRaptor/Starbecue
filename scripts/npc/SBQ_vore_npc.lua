@@ -14,6 +14,7 @@ local old = {
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
 	setNpcItemSlot = _ENV.setNpcItemSlot
+	refreshHumanoidParameters = refreshHumanoidParameters or (function() end),
 }
 
 function _ENV.recruitable.setUniform()
@@ -120,6 +121,17 @@ function uninit()
 	storage.sbqCapturedOccupants = jarray()
 	for _, capturedOccupant in ipairs(sbq.Occupants.captured) do
 		table.insert(storage.sbqCapturedOccupants, capturedOccupant:save())
+	end
+end
+
+function refreshHumanoidParameters()
+	old.refreshHumanoidParameters()
+	if npc.getHumanoidParameter("sbqEnabled") then
+		sbq.refreshHumanoidParameters()
+	else
+		npc.setHumanoidParameter("sbqEnabled", true)
+		sbq.settings:setParameterSettings()
+		npc.refreshHumanoidParameters()
 	end
 end
 

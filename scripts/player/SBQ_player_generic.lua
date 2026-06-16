@@ -388,6 +388,18 @@ function uninit()
 	end
 end
 
+function refreshHumanoidParameters()
+	if player.getProperty("sbqAgreedTerms") then
+		if player.getHumanoidParameter("sbqEnabled") then
+			sbq.refreshHumanoidParameters()
+		else
+			player.setHumanoidParameter("sbqEnabled", true)
+			sbq.settings:setParameterSettings()
+			player.refreshHumanoidParameters()
+		end
+	end
+end
+
 function sbq.buildActionRequestOptions(id, actionList)
 	local options = {}
 	for _, action in ipairs(actionList or {}) do

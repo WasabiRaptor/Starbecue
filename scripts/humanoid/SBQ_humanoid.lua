@@ -1,7 +1,3 @@
-local old = {
-	refreshHumanoidParameters = refreshHumanoidParameters or (function() end),
-	-- equipmentSlotUpdated = equipmentSlotUpdated or (function() end)
-}
 require("/scripts/any/SBQ_util.lua")
 
 -- function equipmentSlotUpdated(slot, itemDescriptor)
@@ -15,8 +11,7 @@ function sbqSettingsConfig()
 end
 
 local initialized = false
-function refreshHumanoidParameters()
-	old.refreshHumanoidParameters()
+function sbq.refreshHumanoidParameters()
 	if not initialized then return end
 	if sbq.uninit then
 		sbq.uninit("refresh")
