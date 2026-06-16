@@ -141,15 +141,6 @@
 					"climb.7": {"properties":{}},
 					"climb.8": {"properties":{}}
 				}
-			},
-
-			"body_fgHiddenState" : {
-				"priority" : 4,
-				"default": "true",
-				"states" : {
-					"true": { "frames": 1, "cycle":0, "mode":"end" },
-					"false": { "frames": 1, "cycle": 0, "mode": "end" }
-				}
 			}
 		},
 		"parts" : {
@@ -253,9 +244,6 @@
 					"portraitMode" : {
 						"head": { "properties": { "image": "<humanoidPath><bodyFrameset>:<personalityIdle><portraitMask>" } },
 						"bust" : "head"
-					},
-					"body_fgHiddenState" : {
-						"true" : { "properties" : {}}
 					}
 				}
 			},
