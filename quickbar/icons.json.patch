@@ -6,5 +6,13 @@
 			"icon" : "/humanoid/any/sbqActionIcons/oralVore.png",
 			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:playerSettings" } } ]
 		}
+	},
+	{ "op" : "add", "path" : "/items/starbecue:globalConfig",
+		"value" : {
+			"label" : "SBQ Admin Config",
+			"weight" : -100,
+			"icon" : "/humanoid/any/sbqActionIcons/oralVore.png",
+			"action" : [ "pane", { "config" : { "gui" : { }, "scripts" : [ "/metagui/sbq/build.lua" ], "ui" : "starbecue:globalConfig" } } ]
+		}
 	}
 ]

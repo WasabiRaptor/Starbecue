@@ -1,18 +1,59 @@
 {
+	"version":1,
 	"globalTagDefaults" : {
 		"directives" : "",
 		"doorDirectives" : "?replace;787060=0060e8;d8d0c0=00d8f8;f8f8f8=f8f8f8", // normal door
 		"partImage" : "",
-		"lockVisible" : "?crop;0;0;0;0"
+		"fullbrightOpacity" : "?multiply=FFFFFF7f"
 	},
 	"animatedParts": {
 		"stateTypes": {
-			"doorState" : {
-				"default" : "idle",
-				"states" : {
-					"idle": { "frames": 1, "cycle": 1, "mode": "end", "priority": 0 },
-					"open": { "frames": 7, "cycle": 0.5, "mode": "end", "priority": 0 },
-					"close": { "frames": 7, "cycle": 0.5, "mode": "end", "priority": 0 }
+			"doorState": {
+				"priority" : 0,
+				"default": "closed",
+				"states": {
+					"open": {
+						"frames": 7,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "opened"
+					},
+					"opened" : {
+						"frames":1,
+						"cycle":0
+					},
+					"closing": {
+						"frames": 7,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "closed"
+					},
+					"closed": {
+						"frames":1,
+						"cycle":0
+					},
+					"closedHit" : {
+						"frames": 1,
+						"cycle": 0.1,
+						"mode": "transition",
+						"transition": "closed"
+					},
+					"locking": {
+						"frames": 7,
+						"cycle": 0.5,
+						"mode": "transition",
+						"transition": "locked"
+					},
+					"locked": {
+						"frames":1,
+						"cycle":0
+					},
+					"lockedHit" : {
+						"frames": 1,
+						"cycle": 0.1,
+						"mode": "transition",
+						"transition": "locked"
+					}
 				}
 			}
 		},
@@ -22,190 +63,92 @@
 					"centered": true,
 					"zLevel": 2,
 					"transformationGroups": [],
-					"image": "<partImage><directives><doorDirectives>"
-				}
-			},
-			"doorRightLock" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 5,
-					"transformationGroups": [],
-					"offset" : [3.5,0]
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame><directives><lockVisible>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame><directives><lockVisible>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame><directives><lockVisible>" } }
-					}
-				}
-			},
-			"doorLeftLock" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 5,
-					"transformationGroups": [],
-					"offset" : [-3.5,0]
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame>?flipx<directives><lockVisible>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame>?flipx<directives><lockVisible>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame>?flipx<directives><lockVisible>" } }
-					}
-				}
-			},
-			"doorUpLock" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 5,
-					"transformationGroups": [],
-					"offset" : [0,3.5]
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame><directives><lockVisible>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame><directives><lockVisible>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame><directives><lockVisible>" } }
-					}
-				}
-			},
-			"doorDownLock" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 5,
-					"transformationGroups": [],
-					"offset" : [0,-3.5]
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame>?flipy<directives><lockVisible>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame>?flipy<directives><lockVisible>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame>?flipy<directives><lockVisible>" } }
-					}
+					"image": "<partImage>",
+					"processingDirectives" : "<directives><doorDirectives>"
 				}
 			},
 			"doorRight" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 4,
+					"zLevel": 3,
 					"transformationGroups": [],
-					"offset" : [3.5,0]
+					"offset" : [3.5,0],
+					"processingDirectives" : "<directives><doorDirectives>"
 				},
 				"partStates": {
 					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame><directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame><directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame><directives><doorDirectives>" } }
+						"open": { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>" } },
+						"opened" : "open",
+						"closing" : "open",
+						"closed" : "open",
+						"closedHit" : "open",
+
+						"locking" : { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>", "processingDirectives" : "<directives>" } },
+						"locked" : "locking",
+						"lockedHit" : "locking"
 					}
 				}
 			},
 			"doorLeft" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 4,
+					"zLevel": 3,
 					"transformationGroups": [],
-					"offset" : [-3.5,0]
+					"offset" : [-3.5,0],
+					"processingDirectives" : "<directives><doorDirectives>"
 				},
 				"partStates": {
 					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame>?flipx<directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame>?flipx<directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame>?flipx<directives><doorDirectives>" } }
+						"open": { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>?flipx" } },
+						"opened" : "open",
+						"closing" : "open",
+						"closed" : "open",
+						"closedHit" : "open",
+						"locking" : { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>?flipx", "processingDirectives" : "<directives>" } },
+						"locked" : "locking",
+						"lockedHit" : "locking"
 					}
 				}
 			},
 			"doorUp" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 4,
+					"zLevel": 3,
 					"transformationGroups": [],
-					"offset" : [0,3.5]
+					"offset" : [0,3.5],
+					"processingDirectives" : "<directives><doorDirectives>"
 				},
 				"partStates": {
 					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame><directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame><directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame><directives><doorDirectives>" } }
+						"open": { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>" } },
+						"opened" : "open",
+						"closing" : "open",
+						"closed" : "open",
+						"closedHit" : "open",
+						"locking" : { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>", "processingDirectives" : "<directives>" } },
+						"locked" : "locking",
+						"lockedHit" : "locking"
 					}
 				}
 			},
 			"doorDown" : {
 				"properties": {
 					"centered": true,
-					"zLevel": 4,
-					"transformationGroups": [],
-					"offset" : [0,-3.5]
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame>?flipy<directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame>?flipy<directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame>?flipy<directives><doorDirectives>" } }
-					}
-				}
-			},
-			"doorRightFB" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 3,
-					"transformationGroups": [],
-					"offset" : [3.5,0],
-					"fullbright" : true
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame><directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame><directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame><directives><doorDirectives>" } }
-					}
-				}
-			},
-			"doorLeftFB" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 3,
-					"transformationGroups": [],
-					"offset" : [-3.5,0],
-					"fullbright" : true
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame>?flipx<directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame>?flipx<directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame>?flipx<directives><doorDirectives>" } }
-					}
-				}
-			},
-			"doorUpFB" : {
-				"properties": {
-					"centered": true,
-					"zLevel": 3,
-					"transformationGroups": [],
-					"offset" : [0,3.5],
-					"fullbright" : true
-				},
-				"partStates": {
-					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame><directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame><directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame><directives><doorDirectives>" } }
-					}
-				}
-			},
-			"doorDownFB" : {
-				"properties": {
-					"centered": true,
 					"zLevel": 3,
 					"transformationGroups": [],
 					"offset" : [0,-3.5],
-					"fullbright" : true
+					"processingDirectives" : "<directives><doorDirectives>"
 				},
 				"partStates": {
 					"doorState" : {
-						"idle": { "properties": { "image": "<partImage>:idle.<frame>?flipy<directives><doorDirectives>" } },
-						"open": { "properties": { "image": "<partImage>:open.<frame>?flipy<directives><doorDirectives>" } },
-						"close": { "properties": { "image": "<partImage>:close.<frame>?flipy<directives><doorDirectives>" } }
+						"open": { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>?flipy" } },
+						"opened" : "open",
+						"closing" : "open",
+						"closed" : "open",
+						"closedHit" : "open",
+						"locking" : { "properties": { "image": "<partImage>:<doorState_state>.<doorState_frame>?flipy", "processingDirectives" : "<directives>" } },
+						"locked" : "locking",
+						"lockedHit" : "locking"
 					}
 				}
 			}
@@ -214,8 +157,11 @@
 	"transformationGroups": {
 	},
 	"sounds": {
-		"doorOpen" : [ "/sfx/wasabiRaptor/metroid/doorOpen.ogg" ],
-		"doorClose" : [ "/sfx/wasabiRaptor/metroid/doorClose.ogg" ]
+		"open" : [ "/sfx/objects/fleshdoor_open.ogg" ],
+		"close" : [ "/sfx/objects/fleshdoor_close.ogg" ],
+		"lockedHit" : [ "/sfx/melee/blunt_hit_organic.ogg" ],
+		"closedHit" : [ "/sfx/melee/blunt_hit_organic.ogg" ],
+		"openingHit" : [ "/sfx/melee/blunt_hit_organic.ogg" ]
 	},
 	"particleEmitters": {
 	}
