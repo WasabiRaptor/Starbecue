@@ -13,7 +13,7 @@ local old = {
 	die = die,
 	tenant_graduate = tenant.graduate,
 	participateInNewQuests = _ENV.participateInNewQuests,
-	setNpcItemSlot = _ENV.setNpcItemSlot
+	setNpcItemSlot = _ENV.setNpcItemSlot,
 	refreshHumanoidParameters = refreshHumanoidParameters or (function() end),
 }
 
