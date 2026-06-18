@@ -342,17 +342,14 @@ function sbq.widgetScripts.makeSecondaryEffectButtons(param)
 			local toolTip = sbq.getString(location.name or (":"..param.groupKey))..": "..sbq.getString(":"..k)
 			local icon
 			local status
-			for _, v in ipairs(effects[k]) do
-				if type(v) == "string" then
-					status = v
-					local effectConfig = (root.effectConfig(status) or {}).effectConfig or {}
-					if effectConfig.description then
-						toolTip = toolTip.."\n"..(sbq.strings[effectConfig.description] or effectConfig.description)
-					end
-					if effectConfig.checkBoxIcon and not icon then
-						icon =  effectConfig.checkBoxIcon
-					end
-
+			for _, v in ipairs((effects[k][1] and effects[k]) or effects[k].effects) do
+				status = v
+				local effectConfig = (root.effectConfig(status) or {}).effectConfig or {}
+				if effectConfig.description then
+					toolTip = toolTip.."\n"..(sbq.strings[effectConfig.description] or effectConfig.description)
+				end
+				if effectConfig.checkBoxIcon and not icon then
+					icon =  effectConfig.checkBoxIcon
 				end
 			end
 			table.insert(effectButtons, sb.jsonMerge(

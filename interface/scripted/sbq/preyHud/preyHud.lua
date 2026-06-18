@@ -124,7 +124,11 @@ function update( dt )
 	indicateButton("right", (right and lockDown) or right )
 
 	-- bar
-	local s = (status.statusProperty("sbqProgressBar") or 0) * bar.w
+	local s = 0
+	if occupantData.progressBar then
+		s = math.min(1,occupantData.progressBarTime / occupantData.progressBar.time) * bar.w
+		occupantData.progressBarTime = occupantData.progressBarTime + dt
+	end
 	if s < bar.w then
 		indicator:drawImageRect(
 			bar.empty,

@@ -209,10 +209,10 @@ function sbq.reloadVoreConfig(sbqConfig)
 	sbq.refreshSettings()
 end
 
-function sbq.actionList(type, target)
+function sbq.actionList(context, target)
 	local list = {}
 	local actions = sb.jsonMerge({}, sbq.voreConfig.actionList)
-	if type == "rp" then
+	if context == "rp" then
 		actions = sb.jsonMerge({}, sbq.voreConfig.rpActionList)
 	elseif target then
 		local occupant = sbq.Occupants.entityId[tostring(target)]
@@ -236,8 +236,9 @@ function sbq.actionList(type, target)
 	end
 	for _, action in ipairs(actions or {}) do
 		local success, failReason, time = sbq.SpeciesScript:actionAvailable(action.action, target, table.unpack(action.args or {}))
-		if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or {})[type] then
-			table.insert(list, sb.jsonMerge(action, { available = success }))
+		local actionData = sbq.SpeciesScript:getAction(action.action)
+		if (not sbq.config.dontDisplayAction[tostring(failReason)]) and not (action.noDisplay or (actionData.menuData or {}).noDisplay or {})[context] then
+			table.insert(list, sb.jsonMerge(actionData.menuData, {available = success}, action))
 		end
 	end
 	return list
@@ -292,6 +293,11 @@ end
 function sbq._SpeciesScript:getLocation(...)
 	if not self.state then return false end
 	return self.state:getLocation(...)
+end
+
+function sbq._SpeciesScript:getAction(action, ...)
+	if not self.state then return false, "missingState" end
+	return self.state:getAction(action, ...)
 end
 
 function sbq._SpeciesScript:tryAction(action, target, ...)
@@ -535,6 +541,10 @@ function sbq._State:queueAction(name, target, ...)
 	local res = { sbq.SpeciesScript:actionAvailable(name, target, ...) }
 	if res[1] then table.insert(sbq.SpeciesScript.actionQueue, {name, target, ...}) end
 	return table.unpack(res)
+end
+
+function sbq._State:getAction(name)
+	return self.actions[name]
 end
 
 function sbq._State:tryAction(name, target, ...)
@@ -1895,6 +1905,14 @@ function sbq._Occupant:update(dt)
 		end
 	end
 	self:checkStruggleDirection(dt)
+	if self.progressBar then
+		self.progressBarTime = self.progressBarTime + dt
+		if self.progressBarTime > self.progressBar.time then
+			sbq.SpeciesScript:queueAction(self.progressBar.finishAction, self.entityId, table.unpack(self.progressBar.args or {}))
+			self.progressBarTime = 0
+			self.progressBar = false
+		end
+	end
 end
 
 function sbq._Occupant:refreshLocation(name, subLocation, force)
@@ -1948,25 +1966,19 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 	if self.flags.infused then
 		util.appendLists(persistentStatusEffects, location.infusedPassiveEffects or {})
 		for setting, effects in pairs(location.infusedEffects or {}) do
-			if self:checkValidEffects(setting, effects) then
-				util.appendLists(persistentStatusEffects, effects or {})
-			end
+			util.appendLists(persistentStatusEffects, self:getValidEffects(setting, effects))
 		end
 	elseif self.flags.digested then
 		util.appendLists(persistentStatusEffects, location.digestedPassiveEffects or {})
 		for setting, effects in pairs(location.digestedEffects or {}) do
-			if self:checkValidEffects(setting, effects) then
-				util.appendLists(persistentStatusEffects, effects or {})
-			end
+			util.appendLists(persistentStatusEffects, self:getValidEffects(setting, effects))
 		end
 	elseif self:valid() then
 		table.insert(persistentStatusEffects, {stat = "sbq_compression_"..self.locationSettings.compression, amount = 1})
 		util.appendLists(persistentStatusEffects, location.passiveEffects or {})
 		util.appendLists(persistentStatusEffects, (location.mainEffect or {})[self.overrideEffect or self.locationSettings.mainEffect or "none"] or {})
 		for setting, effects in pairs(location.secondaryEffects or {}) do
-			if self:checkValidEffects(setting, effects) then
-				util.appendLists(persistentStatusEffects, effects or {})
-			end
+			util.appendLists(persistentStatusEffects, self:getValidEffects(setting, effects))
 		end
 	end
 	local predModifiers = {}
@@ -2045,7 +2057,10 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 
 			flags = self.flags,
 			locationStore = self.locationStore,
-			locationSettings = self.locationSettings
+			locationSettings = self.locationSettings,
+
+			progressBar = self.progressBar,
+			progressBarTime = self.progressBarTime
 		}
 	)
 	if self.flags.newOccupant then
@@ -2065,23 +2080,29 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 
 			flags = self.flags,
 			locationStore = self.locationStore,
-			locationSettings = self.locationSettings
+			locationSettings = self.locationSettings,
+
+			progressBar = self.progressBar,
+			progressBarTime = self.progressBarTime
 		})
 	end
 end
 
-function sbq._Occupant:checkValidEffects(setting, effects)
-	if not (effects and self.locationSettings[setting]) then return false end
-	for _, effect in ipairs(effects) do
-		if type(effect) == "string" then
-			local effectConfig = root.effectConfig(effect).effectConfig or {}
-			if effectConfig.finishAction then
-				local success, failReason = sbq.SpeciesScript:actionAvailable(effectConfig.finishAction, self.entityId)
-				if not success then return false end
-			end
+function sbq._Occupant:getValidEffects(setting, effects)
+	if not (effects and self.locationSettings[setting]) then return {} end
+	if effects[1] then
+		return effects
+	elseif not self.progressBar or (self.progressBar.finishAction == effects.finishAction) then
+		local success, failReason = sbq.SpeciesScript:actionAvailable(effects.finishAction, self.entityId)
+		if not success then
+			self.progressBar = false
+			self.progressBarTime = 0
+			return {}
 		end
+		self.progressBar = effects
+		return effects.effects
 	end
-	return true
+	return {}
 end
 
 function sbq._Occupant:active()
@@ -2455,6 +2476,7 @@ function sbq._Occupant:capture()
 				locationStore = self.locationStore,
 				locationSettings = self.locationSettings,
 
+				progressBar = self.progressBar,
 			}
 			setmetatable(newCapturedOccupant, _CapturedOccupant)
 			table.insert(sbq.Occupants.captured, newCapturedOccupant)
@@ -2486,6 +2508,7 @@ function _CapturedOccupant:save()
 		locationStore = self.locationStore,
 		locationSettings = self.locationSettings,
 
+		progressBar = self.progressBar,
 	})
 end
 function _CapturedOccupant.new(capturedData)
