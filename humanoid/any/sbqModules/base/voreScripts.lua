@@ -795,6 +795,7 @@ function default:infused(name, action, target)
 	occupant.locationSettings[infuseType] = false
 	local locationName = occupant.location
 	local subLocationName = occupant.subLocation
+	occupant:refreshLocation(action.location, action.subLocation, true)
 	if not sbq.Occupants.checkActiveOccupants() then sbq.SpeciesScript:queueAction("lockDownClear") end
 	sbq.addRPC(occupant:sendEntityMessage("sbqDumpOccupants", locationName, subLocationName, occupant.flags.digestType), sbq.receiveOccupants)
 	sbq.settings:setParameterSettings()

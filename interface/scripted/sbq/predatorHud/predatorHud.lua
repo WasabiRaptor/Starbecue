@@ -238,6 +238,9 @@ function sbq.updateBars(dt)
 			local percentage = 0
 			if occupant.progressBar then
 				percentage = math.min(1, occupant.progressBarTime / occupant.progressBar.time)
+				if occupant.progressBar.active then
+					occupant.progressBarTime = occupant.progressBarTime + dt
+				end
 			end
 			sbq.progressBar( _ENV[occupant.entityId.."ProgressBar"], sbq.getPublicProperty(occupant.entityId, "sbqProgressBarColor"), percentage )
 		end

@@ -1907,7 +1907,7 @@ function sbq._Occupant:update(dt)
 		end
 	end
 	self:checkStruggleDirection(dt)
-	if self.progressBar then
+	if self.progressBar and self.progressBar.active then
 		self.progressBarTime = self.progressBarTime + dt
 		if self.progressBarTime > self.progressBar.time then
 			sbq.SpeciesScript:queueAction(self.progressBar.finishAction, self.entityId, table.unpack(self.progressBar.args or {}))
@@ -1959,6 +1959,13 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 		}
 	end
 
+	if self.progressBar then
+		if self.progressBar.active then
+			self.progressBar.active = false
+		else
+			self.progressBar = false
+		end
+	end
 	local persistentStatusEffects = {
 		{ stat = "sbqDigestTick", amount = math.floor(status.stat(location.powerMultiplier or "powerMultiplier")) },
 		{ stat = "sbqDigestingPower", amount = status.stat(location.powerMultiplier or "powerMultiplier") },
@@ -2091,17 +2098,25 @@ function sbq._Occupant:refreshLocation(name, subLocation, force)
 end
 
 function sbq._Occupant:getValidEffects(setting, effects)
-	if not (effects and self.locationSettings[setting]) then return {} end
-	if effects[1] then
-		return effects
-	elseif not self.progressBar or (self.progressBar.finishAction == effects.finishAction) then
+	if self.progressBar and (self.progressBar.finishAction == effects.finishAction) then
 		local success, failReason = sbq.SpeciesScript:actionAvailable(effects.finishAction, self.entityId)
 		if not success then
 			self.progressBar = false
 			self.progressBarTime = 0
 			return {}
+		elseif self.progressBar.time ~= effects.time then
+			self.progressBarTime = effects.time * (self.progressBarTime / self.progressBar.time)
 		end
 		self.progressBar = effects
+		self.progressBar.active = true
+	end
+	if not (effects and self.locationSettings[setting]) then return {} end
+	if effects[1] then
+		return effects
+	elseif not self.progressBar then
+		self.progressBarTime = 0
+		self.progressBar = effects
+		self.progressBar.active = true
 		return effects.effects
 	end
 	return {}

@@ -127,7 +127,9 @@ function update( dt )
 	local s = 0
 	if occupantData.progressBar then
 		s = math.min(1,occupantData.progressBarTime / occupantData.progressBar.time) * bar.w
-		occupantData.progressBarTime = occupantData.progressBarTime + dt
+		if occupantData.progressBar.active then
+			occupantData.progressBarTime = occupantData.progressBarTime + dt
+		end
 	end
 	if s < bar.w then
 		indicator:drawImageRect(

@@ -1,9 +1,4 @@
-sbq = {}
-require "/scripts/any/SBQ_RPC_handling.lua"
 
 function init()
-end
-
-function uninit()
-
+    status.setStatusProperty("sbqProgressBarColor", config.getParameter("progressBarColor"))
 end
