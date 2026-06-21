@@ -1586,6 +1586,7 @@ function sbq.Occupants.newOccupant(entityId, size, location, subLocation, flags)
 		struggleVec = {0,0},
 		locationStore = {},
 		persistentStatusEffects = jarray(),
+		progressBarTime = 0,
 		controls = {
 			Left = { last = false, time = 0 },
 			Right = { last = false, time = 0 },
@@ -1658,6 +1659,7 @@ function sbq.Occupants.insertOccupant(newOccupant)
 		struggleVec = {0,0},
 		locationStore = {},
 		persistentStatusEffects = jarray(),
+		progressBarTime = 0,
 		controls = {
 			Left = { last = false, time = 0 },
 			Right = { last = false, time = 0 },
