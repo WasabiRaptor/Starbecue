@@ -55,6 +55,13 @@ function init()
 	_ENV.genderMale:selectValue(choices[1])
 end
 
+function _ENV.nameBox:onTextChanged()
+	identity.name = self.text
+	identity.parameters = parameters
+	world.sendEntityMessage(pane.sourceEntity(), "wr_setSpeciesIdentity", identity)
+	world.sendEntityMessage(pane.sourceEntity(), "wr_setCurrentIdentity", identity)
+end
+
 function applyChoices()
 	identity, parameters = root.createHumanoid(_ENV.nameBox.text, identity.species, table.unpack(choices))
 	identity.parameters = parameters
