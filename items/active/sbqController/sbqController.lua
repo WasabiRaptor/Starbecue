@@ -147,7 +147,7 @@ function sbq.clickAction(fireMode)
 		animator.playSound("error")
 		interface.queueMessage(sbq.getString(":action_" .. tostring(failReason)))
 	end
-	return table.unpack(result)
+	return table.unpack(result or { false, "messageNotHandled" })
 end
 
 function sbq.attemptAction(action, targetId)
