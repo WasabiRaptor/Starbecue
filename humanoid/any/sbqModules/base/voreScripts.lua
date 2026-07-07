@@ -257,7 +257,7 @@ function default:voreAvailable(name, action, target, locationName, subLocationNa
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
 	local size
 	if target then
-		if (target == sbq.loungingIn()) then return false, "invalidAction" end
+		if (target == sbq.loungingIn()) or not world.entityExists(target) then return false, "invalidAction" end
 		local loungeId, anchorIndex = world.entity(target):anchorState()
 		if loungeId and (loungeId ~= entity.id()) and (not world.entity(loungeId):loungeAnchor(anchorIndex).dismountable) then return false, "invalidAction" end
 		size = sbq.getEntitySize(target)
@@ -296,7 +296,7 @@ end
 
 function default:tryVore(name, action, target, ...)
 	if status.statPositive("sbqIsPrey") or status.statPositive("sbqEntrapped") then return false, "nested" end
-	if target == sbq.loungingIn() then return false, "invalidAction" end
+	if (target == sbq.loungingIn()) or not world.entityExists(target) then return false, "invalidAction" end
 	local loungeId, anchorIndex = world.entity(target):anchorState()
 	if loungeId and (loungeId ~= entity.id()) and (not world.entity(loungeId):loungeAnchor(anchorIndex).dismountable) then return false, "invalidAction" end
 	local size = sbq.getEntitySize(target)
@@ -813,7 +813,7 @@ function default:eggifyAvailable(name, action, target, ...)
 end
 function default:eggify(name, action, target, ...)
 	local occupant = sbq.Occupants.entityId[tostring(target)]
-	if not occupant then return false, "missingOccupant" end
+	if not occupant or not world.entityExists(target) then return false, "missingOccupant" end
 	if occupant.flags.egged or (sbq.settings:checkInvalid("eggify", true, "locations", occupant.location) ~= (true)) then return false, "invalidAction" end
 	local location = occupant:getLocation()
 	if not location.secondaryEffects.eggify then return false, "invalidAction" end

@@ -103,7 +103,7 @@ end
 local gracePeriod = 1
 function update( dt )
 	gracePeriod = math.max(0, gracePeriod - dt)
-	if gracePeriod == 0 and (player.loungingIn() ~= pane.sourceEntity()) then
+	if gracePeriod == 0 and (player.loungingIn() ~= pane.sourceEntity()) or not world.entityExists(pane.sourceEntity()) then
 		pane.dismiss()
 		return
 	end

@@ -553,8 +553,8 @@ function sbq._State:tryAction(name, target, ...)
 	if not action then return self:actionFailed(name, action, target, "missingAction", ...) end
 	if sbq.SpeciesScript.lockActions then return self:actionFailed(name, action, target, "actionsLocked", ...) end
 	if action.onCooldown then return self:actionFailed(name, action, target, "onCooldown", ...) end
-	if target and not world.entity(target):statPositive("sbqStatusPrimaryScript") then return self:actionFailed(name, action, target, "targetMissingStatusPrimaryScript", ...) end
-	if target and not world.entity(target):statPositive("sbqActorScript") then return self:actionFailed(name, action, target, "targetMissingActorScript", ...) end
+	if target and world.entityExists(target) and not world.entity(target):statPositive("sbqStatusPrimaryScript") then return self:actionFailed(name, action, target, "targetMissingStatusPrimaryScript", ...) end
+	if target and world.entityExists(target) and not world.entity(target):statPositive("sbqActorScript") then return self:actionFailed(name, action, target, "targetMissingActorScript", ...) end
 	if action.settings and not sbq.settings:matches(action.settings, true) then return self:actionFailed(name, action, target, "settingsMismatch", ...) end
 	if action.targetSettings then
 		if not target or not world.entityExists(target) then return self:actionFailed(name, action, target, "targetMissing", ...) end
