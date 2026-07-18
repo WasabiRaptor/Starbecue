@@ -149,7 +149,7 @@ function addOccupantPortraitSlot(occupant)
 				player.interactWithEntity(occupant.entityId)
 			end, sbq.getString(":interactDesc")})
 		end
-		if (entityType == "player") or (entityType == "npc") then
+		if (entityType == "npc") then
 			table.insert(actions, { sbq.getString(":capture"), function()
 				world.sendEntityMessage(player.id(), "sbqCaptureOccupant", occupant.entityId)
 			end, sbq.getString(":captureDesc")})
