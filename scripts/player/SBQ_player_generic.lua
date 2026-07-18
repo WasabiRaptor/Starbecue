@@ -146,12 +146,13 @@ function init()
 		sbq.setCurrentLocationData(id, locationData, newOccupantData)
 		player.setProperty("sbqPredPortrait", world.entityPortrait(id, "full"))
 		player.setProperty("sbqPredWarpAttempted", 0)
+		occupantData = newOccupantData
 		if interface.sendMessage("sbqRefreshLocationData", id, locationData, newOccupantData):result() then return end
 		player.interact("ScriptPane", {
 			baseConfig = "/interface/scripted/sbq/preyHud/preyHud.config",
 			gui = player.getProperty("sbqPredHudOpen") and { panefeature = { offset = { -104, 0 } } } or {},
 			locationData = locationData,
-			occupantData = newOccupantData
+			occupantData = occupantData
 		}, id)
 	end)
 
@@ -465,6 +466,9 @@ end
 
 function teleportOut()
 	local occupantData = status.statusProperty("sbqOccupantStorage")
+	if occupantData then
+		occupantData = root.loadVersionedJson(occupantData, "sbqOccupantStorage")
+	end
 	if occupantData and not (occupantData.playerPred or occupantData.crewPred) then
 		status.setStatusProperty("sbqOccupantStorage", nil)
 		status.clearPersistentEffects("sbqMissingPred")

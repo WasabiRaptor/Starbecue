@@ -107,6 +107,10 @@ function init()
 
 		tenant.despawn(false)
 	end)
+	message.setHandler("sbqRefreshLocationData", function(_, _, id, locationData, newOccupantData)
+		occupantData = newOccupantData
+		sbq.setCurrentLocationData(id, locationData, occupantData)
+	end)
 
 	occupantData = status.statusProperty("sbqOccupantStorage")
 	if occupantData then
