@@ -113,7 +113,7 @@ for i = 1, seperators do
 	table.insert(tenantCatalogue, "-")
 end
 
-local armorLists = assets.json("/scripts/assets/SBQ_amor.config")
+local armorLists = assets.json("/scripts/assets/SBQ_armor.config")
 for _, path in ipairs(assets.byExtension("legs")) do
 	local armor = assets.json(path)
 	if not armor.sbqCompatible then
